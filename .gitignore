@@ -1,0 +1,23 @@
+# Local workflow directories
+.booming/
+.codex/
+
+# C# / .NET build outputs
+.vs/
+bin/
+obj/
+TestResults/
+artifacts/
+
+# C++ / Visual Studio / CMake build outputs
+Debug/
+Release/
+RelWithDebInfo/
+MinSizeRel/
+x64/
+x86/
+Win32/
+build/
+out/
+cmake-build-*/
+CMakeFiles/
