@@ -1,50 +1,50 @@
-# IL2CPP-Like C# to C++ System Design
+# 类 IL2CPP 的 C# 到 C++ 系统设计
 
-**Date:** 2026-03-30 00:16:31 +08:00
+**日期：** 2026-03-30 00:16:31 +08:00
 
-**Status:** Draft approved in conversation, pending user review
+**状态：** 对话中已批准的草稿，待用户复核
 
-## Goal
+## 目标
 
-Design a system that translates C#/.NET projects into C++ in a way that is broadly comparable to Unity IL2CPP, while following a phased roadmap:
+设计一个将 C#/.NET 项目翻译为 C++ 的系统，其能力范围整体上可与 Unity IL2CPP 相比较，并遵循分阶段推进的路线图：
 
-- Phase 1 prioritizes engineering deliverability
-- Performance is the next major priority
-- The long-term target approaches IL2CPP-like breadth and robustness
+- 第 1 阶段优先保证工程可交付性
+- 性能是下一优先级的重要目标
+- 长期目标是逐步接近 IL2CPP 级别的覆盖面与健壮性
 
-The design assumes:
+本设计的前提假设如下：
 
-- IL/assembly-first canonical pipeline
-- Fully self-built runtime
-- Cross-platform targets from the beginning
-- Mainline support for libraries, console apps, CLI tools, background jobs, general server programs, and native-host embedding
-- Layered support for dynamic features rather than requiring everything in phase 1
+- 以 IL/程序集优先作为规范化主流程
+- 运行时完全自研
+- 从一开始就面向跨平台目标
+- 主线支持类库、控制台应用、CLI 工具、后台任务、通用服务端程序以及原生宿主嵌入
+- 对动态特性采用分层支持，而不是要求在第 1 阶段全部完成
 
-## Non-Goals
+## 非目标
 
-The following are not part of the phase-1 mainline commitment:
+以下内容不属于第 1 阶段主线承诺的一部分：
 
 - `dynamic`
 - `System.Reflection.Emit`
-- `Assembly.Load`-style dynamic late loading
-- Full expression-tree compilation
-- Framework-heavy UI stacks such as WPF, WinForms, MAUI
-- Full-stack ASP.NET-style framework completeness
+- 类似 `Assembly.Load` 的动态延迟加载
+- 完整的表达式树编译
+- 以框架为核心的重量级 UI 技术栈，例如 WPF、WinForms、MAUI
+- 类似 ASP.NET 的全栈框架完备支持
 
-These may be added later, but they are not used to define the phase-1 architecture boundary.
+这些能力未来可以补充，但它们不用于定义第 1 阶段的架构边界。
 
-## Architecture Overview
+## 架构总览
 
-The system is split into two primary planes:
+系统被划分为两个主要平面：
 
-1. Translation pipeline
-2. Runtime platform
+1. 翻译流水线
+2. 运行时平台
 
-Primary flow:
+主流程如下：
 
 `source -> dotnet build/csc -> IL assemblies + metadata -> semantic/AOT analysis -> runtime-contract IR -> C++ emission -> native build -> executable/library/bundle`
 
-Core subsystems:
+核心子系统包括：
 
 1. `Frontend Gateway`
 2. `Assembly and Metadata Loader`
@@ -55,84 +55,84 @@ Core subsystems:
 7. `Interop and Platform Abstraction`
 8. `Build and Packaging`
 
-Core architectural rule:
+核心架构规则：
 
-- High-level managed semantics must converge into a unified IR and runtime contract before platform-specific lowering.
+- 高层托管语义必须先收敛到统一的 IR 与运行时契约，再进行平台相关的 lowering。
 
-## Frontend Boundary
+## 前端边界
 
-The canonical system boundary is IL/assembly-first.
+系统的规范边界是以 IL/程序集优先为主。
 
-This means:
+这意味着：
 
-- Standard C# compilation remains the front door
-- The system consumes compiled assemblies (`.dll`, `.exe`) plus metadata and symbols
-- The translator behaves as an IL AOT backend rather than as a replacement C# language compiler
+- 标准 C# 编译流程仍然是入口
+- 系统消费已编译的程序集（`.dll`、`.exe`）以及对应的元数据和符号
+- 翻译器的角色是 IL AOT 后端，而不是替代 C# 语言编译器
 
-Source-aware support is still useful, but only as an auxiliary layer for:
+源码感知能力仍然有价值，但只作为辅助层用于：
 
-- diagnostics
-- source mapping
-- debug metadata enhancement
-- developer experience improvements
+- 诊断
+- 源码映射
+- 调试元数据增强
+- 开发者体验改进
 
-Source-aware logic is not treated as a co-equal translation frontend.
+源码感知逻辑不被视为与主翻译前端同等地位的系统入口。
 
-## Runtime Model
+## 运行时模型
 
-The runtime is divided into three internal layers:
+运行时被划分为三个内部层次：
 
-1. Object and memory model
-2. Execution semantics layer
-3. Metadata and reflection layer
+1. 对象与内存模型
+2. 执行语义层
+3. 元数据与反射层
 
-### Object and Memory Model
+### 对象与内存模型
 
-All managed heap objects share a stable `ObjectHeader`.
+所有托管堆对象共享一个稳定的 `ObjectHeader`。
 
-The header should minimally support:
+该头部至少应支持：
 
 - `TypeInfo*`
-- GC state/marking bits
-- synchronization/monitor-related state
-- optional cached identity/hash state
+- GC 状态/标记位
+- 同步/monitor 相关状态
+- 可选的缓存身份/hash 状态
 
-Arrays, strings, and normal objects share the same root object semantics, with payload-specific layout behind a runtime-defined contract.
+数组、字符串和普通对象共享相同的根对象语义，具体负载布局则位于运行时定义的契约之后。
 
-Generated C++ may not assume raw memory layouts directly. It must always operate through runtime-defined object access rules.
+生成出来的 C++ 代码不能直接假设底层原始内存布局，而必须始终通过运行时定义的对象访问规则进行操作。
 
-### GC Direction
+### GC 方向
 
-The architecture should be designed for a future moving collector even if phase 1 uses a simpler precise collector.
+即使第 1 阶段使用更简单的精确 GC，整体架构也应当为未来的移动式收集器做好准备。
 
-This means generated code must already depend on:
+这意味着生成代码从一开始就必须依赖：
 
-- explicit root tracking
-- handle registration where needed
-- write barriers
-- safepoints
-- runtime-owned object/slot access helpers
+- 显式 root 跟踪
+- 在需要处注册 handle
+- 写屏障
+- safepoint
+- 由运行时拥有的对象/slot 访问辅助函数
 
-That keeps future GC upgrades possible without invalidating the generated-code ABI.
+这样可以保证未来升级 GC 时，不需要破坏生成代码 ABI。
 
-### Execution Semantics Layer
+### 执行语义层
 
-This layer owns:
+该层负责：
 
-- exception creation, propagation, and native unwinding bridges
-- thread registration and detach
-- TLS integration
-- safepoints and stop-the-world coordination
-- virtual dispatch
-- interface dispatch
-- generic runtime support
-- managed/native transition protocols
+- 异常创建、传播以及与原生展开机制的桥接
+- 线程注册与分离
+- TLS 集成
+- safepoint 与 stop-the-world 协调
+- 虚调用分发
+- 接口分发
+- 泛型运行时支持
+- 托管/原生切换协议
 
-### Metadata and Reflection Layer
+### 元数据与反射层
 
-Reflection metadata must be a first-class runtime model rather than an incidental codegen byproduct.
+反射元数据必须是运行时中的一等模型，而不是代码生成过程顺带产生的附属物。
 
-The runtime should maintain formal structures for:
+运行时应维护以下正式结构：
 
 - `TypeInfo`
 - `MethodInfo`
@@ -140,402 +140,402 @@ The runtime should maintain formal structures for:
 - `PropertyInfo`
 - `EventInfo`
 - `GenericContext`
-- assembly/module identity
+- 程序集/模块标识
 
-This is necessary not only for reflection, but also for:
+这不仅对反射本身是必要的，也对以下能力必不可少：
 
-- exception formatting
-- serialization
-- diagnostics
-- runtime generic resolution
+- 异常格式化
+- 序列化
+- 诊断
+- 运行时泛型解析
 
-Core rule:
+核心规则：
 
-- Generated code expresses business behavior; runtime contracts own managed semantics.
+- 生成代码表达业务行为；托管语义由运行时契约负责。
 
-## Translation Pipeline and IR
+## 翻译流水线与 IR
 
-Use three representation layers between IL input and C++ output.
+在 IL 输入与 C++ 输出之间使用三层表示。
 
 ### 1. Metadata Graph
 
-Purpose:
+目的：
 
-- define the semantic world model of the loaded assemblies
+- 定义已加载程序集的语义世界模型
 
-Responsibilities:
+职责：
 
-- assemblies and modules
-- type definitions and references
-- inheritance and interface relationships
-- field and method signatures
-- attributes
-- generic parameters and constraints
-- resources and symbol attachment
+- 程序集与模块
+- 类型定义与类型引用
+- 继承关系与接口关系
+- 字段与方法签名
+- 特性
+- 泛型参数与约束
+- 资源与符号挂接
 
-This layer avoids repeated raw assembly parsing across later stages.
+这一层避免后续阶段重复解析原始程序集。
 
 ### 2. Typed IL IR
 
-Purpose:
+目的：
 
-- transform method bodies into explicit control/data-flow suitable for analysis
+- 将方法体转换为适合分析的显式控制流/数据流形式
 
-Properties:
+特性：
 
-- stack semantics are normalized away
-- locals and temporaries are explicit
-- control flow graph is explicit
-- exception regions are explicit
-- call sites and dispatch kinds are explicit
-- boxing/unboxing/array operations become explicit nodes
+- 栈语义被规范化消除
+- 局部变量与临时变量显式化
+- 控制流图显式化
+- 异常区域显式化
+- 调用点与分发类型显式化
+- 装箱/拆箱/数组操作变为显式节点
 
-This is the main analysis layer for:
+这是以下分析工作的主层：
 
-- call graph
-- virtual closure
-- interface closure
-- generic instantiation discovery
-- reflection preservation logic
-- serialization preservation logic
+- 调用图
+- 虚调用闭包
+- 接口调用闭包
+- 泛型实例发现
+- 反射保留逻辑
+- 序列化保留逻辑
 
 ### 3. Runtime-Contract IR
 
-Purpose:
+目的：
 
-- represent managed semantic actions in a backend-stable form independent of original IL shape
+- 以一种对后端稳定、且不依赖原始 IL 形态的方式表示托管语义动作
 
-Examples of operations at this layer:
+这一层的操作示例包括：
 
-- object allocation
-- array allocation
-- dispatch operations
-- metadata lookup
-- type checks and casts
-- write barriers
-- exception boundary operations
-- GC/handle transitions
-- P/Invoke transitions
+- 对象分配
+- 数组分配
+- 分发操作
+- 元数据查找
+- 类型检查与转换
+- 写屏障
+- 异常边界操作
+- GC/handle 切换
+- P/Invoke 切换
 
-The C++ backend should target this IR rather than target IL directly.
+C++ 后端应以这一层 IR 为目标，而不是直接面向 IL。
 
-### AOT Analysis Loop
+### AOT 分析闭环
 
-The analyzer should materialize an explicit closed-world result:
+分析器应物化出一个显式的闭世界结果：
 
 `roots -> call graph -> virtual/interface closure -> generic instantiations -> reflection preservation -> serialization preservation -> native export set`
 
-The output must be recorded in an explicit `AOT manifest`.
+输出必须记录到一个显式的 `AOT manifest` 中。
 
-The manifest is used for:
+该 manifest 用于：
 
-- reproducibility
-- incremental rebuild support
-- diagnostics
-- codegen boundary stability
-- regression comparison
+- 可复现性
+- 增量重建支持
+- 诊断
+- 代码生成边界稳定性
+- 回归对比
 
-Core rule:
+核心规则：
 
-- analysis outputs must be durable artifacts, not hidden side effects inside code generation.
+- 分析输出必须是可持久化产物，而不是隐藏在代码生成内部的副作用。
 
-## C++ Backend and ABI Strategy
+## C++ 后端与 ABI 策略
 
-The backend is split into:
+后端被划分为两部分：
 
-1. Portable emission layer
-2. Platform ABI adaptation layer
+1. 可移植发射层
+2. 平台 ABI 适配层
 
-### Portable Emission Layer
+### 可移植发射层
 
-Responsibilities:
+职责：
 
-- emit stable, uniform C++ for runtime-contract IR
-- avoid compiler-specific semantics where possible
-- preserve useful debug structure
-- keep code generation predictable for optimization and diagnosis
+- 为 runtime-contract IR 发射稳定、统一的 C++
+- 尽可能避免依赖编译器特定语义
+- 保留有价值的调试结构
+- 让生成结果在优化和诊断上都保持可预测性
 
-### Platform ABI Adaptation Layer
+### 平台 ABI 适配层
 
-Responsibilities:
+职责：
 
-- calling conventions
-- symbol visibility/export rules
-- exception interop edges
-- thread-local storage differences
-- atomics and memory model details
-- compiler-family quirks
+- 调用约定
+- 符号可见性/导出规则
+- 异常互操作边界
+- 线程本地存储差异
+- 原子操作与内存模型细节
+- 不同编译器家族的特殊性
 
-This layer isolates platform/compiler differences from the rest of the backend.
+这一层将平台/编译器差异隔离在后端局部，而不让它们扩散到整个后端。
 
-### Type and Layout Strategy
+### 类型与布局策略
 
-Managed semantics take precedence over native idioms.
+托管语义优先于原生语言惯用法。
 
-The runtime owns the canonical representation for:
+运行时拥有以下对象的规范表示：
 
-- reference types
-- value types
-- boxed values
-- strings
-- arrays
-- delegates
-- generic instances
+- 引用类型
+- 值类型
+- 装箱值
+- 字符串
+- 数组
+- 委托
+- 泛型实例
 
-Generated C++ targets these contracts rather than creating ad hoc per-platform layouts.
+生成出来的 C++ 应面向这些契约，而不是为不同平台临时拼出各自的布局。
 
-### Interop Boundaries
+### 互操作边界
 
-Three boundaries must be designed explicitly:
+必须显式设计三个边界：
 
 1. `Managed -> Native`
 2. `Native -> Managed`
 3. `Generated C++ -> Runtime Core`
 
-The third one is the most important internal ABI and must be versioned and stabilized early.
+第三个边界是最重要的内部 ABI，必须尽早版本化并稳定下来。
 
-### Output Forms
+### 输出形态
 
-The system should support:
+系统应支持：
 
-- standalone native executable
-- static or dynamic library
-- embeddable runtime bundle
+- 独立原生可执行文件
+- 静态库或动态库
+- 可嵌入的运行时 bundle
 
-This is required to support both server-style deployment and native-host embedding.
+这是为了同时支持服务端部署和原生宿主嵌入。
 
-Core rule:
+核心规则：
 
-- stabilize the internal ABI first, then adapt to external ABIs.
+- 先稳定内部 ABI，再适配外部 ABI。
 
-## Interop and Platform Abstraction
+## 互操作与平台抽象
 
-Because the target is cross-platform from phase 1, platform abstraction must exist from the start.
+由于目标从第 1 阶段起就是跨平台，因此平台抽象必须从一开始就存在。
 
-The abstraction layer should cover:
+抽象层应覆盖：
 
-- threads
-- mutexes/condition variables
-- filesystem
-- time and timers
-- process/environment access
+- 线程
+- 互斥量/条件变量
+- 文件系统
+- 时间与定时器
+- 进程/环境访问
 - TLS
-- atomics
-- sockets/network primitives where phase-1 runtime needs them
-- loader and symbol resolution utilities
+- 原子操作
+- 第 1 阶段运行时所需的套接字/网络原语
+- 加载器与符号解析工具
 
-The goal is not to hide every platform difference, but to prevent platform assumptions from leaking into the translation pipeline and runtime semantics model.
+目标不是隐藏所有平台差异，而是防止平台假设泄漏进翻译流水线和运行时语义模型。
 
-## Build and Packaging
+## 构建与打包
 
-The build driver should orchestrate:
+构建驱动应编排以下流程：
 
-- project compilation to assemblies
-- translator invocation
-- runtime source selection
-- generated C++ compilation
-- platform-specific native linking
-- symbol/debug file generation
-- packaging into executable, library, or bundle form
+- 项目编译为程序集
+- 调用翻译器
+- 选择运行时源码
+- 编译生成的 C++
+- 平台相关的原生链接
+- 生成符号/调试文件
+- 打包为可执行文件、库或 bundle 形式
 
-Suggested outputs:
+建议输出物包括：
 
 - translated sources manifest
 - AOT manifest
-- generated CMake/native build description
-- final packaged binary or library
-- symbol/mapping artifacts
+- 生成的 CMake/原生构建描述
+- 最终打包的二进制或库
+- 符号/映射产物
 
-The build system should treat reproducibility as a first-class concern.
+构建系统应将可复现性视为一等关注点。
 
-## Phase Roadmap
+## 阶段路线图
 
-### Phase 1 - MVP
+### 第 1 阶段 - MVP
 
-Goal:
+目标：
 
-- translate, compile, and run real projects in the selected mainline scope
+- 在选定的主线范围内，能够翻译、编译并运行真实项目
 
-In scope:
+范围内项目：
 
-- class libraries
-- console apps
-- CLI tools
-- background jobs
-- general server programs
-- native-host embedding
+- 类库
+- 控制台应用
+- CLI 工具
+- 后台任务
+- 通用服务端程序
+- 原生宿主嵌入
 
-Required capabilities:
+必须具备的能力：
 
-- stable assembly loading and metadata model
-- typed IL IR and runtime-contract IR
-- root/call-graph/generic/reflection preservation loop
-- self-built runtime core
-- precise GC baseline
-- exception support
-- thread registration and safepoints
-- reflection foundation
-- generics baseline
-- P/Invoke baseline
-- cross-platform native builds
+- 稳定的程序集加载与元数据模型
+- typed IL IR 与 runtime-contract IR
+- root/调用图/泛型/反射保留闭环
+- 自研运行时核心
+- 精确 GC 基线
+- 异常支持
+- 线程注册与 safepoint
+- 反射基础能力
+- 泛型基础能力
+- P/Invoke 基础能力
+- 跨平台原生构建
 
-Not required in phase 1:
+第 1 阶段不要求：
 
 - `dynamic`
 - `Emit`
 - `Assembly.Load`
-- full expression-tree compilation
-- heavyweight framework completeness
+- 完整表达式树编译
+- 重量级框架完备支持
 
-### Phase 2 - Enhanced Platform
+### 第 2 阶段 - 增强平台
 
-Goal:
+目标：
 
-- increase semantic depth, project success rate, diagnosability, and performance
+- 提升语义深度、项目成功率、可诊断性与性能
 
-Typical work:
+典型工作包括：
 
-- stronger reflection preservation
-- better generic sharing/specialization strategy
-- incremental manifests and caching
-- compatibility diagnostics and reports
-- more robust host embedding surface
-- better metadata and binary size reduction
-- stronger optimization passes and devirtualization opportunities
+- 更强的反射保留能力
+- 更好的泛型共享/特化策略
+- 增量 manifest 与缓存
+- 兼容性诊断与报告
+- 更稳健的宿主嵌入接口
+- 更好的元数据与二进制体积缩减
+- 更强的优化 pass 与去虚调用机会
 
-### Phase 3 - Near-IL2CPP Capability
+### 第 3 阶段 - 接近 IL2CPP 能力
 
-Goal:
+目标：
 
-- approach platform-product quality and breadth
+- 逐步接近平台级产品质量与覆盖广度
 
-Typical work:
+典型工作包括：
 
-- deeper dynamic feature support
-- stronger debug/symbol experience
-- more advanced GC/perf tuning
-- broader framework adapters
-- improved startup time, throughput, and binary-size optimization
+- 更深入的动态特性支持
+- 更强的调试/符号体验
+- 更高级的 GC/性能调优
+- 更广泛的框架适配
+- 更优的启动时间、吞吐与二进制体积优化
 
-Phase rule:
+阶段规则：
 
-- every phase is judged by real project success rate, not by a feature checklist alone.
+- 每个阶段的判断标准都是“真实项目成功率”，而不只是功能清单是否打勾。
 
-## Verification Strategy
+## 验证策略
 
-Validation must be layered from the start.
+验证必须从一开始就分层建设。
 
-### 1. Pipeline Correctness
+### 1. 流水线正确性
 
-Verify consistency between:
+验证以下产物之间的一致性：
 
-- input assemblies
+- 输入程序集
 - metadata graph
 - typed IL IR
 - AOT manifest
-- generated C++
-- produced native artifact
+- 生成的 C++
+- 产出的原生制品
 
-Purpose:
+目的：
 
-- catch drift between analysis and codegen
+- 捕捉分析与代码生成之间的漂移
 
-### 2. Runtime Semantic Tests
+### 2. 运行时语义测试
 
-Dedicated runtime conformance tests for:
+为以下内容建立专门的运行时一致性测试：
 
-- object model
-- GC behavior and safepoints
-- exceptions
-- reflection queries
-- generic runtime behavior
-- P/Invoke transitions
-- thread attach/detach behavior
+- 对象模型
+- GC 行为与 safepoint
+- 异常
+- 反射查询
+- 泛型运行时行为
+- P/Invoke 切换
+- 线程 attach/detach 行为
 
 ### 3. Golden Project Suite
 
-Maintain a set of real representative .NET projects covering:
+维护一组有代表性的真实 .NET 项目，覆盖：
 
-- libraries
-- CLI tools
-- background jobs
-- server programs
-- embedding scenarios
+- 类库
+- CLI 工具
+- 后台任务
+- 服务端程序
+- 嵌入场景
 
-Success criteria must include:
+成功标准至少应包括：
 
-- translates successfully
-- compiles successfully
-- runs successfully
-- behaves acceptably versus expected results
+- 翻译成功
+- 编译成功
+- 运行成功
+- 行为与预期结果相比可接受
 
-### 4. Cross-Platform Conformance
+### 4. 跨平台一致性
 
-Run representative projects across the supported platform matrix to verify:
+在支持的平台矩阵上运行代表性项目，以验证：
 
-- ABI correctness
-- exception behavior
-- threading behavior
-- filesystem and encoding behavior
-- time/timer behavior
-- compiler-family compatibility
+- ABI 正确性
+- 异常行为
+- 线程行为
+- 文件系统与编码行为
+- 时间/定时器行为
+- 编译器家族兼容性
 
-Core rule:
+核心规则：
 
-- validate the full chain before optimizing individual pieces.
+- 在优化单个部件之前，先验证整条链路。
 
-## Major Risks
+## 主要风险
 
-Top-level risks:
+顶层风险包括：
 
-1. Generic and reflection closure explosion
-2. GC/thread/exception coupling destabilizing runtime behavior
-3. Platform ABI differences leaking into generated code
-4. Premature pressure to support heavyweight frameworks outside phase-1 scope
+1. 泛型与反射闭包膨胀
+2. GC/线程/异常耦合导致运行时行为不稳定
+3. 平台 ABI 差异泄漏进生成代码
+4. 过早承受来自第 1 阶段范围之外重量级框架的支持压力
 
-Risk-control approach:
+风险控制方式：
 
-- keep explicit AOT manifests
-- stabilize runtime contracts before aggressive optimization
-- isolate ABI adaptation
-- enforce strict phase boundaries
-- measure real-project success continuously
+- 保持显式的 AOT manifest
+- 在激进优化前先稳定运行时契约
+- 隔离 ABI 适配层
+- 严格执行阶段边界
+- 持续衡量真实项目成功率
 
-## Phase Exit Criteria
+## 阶段退出标准
 
-Phase completion should require representative project success, not module completion.
+阶段完成应以代表性项目成功为准，而不是模块开发完成为准。
 
-Example phase-1 exit criteria:
+示例性的第 1 阶段退出标准：
 
-- at least one representative library suite translates and executes correctly
-- at least one CLI/background-job sample works end to end
-- at least one native-host embedding scenario succeeds
-- at least one multi-platform subset of the matrix passes core semantic validation on more than one platform
+- 至少有一套代表性类库可以被正确翻译并执行
+- 至少有一个 CLI/后台任务样例可以端到端跑通
+- 至少有一个原生宿主嵌入场景成功
+- 至少有一个跨平台子矩阵在一个以上平台上通过核心语义验证
 
-Core rule:
+核心规则：
 
-- enforce phase exit criteria before expanding scope.
+- 在扩展范围之前，先强制满足阶段退出标准。
 
-## Open Follow-On Planning Areas
+## 后续规划的开放主题
 
-This design is sufficient to begin implementation planning, but the next planning pass should break the work into concrete execution tracks such as:
+这份设计已经足以开始实现规划，但下一轮规划应将工作拆成具体执行轨道，例如：
 
-- metadata loader and world model
-- IL normalization and typed IR
-- AOT closure engine and manifest format
-- runtime object model and precise GC baseline
-- exception/thread/safepoint protocol
-- reflection metadata runtime
-- portable C++ emitter
-- ABI adaptation layer
-- packaging/build driver
-- golden-project and semantic validation suites
+- 元数据加载器与世界模型
+- IL 规范化与 typed IR
+- AOT 闭包引擎与 manifest 格式
+- 运行时对象模型与精确 GC 基线
+- 异常/线程/safepoint 协议
+- 反射元数据运行时
+- 可移植 C++ 发射器
+- ABI 适配层
+- 打包/构建驱动
+- golden project 与语义验证套件
 
-## Review Notes
+## 评审备注
 
-This document was written from the approved brainstorming record.
+本文档基于已批准的 brainstorm 记录编写。
 
-Not completed in this session:
+本次会话中未完成的事项：
 
-- Sub-agent specification review loop, because no explicit user authorization for delegation was given in this session
-- Git commit of the design artifacts, because the current workspace root is not a git repository
+- 子 agent 规格评审循环，因为本次会话中没有得到用户对委派的明确授权
+- 设计产物的 git 提交，因为当前工作区根目录不是一个 git 仓库
