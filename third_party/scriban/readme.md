@@ -1,3 +1,34 @@
+<!-- 本仓库维护说明（Roadmap 0） -->
+# README（仓库维护说明）
+
+## 来源
+
+- 上游项目：`scriban/scriban`
+- 本目录内容来源于上游源码的 vendored snapshot。
+
+## 当前目录性质
+
+- `third_party/scriban` 是本仓库第三方依赖的正式落点之一。
+- 本目录中的代码按 vendored snapshot 管理，不在此目录执行自动下载流程。
+
+## 上游说明位置
+
+- 上游自带说明位于本文件后续正文（原始 `readme.md` 内容）。
+
+## 许可证
+
+- BSD-2-Clause（见 `license.txt` 与 `src/Scriban/Scriban.props` 中 `PackageLicenseExpression`）。
+
+## 用途
+
+- 作为 .NET 模板/脚本引擎依赖，用于文本模板与脚本能力。
+
+## 放置原因
+
+- 根据 Roadmap 0 的第三方治理规则，当前维护中的 vendored 依赖统一落在 `third_party/`，因此该库位于 `third_party/scriban`。
+
+---
+
 # scriban [![ci](https://github.com/scriban/scriban/actions/workflows/CI.yml/badge.svg)](https://github.com/scriban/scriban/actions/workflows/CI.yml) [![Coverage Status](https://coveralls.io/repos/github/scriban/scriban/badge.svg?branch=master)](https://coveralls.io/github/scriban/scriban?branch=master) [![NuGet](https://img.shields.io/nuget/v/Scriban.svg)](https://www.nuget.org/packages/Scriban/)
 
 <img align="right" width="160px" height="160px" src="img/scriban.png">
