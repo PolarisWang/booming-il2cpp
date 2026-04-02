@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "analysis/contracts/schemas/metadata-registration.schema.json",
+  "title": "metadata-registration v0",
+  "description": "metadata registration 的最小 contract，冻结注册种类、主体定位和稳定槽位，不冻结更细的布局细节。",
+  "type": "object",
+  "required": [
+    "formatVersion",
+    "artifactKind",
+    "registrations"
+  ],
+  "properties": {
+    "formatVersion": {
+      "const": "v0"
+    },
+    "artifactKind": {
+      "const": "metadataRegistration"
+    },
+    "registrations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "registrationKind",
+          "slot",
+          "subjectId"
+        ],
+        "properties": {
+          "registrationKind": {
+            "type": "string",
+            "enum": [
+              "assembly",
+              "type",
+              "method",
+              "field",
+              "property",
+              "event",
+              "parameter",
+              "genericContext",
+              "delegate"
+            ]
+          },
+          "slot": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "subjectId": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

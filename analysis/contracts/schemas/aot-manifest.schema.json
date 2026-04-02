@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "analysis/contracts/schemas/aot-manifest.schema.json",
+  "title": "aot-manifest v0",
+  "description": "AOT manifest 的最小 contract，冻结保守的条目定位字段，用于声明需要预先保留或生成的 AOT 主体。",
+  "type": "object",
+  "required": [
+    "formatVersion",
+    "artifactKind",
+    "entries"
+  ],
+  "properties": {
+    "formatVersion": {
+      "const": "v0"
+    },
+    "artifactKind": {
+      "const": "aotManifest"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "assemblyName",
+          "subjectKind",
+          "subjectId",
+          "reason"
+        ],
+        "properties": {
+          "assemblyName": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subjectKind": {
+            "type": "string",
+            "enum": [
+              "assembly",
+              "type",
+              "method",
+              "delegate",
+              "genericContext"
+            ]
+          },
+          "subjectId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

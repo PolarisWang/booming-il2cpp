@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tests/contracts/trace/schema/warmup-trace.schema.json",
+  "title": "warmup-trace v0",
+  "description": "用于 lazy warmup 验证的 trace contract。eventName 默认使用三段式 <domain>.<subject>.<action>，必要时允许两段式 <domain>.<action>。domain 只允许 warmup、metadata、reflection、generic、delegate、bootstrap、interop。subjectId 使用人读签名，至少包含程序集、类型、成员签名；泛型场景需要带出实例化形态。",
+  "type": "object",
+  "required": [
+    "formatVersion",
+    "traceName",
+    "targetPlatform",
+    "samples"
+  ],
+  "properties": {
+    "formatVersion": {
+      "const": "v0"
+    },
+    "traceName": {
+      "const": "warmupTrace"
+    },
+    "targetPlatform": {
+      "type": "string",
+      "enum": [
+        "windows",
+        "macos"
+      ]
+    },
+    "samples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "sampleId",
+          "scenario",
+          "events"
+        ],
+        "properties": {
+          "sampleId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scenario": {
+            "type": "string",
+            "minLength": 1
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "eventName",
+                "phase",
+                "subjectKind",
+                "subjectId",
+                "order",
+                "status"
+              ],
+              "properties": {
+                "eventName": {
+                  "type": "string",
+                  "pattern": "^(warmup|metadata|reflection|generic|delegate|bootstrap|interop)\\.[a-z][a-z0-9]*(\\.[a-z][a-z0-9]*)?$",
+                  "description": "默认三段式，必要时允许两段式。"
+                },
+                "phase": {
+                  "type": "string",
+                  "enum": [
+                    "requested",
+                    "started",
+                    "completed",
+                    "failed",
+                    "skipped",
+                    "cached",
+                    "replayed"
+                  ]
+                },
+                "subjectKind": {
+                  "type": "string",
+                  "enum": [
+                    "type",
+                    "method",
+                    "field",
+                    "property",
+                    "event",
+                    "parameter",
+                    "genericContext",
+                    "delegate",
+                    "assembly"
+                  ]
+                },
+                "subjectId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "order": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "ok",
+                    "error",
+                    "skipped",
+                    "cached"
+                  ]
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

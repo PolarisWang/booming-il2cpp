@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "analysis/contracts/schemas/preserve-descriptor.schema.json",
+  "title": "preserve-descriptor v0",
+  "description": "preserve descriptor 的最小 contract，冻结需要保留的主体、保留级别与原因。",
+  "type": "object",
+  "required": [
+    "formatVersion",
+    "artifactKind",
+    "entries"
+  ],
+  "properties": {
+    "formatVersion": {
+      "const": "v0"
+    },
+    "artifactKind": {
+      "const": "preserveDescriptor"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "subjectKind",
+          "subjectId",
+          "preserve",
+          "reason"
+        ],
+        "properties": {
+          "subjectKind": {
+            "type": "string",
+            "enum": [
+              "assembly",
+              "type",
+              "method",
+              "field",
+              "property",
+              "event",
+              "delegate",
+              "genericContext"
+            ]
+          },
+          "subjectId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "preserve": {
+            "type": "string",
+            "enum": [
+              "all",
+              "signature",
+              "fields",
+              "methods",
+              "members"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

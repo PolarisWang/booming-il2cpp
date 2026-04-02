@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "analysis/contracts/schemas/typed-il-ir.schema.json",
+  "title": "typed-il-ir v0",
+  "description": "typed IL IR 的最小稳定骨架。只冻结方法、基础块和指令骨架，不冻结 SSA、优化标记或平台特定字段。",
+  "type": "object",
+  "required": [
+    "formatVersion",
+    "artifactKind",
+    "methods"
+  ],
+  "properties": {
+    "formatVersion": {
+      "const": "v0",
+      "description": "顶层 contract 版本固定为 v0。"
+    },
+    "artifactKind": {
+      "const": "typedIlIr",
+      "description": "稳定产物标识。"
+    },
+    "methods": {
+      "type": "array",
+      "description": "方法级 typed IL IR 骨架。",
+      "items": {
+        "type": "object",
+        "required": [
+          "methodId",
+          "signature",
+          "blocks"
+        ],
+        "properties": {
+          "methodId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "signature": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "type"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "type": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "additionalProperties": true
+            }
+          },
+          "blocks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "blockId",
+                "instructions"
+              ],
+              "properties": {
+                "blockId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "instructions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "op"
+                    ],
+                    "properties": {
+                      "op": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "operand": {},
+                      "resultType": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "callee": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "additionalProperties": true
+                  }
+                }
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
