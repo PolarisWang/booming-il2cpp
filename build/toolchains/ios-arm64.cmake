@@ -1,0 +1,12 @@
+set(ROADMAP0_TARGET_NAME "ios-arm64" CACHE STRING "Roadmap 0 target id")
+if(ROADMAP0_TOOLCHAIN_VALIDATE_ONLY)
+  set(ROADMAP0_TOOLCHAIN_VALIDATE_ONLY ON CACHE BOOL "Validate preset routing without real iOS toolchain")
+  return()
+endif()
+
+set(CMAKE_SYSTEM_NAME iOS)
+set(CMAKE_OSX_SYSROOT "iphoneos" CACHE STRING "iOS SDK")
+set(CMAKE_OSX_ARCHITECTURES "arm64" CACHE STRING "iOS architecture")
+set(CMAKE_OSX_DEPLOYMENT_TARGET "16.0" CACHE STRING "Minimum iOS version")
+set(ROADMAP0_HOST_PROFILE "macos" CACHE STRING "Preferred host profile")
+set(ROADMAP0_PLATFORM_GATE "ios-packaging" CACHE STRING "Roadmap 0 gate id")

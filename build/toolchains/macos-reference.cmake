@@ -1,0 +1,7 @@
+set(ROADMAP0_TARGET_NAME "macos-reference" CACHE STRING "Roadmap 0 target id")
+set(CMAKE_SYSTEM_NAME Darwin)
+set(CMAKE_SYSTEM_PROCESSOR arm64)
+set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "Supported macOS architectures")
+set(CMAKE_OSX_DEPLOYMENT_TARGET "13.0" CACHE STRING "Minimum macOS version")
+set(ROADMAP0_HOST_PROFILE "macos" CACHE STRING "Roadmap 0 host profile")
+set(ROADMAP0_REFERENCE_DESKTOP ON CACHE BOOL "Reference desktop gate")

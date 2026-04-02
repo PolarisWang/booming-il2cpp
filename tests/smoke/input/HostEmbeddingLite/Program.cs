@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 internal enum HostLifecycleState
 {
@@ -16,6 +18,48 @@ internal sealed record HostEnvironmentSnapshot(
     bool TimeZoneReadable,
     bool ProbeLibraryResolved,
     string FilePayload);
+
+internal sealed record WarmupTraceDocument(
+    string FormatVersion,
+    string TraceName,
+    string TargetPlatform,
+    WarmupTraceSample[] Samples);
+
+internal sealed record WarmupTraceSample(
+    string SampleId,
+    string Scenario,
+    WarmupTraceEvent[] Events);
+
+internal sealed record WarmupTraceEvent(
+    string EventName,
+    string Phase,
+    string SubjectKind,
+    string SubjectId,
+    int Order,
+    string Status,
+    string? Trigger = null);
+
+internal sealed class WarmupPlayer
+{
+    public int LastDamage { get; private set; }
+
+    public void TakeDamage(int amount)
+    {
+        LastDamage = amount;
+    }
+}
+
+internal sealed class WarmupInventory
+{
+    public delegate void ItemAddedHandler(string item);
+
+    public string? LastItem { get; private set; }
+
+    public void AddItem<T>(T item)
+    {
+        LastItem = item?.ToString();
+    }
+}
 
 internal sealed class BootstrapStateMachine
 {
@@ -239,7 +283,7 @@ internal sealed class HostEmbeddingSession
 
 internal static class Program
 {
-    private static int Main()
+    private static int Main(string[] args)
     {
         HostEmbeddingSession session = new();
         session.Start();
@@ -251,6 +295,7 @@ internal static class Program
         HostEnvironmentSnapshot snapshot = session.CaptureEnvironment();
         string reflectionSummary = session.RequestReflectionSummary();
         string guardSummary = VerifyLifecycleGuards();
+        string? traceSummary = TryWriteWarmupTrace(args);
 
         session.DetachThread("main");
         session.Stop();
@@ -261,8 +306,157 @@ internal static class Program
         Console.WriteLine($"capabilities={snapshot.LocalClockReadable}|{snapshot.TimeZoneReadable}|{snapshot.ProbeLibraryResolved}");
         Console.WriteLine(reflectionSummary);
         Console.WriteLine(guardSummary);
+
+        if (traceSummary is not null)
+        {
+            Console.WriteLine(traceSummary);
+        }
+
         Console.WriteLine(string.Join(",", session.Trace));
         return 0;
+    }
+
+    private static string? TryWriteWarmupTrace(string[] args)
+    {
+        string? tracePlatform = TryGetOption(args, "--trace-platform");
+        string? traceOutput = TryGetOption(args, "--trace-output");
+
+        if (tracePlatform is null && traceOutput is null)
+        {
+            return null;
+        }
+
+        if (tracePlatform is null || traceOutput is null)
+        {
+            throw new ArgumentException("trace platform and trace output must be supplied together");
+        }
+
+        WarmupTraceDocument traceDocument = BuildWarmupTraceDocument(tracePlatform);
+        string outputPath = Path.GetFullPath(traceOutput);
+        string? outputDirectory = Path.GetDirectoryName(outputPath);
+
+        if (!string.IsNullOrEmpty(outputDirectory))
+        {
+            Directory.CreateDirectory(outputDirectory);
+        }
+
+        JsonSerializerOptions options = new()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            WriteIndented = true,
+        };
+
+        File.WriteAllText(outputPath, JsonSerializer.Serialize(traceDocument, options));
+        return $"trace={traceDocument.TargetPlatform}|{Path.GetFileName(outputPath)}";
+    }
+
+    private static WarmupTraceDocument BuildWarmupTraceDocument(string tracePlatform)
+    {
+        return tracePlatform switch
+        {
+            "windows" => BuildWindowsWarmupTrace(),
+            "macos" => BuildMacosWarmupTrace(),
+            _ => throw new ArgumentOutOfRangeException(nameof(tracePlatform), tracePlatform, "unsupported trace platform"),
+        };
+    }
+
+    private static WarmupTraceDocument BuildWindowsWarmupTrace()
+    {
+        const string typeSubjectId = "Game.Core/Game.Player";
+        const string methodSubjectId = "Game.Core/Game.Player::TakeDamage(System.Int32)";
+
+        WarmupPlayer player = new();
+        Type playerType = typeof(WarmupPlayer);
+        Dictionary<string, MethodInfo> methodCache = new();
+        List<WarmupTraceEvent> events = new();
+
+        events.Add(new WarmupTraceEvent("warmup.type.requested", "requested", "type", typeSubjectId, 10, "ok", "lazy-touch"));
+        events.Add(new WarmupTraceEvent("warmup.type.started", "started", "type", typeSubjectId, 11, "ok"));
+        _ = playerType.FullName ?? throw new InvalidOperationException("warmup player type name missing");
+        events.Add(new WarmupTraceEvent("warmup.type.completed", "completed", "type", typeSubjectId, 12, "ok"));
+
+        events.Add(new WarmupTraceEvent("warmup.method.requested", "requested", "method", methodSubjectId, 13, "ok", "lazy-touch"));
+
+        if (!methodCache.TryGetValue(methodSubjectId, out MethodInfo? method))
+        {
+            events.Add(new WarmupTraceEvent("warmup.method.started", "started", "method", methodSubjectId, 14, "ok"));
+            method = playerType.GetMethod(nameof(WarmupPlayer.TakeDamage), BindingFlags.Instance | BindingFlags.Public)
+                ?? throw new InvalidOperationException("warmup player method missing");
+            method.Invoke(player, [7]);
+            methodCache[methodSubjectId] = method;
+            events.Add(new WarmupTraceEvent("warmup.method.completed", "completed", "method", methodSubjectId, 15, "ok"));
+        }
+
+        MethodInfo cachedMethod = methodCache[methodSubjectId];
+        cachedMethod.Invoke(player, [3]);
+        events.Add(new WarmupTraceEvent("warmup.method.hit", "cached", "method", methodSubjectId, 16, "cached"));
+
+        return new WarmupTraceDocument(
+            "v0",
+            "warmupTrace",
+            "windows",
+            [
+                new WarmupTraceSample(
+                    "windows-lazy-method-cache",
+                    "first touch warms type and method; second method access hits cache",
+                    events.ToArray()),
+            ]);
+    }
+
+    private static WarmupTraceDocument BuildMacosWarmupTrace()
+    {
+        const string genericContextSubjectId = "Game.Core/Game.Inventory::AddItem<System.String>(System.String)";
+        const string methodSubjectId = "Game.Core/Game.Inventory::AddItem<System.String>(System.String)";
+        const string delegateSubjectId = "Game.Core/Game.Inventory+ItemAddedHandler::.ctor(System.Object,System.IntPtr) => Game.Core/Game.Inventory::AddItem<System.String>(System.String)";
+
+        WarmupInventory inventory = new();
+        MethodInfo openMethod = typeof(WarmupInventory).GetMethod(nameof(WarmupInventory.AddItem), BindingFlags.Instance | BindingFlags.Public)
+            ?? throw new InvalidOperationException("warmup inventory method missing");
+        Dictionary<string, MethodInfo> genericContextCache = new();
+        List<WarmupTraceEvent> events = new();
+
+        events.Add(new WarmupTraceEvent("generic.context.requested", "requested", "genericContext", genericContextSubjectId, 20, "ok", "lazy-touch"));
+        events.Add(new WarmupTraceEvent("generic.context.started", "started", "genericContext", genericContextSubjectId, 21, "ok"));
+
+        MethodInfo closedMethod = openMethod.MakeGenericMethod(typeof(string));
+        genericContextCache[genericContextSubjectId] = closedMethod;
+        events.Add(new WarmupTraceEvent("generic.context.completed", "completed", "genericContext", genericContextSubjectId, 22, "ok"));
+
+        events.Add(new WarmupTraceEvent("warmup.method.requested", "requested", "method", methodSubjectId, 23, "ok", "lazy-touch"));
+        events.Add(new WarmupTraceEvent("warmup.method.started", "started", "method", methodSubjectId, 24, "ok"));
+        closedMethod.Invoke(inventory, ["rope"]);
+        events.Add(new WarmupTraceEvent("warmup.method.completed", "completed", "method", methodSubjectId, 25, "ok"));
+
+        MethodInfo replayMethod = genericContextCache[genericContextSubjectId];
+        WarmupInventory.ItemAddedHandler boundDelegate =
+            (WarmupInventory.ItemAddedHandler)Delegate.CreateDelegate(typeof(WarmupInventory.ItemAddedHandler), inventory, replayMethod);
+        boundDelegate("potion");
+        events.Add(new WarmupTraceEvent("delegate.stub.bind", "replayed", "delegate", delegateSubjectId, 26, "ok"));
+
+        return new WarmupTraceDocument(
+            "v0",
+            "warmupTrace",
+            "macos",
+            [
+                new WarmupTraceSample(
+                    "macos-lazy-generic-replay",
+                    "first touch warms closed generic method; delegate bind follows replay path",
+                    events.ToArray()),
+            ]);
+    }
+
+    private static string? TryGetOption(IReadOnlyList<string> args, string optionName)
+    {
+        for (int index = 0; index < args.Count - 1; index++)
+        {
+            if (string.Equals(args[index], optionName, StringComparison.Ordinal))
+            {
+                return args[index + 1];
+            }
+        }
+
+        return null;
     }
 
     private static string VerifyLifecycleGuards()

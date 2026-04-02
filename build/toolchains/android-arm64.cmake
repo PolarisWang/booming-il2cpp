@@ -1,0 +1,16 @@
+set(ROADMAP0_TARGET_NAME "android-arm64" CACHE STRING "Roadmap 0 target id")
+if(ROADMAP0_TOOLCHAIN_VALIDATE_ONLY)
+  set(ROADMAP0_TOOLCHAIN_VALIDATE_ONLY ON CACHE BOOL "Validate preset routing without real Android toolchain")
+  return()
+endif()
+
+set(CMAKE_SYSTEM_NAME Android)
+set(CMAKE_SYSTEM_VERSION 24)
+set(CMAKE_ANDROID_ARCH_ABI "arm64-v8a" CACHE STRING "Android ABI")
+set(ROADMAP0_HOST_PROFILE "windows" CACHE STRING "Preferred host profile")
+set(ROADMAP0_PLATFORM_GATE "android-startup-smoke" CACHE STRING "Roadmap 0 gate id")
+
+if(DEFINED ENV{ANDROID_NDK_ROOT} AND NOT DEFINED CMAKE_ANDROID_NDK)
+  file(TO_CMAKE_PATH "$ENV{ANDROID_NDK_ROOT}" ROADMAP0_ANDROID_NDK)
+  set(CMAKE_ANDROID_NDK "${ROADMAP0_ANDROID_NDK}" CACHE PATH "Android NDK root")
+endif()

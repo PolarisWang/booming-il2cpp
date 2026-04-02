@@ -1,0 +1,65 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 20,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "windows-x64-reference",
+      "displayName": "Roadmap0 Windows x64 Reference",
+      "description": "Windows reference desktop gate baseline for roadmap-0.",
+      "generator": "Visual Studio 17 2022",
+      "binaryDir": "artifacts/presets/windows-x64-reference",
+      "toolchainFile": "build/toolchains/windows-x64-reference.cmake",
+      "cacheVariables": {
+        "ROADMAP0_PRESET_TARGET": "windows-x64-reference"
+      }
+    },
+    {
+      "name": "macos-reference",
+      "displayName": "Roadmap0 macOS Reference",
+      "description": "macOS reference desktop gate subset for roadmap-0.",
+      "generator": "Xcode",
+      "binaryDir": "artifacts/presets/macos-reference",
+      "toolchainFile": "build/toolchains/macos-reference.cmake",
+      "cacheVariables": {
+        "ROADMAP0_PRESET_TARGET": "macos-reference"
+      }
+    },
+    {
+      "name": "android-arm64-smoke",
+      "displayName": "Roadmap0 Android arm64 Smoke",
+      "description": "Android startup smoke shell for roadmap-0.",
+      "generator": "Ninja",
+      "binaryDir": "artifacts/presets/android-arm64-smoke",
+      "toolchainFile": "build/toolchains/android-arm64.cmake",
+      "cacheVariables": {
+        "ROADMAP0_PRESET_TARGET": "android-arm64-smoke"
+      }
+    },
+    {
+      "name": "ios-arm64-packaging",
+      "displayName": "Roadmap0 iOS arm64 Packaging",
+      "description": "iOS compile/link/packaging shell for roadmap-0.",
+      "generator": "Xcode",
+      "binaryDir": "artifacts/presets/ios-arm64-packaging",
+      "toolchainFile": "build/toolchains/ios-arm64.cmake",
+      "cacheVariables": {
+        "ROADMAP0_PRESET_TARGET": "ios-arm64-packaging"
+      }
+    },
+    {
+      "name": "linux-x64-packaging",
+      "displayName": "Roadmap0 Linux x64 Packaging",
+      "description": "Linux cross-compile and packaging shell for roadmap-0.",
+      "generator": "Ninja",
+      "binaryDir": "artifacts/presets/linux-x64-packaging",
+      "toolchainFile": "build/toolchains/linux-x64.cmake",
+      "cacheVariables": {
+        "ROADMAP0_PRESET_TARGET": "linux-x64-packaging"
+      }
+    }
+  ]
+}
