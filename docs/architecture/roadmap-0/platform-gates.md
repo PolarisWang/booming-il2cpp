@@ -2,13 +2,13 @@
 
 ## Reference Desktop
 
-- 双 reference desktop：Windows x64 + macOS。
+- 双 reference desktop：`Windows x64 + macOS`。
 
 ## Gate Statements
 
-- Windows 是高阶 contract 主线（包括 ABI/bridge contract 主线）。
-- macOS 跟同语义子集，保证语义一致性与可验证性。
-- Android 必须覆盖真启动路径。
-- iOS 至少覆盖 compile/link/packaging 门禁。
-- Linux 以 cross-compile/packaging 作为门禁目标。
-
+- Windows：高阶 ABI/bridge contract 主线基准集。
+- macOS：接近同范围的高阶 contract 子集。
+- 仅对真正平台能力相关的 `icall` 留白。
+- Android：真启动 smoke。
+- iOS：compile/link/packaging。
+- Linux：cross-compile/packaging。

@@ -9,7 +9,7 @@
 - Build/Release track: `build/`，负责跨平台编译、链接、打包门禁。
 - Verification track: `tests/`，负责跨平台验证与 smoke 回归。
 - Contract track: `contracts/`，负责 schema/native/trace 约束冻结。
-- Dependency stewardship: `third_party/`，负责 vendored 快照登记与审阅。
+- Dependency stewardship: `third_party/`，负责 vendored 快照登记、审阅与迁移后治理（含 `third_party/scriban`）。
 - Artifact stewardship: `artifacts/`，负责运行输出集中收口与清理策略。
 
 ## Future Workstream Guidance
@@ -18,3 +18,7 @@
 - 跨轨改动需要同时更新 `contracts/` 或架构文档中的边界定义。
 - 若职责变更，先更新本文件与 `repo-layout.md` 再推进实现。
 
+## 迁移后说明
+
+- `3rd/scriban` 已迁移至 `third_party/scriban`，当前依赖治理以 `third_party/` 为准。
+- `3rd/` 不再作为当前依赖落点；后续第三方接入不应回写到 `3rd/`。

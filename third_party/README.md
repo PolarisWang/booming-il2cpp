@@ -4,6 +4,7 @@
 
 - 仅承载 vendored 第三方源码快照（source snapshot）。
 - 维护每个依赖目录自带的来源、版本、许可证与用途说明。
+- 作为当前仓库第三方依赖的正式落点（包含 `third_party/scriban`）。
 
 ## 不负责
 
@@ -16,3 +17,7 @@
 - 每个依赖子目录必须包含 `README.md`，并在根级 `INDEX.md` 登记摘要。
 - 平台构建输出统一进入 `artifacts/`，不得写入本目录。
 
+## 迁移事实
+
+- 原 `3rd/scriban` 已迁移到 `third_party/scriban`。
+- 迁移后不再将 `3rd/scriban` 视为当前依赖落点。
