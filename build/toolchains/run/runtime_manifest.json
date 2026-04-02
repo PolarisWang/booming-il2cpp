@@ -1,0 +1,40 @@
+{
+  "provider": "python-build-standalone",
+  "provider_release": "20260303",
+  "python_version": "3.12.13",
+  "cache_root": "artifacts/toolchains/python",
+  "platforms": {
+    "windows-x64": {
+      "platform_id": "windows-x64",
+      "download_url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260303/cpython-3.12.13+20260303-x86_64-pc-windows-msvc-install_only_stripped.tar.gz",
+      "sha256": "10b7a95b928e551fc78cac665999e1ae1f08fb738b255adb0a8d3b9c2824a9c0",
+      "archive_type": "tar.gz",
+      "extract_dir": ".",
+      "python_relpath": "python/python.exe"
+    },
+    "linux-x64": {
+      "platform_id": "linux-x64",
+      "download_url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260303/cpython-3.12.13+20260303-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz",
+      "sha256": "c710dd6b63e4df92f4c5b7b29ccad4276226a024a9017d5018f15321c7854af4",
+      "archive_type": "tar.gz",
+      "extract_dir": ".",
+      "python_relpath": "python/bin/python3.12"
+    },
+    "macos-arm64": {
+      "platform_id": "macos-arm64",
+      "download_url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260303/cpython-3.12.13+20260303-aarch64-apple-darwin-install_only_stripped.tar.gz",
+      "sha256": "377234f346fce41b6d3112b5ead89cb6af2d5596244f9edc1a739065770dde1f",
+      "archive_type": "tar.gz",
+      "extract_dir": ".",
+      "python_relpath": "python/bin/python3.12"
+    },
+    "macos-x64": {
+      "platform_id": "macos-x64",
+      "download_url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260303/cpython-3.12.13+20260303-x86_64-apple-darwin-install_only_stripped.tar.gz",
+      "sha256": "b7ad42eef6a5729af319ba8a89eedd155e4d7c2a9884beff174a4c13e1286e68",
+      "archive_type": "tar.gz",
+      "extract_dir": ".",
+      "python_relpath": "python/bin/python3.12"
+    }
+  }
+}

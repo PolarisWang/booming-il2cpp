@@ -26,6 +26,10 @@ obj/
 TestResults/
 *.trx
 
+# Python cache outputs
+__pycache__/
+*.pyc
+*.pyo
 # CMake / native build outputs
 Debug/
 Release/

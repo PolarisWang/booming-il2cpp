@@ -1,5 +1,49 @@
 # Local Verification (Roadmap 0)
 
+## 推荐入口
+
+- Windows host:
+
+```powershell
+./run.ps1 doctor --json
+./run.ps1 bootstrap --yes --json
+./run.ps1 prepare verify roadmap-0 --host windows --json
+./run.ps1 verify roadmap-0 --host windows --json
+./run.ps1 clean --scope verify-roadmap0-windows --json
+```
+
+- macOS host:
+
+```bash
+./run.sh doctor --json
+./run.sh bootstrap --yes --json
+./run.sh prepare verify roadmap-0 --host macos --json
+./run.sh verify roadmap-0 --host macos --json
+./run.sh clean --scope verify-roadmap0-macos --json
+```
+
+- 快速 smoke 入口:
+
+```powershell
+./run.ps1 prepare smoke --json
+./run.ps1 test smoke HelloWorld --json
+```
+
+`run.cmd` 只是 Windows 上的薄包装；交互式直接执行 `run` 会进入菜单，CI / harness 必须显式调用子命令并带 `--json`。
+
+## Harness 生命周期
+
+推荐统一走 `bootstrap -> prepare -> build/test/verify -> clean`。
+
+- `bootstrap` 只负责仓库内 Python runtime 缓存。
+- `prepare` 负责复用型环境准备，并把当前 scope 写入 `artifacts/run/prepare/*.json`。
+- `build` / `test` / `verify` 默认复用已经准备好的环境。
+- `clean --scope ...` 只删除统一入口托管的输出，不碰仓库源码和第三方目录。
+
+## 何时直接调用底层脚本
+
+统一入口默认覆盖本地验证和 harness 生命周期。只有在调试底层 `verify-roadmap-0` 脚本本身、绕过 wrapper 做最小重现、或单独复用已有 PowerShell/Shell 流程时，才直接调用 `build/scripts/verify-roadmap-0.*`。
+
 ## 入口
 
 - Windows host:
