@@ -416,8 +416,8 @@ Roadmap 0 的详细计划必须同时覆盖 schema、runtime ABI 和 codegen bri
 
 当前更稳定的 native contract 包结构是：
 
-- `contracts/native/v0/boom_runtime_abi.h`
-- `contracts/native/v0/boom_codegen_bridge.h`
+- `contracts/native/v0/runtime_abi.h`
+- `contracts/native/v0/codegen_bridge.h`
 - `contracts/native/docs/v0/runtime-abi.md`
 - `contracts/native/docs/v0/codegen-bridge.md`
 - `contracts/native/examples/v0/abi/`

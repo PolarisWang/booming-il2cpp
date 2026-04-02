@@ -411,7 +411,7 @@
 - 2026-04-01 02:02:46 +08:00：针对 native contract 的版本落盘方式，用户选择 `AE2`。
 - 2026-04-01 02:02:46 +08:00：据此确认 native contract 采用“目录和文件名双重带版本”的布局，例如 `contracts/native/v0/boom_runtime_abi_v0.h` 和 `contracts/native/v0/boom_codegen_bridge_v0.h`。
 - 2026-04-01 02:05:35 +08:00：用户对上一轮结论做出更正：保留 `AE2` 的目录级版本化，但文件名不带版本。
-- 2026-04-01 02:05:35 +08:00：据此当前 native contract 布局更正为：`contracts/native/v0/boom_runtime_abi.h`、`contracts/native/v0/boom_codegen_bridge.h`，版本信息主要由 `v0/` 目录承载。
+- 2026-04-01 02:05:35 +08:00：据此当前 native contract 布局更正为：`contracts/native/v0/runtime_abi.h`、`contracts/native/v0/codegen_bridge.h`，版本信息主要由 `v0/` 目录承载。
 - 2026-04-01 02:05:35 +08:00：针对 native contract 文档布局，用户选择 `AF3`。
 - 2026-04-01 02:05:35 +08:00：据此确认头文件放在 `contracts/native/v0/`，而人读文档放在 `contracts/native/docs/`，不与 header 同目录收口。
 - 2026-04-01 02:07:38 +08:00：针对 native contract 文档的版本布局，用户选择 `AG1`。

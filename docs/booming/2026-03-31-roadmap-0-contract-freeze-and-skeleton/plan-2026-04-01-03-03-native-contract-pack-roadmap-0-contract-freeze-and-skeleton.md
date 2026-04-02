@@ -7,7 +7,7 @@
 ### 任务 1：创建 ABI header、docs 与 example
 
 **文件：**
-- 创建：`contracts/native/v0/boom_runtime_abi.h`
+- 创建：`contracts/native/v0/runtime_abi.h`
 - 创建：`contracts/native/docs/v0/runtime-abi.md`
 - 创建：`contracts/native/examples/v0/abi/runtime-lifecycle.cpp`
 - 创建：`contracts/native/examples/v0/abi/reflection-handles.cpp`
@@ -19,7 +19,7 @@
 New-Item -ItemType Directory contracts/native/v0,contracts/native/docs/v0,contracts/native/examples/v0/abi -Force
 ```
 
-- [ ] **步骤 2：编写 `boom_runtime_abi.h` 的句柄与状态类型**
+- [ ] **步骤 2：编写 `runtime_abi.h` 的句柄与状态类型**
 
 必须包含不透明句柄：
 - `TypeInfo`
@@ -64,7 +64,7 @@ New-Item -ItemType Directory contracts/native/v0,contracts/native/docs/v0,contra
 ### 任务 2：创建 bridge header、docs 与 example
 
 **文件：**
-- 创建：`contracts/native/v0/boom_codegen_bridge.h`
+- 创建：`contracts/native/v0/codegen_bridge.h`
 - 创建：`contracts/native/docs/v0/codegen-bridge.md`
 - 创建：`contracts/native/examples/v0/bridge/registration.cpp`
 - 创建：`contracts/native/examples/v0/bridge/invoke-and-delegate.cpp`
@@ -76,7 +76,7 @@ New-Item -ItemType Directory contracts/native/v0,contracts/native/docs/v0,contra
 New-Item -ItemType Directory contracts/native/examples/v0/bridge -Force
 ```
 
-- [ ] **步骤 2：编写 `boom_codegen_bridge.h` 的 helper 分类**
+- [ ] **步骤 2：编写 `codegen_bridge.h` 的 helper 分类**
 
 至少包含：
 - registration helper
@@ -131,14 +131,14 @@ New-Item -ItemType Directory tests/contracts/native/abi,tests/contracts/native/b
 - [ ] **步骤 2：写 ABI compile-only smoke**
 
 要求：
-- 只 include `boom_runtime_abi.h`
+- 只 include `runtime_abi.h`
 - 编译时覆盖生命周期、分配、句柄类型引用
 - 不要求真实 runtime 链接
 
 - [ ] **步骤 3：写 bridge compile-only smoke**
 
 要求：
-- 只 include `boom_codegen_bridge.h`
+- 只 include `codegen_bridge.h`
 - 编译时覆盖 registration、invoke、delegate、icall resolve
 - 不要求真实 bridge/runtime 链接
 

@@ -13,8 +13,8 @@
 header 文件名不带版本，版本由目录层承载。
 例如：
 
-- `contracts/native/v0/boom_runtime_abi.h`
-- `contracts/native/v0/boom_codegen_bridge.h`
+- `contracts/native/v0/runtime_abi.h`
+- `contracts/native/v0/codegen_bridge.h`
 
 ## ABI 与 Bridge 的职责分层
 
