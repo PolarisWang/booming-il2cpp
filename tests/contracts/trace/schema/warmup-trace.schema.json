@@ -26,6 +26,7 @@
     },
     "samples": {
       "type": "array",
+      "minItems": 1,
       "items": {
         "type": "object",
         "required": [
@@ -44,6 +45,7 @@
           },
           "events": {
             "type": "array",
+            "minItems": 1,
             "items": {
               "type": "object",
               "required": [

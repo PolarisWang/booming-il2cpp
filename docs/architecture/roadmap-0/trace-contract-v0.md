@@ -15,7 +15,7 @@
 - 顶层 `formatVersion` 固定为 `"v0"`。
 - 顶层 `traceName` 固定为 `warmupTrace`。
 - `targetPlatform` 当前冻结为 `windows` 或 `macos`。
-- `samples[]` 承载可读的验证样本；每个 sample 至少包含 `sampleId`、`scenario`、`events[]`。
+- `samples[]` 承载可读的验证样本；数组至少包含 1 个 sample，且每个 sample 至少包含 `sampleId`、`scenario`、`events[]`。
 
 ## 事件最小冻结字段
 
@@ -56,6 +56,7 @@
 
 - Windows snapshot 至少包含一份 sample，并覆盖 lazy warmup 路径。
 - macOS snapshot 至少包含一份 sample，并覆盖 lazy warmup 路径。
+- 每个 sample 的 `events[]` 至少包含 1 条事件；空 sample 不构成合法验证基线。
 - 两个平台样本合计必须覆盖 `cached` 或 `replayed` 路径；当前基线中 Windows 覆盖 `cached`，macOS 覆盖 `replayed`。
 - snapshot 是验证基线，不是 runtime 生产 ABI 的一部分。
 

@@ -14,6 +14,15 @@
 
 ## Schema 清单
 
+## 共享 `subjectId` 约定
+
+- 凡是将 `subjectId` 作为最小冻结字段的 schema，都使用同一套人读 canonical 规则。
+- `subjectId` 至少包含程序集，以及适用的类型名 / 成员签名；不得使用指针、随机 UUID 或仅本地有效的临时编号。
+- 类型示例：`Game.Core/Game.Player`
+- 方法示例：`Game.Core/Game.Player::TakeDamage(System.Int32)`
+- 泛型场景必须带出实例化形态，例如：`Game.Core/Game.Inventory::AddItem<System.String>(System.String)`
+- 如果是委托绑定或组合主体，可在保留核心签名稳定性的前提下追加 `=>` 等连接语法。
+
 ### `metadata-graph`
 
 - 目的：表达按 `assembly -> type -> member` 组织的元数据关系骨架。

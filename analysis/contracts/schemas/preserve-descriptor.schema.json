@@ -42,7 +42,8 @@
           },
           "subjectId": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "description": "使用跨 schema 共享的人读 canonical subjectId：至少包含程序集，以及适用的类型/成员签名；泛型场景带出实例化形态。"
           },
           "preserve": {
             "type": "string",
