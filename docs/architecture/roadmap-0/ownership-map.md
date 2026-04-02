@@ -11,6 +11,7 @@
 - Contract track: `contracts/`，负责 schema/native/trace 约束冻结。
 - Dependency stewardship: `third_party/`，负责 vendored 快照登记、审阅与迁移后治理（含 `third_party/scriban`）。
 - Artifact stewardship: `artifacts/`，负责运行输出集中收口与清理策略。
+- Deployment artifact stewardship: `deploy/`，负责最终可分发或可部署产物的统一落点。
 
 ## Future Workstream Guidance
 

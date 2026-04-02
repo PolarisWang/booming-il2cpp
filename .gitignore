@@ -1,17 +1,32 @@
-# Local workflow directories
+# Local workflow state
 .booming/
 .codex/
+docs/executions/
 
-# C# / .NET build outputs
+# Editor / IDE state
 .vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# OS clutter
+.DS_Store
+Thumbs.db
+
+# Project-generated artifacts
+artifacts/
+deploy/
+
+# .NET outputs
 bin/
 obj/
 TestResults/
-artifacts/*
-!artifacts/.gitignore
-!artifacts/README.md
+*.trx
 
-# C++ / Visual Studio / CMake build outputs
+# CMake / native build outputs
 Debug/
 Release/
 RelWithDebInfo/
@@ -22,3 +37,8 @@ Win32/
 out/
 cmake-build-*/
 CMakeFiles/
+CMakeCache.txt
+compile_commands.json
+
+# Temporary scratch directories
+.tmp_*/

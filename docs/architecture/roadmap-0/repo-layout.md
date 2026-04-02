@@ -14,7 +14,8 @@ Roadmap 0 产品骨架目录：
 - `tests/`: 验证入口、测试资产与 smoke 执行。
 - `contracts/`: schema/native/trace 等契约定义。
 - `third_party/`: vendored 源码正式落点（当前含 `third_party/scriban`）。
-- `artifacts/`: 运行输出、日志、打包结果与快照副本。
+- `artifacts/`: 中间构建输出、运行日志、验证记录与快照副本。
+- `deploy/`: 最终可分发或可部署的产物落点。
 
 仓库中的非产品骨架目录（示例）：
 
@@ -32,4 +33,5 @@ Roadmap 0 产品骨架目录：
 - `third_party/` 只存放 vendored 源码，不承载工具链或构建产物。
 - 新增或维护中的第三方依赖统一落在 `third_party/`。
 - `artifacts/` 只承载临时或可再生输出，权威 snapshot 不放在此目录。
+- `deploy/` 只承载最终可分发或可部署产物，不回填脚本、模板或中间文件。
 - 平台验证门禁以 `host-verify-matrix.md` 与 `platform-gates.md` 为准。
