@@ -17,6 +17,7 @@
 | 文档 | 主题 | 说明 |
 |------|------|------|
 | [`01-项目总览/知识边界.md`](./01-%E9%A1%B9%E7%9B%AE%E6%80%BB%E8%A7%88/%E7%9F%A5%E8%AF%86%E8%BE%B9%E7%95%8C.md) | 知识边界 | 说明 `.codex`、`docs`、`wiki` 三层边界 |
+| [`01-项目总览/仓库目录与产物边界.md`](./01-%E9%A1%B9%E7%9B%AE%E6%80%BB%E8%A7%88/%E4%BB%93%E5%BA%93%E7%9B%AE%E5%BD%95%E4%B8%8E%E4%BA%A7%E7%89%A9%E8%BE%B9%E7%95%8C.md) | 仓库目录边界 | 说明 `build/`、`artifacts/`、`deploy/` 的职责分层 |
 | [`02-Skill体系/skill-registry.md`](./02-Skill%E4%BD%93%E7%B3%BB/skill-registry.md) | Skill 注册表 | 登记全部 `.codex/skills` 及项目绑定级别 |
 | [`03-功能模块/01-执行系统/CURRENT执行上下文机制.md`](./03-%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97/01-%E6%89%A7%E8%A1%8C%E7%B3%BB%E7%BB%9F/CURRENT%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%9C%BA%E5%88%B6.md) | 执行系统 | 说明 `CURRENT.md` 的职责和更新规则 |
 
@@ -28,4 +29,5 @@
 
 ## 最近更新
 
+- `2026-04-03`：新增仓库目录与产物边界文档，明确 `build/`、`artifacts/`、`deploy/` 分工。
 - `2026-04-02`：初始化项目 wiki 顶层目录与索引。
