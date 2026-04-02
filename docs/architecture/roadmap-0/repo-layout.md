@@ -16,11 +16,15 @@ Roadmap 0 产品骨架目录：
 - `third_party/`: vendored 源码正式落点（当前含 `third_party/scriban`）。
 - `artifacts/`: 运行输出、日志、打包结果与快照副本。
 
-仓库仍保留的非产品骨架目录（示例）：
+仓库中的非产品骨架目录（示例）：
 
 - `docs/`: 设计、执行记录与架构文档。
 - `wiki/`: 项目知识沉淀。
-- `3rd/`: 历史目录，`scriban` 已迁移后不再作为当前依赖落点。
+
+历史迁移说明：
+
+- 原 `3rd/scriban` 已迁移至 `third_party/scriban`。
+- `3rd/` 不再作为当前依赖落点，也不作为后续第三方接入目录。
 
 ## Boundary Rules
 
