@@ -1,4 +1,4 @@
-#include "boom_codegen_bridge.h"
+#include "codegen_bridge.h"
 
 namespace boom::contracts::native::examples {
 

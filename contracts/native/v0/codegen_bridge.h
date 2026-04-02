@@ -1,7 +1,7 @@
 #ifndef BOOM_CODEGEN_BRIDGE_H_
 #define BOOM_CODEGEN_BRIDGE_H_
 
-#include "boom_runtime_abi.h"
+#include "runtime_abi.h"
 
 #ifdef __cplusplus
 extern "C" {

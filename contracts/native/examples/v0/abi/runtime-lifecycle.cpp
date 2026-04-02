@@ -1,4 +1,4 @@
-#include "boom_runtime_abi.h"
+#include "runtime_abi.h"
 
 namespace boom::contracts::native::examples {
 
