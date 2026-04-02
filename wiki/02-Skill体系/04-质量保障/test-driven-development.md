@@ -6,7 +6,7 @@
 
 - 分层：质量保障
 - 项目职责：为实现改动与 skill 行为改动提供红绿重构纪律
-- 实现路径：`.codex/skills/booming-code-test-driven-development/SKILL.md`
+- 实现路径：`.codex/skills/dev-test-driven-development/SKILL.md`
 - 状态：`project`
 
 ## 项目规则

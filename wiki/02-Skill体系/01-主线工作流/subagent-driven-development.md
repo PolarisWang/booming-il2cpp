@@ -6,7 +6,7 @@
 
 - 分层：主线工作流
 - 项目职责：在子 agent 工作流下执行计划，同时维护 `CURRENT.md` 和 wiki 更新
-- 实现路径：`.codex/skills/booming-code-subagent-driven-development/SKILL.md`
+- 实现路径：`.codex/skills/dev-subagent-driven-development/SKILL.md`
 - 状态：`active`
 
 ## 在本项目中的作用

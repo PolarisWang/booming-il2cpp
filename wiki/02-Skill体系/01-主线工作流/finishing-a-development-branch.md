@@ -6,7 +6,7 @@
 
 - 分层：主线工作流
 - 项目职责：在 execution 已归档后进入开发收尾
-- 实现路径：`.codex/skills/booming-code-finishing-a-development-branch/SKILL.md`
+- 实现路径：`.codex/skills/dev-finishing-a-development-branch/SKILL.md`
 - 状态：`active`
 
 ## 项目规则

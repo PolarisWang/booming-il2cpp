@@ -6,7 +6,7 @@
 
 - 分层：质量保障
 - 项目职责：帮助定位 skill、测试或流程中的根因问题
-- 实现路径：`.codex/skills/booming-code-systematic-debugging/SKILL.md`
+- 实现路径：`.codex/skills/dev-systematic-debugging/SKILL.md`
 - 状态：`project`
 
 ## 项目规则

@@ -1,6 +1,6 @@
 # Harness Engineer 自动化实现计划
 
-> **For agentic workers:** REQUIRED: Use booming-code:subagent-driven-development (if subagents available) or booming-code:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED: Use dev:subagent-driven-development (if subagents available) or dev:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **目标：** 将活动计划守卫、执行上下文持久化、执行归档和项目 wiki 沉淀接入现有 `.codex/skills` 工作流。
 
@@ -78,7 +78,7 @@ powershell -NonInteractive -File .codex/tests/claude-code/test-executing-plans.p
 ### 任务 2：实现活动计划守卫 skill
 
 **文件：**
-- 创建：`.codex/skills/booming-code-active-execution-guard/SKILL.md`
+- 创建：`.codex/skills/dev-active-execution-guard/SKILL.md`
 - 测试：`.codex/tests/claude-code/test-active-execution-guard.ps1`
 - 测试：`.codex/tests/claude-code/test-active-execution-guard.sh`
 
@@ -112,7 +112,7 @@ powershell -NonInteractive -File .codex/tests/claude-code/test-active-execution-
 ### 任务 3：增强 `writing-plans`
 
 **文件：**
-- 修改：`.codex/skills/booming-code-writing-plans/SKILL.md`
+- 修改：`.codex/skills/dev-writing-plans/SKILL.md`
 
 - [ ] **步骤 1：在计划规范中补充执行与 wiki 绑定要求**
 
@@ -130,7 +130,7 @@ powershell -NonInteractive -File .codex/tests/claude-code/test-active-execution-
 ### 任务 4：增强 `executing-plans`
 
 **文件：**
-- 修改：`.codex/skills/booming-code-executing-plans/SKILL.md`
+- 修改：`.codex/skills/dev-executing-plans/SKILL.md`
 - 测试：`.codex/tests/claude-code/test-executing-plans.ps1`
 - 测试：`.codex/tests/claude-code/test-executing-plans.sh`
 
@@ -167,7 +167,7 @@ powershell -NonInteractive -File .codex/tests/claude-code/test-executing-plans.p
 ### 任务 5：增强 `subagent-driven-development`
 
 **文件：**
-- 修改：`.codex/skills/booming-code-subagent-driven-development/SKILL.md`
+- 修改：`.codex/skills/dev-subagent-driven-development/SKILL.md`
 - 修改：`.codex/tests/claude-code/test-subagent-driven-development.ps1`
 - 修改：`.codex/tests/claude-code/test-subagent-driven-development.sh`
 
@@ -200,7 +200,7 @@ powershell -NonInteractive -File .codex/tests/claude-code/test-subagent-driven-d
 ### 任务 6：实现 `project-wiki-maintenance`
 
 **文件：**
-- 创建：`.codex/skills/booming-code-project-wiki-maintenance/SKILL.md`
+- 创建：`.codex/skills/dev-project-wiki-maintenance/SKILL.md`
 - 测试：`.codex/tests/claude-code/test-project-wiki-maintenance.ps1`
 - 测试：`.codex/tests/claude-code/test-project-wiki-maintenance.sh`
 

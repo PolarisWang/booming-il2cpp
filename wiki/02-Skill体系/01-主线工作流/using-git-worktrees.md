@@ -6,7 +6,7 @@
 
 - 分层：主线工作流
 - 项目职责：为设计、计划和实现提供隔离工作区
-- 实现路径：`.codex/skills/booming-code-using-git-worktrees/SKILL.md`
+- 实现路径：`.codex/skills/dev-using-git-worktrees/SKILL.md`
 - 状态：`project`
 
 ## 项目规则

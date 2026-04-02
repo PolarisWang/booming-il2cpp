@@ -6,7 +6,7 @@
 
 - 分层：项目知识维护
 - 项目职责：将长期有效知识写入 `wiki/`，并维护分类索引
-- 实现路径：`.codex/skills/booming-code-project-wiki-maintenance/SKILL.md`
+- 实现路径：`.codex/skills/dev-project-wiki-maintenance/SKILL.md`
 - 状态：`active`
 
 ## 在本项目中的作用

@@ -236,14 +236,14 @@ wiki/03-功能模块/
 
 ### 新增技能
 
-- `booming-code-active-execution-guard`
-- `booming-code-project-wiki-maintenance`
+- `dev-active-execution-guard`
+- `dev-project-wiki-maintenance`
 
 ### 增强技能
 
-- `booming-code-writing-plans`
-- `booming-code-executing-plans`
-- `booming-code-subagent-driven-development`
+- `dev-writing-plans`
+- `dev-executing-plans`
+- `dev-subagent-driven-development`
 
 ## 测试策略
 

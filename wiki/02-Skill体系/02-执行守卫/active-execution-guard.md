@@ -6,7 +6,7 @@
 
 - 分层：执行守卫
 - 项目职责：检查 `docs/executions/CURRENT.md`，并阻止未处理的活动计划被绕过
-- 实现路径：`.codex/skills/booming-code-active-execution-guard/SKILL.md`
+- 实现路径：`.codex/skills/dev-active-execution-guard/SKILL.md`
 - 状态：`active`
 
 ## 触发时机

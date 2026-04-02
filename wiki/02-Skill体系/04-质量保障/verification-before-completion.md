@@ -6,7 +6,7 @@
 
 - 分层：质量保障
 - 项目职责：在标记 `completed` 前确认验证和 wiki 更新已完成
-- 实现路径：`.codex/skills/booming-code-verification-before-completion/SKILL.md`
+- 实现路径：`.codex/skills/dev-verification-before-completion/SKILL.md`
 - 状态：`project`
 
 ## 项目规则

@@ -6,7 +6,7 @@
 
 - 分层：主线工作流
 - 项目职责：把想法转为设计文档，并明确 `docs`/`wiki` 边界
-- 实现路径：`.codex/skills/booming-code-brainstorm/SKILL.md`
+- 实现路径：`.codex/skills/dev-brainstorm/SKILL.md`
 - 状态：`active`
 
 ## 在本项目中的作用

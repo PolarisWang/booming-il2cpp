@@ -6,7 +6,7 @@
 
 - 分层：主线工作流
 - 项目职责：执行计划、维护 `docs/executions/CURRENT.md`、自动归档 execution history
-- 实现路径：`.codex/skills/booming-code-executing-plans/SKILL.md`
+- 实现路径：`.codex/skills/dev-executing-plans/SKILL.md`
 - 状态：`active`
 
 ## 触发时机

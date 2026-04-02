@@ -6,7 +6,7 @@
 
 - 分层：主线工作流
 - 项目职责：输出可执行计划，并写明设计文档路径与知识沉淀落点
-- 实现路径：`.codex/skills/booming-code-writing-plans/SKILL.md`
+- 实现路径：`.codex/skills/dev-writing-plans/SKILL.md`
 - 状态：`active`
 
 ## 在本项目中的作用

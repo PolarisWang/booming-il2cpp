@@ -6,7 +6,7 @@
 
 - 分层：主线工作流
 - 项目职责：在项目里强制先检查活动计划守卫，再进入其他 skill
-- 实现路径：`.codex/skills/booming-code-using-booming/SKILL.md`
+- 实现路径：`.codex/skills/dev-using-booming/SKILL.md`
 - 状态：`active`
 
 ## 触发时机
