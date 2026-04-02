@@ -33,11 +33,159 @@ function Read-JsonFile {
     return ConvertFrom-Json -InputObject $jsonText
 }
 
+function Test-JsonPropertyExists {
+    param(
+        $Value,
+        [string]$PropertyName
+    )
+
+    if (-not ($Value -is [pscustomobject])) {
+        return $false
+    }
+
+    return $null -ne $Value.PSObject.Properties[$PropertyName]
+}
+
+function Get-JsonPropertyValue {
+    param(
+        $Value,
+        [string]$PropertyName
+    )
+
+    Write-Output -NoEnumerate $Value.PSObject.Properties[$PropertyName].Value
+}
+
+function Test-JsonSchemaType {
+    param(
+        $Value,
+        [string]$SchemaType
+    )
+
+    switch ($SchemaType) {
+        "object" { return $Value -is [pscustomobject] }
+        "array" { return $Value -is [System.Array] -or ($Value -is [System.Collections.IList] -and -not ($Value -is [string])) }
+        "string" { return $Value -is [string] }
+        "integer" { return $Value -is [sbyte] -or $Value -is [byte] -or $Value -is [int16] -or $Value -is [int32] -or $Value -is [int64] }
+        default { throw "unsupported schema type: $SchemaType" }
+    }
+}
+
+function Assert-JsonMatchesSchema {
+    param(
+        $Value,
+        $Schema,
+        [string]$Path
+    )
+
+    if (Test-JsonPropertyExists -Value $Schema -PropertyName "const") {
+        $expectedConst = Get-JsonPropertyValue -Value $Schema -PropertyName "const"
+        if ($Value -ne $expectedConst) {
+            throw "schema const mismatch at ${Path}: expected '$expectedConst' actual '$Value'"
+        }
+    }
+
+    if (Test-JsonPropertyExists -Value $Schema -PropertyName "type") {
+        $schemaType = [string](Get-JsonPropertyValue -Value $Schema -PropertyName "type")
+        if (-not (Test-JsonSchemaType -Value $Value -SchemaType $schemaType)) {
+            throw "schema type mismatch at ${Path}: expected '$schemaType'"
+        }
+    }
+
+    if (Test-JsonPropertyExists -Value $Schema -PropertyName "enum") {
+        $allowedValues = Get-JsonPropertyValue -Value $Schema -PropertyName "enum"
+        if ($allowedValues -notcontains $Value) {
+            throw "schema enum mismatch at ${Path}: value '$Value' not allowed"
+        }
+    }
+
+    if (Test-JsonPropertyExists -Value $Schema -PropertyName "minLength") {
+        $minLength = [int](Get-JsonPropertyValue -Value $Schema -PropertyName "minLength")
+        if ($null -eq $Value -or ([string]$Value).Length -lt $minLength) {
+            throw "schema minLength mismatch at ${Path}: expected >= $minLength"
+        }
+    }
+
+    if (Test-JsonPropertyExists -Value $Schema -PropertyName "minimum") {
+        $minimum = [int](Get-JsonPropertyValue -Value $Schema -PropertyName "minimum")
+        if ([int]$Value -lt $minimum) {
+            throw "schema minimum mismatch at ${Path}: expected >= $minimum"
+        }
+    }
+
+    if (Test-JsonPropertyExists -Value $Schema -PropertyName "pattern") {
+        $pattern = [string](Get-JsonPropertyValue -Value $Schema -PropertyName "pattern")
+        if (-not [regex]::IsMatch([string]$Value, $pattern)) {
+            throw "schema pattern mismatch at ${Path}: value '$Value' does not match '$pattern'"
+        }
+    }
+
+    if (Test-JsonPropertyExists -Value $Schema -PropertyName "required") {
+        foreach ($requiredName in (Get-JsonPropertyValue -Value $Schema -PropertyName "required")) {
+            if (-not (Test-JsonPropertyExists -Value $Value -PropertyName $requiredName)) {
+                throw "schema required property missing at ${Path}: '$requiredName'"
+            }
+        }
+    }
+
+    if (Test-JsonPropertyExists -Value $Schema -PropertyName "properties") {
+        $properties = Get-JsonPropertyValue -Value $Schema -PropertyName "properties"
+        foreach ($property in $properties.PSObject.Properties) {
+            if (Test-JsonPropertyExists -Value $Value -PropertyName $property.Name) {
+                Assert-JsonMatchesSchema `
+                    -Value (Get-JsonPropertyValue -Value $Value -PropertyName $property.Name) `
+                    -Schema $property.Value `
+                    -Path "$Path.$($property.Name)"
+            }
+        }
+    }
+
+    if (Test-JsonPropertyExists -Value $Schema -PropertyName "minItems") {
+        $minItems = [int](Get-JsonPropertyValue -Value $Schema -PropertyName "minItems")
+        if (@($Value).Count -lt $minItems) {
+            throw "schema minItems mismatch at ${Path}: expected >= $minItems"
+        }
+    }
+
+    if (Test-JsonPropertyExists -Value $Schema -PropertyName "items") {
+        $itemSchema = Get-JsonPropertyValue -Value $Schema -PropertyName "items"
+        $index = 0
+        foreach ($item in @($Value)) {
+            Assert-JsonMatchesSchema -Value $item -Schema $itemSchema -Path "$Path[$index]"
+            $index++
+        }
+    }
+}
+
 function Assert-JsonFilesParse {
     param([string[]]$Paths)
 
     foreach ($path in $Paths) {
         [void](Read-JsonFile -Path $path)
+    }
+}
+
+function Assert-AnalysisContracts {
+    $schemaDir = Join-Path $repoRoot "analysis\contracts\schemas"
+    $exampleDir = Join-Path $repoRoot "analysis\contracts\examples"
+    $snapshotDir = Join-Path $repoRoot "tests\contracts\schema"
+
+    foreach ($schemaFile in Get-ChildItem $schemaDir -Filter *.schema.json) {
+        $baseName = $schemaFile.Name -replace "\.schema\.json$", ""
+        $schema = Read-JsonFile -Path $schemaFile.FullName
+        $example = Read-JsonFile -Path (Join-Path $exampleDir "$baseName.min.json")
+        $snapshot = Read-JsonFile -Path (Join-Path $snapshotDir "$baseName.snapshot.json")
+
+        Assert-JsonMatchesSchema -Value $example -Schema $schema -Path "$baseName.example"
+        Assert-JsonMatchesSchema -Value $snapshot -Schema $schema -Path "$baseName.snapshot"
+    }
+}
+
+function Assert-TraceContracts {
+    $schema = Read-JsonFile -Path (Join-Path $repoRoot "tests\contracts\trace\schema\warmup-trace.schema.json")
+
+    foreach ($snapshotPath in Get-ChildItem (Join-Path $repoRoot "tests\contracts\trace\snapshots") -Filter *.json | ForEach-Object FullName) {
+        $snapshot = Read-JsonFile -Path $snapshotPath
+        Assert-JsonMatchesSchema -Value $snapshot -Schema $schema -Path ([System.IO.Path]::GetFileName($snapshotPath))
     }
 }
 
@@ -68,6 +216,27 @@ function Invoke-DotNetBuild {
     & dotnet build $ProjectPath -c Release | Out-Host
     if ($LASTEXITCODE -ne 0) {
         throw "dotnet build failed: $ProjectPath"
+    }
+}
+
+function Invoke-DotNetRuntimeSmoke {
+    param(
+        [string]$DllPath,
+        [string[]]$ExpectedPatterns
+    )
+
+    $output = & dotnet $DllPath 2>&1
+    $output | Out-Host
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "dotnet runtime smoke failed: $DllPath"
+    }
+
+    $joinedOutput = ($output -join [Environment]::NewLine)
+    foreach ($pattern in $ExpectedPatterns) {
+        if ($joinedOutput -notmatch [regex]::Escape($pattern)) {
+            throw "runtime smoke output mismatch for ${DllPath}: missing '$pattern'"
+        }
     }
 }
 
@@ -157,6 +326,7 @@ function Write-GateRecord {
 }
 
 $repoRoot = Get-RepoRoot
+Set-Location $repoRoot
 $artifactRoot = Join-Path $repoRoot "artifacts\verify-roadmap-0\$HostProfile"
 $commonArtifactRoot = Join-Path $artifactRoot "common"
 $compareScript = Join-Path $repoRoot "tests\contracts\trace\compare-warmup-trace.ps1"
@@ -194,6 +364,12 @@ $jsonPaths += (Get-ChildItem (Join-Path $repoRoot "tests\contracts\schema") -Fil
 $jsonPaths += (Get-ChildItem (Join-Path $repoRoot "tests\contracts\trace") -Recurse -Filter *.json | ForEach-Object FullName)
 Assert-JsonFilesParse -Paths $jsonPaths
 
+Write-Step "Validate analysis schema/example/snapshot contracts"
+Assert-AnalysisContracts
+
+Write-Step "Validate trace schema and snapshots"
+Assert-TraceContracts
+
 Write-Step "Build native ABI compile-only smoke"
 Invoke-NativeSmokeBuild `
     -SourceDir (Join-Path $repoRoot "tests\contracts\native\abi") `
@@ -208,6 +384,23 @@ Write-Step "Build smoke input projects"
 foreach ($projectName in @("HelloWorld", "GenericEcho", "ReflectionLite", "PInvokeLite", "HostEmbeddingLite")) {
     Invoke-DotNetBuild -ProjectPath (Join-Path $repoRoot "tests\smoke\input\$projectName\$projectName.csproj")
 }
+
+Write-Step "Run managed smoke projects"
+Invoke-DotNetRuntimeSmoke `
+    -DllPath (Join-Path $repoRoot "artifacts\smoke\bin\HelloWorld\Release\net8.0\HelloWorld.dll") `
+    -ExpectedPatterns @("HelloWorld smoke entry reached.", "register:Main")
+Invoke-DotNetRuntimeSmoke `
+    -DllPath (Join-Path $repoRoot "artifacts\smoke\bin\GenericEcho\Release\net8.0\GenericEcho.dll") `
+    -ExpectedPatterns @("roadmap0", "42", "roadmap0:roadmap0")
+Invoke-DotNetRuntimeSmoke `
+    -DllPath (Join-Path $repoRoot "artifacts\smoke\bin\ReflectionLite\Release\net8.0\ReflectionLite.dll") `
+    -ExpectedPatterns @("field=BackingField:Int32", "generic-method=String")
+Invoke-DotNetRuntimeSmoke `
+    -DllPath (Join-Path $repoRoot "artifacts\smoke\bin\PInvokeLite\Release\net8.0\PInvokeLite.dll") `
+    -ExpectedPatterns @("marshal=interop-smoke", "export=boom_smoke_add:7", "symbol=True")
+Invoke-DotNetRuntimeSmoke `
+    -DllPath (Join-Path $repoRoot "artifacts\smoke\bin\HostEmbeddingLite\Release\net8.0\HostEmbeddingLite.dll") `
+    -ExpectedPatterns @("HostEmbeddingSession:InvokeManagedEntry:True", "guards=invalid-detach:True|double-start:True|unattached-entry:True")
 
 Write-Step "Validate Linux packaging routing smoke"
 Invoke-RoutingBuildSmoke `

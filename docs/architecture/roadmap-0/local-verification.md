@@ -28,10 +28,13 @@ pwsh ./build/scripts/verify-roadmap-0.ps1 -HostProfile macos
 - `CMakePresets.json`
 - `tests/contracts/schema/*.json`
 - `tests/contracts/trace/**/*.json`
+- analysis schema/example/snapshot 契约校验
+- trace schema/snapshot 契约校验
 - native ABI compile-only smoke
 - native bridge compile-only smoke
 - Windows reference preset smoke
 - 5 个 smoke 输入项目 build
+- 5 个 managed smoke 运行主线
 - Linux cross-compile / packaging preset routing smoke
 - Linux cross-compile / packaging shell gate 记录
 
@@ -68,6 +71,8 @@ compare script 只冻结以下字段：
 - `subjectId`
 - `order`
 - `status`
+
+另外，运行期 trace 还必须带 `traceSource=host-embedding-session` 与 `sessionTrace` 主线摘录；compare script 也会校验 `scenario` 文本，以及每条导出 event 都能在 `sessionTrace` 中找到对应的 warmup marker，用来确认对比输入来自刚执行的 `HostEmbeddingLite` session，而不是离线拼装 JSON。
 
 ## Gate 记录落点
 
