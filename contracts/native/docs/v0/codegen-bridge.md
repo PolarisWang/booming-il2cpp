@@ -9,15 +9,16 @@
 ## 调用约定
 
 - bridge 与 ABI 共享同一套调用约定宏：`BOOM_RUNTIME_ABI_EXPORT` 和 `BOOM_RUNTIME_ABI_CALL`。
-- 调用方应先缓存 `BoomCodegenBridgeV0*`，再按 helper 分类访问函数指针。
+- 调用方应先缓存 `CodegenBridgeV0*`，再按 helper 分类访问函数指针。
 - bridge 只负责生成代码优先依赖的帮助函数；底层生命周期、对象分配和显式异常触发仍通过 `Runtime ABI` 完成。
+- `BridgeStatus` 在 `v0` 中冻结为 32-bit 有符号整数，避免导出 ABI 受 C `enum` 底层表示影响。
 
 ## 错误模型
 
 - `bridge` 采用混合错误模型：
   - 查询/解析类 helper 返回状态码或空指针
   - 托管语义失败通过受控异常出口返回，例如 `out_exception`
-- `register_codegen` 与 `bootstrap_runtime` 返回 `BoomBridgeStatus`，让 bootstrap 流程可以在宿主边界显式失败。
+- `register_codegen` 与 `bootstrap_runtime` 返回 `BridgeStatus`，让 bootstrap 流程可以在宿主边界显式失败。
 - `resolve_type_by_token`、`resolve_method_by_token`、`resolve_field_by_token`、`resolve_virtual_method`、`resolve_icall` 在无法解析时返回空句柄/空指针。
 - `invoke_virtual` 与 `delegate_invoke` 的托管语义失败不会被静默吞掉，必须通过 `out_exception` 交还调用方。
 - `box_value` 失败时返回空对象指针；`unbox_value` 使用状态码报告布局或目标缓冲区不匹配。
@@ -35,7 +36,7 @@
 
 | 入口 | 参数语义 | 返回/约束 |
 | --- | --- | --- |
-| `register_codegen` | 同时接收 `BoomCodeRegistrationV0`、`BoomMetadataRegistrationV0` 和可选 `BoomCodegenRegistrationOptionsV0` | 返回显式状态码，要求结构体 `struct_size` 已正确填写 |
+| `register_codegen` | 同时接收 `CodeRegistrationV0`、`MetadataRegistrationV0` 和可选 `CodegenRegistrationOptionsV0` | 返回显式状态码，要求结构体 `struct_size` 已正确填写 |
 | `bootstrap_runtime` | 触发生成代码依赖的最小运行时装配 | 不接收参数；失败时返回状态码 |
 
 ### Runtime metadata helper

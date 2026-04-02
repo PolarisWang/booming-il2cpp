@@ -3,12 +3,12 @@
 namespace boom::contracts::native::examples {
 
 void InvokeAndDelegateExample(
-    BoomRuntimeState* runtime,
-    BoomThreadState* thread,
-    BoomTypeInfoHandle instance_type,
-    BoomMethodInfoHandle declared_method,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    TypeInfoHandle instance_type,
+    MethodInfoHandle declared_method,
     void* instance) {
-    const BoomCodegenBridgeV0* bridge = boom_codegen_get_bridge_v0();
+    const CodegenBridgeV0* bridge = boom_codegen_get_bridge_v0();
     if (bridge == nullptr) {
         return;
     }
@@ -16,9 +16,9 @@ void InvokeAndDelegateExample(
     int argument = 42;
     int return_value = 0;
     void* argv[] = {&argument};
-    BoomExceptionHandle exception = nullptr;
+    ExceptionHandle exception = nullptr;
 
-    BoomMethodInfoHandle virtual_target =
+    MethodInfoHandle virtual_target =
         bridge->resolve_virtual_method(instance_type, declared_method);
     if (virtual_target != nullptr) {
         (void)bridge->invoke_virtual(

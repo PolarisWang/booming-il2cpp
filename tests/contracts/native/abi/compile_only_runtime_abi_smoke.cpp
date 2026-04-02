@@ -4,28 +4,28 @@
 
 namespace {
 
-void CompileOnlyRuntimeAbiSmoke(const BoomRuntimeAbiV0* abi) {
-    BoomRuntimeInitParams init_params = {};
+void CompileOnlyRuntimeAbiSmoke(const RuntimeAbiV0* abi) {
+    RuntimeInitParams init_params = {};
     init_params.struct_size = sizeof(init_params);
     init_params.init_flags = BOOM_RUNTIME_INIT_ENABLE_LOGGING | BOOM_RUNTIME_INIT_ENABLE_PROFILING;
     init_params.host_name_utf8 = "compile-only";
     init_params.runtime_tag_utf8 = "abi-v0";
 
-    BoomRuntimeConfig config = {};
+    RuntimeConfig config = {};
     config.struct_size = sizeof(config);
 
-    BoomRuntimeState* runtime = nullptr;
-    BoomThreadState* thread = nullptr;
-    BoomTypeInfoHandle type = nullptr;
-    BoomMethodInfoHandle method = nullptr;
-    BoomFieldInfoHandle field = nullptr;
-    BoomPropertyInfoHandle property = nullptr;
-    BoomEventInfoHandle event_handle = nullptr;
-    BoomParameterInfoHandle parameter = nullptr;
-    BoomGenericContextHandle generic_context = nullptr;
-    BoomAssemblyHandle assembly = nullptr;
-    BoomImageHandle image = nullptr;
-    BoomExceptionHandle exception = nullptr;
+    RuntimeState* runtime = nullptr;
+    ThreadState* thread = nullptr;
+    TypeInfoHandle type = nullptr;
+    MethodInfoHandle method = nullptr;
+    FieldInfoHandle field = nullptr;
+    PropertyInfoHandle property = nullptr;
+    EventInfoHandle event_handle = nullptr;
+    ParameterInfoHandle parameter = nullptr;
+    GenericContextHandle generic_context = nullptr;
+    AssemblyHandle assembly = nullptr;
+    ImageHandle image = nullptr;
+    ExceptionHandle exception = nullptr;
 
     int input_value = 7;
     int output_value = 0;
@@ -36,17 +36,14 @@ void CompileOnlyRuntimeAbiSmoke(const BoomRuntimeAbiV0* abi) {
     }
 
     (void)abi->runtime_init(&init_params, &config, &runtime);
-    abi->runtime_shutdown(runtime);
-
     (void)abi->thread_attach(runtime, &thread);
-    abi->thread_detach(runtime, thread);
 
     (void)abi->object_new(runtime, thread, type);
     (void)abi->array_new(runtime, thread, type, 4u);
     (void)abi->string_new_utf8(runtime, thread, "player", 6u);
     (void)abi->class_init(runtime, type);
 
-    BoomGCHandle gc_handle = abi->gc_handle_new(runtime, nullptr, false);
+    GCHandle gc_handle = abi->gc_handle_new(runtime, nullptr, false);
     abi->gc_handle_free(runtime, gc_handle);
     abi->raise_managed_exception(runtime, thread, exception);
 
@@ -76,9 +73,13 @@ void CompileOnlyRuntimeAbiSmoke(const BoomRuntimeAbiV0* abi) {
     (void)event_handle;
     (void)parameter;
     (void)generic_context;
+
+    abi->thread_detach(runtime, thread);
+    abi->runtime_shutdown(runtime);
 }
 
 static_assert(BOOM_RUNTIME_ABI_V0 == 0u, "runtime ABI version must remain v0");
-static_assert(std::is_same<BoomGCHandle, uint64_t>::value, "GC handle type drifted");
+static_assert(std::is_same<RuntimeStatus, int32_t>::value, "runtime status must stay int32_t");
+static_assert(std::is_same<GCHandle, uint64_t>::value, "GC handle type drifted");
 
 }  // namespace

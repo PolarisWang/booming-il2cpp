@@ -3,28 +3,28 @@
 namespace boom::contracts::native::examples {
 
 void ReflectionHandlesExample(
-    BoomRuntimeState* runtime,
-    BoomThreadState* thread,
-    BoomAssemblyHandle assembly,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    AssemblyHandle assembly,
     void* instance) {
-    const BoomRuntimeAbiV0* abi = boom_runtime_get_abi_v0();
+    const RuntimeAbiV0* abi = boom_runtime_get_abi_v0();
     if (abi == nullptr) {
         return;
     }
 
-    BoomImageHandle image = abi->assembly_get_image(assembly);
-    BoomTypeInfoHandle type = abi->image_find_type(image, "Game.Core", "Player");
-    BoomMethodInfoHandle method = abi->type_find_method(type, "TakeDamage", 1);
-    BoomFieldInfoHandle field = abi->type_find_field(type, "_health");
-    BoomPropertyInfoHandle property = abi->type_find_property(type, "Health");
-    BoomEventInfoHandle event_handle = abi->type_find_event(type, "Damaged");
-    BoomParameterInfoHandle parameter = abi->method_get_parameter(method, 0);
-    BoomGenericContextHandle generic_context = abi->method_get_generic_context(method);
+    ImageHandle image = abi->assembly_get_image(assembly);
+    TypeInfoHandle type = abi->image_find_type(image, "Game.Core", "Player");
+    MethodInfoHandle method = abi->type_find_method(type, "TakeDamage", 1);
+    FieldInfoHandle field = abi->type_find_field(type, "_health");
+    PropertyInfoHandle property = abi->type_find_property(type, "Health");
+    EventInfoHandle event_handle = abi->type_find_event(type, "Damaged");
+    ParameterInfoHandle parameter = abi->method_get_parameter(method, 0);
+    GenericContextHandle generic_context = abi->method_get_generic_context(method);
 
     int damage = 10;
     int health = 0;
     void* argv[] = {&damage};
-    BoomExceptionHandle exception = nullptr;
+    ExceptionHandle exception = nullptr;
 
     if (field != nullptr) {
         (void)abi->field_get_value(runtime, thread, field, instance, &health, sizeof(health));

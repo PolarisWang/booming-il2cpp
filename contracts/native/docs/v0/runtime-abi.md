@@ -9,30 +9,31 @@
 ## 调用约定
 
 - 所有导出入口都使用 `BOOM_RUNTIME_ABI_EXPORT` 与 `BOOM_RUNTIME_ABI_CALL`。
-- 宿主应先调用 `boom_runtime_get_abi_v0()`，再缓存返回的 `BoomRuntimeAbiV0*`。
-- `BoomRuntimeState*` 表示进程级 runtime 状态；`BoomThreadState*` 表示当前线程的附着状态。
+- 宿主应先调用 `boom_runtime_get_abi_v0()`，再缓存返回的 `RuntimeAbiV0*`。
+- `RuntimeState*` 表示进程级 runtime 状态；`ThreadState*` 表示当前线程的附着状态。
 - 所有 `*Handle` 都是不透明句柄，只能通过 ABI/bridge 传递，不能解引用、序列化或假设布局。
+- `RuntimeStatus` 在 `v0` 中冻结为 32-bit 有符号整数，避免 ABI 依赖编译器对 C `enum` 的底层表示约定。
 
 ## 句柄集合
 
 | 句柄 | 含义 | 典型来源 |
 | --- | --- | --- |
-| `BoomTypeInfoHandle` | 托管类型元数据句柄 | `image_find_type` |
-| `BoomMethodInfoHandle` | 方法句柄 | `type_find_method` |
-| `BoomFieldInfoHandle` | 字段句柄 | `type_find_field` |
-| `BoomPropertyInfoHandle` | 属性句柄 | `type_find_property` |
-| `BoomEventInfoHandle` | 事件句柄 | `type_find_event` |
-| `BoomParameterInfoHandle` | 参数句柄 | `method_get_parameter` |
-| `BoomGenericContextHandle` | 泛型上下文句柄 | `method_get_generic_context` |
-| `BoomAssemblyHandle` | 程序集句柄 | 上层注册或宿主枚举 |
-| `BoomImageHandle` | 程序集镜像句柄 | `assembly_get_image` |
-| `BoomExceptionHandle` | 托管异常对象句柄 | `method_invoke` 或宿主保留 |
+| `TypeInfoHandle` | 托管类型元数据句柄 | `image_find_type` |
+| `MethodInfoHandle` | 方法句柄 | `type_find_method` |
+| `FieldInfoHandle` | 字段句柄 | `type_find_field` |
+| `PropertyInfoHandle` | 属性句柄 | `type_find_property` |
+| `EventInfoHandle` | 事件句柄 | `type_find_event` |
+| `ParameterInfoHandle` | 参数句柄 | `method_get_parameter` |
+| `GenericContextHandle` | 泛型上下文句柄 | `method_get_generic_context` |
+| `AssemblyHandle` | 程序集句柄 | 上层注册或宿主枚举 |
+| `ImageHandle` | 程序集镜像句柄 | `assembly_get_image` |
+| `ExceptionHandle` | 托管异常对象句柄 | `method_invoke` 或宿主保留 |
 
 ## 错误模型
 
 - `Runtime ABI` 的错误边界比 bridge 更底层、更显式。调用方必须检查状态码、空指针或输出异常句柄，不能假设失败会被自动提升成高层异常。
 - 查询类入口遵循“状态码或空指针”模型：
-  - `runtime_init`、`thread_attach`、`class_init`、`field_get_value`、`field_set_value`、`method_invoke` 返回 `BoomRuntimeStatus`
+  - `runtime_init`、`thread_attach`、`class_init`、`field_get_value`、`field_set_value`、`method_invoke` 返回 `RuntimeStatus`
   - `assembly_get_image`、`image_find_type`、`type_find_method`、`type_find_field`、`type_find_property`、`type_find_event`、`method_get_parameter`、`method_get_generic_context` 在无法解析时返回空句柄
 - 分配类入口 `object_new`、`array_new`、`string_new_utf8` 失败时返回空指针；宿主必须把空返回值视为显式失败，而不是继续向下执行。
 - 托管异常不会通过隐式 side effect 抛出。需要由 `raise_managed_exception` 显式触发，或者由 `method_invoke` 通过 `out_exception` 返回。
@@ -46,7 +47,7 @@
 | --- | --- | --- |
 | `runtime_init` | `init_params` 描述宿主名、runtime tag 与初始化 flag；`config` 可选提供分配器；`out_runtime_state` 返回进程级状态 | 成功返回 `BOOM_RUNTIME_STATUS_OK` 并写出 `runtime_state` |
 | `runtime_shutdown` | 销毁 `runtime_init` 返回的进程级状态 | 无返回值；调用方负责保证线程已分离 |
-| `thread_attach` | 将当前原生线程附着到指定 runtime | 成功后写出 `BoomThreadState*` |
+| `thread_attach` | 将当前原生线程附着到指定 runtime | 成功后写出 `ThreadState*` |
 | `thread_detach` | 解除当前线程与 runtime 的绑定 | 无返回值；仅用于已成功附着的线程 |
 
 ### 分配与类初始化
@@ -62,7 +63,7 @@
 
 | 入口 | 参数语义 | 返回/约束 |
 | --- | --- | --- |
-| `gc_handle_new` | 为对象创建稳定 handle；`pinned=true` 表示请求 pin | 成功返回非零 `BoomGCHandle` |
+| `gc_handle_new` | 为对象创建稳定 handle；`pinned=true` 表示请求 pin | 成功返回非零 `GCHandle` |
 | `gc_handle_free` | 释放先前分配的 handle | 允许对宿主缓存的 handle 做显式清理 |
 | `raise_managed_exception` | 把给定异常句柄提升到当前线程的托管异常边界 | 只负责显式触发，不返回状态 |
 

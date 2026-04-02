@@ -4,24 +4,24 @@
 
 namespace {
 
-void CompileOnlyCodegenBridgeSmoke(const BoomCodegenBridgeV0* bridge) {
-    BoomCodeRegistrationV0 code_registration = {};
+void CompileOnlyCodegenBridgeSmoke(const CodegenBridgeV0* bridge) {
+    CodeRegistrationV0 code_registration = {};
     code_registration.struct_size = sizeof(code_registration);
 
-    BoomMetadataRegistrationV0 metadata_registration = {};
+    MetadataRegistrationV0 metadata_registration = {};
     metadata_registration.struct_size = sizeof(metadata_registration);
 
-    BoomCodegenRegistrationOptionsV0 options = {};
+    CodegenRegistrationOptionsV0 options = {};
     options.struct_size = sizeof(options);
     options.image_name_utf8 = "GameAssembly";
 
-    BoomRuntimeState* runtime = nullptr;
-    BoomThreadState* thread = nullptr;
-    BoomImageHandle image = nullptr;
-    BoomTypeInfoHandle type = nullptr;
-    BoomMethodInfoHandle method = nullptr;
-    BoomFieldInfoHandle field = nullptr;
-    BoomExceptionHandle exception = nullptr;
+    RuntimeState* runtime = nullptr;
+    ThreadState* thread = nullptr;
+    ImageHandle image = nullptr;
+    TypeInfoHandle type = nullptr;
+    MethodInfoHandle method = nullptr;
+    FieldInfoHandle field = nullptr;
+    ExceptionHandle exception = nullptr;
 
     int input_value = 3;
     int output_value = 0;
@@ -69,6 +69,6 @@ void CompileOnlyCodegenBridgeSmoke(const BoomCodegenBridgeV0* bridge) {
 }
 
 static_assert(BOOM_CODEGEN_BRIDGE_V0 == 0u, "bridge version must remain v0");
-static_assert(std::is_enum<BoomBridgeStatus>::value, "bridge status must stay an enum");
+static_assert(std::is_same<BridgeStatus, int32_t>::value, "bridge status must stay int32_t");
 
 }  // namespace

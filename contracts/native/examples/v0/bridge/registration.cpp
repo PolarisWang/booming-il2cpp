@@ -3,18 +3,18 @@
 namespace boom::contracts::native::examples {
 
 void RegistrationExample() {
-    const BoomCodegenBridgeV0* bridge = boom_codegen_get_bridge_v0();
+    const CodegenBridgeV0* bridge = boom_codegen_get_bridge_v0();
     if (bridge == nullptr) {
         return;
     }
 
-    BoomCodeRegistrationV0 code_registration = {};
+    CodeRegistrationV0 code_registration = {};
     code_registration.struct_size = sizeof(code_registration);
 
-    BoomMetadataRegistrationV0 metadata_registration = {};
+    MetadataRegistrationV0 metadata_registration = {};
     metadata_registration.struct_size = sizeof(metadata_registration);
 
-    BoomCodegenRegistrationOptionsV0 options = {};
+    CodegenRegistrationOptionsV0 options = {};
     options.struct_size = sizeof(options);
     options.image_name_utf8 = "GameAssembly";
 
