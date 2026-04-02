@@ -4,7 +4,7 @@
     <File Path="../.gitattributes" />
     <File Path="../.github/workflows/CI.yml" />
     <File Path="../license.txt" />
-    <File Path="../readme.md" />
+    <File Path="../README.md" />
     <File Path="Directory.Packages.props" />
     <File Path="dotnet-releaser.toml" />
     <File Path="global.json" />

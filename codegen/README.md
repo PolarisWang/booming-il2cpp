@@ -14,4 +14,3 @@
 
 - 上游依赖 `analysis/` 与 `contracts/`，下游对接 `runtime/` 与 `build/`。
 - 验证正确性由 `tests/` 与 host-specific verify 流程覆盖。
-

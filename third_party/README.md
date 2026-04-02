@@ -1,5 +1,11 @@
 # third_party
 
+## README 纯度与本地元数据
+
+- vendored 依赖目录中的 `README.md` 保持上游内容纯度，不在上游 README 正文中混入本仓库维护说明。
+- 本仓库本地依赖治理元数据统一放在各依赖目录的 `booming-vendor.md`。
+- 每个依赖目录至少包含：上游 `README.md` + 本地 `booming-vendor.md`。
+
 ## 负责
 
 - 仅承载 vendored 第三方源码快照（source snapshot）。

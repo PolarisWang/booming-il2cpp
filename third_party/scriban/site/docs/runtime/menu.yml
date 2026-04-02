@@ -1,5 +1,5 @@
 doc:
-  - {path: readme.md, title: "<i class='bi bi-cpu' aria-hidden='true'></i> Overview"}
+  - {path: README.md, title: "<i class='bi bi-cpu' aria-hidden='true'></i> Overview"}
   - {path: parsing.md, title: "Parsing"}
   - {path: rendering.md, title: "Rendering"}
   - {path: scriptobject.md, title: "ScriptObject"}

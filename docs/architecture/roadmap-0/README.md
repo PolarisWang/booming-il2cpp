@@ -17,4 +17,3 @@
 - `ownership-map.md`: 未来工作轨归属与职责映射。
 - `host-verify-matrix.md`: host-specific verify 范围矩阵。
 - `platform-gates.md`: 平台门禁与 reference desktop 规则。
-

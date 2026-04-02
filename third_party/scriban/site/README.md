@@ -82,7 +82,7 @@ og_type: website
             Scriban uses a custom Lexer/Parser with a full AST for blazing-fast parsing and low-allocation rendering. CPU and GC-friendly by design.
           </p>
 
-[Language reference](docs/language.md) · [Built-in functions](docs/builtins/readme.md)
+[Language reference](docs/language.md) · [Built-in functions](docs/builtins/README.md)
 
 </div>
       </div>
@@ -95,7 +95,7 @@ og_type: website
             By default, no .NET objects are exposed unless explicitly allowed. You control exactly what is available to templates - perfect for user-facing scenarios.
           </p>
 
-[Runtime &amp; security](docs/runtime/readme.md) · [Safe runtime](docs/runtime/readme.md#safe-runtime)
+[Runtime &amp; security](docs/runtime/README.md) · [Safe runtime](docs/runtime/README.md#safe-runtime)
 
 </div>
       </div>
@@ -121,7 +121,7 @@ og_type: website
             Import .NET classes, delegates,  or custom <code>IScriptCustomFunction</code> implementations. Use member renamers, filters, and template loaders to tailor the engine.
           </p>
 
-[.NET runtime API](docs/runtime/readme.md) · [Custom functions](docs/runtime/readme.md#advanced-usages)
+[.NET runtime API](docs/runtime/README.md) · [Custom functions](docs/runtime/README.md#advanced-usages)
 
 </div>
       </div>
@@ -134,7 +134,7 @@ og_type: website
             Full <code>async</code>/<code>await</code> support with <code>Template.RenderAsync</code>. Evaluate templates without blocking - ideal for web servers and cloud functions.
           </p>
 
-[Getting started](docs/getting-started.md) · [Runtime API](docs/runtime/readme.md)
+[Getting started](docs/getting-started.md) · [Runtime API](docs/runtime/README.md)
 
 </div>
       </div>

@@ -307,7 +307,7 @@ As you can notice, Scriban will translate a call to a liquid tag to the correspo
 
 ## Supported filters
 
-By default, all liquid filters are translated to scriban [builtin functions](builtins/readme.md) (through objects like `string` or `array`)
+By default, all liquid filters are translated to scriban [builtin functions](builtins/README.md) (through objects like `string` or `array`)
 
 The translation is performed by the [TryLiquidToScriban](https://github.com/lunet-io/scriban/blob/4ecb68deab3065c3163d46e3b51956712ec75e49/src/Scriban/Functions/LiquidBuiltinsFunctions.cs#L30) function at parsing time.
 

@@ -62,7 +62,7 @@ namespace Scriban.DocGen
 
         /// <summary>
         /// Writes per-group Markdown files with front matter under site/docs/builtins/.
-        /// Also writes a readme.md index and a menu.yml for navigation.
+/// Also writes a README.md index and a menu.yml for navigation.
         /// </summary>
         static void WriteSiteBuiltins(MarkdownVisitor visitor, Dictionary<string, string> builtinClassNames)
         {
@@ -72,8 +72,8 @@ namespace Scriban.DocGen
 
             var orderedGroups = visitor.ClassWriters.OrderBy(c => c.Key).ToList();
 
-            // --- Write the index page: readme.md ---
-            using (var indexWriter = new StreamWriter(Path.Combine(siteDir, "readme.md")))
+// --- Write the index page: README.md ---
+using (var indexWriter = new StreamWriter(Path.Combine(siteDir, "README.md")))
             {
                 indexWriter.WriteLine("---");
                 indexWriter.WriteLine("title: \"Built-in functions\"");
@@ -100,7 +100,7 @@ namespace Scriban.DocGen
             using (var menuWriter = new StreamWriter(Path.Combine(siteDir, "menu.yml")))
             {
                 menuWriter.WriteLine("doc:");
-                menuWriter.WriteLine("  - {path: readme.md, title: \"<i class='bi bi-gear' aria-hidden='true'></i> Overview\"}");
+menuWriter.WriteLine("  - {path: README.md, title: \"<i class='bi bi-gear' aria-hidden='true'></i> Overview\"}");
                 foreach (var kvp in orderedGroups)
                 {
                     var shortName = kvp.Key;

@@ -1,5 +1,5 @@
 doc:
-  - {path: readme.md, title: "<i class='bi bi-gear' aria-hidden='true'></i> Overview"}
+  - {path: README.md, title: "<i class='bi bi-gear' aria-hidden='true'></i> Overview"}
   - {path: array.md, title: "Array"}
   - {path: date.md, title: "Date"}
   - {path: html.md, title: "Html"}

@@ -116,7 +116,7 @@ Output:
 
 ## Using built-in functions
 
-Scriban comes with a rich set of [built-in functions](builtins/readme.md) for strings, arrays, dates, math, and more. Use the **pipe** operator `|` to apply them:
+Scriban comes with a rich set of [built-in functions](builtins/README.md) for strings, arrays, dates, math, and more. Use the **pipe** operator `|` to apply them:
 
 ```scriban-html
 {{ "{{" }} "hello world" | string.capitalize {{ "}}" }}
@@ -245,6 +245,6 @@ To enable source embedding, make sure your project compiles the embedded sources
 ## What's next?
 
 - **[Language reference](language.md)** - Learn all the syntax: variables, expressions, loops, functions, and more.
-- **[Built-in functions](builtins/readme.md)** - Explore the full list of string, array, date, math, and other functions.
-- **[Runtime API](runtime/readme.md)** - Dive deeper into `TemplateContext`, `ScriptObject`, custom functions, and advanced scenarios.
+- **[Built-in functions](builtins/README.md)** - Explore the full list of string, array, date, math, and other functions.
+- **[Runtime API](runtime/README.md)** - Dive deeper into `TemplateContext`, `ScriptObject`, custom functions, and advanced scenarios.
 - **[Liquid support](liquid-support.md)** - Migrate from Liquid or use Liquid templates with Scriban.

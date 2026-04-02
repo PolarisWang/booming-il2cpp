@@ -14,4 +14,3 @@
 
 - 以 `contracts/` 为断言基准，覆盖 `analysis/`、`codegen/`、`runtime/` 与 `build/`。
 - 测试运行输出与日志收口到 `artifacts/`，不反向污染源码目录。
-

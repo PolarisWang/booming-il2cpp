@@ -14,4 +14,3 @@
 
 - 作为 `frontend/analysis/runtime/codegen/build/tests` 的共同约束源。
 - 具体平台矩阵和 gates 文档放在 `docs/architecture/roadmap-0/`，本目录只定义契约内容。
-

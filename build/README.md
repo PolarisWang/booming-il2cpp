@@ -14,4 +14,3 @@
 
 - 消费 `codegen/`、`runtime/`、`contracts/` 的输入，输出进入 `artifacts/`。
 - 验证标准由 `tests/` 和 `docs/architecture/roadmap-0/` 中矩阵与 gates 定义。
-

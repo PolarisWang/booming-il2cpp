@@ -5,7 +5,7 @@ on:
     paths-ignore:
     - 'site/**'
     - 'img/**'
-    - 'readme.md'
+    - 'README.md'
   pull_request:
 
 jobs:

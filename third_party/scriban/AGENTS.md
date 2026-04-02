@@ -12,7 +12,7 @@ Paths/commands below are relative to this directory.
   - `src/Scriban.DocGen/`, tooling to generate API reference from XML docs (`site/docs/builtins/*.md`)
   - `src/Scriban.AsyncCodeGen/`, tooling to generate async APIs from sync ones
   - `src/Scriban.DelegateCodeGen/`, tooling to generate delegate types for built-in functions
-- Docs to keep in sync with behavior: `readme.md` and the docs under `site/docs/` (e.g., `site/docs/**/*.md`)
+- Docs to keep in sync with behavior: `README.md` and the docs under `site/docs/` (e.g., `site/docs/**/*.md`)
 - Website: `site/` - Lunet-based documentation site (https://scriban.github.io)
 
 ## Build & Test

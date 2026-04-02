@@ -26,7 +26,7 @@ Welcome to the Scriban documentation. Whether you are new to Scriban or an exper
 {.table}
 | Module | What it provides |
 |---|---|
-| [Built-in functions overview](builtins/readme.md) | Index of all built-in function groups |
+| [Built-in functions overview](builtins/README.md) | Index of all built-in function groups |
 | [Array functions](builtins/array.md) | `add`, `sort`, `map`, `filter`, `join`, and more |
 | [String functions](builtins/string.md) | `upcase`, `downcase`, `replace`, `truncate`, `split`, and more |
 | [Date functions](builtins/date.md) | `now`, `parse`, `add_days`, `to_string`, and more |
@@ -41,7 +41,7 @@ Welcome to the Scriban documentation. Whether you are new to Scriban or an exper
 {.table}
 | Guide | What you'll learn |
 |---|---|
-| [Runtime API](runtime/readme.md) | Parsing, rendering, `TemplateContext`, `ScriptObject`, custom functions |
+| [Runtime API](runtime/README.md) | Parsing, rendering, `TemplateContext`, `ScriptObject`, custom functions |
 | [AOT Support](runtime/aot-support.md) | Using Scriban with Native AOT and trimming |
 
 ## Liquid compatibility
