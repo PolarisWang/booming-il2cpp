@@ -7,7 +7,9 @@
 bin/
 obj/
 TestResults/
-artifacts/
+artifacts/*
+!artifacts/.gitignore
+!artifacts/README.md
 
 # C++ / Visual Studio / CMake build outputs
 Debug/
@@ -17,7 +19,6 @@ MinSizeRel/
 x64/
 x86/
 Win32/
-build/
 out/
 cmake-build-*/
 CMakeFiles/
