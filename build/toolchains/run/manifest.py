@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import os
+import sys
 from pathlib import Path
 from typing import Any
 
 if __package__ in (None, ""):
-    import sys
 
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from common import read_json
@@ -58,6 +58,17 @@ def find_command(
     return None
 
 
+def command_argv(command: dict[str, Any]) -> list[str]:
+    argv = list(command.get("tokens", [command["id"]]))
+    for name, value in command.get("options", {}).items():
+        argv.extend([f"--{name}", str(value)])
+    return argv
+
+
+def command_syntax(command: dict[str, Any]) -> str:
+    return command.get("syntax") or " ".join(command_argv(command))
+
+
 def detect_host_platform_family(platform_id: str) -> str:
     if platform_id.startswith("windows"):
         return "windows"
@@ -68,12 +79,31 @@ def detect_host_platform_family(platform_id: str) -> str:
     return platform_id
 
 
+def _stream_is_tty(name: str) -> bool:
+    stream = getattr(sys, name, None)
+    isatty = getattr(stream, "isatty", None)
+    if not callable(isatty):
+        return False
+
+    try:
+        return bool(isatty())
+    except OSError:
+        return False
+
+
 def is_interactive_session() -> bool:
     forced = os.environ.get("BOOM_RUN_FORCE_INTERACTIVE")
     if forced == "1":
         return True
     if forced == "0":
         return False
+
+    if os.environ.get("CI") or os.environ.get("GITHUB_ACTIONS") or os.environ.get("TF_BUILD"):
+        return False
+
+    if _stream_is_tty("stdin") and _stream_is_tty("stdout"):
+        return True
+
     return bool(os.environ.get("TERM")) or bool(os.environ.get("WT_SESSION"))
 
 

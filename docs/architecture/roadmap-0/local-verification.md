@@ -29,7 +29,7 @@
 ./run.ps1 test smoke HelloWorld --json
 ```
 
-`run.cmd` 只是 Windows 上的薄包装；交互式直接执行 `run` 会进入菜单，CI / harness 必须显式调用子命令并带 `--json`。
+`run.cmd` 只是 Windows 上的薄包装；交互式直接执行 `run` 会进入全屏 TUI 菜单，当前支持上下方向键、`PgUp/PgDn`、`Home/End`、`Enter`、`q` / `Esc`；CI / harness 必须显式调用子命令并带 `--json`。
 
 ## Harness 生命周期
 

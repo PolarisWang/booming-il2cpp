@@ -1,4 +1,4 @@
-# 04-工具与集成 INDEX
+﻿# 04-工具与集成 INDEX
 
 ## 本目录职责
 
@@ -17,14 +17,17 @@
 
 | 文档 | 主题 | 说明 |
 |------|------|------|
-| [`统一入口脚本.md`](./%E7%BB%9F%E4%B8%80%E5%85%A5%E5%8F%A3%E8%84%9A%E6%9C%AC.md) | 统一入口 `run.*` | 说明 bootstrap、prepare/clean、`--json` 和 harness 生命周期 |
+| [`统一入口脚本.md`](./%E7%BB%9F%E4%B8%80%E5%85%A5%E5%8F%A3%E8%84%9A%E6%9C%AC.md) | 统一入口 `run.*` | 说明 bootstrap、全屏 TUI、prepare/clean、`--json` 和 harness 生命周期 |
+| [`统一测试框架.md`](./%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md) | 统一测试域 `run test` | 说明 suite manifest、日志目录、事件流、红绿灯覆盖、性能基线和批量执行规则 |
 | [`Claude技能测试入口.md`](./Claude%E6%8A%80%E8%83%BD%E6%B5%8B%E8%AF%95%E5%85%A5%E5%8F%A3.md) | Claude 测试入口 | 说明 `.codex/tests/claude-code/` 的运行入口 |
 
 ## 本层规则
 
-- 工具与集成页描述入口，不记录单次运行结果。
+- 工具与集成页面描述入口和长期协议，不记录单次运行结果。
 
 ## 最近更新
 
+- `2026-04-03`：新增 `统一测试框架.md`，沉淀 `run test ...`、suite manifest、日志目录、事件流、红绿灯覆盖和 perf 基线规则。
+- `2026-04-03`：更新 `统一入口脚本.md`，补充 `run` 全屏 TUI 菜单结构与按键说明。
 - `2026-04-03`：新增 `统一入口脚本.md`，记录 `run.ps1` / `run.sh` / `run.cmd` 协议与 harness 生命周期。
 - `2026-04-02`：建立工具与集成目录。

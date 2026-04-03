@@ -19,10 +19,7 @@ except ImportError:
 def render_help(manifest: dict[str, Any], host_platform: str) -> str:
     lines = ["Available commands", ""]
     for command in manifest_module.list_commands(manifest, host_platform):
-        syntax = command.get("syntax") or " ".join(command.get("tokens", [command["id"]]))
-        for name, value in command.get("options", {}).items():
-            syntax += f" --{name} {value}"
-        lines.append(f"{syntax}: {command['title']}")
+        lines.append(f"{manifest_module.command_syntax(command)}: {command['title']}")
     return "\n".join(lines) + "\n"
 
 
@@ -95,10 +92,7 @@ def handle_capability(manifest: dict[str, Any], host_platform: str, target: str 
         f"Group: {command['group']}",
         f"Handler: {command['handler']}",
     ]
-    syntax = command.get("syntax") or " ".join(command.get("tokens", [command["id"]]))
-    for name, value in command.get("options", {}).items():
-        syntax += f" --{name} {value}"
-    lines.append(f"Syntax: {syntax}")
+    lines.append(f"Syntax: {manifest_module.command_syntax(command)}")
     for example in command.get("examples", []):
         lines.append(f"Example: {example}")
 

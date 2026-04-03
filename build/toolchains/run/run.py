@@ -15,6 +15,7 @@ if __package__ in (None, ""):
     from commands import verify as verify_commands
     import manifest as manifest_module
     import runtime as runtime_module
+    import tui as tui_module
     from result import CommandResult
 else:
     from .commands import clean as clean_commands
@@ -26,6 +27,7 @@ else:
     from .commands import verify as verify_commands
     from . import manifest as manifest_module
     from . import runtime as runtime_module
+    from . import tui as tui_module
     from .result import CommandResult
 
 
@@ -97,6 +99,26 @@ def execute_command(
     )
 
 
+def resolve_tui_selection(
+    parsed: dict[str, object],
+    interactive: bool,
+    manifest: dict,
+    host_platform: str,
+) -> dict[str, object] | None:
+    command = parsed["command"]
+    if parsed["json"] or command is None or command["id"] != "menu":
+        return parsed
+
+    if not tui_module.supports_fullscreen_tui():
+        return parsed
+
+    selection_argv = tui_module.run_fullscreen_menu(manifest, host_platform)
+    if selection_argv is None:
+        return None
+
+    return manifest_module.parse_cli(selection_argv, interactive, manifest, host_platform)
+
+
 def main(argv: list[str] | None = None) -> int:
     start = time.perf_counter()
     argv = list(sys.argv[1:] if argv is None else argv)
@@ -105,9 +127,26 @@ def main(argv: list[str] | None = None) -> int:
     interactive = manifest_module.is_interactive_session()
     host_platform = manifest_module.detect_host_platform_family(runtime_module.detect_host_platform())
     parsed = manifest_module.parse_cli(argv, interactive, manifest, host_platform)
-    result = execute_command(parsed["command"], parsed["command_text"], parsed["target"], host_platform, manifest, repo_root)
+    json_output = parsed["json"]
+    parsed = resolve_tui_selection(parsed, interactive, manifest, host_platform)
+    if parsed is None:
+        result = CommandResult.success(
+            command="menu",
+            host_platform=host_platform,
+            target=None,
+            text="",
+        )
+    else:
+        result = execute_command(
+            parsed["command"],
+            parsed["command_text"],
+            parsed["target"],
+            host_platform,
+            manifest,
+            repo_root,
+        )
     result.duration_ms = int((time.perf_counter() - start) * 1000)
-    sys.stdout.write(render_result(result, parsed["json"]))
+    sys.stdout.write(render_result(result, json_output))
     return 0 if result.status == "ok" else 1
 
 
