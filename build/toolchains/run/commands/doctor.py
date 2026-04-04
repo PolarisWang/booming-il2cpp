@@ -1,28 +1,74 @@
 from __future__ import annotations
 
-import shutil
-import sys
 import os
+import sys
 from pathlib import Path
 
 try:
     from ..result import CommandResult
     from .. import runtime as runtime_module
+    from .. import tooling as tooling_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from result import CommandResult
     import runtime as runtime_module
+    import tooling as tooling_module
+
+ANSI_BOLD_GREEN = "\x1b[1;32m"
+ANSI_BOLD_YELLOW = "\x1b[1;33m"
+ANSI_BOLD_CYAN = "\x1b[1;36m"
+ANSI_RESET = "\x1b[0m"
 
 
-def _check_tool(name: str, executable: str, required: bool) -> dict:
-    location = shutil.which(executable)
+def _build_check(name: str, location: str | None, required: bool, *, missing_detail: str, discovered_via: str | None = None) -> dict:
+    status = "ok" if location else ("error" if required else "missing")
+    detail = location or missing_detail
+    if location and discovered_via:
+        detail = f"{location} ({discovered_via})"
     return {
         "name": name,
-        "status": "ok" if location else ("error" if required else "missing"),
-        "detail": location or f"{executable} not found",
+        "status": status,
+        "detail": detail,
         "required": required,
     }
+
+
+def _status_label(status: str, required: bool) -> str:
+    if status == "ok":
+        return f"{ANSI_BOLD_GREEN}[ok]{ANSI_RESET}"
+    if required:
+        return f"{ANSI_BOLD_YELLOW}[fix]{ANSI_RESET}"
+    return f"{ANSI_BOLD_CYAN}[note]{ANSI_RESET}"
+
+
+def _check_cmake(repo_root: Path) -> dict:
+    location = tooling_module.find_cmake_executable(repo_root)
+    return _build_check(
+        "cmake",
+        location,
+        True,
+        missing_detail="cmake not found in PATH or standard install locations",
+    )
+
+
+def _check_dotnet() -> dict:
+    location = tooling_module.shutil.which("dotnet")
+    return _build_check("dotnet", location, True, missing_detail="dotnet not found")
+
+
+def _check_visual_cpp_toolchain() -> dict:
+    location = tooling_module.find_visual_cpp_executable()
+    discovered_via = None
+    if location and not tooling_module.shutil.which("cl"):
+        discovered_via = "discovered via Visual Studio"
+    return _build_check(
+        "visual-cpp-toolchain",
+        location,
+        False,
+        missing_detail="cl not found",
+        discovered_via=discovered_via,
+    )
 
 
 def _check_osc8_support() -> dict:
@@ -74,9 +120,37 @@ def _check_osc8_support() -> dict:
 
 
 def _render_doctor_text(checks: list[dict], host_platform: str) -> str:
-    lines = [f"Doctor report ({host_platform})", ""]
-    for check in checks:
-        lines.append(f"{check['name']}: {check['status']} - {check['detail']}")
+    required_checks = [check for check in checks if check.get("required")]
+    optional_checks = [check for check in checks if not check.get("required")]
+    required_issues = [check for check in required_checks if check["status"] != "ok"]
+    optional_issues = [check for check in optional_checks if check["status"] != "ok"]
+
+    lines = [
+        f"Doctor report ({host_platform})",
+        "",
+        f"Summary: required issues={len(required_issues)}, optional notes={len(optional_issues)}",
+        "",
+        "Required checks:",
+    ]
+    for check in required_checks:
+        label = _status_label(check["status"], required=True)
+        lines.append(f"{label} {check['name']}: {check['detail']}")
+
+    if optional_checks:
+        lines.append("")
+        lines.append("Optional checks:")
+        for check in optional_checks:
+            label = _status_label(check["status"], required=False)
+            lines.append(f"{label} {check['name']}: {check['detail']}")
+
+    if required_issues:
+        lines.append("")
+        lines.append("Next actions:")
+        for check in required_issues:
+            if check["name"] == "cmake":
+                lines.append("1. Install CMake, or make a local cmake.exe discoverable to the unified entrypoint.")
+            else:
+                lines.append(f"1. Resolve the missing required tool: {check['name']}.")
 
     osc8_check = next((check for check in checks if check["name"] == "osc8-hyperlinks"), None)
     if osc8_check is not None:
@@ -101,15 +175,15 @@ def handle(repo_root: Path, host_platform: str, command_text: str) -> CommandRes
             "detail": probe["pythonPath"],
             "required": True,
         },
-        _check_tool("cmake", "cmake", True),
-        _check_tool("dotnet", "dotnet", True),
+        _check_cmake(repo_root),
+        _check_dotnet(),
         _check_osc8_support(),
     ]
 
     if host_platform == "windows":
-        checks.append(_check_tool("visual-cpp-toolchain", "cl", False))
+        checks.append(_check_visual_cpp_toolchain())
     elif host_platform == "macos":
-        checks.append(_check_tool("xcodebuild", "xcodebuild", False))
+        checks.append(_build_check("xcodebuild", tooling_module.shutil.which("xcodebuild"), False, missing_detail="xcodebuild not found"))
 
     errors = [check["name"] for check in checks if check["status"] == "error"]
     if errors:

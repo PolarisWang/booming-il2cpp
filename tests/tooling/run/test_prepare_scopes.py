@@ -102,6 +102,45 @@ class PrepareScopeTests(unittest.TestCase):
         self.assertEqual(["test smoke all --stage build"], prepare_result.payload["preparedCommands"])
         test_handle.assert_called_once()
 
+    def test_prepare_global_runs_doctor_before_prepare_steps(self) -> None:
+        prepare_module = load_prepare_module()
+        doctor_result = prepare_module.CommandResult.success(
+            command="doctor",
+            host_platform="windows",
+            target=None,
+            text="doctor ok\n",
+        )
+        parsed = {
+            "command": {"id": "test-family-all", "handler": "test.dispatch"},
+            "command_text": "test smoke all --stage build",
+            "target": "smoke",
+            "options": {"family": "smoke", "stage": "build"},
+            "json": False,
+        }
+        step_result = prepare_module.CommandResult.success(
+            command="test smoke all --stage build",
+            host_platform="windows",
+            target="smoke",
+            text="prepared smoke build\n",
+        )
+
+        with patch.object(prepare_module.doctor_commands, "handle", return_value=doctor_result) as doctor_handle:
+            with patch.object(prepare_module, "_prepare_plan", return_value=[["test", "smoke", "all", "--stage", "build"]]):
+                with patch.object(prepare_module.manifest_module, "parse_cli", return_value=parsed):
+                    with patch.object(prepare_module.test_commands, "handle", return_value=step_result):
+                        with patch.object(prepare_module, "write_json"):
+                            prepare_result = prepare_module.handle(
+                                {"id": "prepare"},
+                                REPO_ROOT,
+                                "windows",
+                                "prepare",
+                                {},
+                            )
+
+        self.assertEqual("ok", prepare_result.status)
+        self.assertTrue((prepare_result.text or "").startswith("doctor ok\n"))
+        doctor_handle.assert_called_once()
+
 
 if __name__ == "__main__":
     unittest.main()

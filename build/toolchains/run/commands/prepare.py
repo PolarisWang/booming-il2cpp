@@ -8,6 +8,7 @@ try:
     from ..common import write_json
     from ..result import CommandResult
     from .. import manifest as manifest_module
+    from . import doctor as doctor_commands
     from . import build as build_commands
     from . import test as test_commands
     from . import verify as verify_commands
@@ -17,6 +18,7 @@ except ImportError:
     from common import write_json
     from result import CommandResult
     import manifest as manifest_module
+    from commands import doctor as doctor_commands
     from commands import build as build_commands
     from commands import test as test_commands
     from commands import verify as verify_commands
@@ -168,6 +170,22 @@ def resolve_clean_paths(repo_root: Path, scope: str) -> list[Path]:
 
 def handle(command: dict, repo_root: Path, host_platform: str, command_text: str, manifest: dict) -> CommandResult:
     scope = resolve_prepare_scope(command["id"])
+    outputs: list[str] = []
+
+    if command["id"] == "prepare":
+        doctor_result = doctor_commands.handle(repo_root, host_platform, "doctor")
+        if doctor_result.text:
+            outputs.append(doctor_result.text)
+        if doctor_result.status != "ok":
+            return CommandResult.failure(
+                command=command_text,
+                host_platform=host_platform,
+                target=scope,
+                errors=doctor_result.errors or ["prepare failed during preflight doctor check"],
+                payload={"prepareScope": scope, "preparedCommands": []},
+                text="".join(outputs),
+            )
+
     state_path = prepare_state_path(repo_root, scope)
     if state_path.is_file():
         return CommandResult.success(
@@ -175,12 +193,11 @@ def handle(command: dict, repo_root: Path, host_platform: str, command_text: str
             host_platform=host_platform,
             target=scope,
             payload={"prepareScope": scope, "preparedCommands": [], "cached": True},
-            text=f"prepare scope '{scope}' already available\n",
+            text="".join(outputs) + f"prepare scope '{scope}' already available\n",
         )
 
     plan_steps = _prepare_plan(scope, host_platform)
     executed: list[str] = []
-    outputs: list[str] = []
 
     for step_argv in plan_steps:
         step_text, result = _execute_prepare_step(step_argv, repo_root, host_platform, manifest)

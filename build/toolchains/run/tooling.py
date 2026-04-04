@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 import sys
@@ -22,6 +23,100 @@ class ToolBootstrapResult:
     ready: bool
     output: str = ""
     errors: list[str] = field(default_factory=list)
+
+
+def _vswhere_path() -> Path | None:
+    candidate = Path(os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)")) / "Microsoft Visual Studio" / "Installer" / "vswhere.exe"
+    return candidate if candidate.is_file() else None
+
+
+def _run_vswhere(arguments: list[str]) -> list[str]:
+    executable = _vswhere_path()
+    if executable is None:
+        return []
+
+    completed = subprocess.run(
+        [str(executable), *arguments],
+        capture_output=True,
+        text=True,
+        errors="replace",
+        check=False,
+    )
+    if completed.returncode != 0:
+        return []
+    return [line.strip() for line in completed.stdout.splitlines() if line.strip()]
+
+
+def find_visual_cpp_executable(which: Callable[[str], str | None] = shutil.which) -> str | None:
+    discovered = which("cl")
+    if discovered:
+        return discovered
+
+    matches = _run_vswhere(
+        [
+            "-latest",
+            "-products",
+            "*",
+            "-requires",
+            "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+            "-find",
+            r"VC\Tools\MSVC\**\bin\Hostx64\x64\cl.exe",
+        ]
+    )
+    return matches[0] if matches else None
+
+
+def find_cmake_executable(repo_root: Path | None = None, which: Callable[[str], str | None] = shutil.which) -> str | None:
+    discovered = which("cmake")
+    if discovered:
+        return discovered
+
+    candidates: list[Path] = []
+    if repo_root is not None:
+        candidates.extend(
+            [
+                repo_root / "artifacts" / "toolchains" / "cmake" / "Lib" / "site-packages" / "cmake" / "data" / "bin" / "cmake.exe",
+                repo_root / "artifacts" / "toolchains" / "cmake" / "bin" / "cmake.exe",
+                repo_root / "artifacts" / "toolchains" / "cmake" / "Scripts" / "cmake.exe",
+            ]
+        )
+
+    candidates.extend(
+        [
+            Path(r"C:\Program Files\CMake\bin\cmake.exe"),
+            Path(r"C:\Program Files\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe"),
+            Path(r"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe"),
+            Path(r"D:\Program Files\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe"),
+            Path(r"D:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe"),
+        ]
+    )
+
+    for candidate in candidates:
+        if candidate.is_file():
+            return str(candidate)
+
+    matches = _run_vswhere(
+        [
+            "-latest",
+            "-products",
+            "*",
+            "-find",
+            r"Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe",
+        ]
+    )
+    return matches[0] if matches else None
+
+
+def cmake_environment(repo_root: Path | None = None, which: Callable[[str], str | None] = shutil.which) -> tuple[str | None, dict[str, str]]:
+    cmake_path = find_cmake_executable(repo_root, which=which)
+    if cmake_path is None:
+        return None, {}
+
+    cmake_dir = str(Path(cmake_path).resolve().parent)
+    current_path = os.environ.get("PATH", "")
+    if not current_path:
+        return cmake_path, {"PATH": cmake_dir}
+    return cmake_path, {"PATH": cmake_dir + os.pathsep + current_path}
 
 
 def _normalize_output(text: str) -> str:

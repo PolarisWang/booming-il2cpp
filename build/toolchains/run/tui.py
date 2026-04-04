@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import shutil
 import sys
+import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import quote
@@ -27,6 +28,8 @@ _WINDOWS_VT_READY: bool | None = None
 ANSI_GREEN = "\x1b[32m"
 ANSI_BOLD_YELLOW = "\x1b[1;33m"
 ANSI_BOLD_CYAN = "\x1b[1;36m"
+ANSI_BRIGHT_WHITE = "\x1b[97m"
+ANSI_BRIGHT_BLACK = "\x1b[90m"
 ANSI_RESET = "\x1b[0m"
 
 
@@ -49,39 +52,39 @@ TEST_MENU_COMMAND_IDS = {"test-family-suite", "test-family-all", "test-all", "te
 PRIMARY_MENU_ENTRIES = [
     {
         "id": "prepare-menu",
-        "group_title": "Prepare",
+        "group_title": "环境准备",
         "syntax": "prepare",
-        "title": "Prepare this workspace and local host environment",
+        "title": "准备当前工作区与本机环境，先把运行基础打通",
     },
     {
         "id": "build-menu",
-        "group_title": "Build",
+        "group_title": "构建产物",
         "syntax": "build",
-        "title": "Build runtime contracts, reference presets, and platform routing targets",
+        "title": "构建运行时契约、参考预设与平台路由产物",
     },
     {
         "id": "test-menu",
-        "group_title": "Test",
+        "group_title": "测试验证",
         "syntax": "test",
-        "title": "Run the unified test center with live progress and reports",
+        "title": "进入统一测试入口，查看进度、摘要与测试结果",
     },
     {
         "id": "clean-menu",
-        "group_title": "Clean",
+        "group_title": "清理维护",
         "syntax": "clean",
-        "title": "Clean managed outputs, temporary artifacts, and cached build products",
+        "title": "清理托管输出、临时产物与缓存构建结果",
     },
     {
         "id": "inspect-menu",
-        "group_title": "Inspect",
+        "group_title": "信息查看",
         "syntax": "inspect",
-        "title": "Inspect help, capabilities, and the public test catalog",
+        "title": "查看帮助、能力说明与公开测试目录",
     },
 ]
-MENU_BACK_COMMAND = {"id": "menu-back", "title": "Return to the main run menu"}
-PRIMARY_MENU_HELP = "Use Up/Down to move, Enter to run, PgUp/PgDn to jump groups, Home/End to jump, q/Esc to exit."
-TEST_MENU_HELP = "Use Up/Down to move, Enter to continue, q/Esc to return to the main run menu."
-SECTION_MENU_HELP = "Use Up/Down to move, Enter to continue, q/Esc to return to the main run menu."
+MENU_BACK_COMMAND = {"id": "menu-back", "title": "返回主菜单"}
+PRIMARY_MENU_HELP = "方向键移动，Enter 执行，PgUp/PgDn 切换分组，Home/End 跳转，q/Esc 退出。"
+TEST_MENU_HELP = "方向键选择，Enter 继续，Back 返回上级，q/Esc 返回主菜单。"
+SECTION_MENU_HELP = "方向键选择，Enter 继续，Back 返回上级，q/Esc 返回主菜单。"
 
 
 @dataclass(frozen=True)
@@ -115,15 +118,14 @@ def build_prepare_menu_entries(manifest: dict[str, Any], host_platform: str) -> 
         manifest,
         host_platform,
         [
-            ("Core", "doctor", "doctor", "Check the local toolchain before running anything else"),
-            ("Core", "prepare", "host", "Prepare the reusable host environment for everyday work"),
-            ("Core", "bootstrap", "python", "Bootstrap the cached Python runtime required by the wrapper"),
-            ("Targets", "prepare-smoke", "smoke", "Prepare the managed smoke environment for quick validation"),
+            ("基础准备", "doctor", "doctor", "只检查当前本机工具链与运行条件"),
+            ("基础准备", "prepare", "setup", "检查并初始化当前主机环境（推荐）"),
+            ("场景准备", "prepare-smoke", "smoke", "准备 smoke 测试所需的托管运行环境"),
             (
-                "Targets",
+                "场景准备",
                 f"prepare-verify-roadmap-0-{host_platform}",
                 "roadmap-0",
-                "Prepare the roadmap-0 verification environment for this host",
+                "准备当前主机的 roadmap-0 验证环境",
             ),
         ],
     )
@@ -138,12 +140,12 @@ def build_build_menu_entries(manifest: dict[str, Any], host_platform: str) -> li
         manifest,
         host_platform,
         [
-            ("Contracts", "build-native-contract-abi", "abi", "Build the native ABI contract smoke target"),
-            ("Contracts", "build-native-contract-bridge", "bridge", "Build the native bridge contract smoke target"),
-            ("Presets", preset_by_host.get(host_platform), "reference", "Build the reference preset for this host"),
-            ("Platform Routing", "build-platform-android-arm64-smoke", "android", "Validate Android platform routing"),
-            ("Platform Routing", "build-platform-ios-arm64-packaging", "ios", "Validate iOS platform routing"),
-            ("Platform Routing", "build-platform-linux-x64-packaging", "linux", "Validate Linux platform routing"),
+            ("契约构建", "build-native-contract-abi", "abi", "构建原生 ABI 契约 smoke 目标"),
+            ("契约构建", "build-native-contract-bridge", "bridge", "构建原生 bridge 契约 smoke 目标"),
+            ("参考预设", preset_by_host.get(host_platform), "reference", "构建当前主机对应的参考预设"),
+            ("平台路由", "build-platform-android-arm64-smoke", "android", "验证 Android 平台路由"),
+            ("平台路由", "build-platform-ios-arm64-packaging", "ios", "验证 iOS 平台路由"),
+            ("平台路由", "build-platform-linux-x64-packaging", "linux", "验证 Linux 平台路由"),
         ],
     )
 
@@ -153,9 +155,9 @@ def build_clean_menu_entries(manifest: dict[str, Any], host_platform: str) -> li
         manifest,
         host_platform,
         [
-            ("Scopes", "clean", "all", "Clean managed outputs, temporary artifacts, and cached build products"),
-            ("Scopes", "clean-smoke", "smoke", "Clean the smoke-test outputs only"),
-            ("Scopes", f"clean-verify-roadmap0-{host_platform}", "roadmap-0", "Clean roadmap-0 verification outputs for this host"),
+            ("清理范围", "clean", "all", "清理统一入口产生的全部托管输出与缓存产物"),
+            ("清理范围", "clean-smoke", "smoke", "只清理 smoke 测试相关输出"),
+            ("清理范围", f"clean-verify-roadmap0-{host_platform}", "roadmap-0", "清理当前主机的 roadmap-0 验证输出"),
         ],
     )
 
@@ -165,10 +167,10 @@ def build_inspect_menu_entries(manifest: dict[str, Any], host_platform: str) -> 
         manifest,
         host_platform,
         [
-            ("Reference", "help", "help", "Show the unified command help and quick syntax guide"),
-            ("Reference", "capability", "capability", "Describe one capability in detail"),
-            ("Reference", "list", "catalog", "Browse the available capability catalog"),
-            ("Testing", "test-list", "tests", "Browse the public test suites available on this host"),
+            ("帮助参考", "help", "help", "查看统一入口帮助与常用命令语法"),
+            ("帮助参考", "capability", "capability", "查看单个能力的详细说明"),
+            ("帮助参考", "list", "catalog", "浏览当前可用能力目录"),
+            ("测试目录", "test-list", "tests", "浏览当前主机可用的公开测试套件"),
         ],
     )
 
@@ -178,44 +180,44 @@ def build_test_menu_entries(manifest: dict[str, Any], host_platform: str) -> lis
     del host_platform
     return [
         MenuEntry(
-            group_title="Execute",
-            command={"id": "test-all", "title": "Run the full test center matrix with live progress and end-of-run reports"},
+            group_title="快速开始",
+            command={"id": "test-all", "title": "运行默认测试矩阵，适合先做一轮完整健康检查"},
             syntax="all",
             argv=["test", "all"],
         ),
         MenuEntry(
-            group_title="Execute",
-            command={"id": "test-family-all", "title": "Run every suite in one family when you want a focused regression pass"},
+            group_title="按范围执行",
+            command={"id": "test-family-all", "title": "按测试族批量执行，适合做一轮定向回归"},
             syntax="family",
             argv=["test"],
         ),
         MenuEntry(
-            group_title="Execute",
-            command={"id": "test-family-suite", "title": "Run one named suite for the fastest targeted validation loop"},
+            group_title="按范围执行",
+            command={"id": "test-family-suite", "title": "只运行一个测试套件，适合快速验证单点改动"},
             syntax="suite",
             argv=["test"],
         ),
         MenuEntry(
-            group_title="Observe",
-            command={"id": "test-watch", "title": "Watch the active or most recent run as a readable event timeline"},
+            group_title="查看结果",
+            command={"id": "test-watch", "title": "查看当前或最近一次运行的事件时间线"},
             syntax="watch",
             argv=["test", "watch"],
         ),
         MenuEntry(
-            group_title="Observe",
-            command={"id": "test-summary", "title": "Open the latest aggregated summary with suite-level outcomes"},
+            group_title="查看结果",
+            command={"id": "test-summary", "title": "查看最近一次聚合摘要和套件结果"},
             syntax="summary",
             argv=["test", "summary"],
         ),
         MenuEntry(
-            group_title="Observe",
-            command={"id": "test-list", "title": "Browse the public suite catalog available on this host"},
+            group_title="查看结果",
+            command={"id": "test-list", "title": "浏览当前主机可用的公开测试套件"},
             syntax="list",
             argv=["test", "list"],
         ),
         MenuEntry(
-            group_title="Navigation",
-            command=dict(MENU_BACK_COMMAND),
+            group_title="返回上级",
+            command={**MENU_BACK_COMMAND, "title": "返回上一级菜单"},
             syntax="back",
             argv=[],
         ),
@@ -244,7 +246,7 @@ def _build_submenu_entries(
         )
     entries.append(
         MenuEntry(
-            group_title="Navigation",
+            group_title="返回上级",
             command=dict(MENU_BACK_COMMAND),
             syntax="back",
             argv=[],
@@ -275,7 +277,7 @@ def _build_curated_submenu_entries(
         )
     entries.append(
         MenuEntry(
-            group_title="Navigation",
+            group_title="返回上级",
             command=dict(MENU_BACK_COMMAND),
             syntax="back",
             argv=[],
@@ -315,30 +317,30 @@ def resolve_entry_argv(
     command_id = entry.command["id"]
 
     if command_id == "capability":
-        value = prompt_value_provider("Capability id (blank to cancel): ").strip()
+        value = prompt_value_provider("输入 capability id，留空取消：").strip()
         if not value:
             return None
         return ["capability", value]
 
     if command_id == "test-menu":
-        mode = prompt_value_provider("Test mode (suite/family-all/all/list/watch/summary, blank to cancel): ").strip().lower()
+        mode = prompt_value_provider("测试模式（suite/family-all/all/list/watch/summary），留空取消：").strip().lower()
         if not mode:
             return None
         if mode == "suite":
-            value = prompt_value_provider("Test family and suite (for example: smoke HelloWorld): ").strip()
+            value = prompt_value_provider("输入测试族和套件名，例如：smoke HelloWorld：").strip()
             parts = value.split()
             if len(parts) != 2:
                 return None
             return ["test", parts[0], parts[1]]
         if mode == "family-all":
-            value = prompt_value_provider("Test family (blank to cancel): ").strip()
+            value = prompt_value_provider("输入测试族，留空取消：").strip()
             if not value:
                 return None
             return ["test", value, "all"]
         if mode == "all":
             return ["test", "all"]
         if mode == "list":
-            value = prompt_value_provider("Optional test family (blank for all): ").strip()
+            value = prompt_value_provider("可选输入测试族，留空表示全部：").strip()
             return ["test", "list", value] if value else ["test", "list"]
         if mode == "watch":
             return ["test", "watch"]
@@ -347,14 +349,14 @@ def resolve_entry_argv(
         return None
 
     if command_id == "test-family-suite":
-        value = prompt_value_provider("Test family and suite (for example: smoke HelloWorld): ").strip()
+        value = prompt_value_provider("输入测试族和套件名，例如：smoke HelloWorld：").strip()
         parts = value.split()
         if len(parts) != 2:
             return None
         return ["test", parts[0], parts[1]]
 
     if command_id == "test-family-all":
-        value = prompt_value_provider("Test family (blank to cancel): ").strip()
+        value = prompt_value_provider("输入测试族，留空取消：").strip()
         if not value:
             return None
         return ["test", value, "all"]
@@ -363,7 +365,7 @@ def resolve_entry_argv(
         return ["test", "all"]
 
     if command_id == "test-list":
-        value = prompt_value_provider("Optional test family (blank for all): ").strip()
+        value = prompt_value_provider("可选输入测试族，留空表示全部：").strip()
         return ["test", "list", value] if value else ["test", "list"]
 
     return list(entry.argv)
@@ -429,7 +431,7 @@ def _run_primary_menu(
         selected_entry = _run_menu_selection(
             terminal,
             entries,
-            title="Workspace Control Center",
+            title="工作区控制中心",
             help_text=PRIMARY_MENU_HELP,
             initial_selection=selection,
         )
@@ -464,11 +466,11 @@ def run_section_submenu(
 ) -> list[str] | None:
     if section_command_id == "prepare-menu":
         entries = build_prepare_menu_entries(manifest, host_platform)
-        title = "Prepare Center"
+        title = "准备中心"
         help_text = SECTION_MENU_HELP
     elif section_command_id == "build-menu":
         entries = build_build_menu_entries(manifest, host_platform)
-        title = "Build Center"
+        title = "构建中心"
         help_text = SECTION_MENU_HELP
     elif section_command_id == "test-menu":
         test_kwargs = {"terminal": terminal}
@@ -477,11 +479,11 @@ def run_section_submenu(
         return run_test_submenu(manifest, host_platform, **test_kwargs)
     elif section_command_id == "clean-menu":
         entries = build_clean_menu_entries(manifest, host_platform)
-        title = "Clean Center"
+        title = "清理中心"
         help_text = SECTION_MENU_HELP
     elif section_command_id == "inspect-menu":
         entries = build_inspect_menu_entries(manifest, host_platform)
-        title = "Inspect Center"
+        title = "查看中心"
         help_text = SECTION_MENU_HELP
     else:
         return None
@@ -506,7 +508,7 @@ def run_test_submenu(
     entries = build_test_menu_entries(manifest, host_platform)
     return _run_submenu(
         entries,
-        title="Unified Test Menu",
+        title="统一测试入口",
         help_text=TEST_MENU_HELP,
         terminal=terminal,
         section_command_id="test-menu",
@@ -632,16 +634,16 @@ def render_menu_screen(
     syntax_width = max(18, min(42, width // 3))
 
     header = [
-        _trim(title, width),
-        _trim(help_text, width),
-        _trim(f"{selection + 1}/{len(entries)}", width),
+        _style_menu_screen_title(_trim(title, width)),
+        _style_menu_help(_trim(help_text, width)),
+        _style_menu_counter(_trim(f"{selection + 1}/{len(entries)}", width)),
         "",
     ]
 
     body: list[str] = []
     for row in visible_rows:
         if row["entry_index"] is None:
-            body.append(_trim(row["text"], width))
+            body.append(_style_group_heading(_trim(row["text"], width)))
             continue
 
         entry = entries[row["entry_index"]]
@@ -652,7 +654,7 @@ def render_menu_screen(
         if row["entry_index"] == selection:
             body.append(f"\x1b[7m{_pad(line, width)}\x1b[0m")
         else:
-            body.append(line)
+            body.append(f"{prefix}{_style_menu_syntax(syntax)}  {_style_menu_command_title(title)}")
 
     lines = header + body
     if fullscreen:
@@ -868,12 +870,42 @@ def _green(text: str) -> str:
     return f"{ANSI_GREEN}{text}{ANSI_RESET}"
 
 
+def _style_menu_screen_title(text: str) -> str:
+    return f"{ANSI_BOLD_YELLOW}{text}{ANSI_RESET}"
+
+
+def _style_menu_help(text: str) -> str:
+    return f"{ANSI_BRIGHT_BLACK}{text}{ANSI_RESET}"
+
+
+def _style_menu_counter(text: str) -> str:
+    return f"{ANSI_GREEN}{text}{ANSI_RESET}"
+
+
+def _style_group_heading(text: str) -> str:
+    return f"{ANSI_BOLD_CYAN}{text}{ANSI_RESET}"
+
+
+def _style_menu_syntax(text: str) -> str:
+    return f"{ANSI_BOLD_CYAN}{text}{ANSI_RESET}"
+
+
+def _style_menu_command_title(text: str) -> str:
+    if _contains_cjk(text):
+        return f"{ANSI_BRIGHT_WHITE}{text}{ANSI_RESET}"
+    return f"{ANSI_BRIGHT_WHITE}{text}{ANSI_RESET}"
+
+
 def _highlight_heading(text: str) -> str:
     return f"{ANSI_BOLD_YELLOW}{text}{ANSI_RESET}"
 
 
 def _highlight_label(text: str) -> str:
     return f"{ANSI_BOLD_CYAN}{text}{ANSI_RESET}"
+
+
+def _contains_cjk(text: str) -> bool:
+    return any("\u4e00" <= character <= "\u9fff" for character in text)
 
 
 def _append_unique(lines: list[str], seen: set[str], line: str) -> None:
@@ -980,17 +1012,47 @@ def _selection_index_for_command(entries: list[MenuEntry], command_id: str | Non
 def _trim(text: str, width: int) -> str:
     if width <= 0:
         return ""
-    if len(text) <= width:
+    if _display_width(text) <= width:
         return text
     if width <= 3:
-        return text[:width]
-    return text[: width - 3] + "..."
+        return _slice_display_width(text, width)
+    return _slice_display_width(text, width - 3) + "..."
 
 
 def _pad(text: str, width: int) -> str:
-    if len(text) >= width:
+    text_width = _display_width(text)
+    if text_width >= width:
         return text
-    return text + (" " * (width - len(text)))
+    return text + (" " * (width - text_width))
+
+
+def _slice_display_width(text: str, width: int) -> str:
+    if width <= 0:
+        return ""
+
+    parts: list[str] = []
+    consumed = 0
+    for character in text:
+        char_width = _char_display_width(character)
+        if consumed + char_width > width:
+            break
+        parts.append(character)
+        consumed += char_width
+    return "".join(parts)
+
+
+def _display_width(text: str) -> int:
+    return sum(_char_display_width(character) for character in text)
+
+
+def _char_display_width(character: str) -> int:
+    if not character:
+        return 0
+    if unicodedata.combining(character):
+        return 0
+    if unicodedata.east_asian_width(character) in {"W", "F"}:
+        return 2
+    return 1
 
 
 def _stream_is_tty(name: str) -> bool:

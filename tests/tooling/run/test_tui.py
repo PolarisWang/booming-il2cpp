@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -41,12 +42,12 @@ class TuiTests(unittest.TestCase):
             ["prepare-menu", "build-menu", "test-menu", "clean-menu", "inspect-menu"],
             [entry.command["id"] for entry in entries],
         )
-        self.assertEqual(["Prepare", "Build", "Test", "Clean", "Inspect"], [entry.group_title for entry in entries])
-        self.assertIn("workspace", entries[0].command["title"].lower())
-        self.assertIn("contracts", entries[1].command["title"].lower())
-        self.assertIn("test center", entries[2].command["title"].lower())
-        self.assertIn("artifacts", entries[3].command["title"].lower())
-        self.assertIn("catalog", entries[4].command["title"].lower())
+        self.assertEqual(["环境准备", "构建产物", "测试验证", "清理维护", "信息查看"], [entry.group_title for entry in entries])
+        self.assertIn("工作区", entries[0].command["title"])
+        self.assertIn("运行时契约", entries[1].command["title"])
+        self.assertIn("统一测试入口", entries[2].command["title"])
+        self.assertIn("缓存构建结果", entries[3].command["title"])
+        self.assertIn("公开测试目录", entries[4].command["title"])
 
     def test_jump_group_moves_between_neighbor_groups(self) -> None:
         manifest_module = load_manifest_module()
@@ -60,8 +61,8 @@ class TuiTests(unittest.TestCase):
         test_and_verify_index = tui_module.jump_group(entries, build_index, direction=1)
         build_index_again = tui_module.jump_group(entries, test_and_verify_index, direction=-1)
 
-        self.assertEqual("Build", entries[build_index].group_title)
-        self.assertEqual("Test", entries[test_and_verify_index].group_title)
+        self.assertEqual("构建产物", entries[build_index].group_title)
+        self.assertEqual("测试验证", entries[test_and_verify_index].group_title)
         self.assertEqual(build_index, build_index_again)
 
     def test_build_prepare_menu_entries_provides_curated_second_level_menu(self) -> None:
@@ -72,11 +73,12 @@ class TuiTests(unittest.TestCase):
         entries = tui_module.build_prepare_menu_entries(manifest, "windows")
 
         self.assertEqual(
-            ["doctor", "prepare", "bootstrap", "prepare-smoke", "prepare-verify-roadmap-0-windows", "menu-back"],
+            ["doctor", "prepare", "prepare-smoke", "prepare-verify-roadmap-0-windows", "menu-back"],
             [entry.command["id"] for entry in entries],
         )
-        self.assertEqual(["doctor", "host", "python", "smoke", "roadmap-0", "back"], [entry.syntax for entry in entries])
-        self.assertIn("wrapper", entries[2].command["title"].lower())
+        self.assertEqual(["基础准备", "基础准备", "场景准备", "场景准备", "返回上级"], [entry.group_title for entry in entries])
+        self.assertEqual(["doctor", "setup", "smoke", "roadmap-0", "back"], [entry.syntax for entry in entries])
+        self.assertIn("检查并初始化", entries[1].command["title"])
         self.assertEqual("back", entries[-1].syntax)
 
     def test_build_build_menu_entries_provides_curated_second_level_menu(self) -> None:
@@ -98,7 +100,7 @@ class TuiTests(unittest.TestCase):
             [entry.command["id"] for entry in entries],
         )
         self.assertEqual(["abi", "bridge", "reference", "android", "linux", "back"], [entry.syntax for entry in entries])
-        self.assertIn("this host", entries[2].command["title"].lower())
+        self.assertIn("当前主机", entries[2].command["title"])
 
     def test_build_clean_menu_entries_provides_curated_second_level_menu(self) -> None:
         manifest_module = load_manifest_module()
@@ -108,7 +110,7 @@ class TuiTests(unittest.TestCase):
         entries = tui_module.build_clean_menu_entries(manifest, "windows")
 
         self.assertEqual(["all", "smoke", "roadmap-0", "back"], [entry.syntax for entry in entries])
-        self.assertIn("temporary artifacts", entries[0].command["title"].lower())
+        self.assertIn("全部托管输出", entries[0].command["title"])
         self.assertEqual("menu-back", entries[-1].command["id"])
 
     def test_build_inspect_menu_entries_provides_curated_second_level_menu(self) -> None:
@@ -123,7 +125,7 @@ class TuiTests(unittest.TestCase):
             [entry.command["id"] for entry in entries],
         )
         self.assertEqual(["help", "capability", "catalog", "tests", "back"], [entry.syntax for entry in entries])
-        self.assertIn("public test suites", entries[3].command["title"].lower())
+        self.assertIn("公开测试套件", entries[3].command["title"])
 
     def test_resolve_entry_argv_supports_dynamic_capability_target(self) -> None:
         manifest_module = load_manifest_module()
@@ -149,18 +151,23 @@ class TuiTests(unittest.TestCase):
             ["test-all", "test-family-all", "test-family-suite", "test-watch", "test-summary", "test-list", "menu-back"],
             [entry.command["id"] for entry in entries],
         )
-        self.assertIn("test center", next(entry.command["title"] for entry in entries if entry.command["id"] == "test-all").lower())
+        self.assertEqual(["快速开始", "按范围执行", "按范围执行", "查看结果", "查看结果", "查看结果", "返回上级"], [entry.group_title for entry in entries])
+        self.assertIn("默认测试矩阵", next(entry.command["title"] for entry in entries if entry.command["id"] == "test-all"))
+        self.assertIn("事件时间线", next(entry.command["title"] for entry in entries if entry.command["id"] == "test-watch"))
         self.assertEqual("back", entries[-1].syntax)
-        self.assertIn("previous menu", entries[-1].command["title"].lower())
+        self.assertIn("返回上一级", entries[-1].command["title"])
 
     def test_menu_help_texts_clarify_navigation_expectations(self) -> None:
         tui_module = load_tui_module()
 
-        self.assertIn("q/Esc to exit", tui_module.PRIMARY_MENU_HELP)
-        self.assertIn("Back to return", tui_module.TEST_MENU_HELP)
-        self.assertIn("q/Esc to leave this section", tui_module.TEST_MENU_HELP)
-        self.assertIn("Back to return", tui_module.SECTION_MENU_HELP)
-        self.assertIn("q/Esc to leave this section", tui_module.SECTION_MENU_HELP)
+        self.assertIn("方向键移动", tui_module.PRIMARY_MENU_HELP)
+        self.assertIn("q/Esc 退出", tui_module.PRIMARY_MENU_HELP)
+        self.assertIn("方向键选择", tui_module.TEST_MENU_HELP)
+        self.assertIn("Back 返回上级", tui_module.TEST_MENU_HELP)
+        self.assertIn("q/Esc 返回主菜单", tui_module.TEST_MENU_HELP)
+        self.assertIn("方向键选择", tui_module.SECTION_MENU_HELP)
+        self.assertIn("Back 返回上级", tui_module.SECTION_MENU_HELP)
+        self.assertIn("q/Esc 返回主菜单", tui_module.SECTION_MENU_HELP)
 
     def test_terminal_session_render_normalizes_newlines_on_posix(self) -> None:
         tui_module = load_tui_module()
@@ -198,13 +205,60 @@ class TuiTests(unittest.TestCase):
         screen = tui_module.render_menu_screen(
             entries,
             0,
-            title="Workspace Control Center",
-            help_text="Use Up/Down to move",
+            title="工作区控制中心",
+            help_text="方向键移动",
             fullscreen=False,
         )
 
-        self.assertIn("Workspace Control Center", screen)
+        self.assertIn("工作区控制中心", screen)
         self.assertNotIn("\x1b[2J\x1b[H", screen)
+
+    def test_render_menu_screen_highlights_headers_and_chinese_descriptions(self) -> None:
+        tui_module = load_tui_module()
+        entries = [
+            tui_module.MenuEntry(
+                group_title="查看结果",
+                command={"id": "test-watch", "title": "查看当前或最近一次运行的事件时间线"},
+                syntax="watch",
+                argv=["test", "watch"],
+            )
+        ]
+
+        screen = tui_module.render_menu_screen(
+            entries,
+            0,
+            title="统一测试入口",
+            help_text="方向键选择，Enter 继续，Back 返回上级，q/Esc 返回主菜单。",
+            fullscreen=False,
+        )
+
+        self.assertIn("\x1b[1;33m统一测试入口\x1b[0m", screen)
+        self.assertIn("\x1b[1;36m查看结果\x1b[0m", screen)
+        self.assertIn("\x1b[32m1/1\x1b[0m", screen)
+
+    def test_render_menu_screen_keeps_selected_chinese_row_within_terminal_width(self) -> None:
+        tui_module = load_tui_module()
+        entries = [
+            tui_module.MenuEntry(
+                group_title="鏄剧ず",
+                command={"id": "test-menu", "title": "杩欐槸涓€鏉￠渶瑕侀獙璇佷笉浼氬洜涓枃瀹藉瓧绗﹁€屾姌琛岀殑鑿滃崟璇存槑"},
+                syntax="test",
+                argv=["test"],
+            )
+        ]
+
+        with patch.object(tui_module.shutil, "get_terminal_size", return_value=(30, 12)):
+            screen = tui_module.render_menu_screen(
+                entries,
+                0,
+                title="缁熶竴娴嬭瘯鍏ュ彛",
+                help_text="鏂瑰悜閿€夋嫨",
+                fullscreen=False,
+            )
+
+        selected_line = next(line for line in screen.splitlines() if "\x1b[7m" in line)
+        plain_line = re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", selected_line)
+        self.assertLessEqual(tui_module._display_width(plain_line), 30)
 
     def test_resolve_entry_argv_supports_dynamic_test_suite_target(self) -> None:
         manifest_module = load_manifest_module()
@@ -322,7 +376,7 @@ class TuiTests(unittest.TestCase):
 
         self.assertEqual(["test", "all"], argv)
         run_test_submenu.assert_called_once()
-        self.assertTrue(any("Workspace Control Center" in screen for screen in fake_terminal.screens))
+        self.assertTrue(any("工作区控制中心" in screen for screen in fake_terminal.screens))
 
     def test_run_fullscreen_menu_routes_prepare_entry_into_second_level_menu(self) -> None:
         tui_module = load_tui_module()

@@ -42,13 +42,16 @@ def _failure(command_text: str, host_platform: str, target: str | None, output: 
 def _build_native_contract(command: dict, repo_root: Path, host_platform: str, command_text: str) -> CommandResult:
     source_dir = repo_root / command["source_dir"]
     binary_dir = repo_root / command["binary_dir"]
+    cmake_path, cmake_env = tooling_module.cmake_environment(repo_root)
+    if cmake_path is None:
+        return _failure(command_text, host_platform, command.get("target"), "", ["cmake not found"])
 
-    configure = run_process(["cmake", "-S", str(source_dir), "-B", str(binary_dir)], cwd=repo_root)
+    configure = run_process([cmake_path, "-S", str(source_dir), "-B", str(binary_dir)], cwd=repo_root, env=cmake_env)
     configure_output = combine_process_output(configure)
     if configure.returncode != 0:
         return _failure(command_text, host_platform, command.get("target"), configure_output, ["cmake configure failed"])
 
-    build = run_process(["cmake", "--build", str(binary_dir)], cwd=repo_root)
+    build = run_process([cmake_path, "--build", str(binary_dir)], cwd=repo_root, env=cmake_env)
     build_output = combine_process_output(build)
     output = "\n".join(part for part in [configure_output, build_output] if part)
     if build.returncode != 0:
@@ -74,16 +77,19 @@ def _build_smoke_project(command: dict, repo_root: Path, host_platform: str, com
 def _build_preset(command: dict, repo_root: Path, host_platform: str, command_text: str) -> CommandResult:
     preset_name = command["preset"]
     binary_dir = repo_root / command["binary_dir"]
+    cmake_path, cmake_env = tooling_module.cmake_environment(repo_root)
+    if cmake_path is None:
+        return _failure(command_text, host_platform, command.get("target"), "", ["cmake not found"])
 
     if binary_dir.exists():
         shutil.rmtree(binary_dir)
 
-    configure = run_process(["cmake", "--preset", preset_name], cwd=repo_root)
+    configure = run_process([cmake_path, "--preset", preset_name], cwd=repo_root, env=cmake_env)
     configure_output = combine_process_output(configure)
     if configure.returncode != 0:
         return _failure(command_text, host_platform, command.get("target"), configure_output, ["cmake preset configure failed"])
 
-    build = run_process(["cmake", "--build", str(binary_dir)], cwd=repo_root)
+    build = run_process([cmake_path, "--build", str(binary_dir)], cwd=repo_root, env=cmake_env)
     build_output = combine_process_output(build)
     output = "\n".join(part for part in [configure_output, build_output] if part)
     if build.returncode != 0:
@@ -106,12 +112,15 @@ def _build_platform_gate(command: dict, repo_root: Path, host_platform: str, com
     binary_dir = repo_root / command["binary_dir"]
     toolchain_file = repo_root / command["toolchain_file"]
     preset_target = command["preset_target"]
+    cmake_path, cmake_env = tooling_module.cmake_environment(repo_root)
+    if cmake_path is None:
+        return _failure(command_text, host_platform, command.get("target"), "", ["cmake not found"])
 
     if binary_dir.exists():
         shutil.rmtree(binary_dir)
 
     configure_args = [
-        "cmake",
+        cmake_path,
         "-S",
         str(repo_root),
         "-B",
@@ -123,12 +132,12 @@ def _build_platform_gate(command: dict, repo_root: Path, host_platform: str, com
         f"-DCMAKE_TOOLCHAIN_FILE={toolchain_file}",
     ]
 
-    configure = run_process(configure_args, cwd=repo_root)
+    configure = run_process(configure_args, cwd=repo_root, env=cmake_env)
     configure_output = combine_process_output(configure)
     if configure.returncode != 0:
         return _failure(command_text, host_platform, command.get("target"), configure_output, ["cmake routing configure failed"])
 
-    build = run_process(["cmake", "--build", str(binary_dir)], cwd=repo_root)
+    build = run_process([cmake_path, "--build", str(binary_dir)], cwd=repo_root, env=cmake_env)
     build_output = combine_process_output(build)
     output = "\n".join(part for part in [configure_output, build_output] if part)
     if build.returncode != 0:

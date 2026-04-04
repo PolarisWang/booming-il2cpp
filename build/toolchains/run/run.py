@@ -36,6 +36,12 @@ def resolve_repo_root() -> Path:
     return Path(__file__).resolve().parents[3]
 
 
+def configure_stdout() -> None:
+    reconfigure = getattr(sys.stdout, "reconfigure", None)
+    if callable(reconfigure):
+        reconfigure(errors="replace")
+
+
 def render_result(result: CommandResult, json_output: bool, repo_root: Path) -> str:
     if json_output:
         events_path = result.payload.get("eventsPath")
@@ -268,6 +274,7 @@ def run_fullscreen_menu_session(
 
 def main(argv: list[str] | None = None) -> int:
     start = time.perf_counter()
+    configure_stdout()
     argv = list(sys.argv[1:] if argv is None else argv)
     repo_root = resolve_repo_root()
     manifest = manifest_module.load_run_manifest(repo_root)

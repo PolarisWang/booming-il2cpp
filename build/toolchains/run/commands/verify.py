@@ -27,6 +27,16 @@ def handle(command: dict, repo_root: Path, host_platform: str, command_text: str
             text=message,
         )
 
+    cmake_path, cmake_env = tooling_module.cmake_environment(repo_root)
+    if cmake_path is None:
+        return CommandResult.failure(
+            command=command_text,
+            host_platform=host_platform,
+            target=command.get("target"),
+            errors=["cmake not found"],
+            text="cmake not found\n",
+        )
+
     host_profile = command["host_profile"]
     if host_profile == "windows":
         arguments = [
@@ -47,7 +57,7 @@ def handle(command: dict, repo_root: Path, host_platform: str, command_text: str
             "macos",
         ]
 
-    completed = run_process(arguments, cwd=repo_root)
+    completed = run_process(arguments, cwd=repo_root, env=cmake_env)
     output = "\n".join(part for part in [bootstrap.output.strip(), combine_process_output(completed)] if part)
     if completed.returncode != 0:
         message = output if output else "verify roadmap-0 failed"
