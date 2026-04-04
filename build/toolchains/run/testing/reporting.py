@@ -9,13 +9,13 @@ from typing import Any
 from uuid import uuid4
 
 try:
-    from ..common import write_json
+    from ..common import read_json, write_json
     from .events import build_event
     from .traffic_light import TRAFFIC_LIGHT_BUCKETS
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    from common import write_json
+    from common import read_json, write_json
     from testing.events import build_event
     from testing.traffic_light import TRAFFIC_LIGHT_BUCKETS
 
@@ -39,6 +39,12 @@ def _relative_path(repo_root: Path, path: Path) -> str:
 def _write_text(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8")
+
+
+def _append_text(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(text)
 
 
 def _empty_status_counts() -> dict[str, int]:
@@ -66,6 +72,77 @@ def _build_case_counts(case_results: list[dict[str, Any]]) -> dict[str, int]:
     for case_result in case_results:
         _add_status_count(counts, str(case_result.get("status", "aborted")))
     return counts
+
+
+def _logs_root(repo_root: Path) -> Path:
+    return repo_root / "artifacts" / "logs" / "tests"
+
+
+def start_session_report(
+    *,
+    repo_root: Path,
+    host_platform: str,
+    command_text: str,
+) -> dict[str, Any]:
+    run_id = _build_run_id(host_platform)
+    session_root = _logs_root(repo_root) / run_id
+    session_path = session_root / "session.json"
+    summary_path = session_root / "summary.json"
+    events_path = session_root / "events.jsonl"
+    console_path = session_root / "console.log"
+    telemetry_path = session_root / "telemetry.json"
+
+    session_payload = {
+        "runId": run_id,
+        "command": command_text,
+        "hostPlatform": host_platform,
+        "status": "running",
+        "errors": [],
+    }
+    write_json(session_path, session_payload)
+    _write_text(console_path, "")
+    pointer_payload = {
+        "runId": run_id,
+        "command": command_text,
+        "hostPlatform": host_platform,
+        "sessionPath": _relative_path(repo_root, session_path),
+        "summaryPath": _relative_path(repo_root, summary_path),
+        "eventsPath": _relative_path(repo_root, events_path),
+        "status": "running",
+    }
+    write_json(_logs_root(repo_root) / "current.json", pointer_payload)
+    write_json(_logs_root(repo_root) / "last.json", pointer_payload)
+    append_session_event(
+        repo_root,
+        {
+            "runId": run_id,
+            "eventsPath": events_path,
+        },
+        build_event(
+            "session-start",
+            {
+                "runId": run_id,
+                "command": command_text,
+                "hostPlatform": host_platform,
+            },
+            run_id=run_id,
+            status="running",
+        ),
+    )
+    return {
+        "runId": run_id,
+        "sessionRoot": session_root,
+        "sessionPath": session_path,
+        "summaryPath": summary_path,
+        "eventsPath": events_path,
+        "consolePath": console_path,
+        "telemetryPath": telemetry_path,
+    }
+
+
+def append_session_event(repo_root: Path, run_context: dict[str, Any], event: dict[str, Any]) -> None:
+    del repo_root
+    _append_text(Path(run_context["eventsPath"]), json.dumps(event, ensure_ascii=False) + "\n")
 
 
 def _build_traffic_light_counts(case_results: list[dict[str, Any]]) -> dict[str, dict[str, int]]:
@@ -117,14 +194,18 @@ def write_session_report(
     text: str,
     errors: list[str],
     artifacts: list[Any],
+    run_context: dict[str, Any] | None = None,
 ) -> dict[str, str]:
-    run_id = _build_run_id(host_platform)
-    session_root = repo_root / "artifacts" / "logs" / "tests" / run_id
-    session_path = session_root / "session.json"
-    summary_path = session_root / "summary.json"
-    events_path = session_root / "events.jsonl"
-    console_path = session_root / "console.log"
-    telemetry_path = session_root / "telemetry.json"
+    if run_context is None:
+        run_context = start_session_report(repo_root=repo_root, host_platform=host_platform, command_text=command_text)
+
+    run_id = str(run_context["runId"])
+    session_root = Path(run_context["sessionRoot"])
+    session_path = Path(run_context["sessionPath"])
+    summary_path = Path(run_context["summaryPath"])
+    events_path = Path(run_context["eventsPath"])
+    console_path = Path(run_context["consolePath"])
+    telemetry_path = Path(run_context["telemetryPath"])
 
     final_status = "ok" if status == "ok" else "fail"
     exit_code = 0 if status == "ok" else 1
@@ -194,30 +275,37 @@ def write_session_report(
         "artifacts": list(artifacts),
         "caseCounts": session_case_counts,
         "trafficLightCounts": session_traffic_light_counts,
+        "sessionPath": _relative_path(repo_root, session_path),
         "summaryPath": _relative_path(repo_root, summary_path),
+        "eventsPath": _relative_path(repo_root, events_path),
+        "consolePath": _relative_path(repo_root, console_path),
+        "telemetryPath": _relative_path(repo_root, telemetry_path),
     }
-    events = [
-        build_event(
-            "session-start",
-            {
-                "runId": run_id,
-                "command": command_text,
-                "hostPlatform": host_platform,
-            },
-            run_id=run_id,
-            status=status,
-        ),
+    append_session_event(
+        repo_root,
+        run_context,
         build_event(
             "final-summary",
             final_event_payload,
             run_id=run_id,
             status=final_status,
         ),
-    ]
-    _write_text(
-        events_path,
-        "".join(json.dumps(event, ensure_ascii=False) + "\n" for event in events),
     )
+    pointer_payload = {
+        "runId": run_id,
+        "command": command_text,
+        "hostPlatform": host_platform,
+        "sessionPath": _relative_path(repo_root, session_path),
+        "summaryPath": _relative_path(repo_root, summary_path),
+        "eventsPath": _relative_path(repo_root, events_path),
+        "status": final_status,
+    }
+    write_json(_logs_root(repo_root) / "last.json", pointer_payload)
+    current_path = _logs_root(repo_root) / "current.json"
+    if current_path.is_file():
+        current_payload = read_json(current_path)
+        if current_payload.get("runId") == run_id:
+            current_path.unlink()
 
     return {
         "runId": run_id,

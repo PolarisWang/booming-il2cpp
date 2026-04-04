@@ -200,6 +200,26 @@ def resolve_dynamic_test_command(
         command = find_command(manifest, "test-list", host_platform, include_hidden=True)
         return command, family, merged_options
 
+    if len(positional) >= 2 and positional[1] == "watch":
+        if len(positional) > 3:
+            return None, None, merged_options
+
+        run_ref = positional[2] if len(positional) == 3 else None
+        if run_ref is not None:
+            merged_options["run"] = run_ref
+        command = find_command(manifest, "test-watch", host_platform, include_hidden=True)
+        return command, run_ref, merged_options
+
+    if len(positional) >= 2 and positional[1] == "summary":
+        if len(positional) > 3:
+            return None, None, merged_options
+
+        run_ref = positional[2] if len(positional) == 3 else None
+        if run_ref is not None:
+            merged_options["run"] = run_ref
+        command = find_command(manifest, "test-summary", host_platform, include_hidden=True)
+        return command, run_ref, merged_options
+
     if len(positional) == 2 and positional[1] == "all":
         command = find_command(manifest, "test-all", host_platform, include_hidden=True)
         return command, "all", merged_options

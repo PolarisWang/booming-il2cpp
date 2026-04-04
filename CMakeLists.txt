@@ -1,8 +1,19 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(roadmap0_preset_router LANGUAGES CXX)
-
 set(ROADMAP0_PRESET_TARGET "" CACHE STRING "Roadmap 0 preset target selector")
+
+if(ROADMAP0_TOOLCHAIN_VALIDATE_ONLY)
+    project(roadmap0_preset_router LANGUAGES NONE)
+
+    if(ROADMAP0_PRESET_TARGET STREQUAL "android-arm64-smoke"
+       OR ROADMAP0_PRESET_TARGET STREQUAL "ios-arm64-packaging"
+       OR ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-packaging")
+        add_custom_target(roadmap0_validate_only ALL)
+        return()
+    endif()
+endif()
+
+project(roadmap0_preset_router LANGUAGES CXX)
 
 if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     add_subdirectory(tests/contract/native/abi)

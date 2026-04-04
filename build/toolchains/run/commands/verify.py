@@ -41,8 +41,9 @@ def handle(command: dict, repo_root: Path, host_platform: str, command_text: str
         ]
     else:
         arguments = [
-            "sh",
-            str(repo_root / "build" / "scripts" / "verify-roadmap-0.sh"),
+            sys.executable,
+            str(repo_root / "build" / "scripts" / "verify-roadmap-0.py"),
+            "--host-profile",
             "macos",
         ]
 

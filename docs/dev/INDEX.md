@@ -1,0 +1,15 @@
+# 开发任务总览
+
+本目录汇总当前采用 `docs/dev` 流程管理的任务。
+
+| 任务 | lifecycle_status | phase | 最近更新 | 下一步 | active |
+| --- | --- | --- | --- | --- | --- |
+| `20260329-01-il2cpp-like-cs-to-cpp` | `hanging` | `roadmap` | `2026-04-04 14:20:39 +0800` | 未来恢复时，优先从 `Roadmap 1` 或 `Roadmap 3` 派生新子任务。 | `no` |
+| `20260404-03-roadmap-1-assembly-and-typed-il-ir` | `hanging` | `ready` | `2026-04-04 14:20:39 +0800` | 用户决定启动 `Roadmap 1` 时，进入本子任务的 brainstorm/plan 流程。 | `no` |
+| `20260404-04-roadmap-3-runtime-core-v1` | `hanging` | `ready` | `2026-04-04 14:20:39 +0800` | 用户决定启动 `Roadmap 3` 时，进入本子任务的 brainstorm/plan 流程。 | `no` |
+| `20260331-01-roadmap-0-contract-freeze-and-skeleton` | `completed` | `archived` | `2026-04-04 14:09:00 +0800` | 无。 | `no` |
+| `20260402-01-harness-engineer-automation` | `completed` | `archived` | `2026-04-04 14:09:00 +0800` | 无。 | `no` |
+| `20260403-01-unified-run-entrypoint` | `completed` | `archived` | `2026-04-04 14:09:00 +0800` | 无。 | `no` |
+| `20260403-02-unified-test-framework` | `completed` | `archived` | `2026-04-04 14:09:00 +0800` | 无。 | `no` |
+| `20260404-01-skill-flow-refactor` | `completed` | `reviewing` | `2026-04-04 13:45:41 +0800` | 无。如需继续提升运行时验证稳定性，请新建 follow-up 任务。 | `no` |
+| `20260404-02-booming-docs-migration` | `completed` | `reviewing` | `2026-04-04 13:57:28 +0800` | 无。如需彻底移除 `docs/booming`，请另开 follow-up 处理历史路径清理。 | `no` |

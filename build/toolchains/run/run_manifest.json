@@ -127,6 +127,28 @@
       "examples": ["run test list", "run test list smoke --json"]
     },
     {
+      "id": "test-watch",
+      "title": "Show the latest overall test progress snapshot",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test", "watch"],
+      "syntax": "test watch [run-id|last]",
+      "show_in_menu": false,
+      "examples": ["run test watch", "run test watch last"]
+    },
+    {
+      "id": "test-summary",
+      "title": "Show the latest overall test summary",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test", "summary"],
+      "syntax": "test summary [run-id|last]",
+      "show_in_menu": false,
+      "examples": ["run test summary", "run test summary last"]
+    },
+    {
       "id": "prepare",
       "title": "Prepare the current host's reusable environment",
       "group": "Environment",

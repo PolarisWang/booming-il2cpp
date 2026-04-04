@@ -3,6 +3,7 @@ from __future__ import annotations
 import sys
 import time
 from pathlib import Path
+from typing import Callable
 
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -44,7 +45,16 @@ def render_result(result: CommandResult, json_output: bool, repo_root: Path) -> 
                 return resolved_events_path.read_text(encoding="utf-8")
         return result.to_json() + "\n"
 
-    return result.text or ""
+    text = result.text or ""
+    if result.payload.get("sessionPath") and result.payload.get("summaryPath"):
+        footer = tui_module.render_test_report_highlights(result.payload, repo_root=repo_root)
+        if footer:
+            if text and not text.endswith("\n"):
+                text += "\n"
+            if text:
+                text += "\n"
+            text += footer
+    return text
 
 
 def render_post_tui_prefix(used_fullscreen_tui: bool, result: CommandResult, json_output: bool) -> str:
@@ -53,6 +63,31 @@ def render_post_tui_prefix(used_fullscreen_tui: bool, result: CommandResult, jso
     if not (result.text or ""):
         return ""
     return "\r\x1b[2K"
+
+
+def build_test_progress_callback(repo_root: Path) -> Callable[[dict], None]:
+    events: list[dict] = []
+    rendered_history_count = 0
+    wrote_header = False
+
+    def _callback(event: dict) -> None:
+        nonlocal rendered_history_count
+        nonlocal wrote_header
+        events.append(event)
+        view = tui_module.build_test_progress_view(events, repo_root=repo_root)
+        lines: list[str] = []
+        if not wrote_header:
+            lines.extend(["Unified Test Progress", f"Command: {view.command or '-'}", ""])
+            wrote_header = True
+        new_history = view.history_lines[rendered_history_count:]
+        if new_history:
+            lines.extend(new_history)
+            rendered_history_count += len(new_history)
+        if lines:
+            sys.stdout.write("\n".join(lines) + "\n")
+            sys.stdout.flush()
+
+    return _callback
 
 
 def add_legacy_test_migration_guidance(command: dict, result: CommandResult) -> CommandResult:
@@ -93,6 +128,7 @@ def execute_command(
     manifest: dict,
     repo_root: Path,
     options: dict[str, object] | None = None,
+    progress_callback: Callable[[dict], None] | None = None,
 ) -> CommandResult:
     if command is None:
         return CommandResult.failure(
@@ -125,7 +161,15 @@ def execute_command(
         result = build_commands.handle(command, repo_root, host_platform, command_text)
         return add_legacy_test_migration_guidance(command, result)
     if command["handler"] == "test.dispatch":
-        result = test_commands.handle(command, repo_root, host_platform, command_text, manifest, options or {})
+        result = test_commands.handle(
+            command,
+            repo_root,
+            host_platform,
+            command_text,
+            manifest,
+            options or {},
+            progress_callback=progress_callback,
+        )
         return add_legacy_test_migration_guidance(command, result)
     if command["handler"] == "verify.dispatch":
         result = verify_commands.handle(command, repo_root, host_platform, command_text)
@@ -184,6 +228,15 @@ def main(argv: list[str] | None = None) -> int:
             text="",
         )
     else:
+        progress_callback = None
+        if (
+            interactive
+            and not json_output
+            and parsed["command"] is not None
+            and parsed["command"]["handler"] == "test.dispatch"
+            and parsed["command"]["id"] not in {"test-list", "test-watch", "test-summary"}
+        ):
+            progress_callback = build_test_progress_callback(repo_root)
         result = execute_command(
             parsed["command"],
             parsed["command_text"],
@@ -192,6 +245,7 @@ def main(argv: list[str] | None = None) -> int:
             manifest,
             repo_root,
             parsed["options"],
+            progress_callback=progress_callback,
         )
     result.duration_ms = int((time.perf_counter() - start) * 1000)
     sys.stdout.write(render_post_tui_prefix(used_fullscreen_tui, result, json_output))

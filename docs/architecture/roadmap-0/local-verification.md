@@ -22,6 +22,13 @@
 ./run.sh clean --scope verify-roadmap0-macos --json
 ```
 
+如果只关心整体测试进度或最近一次汇总，可以直接使用：
+
+```bash
+./run.sh test watch
+./run.sh test summary
+```
+
 - 快速 smoke 入口:
 
 ```powershell
@@ -55,13 +62,13 @@ pwsh ./build/scripts/verify-roadmap-0.ps1 -HostProfile windows
 - macOS host:
 
 ```bash
-pwsh ./build/scripts/verify-roadmap-0.ps1 -HostProfile macos
+python3 ./build/scripts/verify-roadmap-0.py --host-profile macos
 ```
 
 - Shell wrapper:
 
 ```bash
-./build/scripts/verify-roadmap-0.sh -HostProfile macos
+./build/scripts/verify-roadmap-0.sh --host-profile macos
 ```
 
 ## `common` 检查
@@ -99,7 +106,7 @@ pwsh ./build/scripts/verify-roadmap-0.ps1 -HostProfile macos
 - 通用: `cmake`、`dotnet`
 - Windows host: Visual Studio C++ toolchain
 - Android: 如需进入真实 Android toolchain，补 `ANDROID_NDK_ROOT`
-- macOS / iOS: `pwsh`、Xcode、可选 `DEVELOPER_DIR`
+- macOS / iOS: Python 3、Apple Command Line Tools 或 Xcode、可选 `DEVELOPER_DIR`
 - Linux cross-compile: 如需进入真实 sysroot，补 `ROADMAP0_LINUX_SYSROOT`
 
 ## Trace Compare 产物

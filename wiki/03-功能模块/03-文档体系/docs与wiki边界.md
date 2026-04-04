@@ -2,9 +2,10 @@
 
 ## docs
 
-- 存放执行过程
-- 存放 `CURRENT.md`
-- 存放 execution history
+- 存放任务过程
+- 存放 `STATUS.md`
+- 存放 `ACTIVE.md`
+- 存放 `notes/progress-*.md`
 
 ## wiki
 
@@ -14,9 +15,9 @@
 
 ## 禁止
 
-- 不把 execution 日志写进 wiki
+- 不把任务日志写进 wiki
 - 不把知识索引写进 docs
 
 ## 最近更新
 
-- `2026-04-02`：明确 docs 与 wiki 的职责边界。
+- `2026-04-04`：docs 边界切换到 `docs/dev` 任务目录与 `ACTIVE.md`。

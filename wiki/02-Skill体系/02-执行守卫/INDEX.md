@@ -1,6 +1,6 @@
 # 02-执行守卫 INDEX
 
-> 收录活动计划优先处理的全局守卫规则。
+> 收录 active 任务优先处理的全局守卫规则。
 
 ## 子类别
 
@@ -12,13 +12,13 @@
 
 | 文档 | 主题 | 说明 |
 |------|------|------|
-| [`active-execution-guard.md`](./active-execution-guard.md) | 活动计划守卫 | 说明 `CURRENT.md` 存在时的唯一合法入口 |
+| [`active-execution-guard.md`](./active-execution-guard.md) | 活动任务守卫 | 说明 `ACTIVE.md` 存在时的唯一合法入口 |
 
 ## 本层规则
 
-- 活动计划守卫优先级高于所有其他 skill。
-- 只要存在 `CURRENT.md`，就必须先处理活动计划。
+- 活动任务守卫优先级高于所有其他 skill。
+- 只要存在 `ACTIVE.md`，就必须先处理 active 任务。
 
 ## 最近更新
 
-- `2026-04-02`：建立执行守卫目录并接入 `active-execution-guard`。
+- `2026-04-04`：执行守卫切换到 `ACTIVE.md` 与 `继续 / 挂起 / 放弃` 语义。

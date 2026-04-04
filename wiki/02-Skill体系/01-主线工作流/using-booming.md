@@ -5,7 +5,7 @@
 ## 基本信息
 
 - 分层：主线工作流
-- 项目职责：在项目里强制先检查活动计划守卫，再进入其他 skill
+- 项目职责：在项目里强制先检查活动任务守卫，再进入其他 skill
 - 实现路径：`.codex/skills/dev-using-booming/SKILL.md`
 - 状态：`active`
 
@@ -18,19 +18,19 @@
 ## 在本项目中的作用
 
 - 先决定是否需要 `active-execution-guard`
-- 如果没有活动计划，再选择头脑风暴、规划、执行、测试等技能
+- 如果没有 active 任务，再选择头脑风暴、roadmap、计划、执行、测试等技能
 
 ## 项目规则
 
 - `active-execution-guard` 优先级高于其他 skill
-- 只要可能存在 `docs/executions/CURRENT.md`，就必须先检查
+- 只要可能存在 `docs/dev/ACTIVE.md`，就必须先检查
 
 ## 关联技能
 
 - 上游：无
-- 下游：`brainstorming`、`writing-plans`、`executing-plans`、`subagent-driven-development`
+- 下游：`brainstorming`、`roadmap`、`writing-plans`、`executing-plans`、`subagent-driven-development`
 - 协作：`active-execution-guard`
 
 ## 最近变更
 
-- `2026-04-02`：增加活动计划守卫优先级规则。
+- `2026-04-04`：全局入口切换到 `ACTIVE.md`，并加入 roadmap 分流。

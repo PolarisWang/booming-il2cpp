@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
+from typing import Any, Callable
 
 try:
     from .. import manifest as manifest_module
+    from .. import tui as tui_module
     from ..testing import catalog as catalog_module
     from ..testing import session as session_module
     from ..testing import reporting as reporting_module
@@ -17,6 +20,7 @@ except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     import manifest as manifest_module
+    import tui as tui_module
     from testing import catalog as catalog_module
     from testing import session as session_module
     from testing import reporting as reporting_module
@@ -160,6 +164,127 @@ def _handle_public_test_list(command_text: str, host_platform: str, options: dic
     )
 
 
+def _logs_root(repo_root: Path) -> Path:
+    return repo_root / "artifacts" / "logs" / "tests"
+
+
+def _read_json_if_exists(path: Path) -> dict[str, Any] | None:
+    if not path.is_file():
+        return None
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _resolve_run_metadata(repo_root: Path, requested_run: str | None, *, prefer_current: bool) -> dict[str, Any] | None:
+    logs_root = _logs_root(repo_root)
+    if requested_run and requested_run not in {"last", "current"}:
+        run_root = logs_root / requested_run
+        return {
+            "runId": requested_run,
+            "summaryPath": str((run_root / "summary.json").relative_to(repo_root).as_posix()),
+            "eventsPath": str((run_root / "events.jsonl").relative_to(repo_root).as_posix()),
+        }
+
+    pointer_names: list[str] = []
+    if requested_run == "current" or (requested_run is None and prefer_current):
+        pointer_names.append("current.json")
+    if requested_run in {None, "last"}:
+        pointer_names.append("last.json")
+    if requested_run == "current" and "last.json" not in pointer_names:
+        pointer_names.append("last.json")
+
+    for pointer_name in pointer_names:
+        payload = _read_json_if_exists(logs_root / pointer_name)
+        if payload is not None:
+            return payload
+    return None
+
+
+def _render_summary(summary: dict[str, Any]) -> str:
+    lines = [
+        "Unified Test Summary",
+        f"Run: {summary.get('runId', '-')}",
+        f"Command: {summary.get('command', '-')}",
+        f"Status: {summary.get('finalStatus', '-')}",
+    ]
+    errors = list(summary.get("errors") or [])
+    if errors:
+        lines.append("Errors:")
+        lines.extend(str(error) for error in errors)
+
+    suite_results = list(summary.get("suiteResults") or [])
+    if suite_results:
+        lines.append("Suites:")
+        lines.extend(f"{suite.get('status', '-')}: {suite.get('suiteId', '-')}" for suite in suite_results)
+
+    return "\n".join(lines) + "\n"
+
+
+def _handle_test_summary(command_text: str, repo_root: Path, host_platform: str, options: dict) -> CommandResult:
+    metadata = _resolve_run_metadata(repo_root, options.get("run"), prefer_current=False)
+    if metadata is None:
+        return CommandResult.failure(
+            command=command_text,
+            host_platform=host_platform,
+            target=None,
+            errors=["no recorded test runs"],
+            text="no recorded test runs\n",
+        )
+
+    summary_path = repo_root / str(metadata["summaryPath"])
+    if not summary_path.is_file():
+        return CommandResult.failure(
+            command=command_text,
+            host_platform=host_platform,
+            target=metadata.get("runId"),
+            errors=["summary file is not available"],
+            text="summary file is not available\n",
+        )
+
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    return CommandResult.success(
+        command=command_text,
+        host_platform=host_platform,
+        target=summary.get("runId"),
+        payload={"summaryPath": str(summary_path.relative_to(repo_root).as_posix())},
+        text=_render_summary(summary),
+    )
+
+
+def _handle_test_watch(command_text: str, repo_root: Path, host_platform: str, options: dict) -> CommandResult:
+    metadata = _resolve_run_metadata(repo_root, options.get("run"), prefer_current=True)
+    if metadata is None:
+        return CommandResult.failure(
+            command=command_text,
+            host_platform=host_platform,
+            target=None,
+            errors=["no active or recorded test runs"],
+            text="no active or recorded test runs\n",
+        )
+
+    events_path = repo_root / str(metadata["eventsPath"])
+    if not events_path.is_file():
+        return CommandResult.failure(
+            command=command_text,
+            host_platform=host_platform,
+            target=metadata.get("runId"),
+            errors=["events file is not available"],
+            text="events file is not available\n",
+        )
+
+    events = [
+        json.loads(line)
+        for line in events_path.read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
+    return CommandResult.success(
+        command=command_text,
+        host_platform=host_platform,
+        target=metadata.get("runId"),
+        payload={"eventsPath": str(events_path.relative_to(repo_root).as_posix())},
+        text=tui_module.render_test_progress_screen(events, repo_root=repo_root),
+    )
+
+
 def _execute_legacy_command(
     legacy_command: dict,
     repo_root: Path,
@@ -213,10 +338,15 @@ def _handle_public_test_dispatch(
     command_text: str,
     manifest: dict,
     options: dict,
+    progress_callback: Callable[[dict[str, Any]], None] | None = None,
 ) -> CommandResult:
     command_id = command["id"]
     if command_id == "test-list":
         return _handle_public_test_list(command_text, host_platform, options, manifest)
+    if command_id == "test-watch":
+        return _handle_test_watch(command_text, repo_root, host_platform, options)
+    if command_id == "test-summary":
+        return _handle_test_summary(command_text, repo_root, host_platform, options)
 
     if command_id in {"test-all", "test-family-all"}:
         if options.get("strict"):
@@ -232,61 +362,144 @@ def _handle_public_test_dispatch(
                     text="invalid suites found while scanning catalog\n",
                 )
 
-        family = options.get("family")
-        items = list_public_test_suites(manifest, host_platform)
-        if family:
-            items = [item for item in items if item["family"] == family]
+    family = options.get("family")
+    items = list_public_test_suites(manifest, host_platform) if command_id in {"test-all", "test-family-all"} else []
+    if family and items:
+        items = [item for item in items if item["family"] == family]
+    if command_id == "test-family-suite":
+        items = [
+            {
+                "id": f"{options.get('family')}/{options.get('suite')}",
+                "family": options.get("family"),
+                "suite": options.get("suite"),
+                "stages": [options.get("stage", "all")],
+            }
+        ]
+    target = family or "all" if command_id in {"test-all", "test-family-all"} else f"{options.get('family')}/{options.get('suite')}"
 
-        if not items:
-            return CommandResult.failure(
-                command=command_text,
-                host_platform=host_platform,
-                target=family,
-                errors=["no matching test suites"],
-                text="no matching test suites\n",
-            )
-
-        outputs: list[str] = []
-        suite_results: list[dict] = []
-        artifacts: list[str] = []
-        for item in items:
-            session_result = _execute_public_test_session(
-                item["family"],
-                item["suite"],
-                options.get("stage", "all"),
-                repo_root,
-                host_platform,
-                f"test {item['family']} {item['suite']}",
-                manifest,
-            )
-            outputs.append(session_result.text or "")
-            suite_results.extend(session_result.suite_results)
-            artifacts.extend(session_result.artifacts)
-            if session_result.status != "ok":
-                result = CommandResult.failure(
-                    command=command_text,
-                    host_platform=host_platform,
-                    target=family or "all",
-                    errors=session_result.errors or [f"batch execution failed while running {item['id']}"],
-                    payload={"items": items, "suiteResults": suite_results, "artifacts": artifacts, "exitCode": session_result.exit_code},
-                    text="".join(outputs),
-                )
-                return _attach_session_report(result, repo_root, host_platform, command_text)
-
-        result = CommandResult.success(
+    if not items:
+        return CommandResult.failure(
             command=command_text,
             host_platform=host_platform,
-            target=family or "all",
-            payload={"items": items, "suiteResults": suite_results, "artifacts": artifacts, "exitCode": 0},
-            text="".join(outputs),
+            target=family,
+            errors=["no matching test suites"],
+            text="no matching test suites\n",
         )
-        return _attach_session_report(result, repo_root, host_platform, command_text)
 
-    family = options.get("family")
-    suite = options.get("suite")
+    run_context = reporting_module.start_session_report(
+        repo_root=repo_root,
+        host_platform=host_platform,
+        command_text=command_text,
+    )
+    session_start_event = reporting_module.build_event(
+        "session-start",
+        {
+            "runId": run_context["runId"],
+            "command": command_text,
+            "hostPlatform": host_platform,
+        },
+        run_id=run_context["runId"],
+        status="running",
+    )
+    if progress_callback is not None:
+        progress_callback(session_start_event)
+        progress_callback(
+            reporting_module.build_event(
+                "progress",
+                {
+                    "completedUnits": 0,
+                    "totalUnits": len(items),
+                    "activeUnit": items[0]["id"],
+                },
+                run_id=run_context["runId"],
+                status="running",
+            )
+        )
+
+    outputs: list[str] = []
+    suite_results: list[dict] = []
+    artifacts: list[str] = []
     stage = options.get("stage", "all")
-    session_result = _execute_public_test_session(family, suite, stage, repo_root, host_platform, command_text, manifest)
-    return _attach_session_report(session_result.to_command_result(), repo_root, host_platform, command_text)
+    for index, item in enumerate(items):
+        stage_start_event = reporting_module.build_event(
+            "stage-start",
+            {
+                "completedUnits": index,
+                "totalUnits": len(items),
+                "activeUnit": item["id"],
+            },
+            run_id=run_context["runId"],
+            suite_id=item["id"],
+            stage=stage,
+            status="running",
+        )
+        reporting_module.append_session_event(repo_root, run_context, stage_start_event)
+        if progress_callback is not None:
+            progress_callback(stage_start_event)
+
+        session_result = _execute_public_test_session(
+            item["family"],
+            item["suite"],
+            stage,
+            repo_root,
+            host_platform,
+            f"test {item['family']} {item['suite']}",
+            manifest,
+        )
+        outputs.append(session_result.text or "")
+        suite_results.extend(session_result.suite_results)
+        artifacts.extend(session_result.artifacts)
+
+        stage_finish_event = reporting_module.build_event(
+            "stage-finish",
+            {
+                "completedUnits": index + 1,
+                "totalUnits": len(items),
+                "activeUnit": item["id"],
+            },
+            run_id=run_context["runId"],
+            suite_id=item["id"],
+            stage=stage,
+            status="ok" if session_result.status == "ok" else "fail",
+        )
+        progress_event = reporting_module.build_event(
+            "progress",
+            {
+                "completedUnits": index + 1,
+                "totalUnits": len(items),
+                "activeUnit": item["id"],
+                "suiteStatus": "ok" if session_result.status == "ok" else "fail",
+            },
+            run_id=run_context["runId"],
+            suite_id=item["id"],
+            stage=stage,
+            status="ok" if session_result.status == "ok" else "fail",
+        )
+        reporting_module.append_session_event(repo_root, run_context, stage_finish_event)
+        reporting_module.append_session_event(repo_root, run_context, progress_event)
+        if progress_callback is not None:
+            progress_callback(stage_finish_event)
+            progress_callback(progress_event)
+
+        if session_result.status != "ok":
+            result = CommandResult.failure(
+                command=command_text,
+                host_platform=host_platform,
+                target=target,
+                errors=session_result.errors or [f"batch execution failed while running {item['id']}"],
+                payload={"items": items, "suiteResults": suite_results, "artifacts": artifacts, "exitCode": session_result.exit_code},
+                text="".join(outputs),
+            )
+            return _attach_session_report(result, repo_root, host_platform, command_text, run_context=run_context)
+
+    result = CommandResult.success(
+        command=command_text,
+        host_platform=host_platform,
+        target=target,
+        payload={"items": items, "suiteResults": suite_results, "artifacts": artifacts, "exitCode": 0},
+        text="".join(outputs),
+    )
+    return _attach_session_report(result, repo_root, host_platform, command_text, run_context=run_context)
 
 
 def _attach_session_report(
@@ -294,6 +507,7 @@ def _attach_session_report(
     repo_root: Path,
     host_platform: str,
     command_text: str,
+    run_context: dict[str, Any] | None = None,
 ) -> CommandResult:
     try:
         report = reporting_module.write_session_report(
@@ -305,6 +519,7 @@ def _attach_session_report(
             text=result.text or "",
             errors=list(result.errors),
             artifacts=list(result.payload.get("artifacts", [])),
+            run_context=run_context,
         )
     except OSError:
         return result
@@ -409,26 +624,12 @@ def _run_trace_compare(command: dict, repo_root: Path, host_platform: str, comma
     if export.returncode != 0:
         return _failure(command_text, host_platform, command.get("target"), "\n".join(part for part in [build_output, export_output] if part), ["trace export failed"])
 
-    if host_platform == "windows":
-        compare_args = [
-            "powershell",
-            "-NoLogo",
-            "-NoProfile",
-            "-NonInteractive",
-            "-File",
-            str(repo_root / "tests" / "contract" / "trace" / "compare-warmup-trace.ps1"),
-            "-ExpectedPath",
-            str(repo_root / command["expected_trace_path"]),
-            "-ActualPath",
-            str(trace_output),
-        ]
-    else:
-        compare_args = [
-            "sh",
-            str(repo_root / "tests" / "contract" / "trace" / "compare-warmup-trace.sh"),
-            str(repo_root / command["expected_trace_path"]),
-            str(trace_output),
-        ]
+    compare_args = [
+        sys.executable,
+        str(repo_root / "tests" / "contract" / "trace" / "compare-warmup-trace.py"),
+        str(repo_root / command["expected_trace_path"]),
+        str(trace_output),
+    ]
 
     compare = run_process(compare_args, cwd=repo_root)
     compare_output = combine_process_output(compare)
@@ -446,9 +647,18 @@ def handle(
     command_text: str,
     manifest: dict | None = None,
     options: dict | None = None,
+    progress_callback: Callable[[dict[str, Any]], None] | None = None,
 ) -> CommandResult:
-    if command["id"] in {"test-family-suite", "test-family-all", "test-all", "test-list"}:
-        return _handle_public_test_dispatch(command, repo_root, host_platform, command_text, manifest or {}, options or {})
+    if command["id"] in {"test-family-suite", "test-family-all", "test-all", "test-list", "test-watch", "test-summary"}:
+        return _handle_public_test_dispatch(
+            command,
+            repo_root,
+            host_platform,
+            command_text,
+            manifest or {},
+            options or {},
+            progress_callback=progress_callback,
+        )
 
     kind = command["kind"]
     if kind == "smoke-run":

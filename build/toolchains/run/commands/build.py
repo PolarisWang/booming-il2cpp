@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import shutil
 import sys
 from pathlib import Path
 
@@ -74,6 +75,9 @@ def _build_preset(command: dict, repo_root: Path, host_platform: str, command_te
     preset_name = command["preset"]
     binary_dir = repo_root / command["binary_dir"]
 
+    if binary_dir.exists():
+        shutil.rmtree(binary_dir)
+
     configure = run_process(["cmake", "--preset", preset_name], cwd=repo_root)
     configure_output = combine_process_output(configure)
     if configure.returncode != 0:
@@ -88,7 +92,9 @@ def _build_preset(command: dict, repo_root: Path, host_platform: str, command_te
     return _success(command_text, host_platform, command.get("target"), output, [str(binary_dir)])
 
 
-def _host_generator(host_platform: str) -> str:
+def _platform_gate_generator(preset_target: str, host_platform: str) -> str:
+    if preset_target in {"android-arm64-smoke", "ios-arm64-packaging", "linux-x64-packaging"}:
+        return "Ninja"
     if host_platform == "windows":
         return "Visual Studio 17 2022"
     if host_platform == "macos":
@@ -101,6 +107,9 @@ def _build_platform_gate(command: dict, repo_root: Path, host_platform: str, com
     toolchain_file = repo_root / command["toolchain_file"]
     preset_target = command["preset_target"]
 
+    if binary_dir.exists():
+        shutil.rmtree(binary_dir)
+
     configure_args = [
         "cmake",
         "-S",
@@ -108,7 +117,7 @@ def _build_platform_gate(command: dict, repo_root: Path, host_platform: str, com
         "-B",
         str(binary_dir),
         "-G",
-        _host_generator(host_platform),
+        _platform_gate_generator(preset_target, host_platform),
         f"-DROADMAP0_PRESET_TARGET={preset_target}",
         "-DROADMAP0_TOOLCHAIN_VALIDATE_ONLY=ON",
         f"-DCMAKE_TOOLCHAIN_FILE={toolchain_file}",

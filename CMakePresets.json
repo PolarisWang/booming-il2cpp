@@ -21,7 +21,7 @@
       "name": "macos-reference",
       "displayName": "Roadmap0 macOS Reference",
       "description": "macOS reference desktop gate subset for roadmap-0.",
-      "generator": "Xcode",
+      "generator": "Ninja",
       "binaryDir": "artifacts/presets/macos-reference",
       "toolchainFile": "build/toolchains/macos-reference.cmake",
       "cacheVariables": {

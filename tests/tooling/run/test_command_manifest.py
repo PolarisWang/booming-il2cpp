@@ -72,6 +72,8 @@ class CommandManifestTests(unittest.TestCase):
                 "test-family-all",
                 "test-all",
                 "test-list",
+                "test-watch",
+                "test-summary",
             }.issubset(command_ids)
         )
         self.assertNotIn("build-smoke-helloworld", command_ids)
@@ -92,6 +94,12 @@ class CommandManifestTests(unittest.TestCase):
         self.assertEqual("test-list", list_family["command"]["id"])
         self.assertEqual("smoke", list_family["target"])
         self.assertEqual("smoke", list_family["options"]["family"])
+
+        watch = manifest_module.parse_cli(["test", "watch"], False, manifest, "macos")
+        self.assertEqual("test-watch", watch["command"]["id"])
+
+        summary = manifest_module.parse_cli(["test", "summary"], False, manifest, "macos")
+        self.assertEqual("test-summary", summary["command"]["id"])
 
 
 if __name__ == "__main__":

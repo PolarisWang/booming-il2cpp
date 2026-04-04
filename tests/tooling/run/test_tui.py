@@ -36,11 +36,17 @@ class TuiTests(unittest.TestCase):
         entries = tui_module.build_menu_entries(manifest, "windows")
         syntaxes = [entry.syntax for entry in entries]
 
-        self.assertIn("doctor", syntaxes)
-        self.assertIn("test", syntaxes)
-        self.assertNotIn("menu", syntaxes)
-        self.assertNotIn("verify roadmap-0 --host windows", syntaxes)
-        self.assertEqual(1, sum(1 for entry in entries if entry.group_title == "Test And Verify" and entry.syntax == "test"))
+        self.assertEqual(["prepare", "build", "test", "clean", "inspect"], syntaxes)
+        self.assertEqual(
+            ["prepare-menu", "build-menu", "test-menu", "clean-menu", "inspect-menu"],
+            [entry.command["id"] for entry in entries],
+        )
+        self.assertEqual(["Prepare", "Build", "Test", "Clean", "Inspect"], [entry.group_title for entry in entries])
+        self.assertIn("workspace", entries[0].command["title"].lower())
+        self.assertIn("contracts", entries[1].command["title"].lower())
+        self.assertIn("test center", entries[2].command["title"].lower())
+        self.assertIn("artifacts", entries[3].command["title"].lower())
+        self.assertIn("catalog", entries[4].command["title"].lower())
 
     def test_jump_group_moves_between_neighbor_groups(self) -> None:
         manifest_module = load_manifest_module()
@@ -48,15 +54,76 @@ class TuiTests(unittest.TestCase):
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         entries = tui_module.build_menu_entries(manifest, "windows")
-        doctor_index = next(index for index, entry in enumerate(entries) if entry.syntax == "doctor")
+        prepare_index = next(index for index, entry in enumerate(entries) if entry.syntax == "prepare")
 
-        build_index = tui_module.jump_group(entries, doctor_index, direction=1)
+        build_index = tui_module.jump_group(entries, prepare_index, direction=1)
         test_and_verify_index = tui_module.jump_group(entries, build_index, direction=1)
         build_index_again = tui_module.jump_group(entries, test_and_verify_index, direction=-1)
 
         self.assertEqual("Build", entries[build_index].group_title)
-        self.assertEqual("Test And Verify", entries[test_and_verify_index].group_title)
+        self.assertEqual("Test", entries[test_and_verify_index].group_title)
         self.assertEqual(build_index, build_index_again)
+
+    def test_build_prepare_menu_entries_provides_curated_second_level_menu(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_prepare_menu_entries(manifest, "windows")
+
+        self.assertEqual(
+            ["doctor", "prepare", "bootstrap", "prepare-smoke", "prepare-verify-roadmap-0-windows", "menu-back"],
+            [entry.command["id"] for entry in entries],
+        )
+        self.assertEqual(["doctor", "host", "python", "smoke", "roadmap-0", "back"], [entry.syntax for entry in entries])
+        self.assertIn("wrapper", entries[2].command["title"].lower())
+        self.assertEqual("back", entries[-1].syntax)
+
+    def test_build_build_menu_entries_provides_curated_second_level_menu(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_build_menu_entries(manifest, "windows")
+
+        self.assertEqual(
+            [
+                "build-native-contract-abi",
+                "build-native-contract-bridge",
+                "build-preset-windows-x64-reference",
+                "build-platform-android-arm64-smoke",
+                "build-platform-linux-x64-packaging",
+                "menu-back",
+            ],
+            [entry.command["id"] for entry in entries],
+        )
+        self.assertEqual(["abi", "bridge", "reference", "android", "linux", "back"], [entry.syntax for entry in entries])
+        self.assertIn("this host", entries[2].command["title"].lower())
+
+    def test_build_clean_menu_entries_provides_curated_second_level_menu(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_clean_menu_entries(manifest, "windows")
+
+        self.assertEqual(["all", "smoke", "roadmap-0", "back"], [entry.syntax for entry in entries])
+        self.assertIn("temporary artifacts", entries[0].command["title"].lower())
+        self.assertEqual("menu-back", entries[-1].command["id"])
+
+    def test_build_inspect_menu_entries_provides_curated_second_level_menu(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_inspect_menu_entries(manifest, "windows")
+
+        self.assertEqual(
+            ["help", "capability", "list", "test-list", "menu-back"],
+            [entry.command["id"] for entry in entries],
+        )
+        self.assertEqual(["help", "capability", "catalog", "tests", "back"], [entry.syntax for entry in entries])
+        self.assertIn("public test suites", entries[3].command["title"].lower())
 
     def test_resolve_entry_argv_supports_dynamic_capability_target(self) -> None:
         manifest_module = load_manifest_module()
@@ -64,12 +131,26 @@ class TuiTests(unittest.TestCase):
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         capability_entry = next(
-            entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.command["id"] == "capability"
+            entry for entry in tui_module.build_inspect_menu_entries(manifest, "windows") if entry.command["id"] == "capability"
         )
 
         argv = tui_module.resolve_entry_argv(capability_entry, prompt_value_provider=lambda prompt: "bootstrap")
 
         self.assertEqual(["capability", "bootstrap"], argv)
+
+    def test_build_test_menu_entries_provides_curated_second_level_menu(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_test_menu_entries(manifest, "windows")
+
+        self.assertEqual(
+            ["test-all", "test-family-all", "test-family-suite", "test-watch", "test-summary", "test-list", "menu-back"],
+            [entry.command["id"] for entry in entries],
+        )
+        self.assertIn("test center", next(entry.command["title"] for entry in entries if entry.command["id"] == "test-all").lower())
+        self.assertEqual("back", entries[-1].syntax)
 
     def test_terminal_session_render_normalizes_newlines_on_posix(self) -> None:
         tui_module = load_tui_module()
@@ -148,6 +229,105 @@ class TuiTests(unittest.TestCase):
 
         self.assertEqual(["test", "list", "smoke"], argv)
 
+    def test_resolve_entry_argv_supports_test_watch_from_unified_test_menu(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        test_entry = next(
+            entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.syntax == "test"
+        )
+
+        argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "watch")
+
+        self.assertEqual(["test", "watch"], argv)
+
+    def test_resolve_entry_argv_supports_test_summary_from_unified_test_menu(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        test_entry = next(
+            entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.syntax == "test"
+        )
+
+        argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "summary")
+
+        self.assertEqual(["test", "summary"], argv)
+
+    def test_run_fullscreen_menu_routes_test_entry_into_second_level_menu(self) -> None:
+        tui_module = load_tui_module()
+        test_entry = tui_module.MenuEntry(
+            group_title="Validate",
+            command={"id": "test-menu", "title": "Open the unified test center"},
+            syntax="test",
+            argv=["test"],
+        )
+
+        class FakeTerminal:
+            def __init__(self) -> None:
+                self.screens: list[str] = []
+                self.keys = iter(["enter"])
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb) -> None:
+                return None
+
+            def render(self, screen: str) -> None:
+                self.screens.append(screen)
+
+            def read_key(self) -> str:
+                return next(self.keys)
+
+        fake_terminal = FakeTerminal()
+
+        with patch.object(tui_module, "build_menu_entries", return_value=[test_entry]):
+            with patch.object(tui_module, "_TerminalSession", return_value=fake_terminal):
+                with patch.object(tui_module, "run_test_submenu", return_value=["test", "all"]) as run_test_submenu:
+                    argv = tui_module.run_fullscreen_menu({"groups": [], "commands": []}, "windows")
+
+        self.assertEqual(["test", "all"], argv)
+        run_test_submenu.assert_called_once()
+        self.assertTrue(any("Workspace Control Center" in screen for screen in fake_terminal.screens))
+
+    def test_run_fullscreen_menu_routes_prepare_entry_into_second_level_menu(self) -> None:
+        tui_module = load_tui_module()
+        prepare_entry = tui_module.MenuEntry(
+            group_title="Start",
+            command={"id": "prepare-menu", "title": "Check and prepare the local host environment"},
+            syntax="prepare",
+            argv=["prepare"],
+        )
+
+        class FakeTerminal:
+            def __init__(self) -> None:
+                self.screens: list[str] = []
+                self.keys = iter(["enter"])
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb) -> None:
+                return None
+
+            def render(self, screen: str) -> None:
+                self.screens.append(screen)
+
+            def read_key(self) -> str:
+                return next(self.keys)
+
+        fake_terminal = FakeTerminal()
+
+        with patch.object(tui_module, "build_menu_entries", return_value=[prepare_entry]):
+            with patch.object(tui_module, "_TerminalSession", return_value=fake_terminal):
+                with patch.object(tui_module, "run_section_submenu", return_value=["doctor"]) as run_section_submenu:
+                    argv = tui_module.run_fullscreen_menu({"groups": [], "commands": []}, "windows")
+
+        self.assertEqual(["doctor"], argv)
+        run_section_submenu.assert_called_once_with("prepare-menu", {"groups": [], "commands": []}, "windows", terminal=fake_terminal)
+
     def test_render_test_progress_screen_consumes_event_stream(self) -> None:
         tui_module = load_tui_module()
 
@@ -162,6 +342,10 @@ class TuiTests(unittest.TestCase):
                     "payload": {"completedUnits": 1, "totalUnits": 2, "activeUnit": "case:main"},
                 },
                 {
+                    "eventType": "stage-start",
+                    "payload": {"completedUnits": 1, "totalUnits": 2, "activeUnit": "workflow/roadmap-0-macos"},
+                },
+                {
                     "eventType": "warning",
                     "payload": {"message": "catalog cache skipped"},
                 },
@@ -171,15 +355,39 @@ class TuiTests(unittest.TestCase):
                 },
                 {
                     "eventType": "final-summary",
-                    "payload": {"finalStatus": "ok", "exitCode": 0},
+                    "payload": {
+                        "finalStatus": "ok",
+                        "exitCode": 0,
+                        "summaryPath": "artifacts/logs/tests/run-1/summary.json",
+                        "eventsPath": "artifacts/logs/tests/run-1/events.jsonl",
+                        "telemetryPath": "artifacts/logs/tests/run-1/telemetry.json",
+                        "artifacts": [
+                            "artifacts/run/trace/macos-warmup-trace.runtime.json",
+                        ],
+                    },
                 },
             ]
+            ,
+            repo_root=REPO_ROOT,
         )
 
-        self.assertIn("50%", screen)
-        self.assertIn("catalog cache skipped", screen)
-        self.assertIn("artifacts/logs/tests/run-1/summary.json", screen)
-        self.assertIn("ok", screen)
+        self.assertIn("Timeline:", screen)
+        self.assertIn("Progress: \x1b[32m50%\x1b[0m", screen)
+        self.assertIn("[\x1b[32m 50%\x1b[0m] run    workflow/roadmap-0-macos", screen)
+        self.assertIn("[\x1b[32m 50%\x1b[0m] warn   catalog cache skipped", screen)
+        self.assertIn("[\x1b[32m 50%\x1b[0m] file   artifacts/logs/tests/run-1/summary.json", screen)
+        self.assertIn("[\x1b[32m 50%\x1b[0m] done   ok", screen)
+        self.assertIn("\x1b[1;33mImportant outputs:\x1b[0m", screen)
+        summary_uri = (REPO_ROOT / "artifacts/logs/tests/run-1/summary.json").resolve().as_uri()
+        self.assertIn(f"\x1b]8;;{summary_uri}\x1b\\artifacts/logs/tests/run-1/summary.json\x1b]8;;\x1b\\", screen)
+        self.assertIn("\x1b[1;36mTest report:\x1b[0m", screen)
+        self.assertIn(
+            "\x1b[1;36mPerformance / telemetry:\x1b[0m",
+            screen,
+        )
+        self.assertIn("\x1b[1;36mArtifacts (2):\x1b[0m", screen)
+        artifact_uri = (REPO_ROOT / "artifacts/logs/tests/run-1/summary.json").resolve().as_uri()
+        self.assertIn(f"  1. \x1b]8;;{artifact_uri}\x1b\\artifacts/logs/tests/run-1/summary.json\x1b]8;;\x1b\\", screen)
 
 
 if __name__ == "__main__":

@@ -91,6 +91,72 @@ class TuiRoutingTests(unittest.TestCase):
         self.assertEqual(0, exit_code)
         self.assertEqual('{"eventType":"progress"}\n{"eventType":"final-summary"}\n', stdout.getvalue())
 
+    def test_interactive_test_command_renders_runtime_progress_screen(self) -> None:
+        run_module = load_run_module()
+        stdout = io.StringIO()
+
+        def fake_handle(command, repo_root, host_platform, command_text, manifest, options, progress_callback=None):
+            del command, repo_root, host_platform, command_text, manifest, options
+            assert progress_callback is not None
+            progress_callback(
+                {
+                    "eventType": "session-start",
+                    "payload": {"command": "test all"},
+                }
+            )
+            progress_callback(
+                {
+                    "eventType": "progress",
+                    "payload": {"completedUnits": 0, "totalUnits": 4, "activeUnit": "smoke/HelloWorld"},
+                }
+            )
+            progress_callback(
+                {
+                    "eventType": "stage-start",
+                    "payload": {"completedUnits": 0, "totalUnits": 4, "activeUnit": "smoke/HelloWorld"},
+                }
+            )
+            progress_callback(
+                {
+                    "eventType": "progress",
+                    "payload": {"completedUnits": 1, "totalUnits": 4, "activeUnit": "smoke/HelloWorld", "suiteStatus": "ok"},
+                }
+            )
+            return run_module.CommandResult.success(
+                command="test all",
+                host_platform="macos",
+                target="all",
+                payload={
+                    "summaryPath": "artifacts/logs/tests/run-1/summary.json",
+                    "eventsPath": "artifacts/logs/tests/run-1/events.jsonl",
+                    "sessionPath": "artifacts/logs/tests/run-1/session.json",
+                    "telemetryPath": "artifacts/logs/tests/run-1/telemetry.json",
+                    "artifacts": [
+                        "artifacts/run/trace/macos-warmup-trace.runtime.json",
+                    ],
+                },
+                text="final output\n",
+            )
+
+        with patch.object(run_module.manifest_module, "is_interactive_session", return_value=True):
+            with patch.object(run_module.runtime_module, "detect_host_platform", return_value="macos-arm64"):
+                with patch.object(run_module.test_commands, "handle", side_effect=fake_handle):
+                    with patch.object(run_module.sys, "stdout", stdout):
+                        exit_code = run_module.main(["test", "all"])
+
+        self.assertEqual(0, exit_code)
+        self.assertIn("Unified Test Progress", stdout.getvalue())
+        self.assertIn("[\x1b[32m  0%\x1b[0m] queued smoke/HelloWorld", stdout.getvalue())
+        self.assertIn("[\x1b[32m 25%\x1b[0m] ok     smoke/HelloWorld", stdout.getvalue())
+        self.assertIn("final output", stdout.getvalue())
+        self.assertIn("\x1b[1;33mImportant outputs:\x1b[0m", stdout.getvalue())
+        self.assertIn("\x1b[1;36mTest report:\x1b[0m", stdout.getvalue())
+        self.assertIn("\x1b]8;;file://", stdout.getvalue())
+        self.assertIn("artifacts/logs/tests/run-1/summary.json\x1b]8;;\x1b\\", stdout.getvalue())
+        self.assertIn("\x1b[1;36mArtifacts (1):\x1b[0m", stdout.getvalue())
+        self.assertIn("artifacts/run/trace/macos-warmup-trace.runtime.json\x1b]8;;\x1b\\", stdout.getvalue())
+        self.assertNotIn("\x1b[2J", stdout.getvalue())
+
 
 if __name__ == "__main__":
     unittest.main()
