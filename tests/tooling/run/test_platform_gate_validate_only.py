@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import platform
 import shutil
 import subprocess
 import sys
@@ -28,7 +29,7 @@ def load_module(path: Path, module_name: str):
     return module
 
 
-@unittest.skipUnless(subprocess.run(["uname"], capture_output=True, text=True).stdout.strip() == "Darwin", "macOS only")
+@unittest.skipUnless(platform.system() == "Darwin", "macOS only")
 class PlatformGateValidateOnlyTests(unittest.TestCase):
     def test_macos_reference_preset_configures_with_repo_preset(self) -> None:
         shutil.rmtree(REPO_ROOT / "artifacts" / "presets" / "macos-reference", ignore_errors=True)
@@ -87,7 +88,7 @@ class PlatformGateValidateOnlyTests(unittest.TestCase):
 
         self.assertEqual("ok", linux_result.status)
         configure_args = run_process_mock.call_args_list[0].args[0]
-        self.assertIn("Ninja", configure_args)
+        self.assertIn("Xcode", configure_args)
 
         with patch.object(build_module, "run_process", return_value=completed) as run_process_mock:
             ios_result = build_module.handle(
@@ -106,7 +107,7 @@ class PlatformGateValidateOnlyTests(unittest.TestCase):
 
         self.assertEqual("ok", ios_result.status)
         configure_args = run_process_mock.call_args_list[0].args[0]
-        self.assertIn("Ninja", configure_args)
+        self.assertIn("Xcode", configure_args)
 
 
 if __name__ == "__main__":

@@ -81,27 +81,6 @@ class TuiTests(unittest.TestCase):
         self.assertIn("检查并初始化", entries[1].command["title"])
         self.assertEqual("back", entries[-1].syntax)
 
-    def test_build_build_menu_entries_provides_curated_second_level_menu(self) -> None:
-        manifest_module = load_manifest_module()
-        tui_module = load_tui_module()
-        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
-
-        entries = tui_module.build_build_menu_entries(manifest, "windows")
-
-        self.assertEqual(
-            [
-                "build-native-contract-abi",
-                "build-native-contract-bridge",
-                "build-preset-windows-x64-reference",
-                "build-platform-android-arm64-smoke",
-                "build-platform-linux-x64-packaging",
-                "menu-back",
-            ],
-            [entry.command["id"] for entry in entries],
-        )
-        self.assertEqual(["abi", "bridge", "reference", "android", "linux", "back"], [entry.syntax for entry in entries])
-        self.assertIn("当前主机", entries[2].command["title"])
-
     def test_build_clean_menu_entries_provides_curated_second_level_menu(self) -> None:
         manifest_module = load_manifest_module()
         tui_module = load_tui_module()
@@ -212,6 +191,8 @@ class TuiTests(unittest.TestCase):
 
         self.assertIn("工作区控制中心", screen)
         self.assertNotIn("\x1b[2J\x1b[H", screen)
+        self.assertIn("日志区 / 当前工作区", screen)
+        self.assertNotIn("上方为运行日志，下方为当前菜单", screen)
 
     def test_render_menu_screen_highlights_headers_and_chinese_descriptions(self) -> None:
         tui_module = load_tui_module()
@@ -235,6 +216,28 @@ class TuiTests(unittest.TestCase):
         self.assertIn("\x1b[1;33m统一测试入口\x1b[0m", screen)
         self.assertIn("\x1b[1;36m查看结果\x1b[0m", screen)
         self.assertIn("\x1b[32m1/1\x1b[0m", screen)
+        self.assertIn("\x1b[1;7m> watch", screen)
+
+    def test_render_menu_screen_keeps_section_title_bold(self) -> None:
+        tui_module = load_tui_module()
+        entries = [
+            tui_module.MenuEntry(
+                group_title="平台校验",
+                command={"id": "build-platform-linux-x64-packaging", "title": "校验 Linux 打包路由"},
+                syntax="linux",
+                argv=["build", "platform", "linux-x64-packaging"],
+            )
+        ]
+
+        screen = tui_module.render_menu_screen(
+            entries,
+            0,
+            title="构建中心",
+            help_text="方向键选择，Enter 继续，Back 返回上级，q/Esc 返回主菜单。",
+            fullscreen=False,
+        )
+
+        self.assertIn("\x1b[1;33m构建中心\x1b[0m", screen)
 
     def test_render_menu_screen_keeps_selected_chinese_row_within_terminal_width(self) -> None:
         tui_module = load_tui_module()
@@ -256,7 +259,7 @@ class TuiTests(unittest.TestCase):
                 fullscreen=False,
             )
 
-        selected_line = next(line for line in screen.splitlines() if "\x1b[7m" in line)
+        selected_line = next(line for line in screen.splitlines() if "\x1b[1;7m" in line)
         plain_line = re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", selected_line)
         self.assertLessEqual(tui_module._display_width(plain_line), 30)
 
@@ -529,6 +532,83 @@ class TuiTests(unittest.TestCase):
         smoke_uri = (REPO_ROOT / "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll").resolve().as_uri()
         self.assertIn(f"  1. \x1b]8;;{smoke_uri}\x1b\\artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll\x1b]8;;\x1b\\", screen)
         self.assertIn(f"  1. \x1b]8;;{other_uri}\x1b\\artifacts/logs/tests/run-1/summary.json\x1b]8;;\x1b\\", screen)
+
+    def test_render_operation_progress_screen_consumes_event_stream(self) -> None:
+        tui_module = load_tui_module()
+
+        screen = tui_module.render_operation_progress_screen(
+            [
+                {
+                    "eventType": "session-start",
+                    "payload": {"command": "prepare"},
+                },
+                {
+                    "eventType": "stage-start",
+                    "payload": {"completedUnits": 0, "totalUnits": 3, "activeUnit": "doctor"},
+                },
+                {
+                    "eventType": "progress",
+                    "payload": {"completedUnits": 1, "totalUnits": 3, "activeUnit": "doctor", "suiteStatus": "ok"},
+                },
+                {
+                    "eventType": "stage-start",
+                    "payload": {"completedUnits": 1, "totalUnits": 3, "activeUnit": "build native-contract abi"},
+                },
+                {
+                    "eventType": "artifact",
+                    "payload": {"completedUnits": 2, "totalUnits": 3, "activeUnit": "build native-contract abi", "path": "artifacts/run/native-contract-abi"},
+                },
+                {
+                    "eventType": "final-summary",
+                    "payload": {
+                        "finalStatus": "ok",
+                        "exitCode": 0,
+                        "summaryPath": "artifacts/logs/run/run-1/summary.json",
+                        "eventsPath": "artifacts/logs/run/run-1/events.jsonl",
+                        "consolePath": "artifacts/logs/run/run-1/console.log",
+                        "telemetryPath": "artifacts/logs/run/run-1/telemetry.json",
+                        "importantOutputs": [{"label": "Prepare state", "path": "artifacts/run/prepare/global.json"}],
+                        "artifacts": ["artifacts/run/native-contract-abi", "artifacts/run/prepare/global.json"],
+                    },
+                },
+            ],
+            repo_root=REPO_ROOT,
+        )
+
+        self.assertIn("Unified Run Progress", screen)
+        self.assertIn("Progress: \x1b[32m66%\x1b[0m", screen)
+        self.assertIn("[\x1b[32m 33%\x1b[0m] ok     doctor", screen)
+        self.assertIn("[\x1b[32m 33%\x1b[0m] run    build native-contract abi", screen)
+        self.assertIn("\x1b[1;33mImportant outputs:\x1b[0m", screen)
+        summary_uri = (REPO_ROOT / "artifacts/logs/run/run-1/summary.json").resolve().as_uri()
+        self.assertIn(f"\x1b]8;;{summary_uri}\x1b\\artifacts/logs/run/run-1/summary.json\x1b]8;;\x1b\\", screen)
+        self.assertIn("\x1b[1;36mPrepare state:\x1b[0m", screen)
+        self.assertIn("\x1b[1;36mArtifacts (2):\x1b[0m", screen)
+
+    def test_build_build_menu_entries_provides_curated_second_level_menu(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_build_menu_entries(manifest, "windows")
+
+        self.assertEqual(
+            [
+                "build-all",
+                "build-native-contract-abi",
+                "build-native-contract-bridge",
+                "build-preset-windows-x64-reference",
+                "build-platform-android-arm64-smoke",
+                "build-platform-linux-x64-packaging",
+                "menu-back",
+            ],
+            [entry.command["id"] for entry in entries],
+        )
+        self.assertEqual(["all", "abi", "bridge", "windows", "android", "linux", "back"], [entry.syntax for entry in entries])
+        self.assertIn("全量构建", entries[0].command["title"])
+        self.assertIn("Windows", entries[3].command["title"])
+        self.assertEqual("校验 Android 启动 smoke 路由", entries[4].command["title"])
+        self.assertEqual("校验 Linux 打包路由", entries[5].command["title"])
 
 
 if __name__ == "__main__":

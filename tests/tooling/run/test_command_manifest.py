@@ -63,6 +63,7 @@ class CommandManifestTests(unittest.TestCase):
 
         self.assertTrue(
             {
+                "build-all",
                 "build-native-contract-abi",
                 "build-native-contract-bridge",
                 "build-preset-windows-x64-reference",

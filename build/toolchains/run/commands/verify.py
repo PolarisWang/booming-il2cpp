@@ -2,20 +2,61 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
+from typing import Any, Callable
 
 try:
     from .. import tooling as tooling_module
     from ..common import combine_process_output, run_process
     from ..result import CommandResult
+    from ..testing.events import build_event
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     import tooling as tooling_module
     from common import combine_process_output, run_process
     from result import CommandResult
+    from testing.events import build_event
 
 
-def handle(command: dict, repo_root: Path, host_platform: str, command_text: str) -> CommandResult:
+def _emit_event(
+    progress_callback: Callable[[dict[str, Any]], None] | None,
+    *,
+    event_type: str,
+    completed: int,
+    total: int,
+    active_unit: str,
+    step_status: str | None = None,
+    path: str | None = None,
+) -> None:
+    if progress_callback is None:
+        return
+
+    payload: dict[str, Any] = {
+        "completedUnits": completed,
+        "totalUnits": total,
+        "activeUnit": active_unit,
+    }
+    if step_status is not None:
+        payload["suiteStatus"] = step_status
+    if path is not None:
+        payload["path"] = path
+
+    progress_callback(
+        build_event(
+            event_type,
+            payload,
+            status=step_status or "running",
+        )
+    )
+
+
+def handle(
+    command: dict,
+    repo_root: Path,
+    host_platform: str,
+    command_text: str,
+    progress_callback: Callable[[dict[str, Any]], None] | None = None,
+) -> CommandResult:
     bootstrap = tooling_module.ensure_dotnet_available(command_text, host_platform)
     if not bootstrap.ready:
         message = bootstrap.output if bootstrap.output.endswith("\n") else bootstrap.output + "\n"
@@ -24,6 +65,7 @@ def handle(command: dict, repo_root: Path, host_platform: str, command_text: str
             host_platform=host_platform,
             target=command.get("target"),
             errors=bootstrap.errors,
+            payload={"artifacts": [], "importantOutputs": [], "consoleText": bootstrap.output},
             text=message,
         )
 
@@ -34,6 +76,7 @@ def handle(command: dict, repo_root: Path, host_platform: str, command_text: str
             host_platform=host_platform,
             target=command.get("target"),
             errors=["cmake not found"],
+            payload={"artifacts": [], "importantOutputs": [], "consoleText": "cmake not found\n"},
             text="cmake not found\n",
         )
 
@@ -57,9 +100,11 @@ def handle(command: dict, repo_root: Path, host_platform: str, command_text: str
             "macos",
         ]
 
+    _emit_event(progress_callback, event_type="stage-start", completed=0, total=1, active_unit=f"verify {host_profile}")
     completed = run_process(arguments, cwd=repo_root, env=cmake_env)
     output = "\n".join(part for part in [bootstrap.output.strip(), combine_process_output(completed)] if part)
     if completed.returncode != 0:
+        _emit_event(progress_callback, event_type="progress", completed=0, total=1, active_unit=f"verify {host_profile}", step_status="fail")
         message = output if output else "verify roadmap-0 failed"
         if message and not message.endswith("\n"):
             message += "\n"
@@ -68,13 +113,21 @@ def handle(command: dict, repo_root: Path, host_platform: str, command_text: str
             host_platform=host_platform,
             target=host_profile,
             errors=["verify roadmap-0 failed"],
-            text=message,
+            payload={"artifacts": [], "importantOutputs": [], "consoleText": output},
+            text="Run failed: " + command_text + "\n- verify roadmap-0 failed\n",
         )
 
+    artifact_path = str(repo_root / "artifacts" / "verify-roadmap-0" / host_profile)
+    _emit_event(progress_callback, event_type="progress", completed=1, total=1, active_unit=f"verify {host_profile}", step_status="ok")
+    _emit_event(progress_callback, event_type="artifact", completed=1, total=1, active_unit=f"verify {host_profile}", path=artifact_path)
     return CommandResult.success(
         command=command_text,
         host_platform=host_platform,
         target=host_profile,
-        payload={"artifacts": [str(repo_root / "artifacts" / "verify-roadmap-0" / host_profile)]},
-        text=(output + "\n") if output else "",
+        payload={
+            "artifacts": [artifact_path],
+            "importantOutputs": [],
+            "consoleText": output,
+        },
+        text=f"Run completed: {command_text}\n",
     )

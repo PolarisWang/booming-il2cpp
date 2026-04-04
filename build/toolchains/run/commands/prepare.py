@@ -3,11 +3,13 @@ from __future__ import annotations
 import itertools
 import sys
 from pathlib import Path
+from typing import Any, Callable
 
 try:
     from ..common import write_json
     from ..result import CommandResult
     from .. import manifest as manifest_module
+    from ..testing.events import build_event
     from . import doctor as doctor_commands
     from . import build as build_commands
     from . import test as test_commands
@@ -18,6 +20,7 @@ except ImportError:
     from common import write_json
     from result import CommandResult
     import manifest as manifest_module
+    from testing.events import build_event
     from commands import doctor as doctor_commands
     from commands import build as build_commands
     from commands import test as test_commands
@@ -168,50 +171,136 @@ def resolve_clean_paths(repo_root: Path, scope: str) -> list[Path]:
     raise KeyError(f"unknown clean scope: {scope}")
 
 
-def handle(command: dict, repo_root: Path, host_platform: str, command_text: str, manifest: dict) -> CommandResult:
+def _emit_event(
+    progress_callback: Callable[[dict[str, Any]], None] | None,
+    *,
+    event_type: str,
+    completed: int,
+    total: int,
+    active_unit: str,
+    step_status: str | None = None,
+    path: str | None = None,
+) -> None:
+    if progress_callback is None:
+        return
+
+    payload: dict[str, Any] = {
+        "completedUnits": completed,
+        "totalUnits": total,
+        "activeUnit": active_unit,
+    }
+    if step_status is not None:
+        payload["suiteStatus"] = step_status
+    if path is not None:
+        payload["path"] = path
+
+    progress_callback(
+        build_event(
+            event_type,
+            payload,
+            status=step_status or "running",
+        )
+    )
+
+
+def _summary_text(command_text: str, scope: str, executed: list[str], *, cached: bool = False) -> str:
+    lines = [f"Run completed: {command_text}", f"Prepare scope: {scope}"]
+    if cached:
+        lines.append("Cache: reused existing prepared state")
+    elif executed:
+        lines.append(f"Executed steps ({len(executed)}):")
+        lines.extend(f"{index}. {step}" for index, step in enumerate(executed, start=1))
+    return "\n".join(lines) + "\n"
+
+
+def handle(
+    command: dict,
+    repo_root: Path,
+    host_platform: str,
+    command_text: str,
+    manifest: dict,
+    progress_callback: Callable[[dict[str, Any]], None] | None = None,
+) -> CommandResult:
     scope = resolve_prepare_scope(command["id"])
-    outputs: list[str] = []
+    console_outputs: list[str] = []
+    artifacts: list[str] = []
+    important_outputs: list[dict[str, str]] = []
+    plan_steps = _prepare_plan(scope, host_platform)
+    total_units = len(plan_steps) + (1 if command["id"] == "prepare" else 0)
+    completed_units = 0
 
     if command["id"] == "prepare":
+        _emit_event(progress_callback, event_type="stage-start", completed=completed_units, total=total_units, active_unit="doctor")
         doctor_result = doctor_commands.handle(repo_root, host_platform, "doctor")
         if doctor_result.text:
-            outputs.append(doctor_result.text)
+            console_outputs.append(doctor_result.payload.get("consoleText", doctor_result.text))
         if doctor_result.status != "ok":
+            _emit_event(progress_callback, event_type="progress", completed=completed_units, total=total_units, active_unit="doctor", step_status="fail")
             return CommandResult.failure(
                 command=command_text,
                 host_platform=host_platform,
                 target=scope,
                 errors=doctor_result.errors or ["prepare failed during preflight doctor check"],
-                payload={"prepareScope": scope, "preparedCommands": []},
-                text="".join(outputs),
+                payload={
+                    "prepareScope": scope,
+                    "preparedCommands": [],
+                    "artifacts": [],
+                    "importantOutputs": [],
+                    "consoleText": "\n".join(part for part in console_outputs if part),
+                },
+                text=f"Run failed: {command_text}\n- prepare failed during preflight doctor check\n",
             )
+        completed_units += 1
+        _emit_event(progress_callback, event_type="progress", completed=completed_units, total=total_units, active_unit="doctor", step_status="ok")
 
     state_path = prepare_state_path(repo_root, scope)
     if state_path.is_file():
+        artifacts.append(str(state_path))
+        important_outputs.append({"label": "Prepare state", "path": str(state_path)})
+        _emit_event(progress_callback, event_type="artifact", completed=completed_units, total=total_units, active_unit="prepare-state", path=str(state_path))
         return CommandResult.success(
             command=command_text,
             host_platform=host_platform,
             target=scope,
-            payload={"prepareScope": scope, "preparedCommands": [], "cached": True},
-            text="".join(outputs) + f"prepare scope '{scope}' already available\n",
+            payload={
+                "prepareScope": scope,
+                "preparedCommands": [],
+                "cached": True,
+                "artifacts": artifacts,
+                "importantOutputs": important_outputs,
+                "consoleText": "\n".join(part for part in console_outputs if part),
+            },
+            text=_summary_text(command_text, scope, [], cached=True),
         )
 
-    plan_steps = _prepare_plan(scope, host_platform)
     executed: list[str] = []
 
     for step_argv in plan_steps:
         step_text, result = _execute_prepare_step(step_argv, repo_root, host_platform, manifest)
-        outputs.append(result.text or "")
+        _emit_event(progress_callback, event_type="stage-start", completed=completed_units, total=total_units, active_unit=step_text)
+        console_outputs.append(str(result.payload.get("consoleText", result.text or "")))
         if result.status != "ok":
+            _emit_event(progress_callback, event_type="progress", completed=completed_units, total=total_units, active_unit=step_text, step_status="fail")
             return CommandResult.failure(
                 command=command_text,
                 host_platform=host_platform,
                 target=scope,
                 errors=[f"prepare failed while executing {step_text}"],
-                payload={"prepareScope": scope, "preparedCommands": executed},
-                text="".join(outputs),
+                payload={
+                    "prepareScope": scope,
+                    "preparedCommands": executed,
+                    "artifacts": artifacts,
+                    "importantOutputs": important_outputs,
+                    "consoleText": "\n".join(part for part in console_outputs if part),
+                },
+                text=f"Run failed: {command_text}\n- prepare failed while executing {step_text}\n",
             )
         executed.append(step_text)
+        completed_units += 1
+        _emit_event(progress_callback, event_type="progress", completed=completed_units, total=total_units, active_unit=step_text, step_status="ok")
+        for artifact in list(result.payload.get("artifacts", [])):
+            artifacts.append(str(artifact))
+            _emit_event(progress_callback, event_type="artifact", completed=completed_units, total=total_units, active_unit=step_text, path=str(artifact))
 
     write_json(
         state_path,
@@ -221,11 +310,21 @@ def handle(command: dict, repo_root: Path, host_platform: str, command_text: str
             "preparedCommands": executed,
         },
     )
+    artifacts.append(str(state_path))
+    important_outputs.append({"label": "Prepare state", "path": str(state_path)})
+    _emit_event(progress_callback, event_type="artifact", completed=completed_units, total=total_units, active_unit="prepare-state", path=str(state_path))
 
     return CommandResult.success(
         command=command_text,
         host_platform=host_platform,
         target=scope,
-        payload={"prepareScope": scope, "preparedCommands": executed, "cached": False},
-        text="".join(outputs) if outputs else f"prepare scope '{scope}' completed\n",
+        payload={
+            "prepareScope": scope,
+            "preparedCommands": executed,
+            "cached": False,
+            "artifacts": artifacts,
+            "importantOutputs": important_outputs,
+            "consoleText": "\n".join(part for part in console_outputs if part),
+        },
+        text=_summary_text(command_text, scope, executed),
     )

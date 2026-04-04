@@ -6,7 +6,6 @@ import sys
 import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
-from urllib.parse import quote
 from typing import Any, Callable
 
 if __package__ in (None, ""):
@@ -29,6 +28,7 @@ ANSI_GREEN = "\x1b[32m"
 ANSI_BOLD_YELLOW = "\x1b[1;33m"
 ANSI_BOLD_CYAN = "\x1b[1;36m"
 ANSI_BRIGHT_WHITE = "\x1b[97m"
+ANSI_BOLD_BRIGHT_WHITE = "\x1b[1;97m"
 ANSI_BRIGHT_BLACK = "\x1b[90m"
 ANSI_RESET = "\x1b[0m"
 
@@ -60,7 +60,7 @@ PRIMARY_MENU_ENTRIES = [
         "id": "build-menu",
         "group_title": "构建产物",
         "syntax": "build",
-        "title": "构建运行时契约、参考预设与平台路由产物",
+        "title": "构建运行时契约、主机预设与平台校验产物",
     },
     {
         "id": "test-menu",
@@ -89,6 +89,18 @@ SECTION_MENU_HELP = "方向键选择，Enter 继续，Back 返回上级，q/Esc 
 
 @dataclass(frozen=True)
 class TestProgressView:
+    command: str
+    progress_text: str
+    final_status: str
+    history_lines: list[str]
+    important_lines: list[str]
+    artifact_lines: list[str]
+    artifact_count: int
+    errors: list[str]
+
+
+@dataclass(frozen=True)
+class OperationProgressView:
     command: str
     progress_text: str
     final_status: str
@@ -131,25 +143,6 @@ def build_prepare_menu_entries(manifest: dict[str, Any], host_platform: str) -> 
     )
 
 
-def build_build_menu_entries(manifest: dict[str, Any], host_platform: str) -> list[MenuEntry]:
-    preset_by_host = {
-        "windows": "build-preset-windows-x64-reference",
-        "macos": "build-preset-macos-reference",
-    }
-    return _build_curated_submenu_entries(
-        manifest,
-        host_platform,
-        [
-            ("契约构建", "build-native-contract-abi", "abi", "构建原生 ABI 契约 smoke 目标"),
-            ("契约构建", "build-native-contract-bridge", "bridge", "构建原生 bridge 契约 smoke 目标"),
-            ("参考预设", preset_by_host.get(host_platform), "reference", "构建当前主机对应的参考预设"),
-            ("平台路由", "build-platform-android-arm64-smoke", "android", "验证 Android 平台路由"),
-            ("平台路由", "build-platform-ios-arm64-packaging", "ios", "验证 iOS 平台路由"),
-            ("平台路由", "build-platform-linux-x64-packaging", "linux", "验证 Linux 平台路由"),
-        ],
-    )
-
-
 def build_clean_menu_entries(manifest: dict[str, Any], host_platform: str) -> list[MenuEntry]:
     return _build_curated_submenu_entries(
         manifest,
@@ -158,6 +151,30 @@ def build_clean_menu_entries(manifest: dict[str, Any], host_platform: str) -> li
             ("清理范围", "clean", "all", "清理统一入口产生的全部托管输出与缓存产物"),
             ("清理范围", "clean-smoke", "smoke", "只清理 smoke 测试相关输出"),
             ("清理范围", f"clean-verify-roadmap0-{host_platform}", "roadmap-0", "清理当前主机的 roadmap-0 验证输出"),
+        ],
+    )
+
+
+def build_build_menu_entries(manifest: dict[str, Any], host_platform: str) -> list[MenuEntry]:
+    preset_by_host = {
+        "windows": ("build-preset-windows-x64-reference", "windows", "构建当前主机的 Windows 参考预设"),
+        "macos": ("build-preset-macos-reference", "macos", "构建当前主机的 macOS 参考预设"),
+    }
+    preset_command_id, preset_syntax, preset_title = preset_by_host.get(
+        host_platform,
+        (None, "reference", "构建当前主机参考预设"),
+    )
+    return _build_curated_submenu_entries(
+        manifest,
+        host_platform,
+        [
+            ("快速构建", "build-all", "all", "执行当前主机推荐的全量构建批次"),
+            ("契约构建", "build-native-contract-abi", "abi", "构建原生 ABI 契约 smoke 目标"),
+            ("契约构建", "build-native-contract-bridge", "bridge", "构建原生 bridge 契约 smoke 目标"),
+            ("主机参考", preset_command_id, preset_syntax, preset_title),
+            ("平台校验", "build-platform-android-arm64-smoke", "android", "校验 Android 启动 smoke 路由"),
+            ("平台校验", "build-platform-ios-arm64-packaging", "ios", "校验 iOS 打包路由"),
+            ("平台校验", "build-platform-linux-x64-packaging", "linux", "校验 Linux 打包路由"),
         ],
     )
 
@@ -639,6 +656,8 @@ def render_menu_screen(
         _style_menu_counter(_trim(f"{selection + 1}/{len(entries)}", width)),
         "",
     ]
+    if not fullscreen:
+        header = _build_inline_workspace_header(width) + header
 
     body: list[str] = []
     for row in visible_rows:
@@ -652,7 +671,7 @@ def render_menu_screen(
         title = _trim(entry.command["title"], max(0, width - len(prefix) - syntax_width - 2))
         line = _trim(f"{prefix}{syntax}  {title}", width)
         if row["entry_index"] == selection:
-            body.append(f"\x1b[7m{_pad(line, width)}\x1b[0m")
+            body.append(f"\x1b[1;7m{_pad(line, width)}\x1b[0m")
         else:
             body.append(f"{prefix}{_style_menu_syntax(syntax)}  {_style_menu_command_title(title)}")
 
@@ -675,6 +694,36 @@ def render_test_progress_screen(events: list[dict[str, Any]], repo_root: Path | 
         "Timeline:",
     ]
     lines.extend(view.history_lines or ["[  0%] waiting for test events"])
+
+    if view.important_lines:
+        lines.append("")
+        lines.append(_highlight_heading("Important outputs:"))
+        lines.extend(view.important_lines)
+
+    if view.artifact_lines:
+        lines.append("")
+        lines.append(_highlight_label(f"Artifacts ({view.artifact_count}):"))
+        lines.extend(view.artifact_lines)
+
+    if view.errors:
+        lines.append("")
+        lines.append("Errors:")
+        lines.extend(view.errors)
+
+    return "\n".join(lines) + "\n"
+
+
+def render_operation_progress_screen(events: list[dict[str, Any]], repo_root: Path | None = None) -> str:
+    view = build_operation_progress_view(events, repo_root=repo_root)
+    lines = [
+        "Unified Run Progress",
+        f"Command: {view.command or '-'}",
+        f"Status: {view.final_status}",
+        f"Progress: {_green(view.progress_text)}",
+        "",
+        "Timeline:",
+    ]
+    lines.extend(view.history_lines or ["[  0%] waiting for run events"])
 
     if view.important_lines:
         lines.append("")
@@ -786,8 +835,115 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
     )
 
 
+def build_operation_progress_view(events: list[dict[str, Any]], repo_root: Path | None = None) -> OperationProgressView:
+    command = ""
+    progress_text = "0%"
+    final_status = "running"
+    history_lines: list[str] = []
+    important_lines: list[str] = []
+    collected_artifacts: list[str] = []
+    errors: list[str] = []
+    seen_history: set[str] = set()
+    seen_important: set[tuple[str, str]] = set()
+    seen_artifacts: set[str] = set()
+
+    for event in events:
+        event_type = str(event.get("eventType") or "")
+        payload = event.get("payload") or {}
+        progress_text = _resolve_progress_text(progress_text, payload)
+
+        if event_type == "session-start":
+            command = str(payload.get("command") or command)
+            _append_unique(history_lines, seen_history, f"[{_format_progress_label(progress_text)}] start  {command or '-'}")
+            continue
+
+        if event_type == "progress":
+            active_unit = payload.get("activeUnit")
+            step_status = payload.get("suiteStatus")
+            if active_unit and step_status:
+                _append_unique(
+                    history_lines,
+                    seen_history,
+                    f"[{_format_progress_label(progress_text)}] {str(step_status):<6} {str(active_unit)}",
+                )
+            elif active_unit:
+                _append_unique(
+                    history_lines,
+                    seen_history,
+                    f"[{_format_progress_label(progress_text)}] queued {str(active_unit)}",
+                )
+            continue
+
+        if event_type == "stage-start":
+            active_unit = payload.get("activeUnit")
+            if active_unit:
+                _append_unique(
+                    history_lines,
+                    seen_history,
+                    f"[{_format_progress_label(progress_text)}] run    {str(active_unit)}",
+                )
+            continue
+
+        if event_type == "warning":
+            message = payload.get("message")
+            if message:
+                _append_unique(
+                    history_lines,
+                    seen_history,
+                    f"[{_format_progress_label(progress_text)}] warn   {str(message)}",
+                )
+            continue
+
+        if event_type == "artifact":
+            path = payload.get("path")
+            if path:
+                _append_unique(
+                    history_lines,
+                    seen_history,
+                    f"[{_format_progress_label(progress_text)}] file   {str(path)}",
+                )
+                _append_grouped_artifact_values(collected_artifacts, seen_artifacts, str(path))
+            continue
+
+        if event_type == "final-summary":
+            final_status = str(payload.get("finalStatus") or final_status)
+            _append_unique(history_lines, seen_history, f"[{_format_progress_label(progress_text)}] done   {final_status}")
+            errors.extend(str(error) for error in list(payload.get("errors") or []))
+            important_lines.extend(build_operation_highlight_lines(payload, repo_root=repo_root, seen=seen_important))
+            for artifact in list(payload.get("artifacts") or []):
+                _append_grouped_artifact_values(collected_artifacts, seen_artifacts, artifact)
+
+    artifact_lines = build_artifact_lines({"artifacts": collected_artifacts}, repo_root=repo_root)
+
+    return OperationProgressView(
+        command=command,
+        progress_text=progress_text,
+        final_status=final_status,
+        history_lines=history_lines,
+        important_lines=important_lines,
+        artifact_lines=artifact_lines,
+        artifact_count=len(seen_artifacts),
+        errors=errors,
+    )
+
+
 def render_test_report_highlights(payload: dict[str, Any], repo_root: Path | None = None) -> str:
     important_lines = build_test_report_highlight_lines(payload, repo_root=repo_root)
+    artifact_lines = build_artifact_lines(payload, repo_root=repo_root)
+    if not important_lines and not artifact_lines:
+        return ""
+    lines = [_highlight_heading("Important outputs:")]
+    lines.extend(important_lines)
+    if artifact_lines:
+        lines.append("")
+        artifact_count = len(list(payload.get("artifacts") or []))
+        lines.append(_highlight_label(f"Artifacts ({artifact_count}):"))
+        lines.extend(artifact_lines)
+    return "\n".join(lines) + "\n"
+
+
+def render_operation_report_highlights(payload: dict[str, Any], repo_root: Path | None = None) -> str:
+    important_lines = build_operation_highlight_lines(payload, repo_root=repo_root)
     artifact_lines = build_artifact_lines(payload, repo_root=repo_root)
     if not important_lines and not artifact_lines:
         return ""
@@ -814,6 +970,28 @@ def build_test_report_highlight_lines(
     _append_important_line(lines, seen, "Session record", payload.get("sessionPath"), repo_root=repo_root)
     _append_important_line(lines, seen, "Console log", payload.get("consolePath"), repo_root=repo_root)
     _append_important_line(lines, seen, "Performance / telemetry", payload.get("telemetryPath"), repo_root=repo_root)
+    return lines
+
+
+def build_operation_highlight_lines(
+    payload: dict[str, Any],
+    *,
+    repo_root: Path | None = None,
+    seen: set[tuple[str, str]] | None = None,
+) -> list[str]:
+    lines: list[str] = []
+    seen = seen or set()
+    _append_important_line(lines, seen, "Run summary", payload.get("summaryPath"), repo_root=repo_root)
+    _append_important_line(lines, seen, "Event stream", payload.get("eventsPath"), repo_root=repo_root)
+    _append_important_line(lines, seen, "Console log", payload.get("consolePath"), repo_root=repo_root)
+    _append_important_line(lines, seen, "Performance / telemetry", payload.get("telemetryPath"), repo_root=repo_root)
+    for item in list(payload.get("importantOutputs") or []):
+        if not isinstance(item, dict):
+            continue
+        label = str(item.get("label") or "").strip()
+        path = item.get("path")
+        if label and path:
+            _append_important_line(lines, seen, label, path, repo_root=repo_root)
     return lines
 
 
@@ -892,8 +1070,25 @@ def _style_menu_syntax(text: str) -> str:
 
 def _style_menu_command_title(text: str) -> str:
     if _contains_cjk(text):
-        return f"{ANSI_BRIGHT_WHITE}{text}{ANSI_RESET}"
-    return f"{ANSI_BRIGHT_WHITE}{text}{ANSI_RESET}"
+        return f"{ANSI_BOLD_BRIGHT_WHITE}{text}{ANSI_RESET}"
+    return f"{ANSI_BOLD_BRIGHT_WHITE}{text}{ANSI_RESET}"
+
+
+def _style_menu_divider(text: str) -> str:
+    return f"{ANSI_BRIGHT_BLACK}{text}{ANSI_RESET}"
+
+
+def _style_workspace_heading(text: str) -> str:
+    return f"{ANSI_BOLD_CYAN}{text}{ANSI_RESET}"
+
+
+def _build_inline_workspace_header(width: int) -> list[str]:
+    divider = _trim("------------------------------------", max(24, width))
+    return [
+        "",
+        _style_menu_divider(divider),
+        "",
+    ]
 
 
 def _highlight_heading(text: str) -> str:
@@ -971,7 +1166,7 @@ def _path_to_uri(text: str, repo_root: Path | None) -> str | None:
         candidate = (repo_root / candidate).resolve()
     else:
         candidate = candidate.resolve()
-    return f"file://{quote(candidate.as_posix())}"
+    return candidate.as_uri()
 
 
 def _build_rows(entries: list[MenuEntry]) -> list[dict[str, Any]]:

@@ -3,7 +3,7 @@ from __future__ import annotations
 import sys
 import time
 from pathlib import Path
-from typing import Callable
+from typing import Any, Callable
 
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -15,8 +15,10 @@ if __package__ in (None, ""):
     from commands import test as test_commands
     from commands import verify as verify_commands
     import manifest as manifest_module
+    import operation_reporting as operation_reporting_module
     import runtime as runtime_module
     import tui as tui_module
+    from testing.events import build_event
     from result import CommandResult
 else:
     from .commands import clean as clean_commands
@@ -27,9 +29,14 @@ else:
     from .commands import test as test_commands
     from .commands import verify as verify_commands
     from . import manifest as manifest_module
+    from . import operation_reporting as operation_reporting_module
     from . import runtime as runtime_module
     from . import tui as tui_module
+    from .testing.events import build_event
     from .result import CommandResult
+
+
+OPERATION_HANDLERS = {"build.dispatch", "prepare.dispatch", "verify.dispatch"}
 
 
 def resolve_repo_root() -> Path:
@@ -52,7 +59,15 @@ def render_result(result: CommandResult, json_output: bool, repo_root: Path) -> 
         return result.to_json() + "\n"
 
     text = result.text or ""
-    if result.payload.get("sessionPath") and result.payload.get("summaryPath"):
+    if result.payload.get("reportKind") == "operation":
+        footer = tui_module.render_operation_report_highlights(result.payload, repo_root=repo_root)
+        if footer:
+            if text and not text.endswith("\n"):
+                text += "\n"
+            if text:
+                text += "\n"
+            text += footer
+    elif result.payload.get("sessionPath") and result.payload.get("summaryPath"):
         footer = tui_module.render_test_report_highlights(result.payload, repo_root=repo_root)
         if footer:
             if text and not text.endswith("\n"):
@@ -96,6 +111,32 @@ def build_test_progress_callback(repo_root: Path) -> Callable[[dict], None]:
     return _callback
 
 
+def build_operation_progress_callback(repo_root: Path, run_context: dict[str, Any]) -> Callable[[dict], None]:
+    events: list[dict] = []
+    rendered_history_count = 0
+    wrote_header = False
+
+    def _callback(event: dict) -> None:
+        nonlocal rendered_history_count
+        nonlocal wrote_header
+        operation_reporting_module.append_operation_event(run_context, event)
+        events.append(event)
+        view = tui_module.build_operation_progress_view(events, repo_root=repo_root)
+        lines: list[str] = []
+        if not wrote_header:
+            lines.extend(["Unified Run Progress", f"Command: {view.command or '-'}", ""])
+            wrote_header = True
+        new_history = view.history_lines[rendered_history_count:]
+        if new_history:
+            lines.extend(new_history)
+            rendered_history_count += len(new_history)
+        if lines:
+            sys.stdout.write("\n".join(lines) + "\n")
+            sys.stdout.flush()
+
+    return _callback
+
+
 def add_legacy_test_migration_guidance(command: dict, result: CommandResult) -> CommandResult:
     if command.get("public", True):
         return result
@@ -123,6 +164,64 @@ def add_legacy_test_migration_guidance(command: dict, result: CommandResult) -> 
         errors=result.errors,
         payload=payload,
         text=text,
+    )
+
+
+def attach_operation_report(
+    result: CommandResult,
+    *,
+    repo_root: Path,
+    host_platform: str,
+    command_text: str,
+    run_context: dict[str, Any],
+    progress_callback: Callable[[dict], None] | None = None,
+) -> CommandResult:
+    payload = dict(result.payload)
+    report = operation_reporting_module.finalize_operation_report(
+        repo_root=repo_root,
+        host_platform=host_platform,
+        command_text=command_text,
+        status=result.status,
+        errors=list(result.errors),
+        artifacts=list(payload.get("artifacts", [])),
+        important_outputs=list(payload.get("importantOutputs", [])),
+        console_text=str(payload.get("consoleText", result.text or "")),
+        run_context=run_context,
+    )
+    payload.update(report)
+    final_event = build_event(
+        "final-summary",
+        {
+            "runId": report["runId"],
+            "finalStatus": "ok" if result.status == "ok" else "fail",
+            "exitCode": 0 if result.status == "ok" else int(payload.get("exitCode", 1) or 1),
+            "errors": list(result.errors),
+            "artifacts": list(payload.get("artifacts", [])),
+            "importantOutputs": list(payload.get("importantOutputs", [])),
+            "sessionPath": report["sessionPath"],
+            "summaryPath": report["summaryPath"],
+            "eventsPath": report["eventsPath"],
+            "consolePath": report["consolePath"],
+            "telemetryPath": report["telemetryPath"],
+        },
+        run_id=report["runId"],
+        status="ok" if result.status == "ok" else "fail",
+    )
+    if progress_callback is not None:
+        progress_callback(final_event)
+    else:
+        operation_reporting_module.append_operation_event(run_context, final_event)
+
+    return CommandResult(
+        command=result.command,
+        status=result.status,
+        host_platform=result.host_platform,
+        target=result.target,
+        duration_ms=result.duration_ms,
+        checks=result.checks,
+        errors=result.errors,
+        payload=payload,
+        text=result.text,
     )
 
 
@@ -164,7 +263,7 @@ def execute_command(
             text="bootstrap is handled by the wrapper. Use run bootstrap --yes.\n",
         )
     if command["handler"] == "build.dispatch":
-        result = build_commands.handle(command, repo_root, host_platform, command_text)
+        result = build_commands.handle(command, repo_root, host_platform, command_text, progress_callback=progress_callback)
         return add_legacy_test_migration_guidance(command, result)
     if command["handler"] == "test.dispatch":
         result = test_commands.handle(
@@ -178,12 +277,12 @@ def execute_command(
         )
         return add_legacy_test_migration_guidance(command, result)
     if command["handler"] == "verify.dispatch":
-        result = verify_commands.handle(command, repo_root, host_platform, command_text)
+        result = verify_commands.handle(command, repo_root, host_platform, command_text, progress_callback=progress_callback)
         return add_legacy_test_migration_guidance(command, result)
     if command["handler"] == "doctor.dispatch":
         return doctor_commands.handle(repo_root, host_platform, command_text)
     if command["handler"] == "prepare.dispatch":
-        return prepare_commands.handle(command, repo_root, host_platform, command_text, manifest)
+        return prepare_commands.handle(command, repo_root, host_platform, command_text, manifest, progress_callback=progress_callback)
     if command["handler"] == "clean.dispatch":
         return clean_commands.handle(command, repo_root, host_platform, command_text)
 
@@ -226,6 +325,7 @@ def execute_parsed_command(
     repo_root: Path,
 ) -> CommandResult:
     progress_callback = None
+    operation_run_context = None
     if (
         interactive
         and not json_output
@@ -234,7 +334,37 @@ def execute_parsed_command(
         and parsed["command"]["id"] not in {"test-list", "test-watch", "test-summary"}
     ):
         progress_callback = build_test_progress_callback(repo_root)
-    return execute_command(
+    elif parsed["command"] is not None and parsed["command"]["handler"] in OPERATION_HANDLERS:
+        operation_run_context = operation_reporting_module.start_operation_report(
+            repo_root=repo_root,
+            host_platform=host_platform,
+            command_text=str(parsed["command_text"]),
+        )
+        if interactive and not json_output:
+            progress_callback = build_operation_progress_callback(repo_root, operation_run_context)
+            progress_callback(
+                build_event(
+                    "session-start",
+                    {
+                        "command": str(parsed["command_text"]),
+                    },
+                    run_id=operation_run_context["runId"],
+                    status="running",
+                )
+            )
+        else:
+            operation_reporting_module.append_operation_event(
+                operation_run_context,
+                build_event(
+                    "session-start",
+                    {
+                        "command": str(parsed["command_text"]),
+                    },
+                    run_id=operation_run_context["runId"],
+                    status="running",
+                ),
+            )
+    result = execute_command(
         parsed["command"],
         parsed["command_text"],
         parsed["target"],
@@ -244,6 +374,16 @@ def execute_parsed_command(
         parsed["options"],
         progress_callback=progress_callback,
     )
+    if operation_run_context is not None:
+        result = attach_operation_report(
+            result,
+            repo_root=repo_root,
+            host_platform=host_platform,
+            command_text=str(parsed["command_text"]),
+            run_context=operation_run_context,
+            progress_callback=progress_callback,
+        )
+    return result
 
 
 def run_fullscreen_menu_session(

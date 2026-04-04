@@ -129,16 +129,20 @@ class PrepareScopeTests(unittest.TestCase):
                 with patch.object(prepare_module.manifest_module, "parse_cli", return_value=parsed):
                     with patch.object(prepare_module.test_commands, "handle", return_value=step_result):
                         with patch.object(prepare_module, "write_json"):
-                            prepare_result = prepare_module.handle(
-                                {"id": "prepare"},
-                                REPO_ROOT,
-                                "windows",
-                                "prepare",
-                                {},
-                            )
+                            with patch.object(prepare_module, "prepare_state_path", return_value=REPO_ROOT / "artifacts" / "run" / "prepare" / "unit-test-global.json"):
+                                prepare_result = prepare_module.handle(
+                                    {"id": "prepare"},
+                                    REPO_ROOT,
+                                    "windows",
+                                    "prepare",
+                                    {},
+                                )
 
         self.assertEqual("ok", prepare_result.status)
-        self.assertTrue((prepare_result.text or "").startswith("doctor ok\n"))
+        self.assertIn("Run completed: prepare", prepare_result.text or "")
+        self.assertIn("Prepare scope: global", prepare_result.text or "")
+        self.assertIn("test smoke all --stage build", prepare_result.text or "")
+        self.assertIn("doctor ok", prepare_result.payload.get("consoleText", ""))
         doctor_handle.assert_called_once()
 
 

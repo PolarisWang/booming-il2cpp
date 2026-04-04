@@ -248,6 +248,18 @@
       "examples": ["run clean --scope verify-roadmap0-macos"]
     },
     {
+      "id": "build-all",
+      "title": "Build the recommended batch for the current host",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["build", "all"],
+      "kind": "batch",
+      "target": "all",
+      "show_in_menu": true,
+      "examples": ["run build all"]
+    },
+    {
       "id": "build-native-contract-abi",
       "title": "Build the native ABI contract smoke target",
       "group": "Build",
