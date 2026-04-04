@@ -37,9 +37,10 @@ class TuiTests(unittest.TestCase):
         syntaxes = [entry.syntax for entry in entries]
 
         self.assertIn("doctor", syntaxes)
-        self.assertIn("test <family> <suite>", syntaxes)
+        self.assertIn("test", syntaxes)
         self.assertNotIn("menu", syntaxes)
         self.assertNotIn("verify roadmap-0 --host windows", syntaxes)
+        self.assertEqual(1, sum(1 for entry in entries if entry.group_title == "Test And Verify" and entry.syntax == "test"))
 
     def test_jump_group_moves_between_neighbor_groups(self) -> None:
         manifest_module = load_manifest_module()
@@ -98,10 +99,11 @@ class TuiTests(unittest.TestCase):
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         test_entry = next(
-            entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.command["id"] == "test-family-suite"
+            entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.syntax == "test"
         )
 
-        argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "smoke HelloWorld")
+        answers = iter(["suite", "smoke HelloWorld"])
+        argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(answers))
 
         self.assertEqual(["test", "smoke", "HelloWorld"], argv)
 
@@ -111,10 +113,11 @@ class TuiTests(unittest.TestCase):
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         test_entry = next(
-            entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.command["id"] == "test-family-all"
+            entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.syntax == "test"
         )
 
-        argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "smoke")
+        answers = iter(["family-all", "smoke"])
+        argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(answers))
 
         self.assertEqual(["test", "smoke", "all"], argv)
 
@@ -124,12 +127,26 @@ class TuiTests(unittest.TestCase):
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         test_entry = next(
-            entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.command["id"] == "test-all"
+            entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.syntax == "test"
         )
 
-        argv = tui_module.resolve_entry_argv(test_entry)
+        argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "all")
 
         self.assertEqual(["test", "all"], argv)
+
+    def test_resolve_entry_argv_supports_test_list_from_unified_test_menu(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        test_entry = next(
+            entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.syntax == "test"
+        )
+
+        answers = iter(["list", "smoke"])
+        argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(answers))
+
+        self.assertEqual(["test", "list", "smoke"], argv)
 
     def test_render_test_progress_screen_consumes_event_stream(self) -> None:
         tui_module = load_tui_module()

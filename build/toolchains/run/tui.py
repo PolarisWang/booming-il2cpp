@@ -33,8 +33,16 @@ class MenuEntry:
     argv: list[str]
 
 
+TEST_MENU_COMMAND_IDS = {"test-family-suite", "test-family-all", "test-all", "test-list"}
+TEST_MENU_COMMAND = {
+    "id": "test-menu",
+    "title": "Run or inspect unified public test capabilities",
+}
+
+
 def build_menu_entries(manifest: dict[str, Any], host_platform: str) -> list[MenuEntry]:
     entries: list[MenuEntry] = []
+    added_test_menu = False
     for group in manifest["groups"]:
         title = group["title"]
         commands = [
@@ -43,6 +51,19 @@ def build_menu_entries(manifest: dict[str, Any], host_platform: str) -> list[Men
             if command.get("show_in_menu", True)
         ]
         for command in commands:
+            if command["id"] in TEST_MENU_COMMAND_IDS:
+                if added_test_menu:
+                    continue
+                entries.append(
+                    MenuEntry(
+                        group_title="Test And Verify",
+                        command=dict(TEST_MENU_COMMAND),
+                        syntax="test",
+                        argv=["test"],
+                    )
+                )
+                added_test_menu = True
+                continue
             entries.append(
                 MenuEntry(
                     group_title=title,
@@ -89,6 +110,28 @@ def resolve_entry_argv(
         if not value:
             return None
         return ["capability", value]
+
+    if command_id == "test-menu":
+        mode = prompt_value_provider("Test mode (suite/family-all/all/list, blank to cancel): ").strip().lower()
+        if not mode:
+            return None
+        if mode == "suite":
+            value = prompt_value_provider("Test family and suite (for example: smoke HelloWorld): ").strip()
+            parts = value.split()
+            if len(parts) != 2:
+                return None
+            return ["test", parts[0], parts[1]]
+        if mode == "family-all":
+            value = prompt_value_provider("Test family (blank to cancel): ").strip()
+            if not value:
+                return None
+            return ["test", value, "all"]
+        if mode == "all":
+            return ["test", "all"]
+        if mode == "list":
+            value = prompt_value_provider("Optional test family (blank for all): ").strip()
+            return ["test", "list", value] if value else ["test", "list"]
+        return None
 
     if command_id == "test-family-suite":
         value = prompt_value_provider("Test family and suite (for example: smoke HelloWorld): ").strip()

@@ -27,6 +27,7 @@
 
 ## 最近更新
 
+- `2026-04-04`：更新 `统一测试框架.md` 与 `统一入口脚本.md`，补充统一测试框架第一版发布摘要，以及统一入口菜单中的单一 `test` 菜单项规则。
 - `2026-04-04`：更新 `统一测试框架.md` 与 `统一入口脚本.md`，补充 perf baseline、build fingerprint、strict 退出码，以及对外只保留 `run test ...` 的最终契约。
 - `2026-04-04`：更新 `统一测试框架.md`，补充 traffic-light 覆盖模型、`coveragePolicy` selector 和 summary/report 三色计数规则。
 - `2026-04-04`：更新 `统一测试框架.md` 与 `统一入口脚本.md`，补充 TUI / harness 消费统一测试事件流，以及 `run test ... --json` 优先输出 `events.jsonl` 的规则。
