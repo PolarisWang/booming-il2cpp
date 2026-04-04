@@ -38,6 +38,13 @@ class MenuEntry:
     argv: list[str]
 
 
+@dataclass
+class MenuState:
+    primary_command_id: str | None = None
+    active_section_command_id: str | None = None
+    section_selection_command_id: str | None = None
+
+
 TEST_MENU_COMMAND_IDS = {"test-family-suite", "test-family-all", "test-all", "test-list", "test-watch", "test-summary"}
 PRIMARY_MENU_ENTRIES = [
     {
@@ -85,6 +92,7 @@ class TestProgressView:
     history_lines: list[str]
     important_lines: list[str]
     artifact_lines: list[str]
+    artifact_count: int
     errors: list[str]
 
 
@@ -368,27 +376,82 @@ def supports_fullscreen_tui() -> bool:
     return _enable_virtual_terminal_output()
 
 
-def run_fullscreen_menu(manifest: dict[str, Any], host_platform: str) -> list[str] | None:
+def run_fullscreen_menu(
+    manifest: dict[str, Any],
+    host_platform: str,
+    *,
+    menu_state: MenuState | None = None,
+) -> list[str] | None:
     entries = build_menu_entries(manifest, host_platform)
     if not entries:
         return None
 
     with _TerminalSession() as terminal:
-        while True:
-            selected_entry = _run_menu_selection(
-                terminal,
-                entries,
-                title="Workspace Control Center",
-                help_text=PRIMARY_MENU_HELP,
-            )
-            if selected_entry is None:
-                return None
-            if not selected_entry.command["id"].endswith("-menu"):
-                return resolve_entry_argv(selected_entry)
+        return _run_primary_menu(manifest, host_platform, terminal, menu_state=menu_state)
 
-            submenu_argv = run_section_submenu(selected_entry.command["id"], manifest, host_platform, terminal=terminal)
-            if submenu_argv is not None:
-                return submenu_argv
+
+def run_inline_menu(
+    manifest: dict[str, Any],
+    host_platform: str,
+    *,
+    menu_state: MenuState | None = None,
+) -> list[str] | None:
+    entries = build_menu_entries(manifest, host_platform)
+    if not entries:
+        return None
+
+    with _InlineTerminalSession() as terminal:
+        return _run_primary_menu(manifest, host_platform, terminal, menu_state=menu_state)
+
+
+def _run_primary_menu(
+    manifest: dict[str, Any],
+    host_platform: str,
+    terminal: "_TerminalSession | _InlineTerminalSession",
+    *,
+    menu_state: MenuState | None = None,
+) -> list[str] | None:
+    entries = build_menu_entries(manifest, host_platform)
+    if menu_state is not None and menu_state.active_section_command_id is not None:
+        submenu_kwargs: dict[str, Any] = {"terminal": terminal}
+        submenu_kwargs["menu_state"] = menu_state
+        submenu_argv = run_section_submenu(
+            menu_state.active_section_command_id,
+            manifest,
+            host_platform,
+            **submenu_kwargs,
+        )
+        if submenu_argv is not None:
+            return submenu_argv
+
+    selection = _selection_index_for_command(entries, menu_state.primary_command_id if menu_state is not None else None)
+    while True:
+        selected_entry = _run_menu_selection(
+            terminal,
+            entries,
+            title="Workspace Control Center",
+            help_text=PRIMARY_MENU_HELP,
+            initial_selection=selection,
+        )
+        if selected_entry is None:
+            return None
+        selection = _selection_index_for_command(entries, selected_entry.command["id"])
+        if menu_state is not None:
+            menu_state.primary_command_id = selected_entry.command["id"]
+        if not selected_entry.command["id"].endswith("-menu"):
+            return resolve_entry_argv(selected_entry)
+
+        submenu_kwargs = {"terminal": terminal}
+        if menu_state is not None:
+            submenu_kwargs["menu_state"] = menu_state
+        submenu_argv = run_section_submenu(
+            selected_entry.command["id"],
+            manifest,
+            host_platform,
+            **submenu_kwargs,
+        )
+        if submenu_argv is not None:
+            return submenu_argv
 
 
 def run_section_submenu(
@@ -397,6 +460,7 @@ def run_section_submenu(
     host_platform: str,
     *,
     terminal: "_TerminalSession" | None = None,
+    menu_state: MenuState | None = None,
 ) -> list[str] | None:
     if section_command_id == "prepare-menu":
         entries = build_prepare_menu_entries(manifest, host_platform)
@@ -407,7 +471,10 @@ def run_section_submenu(
         title = "Build Center"
         help_text = SECTION_MENU_HELP
     elif section_command_id == "test-menu":
-        return run_test_submenu(manifest, host_platform, terminal=terminal)
+        test_kwargs = {"terminal": terminal}
+        if menu_state is not None:
+            test_kwargs["menu_state"] = menu_state
+        return run_test_submenu(manifest, host_platform, **test_kwargs)
     elif section_command_id == "clean-menu":
         entries = build_clean_menu_entries(manifest, host_platform)
         title = "Clean Center"
@@ -419,7 +486,14 @@ def run_section_submenu(
     else:
         return None
 
-    return _run_submenu(entries, title=title, help_text=help_text, terminal=terminal)
+    return _run_submenu(
+        entries,
+        title=title,
+        help_text=help_text,
+        terminal=terminal,
+        section_command_id=section_command_id,
+        menu_state=menu_state,
+    )
 
 
 def run_test_submenu(
@@ -427,9 +501,17 @@ def run_test_submenu(
     host_platform: str,
     *,
     terminal: "_TerminalSession" | None = None,
+    menu_state: MenuState | None = None,
 ) -> list[str] | None:
     entries = build_test_menu_entries(manifest, host_platform)
-    return _run_submenu(entries, title="Unified Test Menu", help_text=TEST_MENU_HELP, terminal=terminal)
+    return _run_submenu(
+        entries,
+        title="Unified Test Menu",
+        help_text=TEST_MENU_HELP,
+        terminal=terminal,
+        section_command_id="test-menu",
+        menu_state=menu_state,
+    )
 
 
 def _run_submenu(
@@ -438,9 +520,19 @@ def _run_submenu(
     title: str,
     help_text: str,
     terminal: "_TerminalSession" | None = None,
+    section_command_id: str | None = None,
+    menu_state: MenuState | None = None,
 ) -> list[str] | None:
     if not entries:
         return None
+
+    initial_selection = 0
+    if (
+        menu_state is not None
+        and section_command_id is not None
+        and menu_state.active_section_command_id == section_command_id
+    ):
+        initial_selection = _selection_index_for_command(entries, menu_state.section_selection_command_id)
 
     if terminal is not None:
         selected_entry = _run_menu_selection(
@@ -448,9 +540,14 @@ def _run_submenu(
             entries,
             title=title,
             help_text=help_text,
+            initial_selection=initial_selection,
         )
         if selected_entry is None or selected_entry.command["id"] == "menu-back":
             return None
+        if menu_state is not None:
+            menu_state.primary_command_id = section_command_id
+            menu_state.active_section_command_id = section_command_id
+            menu_state.section_selection_command_id = selected_entry.command["id"]
         return resolve_entry_argv(selected_entry)
 
     with _TerminalSession() as session:
@@ -459,22 +556,36 @@ def _run_submenu(
             entries,
             title=title,
             help_text=help_text,
+            initial_selection=initial_selection,
         )
     if selected_entry is None or selected_entry.command["id"] == "menu-back":
         return None
+    if menu_state is not None:
+        menu_state.primary_command_id = section_command_id
+        menu_state.active_section_command_id = section_command_id
+        menu_state.section_selection_command_id = selected_entry.command["id"]
     return resolve_entry_argv(selected_entry)
 
 
 def _run_menu_selection(
-    terminal: "_TerminalSession",
+    terminal: "_TerminalSession | _InlineTerminalSession",
     entries: list[MenuEntry],
     *,
     title: str,
     help_text: str,
+    initial_selection: int = 0,
 ) -> MenuEntry | None:
-    selection = 0
+    selection = max(0, min(initial_selection, len(entries) - 1))
     while True:
-        terminal.render(render_menu_screen(entries, selection, title=title, help_text=help_text))
+        terminal.render(
+            render_menu_screen(
+                entries,
+                selection,
+                title=title,
+                help_text=help_text,
+                fullscreen=getattr(terminal, "fullscreen", True),
+            )
+        )
         key = terminal.read_key()
 
         if key in {"escape", "quit"}:
@@ -507,11 +618,15 @@ def render_menu_screen(
     *,
     title: str = "Unified Run Menu",
     help_text: str = PRIMARY_MENU_HELP,
+    fullscreen: bool = True,
 ) -> str:
     width, height = shutil.get_terminal_size(fallback=(100, 30))
     rows = _build_rows(entries)
     selected_row = _find_selected_row(rows, selection)
-    visible_body_height = max(6, height - 5)
+    if fullscreen:
+        visible_body_height = max(6, height - 5)
+    else:
+        visible_body_height = min(len(rows), max(6, min(14, height - 5)))
     scroll_top = _compute_scroll_top(selected_row, visible_body_height, len(rows))
     visible_rows = rows[scroll_top : scroll_top + visible_body_height]
     syntax_width = max(18, min(42, width // 3))
@@ -540,10 +655,11 @@ def render_menu_screen(
             body.append(line)
 
     lines = header + body
-    while len(lines) < height:
-        lines.append("")
-
-    return "\x1b[2J\x1b[H" + "\n".join(lines[:height])
+    if fullscreen:
+        while len(lines) < height:
+            lines.append("")
+        return "\x1b[2J\x1b[H" + "\n".join(lines[:height])
+    return "\n".join(lines)
 
 
 def render_test_progress_screen(events: list[dict[str, Any]], repo_root: Path | None = None) -> str:
@@ -565,7 +681,7 @@ def render_test_progress_screen(events: list[dict[str, Any]], repo_root: Path | 
 
     if view.artifact_lines:
         lines.append("")
-        lines.append(_highlight_label(f"Artifacts ({len(view.artifact_lines)}):"))
+        lines.append(_highlight_label(f"Artifacts ({view.artifact_count}):"))
         lines.extend(view.artifact_lines)
 
     if view.errors:
@@ -582,7 +698,7 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
     final_status = "running"
     history_lines: list[str] = []
     important_lines: list[str] = []
-    artifact_lines: list[str] = []
+    collected_artifacts: list[str] = []
     errors: list[str] = []
     seen_history: set[str] = set()
     seen_important: set[tuple[str, str]] = set()
@@ -643,7 +759,7 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
                     seen_history,
                     f"[{_format_progress_label(progress_text)}] file   {str(path)}",
                 )
-                _append_artifact_line(artifact_lines, seen_artifacts, str(path), repo_root=repo_root)
+                _append_grouped_artifact_values(collected_artifacts, seen_artifacts, str(path))
             continue
 
         if event_type == "final-summary":
@@ -651,7 +767,10 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
             _append_unique(history_lines, seen_history, f"[{_format_progress_label(progress_text)}] done   {final_status}")
             errors.extend(str(error) for error in list(payload.get("errors") or []))
             important_lines.extend(build_test_report_highlight_lines(payload, repo_root=repo_root, seen=seen_important))
-            artifact_lines.extend(build_artifact_lines(payload, repo_root=repo_root, seen=seen_artifacts))
+            for artifact in list(payload.get("artifacts") or []):
+                _append_grouped_artifact_values(collected_artifacts, seen_artifacts, artifact)
+
+    artifact_lines = build_artifact_lines({"artifacts": collected_artifacts}, repo_root=repo_root)
 
     return TestProgressView(
         command=command,
@@ -660,6 +779,7 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
         history_lines=history_lines,
         important_lines=important_lines,
         artifact_lines=artifact_lines,
+        artifact_count=len(seen_artifacts),
         errors=errors,
     )
 
@@ -673,7 +793,8 @@ def render_test_report_highlights(payload: dict[str, Any], repo_root: Path | Non
     lines.extend(important_lines)
     if artifact_lines:
         lines.append("")
-        lines.append(_highlight_label(f"Artifacts ({len(artifact_lines)}):"))
+        artifact_count = len(list(payload.get("artifacts") or []))
+        lines.append(_highlight_label(f"Artifacts ({artifact_count}):"))
         lines.extend(artifact_lines)
     return "\n".join(lines) + "\n"
 
@@ -700,11 +821,35 @@ def build_artifact_lines(
     repo_root: Path | None = None,
     seen: set[str] | None = None,
 ) -> list[str]:
-    lines: list[str] = []
+    grouped: dict[str, list[str]] = {
+        "Smoke binaries": [],
+        "Trace outputs": [],
+        "Verify outputs": [],
+        "Other artifacts": [],
+    }
     seen = seen or set()
     for artifact in list(payload.get("artifacts") or []):
-        _append_artifact_line(lines, seen, artifact, repo_root=repo_root)
+        _append_grouped_artifact(grouped, seen, artifact)
+
+    lines: list[str] = []
+    for group_name in ("Smoke binaries", "Trace outputs", "Verify outputs", "Other artifacts"):
+        values = grouped[group_name]
+        if not values:
+            continue
+        lines.append(_highlight_label(f"{group_name} ({len(values)}):"))
+        for index, value in enumerate(values, start=1):
+            lines.append(f"  {index}. {_terminal_link(value, repo_root)}")
     return lines
+
+
+def _append_grouped_artifact_values(lines: list[str], seen: set[str], value: Any) -> None:
+    if not value:
+        return
+    text = str(value)
+    if text in seen:
+        return
+    seen.add(text)
+    lines.append(text)
 
 
 def _resolve_progress_text(current: str, payload: dict[str, Any]) -> str:
@@ -756,12 +901,10 @@ def _append_important_line(
     lines.append(f"{ANSI_BOLD_CYAN}{label}:{ANSI_RESET} {_terminal_link(text, repo_root)}")
 
 
-def _append_artifact_line(
-    lines: list[str],
+def _append_grouped_artifact(
+    grouped: dict[str, list[str]],
     seen: set[str],
     value: Any,
-    *,
-    repo_root: Path | None = None,
 ) -> None:
     if not value:
         return
@@ -769,7 +912,16 @@ def _append_artifact_line(
     if text in seen:
         return
     seen.add(text)
-    lines.append(f"  {len(lines) + 1}. {_terminal_link(text, repo_root)}")
+    if "/artifacts/smoke/bin/" in text or text.startswith("artifacts/smoke/bin/"):
+        grouped["Smoke binaries"].append(text)
+        return
+    if "/artifacts/run/trace/" in text or text.startswith("artifacts/run/trace/") or "warmup-trace" in text:
+        grouped["Trace outputs"].append(text)
+        return
+    if "/artifacts/verify-roadmap-0/" in text or text.startswith("artifacts/verify-roadmap-0/"):
+        grouped["Verify outputs"].append(text)
+        return
+    grouped["Other artifacts"].append(text)
 
 
 def _terminal_link(text: str, repo_root: Path | None) -> str:
@@ -812,6 +964,15 @@ def _compute_scroll_top(selected_row: int, body_height: int, row_count: int) -> 
 def _find_selected_row(rows: list[dict[str, Any]], selection: int) -> int:
     for index, row in enumerate(rows):
         if row["entry_index"] == selection:
+            return index
+    return 0
+
+
+def _selection_index_for_command(entries: list[MenuEntry], command_id: str | None) -> int:
+    if not command_id:
+        return 0
+    for index, entry in enumerate(entries):
+        if entry.command["id"] == command_id:
             return index
     return 0
 
@@ -873,6 +1034,8 @@ def _enable_virtual_terminal_output() -> bool:
 
 
 class _TerminalSession:
+    fullscreen = True
+
     def __init__(self) -> None:
         self._stdin_fd: int | None = None
         self._saved_mode: Any = None
@@ -898,6 +1061,57 @@ class _TerminalSession:
         if os.name == "nt":
             return _read_windows_key()
         return _read_posix_key(self._stdin_fd)
+
+    @staticmethod
+    def _write(text: str) -> None:
+        if os.name != "nt":
+            text = text.replace("\r\n", "\n").replace("\n", "\r\n")
+        sys.stdout.write(text)
+        sys.stdout.flush()
+
+
+class _InlineTerminalSession:
+    fullscreen = False
+
+    def __init__(self) -> None:
+        self._stdin_fd: int | None = None
+        self._saved_mode: Any = None
+        self._rendered_lines = 0
+
+    def __enter__(self) -> "_InlineTerminalSession":
+        if os.name != "nt":
+            self._stdin_fd = sys.stdin.fileno()
+            self._saved_mode = termios.tcgetattr(self._stdin_fd)
+            tty.setraw(self._stdin_fd)
+
+        self._write("\x1b[?25l")
+        return self
+
+    def __exit__(self, exc_type, exc, tb) -> None:
+        self._clear_rendered_region()
+        self._write("\x1b[0m\x1b[?25h")
+        if os.name != "nt" and self._stdin_fd is not None and self._saved_mode is not None:
+            termios.tcsetattr(self._stdin_fd, termios.TCSADRAIN, self._saved_mode)
+
+    def render(self, screen: str) -> None:
+        lines = screen.splitlines() or [""]
+        self._clear_rendered_region()
+        self._write(screen)
+        self._rendered_lines = len(lines)
+
+    def read_key(self) -> str:
+        if os.name == "nt":
+            return _read_windows_key()
+        return _read_posix_key(self._stdin_fd)
+
+    def _clear_rendered_region(self) -> None:
+        if self._rendered_lines <= 0:
+            return
+        self._write("\r")
+        if self._rendered_lines > 1:
+            self._write(f"\x1b[{self._rendered_lines - 1}F")
+        self._write("\x1b[J")
+        self._rendered_lines = 0
 
     @staticmethod
     def _write(text: str) -> None:

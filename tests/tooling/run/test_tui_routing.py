@@ -26,19 +26,31 @@ def load_run_module():
 
 
 class TuiRoutingTests(unittest.TestCase):
-    def test_bare_interactive_run_executes_selected_tui_command(self) -> None:
+    def test_bare_interactive_run_returns_to_menu_after_selected_command(self) -> None:
         run_module = load_run_module()
         stdout = io.StringIO()
 
         with patch.object(run_module.manifest_module, "is_interactive_session", return_value=True):
             with patch.object(run_module.runtime_module, "detect_host_platform", return_value="windows-x64"):
                 with patch.object(run_module.tui_module, "supports_fullscreen_tui", return_value=True):
-                    with patch.object(run_module.tui_module, "run_fullscreen_menu", return_value=["help"]):
-                        with patch.object(run_module.sys, "stdout", stdout):
-                            exit_code = run_module.main([])
+                    with patch.object(
+                        run_module.tui_module,
+                        "run_fullscreen_menu",
+                        return_value=["help"],
+                    ) as run_fullscreen_menu:
+                        with patch.object(
+                            run_module.tui_module,
+                            "run_inline_menu",
+                            return_value=None,
+                            create=True,
+                        ) as run_inline_menu:
+                            with patch.object(run_module.sys, "stdout", stdout):
+                                exit_code = run_module.main([])
 
         self.assertEqual(0, exit_code)
         self.assertIn("Available commands", stdout.getvalue())
+        self.assertEqual(1, run_fullscreen_menu.call_count)
+        self.assertEqual(1, run_inline_menu.call_count)
         self.assertTrue(
             stdout.getvalue().startswith("\r\x1b[2K"),
             "output rendered after leaving the fullscreen menu should start on a clean line",
@@ -132,7 +144,9 @@ class TuiRoutingTests(unittest.TestCase):
                     "sessionPath": "artifacts/logs/tests/run-1/session.json",
                     "telemetryPath": "artifacts/logs/tests/run-1/telemetry.json",
                     "artifacts": [
+                        "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll",
                         "artifacts/run/trace/macos-warmup-trace.runtime.json",
+                        "artifacts/verify-roadmap-0/macos",
                     ],
                 },
                 text="final output\n",
@@ -153,7 +167,10 @@ class TuiRoutingTests(unittest.TestCase):
         self.assertIn("\x1b[1;36mTest report:\x1b[0m", stdout.getvalue())
         self.assertIn("\x1b]8;;file://", stdout.getvalue())
         self.assertIn("artifacts/logs/tests/run-1/summary.json\x1b]8;;\x1b\\", stdout.getvalue())
-        self.assertIn("\x1b[1;36mArtifacts (1):\x1b[0m", stdout.getvalue())
+        self.assertIn("\x1b[1;36mArtifacts (3):\x1b[0m", stdout.getvalue())
+        self.assertIn("\x1b[1;36mSmoke binaries (1):\x1b[0m", stdout.getvalue())
+        self.assertIn("\x1b[1;36mTrace outputs (1):\x1b[0m", stdout.getvalue())
+        self.assertIn("\x1b[1;36mVerify outputs (1):\x1b[0m", stdout.getvalue())
         self.assertIn("artifacts/run/trace/macos-warmup-trace.runtime.json\x1b]8;;\x1b\\", stdout.getvalue())
         self.assertNotIn("\x1b[2J", stdout.getvalue())
 

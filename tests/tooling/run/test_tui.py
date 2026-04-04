@@ -151,6 +151,16 @@ class TuiTests(unittest.TestCase):
         )
         self.assertIn("test center", next(entry.command["title"] for entry in entries if entry.command["id"] == "test-all").lower())
         self.assertEqual("back", entries[-1].syntax)
+        self.assertIn("previous menu", entries[-1].command["title"].lower())
+
+    def test_menu_help_texts_clarify_navigation_expectations(self) -> None:
+        tui_module = load_tui_module()
+
+        self.assertIn("q/Esc to exit", tui_module.PRIMARY_MENU_HELP)
+        self.assertIn("Back to return", tui_module.TEST_MENU_HELP)
+        self.assertIn("q/Esc to leave this section", tui_module.TEST_MENU_HELP)
+        self.assertIn("Back to return", tui_module.SECTION_MENU_HELP)
+        self.assertIn("q/Esc to leave this section", tui_module.SECTION_MENU_HELP)
 
     def test_terminal_session_render_normalizes_newlines_on_posix(self) -> None:
         tui_module = load_tui_module()
@@ -173,6 +183,28 @@ class TuiTests(unittest.TestCase):
                 session.render("row1\nrow2")
 
         self.assertEqual("row1\r\nrow2", "".join(fake_stdout.parts))
+
+    def test_render_menu_screen_inline_preserves_console_history(self) -> None:
+        tui_module = load_tui_module()
+        entries = [
+            tui_module.MenuEntry(
+                group_title="Inspect",
+                command={"id": "help", "title": "Show help"},
+                syntax="help",
+                argv=["help"],
+            )
+        ]
+
+        screen = tui_module.render_menu_screen(
+            entries,
+            0,
+            title="Workspace Control Center",
+            help_text="Use Up/Down to move",
+            fullscreen=False,
+        )
+
+        self.assertIn("Workspace Control Center", screen)
+        self.assertNotIn("\x1b[2J\x1b[H", screen)
 
     def test_resolve_entry_argv_supports_dynamic_test_suite_target(self) -> None:
         manifest_module = load_manifest_module()
@@ -328,6 +360,53 @@ class TuiTests(unittest.TestCase):
         self.assertEqual(["doctor"], argv)
         run_section_submenu.assert_called_once_with("prepare-menu", {"groups": [], "commands": []}, "windows", terminal=fake_terminal)
 
+    def test_run_inline_menu_reopens_last_selected_section_and_item(self) -> None:
+        tui_module = load_tui_module()
+        test_entry = tui_module.MenuEntry(
+            group_title="Validate",
+            command={"id": "test-menu", "title": "Open the unified test center"},
+            syntax="test",
+            argv=["test"],
+        )
+
+        class FakeTerminal:
+            def __init__(self) -> None:
+                self.screens: list[str] = []
+                self.keys = iter([])
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, tb) -> None:
+                return None
+
+            def render(self, screen: str) -> None:
+                self.screens.append(screen)
+
+            def read_key(self) -> str:
+                return next(self.keys)
+
+        fake_terminal = FakeTerminal()
+        menu_state = tui_module.MenuState(
+            primary_command_id="test-menu",
+            active_section_command_id="test-menu",
+            section_selection_command_id="test-all",
+        )
+
+        with patch.object(tui_module, "build_menu_entries", return_value=[test_entry]):
+            with patch.object(tui_module, "_InlineTerminalSession", return_value=fake_terminal):
+                with patch.object(tui_module, "run_test_submenu", return_value=["test", "all"]) as run_test_submenu:
+                    argv = tui_module.run_inline_menu({"groups": [], "commands": []}, "windows", menu_state=menu_state)
+
+        self.assertEqual(["test", "all"], argv)
+        run_test_submenu.assert_called_once_with(
+            {"groups": [], "commands": []},
+            "windows",
+            terminal=fake_terminal,
+            menu_state=menu_state,
+        )
+        self.assertEqual([], fake_terminal.screens)
+
     def test_render_test_progress_screen_consumes_event_stream(self) -> None:
         tui_module = load_tui_module()
 
@@ -362,7 +441,9 @@ class TuiTests(unittest.TestCase):
                         "eventsPath": "artifacts/logs/tests/run-1/events.jsonl",
                         "telemetryPath": "artifacts/logs/tests/run-1/telemetry.json",
                         "artifacts": [
+                            "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll",
                             "artifacts/run/trace/macos-warmup-trace.runtime.json",
+                            "artifacts/verify-roadmap-0/macos",
                         ],
                     },
                 },
@@ -385,9 +466,15 @@ class TuiTests(unittest.TestCase):
             "\x1b[1;36mPerformance / telemetry:\x1b[0m",
             screen,
         )
-        self.assertIn("\x1b[1;36mArtifacts (2):\x1b[0m", screen)
-        artifact_uri = (REPO_ROOT / "artifacts/logs/tests/run-1/summary.json").resolve().as_uri()
-        self.assertIn(f"  1. \x1b]8;;{artifact_uri}\x1b\\artifacts/logs/tests/run-1/summary.json\x1b]8;;\x1b\\", screen)
+        self.assertIn("\x1b[1;36mArtifacts (4):\x1b[0m", screen)
+        self.assertIn("\x1b[1;36mSmoke binaries (1):\x1b[0m", screen)
+        self.assertIn("\x1b[1;36mTrace outputs (1):\x1b[0m", screen)
+        self.assertIn("\x1b[1;36mVerify outputs (1):\x1b[0m", screen)
+        self.assertIn("\x1b[1;36mOther artifacts (1):\x1b[0m", screen)
+        other_uri = (REPO_ROOT / "artifacts/logs/tests/run-1/summary.json").resolve().as_uri()
+        smoke_uri = (REPO_ROOT / "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll").resolve().as_uri()
+        self.assertIn(f"  1. \x1b]8;;{smoke_uri}\x1b\\artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll\x1b]8;;\x1b\\", screen)
+        self.assertIn(f"  1. \x1b]8;;{other_uri}\x1b\\artifacts/logs/tests/run-1/summary.json\x1b]8;;\x1b\\", screen)
 
 
 if __name__ == "__main__":

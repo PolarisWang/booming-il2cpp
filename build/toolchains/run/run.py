@@ -210,6 +210,62 @@ def resolve_tui_selection(
     return manifest_module.parse_cli(selection_argv, interactive, manifest, host_platform), True
 
 
+def execute_parsed_command(
+    parsed: dict[str, object],
+    *,
+    interactive: bool,
+    json_output: bool,
+    host_platform: str,
+    manifest: dict,
+    repo_root: Path,
+) -> CommandResult:
+    progress_callback = None
+    if (
+        interactive
+        and not json_output
+        and parsed["command"] is not None
+        and parsed["command"]["handler"] == "test.dispatch"
+        and parsed["command"]["id"] not in {"test-list", "test-watch", "test-summary"}
+    ):
+        progress_callback = build_test_progress_callback(repo_root)
+    return execute_command(
+        parsed["command"],
+        parsed["command_text"],
+        parsed["target"],
+        host_platform,
+        manifest,
+        repo_root,
+        parsed["options"],
+        progress_callback=progress_callback,
+    )
+
+
+def run_fullscreen_menu_session(
+    *,
+    interactive: bool,
+    manifest: dict,
+    host_platform: str,
+    repo_root: Path,
+) -> int:
+    menu_state = tui_module.MenuState()
+    selection_argv = tui_module.run_fullscreen_menu(manifest, host_platform, menu_state=menu_state)
+    while selection_argv is not None:
+        parsed = manifest_module.parse_cli(selection_argv, interactive, manifest, host_platform)
+        result = execute_parsed_command(
+            parsed,
+            interactive=interactive,
+            json_output=False,
+            host_platform=host_platform,
+            manifest=manifest,
+            repo_root=repo_root,
+        )
+        sys.stdout.write(render_post_tui_prefix(True, result, False))
+        sys.stdout.write(render_result(result, False, repo_root))
+        sys.stdout.flush()
+        selection_argv = tui_module.run_inline_menu(manifest, host_platform, menu_state=menu_state)
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     start = time.perf_counter()
     argv = list(sys.argv[1:] if argv is None else argv)
@@ -219,6 +275,19 @@ def main(argv: list[str] | None = None) -> int:
     host_platform = manifest_module.detect_host_platform_family(runtime_module.detect_host_platform())
     parsed = manifest_module.parse_cli(argv, interactive, manifest, host_platform)
     json_output = parsed["json"]
+    if (
+        not json_output
+        and parsed["command"] is not None
+        and parsed["command"]["id"] == "menu"
+        and tui_module.supports_fullscreen_tui()
+    ):
+        return run_fullscreen_menu_session(
+            interactive=interactive,
+            manifest=manifest,
+            host_platform=host_platform,
+            repo_root=repo_root,
+        )
+
     parsed, used_fullscreen_tui = resolve_tui_selection(parsed, interactive, manifest, host_platform)
     if parsed is None:
         result = CommandResult.success(
@@ -228,24 +297,13 @@ def main(argv: list[str] | None = None) -> int:
             text="",
         )
     else:
-        progress_callback = None
-        if (
-            interactive
-            and not json_output
-            and parsed["command"] is not None
-            and parsed["command"]["handler"] == "test.dispatch"
-            and parsed["command"]["id"] not in {"test-list", "test-watch", "test-summary"}
-        ):
-            progress_callback = build_test_progress_callback(repo_root)
-        result = execute_command(
-            parsed["command"],
-            parsed["command_text"],
-            parsed["target"],
-            host_platform,
-            manifest,
-            repo_root,
-            parsed["options"],
-            progress_callback=progress_callback,
+        result = execute_parsed_command(
+            parsed,
+            interactive=interactive,
+            json_output=json_output,
+            host_platform=host_platform,
+            manifest=manifest,
+            repo_root=repo_root,
         )
     result.duration_ms = int((time.perf_counter() - start) * 1000)
     sys.stdout.write(render_post_tui_prefix(used_fullscreen_tui, result, json_output))
