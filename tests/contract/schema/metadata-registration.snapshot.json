@@ -1,0 +1,26 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "Game.Core"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "Game.Core/Game.Player"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 2,
+      "subjectId": "Game.Core/Game.Player::TakeDamage(System.Int32)"
+    },
+    {
+      "registrationKind": "genericContext",
+      "slot": 3,
+      "subjectId": "Game.Core/System.Collections.Generic.List<System.String>"
+    }
+  ]
+}

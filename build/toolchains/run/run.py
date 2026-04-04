@@ -35,8 +35,13 @@ def resolve_repo_root() -> Path:
     return Path(__file__).resolve().parents[3]
 
 
-def render_result(result: CommandResult, json_output: bool) -> str:
+def render_result(result: CommandResult, json_output: bool, repo_root: Path) -> str:
     if json_output:
+        events_path = result.payload.get("eventsPath")
+        if isinstance(events_path, str):
+            resolved_events_path = repo_root / events_path
+            if resolved_events_path.is_file():
+                return resolved_events_path.read_text(encoding="utf-8")
         return result.to_json() + "\n"
 
     return result.text or ""
@@ -50,6 +55,36 @@ def render_post_tui_prefix(used_fullscreen_tui: bool, result: CommandResult, jso
     return "\r\x1b[2K"
 
 
+def add_legacy_test_migration_guidance(command: dict, result: CommandResult) -> CommandResult:
+    if command.get("public", True):
+        return result
+
+    replacement_syntax = command.get("replacement_syntax")
+    if not replacement_syntax:
+        return result
+
+    payload = dict(result.payload)
+    payload["migration"] = {
+        "deprecatedCommandId": command["id"],
+        "replacementSyntax": replacement_syntax,
+    }
+
+    guidance = f"Deprecated test command. Use `run {replacement_syntax}` instead.\n"
+    text = guidance + (result.text or "")
+
+    return CommandResult(
+        command=result.command,
+        status=result.status,
+        host_platform=result.host_platform,
+        target=result.target,
+        duration_ms=result.duration_ms,
+        checks=result.checks,
+        errors=result.errors,
+        payload=payload,
+        text=text,
+    )
+
+
 def execute_command(
     command: dict | None,
     command_text: str,
@@ -57,6 +92,7 @@ def execute_command(
     host_platform: str,
     manifest: dict,
     repo_root: Path,
+    options: dict[str, object] | None = None,
 ) -> CommandResult:
     if command is None:
         return CommandResult.failure(
@@ -86,11 +122,14 @@ def execute_command(
             text="bootstrap is handled by the wrapper. Use run bootstrap --yes.\n",
         )
     if command["handler"] == "build.dispatch":
-        return build_commands.handle(command, repo_root, host_platform, command_text)
+        result = build_commands.handle(command, repo_root, host_platform, command_text)
+        return add_legacy_test_migration_guidance(command, result)
     if command["handler"] == "test.dispatch":
-        return test_commands.handle(command, repo_root, host_platform, command_text)
+        result = test_commands.handle(command, repo_root, host_platform, command_text, manifest, options or {})
+        return add_legacy_test_migration_guidance(command, result)
     if command["handler"] == "verify.dispatch":
-        return verify_commands.handle(command, repo_root, host_platform, command_text)
+        result = verify_commands.handle(command, repo_root, host_platform, command_text)
+        return add_legacy_test_migration_guidance(command, result)
     if command["handler"] == "doctor.dispatch":
         return doctor_commands.handle(repo_root, host_platform, command_text)
     if command["handler"] == "prepare.dispatch":
@@ -152,11 +191,15 @@ def main(argv: list[str] | None = None) -> int:
             host_platform,
             manifest,
             repo_root,
+            parsed["options"],
         )
     result.duration_ms = int((time.perf_counter() - start) * 1000)
     sys.stdout.write(render_post_tui_prefix(used_fullscreen_tui, result, json_output))
-    sys.stdout.write(render_result(result, json_output))
-    return 0 if result.status == "ok" else 1
+    sys.stdout.write(render_result(result, json_output, repo_root))
+    if result.status == "ok":
+        return 0
+    exit_code = result.payload.get("exitCode")
+    return exit_code if isinstance(exit_code, int) and exit_code > 0 else 1
 
 
 if __name__ == "__main__":

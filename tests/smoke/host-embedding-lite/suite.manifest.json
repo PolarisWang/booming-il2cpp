@@ -1,0 +1,10 @@
+{
+  "displayName": "HostEmbeddingLite",
+  "runnerType": "dotnet-app",
+  "supportedStages": ["build", "run", "all"],
+  "runnerConfig": {
+    "projectPath": "tests/smoke/input/HostEmbeddingLite/HostEmbeddingLite.csproj",
+    "dllPath": "artifacts/smoke/bin/HostEmbeddingLite/Release/net8.0/HostEmbeddingLite.dll"
+  },
+  "tags": ["smoke", "managed"]
+}

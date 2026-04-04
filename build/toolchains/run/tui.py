@@ -81,14 +81,36 @@ def resolve_entry_argv(
     entry: MenuEntry,
     prompt_value_provider: Callable[[str], str] | None = None,
 ) -> list[str] | None:
-    if entry.command["id"] != "capability":
-        return list(entry.argv)
-
     prompt_value_provider = prompt_value_provider or input
-    value = prompt_value_provider("Capability id (blank to cancel): ").strip()
-    if not value:
-        return None
-    return ["capability", value]
+    command_id = entry.command["id"]
+
+    if command_id == "capability":
+        value = prompt_value_provider("Capability id (blank to cancel): ").strip()
+        if not value:
+            return None
+        return ["capability", value]
+
+    if command_id == "test-family-suite":
+        value = prompt_value_provider("Test family and suite (for example: smoke HelloWorld): ").strip()
+        parts = value.split()
+        if len(parts) != 2:
+            return None
+        return ["test", parts[0], parts[1]]
+
+    if command_id == "test-family-all":
+        value = prompt_value_provider("Test family (blank to cancel): ").strip()
+        if not value:
+            return None
+        return ["test", value, "all"]
+
+    if command_id == "test-all":
+        return ["test", "all"]
+
+    if command_id == "test-list":
+        value = prompt_value_provider("Optional test family (blank for all): ").strip()
+        return ["test", "list", value] if value else ["test", "list"]
+
+    return list(entry.argv)
 
 
 def supports_fullscreen_tui() -> bool:
@@ -172,6 +194,61 @@ def render_menu_screen(entries: list[MenuEntry], selection: int) -> str:
         lines.append("")
 
     return "\x1b[2J\x1b[H" + "\n".join(lines[:height])
+
+
+def render_test_progress_screen(events: list[dict[str, Any]]) -> str:
+    command = ""
+    progress_text = "0%"
+    warnings: list[str] = []
+    artifacts: list[str] = []
+    final_status = "running"
+
+    for event in events:
+        event_type = event.get("eventType")
+        payload = event.get("payload") or {}
+
+        if event_type == "session-start":
+            command = str(payload.get("command") or command)
+            continue
+
+        if event_type == "progress":
+            completed = payload.get("completedUnits")
+            total = payload.get("totalUnits")
+            if isinstance(completed, int) and isinstance(total, int) and total > 0:
+                progress_text = f"{int((completed / total) * 100)}%"
+            continue
+
+        if event_type == "warning":
+            message = payload.get("message")
+            if message:
+                warnings.append(str(message))
+            continue
+
+        if event_type == "artifact":
+            path = payload.get("path")
+            if path:
+                artifacts.append(str(path))
+            continue
+
+        if event_type == "final-summary":
+            final_status = str(payload.get("finalStatus") or final_status)
+
+    lines = [
+        "Unified Test Progress",
+        f"Command: {command or '-'}",
+        f"Progress: {progress_text}",
+        f"Status: {final_status}",
+    ]
+
+    if warnings:
+        lines.append("Warnings:")
+        lines.extend(warnings)
+
+    if artifacts:
+        lines.append("Artifacts:")
+        lines.extend(artifacts)
+
+    return "\n".join(lines) + "\n"
 
 
 def _build_rows(entries: list[MenuEntry]) -> list[dict[str, Any]]:

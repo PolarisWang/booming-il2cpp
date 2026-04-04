@@ -1,0 +1,29 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "Game.Core.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "Game_Player_TakeDamage",
+          "subjectId": "Game.Core/Game.Player::TakeDamage(System.Int32)"
+        },
+        {
+          "registrationKind": "invoker",
+          "slot": 1,
+          "symbol": "Invoker_Game_Player_TakeDamage",
+          "subjectId": "Game.Core/Game.Player::TakeDamage(System.Int32)"
+        },
+        {
+          "registrationKind": "reversePInvoke",
+          "slot": 2,
+          "symbol": "Interop_Bootstrap_Initialize",
+          "subjectId": "Game.Core/Interop.Bootstrap::Initialize()"
+        }
+      ]
+    }
+  ]
+}

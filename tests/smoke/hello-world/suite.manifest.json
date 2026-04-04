@@ -1,0 +1,10 @@
+{
+  "displayName": "HelloWorld",
+  "runnerType": "dotnet-app",
+  "supportedStages": ["build", "run", "all"],
+  "runnerConfig": {
+    "projectPath": "tests/smoke/input/HelloWorld/HelloWorld.csproj",
+    "dllPath": "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll"
+  },
+  "tags": ["smoke", "managed"]
+}

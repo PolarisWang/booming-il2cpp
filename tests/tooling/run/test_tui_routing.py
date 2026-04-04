@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import io
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -56,6 +57,39 @@ class TuiRoutingTests(unittest.TestCase):
 
         self.assertEqual(0, exit_code)
         self.assertEqual("", stdout.getvalue())
+
+    def test_json_test_command_prefers_event_stream_output(self) -> None:
+        run_module = load_run_module()
+        stdout = io.StringIO()
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir)
+            manifest_path = repo_root / "build" / "toolchains" / "run" / "run_manifest.json"
+            events_path = repo_root / "artifacts" / "logs" / "tests" / "run-1" / "events.jsonl"
+            manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            events_path.parent.mkdir(parents=True, exist_ok=True)
+            manifest_path.write_text(
+                (REPO_ROOT / "build" / "toolchains" / "run" / "run_manifest.json").read_text(encoding="utf-8"),
+                encoding="utf-8",
+            )
+            events_path.write_text('{"eventType":"progress"}\n{"eventType":"final-summary"}\n', encoding="utf-8")
+
+            result = run_module.CommandResult.success(
+                command="test smoke HelloWorld",
+                host_platform="macos",
+                target="smoke/HelloWorld",
+                payload={"eventsPath": "artifacts/logs/tests/run-1/events.jsonl"},
+            )
+
+            with patch.object(run_module, "resolve_repo_root", return_value=repo_root):
+                with patch.object(run_module.manifest_module, "is_interactive_session", return_value=False):
+                    with patch.object(run_module.runtime_module, "detect_host_platform", return_value="macos-arm64"):
+                        with patch.object(run_module, "execute_command", return_value=result):
+                            with patch.object(run_module.sys, "stdout", stdout):
+                                exit_code = run_module.main(["test", "smoke", "HelloWorld", "--json"])
+
+        self.assertEqual(0, exit_code)
+        self.assertEqual('{"eventType":"progress"}\n{"eventType":"final-summary"}\n', stdout.getvalue())
 
 
 if __name__ == "__main__":

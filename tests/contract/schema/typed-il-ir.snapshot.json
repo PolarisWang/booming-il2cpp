@@ -1,0 +1,37 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "typedIlIr",
+  "methods": [
+    {
+      "methodId": "Game.Core/Game.Player::TakeDamage(System.Int32)",
+      "signature": "System.Void Game.Player::TakeDamage(System.Int32)",
+      "parameters": [
+        {
+          "name": "amount",
+          "type": "System.Int32"
+        }
+      ],
+      "blocks": [
+        {
+          "blockId": "entry",
+          "instructions": [
+            {
+              "op": "ldarg",
+              "operand": 1,
+              "resultType": "System.Int32"
+            },
+            {
+              "op": "call",
+              "callee": "Game.Core/Game.Player::ApplyDamage(System.Int32)",
+              "resultType": "System.Void",
+              "ssaName": "%call0"
+            },
+            {
+              "op": "ret"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
