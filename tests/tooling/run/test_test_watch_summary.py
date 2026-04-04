@@ -2,14 +2,16 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import shutil
 import sys
-import tempfile
 import unittest
+import uuid
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 TEST_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "test.py"
+TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp_test_watch_summary"
 
 
 def load_module(path: Path, module_name: str):
@@ -30,8 +32,10 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
     def test_test_summary_reads_latest_summary(self) -> None:
         test_module = load_module(TEST_MODULE_PATH, "booming_run_test_summary")
 
-        with tempfile.TemporaryDirectory() as temp_dir:
-            repo_root = Path(temp_dir)
+        TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
+        repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
             logs_root = repo_root / "artifacts" / "logs" / "tests"
             run_root = logs_root / "run-1"
             run_root.mkdir(parents=True, exist_ok=True)
@@ -45,6 +49,10 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
                         "runId": "run-1",
                         "command": "test all",
                         "finalStatus": "ok",
+                        "phaseResults": [
+                            {"phaseId": "code", "status": "ok"},
+                            {"phaseId": "module", "status": "ok"},
+                        ],
                         "suiteResults": [
                             {"suiteId": "smoke/HelloWorld", "status": "ok"},
                             {"suiteId": "workflow/roadmap-0-macos", "status": "ok"},
@@ -63,16 +71,22 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
                 {},
                 {},
             )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
         self.assertEqual("ok", result.status)
         self.assertIn("run-1", result.text or "")
+        self.assertIn("Phases:", result.text or "")
+        self.assertIn("ok: code", result.text or "")
         self.assertIn("workflow/roadmap-0-macos", result.text or "")
 
     def test_test_watch_reads_latest_events(self) -> None:
         test_module = load_module(TEST_MODULE_PATH, "booming_run_test_watch")
 
-        with tempfile.TemporaryDirectory() as temp_dir:
-            repo_root = Path(temp_dir)
+        TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
+        repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
             logs_root = repo_root / "artifacts" / "logs" / "tests"
             run_root = logs_root / "run-2"
             run_root.mkdir(parents=True, exist_ok=True)
@@ -85,6 +99,19 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
                     [
                         json.dumps({"eventType": "session-start", "payload": {"command": "test all"}}),
                         json.dumps({"eventType": "progress", "payload": {"completedUnits": 2, "totalUnits": 4}}),
+                        json.dumps(
+                            {
+                                "eventType": "final-summary",
+                                "payload": {
+                                    "finalStatus": "ok",
+                                    "phaseResults": [
+                                        {"phaseId": "code", "status": "ok"},
+                                        {"phaseId": "module", "status": "ok"},
+                                        {"phaseId": "system", "status": "ok"},
+                                    ],
+                                },
+                            }
+                        ),
                     ]
                 )
                 + "\n",
@@ -99,10 +126,16 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
                 {},
                 {},
             )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
         self.assertEqual("ok", result.status)
         self.assertIn("Unified Test Progress", result.text or "")
         self.assertIn("50%", result.text or "")
+        self.assertIn("Phases:", result.text or "")
+        self.assertIn("ok: code", result.text or "")
+        self.assertIn("ok: module", result.text or "")
+        self.assertIn("ok: system", result.text or "")
 
 
 if __name__ == "__main__":

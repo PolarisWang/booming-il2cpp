@@ -59,7 +59,8 @@ class CommandManifestTests(unittest.TestCase):
     def test_manifest_registers_unified_public_test_capabilities(self) -> None:
         manifest_module = load_manifest_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
-        command_ids = {command["id"] for command in manifest_module.list_commands(manifest)}
+        visible_command_ids = {command["id"] for command in manifest_module.list_commands(manifest)}
+        hidden_command_ids = {command["id"] for command in manifest_module.list_commands(manifest, include_hidden=True)}
 
         self.assertTrue(
             {
@@ -69,17 +70,34 @@ class CommandManifestTests(unittest.TestCase):
                 "build-preset-windows-x64-reference",
                 "build-platform-android-arm64-smoke",
                 "build-platform-linux-x64-packaging",
+                "test-suite",
+                "test-module",
+                "test-system",
+                "test-pipeline",
+                "test-registry-list",
+                "test-registry-refresh",
+                "test-registry-check-consistency",
                 "test-family-suite",
                 "test-family-all",
                 "test-all",
                 "test-list",
                 "test-watch",
                 "test-summary",
-            }.issubset(command_ids)
+            }.issubset(visible_command_ids)
         )
-        self.assertNotIn("build-smoke-helloworld", command_ids)
-        self.assertNotIn("test-smoke-helloworld", command_ids)
-        self.assertNotIn("verify-roadmap-0-windows", command_ids)
+        self.assertTrue(
+            {
+                "build-platform-windows-reference-desktop",
+                "build-platform-macos-reference-desktop",
+                "test-contract-analysis-schema",
+                "test-contract-trace-schema",
+            }.issubset(hidden_command_ids)
+        )
+        self.assertNotIn("verify-roadmap-0-windows", hidden_command_ids)
+        self.assertNotIn("verify-roadmap-0-macos", hidden_command_ids)
+        self.assertNotIn("build-smoke-helloworld", visible_command_ids)
+        self.assertNotIn("test-smoke-helloworld", visible_command_ids)
+        self.assertNotIn("verify-roadmap-0-windows", visible_command_ids)
 
     def test_parse_cli_supports_dynamic_unified_test_commands(self) -> None:
         manifest_module = load_manifest_module()
@@ -91,6 +109,71 @@ class CommandManifestTests(unittest.TestCase):
         self.assertEqual("smoke", suite["options"]["family"])
         self.assertEqual("HelloWorld", suite["options"]["suite"])
 
+        explicit_suite = manifest_module.parse_cli(
+            ["test", "suite", "--family", "smoke", "--suite", "HelloWorld"],
+            False,
+            manifest,
+            "macos",
+        )
+        self.assertEqual("test-suite", explicit_suite["command"]["id"])
+        self.assertEqual("smoke/HelloWorld", explicit_suite["target"])
+        self.assertEqual("smoke", explicit_suite["options"]["family"])
+        self.assertEqual("HelloWorld", explicit_suite["options"]["suite"])
+
+        explicit_suite_id = manifest_module.parse_cli(
+            ["test", "suite", "--id", "smoke/HelloWorld"],
+            False,
+            manifest,
+            "macos",
+        )
+        self.assertEqual("test-suite", explicit_suite_id["command"]["id"])
+        self.assertEqual("smoke/HelloWorld", explicit_suite_id["target"])
+        self.assertEqual("smoke/HelloWorld", explicit_suite_id["options"]["id"])
+
+        module_case = manifest_module.parse_cli(
+            ["test", "module", "--module", "managed-smoke", "--profile", "basic"],
+            False,
+            manifest,
+            "macos",
+        )
+        self.assertEqual("test-module", module_case["command"]["id"])
+        self.assertEqual("module/managed-smoke/basic", module_case["target"])
+        self.assertEqual("managed-smoke", module_case["options"]["module"])
+        self.assertEqual("basic", module_case["options"]["profile"])
+
+        system_case = manifest_module.parse_cli(
+            ["test", "system", "--id", "system/hosted-runtime-smoke"],
+            False,
+            manifest,
+            "macos",
+        )
+        self.assertEqual("test-system", system_case["command"]["id"])
+        self.assertEqual("system/hosted-runtime-smoke", system_case["target"])
+
+        pipeline_case = manifest_module.parse_cli(
+            ["test", "pipeline", "--pipeline", "completion-runtime-core"],
+            False,
+            manifest,
+            "macos",
+        )
+        self.assertEqual("test-pipeline", pipeline_case["command"]["id"])
+        self.assertEqual("pipeline/completion-runtime-core", pipeline_case["target"])
+        self.assertEqual("completion-runtime-core", pipeline_case["options"]["pipeline"])
+
+        registry_refresh = manifest_module.parse_cli(["test", "registry", "refresh"], False, manifest, "macos")
+        self.assertEqual("test-registry-refresh", registry_refresh["command"]["id"])
+
+        registry_list = manifest_module.parse_cli(["test", "registry", "list"], False, manifest, "macos")
+        self.assertEqual("test-registry-list", registry_list["command"]["id"])
+
+        registry_check = manifest_module.parse_cli(
+            ["test", "registry", "check-consistency"],
+            False,
+            manifest,
+            "macos",
+        )
+        self.assertEqual("test-registry-check-consistency", registry_check["command"]["id"])
+
         list_family = manifest_module.parse_cli(["test", "list", "smoke"], False, manifest, "macos")
         self.assertEqual("test-list", list_family["command"]["id"])
         self.assertEqual("smoke", list_family["target"])
@@ -101,6 +184,15 @@ class CommandManifestTests(unittest.TestCase):
 
         summary = manifest_module.parse_cli(["test", "summary"], False, manifest, "macos")
         self.assertEqual("test-summary", summary["command"]["id"])
+
+    def test_parse_cli_rejects_removed_verify_entrypoint(self) -> None:
+        manifest_module = load_manifest_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        parsed = manifest_module.parse_cli(["verify", "roadmap-0", "--host", "macos"], False, manifest, "macos")
+
+        self.assertIsNone(parsed["command"])
+        self.assertEqual("verify roadmap-0", parsed["command_text"])
 
 
 if __name__ == "__main__":

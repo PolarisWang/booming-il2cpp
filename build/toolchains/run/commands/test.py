@@ -9,12 +9,15 @@ try:
     from .. import manifest as manifest_module
     from .. import tui as tui_module
     from ..testing import catalog as catalog_module
+    from ..testing import contracts as contracts_module
+    from ..testing import public_specs as public_specs_module
+    from ..testing import registry as registry_module
+    from ..testing import selectors as selectors_module
     from ..testing import session as session_module
     from ..testing import reporting as reporting_module
     from .. import tooling as tooling_module
     from ..common import combine_process_output, run_process
     from ..commands import build as build_commands
-    from ..commands import verify as verify_commands
     from ..result import CommandResult
 except ImportError:
     root = Path(__file__).resolve().parents[1]
@@ -22,124 +25,32 @@ except ImportError:
     import manifest as manifest_module
     import tui as tui_module
     from testing import catalog as catalog_module
+    from testing import contracts as contracts_module
+    from testing import public_specs as public_specs_module
+    from testing import registry as registry_module
+    from testing import selectors as selectors_module
     from testing import session as session_module
     from testing import reporting as reporting_module
     import tooling as tooling_module
     from common import combine_process_output, run_process
     from commands import build as build_commands
-    from commands import verify as verify_commands
     from result import CommandResult
 
 
-PUBLIC_TEST_SPECS = [
-    {
-        "id": "smoke/HelloWorld",
-        "family": "smoke",
-        "suite": "HelloWorld",
-        "stages": ["all", "build", "run"],
-        "supported_hosts": ["windows", "macos", "linux"],
-        "legacy_commands": {"build": "build-smoke-helloworld", "run": "test-smoke-helloworld", "all": "test-smoke-helloworld"},
-    },
-    {
-        "id": "smoke/GenericEcho",
-        "family": "smoke",
-        "suite": "GenericEcho",
-        "stages": ["all", "build", "run"],
-        "supported_hosts": ["windows", "macos", "linux"],
-        "legacy_commands": {"build": "build-smoke-genericecho", "run": "test-smoke-genericecho", "all": "test-smoke-genericecho"},
-    },
-    {
-        "id": "smoke/ReflectionLite",
-        "family": "smoke",
-        "suite": "ReflectionLite",
-        "stages": ["all", "build", "run"],
-        "supported_hosts": ["windows", "macos", "linux"],
-        "legacy_commands": {"build": "build-smoke-reflectionlite", "run": "test-smoke-reflectionlite", "all": "test-smoke-reflectionlite"},
-    },
-    {
-        "id": "smoke/PInvokeLite",
-        "family": "smoke",
-        "suite": "PInvokeLite",
-        "stages": ["all", "build", "run"],
-        "supported_hosts": ["windows", "macos", "linux"],
-        "legacy_commands": {"build": "build-smoke-pinvokelite", "run": "test-smoke-pinvokelite", "all": "test-smoke-pinvokelite"},
-    },
-    {
-        "id": "smoke/HostEmbeddingLite",
-        "family": "smoke",
-        "suite": "HostEmbeddingLite",
-        "stages": ["all", "build", "run"],
-        "supported_hosts": ["windows", "macos", "linux"],
-        "legacy_commands": {"build": "build-smoke-hostembeddinglite", "run": "test-smoke-hostembeddinglite", "all": "test-smoke-hostembeddinglite"},
-    },
-    {
-        "id": "contract/trace-compare-windows",
-        "family": "contract",
-        "suite": "trace-compare-windows",
-        "stages": ["all", "run"],
-        "supported_hosts": ["windows"],
-        "legacy_commands": {"run": "test-trace-compare-windows", "all": "test-trace-compare-windows"},
-    },
-    {
-        "id": "contract/trace-compare-macos",
-        "family": "contract",
-        "suite": "trace-compare-macos",
-        "stages": ["all", "run"],
-        "supported_hosts": ["macos"],
-        "legacy_commands": {"run": "test-trace-compare-macos", "all": "test-trace-compare-macos"},
-    },
-    {
-        "id": "workflow/roadmap-0-windows",
-        "family": "workflow",
-        "suite": "roadmap-0-windows",
-        "stages": ["all"],
-        "supported_hosts": ["windows"],
-        "legacy_commands": {"all": "verify-roadmap-0-windows"},
-    },
-    {
-        "id": "workflow/roadmap-0-macos",
-        "family": "workflow",
-        "suite": "roadmap-0-macos",
-        "stages": ["all"],
-        "supported_hosts": ["macos"],
-        "legacy_commands": {"all": "verify-roadmap-0-macos"},
-    },
-]
+PUBLIC_TEST_SPECS = public_specs_module.PUBLIC_TEST_SPECS
 
 
 def find_public_test_suite_spec(family: str | None, suite: str | None) -> dict | None:
-    for item in PUBLIC_TEST_SPECS:
-        if item["family"] == family and item["suite"] == suite:
-            return item
-    return None
+    return public_specs_module.find_public_test_suite_spec(family, suite)
 
 
 def list_public_test_suites(manifest: dict, host_platform: str) -> list[dict]:
     del manifest
-    return [
-        {
-            "id": item["id"],
-            "family": item["family"],
-            "suite": item["suite"],
-            "stages": list(item["stages"]),
-        }
-        for item in PUBLIC_TEST_SPECS
-        if host_platform in item["supported_hosts"]
-    ]
+    return public_specs_module.list_public_test_suites(host_platform)
 
 
 def resolve_legacy_test_command_id(family: str, suite: str, *, stage: str, host_platform: str) -> str | None:
-    suite_spec = find_public_test_suite_spec(family, suite)
-    if suite_spec is None:
-        return None
-
-    if host_platform not in suite_spec["supported_hosts"]:
-        return None
-
-    if stage not in suite_spec["stages"]:
-        return None
-
-    return suite_spec["legacy_commands"].get(stage)
+    return public_specs_module.resolve_legacy_test_command_id(family, suite, stage=stage, host_platform=host_platform)
 
 
 def _render_public_test_list(items: list[dict]) -> str:
@@ -161,6 +72,96 @@ def _handle_public_test_list(command_text: str, host_platform: str, options: dic
         target=family,
         payload={"items": items},
         text=_render_public_test_list(items),
+    )
+
+
+def _scan_registry(repo_root: Path, host_platform: str) -> registry_module.RegistryIndex:
+    return registry_module.scan_registry(
+        repo_root,
+        host_platform=host_platform,
+        public_suite_specs=PUBLIC_TEST_SPECS,
+    )
+
+
+def _render_registry_list(index: registry_module.RegistryIndex) -> str:
+    lines = ["Unified Test Registry", ""]
+    for title, items in (
+        ("Suites", index.suites),
+        ("Module Verifications", index.module_verifications),
+        ("System Scenarios", index.system_scenarios),
+        ("Pipelines", index.pipelines),
+    ):
+        lines.append(f"{title}:")
+        for item in items:
+            lines.append(f"- {item['id']}")
+    return "\n".join(lines) + "\n"
+
+
+def _handle_registry_dispatch(
+    command: dict,
+    repo_root: Path,
+    host_platform: str,
+    command_text: str,
+) -> CommandResult:
+    index = _scan_registry(repo_root, host_platform)
+    if command["id"] == "test-registry-refresh":
+        snapshot = registry_module.write_registry_snapshot(repo_root, index)
+        payload = {
+            "currentPath": str(snapshot["currentPath"].relative_to(repo_root).as_posix()),
+            "historyPath": str(snapshot["historyPath"].relative_to(repo_root).as_posix()),
+            "flatItems": index.flat_items,
+            "errors": index.errors,
+            "warnings": index.warnings,
+        }
+        status_factory = CommandResult.failure if index.errors else CommandResult.success
+        kwargs = {
+            "command": command_text,
+            "host_platform": host_platform,
+            "target": "registry",
+            "payload": payload,
+            "text": _render_registry_list(index),
+        }
+        if index.errors:
+            kwargs["errors"] = list(index.errors)
+        return status_factory(**kwargs)
+
+    if command["id"] == "test-registry-list":
+        return CommandResult.success(
+            command=command_text,
+            host_platform=host_platform,
+            target="registry",
+            payload=index.to_dict(),
+            text=_render_registry_list(index),
+        )
+
+    errors = list(index.errors)
+    warnings = list(index.warnings)
+    lines = ["Registry Consistency Check", ""]
+    if errors:
+        lines.append("Errors:")
+        lines.extend(errors)
+    if warnings:
+        lines.append("Warnings:")
+        lines.extend(warnings)
+    if not errors and not warnings:
+        lines.append("ok")
+
+    if errors:
+        return CommandResult.failure(
+            command=command_text,
+            host_platform=host_platform,
+            target="registry",
+            errors=errors,
+            payload={"errors": errors, "warnings": warnings, "exitCode": 2},
+            text="\n".join(lines) + "\n",
+        )
+
+    return CommandResult.success(
+        command=command_text,
+        host_platform=host_platform,
+        target="registry",
+        payload={"errors": errors, "warnings": warnings},
+        text="\n".join(lines) + "\n",
     )
 
 
@@ -212,6 +213,10 @@ def _render_summary(summary: dict[str, Any]) -> str:
         lines.extend(str(error) for error in errors)
 
     suite_results = list(summary.get("suiteResults") or [])
+    phase_results = list(summary.get("phaseResults") or [])
+    if phase_results:
+        lines.append("Phases:")
+        lines.extend(f"{phase.get('status', '-')}: {phase.get('phaseId', '-')}" for phase in phase_results)
     if suite_results:
         lines.append("Suites:")
         lines.extend(f"{suite.get('status', '-')}: {suite.get('suiteId', '-')}" for suite in suite_results)
@@ -294,9 +299,11 @@ def _execute_legacy_command(
     handler = legacy_command["handler"]
     if handler == "build.dispatch":
         return build_commands.handle(legacy_command, repo_root, host_platform, command_text)
-    if handler == "verify.dispatch":
-        return verify_commands.handle(legacy_command, repo_root, host_platform, command_text)
-    return handle(legacy_command, repo_root, host_platform, command_text)
+    manifest = manifest_module.load_run_manifest(
+        repo_root,
+        repo_root / "build" / "toolchains" / "run" / "run_manifest.json",
+    )
+    return handle(legacy_command, repo_root, host_platform, command_text, manifest)
 
 
 def _execute_public_test_session(
@@ -331,57 +338,187 @@ def _execute_public_test_session(
     )
 
 
-def _handle_public_test_dispatch(
-    command: dict,
+def _empty_phase_status_counts() -> dict[str, int]:
+    return {
+        "total": 0,
+        "ok": 0,
+        "fail": 0,
+        "skip": 0,
+        "aborted": 0,
+    }
+
+
+def _merge_phase_suite_ids(target: list[str], additions: list[str]) -> None:
+    for suite_id in additions:
+        if suite_id not in target:
+            target.append(suite_id)
+
+
+def _aggregate_phase_member_status(statuses: list[str]) -> str:
+    if not statuses:
+        return "aborted"
+    if any(status == "fail" for status in statuses):
+        return "fail"
+    if any(status == "aborted" for status in statuses):
+        return "aborted"
+    if all(status == "skip" for status in statuses):
+        return "skip"
+    if all(status in {"ok", "skip"} for status in statuses):
+        return "ok"
+    return "aborted"
+
+
+def _build_pipeline_phase_plan(selected_object: dict[str, Any]) -> list[dict[str, Any]]:
+    phase_plan: list[dict[str, Any]] = []
+    for phase in list(selected_object.get("phases") or []):
+        phase_plan.append(
+            {
+                "phaseId": str(phase.get("id") or ""),
+                "title": str(phase.get("title") or ""),
+                "members": [
+                    {
+                        "type": str(member.get("type") or ""),
+                        "id": str(member.get("id") or ""),
+                    }
+                    for member in list(phase.get("members") or [])
+                ],
+            }
+        )
+    return phase_plan
+
+
+def _build_pipeline_phase_results(
+    index: registry_module.RegistryIndex,
+    selected_object: dict[str, Any],
+    suite_results: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    suite_status_by_id = {
+        str(suite_result.get("suiteId") or ""): str(suite_result.get("status") or "aborted")
+        for suite_result in suite_results
+    }
+    phase_results: list[dict[str, Any]] = []
+
+    for phase in list(selected_object.get("phases") or []):
+        member_counts = _empty_phase_status_counts()
+        member_results: list[dict[str, Any]] = []
+        resolved_phase_suite_ids: list[str] = []
+
+        for member in list(phase.get("members") or []):
+            member_id = str(member.get("id") or "")
+            member_object = registry_module.find_registry_object(index, member_id)
+            if member_object is None:
+                resolved_suite_ids: list[str] = []
+                member_status = "aborted"
+                member_results.append(
+                    {
+                        "objectId": member_id,
+                        "objectType": str(member.get("type") or ""),
+                        "displayName": member_id,
+                        "resolvedSuiteIds": resolved_suite_ids,
+                        "status": member_status,
+                    }
+                )
+            else:
+                resolved_suite_ids = [item["id"] for item in registry_module.expand_execution_plan(index, member_id)]
+                resolved_statuses = [suite_status_by_id.get(suite_id, "aborted") for suite_id in resolved_suite_ids]
+                member_status = _aggregate_phase_member_status(resolved_statuses)
+                member_results.append(
+                    {
+                        "objectId": member_id,
+                        "objectType": str(member_object.get("type") or member.get("type") or ""),
+                        "displayName": str(member_object.get("displayName") or member_id),
+                        "canonicalCommand": str(member_object.get("canonicalCommand") or ""),
+                        "resolvedSuiteIds": resolved_suite_ids,
+                        "status": member_status,
+                    }
+                )
+
+            member_counts["total"] += 1
+            member_counts[member_status if member_status in member_counts else "aborted"] += 1
+            _merge_phase_suite_ids(resolved_phase_suite_ids, resolved_suite_ids)
+
+        phase_status = _aggregate_phase_member_status([member["status"] for member in member_results])
+        phase_results.append(
+            {
+                "phaseId": str(phase.get("id") or ""),
+                "title": str(phase.get("title") or ""),
+                "status": phase_status,
+                "memberCounts": member_counts,
+                "memberResults": member_results,
+                "suiteIds": resolved_phase_suite_ids,
+            }
+        )
+
+    return phase_results
+
+
+def _with_selected_object_context(
+    result: CommandResult,
+    selected_object: dict[str, Any],
+    index: registry_module.RegistryIndex,
+) -> CommandResult:
+    payload = dict(result.payload)
+    payload["selectedObject"] = selected_object
+    payload["objectOwnership"] = {
+        "primaryModuleId": selected_object.get("primaryModuleId"),
+        "moduleIds": list(selected_object.get("moduleIds", [])),
+        "subsystemIds": list(selected_object.get("subsystemIds", [])),
+    }
+    if selected_object.get("type") == "pipeline":
+        payload["phasePlan"] = _build_pipeline_phase_plan(selected_object)
+        payload["phaseResults"] = _build_pipeline_phase_results(
+            index,
+            selected_object,
+            list(payload.get("suiteResults") or []),
+        )
+    if result.status != "ok":
+        payload.setdefault("failureCode", "test.execution.object_failed")
+        payload.setdefault(
+            "parserHint",
+            "Inspect the generated summary/report paths and re-run the canonical command for the selected object.",
+        )
+        human_hint = f"Execution failed while running `{selected_object['id']}`."
+        summary_path = payload.get("summaryPath")
+        console_path = payload.get("consolePath")
+        canonical_command = selected_object.get("canonicalCommand")
+        if isinstance(summary_path, str) and summary_path:
+            human_hint += f" Check `{summary_path}` for the summarized failure."
+        elif isinstance(console_path, str) and console_path:
+            human_hint += f" Check `{console_path}` for the console output."
+        if isinstance(canonical_command, str) and canonical_command:
+            human_hint += f" Re-run with `{canonical_command}`."
+        payload.setdefault("humanHint", human_hint)
+    return CommandResult(
+        command=result.command,
+        status=result.status,
+        host_platform=result.host_platform,
+        target=result.target,
+        duration_ms=result.duration_ms,
+        checks=result.checks,
+        errors=result.errors,
+        payload=payload,
+        text=result.text,
+    )
+
+
+def _run_suite_items(
+    items: list[dict[str, Any]],
+    *,
+    index: registry_module.RegistryIndex,
+    target: str,
+    stage: str,
     repo_root: Path,
     host_platform: str,
     command_text: str,
     manifest: dict,
-    options: dict,
     progress_callback: Callable[[dict[str, Any]], None] | None = None,
+    selected_object: dict[str, Any] | None = None,
 ) -> CommandResult:
-    command_id = command["id"]
-    if command_id == "test-list":
-        return _handle_public_test_list(command_text, host_platform, options, manifest)
-    if command_id == "test-watch":
-        return _handle_test_watch(command_text, repo_root, host_platform, options)
-    if command_id == "test-summary":
-        return _handle_test_summary(command_text, repo_root, host_platform, options)
-
-    if command_id in {"test-all", "test-family-all"}:
-        if options.get("strict"):
-            try:
-                catalog_module.scan_catalog(repo_root, host_platform=host_platform, strict=True)
-            except ValueError:
-                return CommandResult.failure(
-                    command=command_text,
-                    host_platform=host_platform,
-                    target=options.get("family") or "all",
-                    errors=["invalid suites found while scanning catalog"],
-                    payload={"exitCode": 2},
-                    text="invalid suites found while scanning catalog\n",
-                )
-
-    family = options.get("family")
-    items = list_public_test_suites(manifest, host_platform) if command_id in {"test-all", "test-family-all"} else []
-    if family and items:
-        items = [item for item in items if item["family"] == family]
-    if command_id == "test-family-suite":
-        items = [
-            {
-                "id": f"{options.get('family')}/{options.get('suite')}",
-                "family": options.get("family"),
-                "suite": options.get("suite"),
-                "stages": [options.get("stage", "all")],
-            }
-        ]
-    target = family or "all" if command_id in {"test-all", "test-family-all"} else f"{options.get('family')}/{options.get('suite')}"
-
     if not items:
         return CommandResult.failure(
             command=command_text,
             host_platform=host_platform,
-            target=family,
+            target=target,
             errors=["no matching test suites"],
             text="no matching test suites\n",
         )
@@ -419,12 +556,11 @@ def _handle_public_test_dispatch(
     outputs: list[str] = []
     suite_results: list[dict] = []
     artifacts: list[str] = []
-    stage = options.get("stage", "all")
-    for index, item in enumerate(items):
+    for unit_index, item in enumerate(items):
         stage_start_event = reporting_module.build_event(
             "stage-start",
             {
-                "completedUnits": index,
+                "completedUnits": unit_index,
                 "totalUnits": len(items),
                 "activeUnit": item["id"],
             },
@@ -453,7 +589,7 @@ def _handle_public_test_dispatch(
         stage_finish_event = reporting_module.build_event(
             "stage-finish",
             {
-                "completedUnits": index + 1,
+                "completedUnits": unit_index + 1,
                 "totalUnits": len(items),
                 "activeUnit": item["id"],
             },
@@ -465,7 +601,7 @@ def _handle_public_test_dispatch(
         progress_event = reporting_module.build_event(
             "progress",
             {
-                "completedUnits": index + 1,
+                "completedUnits": unit_index + 1,
                 "totalUnits": len(items),
                 "activeUnit": item["id"],
                 "suiteStatus": "ok" if session_result.status == "ok" else "fail",
@@ -486,11 +622,21 @@ def _handle_public_test_dispatch(
                 command=command_text,
                 host_platform=host_platform,
                 target=target,
-                errors=session_result.errors or [f"batch execution failed while running {item['id']}"],
-                payload={"items": items, "suiteResults": suite_results, "artifacts": artifacts, "exitCode": session_result.exit_code},
+                errors=session_result.errors or [f"test execution failed while running {item['id']}"],
+                payload={
+                    "items": items,
+                    "suiteResults": suite_results,
+                    "artifacts": artifacts,
+                    "exitCode": session_result.exit_code,
+                },
                 text="".join(outputs),
             )
-            return _attach_session_report(result, repo_root, host_platform, command_text, run_context=run_context)
+            if selected_object is not None:
+                result = _with_selected_object_context(result, selected_object, index)
+            result = _attach_session_report(result, repo_root, host_platform, command_text, run_context=run_context)
+            if selected_object is not None:
+                result = _with_selected_object_context(result, selected_object, index)
+            return result
 
     result = CommandResult.success(
         command=command_text,
@@ -499,7 +645,153 @@ def _handle_public_test_dispatch(
         payload={"items": items, "suiteResults": suite_results, "artifacts": artifacts, "exitCode": 0},
         text="".join(outputs),
     )
-    return _attach_session_report(result, repo_root, host_platform, command_text, run_context=run_context)
+    if selected_object is not None:
+        result = _with_selected_object_context(result, selected_object, index)
+    result = _attach_session_report(result, repo_root, host_platform, command_text, run_context=run_context)
+    if selected_object is not None:
+        result = _with_selected_object_context(result, selected_object, index)
+    return result
+
+
+def _handle_registry_object_dispatch(
+    object_kind: str,
+    repo_root: Path,
+    host_platform: str,
+    command_text: str,
+    manifest: dict,
+    options: dict,
+    progress_callback: Callable[[dict[str, Any]], None] | None = None,
+) -> CommandResult:
+    try:
+        normalized_options = selectors_module.normalize_selector_options(object_kind, options)
+    except ValueError as error:
+        return CommandResult.failure(
+            command=command_text,
+            host_platform=host_platform,
+            target=None,
+            errors=[str(error)],
+            payload={"exitCode": 2},
+            text=f"{error}\n",
+        )
+
+    index = _scan_registry(repo_root, host_platform)
+    object_id = str(normalized_options["id"])
+    selected_object = registry_module.find_registry_object(index, object_id)
+    if selected_object is None:
+        return CommandResult.failure(
+            command=command_text,
+            host_platform=host_platform,
+            target=object_id,
+            errors=[f"registry object not found: {object_id}"],
+            payload={
+                "failureCode": "test.registry.object_not_found",
+                "parserHint": "Run `run test registry list --json` to inspect available registry object ids.",
+                "humanHint": (
+                    f"Registry object `{object_id}` was not found. "
+                    "Run `run test registry list --json` or "
+                    "`run test registry check-consistency --json` to inspect the current registry."
+                ),
+                "exitCode": 2,
+            },
+            text=f"registry object not found: {object_id}\n",
+        )
+
+    try:
+        plan = registry_module.expand_execution_plan(index, object_id)
+    except ValueError as error:
+        return CommandResult.failure(
+            command=command_text,
+            host_platform=host_platform,
+            target=object_id,
+            errors=[str(error)],
+            payload={"exitCode": 2},
+            text=f"{error}\n",
+        )
+
+    stage = str(normalized_options.get("stage") or "all")
+    return _run_suite_items(
+        plan,
+        index=index,
+        target=object_id,
+        stage=stage,
+        repo_root=repo_root,
+        host_platform=host_platform,
+        command_text=command_text,
+        manifest=manifest,
+        progress_callback=progress_callback,
+        selected_object=selected_object,
+    )
+
+
+def _handle_public_test_dispatch(
+    command: dict,
+    repo_root: Path,
+    host_platform: str,
+    command_text: str,
+    manifest: dict,
+    options: dict,
+    progress_callback: Callable[[dict[str, Any]], None] | None = None,
+) -> CommandResult:
+    command_id = command["id"]
+    if command_id == "test-list":
+        return _handle_public_test_list(command_text, host_platform, options, manifest)
+    if command_id == "test-watch":
+        return _handle_test_watch(command_text, repo_root, host_platform, options)
+    if command_id == "test-summary":
+        return _handle_test_summary(command_text, repo_root, host_platform, options)
+    if command_id in {"test-registry-refresh", "test-registry-list", "test-registry-check-consistency"}:
+        return _handle_registry_dispatch(command, repo_root, host_platform, command_text)
+    if command_id in {"test-suite", "test-module", "test-system", "test-pipeline"}:
+        return _handle_registry_object_dispatch(
+            command_id.removeprefix("test-"),
+            repo_root,
+            host_platform,
+            command_text,
+            manifest,
+            options,
+            progress_callback=progress_callback,
+        )
+
+    if command_id in {"test-all", "test-family-all"}:
+        if options.get("strict"):
+            try:
+                catalog_module.scan_catalog(repo_root, host_platform=host_platform, strict=True)
+            except ValueError:
+                return CommandResult.failure(
+                    command=command_text,
+                    host_platform=host_platform,
+                    target=options.get("family") or "all",
+                    errors=["invalid suites found while scanning catalog"],
+                    payload={"exitCode": 2},
+                    text="invalid suites found while scanning catalog\n",
+                )
+
+    family = options.get("family")
+    items = list_public_test_suites(manifest, host_platform) if command_id in {"test-all", "test-family-all"} else []
+    if family and items:
+        items = [item for item in items if item["family"] == family]
+    if command_id == "test-family-suite":
+        items = [
+            {
+                "id": f"{options.get('family')}/{options.get('suite')}",
+                "family": options.get("family"),
+                "suite": options.get("suite"),
+                "stages": [options.get("stage", "all")],
+            }
+        ]
+    target = family or "all" if command_id in {"test-all", "test-family-all"} else f"{options.get('family')}/{options.get('suite')}"
+
+    return _run_suite_items(
+        items,
+        index=_scan_registry(repo_root, host_platform),
+        target=target,
+        stage=options.get("stage", "all"),
+        repo_root=repo_root,
+        host_platform=host_platform,
+        command_text=command_text,
+        manifest=manifest,
+        progress_callback=progress_callback,
+    )
 
 
 def _attach_session_report(
@@ -516,6 +808,7 @@ def _attach_session_report(
             command_text=command_text,
             status=result.status,
             suite_results=list(result.payload.get("suiteResults", [])),
+            phase_results=list(result.payload.get("phaseResults", [])),
             text=result.text or "",
             errors=list(result.errors),
             artifacts=list(result.payload.get("artifacts", [])),
@@ -640,6 +933,23 @@ def _run_trace_compare(command: dict, repo_root: Path, host_platform: str, comma
     return _success(command_text, host_platform, command.get("target"), output, [str(trace_output)])
 
 
+def _run_contract_check(command: dict, repo_root: Path, host_platform: str, command_text: str) -> CommandResult:
+    target = str(command.get("contract_check") or command.get("target") or "")
+    try:
+        if target == "analysis-schema":
+            contracts_module.assert_json_files_parse(contracts_module.analysis_contract_json_paths(repo_root))
+            contracts_module.validate_analysis_contracts(repo_root)
+        elif target == "trace-schema":
+            contracts_module.assert_json_files_parse(contracts_module.trace_contract_json_paths(repo_root))
+            contracts_module.validate_trace_schema_contracts(repo_root)
+        else:
+            return _failure(command_text, host_platform, command.get("target"), "", [f"unsupported contract check: {target}"])
+    except RuntimeError as error:
+        return _failure(command_text, host_platform, command.get("target"), "", [str(error)])
+
+    return _success(command_text, host_platform, command.get("target"), "", [])
+
+
 def handle(
     command: dict,
     repo_root: Path,
@@ -649,7 +959,21 @@ def handle(
     options: dict | None = None,
     progress_callback: Callable[[dict[str, Any]], None] | None = None,
 ) -> CommandResult:
-    if command["id"] in {"test-family-suite", "test-family-all", "test-all", "test-list", "test-watch", "test-summary"}:
+    if command["id"] in {
+        "test-suite",
+        "test-module",
+        "test-system",
+        "test-pipeline",
+        "test-family-suite",
+        "test-family-all",
+        "test-all",
+        "test-list",
+        "test-watch",
+        "test-summary",
+        "test-registry-refresh",
+        "test-registry-list",
+        "test-registry-check-consistency",
+    }:
         return _handle_public_test_dispatch(
             command,
             repo_root,
@@ -663,6 +987,18 @@ def handle(
     kind = command["kind"]
     if kind == "smoke-run":
         return _run_smoke_project(command, repo_root, host_platform, command_text)
+    if kind == "contract-check":
+        return _run_contract_check(command, repo_root, host_platform, command_text)
+    if kind == "registry-object-alias":
+        return _handle_registry_object_dispatch(
+            str(command["registry_object_kind"]),
+            repo_root,
+            host_platform,
+            command_text,
+            manifest or {},
+            {"id": str(command["registry_object_id"])},
+            progress_callback=progress_callback,
+        )
     if kind == "trace-compare":
         return _run_trace_compare(command, repo_root, host_platform, command_text)
 

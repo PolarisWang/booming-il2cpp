@@ -1,0 +1,33 @@
+{
+  "displayName": "Trace export Windows runtime pipeline",
+  "pipelinePurpose": "verification",
+  "primaryModuleId": "trace-export",
+  "moduleIds": ["trace-export", "hosted-runtime"],
+  "subsystemIds": ["hosting"],
+  "supportedHosts": ["windows"],
+  "docRefs": ["wiki/06-测试验证/测试管线/trace-export-runtime.md"],
+  "phases": [
+    {
+      "id": "code",
+      "title": "Code tests",
+      "members": [
+        {"type": "suite", "id": "smoke/HostEmbeddingLite"}
+      ]
+    },
+    {
+      "id": "module",
+      "title": "Module verification",
+      "members": [
+        {"type": "module", "id": "module/hosted-runtime/basic"},
+        {"type": "module", "id": "module/trace-export/windows"}
+      ]
+    },
+    {
+      "id": "system",
+      "title": "System validation",
+      "members": [
+        {"type": "system", "id": "system/trace-export-windows-smoke"}
+      ]
+    }
+  ]
+}

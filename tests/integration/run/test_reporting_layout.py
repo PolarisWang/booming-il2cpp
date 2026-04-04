@@ -2,14 +2,16 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import shutil
 import sys
-import tempfile
 import unittest
+import uuid
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 REPORTING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "reporting.py"
+TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp_test_reporting_layout"
 
 
 def load_reporting_module():
@@ -30,8 +32,10 @@ class ReportingLayoutTests(unittest.TestCase):
     def test_reporting_layout_writes_fixed_session_files(self) -> None:
         reporting_module = load_reporting_module()
 
-        with tempfile.TemporaryDirectory() as temp_dir:
-            repo_root = Path(temp_dir)
+        TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
+        repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
             report = reporting_module.write_session_report(
                 repo_root=repo_root,
                 host_platform="macos",
@@ -55,6 +59,22 @@ class ReportingLayoutTests(unittest.TestCase):
                         ],
                     }
                 ],
+                phase_results=[
+                    {
+                        "phaseId": "code",
+                        "title": "Code tests",
+                        "status": "ok",
+                        "memberCounts": {"total": 1, "ok": 1, "fail": 0, "aborted": 0},
+                        "memberResults": [
+                            {
+                                "objectId": "smoke/HelloWorld",
+                                "objectType": "suite",
+                                "status": "ok",
+                                "resolvedSuiteIds": ["smoke/HelloWorld"],
+                            }
+                        ],
+                    }
+                ],
                 text="managed smoke ok\n",
                 errors=[],
                 artifacts=[],
@@ -74,9 +94,13 @@ class ReportingLayoutTests(unittest.TestCase):
                 for line in (root / "events.jsonl").read_text(encoding="utf-8").splitlines()
                 if line.strip()
             ]
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
         self.assertEqual("final-summary", events[-1]["eventType"])
         self.assertNotIn("suiteResults", events[-1]["payload"])
+        self.assertEqual("code", summary["phaseResults"][0]["phaseId"])
+        self.assertEqual("code", events[-1]["payload"]["phaseResults"][0]["phaseId"])
         self.assertEqual(1, summary["trafficLightCounts"]["green"]["ok"])
         self.assertEqual(1, summary["trafficLightCounts"]["red"]["fail"])
         self.assertEqual(1, summary["trafficLightCounts"]["yellow"]["skip"])

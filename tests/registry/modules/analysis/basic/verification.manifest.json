@@ -1,0 +1,11 @@
+{
+  "displayName": "Analysis basic verification",
+  "primaryModuleId": "analysis",
+  "moduleIds": ["analysis"],
+  "subsystemIds": ["analysis-contracts"],
+  "supportedHosts": ["windows", "macos", "linux"],
+  "docRefs": ["wiki/06-测试验证/模块/analysis.md"],
+  "members": [
+    {"type": "suite", "id": "contract/analysis-schema"}
+  ]
+}

@@ -139,8 +139,13 @@ $listPayload = $listJson.Output | ConvertFrom-Json
 Assert-True ($listPayload.command -eq "list") "list --json should identify the command"
 Assert-True ($listPayload.status -eq "ok") "list --json should report ok status"
 Assert-True ($listPayload.items.Count -ge 10) "list --json should surface the current real capability set"
-Assert-True ((@($listPayload.items.id) -contains "build-smoke-helloworld")) "list --json should include build smoke HelloWorld"
-Assert-True ((@($listPayload.items.id) -contains "verify-roadmap-0-windows")) "list --json should include Windows roadmap-0 verification"
+Assert-True ((@($listPayload.items.id) -contains "test-suite")) "list --json should include suite selector entry"
+Assert-True ((@($listPayload.items.id) -contains "test-module")) "list --json should include module selector entry"
+Assert-True ((@($listPayload.items.id) -contains "test-system")) "list --json should include system selector entry"
+Assert-True ((@($listPayload.items.id) -contains "test-pipeline")) "list --json should include pipeline selector entry"
+Assert-True ((@($listPayload.items.id) -contains "test-registry-list")) "list --json should include registry listing entry"
+Assert-True (-not (@($listPayload.items.id) -contains "build-smoke-helloworld")) "list --json should hide deprecated hidden smoke build entries"
+Assert-True (-not (@($listPayload.items.id) -contains "verify-roadmap-0-windows")) "list --json should hide removed verify entrypoints"
 
 $capabilityJson = Invoke-Run -Arguments @("capability", "bootstrap", "--json") -Environment $baseEnv
 Assert-True ($capabilityJson.ExitCode -eq 0) "capability bootstrap --json should succeed"
@@ -154,6 +159,7 @@ $interactiveMenu = Invoke-Run -Arguments @() -Environment @{
     BOOM_RUN_BOOTSTRAP_PYTHON = $pythonCommand
 }
 Assert-True ($interactiveMenu.ExitCode -eq 0) "bare interactive run should render menu"
-Assert-True ($interactiveMenu.Output -match "Quick Start") "interactive menu should render grouped sections"
+Assert-True ($interactiveMenu.Output -match "prepare") "interactive menu should render the primary command list"
+Assert-True ($interactiveMenu.Output -match "test") "interactive menu should include the unified test entry"
 
 Write-Host "run CLI tests passed"

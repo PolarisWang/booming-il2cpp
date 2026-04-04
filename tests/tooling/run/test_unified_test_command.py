@@ -41,7 +41,7 @@ class UnifiedTestCommandTests(unittest.TestCase):
             test_module.resolve_legacy_test_command_id("smoke", "HelloWorld", stage="all", host_platform="macos"),
         )
         self.assertEqual(
-            "verify-roadmap-0-macos",
+            "test-workflow-roadmap-0-macos",
             test_module.resolve_legacy_test_command_id("workflow", "roadmap-0-macos", stage="all", host_platform="macos"),
         )
 
@@ -62,24 +62,45 @@ class UnifiedTestCommandTests(unittest.TestCase):
         run_module = load_module(RUN_MODULE_PATH, "booming_run_main_for_legacy_migration")
         result_module = load_module(RESULT_MODULE_PATH, "booming_run_result_for_legacy_migration")
         result = result_module.CommandResult.success(
-            command="verify roadmap-0 --host macos",
+            command="build smoke HelloWorld",
             host_platform="macos",
-            target="macos",
-            payload={"artifacts": ["artifacts/verify-roadmap-0/macos"]},
-            text="verify completed\n",
+            target="HelloWorld",
+            payload={"artifacts": ["artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll"]},
+            text="build completed\n",
         )
 
         wrapped = run_module.add_legacy_test_migration_guidance(
             {
-                "id": "verify-roadmap-0-macos",
+                "id": "build-smoke-helloworld",
                 "public": False,
-                "replacement_syntax": "test workflow roadmap-0-macos",
+                "replacement_syntax": "test smoke HelloWorld --stage build",
             },
             result,
         )
 
         self.assertIn("Deprecated test command", wrapped.text)
-        self.assertEqual("test workflow roadmap-0-macos", wrapped.payload["migration"]["replacementSyntax"])
+        self.assertEqual("test smoke HelloWorld --stage build", wrapped.payload["migration"]["replacementSyntax"])
+
+    def test_removed_verify_entrypoint_returns_migration_guidance(self) -> None:
+        run_module = load_module(RUN_MODULE_PATH, "booming_run_main_for_removed_verify_migration")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_for_removed_verify_migration")
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        result = run_module.execute_command(
+            None,
+            "verify roadmap-0",
+            None,
+            "windows",
+            manifest,
+            REPO_ROOT,
+            {"host": "windows"},
+        )
+
+        self.assertEqual("error", result.status)
+        self.assertIn("Removed command", result.text or "")
+        self.assertIn("run test workflow roadmap-0-windows", result.text or "")
+        self.assertEqual("verify roadmap-0", result.payload["migration"]["removedCommand"])
+        self.assertEqual("test workflow roadmap-0-windows", result.payload["migration"]["replacementSyntax"])
 
 
 if __name__ == "__main__":

@@ -31,24 +31,24 @@ class PrepareScopeTests(unittest.TestCase):
         self.assertEqual("global", prepare_module.resolve_prepare_scope("prepare"))
         self.assertEqual("smoke", prepare_module.resolve_prepare_scope("prepare-smoke"))
         self.assertEqual(
-            "verify-roadmap0-windows",
+            "workflow-roadmap0-windows",
             prepare_module.resolve_prepare_scope("prepare-verify-roadmap-0-windows"),
         )
         self.assertEqual(
-            "verify-roadmap0-macos",
+            "workflow-roadmap0-macos",
             prepare_module.resolve_prepare_scope("prepare-verify-roadmap-0-macos"),
         )
 
     def test_clean_scope_paths_only_cover_managed_outputs(self) -> None:
         prepare_module = load_prepare_module()
-        clean_paths = prepare_module.resolve_clean_paths(REPO_ROOT, "verify-roadmap0-windows")
+        clean_paths = prepare_module.resolve_clean_paths(REPO_ROOT, "workflow-roadmap0-windows")
 
         self.assertIn(
             REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows",
             clean_paths,
         )
         self.assertIn(
-            REPO_ROOT / "artifacts" / "run" / "prepare" / "verify-roadmap0-windows.json",
+            REPO_ROOT / "artifacts" / "run" / "prepare" / "workflow-roadmap0-windows.json",
             clean_paths,
         )
         self.assertNotIn(REPO_ROOT / "contracts", clean_paths)

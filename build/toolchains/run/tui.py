@@ -48,7 +48,18 @@ class MenuState:
     section_selection_command_id: str | None = None
 
 
-TEST_MENU_COMMAND_IDS = {"test-family-suite", "test-family-all", "test-all", "test-list", "test-watch", "test-summary"}
+TEST_MENU_COMMAND_IDS = {
+    "test-all",
+    "test-suite",
+    "test-module",
+    "test-system",
+    "test-pipeline",
+    "test-registry-list",
+    "test-registry-refresh",
+    "test-registry-check-consistency",
+    "test-watch",
+    "test-summary",
+}
 PRIMARY_MENU_ENTRIES = [
     {
         "id": "prepare-menu",
@@ -93,6 +104,7 @@ class TestProgressView:
     progress_text: str
     final_status: str
     history_lines: list[str]
+    phase_lines: list[str]
     important_lines: list[str]
     artifact_lines: list[str]
     artifact_count: int
@@ -137,7 +149,7 @@ def build_prepare_menu_entries(manifest: dict[str, Any], host_platform: str) -> 
                 "场景准备",
                 f"prepare-verify-roadmap-0-{host_platform}",
                 "roadmap-0",
-                "准备当前主机的 roadmap-0 验证环境",
+                "准备当前主机的 roadmap-0 工作流环境",
             ),
         ],
     )
@@ -150,7 +162,7 @@ def build_clean_menu_entries(manifest: dict[str, Any], host_platform: str) -> li
         [
             ("清理范围", "clean", "all", "清理统一入口产生的全部托管输出与缓存产物"),
             ("清理范围", "clean-smoke", "smoke", "只清理 smoke 测试相关输出"),
-            ("清理范围", f"clean-verify-roadmap0-{host_platform}", "roadmap-0", "清理当前主机的 roadmap-0 验证输出"),
+            ("清理范围", f"clean-verify-roadmap0-{host_platform}", "roadmap-0", "清理当前主机的 roadmap-0 工作流输出"),
         ],
     )
 
@@ -384,6 +396,134 @@ def resolve_entry_argv(
     if command_id == "test-list":
         value = prompt_value_provider("可选输入测试族，留空表示全部：").strip()
         return ["test", "list", value] if value else ["test", "list"]
+
+    return list(entry.argv)
+
+
+def build_inspect_menu_entries(manifest: dict[str, Any], host_platform: str) -> list[MenuEntry]:
+    return _build_curated_submenu_entries(
+        manifest,
+        host_platform,
+        [
+            ("Inspect", "help", "help", "Show unified entrypoint help and common command syntax"),
+            ("Inspect", "capability", "capability", "Show details for one capability"),
+            ("Inspect", "list", "catalog", "Browse the visible capability catalog"),
+            ("Tests", "test-registry-list", "tests", "Browse the current host's registered test objects"),
+        ],
+    )
+
+
+def build_test_menu_entries(manifest: dict[str, Any], host_platform: str) -> list[MenuEntry]:
+    del manifest
+    del host_platform
+    return [
+        MenuEntry("Quick Start", {"id": "test-all", "title": "Run the default unified test matrix"}, "all", ["test", "all"]),
+        MenuEntry("Selectors", {"id": "test-suite", "title": "Run a suite object"}, "suite", ["test"]),
+        MenuEntry("Selectors", {"id": "test-module", "title": "Run a module verification object"}, "module", ["test"]),
+        MenuEntry("Selectors", {"id": "test-system", "title": "Run a system validation object"}, "system", ["test"]),
+        MenuEntry("Selectors", {"id": "test-pipeline", "title": "Run a test pipeline object"}, "pipeline", ["test"]),
+        MenuEntry("Registry", {"id": "test-registry-list", "title": "Browse registered test objects"}, "registry-list", ["test", "registry", "list"]),
+        MenuEntry("Registry", {"id": "test-registry-refresh", "title": "Refresh registry snapshots"}, "registry-refresh", ["test", "registry", "refresh"]),
+        MenuEntry("Registry", {"id": "test-registry-check-consistency", "title": "Check registry/wiki consistency"}, "registry-check", ["test", "registry", "check-consistency"]),
+        MenuEntry("Results", {"id": "test-watch", "title": "Show the latest test event timeline"}, "watch", ["test", "watch"]),
+        MenuEntry("Results", {"id": "test-summary", "title": "Show the latest aggregated summary"}, "summary", ["test", "summary"]),
+        MenuEntry("Back", {**MENU_BACK_COMMAND, "title": "Back to previous menu"}, "back", []),
+    ]
+
+
+def resolve_entry_argv(
+    entry: MenuEntry,
+    prompt_value_provider: Callable[[str], str] | None = None,
+) -> list[str] | None:
+    prompt_value_provider = prompt_value_provider or input
+    command_id = entry.command["id"]
+
+    if command_id == "capability":
+        value = prompt_value_provider("Enter capability id, leave blank to cancel: ").strip()
+        if not value:
+            return None
+        return ["capability", value]
+
+    if command_id == "test-menu":
+        mode = prompt_value_provider(
+            "Test mode (suite/module/system/pipeline/all/registry-list/registry-refresh/registry-check/watch/summary), leave blank to cancel: "
+        ).strip().lower()
+        if not mode:
+            return None
+        if mode == "suite":
+            value = prompt_value_provider("Enter family and suite, for example: smoke HelloWorld: ").strip()
+            parts = value.split()
+            if len(parts) != 2:
+                return None
+            return ["test", "suite", "--family", parts[0], "--suite", parts[1]]
+        if mode == "module":
+            value = prompt_value_provider("Enter module and profile, for example: managed-smoke basic: ").strip()
+            parts = value.split()
+            if len(parts) != 2:
+                return None
+            return ["test", "module", "--module", parts[0], "--profile", parts[1]]
+        if mode == "system":
+            value = prompt_value_provider("Enter system scenario id, for example: hosted-runtime-smoke: ").strip()
+            if not value:
+                return None
+            return ["test", "system", "--scenario", value]
+        if mode == "pipeline":
+            value = prompt_value_provider("Enter pipeline id, for example: completion-runtime-core: ").strip()
+            if not value:
+                return None
+            return ["test", "pipeline", "--pipeline", value]
+        if mode == "all":
+            return ["test", "all"]
+        if mode == "registry-list":
+            return ["test", "registry", "list"]
+        if mode == "registry-refresh":
+            return ["test", "registry", "refresh"]
+        if mode == "registry-check":
+            return ["test", "registry", "check-consistency"]
+        if mode == "watch":
+            return ["test", "watch"]
+        if mode == "summary":
+            return ["test", "summary"]
+        return None
+
+    if command_id == "test-suite":
+        value = prompt_value_provider("Enter family and suite, for example: smoke HelloWorld: ").strip()
+        parts = value.split()
+        if len(parts) != 2:
+            return None
+        return ["test", "suite", "--family", parts[0], "--suite", parts[1]]
+
+    if command_id == "test-module":
+        value = prompt_value_provider("Enter module and profile, for example: managed-smoke basic: ").strip()
+        parts = value.split()
+        if len(parts) != 2:
+            return None
+        return ["test", "module", "--module", parts[0], "--profile", parts[1]]
+
+    if command_id == "test-system":
+        value = prompt_value_provider("Enter system scenario id, for example: hosted-runtime-smoke: ").strip()
+        if not value:
+            return None
+        return ["test", "system", "--scenario", value]
+
+    if command_id == "test-pipeline":
+        value = prompt_value_provider("Enter pipeline id, for example: completion-runtime-core: ").strip()
+        if not value:
+            return None
+        return ["test", "pipeline", "--pipeline", value]
+
+    if command_id == "test-all":
+        return ["test", "all"]
+    if command_id == "test-registry-list":
+        return ["test", "registry", "list"]
+    if command_id == "test-registry-refresh":
+        return ["test", "registry", "refresh"]
+    if command_id == "test-registry-check-consistency":
+        return ["test", "registry", "check-consistency"]
+    if command_id == "test-watch":
+        return ["test", "watch"]
+    if command_id == "test-summary":
+        return ["test", "summary"]
 
     return list(entry.argv)
 
@@ -697,6 +837,15 @@ def render_test_progress_screen(events: list[dict[str, Any]], repo_root: Path | 
 
     if view.important_lines:
         lines.append("")
+    if view.phase_lines:
+        lines.append("Phases:")
+        lines.extend(view.phase_lines)
+
+    if view.important_lines:
+        if not view.phase_lines:
+            lines.append("")
+        else:
+            lines.append("")
         lines.append(_highlight_heading("Important outputs:"))
         lines.extend(view.important_lines)
 
@@ -748,6 +897,7 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
     progress_text = "0%"
     final_status = "running"
     history_lines: list[str] = []
+    phase_lines: list[str] = []
     important_lines: list[str] = []
     collected_artifacts: list[str] = []
     errors: list[str] = []
@@ -816,6 +966,7 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
         if event_type == "final-summary":
             final_status = str(payload.get("finalStatus") or final_status)
             _append_unique(history_lines, seen_history, f"[{_format_progress_label(progress_text)}] done   {final_status}")
+            phase_lines = _build_phase_result_lines(payload)
             errors.extend(str(error) for error in list(payload.get("errors") or []))
             important_lines.extend(build_test_report_highlight_lines(payload, repo_root=repo_root, seen=seen_important))
             for artifact in list(payload.get("artifacts") or []):
@@ -828,6 +979,7 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
         progress_text=progress_text,
         final_status=final_status,
         history_lines=history_lines,
+        phase_lines=phase_lines,
         important_lines=important_lines,
         artifact_lines=artifact_lines,
         artifact_count=len(seen_artifacts),
@@ -925,6 +1077,11 @@ def build_operation_progress_view(events: list[dict[str, Any]], repo_root: Path 
         artifact_count=len(seen_artifacts),
         errors=errors,
     )
+
+
+def _build_phase_result_lines(payload: dict[str, Any]) -> list[str]:
+    phase_results = list(payload.get("phaseResults") or [])
+    return [f"{phase.get('status', '-')}: {phase.get('phaseId', '-')}" for phase in phase_results]
 
 
 def render_test_report_highlights(payload: dict[str, Any], repo_root: Path | None = None) -> str:

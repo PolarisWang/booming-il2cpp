@@ -12,7 +12,6 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 TOOLING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "tooling.py"
 BUILD_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "build.py"
 TEST_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "test.py"
-VERIFY_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "verify.py"
 
 
 def load_module(path: Path, module_name: str):
@@ -70,7 +69,7 @@ class DotnetBootstrapTests(unittest.TestCase):
         tooling_module = load_module(TOOLING_MODULE_PATH, "booming_run_tooling_noninteractive")
 
         outcome = tooling_module.ensure_dotnet_available(
-            "verify roadmap-0 --host macos",
+            "test workflow roadmap-0-macos",
             "macos",
             interactive=False,
             which=lambda executable: None,
@@ -150,26 +149,33 @@ class DotnetBootstrapTests(unittest.TestCase):
         self.assertEqual(["dotnet SDK is not installed"], gated.errors)
         run_process_mock.assert_not_called()
 
-    def test_verify_workflow_checks_dotnet_before_running(self) -> None:
-        verify_module = load_module(VERIFY_MODULE_PATH, "booming_run_verify_dotnet_gate")
-        bootstrap = verify_module.tooling_module.ToolBootstrapResult(
+    def test_workflow_suite_checks_dotnet_before_running(self) -> None:
+        manifest_module = load_module(REPO_ROOT / "build" / "toolchains" / "run" / "manifest.py", "booming_run_manifest_dotnet_gate_tooling")
+        test_module = load_module(TEST_MODULE_PATH, "booming_run_test_workflow_dotnet_gate_tooling")
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, REPO_ROOT / "build" / "toolchains" / "run" / "run_manifest.json")
+        bootstrap = test_module.tooling_module.ToolBootstrapResult(
             ready=False,
             output="Run `brew install --cask dotnet-sdk`, then retry.\n",
             errors=["dotnet SDK is not installed"],
         )
 
-        with patch.object(verify_module.tooling_module, "ensure_dotnet_available", return_value=bootstrap):
-            with patch.object(verify_module, "run_process") as run_process_mock:
-                gated = verify_module.handle(
-                    {
-                        "id": "verify-roadmap-0-macos",
-                        "host_profile": "macos",
-                        "target": "macos",
-                    },
-                    REPO_ROOT,
-                    "macos",
-                    "verify roadmap-0 --host macos",
-                )
+        with patch.object(test_module.build_commands.tooling_module, "ensure_dotnet_available", return_value=bootstrap):
+            with patch.object(test_module.tooling_module, "ensure_dotnet_available", return_value=bootstrap):
+                with patch.object(test_module, "run_process") as run_process_mock:
+                    gated = test_module.handle(
+                        {
+                            "id": "test-workflow-roadmap-0-macos",
+                            "handler": "test.dispatch",
+                            "kind": "registry-object-alias",
+                            "target": "roadmap-0-macos",
+                            "registry_object_kind": "system",
+                            "registry_object_id": "system/roadmap-0-macos",
+                        },
+                        REPO_ROOT,
+                        "macos",
+                        "test workflow roadmap-0-macos",
+                        manifest,
+                    )
 
         self.assertIn("brew install --cask dotnet-sdk", gated.text or "")
         self.assertEqual(["dotnet SDK is not installed"], gated.errors)

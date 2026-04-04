@@ -3,12 +3,19 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import platform
-import re
 import shutil
 import subprocess
 import sys
+import uuid
 from pathlib import Path
+
+toolchains_root = Path(__file__).resolve().parents[1] / "toolchains" / "run"
+if str(toolchains_root) not in sys.path:
+    sys.path.insert(0, str(toolchains_root))
+
+from testing import contracts as contracts_module
 
 
 def get_repo_root() -> Path:
@@ -32,95 +39,6 @@ def get_platform_gate_generator(preset_target: str, host_profile: str) -> str:
         return "Ninja"
     return get_host_routing_generator(host_profile)
 
-
-def read_json_file(path: Path) -> object:
-    return json.loads(path.resolve().read_text(encoding="utf-8"))
-
-
-def test_json_schema_type(value: object, schema_type: str) -> bool:
-    if schema_type == "object":
-        return isinstance(value, dict)
-    if schema_type == "array":
-        return isinstance(value, list)
-    if schema_type == "string":
-        return isinstance(value, str)
-    if schema_type == "integer":
-        return isinstance(value, int) and not isinstance(value, bool)
-    raise RuntimeError(f"unsupported schema type: {schema_type}")
-
-
-def assert_json_matches_schema(value: object, schema: dict, path: str) -> None:
-    if "const" in schema and value != schema["const"]:
-        raise RuntimeError(f"schema const mismatch at {path}: expected '{schema['const']}' actual '{value}'")
-
-    schema_type = schema.get("type")
-    if schema_type is not None and not test_json_schema_type(value, str(schema_type)):
-        raise RuntimeError(f"schema type mismatch at {path}: expected '{schema_type}'")
-
-    if "enum" in schema and value not in schema["enum"]:
-        raise RuntimeError(f"schema enum mismatch at {path}: value '{value}' not allowed")
-
-    if "minLength" in schema and (value is None or len(str(value)) < int(schema["minLength"])):
-        raise RuntimeError(f"schema minLength mismatch at {path}: expected >= {schema['minLength']}")
-
-    if "minimum" in schema and int(value) < int(schema["minimum"]):
-        raise RuntimeError(f"schema minimum mismatch at {path}: expected >= {schema['minimum']}")
-
-    if "pattern" in schema and re.search(str(schema["pattern"]), str(value)) is None:
-        raise RuntimeError(f"schema pattern mismatch at {path}: value '{value}' does not match '{schema['pattern']}'")
-
-    if "required" in schema:
-        if not isinstance(value, dict):
-            raise RuntimeError(f"schema required property mismatch at {path}: expected object")
-        for required_name in schema["required"]:
-            if required_name not in value:
-                raise RuntimeError(f"schema required property missing at {path}: '{required_name}'")
-
-    if "properties" in schema:
-        if not isinstance(value, dict):
-            raise RuntimeError(f"schema properties mismatch at {path}: expected object")
-        for property_name, property_schema in schema["properties"].items():
-            if property_name in value:
-                assert_json_matches_schema(value[property_name], property_schema, f"{path}.{property_name}")
-
-    if "minItems" in schema and len(list(value if isinstance(value, list) else [])) < int(schema["minItems"]):
-        raise RuntimeError(f"schema minItems mismatch at {path}: expected >= {schema['minItems']}")
-
-    if "items" in schema:
-        if not isinstance(value, list):
-            raise RuntimeError(f"schema items mismatch at {path}: expected array")
-        for index, item in enumerate(value):
-            assert_json_matches_schema(item, schema["items"], f"{path}[{index}]")
-
-
-def assert_json_files_parse(paths: list[Path]) -> None:
-    for path in paths:
-        read_json_file(path)
-
-
-def assert_analysis_contracts(repo_root: Path) -> None:
-    schema_dir = repo_root / "analysis" / "contracts" / "schemas"
-    example_dir = repo_root / "analysis" / "contracts" / "examples"
-    snapshot_dir = repo_root / "tests" / "contracts" / "schema"
-
-    for schema_file in sorted(schema_dir.glob("*.schema.json")):
-        base_name = schema_file.name.removesuffix(".schema.json")
-        schema = read_json_file(schema_file)
-        example = read_json_file(example_dir / f"{base_name}.min.json")
-        snapshot = read_json_file(snapshot_dir / f"{base_name}.snapshot.json")
-        assert isinstance(schema, dict)
-        assert_json_matches_schema(example, schema, f"{base_name}.example")
-        assert_json_matches_schema(snapshot, schema, f"{base_name}.snapshot")
-
-
-def assert_trace_contracts(repo_root: Path) -> None:
-    schema = read_json_file(repo_root / "tests" / "contracts" / "trace" / "schema" / "warmup-trace.schema.json")
-    assert isinstance(schema, dict)
-    for snapshot_path in sorted((repo_root / "tests" / "contracts" / "trace" / "snapshots").glob("*.json")):
-        snapshot = read_json_file(snapshot_path)
-        assert_json_matches_schema(snapshot, schema, snapshot_path.name)
-
-
 def run_checked(arguments: list[str], *, cwd: Path, failure_message: str, capture_output: bool = False) -> subprocess.CompletedProcess[str]:
     completed = subprocess.run(
         arguments,
@@ -139,11 +57,17 @@ def run_checked(arguments: list[str], *, cwd: Path, failure_message: str, captur
     return completed
 
 
+def allocate_run_scoped_binary_dir(base_dir: Path) -> Path:
+    parent = base_dir.parent
+    scoped = parent / f"{base_dir.name}-{os.getpid()}-{uuid.uuid4().hex[:8]}"
+    scoped.mkdir(parents=True, exist_ok=True)
+    return scoped
+
+
 def invoke_native_smoke_build(source_dir: Path, binary_dir: Path, repo_root: Path) -> None:
-    if binary_dir.exists():
-        shutil.rmtree(binary_dir)
-    run_checked(["cmake", "-S", str(source_dir), "-B", str(binary_dir)], cwd=repo_root, failure_message=f"cmake configure failed: {source_dir}")
-    run_checked(["cmake", "--build", str(binary_dir)], cwd=repo_root, failure_message=f"cmake build failed: {binary_dir}")
+    run_binary_dir = allocate_run_scoped_binary_dir(binary_dir)
+    run_checked(["cmake", "-S", str(source_dir), "-B", str(run_binary_dir)], cwd=repo_root, failure_message=f"cmake configure failed: {source_dir}")
+    run_checked(["cmake", "--build", str(run_binary_dir)], cwd=repo_root, failure_message=f"cmake build failed: {run_binary_dir}")
 
 
 def invoke_dotnet_build(project_path: Path, repo_root: Path) -> None:
@@ -159,28 +83,25 @@ def invoke_dotnet_runtime_smoke(dll_path: Path, expected_patterns: list[str], re
 
 
 def invoke_preset_build_smoke(preset_name: str, repo_root: Path, *, validate_only: bool = False) -> None:
-    arguments = ["cmake", "--preset", preset_name]
+    requested_binary_dir = repo_root / "artifacts" / "presets" / preset_name
+    run_binary_dir = allocate_run_scoped_binary_dir(requested_binary_dir)
+    arguments = ["cmake", "--preset", preset_name, "-B", str(run_binary_dir)]
     if validate_only:
         arguments.append("-DROADMAP0_TOOLCHAIN_VALIDATE_ONLY=ON")
 
-    binary_dir = repo_root / "artifacts" / "presets" / preset_name
-    if binary_dir.exists():
-        shutil.rmtree(binary_dir)
-
     run_checked(arguments, cwd=repo_root, failure_message=f"cmake preset configure failed: {preset_name}")
-    run_checked(["cmake", "--build", str(binary_dir)], cwd=repo_root, failure_message=f"cmake preset build failed: {preset_name}")
+    run_checked(["cmake", "--build", str(run_binary_dir)], cwd=repo_root, failure_message=f"cmake preset build failed: {preset_name}")
 
 
 def invoke_routing_build_smoke(preset_target: str, toolchain_file: Path, binary_dir: Path, generator: str, repo_root: Path) -> None:
-    if binary_dir.exists():
-        shutil.rmtree(binary_dir)
+    run_binary_dir = allocate_run_scoped_binary_dir(binary_dir)
 
     arguments = [
         "cmake",
         "-S",
         str(repo_root),
         "-B",
-        str(binary_dir),
+        str(run_binary_dir),
         "-G",
         generator,
         f"-DROADMAP0_PRESET_TARGET={preset_target}",
@@ -188,7 +109,7 @@ def invoke_routing_build_smoke(preset_target: str, toolchain_file: Path, binary_
         f"-DCMAKE_TOOLCHAIN_FILE={toolchain_file}",
     ]
     run_checked(arguments, cwd=repo_root, failure_message=f"cmake routing smoke failed: {preset_target}")
-    run_checked(["cmake", "--build", str(binary_dir)], cwd=repo_root, failure_message=f"cmake routing build failed: {preset_target}")
+    run_checked(["cmake", "--build", str(run_binary_dir)], cwd=repo_root, failure_message=f"cmake routing build failed: {preset_target}")
 
 
 def write_gate_record(output_path: Path, gate_name: str, status: str, preset: str, notes: str, host_profile: str) -> None:
@@ -240,17 +161,15 @@ def main(argv: list[str] | None = None) -> int:
 
     write_step("Parse schema and trace JSON assets")
     json_paths = [repo_root / "CMakePresets.json"]
-    json_paths.extend(sorted((repo_root / "analysis" / "contracts" / "schemas").glob("*.json")))
-    json_paths.extend(sorted((repo_root / "analysis" / "contracts" / "examples").glob("*.json")))
-    json_paths.extend(sorted((repo_root / "tests" / "contracts" / "schema").glob("*.json")))
-    json_paths.extend(sorted((repo_root / "tests" / "contracts" / "trace").rglob("*.json")))
-    assert_json_files_parse(json_paths)
+    json_paths.extend(contracts_module.analysis_contract_json_paths(repo_root))
+    json_paths.extend(contracts_module.trace_contract_json_paths(repo_root))
+    contracts_module.assert_json_files_parse(json_paths)
 
     write_step("Validate analysis schema/example/snapshot contracts")
-    assert_analysis_contracts(repo_root)
+    contracts_module.validate_analysis_contracts(repo_root)
 
     write_step("Validate trace schema and snapshots")
-    assert_trace_contracts(repo_root)
+    contracts_module.validate_trace_schema_contracts(repo_root)
 
     write_step("Build native ABI compile-only smoke")
     invoke_native_smoke_build(repo_root / "tests" / "contracts" / "native" / "abi", common_artifact_root / "native-abi-config", repo_root)

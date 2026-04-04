@@ -27,7 +27,9 @@
 
 ## 最近更新
 
+- `2026-04-04`：更新 `统一测试框架.md`，补充 pipeline 的 `phasePlan[]` / `phaseResults[]` 结果契约，以及 `summary.json` / `final-summary` 的分层结果输出规则。
 - `2026-04-04`：更新 `统一测试框架.md` 与 `统一入口脚本.md`，补充 `run test watch` / `run test summary` 入口，以及交互式测试运行态实时进度屏和 `current.json` / `last.json` 指针规则。
+- `2026-04-04`：更新 `统一测试框架.md`，补充 `run test watch` 对 `pipeline` 对象的 phase-aware 终态展示规则，统一 `watch` 与 `summary` 的 `Phases:` 语义。
 - `2026-04-04`：更新 `统一测试框架.md` 与 `统一入口脚本.md`，补充统一测试框架第一版发布摘要，以及统一入口菜单中的单一 `test` 菜单项规则。
 - `2026-04-04`：更新 `统一测试框架.md` 与 `统一入口脚本.md`，补充 perf baseline、build fingerprint、strict 退出码，以及对外只保留 `run test ...` 的最终契约。
 - `2026-04-04`：更新 `统一测试框架.md`，补充 traffic-light 覆盖模型、`coveragePolicy` selector 和 summary/report 三色计数规则。

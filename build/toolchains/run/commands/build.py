@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import json
 import os
 import stat
 import shutil
 import sys
+import uuid
 from pathlib import Path
 from typing import Any, Callable
 
@@ -81,6 +83,10 @@ def _success(
 
 
 def _failure(command_text: str, host_platform: str, target: str | None, output: str, errors: list[str]) -> CommandResult:
+    text = f"Run failed: {command_text}\n"
+    if output:
+        text += output if output.endswith("\n") else output + "\n"
+    text += "".join(f"- {error}\n" for error in errors)
     return CommandResult.failure(
         command=command_text,
         host_platform=host_platform,
@@ -91,7 +97,7 @@ def _failure(command_text: str, host_platform: str, target: str | None, output: 
             "importantOutputs": [],
             "consoleText": output,
         },
-        text="".join([f"Run failed: {command_text}\n", *[f"- {error}\n" for error in errors]]),
+        text=text,
     )
 
 
@@ -104,6 +110,13 @@ def _retry_remove_readonly(func, path: str, excinfo) -> None:
 def _reset_binary_dir(binary_dir: Path) -> None:
     if binary_dir.exists():
         shutil.rmtree(binary_dir, onexc=_retry_remove_readonly)
+
+
+def allocate_run_scoped_binary_dir(base_dir: Path) -> Path:
+    parent = base_dir.parent
+    scoped_dir = parent / f"{base_dir.name}-{os.getpid()}-{uuid.uuid4().hex[:8]}"
+    scoped_dir.mkdir(parents=True, exist_ok=True)
+    return scoped_dir
 
 
 def _host_build_plan(host_platform: str) -> list[dict[str, str]]:
@@ -279,6 +292,152 @@ def _build_preset(
     return _success(command_text, host_platform, command.get("target"), output, [str(binary_dir)])
 
 
+def _write_gate_record(
+    output_path: Path,
+    *,
+    gate_name: str,
+    host_platform: str,
+    preset: str,
+    notes: str,
+) -> None:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(
+        json.dumps(
+            {
+                "gateName": gate_name,
+                "hostProfile": host_platform,
+                "status": "passed",
+                "preset": preset,
+                "notes": notes,
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+
+def _build_reference_desktop_gate(
+    command: dict,
+    repo_root: Path,
+    host_platform: str,
+    command_text: str,
+    progress_callback: Callable[[dict[str, Any]], None] | None = None,
+) -> CommandResult:
+    bootstrap = tooling_module.ensure_dotnet_available(command_text, host_platform)
+    if not bootstrap.ready:
+        return _failure(command_text, host_platform, command.get("target"), bootstrap.output, bootstrap.errors)
+
+    cmake_path, cmake_env = tooling_module.cmake_environment(repo_root)
+    if cmake_path is None:
+        return _failure(command_text, host_platform, command.get("target"), bootstrap.output, ["cmake not found"])
+
+    requested_binary_dir = repo_root / command["binary_dir"]
+    binary_dir = allocate_run_scoped_binary_dir(requested_binary_dir)
+    trace_output = repo_root / command["trace_output_path"]
+    gate_record_path = repo_root / command["gate_record_path"]
+    host_embedding_project = repo_root / "tests" / "smoke" / "input" / "HostEmbeddingLite" / "HostEmbeddingLite.csproj"
+    host_embedding_dll = repo_root / "artifacts" / "smoke" / "bin" / "HostEmbeddingLite" / "Release" / "net8.0" / "HostEmbeddingLite.dll"
+    trace_output.parent.mkdir(parents=True, exist_ok=True)
+
+    output_parts: list[str] = []
+    if bootstrap.output.strip():
+        output_parts.append(bootstrap.output.strip())
+
+    _emit_event(progress_callback, event_type="stage-start", completed=0, total=5, active_unit="configure")
+    configure = run_process([cmake_path, "--preset", command["preset"], "-B", str(binary_dir)], cwd=repo_root, env=cmake_env)
+    configure_output = combine_process_output(configure)
+    if configure_output:
+        output_parts.append(configure_output)
+    if configure.returncode != 0:
+        _emit_event(progress_callback, event_type="progress", completed=0, total=5, active_unit="configure", step_status="fail")
+        return _failure(command_text, host_platform, command.get("target"), "\n".join(output_parts), ["cmake preset configure failed"])
+
+    _emit_event(progress_callback, event_type="progress", completed=1, total=5, active_unit="configure", step_status="ok")
+    _emit_event(progress_callback, event_type="stage-start", completed=1, total=5, active_unit="build")
+    build = run_process([cmake_path, "--build", str(binary_dir)], cwd=repo_root, env=cmake_env)
+    build_output = combine_process_output(build)
+    if build_output:
+        output_parts.append(build_output)
+    if build.returncode != 0:
+        _emit_event(progress_callback, event_type="progress", completed=1, total=5, active_unit="build", step_status="fail")
+        return _failure(command_text, host_platform, command.get("target"), "\n".join(output_parts), ["cmake preset build failed"])
+
+    _emit_event(progress_callback, event_type="progress", completed=2, total=5, active_unit="build", step_status="ok")
+    _emit_event(progress_callback, event_type="stage-start", completed=2, total=5, active_unit="smoke-build")
+    smoke_build = run_process(["dotnet", "build", str(host_embedding_project), "-c", "Release"], cwd=repo_root)
+    smoke_build_output = combine_process_output(smoke_build)
+    if smoke_build_output:
+        output_parts.append(smoke_build_output)
+    if smoke_build.returncode != 0:
+        _emit_event(progress_callback, event_type="progress", completed=2, total=5, active_unit="smoke-build", step_status="fail")
+        return _failure(command_text, host_platform, command.get("target"), "\n".join(output_parts), ["HostEmbeddingLite build failed"])
+
+    _emit_event(progress_callback, event_type="progress", completed=3, total=5, active_unit="smoke-build", step_status="ok")
+    _emit_event(progress_callback, event_type="stage-start", completed=3, total=5, active_unit="trace-export")
+    trace_export = run_process(
+        [
+            "dotnet",
+            str(host_embedding_dll),
+            "--trace-platform",
+            command["trace_platform"],
+            "--trace-output",
+            str(trace_output),
+        ],
+        cwd=repo_root,
+    )
+    trace_export_output = combine_process_output(trace_export)
+    if trace_export_output:
+        output_parts.append(trace_export_output)
+    if trace_export.returncode != 0:
+        _emit_event(progress_callback, event_type="progress", completed=3, total=5, active_unit="trace-export", step_status="fail")
+        return _failure(command_text, host_platform, command.get("target"), "\n".join(output_parts), ["trace export failed"])
+
+    _emit_event(progress_callback, event_type="progress", completed=4, total=5, active_unit="trace-export", step_status="ok")
+    _emit_event(progress_callback, event_type="stage-start", completed=4, total=5, active_unit="trace-compare")
+    compare = run_process(
+        [
+            sys.executable,
+            str(repo_root / "tests" / "contract" / "trace" / "compare-warmup-trace.py"),
+            str(repo_root / command["expected_trace_path"]),
+            str(trace_output),
+        ],
+        cwd=repo_root,
+    )
+    compare_output = combine_process_output(compare)
+    if compare_output:
+        output_parts.append(compare_output)
+    if compare.returncode != 0:
+        _emit_event(progress_callback, event_type="progress", completed=4, total=5, active_unit="trace-compare", step_status="fail")
+        return _failure(command_text, host_platform, command.get("target"), "\n".join(output_parts), ["trace compare failed"])
+
+    _emit_event(progress_callback, event_type="progress", completed=5, total=5, active_unit="trace-compare", step_status="ok")
+
+    _write_gate_record(
+        gate_record_path,
+        gate_name=command["gate_name"],
+        host_platform=host_platform,
+        preset=command["gate_preset"],
+        notes=command["gate_notes"],
+    )
+
+    artifacts = [str(binary_dir), str(trace_output), str(gate_record_path)]
+    for artifact in artifacts:
+        _emit_event(progress_callback, event_type="artifact", path=artifact)
+
+    return _success(
+        command_text,
+        host_platform,
+        command.get("target"),
+        "\n".join(output_parts),
+        artifacts,
+        important_outputs=[
+            {"label": "Reference preset output", "path": str(binary_dir)},
+            {"label": "Warmup trace", "path": str(trace_output)},
+            {"label": "Gate record", "path": str(gate_record_path)},
+        ],
+    )
+
+
 def _platform_gate_generator(preset_target: str, host_platform: str) -> str:
     if host_platform == "windows":
         return "Visual Studio 17 2022"
@@ -294,14 +453,14 @@ def _build_platform_gate(
     command_text: str,
     progress_callback: Callable[[dict[str, Any]], None] | None = None,
 ) -> CommandResult:
-    binary_dir = repo_root / command["binary_dir"]
+    requested_binary_dir = repo_root / command["binary_dir"]
     toolchain_file = repo_root / command["toolchain_file"]
     preset_target = command["preset_target"]
     cmake_path, cmake_env = tooling_module.cmake_environment(repo_root)
     if cmake_path is None:
         return _failure(command_text, host_platform, command.get("target"), "", ["cmake not found"])
 
-    _reset_binary_dir(binary_dir)
+    binary_dir = allocate_run_scoped_binary_dir(requested_binary_dir)
 
     configure_args = [
         cmake_path,
@@ -353,6 +512,8 @@ def handle(
         return _build_smoke_project(command, repo_root, host_platform, command_text, progress_callback=progress_callback)
     if kind == "preset":
         return _build_preset(command, repo_root, host_platform, command_text, progress_callback=progress_callback)
+    if kind == "reference-desktop-gate":
+        return _build_reference_desktop_gate(command, repo_root, host_platform, command_text, progress_callback=progress_callback)
     if kind == "platform-gate":
         return _build_platform_gate(command, repo_root, host_platform, command_text, progress_callback=progress_callback)
 

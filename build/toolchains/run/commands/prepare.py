@@ -13,7 +13,6 @@ try:
     from . import doctor as doctor_commands
     from . import build as build_commands
     from . import test as test_commands
-    from . import verify as verify_commands
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
@@ -24,7 +23,6 @@ except ImportError:
     from commands import doctor as doctor_commands
     from commands import build as build_commands
     from commands import test as test_commands
-    from commands import verify as verify_commands
 
 
 SMOKE_PREPARE_STEPS = [
@@ -54,8 +52,8 @@ def resolve_prepare_scope(command_id: str) -> str:
     mapping = {
         "prepare": "global",
         "prepare-smoke": "smoke",
-        "prepare-verify-roadmap-0-windows": "verify-roadmap0-windows",
-        "prepare-verify-roadmap-0-macos": "verify-roadmap0-macos",
+        "prepare-verify-roadmap-0-windows": "workflow-roadmap0-windows",
+        "prepare-verify-roadmap-0-macos": "workflow-roadmap0-macos",
     }
     return mapping[command_id]
 
@@ -75,9 +73,9 @@ def _unique_steps(steps: list[list[str]]) -> list[list[str]]:
 def _prepare_plan(scope: str, host_platform: str) -> list[list[str]]:
     if scope == "smoke":
         return [list(step) for step in SMOKE_PREPARE_STEPS]
-    if scope == "verify-roadmap0-windows":
+    if scope == "workflow-roadmap0-windows":
         return [list(step) for step in VERIFY_WINDOWS_PREPARE_STEPS]
-    if scope == "verify-roadmap0-macos":
+    if scope == "workflow-roadmap0-macos":
         return [list(step) for step in VERIFY_MACOS_PREPARE_STEPS]
     if scope == "global":
         host_specific = (
@@ -115,9 +113,6 @@ def _execute_prepare_step(
         return step_text, build_commands.handle(command, repo_root, host_platform, step_text)
     if handler == "test.dispatch":
         return step_text, test_commands.handle(command, repo_root, host_platform, step_text, manifest, parsed["options"])
-    if handler == "verify.dispatch":
-        return step_text, verify_commands.handle(command, repo_root, host_platform, step_text)
-
     return step_text, CommandResult.failure(
         command=step_text,
         host_platform=host_platform,
@@ -139,7 +134,7 @@ def resolve_clean_paths(repo_root: Path, scope: str) -> list[Path]:
 
     if scope == "smoke":
         return [smoke_root, prepare_state_path(repo_root, "smoke")]
-    if scope == "verify-roadmap0-windows":
+    if scope == "workflow-roadmap0-windows":
         return [
             verify_root / "windows",
             preset_root / "windows-x64-reference",
@@ -149,7 +144,7 @@ def resolve_clean_paths(repo_root: Path, scope: str) -> list[Path]:
             run_root / "platform" / "linux-x64-packaging",
             prepare_state_path(repo_root, scope),
         ]
-    if scope == "verify-roadmap0-macos":
+    if scope == "workflow-roadmap0-macos":
         return [
             verify_root / "macos",
             preset_root / "macos-reference",

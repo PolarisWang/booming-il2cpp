@@ -86,7 +86,15 @@ def start_operation_report(
 
 
 def append_operation_event(run_context: dict[str, Any], event: dict[str, Any]) -> None:
-    _append_text(Path(run_context["eventsPath"]), _json_line(event))
+    _append_text(Path(run_context["eventsPath"]), _json_line(_normalize_operation_event(run_context, event)))
+
+
+def _normalize_operation_event(run_context: dict[str, Any], event: dict[str, Any]) -> dict[str, Any]:
+    normalized = dict(event)
+    run_id = str(run_context["runId"])
+    if not normalized.get("runId"):
+        normalized["runId"] = run_id
+    return normalized
 
 
 def _json_line(payload: dict[str, Any]) -> str:

@@ -1,0 +1,12 @@
+{
+  "displayName": "Hosted runtime smoke scenario",
+  "primaryModuleId": "hosted-runtime",
+  "moduleIds": ["hosted-runtime", "managed-smoke"],
+  "subsystemIds": ["hosting", "managed-execution"],
+  "supportedHosts": ["windows", "macos", "linux"],
+  "docRefs": ["wiki/06-测试验证/整体验证场景/hosted-runtime-smoke.md"],
+  "members": [
+    {"type": "module", "id": "module/managed-smoke/basic"},
+    {"type": "module", "id": "module/hosted-runtime/basic"}
+  ]
+}

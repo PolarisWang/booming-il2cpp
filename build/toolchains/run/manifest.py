@@ -9,8 +9,10 @@ if __package__ in (None, ""):
 
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from common import read_json
+    from testing import selectors as selectors_module
 else:
     from .common import read_json
+    from .testing import selectors as selectors_module
 
 
 DEFAULT_RUN_MANIFEST = Path("build/toolchains/run/run_manifest.json")
@@ -155,7 +157,7 @@ def resolve_cli_command(
     host_platform: str,
 ) -> dict[str, Any] | None:
     candidates = sorted(
-        list_commands(manifest, host_platform, include_hidden=True),
+        list_commands(manifest, host_platform, include_hidden=False),
         key=lambda item: (len(item.get("tokens", [])), len(item.get("options", {}))),
         reverse=True,
     )
@@ -219,6 +221,28 @@ def resolve_dynamic_test_command(
             merged_options["run"] = run_ref
         command = find_command(manifest, "test-summary", host_platform, include_hidden=True)
         return command, run_ref, merged_options
+
+    if len(positional) >= 2 and positional[1] == "registry":
+        if len(positional) != 3:
+            return None, None, merged_options
+        command_id = {
+            "refresh": "test-registry-refresh",
+            "list": "test-registry-list",
+            "check-consistency": "test-registry-check-consistency",
+        }.get(positional[2])
+        if command_id is None:
+            return None, None, merged_options
+        command = find_command(manifest, command_id, host_platform, include_hidden=True)
+        return command, positional[2], merged_options
+
+    if len(positional) == 2 and positional[1] in {"suite", "module", "system", "pipeline"}:
+        kind = positional[1]
+        try:
+            merged_options = selectors_module.normalize_selector_options(kind, merged_options)
+        except ValueError:
+            return None, None, merged_options
+        command = find_command(manifest, f"test-{kind}", host_platform, include_hidden=True)
+        return command, str(merged_options.get("id")), merged_options
 
     if len(positional) == 2 and positional[1] == "all":
         command = find_command(manifest, "test-all", host_platform, include_hidden=True)

@@ -1,0 +1,12 @@
+{
+  "displayName": "Trace export macOS verification",
+  "primaryModuleId": "trace-export",
+  "moduleIds": ["trace-export"],
+  "subsystemIds": ["hosting"],
+  "supportedHosts": ["macos"],
+  "docRefs": ["wiki/06-测试验证/模块/trace-export.md"],
+  "members": [
+    {"type": "suite", "id": "contract/trace-schema"},
+    {"type": "suite", "id": "contract/trace-compare-macos"}
+  ]
+}

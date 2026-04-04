@@ -1,5 +1,7 @@
 # Local Verification (Roadmap 0)
 
+> 项目级测试对象、模块验证、整体验证和测试管线的正式知识入口统一位于 [`wiki/06-测试验证/INDEX.md`](../../../wiki/06-%E6%B5%8B%E8%AF%95%E9%AA%8C%E8%AF%81/INDEX.md)。本页只说明 `Roadmap 0` 本地执行入口。
+
 ## 推荐入口
 
 - Windows host:
@@ -7,9 +9,10 @@
 ```powershell
 ./run.ps1 doctor --json
 ./run.ps1 bootstrap --yes --json
-./run.ps1 prepare verify roadmap-0 --host windows --json
-./run.ps1 verify roadmap-0 --host windows --json
-./run.ps1 clean --scope verify-roadmap0-windows --json
+./run.ps1 prepare workflow roadmap-0 --host windows --json
+./run.ps1 test workflow roadmap-0-windows --json
+./run.ps1 test pipeline --id pipeline/completion-runtime-core --json
+./run.ps1 clean --scope workflow-roadmap0-windows --json
 ```
 
 - macOS host:
@@ -17,9 +20,10 @@
 ```bash
 ./run.sh doctor --json
 ./run.sh bootstrap --yes --json
-./run.sh prepare verify roadmap-0 --host macos --json
-./run.sh verify roadmap-0 --host macos --json
-./run.sh clean --scope verify-roadmap0-macos --json
+./run.sh prepare workflow roadmap-0 --host macos --json
+./run.sh test workflow roadmap-0-macos --json
+./run.sh test pipeline --id pipeline/completion-runtime-core --json
+./run.sh clean --scope workflow-roadmap0-macos --json
 ```
 
 如果只关心整体测试进度或最近一次汇总，可以直接使用：
@@ -40,16 +44,16 @@
 
 ## Harness 生命周期
 
-推荐统一走 `bootstrap -> prepare -> build/test/verify -> clean`。
+推荐统一走 `bootstrap -> prepare -> test -> clean`。
 
 - `bootstrap` 只负责仓库内 Python runtime 缓存。
 - `prepare` 负责复用型环境准备，并把当前 scope 写入 `artifacts/run/prepare/*.json`。
-- `build` / `test` / `verify` 默认复用已经准备好的环境。
+- `test` 默认复用已经准备好的环境；如需单独构建阶段，使用 `run test ... --stage build`。
 - `clean --scope ...` 只删除统一入口托管的输出，不碰仓库源码和第三方目录。
 
 ## 何时直接调用底层脚本
 
-统一入口默认覆盖本地验证和 harness 生命周期。只有在调试底层 `verify-roadmap-0` 脚本本身、绕过 wrapper 做最小重现、或单独复用已有 PowerShell/Shell 流程时，才直接调用 `build/scripts/verify-roadmap-0.*`。
+统一入口默认覆盖本地验证和 harness 生命周期，正式入口应优先使用 `run test workflow ...`、`run test system ...` 或 `run test pipeline ...`。只有在调试底层 `verify-roadmap-0` 脚本本身、绕过 wrapper 做最小重现、或单独复用已有 PowerShell/Shell 流程时，才直接调用 `build/scripts/verify-roadmap-0.*`。
 
 ## 入口
 

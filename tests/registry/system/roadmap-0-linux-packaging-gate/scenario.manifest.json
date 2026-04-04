@@ -1,0 +1,11 @@
+{
+  "displayName": "Roadmap-0 Linux packaging gate scenario",
+  "primaryModuleId": "roadmap-0",
+  "moduleIds": ["roadmap-0"],
+  "subsystemIds": ["workflow"],
+  "supportedHosts": ["windows", "macos", "linux"],
+  "docRefs": ["wiki/06-测试验证/整体验证场景/roadmap-0-platform-gates.md"],
+  "members": [
+    {"type": "suite", "id": "gate/linux-x64-packaging"}
+  ]
+}

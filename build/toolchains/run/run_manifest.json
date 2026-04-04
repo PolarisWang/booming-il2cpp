@@ -83,6 +83,50 @@
       "examples": ["run doctor", "run doctor --json"]
     },
     {
+      "id": "test-suite",
+      "title": "Run a suite by selector or object id",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test", "suite"],
+      "syntax": "test suite (--id <family/suite> | --family <family> --suite <suite>)",
+      "show_in_menu": true,
+      "examples": ["run test suite --id smoke/HelloWorld", "run test suite --family smoke --suite HelloWorld"]
+    },
+    {
+      "id": "test-module",
+      "title": "Run a module verification by selector or object id",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test", "module"],
+      "syntax": "test module (--id module/<module>/<profile> | --module <module> --profile <profile>)",
+      "show_in_menu": true,
+      "examples": ["run test module --id module/managed-smoke/basic", "run test module --module managed-smoke --profile basic"]
+    },
+    {
+      "id": "test-system",
+      "title": "Run a system validation scenario by selector or object id",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test", "system"],
+      "syntax": "test system (--id system/<scenario> | --scenario <scenario>)",
+      "show_in_menu": true,
+      "examples": ["run test system --id system/hosted-runtime-smoke", "run test system --scenario hosted-runtime-smoke"]
+    },
+    {
+      "id": "test-pipeline",
+      "title": "Run a test pipeline by selector or object id",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test", "pipeline"],
+      "syntax": "test pipeline (--id pipeline/<pipeline> | --pipeline <pipeline>)",
+      "show_in_menu": true,
+      "examples": ["run test pipeline --id pipeline/completion-runtime-core", "run test pipeline --pipeline completion-runtime-core"]
+    },
+    {
       "id": "test-family-suite",
       "title": "Run a test suite from a public family",
       "group": "Test And Verify",
@@ -114,6 +158,39 @@
       "syntax": "test all",
       "show_in_menu": true,
       "examples": ["run test all"]
+    },
+    {
+      "id": "test-registry-refresh",
+      "title": "Refresh the unified registry snapshot",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test", "registry", "refresh"],
+      "syntax": "test registry refresh",
+      "show_in_menu": true,
+      "examples": ["run test registry refresh", "run test registry refresh --json"]
+    },
+    {
+      "id": "test-registry-list",
+      "title": "List unified registry objects",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test", "registry", "list"],
+      "syntax": "test registry list",
+      "show_in_menu": true,
+      "examples": ["run test registry list", "run test registry list --json"]
+    },
+    {
+      "id": "test-registry-check-consistency",
+      "title": "Check registry and wiki consistency",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test", "registry", "check-consistency"],
+      "syntax": "test registry check-consistency",
+      "show_in_menu": true,
+      "examples": ["run test registry check-consistency", "run test registry check-consistency --json"]
     },
     {
       "id": "test-list",
@@ -170,29 +247,29 @@
     },
     {
       "id": "prepare-verify-roadmap-0-windows",
-      "title": "Prepare the Windows roadmap-0 verification environment",
+      "title": "Prepare the Windows roadmap-0 workflow environment",
       "group": "Environment",
       "handler": "prepare.dispatch",
       "platforms": ["windows"],
-      "tokens": ["prepare", "verify", "roadmap-0"],
+      "tokens": ["prepare", "workflow", "roadmap-0"],
       "options": {
         "host": "windows"
       },
       "show_in_menu": true,
-      "examples": ["run prepare verify roadmap-0 --host windows"]
+      "examples": ["run prepare workflow roadmap-0 --host windows"]
     },
     {
       "id": "prepare-verify-roadmap-0-macos",
-      "title": "Prepare the macOS roadmap-0 verification environment",
+      "title": "Prepare the macOS roadmap-0 workflow environment",
       "group": "Environment",
       "handler": "prepare.dispatch",
       "platforms": ["macos"],
-      "tokens": ["prepare", "verify", "roadmap-0"],
+      "tokens": ["prepare", "workflow", "roadmap-0"],
       "options": {
         "host": "macos"
       },
       "show_in_menu": true,
-      "examples": ["run prepare verify roadmap-0 --host macos"]
+      "examples": ["run prepare workflow roadmap-0 --host macos"]
     },
     {
       "id": "clean",
@@ -221,31 +298,31 @@
     },
     {
       "id": "clean-verify-roadmap0-windows",
-      "title": "Clean the Windows roadmap-0 verification scope",
+      "title": "Clean the Windows roadmap-0 workflow scope",
       "group": "Environment",
       "handler": "clean.dispatch",
       "platforms": ["windows"],
       "tokens": ["clean"],
       "options": {
-        "scope": "verify-roadmap0-windows"
+        "scope": "workflow-roadmap0-windows"
       },
-      "clean_scope": "verify-roadmap0-windows",
+      "clean_scope": "workflow-roadmap0-windows",
       "show_in_menu": true,
-      "examples": ["run clean --scope verify-roadmap0-windows"]
+      "examples": ["run clean --scope workflow-roadmap0-windows"]
     },
     {
       "id": "clean-verify-roadmap0-macos",
-      "title": "Clean the macOS roadmap-0 verification scope",
+      "title": "Clean the macOS roadmap-0 workflow scope",
       "group": "Environment",
       "handler": "clean.dispatch",
       "platforms": ["macos"],
       "tokens": ["clean"],
       "options": {
-        "scope": "verify-roadmap0-macos"
+        "scope": "workflow-roadmap0-macos"
       },
-      "clean_scope": "verify-roadmap0-macos",
+      "clean_scope": "workflow-roadmap0-macos",
       "show_in_menu": true,
-      "examples": ["run clean --scope verify-roadmap0-macos"]
+      "examples": ["run clean --scope workflow-roadmap0-macos"]
     },
     {
       "id": "build-all",
@@ -396,6 +473,52 @@
       "examples": ["run build preset macos-reference"]
     },
     {
+      "id": "build-platform-windows-reference-desktop",
+      "title": "Validate the Windows reference desktop gate",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": ["windows"],
+      "tokens": ["build", "platform", "windows-reference-desktop"],
+      "kind": "reference-desktop-gate",
+      "target": "windows-reference-desktop",
+      "preset": "windows-x64-reference",
+      "binary_dir": "artifacts/presets/windows-x64-reference",
+      "trace_platform": "windows",
+      "trace_output_path": "artifacts/verify-roadmap-0/windows/windows-warmup-trace.runtime.json",
+      "expected_trace_path": "tests/contract/trace/snapshots/windows-warmup-trace.snapshot.json",
+      "gate_record_path": "artifacts/verify-roadmap-0/windows/windows-reference-desktop.gate.json",
+      "gate_name": "windows-reference-desktop",
+      "gate_preset": "windows-x64-reference",
+      "gate_notes": "Windows reference desktop gate passed with warmup trace compare.",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test gate windows-reference-desktop",
+      "examples": ["run test gate windows-reference-desktop"]
+    },
+    {
+      "id": "build-platform-macos-reference-desktop",
+      "title": "Validate the macOS reference desktop gate",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": ["macos"],
+      "tokens": ["build", "platform", "macos-reference-desktop"],
+      "kind": "reference-desktop-gate",
+      "target": "macos-reference-desktop",
+      "preset": "macos-reference",
+      "binary_dir": "artifacts/presets/macos-reference",
+      "trace_platform": "macos",
+      "trace_output_path": "artifacts/verify-roadmap-0/macos/macos-warmup-trace.runtime.json",
+      "expected_trace_path": "tests/contract/trace/snapshots/macos-warmup-trace.snapshot.json",
+      "gate_record_path": "artifacts/verify-roadmap-0/macos/macos-reference-desktop.gate.json",
+      "gate_name": "macos-reference-desktop",
+      "gate_preset": "macos-reference",
+      "gate_notes": "macOS reference desktop gate passed with warmup trace compare.",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test gate macos-reference-desktop",
+      "examples": ["run test gate macos-reference-desktop"]
+    },
+    {
       "id": "build-platform-android-arm64-smoke",
       "title": "Validate the Android platform routing shell",
       "group": "Build",
@@ -526,6 +649,68 @@
       "examples": ["run test smoke HostEmbeddingLite"]
     },
     {
+      "id": "test-contract-analysis-schema",
+      "title": "Validate the analysis schema/example/snapshot contracts",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test", "contract", "analysis-schema"],
+      "kind": "contract-check",
+      "target": "analysis-schema",
+      "contract_check": "analysis-schema",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test contract analysis-schema",
+      "examples": ["run test contract analysis-schema"]
+    },
+    {
+      "id": "test-contract-trace-schema",
+      "title": "Validate the warmup trace schema and snapshots",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test", "contract", "trace-schema"],
+      "kind": "contract-check",
+      "target": "trace-schema",
+      "contract_check": "trace-schema",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test contract trace-schema",
+      "examples": ["run test contract trace-schema"]
+    },
+    {
+      "id": "test-workflow-roadmap-0-windows",
+      "title": "Run the Windows roadmap-0 workflow via the unified system object",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows"],
+      "tokens": ["test", "workflow", "roadmap-0-windows"],
+      "kind": "registry-object-alias",
+      "target": "roadmap-0-windows",
+      "registry_object_kind": "system",
+      "registry_object_id": "system/roadmap-0-windows",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test workflow roadmap-0-windows",
+      "examples": ["run test workflow roadmap-0-windows"]
+    },
+    {
+      "id": "test-workflow-roadmap-0-macos",
+      "title": "Run the macOS roadmap-0 workflow via the unified system object",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["macos"],
+      "tokens": ["test", "workflow", "roadmap-0-macos"],
+      "kind": "registry-object-alias",
+      "target": "roadmap-0-macos",
+      "registry_object_kind": "system",
+      "registry_object_id": "system/roadmap-0-macos",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test workflow roadmap-0-macos",
+      "examples": ["run test workflow roadmap-0-macos"]
+    },
+    {
       "id": "test-trace-compare-windows",
       "title": "Compare the Windows warmup trace snapshot",
       "group": "Test And Verify",
@@ -558,40 +743,6 @@
       "public": false,
       "replacement_syntax": "test contract trace-compare-macos",
       "examples": ["run test trace-compare macos"]
-    },
-    {
-      "id": "verify-roadmap-0-windows",
-      "title": "Run the Windows roadmap-0 verification workflow",
-      "group": "Test And Verify",
-      "handler": "verify.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["verify", "roadmap-0"],
-      "options": {
-        "host": "windows"
-      },
-      "target": "windows",
-      "host_profile": "windows",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test workflow roadmap-0-windows",
-      "examples": ["run verify roadmap-0 --host windows"]
-    },
-    {
-      "id": "verify-roadmap-0-macos",
-      "title": "Run the macOS roadmap-0 verification workflow",
-      "group": "Test And Verify",
-      "handler": "verify.dispatch",
-      "platforms": ["macos"],
-      "tokens": ["verify", "roadmap-0"],
-      "options": {
-        "host": "macos"
-      },
-      "target": "macos",
-      "host_profile": "macos",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test workflow roadmap-0-macos",
-      "examples": ["run verify roadmap-0 --host macos"]
     }
   ]
 }

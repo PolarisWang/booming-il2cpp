@@ -2,14 +2,16 @@ from __future__ import annotations
 
 import importlib.util
 import io
-import tempfile
+import shutil
 import unittest
+import uuid
 from pathlib import Path
 from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 RUN_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "run.py"
+TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp_test_tui_routing"
 
 
 def load_run_module():
@@ -23,6 +25,13 @@ def load_run_module():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def assert_no_public_verify_command(test_case: unittest.TestCase, output: str) -> None:
+    test_case.assertFalse(
+        any(line.startswith("verify ") for line in output.splitlines()),
+        "help output should not expose standalone `run verify ...` commands",
+    )
 
 
 class TuiRoutingTests(unittest.TestCase):
@@ -49,6 +58,7 @@ class TuiRoutingTests(unittest.TestCase):
 
         self.assertEqual(0, exit_code)
         self.assertIn("Available commands", stdout.getvalue())
+        assert_no_public_verify_command(self, stdout.getvalue())
         self.assertEqual(1, run_fullscreen_menu.call_count)
         self.assertEqual(1, run_inline_menu.call_count)
         self.assertTrue(
@@ -74,8 +84,10 @@ class TuiRoutingTests(unittest.TestCase):
         run_module = load_run_module()
         stdout = io.StringIO()
 
-        with tempfile.TemporaryDirectory() as temp_dir:
-            repo_root = Path(temp_dir)
+        TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
+        repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
             manifest_path = repo_root / "build" / "toolchains" / "run" / "run_manifest.json"
             events_path = repo_root / "artifacts" / "logs" / "tests" / "run-1" / "events.jsonl"
             manifest_path.parent.mkdir(parents=True, exist_ok=True)
@@ -99,6 +111,8 @@ class TuiRoutingTests(unittest.TestCase):
                         with patch.object(run_module, "execute_command", return_value=result):
                             with patch.object(run_module.sys, "stdout", stdout):
                                 exit_code = run_module.main(["test", "smoke", "HelloWorld", "--json"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
         self.assertEqual(0, exit_code)
         self.assertEqual('{"eventType":"progress"}\n{"eventType":"final-summary"}\n', stdout.getvalue())

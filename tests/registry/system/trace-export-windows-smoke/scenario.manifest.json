@@ -1,0 +1,12 @@
+{
+  "displayName": "Trace export Windows smoke scenario",
+  "primaryModuleId": "trace-export",
+  "moduleIds": ["trace-export", "hosted-runtime"],
+  "subsystemIds": ["hosting"],
+  "supportedHosts": ["windows"],
+  "docRefs": ["wiki/06-测试验证/整体验证场景/trace-export-smoke.md"],
+  "members": [
+    {"type": "module", "id": "module/hosted-runtime/basic"},
+    {"type": "module", "id": "module/trace-export/windows"}
+  ]
+}

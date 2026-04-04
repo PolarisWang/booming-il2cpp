@@ -1,0 +1,43 @@
+{
+  "displayName": "Completion runtime trace macOS pipeline",
+  "pipelinePurpose": "completion",
+  "primaryModuleId": "hosted-runtime",
+  "moduleIds": ["analysis", "managed-smoke", "reflection", "interop", "hosted-runtime", "trace-export", "roadmap-0"],
+  "subsystemIds": ["analysis-contracts", "managed-execution", "native-bridge", "hosting", "workflow"],
+  "supportedHosts": ["macos"],
+  "docRefs": ["wiki/06-测试验证/测试管线/completion-runtime-trace.md"],
+  "phases": [
+    {
+      "id": "code",
+      "title": "Code tests",
+      "members": [
+        {"type": "suite", "id": "smoke/HelloWorld"},
+        {"type": "suite", "id": "smoke/GenericEcho"},
+        {"type": "suite", "id": "smoke/ReflectionLite"},
+        {"type": "suite", "id": "smoke/PInvokeLite"},
+        {"type": "suite", "id": "smoke/HostEmbeddingLite"}
+      ]
+    },
+    {
+      "id": "module",
+      "title": "Module verification",
+      "members": [
+        {"type": "module", "id": "module/analysis/basic"},
+        {"type": "module", "id": "module/managed-smoke/basic"},
+        {"type": "module", "id": "module/reflection/basic"},
+        {"type": "module", "id": "module/interop/basic"},
+        {"type": "module", "id": "module/hosted-runtime/basic"},
+        {"type": "module", "id": "module/trace-export/macos"}
+      ]
+    },
+    {
+      "id": "system",
+      "title": "System validation",
+      "members": [
+        {"type": "system", "id": "system/hosted-runtime-smoke"},
+        {"type": "system", "id": "system/trace-export-macos-smoke"},
+        {"type": "system", "id": "system/roadmap-0-macos-reference-gate"}
+      ]
+    }
+  ]
+}

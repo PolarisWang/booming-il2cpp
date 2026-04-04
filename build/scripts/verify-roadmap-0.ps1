@@ -195,9 +195,7 @@ function Invoke-NativeSmokeBuild {
         [string]$BinaryDir
     )
 
-    if (Test-Path $BinaryDir) {
-        Remove-Item -Recurse -Force $BinaryDir
-    }
+    $BinaryDir = New-RunScopedBinaryDir -BaseDir $BinaryDir
 
     & cmake -S $SourceDir -B $BinaryDir | Out-Host
     if ($LASTEXITCODE -ne 0) {
@@ -246,14 +244,10 @@ function Invoke-PresetBuildSmoke {
         [bool]$ValidateOnly = $false
     )
 
-    $arguments = @("--preset", $PresetName)
+    $binaryDir = New-RunScopedBinaryDir -BaseDir (Join-Path $repoRoot "artifacts\presets\$PresetName")
+    $arguments = @("--preset", $PresetName, "-B", $binaryDir)
     if ($ValidateOnly) {
         $arguments += "-DROADMAP0_TOOLCHAIN_VALIDATE_ONLY=ON"
-    }
-
-    $binaryDir = Join-Path $repoRoot "artifacts\presets\$PresetName"
-    if (Test-Path $binaryDir) {
-        Remove-Item -Recurse -Force $binaryDir
     }
 
     & cmake @arguments | Out-Host
@@ -275,9 +269,7 @@ function Invoke-RoutingBuildSmoke {
         [string]$Generator
     )
 
-    if (Test-Path $BinaryDir) {
-        Remove-Item -Recurse -Force $BinaryDir
-    }
+    $BinaryDir = New-RunScopedBinaryDir -BaseDir $BinaryDir
 
     $arguments = @(
         "-S", $repoRoot,
@@ -297,6 +289,17 @@ function Invoke-RoutingBuildSmoke {
     if ($LASTEXITCODE -ne 0) {
         throw "cmake routing build failed: $PresetTarget"
     }
+}
+
+function New-RunScopedBinaryDir {
+    param([string]$BaseDir)
+
+    $parent = Split-Path -Parent $BaseDir
+    $name = Split-Path -Leaf $BaseDir
+    $suffix = [guid]::NewGuid().ToString("N").Substring(0, 8)
+    $scopedDir = Join-Path $parent "$name-$PID-$suffix"
+    New-Item -ItemType Directory -Force -Path $scopedDir | Out-Null
+    return $scopedDir
 }
 
 function Write-GateRecord {

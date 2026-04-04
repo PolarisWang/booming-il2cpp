@@ -13,7 +13,6 @@ if __package__ in (None, ""):
     from commands import inspect as inspect_commands
     from commands import prepare as prepare_commands
     from commands import test as test_commands
-    from commands import verify as verify_commands
     import manifest as manifest_module
     import operation_reporting as operation_reporting_module
     import runtime as runtime_module
@@ -27,7 +26,6 @@ else:
     from .commands import inspect as inspect_commands
     from .commands import prepare as prepare_commands
     from .commands import test as test_commands
-    from .commands import verify as verify_commands
     from . import manifest as manifest_module
     from . import operation_reporting as operation_reporting_module
     from . import runtime as runtime_module
@@ -36,7 +34,7 @@ else:
     from .result import CommandResult
 
 
-OPERATION_HANDLERS = {"build.dispatch", "prepare.dispatch", "verify.dispatch"}
+OPERATION_HANDLERS = {"build.dispatch", "prepare.dispatch"}
 
 
 def resolve_repo_root() -> Path:
@@ -167,6 +165,47 @@ def add_legacy_test_migration_guidance(command: dict, result: CommandResult) -> 
     )
 
 
+def build_removed_command_migration_guidance(
+    command_text: str,
+    host_platform: str,
+    options: dict[str, object] | None = None,
+) -> CommandResult | None:
+    normalized_command = command_text.strip()
+    if normalized_command != "verify roadmap-0":
+        return None
+
+    requested_host = str((options or {}).get("host") or "").strip().lower()
+    replacement_syntax: str
+    if requested_host in {"windows", "macos"}:
+        replacement_syntax = f"test workflow roadmap-0-{requested_host}"
+    elif host_platform in {"windows", "macos"}:
+        replacement_syntax = f"test workflow roadmap-0-{host_platform}"
+    else:
+        replacement_syntax = "test workflow roadmap-0-windows|macos"
+
+    text = (
+        f"Removed command: {normalized_command}\n"
+        f"Use `run {replacement_syntax}` instead.\n"
+    )
+    payload: dict[str, object] = {
+        "migration": {
+            "removedCommand": normalized_command,
+            "replacementSyntax": replacement_syntax,
+        }
+    }
+    if requested_host:
+        payload["migration"]["requestedHost"] = requested_host
+
+    return CommandResult.failure(
+        command=normalized_command,
+        host_platform=host_platform,
+        target=requested_host or None,
+        errors=[f"removed command: {normalized_command}"],
+        payload=payload,
+        text=text,
+    )
+
+
 def attach_operation_report(
     result: CommandResult,
     *,
@@ -236,6 +275,9 @@ def execute_command(
     progress_callback: Callable[[dict], None] | None = None,
 ) -> CommandResult:
     if command is None:
+        migration_result = build_removed_command_migration_guidance(command_text, host_platform, options)
+        if migration_result is not None:
+            return migration_result
         return CommandResult.failure(
             command=command_text,
             host_platform=host_platform,
@@ -275,9 +317,6 @@ def execute_command(
             options or {},
             progress_callback=progress_callback,
         )
-        return add_legacy_test_migration_guidance(command, result)
-    if command["handler"] == "verify.dispatch":
-        result = verify_commands.handle(command, repo_root, host_platform, command_text, progress_callback=progress_callback)
         return add_legacy_test_migration_guidance(command, result)
     if command["handler"] == "doctor.dispatch":
         return doctor_commands.handle(repo_root, host_platform, command_text)

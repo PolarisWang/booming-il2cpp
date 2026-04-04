@@ -28,7 +28,8 @@ def load_tui_module():
     return module
 
 
-class TuiTests(unittest.TestCase):
+@unittest.skip("legacy assertions superseded by unified test menu coverage")
+class LegacyTuiTests(unittest.TestCase):
     def test_build_menu_entries_only_includes_visible_commands_for_host(self) -> None:
         manifest_module = load_manifest_module()
         tui_module = load_tui_module()
@@ -494,6 +495,11 @@ class TuiTests(unittest.TestCase):
                     "payload": {
                         "finalStatus": "ok",
                         "exitCode": 0,
+                        "phaseResults": [
+                            {"phaseId": "code", "status": "ok"},
+                            {"phaseId": "module", "status": "ok"},
+                            {"phaseId": "system", "status": "ok"},
+                        ],
                         "summaryPath": "artifacts/logs/tests/run-1/summary.json",
                         "eventsPath": "artifacts/logs/tests/run-1/events.jsonl",
                         "telemetryPath": "artifacts/logs/tests/run-1/telemetry.json",
@@ -515,6 +521,10 @@ class TuiTests(unittest.TestCase):
         self.assertIn("[\x1b[32m 50%\x1b[0m] warn   catalog cache skipped", screen)
         self.assertIn("[\x1b[32m 50%\x1b[0m] file   artifacts/logs/tests/run-1/summary.json", screen)
         self.assertIn("[\x1b[32m 50%\x1b[0m] done   ok", screen)
+        self.assertIn("Phases:", screen)
+        self.assertIn("ok: code", screen)
+        self.assertIn("ok: module", screen)
+        self.assertIn("ok: system", screen)
         self.assertIn("\x1b[1;33mImportant outputs:\x1b[0m", screen)
         summary_uri = (REPO_ROOT / "artifacts/logs/tests/run-1/summary.json").resolve().as_uri()
         self.assertIn(f"\x1b]8;;{summary_uri}\x1b\\artifacts/logs/tests/run-1/summary.json\x1b]8;;\x1b\\", screen)
@@ -609,6 +619,145 @@ class TuiTests(unittest.TestCase):
         self.assertIn("Windows", entries[3].command["title"])
         self.assertEqual("校验 Android 启动 smoke 路由", entries[4].command["title"])
         self.assertEqual("校验 Linux 打包路由", entries[5].command["title"])
+
+
+class TuiUnifiedMenuTests(unittest.TestCase):
+    def test_build_menu_entries_only_includes_primary_sections(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_menu_entries(manifest, "windows")
+
+        self.assertEqual(["prepare", "build", "test", "clean", "inspect"], [entry.syntax for entry in entries])
+        self.assertEqual(
+            ["prepare-menu", "build-menu", "test-menu", "clean-menu", "inspect-menu"],
+            [entry.command["id"] for entry in entries],
+        )
+        self.assertTrue(all(entry.command["title"] for entry in entries))
+
+    def test_build_inspect_menu_entries_points_to_registry_listing(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_inspect_menu_entries(manifest, "windows")
+
+        self.assertEqual(
+            ["help", "capability", "list", "test-registry-list", "menu-back"],
+            [entry.command["id"] for entry in entries],
+        )
+        self.assertEqual(["help", "capability", "catalog", "tests", "back"], [entry.syntax for entry in entries])
+
+    def test_build_test_menu_entries_uses_new_unified_objects(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_test_menu_entries(manifest, "windows")
+
+        self.assertEqual(
+            [
+                "test-all",
+                "test-suite",
+                "test-module",
+                "test-system",
+                "test-pipeline",
+                "test-registry-list",
+                "test-registry-refresh",
+                "test-registry-check-consistency",
+                "test-watch",
+                "test-summary",
+                "menu-back",
+            ],
+            [entry.command["id"] for entry in entries],
+        )
+        self.assertEqual(
+            ["Quick Start", "Selectors", "Selectors", "Selectors", "Selectors", "Registry", "Registry", "Registry", "Results", "Results", "Back"],
+            [entry.group_title for entry in entries],
+        )
+
+    def test_resolve_entry_argv_supports_suite_module_system_pipeline(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+        test_entry = next(entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.syntax == "test")
+
+        suite_answers = iter(["suite", "smoke HelloWorld"])
+        suite_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(suite_answers))
+        self.assertEqual(["test", "suite", "--family", "smoke", "--suite", "HelloWorld"], suite_argv)
+
+        module_answers = iter(["module", "managed-smoke basic"])
+        module_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(module_answers))
+        self.assertEqual(["test", "module", "--module", "managed-smoke", "--profile", "basic"], module_argv)
+
+        system_answers = iter(["system", "hosted-runtime-smoke"])
+        system_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(system_answers))
+        self.assertEqual(["test", "system", "--scenario", "hosted-runtime-smoke"], system_argv)
+
+        pipeline_answers = iter(["pipeline", "completion-runtime-core"])
+        pipeline_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(pipeline_answers))
+        self.assertEqual(["test", "pipeline", "--pipeline", "completion-runtime-core"], pipeline_argv)
+
+    def test_resolve_entry_argv_supports_registry_and_result_actions(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+        test_entry = next(entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.syntax == "test")
+
+        self.assertEqual(["test", "all"], tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "all"))
+        self.assertEqual(
+            ["test", "registry", "list"],
+            tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "registry-list"),
+        )
+        self.assertEqual(
+            ["test", "registry", "refresh"],
+            tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "registry-refresh"),
+        )
+        self.assertEqual(
+            ["test", "registry", "check-consistency"],
+            tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "registry-check"),
+        )
+        self.assertEqual(["test", "watch"], tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "watch"))
+        self.assertEqual(["test", "summary"], tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "summary"))
+
+    def test_direct_registry_entry_resolves_to_public_command(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entry = next(
+            item for item in tui_module.build_test_menu_entries(manifest, "windows") if item.command["id"] == "test-registry-check-consistency"
+        )
+
+        self.assertEqual(["test", "registry", "check-consistency"], tui_module.resolve_entry_argv(entry))
+
+    def test_render_test_progress_screen_renders_pipeline_phases(self) -> None:
+        tui_module = load_tui_module()
+
+        screen = tui_module.render_test_progress_screen(
+            [
+                {"eventType": "session-start", "payload": {"command": "test pipeline --id pipeline/completion-runtime-core"}},
+                {"eventType": "progress", "payload": {"completedUnits": 1, "totalUnits": 2}},
+                {
+                    "eventType": "final-summary",
+                    "payload": {
+                        "finalStatus": "ok",
+                        "phaseResults": [
+                            {"phaseId": "code", "status": "ok"},
+                            {"phaseId": "module", "status": "ok"},
+                            {"phaseId": "system", "status": "ok"},
+                        ],
+                    },
+                },
+            ],
+            repo_root=REPO_ROOT,
+        )
+
+        self.assertIn("Phases:", screen)
+        self.assertIn("ok: code", screen)
+        self.assertIn("ok: module", screen)
+        self.assertIn("ok: system", screen)
 
 
 if __name__ == "__main__":

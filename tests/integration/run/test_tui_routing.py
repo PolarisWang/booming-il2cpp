@@ -24,6 +24,13 @@ def load_run_module():
     return module
 
 
+def assert_no_public_verify_command(test_case: unittest.TestCase, output: str) -> None:
+    test_case.assertFalse(
+        any(line.startswith("verify ") for line in output.splitlines()),
+        "help output should not expose standalone `run verify ...` commands",
+    )
+
+
 class TuiRoutingTests(unittest.TestCase):
     def test_bare_interactive_run_executes_selected_tui_command(self) -> None:
         run_module = load_run_module()
@@ -33,11 +40,18 @@ class TuiRoutingTests(unittest.TestCase):
             with patch.object(run_module.runtime_module, "detect_host_platform", return_value="windows-x64"):
                 with patch.object(run_module.tui_module, "supports_fullscreen_tui", return_value=True):
                     with patch.object(run_module.tui_module, "run_fullscreen_menu", return_value=["help"]):
-                        with patch.object(run_module.sys, "stdout", stdout):
-                            exit_code = run_module.main([])
+                        with patch.object(
+                            run_module.tui_module,
+                            "run_inline_menu",
+                            return_value=None,
+                            create=True,
+                        ):
+                            with patch.object(run_module.sys, "stdout", stdout):
+                                exit_code = run_module.main([])
 
         self.assertEqual(0, exit_code)
         self.assertIn("Available commands", stdout.getvalue())
+        assert_no_public_verify_command(self, stdout.getvalue())
 
     def test_cancelled_tui_menu_exits_cleanly_without_output(self) -> None:
         run_module = load_run_module()

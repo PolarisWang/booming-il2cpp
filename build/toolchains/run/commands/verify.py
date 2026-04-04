@@ -87,6 +87,8 @@ def handle(
             "-NoLogo",
             "-NoProfile",
             "-NonInteractive",
+            "-ExecutionPolicy",
+            "Bypass",
             "-File",
             str(repo_root / "build" / "scripts" / "verify-roadmap-0.ps1"),
             "-HostProfile",
@@ -100,26 +102,31 @@ def handle(
             "macos",
         ]
 
-    _emit_event(progress_callback, event_type="stage-start", completed=0, total=1, active_unit=f"verify {host_profile}")
+    active_unit = f"roadmap-0 low-level script ({host_profile})"
+    _emit_event(progress_callback, event_type="stage-start", completed=0, total=1, active_unit=active_unit)
     completed = run_process(arguments, cwd=repo_root, env=cmake_env)
     output = "\n".join(part for part in [bootstrap.output.strip(), combine_process_output(completed)] if part)
     if completed.returncode != 0:
-        _emit_event(progress_callback, event_type="progress", completed=0, total=1, active_unit=f"verify {host_profile}", step_status="fail")
-        message = output if output else "verify roadmap-0 failed"
+        _emit_event(progress_callback, event_type="progress", completed=0, total=1, active_unit=active_unit, step_status="fail")
+        message = output if output else "roadmap-0 low-level script execution failed"
         if message and not message.endswith("\n"):
             message += "\n"
+        failure_text = "Run failed: " + command_text + "\n"
+        if output:
+            failure_text += message
+        failure_text += "- roadmap-0 low-level script execution failed\n"
         return CommandResult.failure(
             command=command_text,
             host_platform=host_platform,
             target=host_profile,
-            errors=["verify roadmap-0 failed"],
+            errors=["roadmap-0 low-level script execution failed"],
             payload={"artifacts": [], "importantOutputs": [], "consoleText": output},
-            text="Run failed: " + command_text + "\n- verify roadmap-0 failed\n",
+            text=failure_text,
         )
 
     artifact_path = str(repo_root / "artifacts" / "verify-roadmap-0" / host_profile)
-    _emit_event(progress_callback, event_type="progress", completed=1, total=1, active_unit=f"verify {host_profile}", step_status="ok")
-    _emit_event(progress_callback, event_type="artifact", completed=1, total=1, active_unit=f"verify {host_profile}", path=artifact_path)
+    _emit_event(progress_callback, event_type="progress", completed=1, total=1, active_unit=active_unit, step_status="ok")
+    _emit_event(progress_callback, event_type="artifact", completed=1, total=1, active_unit=active_unit, path=artifact_path)
     return CommandResult.success(
         command=command_text,
         host_platform=host_platform,

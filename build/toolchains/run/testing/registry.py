@@ -1,0 +1,539 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+import sys
+
+try:
+    from ..common import read_json, write_json
+except ImportError:
+    root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(root))
+    from common import read_json, write_json
+
+
+@dataclass(frozen=True)
+class RegistryIndex:
+    host_platform: str
+    suites: list[dict[str, Any]]
+    module_verifications: list[dict[str, Any]]
+    system_scenarios: list[dict[str, Any]]
+    pipelines: list[dict[str, Any]]
+    errors: list[str]
+    warnings: list[str]
+
+    @property
+    def flat_items(self) -> list[dict[str, Any]]:
+        return sorted(
+            [*self.suites, *self.module_verifications, *self.system_scenarios, *self.pipelines],
+            key=lambda item: item["id"],
+        )
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "hostPlatform": self.host_platform,
+            "suites": self.suites,
+            "moduleVerifications": self.module_verifications,
+            "systemScenarios": self.system_scenarios,
+            "pipelines": self.pipelines,
+            "flatItems": self.flat_items,
+            "errors": list(self.errors),
+            "warnings": list(self.warnings),
+        }
+
+
+def _require_string(payload: dict[str, Any], field_name: str) -> str:
+    value = payload.get(field_name)
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(f"{field_name} is required")
+    return value
+
+
+def _string_list(payload: dict[str, Any], field_name: str) -> list[str]:
+    value = payload.get(field_name, [])
+    if value is None:
+        return []
+    if not isinstance(value, list) or any(not isinstance(item, str) or not item.strip() for item in value):
+        raise ValueError(f"{field_name} must be a string list")
+    return list(value)
+
+
+def _member_list(payload: dict[str, Any], field_name: str) -> list[dict[str, str]]:
+    members = payload.get(field_name, [])
+    if not isinstance(members, list):
+        raise ValueError(f"{field_name} must be a list")
+    normalized: list[dict[str, str]] = []
+    for index, member in enumerate(members):
+        if not isinstance(member, dict):
+            raise ValueError(f"{field_name}[{index}] must be an object")
+        normalized.append(
+            {
+                "type": _require_string(member, "type"),
+                "id": _require_string(member, "id"),
+            }
+        )
+    return normalized
+
+
+def _deprecated_flag(payload: dict[str, Any]) -> bool:
+    value = payload.get("deprecated", False)
+    if not isinstance(value, bool):
+        raise ValueError("deprecated must be a boolean")
+    return value
+
+
+def _base_registry_object(
+    *,
+    object_id: str,
+    object_type: str,
+    display_name: str,
+    level: str,
+    manifest_path: Path | None,
+    primary_module_id: str | None,
+    module_ids: list[str],
+    subsystem_ids: list[str],
+    supported_hosts: list[str],
+    doc_refs: list[str],
+) -> dict[str, Any]:
+    return {
+        "id": object_id,
+        "type": object_type,
+        "displayName": display_name,
+        "level": level,
+        "manifestPath": str(manifest_path) if manifest_path is not None else None,
+        "primaryModuleId": primary_module_id,
+        "moduleIds": list(module_ids),
+        "subsystemIds": list(subsystem_ids),
+        "supportedHosts": list(supported_hosts),
+        "docRefs": list(doc_refs),
+    }
+
+
+def _resolved_member_ids(item: dict[str, Any]) -> list[str]:
+    if item["type"] == "pipeline":
+        member_ids: list[str] = []
+        for phase in item.get("phases", []):
+            member_ids.extend(member["id"] for member in phase.get("members", []))
+        return member_ids
+    return [member["id"] for member in item.get("members", [])]
+
+
+def _load_module_manifest(path: Path) -> dict[str, Any]:
+    payload = read_json(path)
+    if path.parent.parent.parent.name != "modules":
+        raise ValueError("module manifest path must be tests/registry/modules/<module>/<profile>/verification.manifest.json")
+    module_name = path.parent.parent.name
+    profile = path.parent.name
+    item = _base_registry_object(
+        object_id=f"module/{module_name}/{profile}",
+        object_type="module",
+        display_name=_require_string(payload, "displayName"),
+        level="module",
+        manifest_path=path,
+        primary_module_id=str(payload.get("primaryModuleId") or module_name),
+        module_ids=_string_list(payload, "moduleIds") or [module_name],
+        subsystem_ids=_string_list(payload, "subsystemIds"),
+        supported_hosts=_string_list(payload, "supportedHosts"),
+        doc_refs=_string_list(payload, "docRefs"),
+    )
+    item["profileId"] = profile
+    item["members"] = _member_list(payload, "members")
+    item["resolvedMembers"] = _resolved_member_ids(item)
+    item["deprecated"] = _deprecated_flag(payload)
+    return item
+
+
+def _load_system_manifest(path: Path) -> dict[str, Any]:
+    payload = read_json(path)
+    if path.parent.parent.name != "system":
+        raise ValueError("system manifest path must be tests/registry/system/<scenario>/scenario.manifest.json")
+    scenario = path.parent.name
+    primary_module_id = payload.get("primaryModuleId")
+    if primary_module_id is not None and not isinstance(primary_module_id, str):
+        raise ValueError("primaryModuleId must be a string")
+    item = _base_registry_object(
+        object_id=f"system/{scenario}",
+        object_type="system",
+        display_name=_require_string(payload, "displayName"),
+        level="system",
+        manifest_path=path,
+        primary_module_id=primary_module_id,
+        module_ids=_string_list(payload, "moduleIds"),
+        subsystem_ids=_string_list(payload, "subsystemIds"),
+        supported_hosts=_string_list(payload, "supportedHosts"),
+        doc_refs=_string_list(payload, "docRefs"),
+    )
+    item["scenarioId"] = scenario
+    item["members"] = _member_list(payload, "members")
+    item["resolvedMembers"] = _resolved_member_ids(item)
+    item["deprecated"] = _deprecated_flag(payload)
+    return item
+
+
+def _load_pipeline_manifest(path: Path) -> dict[str, Any]:
+    payload = read_json(path)
+    if path.parent.parent.name != "pipelines":
+        raise ValueError("pipeline manifest path must be tests/registry/pipelines/<pipeline>/pipeline.manifest.json")
+    pipeline = path.parent.name
+    primary_module_id = payload.get("primaryModuleId")
+    if primary_module_id is not None and not isinstance(primary_module_id, str):
+        raise ValueError("primaryModuleId must be a string")
+    item = _base_registry_object(
+        object_id=f"pipeline/{pipeline}",
+        object_type="pipeline",
+        display_name=_require_string(payload, "displayName"),
+        level="pipeline",
+        manifest_path=path,
+        primary_module_id=primary_module_id,
+        module_ids=_string_list(payload, "moduleIds"),
+        subsystem_ids=_string_list(payload, "subsystemIds"),
+        supported_hosts=_string_list(payload, "supportedHosts"),
+        doc_refs=_string_list(payload, "docRefs"),
+    )
+    item["pipelineId"] = pipeline
+    item["pipelinePurpose"] = _require_string(payload, "pipelinePurpose")
+    phases = payload.get("phases", [])
+    if not isinstance(phases, list) or not phases:
+        raise ValueError("phases must be a non-empty list")
+    normalized_phases: list[dict[str, Any]] = []
+    for index, phase in enumerate(phases):
+        if not isinstance(phase, dict):
+            raise ValueError(f"phases[{index}] must be an object")
+        normalized_phases.append(
+            {
+                "id": _require_string(phase, "id"),
+                "title": _require_string(phase, "title"),
+                "parallel": bool(phase.get("parallel", False)),
+                "members": _member_list(phase, "members"),
+            }
+        )
+    item["phases"] = normalized_phases
+    item["resolvedMembers"] = _resolved_member_ids(item)
+    item["deprecated"] = _deprecated_flag(payload)
+    return item
+
+
+def _exclude_deprecated(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [item for item in items if not bool(item.get("deprecated", False))]
+
+
+def _filter_host_supported(items: list[dict[str, Any]], host_platform: str) -> list[dict[str, Any]]:
+    return [
+        item
+        for item in items
+        if host_platform in list(item.get("supportedHosts", []))
+    ]
+
+
+def _scan_directory(root: Path, pattern: str, loader) -> tuple[list[dict[str, Any]], list[str]]:
+    if not root.is_dir():
+        return [], []
+    items: list[dict[str, Any]] = []
+    errors: list[str] = []
+    for path in sorted(root.rglob(pattern)):
+        try:
+            items.append(loader(path))
+        except ValueError as error:
+            errors.append(f"{path}: {error}")
+    return items, errors
+
+
+def _suite_items(host_platform: str, public_suite_specs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    items: list[dict[str, Any]] = []
+    for spec in public_suite_specs:
+        if host_platform not in spec["supported_hosts"]:
+            continue
+        item = _base_registry_object(
+            object_id=spec["id"],
+            object_type="suite",
+            display_name=spec["suite"],
+            level=str(spec.get("level", "code")),
+            manifest_path=None,
+            primary_module_id=spec.get("primaryModuleId"),
+            module_ids=list(spec.get("moduleIds", [])),
+            subsystem_ids=list(spec.get("subsystemIds", [])),
+            supported_hosts=list(spec["supported_hosts"]),
+            doc_refs=list(spec.get("docRefs", [])),
+        )
+        item["family"] = spec["family"]
+        item["suite"] = spec["suite"]
+        item["stages"] = list(spec["stages"])
+        item["resolvedMembers"] = [spec["id"]]
+        items.append(item)
+    return items
+
+
+def _read_doc_metadata(path: Path) -> dict[str, str]:
+    metadata: dict[str, str] = {}
+    if not path.is_file():
+        return metadata
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if ":" not in line:
+            if metadata:
+                break
+            continue
+        key, value = line.split(":", 1)
+        key = key.strip()
+        value = value.strip()
+        if key in {"objectId", "objectType", "primaryModuleId"} and value:
+            metadata[key] = value
+    return metadata
+
+
+def _canonical_command(item: dict[str, Any]) -> str:
+    object_type = str(item["type"])
+    if object_type == "suite":
+        return f"run test suite --id {item['id']}"
+    if object_type == "module":
+        return f"run test module --id {item['id']}"
+    if object_type == "system":
+        return f"run test system --id {item['id']}"
+    if object_type == "pipeline":
+        return f"run test pipeline --id {item['id']}"
+    return f"run test --id {item['id']}"
+
+
+def _scope_tokens(item: dict[str, Any]) -> set[str]:
+    tokens: set[str] = set()
+    primary_module_id = item.get("primaryModuleId")
+    if isinstance(primary_module_id, str) and primary_module_id:
+        tokens.add(primary_module_id)
+    for field_name in ("moduleIds", "subsystemIds"):
+        for value in item.get(field_name, []):
+            if isinstance(value, str) and value:
+                tokens.add(value)
+    return tokens
+
+
+def _module_scope_tokens(item: dict[str, Any]) -> set[str]:
+    tokens: set[str] = set()
+    primary_module_id = item.get("primaryModuleId")
+    if isinstance(primary_module_id, str) and primary_module_id:
+        tokens.add(primary_module_id)
+    for value in item.get("moduleIds", []):
+        if isinstance(value, str) and value:
+            tokens.add(value)
+    return tokens
+
+
+def _subsystem_scope_tokens(item: dict[str, Any]) -> set[str]:
+    tokens: set[str] = set()
+    for value in item.get("subsystemIds", []):
+        if isinstance(value, str) and value:
+            tokens.add(value)
+    return tokens
+
+
+def _recommendation_entry(item: dict[str, Any]) -> dict[str, str]:
+    return {
+        "objectId": str(item["id"]),
+        "objectType": str(item["type"]),
+        "displayName": str(item.get("displayName") or item["id"]),
+        "command": str(item.get("canonicalCommand") or _canonical_command(item)),
+    }
+
+
+def _related_items(index: RegistryIndex, item: dict[str, Any]) -> list[dict[str, Any]]:
+    item_module_tokens = _module_scope_tokens(item)
+    item_subsystem_tokens = _subsystem_scope_tokens(item)
+    if not item_module_tokens and not item_subsystem_tokens:
+        return []
+    module_related: list[dict[str, Any]] = []
+    subsystem_related: list[dict[str, Any]] = []
+    for candidate in index.flat_items:
+        if candidate["id"] == item["id"]:
+            continue
+        candidate_module_tokens = _module_scope_tokens(candidate)
+        if item_module_tokens and candidate_module_tokens & item_module_tokens:
+            module_related.append(candidate)
+            continue
+        candidate_subsystem_tokens = _subsystem_scope_tokens(candidate)
+        if (
+            not item_module_tokens
+            and item_subsystem_tokens
+            and candidate_subsystem_tokens & item_subsystem_tokens
+        ):
+            subsystem_related.append(candidate)
+    return sorted([*module_related, *subsystem_related], key=lambda candidate: (candidate["type"], candidate["id"]))
+
+
+def _dedupe_entries(items: list[dict[str, Any]]) -> list[dict[str, str]]:
+    seen: set[str] = set()
+    entries: list[dict[str, str]] = []
+    for item in items:
+        object_id = str(item["id"])
+        if object_id in seen:
+            continue
+        seen.add(object_id)
+        entries.append(_recommendation_entry(item))
+    return entries
+
+
+def _decorate_registry_items(index: RegistryIndex) -> None:
+    items_by_id = {item["id"]: item for item in index.flat_items}
+    for item in items_by_id.values():
+        item["canonicalCommand"] = _canonical_command(item)
+
+    for item in items_by_id.values():
+        related = _related_items(index, item)
+        primary_module_id = item.get("primaryModuleId")
+        related_modules = [
+            candidate
+            for candidate in related
+            if candidate["type"] == "module" and candidate.get("primaryModuleId") == primary_module_id
+        ]
+        related_pipelines = [
+            candidate
+            for candidate in related
+            if candidate["type"] == "pipeline" and candidate.get("pipelinePurpose") in {"completion", "release"}
+        ]
+
+        if item["type"] == "suite":
+            required_before_completion = related_modules or [item]
+        elif item["type"] == "module":
+            required_before_completion = [item]
+        elif item["type"] == "system":
+            required_before_completion = related_modules
+        else:
+            required_before_completion = []
+
+        if item["type"] == "pipeline" and item.get("pipelinePurpose") in {"completion", "release"}:
+            required_for_pipeline_release = [item]
+        else:
+            required_for_pipeline_release = related_pipelines
+
+        excluded_ids = {
+            *[candidate["id"] for candidate in required_before_completion],
+            *[candidate["id"] for candidate in required_for_pipeline_release],
+        }
+        recommended = [
+            candidate
+            for candidate in related
+            if candidate["id"] not in excluded_ids and candidate["type"] != "pipeline"
+        ]
+
+        item["skillRecommendations"] = {
+            "recommended": _dedupe_entries(recommended),
+            "requiredBeforeCompletion": _dedupe_entries(required_before_completion),
+            "requiredForPipelineRelease": _dedupe_entries(required_for_pipeline_release),
+        }
+
+
+def check_registry_consistency(repo_root: Path, index: RegistryIndex) -> tuple[list[str], list[str]]:
+    errors = list(index.errors)
+    warnings = list(index.warnings)
+    items_by_id = {item["id"]: item for item in index.flat_items}
+    for item in index.flat_items:
+        for member_id in item.get("resolvedMembers", []):
+            if member_id not in items_by_id:
+                errors.append(f"{item['id']}: referenced object not found: {member_id}")
+        for doc_ref in item.get("docRefs", []):
+            doc_path = repo_root / doc_ref
+            if not doc_path.is_file():
+                warnings.append(f"{item['id']}: docRef missing: {doc_ref}")
+                continue
+            metadata = _read_doc_metadata(doc_path)
+            if metadata.get("objectType") == "guide":
+                continue
+            if metadata.get("objectId") and metadata["objectId"] != item["id"]:
+                errors.append(f"{item['id']}: doc objectId mismatch: {doc_ref}")
+            if metadata.get("objectType") and metadata["objectType"] != item["type"]:
+                errors.append(f"{item['id']}: doc objectType mismatch: {doc_ref}")
+            primary = item.get("primaryModuleId")
+            if primary and metadata.get("primaryModuleId") and metadata["primaryModuleId"] != primary:
+                errors.append(f"{item['id']}: doc primaryModuleId mismatch: {doc_ref}")
+    return errors, warnings
+
+
+def scan_registry(
+    repo_root: Path,
+    *,
+    host_platform: str,
+    public_suite_specs: list[dict[str, Any]],
+) -> RegistryIndex:
+    registry_root = repo_root / "tests" / "registry"
+    suites = _suite_items(host_platform, public_suite_specs)
+    modules, module_errors = _scan_directory(registry_root / "modules", "verification.manifest.json", _load_module_manifest)
+    systems, system_errors = _scan_directory(registry_root / "system", "scenario.manifest.json", _load_system_manifest)
+    pipelines, pipeline_errors = _scan_directory(registry_root / "pipelines", "pipeline.manifest.json", _load_pipeline_manifest)
+    modules = _exclude_deprecated(modules)
+    systems = _exclude_deprecated(systems)
+    pipelines = _exclude_deprecated(pipelines)
+    modules = _filter_host_supported(modules, host_platform)
+    systems = _filter_host_supported(systems, host_platform)
+    pipelines = _filter_host_supported(pipelines, host_platform)
+    provisional = RegistryIndex(
+        host_platform=host_platform,
+        suites=suites,
+        module_verifications=modules,
+        system_scenarios=systems,
+        pipelines=pipelines,
+        errors=[*module_errors, *system_errors, *pipeline_errors],
+        warnings=[],
+    )
+    _decorate_registry_items(provisional)
+    errors, warnings = check_registry_consistency(repo_root, provisional)
+    return RegistryIndex(
+        host_platform=provisional.host_platform,
+        suites=provisional.suites,
+        module_verifications=provisional.module_verifications,
+        system_scenarios=provisional.system_scenarios,
+        pipelines=provisional.pipelines,
+        errors=errors,
+        warnings=warnings,
+    )
+
+
+def write_registry_snapshot(
+    repo_root: Path,
+    index: RegistryIndex,
+    *,
+    stamp: str | None = None,
+) -> dict[str, Path]:
+    snapshot_stamp = stamp or datetime.now().strftime("%Y%m%d-%H%M%S")
+    current_path = repo_root / "artifacts" / "tests" / "registry" / "current" / "index.json"
+    history_path = repo_root / "artifacts" / "tests" / "registry" / "history" / snapshot_stamp / "index.json"
+    payload = index.to_dict()
+    payload["snapshotStamp"] = snapshot_stamp
+    write_json(current_path, payload)
+    write_json(history_path, payload)
+    return {"currentPath": current_path, "historyPath": history_path}
+
+
+def find_registry_object(index: RegistryIndex, object_id: str) -> dict[str, Any] | None:
+    for item in index.flat_items:
+        if item["id"] == object_id:
+            return item
+    return None
+
+
+def expand_execution_plan(index: RegistryIndex, object_id: str) -> list[dict[str, Any]]:
+    plan: list[dict[str, Any]] = []
+    active_stack: set[str] = set()
+    added_suite_ids: set[str] = set()
+
+    def visit(current_id: str) -> None:
+        if current_id in active_stack:
+            raise ValueError(f"cyclic registry reference: {current_id}")
+        item = find_registry_object(index, current_id)
+        if item is None:
+            raise ValueError(f"registry object not found: {current_id}")
+        if item["type"] == "suite":
+            if current_id not in added_suite_ids:
+                added_suite_ids.add(current_id)
+                plan.append(item)
+            return
+        active_stack.add(current_id)
+        if item["type"] == "pipeline":
+            for phase in item.get("phases", []):
+                for member in phase.get("members", []):
+                    visit(member["id"])
+        else:
+            for member in item.get("members", []):
+                visit(member["id"])
+        active_stack.remove(current_id)
+
+    visit(object_id)
+    return plan

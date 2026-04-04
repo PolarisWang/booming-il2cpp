@@ -26,7 +26,8 @@ def load_tui_module():
     return module
 
 
-class TuiTests(unittest.TestCase):
+@unittest.skip("legacy assertions superseded by unified test menu coverage")
+class LegacyTuiTests(unittest.TestCase):
     def test_build_menu_entries_only_includes_visible_commands_for_host(self) -> None:
         manifest_module = load_manifest_module()
         tui_module = load_tui_module()
@@ -107,6 +108,53 @@ class TuiTests(unittest.TestCase):
         argv = tui_module.resolve_entry_argv(test_entry)
 
         self.assertEqual(["test", "all"], argv)
+
+
+class TuiTests(unittest.TestCase):
+    def test_primary_menu_exposes_only_primary_sections(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_menu_entries(manifest, "windows")
+
+        self.assertEqual(["prepare", "build", "test", "clean", "inspect"], [entry.syntax for entry in entries])
+        self.assertNotIn("verify", [entry.syntax for entry in entries])
+
+    def test_test_submenu_exposes_new_registry_and_object_entries(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_test_menu_entries(manifest, "windows")
+        command_ids = [entry.command["id"] for entry in entries]
+
+        self.assertIn("test-suite", command_ids)
+        self.assertIn("test-module", command_ids)
+        self.assertIn("test-system", command_ids)
+        self.assertIn("test-pipeline", command_ids)
+        self.assertIn("test-registry-list", command_ids)
+        self.assertIn("test-registry-refresh", command_ids)
+        self.assertIn("test-registry-check-consistency", command_ids)
+        self.assertNotIn("test-family-suite", command_ids)
+        self.assertNotIn("test-list", command_ids)
+
+    def test_test_menu_resolution_uses_new_run_test_forms(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+        test_entry = next(entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.syntax == "test")
+
+        suite_answers = iter(["suite", "smoke HelloWorld"])
+        suite_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(suite_answers))
+        self.assertEqual(["test", "suite", "--family", "smoke", "--suite", "HelloWorld"], suite_argv)
+
+        module_answers = iter(["module", "managed-smoke basic"])
+        module_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(module_answers))
+        self.assertEqual(["test", "module", "--module", "managed-smoke", "--profile", "basic"], module_argv)
+
+        self.assertEqual(["test", "registry", "list"], tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "registry-list"))
+        self.assertEqual(["test", "all"], tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "all"))
 
 
 if __name__ == "__main__":

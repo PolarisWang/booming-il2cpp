@@ -191,6 +191,7 @@ def write_session_report(
     command_text: str,
     status: str,
     suite_results: list[dict[str, Any]],
+    phase_results: list[dict[str, Any]] | None = None,
     text: str,
     errors: list[str],
     artifacts: list[Any],
@@ -263,6 +264,7 @@ def write_session_report(
         "artifacts": list(artifacts),
         "caseCounts": session_case_counts,
         "trafficLightCounts": session_traffic_light_counts,
+        "phaseResults": list(phase_results or []),
         "suiteResults": summary_suite_results,
     }
     write_json(summary_path, summary_payload)
@@ -275,6 +277,7 @@ def write_session_report(
         "artifacts": list(artifacts),
         "caseCounts": session_case_counts,
         "trafficLightCounts": session_traffic_light_counts,
+        "phaseResults": list(phase_results or []),
         "sessionPath": _relative_path(repo_root, session_path),
         "summaryPath": _relative_path(repo_root, summary_path),
         "eventsPath": _relative_path(repo_root, events_path),
@@ -305,7 +308,10 @@ def write_session_report(
     if current_path.is_file():
         current_payload = read_json(current_path)
         if current_payload.get("runId") == run_id:
-            current_path.unlink()
+            try:
+                current_path.unlink()
+            except OSError:
+                pass
 
     return {
         "runId": run_id,

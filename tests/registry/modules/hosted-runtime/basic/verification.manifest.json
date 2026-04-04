@@ -1,0 +1,11 @@
+{
+  "displayName": "Hosted runtime basic verification",
+  "primaryModuleId": "hosted-runtime",
+  "moduleIds": ["hosted-runtime"],
+  "subsystemIds": ["hosting", "managed-execution"],
+  "supportedHosts": ["windows", "macos", "linux"],
+  "docRefs": ["wiki/06-测试验证/模块/hosted-runtime.md"],
+  "members": [
+    {"type": "suite", "id": "smoke/HostEmbeddingLite"}
+  ]
+}

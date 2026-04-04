@@ -1,0 +1,12 @@
+{
+  "displayName": "Managed smoke basic verification",
+  "primaryModuleId": "managed-smoke",
+  "moduleIds": ["managed-smoke"],
+  "subsystemIds": ["managed-execution"],
+  "supportedHosts": ["windows", "macos", "linux"],
+  "docRefs": ["wiki/06-测试验证/模块/managed-smoke.md"],
+  "members": [
+    {"type": "suite", "id": "smoke/HelloWorld"},
+    {"type": "suite", "id": "smoke/GenericEcho"}
+  ]
+}

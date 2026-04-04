@@ -1,0 +1,34 @@
+{
+  "displayName": "Completion managed smoke pipeline",
+  "deprecated": true,
+  "pipelinePurpose": "completion",
+  "primaryModuleId": "managed-smoke",
+  "moduleIds": ["managed-smoke", "hosted-runtime"],
+  "subsystemIds": ["managed-execution", "hosting"],
+  "supportedHosts": ["windows", "macos", "linux"],
+  "docRefs": ["wiki/06-测试验证/测试管线/completion-managed-smoke.md"],
+  "phases": [
+    {
+      "id": "code",
+      "title": "Code tests",
+      "members": [
+        {"type": "suite", "id": "smoke/HelloWorld"},
+        {"type": "suite", "id": "smoke/GenericEcho"}
+      ]
+    },
+    {
+      "id": "module",
+      "title": "Module verification",
+      "members": [
+        {"type": "module", "id": "module/managed-smoke/basic"}
+      ]
+    },
+    {
+      "id": "system",
+      "title": "System validation",
+      "members": [
+        {"type": "system", "id": "system/hosted-runtime-smoke"}
+      ]
+    }
+  ]
+}

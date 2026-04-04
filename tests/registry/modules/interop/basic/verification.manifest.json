@@ -1,0 +1,13 @@
+{
+  "displayName": "Interop basic verification",
+  "primaryModuleId": "interop",
+  "moduleIds": ["interop"],
+  "subsystemIds": ["native-bridge"],
+  "supportedHosts": ["windows", "macos", "linux"],
+  "docRefs": ["wiki/06-测试验证/模块/interop.md"],
+  "members": [
+    {"type": "suite", "id": "contract/native-abi"},
+    {"type": "suite", "id": "contract/native-bridge"},
+    {"type": "suite", "id": "smoke/PInvokeLite"}
+  ]
+}
