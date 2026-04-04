@@ -27,6 +27,15 @@
 
 ## 最近更新
 
+- `2026-04-04`：更新 `统一测试框架.md` 与 `统一入口脚本.md`，补充 perf baseline、build fingerprint、strict 退出码，以及对外只保留 `run test ...` 的最终契约。
+- `2026-04-04`：更新 `统一测试框架.md`，补充 traffic-light 覆盖模型、`coveragePolicy` selector 和 summary/report 三色计数规则。
+- `2026-04-04`：更新 `统一测试框架.md` 与 `统一入口脚本.md`，补充 TUI / harness 消费统一测试事件流，以及 `run test ... --json` 优先输出 `events.jsonl` 的规则。
+- `2026-04-04`：更新 `统一测试框架.md`，补充结果目录、`runId` / `summaryPath` 元数据和 `final-summary` 事件的最小契约。
+- `2026-04-04`：更新 `统一测试框架.md`，补充 session 执行器、`implicit build` 标记和 host 不兼容时的退出码约定。
+- `2026-04-04`：更新 `统一测试框架.md`，补充 adapter registry、synthetic `main` 和 `caseId` 冲突后缀规则。
+- `2026-04-04`：更新 `统一测试框架.md`，记录 family 目录迁移的当前状态，以及旧目录兼容副本的边界。
+- `2026-04-04`：继续更新 `统一入口脚本.md` 与 `统一测试框架.md`，补充 `prepare` 统一走 smoke build stage，以及 TUI 动态测试菜单输入规则。
+- `2026-04-04`：更新 `统一入口脚本.md` 与 `统一测试框架.md`，补充 macOS 下 `dotnet` 按需引导、Homebrew 前提和非交互限制。
 - `2026-04-03`：新增 `统一测试框架.md`，沉淀 `run test ...`、suite manifest、日志目录、事件流、红绿灯覆盖和 perf 基线规则。
 - `2026-04-03`：更新 `统一入口脚本.md`，补充 `run` 全屏 TUI 菜单结构与按键说明。
 - `2026-04-03`：新增 `统一入口脚本.md`，记录 `run.ps1` / `run.sh` / `run.cmd` 协议与 harness 生命周期。

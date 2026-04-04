@@ -1,0 +1,10 @@
+{
+  "displayName": "PInvokeLite",
+  "runnerType": "dotnet-app",
+  "supportedStages": ["build", "run", "all"],
+  "runnerConfig": {
+    "projectPath": "tests/smoke/input/PInvokeLite/PInvokeLite.csproj",
+    "dllPath": "artifacts/smoke/bin/PInvokeLite/Release/net8.0/PInvokeLite.dll"
+  },
+  "tags": ["smoke", "managed"]
+}

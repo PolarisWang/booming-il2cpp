@@ -9,6 +9,8 @@ try:
     from ..result import CommandResult
     from .. import manifest as manifest_module
     from . import build as build_commands
+    from . import test as test_commands
+    from . import verify as verify_commands
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
@@ -16,32 +18,30 @@ except ImportError:
     from result import CommandResult
     import manifest as manifest_module
     from commands import build as build_commands
+    from commands import test as test_commands
+    from commands import verify as verify_commands
 
 
-SMOKE_BUILD_IDS = [
-    "build-smoke-helloworld",
-    "build-smoke-genericecho",
-    "build-smoke-reflectionlite",
-    "build-smoke-pinvokelite",
-    "build-smoke-hostembeddinglite",
+SMOKE_PREPARE_STEPS = [
+    ["test", "smoke", "all", "--stage", "build"],
 ]
 
-VERIFY_WINDOWS_BUILD_IDS = [
-    "build-native-contract-abi",
-    "build-native-contract-bridge",
-    *SMOKE_BUILD_IDS,
-    "build-preset-windows-x64-reference",
-    "build-platform-android-arm64-smoke",
-    "build-platform-linux-x64-packaging",
+VERIFY_WINDOWS_PREPARE_STEPS = [
+    ["build", "native-contract", "abi"],
+    ["build", "native-contract", "bridge"],
+    *SMOKE_PREPARE_STEPS,
+    ["build", "preset", "windows-x64-reference"],
+    ["build", "platform", "android-arm64-smoke"],
+    ["build", "platform", "linux-x64-packaging"],
 ]
 
-VERIFY_MACOS_BUILD_IDS = [
-    "build-native-contract-abi",
-    "build-native-contract-bridge",
-    *SMOKE_BUILD_IDS,
-    "build-preset-macos-reference",
-    "build-platform-ios-arm64-packaging",
-    "build-platform-linux-x64-packaging",
+VERIFY_MACOS_PREPARE_STEPS = [
+    ["build", "native-contract", "abi"],
+    ["build", "native-contract", "bridge"],
+    *SMOKE_PREPARE_STEPS,
+    ["build", "preset", "macos-reference"],
+    ["build", "platform", "ios-arm64-packaging"],
+    ["build", "platform", "linux-x64-packaging"],
 ]
 
 
@@ -55,17 +55,71 @@ def resolve_prepare_scope(command_id: str) -> str:
     return mapping[command_id]
 
 
-def _prepare_plan(scope: str, host_platform: str) -> list[str]:
+def _unique_steps(steps: list[list[str]]) -> list[list[str]]:
+    seen: set[tuple[str, ...]] = set()
+    unique: list[list[str]] = []
+    for step in steps:
+        key = tuple(step)
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(list(step))
+    return unique
+
+
+def _prepare_plan(scope: str, host_platform: str) -> list[list[str]]:
     if scope == "smoke":
-        return list(SMOKE_BUILD_IDS)
+        return [list(step) for step in SMOKE_PREPARE_STEPS]
     if scope == "verify-roadmap0-windows":
-        return list(VERIFY_WINDOWS_BUILD_IDS)
+        return [list(step) for step in VERIFY_WINDOWS_PREPARE_STEPS]
     if scope == "verify-roadmap0-macos":
-        return list(VERIFY_MACOS_BUILD_IDS)
+        return [list(step) for step in VERIFY_MACOS_PREPARE_STEPS]
     if scope == "global":
-        host_specific = VERIFY_WINDOWS_BUILD_IDS if host_platform == "windows" else VERIFY_MACOS_BUILD_IDS if host_platform == "macos" else SMOKE_BUILD_IDS
-        return list(dict.fromkeys(itertools.chain(SMOKE_BUILD_IDS, host_specific)))
+        host_specific = (
+            VERIFY_WINDOWS_PREPARE_STEPS
+            if host_platform == "windows"
+            else VERIFY_MACOS_PREPARE_STEPS
+            if host_platform == "macos"
+            else SMOKE_PREPARE_STEPS
+        )
+        combined = [list(step) for step in itertools.chain(SMOKE_PREPARE_STEPS, host_specific)]
+        return _unique_steps(combined)
     raise KeyError(f"unknown prepare scope: {scope}")
+
+
+def _execute_prepare_step(
+    step_argv: list[str],
+    repo_root: Path,
+    host_platform: str,
+    manifest: dict,
+) -> tuple[str, CommandResult]:
+    step_text = " ".join(step_argv)
+    parsed = manifest_module.parse_cli(step_argv, False, manifest, host_platform)
+    command = parsed["command"]
+    if command is None:
+        return step_text, CommandResult.failure(
+            command=step_text,
+            host_platform=host_platform,
+            target=None,
+            errors=[f"unknown prepare step: {step_text}"],
+            text=f"unknown prepare step: {step_text}\n",
+        )
+
+    handler = command["handler"]
+    if handler == "build.dispatch":
+        return step_text, build_commands.handle(command, repo_root, host_platform, step_text)
+    if handler == "test.dispatch":
+        return step_text, test_commands.handle(command, repo_root, host_platform, step_text, manifest, parsed["options"])
+    if handler == "verify.dispatch":
+        return step_text, verify_commands.handle(command, repo_root, host_platform, step_text)
+
+    return step_text, CommandResult.failure(
+        command=step_text,
+        host_platform=host_platform,
+        target=None,
+        errors=[f"unsupported prepare step handler: {handler}"],
+        text=f"unsupported prepare step handler: {handler}\n",
+    )
 
 
 def prepare_state_path(repo_root: Path, scope: str) -> Path:
@@ -124,28 +178,23 @@ def handle(command: dict, repo_root: Path, host_platform: str, command_text: str
             text=f"prepare scope '{scope}' already available\n",
         )
 
-    plan_ids = _prepare_plan(scope, host_platform)
+    plan_steps = _prepare_plan(scope, host_platform)
     executed: list[str] = []
     outputs: list[str] = []
 
-    for command_id in plan_ids:
-        entry = manifest_module.find_command(manifest, command_id, host_platform)
-        if entry is None:
-            continue
-
-        syntax = " ".join(entry["tokens"])
-        result = build_commands.handle(entry, repo_root, host_platform, syntax)
+    for step_argv in plan_steps:
+        step_text, result = _execute_prepare_step(step_argv, repo_root, host_platform, manifest)
         outputs.append(result.text or "")
         if result.status != "ok":
             return CommandResult.failure(
                 command=command_text,
                 host_platform=host_platform,
                 target=scope,
-                errors=[f"prepare failed while executing {command_id}"],
+                errors=[f"prepare failed while executing {step_text}"],
                 payload={"prepareScope": scope, "preparedCommands": executed},
                 text="".join(outputs),
             )
-        executed.append(command_id)
+        executed.append(step_text)
 
     write_json(
         state_path,

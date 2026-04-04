@@ -62,6 +62,23 @@ class JsonOutputTests(unittest.TestCase):
         self.assertIn("checks", serialized)
         self.assertIn("durationMs", serialized)
 
+    def test_success_payload_can_carry_run_summary_metadata(self) -> None:
+        result_module = load_result_module()
+        result = result_module.CommandResult.success(
+            command="test smoke HelloWorld",
+            host_platform="macos",
+            target="smoke/HelloWorld",
+            payload={
+                "runId": "20260404-120000-macos-abcd",
+                "summaryPath": "artifacts/logs/tests/20260404-120000-macos-abcd/summary.json",
+            },
+        )
+
+        serialized = result.to_dict()
+
+        self.assertEqual("20260404-120000-macos-abcd", serialized["runId"])
+        self.assertTrue(serialized["summaryPath"].endswith("summary.json"))
+
 
 if __name__ == "__main__":
     unittest.main()

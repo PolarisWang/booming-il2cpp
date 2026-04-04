@@ -83,6 +83,50 @@
       "examples": ["run doctor", "run doctor --json"]
     },
     {
+      "id": "test-family-suite",
+      "title": "Run a test suite from a public family",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test"],
+      "syntax": "test <family> <suite>",
+      "show_in_menu": true,
+      "examples": ["run test smoke HelloWorld", "run test workflow roadmap-0-macos"]
+    },
+    {
+      "id": "test-family-all",
+      "title": "Run all suites in a public test family",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test"],
+      "syntax": "test <family> all",
+      "show_in_menu": true,
+      "examples": ["run test smoke all", "run test workflow all"]
+    },
+    {
+      "id": "test-all",
+      "title": "Run the default batch of public test families",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test"],
+      "syntax": "test all",
+      "show_in_menu": true,
+      "examples": ["run test all"]
+    },
+    {
+      "id": "test-list",
+      "title": "List public test suites",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test", "list"],
+      "syntax": "test list [family]",
+      "show_in_menu": true,
+      "examples": ["run test list", "run test list smoke --json"]
+    },
+    {
       "id": "prepare",
       "title": "Prepare the current host's reusable environment",
       "group": "Environment",
@@ -190,7 +234,7 @@
       "tokens": ["build", "native-contract", "abi"],
       "kind": "native-contract",
       "target": "abi",
-      "source_dir": "tests/contracts/native/abi",
+      "source_dir": "tests/contract/native/abi",
       "binary_dir": "artifacts/run/native-contract-abi",
       "show_in_menu": true,
       "examples": ["run build native-contract abi"]
@@ -204,7 +248,7 @@
       "tokens": ["build", "native-contract", "bridge"],
       "kind": "native-contract",
       "target": "bridge",
-      "source_dir": "tests/contracts/native/bridge",
+      "source_dir": "tests/contract/native/bridge",
       "binary_dir": "artifacts/run/native-contract-bridge",
       "show_in_menu": true,
       "examples": ["run build native-contract bridge"]
@@ -220,7 +264,9 @@
       "target": "HelloWorld",
       "project_path": "tests/smoke/input/HelloWorld/HelloWorld.csproj",
       "artifact_path": "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll",
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke HelloWorld --stage build",
       "examples": ["run build smoke HelloWorld"]
     },
     {
@@ -234,7 +280,9 @@
       "target": "GenericEcho",
       "project_path": "tests/smoke/input/GenericEcho/GenericEcho.csproj",
       "artifact_path": "artifacts/smoke/bin/GenericEcho/Release/net8.0/GenericEcho.dll",
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke GenericEcho --stage build",
       "examples": ["run build smoke GenericEcho"]
     },
     {
@@ -248,7 +296,9 @@
       "target": "ReflectionLite",
       "project_path": "tests/smoke/input/ReflectionLite/ReflectionLite.csproj",
       "artifact_path": "artifacts/smoke/bin/ReflectionLite/Release/net8.0/ReflectionLite.dll",
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke ReflectionLite --stage build",
       "examples": ["run build smoke ReflectionLite"]
     },
     {
@@ -262,7 +312,9 @@
       "target": "PInvokeLite",
       "project_path": "tests/smoke/input/PInvokeLite/PInvokeLite.csproj",
       "artifact_path": "artifacts/smoke/bin/PInvokeLite/Release/net8.0/PInvokeLite.dll",
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke PInvokeLite --stage build",
       "examples": ["run build smoke PInvokeLite"]
     },
     {
@@ -276,7 +328,9 @@
       "target": "HostEmbeddingLite",
       "project_path": "tests/smoke/input/HostEmbeddingLite/HostEmbeddingLite.csproj",
       "artifact_path": "artifacts/smoke/bin/HostEmbeddingLite/Release/net8.0/HostEmbeddingLite.dll",
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke HostEmbeddingLite --stage build",
       "examples": ["run build smoke HostEmbeddingLite"]
     },
     {
@@ -364,7 +418,9 @@
       "project_path": "tests/smoke/input/HelloWorld/HelloWorld.csproj",
       "dll_path": "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll",
       "expected_patterns": ["HelloWorld smoke entry reached.", "register:Main"],
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke HelloWorld",
       "examples": ["run test smoke HelloWorld"]
     },
     {
@@ -379,7 +435,9 @@
       "project_path": "tests/smoke/input/GenericEcho/GenericEcho.csproj",
       "dll_path": "artifacts/smoke/bin/GenericEcho/Release/net8.0/GenericEcho.dll",
       "expected_patterns": ["roadmap0", "42", "roadmap0:roadmap0"],
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke GenericEcho",
       "examples": ["run test smoke GenericEcho"]
     },
     {
@@ -394,7 +452,9 @@
       "project_path": "tests/smoke/input/ReflectionLite/ReflectionLite.csproj",
       "dll_path": "artifacts/smoke/bin/ReflectionLite/Release/net8.0/ReflectionLite.dll",
       "expected_patterns": ["field=BackingField:Int32", "generic-method=String"],
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke ReflectionLite",
       "examples": ["run test smoke ReflectionLite"]
     },
     {
@@ -409,7 +469,9 @@
       "project_path": "tests/smoke/input/PInvokeLite/PInvokeLite.csproj",
       "dll_path": "artifacts/smoke/bin/PInvokeLite/Release/net8.0/PInvokeLite.dll",
       "expected_patterns": ["marshal=interop-smoke", "export=boom_smoke_add:7", "symbol=True"],
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke PInvokeLite",
       "examples": ["run test smoke PInvokeLite"]
     },
     {
@@ -424,7 +486,9 @@
       "project_path": "tests/smoke/input/HostEmbeddingLite/HostEmbeddingLite.csproj",
       "dll_path": "artifacts/smoke/bin/HostEmbeddingLite/Release/net8.0/HostEmbeddingLite.dll",
       "expected_patterns": ["HostEmbeddingSession:InvokeManagedEntry:True", "guards=invalid-detach:True|double-start:True|unattached-entry:True"],
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke HostEmbeddingLite",
       "examples": ["run test smoke HostEmbeddingLite"]
     },
     {
@@ -437,9 +501,11 @@
       "kind": "trace-compare",
       "target": "windows",
       "trace_platform": "windows",
-      "expected_trace_path": "tests/contracts/trace/snapshots/windows-warmup-trace.snapshot.json",
+      "expected_trace_path": "tests/contract/trace/snapshots/windows-warmup-trace.snapshot.json",
       "actual_trace_path": "artifacts/run/trace/windows-warmup-trace.runtime.json",
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test contract trace-compare-windows",
       "examples": ["run test trace-compare windows"]
     },
     {
@@ -452,9 +518,11 @@
       "kind": "trace-compare",
       "target": "macos",
       "trace_platform": "macos",
-      "expected_trace_path": "tests/contracts/trace/snapshots/macos-warmup-trace.snapshot.json",
+      "expected_trace_path": "tests/contract/trace/snapshots/macos-warmup-trace.snapshot.json",
       "actual_trace_path": "artifacts/run/trace/macos-warmup-trace.runtime.json",
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test contract trace-compare-macos",
       "examples": ["run test trace-compare macos"]
     },
     {
@@ -469,7 +537,9 @@
       },
       "target": "windows",
       "host_profile": "windows",
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test workflow roadmap-0-windows",
       "examples": ["run verify roadmap-0 --host windows"]
     },
     {
@@ -484,7 +554,9 @@
       },
       "target": "macos",
       "host_profile": "macos",
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test workflow roadmap-0-macos",
       "examples": ["run verify roadmap-0 --host macos"]
     }
   ]

@@ -6,11 +6,13 @@ from pathlib import Path
 try:
     from ..common import combine_process_output, run_process
     from ..result import CommandResult
+    from .. import tooling as tooling_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from common import combine_process_output, run_process
     from result import CommandResult
+    import tooling as tooling_module
 
 
 def _success(command_text: str, host_platform: str, target: str | None, output: str, artifacts: list[str]) -> CommandResult:
@@ -55,9 +57,13 @@ def _build_native_contract(command: dict, repo_root: Path, host_platform: str, c
 
 
 def _build_smoke_project(command: dict, repo_root: Path, host_platform: str, command_text: str) -> CommandResult:
+    bootstrap = tooling_module.ensure_dotnet_available(command_text, host_platform)
+    if not bootstrap.ready:
+        return _failure(command_text, host_platform, command.get("target"), bootstrap.output, bootstrap.errors)
+
     project_path = repo_root / command["project_path"]
     completed = run_process(["dotnet", "build", str(project_path), "-c", "Release"], cwd=repo_root)
-    output = combine_process_output(completed)
+    output = "\n".join(part for part in [bootstrap.output.strip(), combine_process_output(completed)] if part)
     if completed.returncode != 0:
         return _failure(command_text, host_platform, command.get("target"), output, ["dotnet build failed"])
 

@@ -36,9 +36,9 @@ class TuiTests(unittest.TestCase):
         syntaxes = [entry.syntax for entry in entries]
 
         self.assertIn("doctor", syntaxes)
-        self.assertIn("verify roadmap-0 --host windows", syntaxes)
+        self.assertIn("test <family> <suite>", syntaxes)
         self.assertNotIn("menu", syntaxes)
-        self.assertNotIn("verify roadmap-0 --host macos", syntaxes)
+        self.assertNotIn("verify roadmap-0 --host windows", syntaxes)
 
     def test_jump_group_moves_between_neighbor_groups(self) -> None:
         manifest_module = load_manifest_module()
@@ -68,6 +68,78 @@ class TuiTests(unittest.TestCase):
         argv = tui_module.resolve_entry_argv(capability_entry, prompt_value_provider=lambda prompt: "bootstrap")
 
         self.assertEqual(["capability", "bootstrap"], argv)
+
+    def test_resolve_entry_argv_supports_dynamic_test_suite_target(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        test_entry = next(
+            entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.command["id"] == "test-family-suite"
+        )
+
+        argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "smoke HelloWorld")
+
+        self.assertEqual(["test", "smoke", "HelloWorld"], argv)
+
+    def test_resolve_entry_argv_supports_dynamic_test_family_all_target(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        test_entry = next(
+            entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.command["id"] == "test-family-all"
+        )
+
+        argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "smoke")
+
+        self.assertEqual(["test", "smoke", "all"], argv)
+
+    def test_resolve_entry_argv_supports_test_all_without_prompt(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        test_entry = next(
+            entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.command["id"] == "test-all"
+        )
+
+        argv = tui_module.resolve_entry_argv(test_entry)
+
+        self.assertEqual(["test", "all"], argv)
+
+    def test_render_test_progress_screen_consumes_event_stream(self) -> None:
+        tui_module = load_tui_module()
+
+        screen = tui_module.render_test_progress_screen(
+            [
+                {
+                    "eventType": "session-start",
+                    "payload": {"command": "test smoke HelloWorld"},
+                },
+                {
+                    "eventType": "progress",
+                    "payload": {"completedUnits": 1, "totalUnits": 2, "activeUnit": "case:main"},
+                },
+                {
+                    "eventType": "warning",
+                    "payload": {"message": "catalog cache skipped"},
+                },
+                {
+                    "eventType": "artifact",
+                    "payload": {"path": "artifacts/logs/tests/run-1/summary.json"},
+                },
+                {
+                    "eventType": "final-summary",
+                    "payload": {"finalStatus": "ok", "exitCode": 0},
+                },
+            ]
+        )
+
+        self.assertIn("50%", screen)
+        self.assertIn("catalog cache skipped", screen)
+        self.assertIn("artifacts/logs/tests/run-1/summary.json", screen)
+        self.assertIn("ok", screen)
 
 
 if __name__ == "__main__":

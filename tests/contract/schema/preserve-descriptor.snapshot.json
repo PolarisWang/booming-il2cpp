@@ -1,0 +1,18 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "Game.Core/Game.ReflectionBridge",
+      "preserve": "all",
+      "reason": "reflection-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "Game.Core/Game.Inventory::AddItem<System.String>(System.String)",
+      "preserve": "signature",
+      "reason": "lazy-warmup"
+    }
+  ]
+}

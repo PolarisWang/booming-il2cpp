@@ -1,0 +1,9 @@
+{
+  "displayName": "UnifiedRunTooling",
+  "runnerType": "python-pytest",
+  "supportedStages": ["run", "all"],
+  "runnerConfig": {
+    "modulePattern": "tests.integration.run.test_*"
+  },
+  "tags": ["integration", "tooling", "run"]
+}
