@@ -235,6 +235,106 @@ function Get-RunScriptPath {
     return Join-Path $RepoRoot "build\toolchains\run\run.py"
 }
 
+function Get-WindowsTerminalCommandPath {
+    if ($env:BOOM_RUN_WINDOWS_TERMINAL_COMMAND) {
+        $resolved = Resolve-Path $env:BOOM_RUN_WINDOWS_TERMINAL_COMMAND -ErrorAction SilentlyContinue
+        if ($resolved) {
+            return $resolved.Path
+        }
+
+        return $null
+    }
+
+    $command = Get-Command "wt.exe" -ErrorAction SilentlyContinue
+    if ($command) {
+        return $command.Source
+    }
+
+    $command = Get-Command "wt" -ErrorAction SilentlyContinue
+    if ($command) {
+        return $command.Source
+    }
+
+    return $null
+}
+
+function Test-WindowsTerminalHandoffRequested {
+    param([bool]$JsonOutput)
+
+    if ($env:BOOM_RUN_REQUEST_WINDOWS_TERMINAL -ne "1") {
+        return $false
+    }
+
+    if ($env:BOOM_RUN_WINDOWS_TERMINAL_HANDOFF -eq "1") {
+        return $false
+    }
+
+    if ($env:WT_SESSION) {
+        return $false
+    }
+
+    if ($JsonOutput) {
+        return $false
+    }
+
+    if ($env:CI -or $env:GITHUB_ACTIONS -or $env:TF_BUILD) {
+        return $false
+    }
+
+    return $null -ne (Get-WindowsTerminalCommandPath)
+}
+
+function Invoke-WindowsTerminalHandoff {
+    param(
+        [string]$RepoRoot,
+        [string]$ScriptPath,
+        [string[]]$Arguments
+    )
+
+    $wtCommandPath = Get-WindowsTerminalCommandPath
+    if (-not $wtCommandPath) {
+        return $false
+    }
+
+    $wtArguments = @(
+        "-w", "new",
+        "new-tab",
+        "-d", $RepoRoot,
+        "--title", "boom run",
+        "powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy", "Bypass",
+        "-NoExit",
+        "-File", $ScriptPath
+    )
+    $wtArguments += @($Arguments)
+
+    $originalRequest = $env:BOOM_RUN_REQUEST_WINDOWS_TERMINAL
+    $originalHandoff = $env:BOOM_RUN_WINDOWS_TERMINAL_HANDOFF
+
+    $env:BOOM_RUN_REQUEST_WINDOWS_TERMINAL = "0"
+    $env:BOOM_RUN_WINDOWS_TERMINAL_HANDOFF = "1"
+
+    try {
+        $launcherPath = $wtCommandPath
+        $launcherArguments = $wtArguments
+        $extension = [System.IO.Path]::GetExtension($wtCommandPath)
+        if ($extension -eq ".cmd" -or $extension -eq ".bat") {
+            $launcherPath = $env:ComSpec
+            $launcherArguments = @("/d", "/c", $wtCommandPath) + $wtArguments
+        }
+
+        Start-Process -FilePath $launcherPath -ArgumentList $launcherArguments -WorkingDirectory $RepoRoot | Out-Null
+    }
+    finally {
+        $env:BOOM_RUN_REQUEST_WINDOWS_TERMINAL = $originalRequest
+        $env:BOOM_RUN_WINDOWS_TERMINAL_HANDOFF = $originalHandoff
+    }
+
+    return $true
+}
+
 $jsonOutput = $false
 $commandText = ""
 $hostPlatformFamily = "unknown"
@@ -247,6 +347,12 @@ try {
     $commandText = Get-CommandText -Arguments $Arguments
     $hostPlatformId = Get-HostPlatformId
     $hostPlatformFamily = Get-HostPlatformFamily -PlatformId $hostPlatformId
+    if (Test-WindowsTerminalHandoffRequested -JsonOutput $jsonOutput) {
+        $scriptPath = Join-Path $repoRoot "run.ps1"
+        if (Invoke-WindowsTerminalHandoff -RepoRoot $repoRoot -ScriptPath $scriptPath -Arguments $Arguments) {
+            exit 0
+        }
+    }
     $runtimePython = Get-RuntimePythonPath -RepoRoot $repoRoot -ManifestPath $manifestPath
     $argumentsList = @($Arguments)
     $isBootstrapCommand = $argumentsList.Length -gt 0 -and $argumentsList[0] -eq "bootstrap"
