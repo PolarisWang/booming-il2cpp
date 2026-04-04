@@ -42,6 +42,14 @@ def render_result(result: CommandResult, json_output: bool) -> str:
     return result.text or ""
 
 
+def render_post_tui_prefix(used_fullscreen_tui: bool, result: CommandResult, json_output: bool) -> str:
+    if not used_fullscreen_tui or json_output:
+        return ""
+    if not (result.text or ""):
+        return ""
+    return "\r\x1b[2K"
+
+
 def execute_command(
     command: dict | None,
     command_text: str,
@@ -104,19 +112,19 @@ def resolve_tui_selection(
     interactive: bool,
     manifest: dict,
     host_platform: str,
-) -> dict[str, object] | None:
+) -> tuple[dict[str, object] | None, bool]:
     command = parsed["command"]
     if parsed["json"] or command is None or command["id"] != "menu":
-        return parsed
+        return parsed, False
 
     if not tui_module.supports_fullscreen_tui():
-        return parsed
+        return parsed, False
 
     selection_argv = tui_module.run_fullscreen_menu(manifest, host_platform)
     if selection_argv is None:
-        return None
+        return None, True
 
-    return manifest_module.parse_cli(selection_argv, interactive, manifest, host_platform)
+    return manifest_module.parse_cli(selection_argv, interactive, manifest, host_platform), True
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -128,7 +136,7 @@ def main(argv: list[str] | None = None) -> int:
     host_platform = manifest_module.detect_host_platform_family(runtime_module.detect_host_platform())
     parsed = manifest_module.parse_cli(argv, interactive, manifest, host_platform)
     json_output = parsed["json"]
-    parsed = resolve_tui_selection(parsed, interactive, manifest, host_platform)
+    parsed, used_fullscreen_tui = resolve_tui_selection(parsed, interactive, manifest, host_platform)
     if parsed is None:
         result = CommandResult.success(
             command="menu",
@@ -146,6 +154,7 @@ def main(argv: list[str] | None = None) -> int:
             repo_root,
         )
     result.duration_ms = int((time.perf_counter() - start) * 1000)
+    sys.stdout.write(render_post_tui_prefix(used_fullscreen_tui, result, json_output))
     sys.stdout.write(render_result(result, json_output))
     return 0 if result.status == "ok" else 1
 

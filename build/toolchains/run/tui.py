@@ -285,6 +285,8 @@ class _TerminalSession:
 
     @staticmethod
     def _write(text: str) -> None:
+        if os.name != "nt":
+            text = text.replace("\r\n", "\n").replace("\n", "\r\n")
         sys.stdout.write(text)
         sys.stdout.flush()
 

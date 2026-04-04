@@ -1,0 +1,8 @@
+{
+  "provider": "test-runtime",
+  "provider_release": "local",
+  "python_version": "9.9.9",
+  "platform_id": "macos-arm64",
+  "manifest_path": "/private/var/folders/mm/xw8xdyk54bl82wd6s7c7mcpr0000gn/T/booming-run-wrapper-vbb7qc48/runtime_manifest.test.json",
+  "python_path": "/Users/polariswang/agent/booming-il2cpp/python-cache/macos-arm64/9.9.9/python/bin/python3.12"
+}

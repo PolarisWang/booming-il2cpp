@@ -38,6 +38,10 @@ class TuiRoutingTests(unittest.TestCase):
 
         self.assertEqual(0, exit_code)
         self.assertIn("Available commands", stdout.getvalue())
+        self.assertTrue(
+            stdout.getvalue().startswith("\r\x1b[2K"),
+            "output rendered after leaving the fullscreen menu should start on a clean line",
+        )
 
     def test_cancelled_tui_menu_exits_cleanly_without_output(self) -> None:
         run_module = load_run_module()

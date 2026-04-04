@@ -58,6 +58,10 @@ json_escape() {
   printf '%s' "$1" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e ':a;N;$!ba;s/\r/\\r/g;s/\n/\\n/g'
 }
 
+normalize_response() {
+  printf '%s' "$1" | tr '[:upper:]' '[:lower:]'
+}
+
 has_json_flag() {
   local arg
   for arg in "$@"; do
@@ -112,6 +116,20 @@ probe_runtime() {
   "$bootstrap_python" "$runtime_script" probe --repo-root "$repo_root" --manifest "$manifest_path"
 }
 
+runtime_python_from_probe_json() {
+  local probe_json="$1"
+
+  if [[ -z "$probe_json" || -z "$bootstrap_python" ]]; then
+    return 1
+  fi
+
+  PROBE_JSON="$probe_json" "$bootstrap_python" - <<'PY'
+import json
+import os
+print(json.loads(os.environ["PROBE_JSON"])["pythonPath"])
+PY
+}
+
 json_requested=0
 if has_json_flag "$@"; then
   json_requested=1
@@ -139,7 +157,7 @@ if [[ "${1-}" == "bootstrap" ]]; then
       read -r response
     fi
 
-    case "${response,,}" in
+    case "$(normalize_response "$response")" in
       y|yes|1|true) ;;
       *)
         if [[ "$json_requested" -eq 1 ]]; then
@@ -153,14 +171,8 @@ if [[ "${1-}" == "bootstrap" ]]; then
   fi
 
   probe_json="$(probe_runtime || true)"
-  if [[ -n "$probe_json" ]]; then
-    runtime_python="$(
-      PROBE_JSON="$probe_json" "$bootstrap_python" - <<'PY'
-import json
-import os
-print(json.loads(os.environ["PROBE_JSON"])["pythonPath"])
-PY
-)"
+  runtime_python="$(runtime_python_from_probe_json "$probe_json" || true)"
+  if [[ -n "$runtime_python" && -f "$runtime_python" ]]; then
 
     if [[ "$json_requested" -eq 1 ]]; then
       exec "$runtime_python" "$runtime_script" bootstrap --repo-root "$repo_root" --manifest "$manifest_path" --json
@@ -188,7 +200,8 @@ PY
 fi
 
 probe_json="$(probe_runtime || true)"
-if [[ -z "$probe_json" ]]; then
+runtime_python="$(runtime_python_from_probe_json "$probe_json" || true)"
+if [[ -z "$runtime_python" || ! -f "$runtime_python" ]]; then
   force_interactive="${BOOM_RUN_FORCE_INTERACTIVE:-}"
   if [[ "$force_interactive" == "0" || ! -t 0 ]]; then
     if [[ "$json_requested" -eq 1 ]]; then
@@ -205,7 +218,7 @@ if [[ -z "$probe_json" ]]; then
     read -r response
   fi
 
-  case "${response,,}" in
+  case "$(normalize_response "$response")" in
     y|yes|1|true)
       if [[ -z "$bootstrap_python" ]]; then
         if [[ "$json_requested" -eq 1 ]]; then
@@ -228,15 +241,8 @@ if [[ -z "$probe_json" ]]; then
   esac
 
   probe_json="$(probe_runtime)"
+  runtime_python="$(runtime_python_from_probe_json "$probe_json")"
 fi
-
-runtime_python="$(
-  PROBE_JSON="$probe_json" "$bootstrap_python" - <<'PY'
-import json
-import os
-print(json.loads(os.environ["PROBE_JSON"])["pythonPath"])
-PY
-)"
 
 if [[ ! -f "$run_script" ]]; then
   echo "runtime bootstrap is ready, but the command layer is not implemented yet." >&2

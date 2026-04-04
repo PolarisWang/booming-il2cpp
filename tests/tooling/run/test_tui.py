@@ -4,6 +4,7 @@ import importlib.util
 import sys
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from .test_command_manifest import RUN_MANIFEST_PATH, load_manifest_module
 
@@ -68,6 +69,28 @@ class TuiTests(unittest.TestCase):
         argv = tui_module.resolve_entry_argv(capability_entry, prompt_value_provider=lambda prompt: "bootstrap")
 
         self.assertEqual(["capability", "bootstrap"], argv)
+
+    def test_terminal_session_render_normalizes_newlines_on_posix(self) -> None:
+        tui_module = load_tui_module()
+
+        class FakeStdout:
+            def __init__(self) -> None:
+                self.parts: list[str] = []
+
+            def write(self, text: str) -> None:
+                self.parts.append(text)
+
+            def flush(self) -> None:
+                return None
+
+        fake_stdout = FakeStdout()
+        session = tui_module._TerminalSession()
+
+        with patch.object(tui_module.os, "name", "posix"):
+            with patch.object(tui_module.sys, "stdout", fake_stdout):
+                session.render("row1\nrow2")
+
+        self.assertEqual("row1\r\nrow2", "".join(fake_stdout.parts))
 
 
 if __name__ == "__main__":
