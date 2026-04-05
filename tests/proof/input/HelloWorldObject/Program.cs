@@ -17,9 +17,10 @@ internal sealed class Greeter
 
 internal static class Program
 {
-    private static void Main(string[] args)
+    private static int Main(string[] args)
     {
-        var greeter = new Greeter(args.Length > 0 ? args[0] : "object-world");
+        var greeter = new Greeter("World");
         Console.WriteLine(greeter.BuildMessage());
+        return 0;
     }
 }

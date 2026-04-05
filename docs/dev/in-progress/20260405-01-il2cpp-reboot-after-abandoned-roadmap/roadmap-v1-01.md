@@ -108,7 +108,9 @@ Status: active
 - `exit_criteria`:
   - proof 输入输出、最小语义、metadata/helper 需求全部固定
 - `deliverables`:
-  - 待创建子任务
+  - 子任务 `20260405-04-stage-2-helloworld-proof-spec`
+  - object-based `HelloWorld` canonical proof spec
+  - proof gate matrix 与 source / artifact / native landing 对齐清单
 - `dependencies`:
   - `20260405-02-stage-1a-contract-surface-reset`
   - `20260405-03-stage-1b-structure-and-test-migration`
@@ -121,7 +123,9 @@ Status: active
 - `exit_criteria`:
   - 最小 managed pipeline 能从程序集走到 generated-code input
 - `deliverables`:
-  - 待创建子任务
+  - 子任务 `20260406-01-stage-3-managed-minimal-closure`
+  - managed closure bundle spec
+  - `HelloWorldObject.dll` 到 generated-code input 的最小 managed 输出链
 - `dependencies`:
   - Stage 2
 - `open_questions`:
@@ -160,15 +164,15 @@ Status: active
 | --- | --- | --- | --- | --- | --- |
 | `20260405-02-stage-1a-contract-surface-reset` | `Stage 1A` | `completed` | `codex` | 冻结 proof-facing contract surface，拆出 contract/doc/example/snapshot 的稳定入口 | `-` |
 | `20260405-03-stage-1b-structure-and-test-migration` | `Stage 1B` | `completed` | `codex` | 迁移 managed skeleton、tests family 与 tooling canonical path | `20260405-02-stage-1a-contract-surface-reset` |
-| `reboot-stage-2-helloworld-proof-spec` | `Stage 2` | `planned` | `unassigned` | 固定 object-based `HelloWorld` proof spec | `20260405-02-stage-1a-contract-surface-reset, 20260405-03-stage-1b-structure-and-test-migration` |
-| `reboot-stage-3-managed-minimal-closure` | `Stage 3` | `planned` | `unassigned` | 打通 managed 最小闭环 | `reboot-stage-2-helloworld-proof-spec` |
-| `reboot-stage-4-native-bootstrap-and-reference-proof` | `Stage 4` | `planned` | `unassigned` | 打通 native bootstrap 与 reference platform proof | `reboot-stage-2-helloworld-proof-spec, reboot-stage-3-managed-minimal-closure` |
+| `20260405-04-stage-2-helloworld-proof-spec` | `Stage 2` | `completed` | `codex` | 固定 object-based `HelloWorld` proof spec，并收口 canonical sample truth | `20260405-02-stage-1a-contract-surface-reset, 20260405-03-stage-1b-structure-and-test-migration` |
+| `20260406-01-stage-3-managed-minimal-closure` | `Stage 3` | `completed` | `codex` | 打通 managed 最小闭环，并把输出结束在 generated-code input bundle | `20260405-04-stage-2-helloworld-proof-spec` |
+| `reboot-stage-4-native-bootstrap-and-reference-proof` | `Stage 4` | `planned` | `unassigned` | 打通 native bootstrap 与 reference platform proof | `20260405-04-stage-2-helloworld-proof-spec, 20260406-01-stage-3-managed-minimal-closure` |
 | `reboot-stage-5-post-proof-split` | `Stage 5` | `planned` | `unassigned` | 基于 proof 结果决定 follow-on roadmap | `reboot-stage-4-native-bootstrap-and-reference-proof` |
 
 说明：
 
-- 当前只正式创建 Stage 1A 和 Stage 1B 子任务目录。
-- Stage 2 到 Stage 5 先保留为 roadmap 中的 planned 子任务，不提前激活。
+- 当前已正式创建 Stage 1A、Stage 1B、Stage 2、Stage 3 四个子任务目录，其中 Stage 3 已完成归档，当前 active 上下文回到父 roadmap。
+- Stage 4 与 Stage 5 仍保留为 roadmap 中的 planned 子任务，不提前激活。
 
 ## 7. 依赖
 
@@ -211,6 +215,7 @@ Status: active
 
 1. 先执行 `20260405-02-stage-1a-contract-surface-reset`
 2. 再执行 `20260405-03-stage-1b-structure-and-test-migration`
-3. 现在进入 Stage 2 子任务创建与推进
-4. 等 Stage 2 关闭后，再决定 Stage 3 / Stage 4 的并行度
+3. `20260405-04-stage-2-helloworld-proof-spec` 已完成 proof spec freeze
+4. `20260406-01-stage-3-managed-minimal-closure` 已完成归档，managed closure bundle、正式测试对象与统一入口均已收口
+5. 当前回到父 roadmap 的 Stage 4 `Native Bootstrap And Reference Proof` 派生决策点
 

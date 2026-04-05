@@ -1,0 +1,11 @@
+{
+  "displayName": "Managed closure basic verification",
+  "primaryModuleId": "managed-closure",
+  "moduleIds": ["managed-closure"],
+  "subsystemIds": ["managed-pipeline"],
+  "supportedHosts": ["windows", "macos", "linux"],
+  "docRefs": ["wiki/06-测试验证/模块/managed-closure.md"],
+  "members": [
+    {"type": "suite", "id": "contract/managed-closure-bundle"}
+  ]
+}

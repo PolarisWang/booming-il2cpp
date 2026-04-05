@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 
 PUBLIC_TEST_SPECS = [
@@ -98,6 +98,19 @@ PUBLIC_TEST_SPECS = [
         "primaryModuleId": "analysis",
         "moduleIds": ["analysis"],
         "subsystemIds": ["analysis-contracts"],
+        "docRefs": ["wiki/06-测试验证/模块映射.md"],
+    },
+    {
+        "id": "contract/managed-closure-bundle",
+        "family": "contract",
+        "suite": "managed-closure-bundle",
+        "stages": ["all"],
+        "supported_hosts": ["windows", "macos", "linux"],
+        "legacy_commands": {"all": "test-contract-managed-closure-bundle"},
+        "level": "code",
+        "primaryModuleId": "managed-closure",
+        "moduleIds": ["managed-closure"],
+        "subsystemIds": ["managed-pipeline"],
         "docRefs": ["wiki/06-测试验证/模块映射.md"],
     },
     {

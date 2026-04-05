@@ -950,6 +950,23 @@ def _run_contract_check(command: dict, repo_root: Path, host_platform: str, comm
     return _success(command_text, host_platform, command.get("target"), "", [])
 
 
+def _run_python_unittest(command: dict, repo_root: Path, host_platform: str, command_text: str) -> CommandResult:
+    test_module = str(command.get("test_module") or "").strip()
+    if not test_module:
+        return _failure(command_text, host_platform, command.get("target"), "", ["python unittest target is required"])
+
+    completed = run_process([sys.executable, "-m", "unittest", test_module], cwd=repo_root)
+    output = combine_process_output(completed)
+    if completed.returncode != 0:
+        return _failure(command_text, host_platform, command.get("target"), output, [f"python unittest failed: {test_module}"])
+
+    artifacts = [
+        str((repo_root / artifact).resolve())
+        for artifact in list(command.get("artifacts") or [])
+    ]
+    return _success(command_text, host_platform, command.get("target"), output, artifacts)
+
+
 def handle(
     command: dict,
     repo_root: Path,
@@ -989,6 +1006,8 @@ def handle(
         return _run_smoke_project(command, repo_root, host_platform, command_text)
     if kind == "contract-check":
         return _run_contract_check(command, repo_root, host_platform, command_text)
+    if kind == "python-unittest":
+        return _run_python_unittest(command, repo_root, host_platform, command_text)
     if kind == "registry-object-alias":
         return _handle_registry_object_dispatch(
             str(command["registry_object_kind"]),

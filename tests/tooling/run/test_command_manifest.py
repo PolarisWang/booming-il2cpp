@@ -91,6 +91,7 @@ class CommandManifestTests(unittest.TestCase):
                 "build-platform-windows-reference-desktop",
                 "build-platform-macos-reference-desktop",
                 "test-contract-analysis-schema",
+                "test-contract-managed-closure-bundle",
                 "test-contract-trace-schema",
             }.issubset(hidden_command_ids)
         )
@@ -153,6 +154,17 @@ class CommandManifestTests(unittest.TestCase):
         self.assertEqual("test-suite", explicit_suite_id["command"]["id"])
         self.assertEqual("smoke/HelloWorld", explicit_suite_id["target"])
         self.assertEqual("smoke/HelloWorld", explicit_suite_id["options"]["id"])
+
+        managed_closure_contract = manifest_module.parse_cli(
+            ["test", "contract", "managed-closure-bundle"],
+            False,
+            manifest,
+            "macos",
+        )
+        self.assertEqual("test-family-suite", managed_closure_contract["command"]["id"])
+        self.assertEqual("contract/managed-closure-bundle", managed_closure_contract["target"])
+        self.assertEqual("contract", managed_closure_contract["options"]["family"])
+        self.assertEqual("managed-closure-bundle", managed_closure_contract["options"]["suite"])
 
         module_case = manifest_module.parse_cli(
             ["test", "module", "--module", "managed-smoke", "--profile", "basic"],

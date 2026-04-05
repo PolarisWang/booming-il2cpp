@@ -679,6 +679,22 @@
       "examples": ["run test contract trace-schema"]
     },
     {
+      "id": "test-contract-managed-closure-bundle",
+      "title": "Validate the managed closure proof bundle",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["test", "contract", "managed-closure-bundle"],
+      "kind": "python-unittest",
+      "target": "managed-closure-bundle",
+      "test_module": "tests.unit.run.test_stage3_managed_minimal_closure",
+      "artifacts": ["artifacts/proof/managed-closure/HelloWorldObject"],
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test contract managed-closure-bundle",
+      "examples": ["run test contract managed-closure-bundle"]
+    },
+    {
       "id": "test-workflow-roadmap-0-windows",
       "title": "Run the Windows roadmap-0 workflow via the unified system object",
       "group": "Test And Verify",

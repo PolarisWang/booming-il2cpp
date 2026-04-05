@@ -2,6 +2,8 @@
 
 | 任务 | lifecycle_status | phase | 最近更新 | 下一步 | active |
 | --- | --- | --- | --- | --- | --- |
+| `20260406-01-stage-3-managed-minimal-closure` | `completed` | `archived` | `2026-04-06 01:21:23 +08:00` | 无。若继续 reboot 主线，下一步由父 roadmap 决定是否派生 Stage 4 `Native Bootstrap And Reference Proof`。 | `no` |
+| `20260405-04-stage-2-helloworld-proof-spec` | `completed` | `archived` | `2026-04-06 00:04:02 +08:00` | 无。若继续 reboot 主线，下一步由父 roadmap 决定 Stage 3 / Stage 4 的派生节奏。 | `no` |
 | `20260405-03-stage-1b-structure-and-test-migration` | `completed` | `archived` | `2026-04-05 23:32:04 +08:00` | 无。若继续 reboot 主线，下一步从父 roadmap 派生 Stage 2 `HelloWorld` proof spec。 | `no` |
 | `20260405-02-stage-1a-contract-surface-reset` | `completed` | `archived` | `2026-04-05 23:07:20 +08:00` | 无。若继续 reboot 主线，下一步转到 `20260405-03-stage-1b-structure-and-test-migration`。 | `no` |
 | `20260404-05-test-verification-architecture` | `completed` | `archived` | `2026-04-05 01:40:59 +08:00` | 无。如需继续扩展测试对象或补充其它宿主验证，请新建 follow-up 任务。 | `no` |

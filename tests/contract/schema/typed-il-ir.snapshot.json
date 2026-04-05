@@ -124,6 +124,16 @@
               "resultType": "System.String"
             },
             {
+              "op": "ldstr",
+              "operand": "!",
+              "resultType": "System.String"
+            },
+            {
+              "op": "call",
+              "callee": "System.Private.CoreLib/System.String::Concat(System.String,System.String)",
+              "resultType": "System.String"
+            },
+            {
               "op": "ret"
             }
           ]

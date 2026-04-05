@@ -49,14 +49,25 @@ Stage 1A 实际冻结的 first-proof contract 面包括：
 
 其中 generated `Program.Main`、`Greeter::.ctor(string)`、`Greeter.BuildMessage()` 明确采用 direct-call landing。
 
+## Proof Spec
+
+Stage 2 针对 object-based `HelloWorld` 的 canonical proof 规格收口到：
+
+- `docs/architecture/roadmap-0/hello-world-proof-spec-v0.md`
+- `docs/architecture/roadmap-0/managed-minimal-closure-v0.md`
+
+当 `tests/proof/input/HelloWorldObject`、artifact snapshot 与 native direct-call landing 出现差异时，以这份 proof spec 和本目录下的 canonical contract 入口为准。
+
 ## Reading Order
 
 建议按下面顺序读：
 
 1. 本文，先看目录语义和 compatibility 边界
-2. `contracts/docs/v0/runtime-abi-proof-boundary.md`
-3. `contracts/docs/v0/codegen-bridge-proof-boundary.md`
-4. `contracts/native/docs/v0/runtime-abi.md`
-5. `contracts/native/docs/v0/codegen-bridge.md`
-6. `contracts/artifacts/v0/schemas/*.schema.json`
-7. `contracts/examples/v0/artifacts/*.min.json`
+2. `docs/architecture/roadmap-0/hello-world-proof-spec-v0.md`
+3. `docs/architecture/roadmap-0/managed-minimal-closure-v0.md`
+4. `contracts/docs/v0/runtime-abi-proof-boundary.md`
+5. `contracts/docs/v0/codegen-bridge-proof-boundary.md`
+6. `contracts/native/docs/v0/runtime-abi.md`
+7. `contracts/native/docs/v0/codegen-bridge.md`
+8. `contracts/artifacts/v0/schemas/*.schema.json`
+9. `contracts/examples/v0/artifacts/*.min.json`

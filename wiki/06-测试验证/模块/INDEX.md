@@ -6,6 +6,7 @@ objectType: guide
 | 模块 | 对象 | 正式入口 |
 |------|------|------|
 | `analysis` | `module/analysis/basic` | `run test module --id module/analysis/basic` |
+| `managed-closure` | `module/managed-closure/basic` | `run test module --id module/managed-closure/basic` |
 | `managed-smoke` | `module/managed-smoke/basic` | `run test module --id module/managed-smoke/basic` |
 | `reflection` | `module/reflection/basic` | `run test module --id module/reflection/basic` |
 | `interop` | `module/interop/basic` | `run test module --id module/interop/basic` |

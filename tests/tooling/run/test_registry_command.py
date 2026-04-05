@@ -46,10 +46,12 @@ class RegistryCommandTests(unittest.TestCase):
         self.assertEqual("ok", result.status)
         flat_ids = {item["id"] for item in result.payload["flatItems"]}
         self.assertIn("contract/analysis-schema", flat_ids)
+        self.assertIn("contract/managed-closure-bundle", flat_ids)
         self.assertIn("contract/trace-schema", flat_ids)
         self.assertIn("contract/native-abi", flat_ids)
         self.assertIn("contract/native-bridge", flat_ids)
         self.assertIn("module/analysis/basic", flat_ids)
+        self.assertIn("module/managed-closure/basic", flat_ids)
         self.assertIn("module/managed-smoke/basic", flat_ids)
         self.assertIn("module/reflection/basic", flat_ids)
         self.assertIn("module/interop/basic", flat_ids)
@@ -64,9 +66,20 @@ class RegistryCommandTests(unittest.TestCase):
         self.assertIn("system/roadmap-0-macos-reference-gate", flat_ids)
         self.assertIn("system/roadmap-0-macos", flat_ids)
         self.assertIn("system/trace-export-macos-smoke", flat_ids)
+        self.assertIn("pipeline/completion-managed-closure", flat_ids)
         self.assertIn("pipeline/completion-runtime-core", flat_ids)
         self.assertIn("pipeline/completion-runtime-trace-macos", flat_ids)
         self.assertIn("pipeline/trace-export-macos-runtime", flat_ids)
+        managed_closure_module = next(item for item in result.payload["flatItems"] if item["id"] == "module/managed-closure/basic")
+        self.assertEqual("run test module --id module/managed-closure/basic", managed_closure_module["canonicalCommand"])
+        self.assertEqual(
+            ["module/managed-closure/basic"],
+            [item["objectId"] for item in managed_closure_module["skillRecommendations"]["requiredBeforeCompletion"]],
+        )
+        self.assertIn(
+            "pipeline/completion-managed-closure",
+            [item["objectId"] for item in managed_closure_module["skillRecommendations"]["requiredForPipelineRelease"]],
+        )
         module_item = next(item for item in result.payload["flatItems"] if item["id"] == "module/managed-smoke/basic")
         self.assertEqual("run test module --id module/managed-smoke/basic", module_item["canonicalCommand"])
         self.assertEqual(
@@ -95,6 +108,11 @@ class RegistryCommandTests(unittest.TestCase):
         self.assertEqual(
             ["module/analysis/basic"],
             [item["objectId"] for item in analysis_suite["skillRecommendations"]["requiredBeforeCompletion"]],
+        )
+        managed_closure_suite = next(item for item in result.payload["flatItems"] if item["id"] == "contract/managed-closure-bundle")
+        self.assertEqual(
+            ["module/managed-closure/basic"],
+            [item["objectId"] for item in managed_closure_suite["skillRecommendations"]["requiredBeforeCompletion"]],
         )
         interop_suite = next(item for item in result.payload["flatItems"] if item["id"] == "smoke/PInvokeLite")
         self.assertEqual(
@@ -272,6 +290,57 @@ class RegistryCommandTests(unittest.TestCase):
             [item["id"] for item in result.payload["items"]],
         )
 
+    def test_managed_closure_module_dispatch_expands_contract_plan(self) -> None:
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_managed_closure_module_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_managed_closure_module_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_managed_closure_module_dispatch")
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        def fake_session(
+            family: str,
+            suite: str,
+            stage: str,
+            repo_root: Path,
+            host_platform: str,
+            command_text: str,
+            manifest_payload: dict,
+        ):
+            del repo_root
+            del manifest_payload
+            request = session_module.TestRequest(
+                family=family,
+                suite=suite,
+                stage=stage,
+                command_text=command_text,
+            )
+            return session_module.SessionResult(
+                request=request,
+                host_platform=host_platform,
+                status="ok",
+                suite_results=[{"suiteId": request.suite_key, "status": "ok", "stageResults": {}}],
+                text=f"{request.suite_key} ok\n",
+                artifacts=[],
+                exit_code=0,
+            )
+
+        with patch.object(test_module, "_execute_public_test_session", side_effect=fake_session):
+            result = test_module.handle(
+                {"id": "test-module", "handler": "test.dispatch"},
+                REPO_ROOT,
+                "macos",
+                "test module --id module/managed-closure/basic",
+                manifest,
+                {"id": "module/managed-closure/basic"},
+            )
+
+        self.assertEqual("ok", result.status)
+        self.assertEqual("module/managed-closure/basic", result.target)
+        self.assertEqual("module/managed-closure/basic", result.payload["selectedObject"]["id"])
+        self.assertEqual(
+            ["contract/managed-closure-bundle"],
+            [item["id"] for item in result.payload["items"]],
+        )
+
     def test_interop_module_dispatch_expands_contract_and_runtime_plan(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_interop_module_dispatch")
         manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_interop_module_dispatch")
@@ -429,6 +498,66 @@ class RegistryCommandTests(unittest.TestCase):
         self.assertEqual(
             ["system/hosted-runtime-smoke"],
             [member["objectId"] for member in system_phase["memberResults"]],
+        )
+
+    def test_managed_closure_pipeline_dispatch_returns_code_and_module_phases(self) -> None:
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_managed_closure_pipeline_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_managed_closure_pipeline_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_managed_closure_pipeline_dispatch")
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        def fake_session(
+            family: str,
+            suite: str,
+            stage: str,
+            repo_root: Path,
+            host_platform: str,
+            command_text: str,
+            manifest_payload: dict,
+        ):
+            del repo_root
+            del manifest_payload
+            request = session_module.TestRequest(
+                family=family,
+                suite=suite,
+                stage=stage,
+                command_text=command_text,
+            )
+            return session_module.SessionResult(
+                request=request,
+                host_platform=host_platform,
+                status="ok",
+                suite_results=[{"suiteId": request.suite_key, "status": "ok", "stageResults": {}}],
+                text=f"{request.suite_key} ok\n",
+                artifacts=[],
+                exit_code=0,
+            )
+
+        with patch.object(test_module, "_execute_public_test_session", side_effect=fake_session):
+            result = test_module.handle(
+                {"id": "test-pipeline", "handler": "test.dispatch"},
+                REPO_ROOT,
+                "macos",
+                "test pipeline --id pipeline/completion-managed-closure",
+                manifest,
+                {"id": "pipeline/completion-managed-closure"},
+            )
+
+        self.assertEqual("ok", result.status)
+        self.assertEqual("pipeline/completion-managed-closure", result.payload["selectedObject"]["id"])
+        self.assertEqual(
+            ["code", "module"],
+            [item["phaseId"] for item in result.payload["phaseResults"]],
+        )
+        code_phase = next(item for item in result.payload["phaseResults"] if item["phaseId"] == "code")
+        self.assertEqual(
+            ["contract/managed-closure-bundle"],
+            [member["objectId"] for member in code_phase["memberResults"]],
+        )
+        module_phase = next(item for item in result.payload["phaseResults"] if item["phaseId"] == "module")
+        self.assertEqual(
+            ["module/managed-closure/basic"],
+            [member["objectId"] for member in module_phase["memberResults"]],
         )
 
     def test_completion_trace_pipeline_dispatch_includes_reference_gate_in_system_phase(self) -> None:

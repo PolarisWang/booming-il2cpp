@@ -29,4 +29,5 @@
 
 ## 最近更新
 
+- `2026-04-06`：补入 `managed-closure` 的模块验证与 completion 管线对象，并把 Stage 3 closure bundle 验证接入统一 registry / `run test` 入口。
 - `2026-04-04`：建立项目级测试与验证主入口，并接入 `module/system/pipeline` 注册对象。
