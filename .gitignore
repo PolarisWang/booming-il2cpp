@@ -30,6 +30,7 @@ TestResults/
 __pycache__/
 *.pyc
 *.pyo
+/python-cache/
 # CMake / native build outputs
 Debug/
 Release/
