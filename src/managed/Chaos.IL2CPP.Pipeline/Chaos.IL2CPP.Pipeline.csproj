@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Chaos.IL2CPP.Contracts\Chaos.IL2CPP.Contracts.csproj" />
+    <ProjectReference Include="..\Chaos.IL2CPP.Loader\Chaos.IL2CPP.Loader.csproj" />
+    <ProjectReference Include="..\Chaos.IL2CPP.SemanticWorld\Chaos.IL2CPP.SemanticWorld.csproj" />
+    <ProjectReference Include="..\Chaos.IL2CPP.Linker\Chaos.IL2CPP.Linker.csproj" />
+    <ProjectReference Include="..\Chaos.IL2CPP.MetadataWriter\Chaos.IL2CPP.MetadataWriter.csproj" />
+    <ProjectReference Include="..\Chaos.IL2CPP.CodeGen\Chaos.IL2CPP.CodeGen.csproj" />
+  </ItemGroup>
+</Project>

@@ -3,6 +3,7 @@ from __future__ import annotations
 import base64
 import importlib.util
 import json
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -13,8 +14,8 @@ from unittest.mock import patch
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 TEST_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "test.py"
-COMPARE_WRAPPER_PATH = REPO_ROOT / "tests" / "contract" / "trace" / "compare-warmup-trace.sh"
-EXPECTED_TRACE_PATH = REPO_ROOT / "tests" / "contract" / "trace" / "snapshots" / "macos-warmup-trace.snapshot.json"
+COMPARE_WRAPPER_PATH = REPO_ROOT / "tests" / "contracts" / "trace" / "compare-warmup-trace.sh"
+EXPECTED_TRACE_PATH = REPO_ROOT / "tests" / "contracts" / "trace" / "snapshots" / "macos-warmup-trace.snapshot.json"
 
 
 def load_module(path: Path, module_name: str):
@@ -61,6 +62,9 @@ def _build_runtime_trace(snapshot_path: Path, actual_path: Path) -> None:
 
 class TraceCompareTests(unittest.TestCase):
     def test_posix_compare_wrapper_runs_without_pwsh(self) -> None:
+        if shutil.which("sh") is None:
+            self.skipTest("POSIX shell is not available in this environment")
+
         with tempfile.TemporaryDirectory() as temp_dir:
             actual_path = Path(temp_dir) / "macos-warmup-trace.runtime.json"
             _build_runtime_trace(EXPECTED_TRACE_PATH, actual_path)
@@ -86,7 +90,7 @@ class TraceCompareTests(unittest.TestCase):
             "id": "test-trace-compare-macos",
             "kind": "trace-compare",
             "trace_platform": "macos",
-            "expected_trace_path": "tests/contract/trace/snapshots/macos-warmup-trace.snapshot.json",
+            "expected_trace_path": "tests/contracts/trace/snapshots/macos-warmup-trace.snapshot.json",
             "actual_trace_path": "artifacts/run/trace/macos-warmup-trace.runtime.json",
             "target": "macos",
         }
@@ -99,7 +103,9 @@ class TraceCompareTests(unittest.TestCase):
         compare_args = run_process_mock.call_args_list[2].args[0]
         self.assertEqual(0, result.payload.get("exitCode", 0))
         self.assertEqual(sys.executable, compare_args[0])
-        self.assertTrue(str(compare_args[1]).endswith("tests/contract/trace/compare-warmup-trace.py"))
+        self.assertTrue(
+            str(compare_args[1]).replace("\\", "/").endswith("tests/contracts/trace/compare-warmup-trace.py")
+        )
 
 
 if __name__ == "__main__":

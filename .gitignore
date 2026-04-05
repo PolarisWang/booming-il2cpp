@@ -19,6 +19,14 @@ Thumbs.db
 # Project-generated artifacts
 artifacts/
 deploy/
+!contracts/artifacts/
+!contracts/artifacts/v0/
+!contracts/artifacts/v0/schemas/
+!contracts/artifacts/v0/schemas/**
+!contracts/examples/
+!contracts/examples/v0/
+!contracts/examples/v0/artifacts/
+!contracts/examples/v0/artifacts/**
 
 # .NET outputs
 bin/

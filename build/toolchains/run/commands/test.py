@@ -919,7 +919,7 @@ def _run_trace_compare(command: dict, repo_root: Path, host_platform: str, comma
 
     compare_args = [
         sys.executable,
-        str(repo_root / "tests" / "contract" / "trace" / "compare-warmup-trace.py"),
+        str(repo_root / "tests" / "contracts" / "trace" / "compare-warmup-trace.py"),
         str(repo_root / command["expected_trace_path"]),
         str(trace_output),
     ]

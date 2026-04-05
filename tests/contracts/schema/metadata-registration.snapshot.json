@@ -5,22 +5,37 @@
     {
       "registrationKind": "assembly",
       "slot": 0,
-      "subjectId": "Game.Core"
+      "subjectId": "HelloWorldObject"
     },
     {
       "registrationKind": "type",
       "slot": 1,
-      "subjectId": "Game.Core/Game.Player"
+      "subjectId": "HelloWorldObject/Program"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 2,
+      "subjectId": "HelloWorldObject/Greeter"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 3,
+      "subjectId": "HelloWorldObject/Greeter::_name"
     },
     {
       "registrationKind": "method",
-      "slot": 2,
-      "subjectId": "Game.Core/Game.Player::TakeDamage(System.Int32)"
+      "slot": 4,
+      "subjectId": "HelloWorldObject/Program::Main(System.String[])"
     },
     {
-      "registrationKind": "genericContext",
-      "slot": 3,
-      "subjectId": "Game.Core/System.Collections.Generic.List<System.String>"
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "HelloWorldObject/Greeter::.ctor(System.String)"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "HelloWorldObject/Greeter::BuildMessage()"
     }
   ]
 }

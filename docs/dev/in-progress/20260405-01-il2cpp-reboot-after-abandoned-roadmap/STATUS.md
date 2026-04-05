@@ -5,7 +5,7 @@ task_type: roadmap
 lifecycle_status: in_progress
 phase: roadmap
 created_at: 2026-04-05 20:51:20 +08:00
-updated_at: 2026-04-05 22:40:00 +08:00
+updated_at: 2026-04-05 23:32:04 +08:00
 current_dir: docs/dev/in-progress/20260405-01-il2cpp-reboot-after-abandoned-roadmap
 parent_task_id:
 source_task_id: 20260329-01-il2cpp-like-cs-to-cpp
@@ -40,11 +40,14 @@ active: false
 - 2026-04-05 22:10:00 +08:00: 已完成 design 审查收口：first proof 显式采用 generated direct-call landing，`typed-il-ir` 显式纳入 canonical `subjectId`，Stage 1 设计边界保持重量版 A 但允许执行分期，`tests/contracts/trace` 固定为 canonical trace contract 路径。
 - 2026-04-05 22:20:00 +08:00: 已完成更新后一致性复核，未发现新的 design 阻塞；当前 design checkpoint 可视为关闭，任务进入 planning。
 - 2026-04-05 22:40:00 +08:00: 已将父任务从单一大 plan 升级为轻量 roadmap，并拆出 `20260405-02-stage-1a-contract-surface-reset` 与 `20260405-03-stage-1b-structure-and-test-migration` 两个子任务。
+- 2026-04-05 23:00:12 +08:00: Stage 1A 已完成 contract surface 主体落地：`contracts/` canonical artifact/doc 入口、`typed-il-ir` 的 canonical `subjectId`、first-proof `HelloWorldObject` artifact 样例，以及 runtime/bridge proof-boundary 文档均已写入；当前只剩 native compile-only smoke 因 shell 缺少 `cmake` 尚未补跑。
+- 2026-04-05 23:09:33 +08:00: Stage 1A 已补完 native compile-only smoke，并完成归档；reboot 主线当前等待切换到 `20260405-03-stage-1b-structure-and-test-migration`。
+- 2026-04-05 23:32:04 +08:00: Stage 1B 已完成归档；`src/managed/Chaos.IL2CPP.*` skeleton、`tests/proof` 骨架和 `tests/contracts` canonical path 已全部落地，reboot 主线进入 Stage 2 派生点。
 
 ## 下一步
-- next_action: 维护 roadmap 状态与 parent-child 依赖；当前 active 执行入口切换到 `20260405-02-stage-1a-contract-surface-reset`。
+- next_action: 维护 roadmap 状态与 parent-child 依赖；如继续执行，下一步创建 Stage 2 `HelloWorld` proof spec 子任务。
 - owner: codex
-- trigger: Stage 1A / Stage 1B 子任务推进、关闭或阻塞时，回到父 roadmap 更新整体顺序与状态。
+- trigger: Stage 1A / Stage 1B 已关闭，当前进入 Stage 2 派生点。
 
 ## 风险/阻塞
 ### risks

@@ -1,5 +1,7 @@
 # Runtime ABI v0
 
+> first-proof boundary supplement: `contracts/docs/v0/runtime-abi-proof-boundary.md`
+
 ## 定位
 
 - `boom_runtime_get_abi_v0()` 返回进程级函数表，供 bridge、host embedding、手写 smoke 和少量平台 glue 统一使用。

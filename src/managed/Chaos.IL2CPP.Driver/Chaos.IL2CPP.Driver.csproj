@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Chaos.IL2CPP.Contracts\Chaos.IL2CPP.Contracts.csproj" />
+    <ProjectReference Include="..\Chaos.IL2CPP.Pipeline\Chaos.IL2CPP.Pipeline.csproj" />
+  </ItemGroup>
+</Project>

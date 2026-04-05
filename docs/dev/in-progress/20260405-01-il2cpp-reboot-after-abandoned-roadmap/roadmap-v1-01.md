@@ -158,8 +158,8 @@ Status: active
 
 | task_id | phase | status | owner | purpose | depends_on |
 | --- | --- | --- | --- | --- | --- |
-| `20260405-02-stage-1a-contract-surface-reset` | `Stage 1A` | `in-progress` | `codex` | 冻结 proof-facing contract surface，拆出 contract/doc/example/snapshot 的稳定入口 | `-` |
-| `20260405-03-stage-1b-structure-and-test-migration` | `Stage 1B` | `planned` | `codex` | 迁移 managed skeleton、tests family 与 tooling canonical path | `20260405-02-stage-1a-contract-surface-reset` |
+| `20260405-02-stage-1a-contract-surface-reset` | `Stage 1A` | `completed` | `codex` | 冻结 proof-facing contract surface，拆出 contract/doc/example/snapshot 的稳定入口 | `-` |
+| `20260405-03-stage-1b-structure-and-test-migration` | `Stage 1B` | `completed` | `codex` | 迁移 managed skeleton、tests family 与 tooling canonical path | `20260405-02-stage-1a-contract-surface-reset` |
 | `reboot-stage-2-helloworld-proof-spec` | `Stage 2` | `planned` | `unassigned` | 固定 object-based `HelloWorld` proof spec | `20260405-02-stage-1a-contract-surface-reset, 20260405-03-stage-1b-structure-and-test-migration` |
 | `reboot-stage-3-managed-minimal-closure` | `Stage 3` | `planned` | `unassigned` | 打通 managed 最小闭环 | `reboot-stage-2-helloworld-proof-spec` |
 | `reboot-stage-4-native-bootstrap-and-reference-proof` | `Stage 4` | `planned` | `unassigned` | 打通 native bootstrap 与 reference platform proof | `reboot-stage-2-helloworld-proof-spec, reboot-stage-3-managed-minimal-closure` |
@@ -211,6 +211,6 @@ Status: active
 
 1. 先执行 `20260405-02-stage-1a-contract-surface-reset`
 2. 再执行 `20260405-03-stage-1b-structure-and-test-migration`
-3. 然后再创建并推进 Stage 2 子任务
+3. 现在进入 Stage 2 子任务创建与推进
 4. 等 Stage 2 关闭后，再决定 Stage 3 / Stage 4 的并行度
 

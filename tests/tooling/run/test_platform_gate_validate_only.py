@@ -165,7 +165,7 @@ class PlatformGateCommandTests(unittest.TestCase):
                             "binary_dir": "artifacts/presets/windows-x64-reference",
                             "trace_platform": "windows",
                             "trace_output_path": "artifacts/verify-roadmap-0/windows/windows-warmup-trace.runtime.json",
-                            "expected_trace_path": "tests/contract/trace/snapshots/windows-warmup-trace.snapshot.json",
+                            "expected_trace_path": "tests/contracts/trace/snapshots/windows-warmup-trace.snapshot.json",
                             "gate_record_path": "artifacts/verify-roadmap-0/windows/windows-reference-desktop.gate.json",
                             "gate_name": "windows-reference-desktop",
                             "gate_preset": "windows-x64-reference",
@@ -203,8 +203,8 @@ class PlatformGateCommandTests(unittest.TestCase):
         self.assertEqual(
             [
                 sys.executable,
-                str(REPO_ROOT / "tests" / "contract" / "trace" / "compare-warmup-trace.py"),
-                str(REPO_ROOT / "tests" / "contract" / "trace" / "snapshots" / "windows-warmup-trace.snapshot.json"),
+                str(REPO_ROOT / "tests" / "contracts" / "trace" / "compare-warmup-trace.py"),
+                str(REPO_ROOT / "tests" / "contracts" / "trace" / "snapshots" / "windows-warmup-trace.snapshot.json"),
                 str(trace_output),
             ],
             run_process_mock.call_args_list[4].args[0],
@@ -237,7 +237,7 @@ class PlatformGateCommandTests(unittest.TestCase):
                             "binary_dir": "artifacts/presets/windows-x64-reference",
                             "trace_platform": "windows",
                             "trace_output_path": "artifacts/verify-roadmap-0/windows/windows-warmup-trace.runtime.json",
-                            "expected_trace_path": "tests/contract/trace/snapshots/windows-warmup-trace.snapshot.json",
+                            "expected_trace_path": "tests/contracts/trace/snapshots/windows-warmup-trace.snapshot.json",
                             "gate_record_path": "artifacts/verify-roadmap-0/windows/windows-reference-desktop.gate.json",
                             "gate_name": "windows-reference-desktop",
                             "gate_preset": "windows-x64-reference",

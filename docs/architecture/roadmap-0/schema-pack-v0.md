@@ -8,8 +8,10 @@
 
 - 所有 schema 顶层 `formatVersion` 固定为 `"v0"`。
 - `artifactKind` 作为稳定产物标识，一旦对外使用，不应随意改名。
-- `analysis/contracts/examples/*.min.json` 是人维护、可读、最小样例，用来表达 contract 意图，不追求覆盖全部字段。
+- `contracts/artifacts/v0/schemas/*.schema.json` 是 proof-facing artifact contract 的 canonical schema 根。
+- `contracts/examples/v0/artifacts/*.min.json` 是人维护、可读、最小样例，用来表达 contract 意图，不追求覆盖全部字段。
 - `tests/contracts/schema/*.snapshot.json` 是 canonical baseline，用来承载稳定基线；它与 example 分离存放，后续可独立演进。
+- `analysis/contracts/{schemas,examples}` 当前保留为 compatibility mirror，供尚未迁移的校验与工具继续消费。
 - 除顶层稳定字段和各 schema 明确列出的最小冻结字段外，其余字段默认允许追加；v0 目标是保守冻结，不抢先定义未来细节。
 
 ## Schema 清单
@@ -17,6 +19,7 @@
 ## 共享 `subjectId` 约定
 
 - 凡是将 `subjectId` 作为最小冻结字段的 schema，都使用同一套人读 canonical 规则。
+- `typed-il-ir` 仍可保留 artifact-local `methodId`，但 `methods[].subjectId` 已成为跨 artifact 共享 identity 的正式字段。
 - `subjectId` 至少包含程序集，以及适用的类型名 / 成员签名；不得使用指针、随机 UUID 或仅本地有效的临时编号。
 - 类型示例：`Game.Core/Game.Player`
 - 方法示例：`Game.Core/Game.Player::TakeDamage(System.Int32)`
@@ -33,11 +36,11 @@
 
 ### `typed-il-ir`
 
-- 目的：表达方法级 typed IL IR 的最小稳定骨架。
-- 最小冻结字段：`formatVersion`、`artifactKind`、`methods[]`、`methods[].methodId`、`methods[].signature`、`methods[].blocks[]`、`methods[].blocks[].blockId`、`methods[].blocks[].instructions[]`、`methods[].blocks[].instructions[].op`。
+- 目的：表达方法级 typed IL IR 的最小稳定骨架，并把方法主体对齐到跨 artifact 共享的 canonical `subjectId`。
+- 最小冻结字段：`formatVersion`、`artifactKind`、`methods[]`、`methods[].methodId`、`methods[].subjectId`、`methods[].signature`、`methods[].blocks[]`、`methods[].blocks[].blockId`、`methods[].blocks[].instructions[]`、`methods[].blocks[].instructions[].op`。
 - 允许追加：参数注解、SSA 名称、常量值、控制流边、异常流、优化标签、平台特定 lowering 信息。
-- 禁止随意改动字段名：`methods`、`methodId`、`signature`、`parameters`、`blocks`、`blockId`、`instructions`、`op`。
-- 说明：v0 只冻结方法、基础块、指令这三层骨架，不冻结完整 IR 细节。
+- 禁止随意改动字段名：`methods`、`methodId`、`subjectId`、`signature`、`parameters`、`blocks`、`blockId`、`instructions`、`op`。
+- 说明：`methodId` 可以继续承载 artifact-local 稳定标识，但不能替代 `subjectId` 的跨 artifact 追溯语义；v0 只冻结方法、基础块、指令这三层骨架，不冻结完整 IR 细节。
 
 ### `aot-manifest`
 

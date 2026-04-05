@@ -3,25 +3,25 @@
   "artifactKind": "codeRegistration",
   "modules": [
     {
-      "moduleName": "Game.Core.dll",
+      "moduleName": "HelloWorldObject.dll",
       "registrations": [
         {
           "registrationKind": "methodPointer",
           "slot": 0,
-          "symbol": "Game_Player_TakeDamage",
-          "subjectId": "Game.Core/Game.Player::TakeDamage(System.Int32)"
+          "symbol": "HelloWorldObject_Program_Main",
+          "subjectId": "HelloWorldObject/Program::Main(System.String[])"
         },
         {
-          "registrationKind": "invoker",
+          "registrationKind": "methodPointer",
           "slot": 1,
-          "symbol": "Invoker_Game_Player_TakeDamage",
-          "subjectId": "Game.Core/Game.Player::TakeDamage(System.Int32)"
+          "symbol": "HelloWorldObject_Greeter__ctor",
+          "subjectId": "HelloWorldObject/Greeter::.ctor(System.String)"
         },
         {
-          "registrationKind": "reversePInvoke",
+          "registrationKind": "methodPointer",
           "slot": 2,
-          "symbol": "Interop_Bootstrap_Initialize",
-          "subjectId": "Game.Core/Interop.Bootstrap::Initialize()"
+          "symbol": "HelloWorldObject_Greeter_BuildMessage",
+          "subjectId": "HelloWorldObject/Greeter::BuildMessage()"
         }
       ]
     }

@@ -1,5 +1,7 @@
 # Codegen Bridge v0
 
+> first-proof boundary supplement: `contracts/docs/v0/codegen-bridge-proof-boundary.md`
+
 ## 定位
 
 - `boom_codegen_get_bridge_v0()` 返回进程级 bridge 函数表，供 `generated C++` 直接依赖。

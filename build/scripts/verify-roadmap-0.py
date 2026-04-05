@@ -141,7 +141,7 @@ def main(argv: list[str] | None = None) -> int:
     repo_root = get_repo_root()
     artifact_root = repo_root / "artifacts" / "verify-roadmap-0" / host_profile
     common_artifact_root = artifact_root / "common"
-    compare_script = repo_root / "tests" / "contract" / "trace" / "compare-warmup-trace.py"
+    compare_script = repo_root / "tests" / "contracts" / "trace" / "compare-warmup-trace.py"
     host_embedding_dll = repo_root / "artifacts" / "smoke" / "bin" / "HostEmbeddingLite" / "Release" / "net8.0" / "HostEmbeddingLite.dll"
 
     artifact_root.mkdir(parents=True, exist_ok=True)
@@ -208,7 +208,7 @@ def main(argv: list[str] | None = None) -> int:
         write_step("Run Windows reference desktop trace compare")
         trace_path = artifact_root / "windows-warmup-trace.runtime.json"
         run_checked(["dotnet", str(host_embedding_dll), "--trace-platform", "windows", "--trace-output", str(trace_path)], cwd=repo_root, failure_message="HostEmbeddingLite windows trace export failed")
-        run_checked([sys.executable, str(compare_script), str(repo_root / "tests" / "contract" / "trace" / "snapshots" / "windows-warmup-trace.snapshot.json"), str(trace_path)], cwd=repo_root, failure_message="Windows reference desktop trace compare failed")
+        run_checked([sys.executable, str(compare_script), str(repo_root / "tests" / "contracts" / "trace" / "snapshots" / "windows-warmup-trace.snapshot.json"), str(trace_path)], cwd=repo_root, failure_message="Windows reference desktop trace compare failed")
 
         write_gate_record(
             artifact_root / "windows-reference-desktop.gate.json",
@@ -239,7 +239,7 @@ def main(argv: list[str] | None = None) -> int:
         write_step("Run macOS reference desktop trace compare")
         trace_path = artifact_root / "macos-warmup-trace.runtime.json"
         run_checked(["dotnet", str(host_embedding_dll), "--trace-platform", "macos", "--trace-output", str(trace_path)], cwd=repo_root, failure_message="HostEmbeddingLite macOS trace export failed")
-        run_checked([sys.executable, str(compare_script), str(repo_root / "tests" / "contract" / "trace" / "snapshots" / "macos-warmup-trace.snapshot.json"), str(trace_path)], cwd=repo_root, failure_message="macOS reference desktop trace compare failed")
+        run_checked([sys.executable, str(compare_script), str(repo_root / "tests" / "contracts" / "trace" / "snapshots" / "macos-warmup-trace.snapshot.json"), str(trace_path)], cwd=repo_root, failure_message="macOS reference desktop trace compare failed")
 
         write_gate_record(
             artifact_root / "macos-reference-desktop.gate.json",

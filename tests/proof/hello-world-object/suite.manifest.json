@@ -1,0 +1,10 @@
+{
+  "displayName": "HelloWorldObject",
+  "runnerType": "dotnet-app",
+  "supportedStages": ["build"],
+  "runnerConfig": {
+    "projectPath": "tests/proof/input/HelloWorldObject/HelloWorldObject.csproj",
+    "dllPath": "tests/proof/input/HelloWorldObject/bin/Release/net8.0/HelloWorldObject.dll"
+  },
+  "tags": ["proof", "object"]
+}

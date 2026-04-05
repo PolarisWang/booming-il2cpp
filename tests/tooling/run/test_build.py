@@ -32,7 +32,7 @@ class BuildCommandTests(unittest.TestCase):
         command = {
             "kind": "native-contract",
             "target": "abi",
-            "source_dir": "tests/contract/native/abi",
+            "source_dir": "tests/contracts/native/abi",
             "binary_dir": "artifacts/run/native-contract-abi",
         }
         completed = subprocess.CompletedProcess(["cmake"], 0, "", "")

@@ -122,23 +122,23 @@ def allocate_run_scoped_binary_dir(base_dir: Path) -> Path:
 def _host_build_plan(host_platform: str) -> list[dict[str, str]]:
     if host_platform == "windows":
         return [
-            {"kind": "native-contract", "target": "abi", "source_dir": "tests/contract/native/abi", "binary_dir": "artifacts/run/native-contract-abi"},
-            {"kind": "native-contract", "target": "bridge", "source_dir": "tests/contract/native/bridge", "binary_dir": "artifacts/run/native-contract-bridge"},
+            {"kind": "native-contract", "target": "abi", "source_dir": "tests/contracts/native/abi", "binary_dir": "artifacts/run/native-contract-abi"},
+            {"kind": "native-contract", "target": "bridge", "source_dir": "tests/contracts/native/bridge", "binary_dir": "artifacts/run/native-contract-bridge"},
             {"kind": "preset", "target": "windows-x64-reference", "preset": "windows-x64-reference", "binary_dir": "artifacts/presets/windows-x64-reference"},
             {"kind": "platform-gate", "target": "android-arm64-smoke", "preset_target": "android-arm64-smoke", "toolchain_file": "build/toolchains/android-arm64.cmake", "binary_dir": "artifacts/run/platform/android-arm64-smoke"},
             {"kind": "platform-gate", "target": "linux-x64-packaging", "preset_target": "linux-x64-packaging", "toolchain_file": "build/toolchains/linux-x64.cmake", "binary_dir": "artifacts/run/platform/linux-x64-packaging"},
         ]
     if host_platform == "macos":
         return [
-            {"kind": "native-contract", "target": "abi", "source_dir": "tests/contract/native/abi", "binary_dir": "artifacts/run/native-contract-abi"},
-            {"kind": "native-contract", "target": "bridge", "source_dir": "tests/contract/native/bridge", "binary_dir": "artifacts/run/native-contract-bridge"},
+            {"kind": "native-contract", "target": "abi", "source_dir": "tests/contracts/native/abi", "binary_dir": "artifacts/run/native-contract-abi"},
+            {"kind": "native-contract", "target": "bridge", "source_dir": "tests/contracts/native/bridge", "binary_dir": "artifacts/run/native-contract-bridge"},
             {"kind": "preset", "target": "macos-reference", "preset": "macos-reference", "binary_dir": "artifacts/presets/macos-reference"},
             {"kind": "platform-gate", "target": "ios-arm64-packaging", "preset_target": "ios-arm64-packaging", "toolchain_file": "build/toolchains/ios-arm64.cmake", "binary_dir": "artifacts/run/platform/ios-arm64-packaging"},
             {"kind": "platform-gate", "target": "linux-x64-packaging", "preset_target": "linux-x64-packaging", "toolchain_file": "build/toolchains/linux-x64.cmake", "binary_dir": "artifacts/run/platform/linux-x64-packaging"},
         ]
     return [
-        {"kind": "native-contract", "target": "abi", "source_dir": "tests/contract/native/abi", "binary_dir": "artifacts/run/native-contract-abi"},
-        {"kind": "native-contract", "target": "bridge", "source_dir": "tests/contract/native/bridge", "binary_dir": "artifacts/run/native-contract-bridge"},
+        {"kind": "native-contract", "target": "abi", "source_dir": "tests/contracts/native/abi", "binary_dir": "artifacts/run/native-contract-abi"},
+        {"kind": "native-contract", "target": "bridge", "source_dir": "tests/contracts/native/bridge", "binary_dir": "artifacts/run/native-contract-bridge"},
         {"kind": "platform-gate", "target": "linux-x64-packaging", "preset_target": "linux-x64-packaging", "toolchain_file": "build/toolchains/linux-x64.cmake", "binary_dir": "artifacts/run/platform/linux-x64-packaging"},
     ]
 
@@ -397,7 +397,7 @@ def _build_reference_desktop_gate(
     compare = run_process(
         [
             sys.executable,
-            str(repo_root / "tests" / "contract" / "trace" / "compare-warmup-trace.py"),
+            str(repo_root / "tests" / "contracts" / "trace" / "compare-warmup-trace.py"),
             str(repo_root / command["expected_trace_path"]),
             str(trace_output),
         ],

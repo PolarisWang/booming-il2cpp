@@ -26,6 +26,21 @@ def load_module(path: Path, module_name: str):
 
 
 class BuildBatchTests(unittest.TestCase):
+    def test_host_build_plan_uses_canonical_contract_paths(self) -> None:
+        build_module = load_module(BUILD_MODULE_PATH, "booming_run_build_batch_plan")
+
+        for host_platform in ("windows", "macos", "linux"):
+            plan = build_module._host_build_plan(host_platform)
+            native_steps = [step for step in plan if step["kind"] == "native-contract"]
+
+            self.assertEqual(
+                [
+                    "tests/contracts/native/abi",
+                    "tests/contracts/native/bridge",
+                ],
+                [step["source_dir"] for step in native_steps],
+            )
+
     def test_build_all_executes_windows_recommended_plan(self) -> None:
         build_module = load_module(BUILD_MODULE_PATH, "booming_run_build_batch")
         calls: list[str] = []
@@ -42,7 +57,7 @@ class BuildBatchTests(unittest.TestCase):
             )
 
         with patch.object(build_module, "_host_build_plan", return_value=[
-            {"kind": "native-contract", "target": "abi", "source_dir": "tests/contract/native/abi", "binary_dir": "artifacts/run/native-contract-abi"},
+            {"kind": "native-contract", "target": "abi", "source_dir": "tests/contracts/native/abi", "binary_dir": "artifacts/run/native-contract-abi"},
             {"kind": "preset", "target": "windows-x64-reference", "preset": "windows-x64-reference", "binary_dir": "artifacts/presets/windows-x64-reference"},
         ]):
             with patch.object(build_module, "handle", side_effect=fake_handle):

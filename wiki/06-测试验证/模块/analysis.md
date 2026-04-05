@@ -21,7 +21,7 @@ primaryModuleId: analysis
 
 - 修改 `analysis/contracts/schemas/*.schema.json`
 - 修改 `analysis/contracts/examples/*.min.json`
-- 修改 `tests/contract/schema/*.snapshot.json`
+- 修改 `tests/contracts/schema/*.snapshot.json`
 
 ## 正式入口
 

@@ -82,18 +82,18 @@ def analysis_contract_json_paths(repo_root: Path) -> list[Path]:
     paths: list[Path] = []
     paths.extend(sorted((repo_root / "analysis" / "contracts" / "schemas").glob("*.json")))
     paths.extend(sorted((repo_root / "analysis" / "contracts" / "examples").glob("*.json")))
-    paths.extend(sorted((repo_root / "tests" / "contract" / "schema").glob("*.json")))
+    paths.extend(sorted((repo_root / "tests" / "contracts" / "schema").glob("*.json")))
     return paths
 
 
 def trace_contract_json_paths(repo_root: Path) -> list[Path]:
-    return sorted((repo_root / "tests" / "contract" / "trace").rglob("*.json"))
+    return sorted((repo_root / "tests" / "contracts" / "trace").rglob("*.json"))
 
 
 def validate_analysis_contracts(repo_root: Path) -> None:
     schema_dir = repo_root / "analysis" / "contracts" / "schemas"
     example_dir = repo_root / "analysis" / "contracts" / "examples"
-    snapshot_dir = repo_root / "tests" / "contract" / "schema"
+    snapshot_dir = repo_root / "tests" / "contracts" / "schema"
 
     for schema_file in sorted(schema_dir.glob("*.schema.json")):
         base_name = schema_file.name.removesuffix(".schema.json")
@@ -107,9 +107,9 @@ def validate_analysis_contracts(repo_root: Path) -> None:
 
 
 def validate_trace_schema_contracts(repo_root: Path) -> None:
-    schema = read_json_file(repo_root / "tests" / "contract" / "trace" / "schema" / "warmup-trace.schema.json")
+    schema = read_json_file(repo_root / "tests" / "contracts" / "trace" / "schema" / "warmup-trace.schema.json")
     if not isinstance(schema, dict):
-        raise RuntimeError("trace schema must be an object: tests/contract/trace/schema/warmup-trace.schema.json")
-    for snapshot_path in sorted((repo_root / "tests" / "contract" / "trace" / "snapshots").glob("*.json")):
+        raise RuntimeError("trace schema must be an object: tests/contracts/trace/schema/warmup-trace.schema.json")
+    for snapshot_path in sorted((repo_root / "tests" / "contracts" / "trace" / "snapshots").glob("*.json")):
         snapshot = read_json_file(snapshot_path)
         assert_json_matches_schema(snapshot, schema, snapshot_path.name)
