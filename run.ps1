@@ -26,8 +26,13 @@ function Get-ManifestPath {
 }
 
 function Get-HostPlatformId {
-    $os = [System.Runtime.InteropServices.RuntimeInformation]::OSDescription.ToLowerInvariant()
-    $arch = [System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant()
+    param(
+        [type]$RuntimeInformationType = [System.Runtime.InteropServices.RuntimeInformation],
+        [System.Collections.IDictionary]$EnvironmentVariables = $null
+    )
+
+    $os = Get-HostOsDescription -RuntimeInformationType $RuntimeInformationType
+    $arch = Get-HostArchitectureName -RuntimeInformationType $RuntimeInformationType -EnvironmentVariables $EnvironmentVariables
 
     if ($os.Contains("windows")) {
         if ($arch -eq "x64") {
@@ -57,6 +62,91 @@ function Get-HostPlatformId {
     }
 
     throw "unsupported host platform for run.ps1: os='$os' arch='$arch'"
+}
+
+function Get-RuntimeInformationPropertyValue {
+    param(
+        [string]$PropertyName,
+        [type]$RuntimeInformationType = [System.Runtime.InteropServices.RuntimeInformation]
+    )
+
+    $property = $RuntimeInformationType.GetProperty(
+        $PropertyName,
+        [System.Reflection.BindingFlags]::Public -bor [System.Reflection.BindingFlags]::Static
+    )
+    if ($null -eq $property) {
+        return $null
+    }
+
+    $value = $property.GetValue($null, $null)
+    if ($null -eq $value) {
+        return $null
+    }
+
+    return $value.ToString()
+}
+
+function Get-HostOsDescription {
+    param([type]$RuntimeInformationType = [System.Runtime.InteropServices.RuntimeInformation])
+
+    $os = Get-RuntimeInformationPropertyValue -PropertyName "OSDescription" -RuntimeInformationType $RuntimeInformationType
+    if (-not [string]::IsNullOrWhiteSpace($os)) {
+        return $os.ToLowerInvariant()
+    }
+
+    return [Environment]::OSVersion.VersionString.ToLowerInvariant()
+}
+
+function Convert-ArchitectureName {
+    param([string]$Architecture)
+
+    if ([string]::IsNullOrWhiteSpace($Architecture)) {
+        return $null
+    }
+
+    switch ($Architecture.Trim().ToLowerInvariant()) {
+        { $_ -in @("amd64", "x64") } { return "x64" }
+        { $_ -in @("arm64", "aarch64") } { return "arm64" }
+        { $_ -in @("x86", "i386", "i486", "i586", "i686") } { return "x86" }
+        { $_ -eq "arm" } { return "arm" }
+        default { return $Architecture.Trim().ToLowerInvariant() }
+    }
+}
+
+function Get-HostArchitectureName {
+    param(
+        [type]$RuntimeInformationType = [System.Runtime.InteropServices.RuntimeInformation],
+        [System.Collections.IDictionary]$EnvironmentVariables = $null
+    )
+
+    $arch = Get-RuntimeInformationPropertyValue -PropertyName "OSArchitecture" -RuntimeInformationType $RuntimeInformationType
+    if ([string]::IsNullOrWhiteSpace($arch)) {
+        $arch = Get-RuntimeInformationPropertyValue -PropertyName "ProcessArchitecture" -RuntimeInformationType $RuntimeInformationType
+    }
+
+    if ([string]::IsNullOrWhiteSpace($arch)) {
+        if ($null -eq $EnvironmentVariables) {
+            $EnvironmentVariables = [Environment]::GetEnvironmentVariables()
+        }
+
+        if ($EnvironmentVariables.Contains("PROCESSOR_ARCHITEW6432")) {
+            $arch = [string]$EnvironmentVariables["PROCESSOR_ARCHITEW6432"]
+        }
+        elseif ($EnvironmentVariables.Contains("PROCESSOR_ARCHITECTURE")) {
+            $arch = [string]$EnvironmentVariables["PROCESSOR_ARCHITECTURE"]
+        }
+    }
+
+    $normalized = Convert-ArchitectureName -Architecture $arch
+    if (-not [string]::IsNullOrWhiteSpace($normalized)) {
+        return $normalized
+    }
+
+    if ([Environment]::Is64BitOperatingSystem -or [Environment]::Is64BitProcess) {
+        return "x64"
+    }
+
+    return "x86"
 }
 
 function Read-RuntimeManifest {
@@ -284,6 +374,57 @@ function Test-WindowsTerminalHandoffRequested {
     return $null -ne (Get-WindowsTerminalCommandPath)
 }
 
+function ConvertTo-WindowsProcessArgumentList {
+    param([string[]]$Arguments)
+
+    $segments = New-Object System.Collections.Generic.List[string]
+
+    foreach ($argument in @($Arguments | Where-Object { $null -ne $_ })) {
+        if ($segments.Count -gt 0) {
+            $segments.Add(" ")
+        }
+
+        $requiresQuotes = $argument.Length -eq 0 -or $argument.Contains(" ") -or $argument.Contains("`t")
+        if ($requiresQuotes) {
+            $segments.Add('"')
+        }
+
+        $pendingBackslashes = 0
+        foreach ($character in $argument.ToCharArray()) {
+            if ($character -eq '\') {
+                $pendingBackslashes += 1
+                continue
+            }
+
+            if ($character -eq '"') {
+                if ($pendingBackslashes -gt 0) {
+                    $segments.Add(('\' * ($pendingBackslashes * 2)))
+                }
+                $segments.Add('\"')
+                $pendingBackslashes = 0
+                continue
+            }
+
+            if ($pendingBackslashes -gt 0) {
+                $segments.Add(('\' * $pendingBackslashes))
+                $pendingBackslashes = 0
+            }
+
+            $segments.Add([string]$character)
+        }
+
+        if ($pendingBackslashes -gt 0) {
+            $segments.Add(('\' * ($pendingBackslashes * $(if ($requiresQuotes) { 2 } else { 1 }))))
+        }
+
+        if ($requiresQuotes) {
+            $segments.Add('"')
+        }
+    }
+
+    return [string]::Concat($segments.ToArray())
+}
+
 function Invoke-WindowsTerminalHandoff {
     param(
         [string]$RepoRoot,
@@ -295,6 +436,8 @@ function Invoke-WindowsTerminalHandoff {
     if (-not $wtCommandPath) {
         return $false
     }
+
+    $forwardedArguments = @($Arguments | Where-Object { $null -ne $_ })
 
     $wtArguments = @(
         "-w", "new",
@@ -308,7 +451,7 @@ function Invoke-WindowsTerminalHandoff {
         "-NoExit",
         "-File", $ScriptPath
     )
-    $wtArguments += @($Arguments)
+    $wtArguments += $forwardedArguments
 
     $originalRequest = $env:BOOM_RUN_REQUEST_WINDOWS_TERMINAL
     $originalHandoff = $env:BOOM_RUN_WINDOWS_TERMINAL_HANDOFF
@@ -325,7 +468,8 @@ function Invoke-WindowsTerminalHandoff {
             $launcherArguments = @("/d", "/c", $wtCommandPath) + $wtArguments
         }
 
-        Start-Process -FilePath $launcherPath -ArgumentList $launcherArguments -WorkingDirectory $RepoRoot | Out-Null
+        $launcherArgumentLine = ConvertTo-WindowsProcessArgumentList -Arguments $launcherArguments
+        Start-Process -FilePath $launcherPath -ArgumentList $launcherArgumentLine -WorkingDirectory $RepoRoot | Out-Null
     }
     finally {
         $env:BOOM_RUN_REQUEST_WINDOWS_TERMINAL = $originalRequest
