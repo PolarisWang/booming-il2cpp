@@ -6,7 +6,7 @@
       "assemblyName": "HelloWorldObject",
       "subjectKind": "method",
       "subjectId": "HelloWorldObject/Program::Main(System.String[])",
-      "reason": "first-proof-entry"
+      "reason": "entrypoint"
     },
     {
       "assemblyName": "HelloWorldObject",

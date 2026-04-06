@@ -15,6 +15,7 @@ STAGE4_SRC_SCAN_ROOTS = [
     REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen",
     REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts",
     REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver",
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.MetadataWriter",
     REPO_ROOT / "src" / "native" / "bootstrap",
     REPO_ROOT / "src" / "native" / "runtime-core",
     REPO_ROOT / "src" / "native" / "support",
@@ -23,6 +24,8 @@ STAGE4_SRC_TEXT_SUFFIXES = {".cs", ".csproj", ".cpp", ".h", ".scriban"}
 FORBIDDEN_STAGE4_SRC_SNIPPETS = [
     "HelloWorldObject",
     "Greeter",
+    "ClosedGenericEcho",
+    "first-proof",
     "tests/proof/input/HelloWorldObject",
     "artifacts/proof/managed-closure/HelloWorldObject",
     "artifacts/proof/native-reference/HelloWorldObject",
@@ -105,15 +108,19 @@ class Stage4NativeReferenceProofTests(unittest.TestCase):
 
         generated_cpp = OUTPUT_ROOT / "generated" / "native-reference.generated.cpp"
         manifest_path = OUTPUT_ROOT / "native-proof.manifest.json"
+        plan_path = OUTPUT_ROOT / "native-proof.plan.json"
 
         self.assertTrue(generated_cpp.is_file(), msg=f"missing generated cpp: {generated_cpp}")
         self.assertTrue(manifest_path.is_file(), msg=f"missing native proof manifest: {manifest_path}")
+        self.assertTrue(plan_path.is_file(), msg=f"missing native proof plan: {plan_path}")
 
         manifest = load_json(manifest_path)
+        plan = load_json(plan_path)
         self.assertEqual("v0", manifest["formatVersion"])
         self.assertEqual("nativeReferenceProofManifest", manifest["artifactKind"])
         self.assertEqual("HelloWorldObject", manifest["assemblyName"])
         self.assertEqual("HelloWorldObject/Program::Main(System.String[])", manifest["entrySubjectId"])
+        self.assertEqual("native-proof.plan.json", manifest["planArtifactPath"])
         self.assertEqual(
             "artifacts/proof/managed-closure/HelloWorldObject",
             manifest["managedClosureRootPath"],
@@ -122,6 +129,17 @@ class Stage4NativeReferenceProofTests(unittest.TestCase):
             ["generated/native-reference.generated.cpp"],
             [artifact["path"] for artifact in manifest["generatedArtifacts"]],
         )
+        self.assertEqual("v0", plan["formatVersion"])
+        self.assertEqual("nativeReferenceLoweringPlan", plan["artifactKind"])
+        self.assertEqual("constructorThenInstanceCall", plan["planKind"])
+        self.assertEqual("HelloWorldObject", plan["assemblyName"])
+        self.assertEqual("HelloWorldObject/Program::Main(System.String[])", plan["entrySubjectId"])
+        self.assertEqual("HelloWorldObject_Program_Main", plan["entrySymbol"])
+        self.assertEqual("HelloWorldObject_Greeter__ctor", plan["constructorSymbol"])
+        self.assertEqual("HelloWorldObject_Greeter_BuildMessage", plan["instanceMethodSymbol"])
+        self.assertEqual('"World"', plan["constructorLiteral"])
+        self.assertEqual('"Hello, "', plan["messagePrefixLiteral"])
+        self.assertEqual('"!"', plan["messageSuffixLiteral"])
 
         generated_text = generated_cpp.read_text(encoding="utf-8")
         self.assertIn('#include "codegen_bridge.h"', generated_text)

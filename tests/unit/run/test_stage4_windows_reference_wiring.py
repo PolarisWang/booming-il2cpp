@@ -42,6 +42,7 @@ class Stage4WindowsReferenceWiringTests(unittest.TestCase):
             "closure.manifest.json",
             "native-reference.generated.cpp",
             "native-proof.manifest.json",
+            "native-proof.plan.json",
             "Chaos.IL2CPP.Driver.csproj",
             "tests/proof/input/HelloWorldObject/HelloWorldObject.csproj",
             "emit-native-reference",

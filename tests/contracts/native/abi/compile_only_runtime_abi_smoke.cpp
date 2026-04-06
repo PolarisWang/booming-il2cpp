@@ -21,6 +21,7 @@ void CompileOnlyRuntimeAbiSmoke(const RuntimeAbiV0* abi) {
     FieldInfoHandle field = nullptr;
     PropertyInfoHandle property = nullptr;
     EventInfoHandle event_handle = nullptr;
+    TypeInfoHandle generic_type_definition = nullptr;
     ParameterInfoHandle parameter = nullptr;
     GenericContextHandle generic_context = nullptr;
     AssemblyHandle assembly = nullptr;
@@ -66,11 +67,13 @@ void CompileOnlyRuntimeAbiSmoke(const RuntimeAbiV0* abi) {
     field = abi->type_find_field(type, "_health");
     property = abi->type_find_property(type, "Health");
     event_handle = abi->type_find_event(type, "Damaged");
+    generic_type_definition = abi->type_get_generic_type_definition(type);
     parameter = abi->method_get_parameter(method, 0);
     generic_context = abi->method_get_generic_context(method);
 
     (void)property;
     (void)event_handle;
+    (void)generic_type_definition;
     (void)parameter;
     (void)generic_context;
 

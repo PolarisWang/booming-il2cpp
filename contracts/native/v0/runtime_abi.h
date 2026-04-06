@@ -186,6 +186,8 @@ typedef struct RuntimeAbiV0 {
     EventInfoHandle (CHAOS_RUNTIME_ABI_CALL* type_find_event)(
         TypeInfoHandle type,
         const char* event_name_utf8);
+    TypeInfoHandle (CHAOS_RUNTIME_ABI_CALL* type_get_generic_type_definition)(
+        TypeInfoHandle type);
     ParameterInfoHandle (CHAOS_RUNTIME_ABI_CALL* method_get_parameter)(
         MethodInfoHandle method,
         uint32_t parameter_index);

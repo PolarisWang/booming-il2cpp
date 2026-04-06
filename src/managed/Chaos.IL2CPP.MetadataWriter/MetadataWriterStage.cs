@@ -18,7 +18,7 @@ public sealed class MetadataWriterStage
                 SubjectKind = "method",
                 SubjectId = method.SubjectId,
                 Reason = string.Equals(method.SubjectId, linkedWorld.EntryPointSubjectId, StringComparison.Ordinal)
-                    ? "first-proof-entry"
+                    ? "entrypoint"
                     : "generated-direct-call",
             });
         }
@@ -63,6 +63,10 @@ public sealed class MetadataWriterStage
                 RegistrationKind = "type",
                 Slot = slot++,
                 SubjectId = type.SubjectId,
+                Name = type.Name,
+                NamespaceName = type.NamespaceName,
+                DisplayName = type.DisplayName,
+                DefinitionSubjectId = type.DefinitionSubjectId,
             });
         }
 
@@ -73,6 +77,24 @@ public sealed class MetadataWriterStage
                 RegistrationKind = "field",
                 Slot = slot++,
                 SubjectId = field.SubjectId,
+                Name = field.Name,
+                DefinitionSubjectId = field.DefinitionSubjectId,
+                DeclaringTypeSubjectId = field.DeclaringTypeSubjectId,
+                MemberType = field.FieldType,
+            });
+        }
+
+        foreach (var property in linkedWorld.Properties)
+        {
+            registrations.Add(new MetadataRegistrationEntry
+            {
+                RegistrationKind = "property",
+                Slot = slot++,
+                SubjectId = property.SubjectId,
+                Name = property.Name,
+                DefinitionSubjectId = property.DefinitionSubjectId,
+                DeclaringTypeSubjectId = property.DeclaringTypeSubjectId,
+                MemberType = property.PropertyType,
             });
         }
 
@@ -83,7 +105,33 @@ public sealed class MetadataWriterStage
                 RegistrationKind = "method",
                 Slot = slot++,
                 SubjectId = method.SubjectId,
+                Name = method.Name,
+                DefinitionSubjectId = method.DefinitionSubjectId,
+                DeclaringTypeSubjectId = method.DeclaringTypeSubjectId,
+                MemberType = method.ReturnType,
+                ParameterCount = method.Parameters.Count,
+                IsImported = method.Import is not null,
+                ImportModuleName = method.Import?.ModuleName,
+                ImportEntryPointName = method.Import?.EntryPointName,
             });
+        }
+
+        foreach (var method in linkedWorld.Methods)
+        {
+            for (var parameterIndex = 0; parameterIndex < method.Parameters.Count; parameterIndex++)
+            {
+                var parameter = method.Parameters[parameterIndex];
+                registrations.Add(new MetadataRegistrationEntry
+                {
+                    RegistrationKind = "parameter",
+                    Slot = slot++,
+                    SubjectId = ManagedNaming.CreateParameterSubjectId(method.SubjectId, parameterIndex, parameter.Name),
+                    Name = parameter.Name,
+                    DeclaringMethodSubjectId = method.SubjectId,
+                    MemberType = parameter.Type,
+                    ParameterIndex = parameterIndex,
+                });
+            }
         }
 
         return new MetadataWriterOutput

@@ -15,6 +15,7 @@ public sealed class SemanticWorldStage
             EntryPointSubjectId = loadedAssembly.EntryPointSubjectId,
             Types = loadedAssembly.Types,
             Fields = loadedAssembly.Fields,
+            Properties = loadedAssembly.Properties,
             Methods = loadedAssembly.Methods,
         };
     }

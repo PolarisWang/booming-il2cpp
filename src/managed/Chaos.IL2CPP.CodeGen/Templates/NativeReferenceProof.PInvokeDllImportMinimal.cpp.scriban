@@ -1,0 +1,174 @@
+#include "{{ include_header }}"
+
+#if !defined(_WIN32)
+#error "pinvokeDllImportMinimal proof requires a Windows host"
+#endif
+
+#include <windows.h>
+
+#include <string>
+
+namespace chaos::il2cpp::generated {
+
+namespace {
+
+using NativeImportFn = int32_t (WINAPI*)(int32_t arg0, int32_t arg1, int32_t arg2);
+using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
+    RuntimeState* runtime,
+    ThreadState* thread,
+    const void* string_object);
+
+constexpr const char* kProofMarker = "pinvokeDllImportMinimal";
+constexpr const char* kImportModuleName = {{ import_module_name_literal }};
+constexpr const char* kImportEntryPointName = {{ import_entry_point_name_literal }};
+constexpr const char* kConsoleWriteLineStringIcall = "{{ console_write_line_string_icall }}";
+constexpr const char* kOutputPrefix = {{ output_prefix_literal }};
+
+struct NativeReferenceProofContext {
+    const RuntimeAbiV0* abi;
+    const CodegenBridgeV0* bridge;
+    NativeImportFn import_method;
+    WriteLineStringFn write_line_string;
+};
+
+NativeReferenceProofContext g_proof_context = {};
+
+void ResetProofContext() {
+    g_proof_context = {};
+}
+
+bool InitializeProofContext(
+    const CodegenBridgeV0* bridge,
+    const CodegenRegistrationOptionsV0* options) {
+    (void)options;
+
+    if (bridge == nullptr) {
+        return false;
+    }
+
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr) {
+        return false;
+    }
+
+    const HMODULE module_handle = ::GetModuleHandleA(kImportModuleName);
+    if (module_handle == nullptr) {
+        return false;
+    }
+
+    const FARPROC raw_import = ::GetProcAddress(module_handle, kImportEntryPointName);
+    if (raw_import == nullptr) {
+        return false;
+    }
+
+    void* raw_write_line_string = bridge->resolve_icall(kConsoleWriteLineStringIcall);
+    if (raw_write_line_string == nullptr) {
+        return false;
+    }
+
+    g_proof_context.abi = abi;
+    g_proof_context.bridge = bridge;
+    g_proof_context.import_method = reinterpret_cast<NativeImportFn>(raw_import);
+    g_proof_context.write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
+    return true;
+}
+
+bool EnsureProofContextReady(
+    RuntimeState* runtime,
+    ThreadState* thread) {
+    return runtime != nullptr
+        && thread != nullptr
+        && g_proof_context.abi != nullptr
+        && g_proof_context.bridge != nullptr
+        && g_proof_context.import_method != nullptr
+        && g_proof_context.write_line_string != nullptr;
+}
+
+}  // namespace
+
+extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ import_method_symbol }}(
+    RuntimeState* runtime,
+    ThreadState* thread,
+    int32_t arg0,
+    int32_t arg1,
+    int32_t arg2) {
+    (void)runtime;
+    (void)thread;
+
+    if (g_proof_context.import_method == nullptr) {
+        return 0;
+    }
+
+    return g_proof_context.import_method(arg0, arg1, arg2);
+}
+
+extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args) {
+    (void)managed_args;
+
+    if (!EnsureProofContextReady(runtime, thread)) {
+        return 1;
+    }
+
+    return {{ import_method_symbol }}(
+        runtime,
+        thread,
+        {{ import_argument0 }},
+        {{ import_argument1 }},
+        {{ import_argument2 }});
+}
+
+int32_t {{ proof_function_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args) {
+    (void)kProofMarker;
+
+    ResetProofContext();
+
+    if (bridge == nullptr
+        || code_registration == nullptr
+        || metadata_registration == nullptr
+        || options == nullptr
+        || runtime == nullptr
+        || thread == nullptr) {
+        return 1;
+    }
+
+    if (bridge->register_codegen(code_registration, metadata_registration, options) != CHAOS_BRIDGE_STATUS_OK) {
+        return 1;
+    }
+
+    if (bridge->bootstrap_runtime() != CHAOS_BRIDGE_STATUS_OK) {
+        return 1;
+    }
+
+    if (!InitializeProofContext(bridge, options)) {
+        return 1;
+    }
+
+    const int32_t import_result = {{ entry_symbol }}(runtime, thread, managed_args);
+    if (!EnsureProofContextReady(runtime, thread)) {
+        return 1;
+    }
+
+    const std::string proof_output = std::string(kOutputPrefix) + std::to_string(import_result);
+    void* managed_output = g_proof_context.abi->string_new_utf8(
+        runtime,
+        thread,
+        proof_output.c_str(),
+        static_cast<uint32_t>(proof_output.size()));
+    if (managed_output == nullptr) {
+        return 1;
+    }
+
+    return g_proof_context.write_line_string(runtime, thread, managed_output);
+}
+
+}  // namespace chaos::il2cpp::generated

@@ -1,5 +1,7 @@
 ﻿#include "runtime_core.h"
 
+#include "reflection_query_model.h"
+
 #include <cstdlib>
 #include <cstring>
 
@@ -330,6 +332,11 @@ TypeInfoHandle CHAOS_RUNTIME_ABI_CALL ImageFindType(
         return nullptr;
     }
 
+    if (const auto* reflection_image = TryDecodeReflectionQueryImageHandle(image)) {
+        const auto* type = FindReflectionQueryTypeByName(reflection_image, namespace_utf8, type_name_utf8);
+        return EncodeReflectionQueryTypeHandle(type);
+    }
+
     return reinterpret_cast<TypeInfoHandle>(image);
 }
 
@@ -339,6 +346,11 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL TypeFindMethod(
     int32_t parameter_count) {
     if (type == nullptr || method_name_utf8 == nullptr || parameter_count < 0) {
         return nullptr;
+    }
+
+    if (const auto* reflection_type = TryDecodeReflectionQueryTypeHandle(type)) {
+        const auto* method = FindReflectionQueryMethod(reflection_type, method_name_utf8, parameter_count);
+        return EncodeReflectionQueryMethodHandle(method);
     }
 
     return reinterpret_cast<MethodInfoHandle>(type);
@@ -351,14 +363,26 @@ FieldInfoHandle CHAOS_RUNTIME_ABI_CALL TypeFindField(
         return nullptr;
     }
 
+    if (const auto* reflection_type = TryDecodeReflectionQueryTypeHandle(type)) {
+        const auto* field = FindReflectionQueryField(reflection_type, field_name_utf8);
+        return EncodeReflectionQueryFieldHandle(field);
+    }
+
     return reinterpret_cast<FieldInfoHandle>(type);
 }
 
 PropertyInfoHandle CHAOS_RUNTIME_ABI_CALL TypeFindProperty(
     TypeInfoHandle type,
     const char* property_name_utf8) {
-    (void)type;
-    (void)property_name_utf8;
+    if (type == nullptr || property_name_utf8 == nullptr) {
+        return nullptr;
+    }
+
+    if (const auto* reflection_type = TryDecodeReflectionQueryTypeHandle(type)) {
+        const auto* property = FindReflectionQueryProperty(reflection_type, property_name_utf8);
+        return EncodeReflectionQueryPropertyHandle(property);
+    }
+
     return nullptr;
 }
 
@@ -370,11 +394,30 @@ EventInfoHandle CHAOS_RUNTIME_ABI_CALL TypeFindEvent(
     return nullptr;
 }
 
+TypeInfoHandle CHAOS_RUNTIME_ABI_CALL TypeGetGenericTypeDefinition(TypeInfoHandle type) {
+    if (type == nullptr) {
+        return nullptr;
+    }
+
+    if (const auto* reflection_type = TryDecodeReflectionQueryTypeHandle(type)) {
+        return EncodeReflectionQueryTypeHandle(reflection_type->generic_type_definition);
+    }
+
+    return nullptr;
+}
+
 ParameterInfoHandle CHAOS_RUNTIME_ABI_CALL MethodGetParameter(
     MethodInfoHandle method,
     uint32_t parameter_index) {
-    (void)method;
-    (void)parameter_index;
+    if (method == nullptr) {
+        return nullptr;
+    }
+
+    if (const auto* reflection_method = TryDecodeReflectionQueryMethodHandle(method)) {
+        const auto* parameter = FindReflectionQueryParameter(reflection_method, parameter_index);
+        return EncodeReflectionQueryParameterHandle(parameter);
+    }
+
     return nullptr;
 }
 
@@ -406,6 +449,7 @@ const RuntimeAbiV0 kRuntimeAbiV0 = {
     &TypeFindField,
     &TypeFindProperty,
     &TypeFindEvent,
+    &TypeGetGenericTypeDefinition,
     &MethodGetParameter,
     &MethodGetGenericContext,
 };

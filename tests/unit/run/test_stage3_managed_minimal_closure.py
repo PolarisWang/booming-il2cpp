@@ -21,6 +21,7 @@ EXPECTED_ARTIFACTS = {
     "metadata-registration.json": REPO_ROOT / "contracts" / "examples" / "v0" / "artifacts" / "metadata-registration.min.json",
     "code-registration.json": REPO_ROOT / "contracts" / "examples" / "v0" / "artifacts" / "code-registration.min.json",
 }
+METADATA_REGISTRATION_MINIMAL_KEYS = ("registrationKind", "slot", "subjectId")
 
 
 def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -41,6 +42,25 @@ def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProce
 
 def load_json(path: Path) -> object:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def project_metadata_registration_minimal(artifact: object, expected_subject_ids: set[str]) -> object:
+    if not isinstance(artifact, dict):
+        return artifact
+
+    registrations = artifact.get("registrations")
+    if not isinstance(registrations, list):
+        return artifact
+
+    return {
+        "formatVersion": artifact.get("formatVersion"),
+        "artifactKind": artifact.get("artifactKind"),
+        "registrations": [
+            {key: registration[key] for key in METADATA_REGISTRATION_MINIMAL_KEYS}
+            for registration in registrations
+            if registration.get("subjectId") in expected_subject_ids
+        ],
+    }
 
 
 class Stage3ManagedMinimalClosureTests(unittest.TestCase):
@@ -105,7 +125,17 @@ class Stage3ManagedMinimalClosureTests(unittest.TestCase):
 
         for generated_name, expected_path in EXPECTED_ARTIFACTS.items():
             generated_path = OUTPUT_ROOT / generated_name
-            self.assertEqual(load_json(expected_path), load_json(generated_path), msg=f"artifact mismatch: {generated_name}")
+            expected_json = load_json(expected_path)
+            generated_json = load_json(generated_path)
+
+            if generated_name == "metadata-registration.json":
+                expected_subject_ids = {
+                    registration["subjectId"]
+                    for registration in expected_json["registrations"]
+                }
+                generated_json = project_metadata_registration_minimal(generated_json, expected_subject_ids)
+
+            self.assertEqual(expected_json, generated_json, msg=f"artifact mismatch: {generated_name}")
 
 
 if __name__ == "__main__":

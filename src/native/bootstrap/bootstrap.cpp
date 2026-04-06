@@ -1,5 +1,6 @@
 #include "bootstrap.h"
 
+#include "reflection_query_model.h"
 #include "runtime_core.h"
 #include "support.h"
 
@@ -74,6 +75,11 @@ TypeInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveTypeByToken(
         return nullptr;
     }
 
+    if (const auto* reflection_image = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryImageHandle(image)) {
+        const auto* type = chaos::il2cpp::runtime_core::FindReflectionQueryTypeByToken(reflection_image, type_token);
+        return chaos::il2cpp::runtime_core::EncodeReflectionQueryTypeHandle(type);
+    }
+
     return MakeOpaqueHandle<TypeInfoHandle>(type_token);
 }
 
@@ -84,6 +90,11 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveMethodByToken(
         return nullptr;
     }
 
+    if (const auto* reflection_image = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryImageHandle(image)) {
+        const auto* method = chaos::il2cpp::runtime_core::FindReflectionQueryMethodByToken(reflection_image, method_token);
+        return chaos::il2cpp::runtime_core::EncodeReflectionQueryMethodHandle(method);
+    }
+
     return MakeOpaqueHandle<MethodInfoHandle>(method_token);
 }
 
@@ -92,6 +103,11 @@ FieldInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveFieldByToken(
     uint32_t field_token) {
     if (!IsBootstrapped(image) || field_token == 0u) {
         return nullptr;
+    }
+
+    if (const auto* reflection_image = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryImageHandle(image)) {
+        const auto* field = chaos::il2cpp::runtime_core::FindReflectionQueryFieldByToken(reflection_image, field_token);
+        return chaos::il2cpp::runtime_core::EncodeReflectionQueryFieldHandle(field);
     }
 
     return MakeOpaqueHandle<FieldInfoHandle>(field_token);

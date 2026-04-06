@@ -26,8 +26,12 @@ SCANNED_PATHS = [
     REPO_ROOT / "tests" / "smoke" / "input",
     REPO_ROOT / "tests" / "unit" / "run",
     REPO_ROOT / "docs" / "architecture" / "roadmap-0",
+]
+OPTIONAL_SCANNED_PATHS = [
     REPO_ROOT / "docs" / "dev" / "in-progress" / "20260405-01-il2cpp-reboot-after-abandoned-roadmap",
+    REPO_ROOT / "docs" / "dev" / "completed" / "20260405-01-il2cpp-reboot-after-abandoned-roadmap",
     REPO_ROOT / "docs" / "dev" / "in-progress" / "20260406-02-stage-4-native-bootstrap-and-reference-proof",
+    REPO_ROOT / "docs" / "dev" / "completed" / "20260406-02-stage-4-native-bootstrap-and-reference-proof",
 ]
 TEXT_SUFFIXES = {
     ".cmd",
@@ -60,6 +64,27 @@ class NativePrefixNamingTests(unittest.TestCase):
                 candidate_paths = [scanned_path]
             else:
                 candidate_paths = scanned_path.rglob("*")
+
+            for path in candidate_paths:
+                if not path.is_file() or path.suffix.lower() not in TEXT_SUFFIXES:
+                    continue
+                if path == Path(__file__):
+                    continue
+
+                text = path.read_text(encoding="utf-8")
+                for match in FORBIDDEN_PATTERN.finditer(text):
+                    line_no = text.count("\n", 0, match.start()) + 1
+                    violations.append(f"{path.relative_to(REPO_ROOT)}:{line_no}:{match.group(0)}")
+
+        resolved_optional_paths = [path for path in OPTIONAL_SCANNED_PATHS if path.exists()]
+        self.assertGreaterEqual(
+            len(resolved_optional_paths),
+            2,
+            msg="missing reboot/stage4 task archive or progress scan roots",
+        )
+
+        for scanned_path in resolved_optional_paths:
+            candidate_paths = [scanned_path] if scanned_path.is_file() else scanned_path.rglob("*")
 
             for path in candidate_paths:
                 if not path.is_file() or path.suffix.lower() not in TEXT_SUFFIXES:

@@ -30,12 +30,22 @@ public static class ManagedNaming
         return $"{declaringTypeSubjectId}::{fieldName}";
     }
 
+    public static string CreatePropertySubjectId(string declaringTypeSubjectId, string propertyName)
+    {
+        return $"{declaringTypeSubjectId}::property:{propertyName}";
+    }
+
     public static string CreateMethodSubjectId(
         string declaringTypeSubjectId,
         string methodName,
         IReadOnlyList<string> parameterTypes)
     {
         return $"{declaringTypeSubjectId}::{methodName}({string.Join(",", parameterTypes)})";
+    }
+
+    public static string CreateParameterSubjectId(string methodSubjectId, int parameterIndex, string parameterName)
+    {
+        return $"{methodSubjectId}::parameter[{parameterIndex}]:{parameterName}";
     }
 
     public static string CreateMethodSignature(
@@ -45,6 +55,25 @@ public static class ManagedNaming
         IReadOnlyList<string> parameterTypes)
     {
         return $"{returnType} {declaringTypeDisplayName}::{methodName}({string.Join(",", parameterTypes)})";
+    }
+
+    public static string CreateInstantiatedTypeSubjectId(
+        string genericTypeSubjectId,
+        IReadOnlyList<string> typeArguments)
+    {
+        return $"{StripGenericArity(genericTypeSubjectId)}<{string.Join(",", typeArguments)}>";
+    }
+
+    public static string CreateInstantiatedTypeDisplayName(
+        string genericTypeDisplayName,
+        IReadOnlyList<string> typeArguments)
+    {
+        return $"{StripGenericArity(genericTypeDisplayName)}<{string.Join(",", typeArguments)}>";
+    }
+
+    public static string CreateGenericMethodName(string methodName, IReadOnlyList<string> genericArguments)
+    {
+        return $"{methodName}<{string.Join(",", genericArguments)}>";
     }
 
     public static string CreateMethodId(ManagedMethodModel method)
@@ -80,6 +109,31 @@ public static class ManagedNaming
         }
 
         return absolutePath.Replace('\\', '/');
+    }
+
+    public static string StripGenericArity(string value)
+    {
+        var builder = new System.Text.StringBuilder();
+
+        for (var index = 0; index < value.Length; index++)
+        {
+            var current = value[index];
+            if (current != '`')
+            {
+                builder.Append(current);
+                continue;
+            }
+
+            index++;
+            while (index < value.Length && char.IsDigit(value[index]))
+            {
+                index++;
+            }
+
+            index--;
+        }
+
+        return builder.ToString();
     }
 
     private static string GetTypeIdentityPart(string assemblyName, string? namespaceName, string typeName)
@@ -154,6 +208,8 @@ public sealed record LoadedAssemblyModel
 
     public required IReadOnlyList<ManagedFieldModel> Fields { get; init; }
 
+    public required IReadOnlyList<ManagedPropertyModel> Properties { get; init; }
+
     public required IReadOnlyList<ManagedMethodModel> Methods { get; init; }
 }
 
@@ -166,6 +222,8 @@ public sealed record ManagedTypeModel
     public required string Name { get; init; }
 
     public required string SubjectId { get; init; }
+
+    public required string DefinitionSubjectId { get; init; }
 
     public required string DisplayName { get; init; }
 
@@ -184,6 +242,25 @@ public sealed record ManagedFieldModel
 
     public required string SubjectId { get; init; }
 
+    public required string DefinitionSubjectId { get; init; }
+
+    public required int MetadataToken { get; init; }
+}
+
+public sealed record ManagedPropertyModel
+{
+    public required string AssemblyName { get; init; }
+
+    public required string DeclaringTypeSubjectId { get; init; }
+
+    public required string Name { get; init; }
+
+    public required string PropertyType { get; init; }
+
+    public required string SubjectId { get; init; }
+
+    public required string DefinitionSubjectId { get; init; }
+
     public required int MetadataToken { get; init; }
 }
 
@@ -201,6 +278,8 @@ public sealed record ManagedMethodModel
 
     public required string SubjectId { get; init; }
 
+    public required string DefinitionSubjectId { get; init; }
+
     public required string Signature { get; init; }
 
     public required bool IsStatic { get; init; }
@@ -209,7 +288,16 @@ public sealed record ManagedMethodModel
 
     public required IReadOnlyList<ManagedParameterModel> Parameters { get; init; }
 
+    public ManagedImportModel? Import { get; init; }
+
     public required ManagedMethodBodyModel Body { get; init; }
+}
+
+public sealed record ManagedImportModel
+{
+    public required string ModuleName { get; init; }
+
+    public required string EntryPointName { get; init; }
 }
 
 public sealed record ManagedParameterModel
@@ -265,6 +353,8 @@ public sealed record SemanticWorldModel
 
     public required IReadOnlyList<ManagedFieldModel> Fields { get; init; }
 
+    public required IReadOnlyList<ManagedPropertyModel> Properties { get; init; }
+
     public required IReadOnlyList<ManagedMethodModel> Methods { get; init; }
 }
 
@@ -279,6 +369,8 @@ public sealed record LinkedWorldModel
     public required IReadOnlyList<ManagedTypeModel> Types { get; init; }
 
     public required IReadOnlyList<ManagedFieldModel> Fields { get; init; }
+
+    public required IReadOnlyList<ManagedPropertyModel> Properties { get; init; }
 
     public required IReadOnlyList<ManagedMethodModel> Methods { get; init; }
 
@@ -379,6 +471,30 @@ public sealed record MetadataRegistrationEntry
     public required int Slot { get; init; }
 
     public required string SubjectId { get; init; }
+
+    public string? Name { get; init; }
+
+    public string? NamespaceName { get; init; }
+
+    public string? DisplayName { get; init; }
+
+    public string? DefinitionSubjectId { get; init; }
+
+    public string? DeclaringTypeSubjectId { get; init; }
+
+    public string? DeclaringMethodSubjectId { get; init; }
+
+    public string? MemberType { get; init; }
+
+    public int? ParameterIndex { get; init; }
+
+    public int? ParameterCount { get; init; }
+
+    public bool? IsImported { get; init; }
+
+    public string? ImportModuleName { get; init; }
+
+    public string? ImportEntryPointName { get; init; }
 }
 
 public sealed record CodeRegistrationArtifact
@@ -460,6 +576,7 @@ public static class NativeReferenceArtifactNames
 {
     public const string GeneratedDirectory = "generated";
     public const string GeneratedTranslationUnit = "generated/native-reference.generated.cpp";
+    public const string LoweringPlan = "native-proof.plan.json";
     public const string ProofManifest = "native-proof.manifest.json";
 }
 
@@ -482,7 +599,124 @@ public sealed record NativeReferenceProofManifestArtifact
 
     public required string ManagedClosureRootPath { get; init; }
 
+    public required string PlanArtifactPath { get; init; }
+
     public required IReadOnlyList<NativeReferenceGeneratedArtifactRef> GeneratedArtifacts { get; init; }
+}
+
+public sealed record NativeReferenceLoweringPlanArtifact
+{
+    public string FormatVersion { get; init; } = "v0";
+
+    public string ArtifactKind { get; init; } = "nativeReferenceLoweringPlan";
+
+    public required string PlanKind { get; init; }
+
+    public required string AssemblyName { get; init; }
+
+    public required string EntrySubjectId { get; init; }
+
+    public required string IncludeHeader { get; init; }
+
+    public required string ProofFunctionName { get; init; }
+
+    public required string EntrySymbol { get; init; }
+
+    public string? ConstructorSymbol { get; init; }
+
+    public string? InstanceMethodSymbol { get; init; }
+
+    public string? EchoMethodSymbol { get; init; }
+
+    public string? GetterSymbol { get; init; }
+
+    public required string ReferenceTypeToken { get; init; }
+
+    public required string CapturedFieldToken { get; init; }
+
+    public required string EntryMethodToken { get; init; }
+
+    public string? ConstructorMethodToken { get; init; }
+
+    public string? InstanceMethodToken { get; init; }
+
+    public string? EchoMethodToken { get; init; }
+
+    public string? GetterMethodToken { get; init; }
+
+    public string? ImportMethodSubjectId { get; init; }
+
+    public string? ImportMethodSymbol { get; init; }
+
+    public string? ImportModuleName { get; init; }
+
+    public string? ImportEntryPointName { get; init; }
+
+    public int? ImportArgument0 { get; init; }
+
+    public int? ImportArgument1 { get; init; }
+
+    public int? ImportArgument2 { get; init; }
+
+    public required string ConsoleWriteLineStringIcall { get; init; }
+
+    public string? StringConcatPairIcall { get; init; }
+
+    public string? ConstructorLiteral { get; init; }
+
+    public int? ConstructorLiteralByteCount { get; init; }
+
+    public string? MessagePrefixLiteral { get; init; }
+
+    public int? MessagePrefixLiteralByteCount { get; init; }
+
+    public string? MessageSuffixLiteral { get; init; }
+
+    public int? MessageSuffixLiteralByteCount { get; init; }
+
+    public string? EchoLiteral { get; init; }
+
+    public int? EchoLiteralByteCount { get; init; }
+
+    public string? ClosedTypeSubjectId { get; init; }
+
+    public string? GenericTypeDefinitionSubjectId { get; init; }
+
+    public string? FieldSubjectId { get; init; }
+
+    public string? PropertySubjectId { get; init; }
+
+    public string? MethodSubjectId { get; init; }
+
+    public string? ParameterSubjectId { get; init; }
+
+    public string? ClosedTypeToken { get; init; }
+
+    public string? GenericTypeDefinitionToken { get; init; }
+
+    public string? ClosedTypeNamespaceName { get; init; }
+
+    public string? ClosedTypeName { get; init; }
+
+    public string? ClosedTypeDisplayName { get; init; }
+
+    public string? GenericTypeDefinitionName { get; init; }
+
+    public string? FieldQueryName { get; init; }
+
+    public string? PropertyQueryName { get; init; }
+
+    public string? MethodQueryName { get; init; }
+
+    public int? MethodParameterCount { get; init; }
+
+    public int? ParameterIndex { get; init; }
+
+    public string? OutputPrefix { get; init; }
+
+    public string? ExpectedOutput { get; init; }
+
+    public int? ExpectedOutputByteCount { get; init; }
 }
 
 public sealed record NativeReferenceGeneratedSource
@@ -495,6 +729,8 @@ public sealed record NativeReferenceGeneratedSource
 public sealed record NativeReferenceProofResult
 {
     public required string OutputRootPath { get; init; }
+
+    public required NativeReferenceLoweringPlanArtifact LoweringPlan { get; init; }
 
     public required NativeReferenceProofManifestArtifact ProofManifest { get; init; }
 

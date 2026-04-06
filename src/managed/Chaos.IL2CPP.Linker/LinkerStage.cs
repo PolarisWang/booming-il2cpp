@@ -23,6 +23,7 @@ public sealed class LinkerStage
             EntryPointSubjectId = semanticWorld.EntryPointSubjectId,
             Types = orderedTypes,
             Fields = semanticWorld.Fields.ToList(),
+            Properties = semanticWorld.Properties.ToList(),
             Methods = orderedMethods,
             Dependencies = dependencies,
         };
@@ -109,6 +110,12 @@ public sealed class LinkerStage
             "System.Private.CoreLib/System.Object::.ctor()" => "base-ctor",
             "System.Private.CoreLib/System.String::Concat(System.String,System.String)" => "narrow-concat-path",
             "System.Console/System.Console::WriteLine(System.String)" => "stdout-path",
+            "System.Private.CoreLib/System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)" => "reflection-query",
+            "System.Private.CoreLib/System.Type::GetField(System.String)" => "reflection-query",
+            "System.Private.CoreLib/System.Type::GetProperty(System.String)" => "reflection-query",
+            "System.Private.CoreLib/System.Type::GetMethod(System.String)" => "reflection-query",
+            "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters()" => "reflection-query",
+            "System.Private.CoreLib/System.Type::GetGenericTypeDefinition()" => "reflection-query",
             _ => throw new NotSupportedException($"unsupported external dependency in Stage 3 linker: {subjectId}"),
         };
     }

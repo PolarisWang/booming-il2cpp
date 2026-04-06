@@ -15,6 +15,7 @@ set(STAGE4_MANAGED_CLOSURE_CODE "${STAGE4_MANAGED_CLOSURE_ROOT}/code-registratio
 set(STAGE4_MANAGED_CLOSURE_MANIFEST "${STAGE4_MANAGED_CLOSURE_ROOT}/closure.manifest.json")
 set(STAGE4_OUTPUT_ROOT "${REPO_ROOT}/artifacts/proof/native-reference/HelloWorldObject")
 set(STAGE4_GENERATED_SOURCE "${STAGE4_OUTPUT_ROOT}/generated/native-reference.generated.cpp")
+set(STAGE4_PROOF_PLAN "${STAGE4_OUTPUT_ROOT}/native-proof.plan.json")
 set(STAGE4_PROOF_MANIFEST "${STAGE4_OUTPUT_ROOT}/native-proof.manifest.json")
 set(STAGE4_RUN_OUTPUT_ROOT "${STAGE4_OUTPUT_ROOT}/run")
 set(STAGE4_RUN_SCRIPT "${CMAKE_CURRENT_LIST_DIR}/RunNativeReferenceProof.cmake")
@@ -74,6 +75,7 @@ add_custom_command(
     OUTPUT "${STAGE4_CODEGEN_STAMP}"
     BYPRODUCTS
         "${STAGE4_GENERATED_SOURCE}"
+        "${STAGE4_PROOF_PLAN}"
         "${STAGE4_PROOF_MANIFEST}"
     COMMAND "${CMAKE_COMMAND}" -E make_directory "${STAGE4_OUTPUT_ROOT}"
     COMMAND "${CMAKE_COMMAND}" -E make_directory "${STAGE4_OUTPUT_ROOT}/generated"
