@@ -1,0 +1,37 @@
+if(NOT DEFINED CHAOS_STAGE4_PROOF_EXE OR CHAOS_STAGE4_PROOF_EXE STREQUAL "")
+    message(FATAL_ERROR "CHAOS_STAGE4_PROOF_EXE is required")
+endif()
+
+if(NOT DEFINED CHAOS_STAGE4_RUN_OUTPUT_ROOT OR CHAOS_STAGE4_RUN_OUTPUT_ROOT STREQUAL "")
+    message(FATAL_ERROR "CHAOS_STAGE4_RUN_OUTPUT_ROOT is required")
+endif()
+
+if(NOT DEFINED CHAOS_STAGE4_STDOUT_PATH OR CHAOS_STAGE4_STDOUT_PATH STREQUAL "")
+    message(FATAL_ERROR "CHAOS_STAGE4_STDOUT_PATH is required")
+endif()
+
+if(NOT DEFINED CHAOS_STAGE4_STDERR_PATH OR CHAOS_STAGE4_STDERR_PATH STREQUAL "")
+    message(FATAL_ERROR "CHAOS_STAGE4_STDERR_PATH is required")
+endif()
+
+if(NOT DEFINED CHAOS_STAGE4_EXIT_CODE_PATH OR CHAOS_STAGE4_EXIT_CODE_PATH STREQUAL "")
+    message(FATAL_ERROR "CHAOS_STAGE4_EXIT_CODE_PATH is required")
+endif()
+
+# Collect proof run artifacts under run/stdout.log, run/stderr.log, and run/exit-code.txt.
+file(MAKE_DIRECTORY "${CHAOS_STAGE4_RUN_OUTPUT_ROOT}")
+
+execute_process(
+    COMMAND "${CHAOS_STAGE4_PROOF_EXE}"
+    WORKING_DIRECTORY "${CHAOS_STAGE4_RUN_OUTPUT_ROOT}"
+    RESULT_VARIABLE proof_exit_code
+    OUTPUT_FILE "${CHAOS_STAGE4_STDOUT_PATH}"
+    ERROR_FILE "${CHAOS_STAGE4_STDERR_PATH}")
+
+file(WRITE "${CHAOS_STAGE4_EXIT_CODE_PATH}" "${proof_exit_code}\n")
+
+if(NOT proof_exit_code EQUAL 0)
+    message(FATAL_ERROR
+        "Stage 4 native reference proof failed with exit code ${proof_exit_code}; "
+        "see ${CHAOS_STAGE4_STDOUT_PATH}, ${CHAOS_STAGE4_STDERR_PATH}, and ${CHAOS_STAGE4_EXIT_CODE_PATH}.")
+endif()

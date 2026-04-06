@@ -27,14 +27,14 @@ DEFAULT_MANIFEST = Path("build/toolchains/run/runtime_manifest.json")
 
 
 def resolve_repo_root(repo_root: str | None = None) -> Path:
-    candidate = repo_root or os.environ.get("BOOM_RUN_REPO_ROOT")
+    candidate = repo_root or os.environ.get("CHAOS_RUN_REPO_ROOT")
     if candidate:
         return Path(candidate).resolve()
     return Path(__file__).resolve().parents[3]
 
 
 def resolve_manifest_path(repo_root: Path, manifest_path: str | Path | None = None) -> Path:
-    candidate = manifest_path or os.environ.get("BOOM_RUN_RUNTIME_MANIFEST")
+    candidate = manifest_path or os.environ.get("CHAOS_RUN_RUNTIME_MANIFEST")
     if candidate is None:
         return (repo_root / DEFAULT_MANIFEST).resolve()
 

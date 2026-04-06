@@ -139,12 +139,14 @@ Status: active
   - exit code 为 `0`
   - 无 per-method rescue path
 - `deliverables`:
-  - 待创建子任务
+  - 子任务 `20260406-02-stage-4-native-bootstrap-and-reference-proof`
+  - Stage 4 brainstorm / design / plan 文档
+  - first generated C++ emission 与 native reference proof 骨架
 - `dependencies`:
   - Stage 2
   - Stage 3
 - `open_questions`:
-  - reference platform 最终先锁 Windows 还是 Linux
+  - `windows-x64-reference` 如何在保留 compile-only contract smoke 锚点的同时接入 proof target
 
 ### Stage 5
 
@@ -166,13 +168,13 @@ Status: active
 | `20260405-03-stage-1b-structure-and-test-migration` | `Stage 1B` | `completed` | `codex` | 迁移 managed skeleton、tests family 与 tooling canonical path | `20260405-02-stage-1a-contract-surface-reset` |
 | `20260405-04-stage-2-helloworld-proof-spec` | `Stage 2` | `completed` | `codex` | 固定 object-based `HelloWorld` proof spec，并收口 canonical sample truth | `20260405-02-stage-1a-contract-surface-reset, 20260405-03-stage-1b-structure-and-test-migration` |
 | `20260406-01-stage-3-managed-minimal-closure` | `Stage 3` | `completed` | `codex` | 打通 managed 最小闭环，并把输出结束在 generated-code input bundle | `20260405-04-stage-2-helloworld-proof-spec` |
-| `reboot-stage-4-native-bootstrap-and-reference-proof` | `Stage 4` | `planned` | `unassigned` | 打通 native bootstrap 与 reference platform proof | `20260405-04-stage-2-helloworld-proof-spec, 20260406-01-stage-3-managed-minimal-closure` |
-| `reboot-stage-5-post-proof-split` | `Stage 5` | `planned` | `unassigned` | 基于 proof 结果决定 follow-on roadmap | `reboot-stage-4-native-bootstrap-and-reference-proof` |
+| `20260406-02-stage-4-native-bootstrap-and-reference-proof` | `Stage 4` | `completed` | `codex` | 消费 Stage 3 closure bundle，已落地 native bootstrap、first generated C++ emission 与 Windows x64 reference proof | `20260405-04-stage-2-helloworld-proof-spec, 20260406-01-stage-3-managed-minimal-closure` |
+| `reboot-stage-5-post-proof-split` | `Stage 5` | `planned` | `unassigned` | 基于 proof 结果决定 follow-on roadmap | `20260406-02-stage-4-native-bootstrap-and-reference-proof` |
 
 说明：
 
-- 当前已正式创建 Stage 1A、Stage 1B、Stage 2、Stage 3 四个子任务目录，其中 Stage 3 已完成归档，当前 active 上下文回到父 roadmap。
-- Stage 4 与 Stage 5 仍保留为 roadmap 中的 planned 子任务，不提前激活。
+- 当前已正式创建 Stage 1A、Stage 1B、Stage 2、Stage 3、Stage 4 五个子任务目录，其中 Stage 3 与 Stage 4 都已完成归档。
+- Stage 5 仍保留为 roadmap 中的 planned 子任务，但现在已经具备基于真实 proof 结果继续派生的前提。
 
 ## 7. 依赖
 
@@ -217,5 +219,6 @@ Status: active
 2. 再执行 `20260405-03-stage-1b-structure-and-test-migration`
 3. `20260405-04-stage-2-helloworld-proof-spec` 已完成 proof spec freeze
 4. `20260406-01-stage-3-managed-minimal-closure` 已完成归档，managed closure bundle、正式测试对象与统一入口均已收口
-5. 当前回到父 roadmap 的 Stage 4 `Native Bootstrap And Reference Proof` 派生决策点
+5. `20260406-02-stage-4-native-bootstrap-and-reference-proof` 已完成归档，真实 native reference proof 与 `verify-roadmap-0` Windows gate 已闭环
+6. 父 roadmap 重新成为 active 决策入口，下一步判断是否派生 `Stage 5: Post-Proof Split`
 

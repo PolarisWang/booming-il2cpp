@@ -69,7 +69,7 @@
 - [ ] 不要再新增第三套 contract 根目录或第三套 tests family 语义。
 - [ ] `tests/contracts` 是 canonical 路径；`tests/contract` 只能作为短期兼容过渡，不能继续新增内容。
 - [ ] `tests/smoke/input/HelloWorld` 明确保留为 smoke；新的 object-based proof 必须进入 `tests/proof/input/HelloWorldObject`。
-- [ ] `src/managed` 一律使用 `Chaos.IL2CPP.*` 命名；不混用 `Boom.*`。
+- [ ] `src/managed` 一律使用 `Chaos.IL2CPP.*` 命名；不混用旧托管命名空间。
 - [ ] 每完成一个 chunk，都要同步更新 `STATUS.md`、`docs/dev/ACTIVE.md`、`notes/progress-*.md`，并在必要时追加 finding。
 
 ## Chunk 1：统一 contract 根目录

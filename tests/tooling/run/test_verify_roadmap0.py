@@ -4,6 +4,7 @@ import importlib.util
 import shutil
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -13,6 +14,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 VERIFY_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "verify.py"
 VERIFY_WRAPPER_PATH = REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.sh"
 VERIFY_SCRIPT_PATH = REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.py"
+VERIFY_SCRIPT_PS1_PATH = REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.ps1"
 
 
 def load_module(path: Path, module_name: str):
@@ -214,6 +216,139 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
             ["cmake", "--build", str(allocated_dir)],
             run_checked_mock.call_args_list[1].args[0],
         )
+
+    def test_low_level_script_stage4_codegen_prepares_managed_and_native_reference_artifacts(self) -> None:
+        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_stage4_codegen")
+        driver_dll_path = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Driver.dll"
+
+        with patch.object(script_module, "run_checked") as run_checked_mock:
+            script_module.invoke_stage4_native_reference_codegen(REPO_ROOT)
+
+        self.assertEqual(
+            [
+                "dotnet",
+                "build",
+                str(REPO_ROOT / "tests" / "proof" / "input" / "HelloWorldObject" / "HelloWorldObject.csproj"),
+                "-c",
+                "Release",
+            ],
+            run_checked_mock.call_args_list[0].args[0],
+        )
+        self.assertEqual(
+            [
+                "dotnet",
+                "build",
+                str(REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"),
+                "-c",
+                "Release",
+            ],
+            run_checked_mock.call_args_list[1].args[0],
+        )
+        self.assertEqual(
+            [
+                "dotnet",
+                str(driver_dll_path),
+                str(REPO_ROOT / "tests" / "proof" / "input" / "HelloWorldObject" / "bin" / "Release" / "net8.0" / "HelloWorldObject.dll"),
+                str(REPO_ROOT / "artifacts" / "proof" / "managed-closure" / "HelloWorldObject"),
+            ],
+            run_checked_mock.call_args_list[2].args[0],
+        )
+        self.assertEqual(
+            [
+                "dotnet",
+                str(driver_dll_path),
+                "emit-native-reference",
+                str(REPO_ROOT / "artifacts" / "proof" / "managed-closure" / "HelloWorldObject"),
+                str(REPO_ROOT / "artifacts" / "proof" / "native-reference" / "HelloWorldObject"),
+            ],
+            run_checked_mock.call_args_list[3].args[0],
+        )
+
+    def test_low_level_script_stage4_proof_run_builds_release_target_and_validates_artifacts(self) -> None:
+        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_stage4_proof_run")
+        requested_dir = REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference"
+        allocated_dir = requested_dir.parent / "windows-x64-reference-stage4-proof-run"
+        native_reference_root = REPO_ROOT / "artifacts" / "proof" / "native-reference" / "HelloWorldObject"
+
+        with patch.object(script_module, "allocate_run_scoped_binary_dir", return_value=allocated_dir):
+            with patch.object(script_module, "run_checked") as run_checked_mock:
+                with patch.object(script_module, "validate_stage4_proof_run_artifacts") as validate_mock:
+                    script_module.invoke_stage4_native_reference_proof_run(REPO_ROOT)
+
+        self.assertEqual(
+            ["cmake", "--preset", "windows-x64-reference", "-B", str(allocated_dir)],
+            run_checked_mock.call_args_list[0].args[0],
+        )
+        self.assertEqual(
+            [
+                "cmake",
+                "--build",
+                str(allocated_dir),
+                "--config",
+                "Release",
+                "--target",
+                "chaos_stage4_hello_world_object_proof_run",
+            ],
+            run_checked_mock.call_args_list[1].args[0],
+        )
+        validate_mock.assert_called_once_with(native_reference_root)
+
+    def test_low_level_script_accepts_stage4_proof_run_artifacts_when_stdout_and_exit_code_match(self) -> None:
+        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_stage4_run_artifacts_ok")
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            native_reference_root = Path(temp_dir)
+            run_root = native_reference_root / "run"
+            run_root.mkdir(parents=True, exist_ok=True)
+            (run_root / "stdout.log").write_text("Hello, World!\n", encoding="utf-8")
+            (run_root / "stderr.log").write_text("", encoding="utf-8")
+            (run_root / "exit-code.txt").write_text("0\n", encoding="utf-8")
+
+            script_module.validate_stage4_proof_run_artifacts(native_reference_root)
+
+    def test_low_level_script_rejects_stage4_proof_run_exit_code_mismatch(self) -> None:
+        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_stage4_run_artifacts_exit")
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            native_reference_root = Path(temp_dir)
+            run_root = native_reference_root / "run"
+            run_root.mkdir(parents=True, exist_ok=True)
+            (run_root / "stdout.log").write_text("Hello, World!\n", encoding="utf-8")
+            (run_root / "stderr.log").write_text("", encoding="utf-8")
+            (run_root / "exit-code.txt").write_text("1\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(RuntimeError, "exit code"):
+                script_module.validate_stage4_proof_run_artifacts(native_reference_root)
+
+    def test_low_level_script_rejects_stage4_proof_run_stdout_mismatch(self) -> None:
+        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_stage4_run_artifacts_stdout")
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            native_reference_root = Path(temp_dir)
+            run_root = native_reference_root / "run"
+            run_root.mkdir(parents=True, exist_ok=True)
+            (run_root / "stdout.log").write_text("unexpected output\n", encoding="utf-8")
+            (run_root / "stderr.log").write_text("", encoding="utf-8")
+            (run_root / "exit-code.txt").write_text("0\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(RuntimeError, "Hello, World!"):
+                script_module.validate_stage4_proof_run_artifacts(native_reference_root)
+
+    def test_low_level_powershell_script_keeps_stage4_proof_run_artifact_contract(self) -> None:
+        script_text = VERIFY_SCRIPT_PS1_PATH.read_text(encoding="utf-8")
+
+        required_markers = [
+            "Assert-Stage4ProofRunArtifacts",
+            "Invoke-Stage4NativeReferenceProofRun",
+            "chaos_stage4_hello_world_object_proof_run",
+            "stdout.log",
+            "stderr.log",
+            "exit-code.txt",
+            "Hello, World!",
+        ]
+
+        for marker in required_markers:
+            self.assertIn(marker, script_text)
 
 
 if __name__ == "__main__":

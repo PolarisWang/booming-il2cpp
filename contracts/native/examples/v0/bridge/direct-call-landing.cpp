@@ -1,19 +1,19 @@
-#include "codegen_bridge.h"
+﻿#include "codegen_bridge.h"
 
-namespace boom::contracts::native::examples {
+namespace chaos::contracts::native::examples {
 
-extern "C" int32_t BOOM_RUNTIME_ABI_CALL HelloWorldObject_Program_Main(
+extern "C" int32_t CHAOS_RUNTIME_ABI_CALL HelloWorldObject_Program_Main(
     RuntimeState* runtime,
     ThreadState* thread,
     void* managed_args);
 
-extern "C" void BOOM_RUNTIME_ABI_CALL HelloWorldObject_Greeter__ctor(
+extern "C" void CHAOS_RUNTIME_ABI_CALL HelloWorldObject_Greeter__ctor(
     RuntimeState* runtime,
     ThreadState* thread,
     void* greeter_instance,
     void* name_string);
 
-extern "C" void* BOOM_RUNTIME_ABI_CALL HelloWorldObject_Greeter_BuildMessage(
+extern "C" void* CHAOS_RUNTIME_ABI_CALL HelloWorldObject_Greeter_BuildMessage(
     RuntimeState* runtime,
     ThreadState* thread,
     void* greeter_instance);
@@ -23,8 +23,8 @@ void DirectCallLandingExample(
     ThreadState* thread,
     ImageHandle image,
     void* managed_args) {
-    const RuntimeAbiV0* abi = boom_runtime_get_abi_v0();
-    const CodegenBridgeV0* bridge = boom_codegen_get_bridge_v0();
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    const CodegenBridgeV0* bridge = chaos_codegen_get_bridge_v0();
     if (abi == nullptr || bridge == nullptr) {
         return;
     }
@@ -40,11 +40,11 @@ void DirectCallLandingExample(
     options.image_name_utf8 = "HelloWorldObject";
 
     if (bridge->register_codegen(&code_registration, &metadata_registration, &options) !=
-        BOOM_BRIDGE_STATUS_OK) {
+        CHAOS_BRIDGE_STATUS_OK) {
         return;
     }
 
-    if (bridge->bootstrap_runtime() != BOOM_BRIDGE_STATUS_OK) {
+    if (bridge->bootstrap_runtime() != CHAOS_BRIDGE_STATUS_OK) {
         return;
     }
 
@@ -68,4 +68,5 @@ void DirectCallLandingExample(
     (void)HelloWorldObject_Program_Main(runtime, thread, managed_args);
 }
 
-}  // namespace boom::contracts::native::examples
+}  // namespace chaos::contracts::native::examples
+

@@ -8,8 +8,8 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 function Get-RepoRoot {
-    if ($env:BOOM_RUN_REPO_ROOT) {
-        return (Resolve-Path $env:BOOM_RUN_REPO_ROOT).Path
+    if ($env:CHAOS_RUN_REPO_ROOT) {
+        return (Resolve-Path $env:CHAOS_RUN_REPO_ROOT).Path
     }
 
     return (Resolve-Path $PSScriptRoot).Path
@@ -18,8 +18,8 @@ function Get-RepoRoot {
 function Get-ManifestPath {
     param([string]$RepoRoot)
 
-    if ($env:BOOM_RUN_RUNTIME_MANIFEST) {
-        return (Resolve-Path $env:BOOM_RUN_RUNTIME_MANIFEST).Path
+    if ($env:CHAOS_RUN_RUNTIME_MANIFEST) {
+        return (Resolve-Path $env:CHAOS_RUN_RUNTIME_MANIFEST).Path
     }
 
     return (Join-Path $RepoRoot "build\toolchains\run\runtime_manifest.json")
@@ -193,11 +193,11 @@ function Get-RuntimePythonPath {
 }
 
 function Test-InteractiveSession {
-    if ($env:BOOM_RUN_FORCE_INTERACTIVE -eq "1") {
+    if ($env:CHAOS_RUN_FORCE_INTERACTIVE -eq "1") {
         return $true
     }
 
-    if ($env:BOOM_RUN_FORCE_INTERACTIVE -eq "0") {
+    if ($env:CHAOS_RUN_FORCE_INTERACTIVE -eq "0") {
         return $false
     }
 
@@ -266,7 +266,7 @@ function Confirm-Bootstrap {
     $prompt = "Python runtime is not installed. Bootstrap now? [y/N]"
     Write-Host $prompt
 
-    $response = $env:BOOM_RUN_CONFIRM_RESPONSE
+    $response = $env:CHAOS_RUN_CONFIRM_RESPONSE
     if (-not $response) {
         $response = Read-Host
     }
@@ -275,8 +275,8 @@ function Confirm-Bootstrap {
 }
 
 function Get-BootstrapPython {
-    if ($env:BOOM_RUN_BOOTSTRAP_PYTHON) {
-        return $env:BOOM_RUN_BOOTSTRAP_PYTHON
+    if ($env:CHAOS_RUN_BOOTSTRAP_PYTHON) {
+        return $env:CHAOS_RUN_BOOTSTRAP_PYTHON
     }
 
     $python = Get-Command python -ErrorAction SilentlyContinue
@@ -326,8 +326,8 @@ function Get-RunScriptPath {
 }
 
 function Get-WindowsTerminalCommandPath {
-    if ($env:BOOM_RUN_WINDOWS_TERMINAL_COMMAND) {
-        $resolved = Resolve-Path $env:BOOM_RUN_WINDOWS_TERMINAL_COMMAND -ErrorAction SilentlyContinue
+    if ($env:CHAOS_RUN_WINDOWS_TERMINAL_COMMAND) {
+        $resolved = Resolve-Path $env:CHAOS_RUN_WINDOWS_TERMINAL_COMMAND -ErrorAction SilentlyContinue
         if ($resolved) {
             return $resolved.Path
         }
@@ -351,11 +351,11 @@ function Get-WindowsTerminalCommandPath {
 function Test-WindowsTerminalHandoffRequested {
     param([bool]$JsonOutput)
 
-    if ($env:BOOM_RUN_REQUEST_WINDOWS_TERMINAL -ne "1") {
+    if ($env:CHAOS_RUN_REQUEST_WINDOWS_TERMINAL -ne "1") {
         return $false
     }
 
-    if ($env:BOOM_RUN_WINDOWS_TERMINAL_HANDOFF -eq "1") {
+    if ($env:CHAOS_RUN_WINDOWS_TERMINAL_HANDOFF -eq "1") {
         return $false
     }
 
@@ -453,11 +453,11 @@ function Invoke-WindowsTerminalHandoff {
     )
     $wtArguments += $forwardedArguments
 
-    $originalRequest = $env:BOOM_RUN_REQUEST_WINDOWS_TERMINAL
-    $originalHandoff = $env:BOOM_RUN_WINDOWS_TERMINAL_HANDOFF
+    $originalRequest = $env:CHAOS_RUN_REQUEST_WINDOWS_TERMINAL
+    $originalHandoff = $env:CHAOS_RUN_WINDOWS_TERMINAL_HANDOFF
 
-    $env:BOOM_RUN_REQUEST_WINDOWS_TERMINAL = "0"
-    $env:BOOM_RUN_WINDOWS_TERMINAL_HANDOFF = "1"
+    $env:CHAOS_RUN_REQUEST_WINDOWS_TERMINAL = "0"
+    $env:CHAOS_RUN_WINDOWS_TERMINAL_HANDOFF = "1"
 
     try {
         $launcherPath = $wtCommandPath
@@ -472,8 +472,8 @@ function Invoke-WindowsTerminalHandoff {
         Start-Process -FilePath $launcherPath -ArgumentList $launcherArgumentLine -WorkingDirectory $RepoRoot | Out-Null
     }
     finally {
-        $env:BOOM_RUN_REQUEST_WINDOWS_TERMINAL = $originalRequest
-        $env:BOOM_RUN_WINDOWS_TERMINAL_HANDOFF = $originalHandoff
+        $env:CHAOS_RUN_REQUEST_WINDOWS_TERMINAL = $originalRequest
+        $env:CHAOS_RUN_WINDOWS_TERMINAL_HANDOFF = $originalHandoff
     }
 
     return $true

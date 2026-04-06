@@ -121,9 +121,9 @@ $manifest = [ordered]@{
 $manifest | ConvertTo-Json -Depth 8 | Set-Content -Encoding utf8 -Path $manifestPath
 
 $baseEnv = @{
-    BOOM_RUN_RUNTIME_MANIFEST = $manifestPath
-    BOOM_RUN_FORCE_INTERACTIVE = "0"
-    BOOM_RUN_BOOTSTRAP_PYTHON = $pythonCommand
+    CHAOS_RUN_RUNTIME_MANIFEST = $manifestPath
+    CHAOS_RUN_FORCE_INTERACTIVE = "0"
+    CHAOS_RUN_BOOTSTRAP_PYTHON = $pythonCommand
 }
 
 $bootstrap = Invoke-Run -Arguments @("bootstrap", "--yes") -Environment $baseEnv
@@ -154,9 +154,9 @@ Assert-True ($capabilityPayload.command -eq "capability") "capability --json sho
 Assert-True ($capabilityPayload.item.id -eq "bootstrap") "capability bootstrap --json should return bootstrap metadata"
 
 $interactiveMenu = Invoke-Run -Arguments @() -Environment @{
-    BOOM_RUN_RUNTIME_MANIFEST = $manifestPath
-    BOOM_RUN_FORCE_INTERACTIVE = "1"
-    BOOM_RUN_BOOTSTRAP_PYTHON = $pythonCommand
+    CHAOS_RUN_RUNTIME_MANIFEST = $manifestPath
+    CHAOS_RUN_FORCE_INTERACTIVE = "1"
+    CHAOS_RUN_BOOTSTRAP_PYTHON = $pythonCommand
 }
 Assert-True ($interactiveMenu.ExitCode -eq 0) "bare interactive run should render menu"
 Assert-True ($interactiveMenu.Output -match "prepare") "interactive menu should render the primary command list"

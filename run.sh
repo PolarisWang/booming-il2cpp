@@ -2,12 +2,12 @@
 set -euo pipefail
 
 script_dir="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
-repo_root="${BOOM_RUN_REPO_ROOT:-$script_dir}"
-manifest_path="${BOOM_RUN_RUNTIME_MANIFEST:-$repo_root/build/toolchains/run/runtime_manifest.json}"
+repo_root="${CHAOS_RUN_REPO_ROOT:-$script_dir}"
+manifest_path="${CHAOS_RUN_RUNTIME_MANIFEST:-$repo_root/build/toolchains/run/runtime_manifest.json}"
 runtime_script="$repo_root/build/toolchains/run/runtime.py"
 run_script="$repo_root/build/toolchains/run/run.py"
 
-bootstrap_python="${BOOM_RUN_BOOTSTRAP_PYTHON:-}"
+bootstrap_python="${CHAOS_RUN_BOOTSTRAP_PYTHON:-}"
 if [[ -z "$bootstrap_python" ]]; then
   if command -v python3 >/dev/null 2>&1; then
     bootstrap_python="$(command -v python3)"
@@ -141,7 +141,7 @@ host_platform="$(host_platform_family "$host_platform_id")"
 
 if [[ "${1-}" == "bootstrap" ]]; then
   if [[ " $* " != *" --yes "* ]]; then
-    force_interactive="${BOOM_RUN_FORCE_INTERACTIVE:-}"
+    force_interactive="${CHAOS_RUN_FORCE_INTERACTIVE:-}"
     if [[ "$force_interactive" == "0" || ! -t 0 ]]; then
       if [[ "$json_requested" -eq 1 ]]; then
         emit_json_error "$command_text" "$host_platform" "non-interactive bootstrap requires 'run bootstrap --yes'"
@@ -152,7 +152,7 @@ if [[ "${1-}" == "bootstrap" ]]; then
     fi
 
     echo "Python runtime is not installed. Bootstrap now? [y/N]"
-    response="${BOOM_RUN_CONFIRM_RESPONSE:-}"
+    response="${CHAOS_RUN_CONFIRM_RESPONSE:-}"
     if [[ -z "$response" ]]; then
       read -r response
     fi
@@ -202,7 +202,7 @@ fi
 probe_json="$(probe_runtime || true)"
 runtime_python="$(runtime_python_from_probe_json "$probe_json" || true)"
 if [[ -z "$runtime_python" || ! -f "$runtime_python" ]]; then
-  force_interactive="${BOOM_RUN_FORCE_INTERACTIVE:-}"
+  force_interactive="${CHAOS_RUN_FORCE_INTERACTIVE:-}"
   if [[ "$force_interactive" == "0" || ! -t 0 ]]; then
     if [[ "$json_requested" -eq 1 ]]; then
       emit_json_error "$command_text" "$host_platform" "Python runtime is not installed. Run 'run bootstrap --yes' first."
@@ -213,7 +213,7 @@ if [[ -z "$runtime_python" || ! -f "$runtime_python" ]]; then
   fi
 
   echo "Python runtime is not installed. Bootstrap now? [y/N]"
-  response="${BOOM_RUN_CONFIRM_RESPONSE:-}"
+  response="${CHAOS_RUN_CONFIRM_RESPONSE:-}"
   if [[ -z "$response" ]]; then
     read -r response
   fi

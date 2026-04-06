@@ -291,6 +291,81 @@ function Invoke-RoutingBuildSmoke {
     }
 }
 
+function Invoke-Stage4NativeReferenceCodegen {
+    $proofProjectPath = Join-Path $repoRoot "tests\proof\input\HelloWorldObject\HelloWorldObject.csproj"
+    $proofDllPath = Join-Path $repoRoot "tests\proof\input\HelloWorldObject\bin\Release\net8.0\HelloWorldObject.dll"
+    $driverProjectPath = Join-Path $repoRoot "src\managed\Chaos.IL2CPP.Driver\Chaos.IL2CPP.Driver.csproj"
+    $driverDllPath = Join-Path $repoRoot "src\managed\Chaos.IL2CPP.Driver\bin\Release\net8.0\Chaos.IL2CPP.Driver.dll"
+    $managedClosureRoot = Join-Path $repoRoot "artifacts\proof\managed-closure\HelloWorldObject"
+    $nativeReferenceRoot = Join-Path $repoRoot "artifacts\proof\native-reference\HelloWorldObject"
+
+    Invoke-DotNetBuild -ProjectPath $proofProjectPath
+    Invoke-DotNetBuild -ProjectPath $driverProjectPath
+
+    & dotnet $driverDllPath $proofDllPath $managedClosureRoot | Out-Host
+    if ($LASTEXITCODE -ne 0) {
+        throw "stage4 managed closure materialization failed: $proofProjectPath"
+    }
+
+    & dotnet $driverDllPath emit-native-reference $managedClosureRoot $nativeReferenceRoot | Out-Host
+    if ($LASTEXITCODE -ne 0) {
+        throw "stage4 native reference emission failed: $nativeReferenceRoot"
+    }
+}
+
+function Invoke-Stage4NativeReferenceProofRun {
+    $binaryDir = New-RunScopedBinaryDir -BaseDir (Join-Path $repoRoot "artifacts\presets\windows-x64-reference")
+    $nativeReferenceRoot = Join-Path $repoRoot "artifacts\proof\native-reference\HelloWorldObject"
+
+    & cmake --preset windows-x64-reference -B $binaryDir | Out-Host
+    if ($LASTEXITCODE -ne 0) {
+        throw "cmake preset configure failed: windows-x64-reference"
+    }
+
+    & cmake --build $binaryDir --config Release --target chaos_stage4_hello_world_object_proof_run | Out-Host
+    if ($LASTEXITCODE -ne 0) {
+        throw "stage4 native reference proof run target failed: windows-x64-reference"
+    }
+
+    Assert-Stage4ProofRunArtifacts -NativeReferenceRoot $nativeReferenceRoot
+}
+
+function Assert-Stage4ProofRunArtifacts {
+    param([string]$NativeReferenceRoot)
+
+    $runRoot = Join-Path $NativeReferenceRoot "run"
+    $stdoutPath = Join-Path $runRoot "stdout.log"
+    $stderrPath = Join-Path $runRoot "stderr.log"
+    $exitCodePath = Join-Path $runRoot "exit-code.txt"
+
+    foreach ($requiredPath in @($stdoutPath, $stderrPath, $exitCodePath)) {
+        if (-not (Test-Path -LiteralPath $requiredPath -PathType Leaf)) {
+            throw "missing Stage 4 proof run artifact: $requiredPath"
+        }
+    }
+
+    $stdoutText = [System.IO.File]::ReadAllText($stdoutPath)
+    $stderrText = [System.IO.File]::ReadAllText($stderrPath)
+    $exitCodeText = [System.IO.File]::ReadAllText($exitCodePath).Trim()
+
+    $parsedExitCode = 0
+    if (-not [int]::TryParse($exitCodeText, [ref]$parsedExitCode)) {
+        throw "invalid Stage 4 proof exit code record: $exitCodePath"
+    }
+
+    if ($parsedExitCode -ne 0) {
+        $message = "stage4 native reference proof exit code mismatch: expected 0 actual $parsedExitCode"
+        if (-not [string]::IsNullOrWhiteSpace($stderrText)) {
+            $message = "$message`n$($stderrText.Trim())"
+        }
+        throw $message
+    }
+
+    if ($stdoutText -notmatch [regex]::Escape("Hello, World!")) {
+        throw "stage4 native reference proof stdout mismatch: missing 'Hello, World!'"
+    }
+}
+
 function New-RunScopedBinaryDir {
     param([string]$BaseDir)
 
@@ -400,7 +475,7 @@ Invoke-DotNetRuntimeSmoke `
     -ExpectedPatterns @("field=BackingField:Int32", "generic-method=String")
 Invoke-DotNetRuntimeSmoke `
     -DllPath (Join-Path $repoRoot "artifacts\smoke\bin\PInvokeLite\Release\net8.0\PInvokeLite.dll") `
-    -ExpectedPatterns @("marshal=interop-smoke", "export=boom_smoke_add:7", "symbol=True")
+    -ExpectedPatterns @("marshal=interop-smoke", "export=chaos_smoke_add:7", "symbol=True")
 Invoke-DotNetRuntimeSmoke `
     -DllPath (Join-Path $repoRoot "artifacts\smoke\bin\HostEmbeddingLite\Release\net8.0\HostEmbeddingLite.dll") `
     -ExpectedPatterns @("HostEmbeddingSession:InvokeManagedEntry:True", "guards=invalid-detach:True|double-start:True|unattached-entry:True")
@@ -422,8 +497,21 @@ Write-GateRecord `
 
 switch ($HostProfile) {
     "windows" {
+        Write-Step "Prepare Stage 4 native reference proof inputs"
+        Invoke-Stage4NativeReferenceCodegen
+
         Write-Step "Build Windows reference preset smoke"
         Invoke-PresetBuildSmoke -PresetName "windows-x64-reference"
+
+        Write-Step "Run Stage 4 native reference proof"
+        Invoke-Stage4NativeReferenceProofRun
+
+        Write-GateRecord `
+            -OutputPath (Join-Path $artifactRoot "windows-stage4-native-reference.gate.json") `
+            -GateName "windows-stage4-native-reference" `
+            -Status "passed" `
+            -Preset "windows-x64-reference" `
+            -Notes "Windows Stage 4 native reference proof build/run gate passed with Hello, World! stdout and exit code 0 artifacts."
 
         Write-Step "Run Windows reference desktop trace compare"
         $tracePath = Join-Path $artifactRoot "windows-warmup-trace.runtime.json"

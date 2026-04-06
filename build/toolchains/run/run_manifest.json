@@ -625,7 +625,7 @@
       "target": "PInvokeLite",
       "project_path": "tests/smoke/input/PInvokeLite/PInvokeLite.csproj",
       "dll_path": "artifacts/smoke/bin/PInvokeLite/Release/net8.0/PInvokeLite.dll",
-      "expected_patterns": ["marshal=interop-smoke", "export=boom_smoke_add:7", "symbol=True"],
+      "expected_patterns": ["marshal=interop-smoke", "export=chaos_smoke_add:7", "symbol=True"],
       "show_in_menu": false,
       "public": false,
       "replacement_syntax": "test smoke PInvokeLite",

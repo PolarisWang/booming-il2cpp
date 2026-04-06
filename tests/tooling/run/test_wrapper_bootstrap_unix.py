@@ -125,9 +125,9 @@ class UnixWrapperBootstrapTests(unittest.TestCase):
             self.addCleanup(shutil.rmtree, REPO_ROOT / "artifacts" / ".tmp_run-wrapper" / temp_root.name, True)
 
             env = os.environ.copy()
-            env["BOOM_RUN_RUNTIME_MANIFEST"] = str(manifest_path)
-            env["BOOM_RUN_FORCE_INTERACTIVE"] = "0"
-            env["BOOM_RUN_BOOTSTRAP_PYTHON"] = sys.executable
+            env["CHAOS_RUN_RUNTIME_MANIFEST"] = str(manifest_path)
+            env["CHAOS_RUN_FORCE_INTERACTIVE"] = "0"
+            env["CHAOS_RUN_BOOTSTRAP_PYTHON"] = sys.executable
 
             result = subprocess.run(
                 ["bash", str(RUN_SH), "list"],
@@ -187,9 +187,9 @@ class UnixWrapperBootstrapTests(unittest.TestCase):
             )
 
             env = os.environ.copy()
-            env["BOOM_RUN_RUNTIME_MANIFEST"] = str(manifest_path)
-            env["BOOM_RUN_CONFIRM_RESPONSE"] = "Y"
-            env["BOOM_RUN_BOOTSTRAP_PYTHON"] = sys.executable
+            env["CHAOS_RUN_RUNTIME_MANIFEST"] = str(manifest_path)
+            env["CHAOS_RUN_CONFIRM_RESPONSE"] = "Y"
+            env["CHAOS_RUN_BOOTSTRAP_PYTHON"] = sys.executable
 
             result = run_with_tty(["bootstrap"], env)
 

@@ -92,7 +92,7 @@ function New-FakeRuntimeArchive {
     $pythonCmdPath = Join-Path $pythonDir "python.cmd"
     @'
 @echo off
-if not "%BOOM_RUN_TEST_LOG%"=="" echo %*>>"%BOOM_RUN_TEST_LOG%"
+if not "%CHAOS_RUN_TEST_LOG%"=="" echo %*>>"%CHAOS_RUN_TEST_LOG%"
 exit /b 0
 '@ | Set-Content -Encoding Ascii -Path $pythonCmdPath
 
@@ -141,28 +141,28 @@ $runtimePython = Join-Path $cacheRootAbsolute "windows-x64\9.9.9\python\python.c
 $currentState = Join-Path $cacheRootAbsolute "current.json"
 
 $interactivePrompt = Invoke-Run -Arguments @("list") -Environment @{
-    BOOM_RUN_RUNTIME_MANIFEST = $manifestPath
-    BOOM_RUN_FORCE_INTERACTIVE = "1"
-    BOOM_RUN_CONFIRM_RESPONSE = "n"
-    BOOM_RUN_BOOTSTRAP_PYTHON = $pythonCommand
+    CHAOS_RUN_RUNTIME_MANIFEST = $manifestPath
+    CHAOS_RUN_FORCE_INTERACTIVE = "1"
+    CHAOS_RUN_CONFIRM_RESPONSE = "n"
+    CHAOS_RUN_BOOTSTRAP_PYTHON = $pythonCommand
 }
 
 Assert-True ($interactivePrompt.ExitCode -ne 0) "interactive missing-runtime branch should not continue without confirmation"
 Assert-Contains -Text $interactivePrompt.Output -Expected "bootstrap" -Message "interactive missing-runtime branch should mention bootstrap"
 
 $nonInteractive = Invoke-Run -Arguments @("list") -Environment @{
-    BOOM_RUN_RUNTIME_MANIFEST = $manifestPath
-    BOOM_RUN_FORCE_INTERACTIVE = "0"
-    BOOM_RUN_BOOTSTRAP_PYTHON = $pythonCommand
+    CHAOS_RUN_RUNTIME_MANIFEST = $manifestPath
+    CHAOS_RUN_FORCE_INTERACTIVE = "0"
+    CHAOS_RUN_BOOTSTRAP_PYTHON = $pythonCommand
 }
 
 Assert-True ($nonInteractive.ExitCode -ne 0) "non-interactive missing-runtime branch should fail"
 Assert-Contains -Text $nonInteractive.Output -Expected "run bootstrap --yes" -Message "non-interactive branch should require explicit bootstrap"
 
 $bootstrapJson = Invoke-Run -Arguments @("bootstrap", "--yes", "--json") -Environment @{
-    BOOM_RUN_RUNTIME_MANIFEST = $manifestPath
-    BOOM_RUN_FORCE_INTERACTIVE = "0"
-    BOOM_RUN_BOOTSTRAP_PYTHON = $pythonCommand
+    CHAOS_RUN_RUNTIME_MANIFEST = $manifestPath
+    CHAOS_RUN_FORCE_INTERACTIVE = "0"
+    CHAOS_RUN_BOOTSTRAP_PYTHON = $pythonCommand
 }
 
 $bootstrapPayload = $bootstrapJson.Output | ConvertFrom-Json
@@ -179,9 +179,9 @@ $runtimeTicksBefore = (Get-Item $runtimePython).LastWriteTimeUtc.Ticks
 Start-Sleep -Milliseconds 25
 
 $bootstrapAgain = Invoke-Run -Arguments @("bootstrap", "--yes") -Environment @{
-    BOOM_RUN_RUNTIME_MANIFEST = $manifestPath
-    BOOM_RUN_FORCE_INTERACTIVE = "0"
-    BOOM_RUN_BOOTSTRAP_PYTHON = $pythonCommand
+    CHAOS_RUN_RUNTIME_MANIFEST = $manifestPath
+    CHAOS_RUN_FORCE_INTERACTIVE = "0"
+    CHAOS_RUN_BOOTSTRAP_PYTHON = $pythonCommand
 }
 
 Assert-True ($bootstrapAgain.ExitCode -eq 0) "second bootstrap --yes should also succeed"

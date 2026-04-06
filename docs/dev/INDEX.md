@@ -1,10 +1,11 @@
-﻿# 开发任务总览
+# 开发任务总览
 
 本目录汇总当前采用 `docs/dev` 流程管理的任务。
 
 | 任务 | lifecycle_status | phase | 最近更新 | 下一步 | active |
 | --- | --- | --- | --- | --- | --- |
-| `20260405-01-il2cpp-reboot-after-abandoned-roadmap` | `in_progress` | `roadmap` | `2026-04-06 01:21:23 +08:00` | 维护 reboot roadmap；当前进入 Stage 4 `Native Bootstrap And Reference Proof` 派生决策点。 | `yes` |
+| `20260405-01-il2cpp-reboot-after-abandoned-roadmap` | `in_progress` | `roadmap` | `2026-04-06 12:29:22 +08:00` | 基于已跑通的 `HelloWorldObject` native reference proof，判断是否需要派生 `Stage 5: Post-Proof Split`。 | `yes` |
+| `20260406-02-stage-4-native-bootstrap-and-reference-proof` | `completed` | `archived` | `2026-04-06 12:29:22 +08:00` | 无。若继续 reboot 主线，下一步由父 roadmap 决定是否派生 `Stage 5: Post-Proof Split`。 | `no` |
 | `20260406-01-stage-3-managed-minimal-closure` | `completed` | `archived` | `2026-04-06 01:21:23 +08:00` | 无。若继续 reboot 主线，下一步由父 roadmap 决定是否派生 Stage 4 `Native Bootstrap And Reference Proof`。 | `no` |
 | `20260405-04-stage-2-helloworld-proof-spec` | `completed` | `archived` | `2026-04-06 00:04:02 +08:00` | 无。若继续 reboot 主线，下一步由父 roadmap 决定 Stage 3 / Stage 4 的派生节奏。 | `no` |
 | `20260405-02-stage-1a-contract-surface-reset` | `completed` | `archived` | `2026-04-05 23:07:20 +08:00` | 无。若继续 reboot 主线，下一步转到 `20260405-03-stage-1b-structure-and-test-migration`。 | `no` |

@@ -106,7 +106,7 @@ def _stream_is_tty(name: str) -> bool:
 
 
 def is_interactive_session() -> bool:
-    forced = os.environ.get("BOOM_RUN_FORCE_INTERACTIVE")
+    forced = os.environ.get("CHAOS_RUN_FORCE_INTERACTIVE")
     if forced == "1":
         return True
     if forced == "0":

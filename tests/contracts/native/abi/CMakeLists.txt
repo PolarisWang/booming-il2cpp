@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.20)
+﻿cmake_minimum_required(VERSION 3.20)
 
-project(boom_runtime_abi_compile_only_smoke LANGUAGES CXX)
+project(chaos_runtime_abi_compile_only_smoke LANGUAGES CXX)
 
 get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../../.." ABSOLUTE)
 set(ARTIFACT_ROOT "${REPO_ROOT}/artifacts/native-abi-smoke")
@@ -15,3 +15,4 @@ target_include_directories(
     runtime_abi_compile_only
     PRIVATE
         "${REPO_ROOT}/contracts/native/v0")
+

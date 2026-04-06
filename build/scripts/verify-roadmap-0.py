@@ -82,6 +82,96 @@ def invoke_dotnet_runtime_smoke(dll_path: Path, expected_patterns: list[str], re
             raise RuntimeError(f"runtime smoke output mismatch for {dll_path}: missing '{pattern}'")
 
 
+def invoke_stage4_native_reference_codegen(repo_root: Path) -> None:
+    proof_project_path = repo_root / "tests" / "proof" / "input" / "HelloWorldObject" / "HelloWorldObject.csproj"
+    proof_dll_path = repo_root / "tests" / "proof" / "input" / "HelloWorldObject" / "bin" / "Release" / "net8.0" / "HelloWorldObject.dll"
+    driver_project_path = repo_root / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
+    driver_dll_path = repo_root / "src" / "managed" / "Chaos.IL2CPP.Driver" / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Driver.dll"
+    managed_closure_root = repo_root / "artifacts" / "proof" / "managed-closure" / "HelloWorldObject"
+    native_reference_root = repo_root / "artifacts" / "proof" / "native-reference" / "HelloWorldObject"
+
+    invoke_dotnet_build(proof_project_path, repo_root)
+    invoke_dotnet_build(driver_project_path, repo_root)
+    run_checked(
+        [
+            "dotnet",
+            str(driver_dll_path),
+            str(proof_dll_path),
+            str(managed_closure_root),
+        ],
+        cwd=repo_root,
+        failure_message=f"stage4 managed closure materialization failed: {proof_project_path}",
+    )
+    run_checked(
+        [
+            "dotnet",
+            str(driver_dll_path),
+            "emit-native-reference",
+            str(managed_closure_root),
+            str(native_reference_root),
+        ],
+        cwd=repo_root,
+        failure_message=f"stage4 native reference emission failed: {native_reference_root}",
+    )
+
+
+def invoke_stage4_native_reference_proof_run(repo_root: Path) -> None:
+    requested_binary_dir = repo_root / "artifacts" / "presets" / "windows-x64-reference"
+    run_binary_dir = allocate_run_scoped_binary_dir(requested_binary_dir)
+    native_reference_root = repo_root / "artifacts" / "proof" / "native-reference" / "HelloWorldObject"
+
+    run_checked(
+        ["cmake", "--preset", "windows-x64-reference", "-B", str(run_binary_dir)],
+        cwd=repo_root,
+        failure_message="cmake preset configure failed: windows-x64-reference",
+    )
+    run_checked(
+        [
+            "cmake",
+            "--build",
+            str(run_binary_dir),
+            "--config",
+            "Release",
+            "--target",
+            "chaos_stage4_hello_world_object_proof_run",
+        ],
+        cwd=repo_root,
+        failure_message="stage4 native reference proof run target failed: windows-x64-reference",
+    )
+    validate_stage4_proof_run_artifacts(native_reference_root)
+
+
+def validate_stage4_proof_run_artifacts(native_reference_root: Path) -> None:
+    run_root = native_reference_root / "run"
+    stdout_path = run_root / "stdout.log"
+    stderr_path = run_root / "stderr.log"
+    exit_code_path = run_root / "exit-code.txt"
+
+    required_paths = [stdout_path, stderr_path, exit_code_path]
+    for required_path in required_paths:
+        if not required_path.is_file():
+            raise RuntimeError(f"missing Stage 4 proof run artifact: {required_path}")
+
+    stdout_text = stdout_path.read_text(encoding="utf-8")
+    stderr_text = stderr_path.read_text(encoding="utf-8")
+    exit_code_text = exit_code_path.read_text(encoding="utf-8").strip()
+
+    try:
+        exit_code = int(exit_code_text)
+    except ValueError as exception:
+        raise RuntimeError(f"invalid Stage 4 proof exit code record: {exit_code_path}") from exception
+
+    if exit_code != 0:
+        message = f"stage4 native reference proof exit code mismatch: expected 0 actual {exit_code}"
+        if stderr_text.strip():
+            message = f"{message}\n{stderr_text.strip()}"
+        raise RuntimeError(message)
+
+    expected_stdout = "Hello, World!"
+    if expected_stdout not in stdout_text:
+        raise RuntimeError(f"stage4 native reference proof stdout mismatch: missing '{expected_stdout}'")
+
+
 def invoke_preset_build_smoke(preset_name: str, repo_root: Path, *, validate_only: bool = False) -> None:
     requested_binary_dir = repo_root / "artifacts" / "presets" / preset_name
     run_binary_dir = allocate_run_scoped_binary_dir(requested_binary_dir)
@@ -185,7 +275,7 @@ def main(argv: list[str] | None = None) -> int:
     invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "HelloWorld" / "Release" / "net8.0" / "HelloWorld.dll", ["HelloWorld smoke entry reached.", "register:Main"], repo_root)
     invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "GenericEcho" / "Release" / "net8.0" / "GenericEcho.dll", ["roadmap0", "42", "roadmap0:roadmap0"], repo_root)
     invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "ReflectionLite" / "Release" / "net8.0" / "ReflectionLite.dll", ["field=BackingField:Int32", "generic-method=String"], repo_root)
-    invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "PInvokeLite" / "Release" / "net8.0" / "PInvokeLite.dll", ["marshal=interop-smoke", "export=boom_smoke_add:7", "symbol=True"], repo_root)
+    invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "PInvokeLite" / "Release" / "net8.0" / "PInvokeLite.dll", ["marshal=interop-smoke", "export=chaos_smoke_add:7", "symbol=True"], repo_root)
     invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "HostEmbeddingLite" / "Release" / "net8.0" / "HostEmbeddingLite.dll", ["HostEmbeddingSession:InvokeManagedEntry:True", "guards=invalid-detach:True|double-start:True|unattached-entry:True"], repo_root)
 
     write_step("Validate Linux packaging routing smoke")
@@ -202,8 +292,23 @@ def main(argv: list[str] | None = None) -> int:
     )
 
     if host_profile == "windows":
+        write_step("Prepare Stage 4 native reference proof inputs")
+        invoke_stage4_native_reference_codegen(repo_root)
+
         write_step("Build Windows reference preset smoke")
         invoke_preset_build_smoke("windows-x64-reference", repo_root)
+
+        write_step("Run Stage 4 native reference proof")
+        invoke_stage4_native_reference_proof_run(repo_root)
+
+        write_gate_record(
+            artifact_root / "windows-stage4-native-reference.gate.json",
+            "windows-stage4-native-reference",
+            "passed",
+            "windows-x64-reference",
+            "Windows Stage 4 native reference proof build/run gate passed with Hello, World! stdout and exit code 0 artifacts.",
+            host_profile,
+        )
 
         write_step("Run Windows reference desktop trace compare")
         trace_path = artifact_root / "windows-warmup-trace.runtime.json"

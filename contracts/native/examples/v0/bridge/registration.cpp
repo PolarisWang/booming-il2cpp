@@ -1,9 +1,9 @@
-#include "codegen_bridge.h"
+﻿#include "codegen_bridge.h"
 
-namespace boom::contracts::native::examples {
+namespace chaos::contracts::native::examples {
 
 void RegistrationExample() {
-    const CodegenBridgeV0* bridge = boom_codegen_get_bridge_v0();
+    const CodegenBridgeV0* bridge = chaos_codegen_get_bridge_v0();
     if (bridge == nullptr) {
         return;
     }
@@ -19,11 +19,12 @@ void RegistrationExample() {
     options.image_name_utf8 = "GameAssembly";
 
     if (bridge->register_codegen(&code_registration, &metadata_registration, &options) !=
-        BOOM_BRIDGE_STATUS_OK) {
+        CHAOS_BRIDGE_STATUS_OK) {
         return;
     }
 
     (void)bridge->bootstrap_runtime();
 }
 
-}  // namespace boom::contracts::native::examples
+}  // namespace chaos::contracts::native::examples
+

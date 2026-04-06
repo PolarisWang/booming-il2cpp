@@ -1,6 +1,6 @@
-#include "codegen_bridge.h"
+﻿#include "codegen_bridge.h"
 
-namespace boom::contracts::native::examples {
+namespace chaos::contracts::native::examples {
 
 void InvokeAndDelegateExample(
     RuntimeState* runtime,
@@ -8,7 +8,7 @@ void InvokeAndDelegateExample(
     TypeInfoHandle instance_type,
     MethodInfoHandle declared_method,
     void* instance) {
-    const CodegenBridgeV0* bridge = boom_codegen_get_bridge_v0();
+    const CodegenBridgeV0* bridge = chaos_codegen_get_bridge_v0();
     if (bridge == nullptr) {
         return;
     }
@@ -46,8 +46,9 @@ void InvokeAndDelegateExample(
             &exception);
     }
 
-    void* icall = bridge->resolve_icall("Boom.Runtime.InternalCalls::Tick");
+    void* icall = bridge->resolve_icall("Chaos.Runtime.InternalCalls::Tick");
     (void)icall;
 }
 
-}  // namespace boom::contracts::native::examples
+}  // namespace chaos::contracts::native::examples
+

@@ -3,6 +3,7 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Chaos.IL2CPP.CodeGen\Chaos.IL2CPP.CodeGen.csproj" />
     <ProjectReference Include="..\Chaos.IL2CPP.Contracts\Chaos.IL2CPP.Contracts.csproj" />
     <ProjectReference Include="..\Chaos.IL2CPP.Pipeline\Chaos.IL2CPP.Pipeline.csproj" />
   </ItemGroup>

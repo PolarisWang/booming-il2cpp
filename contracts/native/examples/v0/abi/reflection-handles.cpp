@@ -1,13 +1,13 @@
-#include "runtime_abi.h"
+﻿#include "runtime_abi.h"
 
-namespace boom::contracts::native::examples {
+namespace chaos::contracts::native::examples {
 
 void ReflectionHandlesExample(
     RuntimeState* runtime,
     ThreadState* thread,
     AssemblyHandle assembly,
     void* instance) {
-    const RuntimeAbiV0* abi = boom_runtime_get_abi_v0();
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
     if (abi == nullptr) {
         return;
     }
@@ -49,4 +49,5 @@ void ReflectionHandlesExample(
     (void)generic_context;
 }
 
-}  // namespace boom::contracts::native::examples
+}  // namespace chaos::contracts::native::examples
+

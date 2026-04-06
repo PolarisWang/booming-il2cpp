@@ -2,6 +2,7 @@
 
 | 任务 | lifecycle_status | phase | 最近更新 | 下一步 | active |
 | --- | --- | --- | --- | --- | --- |
+| `20260406-02-stage-4-native-bootstrap-and-reference-proof` | `completed` | `archived` | `2026-04-06 12:29:22 +08:00` | 无。若继续 reboot 主线，下一步由父 roadmap 决定是否派生 `Stage 5: Post-Proof Split`。 | `no` |
 | `20260406-01-stage-3-managed-minimal-closure` | `completed` | `archived` | `2026-04-06 01:21:23 +08:00` | 无。若继续 reboot 主线，下一步由父 roadmap 决定是否派生 Stage 4 `Native Bootstrap And Reference Proof`。 | `no` |
 | `20260405-04-stage-2-helloworld-proof-spec` | `completed` | `archived` | `2026-04-06 00:04:02 +08:00` | 无。若继续 reboot 主线，下一步由父 roadmap 决定 Stage 3 / Stage 4 的派生节奏。 | `no` |
 | `20260405-03-stage-1b-structure-and-test-migration` | `completed` | `archived` | `2026-04-05 23:32:04 +08:00` | 无。若继续 reboot 主线，下一步从父 roadmap 派生 Stage 2 `HelloWorld` proof spec。 | `no` |

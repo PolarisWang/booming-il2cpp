@@ -1,4 +1,4 @@
-#include "runtime_abi.h"
+﻿#include "runtime_abi.h"
 
 #include <type_traits>
 
@@ -7,7 +7,7 @@ namespace {
 void CompileOnlyRuntimeAbiSmoke(const RuntimeAbiV0* abi) {
     RuntimeInitParams init_params = {};
     init_params.struct_size = sizeof(init_params);
-    init_params.init_flags = BOOM_RUNTIME_INIT_ENABLE_LOGGING | BOOM_RUNTIME_INIT_ENABLE_PROFILING;
+    init_params.init_flags = CHAOS_RUNTIME_INIT_ENABLE_LOGGING | CHAOS_RUNTIME_INIT_ENABLE_PROFILING;
     init_params.host_name_utf8 = "compile-only";
     init_params.runtime_tag_utf8 = "abi-v0";
 
@@ -78,8 +78,9 @@ void CompileOnlyRuntimeAbiSmoke(const RuntimeAbiV0* abi) {
     abi->runtime_shutdown(runtime);
 }
 
-static_assert(BOOM_RUNTIME_ABI_V0 == 0u, "runtime ABI version must remain v0");
+static_assert(CHAOS_RUNTIME_ABI_V0 == 0u, "runtime ABI version must remain v0");
 static_assert(std::is_same<RuntimeStatus, int32_t>::value, "runtime status must stay int32_t");
 static_assert(std::is_same<GCHandle, uint64_t>::value, "GC handle type drifted");
 
 }  // namespace
+

@@ -5,7 +5,7 @@ task_type: roadmap
 lifecycle_status: in_progress
 phase: roadmap
 created_at: 2026-04-05 20:51:20 +08:00
-updated_at: 2026-04-06 01:21:23 +08:00
+updated_at: 2026-04-06 12:29:22 +08:00
 current_dir: docs/dev/in-progress/20260405-01-il2cpp-reboot-after-abandoned-roadmap
 parent_task_id:
 source_task_id: 20260329-01-il2cpp-like-cs-to-cpp
@@ -17,11 +17,11 @@ active: true
 - brainstorm: `docs/dev/in-progress/20260405-01-il2cpp-reboot-after-abandoned-roadmap/brainstorm-v1-01.md`
 - design: `docs/dev/in-progress/20260405-01-il2cpp-reboot-after-abandoned-roadmap/design-v1-01.md`
 - roadmap_or_plan: `docs/dev/in-progress/20260405-01-il2cpp-reboot-after-abandoned-roadmap/roadmap-v1-01.md`
-- latest_progress: `docs/dev/in-progress/20260405-01-il2cpp-reboot-after-abandoned-roadmap/notes/progress-v1-05.md`
+- latest_progress: `docs/dev/in-progress/20260405-01-il2cpp-reboot-after-abandoned-roadmap/notes/progress-v1-09.md`
 - finding: `docs/dev/in-progress/20260405-01-il2cpp-reboot-after-abandoned-roadmap/finding-2026-04-05-01-il2cpp-reboot-after-abandoned-roadmap.md`
 
 ## 当前判断
-- current_focus: 作为 reboot 父任务，维护轻量 roadmap、阶段边界和子任务映射；Stage 3 已完成归档，当前 active 上下文回到父 roadmap，并进入 Stage 4 派生决策点。
+- current_focus: 作为 reboot 父任务，维护轻量 roadmap、阶段边界和子任务映射；Stage 4 子任务已完成归档，父任务重新接回 active 上下文，当前唯一待决事项是是否派生 Stage 5 `Post-Proof Split`。
 - why_now: 用户明确要求废弃旧任务，并重新 brainstorm 一份计划，而且要求完整梳理废弃方案全过程。
 - done_definition: roadmap 的阶段、依赖、子任务映射和推进顺序稳定，后续执行主要在 roadmap-child 子任务中推进。
 
@@ -52,11 +52,16 @@ active: true
 - 2026-04-06 00:55:37 +08:00: Stage 3 已完成第一轮实现与计划内验证；通用 managed closure pipeline 已能从真实 `HelloWorldObject.dll` 产出与 Stage 2 canonical examples 对齐的五件套 bundle，且 Stage 2 回归未受影响。
 - 2026-04-06 01:18:35 +08:00: Stage 3 已补齐正式 wiki / registry / unified-entry 接入；`pipeline/completion-managed-closure` 与 `test registry check-consistency --json` 均已通过。
 - 2026-04-06 01:21:23 +08:00: `20260406-01-stage-3-managed-minimal-closure` 已完成归档；父 roadmap 重新接回 active 上下文，等待 Stage 4 `Native Bootstrap And Reference Proof` 的派生决策。
+- 2026-04-06 09:43:58 +08:00: 已确认 Stage 4 具备直接派生为单个 `plan` 子任务的条件；当前不再继续停留在父 roadmap 层讨论排序。
+- 2026-04-06 09:43:58 +08:00: 已创建 `20260406-02-stage-4-native-bootstrap-and-reference-proof`，并写入首轮 brainstorm/design；active 上下文已切换到该子任务。
+- 2026-04-06 10:02:27 +08:00: Stage 4 已完成 `plan-v1-01.md` 与长期 spec 文档，并通过 TDD 落地 first generated C++ emission skeleton。
+- 2026-04-06 12:29:22 +08:00: Stage 4 已完成归档；真实 `Windows x64` native proof 已输出 `Hello, World!` 且 `verify-roadmap-0` Windows gate 已切到真实 `proof_run`。
+- 2026-04-06 12:29:22 +08:00: active 上下文已从 Stage 4 子任务切回父 roadmap，等待 post-proof follow-up 的路线决策。
 
 ## 下一步
-- next_action: 维护 roadmap 状态与 parent-child 依赖；当前进入 Stage 4 派生决策点，准备创建 `Native Bootstrap And Reference Proof` 子任务。
+- next_action: 基于已跑通的 `HelloWorldObject` native reference proof，判断是否需要派生 `Stage 5: Post-Proof Split` 子任务。
 - owner: codex
-- trigger: `20260406-01-stage-3-managed-minimal-closure` 已完成归档，reboot 主线重新回到父 roadmap 决策层。
+- trigger: Stage 4 的真实 proof build/run 与 `verify-roadmap-0` Windows gate 已通过，父 roadmap 重新成为 active 决策入口。
 
 ## 风险/阻塞
 ### risks
@@ -79,3 +84,4 @@ active: true
 - `20260405-03-stage-1b-structure-and-test-migration`
 - `20260405-04-stage-2-helloworld-proof-spec`
 - `20260406-01-stage-3-managed-minimal-closure`
+- `20260406-02-stage-4-native-bootstrap-and-reference-proof`

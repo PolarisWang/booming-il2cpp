@@ -40,24 +40,24 @@ function Invoke-HandoffCase {
         [string[]]$RunArguments
     )
 
-    $originalRequest = [Environment]::GetEnvironmentVariable("BOOM_RUN_REQUEST_WINDOWS_TERMINAL", "Process")
-    $originalCommand = [Environment]::GetEnvironmentVariable("BOOM_RUN_WINDOWS_TERMINAL_COMMAND", "Process")
-    $originalLog = [Environment]::GetEnvironmentVariable("BOOM_RUN_WT_LOG", "Process")
+    $originalRequest = [Environment]::GetEnvironmentVariable("CHAOS_RUN_REQUEST_WINDOWS_TERMINAL", "Process")
+    $originalCommand = [Environment]::GetEnvironmentVariable("CHAOS_RUN_WINDOWS_TERMINAL_COMMAND", "Process")
+    $originalLog = [Environment]::GetEnvironmentVariable("CHAOS_RUN_WT_LOG", "Process")
     $originalWtSession = [Environment]::GetEnvironmentVariable("WT_SESSION", "Process")
 
     try {
-        [Environment]::SetEnvironmentVariable("BOOM_RUN_REQUEST_WINDOWS_TERMINAL", "1", "Process")
-        [Environment]::SetEnvironmentVariable("BOOM_RUN_WINDOWS_TERMINAL_COMMAND", $FakeWtPath, "Process")
-        [Environment]::SetEnvironmentVariable("BOOM_RUN_WT_LOG", $HandoffLog, "Process")
+        [Environment]::SetEnvironmentVariable("CHAOS_RUN_REQUEST_WINDOWS_TERMINAL", "1", "Process")
+        [Environment]::SetEnvironmentVariable("CHAOS_RUN_WINDOWS_TERMINAL_COMMAND", $FakeWtPath, "Process")
+        [Environment]::SetEnvironmentVariable("CHAOS_RUN_WT_LOG", $HandoffLog, "Process")
         [Environment]::SetEnvironmentVariable("WT_SESSION", $null, "Process")
 
         & powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File $ScriptPath @RunArguments
         $exitCode = $LASTEXITCODE
     }
     finally {
-        [Environment]::SetEnvironmentVariable("BOOM_RUN_REQUEST_WINDOWS_TERMINAL", $originalRequest, "Process")
-        [Environment]::SetEnvironmentVariable("BOOM_RUN_WINDOWS_TERMINAL_COMMAND", $originalCommand, "Process")
-        [Environment]::SetEnvironmentVariable("BOOM_RUN_WT_LOG", $originalLog, "Process")
+        [Environment]::SetEnvironmentVariable("CHAOS_RUN_REQUEST_WINDOWS_TERMINAL", $originalRequest, "Process")
+        [Environment]::SetEnvironmentVariable("CHAOS_RUN_WINDOWS_TERMINAL_COMMAND", $originalCommand, "Process")
+        [Environment]::SetEnvironmentVariable("CHAOS_RUN_WT_LOG", $originalLog, "Process")
         [Environment]::SetEnvironmentVariable("WT_SESSION", $originalWtSession, "Process")
     }
 
@@ -86,15 +86,15 @@ New-Item -ItemType Directory -Force -Path $testRoot | Out-Null
 @echo off
 setlocal EnableDelayedExpansion
 set "ALL_ARGS=%*"
->"%BOOM_RUN_WT_LOG%" echo FILE=%~f0
->>"%BOOM_RUN_WT_LOG%" echo HANDOFF=%BOOM_RUN_WINDOWS_TERMINAL_HANDOFF%
->>"%BOOM_RUN_WT_LOG%" echo REQUEST=%BOOM_RUN_REQUEST_WINDOWS_TERMINAL%
->>"%BOOM_RUN_WT_LOG%" echo ARGS=!ALL_ARGS!
+>"%CHAOS_RUN_WT_LOG%" echo FILE=%~f0
+>>"%CHAOS_RUN_WT_LOG%" echo HANDOFF=%CHAOS_RUN_WINDOWS_TERMINAL_HANDOFF%
+>>"%CHAOS_RUN_WT_LOG%" echo REQUEST=%CHAOS_RUN_REQUEST_WINDOWS_TERMINAL%
+>>"%CHAOS_RUN_WT_LOG%" echo ARGS=!ALL_ARGS!
 set ARG_INDEX=0
 :next_arg
 if "%~1"=="" goto end_args
 set /a ARG_INDEX+=1
->>"%BOOM_RUN_WT_LOG%" echo ARG!ARG_INDEX!=[%~1]
+>>"%CHAOS_RUN_WT_LOG%" echo ARG!ARG_INDEX!=[%~1]
 shift
 goto next_arg
 :end_args

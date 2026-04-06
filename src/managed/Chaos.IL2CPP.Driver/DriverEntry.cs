@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Chaos.IL2CPP.CodeGen;
 using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.Pipeline;
 
@@ -31,11 +32,42 @@ public sealed class DriverEntry
         return 0;
     }
 
+    public int Run(NativeReferenceProofRequest request)
+    {
+        var emitter = new NativeReferenceProofEmitter();
+        var result = emitter.Generate(request);
+
+        Directory.CreateDirectory(result.OutputRootPath);
+        foreach (var generatedSource in result.GeneratedSources)
+        {
+            var targetPath = Path.Combine(result.OutputRootPath, generatedSource.RelativePath.Replace('/', Path.DirectorySeparatorChar));
+            Directory.CreateDirectory(Path.GetDirectoryName(targetPath)!);
+            File.WriteAllText(targetPath, generatedSource.Contents);
+        }
+
+        WriteJson(Path.Combine(result.OutputRootPath, NativeReferenceArtifactNames.ProofManifest), result.ProofManifest);
+        return 0;
+    }
+
     public static int Main(string[] args)
     {
+        if (args.Length == 3 && string.Equals(args[0], "emit-native-reference", StringComparison.Ordinal))
+        {
+            try
+            {
+                return new DriverEntry().Run(new NativeReferenceProofRequest(args[1], args[2]));
+            }
+            catch (Exception exception)
+            {
+                Console.Error.WriteLine(exception);
+                return 1;
+            }
+        }
+
         if (args.Length != 2)
         {
             Console.Error.WriteLine("usage: Chaos.IL2CPP.Driver <input-assembly-path> <output-root>");
+            Console.Error.WriteLine("   or: Chaos.IL2CPP.Driver emit-native-reference <managed-closure-root> <output-root>");
             return 1;
         }
 

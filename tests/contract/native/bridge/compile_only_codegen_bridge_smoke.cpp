@@ -1,4 +1,4 @@
-#include "codegen_bridge.h"
+﻿#include "codegen_bridge.h"
 
 #include <type_traits>
 
@@ -64,11 +64,15 @@ void CompileOnlyCodegenBridgeSmoke(const CodegenBridgeV0* bridge) {
         sizeof(output_value),
         &exception);
 
-    (void)bridge->resolve_icall("Boom.Runtime.InternalCalls::Tick");
+    (void)bridge->resolve_icall("Chaos.Runtime.InternalCalls::Tick");
     (void)field;
 }
 
-static_assert(BOOM_CODEGEN_BRIDGE_V0 == 0u, "bridge version must remain v0");
+static_assert(CHAOS_CODEGEN_BRIDGE_V0 == 0u, "bridge version must remain v0");
 static_assert(std::is_same<BridgeStatus, int32_t>::value, "bridge status must stay int32_t");
+static_assert(CHAOS_BRIDGE_STATUS_NOT_SUPPORTED == 4, "bridge not-supported status must remain stable");
+static_assert(CHAOS_BRIDGE_STATUS_MANAGED_EXCEPTION == 5, "bridge managed-exception status must remain stable");
+static_assert(CHAOS_BRIDGE_STATUS_INTERNAL_ERROR == 6, "bridge internal-error status must remain stable");
 
 }  // namespace
+

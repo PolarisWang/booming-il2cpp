@@ -10,6 +10,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 EXPECTED_MANAGED_PROJECTS: dict[str, list[str]] = {
     "Chaos.IL2CPP.Contracts": [],
     "Chaos.IL2CPP.Driver": [
+        "Chaos.IL2CPP.CodeGen",
         "Chaos.IL2CPP.Contracts",
         "Chaos.IL2CPP.Pipeline",
     ],
@@ -39,6 +40,7 @@ EXPECTED_MANAGED_PROJECTS: dict[str, list[str]] = {
     "Chaos.IL2CPP.CodeGen": [
         "Chaos.IL2CPP.Contracts",
         "Chaos.IL2CPP.MetadataWriter",
+        "Scriban",
     ],
 }
 

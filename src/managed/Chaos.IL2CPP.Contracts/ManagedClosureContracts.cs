@@ -453,3 +453,50 @@ public sealed record ManagedClosureResult
 
     public required ManagedClosureManifestArtifact ClosureManifest { get; init; }
 }
+
+public sealed record NativeReferenceProofRequest(string ManagedClosureRootPath, string OutputRootPath);
+
+public static class NativeReferenceArtifactNames
+{
+    public const string GeneratedDirectory = "generated";
+    public const string GeneratedTranslationUnit = "generated/native-reference.generated.cpp";
+    public const string ProofManifest = "native-proof.manifest.json";
+}
+
+public sealed record NativeReferenceGeneratedArtifactRef
+{
+    public required string Kind { get; init; }
+
+    public required string Path { get; init; }
+}
+
+public sealed record NativeReferenceProofManifestArtifact
+{
+    public string FormatVersion { get; init; } = "v0";
+
+    public string ArtifactKind { get; init; } = "nativeReferenceProofManifest";
+
+    public required string AssemblyName { get; init; }
+
+    public required string EntrySubjectId { get; init; }
+
+    public required string ManagedClosureRootPath { get; init; }
+
+    public required IReadOnlyList<NativeReferenceGeneratedArtifactRef> GeneratedArtifacts { get; init; }
+}
+
+public sealed record NativeReferenceGeneratedSource
+{
+    public required string RelativePath { get; init; }
+
+    public required string Contents { get; init; }
+}
+
+public sealed record NativeReferenceProofResult
+{
+    public required string OutputRootPath { get; init; }
+
+    public required NativeReferenceProofManifestArtifact ProofManifest { get; init; }
+
+    public required IReadOnlyList<NativeReferenceGeneratedSource> GeneratedSources { get; init; }
+}

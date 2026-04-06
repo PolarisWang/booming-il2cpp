@@ -1,0 +1,98 @@
+#include "support.h"
+
+#include <cstdio>
+#include <string>
+
+namespace chaos::il2cpp::support {
+
+namespace {
+
+// Mirrors the proof-only UTF-8 string layout currently produced by runtime-core.
+struct StringObjectHeader {
+    TypeInfoHandle type;
+    uintptr_t byte_count;
+};
+
+const StringObjectHeader* TryGetStringHeader(const void* string_object) {
+    if (string_object == nullptr) {
+        return nullptr;
+    }
+
+    return reinterpret_cast<const StringObjectHeader*>(string_object);
+}
+
+}  // namespace
+
+const char* TryGetUtf8View(const void* string_object, uintptr_t* out_byte_count) {
+    if (out_byte_count != nullptr) {
+        *out_byte_count = 0u;
+    }
+
+    const StringObjectHeader* header = TryGetStringHeader(string_object);
+    if (header == nullptr) {
+        return nullptr;
+    }
+
+    if (out_byte_count != nullptr) {
+        *out_byte_count = header->byte_count;
+    }
+
+    return reinterpret_cast<const char*>(header + 1);
+}
+
+void* CHAOS_RUNTIME_ABI_CALL ConcatStringPair(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    const void* left_string,
+    const void* right_string) {
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr || runtime_state == nullptr || thread_state == nullptr) {
+        return nullptr;
+    }
+
+    uintptr_t left_byte_count = 0u;
+    uintptr_t right_byte_count = 0u;
+    const char* left_utf8 = TryGetUtf8View(left_string, &left_byte_count);
+    const char* right_utf8 = TryGetUtf8View(right_string, &right_byte_count);
+    if ((left_string != nullptr && left_utf8 == nullptr) || (right_string != nullptr && right_utf8 == nullptr)) {
+        return nullptr;
+    }
+
+    std::string combined;
+    combined.reserve(static_cast<size_t>(left_byte_count + right_byte_count));
+    if (left_utf8 != nullptr) {
+        combined.append(left_utf8, static_cast<size_t>(left_byte_count));
+    }
+
+    if (right_utf8 != nullptr) {
+        combined.append(right_utf8, static_cast<size_t>(right_byte_count));
+    }
+
+    return abi->string_new_utf8(runtime_state, thread_state, combined.c_str(), combined.size());
+}
+
+int32_t CHAOS_RUNTIME_ABI_CALL WriteLineString(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    const void* string_object) {
+    (void)runtime_state;
+    (void)thread_state;
+
+    uintptr_t byte_count = 0u;
+    const char* utf8_text = TryGetUtf8View(string_object, &byte_count);
+    if (string_object != nullptr && utf8_text == nullptr) {
+        return 1;
+    }
+
+    if (utf8_text != nullptr && std::fwrite(utf8_text, 1u, static_cast<size_t>(byte_count), stdout) != byte_count) {
+        return 1;
+    }
+
+    if (std::fputc('\n', stdout) == EOF) {
+        return 1;
+    }
+
+    return std::fflush(stdout) == 0 ? 0 : 1;
+}
+
+}  // namespace chaos::il2cpp::support

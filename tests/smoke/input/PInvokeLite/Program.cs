@@ -9,7 +9,7 @@ internal static class NativeMethods
 
 internal static class NativeExports
 {
-    internal const string AddEntryPoint = "boom_smoke_add";
+    internal const string AddEntryPoint = "chaos_smoke_add";
 
     [UnmanagedCallersOnly(EntryPoint = AddEntryPoint)]
     public static int Add(int left, int right)

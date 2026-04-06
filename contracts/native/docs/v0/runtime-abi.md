@@ -1,97 +1,98 @@
-# Runtime ABI v0
+﻿# Runtime ABI v0
 
 > first-proof boundary supplement: `contracts/docs/v0/runtime-abi-proof-boundary.md`
 
-## 定位
+## 瀹氫綅
 
-- `boom_runtime_get_abi_v0()` 返回进程级函数表，供 bridge、host embedding、手写 smoke 和少量平台 glue 统一使用。
-- `Runtime ABI` 是低层基础操作面，只承诺稳定的句柄、生命周期与基础内存/反射入口，不承诺高层生成代码语义。
-- `v0` 的目标是冻结后续实现必须对齐的边界，而不是提前实现完整 runtime core。
+- `chaos_runtime_get_abi_v0()` 杩斿洖杩涚▼绾у嚱鏁拌〃锛屼緵 bridge銆乭ost embedding銆佹墜鍐?smoke 鍜屽皯閲忓钩鍙?glue 缁熶竴浣跨敤銆?
+- `Runtime ABI` 鏄綆灞傚熀纭€鎿嶄綔闈紝鍙壙璇虹ǔ瀹氱殑鍙ユ焺銆佺敓鍛藉懆鏈熶笌鍩虹鍐呭瓨/鍙嶅皠鍏ュ彛锛屼笉鎵胯楂樺眰鐢熸垚浠ｇ爜璇箟銆?
+- `v0` 鐨勭洰鏍囨槸鍐荤粨鍚庣画瀹炵幇蹇呴』瀵归綈鐨勮竟鐣岋紝鑰屼笉鏄彁鍓嶅疄鐜板畬鏁?runtime core銆?
 
-## 调用约定
+## 璋冪敤绾﹀畾
 
-- 所有导出入口都使用 `BOOM_RUNTIME_ABI_EXPORT` 与 `BOOM_RUNTIME_ABI_CALL`。
-- 宿主应先调用 `boom_runtime_get_abi_v0()`，再缓存返回的 `RuntimeAbiV0*`。
-- `RuntimeState*` 表示进程级 runtime 状态；`ThreadState*` 表示当前线程的附着状态。
-- 所有 `*Handle` 都是不透明句柄，只能通过 ABI/bridge 传递，不能解引用、序列化或假设布局。
-- `RuntimeStatus` 在 `v0` 中冻结为 32-bit 有符号整数，避免 ABI 依赖编译器对 C `enum` 的底层表示约定。
+- 鎵€鏈夊鍑哄叆鍙ｉ兘浣跨敤 `CHAOS_RUNTIME_ABI_EXPORT` 涓?`CHAOS_RUNTIME_ABI_CALL`銆?
+- 瀹夸富搴斿厛璋冪敤 `chaos_runtime_get_abi_v0()`锛屽啀缂撳瓨杩斿洖鐨?`RuntimeAbiV0*`銆?
+- `RuntimeState*` 琛ㄧず杩涚▼绾?runtime 鐘舵€侊紱`ThreadState*` 琛ㄧず褰撳墠绾跨▼鐨勯檮鐫€鐘舵€併€?
+- 鎵€鏈?`*Handle` 閮芥槸涓嶉€忔槑鍙ユ焺锛屽彧鑳介€氳繃 ABI/bridge 浼犻€掞紝涓嶈兘瑙ｅ紩鐢ㄣ€佸簭鍒楀寲鎴栧亣璁惧竷灞€銆?
+- `RuntimeStatus` 鍦?`v0` 涓喕缁撲负 32-bit 鏈夌鍙锋暣鏁帮紝閬垮厤 ABI 渚濊禆缂栬瘧鍣ㄥ C `enum` 鐨勫簳灞傝〃绀虹害瀹氥€?
 
-## 句柄集合
+## 鍙ユ焺闆嗗悎
 
-| 句柄 | 含义 | 典型来源 |
+| 鍙ユ焺 | 鍚箟 | 鍏稿瀷鏉ユ簮 |
 | --- | --- | --- |
-| `TypeInfoHandle` | 托管类型元数据句柄 | `image_find_type` |
-| `MethodInfoHandle` | 方法句柄 | `type_find_method` |
-| `FieldInfoHandle` | 字段句柄 | `type_find_field` |
-| `PropertyInfoHandle` | 属性句柄 | `type_find_property` |
-| `EventInfoHandle` | 事件句柄 | `type_find_event` |
-| `ParameterInfoHandle` | 参数句柄 | `method_get_parameter` |
-| `GenericContextHandle` | 泛型上下文句柄 | `method_get_generic_context` |
-| `AssemblyHandle` | 程序集句柄 | 上层注册或宿主枚举 |
-| `ImageHandle` | 程序集镜像句柄 | `assembly_get_image` |
-| `ExceptionHandle` | 托管异常对象句柄 | `method_invoke` 或宿主保留 |
+| `TypeInfoHandle` | 鎵樼绫诲瀷鍏冩暟鎹彞鏌?| `image_find_type` |
+| `MethodInfoHandle` | 鏂规硶鍙ユ焺 | `type_find_method` |
+| `FieldInfoHandle` | 瀛楁鍙ユ焺 | `type_find_field` |
+| `PropertyInfoHandle` | 灞炴€у彞鏌?| `type_find_property` |
+| `EventInfoHandle` | 浜嬩欢鍙ユ焺 | `type_find_event` |
+| `ParameterInfoHandle` | 鍙傛暟鍙ユ焺 | `method_get_parameter` |
+| `GenericContextHandle` | 娉涘瀷涓婁笅鏂囧彞鏌?| `method_get_generic_context` |
+| `AssemblyHandle` | 绋嬪簭闆嗗彞鏌?| 涓婂眰娉ㄥ唽鎴栧涓绘灇涓?|
+| `ImageHandle` | 绋嬪簭闆嗛暅鍍忓彞鏌?| `assembly_get_image` |
+| `ExceptionHandle` | 鎵樼寮傚父瀵硅薄鍙ユ焺 | `method_invoke` 鎴栧涓讳繚鐣?|
 
-## 错误模型
+## 閿欒妯″瀷
 
-- `Runtime ABI` 的错误边界比 bridge 更底层、更显式。调用方必须检查状态码、空指针或输出异常句柄，不能假设失败会被自动提升成高层异常。
-- 查询类入口遵循“状态码或空指针”模型：
-  - `runtime_init`、`thread_attach`、`class_init`、`field_get_value`、`field_set_value`、`method_invoke` 返回 `RuntimeStatus`
-  - `assembly_get_image`、`image_find_type`、`type_find_method`、`type_find_field`、`type_find_property`、`type_find_event`、`method_get_parameter`、`method_get_generic_context` 在无法解析时返回空句柄
-- 分配类入口 `object_new`、`array_new`、`string_new_utf8` 失败时返回空指针；宿主必须把空返回值视为显式失败，而不是继续向下执行。
-- 托管异常不会通过隐式 side effect 抛出。需要由 `raise_managed_exception` 显式触发，或者由 `method_invoke` 通过 `out_exception` 返回。
-- 高阶句柄在 `v0` 中按完整语义承诺处理，不是占位符；后续实现必须保证句柄可稳定驱动字段访问、方法调用和反射查询。
+- `Runtime ABI` 鐨勯敊璇竟鐣屾瘮 bridge 鏇村簳灞傘€佹洿鏄惧紡銆傝皟鐢ㄦ柟蹇呴』妫€鏌ョ姸鎬佺爜銆佺┖鎸囬拡鎴栬緭鍑哄紓甯稿彞鏌勶紝涓嶈兘鍋囪澶辫触浼氳鑷姩鎻愬崌鎴愰珮灞傚紓甯搞€?
+- 鏌ヨ绫诲叆鍙ｉ伒寰€滅姸鎬佺爜鎴栫┖鎸囬拡鈥濇ā鍨嬶細
+  - `runtime_init`銆乣thread_attach`銆乣class_init`銆乣field_get_value`銆乣field_set_value`銆乣method_invoke` 杩斿洖 `RuntimeStatus`
+  - `assembly_get_image`銆乣image_find_type`銆乣type_find_method`銆乣type_find_field`銆乣type_find_property`銆乣type_find_event`銆乣method_get_parameter`銆乣method_get_generic_context` 鍦ㄦ棤娉曡В鏋愭椂杩斿洖绌哄彞鏌?
+- 鍒嗛厤绫诲叆鍙?`object_new`銆乣array_new`銆乣string_new_utf8` 澶辫触鏃惰繑鍥炵┖鎸囬拡锛涘涓诲繀椤绘妸绌鸿繑鍥炲€艰涓烘樉寮忓け璐ワ紝鑰屼笉鏄户缁悜涓嬫墽琛屻€?
+- 鎵樼寮傚父涓嶄細閫氳繃闅愬紡 side effect 鎶涘嚭銆傞渶瑕佺敱 `raise_managed_exception` 鏄惧紡瑙﹀彂锛屾垨鑰呯敱 `method_invoke` 閫氳繃 `out_exception` 杩斿洖銆?
+- 楂橀樁鍙ユ焺鍦?`v0` 涓寜瀹屾暣璇箟鎵胯澶勭悊锛屼笉鏄崰浣嶇锛涘悗缁疄鐜板繀椤讳繚璇佸彞鏌勫彲绋冲畾椹卞姩瀛楁璁块棶銆佹柟娉曡皟鐢ㄥ拰鍙嶅皠鏌ヨ銆?
 
-## 函数面划分
+## 鍑芥暟闈㈠垝鍒?
 
-### 生命周期
+### 鐢熷懡鍛ㄦ湡
 
-| 入口 | 参数语义 | 返回/约束 |
+| 鍏ュ彛 | 鍙傛暟璇箟 | 杩斿洖/绾︽潫 |
 | --- | --- | --- |
-| `runtime_init` | `init_params` 描述宿主名、runtime tag 与初始化 flag；`config` 可选提供分配器；`out_runtime_state` 返回进程级状态 | 成功返回 `BOOM_RUNTIME_STATUS_OK` 并写出 `runtime_state` |
-| `runtime_shutdown` | 销毁 `runtime_init` 返回的进程级状态 | 无返回值；调用方负责保证线程已分离 |
-| `thread_attach` | 将当前原生线程附着到指定 runtime | 成功后写出 `ThreadState*` |
-| `thread_detach` | 解除当前线程与 runtime 的绑定 | 无返回值；仅用于已成功附着的线程 |
+| `runtime_init` | `init_params` 鎻忚堪瀹夸富鍚嶃€乺untime tag 涓庡垵濮嬪寲 flag锛沗config` 鍙€夋彁渚涘垎閰嶅櫒锛沗out_runtime_state` 杩斿洖杩涚▼绾х姸鎬?| 鎴愬姛杩斿洖 `CHAOS_RUNTIME_STATUS_OK` 骞跺啓鍑?`runtime_state` |
+| `runtime_shutdown` | 閿€姣?`runtime_init` 杩斿洖鐨勮繘绋嬬骇鐘舵€?| 鏃犺繑鍥炲€硷紱璋冪敤鏂硅礋璐ｄ繚璇佺嚎绋嬪凡鍒嗙 |
+| `thread_attach` | 灏嗗綋鍓嶅師鐢熺嚎绋嬮檮鐫€鍒版寚瀹?runtime | 鎴愬姛鍚庡啓鍑?`ThreadState*` |
+| `thread_detach` | 瑙ｉ櫎褰撳墠绾跨▼涓?runtime 鐨勭粦瀹?| 鏃犺繑鍥炲€硷紱浠呯敤浜庡凡鎴愬姛闄勭潃鐨勭嚎绋?|
 
-### 分配与类初始化
+### 鍒嗛厤涓庣被鍒濆鍖?
 
-| 入口 | 参数语义 | 返回/约束 |
+| 鍏ュ彛 | 鍙傛暟璇箟 | 杩斿洖/绾︽潫 |
 | --- | --- | --- |
-| `object_new` | 按 `type` 分配单对象实例 | 成功返回对象指针，失败返回空 |
-| `array_new` | 按元素类型和长度分配数组 | 成功返回数组对象指针，失败返回空 |
-| `string_new_utf8` | 使用 UTF-8 字节创建托管字符串 | 成功返回字符串对象指针，失败返回空 |
-| `class_init` | 触发类型静态初始化或确保类已准备好 | 返回显式状态码 |
+| `object_new` | 鎸?`type` 鍒嗛厤鍗曞璞″疄渚?| 鎴愬姛杩斿洖瀵硅薄鎸囬拡锛屽け璐ヨ繑鍥炵┖ |
+| `array_new` | 鎸夊厓绱犵被鍨嬪拰闀垮害鍒嗛厤鏁扮粍 | 鎴愬姛杩斿洖鏁扮粍瀵硅薄鎸囬拡锛屽け璐ヨ繑鍥炵┖ |
+| `string_new_utf8` | 浣跨敤 UTF-8 瀛楄妭鍒涘缓鎵樼瀛楃涓?| 鎴愬姛杩斿洖瀛楃涓插璞℃寚閽堬紝澶辫触杩斿洖绌?|
+| `class_init` | 瑙﹀彂绫诲瀷闈欐€佸垵濮嬪寲鎴栫‘淇濈被宸插噯澶囧ソ | 杩斿洖鏄惧紡鐘舵€佺爜 |
 
-### GC handle 与异常
+### GC handle 涓庡紓甯?
 
-| 入口 | 参数语义 | 返回/约束 |
+| 鍏ュ彛 | 鍙傛暟璇箟 | 杩斿洖/绾︽潫 |
 | --- | --- | --- |
-| `gc_handle_new` | 为对象创建稳定 handle；`pinned=true` 表示请求 pin | 成功返回非零 `GCHandle` |
-| `gc_handle_free` | 释放先前分配的 handle | 允许对宿主缓存的 handle 做显式清理 |
-| `raise_managed_exception` | 把给定异常句柄提升到当前线程的托管异常边界 | 只负责显式触发，不返回状态 |
+| `gc_handle_new` | 涓哄璞″垱寤虹ǔ瀹?handle锛沗pinned=true` 琛ㄧず璇锋眰 pin | 鎴愬姛杩斿洖闈為浂 `GCHandle` |
+| `gc_handle_free` | 閲婃斁鍏堝墠鍒嗛厤鐨?handle | 鍏佽瀵瑰涓荤紦瀛樼殑 handle 鍋氭樉寮忔竻鐞?|
+| `raise_managed_exception` | 鎶婄粰瀹氬紓甯稿彞鏌勬彁鍗囧埌褰撳墠绾跨▼鐨勬墭绠″紓甯歌竟鐣?| 鍙礋璐ｆ樉寮忚Е鍙戯紝涓嶈繑鍥炵姸鎬?|
 
-### 句柄驱动访问
+### 鍙ユ焺椹卞姩璁块棶
 
-| 入口 | 参数语义 | 返回/约束 |
+| 鍏ュ彛 | 鍙傛暟璇箟 | 杩斿洖/绾︽潫 |
 | --- | --- | --- |
-| `field_get_value` | 通过字段句柄把对象或静态字段拷贝到 `out_value` | `out_value_size` 必须与宿主缓冲区匹配 |
-| `field_set_value` | 通过字段句柄把原生值写回对象或静态字段 | `value_size` 必须匹配字段布局约定 |
-| `method_invoke` | 使用句柄、实例指针和 `argv/argc` 调用方法 | 语义失败通过 `out_exception` 返回异常句柄 |
+| `field_get_value` | 閫氳繃瀛楁鍙ユ焺鎶婂璞℃垨闈欐€佸瓧娈垫嫹璐濆埌 `out_value` | `out_value_size` 蹇呴』涓庡涓荤紦鍐插尯鍖归厤 |
+| `field_set_value` | 閫氳繃瀛楁鍙ユ焺鎶婂師鐢熷€煎啓鍥炲璞℃垨闈欐€佸瓧娈?| `value_size` 蹇呴』鍖归厤瀛楁甯冨眬绾﹀畾 |
+| `method_invoke` | 浣跨敤鍙ユ焺銆佸疄渚嬫寚閽堝拰 `argv/argc` 璋冪敤鏂规硶 | 璇箟澶辫触閫氳繃 `out_exception` 杩斿洖寮傚父鍙ユ焺 |
 
-### 反射查询
+### 鍙嶅皠鏌ヨ
 
-| 入口 | 参数语义 | 返回/约束 |
+| 鍏ュ彛 | 鍙傛暟璇箟 | 杩斿洖/绾︽潫 |
 | --- | --- | --- |
-| `assembly_get_image` | 从程序集句柄取镜像句柄 | 查无结果返回空 |
-| `image_find_type` | 通过命名空间和类型名查找类型 | 仅负责解析，不做类初始化 |
-| `type_find_method` | 按名称和参数个数查找方法 | 查无结果返回空 |
-| `type_find_field` | 按名称查找字段 | 查无结果返回空 |
-| `type_find_property` | 按名称查找属性 | 查无结果返回空 |
-| `type_find_event` | 按名称查找事件 | 查无结果返回空 |
-| `method_get_parameter` | 按序号读取参数句柄 | 越界返回空 |
-| `method_get_generic_context` | 读取方法的泛型上下文句柄 | 非泛型场景可返回空 |
+| `assembly_get_image` | 浠庣▼搴忛泦鍙ユ焺鍙栭暅鍍忓彞鏌?| 鏌ユ棤缁撴灉杩斿洖绌?|
+| `image_find_type` | 閫氳繃鍛藉悕绌洪棿鍜岀被鍨嬪悕鏌ユ壘绫诲瀷 | 浠呰礋璐ｈВ鏋愶紝涓嶅仛绫诲垵濮嬪寲 |
+| `type_find_method` | 鎸夊悕绉板拰鍙傛暟涓暟鏌ユ壘鏂规硶 | 鏌ユ棤缁撴灉杩斿洖绌?|
+| `type_find_field` | 鎸夊悕绉版煡鎵惧瓧娈?| 鏌ユ棤缁撴灉杩斿洖绌?|
+| `type_find_property` | 鎸夊悕绉版煡鎵惧睘鎬?| 鏌ユ棤缁撴灉杩斿洖绌?|
+| `type_find_event` | 鎸夊悕绉版煡鎵句簨浠?| 鏌ユ棤缁撴灉杩斿洖绌?|
+| `method_get_parameter` | 鎸夊簭鍙疯鍙栧弬鏁板彞鏌?| 瓒婄晫杩斿洖绌?|
+| `method_get_generic_context` | 璇诲彇鏂规硶鐨勬硾鍨嬩笂涓嬫枃鍙ユ焺 | 闈炴硾鍨嬪満鏅彲杩斿洖绌?|
 
-## 与 Bridge 的边界
+## 涓?Bridge 鐨勮竟鐣?
 
-- `Runtime ABI` 只暴露低层基础操作，不承担 `generated C++` 的高层辅助语义。
-- `virtual invoke`、`delegate`、`icall resolve` 等生成代码最常用的高层帮助函数不属于 ABI，而属于 bridge。
-- ABI 的职责是让宿主和 bridge 拿到稳定基础元件；bridge 再把这些元件拼成对生成代码更友好的调用面。
+- `Runtime ABI` 鍙毚闇蹭綆灞傚熀纭€鎿嶄綔锛屼笉鎵挎媴 `generated C++` 鐨勯珮灞傝緟鍔╄涔夈€?
+- `virtual invoke`銆乣delegate`銆乣icall resolve` 绛夌敓鎴愪唬鐮佹渶甯哥敤鐨勯珮灞傚府鍔╁嚱鏁颁笉灞炰簬 ABI锛岃€屽睘浜?bridge銆?
+- ABI 鐨勮亴璐ｆ槸璁╁涓诲拰 bridge 鎷垮埌绋冲畾鍩虹鍏冧欢锛沚ridge 鍐嶆妸杩欎簺鍏冧欢鎷兼垚瀵圭敓鎴愪唬鐮佹洿鍙嬪ソ鐨勮皟鐢ㄩ潰銆?
+

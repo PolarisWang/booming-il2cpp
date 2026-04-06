@@ -1,83 +1,84 @@
-# Codegen Bridge v0
+﻿# Codegen Bridge v0
 
 > first-proof boundary supplement: `contracts/docs/v0/codegen-bridge-proof-boundary.md`
 
-## 定位
+## 瀹氫綅
 
-- `boom_codegen_get_bridge_v0()` 返回进程级 bridge 函数表，供 `generated C++` 直接依赖。
-- `bridge` 位于 ABI 之上：ABI 提供低层基础能力，bridge 把这些能力整理成生成代码可以稳定消费的高层 helper 面。
-- `virtual invoke`、`delegate`、`icall resolve` 已经进入 `bridge v0`，不是后续阶段才会补的占位项。
+- `chaos_codegen_get_bridge_v0()` 杩斿洖杩涚▼绾?bridge 鍑芥暟琛紝渚?`generated C++` 鐩存帴渚濊禆銆?
+- `bridge` 浣嶄簬 ABI 涔嬩笂锛欰BI 鎻愪緵浣庡眰鍩虹鑳藉姏锛宐ridge 鎶婅繖浜涜兘鍔涙暣鐞嗘垚鐢熸垚浠ｇ爜鍙互绋冲畾娑堣垂鐨勯珮灞?helper 闈€?
+- `virtual invoke`銆乣delegate`銆乣icall resolve` 宸茬粡杩涘叆 `bridge v0`锛屼笉鏄悗缁樁娈垫墠浼氳ˉ鐨勫崰浣嶉」銆?
 
-## 调用约定
+## 璋冪敤绾﹀畾
 
-- bridge 与 ABI 共享同一套调用约定宏：`BOOM_RUNTIME_ABI_EXPORT` 和 `BOOM_RUNTIME_ABI_CALL`。
-- 调用方应先缓存 `CodegenBridgeV0*`，再按 helper 分类访问函数指针。
-- bridge 只负责生成代码优先依赖的帮助函数；底层生命周期、对象分配和显式异常触发仍通过 `Runtime ABI` 完成。
-- `BridgeStatus` 在 `v0` 中冻结为 32-bit 有符号整数，避免导出 ABI 受 C `enum` 底层表示影响。
+- bridge 涓?ABI 鍏变韩鍚屼竴濂楄皟鐢ㄧ害瀹氬畯锛歚CHAOS_RUNTIME_ABI_EXPORT` 鍜?`CHAOS_RUNTIME_ABI_CALL`銆?
+- 璋冪敤鏂瑰簲鍏堢紦瀛?`CodegenBridgeV0*`锛屽啀鎸?helper 鍒嗙被璁块棶鍑芥暟鎸囬拡銆?
+- bridge 鍙礋璐ｇ敓鎴愪唬鐮佷紭鍏堜緷璧栫殑甯姪鍑芥暟锛涘簳灞傜敓鍛藉懆鏈熴€佸璞″垎閰嶅拰鏄惧紡寮傚父瑙﹀彂浠嶉€氳繃 `Runtime ABI` 瀹屾垚銆?
+- `BridgeStatus` 鍦?`v0` 涓喕缁撲负 32-bit 鏈夌鍙锋暣鏁帮紝閬垮厤瀵煎嚭 ABI 鍙?C `enum` 搴曞眰琛ㄧず褰卞搷銆?
 
-## 错误模型
+## 閿欒妯″瀷
 
-- `bridge` 采用混合错误模型：
-  - 查询/解析类 helper 返回状态码或空指针
-  - 托管语义失败通过受控异常出口返回，例如 `out_exception`
-- `register_codegen` 与 `bootstrap_runtime` 返回 `BridgeStatus`，让 bootstrap 流程可以在宿主边界显式失败。
-- `resolve_type_by_token`、`resolve_method_by_token`、`resolve_field_by_token`、`resolve_virtual_method`、`resolve_icall` 在无法解析时返回空句柄/空指针。
-- `invoke_virtual` 与 `delegate_invoke` 的托管语义失败不会被静默吞掉，必须通过 `out_exception` 交还调用方。
-- `box_value` 失败时返回空对象指针；`unbox_value` 使用状态码报告布局或目标缓冲区不匹配。
+- `bridge` 閲囩敤娣峰悎閿欒妯″瀷锛?
+  - 鏌ヨ/瑙ｆ瀽绫?helper 杩斿洖鐘舵€佺爜鎴栫┖鎸囬拡
+  - 鎵樼璇箟澶辫触閫氳繃鍙楁帶寮傚父鍑哄彛杩斿洖锛屼緥濡?`out_exception`
+- `register_codegen` 涓?`bootstrap_runtime` 杩斿洖 `BridgeStatus`锛岃 bootstrap 娴佺▼鍙互鍦ㄥ涓昏竟鐣屾樉寮忓け璐ャ€?
+- `resolve_type_by_token`銆乣resolve_method_by_token`銆乣resolve_field_by_token`銆乣resolve_virtual_method`銆乣resolve_icall` 鍦ㄦ棤娉曡В鏋愭椂杩斿洖绌哄彞鏌?绌烘寚閽堛€?
+- `invoke_virtual` 涓?`delegate_invoke` 鐨勬墭绠¤涔夊け璐ヤ笉浼氳闈欓粯鍚炴帀锛屽繀椤婚€氳繃 `out_exception` 浜よ繕璋冪敤鏂广€?
+- `box_value` 澶辫触鏃惰繑鍥炵┖瀵硅薄鎸囬拡锛沗unbox_value` 浣跨敤鐘舵€佺爜鎶ュ憡甯冨眬鎴栫洰鏍囩紦鍐插尯涓嶅尮閰嶃€?
 
-## 与 ABI 的职责分层
+## 涓?ABI 鐨勮亴璐ｅ垎灞?
 
-| 层级 | 负责内容 | 不负责内容 |
+| 灞傜骇 | 璐熻矗鍐呭 | 涓嶈礋璐ｅ唴瀹?|
 | --- | --- | --- |
-| `Runtime ABI` | runtime/thread 生命周期、对象分配、类初始化、GC handle、显式异常入口、基础反射句柄查询 | 生成代码友好的虚调用、delegate 语义、icall 解析 |
-| `Codegen Bridge` | registration、runtime metadata helper、boxing/unboxing、virtual invoke、delegate、icall resolve | 替代 ABI 的底层状态管理 |
+| `Runtime ABI` | runtime/thread 鐢熷懡鍛ㄦ湡銆佸璞″垎閰嶃€佺被鍒濆鍖栥€丟C handle銆佹樉寮忓紓甯稿叆鍙ｃ€佸熀纭€鍙嶅皠鍙ユ焺鏌ヨ | 鐢熸垚浠ｇ爜鍙嬪ソ鐨勮櫄璋冪敤銆乨elegate 璇箟銆乮call 瑙ｆ瀽 |
+| `Codegen Bridge` | registration銆乺untime metadata helper銆乥oxing/unboxing銆乿irtual invoke銆乨elegate銆乮call resolve | 鏇夸唬 ABI 鐨勫簳灞傜姸鎬佺鐞?|
 
-## Helper 分类
+## Helper 鍒嗙被
 
 ### Registration helper
 
-| 入口 | 参数语义 | 返回/约束 |
+| 鍏ュ彛 | 鍙傛暟璇箟 | 杩斿洖/绾︽潫 |
 | --- | --- | --- |
-| `register_codegen` | 同时接收 `CodeRegistrationV0`、`MetadataRegistrationV0` 和可选 `CodegenRegistrationOptionsV0` | 返回显式状态码，要求结构体 `struct_size` 已正确填写 |
-| `bootstrap_runtime` | 触发生成代码依赖的最小运行时装配 | 不接收参数；失败时返回状态码 |
+| `register_codegen` | 鍚屾椂鎺ユ敹 `CodeRegistrationV0`銆乣MetadataRegistrationV0` 鍜屽彲閫?`CodegenRegistrationOptionsV0` | 杩斿洖鏄惧紡鐘舵€佺爜锛岃姹傜粨鏋勪綋 `struct_size` 宸叉纭～鍐?|
+| `bootstrap_runtime` | 瑙﹀彂鐢熸垚浠ｇ爜渚濊禆鐨勬渶灏忚繍琛屾椂瑁呴厤 | 涓嶆帴鏀跺弬鏁帮紱澶辫触鏃惰繑鍥炵姸鎬佺爜 |
 
 ### Runtime metadata helper
 
-| 入口 | 参数语义 | 返回/约束 |
+| 鍏ュ彛 | 鍙傛暟璇箟 | 杩斿洖/绾︽潫 |
 | --- | --- | --- |
-| `resolve_type_by_token` | 用 `image + type_token` 解析类型 | 查无结果返回空 |
-| `resolve_method_by_token` | 用 `image + method_token` 解析方法 | 查无结果返回空 |
-| `resolve_field_by_token` | 用 `image + field_token` 解析字段 | 查无结果返回空 |
+| `resolve_type_by_token` | 鐢?`image + type_token` 瑙ｆ瀽绫诲瀷 | 鏌ユ棤缁撴灉杩斿洖绌?|
+| `resolve_method_by_token` | 鐢?`image + method_token` 瑙ｆ瀽鏂规硶 | 鏌ユ棤缁撴灉杩斿洖绌?|
+| `resolve_field_by_token` | 鐢?`image + field_token` 瑙ｆ瀽瀛楁 | 鏌ユ棤缁撴灉杩斿洖绌?|
 
 ### Boxing / unboxing helper
 
-| 入口 | 参数语义 | 返回/约束 |
+| 鍏ュ彛 | 鍙傛暟璇箟 | 杩斿洖/绾︽潫 |
 | --- | --- | --- |
-| `box_value` | 结合 `runtime_state`、`thread_state`、值类型句柄和原生值缓冲区创建 boxed object | 成功返回对象指针，失败返回空 |
-| `unbox_value` | 把 boxed object 的内容复制到宿主缓冲区 | 用状态码报告布局或缓冲区问题 |
+| `box_value` | 缁撳悎 `runtime_state`銆乣thread_state`銆佸€肩被鍨嬪彞鏌勫拰鍘熺敓鍊肩紦鍐插尯鍒涘缓 boxed object | 鎴愬姛杩斿洖瀵硅薄鎸囬拡锛屽け璐ヨ繑鍥炵┖ |
+| `unbox_value` | 鎶?boxed object 鐨勫唴瀹瑰鍒跺埌瀹夸富缂撳啿鍖?| 鐢ㄧ姸鎬佺爜鎶ュ憡甯冨眬鎴栫紦鍐插尯闂 |
 
 ### Virtual invoke helper
 
-| 入口 | 参数语义 | 返回/约束 |
+| 鍏ュ彛 | 鍙傛暟璇箟 | 杩斿洖/绾︽潫 |
 | --- | --- | --- |
-| `resolve_virtual_method` | 用实例类型与声明方法解析最终落点 | 查无结果返回空 |
-| `invoke_virtual` | 用实例、参数数组和可选返回缓冲区执行虚调用 | 托管语义失败通过 `out_exception` 返回 |
+| `resolve_virtual_method` | 鐢ㄥ疄渚嬬被鍨嬩笌澹版槑鏂规硶瑙ｆ瀽鏈€缁堣惤鐐?| 鏌ユ棤缁撴灉杩斿洖绌?|
+| `invoke_virtual` | 鐢ㄥ疄渚嬨€佸弬鏁版暟缁勫拰鍙€夎繑鍥炵紦鍐插尯鎵ц铏氳皟鐢?| 鎵樼璇箟澶辫触閫氳繃 `out_exception` 杩斿洖 |
 
 ### Delegate helper
 
-| 入口 | 参数语义 | 返回/约束 |
+| 鍏ュ彛 | 鍙傛暟璇箟 | 杩斿洖/绾︽潫 |
 | --- | --- | --- |
-| `create_delegate` | 从方法句柄和目标实例创建 delegate 对象 | 成功返回 delegate 对象指针 |
-| `delegate_invoke` | 用参数数组调用 delegate | 语义失败通过 `out_exception` 返回 |
+| `create_delegate` | 浠庢柟娉曞彞鏌勫拰鐩爣瀹炰緥鍒涘缓 delegate 瀵硅薄 | 鎴愬姛杩斿洖 delegate 瀵硅薄鎸囬拡 |
+| `delegate_invoke` | 鐢ㄥ弬鏁版暟缁勮皟鐢?delegate | 璇箟澶辫触閫氳繃 `out_exception` 杩斿洖 |
 
 ### ICall resolve helper
 
-| 入口 | 参数语义 | 返回/约束 |
+| 鍏ュ彛 | 鍙傛暟璇箟 | 杩斿洖/绾︽潫 |
 | --- | --- | --- |
-| `resolve_icall` | 用稳定的内部调用名解析原生入口 | 查无结果返回空指针 |
+| `resolve_icall` | 鐢ㄧǔ瀹氱殑鍐呴儴璋冪敤鍚嶈В鏋愬師鐢熷叆鍙?| 鏌ユ棤缁撴灉杩斿洖绌烘寚閽?|
 
-## `v0` 冻结原则
+## `v0` 鍐荤粨鍘熷垯
 
-- `v0` 已冻结 helper 名称、函数签名、参数方向和错误模型。
-- 后续版本可以追加字段或扩展 helper 组，但不能在 `v0` 内悄悄改变既有语义。
-- 生成代码如果要依赖新的高层语义，应该通过新增版本或追加 helper，而不是改写现有入口的含义。
+- `v0` 宸插喕缁?helper 鍚嶇О銆佸嚱鏁扮鍚嶃€佸弬鏁版柟鍚戝拰閿欒妯″瀷銆?
+- 鍚庣画鐗堟湰鍙互杩藉姞瀛楁鎴栨墿灞?helper 缁勶紝浣嗕笉鑳藉湪 `v0` 鍐呮倓鎮勬敼鍙樻棦鏈夎涔夈€?
+- 鐢熸垚浠ｇ爜濡傛灉瑕佷緷璧栨柊鐨勯珮灞傝涔夛紝搴旇閫氳繃鏂板鐗堟湰鎴栬拷鍔?helper锛岃€屼笉鏄敼鍐欑幇鏈夊叆鍙ｇ殑鍚箟銆?
+

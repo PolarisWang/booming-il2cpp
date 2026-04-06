@@ -1,0 +1,72 @@
+# docs/discuss INDEX
+
+## 说明
+
+- 本目录用于存放尚未收敛为正式 design/plan 的讨论记录、brainstorm 和方案对比。
+- 当某个方向已经完成决策并进入正式实施，应把稳定结论迁移到 `docs/architecture/` 或 `docs/dev/`。
+
+## 文档
+
+- `20260406-01-test-framework-reboot-brainstorm-v1-01.md`
+  - 测试框架重构与升级的第一轮讨论记录。
+  - 覆盖测试目标、环境多样性、顶层测试项目布局、artifact 分层、命名调整和待确认决策点。
+- `20260406-02-test-framework-reboot-design-draft-v1-01.md`
+  - 基于当前已确认决策收敛出的第一版 design 草案。
+  - 作为后续继续逐项讨论和补全未决点的基线文档。
+- `20260406-03-test-framework-reboot-design-v1-02.md`
+  - 在 draft 基础上整理出的更完整设计稿。
+  - 聚焦正式模型、CLI、registry、目录、命名和实施分期。
+- `20260406-04-roadmap-0-rationality-assessment-v1-01.md`
+  - 对旧 `roadmap-0` 测试/工作流是否仍合理的专项评估。
+  - 结论是：可作为历史迁移来源保留，但不应继续作为新测试框架的一等正式对象。
+- `20260406-05-helloworldobject-windows-matrix-design-v1-01.md`
+  - `HelloWorldObject` 首批 Windows 侧 matrix 设计草案。
+  - 收敛默认 matrix、平台 buildable matrix、matrix/goal 绑定和 matrix 级产物边界。
+- `20260406-06-helloworldobject-windows-stage-worker-design-v1-01.md`
+  - `HelloWorldObject` Windows 侧 matrix 的 stage/worker 设计。
+  - 固定 stage 拆分、worker 责任、共享策略以及 Stage 4 CMake 必须拆开的实现边界。
+- `20260406-07-analysis-contract-storage-strategy-v1-01.md`
+  - 根目录 `analysis/`、`contracts/` 与 `tests/contracts/` 在新管线下的职责重划。
+  - 明确规范源、验证基线与阶段运行产物三层分离原则。
+- `20260406-08-first-implementation-cutover-order-v1-01.md`
+  - 首批从设计进入实施时的切换顺序建议。
+  - 重点固定 contract source cutover、阶段产物命名、manifest schema 和 worker 拆分的先后关系。
+- `20260406-09-artifact-manifest-and-report-naming-v1-01.md`
+  - 首批 `subject + matrix + stage` 管线下最小文件命名草案。
+  - 固定 `*.manifest.json`、`report.json`、`summary.json`、`events.jsonl` 的边界与最小字段。
+- `20260406-10-contract-source-cutover-design-v1-01.md`
+  - `contracts.py` 从 `analysis/contracts` 切到 canonical `contracts/` 的实施设计。
+  - 固定 helper 切换策略、受影响测试以及 `analysis/contracts` 的退役顺序。
+- `20260406-11-stage-output-placement-design-v1-01.md`
+  - 新框架下每个阶段产物、输出的正式落点设计。
+  - 固定 `shared/`、`matrices/<matrix-id>/`、`subject-report/` 与 session 日志层的边界。
+- `20260406-12-stage-reuse-and-invalidation-design-v1-01.md`
+  - 新框架下阶段复用、失效传播与 fingerprint 的第一版设计。
+  - 选择稳定工作目录重建模型，而不是历史 fingerprint cache 仓库。
+- `20260406-13-stage-dependency-graph-design-v1-01.md`
+  - `subject.manifest.json` 中 stage dependency graph 的正式设计。
+  - 采用 `executionPipelines + pipelineId`，而不是隐式 graph 或每个 matrix 内联整份 DAG。
+- `20260406-14-stage-dependency-graph-scenarios-v1-01.md`
+  - 解释 `stage`、`dependency`、`graph` 在新测试框架里的具体落地场景。
+  - 重点说明它们如何服务执行计划、复用判断、失效传播和失败定位。
+- `20260406-15-subject-manifest-schema-draft-v1-01.md`
+  - 汇总 `subject.manifest.json` 的完整增量 schema 草案。
+  - 统一 `supportedGoals`、`artifactPlan`、`pipelineId`、`executionPipelines` 等新增字段。
+- `20260406-16-manifest-consumer-boundaries-v1-01.md`
+  - 说明 `subject.manifest.json` 各字段由 registry/planner/executor/reporting 谁主消费。
+  - 用来约束后续实现模块边界，避免 manifest 继续被各层随意解释。
+- `20260406-17-planner-output-design-v1-01.md`
+  - 定义 planner 输出给 executor 的最小对象结构。
+  - 固定 `request / selection / artifactsRoot / stagePlan` 四层，以及 `executionMode`、`reuse`、`paths` 的职责。
+- `20260406-18-executor-stage-io-boundary-design-v1-01.md`
+  - 定义 executor、单个 stage worker、reporting 之间的最小输入输出边界。
+  - 固定 `invalidated` 是重建原因而不是 worker mode，并把 `status` 与执行方式拆开表达。
+- `20260406-19-reporting-schema-options-v1-01.md`
+  - 对比 reporting 在 matrix/subject/session 三层上的轻重方案。
+  - 推荐采用方案 B，并进一步偏向 B2：matrix 报告适度自包含，聚合层保持偏薄。
+- `20260406-20-reporting-schema-design-v1-01.md`
+  - 将 reporting 正式收敛为 B2 方案，并定义 matrix report、subject summary、session summary 三层 schema。
+  - 固定新 subject 结果通过 `subjectResults` 增量接入 session summary，而不是回灌到旧 `suiteResults`。
+- `20260406-21-event-schema-alignment-design-v1-01.md`
+  - 定义 matrix、subject、session 三层 `events.jsonl` 的职责、canonical event 集合与兼容投影策略。
+  - 固定 matrix/subject 走 canonical stream，session 保留 watch/TUI 兼容投影，并坚持单写者原则。
