@@ -5,7 +5,6 @@ import argparse
 import json
 import os
 import platform
-import shutil
 import subprocess
 import sys
 import uuid
@@ -16,6 +15,11 @@ if str(toolchains_root) not in sys.path:
     sys.path.insert(0, str(toolchains_root))
 
 from testing import contracts as contracts_module
+from testing import subject_executor as subject_executor_module
+from testing import subject_planner as subject_planner_module
+
+
+HELLOWORLD_SUBJECT_ID = "HelloWorldObject"
 
 
 def get_repo_root() -> Path:
@@ -38,6 +42,7 @@ def get_platform_gate_generator(preset_target: str, host_profile: str) -> str:
     if preset_target in {"android-arm64-smoke", "ios-arm64-packaging", "linux-x64-packaging"}:
         return "Ninja"
     return get_host_routing_generator(host_profile)
+
 
 def run_checked(arguments: list[str], *, cwd: Path, failure_message: str, capture_output: bool = False) -> subprocess.CompletedProcess[str]:
     completed = subprocess.run(
@@ -82,96 +87,6 @@ def invoke_dotnet_runtime_smoke(dll_path: Path, expected_patterns: list[str], re
             raise RuntimeError(f"runtime smoke output mismatch for {dll_path}: missing '{pattern}'")
 
 
-def invoke_stage4_native_reference_codegen(repo_root: Path) -> None:
-    proof_project_path = repo_root / "tests" / "proof" / "input" / "HelloWorldObject" / "HelloWorldObject.csproj"
-    proof_dll_path = repo_root / "tests" / "proof" / "input" / "HelloWorldObject" / "bin" / "Release" / "net8.0" / "HelloWorldObject.dll"
-    driver_project_path = repo_root / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
-    driver_dll_path = repo_root / "src" / "managed" / "Chaos.IL2CPP.Driver" / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Driver.dll"
-    managed_closure_root = repo_root / "artifacts" / "proof" / "managed-closure" / "HelloWorldObject"
-    native_reference_root = repo_root / "artifacts" / "proof" / "native-reference" / "HelloWorldObject"
-
-    invoke_dotnet_build(proof_project_path, repo_root)
-    invoke_dotnet_build(driver_project_path, repo_root)
-    run_checked(
-        [
-            "dotnet",
-            str(driver_dll_path),
-            str(proof_dll_path),
-            str(managed_closure_root),
-        ],
-        cwd=repo_root,
-        failure_message=f"stage4 managed closure materialization failed: {proof_project_path}",
-    )
-    run_checked(
-        [
-            "dotnet",
-            str(driver_dll_path),
-            "emit-native-reference",
-            str(managed_closure_root),
-            str(native_reference_root),
-        ],
-        cwd=repo_root,
-        failure_message=f"stage4 native reference emission failed: {native_reference_root}",
-    )
-
-
-def invoke_stage4_native_reference_proof_run(repo_root: Path) -> None:
-    requested_binary_dir = repo_root / "artifacts" / "presets" / "windows-x64-reference"
-    run_binary_dir = allocate_run_scoped_binary_dir(requested_binary_dir)
-    native_reference_root = repo_root / "artifacts" / "proof" / "native-reference" / "HelloWorldObject"
-
-    run_checked(
-        ["cmake", "--preset", "windows-x64-reference", "-B", str(run_binary_dir)],
-        cwd=repo_root,
-        failure_message="cmake preset configure failed: windows-x64-reference",
-    )
-    run_checked(
-        [
-            "cmake",
-            "--build",
-            str(run_binary_dir),
-            "--config",
-            "Release",
-            "--target",
-            "chaos_stage4_hello_world_object_proof_run",
-        ],
-        cwd=repo_root,
-        failure_message="stage4 native reference proof run target failed: windows-x64-reference",
-    )
-    validate_stage4_proof_run_artifacts(native_reference_root)
-
-
-def validate_stage4_proof_run_artifacts(native_reference_root: Path) -> None:
-    run_root = native_reference_root / "run"
-    stdout_path = run_root / "stdout.log"
-    stderr_path = run_root / "stderr.log"
-    exit_code_path = run_root / "exit-code.txt"
-
-    required_paths = [stdout_path, stderr_path, exit_code_path]
-    for required_path in required_paths:
-        if not required_path.is_file():
-            raise RuntimeError(f"missing Stage 4 proof run artifact: {required_path}")
-
-    stdout_text = stdout_path.read_text(encoding="utf-8")
-    stderr_text = stderr_path.read_text(encoding="utf-8")
-    exit_code_text = exit_code_path.read_text(encoding="utf-8").strip()
-
-    try:
-        exit_code = int(exit_code_text)
-    except ValueError as exception:
-        raise RuntimeError(f"invalid Stage 4 proof exit code record: {exit_code_path}") from exception
-
-    if exit_code != 0:
-        message = f"stage4 native reference proof exit code mismatch: expected 0 actual {exit_code}"
-        if stderr_text.strip():
-            message = f"{message}\n{stderr_text.strip()}"
-        raise RuntimeError(message)
-
-    expected_stdout = "Hello, World!"
-    if expected_stdout not in stdout_text:
-        raise RuntimeError(f"stage4 native reference proof stdout mismatch: missing '{expected_stdout}'")
-
-
 def invoke_preset_build_smoke(preset_name: str, repo_root: Path, *, validate_only: bool = False) -> None:
     requested_binary_dir = repo_root / "artifacts" / "presets" / preset_name
     run_binary_dir = allocate_run_scoped_binary_dir(requested_binary_dir)
@@ -185,7 +100,6 @@ def invoke_preset_build_smoke(preset_name: str, repo_root: Path, *, validate_onl
 
 def invoke_routing_build_smoke(preset_target: str, toolchain_file: Path, binary_dir: Path, generator: str, repo_root: Path) -> None:
     run_binary_dir = allocate_run_scoped_binary_dir(binary_dir)
-
     arguments = [
         "cmake",
         "-S",
@@ -212,6 +126,61 @@ def write_gate_record(output_path: Path, gate_name: str, status: str, preset: st
         "notes": notes,
     }
     output_path.write_text(json.dumps(record, indent=2), encoding="utf-8")
+
+
+def resolve_stage4_runtime_root(runtime_root: Path) -> Path:
+    legacy_runtime_root = runtime_root / "run"
+    if not (runtime_root / "stdout.log").is_file() and legacy_runtime_root.is_dir():
+        return legacy_runtime_root
+    return runtime_root
+
+
+def validate_stage4_proof_run_artifacts(runtime_root: Path) -> None:
+    runtime_root = resolve_stage4_runtime_root(runtime_root)
+    stdout_path = runtime_root / "stdout.log"
+    stderr_path = runtime_root / "stderr.log"
+    exit_code_path = runtime_root / "exit-code.txt"
+
+    required_paths = [stdout_path, stderr_path, exit_code_path]
+    for required_path in required_paths:
+        if not required_path.is_file():
+            raise RuntimeError(f"missing Stage 4 proof run artifact: {required_path}")
+
+    stdout_text = stdout_path.read_text(encoding="utf-8")
+    stderr_text = stderr_path.read_text(encoding="utf-8")
+    exit_code_text = exit_code_path.read_text(encoding="utf-8").strip()
+
+    try:
+        exit_code = int(exit_code_text)
+    except ValueError as exception:
+        raise RuntimeError(f"invalid Stage 4 proof exit code record: {exit_code_path}") from exception
+
+    if exit_code != 0:
+        message = f"stage4 native reference proof exit code mismatch: expected 0 actual {exit_code}"
+        if stderr_text.strip():
+            message = f"{message}\n{stderr_text.strip()}"
+        raise RuntimeError(message)
+
+    expected_stdout = "Hello, World!"
+    if expected_stdout not in stdout_text:
+        raise RuntimeError(f"stage4 native reference proof stdout mismatch: missing '{expected_stdout}'")
+
+
+def subject_runtime_root(repo_root: Path, matrix_id: str) -> Path:
+    return repo_root / "artifacts" / "subjects" / HELLOWORLD_SUBJECT_ID / "matrices" / matrix_id / "runtime"
+
+
+def execute_subject_matrix(repo_root: Path, *, matrix_id: str, goal_id: str) -> dict:
+    plan = subject_planner_module.build_plan(
+        repo_root,
+        HELLOWORLD_SUBJECT_ID,
+        goal_id=goal_id,
+        matrix_id=matrix_id,
+    )
+    result = subject_executor_module.execute_plan(repo_root, plan)
+    if result["status"] != "ok":
+        raise RuntimeError(f"subject matrix failed: {matrix_id}: {result['errors']}")
+    return result
 
 
 def parse_host_profile(argv: list[str] | None = None) -> str:
@@ -278,66 +247,64 @@ def main(argv: list[str] | None = None) -> int:
     invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "PInvokeLite" / "Release" / "net8.0" / "PInvokeLite.dll", ["marshal=interop-smoke", "export=chaos_smoke_add:7", "symbol=True"], repo_root)
     invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "HostEmbeddingLite" / "Release" / "net8.0" / "HostEmbeddingLite.dll", ["HostEmbeddingSession:InvokeManagedEntry:True", "guards=invalid-detach:True|double-start:True|unattached-entry:True"], repo_root)
 
-    write_step("Validate Linux packaging routing smoke")
-    invoke_routing_build_smoke("linux-x64-packaging", repo_root / "build" / "toolchains" / "linux-x64.cmake", common_artifact_root / "linux-packaging-routing", get_platform_gate_generator("linux-x64-packaging", host_profile), repo_root)
-
-    write_step("Register Linux packaging shell gate")
-    write_gate_record(
-        artifact_root / "linux-packaging.gate.json",
-        "linux-packaging",
-        "routing-validated",
-        "linux-x64-packaging",
-        "Linux preset remains visible in CMakePresets, and its toolchain/router/harness path was validated with a host-compatible generator; full cross toolchain remains outside Roadmap 0.",
-        host_profile,
-    )
-
     if host_profile == "windows":
-        write_step("Prepare Stage 4 native reference proof inputs")
-        invoke_stage4_native_reference_codegen(repo_root)
-
-        write_step("Build Windows reference preset smoke")
-        invoke_preset_build_smoke("windows-x64-reference", repo_root)
-
-        write_step("Run Stage 4 native reference proof")
-        invoke_stage4_native_reference_proof_run(repo_root)
-
+        write_step("Run HelloWorldObject windows-dev-output subject matrix")
+        execute_subject_matrix(repo_root, matrix_id="windows-dev-output", goal_id="correctness.dev")
+        validate_stage4_proof_run_artifacts(subject_runtime_root(repo_root, "windows-dev-output"))
         write_gate_record(
             artifact_root / "windows-stage4-native-reference.gate.json",
             "windows-stage4-native-reference",
             "passed",
             "windows-x64-reference",
-            "Windows Stage 4 native reference proof build/run gate passed with Hello, World! stdout and exit code 0 artifacts.",
+            "Windows Stage 4 native reference proof compatibility gate passed via the HelloWorldObject subject matrix.",
             host_profile,
         )
 
-        write_step("Run Windows reference desktop trace compare")
-        trace_path = artifact_root / "windows-warmup-trace.runtime.json"
-        run_checked(["dotnet", str(host_embedding_dll), "--trace-platform", "windows", "--trace-output", str(trace_path)], cwd=repo_root, failure_message="HostEmbeddingLite windows trace export failed")
-        run_checked([sys.executable, str(compare_script), str(repo_root / "tests" / "contracts" / "trace" / "snapshots" / "windows-warmup-trace.snapshot.json"), str(trace_path)], cwd=repo_root, failure_message="Windows reference desktop trace compare failed")
-
+        write_step("Run HelloWorldObject windows-reference-trace subject matrix")
+        execute_subject_matrix(repo_root, matrix_id="windows-reference-trace", goal_id="correctness.platform")
         write_gate_record(
             artifact_root / "windows-reference-desktop.gate.json",
             "windows-reference-desktop",
             "passed",
             "windows-x64-reference",
-            "Windows reference desktop gate passed with warmup trace compare.",
+            "Windows reference desktop gate passed via the HelloWorldObject windows-reference-trace subject matrix.",
             host_profile,
         )
 
-        write_step("Validate Android startup smoke routing smoke")
-        invoke_routing_build_smoke("android-arm64-smoke", repo_root / "build" / "toolchains" / "android-arm64.cmake", common_artifact_root / "android-smoke-routing", get_platform_gate_generator("android-arm64-smoke", host_profile), repo_root)
-
-        write_step("Register Android startup smoke shell gate")
+        write_step("Run HelloWorldObject windows-android-buildable subject matrix")
+        execute_subject_matrix(repo_root, matrix_id="windows-android-buildable", goal_id="correctness.platform")
         write_gate_record(
             artifact_root / "android-startup-smoke.gate.json",
             "android-startup-smoke",
-            "routing-validated",
+            "passed",
             "android-arm64-smoke",
-            "Android preset remains visible in CMakePresets, and its toolchain/router/harness path was validated with a host-compatible generator; real Android toolchain execution remains outside Roadmap 0.",
+            "Android gate passed via the HelloWorldObject windows-android-buildable subject matrix.",
+            host_profile,
+        )
+
+        write_step("Run HelloWorldObject windows-linux-buildable subject matrix")
+        execute_subject_matrix(repo_root, matrix_id="windows-linux-buildable", goal_id="correctness.platform")
+        write_gate_record(
+            artifact_root / "linux-packaging.gate.json",
+            "linux-packaging",
+            "passed",
+            "linux-x64-packaging",
+            "Linux packaging gate passed via the HelloWorldObject windows-linux-buildable subject matrix.",
             host_profile,
         )
 
     if host_profile == "macos":
+        write_step("Validate Linux packaging routing smoke")
+        invoke_routing_build_smoke("linux-x64-packaging", repo_root / "build" / "toolchains" / "linux-x64.cmake", common_artifact_root / "linux-packaging-routing", get_platform_gate_generator("linux-x64-packaging", host_profile), repo_root)
+        write_gate_record(
+            artifact_root / "linux-packaging.gate.json",
+            "linux-packaging",
+            "routing-validated",
+            "linux-x64-packaging",
+            "Linux preset remains visible in CMakePresets, and its toolchain/router/harness path was validated with a host-compatible generator; full cross toolchain remains outside Roadmap 0.",
+            host_profile,
+        )
+
         write_step("Build macOS reference preset smoke")
         invoke_preset_build_smoke("macos-reference", repo_root)
 
@@ -345,7 +312,6 @@ def main(argv: list[str] | None = None) -> int:
         trace_path = artifact_root / "macos-warmup-trace.runtime.json"
         run_checked(["dotnet", str(host_embedding_dll), "--trace-platform", "macos", "--trace-output", str(trace_path)], cwd=repo_root, failure_message="HostEmbeddingLite macOS trace export failed")
         run_checked([sys.executable, str(compare_script), str(repo_root / "tests" / "contracts" / "trace" / "snapshots" / "macos-warmup-trace.snapshot.json"), str(trace_path)], cwd=repo_root, failure_message="macOS reference desktop trace compare failed")
-
         write_gate_record(
             artifact_root / "macos-reference-desktop.gate.json",
             "macos-reference-desktop",
@@ -357,8 +323,6 @@ def main(argv: list[str] | None = None) -> int:
 
         write_step("Validate iOS packaging routing smoke")
         invoke_routing_build_smoke("ios-arm64-packaging", repo_root / "build" / "toolchains" / "ios-arm64.cmake", common_artifact_root / "ios-packaging-routing", get_platform_gate_generator("ios-arm64-packaging", host_profile), repo_root)
-
-        write_step("Register iOS packaging shell gate")
         write_gate_record(
             artifact_root / "ios-packaging.gate.json",
             "ios-packaging",

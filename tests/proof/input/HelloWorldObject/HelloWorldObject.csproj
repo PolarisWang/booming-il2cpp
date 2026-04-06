@@ -3,5 +3,12 @@
     <OutputType>Exe</OutputType>
     <AssemblyName>HelloWorldObject</AssemblyName>
     <RootNamespace>HelloWorldObject</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../../subjects/HelloWorldObject/source/Program.cs" Link="Program.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="../../../subjects/HelloWorldObject/source/HelloWorldObject.csproj" Link="canonical/HelloWorldObject.csproj" Visible="false" />
+  </ItemGroup>
 </Project>

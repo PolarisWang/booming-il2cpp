@@ -80,8 +80,8 @@ def assert_json_files_parse(paths: list[Path]) -> None:
 
 def analysis_contract_json_paths(repo_root: Path) -> list[Path]:
     paths: list[Path] = []
-    paths.extend(sorted((repo_root / "analysis" / "contracts" / "schemas").glob("*.json")))
-    paths.extend(sorted((repo_root / "analysis" / "contracts" / "examples").glob("*.json")))
+    paths.extend(sorted((repo_root / "contracts" / "artifacts" / "v0" / "schemas").glob("*.json")))
+    paths.extend(sorted((repo_root / "contracts" / "examples" / "v0" / "artifacts").glob("*.json")))
     paths.extend(sorted((repo_root / "tests" / "contracts" / "schema").glob("*.json")))
     return paths
 
@@ -91,8 +91,8 @@ def trace_contract_json_paths(repo_root: Path) -> list[Path]:
 
 
 def validate_analysis_contracts(repo_root: Path) -> None:
-    schema_dir = repo_root / "analysis" / "contracts" / "schemas"
-    example_dir = repo_root / "analysis" / "contracts" / "examples"
+    schema_dir = repo_root / "contracts" / "artifacts" / "v0" / "schemas"
+    example_dir = repo_root / "contracts" / "examples" / "v0" / "artifacts"
     snapshot_dir = repo_root / "tests" / "contracts" / "schema"
 
     for schema_file in sorted(schema_dir.glob("*.schema.json")):

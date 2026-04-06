@@ -189,13 +189,13 @@ Status: active-parallel-roadmap
 
 | task_id | scope | status | owner | purpose | depends_on |
 | --- | --- | --- | --- | --- | --- |
-| `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover` | `Stage A + Stage B + Stage C` | `in_planning` | `codex` | 首份实现计划，覆盖 subject 真源落地、执行脊柱最小骨架和 Windows 首批 matrix cutover | `-` |
+| `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover` | `Stage A + Stage B + Stage C` | `completed` | `codex` | 首份实现计划，已完成 subject 真源落地、执行脊柱最小骨架和 Windows 首批 matrix cutover | `-` |
 | `subject-stage-d-e-reporting-public-follow-up-plan` | `Stage D + Stage E` | `queued-later-plan` | `unassigned` | 第二份 follow-up plan，合并处理 reporting/events compatibility 与 public entry cutover | `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover` |
 | `subject-stage-f-perf-and-expansion-follow-up-plan` | `Stage F` | `queued-later-plan` | `unassigned` | 第三份 follow-up plan，单独处理 perf 与 multi-subject 扩展 | `subject-stage-d-e-reporting-public-follow-up-plan` |
 
 说明：
 
-- `Stage A + Stage B + Stage C` 已经进入独立 child plan
+- `Stage A + Stage B + Stage C` 已完成独立 child plan 并归档
 - `Stage D + Stage E` 不单独拆两份 plan，而是合并为第二份 follow-up plan
 - `Stage F` 继续后置，单独保留为第三份 follow-up plan
 
@@ -251,7 +251,7 @@ Status: active-parallel-roadmap
 
 ## 10. 当前建议推进顺序
 
-1. 先执行并审阅 `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover`
+1. `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover` 已完成并归档
 2. 后续再派生 `Stage D + Stage E` 合并计划
 3. 最后单独派生 `Stage F` 计划
 
@@ -273,7 +273,7 @@ Status: active-parallel-roadmap
 
 当前实施顺序已经固定为：
 
-1. `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover`
+1. `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover`（已完成）
 2. `Stage D + Stage E` 合并 follow-up plan
 3. `Stage F` 单独 follow-up plan
 

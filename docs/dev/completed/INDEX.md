@@ -2,6 +2,7 @@
 
 | 任务 | lifecycle_status | phase | 最近更新 | 下一步 | active |
 | --- | --- | --- | --- | --- | --- |
+| `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover` | `completed` | `archived` | `2026-04-06 18:50:00 +08:00` | 无。若继续 `subject` 主线，以父 roadmap 派生 `Stage D + Stage E` follow-up plan 为下一入口。 | `no` |
 | `20260406-07-stage-5d-macos-reference-parity` | `completed` | `archived` | `2026-04-06 16:19:51 +08:00` | 无。若未来切到 `macOS` 宿主执行 parity，实现入口以本任务冻结的 `plan-v1-01.md` 为准。 | `no` |
 | `20260406-06-stage-5c-pinvoke-lite-windows-reference` | `completed` | `archived` | `2026-04-06 16:19:51 +08:00` | 无。Stage 5 的 Windows interop foundation 已闭环，`macOS` parity 交接已移入 `20260406-07-stage-5d-macos-reference-parity`。 | `no` |
 | `20260406-03-stage-5-post-proof-split` | `completed` | `archived` | `2026-04-06 16:19:51 +08:00` | 无。Stage 5 的 follow-on 路线与 parity handoff 边界已冻结。 | `no` |

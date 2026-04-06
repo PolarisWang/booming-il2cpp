@@ -29,20 +29,29 @@ class Stage4WindowsReferenceWiringTests(unittest.TestCase):
         for marker in required_markers:
             self.assertIn(marker, root_cmake_text)
 
-    def test_proof_host_cmake_materializes_stage4_generated_source_from_stage3_bundle(self) -> None:
+    def test_proof_host_cmake_consumes_subject_generated_bucket_without_hidden_stage4_codegen(self) -> None:
         proof_host_cmake_text = PROOF_HOST_CMAKE_PATH.read_text(encoding="utf-8")
 
         required_markers = [
+            "artifacts/subjects/HelloWorldObject/shared/generated",
+            "native-reference.generated.cpp",
+            "add_custom_target(chaos_stage4_hello_world_object_proof_run",
+            "RunNativeReferenceProof.cmake",
+            "stdout.log",
+            "stderr.log",
+            "exit-code.txt",
+            "EXCLUDE_FROM_ALL",
+            "CHAOS_HELLOWORLD_GENERATED_ROOT",
+            "CHAOS_HELLOWORLD_BUILD_OUT_ROOT",
+            "CHAOS_HELLOWORLD_RUNTIME_ROOT",
+        ]
+
+        for marker in required_markers:
+            self.assertIn(marker, proof_host_cmake_text)
+
+        forbidden_markers = [
             "artifacts/proof/managed-closure/HelloWorldObject",
             "artifacts/proof/native-reference/HelloWorldObject",
-            "typed-il-ir.json",
-            "aot-manifest.json",
-            "metadata-registration.json",
-            "code-registration.json",
-            "closure.manifest.json",
-            "native-reference.generated.cpp",
-            "native-proof.manifest.json",
-            "native-proof.plan.json",
             "Chaos.IL2CPP.Driver.csproj",
             "tests/proof/input/HelloWorldObject/HelloWorldObject.csproj",
             "emit-native-reference",
@@ -51,20 +60,10 @@ class Stage4WindowsReferenceWiringTests(unittest.TestCase):
             "add_custom_target(chaos_stage4_hello_world_object_driver_build",
             "add_custom_target(chaos_stage4_hello_world_object_managed_closure",
             "add_custom_target(chaos_stage4_hello_world_object_codegen",
-            "add_custom_target(chaos_stage4_hello_world_object_proof_run",
-            "RunNativeReferenceProof.cmake",
-            "stdout.log",
-            "stderr.log",
-            "exit-code.txt",
-            "BYPRODUCTS",
-            "add_dependencies(chaos_stage4_hello_world_object_managed_closure",
-            "add_dependencies(chaos_stage4_hello_world_object_codegen chaos_stage4_hello_world_object_managed_closure)",
-            "EXCLUDE_FROM_ALL",
-            "add_dependencies(chaos_stage4_hello_world_object_proof chaos_stage4_hello_world_object_codegen)",
         ]
 
-        for marker in required_markers:
-            self.assertIn(marker, proof_host_cmake_text)
+        for marker in forbidden_markers:
+            self.assertNotIn(marker, proof_host_cmake_text)
 
     def test_static_native_targets_disable_dllimport_for_runtime_abi_headers(self) -> None:
         runtime_abi_header_text = RUNTIME_ABI_HEADER_PATH.read_text(encoding="utf-8")

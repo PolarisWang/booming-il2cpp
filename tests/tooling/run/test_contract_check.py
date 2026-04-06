@@ -29,7 +29,11 @@ class ContractCheckTests(unittest.TestCase):
     def test_analysis_contract_check_runs_parse_and_validation(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_contract_analysis")
 
-        with patch.object(test_module.contracts_module, "analysis_contract_json_paths", return_value=[REPO_ROOT / "analysis" / "contracts" / "schemas" / "aot-manifest.schema.json"]) as paths_mock:
+        with patch.object(
+            test_module.contracts_module,
+            "analysis_contract_json_paths",
+            return_value=[REPO_ROOT / "contracts" / "artifacts" / "v0" / "schemas" / "aot-manifest.schema.json"],
+        ) as paths_mock:
             with patch.object(test_module.contracts_module, "assert_json_files_parse") as parse_mock:
                 with patch.object(test_module.contracts_module, "validate_analysis_contracts") as validate_mock:
                     result = test_module.handle(
