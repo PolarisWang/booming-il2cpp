@@ -660,6 +660,7 @@ class TuiUnifiedMenuTests(unittest.TestCase):
             [
                 "test-all",
                 "test-suite",
+                "test-subject",
                 "test-module",
                 "test-system",
                 "test-pipeline",
@@ -673,11 +674,11 @@ class TuiUnifiedMenuTests(unittest.TestCase):
             [entry.command["id"] for entry in entries],
         )
         self.assertEqual(
-            ["Quick Start", "Selectors", "Selectors", "Selectors", "Selectors", "Registry", "Registry", "Registry", "Results", "Results", "Back"],
+            ["Quick Start", "Selectors", "Selectors", "Selectors", "Selectors", "Selectors", "Registry", "Registry", "Registry", "Results", "Results", "Back"],
             [entry.group_title for entry in entries],
         )
 
-    def test_resolve_entry_argv_supports_suite_module_system_pipeline(self) -> None:
+    def test_resolve_entry_argv_supports_suite_subject_module_system_pipeline(self) -> None:
         manifest_module = load_manifest_module()
         tui_module = load_tui_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
@@ -686,6 +687,10 @@ class TuiUnifiedMenuTests(unittest.TestCase):
         suite_answers = iter(["suite", "smoke HelloWorld"])
         suite_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(suite_answers))
         self.assertEqual(["test", "suite", "--family", "smoke", "--suite", "HelloWorld"], suite_argv)
+
+        subject_answers = iter(["subject", "HelloWorldObject"])
+        subject_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(subject_answers))
+        self.assertEqual(["test", "subject", "--subject", "HelloWorldObject"], subject_argv)
 
         module_answers = iter(["module", "managed-smoke basic"])
         module_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(module_answers))
@@ -758,6 +763,44 @@ class TuiUnifiedMenuTests(unittest.TestCase):
         self.assertIn("ok: code", screen)
         self.assertIn("ok: module", screen)
         self.assertIn("ok: system", screen)
+
+    def test_render_test_progress_screen_highlights_subject_summary(self) -> None:
+        tui_module = load_tui_module()
+
+        screen = tui_module.render_test_progress_screen(
+            [
+                {"eventType": "session-start", "payload": {"command": "test subject --id subject/HelloWorldObject"}},
+                {
+                    "eventType": "final-summary",
+                    "payload": {
+                        "finalStatus": "ok",
+                        "subjectResults": [
+                            {
+                                "subjectId": "HelloWorldObject",
+                                "status": "ok",
+                                "subjectSummaryPath": "artifacts/subjects/HelloWorldObject/subject-report/summary.json",
+                            }
+                        ],
+                        "artifacts": [
+                            "artifacts/subjects/HelloWorldObject/subject-report/summary.json",
+                            "artifacts/subjects/HelloWorldObject/matrices/windows-dev-output/report.json",
+                        ],
+                    },
+                },
+            ],
+            repo_root=REPO_ROOT,
+        )
+
+        self.assertIn("Subjects:", screen)
+        self.assertIn("ok: HelloWorldObject", screen)
+        self.assertIn("\x1b[1;36mSubject summary:\x1b[0m", screen)
+        subject_summary_uri = (
+            REPO_ROOT / "artifacts" / "subjects" / "HelloWorldObject" / "subject-report" / "summary.json"
+        ).resolve().as_uri()
+        self.assertIn(
+            f"\x1b]8;;{subject_summary_uri}\x1b\\artifacts/subjects/HelloWorldObject/subject-report/summary.json\x1b]8;;\x1b\\",
+            screen,
+        )
 
 
 if __name__ == "__main__":

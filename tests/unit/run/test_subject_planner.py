@@ -117,6 +117,86 @@ class SubjectPlannerTests(unittest.TestCase):
                 matrix_id="windows-dev-output",
             )
 
+    def test_planner_uses_generic_echo_perf_defaults(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "booming_subject_planner_generic_echo_default")
+
+        plan = planner_module.build_plan(REPO_ROOT, "GenericEcho")
+
+        self.assertEqual("GenericEcho", plan["request"]["subjectId"])
+        self.assertEqual("GenericEcho", plan["selection"]["subjectId"])
+        self.assertEqual("perf.dev", plan["selection"]["goalId"])
+        self.assertEqual("windows-perf-dev", plan["selection"]["matrixId"])
+        self.assertEqual("managed-runtime-perf", plan["selection"]["pipelineId"])
+        self.assertEqual("runtime", plan["selection"]["artifactPlan"]["evidenceTerminalBucket"])
+        self.assertEqual(
+            [
+                "source-resolve",
+                "host-input-build",
+                "runtime-perf-collect",
+                "report-assemble",
+            ],
+            [stage["stageId"] for stage in plan["stagePlan"]],
+        )
+        self.assertEqual(
+            "artifacts/subjects/GenericEcho/matrices/windows-perf-dev/runtime/runtime.manifest.json",
+            plan["stagePlan"][2]["paths"]["manifestPath"],
+        )
+
+    def test_planner_selects_release_perf_matrix_for_generic_echo(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "booming_subject_planner_generic_echo_release")
+
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            "GenericEcho",
+            goal_id="perf.release",
+            matrix_id="windows-perf-release",
+        )
+
+        self.assertEqual("windows-perf-release", plan["selection"]["matrixId"])
+        self.assertEqual("managed-runtime-perf", plan["selection"]["pipelineId"])
+        self.assertEqual("report", plan["selection"]["artifactPlan"]["evidenceTerminalBucket"])
+        self.assertEqual(
+            "artifacts/subjects/GenericEcho/matrices/windows-perf-release/report.json",
+            plan["stagePlan"][-1]["paths"]["manifestPath"],
+        )
+
+    def test_planner_selects_first_matrix_supporting_requested_goal_when_matrix_is_omitted(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "booming_subject_planner_generic_echo_goal_only")
+
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            "GenericEcho",
+            goal_id="perf.release",
+        )
+
+        self.assertEqual("perf.release", plan["selection"]["goalId"])
+        self.assertEqual("windows-perf-release", plan["selection"]["matrixId"])
+        self.assertEqual("managed-runtime-perf", plan["selection"]["pipelineId"])
+
+    def test_planner_uses_helloworld_managed_output_defaults(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "booming_subject_planner_helloworld_smoke")
+
+        plan = planner_module.build_plan(REPO_ROOT, "HelloWorld")
+
+        self.assertEqual("HelloWorld", plan["selection"]["subjectId"])
+        self.assertEqual("correctness.dev", plan["selection"]["goalId"])
+        self.assertEqual("windows-managed-output", plan["selection"]["matrixId"])
+        self.assertEqual("managed-runtime-output", plan["selection"]["pipelineId"])
+        self.assertEqual("runtime", plan["selection"]["artifactPlan"]["evidenceTerminalBucket"])
+        self.assertEqual(
+            [
+                "source-resolve",
+                "host-input-build",
+                "runtime-managed-output",
+                "report-assemble",
+            ],
+            [stage["stageId"] for stage in plan["stagePlan"]],
+        )
+        self.assertEqual(
+            "artifacts/subjects/HelloWorld/matrices/windows-managed-output/runtime/runtime.manifest.json",
+            plan["stagePlan"][2]["paths"]["manifestPath"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -11,6 +11,10 @@ def module_id(module: str, profile: str) -> str:
     return f"module/{module}/{profile}"
 
 
+def subject_id(subject: str) -> str:
+    return f"subject/{subject}"
+
+
 def system_id(scenario: str) -> str:
     return f"system/{scenario}"
 
@@ -31,6 +35,13 @@ def parse_module_id(value: str) -> tuple[str, str]:
     if len(parts) != 3 or parts[0] != "module" or not parts[1] or not parts[2]:
         raise ValueError(f"invalid module id: {value}")
     return parts[1], parts[2]
+
+
+def parse_subject_id(value: str) -> str:
+    parts = value.split("/")
+    if len(parts) != 2 or parts[0] != "subject" or not parts[1]:
+        raise ValueError(f"invalid subject id: {value}")
+    return parts[1]
 
 
 def parse_system_id(value: str) -> str:
@@ -75,6 +86,16 @@ def normalize_selector_options(kind: str, options: dict[str, Any]) -> dict[str, 
             if not module or not profile:
                 raise ValueError("module selector requires --id or both --module and --profile")
             normalized["id"] = module_id(module, profile)
+        return normalized
+
+    if kind == "subject":
+        if object_id:
+            normalized["subject"] = parse_subject_id(str(object_id))
+        else:
+            subject = str(normalized.get("subject") or "")
+            if not subject:
+                raise ValueError("subject selector requires --id or --subject")
+            normalized["id"] = subject_id(subject)
         return normalized
 
     if kind == "system":

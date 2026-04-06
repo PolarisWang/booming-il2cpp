@@ -2,14 +2,16 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import shutil
 import sys
-import tempfile
 import unittest
+import uuid
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 EXECUTOR_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_executor.py"
+TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp_test_subject_executor"
 
 
 def load_module(path: Path, module_name: str):
@@ -27,9 +29,10 @@ def load_module(path: Path, module_name: str):
 
 
 class SubjectExecutorTests(unittest.TestCase):
-    def test_executor_skips_reused_stage_and_runs_bucket_local_workers(self) -> None:
+    def test_executor_emits_matrix_events_and_writes_enriched_matrix_report(self) -> None:
         executor_module = load_module(EXECUTOR_MODULE_PATH, "booming_subject_executor")
         worker_calls: list[dict] = []
+        emitted_events: list[dict] = []
 
         def analysis_worker(*, repo_root: Path, request: dict) -> dict:
             worker_calls.append({"kind": request["stage"]["kind"], "request": request})
@@ -50,8 +53,10 @@ class SubjectExecutorTests(unittest.TestCase):
                 "failure": None,
             }
 
-        with tempfile.TemporaryDirectory() as temp_dir:
-            repo_root = Path(temp_dir)
+        TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
+        repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
             source_manifest = repo_root / "artifacts" / "subjects" / "HelloWorldObject" / "shared" / "source" / "source.manifest.json"
             source_manifest.parent.mkdir(parents=True, exist_ok=True)
             source_manifest.write_text("{}", encoding="utf-8")
@@ -60,8 +65,26 @@ class SubjectExecutorTests(unittest.TestCase):
                 "planVersion": "v1",
                 "selection": {
                     "subjectId": "HelloWorldObject",
+                    "displayName": "HelloWorldObject",
                     "goalId": "correctness.platform",
                     "matrixId": "windows-reference-trace",
+                    "pipelineId": "proof-runtime-trace",
+                    "source": {
+                        "type": "dotnet-project",
+                        "path": "subjects/HelloWorldObject/source/HelloWorldObject.csproj",
+                        "entry": "HelloWorldObject/Program::Main(System.String[])",
+                    },
+                    "validationIntent": {
+                        "validationMode": "trace",
+                        "adaptationLevel": "traceable",
+                        "expectedOutcome": "pass",
+                    },
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "msvc-reference",
+                        "runtimeProfile": "reference-trace",
+                    },
                     "artifactPlan": {"evidenceTerminalBucket": "runtime"},
                 },
                 "stagePlan": [
@@ -89,10 +112,10 @@ class SubjectExecutorTests(unittest.TestCase):
                         "scope": "shared",
                         "bucket": "analysis",
                         "dependsOn": ["source-resolve"],
-                        "executionMode": "executed",
+                        "executionMode": "invalidated",
                         "fingerprint": "f-analysis",
                         "upstreamFingerprints": {"source": "f-source"},
-                        "reuse": {"decision": "absent", "reason": "manifest-missing"},
+                        "reuse": {"decision": "mismatch", "reason": "fingerprint-mismatch:driver-changed"},
                         "paths": {
                             "bucketRoot": "artifacts/subjects/HelloWorldObject/shared/analysis",
                             "manifestPath": "artifacts/subjects/HelloWorldObject/shared/analysis/analysis.manifest.json",
@@ -125,6 +148,8 @@ class SubjectExecutorTests(unittest.TestCase):
                 repo_root,
                 plan,
                 worker_registry={"analysis-frontend": analysis_worker},
+                run_id="20260406-hello-001",
+                event_writer=emitted_events.append,
             )
 
             self.assertEqual("ok", result["status"])
@@ -143,8 +168,38 @@ class SubjectExecutorTests(unittest.TestCase):
             report_path = repo_root / "artifacts" / "subjects" / "HelloWorldObject" / "matrices" / "windows-reference-trace" / "report.json"
             self.assertTrue(report_path.is_file(), msg=f"missing matrix report: {report_path}")
             report = json.loads(report_path.read_text(encoding="utf-8"))
+            self.assertEqual("v1", report["reportVersion"])
+            self.assertEqual("20260406-hello-001", report["runId"])
             self.assertEqual("windows-reference-trace", report["matrixId"])
+            self.assertEqual("correctness.platform", report["goalId"])
             self.assertEqual("runtime", report["terminalBucket"])
+            self.assertEqual("proof-runtime-trace", report["selection"]["pipelineId"])
+            self.assertEqual(
+                ["artifacts/subjects/HelloWorldObject/shared/analysis/typed-il-ir.json"],
+                report["stageResults"][1]["primaryEvidencePaths"],
+            )
+            self.assertEqual(
+                "fingerprint-mismatch:driver-changed",
+                report["stageResults"][1]["invalidation"]["reason"],
+            )
+            self.assertEqual(
+                "analysis",
+                report["artifactResults"][-1]["bucket"],
+            )
+            self.assertEqual(
+                "analysis-frontend",
+                next(event["stageId"] for event in emitted_events if event["eventType"] == "stage-finished"),
+            )
+            self.assertEqual(
+                "matrix",
+                emitted_events[0]["streamScope"],
+            )
+            self.assertEqual(
+                ["stage-reused", "stage-invalidated", "stage-start", "stage-finished", "matrix-summary"],
+                [event["eventType"] for event in emitted_events],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
 
 if __name__ == "__main__":

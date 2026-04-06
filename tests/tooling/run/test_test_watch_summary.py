@@ -53,6 +53,14 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
                             {"phaseId": "code", "status": "ok"},
                             {"phaseId": "module", "status": "ok"},
                         ],
+                        "subjectResults": [
+                            {
+                                "subjectId": "HelloWorldObject",
+                                "requestedGoalId": "correctness.platform",
+                                "status": "fail",
+                                "subjectSummaryPath": "artifacts/subjects/HelloWorldObject/subject-report/summary.json",
+                            }
+                        ],
                         "suiteResults": [
                             {"suiteId": "smoke/HelloWorld", "status": "ok"},
                             {"suiteId": "workflow/roadmap-0-macos", "status": "ok"},
@@ -78,6 +86,8 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
         self.assertIn("run-1", result.text or "")
         self.assertIn("Phases:", result.text or "")
         self.assertIn("ok: code", result.text or "")
+        self.assertIn("Subjects:", result.text or "")
+        self.assertIn("fail: HelloWorldObject", result.text or "")
         self.assertIn("workflow/roadmap-0-macos", result.text or "")
 
     def test_test_watch_reads_latest_events(self) -> None:
@@ -109,6 +119,14 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
                                         {"phaseId": "module", "status": "ok"},
                                         {"phaseId": "system", "status": "ok"},
                                     ],
+                                    "subjectResults": [
+                                        {
+                                            "subjectId": "HelloWorldObject",
+                                            "requestedGoalId": "correctness.platform",
+                                            "status": "ok",
+                                            "subjectSummaryPath": "artifacts/subjects/HelloWorldObject/subject-report/summary.json",
+                                        }
+                                    ],
                                 },
                             }
                         ),
@@ -136,6 +154,8 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
         self.assertIn("ok: code", result.text or "")
         self.assertIn("ok: module", result.text or "")
         self.assertIn("ok: system", result.text or "")
+        self.assertIn("Subjects:", result.text or "")
+        self.assertIn("ok: HelloWorldObject", result.text or "")
 
 
 if __name__ == "__main__":

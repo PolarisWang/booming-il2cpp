@@ -145,6 +145,92 @@ class PrepareScopeTests(unittest.TestCase):
         self.assertIn("doctor ok", prepare_result.payload.get("consoleText", ""))
         doctor_handle.assert_called_once()
 
+    def test_prepare_global_bootstraps_cmake_before_doctor(self) -> None:
+        prepare_module = load_prepare_module()
+        cmake_bootstrap = prepare_module.tooling_module.ToolBootstrapResult(
+            ready=True,
+            output="cmake installed successfully.\n",
+        )
+        doctor_result = prepare_module.CommandResult.success(
+            command="doctor",
+            host_platform="windows",
+            target=None,
+            text="doctor ok\n",
+        )
+        parsed = {
+            "command": {"id": "test-family-all", "handler": "test.dispatch"},
+            "command_text": "test smoke all --stage build",
+            "target": "smoke",
+            "options": {"family": "smoke", "stage": "build"},
+            "json": False,
+        }
+        step_result = prepare_module.CommandResult.success(
+            command="test smoke all --stage build",
+            host_platform="windows",
+            target="smoke",
+            text="prepared smoke build\n",
+        )
+
+        with patch.object(prepare_module.tooling_module, "ensure_cmake_available", return_value=cmake_bootstrap) as ensure_cmake:
+            with patch.object(prepare_module.doctor_commands, "handle", return_value=doctor_result) as doctor_handle:
+                with patch.object(prepare_module, "_prepare_plan", return_value=[["test", "smoke", "all", "--stage", "build"]]):
+                    with patch.object(prepare_module.manifest_module, "parse_cli", return_value=parsed):
+                        with patch.object(prepare_module.test_commands, "handle", return_value=step_result):
+                            with patch.object(prepare_module, "write_json"):
+                                with patch.object(prepare_module, "prepare_state_path", return_value=REPO_ROOT / "artifacts" / "run" / "prepare" / "unit-test-global.json"):
+                                    prepare_result = prepare_module.handle(
+                                        {"id": "prepare"},
+                                        REPO_ROOT,
+                                        "windows",
+                                        "prepare",
+                                        {},
+                                    )
+
+        self.assertEqual("ok", prepare_result.status)
+        self.assertIn("cmake installed successfully.", prepare_result.payload.get("consoleText", ""))
+        ensure_cmake.assert_called_once_with("prepare", "windows", REPO_ROOT)
+        doctor_handle.assert_called_once()
+
+    def test_prepare_windows_workflow_bootstraps_cmake_before_steps(self) -> None:
+        prepare_module = load_prepare_module()
+        cmake_bootstrap = prepare_module.tooling_module.ToolBootstrapResult(
+            ready=True,
+            output="cmake installed successfully.\n",
+        )
+        parsed = {
+            "command": {"id": "test-family-all", "handler": "test.dispatch"},
+            "command_text": "test smoke all --stage build",
+            "target": "smoke",
+            "options": {"family": "smoke", "stage": "build"},
+            "json": False,
+        }
+        step_result = prepare_module.CommandResult.success(
+            command="test smoke all --stage build",
+            host_platform="windows",
+            target="smoke",
+            text="prepared smoke build\n",
+        )
+
+        with patch.object(prepare_module.tooling_module, "ensure_cmake_available", return_value=cmake_bootstrap) as ensure_cmake:
+            with patch.object(prepare_module.doctor_commands, "handle") as doctor_handle:
+                with patch.object(prepare_module, "_prepare_plan", return_value=[["test", "smoke", "all", "--stage", "build"]]):
+                    with patch.object(prepare_module.manifest_module, "parse_cli", return_value=parsed):
+                        with patch.object(prepare_module.test_commands, "handle", return_value=step_result):
+                            with patch.object(prepare_module, "write_json"):
+                                with patch.object(prepare_module, "prepare_state_path", return_value=REPO_ROOT / "artifacts" / "run" / "prepare" / "unit-test-workflow.json"):
+                                    prepare_result = prepare_module.handle(
+                                        {"id": "prepare-verify-roadmap-0-windows"},
+                                        REPO_ROOT,
+                                        "windows",
+                                        "prepare workflow roadmap-0 --host windows",
+                                        {},
+                                    )
+
+        self.assertEqual("ok", prepare_result.status)
+        self.assertIn("cmake installed successfully.", prepare_result.payload.get("consoleText", ""))
+        ensure_cmake.assert_called_once_with("prepare workflow roadmap-0 --host windows", "windows", REPO_ROOT)
+        doctor_handle.assert_not_called()
+
 
 if __name__ == "__main__":
     unittest.main()

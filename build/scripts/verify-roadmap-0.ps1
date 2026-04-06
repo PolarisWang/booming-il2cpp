@@ -8,6 +8,7 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
+# Canonical trace contracts live under tests\contracts\trace.
 $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
 if ($null -eq $pythonCommand) {
     $pythonCommand = Get-Command py -ErrorAction SilentlyContinue

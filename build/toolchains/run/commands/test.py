@@ -10,11 +10,15 @@ try:
     from .. import tui as tui_module
     from ..testing import catalog as catalog_module
     from ..testing import contracts as contracts_module
+    from ..testing import events as events_module
     from ..testing import public_specs as public_specs_module
     from ..testing import registry as registry_module
     from ..testing import selectors as selectors_module
     from ..testing import session as session_module
     from ..testing import reporting as reporting_module
+    from ..testing import subject_executor as subject_executor_module
+    from ..testing import subject_planner as subject_planner_module
+    from ..testing import subject_reporting as subject_reporting_module
     from .. import tooling as tooling_module
     from ..common import combine_process_output, run_process
     from ..commands import build as build_commands
@@ -26,11 +30,15 @@ except ImportError:
     import tui as tui_module
     from testing import catalog as catalog_module
     from testing import contracts as contracts_module
+    from testing import events as events_module
     from testing import public_specs as public_specs_module
     from testing import registry as registry_module
     from testing import selectors as selectors_module
     from testing import session as session_module
     from testing import reporting as reporting_module
+    from testing import subject_executor as subject_executor_module
+    from testing import subject_planner as subject_planner_module
+    from testing import subject_reporting as subject_reporting_module
     import tooling as tooling_module
     from common import combine_process_output, run_process
     from commands import build as build_commands
@@ -87,6 +95,7 @@ def _render_registry_list(index: registry_module.RegistryIndex) -> str:
     lines = ["Unified Test Registry", ""]
     for title, items in (
         ("Suites", index.suites),
+        ("Subjects", index.subjects),
         ("Module Verifications", index.module_verifications),
         ("System Scenarios", index.system_scenarios),
         ("Pipelines", index.pipelines),
@@ -213,10 +222,14 @@ def _render_summary(summary: dict[str, Any]) -> str:
         lines.extend(str(error) for error in errors)
 
     suite_results = list(summary.get("suiteResults") or [])
+    subject_results = list(summary.get("subjectResults") or [])
     phase_results = list(summary.get("phaseResults") or [])
     if phase_results:
         lines.append("Phases:")
         lines.extend(f"{phase.get('status', '-')}: {phase.get('phaseId', '-')}" for phase in phase_results)
+    if subject_results:
+        lines.append("Subjects:")
+        lines.extend(f"{subject.get('status', '-')}: {subject.get('subjectId', '-')}" for subject in subject_results)
     if suite_results:
         lines.append("Suites:")
         lines.extend(f"{suite.get('status', '-')}: {suite.get('suiteId', '-')}" for suite in suite_results)
@@ -501,6 +514,162 @@ def _with_selected_object_context(
     )
 
 
+def _write_json_document(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def _resolve_subject_matrix_report_path(plan: dict[str, Any]) -> str:
+    for stage in list(plan.get("stagePlan") or []):
+        if str(stage.get("bucket") or "") == "report":
+            return str(dict(stage.get("paths") or {}).get("manifestPath") or "")
+    matrix_root = str(dict(plan.get("artifactsRoot") or {}).get("matrixRoot") or "")
+    if matrix_root:
+        return f"{matrix_root}/report.json"
+    return ""
+
+
+def _render_subject_summary(subject_summary: dict[str, Any]) -> str:
+    lines = [
+        "Subject Summary",
+        f"Run: {subject_summary.get('runId', '-')}",
+        f"Subject: {subject_summary.get('subjectId', '-')}",
+        f"Goal: {subject_summary.get('requestedGoalId', '-')}",
+        f"Status: {subject_summary.get('status', '-')}",
+    ]
+    matrix_results = list(subject_summary.get("matrixResults") or [])
+    if matrix_results:
+        lines.append("Matrices:")
+        lines.extend(f"{matrix.get('status', '-')}: {matrix.get('matrixId', '-')}" for matrix in matrix_results)
+    return "\n".join(lines) + "\n"
+
+
+def _run_subject_object(
+    *,
+    index: registry_module.RegistryIndex,
+    selected_object: dict[str, Any],
+    normalized_options: dict[str, Any],
+    repo_root: Path,
+    host_platform: str,
+    command_text: str,
+) -> CommandResult:
+    subject_key = str(normalized_options.get("subject") or selected_object.get("subjectId") or "")
+    goal_id = str(normalized_options.get("goal") or "") or None
+    matrix_id = str(normalized_options.get("matrix") or "") or None
+
+    try:
+        plan = subject_planner_module.build_plan(
+            repo_root,
+            subject_key,
+            goal_id=goal_id,
+            matrix_id=matrix_id,
+        )
+    except (FileNotFoundError, RuntimeError, ValueError) as error:
+        return _with_selected_object_context(
+            CommandResult.failure(
+                command=command_text,
+                host_platform=host_platform,
+                target=str(selected_object["id"]),
+                errors=[str(error)],
+                payload={"exitCode": 2},
+                text=f"{error}\n",
+            ),
+            selected_object,
+            index,
+        )
+
+    run_context = reporting_module.start_session_report(
+        repo_root=repo_root,
+        host_platform=host_platform,
+        command_text=command_text,
+    )
+
+    def event_writer(event: dict[str, Any]) -> None:
+        reporting_module.append_session_event(repo_root, run_context, event)
+
+    selection = dict(plan.get("selection") or {})
+    try:
+        execution_result = subject_executor_module.execute_plan(
+            repo_root,
+            plan,
+            run_id=str(run_context["runId"]),
+            event_writer=event_writer,
+        )
+    except Exception as error:
+        execution_result = {
+            "subjectId": str(selection.get("subjectId") or subject_key),
+            "matrixId": str(selection.get("matrixId") or matrix_id or ""),
+            "goalId": str(selection.get("goalId") or goal_id or ""),
+            "status": "fail",
+            "terminalStageId": "",
+            "terminalBucket": str(dict(selection.get("artifactPlan") or {}).get("evidenceTerminalBucket") or ""),
+            "stageResults": [],
+            "errors": [str(error)],
+            "events": [],
+        }
+
+    generated_at = events_module.utc_timestamp()
+    matrix_report_path = _resolve_subject_matrix_report_path(plan)
+    matrix_report: dict[str, Any]
+    matrix_report_abspath = repo_root / matrix_report_path if matrix_report_path else None
+    if matrix_report_abspath is not None and matrix_report_abspath.is_file():
+        matrix_report = json.loads(matrix_report_abspath.read_text(encoding="utf-8"))
+    else:
+        matrix_report = subject_reporting_module.build_matrix_report(
+            plan,
+            execution_result,
+            run_id=str(run_context["runId"]),
+            generated_at=generated_at,
+        )
+        if matrix_report_path:
+            subject_reporting_module.materialize_matrix_report_artifacts(
+                repo_root,
+                matrix_report_path=matrix_report_path,
+                matrix_report=matrix_report,
+            )
+            _write_json_document(repo_root / matrix_report_path, matrix_report)
+
+    subject_summary_path = f"{plan['artifactsRoot']['subjectReportRoot']}/summary.json"
+    subject_summary = subject_reporting_module.build_subject_summary(
+        subject_id=str(selection.get("subjectId") or subject_key),
+        requested_goal_id=str(selection.get("goalId") or goal_id or ""),
+        matrix_reports=[matrix_report],
+        matrix_report_paths={str(matrix_report.get("matrixId") or ""): matrix_report_path},
+        run_id=str(run_context["runId"]),
+        generated_at=generated_at,
+    )
+    _write_json_document(repo_root / subject_summary_path, subject_summary)
+    subject_result = subject_reporting_module.build_subject_result(
+        subject_summary,
+        subject_summary_path=subject_summary_path,
+    )
+
+    artifacts = [
+        path
+        for path in [matrix_report_path, subject_summary_path, *list(matrix_report.get("releaseReportPaths") or [])]
+        if path
+    ]
+    errors = list(execution_result.get("errors") or [])
+    succeeded = str(execution_result.get("status") or "fail") == "ok"
+    result_factory = CommandResult.success if succeeded else CommandResult.failure
+    kwargs: dict[str, Any] = {
+        "command": command_text,
+        "host_platform": host_platform,
+        "target": str(selected_object["id"]),
+        "payload": {
+            "artifacts": artifacts,
+            "exitCode": 0 if succeeded else 1,
+            "subjectResults": [subject_result],
+        },
+        "text": _render_subject_summary(subject_summary),
+    }
+    if not succeeded:
+        kwargs["errors"] = errors or [f"subject execution failed: {selected_object['id']}"]
+    result = result_factory(**kwargs)
+    result = _attach_session_report(result, repo_root, host_platform, command_text, run_context=run_context)
+    return _with_selected_object_context(result, selected_object, index)
+
+
 def _run_suite_items(
     items: list[dict[str, Any]],
     *,
@@ -696,6 +865,17 @@ def _handle_registry_object_dispatch(
             text=f"registry object not found: {object_id}\n",
         )
 
+    stage = str(normalized_options.get("stage") or "all")
+    if object_kind == "subject":
+        return _run_subject_object(
+            index=index,
+            selected_object=selected_object,
+            normalized_options=normalized_options,
+            repo_root=repo_root,
+            host_platform=host_platform,
+            command_text=command_text,
+        )
+
     try:
         plan = registry_module.expand_execution_plan(index, object_id)
     except ValueError as error:
@@ -708,7 +888,6 @@ def _handle_registry_object_dispatch(
             text=f"{error}\n",
         )
 
-    stage = str(normalized_options.get("stage") or "all")
     return _run_suite_items(
         plan,
         index=index,
@@ -741,7 +920,7 @@ def _handle_public_test_dispatch(
         return _handle_test_summary(command_text, repo_root, host_platform, options)
     if command_id in {"test-registry-refresh", "test-registry-list", "test-registry-check-consistency"}:
         return _handle_registry_dispatch(command, repo_root, host_platform, command_text)
-    if command_id in {"test-suite", "test-module", "test-system", "test-pipeline"}:
+    if command_id in {"test-suite", "test-subject", "test-module", "test-system", "test-pipeline"}:
         return _handle_registry_object_dispatch(
             command_id.removeprefix("test-"),
             repo_root,
@@ -812,6 +991,7 @@ def _attach_session_report(
             text=result.text or "",
             errors=list(result.errors),
             artifacts=list(result.payload.get("artifacts", [])),
+            subject_results=list(result.payload.get("subjectResults", [])),
             run_context=run_context,
         )
     except OSError:
@@ -978,6 +1158,7 @@ def handle(
 ) -> CommandResult:
     if command["id"] in {
         "test-suite",
+        "test-subject",
         "test-module",
         "test-system",
         "test-pipeline",

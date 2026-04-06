@@ -6,6 +6,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import uuid
 from pathlib import Path
 from unittest.mock import patch
 
@@ -15,6 +16,7 @@ VERIFY_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "
 VERIFY_WRAPPER_PATH = REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.sh"
 VERIFY_SCRIPT_PATH = REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.py"
 VERIFY_SCRIPT_PS1_PATH = REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.ps1"
+TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "verify-roadmap0"
 
 
 def load_module(path: Path, module_name: str):
@@ -32,6 +34,15 @@ def load_module(path: Path, module_name: str):
 
 
 class Roadmap0LowLevelScriptTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
+
+    def _make_test_dir(self, prefix: str) -> Path:
+        path = TEST_TMP_ROOT / f"{prefix}-{uuid.uuid4().hex}"
+        path.mkdir(parents=True, exist_ok=False)
+        return path
+
     def test_posix_wrapper_runs_without_pwsh(self) -> None:
         if shutil.which("sh") is None:
             self.skipTest("POSIX shell is not available in this environment")
@@ -164,6 +175,43 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
             run_checked_mock.call_args_list[1].args[0],
         )
 
+    def test_low_level_script_native_smoke_uses_visual_studio_compatible_binary_dir_on_windows(self) -> None:
+        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_native_windows_vs")
+        source_dir = REPO_ROOT / "tests" / "contracts" / "native" / "abi"
+        requested_dir = REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows" / "common" / "native-abi-config"
+        allocated_dir = Path(r"C:\Users\mayna\AppData\Local\Temp\booming-il2cpp\cmake-builds\native-abi-config-1234")
+        instance_spec = r"C:\Program Files\Microsoft Visual Studio\18\Professional,version=18.4.11626.88"
+
+        with patch.object(script_module.tooling_module, "detect_visual_studio_generator", return_value="Visual Studio 18 2026"):
+            with patch.object(script_module.tooling_module, "detect_visual_studio_instance_spec", return_value=instance_spec):
+                with patch.object(script_module.tooling_module, "allocate_cmake_binary_dir", return_value=allocated_dir) as allocate_mock:
+                    with patch.object(script_module, "run_checked") as run_checked_mock:
+                        script_module.invoke_native_smoke_build(
+                            source_dir,
+                            requested_dir,
+                            REPO_ROOT,
+                            host_profile="windows",
+                        )
+
+        allocate_mock.assert_called_once_with(
+            requested_dir,
+            host_platform="windows",
+            generator="Visual Studio 18 2026",
+        )
+        self.assertEqual(
+            [
+                "cmake",
+                "-S",
+                str(source_dir),
+                "-B",
+                str(allocated_dir),
+                "-G",
+                "Visual Studio 18 2026",
+                f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}",
+            ],
+            run_checked_mock.call_args_list[0].args[0],
+        )
+
     def test_low_level_script_preset_build_uses_run_scoped_binary_dir(self) -> None:
         script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_preset")
         requested_dir = REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference"
@@ -180,6 +228,28 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
         self.assertEqual(
             ["cmake", "--build", str(allocated_dir)],
             run_checked_mock.call_args_list[1].args[0],
+        )
+
+    def test_low_level_script_dotnet_build_uses_temp_intermediate_root_on_windows(self) -> None:
+        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_dotnet_build")
+        project_path = REPO_ROOT / "tests" / "smoke" / "input" / "HelloWorld" / "HelloWorld.csproj"
+        intermediate_root = Path(r"C:\Users\mayna\AppData\Local\Temp\booming-dotnet-HelloWorld-1234")
+
+        with patch.object(script_module.tooling_module, "allocate_dotnet_intermediate_dir", return_value=intermediate_root):
+            with patch.object(script_module, "run_checked") as run_checked_mock:
+                script_module.invoke_dotnet_build(project_path, REPO_ROOT, host_profile="windows")
+
+        self.assertEqual(
+            [
+                "dotnet",
+                "build",
+                str(project_path),
+                "-c",
+                "Release",
+                f"-p:BaseIntermediateOutputPath={intermediate_root.as_posix()}/$(MSBuildProjectName)/",
+                f"-p:MSBuildProjectExtensionsPath={intermediate_root.as_posix()}/$(MSBuildProjectName)/",
+            ],
+            run_checked_mock.call_args.args[0],
         )
 
     def test_low_level_script_routing_build_uses_run_scoped_binary_dir(self) -> None:
@@ -256,19 +326,21 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
     def test_low_level_script_accepts_stage4_proof_run_artifacts_when_runtime_root_contains_expected_files(self) -> None:
         script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_stage4_run_artifacts_ok")
 
-        with tempfile.TemporaryDirectory() as temp_dir:
-            runtime_root = Path(temp_dir)
+        runtime_root = self._make_test_dir("stage4-runtime-ok")
+        try:
             (runtime_root / "stdout.log").write_text("Hello, World!\n", encoding="utf-8")
             (runtime_root / "stderr.log").write_text("", encoding="utf-8")
             (runtime_root / "exit-code.txt").write_text("0\n", encoding="utf-8")
 
             script_module.validate_stage4_proof_run_artifacts(runtime_root)
+        finally:
+            shutil.rmtree(runtime_root, ignore_errors=True)
 
     def test_low_level_script_accepts_stage4_proof_run_artifacts_when_legacy_root_contains_run_subdir(self) -> None:
         script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_stage4_run_artifacts_legacy_ok")
 
-        with tempfile.TemporaryDirectory() as temp_dir:
-            legacy_root = Path(temp_dir)
+        legacy_root = self._make_test_dir("stage4-runtime-legacy")
+        try:
             run_root = legacy_root / "run"
             run_root.mkdir(parents=True, exist_ok=True)
             (run_root / "stdout.log").write_text("Hello, World!\n", encoding="utf-8")
@@ -276,30 +348,36 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
             (run_root / "exit-code.txt").write_text("0\n", encoding="utf-8")
 
             script_module.validate_stage4_proof_run_artifacts(legacy_root)
+        finally:
+            shutil.rmtree(legacy_root, ignore_errors=True)
 
     def test_low_level_script_rejects_stage4_proof_run_exit_code_mismatch(self) -> None:
         script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_stage4_run_artifacts_exit")
 
-        with tempfile.TemporaryDirectory() as temp_dir:
-            runtime_root = Path(temp_dir)
+        runtime_root = self._make_test_dir("stage4-runtime-exit")
+        try:
             (runtime_root / "stdout.log").write_text("Hello, World!\n", encoding="utf-8")
             (runtime_root / "stderr.log").write_text("", encoding="utf-8")
             (runtime_root / "exit-code.txt").write_text("1\n", encoding="utf-8")
 
             with self.assertRaisesRegex(RuntimeError, "exit code"):
                 script_module.validate_stage4_proof_run_artifacts(runtime_root)
+        finally:
+            shutil.rmtree(runtime_root, ignore_errors=True)
 
     def test_low_level_script_rejects_stage4_proof_run_stdout_mismatch(self) -> None:
         script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_stage4_run_artifacts_stdout")
 
-        with tempfile.TemporaryDirectory() as temp_dir:
-            runtime_root = Path(temp_dir)
+        runtime_root = self._make_test_dir("stage4-runtime-stdout")
+        try:
             (runtime_root / "stdout.log").write_text("unexpected output\n", encoding="utf-8")
             (runtime_root / "stderr.log").write_text("", encoding="utf-8")
             (runtime_root / "exit-code.txt").write_text("0\n", encoding="utf-8")
 
             with self.assertRaisesRegex(RuntimeError, "Hello, World!"):
                 script_module.validate_stage4_proof_run_artifacts(runtime_root)
+        finally:
+            shutil.rmtree(runtime_root, ignore_errors=True)
 
     def test_low_level_powershell_script_is_a_python_forwarder(self) -> None:
         script_text = VERIFY_SCRIPT_PS1_PATH.read_text(encoding="utf-8")

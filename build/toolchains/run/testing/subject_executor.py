@@ -5,14 +5,16 @@ from typing import Any, Callable
 import sys
 
 try:
-    from ..common import write_json
+    from . import events as events_module
     from . import subject_planner as planner_module
+    from . import subject_reporting as subject_reporting_module
     from . import subject_workers as subject_workers_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    from common import write_json
+    from testing import events as events_module
     from testing import subject_planner as planner_module
+    from testing import subject_reporting as subject_reporting_module
     from testing import subject_workers as subject_workers_module
 
 
@@ -34,6 +36,9 @@ def _stage_result(
     action_taken: str,
     manifest_path: str,
     report_paths: list[str],
+    primary_evidence_paths: list[str] | None = None,
+    diagnostics: dict[str, Any] | None = None,
+    details: dict[str, Any] | None = None,
     duration_ms: int = 0,
     failure: str | None = None,
 ) -> dict[str, Any]:
@@ -51,8 +56,14 @@ def _stage_result(
         },
         "manifestPath": manifest_path,
         "reportPaths": report_paths,
+        "primaryEvidencePaths": list(primary_evidence_paths or []),
         "fingerprint": str(stage["fingerprint"]),
         "durationMs": duration_ms,
+        "diagnostics": {
+            "stdoutPath": dict(diagnostics or {}).get("stdoutPath"),
+            "stderrPath": dict(diagnostics or {}).get("stderrPath"),
+        },
+        "details": dict(details or {}),
         "failure": failure,
     }
 
@@ -69,6 +80,8 @@ def execute_plan(
     plan: dict[str, Any],
     *,
     worker_registry: dict[str, Worker] | None = None,
+    run_id: str | None = None,
+    event_writer: Callable[[dict[str, Any]], None] | None = None,
 ) -> dict[str, Any]:
     registry = dict(subject_workers_module.DEFAULT_STAGE_WORKERS)
     if worker_registry:
@@ -78,29 +91,80 @@ def execute_plan(
     stages_by_id = {str(stage["stageId"]): dict(stage) for stage in list(plan.get("stagePlan") or [])}
     stage_results: list[dict[str, Any]] = []
     errors: list[str] = []
+    emitted_events: list[dict[str, Any]] = []
     final_status = "ok"
+    execution_run_id = run_id or "subject-exec"
+
+    def emit_event(
+        event_type: str,
+        payload: dict[str, Any] | None = None,
+        *,
+        stage: dict[str, Any] | None = None,
+        status: str | None = None,
+    ) -> None:
+        event = events_module.build_event(
+            event_type,
+            payload,
+            run_id=execution_run_id,
+            status=status,
+            stream_scope="matrix",
+            subject_id=str(selection["subjectId"]),
+            matrix_id=str(selection["matrixId"]),
+            goal_id=str(selection["goalId"]),
+            stage_id=str(stage["stageId"]) if stage is not None else None,
+            bucket=str(stage["bucket"]) if stage is not None else None,
+            stage_scope=str(stage["scope"]) if stage is not None else None,
+        )
+        emitted_events.append(event)
+        if event_writer is not None:
+            event_writer(event)
 
     for stage in list(plan.get("stagePlan") or []):
         stage_id = str(stage["stageId"])
         if str(stage["kind"]) == "report-assemble":
-            report_payload = {
-                "subjectId": str(selection["subjectId"]),
-                "matrixId": str(selection["matrixId"]),
-                "goalId": str(selection["goalId"]),
-                "status": final_status,
-                "terminalBucket": str(selection["artifactPlan"]["evidenceTerminalBucket"]),
-                "stageResults": list(stage_results),
-                "errors": list(errors),
-            }
-            write_json(repo_root / str(stage["paths"]["manifestPath"]), report_payload)
+            report_payload = subject_reporting_module.build_matrix_report(
+                plan,
+                {
+                    "subjectId": str(selection["subjectId"]),
+                    "matrixId": str(selection["matrixId"]),
+                    "goalId": str(selection["goalId"]),
+                    "status": final_status,
+                    "terminalStageId": _terminal_stage_id(
+                        stage_results,
+                        str(selection["artifactPlan"]["evidenceTerminalBucket"]),
+                    ),
+                    "terminalBucket": str(selection["artifactPlan"]["evidenceTerminalBucket"]),
+                    "stageResults": list(stage_results),
+                    "errors": list(errors),
+                },
+                run_id=execution_run_id,
+                generated_at=events_module.utc_timestamp(),
+            )
+            release_report_paths = subject_reporting_module.materialize_matrix_report_artifacts(
+                repo_root,
+                matrix_report_path=str(stage["paths"]["manifestPath"]),
+                matrix_report=report_payload,
+            )
+            report_path = repo_root / str(stage["paths"]["manifestPath"])
+            report_path.parent.mkdir(parents=True, exist_ok=True)
+            report_path.write_text(__import__("json").dumps(report_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             stage_results.append(
                 _stage_result(
                     stage,
                     status=final_status,
                     action_taken="reused" if str(stage["executionMode"]) == "reused" else "executed",
                     manifest_path=str(stage["paths"]["manifestPath"]),
-                    report_paths=list(stage["paths"]["reportPaths"]),
+                    report_paths=list(stage["paths"]["reportPaths"]) + list(release_report_paths),
                 )
+            )
+            emit_event(
+                "matrix-summary",
+                {
+                    "status": final_status,
+                    "terminalBucket": str(selection["artifactPlan"]["evidenceTerminalBucket"]),
+                    "reportPath": str(stage["paths"]["manifestPath"]),
+                },
+                status=final_status,
             )
             continue
 
@@ -113,6 +177,15 @@ def execute_plan(
                     manifest_path=str(stage["paths"]["manifestPath"]),
                     report_paths=list(stage["paths"]["reportPaths"]),
                 )
+            )
+            emit_event(
+                "stage-reused",
+                {
+                    "manifestPath": str(stage["paths"]["manifestPath"]),
+                    "reason": str(stage["reuse"]["reason"]),
+                },
+                stage=stage,
+                status="ok",
             )
             continue
 
@@ -132,6 +205,26 @@ def execute_plan(
                 )
             )
             break
+
+        if str(stage["executionMode"]) == "invalidated":
+            emit_event(
+                "stage-invalidated",
+                {
+                    "manifestPath": str(stage["paths"]["manifestPath"]),
+                    "reason": str(stage["reuse"]["reason"]),
+                },
+                stage=stage,
+                status="running",
+            )
+
+        emit_event(
+            "stage-start",
+            {
+                "manifestPath": str(stage["paths"]["manifestPath"]),
+            },
+            stage=stage,
+            status="running",
+        )
 
         request = {
             "selection": selection,
@@ -163,6 +256,7 @@ def execute_plan(
                     action_taken="executed",
                     manifest_path=str(stage["paths"]["manifestPath"]),
                     report_paths=list(stage["paths"]["reportPaths"]),
+                    diagnostics={},
                     failure=message,
                 )
             )
@@ -179,9 +273,23 @@ def execute_plan(
                 action_taken="executed",
                 manifest_path=str(worker_result.get("bucketManifestPath") or stage["paths"]["manifestPath"]),
                 report_paths=list(worker_result.get("reportPaths") or stage["paths"]["reportPaths"]),
+                primary_evidence_paths=list(worker_result.get("primaryEvidencePaths") or []),
                 duration_ms=int(dict(worker_result.get("metrics") or {}).get("durationMs") or 0),
+                diagnostics=dict(worker_result.get("diagnostics") or {}),
+                details=dict(worker_result.get("details") or {}),
                 failure=worker_result.get("failure"),
             )
+        )
+        emit_event(
+            "stage-finished",
+            {
+                "manifestPath": str(stage_results[-1]["manifestPath"]),
+                "reportPaths": list(stage_results[-1]["reportPaths"]),
+                "primaryEvidencePaths": list(stage_results[-1]["primaryEvidencePaths"]),
+                "failure": stage_results[-1]["failure"],
+            },
+            stage=stage,
+            status=str(worker_result.get("status") or "fail"),
         )
         if final_status != "ok":
             break
@@ -195,6 +303,7 @@ def execute_plan(
         "terminalStageId": _terminal_stage_id(stage_results, terminal_bucket),
         "terminalBucket": terminal_bucket,
         "stageResults": stage_results,
+        "events": emitted_events,
         "errors": errors,
     }
 

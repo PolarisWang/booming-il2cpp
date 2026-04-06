@@ -6,7 +6,11 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <DefineConstants>$(DefineConstants);SCRIBAN_PUBLIC</DefineConstants>
     <Authors>Alexandre Mutel</Authors>
-    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+    <ScribanTargetFrameworks Condition="'$(ScribanTargetFrameworks)' == '' and '$(ScribanEnablePackaging)' == 'true'">netstandard2.0;net8.0</ScribanTargetFrameworks>
+    <ScribanTargetFrameworks Condition="'$(ScribanTargetFrameworks)' == ''">net8.0</ScribanTargetFrameworks>
+    <ScribanEnableAotCompatibility Condition="'$(ScribanEnableAotCompatibility)' == '' and '$(ScribanEnablePackaging)' == 'true'">true</ScribanEnableAotCompatibility>
+    <ScribanEnableAotCompatibility Condition="'$(ScribanEnableAotCompatibility)' == ''">false</ScribanEnableAotCompatibility>
+    <TargetFrameworks>$(ScribanTargetFrameworks)</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <PackageTags>templating;handlebars;liquid</PackageTags>
     <PackageIcon>scriban.png</PackageIcon>
@@ -14,7 +18,7 @@
     <PackageProjectUrl>https://scriban.github.io</PackageProjectUrl>
     <PackageLicenseExpression>BSD-2-Clause</PackageLicenseExpression>
     <NoWarn>$(NoWarn);CS1591;NU5129</NoWarn>
-    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
+    <IsAotCompatible Condition="'$(ScribanEnableAotCompatibility)' == 'true' and $([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- This is enabled but still not used in scriban, only setup to protect embedding source to produce new warnings if the user project is using nullable -->
@@ -48,7 +52,7 @@
     <None Include="$(MSBuildThisFileDirectory)../../img/scriban.png" Pack="true" PackagePath="" />
     <None Include="$(MSBuildThisFileDirectory)../../README.md" Pack="true" PackagePath="/" />
 
-    <PackageReference Include="MinVer">
+    <PackageReference Include="MinVer" Condition="'$(ScribanEnablePackaging)' == 'true'">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

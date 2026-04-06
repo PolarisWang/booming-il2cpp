@@ -130,6 +130,66 @@ class SubjectManifestSchemaTests(unittest.TestCase):
             runtime_paths["reportPaths"],
         )
 
+    def test_subject_manifest_loader_discovers_generic_echo_benchmark_subject(self) -> None:
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "booming_subject_manifest_schema_generic_echo")
+
+        manifest_paths = subjects_module.discover_subject_manifests(REPO_ROOT)
+        self.assertIn(
+            REPO_ROOT / "subjects" / "GenericEcho" / "subject.manifest.json",
+            manifest_paths,
+        )
+
+        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "GenericEcho")
+
+        self.assertEqual("GenericEcho", manifest["subjectId"])
+        self.assertEqual("GenericEcho", manifest["displayName"])
+        self.assertEqual("benchmark", manifest["category"])
+        self.assertEqual("perf.dev", manifest["defaultGoal"])
+        self.assertEqual("windows-perf-dev", manifest["defaultMatrix"])
+        self.assertEqual("dotnet-project", manifest["source"]["type"])
+        self.assertEqual(
+            "subjects/GenericEcho/source/GenericEcho.csproj",
+            manifest["source"]["path"],
+        )
+        self.assertEqual(
+            {
+                "windows-perf-dev",
+                "windows-perf-release",
+            },
+            {item["matrixId"] for item in manifest["environmentMatrices"]},
+        )
+
+    def test_subject_manifest_loader_discovers_all_migrated_smoke_subjects(self) -> None:
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "booming_subject_manifest_schema_smoke_subjects")
+
+        manifest_paths = set(subjects_module.discover_subject_manifests(REPO_ROOT))
+        expected_subjects = {
+            "HelloWorld": ("canonical", "subjects/HelloWorld/source/HelloWorld.csproj"),
+            "ReflectionLite": ("diagnostic", "subjects/ReflectionLite/source/ReflectionLite.csproj"),
+            "PInvokeLite": ("diagnostic", "subjects/PInvokeLite/source/PInvokeLite.csproj"),
+            "HostEmbeddingLite": ("diagnostic", "subjects/HostEmbeddingLite/source/HostEmbeddingLite.csproj"),
+        }
+
+        for subject_id, (category, source_path) in expected_subjects.items():
+            manifest_path = REPO_ROOT / "subjects" / subject_id / "subject.manifest.json"
+            self.assertIn(manifest_path, manifest_paths)
+
+            manifest = subjects_module.load_subject_manifest(REPO_ROOT, subject_id)
+            self.assertEqual(subject_id, manifest["subjectId"])
+            self.assertEqual(subject_id, manifest["displayName"])
+            self.assertEqual(category, manifest["category"])
+            self.assertEqual("correctness.dev", manifest["defaultGoal"])
+            self.assertEqual("windows-managed-output", manifest["defaultMatrix"])
+            self.assertEqual(source_path, manifest["source"]["path"])
+            self.assertEqual(
+                {
+                    "windows-managed-output",
+                    "macos-managed-output",
+                    "linux-managed-output",
+                },
+                {item["matrixId"] for item in manifest["environmentMatrices"]},
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

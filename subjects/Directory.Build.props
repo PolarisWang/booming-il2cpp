@@ -1,0 +1,22 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>12.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="
+      '$(MSBuildProjectName)' == 'HelloWorld'
+      or '$(MSBuildProjectName)' == 'GenericEcho'
+      or '$(MSBuildProjectName)' == 'ReflectionLite'
+      or '$(MSBuildProjectName)' == 'PInvokeLite'
+      or '$(MSBuildProjectName)' == 'HostEmbeddingLite'">
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <SmokeArtifactsRoot>$(MSBuildThisFileDirectory)..\artifacts\smoke\</SmokeArtifactsRoot>
+    <BaseOutputPath>$(SmokeArtifactsRoot)bin\$(MSBuildProjectName)\</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(SmokeArtifactsRoot)obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
+  </PropertyGroup>
+</Project>

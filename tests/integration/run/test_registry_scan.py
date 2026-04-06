@@ -70,6 +70,7 @@ class RegistryScanTests(unittest.TestCase):
         self.assertNotIn("gate/windows-reference-desktop", object_ids)
         self.assertNotIn("system/roadmap-0-android-startup-gate", object_ids)
         self.assertNotIn("system/roadmap-0-windows-reference-gate", object_ids)
+        self.assertNotIn("subject/HelloWorldObject", object_ids)
 
     def test_registry_scan_collects_windows_android_gate_objects(self) -> None:
         registry_module = load_module(REGISTRY_MODULE_PATH, "booming_run_registry_windows_android_gate")
@@ -86,7 +87,33 @@ class RegistryScanTests(unittest.TestCase):
         self.assertIn("gate/windows-reference-desktop", object_ids)
         self.assertIn("system/roadmap-0-android-startup-gate", object_ids)
         self.assertIn("system/roadmap-0-windows-reference-gate", object_ids)
+        self.assertIn("subject/HelloWorld", object_ids)
+        self.assertIn("subject/HelloWorldObject", object_ids)
+        self.assertIn("subject/GenericEcho", object_ids)
+        self.assertIn("subject/ReflectionLite", object_ids)
+        self.assertIn("subject/PInvokeLite", object_ids)
+        self.assertIn("subject/HostEmbeddingLite", object_ids)
         self.assertNotIn("system/roadmap-0-linux-packaging-gate-macos-only", object_ids)
+        hello_world_item = next(item for item in index.flat_items if item["id"] == "subject/HelloWorld")
+        self.assertEqual("canonical", hello_world_item["category"])
+        self.assertEqual("correctness.dev", hello_world_item["defaultGoalId"])
+        self.assertEqual("windows-managed-output", hello_world_item["defaultMatrixId"])
+        subject_item = next(item for item in index.flat_items if item["id"] == "subject/HelloWorldObject")
+        self.assertEqual("subject", subject_item["type"])
+        self.assertEqual(
+            "run test subject --id subject/HelloWorldObject",
+            subject_item["canonicalCommand"],
+        )
+        self.assertEqual(["windows"], subject_item["supportedHosts"])
+        generic_echo_item = next(item for item in index.flat_items if item["id"] == "subject/GenericEcho")
+        self.assertEqual("benchmark", generic_echo_item["category"])
+        self.assertEqual("perf.dev", generic_echo_item["defaultGoalId"])
+        self.assertEqual("windows-perf-dev", generic_echo_item["defaultMatrixId"])
+        self.assertEqual(
+            "run test subject --id subject/GenericEcho",
+            generic_echo_item["canonicalCommand"],
+        )
+        self.assertEqual(["perf.dev", "perf.release"], generic_echo_item["goalIds"])
 
     def test_pipeline_execution_plan_deduplicates_suite_runs(self) -> None:
         registry_module = load_module(REGISTRY_MODULE_PATH, "booming_run_registry_for_pipeline_plan")

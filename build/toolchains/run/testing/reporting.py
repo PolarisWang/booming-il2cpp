@@ -184,6 +184,21 @@ def _summarize_suite_result(suite_result: dict[str, Any], report_path: Path, rep
     }
 
 
+def _summarize_subject_results(subject_results: list[dict[str, Any]]) -> dict[str, int]:
+    counts = _empty_status_counts()
+    for subject_result in subject_results:
+        _add_status_count(counts, str(subject_result.get("status", "aborted")))
+    return counts
+
+
+def _resolve_final_status(status: str, subject_results: list[dict[str, Any]]) -> str:
+    if status != "ok":
+        return "fail"
+    if any(str(subject_result.get("status") or "aborted") != "ok" for subject_result in subject_results):
+        return "fail"
+    return "ok"
+
+
 def write_session_report(
     *,
     repo_root: Path,
@@ -195,6 +210,7 @@ def write_session_report(
     text: str,
     errors: list[str],
     artifacts: list[Any],
+    subject_results: list[dict[str, Any]] | None = None,
     run_context: dict[str, Any] | None = None,
 ) -> dict[str, str]:
     if run_context is None:
@@ -208,8 +224,9 @@ def write_session_report(
     console_path = Path(run_context["consolePath"])
     telemetry_path = Path(run_context["telemetryPath"])
 
-    final_status = "ok" if status == "ok" else "fail"
-    exit_code = 0 if status == "ok" else 1
+    normalized_subject_results = list(subject_results or [])
+    final_status = _resolve_final_status(status, normalized_subject_results)
+    exit_code = 0 if final_status == "ok" else 1
     summary_suite_results: list[dict[str, Any]] = []
     session_case_counts = _empty_status_counts()
     session_traffic_light_counts = _empty_traffic_light_counts()
@@ -228,6 +245,7 @@ def write_session_report(
         {
             "runId": run_id,
             "suiteCount": len(suite_results),
+            "subjectCount": len(normalized_subject_results),
             "artifactCount": len(artifacts),
             "errorCount": len(errors),
         },
@@ -266,6 +284,8 @@ def write_session_report(
         "trafficLightCounts": session_traffic_light_counts,
         "phaseResults": list(phase_results or []),
         "suiteResults": summary_suite_results,
+        "subjectStatusCounts": _summarize_subject_results(normalized_subject_results),
+        "subjectResults": normalized_subject_results,
     }
     write_json(summary_path, summary_payload)
 
@@ -278,6 +298,8 @@ def write_session_report(
         "caseCounts": session_case_counts,
         "trafficLightCounts": session_traffic_light_counts,
         "phaseResults": list(phase_results or []),
+        "subjectStatusCounts": _summarize_subject_results(normalized_subject_results),
+        "subjectResults": normalized_subject_results,
         "sessionPath": _relative_path(repo_root, session_path),
         "summaryPath": _relative_path(repo_root, summary_path),
         "eventsPath": _relative_path(repo_root, events_path),

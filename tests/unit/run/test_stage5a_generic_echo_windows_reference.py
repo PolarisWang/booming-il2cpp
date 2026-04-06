@@ -340,38 +340,39 @@ class Stage5AGenericEchoWindowsReferenceTests(unittest.TestCase):
             self.assertIn(marker, proof_host_run_script_text)
 
     def test_windows_reference_proof_run_outputs_generic_ok(self) -> None:
-        cmake_executable = find_cmake_executable()
-        if cmake_executable is not None:
-            if NATIVE_OUTPUT_ROOT.exists():
-                shutil.rmtree(NATIVE_OUTPUT_ROOT)
-
-            PRESET_BUILD_ROOT.mkdir(parents=True, exist_ok=True)
-
-            with tempfile.TemporaryDirectory(prefix="windows-x64-reference-stage5a-", dir=PRESET_BUILD_ROOT) as binary_dir:
-                run_checked(
-                    [
-                        cmake_executable,
-                        "--preset",
-                        "windows-x64-reference",
-                        "-B",
-                        binary_dir,
-                    ],
-                    cwd=REPO_ROOT,
-                )
-                run_checked(
-                    [
-                        cmake_executable,
-                        "--build",
-                        binary_dir,
-                        "--config",
-                        "Release",
-                        "--target",
-                        "chaos_stage5a_generic_echo_closed_minimal_proof_run",
-                    ],
-                    cwd=REPO_ROOT,
-                )
-        else:
+        if find_vsdevcmd_path() is not None:
             self._run_proof_host_with_msvc()
+        else:
+            cmake_executable = find_cmake_executable()
+            if cmake_executable is not None:
+                if NATIVE_OUTPUT_ROOT.exists():
+                    shutil.rmtree(NATIVE_OUTPUT_ROOT)
+
+                with tempfile.TemporaryDirectory(prefix="b5a-") as binary_dir:
+                    run_checked(
+                        [
+                            cmake_executable,
+                            "--preset",
+                            "windows-x64-reference",
+                            "-B",
+                            binary_dir,
+                        ],
+                        cwd=REPO_ROOT,
+                    )
+                    run_checked(
+                        [
+                            cmake_executable,
+                            "--build",
+                            binary_dir,
+                            "--config",
+                            "Release",
+                            "--target",
+                            "chaos_stage5a_generic_echo_closed_minimal_proof_run",
+                        ],
+                        cwd=REPO_ROOT,
+                    )
+            else:
+                self.skipTest("neither cmake nor VS developer tools are available in this environment")
 
         run_root = NATIVE_OUTPUT_ROOT / "run"
         stdout_path = run_root / "stdout.log"

@@ -9,6 +9,7 @@ try:
     from ..common import write_json
     from ..result import CommandResult
     from .. import manifest as manifest_module
+    from .. import tooling as tooling_module
     from ..testing.events import build_event
     from . import doctor as doctor_commands
     from . import build as build_commands
@@ -19,6 +20,7 @@ except ImportError:
     from common import write_json
     from result import CommandResult
     import manifest as manifest_module
+    import tooling as tooling_module
     from testing.events import build_event
     from commands import doctor as doctor_commands
     from commands import build as build_commands
@@ -88,6 +90,12 @@ def _prepare_plan(scope: str, host_platform: str) -> list[list[str]]:
         combined = [list(step) for step in itertools.chain(SMOKE_PREPARE_STEPS, host_specific)]
         return _unique_steps(combined)
     raise KeyError(f"unknown prepare scope: {scope}")
+
+
+def _prepare_requires_cmake(scope: str, host_platform: str) -> bool:
+    if scope in {"workflow-roadmap0-windows", "workflow-roadmap0-macos"}:
+        return True
+    return scope == "global" and host_platform in {"windows", "macos"}
 
 
 def _execute_prepare_step(
@@ -223,6 +231,27 @@ def handle(
     plan_steps = _prepare_plan(scope, host_platform)
     total_units = len(plan_steps) + (1 if command["id"] == "prepare" else 0)
     completed_units = 0
+
+    if _prepare_requires_cmake(scope, host_platform):
+        cmake_bootstrap = tooling_module.ensure_cmake_available(command_text, host_platform, repo_root)
+        if cmake_bootstrap.output:
+            console_outputs.append(cmake_bootstrap.output)
+        if not cmake_bootstrap.ready:
+            message = cmake_bootstrap.output if cmake_bootstrap.output.endswith("\n") else cmake_bootstrap.output + "\n"
+            return CommandResult.failure(
+                command=command_text,
+                host_platform=host_platform,
+                target=scope,
+                errors=cmake_bootstrap.errors or ["prepare failed during CMake bootstrap"],
+                payload={
+                    "prepareScope": scope,
+                    "preparedCommands": [],
+                    "artifacts": [],
+                    "importantOutputs": [],
+                    "consoleText": "\n".join(part for part in console_outputs if part),
+                },
+                text=f"Run failed: {command_text}\n{message}",
+            )
 
     if command["id"] == "prepare":
         _emit_event(progress_callback, event_type="stage-start", completed=completed_units, total=total_units, active_unit="doctor")

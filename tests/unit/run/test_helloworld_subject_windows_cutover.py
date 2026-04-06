@@ -9,6 +9,8 @@ PROOF_HOST_CMAKE_PATH = REPO_ROOT / "tests" / "proof" / "native-reference" / "He
 VERIFY_PY_PATH = REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.py"
 VERIFY_PS1_PATH = REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.ps1"
 LEGACY_INPUT_PROJECT_PATH = REPO_ROOT / "tests" / "proof" / "input" / "HelloWorldObject" / "HelloWorldObject.csproj"
+SUBJECT_INPUT_PROJECT_PATH = REPO_ROOT / "subjects" / "HelloWorldObject" / "source" / "HelloWorldObject.csproj"
+SUBJECT_PROGRAM_PATH = REPO_ROOT / "subjects" / "HelloWorldObject" / "source" / "Program.cs"
 
 
 class HelloWorldSubjectWindowsCutoverTests(unittest.TestCase):
@@ -81,6 +83,16 @@ class HelloWorldSubjectWindowsCutoverTests(unittest.TestCase):
         self.assertIn("<EnableDefaultCompileItems>false</EnableDefaultCompileItems>", project_text)
         self.assertIn("subjects/HelloWorldObject/source/Program.cs", project_text)
         self.assertIn("subjects/HelloWorldObject/source/HelloWorldObject.csproj", project_text)
+
+    def test_subject_input_project_declares_target_framework(self) -> None:
+        project_text = SUBJECT_INPUT_PROJECT_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("<TargetFramework>net8.0</TargetFramework>", project_text)
+
+    def test_subject_program_declares_console_namespace(self) -> None:
+        program_text = SUBJECT_PROGRAM_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("using System;", program_text)
 
 
 if __name__ == "__main__":

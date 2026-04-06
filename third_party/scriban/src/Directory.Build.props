@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <BaseIntermediateOutputPath Condition="'$(ChaosTempIntermediateRoot)' != ''">$(ChaosTempIntermediateRoot)$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionsPath Condition="'$(ChaosTempIntermediateRoot)' != ''">$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
+  </PropertyGroup>
+</Project>

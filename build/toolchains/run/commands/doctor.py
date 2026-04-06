@@ -148,7 +148,7 @@ def _render_doctor_text(checks: list[dict], host_platform: str) -> str:
         lines.append("Next actions:")
         for check in required_issues:
             if check["name"] == "cmake":
-                lines.append("1. Install CMake, or make a local cmake.exe discoverable to the unified entrypoint.")
+                lines.append("1. Run `run prepare` to install a cached CMake, or make a local cmake executable discoverable to the unified entrypoint.")
             else:
                 lines.append(f"1. Resolve the missing required tool: {check['name']}.")
 

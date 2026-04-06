@@ -2,21 +2,27 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Any
+import statistics
 import sys
+import time
 
 try:
     from ..common import combine_process_output, read_json, run_process, write_json
+    from .. import tooling as tooling_module
     from . import contracts as contracts_module
+    from . import perf as perf_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from common import combine_process_output, read_json, run_process, write_json
+    import tooling as tooling_module
     from testing import contracts as contracts_module
+    from testing import perf as perf_module
 
 
 DRIVER_PROJECT_PATH = Path("src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj")
 DRIVER_DLL_PATH = Path("src/managed/Chaos.IL2CPP.Driver/bin/Release/net8.0/Chaos.IL2CPP.Driver.dll")
-HOST_EMBEDDING_PROJECT_PATH = Path("tests/smoke/input/HostEmbeddingLite/HostEmbeddingLite.csproj")
+HOST_EMBEDDING_PROJECT_PATH = Path("subjects/HostEmbeddingLite/source/HostEmbeddingLite.csproj")
 HOST_EMBEDDING_DLL_PATH = Path("artifacts/smoke/bin/HostEmbeddingLite/Release/net8.0/HostEmbeddingLite.dll")
 WINDOWS_TRACE_SNAPSHOT_PATH = Path("tests/contracts/trace/snapshots/windows-warmup-trace.snapshot.json")
 WINDOWS_TRACE_SCHEMA_PATH = Path("tests/contracts/trace/schema/warmup-trace.schema.json")
@@ -38,6 +44,28 @@ def _run_checked(arguments: list[str], *, repo_root: Path, failure_message: str)
     return output
 
 
+def _windows_visual_studio_generator(repo_root: Path) -> str:
+    cmake_path = tooling_module.find_cmake_executable(repo_root) or "cmake"
+    return tooling_module.detect_visual_studio_generator(cmake_path) or "Visual Studio 17 2022"
+
+
+def _normalize_host_platform(host_platform: str) -> str:
+    return "windows" if host_platform.startswith("windows") else host_platform
+
+
+def _dotnet_intermediate_args(project_name: str, host_platform: str) -> list[str]:
+    normalized_host = _normalize_host_platform(host_platform)
+    intermediate_root = tooling_module.allocate_dotnet_intermediate_dir(project_name, host_platform=normalized_host)
+    if intermediate_root is None:
+        return []
+
+    intermediate_text = intermediate_root.as_posix() + "/$(MSBuildProjectName)/"
+    return [
+        f"-p:BaseIntermediateOutputPath={intermediate_text}",
+        f"-p:MSBuildProjectExtensionsPath={intermediate_text}",
+    ]
+
+
 def _success_result(
     *,
     bucket_manifest_path: str,
@@ -46,6 +74,7 @@ def _success_result(
     stdout_path: str | None = None,
     stderr_path: str | None = None,
     duration_ms: int = 0,
+    details: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     return {
         "status": "ok",
@@ -54,6 +83,7 @@ def _success_result(
         "primaryEvidencePaths": primary_evidence_paths,
         "metrics": {"durationMs": duration_ms},
         "diagnostics": {"stdoutPath": stdout_path, "stderrPath": stderr_path},
+        "details": dict(details or {}),
         "failure": None,
     }
 
@@ -87,9 +117,19 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
     source = dict(request["selection"]["source"])
     output_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     output_root.mkdir(parents=True, exist_ok=True)
+    host_platform = str(request["selection"]["executionContext"]["hostPlatform"])
 
     _run_checked(
-        ["dotnet", "build", str(_resolve(repo_root, str(source["path"]))), "-c", "Release", "-o", str(output_root)],
+        [
+            "dotnet",
+            "build",
+            str(_resolve(repo_root, str(source["path"]))),
+            "-c",
+            "Release",
+            "-o",
+            str(output_root),
+            *_dotnet_intermediate_args(str(request["selection"]["subjectId"]), host_platform),
+        ],
         repo_root=repo_root,
         failure_message=f"dotnet build failed: {source['path']}",
     )
@@ -118,8 +158,14 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
 
 
 def _ensure_driver_built(repo_root: Path) -> Path:
+    host_platform = "windows" if sys.platform.startswith("win") else ""
+    arguments = ["dotnet", "build", str(repo_root / DRIVER_PROJECT_PATH), "-c", "Release", "-m:1"]
+    intermediate_root = tooling_module.allocate_dotnet_intermediate_dir(DRIVER_PROJECT_PATH.stem, host_platform=host_platform)
+    if intermediate_root is not None:
+        arguments.append(f"-p:ChaosTempIntermediateRoot={intermediate_root.as_posix()}/")
+
     _run_checked(
-        ["dotnet", "build", str(repo_root / DRIVER_PROJECT_PATH), "-c", "Release"],
+        arguments,
         repo_root=repo_root,
         failure_message=f"dotnet build failed: {DRIVER_PROJECT_PATH.as_posix()}",
     )
@@ -212,7 +258,13 @@ def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dic
 
 def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
     build_root = _resolve(repo_root, request["paths"]["bucketRoot"])
-    cmake_binary_dir = build_root / "cmake"
+    generator = _windows_visual_studio_generator(repo_root)
+    instance_spec = tooling_module.detect_visual_studio_instance_spec(generator)
+    cmake_binary_dir = tooling_module.allocate_cmake_binary_dir(
+        build_root / "cmake",
+        host_platform="windows",
+        generator=generator,
+    )
     out_root = build_root / "out"
     runtime_root = build_root.parent / "runtime"
     generated_root = _resolve(repo_root, request["upstream"]["generated"]["manifestPath"]).parent
@@ -222,8 +274,11 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
             "cmake",
             "--preset",
             "windows-x64-reference",
+            "-G",
+            generator,
             "-B",
             str(cmake_binary_dir),
+            *( [f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}"] if instance_spec else [] ),
             f"-DCHAOS_HELLOWORLD_GENERATED_ROOT={generated_root}",
             f"-DCHAOS_HELLOWORLD_BUILD_OUT_ROOT={out_root}",
             f"-DCHAOS_HELLOWORLD_RUNTIME_ROOT={runtime_root}",
@@ -255,7 +310,7 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
         "generatedManifestPath": str(request["upstream"]["generated"]["manifestPath"]),
         "binaryRoot": _relative(repo_root, out_root),
         "outputs": [_relative(repo_root, proof_exe)],
-        "cmakeBinaryDir": _relative(repo_root, cmake_binary_dir),
+        "cmakeBinaryDir": tooling_module.path_text(repo_root, cmake_binary_dir),
     }
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
     return _success_result(
@@ -273,7 +328,20 @@ def _validate_only_build(
     toolchain_file: Path,
 ) -> dict[str, Any]:
     build_root = _resolve(repo_root, request["paths"]["bucketRoot"])
-    cmake_binary_dir = build_root / "cmake"
+    execution_context = dict(request["selection"].get("executionContext") or {})
+    host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
+    generator = "Ninja"
+    instance_spec: str | None = None
+    if host_platform == "windows":
+        generator = _windows_visual_studio_generator(repo_root)
+        instance_spec = tooling_module.detect_visual_studio_instance_spec(generator)
+        cmake_binary_dir = tooling_module.allocate_cmake_binary_dir(
+            build_root / "cmake",
+            host_platform=host_platform,
+            generator=generator,
+        )
+    else:
+        cmake_binary_dir = build_root / "cmake"
     success_marker = build_root / "validate-only.success.txt"
 
     _run_checked(
@@ -284,10 +352,11 @@ def _validate_only_build(
             "-B",
             str(cmake_binary_dir),
             "-G",
-            "Ninja",
+            generator,
             f"-DROADMAP0_PRESET_TARGET={preset_target}",
             "-DROADMAP0_TOOLCHAIN_VALIDATE_ONLY=ON",
             f"-DCMAKE_TOOLCHAIN_FILE={repo_root / toolchain_file}",
+            *([f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}"] if instance_spec else []),
         ],
         repo_root=repo_root,
         failure_message=f"cmake routing configure failed: {preset_target}",
@@ -309,7 +378,7 @@ def _validate_only_build(
         "generatedManifestPath": str(request["upstream"]["generated"]["manifestPath"]),
         "binaryRoot": _relative(repo_root, build_root),
         "outputs": [_relative(repo_root, success_marker)],
-        "cmakeBinaryDir": _relative(repo_root, cmake_binary_dir),
+        "cmakeBinaryDir": tooling_module.path_text(repo_root, cmake_binary_dir),
     }
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
     return _success_result(
@@ -386,9 +455,186 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
     )
 
 
+def run_managed_runtime_output(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
+    host_input_manifest = read_json(_resolve(repo_root, request["upstream"]["host-input"]["manifestPath"]))
+    if not isinstance(host_input_manifest, dict):
+        raise RuntimeError("host-input manifest must be an object")
+
+    assembly_path = _resolve(repo_root, str(host_input_manifest["primaryAssemblyPath"]))
+    runtime_root = _resolve(repo_root, request["paths"]["bucketRoot"])
+    runtime_root.mkdir(parents=True, exist_ok=True)
+
+    completed = run_process(["dotnet", str(assembly_path)], cwd=repo_root)
+    stdout_path = runtime_root / "stdout.log"
+    stderr_path = runtime_root / "stderr.log"
+    exit_code_path = runtime_root / "exit-code.txt"
+    stdout_path.write_text(completed.stdout or "", encoding="utf-8")
+    stderr_path.write_text(completed.stderr or "", encoding="utf-8")
+    exit_code_path.write_text(f"{completed.returncode}\n", encoding="utf-8")
+
+    output_lines = [line for line in (completed.stdout or "").splitlines() if line.strip()]
+    manifest = {
+        "subjectId": str(request["selection"]["subjectId"]),
+        "matrixId": str(request["selection"]["matrixId"]),
+        "bucket": "runtime",
+        "hostInputManifestPath": str(request["upstream"]["host-input"]["manifestPath"]),
+        "stdoutPath": _relative(repo_root, stdout_path),
+        "stderrPath": _relative(repo_root, stderr_path),
+        "exitCodePath": _relative(repo_root, exit_code_path),
+        "outputLines": output_lines,
+    }
+    write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
+
+    if completed.returncode != 0:
+        return {
+            "status": "fail",
+            "bucketManifestPath": request["paths"]["manifestPath"],
+            "reportPaths": list(request["paths"]["reportPaths"]),
+            "primaryEvidencePaths": [manifest["stdoutPath"]],
+            "metrics": {"durationMs": 0},
+            "diagnostics": {"stdoutPath": manifest["stdoutPath"], "stderrPath": manifest["stderrPath"]},
+            "failure": f"managed runtime execution failed: {assembly_path}",
+        }
+
+    return _success_result(
+        bucket_manifest_path=request["paths"]["manifestPath"],
+        report_paths=list(request["paths"]["reportPaths"]),
+        primary_evidence_paths=[manifest["stdoutPath"]],
+        stdout_path=manifest["stdoutPath"],
+        stderr_path=manifest["stderrPath"],
+    )
+
+
+def _perf_sample_count(runtime_profile: str) -> int:
+    return 10 if "release" in runtime_profile else 5
+
+
+def _perf_summary_metrics(samples: list[dict[str, Any]]) -> dict[str, float | int]:
+    durations = [float(sample["durationMs"]) for sample in samples]
+    return {
+        "sampleCount": len(samples),
+        "meanDurationMs": round(statistics.fmean(durations), 3) if durations else 0.0,
+        "minDurationMs": round(min(durations), 3) if durations else 0.0,
+        "maxDurationMs": round(max(durations), 3) if durations else 0.0,
+    }
+
+
+def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
+    host_input_manifest = read_json(_resolve(repo_root, request["upstream"]["host-input"]["manifestPath"]))
+    if not isinstance(host_input_manifest, dict):
+        raise RuntimeError("host-input manifest must be an object")
+
+    selection = dict(request["selection"])
+    execution_context = dict(selection.get("executionContext") or {})
+    subject_id = str(selection["subjectId"])
+    matrix_id = str(selection["matrixId"])
+    host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
+    runtime_profile = str(execution_context.get("runtimeProfile") or "")
+    sample_count = _perf_sample_count(runtime_profile)
+
+    assembly_path = _resolve(repo_root, str(host_input_manifest["primaryAssemblyPath"]))
+    runtime_root = _resolve(repo_root, request["paths"]["bucketRoot"])
+    runtime_root.mkdir(parents=True, exist_ok=True)
+
+    stdout_path = runtime_root / "stdout.log"
+    stderr_path = runtime_root / "stderr.log"
+    exit_code_path = runtime_root / "exit-code.txt"
+
+    samples: list[dict[str, Any]] = []
+    stdout_chunks: list[str] = []
+    stderr_chunks: list[str] = []
+    output_lines: list[str] = []
+    last_exit_code = 0
+
+    for sample_index in range(sample_count):
+        started = time.perf_counter()
+        completed = run_process(["dotnet", str(assembly_path)], cwd=repo_root)
+        duration_ms = round((time.perf_counter() - started) * 1000, 3)
+        stdout_text = completed.stdout or ""
+        stderr_text = completed.stderr or ""
+        output_lines = [line for line in stdout_text.splitlines() if line.strip()]
+        last_exit_code = int(completed.returncode)
+        samples.append(
+            {
+                "sampleIndex": sample_index + 1,
+                "durationMs": duration_ms,
+                "exitCode": last_exit_code,
+            }
+        )
+        stdout_chunks.append(f"=== sample {sample_index + 1} ({duration_ms:.3f} ms) ===\n{stdout_text}".rstrip() + "\n")
+        if stderr_text:
+            stderr_chunks.append(f"=== sample {sample_index + 1} ({duration_ms:.3f} ms) ===\n{stderr_text}".rstrip() + "\n")
+        if last_exit_code != 0:
+            break
+
+    stdout_path.write_text("".join(stdout_chunks), encoding="utf-8")
+    stderr_path.write_text("".join(stderr_chunks), encoding="utf-8")
+    exit_code_path.write_text(f"{last_exit_code}\n", encoding="utf-8")
+
+    summary_metrics = _perf_summary_metrics(samples)
+    perf_result = perf_module.evaluate_perf_subject(
+        repo_root=repo_root,
+        subject_id=subject_id,
+        matrix_id=matrix_id,
+        host_platform=host_platform,
+        metrics=summary_metrics,
+        update_baseline=False,
+    )
+    performance = {
+        "samples": samples,
+        "metrics": dict(perf_result["metrics"]),
+        "baselinePath": str(perf_result["baselinePath"]),
+        "baseline": dict(perf_result["baseline"]),
+        "baselineUpdated": bool(perf_result["baselineUpdated"]),
+        "regressionStatus": str(perf_result["regressionStatus"]),
+        "regressions": list(perf_result.get("regressions") or []),
+    }
+    manifest = {
+        "subjectId": subject_id,
+        "matrixId": matrix_id,
+        "bucket": "runtime",
+        "hostInputManifestPath": str(request["upstream"]["host-input"]["manifestPath"]),
+        "stdoutPath": _relative(repo_root, stdout_path),
+        "stderrPath": _relative(repo_root, stderr_path),
+        "exitCodePath": _relative(repo_root, exit_code_path),
+        "outputLines": output_lines,
+        "samples": samples,
+        "summaryMetrics": dict(performance["metrics"]),
+        "baselinePath": str(performance["baselinePath"]),
+        "baseline": dict(performance["baseline"]),
+        "baselineUpdated": bool(performance["baselineUpdated"]),
+        "regressionStatus": str(performance["regressionStatus"]),
+        "regressions": list(performance["regressions"]),
+    }
+    write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
+
+    if last_exit_code != 0:
+        return {
+            "status": "fail",
+            "bucketManifestPath": request["paths"]["manifestPath"],
+            "reportPaths": list(request["paths"]["reportPaths"]),
+            "primaryEvidencePaths": [manifest["stdoutPath"]],
+            "metrics": {"durationMs": int(round(sum(float(sample["durationMs"]) for sample in samples)))},
+            "diagnostics": {"stdoutPath": manifest["stdoutPath"], "stderrPath": manifest["stderrPath"]},
+            "details": {"performance": performance},
+            "failure": f"managed perf execution failed: {assembly_path}",
+        }
+
+    return _success_result(
+        bucket_manifest_path=request["paths"]["manifestPath"],
+        report_paths=list(request["paths"]["reportPaths"]),
+        primary_evidence_paths=[manifest["stdoutPath"]],
+        stdout_path=manifest["stdoutPath"],
+        stderr_path=manifest["stderrPath"],
+        duration_ms=int(round(sum(float(sample["durationMs"]) for sample in samples))),
+        details={"performance": performance},
+    )
+
+
 def run_runtime_trace_compare(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
+    host_platform = str(request["selection"]["executionContext"]["hostPlatform"])
     _run_checked(
-        ["dotnet", "build", str(repo_root / HOST_EMBEDDING_PROJECT_PATH), "-c", "Release"],
+        ["dotnet", "build", str(repo_root / HOST_EMBEDDING_PROJECT_PATH), "-c", "Release", *_dotnet_intermediate_args(HOST_EMBEDDING_PROJECT_PATH.stem, host_platform)],
         repo_root=repo_root,
         failure_message=f"dotnet build failed: {HOST_EMBEDDING_PROJECT_PATH.as_posix()}",
     )
@@ -452,5 +698,7 @@ DEFAULT_STAGE_WORKERS = {
     "generated-native-proof": run_native_proof_emitter,
     "build-target": run_build_target,
     "runtime-observe": run_runtime_observe,
+    "runtime-managed-output": run_managed_runtime_output,
+    "runtime-perf-collect": run_runtime_perf_collect,
     "runtime-trace-compare": run_runtime_trace_compare,
 }

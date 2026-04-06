@@ -48,6 +48,7 @@
 
 - `bootstrap` 只负责仓库内 Python runtime 缓存。
 - `prepare` 负责复用型环境准备，并把当前 scope 写入 `artifacts/run/prepare/*.json`。
+- Windows / macOS host 验证 scope 缺失 CMake 时，`prepare` 会优先把缓存版 CMake 安装到 `artifacts/toolchains/cmake/`。
 - `test` 默认复用已经准备好的环境；如需单独构建阶段，使用 `run test ... --stage build`。
 - `clean --scope ...` 只删除统一入口托管的输出，不碰仓库源码和第三方目录。
 
@@ -107,7 +108,8 @@ python3 ./build/scripts/verify-roadmap-0.py --host-profile macos
 
 ## 前置条件
 
-- 通用: `cmake`、`dotnet`
+- 通用: `dotnet`
+- `cmake`：可由系统安装提供，也可先运行一次对应的 `run prepare ...` 让统一入口预热 `artifacts/toolchains/cmake/`
 - Windows host: Visual Studio C++ toolchain
 - Android: 如需进入真实 Android toolchain，补 `ANDROID_NDK_ROOT`
 - macOS / iOS: Python 3、Apple Command Line Tools 或 Xcode、可选 `DEVELOPER_DIR`

@@ -3,7 +3,7 @@
   "runnerType": "dotnet-app",
   "supportedStages": ["build", "run", "all"],
   "runnerConfig": {
-    "projectPath": "tests/smoke/input/ReflectionLite/ReflectionLite.csproj",
+    "projectPath": "subjects/ReflectionLite/source/ReflectionLite.csproj",
     "dllPath": "artifacts/smoke/bin/ReflectionLite/Release/net8.0/ReflectionLite.dll"
   },
   "tags": ["smoke", "managed"]

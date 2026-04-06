@@ -235,7 +235,7 @@ def resolve_dynamic_test_command(
         command = find_command(manifest, command_id, host_platform, include_hidden=True)
         return command, positional[2], merged_options
 
-    if len(positional) == 2 and positional[1] in {"suite", "module", "system", "pipeline"}:
+    if len(positional) == 2 and positional[1] in {"suite", "subject", "module", "system", "pipeline"}:
         kind = positional[1]
         try:
             merged_options = selectors_module.normalize_selector_options(kind, merged_options)

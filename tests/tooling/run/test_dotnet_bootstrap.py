@@ -109,7 +109,7 @@ class DotnetBootstrapTests(unittest.TestCase):
                 {
                     "id": "build-smoke-helloworld",
                     "kind": "smoke-project",
-                    "project_path": "tests/smoke/input/HelloWorld/HelloWorld.csproj",
+                    "project_path": "subjects/HelloWorld/source/HelloWorld.csproj",
                     "artifact_path": "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll",
                     "target": "HelloWorld",
                 },
@@ -135,7 +135,7 @@ class DotnetBootstrapTests(unittest.TestCase):
                     {
                         "id": "test-smoke-helloworld",
                         "kind": "smoke-run",
-                        "project_path": "tests/smoke/input/HelloWorld/HelloWorld.csproj",
+                        "project_path": "subjects/HelloWorld/source/HelloWorld.csproj",
                         "dll_path": "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll",
                         "expected_patterns": ["Hello from managed smoke"],
                         "target": "HelloWorld",

@@ -190,14 +190,14 @@ Status: active-parallel-roadmap
 | task_id | scope | status | owner | purpose | depends_on |
 | --- | --- | --- | --- | --- | --- |
 | `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover` | `Stage A + Stage B + Stage C` | `completed` | `codex` | 首份实现计划，已完成 subject 真源落地、执行脊柱最小骨架和 Windows 首批 matrix cutover | `-` |
-| `subject-stage-d-e-reporting-public-follow-up-plan` | `Stage D + Stage E` | `queued-later-plan` | `unassigned` | 第二份 follow-up plan，合并处理 reporting/events compatibility 与 public entry cutover | `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover` |
-| `subject-stage-f-perf-and-expansion-follow-up-plan` | `Stage F` | `queued-later-plan` | `unassigned` | 第三份 follow-up plan，单独处理 perf 与 multi-subject 扩展 | `subject-stage-d-e-reporting-public-follow-up-plan` |
+| `20260406-08-subject-stage-d-e-reporting-and-public-cutover` | `Stage D + Stage E` | `completed` | `codex` | 第二份 follow-up plan，已完成 reporting / events compatibility 与 subject registry / public entry cutover，并在 Windows compatibility gate 通过后归档 | `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover` |
+| `20260407-01-subject-stage-f-perf-and-multi-subject-expansion` | `Stage F` | `completed` | `codex` | 第三份 follow-up plan，已完成 perf、第二个正式 subject 与长期基线整理规则收口 | `20260406-08-subject-stage-d-e-reporting-and-public-cutover` |
 
 说明：
 
 - `Stage A + Stage B + Stage C` 已完成独立 child plan 并归档
-- `Stage D + Stage E` 不单独拆两份 plan，而是合并为第二份 follow-up plan
-- `Stage F` 继续后置，单独保留为第三份 follow-up plan
+- `Stage D + Stage E` 不单独拆两份 plan，而是合并为第二份 follow-up plan；当前已由 `20260406-08-subject-stage-d-e-reporting-and-public-cutover` 完成并归档
+- `Stage F` 已由 `20260407-01-subject-stage-f-perf-and-multi-subject-expansion` 完成并归档，三份 follow-up plan 全部收口
 
 ## 7. 依赖
 
@@ -252,8 +252,8 @@ Status: active-parallel-roadmap
 ## 10. 当前建议推进顺序
 
 1. `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover` 已完成并归档
-2. 后续再派生 `Stage D + Stage E` 合并计划
-3. 最后单独派生 `Stage F` 计划
+2. `20260406-08-subject-stage-d-e-reporting-and-public-cutover` 已完成并归档
+3. `20260407-01-subject-stage-f-perf-and-multi-subject-expansion` 已完成并归档
 
 ## 11. 已确认的计划前提
 
@@ -269,12 +269,12 @@ Status: active-parallel-roadmap
 
 ## 12. 结论
 
-本 roadmap 现在已经从“等待 plan gate 确认”切换到“跟踪 child plan 与后续计划位”的状态。
+本 roadmap 现在已经从“等待 plan gate 确认”切换到“跟踪已完成 child plan 与当前最后一份 follow-up 计划”的状态。
 
 当前实施顺序已经固定为：
 
 1. `20260406-04-subject-stage-a-b-c-foundation-and-windows-cutover`（已完成）
-2. `Stage D + Stage E` 合并 follow-up plan
-3. `Stage F` 单独 follow-up plan
+2. `20260406-08-subject-stage-d-e-reporting-and-public-cutover`（已完成）
+3. `20260407-01-subject-stage-f-perf-and-multi-subject-expansion`（已完成）
 
 只要保持这个顺序，后续就不会把 `perf`、public surface 和 reporting compatibility 提前并入首份实施计划。

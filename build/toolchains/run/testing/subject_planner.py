@@ -31,8 +31,23 @@ def build_plan(
     matrix_id: str | None = None,
 ) -> dict[str, Any]:
     manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
-    selected_matrix_id = matrix_id or str(manifest["defaultMatrix"])
     selected_goal_id = goal_id or str(manifest["defaultGoal"])
+    if matrix_id is not None:
+        selected_matrix_id = matrix_id
+    else:
+        default_matrix_id = str(manifest["defaultMatrix"])
+        default_matrix = subjects_module.find_matrix(manifest, default_matrix_id)
+        if selected_goal_id in list(default_matrix.get("supportedGoals") or []):
+            selected_matrix_id = default_matrix_id
+        else:
+            selected_matrix_id = next(
+                (
+                    str(candidate.get("matrixId") or "")
+                    for candidate in list(manifest.get("environmentMatrices") or [])
+                    if selected_goal_id in list(candidate.get("supportedGoals") or [])
+                ),
+                default_matrix_id,
+            )
 
     matrix = subjects_module.find_matrix(manifest, selected_matrix_id)
     supported_goals = list(matrix.get("supportedGoals") or [])

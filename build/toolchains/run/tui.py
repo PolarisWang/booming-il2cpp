@@ -51,6 +51,7 @@ class MenuState:
 TEST_MENU_COMMAND_IDS = {
     "test-all",
     "test-suite",
+    "test-subject",
     "test-module",
     "test-system",
     "test-pipeline",
@@ -105,6 +106,7 @@ class TestProgressView:
     final_status: str
     history_lines: list[str]
     phase_lines: list[str]
+    subject_lines: list[str]
     important_lines: list[str]
     artifact_lines: list[str]
     artifact_count: int
@@ -419,6 +421,7 @@ def build_test_menu_entries(manifest: dict[str, Any], host_platform: str) -> lis
     return [
         MenuEntry("Quick Start", {"id": "test-all", "title": "Run the default unified test matrix"}, "all", ["test", "all"]),
         MenuEntry("Selectors", {"id": "test-suite", "title": "Run a suite object"}, "suite", ["test"]),
+        MenuEntry("Selectors", {"id": "test-subject", "title": "Run a subject object"}, "subject", ["test"]),
         MenuEntry("Selectors", {"id": "test-module", "title": "Run a module verification object"}, "module", ["test"]),
         MenuEntry("Selectors", {"id": "test-system", "title": "Run a system validation object"}, "system", ["test"]),
         MenuEntry("Selectors", {"id": "test-pipeline", "title": "Run a test pipeline object"}, "pipeline", ["test"]),
@@ -446,7 +449,7 @@ def resolve_entry_argv(
 
     if command_id == "test-menu":
         mode = prompt_value_provider(
-            "Test mode (suite/module/system/pipeline/all/registry-list/registry-refresh/registry-check/watch/summary), leave blank to cancel: "
+            "Test mode (suite/subject/module/system/pipeline/all/registry-list/registry-refresh/registry-check/watch/summary), leave blank to cancel: "
         ).strip().lower()
         if not mode:
             return None
@@ -456,6 +459,11 @@ def resolve_entry_argv(
             if len(parts) != 2:
                 return None
             return ["test", "suite", "--family", parts[0], "--suite", parts[1]]
+        if mode == "subject":
+            value = prompt_value_provider("Enter subject id, for example: HelloWorldObject: ").strip()
+            if not value:
+                return None
+            return ["test", "subject", "--subject", value]
         if mode == "module":
             value = prompt_value_provider("Enter module and profile, for example: managed-smoke basic: ").strip()
             parts = value.split()
@@ -492,6 +500,12 @@ def resolve_entry_argv(
         if len(parts) != 2:
             return None
         return ["test", "suite", "--family", parts[0], "--suite", parts[1]]
+
+    if command_id == "test-subject":
+        value = prompt_value_provider("Enter subject id, for example: HelloWorldObject: ").strip()
+        if not value:
+            return None
+        return ["test", "subject", "--subject", value]
 
     if command_id == "test-module":
         value = prompt_value_provider("Enter module and profile, for example: managed-smoke basic: ").strip()
@@ -840,9 +854,14 @@ def render_test_progress_screen(events: list[dict[str, Any]], repo_root: Path | 
     if view.phase_lines:
         lines.append("Phases:")
         lines.extend(view.phase_lines)
+    if view.subject_lines:
+        if not view.phase_lines:
+            lines.append("")
+        lines.append("Subjects:")
+        lines.extend(view.subject_lines)
 
     if view.important_lines:
-        if not view.phase_lines:
+        if not view.phase_lines and not view.subject_lines:
             lines.append("")
         else:
             lines.append("")
@@ -898,6 +917,7 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
     final_status = "running"
     history_lines: list[str] = []
     phase_lines: list[str] = []
+    subject_lines: list[str] = []
     important_lines: list[str] = []
     collected_artifacts: list[str] = []
     errors: list[str] = []
@@ -967,6 +987,7 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
             final_status = str(payload.get("finalStatus") or final_status)
             _append_unique(history_lines, seen_history, f"[{_format_progress_label(progress_text)}] done   {final_status}")
             phase_lines = _build_phase_result_lines(payload)
+            subject_lines = _build_subject_result_lines(payload)
             errors.extend(str(error) for error in list(payload.get("errors") or []))
             important_lines.extend(build_test_report_highlight_lines(payload, repo_root=repo_root, seen=seen_important))
             for artifact in list(payload.get("artifacts") or []):
@@ -980,6 +1001,7 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
         final_status=final_status,
         history_lines=history_lines,
         phase_lines=phase_lines,
+        subject_lines=subject_lines,
         important_lines=important_lines,
         artifact_lines=artifact_lines,
         artifact_count=len(seen_artifacts),
@@ -1084,6 +1106,11 @@ def _build_phase_result_lines(payload: dict[str, Any]) -> list[str]:
     return [f"{phase.get('status', '-')}: {phase.get('phaseId', '-')}" for phase in phase_results]
 
 
+def _build_subject_result_lines(payload: dict[str, Any]) -> list[str]:
+    subject_results = list(payload.get("subjectResults") or [])
+    return [f"{subject.get('status', '-')}: {subject.get('subjectId', '-')}" for subject in subject_results]
+
+
 def render_test_report_highlights(payload: dict[str, Any], repo_root: Path | None = None) -> str:
     important_lines = build_test_report_highlight_lines(payload, repo_root=repo_root)
     artifact_lines = build_artifact_lines(payload, repo_root=repo_root)
@@ -1127,6 +1154,16 @@ def build_test_report_highlight_lines(
     _append_important_line(lines, seen, "Session record", payload.get("sessionPath"), repo_root=repo_root)
     _append_important_line(lines, seen, "Console log", payload.get("consolePath"), repo_root=repo_root)
     _append_important_line(lines, seen, "Performance / telemetry", payload.get("telemetryPath"), repo_root=repo_root)
+    for subject_result in list(payload.get("subjectResults") or []):
+        if not isinstance(subject_result, dict):
+            continue
+        _append_important_line(
+            lines,
+            seen,
+            "Subject summary",
+            subject_result.get("subjectSummaryPath"),
+            repo_root=repo_root,
+        )
     return lines
 
 

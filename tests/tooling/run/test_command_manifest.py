@@ -72,6 +72,7 @@ class CommandManifestTests(unittest.TestCase):
                 "build-platform-android-arm64-smoke",
                 "build-platform-linux-x64-packaging",
                 "test-suite",
+                "test-subject",
                 "test-module",
                 "test-system",
                 "test-pipeline",
@@ -124,6 +125,25 @@ class CommandManifestTests(unittest.TestCase):
             commands["test-trace-compare-macos"]["expected_trace_path"],
         )
 
+    def test_manifest_points_legacy_smoke_commands_at_subject_sources(self) -> None:
+        manifest = json.loads(RUN_MANIFEST_PATH.read_text(encoding="utf-8"))
+        commands = {command["id"]: command for command in manifest["commands"]}
+        expected_project_paths = {
+            "build-smoke-helloworld": "subjects/HelloWorld/source/HelloWorld.csproj",
+            "test-smoke-helloworld": "subjects/HelloWorld/source/HelloWorld.csproj",
+            "build-smoke-genericecho": "subjects/GenericEcho/source/GenericEcho.csproj",
+            "test-smoke-genericecho": "subjects/GenericEcho/source/GenericEcho.csproj",
+            "build-smoke-reflectionlite": "subjects/ReflectionLite/source/ReflectionLite.csproj",
+            "test-smoke-reflectionlite": "subjects/ReflectionLite/source/ReflectionLite.csproj",
+            "build-smoke-pinvokelite": "subjects/PInvokeLite/source/PInvokeLite.csproj",
+            "test-smoke-pinvokelite": "subjects/PInvokeLite/source/PInvokeLite.csproj",
+            "build-smoke-hostembeddinglite": "subjects/HostEmbeddingLite/source/HostEmbeddingLite.csproj",
+            "test-smoke-hostembeddinglite": "subjects/HostEmbeddingLite/source/HostEmbeddingLite.csproj",
+        }
+
+        for command_id, expected_path in expected_project_paths.items():
+            self.assertEqual(expected_path, commands[command_id]["project_path"])
+
     def test_parse_cli_supports_dynamic_unified_test_commands(self) -> None:
         manifest_module = load_manifest_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
@@ -154,6 +174,16 @@ class CommandManifestTests(unittest.TestCase):
         self.assertEqual("test-suite", explicit_suite_id["command"]["id"])
         self.assertEqual("smoke/HelloWorld", explicit_suite_id["target"])
         self.assertEqual("smoke/HelloWorld", explicit_suite_id["options"]["id"])
+
+        subject_case = manifest_module.parse_cli(
+            ["test", "subject", "--id", "subject/HelloWorldObject"],
+            False,
+            manifest,
+            "windows",
+        )
+        self.assertEqual("test-subject", subject_case["command"]["id"])
+        self.assertEqual("subject/HelloWorldObject", subject_case["target"])
+        self.assertEqual("subject/HelloWorldObject", subject_case["options"]["id"])
 
         managed_closure_contract = manifest_module.parse_cli(
             ["test", "contract", "managed-closure-bundle"],

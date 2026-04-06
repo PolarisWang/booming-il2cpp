@@ -3,7 +3,7 @@
   "runnerType": "dotnet-app",
   "supportedStages": ["build", "run", "all"],
   "runnerConfig": {
-    "projectPath": "tests/smoke/input/GenericEcho/GenericEcho.csproj",
+    "projectPath": "subjects/GenericEcho/source/GenericEcho.csproj",
     "dllPath": "artifacts/smoke/bin/GenericEcho/Release/net8.0/GenericEcho.dll"
   },
   "tags": ["smoke", "managed"]

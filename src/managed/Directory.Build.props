@@ -1,5 +1,7 @@
 <Project>
   <PropertyGroup>
+    <BaseIntermediateOutputPath Condition="'$(ChaosTempIntermediateRoot)' != ''">$(ChaosTempIntermediateRoot)$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionsPath Condition="'$(ChaosTempIntermediateRoot)' != ''">$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>

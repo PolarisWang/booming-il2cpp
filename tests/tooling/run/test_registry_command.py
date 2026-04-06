@@ -238,6 +238,12 @@ class RegistryCommandTests(unittest.TestCase):
             "pipeline/completion-runtime-trace-windows",
             [item["objectId"] for item in windows_reference_gate_system["skillRecommendations"]["requiredForPipelineRelease"]],
         )
+        subject_item = next(item for item in result.payload["flatItems"] if item["id"] == "subject/HelloWorldObject")
+        self.assertEqual("subject", subject_item["type"])
+        self.assertEqual(
+            "run test subject --id subject/HelloWorldObject",
+            subject_item["canonicalCommand"],
+        )
 
     def test_module_dispatch_expands_registered_plan(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_module_dispatch")

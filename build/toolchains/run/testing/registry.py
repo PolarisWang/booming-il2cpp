@@ -8,16 +8,19 @@ import sys
 
 try:
     from ..common import read_json, write_json
+    from . import subjects as subjects_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from common import read_json, write_json
+    from testing import subjects as subjects_module
 
 
 @dataclass(frozen=True)
 class RegistryIndex:
     host_platform: str
     suites: list[dict[str, Any]]
+    subjects: list[dict[str, Any]]
     module_verifications: list[dict[str, Any]]
     system_scenarios: list[dict[str, Any]]
     pipelines: list[dict[str, Any]]
@@ -27,7 +30,13 @@ class RegistryIndex:
     @property
     def flat_items(self) -> list[dict[str, Any]]:
         return sorted(
-            [*self.suites, *self.module_verifications, *self.system_scenarios, *self.pipelines],
+            [
+                *self.suites,
+                *self.subjects,
+                *self.module_verifications,
+                *self.system_scenarios,
+                *self.pipelines,
+            ],
             key=lambda item: item["id"],
         )
 
@@ -35,6 +44,7 @@ class RegistryIndex:
         return {
             "hostPlatform": self.host_platform,
             "suites": self.suites,
+            "subjects": self.subjects,
             "moduleVerifications": self.module_verifications,
             "systemScenarios": self.system_scenarios,
             "pipelines": self.pipelines,
@@ -117,7 +127,19 @@ def _resolved_member_ids(item: dict[str, Any]) -> list[str]:
         for phase in item.get("phases", []):
             member_ids.extend(member["id"] for member in phase.get("members", []))
         return member_ids
+    if item["type"] == "subject":
+        return [str(item["id"])]
     return [member["id"] for member in item.get("members", [])]
+
+
+def _normalize_host_platform(host_platform: str) -> str:
+    if host_platform.startswith("windows"):
+        return "windows"
+    if host_platform.startswith("macos"):
+        return "macos"
+    if host_platform.startswith("linux"):
+        return "linux"
+    return host_platform
 
 
 def _load_module_manifest(path: Path) -> dict[str, Any]:
@@ -215,6 +237,60 @@ def _load_pipeline_manifest(path: Path) -> dict[str, Any]:
     return item
 
 
+def _load_subject_manifest(path: Path) -> dict[str, Any]:
+    payload = read_json(path)
+    if path.parent.parent.name != "subjects":
+        raise ValueError("subject manifest path must be subjects/<subject>/subject.manifest.json")
+
+    subject_id = _require_string(payload, "subjectId")
+    if path.parent.name != subject_id:
+        raise ValueError("subjectId must match the subject directory name")
+
+    matrices = payload.get("environmentMatrices", [])
+    if not isinstance(matrices, list) or not matrices:
+        raise ValueError("environmentMatrices must be a non-empty list")
+
+    supported_hosts = sorted(
+        {
+            _normalize_host_platform(str(dict(matrix.get("executionContext") or {}).get("hostPlatform") or ""))
+            for matrix in matrices
+            if str(dict(matrix.get("executionContext") or {}).get("hostPlatform") or "").strip()
+        }
+    )
+    if not supported_hosts:
+        raise ValueError("subject must declare at least one executionContext.hostPlatform")
+
+    item = _base_registry_object(
+        object_id=f"subject/{subject_id}",
+        object_type="subject",
+        display_name=_require_string(payload, "displayName"),
+        level="subject",
+        manifest_path=path,
+        primary_module_id=None,
+        module_ids=[],
+        subsystem_ids=[],
+        supported_hosts=supported_hosts,
+        doc_refs=_string_list(payload, "docRefs"),
+    )
+    item["subjectId"] = subject_id
+    item["category"] = str(payload.get("category") or "")
+    item["defaultGoalId"] = _require_string(payload, "defaultGoal")
+    item["defaultMatrixId"] = _require_string(payload, "defaultMatrix")
+    item["matrixIds"] = [str(matrix.get("matrixId") or "") for matrix in matrices]
+    item["goalIds"] = sorted(
+        {
+            str(goal_id)
+            for matrix in matrices
+            for goal_id in list(dict(matrix).get("supportedGoals") or [])
+            if str(goal_id).strip()
+        }
+    )
+    item["tags"] = _string_list(payload, "tags")
+    item["resolvedMembers"] = _resolved_member_ids(item)
+    item["deprecated"] = _deprecated_flag(payload)
+    return item
+
+
 def _exclude_deprecated(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return [item for item in items if not bool(item.get("deprecated", False))]
 
@@ -286,6 +362,8 @@ def _canonical_command(item: dict[str, Any]) -> str:
     object_type = str(item["type"])
     if object_type == "suite":
         return f"run test suite --id {item['id']}"
+    if object_type == "subject":
+        return f"run test subject --id {item['id']}"
     if object_type == "module":
         return f"run test module --id {item['id']}"
     if object_type == "system":
@@ -455,22 +533,26 @@ def scan_registry(
 ) -> RegistryIndex:
     registry_root = repo_root / "tests" / "registry"
     suites = _suite_items(host_platform, public_suite_specs)
+    subjects, subject_errors = _scan_directory(repo_root / "subjects", subjects_module.SUBJECT_MANIFEST_NAME, _load_subject_manifest)
     modules, module_errors = _scan_directory(registry_root / "modules", "verification.manifest.json", _load_module_manifest)
     systems, system_errors = _scan_directory(registry_root / "system", "scenario.manifest.json", _load_system_manifest)
     pipelines, pipeline_errors = _scan_directory(registry_root / "pipelines", "pipeline.manifest.json", _load_pipeline_manifest)
+    subjects = _exclude_deprecated(subjects)
     modules = _exclude_deprecated(modules)
     systems = _exclude_deprecated(systems)
     pipelines = _exclude_deprecated(pipelines)
+    subjects = _filter_host_supported(subjects, host_platform)
     modules = _filter_host_supported(modules, host_platform)
     systems = _filter_host_supported(systems, host_platform)
     pipelines = _filter_host_supported(pipelines, host_platform)
     provisional = RegistryIndex(
         host_platform=host_platform,
         suites=suites,
+        subjects=subjects,
         module_verifications=modules,
         system_scenarios=systems,
         pipelines=pipelines,
-        errors=[*module_errors, *system_errors, *pipeline_errors],
+        errors=[*subject_errors, *module_errors, *system_errors, *pipeline_errors],
         warnings=[],
     )
     _decorate_registry_items(provisional)
@@ -478,6 +560,7 @@ def scan_registry(
     return RegistryIndex(
         host_platform=provisional.host_platform,
         suites=provisional.suites,
+        subjects=provisional.subjects,
         module_verifications=provisional.module_verifications,
         system_scenarios=provisional.system_scenarios,
         pipelines=provisional.pipelines,
@@ -512,7 +595,7 @@ def find_registry_object(index: RegistryIndex, object_id: str) -> dict[str, Any]
 def expand_execution_plan(index: RegistryIndex, object_id: str) -> list[dict[str, Any]]:
     plan: list[dict[str, Any]] = []
     active_stack: set[str] = set()
-    added_suite_ids: set[str] = set()
+    added_leaf_ids: set[str] = set()
 
     def visit(current_id: str) -> None:
         if current_id in active_stack:
@@ -520,9 +603,9 @@ def expand_execution_plan(index: RegistryIndex, object_id: str) -> list[dict[str
         item = find_registry_object(index, current_id)
         if item is None:
             raise ValueError(f"registry object not found: {current_id}")
-        if item["type"] == "suite":
-            if current_id not in added_suite_ids:
-                added_suite_ids.add(current_id)
+        if item["type"] in {"suite", "subject"}:
+            if current_id not in added_leaf_ids:
+                added_leaf_ids.add(current_id)
                 plan.append(item)
             return
         active_stack.add(current_id)

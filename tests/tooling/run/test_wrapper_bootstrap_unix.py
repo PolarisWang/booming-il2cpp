@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 import os
 import platform
-import pty
 import shutil
 import stat
 import subprocess
@@ -12,6 +11,11 @@ import tarfile
 import tempfile
 import unittest
 from pathlib import Path
+
+if os.name == "posix":
+    import pty
+else:
+    pty = None
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]

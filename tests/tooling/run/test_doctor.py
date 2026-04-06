@@ -133,6 +133,27 @@ class DoctorCommandTests(unittest.TestCase):
         self.assertEqual("ok", vc_check["status"])
         self.assertIn("discovered via Visual Studio", vc_check["detail"])
 
+    def test_doctor_guides_windows_users_to_prepare_when_cmake_is_missing(self) -> None:
+        doctor_module = load_module(DOCTOR_MODULE_PATH, "booming_run_doctor_missing_cmake_prepare_guidance")
+
+        with patch.object(
+            doctor_module.runtime_module,
+            "probe_runtime",
+            return_value={"isInstalled": True, "pythonPath": "artifacts/python/python.exe"},
+        ):
+            with patch.object(doctor_module.tooling_module, "find_cmake_executable", return_value=None):
+                with patch.object(doctor_module.tooling_module, "find_visual_cpp_executable", return_value=None):
+                    with patch.object(
+                        doctor_module.tooling_module.shutil,
+                        "which",
+                        side_effect=lambda exe: "C:\\Program Files\\dotnet\\dotnet.exe" if exe == "dotnet" else None,
+                    ):
+                        result = doctor_module.handle(REPO_ROOT, "windows", "doctor")
+
+        self.assertEqual("error", result.status)
+        self.assertIn("run prepare", result.text or "")
+        self.assertIn("cached CMake", result.text or "")
+
 
 if __name__ == "__main__":
     unittest.main()

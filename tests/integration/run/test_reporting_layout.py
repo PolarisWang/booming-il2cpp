@@ -78,6 +78,15 @@ class ReportingLayoutTests(unittest.TestCase):
                 text="managed smoke ok\n",
                 errors=[],
                 artifacts=[],
+                subject_results=[
+                    {
+                        "subjectId": "HelloWorldObject",
+                        "requestedGoalId": "correctness.platform",
+                        "status": "fail",
+                        "matrixStatusCounts": {"total": 2, "ok": 1, "fail": 1, "skip": 0, "aborted": 0},
+                        "subjectSummaryPath": "artifacts/subjects/HelloWorldObject/subject-report/summary.json",
+                    }
+                ],
             )
 
             root = repo_root / "artifacts" / "logs" / "tests" / report["runId"]
@@ -99,6 +108,9 @@ class ReportingLayoutTests(unittest.TestCase):
 
         self.assertEqual("final-summary", events[-1]["eventType"])
         self.assertNotIn("suiteResults", events[-1]["payload"])
+        self.assertEqual(1, summary["subjectStatusCounts"]["fail"])
+        self.assertEqual("HelloWorldObject", summary["subjectResults"][0]["subjectId"])
+        self.assertEqual("HelloWorldObject", events[-1]["payload"]["subjectResults"][0]["subjectId"])
         self.assertEqual("code", summary["phaseResults"][0]["phaseId"])
         self.assertEqual("code", events[-1]["payload"]["phaseResults"][0]["phaseId"])
         self.assertEqual(1, summary["trafficLightCounts"]["green"]["ok"])

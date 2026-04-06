@@ -7,19 +7,20 @@ import os
 import platform
 import subprocess
 import sys
-import uuid
 from pathlib import Path
 
 toolchains_root = Path(__file__).resolve().parents[1] / "toolchains" / "run"
 if str(toolchains_root) not in sys.path:
     sys.path.insert(0, str(toolchains_root))
 
+import tooling as tooling_module
 from testing import contracts as contracts_module
 from testing import subject_executor as subject_executor_module
 from testing import subject_planner as subject_planner_module
 
 
 HELLOWORLD_SUBJECT_ID = "HelloWorldObject"
+DEFAULT_WINDOWS_VISUAL_STUDIO_GENERATOR = "Visual Studio 17 2022"
 
 
 def get_repo_root() -> Path:
@@ -32,7 +33,8 @@ def write_step(message: str) -> None:
 
 def get_host_routing_generator(host_profile: str) -> str:
     if host_profile == "windows":
-        return "Visual Studio 17 2022"
+        cmake_path = tooling_module.find_cmake_executable(get_repo_root()) or "cmake"
+        return tooling_module.detect_visual_studio_generator(cmake_path) or DEFAULT_WINDOWS_VISUAL_STUDIO_GENERATOR
     if host_profile == "macos":
         return "Xcode"
     raise RuntimeError(f"unsupported host profile: {host_profile}")
@@ -62,21 +64,39 @@ def run_checked(arguments: list[str], *, cwd: Path, failure_message: str, captur
     return completed
 
 
-def allocate_run_scoped_binary_dir(base_dir: Path) -> Path:
-    parent = base_dir.parent
-    scoped = parent / f"{base_dir.name}-{os.getpid()}-{uuid.uuid4().hex[:8]}"
-    scoped.mkdir(parents=True, exist_ok=True)
-    return scoped
+def allocate_run_scoped_binary_dir(base_dir: Path, *, host_profile: str = "", generator: str | None = None) -> Path:
+    return tooling_module.allocate_cmake_binary_dir(
+        base_dir,
+        host_platform=host_profile,
+        generator=generator,
+    )
 
 
-def invoke_native_smoke_build(source_dir: Path, binary_dir: Path, repo_root: Path) -> None:
-    run_binary_dir = allocate_run_scoped_binary_dir(binary_dir)
-    run_checked(["cmake", "-S", str(source_dir), "-B", str(run_binary_dir)], cwd=repo_root, failure_message=f"cmake configure failed: {source_dir}")
+def invoke_native_smoke_build(source_dir: Path, binary_dir: Path, repo_root: Path, *, host_profile: str = "") -> None:
+    generator = get_host_routing_generator(host_profile) if host_profile == "windows" else None
+    run_binary_dir = allocate_run_scoped_binary_dir(binary_dir, host_profile=host_profile, generator=generator)
+    configure_args = ["cmake", "-S", str(source_dir), "-B", str(run_binary_dir)]
+    if generator:
+        configure_args.extend(["-G", generator])
+        instance_spec = tooling_module.detect_visual_studio_instance_spec(generator)
+        if instance_spec:
+            configure_args.append(f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}")
+    run_checked(configure_args, cwd=repo_root, failure_message=f"cmake configure failed: {source_dir}")
     run_checked(["cmake", "--build", str(run_binary_dir)], cwd=repo_root, failure_message=f"cmake build failed: {run_binary_dir}")
 
 
-def invoke_dotnet_build(project_path: Path, repo_root: Path) -> None:
-    run_checked(["dotnet", "build", str(project_path), "-c", "Release"], cwd=repo_root, failure_message=f"dotnet build failed: {project_path}")
+def invoke_dotnet_build(project_path: Path, repo_root: Path, *, host_profile: str = "") -> None:
+    arguments = ["dotnet", "build", str(project_path), "-c", "Release"]
+    intermediate_root = tooling_module.allocate_dotnet_intermediate_dir(project_path.stem, host_platform=host_profile)
+    if intermediate_root is not None:
+        intermediate_text = intermediate_root.as_posix() + "/$(MSBuildProjectName)/"
+        arguments.extend(
+            [
+                f"-p:BaseIntermediateOutputPath={intermediate_text}",
+                f"-p:MSBuildProjectExtensionsPath={intermediate_text}",
+            ]
+        )
+    run_checked(arguments, cwd=repo_root, failure_message=f"dotnet build failed: {project_path}")
 
 
 def invoke_dotnet_runtime_smoke(dll_path: Path, expected_patterns: list[str], repo_root: Path) -> None:
@@ -87,10 +107,16 @@ def invoke_dotnet_runtime_smoke(dll_path: Path, expected_patterns: list[str], re
             raise RuntimeError(f"runtime smoke output mismatch for {dll_path}: missing '{pattern}'")
 
 
-def invoke_preset_build_smoke(preset_name: str, repo_root: Path, *, validate_only: bool = False) -> None:
+def invoke_preset_build_smoke(preset_name: str, repo_root: Path, *, host_profile: str = "", validate_only: bool = False) -> None:
     requested_binary_dir = repo_root / "artifacts" / "presets" / preset_name
-    run_binary_dir = allocate_run_scoped_binary_dir(requested_binary_dir)
+    generator = get_host_routing_generator(host_profile) if host_profile == "windows" else None
+    run_binary_dir = allocate_run_scoped_binary_dir(requested_binary_dir, host_profile=host_profile, generator=generator)
     arguments = ["cmake", "--preset", preset_name, "-B", str(run_binary_dir)]
+    if generator:
+        arguments.extend(["-G", generator])
+        instance_spec = tooling_module.detect_visual_studio_instance_spec(generator)
+        if instance_spec:
+            arguments.append(f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}")
     if validate_only:
         arguments.append("-DROADMAP0_TOOLCHAIN_VALIDATE_ONLY=ON")
 
@@ -99,7 +125,8 @@ def invoke_preset_build_smoke(preset_name: str, repo_root: Path, *, validate_onl
 
 
 def invoke_routing_build_smoke(preset_target: str, toolchain_file: Path, binary_dir: Path, generator: str, repo_root: Path) -> None:
-    run_binary_dir = allocate_run_scoped_binary_dir(binary_dir)
+    host_profile = "windows" if generator.startswith("Visual Studio") else ""
+    run_binary_dir = allocate_run_scoped_binary_dir(binary_dir, host_profile=host_profile, generator=generator)
     arguments = [
         "cmake",
         "-S",
@@ -112,6 +139,10 @@ def invoke_routing_build_smoke(preset_target: str, toolchain_file: Path, binary_
         "-DROADMAP0_TOOLCHAIN_VALIDATE_ONLY=ON",
         f"-DCMAKE_TOOLCHAIN_FILE={toolchain_file}",
     ]
+    if host_profile == "windows":
+        instance_spec = tooling_module.detect_visual_studio_instance_spec(generator)
+        if instance_spec:
+            arguments.append(f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}")
     run_checked(arguments, cwd=repo_root, failure_message=f"cmake routing smoke failed: {preset_target}")
     run_checked(["cmake", "--build", str(run_binary_dir)], cwd=repo_root, failure_message=f"cmake routing build failed: {preset_target}")
 
@@ -201,6 +232,7 @@ def main(argv: list[str] | None = None) -> int:
     artifact_root = repo_root / "artifacts" / "verify-roadmap-0" / host_profile
     common_artifact_root = artifact_root / "common"
     compare_script = repo_root / "tests" / "contracts" / "trace" / "compare-warmup-trace.py"
+    windows_trace_snapshot = repo_root / "tests" / "contracts" / "trace" / "snapshots" / "windows-warmup-trace.snapshot.json"
     host_embedding_dll = repo_root / "artifacts" / "smoke" / "bin" / "HostEmbeddingLite" / "Release" / "net8.0" / "HostEmbeddingLite.dll"
 
     artifact_root.mkdir(parents=True, exist_ok=True)
@@ -231,14 +263,18 @@ def main(argv: list[str] | None = None) -> int:
     contracts_module.validate_trace_schema_contracts(repo_root)
 
     write_step("Build native ABI compile-only smoke")
-    invoke_native_smoke_build(repo_root / "tests" / "contracts" / "native" / "abi", common_artifact_root / "native-abi-config", repo_root)
+    invoke_native_smoke_build(repo_root / "tests" / "contracts" / "native" / "abi", common_artifact_root / "native-abi-config", repo_root, host_profile=host_profile)
 
     write_step("Build native bridge compile-only smoke")
-    invoke_native_smoke_build(repo_root / "tests" / "contracts" / "native" / "bridge", common_artifact_root / "native-bridge-config", repo_root)
+    invoke_native_smoke_build(repo_root / "tests" / "contracts" / "native" / "bridge", common_artifact_root / "native-bridge-config", repo_root, host_profile=host_profile)
 
     write_step("Build smoke input projects")
     for project_name in ("HelloWorld", "GenericEcho", "ReflectionLite", "PInvokeLite", "HostEmbeddingLite"):
-        invoke_dotnet_build(repo_root / "tests" / "smoke" / "input" / project_name / f"{project_name}.csproj", repo_root)
+        invoke_dotnet_build(
+            repo_root / "subjects" / project_name / "source" / f"{project_name}.csproj",
+            repo_root,
+            host_profile=host_profile,
+        )
 
     write_step("Run managed smoke projects")
     invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "HelloWorld" / "Release" / "net8.0" / "HelloWorld.dll", ["HelloWorld smoke entry reached.", "register:Main"], repo_root)
@@ -248,6 +284,9 @@ def main(argv: list[str] | None = None) -> int:
     invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "HostEmbeddingLite" / "Release" / "net8.0" / "HostEmbeddingLite.dll", ["HostEmbeddingSession:InvokeManagedEntry:True", "guards=invalid-detach:True|double-start:True|unattached-entry:True"], repo_root)
 
     if host_profile == "windows":
+        if not windows_trace_snapshot.is_file():
+            raise RuntimeError(f"missing Windows trace snapshot contract: {windows_trace_snapshot}")
+
         write_step("Run HelloWorldObject windows-dev-output subject matrix")
         execute_subject_matrix(repo_root, matrix_id="windows-dev-output", goal_id="correctness.dev")
         validate_stage4_proof_run_artifacts(subject_runtime_root(repo_root, "windows-dev-output"))
@@ -267,7 +306,7 @@ def main(argv: list[str] | None = None) -> int:
             "windows-reference-desktop",
             "passed",
             "windows-x64-reference",
-            "Windows reference desktop gate passed via the HelloWorldObject windows-reference-trace subject matrix.",
+            f"Windows reference desktop gate passed via the HelloWorldObject windows-reference-trace subject matrix and the canonical snapshot contract at {windows_trace_snapshot}.",
             host_profile,
         )
 
@@ -306,7 +345,7 @@ def main(argv: list[str] | None = None) -> int:
         )
 
         write_step("Build macOS reference preset smoke")
-        invoke_preset_build_smoke("macos-reference", repo_root)
+        invoke_preset_build_smoke("macos-reference", repo_root, host_profile=host_profile)
 
         write_step("Run macOS reference desktop trace compare")
         trace_path = artifact_root / "macos-warmup-trace.runtime.json"
