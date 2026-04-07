@@ -28,7 +28,7 @@ def load_module(path: Path, module_name: str):
 
 class CMakeBootstrapTests(unittest.TestCase):
     def test_find_cmake_executable_discovers_repo_cached_pip_layout(self) -> None:
-        tooling_module = load_module(TOOLING_MODULE_PATH, "booming_run_tooling_find_cached_cmake")
+        tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_find_cached_cmake")
         temp_dir = REPO_ROOT / "artifacts" / ".tmp-tests" / "cmake-find-layout"
         if temp_dir.exists():
             tooling_module.shutil.rmtree(temp_dir, ignore_errors=True)
@@ -44,8 +44,9 @@ class CMakeBootstrapTests(unittest.TestCase):
         self.assertEqual(str(cached_cmake), discovered)
 
     def test_windows_session_can_bootstrap_cmake_into_repo_cache(self) -> None:
-        tooling_module = load_module(TOOLING_MODULE_PATH, "booming_run_tooling_install_cmake")
+        tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_install_cmake")
         cached_cmake = REPO_ROOT / "artifacts" / "toolchains" / "cmake" / "cmake" / "data" / "bin" / "cmake.exe"
+        fake_python = REPO_ROOT / "artifacts" / ".tmp-tests" / "tooling-python" / "python.exe"
         commands: list[list[str]] = []
         find_calls = 0
 
@@ -57,7 +58,7 @@ class CMakeBootstrapTests(unittest.TestCase):
 
         def fake_which(executable: str) -> str | None:
             if executable == "python":
-                return r"C:\Python314\python.exe"
+                return str(fake_python)
             return None
 
         def fake_run(arguments: list[str], cwd: Path | None = None) -> subprocess.CompletedProcess[str]:
@@ -79,10 +80,10 @@ class CMakeBootstrapTests(unittest.TestCase):
         self.assertTrue(outcome.ready)
         self.assertIn("cmake install completed", outcome.output)
         self.assertIn(str(cached_cmake), outcome.output)
-        self.assertEqual([r"C:\Python314\python.exe", "-m", "pip", "--version"], commands[0])
+        self.assertEqual([str(fake_python), "-m", "pip", "--version"], commands[0])
         self.assertEqual(
             [
-                r"C:\Python314\python.exe",
+                str(fake_python),
                 "-m",
                 "pip",
                 "install",
@@ -96,7 +97,7 @@ class CMakeBootstrapTests(unittest.TestCase):
         )
 
     def test_detect_visual_studio_generator_prefers_first_available_entry(self) -> None:
-        tooling_module = load_module(TOOLING_MODULE_PATH, "booming_run_tooling_detect_vs_generator")
+        tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_detect_vs_generator")
         help_output = """
 Generators
 
@@ -117,29 +118,121 @@ The following generators are available on this platform (* marks default):
         self.assertEqual("Visual Studio 18 2026", detected)
 
     def test_detect_visual_studio_instance_spec_prefers_matching_major_version(self) -> None:
-        tooling_module = load_module(TOOLING_MODULE_PATH, "booming_run_tooling_detect_vs_instance")
+        tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_detect_vs_instance")
+        visual_studio_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "tooling-visual-studio"
 
         with patch.object(
             tooling_module,
             "_candidate_visual_studio_instance_specs",
             return_value=[
-                (Path(r"C:\Program Files\Microsoft Visual Studio\17\Community"), "17.9.34728.123"),
-                (Path(r"C:\Program Files\Microsoft Visual Studio\18\Professional"), "18.4.11626.88"),
+                (visual_studio_root / "17" / "Community", "17.9.34728.123"),
+                (visual_studio_root / "18" / "Professional", "18.4.11626.88"),
             ],
         ):
             detected = tooling_module.detect_visual_studio_instance_spec("Visual Studio 18 2026")
 
         self.assertEqual(
-            r"C:\Program Files\Microsoft Visual Studio\18\Professional,version=18.4.11626.88",
+            f"{visual_studio_root / '18' / 'Professional'},version=18.4.11626.88",
             detected,
         )
 
-    def test_allocate_cmake_binary_dir_uses_temp_root_for_windows_visual_studio(self) -> None:
-        tooling_module = load_module(TOOLING_MODULE_PATH, "booming_run_tooling_allocate_vs_binary_dir")
-        base_dir = REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows" / "common" / "native-abi-config"
-        expected_dir = Path(r"C:\Users\mayna\AppData\Local\Temp\booming-native-abi-config-4242-a1b2c3d4")
+    def test_detect_visual_studio_instance_spec_accepts_visual_studio_year_layout(self) -> None:
+        tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_detect_vs_instance_year_layout")
+        visual_studio_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "tooling-visual-studio-year"
 
-        with patch.object(tooling_module.tempfile, "gettempdir", return_value=r"C:\Users\mayna\AppData\Local\Temp"):
+        with patch.object(
+            tooling_module,
+            "_candidate_visual_studio_instance_specs",
+            return_value=[
+                (visual_studio_root / "2019" / "Community", "16.11.34407.143"),
+                (visual_studio_root / "2022" / "Professional", "17.12.35527.113"),
+            ],
+        ):
+            detected = tooling_module.detect_visual_studio_instance_spec("Visual Studio 17 2022")
+
+        self.assertEqual(
+            f"{visual_studio_root / '2022' / 'Professional'},version=17.12.35527.113",
+            detected,
+        )
+
+    def test_find_visual_studio_developer_command_prefers_vswhere_result(self) -> None:
+        tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_find_vsdevcmd")
+        developer_command = REPO_ROOT / "artifacts" / ".tmp-tests" / "tooling-visual-studio" / "2022" / "Professional" / "Common7" / "Tools" / "VsDevCmd.bat"
+
+        with patch.object(tooling_module, "_run_vswhere", return_value=[str(developer_command)]) as run_vswhere_mock:
+            detected = tooling_module.find_visual_studio_developer_command()
+
+        self.assertEqual(developer_command, detected)
+        run_vswhere_mock.assert_called_once_with(
+            [
+                "-latest",
+                "-products",
+                "*",
+                "-requires",
+                "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+                "-find",
+                r"Common7\Tools\VsDevCmd.bat",
+            ]
+        )
+
+    def test_find_ninja_executable_prefers_visual_studio_cmake_bundle(self) -> None:
+        tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_find_ninja")
+        install_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "tooling-visual-studio" / "2022" / "Professional"
+        bundled_ninja = install_root / "Common7" / "IDE" / "CommonExtensions" / "Microsoft" / "CMake" / "Ninja" / "ninja.exe"
+
+        with patch.object(
+            tooling_module,
+            "_candidate_visual_studio_install_paths",
+            return_value=[install_root],
+        ):
+            with patch.object(Path, "is_file", autospec=True) as is_file_mock:
+                def fake_is_file(path: Path) -> bool:
+                    return path == bundled_ninja
+
+                is_file_mock.side_effect = fake_is_file
+                detected = tooling_module.find_ninja_executable(which=lambda executable: None)
+
+        self.assertEqual(str(bundled_ninja), detected)
+
+    def test_windows_developer_environment_parses_vsdevcmd_set_output(self) -> None:
+        tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_windows_dev_env")
+        developer_command = REPO_ROOT / "artifacts" / ".tmp-tests" / "tooling-visual-studio" / "2022" / "Professional" / "Common7" / "Tools" / "VsDevCmd.bat"
+        completed = subprocess.CompletedProcess(
+            ["cmd.exe"],
+            0,
+            "INCLUDE=C:\\VS\\include\nLIB=C:\\VS\\lib\nPATH=C:\\VS\\bin;C:\\VS\\ninja;C:\\Windows\\System32\nPath=C:\\Windows\\System32\n",
+            "",
+        )
+
+        with patch.object(tooling_module, "find_visual_studio_developer_command", return_value=developer_command):
+            with patch.object(tooling_module.subprocess, "run", return_value=completed) as run_mock:
+                env = tooling_module.windows_developer_environment()
+
+        self.assertEqual(
+            {
+                "INCLUDE": r"C:\VS\include",
+                "LIB": r"C:\VS\lib",
+                "PATH": r"C:\VS\bin;C:\VS\ninja;C:\Windows\System32",
+            },
+            env,
+        )
+        self.assertEqual(
+            f'call "{developer_command}" -arch=x64 -host_arch=x64 >nul && set',
+            run_mock.call_args.args[0],
+        )
+        self.assertTrue(run_mock.call_args.kwargs["shell"])
+        self.assertTrue(run_mock.call_args.kwargs["capture_output"])
+        self.assertTrue(run_mock.call_args.kwargs["text"])
+        self.assertEqual("replace", run_mock.call_args.kwargs["errors"])
+        self.assertFalse(run_mock.call_args.kwargs["check"])
+
+    def test_allocate_cmake_binary_dir_uses_temp_root_for_windows_visual_studio(self) -> None:
+        tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_allocate_vs_binary_dir")
+        base_dir = REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows" / "common" / "native-abi-config"
+        temp_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "tooling-temp-root"
+        expected_dir = temp_root / "chaos-native-abi-config-4242-a1b2c3d4"
+
+        with patch.object(tooling_module.tempfile, "gettempdir", return_value=str(temp_root)):
             with patch.object(tooling_module.os, "getpid", return_value=4242):
                 with patch.object(tooling_module.uuid, "uuid4") as uuid4_mock:
                     uuid4_mock.return_value.hex = "a1b2c3d4e5f60708"

@@ -6,6 +6,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from tests.support import load_public_specs_module, select_public_suite_spec, select_registry_item
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 TEST_COMMAND_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "test.py"
@@ -30,8 +32,8 @@ def load_module(path: Path, module_name: str):
 
 class RegistryCommandTests(unittest.TestCase):
     def test_registry_list_returns_registered_objects(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_registry_list")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_registry_list")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_registry_list")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_registry_list")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         result = test_module.handle(
@@ -70,6 +72,30 @@ class RegistryCommandTests(unittest.TestCase):
         self.assertIn("pipeline/completion-runtime-core", flat_ids)
         self.assertIn("pipeline/completion-runtime-trace-macos", flat_ids)
         self.assertIn("pipeline/trace-export-macos-runtime", flat_ids)
+        managed_runtime_suite = select_registry_item(
+            result.payload["flatItems"],
+            object_type="suite",
+            required_module_ids=["managed-smoke"],
+            required_supported_hosts=["macos"],
+        )
+        reflection_suite = select_registry_item(
+            result.payload["flatItems"],
+            object_type="suite",
+            required_module_ids=["reflection"],
+            required_supported_hosts=["macos"],
+        )
+        interop_suite = select_registry_item(
+            result.payload["flatItems"],
+            object_type="suite",
+            required_module_ids=["interop"],
+            required_supported_hosts=["macos"],
+        )
+        hosted_runtime_suite = select_registry_item(
+            result.payload["flatItems"],
+            object_type="suite",
+            required_module_ids=["hosted-runtime"],
+            required_supported_hosts=["macos"],
+        )
         managed_closure_module = next(item for item in result.payload["flatItems"] if item["id"] == "module/managed-closure/basic")
         self.assertEqual("run test module --id module/managed-closure/basic", managed_closure_module["canonicalCommand"])
         self.assertEqual(
@@ -91,15 +117,14 @@ class RegistryCommandTests(unittest.TestCase):
             [item["objectId"] for item in module_item["skillRecommendations"]["requiredForPipelineRelease"]],
         )
         self.assertIn(
-            "smoke/HelloWorld",
+            managed_runtime_suite["id"],
             [item["objectId"] for item in module_item["skillRecommendations"]["recommended"]],
         )
-        suite_item = next(item for item in result.payload["flatItems"] if item["id"] == "smoke/HelloWorld")
+        suite_item = next(item for item in result.payload["flatItems"] if item["id"] == managed_runtime_suite["id"])
         self.assertNotIn(
-            "smoke/ReflectionLite",
+            reflection_suite["id"],
             [item["objectId"] for item in suite_item["skillRecommendations"]["recommended"]],
         )
-        reflection_suite = next(item for item in result.payload["flatItems"] if item["id"] == "smoke/ReflectionLite")
         self.assertEqual(
             ["module/reflection/basic"],
             [item["objectId"] for item in reflection_suite["skillRecommendations"]["requiredBeforeCompletion"]],
@@ -114,7 +139,6 @@ class RegistryCommandTests(unittest.TestCase):
             ["module/managed-closure/basic"],
             [item["objectId"] for item in managed_closure_suite["skillRecommendations"]["requiredBeforeCompletion"]],
         )
-        interop_suite = next(item for item in result.payload["flatItems"] if item["id"] == "smoke/PInvokeLite")
         self.assertEqual(
             ["module/interop/basic"],
             [item["objectId"] for item in interop_suite["skillRecommendations"]["requiredBeforeCompletion"]],
@@ -134,7 +158,6 @@ class RegistryCommandTests(unittest.TestCase):
             ["module/trace-export/macos"],
             [item["objectId"] for item in trace_schema_suite["skillRecommendations"]["requiredBeforeCompletion"]],
         )
-        hosted_runtime_suite = next(item for item in result.payload["flatItems"] if item["id"] == "smoke/HostEmbeddingLite")
         self.assertEqual(
             ["module/hosted-runtime/basic"],
             [item["objectId"] for item in hosted_runtime_suite["skillRecommendations"]["requiredBeforeCompletion"]],
@@ -195,8 +218,8 @@ class RegistryCommandTests(unittest.TestCase):
         )
 
     def test_registry_list_returns_windows_android_gate_objects(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_registry_list_windows_android_gate")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_registry_list_windows_android_gate")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_registry_list_windows_android_gate")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_registry_list_windows_android_gate")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         result = test_module.handle(
@@ -238,17 +261,21 @@ class RegistryCommandTests(unittest.TestCase):
             "pipeline/completion-runtime-trace-windows",
             [item["objectId"] for item in windows_reference_gate_system["skillRecommendations"]["requiredForPipelineRelease"]],
         )
-        subject_item = next(item for item in result.payload["flatItems"] if item["id"] == "subject/HelloWorldObject")
+        subject_item = select_registry_item(
+            result.payload["flatItems"],
+            object_type="subject",
+            required_supported_hosts=["windows"],
+        )
         self.assertEqual("subject", subject_item["type"])
         self.assertEqual(
-            "run test subject --id subject/HelloWorldObject",
+            f"run test subject --id {subject_item['id']}",
             subject_item["canonicalCommand"],
         )
 
     def test_module_dispatch_expands_registered_plan(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_module_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_module_dispatch")
-        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_module_dispatch")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_module_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_module_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_module_dispatch")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         def fake_session(
@@ -297,9 +324,9 @@ class RegistryCommandTests(unittest.TestCase):
         )
 
     def test_managed_closure_module_dispatch_expands_contract_plan(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_managed_closure_module_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_managed_closure_module_dispatch")
-        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_managed_closure_module_dispatch")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_managed_closure_module_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_managed_closure_module_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_managed_closure_module_dispatch")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         def fake_session(
@@ -348,9 +375,9 @@ class RegistryCommandTests(unittest.TestCase):
         )
 
     def test_interop_module_dispatch_expands_contract_and_runtime_plan(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_interop_module_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_interop_module_dispatch")
-        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_interop_module_dispatch")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_interop_module_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_interop_module_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_interop_module_dispatch")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         def fake_session(
@@ -391,15 +418,21 @@ class RegistryCommandTests(unittest.TestCase):
             )
 
         self.assertEqual("ok", result.status)
+        runtime_suite = select_public_suite_spec(
+            "chaos_registry_interop_runtime_suite",
+            host_platform="macos",
+            family="smoke",
+            required_module_ids=["interop"],
+        )
         self.assertEqual(
-            ["contract/native-abi", "contract/native-bridge", "smoke/PInvokeLite"],
+            ["contract/native-abi", "contract/native-bridge", str(runtime_suite["id"])],
             [item["id"] for item in result.payload["items"]],
         )
 
     def test_trace_export_module_dispatch_includes_trace_schema_contract(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_trace_export_module_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_trace_export_module_dispatch")
-        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_trace_export_module_dispatch")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_trace_export_module_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_trace_export_module_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_trace_export_module_dispatch")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         def fake_session(
@@ -446,9 +479,9 @@ class RegistryCommandTests(unittest.TestCase):
         )
 
     def test_pipeline_dispatch_returns_phase_results(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_pipeline_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_pipeline_dispatch")
-        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_pipeline_dispatch")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_pipeline_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_pipeline_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_pipeline_dispatch")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         def fake_session(
@@ -507,9 +540,9 @@ class RegistryCommandTests(unittest.TestCase):
         )
 
     def test_managed_closure_pipeline_dispatch_returns_code_and_module_phases(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_managed_closure_pipeline_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_managed_closure_pipeline_dispatch")
-        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_managed_closure_pipeline_dispatch")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_managed_closure_pipeline_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_managed_closure_pipeline_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_managed_closure_pipeline_dispatch")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         def fake_session(
@@ -567,9 +600,9 @@ class RegistryCommandTests(unittest.TestCase):
         )
 
     def test_completion_trace_pipeline_dispatch_includes_reference_gate_in_system_phase(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_completion_trace_pipeline_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_completion_trace_pipeline_dispatch")
-        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_completion_trace_pipeline_dispatch")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_completion_trace_pipeline_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_completion_trace_pipeline_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_completion_trace_pipeline_dispatch")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         def fake_session(
@@ -622,9 +655,9 @@ class RegistryCommandTests(unittest.TestCase):
         )
 
     def test_system_dispatch_expands_registered_plan(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_system_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_system_dispatch")
-        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_system_dispatch")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_system_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_system_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_system_dispatch")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         def fake_session(
@@ -671,13 +704,15 @@ class RegistryCommandTests(unittest.TestCase):
             "run test system --id system/roadmap-0-macos",
             result.payload["selectedObject"]["canonicalCommand"],
         )
+        public_specs_module = load_public_specs_module("chaos_registry_system_dispatch_public_specs")
+        expected_smoke_suite_ids = [
+            str(spec["id"])
+            for spec in list(public_specs_module.PUBLIC_TEST_SPECS)
+            if str(spec.get("family") or "") == "smoke" and "macos" in list(spec.get("supported_hosts") or [])
+        ]
         self.assertEqual(
             [
-                "smoke/HelloWorld",
-                "smoke/GenericEcho",
-                "smoke/ReflectionLite",
-                "smoke/PInvokeLite",
-                "smoke/HostEmbeddingLite",
+                *expected_smoke_suite_ids,
                 "contract/analysis-schema",
                 "contract/native-abi",
                 "contract/native-bridge",
@@ -691,9 +726,9 @@ class RegistryCommandTests(unittest.TestCase):
         )
 
     def test_linux_gate_system_dispatch_expands_registered_plan(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_linux_gate_system_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_linux_gate_system_dispatch")
-        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_linux_gate_system_dispatch")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_linux_gate_system_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_linux_gate_system_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_linux_gate_system_dispatch")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         def fake_session(
@@ -746,9 +781,9 @@ class RegistryCommandTests(unittest.TestCase):
         )
 
     def test_ios_gate_system_dispatch_expands_registered_plan(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_ios_gate_system_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_ios_gate_system_dispatch")
-        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_ios_gate_system_dispatch")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_ios_gate_system_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_ios_gate_system_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_ios_gate_system_dispatch")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         def fake_session(
@@ -801,9 +836,9 @@ class RegistryCommandTests(unittest.TestCase):
         )
 
     def test_android_gate_system_dispatch_expands_registered_plan(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_android_gate_system_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_android_gate_system_dispatch")
-        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_android_gate_system_dispatch")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_android_gate_system_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_android_gate_system_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_android_gate_system_dispatch")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         def fake_session(
@@ -856,9 +891,9 @@ class RegistryCommandTests(unittest.TestCase):
         )
 
     def test_windows_reference_gate_system_dispatch_expands_registered_plan(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_windows_reference_gate_system_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_windows_reference_gate_system_dispatch")
-        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_windows_reference_gate_system_dispatch")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_windows_reference_gate_system_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_windows_reference_gate_system_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_windows_reference_gate_system_dispatch")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         def fake_session(
@@ -911,9 +946,9 @@ class RegistryCommandTests(unittest.TestCase):
         )
 
     def test_macos_reference_gate_system_dispatch_expands_registered_plan(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_macos_reference_gate_system_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_macos_reference_gate_system_dispatch")
-        session_module = load_module(SESSION_MODULE_PATH, "booming_run_session_macos_reference_gate_system_dispatch")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_macos_reference_gate_system_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_macos_reference_gate_system_dispatch")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_macos_reference_gate_system_dispatch")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         def fake_session(
@@ -966,8 +1001,8 @@ class RegistryCommandTests(unittest.TestCase):
         )
 
     def test_missing_registry_object_returns_structured_hint(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_registry_missing")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_registry_missing")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_registry_missing")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_registry_missing")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         result = test_module.handle(

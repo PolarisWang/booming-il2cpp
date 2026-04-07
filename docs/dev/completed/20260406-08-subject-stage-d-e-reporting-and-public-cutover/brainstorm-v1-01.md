@@ -17,8 +17,8 @@ Status: approved-for-plan
 
 - 现有 `subject` 真源、planner / executor / worker 最小脊柱已经落地
 - `HelloWorldObject` 的四个 Windows matrix 已经跑在新的 subject artifact 链上
-- reporting 方向已经在 `docs/discuss/20260406-20-reporting-schema-design-v1-01.md` 收敛为 `B2`
-- event 方向已经在 `docs/discuss/20260406-21-event-schema-alignment-design-v1-01.md` 收敛为方案 `C`
+- reporting 方向已经在 `docs/discuss/reporting/20260406-20-reporting-schema-design-v1-01.md` 收敛为 `B2`
+- event 方向已经在 `docs/discuss/reporting/20260406-21-event-schema-alignment-design-v1-01.md` 收敛为方案 `C`
 - `perf`、多 subject 扩展和测试工程长期基线整理都属于 `Stage F`，本轮不提前引入
 
 ## 3. 备选推进方式

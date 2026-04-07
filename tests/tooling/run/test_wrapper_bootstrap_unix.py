@@ -105,7 +105,7 @@ class UnixWrapperBootstrapTests(unittest.TestCase):
     def test_missing_runtime_requires_explicit_bootstrap(self) -> None:
         platform_id = detect_host_platform_id()
 
-        with tempfile.TemporaryDirectory(prefix="booming-run-wrapper-") as temp_dir:
+        with tempfile.TemporaryDirectory(prefix="chaos-run-wrapper-") as temp_dir:
             temp_root = Path(temp_dir)
             manifest_path = temp_root / "runtime_manifest.test.json"
             cache_root = build_cache_root_relative(temp_root)
@@ -154,7 +154,7 @@ class UnixWrapperBootstrapTests(unittest.TestCase):
     def test_interactive_bootstrap_accepts_uppercase_confirmation_on_bash_3(self) -> None:
         platform_id = detect_host_platform_id()
 
-        with tempfile.TemporaryDirectory(prefix="booming-run-wrapper-") as temp_dir:
+        with tempfile.TemporaryDirectory(prefix="chaos-run-wrapper-") as temp_dir:
             temp_root = Path(temp_dir)
             archive_path = create_fake_runtime_archive(temp_root)
             manifest_path = temp_root / "runtime_manifest.test.json"

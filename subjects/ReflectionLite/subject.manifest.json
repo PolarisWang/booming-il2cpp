@@ -4,11 +4,29 @@
   "category": "diagnostic",
   "defaultGoal": "correctness.dev",
   "defaultMatrix": "windows-managed-output",
+  "defaultValidationProfile": "managed-output",
   "source": {
     "type": "dotnet-project",
     "path": "subjects/ReflectionLite/source/ReflectionLite.csproj",
     "entry": "ReflectionLite/Program::Main()"
   },
+  "validationProfiles": {
+    "managed-output": [
+      "proof"
+    ]
+  },
+  "validation": {
+    "proof": {
+      "kind": "proof",
+      "defaultVariant": "CHECK"
+    }
+  },
+  "expected": {
+    "analysis": "subjects/ReflectionLite/expected/analysis/",
+    "codegen": "subjects/ReflectionLite/expected/codegen/",
+    "runtime": "subjects/ReflectionLite/expected/runtime/"
+  },
+  "baselines": {},
   "tags": [
     "smoke",
     "managed",

@@ -4,11 +4,29 @@
   "category": "diagnostic",
   "defaultGoal": "correctness.dev",
   "defaultMatrix": "windows-managed-output",
+  "defaultValidationProfile": "managed-output",
   "source": {
     "type": "dotnet-project",
     "path": "subjects/PInvokeLite/source/PInvokeLite.csproj",
     "entry": "PInvokeLite/Program::Main()"
   },
+  "validationProfiles": {
+    "managed-output": [
+      "proof"
+    ]
+  },
+  "validation": {
+    "proof": {
+      "kind": "proof",
+      "defaultVariant": "CHECK"
+    }
+  },
+  "expected": {
+    "analysis": "subjects/PInvokeLite/expected/analysis/",
+    "codegen": "subjects/PInvokeLite/expected/codegen/",
+    "runtime": "subjects/PInvokeLite/expected/runtime/"
+  },
+  "baselines": {},
   "tags": [
     "smoke",
     "managed",

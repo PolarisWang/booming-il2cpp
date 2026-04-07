@@ -29,7 +29,7 @@ registry 中 `subject` 的固定规则是：
 
 当前首个对象为：
 
-`subject/HelloWorldObject`
+`subject/<subject-id>`，具体对象以 registry 当前结果为准。
 
 虽然 parser 也接受 `test subject --subject HelloWorldObject`，但正式文档、脚本、排障记录都应优先写 canonical command。
 
@@ -41,7 +41,7 @@ registry 中 `subject` 的固定规则是：
 
 聚合入口：
 
-`artifacts/subjects/HelloWorldObject/subject-report/summary.json`
+见 `subject-public-entry-and-reporting-runs.md` 中的 run-scoped `subject-report/summary.json` 规则。
 
 它回答：
 
@@ -54,7 +54,7 @@ registry 中 `subject` 的固定规则是：
 
 单个 matrix 的诊断入口：
 
-`artifacts/subjects/HelloWorldObject/matrices/<matrix-id>/report.json`
+见 `subject-public-entry-and-reporting-runs.md` 中的 run-scoped `pipeline-report/report.json` 规则。
 
 它回答：
 
@@ -100,3 +100,4 @@ registry 中 `subject` 的固定规则是：
 ## 最近更新
 
 - `2026-04-06`：`subject/HelloWorldObject` 已进入 registry/public command/TUI，subject summary 与 session `subjectResults` 成为正式 public 结果入口。
+> 2026-04-07 更新：本页旧内容中的单 subject 与非 run-scoped 路径已经过时。活动规则以 [`subject-public-entry-and-reporting-runs.md`](./subject-public-entry-and-reporting-runs.md) 为准。

@@ -41,19 +41,19 @@ Stage 2 的职责不是打通 managed closure 或 native runtime，而是把 pro
 
 Stage 2 采用以下文件作为 proof spec 的上游冻结真源：
 
-- `contracts/examples/v0/artifacts/typed-il-ir.min.json`
-- `contracts/examples/v0/artifacts/aot-manifest.min.json`
-- `contracts/examples/v0/artifacts/code-registration.min.json`
-- `contracts/examples/v0/artifacts/metadata-registration.min.json`
-- `contracts/native/examples/v0/bridge/direct-call-landing.cpp`
+- `contracts/artifacts/v0/samples/typed-il-ir.min.json`
+- `contracts/artifacts/v0/samples/aot-manifest.min.json`
+- `contracts/artifacts/v0/samples/code-registration.min.json`
+- `contracts/artifacts/v0/samples/metadata-registration.min.json`
+- `contracts/native/v0/samples/bridge/direct-call-landing.cpp`
 
 其中：
 
-- `contracts/examples/v0/artifacts/typed-il-ir.min.json` 固定了 3 个方法体的最小 IL 形状
-- `contracts/examples/v0/artifacts/aot-manifest.min.json` 固定了 first-proof entry 与 retained world 最小集合
-- `contracts/examples/v0/artifacts/code-registration.min.json` 固定了 generated method pointer 与 symbol
-- `contracts/examples/v0/artifacts/metadata-registration.min.json` 固定了 assembly / type / field / method 注册集合
-- `contracts/native/examples/v0/bridge/direct-call-landing.cpp` 固定了 generated direct-call landing，而不是 `method_invoke` fallback
+- `contracts/artifacts/v0/samples/typed-il-ir.min.json` 固定了 3 个方法体的最小 IL 形状
+- `contracts/artifacts/v0/samples/aot-manifest.min.json` 固定了 first-proof entry 与 retained world 最小集合
+- `contracts/artifacts/v0/samples/code-registration.min.json` 固定了 generated method pointer 与 symbol
+- `contracts/artifacts/v0/samples/metadata-registration.min.json` 固定了 assembly / type / field / method 注册集合
+- `contracts/native/v0/samples/bridge/direct-call-landing.cpp` 固定了 generated direct-call landing，而不是 `method_invoke` fallback
 
 ## Shared Identity
 
@@ -97,7 +97,7 @@ first-proof 的 managed 调用落点明确固定为 generated direct-call landin
 ### Stage 2 冻结的 gate
 
 - `proof-input-build`
-  - `tests/proof/input/HelloWorldObject/HelloWorldObject.csproj` 可以稳定 build
+  - `subjects/HelloWorldObject/source/HelloWorldObject.csproj` 可以稳定 build
 - `proof-artifact-snapshots`
   - canonical artifact snapshot 稳定表达 3 个方法、1 个字段与 shared `subjectId`
 - `proof-spec-consistency`
@@ -112,8 +112,8 @@ first-proof 的 managed 调用落点明确固定为 generated direct-call landin
 
 ## Repository Entry Points
 
-- sample source: `tests/proof/input/HelloWorldObject/Program.cs`
-- suite manifest: `tests/proof/hello-world-object/suite.manifest.json`
+- sample source: `subjects/HelloWorldObject/source/Program.cs`
+- subject manifest: `subjects/HelloWorldObject/subject.manifest.json`
 - contract overview: `contracts/docs/v0/overview.md`
 
 ## 当前结论

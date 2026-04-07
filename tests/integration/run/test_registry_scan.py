@@ -6,6 +6,8 @@ import sys
 import unittest
 from pathlib import Path
 
+from tests.support import select_subject_record
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 REGISTRY_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "registry.py"
@@ -28,8 +30,15 @@ def load_module(path: Path, module_name: str):
 
 class RegistryScanTests(unittest.TestCase):
     def test_registry_scan_collects_suites_modules_systems_and_pipelines(self) -> None:
-        registry_module = load_module(REGISTRY_MODULE_PATH, "booming_run_registry")
-        specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "booming_run_public_specs")
+        registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry")
+        specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "chaos_run_public_specs")
+        native_proof_subject = select_subject_record(
+            "chaos_registry_scan_native_proof_subject",
+            category="canonical",
+            source_type="dotnet-project",
+            required_stage_kinds=["generated-native-proof"],
+            required_host_platforms=["windows-x64"],
+        )
 
         index = registry_module.scan_registry(
             REPO_ROOT,
@@ -70,11 +79,34 @@ class RegistryScanTests(unittest.TestCase):
         self.assertNotIn("gate/windows-reference-desktop", object_ids)
         self.assertNotIn("system/roadmap-0-android-startup-gate", object_ids)
         self.assertNotIn("system/roadmap-0-windows-reference-gate", object_ids)
-        self.assertNotIn("subject/HelloWorldObject", object_ids)
+        self.assertNotIn(f"subject/{native_proof_subject['subjectId']}", object_ids)
 
     def test_registry_scan_collects_windows_android_gate_objects(self) -> None:
-        registry_module = load_module(REGISTRY_MODULE_PATH, "booming_run_registry_windows_android_gate")
-        specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "booming_run_public_specs_windows_android_gate")
+        registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_windows_android_gate")
+        specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "chaos_run_public_specs_windows_android_gate")
+        canonical_subject = select_subject_record(
+            "chaos_registry_scan_canonical_subject",
+            category="canonical",
+            source_type="dotnet-project",
+            required_stage_kinds=["runtime-managed-output"],
+            required_host_platforms=["macos-arm64", "windows-x64"],
+        )
+        native_proof_subject = select_subject_record(
+            "chaos_registry_scan_windows_native_proof_subject",
+            category="canonical",
+            source_type="dotnet-project",
+            required_stage_kinds=["generated-native-proof"],
+            required_host_platforms=["windows-x64"],
+        )
+        benchmark_subject = select_subject_record(
+            "chaos_registry_scan_benchmark_subject",
+            category="benchmark",
+            source_type="dotnet-project",
+            required_goal_ids=["perf.release"],
+            required_validation_kinds=["perf"],
+            required_validation_drivers=["csharp-perf-harness"],
+            required_host_platforms=["windows-x64"],
+        )
 
         index = registry_module.scan_registry(
             REPO_ROOT,
@@ -87,37 +119,43 @@ class RegistryScanTests(unittest.TestCase):
         self.assertIn("gate/windows-reference-desktop", object_ids)
         self.assertIn("system/roadmap-0-android-startup-gate", object_ids)
         self.assertIn("system/roadmap-0-windows-reference-gate", object_ids)
-        self.assertIn("subject/HelloWorld", object_ids)
-        self.assertIn("subject/HelloWorldObject", object_ids)
-        self.assertIn("subject/GenericEcho", object_ids)
+        self.assertIn(f"subject/{canonical_subject['subjectId']}", object_ids)
+        self.assertIn(f"subject/{native_proof_subject['subjectId']}", object_ids)
+        self.assertIn(f"subject/{benchmark_subject['subjectId']}", object_ids)
         self.assertIn("subject/ReflectionLite", object_ids)
         self.assertIn("subject/PInvokeLite", object_ids)
         self.assertIn("subject/HostEmbeddingLite", object_ids)
         self.assertNotIn("system/roadmap-0-linux-packaging-gate-macos-only", object_ids)
-        hello_world_item = next(item for item in index.flat_items if item["id"] == "subject/HelloWorld")
-        self.assertEqual("canonical", hello_world_item["category"])
-        self.assertEqual("correctness.dev", hello_world_item["defaultGoalId"])
-        self.assertEqual("windows-managed-output", hello_world_item["defaultMatrixId"])
-        subject_item = next(item for item in index.flat_items if item["id"] == "subject/HelloWorldObject")
+        canonical_item = next(
+            item for item in index.flat_items if item["id"] == f"subject/{canonical_subject['subjectId']}"
+        )
+        self.assertEqual("canonical", canonical_item["category"])
+        self.assertEqual("correctness.dev", canonical_item["defaultGoalId"])
+        self.assertEqual(str(canonical_subject["manifest"]["defaultMatrix"]), canonical_item["defaultMatrixId"])
+        subject_item = next(
+            item for item in index.flat_items if item["id"] == f"subject/{native_proof_subject['subjectId']}"
+        )
         self.assertEqual("subject", subject_item["type"])
         self.assertEqual(
-            "run test subject --id subject/HelloWorldObject",
+            f"run test subject --id subject/{native_proof_subject['subjectId']}",
             subject_item["canonicalCommand"],
         )
         self.assertEqual(["windows"], subject_item["supportedHosts"])
-        generic_echo_item = next(item for item in index.flat_items if item["id"] == "subject/GenericEcho")
-        self.assertEqual("benchmark", generic_echo_item["category"])
-        self.assertEqual("perf.dev", generic_echo_item["defaultGoalId"])
-        self.assertEqual("windows-perf-dev", generic_echo_item["defaultMatrixId"])
-        self.assertEqual(
-            "run test subject --id subject/GenericEcho",
-            generic_echo_item["canonicalCommand"],
+        benchmark_item = next(
+            item for item in index.flat_items if item["id"] == f"subject/{benchmark_subject['subjectId']}"
         )
-        self.assertEqual(["perf.dev", "perf.release"], generic_echo_item["goalIds"])
+        self.assertEqual("benchmark", benchmark_item["category"])
+        self.assertEqual("perf.dev", benchmark_item["defaultGoalId"])
+        self.assertEqual(str(benchmark_subject["manifest"]["defaultMatrix"]), benchmark_item["defaultMatrixId"])
+        self.assertEqual(
+            f"run test subject --id subject/{benchmark_subject['subjectId']}",
+            benchmark_item["canonicalCommand"],
+        )
+        self.assertEqual(["perf.dev", "perf.release"], benchmark_item["goalIds"])
 
     def test_pipeline_execution_plan_deduplicates_suite_runs(self) -> None:
-        registry_module = load_module(REGISTRY_MODULE_PATH, "booming_run_registry_for_pipeline_plan")
-        specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "booming_run_public_specs_for_pipeline_plan")
+        registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_for_pipeline_plan")
+        specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "chaos_run_public_specs_for_pipeline_plan")
 
         index = registry_module.scan_registry(
             REPO_ROOT,
@@ -142,8 +180,8 @@ class RegistryScanTests(unittest.TestCase):
         )
 
     def test_trace_export_pipeline_execution_plan_is_host_specific(self) -> None:
-        registry_module = load_module(REGISTRY_MODULE_PATH, "booming_run_registry_for_trace_export_plan")
-        specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "booming_run_public_specs_for_trace_export_plan")
+        registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_for_trace_export_plan")
+        specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "chaos_run_public_specs_for_trace_export_plan")
 
         index = registry_module.scan_registry(
             REPO_ROOT,
@@ -163,8 +201,8 @@ class RegistryScanTests(unittest.TestCase):
         )
 
     def test_completion_trace_pipeline_extends_completion_core_on_supported_hosts(self) -> None:
-        registry_module = load_module(REGISTRY_MODULE_PATH, "booming_run_registry_for_completion_trace_plan")
-        specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "booming_run_public_specs_for_completion_trace_plan")
+        registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_for_completion_trace_plan")
+        specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "chaos_run_public_specs_for_completion_trace_plan")
 
         index = registry_module.scan_registry(
             REPO_ROOT,
@@ -192,8 +230,8 @@ class RegistryScanTests(unittest.TestCase):
         )
 
     def test_refresh_writes_current_and_history_snapshots(self) -> None:
-        registry_module = load_module(REGISTRY_MODULE_PATH, "booming_run_registry_for_snapshot")
-        specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "booming_run_public_specs_for_snapshot")
+        registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_for_snapshot")
+        specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "chaos_run_public_specs_for_snapshot")
 
         index = registry_module.scan_registry(
             REPO_ROOT,

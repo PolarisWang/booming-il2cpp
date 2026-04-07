@@ -56,7 +56,7 @@ Status: plan-ready
 
 ## 4.1 Reporting 采用 `B2`
 
-直接采用 `docs/discuss/20260406-20-reporting-schema-design-v1-01.md` 的结论：
+直接采用 `docs/discuss/reporting/20260406-20-reporting-schema-design-v1-01.md` 的结论：
 
 - `matrices/<matrix-id>/report.json`
   - 是单个 matrix 的诊断主入口
@@ -69,7 +69,7 @@ Status: plan-ready
 
 ## 4.2 Events 采用方案 `C`
 
-直接采用 `docs/discuss/20260406-21-event-schema-alignment-design-v1-01.md` 的结论：
+直接采用 `docs/discuss/reporting/20260406-21-event-schema-alignment-design-v1-01.md` 的结论：
 
 - matrix events
   - canonical detailed stream

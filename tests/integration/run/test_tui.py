@@ -16,7 +16,7 @@ def load_tui_module():
     if not TUI_MODULE_PATH.is_file():
         raise FileNotFoundError(f"tui module missing: {TUI_MODULE_PATH}")
 
-    spec = importlib.util.spec_from_file_location("booming_run_tui", TUI_MODULE_PATH)
+    spec = importlib.util.spec_from_file_location("chaos_run_tui", TUI_MODULE_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"unable to load tui module: {TUI_MODULE_PATH}")
 

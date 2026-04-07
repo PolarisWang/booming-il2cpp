@@ -4,6 +4,8 @@ import importlib.util
 import unittest
 from pathlib import Path
 
+from tests.support import select_public_suite_spec
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 RESULT_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "result.py"
@@ -13,7 +15,7 @@ def load_result_module():
     if not RESULT_MODULE_PATH.is_file():
         raise FileNotFoundError(f"result module missing: {RESULT_MODULE_PATH}")
 
-    spec = importlib.util.spec_from_file_location("booming_run_result", RESULT_MODULE_PATH)
+    spec = importlib.util.spec_from_file_location("chaos_run_result", RESULT_MODULE_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"unable to load result module: {RESULT_MODULE_PATH}")
 
@@ -64,10 +66,16 @@ class JsonOutputTests(unittest.TestCase):
 
     def test_success_payload_can_carry_run_summary_metadata(self) -> None:
         result_module = load_result_module()
-        result = result_module.CommandResult.success(
-            command="test smoke HelloWorld",
+        suite_spec = select_public_suite_spec(
+            "chaos_json_output_suite",
             host_platform="macos",
-            target="smoke/HelloWorld",
+            family="smoke",
+            required_stages=["all"],
+        )
+        result = result_module.CommandResult.success(
+            command=f"test {suite_spec['family']} {suite_spec['suite']}",
+            host_platform="macos",
+            target=str(suite_spec["id"]),
             payload={
                 "runId": "20260404-120000-macos-abcd",
                 "summaryPath": "artifacts/logs/tests/20260404-120000-macos-abcd/summary.json",

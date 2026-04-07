@@ -28,6 +28,10 @@ def _build_run_id(host_platform: str) -> str:
     return f"{timestamp}-{host_platform}-{uuid4().hex[:4]}"
 
 
+def build_run_id(host_platform: str) -> str:
+    return _build_run_id(host_platform)
+
+
 def _strip_ansi(text: str) -> str:
     return ANSI_ESCAPE_RE.sub("", text)
 
@@ -78,22 +82,37 @@ def _logs_root(repo_root: Path) -> Path:
     return repo_root / "artifacts" / "logs" / "tests"
 
 
+def _normalize_pointer_roots(repo_root: Path, pointer_roots: list[Path] | None) -> list[Path]:
+    if pointer_roots:
+        return [Path(root) for root in pointer_roots]
+    return [_logs_root(repo_root)]
+
+
+def _write_pointer_payloads(pointer_roots: list[Path], pointer_name: str, payload: dict[str, Any]) -> None:
+    for pointer_root in pointer_roots:
+        write_json(pointer_root / pointer_name, payload)
+
+
 def start_session_report(
     *,
     repo_root: Path,
     host_platform: str,
     command_text: str,
+    run_id: str | None = None,
+    session_root: Path | None = None,
+    pointer_roots: list[Path] | None = None,
 ) -> dict[str, Any]:
-    run_id = _build_run_id(host_platform)
-    session_root = _logs_root(repo_root) / run_id
-    session_path = session_root / "session.json"
-    summary_path = session_root / "summary.json"
-    events_path = session_root / "events.jsonl"
-    console_path = session_root / "console.log"
-    telemetry_path = session_root / "telemetry.json"
+    resolved_run_id = run_id or _build_run_id(host_platform)
+    resolved_session_root = session_root or (_logs_root(repo_root) / resolved_run_id)
+    resolved_pointer_roots = _normalize_pointer_roots(repo_root, pointer_roots)
+    session_path = resolved_session_root / "session.json"
+    summary_path = resolved_session_root / "summary.json"
+    events_path = resolved_session_root / "events.jsonl"
+    console_path = resolved_session_root / "console.log"
+    telemetry_path = resolved_session_root / "telemetry.json"
 
     session_payload = {
-        "runId": run_id,
+        "runId": resolved_run_id,
         "command": command_text,
         "hostPlatform": host_platform,
         "status": "running",
@@ -102,7 +121,7 @@ def start_session_report(
     write_json(session_path, session_payload)
     _write_text(console_path, "")
     pointer_payload = {
-        "runId": run_id,
+        "runId": resolved_run_id,
         "command": command_text,
         "hostPlatform": host_platform,
         "sessionPath": _relative_path(repo_root, session_path),
@@ -110,33 +129,34 @@ def start_session_report(
         "eventsPath": _relative_path(repo_root, events_path),
         "status": "running",
     }
-    write_json(_logs_root(repo_root) / "current.json", pointer_payload)
-    write_json(_logs_root(repo_root) / "last.json", pointer_payload)
+    _write_pointer_payloads(resolved_pointer_roots, "current.json", pointer_payload)
+    _write_pointer_payloads(resolved_pointer_roots, "last.json", pointer_payload)
     append_session_event(
         repo_root,
         {
-            "runId": run_id,
+            "runId": resolved_run_id,
             "eventsPath": events_path,
         },
         build_event(
             "session-start",
             {
-                "runId": run_id,
+                "runId": resolved_run_id,
                 "command": command_text,
                 "hostPlatform": host_platform,
             },
-            run_id=run_id,
+            run_id=resolved_run_id,
             status="running",
         ),
     )
     return {
-        "runId": run_id,
-        "sessionRoot": session_root,
+        "runId": resolved_run_id,
+        "sessionRoot": resolved_session_root,
         "sessionPath": session_path,
         "summaryPath": summary_path,
         "eventsPath": events_path,
         "consolePath": console_path,
         "telemetryPath": telemetry_path,
+        "pointerRoots": [str(path) for path in resolved_pointer_roots],
     }
 
 
@@ -223,6 +243,9 @@ def write_session_report(
     events_path = Path(run_context["eventsPath"])
     console_path = Path(run_context["consolePath"])
     telemetry_path = Path(run_context["telemetryPath"])
+    pointer_roots = [Path(path) for path in list(run_context.get("pointerRoots") or [])]
+    if not pointer_roots:
+        pointer_roots = [_logs_root(repo_root)]
 
     normalized_subject_results = list(subject_results or [])
     final_status = _resolve_final_status(status, normalized_subject_results)
@@ -325,15 +348,16 @@ def write_session_report(
         "eventsPath": _relative_path(repo_root, events_path),
         "status": final_status,
     }
-    write_json(_logs_root(repo_root) / "last.json", pointer_payload)
-    current_path = _logs_root(repo_root) / "current.json"
-    if current_path.is_file():
-        current_payload = read_json(current_path)
-        if current_payload.get("runId") == run_id:
-            try:
-                current_path.unlink()
-            except OSError:
-                pass
+    _write_pointer_payloads(pointer_roots, "last.json", pointer_payload)
+    for pointer_root in pointer_roots:
+        current_path = pointer_root / "current.json"
+        if current_path.is_file():
+            current_payload = read_json(current_path)
+            if current_payload.get("runId") == run_id:
+                try:
+                    current_path.unlink()
+                except OSError:
+                    pass
 
     return {
         "runId": run_id,

@@ -7,6 +7,7 @@ import os
 import platform
 import subprocess
 import sys
+import uuid
 from pathlib import Path
 
 toolchains_root = Path(__file__).resolve().parents[1] / "toolchains" / "run"
@@ -17,9 +18,9 @@ import tooling as tooling_module
 from testing import contracts as contracts_module
 from testing import subject_executor as subject_executor_module
 from testing import subject_planner as subject_planner_module
+from testing import subjects as subjects_module
 
 
-HELLOWORLD_SUBJECT_ID = "HelloWorldObject"
 DEFAULT_WINDOWS_VISUAL_STUDIO_GENERATOR = "Visual Studio 17 2022"
 
 
@@ -197,20 +198,42 @@ def validate_stage4_proof_run_artifacts(runtime_root: Path) -> None:
         raise RuntimeError(f"stage4 native reference proof stdout mismatch: missing '{expected_stdout}'")
 
 
-def subject_runtime_root(repo_root: Path, matrix_id: str) -> Path:
-    return repo_root / "artifacts" / "subjects" / HELLOWORLD_SUBJECT_ID / "matrices" / matrix_id / "runtime"
+def resolve_subject_matrix_subject_id(repo_root: Path) -> str:
+    record = subjects_module.require_single_subject_record(
+        subjects_module.load_subject_records(repo_root),
+        category="canonical",
+        source_type="dotnet-project",
+        required_stage_kinds=["generated-native-proof", "runtime-trace-compare"],
+        required_goal_ids=["correctness.dev", "correctness.platform"],
+        required_host_platforms=["windows-x64"],
+        required_validation_profile_ids=["proof-dev", "trace-platform"],
+        required_validation_frameworks=["xunit"],
+    )
+    return str(record["subjectId"])
+
+
+def build_subject_run_id(matrix_id: str) -> str:
+    return f"verify-roadmap0-{matrix_id}-{uuid.uuid4().hex[:8]}"
+
+
+def subject_runtime_root(repo_root: Path, subject_id: str, run_id: str, matrix_id: str) -> Path:
+    return repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "matrices" / matrix_id / "runtime"
 
 
 def execute_subject_matrix(repo_root: Path, *, matrix_id: str, goal_id: str) -> dict:
+    subject_id = resolve_subject_matrix_subject_id(repo_root)
+    run_id = build_subject_run_id(matrix_id)
     plan = subject_planner_module.build_plan(
         repo_root,
-        HELLOWORLD_SUBJECT_ID,
+        subject_id,
         goal_id=goal_id,
         matrix_id=matrix_id,
+        run_id=run_id,
     )
-    result = subject_executor_module.execute_plan(repo_root, plan)
+    result = subject_executor_module.execute_plan(repo_root, plan, run_id=run_id)
     if result["status"] != "ok":
         raise RuntimeError(f"subject matrix failed: {matrix_id}: {result['errors']}")
+    result["runId"] = run_id
     return result
 
 
@@ -286,49 +309,50 @@ def main(argv: list[str] | None = None) -> int:
     if host_profile == "windows":
         if not windows_trace_snapshot.is_file():
             raise RuntimeError(f"missing Windows trace snapshot contract: {windows_trace_snapshot}")
+        subject_id = resolve_subject_matrix_subject_id(repo_root)
 
-        write_step("Run HelloWorldObject windows-dev-output subject matrix")
-        execute_subject_matrix(repo_root, matrix_id="windows-dev-output", goal_id="correctness.dev")
-        validate_stage4_proof_run_artifacts(subject_runtime_root(repo_root, "windows-dev-output"))
+        write_step(f"Run {subject_id} windows-dev-output subject matrix")
+        dev_output_result = execute_subject_matrix(repo_root, matrix_id="windows-dev-output", goal_id="correctness.dev")
+        validate_stage4_proof_run_artifacts(subject_runtime_root(repo_root, subject_id, str(dev_output_result["runId"]), "windows-dev-output"))
         write_gate_record(
             artifact_root / "windows-stage4-native-reference.gate.json",
             "windows-stage4-native-reference",
             "passed",
             "windows-x64-reference",
-            "Windows Stage 4 native reference proof compatibility gate passed via the HelloWorldObject subject matrix.",
+            f"Windows Stage 4 native reference proof compatibility gate passed via the {subject_id} subject matrix.",
             host_profile,
         )
 
-        write_step("Run HelloWorldObject windows-reference-trace subject matrix")
+        write_step(f"Run {subject_id} windows-reference-trace subject matrix")
         execute_subject_matrix(repo_root, matrix_id="windows-reference-trace", goal_id="correctness.platform")
         write_gate_record(
             artifact_root / "windows-reference-desktop.gate.json",
             "windows-reference-desktop",
             "passed",
             "windows-x64-reference",
-            f"Windows reference desktop gate passed via the HelloWorldObject windows-reference-trace subject matrix and the canonical snapshot contract at {windows_trace_snapshot}.",
+            f"Windows reference desktop gate passed via the {subject_id} windows-reference-trace subject matrix and the canonical snapshot contract at {windows_trace_snapshot}.",
             host_profile,
         )
 
-        write_step("Run HelloWorldObject windows-android-buildable subject matrix")
+        write_step(f"Run {subject_id} windows-android-buildable subject matrix")
         execute_subject_matrix(repo_root, matrix_id="windows-android-buildable", goal_id="correctness.platform")
         write_gate_record(
             artifact_root / "android-startup-smoke.gate.json",
             "android-startup-smoke",
             "passed",
             "android-arm64-smoke",
-            "Android gate passed via the HelloWorldObject windows-android-buildable subject matrix.",
+            f"Android gate passed via the {subject_id} windows-android-buildable subject matrix.",
             host_profile,
         )
 
-        write_step("Run HelloWorldObject windows-linux-buildable subject matrix")
+        write_step(f"Run {subject_id} windows-linux-buildable subject matrix")
         execute_subject_matrix(repo_root, matrix_id="windows-linux-buildable", goal_id="correctness.platform")
         write_gate_record(
             artifact_root / "linux-packaging.gate.json",
             "linux-packaging",
             "passed",
             "linux-x64-packaging",
-            "Linux packaging gate passed via the HelloWorldObject windows-linux-buildable subject matrix.",
+            f"Linux packaging gate passed via the {subject_id} windows-linux-buildable subject matrix.",
             host_profile,
         )
 

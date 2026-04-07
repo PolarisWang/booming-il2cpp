@@ -14,7 +14,7 @@ def load_traffic_light_module():
     if not TRAFFIC_LIGHT_MODULE_PATH.is_file():
         raise FileNotFoundError(f"traffic light module missing: {TRAFFIC_LIGHT_MODULE_PATH}")
 
-    spec = importlib.util.spec_from_file_location("booming_run_traffic_light", TRAFFIC_LIGHT_MODULE_PATH)
+    spec = importlib.util.spec_from_file_location("chaos_run_traffic_light", TRAFFIC_LIGHT_MODULE_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"unable to load traffic light module: {TRAFFIC_LIGHT_MODULE_PATH}")
 

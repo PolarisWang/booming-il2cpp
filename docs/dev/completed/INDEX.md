@@ -2,6 +2,11 @@
 
 | 任务 | lifecycle_status | phase | 最近更新 | 下一步 | active |
 | --- | --- | --- | --- | --- | --- |
+| `20260407-06-phase-4-variant-aware-codegen-and-native` | `completed` | `archived` | `2026-04-08 00:03:55 +08:00` | 无。`CHECK|PROFILE|SHIP` 已贯通到 worker/codegen/native/report，并完成 Windows native 端到端验证。 | `no` |
+| `20260407-02-subject-layout-and-variant-traceability-roadmap` | `completed` | `archived` | `2026-04-08 00:03:55 +08:00` | 无。父 roadmap 已整体完成，后续仅在出现新结构约束时另开 follow-up。 | `no` |
+| `20260407-05-phase-3-run-scoped-artifact-spine` | `completed` | `archived` | `2026-04-07 16:47:13 +08:00` | 无。后续变体与公共入口改造由 `Phase 4/5` 继续承接。 | `no` |
+| `20260407-04-phase-2-subject-root-and-manifest-cutover` | `completed` | `archived` | `2026-04-07 16:47:13 +08:00` | 无。后续 traceability 与 variant 工作基于已冻结的 subject manifest 继续推进。 | `no` |
+| `20260407-03-phase-1-path-resolver-and-contract-samples-cutover` | `completed` | `archived` | `2026-04-07 16:47:13 +08:00` | 无。path resolver 与 contract samples canonicalization 已成为后续阶段基线。 | `no` |
 | `20260407-01-subject-stage-f-perf-and-multi-subject-expansion` | `completed` | `archived` | `2026-04-07 01:42:14 +08:00` | 无。若后续继续扩展更多 subject、更多 perf host 或新的 public perf surface，应另开 follow-up。 | `no` |
 | `20260406-03-subject-test-framework-rollout-roadmap` | `completed` | `archived` | `2026-04-07 01:42:14 +08:00` | 无。subject 测试框架 rollout 主线已全部完成，如需新增阶段请另开 follow-up。 | `no` |
 | `20260406-08-subject-stage-d-e-reporting-and-public-cutover` | `completed` | `archived` | `2026-04-07 00:00:58 +08:00` | 无。若继续 `subject` 主线，下一步回到父 roadmap 并派生 `Stage F` follow-up plan。 | `no` |

@@ -4,11 +4,42 @@
   "category": "canonical",
   "defaultGoal": "correctness.dev",
   "defaultMatrix": "windows-dev-output",
+  "defaultValidationProfile": "proof-dev",
   "source": {
     "type": "dotnet-project",
     "path": "subjects/HelloWorldObject/source/HelloWorldObject.csproj",
     "entry": "HelloWorldObject/Program::Main(System.String[])"
   },
+  "validationProfiles": {
+    "proof-dev": [
+      "proof",
+      "unit"
+    ],
+    "trace-platform": [
+      "proof"
+    ],
+    "build-platform": [
+      "proof"
+    ]
+  },
+  "validation": {
+    "proof": {
+      "kind": "proof",
+      "defaultVariant": "CHECK"
+    },
+    "unit": {
+      "kind": "unit",
+      "project": "subjects/HelloWorldObject/validation/unit/HelloWorldObject.Subject.UnitTests/HelloWorldObject.Subject.UnitTests.csproj",
+      "framework": "xunit",
+      "defaultVariant": "CHECK"
+    }
+  },
+  "expected": {
+    "analysis": "subjects/HelloWorldObject/expected/analysis/",
+    "codegen": "subjects/HelloWorldObject/expected/codegen/",
+    "runtime": "subjects/HelloWorldObject/expected/runtime/"
+  },
+  "baselines": {},
   "tags": [
     "proof",
     "object",

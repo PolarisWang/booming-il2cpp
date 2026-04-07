@@ -80,7 +80,7 @@ class TraceCompareTests(unittest.TestCase):
         self.assertIn("Warmup trace compare passed", completed.stdout)
 
     def test_trace_compare_command_uses_python_comparer_on_macos(self) -> None:
-        test_module = load_module(TEST_MODULE_PATH, "booming_run_trace_compare")
+        test_module = load_module(TEST_MODULE_PATH, "chaos_run_trace_compare")
         bootstrap = test_module.tooling_module.ToolBootstrapResult(
             ready=True,
             output="",

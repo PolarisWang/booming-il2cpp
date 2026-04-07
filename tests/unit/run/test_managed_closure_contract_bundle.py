@@ -1,0 +1,197 @@
+from __future__ import annotations
+
+import json
+import shutil
+import subprocess
+import unittest
+import uuid
+from pathlib import Path
+
+from tests.support import select_subject_record
+from tests.support import load_module
+
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
+CONTRACT_OVERVIEW_PATH = REPO_ROOT / "contracts" / "docs" / "v0" / "overview.md"
+SPEC_DOC_PATH = REPO_ROOT / "docs" / "architecture" / "roadmap-0" / "managed-minimal-closure-v0.md"
+TOOLING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "tooling.py"
+
+EXPECTED_ARTIFACTS = {
+    "typed-il-ir.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "typed-il-ir.min.json",
+    "aot-manifest.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "aot-manifest.min.json",
+    "metadata-registration.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "metadata-registration.min.json",
+    "code-registration.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "code-registration.min.json",
+}
+METADATA_REGISTRATION_MINIMAL_KEYS = ("registrationKind", "slot", "subjectId")
+TEST_INTERMEDIATE_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "managed-closure-contract"
+
+
+def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
+    completed = subprocess.run(
+        arguments,
+        cwd=cwd,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        check=False,
+    )
+    if completed.returncode != 0:
+        combined_output = "\n".join(part for part in [completed.stdout, completed.stderr] if part)
+        raise AssertionError(f"command failed ({completed.returncode}): {' '.join(arguments)}\n{combined_output}")
+    return completed
+
+
+def load_json(path: Path) -> object:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def project_metadata_registration_minimal(artifact: object, expected_subject_ids: set[str]) -> object:
+    if not isinstance(artifact, dict):
+        return artifact
+
+    registrations = artifact.get("registrations")
+    if not isinstance(registrations, list):
+        return artifact
+
+    return {
+        "formatVersion": artifact.get("formatVersion"),
+        "artifactKind": artifact.get("artifactKind"),
+        "registrations": [
+            {key: registration[key] for key in METADATA_REGISTRATION_MINIMAL_KEYS}
+            for registration in registrations
+            if registration.get("subjectId") in expected_subject_ids
+        ],
+    }
+
+
+class ManagedClosureContractBundleTests(unittest.TestCase):
+    maxDiff = None
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.subject_record = select_subject_record(
+            "chaos_contract_managed_closure_bundle_record",
+            category="canonical",
+            source_type="dotnet-project",
+            required_stage_kinds=["analysis-frontend", "generated-native-proof"],
+            required_validation_profile_ids=["proof-dev"],
+            required_validation_kinds=["proof", "unit"],
+            required_validation_frameworks=["xunit"],
+        )
+        cls.subject_id = str(cls.subject_record["subjectId"])
+        cls.project_path = REPO_ROOT / "subjects" / cls.subject_id / "source" / f"{cls.subject_id}.csproj"
+        cls.dll_path = REPO_ROOT / "subjects" / cls.subject_id / "source" / "bin" / "Release" / "net8.0" / f"{cls.subject_id}.dll"
+        cls.output_root = TEST_INTERMEDIATE_ROOT / "outputs" / f"{cls.subject_id}-{uuid.uuid4().hex}"
+        cls.bundle_generated = False
+
+    def _ensure_bundle_generated(self) -> None:
+        if self.__class__.bundle_generated:
+            return
+
+        if self.output_root.exists():
+            shutil.rmtree(self.output_root)
+
+        tooling_module = load_module(TOOLING_MODULE_PATH, f"chaos_managed_closure_tooling_{self.subject_id}")
+        intermediate_root = tooling_module.allocate_dotnet_intermediate_dir(self.subject_id, host_platform="windows")
+        if intermediate_root is None:
+            intermediate_root = TEST_INTERMEDIATE_ROOT / self.subject_id
+        run_checked(
+            [
+                "dotnet",
+                "build",
+                str(self.project_path),
+                "-c",
+                "Release",
+                f"-p:BaseIntermediateOutputPath={intermediate_root.as_posix()}/$(MSBuildProjectName)/",
+                f"-p:MSBuildProjectExtensionsPath={intermediate_root.as_posix()}/$(MSBuildProjectName)/",
+            ],
+            cwd=REPO_ROOT,
+        )
+        self.assertTrue(self.dll_path.is_file(), msg=f"missing proof dll: {self.dll_path}")
+        driver_intermediate_root = tooling_module.allocate_dotnet_intermediate_dir("Chaos.IL2CPP.Driver", host_platform="windows")
+        self.assertIsNotNone(driver_intermediate_root)
+        run_checked(
+            [
+                "dotnet",
+                "build",
+                str(DRIVER_PROJECT_PATH),
+                "-c",
+                "Release",
+                "-m:1",
+                f"-p:ChaosTempIntermediateRoot={Path(driver_intermediate_root).as_posix()}/",
+            ],
+            cwd=REPO_ROOT,
+        )
+
+        run_checked(
+            [
+                "dotnet",
+                str(REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Driver.dll"),
+                str(self.dll_path),
+                str(self.output_root),
+            ],
+            cwd=REPO_ROOT,
+        )
+        self.__class__.bundle_generated = True
+
+    def test_spec_doc_exists_and_points_at_subject_root_inputs(self) -> None:
+        self.assertTrue(SPEC_DOC_PATH.is_file(), msg=f"missing spec doc: {SPEC_DOC_PATH}")
+
+        spec_text = SPEC_DOC_PATH.read_text(encoding="utf-8")
+        overview_text = CONTRACT_OVERVIEW_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("subjects/<subject-id>/source/<subject-id>.csproj", spec_text)
+        self.assertIn("subjects/<subject-id>/source/bin/Release/net8.0/<subject-id>.dll", spec_text)
+        self.assertIn("artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/typed-il-ir.json", spec_text)
+        self.assertIn("closure.manifest.json", spec_text)
+        self.assertIn("docs/architecture/roadmap-0/managed-minimal-closure-v0.md", overview_text)
+
+    def test_driver_generates_bundle_from_selected_proof_subject(self) -> None:
+        self._ensure_bundle_generated()
+
+        for artifact_name in [*EXPECTED_ARTIFACTS.keys(), "closure.manifest.json"]:
+            artifact_path = self.output_root / artifact_name
+            self.assertTrue(artifact_path.is_file(), msg=f"missing closure artifact: {artifact_path}")
+
+        manifest = load_json(self.output_root / "closure.manifest.json")
+        self.assertEqual("v0", manifest["formatVersion"])
+        self.assertEqual("managedClosureManifest", manifest["artifactKind"])
+        self.assertEqual(self.subject_id, manifest["assemblyName"])
+        self.assertEqual(
+            f"{self.subject_id}/Program::Main(System.String[])",
+            manifest["entrySubjectId"],
+        )
+        self.assertEqual(str(self.dll_path.relative_to(REPO_ROOT)).replace("\\", "/"), manifest["inputAssemblyPath"])
+        self.assertEqual(
+            [
+                "typed-il-ir.json",
+                "aot-manifest.json",
+                "metadata-registration.json",
+                "code-registration.json",
+            ],
+            [artifact["path"] for artifact in manifest["artifacts"]],
+        )
+        self.assertTrue(manifest["inputModuleVersionId"])
+
+    def test_generated_core_artifacts_match_canonical_contract_samples(self) -> None:
+        self._ensure_bundle_generated()
+
+        for generated_name, expected_path in EXPECTED_ARTIFACTS.items():
+            generated_path = self.output_root / generated_name
+            expected_json = load_json(expected_path)
+            generated_json = load_json(generated_path)
+
+            if generated_name == "metadata-registration.json":
+                expected_subject_ids = {
+                    registration["subjectId"]
+                    for registration in expected_json["registrations"]
+                }
+                generated_json = project_metadata_registration_minimal(generated_json, expected_subject_ids)
+
+            self.assertEqual(expected_json, generated_json, msg=f"artifact mismatch: {generated_name}")
+
+
+if __name__ == "__main__":
+    unittest.main()

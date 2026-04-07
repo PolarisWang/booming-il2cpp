@@ -3,6 +3,14 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Any
+import sys
+
+try:
+    from . import path_resolver as path_resolver_module
+except ImportError:
+    root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(root))
+    from testing import path_resolver as path_resolver_module
 
 
 def _baseline_path(repo_root: Path, suite: str, host_platform: str) -> Path:
@@ -10,15 +18,11 @@ def _baseline_path(repo_root: Path, suite: str, host_platform: str) -> Path:
 
 
 def _subject_baseline_path(repo_root: Path, subject_id: str, matrix_id: str, host_platform: str) -> Path:
-    return (
-        repo_root
-        / "tests"
-        / "perf"
-        / "subjects"
-        / subject_id
-        / matrix_id
-        / "baselines"
-        / f"{host_platform}.json"
+    return path_resolver_module.subject_perf_baseline_path(
+        repo_root,
+        subject_id,
+        matrix_id,
+        host_platform,
     )
 
 

@@ -26,7 +26,7 @@ def load_module(path: Path, module_name: str):
 
 class ContractPathsTests(unittest.TestCase):
     def test_analysis_contract_paths_use_canonical_contract_roots(self) -> None:
-        contracts_module = load_module(CONTRACTS_MODULE_PATH, "booming_run_contract_paths_analysis")
+        contracts_module = load_module(CONTRACTS_MODULE_PATH, "chaos_run_contract_paths_analysis")
 
         paths = contracts_module.analysis_contract_json_paths(REPO_ROOT)
 
@@ -35,16 +35,20 @@ class ContractPathsTests(unittest.TestCase):
             paths,
         )
         self.assertIn(
-            REPO_ROOT / "contracts" / "examples" / "v0" / "artifacts" / "aot-manifest.min.json",
+            REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "aot-manifest.min.json",
             paths,
         )
         self.assertIn(REPO_ROOT / "tests" / "contracts" / "schema" / "aot-manifest.snapshot.json", paths)
         self.assertNotIn(REPO_ROOT / "analysis" / "contracts" / "schemas" / "aot-manifest.schema.json", paths)
         self.assertNotIn(REPO_ROOT / "analysis" / "contracts" / "examples" / "aot-manifest.min.json", paths)
+        self.assertNotIn(
+            REPO_ROOT / "contracts" / "examples" / "v0" / "artifacts" / "aot-manifest.min.json",
+            paths,
+        )
         self.assertNotIn(REPO_ROOT / "tests" / "contract" / "schema" / "aot-manifest.snapshot.json", paths)
 
     def test_trace_contract_paths_use_canonical_tests_contracts_trace(self) -> None:
-        contracts_module = load_module(CONTRACTS_MODULE_PATH, "booming_run_contract_paths_trace")
+        contracts_module = load_module(CONTRACTS_MODULE_PATH, "chaos_run_contract_paths_trace")
 
         paths = contracts_module.trace_contract_json_paths(REPO_ROOT)
 

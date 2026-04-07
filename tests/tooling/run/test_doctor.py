@@ -28,7 +28,7 @@ def load_module(path: Path, module_name: str):
 
 class DoctorCommandTests(unittest.TestCase):
     def test_doctor_highlights_status_prefixes(self) -> None:
-        doctor_module = load_module(DOCTOR_MODULE_PATH, "booming_run_doctor_status_highlight")
+        doctor_module = load_module(DOCTOR_MODULE_PATH, "chaos_run_doctor_status_highlight")
 
         with patch.object(
             doctor_module.runtime_module,
@@ -48,7 +48,7 @@ class DoctorCommandTests(unittest.TestCase):
         self.assertIn("\x1b[1;36m[note]\x1b[0m osc8-hyperlinks", result.text or "")
 
     def test_doctor_reports_osc8_support_when_terminal_looks_capable(self) -> None:
-        doctor_module = load_module(DOCTOR_MODULE_PATH, "booming_run_doctor_osc8_supported")
+        doctor_module = load_module(DOCTOR_MODULE_PATH, "chaos_run_doctor_osc8_supported")
 
         with patch.object(
             doctor_module.runtime_module,
@@ -77,7 +77,7 @@ class DoctorCommandTests(unittest.TestCase):
         self.assertIn("Current terminal looks compatible", result.text or "")
 
     def test_doctor_explains_that_osc8_is_not_installable_when_support_is_unknown(self) -> None:
-        doctor_module = load_module(DOCTOR_MODULE_PATH, "booming_run_doctor_osc8_unknown")
+        doctor_module = load_module(DOCTOR_MODULE_PATH, "chaos_run_doctor_osc8_unknown")
 
         with patch.object(
             doctor_module.runtime_module,
@@ -108,7 +108,7 @@ class DoctorCommandTests(unittest.TestCase):
         self.assertIn("Apple_Terminal", result.text or "")
 
     def test_doctor_marks_visual_cpp_toolchain_ok_when_discovered_via_visual_studio(self) -> None:
-        doctor_module = load_module(DOCTOR_MODULE_PATH, "booming_run_doctor_windows_vswhere")
+        doctor_module = load_module(DOCTOR_MODULE_PATH, "chaos_run_doctor_windows_vswhere")
 
         with patch.object(
             doctor_module.runtime_module,
@@ -134,7 +134,7 @@ class DoctorCommandTests(unittest.TestCase):
         self.assertIn("discovered via Visual Studio", vc_check["detail"])
 
     def test_doctor_guides_windows_users_to_prepare_when_cmake_is_missing(self) -> None:
-        doctor_module = load_module(DOCTOR_MODULE_PATH, "booming_run_doctor_missing_cmake_prepare_guidance")
+        doctor_module = load_module(DOCTOR_MODULE_PATH, "chaos_run_doctor_missing_cmake_prepare_guidance")
 
         with patch.object(
             doctor_module.runtime_module,

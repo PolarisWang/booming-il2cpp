@@ -28,7 +28,7 @@ def load_module(path: Path, module_name: str):
 
 class RunProcessTests(unittest.TestCase):
     def test_run_process_captures_binary_output_for_custom_decoding(self) -> None:
-        common_module = load_module(COMMON_MODULE_PATH, "booming_run_common")
+        common_module = load_module(COMMON_MODULE_PATH, "chaos_run_common")
 
         with patch.object(
             common_module.subprocess,
@@ -41,7 +41,7 @@ class RunProcessTests(unittest.TestCase):
         self.assertFalse(kwargs["text"])
 
     def test_run_process_prefers_utf8_when_output_is_utf8_encoded(self) -> None:
-        common_module = load_module(COMMON_MODULE_PATH, "booming_run_common_utf8")
+        common_module = load_module(COMMON_MODULE_PATH, "chaos_run_common_utf8")
         payload = "适用于 .NET Framework MSBuild".encode("utf-8")
 
         with patch.object(common_module.locale, "getpreferredencoding", return_value="gbk"):
@@ -55,7 +55,7 @@ class RunProcessTests(unittest.TestCase):
         self.assertIn("适用于 .NET Framework MSBuild", completed.stdout)
 
     def test_run_process_merges_windows_environment_without_duplicate_path_keys(self) -> None:
-        common_module = load_module(COMMON_MODULE_PATH, "booming_run_common_windows_env")
+        common_module = load_module(COMMON_MODULE_PATH, "chaos_run_common_windows_env")
 
         with patch.object(common_module.os, "name", "nt"):
             with patch.dict(common_module.os.environ, {"Path": "C:\\Windows\\System32"}, clear=True):

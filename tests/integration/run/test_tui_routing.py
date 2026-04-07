@@ -15,7 +15,7 @@ def load_run_module():
     if not RUN_MODULE_PATH.is_file():
         raise FileNotFoundError(f"run module missing: {RUN_MODULE_PATH}")
 
-    spec = importlib.util.spec_from_file_location("booming_run_main", RUN_MODULE_PATH)
+    spec = importlib.util.spec_from_file_location("chaos_run_main", RUN_MODULE_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"unable to load run module: {RUN_MODULE_PATH}")
 

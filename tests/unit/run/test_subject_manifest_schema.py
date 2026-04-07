@@ -25,169 +25,175 @@ def load_module(path: Path, module_name: str):
 
 
 class SubjectManifestSchemaTests(unittest.TestCase):
-    def test_subject_manifest_loader_discovers_helloworld_canonical_subject(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "booming_subject_manifest_schema")
+    def test_all_discovered_subject_manifests_match_directory_identity(self) -> None:
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_schema_all")
 
         manifest_paths = subjects_module.discover_subject_manifests(REPO_ROOT)
-        self.assertIn(
-            REPO_ROOT / "subjects" / "HelloWorldObject" / "subject.manifest.json",
-            manifest_paths,
-        )
+        records = subjects_module.load_subject_records(REPO_ROOT)
 
-        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "HelloWorldObject")
+        self.assertEqual(len(manifest_paths), len(records))
+        self.assertGreater(len(records), 0)
 
-        self.assertEqual("HelloWorldObject", manifest["subjectId"])
-        self.assertEqual("HelloWorldObject", manifest["displayName"])
-        self.assertEqual("correctness.dev", manifest["defaultGoal"])
-        self.assertEqual("windows-dev-output", manifest["defaultMatrix"])
-        self.assertEqual("dotnet-project", manifest["source"]["type"])
-        self.assertEqual(
-            "subjects/HelloWorldObject/source/HelloWorldObject.csproj",
-            manifest["source"]["path"],
-        )
-        self.assertEqual(
-            "HelloWorldObject/Program::Main(System.String[])",
-            manifest["source"]["entry"],
-        )
-        self.assertEqual(
-            {
-                "windows-dev-output",
-                "windows-reference-trace",
-                "windows-android-buildable",
-                "windows-linux-buildable",
-            },
-            {item["matrixId"] for item in manifest["environmentMatrices"]},
-        )
+        for record in records:
+            manifest = record["manifest"]
+            manifest_path = record["manifestPath"]
+            subject_id = record["subjectId"]
+            validation_profiles = dict(manifest.get("validationProfiles") or {})
+            validation = dict(manifest.get("validation") or {})
+            expected = dict(manifest.get("expected") or {})
+            baselines = dict(manifest.get("baselines") or {})
 
-    def test_subject_artifact_roots_and_bucket_paths_follow_subject_layout(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "booming_subject_manifest_paths")
+            self.assertIn(manifest_path, manifest_paths)
+            self.assertEqual(subject_id, manifest["subjectId"])
+            self.assertEqual(subject_id, manifest_path.parent.name)
+            self.assertEqual("dotnet-project", manifest["source"]["type"])
+            self.assertTrue(str(manifest["source"]["path"]).startswith(f"subjects/{subject_id}/source/"))
+            self.assertTrue(manifest["displayName"])
+            self.assertGreater(len(list(manifest.get("environmentMatrices") or [])), 0)
+            self.assertTrue(str(manifest.get("defaultValidationProfile") or ""))
+            self.assertIn(str(manifest["defaultValidationProfile"]), validation_profiles)
+            self.assertGreater(len(validation_profiles), 0)
+            self.assertGreater(len(validation), 0)
 
-        roots = subjects_module.subject_artifact_roots("HelloWorldObject", "windows-reference-trace")
-        self.assertEqual("artifacts/subjects/HelloWorldObject", roots["subjectRoot"])
-        self.assertEqual("artifacts/subjects/HelloWorldObject/shared", roots["sharedRoot"])
+            for profile_id, validation_kinds in validation_profiles.items():
+                self.assertTrue(profile_id)
+                self.assertGreater(len(list(validation_kinds or [])), 0)
+                for validation_kind in list(validation_kinds or []):
+                    self.assertIn(str(validation_kind), validation)
+
+            for validation_kind, validation_spec in validation.items():
+                self.assertEqual(str(validation_spec.get("kind") or validation_kind), validation_kind)
+                self.assertTrue(str(validation_spec.get("defaultVariant") or ""))
+                project_path = str(validation_spec.get("project") or "")
+                if project_path:
+                    self.assertTrue(project_path.startswith(f"subjects/{subject_id}/validation/"))
+                    self.assertTrue((REPO_ROOT / project_path).is_file())
+
+            for label, expected_path in expected.items():
+                self.assertTrue(label)
+                self.assertTrue(str(expected_path).startswith(f"subjects/{subject_id}/expected/"))
+
+            for label, baseline_path in baselines.items():
+                self.assertTrue(label)
+                self.assertTrue(str(baseline_path).startswith(f"subjects/{subject_id}/baselines/"))
+
+    def test_query_finds_trace_capable_canonical_subject_without_subject_name_coupling(self) -> None:
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_query_trace")
+        run_id = "20260407-hello-001"
+
+        record = subjects_module.require_single_subject_record(
+            subjects_module.load_subject_records(REPO_ROOT),
+            category="canonical",
+            source_type="dotnet-project",
+            required_stage_kinds=[
+                "analysis-frontend",
+                "generated-native-proof",
+                "runtime-trace-compare",
+            ],
+            required_validation_profile_ids=["proof-dev"],
+            required_validation_kinds=["proof", "unit"],
+            required_validation_frameworks=["xunit"],
+        )
+        manifest = record["manifest"]
+        subject_id = record["subjectId"]
+        trace_matrix = subjects_module.find_matrix_with_stage_kind(manifest, "runtime-trace-compare")
+        matrix_id = str(trace_matrix["matrixId"])
+
+        roots = subjects_module.subject_artifact_roots(subject_id, matrix_id, run_id=run_id)
+        self.assertEqual(f"artifacts/subjects/{subject_id}", roots["subjectRoot"])
+        self.assertEqual(f"artifacts/subjects/{subject_id}/runs", roots["runsRoot"])
+        self.assertEqual(f"artifacts/subjects/{subject_id}/runs/{run_id}", roots["runRoot"])
+        self.assertEqual(f"artifacts/subjects/{subject_id}/runs/{run_id}/analysis", roots["analysisRoot"])
+        self.assertEqual(f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/{matrix_id}", roots["matrixRoot"])
         self.assertEqual(
-            "artifacts/subjects/HelloWorldObject/matrices/windows-reference-trace",
-            roots["matrixRoot"],
+            f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/{matrix_id}/pipeline-report",
+            roots["pipelineReportRoot"],
         )
         self.assertEqual(
-            "artifacts/subjects/HelloWorldObject/subject-report",
+            f"artifacts/subjects/{subject_id}/runs/{run_id}/subject-report",
             roots["subjectReportRoot"],
         )
 
         analysis_paths = subjects_module.stage_paths(
-            "HelloWorldObject",
-            "windows-reference-trace",
+            subject_id,
+            matrix_id,
+            run_id=run_id,
             bucket="analysis",
             scope="shared",
             kind="analysis-frontend",
         )
         self.assertEqual(
-            "artifacts/subjects/HelloWorldObject/shared/analysis/analysis.manifest.json",
+            f"artifacts/subjects/{subject_id}/runs/{run_id}/analysis/analysis/analysis.manifest.json",
             analysis_paths["manifestPath"],
         )
         self.assertEqual(
-            ["artifacts/subjects/HelloWorldObject/shared/analysis/contract-validate.report.json"],
+            [f"artifacts/subjects/{subject_id}/runs/{run_id}/analysis/analysis/contract-validate.report.json"],
             analysis_paths["reportPaths"],
         )
 
-        generated_paths = subjects_module.stage_paths(
-            "HelloWorldObject",
-            "windows-reference-trace",
-            bucket="generated",
-            scope="shared",
-            kind="generated-native-proof",
-        )
-        self.assertEqual(
-            "artifacts/subjects/HelloWorldObject/shared/generated/generated.manifest.json",
-            generated_paths["manifestPath"],
-        )
-
-        build_paths = subjects_module.stage_paths(
-            "HelloWorldObject",
-            "windows-reference-trace",
-            bucket="build",
-            scope="matrix",
-            kind="build-target",
-        )
-        self.assertEqual(
-            "artifacts/subjects/HelloWorldObject/matrices/windows-reference-trace/build/build.manifest.json",
-            build_paths["manifestPath"],
-        )
-
         runtime_paths = subjects_module.stage_paths(
-            "HelloWorldObject",
-            "windows-reference-trace",
+            subject_id,
+            matrix_id,
+            run_id=run_id,
             bucket="runtime",
             scope="matrix",
             kind="runtime-trace-compare",
         )
         self.assertEqual(
-            "artifacts/subjects/HelloWorldObject/matrices/windows-reference-trace/runtime/runtime.manifest.json",
+            f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/{matrix_id}/runtime/runtime.manifest.json",
             runtime_paths["manifestPath"],
         )
         self.assertEqual(
-            ["artifacts/subjects/HelloWorldObject/matrices/windows-reference-trace/runtime/trace-compare.report.json"],
+            [f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/{matrix_id}/runtime/trace-compare.report.json"],
             runtime_paths["reportPaths"],
         )
 
-    def test_subject_manifest_loader_discovers_generic_echo_benchmark_subject(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "booming_subject_manifest_schema_generic_echo")
+    def test_query_finds_perf_benchmark_subject_without_subject_name_coupling(self) -> None:
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_query_perf")
 
-        manifest_paths = subjects_module.discover_subject_manifests(REPO_ROOT)
-        self.assertIn(
-            REPO_ROOT / "subjects" / "GenericEcho" / "subject.manifest.json",
-            manifest_paths,
+        record = subjects_module.require_single_subject_record(
+            subjects_module.load_subject_records(REPO_ROOT),
+            category="benchmark",
+            source_type="dotnet-project",
+            required_stage_kinds=["runtime-perf-collect"],
+            required_goal_ids=["perf.dev", "perf.release"],
+            required_host_platforms=["windows-x64"],
+            required_validation_profile_ids=["perf-dev", "perf-release"],
+            required_validation_kinds=["perf"],
+            required_validation_drivers=["csharp-perf-harness"],
         )
+        manifest = record["manifest"]
+        capabilities = record["capabilities"]
 
-        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "GenericEcho")
-
-        self.assertEqual("GenericEcho", manifest["subjectId"])
-        self.assertEqual("GenericEcho", manifest["displayName"])
-        self.assertEqual("benchmark", manifest["category"])
-        self.assertEqual("perf.dev", manifest["defaultGoal"])
-        self.assertEqual("windows-perf-dev", manifest["defaultMatrix"])
+        self.assertEqual("benchmark", capabilities["category"])
+        self.assertIn("runtime-perf-collect", capabilities["stageKinds"])
+        self.assertEqual({"perf.dev", "perf.release"}, set(capabilities["goalIds"]))
+        self.assertEqual("perf-dev", capabilities["defaultValidationProfile"])
         self.assertEqual("dotnet-project", manifest["source"]["type"])
-        self.assertEqual(
-            "subjects/GenericEcho/source/GenericEcho.csproj",
-            manifest["source"]["path"],
+        self.assertTrue(str(manifest["source"]["path"]).startswith(f"subjects/{record['subjectId']}/source/"))
+
+    def test_query_groups_managed_output_subjects_without_subject_name_list(self) -> None:
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_query_managed_output")
+
+        records = subjects_module.query_subject_records(
+            subjects_module.load_subject_records(REPO_ROOT),
+            source_type="dotnet-project",
+            required_stage_kinds=["runtime-managed-output"],
+            required_goal_ids=["correctness.dev"],
+            required_host_platforms=["windows-x64", "macos-arm64", "linux-x64"],
+            required_validation_profile_ids=["managed-output"],
+            required_validation_kinds=["proof"],
         )
-        self.assertEqual(
-            {
-                "windows-perf-dev",
-                "windows-perf-release",
-            },
-            {item["matrixId"] for item in manifest["environmentMatrices"]},
-        )
 
-    def test_subject_manifest_loader_discovers_all_migrated_smoke_subjects(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "booming_subject_manifest_schema_smoke_subjects")
-
-        manifest_paths = set(subjects_module.discover_subject_manifests(REPO_ROOT))
-        expected_subjects = {
-            "HelloWorld": ("canonical", "subjects/HelloWorld/source/HelloWorld.csproj"),
-            "ReflectionLite": ("diagnostic", "subjects/ReflectionLite/source/ReflectionLite.csproj"),
-            "PInvokeLite": ("diagnostic", "subjects/PInvokeLite/source/PInvokeLite.csproj"),
-            "HostEmbeddingLite": ("diagnostic", "subjects/HostEmbeddingLite/source/HostEmbeddingLite.csproj"),
-        }
-
-        for subject_id, (category, source_path) in expected_subjects.items():
-            manifest_path = REPO_ROOT / "subjects" / subject_id / "subject.manifest.json"
-            self.assertIn(manifest_path, manifest_paths)
-
-            manifest = subjects_module.load_subject_manifest(REPO_ROOT, subject_id)
-            self.assertEqual(subject_id, manifest["subjectId"])
-            self.assertEqual(subject_id, manifest["displayName"])
-            self.assertEqual(category, manifest["category"])
-            self.assertEqual("correctness.dev", manifest["defaultGoal"])
-            self.assertEqual("windows-managed-output", manifest["defaultMatrix"])
-            self.assertEqual(source_path, manifest["source"]["path"])
+        self.assertGreaterEqual(len(records), 4)
+        for record in records:
+            manifest = record["manifest"]
+            capabilities = record["capabilities"]
+            self.assertIn(capabilities["category"], {"canonical", "diagnostic"})
+            self.assertTrue(str(manifest["source"]["path"]).startswith(f"subjects/{record['subjectId']}/source/"))
             self.assertEqual(
-                {
-                    "windows-managed-output",
-                    "macos-managed-output",
-                    "linux-managed-output",
-                },
-                {item["matrixId"] for item in manifest["environmentMatrices"]},
+                {"windows-x64", "macos-arm64", "linux-x64"},
+                set(capabilities["hostPlatforms"]),
             )
 
 

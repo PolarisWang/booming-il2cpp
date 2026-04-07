@@ -7,10 +7,12 @@ import sys
 
 try:
     from ..common import read_json
+    from . import path_resolver as path_resolver_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from common import read_json
+    from testing import path_resolver as path_resolver_module
 
 
 def read_json_file(path: Path) -> object:
@@ -79,10 +81,11 @@ def assert_json_files_parse(paths: list[Path]) -> None:
 
 
 def analysis_contract_json_paths(repo_root: Path) -> list[Path]:
+    contract_roots = path_resolver_module.contract_roots(repo_root)
     paths: list[Path] = []
-    paths.extend(sorted((repo_root / "contracts" / "artifacts" / "v0" / "schemas").glob("*.json")))
-    paths.extend(sorted((repo_root / "contracts" / "examples" / "v0" / "artifacts").glob("*.json")))
-    paths.extend(sorted((repo_root / "tests" / "contracts" / "schema").glob("*.json")))
+    paths.extend(sorted(contract_roots["artifactSchemaRoot"].glob("*.json")))
+    paths.extend(sorted(contract_roots["artifactSampleRoot"].glob("*.json")))
+    paths.extend(sorted(contract_roots["artifactSnapshotRoot"].glob("*.json")))
     return paths
 
 
@@ -91,9 +94,10 @@ def trace_contract_json_paths(repo_root: Path) -> list[Path]:
 
 
 def validate_analysis_contracts(repo_root: Path) -> None:
-    schema_dir = repo_root / "contracts" / "artifacts" / "v0" / "schemas"
-    example_dir = repo_root / "contracts" / "examples" / "v0" / "artifacts"
-    snapshot_dir = repo_root / "tests" / "contracts" / "schema"
+    contract_roots = path_resolver_module.contract_roots(repo_root)
+    schema_dir = contract_roots["artifactSchemaRoot"]
+    example_dir = contract_roots["artifactSampleRoot"]
+    snapshot_dir = contract_roots["artifactSnapshotRoot"]
 
     for schema_file in sorted(schema_dir.glob("*.schema.json")):
         base_name = schema_file.name.removesuffix(".schema.json")

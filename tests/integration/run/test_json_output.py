@@ -13,7 +13,7 @@ def load_result_module():
     if not RESULT_MODULE_PATH.is_file():
         raise FileNotFoundError(f"result module missing: {RESULT_MODULE_PATH}")
 
-    spec = importlib.util.spec_from_file_location("booming_run_result", RESULT_MODULE_PATH)
+    spec = importlib.util.spec_from_file_location("chaos_run_result", RESULT_MODULE_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"unable to load result module: {RESULT_MODULE_PATH}")
 

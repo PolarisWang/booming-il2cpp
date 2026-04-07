@@ -8,7 +8,8 @@ Stage 3 负责把一个真实编译出的 managed assembly 收束为 generated-c
 ## 输入
 
 - proof input assembly：
-  - `tests/proof/input/HelloWorldObject/bin/Release/net8.0/HelloWorldObject.dll`
+  - `subjects/<subject-id>/source/bin/Release/net8.0/<subject-id>.dll`
+  - `subjects/<subject-id>/source/<subject-id>.csproj`
 
 Stage 3 的实现必须读取真实 assembly metadata 和 method body，不允许直接复制 Stage 2 的 canonical artifact JSON 作为伪实现输出。
 
@@ -16,15 +17,15 @@ Stage 3 的实现必须读取真实 assembly metadata 和 method body，不允�
 
 Stage 3 推荐输出根目录：
 
-- `artifacts/proof/managed-closure/HelloWorldObject/`
+- `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/`
 
 根目录下最小文件集：
 
-- `artifacts/proof/managed-closure/HelloWorldObject/typed-il-ir.json`
-- `artifacts/proof/managed-closure/HelloWorldObject/aot-manifest.json`
-- `artifacts/proof/managed-closure/HelloWorldObject/metadata-registration.json`
-- `artifacts/proof/managed-closure/HelloWorldObject/code-registration.json`
-- `artifacts/proof/managed-closure/HelloWorldObject/closure.manifest.json`
+- `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/typed-il-ir.json`
+- `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/aot-manifest.json`
+- `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/metadata-registration.json`
+- `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/code-registration.json`
+- `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/closure.manifest.json`
 
 ## 边界
 

@@ -15,7 +15,7 @@ def load_prepare_module():
     if not PREPARE_MODULE_PATH.is_file():
         raise FileNotFoundError(f"prepare module missing: {PREPARE_MODULE_PATH}")
 
-    spec = importlib.util.spec_from_file_location("booming_run_prepare", PREPARE_MODULE_PATH)
+    spec = importlib.util.spec_from_file_location("chaos_run_prepare", PREPARE_MODULE_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"unable to load prepare module: {PREPARE_MODULE_PATH}")
 

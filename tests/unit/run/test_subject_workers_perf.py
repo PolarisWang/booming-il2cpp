@@ -10,6 +10,8 @@ import uuid
 from pathlib import Path
 from unittest.mock import patch
 
+from tests.support import select_subject_record
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_WORKERS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_workers.py"
@@ -30,6 +32,14 @@ def load_module(path: Path, module_name: str):
     return module
 
 
+def posix_path(*parts: str) -> str:
+    return Path(*parts).as_posix()
+
+
+def subject_run_path(subject_id: str, run_id: str, *parts: str) -> str:
+    return posix_path("artifacts", "subjects", subject_id, "runs", run_id, *parts)
+
+
 class SubjectWorkersPerfTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -41,11 +51,40 @@ class SubjectWorkersPerfTests(unittest.TestCase):
         return repo_root
 
     def test_runtime_perf_collect_runs_multiple_samples_and_records_perf_details(self) -> None:
-        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "booming_subject_workers_perf_runtime")
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_perf_runtime")
+        subject_record = select_subject_record(
+            "chaos_subject_workers_perf_runtime_record",
+            category="benchmark",
+            source_type="dotnet-project",
+            required_goal_ids=["perf.release"],
+            required_validation_kinds=["perf"],
+            required_validation_drivers=["csharp-perf-harness"],
+        )
+        subject_id = str(subject_record["subjectId"])
+        run_id = "fixture-run-perf-runtime-001"
+        matrix_id = "windows-perf-release"
+        perf_project_path = posix_path(
+            "subjects",
+            subject_id,
+            "validation",
+            "perf",
+            f"{subject_id}.Subject.PerfHarness",
+            f"{subject_id}.Subject.PerfHarness.csproj",
+        )
+        perf_harness_dll_path = subject_run_path(
+            subject_id,
+            run_id,
+            "matrices",
+            matrix_id,
+            "runtime",
+            "harness",
+            f"{subject_id}.Subject.PerfHarness.dll",
+        )
         request = {
             "selection": {
-                "subjectId": "GenericEcho",
-                "matrixId": "windows-perf-release",
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "PROFILE",
                 "executionContext": {
                     "hostPlatform": "windows-x64",
                     "runtimeProfile": "managed-perf-release",
@@ -53,37 +92,66 @@ class SubjectWorkersPerfTests(unittest.TestCase):
             },
             "upstream": {
                 "host-input": {
-                    "manifestPath": "artifacts/subjects/GenericEcho/shared/host-input/host-input.manifest.json",
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "host-input", "host-input.manifest.json"),
                 }
             },
             "paths": {
-                "bucketRoot": "artifacts/subjects/GenericEcho/matrices/windows-perf-release/runtime",
-                "manifestPath": "artifacts/subjects/GenericEcho/matrices/windows-perf-release/runtime/runtime.manifest.json",
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json"),
                 "reportPaths": [],
             },
         }
 
         repo_root = self._make_repo_root("runtime-perf-collect")
         try:
+            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            subject_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "subjectId": subject_id,
+                        "validation": {
+                            "perf": {
+                                "kind": "perf",
+                                "project": perf_project_path,
+                                "driver": "csharp-perf-harness",
+                                "defaultVariant": "PROFILE",
+                            }
+                        },
+                        "validationProfiles": {"perf-release": ["perf"]},
+                        "defaultValidationProfile": "perf-release",
+                    }
+                ),
+                encoding="utf-8",
+            )
             host_input_manifest_path = repo_root / request["upstream"]["host-input"]["manifestPath"]
             host_input_manifest_path.parent.mkdir(parents=True, exist_ok=True)
             host_input_manifest_path.write_text(
                 json.dumps(
                     {
-                        "primaryAssemblyPath": "artifacts/smoke/bin/GenericEcho/Release/net8.0/GenericEcho.dll",
+                        "primaryAssemblyPath": subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.dll"),
                     }
                 ),
                 encoding="utf-8",
             )
 
             completed = subprocess.CompletedProcess(
-                ["dotnet", str(repo_root / "artifacts" / "smoke" / "bin" / "GenericEcho" / "Release" / "net8.0" / "GenericEcho.dll")],
+                ["dotnet", str(repo_root / perf_harness_dll_path), "10000"],
                 0,
-                "roadmap0\n42\nroadmap0:roadmap0\n",
+                json.dumps(
+                    {
+                        "harness": "csharp-perf-harness",
+                        "subjectId": subject_id,
+                        "iterations": 10000,
+                        "elapsedMilliseconds": 16.0,
+                        "lastValue": "6:roadmap0",
+                    }
+                )
+                + "\n",
                 "",
             )
             perf_result = {
-                "baselinePath": "tests/perf/subjects/GenericEcho/windows-perf-release/baselines/windows.json",
+                "baselinePath": posix_path("subjects", subject_id, "baselines", "perf", matrix_id, "windows.json"),
                 "baseline": {"meanDurationMs": 12.0},
                 "metrics": {"sampleCount": 10, "meanDurationMs": 16.0, "minDurationMs": 10.0, "maxDurationMs": 20.0},
                 "baselineUpdated": False,
@@ -110,35 +178,62 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                         result = workers_module.run_runtime_perf_collect(repo_root=repo_root, request=request)
 
             self.assertEqual("ok", result["status"])
-            self.assertEqual(10, run_process_mock.call_count)
+            self.assertEqual(11, run_process_mock.call_count)
             self.assertEqual(
                 [
                     "dotnet",
-                    str(repo_root / "artifacts" / "smoke" / "bin" / "GenericEcho" / "Release" / "net8.0" / "GenericEcho.dll"),
+                    "build",
+                    str(repo_root / perf_project_path),
+                    "-c",
+                    "Release",
+                    "-o",
+                    str(
+                        repo_root
+                        / "artifacts"
+                        / "subjects"
+                        / subject_id
+                        / "runs"
+                        / run_id
+                        / "matrices"
+                        / matrix_id
+                        / "runtime"
+                        / "harness"
+                    ),
                 ],
-                run_process_mock.call_args.args[0],
+                run_process_mock.call_args_list[0].args[0][:7],
+            )
+            self.assertEqual(
+                [
+                    "dotnet",
+                    str(repo_root / perf_harness_dll_path),
+                    "10000",
+                ],
+                run_process_mock.call_args_list[1].args[0],
             )
             evaluate_mock.assert_called_once_with(
                 repo_root=repo_root,
-                subject_id="GenericEcho",
-                matrix_id="windows-perf-release",
+                subject_id=subject_id,
+                matrix_id=matrix_id,
                 host_platform="windows",
-                metrics={"sampleCount": 10, "meanDurationMs": 16.0, "minDurationMs": 10.0, "maxDurationMs": 20.0},
+                metrics={"sampleCount": 10, "meanDurationMs": 16.0, "minDurationMs": 16.0, "maxDurationMs": 16.0},
                 update_baseline=False,
             )
 
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
-            self.assertEqual("GenericEcho", manifest["subjectId"])
-            self.assertEqual("windows-perf-release", manifest["matrixId"])
+            self.assertEqual(subject_id, manifest["subjectId"])
+            self.assertEqual(matrix_id, manifest["matrixId"])
+            self.assertEqual("PROFILE", manifest["variant"])
             self.assertEqual(10, len(manifest["samples"]))
             self.assertEqual({"meanDurationMs": 12.0}, manifest["baseline"])
             self.assertEqual("regressed", manifest["regressionStatus"])
+            self.assertEqual(perf_project_path, manifest["perfHarnessProjectPath"])
+            self.assertEqual(perf_harness_dll_path, manifest["perfHarnessDllPath"])
             self.assertEqual(
                 {"sampleCount": 10, "meanDurationMs": 16.0, "minDurationMs": 10.0, "maxDurationMs": 20.0},
                 manifest["summaryMetrics"],
             )
             self.assertEqual(
-                "artifacts/subjects/GenericEcho/matrices/windows-perf-release/runtime/stdout.log",
+                subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stdout.log"),
                 result["diagnostics"]["stdoutPath"],
             )
             self.assertEqual(

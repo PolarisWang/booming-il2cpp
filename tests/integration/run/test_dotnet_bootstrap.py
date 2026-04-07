@@ -30,7 +30,7 @@ def load_module(path: Path, module_name: str):
 
 class DotnetBootstrapTests(unittest.TestCase):
     def test_macos_interactive_session_can_bootstrap_dotnet_with_homebrew(self) -> None:
-        tooling_module = load_module(TOOLING_MODULE_PATH, "booming_run_tooling_install")
+        tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_install")
         install = subprocess.CompletedProcess(
             ["brew", "install", "--cask", "dotnet-sdk"],
             0,
@@ -66,7 +66,7 @@ class DotnetBootstrapTests(unittest.TestCase):
         self.assertIn("brew install completed", outcome.output)
 
     def test_macos_non_interactive_session_returns_manual_install_guidance(self) -> None:
-        tooling_module = load_module(TOOLING_MODULE_PATH, "booming_run_tooling_noninteractive")
+        tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_noninteractive")
 
         outcome = tooling_module.ensure_dotnet_available(
             "test workflow roadmap-0-macos",
@@ -81,7 +81,7 @@ class DotnetBootstrapTests(unittest.TestCase):
         self.assertIn("non-interactive", outcome.output)
 
     def test_macos_interactive_session_requires_homebrew_for_auto_install(self) -> None:
-        tooling_module = load_module(TOOLING_MODULE_PATH, "booming_run_tooling_missing_brew")
+        tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_missing_brew")
 
         outcome = tooling_module.ensure_dotnet_available(
             "build smoke HelloWorld",
@@ -97,7 +97,7 @@ class DotnetBootstrapTests(unittest.TestCase):
         self.assertIn("https://brew.sh", outcome.output)
 
     def test_build_smoke_project_checks_dotnet_before_running(self) -> None:
-        build_module = load_module(BUILD_MODULE_PATH, "booming_run_build_dotnet_gate")
+        build_module = load_module(BUILD_MODULE_PATH, "chaos_run_build_dotnet_gate")
         bootstrap = build_module.tooling_module.ToolBootstrapResult(
             ready=False,
             output="Run `brew install --cask dotnet-sdk`, then retry.\n",
@@ -122,7 +122,7 @@ class DotnetBootstrapTests(unittest.TestCase):
         self.assertEqual(["dotnet SDK is not installed"], gated.errors)
 
     def test_smoke_test_checks_dotnet_before_running(self) -> None:
-        test_module = load_module(TEST_MODULE_PATH, "booming_run_test_dotnet_gate")
+        test_module = load_module(TEST_MODULE_PATH, "chaos_run_test_dotnet_gate")
         bootstrap = test_module.tooling_module.ToolBootstrapResult(
             ready=False,
             output="Run `brew install --cask dotnet-sdk`, then retry.\n",
@@ -150,8 +150,8 @@ class DotnetBootstrapTests(unittest.TestCase):
         run_process_mock.assert_not_called()
 
     def test_workflow_suite_checks_dotnet_before_running(self) -> None:
-        manifest_module = load_module(REPO_ROOT / "build" / "toolchains" / "run" / "manifest.py", "booming_run_manifest_dotnet_gate")
-        test_module = load_module(TEST_MODULE_PATH, "booming_run_test_workflow_dotnet_gate")
+        manifest_module = load_module(REPO_ROOT / "build" / "toolchains" / "run" / "manifest.py", "chaos_run_manifest_dotnet_gate")
+        test_module = load_module(TEST_MODULE_PATH, "chaos_run_test_workflow_dotnet_gate")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, REPO_ROOT / "build" / "toolchains" / "run" / "run_manifest.json")
         bootstrap = test_module.tooling_module.ToolBootstrapResult(
             ready=False,

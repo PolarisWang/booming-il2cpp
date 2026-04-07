@@ -4,10 +4,35 @@
   "category": "benchmark",
   "defaultGoal": "perf.dev",
   "defaultMatrix": "windows-perf-dev",
+  "defaultValidationProfile": "perf-dev",
   "source": {
     "type": "dotnet-project",
     "path": "subjects/GenericEcho/source/GenericEcho.csproj",
     "entry": "GenericEcho/Program::Main()"
+  },
+  "validationProfiles": {
+    "perf-dev": [
+      "perf"
+    ],
+    "perf-release": [
+      "perf"
+    ]
+  },
+  "validation": {
+    "perf": {
+      "kind": "perf",
+      "project": "subjects/GenericEcho/validation/perf/GenericEcho.Subject.PerfHarness/GenericEcho.Subject.PerfHarness.csproj",
+      "driver": "csharp-perf-harness",
+      "defaultVariant": "PROFILE"
+    }
+  },
+  "expected": {
+    "analysis": "subjects/GenericEcho/expected/analysis/",
+    "codegen": "subjects/GenericEcho/expected/codegen/",
+    "runtime": "subjects/GenericEcho/expected/runtime/"
+  },
+  "baselines": {
+    "perf": "subjects/GenericEcho/baselines/perf/"
   },
   "tags": [
     "benchmark",

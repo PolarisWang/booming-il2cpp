@@ -68,7 +68,7 @@ class PlatformGateValidateOnlyTests(unittest.TestCase):
         self.assertEqual(0, completed.returncode, msg=completed.stdout + completed.stderr)
 
     def test_platform_gate_uses_preset_compatible_generator(self) -> None:
-        build_module = load_module(BUILD_MODULE_PATH, "booming_run_build_platform_gate")
+        build_module = load_module(BUILD_MODULE_PATH, "chaos_run_build_platform_gate")
         completed = subprocess.CompletedProcess(["cmake"], 0, stdout="", stderr="")
 
         with patch.object(build_module, "run_process", return_value=completed) as run_process_mock:
@@ -110,7 +110,7 @@ class PlatformGateValidateOnlyTests(unittest.TestCase):
         self.assertIn("Xcode", configure_args)
 
     def test_platform_gate_uses_run_scoped_binary_dir(self) -> None:
-        build_module = load_module(BUILD_MODULE_PATH, "booming_run_build_platform_gate_scoped_dir")
+        build_module = load_module(BUILD_MODULE_PATH, "chaos_run_build_platform_gate_scoped_dir")
         completed = subprocess.CompletedProcess(["cmake"], 0, stdout="", stderr="")
         requested_dir = REPO_ROOT / "artifacts" / "run" / "platform" / "linux-x64-packaging"
         allocated_dir = requested_dir.parent / "linux-x64-packaging-test-run"
@@ -141,7 +141,7 @@ class PlatformGateValidateOnlyTests(unittest.TestCase):
 
 class PlatformGateCommandTests(unittest.TestCase):
     def test_reference_desktop_gate_runs_preset_trace_and_gate_record(self) -> None:
-        build_module = load_module(BUILD_MODULE_PATH, "booming_run_build_reference_desktop_gate")
+        build_module = load_module(BUILD_MODULE_PATH, "chaos_run_build_reference_desktop_gate")
         bootstrap = build_module.tooling_module.ToolBootstrapResult(
             ready=True,
             output="",
@@ -216,7 +216,7 @@ class PlatformGateCommandTests(unittest.TestCase):
         self.assertTrue(gate_record.is_file())
 
     def test_reference_desktop_gate_failure_text_includes_underlying_output(self) -> None:
-        build_module = load_module(BUILD_MODULE_PATH, "booming_run_build_reference_desktop_gate_failure")
+        build_module = load_module(BUILD_MODULE_PATH, "chaos_run_build_reference_desktop_gate_failure")
         bootstrap = build_module.tooling_module.ToolBootstrapResult(
             ready=True,
             output="",
@@ -253,7 +253,7 @@ class PlatformGateCommandTests(unittest.TestCase):
         self.assertIn("trace compare mismatch at root.warmup[0]", result.text)
 
     def test_platform_gate_uses_run_scoped_binary_dir(self) -> None:
-        build_module = load_module(BUILD_MODULE_PATH, "booming_run_build_platform_gate_scoped_dir_any_host")
+        build_module = load_module(BUILD_MODULE_PATH, "chaos_run_build_platform_gate_scoped_dir_any_host")
         completed = subprocess.CompletedProcess(["cmake"], 0, stdout="", stderr="")
         requested_dir = REPO_ROOT / "artifacts" / "run" / "platform" / "linux-x64-packaging"
         allocated_dir = requested_dir.parent / "linux-x64-packaging-test-run"
@@ -282,7 +282,7 @@ class PlatformGateCommandTests(unittest.TestCase):
         self.assertEqual([str(allocated_dir)], result.payload["artifacts"])
 
     def test_build_failure_text_includes_underlying_output(self) -> None:
-        build_module = load_module(BUILD_MODULE_PATH, "booming_run_build_platform_gate_failure_text")
+        build_module = load_module(BUILD_MODULE_PATH, "chaos_run_build_platform_gate_failure_text")
         completed = subprocess.CompletedProcess(["cmake"], 1, stdout="", stderr="toolchain validate only configure failed")
 
         with patch.object(build_module, "allocate_run_scoped_binary_dir", return_value=REPO_ROOT / "artifacts" / "run" / "platform" / "linux-x64-packaging-test-run"):

@@ -1,4 +1,4 @@
-objectId: module/analysis/basic
+﻿objectId: module/analysis/basic
 objectType: module
 primaryModuleId: analysis
 
@@ -10,8 +10,8 @@ primaryModuleId: analysis
 
 ## 目的
 
-- 为 `analysis/contracts` 下的 schema、example、snapshot 一致性提供默认完成前模块验证。
-- 把原先只藏在 roadmap-0 底层脚本里的 analysis contract 校验升格为正式对象，供 harness、registry 和 skill 直接调用。
+- 为 analysis contract 的 schema / sample / snapshot 一致性提供正式验证入口
+- 把底层脚本里的 analysis contract 校验升级成可复用的模块对象
 
 ## 覆盖
 
@@ -21,7 +21,7 @@ primaryModuleId: analysis
 
 - 修改 `analysis/contracts/schemas/*.schema.json`
 - 修改 `analysis/contracts/examples/*.min.json`
-- 修改 `tests/contracts/schema/*.snapshot.json`
+- 修改 `contracts/artifacts/v0/snapshots/*.snapshot.json`
 
 ## 正式入口
 

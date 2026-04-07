@@ -32,9 +32,9 @@ def load_module(path: Path, module_name: str):
 
 class StageExecutionTests(unittest.TestCase):
     def test_public_test_handle_surfaces_session_stage_results(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_for_stage")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_for_stage")
-        result_module = load_module(RESULT_MODULE_PATH, "booming_run_result_for_stage")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_for_stage")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_for_stage")
+        result_module = load_module(RESULT_MODULE_PATH, "chaos_run_result_for_stage")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
         legacy_result = result_module.CommandResult.success(
             command="test smoke HelloWorld --stage run",
@@ -58,7 +58,7 @@ class StageExecutionTests(unittest.TestCase):
         self.assertTrue(result.payload["suiteResults"][0]["stageResults"]["build"]["implicit"])
 
     def test_explicit_incompatible_suite_fails_with_contract_exit_code(self) -> None:
-        run_module = load_module(RUN_MODULE_PATH, "booming_run_main_for_stage_exit_code")
+        run_module = load_module(RUN_MODULE_PATH, "chaos_run_main_for_stage_exit_code")
         stdout = io.StringIO()
 
         with patch.object(run_module.manifest_module, "is_interactive_session", return_value=False):
@@ -70,7 +70,7 @@ class StageExecutionTests(unittest.TestCase):
         self.assertIn("not supported on host", stdout.getvalue())
 
     def test_strict_invalid_suite_returns_contract_exit_code(self) -> None:
-        run_module = load_module(RUN_MODULE_PATH, "booming_run_main_for_strict_exit_code")
+        run_module = load_module(RUN_MODULE_PATH, "chaos_run_main_for_strict_exit_code")
         stdout = io.StringIO()
 
         with patch.object(run_module.manifest_module, "is_interactive_session", return_value=False):

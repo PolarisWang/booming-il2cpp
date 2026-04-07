@@ -13,7 +13,7 @@ Status: design-discuss
 
 ## 2. 设计输入
 
-本设计以 `docs/discuss/20260406-01` 到 `20260406-21` 的连续讨论为输入，不另行在 `docs/discuss/` 生成新的同步副本。
+本设计以 `docs/discuss/test-framework/`、`docs/discuss/subject-framework/`、`docs/discuss/reporting/` 与 `docs/discuss/roadmap-0/` 下的连续讨论为输入，不另行在 `docs/discuss/` 生成新的同步副本。
 
 其中最关键的冻结点已经包括：
 

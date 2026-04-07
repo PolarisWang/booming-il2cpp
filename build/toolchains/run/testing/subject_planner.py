@@ -29,9 +29,20 @@ def build_plan(
     *,
     goal_id: str | None = None,
     matrix_id: str | None = None,
+    validation_profile_id: str | None = None,
+    validation_kind: str | None = None,
+    variant: str | None = None,
+    run_id: str | None = None,
 ) -> dict[str, Any]:
     manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
     selected_goal_id = goal_id or str(manifest["defaultGoal"])
+    selected_run_id = run_id or "subject-exec"
+    validation_selection = subjects_module.resolve_validation_selection(
+        manifest,
+        validation_profile_id=validation_profile_id,
+        validation_kind=validation_kind,
+        variant=variant,
+    )
     if matrix_id is not None:
         selected_matrix_id = matrix_id
     else:
@@ -55,7 +66,11 @@ def build_plan(
         raise ValueError(f"matrix '{selected_matrix_id}' does not support goal '{selected_goal_id}'")
 
     pipeline = subjects_module.find_pipeline(manifest, str(matrix["pipelineId"]))
-    artifacts_root = subjects_module.subject_artifact_roots(subject_id, selected_matrix_id)
+    artifacts_root = subjects_module.subject_artifact_roots(
+        subject_id,
+        selected_matrix_id,
+        run_id=selected_run_id,
+    )
 
     stage_plan: list[dict[str, Any]] = []
     stage_by_id: dict[str, dict[str, Any]] = {}
@@ -68,6 +83,7 @@ def build_plan(
         paths = subjects_module.stage_paths(
             subject_id,
             selected_matrix_id,
+            run_id=selected_run_id,
             bucket=bucket,
             scope=scope,
             kind=kind,
@@ -81,6 +97,10 @@ def build_plan(
                 "subjectId": subject_id,
                 "goalId": selected_goal_id,
                 "matrixId": selected_matrix_id,
+                "validationProfileId": str(validation_selection["validationProfileId"]),
+                "validationKinds": list(validation_selection["validationKinds"]),
+                "validationKind": validation_selection["validationKind"],
+                "variant": str(validation_selection["variant"]),
                 "stageId": stage_id,
                 "kind": kind,
                 "bucket": bucket,
@@ -137,12 +157,21 @@ def build_plan(
             "subjectId": subject_id,
             "goalId": goal_id,
             "matrixId": matrix_id,
+            "validationProfileId": validation_profile_id,
+            "validationKind": validation_kind,
+            "variant": variant,
+            "runId": selected_run_id,
         },
         "selection": {
             "subjectId": subject_id,
             "displayName": str(manifest["displayName"]),
             "goalId": selected_goal_id,
             "matrixId": selected_matrix_id,
+            "validationProfileId": str(validation_selection["validationProfileId"]),
+            "validationKinds": list(validation_selection["validationKinds"]),
+            "validationKind": validation_selection["validationKind"],
+            "defaultVariant": str(validation_selection["defaultVariant"]),
+            "variant": str(validation_selection["variant"]),
             "pipelineId": str(matrix["pipelineId"]),
             "source": dict(manifest["source"]),
             "executionContext": dict(matrix["executionContext"]),

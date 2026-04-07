@@ -18,7 +18,7 @@ def load_reporting_module():
     if not REPORTING_MODULE_PATH.is_file():
         raise FileNotFoundError(f"reporting module missing: {REPORTING_MODULE_PATH}")
 
-    spec = importlib.util.spec_from_file_location("booming_run_reporting", REPORTING_MODULE_PATH)
+    spec = importlib.util.spec_from_file_location("chaos_run_reporting", REPORTING_MODULE_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"unable to load reporting module: {REPORTING_MODULE_PATH}")
 
@@ -31,6 +31,7 @@ def load_reporting_module():
 class ReportingLayoutTests(unittest.TestCase):
     def test_reporting_layout_writes_fixed_session_files(self) -> None:
         reporting_module = load_reporting_module()
+        subject_id = "fixture-layout-entry"
 
         TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
         repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
@@ -80,11 +81,11 @@ class ReportingLayoutTests(unittest.TestCase):
                 artifacts=[],
                 subject_results=[
                     {
-                        "subjectId": "HelloWorldObject",
+                        "subjectId": subject_id,
                         "requestedGoalId": "correctness.platform",
                         "status": "fail",
                         "matrixStatusCounts": {"total": 2, "ok": 1, "fail": 1, "skip": 0, "aborted": 0},
-                        "subjectSummaryPath": "artifacts/subjects/HelloWorldObject/subject-report/summary.json",
+                        "subjectSummaryPath": f"artifacts/subjects/{subject_id}/runs/run-1/subject-report/summary.json",
                     }
                 ],
             )
@@ -109,8 +110,8 @@ class ReportingLayoutTests(unittest.TestCase):
         self.assertEqual("final-summary", events[-1]["eventType"])
         self.assertNotIn("suiteResults", events[-1]["payload"])
         self.assertEqual(1, summary["subjectStatusCounts"]["fail"])
-        self.assertEqual("HelloWorldObject", summary["subjectResults"][0]["subjectId"])
-        self.assertEqual("HelloWorldObject", events[-1]["payload"]["subjectResults"][0]["subjectId"])
+        self.assertEqual(subject_id, summary["subjectResults"][0]["subjectId"])
+        self.assertEqual(subject_id, events[-1]["payload"]["subjectResults"][0]["subjectId"])
         self.assertEqual("code", summary["phaseResults"][0]["phaseId"])
         self.assertEqual("code", events[-1]["payload"]["phaseResults"][0]["phaseId"])
         self.assertEqual(1, summary["trafficLightCounts"]["green"]["ok"])

@@ -8,6 +8,8 @@ import uuid
 from pathlib import Path
 from unittest.mock import patch
 
+from tests.support import select_public_suite_spec
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 RUN_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "run.py"
@@ -18,7 +20,7 @@ def load_run_module():
     if not RUN_MODULE_PATH.is_file():
         raise FileNotFoundError(f"run module missing: {RUN_MODULE_PATH}")
 
-    spec = importlib.util.spec_from_file_location("booming_run_main", RUN_MODULE_PATH)
+    spec = importlib.util.spec_from_file_location("chaos_run_main", RUN_MODULE_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"unable to load run module: {RUN_MODULE_PATH}")
 
@@ -83,6 +85,12 @@ class TuiRoutingTests(unittest.TestCase):
     def test_json_test_command_prefers_event_stream_output(self) -> None:
         run_module = load_run_module()
         stdout = io.StringIO()
+        smoke_spec = select_public_suite_spec(
+            "chaos_tui_routing_json_suite",
+            host_platform="macos",
+            family="smoke",
+            required_stages=["all"],
+        )
 
         TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
         repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
@@ -99,9 +107,9 @@ class TuiRoutingTests(unittest.TestCase):
             events_path.write_text('{"eventType":"progress"}\n{"eventType":"final-summary"}\n', encoding="utf-8")
 
             result = run_module.CommandResult.success(
-                command="test smoke HelloWorld",
+                command=f"test {smoke_spec['family']} {smoke_spec['suite']}",
                 host_platform="macos",
-                target="smoke/HelloWorld",
+                target=str(smoke_spec["id"]),
                 payload={"eventsPath": "artifacts/logs/tests/run-1/events.jsonl"},
             )
 
@@ -110,7 +118,7 @@ class TuiRoutingTests(unittest.TestCase):
                     with patch.object(run_module.runtime_module, "detect_host_platform", return_value="macos-arm64"):
                         with patch.object(run_module, "execute_command", return_value=result):
                             with patch.object(run_module.sys, "stdout", stdout):
-                                exit_code = run_module.main(["test", "smoke", "HelloWorld", "--json"])
+                                exit_code = run_module.main(["test", str(smoke_spec["family"]), str(smoke_spec["suite"]), "--json"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -120,6 +128,15 @@ class TuiRoutingTests(unittest.TestCase):
     def test_interactive_test_command_renders_runtime_progress_screen(self) -> None:
         run_module = load_run_module()
         stdout = io.StringIO()
+        smoke_spec = select_public_suite_spec(
+            "chaos_tui_routing_progress_suite",
+            host_platform="macos",
+            family="smoke",
+            required_stages=["all"],
+        )
+        suite_id = str(smoke_spec["id"])
+        suite_name = str(smoke_spec["suite"])
+        smoke_artifact_path = f"artifacts/smoke/bin/{suite_name}/Release/net8.0/{suite_name}.dll"
 
         def fake_handle(command, repo_root, host_platform, command_text, manifest, options, progress_callback=None):
             del command, repo_root, host_platform, command_text, manifest, options
@@ -133,19 +150,19 @@ class TuiRoutingTests(unittest.TestCase):
             progress_callback(
                 {
                     "eventType": "progress",
-                    "payload": {"completedUnits": 0, "totalUnits": 4, "activeUnit": "smoke/HelloWorld"},
+                    "payload": {"completedUnits": 0, "totalUnits": 4, "activeUnit": suite_id},
                 }
             )
             progress_callback(
                 {
                     "eventType": "stage-start",
-                    "payload": {"completedUnits": 0, "totalUnits": 4, "activeUnit": "smoke/HelloWorld"},
+                    "payload": {"completedUnits": 0, "totalUnits": 4, "activeUnit": suite_id},
                 }
             )
             progress_callback(
                 {
                     "eventType": "progress",
-                    "payload": {"completedUnits": 1, "totalUnits": 4, "activeUnit": "smoke/HelloWorld", "suiteStatus": "ok"},
+                    "payload": {"completedUnits": 1, "totalUnits": 4, "activeUnit": suite_id, "suiteStatus": "ok"},
                 }
             )
             return run_module.CommandResult.success(
@@ -158,7 +175,7 @@ class TuiRoutingTests(unittest.TestCase):
                     "sessionPath": "artifacts/logs/tests/run-1/session.json",
                     "telemetryPath": "artifacts/logs/tests/run-1/telemetry.json",
                     "artifacts": [
-                        "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll",
+                        smoke_artifact_path,
                         "artifacts/run/trace/macos-warmup-trace.runtime.json",
                         "artifacts/verify-roadmap-0/macos",
                     ],
@@ -174,8 +191,8 @@ class TuiRoutingTests(unittest.TestCase):
 
         self.assertEqual(0, exit_code)
         self.assertIn("Unified Test Progress", stdout.getvalue())
-        self.assertIn("[\x1b[32m  0%\x1b[0m] queued smoke/HelloWorld", stdout.getvalue())
-        self.assertIn("[\x1b[32m 25%\x1b[0m] ok     smoke/HelloWorld", stdout.getvalue())
+        self.assertIn(f"[\x1b[32m  0%\x1b[0m] queued {suite_id}", stdout.getvalue())
+        self.assertIn(f"[\x1b[32m 25%\x1b[0m] ok     {suite_id}", stdout.getvalue())
         self.assertIn("final output", stdout.getvalue())
         self.assertIn("\x1b[1;33mImportant outputs:\x1b[0m", stdout.getvalue())
         self.assertIn("\x1b[1;36mTest report:\x1b[0m", stdout.getvalue())

@@ -7,6 +7,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from tests.support import select_public_suite_spec, select_subject_record
+
 from .test_command_manifest import RUN_MANIFEST_PATH, load_manifest_module
 
 
@@ -18,7 +20,7 @@ def load_tui_module():
     if not TUI_MODULE_PATH.is_file():
         raise FileNotFoundError(f"tui module missing: {TUI_MODULE_PATH}")
 
-    spec = importlib.util.spec_from_file_location("booming_run_tui", TUI_MODULE_PATH)
+    spec = importlib.util.spec_from_file_location("chaos_run_tui", TUI_MODULE_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"unable to load tui module: {TUI_MODULE_PATH}")
 
@@ -26,6 +28,10 @@ def load_tui_module():
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
+
+def smoke_binary_artifact_path(suite_name: str) -> str:
+    return Path("artifacts", "smoke", "bin", suite_name, "Release", "net8.0", f"{suite_name}.dll").as_posix()
 
 
 @unittest.skip("legacy assertions superseded by unified test menu coverage")
@@ -268,15 +274,21 @@ class LegacyTuiTests(unittest.TestCase):
         manifest_module = load_manifest_module()
         tui_module = load_tui_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+        smoke_spec = select_public_suite_spec(
+            "chaos_tui_dynamic_suite_target",
+            host_platform="windows",
+            family="smoke",
+            required_stages=["all"],
+        )
 
         test_entry = next(
             entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.syntax == "test"
         )
 
-        answers = iter(["suite", "smoke HelloWorld"])
+        answers = iter(["suite", f"{smoke_spec['family']} {smoke_spec['suite']}"])
         argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(answers))
 
-        self.assertEqual(["test", "smoke", "HelloWorld"], argv)
+        self.assertEqual(["test", str(smoke_spec["family"]), str(smoke_spec["suite"])], argv)
 
     def test_resolve_entry_argv_supports_dynamic_test_family_all_target(self) -> None:
         manifest_module = load_manifest_module()
@@ -467,12 +479,20 @@ class LegacyTuiTests(unittest.TestCase):
 
     def test_render_test_progress_screen_consumes_event_stream(self) -> None:
         tui_module = load_tui_module()
+        smoke_spec = select_public_suite_spec(
+            "chaos_tui_progress_smoke",
+            host_platform="windows",
+            family="smoke",
+            required_stages=["all"],
+        )
+        smoke_command = f"test {smoke_spec['family']} {smoke_spec['suite']}"
+        smoke_artifact_path = smoke_binary_artifact_path(str(smoke_spec["suite"]))
 
         screen = tui_module.render_test_progress_screen(
             [
                 {
                     "eventType": "session-start",
-                    "payload": {"command": "test smoke HelloWorld"},
+                    "payload": {"command": smoke_command},
                 },
                 {
                     "eventType": "progress",
@@ -504,7 +524,7 @@ class LegacyTuiTests(unittest.TestCase):
                         "eventsPath": "artifacts/logs/tests/run-1/events.jsonl",
                         "telemetryPath": "artifacts/logs/tests/run-1/telemetry.json",
                         "artifacts": [
-                            "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll",
+                            smoke_artifact_path,
                             "artifacts/run/trace/macos-warmup-trace.runtime.json",
                             "artifacts/verify-roadmap-0/macos",
                         ],
@@ -539,8 +559,8 @@ class LegacyTuiTests(unittest.TestCase):
         self.assertIn("\x1b[1;36mVerify outputs (1):\x1b[0m", screen)
         self.assertIn("\x1b[1;36mOther artifacts (1):\x1b[0m", screen)
         other_uri = (REPO_ROOT / "artifacts/logs/tests/run-1/summary.json").resolve().as_uri()
-        smoke_uri = (REPO_ROOT / "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll").resolve().as_uri()
-        self.assertIn(f"  1. \x1b]8;;{smoke_uri}\x1b\\artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll\x1b]8;;\x1b\\", screen)
+        smoke_uri = (REPO_ROOT / smoke_artifact_path).resolve().as_uri()
+        self.assertIn(f"  1. \x1b]8;;{smoke_uri}\x1b\\{smoke_artifact_path}\x1b]8;;\x1b\\", screen)
         self.assertIn(f"  1. \x1b]8;;{other_uri}\x1b\\artifacts/logs/tests/run-1/summary.json\x1b]8;;\x1b\\", screen)
 
     def test_render_operation_progress_screen_consumes_event_stream(self) -> None:
@@ -683,14 +703,28 @@ class TuiUnifiedMenuTests(unittest.TestCase):
         tui_module = load_tui_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
         test_entry = next(entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.syntax == "test")
+        smoke_spec = select_public_suite_spec(
+            "chaos_tui_unified_suite_selector",
+            host_platform="windows",
+            family="smoke",
+            required_stages=["all"],
+        )
+        subject_record = select_subject_record(
+            "chaos_tui_unified_subject_selector",
+            source_type="dotnet-project",
+            required_host_platforms=["windows-x64"],
+        )
 
-        suite_answers = iter(["suite", "smoke HelloWorld"])
+        suite_answers = iter(["suite", f"{smoke_spec['family']} {smoke_spec['suite']}"])
         suite_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(suite_answers))
-        self.assertEqual(["test", "suite", "--family", "smoke", "--suite", "HelloWorld"], suite_argv)
+        self.assertEqual(
+            ["test", "suite", "--family", str(smoke_spec["family"]), "--suite", str(smoke_spec["suite"])],
+            suite_argv,
+        )
 
-        subject_answers = iter(["subject", "HelloWorldObject"])
+        subject_answers = iter(["subject", str(subject_record["subjectId"])])
         subject_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(subject_answers))
-        self.assertEqual(["test", "subject", "--subject", "HelloWorldObject"], subject_argv)
+        self.assertEqual(["test", "subject", "--subject", str(subject_record["subjectId"])], subject_argv)
 
         module_answers = iter(["module", "managed-smoke basic"])
         module_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(module_answers))
@@ -766,24 +800,34 @@ class TuiUnifiedMenuTests(unittest.TestCase):
 
     def test_render_test_progress_screen_highlights_subject_summary(self) -> None:
         tui_module = load_tui_module()
+        subject_record = select_subject_record(
+            "chaos_tui_subject_summary_highlight",
+            source_type="dotnet-project",
+            required_host_platforms=["windows-x64"],
+        )
+        subject_id = str(subject_record["subjectId"])
+        matrix_id = str(subject_record["manifest"]["defaultMatrix"])
+        run_id = "fixture-run-summary-001"
+        summary_path = f"artifacts/subjects/{subject_id}/runs/{run_id}/subject-report/summary.json"
+        matrix_report_path = f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/{matrix_id}/pipeline-report/report.json"
 
         screen = tui_module.render_test_progress_screen(
             [
-                {"eventType": "session-start", "payload": {"command": "test subject --id subject/HelloWorldObject"}},
+                {"eventType": "session-start", "payload": {"command": f"test subject --id subject/{subject_id}"}},
                 {
                     "eventType": "final-summary",
                     "payload": {
                         "finalStatus": "ok",
                         "subjectResults": [
                             {
-                                "subjectId": "HelloWorldObject",
+                                "subjectId": subject_id,
                                 "status": "ok",
-                                "subjectSummaryPath": "artifacts/subjects/HelloWorldObject/subject-report/summary.json",
+                                "subjectSummaryPath": summary_path,
                             }
                         ],
                         "artifacts": [
-                            "artifacts/subjects/HelloWorldObject/subject-report/summary.json",
-                            "artifacts/subjects/HelloWorldObject/matrices/windows-dev-output/report.json",
+                            summary_path,
+                            matrix_report_path,
                         ],
                     },
                 },
@@ -792,13 +836,11 @@ class TuiUnifiedMenuTests(unittest.TestCase):
         )
 
         self.assertIn("Subjects:", screen)
-        self.assertIn("ok: HelloWorldObject", screen)
+        self.assertIn(f"ok: {subject_id}", screen)
         self.assertIn("\x1b[1;36mSubject summary:\x1b[0m", screen)
-        subject_summary_uri = (
-            REPO_ROOT / "artifacts" / "subjects" / "HelloWorldObject" / "subject-report" / "summary.json"
-        ).resolve().as_uri()
+        subject_summary_uri = (REPO_ROOT / summary_path).resolve().as_uri()
         self.assertIn(
-            f"\x1b]8;;{subject_summary_uri}\x1b\\artifacts/subjects/HelloWorldObject/subject-report/summary.json\x1b]8;;\x1b\\",
+            f"\x1b]8;;{subject_summary_uri}\x1b\\{summary_path}\x1b]8;;\x1b\\",
             screen,
         )
 

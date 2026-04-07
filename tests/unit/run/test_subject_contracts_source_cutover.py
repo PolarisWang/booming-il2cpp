@@ -26,7 +26,7 @@ def load_module(path: Path, module_name: str):
 
 class SubjectContractsSourceCutoverTests(unittest.TestCase):
     def test_analysis_contract_helper_reads_canonical_contract_roots(self) -> None:
-        contracts_module = load_module(CONTRACTS_MODULE_PATH, "booming_subject_contracts_cutover_paths")
+        contracts_module = load_module(CONTRACTS_MODULE_PATH, "chaos_subject_contracts_cutover_paths")
 
         paths = contracts_module.analysis_contract_json_paths(REPO_ROOT)
 
@@ -52,7 +52,7 @@ class SubjectContractsSourceCutoverTests(unittest.TestCase):
         )
 
     def test_analysis_contract_validation_succeeds_from_canonical_paths(self) -> None:
-        contracts_module = load_module(CONTRACTS_MODULE_PATH, "booming_subject_contracts_cutover_validate")
+        contracts_module = load_module(CONTRACTS_MODULE_PATH, "chaos_subject_contracts_cutover_validate")
 
         contracts_module.assert_json_files_parse(contracts_module.analysis_contract_json_paths(REPO_ROOT))
         contracts_module.validate_analysis_contracts(REPO_ROOT)

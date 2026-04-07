@@ -49,4 +49,4 @@ first proof 明确采用 generated direct-call landing，而不是以下替代�
 
 ## Example
 
-- generated direct-call landing 的最小示例见 `contracts/native/examples/v0/bridge/direct-call-landing.cpp`
+- generated direct-call landing 的最小示例见 `contracts/native/v0/samples/bridge/direct-call-landing.cpp`

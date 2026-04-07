@@ -4,11 +4,29 @@
   "category": "canonical",
   "defaultGoal": "correctness.dev",
   "defaultMatrix": "windows-managed-output",
+  "defaultValidationProfile": "managed-output",
   "source": {
     "type": "dotnet-project",
     "path": "subjects/HelloWorld/source/HelloWorld.csproj",
     "entry": "HelloWorld/Program::Main(System.String[])"
   },
+  "validationProfiles": {
+    "managed-output": [
+      "proof"
+    ]
+  },
+  "validation": {
+    "proof": {
+      "kind": "proof",
+      "defaultVariant": "CHECK"
+    }
+  },
+  "expected": {
+    "analysis": "subjects/HelloWorld/expected/analysis/",
+    "codegen": "subjects/HelloWorld/expected/codegen/",
+    "runtime": "subjects/HelloWorld/expected/runtime/"
+  },
+  "baselines": {},
   "tags": [
     "smoke",
     "managed",

@@ -5,6 +5,8 @@ import json
 import unittest
 from pathlib import Path
 
+from tests.support import load_public_specs_module, select_public_suite_spec, select_subject_record
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 MANIFEST_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "manifest.py"
@@ -15,7 +17,7 @@ def load_manifest_module():
     if not MANIFEST_MODULE_PATH.is_file():
         raise FileNotFoundError(f"manifest module missing: {MANIFEST_MODULE_PATH}")
 
-    spec = importlib.util.spec_from_file_location("booming_run_manifest", MANIFEST_MODULE_PATH)
+    spec = importlib.util.spec_from_file_location("chaos_run_manifest", MANIFEST_MODULE_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"unable to load manifest module: {MANIFEST_MODULE_PATH}")
 
@@ -62,6 +64,14 @@ class CommandManifestTests(unittest.TestCase):
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
         visible_command_ids = {command["id"] for command in manifest_module.list_commands(manifest)}
         hidden_command_ids = {command["id"] for command in manifest_module.list_commands(manifest, include_hidden=True)}
+        smoke_spec = select_public_suite_spec(
+            "chaos_manifest_command_visibility_smoke",
+            host_platform="macos",
+            family="smoke",
+            required_stages=["build", "run"],
+        )
+        legacy_build_command_id = str(dict(smoke_spec.get("legacy_commands") or {}).get("build") or "")
+        legacy_run_command_id = str(dict(smoke_spec.get("legacy_commands") or {}).get("run") or "")
 
         self.assertTrue(
             {
@@ -98,8 +108,8 @@ class CommandManifestTests(unittest.TestCase):
         )
         self.assertNotIn("verify-roadmap-0-windows", hidden_command_ids)
         self.assertNotIn("verify-roadmap-0-macos", hidden_command_ids)
-        self.assertNotIn("build-smoke-helloworld", visible_command_ids)
-        self.assertNotIn("test-smoke-helloworld", visible_command_ids)
+        self.assertNotIn(legacy_build_command_id, visible_command_ids)
+        self.assertNotIn(legacy_run_command_id, visible_command_ids)
         self.assertNotIn("verify-roadmap-0-windows", visible_command_ids)
 
     def test_manifest_uses_canonical_tests_contracts_paths(self) -> None:
@@ -128,62 +138,71 @@ class CommandManifestTests(unittest.TestCase):
     def test_manifest_points_legacy_smoke_commands_at_subject_sources(self) -> None:
         manifest = json.loads(RUN_MANIFEST_PATH.read_text(encoding="utf-8"))
         commands = {command["id"]: command for command in manifest["commands"]}
-        expected_project_paths = {
-            "build-smoke-helloworld": "subjects/HelloWorld/source/HelloWorld.csproj",
-            "test-smoke-helloworld": "subjects/HelloWorld/source/HelloWorld.csproj",
-            "build-smoke-genericecho": "subjects/GenericEcho/source/GenericEcho.csproj",
-            "test-smoke-genericecho": "subjects/GenericEcho/source/GenericEcho.csproj",
-            "build-smoke-reflectionlite": "subjects/ReflectionLite/source/ReflectionLite.csproj",
-            "test-smoke-reflectionlite": "subjects/ReflectionLite/source/ReflectionLite.csproj",
-            "build-smoke-pinvokelite": "subjects/PInvokeLite/source/PInvokeLite.csproj",
-            "test-smoke-pinvokelite": "subjects/PInvokeLite/source/PInvokeLite.csproj",
-            "build-smoke-hostembeddinglite": "subjects/HostEmbeddingLite/source/HostEmbeddingLite.csproj",
-            "test-smoke-hostembeddinglite": "subjects/HostEmbeddingLite/source/HostEmbeddingLite.csproj",
-        }
+        public_specs_module = load_public_specs_module("chaos_manifest_legacy_smoke_specs")
 
-        for command_id, expected_path in expected_project_paths.items():
-            self.assertEqual(expected_path, commands[command_id]["project_path"])
+        for spec in list(public_specs_module.PUBLIC_TEST_SPECS):
+            if str(spec.get("family") or "") != "smoke":
+                continue
+            legacy_commands = dict(spec.get("legacy_commands") or {})
+            expected_path = f"subjects/{spec['suite']}/source/{spec['suite']}.csproj"
+            self.assertEqual(expected_path, commands[str(legacy_commands["build"])]["project_path"])
+            self.assertEqual(expected_path, commands[str(legacy_commands["run"])]["project_path"])
 
     def test_parse_cli_supports_dynamic_unified_test_commands(self) -> None:
         manifest_module = load_manifest_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+        smoke_spec = select_public_suite_spec(
+            "chaos_manifest_parse_cli_smoke",
+            host_platform="macos",
+            family="smoke",
+            required_stages=["build", "run"],
+        )
+        family = str(smoke_spec["family"])
+        suite_name = str(smoke_spec["suite"])
+        suite_id = str(smoke_spec["id"])
+        subject_record = select_subject_record(
+            "chaos_manifest_parse_cli_subject",
+            source_type="dotnet-project",
+            required_host_platforms=["windows-x64"],
+        )
+        subject_id = str(subject_record["subjectId"])
 
-        suite = manifest_module.parse_cli(["test", "smoke", "HelloWorld"], False, manifest, "macos")
+        suite = manifest_module.parse_cli(["test", family, suite_name], False, manifest, "macos")
         self.assertEqual("test-family-suite", suite["command"]["id"])
-        self.assertEqual("smoke/HelloWorld", suite["target"])
-        self.assertEqual("smoke", suite["options"]["family"])
-        self.assertEqual("HelloWorld", suite["options"]["suite"])
+        self.assertEqual(suite_id, suite["target"])
+        self.assertEqual(family, suite["options"]["family"])
+        self.assertEqual(suite_name, suite["options"]["suite"])
 
         explicit_suite = manifest_module.parse_cli(
-            ["test", "suite", "--family", "smoke", "--suite", "HelloWorld"],
+            ["test", "suite", "--family", family, "--suite", suite_name],
             False,
             manifest,
             "macos",
         )
         self.assertEqual("test-suite", explicit_suite["command"]["id"])
-        self.assertEqual("smoke/HelloWorld", explicit_suite["target"])
-        self.assertEqual("smoke", explicit_suite["options"]["family"])
-        self.assertEqual("HelloWorld", explicit_suite["options"]["suite"])
+        self.assertEqual(suite_id, explicit_suite["target"])
+        self.assertEqual(family, explicit_suite["options"]["family"])
+        self.assertEqual(suite_name, explicit_suite["options"]["suite"])
 
         explicit_suite_id = manifest_module.parse_cli(
-            ["test", "suite", "--id", "smoke/HelloWorld"],
+            ["test", "suite", "--id", suite_id],
             False,
             manifest,
             "macos",
         )
         self.assertEqual("test-suite", explicit_suite_id["command"]["id"])
-        self.assertEqual("smoke/HelloWorld", explicit_suite_id["target"])
-        self.assertEqual("smoke/HelloWorld", explicit_suite_id["options"]["id"])
+        self.assertEqual(suite_id, explicit_suite_id["target"])
+        self.assertEqual(suite_id, explicit_suite_id["options"]["id"])
 
         subject_case = manifest_module.parse_cli(
-            ["test", "subject", "--id", "subject/HelloWorldObject"],
+            ["test", "subject", "--id", f"subject/{subject_id}"],
             False,
             manifest,
             "windows",
         )
         self.assertEqual("test-subject", subject_case["command"]["id"])
-        self.assertEqual("subject/HelloWorldObject", subject_case["target"])
-        self.assertEqual("subject/HelloWorldObject", subject_case["options"]["id"])
+        self.assertEqual(f"subject/{subject_id}", subject_case["target"])
+        self.assertEqual(f"subject/{subject_id}", subject_case["options"]["id"])
 
         managed_closure_contract = manifest_module.parse_cli(
             ["test", "contract", "managed-closure-bundle"],

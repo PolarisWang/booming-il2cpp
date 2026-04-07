@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Any
 import statistics
@@ -11,6 +12,7 @@ try:
     from .. import tooling as tooling_module
     from . import contracts as contracts_module
     from . import perf as perf_module
+    from . import subjects as subjects_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
@@ -18,6 +20,7 @@ except ImportError:
     import tooling as tooling_module
     from testing import contracts as contracts_module
     from testing import perf as perf_module
+    from testing import subjects as subjects_module
 
 
 DRIVER_PROJECT_PATH = Path("src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj")
@@ -26,6 +29,22 @@ HOST_EMBEDDING_PROJECT_PATH = Path("subjects/HostEmbeddingLite/source/HostEmbedd
 HOST_EMBEDDING_DLL_PATH = Path("artifacts/smoke/bin/HostEmbeddingLite/Release/net8.0/HostEmbeddingLite.dll")
 WINDOWS_TRACE_SNAPSHOT_PATH = Path("tests/contracts/trace/snapshots/windows-warmup-trace.snapshot.json")
 WINDOWS_TRACE_SCHEMA_PATH = Path("tests/contracts/trace/schema/warmup-trace.schema.json")
+WINDOWS_REFERENCE_BUILD_TARGET = "chaos_subject_reference_proof"
+WINDOWS_REFERENCE_RUN_TARGET = "chaos_subject_reference_proof_run"
+VARIANT_MACROS = {
+    "CHECK": {
+        "codegen": ["CHAOS_VARIANT_CHECK", "CHAOS_VARIANT_NAME=CHECK"],
+        "native": ["CHAOS_VARIANT_CHECK", "CHAOS_VARIANT_NAME=CHECK"],
+    },
+    "PROFILE": {
+        "codegen": ["CHAOS_VARIANT_PROFILE", "CHAOS_VARIANT_NAME=PROFILE"],
+        "native": ["CHAOS_VARIANT_PROFILE", "CHAOS_VARIANT_NAME=PROFILE"],
+    },
+    "SHIP": {
+        "codegen": ["CHAOS_VARIANT_SHIP", "CHAOS_VARIANT_NAME=SHIP"],
+        "native": ["CHAOS_VARIANT_SHIP", "CHAOS_VARIANT_NAME=SHIP"],
+    },
+}
 
 
 def _resolve(repo_root: Path, relative_path: str) -> Path:
@@ -36,8 +55,24 @@ def _relative(repo_root: Path, path: Path) -> str:
     return path.relative_to(repo_root).as_posix()
 
 
-def _run_checked(arguments: list[str], *, repo_root: Path, failure_message: str) -> str:
-    completed = run_process(arguments, cwd=repo_root)
+def _selection_variant(selection: dict[str, Any]) -> str:
+    return str(selection.get("variant") or "CHECK")
+
+
+def _variant_macros(variant: str) -> dict[str, list[str]]:
+    if variant not in VARIANT_MACROS:
+        raise RuntimeError(f"unsupported subject variant: {variant}")
+    return dict(VARIANT_MACROS[variant])
+
+
+def _run_checked(
+    arguments: list[str],
+    *,
+    repo_root: Path,
+    failure_message: str,
+    env: dict[str, str] | None = None,
+) -> str:
+    completed = run_process(arguments, cwd=repo_root, env=env)
     output = combine_process_output(completed)
     if completed.returncode != 0:
         raise RuntimeError(f"{failure_message}\n{output}".strip())
@@ -47,6 +82,13 @@ def _run_checked(arguments: list[str], *, repo_root: Path, failure_message: str)
 def _windows_visual_studio_generator(repo_root: Path) -> str:
     cmake_path = tooling_module.find_cmake_executable(repo_root) or "cmake"
     return tooling_module.detect_visual_studio_generator(cmake_path) or "Visual Studio 17 2022"
+
+
+def _windows_native_cmake_context(repo_root: Path) -> tuple[str, dict[str, str] | None, str | None]:
+    cmake_path, _cmake_env = tooling_module.cmake_environment(repo_root)
+    developer_env = tooling_module.windows_developer_environment()
+    ninja_path = tooling_module.find_ninja_executable()
+    return cmake_path or "cmake", developer_env or None, ninja_path
 
 
 def _normalize_host_platform(host_platform: str) -> str:
@@ -90,6 +132,7 @@ def _success_result(
 
 def run_source_resolve(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
     source = dict(request["selection"]["source"])
+    selection = dict(request["selection"])
     source_path = _resolve(repo_root, str(source["path"]))
     source_root = source_path.parent
     inputs = sorted(
@@ -103,6 +146,9 @@ def run_source_resolve(*, repo_root: Path, request: dict[str, Any]) -> dict[str,
         "sourceType": str(source["type"]),
         "sourcePath": str(source["path"]),
         "entry": str(source["entry"]),
+        "validationProfileId": selection.get("validationProfileId"),
+        "validationKind": selection.get("validationKind"),
+        "variant": _selection_variant(selection),
         "inputs": inputs,
     }
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
@@ -115,6 +161,7 @@ def run_source_resolve(*, repo_root: Path, request: dict[str, Any]) -> dict[str,
 
 def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
     source = dict(request["selection"]["source"])
+    selection = dict(request["selection"])
     output_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     output_root.mkdir(parents=True, exist_ok=True)
     host_platform = str(request["selection"]["executionContext"]["hostPlatform"])
@@ -147,6 +194,7 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
         "bucket": "host-input",
         "sourceManifestPath": str(request["upstream"]["source"]["manifestPath"]),
         "primaryAssemblyPath": _relative(repo_root, primary_assembly_path),
+        "variant": _selection_variant(selection),
         "files": files,
     }
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
@@ -178,6 +226,9 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
     if not isinstance(host_input_manifest, dict):
         raise RuntimeError("host-input manifest must be an object")
 
+    selection = dict(request["selection"])
+    variant = _selection_variant(selection)
+    variant_macros = _variant_macros(variant)
     assembly_path = _resolve(repo_root, str(host_input_manifest["primaryAssemblyPath"]))
     output_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     output_root.mkdir(parents=True, exist_ok=True)
@@ -195,8 +246,12 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
         {
             "subjectId": str(request["selection"]["subjectId"]),
             "status": "ok",
+            "variant": variant,
+            "validationProfileId": selection.get("validationProfileId"),
+            "validationKind": selection.get("validationKind"),
+            "codegenMacros": list(variant_macros["codegen"]),
             "schemaPath": "contracts/artifacts/v0/schemas",
-            "snapshotPath": "tests/contracts/schema",
+            "snapshotPath": "contracts/artifacts/v0/snapshots",
             "errors": [],
         },
     )
@@ -206,6 +261,10 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
         "bucket": "analysis",
         "hostInputManifestPath": str(request["upstream"]["host-input"]["manifestPath"]),
         "bundleKind": "proof-input-bundle",
+        "validationProfileId": selection.get("validationProfileId"),
+        "validationKind": selection.get("validationKind"),
+        "variant": variant,
+        "codegenMacros": list(variant_macros["codegen"]),
         "artifacts": {
             "typedIlIrPath": _relative(repo_root, output_root / "typed-il-ir.json"),
             "aotManifestPath": _relative(repo_root, output_root / "aot-manifest.json"),
@@ -227,6 +286,9 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
 
 def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
     driver_dll_path = _ensure_driver_built(repo_root)
+    selection = dict(request["selection"])
+    variant = _selection_variant(selection)
+    variant_macros = _variant_macros(variant)
     analysis_root = _resolve(repo_root, request["upstream"]["analysis"]["manifestPath"]).parent
     output_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     output_root.mkdir(parents=True, exist_ok=True)
@@ -241,6 +303,10 @@ def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dic
         "subjectId": str(request["selection"]["subjectId"]),
         "bucket": "generated",
         "analysisManifestPath": str(request["upstream"]["analysis"]["manifestPath"]),
+        "validationProfileId": selection.get("validationProfileId"),
+        "validationKind": selection.get("validationKind"),
+        "variant": variant,
+        "codegenMacros": list(variant_macros["codegen"]),
         "generatedSourcePath": _relative(repo_root, output_root / "generated" / "native-reference.generated.cpp"),
         "nativeProofManifestPath": _relative(repo_root, output_root / "native-proof.manifest.json"),
         "nativeProofPlanPath": _relative(repo_root, output_root / "native-proof.plan.json"),
@@ -258,8 +324,11 @@ def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dic
 
 def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
     build_root = _resolve(repo_root, request["paths"]["bucketRoot"])
-    generator = _windows_visual_studio_generator(repo_root)
-    instance_spec = tooling_module.detect_visual_studio_instance_spec(generator)
+    selection = dict(request["selection"])
+    variant = _selection_variant(selection)
+    variant_macros = _variant_macros(variant)
+    cmake_path, developer_env, ninja_path = _windows_native_cmake_context(repo_root)
+    generator = "Ninja Multi-Config"
     cmake_binary_dir = tooling_module.allocate_cmake_binary_dir(
         build_root / "cmake",
         host_platform="windows",
@@ -271,42 +340,52 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
 
     _run_checked(
         [
-            "cmake",
-            "--preset",
-            "windows-x64-reference",
-            "-G",
-            generator,
+            cmake_path,
+            "-S",
+            str(repo_root),
             "-B",
             str(cmake_binary_dir),
-            *( [f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}"] if instance_spec else [] ),
-            f"-DCHAOS_HELLOWORLD_GENERATED_ROOT={generated_root}",
-            f"-DCHAOS_HELLOWORLD_BUILD_OUT_ROOT={out_root}",
-            f"-DCHAOS_HELLOWORLD_RUNTIME_ROOT={runtime_root}",
+            "-G",
+            generator,
+            "-DROADMAP0_PRESET_TARGET=windows-x64-reference",
+            f"-DCMAKE_TOOLCHAIN_FILE={repo_root / 'build' / 'toolchains' / 'windows-x64-reference.cmake'}",
+            *([f"-DCMAKE_MAKE_PROGRAM={ninja_path}"] if ninja_path else []),
+            f"-DCHAOS_SUBJECT_VARIANT={variant}",
+            f"-DCHAOS_SUBJECT_GENERATED_ROOT={generated_root}",
+            f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={out_root}",
+            f"-DCHAOS_SUBJECT_RUNTIME_ROOT={runtime_root}",
         ],
         repo_root=repo_root,
         failure_message="cmake preset configure failed: windows-x64-reference",
+        env=developer_env,
     )
     _run_checked(
         [
-            "cmake",
+            cmake_path,
             "--build",
             str(cmake_binary_dir),
             "--config",
             "Release",
             "--target",
-            "chaos_stage4_hello_world_object_proof",
+            WINDOWS_REFERENCE_BUILD_TARGET,
         ],
         repo_root=repo_root,
         failure_message="subject proof build failed: windows-x64-reference",
+        env=developer_env,
     )
 
-    proof_exe = out_root / "chaos_stage4_hello_world_object_proof.exe"
+    proof_exe = out_root / f"{WINDOWS_REFERENCE_BUILD_TARGET}.exe"
     manifest = {
         "subjectId": str(request["selection"]["subjectId"]),
         "matrixId": str(request["selection"]["matrixId"]),
         "bucket": "build",
         "targetPlatform": str(request["selection"]["executionContext"]["targetPlatform"]),
         "toolchainProfile": str(request["selection"]["executionContext"]["toolchainProfile"]),
+        "variant": variant,
+        "variantMacros": {
+            "codegen": list(variant_macros["codegen"]),
+            "native": list(variant_macros["native"]),
+        },
         "generatedManifestPath": str(request["upstream"]["generated"]["manifestPath"]),
         "binaryRoot": _relative(repo_root, out_root),
         "outputs": [_relative(repo_root, proof_exe)],
@@ -328,6 +407,9 @@ def _validate_only_build(
     toolchain_file: Path,
 ) -> dict[str, Any]:
     build_root = _resolve(repo_root, request["paths"]["bucketRoot"])
+    selection = dict(request["selection"])
+    variant = _selection_variant(selection)
+    variant_macros = _variant_macros(variant)
     execution_context = dict(request["selection"].get("executionContext") or {})
     host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
     generator = "Ninja"
@@ -355,6 +437,7 @@ def _validate_only_build(
             generator,
             f"-DROADMAP0_PRESET_TARGET={preset_target}",
             "-DROADMAP0_TOOLCHAIN_VALIDATE_ONLY=ON",
+            f"-DCHAOS_SUBJECT_VARIANT={variant}",
             f"-DCMAKE_TOOLCHAIN_FILE={repo_root / toolchain_file}",
             *([f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}"] if instance_spec else []),
         ],
@@ -375,6 +458,11 @@ def _validate_only_build(
         "bucket": "build",
         "targetPlatform": str(request["selection"]["executionContext"]["targetPlatform"]),
         "toolchainProfile": str(request["selection"]["executionContext"]["toolchainProfile"]),
+        "variant": variant,
+        "variantMacros": {
+            "codegen": list(variant_macros["codegen"]),
+            "native": list(variant_macros["native"]),
+        },
         "generatedManifestPath": str(request["upstream"]["generated"]["manifestPath"]),
         "binaryRoot": _relative(repo_root, build_root),
         "outputs": [_relative(repo_root, success_marker)],
@@ -414,22 +502,24 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
     if not isinstance(build_manifest, dict):
         raise RuntimeError("build manifest must be an object")
 
+    cmake_path, developer_env, _ninja_path = _windows_native_cmake_context(repo_root)
     cmake_binary_dir = _resolve(repo_root, str(build_manifest["cmakeBinaryDir"]))
     runtime_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     runtime_root.mkdir(parents=True, exist_ok=True)
 
     _run_checked(
         [
-            "cmake",
+            cmake_path,
             "--build",
             str(cmake_binary_dir),
             "--config",
             "Release",
             "--target",
-            "chaos_stage4_hello_world_object_proof_run",
+            WINDOWS_REFERENCE_RUN_TARGET,
         ],
         repo_root=repo_root,
         failure_message="subject proof run failed: windows-x64-reference",
+        env=developer_env,
     )
 
     stdout_path = runtime_root / "stdout.log"
@@ -439,6 +529,7 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
         "subjectId": str(request["selection"]["subjectId"]),
         "matrixId": str(request["selection"]["matrixId"]),
         "bucket": "runtime",
+        "variant": _selection_variant(dict(request["selection"])),
         "buildManifestPath": str(request["upstream"]["build"]["manifestPath"]),
         "stdoutPath": _relative(repo_root, stdout_path),
         "stderrPath": _relative(repo_root, stderr_path),
@@ -477,6 +568,7 @@ def run_managed_runtime_output(*, repo_root: Path, request: dict[str, Any]) -> d
         "subjectId": str(request["selection"]["subjectId"]),
         "matrixId": str(request["selection"]["matrixId"]),
         "bucket": "runtime",
+        "variant": _selection_variant(dict(request["selection"])),
         "hostInputManifestPath": str(request["upstream"]["host-input"]["manifestPath"]),
         "stdoutPath": _relative(repo_root, stdout_path),
         "stderrPath": _relative(repo_root, stderr_path),
@@ -509,6 +601,10 @@ def _perf_sample_count(runtime_profile: str) -> int:
     return 10 if "release" in runtime_profile else 5
 
 
+def _perf_harness_iterations(runtime_profile: str) -> int:
+    return 10000 if "release" in runtime_profile else 1000
+
+
 def _perf_summary_metrics(samples: list[dict[str, Any]]) -> dict[str, float | int]:
     durations = [float(sample["durationMs"]) for sample in samples]
     return {
@@ -528,17 +624,41 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
     execution_context = dict(selection.get("executionContext") or {})
     subject_id = str(selection["subjectId"])
     matrix_id = str(selection["matrixId"])
+    variant = _selection_variant(selection)
     host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
     runtime_profile = str(execution_context.get("runtimeProfile") or "")
     sample_count = _perf_sample_count(runtime_profile)
+    iterations = _perf_harness_iterations(runtime_profile)
+    manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
+    validation_spec = subjects_module.find_validation(manifest, "perf")
+    perf_project_path = str(validation_spec.get("project") or "")
+    if not perf_project_path:
+        raise RuntimeError(f"perf validation project missing for subject: {subject_id}")
 
-    assembly_path = _resolve(repo_root, str(host_input_manifest["primaryAssemblyPath"]))
+    project_path = _resolve(repo_root, perf_project_path)
     runtime_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     runtime_root.mkdir(parents=True, exist_ok=True)
+    harness_root = runtime_root / "harness"
+    harness_dll_path = harness_root / f"{project_path.stem}.dll"
 
     stdout_path = runtime_root / "stdout.log"
     stderr_path = runtime_root / "stderr.log"
     exit_code_path = runtime_root / "exit-code.txt"
+
+    _run_checked(
+        [
+            "dotnet",
+            "build",
+            str(project_path),
+            "-c",
+            "Release",
+            "-o",
+            str(harness_root),
+            *_dotnet_intermediate_args(project_path.stem, host_platform),
+        ],
+        repo_root=repo_root,
+        failure_message=f"dotnet build failed: {perf_project_path}",
+    )
 
     samples: list[dict[str, Any]] = []
     stdout_chunks: list[str] = []
@@ -548,12 +668,19 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
 
     for sample_index in range(sample_count):
         started = time.perf_counter()
-        completed = run_process(["dotnet", str(assembly_path)], cwd=repo_root)
+        completed = run_process(["dotnet", str(harness_dll_path), str(iterations)], cwd=repo_root)
         duration_ms = round((time.perf_counter() - started) * 1000, 3)
         stdout_text = completed.stdout or ""
         stderr_text = completed.stderr or ""
         output_lines = [line for line in stdout_text.splitlines() if line.strip()]
         last_exit_code = int(completed.returncode)
+        if output_lines:
+            try:
+                payload = json.loads(output_lines[-1])
+            except ValueError:
+                payload = {}
+            if isinstance(payload, dict) and isinstance(payload.get("elapsedMilliseconds"), (int, float)):
+                duration_ms = round(float(payload["elapsedMilliseconds"]), 3)
         samples.append(
             {
                 "sampleIndex": sample_index + 1,
@@ -593,7 +720,10 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
         "subjectId": subject_id,
         "matrixId": matrix_id,
         "bucket": "runtime",
+        "variant": variant,
         "hostInputManifestPath": str(request["upstream"]["host-input"]["manifestPath"]),
+        "perfHarnessProjectPath": perf_project_path,
+        "perfHarnessDllPath": _relative(repo_root, harness_dll_path),
         "stdoutPath": _relative(repo_root, stdout_path),
         "stderrPath": _relative(repo_root, stderr_path),
         "exitCodePath": _relative(repo_root, exit_code_path),
@@ -617,7 +747,7 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
             "metrics": {"durationMs": int(round(sum(float(sample["durationMs"]) for sample in samples)))},
             "diagnostics": {"stdoutPath": manifest["stdoutPath"], "stderrPath": manifest["stderrPath"]},
             "details": {"performance": performance},
-            "failure": f"managed perf execution failed: {assembly_path}",
+            "failure": f"managed perf execution failed: {harness_dll_path}",
         }
 
     return _success_result(
@@ -678,6 +808,7 @@ def run_runtime_trace_compare(*, repo_root: Path, request: dict[str, Any]) -> di
             "subjectId": str(request["selection"]["subjectId"]),
             "matrixId": str(request["selection"]["matrixId"]),
             "status": "ok",
+            "variant": _selection_variant(dict(request["selection"])),
             "schemaPath": WINDOWS_TRACE_SCHEMA_PATH.as_posix(),
             "expectedSnapshotPath": WINDOWS_TRACE_SNAPSHOT_PATH.as_posix(),
             "actualTracePath": _relative(repo_root, trace_path),

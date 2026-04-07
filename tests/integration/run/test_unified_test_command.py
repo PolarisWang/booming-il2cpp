@@ -30,7 +30,7 @@ def load_module(path: Path, module_name: str):
 
 class UnifiedTestCommandTests(unittest.TestCase):
     def test_public_suite_resolution_maps_to_legacy_commands(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command")
 
         self.assertEqual(
             "build-smoke-helloworld",
@@ -86,8 +86,8 @@ class UnifiedTestCommandTests(unittest.TestCase):
         )
 
     def test_public_test_list_surfaces_unified_suite_ids(self) -> None:
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_for_public_test")
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_for_public_list")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_for_public_test")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_for_public_list")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         items = test_module.list_public_test_suites(manifest, "macos")
@@ -111,8 +111,8 @@ class UnifiedTestCommandTests(unittest.TestCase):
         self.assertIn("gate/windows-reference-desktop", windows_item_ids)
 
     def test_legacy_test_commands_gain_migration_guidance(self) -> None:
-        run_module = load_module(RUN_MODULE_PATH, "booming_run_main_for_legacy_migration")
-        result_module = load_module(RESULT_MODULE_PATH, "booming_run_result_for_legacy_migration")
+        run_module = load_module(RUN_MODULE_PATH, "chaos_run_main_for_legacy_migration")
+        result_module = load_module(RESULT_MODULE_PATH, "chaos_run_result_for_legacy_migration")
         result = result_module.CommandResult.success(
             command="build smoke HelloWorld",
             host_platform="macos",
@@ -134,8 +134,8 @@ class UnifiedTestCommandTests(unittest.TestCase):
         self.assertEqual("test smoke HelloWorld --stage build", wrapped.payload["migration"]["replacementSyntax"])
 
     def test_removed_verify_entrypoint_returns_migration_guidance(self) -> None:
-        run_module = load_module(RUN_MODULE_PATH, "booming_run_main_for_removed_verify_migration")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "booming_run_manifest_for_removed_verify_migration")
+        run_module = load_module(RUN_MODULE_PATH, "chaos_run_main_for_removed_verify_migration")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_for_removed_verify_migration")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         result = run_module.execute_command(

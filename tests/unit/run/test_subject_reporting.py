@@ -12,6 +12,12 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_REPORTING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_reporting.py"
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-reporting"
+TRACE_SUBJECT_ID = "FixtureTraceSubject"
+TRACE_MATRIX_ID = "windows-reference-trace"
+TRACE_GOAL_ID = "correctness.platform"
+PERF_SUBJECT_ID = "FixturePerfSubject"
+PERF_MATRIX_ID = "windows-perf-release"
+PERF_GOAL_ID = "perf.release"
 
 
 def load_module(path: Path, module_name: str):
@@ -28,25 +34,46 @@ def load_module(path: Path, module_name: str):
     return module
 
 
+def run_bucket_path(subject_id: str, run_id: str, *parts: str) -> str:
+    return Path("artifacts", "subjects", subject_id, "runs", run_id, *parts).as_posix()
+
+
+def source_project_path(subject_id: str) -> str:
+    return Path("subjects", subject_id, "source", f"{subject_id}.csproj").as_posix()
+
+
+def source_entry(subject_id: str) -> str:
+    return f"{subject_id}/Program::Main(System.String[])"
+
+
+def perf_baseline_path(subject_id: str, matrix_id: str) -> str:
+    return Path("subjects", subject_id, "baselines", "perf", matrix_id, "windows.json").as_posix()
+
+
 class SubjectReportingTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
 
     def test_build_matrix_report_keeps_selection_and_stage_diagnostics(self) -> None:
-        reporting_module = load_module(SUBJECT_REPORTING_MODULE_PATH, "booming_subject_reporting_matrix")
+        reporting_module = load_module(SUBJECT_REPORTING_MODULE_PATH, "chaos_subject_reporting_matrix")
+        run_id = "20260406-fixture-trace-001"
 
         plan = {
             "selection": {
-                "subjectId": "HelloWorldObject",
-                "displayName": "HelloWorldObject",
-                "goalId": "correctness.platform",
-                "matrixId": "windows-reference-trace",
+                "subjectId": TRACE_SUBJECT_ID,
+                "displayName": TRACE_SUBJECT_ID,
+                "goalId": TRACE_GOAL_ID,
+                "matrixId": TRACE_MATRIX_ID,
+                "validationProfileId": "trace-platform",
+                "validationKinds": ["proof"],
+                "validationKind": "proof",
+                "variant": "CHECK",
                 "pipelineId": "proof-runtime-trace",
                 "source": {
                     "type": "dotnet-project",
-                    "path": "subjects/HelloWorldObject/source/HelloWorldObject.csproj",
-                    "entry": "HelloWorldObject/Program::Main(System.String[])",
+                    "path": source_project_path(TRACE_SUBJECT_ID),
+                    "entry": source_entry(TRACE_SUBJECT_ID),
                 },
                 "executionContext": {
                     "hostPlatform": "windows-x64",
@@ -92,9 +119,9 @@ class SubjectReportingTests(unittest.TestCase):
             ],
         }
         execution_result = {
-            "subjectId": "HelloWorldObject",
-            "matrixId": "windows-reference-trace",
-            "goalId": "correctness.platform",
+            "subjectId": TRACE_SUBJECT_ID,
+            "matrixId": TRACE_MATRIX_ID,
+            "goalId": TRACE_GOAL_ID,
             "status": "ok",
             "terminalStageId": "runtime-trace-compare",
             "terminalBucket": "runtime",
@@ -107,9 +134,9 @@ class SubjectReportingTests(unittest.TestCase):
                     "planMode": "reused",
                     "actionTaken": "reused",
                     "invalidation": {"applied": False, "reason": None},
-                    "manifestPath": "artifacts/subjects/HelloWorldObject/shared/source/source.manifest.json",
+                    "manifestPath": run_bucket_path(TRACE_SUBJECT_ID, run_id, "analysis", "source", "source.manifest.json"),
                     "reportPaths": [],
-                    "primaryEvidencePaths": ["subjects/HelloWorldObject/source/HelloWorldObject.csproj"],
+                    "primaryEvidencePaths": [source_project_path(TRACE_SUBJECT_ID)],
                     "fingerprint": "f-source",
                     "durationMs": 0,
                     "diagnostics": {"stdoutPath": None, "stderrPath": None},
@@ -123,12 +150,12 @@ class SubjectReportingTests(unittest.TestCase):
                     "planMode": "invalidated",
                     "actionTaken": "executed",
                     "invalidation": {"applied": True, "reason": "fingerprint-mismatch:driver-changed"},
-                    "manifestPath": "artifacts/subjects/HelloWorldObject/shared/analysis/analysis.manifest.json",
+                    "manifestPath": run_bucket_path(TRACE_SUBJECT_ID, run_id, "analysis", "analysis", "analysis.manifest.json"),
                     "reportPaths": [
-                        "artifacts/subjects/HelloWorldObject/shared/analysis/contract-validate.report.json"
+                        run_bucket_path(TRACE_SUBJECT_ID, run_id, "analysis", "analysis", "contract-validate.report.json")
                     ],
                     "primaryEvidencePaths": [
-                        "artifacts/subjects/HelloWorldObject/shared/analysis/typed-il-ir.json"
+                        run_bucket_path(TRACE_SUBJECT_ID, run_id, "analysis", "analysis", "typed-il-ir.json")
                     ],
                     "fingerprint": "f-analysis",
                     "durationMs": 3280,
@@ -143,18 +170,18 @@ class SubjectReportingTests(unittest.TestCase):
                     "planMode": "executed",
                     "actionTaken": "executed",
                     "invalidation": {"applied": False, "reason": None},
-                    "manifestPath": "artifacts/subjects/HelloWorldObject/matrices/windows-reference-trace/runtime/runtime.manifest.json",
+                    "manifestPath": run_bucket_path(TRACE_SUBJECT_ID, run_id, "matrices", TRACE_MATRIX_ID, "runtime", "runtime.manifest.json"),
                     "reportPaths": [
-                        "artifacts/subjects/HelloWorldObject/matrices/windows-reference-trace/runtime/trace-compare.report.json"
+                        run_bucket_path(TRACE_SUBJECT_ID, run_id, "matrices", TRACE_MATRIX_ID, "runtime", "trace-compare.report.json")
                     ],
                     "primaryEvidencePaths": [
-                        "artifacts/subjects/HelloWorldObject/matrices/windows-reference-trace/runtime/trace.runtime.json"
+                        run_bucket_path(TRACE_SUBJECT_ID, run_id, "matrices", TRACE_MATRIX_ID, "runtime", "trace.runtime.json")
                     ],
                     "fingerprint": "f-runtime",
                     "durationMs": 540,
                     "diagnostics": {
-                        "stdoutPath": "artifacts/subjects/HelloWorldObject/matrices/windows-reference-trace/runtime/stdout.log",
-                        "stderrPath": "artifacts/subjects/HelloWorldObject/matrices/windows-reference-trace/runtime/stderr.log",
+                        "stdoutPath": run_bucket_path(TRACE_SUBJECT_ID, run_id, "matrices", TRACE_MATRIX_ID, "runtime", "stdout.log"),
+                        "stderrPath": run_bucket_path(TRACE_SUBJECT_ID, run_id, "matrices", TRACE_MATRIX_ID, "runtime", "stderr.log"),
                     },
                     "failure": None,
                 },
@@ -165,14 +192,18 @@ class SubjectReportingTests(unittest.TestCase):
         report = reporting_module.build_matrix_report(
             plan,
             execution_result,
-            run_id="20260406-hello-001",
+            run_id=run_id,
             generated_at="2026-04-06T14:20:00Z",
         )
 
         self.assertEqual("v1", report["reportVersion"])
-        self.assertEqual("20260406-hello-001", report["runId"])
-        self.assertEqual("HelloWorldObject", report["subjectId"])
-        self.assertEqual("windows-reference-trace", report["matrixId"])
+        self.assertEqual(run_id, report["runId"])
+        self.assertEqual(TRACE_SUBJECT_ID, report["subjectId"])
+        self.assertEqual(TRACE_MATRIX_ID, report["matrixId"])
+        self.assertEqual("trace-platform", report["validationProfileId"])
+        self.assertEqual(["proof"], report["validationKinds"])
+        self.assertEqual("proof", report["validationKind"])
+        self.assertEqual("CHECK", report["variant"])
         self.assertEqual("proof-runtime-trace", report["selection"]["pipelineId"])
         self.assertEqual("runtime", report["terminalBucket"])
         self.assertEqual(
@@ -184,7 +215,7 @@ class SubjectReportingTests(unittest.TestCase):
             [stage["stageId"] for stage in report["stageResults"]],
         )
         self.assertEqual(
-            ["artifacts/subjects/HelloWorldObject/shared/analysis/typed-il-ir.json"],
+            [run_bucket_path(TRACE_SUBJECT_ID, run_id, "analysis", "analysis", "typed-il-ir.json")],
             report["stageResults"][1]["primaryEvidencePaths"],
         )
         self.assertEqual(
@@ -192,25 +223,30 @@ class SubjectReportingTests(unittest.TestCase):
             report["stageResults"][1]["invalidation"]["reason"],
         )
         self.assertEqual(
-            "artifacts/subjects/HelloWorldObject/matrices/windows-reference-trace/runtime/runtime.manifest.json",
+            run_bucket_path(TRACE_SUBJECT_ID, run_id, "matrices", TRACE_MATRIX_ID, "runtime", "runtime.manifest.json"),
             report["artifactResults"][-1]["manifestPath"],
         )
         self.assertEqual("runtime-trace-compare", report["artifactResults"][-1]["producedByStageId"])
 
     def test_build_matrix_report_surfaces_perf_metrics_and_release_report_paths(self) -> None:
-        reporting_module = load_module(SUBJECT_REPORTING_MODULE_PATH, "booming_subject_reporting_perf")
+        reporting_module = load_module(SUBJECT_REPORTING_MODULE_PATH, "chaos_subject_reporting_perf")
+        run_id = "20260407-fixture-perf-001"
 
         plan = {
             "selection": {
-                "subjectId": "GenericEcho",
-                "displayName": "GenericEcho",
-                "goalId": "perf.release",
-                "matrixId": "windows-perf-release",
+                "subjectId": PERF_SUBJECT_ID,
+                "displayName": PERF_SUBJECT_ID,
+                "goalId": PERF_GOAL_ID,
+                "matrixId": PERF_MATRIX_ID,
+                "validationProfileId": "perf-release",
+                "validationKinds": ["perf"],
+                "validationKind": "perf",
+                "variant": "SHIP",
                 "pipelineId": "managed-runtime-perf",
                 "source": {
                     "type": "dotnet-project",
-                    "path": "subjects/GenericEcho/source/GenericEcho.csproj",
-                    "entry": "GenericEcho/Program::Main()",
+                    "path": source_project_path(PERF_SUBJECT_ID),
+                    "entry": source_entry(PERF_SUBJECT_ID),
                 },
                 "executionContext": {
                     "hostPlatform": "windows-x64",
@@ -236,9 +272,9 @@ class SubjectReportingTests(unittest.TestCase):
             ],
         }
         execution_result = {
-            "subjectId": "GenericEcho",
-            "matrixId": "windows-perf-release",
-            "goalId": "perf.release",
+            "subjectId": PERF_SUBJECT_ID,
+            "matrixId": PERF_MATRIX_ID,
+            "goalId": PERF_GOAL_ID,
             "status": "ok",
             "terminalStageId": "report-assemble",
             "terminalBucket": "report",
@@ -251,16 +287,16 @@ class SubjectReportingTests(unittest.TestCase):
                     "planMode": "executed",
                     "actionTaken": "executed",
                     "invalidation": {"applied": False, "reason": None},
-                    "manifestPath": "artifacts/subjects/GenericEcho/matrices/windows-perf-release/runtime/runtime.manifest.json",
+                    "manifestPath": run_bucket_path(PERF_SUBJECT_ID, run_id, "matrices", PERF_MATRIX_ID, "runtime", "runtime.manifest.json"),
                     "reportPaths": [],
                     "primaryEvidencePaths": [
-                        "artifacts/subjects/GenericEcho/matrices/windows-perf-release/runtime/stdout.log"
+                        run_bucket_path(PERF_SUBJECT_ID, run_id, "matrices", PERF_MATRIX_ID, "runtime", "stdout.log")
                     ],
                     "fingerprint": "f-runtime",
                     "durationMs": 120,
                     "diagnostics": {
-                        "stdoutPath": "artifacts/subjects/GenericEcho/matrices/windows-perf-release/runtime/stdout.log",
-                        "stderrPath": "artifacts/subjects/GenericEcho/matrices/windows-perf-release/runtime/stderr.log",
+                        "stdoutPath": run_bucket_path(PERF_SUBJECT_ID, run_id, "matrices", PERF_MATRIX_ID, "runtime", "stdout.log"),
+                        "stderrPath": run_bucket_path(PERF_SUBJECT_ID, run_id, "matrices", PERF_MATRIX_ID, "runtime", "stderr.log"),
                     },
                     "details": {
                         "performance": {
@@ -274,7 +310,7 @@ class SubjectReportingTests(unittest.TestCase):
                                 "minDurationMs": 12.0,
                                 "maxDurationMs": 14.0,
                             },
-                            "baselinePath": "tests/perf/subjects/GenericEcho/windows-perf-release/baselines/windows.json",
+                            "baselinePath": perf_baseline_path(PERF_SUBJECT_ID, PERF_MATRIX_ID),
                             "baseline": {"meanDurationMs": 11.0},
                             "baselineUpdated": False,
                             "regressionStatus": "regressed",
@@ -295,12 +331,12 @@ class SubjectReportingTests(unittest.TestCase):
             report = reporting_module.build_matrix_report(
                 plan,
                 execution_result,
-                run_id="20260407-generic-001",
+                run_id=run_id,
                 generated_at="2026-04-07T03:20:00Z",
             )
             release_paths = reporting_module.materialize_matrix_report_artifacts(
                 repo_root,
-                matrix_report_path="artifacts/subjects/GenericEcho/matrices/windows-perf-release/report.json",
+                matrix_report_path=run_bucket_path(PERF_SUBJECT_ID, run_id, "matrices", PERF_MATRIX_ID, "pipeline-report", "report.json"),
                 matrix_report=report,
             )
 
@@ -308,9 +344,10 @@ class SubjectReportingTests(unittest.TestCase):
                 {"sampleCount": 2, "meanDurationMs": 13.0, "minDurationMs": 12.0, "maxDurationMs": 14.0},
                 report["metrics"],
             )
+            self.assertEqual("SHIP", report["variant"])
             self.assertEqual(
                 {
-                    "path": "tests/perf/subjects/GenericEcho/windows-perf-release/baselines/windows.json",
+                    "path": perf_baseline_path(PERF_SUBJECT_ID, PERF_MATRIX_ID),
                     "metrics": {"meanDurationMs": 11.0},
                     "updated": False,
                     "regressions": [{"metric": "meanDurationMs", "baseline": 11.0, "actual": 13.0, "delta": 2.0}],
@@ -320,15 +357,27 @@ class SubjectReportingTests(unittest.TestCase):
             self.assertEqual("regressed", report["regressionStatus"])
             self.assertEqual(
                 [
-                    "artifacts/subjects/GenericEcho/matrices/windows-perf-release/report/summary.json",
-                    "artifacts/subjects/GenericEcho/matrices/windows-perf-release/report/baseline-compare.json",
-                    "artifacts/subjects/GenericEcho/matrices/windows-perf-release/report/samples.json",
+                    run_bucket_path(PERF_SUBJECT_ID, run_id, "matrices", PERF_MATRIX_ID, "validations", "perf", "summary.json"),
+                    run_bucket_path(PERF_SUBJECT_ID, run_id, "matrices", PERF_MATRIX_ID, "validations", "perf", "baseline-compare.json"),
+                    run_bucket_path(PERF_SUBJECT_ID, run_id, "matrices", PERF_MATRIX_ID, "validations", "perf", "samples.json"),
                 ],
                 release_paths,
             )
             self.assertEqual(release_paths, report["releaseReportPaths"])
 
-            samples_path = repo_root / "artifacts" / "subjects" / "GenericEcho" / "matrices" / "windows-perf-release" / "report" / "samples.json"
+            samples_path = (
+                repo_root
+                / "artifacts"
+                / "subjects"
+                / PERF_SUBJECT_ID
+                / "runs"
+                / run_id
+                / "matrices"
+                / PERF_MATRIX_ID
+                / "validations"
+                / "perf"
+                / "samples.json"
+            )
             self.assertTrue(samples_path.is_file())
             samples_payload = json.loads(samples_path.read_text(encoding="utf-8"))
             self.assertEqual(2, len(samples_payload["samples"]))
@@ -336,13 +385,15 @@ class SubjectReportingTests(unittest.TestCase):
             shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_build_subject_summary_and_subject_result_aggregate_matrix_reports(self) -> None:
-        reporting_module = load_module(SUBJECT_REPORTING_MODULE_PATH, "booming_subject_reporting_summary")
+        reporting_module = load_module(SUBJECT_REPORTING_MODULE_PATH, "chaos_subject_reporting_summary")
 
         matrix_reports = [
             {
-                "subjectId": "HelloWorldObject",
-                "goalId": "correctness.platform",
-                "matrixId": "windows-reference-trace",
+                "subjectId": TRACE_SUBJECT_ID,
+                "goalId": TRACE_GOAL_ID,
+                "matrixId": TRACE_MATRIX_ID,
+                "validationProfileId": "trace-platform",
+                "variant": "CHECK",
                 "status": "ok",
                 "terminalBucket": "runtime",
                 "selection": {
@@ -355,9 +406,11 @@ class SubjectReportingTests(unittest.TestCase):
                 },
             },
             {
-                "subjectId": "HelloWorldObject",
-                "goalId": "correctness.platform",
+                "subjectId": TRACE_SUBJECT_ID,
+                "goalId": TRACE_GOAL_ID,
                 "matrixId": "windows-linux-buildable",
+                "validationProfileId": "build-platform",
+                "variant": "CHECK",
                 "status": "fail",
                 "terminalBucket": "build",
                 "selection": {
@@ -371,21 +424,21 @@ class SubjectReportingTests(unittest.TestCase):
             },
         ]
         matrix_report_paths = {
-            "windows-reference-trace": "artifacts/subjects/HelloWorldObject/matrices/windows-reference-trace/report.json",
-            "windows-linux-buildable": "artifacts/subjects/HelloWorldObject/matrices/windows-linux-buildable/report.json",
+            TRACE_MATRIX_ID: run_bucket_path(TRACE_SUBJECT_ID, "20260406-fixture-trace-001", "matrices", TRACE_MATRIX_ID, "pipeline-report", "report.json"),
+            "windows-linux-buildable": run_bucket_path(TRACE_SUBJECT_ID, "20260406-fixture-trace-001", "matrices", "windows-linux-buildable", "pipeline-report", "report.json"),
         }
 
         summary = reporting_module.build_subject_summary(
-            subject_id="HelloWorldObject",
-            requested_goal_id="correctness.platform",
+            subject_id=TRACE_SUBJECT_ID,
+            requested_goal_id=TRACE_GOAL_ID,
             matrix_reports=matrix_reports,
             matrix_report_paths=matrix_report_paths,
-            run_id="20260406-hello-001",
+            run_id="20260406-fixture-trace-001",
             generated_at="2026-04-06T14:20:05Z",
         )
         subject_result = reporting_module.build_subject_result(
             summary,
-            subject_summary_path="artifacts/subjects/HelloWorldObject/subject-report/summary.json",
+            subject_summary_path=run_bucket_path(TRACE_SUBJECT_ID, "20260406-fixture-trace-001", "subject-report", "summary.json"),
         )
 
         self.assertEqual("v1", summary["summaryVersion"])
@@ -394,13 +447,15 @@ class SubjectReportingTests(unittest.TestCase):
         self.assertEqual(1, summary["matrixStatusCounts"]["ok"])
         self.assertEqual(1, summary["matrixStatusCounts"]["fail"])
         self.assertEqual(
-            "artifacts/subjects/HelloWorldObject/matrices/windows-reference-trace/report.json",
+            run_bucket_path(TRACE_SUBJECT_ID, "20260406-fixture-trace-001", "matrices", TRACE_MATRIX_ID, "pipeline-report", "report.json"),
             summary["matrixResults"][0]["reportPath"],
         )
+        self.assertEqual("CHECK", summary["matrixResults"][0]["variant"])
+        self.assertEqual("trace-platform", summary["matrixResults"][0]["validationProfileId"])
         self.assertEqual("windows-x64", summary["matrixResults"][0]["executionContext"]["targetPlatform"])
         self.assertEqual("fail", subject_result["status"])
         self.assertEqual(
-            "artifacts/subjects/HelloWorldObject/subject-report/summary.json",
+            run_bucket_path(TRACE_SUBJECT_ID, "20260406-fixture-trace-001", "subject-report", "summary.json"),
             subject_result["subjectSummaryPath"],
         )
         self.assertEqual(2, subject_result["matrixStatusCounts"]["total"])

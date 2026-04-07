@@ -30,6 +30,12 @@ class ToolBootstrapResult:
 
 _VISUAL_STUDIO_GENERATOR_PATTERN = re.compile(r"^\*?\s*(Visual Studio \d+ \d{4})\s+=")
 _VISUAL_STUDIO_GENERATOR_MAJOR_PATTERN = re.compile(r"^Visual Studio (\d+) \d{4}$")
+_VISUAL_STUDIO_GENERATOR_YEAR_BY_MAJOR = {
+    "15": "2017",
+    "16": "2019",
+    "17": "2022",
+    "18": "2026",
+}
 
 
 def _vswhere_path() -> Path | None:
@@ -52,6 +58,39 @@ def _run_vswhere(arguments: list[str]) -> list[str]:
     if completed.returncode != 0:
         return []
     return [line.strip() for line in completed.stdout.splitlines() if line.strip()]
+
+
+def _candidate_visual_studio_install_paths() -> list[Path]:
+    candidates: list[Path] = []
+    seen: set[str] = set()
+
+    install_paths = _run_vswhere(
+        [
+            "-latest",
+            "-products",
+            "*",
+            "-requires",
+            "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+            "-property",
+            "installationPath",
+        ]
+    )
+    for install_path in install_paths:
+        candidate = Path(install_path)
+        key = str(candidate).lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        candidates.append(candidate)
+
+    for root, _version in _candidate_visual_studio_instance_specs():
+        key = str(root).lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        candidates.append(root)
+
+    return candidates
 
 
 def find_visual_cpp_executable(which: Callable[[str], str | None] = shutil.which) -> str | None:
@@ -207,18 +246,114 @@ def detect_visual_studio_instance_spec(generator: str) -> str | None:
 
     match = _VISUAL_STUDIO_GENERATOR_MAJOR_PATTERN.match(generator)
     required_major = match.group(1) if match is not None else None
+    required_roots = {required_major} if required_major is not None else set()
+    if required_major is not None:
+        mapped_year = _VISUAL_STUDIO_GENERATOR_YEAR_BY_MAJOR.get(required_major)
+        if mapped_year is not None:
+            required_roots.add(mapped_year)
 
     for root, version in _candidate_visual_studio_instance_specs():
-        if required_major is not None and root.parent.name != required_major:
+        if required_roots and root.parent.name not in required_roots:
             continue
         return f"{root},version={version}"
     return None
 
 
+def find_visual_studio_developer_command() -> Path | None:
+    if os.name != "nt":
+        return None
+
+    matches = _run_vswhere(
+        [
+            "-latest",
+            "-products",
+            "*",
+            "-requires",
+            "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+            "-find",
+            r"Common7\Tools\VsDevCmd.bat",
+        ]
+    )
+    if matches:
+        return Path(matches[0])
+
+    for root in _candidate_visual_studio_install_paths():
+        candidate = root / "Common7" / "Tools" / "VsDevCmd.bat"
+        if candidate.is_file():
+            return candidate
+
+    return None
+
+
+def find_ninja_executable(which: Callable[[str], str | None] = shutil.which) -> str | None:
+    discovered = which("ninja")
+    if discovered:
+        return discovered
+
+    binary_name = "ninja.exe" if os.name == "nt" else "ninja"
+    candidates: list[Path] = []
+    if os.name == "nt":
+        candidates.extend(
+            [
+                Path(r"C:\Program Files\Ninja\ninja.exe"),
+                Path(r"C:\Program Files (x86)\Ninja\ninja.exe"),
+            ]
+        )
+        for install_root in _candidate_visual_studio_install_paths():
+            candidates.extend(
+                [
+                    install_root / "Common7" / "IDE" / "CommonExtensions" / "Microsoft" / "CMake" / "Ninja" / binary_name,
+                    install_root / "Common7" / "IDE" / "CommonExtensions" / "Microsoft" / "CMake" / "CMake" / "bin" / binary_name,
+                ]
+            )
+
+    for candidate in candidates:
+        if candidate.is_file():
+            return str(candidate)
+
+    return None
+
+
+def windows_developer_environment(*, arch: str = "x64", host_arch: str = "x64") -> dict[str, str]:
+    if os.name != "nt":
+        return {}
+
+    developer_command = find_visual_studio_developer_command()
+    if developer_command is None:
+        return {}
+
+    completed = subprocess.run(
+        f'call "{developer_command}" -arch={arch} -host_arch={host_arch} >nul && set',
+        capture_output=True,
+        text=True,
+        errors="replace",
+        check=False,
+        shell=True,
+    )
+    if completed.returncode != 0:
+        return {}
+
+    environment: dict[str, str] = {}
+    existing_keys: set[str] = set()
+    for line in completed.stdout.splitlines():
+        if not line or "=" not in line or line.startswith("="):
+            continue
+        key, value = line.split("=", 1)
+        if key:
+            normalized = key.lower()
+            if normalized in existing_keys:
+                continue
+            existing_keys.add(normalized)
+            environment[key] = value
+    return environment
+
+
 def allocate_cmake_binary_dir(base_dir: Path, *, host_platform: str, generator: str | None = None) -> Path:
-    if host_platform == "windows" and generator and generator.startswith("Visual Studio"):
+    if host_platform == "windows" and generator and (
+        generator.startswith("Visual Studio") or generator.startswith("Ninja")
+    ):
         temp_root = Path(tempfile.gettempdir())
-        scoped_dir = temp_root / f"booming-{base_dir.name}-{os.getpid()}-{uuid.uuid4().hex[:8]}"
+        scoped_dir = temp_root / f"chaos-{base_dir.name}-{os.getpid()}-{uuid.uuid4().hex[:8]}"
         scoped_dir.mkdir(parents=True, exist_ok=False)
         return scoped_dir
 

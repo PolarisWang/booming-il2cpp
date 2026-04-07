@@ -32,8 +32,8 @@ def load_module(path: Path, module_name: str):
 
 class OperationReportingTests(unittest.TestCase):
     def test_append_operation_event_backfills_missing_run_id(self) -> None:
-        operation_reporting_module = load_module(OPERATION_REPORTING_MODULE_PATH, "booming_run_operation_reporting")
-        events_module = load_module(EVENTS_MODULE_PATH, "booming_run_operation_events")
+        operation_reporting_module = load_module(OPERATION_REPORTING_MODULE_PATH, "chaos_run_operation_reporting")
+        events_module = load_module(EVENTS_MODULE_PATH, "chaos_run_operation_events")
 
         TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
         repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"

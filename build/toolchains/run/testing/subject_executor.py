@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+import shutil
 from pathlib import Path
 from typing import Any, Callable
 import sys
@@ -19,6 +21,125 @@ except ImportError:
 
 
 Worker = Callable[..., dict[str, Any]]
+
+
+def _copy_reused_bucket(repo_root: Path, stage: dict[str, Any]) -> None:
+    existing_manifest_path = str(dict(stage.get("reuse") or {}).get("existingManifestPath") or "")
+    if not existing_manifest_path:
+        return
+
+    source_bucket_root = (repo_root / existing_manifest_path).parent
+    destination_bucket_root = repo_root / str(stage["paths"]["bucketRoot"])
+    if not source_bucket_root.is_dir():
+        return
+
+    destination_bucket_root.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(source_bucket_root, destination_bucket_root, dirs_exist_ok=True)
+
+
+def _read_reused_manifest(repo_root: Path, stage: dict[str, Any]) -> dict[str, Any]:
+    manifest_path = repo_root / str(stage["paths"]["manifestPath"])
+    if not manifest_path.is_file():
+        return {}
+    try:
+        payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def _dedupe_non_empty(values: list[str]) -> list[str]:
+    unique_values: list[str] = []
+    for value in values:
+        if value and value not in unique_values:
+            unique_values.append(value)
+    return unique_values
+
+
+def _rewrite_reused_bucket_path(stage: dict[str, Any], value: str) -> str:
+    if not value:
+        return ""
+
+    source_bucket_root = Path(str(dict(stage.get("reuse") or {}).get("existingManifestPath") or "")).parent.as_posix()
+    destination_bucket_root = str(stage["paths"]["bucketRoot"])
+    if value == source_bucket_root:
+        return destination_bucket_root
+    if value.startswith(source_bucket_root + "/"):
+        return destination_bucket_root + value[len(source_bucket_root) :]
+    return value
+
+
+def _reused_primary_evidence_paths(stage: dict[str, Any], manifest: dict[str, Any]) -> list[str]:
+    kind = str(stage.get("kind") or "")
+    bucket = str(stage.get("bucket") or "")
+    artifacts = dict(manifest.get("artifacts") or {})
+    outputs = [str(value) for value in list(manifest.get("outputs") or []) if value]
+    trace_paths = [str(value) for value in list(manifest.get("tracePaths") or []) if value]
+
+    if kind == "source-resolve":
+        return _dedupe_non_empty([_rewrite_reused_bucket_path(stage, str(manifest.get("sourcePath") or ""))])
+    if kind == "host-input-build":
+        return _dedupe_non_empty([_rewrite_reused_bucket_path(stage, str(manifest.get("primaryAssemblyPath") or ""))])
+    if kind == "analysis-frontend":
+        return _dedupe_non_empty(
+            [
+                _rewrite_reused_bucket_path(stage, str(artifacts.get("typedIlIrPath") or "")),
+                _rewrite_reused_bucket_path(stage, str(artifacts.get("closureManifestPath") or "")),
+            ]
+        )
+    if kind == "generated-native-proof":
+        return _dedupe_non_empty(
+            [
+                _rewrite_reused_bucket_path(stage, str(manifest.get("generatedSourcePath") or "")),
+                _rewrite_reused_bucket_path(stage, str(manifest.get("nativeProofManifestPath") or "")),
+            ]
+        )
+    if kind == "build-target":
+        return _dedupe_non_empty([_rewrite_reused_bucket_path(stage, value) for value in outputs])
+    if kind in {"runtime-observe", "runtime-managed-output", "runtime-perf-collect"}:
+        return _dedupe_non_empty(
+            [
+                _rewrite_reused_bucket_path(stage, str(manifest.get("stdoutPath") or "")),
+                _rewrite_reused_bucket_path(stage, str(manifest.get("exitCodePath") or "")),
+                *[_rewrite_reused_bucket_path(stage, value) for value in trace_paths],
+            ]
+        )
+    if kind == "runtime-trace-compare" or bucket == "runtime":
+        return _dedupe_non_empty([_rewrite_reused_bucket_path(stage, value) for value in trace_paths])
+    return []
+
+
+def _reused_stage_diagnostics(stage: dict[str, Any], manifest: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "stdoutPath": _rewrite_reused_bucket_path(stage, str(manifest.get("stdoutPath") or "")) or None,
+        "stderrPath": _rewrite_reused_bucket_path(stage, str(manifest.get("stderrPath") or "")) or None,
+    }
+
+
+def _reused_stage_details(stage: dict[str, Any], manifest: dict[str, Any]) -> dict[str, Any]:
+    if str(stage.get("kind") or "") != "runtime-perf-collect":
+        return {}
+
+    return {
+        "performance": {
+            "samples": list(manifest.get("samples") or []),
+            "metrics": dict(manifest.get("summaryMetrics") or {}),
+            "baselinePath": manifest.get("baselinePath"),
+            "baseline": dict(manifest.get("baseline") or {}),
+            "baselineUpdated": bool(manifest.get("baselineUpdated", False)),
+            "regressionStatus": str(manifest.get("regressionStatus") or "no-baseline"),
+            "regressions": list(manifest.get("regressions") or []),
+        }
+    }
+
+
+def _reused_stage_metadata(repo_root: Path, stage: dict[str, Any]) -> dict[str, Any]:
+    manifest = _read_reused_manifest(repo_root, stage)
+    return {
+        "primaryEvidencePaths": _reused_primary_evidence_paths(stage, manifest),
+        "diagnostics": _reused_stage_diagnostics(stage, manifest),
+        "details": _reused_stage_details(stage, manifest),
+    }
 
 
 def _stage_upstream(stage: dict[str, Any], stages_by_id: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
@@ -147,7 +268,7 @@ def execute_plan(
             )
             report_path = repo_root / str(stage["paths"]["manifestPath"])
             report_path.parent.mkdir(parents=True, exist_ok=True)
-            report_path.write_text(__import__("json").dumps(report_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            report_path.write_text(json.dumps(report_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             stage_results.append(
                 _stage_result(
                     stage,
@@ -169,6 +290,8 @@ def execute_plan(
             continue
 
         if str(stage["executionMode"]) == "reused":
+            _copy_reused_bucket(repo_root, stage)
+            reused_metadata = _reused_stage_metadata(repo_root, stage)
             stage_results.append(
                 _stage_result(
                     stage,
@@ -176,6 +299,9 @@ def execute_plan(
                     action_taken="reused",
                     manifest_path=str(stage["paths"]["manifestPath"]),
                     report_paths=list(stage["paths"]["reportPaths"]),
+                    primary_evidence_paths=list(reused_metadata["primaryEvidencePaths"]),
+                    diagnostics=dict(reused_metadata["diagnostics"]),
+                    details=dict(reused_metadata["details"]),
                 )
             )
             emit_event(

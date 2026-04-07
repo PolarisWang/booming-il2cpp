@@ -4,11 +4,29 @@
   "category": "diagnostic",
   "defaultGoal": "correctness.dev",
   "defaultMatrix": "windows-managed-output",
+  "defaultValidationProfile": "managed-output",
   "source": {
     "type": "dotnet-project",
     "path": "subjects/HostEmbeddingLite/source/HostEmbeddingLite.csproj",
     "entry": "HostEmbeddingLite/Program::Main(System.String[])"
   },
+  "validationProfiles": {
+    "managed-output": [
+      "proof"
+    ]
+  },
+  "validation": {
+    "proof": {
+      "kind": "proof",
+      "defaultVariant": "CHECK"
+    }
+  },
+  "expected": {
+    "analysis": "subjects/HostEmbeddingLite/expected/analysis/",
+    "codegen": "subjects/HostEmbeddingLite/expected/codegen/",
+    "runtime": "subjects/HostEmbeddingLite/expected/runtime/"
+  },
+  "baselines": {},
   "tags": [
     "smoke",
     "managed",

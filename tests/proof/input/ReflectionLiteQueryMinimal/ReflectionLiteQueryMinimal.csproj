@@ -1,7 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <AssemblyName>ReflectionLiteQueryMinimal</AssemblyName>
-    <RootNamespace>ReflectionLiteQueryMinimal</RootNamespace>
-  </PropertyGroup>
-</Project>

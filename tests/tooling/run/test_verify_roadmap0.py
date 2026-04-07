@@ -10,6 +10,8 @@ import uuid
 from pathlib import Path
 from unittest.mock import patch
 
+from tests.support import select_public_suite_spec
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 VERIFY_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "verify.py"
@@ -58,7 +60,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
         self.assertNotIn("pwsh", completed.stderr)
 
     def test_low_level_command_uses_python_entrypoint_on_macos(self) -> None:
-        verify_module = load_module(VERIFY_MODULE_PATH, "booming_run_verify_route")
+        verify_module = load_module(VERIFY_MODULE_PATH, "chaos_run_verify_route")
         bootstrap = verify_module.tooling_module.ToolBootstrapResult(
             ready=True,
             output="",
@@ -81,7 +83,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
         self.assertEqual(REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.py", Path(args[1]))
 
     def test_low_level_command_uses_execution_policy_bypass_on_windows(self) -> None:
-        verify_module = load_module(VERIFY_MODULE_PATH, "booming_run_verify_route_windows")
+        verify_module = load_module(VERIFY_MODULE_PATH, "chaos_run_verify_route_windows")
         bootstrap = verify_module.tooling_module.ToolBootstrapResult(
             ready=True,
             output="",
@@ -117,7 +119,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
         self.assertEqual(["-HostProfile", "windows"], args[8:])
 
     def test_low_level_failure_text_includes_underlying_output(self) -> None:
-        verify_module = load_module(VERIFY_MODULE_PATH, "booming_run_verify_route_failure_text")
+        verify_module = load_module(VERIFY_MODULE_PATH, "chaos_run_verify_route_failure_text")
         bootstrap = verify_module.tooling_module.ToolBootstrapResult(
             ready=True,
             output="",
@@ -145,7 +147,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
         self.assertIn("running scripts is disabled on this system", result.text)
 
     def test_low_level_script_allocates_run_scoped_binary_dir(self) -> None:
-        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_paths")
+        script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_paths")
         base_dir = REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows" / "common" / "native-abi-config"
 
         first = script_module.allocate_run_scoped_binary_dir(base_dir)
@@ -157,7 +159,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
         self.assertTrue(second.name.startswith("native-abi-config-"))
 
     def test_low_level_script_native_smoke_uses_run_scoped_binary_dir(self) -> None:
-        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_native")
+        script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_native")
         source_dir = REPO_ROOT / "tests" / "contracts" / "native" / "abi"
         requested_dir = REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows" / "common" / "native-abi-config"
         allocated_dir = requested_dir.parent / "native-abi-config-test-run"
@@ -176,11 +178,11 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
         )
 
     def test_low_level_script_native_smoke_uses_visual_studio_compatible_binary_dir_on_windows(self) -> None:
-        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_native_windows_vs")
+        script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_native_windows_vs")
         source_dir = REPO_ROOT / "tests" / "contracts" / "native" / "abi"
         requested_dir = REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows" / "common" / "native-abi-config"
-        allocated_dir = Path(r"C:\Users\mayna\AppData\Local\Temp\booming-il2cpp\cmake-builds\native-abi-config-1234")
-        instance_spec = r"C:\Program Files\Microsoft Visual Studio\18\Professional,version=18.4.11626.88"
+        allocated_dir = TEST_TMP_ROOT / "cmake-builds" / "native-abi-config-1234"
+        instance_spec = f"{TEST_TMP_ROOT / 'visual-studio' / '18' / 'Professional'},version=18.4.11626.88"
 
         with patch.object(script_module.tooling_module, "detect_visual_studio_generator", return_value="Visual Studio 18 2026"):
             with patch.object(script_module.tooling_module, "detect_visual_studio_instance_spec", return_value=instance_spec):
@@ -213,7 +215,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
         )
 
     def test_low_level_script_preset_build_uses_run_scoped_binary_dir(self) -> None:
-        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_preset")
+        script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_preset")
         requested_dir = REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference"
         allocated_dir = requested_dir.parent / "windows-x64-reference-test-run"
 
@@ -231,9 +233,16 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
         )
 
     def test_low_level_script_dotnet_build_uses_temp_intermediate_root_on_windows(self) -> None:
-        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_dotnet_build")
-        project_path = REPO_ROOT / "tests" / "smoke" / "input" / "HelloWorld" / "HelloWorld.csproj"
-        intermediate_root = Path(r"C:\Users\mayna\AppData\Local\Temp\booming-dotnet-HelloWorld-1234")
+        script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_dotnet_build")
+        smoke_spec = select_public_suite_spec(
+            "chaos_verify_roadmap0_dotnet_build_suite",
+            host_platform="windows",
+            family="smoke",
+            required_stages=["build"],
+        )
+        suite_name = str(smoke_spec["suite"])
+        project_path = REPO_ROOT / "subjects" / suite_name / "source" / f"{suite_name}.csproj"
+        intermediate_root = TEST_TMP_ROOT / "dotnet-intermediates" / f"{suite_name}-1234"
 
         with patch.object(script_module.tooling_module, "allocate_dotnet_intermediate_dir", return_value=intermediate_root):
             with patch.object(script_module, "run_checked") as run_checked_mock:
@@ -253,7 +262,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
         )
 
     def test_low_level_script_routing_build_uses_run_scoped_binary_dir(self) -> None:
-        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_routing")
+        script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_routing")
         requested_dir = REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows" / "common" / "linux-packaging-routing"
         allocated_dir = requested_dir.parent / "linux-packaging-routing-test-run"
 
@@ -288,29 +297,32 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
         )
 
     def test_low_level_script_execute_subject_matrix_builds_plan_and_executes_it(self) -> None:
-        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_subject_matrix")
+        script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_subject_matrix")
         plan = {"selection": {"artifactPlan": {"evidenceTerminalBucket": "runtime"}}}
         result = {"status": "ok", "errors": [], "stageResults": []}
 
-        with patch.object(script_module.subject_planner_module, "build_plan", return_value=plan) as build_plan_mock:
-            with patch.object(script_module.subject_executor_module, "execute_plan", return_value=result) as execute_plan_mock:
-                actual = script_module.execute_subject_matrix(
-                    REPO_ROOT,
-                    matrix_id="windows-dev-output",
-                    goal_id="correctness.dev",
-                )
+        with patch.object(script_module, "resolve_subject_matrix_subject_id", return_value="FixtureReferenceSubject"):
+            with patch.object(script_module, "build_subject_run_id", return_value="fixture-run-001"):
+                with patch.object(script_module.subject_planner_module, "build_plan", return_value=plan) as build_plan_mock:
+                    with patch.object(script_module.subject_executor_module, "execute_plan", return_value=result) as execute_plan_mock:
+                        actual = script_module.execute_subject_matrix(
+                            REPO_ROOT,
+                            matrix_id="windows-dev-output",
+                            goal_id="correctness.dev",
+                        )
 
-        self.assertEqual(result, actual)
+        self.assertEqual({**result, "runId": "fixture-run-001"}, actual)
         build_plan_mock.assert_called_once_with(
             REPO_ROOT,
-            script_module.HELLOWORLD_SUBJECT_ID,
+            "FixtureReferenceSubject",
             goal_id="correctness.dev",
             matrix_id="windows-dev-output",
+            run_id="fixture-run-001",
         )
-        execute_plan_mock.assert_called_once_with(REPO_ROOT, plan)
+        execute_plan_mock.assert_called_once_with(REPO_ROOT, plan, run_id="fixture-run-001")
 
     def test_low_level_script_raises_when_subject_matrix_execution_fails(self) -> None:
-        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_subject_matrix_fail")
+        script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_subject_matrix_fail")
         plan = {"selection": {"artifactPlan": {"evidenceTerminalBucket": "runtime"}}}
         result = {"status": "fail", "errors": ["worker boom"], "stageResults": []}
 
@@ -324,7 +336,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
                     )
 
     def test_low_level_script_accepts_stage4_proof_run_artifacts_when_runtime_root_contains_expected_files(self) -> None:
-        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_stage4_run_artifacts_ok")
+        script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_stage4_run_artifacts_ok")
 
         runtime_root = self._make_test_dir("stage4-runtime-ok")
         try:
@@ -337,7 +349,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
             shutil.rmtree(runtime_root, ignore_errors=True)
 
     def test_low_level_script_accepts_stage4_proof_run_artifacts_when_legacy_root_contains_run_subdir(self) -> None:
-        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_stage4_run_artifacts_legacy_ok")
+        script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_stage4_run_artifacts_legacy_ok")
 
         legacy_root = self._make_test_dir("stage4-runtime-legacy")
         try:
@@ -352,7 +364,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
             shutil.rmtree(legacy_root, ignore_errors=True)
 
     def test_low_level_script_rejects_stage4_proof_run_exit_code_mismatch(self) -> None:
-        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_stage4_run_artifacts_exit")
+        script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_stage4_run_artifacts_exit")
 
         runtime_root = self._make_test_dir("stage4-runtime-exit")
         try:
@@ -366,7 +378,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
             shutil.rmtree(runtime_root, ignore_errors=True)
 
     def test_low_level_script_rejects_stage4_proof_run_stdout_mismatch(self) -> None:
-        script_module = load_module(VERIFY_SCRIPT_PATH, "booming_verify_roadmap0_script_stage4_run_artifacts_stdout")
+        script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_stage4_run_artifacts_stdout")
 
         runtime_root = self._make_test_dir("stage4-runtime-stdout")
         try:

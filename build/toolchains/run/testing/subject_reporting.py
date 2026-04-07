@@ -111,6 +111,10 @@ def build_matrix_report(
         "subjectId": str(execution_result.get("subjectId") or selection.get("subjectId") or ""),
         "matrixId": str(execution_result.get("matrixId") or selection.get("matrixId") or ""),
         "goalId": str(execution_result.get("goalId") or selection.get("goalId") or ""),
+        "validationProfileId": selection.get("validationProfileId"),
+        "validationKinds": list(selection.get("validationKinds") or []),
+        "validationKind": selection.get("validationKind"),
+        "variant": selection.get("variant"),
         "selection": selection,
         "status": str(execution_result.get("status") or "aborted"),
         "terminalStageId": str(execution_result.get("terminalStageId") or ""),
@@ -184,6 +188,9 @@ def build_subject_summary(
             {
                 "matrixId": matrix_id,
                 "goalId": str(report.get("goalId") or requested_goal_id),
+                "validationProfileId": report.get("validationProfileId"),
+                "validationKind": report.get("validationKind"),
+                "variant": report.get("variant"),
                 "status": status,
                 "terminalBucket": str(report.get("terminalBucket") or ""),
                 "executionContext": execution_context,
@@ -236,10 +243,11 @@ def materialize_matrix_report_artifacts(
         matrix_report["releaseReportPaths"] = list(matrix_report.get("releaseReportPaths") or [])
         return list(matrix_report["releaseReportPaths"])
 
-    report_root = Path(matrix_report_path).parent / "report"
-    summary_path = report_root / "summary.json"
-    baseline_compare_path = report_root / "baseline-compare.json"
-    samples_path = report_root / "samples.json"
+    matrix_root = Path(matrix_report_path).parent.parent
+    validation_root = matrix_root / "validations" / "perf"
+    summary_path = validation_root / "summary.json"
+    baseline_compare_path = validation_root / "baseline-compare.json"
+    samples_path = validation_root / "samples.json"
 
     summary_payload = {
         "reportVersion": "v1",

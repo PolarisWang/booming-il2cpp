@@ -2,16 +2,18 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import shutil
 import sys
-import tempfile
 import unittest
+import uuid
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 ADAPTERS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "adapters" / "__init__.py"
 SUITE_MANIFEST_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "suite_manifest.py"
-HELLO_WORLD_MANIFEST_PATH = REPO_ROOT / "tests" / "smoke" / "hello-world" / "suite.manifest.json"
+HELLO_WORLD_MANIFEST_PATH = REPO_ROOT / "tests" / "integration" / "run" / "fixtures" / "catalog" / "repo" / "tests" / "smoke" / "hello-world" / "suite.manifest.json"
+TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "integration-case-discovery"
 
 
 def load_module(path: Path, module_name: str):
@@ -29,9 +31,18 @@ def load_module(path: Path, module_name: str):
 
 
 class CaseDiscoveryTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
+
+    def _make_temp_root(self, prefix: str) -> Path:
+        temp_root = TEST_TMP_ROOT / f"{prefix}-{uuid.uuid4().hex}"
+        temp_root.mkdir(parents=True, exist_ok=False)
+        return temp_root
+
     def test_dotnet_adapter_emits_stable_synthetic_main_case(self) -> None:
-        suite_manifest_module = load_module(SUITE_MANIFEST_MODULE_PATH, "booming_run_suite_manifest_for_dotnet_cases")
-        adapters_module = load_module(ADAPTERS_MODULE_PATH, "booming_run_adapters_for_dotnet_cases")
+        suite_manifest_module = load_module(SUITE_MANIFEST_MODULE_PATH, "chaos_run_suite_manifest_for_dotnet_cases")
+        adapters_module = load_module(ADAPTERS_MODULE_PATH, "chaos_run_adapters_for_dotnet_cases")
 
         suite = suite_manifest_module.load_suite_manifest(HELLO_WORLD_MANIFEST_PATH)
         cases = adapters_module.create_adapter(suite).discover_cases()
@@ -40,11 +51,12 @@ class CaseDiscoveryTests(unittest.TestCase):
         self.assertEqual(["main"], [case.source_id for case in cases])
 
     def test_case_id_collision_adds_stable_suffix(self) -> None:
-        suite_manifest_module = load_module(SUITE_MANIFEST_MODULE_PATH, "booming_run_suite_manifest_for_duplicate_cases")
-        adapters_module = load_module(ADAPTERS_MODULE_PATH, "booming_run_adapters_for_duplicate_cases")
+        suite_manifest_module = load_module(SUITE_MANIFEST_MODULE_PATH, "chaos_run_suite_manifest_for_duplicate_cases")
+        adapters_module = load_module(ADAPTERS_MODULE_PATH, "chaos_run_adapters_for_duplicate_cases")
 
-        with tempfile.TemporaryDirectory() as temp_dir:
-            manifest_path = Path(temp_dir) / "tests" / "integration" / "duplicate-cases" / "suite.manifest.json"
+        temp_root = self._make_temp_root("duplicate-cases")
+        try:
+            manifest_path = temp_root / "tests" / "integration" / "duplicate-cases" / "suite.manifest.json"
             manifest_path.parent.mkdir(parents=True, exist_ok=True)
             manifest_path.write_text(
                 json.dumps(
@@ -65,6 +77,8 @@ class CaseDiscoveryTests(unittest.TestCase):
 
             suite = suite_manifest_module.load_suite_manifest(manifest_path)
             cases = adapters_module.create_adapter(suite).discover_cases()
+        finally:
+            shutil.rmtree(temp_root, ignore_errors=True)
 
         self.assertEqual(["duplicate", "duplicate-34a7"], [case.case_id for case in cases])
 

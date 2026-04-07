@@ -16,7 +16,7 @@ def load_runtime_module():
     if not RUNTIME_PY.is_file():
         raise FileNotFoundError(f"runtime module missing: {RUNTIME_PY}")
 
-    spec = importlib.util.spec_from_file_location("booming_run_runtime", RUNTIME_PY)
+    spec = importlib.util.spec_from_file_location("chaos_run_runtime", RUNTIME_PY)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"unable to load runtime module: {RUNTIME_PY}")
 

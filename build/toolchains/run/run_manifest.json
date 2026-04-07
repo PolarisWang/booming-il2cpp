@@ -102,7 +102,7 @@
       "tokens": ["test", "subject"],
       "syntax": "test subject --id subject/<subject>",
       "show_in_menu": true,
-      "examples": ["run test subject --id subject/HelloWorldObject"]
+      "examples": ["run test subject --id subject/<subject-id>"]
     },
     {
       "id": "test-module",
@@ -698,8 +698,8 @@
       "tokens": ["test", "contract", "managed-closure-bundle"],
       "kind": "python-unittest",
       "target": "managed-closure-bundle",
-      "test_module": "tests.unit.run.test_stage3_managed_minimal_closure",
-      "artifacts": ["artifacts/proof/managed-closure/HelloWorldObject"],
+      "test_module": "tests.unit.run.test_managed_closure_contract_bundle",
+      "artifacts": ["contracts/artifacts/v0/samples"],
       "show_in_menu": false,
       "public": false,
       "replacement_syntax": "test contract managed-closure-bundle",

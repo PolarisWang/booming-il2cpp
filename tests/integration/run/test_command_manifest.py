@@ -14,7 +14,7 @@ def load_manifest_module():
     if not MANIFEST_MODULE_PATH.is_file():
         raise FileNotFoundError(f"manifest module missing: {MANIFEST_MODULE_PATH}")
 
-    spec = importlib.util.spec_from_file_location("booming_run_manifest", MANIFEST_MODULE_PATH)
+    spec = importlib.util.spec_from_file_location("chaos_run_manifest", MANIFEST_MODULE_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"unable to load manifest module: {MANIFEST_MODULE_PATH}")
 

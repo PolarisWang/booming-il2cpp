@@ -19,6 +19,7 @@ try:
     from ..testing import subject_executor as subject_executor_module
     from ..testing import subject_planner as subject_planner_module
     from ..testing import subject_reporting as subject_reporting_module
+    from ..testing import subject_validations as subject_validations_module
     from .. import tooling as tooling_module
     from ..common import combine_process_output, run_process
     from ..commands import build as build_commands
@@ -39,6 +40,7 @@ except ImportError:
     from testing import subject_executor as subject_executor_module
     from testing import subject_planner as subject_planner_module
     from testing import subject_reporting as subject_reporting_module
+    from testing import subject_validations as subject_validations_module
     import tooling as tooling_module
     from common import combine_process_output, run_process
     from commands import build as build_commands
@@ -178,6 +180,22 @@ def _logs_root(repo_root: Path) -> Path:
     return repo_root / "artifacts" / "logs" / "tests"
 
 
+def _find_subject_run_metadata(repo_root: Path, requested_run: str) -> dict[str, Any] | None:
+    subject_root = repo_root / "artifacts" / "subjects"
+    if not subject_root.is_dir():
+        return None
+
+    for summary_path in subject_root.glob(f"*/runs/{requested_run}/run-report/summary.json"):
+        run_root = summary_path.parent
+        events_path = run_root / "events.jsonl"
+        return {
+            "runId": requested_run,
+            "summaryPath": str(summary_path.relative_to(repo_root).as_posix()),
+            "eventsPath": str(events_path.relative_to(repo_root).as_posix()),
+        }
+    return None
+
+
 def _read_json_if_exists(path: Path) -> dict[str, Any] | None:
     if not path.is_file():
         return None
@@ -188,11 +206,13 @@ def _resolve_run_metadata(repo_root: Path, requested_run: str | None, *, prefer_
     logs_root = _logs_root(repo_root)
     if requested_run and requested_run not in {"last", "current"}:
         run_root = logs_root / requested_run
-        return {
-            "runId": requested_run,
-            "summaryPath": str((run_root / "summary.json").relative_to(repo_root).as_posix()),
-            "eventsPath": str((run_root / "events.jsonl").relative_to(repo_root).as_posix()),
-        }
+        if run_root.exists():
+            return {
+                "runId": requested_run,
+                "summaryPath": str((run_root / "summary.json").relative_to(repo_root).as_posix()),
+                "eventsPath": str((run_root / "events.jsonl").relative_to(repo_root).as_posix()),
+            }
+        return _find_subject_run_metadata(repo_root, requested_run)
 
     pointer_names: list[str] = []
     if requested_run == "current" or (requested_run is None and prefer_current):
@@ -523,9 +543,9 @@ def _resolve_subject_matrix_report_path(plan: dict[str, Any]) -> str:
     for stage in list(plan.get("stagePlan") or []):
         if str(stage.get("bucket") or "") == "report":
             return str(dict(stage.get("paths") or {}).get("manifestPath") or "")
-    matrix_root = str(dict(plan.get("artifactsRoot") or {}).get("matrixRoot") or "")
-    if matrix_root:
-        return f"{matrix_root}/report.json"
+    pipeline_report_root = str(dict(plan.get("artifactsRoot") or {}).get("pipelineReportRoot") or "")
+    if pipeline_report_root:
+        return f"{pipeline_report_root}/report.json"
     return ""
 
 
@@ -556,6 +576,10 @@ def _run_subject_object(
     subject_key = str(normalized_options.get("subject") or selected_object.get("subjectId") or "")
     goal_id = str(normalized_options.get("goal") or "") or None
     matrix_id = str(normalized_options.get("matrix") or "") or None
+    validation_profile_id = str(normalized_options.get("validation_profile") or "") or None
+    validation_kind = str(normalized_options.get("validation_kind") or "") or None
+    variant = str(normalized_options.get("variant") or "") or None
+    run_id = reporting_module.build_run_id(host_platform)
 
     try:
         plan = subject_planner_module.build_plan(
@@ -563,6 +587,10 @@ def _run_subject_object(
             subject_key,
             goal_id=goal_id,
             matrix_id=matrix_id,
+            validation_profile_id=validation_profile_id,
+            validation_kind=validation_kind,
+            variant=variant,
+            run_id=run_id,
         )
     except (FileNotFoundError, RuntimeError, ValueError) as error:
         return _with_selected_object_context(
@@ -578,10 +606,17 @@ def _run_subject_object(
             index,
         )
 
+    artifacts_root = dict(plan.get("artifactsRoot") or {})
     run_context = reporting_module.start_session_report(
         repo_root=repo_root,
         host_platform=host_platform,
         command_text=command_text,
+        run_id=run_id,
+        session_root=repo_root / str(artifacts_root["runReportRoot"]),
+        pointer_roots=[
+            repo_root / str(artifacts_root["runsRoot"]),
+            repo_root / "artifacts" / "logs" / "tests",
+        ],
     )
 
     def event_writer(event: dict[str, Any]) -> None:
@@ -592,7 +627,7 @@ def _run_subject_object(
         execution_result = subject_executor_module.execute_plan(
             repo_root,
             plan,
-            run_id=str(run_context["runId"]),
+            run_id=run_id,
             event_writer=event_writer,
         )
     except Exception as error:
@@ -629,6 +664,22 @@ def _run_subject_object(
             )
             _write_json_document(repo_root / matrix_report_path, matrix_report)
 
+    validation_outcome = subject_validations_module.run_subject_validations(
+        repo_root,
+        plan,
+        run_id=str(run_context["runId"]),
+    )
+    validation_results = list(validation_outcome.get("validationResults") or [])
+    validation_errors = list(validation_outcome.get("errors") or [])
+    if validation_results:
+        matrix_report["validationResults"] = validation_results
+    if validation_errors:
+        matrix_report.setdefault("errors", [])
+        matrix_report["errors"] = list(matrix_report.get("errors") or []) + validation_errors
+        matrix_report["status"] = "fail"
+    if matrix_report_path and (validation_results or validation_errors):
+        _write_json_document(repo_root / matrix_report_path, matrix_report)
+
     subject_summary_path = f"{plan['artifactsRoot']['subjectReportRoot']}/summary.json"
     subject_summary = subject_reporting_module.build_subject_summary(
         subject_id=str(selection.get("subjectId") or subject_key),
@@ -646,11 +697,16 @@ def _run_subject_object(
 
     artifacts = [
         path
-        for path in [matrix_report_path, subject_summary_path, *list(matrix_report.get("releaseReportPaths") or [])]
+        for path in [
+            matrix_report_path,
+            subject_summary_path,
+            *list(matrix_report.get("releaseReportPaths") or []),
+            *list(validation_outcome.get("artifacts") or []),
+        ]
         if path
     ]
-    errors = list(execution_result.get("errors") or [])
-    succeeded = str(execution_result.get("status") or "fail") == "ok"
+    errors = list(execution_result.get("errors") or []) + validation_errors
+    succeeded = str(matrix_report.get("status") or execution_result.get("status") or "fail") == "ok"
     result_factory = CommandResult.success if succeeded else CommandResult.failure
     kwargs: dict[str, Any] = {
         "command": command_text,
@@ -660,6 +716,7 @@ def _run_subject_object(
             "artifacts": artifacts,
             "exitCode": 0 if succeeded else 1,
             "subjectResults": [subject_result],
+            "validationResults": validation_results,
         },
         "text": _render_subject_summary(subject_summary),
     }

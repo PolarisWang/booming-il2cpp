@@ -8,6 +8,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import select_subject_record
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 PERF_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "perf.py"
@@ -18,7 +20,7 @@ def load_perf_module():
     if not PERF_MODULE_PATH.is_file():
         raise FileNotFoundError(f"perf module missing: {PERF_MODULE_PATH}")
 
-    spec = importlib.util.spec_from_file_location("booming_run_subject_perf", PERF_MODULE_PATH)
+    spec = importlib.util.spec_from_file_location("chaos_run_subject_perf", PERF_MODULE_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"unable to load perf module: {PERF_MODULE_PATH}")
 
@@ -35,18 +37,26 @@ class SubjectPerfPolicyTests(unittest.TestCase):
 
     def test_perf_subject_uses_subject_aware_baseline_path_and_detects_regression(self) -> None:
         perf_module = load_perf_module()
+        subject_record = select_subject_record(
+            "chaos_subject_perf_policy_record",
+            category="benchmark",
+            source_type="dotnet-project",
+            required_goal_ids=["perf.release"],
+            required_validation_kinds=["perf"],
+        )
+        subject_id = str(subject_record["subjectId"])
+        matrix_id = "windows-perf-release"
 
         repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
         repo_root.mkdir(parents=True, exist_ok=False)
         try:
             baseline_path = (
                 repo_root
-                / "tests"
-                / "perf"
                 / "subjects"
-                / "GenericEcho"
-                / "windows-perf-release"
+                / subject_id
                 / "baselines"
+                / "perf"
+                / matrix_id
                 / "windows.json"
             )
             baseline_path.parent.mkdir(parents=True, exist_ok=True)
@@ -57,8 +67,8 @@ class SubjectPerfPolicyTests(unittest.TestCase):
 
             result = perf_module.evaluate_perf_subject(
                 repo_root=repo_root,
-                subject_id="GenericEcho",
-                matrix_id="windows-perf-release",
+                subject_id=subject_id,
+                matrix_id=matrix_id,
                 host_platform="windows",
                 metrics={"meanDurationMs": 15.25, "maxDurationMs": 16.0},
                 update_baseline=False,
@@ -66,7 +76,7 @@ class SubjectPerfPolicyTests(unittest.TestCase):
 
             self.assertTrue(
                 result["baselinePath"].endswith(
-                    "/tests/perf/subjects/GenericEcho/windows-perf-release/baselines/windows.json"
+                    f"/subjects/{subject_id}/baselines/perf/{matrix_id}/windows.json"
                 )
             )
             self.assertFalse(result["baselineUpdated"])

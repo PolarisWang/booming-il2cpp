@@ -27,7 +27,7 @@ def load_module(path: Path, module_name: str):
 
 class ContractCheckTests(unittest.TestCase):
     def test_analysis_contract_check_runs_parse_and_validation(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_contract_analysis")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_contract_analysis")
 
         with patch.object(
             test_module.contracts_module,
@@ -55,7 +55,7 @@ class ContractCheckTests(unittest.TestCase):
         validate_mock.assert_called_once_with(REPO_ROOT)
 
     def test_trace_schema_contract_check_surfaces_precise_failure(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_contract_trace_failure")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_contract_trace_failure")
 
         with patch.object(test_module.contracts_module, "trace_contract_json_paths", return_value=[]):
             with patch.object(test_module.contracts_module, "assert_json_files_parse"):

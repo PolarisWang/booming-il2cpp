@@ -28,7 +28,7 @@ def load_module(path: Path, module_name: str):
 
 class BuildCommandTests(unittest.TestCase):
     def test_native_contract_build_resets_binary_dir_before_configure(self) -> None:
-        build_module = load_module(BUILD_MODULE_PATH, "booming_run_build")
+        build_module = load_module(BUILD_MODULE_PATH, "chaos_run_build")
         command = {
             "kind": "native-contract",
             "target": "abi",

@@ -29,8 +29,69 @@ def load_module(path: Path, module_name: str):
 
 
 class TestWatchSummaryCommandsTests(unittest.TestCase):
+    def test_test_summary_can_resolve_subject_local_run_by_run_id(self) -> None:
+        test_module = load_module(TEST_MODULE_PATH, "chaos_run_test_summary_subject_local")
+        subject_id = "fixture-entry-alpha"
+        suite_id = "fixture-suite-alpha"
+
+        TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
+        repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
+            run_root = (
+                repo_root
+                / "artifacts"
+                / "subjects"
+                / subject_id
+                / "runs"
+                / "run-subject-1"
+                / "run-report"
+            )
+            run_root.mkdir(parents=True, exist_ok=True)
+            (run_root / "summary.json").write_text(
+                json.dumps(
+                    {
+                        "runId": "run-subject-1",
+                        "command": f"test subject --id subject/{subject_id}",
+                        "finalStatus": "ok",
+                        "phaseResults": [],
+                        "subjectResults": [
+                            {
+                                "subjectId": subject_id,
+                                "requestedGoalId": "correctness.platform",
+                                "status": "ok",
+                                "subjectSummaryPath": (
+                                    f"artifacts/subjects/{subject_id}/runs/run-subject-1/subject-report/summary.json"
+                                ),
+                            }
+                        ],
+                        "suiteResults": [{"suiteId": suite_id, "status": "ok"}],
+                        "errors": [],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            result = test_module.handle(
+                {"id": "test-summary", "handler": "test.dispatch"},
+                repo_root,
+                "windows",
+                "test summary --run run-subject-1",
+                {},
+                {"run": "run-subject-1"},
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+        self.assertEqual("ok", result.status)
+        self.assertIn("run-subject-1", result.text or "")
+        self.assertIn(f"ok: {subject_id}", result.text or "")
+        self.assertIn(f"ok: {suite_id}", result.text or "")
+
     def test_test_summary_reads_latest_summary(self) -> None:
-        test_module = load_module(TEST_MODULE_PATH, "booming_run_test_summary")
+        test_module = load_module(TEST_MODULE_PATH, "chaos_run_test_summary")
+        subject_id = "fixture-entry-beta"
+        suite_ids = ["fixture-suite-beta", "workflow/fixture-pipeline"]
 
         TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
         repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
@@ -55,15 +116,17 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
                         ],
                         "subjectResults": [
                             {
-                                "subjectId": "HelloWorldObject",
+                                "subjectId": subject_id,
                                 "requestedGoalId": "correctness.platform",
                                 "status": "fail",
-                                "subjectSummaryPath": "artifacts/subjects/HelloWorldObject/subject-report/summary.json",
+                                "subjectSummaryPath": (
+                                    f"artifacts/subjects/{subject_id}/runs/run-1/subject-report/summary.json"
+                                ),
                             }
                         ],
                         "suiteResults": [
-                            {"suiteId": "smoke/HelloWorld", "status": "ok"},
-                            {"suiteId": "workflow/roadmap-0-macos", "status": "ok"},
+                            {"suiteId": suite_ids[0], "status": "ok"},
+                            {"suiteId": suite_ids[1], "status": "ok"},
                         ],
                         "errors": [],
                     }
@@ -87,11 +150,12 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
         self.assertIn("Phases:", result.text or "")
         self.assertIn("ok: code", result.text or "")
         self.assertIn("Subjects:", result.text or "")
-        self.assertIn("fail: HelloWorldObject", result.text or "")
-        self.assertIn("workflow/roadmap-0-macos", result.text or "")
+        self.assertIn(f"fail: {subject_id}", result.text or "")
+        self.assertIn(suite_ids[1], result.text or "")
 
     def test_test_watch_reads_latest_events(self) -> None:
-        test_module = load_module(TEST_MODULE_PATH, "booming_run_test_watch")
+        test_module = load_module(TEST_MODULE_PATH, "chaos_run_test_watch")
+        subject_id = "fixture-entry-gamma"
 
         TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
         repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
@@ -119,12 +183,14 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
                                         {"phaseId": "module", "status": "ok"},
                                         {"phaseId": "system", "status": "ok"},
                                     ],
-                                    "subjectResults": [
+                                "subjectResults": [
                                         {
-                                            "subjectId": "HelloWorldObject",
+                                            "subjectId": subject_id,
                                             "requestedGoalId": "correctness.platform",
                                             "status": "ok",
-                                            "subjectSummaryPath": "artifacts/subjects/HelloWorldObject/subject-report/summary.json",
+                                            "subjectSummaryPath": (
+                                                f"artifacts/subjects/{subject_id}/runs/run-2/subject-report/summary.json"
+                                            ),
                                         }
                                     ],
                                 },
@@ -155,7 +221,7 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
         self.assertIn("ok: module", result.text or "")
         self.assertIn("ok: system", result.text or "")
         self.assertIn("Subjects:", result.text or "")
-        self.assertIn("ok: HelloWorldObject", result.text or "")
+        self.assertIn(f"ok: {subject_id}", result.text or "")
 
 
 if __name__ == "__main__":

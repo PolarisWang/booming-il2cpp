@@ -29,7 +29,7 @@ objectType: guide
 
 subject-aware perf baseline 的正式路径固定为：
 
-`tests/perf/subjects/<subject-id>/<matrix-id>/baselines/<host>.json`
+见 `subject-perf-and-smoke-baselines-runs.md` 中的正式 baseline 路径规则。
 
 排查 perf 回归时，优先查看这个 baseline，而不是回退到旧 suite perf 路径。
 
@@ -45,8 +45,8 @@ subject-aware perf baseline 的正式路径固定为：
 
 之后，优先按这个顺序定位结果：
 
-1. `artifacts/subjects/<subject-id>/subject-report/summary.json`
-2. `artifacts/subjects/<subject-id>/matrices/<matrix-id>/report.json`
+1. 见 `subject-perf-and-smoke-baselines-runs.md` 中的 run-scoped `subject-report/summary.json`
+2. 见 `subject-perf-and-smoke-baselines-runs.md` 中的 run-scoped `pipeline-report/report.json`
 3. `artifacts/subjects/<subject-id>/matrices/<matrix-id>/report/summary.json`
 4. `artifacts/subjects/<subject-id>/matrices/<matrix-id>/report/baseline-compare.json`
 5. `artifacts/subjects/<subject-id>/matrices/<matrix-id>/report/samples.json`
@@ -57,3 +57,4 @@ subject-aware perf baseline 的正式路径固定为：
 - 不要把 subject perf baseline 继续塞回旧 suite perf 路径
 - 不要因为 canonical source 已迁移，就删除 legacy smoke 项目目录
 - 不要绕过 `run test subject --id subject/<subject-id>` 手工拼 perf 流程
+> 2026-04-07 更新：本页旧内容中的 `tests/perf/subjects/...` 与非 run-scoped report 路径已经过时。活动规则以 [`subject-perf-and-smoke-baselines-runs.md`](./subject-perf-and-smoke-baselines-runs.md) 为准。

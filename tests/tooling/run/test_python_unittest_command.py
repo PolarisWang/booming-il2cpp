@@ -28,7 +28,7 @@ def load_module(path: Path, module_name: str):
 
 class PythonUnittestCommandTests(unittest.TestCase):
     def test_python_unittest_kind_runs_module_with_current_python(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "booming_run_test_command_python_unittest")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_python_unittest")
         completed = SimpleNamespace(returncode=0, stdout="ok\n", stderr="")
 
         with patch.object(test_module, "run_process", return_value=completed) as run_mock:
@@ -38,8 +38,8 @@ class PythonUnittestCommandTests(unittest.TestCase):
                     "handler": "test.dispatch",
                     "kind": "python-unittest",
                     "target": "managed-closure-bundle",
-                    "test_module": "tests.unit.run.test_stage3_managed_minimal_closure",
-                    "artifacts": ["artifacts/proof/managed-closure/HelloWorldObject"],
+                    "test_module": "tests.unit.run.test_managed_closure_contract_bundle",
+                    "artifacts": ["contracts/artifacts/v0/samples"],
                 },
                 REPO_ROOT,
                 "windows",
@@ -48,11 +48,11 @@ class PythonUnittestCommandTests(unittest.TestCase):
 
         self.assertEqual("ok", result.status)
         run_mock.assert_called_once_with(
-            [sys.executable, "-m", "unittest", "tests.unit.run.test_stage3_managed_minimal_closure"],
+            [sys.executable, "-m", "unittest", "tests.unit.run.test_managed_closure_contract_bundle"],
             cwd=REPO_ROOT,
         )
         self.assertEqual(
-            [str((REPO_ROOT / "artifacts" / "proof" / "managed-closure" / "HelloWorldObject").resolve())],
+            [str((REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples").resolve())],
             result.payload["artifacts"],
         )
 
