@@ -12,6 +12,7 @@ from typing import Any, Callable
 try:
     from ..common import combine_process_output, run_process
     from ..result import CommandResult
+    from .. import project_workspace as workspace_module
     from .. import tooling as tooling_module
     from ..testing import reporting as reporting_module
     from ..testing import subject_executor as subject_executor_module
@@ -21,6 +22,7 @@ except ImportError:
     sys.path.insert(0, str(root))
     from common import combine_process_output, run_process
     from result import CommandResult
+    import project_workspace as workspace_module
     import tooling as tooling_module
     from testing import reporting as reporting_module
     from testing import subject_executor as subject_executor_module
@@ -504,16 +506,47 @@ def _build_platform_gate(
     return _success(command_text, host_platform, command.get("target"), output, [str(binary_dir)])
 
 
+def _build_project_workspace(
+    command: dict,
+    repo_root: Path,
+    host_platform: str,
+    command_text: str,
+    options: dict[str, object] | None = None,
+) -> CommandResult:
+    try:
+        project_kind = str(command.get("project_kind") or "")
+        if project_kind == "subject":
+            outcome = workspace_module.build_subject_workspace(repo_root, host_platform, dict(options or {}))
+        elif project_kind == "core":
+            outcome = workspace_module.build_core_workspace(repo_root, host_platform, dict(options or {}))
+        else:
+            raise RuntimeError(f"unsupported project workspace kind: {project_kind}")
+    except Exception as error:
+        return _failure(command_text, host_platform, command.get("target"), str(error), [str(error)])
+
+    return _success(
+        command_text,
+        host_platform,
+        command.get("target"),
+        str(outcome.get("consoleText") or ""),
+        list(outcome.get("artifacts") or []),
+        important_outputs=list(outcome.get("importantOutputs") or []),
+    )
+
+
 def handle(
     command: dict,
     repo_root: Path,
     host_platform: str,
     command_text: str,
+    options: dict[str, object] | None = None,
     progress_callback: Callable[[dict[str, Any]], None] | None = None,
 ) -> CommandResult:
     kind = command["kind"]
     if kind == "batch":
         return _build_batch(command, repo_root, host_platform, command_text, progress_callback=progress_callback)
+    if kind == "project-workspace":
+        return _build_project_workspace(command, repo_root, host_platform, command_text, options)
     if kind == "native-contract":
         return _build_native_contract(command, repo_root, host_platform, command_text, progress_callback=progress_callback)
     if kind == "smoke-project":

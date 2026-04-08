@@ -111,6 +111,15 @@ class CommandManifestTests(unittest.TestCase):
         self.assertNotIn(legacy_build_command_id, visible_command_ids)
         self.assertNotIn(legacy_run_command_id, visible_command_ids)
         self.assertNotIn("verify-roadmap-0-windows", visible_command_ids)
+        self.assertTrue(
+            {
+                "generate-project-subject",
+                "generate-project-core",
+                "build-project-subject",
+                "build-project-core",
+                "deploy-core",
+            }.issubset(visible_command_ids)
+        )
 
     def test_manifest_routes_trace_checks_through_subject_entries(self) -> None:
         manifest = json.loads(RUN_MANIFEST_PATH.read_text(encoding="utf-8"))
@@ -274,6 +283,56 @@ class CommandManifestTests(unittest.TestCase):
 
         self.assertIsNone(parsed["command"])
         self.assertEqual("verify roadmap-0", parsed["command_text"])
+
+    def test_parse_cli_supports_project_and_deploy_commands(self) -> None:
+        manifest_module = load_manifest_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        generate_subject = manifest_module.parse_cli(
+            ["generate", "project", "subject", "--id", "subject/HelloWorldObject"],
+            False,
+            manifest,
+            "windows",
+        )
+        self.assertEqual("generate-project-subject", generate_subject["command"]["id"])
+        self.assertEqual("subject/HelloWorldObject", generate_subject["options"]["id"])
+
+        generate_core = manifest_module.parse_cli(
+            ["generate", "project", "core", "--host", "windows", "--all-targets"],
+            False,
+            manifest,
+            "windows",
+        )
+        self.assertEqual("generate-project-core", generate_core["command"]["id"])
+        self.assertEqual("windows", generate_core["options"]["host"])
+        self.assertTrue(generate_core["options"]["all-targets"])
+
+        build_subject = manifest_module.parse_cli(
+            ["build", "project", "subject", "--id", "subject/HelloWorldObject", "--matrix", "windows-managed-trace"],
+            False,
+            manifest,
+            "windows",
+        )
+        self.assertEqual("build-project-subject", build_subject["command"]["id"])
+        self.assertEqual("windows-managed-trace", build_subject["options"]["matrix"])
+
+        build_core = manifest_module.parse_cli(
+            ["build", "project", "core", "--host", "windows", "--target", "windows-x64-reference"],
+            False,
+            manifest,
+            "windows",
+        )
+        self.assertEqual("build-project-core", build_core["command"]["id"])
+        self.assertEqual("windows-x64-reference", build_core["options"]["target"])
+
+        deploy_core = manifest_module.parse_cli(
+            ["deploy", "core", "--host", "windows", "--all-targets"],
+            False,
+            manifest,
+            "windows",
+        )
+        self.assertEqual("deploy-core", deploy_core["command"]["id"])
+        self.assertTrue(deploy_core["options"]["all-targets"])
 
 
 if __name__ == "__main__":

@@ -348,6 +348,68 @@
       "examples": ["run build all"]
     },
     {
+      "id": "generate-project-subject",
+      "title": "Generate a subject debug workspace",
+      "group": "Build",
+      "handler": "project.dispatch",
+      "platforms": ["windows"],
+      "tokens": ["generate", "project", "subject"],
+      "syntax": "generate project subject --id subject/<subject-id> [--matrix <matrix-id>] [--all-targets] [--variant CHECK|PROFILE|SHIP] [--refresh-generated]",
+      "kind": "subject-workspace",
+      "show_in_menu": true,
+      "examples": ["run generate project subject --id subject/HelloWorldObject"]
+    },
+    {
+      "id": "generate-project-core",
+      "title": "Generate a core debug workspace",
+      "group": "Build",
+      "handler": "project.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["generate", "project", "core"],
+      "syntax": "generate project core [--host windows|macos|linux] [--target <target-id>] [--all-targets]",
+      "kind": "core-workspace",
+      "show_in_menu": true,
+      "examples": ["run generate project core --host windows --all-targets"]
+    },
+    {
+      "id": "build-project-subject",
+      "title": "Build a generated subject workspace",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": ["windows"],
+      "tokens": ["build", "project", "subject"],
+      "syntax": "build project subject --id subject/<subject-id> [--matrix <matrix-id>] [--all-targets]",
+      "kind": "project-workspace",
+      "project_kind": "subject",
+      "show_in_menu": true,
+      "examples": ["run build project subject --id subject/HelloWorldObject"]
+    },
+    {
+      "id": "build-project-core",
+      "title": "Build a generated core workspace",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["build", "project", "core"],
+      "syntax": "build project core [--host windows|macos|linux] [--target <target-id>] [--all-targets]",
+      "kind": "project-workspace",
+      "project_kind": "core",
+      "show_in_menu": true,
+      "examples": ["run build project core --host windows --target windows-x64-reference"]
+    },
+    {
+      "id": "deploy-core",
+      "title": "Produce the formal core deploy output",
+      "group": "Build",
+      "handler": "deploy.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["deploy", "core"],
+      "syntax": "deploy core [--host windows|macos|linux] [--target <target-id>] [--all-targets]",
+      "kind": "core-deploy",
+      "show_in_menu": true,
+      "examples": ["run deploy core --host windows --all-targets"]
+    },
+    {
       "id": "build-native-contract-abi",
       "title": "Build the native ABI contract smoke target",
       "group": "Build",

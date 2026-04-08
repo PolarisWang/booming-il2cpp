@@ -18,6 +18,7 @@
 | 文档 | 主题 | 说明 |
 |------|------|------|
 | [`统一入口脚本.md`](./%E7%BB%9F%E4%B8%80%E5%85%A5%E5%8F%A3%E8%84%9A%E6%9C%AC.md) | 统一入口 `run.*` | 说明 bootstrap、全屏 TUI、prepare/clean、`--json` 和 harness 生命周期 |
+| [`unified-project-workspaces-and-deploy-core.md`](./unified-project-workspaces-and-deploy-core.md) | 工程工作区与正式部署 | 说明 `generate/build project`、`deploy core`、`subject-exec` 刷新规则和 `artifacts/projects/**` / `deploy/core/**` 边界 |
 | [`统一测试框架.md`](./%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md) | 统一测试域 `run test` | 说明 suite manifest、日志目录、事件流、红绿灯覆盖、性能基线和批量执行规则 |
 | [`Claude技能测试入口.md`](./Claude%E6%8A%80%E8%83%BD%E6%B5%8B%E8%AF%95%E5%85%A5%E5%8F%A3.md) | Claude 测试入口 | 说明 `.codex/tests/claude-code/` 的运行入口 |
 
@@ -27,6 +28,7 @@
 
 ## 最近更新
 
+- `2026-04-08`：新增 `unified-project-workspaces-and-deploy-core.md`，沉淀 `generate/build project`、`deploy core`、`subject-exec` 手动刷新和正式产物边界。
 - `2026-04-04`：更新 `统一测试框架.md`，补充 pipeline 的 `phasePlan[]` / `phaseResults[]` 结果契约，以及 `summary.json` / `final-summary` 的分层结果输出规则。
 - `2026-04-04`：更新 `统一测试框架.md` 与 `统一入口脚本.md`，补充 `run test watch` / `run test summary` 入口，以及交互式测试运行态实时进度屏和 `current.json` / `last.json` 指针规则。
 - `2026-04-04`：更新 `统一测试框架.md`，补充 `run test watch` 对 `pipeline` 对象的 phase-aware 终态展示规则，统一 `watch` 与 `summary` 的 `Phases:` 语义。

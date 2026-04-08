@@ -37,3 +37,9 @@
   - 按五段式结构细化 engine proof 在 `analysis/generated/runtime.manifest.json` 与 `report.json` 中的证据落点、局部 report 复用策略与推荐 contract。
 - `20260407-15-phase-a-engine-summary-consumer-boundary-v1-01.md`
   - 按五段式结构细化 `engineProofProfile / engine*Summary / engineProofSummary` 的主消费者、禁止消费边界与推荐 public surface 入口。
+- `20260408-01-phase-a-layered-core-pipeline-concrete-responsibilities-v1-01.md`
+  - 用两个最小 C# 例子把 `Loader / SemanticWorld / Linker / CodeGen / Emitter` 的推荐分层职责具体走一遍，并明确各层的非职责边界。
+- `20260408-02-phase-a-linker-output-contract-v1-01.md`
+  - 细化 `Linker` 在 B 方案下的最小输出 contract，收敛为 retained closure + external managed dependencies + declarative reasons，而不侵入 lowering/runtime/host 层。
+- `20260408-03-phase-a-reason-taxonomy-granularity-v1-01.md`
+  - 比较纯语义层 reason 与双层 reason 的架构差异，明确方案 3 的增量价值主要在 semantic-to-implementation traceability，而不是新的核心编译能力。

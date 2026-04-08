@@ -8,10 +8,12 @@ from typing import Any, Callable
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from commands import clean as clean_commands
+    from commands import deploy as deploy_commands
     from commands import doctor as doctor_commands
     from commands import build as build_commands
     from commands import inspect as inspect_commands
     from commands import prepare as prepare_commands
+    from commands import project as project_commands
     from commands import test as test_commands
     import manifest as manifest_module
     import operation_reporting as operation_reporting_module
@@ -21,10 +23,12 @@ if __package__ in (None, ""):
     from result import CommandResult
 else:
     from .commands import clean as clean_commands
+    from .commands import deploy as deploy_commands
     from .commands import doctor as doctor_commands
     from .commands import build as build_commands
     from .commands import inspect as inspect_commands
     from .commands import prepare as prepare_commands
+    from .commands import project as project_commands
     from .commands import test as test_commands
     from . import manifest as manifest_module
     from . import operation_reporting as operation_reporting_module
@@ -34,7 +38,7 @@ else:
     from .result import CommandResult
 
 
-OPERATION_HANDLERS = {"build.dispatch", "prepare.dispatch"}
+OPERATION_HANDLERS = {"build.dispatch", "prepare.dispatch", "project.dispatch", "deploy.dispatch"}
 
 
 def resolve_repo_root() -> Path:
@@ -305,8 +309,19 @@ def execute_command(
             text="bootstrap is handled by the wrapper. Use run bootstrap --yes.\n",
         )
     if command["handler"] == "build.dispatch":
-        result = build_commands.handle(command, repo_root, host_platform, command_text, progress_callback=progress_callback)
+        result = build_commands.handle(
+            command,
+            repo_root,
+            host_platform,
+            command_text,
+            options or {},
+            progress_callback=progress_callback,
+        )
         return add_legacy_test_migration_guidance(command, result)
+    if command["handler"] == "project.dispatch":
+        return project_commands.handle(command, repo_root, host_platform, command_text, options or {})
+    if command["handler"] == "deploy.dispatch":
+        return deploy_commands.handle(command, repo_root, host_platform, command_text, options or {})
     if command["handler"] == "test.dispatch":
         result = test_commands.handle(
             command,
