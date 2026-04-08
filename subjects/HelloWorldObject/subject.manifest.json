@@ -185,6 +185,7 @@
           "scope": "matrix",
           "bucket": "runtime",
           "dependsOn": [
+            "host-input-build",
             "runtime-observe"
           ]
         },

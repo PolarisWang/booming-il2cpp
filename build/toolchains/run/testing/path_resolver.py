@@ -56,5 +56,4 @@ def contract_roots(repo_root: Path, *, version: str = "v0") -> dict[str, Path]:
         "nativeSampleRoot": native_version_root / "samples",
         "artifactSampleCompatibilityRoot": repo_root / "contracts" / "examples" / version / "artifacts",
         "nativeSampleCompatibilityRoot": repo_root / "contracts" / "native" / "examples" / version,
-        "analysisCompatibilityExampleRoot": repo_root / "analysis" / "contracts" / "examples",
     }

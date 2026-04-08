@@ -13,6 +13,8 @@ try:
     from ..common import combine_process_output, run_process
     from ..result import CommandResult
     from .. import tooling as tooling_module
+    from ..testing import reporting as reporting_module
+    from ..testing import subject_executor as subject_executor_module
     from ..testing.events import build_event
 except ImportError:
     root = Path(__file__).resolve().parents[1]
@@ -20,6 +22,8 @@ except ImportError:
     from common import combine_process_output, run_process
     from result import CommandResult
     import tooling as tooling_module
+    from testing import reporting as reporting_module
+    from testing import subject_executor as subject_executor_module
     from testing.events import build_event
 
 
@@ -299,17 +303,31 @@ def _write_gate_record(
     host_platform: str,
     preset: str,
     notes: str,
+    subject_id: str | None = None,
+    matrix_id: str | None = None,
+    subject_run_id: str | None = None,
+    trace_paths: list[str] | None = None,
 ) -> None:
+    payload: dict[str, Any] = {
+        "gateName": gate_name,
+        "hostProfile": host_platform,
+        "status": "passed",
+        "preset": preset,
+        "notes": notes,
+    }
+    if subject_id:
+        payload["subjectId"] = subject_id
+    if matrix_id:
+        payload["matrixId"] = matrix_id
+    if subject_run_id:
+        payload["subjectRunId"] = subject_run_id
+    if trace_paths:
+        payload["tracePaths"] = list(trace_paths)
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(
         json.dumps(
-            {
-                "gateName": gate_name,
-                "hostProfile": host_platform,
-                "status": "passed",
-                "preset": preset,
-                "notes": notes,
-            },
+            payload,
             indent=2,
         ),
         encoding="utf-8",
@@ -333,84 +351,66 @@ def _build_reference_desktop_gate(
 
     requested_binary_dir = repo_root / command["binary_dir"]
     binary_dir = allocate_run_scoped_binary_dir(requested_binary_dir)
-    trace_output = repo_root / command["trace_output_path"]
     gate_record_path = repo_root / command["gate_record_path"]
-    host_embedding_project = repo_root / "tests" / "smoke" / "input" / "HostEmbeddingLite" / "HostEmbeddingLite.csproj"
-    host_embedding_dll = repo_root / "artifacts" / "smoke" / "bin" / "HostEmbeddingLite" / "Release" / "net8.0" / "HostEmbeddingLite.dll"
-    trace_output.parent.mkdir(parents=True, exist_ok=True)
 
     output_parts: list[str] = []
     if bootstrap.output.strip():
         output_parts.append(bootstrap.output.strip())
 
-    _emit_event(progress_callback, event_type="stage-start", completed=0, total=5, active_unit="configure")
+    _emit_event(progress_callback, event_type="stage-start", completed=0, total=3, active_unit="configure")
     configure = run_process([cmake_path, "--preset", command["preset"], "-B", str(binary_dir)], cwd=repo_root, env=cmake_env)
     configure_output = combine_process_output(configure)
     if configure_output:
         output_parts.append(configure_output)
     if configure.returncode != 0:
-        _emit_event(progress_callback, event_type="progress", completed=0, total=5, active_unit="configure", step_status="fail")
+        _emit_event(progress_callback, event_type="progress", completed=0, total=3, active_unit="configure", step_status="fail")
         return _failure(command_text, host_platform, command.get("target"), "\n".join(output_parts), ["cmake preset configure failed"])
 
-    _emit_event(progress_callback, event_type="progress", completed=1, total=5, active_unit="configure", step_status="ok")
-    _emit_event(progress_callback, event_type="stage-start", completed=1, total=5, active_unit="build")
+    _emit_event(progress_callback, event_type="progress", completed=1, total=3, active_unit="configure", step_status="ok")
+    _emit_event(progress_callback, event_type="stage-start", completed=1, total=3, active_unit="build")
     build = run_process([cmake_path, "--build", str(binary_dir)], cwd=repo_root, env=cmake_env)
     build_output = combine_process_output(build)
     if build_output:
         output_parts.append(build_output)
     if build.returncode != 0:
-        _emit_event(progress_callback, event_type="progress", completed=1, total=5, active_unit="build", step_status="fail")
+        _emit_event(progress_callback, event_type="progress", completed=1, total=3, active_unit="build", step_status="fail")
         return _failure(command_text, host_platform, command.get("target"), "\n".join(output_parts), ["cmake preset build failed"])
 
-    _emit_event(progress_callback, event_type="progress", completed=2, total=5, active_unit="build", step_status="ok")
-    _emit_event(progress_callback, event_type="stage-start", completed=2, total=5, active_unit="smoke-build")
-    smoke_build = run_process(["dotnet", "build", str(host_embedding_project), "-c", "Release"], cwd=repo_root)
-    smoke_build_output = combine_process_output(smoke_build)
-    if smoke_build_output:
-        output_parts.append(smoke_build_output)
-    if smoke_build.returncode != 0:
-        _emit_event(progress_callback, event_type="progress", completed=2, total=5, active_unit="smoke-build", step_status="fail")
-        return _failure(command_text, host_platform, command.get("target"), "\n".join(output_parts), ["HostEmbeddingLite build failed"])
+    _emit_event(progress_callback, event_type="progress", completed=2, total=3, active_unit="build", step_status="ok")
+    _emit_event(progress_callback, event_type="stage-start", completed=2, total=3, active_unit="subject-trace")
+    subject_run_id = reporting_module.build_run_id(host_platform)
+    try:
+        execution_result = subject_executor_module.execute_subject_matrix(
+            repo_root,
+            str(command["subject_id"]),
+            goal_id=str(command.get("goal_id") or "") or None,
+            matrix_id=str(command.get("matrix_id") or "") or None,
+            run_id=subject_run_id,
+        )
+    except Exception as error:
+        _emit_event(progress_callback, event_type="progress", completed=2, total=3, active_unit="subject-trace", step_status="fail")
+        error_text = str(error)
+        combined_output = "\n".join(part for part in [*output_parts, error_text] if part)
+        return _failure(command_text, host_platform, command.get("target"), combined_output, [error_text])
 
-    _emit_event(progress_callback, event_type="progress", completed=3, total=5, active_unit="smoke-build", step_status="ok")
-    _emit_event(progress_callback, event_type="stage-start", completed=3, total=5, active_unit="trace-export")
-    trace_export = run_process(
-        [
-            "dotnet",
-            str(host_embedding_dll),
-            "--trace-platform",
-            command["trace_platform"],
-            "--trace-output",
-            str(trace_output),
-        ],
-        cwd=repo_root,
-    )
-    trace_export_output = combine_process_output(trace_export)
-    if trace_export_output:
-        output_parts.append(trace_export_output)
-    if trace_export.returncode != 0:
-        _emit_event(progress_callback, event_type="progress", completed=3, total=5, active_unit="trace-export", step_status="fail")
-        return _failure(command_text, host_platform, command.get("target"), "\n".join(output_parts), ["trace export failed"])
+    execution_errors = [str(item) for item in list(execution_result.get("errors") or []) if str(item)]
+    if str(execution_result.get("status") or "fail") != "ok":
+        _emit_event(progress_callback, event_type="progress", completed=2, total=3, active_unit="subject-trace", step_status="fail")
+        combined_output = "\n".join(part for part in [*output_parts, *execution_errors] if part)
+        return _failure(
+            command_text,
+            host_platform,
+            command.get("target"),
+            combined_output,
+            execution_errors or ["subject trace pipeline failed"],
+        )
 
-    _emit_event(progress_callback, event_type="progress", completed=4, total=5, active_unit="trace-export", step_status="ok")
-    _emit_event(progress_callback, event_type="stage-start", completed=4, total=5, active_unit="trace-compare")
-    compare = run_process(
-        [
-            sys.executable,
-            str(repo_root / "tests" / "contracts" / "trace" / "compare-warmup-trace.py"),
-            str(repo_root / command["expected_trace_path"]),
-            str(trace_output),
-        ],
-        cwd=repo_root,
-    )
-    compare_output = combine_process_output(compare)
-    if compare_output:
-        output_parts.append(compare_output)
-    if compare.returncode != 0:
-        _emit_event(progress_callback, event_type="progress", completed=4, total=5, active_unit="trace-compare", step_status="fail")
-        return _failure(command_text, host_platform, command.get("target"), "\n".join(output_parts), ["trace compare failed"])
+    trace_paths = subject_executor_module.trace_paths_from_execution(repo_root, execution_result)
+    if not trace_paths:
+        _emit_event(progress_callback, event_type="progress", completed=2, total=3, active_unit="subject-trace", step_status="fail")
+        return _failure(command_text, host_platform, command.get("target"), "\n".join(output_parts), ["subject trace pipeline produced no trace artifacts"])
 
-    _emit_event(progress_callback, event_type="progress", completed=5, total=5, active_unit="trace-compare", step_status="ok")
+    _emit_event(progress_callback, event_type="progress", completed=3, total=3, active_unit="subject-trace", step_status="ok")
 
     _write_gate_record(
         gate_record_path,
@@ -418,9 +418,14 @@ def _build_reference_desktop_gate(
         host_platform=host_platform,
         preset=command["gate_preset"],
         notes=command["gate_notes"],
+        subject_id=str(command.get("subject_id") or ""),
+        matrix_id=str(command.get("matrix_id") or ""),
+        subject_run_id=subject_run_id,
+        trace_paths=trace_paths,
     )
 
-    artifacts = [str(binary_dir), str(trace_output), str(gate_record_path)]
+    trace_artifacts = [str(repo_root / trace_path) for trace_path in trace_paths]
+    artifacts = [str(binary_dir), *trace_artifacts, str(gate_record_path)]
     for artifact in artifacts:
         _emit_event(progress_callback, event_type="artifact", path=artifact)
 
@@ -432,7 +437,10 @@ def _build_reference_desktop_gate(
         artifacts,
         important_outputs=[
             {"label": "Reference preset output", "path": str(binary_dir)},
-            {"label": "Warmup trace", "path": str(trace_output)},
+            *[
+                {"label": f"Subject trace {index + 1}", "path": artifact}
+                for index, artifact in enumerate(trace_artifacts)
+            ],
             {"label": "Gate record", "path": str(gate_record_path)},
         ],
     )

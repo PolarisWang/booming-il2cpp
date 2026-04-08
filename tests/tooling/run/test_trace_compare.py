@@ -79,33 +79,54 @@ class TraceCompareTests(unittest.TestCase):
         self.assertEqual(0, completed.returncode, msg=completed.stdout + completed.stderr)
         self.assertIn("Warmup trace compare passed", completed.stdout)
 
-    def test_trace_compare_command_uses_python_comparer_on_macos(self) -> None:
+    def test_trace_compare_command_uses_subject_artifacts_on_macos(self) -> None:
         test_module = load_module(TEST_MODULE_PATH, "chaos_run_trace_compare")
         bootstrap = test_module.tooling_module.ToolBootstrapResult(
             ready=True,
             output="",
             errors=[],
         )
+        run_id = "20260408-macos-0001"
         command = {
             "id": "test-trace-compare-macos",
             "kind": "trace-compare",
-            "trace_platform": "macos",
-            "expected_trace_path": "tests/contracts/trace/snapshots/macos-warmup-trace.snapshot.json",
-            "actual_trace_path": "artifacts/run/trace/macos-warmup-trace.runtime.json",
+            "subject_id": "FixtureTraceSubject",
+            "goal_id": "correctness.platform",
+            "matrix_id": "macos-managed-trace",
             "target": "macos",
         }
-        completed = subprocess.CompletedProcess(["python3"], 0, stdout="ok", stderr="")
+        execution_result = {
+            "subjectId": "FixtureTraceSubject",
+            "matrixId": "macos-managed-trace",
+            "goalId": "correctness.platform",
+            "status": "ok",
+            "stageResults": [],
+            "errors": [],
+        }
+        trace_output = REPO_ROOT / "artifacts" / "subjects" / "FixtureTraceSubject" / "runs" / run_id / "matrices" / "macos-managed-trace" / "runtime" / "trace.runtime.json"
 
         with patch.object(test_module.tooling_module, "ensure_dotnet_available", return_value=bootstrap):
-            with patch.object(test_module, "run_process", side_effect=[completed, completed, completed]) as run_process_mock:
-                result = test_module.handle(command, REPO_ROOT, "macos", "test contract trace-compare-macos")
+            with patch.object(test_module.reporting_module, "build_run_id", return_value=run_id):
+                with patch.object(test_module.subject_executor_module, "execute_subject_matrix", return_value=execution_result) as execute_subject_matrix_mock:
+                    with patch.object(
+                        test_module.subject_executor_module,
+                        "trace_paths_from_execution",
+                        return_value=["artifacts/subjects/FixtureTraceSubject/runs/20260408-macos-0001/matrices/macos-managed-trace/runtime/trace.runtime.json"],
+                    ) as trace_paths_mock:
+                        with patch.object(test_module, "run_process") as run_process_mock:
+                            result = test_module.handle(command, REPO_ROOT, "macos", "test contract trace-compare-macos")
 
-        compare_args = run_process_mock.call_args_list[2].args[0]
-        self.assertEqual(0, result.payload.get("exitCode", 0))
-        self.assertEqual(sys.executable, compare_args[0])
-        self.assertTrue(
-            str(compare_args[1]).replace("\\", "/").endswith("tests/contracts/trace/compare-warmup-trace.py")
+        self.assertEqual("ok", result.status)
+        execute_subject_matrix_mock.assert_called_once_with(
+            REPO_ROOT,
+            "FixtureTraceSubject",
+            goal_id="correctness.platform",
+            matrix_id="macos-managed-trace",
+            run_id=run_id,
         )
+        trace_paths_mock.assert_called_once_with(REPO_ROOT, execution_result)
+        run_process_mock.assert_not_called()
+        self.assertEqual([str(trace_output)], result.payload["artifacts"])
 
 
 if __name__ == "__main__":

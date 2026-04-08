@@ -1129,45 +1129,47 @@ def _run_trace_compare(command: dict, repo_root: Path, host_platform: str, comma
     if not bootstrap.ready:
         return _failure(command_text, host_platform, command.get("target"), bootstrap.output, bootstrap.errors)
 
-    host_embedding_project = repo_root / "tests" / "smoke" / "input" / "HostEmbeddingLite" / "HostEmbeddingLite.csproj"
-    build = run_process(["dotnet", "build", str(host_embedding_project), "-c", "Release"], cwd=repo_root)
-    build_output = "\n".join(part for part in [bootstrap.output.strip(), combine_process_output(build)] if part)
-    if build.returncode != 0:
-        return _failure(command_text, host_platform, command.get("target"), build_output, ["HostEmbeddingLite build failed"])
+    output = bootstrap.output.strip()
+    run_id = reporting_module.build_run_id(host_platform)
+    try:
+        execution_result = subject_executor_module.execute_subject_matrix(
+            repo_root,
+            str(command["subject_id"]),
+            goal_id=str(command.get("goal_id") or "") or None,
+            matrix_id=str(command.get("matrix_id") or "") or None,
+            run_id=run_id,
+        )
+    except Exception as error:
+        error_text = str(error)
+        return _failure(
+            command_text,
+            host_platform,
+            command.get("target"),
+            "\n".join(part for part in [output, error_text] if part),
+            [error_text],
+        )
 
-    host_embedding_dll = repo_root / "artifacts" / "smoke" / "bin" / "HostEmbeddingLite" / "Release" / "net8.0" / "HostEmbeddingLite.dll"
-    trace_output = repo_root / command["actual_trace_path"]
-    trace_output.parent.mkdir(parents=True, exist_ok=True)
+    execution_errors = [str(item) for item in list(execution_result.get("errors") or []) if str(item)]
+    if str(execution_result.get("status") or "fail") != "ok":
+        return _failure(
+            command_text,
+            host_platform,
+            command.get("target"),
+            "\n".join(part for part in [output, *execution_errors] if part),
+            execution_errors or ["trace compare failed"],
+        )
 
-    export = run_process(
-        [
-            "dotnet",
-            str(host_embedding_dll),
-            "--trace-platform",
-            command["trace_platform"],
-            "--trace-output",
-            str(trace_output),
-        ],
-        cwd=repo_root,
+    trace_paths = subject_executor_module.trace_paths_from_execution(repo_root, execution_result)
+    if not trace_paths:
+        return _failure(command_text, host_platform, command.get("target"), output, ["trace compare produced no trace artifacts"])
+
+    return _success(
+        command_text,
+        host_platform,
+        command.get("target"),
+        output,
+        [str(repo_root / trace_path) for trace_path in trace_paths],
     )
-    export_output = combine_process_output(export)
-    if export.returncode != 0:
-        return _failure(command_text, host_platform, command.get("target"), "\n".join(part for part in [build_output, export_output] if part), ["trace export failed"])
-
-    compare_args = [
-        sys.executable,
-        str(repo_root / "tests" / "contracts" / "trace" / "compare-warmup-trace.py"),
-        str(repo_root / command["expected_trace_path"]),
-        str(trace_output),
-    ]
-
-    compare = run_process(compare_args, cwd=repo_root)
-    compare_output = combine_process_output(compare)
-    output = "\n".join(part for part in [build_output, export_output, compare_output] if part)
-    if compare.returncode != 0:
-        return _failure(command_text, host_platform, command.get("target"), output, ["trace compare failed"])
-
-    return _success(command_text, host_platform, command.get("target"), output, [str(trace_output)])
 
 
 def _run_contract_check(command: dict, repo_root: Path, host_platform: str, command_text: str) -> CommandResult:

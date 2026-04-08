@@ -11,7 +11,7 @@
 - `contracts/artifacts/v0/schemas/*.schema.json` 是 canonical schema
 - `contracts/artifacts/v0/samples/*.min.json` 是最小可读 sample
 - `contracts/artifacts/v0/snapshots/*.snapshot.json` 是 canonical baseline
-- `analysis/contracts/{schemas,examples}` 仅保留 compatibility mirror
+- 根目录 `analysis/` 已退役；run 期 analysis 产物只存在于 `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/...`
 
 ## Example 与 Snapshot 的分工
 

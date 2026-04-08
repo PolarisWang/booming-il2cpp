@@ -13,6 +13,9 @@
   "validationProfiles": {
     "managed-output": [
       "proof"
+    ],
+    "trace-platform": [
+      "proof"
     ]
   },
   "validation": {
@@ -75,6 +78,56 @@
           "bucket": "report",
           "dependsOn": [
             "runtime-managed-output"
+          ]
+        }
+      ]
+    },
+    {
+      "pipelineId": "managed-runtime-trace",
+      "displayName": "Managed runtime trace",
+      "stages": [
+        {
+          "stageId": "source-resolve",
+          "kind": "source-resolve",
+          "scope": "shared",
+          "bucket": "source",
+          "dependsOn": []
+        },
+        {
+          "stageId": "host-input-build",
+          "kind": "host-input-build",
+          "scope": "shared",
+          "bucket": "host-input",
+          "dependsOn": [
+            "source-resolve"
+          ]
+        },
+        {
+          "stageId": "runtime-managed-output",
+          "kind": "runtime-managed-output",
+          "scope": "matrix",
+          "bucket": "runtime",
+          "dependsOn": [
+            "host-input-build"
+          ]
+        },
+        {
+          "stageId": "runtime-trace-compare",
+          "kind": "runtime-trace-compare",
+          "scope": "matrix",
+          "bucket": "runtime",
+          "dependsOn": [
+            "host-input-build",
+            "runtime-managed-output"
+          ]
+        },
+        {
+          "stageId": "report-assemble",
+          "kind": "report-assemble",
+          "scope": "matrix",
+          "bucket": "report",
+          "dependsOn": [
+            "runtime-trace-compare"
           ]
         }
       ]
@@ -150,6 +203,60 @@
       "validationIntent": {
         "validationMode": "output",
         "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-managed-trace",
+      "pipelineId": "managed-runtime-trace",
+      "supportedGoals": [
+        "correctness.platform"
+      ],
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "dotnet-managed",
+        "runtimeProfile": "managed-trace"
+      },
+      "validationIntent": {
+        "validationMode": "trace",
+        "adaptationLevel": "traceable",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "macos-managed-trace",
+      "pipelineId": "managed-runtime-trace",
+      "supportedGoals": [
+        "correctness.platform"
+      ],
+      "executionContext": {
+        "hostPlatform": "macos-arm64",
+        "targetPlatform": "macos-arm64",
+        "toolchainProfile": "dotnet-managed",
+        "runtimeProfile": "managed-trace"
+      },
+      "validationIntent": {
+        "validationMode": "trace",
+        "adaptationLevel": "traceable",
         "expectedOutcome": "pass"
       },
       "artifactPlan": {

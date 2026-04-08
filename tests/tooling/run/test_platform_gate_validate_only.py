@@ -140,7 +140,7 @@ class PlatformGateValidateOnlyTests(unittest.TestCase):
 
 
 class PlatformGateCommandTests(unittest.TestCase):
-    def test_reference_desktop_gate_runs_preset_trace_and_gate_record(self) -> None:
+    def test_reference_desktop_gate_runs_preset_and_subject_trace_pipeline(self) -> None:
         build_module = load_module(BUILD_MODULE_PATH, "chaos_run_build_reference_desktop_gate")
         bootstrap = build_module.tooling_module.ToolBootstrapResult(
             ready=True,
@@ -149,32 +149,48 @@ class PlatformGateCommandTests(unittest.TestCase):
         )
         requested_dir = REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference"
         allocated_dir = requested_dir.parent / "windows-x64-reference-test-run"
-        trace_output = REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows" / "windows-warmup-trace.runtime.json"
+        run_id = "20260408-windows-0001"
+        trace_output = REPO_ROOT / "artifacts" / "subjects" / "FixtureTraceSubject" / "runs" / run_id / "matrices" / "windows-reference-trace" / "runtime" / "trace.runtime.json"
         gate_record = REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows" / "windows-reference-desktop.gate.json"
         completed = subprocess.CompletedProcess(["cmd"], 0, stdout="ok", stderr="")
+        execution_result = {
+            "subjectId": "FixtureTraceSubject",
+            "matrixId": "windows-reference-trace",
+            "goalId": "correctness.platform",
+            "status": "ok",
+            "stageResults": [],
+            "errors": [],
+        }
 
         with patch.object(build_module.tooling_module, "ensure_dotnet_available", return_value=bootstrap):
             with patch.object(build_module, "allocate_run_scoped_binary_dir", return_value=allocated_dir):
                 with patch.object(build_module, "run_process", return_value=completed) as run_process_mock:
-                    result = build_module.handle(
-                        {
-                            "id": "build-platform-windows-reference-desktop",
-                            "kind": "reference-desktop-gate",
-                            "target": "windows-reference-desktop",
-                            "preset": "windows-x64-reference",
-                            "binary_dir": "artifacts/presets/windows-x64-reference",
-                            "trace_platform": "windows",
-                            "trace_output_path": "artifacts/verify-roadmap-0/windows/windows-warmup-trace.runtime.json",
-                            "expected_trace_path": "tests/contracts/trace/snapshots/windows-warmup-trace.snapshot.json",
-                            "gate_record_path": "artifacts/verify-roadmap-0/windows/windows-reference-desktop.gate.json",
-                            "gate_name": "windows-reference-desktop",
-                            "gate_preset": "windows-x64-reference",
-                            "gate_notes": "Windows reference desktop gate passed with warmup trace compare.",
-                        },
-                        REPO_ROOT,
-                        "windows",
-                        "build platform windows-reference-desktop",
-                    )
+                    with patch.object(build_module.reporting_module, "build_run_id", return_value=run_id):
+                        with patch.object(build_module.subject_executor_module, "execute_subject_matrix", return_value=execution_result) as execute_subject_matrix_mock:
+                            with patch.object(
+                                build_module.subject_executor_module,
+                                "trace_paths_from_execution",
+                                return_value=["artifacts/subjects/FixtureTraceSubject/runs/20260408-windows-0001/matrices/windows-reference-trace/runtime/trace.runtime.json"],
+                            ) as trace_paths_mock:
+                                result = build_module.handle(
+                                    {
+                                        "id": "build-platform-windows-reference-desktop",
+                                        "kind": "reference-desktop-gate",
+                                        "target": "windows-reference-desktop",
+                                        "preset": "windows-x64-reference",
+                                        "binary_dir": "artifacts/presets/windows-x64-reference",
+                                        "subject_id": "FixtureTraceSubject",
+                                        "goal_id": "correctness.platform",
+                                        "matrix_id": "windows-reference-trace",
+                                        "gate_record_path": "artifacts/verify-roadmap-0/windows/windows-reference-desktop.gate.json",
+                                        "gate_name": "windows-reference-desktop",
+                                        "gate_preset": "windows-x64-reference",
+                                        "gate_notes": "Windows reference desktop gate passed with warmup trace compare.",
+                                    },
+                                    REPO_ROOT,
+                                    "windows",
+                                    "build platform windows-reference-desktop",
+                                )
 
         self.assertEqual("ok", result.status)
         self.assertEqual(
@@ -185,30 +201,15 @@ class PlatformGateCommandTests(unittest.TestCase):
             ["--build", str(allocated_dir)],
             run_process_mock.call_args_list[1].args[0][1:],
         )
-        self.assertEqual(
-            ["dotnet", "build", str(REPO_ROOT / "tests" / "smoke" / "input" / "HostEmbeddingLite" / "HostEmbeddingLite.csproj"), "-c", "Release"],
-            run_process_mock.call_args_list[2].args[0],
+        self.assertEqual(2, run_process_mock.call_count)
+        execute_subject_matrix_mock.assert_called_once_with(
+            REPO_ROOT,
+            "FixtureTraceSubject",
+            goal_id="correctness.platform",
+            matrix_id="windows-reference-trace",
+            run_id=run_id,
         )
-        self.assertEqual(
-            [
-                "dotnet",
-                str(REPO_ROOT / "artifacts" / "smoke" / "bin" / "HostEmbeddingLite" / "Release" / "net8.0" / "HostEmbeddingLite.dll"),
-                "--trace-platform",
-                "windows",
-                "--trace-output",
-                str(trace_output),
-            ],
-            run_process_mock.call_args_list[3].args[0],
-        )
-        self.assertEqual(
-            [
-                sys.executable,
-                str(REPO_ROOT / "tests" / "contracts" / "trace" / "compare-warmup-trace.py"),
-                str(REPO_ROOT / "tests" / "contracts" / "trace" / "snapshots" / "windows-warmup-trace.snapshot.json"),
-                str(trace_output),
-            ],
-            run_process_mock.call_args_list[4].args[0],
-        )
+        trace_paths_mock.assert_called_once_with(REPO_ROOT, execution_result)
         self.assertEqual(
             [str(allocated_dir), str(trace_output), str(gate_record)],
             result.payload["artifacts"],
@@ -223,30 +224,39 @@ class PlatformGateCommandTests(unittest.TestCase):
             errors=[],
         )
         success = subprocess.CompletedProcess(["cmd"], 0, stdout="ok", stderr="")
-        failure = subprocess.CompletedProcess(["python"], 1, stdout="", stderr="trace compare mismatch at root.warmup[0]")
+        execution_result = {
+            "subjectId": "FixtureTraceSubject",
+            "matrixId": "windows-reference-trace",
+            "goalId": "correctness.platform",
+            "status": "fail",
+            "stageResults": [],
+            "errors": ["trace compare mismatch at root.warmup[0]"],
+        }
 
         with patch.object(build_module.tooling_module, "ensure_dotnet_available", return_value=bootstrap):
             with patch.object(build_module, "allocate_run_scoped_binary_dir", return_value=REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference-test-run"):
-                with patch.object(build_module, "run_process", side_effect=[success, success, success, success, failure]):
-                    result = build_module.handle(
-                        {
-                            "id": "build-platform-windows-reference-desktop",
-                            "kind": "reference-desktop-gate",
-                            "target": "windows-reference-desktop",
-                            "preset": "windows-x64-reference",
-                            "binary_dir": "artifacts/presets/windows-x64-reference",
-                            "trace_platform": "windows",
-                            "trace_output_path": "artifacts/verify-roadmap-0/windows/windows-warmup-trace.runtime.json",
-                            "expected_trace_path": "tests/contracts/trace/snapshots/windows-warmup-trace.snapshot.json",
-                            "gate_record_path": "artifacts/verify-roadmap-0/windows/windows-reference-desktop.gate.json",
-                            "gate_name": "windows-reference-desktop",
-                            "gate_preset": "windows-x64-reference",
-                            "gate_notes": "Windows reference desktop gate passed with warmup trace compare.",
-                        },
-                        REPO_ROOT,
-                        "windows",
-                        "build platform windows-reference-desktop",
-                    )
+                with patch.object(build_module, "run_process", side_effect=[success, success]):
+                    with patch.object(build_module.reporting_module, "build_run_id", return_value="20260408-windows-0002"):
+                        with patch.object(build_module.subject_executor_module, "execute_subject_matrix", return_value=execution_result):
+                            result = build_module.handle(
+                                {
+                                    "id": "build-platform-windows-reference-desktop",
+                                    "kind": "reference-desktop-gate",
+                                    "target": "windows-reference-desktop",
+                                    "preset": "windows-x64-reference",
+                                    "binary_dir": "artifacts/presets/windows-x64-reference",
+                                    "subject_id": "FixtureTraceSubject",
+                                    "goal_id": "correctness.platform",
+                                    "matrix_id": "windows-reference-trace",
+                                    "gate_record_path": "artifacts/verify-roadmap-0/windows/windows-reference-desktop.gate.json",
+                                    "gate_name": "windows-reference-desktop",
+                                    "gate_preset": "windows-x64-reference",
+                                    "gate_notes": "Windows reference desktop gate passed with warmup trace compare.",
+                                },
+                                REPO_ROOT,
+                                "windows",
+                                "build platform windows-reference-desktop",
+                            )
 
         self.assertEqual("error", result.status)
         self.assertIn("trace compare mismatch at root.warmup[0]", result.payload["consoleText"])

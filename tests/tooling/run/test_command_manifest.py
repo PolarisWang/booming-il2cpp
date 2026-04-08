@@ -112,28 +112,24 @@ class CommandManifestTests(unittest.TestCase):
         self.assertNotIn(legacy_run_command_id, visible_command_ids)
         self.assertNotIn("verify-roadmap-0-windows", visible_command_ids)
 
-    def test_manifest_uses_canonical_tests_contracts_paths(self) -> None:
+    def test_manifest_routes_trace_checks_through_subject_entries(self) -> None:
         manifest = json.loads(RUN_MANIFEST_PATH.read_text(encoding="utf-8"))
         commands = {command["id"]: command for command in manifest["commands"]}
 
         self.assertEqual("tests/contracts/native/abi", commands["build-native-contract-abi"]["source_dir"])
         self.assertEqual("tests/contracts/native/bridge", commands["build-native-contract-bridge"]["source_dir"])
-        self.assertEqual(
-            "tests/contracts/trace/snapshots/windows-warmup-trace.snapshot.json",
-            commands["build-platform-windows-reference-desktop"]["expected_trace_path"],
-        )
-        self.assertEqual(
-            "tests/contracts/trace/snapshots/macos-warmup-trace.snapshot.json",
-            commands["build-platform-macos-reference-desktop"]["expected_trace_path"],
-        )
-        self.assertEqual(
-            "tests/contracts/trace/snapshots/windows-warmup-trace.snapshot.json",
-            commands["test-trace-compare-windows"]["expected_trace_path"],
-        )
-        self.assertEqual(
-            "tests/contracts/trace/snapshots/macos-warmup-trace.snapshot.json",
-            commands["test-trace-compare-macos"]["expected_trace_path"],
-        )
+        self.assertEqual("HostEmbeddingLite", commands["build-platform-windows-reference-desktop"]["subject_id"])
+        self.assertEqual("correctness.platform", commands["build-platform-windows-reference-desktop"]["goal_id"])
+        self.assertEqual("windows-managed-trace", commands["build-platform-windows-reference-desktop"]["matrix_id"])
+        self.assertEqual("HostEmbeddingLite", commands["build-platform-macos-reference-desktop"]["subject_id"])
+        self.assertEqual("correctness.platform", commands["build-platform-macos-reference-desktop"]["goal_id"])
+        self.assertEqual("macos-managed-trace", commands["build-platform-macos-reference-desktop"]["matrix_id"])
+        self.assertEqual("HostEmbeddingLite", commands["test-trace-compare-windows"]["subject_id"])
+        self.assertEqual("correctness.platform", commands["test-trace-compare-windows"]["goal_id"])
+        self.assertEqual("windows-managed-trace", commands["test-trace-compare-windows"]["matrix_id"])
+        self.assertEqual("HostEmbeddingLite", commands["test-trace-compare-macos"]["subject_id"])
+        self.assertEqual("correctness.platform", commands["test-trace-compare-macos"]["goal_id"])
+        self.assertEqual("macos-managed-trace", commands["test-trace-compare-macos"]["matrix_id"])
 
     def test_manifest_points_legacy_smoke_commands_at_subject_sources(self) -> None:
         manifest = json.loads(RUN_MANIFEST_PATH.read_text(encoding="utf-8"))

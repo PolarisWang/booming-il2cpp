@@ -1,37 +1,43 @@
-# Repo Layout (Roadmap 0)
+﻿# Repo Layout (Roadmap 0)
 
 ## Scope
 
-本文档描述的是 Roadmap 0 产品骨架与正式落点，不是整个仓库的排他性目录清单。
+本文描述当前仓库在 Roadmap 0 主线下的正式目录边界。
 
-Roadmap 0 产品骨架目录：
+## Canonical Top-Level Layout
 
-- `frontend/`: 前端集成接线与入口适配。
-- `analysis/`: 分析与语义处理能力。
-- `runtime/`: 运行时与桥接执行能力。
-- `codegen/`: 代码生成与目标输出组织。
-- `build/`: 编译/链接/打包/cross-compile 编排。
-- `tests/`: 验证入口、测试资产与 smoke 执行。
-- `contracts/`: schema/native/trace 等契约定义。
-- `third_party/`: vendored 源码正式落点（当前含 `third_party/scriban`）。
-- `artifacts/`: 中间构建输出、运行日志、验证记录与快照副本。
-- `deploy/`: 最终可分发或可部署的产物落点。
+- `src/`: il2cpp 核心实现
+- `build/`: 运行入口、toolchain、编排与辅助脚本
+- `subjects/`: subject 测试工程正式根，承载 `source/`、`validation/`、`expected/`、`baselines/`
+- `tests/`: 通用测试基础设施、通用验证脚本、registry 与平台 gate
+- `contracts/`: artifact/native/trace contract 的唯一顶层真源
+- `artifacts/`: 运行期和构建期可再生产物
+- `deploy/`: 最终可分发或可部署产物
+- `third_party/`: vendored 依赖
+- `docs/`: 架构文档与执行记录
+- `wiki/`: 长期知识沉淀
 
-仓库中的非产品骨架目录（示例）：
+## Source Layout
 
-- `docs/`: 设计、执行记录与架构文档。
-- `wiki/`: 项目知识沉淀。
+- `src/managed/Chaos.IL2CPP.Loader`
+- `src/managed/Chaos.IL2CPP.SemanticWorld`
+- `src/managed/Chaos.IL2CPP.Linker`
+- `src/managed/Chaos.IL2CPP.MetadataWriter`
+- `src/managed/Chaos.IL2CPP.CodeGen`
+- `src/managed/Chaos.IL2CPP.Pipeline`
+- `src/native/`
 
-历史迁移说明：
+这些目录共同承载分析、闭包、metadata、codegen 与 native runtime/bootstrap 能力。
 
-- 原 `3rd/scriban` 已迁移至 `third_party/scriban`。
-- `3rd/` 不再作为当前依赖落点，也不作为后续第三方接入目录。
+## Explicit Non-Goals
+
+- 根目录 `analysis/` 已退役，不再作为源码根、contract 根或长期兼容根
+- run-scoped analysis 产物只允许出现在 `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/...`
+- `tests/` 不承载某个具体 subject 的源码、unit test、perf harness 或 native proof host
 
 ## Boundary Rules
 
-- 目录间协作必须通过 `contracts/` 的显式契约，避免隐式耦合。
-- `third_party/` 只存放 vendored 源码，不承载工具链或构建产物。
-- 新增或维护中的第三方依赖统一落在 `third_party/`。
-- `artifacts/` 只承载临时或可再生输出，权威 snapshot 不放在此目录。
-- `deploy/` 只承载最终可分发或可部署产物，不回填脚本、模板或中间文件。
-- 平台验证门禁以 `host-verify-matrix.md` 与 `platform-gates.md` 为准。
+- 目录间协作必须通过 `contracts/` 的显式边界进行
+- `subjects/` 内的测试源码和 baseline 不得回流到 `tests/`
+- `artifacts/` 只承载可再生输出，不能作为 contract 真源
+- Windows native `cmake` scratch 目录即使落在系统临时目录，也不改变 canonical artifact 根

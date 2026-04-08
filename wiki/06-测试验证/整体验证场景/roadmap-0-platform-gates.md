@@ -29,9 +29,9 @@ objectType: guide
 - `system/roadmap-0-ios-packaging-gate` 把这条 gate 作为正式整体验证场景暴露给 registry 与 `run test system ...`。
 - `gate/linux-x64-packaging` 验证 Linux cross-compile / packaging 路由是否仍可在当前宿主上完成 configure/build 检查。
 - `system/roadmap-0-linux-packaging-gate` 把这条 gate 作为正式整体验证场景暴露给 registry 与 `run test system ...`。
-- `gate/windows-reference-desktop` 验证 Windows reference desktop 是否仍能完成 reference preset 构建、`HostEmbeddingLite` trace export 与 Windows warmup trace compare。
+- `gate/windows-reference-desktop` 验证 Windows reference desktop 是否仍能完成 reference preset 构建，并通过 `HostEmbeddingLite` 的 `windows-managed-trace` subject matrix 产出并校验 Windows warmup trace。
 - `system/roadmap-0-windows-reference-gate` 把这条 gate 作为正式整体验证场景暴露给 registry 与 `run test system ...`。
-- `gate/macos-reference-desktop` 验证 macOS reference desktop 是否仍能完成 reference preset 构建、`HostEmbeddingLite` trace export 与 macOS warmup trace compare。
+- `gate/macos-reference-desktop` 验证 macOS reference desktop 是否仍能完成 reference preset 构建，并通过 `HostEmbeddingLite` 的 `macos-managed-trace` subject matrix 产出并校验 macOS warmup trace。
 - `system/roadmap-0-macos-reference-gate` 把这条 gate 作为正式整体验证场景暴露给 registry 与 `run test system ...`。
 - 这条 gate 验证的是“矩阵可调度、路由可构建、shell 可落盘”，不是 Linux 目标平台的完整运行时闭环。
 - reference desktop gate 验证的是“参考桌面基线仍可构建并且 trace contract 未漂移”，不是把整条 `workflow/roadmap-0-*` 全量重跑一遍。
@@ -55,8 +55,9 @@ objectType: guide
   - `artifacts/logs/tests/<run-id>/summary.json`
   - `artifacts/logs/tests/<run-id>/console.log`
 - reference desktop gate 附加产物：
-  - `artifacts/verify-roadmap-0/windows/windows-warmup-trace.runtime.json`
-  - `artifacts/verify-roadmap-0/windows/windows-reference-desktop.gate.json`
-  - `artifacts/verify-roadmap-0/macos/macos-warmup-trace.runtime.json`
-  - `artifacts/verify-roadmap-0/macos/macos-reference-desktop.gate.json`
+  - gate record 仍落在 `artifacts/verify-roadmap-0/windows/windows-reference-desktop.gate.json`
+  - gate record 仍落在 `artifacts/verify-roadmap-0/macos/macos-reference-desktop.gate.json`
+  - 实际 trace runtime 证据改由 subject pipeline 落在 `artifacts/subjects/HostEmbeddingLite/runs/<run-id>/matrices/windows-managed-trace/runtime/trace.runtime.json`
+  - 实际 trace runtime 证据改由 subject pipeline 落在 `artifacts/subjects/HostEmbeddingLite/runs/<run-id>/matrices/macos-managed-trace/runtime/trace.runtime.json`
+  - 对应 matrix report 落在 `artifacts/subjects/HostEmbeddingLite/runs/<run-id>/matrices/<matrix-id>/pipeline-report/report.json`
 - 更完整的本地执行背景，继续参考 [`docs/architecture/roadmap-0/local-verification.md`](../../../docs/architecture/roadmap-0/local-verification.md)。

@@ -30,7 +30,7 @@ def load_module(path: Path, module_name: str):
 
 
 class PathResolverTests(unittest.TestCase):
-    def test_contract_roots_prefer_samples_and_keep_compatibility_roots(self) -> None:
+    def test_contract_roots_prefer_samples_without_root_analysis_compatibility_dir(self) -> None:
         resolver_module = load_module(PATH_RESOLVER_MODULE_PATH, "chaos_path_resolver_contract_roots")
 
         roots = resolver_module.contract_roots(REPO_ROOT)
@@ -55,10 +55,7 @@ class PathResolverTests(unittest.TestCase):
             REPO_ROOT / "contracts" / "native" / "examples" / "v0",
             roots["nativeSampleCompatibilityRoot"],
         )
-        self.assertEqual(
-            REPO_ROOT / "analysis" / "contracts" / "examples",
-            roots["analysisCompatibilityExampleRoot"],
-        )
+        self.assertNotIn("analysisCompatibilityExampleRoot", roots)
 
     def test_subject_helper_delegates_root_resolution_to_path_resolver(self) -> None:
         resolver_module = load_module(PATH_RESOLVER_MODULE_PATH, "chaos_path_resolver_subject_roots")

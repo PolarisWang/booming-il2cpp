@@ -24,7 +24,7 @@ Status: active
 - `contracts/artifacts/v0/samples`
 - `contracts/artifacts/v0/snapshots`
 
-`analysis/contracts/**` 只保留兼容镜像或历史资产。
+根目录 `analysis/` 已退役；subject 主线里的 analysis 只表示 run-scoped artifact bucket，而不是仓库顶层源码根。
 
 ## 3. Artifact Bucket Layout
 

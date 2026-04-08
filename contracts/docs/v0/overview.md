@@ -13,16 +13,11 @@
 - `contracts/native/v0/samples/`: native sample
 - `contracts/docs/v0/`: 版本化文档入口
 
-## Compatibility Layout
+## Repository Boundary
 
-以下目录仍可保留兼容语义，但不再是正式真源：
-
-- `analysis/contracts/schemas/`
-- `analysis/contracts/examples/`
-
-当前规则：
-
-- `analysis/contracts/*` 是 compatibility mirror
+- `contracts/` 是唯一顶层 contract 根目录
+- 根目录 `analysis/` 已退役，不再承载 schema、sample 或其他正式 contract 资产
+- run 期 analysis 产物只允许落在 `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/...`
 - `contracts/artifacts/v0/snapshots/` 是 canonical snapshot baseline
 
 ## Shared Identity

@@ -43,6 +43,45 @@ def source_project_path(subject_id: str) -> str:
 
 
 class SubjectExecutorTests(unittest.TestCase):
+    def test_trace_paths_from_execution_reads_runtime_trace_artifact_from_stage_manifest(self) -> None:
+        executor_module = load_module(EXECUTOR_MODULE_PATH, "chaos_subject_executor_trace_paths")
+        run_id = "20260406-fixture-trace-002"
+
+        TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
+        repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
+            analysis_manifest_path = repo_root / run_bucket_path(TRACE_SUBJECT_ID, run_id, "analysis", "analysis", "analysis.manifest.json")
+            analysis_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            analysis_manifest_path.write_text("{}", encoding="utf-8")
+
+            runtime_manifest_path = repo_root / run_bucket_path(TRACE_SUBJECT_ID, run_id, "matrices", TRACE_MATRIX_ID, "runtime", "runtime.manifest.json")
+            runtime_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            runtime_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "tracePaths": [
+                            run_bucket_path(TRACE_SUBJECT_ID, run_id, "matrices", TRACE_MATRIX_ID, "runtime", "trace.runtime.json")
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            execution_result = {
+                "stageResults": [
+                    {"manifestPath": analysis_manifest_path.relative_to(repo_root).as_posix()},
+                    {"manifestPath": runtime_manifest_path.relative_to(repo_root).as_posix()},
+                ]
+            }
+
+            self.assertEqual(
+                [run_bucket_path(TRACE_SUBJECT_ID, run_id, "matrices", TRACE_MATRIX_ID, "runtime", "trace.runtime.json")],
+                executor_module.trace_paths_from_execution(repo_root, execution_result),
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
     def test_executor_emits_matrix_events_and_writes_enriched_matrix_report(self) -> None:
         executor_module = load_module(EXECUTOR_MODULE_PATH, "chaos_subject_executor")
         worker_calls: list[dict] = []

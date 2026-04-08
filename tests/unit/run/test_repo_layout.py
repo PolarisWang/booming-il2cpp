@@ -59,6 +59,14 @@ ACTIVE_CONTRACT_DOC_PATHS = [
     REPO_ROOT / "docs" / "architecture" / "roadmap-0" / "local-verification.md",
     REPO_ROOT / "docs" / "architecture" / "subject-test-framework-v1" / "foundation-and-windows-cutover-v1.md",
 ]
+ACTIVE_ANALYSIS_RETIREMENT_DOC_PATHS = [
+    REPO_ROOT / "contracts" / "docs" / "v0" / "overview.md",
+    REPO_ROOT / "docs" / "architecture" / "roadmap-0" / "schema-pack-v0.md",
+    REPO_ROOT / "docs" / "architecture" / "roadmap-0" / "repo-layout.md",
+    REPO_ROOT / "docs" / "architecture" / "roadmap-0" / "ownership-map.md",
+    REPO_ROOT / "docs" / "architecture" / "subject-test-framework-v1" / "foundation-and-windows-cutover-v1.md",
+    REPO_ROOT / "wiki" / "06-测试验证" / "模块" / "analysis.md",
+]
 LEGACY_STAGE_TEST_NAMES = [
     "test_stage3_managed_minimal_closure.py",
     "test_stage4_bootstrap_support_skeleton.py",
@@ -79,6 +87,9 @@ def parse_project_references(project_path: Path) -> list[str]:
 
 
 class RepoLayoutTests(unittest.TestCase):
+    def test_root_analysis_directory_is_retired(self) -> None:
+        self.assertFalse((REPO_ROOT / "analysis").exists())
+
     def test_managed_projects_exist_with_expected_project_references(self) -> None:
         managed_root = REPO_ROOT / "src" / "managed"
         self.assertTrue(managed_root.is_dir(), msg=f"missing managed root: {managed_root}")
@@ -123,6 +134,19 @@ class RepoLayoutTests(unittest.TestCase):
                 offenders.append(f"{doc_path.relative_to(REPO_ROOT).as_posix()}: tests/contracts/schema")
             if "tests/contract/schema" in content:
                 offenders.append(f"{doc_path.relative_to(REPO_ROOT).as_posix()}: tests/contract/schema")
+
+        self.assertEqual([], offenders)
+
+    def test_active_docs_do_not_use_root_analysis_contract_paths(self) -> None:
+        offenders: list[str] = []
+        for doc_path in ACTIVE_ANALYSIS_RETIREMENT_DOC_PATHS:
+            content = doc_path.read_text(encoding="utf-8")
+            if "analysis/contracts/" in content:
+                offenders.append(f"{doc_path.relative_to(REPO_ROOT).as_posix()}: analysis/contracts/")
+            if "- `analysis/`:" in content:
+                offenders.append(f"{doc_path.relative_to(REPO_ROOT).as_posix()}: root analysis layout entry")
+            if "Analysis track: `analysis/`" in content:
+                offenders.append(f"{doc_path.relative_to(REPO_ROOT).as_posix()}: root analysis ownership entry")
 
         self.assertEqual([], offenders)
 

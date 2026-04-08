@@ -8,6 +8,7 @@
 - `tests/` 只保留通用测试基础设施与通用验证资产，例如 tooling、registry、contract trace 对比脚本、平台 gate
 - `subjects/<subject-id>/` 是测试工程正式根目录，承载 `source/`、`validation/`、`expected/`、`baselines/`
 - `contracts/` 是正式契约根目录，artifact/native schema、sample、snapshot 与文档都应落在这里
+- 根目录 `analysis/` 已退役；analysis 现在只表示 run-scoped artifact bucket，不再表示仓库顶层源码或 contract 根
 - `artifacts/subjects/<subject-id>/runs/<run-id>/...` 是 subject 流程的正式中间产物根
 - Windows native `cmake` scratch binary dir 允许临时落到系统 `%TEMP%/chaos-cmake-*`；它不是正式产物、不是 contract 可见路径，也不应被测试源码或 wiki 当作 canonical 根
 

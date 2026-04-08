@@ -1,25 +1,27 @@
-# Ownership Map (Roadmap 0)
+﻿# Ownership Map (Roadmap 0)
 
 ## Track Ownership
 
-- Frontend track: `frontend/`，负责输入接入与前端集成边界。
-- Analysis track: `analysis/`，负责语义分析能力与分析产物。
-- Runtime track: `runtime/`，负责运行时执行语义与桥接实现。
-- Codegen track: `codegen/`，负责生成策略落地与输出结构。
-- Build/Release track: `build/`，负责跨平台编译、链接、打包门禁。
-- Verification track: `tests/`，负责跨平台验证与 smoke 回归。
-- Contract track: `contracts/`，负责 schema/native/trace 约束冻结。
-- Dependency stewardship: `third_party/`，负责 vendored 快照登记、审阅与迁移后治理（含 `third_party/scriban`）。
-- Artifact stewardship: `artifacts/`，负责运行输出集中收口与清理策略。
-- Deployment artifact stewardship: `deploy/`，负责最终可分发或可部署产物的统一落点。
+- Managed core track: `src/managed/Chaos.IL2CPP.*`
+- Native core track: `src/native/`
+- Subject track: `subjects/`
+- Verification track: `tests/`
+- Contract track: `contracts/`
+- Build and orchestration track: `build/`
+- Artifact stewardship: `artifacts/`
+- Deployment stewardship: `deploy/`
+- Dependency stewardship: `third_party/`
 
-## Future Workstream Guidance
+## Analysis Capability Ownership
 
-- 每条工作轨必须在其所有目录内完成实现与维护，不跨目录引入未声明职责。
-- 跨轨改动需要同时更新 `contracts/` 或架构文档中的边界定义。
-- 若职责变更，先更新本文件与 `repo-layout.md` 再推进实现。
+当前“analysis”是能力名称，不再对应顶层目录。
 
-## 迁移后说明
+- 语义分析与装载能力位于 `src/managed/Chaos.IL2CPP.Loader` 与 `src/managed/Chaos.IL2CPP.SemanticWorld`
+- managed closure / metadata / codegen 编排位于 `src/managed/Chaos.IL2CPP.Linker`、`src/managed/Chaos.IL2CPP.MetadataWriter`、`src/managed/Chaos.IL2CPP.CodeGen`、`src/managed/Chaos.IL2CPP.Pipeline`
+- run 期 analysis 证据位于 `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/...`
 
-- `3rd/scriban` 已迁移至 `third_party/scriban`，当前依赖治理以 `third_party/` 为准。
-- `3rd/` 不再作为当前依赖落点；后续第三方接入不应回写到 `3rd/`。
+## Guidance
+
+- 跨轨改动需要同步更新 `contracts/` 或对应架构文档
+- 若目录职责发生变化，应先更新本文件与 `repo-layout.md`
+- 新实现禁止重新引入顶层 `analysis/` 作为源码根或 contract 根

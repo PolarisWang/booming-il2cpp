@@ -440,6 +440,31 @@ def execute_subject_matrix(
     *,
     goal_id: str | None = None,
     matrix_id: str | None = None,
+    run_id: str | None = None,
 ) -> dict[str, Any]:
-    plan = planner_module.build_plan(repo_root, subject_id, goal_id=goal_id, matrix_id=matrix_id)
-    return execute_plan(repo_root, plan)
+    plan = planner_module.build_plan(repo_root, subject_id, goal_id=goal_id, matrix_id=matrix_id, run_id=run_id)
+    return execute_plan(repo_root, plan, run_id=run_id)
+
+
+def trace_paths_from_execution(repo_root: Path, execution_result: dict[str, Any]) -> list[str]:
+    for stage_result in reversed(list(execution_result.get("stageResults") or [])):
+        manifest_path = str(stage_result.get("manifestPath") or "")
+        if not manifest_path:
+            continue
+
+        manifest_file = repo_root / manifest_path
+        if not manifest_file.is_file():
+            continue
+
+        try:
+            manifest = json.loads(manifest_file.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if not isinstance(manifest, dict):
+            continue
+
+        trace_paths = [str(value) for value in list(manifest.get("tracePaths") or []) if str(value)]
+        if trace_paths:
+            return trace_paths
+
+    return []

@@ -31,3 +31,4 @@
 ## 2026-04-08 更新
 
 - `subject-layout-and-artifact-boundaries.md` 已补充 Windows native cmake scratch 目录只是临时目录、不能替代 canonical `artifacts/subjects/...` 的边界规则。
+- `subject-layout-and-artifact-boundaries.md` 已明确根目录 `analysis/` 退役，analysis 只保留为 run-scoped artifact bucket 名称。

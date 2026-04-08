@@ -34,6 +34,15 @@ objectType: guide
 - `artifacts/subjects/<subject-id>/runs/<run-id>/subject-report/`
 - `artifacts/subjects/<subject-id>/runs/<run-id>/run-report/`
 
+其中 `runtime-trace-compare` 有两种常见输入形态：
+
+- native trace subject：先由 `runtime-observe` 产出 `runtime.manifest.json`，再在同一 runtime bucket 追加 `tracePaths`
+- managed trace subject：先由 `runtime-managed-output` 产出 `runtime.manifest.json`，再复用 `host-input-build` 的主程序集导出 trace
+
+不论哪种形态，最终 trace 证据都统一落在：
+
+- `artifacts/subjects/<subject-id>/runs/<run-id>/matrices/<matrix-id>/runtime/trace.runtime.json`
+
 ## CHECK | PROFILE | SHIP
 
 ### CHECK
@@ -67,6 +76,7 @@ objectType: guide
 - `analysis-frontend` / `generated-native-proof` 记录 codegen 宏
 - `build-target` 记录 `variantMacros.codegen` 与 `variantMacros.native`
 - subject-owned native reference host 通过 `CHAOS_SUBJECT_VARIANT` 消费 variant，并把宏落成编译定义
+- public `trace-compare` / reference desktop gate 命令只声明 `subject_id + goal_id + matrix_id`，不再直接持有具体 `csproj`、`dll` 或临时 trace 输出路径
 
 ## Windows Native Build 规则
 
@@ -88,3 +98,4 @@ Windows reference proof 的活动宿主位于：
 
 - `2026-04-07`：新增 subject 主流 traceability 与变体规则页
 - `2026-04-08`：补充 Windows native `cmake + VsDevCmd + Ninja Multi-Config` 规则，以及 `CHECK|PROFILE|SHIP` 的 native 编译特征
+- `2026-04-08`：reference desktop gate 与 `trace-compare` 改为消费 subject matrix 产物，trace runtime 证据统一回收到 `artifacts/subjects/<subject-id>/runs/<run-id>/...`

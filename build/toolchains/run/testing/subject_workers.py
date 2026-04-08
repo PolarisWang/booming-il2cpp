@@ -25,10 +25,9 @@ except ImportError:
 
 DRIVER_PROJECT_PATH = Path("src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj")
 DRIVER_DLL_PATH = Path("src/managed/Chaos.IL2CPP.Driver/bin/Release/net8.0/Chaos.IL2CPP.Driver.dll")
-HOST_EMBEDDING_PROJECT_PATH = Path("subjects/HostEmbeddingLite/source/HostEmbeddingLite.csproj")
-HOST_EMBEDDING_DLL_PATH = Path("artifacts/smoke/bin/HostEmbeddingLite/Release/net8.0/HostEmbeddingLite.dll")
 WINDOWS_TRACE_SNAPSHOT_PATH = Path("tests/contracts/trace/snapshots/windows-warmup-trace.snapshot.json")
-WINDOWS_TRACE_SCHEMA_PATH = Path("tests/contracts/trace/schema/warmup-trace.schema.json")
+MACOS_TRACE_SNAPSHOT_PATH = Path("tests/contracts/trace/snapshots/macos-warmup-trace.snapshot.json")
+TRACE_SCHEMA_PATH = Path("tests/contracts/trace/schema/warmup-trace.schema.json")
 WINDOWS_REFERENCE_BUILD_TARGET = "chaos_subject_reference_proof"
 WINDOWS_REFERENCE_RUN_TARGET = "chaos_subject_reference_proof_run"
 VARIANT_MACROS = {
@@ -63,6 +62,24 @@ def _variant_macros(variant: str) -> dict[str, list[str]]:
     if variant not in VARIANT_MACROS:
         raise RuntimeError(f"unsupported subject variant: {variant}")
     return dict(VARIANT_MACROS[variant])
+
+
+def _trace_platform(selection: dict[str, Any]) -> str:
+    execution_context = dict(selection.get("executionContext") or {})
+    target_platform = str(execution_context.get("targetPlatform") or execution_context.get("hostPlatform") or "")
+    if target_platform.startswith("windows"):
+        return "windows"
+    if target_platform.startswith("macos"):
+        return "macos"
+    raise RuntimeError(f"unsupported trace platform: {target_platform}")
+
+
+def _trace_snapshot_path(trace_platform: str) -> Path:
+    if trace_platform == "windows":
+        return WINDOWS_TRACE_SNAPSHOT_PATH
+    if trace_platform == "macos":
+        return MACOS_TRACE_SNAPSHOT_PATH
+    raise RuntimeError(f"unsupported trace platform: {trace_platform}")
 
 
 def _run_checked(
@@ -762,55 +779,65 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
 
 
 def run_runtime_trace_compare(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
-    host_platform = str(request["selection"]["executionContext"]["hostPlatform"])
-    _run_checked(
-        ["dotnet", "build", str(repo_root / HOST_EMBEDDING_PROJECT_PATH), "-c", "Release", *_dotnet_intermediate_args(HOST_EMBEDDING_PROJECT_PATH.stem, host_platform)],
-        repo_root=repo_root,
-        failure_message=f"dotnet build failed: {HOST_EMBEDDING_PROJECT_PATH.as_posix()}",
-    )
+    selection = dict(request["selection"])
+    host_input_manifest = read_json(_resolve(repo_root, request["upstream"]["host-input"]["manifestPath"]))
+    if not isinstance(host_input_manifest, dict):
+        raise RuntimeError("host-input manifest must be an object")
 
     runtime_manifest_path = _resolve(repo_root, request["paths"]["manifestPath"])
-    runtime_manifest = read_json(runtime_manifest_path)
-    if not isinstance(runtime_manifest, dict):
-        raise RuntimeError("runtime manifest must be an object")
+    if runtime_manifest_path.is_file():
+        runtime_manifest = read_json(runtime_manifest_path)
+        if not isinstance(runtime_manifest, dict):
+            raise RuntimeError("runtime manifest must be an object")
+    else:
+        runtime_manifest = {}
 
     runtime_root = _resolve(repo_root, request["paths"]["bucketRoot"])
+    runtime_root.mkdir(parents=True, exist_ok=True)
     trace_path = runtime_root / "trace.runtime.json"
+    trace_platform = _trace_platform(selection)
+    expected_snapshot_path = _trace_snapshot_path(trace_platform)
+    assembly_path = _resolve(repo_root, str(host_input_manifest["primaryAssemblyPath"]))
     _run_checked(
         [
             "dotnet",
-            str(repo_root / HOST_EMBEDDING_DLL_PATH),
+            str(assembly_path),
             "--trace-platform",
-            "windows",
+            trace_platform,
             "--trace-output",
             str(trace_path),
         ],
         repo_root=repo_root,
-        failure_message="HostEmbeddingLite windows trace export failed",
+        failure_message=f"trace export failed: {assembly_path}",
     )
     _run_checked(
         [
             sys.executable,
             str(repo_root / "tests" / "contracts" / "trace" / "compare-warmup-trace.py"),
-            str(repo_root / WINDOWS_TRACE_SNAPSHOT_PATH),
+            str(repo_root / expected_snapshot_path),
             str(trace_path),
         ],
         repo_root=repo_root,
-        failure_message="Windows reference desktop trace compare failed",
+        failure_message=f"{trace_platform} trace compare failed",
     )
 
+    runtime_manifest["subjectId"] = str(selection["subjectId"])
+    runtime_manifest["matrixId"] = str(selection["matrixId"])
+    runtime_manifest["bucket"] = "runtime"
+    runtime_manifest["variant"] = _selection_variant(selection)
+    runtime_manifest["hostInputManifestPath"] = str(request["upstream"]["host-input"]["manifestPath"])
     runtime_manifest["tracePaths"] = [_relative(repo_root, trace_path)]
     write_json(runtime_manifest_path, runtime_manifest)
     report_path = _resolve(repo_root, request["paths"]["reportPaths"][0])
     write_json(
         report_path,
         {
-            "subjectId": str(request["selection"]["subjectId"]),
-            "matrixId": str(request["selection"]["matrixId"]),
+            "subjectId": str(selection["subjectId"]),
+            "matrixId": str(selection["matrixId"]),
             "status": "ok",
-            "variant": _selection_variant(dict(request["selection"])),
-            "schemaPath": WINDOWS_TRACE_SCHEMA_PATH.as_posix(),
-            "expectedSnapshotPath": WINDOWS_TRACE_SNAPSHOT_PATH.as_posix(),
+            "variant": _selection_variant(selection),
+            "schemaPath": TRACE_SCHEMA_PATH.as_posix(),
+            "expectedSnapshotPath": expected_snapshot_path.as_posix(),
             "actualTracePath": _relative(repo_root, trace_path),
             "errors": [],
         },
