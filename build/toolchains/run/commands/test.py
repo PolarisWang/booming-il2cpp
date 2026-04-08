@@ -781,8 +781,10 @@ def _run_suite_items(
 
     outputs: list[str] = []
     suite_results: list[dict] = []
+    subject_results: list[dict] = []
     artifacts: list[str] = []
     for unit_index, item in enumerate(items):
+        item_type = str(item.get("type") or "suite")
         stage_start_event = reporting_module.build_event(
             "stage-start",
             {
@@ -799,18 +801,44 @@ def _run_suite_items(
         if progress_callback is not None:
             progress_callback(stage_start_event)
 
-        session_result = _execute_public_test_session(
-            item["family"],
-            item["suite"],
-            stage,
-            repo_root,
-            host_platform,
-            f"test {item['family']} {item['suite']}",
-            manifest,
-        )
-        outputs.append(session_result.text or "")
-        suite_results.extend(session_result.suite_results)
-        artifacts.extend(session_result.artifacts)
+        unit_status = "fail"
+        unit_exit_code = 1
+        unit_errors: list[str] = []
+        if item_type == "subject":
+            selected_object = registry_module.find_registry_object(index, str(item["id"]))
+            if selected_object is None:
+                unit_errors = [f"registry object not found: {item['id']}"]
+            else:
+                subject_result = _run_subject_object(
+                    index=index,
+                    selected_object=selected_object,
+                    normalized_options={"id": str(selected_object["id"])},
+                    repo_root=repo_root,
+                    host_platform=host_platform,
+                    command_text=f"test subject --id {selected_object['id']}",
+                )
+                outputs.append(subject_result.text or "")
+                subject_results.extend(list(subject_result.payload.get("subjectResults", [])))
+                artifacts.extend(list(subject_result.payload.get("artifacts", [])))
+                unit_status = "ok" if subject_result.status == "ok" else "fail"
+                unit_exit_code = int(subject_result.payload.get("exitCode", 1))
+                unit_errors = list(subject_result.errors)
+        else:
+            session_result = _execute_public_test_session(
+                item["family"],
+                item["suite"],
+                stage,
+                repo_root,
+                host_platform,
+                f"test {item['family']} {item['suite']}",
+                manifest,
+            )
+            outputs.append(session_result.text or "")
+            suite_results.extend(session_result.suite_results)
+            artifacts.extend(session_result.artifacts)
+            unit_status = "ok" if session_result.status == "ok" else "fail"
+            unit_exit_code = session_result.exit_code
+            unit_errors = list(session_result.errors)
 
         stage_finish_event = reporting_module.build_event(
             "stage-finish",
@@ -822,7 +850,7 @@ def _run_suite_items(
             run_id=run_context["runId"],
             suite_id=item["id"],
             stage=stage,
-            status="ok" if session_result.status == "ok" else "fail",
+            status=unit_status,
         )
         progress_event = reporting_module.build_event(
             "progress",
@@ -830,12 +858,12 @@ def _run_suite_items(
                 "completedUnits": unit_index + 1,
                 "totalUnits": len(items),
                 "activeUnit": item["id"],
-                "suiteStatus": "ok" if session_result.status == "ok" else "fail",
+                "suiteStatus": unit_status,
             },
             run_id=run_context["runId"],
             suite_id=item["id"],
             stage=stage,
-            status="ok" if session_result.status == "ok" else "fail",
+            status=unit_status,
         )
         reporting_module.append_session_event(repo_root, run_context, stage_finish_event)
         reporting_module.append_session_event(repo_root, run_context, progress_event)
@@ -843,17 +871,18 @@ def _run_suite_items(
             progress_callback(stage_finish_event)
             progress_callback(progress_event)
 
-        if session_result.status != "ok":
+        if unit_status != "ok":
             result = CommandResult.failure(
                 command=command_text,
                 host_platform=host_platform,
                 target=target,
-                errors=session_result.errors or [f"test execution failed while running {item['id']}"],
+                errors=unit_errors or [f"test execution failed while running {item['id']}"],
                 payload={
                     "items": items,
                     "suiteResults": suite_results,
+                    "subjectResults": subject_results,
                     "artifacts": artifacts,
-                    "exitCode": session_result.exit_code,
+                    "exitCode": unit_exit_code,
                 },
                 text="".join(outputs),
             )
@@ -868,7 +897,13 @@ def _run_suite_items(
         command=command_text,
         host_platform=host_platform,
         target=target,
-        payload={"items": items, "suiteResults": suite_results, "artifacts": artifacts, "exitCode": 0},
+        payload={
+            "items": items,
+            "suiteResults": suite_results,
+            "subjectResults": subject_results,
+            "artifacts": artifacts,
+            "exitCode": 0,
+        },
         text="".join(outputs),
     )
     if selected_object is not None:
@@ -1004,7 +1039,10 @@ def _handle_public_test_dispatch(
                 )
 
     family = options.get("family")
+    index = _scan_registry(repo_root, host_platform)
     items = list_public_test_suites(manifest, host_platform) if command_id in {"test-all", "test-family-all"} else []
+    if command_id == "test-all":
+        items = [*items, *[dict(subject) for subject in index.subjects]]
     if family and items:
         items = [item for item in items if item["family"] == family]
     if command_id == "test-family-suite":
@@ -1020,7 +1058,7 @@ def _handle_public_test_dispatch(
 
     return _run_suite_items(
         items,
-        index=_scan_registry(repo_root, host_platform),
+        index=index,
         target=target,
         stage=options.get("stage", "all"),
         repo_root=repo_root,

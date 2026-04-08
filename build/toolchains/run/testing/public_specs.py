@@ -290,6 +290,7 @@ def list_public_test_suites(host_platform: str) -> list[dict]:
     return [
         {
             "id": item["id"],
+            "type": "suite",
             "family": item["family"],
             "suite": item["suite"],
             "stages": list(item["stages"]),

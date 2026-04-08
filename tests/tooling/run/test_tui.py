@@ -698,6 +698,50 @@ class TuiUnifiedMenuTests(unittest.TestCase):
             [entry.group_title for entry in entries],
         )
 
+    def test_build_test_subject_menu_entries_lists_registered_subjects(self) -> None:
+        tui_module = load_tui_module()
+        subject_record = select_subject_record(
+            "chaos_tui_subject_menu_entries",
+            source_type="dotnet-project",
+            required_host_platforms=["windows-x64"],
+        )
+        subject_id = str(subject_record["subjectId"])
+
+        entries = tui_module.build_test_subject_menu_entries("windows")
+
+        subject_entry = next(entry for entry in entries if entry.syntax == subject_id)
+        self.assertEqual(["test", "subject", "--id", f"subject/{subject_id}"], subject_entry.argv)
+        self.assertEqual(f"subject/{subject_id}", subject_entry.command["targetObjectId"])
+        self.assertEqual("menu-back", entries[-1].command["id"])
+
+    def test_run_test_submenu_routes_subject_entry_to_third_level_subject_menu(self) -> None:
+        tui_module = load_tui_module()
+        manifest = {"groups": [], "commands": []}
+        subject_entry = tui_module.MenuEntry(
+            "Selectors",
+            {"id": "test-subject", "title": "Run a subject object"},
+            "subject",
+            ["test"],
+        )
+        fake_terminal = object()
+
+        with patch.object(tui_module, "build_test_menu_entries", return_value=[subject_entry]):
+            with patch.object(tui_module, "_run_menu_selection", return_value=subject_entry):
+                with patch.object(
+                    tui_module,
+                    "run_test_subject_submenu",
+                    return_value=["test", "subject", "--id", "subject/HelloWorldObject"],
+                ) as run_test_subject_submenu:
+                    argv = tui_module.run_test_submenu(manifest, "windows", terminal=fake_terminal)
+
+        self.assertEqual(["test", "subject", "--id", "subject/HelloWorldObject"], argv)
+        run_test_subject_submenu.assert_called_once_with(
+            manifest,
+            "windows",
+            terminal=fake_terminal,
+            menu_state=None,
+        )
+
     def test_resolve_entry_argv_supports_suite_subject_module_system_pipeline(self) -> None:
         manifest_module = load_manifest_module()
         tui_module = load_tui_module()

@@ -4,8 +4,9 @@ import importlib.util
 import sys
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
-from tests.support import select_public_suite_spec
+from tests.support import select_public_suite_spec, select_subject_record
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -82,6 +83,98 @@ class UnifiedTestCommandTests(unittest.TestCase):
         self.assertIn("workflow/runtime-baseline-macos", item_ids)
         self.assertNotIn(str(dict(smoke_spec.get("legacy_commands") or {}).get("all") or ""), item_ids)
         self.assertNotIn("verify-roadmap-0-macos", item_ids)
+
+    def test_test_all_includes_all_current_subjects(self) -> None:
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_for_test_all_subjects")
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_for_test_all_subjects")
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+        subject_record = select_subject_record(
+            "chaos_unified_test_all_subjects",
+            source_type="dotnet-project",
+            required_host_platforms=["windows-x64"],
+        )
+        expected_subject_id = f"subject/{subject_record['subjectId']}"
+        index = test_module._scan_registry(REPO_ROOT, "windows")
+        expected_subject_ids = {item["id"] for item in index.subjects}
+        subject_calls: list[str] = []
+
+        def fake_session(
+            family: str,
+            suite: str,
+            stage: str,
+            repo_root: Path,
+            host_platform: str,
+            command_text: str,
+            manifest_payload: dict,
+        ):
+            del repo_root
+            del manifest_payload
+            request = test_module.session_module.TestRequest(
+                family=family,
+                suite=suite,
+                stage=stage,
+                command_text=command_text,
+            )
+            return test_module.session_module.SessionResult(
+                request=request,
+                host_platform=host_platform,
+                status="ok",
+                suite_results=[{"suiteId": request.suite_key, "status": "ok", "stageResults": {}}],
+                text=f"{request.suite_key} ok\n",
+                artifacts=[],
+                exit_code=0,
+            )
+
+        def fake_subject_object(
+            *,
+            index: object,
+            selected_object: dict,
+            normalized_options: dict,
+            repo_root: Path,
+            host_platform: str,
+            command_text: str,
+        ):
+            del index
+            del normalized_options
+            del repo_root
+            del host_platform
+            subject_calls.append(str(selected_object["id"]))
+            subject_id = str(selected_object["subjectId"])
+            return test_module.CommandResult.success(
+                command=command_text,
+                host_platform="windows",
+                target=str(selected_object["id"]),
+                payload={
+                    "artifacts": [],
+                    "exitCode": 0,
+                    "subjectResults": [
+                        {
+                            "subjectId": subject_id,
+                            "status": "ok",
+                            "subjectSummaryPath": f"artifacts/subjects/{subject_id}/runs/fake-run/subject-report/summary.json",
+                        }
+                    ],
+                },
+                text=f"{subject_id} ok\n",
+            )
+
+        with patch.object(test_module, "_execute_public_test_session", side_effect=fake_session):
+            with patch.object(test_module, "_run_subject_object", side_effect=fake_subject_object):
+                result = test_module.handle(
+                    {"id": "test-all", "handler": "test.dispatch"},
+                    REPO_ROOT,
+                    "windows",
+                    "test all",
+                    manifest,
+                    {},
+                )
+
+        self.assertEqual("ok", result.status)
+        item_ids = {item["id"] for item in result.payload["items"]}
+        self.assertTrue(expected_subject_ids.issubset(item_ids))
+        self.assertIn(expected_subject_id, item_ids)
+        self.assertEqual(expected_subject_ids, set(subject_calls))
+        self.assertEqual(expected_subject_ids, {f"subject/{item['subjectId']}" for item in result.payload["subjectResults"]})
 
     def test_legacy_test_commands_gain_migration_guidance(self) -> None:
         run_module = load_module(RUN_MODULE_PATH, "chaos_run_main_for_legacy_migration")

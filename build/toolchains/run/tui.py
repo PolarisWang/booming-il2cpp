@@ -11,8 +11,12 @@ from typing import Any, Callable
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     import manifest as manifest_module
+    from testing import public_specs as public_specs_module
+    from testing import registry as registry_module
 else:
     from . import manifest as manifest_module
+    from .testing import public_specs as public_specs_module
+    from .testing import registry as registry_module
 
 if os.name == "nt":
     import ctypes
@@ -24,6 +28,7 @@ else:
 
 
 _WINDOWS_VT_READY: bool | None = None
+REPO_ROOT = Path(__file__).resolve().parents[3]
 ANSI_GREEN = "\x1b[32m"
 ANSI_BOLD_YELLOW = "\x1b[1;33m"
 ANSI_BOLD_CYAN = "\x1b[1;36m"
@@ -434,6 +439,29 @@ def build_test_menu_entries(manifest: dict[str, Any], host_platform: str) -> lis
     ]
 
 
+def build_test_subject_menu_entries(host_platform: str) -> list[MenuEntry]:
+    index = registry_module.scan_registry(
+        REPO_ROOT,
+        host_platform=host_platform,
+        public_suite_specs=public_specs_module.PUBLIC_TEST_SPECS,
+    )
+    entries = [
+        MenuEntry(
+            "Subjects",
+            {
+                "id": f"test-subject-target:{subject['id']}",
+                "title": str(subject.get("displayName") or subject.get("subjectId") or subject["id"]),
+                "targetObjectId": str(subject["id"]),
+            },
+            str(subject.get("subjectId") or subject["id"]),
+            ["test", "subject", "--id", str(subject["id"])],
+        )
+        for subject in sorted(index.subjects, key=lambda item: str(item["id"]))
+    ]
+    entries.append(MenuEntry("Back", {**MENU_BACK_COMMAND, "title": "Back to previous menu"}, "back", []))
+    return entries
+
+
 def resolve_entry_argv(
     entry: MenuEntry,
     prompt_value_provider: Callable[[str], str] | None = None,
@@ -677,12 +705,64 @@ def run_test_submenu(
     menu_state: MenuState | None = None,
 ) -> list[str] | None:
     entries = build_test_menu_entries(manifest, host_platform)
+    initial_selection = 0
+    if menu_state is not None and menu_state.active_section_command_id == "test-menu":
+        initial_selection = _selection_index_for_command(entries, menu_state.section_selection_command_id)
+
+    active_terminal = terminal
+    created_terminal = False
+    if active_terminal is None:
+        active_terminal = _TerminalSession()
+        created_terminal = True
+
+    def _run_loop(current_terminal: "_TerminalSession") -> list[str] | None:
+        nonlocal initial_selection
+        while True:
+            selected_entry = _run_menu_selection(
+                current_terminal,
+                entries,
+                title="统一测试入口",
+                help_text=TEST_MENU_HELP,
+                initial_selection=initial_selection,
+            )
+            if selected_entry is None or selected_entry.command["id"] == "menu-back":
+                return None
+            if selected_entry.command["id"] == "test-subject":
+                if menu_state is not None:
+                    menu_state.primary_command_id = "test-menu"
+                    menu_state.active_section_command_id = "test-menu"
+                    menu_state.section_selection_command_id = selected_entry.command["id"]
+                argv = run_test_subject_submenu(manifest, host_platform, terminal=current_terminal, menu_state=menu_state)
+                if argv is not None:
+                    return argv
+                initial_selection = _selection_index_for_command(entries, selected_entry.command["id"])
+                continue
+            if menu_state is not None:
+                menu_state.primary_command_id = "test-menu"
+                menu_state.active_section_command_id = "test-menu"
+                menu_state.section_selection_command_id = selected_entry.command["id"]
+            return resolve_entry_argv(selected_entry)
+
+    if created_terminal:
+        with active_terminal as current_terminal:
+            return _run_loop(current_terminal)
+    return _run_loop(active_terminal)
+
+
+def run_test_subject_submenu(
+    manifest: dict[str, Any],
+    host_platform: str,
+    *,
+    terminal: "_TerminalSession" | None = None,
+    menu_state: MenuState | None = None,
+) -> list[str] | None:
+    del manifest
     return _run_submenu(
-        entries,
-        title="统一测试入口",
-        help_text=TEST_MENU_HELP,
+        build_test_subject_menu_entries(host_platform),
+        title="Select subject target",
+        help_text=SECTION_MENU_HELP,
         terminal=terminal,
-        section_command_id="test-menu",
+        section_command_id=None,
         menu_state=menu_state,
     )
 
