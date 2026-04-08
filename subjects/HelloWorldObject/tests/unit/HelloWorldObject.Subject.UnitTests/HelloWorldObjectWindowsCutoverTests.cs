@@ -60,9 +60,20 @@ public sealed class HelloWorldObjectWindowsCutoverTests
     }
 
     [Fact]
-    public void VerifyRoadmap0WindowsBranchRunsSubjectMatricesInsteadOfStage4CodegenChain()
+    public void LegacyVerifyRoadmap0PythonWrapperForwardsToRuntimeBaselineEntrypoint()
     {
         var verifyText = RepoFiles.ReadText("build", "scripts", "verify-roadmap-0.py");
+
+        Assert.Contains("verify-runtime-baseline.py", verifyText);
+        Assert.Contains("runpy.run_path", verifyText);
+        Assert.DoesNotContain("subject_executor", verifyText);
+        Assert.DoesNotContain("subject_planner", verifyText);
+    }
+
+    [Fact]
+    public void VerifyRuntimeBaselineWindowsBranchRunsSubjectMatricesInsteadOfStage4CodegenChain()
+    {
+        var verifyText = RepoFiles.ReadText("build", "scripts", "verify-runtime-baseline.py");
 
         var requiredMarkers = new[]
         {
@@ -101,7 +112,7 @@ public sealed class HelloWorldObjectWindowsCutoverTests
     {
         var verifyText = RepoFiles.ReadText("build", "scripts", "verify-roadmap-0.ps1");
 
-        Assert.Contains("verify-roadmap-0.py", verifyText);
+        Assert.Contains("verify-runtime-baseline.py", verifyText);
         Assert.Contains("--host-profile", verifyText);
         Assert.DoesNotContain("Invoke-Stage4NativeReferenceCodegen", verifyText);
     }

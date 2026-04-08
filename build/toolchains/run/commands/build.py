@@ -29,6 +29,11 @@ except ImportError:
     from testing.events import build_event
 
 
+WINDOWS_REFERENCE_SUBJECT_ID = "HelloWorldObject"
+WINDOWS_REFERENCE_SUBJECT_MATRIX_ID = "windows-dev-output"
+WINDOWS_REFERENCE_SUBJECT_VARIANT = "CHECK"
+
+
 def _emit_event(
     progress_callback: Callable[[dict[str, Any]], None] | None,
     *,
@@ -125,6 +130,24 @@ def allocate_run_scoped_binary_dir(base_dir: Path) -> Path:
     return scoped_dir
 
 
+def _ensure_windows_reference_subject_exec_generated(repo_root: Path) -> None:
+    generated_source_path = workspace_module._subject_generated_source_path(repo_root, WINDOWS_REFERENCE_SUBJECT_ID)
+    if generated_source_path.is_file():
+        return
+
+    workspace_module.refresh_subject_generated_root(
+        repo_root,
+        WINDOWS_REFERENCE_SUBJECT_ID,
+        WINDOWS_REFERENCE_SUBJECT_MATRIX_ID,
+        WINDOWS_REFERENCE_SUBJECT_VARIANT,
+    )
+
+
+def _prepare_preset_inputs(repo_root: Path, host_platform: str, preset_name: str) -> None:
+    if host_platform == "windows" and preset_name == "windows-x64-reference":
+        _ensure_windows_reference_subject_exec_generated(repo_root)
+
+
 def _host_build_plan(host_platform: str) -> list[dict[str, str]]:
     if host_platform == "windows":
         return [
@@ -157,12 +180,11 @@ def _build_native_contract(
     progress_callback: Callable[[dict[str, Any]], None] | None = None,
 ) -> CommandResult:
     source_dir = repo_root / command["source_dir"]
-    binary_dir = repo_root / command["binary_dir"]
+    requested_binary_dir = repo_root / command["binary_dir"]
+    binary_dir = allocate_run_scoped_binary_dir(requested_binary_dir)
     cmake_path, cmake_env = tooling_module.cmake_environment(repo_root)
     if cmake_path is None:
         return _failure(command_text, host_platform, command.get("target"), "", ["cmake not found"])
-
-    _reset_binary_dir(binary_dir)
 
     _emit_event(progress_callback, event_type="stage-start", completed=0, total=2, active_unit="configure")
     configure = run_process([cmake_path, "-S", str(source_dir), "-B", str(binary_dir)], cwd=repo_root, env=cmake_env)
@@ -270,15 +292,19 @@ def _build_preset(
     progress_callback: Callable[[dict[str, Any]], None] | None = None,
 ) -> CommandResult:
     preset_name = command["preset"]
-    binary_dir = repo_root / command["binary_dir"]
+    requested_binary_dir = repo_root / command["binary_dir"]
+    binary_dir = allocate_run_scoped_binary_dir(requested_binary_dir)
     cmake_path, cmake_env = tooling_module.cmake_environment(repo_root)
     if cmake_path is None:
         return _failure(command_text, host_platform, command.get("target"), "", ["cmake not found"])
 
-    _reset_binary_dir(binary_dir)
+    try:
+        _prepare_preset_inputs(repo_root, host_platform, preset_name)
+    except Exception as error:
+        return _failure(command_text, host_platform, command.get("target"), str(error), [str(error)])
 
     _emit_event(progress_callback, event_type="stage-start", completed=0, total=2, active_unit="configure")
-    configure = run_process([cmake_path, "--preset", preset_name], cwd=repo_root, env=cmake_env)
+    configure = run_process([cmake_path, "--preset", preset_name, "-B", str(binary_dir)], cwd=repo_root, env=cmake_env)
     configure_output = combine_process_output(configure)
     if configure.returncode != 0:
         _emit_event(progress_callback, event_type="progress", completed=0, total=2, active_unit="configure", step_status="fail")
@@ -350,6 +376,11 @@ def _build_reference_desktop_gate(
     cmake_path, cmake_env = tooling_module.cmake_environment(repo_root)
     if cmake_path is None:
         return _failure(command_text, host_platform, command.get("target"), bootstrap.output, ["cmake not found"])
+
+    try:
+        _prepare_preset_inputs(repo_root, host_platform, str(command["preset"]))
+    except Exception as error:
+        return _failure(command_text, host_platform, command.get("target"), str(error), [str(error)])
 
     requested_binary_dir = repo_root / command["binary_dir"]
     binary_dir = allocate_run_scoped_binary_dir(requested_binary_dir)

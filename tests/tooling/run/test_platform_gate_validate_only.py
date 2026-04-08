@@ -262,6 +262,84 @@ class PlatformGateCommandTests(unittest.TestCase):
         self.assertIn("trace compare mismatch at root.warmup[0]", result.payload["consoleText"])
         self.assertIn("trace compare mismatch at root.warmup[0]", result.text)
 
+    def test_reference_desktop_gate_refreshes_subject_exec_generated_root_when_missing(self) -> None:
+        build_module = load_module(BUILD_MODULE_PATH, "chaos_run_build_reference_desktop_gate_refreshes_subject_exec")
+        bootstrap = build_module.tooling_module.ToolBootstrapResult(
+            ready=True,
+            output="",
+            errors=[],
+        )
+        allocated_dir = REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference-test-run"
+        run_id = "20260408-windows-0003"
+        trace_output = REPO_ROOT / "artifacts" / "subjects" / "FixtureTraceSubject" / "runs" / run_id / "matrices" / "windows-reference-trace" / "runtime" / "trace.runtime.json"
+        gate_record = REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows" / "windows-reference-desktop.gate.json"
+        completed = subprocess.CompletedProcess(["cmd"], 0, stdout="ok", stderr="")
+        execution_result = {
+            "subjectId": "FixtureTraceSubject",
+            "matrixId": "windows-reference-trace",
+            "goalId": "correctness.platform",
+            "status": "ok",
+            "stageResults": [],
+            "errors": [],
+        }
+        missing_generated = (
+            REPO_ROOT
+            / "artifacts"
+            / "subjects"
+            / "HelloWorldObject"
+            / "runs"
+            / "subject-exec"
+            / "analysis"
+            / "generated"
+            / "generated"
+            / "missing.cpp"
+        )
+
+        with patch.object(build_module.tooling_module, "ensure_dotnet_available", return_value=bootstrap):
+            with patch.object(build_module, "allocate_run_scoped_binary_dir", return_value=allocated_dir):
+                with patch.object(build_module, "run_process", return_value=completed):
+                    with patch.object(
+                        build_module.workspace_module,
+                        "_subject_generated_source_path",
+                        return_value=missing_generated,
+                    ):
+                        with patch.object(build_module.workspace_module, "refresh_subject_generated_root") as refresh_mock:
+                            with patch.object(build_module.reporting_module, "build_run_id", return_value=run_id):
+                                with patch.object(build_module.subject_executor_module, "execute_subject_matrix", return_value=execution_result):
+                                    with patch.object(
+                                        build_module.subject_executor_module,
+                                        "trace_paths_from_execution",
+                                        return_value=[
+                                            "artifacts/subjects/FixtureTraceSubject/runs/20260408-windows-0003/matrices/windows-reference-trace/runtime/trace.runtime.json"
+                                        ],
+                                    ):
+                                        result = build_module.handle(
+                                            {
+                                                "id": "build-platform-windows-reference-desktop",
+                                                "kind": "reference-desktop-gate",
+                                                "target": "windows-reference-desktop",
+                                                "preset": "windows-x64-reference",
+                                                "binary_dir": "artifacts/presets/windows-x64-reference",
+                                                "subject_id": "FixtureTraceSubject",
+                                                "goal_id": "correctness.platform",
+                                                "matrix_id": "windows-reference-trace",
+                                                "gate_record_path": "artifacts/verify-roadmap-0/windows/windows-reference-desktop.gate.json",
+                                                "gate_name": "windows-reference-desktop",
+                                                "gate_preset": "windows-x64-reference",
+                                                "gate_notes": "Windows reference desktop gate passed with warmup trace compare.",
+                                            },
+                                            REPO_ROOT,
+                                            "windows",
+                                            "build platform windows-reference-desktop",
+                                        )
+
+        self.assertEqual("ok", result.status)
+        self.assertEqual(
+            [str(allocated_dir), str(trace_output), str(gate_record)],
+            result.payload["artifacts"],
+        )
+        refresh_mock.assert_called_once_with(REPO_ROOT, "HelloWorldObject", "windows-dev-output", "CHECK")
+
     def test_platform_gate_uses_run_scoped_binary_dir(self) -> None:
         build_module = load_module(BUILD_MODULE_PATH, "chaos_run_build_platform_gate_scoped_dir_any_host")
         completed = subprocess.CompletedProcess(["cmake"], 0, stdout="", stderr="")
