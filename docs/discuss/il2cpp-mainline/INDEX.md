@@ -47,3 +47,5 @@
   - 在已拍板的方案 2 下冻结 `RetainedReasons / DependencyReasons` 的最小 semantic vocabulary，收敛为共享命名空间 + `structural/semantic` 两类 family，并明确禁止 lowering 泄漏命名。
 - `20260408-05-phase-a-emission-order-contract-v1-01.md`
   - 细化 `LinkedWorld` 中 `EmissionOrder` 的正式 contract，收敛为 entry/type/member/dependency 四个 semantic surface 的稳定遍历顺序，并明确排除 codegen/template/render phase 语义。
+- `20260408-06-phase-a-linker-diagnostics-contract-v1-01.md`
+  - 细化 `LinkedWorld` 中 `Diagnostics` 的正式 contract，收敛为 entry/closure/dependency/order-invariant 四类 linker-scope 结构化诊断，并明确区分下游可消费性边界。
