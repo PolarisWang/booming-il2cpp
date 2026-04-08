@@ -1,7 +1,8 @@
-# 已完成任务
+﻿# 已完成任务
 
 | 任务 | lifecycle_status | phase | 最近更新 | 下一步 | active |
 | --- | --- | --- | --- | --- | --- |
+| `20260408-03-unified-test-all-display` | `completed` | `archived` | `2026-04-08 19:15:45 +08:00` | 无。`test all` 现在会在进入前预览批次，并在 progress/summary 中输出 counts 与 failure digest。 | `no` |
 | `20260408-02-runtime-baseline-namespace-migration` | `completed` | `archived` | `2026-04-08 14:32:41 +08:00` | 无。`runtime-baseline` / `platform-gates` 已成为 live canonical surface，旧 `roadmap-0` 入口仅保留兼容包装。 | `no` |
 | `20260408-01-unified-project-generation-entrypoint` | `completed` | `archived` | `2026-04-08 13:13:54 +08:00` | 无。统一入口已正式承载 `generate/build project subject|core` 与 `deploy core`，`artifacts/projects/**` / `deploy/core/**` 边界和 `subject-exec` 手动刷新规则已冻结。 | `no` |
 | `20260407-06-phase-4-variant-aware-codegen-and-native` | `completed` | `archived` | `2026-04-08 00:03:55 +08:00` | 无。`CHECK|PROFILE|SHIP` 已贯通到 worker/codegen/native/report，并完成 Windows native 端到端验证。 | `no` |
@@ -31,3 +32,4 @@
 | `20260403-02-unified-test-framework` | `completed` | `archived` | `2026-04-04 14:09:00 +0800` | 无。 | `no` |
 | `20260404-01-skill-flow-refactor` | `completed` | `reviewing` | `2026-04-04 13:45:41 +0800` | 无。如需继续提升运行时验证稳定性，请新建 follow-up 任务。 | `no` |
 | `20260404-02-booming-docs-migration` | `completed` | `reviewing` | `2026-04-04 13:57:28 +0800` | 无。如需彻底移除 `docs/booming`，请另开 follow-up 处理历史路径清理。 | `no` |
+

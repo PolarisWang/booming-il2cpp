@@ -49,3 +49,7 @@
   - 细化 `LinkedWorld` 中 `EmissionOrder` 的正式 contract，收敛为 entry/type/member/dependency 四个 semantic surface 的稳定遍历顺序，并明确排除 codegen/template/render phase 语义。
 - `20260408-06-phase-a-linker-diagnostics-contract-v1-01.md`
   - 细化 `LinkedWorld` 中 `Diagnostics` 的正式 contract，收敛为 entry/closure/dependency/order-invariant 四类 linker-scope 结构化诊断，并明确区分下游可消费性边界。
+- `20260408-07-phase-a-codegen-input-consumption-contract-v1-01.md`
+  - 细化 `CodeGen` 在消费 error-free `LinkedWorld` 时的输入边界，比较宽松消费型、平衡消费型与强约束切片型三种方案，并推荐以 `LinkedWorld` 为权威输入、配合受限 canonical lookup 的平衡方案。
+- `20260408-08-phase-a-codegen-lowering-family-selection-surface-v1-01.md`
+  - 在已拍板的 `CodeGen` 输入方案 B 下，细化 `LoweringFamily` 的最小选择面，比较 dependency/reason 主导、semantic structure + capability bundle 主导、上游 candidate-set 主导三种方案，并推荐以后者中的平衡方案为主线。

@@ -219,6 +219,56 @@ def _resolve_final_status(status: str, subject_results: list[dict[str, Any]]) ->
     return "ok"
 
 
+def _normalize_nested_status_counts(payload: dict[str, Any] | None) -> dict[str, dict[str, int]]:
+    normalized: dict[str, dict[str, int]] = {}
+    for key, value in dict(payload or {}).items():
+        normalized[str(key)] = {
+            "total": int(dict(value or {}).get("total", 0)),
+            "ok": int(dict(value or {}).get("ok", 0)),
+            "fail": int(dict(value or {}).get("fail", 0)),
+            "skip": int(dict(value or {}).get("skip", 0)),
+            "aborted": int(dict(value or {}).get("aborted", 0)),
+        }
+    return normalized
+
+
+def _enrich_failure_items(
+    failure_items: list[dict[str, Any]],
+    *,
+    suite_results: list[dict[str, Any]],
+    subject_results: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    suite_report_paths = {
+        str(suite_result.get("suiteId") or ""): str(suite_result.get("reportPath") or "")
+        for suite_result in suite_results
+        if str(suite_result.get("reportPath") or "")
+    }
+    subject_summary_paths: dict[str, str] = {}
+    for subject_result in subject_results:
+        subject_id = str(subject_result.get("subjectId") or "")
+        summary_path = str(subject_result.get("subjectSummaryPath") or "")
+        if not subject_id or not summary_path:
+            continue
+        subject_summary_paths[subject_id] = summary_path
+        subject_summary_paths[f"subject/{subject_id}"] = summary_path
+
+    normalized_items: list[dict[str, Any]] = []
+    for failure_item in failure_items:
+        normalized_item = dict(failure_item)
+        item_id = str(normalized_item.get("id") or "")
+        item_type = str(normalized_item.get("type") or "")
+        if item_type == "suite" and not normalized_item.get("reportPath"):
+            report_path = suite_report_paths.get(item_id)
+            if report_path:
+                normalized_item["reportPath"] = report_path
+        if item_type == "subject" and not normalized_item.get("subjectSummaryPath"):
+            subject_summary_path = subject_summary_paths.get(item_id)
+            if subject_summary_path:
+                normalized_item["subjectSummaryPath"] = subject_summary_path
+        normalized_items.append(normalized_item)
+    return normalized_items
+
+
 def write_session_report(
     *,
     repo_root: Path,
@@ -231,6 +281,10 @@ def write_session_report(
     errors: list[str],
     artifacts: list[Any],
     subject_results: list[dict[str, Any]] | None = None,
+    planned_counts: dict[str, int] | None = None,
+    counts_by_type: dict[str, dict[str, int]] | None = None,
+    counts_by_family: dict[str, dict[str, int]] | None = None,
+    failure_items: list[dict[str, Any]] | None = None,
     run_context: dict[str, Any] | None = None,
 ) -> dict[str, str]:
     if run_context is None:
@@ -248,6 +302,13 @@ def write_session_report(
         pointer_roots = [_logs_root(repo_root)]
 
     normalized_subject_results = list(subject_results or [])
+    normalized_planned_counts = {
+        "totalUnits": int(dict(planned_counts or {}).get("totalUnits", 0)),
+        "suiteCount": int(dict(planned_counts or {}).get("suiteCount", 0)),
+        "subjectCount": int(dict(planned_counts or {}).get("subjectCount", 0)),
+    }
+    normalized_counts_by_type = _normalize_nested_status_counts(counts_by_type)
+    normalized_counts_by_family = _normalize_nested_status_counts(counts_by_family)
     final_status = _resolve_final_status(status, normalized_subject_results)
     exit_code = 0 if final_status == "ok" else 1
     summary_suite_results: list[dict[str, Any]] = []
@@ -295,6 +356,12 @@ def write_session_report(
         _write_text(stdout_path, _strip_ansi(text or ""))
         _write_text(stderr_path, "")
 
+    normalized_failure_items = _enrich_failure_items(
+        [dict(item) for item in list(failure_items or [])],
+        suite_results=summary_suite_results,
+        subject_results=normalized_subject_results,
+    )
+
     summary_payload = {
         "runId": run_id,
         "command": command_text,
@@ -306,6 +373,10 @@ def write_session_report(
         "caseCounts": session_case_counts,
         "trafficLightCounts": session_traffic_light_counts,
         "phaseResults": list(phase_results or []),
+        "plannedCounts": normalized_planned_counts,
+        "countsByType": normalized_counts_by_type,
+        "countsByFamily": normalized_counts_by_family,
+        "failureItems": normalized_failure_items,
         "suiteResults": summary_suite_results,
         "subjectStatusCounts": _summarize_subject_results(normalized_subject_results),
         "subjectResults": normalized_subject_results,
@@ -321,6 +392,10 @@ def write_session_report(
         "caseCounts": session_case_counts,
         "trafficLightCounts": session_traffic_light_counts,
         "phaseResults": list(phase_results or []),
+        "plannedCounts": normalized_planned_counts,
+        "countsByType": normalized_counts_by_type,
+        "countsByFamily": normalized_counts_by_family,
+        "failureItems": normalized_failure_items,
         "subjectStatusCounts": _summarize_subject_results(normalized_subject_results),
         "subjectResults": normalized_subject_results,
         "sessionPath": _relative_path(repo_root, session_path),

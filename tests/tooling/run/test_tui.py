@@ -698,6 +698,16 @@ class TuiUnifiedMenuTests(unittest.TestCase):
             [entry.group_title for entry in entries],
         )
 
+    def test_build_test_menu_entries_describes_test_all_as_suite_and_subject_batch(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_test_menu_entries(manifest, "windows")
+
+        title = next(entry.command["title"] for entry in entries if entry.command["id"] == "test-all")
+        self.assertIn("suites + subjects", title)
+
     def test_build_test_subject_menu_entries_lists_registered_subjects(self) -> None:
         tui_module = load_tui_module()
         subject_record = select_subject_record(
@@ -713,6 +723,33 @@ class TuiUnifiedMenuTests(unittest.TestCase):
         self.assertEqual(["test", "subject", "--id", f"subject/{subject_id}"], subject_entry.argv)
         self.assertEqual(f"subject/{subject_id}", subject_entry.command["targetObjectId"])
         self.assertEqual("menu-back", entries[-1].command["id"])
+
+    def test_render_test_all_preview_screen_summarizes_batch(self) -> None:
+        tui_module = load_tui_module()
+
+        screen = tui_module.render_test_all_preview_screen(
+            {
+                "hostPlatform": "windows",
+                "plannedCounts": {"totalUnits": 3, "suiteCount": 2, "subjectCount": 1},
+                "countsByFamily": {
+                    "smoke": {"total": 1},
+                    "contract": {"total": 1},
+                },
+                "subjectPreview": ["HelloWorldObject"],
+                "outputPaths": {
+                    "summaryPath": "artifacts/logs/tests/<run-id>/summary.json",
+                    "eventsPath": "artifacts/logs/tests/<run-id>/events.jsonl",
+                    "consolePath": "artifacts/logs/tests/<run-id>/console.log",
+                },
+            }
+        )
+
+        self.assertIn("Unified Test Batch Preview", screen)
+        self.assertIn("Host: windows", screen)
+        self.assertIn("Planned: 3 = 2 suites + 1 subjects", screen)
+        self.assertIn("Families: contract 1 | smoke 1", screen)
+        self.assertIn("Subjects: HelloWorldObject", screen)
+        self.assertIn("artifacts/logs/tests/<run-id>/summary.json", screen)
 
     def test_run_test_submenu_routes_subject_entry_to_third_level_subject_menu(self) -> None:
         tui_module = load_tui_module()
@@ -741,6 +778,29 @@ class TuiUnifiedMenuTests(unittest.TestCase):
             terminal=fake_terminal,
             menu_state=None,
         )
+
+    def test_run_test_submenu_routes_test_all_entry_through_preview(self) -> None:
+        tui_module = load_tui_module()
+        manifest = {"groups": [], "commands": []}
+        test_all_entry = tui_module.MenuEntry(
+            "Quick Start",
+            {"id": "test-all", "title": "Run host default batch (suites + subjects)"},
+            "all",
+            ["test", "all"],
+        )
+        fake_terminal = object()
+
+        with patch.object(tui_module, "build_test_menu_entries", return_value=[test_all_entry]):
+            with patch.object(tui_module, "_run_menu_selection", return_value=test_all_entry):
+                with patch.object(
+                    tui_module,
+                    "run_test_all_preview",
+                    return_value=["test", "all"],
+                ) as run_test_all_preview:
+                    argv = tui_module.run_test_submenu(manifest, "windows", terminal=fake_terminal)
+
+        self.assertEqual(["test", "all"], argv)
+        run_test_all_preview.assert_called_once_with("windows", terminal=fake_terminal)
 
     def test_resolve_entry_argv_supports_suite_subject_module_system_pipeline(self) -> None:
         manifest_module = load_manifest_module()
@@ -887,6 +947,65 @@ class TuiUnifiedMenuTests(unittest.TestCase):
             f"\x1b]8;;{subject_summary_uri}\x1b\\{summary_path}\x1b]8;;\x1b\\",
             screen,
         )
+
+    def test_render_test_progress_screen_renders_batch_counts_current_and_failures(self) -> None:
+        tui_module = load_tui_module()
+
+        screen = tui_module.render_test_progress_screen(
+            [
+                {"eventType": "session-start", "payload": {"command": "test all"}},
+                {
+                    "eventType": "stage-start",
+                    "payload": {
+                        "completedUnits": 1,
+                        "totalUnits": 3,
+                        "activeUnit": "contract/trace-schema",
+                        "activeUnitContext": {
+                            "id": "contract/trace-schema",
+                            "type": "suite",
+                            "family": "contract",
+                            "level": "code",
+                            "primaryModuleId": "trace-export",
+                        },
+                    },
+                },
+                {
+                    "eventType": "final-summary",
+                    "payload": {
+                        "finalStatus": "fail",
+                        "plannedCounts": {"totalUnits": 3, "suiteCount": 2, "subjectCount": 1},
+                        "countsByType": {
+                            "suite": {"total": 2, "ok": 1, "fail": 1, "skip": 0, "aborted": 0},
+                            "subject": {"total": 1, "ok": 0, "fail": 0, "skip": 0, "aborted": 1},
+                        },
+                        "countsByFamily": {
+                            "smoke": {"total": 1, "ok": 1, "fail": 0, "skip": 0, "aborted": 0},
+                            "contract": {"total": 1, "ok": 0, "fail": 1, "skip": 0, "aborted": 0},
+                        },
+                        "failureItems": [
+                            {
+                                "id": "contract/trace-schema",
+                                "type": "suite",
+                                "status": "fail",
+                                "rerunCommand": "run test contract trace-schema",
+                            }
+                        ],
+                    },
+                },
+            ],
+            repo_root=REPO_ROOT,
+        )
+
+        self.assertIn("Batch:", screen)
+        self.assertIn("Planned: 3 = 2 suites + 1 subjects", screen)
+        self.assertIn("Families: contract 1 | smoke 1", screen)
+        self.assertIn("Counts:", screen)
+        self.assertIn("suite: total 2 | ok 1 | fail 1 | skip 0 | aborted 0", screen)
+        self.assertIn("subject: total 1 | ok 0 | fail 0 | skip 0 | aborted 1", screen)
+        self.assertIn("Current:", screen)
+        self.assertIn("family=contract | level=code | module=trace-export", screen)
+        self.assertIn("Failures:", screen)
+        self.assertIn("rerun: run test contract trace-schema", screen)
 
 
 if __name__ == "__main__":

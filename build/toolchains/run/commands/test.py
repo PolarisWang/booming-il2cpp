@@ -230,29 +230,83 @@ def _resolve_run_metadata(repo_root: Path, requested_run: str | None, *, prefer_
 
 
 def _render_summary(summary: dict[str, Any]) -> str:
-    lines = [
-        "Unified Test Summary",
-        f"Run: {summary.get('runId', '-')}",
-        f"Command: {summary.get('command', '-')}",
-        f"Status: {summary.get('finalStatus', '-')}",
-    ]
+    lines = ["Unified Test Summary"]
+    planned_counts = dict(summary.get("plannedCounts") or {})
+    counts_by_family = dict(summary.get("countsByFamily") or {})
+    subject_results = list(summary.get("subjectResults") or [])
+    failure_items = list(summary.get("failureItems") or [])
+    phase_results = list(summary.get("phaseResults") or [])
+    suite_results = list(summary.get("suiteResults") or [])
+
+    lines.extend(
+        [
+            "",
+            "Overall:",
+            f"Run: {summary.get('runId', '-')}",
+            f"Command: {summary.get('command', '-')}",
+            f"Host: {summary.get('hostPlatform', '-')}",
+            f"Status: {summary.get('finalStatus', '-')}",
+        ]
+    )
+    if planned_counts:
+        lines.extend(
+            [
+                f"Total units: {planned_counts.get('totalUnits', 0)}",
+                f"Suite count: {planned_counts.get('suiteCount', 0)}",
+                f"Subject count: {planned_counts.get('subjectCount', 0)}",
+            ]
+        )
     errors = list(summary.get("errors") or [])
     if errors:
         lines.append("Errors:")
         lines.extend(str(error) for error in errors)
 
-    suite_results = list(summary.get("suiteResults") or [])
-    subject_results = list(summary.get("subjectResults") or [])
-    phase_results = list(summary.get("phaseResults") or [])
     if phase_results:
+        lines.append("")
         lines.append("Phases:")
         lines.extend(f"{phase.get('status', '-')}: {phase.get('phaseId', '-')}" for phase in phase_results)
-    if subject_results:
-        lines.append("Subjects:")
-        lines.extend(f"{subject.get('status', '-')}: {subject.get('subjectId', '-')}" for subject in subject_results)
-    if suite_results:
+
+    if counts_by_family:
+        lines.append("")
+        lines.append("Suite Breakdown:")
+        for family in sorted(counts_by_family):
+            counts = dict(counts_by_family[family] or {})
+            lines.append(
+                f"{family}: total {counts.get('total', 0)} | ok {counts.get('ok', 0)} | "
+                f"fail {counts.get('fail', 0)} | skip {counts.get('skip', 0)} | aborted {counts.get('aborted', 0)}"
+            )
+    elif suite_results:
+        lines.append("")
         lines.append("Suites:")
         lines.extend(f"{suite.get('status', '-')}: {suite.get('suiteId', '-')}" for suite in suite_results)
+
+    if subject_results:
+        lines.append("")
+        lines.append("Subject Breakdown:")
+        for subject in subject_results:
+            matrix_counts = dict(subject.get("matrixStatusCounts") or {})
+            lines.append(
+                f"{subject.get('subjectId', '-')}: goal={subject.get('requestedGoalId', '-')} | "
+                f"status={subject.get('status', '-')} | matrix total {matrix_counts.get('total', 0)} | "
+                f"ok {matrix_counts.get('ok', 0)} | fail {matrix_counts.get('fail', 0)} | "
+                f"skip {matrix_counts.get('skip', 0)} | aborted {matrix_counts.get('aborted', 0)}"
+            )
+            if subject.get("subjectSummaryPath"):
+                lines.append(f"summary: {subject['subjectSummaryPath']}")
+
+    if failure_items:
+        lines.append("")
+        lines.append("Failure Digest:")
+        for failure_item in failure_items:
+            lines.append(
+                f"{failure_item.get('type', '-')}: {failure_item.get('status', '-')} | {failure_item.get('id', '-')}"
+            )
+            if failure_item.get("rerunCommand"):
+                lines.append(f"rerun: {failure_item['rerunCommand']}")
+            if failure_item.get("reportPath"):
+                lines.append(f"report: {failure_item['reportPath']}")
+            if failure_item.get("subjectSummaryPath"):
+                lines.append(f"summary: {failure_item['subjectSummaryPath']}")
 
     return "\n".join(lines) + "\n"
 
@@ -379,6 +433,142 @@ def _empty_phase_status_counts() -> dict[str, int]:
         "skip": 0,
         "aborted": 0,
     }
+
+
+def _normalize_unit_status(status: str) -> str:
+    return status if status in {"ok", "fail", "skip", "aborted"} else "aborted"
+
+
+def _build_planned_counts(items: list[dict[str, Any]]) -> dict[str, int]:
+    subject_count = sum(1 for item in items if str(item.get("type") or "suite") == "subject")
+    suite_count = len(items) - subject_count
+    return {
+        "totalUnits": len(items),
+        "suiteCount": suite_count,
+        "subjectCount": subject_count,
+    }
+
+
+def _build_counts_by_type(items: list[dict[str, Any]]) -> dict[str, dict[str, int]]:
+    counts: dict[str, dict[str, int]] = {}
+    for item in items:
+        item_type = "subject" if str(item.get("type") or "suite") == "subject" else "suite"
+        bucket = counts.setdefault(item_type, _empty_phase_status_counts())
+        bucket["total"] += 1
+    return counts
+
+
+def _build_counts_by_family(items: list[dict[str, Any]]) -> dict[str, dict[str, int]]:
+    counts: dict[str, dict[str, int]] = {}
+    for item in items:
+        if str(item.get("type") or "suite") == "subject":
+            continue
+        family = str(item.get("family") or "unknown")
+        bucket = counts.setdefault(family, _empty_phase_status_counts())
+        bucket["total"] += 1
+    return counts
+
+
+def _record_item_status(
+    item: dict[str, Any],
+    status: str,
+    *,
+    counts_by_type: dict[str, dict[str, int]],
+    counts_by_family: dict[str, dict[str, int]],
+) -> str:
+    normalized_status = _normalize_unit_status(status)
+    item_type = "subject" if str(item.get("type") or "suite") == "subject" else "suite"
+    counts_by_type.setdefault(item_type, _empty_phase_status_counts())[normalized_status] += 1
+    if item_type == "suite":
+        family = str(item.get("family") or "unknown")
+        counts_by_family.setdefault(family, _empty_phase_status_counts())[normalized_status] += 1
+    return normalized_status
+
+
+def _build_active_unit_context(item: dict[str, Any]) -> dict[str, Any]:
+    item_type = "subject" if str(item.get("type") or "suite") == "subject" else "suite"
+    context: dict[str, Any] = {
+        "id": str(item.get("id") or ""),
+        "type": item_type,
+    }
+    if item_type == "subject":
+        context["subjectId"] = str(item.get("subjectId") or str(item.get("id") or "").removeprefix("subject/"))
+        context["goalId"] = str(item.get("defaultGoalId") or item.get("requestedGoalId") or "")
+        context["matrixId"] = str(item.get("defaultMatrixId") or item.get("matrixId") or "")
+    else:
+        context["family"] = str(item.get("family") or "")
+        context["level"] = str(item.get("level") or "")
+        context["primaryModuleId"] = str(item.get("primaryModuleId") or "")
+    return context
+
+
+def _build_rerun_command(item: dict[str, Any]) -> str:
+    item_type = "subject" if str(item.get("type") or "suite") == "subject" else "suite"
+    canonical_command = str(item.get("canonicalCommand") or "").strip()
+    if canonical_command:
+        return canonical_command if canonical_command.startswith("run ") else f"run {canonical_command}"
+    if item_type == "subject":
+        return f"run test subject --id {item['id']}"
+    return f"run test {item.get('family')} {item.get('suite')}"
+
+
+def _build_failure_item(
+    item: dict[str, Any],
+    *,
+    status: str,
+    run_context: dict[str, Any] | None = None,
+    repo_root: Path | None = None,
+    subject_result: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    item_type = "subject" if str(item.get("type") or "suite") == "subject" else "suite"
+    failure_item = {
+        "id": str(item.get("id") or ""),
+        "type": item_type,
+        "status": _normalize_unit_status(status),
+        "rerunCommand": _build_rerun_command(item),
+    }
+    if item_type == "suite" and run_context is not None and repo_root is not None:
+        session_root = Path(run_context["sessionRoot"])
+        report_path = session_root / "suites" / str(item["id"]) / "report.json"
+        failure_item["reportPath"] = report_path.relative_to(repo_root).as_posix()
+    if item_type == "subject" and subject_result is not None and subject_result.get("subjectSummaryPath"):
+        failure_item["subjectSummaryPath"] = str(subject_result["subjectSummaryPath"])
+    return failure_item
+
+
+def _build_aborted_subject_result(item: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "subjectId": str(item.get("subjectId") or str(item.get("id") or "").removeprefix("subject/")),
+        "requestedGoalId": str(item.get("defaultGoalId") or item.get("requestedGoalId") or ""),
+        "status": "aborted",
+        "matrixStatusCounts": {
+            "total": 1,
+            "ok": 0,
+            "fail": 0,
+            "skip": 0,
+            "aborted": 1,
+        },
+    }
+
+
+def _mark_remaining_items_aborted(
+    remaining_items: list[dict[str, Any]],
+    *,
+    counts_by_type: dict[str, dict[str, int]],
+    counts_by_family: dict[str, dict[str, int]],
+    failure_items: list[dict[str, Any]],
+    subject_results: list[dict[str, Any]],
+) -> None:
+    for remaining_item in remaining_items:
+        _record_item_status(
+            remaining_item,
+            "aborted",
+            counts_by_type=counts_by_type,
+            counts_by_family=counts_by_family,
+        )
+        failure_items.append(_build_failure_item(remaining_item, status="aborted"))
+        if str(remaining_item.get("type") or "suite") == "subject":
+            subject_results.append(_build_aborted_subject_result(remaining_item))
 
 
 def _merge_phase_suite_ids(target: list[str], additions: list[str]) -> None:
@@ -783,14 +973,20 @@ def _run_suite_items(
     suite_results: list[dict] = []
     subject_results: list[dict] = []
     artifacts: list[str] = []
+    planned_counts = _build_planned_counts(items)
+    counts_by_type = _build_counts_by_type(items)
+    counts_by_family = _build_counts_by_family(items)
+    failure_items: list[dict[str, Any]] = []
     for unit_index, item in enumerate(items):
         item_type = str(item.get("type") or "suite")
+        active_unit_context = _build_active_unit_context(item)
         stage_start_event = reporting_module.build_event(
             "stage-start",
             {
                 "completedUnits": unit_index,
                 "totalUnits": len(items),
                 "activeUnit": item["id"],
+                "activeUnitContext": active_unit_context,
             },
             run_id=run_context["runId"],
             suite_id=item["id"],
@@ -805,24 +1001,36 @@ def _run_suite_items(
         unit_exit_code = 1
         unit_errors: list[str] = []
         if item_type == "subject":
-            selected_object = registry_module.find_registry_object(index, str(item["id"]))
-            if selected_object is None:
+            subject_object = registry_module.find_registry_object(index, str(item["id"]))
+            if subject_object is None:
                 unit_errors = [f"registry object not found: {item['id']}"]
             else:
                 subject_result = _run_subject_object(
                     index=index,
-                    selected_object=selected_object,
-                    normalized_options={"id": str(selected_object["id"])},
+                    selected_object=subject_object,
+                    normalized_options={"id": str(subject_object["id"])},
                     repo_root=repo_root,
                     host_platform=host_platform,
-                    command_text=f"test subject --id {selected_object['id']}",
+                    command_text=f"test subject --id {subject_object['id']}",
                 )
                 outputs.append(subject_result.text or "")
-                subject_results.extend(list(subject_result.payload.get("subjectResults", [])))
+                current_subject_results = list(subject_result.payload.get("subjectResults", []))
+                subject_results.extend(current_subject_results)
                 artifacts.extend(list(subject_result.payload.get("artifacts", [])))
-                unit_status = "ok" if subject_result.status == "ok" else "fail"
+                if current_subject_results:
+                    unit_status = str(current_subject_results[0].get("status") or "aborted")
+                else:
+                    unit_status = "ok" if subject_result.status == "ok" else "fail"
                 unit_exit_code = int(subject_result.payload.get("exitCode", 1))
                 unit_errors = list(subject_result.errors)
+                if _normalize_unit_status(unit_status) != "ok":
+                    failure_items.append(
+                        _build_failure_item(
+                            item,
+                            status=unit_status,
+                            subject_result=current_subject_results[0] if current_subject_results else None,
+                        )
+                    )
         else:
             session_result = _execute_public_test_session(
                 item["family"],
@@ -836,9 +1044,28 @@ def _run_suite_items(
             outputs.append(session_result.text or "")
             suite_results.extend(session_result.suite_results)
             artifacts.extend(session_result.artifacts)
-            unit_status = "ok" if session_result.status == "ok" else "fail"
+            if session_result.suite_results:
+                unit_status = str(session_result.suite_results[-1].get("status") or "aborted")
+            else:
+                unit_status = "ok" if session_result.status == "ok" else "fail"
             unit_exit_code = session_result.exit_code
             unit_errors = list(session_result.errors)
+            if _normalize_unit_status(unit_status) != "ok":
+                failure_items.append(
+                    _build_failure_item(
+                        item,
+                        status=unit_status,
+                        run_context=run_context,
+                        repo_root=repo_root,
+                    )
+                )
+
+        unit_status = _record_item_status(
+            item,
+            unit_status,
+            counts_by_type=counts_by_type,
+            counts_by_family=counts_by_family,
+        )
 
         stage_finish_event = reporting_module.build_event(
             "stage-finish",
@@ -872,6 +1099,13 @@ def _run_suite_items(
             progress_callback(progress_event)
 
         if unit_status != "ok":
+            _mark_remaining_items_aborted(
+                items[unit_index + 1 :],
+                counts_by_type=counts_by_type,
+                counts_by_family=counts_by_family,
+                failure_items=failure_items,
+                subject_results=subject_results,
+            )
             result = CommandResult.failure(
                 command=command_text,
                 host_platform=host_platform,
@@ -879,6 +1113,10 @@ def _run_suite_items(
                 errors=unit_errors or [f"test execution failed while running {item['id']}"],
                 payload={
                     "items": items,
+                    "plannedCounts": planned_counts,
+                    "countsByType": counts_by_type,
+                    "countsByFamily": counts_by_family,
+                    "failureItems": failure_items,
                     "suiteResults": suite_results,
                     "subjectResults": subject_results,
                     "artifacts": artifacts,
@@ -899,6 +1137,10 @@ def _run_suite_items(
         target=target,
         payload={
             "items": items,
+            "plannedCounts": planned_counts,
+            "countsByType": counts_by_type,
+            "countsByFamily": counts_by_family,
+            "failureItems": failure_items,
             "suiteResults": suite_results,
             "subjectResults": subject_results,
             "artifacts": artifacts,
@@ -1088,6 +1330,10 @@ def _attach_session_report(
             errors=list(result.errors),
             artifacts=list(result.payload.get("artifacts", [])),
             subject_results=list(result.payload.get("subjectResults", [])),
+            planned_counts=dict(result.payload.get("plannedCounts") or {}),
+            counts_by_type=dict(result.payload.get("countsByType") or {}),
+            counts_by_family=dict(result.payload.get("countsByFamily") or {}),
+            failure_items=[dict(item) for item in list(result.payload.get("failureItems") or [])],
             run_context=run_context,
         )
     except OSError:

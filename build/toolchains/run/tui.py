@@ -109,6 +109,10 @@ class TestProgressView:
     command: str
     progress_text: str
     final_status: str
+    batch_lines: list[str]
+    count_lines: list[str]
+    current_lines: list[str]
+    failure_lines: list[str]
     history_lines: list[str]
     phase_lines: list[str]
     subject_lines: list[str]
@@ -424,7 +428,7 @@ def build_test_menu_entries(manifest: dict[str, Any], host_platform: str) -> lis
     del manifest
     del host_platform
     return [
-        MenuEntry("Quick Start", {"id": "test-all", "title": "Run the default unified test matrix"}, "all", ["test", "all"]),
+        MenuEntry("Quick Start", {"id": "test-all", "title": "Run host default batch (suites + subjects)"}, "all", ["test", "all"]),
         MenuEntry("Selectors", {"id": "test-suite", "title": "Run a suite object"}, "suite", ["test"]),
         MenuEntry("Selectors", {"id": "test-subject", "title": "Run a subject object"}, "subject", ["test"]),
         MenuEntry("Selectors", {"id": "test-module", "title": "Run a module verification object"}, "module", ["test"]),
@@ -737,6 +741,16 @@ def run_test_submenu(
                     return argv
                 initial_selection = _selection_index_for_command(entries, selected_entry.command["id"])
                 continue
+            if selected_entry.command["id"] == "test-all":
+                if menu_state is not None:
+                    menu_state.primary_command_id = "test-menu"
+                    menu_state.active_section_command_id = "test-menu"
+                    menu_state.section_selection_command_id = selected_entry.command["id"]
+                argv = run_test_all_preview(host_platform, terminal=current_terminal)
+                if argv is not None:
+                    return argv
+                initial_selection = _selection_index_for_command(entries, selected_entry.command["id"])
+                continue
             if menu_state is not None:
                 menu_state.primary_command_id = "test-menu"
                 menu_state.active_section_command_id = "test-menu"
@@ -818,6 +832,93 @@ def _run_submenu(
         menu_state.active_section_command_id = section_command_id
         menu_state.section_selection_command_id = selected_entry.command["id"]
     return resolve_entry_argv(selected_entry)
+
+
+def _build_test_all_preview_payload(host_platform: str) -> dict[str, Any]:
+    public_suites = public_specs_module.list_public_test_suites(host_platform)
+    index = registry_module.scan_registry(
+        REPO_ROOT,
+        host_platform=host_platform,
+        public_suite_specs=public_specs_module.PUBLIC_TEST_SPECS,
+    )
+    counts_by_family: dict[str, dict[str, int]] = {}
+    for suite in public_suites:
+        family = str(suite.get("family") or "unknown")
+        bucket = counts_by_family.setdefault(family, {"total": 0})
+        bucket["total"] += 1
+
+    subject_preview = [
+        str(subject.get("displayName") or subject.get("subjectId") or subject.get("id") or "").removeprefix("subject/")
+        for subject in sorted(index.subjects, key=lambda item: str(item.get("id") or ""))
+    ]
+    return {
+        "hostPlatform": host_platform,
+        "plannedCounts": {
+            "totalUnits": len(public_suites) + len(index.subjects),
+            "suiteCount": len(public_suites),
+            "subjectCount": len(index.subjects),
+        },
+        "countsByFamily": counts_by_family,
+        "subjectPreview": subject_preview[:5],
+        "outputPaths": {
+            "summaryPath": "artifacts/logs/tests/<run-id>/summary.json",
+            "eventsPath": "artifacts/logs/tests/<run-id>/events.jsonl",
+            "consolePath": "artifacts/logs/tests/<run-id>/console.log",
+        },
+    }
+
+
+def render_test_all_preview_screen(preview: dict[str, Any]) -> str:
+    planned_line = _format_planned_counts(preview.get("plannedCounts"))
+    family_line = _format_family_totals(preview.get("countsByFamily"))
+    subject_preview = [str(item) for item in list(preview.get("subjectPreview") or []) if str(item)]
+    output_paths = dict(preview.get("outputPaths") or {})
+
+    lines = [
+        "Unified Test Batch Preview",
+        f"Host: {preview.get('hostPlatform', '-')}",
+    ]
+    if planned_line:
+        lines.append(planned_line)
+    if family_line:
+        lines.append(f"Families: {family_line}")
+    lines.append(f"Subjects: {' | '.join(subject_preview) if subject_preview else '-'}")
+    lines.append("")
+    lines.append("Outputs:")
+    for key in ("summaryPath", "eventsPath", "consolePath"):
+        value = output_paths.get(key)
+        if value:
+            lines.append(str(value))
+    lines.append("")
+    lines.append("Enter to run. Esc/Q to return.")
+    return "\n".join(lines) + "\n"
+
+
+def run_test_all_preview(
+    host_platform: str,
+    *,
+    terminal: "_TerminalSession" | None = None,
+) -> list[str] | None:
+    preview = _build_test_all_preview_payload(host_platform)
+    active_terminal = terminal
+    created_terminal = False
+    if active_terminal is None:
+        active_terminal = _TerminalSession()
+        created_terminal = True
+
+    def _run_loop(current_terminal: "_TerminalSession") -> list[str] | None:
+        while True:
+            current_terminal.render(render_test_all_preview_screen(preview))
+            key = current_terminal.read_key()
+            if key == "enter":
+                return ["test", "all"]
+            if key in {"escape", "quit"}:
+                return None
+
+    if created_terminal:
+        with active_terminal as current_terminal:
+            return _run_loop(current_terminal)
+    return _run_loop(active_terminal)
 
 
 def _run_menu_selection(
@@ -924,27 +1025,34 @@ def render_test_progress_screen(events: list[dict[str, Any]], repo_root: Path | 
         f"Command: {view.command or '-'}",
         f"Status: {view.final_status}",
         f"Progress: {_green(view.progress_text)}",
-        "",
-        "Timeline:",
     ]
+    if view.batch_lines:
+        lines.extend(["", "Batch:"])
+        lines.extend(view.batch_lines)
+    if view.count_lines:
+        lines.extend(["", "Counts:"])
+        lines.extend(view.count_lines)
+    if view.current_lines:
+        lines.extend(["", "Current:"])
+        lines.extend(view.current_lines)
+    if view.failure_lines:
+        lines.extend(["", "Failures:"])
+        lines.extend(view.failure_lines)
+
+    lines.extend(["", "Timeline:"])
     lines.extend(view.history_lines or ["[  0%] waiting for test events"])
 
-    if view.important_lines:
-        lines.append("")
     if view.phase_lines:
+        lines.append("")
         lines.append("Phases:")
         lines.extend(view.phase_lines)
     if view.subject_lines:
-        if not view.phase_lines:
-            lines.append("")
+        lines.append("")
         lines.append("Subjects:")
         lines.extend(view.subject_lines)
 
     if view.important_lines:
-        if not view.phase_lines and not view.subject_lines:
-            lines.append("")
-        else:
-            lines.append("")
+        lines.append("")
         lines.append(_highlight_heading("Important outputs:"))
         lines.extend(view.important_lines)
 
@@ -995,6 +1103,10 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
     command = ""
     progress_text = "0%"
     final_status = "running"
+    batch_lines: list[str] = []
+    count_lines: list[str] = []
+    current_lines: list[str] = []
+    failure_lines: list[str] = []
     history_lines: list[str] = []
     phase_lines: list[str] = []
     subject_lines: list[str] = []
@@ -1004,6 +1116,8 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
     seen_history: set[str] = set()
     seen_important: set[tuple[str, str]] = set()
     seen_artifacts: set[str] = set()
+    active_unit = ""
+    active_unit_context: dict[str, Any] = {}
 
     for event in events:
         event_type = str(event.get("eventType") or "")
@@ -1033,12 +1147,13 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
             continue
 
         if event_type == "stage-start":
-            active_unit = payload.get("activeUnit")
+            active_unit = str(payload.get("activeUnit") or "")
+            active_unit_context = dict(payload.get("activeUnitContext") or {})
             if active_unit:
                 _append_unique(
                     history_lines,
                     seen_history,
-                    f"[{_format_progress_label(progress_text)}] run    {str(active_unit)}",
+                    f"[{_format_progress_label(progress_text)}] run    {active_unit}",
                 )
             continue
 
@@ -1066,6 +1181,10 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
         if event_type == "final-summary":
             final_status = str(payload.get("finalStatus") or final_status)
             _append_unique(history_lines, seen_history, f"[{_format_progress_label(progress_text)}] done   {final_status}")
+            batch_lines = _build_batch_lines(payload)
+            count_lines = _build_count_lines(payload)
+            current_lines = _build_current_lines(active_unit, active_unit_context)
+            failure_lines = _build_failure_lines(payload)
             phase_lines = _build_phase_result_lines(payload)
             subject_lines = _build_subject_result_lines(payload)
             errors.extend(str(error) for error in list(payload.get("errors") or []))
@@ -1079,6 +1198,10 @@ def build_test_progress_view(events: list[dict[str, Any]], repo_root: Path | Non
         command=command,
         progress_text=progress_text,
         final_status=final_status,
+        batch_lines=batch_lines,
+        count_lines=count_lines,
+        current_lines=current_lines,
+        failure_lines=failure_lines,
         history_lines=history_lines,
         phase_lines=phase_lines,
         subject_lines=subject_lines,
@@ -1189,6 +1312,85 @@ def _build_phase_result_lines(payload: dict[str, Any]) -> list[str]:
 def _build_subject_result_lines(payload: dict[str, Any]) -> list[str]:
     subject_results = list(payload.get("subjectResults") or [])
     return [f"{subject.get('status', '-')}: {subject.get('subjectId', '-')}" for subject in subject_results]
+
+
+def _format_planned_counts(planned_counts: Any) -> str:
+    counts = dict(planned_counts or {})
+    total_units = int(counts.get("totalUnits", 0))
+    suite_count = int(counts.get("suiteCount", 0))
+    subject_count = int(counts.get("subjectCount", 0))
+    if total_units <= 0 and suite_count <= 0 and subject_count <= 0:
+        return ""
+    return f"Planned: {total_units} = {suite_count} suites + {subject_count} subjects"
+
+
+def _format_family_totals(counts_by_family: Any) -> str:
+    families = dict(counts_by_family or {})
+    parts = [f"{family} {int(dict(families[family] or {}).get('total', 0))}" for family in sorted(families)]
+    return " | ".join(parts)
+
+
+def _build_batch_lines(payload: dict[str, Any]) -> list[str]:
+    lines: list[str] = []
+    planned_line = _format_planned_counts(payload.get("plannedCounts"))
+    if planned_line:
+        lines.append(planned_line)
+    family_line = _format_family_totals(payload.get("countsByFamily"))
+    if family_line:
+        lines.append(f"Families: {family_line}")
+    return lines
+
+
+def _build_count_lines(payload: dict[str, Any]) -> list[str]:
+    counts_by_type = dict(payload.get("countsByType") or {})
+    ordered_types = [item_type for item_type in ("suite", "subject") if item_type in counts_by_type]
+    ordered_types.extend(item_type for item_type in counts_by_type if item_type not in {"suite", "subject"})
+    lines: list[str] = []
+    for item_type in ordered_types:
+        counts = dict(counts_by_type.get(item_type) or {})
+        lines.append(
+            f"{item_type}: total {counts.get('total', 0)} | ok {counts.get('ok', 0)} | "
+            f"fail {counts.get('fail', 0)} | skip {counts.get('skip', 0)} | aborted {counts.get('aborted', 0)}"
+        )
+    return lines
+
+
+def _build_current_lines(active_unit: str, active_unit_context: dict[str, Any]) -> list[str]:
+    if not active_unit and not active_unit_context:
+        return []
+    lines: list[str] = []
+    if active_unit:
+        lines.append(f"id: {active_unit}")
+    if str(active_unit_context.get("type") or "") == "subject":
+        parts = [
+            f"subject={active_unit_context.get('subjectId') or '-'}",
+            f"goal={active_unit_context.get('goalId') or '-'}",
+            f"matrix={active_unit_context.get('matrixId') or '-'}",
+        ]
+        lines.append(" | ".join(parts))
+    elif active_unit_context:
+        parts = [
+            f"family={active_unit_context.get('family') or '-'}",
+            f"level={active_unit_context.get('level') or '-'}",
+            f"module={active_unit_context.get('primaryModuleId') or '-'}",
+        ]
+        lines.append(" | ".join(parts))
+    return lines
+
+
+def _build_failure_lines(payload: dict[str, Any]) -> list[str]:
+    lines: list[str] = []
+    for failure_item in list(payload.get("failureItems") or []):
+        lines.append(
+            f"{failure_item.get('type', '-')}: {failure_item.get('status', '-')} | {failure_item.get('id', '-')}"
+        )
+        if failure_item.get("rerunCommand"):
+            lines.append(f"rerun: {failure_item['rerunCommand']}")
+        if failure_item.get("reportPath"):
+            lines.append(f"report: {failure_item['reportPath']}")
+        if failure_item.get("subjectSummaryPath"):
+            lines.append(f"summary: {failure_item['subjectSummaryPath']}")
+    return lines
 
 
 def render_test_report_highlights(payload: dict[str, Any], repo_root: Path | None = None) -> str:
