@@ -155,9 +155,11 @@ def resolve_cli_command(
     positional: list[str],
     options: dict[str, Any],
     host_platform: str,
+    *,
+    include_hidden: bool = False,
 ) -> dict[str, Any] | None:
     candidates = sorted(
-        list_commands(manifest, host_platform, include_hidden=False),
+        list_commands(manifest, host_platform, include_hidden=include_hidden),
         key=lambda item: (len(item.get("tokens", [])), len(item.get("options", {}))),
         reverse=True,
     )
@@ -253,6 +255,17 @@ def resolve_dynamic_test_command(
         command = find_command(manifest, "test-family-all", host_platform, include_hidden=True)
         return command, positional[1], merged_options
 
+    if len(positional) == 3 and positional[1] == "workflow":
+        command = resolve_cli_command(
+            manifest,
+            positional,
+            merged_options,
+            host_platform,
+            include_hidden=True,
+        )
+        if command is not None:
+            return command, command.get("target"), merged_options
+
     if len(positional) == 3:
         merged_options["family"] = positional[1]
         merged_options["suite"] = positional[2]
@@ -280,6 +293,17 @@ def parse_cli(argv: list[str], interactive: bool, manifest: dict[str, Any], host
         command = resolve_cli_command(manifest, positional, options, host_platform)
         target = None
         merged_options = options
+    if command is None:
+        hidden_command = resolve_cli_command(
+            manifest,
+            positional,
+            options,
+            host_platform,
+            include_hidden=True,
+        )
+        if hidden_command is not None and not hidden_command.get("public", True):
+            command = hidden_command
+            merged_options = options
     if command is None:
         return {
             "command": None,

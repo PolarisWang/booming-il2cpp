@@ -2,6 +2,7 @@
 
 | 任务 | lifecycle_status | phase | 最近更新 | 下一步 | active |
 | --- | --- | --- | --- | --- | --- |
+| `20260408-02-runtime-baseline-namespace-migration` | `completed` | `archived` | `2026-04-08 14:32:41 +08:00` | 无。`runtime-baseline` / `platform-gates` 已成为 live canonical surface，旧 `roadmap-0` 入口仅保留兼容包装。 | `no` |
 | `20260408-01-unified-project-generation-entrypoint` | `completed` | `archived` | `2026-04-08 13:13:54 +08:00` | 无。统一入口已正式承载 `generate/build project subject|core` 与 `deploy core`，`artifacts/projects/**` / `deploy/core/**` 边界和 `subject-exec` 手动刷新规则已冻结。 | `no` |
 | `20260407-06-phase-4-variant-aware-codegen-and-native` | `completed` | `archived` | `2026-04-08 00:03:55 +08:00` | 无。`CHECK|PROFILE|SHIP` 已贯通到 worker/codegen/native/report，并完成 Windows native 端到端验证。 | `no` |
 | `20260407-02-subject-layout-and-variant-traceability-roadmap` | `completed` | `archived` | `2026-04-08 00:03:55 +08:00` | 无。父 roadmap 已整体完成，后续仅在出现新结构约束时另开 follow-up。 | `no` |

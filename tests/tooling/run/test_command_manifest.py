@@ -284,6 +284,28 @@ class CommandManifestTests(unittest.TestCase):
         self.assertIsNone(parsed["command"])
         self.assertEqual("verify roadmap-0", parsed["command_text"])
 
+    def test_parse_cli_supports_runtime_baseline_prepare_and_workflow_commands(self) -> None:
+        manifest_module = load_manifest_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        prepare_runtime_baseline = manifest_module.parse_cli(
+            ["prepare", "workflow", "runtime-baseline", "--host", "macos"],
+            False,
+            manifest,
+            "macos",
+        )
+        self.assertEqual("prepare-workflow-runtime-baseline-macos", prepare_runtime_baseline["command"]["id"])
+        self.assertEqual("macos", prepare_runtime_baseline["options"]["host"])
+
+        workflow_runtime_baseline = manifest_module.parse_cli(
+            ["test", "workflow", "runtime-baseline-macos"],
+            False,
+            manifest,
+            "macos",
+        )
+        self.assertEqual("test-workflow-runtime-baseline-macos", workflow_runtime_baseline["command"]["id"])
+        self.assertEqual("runtime-baseline-macos", workflow_runtime_baseline["target"])
+
     def test_parse_cli_supports_project_and_deploy_commands(self) -> None:
         manifest_module = load_manifest_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)

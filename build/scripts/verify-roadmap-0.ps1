@@ -17,7 +17,7 @@ if ($null -eq $pythonCommand) {
     throw "python is required to run verify-roadmap-0.ps1"
 }
 
-$pythonScript = Join-Path $PSScriptRoot "verify-roadmap-0.py"
+$pythonScript = Join-Path $PSScriptRoot "verify-runtime-baseline.py"
 if ($pythonCommand.Name -eq "py") {
     & py -3 $pythonScript --host-profile $HostProfile
 }

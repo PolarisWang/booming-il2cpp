@@ -54,16 +54,16 @@ EXPECTED_MANAGED_PROJECTS: dict[str, list[str]] = {
 }
 ACTIVE_CONTRACT_DOC_PATHS = [
     REPO_ROOT / "contracts" / "docs" / "v0" / "overview.md",
-    REPO_ROOT / "docs" / "architecture" / "roadmap-0" / "schema-pack-v0.md",
-    REPO_ROOT / "docs" / "architecture" / "roadmap-0" / "hello-world-proof-spec-v0.md",
-    REPO_ROOT / "docs" / "architecture" / "roadmap-0" / "local-verification.md",
+    REPO_ROOT / "docs" / "architecture" / "runtime-baseline" / "schema-pack-v0.md",
+    REPO_ROOT / "docs" / "architecture" / "runtime-baseline" / "hello-world-proof-spec-v0.md",
+    REPO_ROOT / "docs" / "architecture" / "runtime-baseline" / "local-verification.md",
     REPO_ROOT / "docs" / "architecture" / "subject-test-framework-v1" / "foundation-and-windows-cutover-v1.md",
 ]
 ACTIVE_ANALYSIS_RETIREMENT_DOC_PATHS = [
     REPO_ROOT / "contracts" / "docs" / "v0" / "overview.md",
-    REPO_ROOT / "docs" / "architecture" / "roadmap-0" / "schema-pack-v0.md",
-    REPO_ROOT / "docs" / "architecture" / "roadmap-0" / "repo-layout.md",
-    REPO_ROOT / "docs" / "architecture" / "roadmap-0" / "ownership-map.md",
+    REPO_ROOT / "docs" / "architecture" / "runtime-baseline" / "schema-pack-v0.md",
+    REPO_ROOT / "docs" / "architecture" / "runtime-baseline" / "repo-layout.md",
+    REPO_ROOT / "docs" / "architecture" / "runtime-baseline" / "ownership-map.md",
     REPO_ROOT / "docs" / "architecture" / "subject-test-framework-v1" / "foundation-and-windows-cutover-v1.md",
     REPO_ROOT / "wiki" / "06-测试验证" / "模块" / "analysis.md",
 ]
@@ -104,8 +104,8 @@ class RepoLayoutTests(unittest.TestCase):
 
     def test_root_cmake_and_verify_scripts_use_canonical_contract_paths(self) -> None:
         cmake_router = (REPO_ROOT / "CMakeLists.txt").read_text(encoding="utf-8")
-        verify_py = (REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.py").read_text(encoding="utf-8")
-        verify_ps1 = (REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.ps1").read_text(encoding="utf-8")
+        verify_py = (REPO_ROOT / "build" / "scripts" / "verify-runtime-baseline.py").read_text(encoding="utf-8")
+        verify_ps1 = (REPO_ROOT / "build" / "scripts" / "verify-runtime-baseline.ps1").read_text(encoding="utf-8")
 
         self.assertIn("subjects/HelloWorldObject/validation/proof/native-reference", cmake_router)
         self.assertIn("tests/contracts/native/abi", cmake_router)

@@ -60,8 +60,8 @@ class UnifiedTestCommandTests(unittest.TestCase):
             ),
         )
         self.assertEqual(
-            "test-workflow-roadmap-0-macos",
-            test_module.resolve_legacy_test_command_id("workflow", "roadmap-0-macos", stage="all", host_platform="macos"),
+            "test-workflow-runtime-baseline-macos",
+            test_module.resolve_legacy_test_command_id("workflow", "runtime-baseline-macos", stage="all", host_platform="macos"),
         )
 
     def test_public_test_list_surfaces_unified_suite_ids(self) -> None:
@@ -79,7 +79,7 @@ class UnifiedTestCommandTests(unittest.TestCase):
         item_ids = {item["id"] for item in items}
 
         self.assertIn(str(smoke_spec["id"]), item_ids)
-        self.assertIn("workflow/roadmap-0-macos", item_ids)
+        self.assertIn("workflow/runtime-baseline-macos", item_ids)
         self.assertNotIn(str(dict(smoke_spec.get("legacy_commands") or {}).get("all") or ""), item_ids)
         self.assertNotIn("verify-roadmap-0-macos", item_ids)
 
@@ -132,9 +132,9 @@ class UnifiedTestCommandTests(unittest.TestCase):
 
         self.assertEqual("error", result.status)
         self.assertIn("Removed command", result.text or "")
-        self.assertIn("run test workflow roadmap-0-windows", result.text or "")
+        self.assertIn("run test workflow runtime-baseline-windows", result.text or "")
         self.assertEqual("verify roadmap-0", result.payload["migration"]["removedCommand"])
-        self.assertEqual("test workflow roadmap-0-windows", result.payload["migration"]["replacementSyntax"])
+        self.assertEqual("test workflow runtime-baseline-windows", result.payload["migration"]["replacementSyntax"])
 
 
 if __name__ == "__main__":

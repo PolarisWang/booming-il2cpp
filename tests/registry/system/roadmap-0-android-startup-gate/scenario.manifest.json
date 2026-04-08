@@ -1,10 +1,11 @@
-{
-  "displayName": "Roadmap-0 Android startup gate scenario",
-  "primaryModuleId": "roadmap-0",
-  "moduleIds": ["roadmap-0"],
+﻿{
+  "scenarioId": "android-startup-gate",
+  "displayName": "Runtime-baseline Android startup gate scenario",
+  "primaryModuleId": "runtime-baseline",
+  "moduleIds": ["runtime-baseline"],
   "subsystemIds": ["workflow"],
   "supportedHosts": ["windows"],
-  "docRefs": ["wiki/06-测试验证/整体验证场景/roadmap-0-platform-gates.md"],
+  "docRefs": ["wiki/06-测试验证/整体验证场景/platform-gates.md"],
   "members": [
     {"type": "suite", "id": "gate/android-arm64-smoke"}
   ]

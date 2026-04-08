@@ -1,13 +1,14 @@
-{
-  "displayName": "Roadmap-0 macOS runtime scenario",
-  "primaryModuleId": "roadmap-0",
-  "moduleIds": ["roadmap-0"],
+﻿{
+  "scenarioId": "runtime-baseline-macos",
+  "displayName": "Runtime-baseline macOS runtime scenario",
+  "primaryModuleId": "runtime-baseline",
+  "moduleIds": ["runtime-baseline"],
   "subsystemIds": ["workflow"],
   "supportedHosts": ["macos"],
-  "docRefs": ["wiki/06-测试验证/整体验证场景/roadmap-0-runtime.md"],
+  "docRefs": ["wiki/06-测试验证/整体验证场景/runtime-baseline.md"],
   "members": [
     {"type": "pipeline", "id": "pipeline/completion-runtime-trace-macos"},
-    {"type": "system", "id": "system/roadmap-0-ios-packaging-gate"},
-    {"type": "system", "id": "system/roadmap-0-linux-packaging-gate"}
+    {"type": "system", "id": "system/ios-packaging-gate"},
+    {"type": "system", "id": "system/linux-packaging-gate"}
   ]
 }

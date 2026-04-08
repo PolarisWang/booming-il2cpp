@@ -15,9 +15,11 @@ from tests.support import select_public_suite_spec
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 VERIFY_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "verify.py"
-VERIFY_WRAPPER_PATH = REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.sh"
-VERIFY_SCRIPT_PATH = REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.py"
-VERIFY_SCRIPT_PS1_PATH = REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.ps1"
+VERIFY_WRAPPER_PATH = REPO_ROOT / "build" / "scripts" / "verify-runtime-baseline.sh"
+VERIFY_SCRIPT_PATH = REPO_ROOT / "build" / "scripts" / "verify-runtime-baseline.py"
+VERIFY_SCRIPT_PS1_PATH = REPO_ROOT / "build" / "scripts" / "verify-runtime-baseline.ps1"
+LEGACY_VERIFY_WRAPPER_PATH = REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.sh"
+LEGACY_VERIFY_SCRIPT_PS1_PATH = REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.ps1"
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "verify-roadmap0"
 
 
@@ -71,16 +73,16 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
         with patch.object(verify_module.tooling_module, "ensure_dotnet_available", return_value=bootstrap):
             with patch.object(verify_module, "run_process", return_value=completed) as run_process_mock:
                 result = verify_module.handle(
-                    {"id": "roadmap-0-low-level-macos", "host_profile": "macos", "target": "macos"},
+                    {"id": "runtime-baseline-low-level-macos", "host_profile": "macos", "target": "macos"},
                     REPO_ROOT,
                     "macos",
-                    "roadmap-0 low-level script (macos)",
+                    "runtime-baseline low-level script (macos)",
                 )
 
         args = run_process_mock.call_args.args[0]
         self.assertEqual("ok", result.status)
         self.assertEqual(sys.executable, args[0])
-        self.assertEqual(REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.py", Path(args[1]))
+        self.assertEqual(REPO_ROOT / "build" / "scripts" / "verify-runtime-baseline.py", Path(args[1]))
 
     def test_low_level_command_uses_execution_policy_bypass_on_windows(self) -> None:
         verify_module = load_module(VERIFY_MODULE_PATH, "chaos_run_verify_route_windows")
@@ -95,10 +97,10 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
             with patch.object(verify_module.tooling_module, "cmake_environment", return_value=("cmake", {})):
                 with patch.object(verify_module, "run_process", return_value=completed) as run_process_mock:
                     result = verify_module.handle(
-                        {"id": "roadmap-0-low-level-windows", "host_profile": "windows", "target": "windows"},
+                        {"id": "runtime-baseline-low-level-windows", "host_profile": "windows", "target": "windows"},
                         REPO_ROOT,
                         "windows",
-                        "roadmap-0 low-level script (windows)",
+                        "runtime-baseline low-level script (windows)",
                     )
 
         args = run_process_mock.call_args.args[0]
@@ -115,7 +117,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
             ],
             args[:7],
         )
-        self.assertEqual(REPO_ROOT / "build" / "scripts" / "verify-roadmap-0.ps1", Path(args[7]))
+        self.assertEqual(REPO_ROOT / "build" / "scripts" / "verify-runtime-baseline.ps1", Path(args[7]))
         self.assertEqual(["-HostProfile", "windows"], args[8:])
 
     def test_low_level_failure_text_includes_underlying_output(self) -> None:
@@ -136,10 +138,10 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
             with patch.object(verify_module.tooling_module, "cmake_environment", return_value=("cmake", {})):
                 with patch.object(verify_module, "run_process", return_value=completed):
                     result = verify_module.handle(
-                        {"id": "roadmap-0-low-level-windows", "host_profile": "windows", "target": "windows"},
+                        {"id": "runtime-baseline-low-level-windows", "host_profile": "windows", "target": "windows"},
                         REPO_ROOT,
                         "windows",
-                        "roadmap-0 low-level script (windows)",
+                        "runtime-baseline low-level script (windows)",
                     )
 
         self.assertEqual("error", result.status)
@@ -148,7 +150,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
 
     def test_low_level_script_allocates_run_scoped_binary_dir(self) -> None:
         script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_paths")
-        base_dir = REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows" / "common" / "native-abi-config"
+        base_dir = REPO_ROOT / "artifacts" / "verify-runtime-baseline" / "windows" / "common" / "native-abi-config"
 
         first = script_module.allocate_run_scoped_binary_dir(base_dir)
         second = script_module.allocate_run_scoped_binary_dir(base_dir)
@@ -161,7 +163,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
     def test_low_level_script_native_smoke_uses_run_scoped_binary_dir(self) -> None:
         script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_native")
         source_dir = REPO_ROOT / "tests" / "contracts" / "native" / "abi"
-        requested_dir = REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows" / "common" / "native-abi-config"
+        requested_dir = REPO_ROOT / "artifacts" / "verify-runtime-baseline" / "windows" / "common" / "native-abi-config"
         allocated_dir = requested_dir.parent / "native-abi-config-test-run"
 
         with patch.object(script_module, "allocate_run_scoped_binary_dir", return_value=allocated_dir):
@@ -180,7 +182,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
     def test_low_level_script_native_smoke_uses_visual_studio_compatible_binary_dir_on_windows(self) -> None:
         script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_native_windows_vs")
         source_dir = REPO_ROOT / "tests" / "contracts" / "native" / "abi"
-        requested_dir = REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows" / "common" / "native-abi-config"
+        requested_dir = REPO_ROOT / "artifacts" / "verify-runtime-baseline" / "windows" / "common" / "native-abi-config"
         allocated_dir = TEST_TMP_ROOT / "cmake-builds" / "native-abi-config-1234"
         instance_spec = f"{TEST_TMP_ROOT / 'visual-studio' / '18' / 'Professional'},version=18.4.11626.88"
 
@@ -263,7 +265,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
 
     def test_low_level_script_routing_build_uses_run_scoped_binary_dir(self) -> None:
         script_module = load_module(VERIFY_SCRIPT_PATH, "chaos_verify_roadmap0_script_routing")
-        requested_dir = REPO_ROOT / "artifacts" / "verify-roadmap-0" / "windows" / "common" / "linux-packaging-routing"
+        requested_dir = REPO_ROOT / "artifacts" / "verify-runtime-baseline" / "windows" / "common" / "linux-packaging-routing"
         allocated_dir = requested_dir.parent / "linux-packaging-routing-test-run"
 
         with patch.object(script_module, "allocate_run_scoped_binary_dir", return_value=allocated_dir):
@@ -397,7 +399,7 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
         required_markers = [
             "Get-Command python",
             "Get-Command py",
-            "verify-roadmap-0.py",
+            "verify-runtime-baseline.py",
             "--host-profile",
         ]
         forbidden_markers = [
@@ -410,6 +412,16 @@ class Roadmap0LowLevelScriptTests(unittest.TestCase):
             self.assertIn(marker, script_text)
         for marker in forbidden_markers:
             self.assertNotIn(marker, script_text)
+
+    def test_legacy_powershell_wrapper_forwards_to_runtime_baseline_script(self) -> None:
+        script_text = LEGACY_VERIFY_SCRIPT_PS1_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("verify-runtime-baseline.py", script_text)
+
+    def test_legacy_shell_wrapper_forwards_to_runtime_baseline_script(self) -> None:
+        script_text = LEGACY_VERIFY_WRAPPER_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("verify-runtime-baseline.py", script_text)
 
 
 if __name__ == "__main__":

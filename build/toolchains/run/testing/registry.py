@@ -171,7 +171,9 @@ def _load_system_manifest(path: Path) -> dict[str, Any]:
     payload = read_json(path)
     if path.parent.parent.name != "system":
         raise ValueError("system manifest path must be tests/registry/system/<scenario>/scenario.manifest.json")
-    scenario = path.parent.name
+    scenario = str(payload.get("scenarioId") or path.parent.name)
+    if not scenario.strip():
+        raise ValueError("scenarioId must be a non-empty string")
     primary_module_id = payload.get("primaryModuleId")
     if primary_module_id is not None and not isinstance(primary_module_id, str):
         raise ValueError("primaryModuleId must be a string")
@@ -585,7 +587,23 @@ def write_registry_snapshot(
     return {"currentPath": current_path, "historyPath": history_path}
 
 
+LEGACY_REGISTRY_OBJECT_ALIASES = {
+    "system/roadmap-0-windows": "system/runtime-baseline-windows",
+    "system/roadmap-0-macos": "system/runtime-baseline-macos",
+    "system/roadmap-0-android-startup-gate": "system/android-startup-gate",
+    "system/roadmap-0-ios-packaging-gate": "system/ios-packaging-gate",
+    "system/roadmap-0-linux-packaging-gate": "system/linux-packaging-gate",
+    "system/roadmap-0-windows-reference-gate": "system/windows-reference-gate",
+    "system/roadmap-0-macos-reference-gate": "system/macos-reference-gate",
+}
+
+
+def normalize_registry_object_id(object_id: str) -> str:
+    return LEGACY_REGISTRY_OBJECT_ALIASES.get(object_id, object_id)
+
+
 def find_registry_object(index: RegistryIndex, object_id: str) -> dict[str, Any] | None:
+    object_id = normalize_registry_object_id(object_id)
     for item in index.flat_items:
         if item["id"] == object_id:
             return item

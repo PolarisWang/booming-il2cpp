@@ -146,7 +146,7 @@
       "tokens": ["test"],
       "syntax": "test <family> <suite>",
       "show_in_menu": true,
-      "examples": ["run test smoke HelloWorld", "run test workflow roadmap-0-macos"]
+      "examples": ["run test smoke HelloWorld", "run test workflow runtime-baseline-macos"]
     },
     {
       "id": "test-family-all",
@@ -257,8 +257,34 @@
       "examples": ["run prepare smoke"]
     },
     {
+      "id": "prepare-workflow-runtime-baseline-windows",
+      "title": "Prepare the Windows runtime-baseline workflow environment",
+      "group": "Environment",
+      "handler": "prepare.dispatch",
+      "platforms": ["windows"],
+      "tokens": ["prepare", "workflow", "runtime-baseline"],
+      "options": {
+        "host": "windows"
+      },
+      "show_in_menu": true,
+      "examples": ["run prepare workflow runtime-baseline --host windows"]
+    },
+    {
+      "id": "prepare-workflow-runtime-baseline-macos",
+      "title": "Prepare the macOS runtime-baseline workflow environment",
+      "group": "Environment",
+      "handler": "prepare.dispatch",
+      "platforms": ["macos"],
+      "tokens": ["prepare", "workflow", "runtime-baseline"],
+      "options": {
+        "host": "macos"
+      },
+      "show_in_menu": true,
+      "examples": ["run prepare workflow runtime-baseline --host macos"]
+    },
+    {
       "id": "prepare-verify-roadmap-0-windows",
-      "title": "Prepare the Windows roadmap-0 workflow environment",
+      "title": "Prepare the legacy Windows roadmap-0 workflow environment",
       "group": "Environment",
       "handler": "prepare.dispatch",
       "platforms": ["windows"],
@@ -266,12 +292,13 @@
       "options": {
         "host": "windows"
       },
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
       "examples": ["run prepare workflow roadmap-0 --host windows"]
     },
     {
       "id": "prepare-verify-roadmap-0-macos",
-      "title": "Prepare the macOS roadmap-0 workflow environment",
+      "title": "Prepare the legacy macOS roadmap-0 workflow environment",
       "group": "Environment",
       "handler": "prepare.dispatch",
       "platforms": ["macos"],
@@ -279,7 +306,8 @@
       "options": {
         "host": "macos"
       },
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
       "examples": ["run prepare workflow roadmap-0 --host macos"]
     },
     {
@@ -308,8 +336,36 @@
       "examples": ["run clean --scope smoke"]
     },
     {
+      "id": "clean-workflow-runtime-baseline-windows",
+      "title": "Clean the Windows runtime-baseline workflow scope",
+      "group": "Environment",
+      "handler": "clean.dispatch",
+      "platforms": ["windows"],
+      "tokens": ["clean"],
+      "options": {
+        "scope": "workflow-runtime-baseline-windows"
+      },
+      "clean_scope": "workflow-runtime-baseline-windows",
+      "show_in_menu": true,
+      "examples": ["run clean --scope workflow-runtime-baseline-windows"]
+    },
+    {
+      "id": "clean-workflow-runtime-baseline-macos",
+      "title": "Clean the macOS runtime-baseline workflow scope",
+      "group": "Environment",
+      "handler": "clean.dispatch",
+      "platforms": ["macos"],
+      "tokens": ["clean"],
+      "options": {
+        "scope": "workflow-runtime-baseline-macos"
+      },
+      "clean_scope": "workflow-runtime-baseline-macos",
+      "show_in_menu": true,
+      "examples": ["run clean --scope workflow-runtime-baseline-macos"]
+    },
+    {
       "id": "clean-verify-roadmap0-windows",
-      "title": "Clean the Windows roadmap-0 workflow scope",
+      "title": "Clean the legacy Windows roadmap-0 workflow scope",
       "group": "Environment",
       "handler": "clean.dispatch",
       "platforms": ["windows"],
@@ -318,12 +374,13 @@
         "scope": "workflow-roadmap0-windows"
       },
       "clean_scope": "workflow-roadmap0-windows",
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
       "examples": ["run clean --scope workflow-roadmap0-windows"]
     },
     {
       "id": "clean-verify-roadmap0-macos",
-      "title": "Clean the macOS roadmap-0 workflow scope",
+      "title": "Clean the legacy macOS roadmap-0 workflow scope",
       "group": "Environment",
       "handler": "clean.dispatch",
       "platforms": ["macos"],
@@ -332,7 +389,8 @@
         "scope": "workflow-roadmap0-macos"
       },
       "clean_scope": "workflow-roadmap0-macos",
-      "show_in_menu": true,
+      "show_in_menu": false,
+      "public": false,
       "examples": ["run clean --scope workflow-roadmap0-macos"]
     },
     {
@@ -559,7 +617,7 @@
       "subject_id": "HostEmbeddingLite",
       "goal_id": "correctness.platform",
       "matrix_id": "windows-managed-trace",
-      "gate_record_path": "artifacts/verify-roadmap-0/windows/windows-reference-desktop.gate.json",
+      "gate_record_path": "artifacts/verify-runtime-baseline/windows/windows-reference-desktop.gate.json",
       "gate_name": "windows-reference-desktop",
       "gate_preset": "windows-x64-reference",
       "gate_notes": "Windows reference desktop gate passed with warmup trace compare.",
@@ -582,7 +640,7 @@
       "subject_id": "HostEmbeddingLite",
       "goal_id": "correctness.platform",
       "matrix_id": "macos-managed-trace",
-      "gate_record_path": "artifacts/verify-roadmap-0/macos/macos-reference-desktop.gate.json",
+      "gate_record_path": "artifacts/verify-runtime-baseline/macos/macos-reference-desktop.gate.json",
       "gate_name": "macos-reference-desktop",
       "gate_preset": "macos-reference",
       "gate_notes": "macOS reference desktop gate passed with warmup trace compare.",
@@ -768,8 +826,38 @@
       "examples": ["run test contract managed-closure-bundle"]
     },
     {
+      "id": "test-workflow-runtime-baseline-windows",
+      "title": "Run the Windows runtime-baseline workflow via the unified system object",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows"],
+      "tokens": ["test", "workflow", "runtime-baseline-windows"],
+      "kind": "registry-object-alias",
+      "target": "runtime-baseline-windows",
+      "registry_object_kind": "system",
+      "registry_object_id": "system/runtime-baseline-windows",
+      "show_in_menu": false,
+      "public": false,
+      "examples": ["run test workflow runtime-baseline-windows"]
+    },
+    {
+      "id": "test-workflow-runtime-baseline-macos",
+      "title": "Run the macOS runtime-baseline workflow via the unified system object",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["macos"],
+      "tokens": ["test", "workflow", "runtime-baseline-macos"],
+      "kind": "registry-object-alias",
+      "target": "runtime-baseline-macos",
+      "registry_object_kind": "system",
+      "registry_object_id": "system/runtime-baseline-macos",
+      "show_in_menu": false,
+      "public": false,
+      "examples": ["run test workflow runtime-baseline-macos"]
+    },
+    {
       "id": "test-workflow-roadmap-0-windows",
-      "title": "Run the Windows roadmap-0 workflow via the unified system object",
+      "title": "Run the legacy Windows roadmap-0 workflow via the unified system object",
       "group": "Test And Verify",
       "handler": "test.dispatch",
       "platforms": ["windows"],
@@ -777,15 +865,15 @@
       "kind": "registry-object-alias",
       "target": "roadmap-0-windows",
       "registry_object_kind": "system",
-      "registry_object_id": "system/roadmap-0-windows",
+      "registry_object_id": "system/runtime-baseline-windows",
       "show_in_menu": false,
       "public": false,
-      "replacement_syntax": "test workflow roadmap-0-windows",
+      "replacement_syntax": "test workflow runtime-baseline-windows",
       "examples": ["run test workflow roadmap-0-windows"]
     },
     {
       "id": "test-workflow-roadmap-0-macos",
-      "title": "Run the macOS roadmap-0 workflow via the unified system object",
+      "title": "Run the legacy macOS roadmap-0 workflow via the unified system object",
       "group": "Test And Verify",
       "handler": "test.dispatch",
       "platforms": ["macos"],
@@ -793,10 +881,10 @@
       "kind": "registry-object-alias",
       "target": "roadmap-0-macos",
       "registry_object_kind": "system",
-      "registry_object_id": "system/roadmap-0-macos",
+      "registry_object_id": "system/runtime-baseline-macos",
       "show_in_menu": false,
       "public": false,
-      "replacement_syntax": "test workflow roadmap-0-macos",
+      "replacement_syntax": "test workflow runtime-baseline-macos",
       "examples": ["run test workflow roadmap-0-macos"]
     },
     {

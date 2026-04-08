@@ -921,6 +921,7 @@ def _handle_registry_object_dispatch(
             },
             text=f"registry object not found: {object_id}\n",
         )
+    object_id = str(selected_object["id"])
 
     stage = str(normalized_options.get("stage") or "all")
     if object_kind == "subject":

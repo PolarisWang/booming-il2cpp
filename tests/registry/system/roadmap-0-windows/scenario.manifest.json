@@ -1,13 +1,14 @@
-{
-  "displayName": "Roadmap-0 Windows runtime scenario",
-  "primaryModuleId": "roadmap-0",
-  "moduleIds": ["roadmap-0"],
+﻿{
+  "scenarioId": "runtime-baseline-windows",
+  "displayName": "Runtime-baseline Windows runtime scenario",
+  "primaryModuleId": "runtime-baseline",
+  "moduleIds": ["runtime-baseline"],
   "subsystemIds": ["workflow"],
   "supportedHosts": ["windows"],
-  "docRefs": ["wiki/06-测试验证/整体验证场景/roadmap-0-runtime.md"],
+  "docRefs": ["wiki/06-测试验证/整体验证场景/runtime-baseline.md"],
   "members": [
     {"type": "pipeline", "id": "pipeline/completion-runtime-trace-windows"},
-    {"type": "system", "id": "system/roadmap-0-android-startup-gate"},
-    {"type": "system", "id": "system/roadmap-0-linux-packaging-gate"}
+    {"type": "system", "id": "system/android-startup-gate"},
+    {"type": "system", "id": "system/linux-packaging-gate"}
   ]
 }

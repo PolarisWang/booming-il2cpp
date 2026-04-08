@@ -149,9 +149,9 @@ def build_prepare_menu_entries(manifest: dict[str, Any], host_platform: str) -> 
             ("场景准备", "prepare-smoke", "smoke", "准备 smoke 测试所需的托管运行环境"),
             (
                 "场景准备",
-                f"prepare-verify-roadmap-0-{host_platform}",
-                "roadmap-0",
-                "准备当前主机的 roadmap-0 工作流环境",
+                f"prepare-workflow-runtime-baseline-{host_platform}",
+                "runtime-baseline",
+                "准备当前主机的 runtime-baseline 工作流环境",
             ),
         ],
     )
@@ -164,7 +164,7 @@ def build_clean_menu_entries(manifest: dict[str, Any], host_platform: str) -> li
         [
             ("清理范围", "clean", "all", "清理统一入口产生的全部托管输出与缓存产物"),
             ("清理范围", "clean-smoke", "smoke", "只清理 smoke 测试相关输出"),
-            ("清理范围", f"clean-verify-roadmap0-{host_platform}", "roadmap-0", "清理当前主机的 roadmap-0 工作流输出"),
+            ("清理范围", f"clean-workflow-runtime-baseline-{host_platform}", "runtime-baseline", "清理当前主机的 runtime-baseline 工作流输出"),
         ],
     )
 
@@ -1339,7 +1339,12 @@ def _append_grouped_artifact(
     if "/artifacts/run/trace/" in text or text.startswith("artifacts/run/trace/") or "warmup-trace" in text:
         grouped["Trace outputs"].append(text)
         return
-    if "/artifacts/verify-roadmap-0/" in text or text.startswith("artifacts/verify-roadmap-0/"):
+    if (
+        "/artifacts/verify-runtime-baseline/" in text
+        or text.startswith("artifacts/verify-runtime-baseline/")
+        or "/artifacts/verify-roadmap-0/" in text
+        or text.startswith("artifacts/verify-roadmap-0/")
+    ):
         grouped["Verify outputs"].append(text)
         return
     grouped["Other artifacts"].append(text)

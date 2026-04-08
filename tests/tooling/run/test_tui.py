@@ -500,7 +500,7 @@ class LegacyTuiTests(unittest.TestCase):
                 },
                 {
                     "eventType": "stage-start",
-                    "payload": {"completedUnits": 1, "totalUnits": 2, "activeUnit": "workflow/roadmap-0-macos"},
+                    "payload": {"completedUnits": 1, "totalUnits": 2, "activeUnit": "workflow/runtime-baseline-macos"},
                 },
                 {
                     "eventType": "warning",
@@ -526,7 +526,7 @@ class LegacyTuiTests(unittest.TestCase):
                         "artifacts": [
                             smoke_artifact_path,
                             "artifacts/run/trace/macos-warmup-trace.runtime.json",
-                            "artifacts/verify-roadmap-0/macos",
+                            "artifacts/verify-runtime-baseline/macos",
                         ],
                     },
                 },
@@ -537,7 +537,7 @@ class LegacyTuiTests(unittest.TestCase):
 
         self.assertIn("Timeline:", screen)
         self.assertIn("Progress: \x1b[32m50%\x1b[0m", screen)
-        self.assertIn("[\x1b[32m 50%\x1b[0m] run    workflow/roadmap-0-macos", screen)
+        self.assertIn("[\x1b[32m 50%\x1b[0m] run    workflow/runtime-baseline-macos", screen)
         self.assertIn("[\x1b[32m 50%\x1b[0m] warn   catalog cache skipped", screen)
         self.assertIn("[\x1b[32m 50%\x1b[0m] file   artifacts/logs/tests/run-1/summary.json", screen)
         self.assertIn("[\x1b[32m 50%\x1b[0m] done   ok", screen)

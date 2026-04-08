@@ -43,3 +43,7 @@
   - 细化 `Linker` 在 B 方案下的最小输出 contract，收敛为 retained closure + external managed dependencies + declarative reasons，而不侵入 lowering/runtime/host 层。
 - `20260408-03-phase-a-reason-taxonomy-granularity-v1-01.md`
   - 比较纯语义层 reason 与双层 reason 的架构差异，明确方案 3 的增量价值主要在 semantic-to-implementation traceability，而不是新的核心编译能力。
+- `20260408-04-phase-a-semantic-reason-vocabulary-v1-01.md`
+  - 在已拍板的方案 2 下冻结 `RetainedReasons / DependencyReasons` 的最小 semantic vocabulary，收敛为共享命名空间 + `structural/semantic` 两类 family，并明确禁止 lowering 泄漏命名。
+- `20260408-05-phase-a-emission-order-contract-v1-01.md`
+  - 细化 `LinkedWorld` 中 `EmissionOrder` 的正式 contract，收敛为 entry/type/member/dependency 四个 semantic surface 的稳定遍历顺序，并明确排除 codegen/template/render phase 语义。

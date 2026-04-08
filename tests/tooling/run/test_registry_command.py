@@ -63,10 +63,10 @@ class RegistryCommandTests(unittest.TestCase):
         self.assertIn("gate/linux-x64-packaging", flat_ids)
         self.assertIn("gate/macos-reference-desktop", flat_ids)
         self.assertIn("system/hosted-runtime-smoke", flat_ids)
-        self.assertIn("system/roadmap-0-ios-packaging-gate", flat_ids)
-        self.assertIn("system/roadmap-0-linux-packaging-gate", flat_ids)
-        self.assertIn("system/roadmap-0-macos-reference-gate", flat_ids)
-        self.assertIn("system/roadmap-0-macos", flat_ids)
+        self.assertIn("system/ios-packaging-gate", flat_ids)
+        self.assertIn("system/linux-packaging-gate", flat_ids)
+        self.assertIn("system/macos-reference-gate", flat_ids)
+        self.assertIn("system/runtime-baseline-macos", flat_ids)
         self.assertIn("system/trace-export-macos-smoke", flat_ids)
         self.assertIn("pipeline/completion-managed-closure", flat_ids)
         self.assertIn("pipeline/completion-runtime-core", flat_ids)
@@ -172,9 +172,9 @@ class RegistryCommandTests(unittest.TestCase):
             "run test system --id system/trace-export-macos-smoke",
             trace_system["canonicalCommand"],
         )
-        roadmap_system = next(item for item in result.payload["flatItems"] if item["id"] == "system/roadmap-0-macos")
+        roadmap_system = next(item for item in result.payload["flatItems"] if item["id"] == "system/runtime-baseline-macos")
         self.assertEqual(
-            "run test system --id system/roadmap-0-macos",
+            "run test system --id system/runtime-baseline-macos",
             roadmap_system["canonicalCommand"],
         )
         linux_gate_suite = next(item for item in result.payload["flatItems"] if item["id"] == "gate/linux-x64-packaging")
@@ -192,23 +192,23 @@ class RegistryCommandTests(unittest.TestCase):
             "run test suite --id gate/macos-reference-desktop",
             macos_reference_gate_suite["canonicalCommand"],
         )
-        ios_gate_system = next(item for item in result.payload["flatItems"] if item["id"] == "system/roadmap-0-ios-packaging-gate")
+        ios_gate_system = next(item for item in result.payload["flatItems"] if item["id"] == "system/ios-packaging-gate")
         self.assertEqual(
-            "run test system --id system/roadmap-0-ios-packaging-gate",
+            "run test system --id system/ios-packaging-gate",
             ios_gate_system["canonicalCommand"],
         )
-        macos_reference_gate_system = next(item for item in result.payload["flatItems"] if item["id"] == "system/roadmap-0-macos-reference-gate")
+        macos_reference_gate_system = next(item for item in result.payload["flatItems"] if item["id"] == "system/macos-reference-gate")
         self.assertEqual(
-            "run test system --id system/roadmap-0-macos-reference-gate",
+            "run test system --id system/macos-reference-gate",
             macos_reference_gate_system["canonicalCommand"],
         )
         self.assertIn(
             "pipeline/completion-runtime-trace-macos",
             [item["objectId"] for item in macos_reference_gate_system["skillRecommendations"]["requiredForPipelineRelease"]],
         )
-        linux_gate_system = next(item for item in result.payload["flatItems"] if item["id"] == "system/roadmap-0-linux-packaging-gate")
+        linux_gate_system = next(item for item in result.payload["flatItems"] if item["id"] == "system/linux-packaging-gate")
         self.assertEqual(
-            "run test system --id system/roadmap-0-linux-packaging-gate",
+            "run test system --id system/linux-packaging-gate",
             linux_gate_system["canonicalCommand"],
         )
         trace_module = next(item for item in result.payload["flatItems"] if item["id"] == "module/trace-export/macos")
@@ -235,8 +235,8 @@ class RegistryCommandTests(unittest.TestCase):
         flat_ids = {item["id"] for item in result.payload["flatItems"]}
         self.assertIn("gate/android-arm64-smoke", flat_ids)
         self.assertIn("gate/windows-reference-desktop", flat_ids)
-        self.assertIn("system/roadmap-0-android-startup-gate", flat_ids)
-        self.assertIn("system/roadmap-0-windows-reference-gate", flat_ids)
+        self.assertIn("system/android-startup-gate", flat_ids)
+        self.assertIn("system/windows-reference-gate", flat_ids)
         android_gate_suite = next(item for item in result.payload["flatItems"] if item["id"] == "gate/android-arm64-smoke")
         self.assertEqual(
             "run test suite --id gate/android-arm64-smoke",
@@ -247,14 +247,14 @@ class RegistryCommandTests(unittest.TestCase):
             "run test suite --id gate/windows-reference-desktop",
             windows_reference_gate_suite["canonicalCommand"],
         )
-        android_gate_system = next(item for item in result.payload["flatItems"] if item["id"] == "system/roadmap-0-android-startup-gate")
+        android_gate_system = next(item for item in result.payload["flatItems"] if item["id"] == "system/android-startup-gate")
         self.assertEqual(
-            "run test system --id system/roadmap-0-android-startup-gate",
+            "run test system --id system/android-startup-gate",
             android_gate_system["canonicalCommand"],
         )
-        windows_reference_gate_system = next(item for item in result.payload["flatItems"] if item["id"] == "system/roadmap-0-windows-reference-gate")
+        windows_reference_gate_system = next(item for item in result.payload["flatItems"] if item["id"] == "system/windows-reference-gate")
         self.assertEqual(
-            "run test system --id system/roadmap-0-windows-reference-gate",
+            "run test system --id system/windows-reference-gate",
             windows_reference_gate_system["canonicalCommand"],
         )
         self.assertIn(
@@ -649,7 +649,7 @@ class RegistryCommandTests(unittest.TestCase):
             [
                 "system/hosted-runtime-smoke",
                 "system/trace-export-macos-smoke",
-                "system/roadmap-0-macos-reference-gate",
+                "system/macos-reference-gate",
             ],
             [member["objectId"] for member in system_phase["memberResults"]],
         )
@@ -692,16 +692,16 @@ class RegistryCommandTests(unittest.TestCase):
                 {"id": "test-system", "handler": "test.dispatch"},
                 REPO_ROOT,
                 "macos",
-                "test system --id system/roadmap-0-macos",
+                "test system --id system/runtime-baseline-macos",
                 manifest,
-                {"id": "system/roadmap-0-macos"},
+                {"id": "system/runtime-baseline-macos"},
             )
 
         self.assertEqual("ok", result.status)
-        self.assertEqual("system/roadmap-0-macos", result.target)
-        self.assertEqual("system/roadmap-0-macos", result.payload["selectedObject"]["id"])
+        self.assertEqual("system/runtime-baseline-macos", result.target)
+        self.assertEqual("system/runtime-baseline-macos", result.payload["selectedObject"]["id"])
         self.assertEqual(
-            "run test system --id system/roadmap-0-macos",
+            "run test system --id system/runtime-baseline-macos",
             result.payload["selectedObject"]["canonicalCommand"],
         )
         public_specs_module = load_public_specs_module("chaos_registry_system_dispatch_public_specs")
@@ -723,6 +723,57 @@ class RegistryCommandTests(unittest.TestCase):
                 "gate/linux-x64-packaging",
             ],
             [item["id"] for item in result.payload["items"]],
+        )
+
+    def test_legacy_runtime_baseline_system_id_maps_to_canonical_object(self) -> None:
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_system_dispatch_legacy_alias")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_system_dispatch_legacy_alias")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_system_dispatch_legacy_alias")
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        def fake_session(
+            family: str,
+            suite: str,
+            stage: str,
+            repo_root: Path,
+            host_platform: str,
+            command_text: str,
+            manifest_payload: dict,
+        ):
+            del repo_root
+            del manifest_payload
+            request = session_module.TestRequest(
+                family=family,
+                suite=suite,
+                stage=stage,
+                command_text=command_text,
+            )
+            return session_module.SessionResult(
+                request=request,
+                host_platform=host_platform,
+                status="ok",
+                suite_results=[{"suiteId": request.suite_key, "status": "ok", "stageResults": {}}],
+                text=f"{request.suite_key} ok\n",
+                artifacts=[],
+                exit_code=0,
+            )
+
+        with patch.object(test_module, "_execute_public_test_session", side_effect=fake_session):
+            result = test_module.handle(
+                {"id": "test-system", "handler": "test.dispatch"},
+                REPO_ROOT,
+                "macos",
+                "test system --id system/roadmap-0-macos",
+                manifest,
+                {"id": "system/roadmap-0-macos"},
+            )
+
+        self.assertEqual("ok", result.status)
+        self.assertEqual("system/runtime-baseline-macos", result.target)
+        self.assertEqual("system/runtime-baseline-macos", result.payload["selectedObject"]["id"])
+        self.assertEqual(
+            "run test system --id system/runtime-baseline-macos",
+            result.payload["selectedObject"]["canonicalCommand"],
         )
 
     def test_linux_gate_system_dispatch_expands_registered_plan(self) -> None:
@@ -763,21 +814,72 @@ class RegistryCommandTests(unittest.TestCase):
                 {"id": "test-system", "handler": "test.dispatch"},
                 REPO_ROOT,
                 "macos",
+                "test system --id system/linux-packaging-gate",
+                manifest,
+                {"id": "system/linux-packaging-gate"},
+            )
+
+        self.assertEqual("ok", result.status)
+        self.assertEqual("system/linux-packaging-gate", result.target)
+        self.assertEqual("system/linux-packaging-gate", result.payload["selectedObject"]["id"])
+        self.assertEqual(
+            "run test system --id system/linux-packaging-gate",
+            result.payload["selectedObject"]["canonicalCommand"],
+        )
+        self.assertEqual(
+            ["gate/linux-x64-packaging"],
+            [item["id"] for item in result.payload["items"]],
+        )
+
+    def test_legacy_linux_gate_system_id_maps_to_canonical_object(self) -> None:
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_linux_gate_system_dispatch_legacy_alias")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_linux_gate_system_dispatch_legacy_alias")
+        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_linux_gate_system_dispatch_legacy_alias")
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        def fake_session(
+            family: str,
+            suite: str,
+            stage: str,
+            repo_root: Path,
+            host_platform: str,
+            command_text: str,
+            manifest_payload: dict,
+        ):
+            del repo_root
+            del manifest_payload
+            request = session_module.TestRequest(
+                family=family,
+                suite=suite,
+                stage=stage,
+                command_text=command_text,
+            )
+            return session_module.SessionResult(
+                request=request,
+                host_platform=host_platform,
+                status="ok",
+                suite_results=[{"suiteId": request.suite_key, "status": "ok", "stageResults": {}}],
+                text=f"{request.suite_key} ok\n",
+                artifacts=[],
+                exit_code=0,
+            )
+
+        with patch.object(test_module, "_execute_public_test_session", side_effect=fake_session):
+            result = test_module.handle(
+                {"id": "test-system", "handler": "test.dispatch"},
+                REPO_ROOT,
+                "macos",
                 "test system --id system/roadmap-0-linux-packaging-gate",
                 manifest,
                 {"id": "system/roadmap-0-linux-packaging-gate"},
             )
 
         self.assertEqual("ok", result.status)
-        self.assertEqual("system/roadmap-0-linux-packaging-gate", result.target)
-        self.assertEqual("system/roadmap-0-linux-packaging-gate", result.payload["selectedObject"]["id"])
+        self.assertEqual("system/linux-packaging-gate", result.target)
+        self.assertEqual("system/linux-packaging-gate", result.payload["selectedObject"]["id"])
         self.assertEqual(
-            "run test system --id system/roadmap-0-linux-packaging-gate",
+            "run test system --id system/linux-packaging-gate",
             result.payload["selectedObject"]["canonicalCommand"],
-        )
-        self.assertEqual(
-            ["gate/linux-x64-packaging"],
-            [item["id"] for item in result.payload["items"]],
         )
 
     def test_ios_gate_system_dispatch_expands_registered_plan(self) -> None:
@@ -818,16 +920,16 @@ class RegistryCommandTests(unittest.TestCase):
                 {"id": "test-system", "handler": "test.dispatch"},
                 REPO_ROOT,
                 "macos",
-                "test system --id system/roadmap-0-ios-packaging-gate",
+                "test system --id system/ios-packaging-gate",
                 manifest,
-                {"id": "system/roadmap-0-ios-packaging-gate"},
+                {"id": "system/ios-packaging-gate"},
             )
 
         self.assertEqual("ok", result.status)
-        self.assertEqual("system/roadmap-0-ios-packaging-gate", result.target)
-        self.assertEqual("system/roadmap-0-ios-packaging-gate", result.payload["selectedObject"]["id"])
+        self.assertEqual("system/ios-packaging-gate", result.target)
+        self.assertEqual("system/ios-packaging-gate", result.payload["selectedObject"]["id"])
         self.assertEqual(
-            "run test system --id system/roadmap-0-ios-packaging-gate",
+            "run test system --id system/ios-packaging-gate",
             result.payload["selectedObject"]["canonicalCommand"],
         )
         self.assertEqual(
@@ -873,16 +975,16 @@ class RegistryCommandTests(unittest.TestCase):
                 {"id": "test-system", "handler": "test.dispatch"},
                 REPO_ROOT,
                 "windows",
-                "test system --id system/roadmap-0-android-startup-gate",
+                "test system --id system/android-startup-gate",
                 manifest,
-                {"id": "system/roadmap-0-android-startup-gate"},
+                {"id": "system/android-startup-gate"},
             )
 
         self.assertEqual("ok", result.status)
-        self.assertEqual("system/roadmap-0-android-startup-gate", result.target)
-        self.assertEqual("system/roadmap-0-android-startup-gate", result.payload["selectedObject"]["id"])
+        self.assertEqual("system/android-startup-gate", result.target)
+        self.assertEqual("system/android-startup-gate", result.payload["selectedObject"]["id"])
         self.assertEqual(
-            "run test system --id system/roadmap-0-android-startup-gate",
+            "run test system --id system/android-startup-gate",
             result.payload["selectedObject"]["canonicalCommand"],
         )
         self.assertEqual(
@@ -928,16 +1030,16 @@ class RegistryCommandTests(unittest.TestCase):
                 {"id": "test-system", "handler": "test.dispatch"},
                 REPO_ROOT,
                 "windows",
-                "test system --id system/roadmap-0-windows-reference-gate",
+                "test system --id system/windows-reference-gate",
                 manifest,
-                {"id": "system/roadmap-0-windows-reference-gate"},
+                {"id": "system/windows-reference-gate"},
             )
 
         self.assertEqual("ok", result.status)
-        self.assertEqual("system/roadmap-0-windows-reference-gate", result.target)
-        self.assertEqual("system/roadmap-0-windows-reference-gate", result.payload["selectedObject"]["id"])
+        self.assertEqual("system/windows-reference-gate", result.target)
+        self.assertEqual("system/windows-reference-gate", result.payload["selectedObject"]["id"])
         self.assertEqual(
-            "run test system --id system/roadmap-0-windows-reference-gate",
+            "run test system --id system/windows-reference-gate",
             result.payload["selectedObject"]["canonicalCommand"],
         )
         self.assertEqual(
@@ -983,16 +1085,16 @@ class RegistryCommandTests(unittest.TestCase):
                 {"id": "test-system", "handler": "test.dispatch"},
                 REPO_ROOT,
                 "macos",
-                "test system --id system/roadmap-0-macos-reference-gate",
+                "test system --id system/macos-reference-gate",
                 manifest,
-                {"id": "system/roadmap-0-macos-reference-gate"},
+                {"id": "system/macos-reference-gate"},
             )
 
         self.assertEqual("ok", result.status)
-        self.assertEqual("system/roadmap-0-macos-reference-gate", result.target)
-        self.assertEqual("system/roadmap-0-macos-reference-gate", result.payload["selectedObject"]["id"])
+        self.assertEqual("system/macos-reference-gate", result.target)
+        self.assertEqual("system/macos-reference-gate", result.payload["selectedObject"]["id"])
         self.assertEqual(
-            "run test system --id system/roadmap-0-macos-reference-gate",
+            "run test system --id system/macos-reference-gate",
             result.payload["selectedObject"]["canonicalCommand"],
         )
         self.assertEqual(

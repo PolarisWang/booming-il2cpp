@@ -1,8 +1,8 @@
-{
+﻿{
   "displayName": "Completion runtime trace macOS pipeline",
   "pipelinePurpose": "completion",
   "primaryModuleId": "hosted-runtime",
-  "moduleIds": ["analysis", "managed-smoke", "reflection", "interop", "hosted-runtime", "trace-export", "roadmap-0"],
+  "moduleIds": ["analysis", "managed-smoke", "reflection", "interop", "hosted-runtime", "trace-export", "runtime-baseline"],
   "subsystemIds": ["analysis-contracts", "managed-execution", "native-bridge", "hosting", "workflow"],
   "supportedHosts": ["macos"],
   "docRefs": ["wiki/06-测试验证/测试管线/completion-runtime-trace.md"],
@@ -36,8 +36,10 @@
       "members": [
         {"type": "system", "id": "system/hosted-runtime-smoke"},
         {"type": "system", "id": "system/trace-export-macos-smoke"},
-        {"type": "system", "id": "system/roadmap-0-macos-reference-gate"}
+        {"type": "system", "id": "system/macos-reference-gate"}
       ]
     }
   ]
 }
+
+

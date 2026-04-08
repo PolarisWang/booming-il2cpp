@@ -31,7 +31,7 @@ SMOKE_PREPARE_STEPS = [
     ["test", "smoke", "all", "--stage", "build"],
 ]
 
-VERIFY_WINDOWS_PREPARE_STEPS = [
+RUNTIME_BASELINE_WINDOWS_PREPARE_STEPS = [
     ["build", "native-contract", "abi"],
     ["build", "native-contract", "bridge"],
     *SMOKE_PREPARE_STEPS,
@@ -40,7 +40,7 @@ VERIFY_WINDOWS_PREPARE_STEPS = [
     ["build", "platform", "linux-x64-packaging"],
 ]
 
-VERIFY_MACOS_PREPARE_STEPS = [
+RUNTIME_BASELINE_MACOS_PREPARE_STEPS = [
     ["build", "native-contract", "abi"],
     ["build", "native-contract", "bridge"],
     *SMOKE_PREPARE_STEPS,
@@ -50,12 +50,22 @@ VERIFY_MACOS_PREPARE_STEPS = [
 ]
 
 
+def _normalize_prepare_scope(scope: str) -> str:
+    mapping = {
+        "workflow-roadmap0-windows": "workflow-runtime-baseline-windows",
+        "workflow-roadmap0-macos": "workflow-runtime-baseline-macos",
+    }
+    return mapping.get(scope, scope)
+
+
 def resolve_prepare_scope(command_id: str) -> str:
     mapping = {
         "prepare": "global",
         "prepare-smoke": "smoke",
-        "prepare-verify-roadmap-0-windows": "workflow-roadmap0-windows",
-        "prepare-verify-roadmap-0-macos": "workflow-roadmap0-macos",
+        "prepare-workflow-runtime-baseline-windows": "workflow-runtime-baseline-windows",
+        "prepare-workflow-runtime-baseline-macos": "workflow-runtime-baseline-macos",
+        "prepare-verify-roadmap-0-windows": "workflow-runtime-baseline-windows",
+        "prepare-verify-roadmap-0-macos": "workflow-runtime-baseline-macos",
     }
     return mapping[command_id]
 
@@ -73,17 +83,18 @@ def _unique_steps(steps: list[list[str]]) -> list[list[str]]:
 
 
 def _prepare_plan(scope: str, host_platform: str) -> list[list[str]]:
+    scope = _normalize_prepare_scope(scope)
     if scope == "smoke":
         return [list(step) for step in SMOKE_PREPARE_STEPS]
-    if scope == "workflow-roadmap0-windows":
-        return [list(step) for step in VERIFY_WINDOWS_PREPARE_STEPS]
-    if scope == "workflow-roadmap0-macos":
-        return [list(step) for step in VERIFY_MACOS_PREPARE_STEPS]
+    if scope == "workflow-runtime-baseline-windows":
+        return [list(step) for step in RUNTIME_BASELINE_WINDOWS_PREPARE_STEPS]
+    if scope == "workflow-runtime-baseline-macos":
+        return [list(step) for step in RUNTIME_BASELINE_MACOS_PREPARE_STEPS]
     if scope == "global":
         host_specific = (
-            VERIFY_WINDOWS_PREPARE_STEPS
+            RUNTIME_BASELINE_WINDOWS_PREPARE_STEPS
             if host_platform == "windows"
-            else VERIFY_MACOS_PREPARE_STEPS
+            else RUNTIME_BASELINE_MACOS_PREPARE_STEPS
             if host_platform == "macos"
             else SMOKE_PREPARE_STEPS
         )
@@ -93,7 +104,8 @@ def _prepare_plan(scope: str, host_platform: str) -> list[list[str]]:
 
 
 def _prepare_requires_cmake(scope: str, host_platform: str) -> bool:
-    if scope in {"workflow-roadmap0-windows", "workflow-roadmap0-macos"}:
+    scope = _normalize_prepare_scope(scope)
+    if scope in {"workflow-runtime-baseline-windows", "workflow-runtime-baseline-macos"}:
         return True
     return scope == "global" and host_platform in {"windows", "macos"}
 
@@ -131,18 +143,20 @@ def _execute_prepare_step(
 
 
 def prepare_state_path(repo_root: Path, scope: str) -> Path:
+    scope = _normalize_prepare_scope(scope)
     return repo_root / "artifacts" / "run" / "prepare" / f"{scope}.json"
 
 
 def resolve_clean_paths(repo_root: Path, scope: str) -> list[Path]:
+    scope = _normalize_prepare_scope(scope)
     smoke_root = repo_root / "artifacts" / "smoke"
     run_root = repo_root / "artifacts" / "run"
-    verify_root = repo_root / "artifacts" / "verify-roadmap-0"
+    verify_root = repo_root / "artifacts" / "verify-runtime-baseline"
     preset_root = repo_root / "artifacts" / "presets"
 
     if scope == "smoke":
         return [smoke_root, prepare_state_path(repo_root, "smoke")]
-    if scope == "workflow-roadmap0-windows":
+    if scope == "workflow-runtime-baseline-windows":
         return [
             verify_root / "windows",
             preset_root / "windows-x64-reference",
@@ -152,7 +166,7 @@ def resolve_clean_paths(repo_root: Path, scope: str) -> list[Path]:
             run_root / "platform" / "linux-x64-packaging",
             prepare_state_path(repo_root, scope),
         ]
-    if scope == "workflow-roadmap0-macos":
+    if scope == "workflow-runtime-baseline-macos":
         return [
             verify_root / "macos",
             preset_root / "macos-reference",

@@ -181,11 +181,11 @@ def build_removed_command_migration_guidance(
     requested_host = str((options or {}).get("host") or "").strip().lower()
     replacement_syntax: str
     if requested_host in {"windows", "macos"}:
-        replacement_syntax = f"test workflow roadmap-0-{requested_host}"
+        replacement_syntax = f"test workflow runtime-baseline-{requested_host}"
     elif host_platform in {"windows", "macos"}:
-        replacement_syntax = f"test workflow roadmap-0-{host_platform}"
+        replacement_syntax = f"test workflow runtime-baseline-{host_platform}"
     else:
-        replacement_syntax = "test workflow roadmap-0-windows|macos"
+        replacement_syntax = "test workflow runtime-baseline-windows|macos"
 
     text = (
         f"Removed command: {normalized_command}\n"
