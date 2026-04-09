@@ -352,6 +352,83 @@ class SubjectPlannerTests(unittest.TestCase):
         self.assertNotEqual(default_plan["selection"]["variant"], ship_plan["selection"]["variant"])
         self.assertNotEqual(default_plan["stagePlan"][0]["fingerprint"], ship_plan["stagePlan"][0]["fingerprint"])
 
+    def test_planner_selects_native_perf_matrix_for_mainline_feature_pack(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_native_perf")
+        _, record = select_subject_record(
+            "chaos_subject_planner_mainline_native_perf_record",
+            category="mainline",
+            source_type="dotnet-project",
+            required_stage_kinds=["native-runtime-perf"],
+            required_goal_ids=["perf.profile"],
+            required_validation_profile_ids=["perf-profile"],
+            required_validation_drivers=["native-runtime-perf"],
+        )
+        subject_id = str(record["subjectId"])
+        run_id = "20260409-fixture-mainline-native-perf-001"
+
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            subject_id,
+            goal_id="perf.profile",
+            validation_profile_id="perf-profile",
+            variant="PROFILE",
+            run_id=run_id,
+        )
+
+        self.assertEqual(subject_id, plan["selection"]["subjectId"])
+        self.assertEqual("perf.profile", plan["selection"]["goalId"])
+        self.assertEqual("windows-native-profile", plan["selection"]["matrixId"])
+        self.assertEqual("perf-profile", plan["selection"]["validationProfileId"])
+        self.assertEqual("PROFILE", plan["selection"]["variant"])
+        self.assertEqual("native-runtime-perf", plan["selection"]["pipelineId"])
+        self.assertEqual(
+            [
+                "source-resolve",
+                "host-input-build",
+                "analysis-frontend",
+                "generated-native-proof",
+                "build-target",
+                "native-runtime-perf",
+                "report-assemble",
+            ],
+            [stage["stageId"] for stage in plan["stagePlan"]],
+        )
+        native_perf_stage = next(stage for stage in plan["stagePlan"] if stage["kind"] == "native-runtime-perf")
+        self.assertEqual(
+            f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/windows-native-profile/runtime/runtime.manifest.json",
+            native_perf_stage["paths"]["manifestPath"],
+        )
+        self.assertEqual("report", plan["selection"]["artifactPlan"]["evidenceTerminalBucket"])
+
+    def test_planner_overlays_matrix_source_entry_for_mainline_feature_pack_capability_slice(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_capability_slice")
+        _, record = select_subject_record(
+            "chaos_subject_planner_mainline_capability_slice_record",
+            category="mainline",
+            source_type="dotnet-project",
+            required_goal_ids=["correctness.dev"],
+            required_validation_profile_ids=["proof-dispatch"],
+        )
+        subject_id = str(record["subjectId"])
+        run_id = "20260409-fixture-mainline-dispatch-slice-001"
+
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            subject_id,
+            goal_id="correctness.dev",
+            matrix_id="windows-dispatch-check",
+            validation_profile_id="proof-dispatch",
+            run_id=run_id,
+        )
+
+        self.assertEqual("windows-dispatch-check", plan["selection"]["matrixId"])
+        self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
+        self.assertEqual("proof-dispatch", plan["selection"]["validationProfileId"])
+        self.assertEqual(
+            "MainlineFeaturePack/DispatchProofEntry::Run()",
+            plan["selection"]["source"]["entry"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

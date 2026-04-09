@@ -151,6 +151,9 @@ def build_plan(
         stage["executionMode"] = execution_mode
         stage["reuse"] = reuse
 
+    selected_source = dict(manifest["source"])
+    selected_source.update(dict(matrix.get("source") or {}))
+
     return {
         "planVersion": "v1",
         "request": {
@@ -173,7 +176,7 @@ def build_plan(
             "defaultVariant": str(validation_selection["defaultVariant"]),
             "variant": str(validation_selection["variant"]),
             "pipelineId": str(matrix["pipelineId"]),
-            "source": dict(manifest["source"]),
+            "source": selected_source,
             "executionContext": dict(matrix["executionContext"]),
             "validationIntent": dict(matrix["validationIntent"]),
             "artifactPlan": dict(matrix["artifactPlan"]),

@@ -399,6 +399,19 @@ Status: design-discuss
 4. metadata lookup 只用于后续 role binding / plan assembly，不作为 family classifier
 5. raw `typed-il` / instruction shape / proof-shape 明确禁止进入 family selection 主路径
 
+### 当前拍板
+
+- **当前讨论已拍板：这里采用方案 B。**
+- 也就是：
+  - `LoweringFamily` 的主决策面 = `semantic subject structure + capability bundle`
+  - `RetainedReasons / DependencyReasons / Dependencies` 只作为辅助约束与一致性校验
+  - metadata lookup 只用于 role binding / plan assembly
+  - raw `typed-il`、instruction shape、proof-shape 明确禁止进入 family selection 主路径
+- 对应影响是：
+  - `CodeGen` 的 family selection 继续保持 semantic-to-lowering 边界
+  - family 不会被当前 BCL dependency 形状绑死
+  - 下一步讨论应转向：这些规则本身到底采用 `打分式`、`优先级式` 还是 `唯一匹配式`
+
 ## 10. 这一步之后最值得继续讨论的点
 
 如果你认可这一步，那下一轮最自然的继续点就是：

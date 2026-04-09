@@ -196,6 +196,98 @@ class SubjectManifestSchemaTests(unittest.TestCase):
                 set(capabilities["hostPlatforms"]),
             )
 
+    def test_query_finds_mainline_feature_pack_planning_surface_without_subject_name_coupling(self) -> None:
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_query_mainline_feature_pack")
+
+        record = subjects_module.require_single_subject_record(
+            subjects_module.load_subject_records(REPO_ROOT),
+            category="mainline",
+            source_type="dotnet-project",
+            required_stage_kinds=[
+                "analysis-frontend",
+                "generated-native-proof",
+                "build-target",
+                "native-runtime-perf",
+            ],
+            required_goal_ids=["correctness.dev", "correctness.platform", "perf.profile"],
+            required_host_platforms=["windows-x64"],
+            required_validation_kinds=["proof", "perf"],
+            required_validation_profile_ids=["proof-dev", "trace-platform", "perf-profile"],
+            required_validation_drivers=["native-runtime-perf"],
+        )
+        manifest = record["manifest"]
+        capabilities = record["capabilities"]
+        pipeline_ids = {
+            str(pipeline["pipelineId"])
+            for pipeline in list(manifest.get("executionPipelines") or [])
+        }
+        matrix_ids = {
+            str(matrix["matrixId"])
+            for matrix in list(manifest.get("environmentMatrices") or [])
+        }
+        native_matrix = subjects_module.find_matrix(manifest, "windows-native-profile")
+
+        self.assertEqual("MainlineFeaturePack", record["subjectId"])
+        self.assertEqual("mainline", capabilities["category"])
+        self.assertEqual({"proof-runtime-output", "proof-runtime-trace", "native-runtime-perf"}, pipeline_ids)
+        self.assertEqual(
+            {
+                "windows-native-check",
+                "windows-reference-trace",
+                "windows-dispatch-check",
+                "windows-generic-layout-check",
+                "windows-array-boxing-check",
+                "windows-native-profile",
+            },
+            matrix_ids,
+        )
+        self.assertEqual("native-runtime-perf", str(native_matrix["pipelineId"]))
+        self.assertEqual(
+            ["source", "host-input", "analysis", "generated", "build", "runtime", "report"],
+            list(dict(native_matrix["artifactPlan"])["requiredBuckets"]),
+        )
+        self.assertEqual("report", str(dict(native_matrix["artifactPlan"])["evidenceTerminalBucket"]))
+
+    def test_mainline_feature_pack_manifest_declares_phase5_capability_slice_profiles_and_matrices(self) -> None:
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase5_capability_slices")
+
+        record = subjects_module.require_single_subject_record(
+            subjects_module.load_subject_records(REPO_ROOT),
+            category="mainline",
+            source_type="dotnet-project",
+            required_validation_profile_ids=[
+                "proof-dispatch",
+                "proof-generic-layout",
+                "proof-array-boxing",
+            ],
+        )
+        manifest = record["manifest"]
+        validation_profiles = dict(manifest.get("validationProfiles") or {})
+        matrix_ids = {
+            str(matrix["matrixId"])
+            for matrix in list(manifest.get("environmentMatrices") or [])
+        }
+        dispatch_matrix = subjects_module.find_matrix(manifest, "windows-dispatch-check")
+
+        self.assertEqual(["proof"], validation_profiles["proof-dispatch"])
+        self.assertEqual(["proof"], validation_profiles["proof-generic-layout"])
+        self.assertEqual(["proof"], validation_profiles["proof-array-boxing"])
+        self.assertEqual(
+            {
+                "windows-native-check",
+                "windows-reference-trace",
+                "windows-native-profile",
+                "windows-dispatch-check",
+                "windows-generic-layout-check",
+                "windows-array-boxing-check",
+            },
+            matrix_ids,
+        )
+        self.assertEqual(
+            "MainlineFeaturePack/DispatchProofEntry::Run()",
+            str(dict(dispatch_matrix.get("source") or {})["entry"]),
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

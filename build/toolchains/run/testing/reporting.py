@@ -93,6 +93,27 @@ def _write_pointer_payloads(pointer_roots: list[Path], pointer_name: str, payloa
         write_json(pointer_root / pointer_name, payload)
 
 
+def _finalize_current_pointer(current_path: Path, run_id: str, pointer_payload: dict[str, Any]) -> None:
+    if not current_path.is_file():
+        return
+    try:
+        current_payload = read_json(current_path)
+    except (OSError, ValueError):
+        return
+    if current_payload.get("runId") != run_id:
+        return
+    try:
+        current_path.unlink()
+        return
+    except OSError:
+        # Some Windows workspaces deny deleting freshly written files.
+        pass
+    try:
+        write_json(current_path, pointer_payload)
+    except OSError:
+        pass
+
+
 def start_session_report(
     *,
     repo_root: Path,
@@ -425,14 +446,7 @@ def write_session_report(
     }
     _write_pointer_payloads(pointer_roots, "last.json", pointer_payload)
     for pointer_root in pointer_roots:
-        current_path = pointer_root / "current.json"
-        if current_path.is_file():
-            current_payload = read_json(current_path)
-            if current_payload.get("runId") == run_id:
-                try:
-                    current_path.unlink()
-                except OSError:
-                    pass
+        _finalize_current_pointer(pointer_root / "current.json", run_id, pointer_payload)
 
     return {
         "runId": run_id,

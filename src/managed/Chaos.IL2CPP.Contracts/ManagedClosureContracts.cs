@@ -1,6 +1,9 @@
 namespace Chaos.IL2CPP.Contracts;
 
-public sealed record ManagedClosureRequest(string InputAssemblyPath, string OutputRootPath);
+public sealed record ManagedClosureRequest(
+    string InputAssemblyPath,
+    string OutputRootPath,
+    string? EntryPointSubjectIdOverride = null);
 
 public static class ManagedClosureArtifactNames
 {
@@ -8,6 +11,8 @@ public static class ManagedClosureArtifactNames
     public const string AotManifest = "aot-manifest.json";
     public const string MetadataRegistration = "metadata-registration.json";
     public const string CodeRegistration = "code-registration.json";
+    public const string OptimizationFacts = "optimization-facts.json";
+    public const string NativeReferenceLoweringPlan = "native-reference.lowering-plan.json";
     public const string ClosureManifest = "closure.manifest.json";
 }
 
@@ -341,6 +346,80 @@ public sealed record ManagedInstructionReference
     public required string SubjectId { get; init; }
 }
 
+public sealed record CanonicalSubjectsModel
+{
+    public required IReadOnlyList<CanonicalSubjectModel> Subjects { get; init; }
+}
+
+public sealed record CanonicalSubjectModel
+{
+    public required string SubjectKind { get; init; }
+
+    public required string SubjectId { get; init; }
+
+    public required string CanonicalSubjectId { get; init; }
+}
+
+public sealed record SemanticShapesModel
+{
+    public required IReadOnlyList<TypeShapeModel> Types { get; init; }
+
+    public required IReadOnlyList<FieldShapeModel> Fields { get; init; }
+
+    public required IReadOnlyList<PropertyShapeModel> Properties { get; init; }
+
+    public required IReadOnlyList<MethodShapeModel> Methods { get; init; }
+}
+
+public sealed record TypeShapeModel
+{
+    public required string SubjectId { get; init; }
+
+    public required string Kind { get; init; }
+}
+
+public sealed record FieldShapeModel
+{
+    public required string SubjectId { get; init; }
+
+    public required string Kind { get; init; }
+}
+
+public sealed record PropertyShapeModel
+{
+    public required string SubjectId { get; init; }
+
+    public required string Kind { get; init; }
+}
+
+public sealed record MethodShapeModel
+{
+    public required string SubjectId { get; init; }
+
+    public required string MethodRole { get; init; }
+
+    public required string BodyAvailability { get; init; }
+}
+
+public sealed record CapabilityBundlesModel
+{
+    public required WorldCapabilityBundleModel World { get; init; }
+
+    public required IReadOnlyList<MethodCapabilityBundleModel> Methods { get; init; }
+}
+
+public sealed record WorldCapabilityBundleModel
+{
+    public required IReadOnlyList<string> Capabilities { get; init; }
+}
+
+public sealed record MethodCapabilityBundleModel
+{
+    public required string SubjectId { get; init; }
+
+    public required IReadOnlyList<string> Capabilities { get; init; }
+}
+
 public sealed record SemanticWorldModel
 {
     public required string InputAssemblyPath { get; init; }
@@ -356,6 +435,12 @@ public sealed record SemanticWorldModel
     public required IReadOnlyList<ManagedPropertyModel> Properties { get; init; }
 
     public required IReadOnlyList<ManagedMethodModel> Methods { get; init; }
+
+    public required CanonicalSubjectsModel CanonicalSubjects { get; init; }
+
+    public required SemanticShapesModel SemanticShapes { get; init; }
+
+    public required CapabilityBundlesModel CapabilityBundles { get; init; }
 }
 
 public sealed record LinkedWorldModel
@@ -375,6 +460,14 @@ public sealed record LinkedWorldModel
     public required IReadOnlyList<ManagedMethodModel> Methods { get; init; }
 
     public required IReadOnlyList<LinkedDependencyModel> Dependencies { get; init; }
+
+    public required CanonicalSubjectsModel CanonicalSubjects { get; init; }
+
+    public required SemanticShapesModel SemanticShapes { get; init; }
+
+    public required CapabilityBundlesModel CapabilityBundles { get; init; }
+
+    public required OptimizationFactsArtifact OptimizationFacts { get; init; }
 }
 
 public sealed record LinkedDependencyModel
@@ -386,6 +479,61 @@ public sealed record LinkedDependencyModel
     public required string SubjectId { get; init; }
 
     public required string Reason { get; init; }
+}
+
+public sealed record OptimizationFactsArtifact
+{
+    public string FormatVersion { get; init; } = "v0";
+
+    public string ArtifactKind { get; init; } = "optimizationFacts";
+
+    public required IReadOnlyList<ClosedWorldSpecializationFact> ClosedWorldSpecializations { get; init; }
+
+    public required IReadOnlyList<DispatchFact> DispatchFacts { get; init; }
+
+    public required IReadOnlyList<LayoutFact> LayoutFacts { get; init; }
+
+    public required IReadOnlyList<ExceptionFact> ExceptionFacts { get; init; }
+}
+
+public sealed record ClosedWorldSpecializationFact
+{
+    public required string SubjectKind { get; init; }
+
+    public required string SubjectId { get; init; }
+
+    public required string Reason { get; init; }
+}
+
+public sealed record DispatchFact
+{
+    public required string MethodSubjectId { get; init; }
+
+    public required string DispatchKind { get; init; }
+
+    public required string TargetSubjectId { get; init; }
+
+    public bool Devirtualized { get; init; }
+}
+
+public sealed record LayoutFact
+{
+    public required string SubjectKind { get; init; }
+
+    public required string SubjectId { get; init; }
+
+    public required string DataKind { get; init; }
+
+    public string? ElementType { get; init; }
+
+    public bool RequiresBoxing { get; init; }
+}
+
+public sealed record ExceptionFact
+{
+    public required string MethodSubjectId { get; init; }
+
+    public required string HandlingKind { get; init; }
 }
 
 public sealed record TypedIlIrArtifact
@@ -404,6 +552,12 @@ public sealed record TypedIlMethodArtifact
     public required string SubjectId { get; init; }
 
     public required string Signature { get; init; }
+
+    public required string MethodRole { get; init; }
+
+    public required string BodyAvailability { get; init; }
+
+    public required IReadOnlyList<string> Capabilities { get; init; }
 
     public required IReadOnlyList<TypedIlParameterArtifact> Parameters { get; init; }
 
@@ -567,6 +721,10 @@ public sealed record ManagedClosureResult
 
     public required CodeRegistrationArtifact CodeRegistration { get; init; }
 
+    public required OptimizationFactsArtifact OptimizationFacts { get; init; }
+
+    public required NativeReferenceLoweringPlanArtifact NativeReferenceLoweringPlan { get; init; }
+
     public required ManagedClosureManifestArtifact ClosureManifest { get; init; }
 }
 
@@ -640,6 +798,8 @@ public sealed record NativeReferenceLoweringPlanArtifact
 
     public string? InstanceMethodToken { get; init; }
 
+    public string? DispatchStrategy { get; init; }
+
     public string? EchoMethodToken { get; init; }
 
     public string? GetterMethodToken { get; init; }
@@ -677,6 +837,10 @@ public sealed record NativeReferenceLoweringPlanArtifact
     public string? EchoLiteral { get; init; }
 
     public int? EchoLiteralByteCount { get; init; }
+
+    public string? BoxedValueTypeToken { get; init; }
+
+    public int? BoxedInt32Value { get; init; }
 
     public string? ClosedTypeSubjectId { get; init; }
 

@@ -1,0 +1,55 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "HelloWorldObject/Program",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "HelloWorldObject/Greeter",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "HelloWorldObject/Program::Main(System.String[])",
+      "reason": "closed-world-entry"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "HelloWorldObject/Greeter::.ctor(System.String)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "HelloWorldObject/Greeter::BuildMessage()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "HelloWorldObject/Program::Main(System.String[])",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "HelloWorldObject/Greeter::BuildMessage()",
+      "devirtualized": true
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "HelloWorldObject/Greeter::_name",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "parameter",
+      "subjectId": "HelloWorldObject/Program::Main(System.String[])::parameter[0]:args",
+      "dataKind": "array",
+      "elementType": "System.String",
+      "requiresBoxing": false
+    }
+  ],
+  "exceptionFacts": []
+}

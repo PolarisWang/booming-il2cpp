@@ -175,6 +175,78 @@ The following generators are available on this platform (* marks default):
             ]
         )
 
+    def test_find_visual_cpp_executable_prefers_developer_environment_toolset(self) -> None:
+        tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_find_cl_from_dev_env")
+        toolset_root = (
+            REPO_ROOT
+            / "artifacts"
+            / ".tmp-tests"
+            / "tooling-visual-studio"
+            / "2022"
+            / "Professional"
+            / "VC"
+            / "Tools"
+            / "MSVC"
+            / "14.38.33130"
+        )
+        expected = toolset_root / "bin" / "Hostx64" / "x64" / "cl.exe"
+
+        with patch.object(tooling_module.os, "name", "nt"):
+            with patch.object(
+                tooling_module,
+                "windows_developer_environment",
+                return_value={"VCToolsInstallDir": str(toolset_root) + "\\"},
+            ):
+                with patch.object(Path, "is_file", autospec=True) as is_file_mock:
+                    is_file_mock.side_effect = lambda path: path == expected
+                    detected = tooling_module.find_visual_cpp_executable(
+                        which=lambda executable: r"C:\toolchains\legacy\cl.exe" if executable == "cl" else None
+                    )
+
+        self.assertEqual(str(expected), detected)
+
+    def test_find_visual_cpp_executable_prefers_highest_vswhere_toolset_match(self) -> None:
+        tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_find_cl_latest_vswhere")
+        older = (
+            REPO_ROOT
+            / "artifacts"
+            / ".tmp-tests"
+            / "tooling-visual-studio"
+            / "2022"
+            / "Professional"
+            / "VC"
+            / "Tools"
+            / "MSVC"
+            / "14.29.30133"
+            / "bin"
+            / "Hostx64"
+            / "x64"
+            / "cl.exe"
+        )
+        newer = (
+            REPO_ROOT
+            / "artifacts"
+            / ".tmp-tests"
+            / "tooling-visual-studio"
+            / "2022"
+            / "Professional"
+            / "VC"
+            / "Tools"
+            / "MSVC"
+            / "14.38.33130"
+            / "bin"
+            / "Hostx64"
+            / "x64"
+            / "cl.exe"
+        )
+
+        with patch.object(tooling_module.os, "name", "nt"):
+            with patch.object(tooling_module, "windows_developer_environment", return_value={}):
+                with patch.object(tooling_module, "_run_vswhere", return_value=[str(older), str(newer)]):
+                    detected = tooling_module.find_visual_cpp_executable(which=lambda executable: None)
+
+        self.assertEqual(str(newer), detected)
+
     def test_find_ninja_executable_prefers_visual_studio_cmake_bundle(self) -> None:
         tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_find_ninja")
         install_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "tooling-visual-studio" / "2022" / "Professional"

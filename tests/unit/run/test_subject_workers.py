@@ -57,14 +57,12 @@ class SubjectWorkersTests(unittest.TestCase):
     def _make_non_repo_path(self, *parts: str) -> Path:
         return TEST_TMP_ROOT / "_external" / Path(*parts)
 
-    def test_windows_build_target_overrides_generator_and_records_non_repo_cmake_binary_dir(self) -> None:
+    def test_windows_build_target_uses_direct_msvc_compile_and_records_build_strategy(self) -> None:
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_windows_build")
         subject_id = "FixtureNativeSubject"
         run_id = "fixture-run-native-build-001"
         matrix_id = "windows-reference-check"
-        expected_cmake_dir = self._make_non_repo_path("cmake-builds", "native-reference-build-1234")
-        expected_cmake_path = self._make_non_repo_path("cmake", "bin", "cmake.exe")
-        expected_ninja_path = self._make_non_repo_path("ninja", "ninja.exe")
+        expected_cl_path = self._make_non_repo_path("vs", "bin", "Hostx64", "x64", "cl.exe")
         expected_env = {
             "Path": r"C:\VS\bin;C:\Windows\System32",
             "INCLUDE": r"C:\VS\include",
@@ -95,36 +93,72 @@ class SubjectWorkersTests(unittest.TestCase):
 
         repo_root = self._make_repo_root("windows-build")
         try:
-            with patch.object(workers_module.tooling_module, "cmake_environment", return_value=(str(expected_cmake_path), {})):
-                with patch.object(workers_module.tooling_module, "find_ninja_executable", return_value=str(expected_ninja_path)):
-                    with patch.object(workers_module.tooling_module, "windows_developer_environment", return_value=expected_env):
-                        with patch.object(workers_module.tooling_module, "allocate_cmake_binary_dir", return_value=expected_cmake_dir):
-                            with patch.object(workers_module, "_run_checked") as run_checked_mock:
-                                result = workers_module.run_build_target(repo_root=repo_root, request=request)
+            for relative_path in [
+                Path("src/native/runtime-core/runtime_core.cpp"),
+                Path("src/native/bootstrap/bootstrap.cpp"),
+                Path("src/native/support/support.cpp"),
+                Path("subjects") / subject_id / "validation" / "proof" / "native-reference" / "main.cpp",
+                Path("artifacts")
+                / "subjects"
+                / subject_id
+                / "runs"
+                / run_id
+                / "analysis"
+                / "generated"
+                / "generated"
+                / "native-reference.generated.cpp",
+            ]:
+                absolute_path = repo_root / relative_path
+                absolute_path.parent.mkdir(parents=True, exist_ok=True)
+                absolute_path.write_text("// fixture\n", encoding="utf-8")
+
+            with patch.object(workers_module.tooling_module, "find_visual_cpp_executable", return_value=str(expected_cl_path)):
+                with patch.object(workers_module.tooling_module, "windows_developer_environment", return_value=expected_env):
+                    with patch.object(workers_module, "_run_checked") as run_checked_mock:
+                        result = workers_module.run_build_target(repo_root=repo_root, request=request)
 
             self.assertEqual("ok", result["status"])
-            configure_args = run_checked_mock.call_args_list[0].args[0]
+            build_args = run_checked_mock.call_args.args[0]
             self.assertEqual(
                 [
-                    str(expected_cmake_path),
-                    "-S",
-                    str(repo_root),
-                    "-B",
-                    str(expected_cmake_dir),
-                    "-G",
-                    "Ninja Multi-Config",
-                    f"-DROADMAP0_PRESET_TARGET=windows-x64-reference",
-                    f"-DCMAKE_TOOLCHAIN_FILE={repo_root / 'build' / 'toolchains' / 'windows-x64-reference.cmake'}",
-                    f"-DCMAKE_MAKE_PROGRAM={expected_ninja_path}",
-                    "-DCHAOS_SUBJECT_VARIANT=CHECK",
-                    f"-DCHAOS_SUBJECT_GENERATED_ROOT={repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'analysis' / 'generated'}",
-                    f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'out'}",
-                    f"-DCHAOS_SUBJECT_RUNTIME_ROOT={repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'runtime'}",
+                    str(expected_cl_path),
+                    "/nologo",
+                    "/std:c++17",
+                    "/EHsc",
+                    "/DWIN32",
+                    "/D_WINDOWS",
+                    "/DCHAOS_RUNTIME_ABI_STATIC",
+                    "/DCHAOS_VARIANT_CHECK",
+                    "/DCHAOS_VARIANT_NAME=CHECK",
+                    "/Od",
+                    "/Zi",
+                    f"/I{repo_root / 'contracts' / 'native' / 'v0'}",
+                    f"/I{repo_root / 'src' / 'native' / 'runtime-core'}",
+                    f"/I{repo_root / 'src' / 'native' / 'bootstrap'}",
+                    f"/I{repo_root / 'src' / 'native' / 'support'}",
+                    f"/Fo{repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'obj'}\\",
+                    f"/Fd{repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'obj' / 'chaos_subject_reference_proof.pdb'}",
+                    f"/Fe{repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'out' / f'{WINDOWS_REFERENCE_BUILD_TARGET}.exe'}",
+                    str(repo_root / "src" / "native" / "runtime-core" / "runtime_core.cpp"),
+                    str(repo_root / "src" / "native" / "bootstrap" / "bootstrap.cpp"),
+                    str(repo_root / "src" / "native" / "support" / "support.cpp"),
+                    str(repo_root / "subjects" / subject_id / "validation" / "proof" / "native-reference" / "main.cpp"),
+                    str(
+                        repo_root
+                        / "artifacts"
+                        / "subjects"
+                        / subject_id
+                        / "runs"
+                        / run_id
+                        / "analysis"
+                        / "generated"
+                        / "generated"
+                        / "native-reference.generated.cpp"
+                    ),
                 ],
-                configure_args,
+                build_args,
             )
-            self.assertEqual(expected_env, run_checked_mock.call_args_list[0].kwargs["env"])
-            self.assertEqual(expected_env, run_checked_mock.call_args_list[1].kwargs["env"])
+            self.assertEqual(expected_env, run_checked_mock.call_args.kwargs["env"])
 
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
             self.assertEqual("CHECK", manifest["variant"])
@@ -135,7 +169,8 @@ class SubjectWorkersTests(unittest.TestCase):
                 },
                 manifest["variantMacros"],
             )
-            self.assertEqual(expected_cmake_dir.as_posix(), manifest["cmakeBinaryDir"])
+            self.assertEqual("direct-msvc", manifest["buildStrategy"])
+            self.assertEqual(str(expected_cl_path), manifest["compilerPath"])
             self.assertEqual(
                 subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "out"),
                 manifest["binaryRoot"],
@@ -144,6 +179,7 @@ class SubjectWorkersTests(unittest.TestCase):
                 [subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "out", f"{WINDOWS_REFERENCE_BUILD_TARGET}.exe")],
                 manifest["outputs"],
             )
+            self.assertNotIn("cmakeBinaryDir", manifest)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -155,6 +191,9 @@ class SubjectWorkersTests(unittest.TestCase):
             "selection": {
                 "subjectId": subject_id,
                 "variant": "CHECK",
+                "source": {
+                    "entry": f"{subject_id}/ProofEntry::Run()",
+                },
             },
             "upstream": {
                 "host-input": {
@@ -196,6 +235,8 @@ class SubjectWorkersTests(unittest.TestCase):
                         str(repo_root / "driver" / "Chaos.IL2CPP.Driver.dll"),
                         str(expected_host_input),
                         str(expected_output_root),
+                        "--entry-point-subject-id",
+                        f"{subject_id}/ProofEntry::Run()",
                     ],
                     arguments,
                 )
@@ -205,6 +246,7 @@ class SubjectWorkersTests(unittest.TestCase):
                     "aot-manifest.json",
                     "metadata-registration.json",
                     "code-registration.json",
+                    "optimization-facts.json",
                     "closure.manifest.json",
                 ]:
                     (expected_output_root / name).write_text("{}", encoding="utf-8")
@@ -229,6 +271,10 @@ class SubjectWorkersTests(unittest.TestCase):
             self.assertEqual(
                 subject_run_path(subject_id, run_id, "analysis", "analysis", "closure.manifest.json"),
                 manifest["artifacts"]["closureManifestPath"],
+            )
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "analysis", "optimization-facts.json"),
+                manifest["artifacts"]["optimizationFactsPath"],
             )
 
             report = json.loads((repo_root / request["paths"]["reportPaths"][0]).read_text(encoding="utf-8"))
@@ -439,6 +485,84 @@ class SubjectWorkersTests(unittest.TestCase):
                 build_args[3:],
             )
             self.assertEqual(expected_env, run_checked_mock.call_args.kwargs["env"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_runtime_observe_executes_direct_msvc_build_output(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_runtime_observe_direct")
+        subject_id = "FixtureRuntimeObserveSubject"
+        run_id = "fixture-run-runtime-observe-direct-001"
+        matrix_id = "windows-reference-check"
+        executable_path = subject_run_path(
+            subject_id,
+            run_id,
+            "matrices",
+            matrix_id,
+            "build",
+            "out",
+            "chaos_subject_reference_proof.exe",
+        )
+
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+            },
+            "upstream": {
+                "build": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("runtime-observe-direct")
+        try:
+            build_manifest_path = repo_root / request["upstream"]["build"]["manifestPath"]
+            build_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            build_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "buildStrategy": "direct-msvc",
+                        "outputs": [executable_path],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            completed = subprocess.CompletedProcess(
+                [str(repo_root / executable_path)],
+                0,
+                "native proof ok\n",
+                "",
+            )
+
+            with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
+                result = workers_module.run_runtime_observe(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            run_process_mock.assert_called_once_with(
+                [str(repo_root / executable_path)],
+                cwd=repo_root / request["paths"]["bucketRoot"],
+            )
+
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stdout.log"),
+                manifest["stdoutPath"],
+            )
+            self.assertEqual(
+                "native proof ok\n",
+                (repo_root / manifest["stdoutPath"]).read_text(encoding="utf-8"),
+            )
+            self.assertEqual(
+                "0\n",
+                (repo_root / manifest["exitCodePath"]).read_text(encoding="utf-8"),
+            )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

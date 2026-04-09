@@ -7,6 +7,7 @@ import sys
 import unittest
 import uuid
 from pathlib import Path
+from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -118,6 +119,49 @@ class ReportingLayoutTests(unittest.TestCase):
         self.assertEqual(1, summary["trafficLightCounts"]["red"]["fail"])
         self.assertEqual(1, summary["trafficLightCounts"]["yellow"]["skip"])
         self.assertEqual("green", suite_report["caseResults"][0]["trafficLight"])
+
+    def test_reporting_layout_rewrites_current_pointer_when_delete_is_denied(self) -> None:
+        reporting_module = load_reporting_module()
+
+        TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
+        repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
+            subject_root = repo_root / "artifacts" / "subjects" / "fixture-layout-entry" / "runs"
+            global_root = repo_root / "artifacts" / "logs" / "tests"
+            run_context = reporting_module.start_session_report(
+                repo_root=repo_root,
+                host_platform="windows",
+                command_text="test subject",
+                run_id="run-1",
+                session_root=subject_root / "run-1" / "run-report",
+                pointer_roots=[subject_root, global_root],
+            )
+
+            with patch("pathlib.Path.unlink", side_effect=PermissionError(13, "Access is denied")):
+                reporting_module.write_session_report(
+                    repo_root=repo_root,
+                    host_platform="windows",
+                    command_text="test subject",
+                    status="ok",
+                    suite_results=[],
+                    phase_results=[],
+                    text="",
+                    errors=[],
+                    artifacts=[],
+                    subject_results=[],
+                    run_context=run_context,
+                )
+
+            subject_current = json.loads((subject_root / "current.json").read_text(encoding="utf-8"))
+            global_current = json.loads((global_root / "current.json").read_text(encoding="utf-8"))
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+        self.assertEqual("ok", subject_current["status"])
+        self.assertEqual("run-1", subject_current["runId"])
+        self.assertEqual("ok", global_current["status"])
+        self.assertEqual("run-1", global_current["runId"])
 
 
 if __name__ == "__main__":

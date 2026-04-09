@@ -7,6 +7,7 @@ import sys
 import unittest
 import uuid
 from pathlib import Path
+from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -66,6 +67,40 @@ class OperationReportingTests(unittest.TestCase):
         self.assertEqual(run_context["runId"], written[0]["runId"])
         self.assertEqual("build abi", written[0]["payload"]["activeUnit"])
         self.assertEqual("ok", written[0]["status"])
+
+    def test_finalize_operation_report_rewrites_current_pointer_when_delete_is_denied(self) -> None:
+        operation_reporting_module = load_module(OPERATION_REPORTING_MODULE_PATH, "chaos_run_operation_reporting_finalize")
+
+        TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
+        repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
+            run_context = operation_reporting_module.start_operation_report(
+                repo_root=repo_root,
+                host_platform="windows",
+                command_text="build all",
+            )
+            with patch("pathlib.Path.unlink", side_effect=PermissionError(13, "Access is denied")):
+                operation_reporting_module.finalize_operation_report(
+                    repo_root=repo_root,
+                    host_platform="windows",
+                    command_text="build all",
+                    status="ok",
+                    errors=[],
+                    artifacts=["artifacts/output.bin"],
+                    important_outputs=[],
+                    console_text="build ok\n",
+                    run_context=run_context,
+                )
+
+            current_payload = json.loads(
+                (repo_root / "artifacts" / "logs" / "run" / "current.json").read_text(encoding="utf-8")
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+        self.assertEqual("ok", current_payload["status"])
+        self.assertEqual(run_context["runId"], current_payload["runId"])
 
 
 if __name__ == "__main__":

@@ -37,6 +37,27 @@ def _append_text(path: Path, text: str) -> None:
         handle.write(text)
 
 
+def _finalize_current_pointer(current_path: Path, run_id: str, pointer_payload: dict[str, Any]) -> None:
+    if not current_path.is_file():
+        return
+    try:
+        current_payload = read_json(current_path)
+    except (OSError, ValueError):
+        return
+    if current_payload.get("runId") != run_id:
+        return
+    try:
+        current_path.unlink()
+        return
+    except OSError:
+        # Some Windows workspaces deny deleting freshly written files.
+        pass
+    try:
+        write_json(current_path, pointer_payload)
+    except OSError:
+        pass
+
+
 def start_operation_report(
     *,
     repo_root: Path,
@@ -175,11 +196,7 @@ def finalize_operation_report(
         "reportKind": "operation",
     }
     write_json(_logs_root(repo_root) / "last.json", pointer_payload)
-    current_path = _logs_root(repo_root) / "current.json"
-    if current_path.is_file():
-        current_payload = read_json(current_path)
-        if current_payload.get("runId") == run_id:
-            current_path.unlink()
+    _finalize_current_pointer(_logs_root(repo_root) / "current.json", run_id, pointer_payload)
 
     return {
         "runId": run_id,

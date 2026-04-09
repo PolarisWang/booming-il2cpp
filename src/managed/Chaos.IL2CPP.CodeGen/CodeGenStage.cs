@@ -11,9 +11,15 @@ public sealed class CodeGenStage
         LinkedWorldModel linkedWorld,
         MetadataWriterOutput metadataWriterOutput)
     {
+        var methodShapes = linkedWorld.SemanticShapes.Methods
+            .ToDictionary(shape => shape.SubjectId, StringComparer.Ordinal);
+        var methodCapabilities = linkedWorld.CapabilityBundles.Methods
+            .ToDictionary(bundle => bundle.SubjectId, bundle => bundle.Capabilities, StringComparer.Ordinal);
         var typedIl = new TypedIlIrArtifact
         {
-            Methods = linkedWorld.Methods.Select(ToTypedIlMethodArtifact).ToList(),
+            Methods = linkedWorld.Methods
+                .Select(method => ToTypedIlMethodArtifact(method, methodShapes, methodCapabilities))
+                .ToList(),
         };
 
         var codeRegistration = new CodeRegistrationArtifact
@@ -33,6 +39,12 @@ public sealed class CodeGenStage
                 },
             ],
         };
+        var loweringPlanner = new NativeReferenceLoweringPlanner();
+        var nativeReferenceLoweringPlan = loweringPlanner.Create(
+            linkedWorld,
+            typedIl,
+            metadataWriterOutput.MetadataRegistration,
+            codeRegistration);
 
         var closureManifest = new ManagedClosureManifestArtifact
         {
@@ -46,6 +58,8 @@ public sealed class CodeGenStage
                 new ManagedClosureArtifactRef { Kind = "aotManifest", Path = ManagedClosureArtifactNames.AotManifest },
                 new ManagedClosureArtifactRef { Kind = "metadataRegistration", Path = ManagedClosureArtifactNames.MetadataRegistration },
                 new ManagedClosureArtifactRef { Kind = "codeRegistration", Path = ManagedClosureArtifactNames.CodeRegistration },
+                new ManagedClosureArtifactRef { Kind = "optimizationFacts", Path = ManagedClosureArtifactNames.OptimizationFacts },
+                new ManagedClosureArtifactRef { Kind = "nativeReferenceLoweringPlan", Path = ManagedClosureArtifactNames.NativeReferenceLoweringPlan },
             ],
         };
 
@@ -56,17 +70,28 @@ public sealed class CodeGenStage
             AotManifest = metadataWriterOutput.AotManifest,
             MetadataRegistration = metadataWriterOutput.MetadataRegistration,
             CodeRegistration = codeRegistration,
+            OptimizationFacts = linkedWorld.OptimizationFacts,
+            NativeReferenceLoweringPlan = nativeReferenceLoweringPlan,
             ClosureManifest = closureManifest,
         };
     }
 
-    private static TypedIlMethodArtifact ToTypedIlMethodArtifact(ManagedMethodModel method)
+    private static TypedIlMethodArtifact ToTypedIlMethodArtifact(
+        ManagedMethodModel method,
+        IReadOnlyDictionary<string, MethodShapeModel> methodShapes,
+        IReadOnlyDictionary<string, IReadOnlyList<string>> methodCapabilities)
     {
+        var methodShape = GetRequiredMethodShape(methodShapes, method.SubjectId);
+        var capabilities = GetRequiredCapabilities(methodCapabilities, method.SubjectId);
+
         return new TypedIlMethodArtifact
         {
             MethodId = ManagedNaming.CreateMethodId(method),
             SubjectId = method.SubjectId,
             Signature = method.Signature,
+            MethodRole = methodShape.MethodRole,
+            BodyAvailability = methodShape.BodyAvailability,
+            Capabilities = capabilities,
             Parameters = method.Parameters.Select(parameter => new TypedIlParameterArtifact
             {
                 Name = parameter.Name,
@@ -75,51 +100,35 @@ public sealed class CodeGenStage
             Blocks = method.Body.Blocks.Select(block => new TypedIlBlockArtifact
             {
                 BlockId = block.BlockId,
-                Instructions = NormalizeInstructions(block.Instructions).Select(ToTypedIlInstructionArtifact).ToList(),
+                Instructions = block.Instructions.Select(ToTypedIlInstructionArtifact).ToList(),
             }).ToList(),
         };
     }
 
-    private static IReadOnlyList<ManagedInstructionModel> NormalizeInstructions(IReadOnlyList<ManagedInstructionModel> instructions)
+    private static MethodShapeModel GetRequiredMethodShape(
+        IReadOnlyDictionary<string, MethodShapeModel> methodShapes,
+        string subjectId)
     {
-        var normalized = new List<ManagedInstructionModel>();
-
-        foreach (var instruction in instructions)
+        if (methodShapes.TryGetValue(subjectId, out var methodShape))
         {
-            if (instruction.Op == "call" &&
-                string.Equals(
-                    instruction.Callee,
-                    "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String)",
-                    StringComparison.Ordinal))
-            {
-                if (normalized.Count == 0)
-                {
-                    throw new NotSupportedException("unable to canonicalize String.Concat(string,string,string) without prior operands");
-                }
-
-                var trailingOperand = normalized[^1];
-                normalized.RemoveAt(normalized.Count - 1);
-
-                normalized.Add(new ManagedInstructionModel
-                {
-                    Op = "call",
-                    Callee = "System.Private.CoreLib/System.String::Concat(System.String,System.String)",
-                    ResultType = "System.String",
-                });
-                normalized.Add(trailingOperand);
-                normalized.Add(new ManagedInstructionModel
-                {
-                    Op = "call",
-                    Callee = "System.Private.CoreLib/System.String::Concat(System.String,System.String)",
-                    ResultType = "System.String",
-                });
-                continue;
-            }
-
-            normalized.Add(instruction);
+            return methodShape;
         }
 
-        return normalized;
+        throw new InvalidOperationException(
+            $"missing semantic method shape for '{subjectId}' during typed-il generation");
+    }
+
+    private static IReadOnlyList<string> GetRequiredCapabilities(
+        IReadOnlyDictionary<string, IReadOnlyList<string>> methodCapabilities,
+        string subjectId)
+    {
+        if (methodCapabilities.TryGetValue(subjectId, out var capabilities))
+        {
+            return capabilities;
+        }
+
+        throw new InvalidOperationException(
+            $"missing method capability bundle for '{subjectId}' during typed-il generation");
     }
 
     private static TypedIlInstructionArtifact ToTypedIlInstructionArtifact(ManagedInstructionModel instruction)

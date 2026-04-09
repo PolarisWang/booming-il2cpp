@@ -4,7 +4,7 @@
 **目标：** 把 live canonical `roadmap-0` 命名空间迁移到 `runtime-baseline` / `platform-gates`，同时保留必要兼容入口。
 **架构：** 先锁定新 canonical 名称与旧入口兼容行为，再迁移 run manifest、registry、low-level verify 脚本、artifact 路径与 live docs，最后跑聚焦回归并归档任务。
 **技术栈：** Python、PowerShell、JSON manifest、registry manifests、wiki/docs、unittest。
-**设计文档：** `docs/dev/in-progress/20260408-02-runtime-baseline-namespace-migration/design-v1-01.md`
+**设计文档：** `docs/dev/completed/20260408-02-runtime-baseline-namespace-migration/design-v1-01.md`
 **预期知识沉淀：** `wiki/04-工具与集成/统一入口脚本.md`、`wiki/06-测试验证/整体验证场景/`
 
 ## 目标文件与职责

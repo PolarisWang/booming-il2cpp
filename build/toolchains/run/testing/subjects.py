@@ -247,11 +247,15 @@ def resolve_validation_selection(
         if current_variant not in unique_default_variants:
             unique_default_variants.append(current_variant)
     if len(unique_default_variants) != 1:
-        raise ValueError(
-            f"validation profile '{selected_profile_id}' resolves to multiple default variants: {unique_default_variants}"
-        )
+        if not variant:
+            raise ValueError(
+                f"validation profile '{selected_profile_id}' resolves to multiple default variants: {unique_default_variants}"
+            )
 
-    default_variant = unique_default_variants[0]
+        default_variant = str(variant)
+    else:
+        default_variant = unique_default_variants[0]
+
     selected_variant = variant or default_variant
     return {
         "validationProfileId": selected_profile_id,

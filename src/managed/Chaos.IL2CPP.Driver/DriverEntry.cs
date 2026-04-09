@@ -27,6 +27,8 @@ public sealed class DriverEntry
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.AotManifest), result.AotManifest);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.MetadataRegistration), result.MetadataRegistration);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.CodeRegistration), result.CodeRegistration);
+        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.OptimizationFacts), result.OptimizationFacts);
+        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.NativeReferenceLoweringPlan), result.NativeReferenceLoweringPlan);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.ClosureManifest), result.ClosureManifest);
 
         return 0;
@@ -65,22 +67,47 @@ public sealed class DriverEntry
             }
         }
 
-        if (args.Length != 2)
+        if (!TryParseManagedClosureRequest(args, out var request))
         {
             Console.Error.WriteLine("usage: Chaos.IL2CPP.Driver <input-assembly-path> <output-root>");
+            Console.Error.WriteLine("   or: Chaos.IL2CPP.Driver <input-assembly-path> <output-root> --entry-point-subject-id <subject-id>");
             Console.Error.WriteLine("   or: Chaos.IL2CPP.Driver emit-native-reference <managed-closure-root> <output-root>");
             return 1;
         }
 
         try
         {
-            return new DriverEntry().Run(new ManagedClosureRequest(args[0], args[1]));
+            return new DriverEntry().Run(request);
         }
         catch (Exception exception)
         {
             Console.Error.WriteLine(exception);
             return 1;
         }
+    }
+
+    private static bool TryParseManagedClosureRequest(string[] args, out ManagedClosureRequest request)
+    {
+        request = default!;
+
+        if (args.Length == 2)
+        {
+            request = new ManagedClosureRequest(args[0], args[1]);
+            return true;
+        }
+
+        if (args.Length == 4 &&
+            string.Equals(args[2], "--entry-point-subject-id", StringComparison.Ordinal) &&
+            !string.IsNullOrWhiteSpace(args[3]))
+        {
+            request = new ManagedClosureRequest(
+                args[0],
+                args[1],
+                EntryPointSubjectIdOverride: args[3]);
+            return true;
+        }
+
+        return false;
     }
 
     private static void WriteJson<T>(string path, T value)

@@ -6,6 +6,11 @@
       "methodId": "hello-world-object.program.main",
       "subjectId": "HelloWorldObject/Program::Main(System.String[])",
       "signature": "System.Int32 Program::Main(System.String[])",
+      "methodRole": "static-method",
+      "bodyAvailability": "has-canonical-body",
+      "capabilities": [
+        "requires-console-string-output"
+      ],
       "parameters": [
         {
           "name": "args",
@@ -52,6 +57,11 @@
       "methodId": "hello-world-object.greeter.ctor",
       "subjectId": "HelloWorldObject/Greeter::.ctor(System.String)",
       "signature": "System.Void Greeter::.ctor(System.String)",
+      "methodRole": "constructor",
+      "bodyAvailability": "has-canonical-body",
+      "capabilities": [
+        "uses-instance-field-state"
+      ],
       "parameters": [
         {
           "name": "name",
@@ -98,6 +108,12 @@
       "methodId": "hello-world-object.greeter.build-message",
       "subjectId": "HelloWorldObject/Greeter::BuildMessage()",
       "signature": "System.String Greeter::BuildMessage()",
+      "methodRole": "instance-method",
+      "bodyAvailability": "has-canonical-body",
+      "capabilities": [
+        "requires-string-concat",
+        "uses-instance-field-state"
+      ],
       "parameters": [],
       "blocks": [
         {

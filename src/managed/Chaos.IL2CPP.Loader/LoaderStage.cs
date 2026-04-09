@@ -47,13 +47,6 @@ public sealed class LoaderStage
             fieldModels,
             propertyModels,
             methodModels);
-        var entryPointSubjectId = ResolveEntryPointSubjectId(
-            peReader,
-            metadataReader,
-            typeResolver,
-            typeModels,
-            ownerIndex.MethodOwners,
-            assemblyName);
         var allTypes = typeModels.Values
             .Concat(materializedGenerics.Types)
             .OrderBy(model => model.MetadataToken)
@@ -70,6 +63,15 @@ public sealed class LoaderStage
             .Concat(materializedGenerics.Methods)
             .OrderBy(model => model.MetadataToken)
             .ToList();
+        var entryPointSubjectId = ResolveEntryPointSubjectId(
+            request,
+            peReader,
+            metadataReader,
+            typeResolver,
+            typeModels,
+            ownerIndex.MethodOwners,
+            assemblyName,
+            allMethods);
 
         return new LoadedAssemblyModel
         {
@@ -84,13 +86,27 @@ public sealed class LoaderStage
     }
 
     private static string ResolveEntryPointSubjectId(
+        ManagedClosureRequest request,
         PEReader peReader,
         MetadataReader metadataReader,
         MetadataTypeResolver typeResolver,
         IReadOnlyDictionary<TypeDefinitionHandle, ManagedTypeModel> typeModels,
         IReadOnlyDictionary<MethodDefinitionHandle, ManagedTypeModel> methodOwners,
-        string assemblyName)
+        string assemblyName,
+        IReadOnlyList<ManagedMethodModel> methods)
     {
+        if (!string.IsNullOrWhiteSpace(request.EntryPointSubjectIdOverride))
+        {
+            var entryPointSubjectIdOverride = request.EntryPointSubjectIdOverride!;
+            if (methods.Any(method => string.Equals(method.SubjectId, entryPointSubjectIdOverride, StringComparison.Ordinal)))
+            {
+                return entryPointSubjectIdOverride;
+            }
+
+            throw new InvalidOperationException(
+                $"managed closure entry point override '{entryPointSubjectIdOverride}' does not match any loaded method");
+        }
+
         var entryToken = peReader.PEHeaders.CorHeader?.EntryPointTokenOrRelativeVirtualAddress ?? 0;
         if (entryToken == 0)
         {
@@ -372,11 +388,14 @@ public sealed class LoaderStage
             ILOpCode.Nop => null,
             ILOpCode.Ldtoken => DecodeLdtokenInstruction(metadataReader, typeResolver, typeModels, fieldOwners, methodOwners, ref ilReader),
             ILOpCode.Ldstr => DecodeLdstrInstruction(metadataReader, ref ilReader),
+            ILOpCode.Newarr => DecodeNewarrInstruction(metadataReader, typeResolver, ref ilReader),
             ILOpCode.Newobj => DecodeMethodReferenceInstruction(metadataReader, typeResolver, typeModels, methodOwners, opCode, ref ilReader),
+            ILOpCode.Box => DecodeBoxInstruction(metadataReader, typeResolver, ref ilReader),
             ILOpCode.Call => DecodeMethodReferenceInstruction(metadataReader, typeResolver, typeModels, methodOwners, opCode, ref ilReader),
             ILOpCode.Callvirt => DecodeMethodReferenceInstruction(metadataReader, typeResolver, typeModels, methodOwners, opCode, ref ilReader),
             ILOpCode.Stfld => DecodeFieldReferenceInstruction(metadataReader, typeResolver, fieldOwners, opCode, ref ilReader),
             ILOpCode.Ldfld => DecodeFieldReferenceInstruction(metadataReader, typeResolver, fieldOwners, opCode, ref ilReader),
+            ILOpCode.Stelem_ref => new ManagedInstructionModel { Op = "stelem.ref", ResultType = "System.Void" },
             ILOpCode.Dup => new ManagedInstructionModel { Op = "dup" },
             ILOpCode.Pop => new ManagedInstructionModel { Op = "pop" },
             ILOpCode.Ldelem_ref => new ManagedInstructionModel { Op = "ldelem.ref", ResultType = "System.Object" },
@@ -401,6 +420,58 @@ public sealed class LoaderStage
             ILOpCode.Ret => new ManagedInstructionModel { Op = "ret" },
             _ => throw new NotSupportedException($"unsupported IL opcode in loader: {opCode}"),
         };
+    }
+
+    private static ManagedInstructionModel DecodeTypeReferenceInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        ILOpCode opCode,
+        ref BlobReader ilReader)
+    {
+        var token = ilReader.ReadInt32();
+        var handle = MetadataTokens.EntityHandle(token);
+        var typeIdentity = typeResolver.ResolveTypeIdentity(handle);
+
+        return new ManagedInstructionModel
+        {
+            Op = opCode switch
+            {
+                ILOpCode.Newarr => "newarr",
+                ILOpCode.Box => "box",
+                _ => throw new NotSupportedException($"unsupported type reference opcode: {opCode}"),
+            },
+            Operand = typeIdentity.SubjectId,
+            ResultType = opCode switch
+            {
+                ILOpCode.Newarr => $"{typeIdentity.DisplayName}[]",
+                ILOpCode.Box => "System.Object",
+                _ => throw new NotSupportedException($"unsupported type reference opcode: {opCode}"),
+            },
+            Reference = new ManagedInstructionReference
+            {
+                AssemblyName = typeIdentity.AssemblyName,
+                SubjectKind = "type",
+                SubjectId = typeIdentity.SubjectId,
+            },
+        };
+    }
+
+    private static ManagedInstructionModel DecodeNewarrInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeTypeReferenceInstruction(metadataReader, typeResolver, ILOpCode.Newarr, ref ilReader);
+        return instruction with { Op = "newarr" };
+    }
+
+    private static ManagedInstructionModel DecodeBoxInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeTypeReferenceInstruction(metadataReader, typeResolver, ILOpCode.Box, ref ilReader);
+        return instruction with { Op = "box" };
     }
 
     private static ManagedInstructionModel DecodeLdtokenInstruction(

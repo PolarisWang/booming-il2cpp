@@ -1,9 +1,15 @@
 ﻿# 寮€鍙戜换鍔℃€昏
 
 鏈洰褰曟眹鎬诲綋鍓嶉噰鐢?`docs/dev` 娴佺▼绠＄悊鐨勪换鍔°€?
-
-| 浠诲姟 | lifecycle_status | phase | 鏈€杩戞洿鏂?| 涓嬩竴姝?| active |
+| 任务 | lifecycle_status | phase | 最近更新 | 下一步 | active |
 | --- | --- | --- | --- | --- | --- |
+| `20260409-07-phase-5-capability-batch-a-dispatch-generic-layout-and-array-boxing` | `in_progress` | `executing` | `2026-04-09 15:20:01 +08:00` | `plan-v1-01.md` 已落地；当前开始执行 `Chunk 1`，先补 planner / manifest 的 matrix-scoped `source.entry` override RED。 | `yes` |
+| `20260409-01-il2cpp-mainline-performance-core-and-full-subject-roadmap` | `in_progress` | `roadmap` | `2026-04-09 15:20:01 +08:00` | `Phase 4` 已完成；当前切到 `Phase 5` child `20260409-07-phase-5-capability-batch-a-dispatch-generic-layout-and-array-boxing` 的 design review。 | `no` |
+| `20260409-06-phase-4-mainline-feature-pack-onboarding` | `completed` | `archived` | `2026-04-09 15:20:01 +08:00` | 无。`MainlineFeaturePack` 已成为真实完整 subject，`output / trace / perf` 三条统一入口已验证通过。 | `no` |
+| `20260409-05-phase-3-capability-driven-lowering-and-arbitration` | `completed` | `archived` | `2026-04-09 13:13:08 +08:00` | 无。`CodeGen` 已成为 lowering family 与 managed lowering plan 真源，emitter 已收缩为 plan consumer；父 roadmap 已继续派生 `Phase 4`。 | `no` |
+| `20260409-04-phase-2-core-contract-cutover` | `completed` | `archived` | `2026-04-09 13:12:00 +08:00` | 无。`Phase 2` contract cutover 已落地；subject-bearing contract 清理延后为单独 follow-up。 | `no` |
+| `20260409-02-phase-1-optimization-facts-and-native-perf-contracts` | `completed` | `archived` | `2026-04-09 10:22:00 +08:00` | 无。`Phase 1` contract 已冻结；下一步由父 roadmap 派生 `phase-2-core-contract-cutover`。 | `no` |
+| `20260409-03-phase-0-completeness-definition-and-performance-governance` | `completed` | `archived` | `2026-04-09 00:55:36 +08:00` | 无。`DefinitionOfComplete` 与 `PerformanceGovernance` 已冻结，`20260409-02` 已恢复执行。 | `no` |
 | `20260408-03-unified-test-all-display` | `completed` | `archived` | `2026-04-08 19:15:45 +08:00` | 无。`test all` 现在会在进入前预览批次，并在 progress/summary 中输出 counts 与 failure digest。 | `no` |
 | `20260408-02-runtime-baseline-namespace-migration` | `completed` | `archived` | `2026-04-08 14:32:41 +08:00` | 无。`runtime-baseline` / `platform-gates` 已成为 live canonical surface，旧 `roadmap-0` 入口仅保留兼容包装。 | `no` |
 | `20260408-01-unified-project-generation-entrypoint` | `completed` | `archived` | `2026-04-08 13:13:54 +08:00` | 无。统一入口已正式承载 `generate/build project subject|core` 与 `deploy core`，`artifacts/projects/**` / `deploy/core/**` 边界和 `subject-exec` 手动刷新规则已冻结。 | `no` |

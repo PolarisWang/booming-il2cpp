@@ -8,7 +8,7 @@
 
 **技术栈：** Python、`unittest`、统一入口 TUI、测试汇总 reporting
 
-**设计文档：** `docs/dev/in-progress/20260408-03-unified-test-all-display/design-v1-01.md`
+**设计文档：** `docs/dev/completed/20260408-03-unified-test-all-display/design-v1-01.md`
 
 **预期知识沉淀：** 按任务决定
 
@@ -43,8 +43,8 @@
 
 - [ ] Task 4: 运行回归并收口任务状态
   - 文件：
-    - `docs/dev/in-progress/20260408-03-unified-test-all-display/STATUS.md`
-    - `docs/dev/in-progress/20260408-03-unified-test-all-display/notes/progress-v1-01.md`
+    - `docs/dev/completed/20260408-03-unified-test-all-display/STATUS.md`
+    - `docs/dev/completed/20260408-03-unified-test-all-display/notes/progress-v1-01.md`
     - `docs/dev/ACTIVE.md`
   - 验证：
     - `python -m unittest tests.tooling.run.test_tui tests.tooling.run.test_unified_test_command`

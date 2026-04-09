@@ -22,6 +22,8 @@ EXPECTED_ARTIFACTS = {
     "aot-manifest.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "aot-manifest.min.json",
     "metadata-registration.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "metadata-registration.min.json",
     "code-registration.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "code-registration.min.json",
+    "optimization-facts.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "optimization-facts.min.json",
+    "native-reference.lowering-plan.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "native-reference.lowering-plan.min.json",
 }
 METADATA_REGISTRATION_MINIMAL_KEYS = ("registrationKind", "slot", "subjectId")
 TEST_INTERMEDIATE_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "managed-closure-contract"
@@ -84,7 +86,9 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         cls.project_path = REPO_ROOT / "subjects" / cls.subject_id / "source" / f"{cls.subject_id}.csproj"
         cls.dll_path = REPO_ROOT / "subjects" / cls.subject_id / "source" / "bin" / "Release" / "net8.0" / f"{cls.subject_id}.dll"
         cls.output_root = TEST_INTERMEDIATE_ROOT / "outputs" / f"{cls.subject_id}-{uuid.uuid4().hex}"
+        cls.native_output_root = TEST_INTERMEDIATE_ROOT / "native-proof-outputs" / f"{cls.subject_id}-{uuid.uuid4().hex}"
         cls.bundle_generated = False
+        cls.native_reference_generated = False
 
     def _ensure_bundle_generated(self) -> None:
         if self.__class__.bundle_generated:
@@ -136,6 +140,27 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         )
         self.__class__.bundle_generated = True
 
+    def _ensure_native_reference_generated(self) -> None:
+        self._ensure_bundle_generated()
+
+        if self.__class__.native_reference_generated:
+            return
+
+        if self.native_output_root.exists():
+            shutil.rmtree(self.native_output_root)
+
+        run_checked(
+            [
+                "dotnet",
+                str(REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Driver.dll"),
+                "emit-native-reference",
+                str(self.output_root),
+                str(self.native_output_root),
+            ],
+            cwd=REPO_ROOT,
+        )
+        self.__class__.native_reference_generated = True
+
     def test_spec_doc_exists_and_points_at_subject_root_inputs(self) -> None:
         self.assertTrue(SPEC_DOC_PATH.is_file(), msg=f"missing spec doc: {SPEC_DOC_PATH}")
 
@@ -170,6 +195,8 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
                 "aot-manifest.json",
                 "metadata-registration.json",
                 "code-registration.json",
+                "optimization-facts.json",
+                "native-reference.lowering-plan.json",
             ],
             [artifact["path"] for artifact in manifest["artifacts"]],
         )
@@ -191,6 +218,56 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
                 generated_json = project_metadata_registration_minimal(generated_json, expected_subject_ids)
 
             self.assertEqual(expected_json, generated_json, msg=f"artifact mismatch: {generated_name}")
+
+    def test_typed_il_methods_expose_semantic_shape_and_capability_contracts(self) -> None:
+        self._ensure_bundle_generated()
+
+        typed_il = load_json(self.output_root / "typed-il-ir.json")
+        methods = {
+            method["subjectId"]: method
+            for method in typed_il["methods"]
+        }
+
+        main_method = methods["HelloWorldObject/Program::Main(System.String[])"]
+        constructor_method = methods["HelloWorldObject/Greeter::.ctor(System.String)"]
+        build_message_method = methods["HelloWorldObject/Greeter::BuildMessage()"]
+
+        self.assertEqual("static-method", main_method["methodRole"])
+        self.assertEqual("has-canonical-body", main_method["bodyAvailability"])
+        self.assertEqual(
+            ["requires-console-string-output"],
+            sorted(main_method["capabilities"]),
+        )
+
+        self.assertEqual("constructor", constructor_method["methodRole"])
+        self.assertEqual("has-canonical-body", constructor_method["bodyAvailability"])
+
+        self.assertEqual("instance-method", build_message_method["methodRole"])
+        self.assertEqual("has-canonical-body", build_message_method["bodyAvailability"])
+        self.assertEqual(
+            ["requires-string-concat", "uses-instance-field-state"],
+            sorted(build_message_method["capabilities"]),
+        )
+
+    def test_generated_bundle_emits_managed_lowering_plan_and_native_proof_mirrors_it(self) -> None:
+        self._ensure_native_reference_generated()
+
+        managed_plan_path = self.output_root / "native-reference.lowering-plan.json"
+        proof_plan_path = self.native_output_root / "native-proof.plan.json"
+        generated_cpp_path = self.native_output_root / "generated" / "native-reference.generated.cpp"
+
+        self.assertTrue(managed_plan_path.is_file(), msg=f"missing managed lowering plan: {managed_plan_path}")
+        self.assertTrue(proof_plan_path.is_file(), msg=f"missing mirrored proof plan: {proof_plan_path}")
+        self.assertTrue(generated_cpp_path.is_file(), msg=f"missing generated native proof source: {generated_cpp_path}")
+
+        managed_plan = load_json(managed_plan_path)
+        proof_plan = load_json(proof_plan_path)
+
+        self.assertEqual(managed_plan, proof_plan)
+        self.assertEqual(
+            "managed-object.captured-state-instance-message.minimal",
+            managed_plan["planKind"],
+        )
 
 
 if __name__ == "__main__":

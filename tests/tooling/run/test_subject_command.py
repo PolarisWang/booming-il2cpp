@@ -205,6 +205,14 @@ class SubjectCommandTests(unittest.TestCase):
                     f"artifacts/subjects/{subject_id}/runs/{run_id}/run-report/summary.json",
                     global_last["summaryPath"],
                 )
+                if subject_current_path.is_file():
+                    subject_current = json.loads(subject_current_path.read_text(encoding="utf-8"))
+                    self.assertEqual(run_id, subject_current["runId"])
+                    self.assertEqual("ok", subject_current["status"])
+                if global_current_path.is_file():
+                    global_current = json.loads(global_current_path.read_text(encoding="utf-8"))
+                    self.assertEqual(run_id, global_current["runId"])
+                    self.assertEqual("ok", global_current["status"])
             finally:
                 shutil.rmtree(run_root, ignore_errors=True)
                 for path, snapshot in snapshots.items():
@@ -505,6 +513,160 @@ class SubjectCommandTests(unittest.TestCase):
             self.assertIn(validation_result["trxPath"], result.payload["artifacts"])
             self.assertTrue((REPO_ROOT / validation_result["summaryPath"]).is_file())
             self.assertEqual(subject_id, matrix_result["subjectId"])
+        finally:
+            shutil.rmtree(run_root, ignore_errors=True)
+            for path, snapshot in snapshots.items():
+                restore_text(path, snapshot)
+
+    def test_subject_dispatch_collects_native_perf_report_artifacts_for_mainline_subject(self) -> None:
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_subject_native_perf_dispatch")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_subject_native_perf_dispatch")
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+        subject_record = select_subject_record(
+            "chaos_run_subject_fixture_native_perf_dispatch",
+            category="mainline",
+            source_type="dotnet-project",
+            required_goal_ids=["perf.profile"],
+            required_stage_kinds=["native-runtime-perf"],
+            required_validation_profile_ids=["perf-profile"],
+            required_validation_drivers=["native-runtime-perf"],
+        )
+        subject_id = str(subject_record["subjectId"])
+        fixed_run_id = f"chaos-run-subject-native-perf-{uuid.uuid4().hex}"
+        observed_selection: dict[str, str] = {}
+        subject_runs_root = REPO_ROOT / "artifacts" / "subjects" / subject_id / "runs"
+        run_root = subject_runs_root / fixed_run_id
+        subject_last_path = subject_runs_root / "last.json"
+        subject_current_path = subject_runs_root / "current.json"
+        global_logs_root = REPO_ROOT / "artifacts" / "logs" / "tests"
+        global_last_path = global_logs_root / "last.json"
+        global_current_path = global_logs_root / "current.json"
+        snapshots = {
+            subject_last_path: snapshot_text(subject_last_path),
+            subject_current_path: snapshot_text(subject_current_path),
+            global_last_path: snapshot_text(global_last_path),
+            global_current_path: snapshot_text(global_current_path),
+        }
+
+        def execute_plan_side_effect(repo_root: Path, plan: dict, **_: object) -> dict:
+            del repo_root
+            selection = dict(plan.get("selection") or {})
+            observed_selection.update(
+                {
+                    "subjectId": str(selection.get("subjectId") or ""),
+                    "matrixId": str(selection.get("matrixId") or ""),
+                    "goalId": str(selection.get("goalId") or ""),
+                    "validationProfileId": str(selection.get("validationProfileId") or ""),
+                    "variant": str(selection.get("variant") or ""),
+                }
+            )
+            native_perf_stage = next(
+                dict(stage)
+                for stage in list(plan.get("stagePlan") or [])
+                if str(stage.get("kind") or "") == "native-runtime-perf"
+            )
+            return {
+                "subjectId": observed_selection["subjectId"],
+                "matrixId": observed_selection["matrixId"],
+                "goalId": observed_selection["goalId"],
+                "status": "ok",
+                "terminalStageId": str(native_perf_stage["stageId"]),
+                "terminalBucket": "report",
+                "stageResults": [
+                    {
+                        "stageId": str(native_perf_stage["stageId"]),
+                        "kind": str(native_perf_stage["kind"]),
+                        "bucket": str(native_perf_stage["bucket"]),
+                        "status": "ok",
+                        "planMode": "executed",
+                        "actionTaken": "executed",
+                        "invalidation": {"applied": False, "reason": None},
+                        "manifestPath": str(native_perf_stage["paths"]["manifestPath"]),
+                        "reportPaths": [],
+                        "primaryEvidencePaths": [
+                            f"{native_perf_stage['paths']['bucketRoot']}/perf.runtime.json",
+                            f"{native_perf_stage['paths']['bucketRoot']}/perf.samples.json",
+                        ],
+                        "fingerprint": "native-perf-fingerprint",
+                        "durationMs": 42,
+                        "diagnostics": {},
+                        "details": {
+                            "performance": {
+                                "samples": [
+                                    {"sampleIndex": 1, "durationMs": 17.0, "exitCode": 0},
+                                    {"sampleIndex": 2, "durationMs": 18.0, "exitCode": 0},
+                                ],
+                                "metrics": {
+                                    "sampleCount": 2,
+                                    "meanDurationMs": 17.5,
+                                    "minDurationMs": 17.0,
+                                    "maxDurationMs": 18.0,
+                                },
+                                "baselinePath": (
+                                    f"subjects/{observed_selection['subjectId']}/baselines/perf/"
+                                    f"{observed_selection['matrixId']}/windows.json"
+                                ),
+                                "baseline": {"meanDurationMs": 16.0},
+                                "baselineUpdated": False,
+                                "regressionStatus": "regressed",
+                                "regressions": [
+                                    {"metric": "meanDurationMs", "baseline": 16.0, "actual": 17.5, "delta": 1.5}
+                                ],
+                                "runtimeEvidence": {
+                                    "runtimePath": f"{native_perf_stage['paths']['bucketRoot']}/perf.runtime.json",
+                                    "samplesPath": f"{native_perf_stage['paths']['bucketRoot']}/perf.samples.json",
+                                },
+                            }
+                        },
+                        "failure": None,
+                    },
+                ],
+                "errors": [],
+                "events": [],
+            }
+
+        try:
+            with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
+                with patch.object(
+                    test_module.subject_executor_module,
+                    "execute_plan",
+                    side_effect=execute_plan_side_effect,
+                ):
+                    result = test_module.handle(
+                        {"id": "test-subject", "handler": "test.dispatch"},
+                        REPO_ROOT,
+                        "windows",
+                        f"test subject --id subject/{subject_id} --goal perf.profile --validation-profile perf-profile --variant PROFILE",
+                        manifest,
+                        {
+                            "id": f"subject/{subject_id}",
+                            "goal": "perf.profile",
+                            "validation_profile": "perf-profile",
+                            "variant": "PROFILE",
+                        },
+                    )
+
+            self.assertEqual("ok", result.status)
+            run_id = result.payload["runId"]
+            matrix_id = observed_selection["matrixId"]
+            self.assertEqual("perf-profile", observed_selection["validationProfileId"])
+            self.assertEqual("PROFILE", observed_selection["variant"])
+            self.assertIn(
+                f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/{matrix_id}/pipeline-report/report.json",
+                result.payload["artifacts"],
+            )
+            self.assertIn(
+                f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/{matrix_id}/pipeline-report/report/perf-summary.json",
+                result.payload["artifacts"],
+            )
+            self.assertIn(
+                f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/{matrix_id}/pipeline-report/report/perf-baseline-compare.json",
+                result.payload["artifacts"],
+            )
+            self.assertIn(
+                f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/{matrix_id}/pipeline-report/report/perf-metrics.json",
+                result.payload["artifacts"],
+            )
         finally:
             shutil.rmtree(run_root, ignore_errors=True)
             for path, snapshot in snapshots.items():

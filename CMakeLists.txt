@@ -15,11 +15,17 @@ endif()
 
 project(roadmap0_preset_router LANGUAGES CXX)
 
+set(
+    CHAOS_SUBJECT_PROOF_ROOT
+    "subjects/HelloWorldObject/validation/proof/native-reference"
+    CACHE PATH
+    "Subject-owned proof host directory for windows-x64-reference")
+
 if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     add_subdirectory(src/native/runtime-core)
     add_subdirectory(src/native/support)
     add_subdirectory(src/native/bootstrap)
-    add_subdirectory(subjects/HelloWorldObject/validation/proof/native-reference)
+    add_subdirectory("${CHAOS_SUBJECT_PROOF_ROOT}" "${CMAKE_BINARY_DIR}/subject-proof")
     add_subdirectory(tests/contracts/native/abi)
 elseif(ROADMAP0_PRESET_TARGET STREQUAL "macos-reference")
     add_subdirectory(tests/contracts/native/bridge)

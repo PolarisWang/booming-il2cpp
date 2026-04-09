@@ -460,6 +460,169 @@ class SubjectReportingTests(unittest.TestCase):
         )
         self.assertEqual(2, subject_result["matrixStatusCounts"]["total"])
 
+    def test_build_matrix_report_surfaces_native_perf_evidence_and_report_artifacts(self) -> None:
+        reporting_module = load_module(SUBJECT_REPORTING_MODULE_PATH, "chaos_subject_reporting_native_perf")
+        run_id = "20260409-fixture-mainline-native-perf-001"
+        subject_id = "MainlineFeaturePack"
+        matrix_id = "windows-native-profile"
+
+        plan = {
+            "selection": {
+                "subjectId": subject_id,
+                "displayName": subject_id,
+                "goalId": "perf.profile",
+                "matrixId": matrix_id,
+                "validationProfileId": "perf-profile",
+                "validationKinds": ["perf"],
+                "validationKind": "perf",
+                "variant": "PROFILE",
+                "pipelineId": "native-runtime-perf",
+                "source": {
+                    "type": "dotnet-project",
+                    "path": source_project_path(subject_id),
+                    "entry": source_entry(subject_id),
+                },
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "toolchainProfile": "msvc-reference",
+                    "runtimeProfile": "native-perf-profile",
+                },
+                "validationIntent": {
+                    "validationMode": "perf",
+                    "adaptationLevel": "native-runtime",
+                    "expectedOutcome": "pass",
+                },
+                "artifactPlan": {
+                    "requiredBuckets": ["source", "host-input", "analysis", "generated", "build", "runtime", "report"],
+                    "evidenceTerminalBucket": "report",
+                },
+            },
+            "stagePlan": [
+                {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source"},
+                {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input"},
+                {"stageId": "analysis-frontend", "kind": "analysis-frontend", "scope": "shared", "bucket": "analysis"},
+                {"stageId": "generated-native-proof", "kind": "generated-native-proof", "scope": "shared", "bucket": "generated"},
+                {"stageId": "build-target", "kind": "build-target", "scope": "matrix", "bucket": "build"},
+                {"stageId": "native-runtime-perf", "kind": "native-runtime-perf", "scope": "matrix", "bucket": "runtime"},
+                {"stageId": "report-assemble", "kind": "report-assemble", "scope": "matrix", "bucket": "report"},
+            ],
+        }
+        execution_result = {
+            "subjectId": subject_id,
+            "matrixId": matrix_id,
+            "goalId": "perf.profile",
+            "status": "ok",
+            "terminalStageId": "report-assemble",
+            "terminalBucket": "report",
+            "stageResults": [
+                {
+                    "stageId": "native-runtime-perf",
+                    "kind": "native-runtime-perf",
+                    "bucket": "runtime",
+                    "status": "ok",
+                    "planMode": "executed",
+                    "actionTaken": "executed",
+                    "invalidation": {"applied": False, "reason": None},
+                    "manifestPath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json"),
+                    "reportPaths": [],
+                    "primaryEvidencePaths": [
+                        run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "perf.runtime.json"),
+                        run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "perf.samples.json"),
+                    ],
+                    "fingerprint": "f-native-runtime-perf",
+                    "durationMs": 84,
+                    "diagnostics": {
+                        "stdoutPath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stdout.log"),
+                        "stderrPath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stderr.log"),
+                    },
+                    "details": {
+                        "performance": {
+                            "samples": [
+                                {"sampleIndex": 1, "durationMs": 17.0, "exitCode": 0},
+                                {"sampleIndex": 2, "durationMs": 18.0, "exitCode": 0},
+                            ],
+                            "metrics": {
+                                "sampleCount": 2,
+                                "meanDurationMs": 17.5,
+                                "minDurationMs": 17.0,
+                                "maxDurationMs": 18.0,
+                            },
+                            "baselinePath": perf_baseline_path(subject_id, matrix_id),
+                            "baseline": {"meanDurationMs": 16.0},
+                            "baselineUpdated": False,
+                            "regressionStatus": "regressed",
+                            "regressions": [
+                                {"metric": "meanDurationMs", "baseline": 16.0, "actual": 17.5, "delta": 1.5}
+                            ],
+                            "runtimeEvidence": {
+                                "runtimePath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "perf.runtime.json"),
+                                "samplesPath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "perf.samples.json"),
+                            },
+                        }
+                    },
+                    "failure": None,
+                }
+            ],
+            "errors": [],
+        }
+
+        repo_root = TEST_TMP_ROOT / f"native-perf-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
+            report = reporting_module.build_matrix_report(
+                plan,
+                execution_result,
+                run_id=run_id,
+                generated_at="2026-04-09T02:20:00Z",
+            )
+            report_artifacts = reporting_module.materialize_matrix_report_artifacts(
+                repo_root,
+                matrix_report_path=run_bucket_path(subject_id, run_id, "matrices", matrix_id, "pipeline-report", "report.json"),
+                matrix_report=report,
+            )
+
+            self.assertEqual("PROFILE", report["variant"])
+            self.assertEqual("native-runtime-perf", report["selection"]["pipelineId"])
+            self.assertEqual(
+                {
+                    "runtimePath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "perf.runtime.json"),
+                    "samplesPath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "perf.samples.json"),
+                },
+                report["performanceEvidence"],
+            )
+            self.assertEqual(
+                [
+                    run_bucket_path(subject_id, run_id, "matrices", matrix_id, "pipeline-report", "report", "perf-summary.json"),
+                    run_bucket_path(subject_id, run_id, "matrices", matrix_id, "pipeline-report", "report", "perf-baseline-compare.json"),
+                    run_bucket_path(subject_id, run_id, "matrices", matrix_id, "pipeline-report", "report", "perf-metrics.json"),
+                ],
+                report_artifacts,
+            )
+            self.assertEqual(report_artifacts, report["reportArtifacts"])
+
+            metrics_path = (
+                repo_root
+                / "artifacts"
+                / "subjects"
+                / subject_id
+                / "runs"
+                / run_id
+                / "matrices"
+                / matrix_id
+                / "pipeline-report"
+                / "report"
+                / "perf-metrics.json"
+            )
+            self.assertTrue(metrics_path.is_file())
+            metrics_payload = json.loads(metrics_path.read_text(encoding="utf-8"))
+            self.assertEqual(
+                {"sampleCount": 2, "meanDurationMs": 17.5, "minDurationMs": 17.0, "maxDurationMs": 18.0},
+                metrics_payload["metrics"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
 
 if __name__ == "__main__":
     unittest.main()

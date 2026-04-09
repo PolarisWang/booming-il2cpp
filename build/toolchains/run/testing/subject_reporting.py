@@ -27,6 +27,7 @@ def _normalize_stage_result(stage_result: dict[str, Any]) -> dict[str, Any]:
             "baselineUpdated": bool(performance.get("baselineUpdated", False)),
             "regressionStatus": str(performance.get("regressionStatus") or "no-baseline"),
             "regressions": list(performance.get("regressions") or []),
+            "runtimeEvidence": dict(performance.get("runtimeEvidence") or {}),
         }
     return {
         "stageId": str(stage_result.get("stageId") or ""),
@@ -133,7 +134,9 @@ def build_matrix_report(
             "regressions": list(performance.get("regressions") or []),
         }
         report["regressionStatus"] = str(performance.get("regressionStatus") or "no-baseline")
+        report["performanceEvidence"] = dict(performance.get("runtimeEvidence") or {})
         report["releaseReportPaths"] = []
+        report["reportArtifacts"] = []
     return report
 
 
@@ -198,6 +201,7 @@ def build_subject_summary(
                 "metrics": dict(report.get("metrics") or {}),
                 "regressionStatus": report.get("regressionStatus"),
                 "releaseReportPaths": list(report.get("releaseReportPaths") or []),
+                "reportArtifacts": list(report.get("reportArtifacts") or []),
             }
         )
 
@@ -239,15 +243,30 @@ def materialize_matrix_report_artifacts(
     matrix_report: dict[str, Any],
 ) -> list[str]:
     performance = dict(matrix_report.get("performance") or {})
-    if str(matrix_report.get("goalId") or "") != "perf.release" or not performance:
+    matrix_report["releaseReportPaths"] = list(matrix_report.get("releaseReportPaths") or [])
+    matrix_report["reportArtifacts"] = list(matrix_report.get("reportArtifacts") or [])
+    if not performance:
+        return list(matrix_report["reportArtifacts"])
+
+    pipeline_id = str(dict(matrix_report.get("selection") or {}).get("pipelineId") or "")
+    is_native_perf = pipeline_id == "native-runtime-perf"
+    is_managed_release = str(matrix_report.get("goalId") or "") == "perf.release"
+    if not is_native_perf and not is_managed_release:
         matrix_report["releaseReportPaths"] = list(matrix_report.get("releaseReportPaths") or [])
-        return list(matrix_report["releaseReportPaths"])
+        matrix_report["reportArtifacts"] = list(matrix_report.get("reportArtifacts") or [])
+        return list(matrix_report["reportArtifacts"])
 
     matrix_root = Path(matrix_report_path).parent.parent
-    validation_root = matrix_root / "validations" / "perf"
-    summary_path = validation_root / "summary.json"
-    baseline_compare_path = validation_root / "baseline-compare.json"
-    samples_path = validation_root / "samples.json"
+    if is_native_perf:
+        report_root = matrix_root / "pipeline-report" / "report"
+        summary_path = report_root / "perf-summary.json"
+        baseline_compare_path = report_root / "perf-baseline-compare.json"
+        metrics_path = report_root / "perf-metrics.json"
+    else:
+        validation_root = matrix_root / "validations" / "perf"
+        summary_path = validation_root / "summary.json"
+        baseline_compare_path = validation_root / "baseline-compare.json"
+        metrics_path = validation_root / "samples.json"
 
     summary_payload = {
         "reportVersion": "v1",
@@ -267,22 +286,34 @@ def materialize_matrix_report_artifacts(
         "baseline": dict(matrix_report.get("baseline") or {}),
         "regressionStatus": matrix_report.get("regressionStatus"),
     }
-    samples_payload = {
-        "reportVersion": "v1",
-        "subjectId": matrix_report.get("subjectId"),
-        "matrixId": matrix_report.get("matrixId"),
-        "goalId": matrix_report.get("goalId"),
-        "samples": list(performance.get("samples") or []),
-    }
+    metrics_payload = (
+        {
+            "reportVersion": "v1",
+            "subjectId": matrix_report.get("subjectId"),
+            "matrixId": matrix_report.get("matrixId"),
+            "goalId": matrix_report.get("goalId"),
+            "metrics": dict(matrix_report.get("metrics") or {}),
+        }
+        if is_native_perf
+        else {
+            "reportVersion": "v1",
+            "subjectId": matrix_report.get("subjectId"),
+            "matrixId": matrix_report.get("matrixId"),
+            "goalId": matrix_report.get("goalId"),
+            "samples": list(performance.get("samples") or []),
+        }
+    )
 
     _write_json_document(repo_root / summary_path, summary_payload)
     _write_json_document(repo_root / baseline_compare_path, baseline_compare_payload)
-    _write_json_document(repo_root / samples_path, samples_payload)
+    _write_json_document(repo_root / metrics_path, metrics_payload)
 
-    release_report_paths = [
+    report_artifacts = [
         summary_path.as_posix(),
         baseline_compare_path.as_posix(),
-        samples_path.as_posix(),
+        metrics_path.as_posix(),
     ]
-    matrix_report["releaseReportPaths"] = release_report_paths
-    return release_report_paths
+    matrix_report["reportArtifacts"] = report_artifacts
+    if is_managed_release:
+        matrix_report["releaseReportPaths"] = report_artifacts
+    return report_artifacts

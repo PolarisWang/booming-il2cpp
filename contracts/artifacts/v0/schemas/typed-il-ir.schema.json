@@ -27,6 +27,10 @@
           "methodId",
           "subjectId",
           "signature",
+          "methodRole",
+          "bodyAvailability",
+          "capabilities",
+          "parameters",
           "blocks"
         ],
         "properties": {
@@ -42,6 +46,30 @@
           "signature": {
             "type": "string",
             "minLength": 1
+          },
+          "methodRole": {
+            "type": "string",
+            "enum": [
+              "constructor",
+              "instance-method",
+              "static-method",
+              "imported-method"
+            ]
+          },
+          "bodyAvailability": {
+            "type": "string",
+            "enum": [
+              "has-canonical-body",
+              "no-canonical-body"
+            ]
+          },
+          "capabilities": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
           },
           "parameters": {
             "type": "array",

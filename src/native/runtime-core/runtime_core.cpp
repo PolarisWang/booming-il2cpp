@@ -29,6 +29,16 @@ struct StringObjectHeader {
     uintptr_t byte_count;
 };
 
+struct ArrayHeader {
+    TypeInfoHandle element_type;
+    uintptr_t length;
+};
+
+struct BoxedValueHeader {
+    TypeInfoHandle type;
+    uintptr_t byte_count;
+};
+
 void* CHAOS_RUNTIME_ABI_CALL DefaultAllocate(size_t size, void* user_data) {
     (void)user_data;
     return std::malloc(size);
@@ -175,11 +185,27 @@ void* CHAOS_RUNTIME_ABI_CALL ArrayNew(
     ThreadState* thread_state,
     TypeInfoHandle element_type,
     uintptr_t length) {
-    (void)runtime_state;
-    (void)thread_state;
-    (void)element_type;
-    (void)length;
-    return nullptr;
+    if (!IsAttached(runtime_state, thread_state) || element_type == nullptr) {
+        return nullptr;
+    }
+
+    const size_t allocation_size =
+        sizeof(ArrayHeader) + (static_cast<size_t>(length) * sizeof(void*));
+    unsigned char* storage = static_cast<unsigned char*>(AllocateBytes(runtime_state->config, allocation_size));
+    if (storage == nullptr) {
+        return nullptr;
+    }
+
+    auto* header = reinterpret_cast<ArrayHeader*>(storage);
+    header->element_type = element_type;
+    header->length = length;
+
+    void** elements = reinterpret_cast<void**>(storage + sizeof(ArrayHeader));
+    if (length != 0u) {
+        std::memset(elements, 0, static_cast<size_t>(length) * sizeof(void*));
+    }
+
+    return header;
 }
 
 void* CHAOS_RUNTIME_ABI_CALL StringNewUtf8(
@@ -458,6 +484,84 @@ const RuntimeAbiV0 kRuntimeAbiV0 = {
 
 const RuntimeAbiV0* GetRuntimeAbiV0() {
     return &kRuntimeAbiV0;
+}
+
+void* BoxValueObject(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    TypeInfoHandle value_type,
+    const void* value,
+    size_t value_size) {
+    if (!IsAttached(runtime_state, thread_state)
+        || value_type == nullptr
+        || value == nullptr
+        || value_size == 0u) {
+        return nullptr;
+    }
+
+    const size_t allocation_size = sizeof(BoxedValueHeader) + value_size;
+    unsigned char* storage = static_cast<unsigned char*>(AllocateBytes(runtime_state->config, allocation_size));
+    if (storage == nullptr) {
+        return nullptr;
+    }
+
+    auto* header = reinterpret_cast<BoxedValueHeader*>(storage);
+    header->type = value_type;
+    header->byte_count = value_size;
+    std::memcpy(storage + sizeof(BoxedValueHeader), value, value_size);
+    return header;
+}
+
+RuntimeStatus UnboxValueObject(
+    RuntimeState* runtime_state,
+    void* boxed_object,
+    void* out_value,
+    size_t out_value_size) {
+    if (runtime_state == nullptr || boxed_object == nullptr || out_value == nullptr || out_value_size == 0u) {
+        return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
+    }
+
+    const auto* header = reinterpret_cast<const BoxedValueHeader*>(boxed_object);
+    if (header->byte_count < out_value_size) {
+        return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
+    }
+
+    std::memcpy(out_value, reinterpret_cast<const unsigned char*>(boxed_object) + sizeof(BoxedValueHeader), out_value_size);
+    return CHAOS_RUNTIME_STATUS_OK;
+}
+
+bool ArrayStoreReference(
+    void* array_instance,
+    uintptr_t index,
+    void* value) {
+    if (array_instance == nullptr) {
+        return false;
+    }
+
+    auto* header = reinterpret_cast<ArrayHeader*>(array_instance);
+    if (index >= header->length) {
+        return false;
+    }
+
+    auto* elements = reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(array_instance) + sizeof(ArrayHeader));
+    elements[index] = value;
+    return true;
+}
+
+void* ArrayLoadReference(
+    void* array_instance,
+    uintptr_t index) {
+    if (array_instance == nullptr) {
+        return nullptr;
+    }
+
+    auto* header = reinterpret_cast<ArrayHeader*>(array_instance);
+    if (index >= header->length) {
+        return nullptr;
+    }
+
+    auto* elements = reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(array_instance) + sizeof(ArrayHeader));
+    return elements[index];
 }
 
 }  // namespace chaos::il2cpp::runtime_core

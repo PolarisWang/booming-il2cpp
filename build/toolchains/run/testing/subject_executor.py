@@ -84,6 +84,7 @@ def _reused_primary_evidence_paths(stage: dict[str, Any], manifest: dict[str, An
         return _dedupe_non_empty(
             [
                 _rewrite_reused_bucket_path(stage, str(artifacts.get("typedIlIrPath") or "")),
+                _rewrite_reused_bucket_path(stage, str(artifacts.get("optimizationFactsPath") or "")),
                 _rewrite_reused_bucket_path(stage, str(artifacts.get("closureManifestPath") or "")),
             ]
         )
@@ -104,6 +105,13 @@ def _reused_primary_evidence_paths(stage: dict[str, Any], manifest: dict[str, An
                 *[_rewrite_reused_bucket_path(stage, value) for value in trace_paths],
             ]
         )
+    if kind == "native-runtime-perf":
+        return _dedupe_non_empty(
+            [
+                _rewrite_reused_bucket_path(stage, str(manifest.get("perfRuntimePath") or "")),
+                _rewrite_reused_bucket_path(stage, str(manifest.get("perfSamplesPath") or "")),
+            ]
+        )
     if kind == "runtime-trace-compare" or bucket == "runtime":
         return _dedupe_non_empty([_rewrite_reused_bucket_path(stage, value) for value in trace_paths])
     return []
@@ -117,7 +125,7 @@ def _reused_stage_diagnostics(stage: dict[str, Any], manifest: dict[str, Any]) -
 
 
 def _reused_stage_details(stage: dict[str, Any], manifest: dict[str, Any]) -> dict[str, Any]:
-    if str(stage.get("kind") or "") != "runtime-perf-collect":
+    if str(stage.get("kind") or "") not in {"runtime-perf-collect", "native-runtime-perf"}:
         return {}
 
     return {
@@ -129,6 +137,10 @@ def _reused_stage_details(stage: dict[str, Any], manifest: dict[str, Any]) -> di
             "baselineUpdated": bool(manifest.get("baselineUpdated", False)),
             "regressionStatus": str(manifest.get("regressionStatus") or "no-baseline"),
             "regressions": list(manifest.get("regressions") or []),
+            "runtimeEvidence": {
+                "runtimePath": manifest.get("perfRuntimePath"),
+                "samplesPath": manifest.get("perfSamplesPath"),
+            },
         }
     }
 
@@ -261,7 +273,7 @@ def execute_plan(
                 run_id=execution_run_id,
                 generated_at=events_module.utc_timestamp(),
             )
-            release_report_paths = subject_reporting_module.materialize_matrix_report_artifacts(
+            report_artifacts = subject_reporting_module.materialize_matrix_report_artifacts(
                 repo_root,
                 matrix_report_path=str(stage["paths"]["manifestPath"]),
                 matrix_report=report_payload,
@@ -275,7 +287,7 @@ def execute_plan(
                     status=final_status,
                     action_taken="reused" if str(stage["executionMode"]) == "reused" else "executed",
                     manifest_path=str(stage["paths"]["manifestPath"]),
-                    report_paths=list(stage["paths"]["reportPaths"]) + list(release_report_paths),
+                    report_paths=list(stage["paths"]["reportPaths"]) + list(report_artifacts),
                 )
             )
             emit_event(

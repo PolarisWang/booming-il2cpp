@@ -890,6 +890,7 @@ def _run_subject_object(
         for path in [
             matrix_report_path,
             subject_summary_path,
+            *list(matrix_report.get("reportArtifacts") or []),
             *list(matrix_report.get("releaseReportPaths") or []),
             *list(validation_outcome.get("artifacts") or []),
         ]

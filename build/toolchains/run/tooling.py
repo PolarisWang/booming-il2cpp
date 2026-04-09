@@ -30,6 +30,7 @@ class ToolBootstrapResult:
 
 _VISUAL_STUDIO_GENERATOR_PATTERN = re.compile(r"^\*?\s*(Visual Studio \d+ \d{4})\s+=")
 _VISUAL_STUDIO_GENERATOR_MAJOR_PATTERN = re.compile(r"^Visual Studio (\d+) \d{4}$")
+_MSVC_TOOLSET_VERSION_PATTERN = re.compile(r"[\\/]+MSVC[\\/]+(\d+\.\d+\.\d+)(?:[\\/]|$)", re.IGNORECASE)
 _VISUAL_STUDIO_GENERATOR_YEAR_BY_MAJOR = {
     "15": "2017",
     "16": "2019",
@@ -94,6 +95,12 @@ def _candidate_visual_studio_install_paths() -> list[Path]:
 
 
 def find_visual_cpp_executable(which: Callable[[str], str | None] = shutil.which) -> str | None:
+    if os.name == "nt":
+        developer_env = windows_developer_environment()
+        preferred = _visual_cpp_executable_from_developer_environment(developer_env)
+        if preferred is not None:
+            return preferred
+
     discovered = which("cl")
     if discovered:
         return discovered
@@ -109,7 +116,31 @@ def find_visual_cpp_executable(which: Callable[[str], str | None] = shutil.which
             r"VC\Tools\MSVC\**\bin\Hostx64\x64\cl.exe",
         ]
     )
-    return matches[0] if matches else None
+    return _prefer_latest_msvc_match(matches)
+
+
+def _visual_cpp_executable_from_developer_environment(environment: dict[str, str]) -> str | None:
+    install_dir = environment.get("VCToolsInstallDir")
+    if not install_dir:
+        return None
+
+    candidate = Path(install_dir) / "bin" / "Hostx64" / "x64" / "cl.exe"
+    if candidate.is_file():
+        return str(candidate)
+    return None
+
+
+def _msvc_toolset_version_key(path: str) -> tuple[int, ...]:
+    match = _MSVC_TOOLSET_VERSION_PATTERN.search(path)
+    if match is None:
+        return ()
+    return tuple(int(part) for part in match.group(1).split("."))
+
+
+def _prefer_latest_msvc_match(matches: list[str]) -> str | None:
+    if not matches:
+        return None
+    return max(matches, key=lambda entry: (_msvc_toolset_version_key(entry), entry.lower()))
 
 
 def find_cmake_executable(repo_root: Path | None = None, which: Callable[[str], str | None] = shutil.which) -> str | None:

@@ -16,6 +16,12 @@ constexpr const char* kConsoleWriteLineStringIcall =
 constexpr const char* kStringConcatPairIcall =
     "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
 
+struct UnresolvedVirtualCallEntry {
+    uint32_t instance_type_token;
+    uint32_t declared_method_token;
+    void* resolved_method;
+};
+
 BootstrapState g_bootstrap_state = {};
 
 template <typename THandle>
@@ -37,6 +43,58 @@ bool IsStructSizeValid(
 
 bool IsBootstrapped(ImageHandle image) {
     return g_bootstrap_state.is_bootstrapped && image != nullptr;
+}
+
+uint32_t DecodeOpaqueToken(const void* handle) {
+    return static_cast<uint32_t>(reinterpret_cast<uintptr_t>(handle));
+}
+
+const UnresolvedVirtualCallEntry* GetUnresolvedVirtualCallEntries() {
+    if (g_bootstrap_state.code_registration == nullptr
+        || g_bootstrap_state.code_registration->unresolved_virtual_calls == nullptr
+        || g_bootstrap_state.code_registration->unresolved_virtual_call_count == 0u) {
+        return nullptr;
+    }
+
+    return static_cast<const UnresolvedVirtualCallEntry*>(g_bootstrap_state.code_registration->unresolved_virtual_calls);
+}
+
+const UnresolvedVirtualCallEntry* FindUnresolvedVirtualCallEntry(
+    TypeInfoHandle instance_type,
+    MethodInfoHandle declared_method) {
+    const auto* entries = GetUnresolvedVirtualCallEntries();
+    if (entries == nullptr) {
+        return nullptr;
+    }
+
+    const uint32_t instance_type_token = DecodeOpaqueToken(instance_type);
+    const uint32_t declared_method_token = DecodeOpaqueToken(declared_method);
+
+    for (uint32_t index = 0u; index < g_bootstrap_state.code_registration->unresolved_virtual_call_count; index++) {
+        const auto& entry = entries[index];
+        if (entry.instance_type_token == instance_type_token
+            && entry.declared_method_token == declared_method_token
+            && entry.resolved_method != nullptr) {
+            return &entry;
+        }
+    }
+
+    return nullptr;
+}
+
+bool IsKnownResolvedVirtualHandle(MethodInfoHandle method) {
+    const auto* entries = GetUnresolvedVirtualCallEntries();
+    if (entries == nullptr) {
+        return false;
+    }
+
+    for (uint32_t index = 0u; index < g_bootstrap_state.code_registration->unresolved_virtual_call_count; index++) {
+        if (entries[index].resolved_method == method) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 BridgeStatus CHAOS_RUNTIME_ABI_CALL RegisterCodegen(
@@ -119,12 +177,12 @@ void* CHAOS_RUNTIME_ABI_CALL BoxValue(
     TypeInfoHandle value_type,
     const void* value,
     size_t value_size) {
-    (void)runtime_state;
-    (void)thread_state;
-    (void)value_type;
-    (void)value;
-    (void)value_size;
-    return nullptr;
+    return chaos::il2cpp::runtime_core::BoxValueObject(
+        runtime_state,
+        thread_state,
+        value_type,
+        value,
+        value_size);
 }
 
 BridgeStatus CHAOS_RUNTIME_ABI_CALL UnboxValue(
@@ -132,11 +190,13 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL UnboxValue(
     void* boxed_object,
     void* out_value,
     size_t out_value_size) {
-    (void)runtime_state;
-    (void)boxed_object;
-    (void)out_value;
-    (void)out_value_size;
-    return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    return chaos::il2cpp::runtime_core::UnboxValueObject(
+        runtime_state,
+        boxed_object,
+        out_value,
+        out_value_size) == CHAOS_RUNTIME_STATUS_OK
+        ? CHAOS_BRIDGE_STATUS_OK
+        : CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
 }
 
 MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveVirtualMethod(
@@ -144,6 +204,10 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveVirtualMethod(
     MethodInfoHandle declared_method) {
     if (instance_type == nullptr || declared_method == nullptr) {
         return nullptr;
+    }
+
+    if (const auto* entry = FindUnresolvedVirtualCallEntry(instance_type, declared_method)) {
+        return reinterpret_cast<MethodInfoHandle>(entry->resolved_method);
     }
 
     return declared_method;
@@ -159,16 +223,28 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL InvokeVirtual(
     void* out_return_value,
     size_t out_return_value_size,
     ExceptionHandle* out_exception) {
-    (void)runtime_state;
-    (void)thread_state;
-    (void)object_instance;
-    (void)method;
     (void)argv;
-    (void)argc;
-    (void)out_return_value;
-    (void)out_return_value_size;
     (void)out_exception;
-    return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+
+    if (runtime_state == nullptr
+        || thread_state == nullptr
+        || object_instance == nullptr
+        || method == nullptr
+        || out_return_value == nullptr
+        || argc != 0u
+        || out_return_value_size != sizeof(void*)
+        || !IsKnownResolvedVirtualHandle(method)) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    using VirtualInstanceMethodFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
+        RuntimeState* runtime,
+        ThreadState* thread,
+        void* __this);
+
+    auto* const return_slot = static_cast<void**>(out_return_value);
+    *return_slot = reinterpret_cast<VirtualInstanceMethodFn>(method)(runtime_state, thread_state, object_instance);
+    return CHAOS_BRIDGE_STATUS_OK;
 }
 
 void* CHAOS_RUNTIME_ABI_CALL CreateDelegate(
