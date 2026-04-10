@@ -18,6 +18,7 @@ active: false
 - brainstorm: `docs/dev/in-progress/20260409-10-total-solution-and-ios-hot-update-analysis/brainstorm-v1-01.md`
 - design: `docs/dev/in-progress/20260409-10-total-solution-and-ios-hot-update-analysis/design-v1-01.md`
 - roadmap_or_plan: `docs/dev/in-progress/20260409-10-total-solution-and-ios-hot-update-analysis/roadmap-v1-01.md`
+- phase_architecture: `docs/dev/in-progress/20260409-10-total-solution-and-ios-hot-update-analysis/phase-architecture-v1-01.md`
 
 ## 当前判断
 
@@ -32,6 +33,7 @@ active: false
 - 2026-04-09 23:18:00 +08:00: 补充外部约束，确认 iOS 热更应优先按 `AOT + Interpreter` 思路设计，并需要额外考虑 App Store 2.5.2 带来的发行边界。
 - 2026-04-09 23:42:00 +08:00: 用户确认采用推荐架构，已新增 `roadmap-v1-01.md`，冻结 9 个阶段以及各阶段验证 gate。
 - 2026-04-11 10:00:00 +08:00: 架构审核完成，修订 design 和 roadmap：更新基线（Driver CLI 已重构）；Phase 0 收窄 engine ABI scope + 新增 version policy + IR 决策前置；Phase 1 标注 CLI 基础可复用；Phase 2 新增 linker + debug baseline；Phase 5 移除对 Phase 4 依赖；design 新增 Linker 和调试章节。
+- 2026-04-11 12:00:00 +08:00: 完成全部 9 Phase 的精细架构设计与执行计划，包含架构分层、执行条目（共 90+ 条）、验证产物、subject 验收方案、性能指标。
 
 ## 下一步
 
