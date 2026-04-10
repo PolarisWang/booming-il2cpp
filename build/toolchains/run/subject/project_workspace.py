@@ -25,10 +25,13 @@ except ImportError:
     from testing.events import build_event
 
 
-def _emit_progress(progress_callback, event_type: str, active_unit: str, completed: int, total: int, **kwargs: Any) -> None:
+def _emit_progress(progress_callback, event_type: str, active_unit: str, completed: int = -1, total: int = -1, **kwargs: Any) -> None:
     if progress_callback is None:
         return
-    payload: dict[str, Any] = {"activeUnit": active_unit, "completedUnits": completed, "totalUnits": total}
+    payload: dict[str, Any] = {"activeUnit": active_unit}
+    if completed >= 0 and total > 0:
+        payload["completedUnits"] = completed
+        payload["totalUnits"] = total
     payload.update(kwargs)
     progress_callback(build_event(event_type, payload))
 
@@ -1364,7 +1367,7 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
     mirrored_generated_roots: dict[str, Path] = {}
     for matrix in selected_matrices:
         matrix_id = str(matrix.get("matrixId") or "")
-        _emit_progress(progress_callback, "stage-start", f"{subject_id}/{matrix_id}", 0, len(selected_matrices))
+        _emit_progress(progress_callback, "artifact", f"{subject_id}/{matrix_id}")
         execution_context = dict(matrix.get("executionContext") or {})
         target_platform = str(execution_context.get("targetPlatform") or "")
         mirrored_generated_root: Path | None = None
