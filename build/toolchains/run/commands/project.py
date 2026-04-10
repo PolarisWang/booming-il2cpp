@@ -19,15 +19,16 @@ def handle(
     host_platform: str,
     command_text: str,
     options: dict[str, object] | None = None,
+    progress_callback=None,
 ) -> CommandResult:
     try:
         kind = str(command.get("kind") or "")
         if kind == "subject-workspace":
-            outcome = workspace_module.generate_subject_workspace(repo_root, host_platform, dict(options or {}))
+            outcome = workspace_module.generate_subject_workspace(repo_root, host_platform, dict(options or {}), progress_callback=progress_callback)
         elif kind == "core-workspace":
-            outcome = workspace_module.generate_core_workspace(repo_root, host_platform, dict(options or {}))
+            outcome = workspace_module.generate_core_workspace(repo_root, host_platform, dict(options or {}), progress_callback=progress_callback)
         elif kind == "all-workspaces":
-            outcome = workspace_module.generate_all_workspaces(repo_root, host_platform, dict(options or {}))
+            outcome = workspace_module.generate_all_workspaces(repo_root, host_platform, dict(options or {}), progress_callback=progress_callback)
         else:
             raise RuntimeError(f"unsupported project kind: {kind}")
     except Exception as error:

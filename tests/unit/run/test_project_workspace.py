@@ -1836,6 +1836,7 @@ class ProjectWorkspaceTests(unittest.TestCase):
                 subject_repo_root: Path,
                 subject_host_platform: str,
                 options: dict[str, object],
+                **kwargs: object,
             ) -> dict[str, object]:
                 del subject_host_platform, options
                 aggregate_manifest_path = subject_repo_root / "solutions" / "manifest.json"
@@ -1866,6 +1867,7 @@ class ProjectWorkspaceTests(unittest.TestCase):
                 core_repo_root: Path,
                 core_host_platform: str,
                 options: dict[str, object],
+                **kwargs: object,
             ) -> dict[str, object]:
                 del core_host_platform, options
                 core_manifest_path = core_repo_root / "solutions" / "core" / "windows" / "workspace.manifest.json"

@@ -319,7 +319,7 @@ def execute_command(
         )
         return add_legacy_test_migration_guidance(command, result)
     if command["handler"] == "project.dispatch":
-        return project_commands.handle(command, repo_root, host_platform, command_text, options or {})
+        return project_commands.handle(command, repo_root, host_platform, command_text, options or {}, progress_callback=progress_callback)
     if command["handler"] == "deploy.dispatch":
         return deploy_commands.handle(command, repo_root, host_platform, command_text, options or {})
     if command["handler"] == "test.dispatch":

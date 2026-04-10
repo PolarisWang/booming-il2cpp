@@ -13,6 +13,7 @@ try:
     from ..testing import subject_executor as subject_executor_module
     from ..testing import subject_planner as subject_planner_module
     from ..testing import subjects as subjects_module
+    from ..testing.events import build_event
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
@@ -21,6 +22,15 @@ except ImportError:
     from testing import subject_executor as subject_executor_module
     from testing import subject_planner as subject_planner_module
     from testing import subjects as subjects_module
+    from testing.events import build_event
+
+
+def _emit_progress(progress_callback, event_type: str, active_unit: str, completed: int, total: int, **kwargs: Any) -> None:
+    if progress_callback is None:
+        return
+    payload: dict[str, Any] = {"activeUnit": active_unit, "completedUnits": completed, "totalUnits": total}
+    payload.update(kwargs)
+    progress_callback(build_event(event_type, payload))
 
 
 WINDOWS_VISUAL_STUDIO_GENERATOR = "Visual Studio 17 2022"
@@ -1317,7 +1327,7 @@ def _discover_subject_ids(repo_root: Path, host_platform: str) -> list[str]:
     return discovered
 
 
-def generate_subject_workspace(repo_root: Path, host_platform: str, options: dict[str, object]) -> dict[str, Any]:
+def generate_subject_workspace(repo_root: Path, host_platform: str, options: dict[str, object], *, progress_callback=None) -> dict[str, Any]:
     subject_id = _subject_id_from_options(options)
     manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
     variant = _subject_variant(manifest, options)
@@ -1354,6 +1364,7 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
     mirrored_generated_roots: dict[str, Path] = {}
     for matrix in selected_matrices:
         matrix_id = str(matrix.get("matrixId") or "")
+        _emit_progress(progress_callback, "stage-start", f"{subject_id}/{matrix_id}", 0, len(selected_matrices))
         execution_context = dict(matrix.get("executionContext") or {})
         target_platform = str(execution_context.get("targetPlatform") or "")
         mirrored_generated_root: Path | None = None
@@ -1547,7 +1558,7 @@ def _core_configure_arguments(
     ]
 
 
-def generate_core_workspace(repo_root: Path, host_platform: str, options: dict[str, object]) -> dict[str, Any]:
+def generate_core_workspace(repo_root: Path, host_platform: str, options: dict[str, object], *, progress_callback=None) -> dict[str, Any]:
     requested_host = _core_requested_host(host_platform, options)
     selected_specs = _core_selected_target_specs(requested_host, options)
     managed_projects = _core_managed_projects(repo_root)
@@ -1619,10 +1630,13 @@ def generate_core_workspace(repo_root: Path, host_platform: str, options: dict[s
     }
 
 
-def generate_all_workspaces(repo_root: Path, host_platform: str, options: dict[str, object]) -> dict[str, Any]:
+def generate_all_workspaces(repo_root: Path, host_platform: str, options: dict[str, object], *, progress_callback=None) -> dict[str, Any]:
     requested_host = _core_requested_host(host_platform, options)
     refresh_generated = _flag(options, "refresh-generated")
     subject_ids = _discover_subject_ids(repo_root, requested_host)
+
+    total_units = len(subject_ids) + 1
+    completed_units = 0
 
     artifacts: list[str] = []
     important_outputs: list[dict[str, str]] = []
@@ -1640,7 +1654,10 @@ def generate_all_workspaces(repo_root: Path, host_platform: str, options: dict[s
         generated_core_targets=[],
     )
 
+    _emit_progress(progress_callback, "session-start", f"Generating {len(subject_ids)} subjects + core", 0, total_units)
+
     for subject_id in subject_ids:
+        _emit_progress(progress_callback, "progress", f"subject/{subject_id}", completed_units, total_units, suiteStatus="running")
         outcome = generate_subject_workspace(
             repo_root,
             requested_host,
@@ -1650,6 +1667,7 @@ def generate_all_workspaces(repo_root: Path, host_platform: str, options: dict[s
                 "auto-refresh-missing-generated": True,
                 "refresh-generated": refresh_generated,
             },
+            progress_callback=progress_callback,
         )
         subject_manifest_paths.append(str(outcome["manifestPath"]))
         generated_subject_ids.append(subject_id)
@@ -1658,7 +1676,10 @@ def generate_all_workspaces(repo_root: Path, host_platform: str, options: dict[s
         console_text = str(outcome.get("consoleText") or "")
         if console_text:
             console_parts.append(console_text)
+        completed_units += 1
+        _emit_progress(progress_callback, "progress", f"subject/{subject_id}", completed_units, total_units, suiteStatus="ok")
 
+    _emit_progress(progress_callback, "progress", "core workspace", completed_units, total_units, suiteStatus="running")
     core_outcome = generate_core_workspace(
         repo_root,
         requested_host,
@@ -1666,11 +1687,14 @@ def generate_all_workspaces(repo_root: Path, host_platform: str, options: dict[s
             "host": requested_host,
             "all-targets": True,
         },
+        progress_callback=progress_callback,
     )
     core_manifest_path = str(core_outcome["manifestPath"])
     core_manifest = read_json(repo_root / core_manifest_path)
     if not isinstance(core_manifest, dict):
         raise RuntimeError("core workspace manifest must be an object")
+    completed_units += 1
+    _emit_progress(progress_callback, "progress", "core workspace", completed_units, total_units, suiteStatus="ok")
 
     generated_core_targets = [
         str(item.get("targetId") or "")
@@ -1703,6 +1727,15 @@ def generate_all_workspaces(repo_root: Path, host_platform: str, options: dict[s
     console_text = str(core_outcome.get("consoleText") or "")
     if console_text:
         console_parts.append(console_text)
+
+    _emit_progress(
+        progress_callback,
+        "final-summary",
+        f"Generated {len(generated_subject_ids)} subjects + {len(generated_core_targets)} core targets",
+        total_units,
+        total_units,
+        suiteStatus="ok",
+    )
 
     return {
         "manifestPath": _path_text(repo_root, manifest_path),
