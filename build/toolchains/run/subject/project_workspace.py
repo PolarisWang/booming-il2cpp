@@ -671,6 +671,25 @@ def _write_solution_file(
         [relative_project_path for relative_project_path, _ in project_records]
     )
 
+    solution_folder_type_guid = "2150E333-8FDC-42A3-9474-1A3956D46DE8"
+    native_folder_assignments: dict[str, str] = {}
+    folder_guids: dict[str, str] = {}
+
+    for relative_project_path in list(native_project_paths or []):
+        parent_parts = list(Path(relative_project_path).parent.parts)
+        native_idx = next((i for i, p in enumerate(parent_parts) if p == "native"), -1)
+        if native_idx >= 0 and native_idx + 1 < len(parent_parts):
+            matrix_id = parent_parts[native_idx + 1]
+            if matrix_id not in folder_guids:
+                folder_guids[matrix_id] = _solution_project_guid(f"folder/{matrix_id}")
+            native_folder_assignments[relative_project_path] = matrix_id
+
+    for folder_name, folder_guid in folder_guids.items():
+        lines.append(
+            f'Project("{{{solution_folder_type_guid}}}") = "{folder_name}", "{folder_name}", "{{{folder_guid}}}"'
+        )
+        lines.append("EndProject")
+
     project_entries: list[tuple[str, str, str]] = []
     for relative_project_path, project_type_guid in project_records:
         project_name = project_names[relative_project_path]
@@ -708,9 +727,18 @@ def _write_solution_file(
             "\tGlobalSection(SolutionProperties) = preSolution",
             "\t\tHideSolutionNode = FALSE",
             "\tEndGlobalSection",
-            "EndGlobal",
         ]
     )
+
+    if native_folder_assignments:
+        lines.append("\tGlobalSection(NestedProjects) = preSolution")
+        for project_guid, _, relative_project_path in project_entries:
+            matrix_id = native_folder_assignments.get(relative_project_path)
+            if matrix_id is not None:
+                lines.append(f"\t\t{{{project_guid}}} = {{{folder_guids[matrix_id]}}}")
+        lines.append("\tEndGlobalSection")
+
+    lines.extend(["EndGlobal"])
     solution_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 

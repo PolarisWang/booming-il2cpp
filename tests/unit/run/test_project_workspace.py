@@ -1093,7 +1093,10 @@ class ProjectWorkspaceTests(unittest.TestCase):
             self.assertNotIn('"chaos_support (windows-dev-output/support)"', solution_text)
             self.assertNotIn('"chaos_support (windows-reference-trace/support)"', solution_text)
             self.assertNotIn('"native/windows-linux-buildable/linux-x64-packaging.vcxproj"', solution_text)
-            self.assertEqual(6, solution_text.count('Project("{'))
+            project_count = solution_text.count('Project("{')
+            folder_count = solution_text.count('Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}")')
+            self.assertEqual(6, project_count - folder_count)
+            self.assertIn("NestedProjects", solution_text)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
