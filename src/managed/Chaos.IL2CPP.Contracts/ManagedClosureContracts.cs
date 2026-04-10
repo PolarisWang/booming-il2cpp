@@ -753,8 +753,8 @@ public static class NativeReferenceArtifactNames
 {
     public const string GeneratedDirectory = "generated";
     public const string GeneratedTranslationUnit = "generated/native-reference.generated.cpp";
-    public const string LoweringPlan = "native-proof.plan.json";
-    public const string ProofManifest = "native-proof.manifest.json";
+    public const string LoweringPlan = "native-reference.plan.json";
+    public const string Manifest = "native-reference.manifest.json";
 }
 
 public sealed record NativeReferenceGeneratedArtifactRef
@@ -768,7 +768,7 @@ public sealed record NativeReferenceProofManifestArtifact
 {
     public string FormatVersion { get; init; } = "v0";
 
-    public string ArtifactKind { get; init; } = "nativeReferenceProofManifest";
+    public string ArtifactKind { get; init; } = "nativeReferenceManifest";
 
     public required string AssemblyName { get; init; }
 
@@ -817,7 +817,7 @@ public sealed record NativeReferenceLoweringPlanArtifact
 
     public required string IncludeHeader { get; init; }
 
-    public required string ProofFunctionName { get; init; }
+    public required string NativeEntryFunctionName { get; init; }
 
     public required string EntrySymbol { get; init; }
 
@@ -953,7 +953,7 @@ public sealed record NativeReferenceProofResult
 
     public required NativeReferenceLoweringPlanArtifact LoweringPlan { get; init; }
 
-    public required NativeReferenceProofManifestArtifact ProofManifest { get; init; }
+    public required NativeReferenceProofManifestArtifact Manifest { get; init; }
 
     public required IReadOnlyList<NativeReferenceGeneratedSource> GeneratedSources { get; init; }
 }

@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
 using Chaos.IL2CPP.Contracts;
 using Scriban;
@@ -191,7 +191,7 @@ public sealed class NativeReferenceLoweringPlanner
             AssemblyName = assemblyName,
             EntrySubjectId = entryPointSubjectId,
             IncludeHeader = "codegen_bridge.h",
-            ProofFunctionName = "RunNativeReferenceProof",
+            NativeEntryFunctionName = "RunNativeReference",
             EntrySymbol = entrySymbol,
             ReferenceTypeToken = "0u",
             CapturedFieldToken = "0u",
@@ -290,7 +290,7 @@ public sealed class NativeReferenceLoweringPlanner
             AssemblyName = linkedWorld.Assembly.Name,
             EntrySubjectId = entryPointSubjectId,
             IncludeHeader = "codegen_bridge.h",
-            ProofFunctionName = "RunNativeReferenceProof",
+            NativeEntryFunctionName = "RunNativeReference",
             EntrySymbol = entryPointRegistration.Symbol,
             ConstructorSymbol = constructorRegistration.Symbol,
             InstanceMethodSymbol = resolvedMethodRegistration.Symbol,
@@ -659,7 +659,7 @@ public sealed class NativeReferenceLoweringPlanner
         {
             OutputRootPath = request.OutputRootPath,
             LoweringPlan = loweringPlan,
-            ProofManifest = manifest,
+            Manifest = manifest,
             GeneratedSources = [generatedSource],
         };
     }
@@ -863,7 +863,7 @@ public sealed class NativeReferenceLoweringPlanner
             AssemblyName = assemblyName,
             EntrySubjectId = entryPointSubjectId,
             IncludeHeader = "codegen_bridge.h",
-            ProofFunctionName = "RunNativeReferenceProof",
+            NativeEntryFunctionName = "RunNativeReference",
             EntrySymbol = entryPointRegistration.Symbol,
             ConstructorSymbol = constructorRegistration.Symbol,
             InstanceMethodSymbol = instanceMethodRegistration.Symbol,
@@ -939,7 +939,7 @@ public sealed class NativeReferenceLoweringPlanner
             AssemblyName = assemblyName,
             EntrySubjectId = entryPointSubjectId,
             IncludeHeader = "codegen_bridge.h",
-            ProofFunctionName = "RunNativeReferenceProof",
+            NativeEntryFunctionName = "RunNativeReference",
             EntrySymbol = entryPointRegistration.Symbol,
             EchoMethodSymbol = echoMethodRegistration.Symbol,
             ConstructorSymbol = constructorRegistration.Symbol,
@@ -1026,7 +1026,7 @@ public sealed class NativeReferenceLoweringPlanner
             AssemblyName = assemblyName,
             EntrySubjectId = entryPointSubjectId,
             IncludeHeader = "codegen_bridge.h",
-            ProofFunctionName = "RunNativeReferenceProof",
+            NativeEntryFunctionName = "RunNativeReference",
             EntrySymbol = entryPointRegistration.Symbol,
             ConstructorSymbol = constructorRegistration.Symbol,
             InstanceMethodSymbol = resolvedMethodRegistration.Symbol,
@@ -1110,7 +1110,7 @@ public sealed class NativeReferenceLoweringPlanner
             AssemblyName = assemblyName,
             EntrySubjectId = entryPointSubjectId,
             IncludeHeader = "codegen_bridge.h",
-            ProofFunctionName = "RunNativeReferenceProof",
+            NativeEntryFunctionName = "RunNativeReference",
             EntrySymbol = entryPointRegistration.Symbol,
             ConstructorSymbol = constructorRegistration.Symbol,
             InstanceMethodSymbol = instanceMethodRegistration.Symbol,
@@ -1206,7 +1206,7 @@ public sealed class NativeReferenceLoweringPlanner
             AssemblyName = assemblyName,
             EntrySubjectId = entryPointSubjectId,
             IncludeHeader = "codegen_bridge.h",
-            ProofFunctionName = "RunNativeReferenceProof",
+            NativeEntryFunctionName = "RunNativeReference",
             EntrySymbol = entryPointRegistration.Symbol,
             ConstructorSymbol = constructorRegistration.Symbol,
             InstanceMethodSymbol = instanceMethodRegistration.Symbol,
@@ -1289,7 +1289,7 @@ public sealed class NativeReferenceLoweringPlanner
             AssemblyName = assemblyName,
             EntrySubjectId = entryPointSubjectId,
             IncludeHeader = "codegen_bridge.h",
-            ProofFunctionName = "RunNativeReferenceProof",
+            NativeEntryFunctionName = "RunNativeReference",
             EntrySymbol = entryPointRegistration.Symbol,
             ConstructorSymbol = constructorRegistration.Symbol,
             InstanceMethodSymbol = captureRegistration.Symbol,
@@ -1377,7 +1377,7 @@ public sealed class NativeReferenceLoweringPlanner
             AssemblyName = assemblyName,
             EntrySubjectId = entryPointSubjectId,
             IncludeHeader = "reflection_query_model.h",
-            ProofFunctionName = "RunNativeReferenceProof",
+            NativeEntryFunctionName = "RunNativeReference",
             EntrySymbol = entryPointRegistration.Symbol,
             ReferenceTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", closedTypeRegistration.SubjectId)),
             CapturedFieldToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "field", fieldRegistration.SubjectId)),
@@ -1458,7 +1458,7 @@ public sealed class NativeReferenceLoweringPlanner
             AssemblyName = assemblyName,
             EntrySubjectId = entryPointSubjectId,
             IncludeHeader = "codegen_bridge.h",
-            ProofFunctionName = "RunNativeReferenceProof",
+            NativeEntryFunctionName = "RunNativeReference",
             EntrySymbol = entryPointRegistration.Symbol,
             ReferenceTypeToken = "0u",
             CapturedFieldToken = "0u",
@@ -1551,7 +1551,7 @@ public sealed class NativeReferenceLoweringPlanner
             AssemblyName = assemblyName,
             EntrySubjectId = entryPointSubjectId,
             IncludeHeader = "reflection_query_model.h",
-            ProofFunctionName = "RunNativeReferenceProof",
+            NativeEntryFunctionName = "RunNativeReference",
             EntrySymbol = entryPointRegistration.Symbol,
             ReferenceTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", closedTypeRegistration.SubjectId)),
             CapturedFieldToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "field", fieldRegistration.SubjectId)),
@@ -1622,7 +1622,7 @@ public sealed class NativeReferenceLoweringPlanner
         var model = new ScriptObject
         {
             ["include_header"] = loweringPlan.IncludeHeader,
-            ["proof_function_name"] = loweringPlan.ProofFunctionName,
+            ["native_reference_function_name"] = loweringPlan.NativeEntryFunctionName,
             ["assembly_name"] = loweringPlan.AssemblyName,
             ["entry_symbol"] = loweringPlan.EntrySymbol,
             ["reference_type_token"] = loweringPlan.ReferenceTypeToken,
@@ -2367,3 +2367,4 @@ public sealed class NativeReferenceLoweringPlanner
 }
 
 internal sealed record GeneratedTranslationUnitRenderPlan(Template Template, ScriptObject Model);
+

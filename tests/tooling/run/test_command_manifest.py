@@ -32,9 +32,36 @@ class CommandManifestTests(unittest.TestCase):
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         self.assertEqual(
-            ["Quick Start", "Build", "Test And Verify", "Environment", "Inspect"],
+            ["Quick Start", "Project And IDE", "Build", "Test And Verify", "Environment", "Inspect"],
             manifest_module.list_group_titles(manifest),
         )
+
+    def test_project_commands_move_into_project_and_ide_group(self) -> None:
+        manifest_module = load_manifest_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        project_command_ids = [
+            command["id"]
+            for command in manifest_module.list_commands_by_group(manifest, "Project And IDE")
+        ]
+        build_command_ids = [
+            command["id"]
+            for command in manifest_module.list_commands_by_group(manifest, "Build")
+        ]
+
+        self.assertEqual(
+            [
+                "generate-project-all",
+                "generate-project-subject",
+                "generate-project-core",
+                "build-project-subject",
+                "build-project-core",
+            ],
+            [command_id for command_id in project_command_ids if command_id.startswith(("generate-project", "build-project"))],
+        )
+        self.assertIn("deploy-core", build_command_ids)
+        self.assertNotIn("generate-project-subject", build_command_ids)
+        self.assertNotIn("build-project-core", build_command_ids)
 
     def test_quick_start_excludes_verify_and_no_package_group_exists(self) -> None:
         manifest_module = load_manifest_module()
@@ -113,6 +140,7 @@ class CommandManifestTests(unittest.TestCase):
         self.assertNotIn("verify-roadmap-0-windows", visible_command_ids)
         self.assertTrue(
             {
+                "generate-project-all",
                 "generate-project-subject",
                 "generate-project-core",
                 "build-project-subject",
@@ -310,14 +338,33 @@ class CommandManifestTests(unittest.TestCase):
         manifest_module = load_manifest_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
+        generate_all = manifest_module.parse_cli(
+            ["generate", "project", "all", "--host", "windows", "--refresh-generated"],
+            False,
+            manifest,
+            "windows",
+        )
+        self.assertEqual("generate-project-all", generate_all["command"]["id"])
+        self.assertEqual("windows", generate_all["options"]["host"])
+        self.assertTrue(generate_all["options"]["refresh-generated"])
+
         generate_subject = manifest_module.parse_cli(
-            ["generate", "project", "subject", "--id", "subject/HelloWorldObject"],
+            [
+                "generate",
+                "project",
+                "subject",
+                "--id",
+                "subject/HelloWorldObject",
+                "--open-native-target",
+                "generated",
+            ],
             False,
             manifest,
             "windows",
         )
         self.assertEqual("generate-project-subject", generate_subject["command"]["id"])
         self.assertEqual("subject/HelloWorldObject", generate_subject["options"]["id"])
+        self.assertEqual("generated", generate_subject["options"]["open-native-target"])
 
         generate_core = manifest_module.parse_cli(
             ["generate", "project", "core", "--host", "windows", "--all-targets"],
@@ -330,13 +377,24 @@ class CommandManifestTests(unittest.TestCase):
         self.assertTrue(generate_core["options"]["all-targets"])
 
         build_subject = manifest_module.parse_cli(
-            ["build", "project", "subject", "--id", "subject/HelloWorldObject", "--matrix", "windows-managed-trace"],
+            [
+                "build",
+                "project",
+                "subject",
+                "--id",
+                "subject/HelloWorldObject",
+                "--matrix",
+                "windows-managed-trace",
+                "--native-target",
+                "proof",
+            ],
             False,
             manifest,
             "windows",
         )
         self.assertEqual("build-project-subject", build_subject["command"]["id"])
         self.assertEqual("windows-managed-trace", build_subject["options"]["matrix"])
+        self.assertEqual("proof", build_subject["options"]["native-target"])
 
         build_core = manifest_module.parse_cli(
             ["build", "project", "core", "--host", "windows", "--target", "windows-x64-reference"],

@@ -1,5 +1,6 @@
 <Project>
   <PropertyGroup>
+    <DefaultItemExcludes>$(DefaultItemExcludes);obj/**;obj\**</DefaultItemExcludes>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>

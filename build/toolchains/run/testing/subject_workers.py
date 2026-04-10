@@ -205,7 +205,7 @@ def _engine_emission_summary(
     lowering_plan: dict[str, Any],
     *,
     generated_source_path: str,
-    native_proof_manifest_path: str,
+    native_reference_manifest_path: str,
 ) -> dict[str, Any]:
     engine_bindings, host_bindings = _engine_lowering_bindings(lowering_plan)
     if not engine_bindings:
@@ -230,7 +230,7 @@ def _engine_emission_summary(
             if str(value)
         ],
         "bridgeArtifactPaths": [generated_source_path],
-        "registrationArtifactPaths": [native_proof_manifest_path],
+        "registrationArtifactPaths": [native_reference_manifest_path],
     }
 
 
@@ -446,16 +446,16 @@ def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dic
         "variant": variant,
         "codegenMacros": list(variant_macros["codegen"]),
         "generatedSourcePath": _relative(repo_root, output_root / "generated" / "native-reference.generated.cpp"),
-        "nativeProofManifestPath": _relative(repo_root, output_root / "native-proof.manifest.json"),
-        "nativeProofPlanPath": _relative(repo_root, output_root / "native-proof.plan.json"),
+        "nativeReferenceManifestPath": _relative(repo_root, output_root / "native-reference.manifest.json"),
+        "nativeReferencePlanPath": _relative(repo_root, output_root / "native-reference.plan.json"),
     }
     details: dict[str, Any] = {}
-    lowering_plan = read_json(output_root / "native-proof.plan.json")
+    lowering_plan = read_json(output_root / "native-reference.plan.json")
     if isinstance(lowering_plan, dict):
         engine_emission_summary = _engine_emission_summary(
             lowering_plan,
             generated_source_path=generated_manifest["generatedSourcePath"],
-            native_proof_manifest_path=generated_manifest["nativeProofManifestPath"],
+            native_reference_manifest_path=generated_manifest["nativeReferenceManifestPath"],
         )
         if engine_emission_summary:
             generated_manifest["engineEmissionSummary"] = engine_emission_summary
@@ -466,7 +466,7 @@ def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dic
         report_paths=[],
         primary_evidence_paths=[
             generated_manifest["generatedSourcePath"],
-            generated_manifest["nativeProofManifestPath"],
+            generated_manifest["nativeReferenceManifestPath"],
         ],
         details=details,
     )

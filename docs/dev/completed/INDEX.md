@@ -2,6 +2,7 @@
 
 | 任务 | lifecycle_status | phase | 最近更新 | 下一步 | active |
 | --- | --- | --- | --- | --- | --- |
+| `20260409-09-unified-entrypoint-solution-menu` | `completed` | `archived` | `2026-04-10 09:10:28 +08:00` | 无。如需继续扩展“直接打开 VS / Xcode”或补 macOS/Linux native IDE 特化，请另开 follow-up。 | `no` |
 | `20260410-12-phase-7-engine-binding-tail-roll-in` | `completed` | `archived` | `2026-04-10 02:18:40 +08:00` | 无。三个最小 engine subject、engine summary contract 与 Windows `correctness.dev` / `correctness.platform` 六条 run 已全部通过。 | `no` |
 | `20260409-01-il2cpp-mainline-performance-core-and-full-subject-roadmap` | `completed` | `archived` | `2026-04-10 02:18:40 +08:00` | 无。`Phase A performance-first core mainline roadmap` 已完成；仍不等于完整 `C# -> C++ total solution`，后续扩展需另开 follow-up。 | `no` |
 | `20260409-08-phase-6-capability-batch-b-delegate-exception-and-phase-a-closure` | `completed` | `archived` | `2026-04-10 00:45:00 +08:00` | 无。`delegates/callbacks`、`exceptions` 与必要 `reflection/interop` closure 已接回完整 `MainlineFeaturePack`；unified `perf.profile` 热态口径已恢复为 `ok`。 | `no` |

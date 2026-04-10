@@ -119,7 +119,7 @@ class NativeReferenceBootstrapSupportTests(unittest.TestCase):
         self.assertIn("exit-code.txt", proof_host_cmake_text)
 
         required_markers = [
-            "RunNativeReferenceProof",
+            "RunNativeReference",
             "chaos_runtime_get_abi_v0",
             "chaos_codegen_get_bridge_v0",
             "windows-x64-reference",

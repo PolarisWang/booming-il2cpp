@@ -19,6 +19,7 @@ Thumbs.db
 # Project-generated artifacts
 artifacts/
 deploy/
+solutions/
 !contracts/artifacts/
 !contracts/artifacts/v0/
 !contracts/artifacts/v0/schemas/

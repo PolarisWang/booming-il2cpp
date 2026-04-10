@@ -26,6 +26,8 @@ def handle(
             outcome = workspace_module.generate_subject_workspace(repo_root, host_platform, dict(options or {}))
         elif kind == "core-workspace":
             outcome = workspace_module.generate_core_workspace(repo_root, host_platform, dict(options or {}))
+        elif kind == "all-workspaces":
+            outcome = workspace_module.generate_all_workspaces(repo_root, host_platform, dict(options or {}))
         else:
             raise RuntimeError(f"unsupported project kind: {kind}")
     except Exception as error:

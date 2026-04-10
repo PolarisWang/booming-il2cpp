@@ -89,10 +89,15 @@ def _reused_primary_evidence_paths(stage: dict[str, Any], manifest: dict[str, An
             ]
         )
     if kind in {"generated-native-proof", "generated-engine-proof"}:
+        native_reference_manifest_path = str(
+            manifest.get("nativeReferenceManifestPath")
+            or manifest.get("nativeProofManifestPath")
+            or ""
+        )
         return _dedupe_non_empty(
             [
                 _rewrite_reused_bucket_path(stage, str(manifest.get("generatedSourcePath") or "")),
-                _rewrite_reused_bucket_path(stage, str(manifest.get("nativeProofManifestPath") or "")),
+                _rewrite_reused_bucket_path(stage, native_reference_manifest_path),
             ]
         )
     if kind == "build-target":

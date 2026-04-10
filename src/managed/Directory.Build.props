@@ -1,5 +1,6 @@
 <Project>
   <PropertyGroup>
+    <DefaultItemExcludes>$(DefaultItemExcludes);obj/**;obj\**</DefaultItemExcludes>
     <BaseIntermediateOutputPath Condition="'$(ChaosTempIntermediateRoot)' != ''">$(ChaosTempIntermediateRoot)$(MSBuildProjectName)\</BaseIntermediateOutputPath>
     <MSBuildProjectExtensionsPath Condition="'$(ChaosTempIntermediateRoot)' != ''">$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
     <TargetFramework>net8.0</TargetFramework>

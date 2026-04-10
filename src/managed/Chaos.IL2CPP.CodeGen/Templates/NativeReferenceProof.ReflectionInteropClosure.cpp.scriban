@@ -103,7 +103,7 @@ const chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kProofImage = 
     static_cast<uint32_t>(sizeof(kProofTypes) / sizeof(kProofTypes[0])),
 };
 
-struct NativeReferenceProofContext {
+struct NativeReferenceContext {
     const RuntimeAbiV0* abi;
     const CodegenBridgeV0* bridge;
     ImageHandle image;
@@ -115,18 +115,18 @@ struct NativeReferenceProofContext {
     WriteLineStringFn write_line_string;
 };
 
-NativeReferenceProofContext g_proof_context = {};
+NativeReferenceContext g_native_reference_context = {};
 
-ImageHandle GetProofImage(const CodegenRegistrationOptionsV0* options) {
+ImageHandle GetNativeReferenceImage(const CodegenRegistrationOptionsV0* options) {
     (void)options;
     return EncodeReflectionQueryImageHandle(&kProofImage);
 }
 
-void ResetProofContext() {
-    g_proof_context = {};
+void ResetNativeReferenceContext() {
+    g_native_reference_context = {};
 }
 
-bool InitializeProofContext(
+bool InitializeNativeReferenceContext(
     const CodegenBridgeV0* bridge,
     const CodegenRegistrationOptionsV0* options) {
     if (bridge == nullptr) {
@@ -148,40 +148,40 @@ bool InitializeProofContext(
         return false;
     }
 
-    g_proof_context.abi = abi;
-    g_proof_context.bridge = bridge;
-    g_proof_context.image = GetProofImage(options);
-    g_proof_context.closed_type = bridge->resolve_type_by_token(g_proof_context.image, kClosedTypeToken);
-    g_proof_context.generic_type_definition =
-        bridge->resolve_type_by_token(g_proof_context.image, kGenericTypeDefinitionToken);
-    g_proof_context.field = bridge->resolve_field_by_token(g_proof_context.image, kFieldToken);
-    g_proof_context.method = bridge->resolve_method_by_token(g_proof_context.image, kMethodToken);
-    g_proof_context.import_method = reinterpret_cast<ImportedGetTickCount64Fn>(raw_import);
-    g_proof_context.write_line_string =
+    g_native_reference_context.abi = abi;
+    g_native_reference_context.bridge = bridge;
+    g_native_reference_context.image = GetNativeReferenceImage(options);
+    g_native_reference_context.closed_type = bridge->resolve_type_by_token(g_native_reference_context.image, kClosedTypeToken);
+    g_native_reference_context.generic_type_definition =
+        bridge->resolve_type_by_token(g_native_reference_context.image, kGenericTypeDefinitionToken);
+    g_native_reference_context.field = bridge->resolve_field_by_token(g_native_reference_context.image, kFieldToken);
+    g_native_reference_context.method = bridge->resolve_method_by_token(g_native_reference_context.image, kMethodToken);
+    g_native_reference_context.import_method = reinterpret_cast<ImportedGetTickCount64Fn>(raw_import);
+    g_native_reference_context.write_line_string =
         reinterpret_cast<WriteLineStringFn>(bridge->resolve_icall(kConsoleWriteLineStringIcall));
 
-    return g_proof_context.closed_type != nullptr
-        && g_proof_context.generic_type_definition != nullptr
-        && g_proof_context.field != nullptr
-        && g_proof_context.method != nullptr
-        && g_proof_context.import_method != nullptr
-        && g_proof_context.write_line_string != nullptr;
+    return g_native_reference_context.closed_type != nullptr
+        && g_native_reference_context.generic_type_definition != nullptr
+        && g_native_reference_context.field != nullptr
+        && g_native_reference_context.method != nullptr
+        && g_native_reference_context.import_method != nullptr
+        && g_native_reference_context.write_line_string != nullptr;
 }
 
-bool EnsureProofContextReady(
+bool EnsureNativeReferenceContextReady(
     RuntimeState* runtime,
     ThreadState* thread) {
     return runtime != nullptr
         && thread != nullptr
-        && g_proof_context.abi != nullptr
-        && g_proof_context.bridge != nullptr
-        && g_proof_context.image != nullptr
-        && g_proof_context.closed_type != nullptr
-        && g_proof_context.generic_type_definition != nullptr
-        && g_proof_context.field != nullptr
-        && g_proof_context.method != nullptr
-        && g_proof_context.import_method != nullptr
-        && g_proof_context.write_line_string != nullptr;
+        && g_native_reference_context.abi != nullptr
+        && g_native_reference_context.bridge != nullptr
+        && g_native_reference_context.image != nullptr
+        && g_native_reference_context.closed_type != nullptr
+        && g_native_reference_context.generic_type_definition != nullptr
+        && g_native_reference_context.field != nullptr
+        && g_native_reference_context.method != nullptr
+        && g_native_reference_context.import_method != nullptr
+        && g_native_reference_context.write_line_string != nullptr;
 }
 
 }  // namespace
@@ -192,51 +192,51 @@ extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
     void* managed_args) {
     (void)managed_args;
 
-    if (!EnsureProofContextReady(runtime, thread)) {
+    if (!EnsureNativeReferenceContextReady(runtime, thread)) {
         return 1;
     }
 
-    FieldInfoHandle field = g_proof_context.abi->type_find_field(
-        g_proof_context.closed_type,
+    FieldInfoHandle field = g_native_reference_context.abi->type_find_field(
+        g_native_reference_context.closed_type,
         kFieldQueryName);
-    if (field == nullptr || field != g_proof_context.field) {
+    if (field == nullptr || field != g_native_reference_context.field) {
         return 1;
     }
 
-    MethodInfoHandle method = g_proof_context.abi->type_find_method(
-        g_proof_context.closed_type,
+    MethodInfoHandle method = g_native_reference_context.abi->type_find_method(
+        g_native_reference_context.closed_type,
         kMethodQueryName,
         kMethodParameterCount);
-    if (method == nullptr || method != g_proof_context.method) {
+    if (method == nullptr || method != g_native_reference_context.method) {
         return 1;
     }
 
-    ParameterInfoHandle parameter = g_proof_context.abi->method_get_parameter(method, kParameterIndex);
+    ParameterInfoHandle parameter = g_native_reference_context.abi->method_get_parameter(method, kParameterIndex);
     if (parameter == nullptr) {
         return 1;
     }
 
     TypeInfoHandle generic_type_definition =
-        g_proof_context.abi->type_get_generic_type_definition(g_proof_context.closed_type);
-    if (generic_type_definition == nullptr || generic_type_definition != g_proof_context.generic_type_definition) {
+        g_native_reference_context.abi->type_get_generic_type_definition(g_native_reference_context.closed_type);
+    if (generic_type_definition == nullptr || generic_type_definition != g_native_reference_context.generic_type_definition) {
         return 1;
     }
 
-    (void)g_proof_context.import_method();
+    (void)g_native_reference_context.import_method();
 
-    void* proof_output = g_proof_context.abi->string_new_utf8(
+    void* native_reference_output = g_native_reference_context.abi->string_new_utf8(
         runtime,
         thread,
         kExpectedOutput,
         {{ expected_output_byte_count }}u);
-    if (proof_output == nullptr) {
+    if (native_reference_output == nullptr) {
         return 1;
     }
 
-    return g_proof_context.write_line_string(runtime, thread, proof_output);
+    return g_native_reference_context.write_line_string(runtime, thread, native_reference_output);
 }
 
-int32_t {{ proof_function_name }}(
+int32_t {{ native_reference_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -244,7 +244,7 @@ int32_t {{ proof_function_name }}(
     RuntimeState* runtime,
     ThreadState* thread,
     void* managed_args) {
-    ResetProofContext();
+    ResetNativeReferenceContext();
 
     if (bridge == nullptr
         || code_registration == nullptr
@@ -263,7 +263,7 @@ int32_t {{ proof_function_name }}(
         return 1;
     }
 
-    if (!InitializeProofContext(bridge, options)) {
+    if (!InitializeNativeReferenceContext(bridge, options)) {
         return 1;
     }
 

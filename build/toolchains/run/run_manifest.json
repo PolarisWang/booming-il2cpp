@@ -5,6 +5,10 @@
       "title": "Quick Start"
     },
     {
+      "id": "project-and-ide",
+      "title": "Project And IDE"
+    },
+    {
       "id": "build",
       "title": "Build"
     },
@@ -406,13 +410,25 @@
       "examples": ["run build all"]
     },
     {
+      "id": "generate-project-all",
+      "title": "Generate all solutions for the current host",
+      "group": "Project And IDE",
+      "handler": "project.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["generate", "project", "all"],
+      "syntax": "generate project all [--host windows|macos|linux] [--refresh-generated]",
+      "kind": "all-workspaces",
+      "show_in_menu": true,
+      "examples": ["run generate project all --host windows --refresh-generated"]
+    },
+    {
       "id": "generate-project-subject",
       "title": "Generate a subject debug workspace",
-      "group": "Build",
+      "group": "Project And IDE",
       "handler": "project.dispatch",
       "platforms": ["windows"],
       "tokens": ["generate", "project", "subject"],
-      "syntax": "generate project subject --id subject/<subject-id> [--matrix <matrix-id>] [--all-targets] [--variant CHECK|PROFILE|SHIP] [--refresh-generated]",
+      "syntax": "generate project subject --id subject/<subject-id> [--matrix <matrix-id>] [--all-targets] [--variant CHECK|PROFILE|SHIP] [--refresh-generated] [--open-native-target generated|proof]",
       "kind": "subject-workspace",
       "show_in_menu": true,
       "examples": ["run generate project subject --id subject/HelloWorldObject"]
@@ -420,7 +436,7 @@
     {
       "id": "generate-project-core",
       "title": "Generate a core debug workspace",
-      "group": "Build",
+      "group": "Project And IDE",
       "handler": "project.dispatch",
       "platforms": ["windows", "macos", "linux"],
       "tokens": ["generate", "project", "core"],
@@ -432,11 +448,11 @@
     {
       "id": "build-project-subject",
       "title": "Build a generated subject workspace",
-      "group": "Build",
+      "group": "Project And IDE",
       "handler": "build.dispatch",
       "platforms": ["windows"],
       "tokens": ["build", "project", "subject"],
-      "syntax": "build project subject --id subject/<subject-id> [--matrix <matrix-id>] [--all-targets]",
+      "syntax": "build project subject --id subject/<subject-id> [--matrix <matrix-id>] [--all-targets] [--native-target generated|proof]",
       "kind": "project-workspace",
       "project_kind": "subject",
       "show_in_menu": true,
@@ -445,7 +461,7 @@
     {
       "id": "build-project-core",
       "title": "Build a generated core workspace",
-      "group": "Build",
+      "group": "Project And IDE",
       "handler": "build.dispatch",
       "platforms": ["windows", "macos", "linux"],
       "tokens": ["build", "project", "core"],

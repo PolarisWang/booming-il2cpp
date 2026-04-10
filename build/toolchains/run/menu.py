@@ -10,6 +10,7 @@ ANSI_RESET = "\x1b[0m"
 
 GROUP_TITLE_ALIASES = {
     "Quick Start": "快速开始",
+    "Project And IDE": "工程 / IDE",
     "Build": "构建产物",
     "Test And Verify": "测试验证",
     "Environment": "环境准备",
@@ -35,6 +36,11 @@ COMMAND_TITLE_ALIASES = {
     "clean-verify-roadmap0-windows": "清理旧版 Windows roadmap-0 工作流输出",
     "clean-verify-roadmap0-macos": "清理旧版 macOS roadmap-0 工作流输出",
     "build-all": "执行当前主机推荐的全量构建",
+    "generate-project-all": "生成所有 Solution（当前宿主）",
+    "generate-project-subject": "生成 Subject 调试工程（默认目标 / 指定目标 / 全部支持目标）",
+    "generate-project-core": "生成 IL2CPP Core 调试工程（默认目标 / 指定目标 / 全部支持目标）",
+    "build-project-subject": "构建 Subject 已生成工程（默认目标 / 指定目标 / 全部支持目标）",
+    "build-project-core": "构建 IL2CPP Core 已生成工程（默认目标 / 指定目标 / 全部支持目标）",
     "build-native-contract-abi": "构建原生 ABI 契约目标",
     "build-native-contract-bridge": "构建原生 bridge 契约目标",
     "build-preset-windows-x64-reference": "构建 Windows 参考预设",

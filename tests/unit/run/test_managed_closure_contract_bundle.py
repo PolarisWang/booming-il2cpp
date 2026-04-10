@@ -249,25 +249,32 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
             sorted(build_message_method["capabilities"]),
         )
 
-    def test_generated_bundle_emits_managed_lowering_plan_and_native_proof_mirrors_it(self) -> None:
+    def test_generated_bundle_emits_managed_lowering_plan_and_native_reference_mirrors_it(self) -> None:
         self._ensure_native_reference_generated()
 
         managed_plan_path = self.output_root / "native-reference.lowering-plan.json"
-        proof_plan_path = self.native_output_root / "native-proof.plan.json"
+        native_reference_plan_path = self.native_output_root / "native-reference.plan.json"
         generated_cpp_path = self.native_output_root / "generated" / "native-reference.generated.cpp"
 
         self.assertTrue(managed_plan_path.is_file(), msg=f"missing managed lowering plan: {managed_plan_path}")
-        self.assertTrue(proof_plan_path.is_file(), msg=f"missing mirrored proof plan: {proof_plan_path}")
-        self.assertTrue(generated_cpp_path.is_file(), msg=f"missing generated native proof source: {generated_cpp_path}")
+        self.assertTrue(
+            native_reference_plan_path.is_file(),
+            msg=f"missing mirrored native reference plan: {native_reference_plan_path}",
+        )
+        self.assertTrue(generated_cpp_path.is_file(), msg=f"missing generated native source: {generated_cpp_path}")
 
         managed_plan = load_json(managed_plan_path)
-        proof_plan = load_json(proof_plan_path)
+        native_reference_plan = load_json(native_reference_plan_path)
 
-        self.assertEqual(managed_plan, proof_plan)
+        self.assertEqual(managed_plan, native_reference_plan)
         self.assertEqual(
             "managed-object.captured-state-instance-message.minimal",
             managed_plan["planKind"],
         )
+        generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
+        self.assertIn("NativeReferenceContext", generated_cpp)
+        self.assertNotIn("NativeReferenceProofContext", generated_cpp)
+        self.assertNotIn("g_proof_context", generated_cpp)
 
 
 if __name__ == "__main__":

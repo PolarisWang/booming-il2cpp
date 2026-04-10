@@ -649,12 +649,220 @@ class TuiUnifiedMenuTests(unittest.TestCase):
 
         entries = tui_module.build_menu_entries(manifest, "windows")
 
-        self.assertEqual(["prepare", "build", "test", "clean", "inspect"], [entry.syntax for entry in entries])
+        self.assertEqual(["prepare", "project", "build", "test", "clean", "inspect"], [entry.syntax for entry in entries])
         self.assertEqual(
-            ["prepare-menu", "build-menu", "test-menu", "clean-menu", "inspect-menu"],
+            ["prepare-menu", "project-menu", "build-menu", "test-menu", "clean-menu", "inspect-menu"],
             [entry.command["id"] for entry in entries],
         )
         self.assertTrue(all(entry.command["title"] for entry in entries))
+
+    def test_build_project_menu_entries_exposes_generate_and_build_actions(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_project_menu_entries(manifest, "windows")
+
+        self.assertEqual(
+            [
+                "generate-project-all",
+                "generate-project-subject",
+                "generate-project-core",
+                "build-project-subject",
+                "build-project-core",
+                "menu-back",
+            ],
+            [entry.command["id"] for entry in entries],
+        )
+        self.assertEqual(
+            ["all", "subject", "core", "subject-build", "core-build", "back"],
+            [entry.syntax for entry in entries],
+        )
+        self.assertIn("生成所有 Solution", entries[0].command["title"])
+        self.assertIn("Subject 调试工程", entries[1].command["title"])
+        self.assertIn("IL2CPP Core 调试工程", entries[2].command["title"])
+
+    def test_run_section_submenu_routes_project_menu_to_project_flow(self) -> None:
+        tui_module = load_tui_module()
+        manifest = {"groups": [], "commands": []}
+        fake_terminal = object()
+
+        with patch.object(
+            tui_module,
+            "run_project_submenu",
+            return_value=["generate", "project", "all", "--host", "windows"],
+        ) as run_project_submenu:
+            argv = tui_module.run_section_submenu("project-menu", manifest, "windows", terminal=fake_terminal)
+
+        self.assertEqual(["generate", "project", "all", "--host", "windows"], argv)
+        run_project_submenu.assert_called_once_with(
+            manifest,
+            "windows",
+            terminal=fake_terminal,
+            menu_state=None,
+        )
+
+    def test_run_project_submenu_routes_generate_all_entry_through_aggregate_flow(self) -> None:
+        tui_module = load_tui_module()
+        manifest = {"groups": [], "commands": []}
+        generate_all_entry = tui_module.MenuEntry(
+            "生成工程",
+            {"id": "generate-project-all", "title": "生成所有 Solution（当前宿主）"},
+            "all",
+            ["generate", "project", "all"],
+        )
+        fake_terminal = object()
+
+        with patch.object(tui_module, "build_project_menu_entries", return_value=[generate_all_entry]):
+            with patch.object(tui_module, "_run_menu_selection", return_value=generate_all_entry):
+                with patch.object(
+                    tui_module,
+                    "run_generate_project_all_flow",
+                    return_value=["generate", "project", "all", "--host", "windows"],
+                ) as run_generate_project_all_flow:
+                    argv = tui_module.run_project_submenu(manifest, "windows", terminal=fake_terminal)
+
+        self.assertEqual(["generate", "project", "all", "--host", "windows"], argv)
+        run_generate_project_all_flow.assert_called_once_with("windows", terminal=fake_terminal)
+
+    def test_run_generate_project_all_flow_supports_refresh_generated(self) -> None:
+        tui_module = load_tui_module()
+        refresh_entry = tui_module.MenuEntry(
+            "刷新策略",
+            {"id": "project-all-refresh-generated", "title": "先刷新全部 generated", "refresh_generated": True},
+            "refresh",
+            [],
+        )
+        fake_terminal = object()
+
+        with patch.object(tui_module, "_run_menu_selection", return_value=refresh_entry):
+            with patch.object(tui_module, "run_confirmation_screen", return_value=True):
+                argv = tui_module.run_generate_project_all_flow("windows", terminal=fake_terminal)
+
+        self.assertEqual(["generate", "project", "all", "--host", "windows", "--refresh-generated"], argv)
+
+    def test_run_project_subject_flow_collects_specific_matrix_variant_and_refresh(self) -> None:
+        tui_module = load_tui_module()
+        fake_terminal = object()
+        subject_record = select_subject_record(
+            "chaos_tui_project_subject_flow",
+            source_type="dotnet-project",
+            required_host_platforms=["windows-x64"],
+        )
+        matrix_id = str(subject_record["manifest"]["defaultMatrix"])
+
+        selections = [
+            tui_module.MenuEntry(
+                "Subjects",
+                {"id": "subject-option", "title": str(subject_record["subjectId"]), "subject_id": str(subject_record["subjectId"])},
+                str(subject_record["subjectId"]),
+                [],
+            ),
+            tui_module.MenuEntry("范围", {"id": "scope-specific", "title": "指定目标", "scope": "specific"}, "specific", []),
+            tui_module.MenuEntry("Matrices", {"id": f"matrix-option:{matrix_id}", "title": matrix_id, "matrix_id": matrix_id}, matrix_id, []),
+            tui_module.MenuEntry("Variant", {"id": "variant-profile", "title": "PROFILE", "variant": "PROFILE"}, "PROFILE", []),
+            tui_module.MenuEntry("Generated", {"id": "refresh-generated", "title": "刷新 generated", "refresh_generated": True}, "refresh", []),
+            tui_module.MenuEntry("Open", {"id": "open-generated-native", "title": "打开 generated native project", "open_native_target": "generated"}, "generated", []),
+        ]
+
+        with patch.object(tui_module, "_run_menu_selection", side_effect=selections):
+            with patch.object(tui_module, "run_confirmation_screen", return_value=True):
+                argv = tui_module.run_project_subject_flow("generate-project-subject", "windows", terminal=fake_terminal)
+
+        self.assertEqual(
+            [
+                "generate",
+                "project",
+                "subject",
+                "--id",
+                f"subject/{subject_record['subjectId']}",
+                "--matrix",
+                matrix_id,
+                "--variant",
+                "PROFILE",
+                "--refresh-generated",
+                "--open-native-target",
+                "generated",
+            ],
+            argv,
+        )
+
+    def test_run_project_subject_flow_build_collects_generated_native_target(self) -> None:
+        tui_module = load_tui_module()
+        fake_terminal = object()
+        subject_record = select_subject_record(
+            "chaos_tui_project_subject_build_flow",
+            source_type="dotnet-project",
+            required_host_platforms=["windows-x64"],
+        )
+        matrix_id = str(subject_record["manifest"]["defaultMatrix"])
+
+        selections = [
+            tui_module.MenuEntry(
+                "Subjects",
+                {"id": "subject-option", "title": str(subject_record["subjectId"]), "subject_id": str(subject_record["subjectId"])},
+                str(subject_record["subjectId"]),
+                [],
+            ),
+            tui_module.MenuEntry("范围", {"id": "scope-specific", "title": "指定目标", "scope": "specific"}, "specific", []),
+            tui_module.MenuEntry("Matrices", {"id": f"matrix-option:{matrix_id}", "title": matrix_id, "matrix_id": matrix_id}, matrix_id, []),
+            tui_module.MenuEntry("Build", {"id": "build-generated-native", "title": "构建 generated native project", "native_target": "generated"}, "generated", []),
+        ]
+
+        with patch.object(tui_module, "_run_menu_selection", side_effect=selections):
+            with patch.object(tui_module, "run_confirmation_screen", return_value=True):
+                argv = tui_module.run_project_subject_flow("build-project-subject", "windows", terminal=fake_terminal)
+
+        self.assertEqual(
+            [
+                "build",
+                "project",
+                "subject",
+                "--id",
+                f"subject/{subject_record['subjectId']}",
+                "--matrix",
+                matrix_id,
+                "--native-target",
+                "generated",
+            ],
+            argv,
+        )
+
+    def test_run_project_core_flow_collects_specific_target(self) -> None:
+        tui_module = load_tui_module()
+        fake_terminal = object()
+        selections = [
+            tui_module.MenuEntry("范围", {"id": "scope-specific", "title": "指定目标", "scope": "specific"}, "specific", []),
+            tui_module.MenuEntry("Targets", {"id": "target-option", "title": "linux-x64", "target_id": "linux-x64"}, "linux-x64", []),
+        ]
+
+        with patch.object(tui_module, "_run_menu_selection", side_effect=selections):
+            with patch.object(tui_module, "run_confirmation_screen", return_value=True):
+                argv = tui_module.run_project_core_flow("build-project-core", "windows", terminal=fake_terminal)
+
+        self.assertEqual(["build", "project", "core", "--host", "windows", "--target", "linux-x64"], argv)
+
+    def test_render_menu_screen_shows_project_detail_block(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_project_menu_entries(manifest, "windows")
+        screen = tui_module.render_menu_screen(
+            entries,
+            0,
+            title="工程 / IDE",
+            help_text="方向键选择，Enter 继续，Back 返回上级，q/Esc 返回主菜单。",
+            fullscreen=False,
+        )
+
+        self.assertIn("简介:", screen)
+        self.assertIn("输出:", screen)
+        self.assertIn("目标范围:", screen)
+        self.assertIn("当前宿主支持:", screen)
+        self.assertIn("执行命令:", screen)
+        self.assertIn("备注:", screen)
+        self.assertIn("solutions/manifest.json", screen)
 
     def test_build_inspect_menu_entries_points_to_registry_listing(self) -> None:
         manifest_module = load_manifest_module()

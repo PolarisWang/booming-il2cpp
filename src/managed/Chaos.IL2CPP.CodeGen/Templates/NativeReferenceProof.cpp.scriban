@@ -23,7 +23,7 @@ constexpr const char* kDefaultImageName = "{{ assembly_name }}";
 constexpr const char* kConsoleWriteLineStringIcall = "{{ console_write_line_string_icall }}";
 constexpr const char* kStringConcatPairIcall = "{{ string_concat_pair_icall }}";
 
-struct NativeReferenceProofContext {
+struct NativeReferenceContext {
     const RuntimeAbiV0* abi;
     const CodegenBridgeV0* bridge;
     ImageHandle image;
@@ -36,20 +36,20 @@ struct NativeReferenceProofContext {
     WriteLineStringFn write_line_string;
 };
 
-NativeReferenceProofContext g_proof_context = {};
+NativeReferenceContext g_native_reference_context = {};
 
-ImageHandle GetProofImage(const CodegenRegistrationOptionsV0* options) {
+ImageHandle GetNativeReferenceImage(const CodegenRegistrationOptionsV0* options) {
     const char* image_name = options != nullptr && options->image_name_utf8 != nullptr
         ? options->image_name_utf8
         : kDefaultImageName;
     return reinterpret_cast<ImageHandle>(const_cast<char*>(image_name));
 }
 
-void ResetProofContext() {
-    g_proof_context = {};
+void ResetNativeReferenceContext() {
+    g_native_reference_context = {};
 }
 
-bool InitializeProofContext(
+bool InitializeNativeReferenceContext(
     const CodegenBridgeV0* bridge,
     const CodegenRegistrationOptionsV0* options) {
     if (bridge == nullptr) {
@@ -61,45 +61,45 @@ bool InitializeProofContext(
         return false;
     }
 
-    g_proof_context.abi = abi;
-    g_proof_context.bridge = bridge;
-    g_proof_context.image = GetProofImage(options);
-    g_proof_context.reference_type = bridge->resolve_type_by_token(g_proof_context.image, kReferenceTypeToken);
-    g_proof_context.captured_field = bridge->resolve_field_by_token(g_proof_context.image, kCapturedFieldToken);
-    g_proof_context.entry_method = bridge->resolve_method_by_token(g_proof_context.image, kEntryMethodToken);
-    g_proof_context.constructor_method = bridge->resolve_method_by_token(g_proof_context.image, kConstructorMethodToken);
-    g_proof_context.instance_method = bridge->resolve_method_by_token(g_proof_context.image, kInstanceMethodToken);
+    g_native_reference_context.abi = abi;
+    g_native_reference_context.bridge = bridge;
+    g_native_reference_context.image = GetNativeReferenceImage(options);
+    g_native_reference_context.reference_type = bridge->resolve_type_by_token(g_native_reference_context.image, kReferenceTypeToken);
+    g_native_reference_context.captured_field = bridge->resolve_field_by_token(g_native_reference_context.image, kCapturedFieldToken);
+    g_native_reference_context.entry_method = bridge->resolve_method_by_token(g_native_reference_context.image, kEntryMethodToken);
+    g_native_reference_context.constructor_method = bridge->resolve_method_by_token(g_native_reference_context.image, kConstructorMethodToken);
+    g_native_reference_context.instance_method = bridge->resolve_method_by_token(g_native_reference_context.image, kInstanceMethodToken);
 
     void* raw_concat_string_pair = bridge->resolve_icall(kStringConcatPairIcall);
     void* raw_write_line_string = bridge->resolve_icall(kConsoleWriteLineStringIcall);
-    g_proof_context.concat_string_pair = reinterpret_cast<ConcatStringPairFn>(raw_concat_string_pair);
-    g_proof_context.write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
+    g_native_reference_context.concat_string_pair = reinterpret_cast<ConcatStringPairFn>(raw_concat_string_pair);
+    g_native_reference_context.write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
 
-    return g_proof_context.image != nullptr
-        && g_proof_context.reference_type != nullptr
-        && g_proof_context.captured_field != nullptr
-        && g_proof_context.entry_method != nullptr
-        && g_proof_context.constructor_method != nullptr
-        && g_proof_context.instance_method != nullptr
-        && g_proof_context.concat_string_pair != nullptr
-        && g_proof_context.write_line_string != nullptr;
+    return g_native_reference_context.image != nullptr
+        && g_native_reference_context.reference_type != nullptr
+        && g_native_reference_context.captured_field != nullptr
+        && g_native_reference_context.entry_method != nullptr
+        && g_native_reference_context.constructor_method != nullptr
+        && g_native_reference_context.instance_method != nullptr
+        && g_native_reference_context.concat_string_pair != nullptr
+        && g_native_reference_context.write_line_string != nullptr;
 }
 
-bool EnsureProofContextReady(
+bool EnsureNativeReferenceContextReady(
     RuntimeState* runtime,
     ThreadState* thread) {
     return runtime != nullptr
         && thread != nullptr
-        && g_proof_context.abi != nullptr
-        && g_proof_context.bridge != nullptr
-        && g_proof_context.image != nullptr
-        && g_proof_context.reference_type != nullptr
-        && g_proof_context.captured_field != nullptr
-        && g_proof_context.entry_method != nullptr
-        && g_proof_context.constructor_method != nullptr
-        && g_proof_context.instance_method != nullptr
-        && g_proof_context.concat_string_pair != nullptr
-        && g_proof_context.write_line_string != nullptr;
+        && g_native_reference_context.abi != nullptr
+        && g_native_reference_context.bridge != nullptr
+        && g_native_reference_context.image != nullptr
+        && g_native_reference_context.reference_type != nullptr
+        && g_native_reference_context.captured_field != nullptr
+        && g_native_reference_context.entry_method != nullptr
+        && g_native_reference_context.constructor_method != nullptr
+        && g_native_reference_context.instance_method != nullptr
+        && g_native_reference_context.concat_string_pair != nullptr
+        && g_native_reference_context.write_line_string != nullptr;
 }
 
 }  // namespace
@@ -109,14 +109,14 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL {{ constructor_symbol }}(
     ThreadState* thread,
     void* __this,
     void* arg0) {
-    if (!EnsureProofContextReady(runtime, thread) || __this == nullptr) {
+    if (!EnsureNativeReferenceContextReady(runtime, thread) || __this == nullptr) {
         return;
     }
 
-    if (g_proof_context.abi->field_set_value(
+    if (g_native_reference_context.abi->field_set_value(
             runtime,
             thread,
-            g_proof_context.captured_field,
+            g_native_reference_context.captured_field,
             __this,
             &arg0,
             sizeof(arg0)) != CHAOS_RUNTIME_STATUS_OK) {
@@ -128,22 +128,22 @@ extern "C" void* CHAOS_RUNTIME_ABI_CALL {{ instance_method_symbol }}(
     RuntimeState* runtime,
     ThreadState* thread,
     void* __this) {
-    if (!EnsureProofContextReady(runtime, thread) || __this == nullptr) {
+    if (!EnsureNativeReferenceContextReady(runtime, thread) || __this == nullptr) {
         return nullptr;
     }
 
     void* captured_value = nullptr;
-    if (g_proof_context.abi->field_get_value(
+    if (g_native_reference_context.abi->field_get_value(
             runtime,
             thread,
-            g_proof_context.captured_field,
+            g_native_reference_context.captured_field,
             __this,
             &captured_value,
             sizeof(captured_value)) != CHAOS_RUNTIME_STATUS_OK) {
         return nullptr;
     }
 
-    void* message_prefix = g_proof_context.abi->string_new_utf8(
+    void* message_prefix = g_native_reference_context.abi->string_new_utf8(
         runtime,
         thread,
         {{ message_prefix_literal }},
@@ -152,7 +152,7 @@ extern "C" void* CHAOS_RUNTIME_ABI_CALL {{ instance_method_symbol }}(
         return nullptr;
     }
 
-    void* combined_message = g_proof_context.concat_string_pair(
+    void* combined_message = g_native_reference_context.concat_string_pair(
         runtime,
         thread,
         message_prefix,
@@ -161,7 +161,7 @@ extern "C" void* CHAOS_RUNTIME_ABI_CALL {{ instance_method_symbol }}(
         return nullptr;
     }
 
-    void* message_suffix = g_proof_context.abi->string_new_utf8(
+    void* message_suffix = g_native_reference_context.abi->string_new_utf8(
         runtime,
         thread,
         {{ message_suffix_literal }},
@@ -170,7 +170,7 @@ extern "C" void* CHAOS_RUNTIME_ABI_CALL {{ instance_method_symbol }}(
         return nullptr;
     }
 
-    return g_proof_context.concat_string_pair(runtime, thread, combined_message, message_suffix);
+    return g_native_reference_context.concat_string_pair(runtime, thread, combined_message, message_suffix);
 }
 
 extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
@@ -179,15 +179,15 @@ extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
     void* managed_args) {
     (void)managed_args;
 
-    if (!EnsureProofContextReady(runtime, thread)) {
+    if (!EnsureNativeReferenceContextReady(runtime, thread)) {
         return 1;
     }
 
-    if (g_proof_context.abi->class_init(runtime, g_proof_context.reference_type) != CHAOS_RUNTIME_STATUS_OK) {
+    if (g_native_reference_context.abi->class_init(runtime, g_native_reference_context.reference_type) != CHAOS_RUNTIME_STATUS_OK) {
         return 1;
     }
 
-    void* constructor_argument = g_proof_context.abi->string_new_utf8(
+    void* constructor_argument = g_native_reference_context.abi->string_new_utf8(
         runtime,
         thread,
         {{ constructor_literal }},
@@ -196,10 +196,10 @@ extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
         return 1;
     }
 
-    void* constructed_instance = g_proof_context.abi->object_new(
+    void* constructed_instance = g_native_reference_context.abi->object_new(
         runtime,
         thread,
-        g_proof_context.reference_type);
+        g_native_reference_context.reference_type);
     if (constructed_instance == nullptr) {
         return 1;
     }
@@ -210,10 +210,10 @@ extern "C" int32_t CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
         return 1;
     }
 
-    return g_proof_context.write_line_string(runtime, thread, message);
+    return g_native_reference_context.write_line_string(runtime, thread, message);
 }
 
-int32_t {{ proof_function_name }}(
+int32_t {{ native_reference_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -221,7 +221,7 @@ int32_t {{ proof_function_name }}(
     RuntimeState* runtime,
     ThreadState* thread,
     void* managed_args) {
-    ResetProofContext();
+    ResetNativeReferenceContext();
 
     if (bridge == nullptr
         || code_registration == nullptr
@@ -240,7 +240,7 @@ int32_t {{ proof_function_name }}(
         return 1;
     }
 
-    if (!InitializeProofContext(bridge, options)) {
+    if (!InitializeNativeReferenceContext(bridge, options)) {
         return 1;
     }
 

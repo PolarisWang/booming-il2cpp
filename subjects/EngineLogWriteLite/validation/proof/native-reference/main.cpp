@@ -3,7 +3,7 @@
 
 namespace chaos::il2cpp::generated {
 
-int32_t CHAOS_RUNTIME_ABI_CALL RunNativeReferenceProof(
+int32_t CHAOS_RUNTIME_ABI_CALL RunNativeReference(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,
@@ -52,7 +52,7 @@ int32_t RunProofHost() {
     options.struct_size = sizeof(options);
     options.image_name_utf8 = "EngineLogWriteLite";
 
-    const int32_t exit_code = chaos::il2cpp::generated::RunNativeReferenceProof(
+    const int32_t exit_code = chaos::il2cpp::generated::RunNativeReference(
         bridge,
         &code_registration,
         &metadata_registration,

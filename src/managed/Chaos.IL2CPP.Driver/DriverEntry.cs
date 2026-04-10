@@ -48,7 +48,7 @@ public sealed class DriverEntry
         }
 
         WriteJson(Path.Combine(result.OutputRootPath, NativeReferenceArtifactNames.LoweringPlan), result.LoweringPlan);
-        WriteJson(Path.Combine(result.OutputRootPath, NativeReferenceArtifactNames.ProofManifest), result.ProofManifest);
+        WriteJson(Path.Combine(result.OutputRootPath, NativeReferenceArtifactNames.Manifest), result.Manifest);
         return 0;
     }
 

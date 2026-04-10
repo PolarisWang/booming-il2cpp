@@ -35,8 +35,8 @@ class ProjectCommandTests(unittest.TestCase):
             project_module.workspace_module,
             "generate_subject_workspace",
             return_value={
-                "manifestPath": "artifacts/projects/subjects/FixtureSubject/workspace.manifest.json",
-                "artifacts": ["artifacts/projects/subjects/FixtureSubject/workspace.manifest.json"],
+                "manifestPath": "solutions/subjects/FixtureSubject/workspace.manifest.json",
+                "artifacts": ["solutions/subjects/FixtureSubject/workspace.manifest.json"],
                 "importantOutputs": [],
                 "consoleText": "",
             },
@@ -57,6 +57,35 @@ class ProjectCommandTests(unittest.TestCase):
             {"id": "subject/FixtureSubject", "refresh-generated": True},
         )
 
+    def test_project_dispatch_routes_aggregate_generation_to_workspace_helper(self) -> None:
+        project_module = load_module(PROJECT_COMMAND_MODULE_PATH, "chaos_project_command_all_dispatch")
+
+        with patch.object(
+            project_module.workspace_module,
+            "generate_all_workspaces",
+            return_value={
+                "manifestPath": "solutions/manifest.json",
+                "artifacts": ["solutions/manifest.json", "solutions/all/generation.report.json"],
+                "importantOutputs": [],
+                "consoleText": "",
+            },
+        ) as generate_mock:
+            result = project_module.handle(
+                {"kind": "all-workspaces"},
+                REPO_ROOT,
+                "windows",
+                "generate project all --host windows --refresh-generated",
+                {"host": "windows", "refresh-generated": True},
+            )
+
+        self.assertEqual("ok", result.status)
+        self.assertEqual("solutions/manifest.json", result.payload["manifestPath"])
+        generate_mock.assert_called_once_with(
+            REPO_ROOT,
+            "windows",
+            {"host": "windows", "refresh-generated": True},
+        )
+
     def test_build_dispatch_routes_project_workspace_to_subject_and_core_helpers(self) -> None:
         build_module = load_module(BUILD_COMMAND_MODULE_PATH, "chaos_build_command_project_workspace")
 
@@ -64,8 +93,8 @@ class ProjectCommandTests(unittest.TestCase):
             build_module.workspace_module,
             "build_subject_workspace",
             return_value={
-                "buildReportPath": "artifacts/projects/subjects/FixtureSubject/build.report.json",
-                "artifacts": ["artifacts/projects/subjects/FixtureSubject/build.report.json"],
+                "buildReportPath": "solutions/subjects/FixtureSubject/build.report.json",
+                "artifacts": ["solutions/subjects/FixtureSubject/build.report.json"],
                 "importantOutputs": [],
                 "consoleText": "",
             },
@@ -81,8 +110,8 @@ class ProjectCommandTests(unittest.TestCase):
             build_module.workspace_module,
             "build_core_workspace",
             return_value={
-                "buildReportPath": "artifacts/projects/core/windows/build.report.json",
-                "artifacts": ["artifacts/projects/core/windows/build.report.json"],
+                "buildReportPath": "solutions/core/windows/build.report.json",
+                "artifacts": ["solutions/core/windows/build.report.json"],
                 "importantOutputs": [],
                 "consoleText": "",
             },

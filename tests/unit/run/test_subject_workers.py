@@ -327,8 +327,8 @@ class SubjectWorkersTests(unittest.TestCase):
                 )
                 (expected_output_root / "generated").mkdir(parents=True, exist_ok=True)
                 (expected_output_root / "generated" / "native-reference.generated.cpp").write_text("// generated", encoding="utf-8")
-                (expected_output_root / "native-proof.manifest.json").write_text("{}", encoding="utf-8")
-                (expected_output_root / "native-proof.plan.json").write_text("{}", encoding="utf-8")
+                (expected_output_root / "native-reference.manifest.json").write_text("{}", encoding="utf-8")
+                (expected_output_root / "native-reference.plan.json").write_text("{}", encoding="utf-8")
                 return ""
 
             with patch.object(workers_module, "_ensure_driver_built", return_value=repo_root / "driver" / "Chaos.IL2CPP.Driver.dll"):
@@ -349,13 +349,15 @@ class SubjectWorkersTests(unittest.TestCase):
                 manifest["generatedSourcePath"],
             )
             self.assertEqual(
-                subject_run_path(subject_id, run_id, "analysis", "generated", "native-proof.manifest.json"),
-                manifest["nativeProofManifestPath"],
+                subject_run_path(subject_id, run_id, "analysis", "generated", "native-reference.manifest.json"),
+                manifest["nativeReferenceManifestPath"],
             )
             self.assertEqual(
-                subject_run_path(subject_id, run_id, "analysis", "generated", "native-proof.plan.json"),
-                manifest["nativeProofPlanPath"],
+                subject_run_path(subject_id, run_id, "analysis", "generated", "native-reference.plan.json"),
+                manifest["nativeReferencePlanPath"],
             )
+            self.assertNotIn("nativeProofManifestPath", manifest)
+            self.assertNotIn("nativeProofPlanPath", manifest)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

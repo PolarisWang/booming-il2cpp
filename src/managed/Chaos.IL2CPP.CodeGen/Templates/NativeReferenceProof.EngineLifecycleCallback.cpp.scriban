@@ -36,7 +36,7 @@ bool MatchesExpectedOrder(const CallbackTrace& trace) {
 
 }  // namespace
 
-int32_t {{ proof_function_name }}(
+int32_t {{ native_reference_function_name }}(
     const CodegenBridgeV0* bridge,
     const CodeRegistrationV0* code_registration,
     const MetadataRegistrationV0* metadata_registration,

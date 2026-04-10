@@ -11,12 +11,16 @@ from typing import Any, Callable
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     import manifest as manifest_module
+    import project_workspace as project_workspace_module
     from testing import public_specs as public_specs_module
     from testing import registry as registry_module
+    from testing import subjects as subjects_module
 else:
     from . import manifest as manifest_module
+    from . import project_workspace as project_workspace_module
     from .testing import public_specs as public_specs_module
     from .testing import registry as registry_module
+    from .testing import subjects as subjects_module
 
 if os.name == "nt":
     import ctypes
@@ -72,6 +76,12 @@ PRIMARY_MENU_ENTRIES = [
         "group_title": "环境准备",
         "syntax": "prepare",
         "title": "准备当前工作区与本机环境，先把运行基础打通",
+    },
+    {
+        "id": "project-menu",
+        "group_title": "工程 / IDE",
+        "syntax": "project",
+        "title": "生成或构建可供 VS / IDE 打开的 subject 与 core 工程工作区",
     },
     {
         "id": "build-menu",
@@ -166,6 +176,67 @@ def build_prepare_menu_entries(manifest: dict[str, Any], host_platform: str) -> 
     )
 
 
+def build_project_menu_entries(manifest: dict[str, Any], host_platform: str) -> list[MenuEntry]:
+    return [
+        MenuEntry(
+            "生成工程",
+            {
+                "id": "generate-project-all",
+                "title": "生成所有 Solution（当前宿主）",
+                "details": _project_command_details("generate-project-all", host_platform),
+            },
+            "all",
+            ["generate", "project", "all"],
+        ),
+        MenuEntry(
+            "生成工程",
+            {
+                "id": "generate-project-subject",
+                "title": "生成 Subject 调试工程",
+                "details": _project_command_details("generate-project-subject", host_platform),
+            },
+            "subject",
+            ["generate", "project", "subject"],
+        ),
+        MenuEntry(
+            "生成工程",
+            {
+                "id": "generate-project-core",
+                "title": "生成 IL2CPP Core 调试工程",
+                "details": _project_command_details("generate-project-core", host_platform),
+            },
+            "core",
+            ["generate", "project", "core"],
+        ),
+        MenuEntry(
+            "构建工程",
+            {
+                "id": "build-project-subject",
+                "title": "构建 Subject 已生成工程",
+                "details": _project_command_details("build-project-subject", host_platform),
+            },
+            "subject-build",
+            ["build", "project", "subject"],
+        ),
+        MenuEntry(
+            "构建工程",
+            {
+                "id": "build-project-core",
+                "title": "构建 IL2CPP Core 已生成工程",
+                "details": _project_command_details("build-project-core", host_platform),
+            },
+            "core-build",
+            ["build", "project", "core"],
+        ),
+        MenuEntry(
+            "返回上级",
+            dict(MENU_BACK_COMMAND),
+            "back",
+            [],
+        ),
+    ]
+
+
 def build_clean_menu_entries(manifest: dict[str, Any], host_platform: str) -> list[MenuEntry]:
     return _build_curated_submenu_entries(
         manifest,
@@ -176,6 +247,128 @@ def build_clean_menu_entries(manifest: dict[str, Any], host_platform: str) -> li
             ("清理范围", f"clean-workflow-runtime-baseline-{host_platform}", "runtime-baseline", "清理当前主机的 runtime-baseline 工作流输出"),
         ],
     )
+
+
+def _project_command_details(command_id: str, host_platform: str) -> dict[str, str]:
+    core_targets = ", ".join(_core_target_ids(host_platform)) or "-"
+    if command_id == "generate-project-all":
+        return {
+            "summary": "为当前宿主生成全部 subject/core solution 与对应 native project/workspace。",
+            "outputs": "solutions/manifest.json | solutions/all/generation.report.json | solutions/subjects/<subject-id>/ | solutions/core/<host>/",
+            "target_scope": "当前宿主支持的全部 subject 与全部 core target",
+            "host_support": f"{host_platform}: {_subject_count_for_host(host_platform)} subjects | {core_targets}",
+            "command": f"run generate project all --host {host_platform} [--refresh-generated]",
+            "notes": "重操作入口；subject 默认按全部支持目标生成 native project 并写入 solution。",
+        }
+    if command_id == "generate-project-subject":
+        return {
+            "summary": "生成 Subject 的 solution 与 native 调试工程。",
+            "outputs": "solutions/subjects/<subject-id>/<subject-id>.sln | solutions/subjects/<subject-id>/native/<matrix-id>/",
+            "target_scope": "默认目标 / 指定目标 / 全部支持目标",
+            "host_support": "从 subject.manifest.json 动态读取当前宿主可用 matrices",
+            "command": "run generate project subject --id subject/<subject-id> [--matrix <matrix-id>] [--all-targets] [--variant CHECK|PROFILE|SHIP] [--refresh-generated] [--open-native-target generated|proof]",
+            "notes": "Windows Subject 会同时生成 generated/proof 两个 native project；可显式选择默认打开哪个 native project。",
+        }
+    if command_id == "build-project-subject":
+        return {
+            "summary": "构建 Subject 已生成的 managed solution 与 native workspace。",
+            "outputs": "solutions/subjects/<subject-id>/build.report.json | solutions/subjects/<subject-id>/workspace.manifest.json",
+            "target_scope": "默认目标 / 指定目标 / 全部支持目标",
+            "host_support": "基于已生成的 workspace.manifest.json 读取可构建 matrices",
+            "command": "run build project subject --id subject/<subject-id> [--matrix <matrix-id>] [--all-targets] [--native-target generated|proof]",
+            "notes": "只消费现有工作区；不会刷新 generated。Windows Subject 可显式选择构建 generated 或 proof native project。",
+        }
+    if command_id == "generate-project-core":
+        return {
+            "summary": "生成 IL2CPP Core 的 managed solution 与 native 调试工作区。",
+            "outputs": "solutions/core/<host>/chaos-il2cpp-core.sln | solutions/core/<host>/native/<target-id>/",
+            "target_scope": "默认目标 / 指定目标 / 全部支持目标",
+            "host_support": core_targets,
+            "command": f"run generate project core --host {host_platform} [--target <target-id>] [--all-targets]",
+            "notes": "native 侧输出仍视为 workspace，不与 managed .sln 混称。",
+        }
+    return {
+        "summary": "构建 IL2CPP Core 已生成的 managed solution 与 native workspace。",
+        "outputs": "solutions/core/<host>/build.report.json | solutions/core/<host>/workspace.manifest.json",
+        "target_scope": "默认目标 / 指定目标 / 全部支持目标",
+        "host_support": core_targets,
+        "command": f"run build project core --host {host_platform} [--target <target-id>] [--all-targets]",
+        "notes": "构建前应已存在 core workspace.manifest.json。",
+    }
+
+
+def _host_platform_family(platform_id: str) -> str:
+    if platform_id.startswith("windows"):
+        return "windows"
+    if platform_id.startswith("macos"):
+        return "macos"
+    if platform_id.startswith("linux"):
+        return "linux"
+    return platform_id
+
+
+def _core_target_ids(host_platform: str) -> list[str]:
+    return [
+        target_id
+        for target_id in project_workspace_module.CORE_TARGET_ORDER
+        if host_platform in set(project_workspace_module.CORE_TARGET_SPECS[target_id]["hosts"])
+    ]
+
+
+def _subject_records_for_host(host_platform: str) -> list[dict[str, Any]]:
+    subjects_root = REPO_ROOT / "subjects"
+    if not subjects_root.is_dir():
+        return []
+
+    records: list[dict[str, Any]] = []
+    for manifest_path in sorted(subjects_root.glob("*/subject.manifest.json")):
+        subject_id = manifest_path.parent.name
+        try:
+            manifest = subjects_module.load_subject_manifest(REPO_ROOT, subject_id)
+        except Exception:
+            continue
+        matrices = [
+            dict(matrix)
+            for matrix in list(manifest.get("environmentMatrices") or [])
+            if _host_platform_family(str(dict(matrix.get("executionContext") or {}).get("hostPlatform") or "")) == host_platform
+        ]
+        if not matrices:
+            continue
+        records.append(
+            {
+                "subject_id": subject_id,
+                "title": str(manifest.get("displayName") or subject_id),
+                "manifest": manifest,
+                "matrices": matrices,
+            }
+        )
+    return records
+
+
+def _subject_count_for_host(host_platform: str) -> int:
+    return len(_subject_records_for_host(host_platform))
+
+
+def _subject_matrix_target_platform(matrix: dict[str, Any]) -> str:
+    return str(dict(matrix.get("executionContext") or {}).get("targetPlatform") or "")
+
+
+def _subject_matrices_support_dual_native_projects(matrices: list[dict[str, Any]]) -> bool:
+    return any(_subject_matrix_target_platform(matrix) == "windows-x64" for matrix in matrices)
+
+
+def _build_choice_entries(group_title: str, options: list[dict[str, Any]]) -> list[MenuEntry]:
+    entries = [
+        MenuEntry(
+            group_title,
+            dict(option["command"]),
+            str(option["syntax"]),
+            list(option.get("argv") or []),
+        )
+        for option in options
+    ]
+    entries.append(MenuEntry("返回上级", dict(MENU_BACK_COMMAND), "back", []))
+    return entries
 
 
 def build_build_menu_entries(manifest: dict[str, Any], host_platform: str) -> list[MenuEntry]:
@@ -671,6 +864,9 @@ def run_section_submenu(
         entries = build_prepare_menu_entries(manifest, host_platform)
         title = "准备中心"
         help_text = SECTION_MENU_HELP
+    elif section_command_id == "project-menu":
+        project_kwargs = {"terminal": terminal, "menu_state": menu_state}
+        return run_project_submenu(manifest, host_platform, **project_kwargs)
     elif section_command_id == "build-menu":
         entries = build_build_menu_entries(manifest, host_platform)
         title = "构建中心"
@@ -699,6 +895,444 @@ def run_section_submenu(
         section_command_id=section_command_id,
         menu_state=menu_state,
     )
+
+
+def _run_choice_menu(
+    entries: list[MenuEntry],
+    *,
+    title: str,
+    terminal: "_TerminalSession | _InlineTerminalSession",
+) -> MenuEntry | None:
+    selected_entry = _run_menu_selection(
+        terminal,
+        entries,
+        title=title,
+        help_text=SECTION_MENU_HELP,
+    )
+    if selected_entry is None or selected_entry.command["id"] == "menu-back":
+        return None
+    return selected_entry
+
+
+def run_project_submenu(
+    manifest: dict[str, Any],
+    host_platform: str,
+    *,
+    terminal: "_TerminalSession | _InlineTerminalSession" | None = None,
+    menu_state: MenuState | None = None,
+) -> list[str] | None:
+    entries = build_project_menu_entries(manifest, host_platform)
+    initial_selection = 0
+    if menu_state is not None and menu_state.active_section_command_id == "project-menu":
+        initial_selection = _selection_index_for_command(entries, menu_state.section_selection_command_id)
+
+    active_terminal = terminal
+    created_terminal = False
+    if active_terminal is None:
+        active_terminal = _TerminalSession()
+        created_terminal = True
+
+    def _run_loop(current_terminal: "_TerminalSession | _InlineTerminalSession") -> list[str] | None:
+        nonlocal initial_selection
+        while True:
+            selected_entry = _run_menu_selection(
+                current_terminal,
+                entries,
+                title="工程 / IDE",
+                help_text=SECTION_MENU_HELP,
+                initial_selection=initial_selection,
+            )
+            if selected_entry is None or selected_entry.command["id"] == "menu-back":
+                return None
+            if menu_state is not None:
+                menu_state.primary_command_id = "project-menu"
+                menu_state.active_section_command_id = "project-menu"
+                menu_state.section_selection_command_id = selected_entry.command["id"]
+
+            command_id = selected_entry.command["id"]
+            if command_id == "generate-project-all":
+                argv = run_generate_project_all_flow(host_platform, terminal=current_terminal)
+            elif command_id in {"generate-project-subject", "build-project-subject"}:
+                argv = run_project_subject_flow(command_id, host_platform, terminal=current_terminal)
+            elif command_id in {"generate-project-core", "build-project-core"}:
+                argv = run_project_core_flow(command_id, host_platform, terminal=current_terminal)
+            else:
+                argv = resolve_entry_argv(selected_entry)
+            if argv is not None:
+                return argv
+            initial_selection = _selection_index_for_command(entries, selected_entry.command["id"])
+
+    if created_terminal:
+        with active_terminal as current_terminal:
+            return _run_loop(current_terminal)
+    return _run_loop(active_terminal)
+
+
+def run_generate_project_all_flow(
+    host_platform: str,
+    *,
+    terminal: "_TerminalSession | _InlineTerminalSession",
+) -> list[str] | None:
+    refresh_entry = _run_choice_menu(
+        _build_choice_entries(
+            "刷新策略",
+            [
+                {
+                    "command": {
+                        "id": "project-all-use-generated",
+                        "title": "使用现有 generated 生成全部 Solution",
+                        "refresh_generated": False,
+                    },
+                    "syntax": "reuse",
+                },
+                {
+                    "command": {
+                        "id": "project-all-refresh-generated",
+                        "title": "先刷新全部 generated 再生成全部 Solution",
+                        "refresh_generated": True,
+                    },
+                    "syntax": "refresh",
+                },
+            ],
+        ),
+        title="生成所有 Solution",
+        terminal=terminal,
+    )
+    if refresh_entry is None:
+        return None
+
+    argv = ["generate", "project", "all", "--host", host_platform]
+    if refresh_entry.command.get("refresh_generated"):
+        argv.append("--refresh-generated")
+    if not run_confirmation_screen(
+        "确认生成所有 Solution",
+        [
+            f"输出根: solutions/",
+            f"当前宿主: {host_platform}",
+            f"刷新 generated: {'yes' if refresh_entry.command.get('refresh_generated') else 'no'}",
+            f"执行命令: {' '.join(argv)}",
+        ],
+        terminal=terminal,
+    ):
+        return None
+    return argv
+
+
+def run_project_subject_flow(
+    command_id: str,
+    host_platform: str,
+    *,
+    terminal: "_TerminalSession | _InlineTerminalSession",
+) -> list[str] | None:
+    is_generate = command_id == "generate-project-subject"
+    subject_records = _subject_records_for_host(host_platform)
+    subject_entry = _run_choice_menu(
+        _build_choice_entries(
+            "Subjects",
+            [
+                {
+                    "command": {
+                        "id": f"subject-option:{record['subject_id']}",
+                        "title": str(record["title"]),
+                        "subject_id": str(record["subject_id"]),
+                    },
+                    "syntax": str(record["subject_id"]),
+                }
+                for record in subject_records
+            ],
+        ),
+        title="选择 Subject",
+        terminal=terminal,
+    )
+    if subject_entry is None:
+        return None
+
+    selected_record = next(
+        (record for record in subject_records if str(record["subject_id"]) == str(subject_entry.command["subject_id"])),
+        None,
+    )
+    if selected_record is None:
+        raise RuntimeError(f"subject not found for project flow: {subject_entry.command['subject_id']}")
+
+    scope_entry = _run_choice_menu(
+        _build_choice_entries(
+            "范围",
+            [
+                {"command": {"id": "scope-default", "title": "默认目标", "scope": "default"}, "syntax": "default"},
+                {"command": {"id": "scope-specific", "title": "指定目标", "scope": "specific"}, "syntax": "specific"},
+                {"command": {"id": "scope-all-targets", "title": "全部支持目标", "scope": "all-targets"}, "syntax": "all-targets"},
+            ],
+        ),
+        title="选择目标范围",
+        terminal=terminal,
+    )
+    if scope_entry is None:
+        return None
+
+    argv = [
+        "generate" if is_generate else "build",
+        "project",
+        "subject",
+        "--id",
+        f"subject/{subject_entry.command['subject_id']}",
+    ]
+    selected_matrix_id = ""
+    scope = str(scope_entry.command["scope"])
+    selected_matrices_for_flow: list[dict[str, Any]] = []
+    if scope == "specific":
+        matrix_entry = _run_choice_menu(
+            _build_choice_entries(
+                "Matrices",
+                [
+                    {
+                        "command": {
+                            "id": f"matrix-option:{matrix['matrixId']}",
+                            "title": str(matrix.get("matrixId") or ""),
+                            "matrix_id": str(matrix.get("matrixId") or ""),
+                        },
+                        "syntax": str(matrix.get("matrixId") or ""),
+                    }
+                    for matrix in list(selected_record["matrices"])
+                ],
+            ),
+            title="选择 Matrix",
+            terminal=terminal,
+        )
+        if matrix_entry is None:
+            return None
+        selected_matrix_id = str(matrix_entry.command["matrix_id"])
+        argv.extend(["--matrix", selected_matrix_id])
+        selected_matrices_for_flow = [
+            matrix for matrix in list(selected_record["matrices"]) if str(matrix.get("matrixId") or "") == selected_matrix_id
+        ]
+    elif scope == "all-targets":
+        argv.append("--all-targets")
+        selected_matrices_for_flow = [dict(matrix) for matrix in list(selected_record["matrices"])]
+    else:
+        default_matrix_id = str(dict(selected_record.get("manifest") or {}).get("defaultMatrix") or "")
+        selected_matrices_for_flow = [
+            dict(matrix)
+            for matrix in list(selected_record["matrices"])
+            if not default_matrix_id or str(matrix.get("matrixId") or "") == default_matrix_id
+        ]
+        if not selected_matrices_for_flow and list(selected_record["matrices"]):
+            selected_matrices_for_flow = [dict(list(selected_record["matrices"])[0])]
+
+    selected_variant = ""
+    refresh_generated = False
+    selected_open_native_target = ""
+    selected_build_native_target = ""
+    if is_generate:
+        variant_entry = _run_choice_menu(
+            _build_choice_entries(
+                "Variant",
+                [
+                    {"command": {"id": "variant-check", "title": "CHECK", "variant": "CHECK"}, "syntax": "CHECK"},
+                    {"command": {"id": "variant-profile", "title": "PROFILE", "variant": "PROFILE"}, "syntax": "PROFILE"},
+                    {"command": {"id": "variant-ship", "title": "SHIP", "variant": "SHIP"}, "syntax": "SHIP"},
+                ],
+            ),
+            title="选择 Variant",
+            terminal=terminal,
+        )
+        if variant_entry is None:
+            return None
+        selected_variant = str(variant_entry.command["variant"])
+        argv.extend(["--variant", selected_variant])
+
+        refresh_entry = _run_choice_menu(
+            _build_choice_entries(
+                "Generated",
+                [
+                    {
+                        "command": {
+                            "id": "use-generated",
+                            "title": "使用现有 generated",
+                            "refresh_generated": False,
+                        },
+                        "syntax": "reuse",
+                    },
+                    {
+                        "command": {
+                            "id": "refresh-generated",
+                            "title": "刷新 generated 后再生成",
+                            "refresh_generated": True,
+                        },
+                        "syntax": "refresh",
+                    },
+                ],
+            ),
+            title="选择 Generated 刷新策略",
+            terminal=terminal,
+        )
+        if refresh_entry is None:
+            return None
+        refresh_generated = bool(refresh_entry.command.get("refresh_generated"))
+        if refresh_generated:
+            argv.append("--refresh-generated")
+        if _subject_matrices_support_dual_native_projects(selected_matrices_for_flow):
+            open_entry = _run_choice_menu(
+                _build_choice_entries(
+                    "Open",
+                    [
+                        {
+                            "command": {
+                                "id": "open-proof-native",
+                                "title": "打开 proof native project",
+                                "open_native_target": "proof",
+                            },
+                            "syntax": "proof",
+                        },
+                        {
+                            "command": {
+                                "id": "open-generated-native",
+                                "title": "打开 generated native project",
+                                "open_native_target": "generated",
+                            },
+                            "syntax": "generated",
+                        },
+                    ],
+                ),
+                title="选择默认打开的 Native Project",
+                terminal=terminal,
+            )
+            if open_entry is None:
+                return None
+            selected_open_native_target = str(open_entry.command["open_native_target"])
+            argv.extend(["--open-native-target", selected_open_native_target])
+    elif _subject_matrices_support_dual_native_projects(selected_matrices_for_flow):
+        build_entry = _run_choice_menu(
+            _build_choice_entries(
+                "Build",
+                [
+                    {
+                        "command": {
+                            "id": "build-proof-native",
+                            "title": "构建 proof native project",
+                            "native_target": "proof",
+                        },
+                        "syntax": "proof",
+                    },
+                    {
+                        "command": {
+                            "id": "build-generated-native",
+                            "title": "构建 generated native project",
+                            "native_target": "generated",
+                        },
+                        "syntax": "generated",
+                    },
+                ],
+            ),
+            title="选择要构建的 Native Project",
+            terminal=terminal,
+        )
+        if build_entry is None:
+            return None
+        selected_build_native_target = str(build_entry.command["native_target"])
+        argv.extend(["--native-target", selected_build_native_target])
+
+    if not run_confirmation_screen(
+        "确认 Subject 工程命令",
+        [
+            f"Subject: {subject_entry.command['subject_id']}",
+            f"目标范围: {scope}",
+            f"Matrix: {selected_matrix_id or '(default)'}",
+            f"Variant: {selected_variant or '(build only)'}",
+            f"刷新 generated: {'yes' if refresh_generated else 'no'}",
+            f"默认打开 native project: {selected_open_native_target or '(default)'}",
+            f"构建 native project: {selected_build_native_target or '(default)'}",
+            f"执行命令: {' '.join(argv)}",
+        ],
+        terminal=terminal,
+    ):
+        return None
+    return argv
+
+
+def run_project_core_flow(
+    command_id: str,
+    host_platform: str,
+    *,
+    terminal: "_TerminalSession | _InlineTerminalSession",
+) -> list[str] | None:
+    scope_entry = _run_choice_menu(
+        _build_choice_entries(
+            "范围",
+            [
+                {"command": {"id": "scope-default", "title": "默认目标", "scope": "default"}, "syntax": "default"},
+                {"command": {"id": "scope-specific", "title": "指定目标", "scope": "specific"}, "syntax": "specific"},
+                {"command": {"id": "scope-all-targets", "title": "全部支持目标", "scope": "all-targets"}, "syntax": "all-targets"},
+            ],
+        ),
+        title="选择 Core 目标范围",
+        terminal=terminal,
+    )
+    if scope_entry is None:
+        return None
+
+    argv = [
+        "generate" if command_id == "generate-project-core" else "build",
+        "project",
+        "core",
+        "--host",
+        host_platform,
+    ]
+    scope = str(scope_entry.command["scope"])
+    selected_target_id = ""
+    if scope == "specific":
+        target_entry = _run_choice_menu(
+            _build_choice_entries(
+                "Targets",
+                [
+                    {
+                        "command": {
+                            "id": f"target-option:{target_id}",
+                            "title": target_id,
+                            "target_id": target_id,
+                        },
+                        "syntax": target_id,
+                    }
+                    for target_id in _core_target_ids(host_platform)
+                ],
+            ),
+            title="选择 Core Target",
+            terminal=terminal,
+        )
+        if target_entry is None:
+            return None
+        selected_target_id = str(target_entry.command["target_id"])
+        argv.extend(["--target", selected_target_id])
+    elif scope == "all-targets":
+        argv.append("--all-targets")
+
+    if not run_confirmation_screen(
+        "确认 Core 工程命令",
+        [
+            f"当前宿主: {host_platform}",
+            f"目标范围: {scope}",
+            f"Target: {selected_target_id or '(default)'}",
+            f"执行命令: {' '.join(argv)}",
+        ],
+        terminal=terminal,
+    ):
+        return None
+    return argv
+
+
+def run_confirmation_screen(
+    title: str,
+    lines: list[str],
+    *,
+    terminal: "_TerminalSession | _InlineTerminalSession",
+) -> bool:
+    while True:
+        screen_lines = [title, "", *lines, "", "Enter 确认，Esc/Q 返回。"]
+        terminal.render("\n".join(screen_lines) + "\n")
+        key = terminal.read_key()
+        if key == "enter":
+            return True
+        if key in {"escape", "quit"}:
+            return False
 
 
 def run_test_submenu(
@@ -977,10 +1611,11 @@ def render_menu_screen(
     width, height = shutil.get_terminal_size(fallback=(100, 30))
     rows = _build_rows(entries)
     selected_row = _find_selected_row(rows, selection)
+    detail_lines = _build_menu_detail_lines(entries[selection].command if entries else {})
     if fullscreen:
-        visible_body_height = max(6, height - 5)
+        visible_body_height = max(6, height - 5 - len(detail_lines) - (1 if detail_lines else 0))
     else:
-        visible_body_height = min(len(rows), max(6, min(14, height - 5)))
+        visible_body_height = min(len(rows), max(6, min(14, height - 5 - len(detail_lines) - (1 if detail_lines else 0))))
     scroll_top = _compute_scroll_top(selected_row, visible_body_height, len(rows))
     visible_rows = rows[scroll_top : scroll_top + visible_body_height]
     syntax_width = max(18, min(42, width // 3))
@@ -1011,11 +1646,35 @@ def render_menu_screen(
             body.append(f"{prefix}{_style_menu_syntax(syntax)}  {_style_menu_command_title(title)}")
 
     lines = header + body
+    if detail_lines:
+        lines.append("")
+        lines.extend(_trim(detail_line, width) for detail_line in detail_lines)
     if fullscreen:
         while len(lines) < height:
             lines.append("")
         return "\x1b[2J\x1b[H" + "\n".join(lines[:height])
     return "\n".join(lines)
+
+
+def _build_menu_detail_lines(command: dict[str, Any]) -> list[str]:
+    details = dict(command.get("details") or {})
+    if not details:
+        return []
+
+    lines = [_style_workspace_heading("选中项说明")]
+    ordered_fields = [
+        ("简介", "summary"),
+        ("输出", "outputs"),
+        ("目标范围", "target_scope"),
+        ("当前宿主支持", "host_support"),
+        ("执行命令", "command"),
+        ("备注", "notes"),
+    ]
+    for label, key in ordered_fields:
+        value = details.get(key)
+        if value:
+            lines.append(f"{label}: {value}")
+    return lines
 
 
 def render_test_progress_screen(events: list[dict[str, Any]], repo_root: Path | None = None) -> str:
