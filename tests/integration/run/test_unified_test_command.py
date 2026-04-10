@@ -8,9 +8,9 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 TEST_COMMAND_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "test.py"
-MANIFEST_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "manifest.py"
+MANIFEST_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "manifest.py"
 RUN_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "run.py"
-RESULT_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "result.py"
+RESULT_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "result.py"
 RUN_MANIFEST_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "run_manifest.json"
 
 

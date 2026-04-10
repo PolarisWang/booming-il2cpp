@@ -151,12 +151,17 @@ class RepoLayoutTests(unittest.TestCase):
         self.assertEqual([], offenders)
 
     def test_contract_snapshot_baselines_live_under_contracts_tree(self) -> None:
-        snapshot_root = REPO_ROOT / "contracts" / "artifacts" / "v0" / "snapshots"
+        snapshot_root = REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "snapshots"
 
         self.assertTrue(snapshot_root.is_dir(), msg=f"missing snapshot root: {snapshot_root}")
         self.assertGreater(len(list(snapshot_root.glob("*.snapshot.json"))), 0)
         self.assertFalse((REPO_ROOT / "tests" / "contracts" / "schema").exists())
         self.assertFalse((REPO_ROOT / "tests" / "contract" / "schema").exists())
+        self.assertFalse((REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples").exists())
+        self.assertFalse((REPO_ROOT / "contracts" / "artifacts" / "v0" / "snapshots").exists())
+        self.assertFalse((REPO_ROOT / "contracts" / "examples").exists())
+        self.assertFalse((REPO_ROOT / "contracts" / "native" / "examples").exists())
+        self.assertFalse((REPO_ROOT / "tests" / "contract").exists())
 
     def test_tests_proof_tree_only_keeps_generic_guidance(self) -> None:
         proof_root = REPO_ROOT / "tests" / "proof"
@@ -251,6 +256,55 @@ class RepoLayoutTests(unittest.TestCase):
                 offenders.append(str(path.relative_to(REPO_ROOT).as_posix()))
 
         self.assertEqual([], offenders)
+
+    def test_contracts_dir_contains_only_formal_definitions(self) -> None:
+        contracts_root = REPO_ROOT / "contracts"
+        forbidden_subdirs = ["samples", "snapshots", "examples"]
+        offenders: list[str] = []
+        for subdir in contracts_root.rglob("*"):
+            if subdir.is_dir() and subdir.name in forbidden_subdirs:
+                offenders.append(str(subdir.relative_to(REPO_ROOT).as_posix()))
+
+        self.assertEqual([], offenders, msg="contracts/ must only contain formal definitions, not concrete fixtures")
+
+    def test_run_tooling_uses_domain_based_core_layout(self) -> None:
+        run_root = REPO_ROOT / "build" / "toolchains" / "run"
+        core_root = run_root / "core"
+        subject_root = run_root / "subject"
+
+        self.assertTrue(core_root.is_dir(), msg="build/toolchains/run/core/ must exist")
+        self.assertTrue(subject_root.is_dir(), msg="build/toolchains/run/subject/ must exist")
+        self.assertTrue((core_root / "common.py").is_file())
+        self.assertTrue((core_root / "manifest.py").is_file())
+        self.assertTrue((core_root / "result.py").is_file())
+        self.assertTrue((core_root / "tooling.py").is_file())
+        self.assertTrue((subject_root / "project_workspace.py").is_file())
+        self.assertFalse((run_root / "common.py").exists(), msg="common.py must be in core/")
+        self.assertFalse((run_root / "manifest.py").exists(), msg="manifest.py must be in core/")
+        self.assertFalse((run_root / "result.py").exists(), msg="result.py must be in core/")
+        self.assertFalse((run_root / "tooling.py").exists(), msg="tooling.py must be in core/")
+        self.assertFalse((run_root / "project_workspace.py").exists(), msg="project_workspace.py must be in subject/")
+
+    def test_manifest_shard_directory_exists(self) -> None:
+        shard_dir = REPO_ROOT / "build" / "toolchains" / "run" / "manifests" / "run"
+        self.assertTrue(shard_dir.is_dir(), msg="manifest shard directory must exist")
+        self.assertTrue((shard_dir / "groups.json").is_file())
+        self.assertGreater(len(list(shard_dir.glob("commands.*.json"))), 0)
+
+    def test_managed_codegen_uses_lowering_subdirectory(self) -> None:
+        codegen_root = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen"
+        lowering_root = codegen_root / "Lowering"
+        self.assertTrue(lowering_root.is_dir(), msg="CodeGen/Lowering/ subdirectory must exist")
+
+    def test_managed_loader_uses_metadata_subdirectory(self) -> None:
+        loader_root = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader"
+        metadata_root = loader_root / "Metadata"
+        models_root = loader_root / "Models"
+        self.assertTrue(metadata_root.is_dir(), msg="Loader/Metadata/ subdirectory must exist")
+        self.assertTrue(models_root.is_dir(), msg="Loader/Models/ subdirectory must exist")
+        self.assertTrue((metadata_root / "MetadataTypeResolver.cs").is_file())
+        self.assertTrue((metadata_root / "TypeProviders.cs").is_file())
+        self.assertTrue((models_root / "LoaderModels.cs").is_file())
 
 
 if __name__ == "__main__":

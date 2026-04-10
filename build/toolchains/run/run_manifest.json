@@ -835,7 +835,7 @@
       "kind": "python-unittest",
       "target": "managed-closure-bundle",
       "test_module": "tests.unit.run.test_managed_closure_contract_bundle",
-      "artifacts": ["contracts/artifacts/v0/samples"],
+      "artifacts": ["tests/contracts/analysis/v0/samples"],
       "show_in_menu": false,
       "public": false,
       "replacement_syntax": "test contract managed-closure-bundle",

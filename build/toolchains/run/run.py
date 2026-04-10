@@ -15,12 +15,12 @@ if __package__ in (None, ""):
     from commands import prepare as prepare_commands
     from commands import project as project_commands
     from commands import test as test_commands
-    import manifest as manifest_module
-    import operation_reporting as operation_reporting_module
+    from core import manifest as manifest_module
+    from core import operation_reporting as operation_reporting_module
     import runtime as runtime_module
     import tui as tui_module
     from testing.events import build_event
-    from result import CommandResult
+    from core.result import CommandResult
 else:
     from .commands import clean as clean_commands
     from .commands import deploy as deploy_commands
@@ -30,12 +30,12 @@ else:
     from .commands import prepare as prepare_commands
     from .commands import project as project_commands
     from .commands import test as test_commands
-    from . import manifest as manifest_module
-    from . import operation_reporting as operation_reporting_module
+    from .core import manifest as manifest_module
+    from .core import operation_reporting as operation_reporting_module
     from . import runtime as runtime_module
     from . import tui as tui_module
     from .testing.events import build_event
-    from .result import CommandResult
+    from .core.result import CommandResult
 
 
 OPERATION_HANDLERS = {"build.dispatch", "prepare.dispatch", "project.dispatch", "deploy.dispatch"}

@@ -5,12 +5,12 @@ from dataclasses import dataclass
 from pathlib import Path
 
 try:
-    from ..common import write_json
+    from ..core.common import write_json
     from .suite_manifest import SuiteManifest, load_suite_manifest
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    from common import write_json
+    from core.common import write_json
     from testing.suite_manifest import SuiteManifest, load_suite_manifest
 
 

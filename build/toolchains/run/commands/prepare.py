@@ -6,10 +6,10 @@ from pathlib import Path
 from typing import Any, Callable
 
 try:
-    from ..common import write_json
-    from ..result import CommandResult
-    from .. import manifest as manifest_module
-    from .. import tooling as tooling_module
+    from ..core.common import write_json
+    from ..core.result import CommandResult
+    from ..core import manifest as manifest_module
+    from ..core import tooling as tooling_module
     from ..testing.events import build_event
     from . import doctor as doctor_commands
     from . import build as build_commands
@@ -17,10 +17,10 @@ try:
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    from common import write_json
-    from result import CommandResult
-    import manifest as manifest_module
-    import tooling as tooling_module
+    from core.common import write_json
+    from core.result import CommandResult
+    from core import manifest as manifest_module
+    from core import tooling as tooling_module
     from testing.events import build_event
     from commands import doctor as doctor_commands
     from commands import build as build_commands

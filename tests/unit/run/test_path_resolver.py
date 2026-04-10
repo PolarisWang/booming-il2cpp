@@ -40,21 +40,19 @@ class PathResolverTests(unittest.TestCase):
             roots["artifactSchemaRoot"],
         )
         self.assertEqual(
-            REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples",
+            REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples",
             roots["artifactSampleRoot"],
         )
         self.assertEqual(
-            REPO_ROOT / "contracts" / "native" / "v0" / "samples",
+            REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "snapshots",
+            roots["artifactSnapshotRoot"],
+        )
+        self.assertEqual(
+            REPO_ROOT / "tests" / "contracts" / "native" / "v0" / "samples",
             roots["nativeSampleRoot"],
         )
-        self.assertEqual(
-            REPO_ROOT / "contracts" / "examples" / "v0" / "artifacts",
-            roots["artifactSampleCompatibilityRoot"],
-        )
-        self.assertEqual(
-            REPO_ROOT / "contracts" / "native" / "examples" / "v0",
-            roots["nativeSampleCompatibilityRoot"],
-        )
+        self.assertNotIn("artifactSampleCompatibilityRoot", roots)
+        self.assertNotIn("nativeSampleCompatibilityRoot", roots)
         self.assertNotIn("analysisCompatibilityExampleRoot", roots)
 
     def test_subject_helper_delegates_root_resolution_to_path_resolver(self) -> None:

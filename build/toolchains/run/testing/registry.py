@@ -7,12 +7,12 @@ from typing import Any
 import sys
 
 try:
-    from ..common import read_json, write_json
+    from ..core.common import read_json, write_json
     from . import subjects as subjects_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    from common import read_json, write_json
+    from core.common import read_json, write_json
     from testing import subjects as subjects_module
 
 

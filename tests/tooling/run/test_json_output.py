@@ -8,7 +8,7 @@ from tests.support import select_public_suite_spec
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-RESULT_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "result.py"
+RESULT_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "result.py"
 
 
 def load_result_module():

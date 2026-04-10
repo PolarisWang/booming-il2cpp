@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-COMMON_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "common.py"
+COMMON_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "common.py"
 
 
 def load_module(path: Path, module_name: str):

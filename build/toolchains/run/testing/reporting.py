@@ -9,13 +9,13 @@ from typing import Any
 from uuid import uuid4
 
 try:
-    from ..common import read_json, write_json
+    from ..core.common import read_json, write_json
     from .events import build_event
     from .traffic_light import TRAFFIC_LIGHT_BUCKETS
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    from common import read_json, write_json
+    from core.common import read_json, write_json
     from testing.events import build_event
     from testing.traffic_light import TRAFFIC_LIGHT_BUCKETS
 

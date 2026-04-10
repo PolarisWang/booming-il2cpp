@@ -1,0 +1,540 @@
+{
+  "group": "test-and-verify",
+  "commands": [
+    {
+      "id": "test-suite",
+      "title": "Run a suite by selector or object id",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "suite"
+      ],
+      "syntax": "test suite (--id <family/suite> | --family <family> --suite <suite>)",
+      "show_in_menu": true,
+      "examples": [
+        "run test suite --id smoke/HelloWorld",
+        "run test suite --family smoke --suite HelloWorld"
+      ]
+    },
+    {
+      "id": "test-subject",
+      "title": "Run a subject by selector or object id",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "test",
+        "subject"
+      ],
+      "syntax": "test subject --id subject/<subject>",
+      "show_in_menu": true,
+      "examples": [
+        "run test subject --id subject/<subject-id>"
+      ]
+    },
+    {
+      "id": "test-module",
+      "title": "Run a module verification by selector or object id",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "module"
+      ],
+      "syntax": "test module (--id module/<module>/<profile> | --module <module> --profile <profile>)",
+      "show_in_menu": true,
+      "examples": [
+        "run test module --id module/managed-smoke/basic",
+        "run test module --module managed-smoke --profile basic"
+      ]
+    },
+    {
+      "id": "test-system",
+      "title": "Run a system validation scenario by selector or object id",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "system"
+      ],
+      "syntax": "test system (--id system/<scenario> | --scenario <scenario>)",
+      "show_in_menu": true,
+      "examples": [
+        "run test system --id system/hosted-runtime-smoke",
+        "run test system --scenario hosted-runtime-smoke"
+      ]
+    },
+    {
+      "id": "test-pipeline",
+      "title": "Run a test pipeline by selector or object id",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "pipeline"
+      ],
+      "syntax": "test pipeline (--id pipeline/<pipeline> | --pipeline <pipeline>)",
+      "show_in_menu": true,
+      "examples": [
+        "run test pipeline --id pipeline/completion-runtime-core",
+        "run test pipeline --pipeline completion-runtime-core"
+      ]
+    },
+    {
+      "id": "test-family-suite",
+      "title": "Run a test suite from a public family",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test"
+      ],
+      "syntax": "test <family> <suite>",
+      "show_in_menu": true,
+      "examples": [
+        "run test smoke HelloWorld",
+        "run test workflow runtime-baseline-macos"
+      ]
+    },
+    {
+      "id": "test-family-all",
+      "title": "Run all suites in a public test family",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test"
+      ],
+      "syntax": "test <family> all",
+      "show_in_menu": true,
+      "examples": [
+        "run test smoke all",
+        "run test workflow all"
+      ]
+    },
+    {
+      "id": "test-all",
+      "title": "Run the default batch of public test families",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test"
+      ],
+      "syntax": "test all",
+      "show_in_menu": true,
+      "examples": [
+        "run test all"
+      ]
+    },
+    {
+      "id": "test-smoke-helloworld",
+      "title": "Run the HelloWorld managed smoke test",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "smoke",
+        "HelloWorld"
+      ],
+      "kind": "smoke-run",
+      "target": "HelloWorld",
+      "project_path": "subjects/HelloWorld/source/HelloWorld.csproj",
+      "dll_path": "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll",
+      "expected_patterns": [
+        "HelloWorld smoke entry reached.",
+        "register:Main"
+      ],
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke HelloWorld",
+      "examples": [
+        "run test smoke HelloWorld"
+      ]
+    },
+    {
+      "id": "test-smoke-genericecho",
+      "title": "Run the GenericEcho managed smoke test",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "smoke",
+        "GenericEcho"
+      ],
+      "kind": "smoke-run",
+      "target": "GenericEcho",
+      "project_path": "subjects/GenericEcho/source/GenericEcho.csproj",
+      "dll_path": "artifacts/smoke/bin/GenericEcho/Release/net8.0/GenericEcho.dll",
+      "expected_patterns": [
+        "roadmap0",
+        "42",
+        "roadmap0:roadmap0"
+      ],
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke GenericEcho",
+      "examples": [
+        "run test smoke GenericEcho"
+      ]
+    },
+    {
+      "id": "test-smoke-reflectionlite",
+      "title": "Run the ReflectionLite managed smoke test",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "smoke",
+        "ReflectionLite"
+      ],
+      "kind": "smoke-run",
+      "target": "ReflectionLite",
+      "project_path": "subjects/ReflectionLite/source/ReflectionLite.csproj",
+      "dll_path": "artifacts/smoke/bin/ReflectionLite/Release/net8.0/ReflectionLite.dll",
+      "expected_patterns": [
+        "field=BackingField:Int32",
+        "generic-method=String"
+      ],
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke ReflectionLite",
+      "examples": [
+        "run test smoke ReflectionLite"
+      ]
+    },
+    {
+      "id": "test-smoke-pinvokelite",
+      "title": "Run the PInvokeLite managed smoke test",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "smoke",
+        "PInvokeLite"
+      ],
+      "kind": "smoke-run",
+      "target": "PInvokeLite",
+      "project_path": "subjects/PInvokeLite/source/PInvokeLite.csproj",
+      "dll_path": "artifacts/smoke/bin/PInvokeLite/Release/net8.0/PInvokeLite.dll",
+      "expected_patterns": [
+        "marshal=interop-smoke",
+        "export=chaos_smoke_add:7",
+        "symbol=True"
+      ],
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke PInvokeLite",
+      "examples": [
+        "run test smoke PInvokeLite"
+      ]
+    },
+    {
+      "id": "test-smoke-hostembeddinglite",
+      "title": "Run the HostEmbeddingLite managed smoke test",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "smoke",
+        "HostEmbeddingLite"
+      ],
+      "kind": "smoke-run",
+      "target": "HostEmbeddingLite",
+      "project_path": "subjects/HostEmbeddingLite/source/HostEmbeddingLite.csproj",
+      "dll_path": "artifacts/smoke/bin/HostEmbeddingLite/Release/net8.0/HostEmbeddingLite.dll",
+      "expected_patterns": [
+        "HostEmbeddingSession:InvokeManagedEntry:True",
+        "guards=invalid-detach:True|double-start:True|unattached-entry:True"
+      ],
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke HostEmbeddingLite",
+      "examples": [
+        "run test smoke HostEmbeddingLite"
+      ]
+    },
+    {
+      "id": "test-contract-analysis-schema",
+      "title": "Validate the analysis schema/example/snapshot contracts",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "contract",
+        "analysis-schema"
+      ],
+      "kind": "contract-check",
+      "target": "analysis-schema",
+      "contract_check": "analysis-schema",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test contract analysis-schema",
+      "examples": [
+        "run test contract analysis-schema"
+      ]
+    },
+    {
+      "id": "test-contract-trace-schema",
+      "title": "Validate the warmup trace schema and snapshots",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "contract",
+        "trace-schema"
+      ],
+      "kind": "contract-check",
+      "target": "trace-schema",
+      "contract_check": "trace-schema",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test contract trace-schema",
+      "examples": [
+        "run test contract trace-schema"
+      ]
+    },
+    {
+      "id": "test-contract-managed-closure-bundle",
+      "title": "Validate the managed closure proof bundle",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "contract",
+        "managed-closure-bundle"
+      ],
+      "kind": "python-unittest",
+      "target": "managed-closure-bundle",
+      "test_module": "tests.unit.run.test_managed_closure_contract_bundle",
+      "artifacts": [
+        "tests/contracts/analysis/v0/samples"
+      ],
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test contract managed-closure-bundle",
+      "examples": [
+        "run test contract managed-closure-bundle"
+      ]
+    },
+    {
+      "id": "test-workflow-runtime-baseline-windows",
+      "title": "Run the Windows runtime-baseline workflow via the unified system object",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "test",
+        "workflow",
+        "runtime-baseline-windows"
+      ],
+      "kind": "registry-object-alias",
+      "target": "runtime-baseline-windows",
+      "registry_object_kind": "system",
+      "registry_object_id": "system/runtime-baseline-windows",
+      "show_in_menu": false,
+      "public": false,
+      "examples": [
+        "run test workflow runtime-baseline-windows"
+      ]
+    },
+    {
+      "id": "test-workflow-runtime-baseline-macos",
+      "title": "Run the macOS runtime-baseline workflow via the unified system object",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "macos"
+      ],
+      "tokens": [
+        "test",
+        "workflow",
+        "runtime-baseline-macos"
+      ],
+      "kind": "registry-object-alias",
+      "target": "runtime-baseline-macos",
+      "registry_object_kind": "system",
+      "registry_object_id": "system/runtime-baseline-macos",
+      "show_in_menu": false,
+      "public": false,
+      "examples": [
+        "run test workflow runtime-baseline-macos"
+      ]
+    },
+    {
+      "id": "test-workflow-roadmap-0-windows",
+      "title": "Run the legacy Windows roadmap-0 workflow via the unified system object",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "test",
+        "workflow",
+        "roadmap-0-windows"
+      ],
+      "kind": "registry-object-alias",
+      "target": "roadmap-0-windows",
+      "registry_object_kind": "system",
+      "registry_object_id": "system/runtime-baseline-windows",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test workflow runtime-baseline-windows",
+      "examples": [
+        "run test workflow roadmap-0-windows"
+      ]
+    },
+    {
+      "id": "test-workflow-roadmap-0-macos",
+      "title": "Run the legacy macOS roadmap-0 workflow via the unified system object",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "macos"
+      ],
+      "tokens": [
+        "test",
+        "workflow",
+        "roadmap-0-macos"
+      ],
+      "kind": "registry-object-alias",
+      "target": "roadmap-0-macos",
+      "registry_object_kind": "system",
+      "registry_object_id": "system/runtime-baseline-macos",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test workflow runtime-baseline-macos",
+      "examples": [
+        "run test workflow roadmap-0-macos"
+      ]
+    },
+    {
+      "id": "test-trace-compare-windows",
+      "title": "Compare the Windows warmup trace snapshot",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "test",
+        "trace-compare",
+        "windows"
+      ],
+      "kind": "trace-compare",
+      "target": "windows",
+      "subject_id": "HostEmbeddingLite",
+      "goal_id": "correctness.platform",
+      "matrix_id": "windows-managed-trace",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test contract trace-compare-windows",
+      "examples": [
+        "run test trace-compare windows"
+      ]
+    },
+    {
+      "id": "test-trace-compare-macos",
+      "title": "Compare the macOS warmup trace snapshot",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": [
+        "macos"
+      ],
+      "tokens": [
+        "test",
+        "trace-compare",
+        "macos"
+      ],
+      "kind": "trace-compare",
+      "target": "macos",
+      "subject_id": "HostEmbeddingLite",
+      "goal_id": "correctness.platform",
+      "matrix_id": "macos-managed-trace",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test contract trace-compare-macos",
+      "examples": [
+        "run test trace-compare macos"
+      ]
+    }
+  ]
+}

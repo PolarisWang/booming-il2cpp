@@ -280,7 +280,7 @@ class SubjectWorkersTests(unittest.TestCase):
             report = json.loads((repo_root / request["paths"]["reportPaths"][0]).read_text(encoding="utf-8"))
             self.assertEqual("ok", report["status"])
             self.assertEqual("contracts/artifacts/v0/schemas", report["schemaPath"])
-            self.assertEqual("contracts/artifacts/v0/snapshots", report["snapshotPath"])
+            self.assertEqual("tests/contracts/analysis/v0/snapshots", report["snapshotPath"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

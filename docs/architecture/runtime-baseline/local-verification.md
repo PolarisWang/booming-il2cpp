@@ -30,8 +30,8 @@
 
 - `cmake --list-presets`
 - `contracts/artifacts/v0/schemas/*.json`
-- `contracts/artifacts/v0/samples/*.json`
-- `contracts/artifacts/v0/snapshots/*.json`
+- `tests/contracts/analysis/v0/samples/*.json`
+- `tests/contracts/analysis/v0/snapshots/*.json`
 - `CMakePresets.json`
 - `tests/contracts/trace/**/*.json`
 - analysis schema/example/snapshot 契约校验

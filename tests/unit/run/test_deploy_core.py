@@ -11,7 +11,7 @@ from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-DEPLOY_LAYOUT_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "deploy_layout.py"
+DEPLOY_LAYOUT_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "subject" / "deploy_layout.py"
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "deploy-core"
 
 

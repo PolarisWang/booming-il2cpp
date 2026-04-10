@@ -5,12 +5,12 @@ from typing import Any
 import sys
 
 try:
-    from ..common import read_json
+    from ..core.common import read_json
     from . import path_resolver as path_resolver_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    from common import read_json
+    from core.common import read_json
     from testing import path_resolver as path_resolver_module
 
 

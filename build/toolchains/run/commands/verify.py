@@ -5,16 +5,16 @@ from pathlib import Path
 from typing import Any, Callable
 
 try:
-    from .. import tooling as tooling_module
-    from ..common import combine_process_output, run_process
-    from ..result import CommandResult
+    from ..core import tooling as tooling_module
+    from ..core.common import combine_process_output, run_process
+    from ..core.result import CommandResult
     from ..testing.events import build_event
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    import tooling as tooling_module
-    from common import combine_process_output, run_process
-    from result import CommandResult
+    from core import tooling as tooling_module
+    from core.common import combine_process_output, run_process
+    from core.result import CommandResult
     from testing.events import build_event
 
 

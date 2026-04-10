@@ -4,13 +4,13 @@ import sys
 from pathlib import Path
 
 try:
-    from .. import project_workspace as workspace_module
-    from ..result import CommandResult
+    from ..subject import project_workspace as workspace_module
+    from ..core.result import CommandResult
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    import project_workspace as workspace_module
-    from result import CommandResult
+    from subject import project_workspace as workspace_module
+    from core.result import CommandResult
 
 
 def handle(

@@ -4,11 +4,11 @@ import sys
 from pathlib import Path
 
 try:
-    from ..result import CommandResult
+    from ..core.result import CommandResult
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    from result import CommandResult
+    from core.result import CommandResult
 
 
 def handle(host_platform: str) -> CommandResult:

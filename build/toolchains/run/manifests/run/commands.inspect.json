@@ -1,0 +1,172 @@
+{
+  "group": "inspect",
+  "commands": [
+    {
+      "id": "help",
+      "title": "Show command help",
+      "group": "Inspect",
+      "handler": "inspect.help",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "help"
+      ],
+      "show_in_menu": true,
+      "examples": [
+        "run help",
+        "run --json"
+      ]
+    },
+    {
+      "id": "capability",
+      "title": "Describe a capability",
+      "group": "Inspect",
+      "handler": "inspect.capability",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "capability"
+      ],
+      "show_in_menu": true,
+      "examples": [
+        "run capability bootstrap",
+        "run capability bootstrap --json"
+      ]
+    },
+    {
+      "id": "test-registry-refresh",
+      "title": "Refresh the unified registry snapshot",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "registry",
+        "refresh"
+      ],
+      "syntax": "test registry refresh",
+      "show_in_menu": true,
+      "examples": [
+        "run test registry refresh",
+        "run test registry refresh --json"
+      ]
+    },
+    {
+      "id": "test-registry-list",
+      "title": "List unified registry objects",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "registry",
+        "list"
+      ],
+      "syntax": "test registry list",
+      "show_in_menu": true,
+      "examples": [
+        "run test registry list",
+        "run test registry list --json"
+      ]
+    },
+    {
+      "id": "test-registry-check-consistency",
+      "title": "Check registry and wiki consistency",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "registry",
+        "check-consistency"
+      ],
+      "syntax": "test registry check-consistency",
+      "show_in_menu": true,
+      "examples": [
+        "run test registry check-consistency",
+        "run test registry check-consistency --json"
+      ]
+    },
+    {
+      "id": "test-list",
+      "title": "List public test suites",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "list"
+      ],
+      "syntax": "test list [family]",
+      "show_in_menu": true,
+      "examples": [
+        "run test list",
+        "run test list smoke --json"
+      ]
+    },
+    {
+      "id": "test-watch",
+      "title": "Show the latest overall test progress snapshot",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "watch"
+      ],
+      "syntax": "test watch [run-id|last]",
+      "show_in_menu": false,
+      "examples": [
+        "run test watch",
+        "run test watch last"
+      ]
+    },
+    {
+      "id": "test-summary",
+      "title": "Show the latest overall test summary",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "summary"
+      ],
+      "syntax": "test summary [run-id|last]",
+      "show_in_menu": false,
+      "examples": [
+        "run test summary",
+        "run test summary last"
+      ]
+    }
+  ]
+}

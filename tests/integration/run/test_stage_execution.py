@@ -11,8 +11,8 @@ from unittest.mock import patch
 REPO_ROOT = Path(__file__).resolve().parents[3]
 RUN_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "run.py"
 TEST_COMMAND_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "test.py"
-MANIFEST_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "manifest.py"
-RESULT_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "result.py"
+MANIFEST_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "manifest.py"
+RESULT_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "result.py"
 RUN_MANIFEST_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "run_manifest.json"
 
 

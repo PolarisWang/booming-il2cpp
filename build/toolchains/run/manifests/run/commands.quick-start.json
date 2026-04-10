@@ -1,0 +1,61 @@
+{
+  "group": "quick-start",
+  "commands": [
+    {
+      "id": "menu",
+      "title": "Show the interactive menu",
+      "group": "Quick Start",
+      "handler": "inspect.menu",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "menu"
+      ],
+      "show_in_menu": false,
+      "examples": [
+        "run menu"
+      ]
+    },
+    {
+      "id": "list",
+      "title": "List available capabilities",
+      "group": "Quick Start",
+      "handler": "inspect.list",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "list"
+      ],
+      "show_in_menu": true,
+      "examples": [
+        "run list",
+        "run list --json"
+      ]
+    },
+    {
+      "id": "doctor",
+      "title": "Check the currently available local toolchain",
+      "group": "Quick Start",
+      "handler": "doctor.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "doctor"
+      ],
+      "show_in_menu": true,
+      "examples": [
+        "run doctor",
+        "run doctor --json"
+      ]
+    }
+  ]
+}

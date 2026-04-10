@@ -9,7 +9,7 @@ from tests.support import load_public_specs_module, select_public_suite_spec, se
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-MANIFEST_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "manifest.py"
+MANIFEST_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "manifest.py"
 RUN_MANIFEST_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "run_manifest.json"
 
 

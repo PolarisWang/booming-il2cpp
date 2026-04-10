@@ -15,15 +15,15 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
 CONTRACT_OVERVIEW_PATH = REPO_ROOT / "contracts" / "docs" / "v0" / "overview.md"
 SPEC_DOC_PATH = REPO_ROOT / "docs" / "architecture" / "roadmap-0" / "managed-minimal-closure-v0.md"
-TOOLING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "tooling.py"
+TOOLING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "tooling.py"
 
 EXPECTED_ARTIFACTS = {
-    "typed-il-ir.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "typed-il-ir.min.json",
-    "aot-manifest.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "aot-manifest.min.json",
-    "metadata-registration.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "metadata-registration.min.json",
-    "code-registration.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "code-registration.min.json",
-    "optimization-facts.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "optimization-facts.min.json",
-    "native-reference.lowering-plan.json": REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "native-reference.lowering-plan.min.json",
+    "typed-il-ir.json": REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "typed-il-ir.min.json",
+    "aot-manifest.json": REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "aot-manifest.min.json",
+    "metadata-registration.json": REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "metadata-registration.min.json",
+    "code-registration.json": REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "code-registration.min.json",
+    "optimization-facts.json": REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "optimization-facts.min.json",
+    "native-reference.lowering-plan.json": REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "native-reference.lowering-plan.min.json",
 }
 METADATA_REGISTRATION_MINIMAL_KEYS = ("registrationKind", "slot", "subjectId")
 TEST_INTERMEDIATE_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "managed-closure-contract"

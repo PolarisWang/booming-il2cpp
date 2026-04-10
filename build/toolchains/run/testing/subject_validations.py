@@ -6,14 +6,14 @@ from typing import Any
 import sys
 
 try:
-    from ..common import combine_process_output, run_process
-    from .. import tooling as tooling_module
+    from ..core.common import combine_process_output, run_process
+    from ..core import tooling as tooling_module
     from . import subjects as subjects_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    from common import combine_process_output, run_process
-    import tooling as tooling_module
+    from core.common import combine_process_output, run_process
+    from core import tooling as tooling_module
     from testing import subjects as subjects_module
 
 

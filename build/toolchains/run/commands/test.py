@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 try:
-    from .. import manifest as manifest_module
+    from ..core import manifest as manifest_module
     from .. import tui as tui_module
     from ..testing import catalog as catalog_module
     from ..testing import contracts as contracts_module
@@ -20,14 +20,14 @@ try:
     from ..testing import subject_planner as subject_planner_module
     from ..testing import subject_reporting as subject_reporting_module
     from ..testing import subject_validations as subject_validations_module
-    from .. import tooling as tooling_module
-    from ..common import combine_process_output, run_process
+    from ..core import tooling as tooling_module
+    from ..core.common import combine_process_output, run_process
     from ..commands import build as build_commands
-    from ..result import CommandResult
+    from ..core.result import CommandResult
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    import manifest as manifest_module
+    from core import manifest as manifest_module
     import tui as tui_module
     from testing import catalog as catalog_module
     from testing import contracts as contracts_module
@@ -41,10 +41,10 @@ except ImportError:
     from testing import subject_planner as subject_planner_module
     from testing import subject_reporting as subject_reporting_module
     from testing import subject_validations as subject_validations_module
-    import tooling as tooling_module
-    from common import combine_process_output, run_process
+    from core import tooling as tooling_module
+    from core.common import combine_process_output, run_process
     from commands import build as build_commands
-    from result import CommandResult
+    from core.result import CommandResult
 
 
 PUBLIC_TEST_SPECS = public_specs_module.PUBLIC_TEST_SPECS

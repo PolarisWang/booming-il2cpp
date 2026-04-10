@@ -39,7 +39,7 @@ class PythonUnittestCommandTests(unittest.TestCase):
                     "kind": "python-unittest",
                     "target": "managed-closure-bundle",
                     "test_module": "tests.unit.run.test_managed_closure_contract_bundle",
-                    "artifacts": ["contracts/artifacts/v0/samples"],
+                    "artifacts": ["tests/contracts/analysis/v0/samples"],
                 },
                 REPO_ROOT,
                 "windows",
@@ -52,7 +52,7 @@ class PythonUnittestCommandTests(unittest.TestCase):
             cwd=REPO_ROOT,
         )
         self.assertEqual(
-            [str((REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples").resolve())],
+            [str((REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples").resolve())],
             result.payload["artifacts"],
         )
 

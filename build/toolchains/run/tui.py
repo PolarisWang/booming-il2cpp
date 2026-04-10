@@ -10,14 +10,14 @@ from typing import Any, Callable
 
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent))
-    import manifest as manifest_module
-    import project_workspace as project_workspace_module
+    from core import manifest as manifest_module
+    from subject import project_workspace as project_workspace_module
     from testing import public_specs as public_specs_module
     from testing import registry as registry_module
     from testing import subjects as subjects_module
 else:
-    from . import manifest as manifest_module
-    from . import project_workspace as project_workspace_module
+    from .core import manifest as manifest_module
+    from .subject import project_workspace as project_workspace_module
     from .testing import public_specs as public_specs_module
     from .testing import registry as registry_module
     from .testing import subjects as subjects_module

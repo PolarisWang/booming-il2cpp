@@ -6,11 +6,11 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from ..common import read_json
+    from ..core.common import read_json
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    from common import read_json
+    from core.common import read_json
 
 
 @dataclass(frozen=True)

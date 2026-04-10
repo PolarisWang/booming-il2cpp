@@ -16,11 +16,11 @@ from typing import Any
 
 if __package__ in (None, ""):
     sys.path.insert(0, str(Path(__file__).resolve().parent))
-    from common import join_relative, read_json, write_json
-    from result import CommandResult
+    from core.common import join_relative, read_json, write_json
+    from core.result import CommandResult
 else:
-    from .common import join_relative, read_json, write_json
-    from .result import CommandResult
+    from .core.common import join_relative, read_json, write_json
+    from .core.result import CommandResult
 
 
 DEFAULT_MANIFEST = Path("build/toolchains/run/runtime_manifest.json")

@@ -10,20 +10,20 @@ from pathlib import Path
 from typing import Any, Callable
 
 try:
-    from ..common import combine_process_output, run_process
-    from ..result import CommandResult
-    from .. import project_workspace as workspace_module
-    from .. import tooling as tooling_module
+    from ..core.common import combine_process_output, run_process
+    from ..core.result import CommandResult
+    from ..subject import project_workspace as workspace_module
+    from ..core import tooling as tooling_module
     from ..testing import reporting as reporting_module
     from ..testing import subject_executor as subject_executor_module
     from ..testing.events import build_event
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    from common import combine_process_output, run_process
-    from result import CommandResult
-    import project_workspace as workspace_module
-    import tooling as tooling_module
+    from core.common import combine_process_output, run_process
+    from core.result import CommandResult
+    from subject import project_workspace as workspace_module
+    from core import tooling as tooling_module
     from testing import reporting as reporting_module
     from testing import subject_executor as subject_executor_module
     from testing.events import build_event

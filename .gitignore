@@ -7,6 +7,7 @@ docs/executions/
 .vs/
 .vscode/
 .idea/
+.pytest_cache/
 *.suo
 *.user
 *.userosscache
@@ -24,15 +25,7 @@ solutions/
 !contracts/artifacts/v0/
 !contracts/artifacts/v0/schemas/
 !contracts/artifacts/v0/schemas/**
-!contracts/artifacts/v0/samples/
-!contracts/artifacts/v0/samples/**
-!contracts/examples/
-!contracts/examples/v0/
-!contracts/examples/v0/artifacts/
-!contracts/examples/v0/artifacts/**
 !contracts/native/v0/
-!contracts/native/v0/samples/
-!contracts/native/v0/samples/**
 
 # .NET outputs
 bin/

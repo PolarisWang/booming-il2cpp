@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-TOOLING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "tooling.py"
+TOOLING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "tooling.py"
 BUILD_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "build.py"
 TEST_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "test.py"
 
@@ -150,7 +150,7 @@ class DotnetBootstrapTests(unittest.TestCase):
         run_process_mock.assert_not_called()
 
     def test_workflow_suite_checks_dotnet_before_running(self) -> None:
-        manifest_module = load_module(REPO_ROOT / "build" / "toolchains" / "run" / "manifest.py", "chaos_run_manifest_dotnet_gate")
+        manifest_module = load_module(REPO_ROOT / "build" / "toolchains" / "run" / "core" / "manifest.py", "chaos_run_manifest_dotnet_gate")
         test_module = load_module(TEST_MODULE_PATH, "chaos_run_test_workflow_dotnet_gate")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, REPO_ROOT / "build" / "toolchains" / "run" / "run_manifest.json")
         bootstrap = test_module.tooling_module.ToolBootstrapResult(

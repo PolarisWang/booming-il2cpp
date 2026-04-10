@@ -5,15 +5,15 @@ import sys
 from pathlib import Path
 
 try:
-    from ..result import CommandResult
+    from ..core.result import CommandResult
     from .. import runtime as runtime_module
-    from .. import tooling as tooling_module
+    from ..core import tooling as tooling_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    from result import CommandResult
+    from core.result import CommandResult
     import runtime as runtime_module
-    import tooling as tooling_module
+    from core import tooling as tooling_module
 
 ANSI_BOLD_GREEN = "\x1b[1;32m"
 ANSI_BOLD_YELLOW = "\x1b[1;33m"

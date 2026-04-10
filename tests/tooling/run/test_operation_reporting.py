@@ -11,7 +11,7 @@ from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-OPERATION_REPORTING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "operation_reporting.py"
+OPERATION_REPORTING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "operation_reporting.py"
 EVENTS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "events.py"
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp_test_operation_reporting"
 

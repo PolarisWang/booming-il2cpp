@@ -6,7 +6,7 @@ using Scriban.Runtime;
 
 namespace Chaos.IL2CPP.CodeGen;
 
-public sealed class NativeReferenceLoweringPlanner
+public sealed partial class NativeReferenceLoweringPlanner
 {
     private const string ManagedDispatchVirtualInstanceMessageMinimal =
         "managed-dispatch.virtual-instance-message.minimal";
@@ -2366,5 +2366,4 @@ public sealed class NativeReferenceLoweringPlanner
     }
 }
 
-internal sealed record GeneratedTranslationUnitRenderPlan(Template Template, ScriptObject Model);
 

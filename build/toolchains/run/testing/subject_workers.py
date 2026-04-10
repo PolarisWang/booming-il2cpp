@@ -8,16 +8,16 @@ import sys
 import time
 
 try:
-    from ..common import combine_process_output, read_json, run_process, write_json
-    from .. import tooling as tooling_module
+    from ..core.common import combine_process_output, read_json, run_process, write_json
+    from ..core import tooling as tooling_module
     from . import contracts as contracts_module
     from . import perf as perf_module
     from . import subjects as subjects_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    from common import combine_process_output, read_json, run_process, write_json
-    import tooling as tooling_module
+    from core.common import combine_process_output, read_json, run_process, write_json
+    from core import tooling as tooling_module
     from testing import contracts as contracts_module
     from testing import perf as perf_module
     from testing import subjects as subjects_module
@@ -379,7 +379,7 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
             "validationKind": selection.get("validationKind"),
             "codegenMacros": list(variant_macros["codegen"]),
             "schemaPath": "contracts/artifacts/v0/schemas",
-            "snapshotPath": "contracts/artifacts/v0/snapshots",
+            "snapshotPath": "tests/contracts/analysis/v0/snapshots",
             "errors": [],
         },
     )

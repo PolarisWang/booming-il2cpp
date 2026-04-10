@@ -41,18 +41,18 @@ Stage 2 鐨勮亴璐ｄ笉鏄墦閫?managed closure 鎴?native runtime锛岃�
 
 Stage 2 閲囩敤浠ヤ笅鏂囦欢浣滀负 proof spec 鐨勪笂娓稿喕缁撶湡婧愶細
 
-- `contracts/artifacts/v0/samples/typed-il-ir.min.json`
-- `contracts/artifacts/v0/samples/aot-manifest.min.json`
-- `contracts/artifacts/v0/samples/code-registration.min.json`
-- `contracts/artifacts/v0/samples/metadata-registration.min.json`
-- `contracts/native/v0/samples/bridge/direct-call-landing.cpp`
+- `tests/contracts/analysis/v0/samples/typed-il-ir.min.json`
+- `tests/contracts/analysis/v0/samples/aot-manifest.min.json`
+- `tests/contracts/analysis/v0/samples/code-registration.min.json`
+- `tests/contracts/analysis/v0/samples/metadata-registration.min.json`
+- `tests/tests/contracts/native/v0/samples/bridge/direct-call-landing.cpp`
 
 鍏朵腑锛?
 
-- `contracts/artifacts/v0/samples/typed-il-ir.min.json` 鍥哄畾浜?3 涓柟娉曚綋鐨勬渶灏?IL 褰㈢姸
-- `contracts/artifacts/v0/samples/aot-manifest.min.json` 鍥哄畾浜?first-proof entry 涓?retained world 鏈€灏忛泦鍚?- `contracts/artifacts/v0/samples/code-registration.min.json` 鍥哄畾浜?generated method pointer 涓?symbol
-- `contracts/artifacts/v0/samples/metadata-registration.min.json` 鍥哄畾浜?assembly / type / field / method 娉ㄥ唽闆嗗悎
-- `contracts/native/v0/samples/bridge/direct-call-landing.cpp` 鍥哄畾浜?generated direct-call landing锛岃€屼笉鏄?`method_invoke` fallback
+- `tests/contracts/analysis/v0/samples/typed-il-ir.min.json` 鍥哄畾浜?3 涓柟娉曚綋鐨勬渶灏?IL 褰㈢姸
+- `tests/contracts/analysis/v0/samples/aot-manifest.min.json` 鍥哄畾浜?first-proof entry 涓?retained world 鏈€灏忛泦鍚?- `tests/contracts/analysis/v0/samples/code-registration.min.json` 鍥哄畾浜?generated method pointer 涓?symbol
+- `tests/contracts/analysis/v0/samples/metadata-registration.min.json` 鍥哄畾浜?assembly / type / field / method 娉ㄥ唽闆嗗悎
+- `tests/contracts/native/v0/samples/bridge/direct-call-landing.cpp` 鍥哄畾浜?generated direct-call landing锛岃€屼笉鏄?`method_invoke` fallback
 
 ## Shared Identity
 

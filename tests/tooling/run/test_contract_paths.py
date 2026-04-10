@@ -35,14 +35,15 @@ class ContractPathsTests(unittest.TestCase):
             paths,
         )
         self.assertIn(
-            REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "aot-manifest.min.json",
+            REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "aot-manifest.min.json",
             paths,
         )
-        self.assertIn(REPO_ROOT / "tests" / "contracts" / "schema" / "aot-manifest.snapshot.json", paths)
+        self.assertIn(
+            REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "snapshots" / "aot-manifest.snapshot.json", paths)
         self.assertNotIn(REPO_ROOT / "analysis" / "contracts" / "schemas" / "aot-manifest.schema.json", paths)
         self.assertNotIn(REPO_ROOT / "analysis" / "contracts" / "examples" / "aot-manifest.min.json", paths)
         self.assertNotIn(
-            REPO_ROOT / "contracts" / "examples" / "v0" / "artifacts" / "aot-manifest.min.json",
+            REPO_ROOT / "contracts" / "artifacts" / "v0" / "samples" / "aot-manifest.min.json",
             paths,
         )
         self.assertNotIn(REPO_ROOT / "tests" / "contract" / "schema" / "aot-manifest.snapshot.json", paths)

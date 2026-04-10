@@ -1,0 +1,272 @@
+{
+  "group": "environment",
+  "commands": [
+    {
+      "id": "bootstrap",
+      "title": "Bootstrap the cached Python runtime",
+      "group": "Environment",
+      "handler": "wrapper.bootstrap",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "bootstrap"
+      ],
+      "show_in_menu": true,
+      "examples": [
+        "run bootstrap --yes",
+        "run bootstrap --yes --json"
+      ]
+    },
+    {
+      "id": "prepare",
+      "title": "Prepare the current host's reusable environment",
+      "group": "Environment",
+      "handler": "prepare.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "prepare"
+      ],
+      "show_in_menu": true,
+      "examples": [
+        "run prepare",
+        "run prepare --json"
+      ]
+    },
+    {
+      "id": "prepare-smoke",
+      "title": "Prepare the managed smoke environment",
+      "group": "Environment",
+      "handler": "prepare.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "prepare",
+        "smoke"
+      ],
+      "show_in_menu": true,
+      "examples": [
+        "run prepare smoke"
+      ]
+    },
+    {
+      "id": "prepare-workflow-runtime-baseline-windows",
+      "title": "Prepare the Windows runtime-baseline workflow environment",
+      "group": "Environment",
+      "handler": "prepare.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "prepare",
+        "workflow",
+        "runtime-baseline"
+      ],
+      "options": {
+        "host": "windows"
+      },
+      "show_in_menu": true,
+      "examples": [
+        "run prepare workflow runtime-baseline --host windows"
+      ]
+    },
+    {
+      "id": "prepare-workflow-runtime-baseline-macos",
+      "title": "Prepare the macOS runtime-baseline workflow environment",
+      "group": "Environment",
+      "handler": "prepare.dispatch",
+      "platforms": [
+        "macos"
+      ],
+      "tokens": [
+        "prepare",
+        "workflow",
+        "runtime-baseline"
+      ],
+      "options": {
+        "host": "macos"
+      },
+      "show_in_menu": true,
+      "examples": [
+        "run prepare workflow runtime-baseline --host macos"
+      ]
+    },
+    {
+      "id": "prepare-verify-roadmap-0-windows",
+      "title": "Prepare the legacy Windows roadmap-0 workflow environment",
+      "group": "Environment",
+      "handler": "prepare.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "prepare",
+        "workflow",
+        "roadmap-0"
+      ],
+      "options": {
+        "host": "windows"
+      },
+      "show_in_menu": false,
+      "public": false,
+      "examples": [
+        "run prepare workflow roadmap-0 --host windows"
+      ]
+    },
+    {
+      "id": "prepare-verify-roadmap-0-macos",
+      "title": "Prepare the legacy macOS roadmap-0 workflow environment",
+      "group": "Environment",
+      "handler": "prepare.dispatch",
+      "platforms": [
+        "macos"
+      ],
+      "tokens": [
+        "prepare",
+        "workflow",
+        "roadmap-0"
+      ],
+      "options": {
+        "host": "macos"
+      },
+      "show_in_menu": false,
+      "public": false,
+      "examples": [
+        "run prepare workflow roadmap-0 --host macos"
+      ]
+    },
+    {
+      "id": "clean",
+      "title": "Clean all managed outputs produced by the unified entrypoint",
+      "group": "Environment",
+      "handler": "clean.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "clean"
+      ],
+      "clean_scope": "global",
+      "show_in_menu": true,
+      "examples": [
+        "run clean",
+        "run clean --json"
+      ]
+    },
+    {
+      "id": "clean-smoke",
+      "title": "Clean the managed smoke scope",
+      "group": "Environment",
+      "handler": "clean.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "clean"
+      ],
+      "options": {
+        "scope": "smoke"
+      },
+      "clean_scope": "smoke",
+      "show_in_menu": true,
+      "examples": [
+        "run clean --scope smoke"
+      ]
+    },
+    {
+      "id": "clean-workflow-runtime-baseline-windows",
+      "title": "Clean the Windows runtime-baseline workflow scope",
+      "group": "Environment",
+      "handler": "clean.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "clean"
+      ],
+      "options": {
+        "scope": "workflow-runtime-baseline-windows"
+      },
+      "clean_scope": "workflow-runtime-baseline-windows",
+      "show_in_menu": true,
+      "examples": [
+        "run clean --scope workflow-runtime-baseline-windows"
+      ]
+    },
+    {
+      "id": "clean-workflow-runtime-baseline-macos",
+      "title": "Clean the macOS runtime-baseline workflow scope",
+      "group": "Environment",
+      "handler": "clean.dispatch",
+      "platforms": [
+        "macos"
+      ],
+      "tokens": [
+        "clean"
+      ],
+      "options": {
+        "scope": "workflow-runtime-baseline-macos"
+      },
+      "clean_scope": "workflow-runtime-baseline-macos",
+      "show_in_menu": true,
+      "examples": [
+        "run clean --scope workflow-runtime-baseline-macos"
+      ]
+    },
+    {
+      "id": "clean-verify-roadmap0-windows",
+      "title": "Clean the legacy Windows roadmap-0 workflow scope",
+      "group": "Environment",
+      "handler": "clean.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "clean"
+      ],
+      "options": {
+        "scope": "workflow-roadmap0-windows"
+      },
+      "clean_scope": "workflow-roadmap0-windows",
+      "show_in_menu": false,
+      "public": false,
+      "examples": [
+        "run clean --scope workflow-roadmap0-windows"
+      ]
+    },
+    {
+      "id": "clean-verify-roadmap0-macos",
+      "title": "Clean the legacy macOS roadmap-0 workflow scope",
+      "group": "Environment",
+      "handler": "clean.dispatch",
+      "platforms": [
+        "macos"
+      ],
+      "tokens": [
+        "clean"
+      ],
+      "options": {
+        "scope": "workflow-roadmap0-macos"
+      },
+      "clean_scope": "workflow-roadmap0-macos",
+      "show_in_menu": false,
+      "public": false,
+      "examples": [
+        "run clean --scope workflow-roadmap0-macos"
+      ]
+    }
+  ]
+}

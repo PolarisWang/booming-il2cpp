@@ -47,13 +47,12 @@ def subject_perf_baseline_path(
 
 
 def contract_roots(repo_root: Path, *, version: str = "v0") -> dict[str, Path]:
-    artifact_version_root = repo_root / "contracts" / "artifacts" / version
-    native_version_root = repo_root / "contracts" / "native" / version
+    artifact_schema_root = repo_root / "contracts" / "artifacts" / version / "schemas"
+    analysis_version_root = repo_root / "tests" / "contracts" / "analysis" / version
+    native_version_root = repo_root / "tests" / "contracts" / "native" / version
     return {
-        "artifactSchemaRoot": artifact_version_root / "schemas",
-        "artifactSampleRoot": artifact_version_root / "samples",
-        "artifactSnapshotRoot": artifact_version_root / "snapshots",
+        "artifactSchemaRoot": artifact_schema_root,
+        "artifactSampleRoot": analysis_version_root / "samples",
+        "artifactSnapshotRoot": analysis_version_root / "snapshots",
         "nativeSampleRoot": native_version_root / "samples",
-        "artifactSampleCompatibilityRoot": repo_root / "contracts" / "examples" / version / "artifacts",
-        "nativeSampleCompatibilityRoot": repo_root / "contracts" / "native" / "examples" / version,
     }

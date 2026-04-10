@@ -5,15 +5,15 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from .. import manifest as manifest_module
+    from ..core import manifest as manifest_module
     from .. import menu as menu_module
-    from ..result import CommandResult
+    from ..core.result import CommandResult
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    import manifest as manifest_module
+    from core import manifest as manifest_module
     import menu as menu_module
-    from result import CommandResult
+    from core.result import CommandResult
 
 
 def render_help(manifest: dict[str, Any], host_platform: str) -> str:

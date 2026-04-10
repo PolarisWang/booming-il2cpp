@@ -1,0 +1,28 @@
+{
+  "groups": [
+    {
+      "id": "quick-start",
+      "title": "Quick Start"
+    },
+    {
+      "id": "project-and-ide",
+      "title": "Project And IDE"
+    },
+    {
+      "id": "build",
+      "title": "Build"
+    },
+    {
+      "id": "test-and-verify",
+      "title": "Test And Verify"
+    },
+    {
+      "id": "environment",
+      "title": "Environment"
+    },
+    {
+      "id": "inspect",
+      "title": "Inspect"
+    }
+  ]
+}

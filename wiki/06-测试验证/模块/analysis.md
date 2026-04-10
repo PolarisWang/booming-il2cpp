@@ -20,8 +20,8 @@ primaryModuleId: analysis
 ## 适用场景
 
 - 修改 `contracts/artifacts/v0/schemas/*.schema.json`
-- 修改 `contracts/artifacts/v0/samples/*.min.json`
-- 修改 `contracts/artifacts/v0/snapshots/*.snapshot.json`
+- 修改 `tests/contracts/analysis/v0/samples/*.min.json`
+- 修改 `tests/contracts/analysis/v0/snapshots/*.snapshot.json`
 
 ## 正式入口
 

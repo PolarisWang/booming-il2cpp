@@ -4,13 +4,13 @@ import sys
 from pathlib import Path
 
 try:
-    from .. import deploy_layout as deploy_layout_module
-    from ..result import CommandResult
+    from ..subject import deploy_layout as deploy_layout_module
+    from ..core.result import CommandResult
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    import deploy_layout as deploy_layout_module
-    from result import CommandResult
+    from subject import deploy_layout as deploy_layout_module
+    from core.result import CommandResult
 
 
 def handle(

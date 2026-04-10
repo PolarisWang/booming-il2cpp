@@ -1,0 +1,402 @@
+{
+  "group": "build",
+  "commands": [
+    {
+      "id": "build-all",
+      "title": "Build the recommended batch for the current host",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "build",
+        "all"
+      ],
+      "kind": "batch",
+      "target": "all",
+      "show_in_menu": true,
+      "examples": [
+        "run build all"
+      ]
+    },
+    {
+      "id": "deploy-core",
+      "title": "Produce the formal core deploy output",
+      "group": "Build",
+      "handler": "deploy.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "deploy",
+        "core"
+      ],
+      "syntax": "deploy core [--host windows|macos|linux] [--target <target-id>] [--all-targets]",
+      "kind": "core-deploy",
+      "show_in_menu": true,
+      "examples": [
+        "run deploy core --host windows --all-targets"
+      ]
+    },
+    {
+      "id": "build-native-contract-abi",
+      "title": "Build the native ABI contract smoke target",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "build",
+        "native-contract",
+        "abi"
+      ],
+      "kind": "native-contract",
+      "target": "abi",
+      "source_dir": "tests/contracts/native/abi",
+      "binary_dir": "artifacts/run/native-contract-abi",
+      "show_in_menu": true,
+      "examples": [
+        "run build native-contract abi"
+      ]
+    },
+    {
+      "id": "build-native-contract-bridge",
+      "title": "Build the native bridge contract smoke target",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "build",
+        "native-contract",
+        "bridge"
+      ],
+      "kind": "native-contract",
+      "target": "bridge",
+      "source_dir": "tests/contracts/native/bridge",
+      "binary_dir": "artifacts/run/native-contract-bridge",
+      "show_in_menu": true,
+      "examples": [
+        "run build native-contract bridge"
+      ]
+    },
+    {
+      "id": "build-smoke-helloworld",
+      "title": "Build the HelloWorld smoke project",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "build",
+        "smoke",
+        "HelloWorld"
+      ],
+      "kind": "smoke-project",
+      "target": "HelloWorld",
+      "project_path": "subjects/HelloWorld/source/HelloWorld.csproj",
+      "artifact_path": "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke HelloWorld --stage build",
+      "examples": [
+        "run build smoke HelloWorld"
+      ]
+    },
+    {
+      "id": "build-smoke-genericecho",
+      "title": "Build the GenericEcho smoke project",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "build",
+        "smoke",
+        "GenericEcho"
+      ],
+      "kind": "smoke-project",
+      "target": "GenericEcho",
+      "project_path": "subjects/GenericEcho/source/GenericEcho.csproj",
+      "artifact_path": "artifacts/smoke/bin/GenericEcho/Release/net8.0/GenericEcho.dll",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke GenericEcho --stage build",
+      "examples": [
+        "run build smoke GenericEcho"
+      ]
+    },
+    {
+      "id": "build-smoke-reflectionlite",
+      "title": "Build the ReflectionLite smoke project",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "build",
+        "smoke",
+        "ReflectionLite"
+      ],
+      "kind": "smoke-project",
+      "target": "ReflectionLite",
+      "project_path": "subjects/ReflectionLite/source/ReflectionLite.csproj",
+      "artifact_path": "artifacts/smoke/bin/ReflectionLite/Release/net8.0/ReflectionLite.dll",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke ReflectionLite --stage build",
+      "examples": [
+        "run build smoke ReflectionLite"
+      ]
+    },
+    {
+      "id": "build-smoke-pinvokelite",
+      "title": "Build the PInvokeLite smoke project",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "build",
+        "smoke",
+        "PInvokeLite"
+      ],
+      "kind": "smoke-project",
+      "target": "PInvokeLite",
+      "project_path": "subjects/PInvokeLite/source/PInvokeLite.csproj",
+      "artifact_path": "artifacts/smoke/bin/PInvokeLite/Release/net8.0/PInvokeLite.dll",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke PInvokeLite --stage build",
+      "examples": [
+        "run build smoke PInvokeLite"
+      ]
+    },
+    {
+      "id": "build-smoke-hostembeddinglite",
+      "title": "Build the HostEmbeddingLite smoke project",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "build",
+        "smoke",
+        "HostEmbeddingLite"
+      ],
+      "kind": "smoke-project",
+      "target": "HostEmbeddingLite",
+      "project_path": "subjects/HostEmbeddingLite/source/HostEmbeddingLite.csproj",
+      "artifact_path": "artifacts/smoke/bin/HostEmbeddingLite/Release/net8.0/HostEmbeddingLite.dll",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test smoke HostEmbeddingLite --stage build",
+      "examples": [
+        "run build smoke HostEmbeddingLite"
+      ]
+    },
+    {
+      "id": "build-preset-windows-x64-reference",
+      "title": "Build the Windows reference preset",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "build",
+        "preset",
+        "windows-x64-reference"
+      ],
+      "kind": "preset",
+      "target": "windows-x64-reference",
+      "preset": "windows-x64-reference",
+      "binary_dir": "artifacts/presets/windows-x64-reference",
+      "show_in_menu": true,
+      "examples": [
+        "run build preset windows-x64-reference"
+      ]
+    },
+    {
+      "id": "build-preset-macos-reference",
+      "title": "Build the macOS reference preset",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "macos"
+      ],
+      "tokens": [
+        "build",
+        "preset",
+        "macos-reference"
+      ],
+      "kind": "preset",
+      "target": "macos-reference",
+      "preset": "macos-reference",
+      "binary_dir": "artifacts/presets/macos-reference",
+      "show_in_menu": true,
+      "examples": [
+        "run build preset macos-reference"
+      ]
+    },
+    {
+      "id": "build-platform-windows-reference-desktop",
+      "title": "Validate the Windows reference desktop gate",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "build",
+        "platform",
+        "windows-reference-desktop"
+      ],
+      "kind": "reference-desktop-gate",
+      "target": "windows-reference-desktop",
+      "preset": "windows-x64-reference",
+      "binary_dir": "artifacts/presets/windows-x64-reference",
+      "subject_id": "HostEmbeddingLite",
+      "goal_id": "correctness.platform",
+      "matrix_id": "windows-managed-trace",
+      "gate_record_path": "artifacts/verify-runtime-baseline/windows/windows-reference-desktop.gate.json",
+      "gate_name": "windows-reference-desktop",
+      "gate_preset": "windows-x64-reference",
+      "gate_notes": "Windows reference desktop gate passed with warmup trace compare.",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test gate windows-reference-desktop",
+      "examples": [
+        "run test gate windows-reference-desktop"
+      ]
+    },
+    {
+      "id": "build-platform-macos-reference-desktop",
+      "title": "Validate the macOS reference desktop gate",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "macos"
+      ],
+      "tokens": [
+        "build",
+        "platform",
+        "macos-reference-desktop"
+      ],
+      "kind": "reference-desktop-gate",
+      "target": "macos-reference-desktop",
+      "preset": "macos-reference",
+      "binary_dir": "artifacts/presets/macos-reference",
+      "subject_id": "HostEmbeddingLite",
+      "goal_id": "correctness.platform",
+      "matrix_id": "macos-managed-trace",
+      "gate_record_path": "artifacts/verify-runtime-baseline/macos/macos-reference-desktop.gate.json",
+      "gate_name": "macos-reference-desktop",
+      "gate_preset": "macos-reference",
+      "gate_notes": "macOS reference desktop gate passed with warmup trace compare.",
+      "show_in_menu": false,
+      "public": false,
+      "replacement_syntax": "test gate macos-reference-desktop",
+      "examples": [
+        "run test gate macos-reference-desktop"
+      ]
+    },
+    {
+      "id": "build-platform-android-arm64-smoke",
+      "title": "Validate the Android platform routing shell",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "build",
+        "platform",
+        "android-arm64-smoke"
+      ],
+      "kind": "platform-gate",
+      "target": "android-arm64-smoke",
+      "preset_target": "android-arm64-smoke",
+      "toolchain_file": "build/toolchains/android-arm64.cmake",
+      "binary_dir": "artifacts/run/platform/android-arm64-smoke",
+      "show_in_menu": true,
+      "examples": [
+        "run build platform android-arm64-smoke"
+      ]
+    },
+    {
+      "id": "build-platform-ios-arm64-packaging",
+      "title": "Validate the iOS platform routing shell",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "macos"
+      ],
+      "tokens": [
+        "build",
+        "platform",
+        "ios-arm64-packaging"
+      ],
+      "kind": "platform-gate",
+      "target": "ios-arm64-packaging",
+      "preset_target": "ios-arm64-packaging",
+      "toolchain_file": "build/toolchains/ios-arm64.cmake",
+      "binary_dir": "artifacts/run/platform/ios-arm64-packaging",
+      "show_in_menu": true,
+      "examples": [
+        "run build platform ios-arm64-packaging"
+      ]
+    },
+    {
+      "id": "build-platform-linux-x64-packaging",
+      "title": "Validate the Linux packaging routing shell",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "build",
+        "platform",
+        "linux-x64-packaging"
+      ],
+      "kind": "platform-gate",
+      "target": "linux-x64-packaging",
+      "preset_target": "linux-x64-packaging",
+      "toolchain_file": "build/toolchains/linux-x64.cmake",
+      "binary_dir": "artifacts/run/platform/linux-x64-packaging",
+      "show_in_menu": true,
+      "examples": [
+        "run build platform linux-x64-packaging"
+      ]
+    }
+  ]
+}

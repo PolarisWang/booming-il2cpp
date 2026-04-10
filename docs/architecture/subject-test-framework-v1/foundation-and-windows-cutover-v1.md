@@ -21,8 +21,8 @@ Status: active
 `build/toolchains/run/testing/contracts.py` 当前读取的 canonical contract source：
 
 - `contracts/artifacts/v0/schemas`
-- `contracts/artifacts/v0/samples`
-- `contracts/artifacts/v0/snapshots`
+- `tests/contracts/analysis/v0/samples`
+- `tests/contracts/analysis/v0/snapshots`
 
 根目录 `analysis/` 已退役；subject 主线里的 analysis 只表示 run-scoped artifact bucket，而不是仓库顶层源码根。
 
