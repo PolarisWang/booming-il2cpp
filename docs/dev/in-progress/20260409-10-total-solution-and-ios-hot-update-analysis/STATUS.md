@@ -19,6 +19,7 @@ active: false
 - design: `docs/dev/in-progress/20260409-10-total-solution-and-ios-hot-update-analysis/design-v1-01.md`
 - roadmap_or_plan: `docs/dev/in-progress/20260409-10-total-solution-and-ios-hot-update-analysis/roadmap-v1-01.md`
 - phase_architecture: `docs/dev/in-progress/20260409-10-total-solution-and-ios-hot-update-analysis/phase-architecture-v1-01.md`
+- native_output: `docs/dev/in-progress/20260409-10-total-solution-and-ios-hot-update-analysis/native-output-structure-v1-01.md`
 
 ## 当前判断
 
