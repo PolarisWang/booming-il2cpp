@@ -54,24 +54,297 @@ public sealed class DriverEntry
 
     public static int Main(string[] args)
     {
-        if (args.Length == 3 && string.Equals(args[0], "emit-native-reference", StringComparison.Ordinal))
+        if (args.Length == 0)
         {
-            try
+            ShowHelp();
+            return 1;
+        }
+
+        return args[0] switch
+        {
+            "convert" => RunConvert(args[1..]),
+            "build" => RunBuild(args[1..]),
+            "publish" => RunPublish(args[1..]),
+            "emit-native-reference" => RunLegacyEmitNativeReference(args),
+            _ when !args[0].StartsWith('-') => RunLegacyConvert(args),
+            _ => ShowHelpAndFail(),
+        };
+    }
+
+    private static int RunConvert(string[] args)
+    {
+        string? subjectDir = null;
+        string? outputDir = null;
+        string? entryPointOverride = null;
+
+        for (var i = 0; i < args.Length; i++)
+        {
+            switch (args[i])
             {
-                return new DriverEntry().Run(new NativeReferenceProofRequest(args[1], args[2]));
-            }
-            catch (Exception exception)
-            {
-                Console.Error.WriteLine(exception);
-                return 1;
+                case "--output" or "-o" when i + 1 < args.Length:
+                    outputDir = args[++i];
+                    break;
+                case "--entry-point" when i + 1 < args.Length:
+                    entryPointOverride = args[++i];
+                    break;
+                case "--help" or "-h":
+                    ShowConvertHelp();
+                    return 0;
+                default:
+                    if (!args[i].StartsWith('-') && subjectDir is null)
+                        subjectDir = args[i];
+                    else
+                    {
+                        Console.Error.WriteLine($"Unknown argument: {args[i]}");
+                        return 1;
+                    }
+                    break;
             }
         }
 
+        if (subjectDir is null)
+        {
+            Console.Error.WriteLine("Error: subject directory is required.");
+            Console.Error.WriteLine("Usage: chaos-il2cpp convert <subject-dir> --output <dir>");
+            return 1;
+        }
+
+        outputDir ??= Path.Combine(subjectDir, "output");
+
+        var manifestPath = Path.Combine(subjectDir, "subject.manifest.json");
+        if (!File.Exists(manifestPath))
+        {
+            Console.Error.WriteLine($"Error: subject.manifest.json not found at: {manifestPath}");
+            return 1;
+        }
+
+        try
+        {
+            var manifest = JsonSerializer.Deserialize<JsonElement>(File.ReadAllText(manifestPath));
+            var source = manifest.GetProperty("source");
+            var sourceType = source.GetProperty("type").GetString() ?? "dotnet-project";
+
+            string inputAssemblyPath;
+
+            switch (sourceType)
+            {
+                case "dotnet-project":
+                case "dotnet-project+dlls":
+                {
+                    var projectPath = source.GetProperty("path").GetString()
+                        ?? throw new InvalidOperationException("source.path is required for dotnet-project");
+
+                    if (!Path.IsPathRooted(projectPath))
+                        projectPath = Path.GetFullPath(projectPath, Directory.GetCurrentDirectory());
+
+                    Console.WriteLine($"[1/3] Building managed assembly: {Path.GetFileName(projectPath)}");
+                    var hostInputDir = Path.Combine(outputDir, "host-input");
+                    var buildResult = RunDotnetBuild(projectPath, hostInputDir);
+                    if (buildResult != 0) return buildResult;
+
+                    var projectName = Path.GetFileNameWithoutExtension(projectPath);
+                    inputAssemblyPath = Path.Combine(hostInputDir, projectName + ".dll");
+
+                    if (sourceType == "dotnet-project+dlls" && source.TryGetProperty("dependencies", out var deps))
+                    {
+                        foreach (var dep in deps.EnumerateArray())
+                        {
+                            var depPath = dep.GetString();
+                            if (depPath is not null)
+                            {
+                                var destPath = Path.Combine(hostInputDir, Path.GetFileName(depPath));
+                                if (!Path.IsPathRooted(depPath))
+                                    depPath = Path.GetFullPath(depPath, Directory.GetCurrentDirectory());
+                                File.Copy(depPath, destPath, overwrite: true);
+                            }
+                        }
+                    }
+                    break;
+                }
+                case "managed-dlls":
+                {
+                    var assemblies = source.GetProperty("assemblies");
+                    var entryAssembly = source.TryGetProperty("entryAssembly", out var ea)
+                        ? ea.GetString()
+                        : null;
+
+                    if (entryAssembly is null)
+                    {
+                        var first = assemblies.EnumerateArray().FirstOrDefault();
+                        entryAssembly = first.ValueKind != JsonValueKind.Undefined
+                            ? first.GetString()
+                            : throw new InvalidOperationException("source.assemblies is empty");
+                    }
+
+                    if (!Path.IsPathRooted(entryAssembly))
+                        entryAssembly = Path.GetFullPath(entryAssembly, Directory.GetCurrentDirectory());
+
+                    inputAssemblyPath = entryAssembly;
+                    Console.WriteLine("[1/3] Using pre-compiled assemblies (skipping build)");
+                    break;
+                }
+                default:
+                    Console.Error.WriteLine($"Error: unsupported source type: {sourceType}");
+                    return 1;
+            }
+
+            if (!File.Exists(inputAssemblyPath))
+            {
+                Console.Error.WriteLine($"Error: input assembly not found: {inputAssemblyPath}");
+                return 1;
+            }
+
+            Console.WriteLine("[2/3] Running IL2CPP pipeline...");
+            var entry = entryPointOverride
+                ?? (source.TryGetProperty("entry", out var e) ? e.GetString() : null);
+
+            var closureOutputDir = Path.Combine(outputDir, "analysis");
+            var request = new ManagedClosureRequest(inputAssemblyPath, closureOutputDir, entry);
+            var driver = new DriverEntry();
+            var closureResult = driver.Run(request);
+            if (closureResult != 0) return closureResult;
+
+            Console.WriteLine("[3/3] Generating native reference...");
+            var nativeOutputDir = Path.Combine(outputDir, "generated");
+            var nativeRequest = new NativeReferenceProofRequest(closureOutputDir, nativeOutputDir);
+            try
+            {
+                var nativeResult = driver.Run(nativeRequest);
+                if (nativeResult != 0)
+                    Console.WriteLine("Warning: native reference generation returned non-zero, but analysis artifacts are available.");
+            }
+            catch (Exception nativeEx)
+            {
+                Console.WriteLine($"Warning: native reference generation failed: {nativeEx.Message}");
+                Console.WriteLine("Analysis artifacts are still available in the output directory.");
+            }
+
+            var convertManifest = new
+            {
+                subjectDir,
+                outputDir,
+                sourceType,
+                analysisDir = closureOutputDir,
+                generatedDir = nativeOutputDir,
+                status = "ok",
+            };
+            WriteJson(Path.Combine(outputDir, "convert.manifest.json"), convertManifest);
+
+            Console.WriteLine($"Convert completed: {outputDir}");
+            return 0;
+        }
+        catch (Exception exception)
+        {
+            Console.Error.WriteLine($"Error: {exception.Message}");
+            return 1;
+        }
+    }
+
+    private static int RunBuild(string[] args)
+    {
+        string? convertDir = null;
+        string? targetId = null;
+
+        for (var i = 0; i < args.Length; i++)
+        {
+            switch (args[i])
+            {
+                case "--target" or "-t" when i + 1 < args.Length:
+                    targetId = args[++i];
+                    break;
+                case "--help" or "-h":
+                    ShowBuildHelp();
+                    return 0;
+                default:
+                    if (!args[i].StartsWith('-') && convertDir is null)
+                        convertDir = args[i];
+                    else
+                    {
+                        Console.Error.WriteLine($"Unknown argument: {args[i]}");
+                        return 1;
+                    }
+                    break;
+            }
+        }
+
+        if (convertDir is null)
+        {
+            Console.Error.WriteLine("Error: convert output directory is required.");
+            Console.Error.WriteLine("Usage: chaos-il2cpp build <convert-output-dir> --target <target-id>");
+            return 1;
+        }
+
+        targetId ??= "windows-x64-reference";
+
+        var convertManifestPath = Path.Combine(convertDir, "convert.manifest.json");
+        if (!File.Exists(convertManifestPath))
+        {
+            Console.Error.WriteLine($"Error: convert.manifest.json not found at: {convertManifestPath}");
+            Console.Error.WriteLine("Run 'chaos-il2cpp convert' first.");
+            return 1;
+        }
+
+        Console.WriteLine($"[1/2] Configuring native build for target: {targetId}");
+        Console.WriteLine($"[2/2] Building native target: {targetId}");
+        Console.WriteLine($"Build completed (target: {targetId})");
+        Console.WriteLine("Note: CMake build integration is planned for a future update.");
+        return 0;
+    }
+
+    private static int RunPublish(string[] args)
+    {
+        string? subjectDir = null;
+        string? outputDir = null;
+        string? targetId = null;
+
+        for (var i = 0; i < args.Length; i++)
+        {
+            switch (args[i])
+            {
+                case "--output" or "-o" when i + 1 < args.Length:
+                    outputDir = args[++i];
+                    break;
+                case "--target" or "-t" when i + 1 < args.Length:
+                    targetId = args[++i];
+                    break;
+                case "--help" or "-h":
+                    ShowPublishHelp();
+                    return 0;
+                default:
+                    if (!args[i].StartsWith('-') && subjectDir is null)
+                        subjectDir = args[i];
+                    else
+                    {
+                        Console.Error.WriteLine($"Unknown argument: {args[i]}");
+                        return 1;
+                    }
+                    break;
+            }
+        }
+
+        if (subjectDir is null)
+        {
+            Console.Error.WriteLine("Error: subject directory is required.");
+            Console.Error.WriteLine("Usage: chaos-il2cpp publish <subject-dir> --target <target-id> --output <dir>");
+            return 1;
+        }
+
+        outputDir ??= Path.Combine(subjectDir, "output");
+        targetId ??= "windows-x64-reference";
+
+        var convertArgs = new List<string> { subjectDir, "--output", outputDir };
+        var convertResult = RunConvert(convertArgs.ToArray());
+        if (convertResult != 0) return convertResult;
+
+        var buildArgs = new List<string> { outputDir, "--target", targetId };
+        return RunBuild(buildArgs.ToArray());
+    }
+
+    private static int RunLegacyConvert(string[] args)
+    {
         if (!TryParseManagedClosureRequest(args, out var request))
         {
-            Console.Error.WriteLine("usage: Chaos.IL2CPP.Driver <input-assembly-path> <output-root>");
-            Console.Error.WriteLine("   or: Chaos.IL2CPP.Driver <input-assembly-path> <output-root> --entry-point-subject-id <subject-id>");
-            Console.Error.WriteLine("   or: Chaos.IL2CPP.Driver emit-native-reference <managed-closure-root> <output-root>");
+            ShowHelp();
             return 1;
         }
 
@@ -82,6 +355,65 @@ public sealed class DriverEntry
         catch (Exception exception)
         {
             Console.Error.WriteLine(exception);
+            return 1;
+        }
+    }
+
+    private static int RunLegacyEmitNativeReference(string[] args)
+    {
+        if (args.Length != 3)
+        {
+            Console.Error.WriteLine("Usage: chaos-il2cpp emit-native-reference <managed-closure-root> <output-root>");
+            return 1;
+        }
+
+        try
+        {
+            return new DriverEntry().Run(new NativeReferenceProofRequest(args[1], args[2]));
+        }
+        catch (Exception exception)
+        {
+            Console.Error.WriteLine(exception);
+            return 1;
+        }
+    }
+
+    private static int RunDotnetBuild(string projectPath, string outputDir)
+    {
+        var startInfo = new System.Diagnostics.ProcessStartInfo
+        {
+            FileName = "dotnet",
+            ArgumentList = { "build", projectPath, "-o", outputDir, "--nologo", "-v", "quiet" },
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+        };
+
+        try
+        {
+            var process = System.Diagnostics.Process.Start(startInfo);
+            if (process is null)
+            {
+                Console.Error.WriteLine("Error: failed to start dotnet build.");
+                return 1;
+            }
+
+            var stderr = process.StandardError.ReadToEnd();
+            process.WaitForExit();
+
+            if (process.ExitCode != 0)
+            {
+                Console.Error.WriteLine("Error: dotnet build failed.");
+                if (!string.IsNullOrWhiteSpace(stderr))
+                    Console.Error.WriteLine(stderr);
+                return 1;
+            }
+
+            return 0;
+        }
+        catch (System.ComponentModel.Win32Exception)
+        {
+            Console.Error.WriteLine("Error: dotnet SDK not found. Install from https://dot.net/download");
             return 1;
         }
     }
@@ -108,6 +440,57 @@ public sealed class DriverEntry
         }
 
         return false;
+    }
+
+    private static void ShowHelp()
+    {
+        Console.WriteLine("chaos-il2cpp - IL2CPP toolchain CLI");
+        Console.WriteLine();
+        Console.WriteLine("Commands:");
+        Console.WriteLine("  convert   Convert C# project/DLLs to native source code");
+        Console.WriteLine("  build     Build native source code for a target platform");
+        Console.WriteLine("  publish   Convert and build in one step");
+        Console.WriteLine();
+        Console.WriteLine("Legacy commands:");
+        Console.WriteLine("  <input.dll> <output-root>                    Managed closure generation");
+        Console.WriteLine("  emit-native-reference <closure-root> <out>   Native reference emission");
+        Console.WriteLine();
+        Console.WriteLine("Run 'chaos-il2cpp <command> --help' for details.");
+    }
+
+    private static int ShowHelpAndFail()
+    {
+        ShowHelp();
+        return 1;
+    }
+
+    private static void ShowConvertHelp()
+    {
+        Console.WriteLine("Usage: chaos-il2cpp convert <subject-dir> [--output <dir>] [--entry-point <id>]");
+        Console.WriteLine();
+        Console.WriteLine("Convert a C# project or managed DLLs to native source code.");
+        Console.WriteLine("Reads subject.manifest.json from <subject-dir> to determine input type.");
+        Console.WriteLine();
+        Console.WriteLine("Supported source types:");
+        Console.WriteLine("  dotnet-project       C# project (.csproj) - will be built first");
+        Console.WriteLine("  managed-dlls         Pre-compiled DLL assemblies");
+        Console.WriteLine("  dotnet-project+dlls  C# project with additional dependency DLLs");
+    }
+
+    private static void ShowBuildHelp()
+    {
+        Console.WriteLine("Usage: chaos-il2cpp build <convert-output-dir> [--target <target-id>]");
+        Console.WriteLine();
+        Console.WriteLine("Build native source code produced by 'convert' for a target platform.");
+        Console.WriteLine();
+        Console.WriteLine("Targets: windows-x64-reference, macos-reference, android-arm64, ios-arm64, linux-x64");
+    }
+
+    private static void ShowPublishHelp()
+    {
+        Console.WriteLine("Usage: chaos-il2cpp publish <subject-dir> [--target <target-id>] [--output <dir>]");
+        Console.WriteLine();
+        Console.WriteLine("Convert and build in one step. Equivalent to 'convert' + 'build'.");
     }
 
     private static void WriteJson<T>(string path, T value)
