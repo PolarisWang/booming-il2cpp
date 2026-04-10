@@ -17,6 +17,9 @@ def _copy_execution_context(selection: dict[str, Any]) -> dict[str, Any]:
 
 def _normalize_stage_result(stage_result: dict[str, Any]) -> dict[str, Any]:
     performance = dict(dict(stage_result.get("details") or {}).get("performance") or {})
+    engine_contract_summary = dict(dict(stage_result.get("details") or {}).get("engineContractSummary") or {})
+    engine_emission_summary = dict(dict(stage_result.get("details") or {}).get("engineEmissionSummary") or {})
+    engine_observation_summary = dict(dict(stage_result.get("details") or {}).get("engineObservationSummary") or {})
     details: dict[str, Any] = {}
     if performance:
         details["performance"] = {
@@ -29,6 +32,12 @@ def _normalize_stage_result(stage_result: dict[str, Any]) -> dict[str, Any]:
             "regressions": list(performance.get("regressions") or []),
             "runtimeEvidence": dict(performance.get("runtimeEvidence") or {}),
         }
+    if engine_contract_summary:
+        details["engineContractSummary"] = engine_contract_summary
+    if engine_emission_summary:
+        details["engineEmissionSummary"] = engine_emission_summary
+    if engine_observation_summary:
+        details["engineObservationSummary"] = engine_observation_summary
     return {
         "stageId": str(stage_result.get("stageId") or ""),
         "kind": str(stage_result.get("kind") or ""),
@@ -78,6 +87,64 @@ def _artifact_results(
     return [artifacts_by_path[path] for path in ordered_paths]
 
 
+def _first_stage_detail(stage_results: list[dict[str, Any]], detail_name: str) -> dict[str, Any]:
+    for stage_result in stage_results:
+        detail = dict(dict(stage_result.get("details") or {}).get(detail_name) or {})
+        if detail:
+            return detail
+    return {}
+
+
+def _build_engine_proof_summary(
+    engine_contract_summary: dict[str, Any],
+    engine_emission_summary: dict[str, Any],
+    engine_observation_summary: dict[str, Any],
+) -> dict[str, Any]:
+    if not engine_contract_summary and not engine_emission_summary and not engine_observation_summary:
+        return {}
+
+    capability_ids = [
+        str(value)
+        for value in list(engine_emission_summary.get("emittedCapabilityIds") or [])
+        if str(value)
+    ]
+    if not capability_ids:
+        capability_ids = [
+            str(value)
+            for value in list(engine_contract_summary.get("resolvedCapabilityIds") or [])
+            if str(value)
+        ]
+
+    evidence_results = [
+        {
+            "kind": str(dict(item).get("kind") or ""),
+            "status": str(dict(item).get("status") or "unknown"),
+            "primaryPath": str(dict(item).get("path") or ""),
+        }
+        for item in list(engine_observation_summary.get("evidenceItems") or [])
+    ]
+
+    return {
+        "proofKind": str(
+            engine_contract_summary.get("proofKind")
+            or engine_emission_summary.get("proofKind")
+            or "engine-binding"
+        ),
+        "focusArea": str(
+            engine_contract_summary.get("focusArea")
+            or engine_emission_summary.get("focusArea")
+            or ""
+        ),
+        "capabilityIds": capability_ids,
+        "evidenceResults": evidence_results,
+        "localReportPaths": [
+            str(value)
+            for value in list(engine_observation_summary.get("localReportPaths") or [])
+            if str(value)
+        ],
+    }
+
+
 def build_matrix_report(
     plan: dict[str, Any],
     execution_result: dict[str, Any],
@@ -104,6 +171,9 @@ def build_matrix_report(
         ),
         {},
     )
+    engine_contract_summary = _first_stage_detail(normalized_stage_results, "engineContractSummary")
+    engine_emission_summary = _first_stage_detail(normalized_stage_results, "engineEmissionSummary")
+    engine_observation_summary = _first_stage_detail(normalized_stage_results, "engineObservationSummary")
 
     report = {
         "reportVersion": "v1",
@@ -137,6 +207,19 @@ def build_matrix_report(
         report["performanceEvidence"] = dict(performance.get("runtimeEvidence") or {})
         report["releaseReportPaths"] = []
         report["reportArtifacts"] = []
+    if engine_contract_summary:
+        report["engineContractSummary"] = engine_contract_summary
+    if engine_emission_summary:
+        report["engineEmissionSummary"] = engine_emission_summary
+    if engine_observation_summary:
+        report["engineObservationSummary"] = engine_observation_summary
+    engine_proof_summary = _build_engine_proof_summary(
+        engine_contract_summary,
+        engine_emission_summary,
+        engine_observation_summary,
+    )
+    if engine_proof_summary:
+        report["engineProofSummary"] = engine_proof_summary
     return report
 
 

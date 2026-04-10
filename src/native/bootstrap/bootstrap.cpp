@@ -22,6 +22,17 @@ struct UnresolvedVirtualCallEntry {
     void* resolved_method;
 };
 
+struct MethodPointerEntry {
+    uint32_t method_token;
+    void* method_pointer;
+};
+
+struct DelegateInstance {
+    uint32_t method_token;
+    void* method_pointer;
+    void* target_instance;
+};
+
 BootstrapState g_bootstrap_state = {};
 
 template <typename THandle>
@@ -47,6 +58,31 @@ bool IsBootstrapped(ImageHandle image) {
 
 uint32_t DecodeOpaqueToken(const void* handle) {
     return static_cast<uint32_t>(reinterpret_cast<uintptr_t>(handle));
+}
+
+const MethodPointerEntry* GetMethodPointerEntries() {
+    if (g_bootstrap_state.code_registration == nullptr
+        || g_bootstrap_state.code_registration->method_pointers == nullptr
+        || g_bootstrap_state.code_registration->method_pointer_count == 0u) {
+        return nullptr;
+    }
+
+    return static_cast<const MethodPointerEntry*>(g_bootstrap_state.code_registration->method_pointers);
+}
+
+void* FindMethodPointerByToken(uint32_t method_token) {
+    const auto* entries = GetMethodPointerEntries();
+    if (entries == nullptr) {
+        return nullptr;
+    }
+
+    for (uint32_t index = 0u; index < g_bootstrap_state.code_registration->method_pointer_count; index++) {
+        if (entries[index].method_token == method_token) {
+            return entries[index].method_pointer;
+        }
+    }
+
+    return nullptr;
 }
 
 const UnresolvedVirtualCallEntry* GetUnresolvedVirtualCallEntries() {
@@ -224,7 +260,6 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL InvokeVirtual(
     size_t out_return_value_size,
     ExceptionHandle* out_exception) {
     (void)argv;
-    (void)out_exception;
 
     if (runtime_state == nullptr
         || thread_state == nullptr
@@ -237,14 +272,26 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL InvokeVirtual(
         return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
     }
 
+    if (out_exception != nullptr) {
+        *out_exception = nullptr;
+    }
+
     using VirtualInstanceMethodFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
         RuntimeState* runtime,
         ThreadState* thread,
         void* __this);
 
-    auto* const return_slot = static_cast<void**>(out_return_value);
-    *return_slot = reinterpret_cast<VirtualInstanceMethodFn>(method)(runtime_state, thread_state, object_instance);
-    return CHAOS_BRIDGE_STATUS_OK;
+    try {
+        auto* const return_slot = static_cast<void**>(out_return_value);
+        *return_slot = reinterpret_cast<VirtualInstanceMethodFn>(method)(runtime_state, thread_state, object_instance);
+        return CHAOS_BRIDGE_STATUS_OK;
+    } catch (const chaos::il2cpp::runtime_core::ManagedExceptionCarrier& carrier) {
+        if (out_exception != nullptr) {
+            *out_exception = carrier.exception;
+        }
+
+        return CHAOS_BRIDGE_STATUS_MANAGED_EXCEPTION;
+    }
 }
 
 void* CHAOS_RUNTIME_ABI_CALL CreateDelegate(
@@ -254,9 +301,24 @@ void* CHAOS_RUNTIME_ABI_CALL CreateDelegate(
     void* target_instance) {
     (void)runtime_state;
     (void)thread_state;
-    (void)method;
-    (void)target_instance;
-    return nullptr;
+
+    if (method == nullptr) {
+        return nullptr;
+    }
+
+    const uint32_t method_token = DecodeOpaqueToken(method);
+    void* const method_pointer = FindMethodPointerByToken(method_token);
+    if (method_pointer == nullptr) {
+        return nullptr;
+    }
+
+    auto* delegate_instance = new DelegateInstance
+    {
+        method_token,
+        method_pointer,
+        target_instance,
+    };
+    return delegate_instance;
 }
 
 BridgeStatus CHAOS_RUNTIME_ABI_CALL DelegateInvoke(
@@ -268,15 +330,59 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL DelegateInvoke(
     void* out_return_value,
     size_t out_return_value_size,
     ExceptionHandle* out_exception) {
-    (void)runtime_state;
-    (void)thread_state;
-    (void)delegate_instance;
-    (void)argv;
-    (void)argc;
-    (void)out_return_value;
-    (void)out_return_value_size;
-    (void)out_exception;
-    return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    if (runtime_state == nullptr
+        || thread_state == nullptr
+        || delegate_instance == nullptr
+        || argv == nullptr
+        || argc != 1u
+        || out_return_value == nullptr
+        || out_return_value_size != sizeof(void*)) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    if (out_exception != nullptr) {
+        *out_exception = nullptr;
+    }
+
+    auto* const delegate_handle = static_cast<DelegateInstance*>(delegate_instance);
+    if (delegate_handle->method_pointer == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_FOUND;
+    }
+
+    void* const argument0 = argv[0];
+    auto* const return_slot = static_cast<void**>(out_return_value);
+
+    try {
+        if (delegate_handle->target_instance != nullptr) {
+            using ClosedInstanceDelegateFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
+                RuntimeState* runtime,
+                ThreadState* thread,
+                void* __this,
+                void* arg0);
+            *return_slot = reinterpret_cast<ClosedInstanceDelegateFn>(delegate_handle->method_pointer)(
+                runtime_state,
+                thread_state,
+                delegate_handle->target_instance,
+                argument0);
+        } else {
+            using StaticDelegateFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
+                RuntimeState* runtime,
+                ThreadState* thread,
+                void* arg0);
+            *return_slot = reinterpret_cast<StaticDelegateFn>(delegate_handle->method_pointer)(
+                runtime_state,
+                thread_state,
+                argument0);
+        }
+
+        return CHAOS_BRIDGE_STATUS_OK;
+    } catch (const chaos::il2cpp::runtime_core::ManagedExceptionCarrier& carrier) {
+        if (out_exception != nullptr) {
+            *out_exception = carrier.exception;
+        }
+
+        return CHAOS_BRIDGE_STATUS_MANAGED_EXCEPTION;
+    }
 }
 
 void* CHAOS_RUNTIME_ABI_CALL ResolveIcall(const char* icall_name_utf8) {

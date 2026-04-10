@@ -237,6 +237,9 @@ class SubjectManifestSchemaTests(unittest.TestCase):
                 "windows-dispatch-check",
                 "windows-generic-layout-check",
                 "windows-array-boxing-check",
+                "windows-delegate-check",
+                "windows-exception-check",
+                "windows-reflection-interop-closure-check",
                 "windows-native-profile",
             },
             matrix_ids,
@@ -280,6 +283,9 @@ class SubjectManifestSchemaTests(unittest.TestCase):
                 "windows-dispatch-check",
                 "windows-generic-layout-check",
                 "windows-array-boxing-check",
+                "windows-delegate-check",
+                "windows-exception-check",
+                "windows-reflection-interop-closure-check",
             },
             matrix_ids,
         )
@@ -287,6 +293,118 @@ class SubjectManifestSchemaTests(unittest.TestCase):
             "MainlineFeaturePack/DispatchProofEntry::Run()",
             str(dict(dispatch_matrix.get("source") or {})["entry"]),
         )
+
+    def test_mainline_feature_pack_manifest_declares_phase6_capability_slice_profiles_and_matrices(self) -> None:
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase6_capability_slices")
+
+        record = subjects_module.require_single_subject_record(
+            subjects_module.load_subject_records(REPO_ROOT),
+            category="mainline",
+            source_type="dotnet-project",
+            required_validation_profile_ids=[
+                "proof-delegate",
+                "proof-exception",
+                "proof-reflection-interop-closure",
+            ],
+        )
+        manifest = record["manifest"]
+        validation_profiles = dict(manifest.get("validationProfiles") or {})
+        matrix_ids = {
+            str(matrix["matrixId"])
+            for matrix in list(manifest.get("environmentMatrices") or [])
+        }
+        delegate_matrix = subjects_module.find_matrix(manifest, "windows-delegate-check")
+        exception_matrix = subjects_module.find_matrix(manifest, "windows-exception-check")
+        closure_matrix = subjects_module.find_matrix(manifest, "windows-reflection-interop-closure-check")
+
+        self.assertEqual(["proof"], validation_profiles["proof-delegate"])
+        self.assertEqual(["proof"], validation_profiles["proof-exception"])
+        self.assertEqual(["proof"], validation_profiles["proof-reflection-interop-closure"])
+        self.assertEqual(
+            {
+                "windows-native-check",
+                "windows-reference-trace",
+                "windows-native-profile",
+                "windows-dispatch-check",
+                "windows-generic-layout-check",
+                "windows-array-boxing-check",
+                "windows-delegate-check",
+                "windows-exception-check",
+                "windows-reflection-interop-closure-check",
+            },
+            matrix_ids,
+        )
+        self.assertEqual(
+            "MainlineFeaturePack/DelegateProofEntry::Run()",
+            str(dict(delegate_matrix.get("source") or {})["entry"]),
+        )
+        self.assertEqual(
+            "MainlineFeaturePack/ExceptionProofEntry::Run()",
+            str(dict(exception_matrix.get("source") or {})["entry"]),
+        )
+        self.assertEqual(
+            "MainlineFeaturePack/ReflectionInteropClosureEntry::Run()",
+            str(dict(closure_matrix.get("source") or {})["entry"]),
+        )
+
+    def test_engine_binding_subject_manifests_declare_minimal_windows_only_surface(self) -> None:
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase7_engine_binding")
+
+        records = subjects_module.query_subject_records(
+            subjects_module.load_subject_records(REPO_ROOT),
+            category="canonical",
+            source_type="dotnet-project",
+            required_stage_kinds=[
+                "analysis-frontend",
+                "generated-engine-proof",
+                "runtime-engine-observe",
+                "runtime-engine-trace-compare",
+            ],
+            required_goal_ids=["correctness.dev", "correctness.platform"],
+            required_host_platforms=["windows-x64"],
+            required_validation_profile_ids=["proof-dev", "trace-platform"],
+            required_validation_kinds=["proof"],
+        )
+
+        self.assertEqual(
+            {
+                "EngineLogWriteLite",
+                "EngineObjectHandleLite",
+                "EngineLifecycleCallbackLite",
+            },
+            {str(record["subjectId"]) for record in records},
+        )
+
+        expected_focus_area = {
+            "EngineLogWriteLite": "service-call",
+            "EngineObjectHandleLite": "object-handle",
+            "EngineLifecycleCallbackLite": "lifecycle-callback",
+        }
+
+        for record in records:
+            manifest = record["manifest"]
+            profile = dict(manifest.get("engineProofProfile") or {})
+            pipeline_ids = {
+                str(pipeline.get("pipelineId") or "")
+                for pipeline in list(manifest.get("executionPipelines") or [])
+            }
+            matrix_ids = {
+                str(matrix.get("matrixId") or "")
+                for matrix in list(manifest.get("environmentMatrices") or [])
+            }
+
+            self.assertEqual("engine-binding", str(profile.get("proofKind") or ""))
+            self.assertEqual(expected_focus_area[str(record["subjectId"])], str(profile.get("focusArea") or ""))
+            self.assertGreater(len(list(profile.get("expectedCapabilityIds") or [])), 0)
+            self.assertGreater(len(list(profile.get("expectedEvidenceKinds") or [])), 0)
+            self.assertEqual(
+                {"engine-runtime-output", "engine-runtime-trace"},
+                pipeline_ids,
+            )
+            self.assertEqual(
+                {"windows-dev-output", "windows-reference-trace"},
+                matrix_ids,
+            )
 
 
 if __name__ == "__main__":

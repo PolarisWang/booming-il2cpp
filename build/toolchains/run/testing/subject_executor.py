@@ -88,7 +88,7 @@ def _reused_primary_evidence_paths(stage: dict[str, Any], manifest: dict[str, An
                 _rewrite_reused_bucket_path(stage, str(artifacts.get("closureManifestPath") or "")),
             ]
         )
-    if kind == "generated-native-proof":
+    if kind in {"generated-native-proof", "generated-engine-proof"}:
         return _dedupe_non_empty(
             [
                 _rewrite_reused_bucket_path(stage, str(manifest.get("generatedSourcePath") or "")),
@@ -97,6 +97,9 @@ def _reused_primary_evidence_paths(stage: dict[str, Any], manifest: dict[str, An
         )
     if kind == "build-target":
         return _dedupe_non_empty([_rewrite_reused_bucket_path(stage, value) for value in outputs])
+    if kind in {"runtime-engine-observe", "runtime-engine-trace-compare"}:
+        engine_evidence_paths = [str(value) for value in list(manifest.get("engineEvidencePaths") or []) if value]
+        return _dedupe_non_empty([_rewrite_reused_bucket_path(stage, value) for value in engine_evidence_paths])
     if kind in {"runtime-observe", "runtime-managed-output", "runtime-perf-collect"}:
         return _dedupe_non_empty(
             [
@@ -125,24 +128,33 @@ def _reused_stage_diagnostics(stage: dict[str, Any], manifest: dict[str, Any]) -
 
 
 def _reused_stage_details(stage: dict[str, Any], manifest: dict[str, Any]) -> dict[str, Any]:
-    if str(stage.get("kind") or "") not in {"runtime-perf-collect", "native-runtime-perf"}:
-        return {}
+    details: dict[str, Any] = {}
+    for detail_name in (
+        "engineContractSummary",
+        "engineEmissionSummary",
+        "engineObservationSummary",
+    ):
+        detail = dict(manifest.get(detail_name) or {})
+        if detail:
+            details[detail_name] = detail
 
-    return {
-        "performance": {
-            "samples": list(manifest.get("samples") or []),
-            "metrics": dict(manifest.get("summaryMetrics") or {}),
-            "baselinePath": manifest.get("baselinePath"),
-            "baseline": dict(manifest.get("baseline") or {}),
-            "baselineUpdated": bool(manifest.get("baselineUpdated", False)),
-            "regressionStatus": str(manifest.get("regressionStatus") or "no-baseline"),
-            "regressions": list(manifest.get("regressions") or []),
-            "runtimeEvidence": {
-                "runtimePath": manifest.get("perfRuntimePath"),
-                "samplesPath": manifest.get("perfSamplesPath"),
-            },
-        }
+    if str(stage.get("kind") or "") not in {"runtime-perf-collect", "native-runtime-perf"}:
+        return details
+
+    details["performance"] = {
+        "samples": list(manifest.get("samples") or []),
+        "metrics": dict(manifest.get("summaryMetrics") or {}),
+        "baselinePath": manifest.get("baselinePath"),
+        "baseline": dict(manifest.get("baseline") or {}),
+        "baselineUpdated": bool(manifest.get("baselineUpdated", False)),
+        "regressionStatus": str(manifest.get("regressionStatus") or "no-baseline"),
+        "regressions": list(manifest.get("regressions") or []),
+        "runtimeEvidence": {
+            "runtimePath": manifest.get("perfRuntimePath"),
+            "samplesPath": manifest.get("perfSamplesPath"),
+        },
     }
+    return details
 
 
 def _reused_stage_metadata(repo_root: Path, stage: dict[str, Any]) -> dict[str, Any]:

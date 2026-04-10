@@ -25,8 +25,8 @@ public sealed class LoaderStage
         };
 
         var typeResolver = new MetadataTypeResolver(metadataReader, assemblyName);
-        var typeModels = LoadTypes(metadataReader, assemblyName);
-        var ownerIndex = BuildOwnerIndex(metadataReader, typeModels);
+        var typeModels = LoadTypes(metadataReader, typeResolver, assemblyName);
+        var ownerIndex = BuildOwnerIndex(metadataReader, typeResolver, typeModels);
         var fieldModels = LoadFields(metadataReader, typeResolver, typeModels, ownerIndex.FieldOwners, assemblyName);
         var propertyModels = LoadProperties(metadataReader, typeResolver, ownerIndex.PropertyOwners, assemblyName);
         var methodModels = LoadMethods(
@@ -130,18 +130,34 @@ public sealed class LoaderStage
 
     private static OwnerIndex BuildOwnerIndex(
         MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
         IReadOnlyDictionary<TypeDefinitionHandle, ManagedTypeModel> typeModels)
     {
         var fieldOwners = new Dictionary<FieldDefinitionHandle, ManagedTypeModel>();
         var propertyOwners = new Dictionary<PropertyDefinitionHandle, ManagedTypeModel>();
         var methodOwners = new Dictionary<MethodDefinitionHandle, ManagedTypeModel>();
 
-        foreach (var (typeHandle, typeModel) in typeModels)
+        foreach (var typeHandle in metadataReader.TypeDefinitions)
         {
             var typeDefinition = metadataReader.GetTypeDefinition(typeHandle);
+            var typeName = metadataReader.GetString(typeDefinition.Name);
+            if (string.Equals(typeName, "<Module>", StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            var typeModel = typeModels.TryGetValue(typeHandle, out var existingTypeModel)
+                ? existingTypeModel
+                : CreateTypeModel(metadataReader, typeResolver, typeHandle);
+
             foreach (var fieldHandle in typeDefinition.GetFields())
             {
                 fieldOwners[fieldHandle] = typeModel;
+            }
+
+            if (!typeDefinition.GetDeclaringType().IsNil)
+            {
+                continue;
             }
 
             foreach (var methodHandle in typeDefinition.GetMethods())
@@ -169,7 +185,10 @@ public sealed class LoaderStage
         return new OwnerIndex(fieldOwners, propertyOwners, methodOwners);
     }
 
-    private static Dictionary<TypeDefinitionHandle, ManagedTypeModel> LoadTypes(MetadataReader metadataReader, string assemblyName)
+    private static Dictionary<TypeDefinitionHandle, ManagedTypeModel> LoadTypes(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        string assemblyName)
     {
         var models = new Dictionary<TypeDefinitionHandle, ManagedTypeModel>();
 
@@ -177,28 +196,111 @@ public sealed class LoaderStage
         {
             var typeDefinition = metadataReader.GetTypeDefinition(typeHandle);
             var typeName = metadataReader.GetString(typeDefinition.Name);
-            if (string.Equals(typeName, "<Module>", StringComparison.Ordinal) || !typeDefinition.GetDeclaringType().IsNil)
+            if (string.Equals(typeName, "<Module>", StringComparison.Ordinal))
             {
                 continue;
             }
 
-            var namespaceName = metadataReader.GetString(typeDefinition.Namespace);
-            var subjectId = ManagedNaming.CreateTypeSubjectId(assemblyName, namespaceName, typeName);
-            var displayName = ManagedNaming.CreateTypeDisplayName(assemblyName, namespaceName, typeName);
-
-            models[typeHandle] = new ManagedTypeModel
-            {
-                AssemblyName = assemblyName,
-                NamespaceName = string.IsNullOrEmpty(namespaceName) ? null : namespaceName,
-                Name = typeName,
-                SubjectId = subjectId,
-                DefinitionSubjectId = subjectId,
-                DisplayName = displayName,
-                MetadataToken = MetadataTokens.GetToken(typeHandle),
-            };
+            models[typeHandle] = CreateTypeModel(metadataReader, typeResolver, typeHandle);
         }
 
         return models;
+    }
+
+    private static ManagedTypeModel CreateTypeModel(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        TypeDefinitionHandle typeHandle)
+    {
+        var typeDefinition = metadataReader.GetTypeDefinition(typeHandle);
+        var typeName = metadataReader.GetString(typeDefinition.Name);
+        var namespaceName = metadataReader.GetString(typeDefinition.Namespace);
+        var typeIdentity = typeResolver.ResolveTypeIdentity(typeHandle);
+
+        return new ManagedTypeModel
+        {
+            AssemblyName = typeIdentity.AssemblyName,
+            NamespaceName = string.IsNullOrEmpty(namespaceName) ? null : namespaceName,
+            Name = typeName,
+            SubjectId = typeIdentity.SubjectId,
+            DefinitionSubjectId = typeIdentity.DefinitionSubjectId,
+            DisplayName = typeIdentity.DisplayName,
+            MetadataToken = MetadataTokens.GetToken(typeHandle),
+        };
+    }
+
+    private static ManagedTypeModel ResolveOwningTypeModel(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        IReadOnlyDictionary<TypeDefinitionHandle, ManagedTypeModel> typeModels,
+        MethodDefinitionHandle handle)
+    {
+        if (TryResolveOwningTypeHandle(metadataReader, handle, out var typeHandle))
+        {
+            return typeModels.TryGetValue(typeHandle, out var typeModel)
+                ? typeModel
+                : CreateTypeModel(metadataReader, typeResolver, typeHandle);
+        }
+
+        throw new KeyNotFoundException($"failed to resolve declaring type for method handle {MetadataTokens.GetToken(handle):X8}");
+    }
+
+    private static ManagedTypeModel ResolveOwningTypeModel(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        IReadOnlyDictionary<TypeDefinitionHandle, ManagedTypeModel> typeModels,
+        FieldDefinitionHandle handle)
+    {
+        if (TryResolveOwningTypeHandle(metadataReader, handle, out var typeHandle))
+        {
+            return typeModels.TryGetValue(typeHandle, out var typeModel)
+                ? typeModel
+                : CreateTypeModel(metadataReader, typeResolver, typeHandle);
+        }
+
+        throw new KeyNotFoundException($"failed to resolve declaring type for field handle {MetadataTokens.GetToken(handle):X8}");
+    }
+
+    private static bool TryResolveOwningTypeHandle(
+        MetadataReader metadataReader,
+        MethodDefinitionHandle methodHandle,
+        out TypeDefinitionHandle typeHandle)
+    {
+        foreach (var candidateTypeHandle in metadataReader.TypeDefinitions)
+        {
+            foreach (var candidateMethodHandle in metadataReader.GetTypeDefinition(candidateTypeHandle).GetMethods())
+            {
+                if (candidateMethodHandle.Equals(methodHandle))
+                {
+                    typeHandle = candidateTypeHandle;
+                    return true;
+                }
+            }
+        }
+
+        typeHandle = default;
+        return false;
+    }
+
+    private static bool TryResolveOwningTypeHandle(
+        MetadataReader metadataReader,
+        FieldDefinitionHandle fieldHandle,
+        out TypeDefinitionHandle typeHandle)
+    {
+        foreach (var candidateTypeHandle in metadataReader.TypeDefinitions)
+        {
+            foreach (var candidateFieldHandle in metadataReader.GetTypeDefinition(candidateTypeHandle).GetFields())
+            {
+                if (candidateFieldHandle.Equals(fieldHandle))
+                {
+                    typeHandle = candidateTypeHandle;
+                    return true;
+                }
+            }
+        }
+
+        typeHandle = default;
+        return false;
     }
 
     private static List<ManagedFieldModel> LoadFields(
@@ -326,6 +428,7 @@ public sealed class LoaderStage
         {
             return new ManagedMethodBodyModel
             {
+                ExceptionRegions = [],
                 Blocks =
                 [
                     new ManagedBlockModel
@@ -362,6 +465,8 @@ public sealed class LoaderStage
 
         return new ManagedMethodBodyModel
         {
+            // ExceptionRegions = bodyBlock.ExceptionRegions are decoded into the contracts model.
+            ExceptionRegions = DecodeExceptionRegions(bodyBlock, typeResolver),
             Blocks =
             [
                 new ManagedBlockModel
@@ -388,6 +493,9 @@ public sealed class LoaderStage
             ILOpCode.Nop => null,
             ILOpCode.Ldtoken => DecodeLdtokenInstruction(metadataReader, typeResolver, typeModels, fieldOwners, methodOwners, ref ilReader),
             ILOpCode.Ldstr => DecodeLdstrInstruction(metadataReader, ref ilReader),
+            ILOpCode.Ldftn => DecodeLdftnInstruction(metadataReader, typeResolver, typeModels, methodOwners, ref ilReader),
+            ILOpCode.Ldvirtftn => DecodeLdvirtftnInstruction(metadataReader, typeResolver, typeModels, methodOwners, ref ilReader),
+            ILOpCode.Ldnull => new ManagedInstructionModel { Op = "ldnull", ResultType = "System.Object" },
             ILOpCode.Newarr => DecodeNewarrInstruction(metadataReader, typeResolver, ref ilReader),
             ILOpCode.Newobj => DecodeMethodReferenceInstruction(metadataReader, typeResolver, typeModels, methodOwners, opCode, ref ilReader),
             ILOpCode.Box => DecodeBoxInstruction(metadataReader, typeResolver, ref ilReader),
@@ -395,6 +503,8 @@ public sealed class LoaderStage
             ILOpCode.Callvirt => DecodeMethodReferenceInstruction(metadataReader, typeResolver, typeModels, methodOwners, opCode, ref ilReader),
             ILOpCode.Stfld => DecodeFieldReferenceInstruction(metadataReader, typeResolver, fieldOwners, opCode, ref ilReader),
             ILOpCode.Ldfld => DecodeFieldReferenceInstruction(metadataReader, typeResolver, fieldOwners, opCode, ref ilReader),
+            ILOpCode.Stsfld => DecodeStsfldInstruction(metadataReader, typeResolver, fieldOwners, ref ilReader),
+            ILOpCode.Ldsfld => DecodeLdsfldInstruction(metadataReader, typeResolver, fieldOwners, ref ilReader),
             ILOpCode.Stelem_ref => new ManagedInstructionModel { Op = "stelem.ref", ResultType = "System.Void" },
             ILOpCode.Dup => new ManagedInstructionModel { Op = "dup" },
             ILOpCode.Pop => new ManagedInstructionModel { Op = "pop" },
@@ -405,6 +515,18 @@ public sealed class LoaderStage
             ILOpCode.Ldarg_1 => DecodeLdargInstruction(methodSummary, 1),
             ILOpCode.Ldarg_2 => DecodeLdargInstruction(methodSummary, 2),
             ILOpCode.Ldarg_3 => DecodeLdargInstruction(methodSummary, 3),
+            ILOpCode.Ldloc => DecodeLdlocInstruction(ilReader.ReadUInt16()),
+            ILOpCode.Ldloc_s => DecodeLdlocInstruction(ilReader.ReadByte()),
+            ILOpCode.Ldloc_0 => DecodeLdlocInstruction(0),
+            ILOpCode.Ldloc_1 => DecodeLdlocInstruction(1),
+            ILOpCode.Ldloc_2 => DecodeLdlocInstruction(2),
+            ILOpCode.Ldloc_3 => DecodeLdlocInstruction(3),
+            ILOpCode.Stloc => DecodeStlocInstruction(ilReader.ReadUInt16()),
+            ILOpCode.Stloc_s => DecodeStlocInstruction(ilReader.ReadByte()),
+            ILOpCode.Stloc_0 => DecodeStlocInstruction(0),
+            ILOpCode.Stloc_1 => DecodeStlocInstruction(1),
+            ILOpCode.Stloc_2 => DecodeStlocInstruction(2),
+            ILOpCode.Stloc_3 => DecodeStlocInstruction(3),
             ILOpCode.Ldc_i4 => DecodeLdcI4Instruction(ilReader.ReadInt32()),
             ILOpCode.Ldc_i4_s => DecodeLdcI4Instruction(ilReader.ReadSByte()),
             ILOpCode.Ldc_i4_m1 => DecodeLdcI4Instruction(-1),
@@ -417,6 +539,17 @@ public sealed class LoaderStage
             ILOpCode.Ldc_i4_6 => DecodeLdcI4Instruction(6),
             ILOpCode.Ldc_i4_7 => DecodeLdcI4Instruction(7),
             ILOpCode.Ldc_i4_8 => DecodeLdcI4Instruction(8),
+            ILOpCode.Br => DecodeBranchInstruction("br", ilReader.ReadInt32()),
+            ILOpCode.Br_s => DecodeBranchInstruction("br", ilReader.ReadSByte()),
+            ILOpCode.Brtrue => DecodeBrtrueInstruction(ilReader.ReadInt32()),
+            ILOpCode.Brtrue_s => DecodeBrtrueInstruction(ilReader.ReadSByte()),
+            ILOpCode.Brfalse => DecodeBrfalseInstruction(ilReader.ReadInt32()),
+            ILOpCode.Brfalse_s => DecodeBrfalseInstruction(ilReader.ReadSByte()),
+            ILOpCode.Leave => DecodeLeaveInstruction(ilReader.ReadInt32()),
+            ILOpCode.Leave_s => DecodeLeaveInstruction(ilReader.ReadSByte()),
+            ILOpCode.Throw => new ManagedInstructionModel { Op = "throw", ResultType = "System.Void" },
+            ILOpCode.Rethrow => new ManagedInstructionModel { Op = "rethrow", ResultType = "System.Void" },
+            ILOpCode.Endfinally => new ManagedInstructionModel { Op = "endfinally", ResultType = "System.Void" },
             ILOpCode.Ret => new ManagedInstructionModel { Op = "ret" },
             _ => throw new NotSupportedException($"unsupported IL opcode in loader: {opCode}"),
         };
@@ -590,6 +723,67 @@ public sealed class LoaderStage
         };
     }
 
+    private static ManagedInstructionModel DecodeFunctionPointerInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        IReadOnlyDictionary<TypeDefinitionHandle, ManagedTypeModel> typeModels,
+        IReadOnlyDictionary<MethodDefinitionHandle, ManagedTypeModel> methodOwners,
+        string op,
+        ref BlobReader ilReader)
+    {
+        var token = ilReader.ReadInt32();
+        var handle = MetadataTokens.EntityHandle(token);
+        var reference = ResolveMethodReference(metadataReader, typeResolver, typeModels, methodOwners, handle);
+
+        return new ManagedInstructionModel
+        {
+            Op = op,
+            Operand = reference.SubjectId,
+            ResultType = "System.IntPtr",
+            Callee = reference.SubjectId,
+            Reference = new ManagedInstructionReference
+            {
+                AssemblyName = reference.AssemblyName,
+                SubjectKind = "method",
+                SubjectId = reference.SubjectId,
+            },
+        };
+    }
+
+    private static ManagedInstructionModel DecodeLdftnInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        IReadOnlyDictionary<TypeDefinitionHandle, ManagedTypeModel> typeModels,
+        IReadOnlyDictionary<MethodDefinitionHandle, ManagedTypeModel> methodOwners,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeFunctionPointerInstruction(
+            metadataReader,
+            typeResolver,
+            typeModels,
+            methodOwners,
+            "ldftn",
+            ref ilReader);
+        return instruction with { Op = "ldftn" };
+    }
+
+    private static ManagedInstructionModel DecodeLdvirtftnInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        IReadOnlyDictionary<TypeDefinitionHandle, ManagedTypeModel> typeModels,
+        IReadOnlyDictionary<MethodDefinitionHandle, ManagedTypeModel> methodOwners,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeFunctionPointerInstruction(
+            metadataReader,
+            typeResolver,
+            typeModels,
+            methodOwners,
+            "ldvirtftn",
+            ref ilReader);
+        return instruction with { Op = "ldvirtftn" };
+    }
+
     private static ManagedInstructionModel DecodeFieldReferenceInstruction(
         MetadataReader metadataReader,
         MetadataTypeResolver typeResolver,
@@ -607,10 +801,12 @@ public sealed class LoaderStage
             {
                 ILOpCode.Stfld => "stfld",
                 ILOpCode.Ldfld => "ldfld",
+                ILOpCode.Stsfld => "stsfld",
+                ILOpCode.Ldsfld => "ldsfld",
                 _ => throw new NotSupportedException($"unsupported field reference opcode: {opCode}"),
             },
             Operand = reference.SubjectId,
-            ResultType = opCode == ILOpCode.Ldfld ? reference.FieldType : "System.Void",
+            ResultType = opCode is ILOpCode.Ldfld or ILOpCode.Ldsfld ? reference.FieldType : "System.Void",
             Reference = new ManagedInstructionReference
             {
                 AssemblyName = reference.AssemblyName,
@@ -618,6 +814,36 @@ public sealed class LoaderStage
                 SubjectId = reference.SubjectId,
             },
         };
+    }
+
+    private static ManagedInstructionModel DecodeLdsfldInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        IReadOnlyDictionary<FieldDefinitionHandle, ManagedTypeModel> fieldOwners,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeFieldReferenceInstruction(
+            metadataReader,
+            typeResolver,
+            fieldOwners,
+            ILOpCode.Ldsfld,
+            ref ilReader);
+        return instruction with { Op = "ldsfld" };
+    }
+
+    private static ManagedInstructionModel DecodeStsfldInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        IReadOnlyDictionary<FieldDefinitionHandle, ManagedTypeModel> fieldOwners,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeFieldReferenceInstruction(
+            metadataReader,
+            typeResolver,
+            fieldOwners,
+            ILOpCode.Stsfld,
+            ref ilReader);
+        return instruction with { Op = "stsfld" };
     }
 
     private static ManagedInstructionModel DecodeLdargInstruction(MethodSummary methodSummary, int index)
@@ -647,6 +873,25 @@ public sealed class LoaderStage
         };
     }
 
+    private static ManagedInstructionModel DecodeLdlocInstruction(int index)
+    {
+        return new ManagedInstructionModel
+        {
+            Op = "ldloc",
+            Operand = index,
+        };
+    }
+
+    private static ManagedInstructionModel DecodeStlocInstruction(int index)
+    {
+        return new ManagedInstructionModel
+        {
+            Op = "stloc",
+            Operand = index,
+            ResultType = "System.Void",
+        };
+    }
+
     private static ManagedInstructionModel DecodeLdcI4Instruction(int value)
     {
         return new ManagedInstructionModel
@@ -655,6 +900,72 @@ public sealed class LoaderStage
             Operand = value,
             ResultType = "System.Int32",
         };
+    }
+
+    private static ManagedInstructionModel DecodeBranchInstruction(string op, int delta)
+    {
+        return new ManagedInstructionModel
+        {
+            Op = op,
+            Operand = delta,
+            ResultType = "System.Void",
+        };
+    }
+
+    private static ManagedInstructionModel DecodeLeaveInstruction(int delta)
+    {
+        return new ManagedInstructionModel
+        {
+            Op = "leave",
+            Operand = delta,
+            ResultType = "System.Void",
+        };
+    }
+
+    private static ManagedInstructionModel DecodeBrtrueInstruction(int delta)
+    {
+        return new ManagedInstructionModel
+        {
+            Op = "brtrue",
+            Operand = delta,
+            ResultType = "System.Void",
+        };
+    }
+
+    private static ManagedInstructionModel DecodeBrfalseInstruction(int delta)
+    {
+        return new ManagedInstructionModel
+        {
+            Op = "brfalse",
+            Operand = delta,
+            ResultType = "System.Void",
+        };
+    }
+
+    private static IReadOnlyList<ManagedExceptionRegionModel> DecodeExceptionRegions(
+        MethodBodyBlock bodyBlock,
+        MetadataTypeResolver typeResolver)
+    {
+        return bodyBlock.ExceptionRegions
+            .Select(region => new ManagedExceptionRegionModel
+            {
+                HandlingKind = region.Kind switch
+                {
+                    ExceptionRegionKind.Catch => "catch",
+                    ExceptionRegionKind.Finally => "finally",
+                    ExceptionRegionKind.Fault => "fault",
+                    ExceptionRegionKind.Filter => "filter",
+                    _ => throw new NotSupportedException($"unsupported exception region kind in loader: {region.Kind}"),
+                },
+                TryOffset = region.TryOffset,
+                TryLength = region.TryLength,
+                HandlerOffset = region.HandlerOffset,
+                HandlerLength = region.HandlerLength,
+                CatchTypeSubjectId = region.Kind == ExceptionRegionKind.Catch && !region.CatchType.IsNil
+                    ? typeResolver.ResolveTypeIdentity(region.CatchType).SubjectId
+                    : null,
+            })
+            .ToList();
     }
 
     private static ILOpCode ReadOpCode(ref BlobReader ilReader)
@@ -723,7 +1034,9 @@ public sealed class LoaderStage
         MethodDefinitionHandle handle)
     {
         var methodDefinition = metadataReader.GetMethodDefinition(handle);
-        var declaringType = methodOwners[handle];
+        var declaringType = methodOwners.TryGetValue(handle, out var existingDeclaringType)
+            ? existingDeclaringType
+            : ResolveOwningTypeModel(metadataReader, typeResolver, typeModels, handle);
         var signature = methodDefinition.DecodeSignature(typeResolver.TypeNameProvider, null);
         var parameterTypes = signature.ParameterTypes.ToArray();
         var parameterNames = methodDefinition
@@ -968,10 +1281,11 @@ public sealed class LoaderStage
                 continue;
             }
 
+            var definitionType = existingTypeSubjects[typeIdentity.DefinitionSubjectId];
             materializedTypes[typeIdentity.SubjectId] = new ManagedTypeModel
             {
                 AssemblyName = typeIdentity.AssemblyName,
-                NamespaceName = null,
+                NamespaceName = definitionType.NamespaceName,
                 Name = typeIdentity.DisplayName,
                 SubjectId = typeIdentity.SubjectId,
                 DefinitionSubjectId = typeIdentity.DefinitionSubjectId,
@@ -1264,6 +1578,17 @@ public sealed class LoaderStage
     {
         return new ManagedMethodBodyModel
         {
+            ExceptionRegions = body.ExceptionRegions.Select(region => new ManagedExceptionRegionModel
+            {
+                HandlingKind = region.HandlingKind,
+                TryOffset = region.TryOffset,
+                TryLength = region.TryLength,
+                HandlerOffset = region.HandlerOffset,
+                HandlerLength = region.HandlerLength,
+                CatchTypeSubjectId = region.CatchTypeSubjectId is null
+                    ? null
+                    : SubstituteText(region.CatchTypeSubjectId, substitutions, subjectSubstitutions),
+            }).ToList(),
             Blocks = body.Blocks.Select(block => new ManagedBlockModel
             {
                 BlockId = block.BlockId,
@@ -1411,38 +1736,28 @@ internal sealed class MetadataTypeResolver
         var typeDefinition = _metadataReader.GetTypeDefinition(handle);
         var namespaceName = _metadataReader.GetString(typeDefinition.Namespace);
         var typeName = _metadataReader.GetString(typeDefinition.Name);
-        var subjectId = ManagedNaming.CreateTypeSubjectId(CurrentAssemblyName, namespaceName, typeName);
-        var displayName = ManagedNaming.CreateTypeDisplayName(CurrentAssemblyName, namespaceName, typeName);
-
-        return new TypeIdentity
+        if (!typeDefinition.GetDeclaringType().IsNil)
         {
-            AssemblyName = CurrentAssemblyName,
-            SubjectId = subjectId,
-            DisplayName = displayName,
-            DefinitionSubjectId = subjectId,
-            DefinitionDisplayName = displayName,
-            TypeArguments = [],
-        };
+            var declaringType = ResolveTypeIdentity(typeDefinition.GetDeclaringType());
+            return CreateResolvedTypeIdentity(CurrentAssemblyName, namespaceName, typeName, declaringType);
+        }
+
+        return CreateResolvedTypeIdentity(CurrentAssemblyName, namespaceName, typeName);
     }
 
     private TypeIdentity ResolveTypeReference(TypeReferenceHandle handle)
     {
         var typeReference = _metadataReader.GetTypeReference(handle);
-        var assemblyName = ResolveAssemblyName(typeReference.ResolutionScope);
         var namespaceName = _metadataReader.GetString(typeReference.Namespace);
         var typeName = _metadataReader.GetString(typeReference.Name);
-        var subjectId = ManagedNaming.CreateTypeSubjectId(assemblyName, namespaceName, typeName);
-        var displayName = ManagedNaming.CreateTypeDisplayName(assemblyName, namespaceName, typeName);
-
-        return new TypeIdentity
+        if (typeReference.ResolutionScope.Kind == HandleKind.TypeReference)
         {
-            AssemblyName = assemblyName,
-            SubjectId = subjectId,
-            DisplayName = displayName,
-            DefinitionSubjectId = subjectId,
-            DefinitionDisplayName = displayName,
-            TypeArguments = [],
-        };
+            var declaringType = ResolveTypeIdentity(typeReference.ResolutionScope);
+            return CreateResolvedTypeIdentity(declaringType.AssemblyName, namespaceName, typeName, declaringType);
+        }
+
+        var assemblyName = ResolveAssemblyName(typeReference.ResolutionScope);
+        return CreateResolvedTypeIdentity(assemblyName, namespaceName, typeName);
     }
 
     private TypeIdentity ResolveTypeSpecification(TypeSpecificationHandle handle)
@@ -1457,6 +1772,30 @@ internal sealed class MetadataTypeResolver
             "System.Runtime" => CoreLibraryAssemblyName,
             "mscorlib" => CoreLibraryAssemblyName,
             _ => assemblyName,
+        };
+    }
+
+    private static TypeIdentity CreateResolvedTypeIdentity(
+        string assemblyName,
+        string? namespaceName,
+        string typeName,
+        TypeIdentity? declaringType = null)
+    {
+        var subjectId = declaringType is null
+            ? ManagedNaming.CreateTypeSubjectId(assemblyName, namespaceName, typeName)
+            : $"{declaringType.SubjectId}+{typeName}";
+        var displayName = declaringType is null
+            ? ManagedNaming.CreateTypeDisplayName(assemblyName, namespaceName, typeName)
+            : $"{declaringType.DisplayName}+{typeName}";
+
+        return new TypeIdentity
+        {
+            AssemblyName = assemblyName,
+            SubjectId = subjectId,
+            DisplayName = displayName,
+            DefinitionSubjectId = subjectId,
+            DefinitionDisplayName = displayName,
+            TypeArguments = [],
         };
     }
 }

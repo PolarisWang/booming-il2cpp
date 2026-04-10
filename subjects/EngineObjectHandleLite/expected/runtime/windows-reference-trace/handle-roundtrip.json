@@ -1,0 +1,12 @@
+{
+  "kind": "handle-roundtrip",
+  "status": "ok",
+  "artifactFileName": "handle-roundtrip.json",
+  "focusArea": "object-handle",
+  "capabilityIds": [
+    "engine.object.handle.create",
+    "engine.object.handle.resolve"
+  ],
+  "roundtrip": "ok",
+  "identity": "same"
+}

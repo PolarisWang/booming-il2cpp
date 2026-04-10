@@ -314,6 +314,10 @@ def stage_paths(
     report_paths: list[str] = []
     if kind == "analysis-frontend":
         report_paths.append(f"{bucket_root}/contract-validate.report.json")
+    elif kind == "runtime-engine-observe":
+        report_paths.append(f"{bucket_root}/engine-observe.report.json")
+    elif kind == "runtime-engine-trace-compare":
+        report_paths.append(f"{bucket_root}/engine-trace-compare.report.json")
     elif kind == "runtime-trace-compare":
         report_paths.append(f"{bucket_root}/trace-compare.report.json")
 

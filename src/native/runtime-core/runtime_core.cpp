@@ -2,8 +2,14 @@
 
 #include "reflection_query_model.h"
 
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <mutex>
+#include <string>
+#include <thread>
+#include <unordered_map>
+#include <vector>
 
 struct RuntimeState {
     RuntimeConfig config;
@@ -18,6 +24,7 @@ namespace chaos::il2cpp::runtime_core {
 namespace {
 
 constexpr size_t kInlineFieldStorageSize = sizeof(void*) * 4u;
+// struct ManagedExceptionCarrier is declared in runtime_core.h and used as the cold EH payload.
 
 struct ObjectHeader {
     TypeInfoHandle type;
@@ -38,6 +45,20 @@ struct BoxedValueHeader {
     TypeInfoHandle type;
     uintptr_t byte_count;
 };
+
+struct EngineLifecycleRegistration {
+    std::string phase;
+    EngineLifecycleCallback callback;
+    void* user_data;
+};
+
+constexpr const char* kEngineObservePrefix = "CHAOS_ENGINE_OBSERVE ";
+
+std::mutex g_engine_binding_mutex;
+uintptr_t g_next_engine_handle = 1u;
+std::unordered_map<uintptr_t, void*> g_engine_handles = {};
+std::vector<EngineLifecycleRegistration> g_engine_lifecycle_registrations = {};
+const std::thread::id g_main_thread_id = std::this_thread::get_id();
 
 void* CHAOS_RUNTIME_ABI_CALL DefaultAllocate(size_t size, void* user_data) {
     (void)user_data;
@@ -96,6 +117,11 @@ void FreeBytes(const RuntimeConfig& config, void* ptr) {
 
 bool IsAttached(RuntimeState* runtime_state, ThreadState* thread_state) {
     return runtime_state != nullptr && thread_state != nullptr && thread_state->runtime_state == runtime_state;
+}
+
+bool IsLikelyMetadataTokenHandle(MethodInfoHandle method) {
+    const uintptr_t raw_method = reinterpret_cast<uintptr_t>(method);
+    return raw_method != 0u && raw_method <= static_cast<uintptr_t>(0x0FFFFFFFu);
 }
 
 RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
@@ -271,9 +297,14 @@ void CHAOS_RUNTIME_ABI_CALL RaiseManagedException(
     RuntimeState* runtime_state,
     ThreadState* thread_state,
     ExceptionHandle exception) {
-    (void)runtime_state;
-    (void)thread_state;
-    (void)exception;
+    if (!IsAttached(runtime_state, thread_state)) {
+        return;
+    }
+
+    throw ManagedExceptionCarrier
+    {
+        exception,
+    };
 }
 
 RuntimeStatus CHAOS_RUNTIME_ABI_CALL FieldGetValue(
@@ -334,16 +365,48 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL MethodInvoke(
     void* out_return_value,
     size_t out_return_value_size,
     ExceptionHandle* out_exception) {
-    (void)runtime_state;
-    (void)thread_state;
-    (void)method;
-    (void)object_instance;
-    (void)argv;
-    (void)argc;
-    (void)out_return_value;
-    (void)out_return_value_size;
-    (void)out_exception;
-    return CHAOS_RUNTIME_STATUS_NOT_SUPPORTED;
+    using RawMethodInvokerFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
+        RuntimeState* runtime,
+        ThreadState* thread,
+        void* __this,
+        void* const* argv,
+        uint32_t argc);
+
+    if (!IsAttached(runtime_state, thread_state) || method == nullptr) {
+        return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
+    }
+
+    if (out_exception != nullptr) {
+        *out_exception = nullptr;
+    }
+
+    if (IsLikelyMetadataTokenHandle(method)) {
+        return CHAOS_RUNTIME_STATUS_NOT_SUPPORTED;
+    }
+
+    try {
+        auto* const invoker = reinterpret_cast<RawMethodInvokerFn>(method);
+        if (invoker == nullptr) {
+            return CHAOS_RUNTIME_STATUS_NOT_FOUND;
+        }
+
+        void* return_value = invoker(runtime_state, thread_state, object_instance, argv, argc);
+        if (out_return_value != nullptr) {
+            if (out_return_value_size != sizeof(void*)) {
+                return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
+            }
+
+            std::memcpy(out_return_value, &return_value, sizeof(return_value));
+        }
+
+        return CHAOS_RUNTIME_STATUS_OK;
+    } catch (const ManagedExceptionCarrier& carrier) {
+        if (out_exception != nullptr) {
+            *out_exception = carrier.exception;
+        }
+
+        return CHAOS_RUNTIME_STATUS_MANAGED_EXCEPTION;
+    }
 }
 
 ImageHandle CHAOS_RUNTIME_ABI_CALL AssemblyGetImage(AssemblyHandle assembly) {
@@ -562,6 +625,98 @@ void* ArrayLoadReference(
 
     auto* elements = reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(array_instance) + sizeof(ArrayHeader));
     return elements[index];
+}
+
+int32_t EngineLogWrite(
+    const char* category_utf8,
+    const char* message_utf8) {
+    (void)category_utf8;
+
+    if (message_utf8 == nullptr) {
+        return 1;
+    }
+
+    const size_t prefix_length = std::strlen(kEngineObservePrefix);
+    if (std::fwrite(kEngineObservePrefix, 1u, prefix_length, stdout) != prefix_length) {
+        return 1;
+    }
+
+    const size_t message_length = std::strlen(message_utf8);
+    if (std::fwrite(message_utf8, 1u, message_length, stdout) != message_length) {
+        return 1;
+    }
+
+    if (std::fputc('\n', stdout) == EOF) {
+        return 1;
+    }
+
+    return std::fflush(stdout) == 0 ? 0 : 1;
+}
+
+uintptr_t CreateEngineObjectHandle(void* object_instance) {
+    if (object_instance == nullptr) {
+        return 0u;
+    }
+
+    std::lock_guard<std::mutex> lock(g_engine_binding_mutex);
+    const uintptr_t handle = g_next_engine_handle++;
+    g_engine_handles[handle] = object_instance;
+    return handle;
+}
+
+void* ResolveEngineObjectHandle(uintptr_t handle) {
+    if (handle == 0u) {
+        return nullptr;
+    }
+
+    std::lock_guard<std::mutex> lock(g_engine_binding_mutex);
+    const auto iterator = g_engine_handles.find(handle);
+    return iterator != g_engine_handles.end() ? iterator->second : nullptr;
+}
+
+bool RegisterEngineLifecycleCallback(
+    const char* phase_utf8,
+    EngineLifecycleCallback callback,
+    void* user_data) {
+    if (phase_utf8 == nullptr || callback == nullptr) {
+        return false;
+    }
+
+    std::lock_guard<std::mutex> lock(g_engine_binding_mutex);
+    g_engine_lifecycle_registrations.push_back(
+        EngineLifecycleRegistration
+        {
+            phase_utf8,
+            callback,
+            user_data,
+        });
+    return true;
+}
+
+bool DispatchEngineLifecycleCallbacks(const char* phase_utf8) {
+    if (phase_utf8 == nullptr) {
+        return false;
+    }
+
+    std::vector<EngineLifecycleRegistration> callbacks = {};
+    {
+        std::lock_guard<std::mutex> lock(g_engine_binding_mutex);
+        for (const auto& registration : g_engine_lifecycle_registrations) {
+            if (registration.phase == phase_utf8) {
+                callbacks.push_back(registration);
+            }
+        }
+    }
+
+    for (const auto& registration : callbacks) {
+        registration.callback(phase_utf8, registration.user_data);
+    }
+
+    return !callbacks.empty();
+}
+
+bool IsMainThreadLane() {
+    return std::this_thread::get_id() == g_main_thread_id;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

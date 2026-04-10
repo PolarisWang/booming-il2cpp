@@ -1,0 +1,273 @@
+{
+  "subjectId": "EngineObjectHandleLite",
+  "displayName": "EngineObjectHandleLite",
+  "category": "canonical",
+  "defaultGoal": "correctness.dev",
+  "defaultMatrix": "windows-dev-output",
+  "defaultValidationProfile": "proof-dev",
+  "source": {
+    "type": "dotnet-project",
+    "path": "subjects/EngineObjectHandleLite/source/EngineObjectHandleLite.csproj",
+    "entry": "EngineObjectHandleLite/EngineObjectHandleEntry::Run()"
+  },
+  "engineProofProfile": {
+    "proofKind": "engine-binding",
+    "focusArea": "object-handle",
+    "expectedCapabilityIds": [
+      "engine.object.handle.create",
+      "engine.object.handle.resolve"
+    ],
+    "expectedEvidenceKinds": [
+      "handle-roundtrip"
+    ],
+    "engineBindingKinds": [
+      "object-handle-create",
+      "object-handle-resolve"
+    ],
+    "hostBindingKinds": [
+      "artifact-observe-contract"
+    ]
+  },
+  "validationProfiles": {
+    "proof-dev": [
+      "proof"
+    ],
+    "trace-platform": [
+      "proof"
+    ]
+  },
+  "validation": {
+    "proof": {
+      "kind": "proof",
+      "defaultVariant": "CHECK"
+    }
+  },
+  "expected": {
+    "analysis": "subjects/EngineObjectHandleLite/expected/analysis/",
+    "codegen": "subjects/EngineObjectHandleLite/expected/codegen/",
+    "runtime": "subjects/EngineObjectHandleLite/expected/runtime/"
+  },
+  "baselines": {},
+  "tags": [
+    "engine",
+    "binding",
+    "object-handle",
+    "windows"
+  ],
+  "expectedArtifacts": [
+    "source",
+    "host-input",
+    "analysis",
+    "generated",
+    "build",
+    "runtime",
+    "report"
+  ],
+  "executionPipelines": [
+    {
+      "pipelineId": "engine-runtime-output",
+      "displayName": "Engine runtime output",
+      "stages": [
+        {
+          "stageId": "source-resolve",
+          "kind": "source-resolve",
+          "scope": "shared",
+          "bucket": "source",
+          "dependsOn": []
+        },
+        {
+          "stageId": "host-input-build",
+          "kind": "host-input-build",
+          "scope": "shared",
+          "bucket": "host-input",
+          "dependsOn": [
+            "source-resolve"
+          ]
+        },
+        {
+          "stageId": "analysis-frontend",
+          "kind": "analysis-frontend",
+          "scope": "shared",
+          "bucket": "analysis",
+          "dependsOn": [
+            "host-input-build"
+          ]
+        },
+        {
+          "stageId": "generated-engine-proof",
+          "kind": "generated-engine-proof",
+          "scope": "shared",
+          "bucket": "generated",
+          "dependsOn": [
+            "analysis-frontend"
+          ]
+        },
+        {
+          "stageId": "build-target",
+          "kind": "build-target",
+          "scope": "matrix",
+          "bucket": "build",
+          "dependsOn": [
+            "generated-engine-proof"
+          ]
+        },
+        {
+          "stageId": "runtime-engine-observe",
+          "kind": "runtime-engine-observe",
+          "scope": "matrix",
+          "bucket": "runtime",
+          "dependsOn": [
+            "build-target"
+          ]
+        },
+        {
+          "stageId": "report-assemble",
+          "kind": "report-assemble",
+          "scope": "matrix",
+          "bucket": "report",
+          "dependsOn": [
+            "runtime-engine-observe"
+          ]
+        }
+      ]
+    },
+    {
+      "pipelineId": "engine-runtime-trace",
+      "displayName": "Engine runtime trace",
+      "stages": [
+        {
+          "stageId": "source-resolve",
+          "kind": "source-resolve",
+          "scope": "shared",
+          "bucket": "source",
+          "dependsOn": []
+        },
+        {
+          "stageId": "host-input-build",
+          "kind": "host-input-build",
+          "scope": "shared",
+          "bucket": "host-input",
+          "dependsOn": [
+            "source-resolve"
+          ]
+        },
+        {
+          "stageId": "analysis-frontend",
+          "kind": "analysis-frontend",
+          "scope": "shared",
+          "bucket": "analysis",
+          "dependsOn": [
+            "host-input-build"
+          ]
+        },
+        {
+          "stageId": "generated-engine-proof",
+          "kind": "generated-engine-proof",
+          "scope": "shared",
+          "bucket": "generated",
+          "dependsOn": [
+            "analysis-frontend"
+          ]
+        },
+        {
+          "stageId": "build-target",
+          "kind": "build-target",
+          "scope": "matrix",
+          "bucket": "build",
+          "dependsOn": [
+            "generated-engine-proof"
+          ]
+        },
+        {
+          "stageId": "runtime-engine-observe",
+          "kind": "runtime-engine-observe",
+          "scope": "matrix",
+          "bucket": "runtime",
+          "dependsOn": [
+            "build-target"
+          ]
+        },
+        {
+          "stageId": "runtime-engine-trace-compare",
+          "kind": "runtime-engine-trace-compare",
+          "scope": "matrix",
+          "bucket": "runtime",
+          "dependsOn": [
+            "runtime-engine-observe"
+          ]
+        },
+        {
+          "stageId": "report-assemble",
+          "kind": "report-assemble",
+          "scope": "matrix",
+          "bucket": "report",
+          "dependsOn": [
+            "runtime-engine-trace-compare"
+          ]
+        }
+      ]
+    }
+  ],
+  "environmentMatrices": [
+    {
+      "matrixId": "windows-dev-output",
+      "pipelineId": "engine-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "engine-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-reference-trace",
+      "pipelineId": "engine-runtime-trace",
+      "supportedGoals": [
+        "correctness.platform"
+      ],
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "engine-reference-trace"
+      },
+      "validationIntent": {
+        "validationMode": "trace",
+        "adaptationLevel": "traceable",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    }
+  ]
+}

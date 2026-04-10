@@ -16,10 +16,22 @@ public sealed class NativeReferenceProofEmitter
         "managed-generic.static-forwarder-captured-getter.minimal";
     private const string ManagedArraysBoxingReferenceArrayBoxedIntMinimal =
         "managed-arrays-boxing.reference-array-boxed-int.minimal";
+    private const string DelegateClosedTargetRelayMinimal =
+        "managed-delegates.closed-target-relay-message.minimal";
+    private const string ExceptionThrowCatchFinallyMinimal =
+        "managed-exceptions.throw-catch-finally-message.minimal";
+    private const string ReflectionInteropClosureMinimal =
+        "managed-reflection-interop.closure.minimal";
     private const string ReflectionClosedTypeQueryMinimal =
         "reflection.closed-type-query.minimal";
     private const string InteropPInvokeDirectCallMinimal =
         "interop.pinvoke-direct-call.minimal";
+    private const string EngineLogWriteMinimal =
+        "engine.log-write.minimal";
+    private const string EngineObjectHandleRoundtripMinimal =
+        "engine.object-handle.roundtrip.minimal";
+    private const string EngineLifecycleCallbackMinimal =
+        "engine.lifecycle-callback.minimal";
     private const string GeneratedTranslationUnitTemplateRelativePath = "Templates/NativeReferenceProof.cpp.scriban";
     private const string DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath =
         "Templates/NativeReferenceProof.DispatchVirtualInstanceMessage.cpp.scriban";
@@ -31,6 +43,18 @@ public sealed class NativeReferenceProofEmitter
         "Templates/NativeReferenceProof.ReflectionQueryMinimal.cpp.scriban";
     private const string PInvokeDllImportMinimalGeneratedTranslationUnitTemplateRelativePath =
         "Templates/NativeReferenceProof.PInvokeDllImportMinimal.cpp.scriban";
+    private const string DelegateClosedTargetRelayGeneratedTranslationUnitTemplateRelativePath =
+        "Templates/NativeReferenceProof.DelegateClosedTargetRelay.cpp.scriban";
+    private const string ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath =
+        "Templates/NativeReferenceProof.ExceptionThrowCatchFinally.cpp.scriban";
+    private const string ReflectionInteropClosureGeneratedTranslationUnitTemplateRelativePath =
+        "Templates/NativeReferenceProof.ReflectionInteropClosure.cpp.scriban";
+    private const string EngineLogWriteGeneratedTranslationUnitTemplateRelativePath =
+        "Templates/NativeReferenceProof.EngineLogWrite.cpp.scriban";
+    private const string EngineObjectHandleGeneratedTranslationUnitTemplateRelativePath =
+        "Templates/NativeReferenceProof.EngineObjectHandle.cpp.scriban";
+    private const string EngineLifecycleCallbackGeneratedTranslationUnitTemplateRelativePath =
+        "Templates/NativeReferenceProof.EngineLifecycleCallback.cpp.scriban";
     private const string ConsoleWriteLineStringIcall = "System.Console/System.Console::WriteLine(System.String)";
     private const string StringConcatPairIcall = "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
 
@@ -56,6 +80,24 @@ public sealed class NativeReferenceProofEmitter
 
     private static readonly Lazy<Template> PInvokeDllImportMinimalGeneratedTranslationUnitTemplate =
         new(() => LoadTemplate(PInvokeDllImportMinimalGeneratedTranslationUnitTemplateRelativePath));
+
+    private static readonly Lazy<Template> DelegateClosedTargetRelayGeneratedTranslationUnitTemplate =
+        new(() => LoadTemplate(DelegateClosedTargetRelayGeneratedTranslationUnitTemplateRelativePath));
+
+    private static readonly Lazy<Template> ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplate =
+        new(() => LoadTemplate(ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath));
+
+    private static readonly Lazy<Template> ReflectionInteropClosureGeneratedTranslationUnitTemplate =
+        new(() => LoadTemplate(ReflectionInteropClosureGeneratedTranslationUnitTemplateRelativePath));
+
+    private static readonly Lazy<Template> EngineLogWriteGeneratedTranslationUnitTemplate =
+        new(() => LoadTemplate(EngineLogWriteGeneratedTranslationUnitTemplateRelativePath));
+
+    private static readonly Lazy<Template> EngineObjectHandleGeneratedTranslationUnitTemplate =
+        new(() => LoadTemplate(EngineObjectHandleGeneratedTranslationUnitTemplateRelativePath));
+
+    private static readonly Lazy<Template> EngineLifecycleCallbackGeneratedTranslationUnitTemplate =
+        new(() => LoadTemplate(EngineLifecycleCallbackGeneratedTranslationUnitTemplateRelativePath));
 
     public NativeReferenceProofResult Generate(NativeReferenceProofRequest request)
     {
@@ -188,6 +230,59 @@ public sealed class NativeReferenceProofEmitter
                 RequireIntField(loweringPlan.MessageSuffixLiteralByteCount, nameof(loweringPlan.MessageSuffixLiteralByteCount));
                 return;
 
+            case DelegateClosedTargetRelayMinimal:
+                RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
+                RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
+                RequireStringField(loweringPlan.StaticMethodSymbol, nameof(loweringPlan.StaticMethodSymbol));
+                RequireStringField(loweringPlan.ReferenceTypeToken, nameof(loweringPlan.ReferenceTypeToken));
+                RequireStringField(loweringPlan.CapturedFieldToken, nameof(loweringPlan.CapturedFieldToken));
+                RequireStringField(loweringPlan.ConstructorMethodToken, nameof(loweringPlan.ConstructorMethodToken));
+                RequireStringField(loweringPlan.InstanceMethodToken, nameof(loweringPlan.InstanceMethodToken));
+                RequireStringField(loweringPlan.StaticMethodToken, nameof(loweringPlan.StaticMethodToken));
+                RequireStringField(loweringPlan.StringConcatPairIcall, nameof(loweringPlan.StringConcatPairIcall));
+                RequireStringField(loweringPlan.ConstructorLiteral, nameof(loweringPlan.ConstructorLiteral));
+                RequireIntField(loweringPlan.ConstructorLiteralByteCount, nameof(loweringPlan.ConstructorLiteralByteCount));
+                RequireStringField(loweringPlan.MessagePrefixLiteral, nameof(loweringPlan.MessagePrefixLiteral));
+                RequireIntField(loweringPlan.MessagePrefixLiteralByteCount, nameof(loweringPlan.MessagePrefixLiteralByteCount));
+                RequireStringField(loweringPlan.MessageSuffixLiteral, nameof(loweringPlan.MessageSuffixLiteral));
+                RequireIntField(loweringPlan.MessageSuffixLiteralByteCount, nameof(loweringPlan.MessageSuffixLiteralByteCount));
+                return;
+
+            case ExceptionThrowCatchFinallyMinimal:
+                RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
+                RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
+                RequireStringField(loweringPlan.ThrowMethodSymbol, nameof(loweringPlan.ThrowMethodSymbol));
+                RequireStringField(loweringPlan.ReferenceTypeToken, nameof(loweringPlan.ReferenceTypeToken));
+                RequireStringField(loweringPlan.ConstructorMethodToken, nameof(loweringPlan.ConstructorMethodToken));
+                RequireStringField(loweringPlan.InstanceMethodToken, nameof(loweringPlan.InstanceMethodToken));
+                RequireStringField(loweringPlan.ThrowMethodToken, nameof(loweringPlan.ThrowMethodToken));
+                RequireStringField(loweringPlan.FinallyLiteral, nameof(loweringPlan.FinallyLiteral));
+                RequireIntField(loweringPlan.FinallyLiteralByteCount, nameof(loweringPlan.FinallyLiteralByteCount));
+                RequireStringField(loweringPlan.ExpectedOutput, nameof(loweringPlan.ExpectedOutput));
+                RequireIntField(loweringPlan.ExpectedOutputByteCount, nameof(loweringPlan.ExpectedOutputByteCount));
+                return;
+
+            case ReflectionInteropClosureMinimal:
+                RequireStringField(loweringPlan.ClosedTypeSubjectId, nameof(loweringPlan.ClosedTypeSubjectId));
+                RequireStringField(loweringPlan.GenericTypeDefinitionSubjectId, nameof(loweringPlan.GenericTypeDefinitionSubjectId));
+                RequireStringField(loweringPlan.FieldSubjectId, nameof(loweringPlan.FieldSubjectId));
+                RequireStringField(loweringPlan.MethodSubjectId, nameof(loweringPlan.MethodSubjectId));
+                RequireStringField(loweringPlan.ParameterSubjectId, nameof(loweringPlan.ParameterSubjectId));
+                RequireStringField(loweringPlan.ClosedTypeToken, nameof(loweringPlan.ClosedTypeToken));
+                RequireStringField(loweringPlan.GenericTypeDefinitionToken, nameof(loweringPlan.GenericTypeDefinitionToken));
+                RequireStringField(loweringPlan.ClosedTypeNamespaceName, nameof(loweringPlan.ClosedTypeNamespaceName));
+                RequireStringField(loweringPlan.ClosedTypeName, nameof(loweringPlan.ClosedTypeName));
+                RequireStringField(loweringPlan.ClosedTypeDisplayName, nameof(loweringPlan.ClosedTypeDisplayName));
+                RequireStringField(loweringPlan.FieldQueryName, nameof(loweringPlan.FieldQueryName));
+                RequireStringField(loweringPlan.MethodQueryName, nameof(loweringPlan.MethodQueryName));
+                RequireIntField(loweringPlan.MethodParameterCount, nameof(loweringPlan.MethodParameterCount));
+                RequireIntField(loweringPlan.ParameterIndex, nameof(loweringPlan.ParameterIndex));
+                RequireStringField(loweringPlan.ImportModuleName, nameof(loweringPlan.ImportModuleName));
+                RequireStringField(loweringPlan.ImportEntryPointName, nameof(loweringPlan.ImportEntryPointName));
+                RequireStringField(loweringPlan.ExpectedOutput, nameof(loweringPlan.ExpectedOutput));
+                RequireIntField(loweringPlan.ExpectedOutputByteCount, nameof(loweringPlan.ExpectedOutputByteCount));
+                return;
+
             case ReflectionClosedTypeQueryMinimal:
                 RequireStringField(loweringPlan.ClosedTypeSubjectId, nameof(loweringPlan.ClosedTypeSubjectId));
                 RequireStringField(loweringPlan.GenericTypeDefinitionSubjectId, nameof(loweringPlan.GenericTypeDefinitionSubjectId));
@@ -218,6 +313,23 @@ public sealed class NativeReferenceProofEmitter
                 RequireIntField(loweringPlan.ImportArgument1, nameof(loweringPlan.ImportArgument1));
                 RequireIntField(loweringPlan.ImportArgument2, nameof(loweringPlan.ImportArgument2));
                 RequireStringField(loweringPlan.OutputPrefix, nameof(loweringPlan.OutputPrefix));
+                return;
+
+            case EngineLogWriteMinimal:
+            case EngineObjectHandleRoundtripMinimal:
+            case EngineLifecycleCallbackMinimal:
+                RequireStringField(loweringPlan.ExpectedOutput, nameof(loweringPlan.ExpectedOutput));
+                RequireIntField(loweringPlan.ExpectedOutputByteCount, nameof(loweringPlan.ExpectedOutputByteCount));
+                if (loweringPlan.EngineBindings is null)
+                {
+                    throw new InvalidOperationException("managed lowering plan is missing required field 'EngineBindings'");
+                }
+
+                if (loweringPlan.HostBindings is null)
+                {
+                    throw new InvalidOperationException("managed lowering plan is missing required field 'HostBindings'");
+                }
+
                 return;
 
             default:
@@ -651,8 +763,14 @@ public sealed class NativeReferenceProofEmitter
             ManagedObjectCapturedStateInstanceMessageMinimal => GeneratedTranslationUnitTemplate.Value,
             ManagedGenericStaticForwarderCapturedGetterMinimal => StaticCallCtorGetterGeneratedTranslationUnitTemplate.Value,
             ManagedArraysBoxingReferenceArrayBoxedIntMinimal => ArrayBoxingReferenceArrayGeneratedTranslationUnitTemplate.Value,
+            DelegateClosedTargetRelayMinimal => DelegateClosedTargetRelayGeneratedTranslationUnitTemplate.Value,
+            ExceptionThrowCatchFinallyMinimal => ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplate.Value,
+            ReflectionInteropClosureMinimal => ReflectionInteropClosureGeneratedTranslationUnitTemplate.Value,
             ReflectionClosedTypeQueryMinimal => ReflectionQueryMinimalGeneratedTranslationUnitTemplate.Value,
             InteropPInvokeDirectCallMinimal => PInvokeDllImportMinimalGeneratedTranslationUnitTemplate.Value,
+            EngineLogWriteMinimal => EngineLogWriteGeneratedTranslationUnitTemplate.Value,
+            EngineObjectHandleRoundtripMinimal => EngineObjectHandleGeneratedTranslationUnitTemplate.Value,
+            EngineLifecycleCallbackMinimal => EngineLifecycleCallbackGeneratedTranslationUnitTemplate.Value,
             _ => throw new InvalidOperationException($"unsupported native-reference lowering plan kind '{planKind}'"),
         };
     }
@@ -673,6 +791,8 @@ public sealed class NativeReferenceProofEmitter
 
         AddIfNotNull(model, "constructor_symbol", loweringPlan.ConstructorSymbol);
         AddIfNotNull(model, "instance_method_symbol", loweringPlan.InstanceMethodSymbol);
+        AddIfNotNull(model, "static_method_symbol", loweringPlan.StaticMethodSymbol);
+        AddIfNotNull(model, "throw_method_symbol", loweringPlan.ThrowMethodSymbol);
         AddIfNotNull(model, "echo_method_symbol", loweringPlan.EchoMethodSymbol);
         AddIfNotNull(model, "getter_symbol", loweringPlan.GetterSymbol);
         AddIfNotNull(model, "import_method_subject_id", loweringPlan.ImportMethodSubjectId);
@@ -684,6 +804,8 @@ public sealed class NativeReferenceProofEmitter
         AddIfNotNull(model, "import_argument2", loweringPlan.ImportArgument2);
         AddIfNotNull(model, "constructor_method_token", loweringPlan.ConstructorMethodToken);
         AddIfNotNull(model, "instance_method_token", loweringPlan.InstanceMethodToken);
+        AddIfNotNull(model, "static_method_token", loweringPlan.StaticMethodToken);
+        AddIfNotNull(model, "throw_method_token", loweringPlan.ThrowMethodToken);
         AddIfNotNull(model, "dispatch_strategy", loweringPlan.DispatchStrategy);
         AddIfNotNull(model, "echo_method_token", loweringPlan.EchoMethodToken);
         AddIfNotNull(model, "getter_method_token", loweringPlan.GetterMethodToken);
@@ -696,6 +818,8 @@ public sealed class NativeReferenceProofEmitter
         AddIfNotNull(model, "message_suffix_literal_byte_count", loweringPlan.MessageSuffixLiteralByteCount);
         AddIfNotNull(model, "echo_literal", loweringPlan.EchoLiteral);
         AddIfNotNull(model, "echo_literal_byte_count", loweringPlan.EchoLiteralByteCount);
+        AddIfNotNull(model, "finally_literal", loweringPlan.FinallyLiteral);
+        AddIfNotNull(model, "finally_literal_byte_count", loweringPlan.FinallyLiteralByteCount);
         AddIfNotNull(model, "boxed_value_type_token", loweringPlan.BoxedValueTypeToken);
         AddIfNotNull(model, "boxed_int32_value", loweringPlan.BoxedInt32Value);
         AddIfNotNull(model, "closed_type_subject_id", loweringPlan.ClosedTypeSubjectId);

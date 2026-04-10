@@ -63,6 +63,48 @@ public sealed class LinkerStage
         var pendingMethods = new Queue<ManagedMethodModel>();
         pendingMethods.Enqueue(entryPointMethod);
 
+        ExpandReachableMethods(
+            semanticWorld,
+            methodMap,
+            fieldMap,
+            propertyMap,
+            typeMap,
+            pendingMethods,
+            reachableMethodIds,
+            reachableFieldIds,
+            reachablePropertyIds,
+            reachableTypeIds);
+        IncludeReflectionQuerySurface(
+            semanticWorld,
+            methodMap,
+            fieldMap,
+            propertyMap,
+            typeMap,
+            reachableMethodIds,
+            reachableFieldIds,
+            reachablePropertyIds,
+            reachableTypeIds);
+        IncludeGenericTypeDefinitions(reachableTypeIds, typeMap);
+
+        return new ReachableClosure(
+            semanticWorld.Types.Where(type => reachableTypeIds.Contains(type.SubjectId)).ToList(),
+            semanticWorld.Fields.Where(field => reachableFieldIds.Contains(field.SubjectId)).ToList(),
+            semanticWorld.Properties.Where(property => reachablePropertyIds.Contains(property.SubjectId)).ToList(),
+            semanticWorld.Methods.Where(method => reachableMethodIds.Contains(method.SubjectId)).ToList());
+    }
+
+    private static void ExpandReachableMethods(
+        SemanticWorldModel semanticWorld,
+        IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
+        IReadOnlyDictionary<string, ManagedFieldModel> fieldMap,
+        IReadOnlyDictionary<string, ManagedPropertyModel> propertyMap,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
+        Queue<ManagedMethodModel> pendingMethods,
+        HashSet<string> reachableMethodIds,
+        HashSet<string> reachableFieldIds,
+        HashSet<string> reachablePropertyIds,
+        HashSet<string> reachableTypeIds)
+    {
         while (pendingMethods.Count > 0)
         {
             var method = pendingMethods.Dequeue();
@@ -121,12 +163,127 @@ public sealed class LinkerStage
                 }
             }
         }
+    }
 
-        return new ReachableClosure(
-            semanticWorld.Types.Where(type => reachableTypeIds.Contains(type.SubjectId)).ToList(),
-            semanticWorld.Fields.Where(field => reachableFieldIds.Contains(field.SubjectId)).ToList(),
-            semanticWorld.Properties.Where(property => reachablePropertyIds.Contains(property.SubjectId)).ToList(),
-            semanticWorld.Methods.Where(method => reachableMethodIds.Contains(method.SubjectId)).ToList());
+    private static void IncludeGenericTypeDefinitions(
+        HashSet<string> reachableTypeIds,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
+    {
+        var pendingTypeIds = new Queue<string>(reachableTypeIds);
+
+        while (pendingTypeIds.Count > 0)
+        {
+            var subjectId = pendingTypeIds.Dequeue();
+            if (!typeMap.TryGetValue(subjectId, out var type) ||
+                string.Equals(type.SubjectId, type.DefinitionSubjectId, StringComparison.Ordinal) ||
+                !typeMap.ContainsKey(type.DefinitionSubjectId))
+            {
+                continue;
+            }
+
+            if (reachableTypeIds.Add(type.DefinitionSubjectId))
+            {
+                pendingTypeIds.Enqueue(type.DefinitionSubjectId);
+            }
+        }
+    }
+
+    private static void IncludeReflectionQuerySurface(
+        SemanticWorldModel semanticWorld,
+        IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
+        IReadOnlyDictionary<string, ManagedFieldModel> fieldMap,
+        IReadOnlyDictionary<string, ManagedPropertyModel> propertyMap,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
+        HashSet<string> reachableMethodIds,
+        HashSet<string> reachableFieldIds,
+        HashSet<string> reachablePropertyIds,
+        HashSet<string> reachableTypeIds)
+    {
+        var methodCapabilities = semanticWorld.CapabilityBundles.Methods
+            .ToDictionary(bundle => bundle.SubjectId, bundle => bundle.Capabilities, StringComparer.Ordinal);
+        var requiresReflectionQuerySurface = reachableMethodIds.Any(subjectId =>
+            methodCapabilities.TryGetValue(subjectId, out var capabilities) &&
+            (capabilities.Contains("requires-closed-type-member-query", StringComparer.Ordinal) ||
+             capabilities.Contains("requires-generic-type-definition-query", StringComparer.Ordinal)));
+        if (!requiresReflectionQuerySurface)
+        {
+            return;
+        }
+
+        var targetTypeIds = CollectReflectionQueryTargetTypeIds(semanticWorld, reachableMethodIds, typeMap);
+        if (targetTypeIds.Count == 0)
+        {
+            return;
+        }
+
+        foreach (var targetTypeId in targetTypeIds)
+        {
+            reachableTypeIds.Add(targetTypeId);
+        }
+
+        foreach (var field in semanticWorld.Fields.Where(candidate => targetTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        {
+            reachableFieldIds.Add(field.SubjectId);
+        }
+
+        foreach (var property in semanticWorld.Properties.Where(candidate => targetTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        {
+            reachablePropertyIds.Add(property.SubjectId);
+        }
+
+        var pendingMethods = new Queue<ManagedMethodModel>();
+        foreach (var method in semanticWorld.Methods.Where(candidate => targetTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        {
+            if (!reachableMethodIds.Contains(method.SubjectId))
+            {
+                pendingMethods.Enqueue(method);
+            }
+        }
+
+        ExpandReachableMethods(
+            semanticWorld,
+            methodMap,
+            fieldMap,
+            propertyMap,
+            typeMap,
+            pendingMethods,
+            reachableMethodIds,
+            reachableFieldIds,
+            reachablePropertyIds,
+            reachableTypeIds);
+    }
+
+    private static HashSet<string> CollectReflectionQueryTargetTypeIds(
+        SemanticWorldModel semanticWorld,
+        IReadOnlySet<string> reachableMethodIds,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
+    {
+        var targetTypeIds = new HashSet<string>(StringComparer.Ordinal);
+
+        foreach (var method in semanticWorld.Methods)
+        {
+            if (!reachableMethodIds.Contains(method.SubjectId))
+            {
+                continue;
+            }
+
+            foreach (var instruction in method.Body.Blocks.SelectMany(block => block.Instructions))
+            {
+                var reference = instruction.Reference;
+                if (!string.Equals(instruction.Op, "ldtoken", StringComparison.Ordinal) ||
+                    reference is null ||
+                    !string.Equals(reference.AssemblyName, semanticWorld.Assembly.Name, StringComparison.Ordinal) ||
+                    !string.Equals(reference.SubjectKind, "type", StringComparison.Ordinal) ||
+                    !typeMap.ContainsKey(reference.SubjectId))
+                {
+                    continue;
+                }
+
+                targetTypeIds.Add(reference.SubjectId);
+            }
+        }
+
+        return targetTypeIds;
     }
 
     private static OptimizationFactsArtifact BuildOptimizationFacts(
@@ -182,6 +339,7 @@ public sealed class LinkerStage
                             Devirtualized = devirtualized,
                         };
                     })))
+            .Concat(BuildDelegateDispatchFacts(orderedMethods))
             .ToList();
 
         var layoutFacts = orderedFields
@@ -225,8 +383,55 @@ public sealed class LinkerStage
             ClosedWorldSpecializations = closedWorldSpecializations,
             DispatchFacts = dispatchFacts,
             LayoutFacts = layoutFacts,
-            ExceptionFacts = [],
+            ExceptionFacts = BuildExceptionFacts(orderedMethods),
         };
+    }
+
+    private static IReadOnlyList<DispatchFact> BuildDelegateDispatchFacts(
+        IReadOnlyList<ManagedMethodModel> orderedMethods)
+    {
+        return orderedMethods
+            .SelectMany(method => method.Body.Blocks.SelectMany(block =>
+                block.Instructions
+                    .Where(instruction =>
+                        (string.Equals(instruction.Op, "ldftn", StringComparison.Ordinal) ||
+                         string.Equals(instruction.Op, "ldvirtftn", StringComparison.Ordinal)) &&
+                        !string.IsNullOrWhiteSpace(instruction.Callee))
+                    .Select(instruction => new DispatchFact
+                    {
+                        MethodSubjectId = method.SubjectId,
+                        DispatchKind = string.Equals(instruction.Op, "ldftn", StringComparison.Ordinal)
+                            ? "delegate.exact-target-direct"
+                            : "delegate.runtime-helper-fallback",
+                        TargetSubjectId = instruction.Callee!,
+                        Devirtualized = string.Equals(instruction.Op, "ldftn", StringComparison.Ordinal),
+                    })))
+            .ToList();
+    }
+
+    private static IReadOnlyList<ExceptionFact> BuildExceptionFacts(
+        IReadOnlyList<ManagedMethodModel> orderedMethods)
+    {
+        return orderedMethods
+            .SelectMany(method =>
+            {
+                _ = HasThrowCatchFinallyShape(method) ? "throw-catch-finally" : null;
+                return method.Body.ExceptionRegions.Select(region => new ExceptionFact
+                {
+                    MethodSubjectId = method.SubjectId,
+                    HandlingKind = region.HandlingKind,
+                    CatchTypeSubjectId = region.CatchTypeSubjectId,
+                });
+            })
+            .ToList();
+    }
+
+    private static bool HasThrowCatchFinallyShape(ManagedMethodModel method)
+    {
+        var instructions = method.Body.Blocks.SelectMany(block => block.Instructions);
+        return instructions.Any(instruction => string.Equals(instruction.Op, "throw", StringComparison.Ordinal)) &&
+               method.Body.ExceptionRegions.Any(region => string.Equals(region.HandlingKind, "catch", StringComparison.Ordinal)) &&
+               method.Body.ExceptionRegions.Any(region => string.Equals(region.HandlingKind, "finally", StringComparison.Ordinal));
     }
 
     private static string? TryResolveDevirtualizedCallTarget(
@@ -437,6 +642,7 @@ public sealed class LinkerStage
             "System.Private.CoreLib/System.Object::.ctor()" => "base-ctor",
             "System.Private.CoreLib/System.Int32" => "boxed-value-type",
             "System.Private.CoreLib/System.String::Concat(System.String,System.String)" => "narrow-concat-path",
+            "System.Private.CoreLib/System.InvalidOperationException::.ctor(System.String)" => "managed-exception-construction",
             "System.Console/System.Console::WriteLine(System.String)" => "stdout-path",
             "System.Private.CoreLib/System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)" => "reflection-query",
             "System.Private.CoreLib/System.Type::GetField(System.String)" => "reflection-query",

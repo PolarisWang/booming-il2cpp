@@ -5,6 +5,12 @@
 
 namespace chaos::il2cpp::runtime_core {
 
+struct ManagedExceptionCarrier {
+    ExceptionHandle exception;
+};
+
+using EngineLifecycleCallback = void (*)(const char* phase_utf8, void* user_data);
+
 const RuntimeAbiV0* GetRuntimeAbiV0();
 void* BoxValueObject(
     RuntimeState* runtime_state,
@@ -24,6 +30,17 @@ bool ArrayStoreReference(
 void* ArrayLoadReference(
     void* array_instance,
     uintptr_t index);
+int32_t EngineLogWrite(
+    const char* category_utf8,
+    const char* message_utf8);
+uintptr_t CreateEngineObjectHandle(void* object_instance);
+void* ResolveEngineObjectHandle(uintptr_t handle);
+bool RegisterEngineLifecycleCallback(
+    const char* phase_utf8,
+    EngineLifecycleCallback callback,
+    void* user_data);
+bool DispatchEngineLifecycleCallbacks(const char* phase_utf8);
+bool IsMainThreadLane();
 
 }  // namespace chaos::il2cpp::runtime_core
 

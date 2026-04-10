@@ -1,0 +1,17 @@
+{
+  "kind": "lifecycle-callback",
+  "status": "ok",
+  "artifactFileName": "lifecycle-callback.json",
+  "focusArea": "lifecycle-callback",
+  "capabilityIds": [
+    "engine.lifecycle.callback.register",
+    "engine.lifecycle.dispatch",
+    "engine.thread.main-lane"
+  ],
+  "order": [
+    "init",
+    "tick",
+    "shutdown"
+  ],
+  "mainThread": true
+}

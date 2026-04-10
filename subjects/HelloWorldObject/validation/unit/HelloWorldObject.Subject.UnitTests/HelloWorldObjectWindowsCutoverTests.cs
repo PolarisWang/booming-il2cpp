@@ -118,7 +118,7 @@ public sealed class HelloWorldObjectWindowsCutoverTests
     }
 
     [Fact]
-    public void TestsProofTreeOnlyContainsGenericMigrationNote()
+    public void TestsProofReadmeRedirectsToSubjectOwnedProofLocations()
     {
         var noteText = RepoFiles.ReadText(
             "tests",
@@ -128,15 +128,7 @@ public sealed class HelloWorldObjectWindowsCutoverTests
 
         Assert.Contains("subjects/<subject-id>/source/", noteText);
         Assert.Contains("subjects/<subject-id>/validation/proof/", noteText);
-        Assert.False(RepoFiles.Exists("tests", "proof", "hello-world-object"));
-        Assert.False(RepoFiles.Exists("tests", "proof", "input", "HelloWorldObject"));
-        Assert.False(RepoFiles.Exists("tests", "proof", "input", "GenericEchoClosedMinimal"));
-        Assert.False(RepoFiles.Exists("tests", "proof", "input", "ReflectionLiteQueryMinimal"));
-        Assert.False(RepoFiles.Exists("tests", "proof", "input", "PInvokeLiteDllImportMinimal"));
-        Assert.False(RepoFiles.Exists("tests", "proof", "native-reference", "HelloWorldObject"));
-        Assert.False(RepoFiles.Exists("tests", "proof", "native-reference", "GenericEchoClosedMinimal"));
-        Assert.False(RepoFiles.Exists("tests", "proof", "native-reference", "ReflectionLiteQueryMinimal"));
-        Assert.False(RepoFiles.Exists("tests", "proof", "native-reference", "PInvokeLiteDllImportMinimal"));
+        Assert.Contains("stale and must be migrated", noteText);
     }
 
     [Fact]

@@ -429,6 +429,180 @@ class SubjectPlannerTests(unittest.TestCase):
             plan["selection"]["source"]["entry"],
         )
 
+    def test_planner_overlays_matrix_source_entry_for_mainline_feature_pack_delegate_slice(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_delegate_slice")
+        _, record = select_subject_record(
+            "chaos_subject_planner_mainline_delegate_slice_record",
+            category="mainline",
+            source_type="dotnet-project",
+            required_goal_ids=["correctness.dev"],
+            required_validation_profile_ids=["proof-delegate"],
+        )
+        subject_id = str(record["subjectId"])
+        run_id = "20260409-fixture-mainline-delegate-slice-001"
+
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            subject_id,
+            goal_id="correctness.dev",
+            matrix_id="windows-delegate-check",
+            validation_profile_id="proof-delegate",
+            run_id=run_id,
+        )
+
+        self.assertEqual("windows-delegate-check", plan["selection"]["matrixId"])
+        self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
+        self.assertEqual("proof-delegate", plan["selection"]["validationProfileId"])
+        self.assertEqual(
+            "MainlineFeaturePack/DelegateProofEntry::Run()",
+            plan["selection"]["source"]["entry"],
+        )
+
+    def test_planner_overlays_matrix_source_entry_for_mainline_feature_pack_exception_slice(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_exception_slice")
+        _, record = select_subject_record(
+            "chaos_subject_planner_mainline_exception_slice_record",
+            category="mainline",
+            source_type="dotnet-project",
+            required_goal_ids=["correctness.dev"],
+            required_validation_profile_ids=["proof-exception"],
+        )
+        subject_id = str(record["subjectId"])
+        run_id = "20260409-fixture-mainline-exception-slice-001"
+
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            subject_id,
+            goal_id="correctness.dev",
+            matrix_id="windows-exception-check",
+            validation_profile_id="proof-exception",
+            run_id=run_id,
+        )
+
+        self.assertEqual("windows-exception-check", plan["selection"]["matrixId"])
+        self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
+        self.assertEqual("proof-exception", plan["selection"]["validationProfileId"])
+        self.assertEqual(
+            "MainlineFeaturePack/ExceptionProofEntry::Run()",
+            plan["selection"]["source"]["entry"],
+        )
+
+    def test_planner_overlays_matrix_source_entry_for_mainline_feature_pack_reflection_interop_closure_slice(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_reflection_interop_closure_slice")
+        _, record = select_subject_record(
+            "chaos_subject_planner_mainline_reflection_interop_closure_slice_record",
+            category="mainline",
+            source_type="dotnet-project",
+            required_goal_ids=["correctness.dev"],
+            required_validation_profile_ids=["proof-reflection-interop-closure"],
+        )
+        subject_id = str(record["subjectId"])
+        run_id = "20260409-fixture-mainline-reflection-interop-closure-slice-001"
+
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            subject_id,
+            goal_id="correctness.dev",
+            matrix_id="windows-reflection-interop-closure-check",
+            validation_profile_id="proof-reflection-interop-closure",
+            run_id=run_id,
+        )
+
+        self.assertEqual("windows-reflection-interop-closure-check", plan["selection"]["matrixId"])
+        self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
+        self.assertEqual("proof-reflection-interop-closure", plan["selection"]["validationProfileId"])
+        self.assertEqual(
+            "MainlineFeaturePack/ReflectionInteropClosureEntry::Run()",
+            plan["selection"]["source"]["entry"],
+        )
+
+    def test_planner_selects_engine_output_pipeline_without_copying_engine_profile_into_selection(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_engine_output")
+        _, record = select_subject_record(
+            "chaos_subject_planner_engine_output_record",
+            category="canonical",
+            source_type="dotnet-project",
+            required_stage_kinds=["generated-engine-proof", "runtime-engine-observe"],
+            required_goal_ids=["correctness.dev"],
+        )
+        subject_id = str(record["subjectId"])
+        run_id = "20260410-fixture-engine-output-001"
+
+        plan = planner_module.build_plan(REPO_ROOT, subject_id, run_id=run_id)
+
+        self.assertEqual(subject_id, plan["selection"]["subjectId"])
+        self.assertEqual("correctness.dev", plan["selection"]["goalId"])
+        self.assertEqual("windows-dev-output", plan["selection"]["matrixId"])
+        self.assertEqual("engine-runtime-output", plan["selection"]["pipelineId"])
+        self.assertNotIn("engineProofProfile", plan["selection"])
+        self.assertEqual(
+            [
+                "source-resolve",
+                "host-input-build",
+                "analysis-frontend",
+                "generated-engine-proof",
+                "build-target",
+                "runtime-engine-observe",
+                "report-assemble",
+            ],
+            [stage["stageId"] for stage in plan["stagePlan"]],
+        )
+
+    def test_planner_selects_engine_trace_matrix_and_paths_without_subject_name_coupling(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_engine_trace")
+        subjects_module, record = select_subject_record(
+            "chaos_subject_planner_engine_trace_record",
+            category="canonical",
+            source_type="dotnet-project",
+            required_stage_kinds=["runtime-engine-trace-compare"],
+            required_goal_ids=["correctness.platform"],
+        )
+        manifest = record["manifest"]
+        subject_id = str(record["subjectId"])
+        trace_matrix = find_matrix_for_goal(
+            subjects_module,
+            manifest,
+            "correctness.platform",
+            required_stage_kind="runtime-engine-trace-compare",
+        )
+        run_id = "20260410-fixture-engine-trace-001"
+
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            subject_id,
+            goal_id="correctness.platform",
+            matrix_id=str(trace_matrix["matrixId"]),
+            run_id=run_id,
+        )
+
+        self.assertEqual("windows-reference-trace", plan["selection"]["matrixId"])
+        self.assertEqual("engine-runtime-trace", plan["selection"]["pipelineId"])
+        self.assertEqual(
+            [
+                "source-resolve",
+                "host-input-build",
+                "analysis-frontend",
+                "generated-engine-proof",
+                "build-target",
+                "runtime-engine-observe",
+                "runtime-engine-trace-compare",
+                "report-assemble",
+            ],
+            [stage["stageId"] for stage in plan["stagePlan"]],
+        )
+        trace_stage = next(stage for stage in plan["stagePlan"] if stage["kind"] == "runtime-engine-trace-compare")
+        self.assertEqual(
+            subjects_module.stage_paths(
+                subject_id,
+                "windows-reference-trace",
+                run_id=run_id,
+                bucket="runtime",
+                scope="matrix",
+                kind="runtime-engine-trace-compare",
+            )["reportPaths"],
+            trace_stage["paths"]["reportPaths"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

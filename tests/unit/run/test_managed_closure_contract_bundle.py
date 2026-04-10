@@ -235,7 +235,7 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         self.assertEqual("static-method", main_method["methodRole"])
         self.assertEqual("has-canonical-body", main_method["bodyAvailability"])
         self.assertEqual(
-            ["requires-console-string-output"],
+            ["requires-console-string-output", "uses-virtual-call-site"],
             sorted(main_method["capabilities"]),
         )
 

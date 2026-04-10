@@ -5,17 +5,19 @@ namespace HelloWorldObject.Subject.UnitTests;
 public sealed class HelloWorldObjectWindowsReferenceWiringTests
 {
     [Fact]
-    public void WindowsReferenceRouterKeepsContractSmokeAndAddsStage4NativeGraph()
+    public void WindowsReferenceRouterKeepsContractSmokeAndUsesSubjectOwnedProofRoot()
     {
         var rootCmakeText = RepoFiles.ReadText("CMakeLists.txt");
 
         var requiredMarkers = new[]
         {
             "if(ROADMAP0_PRESET_TARGET STREQUAL \"windows-x64-reference\")",
+            "CHAOS_SUBJECT_PROOF_ROOT",
+            "subjects/HelloWorldObject/validation/proof/native-reference",
             "add_subdirectory(src/native/runtime-core)",
             "add_subdirectory(src/native/support)",
             "add_subdirectory(src/native/bootstrap)",
-            "add_subdirectory(subjects/HelloWorldObject/validation/proof/native-reference)",
+            "add_subdirectory(\"${CHAOS_SUBJECT_PROOF_ROOT}\" \"${CMAKE_BINARY_DIR}/subject-proof\")",
             "add_subdirectory(tests/contracts/native/abi)",
         };
         var forbiddenMarkers = new[]

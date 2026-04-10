@@ -309,11 +309,12 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                 "regressions": [{"metric": "meanDurationMs", "baseline": 15.0, "actual": 18.0, "delta": 3.0}],
             }
             perf_counter_values = [
-                0.0, 0.017,
-                1.0, 1.018,
-                2.0, 2.019,
-                3.0, 3.017,
-                4.0, 4.019,
+                0.0, 0.120,
+                1.0, 1.017,
+                2.0, 2.018,
+                3.0, 3.019,
+                4.0, 4.017,
+                5.0, 5.019,
             ]
 
             with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
@@ -322,7 +323,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                         result = workers_module.run_native_runtime_perf(repo_root=repo_root, request=request)
 
             self.assertEqual("ok", result["status"])
-            self.assertEqual(5, run_process_mock.call_count)
+            self.assertEqual(6, run_process_mock.call_count)
             self.assertEqual([str(repo_root / executable_path)], run_process_mock.call_args_list[0].args[0])
             evaluate_mock.assert_called_once_with(
                 repo_root=repo_root,
@@ -346,6 +347,10 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                 subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "perf.samples.json"),
                 manifest["perfSamplesPath"],
             )
+            self.assertEqual(1, manifest["warmupSampleCount"])
+            self.assertEqual(6, len(manifest["samples"]))
+            self.assertEqual(False, manifest["samples"][0]["countedInSummary"])
+            self.assertEqual(True, manifest["samples"][1]["countedInSummary"])
             self.assertEqual("regressed", manifest["regressionStatus"])
             self.assertEqual(
                 [
@@ -361,6 +366,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                 },
                 result["details"]["performance"]["runtimeEvidence"],
             )
+            self.assertEqual(1, result["details"]["performance"]["warmupSampleCount"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

@@ -1,0 +1,10 @@
+{
+  "kind": "log-write",
+  "status": "ok",
+  "artifactFileName": "log-write.json",
+  "focusArea": "service-call",
+  "capabilityIds": [
+    "engine.log.write"
+  ],
+  "message": "engine.log.write|minimal|ok"
+}

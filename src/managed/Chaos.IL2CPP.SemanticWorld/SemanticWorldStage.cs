@@ -156,6 +156,9 @@ public sealed class SemanticWorldStage
         {
             Body = new ManagedMethodBodyModel
             {
+                ExceptionRegions = method.Body.ExceptionRegions
+                    .Select(region => region with { })
+                    .ToList(),
                 Blocks = method.Body.Blocks.Select(CanonicalizeBlock).ToList(),
             },
         };
@@ -266,12 +269,20 @@ public sealed class SemanticWorldStage
         {
             switch (instruction.Op)
             {
+                case "ldftn":
+                case "ldvirtftn":
+                    capabilities.Add("requires-delegate-construction");
+                    break;
                 case "ldfld":
                 case "stfld":
                     capabilities.Add("uses-instance-field-state");
                     break;
                 case "callvirt":
                     capabilities.Add("uses-virtual-call-site");
+                    if (IsDelegateInvokeCallee(instruction.Callee))
+                    {
+                        capabilities.Add("requires-delegate-invoke");
+                    }
                     break;
                 case "newarr":
                     capabilities.Add("requires-array-allocation");
@@ -281,6 +292,13 @@ public sealed class SemanticWorldStage
                     break;
                 case "box":
                     capabilities.Add("requires-boxing");
+                    break;
+                case "throw":
+                case "rethrow":
+                    capabilities.Add("requires-exception-throw");
+                    break;
+                case "endfinally":
+                    capabilities.Add("requires-finally");
                     break;
             }
 
@@ -318,9 +336,24 @@ public sealed class SemanticWorldStage
             }
         }
 
+        foreach (var region in method.Body.ExceptionRegions)
+        {
+            capabilities.Add("requires-exception-handler");
+            if (string.Equals(region.HandlingKind, "finally", StringComparison.Ordinal))
+            {
+                capabilities.Add("requires-finally");
+            }
+        }
+
         return capabilities
             .OrderBy(capability => capability, StringComparer.Ordinal)
             .ToList();
+    }
+
+    private static bool IsDelegateInvokeCallee(string? subjectId)
+    {
+        return !string.IsNullOrWhiteSpace(subjectId) &&
+               subjectId.Contains("::Invoke(", StringComparison.Ordinal);
     }
 
     private static bool IsStaticForwarder(ManagedMethodModel method)

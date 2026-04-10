@@ -45,6 +45,7 @@ VARIANT_MACROS = {
         "native": ["CHAOS_VARIANT_SHIP", "CHAOS_VARIANT_NAME=SHIP"],
     },
 }
+ENGINE_OBSERVE_PREFIX = "CHAOS_ENGINE_OBSERVE "
 
 
 def _resolve(repo_root: Path, relative_path: str) -> Path:
@@ -156,6 +157,101 @@ def _success_result(
         "details": dict(details or {}),
         "failure": None,
     }
+
+
+def _engine_profile(repo_root: Path, subject_id: str) -> dict[str, Any]:
+    manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
+    return dict(manifest.get("engineProofProfile") or {})
+
+
+def _engine_contract_summary(profile: dict[str, Any]) -> dict[str, Any]:
+    if not profile:
+        return {}
+
+    focus_area = str(profile.get("focusArea") or "")
+    engine_binding_kinds = [str(value) for value in list(profile.get("engineBindingKinds") or []) if str(value)]
+    if not engine_binding_kinds and focus_area:
+        engine_binding_kinds = [focus_area]
+
+    host_binding_kinds = [str(value) for value in list(profile.get("hostBindingKinds") or []) if str(value)]
+    if not host_binding_kinds:
+        host_binding_kinds = ["artifact-observe-contract"]
+
+    return {
+        "proofKind": str(profile.get("proofKind") or "engine-binding"),
+        "focusArea": focus_area,
+        "resolvedCapabilityIds": [
+            str(value)
+            for value in list(profile.get("expectedCapabilityIds") or [])
+            if str(value)
+        ],
+        "engineBindingKinds": engine_binding_kinds,
+        "hostBindingKinds": host_binding_kinds,
+        "expectedEvidenceKinds": [
+            str(value)
+            for value in list(profile.get("expectedEvidenceKinds") or [])
+            if str(value)
+        ],
+    }
+
+
+def _engine_lowering_bindings(lowering_plan: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
+    engine_bindings = dict(lowering_plan.get("engineBindings") or lowering_plan.get("EngineBindings") or {})
+    host_bindings = dict(lowering_plan.get("hostBindings") or lowering_plan.get("HostBindings") or {})
+    return engine_bindings, host_bindings
+
+
+def _engine_emission_summary(
+    lowering_plan: dict[str, Any],
+    *,
+    generated_source_path: str,
+    native_proof_manifest_path: str,
+) -> dict[str, Any]:
+    engine_bindings, host_bindings = _engine_lowering_bindings(lowering_plan)
+    if not engine_bindings:
+        return {}
+
+    return {
+        "proofKind": str(engine_bindings.get("proofKind") or "engine-binding"),
+        "focusArea": str(engine_bindings.get("focusArea") or ""),
+        "emittedCapabilityIds": [
+            str(value)
+            for value in list(engine_bindings.get("capabilityIds") or [])
+            if str(value)
+        ],
+        "engineBindingKinds": [
+            str(value)
+            for value in list(engine_bindings.get("bindingKinds") or [])
+            if str(value)
+        ],
+        "hostBindingKinds": [
+            str(value)
+            for value in list(host_bindings.get("bindingKinds") or [])
+            if str(value)
+        ],
+        "bridgeArtifactPaths": [generated_source_path],
+        "registrationArtifactPaths": [native_proof_manifest_path],
+    }
+
+
+def _parse_engine_observations(stdout_text: str) -> list[dict[str, Any]]:
+    observations: list[dict[str, Any]] = []
+    for line in stdout_text.splitlines():
+        if not line.startswith(ENGINE_OBSERVE_PREFIX):
+            continue
+
+        payload_text = line[len(ENGINE_OBSERVE_PREFIX) :].strip()
+        if not payload_text:
+            continue
+
+        try:
+            payload = json.loads(payload_text)
+        except ValueError:
+            continue
+
+        if isinstance(payload, dict):
+            observations.append(payload)
+    return observations
 
 
 def run_source_resolve(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
@@ -306,6 +402,13 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
             "closureManifestPath": _relative(repo_root, output_root / "closure.manifest.json"),
         },
     }
+    details: dict[str, Any] = {}
+    engine_contract_summary = _engine_contract_summary(
+        _engine_profile(repo_root, str(request["selection"]["subjectId"])),
+    )
+    if engine_contract_summary:
+        manifest["engineContractSummary"] = engine_contract_summary
+        details["engineContractSummary"] = engine_contract_summary
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
     return _success_result(
         bucket_manifest_path=request["paths"]["manifestPath"],
@@ -315,6 +418,7 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
             manifest["artifacts"]["optimizationFactsPath"],
             manifest["artifacts"]["closureManifestPath"],
         ],
+        details=details,
     )
 
 
@@ -345,6 +449,17 @@ def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dic
         "nativeProofManifestPath": _relative(repo_root, output_root / "native-proof.manifest.json"),
         "nativeProofPlanPath": _relative(repo_root, output_root / "native-proof.plan.json"),
     }
+    details: dict[str, Any] = {}
+    lowering_plan = read_json(output_root / "native-proof.plan.json")
+    if isinstance(lowering_plan, dict):
+        engine_emission_summary = _engine_emission_summary(
+            lowering_plan,
+            generated_source_path=generated_manifest["generatedSourcePath"],
+            native_proof_manifest_path=generated_manifest["nativeProofManifestPath"],
+        )
+        if engine_emission_summary:
+            generated_manifest["engineEmissionSummary"] = engine_emission_summary
+            details["engineEmissionSummary"] = engine_emission_summary
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), generated_manifest)
     return _success_result(
         bucket_manifest_path=request["paths"]["manifestPath"],
@@ -353,6 +468,7 @@ def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dic
             generated_manifest["generatedSourcePath"],
             generated_manifest["nativeProofManifestPath"],
         ],
+        details=details,
     )
 
 
@@ -635,6 +751,216 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
     )
 
 
+def run_runtime_engine_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
+    build_manifest = read_json(_resolve(repo_root, request["upstream"]["build"]["manifestPath"]))
+    if not isinstance(build_manifest, dict):
+        raise RuntimeError("build manifest must be an object")
+    if str(build_manifest.get("buildStrategy") or "") != WINDOWS_DIRECT_BUILD_STRATEGY:
+        raise RuntimeError("engine runtime observe requires direct-msvc build output")
+
+    output_paths = [str(value) for value in list(build_manifest.get("outputs") or []) if str(value)]
+    if not output_paths:
+        raise RuntimeError("direct-msvc build manifest missing outputs")
+
+    runtime_root = _resolve(repo_root, request["paths"]["bucketRoot"])
+    runtime_root.mkdir(parents=True, exist_ok=True)
+
+    native_executable_path = _resolve(repo_root, output_paths[0])
+    started = time.perf_counter()
+    completed = run_process([str(native_executable_path)], cwd=runtime_root)
+    duration_ms = int(round((time.perf_counter() - started) * 1000))
+
+    stdout_path = runtime_root / "stdout.log"
+    stderr_path = runtime_root / "stderr.log"
+    exit_code_path = runtime_root / "exit-code.txt"
+    stdout_path.write_text(completed.stdout or "", encoding="utf-8")
+    stderr_path.write_text(completed.stderr or "", encoding="utf-8")
+    exit_code_path.write_text(f"{completed.returncode}\n", encoding="utf-8")
+
+    observations = _parse_engine_observations(completed.stdout or "")
+    evidence_items: list[dict[str, Any]] = []
+    evidence_paths: list[str] = []
+    for observation in observations:
+        kind = str(observation.get("kind") or "")
+        if not kind:
+            continue
+
+        artifact_file_name = str(observation.get("artifactFileName") or f"{kind}.json")
+        evidence_path = runtime_root / artifact_file_name
+        write_json(evidence_path, observation)
+        evidence_relative_path = _relative(repo_root, evidence_path)
+        evidence_paths.append(evidence_relative_path)
+        evidence_items.append(
+            {
+                "kind": kind,
+                "path": evidence_relative_path,
+                "format": "json",
+                "status": str(observation.get("status") or "ok"),
+                "relatedCapabilityIds": [
+                    str(value)
+                    for value in list(observation.get("capabilityIds") or [])
+                    if str(value)
+                ],
+            }
+        )
+
+    report_payload = {
+        "reportVersion": "v1",
+        "subjectId": str(request["selection"]["subjectId"]),
+        "matrixId": str(request["selection"]["matrixId"]),
+        "status": "ok" if completed.returncode == 0 and evidence_items else "fail",
+        "evidenceItems": evidence_items,
+    }
+    write_json(_resolve(repo_root, request["paths"]["reportPaths"][0]), report_payload)
+
+    engine_observation_summary = {
+        "evidenceItems": evidence_items,
+        "localReportPaths": [request["paths"]["reportPaths"][0]],
+    }
+    manifest = {
+        "subjectId": str(request["selection"]["subjectId"]),
+        "matrixId": str(request["selection"]["matrixId"]),
+        "bucket": "runtime",
+        "variant": _selection_variant(dict(request["selection"])),
+        "buildManifestPath": str(request["upstream"]["build"]["manifestPath"]),
+        "stdoutPath": _relative(repo_root, stdout_path),
+        "stderrPath": _relative(repo_root, stderr_path),
+        "exitCodePath": _relative(repo_root, exit_code_path),
+        "tracePaths": evidence_paths,
+        "engineEvidencePaths": evidence_paths,
+        "engineObservationSummary": engine_observation_summary,
+    }
+    write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
+
+    if completed.returncode != 0 or not evidence_items:
+        failure_reason = (
+            f"engine proof run failed: {native_executable_path}"
+            if completed.returncode != 0
+            else "engine proof run did not emit observation payload"
+        )
+        return {
+            "status": "fail",
+            "bucketManifestPath": request["paths"]["manifestPath"],
+            "reportPaths": list(request["paths"]["reportPaths"]),
+            "primaryEvidencePaths": evidence_paths or [manifest["stdoutPath"], manifest["exitCodePath"]],
+            "metrics": {"durationMs": duration_ms},
+            "diagnostics": {"stdoutPath": manifest["stdoutPath"], "stderrPath": manifest["stderrPath"]},
+            "details": {"engineObservationSummary": engine_observation_summary},
+            "failure": failure_reason,
+        }
+
+    return _success_result(
+        bucket_manifest_path=request["paths"]["manifestPath"],
+        report_paths=list(request["paths"]["reportPaths"]),
+        primary_evidence_paths=evidence_paths,
+        stdout_path=manifest["stdoutPath"],
+        stderr_path=manifest["stderrPath"],
+        duration_ms=duration_ms,
+        details={"engineObservationSummary": engine_observation_summary},
+    )
+
+
+def run_runtime_engine_trace_compare(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
+    subject_id = str(request["selection"]["subjectId"])
+    matrix_id = str(request["selection"]["matrixId"])
+    subject_manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
+    expected_root_text = str(dict(subject_manifest.get("expected") or {}).get("runtime") or "")
+    if not expected_root_text:
+        raise RuntimeError(f"subject manifest missing expected.runtime for engine trace compare: {subject_id}")
+
+    runtime_manifest_path = _resolve(repo_root, request["paths"]["manifestPath"])
+    runtime_manifest = read_json(runtime_manifest_path) if runtime_manifest_path.is_file() else {}
+    if not isinstance(runtime_manifest, dict):
+        raise RuntimeError("runtime manifest must be an object")
+
+    observation_summary = dict(runtime_manifest.get("engineObservationSummary") or {})
+    evidence_items = [dict(item) for item in list(observation_summary.get("evidenceItems") or [])]
+    if not evidence_items:
+        raise RuntimeError("engine runtime trace compare requires observed evidence items")
+
+    expected_root = _resolve(repo_root, expected_root_text) / matrix_id
+    comparisons: list[dict[str, Any]] = []
+    primary_evidence_paths: list[str] = []
+    failed = False
+    for item in evidence_items:
+        observed_relative_path = str(item.get("path") or "")
+        if not observed_relative_path:
+            continue
+
+        primary_evidence_paths.append(observed_relative_path)
+        observed_path = _resolve(repo_root, observed_relative_path)
+        expected_path = expected_root / Path(observed_relative_path).name
+
+        observed_payload = read_json(observed_path)
+        if not expected_path.is_file():
+            failed = True
+            comparisons.append(
+                {
+                    "kind": str(item.get("kind") or ""),
+                    "status": "missing-expected",
+                    "observedPath": observed_relative_path,
+                    "expectedPath": _relative(repo_root, expected_path),
+                }
+            )
+            continue
+
+        expected_payload = read_json(expected_path)
+        matched = observed_payload == expected_payload
+        if not matched:
+            failed = True
+
+        comparisons.append(
+            {
+                "kind": str(item.get("kind") or ""),
+                "status": "ok" if matched else "mismatch",
+                "observedPath": observed_relative_path,
+                "expectedPath": _relative(repo_root, expected_path),
+            }
+        )
+
+    report_payload = {
+        "reportVersion": "v1",
+        "subjectId": subject_id,
+        "matrixId": matrix_id,
+        "status": "fail" if failed else "ok",
+        "expectedRootPath": _relative(repo_root, expected_root),
+        "comparisons": comparisons,
+    }
+    write_json(_resolve(repo_root, request["paths"]["reportPaths"][0]), report_payload)
+
+    runtime_manifest["engineTraceCompareReportPaths"] = [
+        *[
+            str(value)
+            for value in list(runtime_manifest.get("engineTraceCompareReportPaths") or [])
+            if str(value)
+        ],
+        request["paths"]["reportPaths"][0],
+    ]
+    write_json(runtime_manifest_path, runtime_manifest)
+
+    if failed:
+        return {
+            "status": "fail",
+            "bucketManifestPath": request["paths"]["manifestPath"],
+            "reportPaths": list(request["paths"]["reportPaths"]),
+            "primaryEvidencePaths": primary_evidence_paths,
+            "metrics": {"durationMs": 0},
+            "diagnostics": {
+                "stdoutPath": runtime_manifest.get("stdoutPath"),
+                "stderrPath": runtime_manifest.get("stderrPath"),
+            },
+            "failure": f"engine trace compare failed: {subject_id}/{matrix_id}",
+        }
+
+    return _success_result(
+        bucket_manifest_path=request["paths"]["manifestPath"],
+        report_paths=list(request["paths"]["reportPaths"]),
+        primary_evidence_paths=primary_evidence_paths,
+        stdout_path=str(runtime_manifest.get("stdoutPath") or "") or None,
+        stderr_path=str(runtime_manifest.get("stderrPath") or "") or None,
+    )
+
+
 def run_managed_runtime_output(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
     host_input_manifest = read_json(_resolve(repo_root, request["upstream"]["host-input"]["manifestPath"]))
     if not isinstance(host_input_manifest, dict):
@@ -694,10 +1020,18 @@ def _perf_harness_iterations(runtime_profile: str) -> int:
     return 10000 if "release" in runtime_profile else 1000
 
 
+def _native_perf_warmup_count(runtime_profile: str) -> int:
+    return 1 if "native-perf" in runtime_profile else 0
+
+
 def _perf_summary_metrics(samples: list[dict[str, Any]]) -> dict[str, float | int]:
-    durations = [float(sample["durationMs"]) for sample in samples]
+    durations = [
+        float(sample["durationMs"])
+        for sample in samples
+        if bool(sample.get("countedInSummary", True))
+    ]
     return {
-        "sampleCount": len(samples),
+        "sampleCount": len(durations),
         "meanDurationMs": round(statistics.fmean(durations), 3) if durations else 0.0,
         "minDurationMs": round(min(durations), 3) if durations else 0.0,
         "maxDurationMs": round(max(durations), 3) if durations else 0.0,
@@ -863,6 +1197,7 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
     host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
     runtime_profile = str(execution_context.get("runtimeProfile") or "")
     sample_count = _perf_sample_count(runtime_profile)
+    warmup_sample_count = _native_perf_warmup_count(runtime_profile)
     output_paths = [str(value) for value in list(build_manifest.get("outputs") or []) if str(value)]
     if not output_paths:
         raise RuntimeError("native perf build manifest missing outputs")
@@ -883,7 +1218,14 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
     output_lines: list[str] = []
     last_exit_code = 0
 
-    for sample_index in range(sample_count):
+    for sample_index in range(sample_count + warmup_sample_count):
+        counted_in_summary = sample_index >= warmup_sample_count
+        measured_sample_index = sample_index - warmup_sample_count + 1
+        sample_label = (
+            f"warmup sample {sample_index + 1}"
+            if not counted_in_summary
+            else f"sample {measured_sample_index}"
+        )
         started = time.perf_counter()
         completed = run_process([str(native_executable_path)], cwd=repo_root)
         duration_ms = round((time.perf_counter() - started) * 1000, 3)
@@ -904,11 +1246,12 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
                 "sampleIndex": sample_index + 1,
                 "durationMs": duration_ms,
                 "exitCode": last_exit_code,
+                "countedInSummary": counted_in_summary,
             }
         )
-        stdout_chunks.append(f"=== sample {sample_index + 1} ({duration_ms:.3f} ms) ===\n{stdout_text}".rstrip() + "\n")
+        stdout_chunks.append(f"=== {sample_label} ({duration_ms:.3f} ms) ===\n{stdout_text}".rstrip() + "\n")
         if stderr_text:
-            stderr_chunks.append(f"=== sample {sample_index + 1} ({duration_ms:.3f} ms) ===\n{stderr_text}".rstrip() + "\n")
+            stderr_chunks.append(f"=== {sample_label} ({duration_ms:.3f} ms) ===\n{stderr_text}".rstrip() + "\n")
         if last_exit_code != 0:
             break
 
@@ -931,6 +1274,7 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
     }
     performance = {
         "samples": samples,
+        "warmupSampleCount": warmup_sample_count,
         "metrics": dict(perf_result["metrics"]),
         "baselinePath": str(perf_result["baselinePath"]),
         "baseline": dict(perf_result["baseline"]),
@@ -947,6 +1291,7 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
             "matrixId": matrix_id,
             "variant": variant,
             "nativeExecutablePath": _relative(repo_root, native_executable_path),
+            "warmupSampleCount": warmup_sample_count,
             "metrics": dict(performance["metrics"]),
             "baselinePath": str(performance["baselinePath"]),
             "baseline": dict(performance["baseline"]),
@@ -963,6 +1308,7 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
             "reportVersion": "v1",
             "subjectId": subject_id,
             "matrixId": matrix_id,
+            "warmupSampleCount": warmup_sample_count,
             "samples": samples,
         },
     )
@@ -980,6 +1326,7 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
         "perfRuntimePath": runtime_evidence["runtimePath"],
         "perfSamplesPath": runtime_evidence["samplesPath"],
         "outputLines": output_lines,
+        "warmupSampleCount": warmup_sample_count,
         "samples": samples,
         "summaryMetrics": dict(performance["metrics"]),
         "baselinePath": str(performance["baselinePath"]),
@@ -1089,8 +1436,11 @@ DEFAULT_STAGE_WORKERS = {
     "host-input-build": run_dotnet_host_input_builder,
     "analysis-frontend": run_frontend_pipeline_worker,
     "generated-native-proof": run_native_proof_emitter,
+    "generated-engine-proof": run_native_proof_emitter,
     "build-target": run_build_target,
     "runtime-observe": run_runtime_observe,
+    "runtime-engine-observe": run_runtime_engine_observe,
+    "runtime-engine-trace-compare": run_runtime_engine_trace_compare,
     "runtime-managed-output": run_managed_runtime_output,
     "runtime-perf-collect": run_runtime_perf_collect,
     "native-runtime-perf": run_native_runtime_perf,

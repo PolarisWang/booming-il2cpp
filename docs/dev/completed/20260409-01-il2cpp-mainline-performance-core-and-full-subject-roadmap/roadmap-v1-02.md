@@ -1,7 +1,7 @@
 ﻿# IL2CPP Mainline 性能优先核心与完整 Subject Roadmap v1.02
 
 Date: 2026-04-09
-Status: active-roadmap-phase-5-brainstorming
+Status: completed-roadmap-phase-a
 
 ## 1. 目标
 
@@ -52,21 +52,25 @@ Status: active-roadmap-phase-5-brainstorming
 - 冻结“当前主线的 complete 到底是什么意思”
 - 冻结“`C++` 性能最优如何裁决、如何举证、允许牺牲什么”
 - 明确把 `exceptions` 写成 roadmap 内强制交付项
+- 当前状态：已完成
 
 ### Phase 1: `OptimizationFacts` And Native Perf Contracts
 
 - 在 `Phase 0` 约束下冻结 performance-first core contract
 - 冻结 `MainlineFeaturePack` 第一版 validation/profile/matrix/perf evidence 边界
+- 当前状态：已完成
 
 ### Phase 2: Core Contract Cutover
 
 - 把 `SemanticWorld -> Linker -> CodeGen` 的 sample-driven 暂存逻辑替换为正式 contract 落点
 - 在代码层引入 `OptimizationFacts` 的最小闭环
+- 当前状态：已完成
 
 ### Phase 3: Capability-Driven Lowering And Arbitration
 
 - 把 lowering family 选择从 emitter 内部样例识别中迁出
 - 建立“合法性过滤 + 性能裁决”的 codegen 主线
+- 当前状态：已完成
 
 ### Phase 4: `MainlineFeaturePack` Onboarding
 
@@ -80,7 +84,7 @@ Status: active-roadmap-phase-5-brainstorming
   - `dispatch`
   - `closed generics/layout`
   - `arrays/boxing`
-- 当前状态：design review 中
+- 当前状态：已完成
 
 ### Phase 6: Capability Batch B And Phase A Closure
 
@@ -89,11 +93,13 @@ Status: active-roadmap-phase-5-brainstorming
   - `exceptions`
   - 必要的 `reflection/interop` 补位
 - 完成 `Phase A` closure，明确剩余缺口与 follow-up
+- 当前状态：已完成
 
 ### Phase 7: Engine Binding Tail Roll-In
 
 - 在 core performance-first 主线与完整 subject 稳定后，再把 `engine binding` 正式收口进 roadmap
 - 复用既有 `subject + matrix + artifact-chain` 主线，不允许新造平行系统
+- 当前状态：已完成
 
 ## 5. 阶段完成定义
 
@@ -135,8 +141,10 @@ Status: active-roadmap-phase-5-brainstorming
 
 ### Phase 7
 
-- `engine binding` 以正式 child task 接入，不再只停留在 discuss 文档
-- 继续复用 `subject + matrix + artifact-chain`
+- 三个最小 engine subject 已正式接入 unified registry
+- `EngineBindings / HostBindings`、native proof emitter、runtime helper、worker/reporting surface 已全部落地
+- Windows `correctness.dev` 与 `correctness.platform` 六条运行证据全部通过
+- analysis/generated/runtime/report 四层 engine summary contract 已闭环
 
 ## 6. 子任务映射
 
@@ -147,9 +155,9 @@ Status: active-roadmap-phase-5-brainstorming
 | `20260409-04-phase-2-core-contract-cutover` | `Phase 2` | `completed` | `codex` | 把 performance-first contract 切进 `SemanticWorld -> Linker -> CodeGen` | `20260409-02-phase-1-optimization-facts-and-native-perf-contracts` |
 | `20260409-05-phase-3-capability-driven-lowering-and-arbitration` | `Phase 3` | `completed` | `codex` | 迁出 sample-driven lowering 发现逻辑，建立 family + arbitration 主线 | `20260409-04-phase-2-core-contract-cutover` |
 | `20260409-06-phase-4-mainline-feature-pack-onboarding` | `Phase 4` | `completed` | `codex` | 接入完整 subject，并贯通 `output / trace / perf` 三条统一主线 | `20260409-05-phase-3-capability-driven-lowering-and-arbitration` |
-| `20260409-07-phase-5-capability-batch-a-dispatch-generic-layout-and-array-boxing` | `Phase 5` | `in_progress` | `codex` | 为 Batch A 设计 proof slice、entry override 与 capability 补全落点 | `20260409-06-phase-4-mainline-feature-pack-onboarding` |
-| `phase-6-capability-batch-b-delegate-exception-and-phase-a-closure` | `Phase 6` | `planned` | `codex` | 落地第二批能力，并完成 `Phase A` closure | `20260409-07-phase-5-capability-batch-a-dispatch-generic-layout-and-array-boxing` |
-| `phase-7-engine-binding-tail-roll-in` | `Phase 7` | `planned` | `codex` | 把 `engine binding` 作为尾阶段正式接入成熟主线 | `phase-6-capability-batch-b-delegate-exception-and-phase-a-closure` |
+| `20260409-07-phase-5-capability-batch-a-dispatch-generic-layout-and-array-boxing` | `Phase 5` | `completed` | `codex` | 为 Batch A 设计 proof slice、entry override 与 capability 补全落点 | `20260409-06-phase-4-mainline-feature-pack-onboarding` |
+| `20260409-08-phase-6-capability-batch-b-delegate-exception-and-phase-a-closure` | `Phase 6` | `completed` | `codex` | 落地第二批能力，并完成 `Phase A` closure | `20260409-07-phase-5-capability-batch-a-dispatch-generic-layout-and-array-boxing` |
+| `20260410-12-phase-7-engine-binding-tail-roll-in` | `Phase 7` | `completed` | `codex` | 把 `engine binding` 作为尾阶段正式接入成熟主线 | `20260409-08-phase-6-capability-batch-b-delegate-exception-and-phase-a-closure` |
 
 ## 7. 依赖顺序
 
@@ -168,22 +176,21 @@ Status: active-roadmap-phase-5-brainstorming
 
 ### 风险 1: performance-first 继续停留在口号层
 
-如果脱离 `Phase 0` 的 objective function 与 tradeoff order，后续 child task 仍会不断把“性能优先”退化成局部判断。
+如果脱离 `Phase 0` 的 objective function 与 tradeoff order，后续 follow-up 仍会不断把“性能优先”退化成局部判断。
 
 ### 风险 2: roadmap 再次被误读成 total solution
 
-如果在 `Phase 6/7` 完成前重新宣称“主线已闭环”，会继续混淆 `Phase A mainline complete` 与 `C# -> C++ total solution complete`。
+即使当前 roadmap 完成，也不能把 `Phase A mainline complete` 混同成 `C# -> C++ total solution complete`。
 
-### 风险 3: `MainlineFeaturePack` 退化成巨型 smoke
+### 风险 3: engine binding 后续扩展反向污染 core mainline
 
-如果 `Phase 5` 不采用 capability slice，而是改成 mega proof entry 或重新拆回多个 probe subject，后续 perf regression 与故障定位都会退化。
+如果后续把更大的 engine API 面、更多平台或 planner/executor 领域解释重新耦回主线，会破坏这次已经冻结的边界。
 
-### 风险 4: `arrays/boxing` 缺口被低估
+## 9. 完成结论与后续建议
 
-当前 loader/runtime 还缺 `newarr`、`box` 以及相关 array store/unbox 路径；这是 Batch A 中最容易拖慢实现节奏的部分。
-
-## 9. 当前推进建议
-
-1. `Phase 4` 已完成，不再回退到 planning-only `MainlineFeaturePack`。
-2. `Phase 5` 推荐继续沿用“一个完整 subject + 多个 proof slice”的方向，而不是重回多 subject 分裂方案。
-3. `Phase 5` 实施前先完成 design review；确认后再写 `plan-v1-01.md` 并进入 TDD/implementation。
+1. 当前可以宣称 `Phase A performance-first core mainline roadmap` 已完成。
+2. 当前不能宣称仓库已经实现完整 `C# -> C++ total solution`。
+3. 后续建议拆分为独立 follow-up：
+   - contract root 去 subject 内容污染清理
+   - engine binding 的非 Windows parity 与 richer engine API 扩展
+   - total solution 级别的新 roadmap

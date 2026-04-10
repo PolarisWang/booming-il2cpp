@@ -315,6 +315,8 @@ public sealed record ManagedParameterModel
 public sealed record ManagedMethodBodyModel
 {
     public required IReadOnlyList<ManagedBlockModel> Blocks { get; init; }
+
+    public required IReadOnlyList<ManagedExceptionRegionModel> ExceptionRegions { get; init; }
 }
 
 public sealed record ManagedBlockModel
@@ -322,6 +324,21 @@ public sealed record ManagedBlockModel
     public required string BlockId { get; init; }
 
     public required IReadOnlyList<ManagedInstructionModel> Instructions { get; init; }
+}
+
+public sealed record ManagedExceptionRegionModel
+{
+    public required string HandlingKind { get; init; }
+
+    public required int TryOffset { get; init; }
+
+    public required int TryLength { get; init; }
+
+    public required int HandlerOffset { get; init; }
+
+    public required int HandlerLength { get; init; }
+
+    public string? CatchTypeSubjectId { get; init; }
 }
 
 public sealed record ManagedInstructionModel
@@ -534,6 +551,8 @@ public sealed record ExceptionFact
     public required string MethodSubjectId { get; init; }
 
     public required string HandlingKind { get; init; }
+
+    public string? CatchTypeSubjectId { get; init; }
 }
 
 public sealed record TypedIlIrArtifact
@@ -762,6 +781,28 @@ public sealed record NativeReferenceProofManifestArtifact
     public required IReadOnlyList<NativeReferenceGeneratedArtifactRef> GeneratedArtifacts { get; init; }
 }
 
+public sealed record EngineBindingsArtifact
+{
+    public required string ProofKind { get; init; }
+
+    public required string FocusArea { get; init; }
+
+    public required IReadOnlyList<string> CapabilityIds { get; init; }
+
+    public required IReadOnlyList<string> BindingKinds { get; init; }
+
+    public required IReadOnlyList<string> HelperNames { get; init; }
+}
+
+public sealed record HostBindingsArtifact
+{
+    public required string HostPlatform { get; init; }
+
+    public required string RuntimeProfile { get; init; }
+
+    public required IReadOnlyList<string> BindingKinds { get; init; }
+}
+
 public sealed record NativeReferenceLoweringPlanArtifact
 {
     public string FormatVersion { get; init; } = "v0";
@@ -788,6 +829,10 @@ public sealed record NativeReferenceLoweringPlanArtifact
 
     public string? GetterSymbol { get; init; }
 
+    public string? StaticMethodSymbol { get; init; }
+
+    public string? ThrowMethodSymbol { get; init; }
+
     public required string ReferenceTypeToken { get; init; }
 
     public required string CapturedFieldToken { get; init; }
@@ -803,6 +848,10 @@ public sealed record NativeReferenceLoweringPlanArtifact
     public string? EchoMethodToken { get; init; }
 
     public string? GetterMethodToken { get; init; }
+
+    public string? StaticMethodToken { get; init; }
+
+    public string? ThrowMethodToken { get; init; }
 
     public string? ImportMethodSubjectId { get; init; }
 
@@ -837,6 +886,10 @@ public sealed record NativeReferenceLoweringPlanArtifact
     public string? EchoLiteral { get; init; }
 
     public int? EchoLiteralByteCount { get; init; }
+
+    public string? FinallyLiteral { get; init; }
+
+    public int? FinallyLiteralByteCount { get; init; }
 
     public string? BoxedValueTypeToken { get; init; }
 
@@ -881,6 +934,10 @@ public sealed record NativeReferenceLoweringPlanArtifact
     public string? ExpectedOutput { get; init; }
 
     public int? ExpectedOutputByteCount { get; init; }
+
+    public EngineBindingsArtifact? EngineBindings { get; init; }
+
+    public HostBindingsArtifact? HostBindings { get; init; }
 }
 
 public sealed record NativeReferenceGeneratedSource

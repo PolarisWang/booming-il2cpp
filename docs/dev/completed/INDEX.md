@@ -2,6 +2,9 @@
 
 | 任务 | lifecycle_status | phase | 最近更新 | 下一步 | active |
 | --- | --- | --- | --- | --- | --- |
+| `20260410-12-phase-7-engine-binding-tail-roll-in` | `completed` | `archived` | `2026-04-10 02:18:40 +08:00` | 无。三个最小 engine subject、engine summary contract 与 Windows `correctness.dev` / `correctness.platform` 六条 run 已全部通过。 | `no` |
+| `20260409-01-il2cpp-mainline-performance-core-and-full-subject-roadmap` | `completed` | `archived` | `2026-04-10 02:18:40 +08:00` | 无。`Phase A performance-first core mainline roadmap` 已完成；仍不等于完整 `C# -> C++ total solution`，后续扩展需另开 follow-up。 | `no` |
+| `20260409-07-phase-5-capability-batch-a-dispatch-generic-layout-and-array-boxing` | `completed` | `archived` | `2026-04-09 21:43:44 +08:00` | 无。`dispatch`、`closed generics/layout`、`arrays/boxing` 已在完整 `MainlineFeaturePack` 上闭环；统一 `perf.profile` 入口已打通，带负载 perf baseline 留待后续独立复核。 | `no` |
 | `20260409-06-phase-4-mainline-feature-pack-onboarding` | `completed` | `archived` | `2026-04-09 15:20:01 +08:00` | 无。`MainlineFeaturePack` 已成为真实完整 subject，proof entry override、subject-scoped proof build 与 `output / trace / perf` 三条统一入口均已落地。 | `no` |
 | `20260409-05-phase-3-capability-driven-lowering-and-arbitration` | `completed` | `archived` | `2026-04-09 13:13:08 +08:00` | 无。`CodeGen` 已成为 lowering family 与 managed lowering plan 真源，emitter 已收缩为 plan consumer；父 roadmap 已继续派生 `Phase 4`。 | `no` |
 | `20260409-04-phase-2-core-contract-cutover` | `completed` | `archived` | `2026-04-09 13:12:00 +08:00` | 无。`Phase 2` contract cutover 已落地；subject-bearing contract 清理延后为单独 follow-up，父 roadmap 已继续派生 `Phase 3`。 | `no` |
@@ -37,4 +40,6 @@
 | `20260403-02-unified-test-framework` | `completed` | `archived` | `2026-04-04 14:09:00 +0800` | 无。 | `no` |
 | `20260404-01-skill-flow-refactor` | `completed` | `reviewing` | `2026-04-04 13:45:41 +0800` | 无。如需继续提升运行时验证稳定性，请新建 follow-up 任务。 | `no` |
 | `20260404-02-booming-docs-migration` | `completed` | `reviewing` | `2026-04-04 13:57:28 +0800` | 无。如需彻底移除 `docs/booming`，请另开 follow-up 处理历史路径清理。 | `no` |
+
+
 
