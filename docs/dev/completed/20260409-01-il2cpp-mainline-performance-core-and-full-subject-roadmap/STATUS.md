@@ -3,7 +3,7 @@ task_id: 20260409-01-il2cpp-mainline-performance-core-and-full-subject-roadmap
 title: IL2CPP Mainline 性能优先核心与完整 Subject 路线图
 task_type: roadmap
 lifecycle_status: completed
-phase: completed
+phase: archived
 created_at: 2026-04-09 00:05:09 +08:00
 updated_at: 2026-04-10 02:18:40 +08:00
 current_dir: docs/dev/completed/20260409-01-il2cpp-mainline-performance-core-and-full-subject-roadmap

@@ -4,7 +4,7 @@
 > **目标：** 把 `Phase 0/1` 已冻结的 performance-first contract 正式切进 `SemanticWorld -> Linker -> CodeGen` 主干代码，完成最小的 core contract cutover。
 > **架构：** 先用 RED 锁定 artifact contract 与代码责任转移，再补 `SemanticWorld`/`LinkedWorld`/`CodeGen` contract 类型与 threading，最后做 focused regression 与父子任务状态回写。
 > **技术栈：** C#、JSON contract、Python unittest
-> **设计文档：** `docs/dev/in-progress/20260409-04-phase-2-core-contract-cutover/design-v1-01.md`
+> **设计文档：** `docs/dev/completed/20260409-04-phase-2-core-contract-cutover/design-v1-01.md`
 > **预期知识沉淀：** 暂不写 wiki；待 `Phase 3/4` 继续落地后再统一沉淀 core contract 与 lowering boundary。
 
 ## 目标文件与职责

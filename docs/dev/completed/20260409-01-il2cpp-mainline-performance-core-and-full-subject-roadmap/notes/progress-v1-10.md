@@ -22,5 +22,5 @@ Date: 2026-04-09 21:43:44 +08:00
 ## 下一步
 
 - 审阅 `Phase 6` 设计：
-  - `docs/dev/in-progress/20260409-08-phase-6-capability-batch-b-delegate-exception-and-phase-a-closure/design-v1-01.md`
+- `docs/dev/completed/20260409-08-phase-6-capability-batch-b-delegate-exception-and-phase-a-closure/design-v1-01.md`
 - 若认可，再进入 `plan-v1-01.md`

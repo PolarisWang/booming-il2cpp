@@ -3,7 +3,7 @@ task_id: 20260410-12-phase-7-engine-binding-tail-roll-in
 title: Phase 7 Engine Binding Tail Roll In
 task_type: plan
 lifecycle_status: completed
-phase: completed
+phase: archived
 created_at: 2026-04-10 00:45:00 +08:00
 updated_at: 2026-04-10 02:18:40 +08:00
 current_dir: docs/dev/completed/20260410-12-phase-7-engine-binding-tail-roll-in

@@ -4,7 +4,7 @@
 > **目标：** 把 planning-only `MainlineFeaturePack` 接成真实完整 subject，形成 `correctness.dev` / `correctness.platform` / `perf.profile` 三条统一入口。
 > **架构：** 先补 RED 锁定 subject tree、trace export 和 subject-scoped proof build，再补 source / unit / proof / baseline，最后跑 focused verification。
 > **技术栈：** C#、xUnit、Python unittest、CMake、MSBuild
-> **设计文档：** `docs/dev/in-progress/20260409-06-phase-4-mainline-feature-pack-onboarding/design-v1-01.md`
+> **设计文档：** `docs/dev/completed/20260409-06-phase-4-mainline-feature-pack-onboarding/design-v1-01.md`
 > **预期知识沉淀：** 暂不写 wiki；待 `MainlineFeaturePack` 与 Batch A 稳定后统一沉淀完整 subject onboarding 规则。
 
 ## 目标文件与职责

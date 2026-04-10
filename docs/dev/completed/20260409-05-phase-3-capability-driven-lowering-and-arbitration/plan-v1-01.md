@@ -4,7 +4,7 @@
 > **目标：** 把 lowering family 选择与 managed lowering plan 真源前移到 `CodeGen`，同时把 `NativeReferenceProofEmitter` 收缩为 plan consumer。
 > **架构：** 先补 RED 锁定 managed lowering plan artifact 与 emitter boundary，再补 `SemanticWorld` structure signals、`CodeGen` planner、`Driver` 写盘与 emitter consumer cutover。
 > **技术栈：** C#、JSON contract、Python unittest
-> **设计文档：** `docs/dev/in-progress/20260409-05-phase-3-capability-driven-lowering-and-arbitration/design-v1-01.md`
+> **设计文档：** `docs/dev/completed/20260409-05-phase-3-capability-driven-lowering-and-arbitration/design-v1-01.md`
 > **预期知识沉淀：** 暂不写 wiki；待 `Phase 3` 稳定后再统一沉淀 lowering boundary / plan contract。
 
 ## 目标文件与职责

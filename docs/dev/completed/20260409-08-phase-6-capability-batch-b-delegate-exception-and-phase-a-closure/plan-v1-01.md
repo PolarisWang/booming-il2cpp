@@ -8,7 +8,7 @@
 
 **技术栈：** `subject.manifest.json` / Python planner 测试、`Loader -> SemanticWorld -> Linker -> CodeGen`、native `runtime-core` / `bootstrap`、Windows `msbuild` + `python build/toolchains/run/run.py`。
 
-**设计文档：** `docs/dev/in-progress/20260409-08-phase-6-capability-batch-b-delegate-exception-and-phase-a-closure/design-v1-01.md`
+**设计文档：** `docs/dev/completed/20260409-08-phase-6-capability-batch-b-delegate-exception-and-phase-a-closure/design-v1-01.md`
 
 **预期知识沉淀：** `wiki/runtime/phase-a-batch-b-delegate-exception-and-closure.md`
 
@@ -16,7 +16,7 @@
 
 ## 变更范围
 
-- `docs/dev/in-progress/20260409-08-phase-6-capability-batch-b-delegate-exception-and-phase-a-closure/*`
+- `docs/dev/completed/20260409-08-phase-6-capability-batch-b-delegate-exception-and-phase-a-closure/*`
   - 冻结执行计划、状态与进展记录。
 - `subjects/MainlineFeaturePack/source/*`
   - 增加 `DelegateProof.cs`、`ExceptionProof.cs`、`ReflectionInteropClosureProof.cs`，必要时调整 `Program.cs`。

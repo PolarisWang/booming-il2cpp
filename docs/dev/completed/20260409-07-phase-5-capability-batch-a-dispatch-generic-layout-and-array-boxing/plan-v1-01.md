@@ -4,7 +4,7 @@
 > **目标：** 在不拆分 `MainlineFeaturePack` 的前提下，落地 Batch A 的 `dispatch`、`closed generics/layout`、`arrays/boxing`，并继续以 generated native 工程的 `C++` 性能为第一目标。
 > **架构：** 先补 `subject planner` 的 matrix-scoped `source.entry` override 与 `MainlineFeaturePack` capability slices，再补 loader/linker/codegen/runtime 的最小语义闭环，最后跑 focused subject 验证与状态回写。
 > **技术栈：** C#、Python unittest、dotnet、CMake、native runtime/bootstrap、Scriban template
-> **设计文档：** `docs/dev/in-progress/20260409-07-phase-5-capability-batch-a-dispatch-generic-layout-and-array-boxing/design-v1-01.md`
+> **设计文档：** `docs/dev/completed/20260409-07-phase-5-capability-batch-a-dispatch-generic-layout-and-array-boxing/design-v1-01.md`
 > **预期知识沉淀：** 暂不写 wiki；等 `Phase 5` 稳定后再统一沉淀完整 subject capability-slice / entry-override 规则。
 
 ## 目标文件与职责
