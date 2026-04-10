@@ -7,14 +7,16 @@
 - 父 roadmap 明确把当前范围限制在 `Phase A`，并排除了 `.NET 10` 输入兼容、Android/iOS 完整 runtime subset、完整高阶 `BCL` 兼容等内容
 - `engine binding` 仍然被放在尾阶段
 - iOS 当前 gate 仍然只是 `compile/link/packaging`
-- `ManagedClosureRequest` 仍然以单个 `InputAssemblyPath` 为核心输入，`LoaderStage` 也是直接基于单个 PE/metadata 读取
+- ~~`ManagedClosureRequest` 仍然以单个 `InputAssemblyPath` 为核心输入~~ **（已更新）**：Driver 已重构为子命令 CLI（`chaos-il2cpp convert/build/publish`），subject.manifest.json 的 `source` 字段已支持三种输入类型（`dotnet-project` / `managed-dlls` / `dotnet-project+dlls`），但 Pipeline 内部仍以单 assembly 为入口
+- `LoaderStage` 仍然基于单个 PE/metadata 读取
 
 因此，当前仓库更准确的定位是：
 
 - 已经有 IL2CPP 风格的 managed pipeline 骨架
 - 已经有 proof-oriented native runtime/bootstrap 骨架
 - 已经开始围绕 generated native 的能力批次做性能导向收口
-- 但离“完整项目级产品化 IL2CPP”还差一整层系统建设
+- **已经有子命令风格 CLI 入口和 manifest 驱动的输入层骨架**
+- 但离”完整项目级产品化 IL2CPP”还差一整层系统建设
 
 ## 2. 还缺哪些工作
 
@@ -67,7 +69,25 @@
 
 当前 native 侧已经开始出现 delegate/exception/reflection 这些 proof 级 helper，但这还不是完整 runtime 产品面。
 
-### 2.4 “性能最优” 还需要正式工程化
+### 2.4 Linker 的 tree-shaking / whole-program analysis 缺失
+
+当前 `Chaos.IL2CPP.Linker` 只是骨架。对于完整 project graph 输入，如果不做 dead code elimination，生成的 C++ 体积会不可控。至少需要：
+
+- reachability analysis（从 entry point 出发的可达性分析）
+- metadata stripping（未使用类型/方法不写入 registration）
+- 与 `[Preserve]` / XML link descriptor 的兼容
+- 与 reflection 使用分析的联动（保守保留）
+
+### 2.5 调试与诊断支撑层需要尽早引入
+
+调试能力不能留到产品化阶段才做，否则 runtime completeness 和 mobile runtime 阶段的问题定位效率会极低。至少需要从 AOT completeness 阶段就开始引入：
+
+- managed stack trace recovery（从 native crash 恢复 managed 调用栈）
+- native crash → managed source mapping（行号、方法名、文件名）
+- generated C++ → IL 对应关系的 debug metadata
+- 最小 logging / tracing hooks
+
+### 2.6 “性能最优” 还需要正式工程化
 
 要把“性能最好的 IL2CPP”从口号变成工程能力，至少还需要：
 
@@ -80,7 +100,7 @@
 
 否则“高性能”只会停留在局部案例。
 
-### 2.5 引擎衔接需要单独作为产品面来做
+### 2.7 引擎衔接需要单独作为产品面来做
 
 你提到“下能衔接引擎层接口”，这不是给 runtime 补几个 API 就够了，而是要做稳定的 engine-facing contract：
 
@@ -94,7 +114,7 @@
 
 这块如果做晚了，后面容易把 runtime 和引擎代码缠死。
 
-### 2.6 平台层当前还没有真正打穿移动端
+### 2.8 平台层当前还没有真正打穿移动端
 
 当前文档已经明确：
 
@@ -110,7 +130,7 @@
 - 平台相关 PAL、文件系统、时间、线程、本地库装载、异常边界
 - 真机 perf / memory / package size gates
 
-### 2.7 兼容性与回归基础设施还不够
+### 2.9 兼容性与回归基础设施还不够
 
 完整产品化一定需要：
 

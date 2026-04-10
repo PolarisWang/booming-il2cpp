@@ -87,13 +87,18 @@ Status: roadmap-frozen-v1-01
 - exit_criteria:
   - 已冻结统一的 type/method/field identity 方案
   - 已冻结统一的 object/handle model
-  - 已冻结 delegate/callback ABI、exception boundary、engine API ABI 基线
+  - 已冻结 delegate/callback ABI、exception boundary 基线
+  - **已冻结 ABI calling convention 与 handle primitive types（不含 engine lifecycle 语义，engine lifecycle 归 Phase 3）**
   - 已冻结 hot update package manifest v0
+  - **已冻结 contract schema formatVersion 策略与 struct_size 向前兼容规则**
+  - **已完成 interpreter IR vs raw IL 的架构决策（影响 Phase 5 package format 和 Phase 6 metadata supplement 设计）**
   - 关键 contract 都有 schema / header / snapshot
 - deliverables:
   - `shared-contract-v0.md`
   - ABI/header/schema 样例
   - manifest snapshot tests
+  - **version compatibility policy v0**
+  - **interpreter execution model decision record**
 - dependencies:
   - 当前分析设计结论
 - open_questions:
@@ -119,6 +124,9 @@ Status: roadmap-frozen-v1-01
   - golden project fixtures
 - dependencies:
   - Phase 0
+- baseline:
+  - **已有 `chaos-il2cpp convert` CLI 入口，manifest 驱动三种 input.kind，可在此基础上扩展 project graph 支持**
+  - **已有 subject 测试框架（10 个 subjects、validation profiles、environment matrices），golden projects 应复用此基础设施**
 - open_questions:
   - 与 MSBuild 的接线深度是轻量 graph 读取还是更深的 design-time build
 - verification:
@@ -134,10 +142,14 @@ Status: roadmap-frozen-v1-01
   - generics/rgctx、EH、delegates、reflection/interop、threading、GC integration 到达指定主线子集
   - generated native perf 有稳定 baseline
   - 关键 golden projects 的 native output 可运行且与 reference 行为一致
+  - **Linker reachability analysis baseline 已建立（dead code elimination、metadata stripping）**
+  - **managed stack trace recovery + native crash → managed source mapping baseline 已建立**
 - deliverables:
   - runtime-core 扩展
   - codegen arbitration/perf evidence
   - native regression dashboards/baselines
+  - **linker policy: reachability analysis + metadata stripping baseline**
+  - **debug/diagnostics: stack trace recovery + crash mapping + minimal tracing hooks**
 - dependencies:
   - Phase 1
 - open_questions:
@@ -206,7 +218,7 @@ Status: roadmap-frozen-v1-01
 - dependencies:
   - Phase 0
   - Phase 3
-  - Phase 4
+  - **注意：不依赖 Phase 4 (mobile)。热更骨架先在 desktop 上验证，mobile 验证推迟到 Phase 7-8。**
 - open_questions:
   - package signing/校验与版本协商的最小策略
 - verification:
@@ -291,7 +303,7 @@ Status: roadmap-frozen-v1-01
 | `aot-mainline-runtime-completeness` | `Phase 2` | `planned` | `codex` | 补齐主线 runtime completeness 与 perf governance | `full-project-ingestion-and-build-graph` |
 | `engine-binding-contract` | `Phase 3` | `planned` | `codex` | 冻结 engine-facing ABI、ownership、callback 与 host embedding | `shared-contract-freeze` |
 | `mobile-runtime-and-host-matrix` | `Phase 4` | `planned` | `codex` | 建立 Android/iOS runtime/host 验证矩阵 | `aot-mainline-runtime-completeness, engine-binding-contract` |
-| `hot-update-runtime-skeleton` | `Phase 5` | `planned` | `codex` | 建立 runtime mode switch、package loader 与最小热更骨架 | `shared-contract-freeze, engine-binding-contract, mobile-runtime-and-host-matrix` |
+| `hot-update-runtime-skeleton` | `Phase 5` | `planned` | `codex` | 建立 runtime mode switch、package loader 与最小热更骨架 | `shared-contract-freeze, engine-binding-contract` |
 | `metadata-supplement-and-bridge-generation` | `Phase 6` | `planned` | `codex` | 建立 supplemental metadata、wrapper、bridge 主线 | `hot-update-runtime-skeleton, aot-mainline-runtime-completeness` |
 | `interpreter-core-and-mixed-execution` | `Phase 7` | `planned` | `codex` | 建立解释器与 mixed mode | `metadata-supplement-and-bridge-generation` |
 | `productization-gates` | `Phase 8` | `planned` | `codex` | 补齐回滚、兼容性、发行、长期回归 gate | `interpreter-core-and-mixed-execution, mobile-runtime-and-host-matrix` |
@@ -355,3 +367,37 @@ Status: roadmap-frozen-v1-01
 
 - 验证对象不再是单个 demo assembly
 - AOT 与热更看到的是同一套 identity/ABI/manifest
+
+## 11. 审核修订记录 (2026-04-11)
+
+基于代码库变更和架构审核，对 v1.01 做了以下修订：
+
+### 基线更新
+
+- design-v1-01.md: Driver 已重构为子命令 CLI，manifest 已支持三种 input.kind，基线判断已更新
+
+### Phase 0 调整
+
+- engine API ABI scope 收窄为 **ABI calling convention + handle primitive types**，不含 engine lifecycle 语义（归 Phase 3）
+- 新增 **version compatibility policy v0**（formatVersion 策略、struct_size 向前兼容）
+- 新增 **interpreter IR vs raw IL 架构决策**（影响 Phase 5 package format 和 Phase 6 metadata supplement）
+
+### Phase 1 调整
+
+- 标注 CLI convert 基础设施和 subject 测试框架已可复用，起点前移
+
+### Phase 2 调整
+
+- 新增 **Linker reachability analysis + metadata stripping baseline**
+- 新增 **managed stack trace recovery + crash mapping baseline**（调试能力不能留到产品化阶段）
+
+### Phase 5 调整
+
+- **移除对 Phase 4 (mobile) 的依赖**。热更骨架先在 desktop 验证，mobile 验证推迟到 Phase 7-8
+- 这解除了热更开发被 mobile runtime 阻塞的问题
+
+### 新增遗漏识别
+
+- design 新增 2.4 节（Linker tree-shaking）和 2.5 节（调试与诊断支撑层）
+- 原 2.4-2.7 重新编号为 2.6-2.9
+
