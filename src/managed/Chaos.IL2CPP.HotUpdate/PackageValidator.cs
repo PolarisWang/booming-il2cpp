@@ -8,10 +8,22 @@ public static class PackageValidator
         ArgumentException.ThrowIfNullOrWhiteSpace(currentAotVersion);
 
         var targetAotVersion = package.Manifest.TargetAotVersion;
-        if (!string.Equals(targetAotVersion, currentAotVersion, StringComparison.Ordinal))
+        if (!HotUpdateSemanticVersion.TryParse(currentAotVersion, out var runtimeVersion))
         {
             throw new InvalidOperationException(
-                $"hot update package target AOT version '{targetAotVersion}' is not compatible with runtime AOT version '{currentAotVersion}'.");
+                $"runtime AOT version '{currentAotVersion}' is not a valid semantic version. Expected 'major.minor.patch'.");
+        }
+
+        if (!HotUpdateSemanticVersion.TryParse(targetAotVersion, out var targetVersion))
+        {
+            throw new InvalidOperationException(
+                $"hot update package target AOT version '{targetAotVersion}' is not a valid semantic version. Expected 'major.minor.patch'.");
+        }
+
+        if (!targetVersion.IsCompatibleWith(runtimeVersion))
+        {
+            throw new InvalidOperationException(
+                $"hot update package target AOT version '{targetAotVersion}' is not compatible with runtime AOT version '{currentAotVersion}'. Expected matching major.minor compatibility band.");
         }
 
         if (string.IsNullOrWhiteSpace(package.Manifest.Signature))
