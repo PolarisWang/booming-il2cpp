@@ -5,7 +5,7 @@ task_type: plan
 lifecycle_status: hanging
 phase: hanging
 created_at: 2026-04-11 13:59:04 +08:00
-updated_at: 2026-04-11 15:00:53 +08:00
+updated_at: 2026-04-11 22:45:00 +08:00
 current_dir: docs/dev/hanging/20260411-05-mobile-runtime-host
 parent_task_id: 20260409-10-total-solution-and-ios-hot-update-analysis
 source_task_id: 20260409-10-total-solution-and-ios-hot-update-analysis
@@ -20,16 +20,17 @@ active: false
 - brainstorm: `docs/dev/hanging/20260411-05-mobile-runtime-host/brainstorm-v1-04.md`
 - design: `docs/dev/hanging/20260411-05-mobile-runtime-host/design-v1-04.md`
 - plan: `docs/dev/hanging/20260411-05-mobile-runtime-host/plan-v1-01.md`
-- latest_progress: `docs/dev/hanging/20260411-05-mobile-runtime-host/notes/progress-v1-04.md`
+- latest_progress: `docs/dev/hanging/20260411-05-mobile-runtime-host/notes/progress-v1-05.md`
 
 ## 当前判断
 
-- current_focus: Batch 1-4.1 已闭环；`src/mobile/shared/`、`src/mobile/android/`、`src/mobile/ios/` 与 `subjects/MobileHelloWorldProof/` 已形成 subject-scoped mobile buildable route，但真实 Android/iOS runtime、crash 收集与 perf/package baseline 尚未完成。
+- current_focus: Batch 1-4.1 已闭环；`src/mobile/shared/`、`src/mobile/android/`、`src/mobile/ios/` 与 `subjects/MobileHelloWorldProof/` 已形成 subject-scoped mobile buildable route，并新增 `run doctor` mobile runtime preflight 入口；但真实 Android/iOS runtime、crash 收集与 perf/package baseline 尚未完成。
 - why_now: 当前宿主缺少可直接验证 Android startup/runtime 的 NDK/emulator/device，且没有 macOS/Xcode 可推进 iOS simulator/device；继续停留在本任务会把 validate-only/buildable 误报为 runtime 完成。
 - done_definition: 保留 shared host、Android/iOS skeleton 与 `MobileHelloWorldProof` 作为 Phase 4 落点，待真实移动端环境具备后继续 Batch 2.4/2.5、3.4-3.7、4.2-4.4。
 
 ## 最近摘要
 
+- 2026-04-11 22:45:00 +08:00: 扩展 public command `run doctor`，新增 Android SDK/NDK/adb/emulator 与 iOS host 缺口探测；当前 Windows 宿主可直接得到 mobile runtime host 恢复前的环境阻塞清单。
 - 2026-04-11 13:59:04 +08:00: 激活任务；上游 `20260411-04-engine-binding-contract` 已归档，`EngineHostProof` 与 `HostEmbeddingLite` ownership proof 已闭环，开始推进 Phase 4 mobile host。
 - 2026-04-11 14:22:48 +08:00: 完成 Batch 1 shared host framework、Batch 2 Android skeleton、Batch 3 iOS skeleton；`src/mobile/shared/*`、`src/mobile/android/*`、`src/mobile/ios/*` 已落地，并通过 9 项 Phase 4 相关 pytest 与 Android shared host 桌面编译验证。
 - 2026-04-11 14:42:36 +08:00: 完成 Batch 4.1 `MobileHelloWorldProof`；subject-scoped Android/iOS mobile host root、root CMake route 与 iOS validate-only worker 已接通，并通过 50 项相关 pytest、managed runtime、Android host 桌面编译以及 Android/iOS validate-only route 验证。
@@ -37,7 +38,7 @@ active: false
 
 ## 下一步
 
-- next_action: 在具备 Android NDK/emulator/device 或 macOS/Xcode 宿主后恢复本任务，继续 Batch 2.4/2.5、3.4-3.7、4.2-4.4；当前父 roadmap 先由 `20260411-06-hot-update-skeleton` 接续推进。
+- next_action: 先在目标宿主运行 `run doctor` 补齐 Android SDK/NDK/adb/emulator 缺口，并准备 macOS/Xcode 宿主；环境到位后恢复本任务，继续 Batch 2.4/2.5、3.4-3.7、4.2-4.4。
 - owner: codex
 - trigger: 提供真实 Android runtime 验证环境或 macOS/Xcode 验证环境。
 
@@ -58,6 +59,9 @@ active: false
 - passed: `cmake --build artifacts/.tmp-mobile-proof-android-route --config Release`
 - passed: `cmake -S . -B artifacts/.tmp-mobile-proof-ios-route -G "Visual Studio 17 2022" -DROADMAP0_PRESET_TARGET=ios-arm64-packaging -DROADMAP0_TOOLCHAIN_VALIDATE_ONLY=ON -DCHAOS_SUBJECT_IOS_HOST_ROOT=subjects/MobileHelloWorldProof/validation/mobile/ios-host -DCMAKE_TOOLCHAIN_FILE=build/toolchains/ios-arm64.cmake`
 - passed: `cmake --build artifacts/.tmp-mobile-proof-ios-route --config Release`
+- passed: `python -m pytest tests/tooling/run/test_doctor.py -v`
+- passed: `python -m pytest tests/tooling/run/test_prepare_scopes.py -v`
+- passed: `python build/toolchains/run/run.py doctor`
 
 ## 风险 / 阻塞
 
@@ -70,4 +74,4 @@ active: false
 ### blockers
 
 - 缺少已配置的 Android NDK / emulator / device，无法在当前宿主直接推进 Batch 2.4 真 startup/runtime 证据。
-- 当前宿主为 Windows，无法直接推进 Batch 3.4+ 所需的 macOS/Xcode simulator/device 验证。
+- 当前宿主为 Windows，无法直接推进 Batch 3.4+ 所需的 macOS/Xcode simulator/device 验证；`run doctor` 现已明确输出这一阻塞。

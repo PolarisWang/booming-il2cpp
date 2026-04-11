@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import os
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -154,6 +155,85 @@ class DoctorCommandTests(unittest.TestCase):
         self.assertEqual("error", result.status)
         self.assertIn("run prepare", result.text or "")
         self.assertIn("cached CMake", result.text or "")
+
+    def test_doctor_reports_mobile_runtime_host_blockers_on_windows(self) -> None:
+        doctor_module = load_module(DOCTOR_MODULE_PATH, "chaos_run_doctor_mobile_runtime_blockers")
+
+        with patch.object(
+            doctor_module.runtime_module,
+            "probe_runtime",
+            return_value={"isInstalled": True, "pythonPath": "artifacts/python/python.exe"},
+        ):
+            with patch.dict(os.environ, {"TERM": "dumb"}, clear=True):
+                with patch.object(doctor_module.tooling_module, "find_cmake_executable", return_value="C:\\tools\\cmake\\bin\\cmake.exe"):
+                    with patch.object(doctor_module.tooling_module, "find_visual_cpp_executable", return_value=None):
+                        with patch.object(
+                            doctor_module.tooling_module.shutil,
+                            "which",
+                            side_effect=lambda exe: "C:\\Program Files\\dotnet\\dotnet.exe" if exe == "dotnet" else None,
+                        ):
+                            result = doctor_module.handle(REPO_ROOT, "windows", "doctor")
+
+        self.assertEqual("ok", result.status)
+        checks = {check["name"]: check for check in result.checks}
+        self.assertEqual("missing", checks["android-sdk-root"]["status"])
+        self.assertEqual("missing", checks["android-ndk-root"]["status"])
+        self.assertEqual("missing", checks["android-adb"]["status"])
+        self.assertEqual("missing", checks["android-emulator"]["status"])
+        self.assertEqual("missing", checks["ios-runtime-host"]["status"])
+        self.assertIn("requires a macOS host with Xcode", checks["ios-runtime-host"]["detail"])
+        self.assertIn("Mobile runtime host:", result.text or "")
+        self.assertIn("Android blockers:", result.text or "")
+        self.assertIn("iOS blockers:", result.text or "")
+
+    def test_doctor_discovers_android_tooling_from_sdk_and_ndk_environment(self) -> None:
+        doctor_module = load_module(DOCTOR_MODULE_PATH, "chaos_run_doctor_android_env_discovery")
+
+        with tempfile.TemporaryDirectory() as temp_root:
+            sdk_root = Path(temp_root) / "Android" / "Sdk"
+            ndk_root = sdk_root / "ndk" / "26.3.11579264"
+            adb_path = sdk_root / "platform-tools" / "adb.exe"
+            emulator_path = sdk_root / "emulator" / "emulator.exe"
+
+            ndk_root.mkdir(parents=True, exist_ok=False)
+            adb_path.parent.mkdir(parents=True, exist_ok=False)
+            emulator_path.parent.mkdir(parents=True, exist_ok=False)
+            adb_path.write_text("", encoding="utf-8")
+            emulator_path.write_text("", encoding="utf-8")
+
+            with patch.object(
+                doctor_module.runtime_module,
+                "probe_runtime",
+                return_value={"isInstalled": True, "pythonPath": "artifacts/python/python.exe"},
+            ):
+                with patch.dict(
+                    os.environ,
+                    {
+                        "ANDROID_SDK_ROOT": str(sdk_root),
+                        "ANDROID_NDK_ROOT": str(ndk_root),
+                        "TERM": "dumb",
+                    },
+                    clear=True,
+                ):
+                    with patch.object(doctor_module.tooling_module, "find_cmake_executable", return_value="C:\\tools\\cmake\\bin\\cmake.exe"):
+                        with patch.object(doctor_module.tooling_module, "find_visual_cpp_executable", return_value=None):
+                            with patch.object(
+                                doctor_module.tooling_module.shutil,
+                                "which",
+                                side_effect=lambda exe: "C:\\Program Files\\dotnet\\dotnet.exe" if exe == "dotnet" else None,
+                            ):
+                                result = doctor_module.handle(REPO_ROOT, "windows", "doctor")
+
+        self.assertEqual("ok", result.status)
+        checks = {check["name"]: check for check in result.checks}
+        self.assertEqual("ok", checks["android-sdk-root"]["status"])
+        self.assertEqual("ok", checks["android-ndk-root"]["status"])
+        self.assertEqual("ok", checks["android-adb"]["status"])
+        self.assertEqual("ok", checks["android-emulator"]["status"])
+        self.assertIn(str(sdk_root), checks["android-sdk-root"]["detail"])
+        self.assertIn(str(ndk_root), checks["android-ndk-root"]["detail"])
+        self.assertIn(str(adb_path), checks["android-adb"]["detail"])
+        self.assertIn(str(emulator_path), checks["android-emulator"]["detail"])
 
 
 if __name__ == "__main__":

@@ -5,7 +5,7 @@ task_type: roadmap
 lifecycle_status: in_progress
 phase: roadmap
 created_at: 2026-04-09 23:20:00 +08:00
-updated_at: 2026-04-11 19:10:21 +08:00
+updated_at: 2026-04-11 22:45:00 +08:00
 current_dir: docs/dev/in-progress/20260409-10-total-solution-and-ios-hot-update-analysis
 parent_task_id:
 source_task_id:
@@ -29,6 +29,7 @@ active: false
 
 ## 最近摘要
 
+- 2026-04-11 22:45:00 +08:00: 为 Phase 4 外部阻塞新增 `run doctor` mobile runtime preflight；当前 Windows 宿主已可直接枚举 Android SDK/NDK/adb/emulator 缺口，并明确 iOS runtime 仍需要 macOS/Xcode 宿主。
 - 2026-04-11 12:51:22 +08:00: `20260411-03-aot-runtime-completeness` 归档，`InterfaceDispatchProof` native perf baseline 与 `GoldenMultiProject` convert perf baseline 闭环。
 - 2026-04-11 13:59:04 +08:00: `20260411-04-engine-binding-contract` 归档，`EngineHostProof` 与 `HostEmbeddingLite` 形成 windows host proof + ownership baseline。
 - 2026-04-11 15:00:53 +08:00: `20260411-05-mobile-runtime-host` 因缺少真实 Android/macOS/Xcode 环境挂起，主线切换到 `20260411-06-hot-update-skeleton`。
@@ -38,7 +39,7 @@ active: false
 
 ## 下一步
 
-- next_action: 等待 Phase 4 `20260411-05-mobile-runtime-host` 所需 Android NDK / emulator / device 与 macOS/Xcode 环境恢复；环境到位后恢复 mobile host proof，并据此决定父 roadmap 的最终归档方式。
+- next_action: 先在目标宿主运行 `run doctor` 补齐 Android SDK/NDK/adb/emulator，并准备 macOS/Xcode 宿主；环境到位后恢复 Phase 4 mobile host proof，并据此决定父 roadmap 的最终归档方式。
 - owner: codex
 - trigger: 当前仓库内已没有新的解释器/热更新本地落地缺口，剩余阻塞为外部运行环境证据。
 

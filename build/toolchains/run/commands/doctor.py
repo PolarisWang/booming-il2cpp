@@ -57,6 +57,149 @@ def _check_dotnet() -> dict:
     return _build_check("dotnet", location, True, missing_detail="dotnet not found")
 
 
+def _existing_directory(path_text: str | None) -> str | None:
+    if not path_text:
+        return None
+    candidate = Path(path_text).expanduser()
+    if candidate.is_dir():
+        return str(candidate)
+    return None
+
+
+def _android_executable_name(name: str) -> str:
+    return f"{name}.exe" if os.name == "nt" else name
+
+
+def _find_latest_ndk_under_sdk(sdk_root: str | None) -> str | None:
+    if not sdk_root:
+        return None
+
+    ndk_root = Path(sdk_root) / "ndk"
+    if ndk_root.is_dir():
+        candidates = sorted((candidate for candidate in ndk_root.iterdir() if candidate.is_dir()), reverse=True)
+        if candidates:
+            return str(candidates[0])
+
+    ndk_bundle = Path(sdk_root) / "ndk-bundle"
+    if ndk_bundle.is_dir():
+        return str(ndk_bundle)
+
+    return None
+
+
+def _locate_android_sdk_root() -> tuple[str | None, str | None]:
+    candidates = [
+        ("ANDROID_SDK_ROOT", os.environ.get("ANDROID_SDK_ROOT")),
+        ("ANDROID_HOME", os.environ.get("ANDROID_HOME")),
+    ]
+
+    local_app_data = os.environ.get("LOCALAPPDATA")
+    home = os.environ.get("HOME")
+    if local_app_data:
+        candidates.append(("LOCALAPPDATA", str(Path(local_app_data) / "Android" / "Sdk")))
+    if home:
+        candidates.append(("HOME", str(Path(home) / "Library" / "Android" / "sdk")))
+        candidates.append(("HOME", str(Path(home) / "Android" / "Sdk")))
+
+    for discovered_via, candidate in candidates:
+        location = _existing_directory(candidate)
+        if location:
+            return location, discovered_via
+    return None, None
+
+
+def _locate_android_ndk_root(sdk_root: str | None) -> tuple[str | None, str | None]:
+    candidates = [
+        ("ANDROID_NDK_ROOT", os.environ.get("ANDROID_NDK_ROOT")),
+        ("ANDROID_NDK_HOME", os.environ.get("ANDROID_NDK_HOME")),
+        ("ANDROID_SDK_ROOT", _find_latest_ndk_under_sdk(sdk_root)),
+    ]
+
+    for discovered_via, candidate in candidates:
+        location = _existing_directory(candidate)
+        if location:
+            return location, discovered_via
+    return None, None
+
+
+def _locate_android_sdk_tool(sdk_root: str | None, executable: str, relative_path: tuple[str, ...]) -> tuple[str | None, str | None]:
+    discovered = tooling_module.shutil.which(executable)
+    if discovered:
+        return discovered, "PATH"
+
+    if sdk_root:
+        candidate = Path(sdk_root).joinpath(*relative_path)
+        if candidate.is_file():
+            return str(candidate), "ANDROID_SDK_ROOT"
+
+    return None, None
+
+
+def _check_android_runtime_tooling() -> list[dict]:
+    sdk_root, sdk_via = _locate_android_sdk_root()
+    ndk_root, ndk_via = _locate_android_ndk_root(sdk_root)
+    adb_location, adb_via = _locate_android_sdk_tool(
+        sdk_root,
+        "adb",
+        ("platform-tools", _android_executable_name("adb")),
+    )
+    emulator_location, emulator_via = _locate_android_sdk_tool(
+        sdk_root,
+        "emulator",
+        ("emulator", _android_executable_name("emulator")),
+    )
+
+    return [
+        _build_check(
+            "android-sdk-root",
+            sdk_root,
+            False,
+            missing_detail="ANDROID_SDK_ROOT / ANDROID_HOME not found",
+            discovered_via=sdk_via,
+        ),
+        _build_check(
+            "android-ndk-root",
+            ndk_root,
+            False,
+            missing_detail="ANDROID_NDK_ROOT not found and no side-by-side NDK discovered under Android SDK",
+            discovered_via=ndk_via,
+        ),
+        _build_check(
+            "android-adb",
+            adb_location,
+            False,
+            missing_detail="adb not found in PATH or Android SDK platform-tools",
+            discovered_via=adb_via,
+        ),
+        _build_check(
+            "android-emulator",
+            emulator_location,
+            False,
+            missing_detail="emulator not found in PATH or Android SDK emulator directory",
+            discovered_via=emulator_via,
+        ),
+    ]
+
+
+def _check_ios_runtime_host(host_platform: str) -> dict:
+    if host_platform == "macos":
+        location = tooling_module.shutil.which("xcodebuild")
+        return _build_check(
+            "ios-runtime-host",
+            location,
+            False,
+            missing_detail="xcodebuild not found; iOS runtime evidence requires Xcode plus Simulator or a signed device",
+            discovered_via="PATH" if location else None,
+        )
+
+    return {
+        "name": "ios-runtime-host",
+        "status": "missing",
+        "detail": f"requires a macOS host with Xcode plus Simulator or a signed device; current host is {host_platform}",
+        "required": False,
+    }
+
+
 def _check_visual_cpp_toolchain() -> dict:
     location = tooling_module.find_visual_cpp_executable()
     discovered_via = None
@@ -143,6 +286,23 @@ def _render_doctor_text(checks: list[dict], host_platform: str) -> str:
             label = _status_label(check["status"], required=False)
             lines.append(f"{label} {check['name']}: {check['detail']}")
 
+    android_checks = [check for check in checks if check["name"].startswith("android-")]
+    ios_runtime_check = next((check for check in checks if check["name"] == "ios-runtime-host"), None)
+    if android_checks or ios_runtime_check is not None:
+        lines.append("")
+        lines.append("Mobile runtime host:")
+        android_blockers = [check["name"] for check in android_checks if check["status"] != "ok"]
+        if android_checks:
+            if android_blockers:
+                lines.append(f"Android blockers: {', '.join(android_blockers)}")
+            else:
+                lines.append("Android runtime host tooling looks discoverable from the current host.")
+        if ios_runtime_check is not None:
+            if ios_runtime_check["status"] == "ok":
+                lines.append("iOS host note: xcodebuild is available on this macOS host.")
+            else:
+                lines.append(f"iOS blockers: {ios_runtime_check['detail']}")
+
     if required_issues:
         lines.append("")
         lines.append("Next actions:")
@@ -184,6 +344,9 @@ def handle(repo_root: Path, host_platform: str, command_text: str) -> CommandRes
         checks.append(_check_visual_cpp_toolchain())
     elif host_platform == "macos":
         checks.append(_build_check("xcodebuild", tooling_module.shutil.which("xcodebuild"), False, missing_detail="xcodebuild not found"))
+
+    checks.extend(_check_android_runtime_tooling())
+    checks.append(_check_ios_runtime_host(host_platform))
 
     errors = [check["name"] for check in checks if check["status"] == "error"]
     if errors:
