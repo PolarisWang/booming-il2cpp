@@ -7,13 +7,13 @@ plan_file: docs/dev/in-progress/20260411-09-productization-gates/plan-v1-01.md
 lifecycle_status: in_progress
 phase: executing
 total_tasks: 16
-current_task: Batch 4 - perf regression dashboard 配置与 unsupported feature report 骨架
+current_task: External Blockers - 24h soak acceptance 与 mobile runtime host 真实证据
 ---
 
 ## 最近摘要
 
-- 2026-04-11 19:59:47 +08:00: Batch 1 已完成：新增 `subjects/CompatibilityMatrixProof/`、compatibility matrix JSON config、Python runner 与 JSON report skeleton，并通过 Phase 8 定向测试、subject manifest schema 回归与 proof 项目运行验证。
+- 2026-04-11 20:12:32 +08:00: Batch 4 本地 skeleton 已完成：新增 perf dashboard config builder、unsupported feature report scanner 与 soak harness；Phase 8 本地可落地资产已基本收口。
 
 ## 下一步
 
-- 进入 Batch 4，先复用现有 perf / reporting / registry 基础设施，补 perf regression dashboard 配置与 unsupported feature report skeleton；再评估 soak harness 的最小切片边界。
+- 等待真实 Android/macOS/iOS 与长时间运行环境恢复后，执行 24h soak 验收、full compatibility matrix、真实平台 perf dashboard evidence 收集，以及 release checklist 最终复跑。

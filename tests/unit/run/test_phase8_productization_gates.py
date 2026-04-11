@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import shutil
 import subprocess
 import sys
 import unittest
@@ -33,6 +34,12 @@ COMPATIBILITY_MATRIX_SUBJECT_MANIFEST_PATH = (
     REPO_ROOT / "subjects" / "CompatibilityMatrixProof" / "subject.manifest.json"
 )
 COMPATIBILITY_MATRIX_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "compatibility-matrix"
+PERF_DASHBOARD_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "perf_dashboard.py"
+UNSUPPORTED_FEATURE_REPORT_MODULE_PATH = (
+    REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "unsupported_feature_report.py"
+)
+SOAK_HARNESS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "soak_harness.py"
+BATCH4_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase8-productization-batch4"
 
 
 def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -247,6 +254,129 @@ class Phase8ProductizationGatesTests(unittest.TestCase):
             ),
             msg=report_path.read_text(encoding="utf-8"),
         )
+
+    def test_perf_dashboard_builder_discovers_perf_subject_matrix_entries(self) -> None:
+        dashboard_module = load_module(
+            PERF_DASHBOARD_MODULE_PATH,
+            "chaos_perf_dashboard_phase8",
+        )
+
+        config = dashboard_module.build_perf_dashboard_config(REPO_ROOT)
+
+        self.assertEqual("v1", config["configVersion"])
+        self.assertEqual("ok", config["status"])
+        self.assertGreaterEqual(config["statusCounts"]["total"], 4)
+        self.assertEqual(0, config["statusCounts"]["fail"])
+
+        discovered_entries = {
+            (entry["subjectId"], entry["matrixId"], entry["goalId"])
+            for entry in config["entries"]
+        }
+        self.assertTrue(
+            {
+                ("GenericEcho", "windows-perf-dev", "perf.dev"),
+                ("GenericEcho", "windows-perf-release", "perf.release"),
+                ("InterfaceDispatchProof", "windows-native-profile", "perf.profile"),
+                ("MainlineFeaturePack", "windows-native-profile", "perf.profile"),
+            }.issubset(discovered_entries)
+        )
+
+        generic_echo_dev = next(
+            entry
+            for entry in config["entries"]
+            if entry["subjectId"] == "GenericEcho" and entry["matrixId"] == "windows-perf-dev"
+        )
+        self.assertTrue(generic_echo_dev["baselinePath"].startswith("subjects/GenericEcho/baselines/perf/"))
+        self.assertIn("meanDurationMs", generic_echo_dev["metricKeys"])
+
+    def test_unsupported_feature_report_scanner_flags_fixture_patterns(self) -> None:
+        report_module = load_module(
+            UNSUPPORTED_FEATURE_REPORT_MODULE_PATH,
+            "chaos_unsupported_feature_report_phase8",
+        )
+
+        fixture_root = BATCH4_TMP_ROOT / f"unsupported-feature-{uuid.uuid4().hex}"
+        source_root = fixture_root / "FixtureUnsupportedSubject" / "source"
+        source_root.mkdir(parents=True, exist_ok=False)
+        try:
+            (source_root / "Program.cs").write_text(
+                "\n".join(
+                    [
+                        "using System;",
+                        "using System.Reflection.Emit;",
+                        "",
+                        "internal static class Program",
+                        "{",
+                        "    private static void Main()",
+                        "    {",
+                        "        _ = AppDomain.CurrentDomain;",
+                        "        _ = new DynamicMethod(\"fixture\", typeof(void), Type.EmptyTypes);",
+                        "    }",
+                        "}",
+                        "",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            report = report_module.build_unsupported_feature_report_for_source_tree(
+                source_root,
+                subject_id="FixtureUnsupportedSubject",
+            )
+            self.assertEqual("v1", report["reportVersion"])
+            self.assertEqual("fail", report["status"])
+            self.assertEqual(2, report["statusCounts"]["fail"])
+            self.assertEqual(
+                {"appdomain", "reflection-emit"},
+                {finding["ruleId"] for finding in report["findings"]},
+            )
+
+            output_path = fixture_root / "unsupported-feature-report.json"
+            report_module.write_unsupported_feature_report(output_path, report)
+            self.assertTrue(output_path.is_file())
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
+
+    def test_soak_harness_collects_samples_for_successful_iterations(self) -> None:
+        soak_module = load_module(
+            SOAK_HARNESS_MODULE_PATH,
+            "chaos_soak_harness_phase8_success",
+        )
+
+        report = soak_module.run_soak_harness(
+            [sys.executable, "-c", "import time; time.sleep(0.3)"],
+            cwd=REPO_ROOT,
+            duration_seconds=0.3,
+            poll_interval_seconds=0.05,
+            max_iterations=1,
+        )
+
+        self.assertEqual("v1", report["reportVersion"])
+        self.assertEqual("ok", report["status"])
+        self.assertEqual(1, report["statusCounts"]["totalIterations"])
+        self.assertEqual(0, report["statusCounts"]["fail"])
+        self.assertGreaterEqual(report["sampleCount"], 1)
+        self.assertIsNotNone(report["peakWorkingSetBytes"])
+
+    def test_soak_harness_marks_non_zero_exit_as_crash(self) -> None:
+        soak_module = load_module(
+            SOAK_HARNESS_MODULE_PATH,
+            "chaos_soak_harness_phase8_failure",
+        )
+
+        report = soak_module.run_soak_harness(
+            [sys.executable, "-c", "import sys; sys.exit(3)"],
+            cwd=REPO_ROOT,
+            duration_seconds=0.1,
+            poll_interval_seconds=0.02,
+            max_iterations=1,
+        )
+
+        self.assertEqual("fail", report["status"])
+        self.assertEqual(1, report["statusCounts"]["totalIterations"])
+        self.assertEqual(1, report["statusCounts"]["fail"])
+        self.assertEqual(1, report["crashedIterations"])
+        self.assertEqual(3, report["iterations"][0]["exitCode"])
 
 
 if __name__ == "__main__":

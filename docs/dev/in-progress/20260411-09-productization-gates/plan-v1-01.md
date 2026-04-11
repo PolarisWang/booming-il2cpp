@@ -47,10 +47,10 @@
 
 ### Batch 4: 长期回归 + Soak Test
 
-- [ ] **4.1** 建立 perf regression dashboard 配置：所有 subject × 所有 platform × 关键指标
-- [ ] **4.2** 实现 soak test harness：连续运行 24h，监控内存/cpu/crash
+- [x] **4.1** 建立 perf regression dashboard 配置：所有 subject × 所有 platform × 关键指标
+- [x] **4.2** 实现 soak test harness：连续运行 24h，监控内存/cpu/crash
 - [ ] **4.3** soak test 验收：24h 运行，内存增长 < 1MB，0 crash
-- [ ] **4.4** 建立 unsupported feature report：自动检测不支持的 CLR 特性并输出报告
+- [x] **4.4** 建立 unsupported feature report：自动检测不支持的 CLR 特性并输出报告
 - [x] **4.5** 编写 release checklist（markdown）：每个发布版本必须通过的 gate 清单
 
 ### Batch 5: 收尾
