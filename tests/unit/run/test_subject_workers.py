@@ -524,6 +524,120 @@ class SubjectWorkersTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_windows_android_runtime_build_uses_ninja_and_records_runtime_output(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_windows_android_runtime_build")
+        subject_id = "FixtureAndroidRuntimeSubject"
+        run_id = "fixture-run-android-runtime-build-001"
+        matrix_id = "windows-android-runtime"
+        expected_cmake_dir = self._make_non_repo_path("cmake-builds", "android-runtime-1234")
+        expected_cmake_path = self._make_non_repo_path("cmake", "bin", "cmake.exe")
+        expected_ninja_path = self._make_non_repo_path("cmake", "bin", "ninja.exe")
+        expected_env = {
+            "ANDROID_SDK_ROOT": r"C:\android\sdk",
+            "ANDROID_NDK_ROOT": r"C:\android\sdk\ndk\26.3.11579264",
+            "PATH": r"C:\android\sdk\platform-tools;C:\android\sdk\emulator",
+        }
+
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "CHECK",
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "android-arm64",
+                    "toolchainProfile": "android-ndk-r26",
+                    "runtimeProfile": "android-native-runtime",
+                },
+            },
+            "upstream": {
+                "generated": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("windows-android-runtime-build")
+        try:
+            expected_android_host_root = repo_root / "subjects" / subject_id / "validation" / "mobile" / "android-host"
+            expected_android_host_root.mkdir(parents=True, exist_ok=True)
+
+            with patch.object(workers_module.tooling_module, "cmake_environment", return_value=(str(expected_cmake_path), expected_env)):
+                with patch.object(workers_module.tooling_module, "find_ninja_executable", return_value=str(expected_ninja_path)):
+                    with patch.object(workers_module.tooling_module, "allocate_cmake_binary_dir", return_value=expected_cmake_dir):
+                        with patch.object(workers_module, "_run_checked") as run_checked_mock:
+                            result = workers_module.run_build_target(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            expected_output_root = (
+                repo_root
+                / "artifacts"
+                / "subjects"
+                / subject_id
+                / "runs"
+                / run_id
+                / "matrices"
+                / matrix_id
+                / "build"
+                / "out"
+            )
+            self.assertEqual(
+                [
+                    str(expected_cmake_path),
+                    "-S",
+                    str(repo_root),
+                    "-B",
+                    str(expected_cmake_dir),
+                    "-G",
+                    "Ninja",
+                    "-DROADMAP0_PRESET_TARGET=android-arm64-smoke",
+                    "-DCHAOS_SUBJECT_VARIANT=CHECK",
+                    f"-DCHAOS_SUBJECT_ANDROID_HOST_ROOT={expected_android_host_root}",
+                    f"-DCHAOS_SUBJECT_ANDROID_ARTIFACT_ROOT={expected_output_root}",
+                    f"-DCMAKE_TOOLCHAIN_FILE={repo_root / 'build' / 'toolchains' / 'android-arm64.cmake'}",
+                    "-DCMAKE_BUILD_TYPE=Release",
+                    f"-DCMAKE_MAKE_PROGRAM={expected_ninja_path}",
+                ],
+                run_checked_mock.call_args_list[0].args[0],
+            )
+            self.assertEqual(
+                [
+                    str(expected_cmake_path),
+                    "--build",
+                    str(expected_cmake_dir),
+                    "--target",
+                    "mobile_hello_world_android_host_runtime",
+                ],
+                run_checked_mock.call_args_list[1].args[0],
+            )
+            self.assertEqual(expected_env, run_checked_mock.call_args_list[0].kwargs["env"])
+
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("android-native-cmake", manifest["buildStrategy"])
+            self.assertEqual("android-arm64", manifest["targetPlatform"])
+            self.assertEqual(expected_cmake_dir.as_posix(), manifest["cmakeBinaryDir"])
+            self.assertEqual(
+                [
+                    subject_run_path(
+                        subject_id,
+                        run_id,
+                        "matrices",
+                        matrix_id,
+                        "build",
+                        "out",
+                        "mobile_hello_world_android_host_runtime",
+                    )
+                ],
+                manifest["outputs"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
     def test_runtime_observe_accepts_non_repo_cmake_binary_dir_from_build_manifest(self) -> None:
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_runtime_observe")
         subject_id = "FixtureRuntimeObserveSubject"
@@ -654,6 +768,110 @@ class SubjectWorkersTests(unittest.TestCase):
             )
             self.assertEqual(
                 "native proof ok\n",
+                (repo_root / manifest["stdoutPath"]).read_text(encoding="utf-8"),
+            )
+            self.assertEqual(
+                "0\n",
+                (repo_root / manifest["exitCodePath"]).read_text(encoding="utf-8"),
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_runtime_observe_executes_android_native_build_output_via_adb_shell(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_runtime_observe_android")
+        subject_id = "FixtureAndroidRuntimeSubject"
+        run_id = "fixture-run-android-runtime-observe-001"
+        matrix_id = "windows-android-runtime"
+        executable_path = subject_run_path(
+            subject_id,
+            run_id,
+            "matrices",
+            matrix_id,
+            "build",
+            "out",
+            "mobile_hello_world_android_host_runtime",
+        )
+
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "CHECK",
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "android-arm64",
+                    "runtimeProfile": "android-native-runtime",
+                },
+            },
+            "upstream": {
+                "build": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("runtime-observe-android")
+        try:
+            build_manifest_path = repo_root / request["upstream"]["build"]["manifestPath"]
+            build_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            build_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "buildStrategy": "android-native-cmake",
+                        "outputs": [executable_path],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            android_result = subprocess.CompletedProcess(
+                ["adb", "shell"],
+                0,
+                "mobile-host|stage=shared-host-bootstrap|detail=MobileHelloWorldProof|exitCode=0\n__CHAOS_EXIT_CODE__=0\n",
+                "",
+            )
+
+            with patch.object(
+                workers_module.tooling_module,
+                "ensure_android_host_tooling_available",
+                return_value=workers_module.tooling_module.ToolBootstrapResult(ready=True, output="android host ready\n"),
+            ):
+                with patch.object(
+                    workers_module.tooling_module,
+                    "android_environment_overrides",
+                    return_value={
+                        "ANDROID_SDK_ROOT": r"C:\android\sdk",
+                        "ANDROID_AVD_HOME": r"C:\android\.android\avd",
+                        "ANDROID_EMULATOR_HOME": r"C:\android\.android",
+                        "PATH": r"C:\android\sdk\platform-tools;C:\android\sdk\emulator",
+                    },
+                ):
+                    with patch.object(workers_module, "_launch_android_emulator", return_value=("emulator-5560", object(), None, None)) as launch_mock:
+                        with patch.object(workers_module, "_wait_for_android_boot_completed") as wait_mock:
+                            with patch.object(workers_module, "_run_android_binary_via_adb", return_value=android_result) as adb_mock:
+                                with patch.object(workers_module, "_shutdown_android_emulator") as shutdown_mock:
+                                    result = workers_module.run_runtime_observe(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            launch_mock.assert_called_once()
+            wait_mock.assert_called_once()
+            adb_mock.assert_called_once()
+            shutdown_mock.assert_called_once()
+
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("emulator-5560", manifest["androidSerial"])
+            self.assertEqual(workers_module.tooling_module.ANDROID_AVD_NAME, manifest["androidAvdName"])
+            self.assertEqual(
+                ["mobile-host|stage=shared-host-bootstrap|detail=MobileHelloWorldProof|exitCode=0"],
+                manifest["outputLines"],
+            )
+            self.assertEqual(
+                "mobile-host|stage=shared-host-bootstrap|detail=MobileHelloWorldProof|exitCode=0\n",
                 (repo_root / manifest["stdoutPath"]).read_text(encoding="utf-8"),
             )
             self.assertEqual(

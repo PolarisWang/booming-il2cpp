@@ -5,7 +5,7 @@ task_type: plan
 lifecycle_status: in_progress
 phase: executing
 created_at: 2026-04-11 21:10:00 +08:00
-updated_at: 2026-04-11 21:07:28 +08:00
+updated_at: 2026-04-11 22:20:28 +08:00
 current_dir: docs/dev/in-progress/20260411-09-productization-gates
 parent_task_id: 20260409-10-total-solution-and-ios-hot-update-analysis
 source_task_id: 20260409-10-total-solution-and-ios-hot-update-analysis
@@ -22,12 +22,13 @@ active: true
 
 ## 当前判断
 
-- current_focus: Phase 8 本地实现批次已经闭环，本轮继续消减 Phase 4 外部阻塞；Windows 侧 Android SDK / NDK / adb / emulator 与 JDK 已落到 repo cache，并接入 `run prepare android-host`、`run clean --scope android-host`、`run doctor` 与入口菜单。
+- current_focus: Phase 8 本地实现批次已经闭环，本轮继续消减 Phase 4 外部阻塞；Windows 侧 Android SDK / NDK / adb / emulator 与 JDK 已落到 repo cache，并已修正为按主机架构选择 Android emulator system image / AVD，`windows-android-runtime` 真实 subject 链路已打通。
 - why_now: 之前 productization 的真实平台验证主要卡在 Windows 主机缺少 Android host tooling 与 Java；补齐 repo-cache bootstrap 之后，Android 侧后续可以直接在仓库内复用环境，iOS 则明确只在 macOS 主机验证，不再让 Windows `doctor` 误报。
-- done_definition: 本轮切片的完成标准是 Android host tooling 自动化可执行、`doctor` 能识别 repo cache、入口菜单可见、Windows 平台不再要求 iOS host，并且有真实主机 bootstrap / doctor / version probe 证据。
+- done_definition: 本轮切片的完成标准是 Android host tooling 自动化可执行、`doctor` 能识别 repo cache、入口菜单可见、Windows 平台不再要求 iOS host，并且有真实主机 bootstrap / doctor / version probe 证据，以及至少一个真实 Android runtime subject matrix 可在当前 Windows 主机闭环通过。
 
 ## 最近摘要
 
+- 2026-04-11 22:20:28 +08:00: 修复 `MobileHelloWorldProof` lowering 入口形状，并把 Windows Android repo-cache bootstrap 改为按主机架构选择 emulator system image；在当前 Windows x86_64 主机上重新 `clean --scope android-host` / `prepare android-host` / `doctor` 后，repo cache 成功切到 `x86_64` system image + `chaos-android-36-x86_64` AVD，随后 `python build/toolchains/run/run.py test subject --id subject/MobileHelloWorldProof --goal correctness.platform --matrix windows-android-runtime` 真实通过。
 - 2026-04-11 21:07:28 +08:00: 进一步补齐 Android bootstrap 下载头与 PATH 兼容性修复，并把 `doctor` 的 Windows blocker 测试改为临时 repo root，避免真实 repo cache 污染单测；`tests/tooling/run` 全套 160 项通过，确认本轮 Android host 改动未破坏同子系统其他入口。
 - 2026-04-11 21:04:03 +08:00: 补齐 `prepare android-host` / `clean --scope android-host`、repo-cache Android 环境注入、doctor repo-cache 识别与 Windows 跳过 iOS host 检查；新增 Android bootstrap 回归测试并通过 55 项 tooling/run 相关验证，随后在当前 Windows 主机真实执行 `prepare android-host` 与 `doctor`，确认 repo cache 下的 JDK 17、adb 与 emulator 可用。
 - 2026-04-11 22:19:33 +08:00: 补齐 Batch 2.5 验证闭环；执行 `test_subject_*`、`test_phase5_hot_update_skeleton.py` 与 `test_phase8_productization_gates.py` 共 68 项回归全部通过，确认 rollback 不会破坏现有 subject 测试面。
@@ -38,7 +39,7 @@ active: true
 
 ## 下一步
 
-- next_action: 继续在有可用 Android emulator / device 的前提下收集真实 Android perf / soak evidence；iOS 只在 macOS 主机上验证，并推进 full compatibility matrix、24h soak 与 release checklist 的最终复跑。
+- next_action: 继续在已恢复的 Windows Android runtime 环境上收集真实 Android perf / soak evidence；iOS 仍只在 macOS 主机上验证，并推进 full compatibility matrix、24h soak 与 release checklist 的最终复跑。
 - owner: codex
 - trigger: Windows Android host repo-cache 已恢复，后续推进主要依赖 Android 运行资源与 macOS/Xcode 资源，而不再受本机 SDK/NDK/adb/emulator 缺失阻塞。
 
@@ -49,6 +50,9 @@ active: true
 - passed: `python build/toolchains/run/run.py clean --scope android-host`
 - passed: `python build/toolchains/run/run.py prepare android-host`
 - passed: `python build/toolchains/run/run.py doctor`
+- passed: `python build/toolchains/run/run.py test subject --id subject/MobileHelloWorldProof --goal correctness.platform --matrix windows-android-runtime`
+- passed: `python -m pytest tests/tooling/run/test_android_bootstrap.py tests/tooling/run/test_doctor.py tests/unit/run/test_phase4_mobile_hello_world_proof.py tests/unit/run/test_subject_workers.py -v`
+- passed: `python -m pytest tests/unit/run/test_subject_manifest_schema.py tests/unit/run/test_subject_executor.py tests/unit/run/test_subject_planner.py tests/unit/run/test_subject_workers.py tests/unit/run/test_phase4_mobile_hello_world_proof.py tests/unit/run/test_phase8_productization_gates.py -v`
 - passed: `artifacts/toolchains/android/jdk/bin/java.exe -version`
 - passed: `artifacts/toolchains/android/sdk/platform-tools/adb.exe version`
 - passed: `artifacts/toolchains/android/sdk/emulator/emulator.exe -version`
@@ -63,7 +67,8 @@ active: true
 
 ### risks
 
-- Android host tooling 已恢复，但 Batch 4/5 的真实结论仍依赖 emulator / device 上的长时间运行证据，而不是单纯的 SDK 安装完成。
+- Android host tooling 已恢复，且 `windows-android-runtime` 已闭环通过，但 Batch 4/5 的真实结论仍依赖 emulator / device 上的长时间运行证据，而不是单纯的单次 smoke 通过。
+- Windows x86_64 主机必须使用 `x86_64` Android emulator system image；若 repo cache 回退到 `arm64-v8a` image，emulator 会在 adb 暴露 serial 之前直接退出。
 - Windows 平台现已明确跳过 iOS host 校验；iOS runtime evidence 仍必须在 macOS + Xcode + Simulator 或签名设备上采集。
 - `perf_dashboard.py`、`unsupported_feature_report.py` 与 `soak_harness.py` 仍是 repo-local skeleton，后续还需要真实 CI / mobile evidence 持续回灌。
 

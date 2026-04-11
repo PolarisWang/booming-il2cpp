@@ -183,10 +183,54 @@ class DoctorCommandTests(unittest.TestCase):
         self.assertEqual("missing", checks["android-ndk-root"]["status"])
         self.assertEqual("missing", checks["android-adb"]["status"])
         self.assertEqual("missing", checks["android-emulator"]["status"])
+        self.assertEqual("missing", checks["android-system-image"]["status"])
+        self.assertEqual("missing", checks["android-avd"]["status"])
         self.assertNotIn("ios-runtime-host", checks)
         self.assertIn("Mobile runtime host:", result.text or "")
         self.assertIn("Android blockers:", result.text or "")
         self.assertNotIn("iOS blockers:", result.text or "")
+
+    def test_doctor_discovers_repo_cached_android_system_image_and_avd(self) -> None:
+        doctor_module = load_module(DOCTOR_MODULE_PATH, "chaos_run_doctor_android_runtime_cache")
+
+        with tempfile.TemporaryDirectory() as temp_root:
+            repo_root = Path(temp_root)
+            sdk_root = repo_root / "artifacts" / "toolchains" / "android" / "sdk"
+            ndk_root = sdk_root / "ndk" / doctor_module.tooling_module.ANDROID_NDK_VERSION
+            adb_path = sdk_root / "platform-tools" / "adb.exe"
+            emulator_path = sdk_root / "emulator" / "emulator.exe"
+            system_image_dir = doctor_module.tooling_module.android_system_image_dir(repo_root)
+            avd_dir = doctor_module.tooling_module.android_avd_home(repo_root) / f"{doctor_module.tooling_module.ANDROID_AVD_NAME}.avd"
+
+            ndk_root.mkdir(parents=True, exist_ok=False)
+            adb_path.parent.mkdir(parents=True, exist_ok=False)
+            emulator_path.parent.mkdir(parents=True, exist_ok=False)
+            system_image_dir.mkdir(parents=True, exist_ok=False)
+            avd_dir.mkdir(parents=True, exist_ok=False)
+            adb_path.write_text("", encoding="utf-8")
+            emulator_path.write_text("", encoding="utf-8")
+
+            with patch.object(
+                doctor_module.runtime_module,
+                "probe_runtime",
+                return_value={"isInstalled": True, "pythonPath": "artifacts/python/python.exe"},
+            ):
+                with patch.dict(os.environ, {"TERM": "dumb"}, clear=True):
+                    with patch.object(doctor_module.tooling_module, "find_cmake_executable", return_value="C:\\tools\\cmake\\bin\\cmake.exe"):
+                        with patch.object(doctor_module.tooling_module, "find_visual_cpp_executable", return_value=None):
+                            with patch.object(
+                                doctor_module.tooling_module.shutil,
+                                "which",
+                                side_effect=lambda exe: "C:\\Program Files\\dotnet\\dotnet.exe" if exe == "dotnet" else None,
+                            ):
+                                result = doctor_module.handle(repo_root, "windows", "doctor")
+
+        self.assertEqual("ok", result.status)
+        checks = {check["name"]: check for check in result.checks}
+        self.assertEqual("ok", checks["android-system-image"]["status"])
+        self.assertEqual("ok", checks["android-avd"]["status"])
+        self.assertIn(str(system_image_dir), checks["android-system-image"]["detail"])
+        self.assertIn(str(avd_dir), checks["android-avd"]["detail"])
 
     def test_doctor_discovers_android_tooling_from_sdk_and_ndk_environment(self) -> None:
         doctor_module = load_module(DOCTOR_MODULE_PATH, "chaos_run_doctor_android_env_discovery")

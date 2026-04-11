@@ -52,16 +52,24 @@ class Phase4MobileHelloWorldProofTests(unittest.TestCase):
         self.assertEqual("managed-output", manifest["defaultValidationProfile"])
         self.assertEqual("MobileHelloWorldProof/Program::Main(System.String[])", manifest["source"]["entry"])
         self.assertEqual(["proof"], validation_profiles["managed-output"])
-        self.assertEqual({"managed-runtime-output", "platform-buildable"}, pipeline_ids)
+        self.assertEqual({"managed-runtime-output", "platform-buildable", "android-runtime-observe"}, pipeline_ids)
         self.assertEqual(
-            {"windows-managed-output", "windows-android-buildable", "windows-ios-buildable"},
+            {"windows-managed-output", "windows-android-buildable", "windows-android-runtime", "windows-ios-buildable"},
             matrix_ids,
         )
+
+        android_runtime_matrix = next(
+            matrix for matrix in list(manifest.get("environmentMatrices") or [])
+            if str(matrix.get("matrixId") or "") == "windows-android-runtime"
+        )
+        self.assertEqual("android-runtime-observe", str(android_runtime_matrix["pipelineId"]))
+        self.assertEqual("runtime", str(dict(android_runtime_matrix["artifactPlan"])["evidenceTerminalBucket"]))
 
         self.assertTrue(SOURCE_PROJECT_PATH.is_file())
         self.assertTrue(SOURCE_PROGRAM_PATH.is_file())
         self.assertTrue((ANDROID_HOST_ROOT / "CMakeLists.txt").is_file())
         self.assertTrue((ANDROID_HOST_ROOT / "mobile_host_entry.cpp").is_file())
+        self.assertTrue((ANDROID_HOST_ROOT / "mobile_runtime_main.cpp").is_file())
         self.assertTrue((IOS_HOST_ROOT / "CMakeLists.txt").is_file())
         self.assertTrue((IOS_HOST_ROOT / "mobile_host_entry.mm").is_file())
 
@@ -72,6 +80,32 @@ class Phase4MobileHelloWorldProofTests(unittest.TestCase):
         for source_text in [android_entry, ios_entry]:
             self.assertIn('"MobileHelloWorldProof"', source_text)
             self.assertIn("il2cpp_host_run(1, argv)", source_text)
+
+    def test_mobile_source_stays_on_supported_captured_state_lowering_shape(self) -> None:
+        source_program = SOURCE_PROGRAM_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("namespace MobileHelloWorldProof;", source_program)
+        self.assertIn("internal sealed class MobileBanner", source_program)
+        self.assertIn("private readonly string _name;", source_program)
+        self.assertIn("public MobileBanner(string name)", source_program)
+        self.assertIn('return "Mobile native proof: " + _name + ".";', source_program)
+        self.assertIn('var banner = new MobileBanner("hello world");', source_program)
+        self.assertIn("Console.WriteLine(banner.BuildMessage());", source_program)
+        self.assertNotIn("ReadOnlyCollection", source_program)
+        self.assertNotIn("AsReadOnly", source_program)
+        self.assertNotIn("$\"", source_program)
+        self.assertNotIn("nameof(Main)", source_program)
+
+    def test_subject_scoped_android_host_declares_runtime_executable_target(self) -> None:
+        android_cmake = (ANDROID_HOST_ROOT / "CMakeLists.txt").read_text(encoding="utf-8")
+        android_runtime_main = (ANDROID_HOST_ROOT / "mobile_runtime_main.cpp").read_text(encoding="utf-8")
+
+        self.assertIn("CHAOS_SUBJECT_ANDROID_ARTIFACT_ROOT", android_cmake)
+        self.assertIn("add_executable(", android_cmake)
+        self.assertIn("mobile_hello_world_android_host_runtime", android_cmake)
+        self.assertIn("mobile_runtime_main.cpp", android_cmake)
+        self.assertIn('"MobileHelloWorldProof"', android_runtime_main)
+        self.assertIn("il2cpp_host_run(1, argv)", android_runtime_main)
 
     def test_subject_query_finds_mobile_runtime_host_surface_without_subject_name_coupling(self) -> None:
         subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase4_mobile_host")
@@ -89,7 +123,7 @@ class Phase4MobileHelloWorldProofTests(unittest.TestCase):
         capabilities = record["capabilities"]
 
         self.assertEqual("MobileHelloWorldProof", record["subjectId"])
-        self.assertEqual({"managed-runtime-output", "platform-buildable"}, set(capabilities["pipelineIds"]))
+        self.assertEqual({"managed-runtime-output", "platform-buildable", "android-runtime-observe"}, set(capabilities["pipelineIds"]))
         self.assertEqual({"windows-x64"}, set(capabilities["hostPlatforms"]))
 
     def test_mobile_subject_host_roots_are_routed_from_worker_to_root_cmake(self) -> None:

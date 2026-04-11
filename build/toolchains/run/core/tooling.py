@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import platform
 import re
 import shutil
 import subprocess
@@ -38,11 +39,30 @@ ANDROID_COMMAND_LINE_TOOLS_WINDOWS_URL = (
 ANDROID_WINDOWS_JDK_URL = (
     "https://api.adoptium.net/v3/binary/latest/17/ga/windows/x64/jdk/hotspot/normal/eclipse"
 )
+
+
+def _normalize_android_emulator_host_machine(machine: str | None = None) -> str:
+    normalized = (machine or platform.machine()).strip().lower()
+    if normalized in {"amd64", "x86_64", "x64"}:
+        return "x86_64"
+    if normalized in {"arm64", "aarch64"}:
+        return "arm64-v8a"
+    return "x86_64"
+
+
+def _android_avd_suffix_for_abi(abi: str) -> str:
+    return abi.replace("-v8a", "")
+
+
+ANDROID_EMULATOR_ABI = _normalize_android_emulator_host_machine()
+ANDROID_SYSTEM_IMAGE_PACKAGE = f"system-images;android-{ANDROID_PLATFORM_API};google_apis;{ANDROID_EMULATOR_ABI}"
+ANDROID_AVD_NAME = f"chaos-android-{ANDROID_PLATFORM_API}-{_android_avd_suffix_for_abi(ANDROID_EMULATOR_ABI)}"
 ANDROID_REQUIRED_PACKAGES = [
     "platform-tools",
     "emulator",
     f"ndk;{ANDROID_NDK_VERSION}",
     f"platforms;android-{ANDROID_PLATFORM_API}",
+    ANDROID_SYSTEM_IMAGE_PACKAGE,
 ]
 
 
@@ -364,12 +384,28 @@ def android_jdk_root(repo_root: Path) -> Path:
     return android_toolchain_root(repo_root) / "jdk"
 
 
+def android_emulator_home(repo_root: Path) -> Path:
+    return android_toolchain_root(repo_root) / ".android"
+
+
+def android_avd_home(repo_root: Path) -> Path:
+    return android_emulator_home(repo_root) / "avd"
+
+
+def android_system_image_dir(repo_root: Path) -> Path:
+    return android_sdk_root(repo_root) / "system-images" / f"android-{ANDROID_PLATFORM_API}" / "google_apis" / ANDROID_EMULATOR_ABI
+
+
 def _android_java_executable_name() -> str:
     return "java.exe" if os.name == "nt" else "java"
 
 
 def _android_sdkmanager_name() -> str:
     return "sdkmanager.bat" if os.name == "nt" else "sdkmanager"
+
+
+def _android_avdmanager_name() -> str:
+    return "avdmanager.bat" if os.name == "nt" else "avdmanager"
 
 
 def _repo_cached_java_home(repo_root: Path) -> Path | None:
@@ -412,6 +448,10 @@ def _repo_cached_android_sdkmanager_path(repo_root: Path) -> Path:
     return android_sdk_root(repo_root) / "cmdline-tools" / "latest" / "bin" / _android_sdkmanager_name()
 
 
+def _repo_cached_android_avdmanager_path(repo_root: Path) -> Path:
+    return android_sdk_root(repo_root) / "cmdline-tools" / "latest" / "bin" / _android_avdmanager_name()
+
+
 def _repo_cached_android_ndk_root(repo_root: Path) -> Path:
     return android_sdk_root(repo_root) / "ndk" / ANDROID_NDK_VERSION
 
@@ -430,10 +470,28 @@ def _repo_cached_android_platform_dir(repo_root: Path) -> Path:
     return android_sdk_root(repo_root) / "platforms" / f"android-{ANDROID_PLATFORM_API}"
 
 
+def android_sdkmanager_path(repo_root: Path) -> Path:
+    return _repo_cached_android_sdkmanager_path(repo_root)
+
+
+def android_avdmanager_path(repo_root: Path) -> Path:
+    return _repo_cached_android_avdmanager_path(repo_root)
+
+
+def android_adb_path(repo_root: Path) -> Path:
+    return _repo_cached_android_adb_path(repo_root)
+
+
+def android_emulator_path(repo_root: Path) -> Path:
+    return _repo_cached_android_emulator_path(repo_root)
+
+
 def android_environment_overrides(repo_root: Path) -> dict[str, str]:
     sdk_root = android_sdk_root(repo_root)
     ndk_root = _repo_cached_android_ndk_root(repo_root)
     java_home = _repo_cached_java_home(repo_root)
+    emulator_home = android_emulator_home(repo_root)
+    avd_home = android_avd_home(repo_root)
 
     path_parts: list[str] = []
     if java_home is not None:
@@ -469,6 +527,9 @@ def android_environment_overrides(repo_root: Path) -> dict[str, str]:
         overrides["ANDROID_NDK_ROOT"] = str(ndk_root)
     if java_home is not None:
         overrides["JAVA_HOME"] = str(java_home)
+    overrides["ANDROID_USER_HOME"] = str(emulator_home)
+    overrides["ANDROID_EMULATOR_HOME"] = str(emulator_home)
+    overrides["ANDROID_AVD_HOME"] = str(avd_home)
     if unique_path_parts:
         overrides["PATH"] = os.pathsep.join(unique_path_parts)
     return overrides
@@ -576,7 +637,7 @@ def _bootstrap_windows_android_commandline_tools(
     return latest_root
 
 
-def _android_repo_tooling_ready(repo_root: Path) -> bool:
+def _android_repo_sdk_packages_ready(repo_root: Path) -> bool:
     java_home = _repo_cached_java_home(repo_root)
     return all(
         (
@@ -585,8 +646,14 @@ def _android_repo_tooling_ready(repo_root: Path) -> bool:
             _repo_cached_android_adb_path(repo_root).is_file(),
             _repo_cached_android_emulator_path(repo_root).is_file(),
             _repo_cached_android_ndk_root(repo_root).is_dir(),
+            _repo_cached_android_platform_dir(repo_root).is_dir(),
+            android_system_image_dir(repo_root).is_dir(),
         )
     )
+
+
+def _android_repo_avd_ready(repo_root: Path) -> bool:
+    return (android_avd_home(repo_root) / f"{ANDROID_AVD_NAME}.avd").is_dir()
 
 
 def ensure_android_host_tooling_available(
@@ -609,7 +676,7 @@ def ensure_android_host_tooling_available(
         )
 
     output_parts: list[str] = []
-    if _repo_cached_java_home(repo_root) is None and find_java_executable(repo_root) is None:
+    if _repo_cached_java_home(repo_root) is None:
         try:
             _bootstrap_windows_jdk(repo_root, download_file=download_file, extract_zip=extract_zip)
             output_parts.append("Bootstrapped cached OpenJDK 17 for Android sdkmanager.")
@@ -631,7 +698,7 @@ def ensure_android_host_tooling_available(
                 errors=["android host bootstrap failed while installing Android command-line tools"],
             )
 
-    if not _android_repo_tooling_ready(repo_root):
+    if not _android_repo_sdk_packages_ready(repo_root):
         sdk_root = android_sdk_root(repo_root)
         env = android_environment_overrides(repo_root)
         sdkmanager_path = _repo_cached_android_sdkmanager_path(repo_root)
@@ -667,11 +734,52 @@ def ensure_android_host_tooling_available(
                 errors=["android host bootstrap failed while installing Android SDK packages"],
             )
 
-    if not _android_repo_tooling_ready(repo_root):
+    if not _android_repo_avd_ready(repo_root):
+        sdk_root = android_sdk_root(repo_root)
+        env = android_environment_overrides(repo_root)
+        emulator_home = android_emulator_home(repo_root)
+        avd_home = android_avd_home(repo_root)
+        avdmanager_path = _repo_cached_android_avdmanager_path(repo_root)
+
+        emulator_home.mkdir(parents=True, exist_ok=True)
+        avd_home.mkdir(parents=True, exist_ok=True)
+        create_avd = run_android_tool(
+            [
+                str(avdmanager_path),
+                "create",
+                "avd",
+                "--force",
+                "--name",
+                ANDROID_AVD_NAME,
+                "--package",
+                ANDROID_SYSTEM_IMAGE_PACKAGE,
+            ],
+            env=env,
+            input_text="no\n",
+            cwd=repo_root,
+        )
+        create_avd_output = combine_process_output(create_avd).strip()
+        if create_avd_output:
+            output_parts.append(create_avd_output)
+        if create_avd.returncode != 0:
+            return ToolBootstrapResult(
+                ready=False,
+                output="\n".join(part for part in output_parts if part) + "\n",
+                errors=["android host bootstrap failed while creating repo-cached Android AVD"],
+            )
+
+    if not _android_repo_sdk_packages_ready(repo_root):
         return ToolBootstrapResult(
             ready=False,
             output="\n".join(part for part in output_parts if part) + "\n",
-            errors=["android host bootstrap completed with missing SDK / NDK / adb / emulator artifacts"],
+            errors=["android host bootstrap completed with missing SDK / NDK / adb / emulator / system image artifacts"],
+        )
+
+    if not _android_repo_avd_ready(repo_root):
+        return ToolBootstrapResult(
+            ready=False,
+            output="\n".join(part for part in output_parts if part) + "\n",
+            errors=["android host bootstrap completed with missing repo-cached Android AVD"],
         )
 
     env = android_environment_overrides(repo_root)
@@ -679,6 +787,8 @@ def ensure_android_host_tooling_available(
     output_parts.append(f"Android NDK root ready: {env['ANDROID_NDK_ROOT']}")
     output_parts.append(f"Android adb ready: {_repo_cached_android_adb_path(repo_root)}")
     output_parts.append(f"Android emulator ready: {_repo_cached_android_emulator_path(repo_root)}")
+    output_parts.append(f"Android system image ready: {android_system_image_dir(repo_root)}")
+    output_parts.append(f"Android AVD ready: {android_avd_home(repo_root) / f'{ANDROID_AVD_NAME}.avd'}")
     return ToolBootstrapResult(ready=True, output="\n".join(output_parts) + "\n")
 
 

@@ -1,17 +1,19 @@
-using System.Collections.ObjectModel;
+using System;
 
-internal static class RegistrationTrace
+namespace MobileHelloWorldProof;
+
+internal sealed class MobileBanner
 {
-    private static readonly List<string> Marks = new();
+    private readonly string _name;
 
-    public static void MarkEntry(string entryName)
+    public MobileBanner(string name)
     {
-        Marks.Add($"register:{entryName}");
+        _name = name;
     }
 
-    public static ReadOnlyCollection<string> Snapshot()
+    public string BuildMessage()
     {
-        return Marks.AsReadOnly();
+        return "Mobile native proof: " + _name + ".";
     }
 }
 
@@ -19,11 +21,8 @@ internal static class Program
 {
     private static int Main(string[] args)
     {
-        RegistrationTrace.MarkEntry(nameof(Main));
-
-        Console.WriteLine("MobileHelloWorldProof entry reached.");
-        Console.WriteLine($"args={args.Length}");
-        Console.WriteLine(string.Join(",", RegistrationTrace.Snapshot()));
+        var banner = new MobileBanner("hello world");
+        Console.WriteLine(banner.BuildMessage());
         return 0;
     }
 }

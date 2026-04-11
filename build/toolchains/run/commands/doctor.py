@@ -150,6 +150,45 @@ def _locate_android_sdk_tool(sdk_root: str | None, executable: str, relative_pat
     return None, None
 
 
+def _locate_android_system_image_dir(repo_root: Path, sdk_root: str | None) -> tuple[str | None, str | None]:
+    candidates = [
+        (
+            "ANDROID_SDK_ROOT",
+            str(
+                Path(sdk_root)
+                / "system-images"
+                / f"android-{tooling_module.ANDROID_PLATFORM_API}"
+                / "google_apis"
+                / tooling_module.ANDROID_EMULATOR_ABI
+            )
+            if sdk_root
+            else None,
+        ),
+        ("repo-cache", str(tooling_module.android_system_image_dir(repo_root))),
+    ]
+
+    for discovered_via, candidate in candidates:
+        location = _existing_directory(candidate)
+        if location:
+            return location, discovered_via
+    return None, None
+
+
+def _locate_android_avd_dir(repo_root: Path) -> tuple[str | None, str | None]:
+    avd_name = f"{tooling_module.ANDROID_AVD_NAME}.avd"
+    candidates = [
+        ("ANDROID_AVD_HOME", str(Path(os.environ["ANDROID_AVD_HOME"]) / avd_name) if os.environ.get("ANDROID_AVD_HOME") else None),
+        ("ANDROID_USER_HOME", str(Path(os.environ["ANDROID_USER_HOME"]) / "avd" / avd_name) if os.environ.get("ANDROID_USER_HOME") else None),
+        ("repo-cache", str(tooling_module.android_avd_home(repo_root) / avd_name)),
+    ]
+
+    for discovered_via, candidate in candidates:
+        location = _existing_directory(candidate)
+        if location:
+            return location, discovered_via
+    return None, None
+
+
 def _check_android_runtime_tooling(repo_root: Path) -> list[dict]:
     sdk_root, sdk_via = _locate_android_sdk_root(repo_root)
     ndk_root, ndk_via = _locate_android_ndk_root(repo_root, sdk_root)
@@ -163,6 +202,8 @@ def _check_android_runtime_tooling(repo_root: Path) -> list[dict]:
         "emulator",
         ("emulator", _android_executable_name("emulator")),
     )
+    system_image_location, system_image_via = _locate_android_system_image_dir(repo_root, sdk_root)
+    avd_location, avd_via = _locate_android_avd_dir(repo_root)
 
     return [
         _build_check(
@@ -192,6 +233,20 @@ def _check_android_runtime_tooling(repo_root: Path) -> list[dict]:
             False,
             missing_detail="emulator not found in PATH or Android SDK emulator directory",
             discovered_via=emulator_via,
+        ),
+        _build_check(
+            "android-system-image",
+            system_image_location,
+            False,
+            missing_detail="Android arm64 system image not found under Android SDK or repo cache",
+            discovered_via=system_image_via,
+        ),
+        _build_check(
+            "android-avd",
+            avd_location,
+            False,
+            missing_detail="repo-cached Android AVD not found",
+            discovered_via=avd_via,
         ),
     ]
 

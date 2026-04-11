@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
+import subprocess
 from typing import Any
 import statistics
 import sys
@@ -31,6 +33,10 @@ TRACE_SCHEMA_PATH = Path("tests/contracts/trace/schema/warmup-trace.schema.json"
 WINDOWS_REFERENCE_BUILD_TARGET = "chaos_subject_reference_proof"
 WINDOWS_REFERENCE_RUN_TARGET = "chaos_subject_reference_proof_run"
 WINDOWS_DIRECT_BUILD_STRATEGY = "direct-msvc"
+ANDROID_NATIVE_BUILD_STRATEGY = "android-native-cmake"
+ANDROID_RUNTIME_BUILD_TARGET = "mobile_hello_world_android_host_runtime"
+ANDROID_RUNTIME_REMOTE_ROOT = "/data/local/tmp/chaos-subjects"
+ANDROID_EXIT_CODE_PREFIX = "__CHAOS_EXIT_CODE__="
 VARIANT_MACROS = {
     "CHECK": {
         "codegen": ["CHAOS_VARIANT_CHECK", "CHAOS_VARIANT_NAME=CHECK"],
@@ -576,6 +582,108 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
     )
 
 
+def _android_runtime_build_environment(repo_root: Path) -> tuple[str, dict[str, str], str]:
+    cmake_path, env = tooling_module.cmake_environment(repo_root)
+    if not cmake_path or not dict(env or {}).get("ANDROID_NDK_ROOT"):
+        bootstrap = tooling_module.ensure_android_host_tooling_available(
+            "subject android runtime build",
+            "windows",
+            repo_root,
+        )
+        if not bootstrap.ready:
+            raise RuntimeError((bootstrap.output or "android host tooling bootstrap failed").strip())
+        cmake_path, env = tooling_module.cmake_environment(repo_root)
+
+    ninja_path = tooling_module.find_ninja_executable()
+    if not cmake_path:
+        raise RuntimeError("cmake not found for Android runtime build")
+    if not ninja_path:
+        raise RuntimeError("ninja not found for Android runtime build")
+    return cmake_path, dict(env or {}), ninja_path
+
+
+def _android_subject_runtime_build(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
+    build_root = _resolve(repo_root, request["paths"]["bucketRoot"])
+    selection = dict(request["selection"])
+    execution_context = dict(selection.get("executionContext") or {})
+    subject_id = str(selection["subjectId"])
+    variant = _selection_variant(selection)
+    variant_macros = _variant_macros(variant)
+    host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
+    android_host_root = _subject_mobile_host_root(repo_root, subject_id, "android-arm64")
+    out_root = build_root / "out"
+    out_root.mkdir(parents=True, exist_ok=True)
+
+    cmake_path, env, ninja_path = _android_runtime_build_environment(repo_root)
+    if host_platform == "windows":
+        cmake_binary_dir = tooling_module.allocate_cmake_binary_dir(
+            build_root / "cmake",
+            host_platform=host_platform,
+            generator="Ninja",
+        )
+    else:
+        cmake_binary_dir = build_root / "cmake"
+
+    runtime_binary_path = out_root / ANDROID_RUNTIME_BUILD_TARGET
+    _run_checked(
+        [
+            str(cmake_path),
+            "-S",
+            str(repo_root),
+            "-B",
+            str(cmake_binary_dir),
+            "-G",
+            "Ninja",
+            "-DROADMAP0_PRESET_TARGET=android-arm64-smoke",
+            f"-DCHAOS_SUBJECT_VARIANT={variant}",
+            f"-DCHAOS_SUBJECT_ANDROID_HOST_ROOT={android_host_root}",
+            f"-DCHAOS_SUBJECT_ANDROID_ARTIFACT_ROOT={out_root}",
+            f"-DCMAKE_TOOLCHAIN_FILE={repo_root / 'build' / 'toolchains' / 'android-arm64.cmake'}",
+            "-DCMAKE_BUILD_TYPE=Release",
+            f"-DCMAKE_MAKE_PROGRAM={ninja_path}",
+        ],
+        repo_root=repo_root,
+        failure_message="subject proof build failed: android-arm64-runtime",
+        env=env,
+    )
+    _run_checked(
+        [
+            str(cmake_path),
+            "--build",
+            str(cmake_binary_dir),
+            "--target",
+            ANDROID_RUNTIME_BUILD_TARGET,
+        ],
+        repo_root=repo_root,
+        failure_message="subject proof build failed: android-arm64-runtime",
+        env=env,
+    )
+
+    manifest = {
+        "subjectId": subject_id,
+        "matrixId": str(selection["matrixId"]),
+        "bucket": "build",
+        "targetPlatform": str(execution_context["targetPlatform"]),
+        "toolchainProfile": str(execution_context["toolchainProfile"]),
+        "variant": variant,
+        "variantMacros": {
+            "codegen": list(variant_macros["codegen"]),
+            "native": list(variant_macros["native"]),
+        },
+        "generatedManifestPath": str(request["upstream"]["generated"]["manifestPath"]),
+        "buildStrategy": ANDROID_NATIVE_BUILD_STRATEGY,
+        "binaryRoot": _relative(repo_root, out_root),
+        "outputs": [_relative(repo_root, runtime_binary_path)],
+        "cmakeBinaryDir": tooling_module.path_text(repo_root, cmake_binary_dir),
+    }
+    write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
+    return _success_result(
+        bucket_manifest_path=request["paths"]["manifestPath"],
+        report_paths=[],
+        primary_evidence_paths=[_relative(repo_root, runtime_binary_path)],
+    )
+
+
 def _validate_only_build(
     *,
     repo_root: Path,
@@ -657,10 +765,13 @@ def _validate_only_build(
 
 def run_build_target(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
     subject_id = str(request["selection"]["subjectId"])
-    target_platform = str(request["selection"]["executionContext"]["targetPlatform"])
+    execution_context = dict(request["selection"].get("executionContext") or {})
+    target_platform = str(execution_context["targetPlatform"])
     if target_platform == "windows-x64":
         return _windows_subject_build(repo_root=repo_root, request=request)
     if target_platform == "android-arm64":
+        if str(execution_context.get("runtimeProfile") or "") == "android-native-runtime":
+            return _android_subject_runtime_build(repo_root=repo_root, request=request)
         android_host_root = _subject_mobile_host_root(repo_root, subject_id, target_platform)
         return _validate_only_build(
             repo_root=repo_root,
@@ -688,6 +799,209 @@ def run_build_target(*, repo_root: Path, request: dict[str, Any]) -> dict[str, A
     raise RuntimeError(f"unsupported build target platform: {target_platform}")
 
 
+def _android_adb_executable(repo_root: Path) -> str:
+    candidate = tooling_module.android_adb_path(repo_root)
+    return str(candidate if candidate.is_file() else Path("adb"))
+
+
+def _android_emulator_executable(repo_root: Path) -> str:
+    candidate = tooling_module.android_emulator_path(repo_root)
+    return str(candidate if candidate.is_file() else Path("emulator"))
+
+
+def _run_android_host_command(
+    arguments: list[str],
+    *,
+    repo_root: Path,
+    env: dict[str, str],
+    failure_message: str,
+) -> subprocess.CompletedProcess[str]:
+    completed = run_process(arguments, cwd=repo_root, env=env)
+    if completed.returncode != 0:
+        raise RuntimeError(f"{failure_message}\n{combine_process_output(completed)}".strip())
+    return completed
+
+
+def _android_device_serials(*, repo_root: Path, env: dict[str, str]) -> list[str]:
+    completed = run_process([_android_adb_executable(repo_root), "devices"], cwd=repo_root, env=env)
+    if completed.returncode != 0:
+        return []
+
+    serials: list[str] = []
+    for line in (completed.stdout or "").splitlines():
+        line = line.strip()
+        if not line or line.startswith("List of devices attached") or "\t" not in line:
+            continue
+        serial, state = line.split("\t", 1)
+        if serial and state:
+            serials.append(serial)
+    return serials
+
+
+def _launch_android_emulator(
+    *,
+    repo_root: Path,
+    env: dict[str, str],
+) -> tuple[str, subprocess.Popen[Any], Any, Any]:
+    existing_serials = set(_android_device_serials(repo_root=repo_root, env=env))
+    merged_env = dict(os.environ)
+    merged_env.update(env)
+    process = subprocess.Popen(
+        [
+            _android_emulator_executable(repo_root),
+            "-avd",
+            tooling_module.ANDROID_AVD_NAME,
+            "-no-window",
+            "-no-audio",
+            "-no-boot-anim",
+            "-no-snapshot",
+        ],
+        cwd=str(repo_root),
+        env=merged_env,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+    deadline = time.time() + 90
+    while time.time() < deadline:
+        if process.poll() is not None:
+            raise RuntimeError("android emulator exited before adb exposed a device serial")
+
+        current_serials = {
+            serial
+            for serial in _android_device_serials(repo_root=repo_root, env=env)
+            if serial.startswith("emulator-")
+        }
+        new_serials = sorted(current_serials - existing_serials)
+        if new_serials:
+            return new_serials[0], process, None, None
+        time.sleep(2)
+
+    raise RuntimeError("android emulator did not expose an adb device serial in time")
+
+
+def _wait_for_android_boot_completed(
+    *,
+    repo_root: Path,
+    serial: str,
+    env: dict[str, str],
+    timeout_seconds: int = 300,
+) -> None:
+    adb_executable = _android_adb_executable(repo_root)
+    _run_android_host_command(
+        [adb_executable, "-s", serial, "wait-for-device"],
+        repo_root=repo_root,
+        env=env,
+        failure_message=f"android emulator did not become available: {serial}",
+    )
+
+    deadline = time.time() + timeout_seconds
+    while time.time() < deadline:
+        completed = run_process(
+            [adb_executable, "-s", serial, "shell", "getprop", "sys.boot_completed"],
+            cwd=repo_root,
+            env=env,
+        )
+        if completed.returncode == 0 and (completed.stdout or "").strip() == "1":
+            return
+        time.sleep(2)
+
+    raise RuntimeError(f"android emulator boot timed out: {serial}")
+
+
+def _run_android_binary_via_adb(
+    *,
+    repo_root: Path,
+    executable_path: Path,
+    serial: str,
+    env: dict[str, str],
+) -> subprocess.CompletedProcess[str]:
+    adb_executable = _android_adb_executable(repo_root)
+    remote_path = f"{ANDROID_RUNTIME_REMOTE_ROOT}/{executable_path.name}"
+    _run_android_host_command(
+        [adb_executable, "-s", serial, "shell", "mkdir", "-p", ANDROID_RUNTIME_REMOTE_ROOT],
+        repo_root=repo_root,
+        env=env,
+        failure_message=f"failed to prepare Android runtime directory: {ANDROID_RUNTIME_REMOTE_ROOT}",
+    )
+    _run_android_host_command(
+        [adb_executable, "-s", serial, "push", str(executable_path), remote_path],
+        repo_root=repo_root,
+        env=env,
+        failure_message=f"failed to push Android runtime binary: {executable_path}",
+    )
+    _run_android_host_command(
+        [adb_executable, "-s", serial, "shell", "chmod", "755", remote_path],
+        repo_root=repo_root,
+        env=env,
+        failure_message=f"failed to chmod Android runtime binary: {remote_path}",
+    )
+    return run_process(
+        [
+            adb_executable,
+            "-s",
+            serial,
+            "shell",
+            "sh",
+            "-c",
+            f"{remote_path}; status=$?; printf '\\n{ANDROID_EXIT_CODE_PREFIX}%s\\n' \"$status\"",
+        ],
+        cwd=repo_root,
+        env=env,
+    )
+
+
+def _shutdown_android_emulator(
+    *,
+    repo_root: Path,
+    serial: str | None,
+    process: subprocess.Popen[Any] | None,
+    stdout_handle: Any,
+    stderr_handle: Any,
+    env: dict[str, str],
+) -> None:
+    try:
+        if serial:
+            run_process([_android_adb_executable(repo_root), "-s", serial, "emu", "kill"], cwd=repo_root, env=env)
+    finally:
+        if process is not None:
+            try:
+                process.wait(timeout=20)
+            except subprocess.TimeoutExpired:
+                process.terminate()
+                try:
+                    process.wait(timeout=10)
+                except subprocess.TimeoutExpired:
+                    process.kill()
+                    process.wait(timeout=5)
+        for handle in [stdout_handle, stderr_handle]:
+            if handle is not None and hasattr(handle, "close"):
+                handle.close()
+
+
+def _extract_android_runtime_output(completed: subprocess.CompletedProcess[str]) -> tuple[str, list[str], int]:
+    output_lines: list[str] = []
+    stdout_lines: list[str] = []
+    exit_code: int | None = None
+    for line in (completed.stdout or "").splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        if stripped.startswith(ANDROID_EXIT_CODE_PREFIX):
+            try:
+                exit_code = int(stripped.split("=", 1)[1])
+            except ValueError:
+                exit_code = completed.returncode
+            continue
+        stdout_lines.append(line)
+        output_lines.append(stripped)
+
+    stdout_text = "\n".join(stdout_lines)
+    if stdout_text:
+        stdout_text += "\n"
+    return stdout_text, output_lines, int(completed.returncode if exit_code is None else exit_code)
+
+
 def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
     build_manifest = read_json(_resolve(repo_root, request["upstream"]["build"]["manifestPath"]))
     if not isinstance(build_manifest, dict):
@@ -699,8 +1013,9 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
     stdout_path = runtime_root / "stdout.log"
     stderr_path = runtime_root / "stderr.log"
     exit_code_path = runtime_root / "exit-code.txt"
+    build_strategy = str(build_manifest.get("buildStrategy") or "")
 
-    if str(build_manifest.get("buildStrategy") or "") == WINDOWS_DIRECT_BUILD_STRATEGY:
+    if build_strategy == WINDOWS_DIRECT_BUILD_STRATEGY:
         output_paths = [str(value) for value in list(build_manifest.get("outputs") or []) if str(value)]
         if not output_paths:
             raise RuntimeError("direct-msvc build manifest missing outputs")
@@ -734,6 +1049,100 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
                 "diagnostics": {"stdoutPath": manifest["stdoutPath"], "stderrPath": manifest["stderrPath"]},
                 "details": {},
                 "failure": f"subject proof run failed: {native_executable_path}",
+            }
+
+        return _success_result(
+            bucket_manifest_path=request["paths"]["manifestPath"],
+            report_paths=[],
+            primary_evidence_paths=[manifest["stdoutPath"], manifest["exitCodePath"]],
+            stdout_path=manifest["stdoutPath"],
+            stderr_path=manifest["stderrPath"],
+        )
+
+    if build_strategy == ANDROID_NATIVE_BUILD_STRATEGY:
+        output_paths = [str(value) for value in list(build_manifest.get("outputs") or []) if str(value)]
+        if not output_paths:
+            raise RuntimeError("android-native-cmake build manifest missing outputs")
+
+        execution_context = dict(dict(request["selection"]).get("executionContext") or {})
+        host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
+        bootstrap = tooling_module.ensure_android_host_tooling_available(
+            "subject runtime observe",
+            host_platform,
+            repo_root,
+        )
+        if not bootstrap.ready:
+            raise RuntimeError((bootstrap.output or "android host tooling bootstrap failed").strip())
+
+        env = tooling_module.android_environment_overrides(repo_root)
+        native_executable_path = _resolve(repo_root, output_paths[0])
+        android_serial: str | None = None
+        emulator_process: subprocess.Popen[Any] | None = None
+        emulator_stdout = None
+        emulator_stderr = None
+        try:
+            android_serial, emulator_process, emulator_stdout, emulator_stderr = _launch_android_emulator(
+                repo_root=repo_root,
+                env=env,
+            )
+            _wait_for_android_boot_completed(
+                repo_root=repo_root,
+                serial=android_serial,
+                env=env,
+            )
+            completed = _run_android_binary_via_adb(
+                repo_root=repo_root,
+                executable_path=native_executable_path,
+                serial=android_serial,
+                env=env,
+            )
+        finally:
+            _shutdown_android_emulator(
+                repo_root=repo_root,
+                serial=android_serial,
+                process=emulator_process,
+                stdout_handle=emulator_stdout,
+                stderr_handle=emulator_stderr,
+                env=env,
+            )
+
+        cleaned_stdout, output_lines, runtime_exit_code = _extract_android_runtime_output(completed)
+        stdout_path.write_text(cleaned_stdout, encoding="utf-8")
+        stderr_path.write_text(completed.stderr or "", encoding="utf-8")
+        exit_code_path.write_text(f"{runtime_exit_code}\n", encoding="utf-8")
+
+        manifest = {
+            "subjectId": str(request["selection"]["subjectId"]),
+            "matrixId": str(request["selection"]["matrixId"]),
+            "bucket": "runtime",
+            "variant": _selection_variant(dict(request["selection"])),
+            "buildManifestPath": str(request["upstream"]["build"]["manifestPath"]),
+            "stdoutPath": _relative(repo_root, stdout_path),
+            "stderrPath": _relative(repo_root, stderr_path),
+            "exitCodePath": _relative(repo_root, exit_code_path),
+            "tracePaths": [],
+            "outputLines": output_lines,
+            "androidSerial": android_serial,
+            "androidAvdName": tooling_module.ANDROID_AVD_NAME,
+        }
+        write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
+
+        failure_reason: str | None = None
+        if completed.returncode != 0:
+            failure_reason = f"android adb execution failed: {native_executable_path}"
+        elif runtime_exit_code != 0:
+            failure_reason = f"android runtime observe failed: {native_executable_path}"
+
+        if failure_reason is not None:
+            return {
+                "status": "fail",
+                "bucketManifestPath": request["paths"]["manifestPath"],
+                "reportPaths": [],
+                "primaryEvidencePaths": [manifest["stdoutPath"], manifest["exitCodePath"]],
+                "metrics": {"durationMs": 0},
+                "diagnostics": {"stdoutPath": manifest["stdoutPath"], "stderrPath": manifest["stderrPath"]},
+                "details": {},
+                "failure": failure_reason,
             }
 
         return _success_result(

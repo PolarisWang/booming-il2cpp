@@ -140,6 +140,73 @@
           ]
         }
       ]
+    },
+    {
+      "pipelineId": "android-runtime-observe",
+      "displayName": "Android runtime observe",
+      "stages": [
+        {
+          "stageId": "source-resolve",
+          "kind": "source-resolve",
+          "scope": "shared",
+          "bucket": "source",
+          "dependsOn": []
+        },
+        {
+          "stageId": "host-input-build",
+          "kind": "host-input-build",
+          "scope": "shared",
+          "bucket": "host-input",
+          "dependsOn": [
+            "source-resolve"
+          ]
+        },
+        {
+          "stageId": "analysis-frontend",
+          "kind": "analysis-frontend",
+          "scope": "shared",
+          "bucket": "analysis",
+          "dependsOn": [
+            "host-input-build"
+          ]
+        },
+        {
+          "stageId": "generated-native-proof",
+          "kind": "generated-native-proof",
+          "scope": "shared",
+          "bucket": "generated",
+          "dependsOn": [
+            "analysis-frontend"
+          ]
+        },
+        {
+          "stageId": "build-target",
+          "kind": "build-target",
+          "scope": "matrix",
+          "bucket": "build",
+          "dependsOn": [
+            "generated-native-proof"
+          ]
+        },
+        {
+          "stageId": "runtime-observe",
+          "kind": "runtime-observe",
+          "scope": "matrix",
+          "bucket": "runtime",
+          "dependsOn": [
+            "build-target"
+          ]
+        },
+        {
+          "stageId": "report-assemble",
+          "kind": "report-assemble",
+          "scope": "matrix",
+          "bucket": "report",
+          "dependsOn": [
+            "runtime-observe"
+          ]
+        }
+      ]
     }
   ],
   "environmentMatrices": [
@@ -226,6 +293,36 @@
           "report"
         ],
         "evidenceTerminalBucket": "build"
+      }
+    },
+    {
+      "matrixId": "windows-android-runtime",
+      "pipelineId": "android-runtime-observe",
+      "supportedGoals": [
+        "correctness.platform"
+      ],
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "android-arm64",
+        "toolchainProfile": "android-ndk-r26",
+        "runtimeProfile": "android-native-runtime"
+      },
+      "validationIntent": {
+        "validationMode": "runtime",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
       }
     }
   ]
