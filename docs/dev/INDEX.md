@@ -1,16 +1,17 @@
-# ??????
+# 开发任务索引
 
-????????? `docs/dev` ????????
+当前维护 `docs/dev` 下所有任务状态。
 
-| ?? | lifecycle_status | phase | ???? | ??? | active |
+| 任务 | lifecycle_status | phase | 最近更新 | 下一步 | active |
 | --- | --- | --- | --- | --- | --- |
+| [20260411-10-post-phase7-development-roadmap](in-progress/20260411-10-post-phase7-development-roadmap/STATUS.md) | in_progress | roadmap | 2026-04-12 00:04:39 +08:00 | Phase A: dispatch child plan | true |
+| [20260411-09-productization-gates](completed/20260411-09-productization-gates/STATUS.md) | completed | archived | 2026-04-12 00:04:39 +08:00 | 无 | false |
+| [20260409-10-total-solution-and-ios-hot-update-analysis](completed/20260409-10-total-solution-and-ios-hot-update-analysis/STATUS.md) | completed | archived | 2026-04-12 00:04:39 +08:00 | 后续转入 20260411-10 successor roadmap | false |
 | [20260411-08-interpreter-mixed-execution](completed/20260411-08-interpreter-mixed-execution/STATUS.md) | completed | archived | 2026-04-11 19:10:21 +08:00 | ? | false |
 | [20260411-07-metadata-supplement-bridge](completed/20260411-07-metadata-supplement-bridge/STATUS.md) | completed | archived | 2026-04-11 16:00:23 +08:00 | ? | false |
-| [20260411-09-productization-gates](in-progress/20260411-09-productization-gates/STATUS.md) | in_progress | executing | 2026-04-11 21:45:00 +08:00 | ? | true |
-| [20260409-10-total-solution-and-ios-hot-update-analysis](in-progress/20260409-10-total-solution-and-ios-hot-update-analysis/STATUS.md) | in_progress | roadmap | 2026-04-11 19:10:21 +08:00 | ? | false |
 | [20260411-02-full-project-ingestion](completed/20260411-02-full-project-ingestion/STATUS.md) | completed | archived | 2026-04-11 16:00:00 +08:00 | ? | false |
 | [20260411-06-hot-update-skeleton](completed/20260411-06-hot-update-skeleton/STATUS.md) | completed | archived | 2026-04-11 15:21:32 +08:00 | ? | false |
-| [20260411-05-mobile-runtime-host](hanging/20260411-05-mobile-runtime-host/STATUS.md) | hanging | hanging | 2026-04-11 15:00:53 +08:00 | ? | false |
+| [20260411-05-mobile-runtime-host](hanging/20260411-05-mobile-runtime-host/STATUS.md) | hanging | hanging | 2026-04-12 00:04:39 +08:00 | macOS/Xcode follow-up only | false |
 | [20260411-01-shared-contract-freeze](completed/20260411-01-shared-contract-freeze/STATUS.md) | completed | archived | 2026-04-11 14:50:00 +08:00 | ? | false |
 | [20260411-04-engine-binding-contract](completed/20260411-04-engine-binding-contract/STATUS.md) | completed | archived | 2026-04-11 13:59:04 +08:00 | ? | false |
 | [20260411-03-aot-runtime-completeness](completed/20260411-03-aot-runtime-completeness/STATUS.md) | completed | archived | 2026-04-11 12:51:22 +08:00 | ? | false |
@@ -61,4 +62,3 @@
 | [20260331-01-roadmap-0-contract-freeze-and-skeleton](completed/20260331-01-roadmap-0-contract-freeze-and-skeleton/STATUS.md) | completed | archived | 2026-04-04 14:09:00 +0800 | ? | false |
 | [20260404-02-booming-docs-migration](completed/20260404-02-booming-docs-migration/STATUS.md) | completed | reviewing | 2026-04-04 13:57:28 +0800 | ? | false |
 | [20260404-01-skill-flow-refactor](completed/20260404-01-skill-flow-refactor/STATUS.md) | completed | reviewing | 2026-04-04 13:45:41 +0800 | ? | false |
-| [20260411-09-productization-gates](in-progress/20260411-09-productization-gates/STATUS.md) | planned | planned | - | ? | false |

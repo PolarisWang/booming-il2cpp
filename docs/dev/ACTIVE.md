@@ -1,22 +1,19 @@
 ---
-task_id: 20260411-09-productization-gates
-title: Productization Gates
-task_dir: docs/dev/in-progress/20260411-09-productization-gates
-status_file: docs/dev/in-progress/20260411-09-productization-gates/STATUS.md
-plan_file: docs/dev/in-progress/20260411-09-productization-gates/plan-v1-01.md
+task_id: 20260411-10-post-phase7-development-roadmap
+title: Post Phase-7 Development Roadmap (Phase A-E)
+task_dir: docs/dev/in-progress/20260411-10-post-phase7-development-roadmap
+status_file: docs/dev/in-progress/20260411-10-post-phase7-development-roadmap/STATUS.md
+plan_file: docs/dev/in-progress/20260411-10-post-phase7-development-roadmap/roadmap-v1-01.md
 lifecycle_status: in_progress
-phase: executing
-total_tasks: 16
-current_task: External Blockers - 24h Android soak and macOS/iOS runtime evidence
+phase: roadmap
+total_tasks: 5 phases / 35 sub-tasks
+current_task: Phase A kickoff - GC integration and AOT runtime completion planning
 ---
 
 ## 最近摘要
 
-- 2026-04-11 23:51:14 +08:00: `4h soak` 已按用户指令中止并接受为通过；full compatibility matrix 已通过（`compatibility-matrix-e65197e8`），unsupported feature report 已生成且为 `ok`，release checklist review 已完成，当前结论为 `blocked`。
-- 2026-04-11 23:29:40 +08:00: `windows-android-soak` 300 秒真实 Android soak 已通过，run id `20260411-232036-windows-275c`。
-- 2026-04-11 23:28:00 +08:00: `python -m pytest tests/unit/run tests/tooling/run -q` 通过，结果 `408 passed, 34 skipped`。
+- 2026-04-12 00:04:39 +08:00: 父 roadmap `20260409-10` 已按用户指令跳过最后两个 blocker 并归档完成；active 指针切换到本 successor roadmap。
 
 ## 下一步
 
-- 如需严格完成计划中的 `5.2`，继续执行真实 `24h soak`，或由用户继续明确 waive。
-- 如需关闭 iOS release blocker，在 `macOS + Xcode` 环境补齐 iOS runtime host evidence。
+- 派生 `Phase A` child plan，先推进 GC 集成、AOT 运行时关键补完与验收路径落地。

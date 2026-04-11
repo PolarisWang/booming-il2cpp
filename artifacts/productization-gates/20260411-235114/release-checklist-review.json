@@ -1,0 +1,67 @@
+{
+  "reviewVersion": "v1",
+  "generatedAt": "2026-04-11T16:04:39Z",
+  "status": "ok",
+  "summary": "release checklist review completed with user-approved waivers for strict 24h soak evidence and macOS/iOS runtime host evidence",
+  "items": [
+    {
+      "gate": "version-compatibility",
+      "status": "ok",
+      "evidence": [
+        "artifacts/compatibility-matrix/compatibility-matrix-e65197e8/report.json"
+      ],
+      "notes": "30/30 compatibility matrix cases passed across windows/android/ios dimensions."
+    },
+    {
+      "gate": "rollback",
+      "status": "ok",
+      "evidence": [
+        "dotnet run --project subjects/HotUpdateSkeletonProof/source/HotUpdateSkeletonProof.csproj -- phase8"
+      ],
+      "notes": "apply/rollback/re-apply flow and integrity checks completed successfully in current run."
+    },
+    {
+      "gate": "mobile-runtime-host",
+      "status": "ok",
+      "evidence": [
+        "artifacts/subjects/MobileHelloWorldProof/runs/20260411-232036-windows-275c/subject-report/summary.json",
+        "artifacts/productization-gates/20260411-233956/android-soak-4h.launch.json"
+      ],
+      "notes": "Android host evidence exists. Per user instruction on 2026-04-12 +08:00, macOS/iOS runtime host evidence is waived for current roadmap closure and remains a macOS-only follow-up."
+    },
+    {
+      "gate": "ios-distribution-policy",
+      "status": "ok",
+      "evidence": [
+        "docs/architecture/ios-distribution-policy.md",
+        "docs/architecture/version-compatibility-matrix.md"
+      ],
+      "notes": "Policy and compatibility guidance are present; runtime validation remains a separate follow-up."
+    },
+    {
+      "gate": "perf-regression",
+      "status": "ok",
+      "evidence": [
+        "artifacts/productization-gates/20260411-224327/perf-dashboard.json"
+      ],
+      "notes": "Current perf dashboard shows 4/4 tracked entries ok."
+    },
+    {
+      "gate": "soak-test",
+      "status": "ok",
+      "evidence": [
+        "artifacts/subjects/MobileHelloWorldProof/runs/20260411-232036-windows-275c/subject-report/summary.json",
+        "artifacts/productization-gates/20260411-233956/android-soak-4h.launch.json"
+      ],
+      "notes": "300s Android soak passed; the 4h run entered runtime-observe without fail before user abort; strict 24h soak evidence is waived per user instruction for current closure."
+    },
+    {
+      "gate": "unsupported-feature-report",
+      "status": "ok",
+      "evidence": [
+        "artifacts/productization-gates/20260411-235114/unsupported-feature-report.json"
+      ],
+      "notes": "Current repo scan produced zero findings."
+    }
+  ]
+}
