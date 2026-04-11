@@ -5,7 +5,7 @@ task_type: plan
 lifecycle_status: in_progress
 phase: executing
 created_at: 2026-04-11 21:10:00 +08:00
-updated_at: 2026-04-11 21:22:00 +08:00
+updated_at: 2026-04-11 21:45:00 +08:00
 current_dir: docs/dev/in-progress/20260411-09-productization-gates
 parent_task_id: 20260409-10-total-solution-and-ios-hot-update-analysis
 source_task_id: 20260409-10-total-solution-and-ios-hot-update-analysis
@@ -22,20 +22,21 @@ active: true
 
 ## 当前判断
 
-- current_focus: 在 Phase 4 外部阻塞持续存在的前提下，Phase 8 先按批次推进；本轮 Batch 3 已完成，下一步转向 Batch 2 rollback / integrity 最小闭环。
-- why_now: 版本兼容规则、`PackageValidator` 版本检查与 iOS 发布边界文档都属于本地可验证资产，已经可以先沉淀成产品化 gate，减少后续 mobile 环境恢复后的收尾压力。
-- done_definition: 本轮完成 `docs/architecture/ios-distribution-policy.md`、`docs/architecture/version-compatibility-matrix.md`、`HotUpdateSemanticVersion` helper、`PackageValidator` 的 `major.minor` 兼容检查，以及对应定向测试与回归验证。
+- current_focus: 在 Phase 4 外部阻塞持续存在的前提下，Phase 8 继续按批次推进；Batch 3 与 Batch 2 最小闭环都已完成，下一步转向 Batch 1 compatibility matrix framework。
+- why_now: 版本兼容、rollback、integrity 与 release checklist 都属于本地可验证资产，先沉淀成 productization gate 可以减少后续 mobile 环境恢复后的收尾压力。
+- done_definition: 本轮已完成 `docs/architecture/ios-distribution-policy.md`、`docs/architecture/version-compatibility-matrix.md`、`docs/architecture/release-checklist.md`、`HotUpdateSemanticVersion` helper、`RuntimeManager` 的 rollback / active patches / integrity report，以及对应定向测试与回归验证。
 
 ## 最近摘要
 
 - 2026-04-11 21:10:00 +08:00: 激活 `20260411-09-productization-gates`，决定在 Phase 4 外部阻塞期间先执行 Phase 8 Batch 3。
 - 2026-04-11 21:22:00 +08:00: 完成 Batch 3 最小切片：新增 iOS 发布边界与版本兼容矩阵文档，`PackageValidator` 从精确字符串相等升级为 `major.minor` compatibility band 校验，并通过 Phase 8 定向测试、Phase 5 skeleton 回归与 HotUpdate 项目构建。
+- 2026-04-11 21:45:00 +08:00: 完成 Batch 2 最小闭环与 release checklist：`RuntimeManager` 新增 `Rollback()`、`GetActivePatches()`、`ValidateIntegrity()` / `HotUpdateIntegrityReport`，`HotUpdateSkeletonProof` 跑通 apply → integrity → rollback → re-apply，且新增 `docs/architecture/release-checklist.md`。
 
 ## 下一步
 
-- next_action: 转向 Batch 2，补 `RuntimeManager` rollback / active patches / integrity 的最小闭环与定向测试。
+- next_action: 转向 Batch 1，定义 compatibility matrix 配置格式并补最小 runner / report 骨架。
 - owner: codex
-- trigger: Batch 3 已闭环，且 rollback / integrity 同样不依赖真实 Android NDK / emulator / device 或 macOS/Xcode。
+- trigger: Batch 2 已闭环，compatibility matrix framework 同样不依赖真实 Android NDK / emulator / device 或 macOS/Xcode。
 
 ## 验证
 
@@ -58,4 +59,4 @@ active: true
 
 ## Wiki 决策
 
-- 本轮长期知识直接沉淀在 `docs/architecture/ios-distribution-policy.md` 与 `docs/architecture/version-compatibility-matrix.md`，暂不额外写入 `wiki/`。
+- 本轮长期知识直接沉淀在 `docs/architecture/ios-distribution-policy.md`、`docs/architecture/version-compatibility-matrix.md` 与 `docs/architecture/release-checklist.md`，暂不额外写入 `wiki/`。

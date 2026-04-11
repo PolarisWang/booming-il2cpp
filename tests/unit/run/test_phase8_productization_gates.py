@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import subprocess
 import unittest
 from pathlib import Path
 
@@ -8,10 +9,32 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 HOT_UPDATE_ROOT = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.HotUpdate"
 
 PACKAGE_VALIDATOR_PATH = HOT_UPDATE_ROOT / "PackageValidator.cs"
+RUNTIME_MANAGER_PATH = HOT_UPDATE_ROOT / "RuntimeManager.cs"
 VERSION_HELPER_PATH = HOT_UPDATE_ROOT / "HotUpdateVersionCompatibility.cs"
 
 IOS_POLICY_PATH = REPO_ROOT / "docs" / "architecture" / "ios-distribution-policy.md"
+RELEASE_CHECKLIST_PATH = REPO_ROOT / "docs" / "architecture" / "release-checklist.md"
 VERSION_MATRIX_PATH = REPO_ROOT / "docs" / "architecture" / "version-compatibility-matrix.md"
+
+HOT_UPDATE_SKELETON_PROJECT_PATH = (
+    REPO_ROOT / "subjects" / "HotUpdateSkeletonProof" / "source" / "HotUpdateSkeletonProof.csproj"
+)
+
+
+def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
+    completed = subprocess.run(
+        arguments,
+        cwd=cwd,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        check=False,
+    )
+    if completed.returncode != 0:
+        combined_output = "\n".join(part for part in [completed.stdout, completed.stderr] if part)
+        raise AssertionError(f"command failed ({completed.returncode}): {' '.join(arguments)}\n{combined_output}")
+    return completed
 
 
 class Phase8ProductizationGatesTests(unittest.TestCase):
@@ -66,6 +89,58 @@ class Phase8ProductizationGatesTests(unittest.TestCase):
             "major 不兼容",
         ]:
             self.assertIn(required_fragment, version_matrix_source)
+
+    def test_release_checklist_doc_covers_required_productization_gates(self) -> None:
+        self.assertTrue(RELEASE_CHECKLIST_PATH.is_file(), msg=f"missing release checklist doc: {RELEASE_CHECKLIST_PATH}")
+
+        checklist_source = RELEASE_CHECKLIST_PATH.read_text(encoding="utf-8")
+        for required_fragment in [
+            "版本兼容",
+            "rollback",
+            "mobile runtime host",
+            "iOS distribution policy",
+            "perf regression",
+            "soak test",
+            "unsupported feature report",
+        ]:
+            self.assertIn(required_fragment, checklist_source)
+
+    def test_runtime_manager_defines_rollback_active_patch_listing_and_integrity_validation(self) -> None:
+        runtime_manager_source = RUNTIME_MANAGER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "record HotUpdateIntegrityReport",
+            "Rollback()",
+            "GetActivePatches()",
+            "ValidateIntegrity()",
+            "SupplementalMetadataLoader",
+            "PackageValidator.ValidateCompatibleTargetAotVersion",
+        ]:
+            self.assertIn(required_fragment, runtime_manager_source)
+
+    def test_hot_update_skeleton_proof_runs_apply_integrity_rollback_and_reapply(self) -> None:
+        completed = run_checked(
+            [
+                "dotnet",
+                "run",
+                "--project",
+                str(HOT_UPDATE_SKELETON_PROJECT_PATH),
+                "--",
+                "phase8",
+            ],
+            cwd=REPO_ROOT,
+        )
+        output_lines = {line.strip() for line in completed.stdout.splitlines() if line.strip()}
+
+        expected_lines = {
+            "integrity-after-load=true",
+            "active-patches-after-load=1",
+            "after-rollback=1",
+            "active-patches-after-rollback=0",
+            "integrity-after-rollback=true",
+            "after-reapply=42",
+        }
+        self.assertTrue(expected_lines.issubset(output_lines), msg=completed.stdout)
 
 
 if __name__ == "__main__":

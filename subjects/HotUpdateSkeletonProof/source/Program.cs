@@ -37,6 +37,21 @@ internal static class Program
                 });
 
             System.Console.WriteLine($"after-load={runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue)}");
+            System.Console.WriteLine($"integrity-after-load={runtimeManager.ValidateIntegrity().IsValid.ToString().ToLowerInvariant()}");
+            System.Console.WriteLine($"active-patches-after-load={runtimeManager.GetActivePatches().Count}");
+            runtimeManager.Rollback();
+            System.Console.WriteLine($"after-rollback={runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue)}");
+            System.Console.WriteLine($"active-patches-after-rollback={runtimeManager.GetActivePatches().Count}");
+            System.Console.WriteLine($"integrity-after-rollback={runtimeManager.ValidateIntegrity().IsValid.ToString().ToLowerInvariant()}");
+
+            runtimeManager.LoadPackage(
+                validPackage,
+                CurrentAotVersion,
+                new Dictionary<string, int>(StringComparer.Ordinal)
+                {
+                    [HotUpdateSubjectId] = 42,
+                });
+            System.Console.WriteLine($"after-reapply={runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue)}");
             runtimeManager.UnloadPackage();
             System.Console.WriteLine($"after-unload={runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue)}");
 
@@ -77,7 +92,19 @@ internal static class Program
             0x32,
         };
         File.WriteAllBytes(Path.Combine(packageRoot, "HotPatch.dll"), assemblyBytes);
-        File.WriteAllBytes(Path.Combine(packageRoot, "metadata-supplement.bin"), new byte[] { 0x01, 0x02, 0x03 });
+        File.WriteAllText(
+            Path.Combine(packageRoot, "metadata-supplement.bin"),
+            JsonSerializer.Serialize(
+                new SupplementalMetadataPayload
+                {
+                    Types = [],
+                    Methods = [],
+                    GenericInstantiations = [],
+                },
+                new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                }));
 
         var correctHash = PackageReader.ComputeFileHash(assemblyBytes);
         var manifest = new HotUpdatePackage
