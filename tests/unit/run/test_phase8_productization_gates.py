@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+import importlib.util
+import json
 import subprocess
+import sys
 import unittest
+import uuid
 from pathlib import Path
 
 
@@ -19,6 +23,16 @@ VERSION_MATRIX_PATH = REPO_ROOT / "docs" / "architecture" / "version-compatibili
 HOT_UPDATE_SKELETON_PROJECT_PATH = (
     REPO_ROOT / "subjects" / "HotUpdateSkeletonProof" / "source" / "HotUpdateSkeletonProof.csproj"
 )
+COMPATIBILITY_MATRIX_RUNNER_PATH = (
+    REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "compatibility_matrix_runner.py"
+)
+COMPATIBILITY_MATRIX_CONFIG_PATH = (
+    REPO_ROOT / "subjects" / "CompatibilityMatrixProof" / "compatibility-matrix.json"
+)
+COMPATIBILITY_MATRIX_SUBJECT_MANIFEST_PATH = (
+    REPO_ROOT / "subjects" / "CompatibilityMatrixProof" / "subject.manifest.json"
+)
+COMPATIBILITY_MATRIX_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "compatibility-matrix"
 
 
 def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -35,6 +49,20 @@ def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProce
         combined_output = "\n".join(part for part in [completed.stdout, completed.stderr] if part)
         raise AssertionError(f"command failed ({completed.returncode}): {' '.join(arguments)}\n{combined_output}")
     return completed
+
+
+def load_module(path: Path, module_name: str):
+    if not path.is_file():
+        raise FileNotFoundError(f"module missing: {path}")
+
+    spec = importlib.util.spec_from_file_location(module_name, path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"unable to load module: {path}")
+
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
 
 
 class Phase8ProductizationGatesTests(unittest.TestCase):
@@ -141,6 +169,84 @@ class Phase8ProductizationGatesTests(unittest.TestCase):
             "after-reapply=42",
         }
         self.assertTrue(expected_lines.issubset(output_lines), msg=completed.stdout)
+
+    def test_compatibility_matrix_assets_define_config_schema_and_proof_subject(self) -> None:
+        self.assertTrue(
+            COMPATIBILITY_MATRIX_CONFIG_PATH.is_file(),
+            msg=f"missing compatibility matrix config: {COMPATIBILITY_MATRIX_CONFIG_PATH}",
+        )
+        self.assertTrue(
+            COMPATIBILITY_MATRIX_SUBJECT_MANIFEST_PATH.is_file(),
+            msg=f"missing compatibility matrix subject manifest: {COMPATIBILITY_MATRIX_SUBJECT_MANIFEST_PATH}",
+        )
+
+        config = json.loads(COMPATIBILITY_MATRIX_CONFIG_PATH.read_text(encoding="utf-8"))
+        manifest = json.loads(COMPATIBILITY_MATRIX_SUBJECT_MANIFEST_PATH.read_text(encoding="utf-8"))
+
+        for required_key in [
+            "schemaVersion",
+            "subjectId",
+            "projectPath",
+            "aotVersions",
+            "hotUpdateVersions",
+            "platforms",
+            "additionalTestCases",
+        ]:
+            self.assertIn(required_key, config)
+
+        self.assertEqual("v1", config["schemaVersion"])
+        self.assertEqual("CompatibilityMatrixProof", config["subjectId"])
+        self.assertEqual(3, len(config["aotVersions"]))
+        self.assertEqual(3, len(config["hotUpdateVersions"]))
+        self.assertEqual(
+            ["windows-x64", "android-arm64", "ios-arm64"],
+            config["platforms"],
+        )
+
+        first_patch = config["hotUpdateVersions"][0]
+        self.assertIn("patchId", first_patch)
+        self.assertIn("targetAotVersion", first_patch)
+        self.assertEqual("CompatibilityMatrixProof", manifest["subjectId"])
+        self.assertEqual("windows-managed-output", manifest["defaultMatrix"])
+
+    def test_compatibility_matrix_runner_executes_proof_subject_and_writes_json_report(self) -> None:
+        runner_module = load_module(
+            COMPATIBILITY_MATRIX_RUNNER_PATH,
+            "chaos_compatibility_matrix_runner_phase8",
+        )
+
+        run_id = f"phase8-productization-{uuid.uuid4().hex}"
+        result = runner_module.run_compatibility_matrix(
+            REPO_ROOT,
+            COMPATIBILITY_MATRIX_CONFIG_PATH,
+            run_id=run_id,
+            artifact_root=COMPATIBILITY_MATRIX_TMP_ROOT,
+        )
+
+        report_path = REPO_ROOT / result["reportPath"]
+        self.assertTrue(report_path.is_file(), msg=f"missing compatibility matrix report: {report_path}")
+
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+        self.assertEqual("v1", report["reportVersion"])
+        self.assertEqual("CompatibilityMatrixProof", report["subjectId"])
+        self.assertEqual("ok", report["status"])
+        self.assertEqual(0, report["statusCounts"]["fail"])
+        self.assertEqual(3, report["matrixDimensions"]["aotVersionCount"])
+        self.assertEqual(3, report["matrixDimensions"]["hotUpdateVersionCount"])
+        self.assertEqual(3, report["matrixDimensions"]["platformCount"])
+        self.assertEqual(30, report["statusCounts"]["total"])
+
+        platforms = {case_result["platform"] for case_result in report["caseResults"]}
+        self.assertEqual({"windows-x64", "android-arm64", "ios-arm64"}, platforms)
+        self.assertTrue(
+            any(
+                case_result["expected"] == "reject"
+                and case_result["actual"] == "reject"
+                and case_result["status"] == "ok"
+                for case_result in report["caseResults"]
+            ),
+            msg=report_path.read_text(encoding="utf-8"),
+        )
 
 
 if __name__ == "__main__":
