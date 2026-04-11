@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
+import shlex
 import subprocess
 from typing import Any
 import statistics
@@ -37,6 +38,11 @@ ANDROID_NATIVE_BUILD_STRATEGY = "android-native-cmake"
 ANDROID_RUNTIME_BUILD_TARGET = "mobile_hello_world_android_host_runtime"
 ANDROID_RUNTIME_REMOTE_ROOT = "/data/local/tmp/chaos-subjects"
 ANDROID_EXIT_CODE_PREFIX = "__CHAOS_EXIT_CODE__="
+ANDROID_RUNTIME_ARGUMENT_ENVIRONMENTS = {
+    "--soak-duration-seconds=": "CHAOS_MOBILE_HOST_SOAK_DURATION_SECONDS",
+    "--heartbeat-interval-seconds=": "CHAOS_MOBILE_HOST_HEARTBEAT_INTERVAL_SECONDS",
+    "--subject-id=": "CHAOS_MOBILE_HOST_SUBJECT_ID",
+}
 VARIANT_MACROS = {
     "CHECK": {
         "codegen": ["CHAOS_VARIANT_CHECK", "CHAOS_VARIANT_NAME=CHECK"],
@@ -64,6 +70,25 @@ def _relative(repo_root: Path, path: Path) -> str:
 
 def _selection_variant(selection: dict[str, Any]) -> str:
     return str(selection.get("variant") or "CHECK")
+
+
+def _selection_runtime_arguments(selection: dict[str, Any]) -> list[str]:
+    execution_context = dict(selection.get("executionContext") or {})
+    return [str(value) for value in list(execution_context.get("runtimeArguments") or []) if str(value)]
+
+
+def _android_runtime_environment_exports(runtime_arguments: list[str]) -> list[str]:
+    assignments: list[str] = []
+    for argument in runtime_arguments:
+        for prefix, environment_name in ANDROID_RUNTIME_ARGUMENT_ENVIRONMENTS.items():
+            if not argument.startswith(prefix):
+                continue
+
+            value = argument[len(prefix):]
+            if value:
+                assignments.append(f"export {environment_name}={shlex.quote(value)} >/dev/null")
+            break
+    return assignments
 
 
 def _variant_macros(variant: str) -> dict[str, list[str]]:
@@ -915,9 +940,11 @@ def _run_android_binary_via_adb(
     executable_path: Path,
     serial: str,
     env: dict[str, str],
+    runtime_arguments: list[str] | None = None,
 ) -> subprocess.CompletedProcess[str]:
     adb_executable = _android_adb_executable(repo_root)
     remote_path = f"{ANDROID_RUNTIME_REMOTE_ROOT}/{executable_path.name}"
+    selected_runtime_arguments = list(runtime_arguments or [])
     _run_android_host_command(
         [adb_executable, "-s", serial, "shell", "mkdir", "-p", ANDROID_RUNTIME_REMOTE_ROOT],
         repo_root=repo_root,
@@ -936,6 +963,19 @@ def _run_android_binary_via_adb(
         env=env,
         failure_message=f"failed to chmod Android runtime binary: {remote_path}",
     )
+    binary_command_text = " ".join(
+        [
+            shlex.quote(remote_path),
+            *[shlex.quote(argument) for argument in selected_runtime_arguments],
+        ]
+    ).strip()
+    command_text = "; ".join(
+        [
+            *_android_runtime_environment_exports(selected_runtime_arguments),
+            binary_command_text,
+            f"status=$?; printf '\\n{ANDROID_EXIT_CODE_PREFIX}%s\\n' \"$status\"",
+        ]
+    ).strip()
     return run_process(
         [
             adb_executable,
@@ -944,7 +984,7 @@ def _run_android_binary_via_adb(
             "shell",
             "sh",
             "-c",
-            f"{remote_path}; status=$?; printf '\\n{ANDROID_EXIT_CODE_PREFIX}%s\\n' \"$status\"",
+            command_text,
         ],
         cwd=repo_root,
         env=env,
@@ -1064,7 +1104,9 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
         if not output_paths:
             raise RuntimeError("android-native-cmake build manifest missing outputs")
 
-        execution_context = dict(dict(request["selection"]).get("executionContext") or {})
+        selection = dict(request["selection"])
+        execution_context = dict(selection.get("executionContext") or {})
+        runtime_arguments = _selection_runtime_arguments(selection)
         host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
         bootstrap = tooling_module.ensure_android_host_tooling_available(
             "subject runtime observe",
@@ -1095,6 +1137,7 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
                 executable_path=native_executable_path,
                 serial=android_serial,
                 env=env,
+                runtime_arguments=runtime_arguments,
             )
         finally:
             _shutdown_android_emulator(
@@ -1124,6 +1167,7 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
             "outputLines": output_lines,
             "androidSerial": android_serial,
             "androidAvdName": tooling_module.ANDROID_AVD_NAME,
+            "runtimeArguments": runtime_arguments,
         }
         write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
 

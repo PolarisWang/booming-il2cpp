@@ -54,7 +54,13 @@ class Phase4MobileHelloWorldProofTests(unittest.TestCase):
         self.assertEqual(["proof"], validation_profiles["managed-output"])
         self.assertEqual({"managed-runtime-output", "platform-buildable", "android-runtime-observe"}, pipeline_ids)
         self.assertEqual(
-            {"windows-managed-output", "windows-android-buildable", "windows-android-runtime", "windows-ios-buildable"},
+            {
+                "windows-managed-output",
+                "windows-android-buildable",
+                "windows-android-runtime",
+                "windows-android-soak",
+                "windows-ios-buildable",
+            },
             matrix_ids,
         )
 
@@ -64,6 +70,17 @@ class Phase4MobileHelloWorldProofTests(unittest.TestCase):
         )
         self.assertEqual("android-runtime-observe", str(android_runtime_matrix["pipelineId"]))
         self.assertEqual("runtime", str(dict(android_runtime_matrix["artifactPlan"])["evidenceTerminalBucket"]))
+
+        android_soak_matrix = next(
+            matrix for matrix in list(manifest.get("environmentMatrices") or [])
+            if str(matrix.get("matrixId") or "") == "windows-android-soak"
+        )
+        self.assertEqual("android-runtime-observe", str(android_soak_matrix["pipelineId"]))
+        self.assertEqual("runtime", str(dict(android_soak_matrix["artifactPlan"])["evidenceTerminalBucket"]))
+        self.assertEqual(
+            ["--soak-duration-seconds=300", "--heartbeat-interval-seconds=30"],
+            list(dict(android_soak_matrix["executionContext"]).get("runtimeArguments") or []),
+        )
 
         self.assertTrue(SOURCE_PROJECT_PATH.is_file())
         self.assertTrue(SOURCE_PROGRAM_PATH.is_file())
@@ -105,7 +122,21 @@ class Phase4MobileHelloWorldProofTests(unittest.TestCase):
         self.assertIn("mobile_hello_world_android_host_runtime", android_cmake)
         self.assertIn("mobile_runtime_main.cpp", android_cmake)
         self.assertIn('"MobileHelloWorldProof"', android_runtime_main)
-        self.assertIn("il2cpp_host_run(1, argv)", android_runtime_main)
+        self.assertIn("int main(int argc, char** argv)", android_runtime_main)
+        self.assertIn("return il2cpp_host_run(argc, forwarded_argv);", android_runtime_main)
+
+    def test_shared_mobile_host_supports_long_running_soak_arguments(self) -> None:
+        shared_host_source = (REPO_ROOT / "src" / "mobile" / "shared" / "host_main.cpp").read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "--soak-duration-seconds",
+            "--heartbeat-interval-seconds",
+            "CHAOS_MOBILE_HOST_SOAK_DURATION_SECONDS",
+            "CHAOS_MOBILE_HOST_HEARTBEAT_INTERVAL_SECONDS",
+            "shared-host-heartbeat",
+            "shared-host-soak-complete",
+        ]:
+            self.assertIn(required_fragment, shared_host_source)
 
     def test_subject_query_finds_mobile_runtime_host_surface_without_subject_name_coupling(self) -> None:
         subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase4_mobile_host")
