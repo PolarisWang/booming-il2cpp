@@ -59,6 +59,8 @@ class Phase4MobileHelloWorldProofTests(unittest.TestCase):
                 "windows-android-buildable",
                 "windows-android-runtime",
                 "windows-android-soak",
+                "windows-android-soak-4h",
+                "windows-android-soak-24h",
                 "windows-ios-buildable",
             },
             matrix_ids,
@@ -80,6 +82,26 @@ class Phase4MobileHelloWorldProofTests(unittest.TestCase):
         self.assertEqual(
             ["--soak-duration-seconds=300", "--heartbeat-interval-seconds=30"],
             list(dict(android_soak_matrix["executionContext"]).get("runtimeArguments") or []),
+        )
+
+        android_soak_4h_matrix = next(
+            matrix for matrix in list(manifest.get("environmentMatrices") or [])
+            if str(matrix.get("matrixId") or "") == "windows-android-soak-4h"
+        )
+        self.assertEqual("android-runtime-observe", str(android_soak_4h_matrix["pipelineId"]))
+        self.assertEqual(
+            ["--soak-duration-seconds=14400", "--heartbeat-interval-seconds=60"],
+            list(dict(android_soak_4h_matrix["executionContext"]).get("runtimeArguments") or []),
+        )
+
+        android_soak_24h_matrix = next(
+            matrix for matrix in list(manifest.get("environmentMatrices") or [])
+            if str(matrix.get("matrixId") or "") == "windows-android-soak-24h"
+        )
+        self.assertEqual("android-runtime-observe", str(android_soak_24h_matrix["pipelineId"]))
+        self.assertEqual(
+            ["--soak-duration-seconds=86400", "--heartbeat-interval-seconds=300"],
+            list(dict(android_soak_24h_matrix["executionContext"]).get("runtimeArguments") or []),
         )
 
         self.assertTrue(SOURCE_PROJECT_PATH.is_file())

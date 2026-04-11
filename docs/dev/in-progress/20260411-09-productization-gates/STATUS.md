@@ -28,6 +28,7 @@ active: true
 
 ## 最近摘要
 
+- 2026-04-11 23:43:48 +08:00: 已把 Android soak 入口进一步正式化为 `windows-android-soak-4h` 与 `windows-android-soak-24h` 两个矩阵，分别固定 `14400s/60s heartbeat` 与 `86400s/300s heartbeat`；对应 manifest surface 回归已通过。与此同时，已启动真实 4h Android soak：命令 `python build/toolchains/run/run.py test subject --id subject/MobileHelloWorldProof --goal correctness.platform --matrix windows-android-soak-4h`，run id `20260411-233957-windows-ce2b`，后台 PID `37860`，launch 元数据位于 `artifacts/productization-gates/20260411-233956/android-soak-4h.launch.json`。当前 event stream 已推进到 `runtime-observe` 阶段并保持运行。
 - 2026-04-11 23:29:40 +08:00: 已为 `MobileHelloWorldProof` 新增显式 `windows-android-soak` 矩阵，并把 shared mobile host 升级为支持 `--soak-duration-seconds` / `--heartbeat-interval-seconds` / `--subject-id` 及对应环境变量；`subject_workers.py` 新增 Android runtime 参数到 adb shell 的 env bridge，解决 adb 下 argv 透传不稳定问题。真实执行 `python build/toolchains/run/run.py test subject --id subject/MobileHelloWorldProof --goal correctness.platform --matrix windows-android-soak` 后，run id `20260411-232036-windows-275c` 连续运行约 300 秒，产出 `10` 个 heartbeat 与 `shared-host-soak-complete` 证据，见 `artifacts/subjects/MobileHelloWorldProof/runs/20260411-232036-windows-275c/matrices/windows-android-soak/runtime/runtime.manifest.json` 与同目录 `stdout.log`。
 - 2026-04-11 23:28:00 +08:00: 执行 `python -m pytest tests/unit/run tests/tooling/run -q`，结果 `408 passed, 34 skipped`；其中新增 Android soak 入口相关回归覆盖 manifest、shared host 参数解析、adb runtime 参数桥接与 MobileHelloWorldProof subject surface。
 - 2026-04-11 22:52:01 +08:00: 旧版 `android-soak-pilot.json` 证明现有 `soak_harness.py` 只能包住一次真实 `windows-android-runtime` 命令；该 pilot 的价值保留为“harness 能工作”，但不再被视为“连续 mobile soak 入口已成立”的证据。
@@ -36,12 +37,14 @@ active: true
 
 ## 下一步
 
-- next_action: 继续推进 `Batch 4.3 / 5.2`，基于 `windows-android-soak` 安排真实 `4h/24h` 连续 soak 窗口并补齐内存增长 / crash 证据；并在具备 `macOS + Xcode` 环境后收集 iOS runtime host 证据，再完成 full compatibility matrix 与 release checklist 最终复跑。
+- next_action: 观察并等待正在执行的 `windows-android-soak-4h`（run id `20260411-233957-windows-ce2b`）完成，收集内存增长 / crash / heartbeat 证据；如 4h 结果成立，再推进 24h soak 与 macOS/iOS 外部环境项。
 - owner: codex
 - trigger: 本地 Android 长时 soak 入口已落地，当前主阻塞已从“代码/工具链缺口”切换为“长时间运行窗口”和“macOS/Xcode 外部环境”。
 
 ## 验证
 
+- passed: `python -m pytest tests/unit/run/test_phase4_mobile_hello_world_proof.py tests/unit/run/test_phase4_mobile_runtime_host_batch1.py tests/unit/run/test_subject_workers.py tests/unit/run/test_subject_planner.py tests/tooling/run/test_subject_command.py -q`
+- running: `python build/toolchains/run/run.py test subject --id subject/MobileHelloWorldProof --goal correctness.platform --matrix windows-android-soak-4h` (run id `20260411-233957-windows-ce2b`, PID `37860`)
 - passed: `python -m pytest tests/unit/run/test_phase4_mobile_runtime_host_batch1.py tests/unit/run/test_phase4_mobile_hello_world_proof.py tests/unit/run/test_subject_workers.py -q`
 - passed: `python -m pytest tests/unit/run tests/tooling/run -q` (`408 passed, 34 skipped`)
 - passed: `python build/toolchains/run/run.py test subject --id subject/MobileHelloWorldProof --goal correctness.platform --matrix windows-android-soak`
@@ -61,7 +64,7 @@ active: true
 
 ### blockers
 
-- `Batch 4.3` / `Batch 5.2` 仍受限于可持续占用的 `4h/24h` Android soak 时间窗口。
+- `Batch 4.3` / `Batch 5.2` 仍受限于 wall-clock 时间窗口；当前 4h soak 已启动，但需要自然完成后才能关闭该阻塞。
 - `Batch 5` 里的 full compatibility matrix 与 release checklist 最终复跑，仍依赖 macOS/Xcode 资源来补齐 iOS runtime host 证据。
 
 ## Wiki 决策

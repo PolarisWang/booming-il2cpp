@@ -358,6 +358,74 @@
         ],
         "evidenceTerminalBucket": "runtime"
       }
+    },
+    {
+      "matrixId": "windows-android-soak-4h",
+      "pipelineId": "android-runtime-observe",
+      "supportedGoals": [
+        "correctness.platform"
+      ],
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "android-arm64",
+        "toolchainProfile": "android-ndk-r26",
+        "runtimeProfile": "android-native-runtime",
+        "runtimeArguments": [
+          "--soak-duration-seconds=14400",
+          "--heartbeat-interval-seconds=60"
+        ]
+      },
+      "validationIntent": {
+        "validationMode": "runtime",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-android-soak-24h",
+      "pipelineId": "android-runtime-observe",
+      "supportedGoals": [
+        "correctness.platform"
+      ],
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "android-arm64",
+        "toolchainProfile": "android-ndk-r26",
+        "runtimeProfile": "android-native-runtime",
+        "runtimeArguments": [
+          "--soak-duration-seconds=86400",
+          "--heartbeat-interval-seconds=300"
+        ]
+      },
+      "validationIntent": {
+        "validationMode": "runtime",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
     }
   ]
 }
