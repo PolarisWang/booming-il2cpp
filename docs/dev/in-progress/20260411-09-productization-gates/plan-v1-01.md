@@ -31,7 +31,7 @@
 - [x] **2.2** 实现 `HotUpdateManager.GetActivePatches()`：返回已加载 patch 清单
 - [x] **2.3** 实现 `HotUpdateManager.ValidateIntegrity()`：校验 metadata/bridge 一致性
 - [x] **2.4** 验证：apply → verify → rollback → verify AOT-only → re-apply → verify
-- [ ] **2.5** 验证：rollback 后所有现有 subject 测试通过
+- [x] **2.5** 验证：rollback 后所有现有 subject 测试通过
 
 ### Batch 3: iOS 发行策略 + 版本管理
 

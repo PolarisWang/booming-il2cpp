@@ -12,6 +12,7 @@ current_task: External Blockers - 24h soak acceptance 与 mobile runtime host �
 
 ## 最近摘要
 
+- 2026-04-11 22:19:33 +08:00: Batch 2.5 已补齐：rollback 后执行 subject 相关回归共 68 项全部通过，Phase 8 本地仅余外部环境阻塞项。
 - 2026-04-11 20:12:32 +08:00: Batch 4 本地 skeleton 已完成：新增 perf dashboard config builder、unsupported feature report scanner 与 soak harness；Phase 8 本地可落地资产已基本收口。
 
 ## 下一步

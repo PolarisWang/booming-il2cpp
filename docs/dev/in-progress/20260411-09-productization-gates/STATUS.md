@@ -5,7 +5,7 @@ task_type: plan
 lifecycle_status: in_progress
 phase: executing
 created_at: 2026-04-11 21:10:00 +08:00
-updated_at: 2026-04-11 20:12:32 +08:00
+updated_at: 2026-04-11 22:19:33 +08:00
 current_dir: docs/dev/in-progress/20260411-09-productization-gates
 parent_task_id: 20260409-10-total-solution-and-ios-hot-update-analysis
 source_task_id: 20260409-10-total-solution-and-ios-hot-update-analysis
@@ -22,12 +22,13 @@ active: true
 
 ## 当前判断
 
-- current_focus: 在 Phase 4 外部阻塞仍存在的前提下，Phase 8 已完成 Batch 3、Batch 2、Batch 1，以及 Batch 4 的本地 skeleton；剩余工作集中在 24h soak 验收与真实移动端/跨平台运行证据。
+- current_focus: 在 Phase 4 外部阻塞仍存在的前提下，Phase 8 已完成 Batch 1、Batch 2、Batch 3，以及 Batch 4 的本地 skeleton；其中 Batch 2.5 已通过 rollback 后 subject 回归验证，剩余工作集中在 24h soak 验收与真实移动端/跨平台运行证据。
 - why_now: 本地可落地的 productization 资产已经沉淀到 compatibility matrix、perf dashboard config、unsupported feature report 和 soak harness skeleton；继续停留在本地实现层已无法替代真实 Android/iOS/macOS 与长时间运行验证。
 - done_definition: 本轮已完成 `docs/architecture/ios-distribution-policy.md`、`docs/architecture/version-compatibility-matrix.md`、`docs/architecture/release-checklist.md`、`HotUpdateSemanticVersion` helper、`RuntimeManager` 的 rollback/active patches/integrity report、`CompatibilityMatrixProof` 的 config/runner/report 骨架，以及 `perf_dashboard.py`、`unsupported_feature_report.py`、`soak_harness.py` 三个 Batch 4 本地入口。
 
 ## 最近摘要
 
+- 2026-04-11 22:19:33 +08:00: 补齐 Batch 2.5 验证闭环；执行 `test_subject_*`、`test_phase5_hot_update_skeleton.py` 与 `test_phase8_productization_gates.py` 共 68 项回归全部通过，确认 rollback 不会破坏现有 subject 测试面。
 - 2026-04-11 21:10:00 +08:00: 激活 `20260411-09-productization-gates`，决定在 Phase 4 外部阻塞期间先执行 Phase 8 的本地可验证批次。
 - 2026-04-11 21:22:00 +08:00: 完成 Batch 3 最小切片：新增 iOS distribution policy 与 version compatibility matrix 文档，`PackageValidator` 升级为 `major.minor` compatibility band 校验。
 - 2026-04-11 21:45:00 +08:00: 完成 Batch 2 最小闭环：`RuntimeManager` 新增 `Rollback()`、`GetActivePatches()`、`ValidateIntegrity()` / `HotUpdateIntegrityReport`，并补 `release-checklist.md`。
@@ -44,6 +45,7 @@ active: true
 
 - passed: `python -m pytest tests/unit/run/test_phase8_productization_gates.py -v`
 - passed: `python -m pytest tests/unit/run/test_subject_manifest_schema.py -v`
+- passed: `python -m pytest tests/unit/run/test_subject_manifest_schema.py tests/unit/run/test_subject_contracts_source_cutover.py tests/unit/run/test_subject_executor.py tests/unit/run/test_subject_perf_policy.py tests/unit/run/test_subject_planner.py tests/unit/run/test_subject_reporting.py tests/unit/run/test_subject_workers.py tests/unit/run/test_subject_workers_perf.py tests/unit/run/test_phase5_hot_update_skeleton.py tests/unit/run/test_phase8_productization_gates.py -v`
 - passed: `dotnet run --project subjects/CompatibilityMatrixProof/source/CompatibilityMatrixProof.csproj`
 - passed: `python -m pytest tests/unit/run/test_phase5_hot_update_skeleton.py -v`
 - passed: `dotnet build src/managed/Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.csproj -c Release`
