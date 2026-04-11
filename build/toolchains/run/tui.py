@@ -159,20 +159,25 @@ def build_menu_entries(manifest: dict[str, Any], host_platform: str) -> list[Men
 
 
 def build_prepare_menu_entries(manifest: dict[str, Any], host_platform: str) -> list[MenuEntry]:
+    ordered_items: list[tuple[str, str | None, str, str]] = [
+        ("基础准备", "doctor", "doctor", "只检查当前本机工具链与运行条件"),
+        ("基础准备", "prepare", "setup", "检查并初始化当前主机环境（推荐）"),
+        ("场景准备", "prepare-smoke", "smoke", "准备 smoke 测试所需的托管运行环境"),
+    ]
+    if host_platform == "windows":
+        ordered_items.append(("场景准备", "prepare-android-host", "android-host", "准备 Android SDK / NDK / adb / emulator 缓存"))
+    ordered_items.append(
+        (
+            "场景准备",
+            f"prepare-workflow-runtime-baseline-{host_platform}",
+            "runtime-baseline",
+            "准备当前主机的 runtime-baseline 工作流环境",
+        )
+    )
     return _build_curated_submenu_entries(
         manifest,
         host_platform,
-        [
-            ("基础准备", "doctor", "doctor", "只检查当前本机工具链与运行条件"),
-            ("基础准备", "prepare", "setup", "检查并初始化当前主机环境（推荐）"),
-            ("场景准备", "prepare-smoke", "smoke", "准备 smoke 测试所需的托管运行环境"),
-            (
-                "场景准备",
-                f"prepare-workflow-runtime-baseline-{host_platform}",
-                "runtime-baseline",
-                "准备当前主机的 runtime-baseline 工作流环境",
-            ),
-        ],
+        ordered_items,
     )
 
 
@@ -238,14 +243,24 @@ def build_project_menu_entries(manifest: dict[str, Any], host_platform: str) -> 
 
 
 def build_clean_menu_entries(manifest: dict[str, Any], host_platform: str) -> list[MenuEntry]:
+    ordered_items: list[tuple[str, str | None, str, str]] = [
+        ("清理范围", "clean", "all", "清理统一入口产生的全部托管输出与缓存产物"),
+        ("清理范围", "clean-smoke", "smoke", "只清理 smoke 测试相关输出"),
+    ]
+    if host_platform == "windows":
+        ordered_items.append(("清理范围", "clean-android-host", "android-host", "清理 Android SDK / NDK / adb / emulator 缓存"))
+    ordered_items.append(
+        (
+            "清理范围",
+            f"clean-workflow-runtime-baseline-{host_platform}",
+            "runtime-baseline",
+            "清理当前主机的 runtime-baseline 工作流输出",
+        )
+    )
     return _build_curated_submenu_entries(
         manifest,
         host_platform,
-        [
-            ("清理范围", "clean", "all", "清理统一入口产生的全部托管输出与缓存产物"),
-            ("清理范围", "clean-smoke", "smoke", "只清理 smoke 测试相关输出"),
-            ("清理范围", f"clean-workflow-runtime-baseline-{host_platform}", "runtime-baseline", "清理当前主机的 runtime-baseline 工作流输出"),
-        ],
+        ordered_items,
     )
 
 

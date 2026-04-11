@@ -159,20 +159,23 @@ class DoctorCommandTests(unittest.TestCase):
     def test_doctor_reports_mobile_runtime_host_blockers_on_windows(self) -> None:
         doctor_module = load_module(DOCTOR_MODULE_PATH, "chaos_run_doctor_mobile_runtime_blockers")
 
-        with patch.object(
-            doctor_module.runtime_module,
-            "probe_runtime",
-            return_value={"isInstalled": True, "pythonPath": "artifacts/python/python.exe"},
-        ):
-            with patch.dict(os.environ, {"TERM": "dumb"}, clear=True):
-                with patch.object(doctor_module.tooling_module, "find_cmake_executable", return_value="C:\\tools\\cmake\\bin\\cmake.exe"):
-                    with patch.object(doctor_module.tooling_module, "find_visual_cpp_executable", return_value=None):
-                        with patch.object(
-                            doctor_module.tooling_module.shutil,
-                            "which",
-                            side_effect=lambda exe: "C:\\Program Files\\dotnet\\dotnet.exe" if exe == "dotnet" else None,
-                        ):
-                            result = doctor_module.handle(REPO_ROOT, "windows", "doctor")
+        with tempfile.TemporaryDirectory() as temp_root:
+            repo_root = Path(temp_root)
+
+            with patch.object(
+                doctor_module.runtime_module,
+                "probe_runtime",
+                return_value={"isInstalled": True, "pythonPath": "artifacts/python/python.exe"},
+            ):
+                with patch.dict(os.environ, {"TERM": "dumb"}, clear=True):
+                    with patch.object(doctor_module.tooling_module, "find_cmake_executable", return_value="C:\\tools\\cmake\\bin\\cmake.exe"):
+                        with patch.object(doctor_module.tooling_module, "find_visual_cpp_executable", return_value=None):
+                            with patch.object(
+                                doctor_module.tooling_module.shutil,
+                                "which",
+                                side_effect=lambda exe: "C:\\Program Files\\dotnet\\dotnet.exe" if exe == "dotnet" else None,
+                            ):
+                                result = doctor_module.handle(repo_root, "windows", "doctor")
 
         self.assertEqual("ok", result.status)
         checks = {check["name"]: check for check in result.checks}
@@ -180,11 +183,10 @@ class DoctorCommandTests(unittest.TestCase):
         self.assertEqual("missing", checks["android-ndk-root"]["status"])
         self.assertEqual("missing", checks["android-adb"]["status"])
         self.assertEqual("missing", checks["android-emulator"]["status"])
-        self.assertEqual("missing", checks["ios-runtime-host"]["status"])
-        self.assertIn("requires a macOS host with Xcode", checks["ios-runtime-host"]["detail"])
+        self.assertNotIn("ios-runtime-host", checks)
         self.assertIn("Mobile runtime host:", result.text or "")
         self.assertIn("Android blockers:", result.text or "")
-        self.assertIn("iOS blockers:", result.text or "")
+        self.assertNotIn("iOS blockers:", result.text or "")
 
     def test_doctor_discovers_android_tooling_from_sdk_and_ndk_environment(self) -> None:
         doctor_module = load_module(DOCTOR_MODULE_PATH, "chaos_run_doctor_android_env_discovery")
@@ -234,6 +236,37 @@ class DoctorCommandTests(unittest.TestCase):
         self.assertIn(str(ndk_root), checks["android-ndk-root"]["detail"])
         self.assertIn(str(adb_path), checks["android-adb"]["detail"])
         self.assertIn(str(emulator_path), checks["android-emulator"]["detail"])
+
+    def test_doctor_reports_ios_runtime_host_only_on_macos(self) -> None:
+        doctor_module = load_module(DOCTOR_MODULE_PATH, "chaos_run_doctor_ios_host_on_macos")
+
+        with patch.object(
+            doctor_module.runtime_module,
+            "probe_runtime",
+            return_value={"isInstalled": True, "pythonPath": "artifacts/python/bin/python3"},
+        ):
+            with patch.object(doctor_module.tooling_module, "find_cmake_executable", return_value="/usr/bin/cmake"):
+                with patch.object(doctor_module.tooling_module, "find_visual_cpp_executable", return_value=None):
+                    with patch.object(
+                        doctor_module.tooling_module.shutil,
+                        "which",
+                        side_effect=lambda exe: "/usr/bin/xcodebuild" if exe == "xcodebuild" else f"/usr/bin/{exe}" if exe == "dotnet" else None,
+                    ):
+                        with patch.dict(
+                            os.environ,
+                            {
+                                "TERM_PROGRAM": "iTerm.app",
+                                "TERM": "xterm-256color",
+                            },
+                            clear=True,
+                        ):
+                            result = doctor_module.handle(REPO_ROOT, "macos", "doctor")
+
+        self.assertEqual("ok", result.status)
+        checks = {check["name"]: check for check in result.checks}
+        self.assertEqual("ok", checks["ios-runtime-host"]["status"])
+        self.assertIn("/usr/bin/xcodebuild", checks["ios-runtime-host"]["detail"])
+        self.assertIn("iOS host note:", result.text or "")
 
 
 if __name__ == "__main__":

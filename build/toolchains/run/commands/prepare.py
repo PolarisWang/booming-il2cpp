@@ -61,6 +61,7 @@ def _normalize_prepare_scope(scope: str) -> str:
 def resolve_prepare_scope(command_id: str) -> str:
     mapping = {
         "prepare": "global",
+        "prepare-android-host": "android-host",
         "prepare-smoke": "smoke",
         "prepare-workflow-runtime-baseline-windows": "workflow-runtime-baseline-windows",
         "prepare-workflow-runtime-baseline-macos": "workflow-runtime-baseline-macos",
@@ -84,6 +85,8 @@ def _unique_steps(steps: list[list[str]]) -> list[list[str]]:
 
 def _prepare_plan(scope: str, host_platform: str) -> list[list[str]]:
     scope = _normalize_prepare_scope(scope)
+    if scope == "android-host":
+        return []
     if scope == "smoke":
         return [list(step) for step in SMOKE_PREPARE_STEPS]
     if scope == "workflow-runtime-baseline-windows":
@@ -153,7 +156,10 @@ def resolve_clean_paths(repo_root: Path, scope: str) -> list[Path]:
     run_root = repo_root / "artifacts" / "run"
     verify_root = repo_root / "artifacts" / "verify-runtime-baseline"
     preset_root = repo_root / "artifacts" / "presets"
+    android_toolchain_root = repo_root / "artifacts" / "toolchains" / "android"
 
+    if scope == "android-host":
+        return [android_toolchain_root, prepare_state_path(repo_root, scope)]
     if scope == "smoke":
         return [smoke_root, prepare_state_path(repo_root, "smoke")]
     if scope == "workflow-runtime-baseline-windows":
@@ -230,6 +236,99 @@ def _summary_text(command_text: str, scope: str, executed: list[str], *, cached:
     return "\n".join(lines) + "\n"
 
 
+def _handle_android_host_prepare(
+    repo_root: Path,
+    host_platform: str,
+    command_text: str,
+    *,
+    progress_callback: Callable[[dict[str, Any]], None] | None = None,
+) -> CommandResult:
+    console_outputs: list[str] = []
+    artifacts: list[str] = []
+    important_outputs: list[dict[str, str]] = []
+    state_path = prepare_state_path(repo_root, "android-host")
+
+    if state_path.is_file():
+        artifacts.append(str(state_path))
+        important_outputs.append({"label": "Prepare state", "path": str(state_path)})
+        _emit_event(progress_callback, event_type="artifact", completed=0, total=1, active_unit="prepare-state", path=str(state_path))
+        return CommandResult.success(
+            command=command_text,
+            host_platform=host_platform,
+            target="android-host",
+            payload={
+                "prepareScope": "android-host",
+                "preparedCommands": [],
+                "cached": True,
+                "artifacts": artifacts,
+                "importantOutputs": important_outputs,
+                "consoleText": "",
+            },
+            text=_summary_text(command_text, "android-host", [], cached=True),
+        )
+
+    _emit_event(progress_callback, event_type="stage-start", completed=0, total=1, active_unit="android-host-bootstrap")
+    bootstrap = tooling_module.ensure_android_host_tooling_available(command_text, host_platform, repo_root)
+    if bootstrap.output:
+        console_outputs.append(bootstrap.output)
+    if not bootstrap.ready:
+        _emit_event(progress_callback, event_type="progress", completed=0, total=1, active_unit="android-host-bootstrap", step_status="fail")
+        message = bootstrap.output if bootstrap.output.endswith("\n") else bootstrap.output + "\n"
+        return CommandResult.failure(
+            command=command_text,
+            host_platform=host_platform,
+            target="android-host",
+            errors=bootstrap.errors or ["prepare failed during Android host bootstrap"],
+            payload={
+                "prepareScope": "android-host",
+                "preparedCommands": [],
+                "artifacts": [],
+                "importantOutputs": [],
+                "consoleText": "\n".join(part for part in console_outputs if part),
+            },
+            text=f"Run failed: {command_text}\n{message}",
+        )
+
+    android_sdk_root = tooling_module.android_sdk_root(repo_root)
+    android_toolchain_root = tooling_module.android_toolchain_root(repo_root)
+    artifacts.append(str(android_toolchain_root))
+    important_outputs.extend(
+        [
+            {"label": "Android toolchain cache", "path": str(android_toolchain_root)},
+            {"label": "Android SDK root", "path": str(android_sdk_root)},
+        ]
+    )
+    _emit_event(progress_callback, event_type="progress", completed=1, total=1, active_unit="android-host-bootstrap", step_status="ok")
+    _emit_event(progress_callback, event_type="artifact", completed=1, total=1, active_unit="android-host-bootstrap", path=str(android_toolchain_root))
+
+    write_json(
+        state_path,
+        {
+            "scope": "android-host",
+            "hostPlatform": host_platform,
+            "preparedCommands": [],
+        },
+    )
+    artifacts.append(str(state_path))
+    important_outputs.append({"label": "Prepare state", "path": str(state_path)})
+    _emit_event(progress_callback, event_type="artifact", completed=1, total=1, active_unit="prepare-state", path=str(state_path))
+
+    return CommandResult.success(
+        command=command_text,
+        host_platform=host_platform,
+        target="android-host",
+        payload={
+            "prepareScope": "android-host",
+            "preparedCommands": [],
+            "cached": False,
+            "artifacts": artifacts,
+            "importantOutputs": important_outputs,
+            "consoleText": "\n".join(part for part in console_outputs if part),
+        },
+        text=_summary_text(command_text, "android-host", []),
+    )
+
+
 def handle(
     command: dict,
     repo_root: Path,
@@ -239,6 +338,14 @@ def handle(
     progress_callback: Callable[[dict[str, Any]], None] | None = None,
 ) -> CommandResult:
     scope = resolve_prepare_scope(command["id"])
+    if scope == "android-host":
+        return _handle_android_host_prepare(
+            repo_root,
+            host_platform,
+            command_text,
+            progress_callback=progress_callback,
+        )
+
     console_outputs: list[str] = []
     artifacts: list[str] = []
     important_outputs: list[dict[str, str]] = []

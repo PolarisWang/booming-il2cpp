@@ -656,6 +656,18 @@ class TuiUnifiedMenuTests(unittest.TestCase):
         )
         self.assertTrue(all(entry.command["title"] for entry in entries))
 
+    def test_build_prepare_menu_entries_exposes_android_host_bootstrap_on_windows(self) -> None:
+        manifest_module = load_manifest_module()
+        tui_module = load_tui_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        entries = tui_module.build_prepare_menu_entries(manifest, "windows")
+
+        self.assertIn("prepare-android-host", [entry.command["id"] for entry in entries])
+        android_entry = next(entry for entry in entries if entry.command["id"] == "prepare-android-host")
+        self.assertEqual("android-host", android_entry.syntax)
+        self.assertIn("Android", android_entry.command["title"])
+
     def test_build_project_menu_entries_exposes_generate_and_build_actions(self) -> None:
         manifest_module = load_manifest_module()
         tui_module = load_tui_module()

@@ -6,19 +6,21 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import urllib.request
 import uuid
+import zipfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable
 
 try:
     from . import manifest as manifest_module
-    from .common import combine_process_output, run_process
+    from .common import _merge_environment, combine_process_output, run_process
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from core import manifest as manifest_module
-    from core.common import combine_process_output, run_process
+    from core.common import _merge_environment, combine_process_output, run_process
 
 
 @dataclass
@@ -26,6 +28,22 @@ class ToolBootstrapResult:
     ready: bool
     output: str = ""
     errors: list[str] = field(default_factory=list)
+
+
+ANDROID_NDK_VERSION = "26.3.11579264"
+ANDROID_PLATFORM_API = "36"
+ANDROID_COMMAND_LINE_TOOLS_WINDOWS_URL = (
+    "https://dl.google.com/android/repository/commandlinetools-win-14742923_latest.zip"
+)
+ANDROID_WINDOWS_JDK_URL = (
+    "https://api.adoptium.net/v3/binary/latest/17/ga/windows/x64/jdk/hotspot/normal/eclipse"
+)
+ANDROID_REQUIRED_PACKAGES = [
+    "platform-tools",
+    "emulator",
+    f"ndk;{ANDROID_NDK_VERSION}",
+    f"platforms;android-{ANDROID_PLATFORM_API}",
+]
 
 
 _VISUAL_STUDIO_GENERATOR_PATTERN = re.compile(r"^\*?\s*(Visual Studio \d+ \d{4})\s+=")
@@ -197,10 +215,28 @@ def cmake_environment(repo_root: Path | None = None, which: Callable[[str], str 
         return None, {}
 
     cmake_dir = str(Path(cmake_path).resolve().parent)
-    current_path = os.environ.get("PATH", "")
-    if not current_path:
-        return cmake_path, {"PATH": cmake_dir}
-    return cmake_path, {"PATH": cmake_dir + os.pathsep + current_path}
+    overrides = android_environment_overrides(repo_root) if repo_root is not None else {}
+
+    path_parts = [cmake_dir]
+    android_path = overrides.pop("PATH", "")
+    if android_path:
+        path_parts.extend(segment for segment in android_path.split(os.pathsep) if segment)
+    system_path = os.environ.get("PATH", "")
+    if system_path:
+        path_parts.extend(segment for segment in system_path.split(os.pathsep) if segment)
+
+    unique_parts: list[str] = []
+    seen: set[str] = set()
+    for segment in path_parts:
+        normalized = segment.lower() if os.name == "nt" else segment
+        if normalized in seen:
+            continue
+        seen.add(normalized)
+        unique_parts.append(segment)
+
+    if unique_parts:
+        overrides["PATH"] = os.pathsep.join(unique_parts)
+    return cmake_path, overrides
 
 
 def detect_visual_studio_generator(
@@ -314,6 +350,336 @@ def find_visual_studio_developer_command() -> Path | None:
             return candidate
 
     return None
+
+
+def android_toolchain_root(repo_root: Path) -> Path:
+    return repo_root / "artifacts" / "toolchains" / "android"
+
+
+def android_sdk_root(repo_root: Path) -> Path:
+    return android_toolchain_root(repo_root) / "sdk"
+
+
+def android_jdk_root(repo_root: Path) -> Path:
+    return android_toolchain_root(repo_root) / "jdk"
+
+
+def _android_java_executable_name() -> str:
+    return "java.exe" if os.name == "nt" else "java"
+
+
+def _android_sdkmanager_name() -> str:
+    return "sdkmanager.bat" if os.name == "nt" else "sdkmanager"
+
+
+def _repo_cached_java_home(repo_root: Path) -> Path | None:
+    cache_root = android_jdk_root(repo_root)
+    candidate = cache_root / "bin" / _android_java_executable_name()
+    if candidate.is_file():
+        return cache_root
+
+    if cache_root.is_dir():
+        for child in sorted(candidate for candidate in cache_root.iterdir() if candidate.is_dir()):
+            nested_candidate = child / "bin" / _android_java_executable_name()
+            if nested_candidate.is_file():
+                return child
+
+    return None
+
+
+def find_java_executable(repo_root: Path | None = None, which: Callable[[str], str | None] = shutil.which) -> str | None:
+    java_home = os.environ.get("JAVA_HOME")
+    if java_home:
+        candidate = Path(java_home) / "bin" / _android_java_executable_name()
+        if candidate.is_file():
+            return str(candidate)
+
+    if repo_root is not None:
+        cached_java_home = _repo_cached_java_home(repo_root)
+        if cached_java_home is not None:
+            candidate = cached_java_home / "bin" / _android_java_executable_name()
+            if candidate.is_file():
+                return str(candidate)
+
+    discovered = which("java")
+    if discovered:
+        return discovered
+
+    return None
+
+
+def _repo_cached_android_sdkmanager_path(repo_root: Path) -> Path:
+    return android_sdk_root(repo_root) / "cmdline-tools" / "latest" / "bin" / _android_sdkmanager_name()
+
+
+def _repo_cached_android_ndk_root(repo_root: Path) -> Path:
+    return android_sdk_root(repo_root) / "ndk" / ANDROID_NDK_VERSION
+
+
+def _repo_cached_android_adb_path(repo_root: Path) -> Path:
+    executable = "adb.exe" if os.name == "nt" else "adb"
+    return android_sdk_root(repo_root) / "platform-tools" / executable
+
+
+def _repo_cached_android_emulator_path(repo_root: Path) -> Path:
+    executable = "emulator.exe" if os.name == "nt" else "emulator"
+    return android_sdk_root(repo_root) / "emulator" / executable
+
+
+def _repo_cached_android_platform_dir(repo_root: Path) -> Path:
+    return android_sdk_root(repo_root) / "platforms" / f"android-{ANDROID_PLATFORM_API}"
+
+
+def android_environment_overrides(repo_root: Path) -> dict[str, str]:
+    sdk_root = android_sdk_root(repo_root)
+    ndk_root = _repo_cached_android_ndk_root(repo_root)
+    java_home = _repo_cached_java_home(repo_root)
+
+    path_parts: list[str] = []
+    if java_home is not None:
+        path_parts.append(str(java_home / "bin"))
+        path_parts.append(str(java_home / "bin" / _android_java_executable_name()))
+    sdkmanager_dir = _repo_cached_android_sdkmanager_path(repo_root).parent
+    if sdkmanager_dir.is_dir():
+        path_parts.append(str(sdkmanager_dir))
+    adb_dir = _repo_cached_android_adb_path(repo_root).parent
+    if adb_dir.is_dir():
+        path_parts.append(str(adb_dir))
+    emulator_dir = _repo_cached_android_emulator_path(repo_root).parent
+    if emulator_dir.is_dir():
+        path_parts.append(str(emulator_dir))
+    current_path = os.environ.get("PATH", "")
+    if current_path:
+        path_parts.extend(segment for segment in current_path.split(os.pathsep) if segment)
+
+    unique_path_parts: list[str] = []
+    seen_path_parts: set[str] = set()
+    for path_part in path_parts:
+        normalized = path_part.lower() if os.name == "nt" else path_part
+        if normalized in seen_path_parts:
+            continue
+        seen_path_parts.add(normalized)
+        unique_path_parts.append(path_part)
+
+    overrides: dict[str, str] = {}
+    if sdk_root.is_dir():
+        overrides["ANDROID_SDK_ROOT"] = str(sdk_root)
+        overrides["ANDROID_HOME"] = str(sdk_root)
+    if ndk_root.is_dir():
+        overrides["ANDROID_NDK_ROOT"] = str(ndk_root)
+    if java_home is not None:
+        overrides["JAVA_HOME"] = str(java_home)
+    if unique_path_parts:
+        overrides["PATH"] = os.pathsep.join(unique_path_parts)
+    return overrides
+
+
+def _download_file(url: str, destination: Path) -> None:
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    request = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "Mozilla/5.0 (compatible; chaos-il2cpp-bootstrap/1.0)",
+            "Accept": "*/*",
+        },
+    )
+    with urllib.request.urlopen(request) as response, destination.open("wb") as stream:
+        shutil.copyfileobj(response, stream)
+
+
+def _extract_zip(archive_path: Path, destination: Path) -> None:
+    if destination.exists():
+        shutil.rmtree(destination, ignore_errors=True)
+    destination.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(archive_path, "r") as archive:
+        archive.extractall(destination)
+
+
+def _replace_directory(source: Path, destination: Path) -> None:
+    if destination.exists():
+        shutil.rmtree(destination, ignore_errors=True)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.move(str(source), str(destination))
+
+
+def _single_directory_or_self(root: Path) -> Path:
+    entries = list(root.iterdir()) if root.is_dir() else []
+    directories = [entry for entry in entries if entry.is_dir()]
+    files = [entry for entry in entries if entry.is_file()]
+    if len(directories) == 1 and not files:
+        return directories[0]
+    return root
+
+
+def _run_android_tool(
+    arguments: list[str],
+    *,
+    env: dict[str, str] | None = None,
+    input_text: str | None = None,
+    cwd: Path | None = None,
+) -> subprocess.CompletedProcess[str]:
+    completed = subprocess.run(
+        arguments,
+        cwd=str(cwd) if cwd else None,
+        env=_merge_environment(env),
+        input=input_text,
+        capture_output=True,
+        text=True,
+        errors="replace",
+        check=False,
+    )
+    return completed
+
+
+def _bootstrap_windows_jdk(
+    repo_root: Path,
+    *,
+    download_file: Callable[[str, Path], None],
+    extract_zip: Callable[[Path, Path], None],
+) -> Path:
+    toolchain_root = android_toolchain_root(repo_root)
+    downloads_root = toolchain_root / ".downloads"
+    archive_path = downloads_root / "OpenJDK17U-jdk_x64_windows_hotspot.zip"
+    extraction_root = toolchain_root / ".tmp-jdk"
+    target_root = android_jdk_root(repo_root)
+
+    download_file(ANDROID_WINDOWS_JDK_URL, archive_path)
+    extract_zip(archive_path, extraction_root)
+
+    extracted_root = _single_directory_or_self(extraction_root)
+    _replace_directory(extracted_root, target_root)
+    shutil.rmtree(extraction_root, ignore_errors=True)
+    return target_root
+
+
+def _bootstrap_windows_android_commandline_tools(
+    repo_root: Path,
+    *,
+    download_file: Callable[[str, Path], None],
+    extract_zip: Callable[[Path, Path], None],
+) -> Path:
+    sdk_root = android_sdk_root(repo_root)
+    downloads_root = android_toolchain_root(repo_root) / ".downloads"
+    archive_path = downloads_root / "commandlinetools-win-latest.zip"
+    extraction_root = android_toolchain_root(repo_root) / ".tmp-cmdline-tools"
+    latest_root = sdk_root / "cmdline-tools" / "latest"
+
+    download_file(ANDROID_COMMAND_LINE_TOOLS_WINDOWS_URL, archive_path)
+    extract_zip(archive_path, extraction_root)
+
+    extracted_root = _single_directory_or_self(extraction_root)
+    if (extracted_root / "cmdline-tools").is_dir():
+        extracted_root = extracted_root / "cmdline-tools"
+
+    _replace_directory(extracted_root, latest_root)
+    shutil.rmtree(extraction_root, ignore_errors=True)
+    return latest_root
+
+
+def _android_repo_tooling_ready(repo_root: Path) -> bool:
+    java_home = _repo_cached_java_home(repo_root)
+    return all(
+        (
+            java_home is not None and (java_home / "bin" / _android_java_executable_name()).is_file(),
+            _repo_cached_android_sdkmanager_path(repo_root).is_file(),
+            _repo_cached_android_adb_path(repo_root).is_file(),
+            _repo_cached_android_emulator_path(repo_root).is_file(),
+            _repo_cached_android_ndk_root(repo_root).is_dir(),
+        )
+    )
+
+
+def ensure_android_host_tooling_available(
+    command_text: str,
+    host_platform: str,
+    repo_root: Path,
+    *,
+    download_file: Callable[[str, Path], None] = _download_file,
+    extract_zip: Callable[[Path, Path], None] = _extract_zip,
+    run_android_tool: Callable[..., subprocess.CompletedProcess[str]] = _run_android_tool,
+) -> ToolBootstrapResult:
+    if host_platform != "windows":
+        return ToolBootstrapResult(
+            ready=False,
+            output=(
+                f"Android host bootstrap is currently only automated on windows for `{command_text}`.\n"
+                "Use a Windows host to cache Android SDK / NDK / adb / emulator, or install them manually on this platform.\n"
+            ),
+            errors=["android host bootstrap is not supported on this platform"],
+        )
+
+    output_parts: list[str] = []
+    if _repo_cached_java_home(repo_root) is None and find_java_executable(repo_root) is None:
+        try:
+            _bootstrap_windows_jdk(repo_root, download_file=download_file, extract_zip=extract_zip)
+            output_parts.append("Bootstrapped cached OpenJDK 17 for Android sdkmanager.")
+        except Exception as error:
+            return ToolBootstrapResult(
+                ready=False,
+                output="\n".join(part for part in [*output_parts, str(error)] if part) + "\n",
+                errors=["android host bootstrap failed while installing Java"],
+            )
+
+    if not _repo_cached_android_sdkmanager_path(repo_root).is_file():
+        try:
+            _bootstrap_windows_android_commandline_tools(repo_root, download_file=download_file, extract_zip=extract_zip)
+            output_parts.append("Bootstrapped Android command-line tools into the repo cache.")
+        except Exception as error:
+            return ToolBootstrapResult(
+                ready=False,
+                output="\n".join(part for part in [*output_parts, str(error)] if part) + "\n",
+                errors=["android host bootstrap failed while installing Android command-line tools"],
+            )
+
+    if not _android_repo_tooling_ready(repo_root):
+        sdk_root = android_sdk_root(repo_root)
+        env = android_environment_overrides(repo_root)
+        sdkmanager_path = _repo_cached_android_sdkmanager_path(repo_root)
+
+        licenses = run_android_tool(
+            [str(sdkmanager_path), f"--sdk_root={sdk_root}", "--licenses"],
+            env=env,
+            input_text="y\n" * 32,
+            cwd=repo_root,
+        )
+        licenses_output = combine_process_output(licenses).strip()
+        if licenses_output:
+            output_parts.append(licenses_output)
+        if licenses.returncode != 0:
+            return ToolBootstrapResult(
+                ready=False,
+                output="\n".join(part for part in output_parts if part) + "\n",
+                errors=["android host bootstrap failed while accepting Android SDK licenses"],
+            )
+
+        install = run_android_tool(
+            [str(sdkmanager_path), f"--sdk_root={sdk_root}", "--install", *ANDROID_REQUIRED_PACKAGES],
+            env=env,
+            cwd=repo_root,
+        )
+        install_output = combine_process_output(install).strip()
+        if install_output:
+            output_parts.append(install_output)
+        if install.returncode != 0:
+            return ToolBootstrapResult(
+                ready=False,
+                output="\n".join(part for part in output_parts if part) + "\n",
+                errors=["android host bootstrap failed while installing Android SDK packages"],
+            )
+
+    if not _android_repo_tooling_ready(repo_root):
+        return ToolBootstrapResult(
+            ready=False,
+            output="\n".join(part for part in output_parts if part) + "\n",
+            errors=["android host bootstrap completed with missing SDK / NDK / adb / emulator artifacts"],
+        )
+
+    env = android_environment_overrides(repo_root)
+    output_parts.append(f"Android SDK root ready: {env['ANDROID_SDK_ROOT']}")
+    output_parts.append(f"Android NDK root ready: {env['ANDROID_NDK_ROOT']}")
+    output_parts.append(f"Android adb ready: {_repo_cached_android_adb_path(repo_root)}")
+    output_parts.append(f"Android emulator ready: {_repo_cached_android_emulator_path(repo_root)}")
+    return ToolBootstrapResult(ready=True, output="\n".join(output_parts) + "\n")
 
 
 def find_ninja_executable(which: Callable[[str], str | None] = shutil.which) -> str | None:

@@ -325,6 +325,14 @@ class CommandManifestTests(unittest.TestCase):
         self.assertEqual("prepare-workflow-runtime-baseline-macos", prepare_runtime_baseline["command"]["id"])
         self.assertEqual("macos", prepare_runtime_baseline["options"]["host"])
 
+        prepare_android_host = manifest_module.parse_cli(
+            ["prepare", "android-host"],
+            False,
+            manifest,
+            "windows",
+        )
+        self.assertEqual("prepare-android-host", prepare_android_host["command"]["id"])
+
         workflow_runtime_baseline = manifest_module.parse_cli(
             ["test", "workflow", "runtime-baseline-macos"],
             False,

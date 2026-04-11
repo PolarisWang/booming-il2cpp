@@ -87,10 +87,21 @@ def _find_latest_ndk_under_sdk(sdk_root: str | None) -> str | None:
     return None
 
 
-def _locate_android_sdk_root() -> tuple[str | None, str | None]:
+def _repo_cached_android_sdk_root(repo_root: Path) -> str | None:
+    sdk_root = tooling_module.android_sdk_root(repo_root)
+    adb_path = sdk_root / "platform-tools" / _android_executable_name("adb")
+    emulator_path = sdk_root / "emulator" / _android_executable_name("emulator")
+    ndk_root = sdk_root / "ndk" / tooling_module.ANDROID_NDK_VERSION
+    if sdk_root.is_dir() and (adb_path.is_file() or emulator_path.is_file() or ndk_root.is_dir()):
+        return str(sdk_root)
+    return None
+
+
+def _locate_android_sdk_root(repo_root: Path) -> tuple[str | None, str | None]:
     candidates = [
         ("ANDROID_SDK_ROOT", os.environ.get("ANDROID_SDK_ROOT")),
         ("ANDROID_HOME", os.environ.get("ANDROID_HOME")),
+        ("repo-cache", _repo_cached_android_sdk_root(repo_root)),
     ]
 
     local_app_data = os.environ.get("LOCALAPPDATA")
@@ -108,11 +119,15 @@ def _locate_android_sdk_root() -> tuple[str | None, str | None]:
     return None, None
 
 
-def _locate_android_ndk_root(sdk_root: str | None) -> tuple[str | None, str | None]:
+def _locate_android_ndk_root(repo_root: Path, sdk_root: str | None) -> tuple[str | None, str | None]:
     candidates = [
         ("ANDROID_NDK_ROOT", os.environ.get("ANDROID_NDK_ROOT")),
         ("ANDROID_NDK_HOME", os.environ.get("ANDROID_NDK_HOME")),
         ("ANDROID_SDK_ROOT", _find_latest_ndk_under_sdk(sdk_root)),
+        (
+            "repo-cache",
+            str(tooling_module.android_sdk_root(repo_root) / "ndk" / tooling_module.ANDROID_NDK_VERSION),
+        ),
     ]
 
     for discovered_via, candidate in candidates:
@@ -135,9 +150,9 @@ def _locate_android_sdk_tool(sdk_root: str | None, executable: str, relative_pat
     return None, None
 
 
-def _check_android_runtime_tooling() -> list[dict]:
-    sdk_root, sdk_via = _locate_android_sdk_root()
-    ndk_root, ndk_via = _locate_android_ndk_root(sdk_root)
+def _check_android_runtime_tooling(repo_root: Path) -> list[dict]:
+    sdk_root, sdk_via = _locate_android_sdk_root(repo_root)
+    ndk_root, ndk_via = _locate_android_ndk_root(repo_root, sdk_root)
     adb_location, adb_via = _locate_android_sdk_tool(
         sdk_root,
         "adb",
@@ -182,22 +197,14 @@ def _check_android_runtime_tooling() -> list[dict]:
 
 
 def _check_ios_runtime_host(host_platform: str) -> dict:
-    if host_platform == "macos":
-        location = tooling_module.shutil.which("xcodebuild")
-        return _build_check(
-            "ios-runtime-host",
-            location,
-            False,
-            missing_detail="xcodebuild not found; iOS runtime evidence requires Xcode plus Simulator or a signed device",
-            discovered_via="PATH" if location else None,
-        )
-
-    return {
-        "name": "ios-runtime-host",
-        "status": "missing",
-        "detail": f"requires a macOS host with Xcode plus Simulator or a signed device; current host is {host_platform}",
-        "required": False,
-    }
+    location = tooling_module.shutil.which("xcodebuild")
+    return _build_check(
+        "ios-runtime-host",
+        location,
+        False,
+        missing_detail="xcodebuild not found; iOS runtime evidence requires Xcode plus Simulator or a signed device",
+        discovered_via="PATH" if location else None,
+    )
 
 
 def _check_visual_cpp_toolchain() -> dict:
@@ -342,11 +349,10 @@ def handle(repo_root: Path, host_platform: str, command_text: str) -> CommandRes
 
     if host_platform == "windows":
         checks.append(_check_visual_cpp_toolchain())
-    elif host_platform == "macos":
-        checks.append(_build_check("xcodebuild", tooling_module.shutil.which("xcodebuild"), False, missing_detail="xcodebuild not found"))
 
-    checks.extend(_check_android_runtime_tooling())
-    checks.append(_check_ios_runtime_host(host_platform))
+    checks.extend(_check_android_runtime_tooling(repo_root))
+    if host_platform == "macos":
+        checks.append(_check_ios_runtime_host(host_platform))
 
     errors = [check["name"] for check in checks if check["status"] == "error"]
     if errors:

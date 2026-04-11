@@ -29,6 +29,7 @@ class PrepareScopeTests(unittest.TestCase):
         prepare_module = load_prepare_module()
 
         self.assertEqual("global", prepare_module.resolve_prepare_scope("prepare"))
+        self.assertEqual("android-host", prepare_module.resolve_prepare_scope("prepare-android-host"))
         self.assertEqual("smoke", prepare_module.resolve_prepare_scope("prepare-smoke"))
         self.assertEqual(
             "workflow-runtime-baseline-windows",
@@ -61,6 +62,20 @@ class PrepareScopeTests(unittest.TestCase):
         )
         self.assertNotIn(REPO_ROOT / "contracts", clean_paths)
         self.assertNotIn(REPO_ROOT / "third_party", clean_paths)
+
+    def test_clean_android_host_scope_covers_cached_android_toolchain(self) -> None:
+        prepare_module = load_prepare_module()
+
+        clean_paths = prepare_module.resolve_clean_paths(REPO_ROOT, "android-host")
+
+        self.assertIn(
+            REPO_ROOT / "artifacts" / "toolchains" / "android",
+            clean_paths,
+        )
+        self.assertIn(
+            REPO_ROOT / "artifacts" / "run" / "prepare" / "android-host.json",
+            clean_paths,
+        )
 
     def test_prepare_plan_routes_smoke_scope_through_unified_test_build_stage(self) -> None:
         prepare_module = load_prepare_module()
@@ -237,6 +252,31 @@ class PrepareScopeTests(unittest.TestCase):
         self.assertEqual("ok", prepare_result.status)
         self.assertIn("cmake installed successfully.", prepare_result.payload.get("consoleText", ""))
         ensure_cmake.assert_called_once_with("prepare workflow runtime-baseline --host windows", "windows", REPO_ROOT)
+        doctor_handle.assert_not_called()
+
+    def test_prepare_android_host_bootstraps_android_tooling_without_running_doctor(self) -> None:
+        prepare_module = load_prepare_module()
+        android_bootstrap = prepare_module.tooling_module.ToolBootstrapResult(
+            ready=True,
+            output="android host ready\n",
+        )
+
+        with patch.object(prepare_module.tooling_module, "ensure_android_host_tooling_available", return_value=android_bootstrap) as ensure_android:
+            with patch.object(prepare_module.doctor_commands, "handle") as doctor_handle:
+                with patch.object(prepare_module, "write_json"):
+                    with patch.object(prepare_module, "prepare_state_path", return_value=REPO_ROOT / "artifacts" / "run" / "prepare" / "unit-test-android-host.json"):
+                        prepare_result = prepare_module.handle(
+                            {"id": "prepare-android-host"},
+                            REPO_ROOT,
+                            "windows",
+                            "prepare android-host",
+                            {},
+                        )
+
+        self.assertEqual("ok", prepare_result.status)
+        self.assertEqual([], prepare_result.payload["preparedCommands"])
+        self.assertIn("android host ready", prepare_result.payload.get("consoleText", ""))
+        ensure_android.assert_called_once_with("prepare android-host", "windows", REPO_ROOT)
         doctor_handle.assert_not_called()
 
 

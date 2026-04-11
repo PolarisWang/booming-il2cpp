@@ -261,6 +261,16 @@
       "examples": ["run prepare smoke"]
     },
     {
+      "id": "prepare-android-host",
+      "title": "Prepare the cached Android host toolchain environment",
+      "group": "Environment",
+      "handler": "prepare.dispatch",
+      "platforms": ["windows"],
+      "tokens": ["prepare", "android-host"],
+      "show_in_menu": true,
+      "examples": ["run prepare android-host"]
+    },
+    {
       "id": "prepare-workflow-runtime-baseline-windows",
       "title": "Prepare the Windows runtime-baseline workflow environment",
       "group": "Environment",
@@ -338,6 +348,20 @@
       "clean_scope": "smoke",
       "show_in_menu": true,
       "examples": ["run clean --scope smoke"]
+    },
+    {
+      "id": "clean-android-host",
+      "title": "Clean the cached Android host toolchain scope",
+      "group": "Environment",
+      "handler": "clean.dispatch",
+      "platforms": ["windows"],
+      "tokens": ["clean"],
+      "options": {
+        "scope": "android-host"
+      },
+      "clean_scope": "android-host",
+      "show_in_menu": true,
+      "examples": ["run clean --scope android-host"]
     },
     {
       "id": "clean-workflow-runtime-baseline-windows",
