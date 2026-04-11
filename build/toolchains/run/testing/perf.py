@@ -39,9 +39,25 @@ def _write_baseline(baseline_path: Path, metrics: dict[str, Any]) -> None:
 
 def _compare_metrics(metrics: dict[str, Any], baseline: dict[str, Any]) -> list[dict[str, Any]]:
     regressions: list[dict[str, Any]] = []
-    for metric_name in sorted(set(metrics).intersection(baseline)):
-        actual = metrics[metric_name]
+    baseline_keys = sorted(str(metric_name) for metric_name in baseline)
+    for metric_name in baseline_keys:
         expected = baseline[metric_name]
+        if not isinstance(expected, (int, float)):
+            continue
+
+        if metric_name not in metrics:
+            regressions.append(
+                {
+                    "metric": metric_name,
+                    "baseline": float(expected),
+                    "actual": None,
+                    "delta": None,
+                    "reason": "missing-actual-metric",
+                }
+            )
+            continue
+
+        actual = metrics[metric_name]
         if not isinstance(actual, (int, float)) or not isinstance(expected, (int, float)):
             continue
         if float(actual) <= float(expected):

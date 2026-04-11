@@ -89,6 +89,45 @@ class SubjectPerfPolicyTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_perf_subject_marks_missing_baseline_metrics_as_regression(self) -> None:
+        perf_module = load_perf_module()
+        subject_id = "InterfaceDispatchProof"
+        matrix_id = "windows-native-profile"
+
+        repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
+            baseline_path = (
+                repo_root
+                / "subjects"
+                / subject_id
+                / "baselines"
+                / "perf"
+                / matrix_id
+                / "windows.json"
+            )
+            baseline_path.parent.mkdir(parents=True, exist_ok=True)
+            baseline_path.write_text(
+                json.dumps({"meanDispatchNanoseconds": 5.0}),
+                encoding="utf-8",
+            )
+
+            result = perf_module.evaluate_perf_subject(
+                repo_root=repo_root,
+                subject_id=subject_id,
+                matrix_id=matrix_id,
+                host_platform="windows",
+                metrics={"meanDurationMs": 1.25},
+                update_baseline=False,
+            )
+
+            self.assertEqual("regressed", result["regressionStatus"])
+            self.assertEqual(1, len(result["regressions"]))
+            self.assertEqual("meanDispatchNanoseconds", result["regressions"][0]["metric"])
+            self.assertIsNone(result["regressions"][0]["actual"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
 
 if __name__ == "__main__":
     unittest.main()

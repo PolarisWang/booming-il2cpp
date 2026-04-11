@@ -672,6 +672,142 @@ class SubjectCommandTests(unittest.TestCase):
             for path, snapshot in snapshots.items():
                 restore_text(path, snapshot)
 
+    def test_subject_dispatch_uses_native_perf_defaults_when_validation_override_is_omitted(self) -> None:
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_subject_native_perf_defaults")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_subject_native_perf_defaults")
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+        subject_record = select_subject_record(
+            "chaos_run_subject_fixture_native_perf_defaults",
+            category="mainline",
+            source_type="dotnet-project",
+            required_goal_ids=["perf.profile"],
+            required_stage_kinds=["native-runtime-perf"],
+            required_validation_profile_ids=["perf-profile"],
+            required_validation_drivers=["native-runtime-perf"],
+        )
+        subject_id = str(subject_record["subjectId"])
+        fixed_run_id = f"chaos-run-subject-native-perf-defaults-{uuid.uuid4().hex}"
+        observed_selection: dict[str, str] = {}
+        subject_runs_root = REPO_ROOT / "artifacts" / "subjects" / subject_id / "runs"
+        run_root = subject_runs_root / fixed_run_id
+        subject_last_path = subject_runs_root / "last.json"
+        subject_current_path = subject_runs_root / "current.json"
+        global_logs_root = REPO_ROOT / "artifacts" / "logs" / "tests"
+        global_last_path = global_logs_root / "last.json"
+        global_current_path = global_logs_root / "current.json"
+        snapshots = {
+            subject_last_path: snapshot_text(subject_last_path),
+            subject_current_path: snapshot_text(subject_current_path),
+            global_last_path: snapshot_text(global_last_path),
+            global_current_path: snapshot_text(global_current_path),
+        }
+
+        def execute_plan_side_effect(repo_root: Path, plan: dict, **_: object) -> dict:
+            del repo_root
+            selection = dict(plan.get("selection") or {})
+            observed_selection.update(
+                {
+                    "subjectId": str(selection.get("subjectId") or ""),
+                    "matrixId": str(selection.get("matrixId") or ""),
+                    "goalId": str(selection.get("goalId") or ""),
+                    "validationProfileId": str(selection.get("validationProfileId") or ""),
+                    "validationKind": str(selection.get("validationKind") or ""),
+                    "variant": str(selection.get("variant") or ""),
+                }
+            )
+            native_perf_stage = next(
+                dict(stage)
+                for stage in list(plan.get("stagePlan") or [])
+                if str(stage.get("kind") or "") == "native-runtime-perf"
+            )
+            return {
+                "subjectId": observed_selection["subjectId"],
+                "matrixId": observed_selection["matrixId"],
+                "goalId": observed_selection["goalId"],
+                "status": "ok",
+                "terminalStageId": str(native_perf_stage["stageId"]),
+                "terminalBucket": "report",
+                "stageResults": [
+                    {
+                        "stageId": str(native_perf_stage["stageId"]),
+                        "kind": str(native_perf_stage["kind"]),
+                        "bucket": str(native_perf_stage["bucket"]),
+                        "status": "ok",
+                        "planMode": "executed",
+                        "actionTaken": "executed",
+                        "invalidation": {"applied": False, "reason": None},
+                        "manifestPath": str(native_perf_stage["paths"]["manifestPath"]),
+                        "reportPaths": [],
+                        "primaryEvidencePaths": [
+                            f"{native_perf_stage['paths']['bucketRoot']}/perf.runtime.json",
+                            f"{native_perf_stage['paths']['bucketRoot']}/perf.samples.json",
+                        ],
+                        "fingerprint": "native-perf-defaults-fingerprint",
+                        "durationMs": 42,
+                        "diagnostics": {},
+                        "details": {
+                            "performance": {
+                                "samples": [
+                                    {"sampleIndex": 1, "durationMs": 4.5, "exitCode": 0},
+                                    {"sampleIndex": 2, "durationMs": 4.6, "exitCode": 0},
+                                ],
+                                "metrics": {
+                                    "sampleCount": 2,
+                                    "meanDurationMs": 4.55,
+                                    "minDurationMs": 4.5,
+                                    "maxDurationMs": 4.6,
+                                },
+                                "baselinePath": (
+                                    f"subjects/{observed_selection['subjectId']}/baselines/perf/"
+                                    f"{observed_selection['matrixId']}/windows.json"
+                                ),
+                                "baseline": {"meanDispatchNanoseconds": 5.0},
+                                "baselineUpdated": False,
+                                "regressionStatus": "ok",
+                                "regressions": [],
+                                "runtimeEvidence": {
+                                    "runtimePath": f"{native_perf_stage['paths']['bucketRoot']}/perf.runtime.json",
+                                    "samplesPath": f"{native_perf_stage['paths']['bucketRoot']}/perf.samples.json",
+                                },
+                            }
+                        },
+                        "failure": None,
+                    },
+                ],
+                "errors": [],
+                "events": [],
+            }
+
+        try:
+            with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
+                with patch.object(
+                    test_module.subject_executor_module,
+                    "execute_plan",
+                    side_effect=execute_plan_side_effect,
+                ):
+                    result = test_module.handle(
+                        {"id": "test-subject", "handler": "test.dispatch"},
+                        REPO_ROOT,
+                        "windows",
+                        f"test subject --id subject/{subject_id} --goal perf.profile",
+                        manifest,
+                        {
+                            "id": f"subject/{subject_id}",
+                            "goal": "perf.profile",
+                        },
+                    )
+
+            self.assertEqual("ok", result.status)
+            self.assertEqual("perf.profile", observed_selection["goalId"])
+            self.assertEqual("windows-native-profile", observed_selection["matrixId"])
+            self.assertEqual("perf-profile", observed_selection["validationProfileId"])
+            self.assertEqual("perf", observed_selection["validationKind"])
+            self.assertEqual("PROFILE", observed_selection["variant"])
+        finally:
+            shutil.rmtree(run_root, ignore_errors=True)
+            for path, snapshot in snapshots.items():
+                restore_text(path, snapshot)
+
 
 if __name__ == "__main__":
     unittest.main()

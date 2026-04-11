@@ -437,6 +437,59 @@ class SubjectPlannerTests(unittest.TestCase):
         )
         self.assertEqual("report", plan["selection"]["artifactPlan"]["evidenceTerminalBucket"])
 
+    def test_planner_uses_goal_aware_perf_defaults_for_native_perf_subject(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_native_perf_goal_defaults")
+        _, record = select_subject_record(
+            "chaos_subject_planner_native_perf_goal_defaults_record",
+            category="mainline",
+            source_type="dotnet-project",
+            required_goal_ids=["perf.profile"],
+            required_validation_profile_ids=["perf-profile"],
+            required_validation_drivers=["native-runtime-perf"],
+        )
+        subject_id = str(record["subjectId"])
+        run_id = "20260411-fixture-native-perf-goal-defaults-001"
+
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            subject_id,
+            goal_id="perf.profile",
+            run_id=run_id,
+        )
+
+        self.assertEqual(subject_id, plan["selection"]["subjectId"])
+        self.assertEqual("perf.profile", plan["selection"]["goalId"])
+        self.assertEqual("windows-native-profile", plan["selection"]["matrixId"])
+        self.assertEqual("perf-profile", plan["selection"]["validationProfileId"])
+        self.assertEqual("perf", plan["selection"]["validationKind"])
+        self.assertEqual("PROFILE", plan["selection"]["variant"])
+        self.assertEqual("native-runtime-perf", plan["selection"]["pipelineId"])
+
+    def test_planner_uses_goal_matching_perf_profile_when_goal_changes_perf_matrix(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_goal_matching_perf_profile")
+        _, record = select_subject_record(
+            "chaos_subject_planner_goal_matching_perf_profile_record",
+            category="benchmark",
+            source_type="dotnet-project",
+            required_goal_ids=["perf.dev", "perf.release"],
+            required_validation_profile_ids=["perf-dev", "perf-release"],
+            required_validation_drivers=["csharp-perf-harness"],
+        )
+        subject_id = str(record["subjectId"])
+
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            subject_id,
+            goal_id="perf.release",
+            run_id="20260411-fixture-goal-matching-perf-profile-001",
+        )
+
+        self.assertEqual("perf.release", plan["selection"]["goalId"])
+        self.assertEqual("windows-perf-release", plan["selection"]["matrixId"])
+        self.assertEqual("perf-release", plan["selection"]["validationProfileId"])
+        self.assertEqual("perf", plan["selection"]["validationKind"])
+        self.assertEqual("PROFILE", plan["selection"]["variant"])
+
     def test_planner_overlays_matrix_source_entry_for_mainline_feature_pack_capability_slice(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_capability_slice")
         _, record = select_subject_record(

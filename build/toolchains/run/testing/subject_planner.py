@@ -37,12 +37,6 @@ def build_plan(
     manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
     selected_goal_id = goal_id or str(manifest["defaultGoal"])
     selected_run_id = run_id or "subject-exec"
-    validation_selection = subjects_module.resolve_validation_selection(
-        manifest,
-        validation_profile_id=validation_profile_id,
-        validation_kind=validation_kind,
-        variant=variant,
-    )
     if matrix_id is not None:
         selected_matrix_id = matrix_id
     else:
@@ -61,6 +55,15 @@ def build_plan(
             )
 
     matrix = subjects_module.find_matrix(manifest, selected_matrix_id)
+    validation_mode = str(dict(matrix.get("validationIntent") or {}).get("validationMode") or "")
+    validation_selection = subjects_module.resolve_validation_selection(
+        manifest,
+        goal_id=selected_goal_id,
+        validation_mode=validation_mode,
+        validation_profile_id=validation_profile_id,
+        validation_kind=validation_kind,
+        variant=variant,
+    )
     supported_goals = list(matrix.get("supportedGoals") or [])
     if selected_goal_id not in supported_goals:
         raise ValueError(f"matrix '{selected_matrix_id}' does not support goal '{selected_goal_id}'")

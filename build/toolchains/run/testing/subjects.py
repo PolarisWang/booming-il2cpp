@@ -213,9 +213,57 @@ def find_validation(manifest: dict[str, Any], validation_kind: str) -> dict[str,
     return dict(validation[validation_kind])
 
 
+def _goal_profile_id(goal_id: str | None) -> str:
+    return str(goal_id or "").replace(".", "-")
+
+
+def _preferred_validation_kind(validation: dict[str, Any], validation_mode: str | None) -> str | None:
+    candidate = str(validation_mode or "")
+    if candidate and candidate in validation:
+        return candidate
+    return None
+
+
+def _select_validation_profile_id(
+    manifest: dict[str, Any],
+    *,
+    validation_profile_id: str | None,
+    goal_id: str | None,
+    preferred_validation_kind: str | None,
+) -> str:
+    validation_profiles = dict(manifest.get("validationProfiles") or {})
+    default_profile_id = str(manifest.get("defaultValidationProfile") or "")
+
+    if validation_profile_id:
+        return validation_profile_id
+
+    goal_profile_id = _goal_profile_id(goal_id)
+    if goal_profile_id and goal_profile_id in validation_profiles:
+        goal_profile_kinds = [str(item) for item in list(validation_profiles.get(goal_profile_id) or []) if str(item)]
+        if preferred_validation_kind is None or preferred_validation_kind in goal_profile_kinds:
+            return goal_profile_id
+
+    if preferred_validation_kind is not None:
+        default_profile_kinds = [str(item) for item in list(validation_profiles.get(default_profile_id) or []) if str(item)]
+        if preferred_validation_kind in default_profile_kinds:
+            return default_profile_id
+
+        matching_profiles = sorted(
+            profile_id
+            for profile_id, profile_kinds in validation_profiles.items()
+            if preferred_validation_kind in [str(item) for item in list(profile_kinds or []) if str(item)]
+        )
+        if len(matching_profiles) == 1:
+            return matching_profiles[0]
+
+    return default_profile_id
+
+
 def resolve_validation_selection(
     manifest: dict[str, Any],
     *,
+    goal_id: str | None = None,
+    validation_mode: str | None = None,
     validation_profile_id: str | None = None,
     validation_kind: str | None = None,
     variant: str | None = None,
@@ -223,7 +271,13 @@ def resolve_validation_selection(
     validation_profiles = dict(manifest.get("validationProfiles") or {})
     validation = dict(manifest.get("validation") or {})
 
-    selected_profile_id = validation_profile_id or str(manifest.get("defaultValidationProfile") or "")
+    preferred_validation_kind = _preferred_validation_kind(validation, validation_mode)
+    selected_profile_id = _select_validation_profile_id(
+        manifest,
+        validation_profile_id=validation_profile_id,
+        goal_id=goal_id,
+        preferred_validation_kind=preferred_validation_kind,
+    )
     if not selected_profile_id:
         raise ValueError("subject manifest missing defaultValidationProfile")
     if selected_profile_id not in validation_profiles:
@@ -239,6 +293,8 @@ def resolve_validation_selection(
             )
 
     selected_validation_kind = validation_kind or None
+    if selected_validation_kind is None and preferred_validation_kind in selected_validation_kinds:
+        selected_validation_kind = preferred_validation_kind
     if selected_validation_kind is not None and selected_validation_kind not in selected_validation_kinds:
         raise ValueError(
             f"validation '{selected_validation_kind}' is not part of validation profile '{selected_profile_id}'"
