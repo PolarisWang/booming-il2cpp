@@ -8,6 +8,12 @@ namespace Chaos.IL2CPP.CodeGen;
 
 public sealed class NativeReferenceProofEmitter
 {
+    private const string ManagedAsyncAwaitIntMinimal =
+        "managed-async.awaitable-int.minimal";
+    private const string ManagedThreadingThreadStaticMonitorMinimal =
+        "managed-threading.threadstatic-monitor.minimal";
+    private const string ManagedInterfaceDispatchMessageMinimal =
+        "managed-dispatch.interface-message.minimal";
     private const string ManagedDispatchVirtualInstanceMessageMinimal =
         "managed-dispatch.virtual-instance-message.minimal";
     private const string ManagedObjectCapturedStateInstanceMessageMinimal =
@@ -18,12 +24,16 @@ public sealed class NativeReferenceProofEmitter
         "managed-arrays-boxing.reference-array-boxed-int.minimal";
     private const string DelegateClosedTargetRelayMinimal =
         "managed-delegates.closed-target-relay-message.minimal";
+    private const string NestedExceptionThrowCatchFinallyMinimal =
+        "managed-exceptions.nested-throw-catch-finally.minimal";
     private const string ExceptionThrowCatchFinallyMinimal =
         "managed-exceptions.throw-catch-finally-message.minimal";
     private const string ReflectionInteropClosureMinimal =
         "managed-reflection-interop.closure.minimal";
     private const string ReflectionClosedTypeQueryMinimal =
         "reflection.closed-type-query.minimal";
+    private const string MarshalingUtf8ExportMinimal =
+        "interop.marshaling-utf8-export.minimal";
     private const string InteropPInvokeDirectCallMinimal =
         "interop.pinvoke-direct-call.minimal";
     private const string EngineLogWriteMinimal =
@@ -32,19 +42,31 @@ public sealed class NativeReferenceProofEmitter
         "engine.object-handle.roundtrip.minimal";
     private const string EngineLifecycleCallbackMinimal =
         "engine.lifecycle-callback.minimal";
+    private const string EngineHostProofMinimal =
+        "engine.host-proof.minimal";
     private const string GeneratedTranslationUnitTemplateRelativePath = "Templates/NativeReferenceProof.cpp.scriban";
     private const string DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath =
         "Templates/NativeReferenceProof.DispatchVirtualInstanceMessage.cpp.scriban";
+    private const string InterfaceDispatchMessageGeneratedTranslationUnitTemplateRelativePath =
+        "Templates/NativeReferenceProof.InterfaceDispatchMessage.cpp.scriban";
+    private const string AsyncAwaitIntGeneratedTranslationUnitTemplateRelativePath =
+        "Templates/NativeReferenceProof.AsyncAwaitInt.cpp.scriban";
+    private const string ThreadingThreadStaticMonitorGeneratedTranslationUnitTemplateRelativePath =
+        "Templates/NativeReferenceProof.ThreadingThreadStaticMonitor.cpp.scriban";
     private const string StaticCallCtorGetterGeneratedTranslationUnitTemplateRelativePath =
         "Templates/NativeReferenceProof.StaticCallCtorGetter.cpp.scriban";
     private const string ArrayBoxingReferenceArrayGeneratedTranslationUnitTemplateRelativePath =
         "Templates/NativeReferenceProof.ArrayBoxingReferenceArray.cpp.scriban";
     private const string ReflectionQueryMinimalGeneratedTranslationUnitTemplateRelativePath =
         "Templates/NativeReferenceProof.ReflectionQueryMinimal.cpp.scriban";
+    private const string MarshalingUtf8ExportGeneratedTranslationUnitTemplateRelativePath =
+        "Templates/NativeReferenceProof.MarshalingUtf8Export.cpp.scriban";
     private const string PInvokeDllImportMinimalGeneratedTranslationUnitTemplateRelativePath =
         "Templates/NativeReferenceProof.PInvokeDllImportMinimal.cpp.scriban";
     private const string DelegateClosedTargetRelayGeneratedTranslationUnitTemplateRelativePath =
         "Templates/NativeReferenceProof.DelegateClosedTargetRelay.cpp.scriban";
+    private const string NestedExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath =
+        "Templates/NativeReferenceProof.NestedExceptionThrowCatchFinally.cpp.scriban";
     private const string ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath =
         "Templates/NativeReferenceProof.ExceptionThrowCatchFinally.cpp.scriban";
     private const string ReflectionInteropClosureGeneratedTranslationUnitTemplateRelativePath =
@@ -55,6 +77,8 @@ public sealed class NativeReferenceProofEmitter
         "Templates/NativeReferenceProof.EngineObjectHandle.cpp.scriban";
     private const string EngineLifecycleCallbackGeneratedTranslationUnitTemplateRelativePath =
         "Templates/NativeReferenceProof.EngineLifecycleCallback.cpp.scriban";
+    private const string EngineHostProofGeneratedTranslationUnitTemplateRelativePath =
+        "Templates/NativeReferenceProof.EngineHostProof.cpp.scriban";
     private const string ConsoleWriteLineStringIcall = "System.Console/System.Console::WriteLine(System.String)";
     private const string StringConcatPairIcall = "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
 
@@ -69,6 +93,15 @@ public sealed class NativeReferenceProofEmitter
     private static readonly Lazy<Template> DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplate =
         new(() => LoadTemplate(DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath));
 
+    private static readonly Lazy<Template> InterfaceDispatchMessageGeneratedTranslationUnitTemplate =
+        new(() => LoadTemplate(InterfaceDispatchMessageGeneratedTranslationUnitTemplateRelativePath));
+
+    private static readonly Lazy<Template> AsyncAwaitIntGeneratedTranslationUnitTemplate =
+        new(() => LoadTemplate(AsyncAwaitIntGeneratedTranslationUnitTemplateRelativePath));
+
+    private static readonly Lazy<Template> ThreadingThreadStaticMonitorGeneratedTranslationUnitTemplate =
+        new(() => LoadTemplate(ThreadingThreadStaticMonitorGeneratedTranslationUnitTemplateRelativePath));
+
     private static readonly Lazy<Template> StaticCallCtorGetterGeneratedTranslationUnitTemplate =
         new(() => LoadTemplate(StaticCallCtorGetterGeneratedTranslationUnitTemplateRelativePath));
 
@@ -78,11 +111,17 @@ public sealed class NativeReferenceProofEmitter
     private static readonly Lazy<Template> ReflectionQueryMinimalGeneratedTranslationUnitTemplate =
         new(() => LoadTemplate(ReflectionQueryMinimalGeneratedTranslationUnitTemplateRelativePath));
 
+    private static readonly Lazy<Template> MarshalingUtf8ExportGeneratedTranslationUnitTemplate =
+        new(() => LoadTemplate(MarshalingUtf8ExportGeneratedTranslationUnitTemplateRelativePath));
+
     private static readonly Lazy<Template> PInvokeDllImportMinimalGeneratedTranslationUnitTemplate =
         new(() => LoadTemplate(PInvokeDllImportMinimalGeneratedTranslationUnitTemplateRelativePath));
 
     private static readonly Lazy<Template> DelegateClosedTargetRelayGeneratedTranslationUnitTemplate =
         new(() => LoadTemplate(DelegateClosedTargetRelayGeneratedTranslationUnitTemplateRelativePath));
+
+    private static readonly Lazy<Template> NestedExceptionThrowCatchFinallyGeneratedTranslationUnitTemplate =
+        new(() => LoadTemplate(NestedExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath));
 
     private static readonly Lazy<Template> ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplate =
         new(() => LoadTemplate(ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath));
@@ -98,6 +137,9 @@ public sealed class NativeReferenceProofEmitter
 
     private static readonly Lazy<Template> EngineLifecycleCallbackGeneratedTranslationUnitTemplate =
         new(() => LoadTemplate(EngineLifecycleCallbackGeneratedTranslationUnitTemplateRelativePath));
+
+    private static readonly Lazy<Template> EngineHostProofGeneratedTranslationUnitTemplate =
+        new(() => LoadTemplate(EngineHostProofGeneratedTranslationUnitTemplateRelativePath));
 
     public NativeReferenceProofResult Generate(NativeReferenceProofRequest request)
     {
@@ -166,6 +208,14 @@ public sealed class NativeReferenceProofEmitter
 
         switch (loweringPlan.PlanKind)
         {
+            case ManagedAsyncAwaitIntMinimal:
+            case ManagedThreadingThreadStaticMonitorMinimal:
+            case MarshalingUtf8ExportMinimal:
+                RequireStringField(loweringPlan.ExpectedOutput, nameof(loweringPlan.ExpectedOutput));
+                RequireIntField(loweringPlan.ExpectedOutputByteCount, nameof(loweringPlan.ExpectedOutputByteCount));
+                return;
+
+            case ManagedInterfaceDispatchMessageMinimal:
             case ManagedDispatchVirtualInstanceMessageMinimal:
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
                 RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
@@ -248,6 +298,7 @@ public sealed class NativeReferenceProofEmitter
                 RequireIntField(loweringPlan.MessageSuffixLiteralByteCount, nameof(loweringPlan.MessageSuffixLiteralByteCount));
                 return;
 
+            case NestedExceptionThrowCatchFinallyMinimal:
             case ExceptionThrowCatchFinallyMinimal:
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
                 RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
@@ -318,6 +369,7 @@ public sealed class NativeReferenceProofEmitter
             case EngineLogWriteMinimal:
             case EngineObjectHandleRoundtripMinimal:
             case EngineLifecycleCallbackMinimal:
+            case EngineHostProofMinimal:
                 RequireStringField(loweringPlan.ExpectedOutput, nameof(loweringPlan.ExpectedOutput));
                 RequireIntField(loweringPlan.ExpectedOutputByteCount, nameof(loweringPlan.ExpectedOutputByteCount));
                 if (loweringPlan.EngineBindings is null)
@@ -759,18 +811,24 @@ public sealed class NativeReferenceProofEmitter
     {
         return planKind switch
         {
+            ManagedAsyncAwaitIntMinimal => AsyncAwaitIntGeneratedTranslationUnitTemplate.Value,
+            ManagedThreadingThreadStaticMonitorMinimal => ThreadingThreadStaticMonitorGeneratedTranslationUnitTemplate.Value,
+            ManagedInterfaceDispatchMessageMinimal => InterfaceDispatchMessageGeneratedTranslationUnitTemplate.Value,
             ManagedDispatchVirtualInstanceMessageMinimal => DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplate.Value,
             ManagedObjectCapturedStateInstanceMessageMinimal => GeneratedTranslationUnitTemplate.Value,
             ManagedGenericStaticForwarderCapturedGetterMinimal => StaticCallCtorGetterGeneratedTranslationUnitTemplate.Value,
             ManagedArraysBoxingReferenceArrayBoxedIntMinimal => ArrayBoxingReferenceArrayGeneratedTranslationUnitTemplate.Value,
             DelegateClosedTargetRelayMinimal => DelegateClosedTargetRelayGeneratedTranslationUnitTemplate.Value,
+            NestedExceptionThrowCatchFinallyMinimal => NestedExceptionThrowCatchFinallyGeneratedTranslationUnitTemplate.Value,
             ExceptionThrowCatchFinallyMinimal => ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplate.Value,
             ReflectionInteropClosureMinimal => ReflectionInteropClosureGeneratedTranslationUnitTemplate.Value,
             ReflectionClosedTypeQueryMinimal => ReflectionQueryMinimalGeneratedTranslationUnitTemplate.Value,
+            MarshalingUtf8ExportMinimal => MarshalingUtf8ExportGeneratedTranslationUnitTemplate.Value,
             InteropPInvokeDirectCallMinimal => PInvokeDllImportMinimalGeneratedTranslationUnitTemplate.Value,
             EngineLogWriteMinimal => EngineLogWriteGeneratedTranslationUnitTemplate.Value,
             EngineObjectHandleRoundtripMinimal => EngineObjectHandleGeneratedTranslationUnitTemplate.Value,
             EngineLifecycleCallbackMinimal => EngineLifecycleCallbackGeneratedTranslationUnitTemplate.Value,
+            EngineHostProofMinimal => EngineHostProofGeneratedTranslationUnitTemplate.Value,
             _ => throw new InvalidOperationException($"unsupported native-reference lowering plan kind '{planKind}'"),
         };
     }

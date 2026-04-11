@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using Chaos.IL2CPP.CodeGen;
 using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.Pipeline;
+using Chaos.IL2CPP.ProjectGraph;
 
 namespace Chaos.IL2CPP.Driver;
 
@@ -26,8 +27,10 @@ public sealed class DriverEntry
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.TypedIlIr), result.TypedIlIr);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.AotManifest), result.AotManifest);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.MetadataRegistration), result.MetadataRegistration);
+        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.SupplementalMetadataTemplate), result.SupplementalMetadataTemplate);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.CodeRegistration), result.CodeRegistration);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.OptimizationFacts), result.OptimizationFacts);
+        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.PreserveDescriptor), result.PreserveDescriptor);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.NativeReferenceLoweringPlan), result.NativeReferenceLoweringPlan);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.ClosureManifest), result.ClosureManifest);
 
@@ -125,6 +128,8 @@ public sealed class DriverEntry
             var sourceType = source.GetProperty("type").GetString() ?? "dotnet-project";
 
             string inputAssemblyPath;
+            ProjectGraphModel? projectGraph = null;
+            IReadOnlyList<string> additionalAssemblyPaths = [];
 
             switch (sourceType)
             {
@@ -142,8 +147,12 @@ public sealed class DriverEntry
                     var buildResult = RunDotnetBuild(projectPath, hostInputDir);
                     if (buildResult != 0) return buildResult;
 
-                    var projectName = Path.GetFileNameWithoutExtension(projectPath);
-                    inputAssemblyPath = Path.Combine(hostInputDir, projectName + ".dll");
+                    projectGraph = new ProjectGraphLoader().LoadFromEntryProject(projectPath, hostInputDir);
+                    inputAssemblyPath = projectGraph.EntryProject.OutputAssemblyPath;
+                    additionalAssemblyPaths = projectGraph.Projects
+                        .Skip(1)
+                        .Select(project => project.OutputAssemblyPath)
+                        .ToList();
 
                     if (sourceType == "dotnet-project+dlls" && source.TryGetProperty("dependencies", out var deps))
                     {
@@ -180,6 +189,15 @@ public sealed class DriverEntry
                         entryAssembly = Path.GetFullPath(entryAssembly, Directory.GetCurrentDirectory());
 
                     inputAssemblyPath = entryAssembly;
+                    additionalAssemblyPaths = assemblies.EnumerateArray()
+                        .Select(assembly => assembly.GetString())
+                        .Where(assembly => !string.IsNullOrWhiteSpace(assembly))
+                        .Select(assembly => Path.IsPathRooted(assembly!)
+                            ? assembly!
+                            : Path.GetFullPath(assembly!, Directory.GetCurrentDirectory()))
+                        .Where(assembly => !string.Equals(assembly, inputAssemblyPath, StringComparison.OrdinalIgnoreCase))
+                        .Distinct(StringComparer.OrdinalIgnoreCase)
+                        .ToList();
                     Console.WriteLine("[1/3] Using pre-compiled assemblies (skipping build)");
                     break;
                 }
@@ -194,12 +212,18 @@ public sealed class DriverEntry
                 return 1;
             }
 
+            Directory.CreateDirectory(outputDir);
+            if (projectGraph is not null)
+            {
+                WriteJson(Path.Combine(outputDir, "project-graph.json"), projectGraph);
+            }
+
             Console.WriteLine("[2/3] Running IL2CPP pipeline...");
             var entry = entryPointOverride
                 ?? (source.TryGetProperty("entry", out var e) ? e.GetString() : null);
 
             var closureOutputDir = Path.Combine(outputDir, "analysis");
-            var request = new ManagedClosureRequest(inputAssemblyPath, closureOutputDir, entry);
+            var request = new ManagedClosureRequest(inputAssemblyPath, closureOutputDir, entry, additionalAssemblyPaths);
             var driver = new DriverEntry();
             var closureResult = driver.Run(request);
             if (closureResult != 0) return closureResult;
@@ -217,6 +241,11 @@ public sealed class DriverEntry
             {
                 Console.WriteLine($"Warning: native reference generation failed: {nativeEx.Message}");
                 Console.WriteLine("Analysis artifacts are still available in the output directory.");
+            }
+
+            if (projectGraph is not null)
+            {
+                EnsureGeneratedAssemblyDirectories(nativeOutputDir, projectGraph);
             }
 
             var convertManifest = new
@@ -418,6 +447,15 @@ public sealed class DriverEntry
         }
     }
 
+    private static void EnsureGeneratedAssemblyDirectories(string nativeOutputDir, ProjectGraphModel projectGraph)
+    {
+        var assembliesRoot = Path.Combine(nativeOutputDir, "assemblies");
+        foreach (var project in projectGraph.Projects)
+        {
+            Directory.CreateDirectory(Path.Combine(assembliesRoot, project.AssemblyName));
+        }
+    }
+
     private static bool TryParseManagedClosureRequest(string[] args, out ManagedClosureRequest request)
     {
         request = default!;
@@ -495,6 +533,12 @@ public sealed class DriverEntry
 
     private static void WriteJson<T>(string path, T value)
     {
+        var directoryPath = Path.GetDirectoryName(path);
+        if (!string.IsNullOrEmpty(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
+
         var json = JsonSerializer.Serialize(value, JsonOptions);
         File.WriteAllText(path, json + Environment.NewLine);
     }

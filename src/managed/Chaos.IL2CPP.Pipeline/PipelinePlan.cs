@@ -26,8 +26,8 @@ public sealed class PipelinePlan
 
     public ManagedClosureResult Execute(ManagedClosureRequest request)
     {
-        var loadedAssembly = _loader.Load(request);
-        var semanticWorld = _semanticWorld.Build(loadedAssembly);
+        var loadedWorld = _loader.LoadMultiple(request);
+        var semanticWorld = _semanticWorld.Build(loadedWorld);
         var linkedWorld = _linker.Link(semanticWorld);
         var metadataWriterOutput = _metadataWriter.Write(linkedWorld);
 

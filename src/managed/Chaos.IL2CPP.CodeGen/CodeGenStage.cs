@@ -24,27 +24,37 @@ public sealed class CodeGenStage
 
         var codeRegistration = new CodeRegistrationArtifact
         {
-            Modules =
-            [
-                new CodeRegistrationModule
+            Modules = linkedWorld.Assemblies
+                .Select(assembly => new CodeRegistrationModule
                 {
-                    ModuleName = $"{linkedWorld.Assembly.Name}.dll",
-                    Registrations = linkedWorld.Methods.Select((method, index) => new CodeRegistrationEntry
-                    {
-                        RegistrationKind = "methodPointer",
-                        Slot = index,
-                        Symbol = ManagedNaming.CreateMethodSymbol(method),
-                        SubjectId = method.SubjectId,
-                    }).ToList(),
-                },
-            ],
+                    ModuleName = $"{assembly.Name}.dll",
+                    Registrations = linkedWorld.Methods
+                        .Where(method => string.Equals(method.AssemblyName, assembly.Name, StringComparison.Ordinal))
+                        .Select((method, index) => new CodeRegistrationEntry
+                        {
+                            RegistrationKind = "methodPointer",
+                            Slot = index,
+                            Symbol = ManagedNaming.CreateMethodSymbol(method),
+                            SubjectId = method.SubjectId,
+                        })
+                        .ToList(),
+                })
+                .ToList(),
         };
         var loweringPlanner = new NativeReferenceLoweringPlanner();
-        var nativeReferenceLoweringPlan = loweringPlanner.Create(
-            linkedWorld,
-            typedIl,
-            metadataWriterOutput.MetadataRegistration,
-            codeRegistration);
+        NativeReferenceLoweringPlanArtifact nativeReferenceLoweringPlan;
+        try
+        {
+            nativeReferenceLoweringPlan = loweringPlanner.Create(
+                linkedWorld,
+                typedIl,
+                metadataWriterOutput.MetadataRegistration,
+                codeRegistration);
+        }
+        catch when (ShouldFallbackToGenericLoweringPlan(linkedWorld))
+        {
+            nativeReferenceLoweringPlan = CreateGenericLoweringPlan(linkedWorld, codeRegistration);
+        }
 
         var closureManifest = new ManagedClosureManifestArtifact
         {
@@ -57,8 +67,10 @@ public sealed class CodeGenStage
                 new ManagedClosureArtifactRef { Kind = "typedIlIr", Path = ManagedClosureArtifactNames.TypedIlIr },
                 new ManagedClosureArtifactRef { Kind = "aotManifest", Path = ManagedClosureArtifactNames.AotManifest },
                 new ManagedClosureArtifactRef { Kind = "metadataRegistration", Path = ManagedClosureArtifactNames.MetadataRegistration },
+                new ManagedClosureArtifactRef { Kind = "supplementalMetadataTemplate", Path = ManagedClosureArtifactNames.SupplementalMetadataTemplate },
                 new ManagedClosureArtifactRef { Kind = "codeRegistration", Path = ManagedClosureArtifactNames.CodeRegistration },
                 new ManagedClosureArtifactRef { Kind = "optimizationFacts", Path = ManagedClosureArtifactNames.OptimizationFacts },
+                new ManagedClosureArtifactRef { Kind = "preserveDescriptor", Path = ManagedClosureArtifactNames.PreserveDescriptor },
                 new ManagedClosureArtifactRef { Kind = "nativeReferenceLoweringPlan", Path = ManagedClosureArtifactNames.NativeReferenceLoweringPlan },
             ],
         };
@@ -69,10 +81,45 @@ public sealed class CodeGenStage
             TypedIlIr = typedIl,
             AotManifest = metadataWriterOutput.AotManifest,
             MetadataRegistration = metadataWriterOutput.MetadataRegistration,
+            SupplementalMetadataTemplate = metadataWriterOutput.SupplementalMetadataTemplate,
             CodeRegistration = codeRegistration,
             OptimizationFacts = linkedWorld.OptimizationFacts,
+            PreserveDescriptor = linkedWorld.PreserveDescriptor,
             NativeReferenceLoweringPlan = nativeReferenceLoweringPlan,
             ClosureManifest = closureManifest,
+        };
+    }
+
+    private static bool ShouldFallbackToGenericLoweringPlan(LinkedWorldModel linkedWorld)
+    {
+        return linkedWorld.Assemblies.Count > 1 ||
+               linkedWorld.PreserveDescriptor.Entries.Count > 0 ||
+               linkedWorld.Dependencies.Any(dependency =>
+                   string.Equals(dependency.Reason, "external-call", StringComparison.Ordinal));
+    }
+
+    private static NativeReferenceLoweringPlanArtifact CreateGenericLoweringPlan(
+        LinkedWorldModel linkedWorld,
+        CodeRegistrationArtifact codeRegistration)
+    {
+        var entrySymbol = codeRegistration.Modules
+            .SelectMany(module => module.Registrations)
+            .FirstOrDefault(registration => string.Equals(registration.SubjectId, linkedWorld.EntryPointSubjectId, StringComparison.Ordinal))
+            ?.Symbol
+            ?? "analysis_only_entry";
+
+        return new NativeReferenceLoweringPlanArtifact
+        {
+            PlanKind = "generic-analysis-only",
+            AssemblyName = linkedWorld.Assembly.Name,
+            EntrySubjectId = linkedWorld.EntryPointSubjectId,
+            IncludeHeader = "codegen_bridge.h",
+            NativeEntryFunctionName = "RunNativeReference",
+            EntrySymbol = entrySymbol,
+            ReferenceTypeToken = "0u",
+            CapturedFieldToken = "0u",
+            EntryMethodToken = "0u",
+            ConsoleWriteLineStringIcall = "System.Console/System.Console::WriteLine(System.String)",
         };
     }
 

@@ -25,11 +25,13 @@ public sealed class LinkerStage
         var semanticShapes = FilterSemanticShapes(semanticWorld, orderedTypes, orderedFields, orderedProperties, orderedMethods);
         var capabilityBundles = FilterCapabilityBundles(semanticWorld, orderedMethods);
         var optimizationFacts = BuildOptimizationFacts(semanticWorld, orderedTypes, orderedFields, orderedMethods);
+        var preserveDescriptor = BuildPreserveDescriptor(orderedTypes, orderedFields, orderedProperties, orderedMethods);
 
         return new LinkedWorldModel
         {
             InputAssemblyPath = semanticWorld.InputAssemblyPath,
             Assembly = semanticWorld.Assembly,
+            Assemblies = semanticWorld.Assemblies,
             EntryPointSubjectId = semanticWorld.EntryPointSubjectId,
             Types = orderedTypes,
             Fields = orderedFields,
@@ -40,6 +42,7 @@ public sealed class LinkerStage
             SemanticShapes = semanticShapes,
             CapabilityBundles = capabilityBundles,
             OptimizationFacts = optimizationFacts,
+            PreserveDescriptor = preserveDescriptor,
         };
     }
 
@@ -74,7 +77,32 @@ public sealed class LinkerStage
             reachableFieldIds,
             reachablePropertyIds,
             reachableTypeIds);
+        IncludeThreadStaticFieldClosure(
+            semanticWorld,
+            reachableMethodIds,
+            reachableFieldIds,
+            reachableTypeIds);
         IncludeReflectionQuerySurface(
+            semanticWorld,
+            methodMap,
+            fieldMap,
+            propertyMap,
+            typeMap,
+            reachableMethodIds,
+            reachableFieldIds,
+            reachablePropertyIds,
+            reachableTypeIds);
+        IncludeAsyncStateMachineClosure(
+            semanticWorld,
+            methodMap,
+            fieldMap,
+            propertyMap,
+            typeMap,
+            reachableMethodIds,
+            reachableFieldIds,
+            reachablePropertyIds,
+            reachableTypeIds);
+        IncludePreservedClosure(
             semanticWorld,
             methodMap,
             fieldMap,
@@ -91,6 +119,77 @@ public sealed class LinkerStage
             semanticWorld.Fields.Where(field => reachableFieldIds.Contains(field.SubjectId)).ToList(),
             semanticWorld.Properties.Where(property => reachablePropertyIds.Contains(property.SubjectId)).ToList(),
             semanticWorld.Methods.Where(method => reachableMethodIds.Contains(method.SubjectId)).ToList());
+    }
+
+    private static void IncludePreservedClosure(
+        SemanticWorldModel semanticWorld,
+        IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
+        IReadOnlyDictionary<string, ManagedFieldModel> fieldMap,
+        IReadOnlyDictionary<string, ManagedPropertyModel> propertyMap,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
+        HashSet<string> reachableMethodIds,
+        HashSet<string> reachableFieldIds,
+        HashSet<string> reachablePropertyIds,
+        HashSet<string> reachableTypeIds)
+    {
+        var pendingMethods = new Queue<ManagedMethodModel>();
+
+        foreach (var type in semanticWorld.Types.Where(candidate => candidate.IsPreserved))
+        {
+            reachableTypeIds.Add(type.SubjectId);
+
+            foreach (var field in semanticWorld.Fields.Where(candidate =>
+                         string.Equals(candidate.DeclaringTypeSubjectId, type.SubjectId, StringComparison.Ordinal)))
+            {
+                reachableFieldIds.Add(field.SubjectId);
+            }
+
+            foreach (var property in semanticWorld.Properties.Where(candidate =>
+                         string.Equals(candidate.DeclaringTypeSubjectId, type.SubjectId, StringComparison.Ordinal)))
+            {
+                reachablePropertyIds.Add(property.SubjectId);
+            }
+
+            foreach (var method in semanticWorld.Methods.Where(candidate =>
+                         string.Equals(candidate.DeclaringTypeSubjectId, type.SubjectId, StringComparison.Ordinal) &&
+                         !reachableMethodIds.Contains(candidate.SubjectId)))
+            {
+                pendingMethods.Enqueue(method);
+            }
+        }
+
+        foreach (var field in semanticWorld.Fields.Where(candidate => candidate.IsPreserved))
+        {
+            reachableFieldIds.Add(field.SubjectId);
+            reachableTypeIds.Add(field.DeclaringTypeSubjectId);
+        }
+
+        foreach (var property in semanticWorld.Properties.Where(candidate => candidate.IsPreserved))
+        {
+            reachablePropertyIds.Add(property.SubjectId);
+            reachableTypeIds.Add(property.DeclaringTypeSubjectId);
+        }
+
+        foreach (var method in semanticWorld.Methods.Where(candidate => candidate.IsPreserved))
+        {
+            reachableTypeIds.Add(method.DeclaringTypeSubjectId);
+            if (!reachableMethodIds.Contains(method.SubjectId))
+            {
+                pendingMethods.Enqueue(method);
+            }
+        }
+
+        ExpandReachableMethods(
+            semanticWorld,
+            methodMap,
+            fieldMap,
+            propertyMap,
+            typeMap,
+            pendingMethods,
+            reachableMethodIds,
+            reachableFieldIds,
+            reachablePropertyIds,
+            reachableTypeIds);
     }
 
     private static void ExpandReachableMethods(
@@ -138,7 +237,7 @@ public sealed class LinkerStage
 
                     var reference = instruction.Reference;
                     if (reference is null ||
-                        !string.Equals(reference.AssemblyName, semanticWorld.Assembly.Name, StringComparison.Ordinal))
+                        !IsInternalAssembly(semanticWorld, reference.AssemblyName))
                     {
                         continue;
                     }
@@ -186,6 +285,97 @@ public sealed class LinkerStage
                 pendingTypeIds.Enqueue(type.DefinitionSubjectId);
             }
         }
+    }
+
+    private static void IncludeThreadStaticFieldClosure(
+        SemanticWorldModel semanticWorld,
+        IReadOnlySet<string> reachableMethodIds,
+        HashSet<string> reachableFieldIds,
+        HashSet<string> reachableTypeIds)
+    {
+        var methodCapabilities = semanticWorld.CapabilityBundles.Methods
+            .ToDictionary(bundle => bundle.SubjectId, bundle => bundle.Capabilities, StringComparer.Ordinal);
+        var requiresThreadStaticClosure = reachableMethodIds.Any(subjectId =>
+            methodCapabilities.TryGetValue(subjectId, out var capabilities) &&
+            capabilities.Contains("requires-thread-static-storage", StringComparer.Ordinal));
+        if (!requiresThreadStaticClosure)
+        {
+            return;
+        }
+
+        foreach (var field in semanticWorld.Fields.Where(candidate => candidate.IsThreadStatic))
+        {
+            reachableFieldIds.Add(field.SubjectId);
+            reachableTypeIds.Add(field.DeclaringTypeSubjectId);
+        }
+    }
+
+    private static void IncludeAsyncStateMachineClosure(
+        SemanticWorldModel semanticWorld,
+        IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
+        IReadOnlyDictionary<string, ManagedFieldModel> fieldMap,
+        IReadOnlyDictionary<string, ManagedPropertyModel> propertyMap,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
+        HashSet<string> reachableMethodIds,
+        HashSet<string> reachableFieldIds,
+        HashSet<string> reachablePropertyIds,
+        HashSet<string> reachableTypeIds)
+    {
+        var methodCapabilities = semanticWorld.CapabilityBundles.Methods
+            .ToDictionary(bundle => bundle.SubjectId, bundle => bundle.Capabilities, StringComparer.Ordinal);
+        var requiresAsyncClosure = reachableMethodIds.Any(subjectId =>
+            methodCapabilities.TryGetValue(subjectId, out var capabilities) &&
+            (capabilities.Contains("requires-async-state-machine", StringComparer.Ordinal) ||
+             capabilities.Contains("requires-task-awaiter", StringComparer.Ordinal)));
+        if (!requiresAsyncClosure)
+        {
+            return;
+        }
+
+        var asyncTypeIds = semanticWorld.Types
+            .Where(IsCompilerGeneratedAsyncStateMachine)
+            .Select(type => type.SubjectId)
+            .ToHashSet(StringComparer.Ordinal);
+        if (asyncTypeIds.Count == 0)
+        {
+            return;
+        }
+
+        foreach (var asyncTypeId in asyncTypeIds)
+        {
+            reachableTypeIds.Add(asyncTypeId);
+        }
+
+        foreach (var field in semanticWorld.Fields.Where(candidate => asyncTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        {
+            reachableFieldIds.Add(field.SubjectId);
+        }
+
+        foreach (var property in semanticWorld.Properties.Where(candidate => asyncTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        {
+            reachablePropertyIds.Add(property.SubjectId);
+        }
+
+        var pendingMethods = new Queue<ManagedMethodModel>();
+        foreach (var method in semanticWorld.Methods.Where(candidate => asyncTypeIds.Contains(candidate.DeclaringTypeSubjectId)))
+        {
+            if (!reachableMethodIds.Contains(method.SubjectId))
+            {
+                pendingMethods.Enqueue(method);
+            }
+        }
+
+        ExpandReachableMethods(
+            semanticWorld,
+            methodMap,
+            fieldMap,
+            propertyMap,
+            typeMap,
+            pendingMethods,
+            reachableMethodIds,
+            reachableFieldIds,
+            reachablePropertyIds,
+            reachableTypeIds);
     }
 
     private static void IncludeReflectionQuerySurface(
@@ -272,7 +462,7 @@ public sealed class LinkerStage
                 var reference = instruction.Reference;
                 if (!string.Equals(instruction.Op, "ldtoken", StringComparison.Ordinal) ||
                     reference is null ||
-                    !string.Equals(reference.AssemblyName, semanticWorld.Assembly.Name, StringComparison.Ordinal) ||
+                    !IsInternalAssembly(semanticWorld, reference.AssemblyName) ||
                     !string.Equals(reference.SubjectKind, "type", StringComparison.Ordinal) ||
                     !typeMap.ContainsKey(reference.SubjectId))
                 {
@@ -298,7 +488,9 @@ public sealed class LinkerStage
             {
                 SubjectKind = "type",
                 SubjectId = type.SubjectId,
-                Reason = "closed-world-type",
+                Reason = IsCompilerGeneratedAsyncStateMachine(type)
+                    ? "compiler-generated-async-state-machine"
+                    : "closed-world-type",
             })
             .Concat(
                 orderedMethods.Select(method => new ClosedWorldSpecializationFact
@@ -326,15 +518,18 @@ public sealed class LinkerStage
                             candidate.Instructions,
                             candidate.index,
                             declaredTargetSubjectId) ?? declaredTargetSubjectId;
+                        var interfaceDispatch = IsInterfaceDispatchTarget(semanticWorld.Types, declaredTargetSubjectId);
                         var devirtualized = !string.Equals(resolvedTargetSubjectId, declaredTargetSubjectId, StringComparison.Ordinal)
-                            || declaredTargetSubjectId.StartsWith($"{semanticWorld.Assembly.Name}/", StringComparison.Ordinal);
+                            || IsInternalSubjectId(semanticWorld, declaredTargetSubjectId);
 
                         return new DispatchFact
                         {
                             MethodSubjectId = method.SubjectId,
-                            DispatchKind = devirtualized && !string.Equals(resolvedTargetSubjectId, declaredTargetSubjectId, StringComparison.Ordinal)
-                                ? "callvirt.devirtualized-direct"
-                                : "callvirt",
+                            DispatchKind = interfaceDispatch
+                                ? "callvirt.interface-runtime-helper"
+                                : devirtualized && !string.Equals(resolvedTargetSubjectId, declaredTargetSubjectId, StringComparison.Ordinal)
+                                    ? "callvirt.devirtualized-direct"
+                                    : "callvirt",
                             TargetSubjectId = resolvedTargetSubjectId,
                             Devirtualized = devirtualized,
                         };
@@ -387,6 +582,59 @@ public sealed class LinkerStage
         };
     }
 
+    private static PreserveDescriptorArtifact BuildPreserveDescriptor(
+        IReadOnlyList<ManagedTypeModel> orderedTypes,
+        IReadOnlyList<ManagedFieldModel> orderedFields,
+        IReadOnlyList<ManagedPropertyModel> orderedProperties,
+        IReadOnlyList<ManagedMethodModel> orderedMethods)
+    {
+        var entries = orderedTypes
+            .Where(type => type.IsPreserved)
+            .Select(type => new PreserveDescriptorEntry
+            {
+                SubjectKind = "type",
+                SubjectId = type.SubjectId,
+                Preserve = "all",
+                Reason = "preserve-attribute",
+            })
+            .Concat(
+                orderedFields
+                    .Where(field => field.IsPreserved)
+                    .Select(field => new PreserveDescriptorEntry
+                    {
+                        SubjectKind = "field",
+                        SubjectId = field.SubjectId,
+                        Preserve = "members",
+                        Reason = "preserve-attribute",
+                    }))
+            .Concat(
+                orderedProperties
+                    .Where(property => property.IsPreserved)
+                    .Select(property => new PreserveDescriptorEntry
+                    {
+                        SubjectKind = "property",
+                        SubjectId = property.SubjectId,
+                        Preserve = "members",
+                        Reason = "preserve-attribute",
+                    }))
+            .Concat(
+                orderedMethods
+                    .Where(method => method.IsPreserved)
+                    .Select(method => new PreserveDescriptorEntry
+                    {
+                        SubjectKind = "method",
+                        SubjectId = method.SubjectId,
+                        Preserve = "signature",
+                        Reason = "preserve-attribute",
+                    }))
+            .ToList();
+
+        return new PreserveDescriptorArtifact
+        {
+            Entries = entries,
+        };
+    }
+
     private static IReadOnlyList<DispatchFact> BuildDelegateDispatchFacts(
         IReadOnlyList<ManagedMethodModel> orderedMethods)
     {
@@ -416,6 +664,9 @@ public sealed class LinkerStage
             .SelectMany(method =>
             {
                 _ = HasThrowCatchFinallyShape(method) ? "throw-catch-finally" : null;
+                _ = HasNestedExceptionHandlerShape(method) ? "nested-throw-catch-finally" : null;
+                _ = HasUtf8StringMarshalShape(method) ? "utf8-string-marshal" : null;
+                _ = HasUnmanagedExportShape(method) ? "unmanaged-callers-only-export" : null;
                 return method.Body.ExceptionRegions.Select(region => new ExceptionFact
                 {
                     MethodSubjectId = method.SubjectId,
@@ -432,6 +683,50 @@ public sealed class LinkerStage
         return instructions.Any(instruction => string.Equals(instruction.Op, "throw", StringComparison.Ordinal)) &&
                method.Body.ExceptionRegions.Any(region => string.Equals(region.HandlingKind, "catch", StringComparison.Ordinal)) &&
                method.Body.ExceptionRegions.Any(region => string.Equals(region.HandlingKind, "finally", StringComparison.Ordinal));
+    }
+
+    private static bool HasNestedExceptionHandlerShape(ManagedMethodModel method)
+    {
+        var exceptionRegions = method.Body.ExceptionRegions;
+        for (var outerIndex = 0; outerIndex < exceptionRegions.Count; outerIndex++)
+        {
+            var outerRegion = exceptionRegions[outerIndex];
+            var outerTryEnd = outerRegion.TryOffset + outerRegion.TryLength;
+
+            for (var innerIndex = 0; innerIndex < exceptionRegions.Count; innerIndex++)
+            {
+                if (outerIndex == innerIndex)
+                {
+                    continue;
+                }
+
+                var innerRegion = exceptionRegions[innerIndex];
+                var innerTryEnd = innerRegion.TryOffset + innerRegion.TryLength;
+                if (outerRegion.TryOffset <= innerRegion.TryOffset &&
+                    innerTryEnd <= outerTryEnd &&
+                    (outerRegion.TryOffset != innerRegion.TryOffset || outerTryEnd != innerTryEnd))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private static bool HasUtf8StringMarshalShape(ManagedMethodModel method)
+    {
+        return method.Body.Blocks
+            .SelectMany(block => block.Instructions)
+            .Any(instruction =>
+                string.Equals(instruction.Callee, "System.Runtime.InteropServices.Marshal::StringToCoTaskMemUTF8(System.String)", StringComparison.Ordinal) ||
+                string.Equals(instruction.Callee, "System.Runtime.InteropServices.Marshal::PtrToStringUTF8(System.IntPtr)", StringComparison.Ordinal) ||
+                string.Equals(instruction.Callee, "System.Runtime.InteropServices.Marshal::FreeCoTaskMem(System.IntPtr)", StringComparison.Ordinal));
+    }
+
+    private static bool HasUnmanagedExportShape(ManagedMethodModel method)
+    {
+        return method.IsUnmanagedCallersOnly;
     }
 
     private static string? TryResolveDevirtualizedCallTarget(
@@ -526,7 +821,7 @@ public sealed class LinkerStage
                 foreach (var instruction in block.Instructions)
                 {
                     var reference = instruction.Reference;
-                    if (reference is null || string.Equals(reference.AssemblyName, semanticWorld.Assembly.Name, StringComparison.Ordinal))
+                    if (reference is null || IsInternalAssembly(semanticWorld, reference.AssemblyName))
                     {
                         continue;
                     }
@@ -637,6 +932,11 @@ public sealed class LinkerStage
 
     private static string ResolveDependencyReason(string subjectId)
     {
+        if (IsMonitorEnterExitSubjectId(subjectId))
+        {
+            return "monitor-enter-exit";
+        }
+
         return subjectId switch
         {
             "System.Private.CoreLib/System.Object::.ctor()" => "base-ctor",
@@ -650,8 +950,14 @@ public sealed class LinkerStage
             "System.Private.CoreLib/System.Type::GetMethod(System.String)" => "reflection-query",
             "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters()" => "reflection-query",
             "System.Private.CoreLib/System.Type::GetGenericTypeDefinition()" => "reflection-query",
-            _ => throw new NotSupportedException($"unsupported external dependency in Stage 3 linker: {subjectId}"),
+            _ => "external-call",
         };
+    }
+
+    private static bool IsMonitorEnterExitSubjectId(string subjectId)
+    {
+        return subjectId.Contains("System.Threading.Monitor::Enter(", StringComparison.Ordinal) ||
+               subjectId.Contains("System.Threading.Monitor::Exit(", StringComparison.Ordinal);
     }
 
     private static string ResolveLayoutDataKind(string typeName)
@@ -699,6 +1005,38 @@ public sealed class LinkerStage
         }
 
         return subjectId[..separatorIndex];
+    }
+
+    private static bool IsInterfaceDispatchTarget(
+        IReadOnlyList<ManagedTypeModel> types,
+        string subjectId)
+    {
+        var declaringTypeSubjectId = GetDeclaringTypeSubjectId(subjectId);
+        return types.Any(type =>
+            string.Equals(type.SubjectId, declaringTypeSubjectId, StringComparison.Ordinal) &&
+            type.IsInterface);
+    }
+
+    private static bool IsCompilerGeneratedAsyncStateMachine(ManagedTypeModel type)
+    {
+        return type.Name.Contains("d__", StringComparison.Ordinal);
+    }
+
+    private static bool IsInternalAssembly(SemanticWorldModel semanticWorld, string assemblyName)
+    {
+        return semanticWorld.Assemblies.Any(assembly =>
+            string.Equals(assembly.Name, assemblyName, StringComparison.Ordinal));
+    }
+
+    private static bool IsInternalSubjectId(SemanticWorldModel semanticWorld, string subjectId)
+    {
+        var separatorIndex = subjectId.IndexOf('/', StringComparison.Ordinal);
+        if (separatorIndex <= 0)
+        {
+            return false;
+        }
+
+        return IsInternalAssembly(semanticWorld, subjectId[..separatorIndex]);
     }
 }
 

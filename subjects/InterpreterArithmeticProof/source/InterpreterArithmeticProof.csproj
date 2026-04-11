@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>Exe</OutputType>
+    <UseAppHost>false</UseAppHost>
+    <BaseOutputPath>..\..\..\artifacts\.tmp-subject-build\InterpreterArithmeticProof\bin\</BaseOutputPath>
+    <AssemblyName>InterpreterArithmeticProof</AssemblyName>
+    <RootNamespace>InterpreterArithmeticProof</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="AotBridge\\**\\*.cs" />
+    <ProjectReference Include="AotBridge\\InterpreterArithmeticProof.AotBridge.csproj" />
+  </ItemGroup>
+</Project>

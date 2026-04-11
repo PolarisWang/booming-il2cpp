@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\managed\Chaos.IL2CPP.HotUpdate\Chaos.IL2CPP.HotUpdate.csproj" />
+  </ItemGroup>
+</Project>

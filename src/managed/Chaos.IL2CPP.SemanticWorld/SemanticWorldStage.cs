@@ -25,23 +25,28 @@ public sealed class SemanticWorldStage
 
     public string Name => "SemanticWorld";
 
-    public SemanticWorldModel Build(LoadedAssemblyModel loadedAssembly)
+    public SemanticWorldModel Build(LoadedWorldModel loadedWorld)
     {
-        var canonicalMethods = loadedAssembly.Methods
+        var canonicalMethods = loadedWorld.Methods
             .Select(CanonicalizeMethodBody)
             .ToList();
-        var canonicalSubjects = BuildCanonicalSubjects(loadedAssembly);
-        var semanticShapes = BuildSemanticShapes(loadedAssembly, canonicalMethods);
-        var capabilityBundles = BuildCapabilityBundles(loadedAssembly.Assembly.Name, canonicalMethods);
+        var canonicalSubjects = BuildCanonicalSubjects(loadedWorld);
+        var semanticShapes = BuildSemanticShapes(loadedWorld, canonicalMethods);
+        var capabilityBundles = BuildCapabilityBundles(
+            loadedWorld.Assemblies.Select(assembly => assembly.Assembly.Name).ToHashSet(StringComparer.Ordinal),
+            loadedWorld.Types.ToDictionary(type => type.SubjectId, StringComparer.Ordinal),
+            loadedWorld.Fields.ToDictionary(field => field.SubjectId, StringComparer.Ordinal),
+            canonicalMethods);
 
         return new SemanticWorldModel
         {
-            InputAssemblyPath = loadedAssembly.InputAssemblyPath,
-            Assembly = loadedAssembly.Assembly,
-            EntryPointSubjectId = loadedAssembly.EntryPointSubjectId,
-            Types = loadedAssembly.Types,
-            Fields = loadedAssembly.Fields,
-            Properties = loadedAssembly.Properties,
+            InputAssemblyPath = loadedWorld.InputAssemblyPath,
+            Assembly = loadedWorld.Assembly,
+            Assemblies = loadedWorld.Assemblies.Select(assembly => assembly.Assembly).ToList(),
+            EntryPointSubjectId = loadedWorld.EntryPointSubjectId,
+            Types = loadedWorld.Types,
+            Fields = loadedWorld.Fields,
+            Properties = loadedWorld.Properties,
             Methods = canonicalMethods,
             CanonicalSubjects = canonicalSubjects,
             SemanticShapes = semanticShapes,
@@ -49,31 +54,31 @@ public sealed class SemanticWorldStage
         };
     }
 
-    private static CanonicalSubjectsModel BuildCanonicalSubjects(LoadedAssemblyModel loadedAssembly)
+    private static CanonicalSubjectsModel BuildCanonicalSubjects(LoadedWorldModel loadedWorld)
     {
         return new CanonicalSubjectsModel
         {
             Subjects =
             [
-                .. loadedAssembly.Types.Select(type => new CanonicalSubjectModel
+                .. loadedWorld.Types.Select(type => new CanonicalSubjectModel
                 {
                     SubjectKind = "type",
                     SubjectId = type.SubjectId,
                     CanonicalSubjectId = type.SubjectId,
                 }),
-                .. loadedAssembly.Fields.Select(field => new CanonicalSubjectModel
+                .. loadedWorld.Fields.Select(field => new CanonicalSubjectModel
                 {
                     SubjectKind = "field",
                     SubjectId = field.SubjectId,
                     CanonicalSubjectId = field.SubjectId,
                 }),
-                .. loadedAssembly.Properties.Select(property => new CanonicalSubjectModel
+                .. loadedWorld.Properties.Select(property => new CanonicalSubjectModel
                 {
                     SubjectKind = "property",
                     SubjectId = property.SubjectId,
                     CanonicalSubjectId = property.SubjectId,
                 }),
-                .. loadedAssembly.Methods.Select(method => new CanonicalSubjectModel
+                .. loadedWorld.Methods.Select(method => new CanonicalSubjectModel
                 {
                     SubjectKind = "method",
                     SubjectId = method.SubjectId,
@@ -90,22 +95,22 @@ public sealed class SemanticWorldStage
     }
 
     private static SemanticShapesModel BuildSemanticShapes(
-        LoadedAssemblyModel loadedAssembly,
+        LoadedWorldModel loadedWorld,
         IReadOnlyList<ManagedMethodModel> canonicalMethods)
     {
         return new SemanticShapesModel
         {
-            Types = loadedAssembly.Types.Select(type => new TypeShapeModel
+            Types = loadedWorld.Types.Select(type => new TypeShapeModel
             {
                 SubjectId = type.SubjectId,
                 Kind = "type-definition",
             }).ToList(),
-            Fields = loadedAssembly.Fields.Select(field => new FieldShapeModel
+            Fields = loadedWorld.Fields.Select(field => new FieldShapeModel
             {
                 SubjectId = field.SubjectId,
                 Kind = "field-definition",
             }).ToList(),
-            Properties = loadedAssembly.Properties.Select(property => new PropertyShapeModel
+            Properties = loadedWorld.Properties.Select(property => new PropertyShapeModel
             {
                 SubjectId = property.SubjectId,
                 Kind = "property-definition",
@@ -120,7 +125,9 @@ public sealed class SemanticWorldStage
     }
 
     private static CapabilityBundlesModel BuildCapabilityBundles(
-        string assemblyName,
+        IReadOnlySet<string> internalAssemblyNames,
+        IReadOnlyDictionary<string, ManagedTypeModel> types,
+        IReadOnlyDictionary<string, ManagedFieldModel> fields,
         IReadOnlyList<ManagedMethodModel> canonicalMethods)
     {
         var importMethods = canonicalMethods
@@ -132,7 +139,7 @@ public sealed class SemanticWorldStage
             .Select(method => new MethodCapabilityBundleModel
             {
                 SubjectId = method.SubjectId,
-                Capabilities = ResolveMethodCapabilities(assemblyName, method, importMethods),
+                Capabilities = ResolveMethodCapabilities(internalAssemblyNames, types, fields, method, importMethods),
             })
             .ToList();
 
@@ -254,19 +261,33 @@ public sealed class SemanticWorldStage
     }
 
     private static IReadOnlyList<string> ResolveMethodCapabilities(
-        string assemblyName,
+        IReadOnlySet<string> internalAssemblyNames,
+        IReadOnlyDictionary<string, ManagedTypeModel> types,
+        IReadOnlyDictionary<string, ManagedFieldModel> fields,
         ManagedMethodModel method,
         IReadOnlySet<string> importMethods)
     {
         var capabilities = new HashSet<string>(StringComparer.Ordinal);
+
+        if (IsCompilerGeneratedAsyncStateMachineMethod(method))
+        {
+            capabilities.Add("requires-async-state-machine");
+        }
 
         if (method.Import is not null)
         {
             capabilities.Add("requires-imported-call");
         }
 
+        if (method.IsUnmanagedCallersOnly)
+        {
+            capabilities.Add("requires-unmanaged-callers-only-export");
+        }
+
         foreach (var instruction in method.Body.Blocks.SelectMany(block => block.Instructions))
         {
+            var reference = instruction.Reference;
+
             switch (instruction.Op)
             {
                 case "ldftn":
@@ -277,8 +298,21 @@ public sealed class SemanticWorldStage
                 case "stfld":
                     capabilities.Add("uses-instance-field-state");
                     break;
+                case "ldsfld":
+                case "stsfld":
+                    if (IsThreadStaticField(fields, reference?.SubjectId))
+                    {
+                        capabilities.Add("requires-thread-static-storage");
+                    }
+
+                    break;
                 case "callvirt":
                     capabilities.Add("uses-virtual-call-site");
+                    if (IsInterfaceDispatchCallee(types, instruction.Callee))
+                    {
+                        capabilities.Add("uses-interface-call-site");
+                    }
+
                     if (IsDelegateInvokeCallee(instruction.Callee))
                     {
                         capabilities.Add("requires-delegate-invoke");
@@ -304,6 +338,21 @@ public sealed class SemanticWorldStage
 
             if (string.IsNullOrEmpty(instruction.Callee))
             {
+                if (IsThreadStaticField(fields, reference?.SubjectId))
+                {
+                    capabilities.Add("requires-thread-static-storage");
+                }
+
+                if (IsAsyncStateMachineSurface(null, reference))
+                {
+                    capabilities.Add("requires-async-state-machine");
+                }
+
+                if (IsTaskAwaiterSurface(null, reference))
+                {
+                    capabilities.Add("requires-task-awaiter");
+                }
+
                 continue;
             }
 
@@ -327,9 +376,28 @@ public sealed class SemanticWorldStage
                     break;
             }
 
-            var reference = instruction.Reference;
+            if (IsAsyncStateMachineSurface(instruction.Callee, reference))
+            {
+                capabilities.Add("requires-async-state-machine");
+            }
+
+            if (IsTaskAwaiterSurface(instruction.Callee, reference))
+            {
+                capabilities.Add("requires-task-awaiter");
+            }
+
+            if (IsUtf8StringMarshalSurface(instruction.Callee, reference))
+            {
+                capabilities.Add("requires-utf8-string-marshaling");
+            }
+
+            if (IsMonitorEnterExitSurface(instruction.Callee, reference))
+            {
+                capabilities.Add("requires-monitor-enter-exit");
+            }
+
             if (reference is not null &&
-                string.Equals(reference.AssemblyName, assemblyName, StringComparison.Ordinal) &&
+                internalAssemblyNames.Contains(reference.AssemblyName) &&
                 importMethods.Contains(reference.SubjectId))
             {
                 capabilities.Add("requires-imported-call");
@@ -345,15 +413,146 @@ public sealed class SemanticWorldStage
             }
         }
 
+        if (HasNestedExceptionHandlerShape(method.Body.ExceptionRegions))
+        {
+            capabilities.Add("requires-nested-exception-handler");
+        }
+
         return capabilities
             .OrderBy(capability => capability, StringComparer.Ordinal)
             .ToList();
+    }
+
+    private static bool HasNestedExceptionHandlerShape(
+        IReadOnlyList<ManagedExceptionRegionModel> exceptionRegions)
+    {
+        for (var outerIndex = 0; outerIndex < exceptionRegions.Count; outerIndex++)
+        {
+            var outerRegion = exceptionRegions[outerIndex];
+            var outerTryEnd = outerRegion.TryOffset + outerRegion.TryLength;
+
+            for (var innerIndex = 0; innerIndex < exceptionRegions.Count; innerIndex++)
+            {
+                if (outerIndex == innerIndex)
+                {
+                    continue;
+                }
+
+                var innerRegion = exceptionRegions[innerIndex];
+                var innerTryEnd = innerRegion.TryOffset + innerRegion.TryLength;
+                if (outerRegion.TryOffset <= innerRegion.TryOffset &&
+                    innerTryEnd <= outerTryEnd &&
+                    (outerRegion.TryOffset != innerRegion.TryOffset || outerTryEnd != innerTryEnd))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     private static bool IsDelegateInvokeCallee(string? subjectId)
     {
         return !string.IsNullOrWhiteSpace(subjectId) &&
                subjectId.Contains("::Invoke(", StringComparison.Ordinal);
+    }
+
+    private static bool IsCompilerGeneratedAsyncStateMachineMethod(ManagedMethodModel method)
+    {
+        return method.DeclaringTypeDisplayName.Contains("d__", StringComparison.Ordinal) &&
+               (string.Equals(method.Name, "MoveNext", StringComparison.Ordinal) ||
+                string.Equals(method.Name, "SetStateMachine", StringComparison.Ordinal));
+    }
+
+    private static bool IsAsyncStateMachineSurface(
+        string? callee,
+        ManagedInstructionReference? reference)
+    {
+        return ContainsAsyncSurfaceMarker(callee) ||
+               ContainsAsyncSurfaceMarker(reference?.SubjectId);
+    }
+
+    private static bool IsTaskAwaiterSurface(
+        string? callee,
+        ManagedInstructionReference? reference)
+    {
+        return ContainsTaskAwaiterMarker(callee) ||
+               ContainsTaskAwaiterMarker(reference?.SubjectId);
+    }
+
+    private static bool ContainsAsyncSurfaceMarker(string? subjectId)
+    {
+        return !string.IsNullOrWhiteSpace(subjectId) &&
+               (subjectId.Contains("IAsyncStateMachine", StringComparison.Ordinal) ||
+                subjectId.Contains("AsyncTaskMethodBuilder", StringComparison.Ordinal));
+    }
+
+    private static bool ContainsTaskAwaiterMarker(string? subjectId)
+    {
+        return !string.IsNullOrWhiteSpace(subjectId) &&
+               (subjectId.Contains("TaskAwaiter", StringComparison.Ordinal) ||
+                subjectId.Contains("::GetAwaiter(", StringComparison.Ordinal) ||
+                subjectId.Contains("::GetResult(", StringComparison.Ordinal));
+    }
+
+    private static bool IsInterfaceDispatchCallee(
+        IReadOnlyDictionary<string, ManagedTypeModel> types,
+        string? subjectId)
+    {
+        if (string.IsNullOrWhiteSpace(subjectId))
+        {
+            return false;
+        }
+
+        var separatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
+        if (separatorIndex <= 0)
+        {
+            return false;
+        }
+
+        var declaringTypeSubjectId = subjectId[..separatorIndex];
+        return types.TryGetValue(declaringTypeSubjectId, out var declaringType) && declaringType.IsInterface;
+    }
+
+    private static bool IsThreadStaticField(
+        IReadOnlyDictionary<string, ManagedFieldModel> fields,
+        string? subjectId)
+    {
+        return !string.IsNullOrWhiteSpace(subjectId) &&
+               fields.TryGetValue(subjectId, out var field) &&
+               field.IsThreadStatic;
+    }
+
+    private static bool IsMonitorEnterExitSurface(
+        string? callee,
+        ManagedInstructionReference? reference)
+    {
+        return ContainsMonitorSurfaceMarker(callee) ||
+               ContainsMonitorSurfaceMarker(reference?.SubjectId);
+    }
+
+    private static bool IsUtf8StringMarshalSurface(
+        string? callee,
+        ManagedInstructionReference? reference)
+    {
+        return ContainsUtf8MarshalSurfaceMarker(callee) ||
+               ContainsUtf8MarshalSurfaceMarker(reference?.SubjectId);
+    }
+
+    private static bool ContainsMonitorSurfaceMarker(string? subjectId)
+    {
+        return !string.IsNullOrWhiteSpace(subjectId) &&
+               (subjectId.Contains("System.Threading.Monitor::Enter(", StringComparison.Ordinal) ||
+                subjectId.Contains("System.Threading.Monitor::Exit(", StringComparison.Ordinal));
+    }
+
+    private static bool ContainsUtf8MarshalSurfaceMarker(string? subjectId)
+    {
+        return !string.IsNullOrWhiteSpace(subjectId) &&
+               (subjectId.Contains("System.Runtime.InteropServices.Marshal::StringToCoTaskMemUTF8(", StringComparison.Ordinal) ||
+                subjectId.Contains("System.Runtime.InteropServices.Marshal::PtrToStringUTF8(", StringComparison.Ordinal) ||
+                subjectId.Contains("System.Runtime.InteropServices.Marshal::FreeCoTaskMem(", StringComparison.Ordinal));
     }
 
     private static bool IsStaticForwarder(ManagedMethodModel method)

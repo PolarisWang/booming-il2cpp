@@ -1,0 +1,129 @@
+namespace Chaos.IL2CPP.HotUpdate;
+
+public sealed class BridgeGenerator
+{
+    public BridgePlan Generate(BridgeGenerationRequest request)
+    {
+        ArgumentNullException.ThrowIfNull(request);
+
+        return new BridgePlan
+        {
+            AotToHotUpdate = request.AotToHotUpdate
+                .Select(spec => new AotToHotUpdateBridgeEntry
+                {
+                    BridgeId = RequireValue(spec.BridgeId, nameof(spec.BridgeId)),
+                    HotUpdateSubjectId = RequireValue(spec.HotUpdateSubjectId, nameof(spec.HotUpdateSubjectId)),
+                })
+                .ToList(),
+            HotUpdateToAot = request.HotUpdateToAot
+                .Select(spec => new HotUpdateToAotBridgeEntry
+                {
+                    BridgeId = RequireValue(spec.BridgeId, nameof(spec.BridgeId)),
+                    AotSubjectId = RequireValue(spec.AotSubjectId, nameof(spec.AotSubjectId)),
+                })
+                .ToList(),
+            HotUpdateToEngine = request.HotUpdateToEngine
+                .Select(spec => new HotUpdateToEngineBridgeEntry
+                {
+                    BridgeId = RequireValue(spec.BridgeId, nameof(spec.BridgeId)),
+                    EngineSubjectId = RequireValue(spec.EngineSubjectId, nameof(spec.EngineSubjectId)),
+                })
+                .ToList(),
+            DelegateWrappers = request.DelegateWrappers
+                .Select(spec => new DelegateWrapperEntry
+                {
+                    WrapperId = RequireValue(spec.WrapperId, nameof(spec.WrapperId)),
+                    HotUpdateSubjectId = RequireValue(spec.HotUpdateSubjectId, nameof(spec.HotUpdateSubjectId)),
+                })
+                .ToList(),
+        };
+    }
+
+    private static string RequireValue(string? value, string parameterName)
+    {
+        if (!string.IsNullOrWhiteSpace(value))
+        {
+            return value;
+        }
+
+        throw new InvalidOperationException($"bridge generation requires '{parameterName}'.");
+    }
+}
+
+public sealed record BridgeGenerationRequest
+{
+    public IReadOnlyList<AotToHotUpdateBridgeSpec> AotToHotUpdate { get; init; } = [];
+
+    public IReadOnlyList<HotUpdateToAotBridgeSpec> HotUpdateToAot { get; init; } = [];
+
+    public IReadOnlyList<HotUpdateToEngineBridgeSpec> HotUpdateToEngine { get; init; } = [];
+
+    public IReadOnlyList<DelegateWrapperSpec> DelegateWrappers { get; init; } = [];
+}
+
+public sealed record AotToHotUpdateBridgeSpec
+{
+    public required string BridgeId { get; init; }
+
+    public required string HotUpdateSubjectId { get; init; }
+}
+
+public sealed record HotUpdateToAotBridgeSpec
+{
+    public required string BridgeId { get; init; }
+
+    public required string AotSubjectId { get; init; }
+}
+
+public sealed record HotUpdateToEngineBridgeSpec
+{
+    public required string BridgeId { get; init; }
+
+    public required string EngineSubjectId { get; init; }
+}
+
+public sealed record DelegateWrapperSpec
+{
+    public required string WrapperId { get; init; }
+
+    public required string HotUpdateSubjectId { get; init; }
+}
+
+public sealed record BridgePlan
+{
+    public required IReadOnlyList<AotToHotUpdateBridgeEntry> AotToHotUpdate { get; init; }
+
+    public required IReadOnlyList<HotUpdateToAotBridgeEntry> HotUpdateToAot { get; init; }
+
+    public required IReadOnlyList<HotUpdateToEngineBridgeEntry> HotUpdateToEngine { get; init; }
+
+    public required IReadOnlyList<DelegateWrapperEntry> DelegateWrappers { get; init; }
+}
+
+public sealed record AotToHotUpdateBridgeEntry
+{
+    public required string BridgeId { get; init; }
+
+    public required string HotUpdateSubjectId { get; init; }
+}
+
+public sealed record HotUpdateToAotBridgeEntry
+{
+    public required string BridgeId { get; init; }
+
+    public required string AotSubjectId { get; init; }
+}
+
+public sealed record HotUpdateToEngineBridgeEntry
+{
+    public required string BridgeId { get; init; }
+
+    public required string EngineSubjectId { get; init; }
+}
+
+public sealed record DelegateWrapperEntry
+{
+    public required string WrapperId { get; init; }
+
+    public required string HotUpdateSubjectId { get; init; }
+}

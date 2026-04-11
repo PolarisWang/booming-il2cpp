@@ -95,7 +95,7 @@ class Phase4MainlineFeaturePackOnboardingTests(unittest.TestCase):
 
         self.assertIn("CHAOS_SUBJECT_PROOF_ROOT", cmake_source)
         self.assertIn("add_subdirectory(\"${CHAOS_SUBJECT_PROOF_ROOT}\"", cmake_source)
-        self.assertIn("-DCHAOS_SUBJECT_PROOF_ROOT=", workers_source)
+        self.assertIn('proof_root = repo_root / "subjects" / str(selection["subjectId"]) / "validation" / "proof" / "native-reference"', workers_source)
 
     def test_mainline_feature_pack_manifest_and_tree_are_realized(self) -> None:
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))

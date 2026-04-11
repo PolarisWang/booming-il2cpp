@@ -30,7 +30,17 @@ def discover_subject_manifests(repo_root: Path) -> list[Path]:
     subject_root = repo_root / "subjects"
     if not subject_root.is_dir():
         return []
-    return sorted(subject_root.rglob(SUBJECT_MANIFEST_NAME))
+
+    manifest_paths: list[Path] = []
+    for candidate in subject_root.iterdir():
+        if not candidate.is_dir():
+            continue
+
+        manifest_path = candidate / SUBJECT_MANIFEST_NAME
+        if manifest_path.is_file():
+            manifest_paths.append(manifest_path)
+
+    return sorted(manifest_paths)
 
 
 def load_subject_manifest(repo_root: Path, subject_id: str) -> dict[str, Any]:

@@ -9,5 +9,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
 
-add_library(ios_packaging_smoke STATIC smoke_entry.mm)
+add_library(
+    ios_packaging_smoke
+    STATIC
+    smoke_entry.mm
+    "${REPO_ROOT}/src/mobile/shared/host_main.cpp"
+    "${REPO_ROOT}/src/mobile/shared/result_reporter.cpp"
+)
 target_compile_features(ios_packaging_smoke PRIVATE cxx_std_17)
+target_include_directories(ios_packaging_smoke PRIVATE "${REPO_ROOT}/src/mobile/shared")

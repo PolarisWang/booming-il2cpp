@@ -1,0 +1,153 @@
+#include "{{ include_header }}"
+#include "engine_bridge.h"
+#include "runtime_core.h"
+
+#include <cstdint>
+#include <cstring>
+
+namespace chaos::il2cpp::generated {
+
+namespace {
+
+struct HostProofTrace {
+    int init_count = 0;
+    int shutdown_count = 0;
+    int callback_count = 0;
+    bool on_main_thread = true;
+    bool callback_matched = true;
+};
+
+void RecordLifecyclePhase(const char* phase_utf8, void* user_data) {
+    auto* trace = static_cast<HostProofTrace*>(user_data);
+    if (trace == nullptr || phase_utf8 == nullptr) {
+        return;
+    }
+
+    if (std::strcmp(phase_utf8, "init") == 0) {
+        trace->init_count++;
+    } else if (std::strcmp(phase_utf8, "shutdown") == 0) {
+        trace->shutdown_count++;
+    }
+
+    trace->on_main_thread = trace->on_main_thread && chaos::il2cpp::runtime_core::IsMainThreadLane();
+}
+
+engine_status_t RecordDispatchPayload(
+    const char* callback_name_utf8,
+    const void* payload,
+    size_t payload_size,
+    void* user_data) {
+    auto* trace = static_cast<HostProofTrace*>(user_data);
+    constexpr const char* kExpectedCallbackName = "host-proof-dispatch";
+    constexpr const char* kExpectedPayload = "engine-host-proof-dispatch";
+
+    if (trace == nullptr || callback_name_utf8 == nullptr || payload == nullptr) {
+        return ENGINE_STATUS_INVALID_ARGUMENT;
+    }
+
+    const size_t expected_payload_size = std::strlen(kExpectedPayload);
+    trace->callback_count++;
+    trace->callback_matched =
+        std::strcmp(callback_name_utf8, kExpectedCallbackName) == 0 &&
+        payload_size == expected_payload_size &&
+        std::memcmp(payload, kExpectedPayload, expected_payload_size) == 0 &&
+        trace->callback_matched;
+    return trace->callback_matched ? ENGINE_STATUS_OK : ENGINE_STATUS_INTERNAL_ERROR;
+}
+
+bool MatchesExpectedLifecycle(const HostProofTrace& trace, int expected_iterations) {
+    return trace.init_count == expected_iterations
+        && trace.shutdown_count == expected_iterations
+        && trace.callback_count == expected_iterations
+        && trace.on_main_thread
+        && trace.callback_matched;
+}
+
+}  // namespace
+
+int32_t {{ native_reference_function_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args) {
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+
+    constexpr int kStressIterations = 1000;
+    constexpr engine_object_ref_t kObjectRef = 7u;
+    constexpr const char* kDispatchPayload = "engine-host-proof-dispatch";
+
+    HostProofTrace trace = {};
+    if (!chaos::il2cpp::runtime_core::RegisterEngineLifecycleCallback("init", &RecordLifecyclePhase, &trace)) {
+        return 1;
+    }
+
+    if (!chaos::il2cpp::runtime_core::RegisterEngineLifecycleCallback("shutdown", &RecordLifecyclePhase, &trace)) {
+        return 1;
+    }
+
+    for (int iteration = 0; iteration < kStressIterations; iteration++) {
+        engine_runtime_context_t* engine_runtime = nullptr;
+        engine_init_params_t init_params = {};
+        init_params.struct_size = sizeof(init_params);
+        init_params.host_name_utf8 = "engine-host-proof";
+
+        if (engine_init(&engine_runtime, &init_params) != ENGINE_STATUS_OK || engine_runtime == nullptr) {
+            return 1;
+        }
+
+        if (engine_retain_object(engine_runtime, kObjectRef, ENGINE_HANDLE_KIND_STRONG) != ENGINE_STATUS_OK) {
+            engine_shutdown(engine_runtime);
+            return 1;
+        }
+
+        if (engine_transfer_ownership(engine_runtime, kObjectRef, "managed-proof", "engine-host-proof") != ENGINE_STATUS_OK) {
+            engine_shutdown(engine_runtime);
+            return 1;
+        }
+
+        engine_callback_id_t callback_id = 0u;
+        if (engine_register_callback(
+                engine_runtime,
+                "host-proof-dispatch",
+                &RecordDispatchPayload,
+                &trace,
+                &callback_id) != ENGINE_STATUS_OK
+            || callback_id == 0u) {
+            engine_shutdown(engine_runtime);
+            return 1;
+        }
+
+        if (engine_dispatch_callback(
+                engine_runtime,
+                callback_id,
+                kDispatchPayload,
+                std::strlen(kDispatchPayload)) != ENGINE_STATUS_OK) {
+            engine_shutdown(engine_runtime);
+            return 1;
+        }
+
+        if (engine_release_object(engine_runtime, kObjectRef, ENGINE_HANDLE_KIND_STRONG) != ENGINE_STATUS_OK) {
+            engine_shutdown(engine_runtime);
+            return 1;
+        }
+
+        engine_shutdown(engine_runtime);
+    }
+
+    if (!MatchesExpectedLifecycle(trace, kStressIterations)) {
+        return 1;
+    }
+
+    return chaos::il2cpp::runtime_core::EngineLogWrite("host-proof", {{ expected_output_literal }});
+}
+
+}  // namespace chaos::il2cpp::generated

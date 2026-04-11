@@ -1,11 +1,11 @@
 ---
 task_id: 20260409-10-total-solution-and-ios-hot-update-analysis
-title: 完整 IL2CPP 总方案与 iOS 热更分析
+title: 完整 IL2CPP 总方案与 iOS 热更新分析
 task_type: roadmap
 lifecycle_status: in_progress
 phase: roadmap
 created_at: 2026-04-09 23:20:00 +08:00
-updated_at: 2026-04-11 10:00:00 +08:00
+updated_at: 2026-04-11 19:10:21 +08:00
 current_dir: docs/dev/in-progress/20260409-10-total-solution-and-ios-hot-update-analysis
 parent_task_id:
 source_task_id:
@@ -23,33 +23,33 @@ active: false
 
 ## 当前判断
 
-- current_focus: 已把这项工作升级为 roadmap，当前重点是冻结“先 contract、再 ingestion/completeness、再 mobile/engine、最后 hot update runtime”的阶段顺序，并明确每阶段的验证 gate。
-- why_now: 用户已经确认采用 `AOT 主线 + Interpreter 热更 + Metadata Supplement` 方案，下一步不能直接进入实现，必须先冻结跨阶段依赖与验证标准，避免大规模返工。
-- done_definition: roadmap 的阶段、依赖、验证方式和首批 child task 已冻结，后续可以从 `shared-contract-freeze` 与 `full-project-ingestion-and-build-graph` 开始派生子任务。
+- current_focus: 主任务已完成 Phase 0/1/2/3/5/6/7 的本地落地与证据化验证；当前仅剩 Phase 4 `20260411-05-mobile-runtime-host` 仍因缺少真实 Android NDK / emulator / device 与 macOS/Xcode 环境而挂起。
+- why_now: 本轮已把 Phase 7 的剩余解释器主线缺口收口为 same-assembly `CallVirt` 真实执行，以及真实 `ManagedExceptionRegionModel -> IRExceptionRegion` EH lowering / dispatcher minimal proof；因此父 roadmap 的主要阻塞重新回到 mobile runtime host 环境证据，而不是 desktop 主线实现缺口。
+- done_definition: roadmap 需要按顺序落地全部阶段，并补齐 mobile runtime host 的真实 Android/iOS 运行证据后，才能宣称 `AOT 主线 + Interpreter 热更新 + Metadata Supplement + Mobile Host` 总方案闭环。
 
 ## 最近摘要
 
-- 2026-04-09 23:10:00 +08:00: 复查当前主线 roadmap，确认当前仓库仍定位为 `performance-first core mainline`，而非完整 `C# -> C++ total solution`。
-- 2026-04-09 23:14:00 +08:00: 复查平台 gate，确认 iOS 当前仅冻结为 `compile/link/packaging`，尚未进入完整移动端 runtime 语义。
-- 2026-04-09 23:18:00 +08:00: 补充外部约束，确认 iOS 热更应优先按 `AOT + Interpreter` 思路设计，并需要额外考虑 App Store 2.5.2 带来的发行边界。
-- 2026-04-09 23:42:00 +08:00: 用户确认采用推荐架构，已新增 `roadmap-v1-01.md`，冻结 9 个阶段以及各阶段验证 gate。
-- 2026-04-11 10:00:00 +08:00: 架构审核完成，修订 design 和 roadmap：更新基线（Driver CLI 已重构）；Phase 0 收窄 engine ABI scope + 新增 version policy + IR 决策前置；Phase 1 标注 CLI 基础可复用；Phase 2 新增 linker + debug baseline；Phase 5 移除对 Phase 4 依赖；design 新增 Linker 和调试章节。
-- 2026-04-11 12:00:00 +08:00: 完成全部 9 Phase 的精细架构设计与执行计划，包含架构分层、执行条目（共 90+ 条）、验证产物、subject 验收方案、性能指标。
+- 2026-04-11 12:51:22 +08:00: `20260411-03-aot-runtime-completeness` 归档，`InterfaceDispatchProof` native perf baseline 与 `GoldenMultiProject` convert perf baseline 闭环。
+- 2026-04-11 13:59:04 +08:00: `20260411-04-engine-binding-contract` 归档，`EngineHostProof` 与 `HostEmbeddingLite` 形成 windows host proof + ownership baseline。
+- 2026-04-11 15:00:53 +08:00: `20260411-05-mobile-runtime-host` 因缺少真实 Android/macOS/Xcode 环境挂起，主线切换到 `20260411-06-hot-update-skeleton`。
+- 2026-04-11 15:21:32 +08:00: `20260411-06-hot-update-skeleton` 归档，热更新骨架最小 proof 闭环。
+- 2026-04-11 16:00:23 +08:00: `20260411-07-metadata-supplement-bridge` 归档，metadata supplement 与 bridge baseline 落地。
+- 2026-04-11 19:10:21 +08:00: `20260411-08-interpreter-mixed-execution` 补齐实例 receiver / same-assembly `CallVirt` 真实执行，以及真实 `ManagedExceptionRegionModel -> IRExceptionRegion` EH lowering / dispatcher minimal proof 后归档；父 roadmap 在当前环境内已无新的 desktop 主线缺口。
 
 ## 下一步
 
-- next_action: 优先创建两个 child task：`shared-contract-freeze` 与 `full-project-ingestion-and-build-graph`。前者冻结共享 ABI/identity/manifest，后者把输入层升级到真实 project graph。
+- next_action: 等待 Phase 4 `20260411-05-mobile-runtime-host` 所需 Android NDK / emulator / device 与 macOS/Xcode 环境恢复；环境到位后恢复 mobile host proof，并据此决定父 roadmap 的最终归档方式。
 - owner: codex
-- trigger: 用户指定先启动哪个 child task，或要求继续细化其中一个阶段。
+- trigger: 当前仓库内已没有新的解释器/热更新本地落地缺口，剩余阻塞为外部运行环境证据。
 
 ## 风险 / 阻塞
 
 ### risks
 
-- 如果把“完整 IL2CPP”与“热更”混成一条执行链，主线的 generated native 热路径会被动态装载需求反向污染。
-- 如果忽略 iOS 的发行边界，只讨论技术可行性，后期很可能在上架策略上返工。
-- 如果在 project ingestion 与 engine ABI 未冻结前就先做热更实现，metadata 和 bridge 会高概率返工。
+- 若在 Phase 4 真实 mobile runtime 证据缺失时提前宣称主任务完成，会把 desktop proof 错误外推成 mobile runtime 已闭环。
+- 当前 Phase 7 交付的是 proof-first baseline，而不是完整 production interpreter；但它已足以支撑父 roadmap 在 Windows 环境内的解释器主线收口。
 
 ### blockers
 
-- 当前没有实现阻塞，主要等待用户确认先启动哪个 child task。
+- Android 真实运行证据仍需要 NDK / emulator / device。
+- iOS 真实运行证据仍需要 macOS/Xcode。

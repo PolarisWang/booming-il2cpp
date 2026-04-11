@@ -95,6 +95,7 @@ class SubjectWorkersTests(unittest.TestCase):
         try:
             for relative_path in [
                 Path("src/native/runtime-core/runtime_core.cpp"),
+                Path("src/native/engine-bridge/engine_bridge.cpp"),
                 Path("src/native/bootstrap/bootstrap.cpp"),
                 Path("src/native/support/support.cpp"),
                 Path("subjects") / subject_id / "validation" / "proof" / "native-reference" / "main.cpp",
@@ -133,13 +134,16 @@ class SubjectWorkersTests(unittest.TestCase):
                     "/Od",
                     "/Zi",
                     f"/I{repo_root / 'contracts' / 'native' / 'v0'}",
+                    f"/I{repo_root / 'contracts' / 'engine' / 'v0'}",
                     f"/I{repo_root / 'src' / 'native' / 'runtime-core'}",
+                    f"/I{repo_root / 'src' / 'native' / 'engine-bridge'}",
                     f"/I{repo_root / 'src' / 'native' / 'bootstrap'}",
                     f"/I{repo_root / 'src' / 'native' / 'support'}",
                     f"/Fo{repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'obj'}\\",
                     f"/Fd{repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'obj' / 'chaos_subject_reference_proof.pdb'}",
                     f"/Fe{repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'out' / f'{WINDOWS_REFERENCE_BUILD_TARGET}.exe'}",
                     str(repo_root / "src" / "native" / "runtime-core" / "runtime_core.cpp"),
+                    str(repo_root / "src" / "native" / "engine-bridge" / "engine_bridge.cpp"),
                     str(repo_root / "src" / "native" / "bootstrap" / "bootstrap.cpp"),
                     str(repo_root / "src" / "native" / "support" / "support.cpp"),
                     str(repo_root / "subjects" / subject_id / "validation" / "proof" / "native-reference" / "main.cpp"),
@@ -221,6 +225,16 @@ class SubjectWorkersTests(unittest.TestCase):
                 ),
                 encoding="utf-8",
             )
+            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            subject_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "subjectId": subject_id,
+                    }
+                ),
+                encoding="utf-8",
+            )
 
             expected_host_input = (
                 repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "host-input" / f"{subject_id}.dll"
@@ -247,6 +261,7 @@ class SubjectWorkersTests(unittest.TestCase):
                     "metadata-registration.json",
                     "code-registration.json",
                     "optimization-facts.json",
+                    "preserve-descriptor.json",
                     "closure.manifest.json",
                 ]:
                     (expected_output_root / name).write_text("{}", encoding="utf-8")
@@ -275,6 +290,10 @@ class SubjectWorkersTests(unittest.TestCase):
             self.assertEqual(
                 subject_run_path(subject_id, run_id, "analysis", "analysis", "optimization-facts.json"),
                 manifest["artifacts"]["optimizationFactsPath"],
+            )
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "analysis", "preserve-descriptor.json"),
+                manifest["artifacts"]["preserveDescriptorPath"],
             )
 
             report = json.loads((repo_root / request["paths"]["reportPaths"][0]).read_text(encoding="utf-8"))
@@ -394,6 +413,10 @@ class SubjectWorkersTests(unittest.TestCase):
 
         repo_root = self._make_repo_root("windows-validate-only")
         try:
+            expected_android_host_root = (
+                repo_root / "subjects" / subject_id / "validation" / "mobile" / "android-host"
+            )
+            expected_android_host_root.mkdir(parents=True, exist_ok=True)
             with patch.object(workers_module.tooling_module, "detect_visual_studio_generator", return_value="Visual Studio 18 2026"):
                 with patch.object(workers_module.tooling_module, "detect_visual_studio_instance_spec", return_value=instance_spec):
                     with patch.object(workers_module.tooling_module, "allocate_cmake_binary_dir", return_value=expected_cmake_dir):
@@ -413,6 +436,7 @@ class SubjectWorkersTests(unittest.TestCase):
                     "-DROADMAP0_PRESET_TARGET=android-arm64-smoke",
                     "-DROADMAP0_TOOLCHAIN_VALIDATE_ONLY=ON",
                     "-DCHAOS_SUBJECT_VARIANT=CHECK",
+                    f"-DCHAOS_SUBJECT_ANDROID_HOST_ROOT={expected_android_host_root}",
                     f"-DCMAKE_TOOLCHAIN_FILE={repo_root / 'build' / 'toolchains' / 'android-arm64.cmake'}",
                     f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}",
                 ],
@@ -425,6 +449,77 @@ class SubjectWorkersTests(unittest.TestCase):
 
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
             self.assertEqual("CHECK", manifest["variant"])
+            self.assertEqual(expected_cmake_dir.as_posix(), manifest["cmakeBinaryDir"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_windows_validate_only_build_supports_ios_target_and_subject_scoped_host_root(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_windows_ios_validate_only")
+        subject_id = "FixtureIosValidateOnlySubject"
+        run_id = "fixture-run-ios-validate-only-001"
+        matrix_id = "windows-ios-check"
+        expected_cmake_dir = self._make_non_repo_path("cmake-builds", "ios-platform-gate-1234")
+        instance_spec = f"{self._make_non_repo_path('visual-studio', '18', 'Professional')},version=18.4.11626.88"
+
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "CHECK",
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "ios-arm64",
+                    "toolchainProfile": "ios-xcode",
+                },
+            },
+            "upstream": {
+                "generated": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("windows-ios-validate-only")
+        try:
+            expected_ios_host_root = repo_root / "subjects" / subject_id / "validation" / "mobile" / "ios-host"
+            expected_ios_host_root.mkdir(parents=True, exist_ok=True)
+            with patch.object(workers_module.tooling_module, "detect_visual_studio_generator", return_value="Visual Studio 18 2026"):
+                with patch.object(workers_module.tooling_module, "detect_visual_studio_instance_spec", return_value=instance_spec):
+                    with patch.object(workers_module.tooling_module, "allocate_cmake_binary_dir", return_value=expected_cmake_dir):
+                        with patch.object(workers_module, "_run_checked") as run_checked_mock:
+                            result = workers_module.run_build_target(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            self.assertEqual(
+                [
+                    "cmake",
+                    "-S",
+                    str(repo_root),
+                    "-B",
+                    str(expected_cmake_dir),
+                    "-G",
+                    "Visual Studio 18 2026",
+                    "-DROADMAP0_PRESET_TARGET=ios-arm64-packaging",
+                    "-DROADMAP0_TOOLCHAIN_VALIDATE_ONLY=ON",
+                    "-DCHAOS_SUBJECT_VARIANT=CHECK",
+                    f"-DCHAOS_SUBJECT_IOS_HOST_ROOT={expected_ios_host_root}",
+                    f"-DCMAKE_TOOLCHAIN_FILE={repo_root / 'build' / 'toolchains' / 'ios-arm64.cmake'}",
+                    f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}",
+                ],
+                run_checked_mock.call_args_list[0].args[0],
+            )
+            self.assertEqual(
+                ["cmake", "--build", str(expected_cmake_dir)],
+                run_checked_mock.call_args_list[1].args[0],
+            )
+
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("ios-arm64", manifest["targetPlatform"])
             self.assertEqual(expected_cmake_dir.as_posix(), manifest["cmakeBinaryDir"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)

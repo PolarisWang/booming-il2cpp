@@ -1,0 +1,22 @@
+{
+  "kind": "host-proof",
+  "status": "ok",
+  "artifactFileName": "host-proof.json",
+  "focusArea": "host-proof",
+  "capabilityIds": [
+    "engine.lifecycle.init",
+    "engine.lifecycle.shutdown",
+    "engine.callback.register",
+    "engine.callback.dispatch",
+    "engine.object.ownership.retain",
+    "engine.object.ownership.transfer",
+    "engine.object.ownership.release"
+  ],
+  "lifecycle": [
+    "init",
+    "shutdown"
+  ],
+  "callback": "ok",
+  "ownership": "ok",
+  "stressIterations": 1000
+}

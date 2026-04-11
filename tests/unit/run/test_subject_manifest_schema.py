@@ -371,6 +371,7 @@ class SubjectManifestSchemaTests(unittest.TestCase):
                 "EngineLogWriteLite",
                 "EngineObjectHandleLite",
                 "EngineLifecycleCallbackLite",
+                "EngineHostProof",
             },
             {str(record["subjectId"]) for record in records},
         )
@@ -379,6 +380,7 @@ class SubjectManifestSchemaTests(unittest.TestCase):
             "EngineLogWriteLite": "service-call",
             "EngineObjectHandleLite": "object-handle",
             "EngineLifecycleCallbackLite": "lifecycle-callback",
+            "EngineHostProof": "host-proof",
         }
 
         for record in records:

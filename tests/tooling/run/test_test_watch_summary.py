@@ -85,7 +85,8 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
 
         self.assertEqual("ok", result.status)
         self.assertIn("run-subject-1", result.text or "")
-        self.assertIn(f"ok: {subject_id}", result.text or "")
+        self.assertIn("Subject Breakdown:", result.text or "")
+        self.assertIn(f"{subject_id}: goal=correctness.platform | status=ok", result.text or "")
         self.assertIn(f"ok: {suite_id}", result.text or "")
 
     def test_test_summary_reads_latest_summary(self) -> None:
@@ -149,8 +150,8 @@ class TestWatchSummaryCommandsTests(unittest.TestCase):
         self.assertIn("run-1", result.text or "")
         self.assertIn("Phases:", result.text or "")
         self.assertIn("ok: code", result.text or "")
-        self.assertIn("Subjects:", result.text or "")
-        self.assertIn(f"fail: {subject_id}", result.text or "")
+        self.assertIn("Subject Breakdown:", result.text or "")
+        self.assertIn(f"{subject_id}: goal=correctness.platform | status=fail", result.text or "")
         self.assertIn(suite_ids[1], result.text or "")
 
     def test_test_watch_reads_latest_events(self) -> None:

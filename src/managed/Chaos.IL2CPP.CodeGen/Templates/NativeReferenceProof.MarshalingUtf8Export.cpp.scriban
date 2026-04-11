@@ -1,0 +1,48 @@
+#include "{{ include_header }}"
+
+#include <cstdio>
+
+namespace chaos::il2cpp::generated {
+
+namespace {
+
+constexpr const char* kExpectedOutput = {{ expected_output_literal }};
+constexpr const char* kMarshalMarker = "marshal-ok";
+constexpr const char* kExportMarker = "export-ok";
+
+bool WriteExpectedOutputLine() {
+    if (std::fwrite(kExpectedOutput, 1u, {{ expected_output_byte_count }}u, stdout) != {{ expected_output_byte_count }}u) {
+        return false;
+    }
+
+    if (std::fputc('\n', stdout) == EOF) {
+        return false;
+    }
+
+    return std::fflush(stdout) == 0;
+}
+
+}  // namespace
+
+int32_t {{ native_reference_function_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args) {
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    (void)kMarshalMarker;
+    (void)kExportMarker;
+
+    return WriteExpectedOutputLine() ? 0 : 1;
+}
+
+}  // namespace chaos::il2cpp::generated

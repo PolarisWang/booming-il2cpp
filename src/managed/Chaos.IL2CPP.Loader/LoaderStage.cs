@@ -13,7 +13,58 @@ public sealed class LoaderStage
 
     public LoadedAssemblyModel Load(ManagedClosureRequest request)
     {
-        using var stream = File.OpenRead(request.InputAssemblyPath);
+        return LoadAssembly(
+            request.InputAssemblyPath,
+            request.EntryPointSubjectIdOverride,
+            requireEntryPoint: true);
+    }
+
+    public LoadedWorldModel LoadMultiple(ManagedClosureRequest request)
+    {
+        var assemblyPaths = new List<string> { request.InputAssemblyPath };
+        if (request.AdditionalAssemblyPaths is not null)
+        {
+            foreach (var additionalAssemblyPath in request.AdditionalAssemblyPaths)
+            {
+                if (string.IsNullOrWhiteSpace(additionalAssemblyPath))
+                {
+                    continue;
+                }
+
+                if (!assemblyPaths.Contains(additionalAssemblyPath, StringComparer.OrdinalIgnoreCase))
+                {
+                    assemblyPaths.Add(additionalAssemblyPath);
+                }
+            }
+        }
+
+        var loadedAssemblies = assemblyPaths
+            .Select((assemblyPath, index) => LoadAssembly(
+                assemblyPath,
+                index == 0 ? request.EntryPointSubjectIdOverride : null,
+                requireEntryPoint: index == 0))
+            .ToList();
+        var entryAssembly = loadedAssemblies[0];
+
+        return new LoadedWorldModel
+        {
+            InputAssemblyPath = request.InputAssemblyPath,
+            Assembly = entryAssembly.Assembly,
+            Assemblies = loadedAssemblies,
+            EntryPointSubjectId = entryAssembly.EntryPointSubjectId,
+            Types = loadedAssemblies.SelectMany(assembly => assembly.Types).OrderBy(model => model.MetadataToken).ToList(),
+            Fields = loadedAssemblies.SelectMany(assembly => assembly.Fields).OrderBy(model => model.MetadataToken).ToList(),
+            Properties = loadedAssemblies.SelectMany(assembly => assembly.Properties).OrderBy(model => model.MetadataToken).ToList(),
+            Methods = loadedAssemblies.SelectMany(assembly => assembly.Methods).OrderBy(model => model.MetadataToken).ToList(),
+        };
+    }
+
+    private static LoadedAssemblyModel LoadAssembly(
+        string inputAssemblyPath,
+        string? entryPointSubjectIdOverride,
+        bool requireEntryPoint)
+    {
+        using var stream = File.OpenRead(inputAssemblyPath);
         using var peReader = new PEReader(stream);
         var metadataReader = peReader.GetMetadataReader();
 
@@ -64,18 +115,19 @@ public sealed class LoaderStage
             .OrderBy(model => model.MetadataToken)
             .ToList();
         var entryPointSubjectId = ResolveEntryPointSubjectId(
-            request,
+            entryPointSubjectIdOverride,
             peReader,
             metadataReader,
             typeResolver,
             typeModels,
             ownerIndex.MethodOwners,
             assemblyName,
-            allMethods);
+            allMethods,
+            requireEntryPoint);
 
         return new LoadedAssemblyModel
         {
-            InputAssemblyPath = request.InputAssemblyPath,
+            InputAssemblyPath = inputAssemblyPath,
             Assembly = assembly,
             EntryPointSubjectId = entryPointSubjectId,
             Types = allTypes,
@@ -86,18 +138,19 @@ public sealed class LoaderStage
     }
 
     private static string ResolveEntryPointSubjectId(
-        ManagedClosureRequest request,
+        string? entryPointSubjectIdOverride,
         PEReader peReader,
         MetadataReader metadataReader,
         MetadataTypeResolver typeResolver,
         IReadOnlyDictionary<TypeDefinitionHandle, ManagedTypeModel> typeModels,
         IReadOnlyDictionary<MethodDefinitionHandle, ManagedTypeModel> methodOwners,
         string assemblyName,
-        IReadOnlyList<ManagedMethodModel> methods)
+        IReadOnlyList<ManagedMethodModel> methods,
+        bool requireEntryPoint)
     {
-        if (!string.IsNullOrWhiteSpace(request.EntryPointSubjectIdOverride))
+        if (!string.IsNullOrWhiteSpace(entryPointSubjectIdOverride))
         {
-            var entryPointSubjectIdOverride = request.EntryPointSubjectIdOverride!;
+            entryPointSubjectIdOverride = entryPointSubjectIdOverride!;
             if (methods.Any(method => string.Equals(method.SubjectId, entryPointSubjectIdOverride, StringComparison.Ordinal)))
             {
                 return entryPointSubjectIdOverride;
@@ -110,6 +163,11 @@ public sealed class LoaderStage
         var entryToken = peReader.PEHeaders.CorHeader?.EntryPointTokenOrRelativeVirtualAddress ?? 0;
         if (entryToken == 0)
         {
+            if (!requireEntryPoint)
+            {
+                return string.Empty;
+            }
+
             throw new InvalidOperationException("managed closure input assembly does not define an entry point");
         }
 
@@ -153,11 +211,6 @@ public sealed class LoaderStage
             foreach (var fieldHandle in typeDefinition.GetFields())
             {
                 fieldOwners[fieldHandle] = typeModel;
-            }
-
-            if (!typeDefinition.GetDeclaringType().IsNil)
-            {
-                continue;
             }
 
             foreach (var methodHandle in typeDefinition.GetMethods())
@@ -225,6 +278,8 @@ public sealed class LoaderStage
             SubjectId = typeIdentity.SubjectId,
             DefinitionSubjectId = typeIdentity.DefinitionSubjectId,
             DisplayName = typeIdentity.DisplayName,
+            IsInterface = typeDefinition.Attributes.HasFlag(TypeAttributes.Interface),
+            IsPreserved = HasPreserveAttribute(metadataReader, typeHandle),
             MetadataToken = MetadataTokens.GetToken(typeHandle),
         };
     }
@@ -317,6 +372,9 @@ public sealed class LoaderStage
             var fieldDefinition = metadataReader.GetFieldDefinition(fieldHandle);
             var fieldName = metadataReader.GetString(fieldDefinition.Name);
             var fieldType = fieldDefinition.DecodeSignature(typeResolver.TypeNameProvider, null);
+            var isStatic = fieldDefinition.Attributes.HasFlag(FieldAttributes.Static);
+            var isThreadStatic = HasThreadStaticAttribute(metadataReader, fieldHandle);
+            var isPreserved = HasPreserveAttribute(metadataReader, fieldHandle);
 
             models.Add(new ManagedFieldModel
             {
@@ -326,6 +384,9 @@ public sealed class LoaderStage
                 FieldType = fieldType,
                 SubjectId = ManagedNaming.CreateFieldSubjectId(typeModel.SubjectId, fieldName),
                 DefinitionSubjectId = ManagedNaming.CreateFieldSubjectId(typeModel.DefinitionSubjectId, fieldName),
+                IsStatic = isStatic,
+                IsThreadStatic = isThreadStatic,
+                IsPreserved = isPreserved,
                 MetadataToken = MetadataTokens.GetToken(fieldHandle),
             });
         }
@@ -346,6 +407,7 @@ public sealed class LoaderStage
             var propertyDefinition = metadataReader.GetPropertyDefinition(propertyHandle);
             var propertyName = metadataReader.GetString(propertyDefinition.Name);
             var propertyType = propertyDefinition.DecodeSignature(typeResolver.TypeNameProvider, null).ReturnType;
+            var isPreserved = HasPreserveAttribute(metadataReader, propertyHandle);
 
             models.Add(new ManagedPropertyModel
             {
@@ -355,6 +417,7 @@ public sealed class LoaderStage
                 PropertyType = propertyType,
                 SubjectId = ManagedNaming.CreatePropertySubjectId(typeModel.SubjectId, propertyName),
                 DefinitionSubjectId = ManagedNaming.CreatePropertySubjectId(typeModel.DefinitionSubjectId, propertyName),
+                IsPreserved = isPreserved,
                 MetadataToken = MetadataTokens.GetToken(propertyHandle),
             });
         }
@@ -403,6 +466,8 @@ public sealed class LoaderStage
                 DefinitionSubjectId = methodSummary.DefinitionSubjectId,
                 Signature = methodSummary.Signature,
                 IsStatic = methodSummary.IsStatic,
+                IsPreserved = methodSummary.IsPreserved,
+                IsUnmanagedCallersOnly = methodSummary.IsUnmanagedCallersOnly,
                 MetadataToken = methodSummary.MetadataToken,
                 Parameters = methodSummary.Parameters,
                 Import = methodSummary.Import,
@@ -446,6 +511,7 @@ public sealed class LoaderStage
 
         while (ilReader.RemainingBytes > 0)
         {
+            var instructionOffset = ilReader.Offset;
             var opCode = ReadOpCode(ref ilReader);
             var instruction = DecodeInstruction(
                 metadataReader,
@@ -459,7 +525,7 @@ public sealed class LoaderStage
 
             if (instruction is not null)
             {
-                instructions.Add(instruction);
+                instructions.Add(instruction with { IlOffset = instructionOffset });
             }
         }
 
@@ -539,14 +605,22 @@ public sealed class LoaderStage
             ILOpCode.Ldc_i4_6 => DecodeLdcI4Instruction(6),
             ILOpCode.Ldc_i4_7 => DecodeLdcI4Instruction(7),
             ILOpCode.Ldc_i4_8 => DecodeLdcI4Instruction(8),
-            ILOpCode.Br => DecodeBranchInstruction("br", ilReader.ReadInt32()),
-            ILOpCode.Br_s => DecodeBranchInstruction("br", ilReader.ReadSByte()),
-            ILOpCode.Brtrue => DecodeBrtrueInstruction(ilReader.ReadInt32()),
-            ILOpCode.Brtrue_s => DecodeBrtrueInstruction(ilReader.ReadSByte()),
-            ILOpCode.Brfalse => DecodeBrfalseInstruction(ilReader.ReadInt32()),
-            ILOpCode.Brfalse_s => DecodeBrfalseInstruction(ilReader.ReadSByte()),
-            ILOpCode.Leave => DecodeLeaveInstruction(ilReader.ReadInt32()),
-            ILOpCode.Leave_s => DecodeLeaveInstruction(ilReader.ReadSByte()),
+            ILOpCode.Add => DecodeSimpleInstruction("add", "System.Int32"),
+            ILOpCode.Sub => DecodeSimpleInstruction("sub", "System.Int32"),
+            ILOpCode.Mul => DecodeSimpleInstruction("mul", "System.Int32"),
+            ILOpCode.Div => DecodeSimpleInstruction("div", "System.Int32"),
+            ILOpCode.Rem => DecodeSimpleInstruction("rem", "System.Int32"),
+            ILOpCode.Ceq => DecodeSimpleInstruction("ceq", "System.Int32"),
+            ILOpCode.Clt => DecodeSimpleInstruction("clt", "System.Int32"),
+            ILOpCode.Cgt => DecodeSimpleInstruction("cgt", "System.Int32"),
+            ILOpCode.Br => DecodeBranchInstruction("br", ReadBranchTargetInt32(ref ilReader)),
+            ILOpCode.Br_s => DecodeBranchInstruction("br", ReadBranchTargetSByte(ref ilReader)),
+            ILOpCode.Brtrue => DecodeBrtrueInstruction(ReadBranchTargetInt32(ref ilReader)),
+            ILOpCode.Brtrue_s => DecodeBrtrueInstruction(ReadBranchTargetSByte(ref ilReader)),
+            ILOpCode.Brfalse => DecodeBrfalseInstruction(ReadBranchTargetInt32(ref ilReader)),
+            ILOpCode.Brfalse_s => DecodeBrfalseInstruction(ReadBranchTargetSByte(ref ilReader)),
+            ILOpCode.Leave => DecodeLeaveInstruction(ReadBranchTargetInt32(ref ilReader)),
+            ILOpCode.Leave_s => DecodeLeaveInstruction(ReadBranchTargetSByte(ref ilReader)),
             ILOpCode.Throw => new ManagedInstructionModel { Op = "throw", ResultType = "System.Void" },
             ILOpCode.Rethrow => new ManagedInstructionModel { Op = "rethrow", ResultType = "System.Void" },
             ILOpCode.Endfinally => new ManagedInstructionModel { Op = "endfinally", ResultType = "System.Void" },
@@ -902,6 +976,26 @@ public sealed class LoaderStage
         };
     }
 
+    private static ManagedInstructionModel DecodeSimpleInstruction(string op, string resultType)
+    {
+        return op switch
+        {
+            "add" => new ManagedInstructionModel { Op = "add", ResultType = resultType },
+            "sub" => new ManagedInstructionModel { Op = "sub", ResultType = resultType },
+            "mul" => new ManagedInstructionModel { Op = "mul", ResultType = resultType },
+            "div" => new ManagedInstructionModel { Op = "div", ResultType = resultType },
+            "rem" => new ManagedInstructionModel { Op = "rem", ResultType = resultType },
+            "ceq" => new ManagedInstructionModel { Op = "ceq", ResultType = resultType },
+            "clt" => new ManagedInstructionModel { Op = "clt", ResultType = resultType },
+            "cgt" => new ManagedInstructionModel { Op = "cgt", ResultType = resultType },
+            _ => new ManagedInstructionModel
+            {
+                Op = op,
+                ResultType = resultType,
+            },
+        };
+    }
+
     private static ManagedInstructionModel DecodeBranchInstruction(string op, int delta)
     {
         return new ManagedInstructionModel
@@ -940,6 +1034,18 @@ public sealed class LoaderStage
             Operand = delta,
             ResultType = "System.Void",
         };
+    }
+
+    private static int ReadBranchTargetInt32(ref BlobReader ilReader)
+    {
+        var delta = ilReader.ReadInt32();
+        return ilReader.Offset + delta;
+    }
+
+    private static int ReadBranchTargetSByte(ref BlobReader ilReader)
+    {
+        var delta = ilReader.ReadSByte();
+        return ilReader.Offset + delta;
     }
 
     private static IReadOnlyList<ManagedExceptionRegionModel> DecodeExceptionRegions(
@@ -1062,6 +1168,8 @@ public sealed class LoaderStage
         var methodName = metadataReader.GetString(methodDefinition.Name);
         var subjectId = ManagedNaming.CreateMethodSubjectId(declaringType.SubjectId, methodName, parameterTypes);
         var import = TryDescribeMethodImport(metadataReader, methodDefinition);
+        var isPreserved = HasPreserveAttribute(metadataReader, handle);
+        var isUnmanagedCallersOnly = HasUnmanagedCallersOnlyAttribute(metadataReader, handle);
 
         return new MethodSummary
         {
@@ -1075,6 +1183,8 @@ public sealed class LoaderStage
             ParameterTypes = parameterTypes,
             Signature = ManagedNaming.CreateMethodSignature(signature.ReturnType, declaringType.DisplayName, methodName, parameterTypes),
             IsStatic = methodDefinition.Attributes.HasFlag(MethodAttributes.Static),
+            IsPreserved = isPreserved,
+            IsUnmanagedCallersOnly = isUnmanagedCallersOnly,
             MetadataToken = MetadataTokens.GetToken(handle),
             Parameters = parameters,
             Import = import,
@@ -1206,6 +1316,8 @@ public sealed class LoaderStage
             SubjectId = ManagedNaming.CreateFieldSubjectId(declaringType.SubjectId, fieldName),
             DefinitionSubjectId = ManagedNaming.CreateFieldSubjectId(declaringType.SubjectId, fieldName),
             FieldType = fieldDefinition.DecodeSignature(typeResolver.TypeNameProvider, null),
+            IsStatic = fieldDefinition.Attributes.HasFlag(FieldAttributes.Static),
+            IsThreadStatic = HasThreadStaticAttribute(metadataReader, handle),
             MetadataToken = MetadataTokens.GetToken(handle),
             Substitutions = ImmutableDictionary<string, string>.Empty,
         };
@@ -1232,6 +1344,100 @@ public sealed class LoaderStage
             MetadataToken = MetadataTokens.GetToken(handle),
             Substitutions = CreateSubstitutionMap(declaringType.TypeArguments, []),
         };
+    }
+
+    private static bool HasThreadStaticAttribute(
+        MetadataReader metadataReader,
+        FieldDefinitionHandle fieldHandle)
+    {
+        const string threadStaticAttributeFullName = "System.ThreadStaticAttribute";
+        var fieldDefinition = metadataReader.GetFieldDefinition(fieldHandle);
+
+        foreach (var attributeHandle in fieldDefinition.GetCustomAttributes())
+        {
+            if (TryGetAttributeTypeName(metadataReader, attributeHandle, out var namespaceName, out var typeName) &&
+                string.Equals($"{namespaceName}.{typeName}", threadStaticAttributeFullName, StringComparison.Ordinal))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool HasUnmanagedCallersOnlyAttribute(
+        MetadataReader metadataReader,
+        MethodDefinitionHandle methodHandle)
+    {
+        const string unmanagedCallersOnlyAttributeFullName = "System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute";
+        var methodDefinition = metadataReader.GetMethodDefinition(methodHandle);
+
+        foreach (var attributeHandle in methodDefinition.GetCustomAttributes())
+        {
+            if (TryGetAttributeTypeName(metadataReader, attributeHandle, out var namespaceName, out var typeName) &&
+                string.Equals($"{namespaceName}.{typeName}", unmanagedCallersOnlyAttributeFullName, StringComparison.Ordinal))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool TryGetAttributeTypeName(
+        MetadataReader metadataReader,
+        CustomAttributeHandle attributeHandle,
+        out string namespaceName,
+        out string typeName)
+    {
+        var attribute = metadataReader.GetCustomAttribute(attributeHandle);
+        return TryGetAttributeTypeName(metadataReader, attribute.Constructor, out namespaceName, out typeName);
+    }
+
+    private static bool TryGetAttributeTypeName(
+        MetadataReader metadataReader,
+        EntityHandle constructorHandle,
+        out string namespaceName,
+        out string typeName)
+    {
+        switch (constructorHandle.Kind)
+        {
+            case HandleKind.MemberReference:
+                var memberReference = metadataReader.GetMemberReference((MemberReferenceHandle)constructorHandle);
+                return TryGetTypeName(metadataReader, memberReference.Parent, out namespaceName, out typeName);
+            case HandleKind.MethodDefinition:
+                var methodDefinition = metadataReader.GetMethodDefinition((MethodDefinitionHandle)constructorHandle);
+                return TryGetTypeName(metadataReader, methodDefinition.GetDeclaringType(), out namespaceName, out typeName);
+            default:
+                namespaceName = string.Empty;
+                typeName = string.Empty;
+                return false;
+        }
+    }
+
+    private static bool TryGetTypeName(
+        MetadataReader metadataReader,
+        EntityHandle typeHandle,
+        out string namespaceName,
+        out string typeName)
+    {
+        switch (typeHandle.Kind)
+        {
+            case HandleKind.TypeReference:
+                var typeReference = metadataReader.GetTypeReference((TypeReferenceHandle)typeHandle);
+                namespaceName = metadataReader.GetString(typeReference.Namespace);
+                typeName = metadataReader.GetString(typeReference.Name);
+                return true;
+            case HandleKind.TypeDefinition:
+                var typeDefinition = metadataReader.GetTypeDefinition((TypeDefinitionHandle)typeHandle);
+                namespaceName = metadataReader.GetString(typeDefinition.Namespace);
+                typeName = metadataReader.GetString(typeDefinition.Name);
+                return true;
+            default:
+                namespaceName = string.Empty;
+                typeName = string.Empty;
+                return false;
+        }
     }
 
     private static MaterializedGenericModels MaterializeGenericInstantiations(
@@ -1290,6 +1496,8 @@ public sealed class LoaderStage
                 SubjectId = typeIdentity.SubjectId,
                 DefinitionSubjectId = typeIdentity.DefinitionSubjectId,
                 DisplayName = typeIdentity.DisplayName,
+                IsInterface = definitionType.IsInterface,
+                IsPreserved = definitionType.IsPreserved,
                 MetadataToken = MetadataTokens.GetToken(typeSpecificationHandle),
             };
             materializedTypeIdentities[typeIdentity.SubjectId] = typeIdentity;
@@ -1322,6 +1530,9 @@ public sealed class LoaderStage
                         new Dictionary<string, string>(StringComparer.Ordinal)),
                     SubjectId = subjectId,
                     DefinitionSubjectId = definitionField.SubjectId,
+                    IsStatic = definitionField.IsStatic,
+                    IsThreadStatic = definitionField.IsThreadStatic,
+                    IsPreserved = definitionField.IsPreserved,
                     MetadataToken = syntheticFieldMetadataToken++,
                 };
                 fieldBindings[new FieldBindingKey(definitionField.SubjectId, typeIdentity.SubjectId)] = subjectId;
@@ -1355,6 +1566,7 @@ public sealed class LoaderStage
                         new Dictionary<string, string>(StringComparer.Ordinal)),
                     SubjectId = subjectId,
                     DefinitionSubjectId = definitionProperty.SubjectId,
+                    IsPreserved = definitionProperty.IsPreserved,
                     MetadataToken = syntheticPropertyMetadataToken++,
                 };
             }
@@ -1427,17 +1639,19 @@ public sealed class LoaderStage
                     ReturnType = returnType,
                     SubjectId = subjectId,
                     DefinitionSubjectId = definitionMethod.SubjectId,
-                    Signature = ManagedNaming.CreateMethodSignature(
-                        returnType,
-                        typeIdentity.DisplayName,
-                        definitionMethod.Name,
-                        parameters.Select(parameter => parameter.Type).ToList()),
-                    IsStatic = definitionMethod.IsStatic,
-                    MetadataToken = syntheticMethodMetadataToken++,
-                    Parameters = parameters,
-                    Import = null,
-                    Body = SubstituteMethodBody(definitionMethod.Body, substitutions, subjectSubstitutions),
-                };
+                Signature = ManagedNaming.CreateMethodSignature(
+                    returnType,
+                    typeIdentity.DisplayName,
+                    definitionMethod.Name,
+                    parameters.Select(parameter => parameter.Type).ToList()),
+                IsStatic = definitionMethod.IsStatic,
+                IsPreserved = definitionMethod.IsPreserved,
+                IsUnmanagedCallersOnly = definitionMethod.IsUnmanagedCallersOnly,
+                MetadataToken = syntheticMethodMetadataToken++,
+                Parameters = parameters,
+                Import = null,
+                Body = SubstituteMethodBody(definitionMethod.Body, substitutions, subjectSubstitutions),
+            };
             }
         }
 
@@ -1458,6 +1672,12 @@ public sealed class LoaderStage
                 continue;
             }
 
+            var definitionField = existingFieldSubjects.TryGetValue(fieldReference.DefinitionSubjectId, out var existingDefinitionField)
+                ? existingDefinitionField
+                : materializedFields.TryGetValue(fieldReference.DefinitionSubjectId, out var materializedDefinitionField)
+                    ? materializedDefinitionField
+                    : null;
+
             materializedFields[fieldReference.SubjectId] = new ManagedFieldModel
             {
                 AssemblyName = fieldReference.AssemblyName,
@@ -1466,6 +1686,9 @@ public sealed class LoaderStage
                 FieldType = fieldReference.FieldType,
                 SubjectId = fieldReference.SubjectId,
                 DefinitionSubjectId = fieldReference.DefinitionSubjectId,
+                IsStatic = definitionField?.IsStatic ?? fieldReference.IsStatic,
+                IsThreadStatic = definitionField?.IsThreadStatic ?? fieldReference.IsThreadStatic,
+                IsPreserved = definitionField?.IsPreserved ?? false,
                 MetadataToken = fieldReference.MetadataToken,
             };
             fieldBindings[new FieldBindingKey(fieldReference.DefinitionSubjectId, fieldReference.DeclaringTypeSubjectId)] = fieldReference.SubjectId;
@@ -1564,11 +1787,61 @@ public sealed class LoaderStage
                 methodReference.Name,
                 parameters.Select(parameter => parameter.Type).ToList()),
             IsStatic = definitionMethod.IsStatic,
+            IsPreserved = definitionMethod.IsPreserved,
+            IsUnmanagedCallersOnly = definitionMethod.IsUnmanagedCallersOnly,
             MetadataToken = methodReference.MetadataToken,
             Parameters = parameters,
             Import = null,
             Body = SubstituteMethodBody(definitionMethod.Body, methodReference.Substitutions, subjectSubstitutions),
         };
+    }
+
+    private static bool HasPreserveAttribute(
+        MetadataReader metadataReader,
+        TypeDefinitionHandle typeHandle)
+    {
+        var typeDefinition = metadataReader.GetTypeDefinition(typeHandle);
+        return HasPreserveAttribute(metadataReader, typeDefinition.GetCustomAttributes());
+    }
+
+    private static bool HasPreserveAttribute(
+        MetadataReader metadataReader,
+        FieldDefinitionHandle fieldHandle)
+    {
+        var fieldDefinition = metadataReader.GetFieldDefinition(fieldHandle);
+        return HasPreserveAttribute(metadataReader, fieldDefinition.GetCustomAttributes());
+    }
+
+    private static bool HasPreserveAttribute(
+        MetadataReader metadataReader,
+        PropertyDefinitionHandle propertyHandle)
+    {
+        var propertyDefinition = metadataReader.GetPropertyDefinition(propertyHandle);
+        return HasPreserveAttribute(metadataReader, propertyDefinition.GetCustomAttributes());
+    }
+
+    private static bool HasPreserveAttribute(
+        MetadataReader metadataReader,
+        MethodDefinitionHandle methodHandle)
+    {
+        var methodDefinition = metadataReader.GetMethodDefinition(methodHandle);
+        return HasPreserveAttribute(metadataReader, methodDefinition.GetCustomAttributes());
+    }
+
+    private static bool HasPreserveAttribute(
+        MetadataReader metadataReader,
+        CustomAttributeHandleCollection attributeHandles)
+    {
+        foreach (var attributeHandle in attributeHandles)
+        {
+            if (TryGetAttributeTypeName(metadataReader, attributeHandle, out _, out var typeName) &&
+                string.Equals(typeName, "PreserveAttribute", StringComparison.Ordinal))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static ManagedMethodBodyModel SubstituteMethodBody(
@@ -1596,6 +1869,7 @@ public sealed class LoaderStage
                 {
                     Op = instruction.Op,
                     Operand = SubstituteOperand(instruction.Operand, substitutions, subjectSubstitutions),
+                    IlOffset = instruction.IlOffset,
                     ResultType = instruction.ResultType is null
                         ? null
                         : SubstituteText(instruction.ResultType, substitutions, subjectSubstitutions),

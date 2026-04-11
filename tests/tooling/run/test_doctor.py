@@ -35,14 +35,15 @@ class DoctorCommandTests(unittest.TestCase):
             "probe_runtime",
             return_value={"isInstalled": True, "pythonPath": "artifacts/python/python.exe"},
         ):
-            with patch.object(doctor_module.tooling_module, "find_cmake_executable", return_value="C:\\tools\\cmake\\bin\\cmake.exe"):
-                with patch.object(doctor_module.tooling_module, "find_visual_cpp_executable", return_value=None):
-                    with patch.object(
-                        doctor_module.tooling_module.shutil,
-                        "which",
-                        side_effect=lambda exe: "C:\\Program Files\\dotnet\\dotnet.exe" if exe == "dotnet" else None,
-                    ):
-                        result = doctor_module.handle(REPO_ROOT, "windows", "doctor")
+            with patch.dict(os.environ, {"TERM": "dumb"}, clear=True):
+                with patch.object(doctor_module.tooling_module, "find_cmake_executable", return_value="C:\\tools\\cmake\\bin\\cmake.exe"):
+                    with patch.object(doctor_module.tooling_module, "find_visual_cpp_executable", return_value=None):
+                        with patch.object(
+                            doctor_module.tooling_module.shutil,
+                            "which",
+                            side_effect=lambda exe: "C:\\Program Files\\dotnet\\dotnet.exe" if exe == "dotnet" else None,
+                        ):
+                            result = doctor_module.handle(REPO_ROOT, "windows", "doctor")
 
         self.assertIn("\x1b[1;32m[ok]\x1b[0m cached-python-runtime", result.text or "")
         self.assertIn("\x1b[1;36m[note]\x1b[0m osc8-hyperlinks", result.text or "")
@@ -64,7 +65,7 @@ class DoctorCommandTests(unittest.TestCase):
                                 "TERM_PROGRAM": "iTerm.app",
                                 "TERM": "xterm-256color",
                             },
-                            clear=False,
+                            clear=True,
                         ):
                             result = doctor_module.handle(REPO_ROOT, "macos", "doctor")
 
@@ -93,7 +94,7 @@ class DoctorCommandTests(unittest.TestCase):
                                 "TERM_PROGRAM": "Apple_Terminal",
                                 "TERM": "xterm-256color",
                             },
-                            clear=False,
+                            clear=True,
                         ):
                             result = doctor_module.handle(REPO_ROOT, "macos", "doctor")
 

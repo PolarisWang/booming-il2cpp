@@ -4,6 +4,10 @@ namespace Chaos.IL2CPP.MetadataWriter;
 
 public sealed class MetadataWriterStage
 {
+    private const int DefaultReservedTypeSlots = 256;
+    private const int DefaultReservedMethodSlots = 1024;
+    private const int DefaultReservedGenericInstantiationSlots = 256;
+
     public string Name => "MetadataWriter";
 
     public MetadataWriterOutput Write(LinkedWorldModel linkedWorld)
@@ -45,17 +49,19 @@ public sealed class MetadataWriterStage
             });
         }
 
-        var registrations = new List<MetadataRegistrationEntry>
+        var registrations = new List<MetadataRegistrationEntry>();
+
+        var slot = 0;
+        foreach (var assembly in linkedWorld.Assemblies)
         {
-            new()
+            registrations.Add(new MetadataRegistrationEntry
             {
                 RegistrationKind = "assembly",
-                Slot = 0,
-                SubjectId = linkedWorld.Assembly.Name,
-            },
-        };
+                Slot = slot++,
+                SubjectId = assembly.Name,
+            });
+        }
 
-        var slot = 1;
         foreach (var type in linkedWorld.Types)
         {
             registrations.Add(new MetadataRegistrationEntry
@@ -134,6 +140,36 @@ public sealed class MetadataWriterStage
             }
         }
 
+        var supplementalMetadataTemplate = new SupplementalMetadataTemplateArtifact
+        {
+            RegisteredTypes = linkedWorld.Types
+                .Select(type => new SupplementalMetadataTypeTemplateEntry
+                {
+                    AssemblyName = type.AssemblyName,
+                    SubjectId = type.SubjectId,
+                    DefinitionSubjectId = type.DefinitionSubjectId,
+                    MetadataToken = type.MetadataToken,
+                })
+                .ToList(),
+            RegisteredMethods = linkedWorld.Methods
+                .Select(method => new SupplementalMetadataMethodTemplateEntry
+                {
+                    AssemblyName = method.AssemblyName,
+                    SubjectId = method.SubjectId,
+                    DefinitionSubjectId = method.DefinitionSubjectId,
+                    DeclaringTypeSubjectId = method.DeclaringTypeSubjectId,
+                    MetadataToken = method.MetadataToken,
+                    ParameterCount = method.Parameters.Count,
+                })
+                .ToList(),
+            ReservedSlots = new SupplementalMetadataReservedSlots
+            {
+                TypeCount = DefaultReservedTypeSlots,
+                MethodCount = DefaultReservedMethodSlots,
+                GenericInstantiationCount = DefaultReservedGenericInstantiationSlots,
+            },
+        };
+
         return new MetadataWriterOutput
         {
             AotManifest = new AotManifestArtifact
@@ -144,6 +180,7 @@ public sealed class MetadataWriterStage
             {
                 Registrations = registrations,
             },
+            SupplementalMetadataTemplate = supplementalMetadataTemplate,
         };
     }
 }

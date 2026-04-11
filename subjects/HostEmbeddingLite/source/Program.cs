@@ -68,6 +68,16 @@ internal sealed class WarmupInventory
     }
 }
 
+internal sealed class OwnershipProxy
+{
+    public OwnershipProxy(string payload)
+    {
+        Payload = payload;
+    }
+
+    public string Payload { get; }
+}
+
 internal sealed class BootstrapStateMachine
 {
     private readonly List<string> _trace;
@@ -254,6 +264,37 @@ internal sealed class HostEmbeddingSession
         return $"{entryType.Name}:{managedEntry.Name}:{_bootstrap.ClassWorldWarmupComplete}";
     }
 
+    public string ExerciseOwnershipProtocol()
+    {
+        EnsureAttachedThread(nameof(ExerciseOwnershipProtocol));
+
+        OwnershipProxy proxy = new("host-ownership-payload");
+        GCHandle strongHandle = GCHandle.Alloc(proxy, GCHandleType.Normal);
+        GCHandle weakHandle = GCHandle.Alloc(proxy, GCHandleType.Weak);
+
+        try
+        {
+            OwnershipProxy strongTarget = (OwnershipProxy)(strongHandle.Target
+                ?? throw new InvalidOperationException("strong ownership target missing"));
+            bool weakTargetAvailable = weakHandle.Target is OwnershipProxy;
+            nint strongToken = GCHandle.ToIntPtr(strongHandle);
+            nint weakToken = GCHandle.ToIntPtr(weakHandle);
+            return $"ownership={strongTarget.Payload}|managed->engine-host|strong:{strongToken != 0}|weak:{weakToken != 0}|weakAlive:{weakTargetAvailable}|released:true";
+        }
+        finally
+        {
+            if (weakHandle.IsAllocated)
+            {
+                weakHandle.Free();
+            }
+
+            if (strongHandle.IsAllocated)
+            {
+                strongHandle.Free();
+            }
+        }
+    }
+
     public void RecordWarmupTraceEvent(string sampleId, WarmupTraceEvent traceEvent)
     {
         EnsureAttachedThread(nameof(RecordWarmupTraceEvent));
@@ -310,6 +351,7 @@ internal static class Program
         string callbackResult = session.InvokeManagedEntry(static payload => $"managed:{payload}");
         HostEnvironmentSnapshot snapshot = session.CaptureEnvironment();
         string reflectionSummary = session.RequestReflectionSummary();
+        string ownershipSummary = session.ExerciseOwnershipProtocol();
         WarmupTraceDocument? traceDocument = traceRequest is null
             ? null
             : BuildWarmupTraceDocument(traceRequest.Platform, session);
@@ -324,6 +366,7 @@ internal static class Program
         Console.WriteLine($"env={snapshot.WorkingDirectoryAvailable}|{snapshot.TempDirectoryName}|{snapshot.FilePayload}");
         Console.WriteLine($"capabilities={snapshot.LocalClockReadable}|{snapshot.TimeZoneReadable}|{snapshot.ProbeLibraryResolved}");
         Console.WriteLine(reflectionSummary);
+        Console.WriteLine(ownershipSummary);
         Console.WriteLine(guardSummary);
 
         if (traceSummary is not null)

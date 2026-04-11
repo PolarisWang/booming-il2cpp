@@ -18,12 +18,22 @@ FORBIDDEN_ACTIVE_PREFIX_SNIPPETS = [
 
 EXPECTED_MANAGED_PROJECTS: dict[str, list[str]] = {
     "Chaos.IL2CPP.Contracts": [],
+    "Chaos.IL2CPP.EngineBinding": [
+        "Chaos.IL2CPP.Contracts",
+    ],
+    "Chaos.IL2CPP.HotUpdate": [
+        "Chaos.IL2CPP.Contracts",
+    ],
     "Chaos.IL2CPP.Driver": [
         "Chaos.IL2CPP.CodeGen",
         "Chaos.IL2CPP.Contracts",
+        "Chaos.IL2CPP.ProjectGraph",
         "Chaos.IL2CPP.Pipeline",
     ],
     "Chaos.IL2CPP.Loader": [
+        "Chaos.IL2CPP.Contracts",
+    ],
+    "Chaos.IL2CPP.ProjectGraph": [
         "Chaos.IL2CPP.Contracts",
     ],
     "Chaos.IL2CPP.SemanticWorld": [
@@ -266,6 +276,21 @@ class RepoLayoutTests(unittest.TestCase):
                 offenders.append(str(subdir.relative_to(REPO_ROOT).as_posix()))
 
         self.assertEqual([], offenders, msg="contracts/ must only contain formal definitions, not concrete fixtures")
+
+    def test_shared_contracts_directory_exists(self) -> None:
+        shared_root = REPO_ROOT / "contracts" / "shared" / "v0"
+        self.assertTrue(shared_root.is_dir(), msg="contracts/shared/v0/ must exist")
+        self.assertTrue((shared_root / "README.md").is_file())
+        self.assertTrue((shared_root / "identity-model.md").is_file())
+        self.assertTrue((shared_root / "object-model.md").is_file())
+        self.assertTrue((shared_root / "handle-model.md").is_file())
+        self.assertTrue((shared_root / "abi-calling-convention.md").is_file())
+        self.assertTrue((shared_root / "exception-boundary.md").is_file())
+        self.assertTrue((shared_root / "delegate-abi.md").is_file())
+        self.assertTrue((shared_root / "metadata-token-mapping.md").is_file())
+        self.assertTrue((shared_root / "version-policy.md").is_file())
+        self.assertTrue((shared_root / "interpreter-ir-decision.md").is_file())
+        self.assertTrue((shared_root / "package-manifest.schema.json").is_file())
 
     def test_run_tooling_uses_domain_based_core_layout(self) -> None:
         run_root = REPO_ROOT / "build" / "toolchains" / "run"

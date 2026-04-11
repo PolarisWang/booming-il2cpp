@@ -31,7 +31,9 @@ class NativeReferenceBootstrapSupportTests(unittest.TestCase):
             required_validation_profile_ids=["proof-dev"],
         )
         cls.subject_id = str(subject_record["subjectId"])
-        cls.proof_host_dir = REPO_ROOT / "tests" / "proof" / "native-reference" / cls.subject_id
+        cls.proof_host_dir = (
+            REPO_ROOT / "subjects" / cls.subject_id / "validation" / "proof" / "native-reference"
+        )
         cls.proof_host_cmake_path = cls.proof_host_dir / "CMakeLists.txt"
         cls.proof_host_main_path = cls.proof_host_dir / "main.cpp"
         cls.proof_host_run_script_path = cls.proof_host_dir / "RunNativeReferenceProof.cmake"
@@ -138,7 +140,7 @@ class NativeReferenceBootstrapSupportTests(unittest.TestCase):
             "RESULT_VARIABLE proof_exit_code",
             "OUTPUT_FILE",
             "ERROR_FILE",
-            "exit-code.txt",
+            "CHAOS_SUBJECT_REFERENCE_EXIT_CODE_PATH",
         ]
 
         for marker in run_script_markers:

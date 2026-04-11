@@ -3,20 +3,46 @@
 #include "reflection_query_model.h"
 
 #include <cstdio>
+#include <atomic>
 #include <cstdlib>
 #include <cstring>
+#include <memory>
 #include <mutex>
+#include <new>
 #include <string>
 #include <thread>
 #include <unordered_map>
 #include <vector>
 
+struct ThreadRootRecord {
+    const void* address;
+    size_t size;
+};
+
+struct FinalizerWorkItem {
+    void* object_instance;
+    chaos::il2cpp::runtime_core::FinalizerCallback finalizer;
+};
+
+struct RuntimeInternalState {
+    std::mutex finalizer_queue_mutex;
+    std::vector<FinalizerWorkItem> finalizer_queue = {};
+};
+
+struct ThreadInternalState {
+    std::unordered_map<std::string, int32_t> thread_static_int32_slots = {};
+    std::vector<ThreadRootRecord> reported_roots = {};
+    bool at_gc_safepoint = false;
+};
+
 struct RuntimeState {
     RuntimeConfig config;
+    RuntimeInternalState* internal_state;
 };
 
 struct ThreadState {
     RuntimeState* runtime_state;
+    ThreadInternalState* internal_state;
 };
 
 namespace chaos::il2cpp::runtime_core {
@@ -58,7 +84,10 @@ std::mutex g_engine_binding_mutex;
 uintptr_t g_next_engine_handle = 1u;
 std::unordered_map<uintptr_t, void*> g_engine_handles = {};
 std::vector<EngineLifecycleRegistration> g_engine_lifecycle_registrations = {};
+std::mutex g_monitor_registry_mutex;
+std::unordered_map<void*, std::shared_ptr<std::recursive_mutex>> g_monitor_registry = {};
 const std::thread::id g_main_thread_id = std::this_thread::get_id();
+std::atomic<RuntimeMode> g_runtime_mode = RuntimeMode::Aot;
 
 void* CHAOS_RUNTIME_ABI_CALL DefaultAllocate(size_t size, void* user_data) {
     (void)user_data;
@@ -119,6 +148,28 @@ bool IsAttached(RuntimeState* runtime_state, ThreadState* thread_state) {
     return runtime_state != nullptr && thread_state != nullptr && thread_state->runtime_state == runtime_state;
 }
 
+RuntimeInternalState* GetRuntimeInternalState(RuntimeState* runtime_state) {
+    return runtime_state != nullptr ? runtime_state->internal_state : nullptr;
+}
+
+ThreadInternalState* GetThreadInternalState(ThreadState* thread_state) {
+    return thread_state != nullptr ? thread_state->internal_state : nullptr;
+}
+
+std::shared_ptr<std::recursive_mutex> GetOrCreateMonitor(void* monitor_target) {
+    if (monitor_target == nullptr) {
+        return nullptr;
+    }
+
+    std::lock_guard<std::mutex> lock(g_monitor_registry_mutex);
+    auto& monitor = g_monitor_registry[monitor_target];
+    if (!monitor) {
+        monitor = std::make_shared<std::recursive_mutex>();
+    }
+
+    return monitor;
+}
+
 bool IsLikelyMetadataTokenHandle(MethodInfoHandle method) {
     const uintptr_t raw_method = reinterpret_cast<uintptr_t>(method);
     return raw_method != 0u && raw_method <= static_cast<uintptr_t>(0x0FFFFFFFu);
@@ -148,6 +199,13 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     }
 
     runtime_state->config = normalized_config;
+    runtime_state->internal_state = new (std::nothrow) RuntimeInternalState();
+    if (runtime_state->internal_state == nullptr) {
+        FreeBytes(normalized_config, runtime_state);
+        return CHAOS_RUNTIME_STATUS_INTERNAL_ERROR;
+    }
+
+    SetRuntimeMode(RuntimeMode::Aot);
     *out_runtime_state = runtime_state;
     return CHAOS_RUNTIME_STATUS_OK;
 }
@@ -157,6 +215,9 @@ void CHAOS_RUNTIME_ABI_CALL RuntimeShutdown(RuntimeState* runtime_state) {
         return;
     }
 
+    SetRuntimeMode(RuntimeMode::Aot);
+    delete runtime_state->internal_state;
+    runtime_state->internal_state = nullptr;
     FreeBytes(runtime_state->config, runtime_state);
 }
 
@@ -174,6 +235,12 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL ThreadAttach(
     }
 
     thread_state->runtime_state = runtime_state;
+    thread_state->internal_state = new (std::nothrow) ThreadInternalState();
+    if (thread_state->internal_state == nullptr) {
+        FreeBytes(runtime_state->config, thread_state);
+        return CHAOS_RUNTIME_STATUS_INTERNAL_ERROR;
+    }
+
     *out_thread_state = thread_state;
     return CHAOS_RUNTIME_STATUS_OK;
 }
@@ -185,6 +252,8 @@ void CHAOS_RUNTIME_ABI_CALL ThreadDetach(
         return;
     }
 
+    delete thread_state->internal_state;
+    thread_state->internal_state = nullptr;
     FreeBytes(runtime_state->config, thread_state);
 }
 
@@ -549,6 +618,18 @@ const RuntimeAbiV0* GetRuntimeAbiV0() {
     return &kRuntimeAbiV0;
 }
 
+RuntimeMode GetRuntimeMode() {
+    return g_runtime_mode.load(std::memory_order_acquire);
+}
+
+void SetRuntimeMode(RuntimeMode mode) {
+    g_runtime_mode.store(mode, std::memory_order_release);
+}
+
+bool IsMixedMode() {
+    return GetRuntimeMode() == RuntimeMode::Mixed;
+}
+
 void* BoxValueObject(
     RuntimeState* runtime_state,
     ThreadState* thread_state,
@@ -717,6 +798,138 @@ bool DispatchEngineLifecycleCallbacks(const char* phase_utf8) {
 
 bool IsMainThreadLane() {
     return std::this_thread::get_id() == g_main_thread_id;
+}
+
+bool ThreadStaticInt32Add(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    const char* slot_key_utf8,
+    int32_t delta,
+    int32_t* out_value) {
+    if (!IsAttached(runtime_state, thread_state) || slot_key_utf8 == nullptr || out_value == nullptr) {
+        return false;
+    }
+
+    auto* thread_internal_state = GetThreadInternalState(thread_state);
+    if (thread_internal_state == nullptr) {
+        return false;
+    }
+
+    int32_t& value = thread_internal_state->thread_static_int32_slots[slot_key_utf8];
+    value += delta;
+    *out_value = value;
+    return true;
+}
+
+bool MonitorEnter(void* monitor_target) {
+    auto monitor = GetOrCreateMonitor(monitor_target);
+    if (!monitor) {
+        return false;
+    }
+
+    monitor->lock();
+    return true;
+}
+
+bool MonitorExit(void* monitor_target) {
+    if (monitor_target == nullptr) {
+        return false;
+    }
+
+    std::shared_ptr<std::recursive_mutex> monitor = nullptr;
+    {
+        std::lock_guard<std::mutex> lock(g_monitor_registry_mutex);
+        const auto iterator = g_monitor_registry.find(monitor_target);
+        if (iterator == g_monitor_registry.end()) {
+            return false;
+        }
+
+        monitor = iterator->second;
+    }
+
+    if (!monitor) {
+        return false;
+    }
+
+    monitor->unlock();
+    return true;
+}
+
+bool GcSafepoint(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state) {
+    if (!IsAttached(runtime_state, thread_state)) {
+        return false;
+    }
+
+    auto* thread_internal_state = GetThreadInternalState(thread_state);
+    if (thread_internal_state == nullptr) {
+        return false;
+    }
+
+    thread_internal_state->at_gc_safepoint = true;
+    return true;
+}
+
+size_t ReportThreadRoot(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    const void* root_address,
+    size_t root_size) {
+    if (!IsAttached(runtime_state, thread_state) || root_address == nullptr || root_size == 0u) {
+        return 0u;
+    }
+
+    auto* thread_internal_state = GetThreadInternalState(thread_state);
+    if (thread_internal_state == nullptr) {
+        return 0u;
+    }
+
+    thread_internal_state->reported_roots.push_back(
+        ThreadRootRecord
+        {
+            root_address,
+            root_size,
+        });
+    return thread_internal_state->reported_roots.size();
+}
+
+bool EnqueueFinalizer(
+    RuntimeState* runtime_state,
+    void* object_instance,
+    FinalizerCallback finalizer) {
+    auto* runtime_internal_state = GetRuntimeInternalState(runtime_state);
+    if (runtime_internal_state == nullptr || object_instance == nullptr || finalizer == nullptr) {
+        return false;
+    }
+
+    std::lock_guard<std::mutex> lock(runtime_internal_state->finalizer_queue_mutex);
+    runtime_internal_state->finalizer_queue.push_back(
+        FinalizerWorkItem
+        {
+            object_instance,
+            finalizer,
+        });
+    return true;
+}
+
+size_t DrainFinalizerQueue(RuntimeState* runtime_state) {
+    auto* runtime_internal_state = GetRuntimeInternalState(runtime_state);
+    if (runtime_internal_state == nullptr) {
+        return 0u;
+    }
+
+    std::vector<FinalizerWorkItem> pending_finalizers = {};
+    {
+        std::lock_guard<std::mutex> lock(runtime_internal_state->finalizer_queue_mutex);
+        pending_finalizers.swap(runtime_internal_state->finalizer_queue);
+    }
+
+    for (const auto& work_item : pending_finalizers) {
+        work_item.finalizer(work_item.object_instance);
+    }
+
+    return pending_finalizers.size();
 }
 
 }  // namespace chaos::il2cpp::runtime_core

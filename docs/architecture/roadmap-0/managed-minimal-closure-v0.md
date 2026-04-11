@@ -24,6 +24,7 @@ Stage 3 推荐输出根目录：
 - `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/typed-il-ir.json`
 - `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/aot-manifest.json`
 - `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/metadata-registration.json`
+- `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/hot-update/supplemental-metadata-template.json`
 - `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/code-registration.json`
 - `artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/closure.manifest.json`
 

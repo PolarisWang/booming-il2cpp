@@ -263,6 +263,43 @@ class SubjectPlannerTests(unittest.TestCase):
         self.assertEqual(str(expected_matrix["matrixId"]), plan["selection"]["matrixId"])
         self.assertEqual(str(expected_matrix["pipelineId"]), plan["selection"]["pipelineId"])
 
+    def test_planner_selects_mobile_android_buildable_matrix_without_subject_name_coupling(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mobile_buildable")
+        _, record = select_subject_record(
+            "chaos_subject_planner_mobile_buildable_record",
+            category="canonical",
+            source_type="dotnet-project",
+            required_stage_kinds=["runtime-managed-output", "build-target"],
+            required_goal_ids=["correctness.dev", "correctness.platform"],
+            required_validation_profile_ids=["managed-output"],
+        )
+        subject_id = str(record["subjectId"])
+        run_id = "20260411-fixture-mobile-build-001"
+
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            subject_id,
+            goal_id="correctness.platform",
+            run_id=run_id,
+        )
+
+        self.assertEqual(subject_id, plan["selection"]["subjectId"])
+        self.assertEqual("correctness.platform", plan["selection"]["goalId"])
+        self.assertEqual("windows-android-buildable", plan["selection"]["matrixId"])
+        self.assertEqual("platform-buildable", plan["selection"]["pipelineId"])
+        self.assertEqual(
+            [
+                "source-resolve",
+                "host-input-build",
+                "analysis-frontend",
+                "generated-native-proof",
+                "build-target",
+                "report-assemble",
+            ],
+            [stage["stageId"] for stage in plan["stagePlan"]],
+        )
+        self.assertEqual("build", plan["selection"]["artifactPlan"]["evidenceTerminalBucket"])
+
     def test_planner_uses_default_validation_profile_and_variant(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_variant_default")
         subjects_module, record = select_subject_record(

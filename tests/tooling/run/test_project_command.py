@@ -55,6 +55,7 @@ class ProjectCommandTests(unittest.TestCase):
             REPO_ROOT,
             "windows",
             {"id": "subject/FixtureSubject", "refresh-generated": True},
+            progress_callback=None,
         )
 
     def test_project_dispatch_routes_aggregate_generation_to_workspace_helper(self) -> None:
@@ -84,6 +85,7 @@ class ProjectCommandTests(unittest.TestCase):
             REPO_ROOT,
             "windows",
             {"host": "windows", "refresh-generated": True},
+            progress_callback=None,
         )
 
     def test_build_dispatch_routes_project_workspace_to_subject_and_core_helpers(self) -> None:

@@ -10,8 +10,17 @@ struct ManagedExceptionCarrier {
 };
 
 using EngineLifecycleCallback = void (*)(const char* phase_utf8, void* user_data);
+using FinalizerCallback = void (*)(void* object_instance);
+
+enum class RuntimeMode {
+    Aot = 0,
+    Mixed = 1,
+};
 
 const RuntimeAbiV0* GetRuntimeAbiV0();
+RuntimeMode GetRuntimeMode();
+void SetRuntimeMode(RuntimeMode mode);
+bool IsMixedMode();
 void* BoxValueObject(
     RuntimeState* runtime_state,
     ThreadState* thread_state,
@@ -41,6 +50,27 @@ bool RegisterEngineLifecycleCallback(
     void* user_data);
 bool DispatchEngineLifecycleCallbacks(const char* phase_utf8);
 bool IsMainThreadLane();
+bool ThreadStaticInt32Add(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    const char* slot_key_utf8,
+    int32_t delta,
+    int32_t* out_value);
+bool MonitorEnter(void* monitor_target);
+bool MonitorExit(void* monitor_target);
+bool GcSafepoint(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state);
+size_t ReportThreadRoot(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    const void* root_address,
+    size_t root_size);
+bool EnqueueFinalizer(
+    RuntimeState* runtime_state,
+    void* object_instance,
+    FinalizerCallback finalizer);
+size_t DrainFinalizerQueue(RuntimeState* runtime_state);
 
 }  // namespace chaos::il2cpp::runtime_core
 

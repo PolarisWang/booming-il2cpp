@@ -3,15 +3,18 @@ namespace Chaos.IL2CPP.Contracts;
 public sealed record ManagedClosureRequest(
     string InputAssemblyPath,
     string OutputRootPath,
-    string? EntryPointSubjectIdOverride = null);
+    string? EntryPointSubjectIdOverride = null,
+    IReadOnlyList<string>? AdditionalAssemblyPaths = null);
 
 public static class ManagedClosureArtifactNames
 {
     public const string TypedIlIr = "typed-il-ir.json";
     public const string AotManifest = "aot-manifest.json";
     public const string MetadataRegistration = "metadata-registration.json";
+    public const string SupplementalMetadataTemplate = "hot-update/supplemental-metadata-template.json";
     public const string CodeRegistration = "code-registration.json";
     public const string OptimizationFacts = "optimization-facts.json";
+    public const string PreserveDescriptor = "preserve-descriptor.json";
     public const string NativeReferenceLoweringPlan = "native-reference.lowering-plan.json";
     public const string ClosureManifest = "closure.manifest.json";
 }
@@ -232,6 +235,10 @@ public sealed record ManagedTypeModel
 
     public required string DisplayName { get; init; }
 
+    public bool IsInterface { get; init; }
+
+    public bool IsPreserved { get; init; }
+
     public required int MetadataToken { get; init; }
 }
 
@@ -249,6 +256,12 @@ public sealed record ManagedFieldModel
 
     public required string DefinitionSubjectId { get; init; }
 
+    public bool IsStatic { get; init; }
+
+    public bool IsThreadStatic { get; init; }
+
+    public bool IsPreserved { get; init; }
+
     public required int MetadataToken { get; init; }
 }
 
@@ -265,6 +278,8 @@ public sealed record ManagedPropertyModel
     public required string SubjectId { get; init; }
 
     public required string DefinitionSubjectId { get; init; }
+
+    public bool IsPreserved { get; init; }
 
     public required int MetadataToken { get; init; }
 }
@@ -288,6 +303,10 @@ public sealed record ManagedMethodModel
     public required string Signature { get; init; }
 
     public required bool IsStatic { get; init; }
+
+    public bool IsPreserved { get; init; }
+
+    public bool IsUnmanagedCallersOnly { get; init; }
 
     public required int MetadataToken { get; init; }
 
@@ -346,6 +365,8 @@ public sealed record ManagedInstructionModel
     public required string Op { get; init; }
 
     public object? Operand { get; init; }
+
+    public int? IlOffset { get; init; }
 
     public string? ResultType { get; init; }
 
@@ -443,6 +464,8 @@ public sealed record SemanticWorldModel
 
     public required AssemblyIdentityModel Assembly { get; init; }
 
+    public required IReadOnlyList<AssemblyIdentityModel> Assemblies { get; init; }
+
     public required string EntryPointSubjectId { get; init; }
 
     public required IReadOnlyList<ManagedTypeModel> Types { get; init; }
@@ -466,6 +489,8 @@ public sealed record LinkedWorldModel
 
     public required AssemblyIdentityModel Assembly { get; init; }
 
+    public required IReadOnlyList<AssemblyIdentityModel> Assemblies { get; init; }
+
     public required string EntryPointSubjectId { get; init; }
 
     public required IReadOnlyList<ManagedTypeModel> Types { get; init; }
@@ -485,6 +510,8 @@ public sealed record LinkedWorldModel
     public required CapabilityBundlesModel CapabilityBundles { get; init; }
 
     public required OptimizationFactsArtifact OptimizationFacts { get; init; }
+
+    public required PreserveDescriptorArtifact PreserveDescriptor { get; init; }
 }
 
 public sealed record LinkedDependencyModel
@@ -511,6 +538,26 @@ public sealed record OptimizationFactsArtifact
     public required IReadOnlyList<LayoutFact> LayoutFacts { get; init; }
 
     public required IReadOnlyList<ExceptionFact> ExceptionFacts { get; init; }
+}
+
+public sealed record PreserveDescriptorArtifact
+{
+    public string FormatVersion { get; init; } = "v0";
+
+    public string ArtifactKind { get; init; } = "preserveDescriptor";
+
+    public required IReadOnlyList<PreserveDescriptorEntry> Entries { get; init; }
+}
+
+public sealed record PreserveDescriptorEntry
+{
+    public required string SubjectKind { get; init; }
+
+    public required string SubjectId { get; init; }
+
+    public required string Preserve { get; init; }
+
+    public required string Reason { get; init; }
 }
 
 public sealed record ClosedWorldSpecializationFact
@@ -670,6 +717,54 @@ public sealed record MetadataRegistrationEntry
     public string? ImportEntryPointName { get; init; }
 }
 
+public sealed record SupplementalMetadataTemplateArtifact
+{
+    public string FormatVersion { get; init; } = "v0";
+
+    public string ArtifactKind { get; init; } = "supplementalMetadataTemplate";
+
+    public required IReadOnlyList<SupplementalMetadataTypeTemplateEntry> RegisteredTypes { get; init; }
+
+    public required IReadOnlyList<SupplementalMetadataMethodTemplateEntry> RegisteredMethods { get; init; }
+
+    public required SupplementalMetadataReservedSlots ReservedSlots { get; init; }
+}
+
+public sealed record SupplementalMetadataTypeTemplateEntry
+{
+    public required string AssemblyName { get; init; }
+
+    public required string SubjectId { get; init; }
+
+    public required string DefinitionSubjectId { get; init; }
+
+    public required int MetadataToken { get; init; }
+}
+
+public sealed record SupplementalMetadataMethodTemplateEntry
+{
+    public required string AssemblyName { get; init; }
+
+    public required string SubjectId { get; init; }
+
+    public required string DefinitionSubjectId { get; init; }
+
+    public required string DeclaringTypeSubjectId { get; init; }
+
+    public required int MetadataToken { get; init; }
+
+    public required int ParameterCount { get; init; }
+}
+
+public sealed record SupplementalMetadataReservedSlots
+{
+    public int TypeCount { get; init; } = 256;
+
+    public int MethodCount { get; init; } = 1024;
+
+    public int GenericInstantiationCount { get; init; } = 256;
+}
+
 public sealed record CodeRegistrationArtifact
 {
     public string FormatVersion { get; init; } = "v0";
@@ -702,6 +797,8 @@ public sealed record MetadataWriterOutput
     public required AotManifestArtifact AotManifest { get; init; }
 
     public required MetadataRegistrationArtifact MetadataRegistration { get; init; }
+
+    public required SupplementalMetadataTemplateArtifact SupplementalMetadataTemplate { get; init; }
 }
 
 public sealed record ManagedClosureArtifactRef
@@ -738,9 +835,13 @@ public sealed record ManagedClosureResult
 
     public required MetadataRegistrationArtifact MetadataRegistration { get; init; }
 
+    public required SupplementalMetadataTemplateArtifact SupplementalMetadataTemplate { get; init; }
+
     public required CodeRegistrationArtifact CodeRegistration { get; init; }
 
     public required OptimizationFactsArtifact OptimizationFacts { get; init; }
+
+    public required PreserveDescriptorArtifact PreserveDescriptor { get; init; }
 
     public required NativeReferenceLoweringPlanArtifact NativeReferenceLoweringPlan { get; init; }
 

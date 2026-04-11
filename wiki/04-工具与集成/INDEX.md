@@ -1,48 +1,48 @@
 ﻿# 04-工具与集成 INDEX
 
-## 本目录职责
+## 范围说明
 
-- 记录仓库级工具入口、wrapper、测试拉起方式和 harness / CI 集成约定。
-- 记录长期有效的命令协议、产物边界和接入规则，不记录单次运行结果。
+- 记录项目级工具入口、集成边界、proof baseline 与长期稳定的操作约束。
+- 不记录单次任务流水、临时诊断或仅对某次执行有效的上下文。
+- 执行日志保留在 `docs/dev/<lifecycle>/<task_id>/`；沉淀后的长期知识再进入本目录。
 
-> 收录工具入口、测试入口和集成约定。
+## 子分类
 
-## 子类别
+| 分类 | 说明 | 索引 |
+| --- | --- | --- |
+| `-` | 当前目录直接维护工具与集成主题页 | `-` |
 
-| 类别 | 说明 | 索引 |
-|------|------|------|
-| `-` | 当前无下级目录 | `-` |
+## 关键页面
 
-## 重要文档
+| 页面 | 主题 | 摘要 |
+| --- | --- | --- |
+| [`interpreter-lowering-and-native-smoke-baseline-v1.md`](./interpreter-lowering-and-native-smoke-baseline-v1.md) | interpreter lowering、mixed execution 与 native smoke baseline | 固化 Phase 7 的真实 lowering proof、same-assembly `Call` / `CallVirt` 执行、真实 EH lowering、`try/catch` / `rethrow` / `try/finally` 最小 managed proof、字符串桥执行 proof、native `InterpreterVM` smoke proof 与 Windows 文件锁规避规则。 |
+| [`metadata-supplement-bridge-baseline-v1.md`](./metadata-supplement-bridge-baseline-v1.md) | metadata supplement 与 bridge baseline | 固化 Phase 6 的 supplemental metadata template、bridge baseline、proof 与项目级验证入口。 |
+| [`hot-update-skeleton-v1.md`](./hot-update-skeleton-v1.md) | hot update skeleton | 固化 `Chaos.IL2CPP.HotUpdate` 的项目边界、package 形状、runtime mode 语义与 `HotUpdateSkeletonProof`。 |
+| [`engine-host-proof-baseline-v1.md`](./engine-host-proof-baseline-v1.md) | engine host proof baseline | 固化 `EngineHostProof` 的 host proof build、lifecycle stress 与 `HostEmbeddingLite` ownership 基线。 |
+| [`mobile-host-subject-routing-v1.md`](./mobile-host-subject-routing-v1.md) | mobile host subject routing | 说明 `MobileHelloWorldProof` 的 subject-scoped Android/iOS host root、root CMake cache 变量与 mobile route fallback 规则。 |
+| [`native-perf-and-convert-baselines-v1.md`](./native-perf-and-convert-baselines-v1.md) | native perf 与 convert baseline | 固化 `native-runtime-perf` payload、`tests/perf/*` 约束与 convert perf baseline。 |
+| [`engine-binding-stub-baseline-v1.md`](./engine-binding-stub-baseline-v1.md) | engine binding stub baseline | 固化 `Chaos.IL2CPP.EngineBinding`、`[EngineExport]` / `[EngineCallback]` 标注入口与 smoke / compile-only baseline。 |
+| [`project-graph-ingestion-v1.md`](./project-graph-ingestion-v1.md) | project graph ingestion | 固化 `Chaos.IL2CPP.ProjectGraph`、`project-graph.json` 与 golden convert 接线。 |
+| [`共享-contract-v0.md`](./共享-contract-v0.md) | 共享 contract v0 | 固化 `contracts/shared/v0/` 的长期约束、验证入口与使用边界。 |
+| [`统一入口脚本.md`](./统一入口脚本.md) | 统一入口脚本 `run.*` | 固化 bootstrap、TUI、prepare/clean、`--json` 与 harness 接线规则。 |
+| [`统一测试框架.md`](./统一测试框架.md) | 统一测试框架 `run test` | 固化 suite manifest、summary/final-summary 与测试入口约束。 |
+| [`unified-project-workspaces-and-deploy-core.md`](./unified-project-workspaces-and-deploy-core.md) | project workspaces 与 deploy core | 固化 `generate/build project`、`deploy core`、`subject-exec` 与 `artifacts/projects/**` / `deploy/core/**` 边界。 |
+| [`Claude技能测试入口.md`](./Claude技能测试入口.md) | Claude 技能测试入口 | 固化 `.codex/tests/claude-code/` 的入口与约束。 |
 
-| 文档 | 主题 | 说明 |
-|------|------|------|
-| [`统一入口脚本.md`](./%E7%BB%9F%E4%B8%80%E5%85%A5%E5%8F%A3%E8%84%9A%E6%9C%AC.md) | 统一入口 `run.*` | 说明 bootstrap、全屏 TUI、prepare/clean、`--json` 和 harness 生命周期 |
-| [`unified-project-workspaces-and-deploy-core.md`](./unified-project-workspaces-and-deploy-core.md) | 工程工作区与正式部署 | 说明 `generate/build project`、`deploy core`、`subject-exec` 刷新规则和 `artifacts/projects/**` / `deploy/core/**` 边界 |
-| [`统一测试框架.md`](./%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md) | 统一测试域 `run test` | 说明 suite manifest、日志目录、事件流、红绿灯覆盖、性能基线和批量执行规则 |
-| [`Claude技能测试入口.md`](./Claude%E6%8A%80%E8%83%BD%E6%B5%8B%E8%AF%95%E5%85%A5%E5%8F%A3.md) | Claude 测试入口 | 说明 `.codex/tests/claude-code/` 的运行入口 |
+## 维护约定
 
-## 本层规则
+- 页面必须总结可复用结论，而不是复制任务过程。
+- 新增页面时必须同步更新本目录 `INDEX.md`；如影响上层导航，再更新 `wiki/INDEX.md`。
 
-- 工具与集成页面描述入口和长期协议，不记录单次运行结果。
+## 最近变更
 
-## 最近更新
-
-- `2026-04-08`：新增 `unified-project-workspaces-and-deploy-core.md`，沉淀 `generate/build project`、`deploy core`、`subject-exec` 手动刷新和正式产物边界。
-- `2026-04-04`：更新 `统一测试框架.md`，补充 pipeline 的 `phasePlan[]` / `phaseResults[]` 结果契约，以及 `summary.json` / `final-summary` 的分层结果输出规则。
-- `2026-04-04`：更新 `统一测试框架.md` 与 `统一入口脚本.md`，补充 `run test watch` / `run test summary` 入口，以及交互式测试运行态实时进度屏和 `current.json` / `last.json` 指针规则。
-- `2026-04-04`：更新 `统一测试框架.md`，补充 `run test watch` 对 `pipeline` 对象的 phase-aware 终态展示规则，统一 `watch` 与 `summary` 的 `Phases:` 语义。
-- `2026-04-04`：更新 `统一测试框架.md` 与 `统一入口脚本.md`，补充统一测试框架第一版发布摘要，以及统一入口菜单中的单一 `test` 菜单项规则。
-- `2026-04-04`：更新 `统一测试框架.md` 与 `统一入口脚本.md`，补充 perf baseline、build fingerprint、strict 退出码，以及对外只保留 `run test ...` 的最终契约。
-- `2026-04-04`：更新 `统一测试框架.md`，补充 traffic-light 覆盖模型、`coveragePolicy` selector 和 summary/report 三色计数规则。
-- `2026-04-04`：更新 `统一测试框架.md` 与 `统一入口脚本.md`，补充 TUI / harness 消费统一测试事件流，以及 `run test ... --json` 优先输出 `events.jsonl` 的规则。
-- `2026-04-04`：更新 `统一测试框架.md`，补充结果目录、`runId` / `summaryPath` 元数据和 `final-summary` 事件的最小契约。
-- `2026-04-04`：更新 `统一测试框架.md`，补充 session 执行器、`implicit build` 标记和 host 不兼容时的退出码约定。
-- `2026-04-04`：更新 `统一测试框架.md`，补充 adapter registry、synthetic `main` 和 `caseId` 冲突后缀规则。
-- `2026-04-04`：更新 `统一测试框架.md`，记录 family 目录迁移的当前状态，以及旧目录兼容副本的边界。
-- `2026-04-04`：继续更新 `统一入口脚本.md` 与 `统一测试框架.md`，补充 `prepare` 统一走 smoke build stage，以及 TUI 动态测试菜单输入规则。
-- `2026-04-04`：更新 `统一入口脚本.md` 与 `统一测试框架.md`，补充 macOS 下 `dotnet` 按需引导、Homebrew 前提和非交互限制。
-- `2026-04-03`：新增 `统一测试框架.md`，沉淀 `run test ...`、suite manifest、日志目录、事件流、红绿灯覆盖和 perf 基线规则。
-- `2026-04-03`：更新 `统一入口脚本.md`，补充 `run` 全屏 TUI 菜单结构与按键说明。
-- `2026-04-03`：新增 `统一入口脚本.md`，记录 `run.ps1` / `run.sh` / `run.cmd` 协议与 harness 生命周期。
-- `2026-04-02`：建立工具与集成目录。
+- `2026-04-11`: 更新 `interpreter-lowering-and-native-smoke-baseline-v1.md`，补充 same-assembly `CallVirt` 真实执行、`ManagedInstructionModel.IlOffset` 与真实 EH lowering，以及 `try/catch` / `rethrow` / `try/finally` 最小 managed proof。
+- `2026-04-11`: 新增 `metadata-supplement-bridge-baseline-v1.md`，沉淀 Phase 6 supplemental metadata 与 bridge baseline 的长期规则。
+- `2026-04-11`: 新增 `hot-update-skeleton-v1.md`，沉淀 Phase 5 热更新骨架的项目边界、package 形状、runtime mode 与 proof/verification 入口。
+- `2026-04-11`: 新增 `engine-host-proof-baseline-v1.md`，沉淀 `EngineHostProof` host proof 与 `HostEmbeddingLite` ownership 基线。
+- `2026-04-11`: 新增 `mobile-host-subject-routing-v1.md`，沉淀 mobile subject route 的长期规则。
+- `2026-04-11`: 新增 `engine-binding-stub-baseline-v1.md`，沉淀 `Chaos.IL2CPP.EngineBinding` 的 smoke / compile-only baseline。
+- `2026-04-11`: 新增 `native-perf-and-convert-baselines-v1.md`，沉淀 native perf 与 convert perf 基线。
+- `2026-04-11`: 新增 `project-graph-ingestion-v1.md`，沉淀 `Chaos.IL2CPP.ProjectGraph` 与 `project-graph.json` 接线。
+- `2026-04-11`: 新增 `共享-contract-v0.md`，沉淀 `contracts/shared/v0/` 的长期约束。

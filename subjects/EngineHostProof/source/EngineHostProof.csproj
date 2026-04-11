@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>EngineHostProof</AssemblyName>
+    <RootNamespace>EngineHostProof</RootNamespace>
+  </PropertyGroup>
+</Project>

@@ -58,6 +58,10 @@ internal sealed record FieldReferenceSummary
 
     public required string FieldType { get; init; }
 
+    public bool IsStatic { get; init; }
+
+    public bool IsThreadStatic { get; init; }
+
     public required int MetadataToken { get; init; }
 
     public required ImmutableDictionary<string, string> Substitutions { get; init; }
@@ -68,6 +72,10 @@ internal sealed record MethodSummary : MethodReferenceSummary
     public required string Signature { get; init; }
 
     public required bool IsStatic { get; init; }
+
+    public bool IsPreserved { get; init; }
+
+    public bool IsUnmanagedCallersOnly { get; init; }
 
     public required IReadOnlyList<ManagedParameterModel> Parameters { get; init; }
 

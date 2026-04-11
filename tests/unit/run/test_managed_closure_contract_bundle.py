@@ -25,6 +25,8 @@ EXPECTED_ARTIFACTS = {
     "optimization-facts.json": REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "optimization-facts.min.json",
     "native-reference.lowering-plan.json": REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "native-reference.lowering-plan.min.json",
 }
+ADDITIONAL_BUNDLE_ARTIFACTS = ("preserve-descriptor.json",)
+SUPPLEMENTAL_METADATA_TEMPLATE_PATH = "hot-update/supplemental-metadata-template.json"
 METADATA_REGISTRATION_MINIMAL_KEYS = ("registrationKind", "slot", "subjectId")
 TEST_INTERMEDIATE_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "managed-closure-contract"
 
@@ -170,13 +172,17 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         self.assertIn("subjects/<subject-id>/source/<subject-id>.csproj", spec_text)
         self.assertIn("subjects/<subject-id>/source/bin/Release/net8.0/<subject-id>.dll", spec_text)
         self.assertIn("artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/typed-il-ir.json", spec_text)
+        self.assertIn(
+            "artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/hot-update/supplemental-metadata-template.json",
+            spec_text,
+        )
         self.assertIn("closure.manifest.json", spec_text)
         self.assertIn("docs/architecture/roadmap-0/managed-minimal-closure-v0.md", overview_text)
 
     def test_driver_generates_bundle_from_selected_proof_subject(self) -> None:
         self._ensure_bundle_generated()
 
-        for artifact_name in [*EXPECTED_ARTIFACTS.keys(), "closure.manifest.json"]:
+        for artifact_name in [*EXPECTED_ARTIFACTS.keys(), *ADDITIONAL_BUNDLE_ARTIFACTS, "closure.manifest.json"]:
             artifact_path = self.output_root / artifact_name
             self.assertTrue(artifact_path.is_file(), msg=f"missing closure artifact: {artifact_path}")
 
@@ -194,13 +200,23 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
                 "typed-il-ir.json",
                 "aot-manifest.json",
                 "metadata-registration.json",
+                SUPPLEMENTAL_METADATA_TEMPLATE_PATH,
                 "code-registration.json",
                 "optimization-facts.json",
+                "preserve-descriptor.json",
                 "native-reference.lowering-plan.json",
             ],
             [artifact["path"] for artifact in manifest["artifacts"]],
         )
         self.assertTrue(manifest["inputModuleVersionId"])
+
+    def test_generated_preserve_descriptor_defaults_to_empty_entries_without_preserve_attributes(self) -> None:
+        self._ensure_bundle_generated()
+
+        preserve_descriptor = load_json(self.output_root / "preserve-descriptor.json")
+        self.assertEqual("v0", preserve_descriptor["formatVersion"])
+        self.assertEqual("preserveDescriptor", preserve_descriptor["artifactKind"])
+        self.assertEqual([], preserve_descriptor["entries"])
 
     def test_generated_core_artifacts_match_canonical_contract_samples(self) -> None:
         self._ensure_bundle_generated()

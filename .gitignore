@@ -1,6 +1,7 @@
 # Local workflow state
 .booming/
 .codex/
+.claude/
 docs/executions/
 
 # Editor / IDE state

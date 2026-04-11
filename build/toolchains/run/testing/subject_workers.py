@@ -124,6 +124,19 @@ def _windows_variant_build_flags(variant: str) -> tuple[list[str], list[str]]:
     raise RuntimeError(f"unsupported subject variant: {variant}")
 
 
+def _subject_mobile_host_root(repo_root: Path, subject_id: str, target_platform: str) -> Path:
+    if target_platform == "android-arm64":
+        candidate = repo_root / "subjects" / subject_id / "validation" / "mobile" / "android-host"
+        fallback = repo_root / "tests" / "gate" / "android-smoke"
+    elif target_platform == "ios-arm64":
+        candidate = repo_root / "subjects" / subject_id / "validation" / "mobile" / "ios-host"
+        fallback = repo_root / "tests" / "gate" / "ios-smoke"
+    else:
+        raise RuntimeError(f"unsupported mobile target platform: {target_platform}")
+
+    return candidate if candidate.is_dir() else fallback
+
+
 def _dotnet_intermediate_args(project_name: str, host_platform: str) -> list[str]:
     normalized_host = _normalize_host_platform(host_platform)
     intermediate_root = tooling_module.allocate_dotnet_intermediate_dir(project_name, host_platform=normalized_host)
@@ -399,6 +412,7 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
             "metadataRegistrationPath": _relative(repo_root, output_root / "metadata-registration.json"),
             "codeRegistrationPath": _relative(repo_root, output_root / "code-registration.json"),
             "optimizationFactsPath": _relative(repo_root, output_root / "optimization-facts.json"),
+            "preserveDescriptorPath": _relative(repo_root, output_root / "preserve-descriptor.json"),
             "closureManifestPath": _relative(repo_root, output_root / "closure.manifest.json"),
         },
     }
@@ -495,12 +509,15 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
 
     include_roots = [
         repo_root / "contracts" / "native" / "v0",
+        repo_root / "contracts" / "engine" / "v0",
         repo_root / "src" / "native" / "runtime-core",
+        repo_root / "src" / "native" / "engine-bridge",
         repo_root / "src" / "native" / "bootstrap",
         repo_root / "src" / "native" / "support",
     ]
     source_files = [
         repo_root / "src" / "native" / "runtime-core" / "runtime_core.cpp",
+        repo_root / "src" / "native" / "engine-bridge" / "engine_bridge.cpp",
         repo_root / "src" / "native" / "bootstrap" / "bootstrap.cpp",
         repo_root / "src" / "native" / "support" / "support.cpp",
         proof_root / "main.cpp",
@@ -565,6 +582,7 @@ def _validate_only_build(
     request: dict[str, Any],
     preset_target: str,
     toolchain_file: Path,
+    extra_cache_entries: list[str] | None = None,
 ) -> dict[str, Any]:
     build_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     selection = dict(request["selection"])
@@ -598,6 +616,7 @@ def _validate_only_build(
             f"-DROADMAP0_PRESET_TARGET={preset_target}",
             "-DROADMAP0_TOOLCHAIN_VALIDATE_ONLY=ON",
             f"-DCHAOS_SUBJECT_VARIANT={variant}",
+            *(list(extra_cache_entries or [])),
             f"-DCMAKE_TOOLCHAIN_FILE={repo_root / toolchain_file}",
             *([f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}"] if instance_spec else []),
         ],
@@ -637,15 +656,27 @@ def _validate_only_build(
 
 
 def run_build_target(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
+    subject_id = str(request["selection"]["subjectId"])
     target_platform = str(request["selection"]["executionContext"]["targetPlatform"])
     if target_platform == "windows-x64":
         return _windows_subject_build(repo_root=repo_root, request=request)
     if target_platform == "android-arm64":
+        android_host_root = _subject_mobile_host_root(repo_root, subject_id, target_platform)
         return _validate_only_build(
             repo_root=repo_root,
             request=request,
             preset_target="android-arm64-smoke",
             toolchain_file=Path("build/toolchains/android-arm64.cmake"),
+            extra_cache_entries=[f"-DCHAOS_SUBJECT_ANDROID_HOST_ROOT={android_host_root}"],
+        )
+    if target_platform == "ios-arm64":
+        ios_host_root = _subject_mobile_host_root(repo_root, subject_id, target_platform)
+        return _validate_only_build(
+            repo_root=repo_root,
+            request=request,
+            preset_target="ios-arm64-packaging",
+            toolchain_file=Path("build/toolchains/ios-arm64.cmake"),
+            extra_cache_entries=[f"-DCHAOS_SUBJECT_IOS_HOST_ROOT={ios_host_root}"],
         )
     if target_platform == "linux-x64":
         return _validate_only_build(
@@ -1024,18 +1055,78 @@ def _native_perf_warmup_count(runtime_profile: str) -> int:
     return 1 if "native-perf" in runtime_profile else 0
 
 
+def _is_numeric_perf_value(value: Any) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
+
+def _parse_perf_payload(output_lines: list[str]) -> dict[str, Any]:
+    if not output_lines:
+        return {}
+
+    try:
+        payload = json.loads(output_lines[-1])
+    except ValueError:
+        return {}
+
+    return dict(payload) if isinstance(payload, dict) else {}
+
+
+def _payload_custom_perf_metrics(payload: dict[str, Any]) -> dict[str, float]:
+    metrics = dict(payload.get("metrics") or {})
+    custom_metrics: dict[str, float] = {}
+    for metric_name, metric_value in metrics.items():
+        key = str(metric_name or "").strip()
+        if not key or not _is_numeric_perf_value(metric_value):
+            continue
+
+        custom_metrics[key] = round(float(metric_value), 3)
+
+    return custom_metrics
+
+
+def _summary_metric_name(prefix: str, metric_name: str) -> str:
+    if not metric_name:
+        return prefix
+    return f"{prefix}{metric_name[0].upper()}{metric_name[1:]}"
+
+
 def _perf_summary_metrics(samples: list[dict[str, Any]]) -> dict[str, float | int]:
+    counted_samples = [sample for sample in samples if bool(sample.get("countedInSummary", True))]
     durations = [
         float(sample["durationMs"])
-        for sample in samples
-        if bool(sample.get("countedInSummary", True))
+        for sample in counted_samples
+        if _is_numeric_perf_value(sample.get("durationMs"))
     ]
-    return {
+    summary_metrics: dict[str, float | int] = {
         "sampleCount": len(durations),
         "meanDurationMs": round(statistics.fmean(durations), 3) if durations else 0.0,
         "minDurationMs": round(min(durations), 3) if durations else 0.0,
         "maxDurationMs": round(max(durations), 3) if durations else 0.0,
     }
+
+    reserved_keys = {"sampleIndex", "durationMs", "exitCode", "countedInSummary"}
+    custom_metric_names = sorted(
+        {
+            str(metric_name)
+            for sample in counted_samples
+            for metric_name, metric_value in sample.items()
+            if metric_name not in reserved_keys and _is_numeric_perf_value(metric_value)
+        }
+    )
+    for metric_name in custom_metric_names:
+        metric_values = [
+            float(sample[metric_name])
+            for sample in counted_samples
+            if _is_numeric_perf_value(sample.get(metric_name))
+        ]
+        if not metric_values:
+            continue
+
+        summary_metrics[_summary_metric_name("mean", metric_name)] = round(statistics.fmean(metric_values), 3)
+        summary_metrics[_summary_metric_name("min", metric_name)] = round(min(metric_values), 3)
+        summary_metrics[_summary_metric_name("max", metric_name)] = round(max(metric_values), 3)
+
+    return summary_metrics
 
 
 def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
@@ -1097,20 +1188,17 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
         stderr_text = completed.stderr or ""
         output_lines = [line for line in stdout_text.splitlines() if line.strip()]
         last_exit_code = int(completed.returncode)
-        if output_lines:
-            try:
-                payload = json.loads(output_lines[-1])
-            except ValueError:
-                payload = {}
-            if isinstance(payload, dict) and isinstance(payload.get("elapsedMilliseconds"), (int, float)):
-                duration_ms = round(float(payload["elapsedMilliseconds"]), 3)
-        samples.append(
-            {
-                "sampleIndex": sample_index + 1,
-                "durationMs": duration_ms,
-                "exitCode": last_exit_code,
-            }
-        )
+        payload = _parse_perf_payload(output_lines)
+        if _is_numeric_perf_value(payload.get("elapsedMilliseconds")):
+            duration_ms = round(float(payload["elapsedMilliseconds"]), 3)
+
+        sample = {
+            "sampleIndex": sample_index + 1,
+            "durationMs": duration_ms,
+            "exitCode": last_exit_code,
+        }
+        sample.update(_payload_custom_perf_metrics(payload))
+        samples.append(sample)
         stdout_chunks.append(f"=== sample {sample_index + 1} ({duration_ms:.3f} ms) ===\n{stdout_text}".rstrip() + "\n")
         if stderr_text:
             stderr_chunks.append(f"=== sample {sample_index + 1} ({duration_ms:.3f} ms) ===\n{stderr_text}".rstrip() + "\n")
@@ -1233,22 +1321,18 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
         stderr_text = completed.stderr or ""
         output_lines = [line for line in stdout_text.splitlines() if line.strip()]
         last_exit_code = int(completed.returncode)
-        if output_lines:
-            try:
-                payload = json.loads(output_lines[-1])
-            except ValueError:
-                payload = {}
-            if isinstance(payload, dict) and isinstance(payload.get("elapsedMilliseconds"), (int, float)):
-                duration_ms = round(float(payload["elapsedMilliseconds"]), 3)
+        payload = _parse_perf_payload(output_lines)
+        if _is_numeric_perf_value(payload.get("elapsedMilliseconds")):
+            duration_ms = round(float(payload["elapsedMilliseconds"]), 3)
 
-        samples.append(
-            {
-                "sampleIndex": sample_index + 1,
-                "durationMs": duration_ms,
-                "exitCode": last_exit_code,
-                "countedInSummary": counted_in_summary,
-            }
-        )
+        sample = {
+            "sampleIndex": sample_index + 1,
+            "durationMs": duration_ms,
+            "exitCode": last_exit_code,
+            "countedInSummary": counted_in_summary,
+        }
+        sample.update(_payload_custom_perf_metrics(payload))
+        samples.append(sample)
         stdout_chunks.append(f"=== {sample_label} ({duration_ms:.3f} ms) ===\n{stdout_text}".rstrip() + "\n")
         if stderr_text:
             stderr_chunks.append(f"=== {sample_label} ({duration_ms:.3f} ms) ===\n{stderr_text}".rstrip() + "\n")

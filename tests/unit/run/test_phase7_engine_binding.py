@@ -15,15 +15,17 @@ ENGINE_SUBJECT_PROGRAM_PATHS = [
     REPO_ROOT / "subjects" / "EngineLogWriteLite" / "source" / "Program.cs",
     REPO_ROOT / "subjects" / "EngineObjectHandleLite" / "source" / "Program.cs",
     REPO_ROOT / "subjects" / "EngineLifecycleCallbackLite" / "source" / "Program.cs",
+    REPO_ROOT / "subjects" / "EngineHostProof" / "source" / "Program.cs",
 ]
 
 
 class Phase7EngineBindingTests(unittest.TestCase):
-    def test_engine_subject_tree_realizes_three_minimal_engine_subjects(self) -> None:
+    def test_engine_subject_tree_realizes_four_minimal_engine_subjects(self) -> None:
         subject_ids = [
             "EngineLogWriteLite",
             "EngineObjectHandleLite",
             "EngineLifecycleCallbackLite",
+            "EngineHostProof",
         ]
 
         for subject_id in subject_ids:
@@ -53,6 +55,7 @@ class Phase7EngineBindingTests(unittest.TestCase):
             "engine.log-write.minimal",
             "engine.object-handle.roundtrip.minimal",
             "engine.lifecycle-callback.minimal",
+            "engine.host-proof.minimal",
         ]:
             self.assertIn(lowering_family, planner_source)
             self.assertIn(lowering_family, emitter_source)
@@ -63,6 +66,9 @@ class Phase7EngineBindingTests(unittest.TestCase):
             "runtime-engine-trace-compare",
         ]:
             self.assertIn(stage_kind, workers_source)
+
+        self.assertIn('"engine-bridge"', workers_source)
+        self.assertIn('"engine_bridge.cpp"', workers_source)
 
         for helper_name in [
             "EngineLogWrite",

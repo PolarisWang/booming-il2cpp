@@ -10,7 +10,7 @@ current_dir: docs/dev/in-progress/20260410-12-unified-project-generation-and-cli
 parent_task_id:
 source_task_id:
 source_relation:
-active: true
+active: false
 ---
 
 ## 关键文档

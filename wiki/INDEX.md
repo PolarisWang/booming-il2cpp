@@ -1,37 +1,41 @@
-# Wiki INDEX
+﻿# Wiki INDEX
 
-> 项目知识库总目录。这里收录长期有效的项目知识，不收录执行流水。
+> `wiki/` 用于沉淀长期有效知识。单次执行过程、阻塞、临时诊断与任务流水统一保留在 `docs/dev/<lifecycle>/<task_id>/`。
 
-## 子类别
+## 目录导航
 
-| 类别 | 说明 | 索引 |
-|------|------|------|
-| `01-项目总览` | 项目级边界、总原则和知识结构 | [`01-项目总览/INDEX.md`](./01-%E9%A1%B9%E7%9B%AE%E6%80%BB%E8%A7%88/INDEX.md) |
-| `02-Skill体系` | 项目中 skill 的实现绑定、解释页和 registry | [`02-Skill体系/INDEX.md`](./02-Skill%E4%BD%93%E7%B3%BB/INDEX.md) |
-| `03-功能模块` | 功能本体知识，按固定大类归档 | [`03-功能模块/INDEX.md`](./03-%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97/INDEX.md) |
-| `04-工具与集成` | 工具入口、测试入口和集成约定 | [`04-工具与集成/INDEX.md`](./04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/INDEX.md) |
-| `05-项目经验` | 跨功能复用经验和长期规则 | [`05-项目经验/INDEX.md`](./05-%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/INDEX.md) |
-| `06-测试验证` | 项目级测试知识入口、module/system/pipeline 说明与规则 | [`06-测试验证/INDEX.md`](./06-%E6%B5%8B%E8%AF%95%E9%AA%8C%E8%AF%81/INDEX.md) |
+| 分类 | 说明 | 入口 |
+| --- | --- | --- |
+| `01-项目总览` | 项目边界、目录结构与长期约束 | [`01-项目总览/INDEX.md`](./01-项目总览/INDEX.md) |
+| `02-Skill体系` | 项目内 skill 的职责边界与注册表 | [`02-Skill体系/INDEX.md`](./02-Skill体系/INDEX.md) |
+| `03-功能模块` | 核心功能模块与执行系统知识 | [`03-功能模块/INDEX.md`](./03-功能模块/INDEX.md) |
+| `04-工具与集成` | 工具链入口、proof baseline 与集成规则 | [`04-工具与集成/INDEX.md`](./04-工具与集成/INDEX.md) |
+| `05-项目经验` | 复用型经验与项目级约束 | [`05-项目经验/INDEX.md`](./05-项目经验/INDEX.md) |
+| `06-测试验证` | 测试体系、验证入口与基线知识 | [`06-测试验证/INDEX.md`](./06-测试验证/INDEX.md) |
 
-## 重要文档
+## 关键页面
 
-| 文档 | 主题 | 说明 |
-|------|------|------|
-| [`01-项目总览/知识边界.md`](./01-%E9%A1%B9%E7%9B%AE%E6%80%BB%E8%A7%88/%E7%9F%A5%E8%AF%86%E8%BE%B9%E7%95%8C.md) | 知识边界 | 说明 `.codex`、`docs`、`wiki` 三层边界 |
-| [`01-项目总览/仓库目录与产物边界.md`](./01-%E9%A1%B9%E7%9B%AE%E6%80%BB%E8%A7%88/%E4%BB%93%E5%BA%93%E7%9B%AE%E5%BD%95%E4%B8%8E%E4%BA%A7%E7%89%A9%E8%BE%B9%E7%95%8C.md) | 仓库目录边界 | 说明 `build/`、`artifacts/`、`deploy/` 的职责分层 |
-| [`02-Skill体系/skill-registry.md`](./02-Skill%E4%BD%93%E7%B3%BB/skill-registry.md) | Skill 注册表 | 登记全部 `.codex/skills` 及项目绑定级别 |
-| [`03-功能模块/01-执行系统/ACTIVE活动指针与任务目录机制.md`](./03-%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97/01-%E6%89%A7%E8%A1%8C%E7%B3%BB%E7%BB%9F/ACTIVE%E6%B4%BB%E5%8A%A8%E6%8C%87%E9%92%88%E4%B8%8E%E4%BB%BB%E5%8A%A1%E7%9B%AE%E5%BD%95%E6%9C%BA%E5%88%B6.md) | 执行系统 | 说明 `ACTIVE.md` 与任务目录的职责和更新规则 |
+| 页面 | 主题 | 摘要 |
+| --- | --- | --- |
+| [`01-项目总览/知识边界.md`](./01-项目总览/知识边界.md) | 知识边界 | 固化 `.codex`、`docs` 与 `wiki` 的职责边界。 |
+| [`01-项目总览/仓库目录与产物边界.md`](./01-项目总览/仓库目录与产物边界.md) | 仓库目录与产物边界 | 固化 `build/`、`artifacts/`、`deploy/` 的目录职责。 |
+| [`02-Skill体系/skill-registry.md`](./02-Skill体系/skill-registry.md) | Skill 注册表 | 汇总 `.codex/skills` 的长期职责边界。 |
+| [`03-功能模块/01-执行系统/ACTIVE活动指针与任务目录机制.md`](./03-功能模块/01-执行系统/ACTIVE活动指针与任务目录机制.md) | ACTIVE 活动指针机制 | 固化 `ACTIVE.md` 与任务目录的职责分工。 |
+| [`04-工具与集成/interpreter-lowering-and-native-smoke-baseline-v1.md`](./04-工具与集成/interpreter-lowering-and-native-smoke-baseline-v1.md) | interpreter lowering、mixed execution 与 native smoke baseline | 固化 Phase 7 的真实 lowering、same-assembly `Call` / `CallVirt` 执行、真实 EH lowering、`try/catch` / `rethrow` / `try/finally` 最小 managed proof、字符串桥执行 proof 与 Windows 文件锁规避规则。 |
+| [`04-工具与集成/metadata-supplement-bridge-baseline-v1.md`](./04-工具与集成/metadata-supplement-bridge-baseline-v1.md) | metadata supplement 与 bridge baseline | 固化 Phase 6 的 template/bridge baseline、proof 与项目级验证入口。 |
+| [`04-工具与集成/hot-update-skeleton-v1.md`](./04-工具与集成/hot-update-skeleton-v1.md) | hot update skeleton | 固化 Phase 5 热更新骨架的项目边界、package 形状、runtime mode 与 proof/verification 入口。 |
+| [`04-工具与集成/engine-host-proof-baseline-v1.md`](./04-工具与集成/engine-host-proof-baseline-v1.md) | engine host proof baseline | 固化 `EngineHostProof` host proof 与 `HostEmbeddingLite` ownership 基线。 |
+| [`04-工具与集成/mobile-host-subject-routing-v1.md`](./04-工具与集成/mobile-host-subject-routing-v1.md) | mobile host subject routing | 说明 mobile subject route 的长期规则。 |
 
-## 本层规则
+## 维护原则
 
-- `wiki/` 只写长期有效的项目知识。
-- 执行流水、任务日志、聊天过程必须留在 `docs/dev/<lifecycle>/<task_id>/`。
-- 更新任何知识页面时，都要回填对应目录的 `INDEX.md`。
+- `wiki/` 只记录长期有效知识，不复制执行日志。
+- 新增页面必须同步更新对应目录的 `INDEX.md`；影响导航时再更新本页。
+- `docs/dev` 记录过程，`wiki/` 记录结论。
 
-## 最近更新
+## 最近变更
 
-- `2026-04-08`：更新 `04-工具与集成/INDEX.md`，新增统一入口工程工作区与 `deploy core` 的长期规则页。
-- `2026-04-04`：新增 `06-测试验证/` 作为项目级测试与验证知识的唯一正式入口。
-- `2026-04-04`：执行系统主路径切换到 `docs/dev` 任务目录与 `ACTIVE.md` 指针。
-- `2026-04-03`：新增仓库目录与产物边界文档，明确 `build/`、`artifacts/`、`deploy/` 分工。
-- `2026-04-02`：初始化项目 wiki 顶层目录与索引。
+- `2026-04-11`: 更新 `04-工具与集成/INDEX.md`，补充 Phase 7 的 same-assembly `CallVirt` 真实执行、`ManagedInstructionModel.IlOffset` 与真实 EH lowering，以及 `try/catch` / `rethrow` / `try/finally` 最小 managed proof。
+- `2026-04-11`: 更新 `04-工具与集成/INDEX.md`，新增 `metadata-supplement-bridge-baseline-v1.md`，沉淀 Phase 6 metadata supplement 与 bridge baseline。
+- `2026-04-11`: 更新 `04-工具与集成/INDEX.md`，新增 `hot-update-skeleton-v1.md`，沉淀 Phase 5 热更新骨架知识。
+- `2026-04-11`: 更新 `04-工具与集成/INDEX.md`，新增 `engine-host-proof-baseline-v1.md` 与 `mobile-host-subject-routing-v1.md`。
