@@ -60,6 +60,19 @@
       ]
     },
     {
+      "pipelineId": "mobile-native-benchmark",
+      "displayName": "Mobile native benchmark",
+      "stages": [
+        {"stageId":"source-resolve","kind":"source-resolve","scope":"shared","bucket":"source","dependsOn":[]},
+        {"stageId":"host-input-build","kind":"host-input-build","scope":"shared","bucket":"host-input","dependsOn":["source-resolve"]},
+        {"stageId":"analysis-frontend","kind":"analysis-frontend","scope":"shared","bucket":"analysis","dependsOn":["host-input-build"]},
+        {"stageId":"generated-native-proof","kind":"generated-native-proof","scope":"shared","bucket":"generated","dependsOn":["analysis-frontend"]},
+        {"stageId":"build-target","kind":"build-target","scope":"matrix","bucket":"build","dependsOn":["generated-native-proof"]},
+        {"stageId":"mobile-native-perf","kind":"mobile-native-perf","scope":"matrix","bucket":"runtime","dependsOn":["build-target"]},
+        {"stageId":"report-assemble","kind":"report-assemble","scope":"matrix","bucket":"report","dependsOn":["mobile-native-perf"]}
+      ]
+    },
+    {
       "pipelineId": "interpreter-benchmark",
       "displayName": "HotUpdate (Interpreter) benchmark",
       "stages": [
@@ -84,6 +97,22 @@
       "pipelineId": "native-benchmark",
       "supportedGoals": ["perf.release"],
       "executionContext": {"hostPlatform":"windows-x64","targetPlatform":"windows-x64","toolchainProfile":"msvc-reference","runtimeProfile":"native-perf-profile"},
+      "validationIntent": {"validationMode":"perf","adaptationLevel":"native-runtime","expectedOutcome":"pass"},
+      "artifactPlan": {"requiredBuckets":["source","host-input","analysis","generated","build","runtime","report"],"evidenceTerminalBucket":"report"}
+    },
+    {
+      "matrixId": "android-arm64-native-perf",
+      "pipelineId": "mobile-native-benchmark",
+      "supportedGoals": ["perf.release"],
+      "executionContext": {"hostPlatform":"windows-x64","targetPlatform":"android-arm64","toolchainProfile":"android-ndk-r26","runtimeProfile":"android-native-perf-profile"},
+      "validationIntent": {"validationMode":"perf","adaptationLevel":"native-runtime","expectedOutcome":"pass"},
+      "artifactPlan": {"requiredBuckets":["source","host-input","analysis","generated","build","runtime","report"],"evidenceTerminalBucket":"report"}
+    },
+    {
+      "matrixId": "ios-arm64-native-perf",
+      "pipelineId": "mobile-native-benchmark",
+      "supportedGoals": ["perf.release"],
+      "executionContext": {"hostPlatform":"macos-arm64","targetPlatform":"ios-arm64","toolchainProfile":"ios-xcode","runtimeProfile":"ios-native-perf-profile"},
       "validationIntent": {"validationMode":"perf","adaptationLevel":"native-runtime","expectedOutcome":"pass"},
       "artifactPlan": {"requiredBuckets":["source","host-input","analysis","generated","build","runtime","report"],"evidenceTerminalBucket":"report"}
     },

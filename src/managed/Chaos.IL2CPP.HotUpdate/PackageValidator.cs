@@ -31,4 +31,11 @@ public static class PackageValidator
             throw new InvalidOperationException("hot update package signature must not be empty.");
         }
     }
+
+    public static void ValidateIosDistributionCompliance(
+        LoadedHotUpdatePackage package,
+        IosComplianceValidationOptions? options = null)
+    {
+        IosComplianceValidator.Validate(package, options);
+    }
 }

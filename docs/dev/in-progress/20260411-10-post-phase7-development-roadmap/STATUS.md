@@ -5,7 +5,7 @@ task_type: roadmap
 lifecycle_status: in_progress
 phase: roadmap
 created_at: 2026-04-11 21:30:00 +08:00
-updated_at: 2026-04-12 15:40:00 +08:00
+updated_at: 2026-04-12 11:02:14 +08:00
 current_dir: docs/dev/in-progress/20260411-10-post-phase7-development-roadmap
 parent_task_id: "20260409-10-total-solution-and-ios-hot-update-analysis"
 source_task_id: "20260409-10-total-solution-and-ios-hot-update-analysis"
@@ -21,46 +21,29 @@ active: true
 
 ## 当前判断
 
-- current_focus: Phase A / B / C 子任务都已归档完成；本 roadmap 进入 Phase D 多平台真机验证入口。
-- why_now: GC、benchmark 与 hot update 端到端闭环都已落地，后续主线转向 Android/iOS 真机与跨平台 benchmark。
-- done_definition: Phase A-E 全部子任务完成，三方 Benchmark 报告在各平台可运行
-
-## 5 Phase 概览
-
-| Phase | 目标 | 核心产出 | 依赖 |
-| --- | --- | --- | --- |
-| A | GC 集成 + AOT 运行时关键补完 | BDWGC 接入、vtable、完整 EH/泛型/委托、IL opcode 扩展 | Phase 7 完成 |
-| B | 三方 Benchmark 报告体系 | C# vs AOT vs HotUpdate 对比报告 + HTML 可视化 | A (中期可启动) |
-| C | 热更端到端 | Package -> Interpreter -> AOT interop 闭环 | A |
-| D | 多平台真机验证 | Android/iOS 真机 + 跨平台 Benchmark | A + C |
-| E | 生产化 + CI/CD | GitHub Actions + 版本兼容 + Stack Trace + 文档 | All |
-
-## 关键决策
-
-- GC 方案: BDWGC 分阶段策略 (BDWGC -> Arena 补充 -> 数据驱动精确 GC 迁移)
-- Benchmark: 三方对比 (C# .NET / AOT Generated C++ / HotUpdate Interpreter)
-- 性能目标: AOT >= 2x faster than C#, HotUpdate <= 50x slower than C#
+- current_focus: Phase A / B / C 的子任务已全部完成，Phase D 的仓库内基础设施子任务 `20260412-04-phase-d-mobile-foundation` 也已完成并归档。
+- why_now: 当前真正剩余的 Phase D 工作已经不在仓库内，而是在 macOS/Xcode 与 Android/iOS 真机环境上的执行与证据采集。
+- done_definition: 只有当 Phase D 真机验证与后续 Phase E 也完成后，本 roadmap 才能整体关闭。
 
 ## 最近摘要
 
-- 2026-04-12 15:40:00 +08:00: 子任务 `20260412-03-phase-c-hot-update-e2e` 完成并归档；Phase C 端到端、方法替换、auto bridge、回滚与 hot-update benchmark 已通过项目级验证。
-- 2026-04-12 00:04:39 +08:00: 父 roadmap `20260409-10` 已按用户指令跳过最后两个 blocker 并归档完成；本 successor roadmap 正式成为当前 active 入口。
-- 2026-04-11 21:30:00 +08:00: 完成 Phase A-E 全量实现方案设计，包含 5 Phase / 35 sub-task / 文件级实现步骤
+- 2026-04-12 11:02:14 +08:00: 子任务 `20260412-04-phase-d-mobile-foundation` 完成并归档；iOS 合规校验、移动 perf worker/collector 骨架、移动热更新桥接和 benchmark manifest 扩展已通过 `tests/unit/run -v` 全量 267 项验证。
+- 2026-04-12 15:40:00 +08:00: 子任务 `20260412-03-phase-c-hot-update-e2e` 完成并归档，Phase C 端到端链路闭环完成。
+- 2026-04-11 21:30:00 +08:00: 完成 Phase A-E 全量实施方案设计，形成 5 Phase / 35 sub-task 路线图。
 
 ## 下一步
 
-- next_action: 派生 `Phase D` child plan，收敛 Android/iOS 真机验证、host route 与跨平台 benchmark 的最小首批范围。
-- trigger: 用户继续且对应真机/工具链可用
+- next_action: 等待 macOS/Xcode 或 Android/iOS 真机资源，再派生新的 Phase D 真机验证子任务。
+- trigger: 用户提供可用设备、可运行的 Apple 工具链，或明确切换到 roadmap 中其它无阻塞阶段。
 
 ## 风险
 
 ### risks
 
-- AOT codegen 从 proof 到 production 的 IL opcode 覆盖工作量可能超预期 (A.11)
-- BDWGC 保守式扫描的假性存活可能在移动端造成内存问题
-- Interpreter 当前仅 int32，扩展到 float/object/array 工作量大 (C.1)
-- Mobile 真机环境不可控 (D.1, D.2)
+- Phase D 真机验证仍受外部环境约束，仓库内无法替代真实设备与 App Store 审核证据。
+- `mobile_perf_collector.py` 当前只完成基础设施骨架；真实 Android/iOS 样本采集仍需外部执行环境。
+- Phase E 依赖 Phase D 的真实平台证据，不能提前宣称整体路线图完成。
 
 ### blockers
 
-- 当前无 immediate blocker；Phase D 的 Android/iOS 真机环境约束保留到对应子任务处理。
+- 当前 immediate blocker 为 macOS + Xcode 与 Android/iOS 真机资源缺失。

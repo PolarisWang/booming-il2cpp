@@ -4,7 +4,8 @@
 
 | 任务 | lifecycle_status | phase | 最近更新 | 下一步 | active |
 | --- | --- | --- | --- | --- | --- |
-| [20260411-10-post-phase7-development-roadmap](in-progress/20260411-10-post-phase7-development-roadmap/STATUS.md) | in_progress | roadmap | 2026-04-12 15:40:00 +08:00 | Phase C completed → Phase D next | false |
+| [20260412-04-phase-d-mobile-foundation](completed/20260412-04-phase-d-mobile-foundation/STATUS.md) | completed | archived | 2026-04-12 11:02:14 +08:00 | 已完成，返回父 roadmap | false |
+| [20260411-10-post-phase7-development-roadmap](in-progress/20260411-10-post-phase7-development-roadmap/STATUS.md) | in_progress | roadmap | 2026-04-12 11:02:14 +08:00 | 等待 macOS/Xcode 或 Android/iOS 真机资源，再派生新的 Phase D 真机验证子任务 | true |
 | [20260412-03-phase-c-hot-update-e2e](completed/20260412-03-phase-c-hot-update-e2e/STATUS.md) | completed | archived | 2026-04-12 15:40:00 +08:00 | 已完成，返回父 roadmap | false |
 | [20260412-02-phase-b-benchmark-system](completed/20260412-02-phase-b-benchmark-system/STATUS.md) | completed | archived | 2026-04-12 13:30:00 +08:00 | 4 Batch 完成 | false |
 | [20260412-01-phase-a-gc-aot-completeness](completed/20260412-01-phase-a-gc-aot-completeness/STATUS.md) | completed | archived | 2026-04-12 12:00:00 +08:00 | 6 Batch 完成: BDWGC+vtable+EH+generic+delegate+opcodes | false |

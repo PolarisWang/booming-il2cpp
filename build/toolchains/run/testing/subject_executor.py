@@ -113,11 +113,13 @@ def _reused_primary_evidence_paths(stage: dict[str, Any], manifest: dict[str, An
                 *[_rewrite_reused_bucket_path(stage, value) for value in trace_paths],
             ]
         )
-    if kind == "native-runtime-perf":
+    if kind in {"native-runtime-perf", "mobile-native-perf"}:
+        collector_evidence_paths = [str(value) for value in list(manifest.get("collectorEvidencePaths") or []) if value]
         return _dedupe_non_empty(
             [
                 _rewrite_reused_bucket_path(stage, str(manifest.get("perfRuntimePath") or "")),
                 _rewrite_reused_bucket_path(stage, str(manifest.get("perfSamplesPath") or "")),
+                *[_rewrite_reused_bucket_path(stage, value) for value in collector_evidence_paths],
             ]
         )
     if kind == "runtime-trace-compare" or bucket == "runtime":
@@ -143,7 +145,7 @@ def _reused_stage_details(stage: dict[str, Any], manifest: dict[str, Any]) -> di
         if detail:
             details[detail_name] = detail
 
-    if str(stage.get("kind") or "") not in {"runtime-perf-collect", "native-runtime-perf"}:
+    if str(stage.get("kind") or "") not in {"runtime-perf-collect", "native-runtime-perf", "mobile-native-perf"}:
         return details
 
     details["performance"] = {
@@ -158,6 +160,8 @@ def _reused_stage_details(stage: dict[str, Any], manifest: dict[str, Any]) -> di
             "runtimePath": manifest.get("perfRuntimePath"),
             "samplesPath": manifest.get("perfSamplesPath"),
         },
+        "collectorDetails": dict(manifest.get("collectorDetails") or {}),
+        "collectorEvidencePaths": list(manifest.get("collectorEvidencePaths") or []),
     }
     return details
 

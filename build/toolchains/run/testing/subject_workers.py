@@ -14,6 +14,7 @@ try:
     from ..core.common import combine_process_output, read_json, run_process, write_json
     from ..core import tooling as tooling_module
     from . import contracts as contracts_module
+    from . import mobile_perf_collector
     from . import perf as perf_module
     from . import subjects as subjects_module
 except ImportError:
@@ -22,6 +23,7 @@ except ImportError:
     from core.common import combine_process_output, read_json, run_process, write_json
     from core import tooling as tooling_module
     from testing import contracts as contracts_module
+    from testing import mobile_perf_collector
     from testing import perf as perf_module
     from testing import subjects as subjects_module
 
@@ -795,7 +797,8 @@ def run_build_target(*, repo_root: Path, request: dict[str, Any]) -> dict[str, A
     if target_platform == "windows-x64":
         return _windows_subject_build(repo_root=repo_root, request=request)
     if target_platform == "android-arm64":
-        if str(execution_context.get("runtimeProfile") or "") == "android-native-runtime":
+        runtime_profile = str(execution_context.get("runtimeProfile") or "")
+        if runtime_profile in {"android-native-runtime", "android-native-perf-profile"}:
             return _android_subject_runtime_build(repo_root=repo_root, request=request)
         android_host_root = _subject_mobile_host_root(repo_root, subject_id, target_platform)
         return _validate_only_build(
@@ -1897,6 +1900,185 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
     )
 
 
+def run_mobile_native_perf(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
+    build_manifest = read_json(_resolve(repo_root, request["upstream"]["build"]["manifestPath"]))
+    if not isinstance(build_manifest, dict):
+        raise RuntimeError("build manifest must be an object")
+
+    selection = dict(request["selection"])
+    execution_context = dict(selection.get("executionContext") or {})
+    subject_id = str(selection["subjectId"])
+    matrix_id = str(selection["matrixId"])
+    target_platform = str(execution_context.get("targetPlatform") or "")
+    host_platform = str(execution_context.get("hostPlatform") or "")
+    runtime_profile = str(execution_context.get("runtimeProfile") or "")
+    variant = _selection_variant(selection)
+    sample_count = _perf_sample_count(runtime_profile)
+    runtime_arguments = _selection_runtime_arguments(selection)
+
+    runtime_root = _resolve(repo_root, request["paths"]["bucketRoot"])
+    runtime_root.mkdir(parents=True, exist_ok=True)
+
+    stdout_path = runtime_root / "stdout.log"
+    stderr_path = runtime_root / "stderr.log"
+    exit_code_path = runtime_root / "exit-code.txt"
+    perf_runtime_path = runtime_root / "perf.runtime.json"
+    perf_samples_path = runtime_root / "perf.samples.json"
+
+    if target_platform == "android-arm64":
+        output_paths = [str(value) for value in list(build_manifest.get("outputs") or []) if str(value)]
+        if not output_paths:
+            raise RuntimeError("mobile perf build manifest missing outputs")
+
+        collector_result = mobile_perf_collector.collect_android_perf(
+            repo_root=repo_root,
+            runtime_root=runtime_root,
+            native_executable_path=_resolve(repo_root, output_paths[0]),
+            runtime_arguments=runtime_arguments,
+            sample_count=sample_count,
+            host_platform=host_platform,
+        )
+    elif target_platform == "ios-arm64":
+        cmake_binary_dir_text = str(build_manifest.get("cmakeBinaryDir") or "")
+        if not cmake_binary_dir_text:
+            raise RuntimeError("mobile perf build manifest missing cmakeBinaryDir")
+
+        collector_result = mobile_perf_collector.collect_ios_perf(
+            repo_root=repo_root,
+            runtime_root=runtime_root,
+            cmake_binary_dir=_resolve(repo_root, cmake_binary_dir_text),
+            sample_count=sample_count,
+            host_platform=host_platform,
+        )
+    else:
+        raise RuntimeError(f"unsupported mobile target platform: {target_platform}")
+
+    stdout_text = str(collector_result.get("stdout") or "")
+    stderr_text = str(collector_result.get("stderr") or "")
+    output_lines = [line for line in stdout_text.splitlines() if line.strip()]
+    exit_code = int(collector_result.get("exitCode") or 0)
+    samples = [
+        dict(sample)
+        for sample in list(collector_result.get("samples") or [])
+        if isinstance(sample, dict)
+    ]
+    collector_details = dict(collector_result.get("details") or {})
+    collector_evidence_paths = [str(value) for value in list(collector_result.get("evidencePaths") or []) if str(value)]
+
+    stdout_path.write_text(stdout_text, encoding="utf-8")
+    stderr_path.write_text(stderr_text, encoding="utf-8")
+    exit_code_path.write_text(f"{exit_code}\n", encoding="utf-8")
+
+    summary_metrics = _perf_summary_metrics(samples)
+    perf_result = perf_module.evaluate_perf_subject(
+        repo_root=repo_root,
+        subject_id=subject_id,
+        matrix_id=matrix_id,
+        host_platform=target_platform,
+        metrics=summary_metrics,
+        update_baseline=False,
+    )
+    runtime_evidence = {
+        "runtimePath": _relative(repo_root, perf_runtime_path),
+        "samplesPath": _relative(repo_root, perf_samples_path),
+    }
+    performance = {
+        "samples": samples,
+        "metrics": dict(perf_result["metrics"]),
+        "baselinePath": str(perf_result["baselinePath"]),
+        "baseline": dict(perf_result["baseline"]),
+        "baselineUpdated": bool(perf_result["baselineUpdated"]),
+        "regressionStatus": str(perf_result["regressionStatus"]),
+        "regressions": list(perf_result.get("regressions") or []),
+        "runtimeEvidence": runtime_evidence,
+        "collectorDetails": collector_details,
+        "collectorEvidencePaths": collector_evidence_paths,
+    }
+    write_json(
+        perf_runtime_path,
+        {
+            "reportVersion": "v1",
+            "subjectId": subject_id,
+            "matrixId": matrix_id,
+            "variant": variant,
+            "targetPlatform": target_platform,
+            "metrics": dict(performance["metrics"]),
+            "baselinePath": str(performance["baselinePath"]),
+            "baseline": dict(performance["baseline"]),
+            "baselineUpdated": bool(performance["baselineUpdated"]),
+            "regressionStatus": str(performance["regressionStatus"]),
+            "regressions": list(performance["regressions"]),
+            "collectorDetails": collector_details,
+            "collectorEvidencePaths": collector_evidence_paths,
+            "stdoutPath": _relative(repo_root, stdout_path),
+            "stderrPath": _relative(repo_root, stderr_path),
+        },
+    )
+    write_json(
+        perf_samples_path,
+        {
+            "reportVersion": "v1",
+            "subjectId": subject_id,
+            "matrixId": matrix_id,
+            "targetPlatform": target_platform,
+            "samples": samples,
+        },
+    )
+
+    manifest = {
+        "subjectId": subject_id,
+        "matrixId": matrix_id,
+        "bucket": "runtime",
+        "variant": variant,
+        "targetPlatform": target_platform,
+        "buildManifestPath": str(request["upstream"]["build"]["manifestPath"]),
+        "stdoutPath": _relative(repo_root, stdout_path),
+        "stderrPath": _relative(repo_root, stderr_path),
+        "exitCodePath": _relative(repo_root, exit_code_path),
+        "perfRuntimePath": runtime_evidence["runtimePath"],
+        "perfSamplesPath": runtime_evidence["samplesPath"],
+        "collectorDetails": collector_details,
+        "collectorEvidencePaths": collector_evidence_paths,
+        "outputLines": output_lines,
+        "samples": samples,
+        "summaryMetrics": dict(performance["metrics"]),
+        "baselinePath": str(performance["baselinePath"]),
+        "baseline": dict(performance["baseline"]),
+        "baselineUpdated": bool(performance["baselineUpdated"]),
+        "regressionStatus": str(performance["regressionStatus"]),
+        "regressions": list(performance["regressions"]),
+    }
+    write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
+
+    failure_reason: str | None = None
+    if exit_code != 0:
+        failure_reason = f"mobile perf execution failed: {target_platform}"
+    elif not samples:
+        failure_reason = f"mobile perf collector returned no samples: {target_platform}"
+
+    if failure_reason is not None:
+        return {
+            "status": "fail",
+            "bucketManifestPath": request["paths"]["manifestPath"],
+            "reportPaths": list(request["paths"]["reportPaths"]),
+            "primaryEvidencePaths": [manifest["perfRuntimePath"], manifest["perfSamplesPath"], *collector_evidence_paths],
+            "metrics": {"durationMs": int(round(sum(float(sample.get("durationMs") or 0.0) for sample in samples)))},
+            "diagnostics": {"stdoutPath": manifest["stdoutPath"], "stderrPath": manifest["stderrPath"]},
+            "details": {"performance": performance},
+            "failure": failure_reason,
+        }
+
+    return _success_result(
+        bucket_manifest_path=request["paths"]["manifestPath"],
+        report_paths=list(request["paths"]["reportPaths"]),
+        primary_evidence_paths=[manifest["perfRuntimePath"], manifest["perfSamplesPath"], *collector_evidence_paths],
+        stdout_path=manifest["stdoutPath"],
+        stderr_path=manifest["stderrPath"],
+        duration_ms=int(round(sum(float(sample.get("durationMs") or 0.0) for sample in samples))),
+        details={"performance": performance},
+    )
+
+
 def run_runtime_trace_compare(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
     selection = dict(request["selection"])
     host_input_manifest = read_json(_resolve(repo_root, request["upstream"]["host-input"]["manifestPath"]))
@@ -2237,6 +2419,7 @@ DEFAULT_STAGE_WORKERS = {
     "runtime-managed-output": run_managed_runtime_output,
     "runtime-perf-collect": run_runtime_perf_collect,
     "native-runtime-perf": run_native_runtime_perf,
+    "mobile-native-perf": run_mobile_native_perf,
     "runtime-trace-compare": run_runtime_trace_compare,
     "interpreter-runtime-perf": run_interpreter_runtime_perf,
     "benchmark-comparison-aggregate": run_benchmark_comparison_aggregate,

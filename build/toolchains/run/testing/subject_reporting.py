@@ -31,6 +31,8 @@ def _normalize_stage_result(stage_result: dict[str, Any]) -> dict[str, Any]:
             "regressionStatus": str(performance.get("regressionStatus") or "no-baseline"),
             "regressions": list(performance.get("regressions") or []),
             "runtimeEvidence": dict(performance.get("runtimeEvidence") or {}),
+            "collectorDetails": dict(performance.get("collectorDetails") or {}),
+            "collectorEvidencePaths": list(performance.get("collectorEvidencePaths") or []),
         }
     if engine_contract_summary:
         details["engineContractSummary"] = engine_contract_summary
@@ -332,7 +334,11 @@ def materialize_matrix_report_artifacts(
         return list(matrix_report["reportArtifacts"])
 
     pipeline_id = str(dict(matrix_report.get("selection") or {}).get("pipelineId") or "")
-    is_native_perf = pipeline_id == "native-runtime-perf"
+    stage_kinds = {
+        str(stage_result.get("kind") or "")
+        for stage_result in list(matrix_report.get("stageResults") or [])
+    }
+    is_native_perf = bool({"native-runtime-perf", "mobile-native-perf"} & stage_kinds)
     is_managed_release = str(matrix_report.get("goalId") or "") == "perf.release"
     if not is_native_perf and not is_managed_release:
         matrix_report["releaseReportPaths"] = list(matrix_report.get("releaseReportPaths") or [])

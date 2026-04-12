@@ -14,3 +14,4 @@ add_library(
 
 target_compile_features(chaos_mobile_android_host PRIVATE cxx_std_17)
 target_include_directories(chaos_mobile_android_host PRIVATE "${REPO_ROOT}/src/mobile/shared")
+target_link_libraries(chaos_mobile_android_host PRIVATE chaos_hot_update)
