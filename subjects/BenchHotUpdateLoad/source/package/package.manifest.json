@@ -1,0 +1,15 @@
+{
+  "formatVersion": "v0",
+  "packageId": "bench.hotupdate.load",
+  "targetAotVersion": "1.0.0",
+  "assemblies": [
+    {
+      "name": "HotPatch.dll",
+      "hash": "sha256:1e6cb49f7570d447a8bce95c4f5007dfe6af8ecc88abd50cc73d5fac3e7db2f8",
+      "size": 4,
+      "entryPoint": "BenchHotUpdateLoad/HotPatch::GetValue()"
+    }
+  ],
+  "supplementalMetadata": "metadata-supplement.bin",
+  "signature": "bench-load"
+}

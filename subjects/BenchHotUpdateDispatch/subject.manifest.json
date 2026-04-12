@@ -8,17 +8,24 @@
   "source": {
     "type": "dotnet-project",
     "path": "subjects/BenchHotUpdateDispatch/source/BenchHotUpdateDispatch.csproj",
-    "entry": "BenchHotUpdateDispatch/Program::Main(System.String[])"
+    "entry": "BenchHotUpdateDispatch/Program::Main()"
   },
+  "workloadEntry": "BenchHotUpdateDispatch/Program::RunWorkload()",
   "validationProfiles": {
-    "perf-profile": ["perf"],
-    "proof-dev": ["proof"]
+    "perf-profile": [
+      "perf"
+    ],
+    "proof-dev": [
+      "proof"
+    ]
   },
   "validation": {
     "perf": {
       "kind": "perf",
       "driver": "native-runtime-perf",
-      "defaultVariant": "PROFILE"
+      "defaultVariant": "PROFILE",
+      "project": "src/validation/perf/Benchmark.WorkloadEntry.PerfHarness/Benchmark.WorkloadEntry.PerfHarness.csproj",
+      "harnessIterations": 45
     },
     "proof": {
       "kind": "proof",
@@ -33,40 +40,166 @@
   "baselines": {
     "perf": "subjects/BenchHotUpdateDispatch/baselines/perf/"
   },
-  "tags": ["benchmark", "perf", "hot-update"],
-  "expectedArtifacts": ["source","host-input","analysis","generated","build","runtime","report"],
+  "tags": [
+    "benchmark",
+    "perf",
+    "hot-update"
+  ],
+  "expectedArtifacts": [
+    "source",
+    "host-input",
+    "analysis",
+    "generated",
+    "build",
+    "runtime",
+    "report"
+  ],
   "executionPipelines": [
     {
       "pipelineId": "managed-benchmark",
       "displayName": "C# (.NET) benchmark",
       "stages": [
-        {"stageId":"source-resolve","kind":"source-resolve","scope":"shared","bucket":"source","dependsOn":[]},
-        {"stageId":"host-input-build","kind":"host-input-build","scope":"shared","bucket":"host-input","dependsOn":["source-resolve"]},
-        {"stageId":"runtime-perf-collect","kind":"runtime-perf-collect","scope":"matrix","bucket":"runtime","dependsOn":["host-input-build"]},
-        {"stageId":"report-assemble","kind":"report-assemble","scope":"matrix","bucket":"report","dependsOn":["runtime-perf-collect"]}
+        {
+          "stageId": "source-resolve",
+          "kind": "source-resolve",
+          "scope": "shared",
+          "bucket": "source",
+          "dependsOn": []
+        },
+        {
+          "stageId": "host-input-build",
+          "kind": "host-input-build",
+          "scope": "shared",
+          "bucket": "host-input",
+          "dependsOn": [
+            "source-resolve"
+          ]
+        },
+        {
+          "stageId": "runtime-perf-collect",
+          "kind": "runtime-perf-collect",
+          "scope": "matrix",
+          "bucket": "runtime",
+          "dependsOn": [
+            "host-input-build"
+          ]
+        },
+        {
+          "stageId": "report-assemble",
+          "kind": "report-assemble",
+          "scope": "matrix",
+          "bucket": "report",
+          "dependsOn": [
+            "runtime-perf-collect"
+          ]
+        }
       ]
     },
     {
       "pipelineId": "native-benchmark",
       "displayName": "AOT (Generated C++) benchmark",
       "stages": [
-        {"stageId":"source-resolve","kind":"source-resolve","scope":"shared","bucket":"source","dependsOn":[]},
-        {"stageId":"host-input-build","kind":"host-input-build","scope":"shared","bucket":"host-input","dependsOn":["source-resolve"]},
-        {"stageId":"analysis-frontend","kind":"analysis-frontend","scope":"shared","bucket":"analysis","dependsOn":["host-input-build"]},
-        {"stageId":"generated-native-proof","kind":"generated-native-proof","scope":"shared","bucket":"generated","dependsOn":["analysis-frontend"]},
-        {"stageId":"build-target","kind":"build-target","scope":"matrix","bucket":"build","dependsOn":["generated-native-proof"]},
-        {"stageId":"native-runtime-perf","kind":"native-runtime-perf","scope":"matrix","bucket":"runtime","dependsOn":["build-target"]},
-        {"stageId":"report-assemble","kind":"report-assemble","scope":"matrix","bucket":"report","dependsOn":["native-runtime-perf"]}
+        {
+          "stageId": "source-resolve",
+          "kind": "source-resolve",
+          "scope": "shared",
+          "bucket": "source",
+          "dependsOn": []
+        },
+        {
+          "stageId": "host-input-build",
+          "kind": "host-input-build",
+          "scope": "shared",
+          "bucket": "host-input",
+          "dependsOn": [
+            "source-resolve"
+          ]
+        },
+        {
+          "stageId": "analysis-frontend",
+          "kind": "analysis-frontend",
+          "scope": "shared",
+          "bucket": "analysis",
+          "dependsOn": [
+            "host-input-build"
+          ]
+        },
+        {
+          "stageId": "generated-native-aot",
+          "kind": "generated-native-aot",
+          "scope": "shared",
+          "bucket": "generated",
+          "dependsOn": [
+            "analysis-frontend"
+          ]
+        },
+        {
+          "stageId": "build-target",
+          "kind": "build-target",
+          "scope": "matrix",
+          "bucket": "build",
+          "dependsOn": [
+            "generated-native-aot"
+          ]
+        },
+        {
+          "stageId": "native-runtime-perf",
+          "kind": "native-runtime-perf",
+          "scope": "matrix",
+          "bucket": "runtime",
+          "dependsOn": [
+            "build-target"
+          ]
+        },
+        {
+          "stageId": "report-assemble",
+          "kind": "report-assemble",
+          "scope": "matrix",
+          "bucket": "report",
+          "dependsOn": [
+            "native-runtime-perf"
+          ]
+        }
       ]
     },
     {
       "pipelineId": "interpreter-benchmark",
       "displayName": "HotUpdate (Interpreter) benchmark",
       "stages": [
-        {"stageId":"source-resolve","kind":"source-resolve","scope":"shared","bucket":"source","dependsOn":[]},
-        {"stageId":"host-input-build","kind":"host-input-build","scope":"shared","bucket":"host-input","dependsOn":["source-resolve"]},
-        {"stageId":"interpreter-runtime-perf","kind":"interpreter-runtime-perf","scope":"matrix","bucket":"runtime","dependsOn":["host-input-build"]},
-        {"stageId":"report-assemble","kind":"report-assemble","scope":"matrix","bucket":"report","dependsOn":["interpreter-runtime-perf"]}
+        {
+          "stageId": "source-resolve",
+          "kind": "source-resolve",
+          "scope": "shared",
+          "bucket": "source",
+          "dependsOn": []
+        },
+        {
+          "stageId": "host-input-build",
+          "kind": "host-input-build",
+          "scope": "shared",
+          "bucket": "host-input",
+          "dependsOn": [
+            "source-resolve"
+          ]
+        },
+        {
+          "stageId": "interpreter-runtime-perf",
+          "kind": "interpreter-runtime-perf",
+          "scope": "matrix",
+          "bucket": "runtime",
+          "dependsOn": [
+            "host-input-build"
+          ]
+        },
+        {
+          "stageId": "report-assemble",
+          "kind": "report-assemble",
+          "scope": "matrix",
+          "bucket": "report",
+          "dependsOn": [
+            "interpreter-runtime-perf"
+          ]
+        }
       ]
     }
   ],
@@ -74,26 +207,89 @@
     {
       "matrixId": "windows-managed-perf",
       "pipelineId": "managed-benchmark",
-      "supportedGoals": ["perf.release"],
-      "executionContext": {"hostPlatform":"windows-x64","targetPlatform":"windows-x64","toolchainProfile":"dotnet-managed","runtimeProfile":"managed-perf-release"},
-      "validationIntent": {"validationMode":"perf","adaptationLevel":"native-runtime","expectedOutcome":"pass"},
-      "artifactPlan": {"requiredBuckets":["source","host-input","runtime","report"],"evidenceTerminalBucket":"report"}
+      "supportedGoals": [
+        "perf.release"
+      ],
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "dotnet-managed",
+        "runtimeProfile": "managed-perf-release"
+      },
+      "validationIntent": {
+        "validationMode": "perf",
+        "adaptationLevel": "native-runtime",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "report"
+      }
     },
     {
       "matrixId": "windows-native-perf",
       "pipelineId": "native-benchmark",
-      "supportedGoals": ["perf.release"],
-      "executionContext": {"hostPlatform":"windows-x64","targetPlatform":"windows-x64","toolchainProfile":"msvc-reference","runtimeProfile":"native-perf-profile"},
-      "validationIntent": {"validationMode":"perf","adaptationLevel":"native-runtime","expectedOutcome":"pass"},
-      "artifactPlan": {"requiredBuckets":["source","host-input","analysis","generated","build","runtime","report"],"evidenceTerminalBucket":"report"}
+      "supportedGoals": [
+        "perf.release"
+      ],
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-perf-profile"
+      },
+      "validationIntent": {
+        "validationMode": "perf",
+        "adaptationLevel": "native-runtime",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "report"
+      },
+      "source": {
+        "entry": "BenchHotUpdateDispatch/Program::RunWorkload()"
+      }
     },
     {
       "matrixId": "windows-interpreter-perf",
       "pipelineId": "interpreter-benchmark",
-      "supportedGoals": ["perf.release"],
-      "executionContext": {"hostPlatform":"windows-x64","targetPlatform":"windows-x64","toolchainProfile":"dotnet-managed","runtimeProfile":"interpreter-perf-release"},
-      "validationIntent": {"validationMode":"perf","adaptationLevel":"native-runtime","expectedOutcome":"pass"},
-      "artifactPlan": {"requiredBuckets":["source","host-input","runtime","report"],"evidenceTerminalBucket":"report"}
+      "supportedGoals": [
+        "perf.release"
+      ],
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "dotnet-managed",
+        "runtimeProfile": "interpreter-perf-release"
+      },
+      "validationIntent": {
+        "validationMode": "perf",
+        "adaptationLevel": "native-runtime",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "report"
+      }
     }
   ]
 }

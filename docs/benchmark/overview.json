@@ -1,353 +1,486 @@
 {
-  "generatedAt": "2026-04-12T07:14:32.853837+00:00",
+  "generatedAt": "2026-04-12T10:14:41.767505+00:00",
   "defaultPlatform": "windows-x64",
   "subjects": {
-    "BenchArithmetic": {
-      "native": {
-        "metrics": {
-          "sampleCount": 5,
-          "meanDurationMs": 59.961,
-          "minDurationMs": 59.441,
-          "maxDurationMs": 60.247,
-          "meanChecksum": 7010.0,
-          "minChecksum": 7010.0,
-          "maxChecksum": 7010.0,
-          "meanElapsedMilliseconds": 59.961,
-          "minElapsedMilliseconds": 59.441,
-          "maxElapsedMilliseconds": 60.247,
-          "meanOpsPerSecond": 166.778,
-          "minOpsPerSecond": 165.983,
-          "maxOpsPerSecond": 168.234
-        },
-        "recordedAt": "2026-04-12T07:14:31.822759Z",
-        "gitCommit": "3779b64",
-        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
-      },
+    "BenchAllocation": {
       "interpreter": {
         "metrics": {
-          "sampleCount": 10,
-          "meanDurationMs": 63.64,
-          "minDurationMs": 62.461,
-          "maxDurationMs": 64.45,
-          "meanChecksum": 7010.0,
-          "minChecksum": 7010.0,
-          "maxChecksum": 7010.0,
-          "meanElapsedMilliseconds": 63.64,
-          "minElapsedMilliseconds": 62.461,
-          "maxElapsedMilliseconds": 64.45,
-          "meanOpsPerSecond": 157.147,
-          "minOpsPerSecond": 155.16,
-          "maxOpsPerSecond": 160.1
+          "sampleCount": 3,
+          "meanDurationMs": 5.223,
+          "minDurationMs": 4.305,
+          "maxDurationMs": 5.934,
+          "meanChecksum": 5000.0,
+          "minChecksum": 5000.0,
+          "maxChecksum": 5000.0,
+          "meanElapsedMilliseconds": 5.223,
+          "minElapsedMilliseconds": 4.305,
+          "maxElapsedMilliseconds": 5.934,
+          "meanOpsPerSecond": 584.964,
+          "minOpsPerSecond": 505.519,
+          "maxOpsPerSecond": 696.929
         },
-        "recordedAt": "2026-04-12T06:56:52.249954Z",
-        "gitCommit": "3779b64",
+        "recordedAt": "2026-04-12T09:29:07.676287Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       },
       "managed": {
         "metrics": {
-          "sampleCount": 10,
-          "meanDurationMs": 63.484,
-          "minDurationMs": 62.267,
-          "maxDurationMs": 64.388,
-          "meanChecksum": 7010.0,
-          "minChecksum": 7010.0,
-          "maxChecksum": 7010.0,
-          "meanElapsedMilliseconds": 63.484,
-          "minElapsedMilliseconds": 62.267,
-          "maxElapsedMilliseconds": 64.388,
-          "meanOpsPerSecond": 157.534,
-          "minOpsPerSecond": 155.309,
-          "maxOpsPerSecond": 160.599
+          "sampleCount": 3,
+          "meanDurationMs": 4.645,
+          "minDurationMs": 4.174,
+          "maxDurationMs": 5.165,
+          "meanChecksum": 5000.0,
+          "minChecksum": 5000.0,
+          "maxChecksum": 5000.0,
+          "meanElapsedMilliseconds": 4.645,
+          "minElapsedMilliseconds": 4.174,
+          "maxElapsedMilliseconds": 5.165,
+          "meanOpsPerSecond": 650.689,
+          "minOpsPerSecond": 580.844,
+          "maxOpsPerSecond": 718.666
         },
-        "recordedAt": "2026-04-12T06:55:56.585555Z",
-        "gitCommit": "3779b64",
+        "recordedAt": "2026-04-12T08:53:41.946025Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       }
     },
-    "BenchAllocation": {
+    "BenchArithmetic": {
       "native": {
         "metrics": {
-          "meanDurationMs": 0.0,
-          "note": "native requires full pipeline run"
+          "sampleCount": 1,
+          "meanDurationMs": 12.062,
+          "minDurationMs": 12.062,
+          "maxDurationMs": 12.062,
+          "meanChecksum": 1402.0,
+          "minChecksum": 1402.0,
+          "maxChecksum": 1402.0,
+          "meanElapsedMilliseconds": 12.062,
+          "minElapsedMilliseconds": 12.062,
+          "maxElapsedMilliseconds": 12.062,
+          "meanOpsPerSecond": 165.809,
+          "minOpsPerSecond": 165.809,
+          "maxOpsPerSecond": 165.809
         },
-        "recordedAt": "2026-04-11T17:46:53.402172Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T09:46:21.528680Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       },
       "interpreter": {
         "metrics": {
-          "meanDurationMs": 848.018,
-          "elapsedMilliseconds": 3.542,
-          "iterations": 1000,
-          "opsPerSecond": 2823184,
-          "checksum": 5000
+          "sampleCount": 3,
+          "meanDurationMs": 13.69,
+          "minDurationMs": 13.479,
+          "maxDurationMs": 13.872,
+          "meanChecksum": 1402.0,
+          "minChecksum": 1402.0,
+          "maxChecksum": 1402.0,
+          "meanElapsedMilliseconds": 13.69,
+          "minElapsedMilliseconds": 13.479,
+          "maxElapsedMilliseconds": 13.872,
+          "meanOpsPerSecond": 146.112,
+          "minOpsPerSecond": 144.174,
+          "maxOpsPerSecond": 148.376
         },
-        "recordedAt": "2026-04-11T17:45:49.003393Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T09:29:33.372487Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       },
       "managed": {
         "metrics": {
-          "meanDurationMs": 871.352,
-          "elapsedMilliseconds": 3.719,
-          "iterations": 1000,
-          "opsPerSecond": 2689039,
-          "checksum": 5000
+          "sampleCount": 3,
+          "meanDurationMs": 13.99,
+          "minDurationMs": 13.491,
+          "maxDurationMs": 14.332,
+          "meanChecksum": 1402.0,
+          "minChecksum": 1402.0,
+          "maxChecksum": 1402.0,
+          "meanElapsedMilliseconds": 13.99,
+          "minElapsedMilliseconds": 13.491,
+          "maxElapsedMilliseconds": 14.332,
+          "meanOpsPerSecond": 143.05,
+          "minOpsPerSecond": 139.544,
+          "maxOpsPerSecond": 148.243
         },
-        "recordedAt": "2026-04-11T17:45:48.061095Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T08:53:48.380997Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       }
     },
     "BenchDelegate": {
-      "native": {
-        "metrics": {
-          "meanDurationMs": 0.0,
-          "note": "native requires full pipeline run"
-        },
-        "recordedAt": "2026-04-11T17:46:53.517871Z",
-        "gitCommit": "ef2c842",
-        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
-      },
       "interpreter": {
         "metrics": {
-          "meanDurationMs": 886.528,
-          "elapsedMilliseconds": 1.71,
-          "iterations": 1000,
-          "opsPerSecond": 58469274,
-          "checksum": 0
+          "sampleCount": 3,
+          "meanDurationMs": 2.98,
+          "minDurationMs": 2.817,
+          "maxDurationMs": 3.11,
+          "meanChecksum": 0.0,
+          "minChecksum": 0.0,
+          "maxChecksum": 0.0,
+          "meanElapsedMilliseconds": 2.98,
+          "minElapsedMilliseconds": 2.817,
+          "maxElapsedMilliseconds": 3.11,
+          "meanOpsPerSecond": 1680.722,
+          "minOpsPerSecond": 1607.665,
+          "maxOpsPerSecond": 1775.19
         },
-        "recordedAt": "2026-04-11T17:45:52.826958Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T09:30:19.382561Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       },
       "managed": {
         "metrics": {
-          "meanDurationMs": 893.755,
-          "elapsedMilliseconds": 1.982,
-          "iterations": 1000,
-          "opsPerSecond": 50466818,
-          "checksum": 0
+          "sampleCount": 3,
+          "meanDurationMs": 2.999,
+          "minDurationMs": 2.824,
+          "maxDurationMs": 3.249,
+          "meanChecksum": 0.0,
+          "minChecksum": 0.0,
+          "maxChecksum": 0.0,
+          "meanElapsedMilliseconds": 2.999,
+          "minElapsedMilliseconds": 2.824,
+          "maxElapsedMilliseconds": 3.249,
+          "meanOpsPerSecond": 1673.266,
+          "minOpsPerSecond": 1538.793,
+          "maxOpsPerSecond": 1770.726
         },
-        "recordedAt": "2026-04-11T17:45:51.842981Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T08:54:34.648471Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       }
     },
     "BenchDispatch": {
-      "native": {
-        "metrics": {
-          "meanDurationMs": 0.0,
-          "note": "native requires full pipeline run"
-        },
-        "recordedAt": "2026-04-11T17:46:53.576450Z",
-        "gitCommit": "ef2c842",
-        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
-      },
       "interpreter": {
         "metrics": {
-          "meanDurationMs": 875.408,
-          "elapsedMilliseconds": 1.593,
-          "iterations": 1000,
-          "opsPerSecond": 62790406,
-          "checksum": 3572
+          "sampleCount": 3,
+          "meanDurationMs": 2.276,
+          "minDurationMs": 2.239,
+          "maxDurationMs": 2.327,
+          "meanChecksum": 1432.0,
+          "minChecksum": 1432.0,
+          "maxChecksum": 1432.0,
+          "meanElapsedMilliseconds": 2.276,
+          "minElapsedMilliseconds": 2.239,
+          "maxElapsedMilliseconds": 2.327,
+          "meanOpsPerSecond": 2636.743,
+          "minOpsPerSecond": 2578.87,
+          "maxOpsPerSecond": 2680.127
         },
-        "recordedAt": "2026-04-11T17:45:54.745632Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T09:31:05.105273Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       },
       "managed": {
         "metrics": {
-          "meanDurationMs": 887.954,
-          "elapsedMilliseconds": 1.564,
-          "iterations": 1000,
-          "opsPerSecond": 63922271,
-          "checksum": 3572
+          "sampleCount": 3,
+          "meanDurationMs": 2.295,
+          "minDurationMs": 2.183,
+          "maxDurationMs": 2.453,
+          "meanChecksum": 1432.0,
+          "minChecksum": 1432.0,
+          "maxChecksum": 1432.0,
+          "meanElapsedMilliseconds": 2.295,
+          "minElapsedMilliseconds": 2.183,
+          "maxElapsedMilliseconds": 2.453,
+          "meanOpsPerSecond": 2620.583,
+          "minOpsPerSecond": 2445.985,
+          "maxOpsPerSecond": 2748.385
         },
-        "recordedAt": "2026-04-11T17:45:53.773705Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T08:54:40.769343Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       }
     },
     "BenchException": {
-      "native": {
-        "metrics": {
-          "meanDurationMs": 0.0,
-          "note": "native requires full pipeline run"
-        },
-        "recordedAt": "2026-04-11T17:46:53.627081Z",
-        "gitCommit": "ef2c842",
-        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
-      },
       "interpreter": {
         "metrics": {
-          "meanDurationMs": 894.952,
-          "elapsedMilliseconds": 1.719,
-          "iterations": 1000,
-          "opsPerSecond": 63994415,
-          "checksum": 100
+          "sampleCount": 3,
+          "meanDurationMs": 3.914,
+          "minDurationMs": 3.153,
+          "maxDurationMs": 4.67,
+          "meanChecksum": 600.0,
+          "minChecksum": 600.0,
+          "maxChecksum": 600.0,
+          "meanElapsedMilliseconds": 3.914,
+          "minElapsedMilliseconds": 3.153,
+          "maxElapsedMilliseconds": 4.67,
+          "meanOpsPerSecond": 1573.056,
+          "minOpsPerSecond": 1284.907,
+          "maxOpsPerSecond": 1902.829
         },
-        "recordedAt": "2026-04-11T17:45:56.673872Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T09:31:50.909974Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       },
       "managed": {
         "metrics": {
-          "meanDurationMs": 878.802,
-          "elapsedMilliseconds": 1.744,
-          "iterations": 1000,
-          "opsPerSecond": 63077011,
-          "checksum": 100
+          "sampleCount": 3,
+          "meanDurationMs": 3.553,
+          "minDurationMs": 3.262,
+          "maxDurationMs": 3.822,
+          "meanChecksum": 600.0,
+          "minChecksum": 600.0,
+          "maxChecksum": 600.0,
+          "meanElapsedMilliseconds": 3.553,
+          "minElapsedMilliseconds": 3.262,
+          "maxElapsedMilliseconds": 3.822,
+          "meanOpsPerSecond": 1695.596,
+          "minOpsPerSecond": 1569.818,
+          "maxOpsPerSecond": 1839.306
         },
-        "recordedAt": "2026-04-11T17:45:55.683902Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T08:55:06.803267Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       }
     },
     "BenchGameLoop": {
-      "native": {
-        "metrics": {
-          "meanDurationMs": 0.0,
-          "note": "native requires full pipeline run"
-        },
-        "recordedAt": "2026-04-11T17:46:53.690935Z",
-        "gitCommit": "ef2c842",
-        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
-      },
       "interpreter": {
         "metrics": {
-          "meanDurationMs": 876.237,
-          "elapsedMilliseconds": 3.368,
-          "iterations": 1000,
-          "framesPerSecond": 2968769,
-          "checksum": 6267
+          "sampleCount": 3,
+          "meanDurationMs": 6.955,
+          "minDurationMs": 6.776,
+          "maxDurationMs": 7.213,
+          "meanChecksum": 8801.0,
+          "minChecksum": 8801.0,
+          "maxChecksum": 8801.0,
+          "meanElapsedMilliseconds": 6.955,
+          "minElapsedMilliseconds": 6.776,
+          "maxElapsedMilliseconds": 7.213,
+          "meanOpsPerSecond": 431.634,
+          "minOpsPerSecond": 415.893,
+          "maxOpsPerSecond": 442.759
         },
-        "recordedAt": "2026-04-11T17:45:58.599146Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T09:32:17.168885Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       },
       "managed": {
         "metrics": {
-          "meanDurationMs": 901.301,
-          "elapsedMilliseconds": 3.778,
-          "iterations": 1000,
-          "framesPerSecond": 2647043,
-          "checksum": 6267
+          "sampleCount": 3,
+          "meanDurationMs": 7.06,
+          "minDurationMs": 6.532,
+          "maxDurationMs": 7.375,
+          "meanChecksum": 8801.0,
+          "minChecksum": 8801.0,
+          "maxChecksum": 8801.0,
+          "meanElapsedMilliseconds": 7.06,
+          "minElapsedMilliseconds": 6.532,
+          "maxElapsedMilliseconds": 7.375,
+          "meanOpsPerSecond": 426.166,
+          "minOpsPerSecond": 406.769,
+          "maxOpsPerSecond": 459.313
         },
-        "recordedAt": "2026-04-11T17:45:57.622138Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T08:55:53.071470Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       }
     },
     "BenchGeneric": {
-      "native": {
-        "metrics": {
-          "meanDurationMs": 0.0,
-          "note": "native requires full pipeline run"
-        },
-        "recordedAt": "2026-04-11T17:46:53.747696Z",
-        "gitCommit": "ef2c842",
-        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
-      },
       "interpreter": {
         "metrics": {
-          "meanDurationMs": 882.878,
-          "elapsedMilliseconds": 4.871,
-          "iterations": 1000,
-          "opsPerSecond": 205309,
-          "checksum": 0
+          "sampleCount": 3,
+          "meanDurationMs": 7.389,
+          "minDurationMs": 7.336,
+          "maxDurationMs": 7.468,
+          "meanChecksum": 0.0,
+          "minChecksum": 0.0,
+          "maxChecksum": 0.0,
+          "meanElapsedMilliseconds": 7.389,
+          "minElapsedMilliseconds": 7.336,
+          "maxElapsedMilliseconds": 7.468,
+          "meanOpsPerSecond": 270.688,
+          "minOpsPerSecond": 267.827,
+          "maxOpsPerSecond": 272.643
         },
-        "recordedAt": "2026-04-11T17:46:00.522420Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T09:32:23.097102Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       },
       "managed": {
         "metrics": {
-          "meanDurationMs": 891.756,
-          "elapsedMilliseconds": 5.013,
-          "iterations": 1000,
-          "opsPerSecond": 199493,
-          "checksum": 0
+          "sampleCount": 3,
+          "meanDurationMs": 7.562,
+          "minDurationMs": 7.173,
+          "maxDurationMs": 7.788,
+          "meanChecksum": 0.0,
+          "minChecksum": 0.0,
+          "maxChecksum": 0.0,
+          "meanElapsedMilliseconds": 7.562,
+          "minElapsedMilliseconds": 7.173,
+          "maxElapsedMilliseconds": 7.788,
+          "meanOpsPerSecond": 264.833,
+          "minOpsPerSecond": 256.792,
+          "maxOpsPerSecond": 278.816
         },
-        "recordedAt": "2026-04-11T17:45:59.548157Z",
-        "gitCommit": "ef2c842",
-        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
-      }
-    },
-    "BenchMixed": {
-      "native": {
-        "metrics": {
-          "meanDurationMs": 0.0,
-          "note": "native requires full pipeline run"
-        },
-        "recordedAt": "2026-04-11T17:46:53.799173Z",
-        "gitCommit": "ef2c842",
-        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
-      },
-      "interpreter": {
-        "metrics": {
-          "meanDurationMs": 894.719,
-          "elapsedMilliseconds": 1.724,
-          "iterations": 1000,
-          "opsPerSecond": 58014736,
-          "checksum": 8272
-        },
-        "recordedAt": "2026-04-11T17:46:02.465402Z",
-        "gitCommit": "ef2c842",
-        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
-      },
-      "managed": {
-        "metrics": {
-          "meanDurationMs": 897.831,
-          "elapsedMilliseconds": 1.733,
-          "iterations": 1000,
-          "opsPerSecond": 57713395,
-          "checksum": 8272
-        },
-        "recordedAt": "2026-04-11T17:46:01.479283Z",
-        "gitCommit": "ef2c842",
-        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
-      }
-    },
-    "BenchHotUpdateLoad": {
-      "managed": {
-        "metrics": {
-          "elapsedMilliseconds": 7.1794,
-          "loadDurationMs": 7.1794,
-          "methodCount": 1,
-          "loaded": true,
-          "meanDurationMs": 7.1794
-        },
-        "recordedAt": "2026-04-11T18:37:06.056892Z",
-        "gitCommit": "ef2c842",
-        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
-      }
-    },
-    "BenchHotUpdateRoundtrip": {
-      "managed": {
-        "metrics": {
-          "elapsedMilliseconds": 0.3456,
-          "iterations": 1000,
-          "roundtripsPerSecond": 2893518.5185185187,
-          "checksum": 501500,
-          "meanDurationMs": 0.3456
-        },
-        "recordedAt": "2026-04-11T18:37:06.265030Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T08:56:19.160879Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       }
     },
     "BenchHotUpdateDispatch": {
+      "interpreter": {
+        "metrics": {
+          "sampleCount": 3,
+          "meanDurationMs": 4.936,
+          "minDurationMs": 4.833,
+          "maxDurationMs": 5.058,
+          "meanChecksum": 7500.0,
+          "minChecksum": 7500.0,
+          "maxChecksum": 7500.0,
+          "meanElapsedMilliseconds": 4.936,
+          "minElapsedMilliseconds": 4.833,
+          "maxElapsedMilliseconds": 5.058,
+          "meanOpsPerSecond": 9119.578,
+          "minOpsPerSecond": 8897.501,
+          "maxOpsPerSecond": 9310.987
+        },
+        "recordedAt": "2026-04-12T09:33:11.992471Z",
+        "gitCommit": "7e4e814",
+        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      },
       "managed": {
         "metrics": {
-          "elapsedMilliseconds": 0.2228,
-          "iterations": 1000,
-          "opsPerSecond": 4488330.341113106,
-          "checksum": 499500,
-          "meanDurationMs": 0.2228
+          "sampleCount": 3,
+          "meanDurationMs": 4.757,
+          "minDurationMs": 4.628,
+          "maxDurationMs": 5.012,
+          "meanChecksum": 7500.0,
+          "minChecksum": 7500.0,
+          "maxChecksum": 7500.0,
+          "meanElapsedMilliseconds": 4.757,
+          "minElapsedMilliseconds": 4.628,
+          "maxElapsedMilliseconds": 5.012,
+          "meanOpsPerSecond": 9472.618,
+          "minOpsPerSecond": 8978.989,
+          "maxOpsPerSecond": 9722.372
         },
-        "recordedAt": "2026-04-11T18:37:06.320184Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T08:57:47.959820Z",
+        "gitCommit": "7e4e814",
+        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      }
+    },
+    "BenchHotUpdateLoad": {
+      "interpreter": {
+        "metrics": {
+          "sampleCount": 3,
+          "meanDurationMs": 3.644,
+          "minDurationMs": 3.507,
+          "maxDurationMs": 3.787,
+          "meanChecksum": 0.0,
+          "minChecksum": 0.0,
+          "maxChecksum": 0.0,
+          "meanElapsedMilliseconds": 3.644,
+          "minElapsedMilliseconds": 3.507,
+          "maxElapsedMilliseconds": 3.787,
+          "meanOpsPerSecond": 2197.683,
+          "minOpsPerSecond": 2112.323,
+          "maxOpsPerSecond": 2281.412
+        },
+        "recordedAt": "2026-04-12T09:36:45.885739Z",
+        "gitCommit": "7e4e814",
+        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      },
+      "managed": {
+        "metrics": {
+          "sampleCount": 3,
+          "meanDurationMs": 4.466,
+          "minDurationMs": 3.664,
+          "maxDurationMs": 5.367,
+          "meanChecksum": 0.0,
+          "minChecksum": 0.0,
+          "maxChecksum": 0.0,
+          "meanElapsedMilliseconds": 4.466,
+          "minElapsedMilliseconds": 3.664,
+          "maxElapsedMilliseconds": 5.367,
+          "meanOpsPerSecond": 1835.013,
+          "minOpsPerSecond": 1490.452,
+          "maxOpsPerSecond": 2183.168
+        },
+        "recordedAt": "2026-04-12T09:26:52.570437Z",
+        "gitCommit": "7e4e814",
+        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      }
+    },
+    "BenchHotUpdateRoundtrip": {
+      "interpreter": {
+        "metrics": {
+          "sampleCount": 3,
+          "meanDurationMs": 7.395,
+          "minDurationMs": 7.139,
+          "maxDurationMs": 7.792,
+          "meanChecksum": 5000.0,
+          "minChecksum": 5000.0,
+          "maxChecksum": 5000.0,
+          "meanElapsedMilliseconds": 7.395,
+          "minElapsedMilliseconds": 7.139,
+          "maxElapsedMilliseconds": 7.792,
+          "meanOpsPerSecond": 4062.479,
+          "minOpsPerSecond": 3850.152,
+          "maxOpsPerSecond": 4202.093
+        },
+        "recordedAt": "2026-04-12T09:34:21.836878Z",
+        "gitCommit": "7e4e814",
+        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      },
+      "managed": {
+        "metrics": {
+          "sampleCount": 3,
+          "meanDurationMs": 9.244,
+          "minDurationMs": 8.833,
+          "maxDurationMs": 9.963,
+          "meanChecksum": 5000.0,
+          "minChecksum": 5000.0,
+          "maxChecksum": 5000.0,
+          "meanElapsedMilliseconds": 9.244,
+          "minElapsedMilliseconds": 8.833,
+          "maxElapsedMilliseconds": 9.963,
+          "meanOpsPerSecond": 3254.972,
+          "minOpsPerSecond": 3011.202,
+          "maxOpsPerSecond": 3396.393
+        },
+        "recordedAt": "2026-04-12T09:12:28.765404Z",
+        "gitCommit": "7e4e814",
+        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      }
+    },
+    "BenchMixed": {
+      "interpreter": {
+        "metrics": {
+          "sampleCount": 3,
+          "meanDurationMs": 2.476,
+          "minDurationMs": 2.39,
+          "maxDurationMs": 2.577,
+          "meanChecksum": 9632.0,
+          "minChecksum": 9632.0,
+          "maxChecksum": 9632.0,
+          "meanElapsedMilliseconds": 2.476,
+          "minElapsedMilliseconds": 2.39,
+          "maxElapsedMilliseconds": 2.577,
+          "meanOpsPerSecond": 2425.311,
+          "minOpsPerSecond": 2328.108,
+          "maxOpsPerSecond": 2510.88
+        },
+        "recordedAt": "2026-04-12T09:34:47.772175Z",
+        "gitCommit": "7e4e814",
+        "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      },
+      "managed": {
+        "metrics": {
+          "sampleCount": 3,
+          "meanDurationMs": 2.393,
+          "minDurationMs": 2.277,
+          "maxDurationMs": 2.463,
+          "meanChecksum": 9632.0,
+          "minChecksum": 9632.0,
+          "maxChecksum": 9632.0,
+          "meanElapsedMilliseconds": 2.393,
+          "minElapsedMilliseconds": 2.277,
+          "maxElapsedMilliseconds": 2.463,
+          "meanOpsPerSecond": 2510.661,
+          "minOpsPerSecond": 2435.757,
+          "maxOpsPerSecond": 2635.393
+        },
+        "recordedAt": "2026-04-12T08:59:03.033668Z",
+        "gitCommit": "7e4e814",
         "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
       }
     }

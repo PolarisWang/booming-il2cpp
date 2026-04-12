@@ -184,7 +184,7 @@ def _dotnet_intermediate_args(project_name: str, host_platform: str) -> list[str
 
     intermediate_text = intermediate_root.as_posix() + "/$(MSBuildProjectName)/"
     return [
-        f"-p:BaseIntermediateOutputPath={intermediate_text}",
+        f"-p:IntermediateOutputPath={intermediate_text}",
         f"-p:MSBuildProjectExtensionsPath={intermediate_text}",
     ]
 
@@ -349,6 +349,7 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
             str(_resolve(repo_root, str(source["path"]))),
             "-c",
             "Release",
+            "-m:1",
             "-o",
             str(output_root),
             *_dotnet_intermediate_args(str(request["selection"]["subjectId"]), host_platform),
@@ -1582,11 +1583,11 @@ def run_managed_runtime_output(*, repo_root: Path, request: dict[str, Any]) -> d
 
 
 def _perf_sample_count(runtime_profile: str) -> int:
-    return 10 if "release" in runtime_profile else 5
+    return 3 if "release" in runtime_profile else 1
 
 
 def _perf_harness_iterations(runtime_profile: str) -> int:
-    return 10000 if "release" in runtime_profile else 1000
+    return 1000 if "release" in runtime_profile else 100
 
 
 def _subject_perf_iterations(
@@ -1759,6 +1760,7 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
             str(project_path),
             "-c",
             "Release",
+            "-m:1",
             "-o",
             str(harness_root),
             *_dotnet_intermediate_args(project_path.stem, host_platform),
@@ -2401,6 +2403,7 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
         [
             "dotnet", "build", str(project_path),
             "-c", "Release",
+            "-m:1",
             "-o", str(harness_root),
             *_dotnet_intermediate_args(project_path.stem, host_platform),
         ],

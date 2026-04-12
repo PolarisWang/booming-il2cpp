@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 
 namespace BenchGameLoop;
 
@@ -11,24 +10,31 @@ internal sealed class GameObject
 
 internal static class Program
 {
-    public static int Main(string[] args)
-    {
-        int iterations = args.Length > 0 && int.TryParse(args[0], out var n) ? n : 1000;
-        const int ObjectCount = 100;
-        const int FrameCount = 10;
+    private const int IterationCount = 1000;
+    private const int ObjectCount = 100;
+    private const int FrameCount = 10;
+    private static long s_lastChecksum;
 
+    public static int Main()
+    {
+        s_lastChecksum = RunWorkload();
+        return 0;
+    }
+
+    public static long RunWorkload()
+    {
         var objects = new GameObject[ObjectCount];
         for (int i = 0; i < ObjectCount; i++)
+        {
             objects[i] = new GameObject { X = i, Y = i * 0.5f, VX = 0.1f, VY = -0.05f, Active = true };
+        }
 
-        var sw = Stopwatch.StartNew();
         double checksum = 0;
 
-        for (int iter = 0; iter < iterations; iter++)
+        for (int iter = 0; iter < IterationCount; iter++)
         {
             for (int frame = 0; frame < FrameCount; frame++)
             {
-                // Update phase
                 foreach (var obj in objects)
                 {
                     if (!obj.Active) continue;
@@ -38,20 +44,18 @@ internal static class Program
                     if (obj.Y > 100 || obj.Y < 0) obj.VY = -obj.VY;
                 }
 
-                // Simple collision check (O(n^2) subset)
                 for (int i = 0; i < 10; i++)
+                {
                     for (int j = i + 1; j < 10; j++)
                     {
                         float dx = objects[i].X - objects[j].X;
                         float dy = objects[i].Y - objects[j].Y;
                         checksum += Math.Sqrt(dx * dx + dy * dy);
                     }
+                }
             }
         }
-        sw.Stop();
 
-        double framesPerSec = (iterations * FrameCount) / (sw.Elapsed.TotalMilliseconds / 1000.0);
-        Console.WriteLine($"{{\"elapsedMilliseconds\":{sw.Elapsed.TotalMilliseconds:F3},\"iterations\":{iterations},\"framesPerSecond\":{framesPerSec:F0},\"checksum\":{(long)(checksum % 10000)}}}");
-        return 0;
+        return (long)(checksum % 10000);
     }
 }

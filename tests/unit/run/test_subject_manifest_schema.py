@@ -66,7 +66,10 @@ class SubjectManifestSchemaTests(unittest.TestCase):
                 self.assertTrue(str(validation_spec.get("defaultVariant") or ""))
                 project_path = str(validation_spec.get("project") or "")
                 if project_path:
-                    self.assertTrue(project_path.startswith(f"subjects/{subject_id}/validation/"))
+                    self.assertTrue(
+                        project_path.startswith(f"subjects/{subject_id}/validation/")
+                        or project_path.startswith("src/validation/perf/")
+                    )
                     self.assertTrue((REPO_ROOT / project_path).is_file())
 
             for label, expected_path in expected.items():

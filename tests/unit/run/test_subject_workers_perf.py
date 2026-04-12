@@ -140,13 +140,13 @@ class SubjectWorkersPerfTests(unittest.TestCase):
             )
 
             completed = subprocess.CompletedProcess(
-                ["dotnet", str(repo_root / perf_harness_dll_path), "10000"],
+                ["dotnet", str(repo_root / perf_harness_dll_path), "1000"],
                 0,
                 json.dumps(
                     {
                         "harness": "csharp-perf-harness",
                         "subjectId": subject_id,
-                        "iterations": 10000,
+                        "iterations": 1000,
                         "elapsedMilliseconds": 16.0,
                         "lastValue": "6:roadmap0",
                     }
@@ -157,7 +157,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
             perf_result = {
                 "baselinePath": posix_path("subjects", subject_id, "baselines", "perf", matrix_id, "windows.json"),
                 "baseline": {"meanDurationMs": 12.0},
-                "metrics": {"sampleCount": 10, "meanDurationMs": 16.0, "minDurationMs": 10.0, "maxDurationMs": 20.0},
+                "metrics": {"sampleCount": 3, "meanDurationMs": 16.0, "minDurationMs": 10.0, "maxDurationMs": 20.0},
                 "baselineUpdated": False,
                 "regressionStatus": "regressed",
                 "regressions": [{"metric": "meanDurationMs", "baseline": 12.0, "actual": 16.0, "delta": 4.0}],
@@ -167,13 +167,6 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                 0.0, 0.010,
                 1.0, 1.020,
                 2.0, 2.012,
-                3.0, 3.018,
-                4.0, 4.014,
-                5.0, 5.016,
-                6.0, 6.012,
-                7.0, 7.020,
-                8.0, 8.018,
-                9.0, 9.020,
             ]
 
             with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
@@ -182,7 +175,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                         result = workers_module.run_runtime_perf_collect(repo_root=repo_root, request=request)
 
             self.assertEqual("ok", result["status"])
-            self.assertEqual(11, run_process_mock.call_count)
+            self.assertEqual(4, run_process_mock.call_count)
             self.assertEqual(
                 [
                     "dotnet",
@@ -210,7 +203,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                 [
                     "dotnet",
                     str(repo_root / perf_harness_dll_path),
-                    "10000",
+                    "1000",
                     "--assembly",
                     str(
                         repo_root
@@ -227,7 +220,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                 matrix_id=matrix_id,
                 host_platform="windows",
                 metrics={
-                    "sampleCount": 10,
+                    "sampleCount": 3,
                     "meanDurationMs": 16.0,
                     "minDurationMs": 16.0,
                     "maxDurationMs": 16.0,
@@ -242,13 +235,13 @@ class SubjectWorkersPerfTests(unittest.TestCase):
             self.assertEqual(subject_id, manifest["subjectId"])
             self.assertEqual(matrix_id, manifest["matrixId"])
             self.assertEqual("PROFILE", manifest["variant"])
-            self.assertEqual(10, len(manifest["samples"]))
+            self.assertEqual(3, len(manifest["samples"]))
             self.assertEqual({"meanDurationMs": 12.0}, manifest["baseline"])
             self.assertEqual("regressed", manifest["regressionStatus"])
             self.assertEqual(perf_project_path, manifest["perfHarnessProjectPath"])
             self.assertEqual(perf_harness_dll_path, manifest["perfHarnessDllPath"])
             self.assertEqual(
-                {"sampleCount": 10, "meanDurationMs": 16.0, "minDurationMs": 10.0, "maxDurationMs": 20.0},
+                {"sampleCount": 3, "meanDurationMs": 16.0, "minDurationMs": 10.0, "maxDurationMs": 20.0},
                 manifest["summaryMetrics"],
             )
             self.assertEqual(
@@ -339,18 +332,14 @@ class SubjectWorkersPerfTests(unittest.TestCase):
             perf_result = {
                 "baselinePath": posix_path("subjects", subject_id, "baselines", "perf", matrix_id, "windows.json"),
                 "baseline": {"meanDurationMs": 15.0},
-                "metrics": {"sampleCount": 5, "meanDurationMs": 18.0, "minDurationMs": 17.0, "maxDurationMs": 19.0},
+                "metrics": {"sampleCount": 1, "meanDurationMs": 18.0, "minDurationMs": 18.0, "maxDurationMs": 18.0},
                 "baselineUpdated": False,
                 "regressionStatus": "regressed",
                 "regressions": [{"metric": "meanDurationMs", "baseline": 15.0, "actual": 18.0, "delta": 3.0}],
             }
             perf_counter_values = [
                 0.0, 0.120,
-                1.0, 1.017,
-                2.0, 2.018,
-                3.0, 3.019,
-                4.0, 4.017,
-                5.0, 5.019,
+                1.0, 1.018,
             ]
 
             with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
@@ -359,14 +348,14 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                         result = workers_module.run_native_runtime_perf(repo_root=repo_root, request=request)
 
             self.assertEqual("ok", result["status"])
-            self.assertEqual(6, run_process_mock.call_count)
+            self.assertEqual(2, run_process_mock.call_count)
             self.assertEqual([str(repo_root / executable_path)], run_process_mock.call_args_list[0].args[0])
             evaluate_mock.assert_called_once_with(
                 repo_root=repo_root,
                 subject_id=subject_id,
                 matrix_id=matrix_id,
                 host_platform="windows",
-                metrics={"sampleCount": 5, "meanDurationMs": 18.0, "minDurationMs": 17.0, "maxDurationMs": 19.0},
+                metrics={"sampleCount": 1, "meanDurationMs": 18.0, "minDurationMs": 18.0, "maxDurationMs": 18.0},
                 update_baseline=False,
             )
 
@@ -384,7 +373,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                 manifest["perfSamplesPath"],
             )
             self.assertEqual(1, manifest["warmupSampleCount"])
-            self.assertEqual(6, len(manifest["samples"]))
+            self.assertEqual(2, len(manifest["samples"]))
             self.assertEqual(False, manifest["samples"][0]["countedInSummary"])
             self.assertEqual(True, manifest["samples"][1]["countedInSummary"])
             self.assertEqual("regressed", manifest["regressionStatus"])
@@ -593,7 +582,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                 "baselinePath": posix_path("subjects", subject_id, "baselines", "perf", matrix_id, "windows.json"),
                 "baseline": {"meanDispatchNanoseconds": 5.0},
                 "metrics": {
-                    "sampleCount": 5,
+                    "sampleCount": 1,
                     "meanDurationMs": 1.25,
                     "minDurationMs": 1.25,
                     "maxDurationMs": 1.25,
@@ -608,10 +597,6 @@ class SubjectWorkersPerfTests(unittest.TestCase):
             perf_counter_values = [
                 0.0, 0.110,
                 1.0, 1.110,
-                2.0, 2.110,
-                3.0, 3.110,
-                4.0, 4.110,
-                5.0, 5.110,
             ]
 
             with patch.object(workers_module, "run_process", return_value=completed):
@@ -626,7 +611,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                 matrix_id=matrix_id,
                 host_platform="windows",
                 metrics={
-                    "sampleCount": 5,
+                    "sampleCount": 1,
                     "meanDurationMs": 1.25,
                     "minDurationMs": 1.25,
                     "maxDurationMs": 1.25,

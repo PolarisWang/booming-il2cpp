@@ -58,6 +58,15 @@ class SubjectWorkersTests(unittest.TestCase):
     def _make_non_repo_path(self, *parts: str) -> Path:
         return TEST_TMP_ROOT / "_external" / Path(*parts)
 
+    def test_perf_defaults_bias_toward_short_benchmark_batches(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_perf_defaults")
+
+        self.assertEqual(3, workers_module._perf_sample_count("managed-perf-release"))
+        self.assertEqual(1, workers_module._perf_sample_count("native-perf-profile"))
+        self.assertEqual(1, workers_module._perf_sample_count("managed-perf-dev"))
+        self.assertEqual(1000, workers_module._perf_harness_iterations("managed-perf-release"))
+        self.assertEqual(100, workers_module._perf_harness_iterations("interpreter-perf-dev"))
+
     def test_windows_build_target_uses_direct_msvc_compile_and_records_build_strategy(self) -> None:
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_windows_build")
         subject_id = "FixtureNativeSubject"
@@ -1153,14 +1162,15 @@ class SubjectWorkersTests(unittest.TestCase):
                     "build",
                     str(repo_root / "subjects" / subject_id / "source" / f"{subject_id}.csproj"),
                     "-c",
-                    "Release",
-                    "-o",
-                    str(repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "host-input"),
-                    f"-p:BaseIntermediateOutputPath={intermediate_root.as_posix()}/$(MSBuildProjectName)/",
-                    f"-p:MSBuildProjectExtensionsPath={intermediate_root.as_posix()}/$(MSBuildProjectName)/",
-                ],
-                run_checked_mock.call_args.args[0],
-            )
+                "Release",
+                "-m:1",
+                "-o",
+                str(repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "host-input"),
+                f"-p:IntermediateOutputPath={intermediate_root.as_posix()}/$(MSBuildProjectName)/",
+                f"-p:MSBuildProjectExtensionsPath={intermediate_root.as_posix()}/$(MSBuildProjectName)/",
+            ],
+            run_checked_mock.call_args.args[0],
+        )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -1401,6 +1411,7 @@ class SubjectWorkersTests(unittest.TestCase):
         run_id = "fixture-run-managed-perf-001"
         matrix_id = "windows-managed-perf"
         workload_entry = f"{subject_id}/Program::RunWorkload()"
+        intermediate_root = TEST_TMP_ROOT / "dotnet-intermediates" / "fixture-managed-perf-1234"
         perf_project_path = (
             f"subjects/{subject_id}/validation/perf/"
             f"{subject_id}.Subject.PerfHarness/{subject_id}.Subject.PerfHarness.csproj"
@@ -1484,15 +1495,31 @@ class SubjectWorkersTests(unittest.TestCase):
                 / f"{subject_id}.Subject.PerfHarness.dll"
             )
 
-            with patch.object(workers_module, "_run_checked", return_value=""):
-                with patch.object(workers_module, "_perf_sample_count", return_value=1):
-                    with patch.object(workers_module, "_perf_harness_iterations", return_value=13):
-                        with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
-                            with patch.object(workers_module.time, "perf_counter", side_effect=[10.0, 10.5]):
-                                with patch.object(workers_module.perf_module, "evaluate_perf_subject", return_value=perf_result):
-                                    result = workers_module.run_runtime_perf_collect(repo_root=repo_root, request=request)
+            with patch.object(workers_module.tooling_module, "allocate_dotnet_intermediate_dir", return_value=intermediate_root):
+                with patch.object(workers_module, "_run_checked", return_value="") as run_checked_mock:
+                    with patch.object(workers_module, "_perf_sample_count", return_value=1):
+                        with patch.object(workers_module, "_perf_harness_iterations", return_value=13):
+                            with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
+                                with patch.object(workers_module.time, "perf_counter", side_effect=[10.0, 10.5]):
+                                    with patch.object(workers_module.perf_module, "evaluate_perf_subject", return_value=perf_result):
+                                        result = workers_module.run_runtime_perf_collect(repo_root=repo_root, request=request)
 
             self.assertEqual("ok", result["status"])
+            self.assertEqual(
+                [
+                    "dotnet",
+                    "build",
+                    str(repo_root / perf_project_path),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    "-o",
+                    str(repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "matrices" / matrix_id / "runtime" / "harness"),
+                    f"-p:IntermediateOutputPath={intermediate_root.as_posix()}/$(MSBuildProjectName)/",
+                    f"-p:MSBuildProjectExtensionsPath={intermediate_root.as_posix()}/$(MSBuildProjectName)/",
+                ],
+                run_checked_mock.call_args.args[0],
+            )
             run_process_mock.assert_called_once_with(
                 [
                     "dotnet",
@@ -1525,6 +1552,7 @@ class SubjectWorkersTests(unittest.TestCase):
         run_id = "fixture-run-interpreter-perf-001"
         matrix_id = "windows-interpreter-perf"
         workload_entry = f"{subject_id}/Program::RunWorkload()"
+        intermediate_root = TEST_TMP_ROOT / "dotnet-intermediates" / "fixture-interpreter-perf-1234"
         perf_project_path = (
             f"subjects/{subject_id}/validation/perf/"
             f"{subject_id}.Subject.PerfHarness/{subject_id}.Subject.PerfHarness.csproj"
@@ -1608,15 +1636,31 @@ class SubjectWorkersTests(unittest.TestCase):
                 / f"{subject_id}.Subject.PerfHarness.dll"
             )
 
-            with patch.object(workers_module, "_run_checked", return_value=""):
-                with patch.object(workers_module, "_perf_sample_count", return_value=1):
-                    with patch.object(workers_module, "_perf_harness_iterations", return_value=21):
-                        with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
-                            with patch.object(workers_module.time, "perf_counter", side_effect=[20.0, 20.75]):
-                                with patch.object(workers_module.perf_module, "evaluate_perf_subject", return_value=perf_result):
-                                    result = workers_module.run_interpreter_runtime_perf(repo_root=repo_root, request=request)
+            with patch.object(workers_module.tooling_module, "allocate_dotnet_intermediate_dir", return_value=intermediate_root):
+                with patch.object(workers_module, "_run_checked", return_value="") as run_checked_mock:
+                    with patch.object(workers_module, "_perf_sample_count", return_value=1):
+                        with patch.object(workers_module, "_perf_harness_iterations", return_value=21):
+                            with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
+                                with patch.object(workers_module.time, "perf_counter", side_effect=[20.0, 20.75]):
+                                    with patch.object(workers_module.perf_module, "evaluate_perf_subject", return_value=perf_result):
+                                        result = workers_module.run_interpreter_runtime_perf(repo_root=repo_root, request=request)
 
             self.assertEqual("ok", result["status"])
+            self.assertEqual(
+                [
+                    "dotnet",
+                    "build",
+                    str(repo_root / perf_project_path),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    "-o",
+                    str(repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "matrices" / matrix_id / "runtime" / "harness"),
+                    f"-p:IntermediateOutputPath={intermediate_root.as_posix()}/$(MSBuildProjectName)/",
+                    f"-p:MSBuildProjectExtensionsPath={intermediate_root.as_posix()}/$(MSBuildProjectName)/",
+                ],
+                run_checked_mock.call_args.args[0],
+            )
             run_process_mock.assert_called_once_with(
                 [
                     "dotnet",

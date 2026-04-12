@@ -1,29 +1,8 @@
 {
   "latestByDevice": {
     "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd": {
-      "native": {
-        "runId": "20260411-174653-BenchException-native",
-        "subject": "BenchException",
-        "mode": "native",
-        "platform": "windows",
-        "device": {
-          "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-          "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-          "os": "Windows 10.0.26100",
-          "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
-          "arch": "x64",
-          "isSimulator": false
-        },
-        "recordedAt": "2026-04-11T17:46:53.627081Z",
-        "gitCommit": "ef2c842",
-        "gitBranch": "main",
-        "metrics": {
-          "meanDurationMs": 0.0,
-          "note": "native requires full pipeline run"
-        }
-      },
       "interpreter": {
-        "runId": "20260411-174556-BenchException-interpreter",
+        "runId": "20260412-093150-BenchException-interpreter",
         "subject": "BenchException",
         "mode": "interpreter",
         "platform": "windows",
@@ -35,19 +14,27 @@
           "arch": "x64",
           "isSimulator": false
         },
-        "recordedAt": "2026-04-11T17:45:56.673872Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T09:31:50.909974Z",
+        "gitCommit": "7e4e814",
         "gitBranch": "main",
         "metrics": {
-          "meanDurationMs": 894.952,
-          "elapsedMilliseconds": 1.719,
-          "iterations": 1000,
-          "opsPerSecond": 63994415,
-          "checksum": 100
+          "sampleCount": 3,
+          "meanDurationMs": 3.914,
+          "minDurationMs": 3.153,
+          "maxDurationMs": 4.67,
+          "meanChecksum": 600.0,
+          "minChecksum": 600.0,
+          "maxChecksum": 600.0,
+          "meanElapsedMilliseconds": 3.914,
+          "minElapsedMilliseconds": 3.153,
+          "maxElapsedMilliseconds": 4.67,
+          "meanOpsPerSecond": 1573.056,
+          "minOpsPerSecond": 1284.907,
+          "maxOpsPerSecond": 1902.829
         }
       },
       "managed": {
-        "runId": "20260411-174555-BenchException-managed",
+        "runId": "20260412-085506-BenchException-managed",
         "subject": "BenchException",
         "mode": "managed",
         "platform": "windows",
@@ -59,87 +46,62 @@
           "arch": "x64",
           "isSimulator": false
         },
-        "recordedAt": "2026-04-11T17:45:55.683902Z",
-        "gitCommit": "ef2c842",
+        "recordedAt": "2026-04-12T08:55:06.803267Z",
+        "gitCommit": "7e4e814",
         "gitBranch": "main",
         "metrics": {
-          "meanDurationMs": 878.802,
-          "elapsedMilliseconds": 1.744,
-          "iterations": 1000,
-          "opsPerSecond": 63077011,
-          "checksum": 100
+          "sampleCount": 3,
+          "meanDurationMs": 3.553,
+          "minDurationMs": 3.262,
+          "maxDurationMs": 3.822,
+          "meanChecksum": 600.0,
+          "minChecksum": 600.0,
+          "maxChecksum": 600.0,
+          "meanElapsedMilliseconds": 3.553,
+          "minElapsedMilliseconds": 3.262,
+          "maxElapsedMilliseconds": 3.822,
+          "meanOpsPerSecond": 1695.596,
+          "minOpsPerSecond": 1569.818,
+          "maxOpsPerSecond": 1839.306
         }
       }
     }
   },
   "history": {
     "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd": {
-      "native": [
-        {
-          "runId": "20260411-174653-BenchException-native",
-          "subject": "BenchException",
-          "mode": "native",
-          "platform": "windows",
-          "device": {
-            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "os": "Windows 10.0.26100",
-            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
-            "arch": "x64",
-            "isSimulator": false
-          },
-          "recordedAt": "2026-04-11T17:46:53.627081Z",
-          "gitCommit": "ef2c842",
-          "gitBranch": "main",
-          "metrics": {
-            "meanDurationMs": 0.0,
-            "note": "native requires full pipeline run"
-          }
-        },
-        {
-          "runId": "20260411-174555-BenchException-native",
-          "subject": "BenchException",
-          "mode": "native",
-          "platform": "windows",
-          "device": {
-            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "os": "Windows 10.0.26100",
-            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
-            "arch": "x64",
-            "isSimulator": false
-          },
-          "recordedAt": "2026-04-11T17:45:55.733360Z",
-          "gitCommit": "ef2c842",
-          "gitBranch": "main",
-          "metrics": {
-            "meanDurationMs": 0.0,
-            "note": "native requires full pipeline run"
-          }
-        },
-        {
-          "runId": "20260411-174457-BenchException-native",
-          "subject": "BenchException",
-          "mode": "native",
-          "platform": "windows",
-          "device": {
-            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "os": "Windows 10.0.26100",
-            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
-            "arch": "x64",
-            "isSimulator": false
-          },
-          "recordedAt": "2026-04-11T17:44:57.997220Z",
-          "gitCommit": "ef2c842",
-          "gitBranch": "main",
-          "metrics": {
-            "meanDurationMs": 0.0,
-            "note": "native requires full pipeline run"
-          }
-        }
-      ],
       "interpreter": [
+        {
+          "runId": "20260412-093150-BenchException-interpreter",
+          "subject": "BenchException",
+          "mode": "interpreter",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-12T09:31:50.909974Z",
+          "gitCommit": "7e4e814",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 3.914,
+            "minDurationMs": 3.153,
+            "maxDurationMs": 4.67,
+            "meanChecksum": 600.0,
+            "minChecksum": 600.0,
+            "maxChecksum": 600.0,
+            "meanElapsedMilliseconds": 3.914,
+            "minElapsedMilliseconds": 3.153,
+            "maxElapsedMilliseconds": 4.67,
+            "meanOpsPerSecond": 1573.056,
+            "minOpsPerSecond": 1284.907,
+            "maxOpsPerSecond": 1902.829
+          }
+        },
         {
           "runId": "20260411-174556-BenchException-interpreter",
           "subject": "BenchException",
@@ -166,6 +128,70 @@
         }
       ],
       "managed": [
+        {
+          "runId": "20260412-085506-BenchException-managed",
+          "subject": "BenchException",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-12T08:55:06.803267Z",
+          "gitCommit": "7e4e814",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 3.553,
+            "minDurationMs": 3.262,
+            "maxDurationMs": 3.822,
+            "meanChecksum": 600.0,
+            "minChecksum": 600.0,
+            "maxChecksum": 600.0,
+            "meanElapsedMilliseconds": 3.553,
+            "minElapsedMilliseconds": 3.262,
+            "maxElapsedMilliseconds": 3.822,
+            "meanOpsPerSecond": 1695.596,
+            "minOpsPerSecond": 1569.818,
+            "maxOpsPerSecond": 1839.306
+          }
+        },
+        {
+          "runId": "20260412-083722-BenchException-managed",
+          "subject": "BenchException",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-12T08:37:22.990980Z",
+          "gitCommit": "7e4e814",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 3.259,
+            "minDurationMs": 3.057,
+            "maxDurationMs": 3.563,
+            "meanChecksum": 600.0,
+            "minChecksum": 600.0,
+            "maxChecksum": 600.0,
+            "meanElapsedMilliseconds": 3.259,
+            "minElapsedMilliseconds": 3.057,
+            "maxElapsedMilliseconds": 3.563,
+            "meanOpsPerSecond": 1848.914,
+            "minOpsPerSecond": 1684.021,
+            "maxOpsPerSecond": 1962.965
+          }
+        },
         {
           "runId": "20260411-174555-BenchException-managed",
           "subject": "BenchException",
@@ -197,44 +223,65 @@
     "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd": {
       "comparison": {
         "nativeVsManaged": {
-          "checksum": null,
-          "elapsedMilliseconds": null,
-          "iterations": null,
-          "meanDurationMs": 0.0,
-          "note": null,
-          "opsPerSecond": null
+          "maxChecksum": null,
+          "maxDurationMs": null,
+          "maxElapsedMilliseconds": null,
+          "maxOpsPerSecond": null,
+          "meanChecksum": null,
+          "meanDurationMs": null,
+          "meanElapsedMilliseconds": null,
+          "meanOpsPerSecond": null,
+          "minChecksum": null,
+          "minDurationMs": null,
+          "minElapsedMilliseconds": null,
+          "minOpsPerSecond": null,
+          "sampleCount": null
         },
         "interpreterVsManaged": {
-          "checksum": 1.0,
-          "elapsedMilliseconds": 0.99,
-          "iterations": 1.0,
-          "meanDurationMs": 1.02,
-          "note": null,
-          "opsPerSecond": 1.01
+          "maxChecksum": 1.0,
+          "maxDurationMs": 1.22,
+          "maxElapsedMilliseconds": 1.22,
+          "maxOpsPerSecond": 1.03,
+          "meanChecksum": 1.0,
+          "meanDurationMs": 1.1,
+          "meanElapsedMilliseconds": 1.1,
+          "meanOpsPerSecond": 0.93,
+          "minChecksum": 1.0,
+          "minDurationMs": 0.97,
+          "minElapsedMilliseconds": 0.97,
+          "minOpsPerSecond": 0.82,
+          "sampleCount": 1.0
         },
         "nativeVsInterpreter": {
-          "checksum": null,
-          "elapsedMilliseconds": null,
-          "iterations": null,
-          "meanDurationMs": 0.0,
-          "note": null,
-          "opsPerSecond": null
+          "maxChecksum": null,
+          "maxDurationMs": null,
+          "maxElapsedMilliseconds": null,
+          "maxOpsPerSecond": null,
+          "meanChecksum": null,
+          "meanDurationMs": null,
+          "meanElapsedMilliseconds": null,
+          "meanOpsPerSecond": null,
+          "minChecksum": null,
+          "minDurationMs": null,
+          "minElapsedMilliseconds": null,
+          "minOpsPerSecond": null,
+          "sampleCount": null
         },
-        "nativeSpeedup": "N/A",
-        "interpreterOverhead": 1.02
+        "nativeSpeedup": null,
+        "interpreterOverhead": 1.1
       },
       "verdict": {
         "verdicts": {
           "nativeVsManaged": {
-            "actual": "N/A",
+            "actual": null,
             "pass": null,
             "label": "no data"
           },
           "interpreterVsManaged": {
-            "actual": 1.02,
+            "actual": 1.1,
             "target": 50.0,
             "pass": true,
-            "label": "1.02x overhead"
+            "label": "1.10x overhead"
           }
         },
         "overallPass": true

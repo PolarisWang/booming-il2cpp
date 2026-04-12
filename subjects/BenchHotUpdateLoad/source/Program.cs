@@ -1,5 +1,3 @@
-using System.Diagnostics;
-using System.Text.Json;
 using Chaos.IL2CPP.HotUpdate;
 
 namespace BenchHotUpdateLoad;
@@ -8,76 +6,27 @@ internal static class Program
 {
     private const string CurrentAotVersion = "1.0.0";
     private const string SubjectId = "BenchHotUpdateLoad/HotPatch::GetValue()";
+    private static readonly string s_packageRoot = Path.Combine(AppContext.BaseDirectory, "package");
+    private static readonly IReadOnlyDictionary<string, int> s_subjectIdToConstantInt32 =
+        new Dictionary<string, int>(StringComparer.Ordinal)
+        {
+            [SubjectId] = 1,
+        };
+    private static int s_lastLoadStatus;
 
-    public static int Main(string[] args)
+    public static int Main()
     {
-        var workspace = Path.Combine(Path.GetTempPath(), $"bench-hot-update-load-{Guid.NewGuid():N}");
-        Directory.CreateDirectory(workspace);
-
-        try
-        {
-            var runtimeManager = new RuntimeManager();
-            var packageRoot = CreatePackageRoot(workspace);
-
-            var sw = Stopwatch.StartNew();
-            var loaded = runtimeManager.LoadPackage(
-                packageRoot,
-                CurrentAotVersion,
-                subjectIdToConstantInt32: new Dictionary<string, int>(StringComparer.Ordinal)
-                {
-                    [SubjectId] = 1,
-                });
-            sw.Stop();
-
-            Console.WriteLine(
-                JsonSerializer.Serialize(new
-                {
-                    elapsedMilliseconds = sw.Elapsed.TotalMilliseconds,
-                    loadDurationMs = sw.Elapsed.TotalMilliseconds,
-                    methodCount = 1,
-                    loaded,
-                }));
-            return loaded ? 0 : 1;
-        }
-        finally
-        {
-            if (Directory.Exists(workspace))
-            {
-                Directory.Delete(workspace, recursive: true);
-            }
-        }
+        s_lastLoadStatus = RunWorkload();
+        return 0;
     }
 
-    private static string CreatePackageRoot(string workspaceRoot)
+    public static int RunWorkload()
     {
-        var packageRoot = Path.Combine(workspaceRoot, "package");
-        Directory.CreateDirectory(packageRoot);
-
-        var assemblyBytes = new byte[] { 0x42, 0x48, 0x4C };
-        File.WriteAllBytes(Path.Combine(packageRoot, "HotPatch.dll"), assemblyBytes);
-        File.WriteAllText(Path.Combine(packageRoot, "metadata-supplement.bin"), "{}");
-
-        var manifest = new HotUpdatePackage
-        {
-            PackageId = "bench.hotupdate.load",
-            TargetAotVersion = CurrentAotVersion,
-            Assemblies =
-            [
-                new HotUpdateAssemblyEntry
-                {
-                    Name = "HotPatch.dll",
-                    Hash = PackageReader.ComputeFileHash(assemblyBytes),
-                    Size = assemblyBytes.Length,
-                    EntryPoint = SubjectId,
-                },
-            ],
-            SupplementalMetadata = "metadata-supplement.bin",
-            Signature = "bench-load",
-        };
-
-        File.WriteAllText(
-            Path.Combine(packageRoot, PackageReader.ManifestFileName),
-            JsonSerializer.Serialize(manifest, new JsonSerializerOptions { WriteIndented = true }));
-        return packageRoot;
+        var runtimeManager = new RuntimeManager();
+        var loaded = runtimeManager.LoadPackage(
+            s_packageRoot,
+            CurrentAotVersion,
+            subjectIdToConstantInt32: s_subjectIdToConstantInt32);
+        return loaded ? 1 : 0;
     }
 }

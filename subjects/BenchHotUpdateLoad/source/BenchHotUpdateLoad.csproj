@@ -5,4 +5,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\managed\Chaos.IL2CPP.HotUpdate\Chaos.IL2CPP.HotUpdate.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="package\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

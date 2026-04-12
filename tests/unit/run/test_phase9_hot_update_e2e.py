@@ -358,24 +358,32 @@ class Phase9HotUpdateE2ETests(unittest.TestCase):
         ]:
             self.assertIn(required_fragment, rollback_output)
 
-    def test_hot_update_benchmark_subjects_emit_expected_json_payloads(self) -> None:
+    def test_hot_update_benchmark_subjects_keep_workload_contract_and_build_serially(self) -> None:
         benchmark_projects = [
-            (BENCH_LOAD_ROOT, BENCH_LOAD_PROJECT_PATH, "loadDurationMs"),
-            (BENCH_DISPATCH_ROOT, BENCH_DISPATCH_PROJECT_PATH, "opsPerSecond"),
-            (BENCH_ROUNDTRIP_ROOT, BENCH_ROUNDTRIP_PROJECT_PATH, "roundtripsPerSecond"),
+            (BENCH_LOAD_ROOT, BENCH_LOAD_PROJECT_PATH),
+            (BENCH_DISPATCH_ROOT, BENCH_DISPATCH_PROJECT_PATH),
+            (BENCH_ROUNDTRIP_ROOT, BENCH_ROUNDTRIP_PROJECT_PATH),
         ]
 
-        for root, project_path, required_metric in benchmark_projects:
+        for root, project_path in benchmark_projects:
             self.assertTrue(root.is_dir(), msg=f"missing benchmark root: {root}")
             self.assertTrue(project_path.is_file(), msg=f"missing benchmark project: {project_path}")
+            program_path = root / "source" / "Program.cs"
+            self.assertTrue(program_path.is_file(), msg=f"missing benchmark program: {program_path}")
 
-            completed = run_checked(
-                ["dotnet", "run", "--project", str(project_path), "-c", "Release", "--", "25"],
+            program_source = program_path.read_text(encoding="utf-8")
+            self.assertIn("RunWorkload", program_source)
+            self.assertNotIn("Stopwatch", program_source)
+            self.assertNotIn("elapsedMilliseconds", program_source)
+            self.assertNotIn("opsPerSecond", program_source)
+            self.assertNotIn("roundtripsPerSecond", program_source)
+            self.assertNotIn("loadDurationMs", program_source)
+            self.assertNotIn("Console.WriteLine", program_source)
+
+            run_checked(
+                ["dotnet", "build", str(project_path), "-c", "Release", "-m:1"],
                 cwd=REPO_ROOT,
             )
-            payload = parse_last_json_line(completed.stdout)
-            self.assertIn(required_metric, payload)
-            self.assertIn("elapsedMilliseconds", payload)
 
 
 if __name__ == "__main__":
