@@ -211,6 +211,13 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                     "dotnet",
                     str(repo_root / perf_harness_dll_path),
                     "10000",
+                    "--assembly",
+                    str(
+                        repo_root
+                        / subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.dll")
+                    ),
+                    "--mode",
+                    "managed",
                 ],
                 run_process_mock.call_args_list[1].args[0],
             )
@@ -219,7 +226,15 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                 subject_id=subject_id,
                 matrix_id=matrix_id,
                 host_platform="windows",
-                metrics={"sampleCount": 10, "meanDurationMs": 16.0, "minDurationMs": 16.0, "maxDurationMs": 16.0},
+                metrics={
+                    "sampleCount": 10,
+                    "meanDurationMs": 16.0,
+                    "minDurationMs": 16.0,
+                    "maxDurationMs": 16.0,
+                    "meanElapsedMilliseconds": 16.0,
+                    "minElapsedMilliseconds": 16.0,
+                    "maxElapsedMilliseconds": 16.0,
+                },
                 update_baseline=False,
             )
 
@@ -285,6 +300,23 @@ class SubjectWorkersPerfTests(unittest.TestCase):
 
         repo_root = self._make_repo_root("native-runtime-perf")
         try:
+            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            subject_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "subjectId": subject_id,
+                        "validation": {
+                            "perf": {
+                                "kind": "perf",
+                                "driver": "native-runtime-perf",
+                                "defaultVariant": "PROFILE",
+                            }
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
             build_manifest_path = repo_root / request["upstream"]["build"]["manifestPath"]
             build_manifest_path.parent.mkdir(parents=True, exist_ok=True)
             build_manifest_path.write_text(
@@ -374,6 +406,107 @@ class SubjectWorkersPerfTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_native_runtime_perf_passes_subject_harness_iterations_override_to_host(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_native_perf_iterations_override")
+        subject_id = "BenchArithmetic"
+        run_id = "fixture-run-native-perf-iterations-override-001"
+        matrix_id = "windows-native-profile"
+        executable_path = subject_run_path(
+            subject_id,
+            run_id,
+            "matrices",
+            matrix_id,
+            "build",
+            "out",
+            "chaos_subject_reference_proof.exe",
+        )
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "PROFILE",
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "runtimeProfile": "native-perf-profile",
+                },
+            },
+            "upstream": {
+                "build": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("native-runtime-perf-iterations-override")
+        try:
+            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            subject_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "subjectId": subject_id,
+                        "validation": {
+                            "perf": {
+                                "kind": "perf",
+                                "driver": "native-runtime-perf",
+                                "defaultVariant": "PROFILE",
+                                "harnessIterations": 7,
+                            }
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+            build_manifest_path = repo_root / request["upstream"]["build"]["manifestPath"]
+            build_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            build_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "subjectId": subject_id,
+                        "matrixId": matrix_id,
+                        "outputs": [executable_path],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            completed = subprocess.CompletedProcess(
+                [str(repo_root / executable_path), "--iterations", "7"],
+                0,
+                json.dumps({"elapsedMilliseconds": 42.0, "opsPerSecond": 166.667, "checksum": 7010, "iterations": 7}) + "\n",
+                "",
+            )
+            perf_result = {
+                "baselinePath": posix_path("subjects", subject_id, "baselines", "perf", matrix_id, "windows.json"),
+                "baseline": {"meanDurationMs": 40.0},
+                "metrics": {"sampleCount": 1, "meanDurationMs": 42.0, "minDurationMs": 42.0, "maxDurationMs": 42.0},
+                "baselineUpdated": False,
+                "regressionStatus": "regressed",
+                "regressions": [{"metric": "meanDurationMs", "baseline": 40.0, "actual": 42.0, "delta": 2.0}],
+            }
+
+            with patch.object(workers_module, "_perf_sample_count", return_value=1):
+                with patch.object(workers_module, "_native_perf_warmup_count", return_value=0):
+                    with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
+                        with patch.object(workers_module.time, "perf_counter", side_effect=[0.0, 0.050]):
+                            with patch.object(workers_module.perf_module, "evaluate_perf_subject", return_value=perf_result):
+                                result = workers_module.run_native_runtime_perf(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            run_process_mock.assert_called_once_with(
+                [str(repo_root / executable_path), "--iterations", "7"],
+                cwd=repo_root,
+            )
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(7, manifest["harnessIterations"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
     def test_native_runtime_perf_collects_custom_numeric_metrics_from_payload(self) -> None:
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_native_perf_custom_metrics")
         subject_id = "InterfaceDispatchProof"
@@ -412,6 +545,23 @@ class SubjectWorkersPerfTests(unittest.TestCase):
 
         repo_root = self._make_repo_root("native-runtime-perf-custom-metrics")
         try:
+            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            subject_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "subjectId": subject_id,
+                        "validation": {
+                            "perf": {
+                                "kind": "perf",
+                                "driver": "native-runtime-perf",
+                                "defaultVariant": "PROFILE",
+                            }
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
             build_manifest_path = repo_root / request["upstream"]["build"]["manifestPath"]
             build_manifest_path.parent.mkdir(parents=True, exist_ok=True)
             build_manifest_path.write_text(

@@ -1,15 +1,16 @@
----
-task_id: 20260411-10-post-phase7-development-roadmap
-title: Post Phase-7 Development Roadmap (Phase A-E)
-task_dir: docs/dev/in-progress/20260411-10-post-phase7-development-roadmap
-status_file: docs/dev/in-progress/20260411-10-post-phase7-development-roadmap/STATUS.md
-plan_file: docs/dev/in-progress/20260411-10-post-phase7-development-roadmap/roadmap-v1-01.md
+﻿---
+task_id: 20260412-05-phase-b-generic-native-aot-benchmark-backend
+title: Phase B Generic Native AOT Benchmark Backend
+task_dir: docs/dev/in-progress/20260412-05-phase-b-generic-native-aot-benchmark-backend
+status_file: docs/dev/in-progress/20260412-05-phase-b-generic-native-aot-benchmark-backend/STATUS.md
+plan_file: docs/dev/in-progress/20260412-05-phase-b-generic-native-aot-benchmark-backend/roadmap-v1-01.md
 lifecycle_status: in_progress
 phase: roadmap
-total_tasks: 5
-current_task: Phase D 外部验证阻塞跟踪
-updated_at: 2026-04-12 11:02:14 +08:00
+total_tasks: 6
+current_task: BenchArithmetic benchmark alignment closed (Stage 4 rollout pending)
+updated_at: 2026-04-12 15:15:10 +08:00
 ---
 
-- 最近摘要: 子任务 `20260412-04-phase-d-mobile-foundation` 已完成并归档；Phase D 的仓库内基础设施已具备代码与测试闭环。
-- 下一步: 等待 macOS/Xcode 或 Android/iOS 真机资源，再派生新的 Phase D 真机验证子任务；若用户转向其他无阻塞 roadmap 项，再按父 roadmap 继续拆解。
+- 最近摘要：`BenchArithmetic` generic native AOT MVP 已闭环；managed / interpreter / native 现在都通过 external harness / native host 执行同一个 `workloadEntry`，并统一使用 subject 级 `harnessIterations` 对齐 benchmark 口径。
+- 最近摘要：旧的超长 managed / interpreter record 仍保留在 history 中，但 dashboard 最新值已经切到 63 ms / 63 ms / 59 ms 这一组同口径结果。
+- 下一步：如果继续推进 Phase B，进入 Stage 4 rollout，把这套 `generated-native-aot + external harness/native host + harnessIterations` contract 扩到其他 `Bench*` subject。

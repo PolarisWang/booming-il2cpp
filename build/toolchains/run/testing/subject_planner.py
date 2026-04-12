@@ -74,6 +74,7 @@ def build_plan(
         selected_matrix_id,
         run_id=selected_run_id,
     )
+    selected_workload_entry = str(matrix.get("workloadEntry") or manifest.get("workloadEntry") or "")
 
     stage_plan: list[dict[str, Any]] = []
     stage_by_id: dict[str, dict[str, Any]] = {}
@@ -104,6 +105,7 @@ def build_plan(
                 "validationKinds": list(validation_selection["validationKinds"]),
                 "validationKind": validation_selection["validationKind"],
                 "variant": str(validation_selection["variant"]),
+                "workloadEntry": selected_workload_entry,
                 "stageId": stage_id,
                 "kind": kind,
                 "bucket": bucket,
@@ -180,6 +182,7 @@ def build_plan(
             "variant": str(validation_selection["variant"]),
             "pipelineId": str(matrix["pipelineId"]),
             "source": selected_source,
+            "workloadEntry": selected_workload_entry,
             "executionContext": dict(matrix["executionContext"]),
             "validationIntent": dict(matrix["validationIntent"]),
             "artifactPlan": dict(matrix["artifactPlan"]),

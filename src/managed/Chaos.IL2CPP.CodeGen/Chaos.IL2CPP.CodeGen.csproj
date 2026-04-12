@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\Chaos.IL2CPP.Contracts\Chaos.IL2CPP.Contracts.csproj" />
+    <ProjectReference Include="..\Chaos.IL2CPP.Loader\Chaos.IL2CPP.Loader.csproj" />
     <ProjectReference Include="..\Chaos.IL2CPP.MetadataWriter\Chaos.IL2CPP.MetadataWriter.csproj" />
     <ProjectReference Include="..\..\..\third_party\scriban\src\Scriban\Scriban.csproj" />
   </ItemGroup>

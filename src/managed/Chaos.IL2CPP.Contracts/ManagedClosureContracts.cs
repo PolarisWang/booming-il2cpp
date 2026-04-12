@@ -16,6 +16,7 @@ public static class ManagedClosureArtifactNames
     public const string OptimizationFacts = "optimization-facts.json";
     public const string PreserveDescriptor = "preserve-descriptor.json";
     public const string NativeReferenceLoweringPlan = "native-reference.lowering-plan.json";
+    public const string NativeAotLoweringPlan = "native-aot.lowering-plan.json";
     public const string ClosureManifest = "closure.manifest.json";
 }
 
@@ -845,10 +846,14 @@ public sealed record ManagedClosureResult
 
     public required NativeReferenceLoweringPlanArtifact NativeReferenceLoweringPlan { get; init; }
 
+    public required NativeAotLoweringPlanArtifact NativeAotLoweringPlan { get; init; }
+
     public required ManagedClosureManifestArtifact ClosureManifest { get; init; }
 }
 
 public sealed record NativeReferenceProofRequest(string ManagedClosureRootPath, string OutputRootPath);
+
+public sealed record NativeAotRequest(string ManagedClosureRootPath, string OutputRootPath);
 
 public static class NativeReferenceArtifactNames
 {
@@ -856,6 +861,14 @@ public static class NativeReferenceArtifactNames
     public const string GeneratedTranslationUnit = "generated/native-reference.generated.cpp";
     public const string LoweringPlan = "native-reference.plan.json";
     public const string Manifest = "native-reference.manifest.json";
+}
+
+public static class NativeAotArtifactNames
+{
+    public const string GeneratedDirectory = "generated";
+    public const string GeneratedTranslationUnit = "generated/native-aot.generated.cpp";
+    public const string LoweringPlan = "native-aot.plan.json";
+    public const string Manifest = "native-aot.manifest.json";
 }
 
 public sealed record NativeReferenceGeneratedArtifactRef
@@ -880,6 +893,30 @@ public sealed record NativeReferenceProofManifestArtifact
     public required string PlanArtifactPath { get; init; }
 
     public required IReadOnlyList<NativeReferenceGeneratedArtifactRef> GeneratedArtifacts { get; init; }
+}
+
+public sealed record NativeAotGeneratedArtifactRef
+{
+    public required string Kind { get; init; }
+
+    public required string Path { get; init; }
+}
+
+public sealed record NativeAotManifestArtifact
+{
+    public string FormatVersion { get; init; } = "v0";
+
+    public string ArtifactKind { get; init; } = "nativeAotManifest";
+
+    public required string AssemblyName { get; init; }
+
+    public required string EntrySubjectId { get; init; }
+
+    public required string ManagedClosureRootPath { get; init; }
+
+    public required string PlanArtifactPath { get; init; }
+
+    public required IReadOnlyList<NativeAotGeneratedArtifactRef> GeneratedArtifacts { get; init; }
 }
 
 public sealed record EngineBindingsArtifact
@@ -1041,7 +1078,35 @@ public sealed record NativeReferenceLoweringPlanArtifact
     public HostBindingsArtifact? HostBindings { get; init; }
 }
 
+public sealed record NativeAotLoweringPlanArtifact
+{
+    public string FormatVersion { get; init; } = "v0";
+
+    public string ArtifactKind { get; init; } = "nativeAotLoweringPlan";
+
+    public required string PlanKind { get; init; }
+
+    public required string AssemblyName { get; init; }
+
+    public required string EntrySubjectId { get; init; }
+
+    public required string NativeEntryFunctionName { get; init; }
+
+    public required string EntrySymbol { get; init; }
+
+    public required string EntryMethodToken { get; init; }
+
+    public required string WorkloadAbi { get; init; }
+}
+
 public sealed record NativeReferenceGeneratedSource
+{
+    public required string RelativePath { get; init; }
+
+    public required string Contents { get; init; }
+}
+
+public sealed record NativeAotGeneratedSource
 {
     public required string RelativePath { get; init; }
 
@@ -1057,4 +1122,15 @@ public sealed record NativeReferenceProofResult
     public required NativeReferenceProofManifestArtifact Manifest { get; init; }
 
     public required IReadOnlyList<NativeReferenceGeneratedSource> GeneratedSources { get; init; }
+}
+
+public sealed record NativeAotResult
+{
+    public required string OutputRootPath { get; init; }
+
+    public required NativeAotLoweringPlanArtifact LoweringPlan { get; init; }
+
+    public required NativeAotManifestArtifact Manifest { get; init; }
+
+    public required IReadOnlyList<NativeAotGeneratedSource> GeneratedSources { get; init; }
 }

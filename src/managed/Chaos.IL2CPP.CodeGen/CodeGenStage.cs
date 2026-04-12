@@ -56,6 +56,11 @@ public sealed class CodeGenStage
             nativeReferenceLoweringPlan = CreateGenericLoweringPlan(linkedWorld, codeRegistration);
         }
 
+        var nativeAotLoweringPlan = CreateNativeAotLoweringPlan(
+            linkedWorld,
+            metadataWriterOutput.MetadataRegistration,
+            codeRegistration);
+
         var closureManifest = new ManagedClosureManifestArtifact
         {
             AssemblyName = linkedWorld.Assembly.Name,
@@ -72,6 +77,7 @@ public sealed class CodeGenStage
                 new ManagedClosureArtifactRef { Kind = "optimizationFacts", Path = ManagedClosureArtifactNames.OptimizationFacts },
                 new ManagedClosureArtifactRef { Kind = "preserveDescriptor", Path = ManagedClosureArtifactNames.PreserveDescriptor },
                 new ManagedClosureArtifactRef { Kind = "nativeReferenceLoweringPlan", Path = ManagedClosureArtifactNames.NativeReferenceLoweringPlan },
+                new ManagedClosureArtifactRef { Kind = "nativeAotLoweringPlan", Path = ManagedClosureArtifactNames.NativeAotLoweringPlan },
             ],
         };
 
@@ -86,16 +92,31 @@ public sealed class CodeGenStage
             OptimizationFacts = linkedWorld.OptimizationFacts,
             PreserveDescriptor = linkedWorld.PreserveDescriptor,
             NativeReferenceLoweringPlan = nativeReferenceLoweringPlan,
+            NativeAotLoweringPlan = nativeAotLoweringPlan,
             ClosureManifest = closureManifest,
         };
     }
 
     private static bool ShouldFallbackToGenericLoweringPlan(LinkedWorldModel linkedWorld)
     {
-        return linkedWorld.Assemblies.Count > 1 ||
-               linkedWorld.PreserveDescriptor.Entries.Count > 0 ||
-               linkedWorld.Dependencies.Any(dependency =>
-                   string.Equals(dependency.Reason, "external-call", StringComparison.Ordinal));
+        if (linkedWorld.Assemblies.Count > 1 ||
+            linkedWorld.PreserveDescriptor.Entries.Count > 0 ||
+            linkedWorld.Dependencies.Any(dependency =>
+                string.Equals(dependency.Reason, "external-call", StringComparison.Ordinal)))
+        {
+            return true;
+        }
+
+        var entryPointMethod = linkedWorld.Methods.FirstOrDefault(method =>
+            string.Equals(method.SubjectId, linkedWorld.EntryPointSubjectId, StringComparison.Ordinal));
+        if (entryPointMethod is null)
+        {
+            return false;
+        }
+
+        return entryPointMethod.IsStatic &&
+               entryPointMethod.Parameters.Count == 0 &&
+               !string.Equals(entryPointMethod.Name, "Run", StringComparison.Ordinal);
     }
 
     private static NativeReferenceLoweringPlanArtifact CreateGenericLoweringPlan(
@@ -121,6 +142,54 @@ public sealed class CodeGenStage
             EntryMethodToken = "0u",
             ConsoleWriteLineStringIcall = "System.Console/System.Console::WriteLine(System.String)",
         };
+    }
+
+    private static NativeAotLoweringPlanArtifact CreateNativeAotLoweringPlan(
+        LinkedWorldModel linkedWorld,
+        MetadataRegistrationArtifact metadataRegistration,
+        CodeRegistrationArtifact codeRegistration)
+    {
+        var entrySymbol = codeRegistration.Modules
+            .SelectMany(module => module.Registrations)
+            .FirstOrDefault(registration => string.Equals(registration.SubjectId, linkedWorld.EntryPointSubjectId, StringComparison.Ordinal))
+            ?.Symbol
+            ?? "analysis_only_entry";
+        var entryMethodToken = metadataRegistration.Registrations
+            .FirstOrDefault(registration =>
+                string.Equals(registration.RegistrationKind, "method", StringComparison.Ordinal) &&
+                string.Equals(registration.SubjectId, linkedWorld.EntryPointSubjectId, StringComparison.Ordinal))
+            ?.SubjectId is null
+                ? "0u"
+                : FormatCppTokenLiteral(metadataRegistration, linkedWorld.EntryPointSubjectId);
+
+        return new NativeAotLoweringPlanArtifact
+        {
+            PlanKind = "generic-managed-entry",
+            AssemblyName = linkedWorld.Assembly.Name,
+            EntrySubjectId = linkedWorld.EntryPointSubjectId,
+            NativeEntryFunctionName = "RunNativeAot",
+            EntrySymbol = entrySymbol,
+            EntryMethodToken = entryMethodToken,
+            WorkloadAbi = "int(void)",
+        };
+    }
+
+    private static string FormatCppTokenLiteral(
+        MetadataRegistrationArtifact metadataRegistration,
+        string subjectId)
+    {
+        var token = metadataRegistration.Registrations
+            .FirstOrDefault(registration =>
+                string.Equals(registration.RegistrationKind, "method", StringComparison.Ordinal) &&
+                string.Equals(registration.SubjectId, subjectId, StringComparison.Ordinal))
+            ?.DefinitionSubjectId;
+
+        if (string.IsNullOrWhiteSpace(token))
+        {
+            return "0u";
+        }
+
+        return "0u";
     }
 
     private static TypedIlMethodArtifact ToTypedIlMethodArtifact(

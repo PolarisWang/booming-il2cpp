@@ -1,0 +1,21 @@
+## 2026-04-12 14:31:35 +08:00
+
+- Stage 3 `BenchArithmetic` generic native AOT MVP 收口完成。
+- `NativeAotEmitter` 现在会从 `closure.manifest.json` 回到原始 DLL，借助 loader 读取带 `IlOffset` 的 entry method，再生成真实 eval-stack C++ lowering。
+- 本轮没有把 perf/timing 放回 generated code，也没有把 profiling/scaffolding 塞回 benchmark C# source；计时仍在 repo 级 native host `src/native/benchmark-host/native_aot_main.cpp` 外置完成。
+- 新增回归约束：`tests/unit/run/test_phase_b_native_aot_workload_entry_bundle.py` 会验证 emitted C++ 必须包含真实 workload lowering，而不是 placeholder `return 0`。
+- 回归验证：
+  - `python -m pytest tests/unit/run/test_benchmark_subject_sources.py tests/unit/run/test_subject_planner.py tests/unit/run/test_subject_workers.py tests/unit/run/test_benchmark_command.py tests/unit/run/test_phase_b_aot_contract_split.py tests/unit/run/test_phase_b_native_aot_workload_entry_bundle.py tests/unit/run/test_subject_executor.py tests/unit/run/test_managed_closure_contract_bundle.py -q`
+  - 结果：`61 passed, 1 warning`
+- 编译验证：
+  - `dotnet build src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj -c Release -m:1`
+  - 结果：通过；仅有既有 nullable warning
+- 端到端验证：
+  - `python build/toolchains/run/run.py benchmark --subject BenchArithmetic --mode native --record`
+  - 结果：通过；最新 run `20260412-063022-BenchArithmetic-native`
+  - 关键指标：`meanDurationMs = 5.883 ms`，`meanChecksum = -182045701`
+- dashboard 结果：
+  - `docs/benchmark/overview.json`
+  - `docs/benchmark/subjects/BenchArithmetic.json`
+  - AOT(native) 已恢复为真实数据，不再是 `0 ms / checksum 0`
+- 本轮暂不进入 Stage 4 rollout；按用户约束，先把 `BenchArithmetic` MVP 单独做通，再决定其他 `Bench*` 的迁移顺序。

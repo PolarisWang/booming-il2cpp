@@ -36,6 +36,8 @@ TRACE_SCHEMA_PATH = Path("tests/contracts/trace/schema/warmup-trace.schema.json"
 WINDOWS_REFERENCE_BUILD_TARGET = "chaos_subject_reference_proof"
 WINDOWS_REFERENCE_RUN_TARGET = "chaos_subject_reference_proof_run"
 WINDOWS_DIRECT_BUILD_STRATEGY = "direct-msvc"
+WINDOWS_NATIVE_AOT_BUILD_TARGET = "chaos_subject_native_aot"
+WINDOWS_NATIVE_AOT_BUILD_STRATEGY = "direct-msvc-native-aot"
 ANDROID_NATIVE_BUILD_STRATEGY = "android-native-cmake"
 ANDROID_RUNTIME_BUILD_TARGET = "mobile_hello_world_android_host_runtime"
 ANDROID_RUNTIME_REMOTE_ROOT = "/data/local/tmp/chaos-subjects"
@@ -77,6 +79,10 @@ def _selection_variant(selection: dict[str, Any]) -> str:
 def _selection_runtime_arguments(selection: dict[str, Any]) -> list[str]:
     execution_context = dict(selection.get("executionContext") or {})
     return [str(value) for value in list(execution_context.get("runtimeArguments") or []) if str(value)]
+
+
+def _selection_workload_entry(selection: dict[str, Any]) -> str:
+    return str(selection.get("workloadEntry") or "")
 
 
 def _android_runtime_environment_exports(runtime_arguments: list[str]) -> list[str]:
@@ -469,7 +475,18 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
     )
 
 
-def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
+def _run_native_generated_emitter(
+    *,
+    repo_root: Path,
+    request: dict[str, Any],
+    driver_command: str,
+    failure_label: str,
+    generated_source_name: str,
+    manifest_name: str,
+    plan_name: str,
+    manifest_key: str,
+    plan_key: str,
+) -> dict[str, Any]:
     driver_dll_path = _ensure_driver_built(repo_root)
     selection = dict(request["selection"])
     variant = _selection_variant(selection)
@@ -479,9 +496,9 @@ def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dic
     output_root.mkdir(parents=True, exist_ok=True)
 
     _run_checked(
-        ["dotnet", str(driver_dll_path), "emit-native-reference", str(analysis_root), str(output_root)],
+        ["dotnet", str(driver_dll_path), driver_command, str(analysis_root), str(output_root)],
         repo_root=repo_root,
-        failure_message=f"native proof emission failed: {analysis_root}",
+        failure_message=f"{failure_label} failed: {analysis_root}",
     )
 
     generated_manifest = {
@@ -492,17 +509,18 @@ def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dic
         "validationKind": selection.get("validationKind"),
         "variant": variant,
         "codegenMacros": list(variant_macros["codegen"]),
-        "generatedSourcePath": _relative(repo_root, output_root / "generated" / "native-reference.generated.cpp"),
-        "nativeReferenceManifestPath": _relative(repo_root, output_root / "native-reference.manifest.json"),
-        "nativeReferencePlanPath": _relative(repo_root, output_root / "native-reference.plan.json"),
+        "workloadEntry": _selection_workload_entry(selection),
+        "generatedSourcePath": _relative(repo_root, output_root / "generated" / generated_source_name),
+        manifest_key: _relative(repo_root, output_root / manifest_name),
+        plan_key: _relative(repo_root, output_root / plan_name),
     }
     details: dict[str, Any] = {}
-    lowering_plan = read_json(output_root / "native-reference.plan.json")
+    lowering_plan = read_json(output_root / plan_name)
     if isinstance(lowering_plan, dict):
         engine_emission_summary = _engine_emission_summary(
             lowering_plan,
             generated_source_path=generated_manifest["generatedSourcePath"],
-            native_reference_manifest_path=generated_manifest["nativeReferenceManifestPath"],
+            native_reference_manifest_path=str(generated_manifest[manifest_key]),
         )
         if engine_emission_summary:
             generated_manifest["engineEmissionSummary"] = engine_emission_summary
@@ -513,9 +531,37 @@ def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dic
         report_paths=[],
         primary_evidence_paths=[
             generated_manifest["generatedSourcePath"],
-            generated_manifest["nativeReferenceManifestPath"],
+            str(generated_manifest[manifest_key]),
         ],
         details=details,
+    )
+
+
+def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
+    return _run_native_generated_emitter(
+        repo_root=repo_root,
+        request=request,
+        driver_command="emit-native-reference",
+        failure_label="native proof emission",
+        generated_source_name="native-reference.generated.cpp",
+        manifest_name="native-reference.manifest.json",
+        plan_name="native-reference.plan.json",
+        manifest_key="nativeReferenceManifestPath",
+        plan_key="nativeReferencePlanPath",
+    )
+
+
+def run_native_aot_emitter(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
+    return _run_native_generated_emitter(
+        repo_root=repo_root,
+        request=request,
+        driver_command="emit-native-aot",
+        failure_label="native aot emission",
+        generated_source_name="native-aot.generated.cpp",
+        manifest_name="native-aot.manifest.json",
+        plan_name="native-aot.plan.json",
+        manifest_key="nativeAotManifestPath",
+        plan_key="nativeAotPlanPath",
     )
 
 
@@ -532,30 +578,63 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
     compile_flags, link_flags = _windows_variant_build_flags(variant)
     out_root = build_root / "out"
     obj_root = build_root / "obj"
-    generated_root = _resolve(repo_root, request["upstream"]["generated"]["manifestPath"]).parent
-    proof_root = repo_root / "subjects" / str(selection["subjectId"]) / "validation" / "proof" / "native-reference"
-    generated_source_path = generated_root / "generated" / "native-reference.generated.cpp"
-    proof_exe = out_root / f"{WINDOWS_REFERENCE_BUILD_TARGET}.exe"
+    generated_manifest_path = _resolve(repo_root, request["upstream"]["generated"]["manifestPath"])
+    generated_manifest = read_json(generated_manifest_path) if generated_manifest_path.is_file() else {}
+    if not isinstance(generated_manifest, dict):
+        raise RuntimeError("generated manifest must be an object")
+    generated_source_path_text = str(generated_manifest.get("generatedSourcePath") or "")
+    native_aot_build = str(generated_manifest.get("nativeAotManifestPath") or "") != ""
+
+    if native_aot_build:
+        if not generated_source_path_text:
+            raise RuntimeError("generated manifest missing generatedSourcePath")
+        host_source_path = repo_root / "src" / "native" / "benchmark-host" / "native_aot_main.cpp"
+        generated_source_path = _resolve(repo_root, generated_source_path_text)
+        output_executable_path = out_root / f"{WINDOWS_NATIVE_AOT_BUILD_TARGET}.exe"
+        build_strategy = WINDOWS_NATIVE_AOT_BUILD_STRATEGY
+        build_kind = "native-aot"
+        pdb_name = "chaos_subject_native_aot.pdb"
+    else:
+        generated_root = generated_manifest_path.parent
+        host_source_path = repo_root / "subjects" / str(selection["subjectId"]) / "validation" / "proof" / "native-reference" / "main.cpp"
+        generated_source_path = (
+            _resolve(repo_root, generated_source_path_text)
+            if generated_source_path_text
+            else generated_root / "generated" / "native-reference.generated.cpp"
+        )
+        output_executable_path = out_root / f"{WINDOWS_REFERENCE_BUILD_TARGET}.exe"
+        build_strategy = WINDOWS_DIRECT_BUILD_STRATEGY
+        build_kind = "native-reference"
+        pdb_name = "chaos_subject_reference_proof.pdb"
 
     out_root.mkdir(parents=True, exist_ok=True)
     obj_root.mkdir(parents=True, exist_ok=True)
 
-    include_roots = [
-        repo_root / "contracts" / "native" / "v0",
-        repo_root / "contracts" / "engine" / "v0",
-        repo_root / "src" / "native" / "runtime-core",
-        repo_root / "src" / "native" / "engine-bridge",
-        repo_root / "src" / "native" / "bootstrap",
-        repo_root / "src" / "native" / "support",
-    ]
-    source_files = [
-        repo_root / "src" / "native" / "runtime-core" / "runtime_core.cpp",
-        repo_root / "src" / "native" / "engine-bridge" / "engine_bridge.cpp",
-        repo_root / "src" / "native" / "bootstrap" / "bootstrap.cpp",
-        repo_root / "src" / "native" / "support" / "support.cpp",
-        proof_root / "main.cpp",
-        generated_source_path,
-    ]
+    if native_aot_build:
+        include_roots = [
+            repo_root / "src" / "native" / "benchmark-host",
+        ]
+        source_files = [
+            host_source_path,
+            generated_source_path,
+        ]
+    else:
+        include_roots = [
+            repo_root / "contracts" / "native" / "v0",
+            repo_root / "contracts" / "engine" / "v0",
+            repo_root / "src" / "native" / "runtime-core",
+            repo_root / "src" / "native" / "engine-bridge",
+            repo_root / "src" / "native" / "bootstrap",
+            repo_root / "src" / "native" / "support",
+        ]
+        source_files = [
+            repo_root / "src" / "native" / "runtime-core" / "runtime_core.cpp",
+            repo_root / "src" / "native" / "engine-bridge" / "engine_bridge.cpp",
+            repo_root / "src" / "native" / "bootstrap" / "bootstrap.cpp",
+            repo_root / "src" / "native" / "support" / "support.cpp",
+            host_source_path,
+            generated_source_path,
+        ]
 
     for source_file in source_files:
         if not source_file.is_file():
@@ -574,13 +653,13 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
             *compile_flags,
             *[f"/I{include_root}" for include_root in include_roots],
             f"/Fo{obj_root}\\",
-            f"/Fd{obj_root / 'chaos_subject_reference_proof.pdb'}",
-            f"/Fe{proof_exe}",
+            f"/Fd{obj_root / pdb_name}",
+            f"/Fe{output_executable_path}",
             *[str(source_file) for source_file in source_files],
             *(["/link", *link_flags] if link_flags else []),
         ],
         repo_root=repo_root,
-        failure_message="subject proof build failed: windows-x64-reference",
+        failure_message=f"subject native build failed: windows-x64-{build_kind}",
         env=developer_env,
     )
 
@@ -591,21 +670,24 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
         "targetPlatform": str(request["selection"]["executionContext"]["targetPlatform"]),
         "toolchainProfile": str(request["selection"]["executionContext"]["toolchainProfile"]),
         "variant": variant,
-        "buildStrategy": WINDOWS_DIRECT_BUILD_STRATEGY,
+        "buildStrategy": build_strategy,
+        "buildKind": build_kind,
         "compilerPath": str(compiler_path),
         "variantMacros": {
             "codegen": list(variant_macros["codegen"]),
             "native": list(variant_macros["native"]),
         },
         "generatedManifestPath": str(request["upstream"]["generated"]["manifestPath"]),
+        "generatedSourcePath": _relative(repo_root, generated_source_path),
+        "hostSourcePath": _relative(repo_root, host_source_path),
         "binaryRoot": _relative(repo_root, out_root),
-        "outputs": [_relative(repo_root, proof_exe)],
+        "outputs": [_relative(repo_root, output_executable_path)],
     }
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
     return _success_result(
         bucket_manifest_path=request["paths"]["manifestPath"],
         report_paths=[],
-        primary_evidence_paths=[_relative(repo_root, proof_exe)],
+        primary_evidence_paths=[_relative(repo_root, output_executable_path)],
     )
 
 
@@ -1507,6 +1589,22 @@ def _perf_harness_iterations(runtime_profile: str) -> int:
     return 10000 if "release" in runtime_profile else 1000
 
 
+def _subject_perf_iterations(
+    *,
+    subject_id: str,
+    validation_spec: dict[str, Any],
+    default_iterations: int,
+) -> int:
+    override = validation_spec.get("harnessIterations")
+    if override is None:
+        return default_iterations
+    if isinstance(override, bool) or not isinstance(override, int) or override <= 0:
+        raise RuntimeError(
+            f"validation.perf.harnessIterations must be a positive integer for subject: {subject_id}"
+        )
+    return override
+
+
 def _native_perf_warmup_count(runtime_profile: str) -> int:
     return 1 if "native-perf" in runtime_profile else 0
 
@@ -1529,6 +1627,13 @@ def _parse_perf_payload(output_lines: list[str]) -> dict[str, Any]:
 
 def _payload_custom_perf_metrics(payload: dict[str, Any]) -> dict[str, float]:
     metrics = dict(payload.get("metrics") or {})
+    if not metrics:
+        metrics = {
+            str(metric_name): metric_value
+            for metric_name, metric_value in payload.items()
+            if str(metric_name)
+            not in {"harness", "mode", "subjectId", "workloadEntry", "iterations"}
+        }
     custom_metrics: dict[str, float] = {}
     for metric_name, metric_value in metrics.items():
         key = str(metric_name or "").strip()
@@ -1585,6 +1690,31 @@ def _perf_summary_metrics(samples: list[dict[str, Any]]) -> dict[str, float | in
     return summary_metrics
 
 
+def _perf_harness_command(
+    *,
+    harness_dll_path: Path,
+    iterations: int,
+    assembly_path: Path | None,
+    workload_entry: str,
+    mode: str,
+) -> list[str]:
+    arguments = ["dotnet", str(harness_dll_path), str(iterations)]
+    if assembly_path is not None:
+        arguments.extend(["--assembly", str(assembly_path)])
+    if workload_entry:
+        arguments.extend(["--workload-entry", workload_entry])
+    if mode:
+        arguments.extend(["--mode", mode])
+    return arguments
+
+
+def _native_perf_command(*, native_executable_path: Path, iterations: int) -> list[str]:
+    arguments = [str(native_executable_path)]
+    if iterations > 1:
+        arguments.extend(["--iterations", str(iterations)])
+    return arguments
+
+
 def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
     host_input_manifest = read_json(_resolve(repo_root, request["upstream"]["host-input"]["manifestPath"]))
     if not isinstance(host_input_manifest, dict):
@@ -1595,12 +1725,17 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
     subject_id = str(selection["subjectId"])
     matrix_id = str(selection["matrixId"])
     variant = _selection_variant(selection)
+    workload_entry = _selection_workload_entry(selection)
     host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
     runtime_profile = str(execution_context.get("runtimeProfile") or "")
     sample_count = _perf_sample_count(runtime_profile)
-    iterations = _perf_harness_iterations(runtime_profile)
     manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
     validation_spec = subjects_module.find_validation(manifest, "perf")
+    iterations = _subject_perf_iterations(
+        subject_id=subject_id,
+        validation_spec=validation_spec,
+        default_iterations=_perf_harness_iterations(runtime_profile),
+    )
     perf_project_path = str(validation_spec.get("project") or "")
     if not perf_project_path:
         raise RuntimeError(f"perf validation project missing for subject: {subject_id}")
@@ -1610,6 +1745,8 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
     runtime_root.mkdir(parents=True, exist_ok=True)
     harness_root = runtime_root / "harness"
     harness_dll_path = harness_root / f"{project_path.stem}.dll"
+    workload_assembly_path_text = str(host_input_manifest.get("primaryAssemblyPath") or "")
+    workload_assembly_path = _resolve(repo_root, workload_assembly_path_text) if workload_assembly_path_text else None
 
     stdout_path = runtime_root / "stdout.log"
     stderr_path = runtime_root / "stderr.log"
@@ -1638,7 +1775,16 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
 
     for sample_index in range(sample_count):
         started = time.perf_counter()
-        completed = run_process(["dotnet", str(harness_dll_path), str(iterations)], cwd=repo_root)
+        completed = run_process(
+            _perf_harness_command(
+                harness_dll_path=harness_dll_path,
+                iterations=iterations,
+                assembly_path=workload_assembly_path,
+                workload_entry=workload_entry,
+                mode="managed",
+            ),
+            cwd=repo_root,
+        )
         duration_ms = round((time.perf_counter() - started) * 1000, 3)
         stdout_text = completed.stdout or ""
         stderr_text = completed.stderr or ""
@@ -1689,6 +1835,8 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
         "bucket": "runtime",
         "variant": variant,
         "hostInputManifestPath": str(request["upstream"]["host-input"]["manifestPath"]),
+        "workloadEntry": workload_entry,
+        "workloadAssemblyPath": workload_assembly_path_text,
         "perfHarnessProjectPath": perf_project_path,
         "perfHarnessDllPath": _relative(repo_root, harness_dll_path),
         "stdoutPath": _relative(repo_root, stdout_path),
@@ -1738,10 +1886,18 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
     subject_id = str(selection["subjectId"])
     matrix_id = str(selection["matrixId"])
     variant = _selection_variant(selection)
+    workload_entry = _selection_workload_entry(selection)
     host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
     runtime_profile = str(execution_context.get("runtimeProfile") or "")
     sample_count = _perf_sample_count(runtime_profile)
     warmup_sample_count = _native_perf_warmup_count(runtime_profile)
+    manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
+    validation_spec = subjects_module.find_validation(manifest, "perf")
+    iterations = _subject_perf_iterations(
+        subject_id=subject_id,
+        validation_spec=validation_spec,
+        default_iterations=1,
+    )
     output_paths = [str(value) for value in list(build_manifest.get("outputs") or []) if str(value)]
     if not output_paths:
         raise RuntimeError("native perf build manifest missing outputs")
@@ -1771,7 +1927,10 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
             else f"sample {measured_sample_index}"
         )
         started = time.perf_counter()
-        completed = run_process([str(native_executable_path)], cwd=repo_root)
+        completed = run_process(
+            _native_perf_command(native_executable_path=native_executable_path, iterations=iterations),
+            cwd=repo_root,
+        )
         duration_ms = round((time.perf_counter() - started) * 1000, 3)
         stdout_text = completed.stdout or ""
         stderr_text = completed.stderr or ""
@@ -1831,6 +1990,7 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
             "matrixId": matrix_id,
             "variant": variant,
             "nativeExecutablePath": _relative(repo_root, native_executable_path),
+            "harnessIterations": iterations,
             "warmupSampleCount": warmup_sample_count,
             "metrics": dict(performance["metrics"]),
             "baselinePath": str(performance["baselinePath"]),
@@ -1860,6 +2020,7 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
         "variant": variant,
         "buildManifestPath": str(request["upstream"]["build"]["manifestPath"]),
         "nativeExecutablePath": _relative(repo_root, native_executable_path),
+        "harnessIterations": iterations,
         "stdoutPath": _relative(repo_root, stdout_path),
         "stderrPath": _relative(repo_root, stderr_path),
         "exitCodePath": _relative(repo_root, exit_code_path),
@@ -2167,10 +2328,10 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
     subject_id = str(selection["subjectId"])
     matrix_id = str(selection["matrixId"])
     variant = _selection_variant(selection)
+    workload_entry = _selection_workload_entry(selection)
     host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
     runtime_profile = str(execution_context.get("runtimeProfile") or "")
     sample_count = _perf_sample_count(runtime_profile)
-    iterations = _perf_harness_iterations(runtime_profile)
 
     manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
 
@@ -2178,6 +2339,11 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
     # Subject may declare:  "validation": { "perf": { "driver": "interpreter-runtime-perf",
     #                                                  "project": "subjects/.../Harness.csproj" } }
     validation_spec = subjects_module.find_validation(manifest, "perf") or {}
+    iterations = _subject_perf_iterations(
+        subject_id=subject_id,
+        validation_spec=validation_spec,
+        default_iterations=_perf_harness_iterations(runtime_profile),
+    )
     harness_project_path_str = str(validation_spec.get("project") or "")
 
     runtime_root = _resolve(repo_root, request["paths"]["bucketRoot"])
@@ -2228,6 +2394,8 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
     project_path = _resolve(repo_root, harness_project_path_str)
     harness_root = runtime_root / "harness"
     harness_dll_path = harness_root / f"{project_path.stem}.dll"
+    workload_assembly_path_text = str(host_input_manifest.get("primaryAssemblyPath") or "")
+    workload_assembly_path = _resolve(repo_root, workload_assembly_path_text) if workload_assembly_path_text else None
 
     _run_checked(
         [
@@ -2248,7 +2416,16 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
 
     for sample_index in range(sample_count):
         started = time.perf_counter()
-        completed = run_process(["dotnet", str(harness_dll_path), str(iterations)], cwd=repo_root)
+        completed = run_process(
+            _perf_harness_command(
+                harness_dll_path=harness_dll_path,
+                iterations=iterations,
+                assembly_path=workload_assembly_path,
+                workload_entry=workload_entry,
+                mode="interpreter",
+            ),
+            cwd=repo_root,
+        )
         duration_ms = round((time.perf_counter() - started) * 1000, 3)
         stdout_text = completed.stdout or ""
         stderr_text = completed.stderr or ""
@@ -2300,7 +2477,10 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
         "bucket": "runtime",
         "variant": variant,
         "mode": "interpreter",
+        "workloadEntry": workload_entry,
+        "workloadAssemblyPath": workload_assembly_path_text,
         "harnessProjectPath": harness_project_path_str,
+        "harnessDllPath": _relative(repo_root, harness_dll_path),
         "stdoutPath": _relative(repo_root, stdout_path),
         "stderrPath": _relative(repo_root, stderr_path),
         "exitCodePath": _relative(repo_root, exit_code_path),
@@ -2411,6 +2591,7 @@ DEFAULT_STAGE_WORKERS = {
     "host-input-build": run_dotnet_host_input_builder,
     "analysis-frontend": run_frontend_pipeline_worker,
     "generated-native-proof": run_native_proof_emitter,
+    "generated-native-aot": run_native_aot_emitter,
     "generated-engine-proof": run_native_proof_emitter,
     "build-target": run_build_target,
     "runtime-observe": run_runtime_observe,

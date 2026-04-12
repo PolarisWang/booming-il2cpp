@@ -132,6 +132,38 @@ public sealed class ManagedInterpreterExecutor
                                 jumped = true;
                             }
                             break;
+                        case IROpCode.Blt:
+                            if (ReadInt32Operand(RequireOperand(instruction, 0), arguments, values) <
+                                ReadInt32Operand(RequireOperand(instruction, 1), arguments, values))
+                            {
+                                blockOffset = ResolveBlockOffset(RequireOperand(instruction, 2), blockOffsets);
+                                jumped = true;
+                            }
+                            break;
+                        case IROpCode.Bgt:
+                            if (ReadInt32Operand(RequireOperand(instruction, 0), arguments, values) >
+                                ReadInt32Operand(RequireOperand(instruction, 1), arguments, values))
+                            {
+                                blockOffset = ResolveBlockOffset(RequireOperand(instruction, 2), blockOffsets);
+                                jumped = true;
+                            }
+                            break;
+                        case IROpCode.Ble:
+                            if (ReadInt32Operand(RequireOperand(instruction, 0), arguments, values) <=
+                                ReadInt32Operand(RequireOperand(instruction, 1), arguments, values))
+                            {
+                                blockOffset = ResolveBlockOffset(RequireOperand(instruction, 2), blockOffsets);
+                                jumped = true;
+                            }
+                            break;
+                        case IROpCode.Bge:
+                            if (ReadInt32Operand(RequireOperand(instruction, 0), arguments, values) >=
+                                ReadInt32Operand(RequireOperand(instruction, 1), arguments, values))
+                            {
+                                blockOffset = ResolveBlockOffset(RequireOperand(instruction, 2), blockOffsets);
+                                jumped = true;
+                            }
+                            break;
                         case IROpCode.CallBridge:
                             WriteResult(values, instruction.Result, InvokeBridge(instruction, arguments, values));
                             break;

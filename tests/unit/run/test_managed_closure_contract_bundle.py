@@ -24,6 +24,7 @@ EXPECTED_ARTIFACTS = {
     "code-registration.json": REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "code-registration.min.json",
     "optimization-facts.json": REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "optimization-facts.min.json",
     "native-reference.lowering-plan.json": REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "native-reference.lowering-plan.min.json",
+    "native-aot.lowering-plan.json": REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "native-aot.lowering-plan.min.json",
 }
 ADDITIONAL_BUNDLE_ARTIFACTS = ("preserve-descriptor.json",)
 SUPPLEMENTAL_METADATA_TEMPLATE_PATH = "hot-update/supplemental-metadata-template.json"
@@ -205,6 +206,7 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
                 "optimization-facts.json",
                 "preserve-descriptor.json",
                 "native-reference.lowering-plan.json",
+                "native-aot.lowering-plan.json",
             ],
             [artifact["path"] for artifact in manifest["artifacts"]],
         )

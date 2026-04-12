@@ -16,6 +16,7 @@ SUBJECT_WORKERS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "test
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-workers"
 WINDOWS_REFERENCE_BUILD_TARGET = "chaos_subject_reference_proof"
 WINDOWS_REFERENCE_RUN_TARGET = "chaos_subject_reference_proof_run"
+WINDOWS_NATIVE_AOT_BUILD_TARGET = "chaos_subject_native_aot"
 
 
 def load_module(path: Path, module_name: str):
@@ -450,6 +451,157 @@ class SubjectWorkersTests(unittest.TestCase):
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
             self.assertEqual("CHECK", manifest["variant"])
             self.assertEqual(expected_cmake_dir.as_posix(), manifest["cmakeBinaryDir"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_payload_custom_perf_metrics_accepts_flat_numeric_payload(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_flat_perf_payload")
+
+        metrics = workers_module._payload_custom_perf_metrics(
+            {
+                "mode": "native",
+                "subjectId": "BenchArithmetic",
+                "elapsedMilliseconds": 0.125,
+                "opsPerSecond": 8000.0,
+                "checksum": 42,
+            }
+        )
+
+        self.assertEqual(
+            {
+                "elapsedMilliseconds": 0.125,
+                "opsPerSecond": 8000.0,
+                "checksum": 42.0,
+            },
+            metrics,
+        )
+
+    def test_windows_build_target_uses_generic_native_aot_host_for_generated_native_aot(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_windows_native_aot_build")
+        subject_id = "FixtureNativeAotSubject"
+        run_id = "fixture-run-native-aot-build-001"
+        matrix_id = "windows-native-perf"
+        expected_cl_path = self._make_non_repo_path("vs", "bin", "Hostx64", "x64", "cl.exe")
+        expected_env = {
+            "Path": r"C:\VS\bin;C:\Windows\System32",
+            "INCLUDE": r"C:\VS\include",
+            "LIB": r"C:\VS\lib",
+        }
+
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "PROFILE",
+                "executionContext": {
+                    "targetPlatform": "windows-x64",
+                    "toolchainProfile": "msvc-reference",
+                },
+            },
+            "upstream": {
+                "generated": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("windows-native-aot-build")
+        try:
+            for relative_path in [
+                Path("src/native/runtime-core/runtime_core.cpp"),
+                Path("src/native/engine-bridge/engine_bridge.cpp"),
+                Path("src/native/bootstrap/bootstrap.cpp"),
+                Path("src/native/support/support.cpp"),
+                Path("src/native/benchmark-host/native_aot_main.cpp"),
+                Path("artifacts")
+                / "subjects"
+                / subject_id
+                / "runs"
+                / run_id
+                / "analysis"
+                / "generated"
+                / "generated"
+                / "native-aot.generated.cpp",
+            ]:
+                absolute_path = repo_root / relative_path
+                absolute_path.parent.mkdir(parents=True, exist_ok=True)
+                absolute_path.write_text("// fixture\n", encoding="utf-8")
+
+            generated_manifest_path = repo_root / request["upstream"]["generated"]["manifestPath"]
+            generated_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            generated_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "generatedSourcePath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated", "native-aot.generated.cpp"),
+                        "nativeAotManifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "native-aot.manifest.json"),
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            with patch.object(workers_module.tooling_module, "find_visual_cpp_executable", return_value=str(expected_cl_path)):
+                with patch.object(workers_module.tooling_module, "windows_developer_environment", return_value=expected_env):
+                    with patch.object(workers_module, "_run_checked") as run_checked_mock:
+                        result = workers_module.run_build_target(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            build_args = run_checked_mock.call_args.args[0]
+            self.assertEqual(
+                [
+                    str(expected_cl_path),
+                    "/nologo",
+                    "/std:c++17",
+                    "/EHsc",
+                    "/DWIN32",
+                    "/D_WINDOWS",
+                    "/DCHAOS_RUNTIME_ABI_STATIC",
+                    "/DCHAOS_VARIANT_PROFILE",
+                    "/DCHAOS_VARIANT_NAME=PROFILE",
+                    "/O2",
+                    "/DNDEBUG",
+                    f"/I{repo_root / 'src' / 'native' / 'benchmark-host'}",
+                    f"/Fo{repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'obj'}\\",
+                    f"/Fd{repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'obj' / 'chaos_subject_native_aot.pdb'}",
+                    f"/Fe{repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'out' / f'{WINDOWS_NATIVE_AOT_BUILD_TARGET}.exe'}",
+                    str(repo_root / "src" / "native" / "benchmark-host" / "native_aot_main.cpp"),
+                    str(
+                        repo_root
+                        / "artifacts"
+                        / "subjects"
+                        / subject_id
+                        / "runs"
+                        / run_id
+                        / "analysis"
+                        / "generated"
+                        / "generated"
+                        / "native-aot.generated.cpp"
+                    ),
+                ],
+                build_args,
+            )
+            self.assertEqual(expected_env, run_checked_mock.call_args.kwargs["env"])
+
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("PROFILE", manifest["variant"])
+            self.assertEqual("direct-msvc-native-aot", manifest["buildStrategy"])
+            self.assertEqual("native-aot", manifest["buildKind"])
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "generated", "generated", "native-aot.generated.cpp"),
+                manifest["generatedSourcePath"],
+            )
+            self.assertEqual(
+                posix_path("src", "native", "benchmark-host", "native_aot_main.cpp"),
+                manifest["hostSourcePath"],
+            )
+            self.assertEqual(
+                [subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "out", f"{WINDOWS_NATIVE_AOT_BUILD_TARGET}.exe")],
+                manifest["outputs"],
+            )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -1239,6 +1391,479 @@ class SubjectWorkersTests(unittest.TestCase):
             self.assertEqual(
                 subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "trace.runtime.json"),
                 report["actualTracePath"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_runtime_perf_collect_passes_workload_entry_and_assembly_path_to_perf_harness(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_runtime_perf_workload_entry")
+        subject_id = "FixtureBenchSubject"
+        run_id = "fixture-run-managed-perf-001"
+        matrix_id = "windows-managed-perf"
+        workload_entry = f"{subject_id}/Program::RunWorkload()"
+        perf_project_path = (
+            f"subjects/{subject_id}/validation/perf/"
+            f"{subject_id}.Subject.PerfHarness/{subject_id}.Subject.PerfHarness.csproj"
+        )
+        assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.dll")
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "PROFILE",
+                "workloadEntry": workload_entry,
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "runtimeProfile": "managed-perf-dev",
+                },
+            },
+            "upstream": {
+                "host-input": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "host-input", "host-input.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("runtime-perf-workload-entry")
+        try:
+            host_input_manifest_path = repo_root / request["upstream"]["host-input"]["manifestPath"]
+            host_input_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            host_input_manifest_path.write_text(
+                json.dumps({"primaryAssemblyPath": assembly_path}),
+                encoding="utf-8",
+            )
+            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            subject_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "subjectId": subject_id,
+                        "validation": {
+                            "perf": {
+                                "kind": "perf",
+                                "project": perf_project_path,
+                                "driver": "csharp-perf-harness",
+                                "defaultVariant": "PROFILE",
+                            }
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            perf_result = {
+                "metrics": {"meanDurationMs": 12.5, "opsPerSecond": 8000, "checksum": 42},
+                "baselinePath": "subjects/FixtureBenchSubject/baselines/perf/windows-managed-perf/windows.json",
+                "baseline": {"meanDurationMs": 12.0},
+                "baselineUpdated": False,
+                "regressionStatus": "no-baseline",
+                "regressions": [],
+            }
+            completed = subprocess.CompletedProcess(
+                args=["dotnet"],
+                returncode=0,
+                stdout=json.dumps({"elapsedMilliseconds": 12.5, "opsPerSecond": 8000, "checksum": 42}) + "\n",
+                stderr="",
+            )
+            harness_dll_path = (
+                repo_root
+                / "artifacts"
+                / "subjects"
+                / subject_id
+                / "runs"
+                / run_id
+                / "matrices"
+                / matrix_id
+                / "runtime"
+                / "harness"
+                / f"{subject_id}.Subject.PerfHarness.dll"
+            )
+
+            with patch.object(workers_module, "_run_checked", return_value=""):
+                with patch.object(workers_module, "_perf_sample_count", return_value=1):
+                    with patch.object(workers_module, "_perf_harness_iterations", return_value=13):
+                        with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
+                            with patch.object(workers_module.time, "perf_counter", side_effect=[10.0, 10.5]):
+                                with patch.object(workers_module.perf_module, "evaluate_perf_subject", return_value=perf_result):
+                                    result = workers_module.run_runtime_perf_collect(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            run_process_mock.assert_called_once_with(
+                [
+                    "dotnet",
+                    str(harness_dll_path),
+                    "13",
+                    "--assembly",
+                    str(repo_root / assembly_path),
+                    "--workload-entry",
+                    workload_entry,
+                    "--mode",
+                    "managed",
+                ],
+                cwd=repo_root,
+            )
+
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(workload_entry, manifest["workloadEntry"])
+            self.assertEqual(assembly_path, manifest["workloadAssemblyPath"])
+            self.assertEqual(perf_project_path, manifest["perfHarnessProjectPath"])
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "harness", f"{subject_id}.Subject.PerfHarness.dll"),
+                manifest["perfHarnessDllPath"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_interpreter_runtime_perf_passes_workload_entry_and_assembly_path_to_harness(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_interpreter_perf_workload_entry")
+        subject_id = "FixtureBenchSubject"
+        run_id = "fixture-run-interpreter-perf-001"
+        matrix_id = "windows-interpreter-perf"
+        workload_entry = f"{subject_id}/Program::RunWorkload()"
+        perf_project_path = (
+            f"subjects/{subject_id}/validation/perf/"
+            f"{subject_id}.Subject.PerfHarness/{subject_id}.Subject.PerfHarness.csproj"
+        )
+        assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.dll")
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "PROFILE",
+                "workloadEntry": workload_entry,
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "runtimeProfile": "interpreter-perf-dev",
+                },
+            },
+            "upstream": {
+                "host-input": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "host-input", "host-input.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("interpreter-perf-workload-entry")
+        try:
+            host_input_manifest_path = repo_root / request["upstream"]["host-input"]["manifestPath"]
+            host_input_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            host_input_manifest_path.write_text(
+                json.dumps({"primaryAssemblyPath": assembly_path}),
+                encoding="utf-8",
+            )
+            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            subject_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "subjectId": subject_id,
+                        "validation": {
+                            "perf": {
+                                "kind": "perf",
+                                "project": perf_project_path,
+                                "driver": "csharp-perf-harness",
+                                "defaultVariant": "PROFILE",
+                            }
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            perf_result = {
+                "metrics": {"meanDurationMs": 18.25, "opsPerSecond": 5600, "checksum": 84},
+                "baselinePath": "subjects/FixtureBenchSubject/baselines/perf/windows-interpreter-perf/windows.json",
+                "baseline": {"meanDurationMs": 18.0},
+                "baselineUpdated": False,
+                "regressionStatus": "no-baseline",
+                "regressions": [],
+            }
+            completed = subprocess.CompletedProcess(
+                args=["dotnet"],
+                returncode=0,
+                stdout=json.dumps({"elapsedMilliseconds": 18.25, "opsPerSecond": 5600, "checksum": 84}) + "\n",
+                stderr="",
+            )
+            harness_dll_path = (
+                repo_root
+                / "artifacts"
+                / "subjects"
+                / subject_id
+                / "runs"
+                / run_id
+                / "matrices"
+                / matrix_id
+                / "runtime"
+                / "harness"
+                / f"{subject_id}.Subject.PerfHarness.dll"
+            )
+
+            with patch.object(workers_module, "_run_checked", return_value=""):
+                with patch.object(workers_module, "_perf_sample_count", return_value=1):
+                    with patch.object(workers_module, "_perf_harness_iterations", return_value=21):
+                        with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
+                            with patch.object(workers_module.time, "perf_counter", side_effect=[20.0, 20.75]):
+                                with patch.object(workers_module.perf_module, "evaluate_perf_subject", return_value=perf_result):
+                                    result = workers_module.run_interpreter_runtime_perf(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            run_process_mock.assert_called_once_with(
+                [
+                    "dotnet",
+                    str(harness_dll_path),
+                    "21",
+                    "--assembly",
+                    str(repo_root / assembly_path),
+                    "--workload-entry",
+                    workload_entry,
+                    "--mode",
+                    "interpreter",
+                ],
+                cwd=repo_root,
+            )
+
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("interpreter", manifest["mode"])
+            self.assertEqual(workload_entry, manifest["workloadEntry"])
+            self.assertEqual(assembly_path, manifest["workloadAssemblyPath"])
+            self.assertEqual(perf_project_path, manifest["harnessProjectPath"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_runtime_perf_collect_prefers_subject_harness_iterations_override(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_perf_iteration_override")
+        subject_id = "FixtureBenchSubject"
+        run_id = "fixture-run-managed-perf-iterations-override-001"
+        matrix_id = "windows-managed-perf"
+        workload_entry = f"{subject_id}/Program::RunWorkload()"
+        perf_project_path = (
+            f"subjects/{subject_id}/validation/perf/"
+            f"{subject_id}.Subject.PerfHarness/{subject_id}.Subject.PerfHarness.csproj"
+        )
+        assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.dll")
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "PROFILE",
+                "workloadEntry": workload_entry,
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "runtimeProfile": "managed-perf-release",
+                },
+            },
+            "upstream": {
+                "host-input": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "host-input", "host-input.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("runtime-perf-iterations-override")
+        try:
+            host_input_manifest_path = repo_root / request["upstream"]["host-input"]["manifestPath"]
+            host_input_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            host_input_manifest_path.write_text(
+                json.dumps({"primaryAssemblyPath": assembly_path}),
+                encoding="utf-8",
+            )
+            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            subject_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "subjectId": subject_id,
+                        "validation": {
+                            "perf": {
+                                "kind": "perf",
+                                "project": perf_project_path,
+                                "driver": "csharp-perf-harness",
+                                "defaultVariant": "PROFILE",
+                                "harnessIterations": 7,
+                            }
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            perf_result = {
+                "metrics": {"meanDurationMs": 12.5, "opsPerSecond": 8000, "checksum": 42},
+                "baselinePath": "subjects/FixtureBenchSubject/baselines/perf/windows-managed-perf/windows.json",
+                "baseline": {"meanDurationMs": 12.0},
+                "baselineUpdated": False,
+                "regressionStatus": "no-baseline",
+                "regressions": [],
+            }
+            completed = subprocess.CompletedProcess(
+                args=["dotnet"],
+                returncode=0,
+                stdout=json.dumps({"elapsedMilliseconds": 12.5, "opsPerSecond": 8000, "checksum": 42}) + "\n",
+                stderr="",
+            )
+            harness_dll_path = (
+                repo_root
+                / "artifacts"
+                / "subjects"
+                / subject_id
+                / "runs"
+                / run_id
+                / "matrices"
+                / matrix_id
+                / "runtime"
+                / "harness"
+                / f"{subject_id}.Subject.PerfHarness.dll"
+            )
+
+            with patch.object(workers_module, "_run_checked", return_value=""):
+                with patch.object(workers_module, "_perf_sample_count", return_value=1):
+                    with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
+                        with patch.object(workers_module.time, "perf_counter", side_effect=[10.0, 10.5]):
+                            with patch.object(workers_module.perf_module, "evaluate_perf_subject", return_value=perf_result):
+                                workers_module.run_runtime_perf_collect(repo_root=repo_root, request=request)
+
+            run_process_mock.assert_called_once_with(
+                [
+                    "dotnet",
+                    str(harness_dll_path),
+                    "7",
+                    "--assembly",
+                    str(repo_root / assembly_path),
+                    "--workload-entry",
+                    workload_entry,
+                    "--mode",
+                    "managed",
+                ],
+                cwd=repo_root,
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_interpreter_runtime_perf_prefers_subject_harness_iterations_override(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_interpreter_iteration_override")
+        subject_id = "FixtureBenchSubject"
+        run_id = "fixture-run-interpreter-perf-iterations-override-001"
+        matrix_id = "windows-interpreter-perf"
+        workload_entry = f"{subject_id}/Program::RunWorkload()"
+        perf_project_path = (
+            f"subjects/{subject_id}/validation/perf/"
+            f"{subject_id}.Subject.PerfHarness/{subject_id}.Subject.PerfHarness.csproj"
+        )
+        assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.dll")
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "PROFILE",
+                "workloadEntry": workload_entry,
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "runtimeProfile": "interpreter-perf-release",
+                },
+            },
+            "upstream": {
+                "host-input": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "host-input", "host-input.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("interpreter-perf-iterations-override")
+        try:
+            host_input_manifest_path = repo_root / request["upstream"]["host-input"]["manifestPath"]
+            host_input_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            host_input_manifest_path.write_text(
+                json.dumps({"primaryAssemblyPath": assembly_path}),
+                encoding="utf-8",
+            )
+            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            subject_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "subjectId": subject_id,
+                        "validation": {
+                            "perf": {
+                                "kind": "perf",
+                                "project": perf_project_path,
+                                "driver": "interpreter-runtime-perf",
+                                "defaultVariant": "PROFILE",
+                                "harnessIterations": 9,
+                            }
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            perf_result = {
+                "metrics": {"meanDurationMs": 18.25, "opsPerSecond": 5600, "checksum": 84},
+                "baselinePath": "subjects/FixtureBenchSubject/baselines/perf/windows-interpreter-perf/windows.json",
+                "baseline": {"meanDurationMs": 18.0},
+                "baselineUpdated": False,
+                "regressionStatus": "no-baseline",
+                "regressions": [],
+            }
+            completed = subprocess.CompletedProcess(
+                args=["dotnet"],
+                returncode=0,
+                stdout=json.dumps({"elapsedMilliseconds": 18.25, "opsPerSecond": 5600, "checksum": 84}) + "\n",
+                stderr="",
+            )
+            harness_dll_path = (
+                repo_root
+                / "artifacts"
+                / "subjects"
+                / subject_id
+                / "runs"
+                / run_id
+                / "matrices"
+                / matrix_id
+                / "runtime"
+                / "harness"
+                / f"{subject_id}.Subject.PerfHarness.dll"
+            )
+
+            with patch.object(workers_module, "_run_checked", return_value=""):
+                with patch.object(workers_module, "_perf_sample_count", return_value=1):
+                    with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
+                        with patch.object(workers_module.time, "perf_counter", side_effect=[20.0, 20.75]):
+                            with patch.object(workers_module.perf_module, "evaluate_perf_subject", return_value=perf_result):
+                                workers_module.run_interpreter_runtime_perf(repo_root=repo_root, request=request)
+
+            run_process_mock.assert_called_once_with(
+                [
+                    "dotnet",
+                    str(harness_dll_path),
+                    "9",
+                    "--assembly",
+                    str(repo_root / assembly_path),
+                    "--workload-entry",
+                    workload_entry,
+                    "--mode",
+                    "interpreter",
+                ],
+                cwd=repo_root,
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)

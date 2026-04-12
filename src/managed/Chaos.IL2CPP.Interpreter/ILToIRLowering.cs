@@ -160,7 +160,7 @@ public sealed class ILToIRLowering
     {
         return op switch
         {
-            "br" or "brtrue" or "brfalse" or "leave" => true,
+            "br" or "brtrue" or "brfalse" or "blt" or "bgt" or "ble" or "bge" or "leave" => true,
             _ => false,
         };
     }
@@ -169,7 +169,7 @@ public sealed class ILToIRLowering
     {
         return op switch
         {
-            "brtrue" or "brfalse" => true,
+            "brtrue" or "brfalse" or "blt" or "bgt" or "ble" or "bge" => true,
             _ => false,
         };
     }
@@ -299,6 +299,10 @@ public sealed class ILToIRLowering
             "br" => LowerBranch(IROpCode.Br, instruction, blockIds, offsetToBlockIndex),
             "brtrue" => LowerConditionalBranch(IROpCode.BrTrue, instruction, blockIds, offsetToBlockIndex, stack),
             "brfalse" => LowerConditionalBranch(IROpCode.BrFalse, instruction, blockIds, offsetToBlockIndex, stack),
+            "blt" => LowerRelationalBranch(IROpCode.Blt, instruction, blockIds, offsetToBlockIndex, stack),
+            "bgt" => LowerRelationalBranch(IROpCode.Bgt, instruction, blockIds, offsetToBlockIndex, stack),
+            "ble" => LowerRelationalBranch(IROpCode.Ble, instruction, blockIds, offsetToBlockIndex, stack),
+            "bge" => LowerRelationalBranch(IROpCode.Bge, instruction, blockIds, offsetToBlockIndex, stack),
             "leave" => LowerLeave(instruction, blockIds, offsetToBlockIndex, exceptionRegions),
             "endfinally" => new IRInstruction { OpCode = IROpCode.EndFinally },
             "rethrow" => new IRInstruction { OpCode = IROpCode.Rethrow },
@@ -521,6 +525,24 @@ public sealed class ILToIRLowering
         {
             OpCode = opCode,
             Operands = [condition, target],
+        };
+    }
+
+    private static IRInstruction LowerRelationalBranch(
+        IROpCode opCode,
+        ManagedInstructionModel instruction,
+        IReadOnlyDictionary<string, int> blockIds,
+        IReadOnlyDictionary<int, int> offsetToBlockIndex,
+        Stack<IROperand> stack)
+    {
+        var right = Pop(stack, instruction.Op);
+        var left = Pop(stack, instruction.Op);
+        var target = CreateBranchTargetOperand(instruction, blockIds, offsetToBlockIndex);
+
+        return new IRInstruction
+        {
+            OpCode = opCode,
+            Operands = [left, right, target],
         };
     }
 

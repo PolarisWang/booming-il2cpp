@@ -216,6 +216,34 @@ class Phase7InterpreterMixedExecutionTests(unittest.TestCase):
         ]:
             self.assertIn(required_fragment, loader_source)
 
+    def test_loader_and_lowering_support_relational_branch_opcodes(self) -> None:
+        loader_source = LOADER_STAGE_PATH.read_text(encoding="utf-8")
+        lowering_source = IL_TO_IR_LOWERING_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "ILOpCode.Blt",
+            "ILOpCode.Blt_s",
+            "ILOpCode.Bgt",
+            "ILOpCode.Bgt_s",
+            "ILOpCode.Ble",
+            "ILOpCode.Ble_s",
+            "ILOpCode.Bge",
+            "ILOpCode.Bge_s",
+        ]:
+            self.assertIn(required_fragment, loader_source)
+
+        for required_fragment in [
+            '"blt" =>',
+            "IROpCode.Blt",
+            '"bgt" =>',
+            "IROpCode.Bgt",
+            '"ble" =>',
+            "IROpCode.Ble",
+            '"bge" =>',
+            "IROpCode.Bge",
+        ]:
+            self.assertIn(required_fragment, lowering_source)
+
     def test_real_lowering_proof_subject_executes_add_method_into_ir(self) -> None:
         self.assertTrue(INTERPRETER_LOWERING_MANIFEST_PATH.is_file(), msg=f"missing manifest: {INTERPRETER_LOWERING_MANIFEST_PATH}")
         self.assertTrue(INTERPRETER_LOWERING_PROJECT_PATH.is_file(), msg=f"missing project: {INTERPRETER_LOWERING_PROJECT_PATH}")
@@ -294,6 +322,10 @@ class Phase7InterpreterMixedExecutionTests(unittest.TestCase):
             "IROpCode.Add",
             "IROpCode.Ceq",
             "IROpCode.BrTrue",
+            "IROpCode.Blt",
+            "IROpCode.Bgt",
+            "IROpCode.Ble",
+            "IROpCode.Bge",
             "IROpCode.CallBridge",
             "IROpCode.CallVirt",
             "IROpCode.Leave",

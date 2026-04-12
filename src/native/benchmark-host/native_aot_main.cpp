@@ -1,0 +1,52 @@
+#include <chrono>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+
+extern "C" int RunNativeAot(void);
+
+namespace {
+
+int ParseIterations(int argc, char** argv) {
+    int iterations = 1;
+    for (int index = 1; index + 1 < argc; index += 2) {
+        if (std::strcmp(argv[index], "--iterations") != 0) {
+            continue;
+        }
+
+        const int parsed = std::atoi(argv[index + 1]);
+        if (parsed > 0) {
+            iterations = parsed;
+        }
+    }
+
+    return iterations;
+}
+
+long long NormalizeChecksum(long long checksum) {
+    const long long normalized = checksum % 10000LL;
+    return normalized < 0 ? -normalized : normalized;
+}
+
+}  // namespace
+
+int main(int argc, char** argv) {
+    const int iterations = ParseIterations(argc, argv);
+    const auto started = std::chrono::steady_clock::now();
+    long long checksum = 0;
+    for (int index = 0; index < iterations; ++index) {
+        checksum += static_cast<long long>(RunNativeAot());
+    }
+    const auto elapsed = std::chrono::duration<double, std::milli>(
+        std::chrono::steady_clock::now() - started);
+    const double seconds = elapsed.count() / 1000.0;
+    const double ops_per_second = seconds > 0.0 ? (static_cast<double>(iterations) / seconds) : 0.0;
+
+    std::printf(
+        "{\"elapsedMilliseconds\":%.6f,\"opsPerSecond\":%.6f,\"checksum\":%lld,\"iterations\":%d}\n",
+        elapsed.count(),
+        ops_per_second,
+        NormalizeChecksum(checksum),
+        iterations);
+    return 0;
+}

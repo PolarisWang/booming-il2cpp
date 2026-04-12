@@ -88,9 +88,10 @@ def _reused_primary_evidence_paths(stage: dict[str, Any], manifest: dict[str, An
                 _rewrite_reused_bucket_path(stage, str(artifacts.get("closureManifestPath") or "")),
             ]
         )
-    if kind in {"generated-native-proof", "generated-engine-proof"}:
+    if kind in {"generated-native-proof", "generated-engine-proof", "generated-native-aot"}:
         native_reference_manifest_path = str(
             manifest.get("nativeReferenceManifestPath")
+            or manifest.get("nativeAotManifestPath")
             or manifest.get("nativeProofManifestPath")
             or ""
         )

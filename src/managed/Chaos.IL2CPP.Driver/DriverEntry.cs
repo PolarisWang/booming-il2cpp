@@ -32,6 +32,7 @@ public sealed class DriverEntry
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.OptimizationFacts), result.OptimizationFacts);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.PreserveDescriptor), result.PreserveDescriptor);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.NativeReferenceLoweringPlan), result.NativeReferenceLoweringPlan);
+        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.NativeAotLoweringPlan), result.NativeAotLoweringPlan);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.ClosureManifest), result.ClosureManifest);
 
         return 0;
@@ -55,6 +56,24 @@ public sealed class DriverEntry
         return 0;
     }
 
+    public int Run(NativeAotRequest request)
+    {
+        var emitter = new NativeAotEmitter();
+        var result = emitter.Generate(request);
+
+        Directory.CreateDirectory(result.OutputRootPath);
+        foreach (var generatedSource in result.GeneratedSources)
+        {
+            var targetPath = Path.Combine(result.OutputRootPath, generatedSource.RelativePath.Replace('/', Path.DirectorySeparatorChar));
+            Directory.CreateDirectory(Path.GetDirectoryName(targetPath)!);
+            File.WriteAllText(targetPath, generatedSource.Contents);
+        }
+
+        WriteJson(Path.Combine(result.OutputRootPath, NativeAotArtifactNames.LoweringPlan), result.LoweringPlan);
+        WriteJson(Path.Combine(result.OutputRootPath, NativeAotArtifactNames.Manifest), result.Manifest);
+        return 0;
+    }
+
     public static int Main(string[] args)
     {
         if (args.Length == 0)
@@ -69,6 +88,7 @@ public sealed class DriverEntry
             "build" => RunBuild(args[1..]),
             "publish" => RunPublish(args[1..]),
             "emit-native-reference" => RunLegacyEmitNativeReference(args),
+            "emit-native-aot" => RunLegacyEmitNativeAot(args),
             _ when !args[0].StartsWith('-') => RunLegacyConvert(args),
             _ => ShowHelpAndFail(),
         };
@@ -407,6 +427,25 @@ public sealed class DriverEntry
         }
     }
 
+    private static int RunLegacyEmitNativeAot(string[] args)
+    {
+        if (args.Length != 3)
+        {
+            Console.Error.WriteLine("Usage: chaos-il2cpp emit-native-aot <managed-closure-root> <output-root>");
+            return 1;
+        }
+
+        try
+        {
+            return new DriverEntry().Run(new NativeAotRequest(args[1], args[2]));
+        }
+        catch (Exception exception)
+        {
+            Console.Error.WriteLine(exception);
+            return 1;
+        }
+    }
+
     private static int RunDotnetBuild(string projectPath, string outputDir)
     {
         var startInfo = new System.Diagnostics.ProcessStartInfo
@@ -492,6 +531,7 @@ public sealed class DriverEntry
         Console.WriteLine("Legacy commands:");
         Console.WriteLine("  <input.dll> <output-root>                    Managed closure generation");
         Console.WriteLine("  emit-native-reference <closure-root> <out>   Native reference emission");
+        Console.WriteLine("  emit-native-aot <closure-root> <out>         Generic native AOT emission");
         Console.WriteLine();
         Console.WriteLine("Run 'chaos-il2cpp <command> --help' for details.");
     }
