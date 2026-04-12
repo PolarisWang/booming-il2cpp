@@ -5,7 +5,7 @@ task_type: roadmap
 lifecycle_status: in_progress
 phase: roadmap
 created_at: 2026-04-11 21:30:00 +08:00
-updated_at: 2026-04-12 00:04:39 +08:00
+updated_at: 2026-04-12 15:40:00 +08:00
 current_dir: docs/dev/in-progress/20260411-10-post-phase7-development-roadmap
 parent_task_id: "20260409-10-total-solution-and-ios-hot-update-analysis"
 source_task_id: "20260409-10-total-solution-and-ios-hot-update-analysis"
@@ -21,8 +21,8 @@ active: true
 
 ## 当前判断
 
-- current_focus: 父 roadmap `20260409-10` 已归档完成；本 roadmap 现为新的 active 主线，准备从 Phase A 开始推进。
-- why_now: Phase 8 已收口，上一轮 proof-first total-solution baseline 已完成，需要把后续 GC / Benchmark / HotUpdate / Mobile / CI 路线从设计切到执行。
+- current_focus: Phase A / B / C 子任务都已归档完成；本 roadmap 进入 Phase D 多平台真机验证入口。
+- why_now: GC、benchmark 与 hot update 端到端闭环都已落地，后续主线转向 Android/iOS 真机与跨平台 benchmark。
 - done_definition: Phase A-E 全部子任务完成，三方 Benchmark 报告在各平台可运行
 
 ## 5 Phase 概览
@@ -43,13 +43,14 @@ active: true
 
 ## 最近摘要
 
+- 2026-04-12 15:40:00 +08:00: 子任务 `20260412-03-phase-c-hot-update-e2e` 完成并归档；Phase C 端到端、方法替换、auto bridge、回滚与 hot-update benchmark 已通过项目级验证。
 - 2026-04-12 00:04:39 +08:00: 父 roadmap `20260409-10` 已按用户指令跳过最后两个 blocker 并归档完成；本 successor roadmap 正式成为当前 active 入口。
 - 2026-04-11 21:30:00 +08:00: 完成 Phase A-E 全量实现方案设计，包含 5 Phase / 35 sub-task / 文件级实现步骤
 
 ## 下一步
 
-- next_action: 派生 `Phase A` child plan，固定第一批实现范围: BDWGC 接入、runtime-core GC / vtable / EH / generic / delegate 关键缺口与验收路径。
-- trigger: 父 roadmap 已 completed，进入执行入口
+- next_action: 派生 `Phase D` child plan，收敛 Android/iOS 真机验证、host route 与跨平台 benchmark 的最小首批范围。
+- trigger: 用户继续且对应真机/工具链可用
 
 ## 风险
 

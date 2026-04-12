@@ -2,6 +2,22 @@
   "group": "test-and-verify",
   "commands": [
     {
+      "id": "benchmark-record",
+      "title": "Run benchmark and record result",
+      "group": "Test And Verify",
+      "handler": "benchmark.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["benchmark"],
+      "syntax": "benchmark [--subject <id>] [--all] [--mode <mode>] [--record] [--dashboard] [--open]",
+      "show_in_menu": true,
+      "examples": [
+        "run benchmark --subject BenchArithmetic --mode native --record",
+        "run benchmark --all --record",
+        "run benchmark --dashboard --open",
+        "run benchmark status --all"
+      ]
+    },
+    {
       "id": "test-suite",
       "title": "Run a suite by selector or object id",
       "group": "Test And Verify",

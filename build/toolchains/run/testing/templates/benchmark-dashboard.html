@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IL2CPP Benchmark Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+         margin: 0; padding: 0; background: #f5f5f5; color: #333; }
+  header { background: #1a1a2e; color: #fff; padding: 16px 24px; }
+  header h1 { margin: 0; font-size: 1.4rem; }
+  header small { opacity: 0.7; font-size: 0.8rem; }
+  .tabs { display: flex; background: #fff; border-bottom: 2px solid #ddd; }
+  .tab { padding: 12px 24px; cursor: pointer; border: none; background: none;
+          font-size: 0.95rem; color: #555; transition: color .2s; }
+  .tab.active { color: #1a1a2e; border-bottom: 2px solid #1a1a2e; margin-bottom: -2px; font-weight: 600; }
+  .panel { display: none; padding: 24px; }
+  .panel.active { display: block; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px;
+           overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.1); }
+  th { background: #1a1a2e; color: #fff; padding: 10px 14px; text-align: left; font-size: 0.85rem; }
+  td { padding: 10px 14px; border-bottom: 1px solid #eee; font-size: 0.85rem; }
+  tr:last-child td { border-bottom: none; }
+  .pass { color: #16a34a; font-weight: 600; }
+  .fail { color: #dc2626; font-weight: 600; }
+  .na   { color: #9ca3af; }
+  .stale { color: #f59e0b; }
+  .chart-box { background: #fff; border-radius: 8px; padding: 20px;
+               box-shadow: 0 1px 4px rgba(0,0,0,.1); margin-bottom: 24px; }
+  select { padding: 6px 10px; border: 1px solid #ddd; border-radius: 4px;
+            font-size: 0.9rem; margin-right: 8px; }
+  .empty { color: #9ca3af; font-style: italic; padding: 40px; text-align: center; }
+  .row-controls { margin-bottom: 16px; }
+  h2 { margin: 0 0 16px; font-size: 1.1rem; color: #1a1a2e; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>IL2CPP Benchmark Dashboard</h1>
+  <small id="gen-time">Generated: —</small>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('overview')">Overview</button>
+  <button class="tab" onclick="showTab('detail')">Subject Detail</button>
+  <button class="tab" onclick="showTab('devices')">Device Comparison</button>
+</div>
+
+<!-- TAB 1: Overview -->
+<div class="panel active" id="tab-overview">
+  <div class="row-controls">
+    <label>Platform: <select id="ov-platform-select" onchange="renderOverview()"></select></label>
+    <label>Metric: <select id="ov-metric-select" onchange="renderOverview()">
+      <option value="meanDurationMs">Mean Duration (ms)</option>
+      <option value="opsPerSecond">Ops/sec</option>
+    </select></label>
+  </div>
+  <div id="overview-table-container"></div>
+</div>
+
+<!-- TAB 2: Subject Detail -->
+<div class="panel" id="tab-detail">
+  <div class="row-controls">
+    <label>Subject: <select id="det-subject-select" onchange="renderDetail()"></select></label>
+    <label>Device: <select id="det-device-select" onchange="renderDetail()"></select></label>
+  </div>
+  <div class="chart-box"><h2>Mode Comparison (latest)</h2><canvas id="det-bar" height="80"></canvas></div>
+  <div class="chart-box">
+    <h2>Trend</h2>
+    <label>Mode: <select id="det-trend-mode" onchange="renderTrend()">
+      <option value="managed">C# (.NET)</option>
+      <option value="native">AOT (C++)</option>
+      <option value="interpreter">HotUpdate (Interpreter)</option>
+    </select></label>
+    <canvas id="det-trend" height="80"></canvas>
+  </div>
+  <div id="det-devices-table"></div>
+</div>
+
+<!-- TAB 3: Device Comparison -->
+<div class="panel" id="tab-devices">
+  <div class="row-controls">
+    <label>Subject: <select id="dev-subject-select" onchange="renderDeviceComparison()"></select></label>
+    <label>Mode: <select id="dev-mode-select" onchange="renderDeviceComparison()">
+      <option value="native">AOT (C++)</option>
+      <option value="managed">C# (.NET)</option>
+      <option value="interpreter">HotUpdate (Interpreter)</option>
+    </select></label>
+  </div>
+  <div class="chart-box"><canvas id="dev-radar" height="100"></canvas></div>
+  <div id="dev-table-container"></div>
+</div>
+
+<script>
+/* BENCHMARK_DATA_PLACEHOLDER */
+
+const D = window.BENCHMARK_DATA || {};
+const overview = (D.overview || {});
+const subjects = D.subjects || {};
+const allSubjectIds = Object.keys(subjects).sort();
+
+// ── Utilities ──────────────────────────────────────────────────────────────
+function fmt(v) {
+  if (v == null || v === "N/A") return '<span class="na">—</span>';
+  if (typeof v === "number") return v.toLocaleString(undefined, {maximumFractionDigits: 2});
+  return String(v);
+}
+function fmtRatio(r) {
+  if (r == null) return '<span class="na">—</span>';
+  if (r === "N/A") return '<span class="na">N/A</span>';
+  const n = parseFloat(r);
+  const cls = n >= 1 ? "pass" : "fail";
+  return `<span class="${cls}">${n.toFixed(2)}x</span>`;
+}
+function staleness(ts) {
+  if (!ts) return "";
+  const age = (Date.now() - new Date(ts).getTime()) / 86400000;
+  if (age > 7) return ' <span class="stale" title="Data older than 7 days">⚠</span>';
+  return "";
+}
+
+// ── Tabs ───────────────────────────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.getElementById("tab-" + id).classList.add("active");
+  event.target.classList.add("active");
+}
+
+// ── Overview ───────────────────────────────────────────────────────────────
+let ovPlatforms = [];
+
+function buildOverviewPlatforms() {
+  const set = new Set();
+  Object.values(subjects).forEach(s => {
+    Object.values(s.latestByDevice || {}).forEach((modes, i, arr) => {
+      Object.values(modes).forEach(rec => {
+        const plat = (rec.device || {}).id || "";
+        set.add(plat.split("-").slice(0, 2).join("-"));
+      });
+    });
+  });
+  ovPlatforms = Array.from(set).sort();
+  if (!ovPlatforms.length) ovPlatforms = ["windows-x64"];
+  const sel = document.getElementById("ov-platform-select");
+  sel.innerHTML = ovPlatforms.map(p => `<option value="${p}">${p}</option>`).join("");
+}
+
+function renderOverview() {
+  const plat = document.getElementById("ov-platform-select").value;
+  const metric = document.getElementById("ov-metric-select").value;
+  const rows = allSubjectIds.map(sid => {
+    const sdata = subjects[sid] || {};
+    const byDev = sdata.latestByDevice || {};
+    // Find device matching platform prefix
+    let devId = Object.keys(byDev).find(d => d.startsWith(plat)) || Object.keys(byDev)[0];
+    const modes = (byDev[devId] || {});
+    const m = (modes.managed || {}).metrics || {};
+    const n = (modes.native || {}).metrics || {};
+    const i = (modes.interpreter || {}).metrics || {};
+    const managed = m[metric];
+    const native_ = n[metric];
+    const interp = i[metric];
+    // For latency: speedup = managed/native; for throughput: native/managed
+    const isLatency = metric.toLowerCase().includes("duration") || metric.toLowerCase().includes("ms");
+    const speedup = (managed && native_) ? (isLatency ? managed/native_ : native_/managed) : null;
+    const overhead = (managed && interp) ? (isLatency ? interp/managed : managed/interp) : null;
+    const mTs = (modes.managed || {}).recordedAt;
+    const nTs = (modes.native || {}).recordedAt;
+    return `<tr>
+      <td><strong>${sid}</strong></td>
+      <td>${fmt(managed)}${staleness(mTs)}</td>
+      <td>${fmt(native_)}${staleness(nTs)}</td>
+      <td>${fmt(interp)}</td>
+      <td>${speedup ? fmtRatio(speedup) : '<span class="na">—</span>'}</td>
+      <td>${overhead ? fmtRatio(overhead) : '<span class="na">—</span>'}</td>
+    </tr>`;
+  });
+  const ratioLabel = metric.includes("Duration") ? "AOT/C# Speedup" : "AOT/C# Ratio";
+  document.getElementById("overview-table-container").innerHTML = rows.length
+    ? `<table><thead><tr>
+        <th>Subject</th><th>C# (.NET)</th><th>AOT (C++)</th><th>HotUpdate</th>
+        <th>${ratioLabel}</th><th>HU/C# Overhead</th>
+       </tr></thead><tbody>${rows.join("")}</tbody></table>`
+    : `<div class="empty">No benchmark data yet.<br>Run: <code>run benchmark --all --mode native --record</code></div>`;
+}
+
+// ── Detail ─────────────────────────────────────────────────────────────────
+let detBarChart = null, detTrendChart = null;
+
+function buildDetailSelects() {
+  const sids = allSubjectIds;
+  if (!sids.length) return;
+  document.getElementById("det-subject-select").innerHTML =
+    sids.map(s => `<option value="${s}">${s}</option>`).join("");
+  updateDetailDevices();
+}
+
+function updateDetailDevices() {
+  const sid = document.getElementById("det-subject-select").value;
+  const sdata = subjects[sid] || {};
+  const devices = Object.keys(sdata.latestByDevice || {}).sort();
+  document.getElementById("det-device-select").innerHTML =
+    devices.map(d => `<option value="${d}">${d}</option>`).join("");
+}
+
+function renderDetail() {
+  updateDetailDevices();
+  const sid = document.getElementById("det-subject-select").value;
+  const devId = document.getElementById("det-device-select").value;
+  const sdata = subjects[sid] || {};
+  const byDev = sdata.latestByDevice || {};
+  const modes = byDev[devId] || {};
+
+  // Bar chart
+  const labels = ["C# (.NET)", "AOT (C++)", "HotUpdate"];
+  const vals = [
+    (modes.managed || {}).metrics?.meanDurationMs,
+    (modes.native || {}).metrics?.meanDurationMs,
+    (modes.interpreter || {}).metrics?.meanDurationMs,
+  ].map(v => v ?? 0);
+  const ctx = document.getElementById("det-bar").getContext("2d");
+  if (detBarChart) detBarChart.destroy();
+  detBarChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{
+        label: "Mean Duration (ms)",
+        data: vals,
+        backgroundColor: ["#3b82f6","#22c55e","#f59e0b"],
+      }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } } }
+  });
+
+  // Devices table
+  const allDevices = Object.entries(byDev);
+  const rows = allDevices.map(([dId, ms]) => {
+    const m = (ms.managed || {}).metrics || {};
+    const n = (ms.native || {}).metrics || {};
+    const i = (ms.interpreter || {}).metrics || {};
+    return `<tr>
+      <td>${dId}</td>
+      <td>${fmt(m.meanDurationMs)}</td>
+      <td>${fmt(n.meanDurationMs)}</td>
+      <td>${fmt(i.meanDurationMs)}</td>
+    </tr>`;
+  });
+  document.getElementById("det-devices-table").innerHTML = `
+    <div class="chart-box"><h2>Device Breakdown</h2>
+    <table><thead><tr><th>Device</th><th>C# (ms)</th><th>AOT (ms)</th><th>HU (ms)</th></tr></thead>
+    <tbody>${rows.join("")}</tbody></table></div>`;
+
+  renderTrend();
+}
+
+function renderTrend() {
+  const sid = document.getElementById("det-subject-select").value;
+  const devId = document.getElementById("det-device-select").value;
+  const mode = document.getElementById("det-trend-mode").value;
+  const sdata = subjects[sid] || {};
+  const hist = ((sdata.history || {})[devId] || {})[mode] || [];
+  const labels = hist.map((_, i) => `#${hist.length - i}`).reverse();
+  const vals = [...hist].reverse().map(r => r.metrics?.meanDurationMs ?? null);
+
+  const ctx = document.getElementById("det-trend").getContext("2d");
+  if (detTrendChart) detTrendChart.destroy();
+  detTrendChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [{
+        label: `${mode} meanDurationMs`,
+        data: vals,
+        borderColor: mode === "native" ? "#22c55e" : mode === "managed" ? "#3b82f6" : "#f59e0b",
+        tension: 0.3,
+        fill: false,
+      }]
+    },
+    options: { responsive: true }
+  });
+}
+
+// ── Device Comparison ──────────────────────────────────────────────────────
+let devRadarChart = null;
+
+function buildDeviceSelects() {
+  if (!allSubjectIds.length) return;
+  document.getElementById("dev-subject-select").innerHTML =
+    allSubjectIds.map(s => `<option value="${s}">${s}</option>`).join("");
+}
+
+function renderDeviceComparison() {
+  const sid = document.getElementById("dev-subject-select").value;
+  const mode = document.getElementById("dev-mode-select").value;
+  const sdata = subjects[sid] || {};
+  const byDev = sdata.latestByDevice || {};
+
+  // Build device → metric mapping
+  const deviceMetrics = Object.entries(byDev).map(([devId, modes]) => ({
+    id: devId,
+    val: (modes[mode] || {}).metrics?.meanDurationMs ?? null,
+    ts: (modes[mode] || {}).recordedAt,
+  })).filter(x => x.val != null);
+
+  // Normalise against windows-x64 (or first device)
+  const baseline = deviceMetrics.find(d => d.id.startsWith("windows-x64")) || deviceMetrics[0];
+  const baseVal = baseline?.val || 1;
+
+  // Radar
+  const labels = deviceMetrics.map(d => d.id.substring(0, 24));
+  const vals = deviceMetrics.map(d => Math.round((d.val / baseVal) * 100) / 100);
+
+  const ctx = document.getElementById("dev-radar").getContext("2d");
+  if (devRadarChart) devRadarChart.destroy();
+  devRadarChart = new Chart(ctx, {
+    type: "radar",
+    data: {
+      labels,
+      datasets: [{
+        label: `${mode} (relative to ${baseline?.id || "baseline"})`,
+        data: vals,
+        backgroundColor: "rgba(59,130,246,0.2)",
+        borderColor: "#3b82f6",
+        pointBackgroundColor: "#3b82f6",
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: { r: { min: 0, ticks: { stepSize: 0.5 } } }
+    }
+  });
+
+  // Table
+  const rows = deviceMetrics.map(d => {
+    const rel = (d.val / baseVal).toFixed(2);
+    return `<tr>
+      <td>${d.id}</td>
+      <td>${d.val.toFixed(3)} ms</td>
+      <td>${rel}x</td>
+      <td>${d.ts ? new Date(d.ts).toLocaleDateString() : "—"}${staleness(d.ts)}</td>
+    </tr>`;
+  });
+  document.getElementById("dev-table-container").innerHTML = `
+    <div class="chart-box"><table>
+    <thead><tr><th>Device</th><th>Mean Duration</th><th>Relative</th><th>Recorded</th></tr></thead>
+    <tbody>${rows.join("")}</tbody></table></div>`;
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────
+(function init() {
+  const ts = D.generatedAt ? new Date(D.generatedAt).toLocaleString() : "unknown";
+  document.getElementById("gen-time").textContent = "Generated: " + ts;
+
+  buildOverviewPlatforms();
+  renderOverview();
+  buildDetailSelects();
+  buildDeviceSelects();
+  if (allSubjectIds.length) {
+    renderDetail();
+    renderDeviceComparison();
+  }
+})();
+</script>
+</body>
+</html>

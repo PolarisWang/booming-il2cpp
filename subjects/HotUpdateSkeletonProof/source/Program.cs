@@ -13,6 +13,7 @@ internal static class Program
 {
     private const string CurrentAotVersion = "1.0.0";
     private const string HotUpdateSubjectId = "HotUpdateSkeletonProof/Helper::GetValue()";
+    private const string HotUpdateAddSubjectId = "HotUpdateSkeletonProof/HotPatch::Add()";
 
     private static int Main(string[] args)
     {
@@ -27,29 +28,34 @@ internal static class Program
             System.Console.WriteLine($"before-load={runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue)}");
 
             var validPackageRoot = CreatePackageRoot(workspace, "valid", corruptAssemblyHash: false);
-            var validPackage = PackageReader.ReadFromDirectory(validPackageRoot);
-            runtimeManager.LoadPackage(
-                validPackage,
+            var loaded = runtimeManager.LoadPackage(
+                validPackageRoot,
                 CurrentAotVersion,
-                new Dictionary<string, int>(StringComparer.Ordinal)
+                subjectIdToConstantInt32: new Dictionary<string, int>(StringComparer.Ordinal)
                 {
                     [HotUpdateSubjectId] = 42,
+                    [HotUpdateAddSubjectId] = 7,
                 });
 
+            System.Console.WriteLine($"hot-update-skeleton-load={loaded.ToString().ToLowerInvariant()}");
             System.Console.WriteLine($"after-load={runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue)}");
+            System.Console.WriteLine($"hot-update-skeleton-dispatch={runtimeManager.DispatchInt32(HotUpdateAddSubjectId, GetAotAddFallback)}");
+            System.Console.WriteLine($"hot-update-skeleton-mode={runtimeManager.Mode.ToString().ToLowerInvariant()}");
             System.Console.WriteLine($"integrity-after-load={runtimeManager.ValidateIntegrity().IsValid.ToString().ToLowerInvariant()}");
             System.Console.WriteLine($"active-patches-after-load={runtimeManager.GetActivePatches().Count}");
             runtimeManager.Rollback();
             System.Console.WriteLine($"after-rollback={runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue)}");
+            System.Console.WriteLine($"hot-update-skeleton-after-rollback={runtimeManager.DispatchInt32(HotUpdateAddSubjectId, GetAotAddFallback)}");
             System.Console.WriteLine($"active-patches-after-rollback={runtimeManager.GetActivePatches().Count}");
             System.Console.WriteLine($"integrity-after-rollback={runtimeManager.ValidateIntegrity().IsValid.ToString().ToLowerInvariant()}");
 
             runtimeManager.LoadPackage(
-                validPackage,
+                validPackageRoot,
                 CurrentAotVersion,
-                new Dictionary<string, int>(StringComparer.Ordinal)
+                subjectIdToConstantInt32: new Dictionary<string, int>(StringComparer.Ordinal)
                 {
                     [HotUpdateSubjectId] = 42,
+                    [HotUpdateAddSubjectId] = 7,
                 });
             System.Console.WriteLine($"after-reapply={runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue)}");
             runtimeManager.UnloadPackage();
@@ -76,6 +82,11 @@ internal static class Program
                 Directory.Delete(workspace, recursive: true);
             }
         }
+    }
+
+    private static int GetAotAddFallback()
+    {
+        return 3;
     }
 
     private static string CreatePackageRoot(string workspaceRoot, string packageIdSuffix, bool corruptAssemblyHash)

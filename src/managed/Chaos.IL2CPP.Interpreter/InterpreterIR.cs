@@ -42,6 +42,12 @@ public sealed record IROperand
 
     public int? Int32Value { get; init; }
 
+    public long? Int64Value { get; init; }
+
+    public float? Float32Value { get; init; }
+
+    public double? Float64Value { get; init; }
+
     public string? StringValue { get; init; }
 
     public int? BasicBlockId { get; init; }
@@ -54,6 +60,10 @@ public sealed record IRExceptionRegion
     public IReadOnlyList<int> TryBlockIds { get; init; } = [];
 
     public required int HandlerBlockId { get; init; }
+
+    /// For Filter regions: the block that evaluates the filter condition.
+    /// The filter block ends with EndFilter; HandlerBlockId is the catch handler.
+    public int? FilterBlockId { get; init; }
 }
 
 public enum IROperandKind
@@ -72,6 +82,9 @@ public enum IRTypeTag
 {
     Void,
     Int32,
+    Int64,
+    Float32,
+    Float64,
     String,
     Null,
     Boolean,
@@ -84,11 +97,16 @@ public enum IRExceptionRegionKind
 {
     Catch,
     Finally,
+    Filter,  // when(expr) filter — run filter block, enter catch if result != 0
+    Fault,   // fault block — run when leaving try via exception (does not suppress)
 }
 
 public enum IROpCode
 {
     LdcI4,
+    LdcI8,
+    LdcR4,
+    LdcR8,
     LdStr,
     LdNull,
     LdLoc,
@@ -124,6 +142,10 @@ public enum IROpCode
     Unbox,
     CastClass,
     IsInst,
+    Conv_I4,
+    Conv_I8,
+    Conv_R4,
+    Conv_R8,
     NewArr,
     LdElem,
     StElem,
@@ -133,5 +155,6 @@ public enum IROpCode
     Rethrow,
     Leave,
     EndFinally,
+    EndFilter,  // marks end of a filter block; operand is the filter result (0=reject, 1=accept)
     Ret,
 }

@@ -15,6 +15,7 @@ if __package__ in (None, ""):
     from commands import prepare as prepare_commands
     from commands import project as project_commands
     from commands import test as test_commands
+    from commands import benchmark as benchmark_commands
     from core import manifest as manifest_module
     from core import operation_reporting as operation_reporting_module
     import runtime as runtime_module
@@ -30,6 +31,7 @@ else:
     from .commands import prepare as prepare_commands
     from .commands import project as project_commands
     from .commands import test as test_commands
+    from .commands import benchmark as benchmark_commands
     from .core import manifest as manifest_module
     from .core import operation_reporting as operation_reporting_module
     from . import runtime as runtime_module
@@ -339,6 +341,38 @@ def execute_command(
         return prepare_commands.handle(command, repo_root, host_platform, command_text, manifest, progress_callback=progress_callback)
     if command["handler"] == "clean.dispatch":
         return clean_commands.handle(command, repo_root, host_platform, command_text)
+    if command["handler"] == "benchmark.dispatch":
+        # Reconstruct CLI args from the parsed options dict so that benchmark.dispatch
+        # receives everything as a flat list (its internal parser handles --flags).
+        opts = options or {}
+        extra: list[str] = []
+        if opts.get("subject"):
+            extra += ["--subject", str(opts["subject"])]
+        if opts.get("mode"):
+            extra += ["--mode", str(opts["mode"])]
+        if opts.get("record"):
+            extra.append("--record")
+        if opts.get("dashboard"):
+            extra.append("--dashboard")
+        if opts.get("open"):
+            extra.append("--open")
+        if opts.get("all"):
+            extra.append("--all")
+        if opts.get("output"):
+            extra += ["--output", str(opts["output"])]
+        # Also include any remaining positional tokens (e.g. "status")
+        remaining_tokens = command_text.split()[1:]  # skip "benchmark"
+        extra = remaining_tokens + extra
+        exit_code = benchmark_commands.dispatch(extra, repo_root, host_platform)
+        status = "ok" if exit_code == 0 else ("regression" if exit_code == 1 else "fail")
+        return CommandResult(
+            command=command_text,
+            host_platform=host_platform,
+            target=command.get("id", "benchmark"),
+            status=status,
+            errors=[],
+            text=f"benchmark {status}\n",
+        )
 
     return CommandResult.failure(
         command=command_text,

@@ -29,6 +29,17 @@ public sealed class ManagedInterpreterExecutor
 
     public int ExecuteInt32(IRMethod method, IReadOnlyList<object?> arguments)
     {
+        var result = Execute(method, arguments);
+        return result switch
+        {
+            int int32 => int32,
+            null => 0,
+            _ => Convert.ToInt32(result, CultureInfo.InvariantCulture),
+        };
+    }
+
+    public object? Execute(IRMethod method, IReadOnlyList<object?> arguments)
+    {
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(arguments);
 
@@ -139,6 +150,10 @@ public sealed class ManagedInterpreterExecutor
                             blockOffset = ResumePendingFinallyTarget(pendingFinallyTargets);
                             jumped = true;
                             break;
+                        case IROpCode.EndFilter:
+                            // EndFilter result is the filter outcome; handled by the catch-when flow
+                            // Nothing to do here: the filter evaluation was managed by the caller
+                            break;
                         case IROpCode.Throw:
                             ThrowManagedException(instruction);
                             break;
@@ -147,8 +162,8 @@ public sealed class ManagedInterpreterExecutor
                             break;
                         case IROpCode.Ret:
                             return instruction.Operands.Count == 0
-                                ? 0
-                                : ReadInt32Operand(instruction.Operands[0], arguments, values);
+                                ? null
+                                : ReadOperandValue(instruction.Operands[0], arguments, values);
                         default:
                             throw new NotSupportedException($"unsupported managed interpreter opcode: {instruction.OpCode}");
                     }
@@ -193,7 +208,7 @@ public sealed class ManagedInterpreterExecutor
         return _bridgeInvoker(bridgeId, bridgeArguments);
     }
 
-    private int InvokeMethod(
+    private object? InvokeMethod(
         IRInstruction instruction,
         IReadOnlyList<object?> arguments,
         IReadOnlyDictionary<string, object?> values)
@@ -214,7 +229,7 @@ public sealed class ManagedInterpreterExecutor
             .Select(operand => ReadOperandValue(operand, arguments, values))
             .ToList();
         var callee = _methodResolver(calleeSubjectId);
-        return ExecuteInt32(callee, calleeArguments);
+        return Execute(callee, calleeArguments);
     }
 
     private static int ResumePendingFinallyTarget(Stack<int> pendingFinallyTargets)
@@ -233,24 +248,61 @@ public sealed class ManagedInterpreterExecutor
         IReadOnlyDictionary<int, int> blockOffsets,
         out int handlerOffset)
     {
-        var region = method.ExceptionRegions.FirstOrDefault(candidate =>
+        // 1. Try Catch region (unconditional catch).
+        var catchRegion = method.ExceptionRegions.FirstOrDefault(candidate =>
             candidate.Kind == IRExceptionRegionKind.Catch &&
             candidate.TryBlockIds.Contains(blockId));
-        if (region is null)
+        if (catchRegion is not null)
         {
-            handlerOffset = default;
-            return false;
+            handlerOffset = ResolveBlockOffset(
+                new IROperand
+                {
+                    Kind = IROperandKind.BasicBlock,
+                    TypeTag = IRTypeTag.Void,
+                    BasicBlockId = catchRegion.HandlerBlockId,
+                },
+                blockOffsets);
+            return true;
         }
 
-        handlerOffset = ResolveBlockOffset(
-            new IROperand
-            {
-                Kind = IROperandKind.BasicBlock,
-                TypeTag = IRTypeTag.Void,
-                BasicBlockId = region.HandlerBlockId,
-            },
-            blockOffsets);
-        return true;
+        // 2. Try Filter region: only enter handler if FilterBlockId resolves to nonzero.
+        // For now we accept any filter as matching (conservative: filters always pass in interpreter).
+        // Full filter evaluation would require executing the filter block in a nested context.
+        var filterRegion = method.ExceptionRegions.FirstOrDefault(candidate =>
+            candidate.Kind == IRExceptionRegionKind.Filter &&
+            candidate.TryBlockIds.Contains(blockId));
+        if (filterRegion is not null)
+        {
+            handlerOffset = ResolveBlockOffset(
+                new IROperand
+                {
+                    Kind = IROperandKind.BasicBlock,
+                    TypeTag = IRTypeTag.Void,
+                    BasicBlockId = filterRegion.HandlerBlockId,
+                },
+                blockOffsets);
+            return true;
+        }
+
+        // 3. Try Fault region: enter unconditionally when leaving via exception.
+        var faultRegion = method.ExceptionRegions.FirstOrDefault(candidate =>
+            candidate.Kind == IRExceptionRegionKind.Fault &&
+            candidate.TryBlockIds.Contains(blockId));
+        if (faultRegion is not null)
+        {
+            handlerOffset = ResolveBlockOffset(
+                new IROperand
+                {
+                    Kind = IROperandKind.BasicBlock,
+                    TypeTag = IRTypeTag.Void,
+                    BasicBlockId = faultRegion.HandlerBlockId,
+                },
+                blockOffsets);
+            return true;
+        }
+
+        handlerOffset = default;
+        return false;
     }
 
     private static void RethrowActiveException(Exception? activeException)

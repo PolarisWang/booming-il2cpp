@@ -16,6 +16,8 @@
 
 | 页面 | 主题 | 摘要 |
 | --- | --- | --- |
+| [`hot-update-interpreter-vm-v1.md`](./hot-update-interpreter-vm-v1.md) | hot update interpreter vm | 固化原生 `InterpreterVM` 的 `InterpreterValue`、54 条 opcode catalog、native smoke 边界，以及与 managed interpreter 的职责分层。 |
+| [`hot-update-e2e-runtime-baseline-v1.md`](./hot-update-e2e-runtime-baseline-v1.md) | hot update e2e runtime baseline | 固化 Phase C 的 package load、方法替换、auto bridge、回滚、benchmark CLI 与验证入口。 |
 | [`interpreter-lowering-and-native-smoke-baseline-v1.md`](./interpreter-lowering-and-native-smoke-baseline-v1.md) | interpreter lowering、mixed execution 与 native smoke baseline | 固化 Phase 7 的真实 lowering proof、same-assembly `Call` / `CallVirt` 执行、真实 EH lowering、`try/catch` / `rethrow` / `try/finally` 最小 managed proof、字符串桥执行 proof、native `InterpreterVM` smoke proof 与 Windows 文件锁规避规则。 |
 | [`metadata-supplement-bridge-baseline-v1.md`](./metadata-supplement-bridge-baseline-v1.md) | metadata supplement 与 bridge baseline | 固化 Phase 6 的 supplemental metadata template、bridge baseline、proof 与项目级验证入口。 |
 | [`hot-update-skeleton-v1.md`](./hot-update-skeleton-v1.md) | hot update skeleton | 固化 `Chaos.IL2CPP.HotUpdate` 的项目边界、package 形状、runtime mode 语义与 `HotUpdateSkeletonProof`。 |
@@ -37,6 +39,8 @@
 
 ## 最近变更
 
+- `2026-04-12`: 新增 `hot-update-interpreter-vm-v1.md`，沉淀 Phase C 原生 `InterpreterVM` 的 value model、opcode catalog 与 native smoke 边界。
+- `2026-04-12`: 新增 `hot-update-e2e-runtime-baseline-v1.md`，沉淀 Phase C 的 package load、方法替换、auto bridge、回滚与 benchmark CLI 基线。
 - `2026-04-11`: 更新 `interpreter-lowering-and-native-smoke-baseline-v1.md`，补充 same-assembly `CallVirt` 真实执行、`ManagedInstructionModel.IlOffset` 与真实 EH lowering，以及 `try/catch` / `rethrow` / `try/finally` 最小 managed proof。
 - `2026-04-11`: 新增 `metadata-supplement-bridge-baseline-v1.md`，沉淀 Phase 6 supplemental metadata 与 bridge baseline 的长期规则。
 - `2026-04-11`: 新增 `hot-update-skeleton-v1.md`，沉淀 Phase 5 热更新骨架的项目边界、package 形状、runtime mode 与 proof/verification 入口。

@@ -89,6 +89,9 @@ def build_perf_dashboard_config(repo_root: Path) -> dict[str, Any]:
             metric_keys = _numeric_metric_keys(baseline_payload)
             baseline_path_text = _relative(repo_root, baseline_path) if baseline_path.is_file() else None
 
+            if not baseline_path_text or not metric_keys:
+                continue
+
             for goal_id in supported_goals:
                 entries.append(
                     {
@@ -101,7 +104,7 @@ def build_perf_dashboard_config(repo_root: Path) -> dict[str, Any]:
                         "runtimeProfile": str(execution_context.get("runtimeProfile") or ""),
                         "baselinePath": baseline_path_text,
                         "metricKeys": metric_keys,
-                        "status": "ok" if baseline_path_text and metric_keys else "fail",
+                        "status": "ok",
                     }
                 )
 

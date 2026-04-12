@@ -1,0 +1,244 @@
+{
+  "latestByDevice": {
+    "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd": {
+      "native": {
+        "runId": "20260411-174653-BenchGeneric-native",
+        "subject": "BenchGeneric",
+        "mode": "native",
+        "platform": "windows",
+        "device": {
+          "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+          "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+          "os": "Windows 10.0.26100",
+          "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+          "arch": "x64",
+          "isSimulator": false
+        },
+        "recordedAt": "2026-04-11T17:46:53.747696Z",
+        "gitCommit": "ef2c842",
+        "gitBranch": "main",
+        "metrics": {
+          "meanDurationMs": 0.0,
+          "note": "native requires full pipeline run"
+        }
+      },
+      "interpreter": {
+        "runId": "20260411-174600-BenchGeneric-interpreter",
+        "subject": "BenchGeneric",
+        "mode": "interpreter",
+        "platform": "windows",
+        "device": {
+          "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+          "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+          "os": "Windows 10.0.26100",
+          "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+          "arch": "x64",
+          "isSimulator": false
+        },
+        "recordedAt": "2026-04-11T17:46:00.522420Z",
+        "gitCommit": "ef2c842",
+        "gitBranch": "main",
+        "metrics": {
+          "meanDurationMs": 882.878,
+          "elapsedMilliseconds": 4.871,
+          "iterations": 1000,
+          "opsPerSecond": 205309,
+          "checksum": 0
+        }
+      },
+      "managed": {
+        "runId": "20260411-174559-BenchGeneric-managed",
+        "subject": "BenchGeneric",
+        "mode": "managed",
+        "platform": "windows",
+        "device": {
+          "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+          "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+          "os": "Windows 10.0.26100",
+          "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+          "arch": "x64",
+          "isSimulator": false
+        },
+        "recordedAt": "2026-04-11T17:45:59.548157Z",
+        "gitCommit": "ef2c842",
+        "gitBranch": "main",
+        "metrics": {
+          "meanDurationMs": 891.756,
+          "elapsedMilliseconds": 5.013,
+          "iterations": 1000,
+          "opsPerSecond": 199493,
+          "checksum": 0
+        }
+      }
+    }
+  },
+  "history": {
+    "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd": {
+      "native": [
+        {
+          "runId": "20260411-174653-BenchGeneric-native",
+          "subject": "BenchGeneric",
+          "mode": "native",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-11T17:46:53.747696Z",
+          "gitCommit": "ef2c842",
+          "gitBranch": "main",
+          "metrics": {
+            "meanDurationMs": 0.0,
+            "note": "native requires full pipeline run"
+          }
+        },
+        {
+          "runId": "20260411-174559-BenchGeneric-native",
+          "subject": "BenchGeneric",
+          "mode": "native",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-11T17:45:59.593915Z",
+          "gitCommit": "ef2c842",
+          "gitBranch": "main",
+          "metrics": {
+            "meanDurationMs": 0.0,
+            "note": "native requires full pipeline run"
+          }
+        },
+        {
+          "runId": "20260411-174458-BenchGeneric-native",
+          "subject": "BenchGeneric",
+          "mode": "native",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-11T17:44:58.109316Z",
+          "gitCommit": "ef2c842",
+          "gitBranch": "main",
+          "metrics": {
+            "meanDurationMs": 0.0,
+            "note": "native requires full pipeline run"
+          }
+        }
+      ],
+      "interpreter": [
+        {
+          "runId": "20260411-174600-BenchGeneric-interpreter",
+          "subject": "BenchGeneric",
+          "mode": "interpreter",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-11T17:46:00.522420Z",
+          "gitCommit": "ef2c842",
+          "gitBranch": "main",
+          "metrics": {
+            "meanDurationMs": 882.878,
+            "elapsedMilliseconds": 4.871,
+            "iterations": 1000,
+            "opsPerSecond": 205309,
+            "checksum": 0
+          }
+        }
+      ],
+      "managed": [
+        {
+          "runId": "20260411-174559-BenchGeneric-managed",
+          "subject": "BenchGeneric",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-11T17:45:59.548157Z",
+          "gitCommit": "ef2c842",
+          "gitBranch": "main",
+          "metrics": {
+            "meanDurationMs": 891.756,
+            "elapsedMilliseconds": 5.013,
+            "iterations": 1000,
+            "opsPerSecond": 199493,
+            "checksum": 0
+          }
+        }
+      ]
+    }
+  },
+  "comparisons": {
+    "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd": {
+      "comparison": {
+        "nativeVsManaged": {
+          "checksum": null,
+          "elapsedMilliseconds": null,
+          "iterations": null,
+          "meanDurationMs": 0.0,
+          "note": null,
+          "opsPerSecond": null
+        },
+        "interpreterVsManaged": {
+          "checksum": "N/A",
+          "elapsedMilliseconds": 0.97,
+          "iterations": 1.0,
+          "meanDurationMs": 0.99,
+          "note": null,
+          "opsPerSecond": 1.03
+        },
+        "nativeVsInterpreter": {
+          "checksum": null,
+          "elapsedMilliseconds": null,
+          "iterations": null,
+          "meanDurationMs": 0.0,
+          "note": null,
+          "opsPerSecond": null
+        },
+        "nativeSpeedup": "N/A",
+        "interpreterOverhead": 0.99
+      },
+      "verdict": {
+        "verdicts": {
+          "nativeVsManaged": {
+            "actual": "N/A",
+            "pass": null,
+            "label": "no data"
+          },
+          "interpreterVsManaged": {
+            "actual": 0.99,
+            "target": 50.0,
+            "pass": true,
+            "label": "0.99x overhead"
+          }
+        },
+        "overallPass": true
+      }
+    }
+  }
+}

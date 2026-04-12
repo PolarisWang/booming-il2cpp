@@ -1,6 +1,10 @@
 ﻿#include "runtime_core.h"
 
 #include "reflection_query_model.h"
+#include "generic_context.h"
+#include "vtable_registry.h"
+
+#include <gc.h>
 
 #include <cstdio>
 #include <atomic>
@@ -89,14 +93,32 @@ std::unordered_map<void*, std::shared_ptr<std::recursive_mutex>> g_monitor_regis
 const std::thread::id g_main_thread_id = std::this_thread::get_id();
 std::atomic<RuntimeMode> g_runtime_mode = RuntimeMode::Aot;
 
+// GC handle table: maps handle IDs to object instances.
+// Pinned handles are registered as explicit GC roots so the collector never moves/collects them.
+struct GcHandleEntry {
+    void* object_instance;
+    bool pinned;
+};
+static std::mutex s_gc_handle_mutex;
+static std::atomic<uint64_t> s_next_gc_handle{1};
+static std::unordered_map<uint64_t, GcHandleEntry> s_gc_handle_table;
+
 void* CHAOS_RUNTIME_ABI_CALL DefaultAllocate(size_t size, void* user_data) {
     (void)user_data;
-    return std::malloc(size);
+    return GC_MALLOC(size);
 }
 
 void CHAOS_RUNTIME_ABI_CALL DefaultDeallocate(void* ptr, void* user_data) {
     (void)user_data;
-    std::free(ptr);
+    (void)ptr;
+    // GC manages deallocation automatically — no explicit free needed
+}
+
+// Allocate memory that contains no pointers (e.g., string bytes, boxed value data).
+// GC_MALLOC_ATOMIC allows the GC to skip scanning this region for pointers,
+// improving collection performance.
+static void* AllocateBytesAtomic(size_t size) {
+    return GC_MALLOC_ATOMIC(size);
 }
 
 bool TryNormalizeConfig(const RuntimeConfig* config, RuntimeConfig* out_config) {
@@ -193,6 +215,10 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
         return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
     }
 
+    // Initialize BDWGC exactly once per process.
+    static std::once_flag s_gc_init_flag;
+    std::call_once(s_gc_init_flag, []() { GC_INIT(); });
+
     RuntimeState* runtime_state = static_cast<RuntimeState*>(AllocateBytes(normalized_config, sizeof(RuntimeState)));
     if (runtime_state == nullptr) {
         return CHAOS_RUNTIME_STATUS_INTERNAL_ERROR;
@@ -218,7 +244,7 @@ void CHAOS_RUNTIME_ABI_CALL RuntimeShutdown(RuntimeState* runtime_state) {
     SetRuntimeMode(RuntimeMode::Aot);
     delete runtime_state->internal_state;
     runtime_state->internal_state = nullptr;
-    FreeBytes(runtime_state->config, runtime_state);
+    // RuntimeState itself is GC-managed; no explicit free needed.
 }
 
 RuntimeStatus CHAOS_RUNTIME_ABI_CALL ThreadAttach(
@@ -241,6 +267,18 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL ThreadAttach(
         return CHAOS_RUNTIME_STATUS_INTERNAL_ERROR;
     }
 
+    // Register this thread with BDWGC so it can scan the thread's stack for roots.
+    // On Windows (GC_WIN32_THREADS), BDWGC auto-registers threads via DllMain / Win32 hooks;
+    // explicit registration is neither needed nor allowed.
+    // On pthreads platforms, we must register manually.
+#if !defined(_WIN32) && !defined(_WIN64)
+    struct GC_stack_base sb;
+    if (GC_get_stack_base(&sb) == GC_SUCCESS) {
+        const int gc_reg_result = GC_register_my_thread(&sb);
+        (void)gc_reg_result;  // GC_DUPLICATE is fine for the main thread
+    }
+#endif
+
     *out_thread_state = thread_state;
     return CHAOS_RUNTIME_STATUS_OK;
 }
@@ -251,6 +289,12 @@ void CHAOS_RUNTIME_ABI_CALL ThreadDetach(
     if (runtime_state == nullptr || thread_state == nullptr) {
         return;
     }
+
+    // Unregister this thread from BDWGC on pthreads platforms only.
+    // On Windows, BDWGC auto-manages thread lifecycle via Win32 hooks.
+#if !defined(_WIN32) && !defined(_WIN64)
+    GC_unregister_my_thread();
+#endif
 
     delete thread_state->internal_state;
     thread_state->internal_state = nullptr;
@@ -317,7 +361,8 @@ void* CHAOS_RUNTIME_ABI_CALL StringNewUtf8(
     }
 
     const size_t allocation_size = sizeof(StringObjectHeader) + static_cast<size_t>(byte_count) + 1u;
-    unsigned char* storage = static_cast<unsigned char*>(AllocateBytes(runtime_state->config, allocation_size));
+    // Use atomic allocation: string bytes contain no pointers, so GC need not scan them.
+    unsigned char* storage = static_cast<unsigned char*>(AllocateBytesAtomic(allocation_size));
     if (storage == nullptr) {
         return nullptr;
     }
@@ -349,17 +394,40 @@ GCHandle CHAOS_RUNTIME_ABI_CALL GcHandleNew(
     RuntimeState* runtime_state,
     void* object_instance,
     bool pinned) {
-    (void)runtime_state;
-    (void)object_instance;
-    (void)pinned;
-    return CHAOS_GC_HANDLE_INVALID;
+    if (runtime_state == nullptr || object_instance == nullptr) {
+        return CHAOS_GC_HANDLE_INVALID;
+    }
+
+    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
+    uint64_t handle = s_next_gc_handle++;
+    s_gc_handle_table[handle] = GcHandleEntry{ object_instance, pinned };
+
+    if (pinned) {
+        // Tell GC this address is an explicit root so the object is never collected.
+        GC_add_roots(object_instance,
+            static_cast<char*>(object_instance) + sizeof(void*));
+    }
+
+    return static_cast<GCHandle>(handle);
 }
 
 void CHAOS_RUNTIME_ABI_CALL GcHandleFree(
     RuntimeState* runtime_state,
     GCHandle gc_handle) {
-    (void)runtime_state;
-    (void)gc_handle;
+    if (runtime_state == nullptr || gc_handle == CHAOS_GC_HANDLE_INVALID) {
+        return;
+    }
+
+    std::lock_guard<std::mutex> lock(s_gc_handle_mutex);
+    auto it = s_gc_handle_table.find(static_cast<uint64_t>(gc_handle));
+    if (it != s_gc_handle_table.end()) {
+        // Note: for pinned handles we intentionally do not call GC_remove_roots here.
+        // GC_add_roots registers a memory range (not the object itself) as a scan root.
+        // Once the handle is removed from the table, no live code will use this object
+        // through the handle, so the range is a harmless false positive until the next GC.
+        // GC_remove_roots requires DYNAMIC_LOADING and is not available on all platforms.
+        s_gc_handle_table.erase(it);
+    }
 }
 
 void CHAOS_RUNTIME_ABI_CALL RaiseManagedException(
@@ -580,8 +648,11 @@ ParameterInfoHandle CHAOS_RUNTIME_ABI_CALL MethodGetParameter(
 }
 
 GenericContextHandle CHAOS_RUNTIME_ABI_CALL MethodGetGenericContext(MethodInfoHandle method) {
-    (void)method;
-    return nullptr;
+    if (method == nullptr) {
+        return nullptr;
+    }
+    const uint32_t method_token = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(method));
+    return chaos::il2cpp::generic_context::GetGenericContextForMethod(method_token);
 }
 
 const RuntimeAbiV0 kRuntimeAbiV0 = {
@@ -644,7 +715,8 @@ void* BoxValueObject(
     }
 
     const size_t allocation_size = sizeof(BoxedValueHeader) + value_size;
-    unsigned char* storage = static_cast<unsigned char*>(AllocateBytes(runtime_state->config, allocation_size));
+    // Value data contains no pointers; use atomic allocation so GC skips scanning it.
+    unsigned char* storage = static_cast<unsigned char*>(AllocateBytesAtomic(allocation_size));
     if (storage == nullptr) {
         return nullptr;
     }
@@ -868,6 +940,10 @@ bool GcSafepoint(
     }
 
     thread_internal_state->at_gc_safepoint = true;
+    // Perform a small slice of incremental GC work.
+    // This distributes GC pauses across frames rather than causing a single large pause.
+    GC_collect_a_little();
+    thread_internal_state->at_gc_safepoint = false;
     return true;
 }
 
@@ -903,13 +979,27 @@ bool EnqueueFinalizer(
         return false;
     }
 
-    std::lock_guard<std::mutex> lock(runtime_internal_state->finalizer_queue_mutex);
-    runtime_internal_state->finalizer_queue.push_back(
-        FinalizerWorkItem
-        {
-            object_instance,
-            finalizer,
-        });
+    {
+        std::lock_guard<std::mutex> lock(runtime_internal_state->finalizer_queue_mutex);
+        runtime_internal_state->finalizer_queue.push_back(
+            FinalizerWorkItem
+            {
+                object_instance,
+                finalizer,
+            });
+    }
+
+    // Also register with BDWGC so it can invoke the finalizer automatically
+    // when the object becomes unreachable during a GC cycle.
+    GC_register_finalizer_no_order(
+        object_instance,
+        [](void* obj, void* client_data) {
+            auto* cb = reinterpret_cast<FinalizerCallback>(client_data);
+            if (cb) { cb(obj); }
+        },
+        reinterpret_cast<void*>(finalizer),
+        nullptr, nullptr);
+
     return true;
 }
 
@@ -918,6 +1008,9 @@ size_t DrainFinalizerQueue(RuntimeState* runtime_state) {
     if (runtime_internal_state == nullptr) {
         return 0u;
     }
+
+    // Flush any GC-triggered finalizers first.
+    GC_invoke_finalizers();
 
     std::vector<FinalizerWorkItem> pending_finalizers = {};
     {

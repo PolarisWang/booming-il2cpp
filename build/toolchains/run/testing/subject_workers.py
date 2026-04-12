@@ -1968,6 +1968,262 @@ def run_runtime_trace_compare(*, repo_root: Path, request: dict[str, Any]) -> di
     )
 
 
+def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
+    """Run the managed interpreter performance harness.
+
+    Reads the compiled subject assembly from the host-input stage and invokes the
+    interpreter harness project (if one is declared in the subject's manifest perf
+    validation spec).  Output format is identical to run_runtime_perf_collect so
+    that downstream comparison workers can treat all three modes uniformly.
+    """
+    host_input_manifest = read_json(_resolve(repo_root, request["upstream"]["host-input"]["manifestPath"]))
+    if not isinstance(host_input_manifest, dict):
+        raise RuntimeError("host-input manifest must be an object")
+
+    selection = dict(request["selection"])
+    execution_context = dict(selection.get("executionContext") or {})
+    subject_id = str(selection["subjectId"])
+    matrix_id = str(selection["matrixId"])
+    variant = _selection_variant(selection)
+    host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
+    runtime_profile = str(execution_context.get("runtimeProfile") or "")
+    sample_count = _perf_sample_count(runtime_profile)
+    iterations = _perf_harness_iterations(runtime_profile)
+
+    manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
+
+    # Look for an interpreter-specific harness project.
+    # Subject may declare:  "validation": { "perf": { "driver": "interpreter-runtime-perf",
+    #                                                  "project": "subjects/.../Harness.csproj" } }
+    validation_spec = subjects_module.find_validation(manifest, "perf") or {}
+    harness_project_path_str = str(validation_spec.get("project") or "")
+
+    runtime_root = _resolve(repo_root, request["paths"]["bucketRoot"])
+    runtime_root.mkdir(parents=True, exist_ok=True)
+    stdout_path = runtime_root / "stdout.log"
+    stderr_path = runtime_root / "stderr.log"
+    exit_code_path = runtime_root / "exit-code.txt"
+
+    if not harness_project_path_str:
+        # No interpreter harness configured: return a clearly-labelled skip result so the
+        # comparison stage can treat the missing data as "interpreter: N/A" rather than
+        # propagating a hard failure.
+        msg = (
+            f"interpreter-runtime-perf: no harness project configured for subject '{subject_id}'. "
+            "Add 'validation.perf.project' to the subject manifest to enable interpreter benchmarking."
+        )
+        stdout_path.write_text(msg + "\n", encoding="utf-8")
+        stderr_path.write_text("", encoding="utf-8")
+        exit_code_path.write_text("0\n", encoding="utf-8")
+
+        skip_manifest = {
+            "subjectId": subject_id,
+            "matrixId": matrix_id,
+            "bucket": "runtime",
+            "variant": variant,
+            "mode": "interpreter",
+            "stdoutPath": _relative(repo_root, stdout_path),
+            "stderrPath": _relative(repo_root, stderr_path),
+            "exitCodePath": _relative(repo_root, exit_code_path),
+            "skipped": True,
+            "skipReason": "no-harness-configured",
+            "samples": [],
+            "summaryMetrics": {},
+            "regressionStatus": "no-baseline",
+        }
+        write_json(_resolve(repo_root, request["paths"]["manifestPath"]), skip_manifest)
+        return _success_result(
+            bucket_manifest_path=request["paths"]["manifestPath"],
+            report_paths=list(request["paths"]["reportPaths"]),
+            primary_evidence_paths=[_relative(repo_root, stdout_path)],
+            stdout_path=_relative(repo_root, stdout_path),
+            stderr_path=_relative(repo_root, stderr_path),
+            duration_ms=0,
+            details={"mode": "interpreter", "skipped": True},
+        )
+
+    # Harness project is configured — build and run it.
+    project_path = _resolve(repo_root, harness_project_path_str)
+    harness_root = runtime_root / "harness"
+    harness_dll_path = harness_root / f"{project_path.stem}.dll"
+
+    _run_checked(
+        [
+            "dotnet", "build", str(project_path),
+            "-c", "Release",
+            "-o", str(harness_root),
+            *_dotnet_intermediate_args(project_path.stem, host_platform),
+        ],
+        repo_root=repo_root,
+        failure_message=f"interpreter harness build failed: {harness_project_path_str}",
+    )
+
+    samples: list[dict[str, Any]] = []
+    stdout_chunks: list[str] = []
+    stderr_chunks: list[str] = []
+    output_lines: list[str] = []
+    last_exit_code = 0
+
+    for sample_index in range(sample_count):
+        started = time.perf_counter()
+        completed = run_process(["dotnet", str(harness_dll_path), str(iterations)], cwd=repo_root)
+        duration_ms = round((time.perf_counter() - started) * 1000, 3)
+        stdout_text = completed.stdout or ""
+        stderr_text = completed.stderr or ""
+        output_lines = [line for line in stdout_text.splitlines() if line.strip()]
+        last_exit_code = int(completed.returncode)
+        payload = _parse_perf_payload(output_lines)
+        if _is_numeric_perf_value(payload.get("elapsedMilliseconds")):
+            duration_ms = round(float(payload["elapsedMilliseconds"]), 3)
+
+        sample: dict[str, Any] = {
+            "sampleIndex": sample_index + 1,
+            "durationMs": duration_ms,
+            "exitCode": last_exit_code,
+            "mode": "interpreter",
+        }
+        sample.update(_payload_custom_perf_metrics(payload))
+        samples.append(sample)
+        stdout_chunks.append(f"=== sample {sample_index + 1} ({duration_ms:.3f} ms) ===\n{stdout_text}".rstrip() + "\n")
+        if stderr_text:
+            stderr_chunks.append(f"=== sample {sample_index + 1} ===\n{stderr_text}".rstrip() + "\n")
+        if last_exit_code != 0:
+            break
+
+    stdout_path.write_text("".join(stdout_chunks), encoding="utf-8")
+    stderr_path.write_text("".join(stderr_chunks), encoding="utf-8")
+    exit_code_path.write_text(f"{last_exit_code}\n", encoding="utf-8")
+
+    summary_metrics = _perf_summary_metrics(samples)
+    perf_result = perf_module.evaluate_perf_subject(
+        repo_root=repo_root,
+        subject_id=subject_id,
+        matrix_id=matrix_id,
+        host_platform=host_platform,
+        metrics=summary_metrics,
+        update_baseline=False,
+    )
+    performance = {
+        "samples": samples,
+        "metrics": dict(perf_result["metrics"]),
+        "baselinePath": str(perf_result["baselinePath"]),
+        "baseline": dict(perf_result["baseline"]),
+        "baselineUpdated": bool(perf_result["baselineUpdated"]),
+        "regressionStatus": str(perf_result["regressionStatus"]),
+        "regressions": list(perf_result.get("regressions") or []),
+    }
+    result_manifest = {
+        "subjectId": subject_id,
+        "matrixId": matrix_id,
+        "bucket": "runtime",
+        "variant": variant,
+        "mode": "interpreter",
+        "harnessProjectPath": harness_project_path_str,
+        "stdoutPath": _relative(repo_root, stdout_path),
+        "stderrPath": _relative(repo_root, stderr_path),
+        "exitCodePath": _relative(repo_root, exit_code_path),
+        "outputLines": output_lines,
+        "samples": samples,
+        "summaryMetrics": dict(performance["metrics"]),
+        "baselinePath": str(performance["baselinePath"]),
+        "baseline": dict(performance["baseline"]),
+        "baselineUpdated": bool(performance["baselineUpdated"]),
+        "regressionStatus": str(performance["regressionStatus"]),
+        "regressions": list(performance["regressions"]),
+    }
+    write_json(_resolve(repo_root, request["paths"]["manifestPath"]), result_manifest)
+
+    if last_exit_code != 0:
+        return {
+            "status": "fail",
+            "bucketManifestPath": request["paths"]["manifestPath"],
+            "reportPaths": list(request["paths"]["reportPaths"]),
+            "primaryEvidencePaths": [result_manifest["stdoutPath"]],
+            "metrics": {"durationMs": int(round(sum(float(s["durationMs"]) for s in samples)))},
+            "diagnostics": {"stdoutPath": result_manifest["stdoutPath"], "stderrPath": result_manifest["stderrPath"]},
+            "details": {"performance": performance},
+            "failure": f"interpreter perf execution failed: {harness_dll_path}",
+        }
+
+    return _success_result(
+        bucket_manifest_path=request["paths"]["manifestPath"],
+        report_paths=list(request["paths"]["reportPaths"]),
+        primary_evidence_paths=[result_manifest["stdoutPath"]],
+        stdout_path=result_manifest["stdoutPath"],
+        stderr_path=result_manifest["stderrPath"],
+        duration_ms=int(round(sum(float(s["durationMs"]) for s in samples))),
+        details={"performance": performance},
+    )
+
+
+def run_benchmark_comparison_aggregate(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
+    """Aggregate perf results from managed, native and interpreter stages into a comparison report.
+
+    Upstream buckets expected (any subset is acceptable — missing modes produce null entries):
+      - "managed-runtime"   or  "runtime-perf"
+      - "native-runtime"    or  "native-perf"
+      - "interpreter-runtime"
+    """
+    import importlib
+    benchmark_comparison = importlib.import_module("benchmark_comparison")
+
+    selection = dict(request["selection"])
+    subject_id = str(selection["subjectId"])
+    matrix_id = str(selection["matrixId"])
+    runtime_root = _resolve(repo_root, request["paths"]["bucketRoot"])
+    runtime_root.mkdir(parents=True, exist_ok=True)
+
+    def _load_mode_metrics(bucket_key: str) -> dict[str, Any] | None:
+        upstream = dict(request.get("upstream") or {})
+        entry = upstream.get(bucket_key)
+        if not entry:
+            return None
+        try:
+            m = read_json(_resolve(repo_root, entry["manifestPath"]))
+            return dict(m.get("summaryMetrics") or {}) if isinstance(m, dict) else None
+        except Exception:
+            return None
+
+    # Try common upstream bucket names for each mode.
+    managed_metrics = _load_mode_metrics("managed-runtime") or _load_mode_metrics("runtime-perf")
+    native_metrics = _load_mode_metrics("native-runtime") or _load_mode_metrics("native-perf")
+    interpreter_metrics = _load_mode_metrics("interpreter-runtime")
+
+    comparison = benchmark_comparison.compute_comparison(managed_metrics, native_metrics, interpreter_metrics)
+    verdict = benchmark_comparison.evaluate_targets(comparison)
+
+    report = {
+        "reportVersion": "v1",
+        "subjectId": subject_id,
+        "matrixId": matrix_id,
+        "modes": {
+            "managed": managed_metrics,
+            "native": native_metrics,
+            "interpreter": interpreter_metrics,
+        },
+        "comparison": comparison,
+        "verdict": verdict,
+    }
+
+    comparison_path = runtime_root / "comparison.json"
+    write_json(comparison_path, report)
+
+    write_json(_resolve(repo_root, request["paths"]["manifestPath"]), {
+        "subjectId": subject_id,
+        "matrixId": matrix_id,
+        "bucket": "report",
+        "comparisonPath": _relative(repo_root, comparison_path),
+        "overallPass": bool(verdict.get("overallPass")),
+    })
+
+    return _success_result(
+        bucket_manifest_path=request["paths"]["manifestPath"],
+        report_paths=list(request["paths"]["reportPaths"]),
+        primary_evidence_paths=[_relative(repo_root, comparison_path)],
+        details={"comparison": comparison, "verdict": verdict},
+    )
+
+
 DEFAULT_STAGE_WORKERS = {
     "source-resolve": run_source_resolve,
     "host-input-build": run_dotnet_host_input_builder,
@@ -1982,4 +2238,6 @@ DEFAULT_STAGE_WORKERS = {
     "runtime-perf-collect": run_runtime_perf_collect,
     "native-runtime-perf": run_native_runtime_perf,
     "runtime-trace-compare": run_runtime_trace_compare,
+    "interpreter-runtime-perf": run_interpreter_runtime_perf,
+    "benchmark-comparison-aggregate": run_benchmark_comparison_aggregate,
 }

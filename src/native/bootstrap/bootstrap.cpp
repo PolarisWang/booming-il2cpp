@@ -1,8 +1,11 @@
 #include "bootstrap.h"
 
+#include "generic_context.h"
+#include "method_replacement.h"
 #include "reflection_query_model.h"
 #include "runtime_core.h"
 #include "support.h"
+#include "vtable_registry.h"
 
 #include <cstdint>
 #include <cstring>
@@ -15,6 +18,10 @@ constexpr const char* kConsoleWriteLineStringIcall =
     "System.Console/System.Console::WriteLine(System.String)";
 constexpr const char* kStringConcatPairIcall =
     "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
+constexpr const char* kDelegateCombineIcall =
+    "System.Private.CoreLib/System.Delegate::Combine(System.Delegate,System.Delegate)";
+constexpr const char* kDelegateRemoveIcall =
+    "System.Private.CoreLib/System.Delegate::Remove(System.Delegate,System.Delegate)";
 
 struct UnresolvedVirtualCallEntry {
     uint32_t instance_type_token;
@@ -31,6 +38,8 @@ struct DelegateInstance {
     uint32_t method_token;
     void* method_pointer;
     void* target_instance;
+    DelegateInstance* next;          // multicast chain (nullptr = last in chain)
+    uint32_t invocation_count;       // total length of the chain starting at this node
 };
 
 BootstrapState g_bootstrap_state = {};
@@ -71,6 +80,10 @@ const MethodPointerEntry* GetMethodPointerEntries() {
 }
 
 void* FindMethodPointerByToken(uint32_t method_token) {
+    if (void* replacement = chaos::il2cpp::method_replacement::Resolve(method_token)) {
+        return replacement;
+    }
+
     const auto* entries = GetMethodPointerEntries();
     if (entries == nullptr) {
         return nullptr;
@@ -119,6 +132,19 @@ const UnresolvedVirtualCallEntry* FindUnresolvedVirtualCallEntry(
 }
 
 bool IsKnownResolvedVirtualHandle(MethodInfoHandle method) {
+    if (method == nullptr) return false;
+
+    // Accept any method pointer that came from the vtable registry.
+    // (vtable registry stores raw function pointers, not opaque tokens.)
+    // We distinguish vtable pointers from token handles by checking the token range:
+    // tokens are <= 0x0FFFFFFF; real function pointers are usually larger addresses.
+    const uintptr_t raw = reinterpret_cast<uintptr_t>(method);
+    if (raw > static_cast<uintptr_t>(0x0FFFFFFFu)) {
+        // Likely a real function pointer from vtable registry or unresolved-virtual table.
+        return true;
+    }
+
+    // Also check the legacy unresolved-virtual table.
     const auto* entries = GetUnresolvedVirtualCallEntries();
     if (entries == nullptr) {
         return false;
@@ -157,6 +183,12 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
     if (chaos::il2cpp::runtime_core::GetRuntimeAbiV0() == nullptr) {
         return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
     }
+
+    // Note: MetadataRegistrationV0.generic_types / generic_methods are reserved for
+    // generic instantiation registration. When the codegen emits a concrete struct layout
+    // for these arrays (Phase A.11), we will iterate them here and call
+    // chaos::il2cpp::generic_context::RegisterGenericInstantiation().
+    // For now the pointers may be null; this is a no-op.
 
     g_bootstrap_state.is_bootstrapped = true;
     return CHAOS_BRIDGE_STATUS_OK;
@@ -242,10 +274,21 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveVirtualMethod(
         return nullptr;
     }
 
+    const uint32_t instance_type_token  = DecodeOpaqueToken(instance_type);
+    const uint32_t declared_method_token = DecodeOpaqueToken(declared_method);
+
+    // 1. Try vtable registry (runtime-registered per-type vtables).
+    if (void* vtable_ptr = chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(
+            instance_type_token, declared_method_token)) {
+        return reinterpret_cast<MethodInfoHandle>(vtable_ptr);
+    }
+
+    // 2. Fall back to the pre-resolved unresolved-virtual-call table (codegen inline).
     if (const auto* entry = FindUnresolvedVirtualCallEntry(instance_type, declared_method)) {
         return reinterpret_cast<MethodInfoHandle>(entry->resolved_method);
     }
 
+    // 3. Return the declared method as last resort (direct call fallback).
     return declared_method;
 }
 
@@ -317,8 +360,113 @@ void* CHAOS_RUNTIME_ABI_CALL CreateDelegate(
         method_token,
         method_pointer,
         target_instance,
+        nullptr,   // next
+        1u,        // invocation_count
     };
     return delegate_instance;
+}
+
+/// Clone a delegate chain (deep copy of all nodes).
+static DelegateInstance* CloneChain(const DelegateInstance* src) {
+    if (src == nullptr) return nullptr;
+    auto* copy = new DelegateInstance { src->method_token, src->method_pointer, src->target_instance, nullptr, 1u };
+    DelegateInstance* tail = copy;
+    const DelegateInstance* cur = src->next;
+    while (cur != nullptr) {
+        auto* node = new DelegateInstance { cur->method_token, cur->method_pointer, cur->target_instance, nullptr, 1u };
+        tail->next = node;
+        tail = node;
+        cur = cur->next;
+    }
+    return copy;
+}
+
+/// Returns true if two delegate nodes refer to the same (method, target) pair.
+static bool DelegateNodesEqual(const DelegateInstance* a, const DelegateInstance* b) {
+    return a != nullptr && b != nullptr
+        && a->method_token  == b->method_token
+        && a->target_instance == b->target_instance;
+}
+
+/// Rebuild invocation_count for each node in the chain.
+static void RebuildCounts(DelegateInstance* head) {
+    // Count chain length
+    uint32_t len = 0u;
+    for (const DelegateInstance* n = head; n != nullptr; n = n->next) { ++len; }
+    // Assign descending counts
+    DelegateInstance* n = head;
+    while (n != nullptr) {
+        n->invocation_count = len--;
+        n = n->next;
+    }
+}
+
+void* CHAOS_RUNTIME_ABI_CALL CombineDelegate(
+    void* left_delegate,
+    void* right_delegate) {
+    if (left_delegate == nullptr)  return right_delegate;
+    if (right_delegate == nullptr) return left_delegate;
+
+    // Clone left chain and append a clone of the right node (single-node append).
+    auto* new_head = CloneChain(static_cast<DelegateInstance*>(left_delegate));
+    // Find tail of new_head
+    DelegateInstance* tail = new_head;
+    while (tail->next != nullptr) { tail = tail->next; }
+    // Append clone of right (single node only — multicast combine is left + right)
+    auto* right = static_cast<DelegateInstance*>(right_delegate);
+    auto* right_clone = new DelegateInstance
+        { right->method_token, right->method_pointer, right->target_instance, nullptr, 1u };
+    tail->next = right_clone;
+    RebuildCounts(new_head);
+    return new_head;
+}
+
+void* CHAOS_RUNTIME_ABI_CALL RemoveDelegate(
+    void* source_delegate,
+    void* target_delegate) {
+    if (source_delegate == nullptr || target_delegate == nullptr) return source_delegate;
+
+    auto* src  = static_cast<const DelegateInstance*>(source_delegate);
+    auto* tgt  = static_cast<const DelegateInstance*>(target_delegate);
+
+    // Find the LAST node in the chain matching target.
+    // Build a cloned chain without that node.
+    auto* clone_head = CloneChain(src);
+
+    // Find the last matching node in the clone
+    DelegateInstance* prev        = nullptr;
+    DelegateInstance* last_match  = nullptr;
+    DelegateInstance* last_prev   = nullptr;
+    DelegateInstance* cur         = clone_head;
+    while (cur != nullptr) {
+        if (DelegateNodesEqual(cur, tgt)) {
+            last_match = cur;
+            last_prev  = prev;
+        }
+        prev = cur;
+        cur  = cur->next;
+    }
+
+    if (last_match == nullptr) {
+        // No match — return original (clone is wasted, but safe)
+        return clone_head;
+    }
+
+    // Remove last_match from clone chain
+    if (last_prev == nullptr) {
+        // Removing head
+        DelegateInstance* new_head = last_match->next;
+        last_match->next = nullptr;
+        delete last_match;
+        if (new_head != nullptr) RebuildCounts(new_head);
+        return new_head;
+    } else {
+        last_prev->next = last_match->next;
+        last_match->next = nullptr;
+        delete last_match;
+        RebuildCounts(clone_head);
+        return clone_head;
+    }
 }
 
 BridgeStatus CHAOS_RUNTIME_ABI_CALL DelegateInvoke(
@@ -344,43 +492,38 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL DelegateInvoke(
         *out_exception = nullptr;
     }
 
-    auto* const delegate_handle = static_cast<DelegateInstance*>(delegate_instance);
-    if (delegate_handle->method_pointer == nullptr) {
-        return CHAOS_BRIDGE_STATUS_NOT_FOUND;
-    }
+    auto* delegate_handle = static_cast<DelegateInstance*>(delegate_instance);
 
     void* const argument0 = argv[0];
     auto* const return_slot = static_cast<void**>(out_return_value);
+    *return_slot = nullptr;
 
+    // Walk the multicast chain; last return value wins (C# semantics).
     try {
-        if (delegate_handle->target_instance != nullptr) {
-            using ClosedInstanceDelegateFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
-                RuntimeState* runtime,
-                ThreadState* thread,
-                void* __this,
-                void* arg0);
-            *return_slot = reinterpret_cast<ClosedInstanceDelegateFn>(delegate_handle->method_pointer)(
-                runtime_state,
-                thread_state,
-                delegate_handle->target_instance,
-                argument0);
-        } else {
-            using StaticDelegateFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
-                RuntimeState* runtime,
-                ThreadState* thread,
-                void* arg0);
-            *return_slot = reinterpret_cast<StaticDelegateFn>(delegate_handle->method_pointer)(
-                runtime_state,
-                thread_state,
-                argument0);
-        }
+        while (delegate_handle != nullptr) {
+            if (delegate_handle->method_pointer == nullptr) {
+                return CHAOS_BRIDGE_STATUS_NOT_FOUND;
+            }
 
+            if (delegate_handle->target_instance != nullptr) {
+                using ClosedInstanceDelegateFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
+                    RuntimeState* runtime, ThreadState* thread, void* __this, void* arg0);
+                *return_slot = reinterpret_cast<ClosedInstanceDelegateFn>(delegate_handle->method_pointer)(
+                    runtime_state, thread_state, delegate_handle->target_instance, argument0);
+            } else {
+                using StaticDelegateFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
+                    RuntimeState* runtime, ThreadState* thread, void* arg0);
+                *return_slot = reinterpret_cast<StaticDelegateFn>(delegate_handle->method_pointer)(
+                    runtime_state, thread_state, argument0);
+            }
+
+            delegate_handle = delegate_handle->next;
+        }
         return CHAOS_BRIDGE_STATUS_OK;
     } catch (const chaos::il2cpp::runtime_core::ManagedExceptionCarrier& carrier) {
         if (out_exception != nullptr) {
             *out_exception = carrier.exception;
         }
-
         return CHAOS_BRIDGE_STATUS_MANAGED_EXCEPTION;
     }
 }
@@ -396,6 +539,14 @@ void* CHAOS_RUNTIME_ABI_CALL ResolveIcall(const char* icall_name_utf8) {
 
     if (std::strcmp(icall_name_utf8, kStringConcatPairIcall) == 0) {
         return reinterpret_cast<void*>(&chaos::il2cpp::support::ConcatStringPair);
+    }
+
+    if (std::strcmp(icall_name_utf8, kDelegateCombineIcall) == 0) {
+        return reinterpret_cast<void*>(&CombineDelegate);
+    }
+
+    if (std::strcmp(icall_name_utf8, kDelegateRemoveIcall) == 0) {
+        return reinterpret_cast<void*>(&RemoveDelegate);
     }
 
     return nullptr;

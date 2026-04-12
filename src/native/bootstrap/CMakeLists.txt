@@ -13,6 +13,7 @@ target_include_directories(
         "${REPO_ROOT}/contracts/native/v0"
         "${CMAKE_CURRENT_LIST_DIR}"
     PRIVATE
+        "${REPO_ROOT}/src/native/hot-update"
         "${REPO_ROOT}/src/native/runtime-core"
         "${REPO_ROOT}/src/native/support")
 target_link_libraries(
@@ -20,4 +21,5 @@ target_link_libraries(
     PUBLIC
         chaos_runtime_core
     PRIVATE
+        chaos_hot_update
         chaos_support)

@@ -2,7 +2,11 @@
 
 add_library(chaos_runtime_core STATIC
     runtime_core.cpp
-    runtime_core.h)
+    runtime_core.h
+    vtable_registry.cpp
+    vtable_registry.h
+    generic_context.cpp
+    generic_context.h)
 
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
 target_compile_definitions(chaos_runtime_core PRIVATE CHAOS_RUNTIME_ABI_EXPORTS)
@@ -12,4 +16,8 @@ target_include_directories(
     PUBLIC
         "${REPO_ROOT}/contracts/native/v0"
         "${CMAKE_CURRENT_LIST_DIR}")
+
+target_link_libraries(chaos_runtime_core PUBLIC chaos_bdwgc)
+target_include_directories(chaos_runtime_core PRIVATE
+    "${REPO_ROOT}/third_party/bdwgc/include")
 

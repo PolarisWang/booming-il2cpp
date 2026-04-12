@@ -1,0 +1,47 @@
+cmake_minimum_required(VERSION 3.20)
+
+project(chaos_gc_contracts LANGUAGES CXX)
+
+get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../../.." ABSOLUTE)
+set(ARTIFACT_ROOT "${REPO_ROOT}/artifacts/gc-contracts")
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
+
+# gc_init_smoke — verifies GC_INIT + GC_MALLOC work (Batch 1)
+add_executable(gc_init_smoke gc_init_smoke.cpp)
+target_compile_features(gc_init_smoke PRIVATE cxx_std_17)
+target_link_libraries(gc_init_smoke PRIVATE chaos_bdwgc)
+
+# gc_handle_smoke added in Batch 2 (A.3)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_handle_smoke.cpp")
+    add_executable(gc_handle_smoke gc_handle_smoke.cpp)
+    target_compile_features(gc_handle_smoke PRIVATE cxx_std_17)
+    target_compile_definitions(gc_handle_smoke PRIVATE CHAOS_RUNTIME_ABI_STATIC)
+    target_link_libraries(gc_handle_smoke PRIVATE chaos_runtime_core chaos_bdwgc)
+endif()
+
+# gc_thread_smoke added in Batch 3 (A.4)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_thread_smoke.cpp")
+    add_executable(gc_thread_smoke gc_thread_smoke.cpp)
+    target_compile_features(gc_thread_smoke PRIVATE cxx_std_17)
+    target_compile_definitions(gc_thread_smoke PRIVATE CHAOS_RUNTIME_ABI_STATIC)
+    target_link_libraries(gc_thread_smoke PRIVATE chaos_runtime_core chaos_bdwgc)
+endif()
+
+# gc_finalizer_smoke added in Batch 3 (A.5)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_finalizer_smoke.cpp")
+    add_executable(gc_finalizer_smoke gc_finalizer_smoke.cpp)
+    target_compile_features(gc_finalizer_smoke PRIVATE cxx_std_17)
+    target_compile_definitions(gc_finalizer_smoke PRIVATE CHAOS_RUNTIME_ABI_STATIC)
+    target_link_libraries(gc_finalizer_smoke PRIVATE chaos_runtime_core chaos_bdwgc)
+endif()
+
+# gc_safepoint_smoke added in Batch 3 (A.6)
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_safepoint_smoke.cpp")
+    add_executable(gc_safepoint_smoke gc_safepoint_smoke.cpp)
+    target_compile_features(gc_safepoint_smoke PRIVATE cxx_std_17)
+    target_compile_definitions(gc_safepoint_smoke PRIVATE CHAOS_RUNTIME_ABI_STATIC)
+    target_link_libraries(gc_safepoint_smoke PRIVATE chaos_runtime_core chaos_bdwgc)
+endif()

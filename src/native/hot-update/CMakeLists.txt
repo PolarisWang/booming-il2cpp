@@ -2,7 +2,9 @@ get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
 
 add_library(chaos_hot_update STATIC
     hot_update.cpp
-    hot_update.h)
+    hot_update.h
+    method_replacement.cpp
+    method_replacement.h)
 
 target_compile_features(chaos_hot_update PUBLIC cxx_std_17)
 target_compile_definitions(chaos_hot_update PUBLIC CHAOS_RUNTIME_ABI_STATIC)
