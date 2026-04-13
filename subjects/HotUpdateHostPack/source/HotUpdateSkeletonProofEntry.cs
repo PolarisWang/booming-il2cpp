@@ -12,7 +12,6 @@ internal static class HotUpdateSkeletonProofEntry
         ChaosUnitCategory.HotUpdateContract,
         Alias = "hot-update-skeleton-proof",
         Requires = ChaosRuntimeFeature.HotUpdate,
-        Evidence = ChaosEvidenceKind.Stdout | ChaosEvidenceKind.Metadata,
         Priority = 2)]
     public static int Run()
     {
@@ -22,9 +21,8 @@ internal static class HotUpdateSkeletonProofEntry
         try
         {
             var runtimeManager = new RuntimeManager();
-            Console.WriteLine("HotUpdateSkeletonProof entry reached.");
-            Console.WriteLine("args=0");
-            Console.WriteLine($"before-load={runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue)}");
+            var beforeLoad = runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue);
+            Assert.Equal(1, beforeLoad);
 
             var validPackageRoot = HotUpdatePackageSupport.CreatePackageRoot(
                 workspace,
@@ -41,18 +39,26 @@ internal static class HotUpdateSkeletonProofEntry
                     [HotUpdateSubjectId] = 42,
                     [HotUpdateAddSubjectId] = 7,
                 });
+            Assert.True(loaded);
 
-            Console.WriteLine($"hot-update-skeleton-load={loaded.ToString().ToLowerInvariant()}");
-            Console.WriteLine($"after-load={runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue)}");
-            Console.WriteLine($"hot-update-skeleton-dispatch={runtimeManager.DispatchInt32(HotUpdateAddSubjectId, GetAotAddFallback)}");
-            Console.WriteLine($"hot-update-skeleton-mode={runtimeManager.Mode.ToString().ToLowerInvariant()}");
-            Console.WriteLine($"integrity-after-load={runtimeManager.ValidateIntegrity().IsValid.ToString().ToLowerInvariant()}");
-            Console.WriteLine($"active-patches-after-load={runtimeManager.GetActivePatches().Count}");
+            var afterLoad = runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue);
+            var dispatchValue = runtimeManager.DispatchInt32(HotUpdateAddSubjectId, GetAotAddFallback);
+            var integrityAfterLoad = runtimeManager.ValidateIntegrity();
+            var activePatchesAfterLoad = runtimeManager.GetActivePatches().Count;
+            Assert.Equal(42, afterLoad);
+            Assert.Equal(7, dispatchValue);
+            Assert.Equal(RuntimeMode.Mixed, runtimeManager.Mode);
+            Assert.True(integrityAfterLoad.IsValid);
+            Assert.Equal(1, activePatchesAfterLoad);
             runtimeManager.Rollback();
-            Console.WriteLine($"after-rollback={runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue)}");
-            Console.WriteLine($"hot-update-skeleton-after-rollback={runtimeManager.DispatchInt32(HotUpdateAddSubjectId, GetAotAddFallback)}");
-            Console.WriteLine($"active-patches-after-rollback={runtimeManager.GetActivePatches().Count}");
-            Console.WriteLine($"integrity-after-rollback={runtimeManager.ValidateIntegrity().IsValid.ToString().ToLowerInvariant()}");
+            var afterRollback = runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue);
+            var afterRollbackDispatch = runtimeManager.DispatchInt32(HotUpdateAddSubjectId, GetAotAddFallback);
+            var activePatchesAfterRollback = runtimeManager.GetActivePatches().Count;
+            var integrityAfterRollback = runtimeManager.ValidateIntegrity();
+            Assert.Equal(1, afterRollback);
+            Assert.Equal(3, afterRollbackDispatch);
+            Assert.Equal(0, activePatchesAfterRollback);
+            Assert.True(integrityAfterRollback.IsValid);
 
             runtimeManager.LoadPackage(
                 validPackageRoot,
@@ -62,28 +68,21 @@ internal static class HotUpdateSkeletonProofEntry
                     [HotUpdateSubjectId] = 42,
                     [HotUpdateAddSubjectId] = 7,
                 });
-            Console.WriteLine($"after-reapply={runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue)}");
+            var afterReapply = runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue);
+            Assert.Equal(42, afterReapply);
             runtimeManager.UnloadPackage();
-            Console.WriteLine($"after-unload={runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue)}");
+            var afterUnload = runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue);
+            Assert.Equal(1, afterUnload);
 
-            try
-            {
-                var corruptPackageRoot = HotUpdatePackageSupport.CreatePackageRoot(
-                    workspace,
-                    "corrupt",
-                    HotUpdatePackageSupport.CurrentAotVersion,
-                    "HotPatch/Patch::Apply()",
-                    [0x48, 0x4F, 0x54, 0x34, 0x32],
-                    "signed-proof",
-                    corruptAssemblyHash: true);
-                PackageReader.ReadFromDirectory(corruptPackageRoot);
-                Console.WriteLine("corruption=unexpected-pass");
-                return 1;
-            }
-            catch (InvalidDataException)
-            {
-                Console.WriteLine("corruption=rejected");
-            }
+            var corruptPackageRoot = HotUpdatePackageSupport.CreatePackageRoot(
+                workspace,
+                "corrupt",
+                HotUpdatePackageSupport.CurrentAotVersion,
+                "HotPatch/Patch::Apply()",
+                [0x48, 0x4F, 0x54, 0x34, 0x32],
+                "signed-proof",
+                corruptAssemblyHash: true);
+            Assert.Throws<InvalidDataException>(() => PackageReader.ReadFromDirectory(corruptPackageRoot));
 
             return 0;
         }

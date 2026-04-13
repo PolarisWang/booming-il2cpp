@@ -242,6 +242,7 @@ def _declared_entry_from_raw(
         method_signature=method_signature,
         category=int(payload.get("category") or 0),
         metrics=int(payload.get("metrics") or 0),
+        modes=int(payload.get("modes") or 0),
         requires=int(payload.get("requires") or 0),
         evidence=int(payload.get("evidence") or 0),
         priority=int(payload.get("priority") or 0),
@@ -268,6 +269,7 @@ def _entry_to_dict(entry: declarations_module.DeclaredTestEntry) -> dict[str, An
         return payload
 
     payload["metrics"] = entry.metrics
+    payload["modes"] = entry.modes
     payload["warmupCount"] = entry.warmup_count
     payload["iterationCount"] = entry.iteration_count
     payload["invocationCount"] = entry.invocation_count
@@ -537,6 +539,7 @@ def _resolve_subject_assembly_paths(
     manifest: dict[str, Any],
     *,
     build_if_missing: bool = True,
+    force_build: bool = False,
 ) -> list[Path]:
     source = dict(manifest.get("source") or {})
     source_type = str(source.get("type") or "")
@@ -549,18 +552,20 @@ def _resolve_subject_assembly_paths(
         raise FileNotFoundError(f"subject source project missing: {project_path}")
 
     source_path_text = str(source.get("path") or "").strip()
-    existing_solution_assemblies = _solution_assembly_paths(
-        repo_root,
-        source,
-        primary_project_path=project_path,
-    )
-    if existing_solution_assemblies:
-        return existing_solution_assemblies
+    if not force_build:
+        existing_solution_assemblies = _solution_assembly_paths(
+            repo_root,
+            source,
+            primary_project_path=project_path,
+        )
+        if existing_solution_assemblies:
+            return existing_solution_assemblies
 
-    existing_primary_assembly = _find_primary_project_assembly(project_path)
-    if existing_primary_assembly is not None:
-        return [existing_primary_assembly]
-    if not build_if_missing:
+        existing_primary_assembly = _find_primary_project_assembly(project_path)
+        if existing_primary_assembly is not None:
+            return [existing_primary_assembly]
+
+    if not build_if_missing and not force_build:
         return []
 
     build_target = project_path
@@ -603,6 +608,7 @@ def build_subject_declared_test_catalog(
     *,
     repo_root: Path,
     subject_id: str,
+    force_build: bool = False,
 ) -> dict[str, Any]:
     manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
     declaration_mode = declarations_module.test_declaration_mode(manifest)
@@ -618,6 +624,7 @@ def build_subject_declared_test_catalog(
         repo_root,
         manifest,
         build_if_missing=declaration_mode is declarations_module.TestDeclarationMode.REQUIRE,
+        force_build=force_build,
     )
     if not assembly_paths:
         summary = declarations_module.summarize_declaration_scan(

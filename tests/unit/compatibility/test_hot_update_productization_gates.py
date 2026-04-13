@@ -24,6 +24,9 @@ VERSION_MATRIX_PATH = REPO_ROOT / "docs" / "architecture" / "version-compatibili
 HOT_UPDATE_SKELETON_PROJECT_PATH = (
     REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "HotUpdateHostPack.csproj"
 )
+HOT_UPDATE_SKELETON_PROOF_PATH = (
+    REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "HotUpdateSkeletonProofEntry.cs"
+)
 COMPATIBILITY_MATRIX_RUNNER_PATH = (
     REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "compatibility_matrix_runner.py"
 )
@@ -154,6 +157,16 @@ class Phase8ProductizationGatesTests(unittest.TestCase):
             self.assertIn(required_fragment, runtime_manager_source)
 
     def test_hot_update_skeleton_proof_runs_apply_integrity_rollback_and_reapply(self) -> None:
+        proof_source = HOT_UPDATE_SKELETON_PROOF_PATH.read_text(encoding="utf-8")
+        for required_fragment in [
+            "ValidateIntegrity()",
+            "GetActivePatches().Count",
+            "runtimeManager.Rollback();",
+            'Assert.Equal(42, afterReapply);',
+            'Assert.Equal(1, afterUnload);',
+        ]:
+            self.assertIn(required_fragment, proof_source)
+
         completed = run_checked(
             [
                 "dotnet",
@@ -165,17 +178,8 @@ class Phase8ProductizationGatesTests(unittest.TestCase):
             ],
             cwd=REPO_ROOT,
         )
-        output_lines = {line.strip() for line in completed.stdout.splitlines() if line.strip()}
-
-        expected_lines = {
-            "integrity-after-load=true",
-            "active-patches-after-load=1",
-            "after-rollback=1",
-            "active-patches-after-rollback=0",
-            "integrity-after-rollback=true",
-            "after-reapply=42",
-        }
-        self.assertTrue(expected_lines.issubset(output_lines), msg=completed.stdout)
+        self.assertEqual("", completed.stdout.strip())
+        self.assertEqual("", completed.stderr.strip())
 
     def test_compatibility_matrix_assets_define_config_schema_and_proof_subject(self) -> None:
         self.assertTrue(

@@ -11,13 +11,14 @@ internal static class GenericBenchmarkEntry
         ChaosBenchmarkCategory.RuntimeDispatch,
         ChaosMetric.WallClockUs | ChaosMetric.ManagedAllocBytes,
         Alias = "generic-bench",
+        Modes = ChaosExecutionMode.Managed,
         Requires = ChaosRuntimeFeature.GenericSharing,
         WarmupCount = 1,
         IterationCount = 2,
         InvocationCount = 1)]
-    public static long RunWorkload()
+    public static int RunWorkload()
     {
-        long checksum = 0;
+        int checksum = 0;
         for (int iter = 0; iter < IterationCount; iter++)
         {
             var list = new List<int>();

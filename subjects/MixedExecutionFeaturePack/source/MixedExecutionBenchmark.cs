@@ -12,6 +12,7 @@ internal static class MixedExecutionBenchmarkEntry
         ChaosMetric.WallClockUs,
         Alias = "mixed-execution-bench",
         Requires = ChaosRuntimeFeature.HotUpdate,
+        Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Interpreter,
         WarmupCount = 1,
         IterationCount = 6,
         InvocationCount = 1000)]

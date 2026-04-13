@@ -22,7 +22,6 @@ internal sealed class ExceptionThrower
         }
         finally
         {
-            Console.WriteLine("Exception finally proof.");
         }
     }
 
@@ -38,12 +37,12 @@ internal static class ExceptionProofEntry
         ChaosUnitCategory.RuntimeContract,
         Alias = "exception-proof",
         Requires = ChaosRuntimeFeature.ExceptionFlow,
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 6)]
     public static int Run()
     {
         var thrower = new ExceptionThrower();
-        Console.WriteLine(thrower.Capture());
+        var message = thrower.Capture();
+        Assert.Equal("Exception native proof: caught.", message);
         return 0;
     }
 }

@@ -27,12 +27,12 @@ internal static class DispatchProofEntry
     [ChaosUnitTest(
         ChaosUnitCategory.RuntimeContract,
         Alias = "dispatch-proof",
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 2)]
     public static int Run()
     {
         DispatchBase instance = new DispatchLeaf("leaf");
-        Console.WriteLine(instance.BuildMessage());
+        var message = instance.BuildMessage();
+        Assert.Equal("Dispatch native proof: leaf.", message);
         return 0;
     }
 }

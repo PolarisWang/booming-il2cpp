@@ -250,20 +250,14 @@ class Phase9HotUpdateE2ETests(unittest.TestCase):
     def test_hot_update_skeleton_proof_runs_real_package_load_path(self) -> None:
         self.assertTrue(HOT_UPDATE_SKELETON_PROJECT_PATH.is_file(), msg=f"missing project: {HOT_UPDATE_SKELETON_PROJECT_PATH}")
         self.assertTrue(HOT_UPDATE_SKELETON_PROGRAM_PATH.is_file(), msg=f"missing program: {HOT_UPDATE_SKELETON_PROGRAM_PATH}")
+        source_text = HOT_UPDATE_SKELETON_PROGRAM_PATH.read_text(encoding="utf-8")
+        self.assertNotIn("Console.WriteLine", source_text)
 
         completed = run_checked(
             ["dotnet", "run", "--project", str(HOT_UPDATE_SKELETON_PROJECT_PATH), "-c", "Release", "--"],
             cwd=REPO_ROOT,
         )
-        output = completed.stdout
-
-        for required_fragment in [
-            "hot-update-skeleton-load=true",
-            "hot-update-skeleton-dispatch=7",
-            "hot-update-skeleton-mode=mixed",
-            "hot-update-skeleton-after-rollback=3",
-        ]:
-            self.assertIn(required_fragment, output)
+        self.assertEqual("", completed.stdout.strip())
 
     def test_method_replacement_proof_and_native_smoke_run_replace_call_revert_cycle(self) -> None:
         self.assertTrue(METHOD_REPLACEMENT_PROOF_PROJECT_PATH.is_file(), msg=f"missing project: {METHOD_REPLACEMENT_PROOF_PROJECT_PATH}")

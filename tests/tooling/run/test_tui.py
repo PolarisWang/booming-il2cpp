@@ -991,6 +991,7 @@ class TuiUnifiedMenuTests(unittest.TestCase):
 
     def test_render_test_all_preview_screen_summarizes_batch(self) -> None:
         tui_module = load_tui_module()
+        subject_id = "FixtureSubject"
 
         screen = tui_module.render_test_all_preview_screen(
             {
@@ -1000,7 +1001,7 @@ class TuiUnifiedMenuTests(unittest.TestCase):
                     "smoke": {"total": 1},
                     "contract": {"total": 1},
                 },
-                "subjectPreview": ["SolutionCorePack"],
+                "subjectPreview": [subject_id],
                 "outputPaths": {
                     "summaryPath": "artifacts/logs/tests/<run-id>/summary.json",
                     "eventsPath": "artifacts/logs/tests/<run-id>/events.jsonl",
@@ -1013,7 +1014,7 @@ class TuiUnifiedMenuTests(unittest.TestCase):
         self.assertIn("Host: windows", screen)
         self.assertIn("Planned: 3 = 2 suites + 1 subjects", screen)
         self.assertIn("Families: contract 1 | smoke 1", screen)
-        self.assertIn("Subjects: SolutionCorePack", screen)
+        self.assertIn(f"Subjects: {subject_id}", screen)
         self.assertIn("artifacts/logs/tests/<run-id>/summary.json", screen)
 
     def test_run_test_submenu_routes_subject_entry_to_third_level_subject_menu(self) -> None:
@@ -1032,11 +1033,11 @@ class TuiUnifiedMenuTests(unittest.TestCase):
                 with patch.object(
                     tui_module,
                     "run_test_subject_submenu",
-                    return_value=["test", "subject", "--id", "subject/SolutionCorePack"],
+                    return_value=["test", "subject", "--id", "subject/FixtureSubject"],
                 ) as run_test_subject_submenu:
                     argv = tui_module.run_test_submenu(manifest, "windows", terminal=fake_terminal)
 
-        self.assertEqual(["test", "subject", "--id", "subject/SolutionCorePack"], argv)
+        self.assertEqual(["test", "subject", "--id", "subject/FixtureSubject"], argv)
         run_test_subject_submenu.assert_called_once_with(
             manifest,
             "windows",

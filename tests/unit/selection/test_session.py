@@ -67,8 +67,8 @@ class SessionTests(unittest.TestCase):
                 "supported_hosts": list(suite_spec["supported_hosts"]),
                 "execution": {
                     "kind": "smoke-run",
-                    "project_path": "subjects/SolutionCorePack/source/Slices/HelloWorld/HelloWorld.csproj",
-                    "dll_path": "subjects/SolutionCorePack/source/Slices/HelloWorld/bin/Release/net8.0/HelloWorld.dll",
+                    "project_path": "tests/fixtures/public-smoke/HelloWorld/HelloWorld.csproj",
+                    "dll_path": "tests/fixtures/public-smoke/HelloWorld/bin/Release/net8.0/HelloWorld.dll",
                     "expected_patterns": ["HelloWorld smoke entry reached."],
                 },
             },

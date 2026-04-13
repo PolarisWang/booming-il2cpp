@@ -171,81 +171,6 @@ def add_legacy_test_migration_guidance(command: dict, result: CommandResult) -> 
     )
 
 
-def build_removed_command_migration_guidance(
-    command_text: str,
-    host_platform: str,
-    options: dict[str, object] | None = None,
-) -> CommandResult | None:
-    normalized_command = command_text.strip()
-    legacy_smoke_suite_replacements = {
-        "HelloWorld": "managed-entry-basic",
-        "GenericEcho": "managed-generics-basic",
-        "ReflectionLite": "reflection-basic",
-        "PInvokeLite": "native-interop-basic",
-        "HostEmbeddingLite": "host-embedding-basic",
-    }
-
-    smoke_build_prefix = "build smoke "
-    smoke_test_prefix = "test smoke "
-    workflow_legacy_prefix = "test workflow roadmap-0-"
-
-    replacement_syntax: str | None = None
-    target: str | None = None
-
-    if normalized_command.startswith(smoke_build_prefix):
-        suite = normalized_command.removeprefix(smoke_build_prefix).strip()
-        replacement_suite = legacy_smoke_suite_replacements.get(suite, suite)
-        if test_commands.find_public_test_suite_spec("smoke", replacement_suite) is not None:
-            replacement_syntax = f"test smoke {replacement_suite} --stage build"
-            target = replacement_suite
-    elif normalized_command.startswith(smoke_test_prefix):
-        suite = normalized_command.removeprefix(smoke_test_prefix).strip()
-        replacement_suite = legacy_smoke_suite_replacements.get(suite, suite)
-        if test_commands.find_public_test_suite_spec("smoke", replacement_suite) is not None:
-            replacement_syntax = f"test smoke {replacement_suite}"
-            target = replacement_suite
-    elif normalized_command.startswith(workflow_legacy_prefix):
-        suffix = normalized_command.removeprefix(workflow_legacy_prefix).strip()
-        if suffix in {"windows", "macos"}:
-            replacement_syntax = f"test workflow runtime-baseline-{suffix}"
-            target = suffix
-    elif normalized_command == "verify roadmap-0":
-        requested_host = str((options or {}).get("host") or "").strip().lower()
-        if requested_host in {"windows", "macos"}:
-            replacement_syntax = f"test workflow runtime-baseline-{requested_host}"
-        elif host_platform in {"windows", "macos"}:
-            replacement_syntax = f"test workflow runtime-baseline-{host_platform}"
-        else:
-            replacement_syntax = "test workflow runtime-baseline-windows|macos"
-        target = requested_host or None
-    else:
-        return None
-
-    requested_host = str((options or {}).get("host") or "").strip().lower()
-
-    text = (
-        f"Removed command: {normalized_command}\n"
-        f"Use `run {replacement_syntax}` instead.\n"
-    )
-    payload: dict[str, object] = {
-        "migration": {
-            "removedCommand": normalized_command,
-            "replacementSyntax": replacement_syntax,
-        }
-    }
-    if requested_host:
-        payload["migration"]["requestedHost"] = requested_host
-
-    return CommandResult.failure(
-        command=normalized_command,
-        host_platform=host_platform,
-        target=target,
-        errors=[f"removed command: {normalized_command}"],
-        payload=payload,
-        text=text,
-    )
-
-
 def attach_operation_report(
     result: CommandResult,
     *,
@@ -315,9 +240,6 @@ def execute_command(
     progress_callback: Callable[[dict], None] | None = None,
 ) -> CommandResult:
     if command is None:
-        migration_result = build_removed_command_migration_guidance(command_text, host_platform, options)
-        if migration_result is not None:
-            return migration_result
         return CommandResult.failure(
             command=command_text,
             host_platform=host_platform,

@@ -7,20 +7,19 @@ internal static class ConversionOpsProofEntry
     [ChaosUnitTest(
         ChaosUnitCategory.RuntimeContract,
         Alias = "conversion-ops-proof",
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 2)]
     public static int Run()
     {
         int i = 300;
-        Console.WriteLine("conv-i1=" + (sbyte)i);
-        Console.WriteLine("conv-i2=" + (short)i);
-        Console.WriteLine("conv-u1=" + (byte)i);
-        Console.WriteLine("conv-u2=" + (ushort)i);
-        Console.WriteLine("conv-i8=" + (long)i);
-        Console.WriteLine("conv-r4=" + ((float)i).ToString("F1"));
-        Console.WriteLine("conv-r8=" + ((double)i).ToString("F1"));
+        Assert.Equal((sbyte)44, (sbyte)i);
+        Assert.Equal((short)300, (short)i);
+        Assert.Equal((byte)44, (byte)i);
+        Assert.Equal((ushort)300, (ushort)i);
+        Assert.Equal(300L, (long)i);
+        Assert.Equal("300.0", ((float)i).ToString("F1"));
+        Assert.Equal("300.0", ((double)i).ToString("F1"));
         double d = 3.7;
-        Console.WriteLine("conv-i4-from-r8=" + (int)d);
+        Assert.Equal(3, (int)d);
         return 0;
     }
 }

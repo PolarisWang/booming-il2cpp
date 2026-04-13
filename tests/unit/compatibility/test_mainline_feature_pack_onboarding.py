@@ -19,6 +19,7 @@ SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
 SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "Slices" / "MainlineFeaturePack" / "MainlineFeaturePack.csproj"
 SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Slices" / "MainlineFeaturePack" / "Program.cs"
+SOURCE_SLICE_ROOT = SUBJECT_ROOT / "source" / "Slices" / "MainlineFeaturePack"
 FRAMEWORK_PROJECT_REFERENCE = "../../../../../src/reference/Chaos.TestFramework/Chaos.TestFramework.csproj"
 PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
 PERF_BASELINE_PATH = SUBJECT_ROOT / "baselines" / "perf" / "windows-native-perf" / "windows.json"
@@ -110,6 +111,15 @@ class Phase4SolutionCorePackOnboardingTests(unittest.TestCase):
         self.assertTrue(PERF_BASELINE_PATH.is_file())
         self.assertIn("[ChaosUnitTest(", source_program_text)
         self.assertIn('Alias = "mainline-proof"', source_program_text)
+
+    def test_mainline_proof_sources_use_asserts_without_stdout_contracts(self) -> None:
+        proof_sources = [SOURCE_PROGRAM_PATH, *sorted(SOURCE_SLICE_ROOT.glob("*Proof.cs"))]
+
+        for source_path in proof_sources:
+            source_text = source_path.read_text(encoding="utf-8")
+            self.assertIn("Assert.", source_text, msg=f"missing Assert usage: {source_path}")
+            self.assertNotIn("Console.WriteLine", source_text, msg=f"stdout contract leaked into {source_path}")
+            self.assertNotIn("ChaosEvidenceKind.Stdout", source_text, msg=f"stdout evidence leaked into {source_path}")
 
     def test_solution_core_pack_mainline_trace_export_matches_windows_snapshot(self) -> None:
         temp_root = Path(tempfile.mkdtemp(prefix="trace-export-", dir=str(TEST_TMP_ROOT)))

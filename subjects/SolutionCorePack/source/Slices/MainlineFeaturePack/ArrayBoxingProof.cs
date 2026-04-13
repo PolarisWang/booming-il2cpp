@@ -15,12 +15,12 @@ internal static class ArrayBoxingProofEntry
     [ChaosUnitTest(
         ChaosUnitCategory.RuntimeContract,
         Alias = "array-boxing-proof",
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 4)]
     public static int Run()
     {
         BoxingSink.Consume(42);
-        Console.WriteLine(new FeatureBanner[] { new("array boxing proof") }[0].BuildMessage());
+        var message = new FeatureBanner[] { new("array boxing proof") }[0].BuildMessage();
+        Assert.Equal("Mainline native proof: array boxing proof.", message);
         return 0;
     }
 }

@@ -6,8 +6,9 @@ import shutil
 import sys
 import unittest
 from pathlib import Path
+from typing import Any
 
-from tests.support import select_subject_record
+from tests.support import clone_registry_fixture_tree, make_temp_repo_root, materialize_subject_manifest, write_json
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -29,17 +30,109 @@ def load_module(path: Path, module_name: str):
     return module
 
 
+def make_stage(
+    stage_id: str,
+    kind: str,
+    bucket: str,
+    *,
+    scope: str = "matrix",
+    depends_on: list[str] | None = None,
+) -> dict[str, Any]:
+    return {
+        "stageId": stage_id,
+        "kind": kind,
+        "scope": scope,
+        "bucket": bucket,
+        "dependsOn": list(depends_on or []),
+    }
+
+
+def make_pipeline(pipeline_id: str, stages: list[dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "pipelineId": pipeline_id,
+        "displayName": pipeline_id,
+        "stages": list(stages),
+    }
+
+
+def build_registry_subject_manifest(
+    subject_id: str,
+    *,
+    default_goal: str,
+    default_matrix: str,
+    execution_pipelines: list[dict[str, Any]],
+    environment_matrices: list[dict[str, Any]],
+    default_validation_profile: str = "proof-dev",
+    validation_profiles: dict[str, list[str]] | None = None,
+    validation: dict[str, dict[str, Any]] | None = None,
+    source_path: str | None = None,
+    primary_project_path: str | None = None,
+    entry: str | None = None,
+    category: str = "canonical",
+    source_model: str = "dotnet-project-set",
+    dependency_model: str = "project-reference",
+    executable_plan: str = "generated-native",
+    engineering_profile: str = "native-executable",
+    availability: dict[str, str] | None = None,
+    workload_entry: str | None = None,
+    test_declaration_mode: str = "none",
+) -> dict[str, Any]:
+    resolved_source_path = source_path or f"subjects/{subject_id}/source/{subject_id}.csproj"
+    resolved_primary_project_path = primary_project_path or resolved_source_path
+    resolved_validation_profiles = validation_profiles or {default_validation_profile: ["proof"]}
+    resolved_validation = validation or {
+        "proof": {
+            "kind": "proof",
+            "defaultVariant": "CHECK",
+        }
+    }
+    manifest = {
+        "subjectId": subject_id,
+        "displayName": subject_id,
+        "category": category,
+        "defaultGoal": default_goal,
+        "defaultMatrix": default_matrix,
+        "defaultValidationProfile": default_validation_profile,
+        "sourceModel": source_model,
+        "dependencyModel": dependency_model,
+        "executablePlan": executable_plan,
+        "engineeringProfile": engineering_profile,
+        "availability": availability or {},
+        "testDeclarationMode": test_declaration_mode,
+        "source": {
+            "type": "dotnet-project",
+            "path": resolved_source_path,
+            "primaryProjectPath": resolved_primary_project_path,
+            "entry": entry or f"{subject_id}/Program::Main()",
+        },
+        "validationProfiles": resolved_validation_profiles,
+        "validation": resolved_validation,
+        "executionPipelines": list(execution_pipelines),
+        "environmentMatrices": list(environment_matrices),
+    }
+    if workload_entry:
+        manifest["workloadEntry"] = workload_entry
+    return manifest
+
+
+def create_registry_repo(
+    prefix: str,
+    *,
+    subjects: list[dict[str, Any]],
+    copy_registry_fixtures: bool = False,
+) -> Path:
+    repo_root = make_temp_repo_root("registry-scan", prefix)
+    if copy_registry_fixtures:
+        clone_registry_fixture_tree(repo_root)
+    for manifest in subjects:
+        materialize_subject_manifest(repo_root, manifest)
+    return repo_root
+
+
 class RegistryScanTests(unittest.TestCase):
     def test_registry_scan_collects_suites_modules_systems_and_pipelines(self) -> None:
         registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry")
         specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "chaos_run_public_specs")
-        windows_only_subject = select_subject_record(
-            "chaos_registry_scan_windows_only_subject",
-            category="canonical",
-            source_type="dotnet-project",
-            required_stage_kinds=["interpreter-runtime-perf"],
-            required_host_platforms=["windows-x64"],
-        )
 
         index = registry_module.scan_registry(
             REPO_ROOT,
@@ -82,108 +175,274 @@ class RegistryScanTests(unittest.TestCase):
         self.assertNotIn("system/windows-reference-gate", object_ids)
         self.assertIn("subject/HotUpdateHostPack", object_ids)
         self.assertIn("subject/SolutionCorePack", object_ids)
-        self.assertNotIn(f"subject/{windows_only_subject['subjectId']}", object_ids)
+
+    def test_registry_scan_filters_subjects_by_host_for_synthetic_repo(self) -> None:
+        registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_host_filtering")
+        windows_subject = build_registry_subject_manifest(
+            "FixtureWindowsOnlySubject",
+            default_goal="correctness.dev",
+            default_matrix="windows-proof",
+            executable_plan="managed-host",
+            engineering_profile="managed-output",
+            execution_pipelines=[
+                make_pipeline(
+                    "proof-runtime-output",
+                    [
+                        make_stage("host-input-build", "host-input-build", "host-input", scope="shared"),
+                        make_stage("runtime-managed-output", "runtime-managed-output", "runtime", depends_on=["host-input-build"]),
+                        make_stage("report-assemble", "report-assemble", "report", depends_on=["runtime-managed-output"]),
+                    ],
+                )
+            ],
+            environment_matrices=[
+                {
+                    "matrixId": "windows-proof",
+                    "pipelineId": "proof-runtime-output",
+                    "supportedGoals": ["correctness.dev"],
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                    },
+                }
+            ],
+        )
+        macos_subject = build_registry_subject_manifest(
+            "FixtureMacosOnlySubject",
+            default_goal="correctness.dev",
+            default_matrix="macos-proof",
+            executable_plan="managed-host",
+            engineering_profile="managed-output",
+            execution_pipelines=[
+                make_pipeline(
+                    "proof-runtime-output",
+                    [
+                        make_stage("host-input-build", "host-input-build", "host-input", scope="shared"),
+                        make_stage("runtime-managed-output", "runtime-managed-output", "runtime", depends_on=["host-input-build"]),
+                        make_stage("report-assemble", "report-assemble", "report", depends_on=["runtime-managed-output"]),
+                    ],
+                )
+            ],
+            environment_matrices=[
+                {
+                    "matrixId": "macos-proof",
+                    "pipelineId": "proof-runtime-output",
+                    "supportedGoals": ["correctness.dev"],
+                    "executionContext": {
+                        "hostPlatform": "macos-arm64",
+                        "targetPlatform": "macos-arm64",
+                    },
+                }
+            ],
+        )
+
+        repo_root = create_registry_repo(
+            "host-filtering",
+            subjects=[windows_subject, macos_subject],
+        )
+
+        try:
+            windows_index = registry_module.scan_registry(
+                repo_root,
+                host_platform="windows",
+                public_suite_specs=[],
+            )
+            macos_index = registry_module.scan_registry(
+                repo_root,
+                host_platform="macos",
+                public_suite_specs=[],
+            )
+
+            self.assertEqual(["subject/FixtureWindowsOnlySubject"], [item["id"] for item in windows_index.subjects])
+            self.assertEqual(["windows"], windows_index.subjects[0]["supportedHosts"])
+            self.assertEqual(["subject/FixtureMacosOnlySubject"], [item["id"] for item in macos_index.subjects])
+            self.assertEqual(["macos"], macos_index.subjects[0]["supportedHosts"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_registry_scan_collects_windows_android_gate_objects(self) -> None:
         registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_windows_android_gate")
         specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "chaos_run_public_specs_windows_android_gate")
-        canonical_subject = select_subject_record(
-            "chaos_registry_scan_canonical_subject",
-            category="canonical",
-            source_type="dotnet-project",
-            required_stage_kinds=["runtime-managed-output"],
-            required_host_platforms=["macos-arm64", "windows-x64"],
+        canonical_subject = build_registry_subject_manifest(
+            "FixtureManagedOutputSubject",
+            default_goal="correctness.dev",
+            default_matrix="windows-output",
+            source_model="dotnet-solution",
+            dependency_model="project-reference",
+            executable_plan="managed-host",
+            engineering_profile="managed-output",
+            availability={"windows-x64": "ready"},
+            execution_pipelines=[
+                make_pipeline(
+                    "managed-output",
+                    [
+                        make_stage("host-input-build", "host-input-build", "host-input", scope="shared"),
+                        make_stage("runtime-managed-output", "runtime-managed-output", "runtime", depends_on=["host-input-build"]),
+                        make_stage("report-assemble", "report-assemble", "report", depends_on=["runtime-managed-output"]),
+                    ],
+                )
+            ],
+            environment_matrices=[
+                {
+                    "matrixId": "windows-output",
+                    "pipelineId": "managed-output",
+                    "supportedGoals": ["correctness.dev"],
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                    },
+                }
+            ],
+            source_path="subjects/FixtureManagedOutputSubject/source/FixtureManagedOutputSubject.sln",
+            primary_project_path="subjects/FixtureManagedOutputSubject/source/App/App.csproj",
+            entry="FixtureManagedOutputSubject/Program::Main()",
         )
-        native_proof_subject = select_subject_record(
-            "chaos_registry_scan_windows_native_proof_subject",
-            category="canonical",
-            source_type="dotnet-project",
-            required_stage_kinds=["generated-native-proof"],
-            required_host_platforms=["windows-x64"],
+        native_proof_subject = build_registry_subject_manifest(
+            "FixtureNativeProofSubject",
+            default_goal="correctness.dev",
+            default_matrix="windows-native-proof",
+            source_model="dotnet-project-set",
+            dependency_model="project-reference",
+            executable_plan="generated-native",
+            engineering_profile="native-executable",
+            availability={"windows-x64": "ready"},
+            execution_pipelines=[
+                make_pipeline(
+                    "native-proof",
+                    [
+                        make_stage("analysis-frontend", "analysis-frontend", "analysis", scope="shared"),
+                        make_stage("generated-native-proof", "generated-native-proof", "generated", scope="shared", depends_on=["analysis-frontend"]),
+                        make_stage("build-target", "build-target", "build", depends_on=["generated-native-proof"]),
+                        make_stage("runtime-observe", "runtime-observe", "runtime", depends_on=["build-target"]),
+                        make_stage("report-assemble", "report-assemble", "report", depends_on=["runtime-observe"]),
+                    ],
+                )
+            ],
+            environment_matrices=[
+                {
+                    "matrixId": "windows-native-proof",
+                    "pipelineId": "native-proof",
+                    "supportedGoals": ["correctness.dev"],
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                    },
+                }
+            ],
         )
-        benchmark_subject = select_subject_record(
-            "chaos_registry_scan_benchmark_subject",
-            category="canonical",
-            source_type="dotnet-project",
-            required_goal_ids=["perf.release"],
-            required_validation_kinds=["perf"],
-            required_stage_kinds=["interpreter-runtime-perf"],
-            required_host_platforms=["windows-x64"],
+        benchmark_subject = build_registry_subject_manifest(
+            "FixtureInterpreterPerfSubject",
+            default_goal="perf.release",
+            default_matrix="windows-interpreter-perf",
+            default_validation_profile="perf-profile",
+            validation_profiles={"perf-profile": ["perf"]},
+            validation={
+                "perf": {
+                    "kind": "perf",
+                    "defaultVariant": "PROFILE",
+                    "driver": "native-runtime-perf",
+                }
+            },
+            source_model="dotnet-project-set",
+            dependency_model="project-reference",
+            executable_plan="generated-native",
+            engineering_profile="native-executable",
+            availability={"windows-x64": "ready"},
+            execution_pipelines=[
+                make_pipeline(
+                    "interpreter-perf",
+                    [
+                        make_stage("analysis-frontend", "analysis-frontend", "analysis", scope="shared"),
+                        make_stage("generated-native-proof", "generated-native-proof", "generated", scope="shared", depends_on=["analysis-frontend"]),
+                        make_stage("interpreter-runtime-perf", "interpreter-runtime-perf", "runtime", depends_on=["generated-native-proof"]),
+                        make_stage("report-assemble", "report-assemble", "report", depends_on=["interpreter-runtime-perf"]),
+                    ],
+                )
+            ],
+            environment_matrices=[
+                {
+                    "matrixId": "windows-interpreter-perf",
+                    "pipelineId": "interpreter-perf",
+                    "supportedGoals": ["perf.release"],
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                    },
+                }
+            ],
+            workload_entry="FixtureInterpreterPerfSubject/Benchmarks::RunWorkload()",
+        )
+        repo_root = create_registry_repo(
+            "windows-android-gates",
+            subjects=[canonical_subject, native_proof_subject, benchmark_subject],
+            copy_registry_fixtures=True,
         )
 
-        index = registry_module.scan_registry(
-            REPO_ROOT,
-            host_platform="windows",
-            public_suite_specs=specs_module.PUBLIC_TEST_SPECS,
-        )
+        try:
+            index = registry_module.scan_registry(
+                repo_root,
+                host_platform="windows",
+                public_suite_specs=specs_module.PUBLIC_TEST_SPECS,
+            )
 
-        object_ids = {item["id"] for item in index.flat_items}
-        self.assertIn("gate/android-arm64-smoke", object_ids)
-        self.assertIn("gate/windows-reference-desktop", object_ids)
-        self.assertIn("system/android-startup-gate", object_ids)
-        self.assertIn("system/windows-reference-gate", object_ids)
-        self.assertIn(f"subject/{canonical_subject['subjectId']}", object_ids)
-        self.assertIn(f"subject/{native_proof_subject['subjectId']}", object_ids)
-        self.assertIn(f"subject/{benchmark_subject['subjectId']}", object_ids)
-        self.assertNotIn("subject/SolutionSimpleLib", object_ids)
-        self.assertNotIn("subject/SolutionMultiProject", object_ids)
-        self.assertNotIn("subject/SolutionPackageReference", object_ids)
-        self.assertNotIn("subject/GoldenMultiProject", object_ids)
-        self.assertNotIn("system/linux-packaging-gate-macos-only", object_ids)
-        canonical_item = next(
-            item for item in index.flat_items if item["id"] == f"subject/{canonical_subject['subjectId']}"
-        )
-        self.assertEqual("canonical", canonical_item["category"])
-        self.assertEqual("correctness.dev", canonical_item["defaultGoalId"])
-        self.assertEqual(str(canonical_subject["manifest"]["defaultMatrix"]), canonical_item["defaultMatrixId"])
-        self.assertEqual(canonical_subject["manifest"]["sourceModel"], canonical_item["sourceModel"])
-        self.assertEqual(canonical_subject["manifest"]["engineeringProfile"], canonical_item["engineeringProfile"])
-        subject_item = next(
-            item for item in index.flat_items if item["id"] == f"subject/{native_proof_subject['subjectId']}"
-        )
-        self.assertEqual("subject", subject_item["type"])
-        self.assertEqual(
-            f"run test subject --id subject/{native_proof_subject['subjectId']}",
-            subject_item["canonicalCommand"],
-        )
-        expected_supported_hosts = sorted(
-            {
-                "windows" if str(host).startswith("windows")
-                else "macos" if str(host).startswith("macos")
-                else str(host)
-                for host in native_proof_subject["capabilities"]["hostPlatforms"]
-            }
-        )
-        self.assertEqual(expected_supported_hosts, sorted(subject_item["supportedHosts"]))
-        benchmark_item = next(
-            item for item in index.flat_items if item["id"] == f"subject/{benchmark_subject['subjectId']}"
-        )
-        self.assertEqual("canonical", benchmark_item["category"])
-        self.assertEqual(str(benchmark_subject["manifest"]["defaultGoal"]), benchmark_item["defaultGoalId"])
-        self.assertEqual(str(benchmark_subject["manifest"]["defaultMatrix"]), benchmark_item["defaultMatrixId"])
-        self.assertEqual(benchmark_subject["manifest"]["executablePlan"], benchmark_item["executablePlan"])
-        self.assertEqual(benchmark_subject["manifest"]["availability"], benchmark_item["availability"])
-        self.assertEqual(
-            f"run test subject --id subject/{benchmark_subject['subjectId']}",
-            benchmark_item["canonicalCommand"],
-        )
-        self.assertEqual(sorted(str(value) for value in benchmark_subject["capabilities"]["goalIds"]), sorted(benchmark_item["goalIds"]))
+            object_ids = {item["id"] for item in index.flat_items}
+            self.assertIn("gate/android-arm64-smoke", object_ids)
+            self.assertIn("gate/windows-reference-desktop", object_ids)
+            self.assertIn("system/android-startup-gate", object_ids)
+            self.assertIn("system/windows-reference-gate", object_ids)
+            self.assertEqual(
+                {
+                    "subject/FixtureManagedOutputSubject",
+                    "subject/FixtureNativeProofSubject",
+                    "subject/FixtureInterpreterPerfSubject",
+                },
+                {item["id"] for item in index.subjects},
+            )
+            self.assertNotIn("system/linux-packaging-gate-macos-only", object_ids)
 
-        analysis_module_item = next(item for item in index.flat_items if item["id"] == "module/analysis/basic")
-        runtime_baseline_item = next(item for item in index.flat_items if item["id"] == "system/windows-reference-gate")
-        completion_pipeline_item = next(item for item in index.flat_items if item["id"] == "pipeline/completion-runtime-core")
-        self.assertIn(
-            "tests/fixtures/registry/modules/analysis/basic/verification.manifest.json",
-            analysis_module_item["manifestPath"].replace("\\", "/"),
-        )
-        self.assertIn(
-            "tests/fixtures/registry/systems/windows-reference-gate/scenario.manifest.json",
-            runtime_baseline_item["manifestPath"].replace("\\", "/"),
-        )
-        self.assertIn(
-            "tests/fixtures/registry/pipelines/completion-runtime-core/pipeline.manifest.json",
-            completion_pipeline_item["manifestPath"].replace("\\", "/"),
-        )
+            canonical_item = next(item for item in index.flat_items if item["id"] == "subject/FixtureManagedOutputSubject")
+            self.assertEqual("canonical", canonical_item["category"])
+            self.assertEqual("correctness.dev", canonical_item["defaultGoalId"])
+            self.assertEqual("windows-output", canonical_item["defaultMatrixId"])
+            self.assertEqual("dotnet-solution", canonical_item["sourceModel"])
+            self.assertEqual("managed-output", canonical_item["engineeringProfile"])
+
+            subject_item = next(item for item in index.flat_items if item["id"] == "subject/FixtureNativeProofSubject")
+            self.assertEqual("subject", subject_item["type"])
+            self.assertEqual(
+                "run test subject --id subject/FixtureNativeProofSubject",
+                subject_item["canonicalCommand"],
+            )
+            self.assertEqual(["windows"], sorted(subject_item["supportedHosts"]))
+
+            benchmark_item = next(item for item in index.flat_items if item["id"] == "subject/FixtureInterpreterPerfSubject")
+            self.assertEqual("canonical", benchmark_item["category"])
+            self.assertEqual("perf.release", benchmark_item["defaultGoalId"])
+            self.assertEqual("windows-interpreter-perf", benchmark_item["defaultMatrixId"])
+            self.assertEqual("generated-native", benchmark_item["executablePlan"])
+            self.assertEqual({"windows-x64": "ready"}, benchmark_item["availability"])
+            self.assertEqual(
+                "run test subject --id subject/FixtureInterpreterPerfSubject",
+                benchmark_item["canonicalCommand"],
+            )
+            self.assertEqual(["perf.release"], sorted(benchmark_item["goalIds"]))
+
+            analysis_module_item = next(item for item in index.flat_items if item["id"] == "module/analysis/basic")
+            runtime_baseline_item = next(item for item in index.flat_items if item["id"] == "system/windows-reference-gate")
+            completion_pipeline_item = next(item for item in index.flat_items if item["id"] == "pipeline/completion-runtime-core")
+            self.assertIn(
+                "tests/fixtures/registry/modules/analysis/basic/verification.manifest.json",
+                analysis_module_item["manifestPath"].replace("\\", "/"),
+            )
+            self.assertIn(
+                "tests/fixtures/registry/systems/windows-reference-gate/scenario.manifest.json",
+                runtime_baseline_item["manifestPath"].replace("\\", "/"),
+            )
+            self.assertIn(
+                "tests/fixtures/registry/pipelines/completion-runtime-core/pipeline.manifest.json",
+                completion_pipeline_item["manifestPath"].replace("\\", "/"),
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_pipeline_execution_plan_deduplicates_suite_runs(self) -> None:
         registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_for_pipeline_plan")
@@ -294,7 +553,7 @@ class RegistryScanTests(unittest.TestCase):
 
     def test_registry_scan_collects_subjects_declared_by_shared_orchestration_profiles(self) -> None:
         registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_shared_profiles")
-        repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "registry-scan" / "shared-profiles"
+        repo_root = make_temp_repo_root("registry-scan", "shared-profiles")
         manifest_path = repo_root / "subjects" / "FixtureSharedRegistry" / "subject.manifest.json"
         pipeline_profile_path = repo_root / "testing" / "orchestration" / "pipelines" / "proof-core.json"
         matrix_profile_path = repo_root / "testing" / "orchestration" / "matrices" / "proof-core.json"
@@ -373,9 +632,9 @@ class RegistryScanTests(unittest.TestCase):
         }
 
         try:
-            pipeline_profile_path.write_text(json.dumps(pipeline_profile, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-            matrix_profile_path.write_text(json.dumps(matrix_profile, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            write_json(pipeline_profile_path, pipeline_profile)
+            write_json(matrix_profile_path, matrix_profile)
+            write_json(manifest_path, manifest)
 
             index = registry_module.scan_registry(
                 repo_root,

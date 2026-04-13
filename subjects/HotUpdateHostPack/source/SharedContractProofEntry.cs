@@ -8,14 +8,12 @@ internal static class SharedContractProofEntry
         ChaosUnitCategory.HotUpdateContract,
         Alias = "shared-contract-proof",
         Requires = ChaosRuntimeFeature.HotUpdate,
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 2)]
     public static int Run()
     {
         var witness = new ContractIdentityWitness();
-        Console.WriteLine("SharedContractProof entry reached.");
-        Console.WriteLine("args=0");
-        Console.WriteLine($"ping={witness.Ping(41)}");
+        var ping = witness.Ping(41);
+        Assert.Equal(42, ping);
         return 0;
     }
 

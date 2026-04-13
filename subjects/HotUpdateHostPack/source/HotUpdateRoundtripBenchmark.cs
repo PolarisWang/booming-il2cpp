@@ -14,6 +14,7 @@ internal static class HotUpdateRoundtripBenchmarkEntry
         ChaosMetric.WallClockUs,
         Alias = "hot-update-roundtrip-bench",
         Requires = ChaosRuntimeFeature.HotUpdate,
+        Modes = ChaosExecutionMode.Managed,
         WarmupCount = 1,
         IterationCount = 30,
         InvocationCount = 1)]

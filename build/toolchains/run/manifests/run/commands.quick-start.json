@@ -41,7 +41,7 @@
       "kind": "il2cpp-convert",
       "syntax": "convert subject --id <SubjectId> [--output <dir>]",
       "show_in_menu": true,
-      "examples": ["run convert subject --id HelloWorldObject"]
+      "examples": ["run convert subject --id SolutionCorePack"]
     },
     {
       "id": "generate-all",

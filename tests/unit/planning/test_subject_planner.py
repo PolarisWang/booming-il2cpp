@@ -8,13 +8,12 @@ import unittest
 import uuid
 from pathlib import Path
 
-from tests.support import make_temp_repo_root, materialize_subject_manifest
+from tests.support import clone_fixture_subject_repo, make_temp_repo_root, materialize_subject_manifest
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 PLANNER_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_planner.py"
 SUBJECTS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subjects.py"
-FIXTURE_SUBJECTS_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects"
 
 
 def load_module(path: Path, module_name: str):
@@ -33,32 +32,6 @@ def load_module(path: Path, module_name: str):
 
 def load_subjects_module(module_name: str):
     return load_module(SUBJECTS_MODULE_PATH, module_name)
-
-
-def _rewrite_fixture_manifest_paths(payload: object, fixture_subject_id: str) -> object:
-    prefix = f"tests/fixtures/subjects/{fixture_subject_id}/"
-    replacement = f"subjects/{fixture_subject_id}/"
-    if isinstance(payload, dict):
-        return {
-            key: _rewrite_fixture_manifest_paths(value, fixture_subject_id)
-            for key, value in payload.items()
-        }
-    if isinstance(payload, list):
-        return [_rewrite_fixture_manifest_paths(value, fixture_subject_id) for value in payload]
-    if isinstance(payload, str) and payload.startswith(prefix):
-        return replacement + payload.removeprefix(prefix)
-    return payload
-
-
-def clone_fixture_subject_repo(fixture_subject_id: str) -> tuple[Path, dict]:
-    repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"{fixture_subject_id}-{uuid.uuid4().hex}"
-    subject_root = repo_root / "subjects" / fixture_subject_id
-    shutil.copytree(FIXTURE_SUBJECTS_ROOT / fixture_subject_id, subject_root)
-    manifest_path = subject_root / "subject.manifest.json"
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    manifest = _rewrite_fixture_manifest_paths(manifest, fixture_subject_id)
-    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    return repo_root, manifest
 
 
 def expected_matrix_for_goal(manifest: dict, goal_id: str) -> dict:
@@ -312,6 +285,46 @@ def build_managed_output_subject_manifest(subject_id: str = "FixtureManagedOutpu
     }
 
 
+def build_solution_style_managed_perf_subject_manifest(
+    subject_id: str = "FixtureSolutionStylePerfSubject",
+    *,
+    source_entry: str | None = None,
+    workload_entry: str | None = None,
+    matrix_source_entry: str | None = None,
+    matrix_workload_entry: str | None = None,
+) -> dict:
+    manifest = build_managed_perf_subject_manifest(subject_id)
+    manifest["source"]["path"] = f"subjects/{subject_id}/source/{subject_id}.sln"
+    manifest["source"]["primaryProjectPath"] = f"subjects/{subject_id}/source/{subject_id}.csproj"
+    if source_entry is not None:
+        manifest["source"]["entry"] = source_entry
+    if workload_entry is not None:
+        manifest["workloadEntry"] = workload_entry
+    matrix = manifest["environmentMatrices"][0]
+    if matrix_source_entry is not None:
+        matrix["source"] = {"entry": matrix_source_entry}
+    if matrix_workload_entry is not None:
+        matrix["workloadEntry"] = matrix_workload_entry
+    return manifest
+
+
+def build_solution_style_managed_output_subject_manifest(
+    subject_id: str = "FixtureSolutionStyleOutputSubject",
+    *,
+    source_entry: str | None = None,
+    matrix_source_entry: str | None = None,
+) -> dict:
+    manifest = build_managed_output_subject_manifest(subject_id)
+    manifest["source"]["path"] = f"subjects/{subject_id}/source/{subject_id}.sln"
+    manifest["source"]["primaryProjectPath"] = f"subjects/{subject_id}/source/{subject_id}.csproj"
+    if source_entry is not None:
+        manifest["source"]["entry"] = source_entry
+    matrix = manifest["environmentMatrices"][0]
+    if matrix_source_entry is not None:
+        matrix["source"] = {"entry": matrix_source_entry}
+    return manifest
+
+
 class SubjectPlannerTests(unittest.TestCase):
     def test_planner_uses_subject_defaults_and_subject_artifact_layout(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_default")
@@ -508,114 +521,205 @@ class SubjectPlannerTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
-    def test_planner_surfaces_workload_entry_for_benchmark_subject(self) -> None:
+    def test_planner_surfaces_workload_entry_for_solution_style_benchmark_subject(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_workload_entry")
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            "SolutionCorePack",
-            goal_id="perf.release",
-            matrix_id="windows-native-perf",
-            run_id="20260413-solutioncorepack-workload-entry-001",
+        subject_id = "FixtureSolutionStyleBenchmarkSubject"
+        workload_entry = f"{subject_id}/Benchmarks::RunDefault()"
+        repo_root, manifest = create_subject_repo(
+            "solution-style-benchmark",
+            build_solution_style_managed_perf_subject_manifest(
+                subject_id,
+                source_entry=workload_entry,
+                workload_entry=workload_entry,
+            ),
         )
 
-        self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
-        self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
-        self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
+        try:
+            plan = planner_module.build_plan(
+                repo_root,
+                subject_id,
+                goal_id="perf.release",
+                matrix_id="windows-managed-perf",
+                run_id="20260413-solution-style-benchmark-workload-entry-001",
+            )
 
-    def test_planner_surfaces_explicit_workload_entry_for_hot_update_host_pack(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_hot_update_workload_entry")
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            "HotUpdateHostPack",
-            goal_id="correctness.dev",
-            matrix_id="windows-managed-output",
-            run_id="20260413-benchhotupdateload-workload-entry-001",
-            source_entry="HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
-            workload_entry="HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
+            self.assertEqual(str(manifest["subjectId"]), plan["selection"]["subjectId"])
+            self.assertEqual(str(manifest["source"]["path"]), plan["selection"]["source"]["path"])
+            self.assertEqual(str(manifest["source"]["primaryProjectPath"]), plan["selection"]["source"]["primaryProjectPath"])
+            self.assertEqual(workload_entry, plan["selection"]["source"]["entry"])
+            self.assertEqual(workload_entry, plan["selection"]["workloadEntry"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_planner_surfaces_explicit_workload_entry_for_solution_style_perf_subject(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_explicit_solution_workload_entry")
+        subject_id = "FixtureExplicitPerfSubject"
+        repo_root, manifest = create_subject_repo(
+            "explicit-solution-workload",
+            build_solution_style_managed_perf_subject_manifest(subject_id),
+        )
+        explicit_entry = f"{subject_id}/Benchmarks::RunHotPath()"
+
+        try:
+            plan = planner_module.build_plan(
+                repo_root,
+                subject_id,
+                goal_id="perf.release",
+                matrix_id="windows-managed-perf",
+                run_id="20260413-explicit-solution-workload-entry-001",
+                source_entry=explicit_entry,
+                workload_entry=explicit_entry,
+            )
+
+            self.assertEqual(str(manifest["subjectId"]), plan["selection"]["subjectId"])
+            self.assertEqual(str(manifest["source"]["path"]), plan["selection"]["source"]["path"])
+            self.assertEqual(str(manifest["source"]["primaryProjectPath"]), plan["selection"]["source"]["primaryProjectPath"])
+            self.assertEqual(explicit_entry, plan["selection"]["source"]["entry"])
+            self.assertEqual(explicit_entry, plan["selection"]["workloadEntry"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_planner_surfaces_matrix_workload_entry_for_solution_style_perf_subject(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_solution_style_matrix_workload_entry")
+        subject_id = "FixtureMatrixPerfSubject"
+        matrix_entry = f"{subject_id}/Benchmarks::RunMatrixDefault()"
+        repo_root, manifest = create_subject_repo(
+            "matrix-solution-workload",
+            build_solution_style_managed_perf_subject_manifest(
+                subject_id,
+                matrix_source_entry=matrix_entry,
+                matrix_workload_entry=matrix_entry,
+            ),
         )
 
-        self.assertEqual("HotUpdateHostPack", plan["selection"]["subjectId"])
-        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.sln", plan["selection"]["source"]["path"])
-        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj", plan["selection"]["source"]["primaryProjectPath"])
-        self.assertEqual("HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
-        self.assertEqual("HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
+        try:
+            plan = planner_module.build_plan(
+                repo_root,
+                subject_id,
+                goal_id="perf.release",
+                matrix_id="windows-managed-perf",
+                run_id="20260413-matrix-solution-workload-entry-001",
+            )
 
-    def test_planner_surfaces_default_workload_entry_for_hot_update_host_pack_perf(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_hot_update_default_perf_entry")
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            "HotUpdateHostPack",
-            goal_id="perf.release",
-            matrix_id="windows-managed-perf",
-            run_id="20260413-hotupdatehostpack-default-workload-entry-001",
+            self.assertEqual(str(manifest["subjectId"]), plan["selection"]["subjectId"])
+            self.assertEqual(str(manifest["source"]["path"]), plan["selection"]["source"]["path"])
+            self.assertEqual(str(manifest["source"]["primaryProjectPath"]), plan["selection"]["source"]["primaryProjectPath"])
+            self.assertEqual(matrix_entry, plan["selection"]["source"]["entry"])
+            self.assertEqual(matrix_entry, plan["selection"]["workloadEntry"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_planner_surfaces_native_perf_override_for_solution_style_perf_subject(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_solution_style_native_perf_entry")
+        subject_id = "FixtureNativePerfSubject"
+        native_entry = f"{subject_id}/Benchmarks::RunNativePerf()"
+        manifest = build_solution_style_managed_perf_subject_manifest(subject_id)
+        manifest["executionPipelines"].append(
+            {
+                "pipelineId": "native-benchmark",
+                "stages": [
+                    {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source", "dependsOn": []},
+                    {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input", "dependsOn": ["source-resolve"]},
+                    {"stageId": "build-target", "kind": "build-target", "scope": "matrix", "bucket": "build", "dependsOn": ["host-input-build"]},
+                    {"stageId": "native-runtime-perf", "kind": "native-runtime-perf", "scope": "matrix", "bucket": "runtime", "dependsOn": ["build-target"]},
+                    {"stageId": "report-assemble", "kind": "report-assemble", "scope": "matrix", "bucket": "report", "dependsOn": ["native-runtime-perf"]},
+                ],
+            }
+        )
+        manifest["environmentMatrices"].append(
+            {
+                "matrixId": "windows-native-perf",
+                "pipelineId": "native-benchmark",
+                "supportedGoals": ["perf.release"],
+                "source": {"entry": native_entry},
+                "workloadEntry": native_entry,
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "toolchainProfile": "msvc-reference",
+                    "runtimeProfile": "native-perf-profile",
+                },
+                "validationIntent": {
+                    "validationMode": "perf",
+                    "adaptationLevel": "native-runtime",
+                    "expectedOutcome": "pass",
+                },
+                "artifactPlan": {
+                    "requiredBuckets": ["source", "host-input", "build", "runtime", "report"],
+                    "evidenceTerminalBucket": "report",
+                },
+            }
+        )
+        repo_root, manifest = create_subject_repo("solution-style-native-perf", manifest)
+
+        try:
+            plan = planner_module.build_plan(
+                repo_root,
+                subject_id,
+                goal_id="perf.release",
+                matrix_id="windows-native-perf",
+                run_id="20260413-solution-style-native-perf-workload-entry-001",
+            )
+
+            self.assertEqual(str(manifest["subjectId"]), plan["selection"]["subjectId"])
+            self.assertEqual(str(manifest["source"]["path"]), plan["selection"]["source"]["path"])
+            self.assertEqual(str(manifest["source"]["primaryProjectPath"]), plan["selection"]["source"]["primaryProjectPath"])
+            self.assertEqual(native_entry, plan["selection"]["source"]["entry"])
+            self.assertEqual(native_entry, plan["selection"]["workloadEntry"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_planner_surfaces_explicit_proof_entry_for_solution_style_output_subject(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_solution_style_explicit_proof_entry")
+        subject_id = "FixtureExplicitProofSubject"
+        repo_root, manifest = create_subject_repo(
+            "explicit-solution-proof",
+            build_solution_style_managed_output_subject_manifest(subject_id),
+        )
+        explicit_entry = f"{subject_id}/Proofs::RunExplicit()"
+
+        try:
+            plan = planner_module.build_plan(
+                repo_root,
+                subject_id,
+                goal_id="correctness.dev",
+                matrix_id="windows-managed-output",
+                run_id="20260413-explicit-solution-proof-entry-001",
+                source_entry=explicit_entry,
+            )
+
+            self.assertEqual(str(manifest["subjectId"]), plan["selection"]["subjectId"])
+            self.assertEqual(explicit_entry, plan["selection"]["source"]["entry"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_planner_surfaces_matrix_proof_entry_for_solution_style_output_subject(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_solution_style_matrix_proof_entry")
+        subject_id = "FixtureMatrixProofSubject"
+        matrix_entry = f"{subject_id}/Proofs::RunMatrixDefault()"
+        repo_root, manifest = create_subject_repo(
+            "matrix-solution-proof",
+            build_solution_style_managed_output_subject_manifest(
+                subject_id,
+                matrix_source_entry=matrix_entry,
+            ),
         )
 
-        self.assertEqual("HotUpdateHostPack", plan["selection"]["subjectId"])
-        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.sln", plan["selection"]["source"]["path"])
-        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj", plan["selection"]["source"]["primaryProjectPath"])
-        self.assertEqual("HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
-        self.assertEqual("HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
+        try:
+            plan = planner_module.build_plan(
+                repo_root,
+                subject_id,
+                goal_id="correctness.dev",
+                matrix_id="windows-managed-output",
+                run_id="20260413-matrix-solution-proof-entry-001",
+            )
 
-    def test_planner_surfaces_workload_entry_for_mixed_execution_feature_pack(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mixed_execution_workload_entry")
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            "MixedExecutionFeaturePack",
-            goal_id="perf.release",
-            matrix_id="windows-managed-perf",
-            run_id="20260413-benchmixed-workload-entry-001",
-        )
-
-        self.assertEqual("MixedExecutionFeaturePack", plan["selection"]["subjectId"])
-        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln", plan["selection"]["source"]["path"])
-        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", plan["selection"]["source"]["primaryProjectPath"])
-        self.assertEqual("MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
-        self.assertEqual("MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
-
-    def test_planner_surfaces_native_perf_override_for_mixed_execution_feature_pack(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mixed_execution_native_perf_entry")
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            "MixedExecutionFeaturePack",
-            goal_id="perf.release",
-            matrix_id="windows-native-perf",
-            run_id="20260413-benchmixed-native-workload-entry-001",
-        )
-
-        self.assertEqual("MixedExecutionFeaturePack", plan["selection"]["subjectId"])
-        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln", plan["selection"]["source"]["path"])
-        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", plan["selection"]["source"]["primaryProjectPath"])
-        self.assertEqual("MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
-        self.assertEqual("MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
-
-    def test_planner_surfaces_explicit_proof_entry_for_hot_update_host_pack(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_hot_update_proof_shell")
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            "HotUpdateHostPack",
-            goal_id="correctness.dev",
-            matrix_id="windows-managed-output",
-            run_id="20260413-hotupdateskeletonproof-shell-entry-001",
-            source_entry="HotUpdateHostPack/HotUpdateSkeletonProofEntry::Run()",
-        )
-
-        self.assertEqual("HotUpdateHostPack", plan["selection"]["subjectId"])
-        self.assertEqual("HotUpdateHostPack/HotUpdateSkeletonProofEntry::Run()", plan["selection"]["source"]["entry"])
-
-    def test_planner_surfaces_entry_for_mixed_execution_feature_pack_proof(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mixed_execution_proof_shell")
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            "MixedExecutionFeaturePack",
-            goal_id="correctness.dev",
-            matrix_id="windows-managed-output",
-            run_id="20260413-mixedexecutionproof-shell-entry-001",
-        )
-
-        self.assertEqual("MixedExecutionFeaturePack", plan["selection"]["subjectId"])
-        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln", plan["selection"]["source"]["path"])
-        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", plan["selection"]["source"]["primaryProjectPath"])
-        self.assertEqual("MixedExecutionFeaturePack/MixedExecutionProofEntry::Run()", plan["selection"]["source"]["entry"])
+            self.assertEqual(str(manifest["subjectId"]), plan["selection"]["subjectId"])
+            self.assertEqual(str(manifest["source"]["path"]), plan["selection"]["source"]["path"])
+            self.assertEqual(str(manifest["source"]["primaryProjectPath"]), plan["selection"]["source"]["primaryProjectPath"])
+            self.assertEqual(matrix_entry, plan["selection"]["source"]["entry"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_planner_can_override_declared_unit_entry_and_emit_family_specific_report_roots(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_declared_unit_selection")

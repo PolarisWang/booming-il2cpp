@@ -36,6 +36,7 @@ class DeclaredTestEntry:
     method_signature: str = ""
     category: int = 0
     metrics: int = 0
+    modes: int = 0
     requires: int = 0
     evidence: int = 0
     priority: int = 0
@@ -82,6 +83,7 @@ def _normalize_declared_entries(
                 method_signature=str(payload.get("methodSignature") or payload.get("method_signature") or ""),
                 category=int(payload.get("category") or 0),
                 metrics=int(payload.get("metrics") or 0),
+                modes=int(payload.get("modes") or 0),
                 requires=int(payload.get("requires") or 0),
                 evidence=int(payload.get("evidence") or 0),
                 priority=int(payload.get("priority") or 0),

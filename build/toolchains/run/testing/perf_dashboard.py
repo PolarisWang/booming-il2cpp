@@ -55,7 +55,7 @@ def _status_counts(entries: list[dict[str, Any]]) -> dict[str, int]:
 
 def build_perf_dashboard_config(repo_root: Path) -> dict[str, Any]:
     entries: list[dict[str, Any]] = []
-    for record in subjects_module.load_subject_records(repo_root):
+    for record in subjects_module.discover_perf_subject_records(repo_root):
         subject_id = str(record["subjectId"])
         manifest = dict(record["manifest"])
         for matrix in list(manifest.get("environmentMatrices") or []):

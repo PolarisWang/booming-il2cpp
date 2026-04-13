@@ -5,7 +5,7 @@ import json
 import unittest
 from pathlib import Path
 
-from tests.support import load_public_specs_module, select_public_suite_spec, select_subject_record
+from tests.support import load_public_specs_module, select_public_suite_spec
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -175,10 +175,11 @@ class CommandManifestTests(unittest.TestCase):
             execution = dict(spec.get("execution") or {})
             suite_name = str(spec["suite"])
             project_name = str(execution["project_path"]).replace("\\", "/").split("/")[-1].removesuffix(".csproj")
-            expected_path = f"subjects/SolutionCorePack/source/Slices/{project_name}/{project_name}.csproj"
-            expected_dll_path = f"subjects/SolutionCorePack/source/Slices/{project_name}/bin/Release/net8.0/{project_name}.dll"
+            expected_path = f"tests/fixtures/public-smoke/{project_name}/{project_name}.csproj"
+            expected_dll_path = f"tests/fixtures/public-smoke/{project_name}/bin/Release/net8.0/{project_name}.dll"
             self.assertEqual(expected_path, str(execution["project_path"]).replace("\\", "/"))
             self.assertEqual(expected_dll_path, str(execution["dll_path"]).replace("\\", "/"))
+            self.assertEqual("SolutionCorePack", str(execution["targetSubjectId"]))
             self.assertEqual(f"smoke/{suite_name}", str(spec["id"]))
 
     def test_parse_cli_supports_dynamic_unified_test_commands(self) -> None:
@@ -340,6 +341,7 @@ class CommandManifestTests(unittest.TestCase):
     def test_parse_cli_supports_project_and_deploy_commands(self) -> None:
         manifest_module = load_manifest_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+        subject_id = "FixtureSubject"
 
         generate_all = manifest_module.parse_cli(
             ["generate", "project", "all", "--host", "windows", "--refresh-generated"],
@@ -357,7 +359,7 @@ class CommandManifestTests(unittest.TestCase):
                 "project",
                 "subject",
                 "--id",
-                "subject/SolutionCorePack",
+                f"subject/{subject_id}",
                 "--open-native-target",
                 "generated",
             ],
@@ -366,7 +368,7 @@ class CommandManifestTests(unittest.TestCase):
             "windows",
         )
         self.assertEqual("generate-project-subject", generate_subject["command"]["id"])
-        self.assertEqual("subject/SolutionCorePack", generate_subject["options"]["id"])
+        self.assertEqual(f"subject/{subject_id}", generate_subject["options"]["id"])
         self.assertEqual("generated", generate_subject["options"]["open-native-target"])
 
         generate_core = manifest_module.parse_cli(
@@ -385,7 +387,7 @@ class CommandManifestTests(unittest.TestCase):
                 "project",
                 "subject",
                 "--id",
-                "subject/SolutionCorePack",
+                f"subject/{subject_id}",
                 "--matrix",
                 "windows-managed-trace",
                 "--native-target",
@@ -396,6 +398,7 @@ class CommandManifestTests(unittest.TestCase):
             "windows",
         )
         self.assertEqual("build-project-subject", build_subject["command"]["id"])
+        self.assertEqual(f"subject/{subject_id}", build_subject["options"]["id"])
         self.assertEqual("windows-managed-trace", build_subject["options"]["matrix"])
         self.assertEqual("proof", build_subject["options"]["native-target"])
 

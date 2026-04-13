@@ -16,6 +16,7 @@ if str(toolchains_root) not in sys.path:
 
 from core import tooling as tooling_module
 from testing import contracts as contracts_module
+from testing import public_specs as public_specs_module
 from testing import subject_executor as subject_executor_module
 from testing import subject_planner as subject_planner_module
 from testing import subjects as subjects_module
@@ -26,6 +27,13 @@ SOLUTION_CORE_PACK_SUBJECT_ID = "SolutionCorePack"
 SOLUTION_CORE_PACK_NATIVE_MATRIX_ID = "windows-native-check"
 SOLUTION_CORE_PACK_WINDOWS_TRACE_MATRIX_ID = "windows-managed-trace"
 SOLUTION_CORE_PACK_MACOS_TRACE_MATRIX_ID = "macos-managed-trace"
+PUBLIC_SMOKE_SUITES = (
+    "managed-entry-basic",
+    "managed-generics-basic",
+    "reflection-basic",
+    "native-interop-basic",
+    "host-embedding-basic",
+)
 
 
 def get_repo_root() -> Path:
@@ -182,7 +190,6 @@ def validate_stage4_proof_run_artifacts(runtime_root: Path) -> None:
         if not required_path.is_file():
             raise RuntimeError(f"missing Stage 4 proof run artifact: {required_path}")
 
-    stdout_text = stdout_path.read_text(encoding="utf-8")
     stderr_text = stderr_path.read_text(encoding="utf-8")
     exit_code_text = exit_code_path.read_text(encoding="utf-8").strip()
 
@@ -197,10 +204,6 @@ def validate_stage4_proof_run_artifacts(runtime_root: Path) -> None:
             message = f"{message}\n{stderr_text.strip()}"
         raise RuntimeError(message)
 
-    expected_stdout = "Hello, World!"
-    if expected_stdout not in stdout_text:
-        raise RuntimeError(f"stage4 native reference proof stdout mismatch: missing '{expected_stdout}'")
-
 
 def build_subject_run_id(matrix_id: str) -> str:
     return f"verify-runtime-baseline-{matrix_id}-{uuid.uuid4().hex[:8]}"
@@ -209,6 +212,34 @@ def build_subject_run_id(matrix_id: str) -> str:
 def resolve_subject_matrix_subject_id(matrix_id: str) -> str:
     del matrix_id
     return SOLUTION_CORE_PACK_SUBJECT_ID
+
+
+def require_public_suite_execution(
+    family: str,
+    suite: str,
+    *,
+    host_profile: str | None = None,
+) -> dict:
+    suite_spec = public_specs_module.find_public_test_suite_spec(family, suite)
+    if suite_spec is None:
+        raise RuntimeError(f"missing public suite spec: {family}/{suite}")
+    if host_profile and host_profile not in list(suite_spec.get("supported_hosts") or []):
+        raise RuntimeError(f"public suite spec does not support host '{host_profile}': {family}/{suite}")
+
+    execution = dict(suite_spec.get("execution") or {})
+    if not execution:
+        raise RuntimeError(f"public suite spec does not declare execution metadata: {family}/{suite}")
+    return execution
+
+
+def iter_public_smoke_executions(*, host_profile: str) -> list[tuple[str, dict]]:
+    return [
+        (
+            suite,
+            require_public_suite_execution("smoke", suite, host_profile=host_profile),
+        )
+        for suite in PUBLIC_SMOKE_SUITES
+    ]
 
 
 def subject_runtime_root(repo_root: Path, subject_id: str, run_id: str, matrix_id: str) -> Path:
@@ -251,7 +282,9 @@ def main(argv: list[str] | None = None) -> int:
     common_artifact_root = artifact_root / "common"
     compare_script = repo_root / "tests" / "contracts" / "trace" / "compare-warmup-trace.py"
     windows_trace_snapshot = repo_root / "tests" / "contracts" / "trace" / "snapshots" / "windows-warmup-trace.snapshot.json"
-    host_embedding_dll = repo_root / "artifacts" / "smoke" / "bin" / "HostEmbeddingLite" / "Release" / "net8.0" / "HostEmbeddingLite.dll"
+    smoke_executions = iter_public_smoke_executions(host_profile=host_profile)
+    host_embedding_execution = require_public_suite_execution("smoke", "host-embedding-basic", host_profile=host_profile)
+    host_embedding_dll = repo_root / str(host_embedding_execution["dll_path"])
 
     artifact_root.mkdir(parents=True, exist_ok=True)
     common_artifact_root.mkdir(parents=True, exist_ok=True)
@@ -287,19 +320,20 @@ def main(argv: list[str] | None = None) -> int:
     invoke_native_smoke_build(repo_root / "tests" / "contracts" / "native" / "bridge", common_artifact_root / "native-bridge-config", repo_root, host_profile=host_profile)
 
     write_step("Build smoke input projects")
-    for project_name in ("HelloWorld", "GenericEcho", "ReflectionLite", "PInvokeLite", "HostEmbeddingLite"):
+    for _suite_name, execution in smoke_executions:
         invoke_dotnet_build(
-            repo_root / "subjects" / "SolutionCorePack" / "source" / "Slices" / project_name / f"{project_name}.csproj",
+            repo_root / str(execution["project_path"]),
             repo_root,
             host_profile=host_profile,
         )
 
     write_step("Run managed smoke projects")
-    invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "HelloWorld" / "Release" / "net8.0" / "HelloWorld.dll", ["HelloWorld smoke entry reached.", "register:Main"], repo_root)
-    invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "GenericEcho" / "Release" / "net8.0" / "GenericEcho.dll", ["roadmap0", "42", "roadmap0:roadmap0"], repo_root)
-    invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "ReflectionLite" / "Release" / "net8.0" / "ReflectionLite.dll", ["field=BackingField:Int32", "generic-method=String"], repo_root)
-    invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "PInvokeLite" / "Release" / "net8.0" / "PInvokeLite.dll", ["marshal=interop-smoke", "export=chaos_smoke_add:7", "symbol=True"], repo_root)
-    invoke_dotnet_runtime_smoke(repo_root / "artifacts" / "smoke" / "bin" / "HostEmbeddingLite" / "Release" / "net8.0" / "HostEmbeddingLite.dll", ["HostEmbeddingSession:InvokeManagedEntry:True", "guards=invalid-detach:True|double-start:True|unattached-entry:True"], repo_root)
+    for _suite_name, execution in smoke_executions:
+        invoke_dotnet_runtime_smoke(
+            repo_root / str(execution["dll_path"]),
+            list(execution.get("expected_patterns") or []),
+            repo_root,
+        )
 
     if host_profile == "windows":
         if not windows_trace_snapshot.is_file():

@@ -13,6 +13,7 @@ internal static class HotUpdateDispatchBenchmarkEntry
         ChaosMetric.WallClockUs,
         Alias = "hot-update-dispatch-bench",
         Requires = ChaosRuntimeFeature.HotUpdate,
+        Modes = ChaosExecutionMode.Managed,
         WarmupCount = 1,
         IterationCount = 45,
         InvocationCount = 1)]

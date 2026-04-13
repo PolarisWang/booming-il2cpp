@@ -10,7 +10,6 @@ internal static class InterpreterLoweringProofEntry
     [ChaosUnitTest(
         ChaosUnitCategory.RuntimeContract,
         Alias = "interpreter-lowering-proof",
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 2)]
     public static int Run()
     {
@@ -64,24 +63,24 @@ internal static class InterpreterLoweringProofEntry
         var instanceCallInstructions = instanceCallIrMethod.Blocks.SelectMany(static block => block.Instructions).ToList();
         var instanceCallInstruction = instanceCallInstructions.Single(static instruction => instruction.OpCode == IROpCode.CallVirt);
         var instanceCallOpSequence = string.Join(",", instanceCallInstructions.Select(static instruction => GetDisplayOp(instruction.OpCode)));
+        Assert.Equal("InterpreterArithmeticProof/NativeExports::Add(System.Int32,System.Int32)", method.SubjectId);
+        Assert.Equal(1, irMethod.Blocks.Count);
+        Assert.Equal("ldarg,ldarg,add,ret", opSequence);
+        Assert.NotNull(addInstruction.Result);
+        Assert.Equal(IRTypeTag.Int32, addInstruction.Result!.TypeTag);
+        Assert.Equal("InterpreterArithmeticProof/NativeExports::CallAotBridgeAdd(System.Int32,System.Int32)", callMethod.SubjectId);
+        Assert.Equal("ldarg,ldarg,callbridge,ret", callOpSequence);
+        Assert.Equal("InterpreterArithmeticProof.AotBridge/AotBridgeExports::Add(System.Int32,System.Int32)", callInstruction.Operands[0].Symbol);
+        Assert.Equal("InterpreterArithmeticProof/NativeExports::CallLocalAdd(System.Int32,System.Int32)", localCallMethod.SubjectId);
+        Assert.Equal("ldarg,ldarg,call,ret", localCallOpSequence);
+        Assert.Equal("InterpreterArithmeticProof/NativeExports::Add(System.Int32,System.Int32)", localCallInstruction.Operands[0].Symbol);
+        Assert.Equal("InterpreterArithmeticProof/NativeExports::CallStringLength()", callVirtMethod.SubjectId);
+        Assert.Equal("ldstr,callbridge,ret", callVirtOpSequence);
+        Assert.Equal("System.Private.CoreLib/System.String::get_Length()", callVirtInstruction.Operands[0].Symbol);
+        Assert.Equal("InterpreterArithmeticProof/NativeExports::CallInstanceAddOne(InstanceArithmetic,System.Int32)", instanceCallMethod.SubjectId);
+        Assert.Equal("ldarg,ldarg,callvirt,ret", instanceCallOpSequence);
+        Assert.Equal("InterpreterArithmeticProof/InstanceArithmetic::AddOne(System.Int32)", instanceCallInstruction.Operands[0].Symbol);
 
-        Console.WriteLine($"method-subject={method.SubjectId}");
-        Console.WriteLine($"blocks={irMethod.Blocks.Count}");
-        Console.WriteLine($"ops={opSequence}");
-        Console.WriteLine($"add-result={addInstruction.Result?.TypeTag}");
-        Console.WriteLine($"call-method-subject={callMethod.SubjectId}");
-        Console.WriteLine($"call-ops={callOpSequence}");
-        Console.WriteLine($"call-target={callInstruction.Operands[0].Symbol}");
-        Console.WriteLine($"local-call-method-subject={localCallMethod.SubjectId}");
-        Console.WriteLine($"local-call-ops={localCallOpSequence}");
-        Console.WriteLine($"local-call-target={localCallInstruction.Operands[0].Symbol}");
-        Console.WriteLine($"callvirt-method-subject={callVirtMethod.SubjectId}");
-        Console.WriteLine($"callvirt-ops={callVirtOpSequence}");
-        Console.WriteLine($"callvirt-target={callVirtInstruction.Operands[0].Symbol}");
-        Console.WriteLine($"instance-call-method-subject={instanceCallMethod.SubjectId}");
-        Console.WriteLine($"instance-call-ops={instanceCallOpSequence}");
-        Console.WriteLine($"instance-call-target={instanceCallInstruction.Operands[0].Symbol}");
-        Console.WriteLine("lowering-proof=ok");
         return 0;
     }
 

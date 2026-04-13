@@ -16,7 +16,7 @@
     }
   },
   "sourceModel": "dotnet-solution",
-  "workloadEntry": "MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()",
+  "workloadEntry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
   "testDeclarationMode": "require",
   "validationProfiles": {
     "managed-output": [
@@ -286,7 +286,7 @@
         "perf.release"
       ],
       "source": {
-        "entry": "MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()"
+        "entry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()"
       },
       "executionContext": {
         "hostPlatform": "windows-x64",
@@ -350,7 +350,7 @@
         "perf.release"
       ],
       "source": {
-        "entry": "MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()"
+        "entry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()"
       },
       "executionContext": {
         "hostPlatform": "windows-x64",

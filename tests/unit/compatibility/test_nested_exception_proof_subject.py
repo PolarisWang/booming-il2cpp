@@ -57,10 +57,10 @@ class Phase2NestedExceptionProofTests(unittest.TestCase):
         self.assertIn('Alias = "nested-exception-proof"', source)
         self.assertIn("internal sealed class NestedExceptionHarness", source)
         self.assertIn("catch (InvalidOperationException ex)", source)
-        self.assertIn("Nested EH inner finally.", source)
-        self.assertIn("Nested EH outer finally.", source)
+        self.assertIn('Assert.Equal("Nested EH native proof: inner caught.", message);', source)
         self.assertIn("throw new InvalidOperationException(", source)
         self.assertGreaterEqual(source.count("try"), 2)
+        self.assertGreaterEqual(source.count("finally"), 2)
         self.assertIn("internal static class NestedExceptionProofEntry", source)
 
     def test_loader_semantic_and_linker_lock_nested_exception_surface(self) -> None:

@@ -295,6 +295,7 @@ class UnifiedTestCommandTests(unittest.TestCase):
 
     def test_render_summary_surfaces_overall_breakdown_and_failures(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_for_summary_render")
+        subject_id = "FixtureSubject"
 
         summary_text = test_module._render_summary(
             {
@@ -313,11 +314,11 @@ class UnifiedTestCommandTests(unittest.TestCase):
                 },
                 "subjectResults": [
                     {
-                        "subjectId": "SolutionCorePack",
+                        "subjectId": subject_id,
                         "requestedGoalId": "debug.native",
                         "status": "aborted",
                         "matrixStatusCounts": {"total": 1, "ok": 0, "fail": 0, "skip": 0, "aborted": 1},
-                        "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/run-1/subject-report/summary.json",
+                        "subjectSummaryPath": f"artifacts/subjects/{subject_id}/runs/run-1/subject-report/summary.json",
                     }
                 ],
                 "failureItems": [
@@ -339,27 +340,12 @@ class UnifiedTestCommandTests(unittest.TestCase):
         self.assertIn("Suite Breakdown:", summary_text)
         self.assertIn("contract: total 1 | ok 0 | fail 1 | skip 0 | aborted 0", summary_text)
         self.assertIn("Subject Breakdown:", summary_text)
-        self.assertIn("SolutionCorePack", summary_text)
+        self.assertIn(subject_id, summary_text)
         self.assertIn("Failure Digest:", summary_text)
         self.assertIn("rerun: run test contract trace-schema", summary_text)
 
-    def test_removed_legacy_smoke_command_returns_migration_guidance(self) -> None:
-        run_module = load_module(RUN_MODULE_PATH, "chaos_run_main_for_legacy_migration")
-        result = run_module.build_removed_command_migration_guidance(
-            "build smoke HelloWorld",
-            "macos",
-        )
-
-        self.assertIsNotNone(result)
-        assert result is not None
-        self.assertIn("Removed command", result.text or "")
-        self.assertEqual(
-            "test smoke managed-entry-basic --stage build",
-            result.payload["migration"]["replacementSyntax"],
-        )
-
-    def test_removed_verify_entrypoint_returns_migration_guidance(self) -> None:
-        run_module = load_module(RUN_MODULE_PATH, "chaos_run_main_for_removed_verify_migration")
+    def test_removed_verify_entrypoint_returns_unknown_command(self) -> None:
+        run_module = load_module(RUN_MODULE_PATH, "chaos_run_main_for_removed_verify_unknown")
         manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_for_removed_verify_migration")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
@@ -374,10 +360,9 @@ class UnifiedTestCommandTests(unittest.TestCase):
         )
 
         self.assertEqual("error", result.status)
-        self.assertIn("Removed command", result.text or "")
-        self.assertIn("run test workflow runtime-baseline-windows", result.text or "")
-        self.assertEqual("verify roadmap-0", result.payload["migration"]["removedCommand"])
-        self.assertEqual("test workflow runtime-baseline-windows", result.payload["migration"]["replacementSyntax"])
+        self.assertEqual({}, result.payload)
+        self.assertEqual(["unknown command: verify roadmap-0"], result.errors)
+        self.assertEqual("unknown command: verify roadmap-0\n", result.text)
 
 
 if __name__ == "__main__":

@@ -548,6 +548,30 @@ def load_subject_records(repo_root: Path) -> list[dict[str, Any]]:
     return records
 
 
+def perf_goal_matrices(manifest: dict[str, Any]) -> list[dict[str, Any]]:
+    return [
+        dict(matrix)
+        for matrix in list(manifest.get("environmentMatrices") or [])
+        if any(str(goal_id).startswith("perf.") for goal_id in list(dict(matrix).get("supportedGoals") or []))
+    ]
+
+
+def supports_perf_goal(manifest: dict[str, Any]) -> bool:
+    return bool(perf_goal_matrices(manifest))
+
+
+def discover_perf_subject_records(repo_root: Path) -> list[dict[str, Any]]:
+    return [
+        record
+        for record in load_subject_records(repo_root)
+        if supports_perf_goal(dict(record.get("manifest") or {}))
+    ]
+
+
+def discover_perf_subject_ids(repo_root: Path) -> list[str]:
+    return sorted(str(record["subjectId"]) for record in discover_perf_subject_records(repo_root))
+
+
 def query_subject_records(
     records: list[dict[str, Any]],
     *,

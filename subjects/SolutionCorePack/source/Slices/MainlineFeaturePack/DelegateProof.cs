@@ -50,7 +50,6 @@ internal static class DelegateProofEntry
         ChaosUnitCategory.RuntimeContract,
         Alias = "delegate-proof",
         Requires = ChaosRuntimeFeature.Delegate,
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 5)]
     public static int Run()
     {
@@ -58,7 +57,8 @@ internal static class DelegateProofEntry
         MessageFormatter formatter = banner.BuildMessage;
         TailFormatter tail = DelegateStaticTail.AppendBang;
         var relay = new DelegateRelay(formatter);
-        Console.WriteLine(tail(relay.Format("Delegate native proof: ")));
+        var message = tail(relay.Format("Delegate native proof: "));
+        Assert.Equal("Delegate native proof: delegate proof.!", message);
         return 0;
     }
 }

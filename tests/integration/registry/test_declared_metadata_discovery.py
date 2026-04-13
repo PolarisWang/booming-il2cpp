@@ -302,6 +302,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             self.assertEqual(4, unit_entries["MainlineFeaturePack.DelegateProofEntry"]["requires"])
             self.assertEqual(8, unit_entries["MainlineFeaturePack.ExceptionProofEntry"]["requires"])
             self.assertEqual(18, unit_entries["MainlineFeaturePack.ReflectionInteropClosureEntry"]["requires"])
+            self.assertTrue(all(entry["evidence"] == 0 for entry in unit_entries.values()))
         finally:
             shutil.rmtree(build_root, ignore_errors=True)
 
@@ -359,6 +360,10 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             self.assertEqual("allocation-bench", benchmark_entries["PerformanceFeaturePack.AllocationBenchmarkEntry"]["alias"])
             self.assertEqual("dispatch-bench", benchmark_entries["PerformanceFeaturePack.DispatchBenchmarkEntry"]["alias"])
             self.assertEqual("generic-bench", benchmark_entries["PerformanceFeaturePack.GenericBenchmarkEntry"]["alias"])
+            self.assertEqual(3, benchmark_entries["PerformanceFeaturePack.ArithmeticBenchmarkEntry"]["modes"])
+            self.assertEqual(1, benchmark_entries["PerformanceFeaturePack.AllocationBenchmarkEntry"]["modes"])
+            self.assertEqual(1, benchmark_entries["PerformanceFeaturePack.DispatchBenchmarkEntry"]["modes"])
+            self.assertEqual(1, benchmark_entries["PerformanceFeaturePack.GenericBenchmarkEntry"]["modes"])
             self.assertEqual(1, benchmark_entries["PerformanceFeaturePack.ArithmeticBenchmarkEntry"]["category"])
             self.assertEqual(3, benchmark_entries["PerformanceFeaturePack.AllocationBenchmarkEntry"]["category"])
             self.assertEqual(1, benchmark_entries["PerformanceFeaturePack.ArithmeticBenchmarkEntry"]["metrics"])
@@ -436,6 +441,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             self.assertEqual("hot-update-dispatch-bench", benchmark_entries["HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry"]["alias"])
             self.assertEqual("hot-update-load-bench", benchmark_entries["HotUpdateHostPack.HotUpdateLoadBenchmarkEntry"]["alias"])
             self.assertEqual("hot-update-roundtrip-bench", benchmark_entries["HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry"]["alias"])
+            self.assertTrue(all(entry["evidence"] == 0 for entry in unit_entries.values()))
         finally:
             shutil.rmtree(build_root, ignore_errors=True)
 
@@ -502,6 +508,9 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             self.assertEqual("interpreter-lowering-proof", unit_entries["MixedExecutionFeaturePack.InterpreterLoweringProofEntry"]["alias"])
             self.assertEqual("mixed-execution-bench", benchmark_entries["MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry"]["alias"])
             self.assertEqual("mixed-execution-native-bench", benchmark_entries["MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry"]["alias"])
+            self.assertEqual(5, benchmark_entries["MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry"]["modes"])
+            self.assertEqual(7, benchmark_entries["MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry"]["modes"])
+            self.assertTrue(all(entry["evidence"] == 0 for entry in unit_entries.values()))
         finally:
             shutil.rmtree(build_root, ignore_errors=True)
 

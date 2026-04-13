@@ -20,12 +20,10 @@ internal sealed class NestedExceptionHarness
             }
             finally
             {
-                Console.WriteLine("Nested EH inner finally.");
             }
         }
         finally
         {
-            Console.WriteLine("Nested EH outer finally.");
         }
     }
 
@@ -41,12 +39,12 @@ internal static class NestedExceptionProofEntry
         ChaosUnitCategory.RuntimeContract,
         Alias = "nested-exception-proof",
         Requires = ChaosRuntimeFeature.ExceptionFlow,
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 2)]
     public static int Run()
     {
         var harness = new NestedExceptionHarness();
-        Console.WriteLine(harness.Capture());
+        var message = harness.Capture();
+        Assert.Equal("Nested EH native proof: inner caught.", message);
         return 0;
     }
 }

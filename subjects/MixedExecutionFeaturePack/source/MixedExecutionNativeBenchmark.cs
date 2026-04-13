@@ -4,6 +4,8 @@ namespace MixedExecutionFeaturePack;
 
 internal static class MixedExecutionNativeBenchmarkEntry
 {
+    private const int IterationCount = 250_000;
+
     [ChaosBenchmark(
         ChaosBenchmarkCategory.RuntimeDispatch,
         ChaosMetric.WallClockUs,
@@ -13,11 +15,15 @@ internal static class MixedExecutionNativeBenchmarkEntry
         InvocationCount = 1000)]
     public static int RunWorkload()
     {
-        int seed = 17;
-        int aotStage = seed * seed + seed;
-        int interpreterShapeStage = aotStage * 2 + 1;
-        int aotReentryStage = interpreterShapeStage * interpreterShapeStage + interpreterShapeStage;
-        int checksum = aotReentryStage % 10000;
+        int checksum = 17;
+        for (int i = 0; i < IterationCount; i++)
+        {
+            int aotStage = checksum * checksum + checksum + i;
+            int interpreterShapeStage = aotStage * 2 + 1;
+            int aotReentryStage = interpreterShapeStage * interpreterShapeStage + interpreterShapeStage;
+            checksum = (checksum + aotReentryStage) % 10000;
+        }
+
         return checksum;
     }
 }

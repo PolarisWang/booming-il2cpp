@@ -44,11 +44,12 @@ internal static class LinkerStrippingProofEntry
     [ChaosUnitTest(
         ChaosUnitCategory.MetadataContract,
         Alias = "linker-stripping-proof",
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 4)]
     public static int Run()
     {
-        Console.WriteLine(new ReachableHarness("reachable path").BuildMessage());
+        var reachable = new ReachableHarness("reachable path").BuildMessage();
+        Assert.Equal("Linker stripping proof: reachable path.", reachable);
+        Assert.Equal("Linker stripping proof: preserved path.", PreservedUnusedHarness.Marker());
         return 0;
     }
 }

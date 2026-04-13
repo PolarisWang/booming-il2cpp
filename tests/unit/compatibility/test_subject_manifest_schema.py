@@ -249,7 +249,7 @@ class SubjectManifestSchemaTests(unittest.TestCase):
             subjects_module,
             manifest,
             "windows-managed-trace",
-            "HostEmbeddingLite/Program::Main(System.String[])",
+            "MainlineFeaturePack/Program::Main(System.String[])",
         )
         assert_matrix_source_entry(
             self,

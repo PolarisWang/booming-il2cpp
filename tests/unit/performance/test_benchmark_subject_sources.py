@@ -22,7 +22,7 @@ MANAGED_PERF_SUBJECTS = {
         "manifest_path": MIXED_EXECUTION_FEATURE_PACK_ROOT / "subject.manifest.json",
         "source_path": "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln",
         "primary_project_path": "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj",
-        "workload_entry": "MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()",
+        "workload_entry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
         "native_workload_entry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
         "harness_iterations": 6,
     },
@@ -62,24 +62,36 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn("ChaosBenchmark(", arithmetic_source)
         self.assertIn('Alias = "arithmetic-bench"', arithmetic_source)
         self.assertIn("ChaosBenchmarkCategory.RuntimeDispatch", arithmetic_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native", arithmetic_source)
         self.assertIn("ChaosMetric.WallClockUs", arithmetic_source)
 
         self.assertIn("ChaosBenchmark(", allocation_source)
         self.assertIn('Alias = "allocation-bench"', allocation_source)
         self.assertIn("ChaosBenchmarkCategory.Allocation", allocation_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", allocation_source)
         self.assertIn("ChaosMetric.ManagedAllocBytes", allocation_source)
+        self.assertIn("public static int RunWorkload()", allocation_source)
+        self.assertNotIn("public static long RunWorkload()", allocation_source)
 
         self.assertIn("ChaosBenchmark(", dispatch_source)
         self.assertIn('Alias = "dispatch-bench"', dispatch_source)
         self.assertIn("ChaosBenchmarkCategory.RuntimeDispatch", dispatch_source)
-        self.assertIn("DispatchShape[] shapes", dispatch_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", dispatch_source)
+        self.assertIn("DispatchShape first = new DispatchCircle(3.0);", dispatch_source)
+        self.assertIn("(i & 3) switch", dispatch_source)
+        self.assertNotIn("DispatchShape[] shapes", dispatch_source)
+        self.assertIn("public static int RunWorkload()", dispatch_source)
+        self.assertNotIn("public static long RunWorkload()", dispatch_source)
 
         self.assertIn("ChaosBenchmark(", generic_source)
         self.assertIn('Alias = "generic-bench"', generic_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", generic_source)
         self.assertIn("ChaosRuntimeFeature.GenericSharing", generic_source)
         self.assertIn("Dictionary<string, int>", generic_source)
+        self.assertIn("public static int RunWorkload()", generic_source)
+        self.assertNotIn("public static long RunWorkload()", generic_source)
 
-    def test_managed_benchmark_subjects_keep_perf_harness_external_while_solution_core_pack_uses_native_pipeline(self) -> None:
+    def test_managed_benchmark_subjects_keep_perf_harness_external_and_solution_core_pack_adds_managed_baseline(self) -> None:
         self.assertTrue((REPO_ROOT / SHARED_PERF_PROJECT_PATH).is_file())
 
         for subject_id, spec in MANAGED_PERF_SUBJECTS.items():
@@ -108,14 +120,24 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
                     self.assertEqual(native_workload_entry, matrix["source"]["entry"], msg=subject_id)
 
         solution_core_manifest = json.loads((SOLUTION_CORE_PACK_ROOT / "subject.manifest.json").read_text(encoding="utf-8"))
-        self.assertNotIn("project", solution_core_manifest["validation"]["perf"])
-        self.assertNotIn("harnessIterations", solution_core_manifest["validation"]["perf"])
+        self.assertEqual(SHARED_PERF_PROJECT_PATH, solution_core_manifest["validation"]["perf"]["project"])
+        self.assertEqual(4, solution_core_manifest["validation"]["perf"]["harnessIterations"])
+        managed_pipeline = next(
+            pipeline for pipeline in solution_core_manifest["executionPipelines"] if pipeline["pipelineId"] == "managed-benchmark"
+        )
+        managed_stage_kinds = {stage["kind"] for stage in managed_pipeline["stages"]}
+        self.assertIn("runtime-perf-collect", managed_stage_kinds)
         native_pipeline = next(
             pipeline for pipeline in solution_core_manifest["executionPipelines"] if pipeline["pipelineId"] == "native-benchmark"
         )
         native_stage_kinds = {stage["kind"] for stage in native_pipeline["stages"]}
         self.assertIn("generated-native-aot", native_stage_kinds)
         self.assertNotIn("generated-native-proof", native_stage_kinds)
+        managed_perf_matrix = next(
+            matrix for matrix in solution_core_manifest["environmentMatrices"] if matrix["matrixId"] == "windows-managed-perf"
+        )
+        self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", managed_perf_matrix["source"]["entry"])
+        self.assertEqual("managed-benchmark", managed_perf_matrix["pipelineId"])
 
     def test_hot_update_host_pack_declares_hot_update_unit_and_benchmark_slices(self) -> None:
         manifest_path = HOT_UPDATE_HOST_PACK_ROOT / "subject.manifest.json"
@@ -167,33 +189,44 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn('Alias = "hot-update-skeleton-proof"', skeleton_source)
         self.assertIn("ChaosUnitCategory.HotUpdateContract", skeleton_source)
         self.assertIn("ChaosRuntimeFeature.HotUpdate", skeleton_source)
+        self.assertNotIn("Console.WriteLine", skeleton_source)
+        self.assertNotIn("ChaosEvidenceKind.Stdout", skeleton_source)
 
         self.assertIn("ChaosUnitTest(", replacement_source)
         self.assertIn('Alias = "method-replacement-proof"', replacement_source)
         self.assertIn("ChaosUnitCategory.HotUpdateContract", replacement_source)
+        self.assertNotIn("Console.WriteLine", replacement_source)
+        self.assertNotIn("ChaosEvidenceKind.Stdout", replacement_source)
 
         self.assertIn("ChaosUnitTest(", shared_contract_source)
         self.assertIn('Alias = "shared-contract-proof"', shared_contract_source)
         self.assertIn("ContractIdentityWitness", shared_contract_source)
+        self.assertNotIn("Console.WriteLine", shared_contract_source)
+        self.assertNotIn("ChaosEvidenceKind.Stdout", shared_contract_source)
 
         self.assertIn("ChaosUnitTest(", rollback_source)
         self.assertIn('Alias = "version-rollback-proof"', rollback_source)
         self.assertIn("ChaosUnitCategory.HotUpdateContract", rollback_source)
+        self.assertNotIn("Console.WriteLine", rollback_source)
+        self.assertNotIn("ChaosEvidenceKind.Stdout", rollback_source)
 
         self.assertIn("ChaosBenchmark(", dispatch_source)
         self.assertIn('Alias = "hot-update-dispatch-bench"', dispatch_source)
         self.assertIn("ChaosBenchmarkCategory.HotUpdate", dispatch_source)
         self.assertIn("ChaosRuntimeFeature.HotUpdate", dispatch_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", dispatch_source)
 
         self.assertIn("ChaosBenchmark(", load_source)
         self.assertIn('Alias = "hot-update-load-bench"', load_source)
         self.assertIn("ChaosBenchmarkCategory.HotUpdate", load_source)
         self.assertIn("LoadPackage", load_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", load_source)
 
         self.assertIn("ChaosBenchmark(", roundtrip_source)
         self.assertIn('Alias = "hot-update-roundtrip-bench"', roundtrip_source)
         self.assertIn("ChaosBenchmarkCategory.HotUpdate", roundtrip_source)
         self.assertIn("BridgeDispatcher", roundtrip_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", roundtrip_source)
 
     def test_mixed_execution_feature_pack_declares_mixed_interpreter_unit_and_benchmark_slices(self) -> None:
         manifest_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "subject.manifest.json"
@@ -230,26 +263,35 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln", manifest["source"]["path"])
         self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", manifest["source"]["primaryProjectPath"])
         self.assertEqual("require", manifest["testDeclarationMode"])
-        self.assertEqual("MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
+        self.assertEqual("MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
         self.assertEqual("dotnet-solution", manifest["sourceModel"])
 
         self.assertIn("ChaosUnitTest(", proof_source)
         self.assertIn('Alias = "mixed-execution-proof"', proof_source)
         self.assertIn("ChaosUnitCategory.RuntimeContract", proof_source)
         self.assertIn("ManagedInterpreterExecutor", proof_source)
+        self.assertNotIn("Console.WriteLine", proof_source)
+        self.assertNotIn("ChaosEvidenceKind.Stdout", proof_source)
 
         self.assertIn("ChaosUnitTest(", lowering_source)
         self.assertIn('Alias = "interpreter-lowering-proof"', lowering_source)
         self.assertIn("ChaosUnitCategory.RuntimeContract", lowering_source)
         self.assertIn("ILToIRLowering", lowering_source)
+        self.assertNotIn("Console.WriteLine", lowering_source)
+        self.assertNotIn("ChaosEvidenceKind.Stdout", lowering_source)
 
         self.assertIn("ChaosBenchmark(", benchmark_source)
         self.assertIn('Alias = "mixed-execution-bench"', benchmark_source)
         self.assertIn("ChaosBenchmarkCategory.RuntimeDispatch", benchmark_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Interpreter", benchmark_source)
         self.assertIn("public static int RunWorkload()", benchmark_source)
         self.assertIn("AotCompute", benchmark_source)
         self.assertIn("InterpreterCompute", benchmark_source)
 
+        self.assertEqual(
+            "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+            manifest["environmentMatrices"][1]["source"]["entry"],
+        )
         self.assertEqual(
             "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
             manifest["environmentMatrices"][2]["source"]["entry"],
@@ -257,6 +299,8 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn("ChaosBenchmark(", native_benchmark_source)
         self.assertIn('Alias = "mixed-execution-native-bench"', native_benchmark_source)
         self.assertIn("public static int RunWorkload()", native_benchmark_source)
+        self.assertIn("private const int IterationCount =", native_benchmark_source)
+        self.assertIn("for (int i = 0; i < IterationCount; i++)", native_benchmark_source)
 
 
 if __name__ == "__main__":

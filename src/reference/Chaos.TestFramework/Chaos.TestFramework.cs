@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Chaos.TestFramework;
 
@@ -57,6 +58,38 @@ public enum ChaosBenchmarkCategory : byte
     /// Hot-update load, switch, or roundtrip benchmarks.
     /// </summary>
     HotUpdate = 4,
+}
+
+[Flags]
+/// <summary>
+/// Defines which runtime execution modes a benchmark supports.
+/// </summary>
+public enum ChaosExecutionMode : byte
+{
+    /// <summary>
+    /// No execution mode is declared.
+    /// </summary>
+    None = 0,
+
+    /// <summary>
+    /// Managed (.NET) execution.
+    /// </summary>
+    Managed = 1 << 0,
+
+    /// <summary>
+    /// Native AOT execution.
+    /// </summary>
+    Native = 1 << 1,
+
+    /// <summary>
+    /// Interpreter / hot-update execution.
+    /// </summary>
+    Interpreter = 1 << 2,
+
+    /// <summary>
+    /// All standard execution modes are supported.
+    /// </summary>
+    All = Managed | Native | Interpreter,
 }
 
 /// <summary>
@@ -398,6 +431,11 @@ public sealed class ChaosBenchmarkAttribute : Attribute
     public ChaosRuntimeFeature Requires { get; init; }
 
     /// <summary>
+    /// Gets or sets the execution modes supported by this benchmark.
+    /// </summary>
+    public ChaosExecutionMode Modes { get; init; } = ChaosExecutionMode.All;
+
+    /// <summary>
     /// Gets or sets the benchmark warmup count.
     /// </summary>
     public byte WarmupCount { get; init; }
@@ -411,4 +449,111 @@ public sealed class ChaosBenchmarkAttribute : Attribute
     /// Gets or sets the benchmark invocation count.
     /// </summary>
     public ushort InvocationCount { get; init; }
+}
+
+/// <summary>
+/// Represents a proof assertion failure.
+/// </summary>
+public sealed class ChaosAssertionException : Exception
+{
+    /// <summary>
+    /// Initializes a new assertion failure with a message.
+    /// </summary>
+    public ChaosAssertionException(string message)
+        : base(message)
+    {
+    }
+}
+
+/// <summary>
+/// Provides minimal proof assertions for retained subjects.
+/// </summary>
+public static class Assert
+{
+    /// <summary>
+    /// Verifies that the condition is true.
+    /// </summary>
+    public static void True(bool condition, string? message = null)
+    {
+        if (!condition)
+        {
+            throw new ChaosAssertionException(message ?? "Expected condition to be true.");
+        }
+    }
+
+    /// <summary>
+    /// Verifies that the condition is false.
+    /// </summary>
+    public static void False(bool condition, string? message = null)
+    {
+        if (condition)
+        {
+            throw new ChaosAssertionException(message ?? "Expected condition to be false.");
+        }
+    }
+
+    /// <summary>
+    /// Verifies that the expected and actual values are equal.
+    /// </summary>
+    public static void Equal<T>(T expected, T actual, string? message = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(expected, actual))
+        {
+            return;
+        }
+
+        throw new ChaosAssertionException(
+            message ?? $"Expected '{FormatValue(expected)}' but got '{FormatValue(actual)}'.");
+    }
+
+    /// <summary>
+    /// Verifies that the value is not null.
+    /// </summary>
+    public static void NotNull(object? value, string? message = null)
+    {
+        if (value is null)
+        {
+            throw new ChaosAssertionException(message ?? "Expected value to be non-null.");
+        }
+    }
+
+    /// <summary>
+    /// Unconditionally fails the current proof.
+    /// </summary>
+    public static void Fail(string? message = null)
+    {
+        throw new ChaosAssertionException(message ?? "Assertion failure.");
+    }
+
+    /// <summary>
+    /// Verifies that the action throws the expected exception type.
+    /// </summary>
+    public static TException Throws<TException>(Action action, string? message = null)
+        where TException : Exception
+    {
+        ArgumentNullException.ThrowIfNull(action);
+
+        try
+        {
+            action();
+        }
+        catch (TException exception)
+        {
+            return exception;
+        }
+        catch (Exception exception)
+        {
+            throw new ChaosAssertionException(
+                message
+                ?? $"Expected exception '{typeof(TException).FullName}', but got '{exception.GetType().FullName}'.");
+        }
+
+        throw new ChaosAssertionException(
+            message ?? $"Expected exception '{typeof(TException).FullName}'.");
+    }
+
+    private static string FormatValue<T>(T value)
+    {
+        return value is null ? "<null>" : value.ToString() ?? $"<{typeof(T).Name}>";
+    }
 }

@@ -185,16 +185,20 @@ class Phase5HotUpdateSkeletonTests(unittest.TestCase):
         program_source = CANONICAL_SKELETON_ENTRY_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
-            "before-load=",
-            "after-load=",
-            "after-unload=",
-            "corruption=rejected",
+            "Assert.Equal(1, beforeLoad);",
+            "Assert.True(loaded);",
+            "Assert.Equal(42, afterLoad);",
+            "Assert.Equal(RuntimeMode.Mixed, runtimeManager.Mode);",
+            "Assert.Equal(1, afterUnload);",
+            "Assert.Throws<InvalidDataException>(() => PackageReader.ReadFromDirectory(corruptPackageRoot));",
             "LoadPackage",
             "UnloadPackage",
             "DispatchInt32",
             "[HotUpdateSubjectId] = 42",
         ]:
             self.assertIn(required_fragment, program_source)
+        self.assertNotIn("Console.WriteLine", program_source)
+        self.assertNotIn("ChaosEvidenceKind.Stdout", program_source)
 
     def test_subject_query_finds_hot_update_surface_without_subject_name_coupling(self) -> None:
         subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase5_hot_update")

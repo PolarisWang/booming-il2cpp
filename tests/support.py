@@ -10,9 +10,9 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SUBJECTS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subjects.py"
 PUBLIC_SPECS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "public_specs.py"
 FIXTURE_SUBJECTS_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects"
+REGISTRY_FIXTURES_ROOT = REPO_ROOT / "tests" / "fixtures" / "registry"
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests"
 
 
@@ -29,11 +29,6 @@ def load_module(path: Path, module_name: str):
     spec.loader.exec_module(module)
     return module
 
-
-def load_subjects_module(module_name: str):
-    return load_module(SUBJECTS_MODULE_PATH, module_name)
-
-
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -45,19 +40,25 @@ def make_temp_repo_root(area: str, prefix: str) -> Path:
     return repo_root
 
 
-def rewrite_fixture_manifest_paths(payload: object, fixture_subject_id: str) -> object:
-    prefix = f"tests/fixtures/subjects/{fixture_subject_id}/"
-    replacement = f"subjects/{fixture_subject_id}/"
+def _rewrite_path_prefixes(payload: object, *, prefix: str, replacement: str) -> object:
     if isinstance(payload, dict):
         return {
-            key: rewrite_fixture_manifest_paths(value, fixture_subject_id)
+            key: _rewrite_path_prefixes(value, prefix=prefix, replacement=replacement)
             for key, value in payload.items()
         }
     if isinstance(payload, list):
-        return [rewrite_fixture_manifest_paths(value, fixture_subject_id) for value in payload]
+        return [_rewrite_path_prefixes(value, prefix=prefix, replacement=replacement) for value in payload]
     if isinstance(payload, str) and payload.startswith(prefix):
         return replacement + payload.removeprefix(prefix)
     return payload
+
+
+def rewrite_fixture_manifest_paths(payload: object, fixture_subject_id: str) -> object:
+    return _rewrite_path_prefixes(
+        payload,
+        prefix=f"tests/fixtures/subjects/{fixture_subject_id}/",
+        replacement=f"subjects/{fixture_subject_id}/",
+    )
 
 
 def clone_fixture_subject_repo(
@@ -73,6 +74,13 @@ def clone_fixture_subject_repo(
     manifest = rewrite_fixture_manifest_paths(manifest, fixture_subject_id)
     write_json(manifest_path, manifest)
     return repo_root, manifest
+
+
+def clone_registry_fixture_tree(repo_root: Path) -> Path:
+    target_root = repo_root / "tests" / "fixtures" / "registry"
+    target_root.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(REGISTRY_FIXTURES_ROOT, target_root)
+    return target_root
 
 
 def materialize_subject_manifest(repo_root: Path, manifest: dict[str, Any]) -> Path:
@@ -108,18 +116,6 @@ def materialize_subject_manifest(repo_root: Path, manifest: dict[str, Any]) -> P
     manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
     write_json(manifest_path, manifest)
     return manifest_path
-
-
-def select_subject_record(module_name: str, *, repo_root: Path = REPO_ROOT, **filters: object) -> dict[str, Any]:
-    subjects_module = load_subjects_module(module_name)
-    records = subjects_module.query_subject_records(
-        subjects_module.load_subject_records(repo_root),
-        **filters,
-    )
-    if not records:
-        raise AssertionError(f"no subject record matched filters: {filters}")
-    return sorted(records, key=lambda item: str(item["subjectId"]))[0]
-
 
 def load_public_specs_module(module_name: str):
     return load_module(PUBLIC_SPECS_MODULE_PATH, module_name)

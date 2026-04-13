@@ -1,93 +1,777 @@
-"""benchmark_dashboard_generator.py — Generate static HTML benchmark dashboard.
-
-Reads benchmark-records/records.jsonl for every subject, computes the
-latest record per (subject, mode, device), then injects the data into
-a Jinja2-free HTML template as a window.BENCHMARK_DATA = {...} JavaScript
-variable.
-
-Usage:
-    from benchmark_dashboard_generator import generate, update_docs
-    generate(repo_root, Path("docs/benchmark/dashboard.html"))
-    update_docs(repo_root, subject_id="SolutionCorePack")  # incremental update
-"""
+"""Generate static benchmark dashboard data and HTML."""
 from __future__ import annotations
 
+import importlib.util
 import json
-import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-# ---------------------------------------------------------------------------
-# Data collection
-# ---------------------------------------------------------------------------
+
+_MODE_ORDER = ("managed", "native", "interpreter")
+_DEFAULT_PLATFORM = "windows-x64"
+_STALE_AFTER_DAYS = 7.0
+_MODE_FLAGS = {
+    "managed": 1 << 0,
+    "native": 1 << 1,
+    "interpreter": 1 << 2,
+}
+_ALL_MODE_FLAGS = sum(_MODE_FLAGS.values())
+_BENCHMARK_CATEGORY_LABELS = {
+    1: "Runtime Dispatch",
+    2: "Startup",
+    3: "Allocation",
+    4: "Hot Update",
+}
+_METRIC_LABELS = {
+    1 << 0: "Wall Clock",
+    1 << 1: "Managed Alloc",
+    1 << 2: "Native Alloc",
+    1 << 3: "Working Set",
+}
+_RUNTIME_FEATURE_LABELS = {
+    1 << 0: "Generic Sharing",
+    1 << 1: "Reflection",
+    1 << 2: "Delegate",
+    1 << 3: "Exception Flow",
+    1 << 4: "Native Interop",
+    1 << 5: "Hot Update",
+}
+
+
+def _load(name: str, path: Path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)  # type: ignore[union-attr]
+    return module
+
+
+def _sort_modes(values: list[str]) -> list[str]:
+    order = {mode: index for index, mode in enumerate(_MODE_ORDER)}
+    return sorted({str(value) for value in values if str(value)}, key=lambda item: order.get(item, 999))
+
+
+def _supported_modes_from_mask(value: Any) -> list[str]:
+    try:
+        mask = int(value or 0)
+    except (TypeError, ValueError):
+        mask = 0
+    if mask <= 0:
+        mask = _ALL_MODE_FLAGS
+    return [mode for mode in _MODE_ORDER if mask & _MODE_FLAGS[mode]]
+
+
+def _labels_from_mask(value: Any, labels: dict[int, str]) -> list[str]:
+    try:
+        mask = int(value or 0)
+    except (TypeError, ValueError):
+        mask = 0
+    return [label for bit, label in labels.items() if mask & bit]
+
+
+def _normalize_platform_key(value: str) -> str:
+    text = str(value or "").strip().lower()
+    if not text:
+        return ""
+    parts = text.split("-")
+    if len(parts) >= 2 and parts[0] in {"windows", "linux", "macos"}:
+        return "-".join(parts[:2])
+    return text
+
+
+def _parse_timestamp(value: str | None) -> datetime | None:
+    text = str(value or "").strip()
+    if not text:
+        return None
+    try:
+        return datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def _metric_value(metrics: dict[str, Any], metric_key: str) -> float | None:
+    if metric_key == "meanDurationMs":
+        candidates = ("meanDurationMs", "meanElapsedMilliseconds", "elapsedMilliseconds")
+    elif metric_key == "meanOpsPerSecond":
+        candidates = ("meanOpsPerSecond", "opsPerSecond")
+    else:
+        candidates = (metric_key,)
+
+    for candidate in candidates:
+        value = metrics.get(candidate)
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            return float(value)
+    return None
+
+
+def _declared_source_entry(entry: dict[str, Any]) -> str:
+    assembly_name = str(entry.get("assemblyName") or "")
+    declaring_type = str(entry.get("declaringType") or "")
+    method_signature = str(entry.get("methodSignature") or "")
+    if not assembly_name or not declaring_type or not method_signature:
+        return ""
+    type_name = declaring_type.rsplit(".", 1)[-1]
+    return f"{assembly_name}/{type_name}::{method_signature}"
+
+
+def _load_declared_benchmark_cases(repo_root: Path, subject_id: str) -> dict[str, dict[str, Any]]:
+    testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
+    try:
+        compiled_catalog_mod = _load("compiled_catalog", testing_root / "compiled_catalog.py")
+        catalog = compiled_catalog_mod.build_subject_declared_test_catalog(
+            repo_root=repo_root,
+            subject_id=subject_id,
+            force_build=False,
+        )
+    except Exception:
+        return {}
+
+    cases: dict[str, dict[str, Any]] = {}
+    for payload in list(dict(catalog).get("declaredBenchmarks") or []):
+        item = dict(payload or {})
+        stable_id = str(item.get("stableId") or "").strip()
+        if not stable_id:
+            continue
+        modes = int(item.get("modes") or 0)
+        cases[stable_id] = {
+            "stableId": stable_id,
+            "alias": str(item.get("alias") or "").strip() or stable_id,
+            "displayName": str(item.get("alias") or "").strip() or stable_id,
+            "workloadEntry": _declared_source_entry(item),
+            "assemblyName": str(item.get("assemblyName") or ""),
+            "declaringType": str(item.get("declaringType") or ""),
+            "methodName": str(item.get("methodName") or ""),
+            "methodSignature": str(item.get("methodSignature") or ""),
+            "category": int(item.get("category") or 0),
+            "categoryLabel": _BENCHMARK_CATEGORY_LABELS.get(int(item.get("category") or 0), "Uncategorized"),
+            "metrics": int(item.get("metrics") or 0),
+            "metricLabels": _labels_from_mask(item.get("metrics"), _METRIC_LABELS),
+            "modes": modes,
+            "supportedModes": _supported_modes_from_mask(modes),
+            "requires": int(item.get("requires") or 0),
+            "requirementLabels": _labels_from_mask(item.get("requires"), _RUNTIME_FEATURE_LABELS),
+            "warmupCount": int(item.get("warmupCount") or 0),
+            "iterationCount": int(item.get("iterationCount") or 0),
+            "invocationCount": int(item.get("invocationCount") or 0),
+        }
+    return cases
+
+
+def _merge_case_meta(base: dict[str, Any], incoming: dict[str, Any]) -> dict[str, Any]:
+    merged = dict(base or {})
+    for key, value in incoming.items():
+        if key in {"supportedModes", "metricLabels", "requirementLabels"}:
+            values = [str(item) for item in list(value or []) if str(item)]
+            if values:
+                merged[key] = values
+            elif key not in merged:
+                merged[key] = []
+            continue
+        if value not in (None, "", [], {}):
+            merged[key] = value
+    return merged
+
+
+def _summary_benchmark_case_payload(case_payload: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "caseId": str(case_payload.get("caseId") or case_payload.get("stableId") or ""),
+        "stableId": str(case_payload.get("stableId") or case_payload.get("caseId") or ""),
+        "alias": str(case_payload.get("alias") or case_payload.get("displayName") or ""),
+        "displayName": str(case_payload.get("displayName") or case_payload.get("alias") or ""),
+        "workloadEntry": str(case_payload.get("workloadEntry") or ""),
+        "assemblyName": str(case_payload.get("assemblyName") or ""),
+        "declaringType": str(case_payload.get("declaringType") or ""),
+        "methodName": str(case_payload.get("methodName") or ""),
+        "methodSignature": str(case_payload.get("methodSignature") or ""),
+        "category": int(case_payload.get("category") or 0),
+        "categoryLabel": str(case_payload.get("categoryLabel") or "Uncategorized"),
+        "metricLabels": list(case_payload.get("metricLabels") or []),
+        "requirementLabels": list(case_payload.get("requirementLabels") or []),
+        "supportedModes": _sort_modes(list(case_payload.get("supportedModes") or [])),
+    }
+
+
+def _find_summary_benchmark_case(
+    workload_entry: str,
+    *,
+    benchmark_cases_by_device: dict[str, dict[str, Any]],
+    declared_cases: dict[str, dict[str, Any]],
+) -> dict[str, Any] | None:
+    if not workload_entry:
+        return None
+
+    for cases in benchmark_cases_by_device.values():
+        for case_payload in cases.values():
+            if str(case_payload.get("workloadEntry") or "") == workload_entry:
+                return _summary_benchmark_case_payload(case_payload)
+
+    for declared_case in declared_cases.values():
+        if str(declared_case.get("workloadEntry") or "") == workload_entry:
+            return _summary_benchmark_case_payload(declared_case)
+
+    return None
+
+
+def _ratio(numerator: float | None, denominator: float | None) -> float | None:
+    if numerator is None or denominator is None or denominator == 0.0:
+        return None
+    return round(float(numerator) / float(denominator), 2)
+
+
+def _derived_ratio(*, latency_ratio: float | None, throughput_ratio: float | None) -> dict[str, Any] | None:
+    if latency_ratio is not None:
+        return {"value": latency_ratio, "basis": "latency"}
+    if throughput_ratio is not None:
+        return {"value": throughput_ratio, "basis": "throughput"}
+    return None
+
+
+def _record_sort_key(record: dict[str, Any]) -> tuple[float, str]:
+    recorded_at = str(record.get("recordedAt") or "")
+    parsed = _parse_timestamp(recorded_at)
+    return ((parsed.timestamp() if parsed else 0.0), recorded_at)
+
+
+def _choose_device_for_platform(by_device: dict[str, dict[str, Any]], platform_key: str) -> str | None:
+    best_device_id: str | None = None
+    best_score: tuple[int, float, str] = (-1, -1.0, "")
+
+    for device_id, modes in by_device.items():
+        if platform_key and _normalize_platform_key(device_id) != platform_key:
+            continue
+        latest_record = max(list(modes.values()), key=_record_sort_key, default=None)
+        latest_timestamp = _record_sort_key(latest_record)[0] if latest_record else -1.0
+        score = (len(modes), latest_timestamp, device_id)
+        if score > best_score:
+            best_score = score
+            best_device_id = device_id
+
+    return best_device_id
+
+
+def _manifest_perf_matrices(manifest: dict[str, Any]) -> list[dict[str, Any]]:
+    matrices = []
+    for matrix in list(manifest.get("environmentMatrices") or []):
+        payload = dict(matrix)
+        goal_ids = [str(goal_id) for goal_id in list(payload.get("supportedGoals") or [])]
+        if any(goal_id.startswith("perf.") for goal_id in goal_ids):
+            matrices.append(payload)
+    return matrices
+
+
+def _manifest_platforms(manifest: dict[str, Any]) -> list[str]:
+    platforms = []
+    for matrix in _manifest_perf_matrices(manifest):
+        execution_context = dict(matrix.get("executionContext") or {})
+        platform_key = _normalize_platform_key(str(execution_context.get("hostPlatform") or ""))
+        if platform_key:
+            platforms.append(platform_key)
+    return sorted(set(platforms))
+
+
+def _pipeline_stage_kinds(manifest: dict[str, Any], pipeline_id: str) -> set[str]:
+    if not pipeline_id:
+        return set()
+    for pipeline in list(manifest.get("executionPipelines") or []):
+        payload = dict(pipeline)
+        if str(payload.get("pipelineId") or "") != pipeline_id:
+            continue
+        return {
+            str(stage.get("kind") or "")
+            for stage in list(payload.get("stages") or [])
+            if str(stage.get("kind") or "")
+        }
+    return set()
+
+
+def _mode_selection_terms(mode: str) -> tuple[str, ...]:
+    return {
+        "managed": ("managed-benchmark", "managed-perf"),
+        "native": ("native-benchmark", "native-perf"),
+        "interpreter": ("interpreter-benchmark", "interpreter-perf"),
+    }.get(mode, (mode,))
+
+
+def _mode_stage_kinds(mode: str) -> tuple[str, ...]:
+    return {
+        "managed": ("runtime-perf-collect",),
+        "native": ("native-runtime-perf", "mobile-native-perf"),
+        "interpreter": ("interpreter-runtime-perf",),
+    }.get(mode, ())
+
+
+def _matrix_matches_mode(manifest: dict[str, Any], matrix: dict[str, Any], mode: str, platform_key: str) -> bool:
+    goal_ids = [str(goal_id) for goal_id in list(matrix.get("supportedGoals") or [])]
+    if not any(goal_id.startswith("perf.") for goal_id in goal_ids):
+        return False
+
+    execution_context = dict(matrix.get("executionContext") or {})
+    host_key = _normalize_platform_key(str(execution_context.get("hostPlatform") or ""))
+    if platform_key and host_key and host_key != platform_key:
+        return False
+
+    pipeline_id = str(matrix.get("pipelineId") or "")
+    runtime_profile = str(execution_context.get("runtimeProfile") or "").lower()
+    stage_kinds = _pipeline_stage_kinds(manifest, pipeline_id)
+    expected_stage_kinds = set(_mode_stage_kinds(mode))
+    if expected_stage_kinds.intersection(stage_kinds):
+        return True
+
+    haystack = " ".join((str(matrix.get("matrixId") or ""), pipeline_id, runtime_profile)).lower()
+    return any(term in haystack for term in _mode_selection_terms(mode))
+
+
+def _supported_modes_for_platform(
+    manifest: dict[str, Any],
+    *,
+    platform_key: str,
+) -> list[str]:
+    supported = [
+        mode
+        for mode in _MODE_ORDER
+        if any(_matrix_matches_mode(manifest, dict(matrix), mode, platform_key) for matrix in _manifest_perf_matrices(manifest))
+    ]
+    return _sort_modes(supported)
+
+
+def _record_status_payload(mode: str, record: dict[str, Any], device_id: str) -> dict[str, Any]:
+    device = dict(record.get("device") or {})
+    return {
+        "mode": mode,
+        "status": "recorded",
+        "deviceId": device_id,
+        "deviceName": str(device.get("name") or device_id),
+        "recordedAt": record.get("recordedAt"),
+        "gitCommit": record.get("gitCommit"),
+        "metrics": dict(record.get("metrics") or {}),
+    }
+
+
+def _baseline_metric_payload(entry: dict[str, Any]) -> dict[str, Any]:
+    metrics = dict(entry.get("metrics") or {})
+    return {
+        "mode": str(entry.get("mode") or "managed"),
+        "status": str(entry.get("status") or "unsupported"),
+        "durationMs": _metric_value(metrics, "meanDurationMs"),
+        "opsPerSecond": _metric_value(metrics, "meanOpsPerSecond"),
+        "recordedAt": entry.get("recordedAt"),
+        "gitCommit": entry.get("gitCommit"),
+    }
+
+
+def _relative_to_managed_payload(
+    *,
+    mode: str,
+    mode_status: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    current_entry = dict(mode_status.get(mode) or {})
+    managed_entry = dict(mode_status.get("managed") or {})
+    current_status = str(current_entry.get("status") or "unsupported")
+    managed_status = str(managed_entry.get("status") or "unsupported")
+
+    payload = {
+        "mode": mode,
+        "status": current_status,
+        "direction": "faster" if mode == "native" else "slower",
+        "ratio": None,
+        "durationMs": None,
+        "opsPerSecond": None,
+        "recordedAt": current_entry.get("recordedAt"),
+        "gitCommit": current_entry.get("gitCommit"),
+        "baselineStatus": managed_status,
+    }
+
+    if current_status != "recorded":
+        return payload
+    if managed_status != "recorded":
+        payload["status"] = "baseline-unavailable"
+        return payload
+
+    current_metrics = dict(current_entry.get("metrics") or {})
+    managed_metrics = dict(managed_entry.get("metrics") or {})
+    payload["durationMs"] = _metric_value(current_metrics, "meanDurationMs")
+    payload["opsPerSecond"] = _metric_value(current_metrics, "meanOpsPerSecond")
+
+    if mode == "native":
+        ratio = _derived_ratio(
+            latency_ratio=_ratio(
+                _metric_value(managed_metrics, "meanDurationMs"),
+                _metric_value(current_metrics, "meanDurationMs"),
+            ),
+            throughput_ratio=_ratio(
+                _metric_value(current_metrics, "meanOpsPerSecond"),
+                _metric_value(managed_metrics, "meanOpsPerSecond"),
+            ),
+        )
+    else:
+        ratio = _derived_ratio(
+            latency_ratio=_ratio(
+                _metric_value(current_metrics, "meanDurationMs"),
+                _metric_value(managed_metrics, "meanDurationMs"),
+            ),
+            throughput_ratio=_ratio(
+                _metric_value(managed_metrics, "meanOpsPerSecond"),
+                _metric_value(current_metrics, "meanOpsPerSecond"),
+            ),
+        )
+    payload["ratio"] = ratio
+    return payload
+
+
+def _key_metrics_from_mode_status(mode_status: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    managed_metrics = dict(mode_status.get("managed", {}).get("metrics") or {})
+    native_metrics = dict(mode_status.get("native", {}).get("metrics") or {})
+    interpreter_metrics = dict(mode_status.get("interpreter", {}).get("metrics") or {})
+
+    native_speedup = _derived_ratio(
+        latency_ratio=_ratio(
+            _metric_value(managed_metrics, "meanDurationMs"),
+            _metric_value(native_metrics, "meanDurationMs"),
+        ),
+        throughput_ratio=_ratio(
+            _metric_value(native_metrics, "meanOpsPerSecond"),
+            _metric_value(managed_metrics, "meanOpsPerSecond"),
+        ),
+    )
+    interpreter_overhead = _derived_ratio(
+        latency_ratio=_ratio(
+            _metric_value(interpreter_metrics, "meanDurationMs"),
+            _metric_value(managed_metrics, "meanDurationMs"),
+        ),
+        throughput_ratio=_ratio(
+            _metric_value(managed_metrics, "meanOpsPerSecond"),
+            _metric_value(interpreter_metrics, "meanOpsPerSecond"),
+        ),
+    )
+    return {
+        "managedBaseline": _baseline_metric_payload(dict(mode_status.get("managed") or {"mode": "managed"})),
+        "relativeToManaged": {
+            "native": _relative_to_managed_payload(mode="native", mode_status=mode_status),
+            "interpreter": _relative_to_managed_payload(mode="interpreter", mode_status=mode_status),
+        },
+        "nativeSpeedup": native_speedup,
+        "interpreterOverhead": interpreter_overhead,
+    }
+
+
+def _build_platform_summary(
+    *,
+    subject_id: str,
+    display_name: str,
+    platform_key: str,
+    by_device: dict[str, dict[str, Any]],
+    comparisons: dict[str, Any],
+    supported_modes: list[str],
+) -> dict[str, Any]:
+    device_id = _choose_device_for_platform(by_device, platform_key)
+    latest_by_mode = dict(by_device.get(device_id, {})) if device_id else {}
+    mode_status: dict[str, dict[str, Any]] = {}
+
+    recorded_modes = _sort_modes([mode for mode in latest_by_mode if mode in supported_modes])
+    missing_modes = _sort_modes([mode for mode in supported_modes if mode not in latest_by_mode])
+    unsupported_modes = _sort_modes([mode for mode in _MODE_ORDER if mode not in supported_modes])
+
+    for mode in _MODE_ORDER:
+        if mode in latest_by_mode:
+            mode_status[mode] = _record_status_payload(mode, latest_by_mode[mode], device_id or "unknown")
+        elif mode in supported_modes:
+            mode_status[mode] = {"mode": mode, "status": "missing"}
+        else:
+            mode_status[mode] = {"mode": mode, "status": "unsupported"}
+
+    latest_record = max(list(latest_by_mode.values()), key=_record_sort_key, default=None)
+    latest_ts = str(latest_record.get("recordedAt") or "") if latest_record else ""
+    latest_dt = _parse_timestamp(latest_ts)
+    is_stale = False
+    if latest_dt is not None:
+        age_days = (datetime.now(timezone.utc) - latest_dt.astimezone(timezone.utc)).total_seconds() / 86400.0
+        is_stale = age_days > _STALE_AFTER_DAYS
+
+    comparison_payload = dict(comparisons.get(device_id) or {}) if device_id else {}
+    device_name = ""
+    if latest_record is not None:
+        device_name = str(dict(latest_record.get("device") or {}).get("name") or device_id or "")
+
+    return {
+        "subjectId": subject_id,
+        "displayName": display_name,
+        "platformId": platform_key,
+        "deviceId": device_id,
+        "deviceName": device_name,
+        "supportedModes": supported_modes,
+        "recordedModes": recorded_modes,
+        "missingModes": missing_modes,
+        "unsupportedModes": unsupported_modes,
+        "modeStatus": mode_status,
+        "coverage": {
+            "supportedModeCount": len(supported_modes),
+            "recordedModeCount": len(recorded_modes),
+            "missingModeCount": len(missing_modes),
+            "unsupportedModeCount": len(unsupported_modes),
+            "isComplete": len(supported_modes) > 0 and len(missing_modes) == 0,
+        },
+        "lastRecordedAt": latest_ts or None,
+        "gitCommit": (latest_record or {}).get("gitCommit"),
+        "isStale": is_stale,
+        "comparison": comparison_payload.get("comparison"),
+        "verdict": comparison_payload.get("verdict"),
+        "keyMetrics": _key_metrics_from_mode_status(mode_status),
+    }
+
+
+def _build_case_summary(
+    *,
+    case_id: str,
+    case_payload: dict[str, Any],
+    platform_supported_modes: list[str],
+) -> dict[str, Any]:
+    meta = dict(case_payload.get("meta") or {})
+    latest_by_mode = dict(case_payload.get("records") or {})
+    declared_supported_modes = _sort_modes(
+        [
+            mode
+            for mode in list(meta.get("supportedModes") or [])
+            if not platform_supported_modes or mode in platform_supported_modes
+        ]
+    )
+    supported_modes = declared_supported_modes or platform_supported_modes
+    mode_status: dict[str, dict[str, Any]] = {}
+
+    recorded_modes = _sort_modes([mode for mode in latest_by_mode if mode in supported_modes])
+    missing_modes = _sort_modes([mode for mode in supported_modes if mode not in latest_by_mode])
+    unsupported_modes = _sort_modes([mode for mode in _MODE_ORDER if mode not in supported_modes])
+
+    for mode in _MODE_ORDER:
+        if mode in latest_by_mode:
+            mode_status[mode] = _record_status_payload(mode, latest_by_mode[mode], str(meta.get("deviceId") or "unknown"))
+        elif mode in supported_modes:
+            mode_status[mode] = {"mode": mode, "status": "missing"}
+        else:
+            mode_status[mode] = {"mode": mode, "status": "unsupported"}
+
+    return {
+        "caseId": case_id,
+        "displayName": str(meta.get("displayName") or meta.get("alias") or case_id),
+        "alias": str(meta.get("alias") or case_id),
+        "workloadEntry": str(meta.get("workloadEntry") or ""),
+        "assemblyName": str(meta.get("assemblyName") or ""),
+        "declaringType": str(meta.get("declaringType") or ""),
+        "methodName": str(meta.get("methodName") or ""),
+        "methodSignature": str(meta.get("methodSignature") or ""),
+        "category": int(meta.get("category") or 0),
+        "categoryLabel": str(meta.get("categoryLabel") or "Uncategorized"),
+        "metrics": int(meta.get("metrics") or 0),
+        "metricLabels": list(meta.get("metricLabels") or []),
+        "requires": int(meta.get("requires") or 0),
+        "requirementLabels": list(meta.get("requirementLabels") or []),
+        "warmupCount": int(meta.get("warmupCount") or 0),
+        "iterationCount": int(meta.get("iterationCount") or 0),
+        "invocationCount": int(meta.get("invocationCount") or 0),
+        "supportedModes": supported_modes,
+        "recordedModes": recorded_modes,
+        "missingModes": missing_modes,
+        "unsupportedModes": unsupported_modes,
+        "modeStatus": mode_status,
+        "coverage": {
+            "supportedModeCount": len(supported_modes),
+            "recordedModeCount": len(recorded_modes),
+            "missingModeCount": len(missing_modes),
+            "unsupportedModeCount": len(unsupported_modes),
+            "isComplete": len(supported_modes) > 0 and len(missing_modes) == 0,
+        },
+        "keyMetrics": _key_metrics_from_mode_status(mode_status),
+    }
+
+
+def _summarize_case_entries(entries: list[dict[str, Any]]) -> dict[str, Any]:
+    cross_mode_count = sum(1 for entry in entries if len(list(entry.get("supportedModes") or [])) >= 2)
+    managed_only_count = sum(1 for entry in entries if list(entry.get("supportedModes") or []) == ["managed"])
+    return {
+        "caseCount": len(entries),
+        "crossModeCaseCount": cross_mode_count,
+        "managedOnlyCaseCount": managed_only_count,
+        "fullyRecordedCaseCount": sum(1 for entry in entries if bool(dict(entry.get("coverage") or {}).get("isComplete"))),
+        "missingCaseCount": sum(1 for entry in entries if bool(entry.get("missingModes"))),
+    }
+
+
+def _summarize_subject_entries(entries: list[dict[str, Any]]) -> dict[str, Any]:
+    latest_recorded_at = None
+    latest_recorded_dt = None
+
+    for entry in entries:
+        current = _parse_timestamp(str(entry.get("lastRecordedAt") or ""))
+        if current is None:
+            continue
+        if latest_recorded_dt is None or current > latest_recorded_dt:
+            latest_recorded_dt = current
+            latest_recorded_at = entry.get("lastRecordedAt")
+
+    return {
+        "subjectCount": len(entries),
+        "fullyRecordedCount": sum(1 for entry in entries if bool(dict(entry.get("coverage") or {}).get("isComplete"))),
+        "subjectsWithMissingRecords": sum(1 for entry in entries if bool(entry.get("missingModes"))),
+        "staleSubjectCount": sum(1 for entry in entries if bool(entry.get("isStale"))),
+        "recordedModeCount": sum(len(list(entry.get("recordedModes") or [])) for entry in entries),
+        "missingModeCount": sum(len(list(entry.get("missingModes") or [])) for entry in entries),
+        "unsupportedModeCount": sum(len(list(entry.get("unsupportedModes") or [])) for entry in entries),
+        "latestRecordedAt": latest_recorded_at,
+    }
 
 
 def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict[str, Any]:
-    """Scan all (or selected) subjects and return the full benchmark dataset."""
-    import importlib.util
-
-    def _load(name: str, path: Path):
-        spec = importlib.util.spec_from_file_location(name, path)
-        assert spec and spec.loader
-        mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)  # type: ignore[union-attr]
-        return mod
-
     testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
-    records_mod = _load("benchmark_records", testing_root / "benchmark_records.py")
     comparison_mod = _load("benchmark_comparison", testing_root / "benchmark_comparison.py")
+    subjects_mod = _load("subjects", testing_root / "subjects.py")
 
-    # Discover subjects
     if subject_ids is None:
-        subjects_root = repo_root / "subjects"
-        subject_ids = sorted(
-            p.name for p in subjects_root.iterdir()
-            if (p / "benchmark-records" / "records.jsonl").exists()
-        )
+        subject_ids = subjects_mod.discover_perf_subject_ids(repo_root)
 
     data: dict[str, Any] = {}
 
     for subject_id in subject_ids:
+        manifest = subjects_mod.load_subject_manifest(repo_root, subject_id)
+        display_name = str(manifest.get("displayName") or subject_id)
+        summary_workload_entry = str(manifest.get("workloadEntry") or "")
         records_path = repo_root / "subjects" / subject_id / "benchmark-records" / "records.jsonl"
-        if not records_path.exists():
-            continue
+        declared_cases = _load_declared_benchmark_cases(repo_root, subject_id)
 
-        # Collect all unique (mode, device) combinations
         seen_pairs: set[tuple[str, str]] = set()
-        by_device: dict[str, dict[str, Any]] = {}  # device_id → {mode: record}
-        history: dict[str, dict[str, list[Any]]] = {}  # device_id → {mode: [records]}
+        by_device: dict[str, dict[str, Any]] = {}
+        history: dict[str, dict[str, list[Any]]] = {}
+        case_records_by_device: dict[str, dict[str, dict[str, Any]]] = {}
 
-        # Iterate newest-first
-        for record in _iter_jsonl_reverse(records_path):
-            mode = str(record.get("mode") or "")
-            dev_id = record.get("device", {}).get("id") or "unknown"
-            pair = (mode, dev_id)
+        if records_path.exists():
+            for record in _iter_jsonl_reverse(records_path):
+                mode = str(record.get("mode") or "")
+                device_id = str(dict(record.get("device") or {}).get("id") or "unknown")
+                benchmark_case = dict(record.get("benchmarkCase") or {})
+                case_id = str(benchmark_case.get("stableId") or benchmark_case.get("alias") or "").strip()
+                if case_id:
+                    record_case_meta = {
+                        "stableId": case_id,
+                        "deviceId": device_id,
+                        "alias": str(benchmark_case.get("alias") or case_id),
+                        "displayName": str(benchmark_case.get("displayName") or benchmark_case.get("alias") or case_id),
+                        "workloadEntry": str(benchmark_case.get("workloadEntry") or ""),
+                        "assemblyName": str(benchmark_case.get("assemblyName") or ""),
+                        "declaringType": str(benchmark_case.get("declaringType") or ""),
+                        "methodName": str(benchmark_case.get("methodName") or ""),
+                        "methodSignature": str(benchmark_case.get("methodSignature") or ""),
+                        "category": int(benchmark_case.get("category") or 0),
+                        "categoryLabel": _BENCHMARK_CATEGORY_LABELS.get(int(benchmark_case.get("category") or 0), "Uncategorized"),
+                        "metrics": int(benchmark_case.get("metrics") or 0),
+                        "metricLabels": _labels_from_mask(benchmark_case.get("metrics"), _METRIC_LABELS),
+                        "modes": int(benchmark_case.get("modes") or 0),
+                        "supportedModes": list(benchmark_case.get("supportedModes") or _supported_modes_from_mask(benchmark_case.get("modes"))),
+                        "requires": int(benchmark_case.get("requires") or 0),
+                        "requirementLabels": _labels_from_mask(benchmark_case.get("requires"), _RUNTIME_FEATURE_LABELS),
+                        "warmupCount": int(benchmark_case.get("warmupCount") or 0),
+                        "iterationCount": int(benchmark_case.get("iterationCount") or 0),
+                        "invocationCount": int(benchmark_case.get("invocationCount") or 0),
+                    }
+                    case_payload = case_records_by_device.setdefault(device_id, {}).setdefault(
+                        case_id,
+                        {
+                            "meta": {},
+                            "records": {},
+                        },
+                    )
+                    case_payload["meta"] = _merge_case_meta(
+                        case_payload["meta"],
+                        _merge_case_meta(dict(declared_cases.get(case_id) or {}), record_case_meta),
+                    )
+                    if mode and mode not in case_payload["records"]:
+                        case_payload["records"][mode] = record
+                    continue
+                pair = (mode, device_id)
 
-            # Accumulate history
-            history.setdefault(dev_id, {}).setdefault(mode, [])
-            if len(history[dev_id][mode]) < 20:
-                history[dev_id][mode].append(record)
+                history.setdefault(device_id, {}).setdefault(mode, [])
+                if len(history[device_id][mode]) < 20:
+                    history[device_id][mode].append(record)
 
-            # Latest per mode+device
-            if pair not in seen_pairs:
-                seen_pairs.add(pair)
-                by_device.setdefault(dev_id, {})[mode] = record
+                if pair not in seen_pairs:
+                    seen_pairs.add(pair)
+                    by_device.setdefault(device_id, {})[mode] = record
 
-        # Build comparison for each device using latest records
         comparisons: dict[str, Any] = {}
-        for dev_id, modes in by_device.items():
-            def _metrics(m):
-                rec = modes.get(m)
-                return dict(rec.get("metrics") or {}) if rec else None
-            cmp = comparison_mod.compute_comparison(
-                _metrics("managed"), _metrics("native"), _metrics("interpreter")
+        for device_id, modes in by_device.items():
+            comparison = comparison_mod.compute_comparison(
+                dict(dict(modes.get("managed") or {}).get("metrics") or {}),
+                dict(dict(modes.get("native") or {}).get("metrics") or {}),
+                dict(dict(modes.get("interpreter") or {}).get("metrics") or {}),
             )
-            verdict = comparison_mod.evaluate_targets(cmp)
-            comparisons[dev_id] = {"comparison": cmp, "verdict": verdict}
+            comparisons[device_id] = {
+                "comparison": comparison,
+                "verdict": comparison_mod.evaluate_targets(comparison),
+            }
+
+        platforms = sorted(set(_manifest_platforms(manifest)) | {_normalize_platform_key(device_id) for device_id in by_device})
+        platform_summaries: dict[str, Any] = {}
+        supported_modes_by_platform: dict[str, list[str]] = {}
+        for platform_key in platforms:
+            if not platform_key:
+                continue
+            supported_modes = _supported_modes_for_platform(
+                manifest,
+                platform_key=platform_key,
+            )
+            supported_modes_by_platform[platform_key] = supported_modes
+            platform_summaries[platform_key] = _build_platform_summary(
+                subject_id=subject_id,
+                display_name=display_name,
+                platform_key=platform_key,
+                by_device=by_device,
+                comparisons=comparisons,
+                supported_modes=supported_modes,
+            )
+
+        for device_id in set(by_device) | set(case_records_by_device):
+            cases = case_records_by_device.setdefault(device_id, {})
+            for case_id, declared_case_meta in declared_cases.items():
+                case_payload = cases.setdefault(case_id, {"meta": {}, "records": {}})
+                case_payload["meta"] = _merge_case_meta(
+                    case_payload["meta"],
+                    _merge_case_meta(dict(declared_case_meta), {"deviceId": device_id}),
+                )
+
+        benchmark_cases_by_device: dict[str, dict[str, Any]] = {}
+        for device_id, cases in case_records_by_device.items():
+            platform_key = _normalize_platform_key(device_id)
+            platform_supported_modes = supported_modes_by_platform.get(platform_key) or _sort_modes(
+                [mode for mode in _MODE_ORDER if any(mode in dict(case_payload.get("records") or {}) for case_payload in cases.values())]
+            )
+            benchmark_cases_by_device[device_id] = {
+                case_id: _build_case_summary(
+                    case_id=case_id,
+                    case_payload=case_payload,
+                    platform_supported_modes=platform_supported_modes,
+                )
+                for case_id, case_payload in sorted(cases.items())
+            }
+
+        summary_benchmark_case = _find_summary_benchmark_case(
+            summary_workload_entry,
+            benchmark_cases_by_device=benchmark_cases_by_device,
+            declared_cases=declared_cases,
+        )
 
         data[subject_id] = {
+            "subjectId": subject_id,
+            "displayName": display_name,
+            "summaryWorkloadEntry": summary_workload_entry,
+            "summaryBenchmarkCase": summary_benchmark_case,
+            "supportedModesByPlatform": supported_modes_by_platform,
+            "availablePlatforms": sorted(platform_summaries),
+            "platforms": platform_summaries,
             "latestByDevice": by_device,
+            "benchmarkCasesByDevice": benchmark_cases_by_device,
+            "declaredBenchmarkCases": declared_cases,
+            "caseSummaryByDevice": {
+                device_id: _summarize_case_entries(list(cases.values()))
+                for device_id, cases in benchmark_cases_by_device.items()
+            },
             "history": history,
             "comparisons": comparisons,
         }
@@ -110,111 +794,112 @@ def _iter_jsonl_reverse(path: Path):
             continue
 
 
-# ---------------------------------------------------------------------------
-# Overview JSON
-# ---------------------------------------------------------------------------
-
-
-def _build_overview(data: dict[str, Any], default_platform_prefix: str = "windows") -> dict[str, Any]:
+def _build_overview(data: dict[str, Any], default_platform_prefix: str = _DEFAULT_PLATFORM) -> dict[str, Any]:
     subjects_out: dict[str, Any] = {}
-    for subject_id, subject_data in data.items():
-        by_device = subject_data.get("latestByDevice") or {}
-        # Pick the device matching default_platform_prefix (most windows-x64 data)
-        chosen_device = None
-        max_modes = -1
-        for dev_id, modes in by_device.items():
-            if default_platform_prefix in dev_id and len(modes) > max_modes:
-                max_modes = len(modes)
-                chosen_device = dev_id
-        if chosen_device is None and by_device:
-            chosen_device = next(iter(by_device))
+    platform_entries: dict[str, list[dict[str, Any]]] = {}
+    chosen_entries: list[dict[str, Any]] = []
 
-        if chosen_device:
-            modes = by_device[chosen_device]
-            entry: dict[str, Any] = {}
-            for mode, record in modes.items():
-                entry[mode] = {
-                    "metrics": record.get("metrics"),
-                    "recordedAt": record.get("recordedAt"),
-                    "gitCommit": record.get("gitCommit"),
-                    "deviceId": chosen_device,
-                }
-            subjects_out[subject_id] = entry
+    for subject_id, subject_data in data.items():
+        platforms = dict(subject_data.get("platforms") or {})
+        if not platforms:
+            continue
+
+        selected_platform = default_platform_prefix if default_platform_prefix in platforms else sorted(platforms)[0]
+        selected_entry = dict(platforms[selected_platform])
+        selected_device_id = str(selected_entry.get("deviceId") or "")
+        subject_entry = {
+            "subjectId": subject_id,
+            "displayName": subject_data.get("displayName") or subject_id,
+            "defaultPlatform": selected_platform,
+            "availablePlatforms": list(subject_data.get("availablePlatforms") or []),
+            "summaryWorkloadEntry": str(subject_data.get("summaryWorkloadEntry") or ""),
+            "summaryBenchmarkCase": dict(subject_data.get("summaryBenchmarkCase") or {}),
+            "caseSummary": dict((subject_data.get("caseSummaryByDevice") or {}).get(selected_device_id) or {}),
+            "platforms": platforms,
+            **selected_entry,
+        }
+        subjects_out[subject_id] = subject_entry
+        chosen_entries.append(subject_entry)
+
+        for platform_id, platform_entry in platforms.items():
+            platform_entries.setdefault(platform_id, []).append(dict(platform_entry))
+
+    platform_summaries = {
+        platform_id: _summarize_subject_entries(entries)
+        for platform_id, entries in sorted(platform_entries.items())
+    }
 
     return {
         "generatedAt": datetime.now(timezone.utc).isoformat(),
-        "defaultPlatform": "windows-x64",
+        "defaultPlatform": default_platform_prefix,
+        "availablePlatforms": sorted(platform_summaries),
+        "modeOrder": list(_MODE_ORDER),
+        "summary": _summarize_subject_entries(chosen_entries),
+        "platformSummaries": platform_summaries,
         "subjects": subjects_out,
     }
 
 
-# ---------------------------------------------------------------------------
-# HTML generation
-# ---------------------------------------------------------------------------
-
-
-def generate(repo_root: Path, output_path: Path, subject_ids: list[str] | None = None) -> None:
-    """Generate a self-contained HTML dashboard at output_path."""
-    data = _collect_data(repo_root, subject_ids)
-    overview = _build_overview(data)
-
-    template_path = (
-        repo_root / "build" / "toolchains" / "run" / "testing" / "templates" / "benchmark-dashboard.html"
-    )
-    if not template_path.exists():
-        _write_default_template(template_path)
-
-    template = template_path.read_text(encoding="utf-8")
-
-    payload = {
+def _dashboard_payload(data: dict[str, Any], overview: dict[str, Any]) -> dict[str, Any]:
+    return {
         "generatedAt": overview["generatedAt"],
         "overview": overview,
         "subjects": data,
     }
-    data_js = f"window.BENCHMARK_DATA = {json.dumps(payload, ensure_ascii=False, default=str)};"
-    html = template.replace("/* BENCHMARK_DATA_PLACEHOLDER */", data_js)
+
+
+def generate(repo_root: Path, output_path: Path, subject_ids: list[str] | None = None) -> None:
+    data = _collect_data(repo_root, subject_ids)
+    overview = _build_overview(data)
+    template = _read_template(repo_root / "build" / "toolchains" / "run" / "testing" / "templates" / "benchmark-dashboard.html")
+    payload = _dashboard_payload(data, overview)
+    html = template.replace(
+        "/* BENCHMARK_DATA_PLACEHOLDER */",
+        f"window.BENCHMARK_DATA = {json.dumps(payload, ensure_ascii=False, default=str)};",
+    )
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(html, encoding="utf-8")
 
 
 def update_docs(repo_root: Path, subject_id: str | None = None) -> None:
-    """Update docs/benchmark/ — overview.json, subjects/*.json, dashboard.html."""
+    testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
+    subjects_mod = _load("subjects", testing_root / "subjects.py")
     docs_root = repo_root / "docs" / "benchmark"
     subjects_doc_root = docs_root / "subjects"
     subjects_doc_root.mkdir(parents=True, exist_ok=True)
 
-    subject_ids: list[str] | None = [subject_id] if subject_id else None
-    data = _collect_data(repo_root, subject_ids)
+    del subject_id
+    data = _collect_data(repo_root, subjects_mod.discover_perf_subject_ids(repo_root))
     overview = _build_overview(data)
 
-    # Write per-subject JSON
-    for sid, sdata in data.items():
-        (subjects_doc_root / f"{sid}.json").write_text(
-            json.dumps(sdata, ensure_ascii=False, indent=2, default=str),
+    for stale_path in subjects_doc_root.glob("*.json"):
+        stale_path.unlink()
+
+    for current_subject_id, subject_payload in data.items():
+        (subjects_doc_root / f"{current_subject_id}.json").write_text(
+            json.dumps(subject_payload, ensure_ascii=False, indent=2, default=str),
             encoding="utf-8",
         )
 
-    # Write/merge overview JSON
-    overview_path = docs_root / "overview.json"
-    if overview_path.exists() and subject_id:
-        # Merge: only update the specified subject
-        existing = json.loads(overview_path.read_text(encoding="utf-8"))
-        existing_subjects = dict(existing.get("subjects") or {})
-        existing_subjects.update(overview.get("subjects") or {})
-        overview["subjects"] = existing_subjects
-    overview_path.write_text(
-        json.dumps(overview, ensure_ascii=False, indent=2),
+    (docs_root / "overview.json").write_text(
+        json.dumps(overview, ensure_ascii=False, indent=2, default=str),
         encoding="utf-8",
     )
 
-    # Re-generate dashboard HTML
-    generate(repo_root, docs_root / "dashboard.html")
+    template = _read_template(testing_root / "templates" / "benchmark-dashboard.html")
+    payload = _dashboard_payload(data, overview)
+    html = template.replace(
+        "/* BENCHMARK_DATA_PLACEHOLDER */",
+        f"window.BENCHMARK_DATA = {json.dumps(payload, ensure_ascii=False, default=str)};",
+    )
+    (docs_root / "dashboard.html").write_text(html, encoding="utf-8")
 
 
-# ---------------------------------------------------------------------------
-# Default HTML template (written once if missing)
-# ---------------------------------------------------------------------------
+def _read_template(path: Path) -> str:
+    if not path.exists():
+        _write_default_template(path)
+    return path.read_text(encoding="utf-8")
 
 
 def _write_default_template(path: Path) -> None:
@@ -222,375 +907,9 @@ def _write_default_template(path: Path) -> None:
     path.write_text(_DEFAULT_HTML, encoding="utf-8")
 
 
-_DEFAULT_HTML = """\
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IL2CPP Benchmark Dashboard</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<style>
-  * { box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-         margin: 0; padding: 0; background: #f5f5f5; color: #333; }
-  header { background: #1a1a2e; color: #fff; padding: 16px 24px; }
-  header h1 { margin: 0; font-size: 1.4rem; }
-  header small { opacity: 0.7; font-size: 0.8rem; }
-  .tabs { display: flex; background: #fff; border-bottom: 2px solid #ddd; }
-  .tab { padding: 12px 24px; cursor: pointer; border: none; background: none;
-          font-size: 0.95rem; color: #555; transition: color .2s; }
-  .tab.active { color: #1a1a2e; border-bottom: 2px solid #1a1a2e; margin-bottom: -2px; font-weight: 600; }
-  .panel { display: none; padding: 24px; }
-  .panel.active { display: block; }
-  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px;
-           overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.1); }
-  th { background: #1a1a2e; color: #fff; padding: 10px 14px; text-align: left; font-size: 0.85rem; }
-  td { padding: 10px 14px; border-bottom: 1px solid #eee; font-size: 0.85rem; }
-  tr:last-child td { border-bottom: none; }
-  .pass { color: #16a34a; font-weight: 600; }
-  .fail { color: #dc2626; font-weight: 600; }
-  .na   { color: #9ca3af; }
-  .stale { color: #f59e0b; }
-  .chart-box { background: #fff; border-radius: 8px; padding: 20px;
-               box-shadow: 0 1px 4px rgba(0,0,0,.1); margin-bottom: 24px; }
-  select { padding: 6px 10px; border: 1px solid #ddd; border-radius: 4px;
-            font-size: 0.9rem; margin-right: 8px; }
-  .empty { color: #9ca3af; font-style: italic; padding: 40px; text-align: center; }
-  .row-controls { margin-bottom: 16px; }
-  h2 { margin: 0 0 16px; font-size: 1.1rem; color: #1a1a2e; }
-</style>
-</head>
-<body>
-
-<header>
-  <h1>IL2CPP Benchmark Dashboard</h1>
-  <small id="gen-time">Generated: —</small>
-</header>
-
-<div class="tabs">
-  <button class="tab active" onclick="showTab('overview')">Overview</button>
-  <button class="tab" onclick="showTab('detail')">Subject Detail</button>
-  <button class="tab" onclick="showTab('devices')">Device Comparison</button>
-</div>
-
-<!-- TAB 1: Overview -->
-<div class="panel active" id="tab-overview">
-  <div class="row-controls">
-    <label>Platform: <select id="ov-platform-select" onchange="renderOverview()"></select></label>
-    <label>Metric: <select id="ov-metric-select" onchange="renderOverview()">
-      <option value="meanDurationMs">Mean Duration (ms)</option>
-      <option value="opsPerSecond">Ops/sec</option>
-    </select></label>
-  </div>
-  <div id="overview-table-container"></div>
-</div>
-
-<!-- TAB 2: Subject Detail -->
-<div class="panel" id="tab-detail">
-  <div class="row-controls">
-    <label>Subject: <select id="det-subject-select" onchange="renderDetail()"></select></label>
-    <label>Device: <select id="det-device-select" onchange="renderDetail()"></select></label>
-  </div>
-  <div class="chart-box"><h2>Mode Comparison (latest)</h2><canvas id="det-bar" height="80"></canvas></div>
-  <div class="chart-box">
-    <h2>Trend</h2>
-    <label>Mode: <select id="det-trend-mode" onchange="renderTrend()">
-      <option value="managed">C# (.NET)</option>
-      <option value="native">AOT (C++)</option>
-      <option value="interpreter">HotUpdate (Interpreter)</option>
-    </select></label>
-    <canvas id="det-trend" height="80"></canvas>
-  </div>
-  <div id="det-devices-table"></div>
-</div>
-
-<!-- TAB 3: Device Comparison -->
-<div class="panel" id="tab-devices">
-  <div class="row-controls">
-    <label>Subject: <select id="dev-subject-select" onchange="renderDeviceComparison()"></select></label>
-    <label>Mode: <select id="dev-mode-select" onchange="renderDeviceComparison()">
-      <option value="native">AOT (C++)</option>
-      <option value="managed">C# (.NET)</option>
-      <option value="interpreter">HotUpdate (Interpreter)</option>
-    </select></label>
-  </div>
-  <div class="chart-box"><canvas id="dev-radar" height="100"></canvas></div>
-  <div id="dev-table-container"></div>
-</div>
-
-<script>
-/* BENCHMARK_DATA_PLACEHOLDER */
-
-const D = window.BENCHMARK_DATA || {};
-const overview = (D.overview || {});
-const subjects = D.subjects || {};
-const allSubjectIds = Object.keys(subjects).sort();
-
-// ── Utilities ──────────────────────────────────────────────────────────────
-function fmt(v) {
-  if (v == null || v === "N/A") return '<span class="na">—</span>';
-  if (typeof v === "number") return v.toLocaleString(undefined, {maximumFractionDigits: 2});
-  return String(v);
-}
-function fmtRatio(r) {
-  if (r == null) return '<span class="na">—</span>';
-  if (r === "N/A") return '<span class="na">N/A</span>';
-  const n = parseFloat(r);
-  const cls = n >= 1 ? "pass" : "fail";
-  return `<span class="${cls}">${n.toFixed(2)}x</span>`;
-}
-function staleness(ts) {
-  if (!ts) return "";
-  const age = (Date.now() - new Date(ts).getTime()) / 86400000;
-  if (age > 7) return ' <span class="stale" title="Data older than 7 days">⚠</span>';
-  return "";
-}
-
-// ── Tabs ───────────────────────────────────────────────────────────────────
-function showTab(id) {
-  document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-  document.getElementById("tab-" + id).classList.add("active");
-  event.target.classList.add("active");
-}
-
-// ── Overview ───────────────────────────────────────────────────────────────
-let ovPlatforms = [];
-
-function buildOverviewPlatforms() {
-  const set = new Set();
-  Object.values(subjects).forEach(s => {
-    Object.values(s.latestByDevice || {}).forEach((modes, i, arr) => {
-      Object.values(modes).forEach(rec => {
-        const plat = (rec.device || {}).id || "";
-        set.add(plat.split("-").slice(0, 2).join("-"));
-      });
-    });
-  });
-  ovPlatforms = Array.from(set).sort();
-  if (!ovPlatforms.length) ovPlatforms = ["windows-x64"];
-  const sel = document.getElementById("ov-platform-select");
-  sel.innerHTML = ovPlatforms.map(p => `<option value="${p}">${p}</option>`).join("");
-}
-
-function renderOverview() {
-  const plat = document.getElementById("ov-platform-select").value;
-  const metric = document.getElementById("ov-metric-select").value;
-  const rows = allSubjectIds.map(sid => {
-    const sdata = subjects[sid] || {};
-    const byDev = sdata.latestByDevice || {};
-    // Find device matching platform prefix
-    let devId = Object.keys(byDev).find(d => d.startsWith(plat)) || Object.keys(byDev)[0];
-    const modes = (byDev[devId] || {});
-    const m = (modes.managed || {}).metrics || {};
-    const n = (modes.native || {}).metrics || {};
-    const i = (modes.interpreter || {}).metrics || {};
-    const managed = m[metric];
-    const native_ = n[metric];
-    const interp = i[metric];
-    // For latency: speedup = managed/native; for throughput: native/managed
-    const isLatency = metric.toLowerCase().includes("duration") || metric.toLowerCase().includes("ms");
-    const speedup = (managed && native_) ? (isLatency ? managed/native_ : native_/managed) : null;
-    const overhead = (managed && interp) ? (isLatency ? interp/managed : managed/interp) : null;
-    const mTs = (modes.managed || {}).recordedAt;
-    const nTs = (modes.native || {}).recordedAt;
-    return `<tr>
-      <td><strong>${sid}</strong></td>
-      <td>${fmt(managed)}${staleness(mTs)}</td>
-      <td>${fmt(native_)}${staleness(nTs)}</td>
-      <td>${fmt(interp)}</td>
-      <td>${speedup ? fmtRatio(speedup) : '<span class="na">—</span>'}</td>
-      <td>${overhead ? fmtRatio(overhead) : '<span class="na">—</span>'}</td>
-    </tr>`;
-  });
-  const ratioLabel = metric.includes("Duration") ? "AOT/C# Speedup" : "AOT/C# Ratio";
-  document.getElementById("overview-table-container").innerHTML = rows.length
-    ? `<table><thead><tr>
-        <th>Subject</th><th>C# (.NET)</th><th>AOT (C++)</th><th>HotUpdate</th>
-        <th>${ratioLabel}</th><th>HU/C# Overhead</th>
-       </tr></thead><tbody>${rows.join("")}</tbody></table>`
-    : `<div class="empty">No benchmark data yet.<br>Run: <code>run benchmark --all --mode native --record</code></div>`;
-}
-
-// ── Detail ─────────────────────────────────────────────────────────────────
-let detBarChart = null, detTrendChart = null;
-
-function buildDetailSelects() {
-  const sids = allSubjectIds;
-  if (!sids.length) return;
-  document.getElementById("det-subject-select").innerHTML =
-    sids.map(s => `<option value="${s}">${s}</option>`).join("");
-  updateDetailDevices();
-}
-
-function updateDetailDevices() {
-  const sid = document.getElementById("det-subject-select").value;
-  const sdata = subjects[sid] || {};
-  const devices = Object.keys(sdata.latestByDevice || {}).sort();
-  document.getElementById("det-device-select").innerHTML =
-    devices.map(d => `<option value="${d}">${d}</option>`).join("");
-}
-
-function renderDetail() {
-  updateDetailDevices();
-  const sid = document.getElementById("det-subject-select").value;
-  const devId = document.getElementById("det-device-select").value;
-  const sdata = subjects[sid] || {};
-  const byDev = sdata.latestByDevice || {};
-  const modes = byDev[devId] || {};
-
-  // Bar chart
-  const labels = ["C# (.NET)", "AOT (C++)", "HotUpdate"];
-  const vals = [
-    (modes.managed || {}).metrics?.meanDurationMs,
-    (modes.native || {}).metrics?.meanDurationMs,
-    (modes.interpreter || {}).metrics?.meanDurationMs,
-  ].map(v => v ?? 0);
-  const ctx = document.getElementById("det-bar").getContext("2d");
-  if (detBarChart) detBarChart.destroy();
-  detBarChart = new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels,
-      datasets: [{
-        label: "Mean Duration (ms)",
-        data: vals,
-        backgroundColor: ["#3b82f6","#22c55e","#f59e0b"],
-      }]
-    },
-    options: { responsive: true, plugins: { legend: { display: false } } }
-  });
-
-  // Devices table
-  const allDevices = Object.entries(byDev);
-  const rows = allDevices.map(([dId, ms]) => {
-    const m = (ms.managed || {}).metrics || {};
-    const n = (ms.native || {}).metrics || {};
-    const i = (ms.interpreter || {}).metrics || {};
-    return `<tr>
-      <td>${dId}</td>
-      <td>${fmt(m.meanDurationMs)}</td>
-      <td>${fmt(n.meanDurationMs)}</td>
-      <td>${fmt(i.meanDurationMs)}</td>
-    </tr>`;
-  });
-  document.getElementById("det-devices-table").innerHTML = `
-    <div class="chart-box"><h2>Device Breakdown</h2>
-    <table><thead><tr><th>Device</th><th>C# (ms)</th><th>AOT (ms)</th><th>HU (ms)</th></tr></thead>
-    <tbody>${rows.join("")}</tbody></table></div>`;
-
-  renderTrend();
-}
-
-function renderTrend() {
-  const sid = document.getElementById("det-subject-select").value;
-  const devId = document.getElementById("det-device-select").value;
-  const mode = document.getElementById("det-trend-mode").value;
-  const sdata = subjects[sid] || {};
-  const hist = ((sdata.history || {})[devId] || {})[mode] || [];
-  const labels = hist.map((_, i) => `#${hist.length - i}`).reverse();
-  const vals = [...hist].reverse().map(r => r.metrics?.meanDurationMs ?? null);
-
-  const ctx = document.getElementById("det-trend").getContext("2d");
-  if (detTrendChart) detTrendChart.destroy();
-  detTrendChart = new Chart(ctx, {
-    type: "line",
-    data: {
-      labels,
-      datasets: [{
-        label: `${mode} meanDurationMs`,
-        data: vals,
-        borderColor: mode === "native" ? "#22c55e" : mode === "managed" ? "#3b82f6" : "#f59e0b",
-        tension: 0.3,
-        fill: false,
-      }]
-    },
-    options: { responsive: true }
-  });
-}
-
-// ── Device Comparison ──────────────────────────────────────────────────────
-let devRadarChart = null;
-
-function buildDeviceSelects() {
-  if (!allSubjectIds.length) return;
-  document.getElementById("dev-subject-select").innerHTML =
-    allSubjectIds.map(s => `<option value="${s}">${s}</option>`).join("");
-}
-
-function renderDeviceComparison() {
-  const sid = document.getElementById("dev-subject-select").value;
-  const mode = document.getElementById("dev-mode-select").value;
-  const sdata = subjects[sid] || {};
-  const byDev = sdata.latestByDevice || {};
-
-  // Build device → metric mapping
-  const deviceMetrics = Object.entries(byDev).map(([devId, modes]) => ({
-    id: devId,
-    val: (modes[mode] || {}).metrics?.meanDurationMs ?? null,
-    ts: (modes[mode] || {}).recordedAt,
-  })).filter(x => x.val != null);
-
-  // Normalise against windows-x64 (or first device)
-  const baseline = deviceMetrics.find(d => d.id.startsWith("windows-x64")) || deviceMetrics[0];
-  const baseVal = baseline?.val || 1;
-
-  // Radar
-  const labels = deviceMetrics.map(d => d.id.substring(0, 24));
-  const vals = deviceMetrics.map(d => Math.round((d.val / baseVal) * 100) / 100);
-
-  const ctx = document.getElementById("dev-radar").getContext("2d");
-  if (devRadarChart) devRadarChart.destroy();
-  devRadarChart = new Chart(ctx, {
-    type: "radar",
-    data: {
-      labels,
-      datasets: [{
-        label: `${mode} (relative to ${baseline?.id || "baseline"})`,
-        data: vals,
-        backgroundColor: "rgba(59,130,246,0.2)",
-        borderColor: "#3b82f6",
-        pointBackgroundColor: "#3b82f6",
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: { r: { min: 0, ticks: { stepSize: 0.5 } } }
-    }
-  });
-
-  // Table
-  const rows = deviceMetrics.map(d => {
-    const rel = (d.val / baseVal).toFixed(2);
-    return `<tr>
-      <td>${d.id}</td>
-      <td>${d.val.toFixed(3)} ms</td>
-      <td>${rel}x</td>
-      <td>${d.ts ? new Date(d.ts).toLocaleDateString() : "—"}${staleness(d.ts)}</td>
-    </tr>`;
-  });
-  document.getElementById("dev-table-container").innerHTML = `
-    <div class="chart-box"><table>
-    <thead><tr><th>Device</th><th>Mean Duration</th><th>Relative</th><th>Recorded</th></tr></thead>
-    <tbody>${rows.join("")}</tbody></table></div>`;
-}
-
-// ── Init ───────────────────────────────────────────────────────────────────
-(function init() {
-  const ts = D.generatedAt ? new Date(D.generatedAt).toLocaleString() : "unknown";
-  document.getElementById("gen-time").textContent = "Generated: " + ts;
-
-  buildOverviewPlatforms();
-  renderOverview();
-  buildDetailSelects();
-  buildDeviceSelects();
-  if (allSubjectIds.length) {
-    renderDetail();
-    renderDeviceComparison();
-  }
-})();
-</script>
-</body>
+_DEFAULT_HTML = """<!DOCTYPE html>
+<html lang=\\"en\\">
+<head><meta charset=\\"UTF-8\\"><meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0\\"><title>IL2CPP Benchmark Dashboard</title></head>
+<body><script>/* BENCHMARK_DATA_PLACEHOLDER */</script></body>
 </html>
 """

@@ -26,19 +26,18 @@ internal static class ObjectOpsProofEntry
     [ChaosUnitTest(
         ChaosUnitCategory.RuntimeContract,
         Alias = "object-ops-proof",
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 2)]
     public static int Run()
     {
         var box = new ObjectOpsBox { Value = 42 };
-        Console.WriteLine("obj-new=" + box.Value);
+        Assert.Equal(42, box.Value);
         object o = box;
-        Console.WriteLine("obj-isinst=" + (o is ObjectOpsBox ? "yes" : "no"));
+        Assert.True(o is ObjectOpsBox);
         var cast = (ObjectOpsBox)o;
-        Console.WriteLine("obj-cast=" + cast.Value);
+        Assert.Equal(42, cast.Value);
         IObjectOpsLabel label = new ObjectOpsTag();
-        Console.WriteLine("obj-iface=" + label.Label());
-        Console.WriteLine("obj-sizeof=" + Marshal.SizeOf<int>());
+        Assert.Equal("tag", label.Label());
+        Assert.Equal(4, Marshal.SizeOf<int>());
         return 0;
     }
 }

@@ -31,12 +31,12 @@ internal static class GenericLayoutProofEntry
         ChaosUnitCategory.RuntimeContract,
         Alias = "generic-layout-proof",
         Requires = ChaosRuntimeFeature.GenericSharing,
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 3)]
     public static int Run()
     {
         var box = new GenericBox<string>(GenericEcho.Echo("Generic layout native proof."));
-        Console.WriteLine(box.Value());
+        var message = box.Value();
+        Assert.Equal("Generic layout native proof.", message);
         return 0;
     }
 }

@@ -218,6 +218,7 @@ internal static class Program
             MethodSignature = methodSignature,
             Category = reader.ReadByte(),
             Metrics = reader.ReadUInt16(),
+            Modes = 7,
         };
         ReadBenchmarkNamedArguments(ref reader, entry);
         return entry;
@@ -280,6 +281,9 @@ internal static class Program
                 case "Requires":
                     entry.Requires = reader.ReadUInt32();
                     break;
+                case "Modes":
+                    entry.Modes = reader.ReadByte();
+                    break;
                 case "WarmupCount":
                     entry.WarmupCount = reader.ReadByte();
                     break;
@@ -325,6 +329,10 @@ internal static class Program
         if (enumTypeName.EndsWith("ChaosMetric", StringComparison.Ordinal))
         {
             return SerializationTypeCode.UInt16;
+        }
+        if (enumTypeName.EndsWith("ChaosExecutionMode", StringComparison.Ordinal))
+        {
+            return SerializationTypeCode.Byte;
         }
         if (enumTypeName.EndsWith("ChaosRuntimeFeature", StringComparison.Ordinal))
         {
@@ -555,6 +563,8 @@ internal sealed class DeclaredBenchmarkEntry : DeclaredEntryBase
 {
     public ushort Metrics { get; set; }
 
+    public byte Modes { get; set; }
+
     public byte WarmupCount { get; set; }
 
     public ushort IterationCount { get; set; }
@@ -624,6 +634,7 @@ internal sealed class AttributeTypeProvider : ICustomAttributeTypeProvider<strin
             "Chaos.TestFramework.ChaosUnitCategory" => PrimitiveTypeCode.Byte,
             "Chaos.TestFramework.ChaosBenchmarkCategory" => PrimitiveTypeCode.Byte,
             "Chaos.TestFramework.ChaosMetric" => PrimitiveTypeCode.UInt16,
+            "Chaos.TestFramework.ChaosExecutionMode" => PrimitiveTypeCode.Byte,
             "Chaos.TestFramework.ChaosRuntimeFeature" => PrimitiveTypeCode.UInt32,
             "Chaos.TestFramework.ChaosEvidenceKind" => PrimitiveTypeCode.UInt16,
             _ => PrimitiveTypeCode.Int32,

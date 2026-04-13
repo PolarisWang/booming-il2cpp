@@ -27,20 +27,19 @@ internal static class MarshalingProofEntry
         ChaosUnitCategory.InteropContract,
         Alias = "marshaling-proof",
         Requires = ChaosRuntimeFeature.Reflection | ChaosRuntimeFeature.NativeInterop,
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 7)]
     public static unsafe int Run()
     {
         string roundTripText = MarshalUtf8("marshal-ok");
         string exportSummary = ValidateExportContract();
+        Assert.Equal("marshal-ok", roundTripText);
+        Assert.Equal($"{MarshalingNativeExports.AddEntryPoint}:7", exportSummary);
 
         if (OperatingSystem.IsWindows())
         {
             _ = MarshalingNativeMethods.GetTickCount64();
         }
 
-        Console.WriteLine($"marshal={roundTripText}");
-        Console.WriteLine($"export={exportSummary}");
         return 0;
     }
 

@@ -23,14 +23,46 @@ internal static class ProofEntry
     [ChaosUnitTest(
         ChaosUnitCategory.RuntimeContract,
         Alias = "mainline-proof",
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 1)]
     public static int Run()
     {
         var banner = new FeatureBanner("feature pack");
-        Console.WriteLine(banner.BuildMessage());
+        var message = banner.BuildMessage();
+        Assert.Equal("Mainline native proof: feature pack.", message);
+
+        foreach (var entry in AllProofEntries)
+        {
+            Assert.Equal(0, entry(), "mainline proof entry returned non-zero exit code.");
+        }
+
         return 0;
     }
+
+    private static readonly Func<int>[] AllProofEntries =
+    [
+        ArrayOpsProofEntry.Run,
+        ArrayBoxingProofEntry.Run,
+        AsyncAwaitProofEntry.Run,
+        BitwiseOpsProofEntry.Run,
+        BranchOpsProofEntry.Run,
+        ConversionOpsProofEntry.Run,
+        CrossBoundaryExceptionProofEntry.Run,
+        DelegateChainProofEntry.Run,
+        DelegateProofEntry.Run,
+        DispatchProofEntry.Run,
+        ExceptionProofEntry.Run,
+        GenericCollectionProofEntry.Run,
+        GenericLayoutProofEntry.Run,
+        InterfaceDispatchProofEntry.Run,
+        LinkerStrippingProofEntry.Run,
+        MarshalingProofEntry.Run,
+        NestedExceptionProofEntry.Run,
+        ObjectOpsProofEntry.Run,
+        OverflowOpsProofEntry.Run,
+        ReflectionInteropClosureEntry.Run,
+        ThreadingProofEntry.Run,
+        VTableDispatchProofEntry.Run,
+    ];
 }
 
 internal static class TraceDocumentFactory

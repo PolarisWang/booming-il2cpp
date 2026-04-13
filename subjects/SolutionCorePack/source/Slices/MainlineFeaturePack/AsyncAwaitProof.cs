@@ -12,11 +12,11 @@ internal static class AsyncAwaitProofEntry
     [ChaosUnitTest(
         ChaosUnitCategory.RuntimeContract,
         Alias = "async-await-proof",
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 2)]
     public static int Run()
     {
-        Console.WriteLine(ComputeAsync().GetAwaiter().GetResult());
+        var result = ComputeAsync().GetAwaiter().GetResult();
+        Assert.Equal(42, result);
         return 0;
     }
 }

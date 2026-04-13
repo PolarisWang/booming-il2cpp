@@ -43,6 +43,8 @@
     "perf": {
       "kind": "perf",
       "driver": "native-runtime-perf",
+      "project": "src/validation/perf/Benchmark.WorkloadEntry.PerfHarness/Benchmark.WorkloadEntry.PerfHarness.csproj",
+      "harnessIterations": 4,
       "defaultVariant": "PROFILE"
     }
   },
@@ -216,6 +218,46 @@
           "bucket": "report",
           "dependsOn": [
             "runtime-observe"
+          ]
+        }
+      ]
+    },
+    {
+      "pipelineId": "managed-benchmark",
+      "displayName": "C# (.NET) benchmark",
+      "stages": [
+        {
+          "stageId": "source-resolve",
+          "kind": "source-resolve",
+          "scope": "shared",
+          "bucket": "source",
+          "dependsOn": []
+        },
+        {
+          "stageId": "host-input-build",
+          "kind": "host-input-build",
+          "scope": "shared",
+          "bucket": "host-input",
+          "dependsOn": [
+            "source-resolve"
+          ]
+        },
+        {
+          "stageId": "runtime-perf-collect",
+          "kind": "runtime-perf-collect",
+          "scope": "matrix",
+          "bucket": "runtime",
+          "dependsOn": [
+            "host-input-build"
+          ]
+        },
+        {
+          "stageId": "report-assemble",
+          "kind": "report-assemble",
+          "scope": "matrix",
+          "bucket": "report",
+          "dependsOn": [
+            "runtime-perf-collect"
           ]
         }
       ]
@@ -431,8 +473,8 @@
         "correctness.platform"
       ],
       "source": {
-        "primaryProjectPath": "subjects/SolutionCorePack/source/Slices/HostEmbeddingLite/HostEmbeddingLite.csproj",
-        "entry": "HostEmbeddingLite/Program::Main(System.String[])"
+        "primaryProjectPath": "subjects/SolutionCorePack/source/Slices/MainlineFeaturePack/MainlineFeaturePack.csproj",
+        "entry": "MainlineFeaturePack/Program::Main(System.String[])"
       },
       "executionContext": {
         "hostPlatform": "windows-x64",
@@ -462,8 +504,8 @@
         "correctness.platform"
       ],
       "source": {
-        "primaryProjectPath": "subjects/SolutionCorePack/source/Slices/HostEmbeddingLite/HostEmbeddingLite.csproj",
-        "entry": "HostEmbeddingLite/Program::Main(System.String[])"
+        "primaryProjectPath": "subjects/SolutionCorePack/source/Slices/MainlineFeaturePack/MainlineFeaturePack.csproj",
+        "entry": "MainlineFeaturePack/Program::Main(System.String[])"
       },
       "executionContext": {
         "hostPlatform": "macos-arm64",
@@ -484,6 +526,36 @@
           "report"
         ],
         "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-managed-perf",
+      "pipelineId": "managed-benchmark",
+      "supportedGoals": [
+        "perf.release"
+      ],
+      "source": {
+        "entry": "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "dotnet-managed",
+        "runtimeProfile": "managed-perf-release"
+      },
+      "validationIntent": {
+        "validationMode": "perf",
+        "adaptationLevel": "native-runtime",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "report"
       }
     },
     {

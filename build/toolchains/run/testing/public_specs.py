@@ -8,6 +8,7 @@ PLATFORM_GATES_DOC = "wiki/06-测试验证/整体验证场景/platform-gates.md"
 TEST_TAXONOMY_DOC = "wiki/06-测试验证/测试分层.md"
 TRACE_EXPORT_DOC = "wiki/06-测试验证/模块/trace-export.md"
 SOLUTION_CORE_PACK = "SolutionCorePack"
+PUBLIC_SMOKE_ROOT = "tests/fixtures/public-smoke"
 
 
 def _suite_spec(
@@ -39,7 +40,7 @@ def _suite_spec(
     }
 
 
-def _solution_core_smoke_suite(
+def _public_smoke_suite(
     *,
     suite: str,
     project_name: str,
@@ -48,7 +49,7 @@ def _solution_core_smoke_suite(
     subsystem_ids: list[str],
     expected_patterns: list[str],
 ) -> dict[str, Any]:
-    project_root = f"subjects/{SOLUTION_CORE_PACK}/source/Slices/{project_name}"
+    project_root = f"{PUBLIC_SMOKE_ROOT}/{project_name}"
     dll_path = f"{project_root}/bin/Release/net8.0/{project_name}.dll"
     return _suite_spec(
         suite_id=f"smoke/{suite}",
@@ -73,7 +74,7 @@ def _solution_core_smoke_suite(
 
 
 PUBLIC_TEST_SPECS = [
-    _solution_core_smoke_suite(
+    _public_smoke_suite(
         suite="managed-entry-basic",
         project_name="HelloWorld",
         primary_module_id="managed-smoke",
@@ -84,7 +85,7 @@ PUBLIC_TEST_SPECS = [
             "register:Main",
         ],
     ),
-    _solution_core_smoke_suite(
+    _public_smoke_suite(
         suite="managed-generics-basic",
         project_name="GenericEcho",
         primary_module_id="managed-smoke",
@@ -96,7 +97,7 @@ PUBLIC_TEST_SPECS = [
             "roadmap0:roadmap0",
         ],
     ),
-    _solution_core_smoke_suite(
+    _public_smoke_suite(
         suite="reflection-basic",
         project_name="ReflectionLite",
         primary_module_id="reflection",
@@ -107,7 +108,7 @@ PUBLIC_TEST_SPECS = [
             "generic-method=String",
         ],
     ),
-    _solution_core_smoke_suite(
+    _public_smoke_suite(
         suite="native-interop-basic",
         project_name="PInvokeLite",
         primary_module_id="interop",
@@ -119,7 +120,7 @@ PUBLIC_TEST_SPECS = [
             "symbol=True",
         ],
     ),
-    _solution_core_smoke_suite(
+    _public_smoke_suite(
         suite="host-embedding-basic",
         project_name="HostEmbeddingLite",
         primary_module_id="hosted-runtime",

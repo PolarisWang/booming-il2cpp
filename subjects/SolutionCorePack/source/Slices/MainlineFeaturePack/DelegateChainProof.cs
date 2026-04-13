@@ -9,21 +9,19 @@ internal static class DelegateChainProofEntry
     private static void Increment(string tag)
     {
         s_counter++;
-        Console.WriteLine("delegate-invoked=" + tag);
     }
 
     [ChaosUnitTest(
         ChaosUnitCategory.RuntimeContract,
         Alias = "delegate-chain-proof",
         Requires = ChaosRuntimeFeature.Delegate,
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 2)]
     public static int Run()
     {
         s_counter = 0;
         Action<string> single = Increment;
         single("A");
-        Console.WriteLine("delegate-single-count=" + s_counter);
+        Assert.Equal(1, s_counter);
 
         s_counter = 0;
         Action<string> multi = null!;
@@ -31,7 +29,7 @@ internal static class DelegateChainProofEntry
         multi += Increment;
         multi += Increment;
         multi("B");
-        Console.WriteLine("delegate-multi-count=" + s_counter);
+        Assert.Equal(3, s_counter);
 
         s_counter = 0;
         Action<string> chain = null!;
@@ -42,7 +40,7 @@ internal static class DelegateChainProofEntry
         chain += d1;
         chain -= d1;
         chain("C");
-        Console.WriteLine("delegate-remove-count=" + s_counter);
+        Assert.Equal(2, s_counter);
 
         s_counter = 0;
         Action<string> evt = null!;
@@ -53,7 +51,7 @@ internal static class DelegateChainProofEntry
             evt("D");
         }
 
-        Console.WriteLine("delegate-empty-count=" + s_counter);
+        Assert.Equal(0, s_counter);
         return 0;
     }
 }

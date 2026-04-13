@@ -4,7 +4,7 @@ import importlib.util
 import unittest
 from pathlib import Path
 
-from tests.support import select_public_suite_spec, select_subject_record
+from tests.support import select_public_suite_spec
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -105,6 +105,12 @@ class CommandManifestTests(unittest.TestCase):
     def test_parse_cli_supports_dynamic_unified_test_commands(self) -> None:
         manifest_module = load_manifest_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+        fixture_engineering_validation_id = "engineering-validation/FixtureSubject/project-graph"
+        fixture_engineering_workload_id = "engineering-workload/FixtureSubject/codegen"
+        fixture_declared_unit_id = "declared-unit-test/FixtureSubject::FeaturePack::FeaturePack.ProofEntry::Run()"
+        fixture_declared_benchmark_id = (
+            "declared-benchmark/FixtureSubject::PerformancePack::PerformancePack.BenchmarkEntry::RunWorkload()"
+        )
         smoke_spec = select_public_suite_spec(
             "chaos_integration_manifest_parse_cli_smoke",
             host_platform="macos",
@@ -184,46 +190,40 @@ class CommandManifestTests(unittest.TestCase):
         self.assertEqual("completion-runtime-core", pipeline_case["options"]["pipeline"])
 
         engineering_validation_case = manifest_module.parse_cli(
-            ["test", "engineering-validation", "--id", "engineering-validation/SolutionCorePack/project-graph"],
+            ["test", "engineering-validation", "--id", fixture_engineering_validation_id],
             False,
             manifest,
             "windows",
         )
         self.assertEqual("test-engineering-validation", engineering_validation_case["command"]["id"])
-        self.assertEqual("engineering-validation/SolutionCorePack/project-graph", engineering_validation_case["target"])
+        self.assertEqual(fixture_engineering_validation_id, engineering_validation_case["target"])
 
         engineering_workload_case = manifest_module.parse_cli(
-            ["test", "engineering-workload", "--id", "engineering-workload/SolutionCorePack/codegen"],
+            ["test", "engineering-workload", "--id", fixture_engineering_workload_id],
             False,
             manifest,
             "windows",
         )
         self.assertEqual("test-engineering-workload", engineering_workload_case["command"]["id"])
-        self.assertEqual("engineering-workload/SolutionCorePack/codegen", engineering_workload_case["target"])
+        self.assertEqual(fixture_engineering_workload_id, engineering_workload_case["target"])
 
         declared_unit_case = manifest_module.parse_cli(
-            ["test", "declared-unit-test", "--id", "declared-unit-test/SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"],
+            ["test", "declared-unit-test", "--id", fixture_declared_unit_id],
             False,
             manifest,
             "windows",
         )
         self.assertEqual("test-declared-unit-test", declared_unit_case["command"]["id"])
-        self.assertEqual(
-            "declared-unit-test/SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()",
-            declared_unit_case["target"],
-        )
+        self.assertEqual(fixture_declared_unit_id, declared_unit_case["target"])
 
         declared_benchmark_case = manifest_module.parse_cli(
-            ["test", "declared-benchmark", "--id", "declared-benchmark/SolutionCorePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()"],
+            ["test", "declared-benchmark", "--id", fixture_declared_benchmark_id],
             False,
             manifest,
             "windows",
         )
         self.assertEqual("test-declared-benchmark", declared_benchmark_case["command"]["id"])
-        self.assertEqual(
-            "declared-benchmark/SolutionCorePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()",
-            declared_benchmark_case["target"],
-        )
+        self.assertEqual(fixture_declared_benchmark_id, declared_benchmark_case["target"])
 
         registry_refresh = manifest_module.parse_cli(["test", "registry", "refresh"], False, manifest, "macos")
         self.assertEqual("test-registry-refresh", registry_refresh["command"]["id"])

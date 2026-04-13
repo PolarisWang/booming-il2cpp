@@ -4,11 +4,17 @@ namespace MixedExecutionFeaturePack;
 
 internal static class Program
 {
+    private static readonly Func<int>[] DefaultProofEntries =
+    [
+        MixedExecutionProofEntry.Run,
+        InterpreterLoweringProofEntry.Run,
+    ];
+
     public static int Main(string[] args)
     {
         if (!ChaosSubjectEntryArguments.TryParse(args, out var selection) || selection.IsNone)
         {
-            return MixedExecutionProofEntry.Run();
+            return RunAll(DefaultProofEntries);
         }
 
         return selection switch
@@ -17,5 +23,15 @@ internal static class Program
             { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.InterpreterLoweringProof } => InterpreterLoweringProofEntry.Run(),
             _ => throw new ArgumentOutOfRangeException(nameof(args), "unsupported MixedExecutionFeaturePack entry selection."),
         };
+    }
+
+    private static int RunAll(IEnumerable<Func<int>> entries)
+    {
+        foreach (var entry in entries)
+        {
+            Assert.Equal(0, entry(), "MixedExecutionFeaturePack proof entry returned non-zero exit code.");
+        }
+
+        return 0;
     }
 }

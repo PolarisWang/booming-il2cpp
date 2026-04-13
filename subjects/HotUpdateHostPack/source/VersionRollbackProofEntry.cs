@@ -11,7 +11,6 @@ internal static class VersionRollbackProofEntry
         ChaosUnitCategory.HotUpdateContract,
         Alias = "version-rollback-proof",
         Requires = ChaosRuntimeFeature.HotUpdate,
-        Evidence = ChaosEvidenceKind.Stdout | ChaosEvidenceKind.Metadata,
         Priority = 2)]
     public static int Run()
     {
@@ -50,7 +49,8 @@ internal static class VersionRollbackProofEntry
                 {
                     [SubjectId] = 11,
                 });
-            Console.WriteLine($"version-rollback-v1={runtimeManager.DispatchInt32(SubjectId, GetAotFallback)}");
+            var v1Value = runtimeManager.DispatchInt32(SubjectId, GetAotFallback);
+            Assert.Equal(11, v1Value);
 
             runtimeManager.LoadPackage(
                 v2Root,
@@ -59,13 +59,16 @@ internal static class VersionRollbackProofEntry
                 {
                     [SubjectId] = 22,
                 });
-            Console.WriteLine($"version-rollback-v2={runtimeManager.DispatchInt32(SubjectId, GetAotFallback)}");
+            var v2Value = runtimeManager.DispatchInt32(SubjectId, GetAotFallback);
+            Assert.Equal(22, v2Value);
 
             runtimeManager.Rollback();
-            Console.WriteLine($"version-rollback-back-v1={runtimeManager.DispatchInt32(SubjectId, GetAotFallback)}");
+            var rollbackToV1 = runtimeManager.DispatchInt32(SubjectId, GetAotFallback);
+            Assert.Equal(11, rollbackToV1);
 
             runtimeManager.Rollback();
-            Console.WriteLine($"version-rollback-back-aot={runtimeManager.DispatchInt32(SubjectId, GetAotFallback)}");
+            var rollbackToAot = runtimeManager.DispatchInt32(SubjectId, GetAotFallback);
+            Assert.Equal(5, rollbackToAot);
 
             var compatible = runtimeManager.LoadPackage(
                 incompatibleRoot,
@@ -74,8 +77,8 @@ internal static class VersionRollbackProofEntry
                 {
                     [SubjectId] = 99,
                 });
-            Console.WriteLine($"version-rollback-compatibility={(compatible ? "unexpected" : "rejected")}");
-            return compatible ? 1 : 0;
+            Assert.False(compatible);
+            return 0;
         }
         finally
         {

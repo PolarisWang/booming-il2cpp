@@ -88,6 +88,37 @@ def _selection_workload_entry(selection: dict[str, Any]) -> str:
     return str(selection.get("workloadEntry") or "")
 
 
+def _workload_assembly_name(workload_entry: str) -> str:
+    return str(workload_entry or "").split("/", 1)[0].strip()
+
+
+def _resolve_workload_assembly_path(
+    repo_root: Path,
+    host_input_manifest: dict[str, Any],
+    workload_entry: str,
+) -> tuple[str, Path | None]:
+    candidate_paths = []
+    primary_assembly_path_text = str(host_input_manifest.get("primaryAssemblyPath") or "")
+    if primary_assembly_path_text:
+        candidate_paths.append(primary_assembly_path_text)
+    candidate_paths.extend(
+        str(path)
+        for path in list(host_input_manifest.get("additionalAssemblyPaths") or [])
+        if str(path)
+    )
+
+    workload_assembly_name = _workload_assembly_name(workload_entry)
+    for candidate_path_text in candidate_paths:
+        candidate_path = _resolve(repo_root, candidate_path_text)
+        if workload_assembly_name and candidate_path.stem.lower() == workload_assembly_name.lower():
+            return candidate_path_text, candidate_path
+
+    if primary_assembly_path_text:
+        return primary_assembly_path_text, _resolve(repo_root, primary_assembly_path_text)
+
+    return "", None
+
+
 def _selection_subject_entry_selection(selection: dict[str, Any]) -> dict[str, int]:
     source = dict(selection.get("source") or {})
     payload = source.get("entrySelection")
@@ -1872,8 +1903,11 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
     runtime_root.mkdir(parents=True, exist_ok=True)
     harness_root = runtime_root / "harness"
     harness_dll_path = harness_root / f"{project_path.stem}.dll"
-    workload_assembly_path_text = str(host_input_manifest.get("primaryAssemblyPath") or "")
-    workload_assembly_path = _resolve(repo_root, workload_assembly_path_text) if workload_assembly_path_text else None
+    workload_assembly_path_text, workload_assembly_path = _resolve_workload_assembly_path(
+        repo_root,
+        host_input_manifest,
+        workload_entry,
+    )
 
     stdout_path = runtime_root / "stdout.log"
     stderr_path = runtime_root / "stderr.log"
@@ -2522,8 +2556,11 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
     project_path = _resolve(repo_root, harness_project_path_str)
     harness_root = runtime_root / "harness"
     harness_dll_path = harness_root / f"{project_path.stem}.dll"
-    workload_assembly_path_text = str(host_input_manifest.get("primaryAssemblyPath") or "")
-    workload_assembly_path = _resolve(repo_root, workload_assembly_path_text) if workload_assembly_path_text else None
+    workload_assembly_path_text, workload_assembly_path = _resolve_workload_assembly_path(
+        repo_root,
+        host_input_manifest,
+        workload_entry,
+    )
 
     _run_checked(
         [

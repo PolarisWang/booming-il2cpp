@@ -18,7 +18,6 @@ internal static class MixedExecutionProofEntry
         ChaosUnitCategory.RuntimeContract,
         Alias = "mixed-execution-proof",
         Requires = ChaosRuntimeFeature.HotUpdate,
-        Evidence = ChaosEvidenceKind.Stdout | ChaosEvidenceKind.Metadata,
         Priority = 1)]
     public static int Run()
     {
@@ -40,7 +39,8 @@ internal static class MixedExecutionProofEntry
             var realCatchMethod = GetRequiredMethod(loweredMethods, "DivideOrCatch");
             var realRethrowMethod = GetRequiredMethod(loweredMethods, "DivideOrRethrow");
             var realLeaveFinallyMethod = GetRequiredMethod(loweredMethods, "AddWithFinally");
-            Console.WriteLine($"mixed-aot-to-interpreter-before-load={runtimeManager.DispatchInt32Unary(subjectId, 21, static value => value + 1)}");
+            var beforeLoad = runtimeManager.DispatchInt32Unary(subjectId, 21, static value => value + 1);
+            Assert.Equal(22, beforeLoad);
 
             var packageRoot = CreatePackageRoot(workspace, assemblyPath);
             var package = PackageReader.ReadFromDirectory(packageRoot);
@@ -53,7 +53,8 @@ internal static class MixedExecutionProofEntry
                     [subjectId] = interpreterInvoker,
                 });
 
-            Console.WriteLine($"mixed-aot-to-interpreter={runtimeManager.DispatchInt32Unary(subjectId, 21, static value => value + 1)}");
+            var afterLoad = runtimeManager.DispatchInt32Unary(subjectId, 21, static value => value + 1);
+            Assert.Equal(42, afterLoad);
 
             var dispatcher = new BridgeDispatcher();
             dispatcher.ApplyPlan(new BridgePlan
@@ -121,32 +122,54 @@ internal static class MixedExecutionProofEntry
             },
             methodResolver: subjectKey => loweredMethods[subjectKey]);
 
-            Console.WriteLine($"mixed-interpreter-to-aot={bridgeExecutor.ExecuteInt32(aotBridgeMethod, new int[] { 10, 20 })}");
-            Console.WriteLine($"mixed-interpreter-to-aot-ops={GetOpSequence(aotBridgeMethod)}");
-            Console.WriteLine($"mixed-interpreter-to-aot-target={GetCallTarget(aotBridgeMethod, IROpCode.CallBridge)}");
-            Console.WriteLine($"mixed-interpreter-local-call={bridgeExecutor.ExecuteInt32(localCallMethod, new int[] { 21, 21 })}");
-            Console.WriteLine($"mixed-interpreter-local-call-ops={GetOpSequence(localCallMethod)}");
+            var interpreterToAot = bridgeExecutor.ExecuteInt32(aotBridgeMethod, new int[] { 10, 20 });
+            var interpreterToAotOps = GetOpSequence(aotBridgeMethod);
+            var interpreterToAotTarget = GetCallTarget(aotBridgeMethod, IROpCode.CallBridge);
+            var localCall = bridgeExecutor.ExecuteInt32(localCallMethod, new int[] { 21, 21 });
+            var localCallOps = GetOpSequence(localCallMethod);
+            Assert.Equal(30, interpreterToAot);
+            Assert.Equal("ldarg,ldarg,callbridge,ret", interpreterToAotOps);
+            Assert.Equal(AotBridgeSubjectId, interpreterToAotTarget);
+            Assert.Equal(42, localCall);
+            Assert.Equal("ldarg,ldarg,call,ret", localCallOps);
             var instanceReceiver = CreateInstanceArithmeticReceiver(assemblyPath);
-            Console.WriteLine($"mixed-interpreter-instance-call={bridgeExecutor.ExecuteInt32(instanceCallMethod, [instanceReceiver, 41])}");
-            Console.WriteLine($"mixed-interpreter-instance-call-ops={GetOpSequence(instanceCallMethod)}");
-            Console.WriteLine($"mixed-interpreter-instance-call-target={GetCallTarget(instanceCallMethod, IROpCode.CallVirt)}");
+            var instanceCall = bridgeExecutor.ExecuteInt32(instanceCallMethod, [instanceReceiver, 41]);
+            var instanceCallOps = GetOpSequence(instanceCallMethod);
+            var instanceCallTarget = GetCallTarget(instanceCallMethod, IROpCode.CallVirt);
+            Assert.Equal(42, instanceCall);
+            Assert.Equal("ldarg,ldarg,callvirt,ret", instanceCallOps);
+            Assert.Equal("InterpreterArithmeticProof/InstanceArithmetic::AddOne(System.Int32)", instanceCallTarget);
             var stringBridgeMethod = CreateStringLengthBridgeMethod();
-            Console.WriteLine($"mixed-interpreter-string-bridge={bridgeExecutor.ExecuteInt32(stringBridgeMethod, Array.Empty<int>())}");
-            Console.WriteLine($"mixed-interpreter-string-bridge-ops={GetOpSequence(stringBridgeMethod)}");
-            Console.WriteLine($"mixed-interpreter-real-catch={bridgeExecutor.ExecuteInt32(realCatchMethod, new int[] { 0 })}");
-            Console.WriteLine($"mixed-interpreter-real-catch-region-kind={GetSingleRegionKind(realCatchMethod)}");
-            Console.WriteLine($"mixed-interpreter-real-rethrow-caught={RunRealInterpreterRethrowProof(bridgeExecutor, realRethrowMethod)}");
-            Console.WriteLine($"mixed-interpreter-real-rethrow-region-kind={GetSingleRegionKind(realRethrowMethod)}");
-            Console.WriteLine($"mixed-interpreter-real-leave-finally={bridgeExecutor.ExecuteInt32(realLeaveFinallyMethod, Array.Empty<int>())}");
-            Console.WriteLine($"mixed-interpreter-real-leave-finally-region-kind={GetSingleRegionKind(realLeaveFinallyMethod)}");
-            Console.WriteLine($"mixed-interpreter-real-leave-finally-opcodes={GetOpSequence(realLeaveFinallyMethod, IROpCode.Leave, IROpCode.EndFinally)}");
-            Console.WriteLine($"mixed-interpreter-to-engine={bridgeExecutor.ExecuteInt32(CreateCallEngineBridgeMethod(), Array.Empty<int>())}");
-            Console.WriteLine($"mixed-interpreter-throw-caught={RunInterpreterThrowCatchProof()}");
-            Console.WriteLine($"mixed-interpreter-leave-finally={RunInterpreterLeaveFinallyProof()}");
-            Console.WriteLine($"mixed-interpreter-rethrow-caught={RunInterpreterRethrowCatchProof()}");
+            var stringBridge = bridgeExecutor.ExecuteInt32(stringBridgeMethod, Array.Empty<int>());
+            var stringBridgeOps = GetOpSequence(stringBridgeMethod);
+            var realCatch = bridgeExecutor.ExecuteInt32(realCatchMethod, new int[] { 0 });
+            var realCatchRegionKind = GetSingleRegionKind(realCatchMethod);
+            var realRethrowCaught = RunRealInterpreterRethrowProof(bridgeExecutor, realRethrowMethod);
+            var realRethrowRegionKind = GetSingleRegionKind(realRethrowMethod);
+            var realLeaveFinally = bridgeExecutor.ExecuteInt32(realLeaveFinallyMethod, Array.Empty<int>());
+            var realLeaveFinallyRegionKind = GetSingleRegionKind(realLeaveFinallyMethod);
+            var realLeaveFinallyOpcodes = GetOpSequence(realLeaveFinallyMethod, IROpCode.Leave, IROpCode.EndFinally);
+            var toEngine = bridgeExecutor.ExecuteInt32(CreateCallEngineBridgeMethod(), Array.Empty<int>());
+            var throwCaught = RunInterpreterThrowCatchProof();
+            var leaveFinally = RunInterpreterLeaveFinallyProof();
+            var rethrowCaught = RunInterpreterRethrowCatchProof();
+            Assert.Equal(5, stringBridge);
+            Assert.Equal("ldstr,callbridge,ret", stringBridgeOps);
+            Assert.Equal(42, realCatch);
+            Assert.Equal("catch", realCatchRegionKind);
+            Assert.Equal("ok", realRethrowCaught);
+            Assert.Equal("catch", realRethrowRegionKind);
+            Assert.Equal(42, realLeaveFinally);
+            Assert.Equal("finally", realLeaveFinallyRegionKind);
+            Assert.Equal("leave,endfinally", realLeaveFinallyOpcodes);
+            Assert.Equal(7, toEngine);
+            Assert.Equal("ok", throwCaught);
+            Assert.Equal("ok", leaveFinally);
+            Assert.Equal("ok", rethrowCaught);
 
             runtimeManager.UnloadPackage();
-            Console.WriteLine($"mixed-aot-to-interpreter-after-unload={runtimeManager.DispatchInt32Unary(subjectId, 21, static value => value + 1)}");
+            var afterUnload = runtimeManager.DispatchInt32Unary(subjectId, 21, static value => value + 1);
+            Assert.Equal(22, afterUnload);
             return 0;
         }
         finally

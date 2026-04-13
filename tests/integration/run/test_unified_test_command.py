@@ -117,20 +117,8 @@ class UnifiedTestCommandTests(unittest.TestCase):
         self.assertIn("gate/android-arm64-smoke", windows_item_ids)
         self.assertIn("gate/windows-reference-desktop", windows_item_ids)
 
-    def test_removed_legacy_smoke_command_returns_migration_guidance(self) -> None:
-        run_module = load_module(RUN_MODULE_PATH, "chaos_run_main_for_legacy_migration")
-        result = run_module.build_removed_command_migration_guidance(
-            "build smoke managed-entry-basic",
-            "macos",
-        )
-
-        self.assertIsNotNone(result)
-        assert result is not None
-        self.assertIn("Removed command", result.text or "")
-        self.assertEqual("test smoke managed-entry-basic --stage build", result.payload["migration"]["replacementSyntax"])
-
-    def test_removed_verify_entrypoint_returns_migration_guidance(self) -> None:
-        run_module = load_module(RUN_MODULE_PATH, "chaos_run_main_for_removed_verify_migration")
+    def test_removed_verify_entrypoint_returns_unknown_command(self) -> None:
+        run_module = load_module(RUN_MODULE_PATH, "chaos_run_main_for_removed_verify_unknown")
         manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_for_removed_verify_migration")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
@@ -145,10 +133,9 @@ class UnifiedTestCommandTests(unittest.TestCase):
         )
 
         self.assertEqual("error", result.status)
-        self.assertIn("Removed command", result.text or "")
-        self.assertIn("run test workflow runtime-baseline-macos", result.text or "")
-        self.assertEqual("verify roadmap-0", result.payload["migration"]["removedCommand"])
-        self.assertEqual("test workflow runtime-baseline-macos", result.payload["migration"]["replacementSyntax"])
+        self.assertEqual({}, result.payload)
+        self.assertEqual(["unknown command: verify roadmap-0"], result.errors)
+        self.assertEqual("unknown command: verify roadmap-0\n", result.text)
 
 
 if __name__ == "__main__":

@@ -27,11 +27,11 @@ internal static class InterfaceDispatchProofEntry
     [ChaosUnitTest(
         ChaosUnitCategory.RuntimeContract,
         Alias = "interface-dispatch-proof",
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 3)]
     public static int Run()
     {
-        Console.WriteLine(((IMessageBuilder)new InterfaceMessageBuilder("leaf")).BuildMessage());
+        var message = ((IMessageBuilder)new InterfaceMessageBuilder("leaf")).BuildMessage();
+        Assert.Equal("Interface dispatch native proof: leaf.", message);
         return 0;
     }
 }

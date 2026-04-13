@@ -248,6 +248,15 @@ class Phase7InterpreterMixedExecutionTests(unittest.TestCase):
         self.assertTrue(INTERPRETER_LOWERING_MANIFEST_PATH.is_file(), msg=f"missing manifest: {INTERPRETER_LOWERING_MANIFEST_PATH}")
         self.assertTrue(INTERPRETER_LOWERING_PROJECT_PATH.is_file(), msg=f"missing project: {INTERPRETER_LOWERING_PROJECT_PATH}")
         self.assertTrue(INTERPRETER_LOWERING_PROGRAM_PATH.is_file(), msg=f"missing program: {INTERPRETER_LOWERING_PROGRAM_PATH}")
+        lowering_source = INTERPRETER_LOWERING_PROGRAM_PATH.read_text(encoding="utf-8")
+        for required_fragment in [
+            'Assert.Equal("InterpreterArithmeticProof/NativeExports::Add(System.Int32,System.Int32)", method.SubjectId);',
+            'Assert.Equal("ldarg,ldarg,add,ret", opSequence);',
+            'Assert.Equal("System.Private.CoreLib/System.String::get_Length()", callVirtInstruction.Operands[0].Symbol);',
+        ]:
+            self.assertIn(required_fragment, lowering_source)
+        self.assertNotIn("Console.WriteLine", lowering_source)
+        self.assertNotIn("ChaosEvidenceKind.Stdout", lowering_source)
         proof_build_root = make_unique_build_root("lowering-proof")
         proof_base_output = f"-p:BaseOutputPath={proof_build_root}\\"
         run_checked(
@@ -270,28 +279,7 @@ class Phase7InterpreterMixedExecutionTests(unittest.TestCase):
             ],
             cwd=REPO_ROOT,
         )
-        output = completed.stdout
-
-        for required_fragment in [
-            "lowering-proof=ok",
-            "method-subject=InterpreterArithmeticProof/NativeExports::Add(System.Int32,System.Int32)",
-            "blocks=1",
-            "ops=ldarg,ldarg,add,ret",
-            "add-result=Int32",
-            "call-method-subject=InterpreterArithmeticProof/NativeExports::CallAotBridgeAdd(System.Int32,System.Int32)",
-            "call-ops=ldarg,ldarg,callbridge,ret",
-            "call-target=InterpreterArithmeticProof.AotBridge/AotBridgeExports::Add(System.Int32,System.Int32)",
-            "local-call-method-subject=InterpreterArithmeticProof/NativeExports::CallLocalAdd(System.Int32,System.Int32)",
-            "local-call-ops=ldarg,ldarg,call,ret",
-            "local-call-target=InterpreterArithmeticProof/NativeExports::Add(System.Int32,System.Int32)",
-            "callvirt-method-subject=InterpreterArithmeticProof/NativeExports::CallStringLength()",
-            "callvirt-ops=ldstr,callbridge,ret",
-            "callvirt-target=System.Private.CoreLib/System.String::get_Length()",
-            "instance-call-method-subject=InterpreterArithmeticProof/NativeExports::CallInstanceAddOne(InstanceArithmetic,System.Int32)",
-            "instance-call-ops=ldarg,ldarg,callvirt,ret",
-            "instance-call-target=InterpreterArithmeticProof/InstanceArithmetic::AddOne(System.Int32)",
-        ]:
-            self.assertIn(required_fragment, output)
+        self.assertEqual("", completed.stdout.strip())
 
     def test_managed_interpreter_executor_and_runtime_manager_support_aot_to_interpreter_and_call_bridge(self) -> None:
         executor_source = MANAGED_INTERPRETER_EXECUTOR_PATH.read_text(encoding="utf-8")
@@ -335,6 +323,18 @@ class Phase7InterpreterMixedExecutionTests(unittest.TestCase):
         self.assertTrue(MIXED_EXECUTION_PROOF_MANIFEST_PATH.is_file(), msg=f"missing manifest: {MIXED_EXECUTION_PROOF_MANIFEST_PATH}")
         self.assertTrue(MIXED_EXECUTION_PROOF_PROJECT_PATH.is_file(), msg=f"missing project: {MIXED_EXECUTION_PROOF_PROJECT_PATH}")
         self.assertTrue(MIXED_EXECUTION_PROOF_PROGRAM_PATH.is_file(), msg=f"missing program: {MIXED_EXECUTION_PROOF_PROGRAM_PATH}")
+        proof_source = MIXED_EXECUTION_PROOF_PROGRAM_PATH.read_text(encoding="utf-8")
+        for required_fragment in [
+            "Assert.Equal(22, beforeLoad);",
+            "Assert.Equal(42, afterLoad);",
+            "Assert.Equal(30, interpreterToAot);",
+            'Assert.Equal("ldarg,ldarg,callbridge,ret", interpreterToAotOps);',
+            'Assert.Equal("ok", rethrowCaught);',
+            "Assert.Equal(22, afterUnload);",
+        ]:
+            self.assertIn(required_fragment, proof_source)
+        self.assertNotIn("Console.WriteLine", proof_source)
+        self.assertNotIn("ChaosEvidenceKind.Stdout", proof_source)
 
         proof_build_root = make_unique_build_root("mixed-proof")
         proof_base_output = f"-p:BaseOutputPath={proof_build_root}\\"
@@ -356,35 +356,7 @@ class Phase7InterpreterMixedExecutionTests(unittest.TestCase):
             ],
             cwd=REPO_ROOT,
         )
-        output = completed.stdout
-
-        for required_fragment in [
-            "mixed-aot-to-interpreter-before-load=22",
-            "mixed-aot-to-interpreter=42",
-            "mixed-interpreter-to-aot=30",
-            "mixed-interpreter-to-aot-ops=ldarg,ldarg,callbridge,ret",
-            "mixed-interpreter-to-aot-target=InterpreterArithmeticProof.AotBridge/AotBridgeExports::Add(System.Int32,System.Int32)",
-            "mixed-interpreter-local-call=42",
-            "mixed-interpreter-local-call-ops=ldarg,ldarg,call,ret",
-            "mixed-interpreter-instance-call=42",
-            "mixed-interpreter-instance-call-ops=ldarg,ldarg,callvirt,ret",
-            "mixed-interpreter-instance-call-target=InterpreterArithmeticProof/InstanceArithmetic::AddOne(System.Int32)",
-            "mixed-interpreter-string-bridge=5",
-            "mixed-interpreter-string-bridge-ops=ldstr,callbridge,ret",
-            "mixed-interpreter-real-catch=42",
-            "mixed-interpreter-real-catch-region-kind=catch",
-            "mixed-interpreter-real-rethrow-caught=ok",
-            "mixed-interpreter-real-rethrow-region-kind=catch",
-            "mixed-interpreter-real-leave-finally=42",
-            "mixed-interpreter-real-leave-finally-region-kind=finally",
-            "mixed-interpreter-real-leave-finally-opcodes=leave,endfinally",
-            "mixed-interpreter-to-engine=7",
-            "mixed-interpreter-throw-caught=ok",
-            "mixed-interpreter-leave-finally=ok",
-            "mixed-interpreter-rethrow-caught=ok",
-            "mixed-aot-to-interpreter-after-unload=22",
-        ]:
-            self.assertIn(required_fragment, output)
+        self.assertEqual("", completed.stdout.strip())
 
     def test_native_interpreter_vm_project_scaffold_and_dispatch_loop_exist(self) -> None:
         root_cmake_source = ROOT_CMAKE_PATH.read_text(encoding="utf-8")

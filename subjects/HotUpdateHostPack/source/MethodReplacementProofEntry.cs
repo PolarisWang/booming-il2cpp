@@ -8,17 +8,19 @@ internal static class MethodReplacementProofEntry
         ChaosUnitCategory.HotUpdateContract,
         Alias = "method-replacement-proof",
         Requires = ChaosRuntimeFeature.HotUpdate,
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 2)]
     public static int Run()
     {
         var slot = new ReplacementSlot(static () => "hello from AOT");
+        var before = slot.Invoke();
+        Assert.Equal("hello from AOT", before);
 
-        Console.WriteLine($"method-replacement-before={slot.Invoke()}");
         slot.Register(static () => "hello from interpreter");
-        Console.WriteLine($"method-replacement-after={slot.Invoke()}");
+        var after = slot.Invoke();
+        Assert.Equal("hello from interpreter", after);
         slot.Revert();
-        Console.WriteLine($"method-replacement-reverted={slot.Invoke()}");
+        var reverted = slot.Invoke();
+        Assert.Equal("hello from AOT", reverted);
         return 0;
     }
 

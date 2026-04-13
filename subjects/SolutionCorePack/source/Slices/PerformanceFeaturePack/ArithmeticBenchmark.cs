@@ -10,6 +10,7 @@ internal static class ArithmeticBenchmarkEntry
         ChaosBenchmarkCategory.RuntimeDispatch,
         ChaosMetric.WallClockUs,
         Alias = "arithmetic-bench",
+        Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native,
         WarmupCount = 1,
         IterationCount = 2,
         InvocationCount = 1)]

@@ -78,15 +78,22 @@ internal static class CrossBoundaryExceptionProofEntry
         ChaosUnitCategory.RuntimeContract,
         Alias = "cross-boundary-exception-proof",
         Requires = ChaosRuntimeFeature.ExceptionFlow,
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 6)]
     public static int Run()
     {
-        Console.WriteLine("cross-ex-catch=" + CrossBoundaryProofMethods.CatchFromCallee("aot"));
-        Console.WriteLine("cross-ex-filter-ok=" + CrossBoundaryProofMethods.CatchWithCondition(5));
-        Console.WriteLine("cross-ex-filter-caught=" + CrossBoundaryProofMethods.CatchWithCondition(-1));
-        Console.WriteLine("cross-ex-finally-throw=" + CrossBoundaryProofMethods.NestedFinally(true));
-        Console.WriteLine("cross-ex-finally-ok=" + CrossBoundaryProofMethods.NestedFinally(false));
+        var caught = CrossBoundaryProofMethods.CatchFromCallee("aot");
+        var filterOk = CrossBoundaryProofMethods.CatchWithCondition(5);
+        var filterCaught = CrossBoundaryProofMethods.CatchWithCondition(-1);
+        var finallyThrow = CrossBoundaryProofMethods.NestedFinally(true);
+        var finallyOk = CrossBoundaryProofMethods.NestedFinally(false);
+
+        Assert.Equal("caught:from-aot", caught);
+        Assert.Equal("ok:5", filterOk);
+        Assert.True(filterCaught.StartsWith("filtered:negative", StringComparison.Ordinal));
+        Assert.True(filterCaught.Contains("value", StringComparison.Ordinal));
+        Assert.Equal("inner-try;inner-finally;outer-catch:nested;outer-finally;", finallyThrow);
+        Assert.Equal("inner-try;no-throw;inner-finally;outer-finally;", finallyOk);
+
         return 0;
     }
 }

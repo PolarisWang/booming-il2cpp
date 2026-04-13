@@ -31,7 +31,6 @@ internal static class ReflectionInteropClosureEntry
         ChaosUnitCategory.InteropContract,
         Alias = "reflection-interop-closure-proof",
         Requires = ChaosRuntimeFeature.Reflection | ChaosRuntimeFeature.NativeInterop,
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 7)]
     public static int Run()
     {
@@ -39,11 +38,10 @@ internal static class ReflectionInteropClosureEntry
         FieldInfo field = closedType.GetField(nameof(ReflectionClosureBox<string>.Value))!;
         MethodInfo method = closedType.GetMethod(nameof(ReflectionClosureBox<string>.Echo))!;
         Type genericTypeDefinition = closedType.GetGenericTypeDefinition();
+        Assert.Equal("Value", field.Name);
+        Assert.Equal("Echo", method.Name);
+        Assert.Equal("ReflectionClosureBox`1", genericTypeDefinition.Name);
         _ = ClosureNativeMethods.GetTickCount64();
-        _ = field;
-        _ = method;
-        _ = genericTypeDefinition;
-        Console.WriteLine("closure-ok|ReflectionClosureBox<String>|Value|Echo|GetTickCount64");
         return 0;
     }
 }

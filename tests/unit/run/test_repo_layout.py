@@ -135,7 +135,6 @@ MIGRATED_COMPATIBILITY_TESTS = [
     "test_engine_bridge_minimal.py",
     "test_engine_contract_freeze.py",
     "test_engine_host_proof_subject.py",
-    "test_host_embedding_ownership_protocol.py",
     "test_mainline_feature_pack_onboarding.py",
     "test_mobile_hello_world_proof_subject.py",
     "test_mobile_runtime_host_foundation.py",

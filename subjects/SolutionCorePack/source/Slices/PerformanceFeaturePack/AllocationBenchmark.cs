@@ -17,12 +17,13 @@ internal static class AllocationBenchmarkEntry
         ChaosBenchmarkCategory.Allocation,
         ChaosMetric.WallClockUs | ChaosMetric.ManagedAllocBytes,
         Alias = "allocation-bench",
+        Modes = ChaosExecutionMode.Managed,
         WarmupCount = 1,
         IterationCount = 3,
         InvocationCount = 1)]
-    public static long RunWorkload()
+    public static int RunWorkload()
     {
-        long checksum = 0;
+        int checksum = 0;
         for (int i = 0; i < IterationCount * 10; i++)
         {
             var item = new AllocationWorkItem { Id = i, Name = "item" + i, Value = i * 1.5 };

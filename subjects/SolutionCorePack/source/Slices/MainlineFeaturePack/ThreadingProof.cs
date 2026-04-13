@@ -13,10 +13,11 @@ internal static class ThreadingProofEntry
     [ChaosUnitTest(
         ChaosUnitCategory.RuntimeContract,
         Alias = "threading-proof",
-        Evidence = ChaosEvidenceKind.Stdout,
         Priority = 2)]
     public static int Run()
     {
+        ThreadSlot = 0;
+        SharedTotal = 0;
         ThreadSlot += 1;
 
         lock (Gate)
@@ -24,7 +25,7 @@ internal static class ThreadingProofEntry
             SharedTotal += ThreadSlot;
         }
 
-        Console.WriteLine(SharedTotal);
+        Assert.Equal(1, SharedTotal);
         return 0;
     }
 }
