@@ -66,8 +66,13 @@ def list_public_test_suites(manifest: dict, host_platform: str) -> list[dict]:
     return public_specs_module.list_public_test_suites(host_platform)
 
 
-def resolve_legacy_test_command_id(family: str, suite: str, *, stage: str, host_platform: str) -> str | None:
-    return public_specs_module.resolve_legacy_test_command_id(family, suite, stage=stage, host_platform=host_platform)
+def resolve_public_test_execution_spec(
+    family: str,
+    suite: str,
+    *,
+    host_platform: str,
+) -> dict[str, Any] | None:
+    return public_specs_module.resolve_public_test_execution_spec(family, suite, host_platform=host_platform)
 
 
 def _render_public_test_list(items: list[dict]) -> str:
@@ -430,6 +435,71 @@ def _execute_legacy_command(
     return handle(legacy_command, repo_root, host_platform, command_text, manifest)
 
 
+def _execute_public_suite_spec(
+    suite_spec: dict[str, Any],
+    repo_root: Path,
+    host_platform: str,
+    command_text: str,
+    stage: str,
+    *,
+    manifest: dict,
+) -> CommandResult:
+    execution = resolve_public_test_execution_spec(
+        str(suite_spec.get("family") or ""),
+        str(suite_spec.get("suite") or ""),
+        host_platform=host_platform,
+    )
+    if execution is None:
+        return _failure(
+            command_text,
+            host_platform,
+            str(suite_spec.get("id") or ""),
+            "",
+            [f"public suite execution is not available: {suite_spec.get('id')}"],
+        )
+
+    command = dict(execution)
+    command.setdefault("target", str(command.get("target") or suite_spec.get("suite") or suite_spec.get("id") or ""))
+    kind = str(command.get("kind") or "")
+
+    if kind == "smoke-run":
+        if stage == "build":
+            build_command = dict(command)
+            build_command["kind"] = "smoke-project"
+            build_command.setdefault("artifact_path", str(build_command.get("dll_path") or ""))
+            return build_commands.handle(build_command, repo_root, host_platform, command_text)
+        return _run_smoke_project(command, repo_root, host_platform, command_text)
+
+    if kind == "contract-check":
+        return _run_contract_check(command, repo_root, host_platform, command_text)
+    if kind == "python-unittest":
+        return _run_python_unittest(command, repo_root, host_platform, command_text)
+    if kind == "trace-compare":
+        return _run_trace_compare(command, repo_root, host_platform, command_text)
+    if kind in {"native-contract", "reference-desktop-gate", "platform-gate"}:
+        return build_commands.handle(command, repo_root, host_platform, command_text)
+    if kind == "registry-object":
+        return _handle_registry_object_dispatch(
+            str(command.get("object_kind") or ""),
+            repo_root,
+            host_platform,
+            command_text,
+            manifest,
+            {
+                "id": str(command.get("object_id") or ""),
+                "stage": stage,
+            },
+        )
+
+    return _failure(
+        command_text,
+        host_platform,
+        str(suite_spec.get("id") or ""),
+        "",
+        [f"unsupported public suite execution kind: {kind or '<missing>'}"],
+    )
+
+
 def _execute_public_test_session(
     family: str,
     suite: str,
@@ -440,12 +510,6 @@ def _execute_public_test_session(
     manifest: dict,
 ) -> session_module.SessionResult:
     suite_spec = find_public_test_suite_spec(family, suite)
-    legacy_command_id = resolve_legacy_test_command_id(family, suite, stage=stage, host_platform=host_platform)
-    legacy_command = (
-        manifest_module.find_command(manifest, legacy_command_id, host_platform, include_hidden=True)
-        if legacy_command_id is not None
-        else None
-    )
     request = session_module.TestRequest(
         family=family,
         suite=suite,
@@ -457,8 +521,14 @@ def _execute_public_test_session(
         repo_root=repo_root,
         host_platform=host_platform,
         suite_spec=suite_spec,
-        legacy_command=legacy_command,
-        legacy_executor=_execute_legacy_command,
+        suite_executor=lambda selected_suite_spec, selected_repo_root, selected_host_platform, selected_command_text, selected_stage: _execute_public_suite_spec(
+            selected_suite_spec,
+            selected_repo_root,
+            selected_host_platform,
+            selected_command_text,
+            selected_stage,
+            manifest=manifest,
+        ),
     )
 
 

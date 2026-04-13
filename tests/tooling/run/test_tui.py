@@ -80,11 +80,11 @@ class LegacyTuiTests(unittest.TestCase):
         entries = tui_module.build_prepare_menu_entries(manifest, "windows")
 
         self.assertEqual(
-            ["doctor", "prepare", "prepare-smoke", "prepare-verify-roadmap-0-windows", "menu-back"],
+            ["doctor", "prepare", "prepare-smoke", "prepare-android-host", "prepare-workflow-runtime-baseline-windows", "menu-back"],
             [entry.command["id"] for entry in entries],
         )
         self.assertEqual(["基础准备", "基础准备", "场景准备", "场景准备", "返回上级"], [entry.group_title for entry in entries])
-        self.assertEqual(["doctor", "setup", "smoke", "roadmap-0", "back"], [entry.syntax for entry in entries])
+        self.assertEqual(["doctor", "setup", "smoke", "android-host", "runtime-baseline", "back"], [entry.syntax for entry in entries])
         self.assertIn("检查并初始化", entries[1].command["title"])
         self.assertEqual("back", entries[-1].syntax)
 
@@ -95,7 +95,7 @@ class LegacyTuiTests(unittest.TestCase):
 
         entries = tui_module.build_clean_menu_entries(manifest, "windows")
 
-        self.assertEqual(["all", "smoke", "roadmap-0", "back"], [entry.syntax for entry in entries])
+        self.assertEqual(["all", "smoke", "android-host", "runtime-baseline", "back"], [entry.syntax for entry in entries])
         self.assertIn("全部托管输出", entries[0].command["title"])
         self.assertEqual("menu-back", entries[-1].command["id"])
 
@@ -955,7 +955,7 @@ class TuiUnifiedMenuTests(unittest.TestCase):
                     "smoke": {"total": 1},
                     "contract": {"total": 1},
                 },
-                "subjectPreview": ["HelloWorldObject"],
+                "subjectPreview": ["SolutionCorePack"],
                 "outputPaths": {
                     "summaryPath": "artifacts/logs/tests/<run-id>/summary.json",
                     "eventsPath": "artifacts/logs/tests/<run-id>/events.jsonl",
@@ -968,7 +968,7 @@ class TuiUnifiedMenuTests(unittest.TestCase):
         self.assertIn("Host: windows", screen)
         self.assertIn("Planned: 3 = 2 suites + 1 subjects", screen)
         self.assertIn("Families: contract 1 | smoke 1", screen)
-        self.assertIn("Subjects: HelloWorldObject", screen)
+        self.assertIn("Subjects: SolutionCorePack", screen)
         self.assertIn("artifacts/logs/tests/<run-id>/summary.json", screen)
 
     def test_run_test_submenu_routes_subject_entry_to_third_level_subject_menu(self) -> None:
@@ -987,11 +987,11 @@ class TuiUnifiedMenuTests(unittest.TestCase):
                 with patch.object(
                     tui_module,
                     "run_test_subject_submenu",
-                    return_value=["test", "subject", "--id", "subject/HelloWorldObject"],
+                    return_value=["test", "subject", "--id", "subject/SolutionCorePack"],
                 ) as run_test_subject_submenu:
                     argv = tui_module.run_test_submenu(manifest, "windows", terminal=fake_terminal)
 
-        self.assertEqual(["test", "subject", "--id", "subject/HelloWorldObject"], argv)
+        self.assertEqual(["test", "subject", "--id", "subject/SolutionCorePack"], argv)
         run_test_subject_submenu.assert_called_once_with(
             manifest,
             "windows",

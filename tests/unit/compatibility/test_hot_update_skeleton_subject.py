@@ -162,14 +162,18 @@ class Phase5HotUpdateSkeletonTests(unittest.TestCase):
         self.assertEqual("canonical", canonical_manifest["category"])
         self.assertEqual("windows-managed-output", canonical_manifest["defaultMatrix"])
         self.assertEqual("managed-output", canonical_manifest["defaultValidationProfile"])
-        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj", canonical_manifest["source"]["path"])
+        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.sln", canonical_manifest["source"]["path"])
+        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj", canonical_manifest["source"]["primaryProjectPath"])
         self.assertEqual("HotUpdateHostPack/Program::Main()", canonical_manifest["source"]["entry"])
+        self.assertEqual("HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()", canonical_manifest["workloadEntry"])
+        self.assertEqual("dotnet-solution", canonical_manifest["sourceModel"])
         self.assertEqual("require", canonical_manifest["testDeclarationMode"])
         self.assertEqual(["proof"], validation_profiles["managed-output"])
         self.assertEqual(["proof"], validation_profiles["corruption-check"])
-        self.assertEqual({"managed-runtime-output"}, pipeline_ids)
+        self.assertEqual(["perf"], validation_profiles["perf-profile"])
+        self.assertEqual({"managed-runtime-output", "managed-benchmark"}, pipeline_ids)
         self.assertEqual(
-            {"windows-managed-output", "macos-managed-output", "linux-managed-output"},
+            {"windows-managed-output", "macos-managed-output", "linux-managed-output", "windows-managed-perf"},
             matrix_ids,
         )
 
@@ -208,7 +212,7 @@ class Phase5HotUpdateSkeletonTests(unittest.TestCase):
         capabilities = record["capabilities"]
 
         self.assertEqual("HotUpdateHostPack", record["subjectId"])
-        self.assertEqual({"managed-runtime-output"}, set(capabilities["pipelineIds"]))
+        self.assertEqual({"managed-runtime-output", "managed-benchmark"}, set(capabilities["pipelineIds"]))
         self.assertEqual({"windows-x64", "macos-arm64", "linux-x64"}, set(capabilities["hostPlatforms"]))
 
 

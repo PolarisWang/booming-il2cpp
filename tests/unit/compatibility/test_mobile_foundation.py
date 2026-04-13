@@ -27,7 +27,7 @@ MOBILE_BENCHMARK_SUBJECTS = [
     "BenchHotUpdateRoundtrip",
 ]
 CANONICAL_BENCHMARK_SUBJECTS = [
-    "PerformanceFeaturePack",
+    "SolutionCorePack",
     "HotUpdateHostPack",
     "MixedExecutionFeaturePack",
 ]

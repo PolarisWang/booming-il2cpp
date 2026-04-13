@@ -341,6 +341,11 @@ def _load_subject_manifest(path: Path) -> dict[str, Any]:
     if not supported_hosts:
         raise ValueError("subject must declare at least one executionContext.hostPlatform")
 
+    default_matrix = subjects_module.find_matrix(payload, _require_string(payload, "defaultMatrix"))
+    resolved_source = dict(payload.get("source") or {})
+    resolved_source.update(dict(default_matrix.get("source") or {}))
+    default_subject_entry_selection = dict(resolved_source.get("entrySelection") or {})
+
     item = _base_registry_object(
         object_id=f"subject/{subject_id}",
         object_type="subject",
@@ -363,7 +368,7 @@ def _load_subject_manifest(path: Path) -> dict[str, Any]:
     item["availability"] = dict(payload.get("availability") or {})
     item["compatibility"] = dict(payload.get("compatibility") or {})
     item["defaultGoalId"] = _require_string(payload, "defaultGoal")
-    item["defaultMatrixId"] = _require_string(payload, "defaultMatrix")
+    item["defaultMatrixId"] = str(default_matrix.get("matrixId") or "")
     item["matrixIds"] = [str(matrix.get("matrixId") or "") for matrix in matrices]
     item["goalIds"] = sorted(
         {
@@ -374,6 +379,10 @@ def _load_subject_manifest(path: Path) -> dict[str, Any]:
         }
     )
     item["tags"] = _string_list(payload, "tags")
+    item["defaultPrimaryProjectPath"] = subjects_module.resolve_source_primary_project_path(resolved_source)
+    item["defaultSourceEntry"] = str(resolved_source.get("entry") or "")
+    item["defaultSubjectEntrySelection"] = default_subject_entry_selection
+    item["defaultWorkloadEntry"] = str(default_matrix.get("workloadEntry") or payload.get("workloadEntry") or "")
     item["resolvedMembers"] = _resolved_member_ids(item)
     item["deprecated"] = _deprecated_flag(payload)
     return item
@@ -958,25 +967,7 @@ def write_registry_snapshot(
     write_json(current_path, payload)
     write_json(history_path, payload)
     return {"currentPath": current_path, "historyPath": history_path}
-
-
-LEGACY_REGISTRY_OBJECT_ALIASES = {
-    "system/roadmap-0-windows": "system/runtime-baseline-windows",
-    "system/roadmap-0-macos": "system/runtime-baseline-macos",
-    "system/roadmap-0-android-startup-gate": "system/android-startup-gate",
-    "system/roadmap-0-ios-packaging-gate": "system/ios-packaging-gate",
-    "system/roadmap-0-linux-packaging-gate": "system/linux-packaging-gate",
-    "system/roadmap-0-windows-reference-gate": "system/windows-reference-gate",
-    "system/roadmap-0-macos-reference-gate": "system/macos-reference-gate",
-}
-
-
-def normalize_registry_object_id(object_id: str) -> str:
-    return LEGACY_REGISTRY_OBJECT_ALIASES.get(object_id, object_id)
-
-
 def find_registry_object(index: RegistryIndex, object_id: str) -> dict[str, Any] | None:
-    object_id = normalize_registry_object_id(object_id)
     for item in index.flat_items:
         if item["id"] == object_id:
             return item

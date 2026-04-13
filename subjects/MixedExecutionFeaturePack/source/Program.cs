@@ -1,14 +1,21 @@
+using Chaos.TestFramework;
+
 namespace MixedExecutionFeaturePack;
 
 internal static class Program
 {
     public static int Main(string[] args)
     {
-        if (args.Length > 0 && string.Equals(args[0], "lowering-proof", StringComparison.Ordinal))
+        if (!ChaosSubjectEntryArguments.TryParse(args, out var selection) || selection.IsNone)
         {
-            return InterpreterLoweringProofEntry.Run();
+            return MixedExecutionProofEntry.Run();
         }
 
-        return MixedExecutionProofEntry.Run();
+        return selection switch
+        {
+            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.MixedExecutionProof } => MixedExecutionProofEntry.Run(),
+            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.InterpreterLoweringProof } => InterpreterLoweringProofEntry.Run(),
+            _ => throw new ArgumentOutOfRangeException(nameof(args), "unsupported MixedExecutionFeaturePack entry selection."),
+        };
     }
 }

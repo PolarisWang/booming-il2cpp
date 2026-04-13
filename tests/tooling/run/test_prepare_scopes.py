@@ -36,17 +36,13 @@ class PrepareScopeTests(unittest.TestCase):
             prepare_module.resolve_prepare_scope("prepare-workflow-runtime-baseline-windows"),
         )
         self.assertEqual(
-            "workflow-runtime-baseline-windows",
-            prepare_module.resolve_prepare_scope("prepare-verify-roadmap-0-windows"),
-        )
-        self.assertEqual(
             "workflow-runtime-baseline-macos",
             prepare_module.resolve_prepare_scope("prepare-workflow-runtime-baseline-macos"),
         )
-        self.assertEqual(
-            "workflow-runtime-baseline-macos",
-            prepare_module.resolve_prepare_scope("prepare-verify-roadmap-0-macos"),
-        )
+        with self.assertRaises(KeyError):
+            prepare_module.resolve_prepare_scope("prepare-verify-roadmap-0-windows")
+        with self.assertRaises(KeyError):
+            prepare_module.resolve_prepare_scope("prepare-verify-roadmap-0-macos")
 
     def test_clean_scope_paths_only_cover_managed_outputs(self) -> None:
         prepare_module = load_prepare_module()

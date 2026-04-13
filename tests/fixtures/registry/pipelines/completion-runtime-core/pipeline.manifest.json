@@ -11,11 +11,11 @@
       "id": "code",
       "title": "Code tests",
       "members": [
-        {"type": "suite", "id": "smoke/HelloWorld"},
-        {"type": "suite", "id": "smoke/GenericEcho"},
-        {"type": "suite", "id": "smoke/ReflectionLite"},
-        {"type": "suite", "id": "smoke/PInvokeLite"},
-        {"type": "suite", "id": "smoke/HostEmbeddingLite"}
+        {"type": "suite", "id": "smoke/managed-entry-basic"},
+        {"type": "suite", "id": "smoke/managed-generics-basic"},
+        {"type": "suite", "id": "smoke/reflection-basic"},
+        {"type": "suite", "id": "smoke/native-interop-basic"},
+        {"type": "suite", "id": "smoke/host-embedding-basic"}
       ]
     },
     {

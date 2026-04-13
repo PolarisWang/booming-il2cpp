@@ -41,11 +41,11 @@ class ReportingLayoutTests(unittest.TestCase):
             report = reporting_module.write_session_report(
                 repo_root=repo_root,
                 host_platform="macos",
-                command_text="test smoke HelloWorld",
+                command_text="test smoke managed-entry-basic",
                 status="ok",
                 suite_results=[
                     {
-                        "suiteId": "smoke/HelloWorld",
+                        "suiteId": "smoke/managed-entry-basic",
                         "status": "ok",
                         "stageResults": {
                             "build": {"status": "ok"},
@@ -69,10 +69,10 @@ class ReportingLayoutTests(unittest.TestCase):
                         "memberCounts": {"total": 1, "ok": 1, "fail": 0, "aborted": 0},
                         "memberResults": [
                             {
-                                "objectId": "smoke/HelloWorld",
+                                "objectId": "smoke/managed-entry-basic",
                                 "objectType": "suite",
                                 "status": "ok",
-                                "resolvedSuiteIds": ["smoke/HelloWorld"],
+                                "resolvedSuiteIds": ["smoke/managed-entry-basic"],
                             }
                         ],
                     }
@@ -97,7 +97,7 @@ class ReportingLayoutTests(unittest.TestCase):
             self.assertTrue((root / "events.jsonl").is_file())
             summary = json.loads((root / "summary.json").read_text(encoding="utf-8"))
             suite_report = json.loads(
-                (root / "suites" / "smoke" / "HelloWorld" / "report.json").read_text(encoding="utf-8")
+                (root / "suites" / "smoke" / "managed-entry-basic" / "report.json").read_text(encoding="utf-8")
             )
 
             events = [

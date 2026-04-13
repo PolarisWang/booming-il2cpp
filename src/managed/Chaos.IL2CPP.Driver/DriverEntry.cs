@@ -156,8 +156,7 @@ public sealed class DriverEntry
                 case "dotnet-project":
                 case "dotnet-project+dlls":
                 {
-                    var projectPath = source.GetProperty("path").GetString()
-                        ?? throw new InvalidOperationException("source.path is required for dotnet-project");
+                    var projectPath = ResolvePrimaryProjectPath(source);
 
                     if (!Path.IsPathRooted(projectPath))
                         projectPath = Path.GetFullPath(projectPath, Directory.GetCurrentDirectory());
@@ -287,6 +286,27 @@ public sealed class DriverEntry
             Console.Error.WriteLine($"Error: {exception.Message}");
             return 1;
         }
+    }
+
+    private static string ResolvePrimaryProjectPath(JsonElement source)
+    {
+        var sourcePath = source.GetProperty("path").GetString()
+            ?? throw new InvalidOperationException("source.path is required for dotnet-project");
+        var primaryProjectPath = source.TryGetProperty("primaryProjectPath", out var primaryProjectElement)
+            ? primaryProjectElement.GetString()
+            : null;
+
+        if (!string.IsNullOrWhiteSpace(primaryProjectPath))
+        {
+            return primaryProjectPath!;
+        }
+
+        if (sourcePath.EndsWith(".csproj", StringComparison.OrdinalIgnoreCase))
+        {
+            return sourcePath;
+        }
+
+        throw new InvalidOperationException("solution source requires source.primaryProjectPath");
     }
 
     private static int RunBuild(string[] args)
@@ -499,24 +519,40 @@ public sealed class DriverEntry
     {
         request = default!;
 
-        if (args.Length == 2)
+        if (args.Length < 2)
         {
-            request = new ManagedClosureRequest(args[0], args[1]);
-            return true;
+            return false;
         }
 
-        if (args.Length == 4 &&
-            string.Equals(args[2], "--entry-point-subject-id", StringComparison.Ordinal) &&
-            !string.IsNullOrWhiteSpace(args[3]))
+        string? entryPointSubjectIdOverride = null;
+        var additionalAssemblyPaths = new List<string>();
+
+        for (var index = 2; index < args.Length; index++)
         {
-            request = new ManagedClosureRequest(
-                args[0],
-                args[1],
-                EntryPointSubjectIdOverride: args[3]);
-            return true;
+            switch (args[index])
+            {
+                case "--entry-point-subject-id" when index + 1 < args.Length && !string.IsNullOrWhiteSpace(args[index + 1]):
+                    if (!string.IsNullOrWhiteSpace(entryPointSubjectIdOverride))
+                    {
+                        return false;
+                    }
+
+                    entryPointSubjectIdOverride = args[++index];
+                    break;
+                case "--additional-assembly" when index + 1 < args.Length && !string.IsNullOrWhiteSpace(args[index + 1]):
+                    additionalAssemblyPaths.Add(args[++index]);
+                    break;
+                default:
+                    return false;
+            }
         }
 
-        return false;
+        request = new ManagedClosureRequest(
+            args[0],
+            args[1],
+            EntryPointSubjectIdOverride: entryPointSubjectIdOverride,
+            AdditionalAssemblyPaths: additionalAssemblyPaths.Count == 0 ? null : additionalAssemblyPaths);
+        return true;
     }
 
     private static void ShowHelp()
@@ -530,6 +566,7 @@ public sealed class DriverEntry
         Console.WriteLine();
         Console.WriteLine("Legacy commands:");
         Console.WriteLine("  <input.dll> <output-root>                    Managed closure generation");
+        Console.WriteLine("      [--entry-point-subject-id <subject-id>] [--additional-assembly <path> ...]");
         Console.WriteLine("  emit-native-reference <closure-root> <out>   Native reference emission");
         Console.WriteLine("  emit-native-aot <closure-root> <out>         Generic native AOT emission");
         Console.WriteLine();

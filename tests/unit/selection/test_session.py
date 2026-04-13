@@ -28,7 +28,7 @@ def load_module(path: Path, module_name: str):
 
 
 class SessionTests(unittest.TestCase):
-    def test_stage_run_marks_implicit_build_when_build_cache_missing(self) -> None:
+    def test_stage_run_marks_implicit_build_when_direct_smoke_executor_handles_run(self) -> None:
         session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session")
         result_module = load_module(RESULT_MODULE_PATH, "chaos_run_result_for_session")
         suite_spec = select_public_suite_spec(
@@ -39,9 +39,8 @@ class SessionTests(unittest.TestCase):
         )
         suite_name = str(suite_spec["suite"])
         suite_id = str(suite_spec["id"])
-        legacy_commands = dict(suite_spec.get("legacy_commands") or {})
         artifact_path = Path("artifacts", "smoke", "bin", suite_name, "Release", "net8.0", f"{suite_name}.dll").as_posix()
-        legacy_result = result_module.CommandResult.success(
+        execution_result = result_module.CommandResult.success(
             command=f"test {suite_spec['family']} {suite_name} --stage run",
             host_platform="macos",
             target=suite_name,
@@ -66,10 +65,14 @@ class SessionTests(unittest.TestCase):
                 "suite": suite_name,
                 "stages": list(suite_spec["stages"]),
                 "supported_hosts": list(suite_spec["supported_hosts"]),
-                "legacy_commands": legacy_commands,
+                "execution": {
+                    "kind": "smoke-run",
+                    "project_path": "subjects/SolutionCorePack/source/Slices/HelloWorld/HelloWorld.csproj",
+                    "dll_path": "subjects/SolutionCorePack/source/Slices/HelloWorld/bin/Release/net8.0/HelloWorld.dll",
+                    "expected_patterns": ["HelloWorld smoke entry reached."],
+                },
             },
-            legacy_command={"id": str(legacy_commands["run"]), "target": suite_name},
-            legacy_executor=lambda command, repo_root, host_platform, command_text: legacy_result,
+            suite_executor=lambda suite_spec, repo_root, host_platform, command_text, stage: execution_result,
         )
 
         self.assertEqual(0, session_result.exit_code)

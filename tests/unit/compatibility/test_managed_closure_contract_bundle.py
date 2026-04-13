@@ -7,7 +7,6 @@ import unittest
 import uuid
 from pathlib import Path
 
-from tests.support import select_subject_record
 from tests.support import load_module
 
 
@@ -76,18 +75,29 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        cls.subject_record = select_subject_record(
-            "chaos_contract_managed_closure_bundle_record",
-            category="canonical",
-            source_type="dotnet-project",
-            required_stage_kinds=["analysis-frontend", "generated-native-proof"],
-            required_validation_profile_ids=["proof-dev"],
-            required_validation_kinds=["proof", "unit"],
-            required_validation_frameworks=["xunit"],
+        cls.subject_pack_id = "SolutionCorePack"
+        cls.subject_id = "HelloWorldObject"
+        cls.project_path = (
+            REPO_ROOT
+            / "subjects"
+            / cls.subject_pack_id
+            / "source"
+            / "Slices"
+            / cls.subject_id
+            / f"{cls.subject_id}.csproj"
         )
-        cls.subject_id = str(cls.subject_record["subjectId"])
-        cls.project_path = REPO_ROOT / "subjects" / cls.subject_id / "source" / f"{cls.subject_id}.csproj"
-        cls.dll_path = REPO_ROOT / "subjects" / cls.subject_id / "source" / "bin" / "Release" / "net8.0" / f"{cls.subject_id}.dll"
+        cls.dll_path = (
+            REPO_ROOT
+            / "subjects"
+            / cls.subject_pack_id
+            / "source"
+            / "Slices"
+            / cls.subject_id
+            / "bin"
+            / "Release"
+            / "net8.0"
+            / f"{cls.subject_id}.dll"
+        )
         cls.output_root = TEST_INTERMEDIATE_ROOT / "outputs" / f"{cls.subject_id}-{uuid.uuid4().hex}"
         cls.native_output_root = TEST_INTERMEDIATE_ROOT / "native-proof-outputs" / f"{cls.subject_id}-{uuid.uuid4().hex}"
         cls.bundle_generated = False
@@ -164,14 +174,14 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         )
         self.__class__.native_reference_generated = True
 
-    def test_spec_doc_exists_and_points_at_subject_root_inputs(self) -> None:
+    def test_spec_doc_exists_and_points_at_solution_slice_inputs(self) -> None:
         self.assertTrue(SPEC_DOC_PATH.is_file(), msg=f"missing spec doc: {SPEC_DOC_PATH}")
 
         spec_text = SPEC_DOC_PATH.read_text(encoding="utf-8")
         overview_text = CONTRACT_OVERVIEW_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("subjects/<subject-id>/source/<subject-id>.csproj", spec_text)
-        self.assertIn("subjects/<subject-id>/source/bin/Release/net8.0/<subject-id>.dll", spec_text)
+        self.assertIn("subjects/<subject-pack>/source/Slices/<slice-name>/<slice-name>.csproj", spec_text)
+        self.assertIn("subjects/<subject-pack>/source/Slices/<slice-name>/bin/Release/net8.0/<slice-name>.dll", spec_text)
         self.assertIn("artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/typed-il-ir.json", spec_text)
         self.assertIn(
             "artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/hot-update/supplemental-metadata-template.json",

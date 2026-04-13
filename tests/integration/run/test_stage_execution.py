@@ -7,6 +7,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from tests.support import select_public_suite_spec
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 RUN_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "run.py"
@@ -34,24 +36,50 @@ class StageExecutionTests(unittest.TestCase):
     def test_public_test_handle_surfaces_session_stage_results(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_for_stage")
         manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_for_stage")
-        result_module = load_module(RESULT_MODULE_PATH, "chaos_run_result_for_stage")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
-        legacy_result = result_module.CommandResult.success(
-            command="test smoke HelloWorld --stage run",
+        smoke_spec = select_public_suite_spec(
+            "chaos_stage_execution_public_smoke",
             host_platform="macos",
-            target="HelloWorld",
-            payload={"artifacts": ["artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll"]},
+            family="smoke",
+            required_stages=["build", "run"],
+        )
+        suite_id = str(smoke_spec["id"])
+        suite_name = str(smoke_spec["suite"])
+        session_result = test_module.session_module.SessionResult(
+            request=test_module.session_module.TestRequest(
+                family="smoke",
+                suite=suite_name,
+                stage="run",
+                command_text=f"test smoke {suite_name} --stage run",
+            ),
+            host_platform="macos",
+            status="ok",
+            suite_results=[
+                {
+                    "suiteId": suite_id,
+                    "status": "ok",
+                    "stageResults": {
+                        "build": {"status": "ok", "implicit": True},
+                        "setup": {"status": "not-requested"},
+                        "run": {"status": "ok"},
+                        "report": {"status": "not-requested"},
+                    },
+                    "artifacts": [],
+                }
+            ],
             text="managed smoke ok\n",
+            artifacts=[],
+            exit_code=0,
         )
 
-        with patch.object(test_module, "_execute_legacy_command", return_value=legacy_result):
+        with patch.object(test_module, "_execute_public_test_session", return_value=session_result):
             result = test_module.handle(
                 {"id": "test-family-suite", "handler": "test.dispatch"},
                 REPO_ROOT,
                 "macos",
-                "test smoke HelloWorld --stage run",
+                f"test smoke {suite_name} --stage run",
                 manifest,
-                {"family": "smoke", "suite": "HelloWorld", "stage": "run"},
+                {"family": "smoke", "suite": suite_name, "stage": "run"},
             )
 
         self.assertEqual("ok", result.status)

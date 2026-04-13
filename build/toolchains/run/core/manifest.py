@@ -16,6 +16,15 @@ except ImportError:
 
 DEFAULT_RUN_MANIFEST = Path("build/toolchains/run/run_manifest.json")
 DEFAULT_MANIFEST_SHARD_DIR = Path("build/toolchains/run/manifests/run")
+REMOVED_PUBLIC_TEST_SUITES = {
+    ("smoke", "HelloWorld"),
+    ("smoke", "GenericEcho"),
+    ("smoke", "ReflectionLite"),
+    ("smoke", "PInvokeLite"),
+    ("smoke", "HostEmbeddingLite"),
+    ("workflow", "roadmap-0-windows"),
+    ("workflow", "roadmap-0-macos"),
+}
 
 
 def resolve_manifest_path(repo_root: Path, manifest_path: str | Path | None = None) -> Path:
@@ -296,6 +305,9 @@ def resolve_dynamic_test_command(
         )
         if command is not None:
             return command, command.get("target"), merged_options
+
+    if len(positional) == 3 and (positional[1], positional[2]) in REMOVED_PUBLIC_TEST_SUITES:
+        return None, None, merged_options
 
     if len(positional) == 3:
         merged_options["family"] = positional[1]

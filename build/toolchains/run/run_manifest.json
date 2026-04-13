@@ -27,76 +27,818 @@
   ],
   "commands": [
     {
-      "id": "menu",
-      "title": "Show the interactive menu",
-      "group": "Quick Start",
-      "handler": "inspect.menu",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["menu"],
-      "show_in_menu": false,
-      "examples": ["run menu"]
+      "id": "build-all",
+      "title": "Build the recommended batch for the current host",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "build",
+        "all"
+      ],
+      "kind": "batch",
+      "target": "all",
+      "show_in_menu": true,
+      "examples": [
+        "run build all"
+      ]
     },
     {
-      "id": "list",
-      "title": "List available capabilities",
-      "group": "Quick Start",
-      "handler": "inspect.list",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["list"],
+      "id": "deploy-core",
+      "title": "Produce the formal core deploy output",
+      "group": "Build",
+      "handler": "deploy.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "deploy",
+        "core"
+      ],
+      "syntax": "deploy core [--host windows|macos|linux] [--target <target-id>] [--all-targets]",
+      "kind": "core-deploy",
       "show_in_menu": true,
-      "examples": ["run list", "run list --json"]
+      "examples": [
+        "run deploy core --host windows --all-targets"
+      ]
     },
     {
-      "id": "help",
-      "title": "Show command help",
-      "group": "Inspect",
-      "handler": "inspect.help",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["help"],
+      "id": "build-native-contract-abi",
+      "title": "Build the native ABI contract smoke target",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "build",
+        "native-contract",
+        "abi"
+      ],
+      "kind": "native-contract",
+      "target": "abi",
+      "source_dir": "tests/contracts/native/abi",
+      "binary_dir": "artifacts/run/native-contract-abi",
       "show_in_menu": true,
-      "examples": ["run help", "run --json"]
+      "examples": [
+        "run build native-contract abi"
+      ]
     },
     {
-      "id": "capability",
-      "title": "Describe a capability",
-      "group": "Inspect",
-      "handler": "inspect.capability",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["capability"],
+      "id": "build-native-contract-bridge",
+      "title": "Build the native bridge contract smoke target",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "build",
+        "native-contract",
+        "bridge"
+      ],
+      "kind": "native-contract",
+      "target": "bridge",
+      "source_dir": "tests/contracts/native/bridge",
+      "binary_dir": "artifacts/run/native-contract-bridge",
       "show_in_menu": true,
-      "examples": ["run capability bootstrap", "run capability bootstrap --json"]
+      "examples": [
+        "run build native-contract bridge"
+      ]
+    },
+    {
+      "id": "build-preset-windows-x64-reference",
+      "title": "Build the Windows reference preset",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "build",
+        "preset",
+        "windows-x64-reference"
+      ],
+      "kind": "preset",
+      "target": "windows-x64-reference",
+      "preset": "windows-x64-reference",
+      "binary_dir": "artifacts/presets/windows-x64-reference",
+      "show_in_menu": true,
+      "examples": [
+        "run build preset windows-x64-reference"
+      ]
+    },
+    {
+      "id": "build-preset-macos-reference",
+      "title": "Build the macOS reference preset",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "macos"
+      ],
+      "tokens": [
+        "build",
+        "preset",
+        "macos-reference"
+      ],
+      "kind": "preset",
+      "target": "macos-reference",
+      "preset": "macos-reference",
+      "binary_dir": "artifacts/presets/macos-reference",
+      "show_in_menu": true,
+      "examples": [
+        "run build preset macos-reference"
+      ]
+    },
+    {
+      "id": "build-platform-android-arm64-smoke",
+      "title": "Validate the Android platform routing shell",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "build",
+        "platform",
+        "android-arm64-smoke"
+      ],
+      "kind": "platform-gate",
+      "target": "android-arm64-smoke",
+      "preset_target": "android-arm64-smoke",
+      "toolchain_file": "build/toolchains/android-arm64.cmake",
+      "binary_dir": "artifacts/run/platform/android-arm64-smoke",
+      "show_in_menu": true,
+      "examples": [
+        "run build platform android-arm64-smoke"
+      ]
+    },
+    {
+      "id": "build-platform-ios-arm64-packaging",
+      "title": "Validate the iOS platform routing shell",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "macos"
+      ],
+      "tokens": [
+        "build",
+        "platform",
+        "ios-arm64-packaging"
+      ],
+      "kind": "platform-gate",
+      "target": "ios-arm64-packaging",
+      "preset_target": "ios-arm64-packaging",
+      "toolchain_file": "build/toolchains/ios-arm64.cmake",
+      "binary_dir": "artifacts/run/platform/ios-arm64-packaging",
+      "show_in_menu": true,
+      "examples": [
+        "run build platform ios-arm64-packaging"
+      ]
+    },
+    {
+      "id": "build-platform-linux-x64-packaging",
+      "title": "Validate the Linux packaging routing shell",
+      "group": "Build",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "build",
+        "platform",
+        "linux-x64-packaging"
+      ],
+      "kind": "platform-gate",
+      "target": "linux-x64-packaging",
+      "preset_target": "linux-x64-packaging",
+      "toolchain_file": "build/toolchains/linux-x64.cmake",
+      "binary_dir": "artifacts/run/platform/linux-x64-packaging",
+      "show_in_menu": true,
+      "examples": [
+        "run build platform linux-x64-packaging"
+      ]
     },
     {
       "id": "bootstrap",
       "title": "Bootstrap the cached Python runtime",
       "group": "Environment",
       "handler": "wrapper.bootstrap",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["bootstrap"],
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "bootstrap"
+      ],
       "show_in_menu": true,
-      "examples": ["run bootstrap --yes", "run bootstrap --yes --json"]
+      "examples": [
+        "run bootstrap --yes",
+        "run bootstrap --yes --json"
+      ]
+    },
+    {
+      "id": "prepare",
+      "title": "Prepare the current host's reusable environment",
+      "group": "Environment",
+      "handler": "prepare.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "prepare"
+      ],
+      "show_in_menu": true,
+      "examples": [
+        "run prepare",
+        "run prepare --json"
+      ]
+    },
+    {
+      "id": "prepare-smoke",
+      "title": "Prepare the managed smoke environment",
+      "group": "Environment",
+      "handler": "prepare.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "prepare",
+        "smoke"
+      ],
+      "show_in_menu": true,
+      "examples": [
+        "run prepare smoke"
+      ]
+    },
+    {
+      "id": "prepare-android-host",
+      "title": "Prepare the cached Android host toolchain environment",
+      "group": "Environment",
+      "handler": "prepare.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "prepare",
+        "android-host"
+      ],
+      "show_in_menu": true,
+      "examples": [
+        "run prepare android-host"
+      ]
+    },
+    {
+      "id": "prepare-workflow-runtime-baseline-windows",
+      "title": "Prepare the Windows runtime-baseline workflow environment",
+      "group": "Environment",
+      "handler": "prepare.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "prepare",
+        "workflow",
+        "runtime-baseline"
+      ],
+      "options": {
+        "host": "windows"
+      },
+      "show_in_menu": true,
+      "examples": [
+        "run prepare workflow runtime-baseline --host windows"
+      ]
+    },
+    {
+      "id": "prepare-workflow-runtime-baseline-macos",
+      "title": "Prepare the macOS runtime-baseline workflow environment",
+      "group": "Environment",
+      "handler": "prepare.dispatch",
+      "platforms": [
+        "macos"
+      ],
+      "tokens": [
+        "prepare",
+        "workflow",
+        "runtime-baseline"
+      ],
+      "options": {
+        "host": "macos"
+      },
+      "show_in_menu": true,
+      "examples": [
+        "run prepare workflow runtime-baseline --host macos"
+      ]
+    },
+    {
+      "id": "clean",
+      "title": "Clean all managed outputs produced by the unified entrypoint",
+      "group": "Environment",
+      "handler": "clean.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "clean"
+      ],
+      "clean_scope": "global",
+      "show_in_menu": true,
+      "examples": [
+        "run clean",
+        "run clean --json"
+      ]
+    },
+    {
+      "id": "clean-smoke",
+      "title": "Clean the managed smoke scope",
+      "group": "Environment",
+      "handler": "clean.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "clean"
+      ],
+      "options": {
+        "scope": "smoke"
+      },
+      "clean_scope": "smoke",
+      "show_in_menu": true,
+      "examples": [
+        "run clean --scope smoke"
+      ]
+    },
+    {
+      "id": "clean-android-host",
+      "title": "Clean the cached Android host toolchain scope",
+      "group": "Environment",
+      "handler": "clean.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "clean"
+      ],
+      "options": {
+        "scope": "android-host"
+      },
+      "clean_scope": "android-host",
+      "show_in_menu": true,
+      "examples": [
+        "run clean --scope android-host"
+      ]
+    },
+    {
+      "id": "clean-workflow-runtime-baseline-windows",
+      "title": "Clean the Windows runtime-baseline workflow scope",
+      "group": "Environment",
+      "handler": "clean.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "clean"
+      ],
+      "options": {
+        "scope": "workflow-runtime-baseline-windows"
+      },
+      "clean_scope": "workflow-runtime-baseline-windows",
+      "show_in_menu": true,
+      "examples": [
+        "run clean --scope workflow-runtime-baseline-windows"
+      ]
+    },
+    {
+      "id": "clean-workflow-runtime-baseline-macos",
+      "title": "Clean the macOS runtime-baseline workflow scope",
+      "group": "Environment",
+      "handler": "clean.dispatch",
+      "platforms": [
+        "macos"
+      ],
+      "tokens": [
+        "clean"
+      ],
+      "options": {
+        "scope": "workflow-runtime-baseline-macos"
+      },
+      "clean_scope": "workflow-runtime-baseline-macos",
+      "show_in_menu": true,
+      "examples": [
+        "run clean --scope workflow-runtime-baseline-macos"
+      ]
+    },
+    {
+      "id": "help",
+      "title": "Show command help",
+      "group": "Inspect",
+      "handler": "inspect.help",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "help"
+      ],
+      "show_in_menu": true,
+      "examples": [
+        "run help",
+        "run --json"
+      ]
+    },
+    {
+      "id": "capability",
+      "title": "Describe a capability",
+      "group": "Inspect",
+      "handler": "inspect.capability",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "capability"
+      ],
+      "show_in_menu": true,
+      "examples": [
+        "run capability bootstrap",
+        "run capability bootstrap --json"
+      ]
+    },
+    {
+      "id": "test-registry-refresh",
+      "title": "Refresh the unified registry snapshot",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "registry",
+        "refresh"
+      ],
+      "syntax": "test registry refresh",
+      "show_in_menu": true,
+      "examples": [
+        "run test registry refresh",
+        "run test registry refresh --json"
+      ]
+    },
+    {
+      "id": "test-registry-list",
+      "title": "List unified registry objects",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "registry",
+        "list"
+      ],
+      "syntax": "test registry list",
+      "show_in_menu": true,
+      "examples": [
+        "run test registry list",
+        "run test registry list --json"
+      ]
+    },
+    {
+      "id": "test-registry-check-consistency",
+      "title": "Check registry and wiki consistency",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "registry",
+        "check-consistency"
+      ],
+      "syntax": "test registry check-consistency",
+      "show_in_menu": true,
+      "examples": [
+        "run test registry check-consistency",
+        "run test registry check-consistency --json"
+      ]
+    },
+    {
+      "id": "test-list",
+      "title": "List public test suites",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "list"
+      ],
+      "syntax": "test list [family]",
+      "show_in_menu": true,
+      "examples": [
+        "run test list",
+        "run test list smoke --json"
+      ]
+    },
+    {
+      "id": "test-watch",
+      "title": "Show the latest overall test progress snapshot",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "watch"
+      ],
+      "syntax": "test watch [run-id|last]",
+      "show_in_menu": false,
+      "examples": [
+        "run test watch",
+        "run test watch last"
+      ]
+    },
+    {
+      "id": "test-summary",
+      "title": "Show the latest overall test summary",
+      "group": "Inspect",
+      "handler": "test.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "summary"
+      ],
+      "syntax": "test summary [run-id|last]",
+      "show_in_menu": false,
+      "examples": [
+        "run test summary",
+        "run test summary last"
+      ]
+    },
+    {
+      "id": "generate-project-all",
+      "title": "Generate all solutions for the current host",
+      "group": "Project And IDE",
+      "handler": "project.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "generate",
+        "project",
+        "all"
+      ],
+      "syntax": "generate project all [--host windows|macos|linux] [--refresh-generated]",
+      "kind": "all-workspaces",
+      "show_in_menu": true,
+      "examples": [
+        "run generate project all --host windows --refresh-generated"
+      ]
+    },
+    {
+      "id": "generate-project-subject",
+      "title": "Generate a subject debug workspace",
+      "group": "Project And IDE",
+      "handler": "project.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "generate",
+        "project",
+        "subject"
+      ],
+      "syntax": "generate project subject --id subject/<subject-id> [--matrix <matrix-id>] [--all-targets] [--variant CHECK|PROFILE|SHIP] [--refresh-generated] [--open-native-target generated|proof]",
+      "kind": "subject-workspace",
+      "show_in_menu": true,
+      "examples": [
+        "run generate project subject --id subject/SolutionCorePack"
+      ]
+    },
+    {
+      "id": "generate-project-core",
+      "title": "Generate a core debug workspace",
+      "group": "Project And IDE",
+      "handler": "project.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "generate",
+        "project",
+        "core"
+      ],
+      "syntax": "generate project core [--host windows|macos|linux] [--target <target-id>] [--all-targets]",
+      "kind": "core-workspace",
+      "show_in_menu": true,
+      "examples": [
+        "run generate project core --host windows --all-targets"
+      ]
+    },
+    {
+      "id": "build-project-subject",
+      "title": "Build a generated subject workspace",
+      "group": "Project And IDE",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "build",
+        "project",
+        "subject"
+      ],
+      "syntax": "build project subject --id subject/<subject-id> [--matrix <matrix-id>] [--all-targets] [--native-target generated|proof]",
+      "kind": "project-workspace",
+      "project_kind": "subject",
+      "show_in_menu": true,
+      "examples": [
+        "run build project subject --id subject/SolutionCorePack"
+      ]
+    },
+    {
+      "id": "build-project-core",
+      "title": "Build a generated core workspace",
+      "group": "Project And IDE",
+      "handler": "build.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "build",
+        "project",
+        "core"
+      ],
+      "syntax": "build project core [--host windows|macos|linux] [--target <target-id>] [--all-targets]",
+      "kind": "project-workspace",
+      "project_kind": "core",
+      "show_in_menu": true,
+      "examples": [
+        "run build project core --host windows --target windows-x64-reference"
+      ]
+    },
+    {
+      "id": "menu",
+      "title": "Show the interactive menu",
+      "group": "Quick Start",
+      "handler": "inspect.menu",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "menu"
+      ],
+      "show_in_menu": false,
+      "examples": [
+        "run menu"
+      ]
+    },
+    {
+      "id": "list",
+      "title": "List available capabilities",
+      "group": "Quick Start",
+      "handler": "inspect.list",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "list"
+      ],
+      "show_in_menu": true,
+      "examples": [
+        "run list",
+        "run list --json"
+      ]
     },
     {
       "id": "doctor",
       "title": "Check the currently available local toolchain",
       "group": "Quick Start",
       "handler": "doctor.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["doctor"],
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "doctor"
+      ],
       "show_in_menu": true,
-      "examples": ["run doctor", "run doctor --json"]
+      "examples": [
+        "run doctor",
+        "run doctor --json"
+      ]
+    },
+    {
+      "id": "convert-subject",
+      "title": "Convert a subject's C# source to native code",
+      "group": "Quick Start",
+      "handler": "project.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "convert",
+        "subject"
+      ],
+      "kind": "il2cpp-convert",
+      "syntax": "convert subject --id <SubjectId> [--output <dir>]",
+      "show_in_menu": true,
+      "examples": [
+        "run convert subject --id HelloWorldObject"
+      ]
+    },
+    {
+      "id": "generate-all",
+      "title": "Generate all project workspaces",
+      "group": "Quick Start",
+      "handler": "project.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "generate",
+        "project",
+        "all"
+      ],
+      "kind": "all-workspaces",
+      "show_in_menu": true,
+      "examples": [
+        "run generate project all"
+      ]
     },
     {
       "id": "benchmark-record",
-      "title": "Run benchmark and record result to benchmark-records/records.jsonl",
+      "title": "Run benchmark and record result",
       "group": "Test And Verify",
       "handler": "benchmark.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["benchmark"],
-      "syntax": "benchmark [--subject <id>] [--all] [--mode <managed|native|interpreter>] [--record] [--dashboard] [--open]",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "benchmark"
+      ],
+      "syntax": "benchmark [--subject <id>] [--all] [--mode <mode>] [--record] [--dashboard] [--open]",
       "show_in_menu": true,
       "examples": [
-        "run benchmark --subject PerformanceFeaturePack --mode native --record",
+        "run benchmark --subject SolutionCorePack --mode native --record",
         "run benchmark --all --record",
         "run benchmark --dashboard --open",
         "run benchmark status --all"
@@ -107,35 +849,57 @@
       "title": "Run a suite by selector or object id",
       "group": "Test And Verify",
       "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "suite"],
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "suite"
+      ],
       "syntax": "test suite (--id <family/suite> | --family <family> --suite <suite>)",
       "show_in_menu": true,
-      "examples": ["run test suite --id smoke/HelloWorld", "run test suite --family smoke --suite HelloWorld"]
+      "examples": [
+        "run test suite --id smoke/managed-entry-basic",
+        "run test suite --family smoke --suite managed-entry-basic"
+      ]
     },
     {
       "id": "test-subject",
       "title": "Run a subject by selector or object id",
       "group": "Test And Verify",
       "handler": "test.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["test", "subject"],
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "test",
+        "subject"
+      ],
       "syntax": "test subject --id subject/<subject>",
       "show_in_menu": true,
-      "examples": ["run test subject --id subject/<subject-id>"]
+      "examples": [
+        "run test subject --id subject/<subject-id>"
+      ]
     },
     {
       "id": "test-engineering-validation",
       "title": "Run a subject engineering validation by selector or object id",
       "group": "Test And Verify",
       "handler": "test.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["test", "engineering-validation"],
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "test",
+        "engineering-validation"
+      ],
       "syntax": "test engineering-validation (--id engineering-validation/<subject>/<kind> | --subject <subject> --kind <kind>)",
       "show_in_menu": true,
       "examples": [
-        "run test engineering-validation --id engineering-validation/MainlineFeaturePack/project-graph",
-        "run test engineering-validation --subject MainlineFeaturePack --kind project-graph"
+        "run test engineering-validation --id engineering-validation/SolutionCorePack/project-graph",
+        "run test engineering-validation --subject SolutionCorePack --kind project-graph"
       ]
     },
     {
@@ -143,13 +907,18 @@
       "title": "Run a subject engineering workload by selector or object id",
       "group": "Test And Verify",
       "handler": "test.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["test", "engineering-workload"],
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "test",
+        "engineering-workload"
+      ],
       "syntax": "test engineering-workload (--id engineering-workload/<subject>/<kind> | --subject <subject> --kind <kind>)",
       "show_in_menu": true,
       "examples": [
-        "run test engineering-workload --id engineering-workload/PerformanceFeaturePack/codegen",
-        "run test engineering-workload --subject PerformanceFeaturePack --kind codegen"
+        "run test engineering-workload --id engineering-workload/SolutionCorePack/codegen",
+        "run test engineering-workload --subject SolutionCorePack --kind codegen"
       ]
     },
     {
@@ -157,12 +926,17 @@
       "title": "Run a declared unit test by selector or object id",
       "group": "Test And Verify",
       "handler": "test.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["test", "declared-unit-test"],
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "test",
+        "declared-unit-test"
+      ],
       "syntax": "test declared-unit-test --id declared-unit-test/<stable-id>",
       "show_in_menu": true,
       "examples": [
-        "run test declared-unit-test --id declared-unit-test/MainlineFeaturePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"
+        "run test declared-unit-test --id declared-unit-test/SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"
       ]
     },
     {
@@ -170,12 +944,17 @@
       "title": "Run a declared benchmark by selector or object id",
       "group": "Test And Verify",
       "handler": "test.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["test", "declared-benchmark"],
+      "platforms": [
+        "windows"
+      ],
+      "tokens": [
+        "test",
+        "declared-benchmark"
+      ],
       "syntax": "test declared-benchmark --id declared-benchmark/<stable-id>",
       "show_in_menu": true,
       "examples": [
-        "run test declared-benchmark --id declared-benchmark/PerformanceFeaturePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()"
+        "run test declared-benchmark --id declared-benchmark/SolutionCorePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()"
       ]
     },
     {
@@ -183,853 +962,122 @@
       "title": "Run a module verification by selector or object id",
       "group": "Test And Verify",
       "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "module"],
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "module"
+      ],
       "syntax": "test module (--id module/<module>/<profile> | --module <module> --profile <profile>)",
       "show_in_menu": true,
-      "examples": ["run test module --id module/managed-smoke/basic", "run test module --module managed-smoke --profile basic"]
+      "examples": [
+        "run test module --id module/managed-smoke/basic",
+        "run test module --module managed-smoke --profile basic"
+      ]
     },
     {
       "id": "test-system",
       "title": "Run a system validation scenario by selector or object id",
       "group": "Test And Verify",
       "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "system"],
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "system"
+      ],
       "syntax": "test system (--id system/<scenario> | --scenario <scenario>)",
       "show_in_menu": true,
-      "examples": ["run test system --id system/hosted-runtime-smoke", "run test system --scenario hosted-runtime-smoke"]
+      "examples": [
+        "run test system --id system/hosted-runtime-smoke",
+        "run test system --scenario hosted-runtime-smoke"
+      ]
     },
     {
       "id": "test-pipeline",
       "title": "Run a test pipeline by selector or object id",
       "group": "Test And Verify",
       "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "pipeline"],
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test",
+        "pipeline"
+      ],
       "syntax": "test pipeline (--id pipeline/<pipeline> | --pipeline <pipeline>)",
       "show_in_menu": true,
-      "examples": ["run test pipeline --id pipeline/completion-runtime-core", "run test pipeline --pipeline completion-runtime-core"]
+      "examples": [
+        "run test pipeline --id pipeline/completion-runtime-core",
+        "run test pipeline --pipeline completion-runtime-core"
+      ]
     },
     {
       "id": "test-family-suite",
       "title": "Run a test suite from a public family",
       "group": "Test And Verify",
       "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test"],
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test"
+      ],
       "syntax": "test <family> <suite>",
       "show_in_menu": true,
-      "examples": ["run test smoke HelloWorld", "run test workflow runtime-baseline-macos"]
+      "examples": [
+        "run test smoke managed-entry-basic",
+        "run test workflow runtime-baseline-macos"
+      ]
     },
     {
       "id": "test-family-all",
       "title": "Run all suites in a public test family",
       "group": "Test And Verify",
       "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test"],
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test"
+      ],
       "syntax": "test <family> all",
       "show_in_menu": true,
-      "examples": ["run test smoke all", "run test workflow all"]
+      "examples": [
+        "run test smoke all",
+        "run test workflow all"
+      ]
     },
     {
       "id": "test-all",
       "title": "Run the default batch of public test families",
       "group": "Test And Verify",
       "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test"],
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "test"
+      ],
       "syntax": "test all",
       "show_in_menu": true,
-      "examples": ["run test all"]
-    },
-    {
-      "id": "test-registry-refresh",
-      "title": "Refresh the unified registry snapshot",
-      "group": "Inspect",
-      "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "registry", "refresh"],
-      "syntax": "test registry refresh",
-      "show_in_menu": true,
-      "examples": ["run test registry refresh", "run test registry refresh --json"]
-    },
-    {
-      "id": "test-registry-list",
-      "title": "List unified registry objects",
-      "group": "Inspect",
-      "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "registry", "list"],
-      "syntax": "test registry list",
-      "show_in_menu": true,
-      "examples": ["run test registry list", "run test registry list --json"]
-    },
-    {
-      "id": "test-registry-check-consistency",
-      "title": "Check registry and wiki consistency",
-      "group": "Inspect",
-      "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "registry", "check-consistency"],
-      "syntax": "test registry check-consistency",
-      "show_in_menu": true,
-      "examples": ["run test registry check-consistency", "run test registry check-consistency --json"]
-    },
-    {
-      "id": "test-list",
-      "title": "List public test suites",
-      "group": "Inspect",
-      "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "list"],
-      "syntax": "test list [family]",
-      "show_in_menu": true,
-      "examples": ["run test list", "run test list smoke --json"]
-    },
-    {
-      "id": "test-watch",
-      "title": "Show the latest overall test progress snapshot",
-      "group": "Inspect",
-      "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "watch"],
-      "syntax": "test watch [run-id|last]",
-      "show_in_menu": false,
-      "examples": ["run test watch", "run test watch last"]
-    },
-    {
-      "id": "test-summary",
-      "title": "Show the latest overall test summary",
-      "group": "Inspect",
-      "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "summary"],
-      "syntax": "test summary [run-id|last]",
-      "show_in_menu": false,
-      "examples": ["run test summary", "run test summary last"]
-    },
-    {
-      "id": "prepare",
-      "title": "Prepare the current host's reusable environment",
-      "group": "Environment",
-      "handler": "prepare.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["prepare"],
-      "show_in_menu": true,
-      "examples": ["run prepare", "run prepare --json"]
-    },
-    {
-      "id": "prepare-smoke",
-      "title": "Prepare the managed smoke environment",
-      "group": "Environment",
-      "handler": "prepare.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["prepare", "smoke"],
-      "show_in_menu": true,
-      "examples": ["run prepare smoke"]
-    },
-    {
-      "id": "prepare-android-host",
-      "title": "Prepare the cached Android host toolchain environment",
-      "group": "Environment",
-      "handler": "prepare.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["prepare", "android-host"],
-      "show_in_menu": true,
-      "examples": ["run prepare android-host"]
-    },
-    {
-      "id": "prepare-workflow-runtime-baseline-windows",
-      "title": "Prepare the Windows runtime-baseline workflow environment",
-      "group": "Environment",
-      "handler": "prepare.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["prepare", "workflow", "runtime-baseline"],
-      "options": {
-        "host": "windows"
-      },
-      "show_in_menu": true,
-      "examples": ["run prepare workflow runtime-baseline --host windows"]
-    },
-    {
-      "id": "prepare-workflow-runtime-baseline-macos",
-      "title": "Prepare the macOS runtime-baseline workflow environment",
-      "group": "Environment",
-      "handler": "prepare.dispatch",
-      "platforms": ["macos"],
-      "tokens": ["prepare", "workflow", "runtime-baseline"],
-      "options": {
-        "host": "macos"
-      },
-      "show_in_menu": true,
-      "examples": ["run prepare workflow runtime-baseline --host macos"]
-    },
-    {
-      "id": "prepare-verify-roadmap-0-windows",
-      "title": "Prepare the legacy Windows roadmap-0 workflow environment",
-      "group": "Environment",
-      "handler": "prepare.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["prepare", "workflow", "roadmap-0"],
-      "options": {
-        "host": "windows"
-      },
-      "show_in_menu": false,
-      "public": false,
-      "examples": ["run prepare workflow roadmap-0 --host windows"]
-    },
-    {
-      "id": "prepare-verify-roadmap-0-macos",
-      "title": "Prepare the legacy macOS roadmap-0 workflow environment",
-      "group": "Environment",
-      "handler": "prepare.dispatch",
-      "platforms": ["macos"],
-      "tokens": ["prepare", "workflow", "roadmap-0"],
-      "options": {
-        "host": "macos"
-      },
-      "show_in_menu": false,
-      "public": false,
-      "examples": ["run prepare workflow roadmap-0 --host macos"]
-    },
-    {
-      "id": "clean",
-      "title": "Clean all managed outputs produced by the unified entrypoint",
-      "group": "Environment",
-      "handler": "clean.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["clean"],
-      "clean_scope": "global",
-      "show_in_menu": true,
-      "examples": ["run clean", "run clean --json"]
-    },
-    {
-      "id": "clean-smoke",
-      "title": "Clean the managed smoke scope",
-      "group": "Environment",
-      "handler": "clean.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["clean"],
-      "options": {
-        "scope": "smoke"
-      },
-      "clean_scope": "smoke",
-      "show_in_menu": true,
-      "examples": ["run clean --scope smoke"]
-    },
-    {
-      "id": "clean-android-host",
-      "title": "Clean the cached Android host toolchain scope",
-      "group": "Environment",
-      "handler": "clean.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["clean"],
-      "options": {
-        "scope": "android-host"
-      },
-      "clean_scope": "android-host",
-      "show_in_menu": true,
-      "examples": ["run clean --scope android-host"]
-    },
-    {
-      "id": "clean-workflow-runtime-baseline-windows",
-      "title": "Clean the Windows runtime-baseline workflow scope",
-      "group": "Environment",
-      "handler": "clean.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["clean"],
-      "options": {
-        "scope": "workflow-runtime-baseline-windows"
-      },
-      "clean_scope": "workflow-runtime-baseline-windows",
-      "show_in_menu": true,
-      "examples": ["run clean --scope workflow-runtime-baseline-windows"]
-    },
-    {
-      "id": "clean-workflow-runtime-baseline-macos",
-      "title": "Clean the macOS runtime-baseline workflow scope",
-      "group": "Environment",
-      "handler": "clean.dispatch",
-      "platforms": ["macos"],
-      "tokens": ["clean"],
-      "options": {
-        "scope": "workflow-runtime-baseline-macos"
-      },
-      "clean_scope": "workflow-runtime-baseline-macos",
-      "show_in_menu": true,
-      "examples": ["run clean --scope workflow-runtime-baseline-macos"]
-    },
-    {
-      "id": "clean-verify-roadmap0-windows",
-      "title": "Clean the legacy Windows roadmap-0 workflow scope",
-      "group": "Environment",
-      "handler": "clean.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["clean"],
-      "options": {
-        "scope": "workflow-roadmap0-windows"
-      },
-      "clean_scope": "workflow-roadmap0-windows",
-      "show_in_menu": false,
-      "public": false,
-      "examples": ["run clean --scope workflow-roadmap0-windows"]
-    },
-    {
-      "id": "clean-verify-roadmap0-macos",
-      "title": "Clean the legacy macOS roadmap-0 workflow scope",
-      "group": "Environment",
-      "handler": "clean.dispatch",
-      "platforms": ["macos"],
-      "tokens": ["clean"],
-      "options": {
-        "scope": "workflow-roadmap0-macos"
-      },
-      "clean_scope": "workflow-roadmap0-macos",
-      "show_in_menu": false,
-      "public": false,
-      "examples": ["run clean --scope workflow-roadmap0-macos"]
-    },
-    {
-      "id": "build-all",
-      "title": "Build the recommended batch for the current host",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["build", "all"],
-      "kind": "batch",
-      "target": "all",
-      "show_in_menu": true,
-      "examples": ["run build all"]
-    },
-    {
-      "id": "generate-project-all",
-      "title": "Generate all solutions for the current host",
-      "group": "Project And IDE",
-      "handler": "project.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["generate", "project", "all"],
-      "syntax": "generate project all [--host windows|macos|linux] [--refresh-generated]",
-      "kind": "all-workspaces",
-      "show_in_menu": true,
-      "examples": ["run generate project all --host windows --refresh-generated"]
-    },
-    {
-      "id": "generate-project-subject",
-      "title": "Generate a subject debug workspace",
-      "group": "Project And IDE",
-      "handler": "project.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["generate", "project", "subject"],
-      "syntax": "generate project subject --id subject/<subject-id> [--matrix <matrix-id>] [--all-targets] [--variant CHECK|PROFILE|SHIP] [--refresh-generated] [--open-native-target generated|proof]",
-      "kind": "subject-workspace",
-      "show_in_menu": true,
-      "examples": ["run generate project subject --id subject/HelloWorldObject"]
-    },
-    {
-      "id": "generate-project-core",
-      "title": "Generate a core debug workspace",
-      "group": "Project And IDE",
-      "handler": "project.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["generate", "project", "core"],
-      "syntax": "generate project core [--host windows|macos|linux] [--target <target-id>] [--all-targets]",
-      "kind": "core-workspace",
-      "show_in_menu": true,
-      "examples": ["run generate project core --host windows --all-targets"]
-    },
-    {
-      "id": "build-project-subject",
-      "title": "Build a generated subject workspace",
-      "group": "Project And IDE",
-      "handler": "build.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["build", "project", "subject"],
-      "syntax": "build project subject --id subject/<subject-id> [--matrix <matrix-id>] [--all-targets] [--native-target generated|proof]",
-      "kind": "project-workspace",
-      "project_kind": "subject",
-      "show_in_menu": true,
-      "examples": ["run build project subject --id subject/HelloWorldObject"]
-    },
-    {
-      "id": "build-project-core",
-      "title": "Build a generated core workspace",
-      "group": "Project And IDE",
-      "handler": "build.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["build", "project", "core"],
-      "syntax": "build project core [--host windows|macos|linux] [--target <target-id>] [--all-targets]",
-      "kind": "project-workspace",
-      "project_kind": "core",
-      "show_in_menu": true,
-      "examples": ["run build project core --host windows --target windows-x64-reference"]
-    },
-    {
-      "id": "deploy-core",
-      "title": "Produce the formal core deploy output",
-      "group": "Build",
-      "handler": "deploy.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["deploy", "core"],
-      "syntax": "deploy core [--host windows|macos|linux] [--target <target-id>] [--all-targets]",
-      "kind": "core-deploy",
-      "show_in_menu": true,
-      "examples": ["run deploy core --host windows --all-targets"]
-    },
-    {
-      "id": "build-native-contract-abi",
-      "title": "Build the native ABI contract smoke target",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["build", "native-contract", "abi"],
-      "kind": "native-contract",
-      "target": "abi",
-      "source_dir": "tests/contracts/native/abi",
-      "binary_dir": "artifacts/run/native-contract-abi",
-      "show_in_menu": true,
-      "examples": ["run build native-contract abi"]
-    },
-    {
-      "id": "build-native-contract-bridge",
-      "title": "Build the native bridge contract smoke target",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["build", "native-contract", "bridge"],
-      "kind": "native-contract",
-      "target": "bridge",
-      "source_dir": "tests/contracts/native/bridge",
-      "binary_dir": "artifacts/run/native-contract-bridge",
-      "show_in_menu": true,
-      "examples": ["run build native-contract bridge"]
-    },
-    {
-      "id": "build-smoke-helloworld",
-      "title": "Build the HelloWorld smoke project",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["build", "smoke", "HelloWorld"],
-      "kind": "smoke-project",
-      "target": "HelloWorld",
-      "project_path": "subjects/HelloWorld/source/HelloWorld.csproj",
-      "artifact_path": "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test smoke HelloWorld --stage build",
-      "examples": ["run build smoke HelloWorld"]
-    },
-    {
-      "id": "build-smoke-genericecho",
-      "title": "Build the GenericEcho smoke project",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["build", "smoke", "GenericEcho"],
-      "kind": "smoke-project",
-      "target": "GenericEcho",
-      "project_path": "subjects/GenericEcho/source/GenericEcho.csproj",
-      "artifact_path": "artifacts/smoke/bin/GenericEcho/Release/net8.0/GenericEcho.dll",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test smoke GenericEcho --stage build",
-      "examples": ["run build smoke GenericEcho"]
-    },
-    {
-      "id": "build-smoke-reflectionlite",
-      "title": "Build the ReflectionLite smoke project",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["build", "smoke", "ReflectionLite"],
-      "kind": "smoke-project",
-      "target": "ReflectionLite",
-      "project_path": "subjects/ReflectionLite/source/ReflectionLite.csproj",
-      "artifact_path": "artifacts/smoke/bin/ReflectionLite/Release/net8.0/ReflectionLite.dll",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test smoke ReflectionLite --stage build",
-      "examples": ["run build smoke ReflectionLite"]
-    },
-    {
-      "id": "build-smoke-pinvokelite",
-      "title": "Build the PInvokeLite smoke project",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["build", "smoke", "PInvokeLite"],
-      "kind": "smoke-project",
-      "target": "PInvokeLite",
-      "project_path": "subjects/PInvokeLite/source/PInvokeLite.csproj",
-      "artifact_path": "artifacts/smoke/bin/PInvokeLite/Release/net8.0/PInvokeLite.dll",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test smoke PInvokeLite --stage build",
-      "examples": ["run build smoke PInvokeLite"]
-    },
-    {
-      "id": "build-smoke-hostembeddinglite",
-      "title": "Build the HostEmbeddingLite smoke project",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["build", "smoke", "HostEmbeddingLite"],
-      "kind": "smoke-project",
-      "target": "HostEmbeddingLite",
-      "project_path": "subjects/HostEmbeddingLite/source/HostEmbeddingLite.csproj",
-      "artifact_path": "artifacts/smoke/bin/HostEmbeddingLite/Release/net8.0/HostEmbeddingLite.dll",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test smoke HostEmbeddingLite --stage build",
-      "examples": ["run build smoke HostEmbeddingLite"]
-    },
-    {
-      "id": "build-preset-windows-x64-reference",
-      "title": "Build the Windows reference preset",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["build", "preset", "windows-x64-reference"],
-      "kind": "preset",
-      "target": "windows-x64-reference",
-      "preset": "windows-x64-reference",
-      "binary_dir": "artifacts/presets/windows-x64-reference",
-      "show_in_menu": true,
-      "examples": ["run build preset windows-x64-reference"]
-    },
-    {
-      "id": "build-preset-macos-reference",
-      "title": "Build the macOS reference preset",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["macos"],
-      "tokens": ["build", "preset", "macos-reference"],
-      "kind": "preset",
-      "target": "macos-reference",
-      "preset": "macos-reference",
-      "binary_dir": "artifacts/presets/macos-reference",
-      "show_in_menu": true,
-      "examples": ["run build preset macos-reference"]
-    },
-    {
-      "id": "build-platform-windows-reference-desktop",
-      "title": "Validate the Windows reference desktop gate",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["build", "platform", "windows-reference-desktop"],
-      "kind": "reference-desktop-gate",
-      "target": "windows-reference-desktop",
-      "preset": "windows-x64-reference",
-      "binary_dir": "artifacts/presets/windows-x64-reference",
-      "subject_id": "HostEmbeddingLite",
-      "goal_id": "correctness.platform",
-      "matrix_id": "windows-managed-trace",
-      "gate_record_path": "artifacts/verify-runtime-baseline/windows/windows-reference-desktop.gate.json",
-      "gate_name": "windows-reference-desktop",
-      "gate_preset": "windows-x64-reference",
-      "gate_notes": "Windows reference desktop gate passed with warmup trace compare.",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test gate windows-reference-desktop",
-      "examples": ["run test gate windows-reference-desktop"]
-    },
-    {
-      "id": "build-platform-macos-reference-desktop",
-      "title": "Validate the macOS reference desktop gate",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["macos"],
-      "tokens": ["build", "platform", "macos-reference-desktop"],
-      "kind": "reference-desktop-gate",
-      "target": "macos-reference-desktop",
-      "preset": "macos-reference",
-      "binary_dir": "artifacts/presets/macos-reference",
-      "subject_id": "HostEmbeddingLite",
-      "goal_id": "correctness.platform",
-      "matrix_id": "macos-managed-trace",
-      "gate_record_path": "artifacts/verify-runtime-baseline/macos/macos-reference-desktop.gate.json",
-      "gate_name": "macos-reference-desktop",
-      "gate_preset": "macos-reference",
-      "gate_notes": "macOS reference desktop gate passed with warmup trace compare.",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test gate macos-reference-desktop",
-      "examples": ["run test gate macos-reference-desktop"]
-    },
-    {
-      "id": "build-platform-android-arm64-smoke",
-      "title": "Validate the Android platform routing shell",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["build", "platform", "android-arm64-smoke"],
-      "kind": "platform-gate",
-      "target": "android-arm64-smoke",
-      "preset_target": "android-arm64-smoke",
-      "toolchain_file": "build/toolchains/android-arm64.cmake",
-      "binary_dir": "artifacts/run/platform/android-arm64-smoke",
-      "show_in_menu": true,
-      "examples": ["run build platform android-arm64-smoke"]
-    },
-    {
-      "id": "build-platform-ios-arm64-packaging",
-      "title": "Validate the iOS platform routing shell",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["macos"],
-      "tokens": ["build", "platform", "ios-arm64-packaging"],
-      "kind": "platform-gate",
-      "target": "ios-arm64-packaging",
-      "preset_target": "ios-arm64-packaging",
-      "toolchain_file": "build/toolchains/ios-arm64.cmake",
-      "binary_dir": "artifacts/run/platform/ios-arm64-packaging",
-      "show_in_menu": true,
-      "examples": ["run build platform ios-arm64-packaging"]
-    },
-    {
-      "id": "build-platform-linux-x64-packaging",
-      "title": "Validate the Linux packaging routing shell",
-      "group": "Build",
-      "handler": "build.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["build", "platform", "linux-x64-packaging"],
-      "kind": "platform-gate",
-      "target": "linux-x64-packaging",
-      "preset_target": "linux-x64-packaging",
-      "toolchain_file": "build/toolchains/linux-x64.cmake",
-      "binary_dir": "artifacts/run/platform/linux-x64-packaging",
-      "show_in_menu": true,
-      "examples": ["run build platform linux-x64-packaging"]
-    },
-    {
-      "id": "test-smoke-helloworld",
-      "title": "Run the HelloWorld managed smoke test",
-      "group": "Test And Verify",
-      "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "smoke", "HelloWorld"],
-      "kind": "smoke-run",
-      "target": "HelloWorld",
-      "project_path": "subjects/HelloWorld/source/HelloWorld.csproj",
-      "dll_path": "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll",
-      "expected_patterns": ["HelloWorld smoke entry reached.", "register:Main"],
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test smoke HelloWorld",
-      "examples": ["run test smoke HelloWorld"]
-    },
-    {
-      "id": "test-smoke-genericecho",
-      "title": "Run the GenericEcho managed smoke test",
-      "group": "Test And Verify",
-      "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "smoke", "GenericEcho"],
-      "kind": "smoke-run",
-      "target": "GenericEcho",
-      "project_path": "subjects/GenericEcho/source/GenericEcho.csproj",
-      "dll_path": "artifacts/smoke/bin/GenericEcho/Release/net8.0/GenericEcho.dll",
-      "expected_patterns": ["roadmap0", "42", "roadmap0:roadmap0"],
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test smoke GenericEcho",
-      "examples": ["run test smoke GenericEcho"]
-    },
-    {
-      "id": "test-smoke-reflectionlite",
-      "title": "Run the ReflectionLite managed smoke test",
-      "group": "Test And Verify",
-      "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "smoke", "ReflectionLite"],
-      "kind": "smoke-run",
-      "target": "ReflectionLite",
-      "project_path": "subjects/ReflectionLite/source/ReflectionLite.csproj",
-      "dll_path": "artifacts/smoke/bin/ReflectionLite/Release/net8.0/ReflectionLite.dll",
-      "expected_patterns": ["field=BackingField:Int32", "generic-method=String"],
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test smoke ReflectionLite",
-      "examples": ["run test smoke ReflectionLite"]
-    },
-    {
-      "id": "test-smoke-pinvokelite",
-      "title": "Run the PInvokeLite managed smoke test",
-      "group": "Test And Verify",
-      "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "smoke", "PInvokeLite"],
-      "kind": "smoke-run",
-      "target": "PInvokeLite",
-      "project_path": "subjects/PInvokeLite/source/PInvokeLite.csproj",
-      "dll_path": "artifacts/smoke/bin/PInvokeLite/Release/net8.0/PInvokeLite.dll",
-      "expected_patterns": ["marshal=interop-smoke", "export=chaos_smoke_add:7", "symbol=True"],
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test smoke PInvokeLite",
-      "examples": ["run test smoke PInvokeLite"]
-    },
-    {
-      "id": "test-smoke-hostembeddinglite",
-      "title": "Run the HostEmbeddingLite managed smoke test",
-      "group": "Test And Verify",
-      "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "smoke", "HostEmbeddingLite"],
-      "kind": "smoke-run",
-      "target": "HostEmbeddingLite",
-      "project_path": "subjects/HostEmbeddingLite/source/HostEmbeddingLite.csproj",
-      "dll_path": "artifacts/smoke/bin/HostEmbeddingLite/Release/net8.0/HostEmbeddingLite.dll",
-      "expected_patterns": ["HostEmbeddingSession:InvokeManagedEntry:True", "guards=invalid-detach:True|double-start:True|unattached-entry:True"],
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test smoke HostEmbeddingLite",
-      "examples": ["run test smoke HostEmbeddingLite"]
-    },
-    {
-      "id": "test-contract-analysis-schema",
-      "title": "Validate the analysis schema/example/snapshot contracts",
-      "group": "Test And Verify",
-      "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "contract", "analysis-schema"],
-      "kind": "contract-check",
-      "target": "analysis-schema",
-      "contract_check": "analysis-schema",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test contract analysis-schema",
-      "examples": ["run test contract analysis-schema"]
-    },
-    {
-      "id": "test-contract-trace-schema",
-      "title": "Validate the warmup trace schema and snapshots",
-      "group": "Test And Verify",
-      "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "contract", "trace-schema"],
-      "kind": "contract-check",
-      "target": "trace-schema",
-      "contract_check": "trace-schema",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test contract trace-schema",
-      "examples": ["run test contract trace-schema"]
-    },
-    {
-      "id": "test-contract-managed-closure-bundle",
-      "title": "Validate the managed closure proof bundle",
-      "group": "Test And Verify",
-      "handler": "test.dispatch",
-      "platforms": ["windows", "macos", "linux"],
-      "tokens": ["test", "contract", "managed-closure-bundle"],
-      "kind": "python-unittest",
-      "target": "managed-closure-bundle",
-      "test_module": "tests.unit.run.test_managed_closure_contract_bundle",
-      "artifacts": ["tests/contracts/analysis/v0/samples"],
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test contract managed-closure-bundle",
-      "examples": ["run test contract managed-closure-bundle"]
-    },
-    {
-      "id": "test-workflow-runtime-baseline-windows",
-      "title": "Run the Windows runtime-baseline workflow via the unified system object",
-      "group": "Test And Verify",
-      "handler": "test.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["test", "workflow", "runtime-baseline-windows"],
-      "kind": "registry-object-alias",
-      "target": "runtime-baseline-windows",
-      "registry_object_kind": "system",
-      "registry_object_id": "system/runtime-baseline-windows",
-      "show_in_menu": false,
-      "public": false,
-      "examples": ["run test workflow runtime-baseline-windows"]
-    },
-    {
-      "id": "test-workflow-runtime-baseline-macos",
-      "title": "Run the macOS runtime-baseline workflow via the unified system object",
-      "group": "Test And Verify",
-      "handler": "test.dispatch",
-      "platforms": ["macos"],
-      "tokens": ["test", "workflow", "runtime-baseline-macos"],
-      "kind": "registry-object-alias",
-      "target": "runtime-baseline-macos",
-      "registry_object_kind": "system",
-      "registry_object_id": "system/runtime-baseline-macos",
-      "show_in_menu": false,
-      "public": false,
-      "examples": ["run test workflow runtime-baseline-macos"]
-    },
-    {
-      "id": "test-workflow-roadmap-0-windows",
-      "title": "Run the legacy Windows roadmap-0 workflow via the unified system object",
-      "group": "Test And Verify",
-      "handler": "test.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["test", "workflow", "roadmap-0-windows"],
-      "kind": "registry-object-alias",
-      "target": "roadmap-0-windows",
-      "registry_object_kind": "system",
-      "registry_object_id": "system/runtime-baseline-windows",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test workflow runtime-baseline-windows",
-      "examples": ["run test workflow roadmap-0-windows"]
-    },
-    {
-      "id": "test-workflow-roadmap-0-macos",
-      "title": "Run the legacy macOS roadmap-0 workflow via the unified system object",
-      "group": "Test And Verify",
-      "handler": "test.dispatch",
-      "platforms": ["macos"],
-      "tokens": ["test", "workflow", "roadmap-0-macos"],
-      "kind": "registry-object-alias",
-      "target": "roadmap-0-macos",
-      "registry_object_kind": "system",
-      "registry_object_id": "system/runtime-baseline-macos",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test workflow runtime-baseline-macos",
-      "examples": ["run test workflow roadmap-0-macos"]
-    },
-    {
-      "id": "test-trace-compare-windows",
-      "title": "Compare the Windows warmup trace snapshot",
-      "group": "Test And Verify",
-      "handler": "test.dispatch",
-      "platforms": ["windows"],
-      "tokens": ["test", "trace-compare", "windows"],
-      "kind": "trace-compare",
-      "target": "windows",
-      "subject_id": "HostEmbeddingLite",
-      "goal_id": "correctness.platform",
-      "matrix_id": "windows-managed-trace",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test contract trace-compare-windows",
-      "examples": ["run test trace-compare windows"]
-    },
-    {
-      "id": "test-trace-compare-macos",
-      "title": "Compare the macOS warmup trace snapshot",
-      "group": "Test And Verify",
-      "handler": "test.dispatch",
-      "platforms": ["macos"],
-      "tokens": ["test", "trace-compare", "macos"],
-      "kind": "trace-compare",
-      "target": "macos",
-      "subject_id": "HostEmbeddingLite",
-      "goal_id": "correctness.platform",
-      "matrix_id": "macos-managed-trace",
-      "show_in_menu": false,
-      "public": false,
-      "replacement_syntax": "test contract trace-compare-macos",
-      "examples": ["run test trace-compare macos"]
+      "examples": [
+        "run test all"
+      ]
     }
   ]
 }

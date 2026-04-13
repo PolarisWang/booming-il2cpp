@@ -4,6 +4,8 @@ import importlib.util
 import unittest
 from pathlib import Path
 
+from tests.support import select_public_suite_spec, select_subject_record
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 MANIFEST_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "manifest.py"
@@ -60,7 +62,7 @@ class CommandManifestTests(unittest.TestCase):
         manifest_module = load_manifest_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
         visible_command_ids = {command["id"] for command in manifest_module.list_commands(manifest)}
-        hidden_command_ids = {command["id"] for command in manifest_module.list_commands(manifest, include_hidden=True)}
+        all_command_ids = {command["id"] for command in manifest_module.list_commands(manifest, include_hidden=True)}
 
         self.assertTrue(
             {
@@ -86,16 +88,16 @@ class CommandManifestTests(unittest.TestCase):
                 "test-list",
             }.issubset(visible_command_ids)
         )
-        self.assertTrue(
-            {
-                "build-platform-windows-reference-desktop",
-                "build-platform-macos-reference-desktop",
-                "test-workflow-roadmap-0-windows",
-                "test-workflow-roadmap-0-macos",
-            }.issubset(hidden_command_ids)
-        )
-        self.assertNotIn("verify-roadmap-0-windows", hidden_command_ids)
-        self.assertNotIn("verify-roadmap-0-macos", hidden_command_ids)
+        self.assertNotIn("build-platform-windows-reference-desktop", all_command_ids)
+        self.assertNotIn("build-platform-macos-reference-desktop", all_command_ids)
+        self.assertNotIn("test-workflow-runtime-baseline-windows", all_command_ids)
+        self.assertNotIn("test-workflow-runtime-baseline-macos", all_command_ids)
+        self.assertNotIn("test-workflow-roadmap-0-windows", all_command_ids)
+        self.assertNotIn("test-workflow-roadmap-0-macos", all_command_ids)
+        self.assertNotIn("verify-roadmap-0-windows", all_command_ids)
+        self.assertNotIn("verify-roadmap-0-macos", all_command_ids)
+        self.assertNotIn("build-smoke-helloworld", all_command_ids)
+        self.assertNotIn("test-smoke-helloworld", all_command_ids)
         self.assertNotIn("build-smoke-helloworld", visible_command_ids)
         self.assertNotIn("test-smoke-helloworld", visible_command_ids)
         self.assertNotIn("verify-roadmap-0-windows", visible_command_ids)
@@ -103,33 +105,58 @@ class CommandManifestTests(unittest.TestCase):
     def test_parse_cli_supports_dynamic_unified_test_commands(self) -> None:
         manifest_module = load_manifest_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+        smoke_spec = select_public_suite_spec(
+            "chaos_integration_manifest_parse_cli_smoke",
+            host_platform="macos",
+            family="smoke",
+            required_stages=["build", "run"],
+        )
+        family = str(smoke_spec["family"])
+        suite_name = str(smoke_spec["suite"])
+        suite_id = str(smoke_spec["id"])
+        subject_record = select_subject_record(
+            "chaos_integration_manifest_parse_cli_subject",
+            source_type="dotnet-project",
+            required_host_platforms=["windows-x64"],
+        )
+        subject_id = str(subject_record["subjectId"])
 
-        suite = manifest_module.parse_cli(["test", "smoke", "HelloWorld"], False, manifest, "macos")
+        suite = manifest_module.parse_cli(["test", family, suite_name], False, manifest, "macos")
         self.assertEqual("test-family-suite", suite["command"]["id"])
-        self.assertEqual("smoke/HelloWorld", suite["target"])
-        self.assertEqual("smoke", suite["options"]["family"])
-        self.assertEqual("HelloWorld", suite["options"]["suite"])
+        self.assertEqual(suite_id, suite["target"])
+        self.assertEqual(family, suite["options"]["family"])
+        self.assertEqual(suite_name, suite["options"]["suite"])
 
         explicit_suite = manifest_module.parse_cli(
-            ["test", "suite", "--family", "smoke", "--suite", "HelloWorld"],
+            ["test", "suite", "--family", family, "--suite", suite_name],
             False,
             manifest,
             "macos",
         )
         self.assertEqual("test-suite", explicit_suite["command"]["id"])
-        self.assertEqual("smoke/HelloWorld", explicit_suite["target"])
-        self.assertEqual("smoke", explicit_suite["options"]["family"])
-        self.assertEqual("HelloWorld", explicit_suite["options"]["suite"])
+        self.assertEqual(suite_id, explicit_suite["target"])
+        self.assertEqual(family, explicit_suite["options"]["family"])
+        self.assertEqual(suite_name, explicit_suite["options"]["suite"])
 
         explicit_suite_id = manifest_module.parse_cli(
-            ["test", "suite", "--id", "smoke/HelloWorld"],
+            ["test", "suite", "--id", suite_id],
             False,
             manifest,
             "macos",
         )
         self.assertEqual("test-suite", explicit_suite_id["command"]["id"])
-        self.assertEqual("smoke/HelloWorld", explicit_suite_id["target"])
-        self.assertEqual("smoke/HelloWorld", explicit_suite_id["options"]["id"])
+        self.assertEqual(suite_id, explicit_suite_id["target"])
+        self.assertEqual(suite_id, explicit_suite_id["options"]["id"])
+
+        subject_case = manifest_module.parse_cli(
+            ["test", "subject", "--id", f"subject/{subject_id}"],
+            False,
+            manifest,
+            "windows",
+        )
+        self.assertEqual("test-subject", subject_case["command"]["id"])
+        self.assertEqual(f"subject/{subject_id}", subject_case["target"])
+        self.assertEqual(f"subject/{subject_id}", subject_case["options"]["id"])
 
         module_case = manifest_module.parse_cli(
             ["test", "module", "--module", "managed-smoke", "--profile", "basic"],
@@ -162,44 +189,44 @@ class CommandManifestTests(unittest.TestCase):
         self.assertEqual("completion-runtime-core", pipeline_case["options"]["pipeline"])
 
         engineering_validation_case = manifest_module.parse_cli(
-            ["test", "engineering-validation", "--id", "engineering-validation/MainlineFeaturePack/project-graph"],
+            ["test", "engineering-validation", "--id", "engineering-validation/SolutionCorePack/project-graph"],
             False,
             manifest,
             "windows",
         )
         self.assertEqual("test-engineering-validation", engineering_validation_case["command"]["id"])
-        self.assertEqual("engineering-validation/MainlineFeaturePack/project-graph", engineering_validation_case["target"])
+        self.assertEqual("engineering-validation/SolutionCorePack/project-graph", engineering_validation_case["target"])
 
         engineering_workload_case = manifest_module.parse_cli(
-            ["test", "engineering-workload", "--id", "engineering-workload/PerformanceFeaturePack/codegen"],
+            ["test", "engineering-workload", "--id", "engineering-workload/SolutionCorePack/codegen"],
             False,
             manifest,
             "windows",
         )
         self.assertEqual("test-engineering-workload", engineering_workload_case["command"]["id"])
-        self.assertEqual("engineering-workload/PerformanceFeaturePack/codegen", engineering_workload_case["target"])
+        self.assertEqual("engineering-workload/SolutionCorePack/codegen", engineering_workload_case["target"])
 
         declared_unit_case = manifest_module.parse_cli(
-            ["test", "declared-unit-test", "--id", "declared-unit-test/MainlineFeaturePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"],
+            ["test", "declared-unit-test", "--id", "declared-unit-test/SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"],
             False,
             manifest,
             "windows",
         )
         self.assertEqual("test-declared-unit-test", declared_unit_case["command"]["id"])
         self.assertEqual(
-            "declared-unit-test/MainlineFeaturePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()",
+            "declared-unit-test/SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()",
             declared_unit_case["target"],
         )
 
         declared_benchmark_case = manifest_module.parse_cli(
-            ["test", "declared-benchmark", "--id", "declared-benchmark/PerformanceFeaturePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()"],
+            ["test", "declared-benchmark", "--id", "declared-benchmark/SolutionCorePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()"],
             False,
             manifest,
             "windows",
         )
         self.assertEqual("test-declared-benchmark", declared_benchmark_case["command"]["id"])
         self.assertEqual(
-            "declared-benchmark/PerformanceFeaturePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()",
+            "declared-benchmark/SolutionCorePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()",
             declared_benchmark_case["target"],
         )
 

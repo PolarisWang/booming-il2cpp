@@ -18,17 +18,16 @@ BRIDGE_GENERATOR_PATH = HOT_UPDATE_ROOT / "BridgeGenerator.cs"
 BRIDGE_DISPATCHER_PATH = HOT_UPDATE_ROOT / "BridgeDispatcher.cs"
 NATIVE_HOT_UPDATE_HEADER_PATH = REPO_ROOT / "src" / "native" / "hot-update" / "hot_update.h"
 NATIVE_HOT_UPDATE_SOURCE_PATH = REPO_ROOT / "src" / "native" / "hot-update" / "hot_update.cpp"
-BRIDGE_ROUNDTRIP_ROOT = REPO_ROOT / "subjects" / "BridgeRoundtripProof"
+BRIDGE_FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects"
+BRIDGE_ROUNDTRIP_ROOT = BRIDGE_FIXTURE_ROOT / "BridgeRoundtripProof"
 BRIDGE_ROUNDTRIP_MANIFEST_PATH = BRIDGE_ROUNDTRIP_ROOT / "subject.manifest.json"
 BRIDGE_ROUNDTRIP_PROJECT_PATH = BRIDGE_ROUNDTRIP_ROOT / "source" / "BridgeRoundtripProof.csproj"
 BRIDGE_ROUNDTRIP_PROGRAM_PATH = BRIDGE_ROUNDTRIP_ROOT / "source" / "Program.cs"
-GENERIC_SUPPLEMENT_ROOT = REPO_ROOT / "subjects" / "GenericSupplementProof"
+GENERIC_SUPPLEMENT_ROOT = BRIDGE_FIXTURE_ROOT / "GenericSupplementProof"
 GENERIC_SUPPLEMENT_MANIFEST_PATH = GENERIC_SUPPLEMENT_ROOT / "subject.manifest.json"
 GENERIC_SUPPLEMENT_PROJECT_PATH = GENERIC_SUPPLEMENT_ROOT / "source" / "GenericSupplementProof.csproj"
 GENERIC_SUPPLEMENT_PROGRAM_PATH = GENERIC_SUPPLEMENT_ROOT / "source" / "Program.cs"
-SUBJECT_ROOT_ALIASES = {
-    "GoldenSimpleLib": REPO_ROOT / "subjects" / "SolutionSimpleLib",
-}
+SOLUTION_SIMPLE_LIB_FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects" / "solution-simple-lib"
 
 
 def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -58,15 +57,14 @@ class Phase6MetadataSupplementBridgeTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
 
-    def _make_output_root(self, subject_id: str) -> Path:
-        output_root = TEST_TMP_ROOT / f"{subject_id}-{uuid.uuid4().hex}"
+    def _make_output_root(self, run_label: str) -> Path:
+        output_root = TEST_TMP_ROOT / f"{run_label}-{uuid.uuid4().hex}"
         if output_root.exists():
             shutil.rmtree(output_root)
         return output_root
 
-    def _run_convert(self, subject_id: str) -> Path:
-        output_root = self._make_output_root(subject_id)
-        subject_root = SUBJECT_ROOT_ALIASES.get(subject_id, REPO_ROOT / "subjects" / subject_id)
+    def _run_convert(self, subject_root: Path, run_label: str) -> Path:
+        output_root = self._make_output_root(run_label)
         run_checked(
             [
                 "dotnet",
@@ -84,7 +82,7 @@ class Phase6MetadataSupplementBridgeTests(unittest.TestCase):
         return output_root
 
     def test_convert_writes_supplemental_metadata_template_and_closure_manifest_reference(self) -> None:
-        output_root = self._run_convert("GoldenSimpleLib")
+        output_root = self._run_convert(SOLUTION_SIMPLE_LIB_FIXTURE_ROOT, "solution-simple-lib")
 
         template_path = output_root / "analysis" / "hot-update" / "supplemental-metadata-template.json"
         closure_manifest_path = output_root / "analysis" / "closure.manifest.json"

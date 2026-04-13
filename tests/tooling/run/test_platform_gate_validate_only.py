@@ -286,7 +286,7 @@ class PlatformGateCommandTests(unittest.TestCase):
             REPO_ROOT
             / "artifacts"
             / "subjects"
-            / "HelloWorldObject"
+            / "SolutionCorePack"
             / "runs"
             / "subject-exec"
             / "analysis"
@@ -338,7 +338,7 @@ class PlatformGateCommandTests(unittest.TestCase):
             [str(allocated_dir), str(trace_output), str(gate_record)],
             result.payload["artifacts"],
         )
-        refresh_mock.assert_called_once_with(REPO_ROOT, "HelloWorldObject", "windows-dev-output", "CHECK")
+        refresh_mock.assert_called_once_with(REPO_ROOT, "SolutionCorePack", "windows-native-check", "CHECK")
 
     def test_platform_gate_uses_run_scoped_binary_dir(self) -> None:
         build_module = load_module(BUILD_MODULE_PATH, "chaos_run_build_platform_gate_scoped_dir_any_host")

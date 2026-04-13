@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 
 SUBJECT_MANIFEST_NAME = "subject.manifest.json"
-_LEGACY_SUBJECT_ALIAS_FIELDS = ("legacySubjectIds", "subjectAliases", "aliases")
 
 
 def _profile_relative_path(profile_id: str) -> Path:
@@ -18,64 +16,19 @@ def _profile_relative_path(profile_id: str) -> Path:
 def repo_root_from_subject_manifest(manifest_path: Path) -> Path:
     for parent in manifest_path.parents:
         if parent.name == "subjects":
-            return parent.parent
+            fixtures_parent = parent.parent
+            if fixtures_parent.name == "fixtures" and fixtures_parent.parent.name == "tests":
+                return fixtures_parent.parent.parent
+            return fixtures_parent
     raise ValueError(f"subject manifest path must be rooted under subjects/: {manifest_path}")
 
 
-def _iter_top_level_subject_manifest_paths(repo_root: Path) -> list[Path]:
-    subjects_root = repo_root / "subjects"
-    if not subjects_root.is_dir():
-        return []
-
-    manifest_paths: list[Path] = []
-    for candidate in subjects_root.iterdir():
-        if not candidate.is_dir():
-            continue
-        manifest_path = candidate / SUBJECT_MANIFEST_NAME
-        if manifest_path.is_file():
-            manifest_paths.append(manifest_path)
-    return sorted(manifest_paths)
-
-
-def _legacy_subject_aliases(manifest_path: Path) -> set[str]:
-    try:
-        payload = json.loads(manifest_path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
-        return set()
-
-    compatibility = payload.get("compatibility")
-    if not isinstance(compatibility, dict):
-        return set()
-
-    aliases: set[str] = set()
-    for field_name in _LEGACY_SUBJECT_ALIAS_FIELDS:
-        value = compatibility.get(field_name, [])
-        if not isinstance(value, list):
-            continue
-        for item in value:
-            alias = str(item or "").strip()
-            if alias:
-                aliases.add(alias)
-    return aliases
-
-
-def _resolve_subject_id(repo_root: Path, subject_id: str) -> str:
-    normalized_subject_id = str(subject_id).strip()
-    if not normalized_subject_id:
-        return normalized_subject_id
-
-    direct_manifest_path = repo_root / "subjects" / normalized_subject_id / SUBJECT_MANIFEST_NAME
-    if direct_manifest_path.is_file():
-        return normalized_subject_id
-
-    for manifest_path in _iter_top_level_subject_manifest_paths(repo_root):
-        if normalized_subject_id in _legacy_subject_aliases(manifest_path):
-            return manifest_path.parent.name
-    return normalized_subject_id
+def _normalize_subject_id(subject_id: str) -> str:
+    return str(subject_id).strip()
 
 
 def subject_root(repo_root: Path, subject_id: str) -> Path:
-    return repo_root / "subjects" / _resolve_subject_id(repo_root, subject_id)
+    return repo_root / "subjects" / _normalize_subject_id(subject_id)
 
 
 def subject_manifest_path(repo_root: Path, subject_id: str) -> Path:

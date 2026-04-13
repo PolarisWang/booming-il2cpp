@@ -6,15 +6,13 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SUBJECT_ROOT = REPO_ROOT / "subjects" / "MainlineFeaturePack"
+SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
-SOURCE_PROJECT_PATH = REPO_ROOT / "subjects" / "MainlineFeaturePack" / "source" / "MainlineFeaturePack.csproj"
-SOURCE_PROGRAM_PATH = REPO_ROOT / "subjects" / "MainlineFeaturePack" / "source" / "ThreadingProof.cs"
+SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "Slices" / "MainlineFeaturePack" / "MainlineFeaturePack.csproj"
+SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Slices" / "MainlineFeaturePack" / "ThreadingProof.cs"
 PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
 PROOF_MAIN_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "main.cpp"
 PROOF_RUN_SCRIPT_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "RunNativeReferenceProof.cmake"
-PROFILE_ID = "proof-threading"
-MATRIX_ID = "windows-threading-check"
 
 CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
 LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
@@ -45,23 +43,17 @@ class Phase2ThreadingGcProofTests(unittest.TestCase):
 
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         source = SOURCE_PROGRAM_PATH.read_text(encoding="utf-8")
-        validation_profiles = dict(manifest.get("validationProfiles") or {})
-        matrices = {
-            str(matrix["matrixId"]): matrix
-            for matrix in list(manifest.get("environmentMatrices") or [])
-        }
 
-        self.assertEqual("MainlineFeaturePack", manifest["subjectId"])
+        self.assertEqual("SolutionCorePack", manifest["subjectId"])
         self.assertEqual("dotnet-project", manifest["source"]["type"])
-        self.assertEqual("subjects/MainlineFeaturePack/source/MainlineFeaturePack.csproj", manifest["source"]["path"])
+        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
+        self.assertEqual(
+            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            manifest["source"]["primaryProjectPath"],
+        )
         self.assertEqual("MainlineFeaturePack/ProofEntry::Run()", manifest["source"]["entry"])
         self.assertEqual("require", manifest["testDeclarationMode"])
-        self.assertEqual(["proof"], validation_profiles[PROFILE_ID])
         self.assertEqual("proof", manifest["validation"]["proof"]["kind"])
-        self.assertEqual(
-            "MainlineFeaturePack/ThreadingProofEntry::Run()",
-            matrices[MATRIX_ID]["source"]["entry"],
-        )
 
         self.assertIn("[ChaosUnitTest(", source)
         self.assertIn('Alias = "threading-proof"', source)

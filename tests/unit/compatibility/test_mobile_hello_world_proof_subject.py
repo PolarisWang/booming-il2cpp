@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SUBJECT_ROOT = REPO_ROOT / "subjects" / "MobileHelloWorldProof"
+SUBJECT_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects" / "MobileHelloWorldProof"
 MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
 SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "MobileHelloWorldProof.csproj"
 SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Program.cs"
@@ -162,9 +162,18 @@ class Phase4MobileHelloWorldProofTests(unittest.TestCase):
 
     def test_subject_query_finds_mobile_runtime_host_surface_without_subject_name_coupling(self) -> None:
         subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase4_mobile_host")
+        manifest = subjects_module.load_subject_manifest_file(MANIFEST_PATH)
+        records = [
+            {
+                "subjectId": str(manifest["subjectId"]),
+                "manifestPath": MANIFEST_PATH,
+                "manifest": manifest,
+                "capabilities": subjects_module.manifest_capabilities(manifest),
+            }
+        ]
 
         record = subjects_module.require_single_subject_record(
-            subjects_module.load_subject_records(REPO_ROOT),
+            records,
             category="canonical",
             source_type="dotnet-project",
             required_stage_kinds=["runtime-managed-output", "build-target"],

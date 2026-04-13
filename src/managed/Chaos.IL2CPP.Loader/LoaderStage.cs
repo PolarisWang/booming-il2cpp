@@ -39,24 +39,53 @@ public sealed class LoaderStage
         }
 
         var loadedAssemblies = assemblyPaths
-            .Select((assemblyPath, index) => LoadAssembly(
+            .Select(assemblyPath => LoadAssembly(
                 assemblyPath,
-                index == 0 ? request.EntryPointSubjectIdOverride : null,
-                requireEntryPoint: index == 0))
+                entryPointSubjectIdOverride: null,
+                requireEntryPoint: false))
             .ToList();
-        var entryAssembly = loadedAssemblies[0];
+        var entryAssembly = ResolveEntryAssembly(loadedAssemblies, request.EntryPointSubjectIdOverride);
+        var entryPointSubjectId = !string.IsNullOrWhiteSpace(request.EntryPointSubjectIdOverride)
+            ? request.EntryPointSubjectIdOverride!
+            : entryAssembly.EntryPointSubjectId;
 
         return new LoadedWorldModel
         {
             InputAssemblyPath = request.InputAssemblyPath,
             Assembly = entryAssembly.Assembly,
             Assemblies = loadedAssemblies,
-            EntryPointSubjectId = entryAssembly.EntryPointSubjectId,
+            EntryPointSubjectId = entryPointSubjectId,
             Types = loadedAssemblies.SelectMany(assembly => assembly.Types).OrderBy(model => model.MetadataToken).ToList(),
             Fields = loadedAssemblies.SelectMany(assembly => assembly.Fields).OrderBy(model => model.MetadataToken).ToList(),
             Properties = loadedAssemblies.SelectMany(assembly => assembly.Properties).OrderBy(model => model.MetadataToken).ToList(),
             Methods = loadedAssemblies.SelectMany(assembly => assembly.Methods).OrderBy(model => model.MetadataToken).ToList(),
         };
+    }
+
+    private static LoadedAssemblyModel ResolveEntryAssembly(
+        IReadOnlyList<LoadedAssemblyModel> loadedAssemblies,
+        string? entryPointSubjectIdOverride)
+    {
+        if (!string.IsNullOrWhiteSpace(entryPointSubjectIdOverride))
+        {
+            var entryAssembly = loadedAssemblies.FirstOrDefault(assembly =>
+                assembly.Methods.Any(method => string.Equals(method.SubjectId, entryPointSubjectIdOverride, StringComparison.Ordinal)));
+            if (entryAssembly is not null)
+            {
+                return entryAssembly;
+            }
+
+            throw new InvalidOperationException(
+                $"managed closure entry point override '{entryPointSubjectIdOverride}' does not match any loaded method");
+        }
+
+        var primaryAssembly = loadedAssemblies[0];
+        if (!string.IsNullOrWhiteSpace(primaryAssembly.EntryPointSubjectId))
+        {
+            return primaryAssembly;
+        }
+
+        throw new InvalidOperationException("managed closure input assembly does not define an entry point");
     }
 
     private static LoadedAssemblyModel LoadAssembly(
@@ -150,14 +179,14 @@ public sealed class LoaderStage
     {
         if (!string.IsNullOrWhiteSpace(entryPointSubjectIdOverride))
         {
-            entryPointSubjectIdOverride = entryPointSubjectIdOverride!;
-            if (methods.Any(method => string.Equals(method.SubjectId, entryPointSubjectIdOverride, StringComparison.Ordinal)))
+            var overrideSubjectId = entryPointSubjectIdOverride!;
+            if (methods.Any(method => string.Equals(method.SubjectId, overrideSubjectId, StringComparison.Ordinal)))
             {
-                return entryPointSubjectIdOverride;
+                return overrideSubjectId;
             }
 
             throw new InvalidOperationException(
-                $"managed closure entry point override '{entryPointSubjectIdOverride}' does not match any loaded method");
+                $"managed closure entry point override '{overrideSubjectId}' does not match any loaded method");
         }
 
         var entryToken = peReader.PEHeaders.CorHeader?.EntryPointTokenOrRelativeVirtualAddress ?? 0;
@@ -558,6 +587,7 @@ public sealed class LoaderStage
         {
             ILOpCode.Nop => null,
             ILOpCode.Volatile => null,
+            ILOpCode.Constrained => SkipConstrainedInstruction(ref ilReader),
             ILOpCode.Ldtoken => DecodeLdtokenInstruction(metadataReader, typeResolver, typeModels, fieldOwners, methodOwners, ref ilReader),
             ILOpCode.Ldstr => DecodeLdstrInstruction(metadataReader, ref ilReader),
             ILOpCode.Ldftn => DecodeLdftnInstruction(metadataReader, typeResolver, typeModels, methodOwners, ref ilReader),
@@ -568,8 +598,12 @@ public sealed class LoaderStage
             ILOpCode.Castclass => DecodeCastclassInstruction(metadataReader, typeResolver, ref ilReader),
             ILOpCode.Isinst => DecodeIsinstInstruction(metadataReader, typeResolver, ref ilReader),
             ILOpCode.Initobj => DecodeInitobjInstruction(metadataReader, typeResolver, ref ilReader),
+            ILOpCode.Ldobj => DecodeLdobjInstruction(metadataReader, typeResolver, ref ilReader),
+            ILOpCode.Stobj => DecodeStobjInstruction(metadataReader, typeResolver, ref ilReader),
             ILOpCode.Newobj => DecodeMethodReferenceInstruction(metadataReader, typeResolver, typeModels, methodOwners, opCode, ref ilReader),
             ILOpCode.Box => DecodeBoxInstruction(metadataReader, typeResolver, ref ilReader),
+            ILOpCode.Unbox => DecodeUnboxInstruction(metadataReader, typeResolver, ref ilReader),
+            ILOpCode.Unbox_any => DecodeUnboxAnyInstruction(metadataReader, typeResolver, ref ilReader),
             ILOpCode.Calli => DecodeCalliInstruction(ref ilReader),
             ILOpCode.Call => DecodeMethodReferenceInstruction(metadataReader, typeResolver, typeModels, methodOwners, opCode, ref ilReader),
             ILOpCode.Callvirt => DecodeMethodReferenceInstruction(metadataReader, typeResolver, typeModels, methodOwners, opCode, ref ilReader),
@@ -581,12 +615,14 @@ public sealed class LoaderStage
             ILOpCode.Ldsflda => DecodeFieldReferenceInstruction(metadataReader, typeResolver, fieldOwners, opCode, ref ilReader),
             ILOpCode.Ldelema => DecodeLdelemaInstruction(metadataReader, typeResolver, ref ilReader),
             ILOpCode.Stelem_ref => new ManagedInstructionModel { Op = "stelem.ref", ResultType = "System.Void" },
+            ILOpCode.Stelem => DecodeArrayElementInstruction(metadataReader, typeResolver, ILOpCode.Stelem, ref ilReader),
             ILOpCode.Stelem_i4 => DecodeTypedArrayInstruction("stelem", "System.Void", "System.Int32"),
             ILOpCode.Ldelem_i4 => DecodeTypedArrayInstruction("ldelem", "System.Int32", "System.Int32"),
             ILOpCode.Stelem_r8 => DecodeTypedArrayInstruction("stelem", "System.Void", "System.Double"),
             ILOpCode.Ldelem_r8 => DecodeTypedArrayInstruction("ldelem", "System.Double", "System.Double"),
             ILOpCode.Dup => new ManagedInstructionModel { Op = "dup" },
             ILOpCode.Pop => new ManagedInstructionModel { Op = "pop" },
+            ILOpCode.Ldelem => DecodeArrayElementInstruction(metadataReader, typeResolver, ILOpCode.Ldelem, ref ilReader),
             ILOpCode.Ldelem_ref => new ManagedInstructionModel { Op = "ldelem.ref", ResultType = "System.Object" },
             ILOpCode.Ldarg => DecodeLdargInstruction(methodSummary, ilReader.ReadUInt16()),
             ILOpCode.Ldarg_s => DecodeLdargInstruction(methodSummary, ilReader.ReadByte()),
@@ -625,6 +661,25 @@ public sealed class LoaderStage
             ILOpCode.Ldc_i8 => DecodeLdcI8Instruction(ilReader.ReadInt64()),
             ILOpCode.Ldc_r4 => DecodeLdcR4Instruction(ilReader.ReadSingle()),
             ILOpCode.Ldc_r8 => DecodeLdcR8Instruction(ilReader.ReadDouble()),
+            ILOpCode.Ldind_i1 => DecodeSimpleInstruction("ldind.i1", "System.SByte"),
+            ILOpCode.Ldind_u1 => DecodeSimpleInstruction("ldind.u1", "System.Byte"),
+            ILOpCode.Ldind_i2 => DecodeSimpleInstruction("ldind.i2", "System.Int16"),
+            ILOpCode.Ldind_u2 => DecodeSimpleInstruction("ldind.u2", "System.UInt16"),
+            ILOpCode.Ldind_i4 => DecodeSimpleInstruction("ldind.i4", "System.Int32"),
+            ILOpCode.Ldind_u4 => DecodeSimpleInstruction("ldind.u4", "System.UInt32"),
+            ILOpCode.Ldind_i8 => DecodeSimpleInstruction("ldind.i8", "System.Int64"),
+            ILOpCode.Ldind_i => DecodeSimpleInstruction("ldind.i", "System.IntPtr"),
+            ILOpCode.Ldind_r4 => DecodeSimpleInstruction("ldind.r4", "System.Single"),
+            ILOpCode.Ldind_r8 => DecodeSimpleInstruction("ldind.r8", "System.Double"),
+            ILOpCode.Ldind_ref => DecodeSimpleInstruction("ldind.ref", "System.Object"),
+            ILOpCode.Stind_i1 => DecodeSimpleInstruction("stind.i1", "System.Void"),
+            ILOpCode.Stind_i2 => DecodeSimpleInstruction("stind.i2", "System.Void"),
+            ILOpCode.Stind_i4 => DecodeSimpleInstruction("stind.i4", "System.Void"),
+            ILOpCode.Stind_i8 => DecodeSimpleInstruction("stind.i8", "System.Void"),
+            ILOpCode.Stind_i => DecodeSimpleInstruction("stind.i", "System.Void"),
+            ILOpCode.Stind_r4 => DecodeSimpleInstruction("stind.r4", "System.Void"),
+            ILOpCode.Stind_r8 => DecodeSimpleInstruction("stind.r8", "System.Void"),
+            ILOpCode.Stind_ref => DecodeSimpleInstruction("stind.ref", "System.Void"),
             ILOpCode.Conv_i1 => DecodeSimpleInstruction("conv.i1", "System.SByte"),
             ILOpCode.Conv_i2 => DecodeSimpleInstruction("conv.i2", "System.Int16"),
             ILOpCode.Conv_i4 => new ManagedInstructionModel { Op = "conv.i4", ResultType = "System.Int32" },
@@ -673,6 +728,7 @@ public sealed class LoaderStage
             ILOpCode.Ble_s => DecodeBranchInstruction("ble", ReadBranchTargetSByte(ref ilReader)),
             ILOpCode.Bge => DecodeBranchInstruction("bge", ReadBranchTargetInt32(ref ilReader)),
             ILOpCode.Bge_s => DecodeBranchInstruction("bge", ReadBranchTargetSByte(ref ilReader)),
+            ILOpCode.Switch => DecodeSwitchInstruction(ref ilReader),
             ILOpCode.Leave => DecodeLeaveInstruction(ReadBranchTargetInt32(ref ilReader)),
             ILOpCode.Leave_s => DecodeLeaveInstruction(ReadBranchTargetSByte(ref ilReader)),
             ILOpCode.Throw => new ManagedInstructionModel { Op = "throw", ResultType = "System.Void" },
@@ -703,7 +759,13 @@ public sealed class LoaderStage
                 ILOpCode.Castclass => "castclass",
                 ILOpCode.Isinst => "isinst",
                 ILOpCode.Initobj => "initobj",
+                ILOpCode.Ldobj => "ldobj",
                 ILOpCode.Ldelema => "ldelema",
+                ILOpCode.Ldelem => "ldelem",
+                ILOpCode.Stobj => "stobj",
+                ILOpCode.Stelem => "stelem",
+                ILOpCode.Unbox => "unbox",
+                ILOpCode.Unbox_any => "unbox.any",
                 _ => throw new NotSupportedException($"unsupported type reference opcode: {opCode}"),
             },
             Operand = typeIdentity.SubjectId,
@@ -714,7 +776,13 @@ public sealed class LoaderStage
                 ILOpCode.Castclass => typeIdentity.SubjectId,
                 ILOpCode.Isinst => typeIdentity.SubjectId,
                 ILOpCode.Initobj => "System.Void",
+                ILOpCode.Ldobj => typeIdentity.SubjectId,
                 ILOpCode.Ldelema => "System.IntPtr",
+                ILOpCode.Ldelem => typeIdentity.SubjectId,
+                ILOpCode.Stobj => "System.Void",
+                ILOpCode.Stelem => "System.Void",
+                ILOpCode.Unbox => "System.IntPtr",
+                ILOpCode.Unbox_any => typeIdentity.SubjectId,
                 _ => throw new NotSupportedException($"unsupported type reference opcode: {opCode}"),
             },
             Reference = new ManagedInstructionReference
@@ -744,6 +812,24 @@ public sealed class LoaderStage
         return instruction with { Op = "box" };
     }
 
+    private static ManagedInstructionModel DecodeUnboxInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeTypeReferenceInstruction(metadataReader, typeResolver, ILOpCode.Unbox, ref ilReader);
+        return instruction with { Op = "unbox" };
+    }
+
+    private static ManagedInstructionModel DecodeUnboxAnyInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeTypeReferenceInstruction(metadataReader, typeResolver, ILOpCode.Unbox_any, ref ilReader);
+        return instruction with { Op = "unbox.any" };
+    }
+
     private static ManagedInstructionModel DecodeLdelemaInstruction(
         MetadataReader metadataReader,
         MetadataTypeResolver typeResolver,
@@ -751,6 +837,19 @@ public sealed class LoaderStage
     {
         var instruction = DecodeTypeReferenceInstruction(metadataReader, typeResolver, ILOpCode.Ldelema, ref ilReader);
         return instruction with { Op = "ldelema" };
+    }
+
+    private static ManagedInstructionModel DecodeArrayElementInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        ILOpCode opCode,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeTypeReferenceInstruction(metadataReader, typeResolver, opCode, ref ilReader);
+        return instruction with
+        {
+            Op = opCode == ILOpCode.Ldelem ? "ldelem" : "stelem",
+        };
     }
 
     private static ManagedInstructionModel DecodeCastclassInstruction(
@@ -778,6 +877,24 @@ public sealed class LoaderStage
     {
         var instruction = DecodeTypeReferenceInstruction(metadataReader, typeResolver, ILOpCode.Initobj, ref ilReader);
         return instruction with { Op = "initobj" };
+    }
+
+    private static ManagedInstructionModel DecodeLdobjInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeTypeReferenceInstruction(metadataReader, typeResolver, ILOpCode.Ldobj, ref ilReader);
+        return instruction with { Op = "ldobj" };
+    }
+
+    private static ManagedInstructionModel DecodeStobjInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeTypeReferenceInstruction(metadataReader, typeResolver, ILOpCode.Stobj, ref ilReader);
+        return instruction with { Op = "stobj" };
     }
 
     private static ManagedInstructionModel DecodeTypedArrayInstruction(string op, string resultType, string elementType)
@@ -1192,6 +1309,22 @@ public sealed class LoaderStage
         };
     }
 
+    private static ManagedInstructionModel DecodeSwitchInstruction(ref BlobReader ilReader)
+    {
+        return new ManagedInstructionModel
+        {
+            Op = "switch",
+            Operand = ReadSwitchTargets(ref ilReader),
+            ResultType = "System.Void",
+        };
+    }
+
+    private static ManagedInstructionModel? SkipConstrainedInstruction(ref BlobReader ilReader)
+    {
+        ilReader.ReadInt32();
+        return null;
+    }
+
     private static ManagedInstructionModel DecodeBrtrueInstruction(int delta)
     {
         return new ManagedInstructionModel
@@ -1222,6 +1355,26 @@ public sealed class LoaderStage
     {
         var delta = ilReader.ReadSByte();
         return ilReader.Offset + delta;
+    }
+
+    private static IReadOnlyList<int> ReadSwitchTargets(ref BlobReader ilReader)
+    {
+        var targetCount = ilReader.ReadInt32();
+        var deltas = new int[targetCount];
+
+        for (var index = 0; index < targetCount; index++)
+        {
+            deltas[index] = ilReader.ReadInt32();
+        }
+
+        var baseOffset = ilReader.Offset;
+        var targets = new int[targetCount];
+        for (var index = 0; index < targetCount; index++)
+        {
+            targets[index] = baseOffset + deltas[index];
+        }
+
+        return targets;
     }
 
     private static IReadOnlyList<ManagedExceptionRegionModel> DecodeExceptionRegions(

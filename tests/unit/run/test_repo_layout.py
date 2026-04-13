@@ -215,7 +215,7 @@ class RepoLayoutTests(unittest.TestCase):
         verify_py = (REPO_ROOT / "build" / "scripts" / "verify-runtime-baseline.py").read_text(encoding="utf-8")
         verify_ps1 = (REPO_ROOT / "build" / "scripts" / "verify-runtime-baseline.ps1").read_text(encoding="utf-8")
 
-        self.assertIn("subjects/HelloWorldObject/validation/proof/native-reference", cmake_router)
+        self.assertIn("subjects/SolutionCorePack/validation/proof/native-reference", cmake_router)
         self.assertIn("tests/contracts/native/abi", cmake_router)
         self.assertIn("tests/contracts/native/bridge", cmake_router)
         self.assertNotIn("tests/proof/native-reference/HelloWorldObject", cmake_router)
@@ -378,7 +378,7 @@ class RepoLayoutTests(unittest.TestCase):
         native_reference_cmake = (
             REPO_ROOT
             / "subjects"
-            / "HelloWorldObject"
+            / "SolutionCorePack"
             / "validation"
             / "proof"
             / "native-reference"

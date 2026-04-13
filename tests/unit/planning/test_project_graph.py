@@ -11,7 +11,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "project-graph"
-SUBJECTS_ROOT = REPO_ROOT / "subjects"
+FIXTURE_SUBJECTS_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects"
+SOLUTION_SIMPLE_LIB_FIXTURE_ROOT = FIXTURE_SUBJECTS_ROOT / "solution-simple-lib"
+SOLUTION_MULTI_PROJECT_FIXTURE_ROOT = FIXTURE_SUBJECTS_ROOT / "solution-multi-project"
+SOLUTION_PACKAGE_REFERENCE_FIXTURE_ROOT = FIXTURE_SUBJECTS_ROOT / "solution-package-reference"
 
 
 def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -47,8 +50,8 @@ class ProjectGraphTests(unittest.TestCase):
             shutil.rmtree(output_root)
         return output_root
 
-    def _run_convert(self, subject_root: Path, subject_id: str) -> Path:
-        output_root = self._make_output_root(subject_id)
+    def _run_convert(self, subject_root: Path, run_label: str) -> Path:
+        output_root = self._make_output_root(run_label)
         run_checked(
             [
                 "dotnet",
@@ -65,13 +68,16 @@ class ProjectGraphTests(unittest.TestCase):
         )
         return output_root
 
-    def test_golden_subjects_exist(self) -> None:
-        expected_subjects = {"SolutionSimpleLib", "SolutionMultiProject", "SolutionPackageReference"}
-        actual_subjects = {path.name for path in SUBJECTS_ROOT.iterdir() if path.is_dir()}
-        self.assertTrue(expected_subjects.issubset(actual_subjects))
+    def test_archetype_convert_fixtures_target_solution_core_pack_sources(self) -> None:
+        self.assertTrue((SOLUTION_SIMPLE_LIB_FIXTURE_ROOT / "subject.manifest.json").is_file())
+        self.assertTrue((SOLUTION_MULTI_PROJECT_FIXTURE_ROOT / "subject.manifest.json").is_file())
+        self.assertTrue((SOLUTION_PACKAGE_REFERENCE_FIXTURE_ROOT / "subject.manifest.json").is_file())
+        self.assertFalse((REPO_ROOT / "subjects" / "SolutionSimpleLib").exists())
+        self.assertFalse((REPO_ROOT / "subjects" / "SolutionMultiProject").exists())
+        self.assertFalse((REPO_ROOT / "subjects" / "SolutionPackageReference").exists())
 
     def test_convert_solution_simple_lib_loads_entry_and_project_reference_assemblies(self) -> None:
-        output_root = self._run_convert(SUBJECTS_ROOT / "SolutionSimpleLib", "SolutionSimpleLib")
+        output_root = self._run_convert(SOLUTION_SIMPLE_LIB_FIXTURE_ROOT, "solution-simple-lib")
 
         graph = load_json(output_root / "project-graph.json")
         self.assertEqual("GoldenSimpleLib.App", graph["entryProject"]["assemblyName"])
@@ -95,7 +101,7 @@ class ProjectGraphTests(unittest.TestCase):
         )
 
     def test_convert_solution_multi_project_tracks_transitive_cross_assembly_references(self) -> None:
-        output_root = self._run_convert(SUBJECTS_ROOT / "SolutionMultiProject", "SolutionMultiProject")
+        output_root = self._run_convert(SOLUTION_MULTI_PROJECT_FIXTURE_ROOT, "solution-multi-project")
 
         graph = load_json(output_root / "project-graph.json")
         self.assertEqual("GoldenMultiProject.App", graph["entryProject"]["assemblyName"])
@@ -125,7 +131,7 @@ class ProjectGraphTests(unittest.TestCase):
         self.assertTrue((native_generated_root / "GoldenMultiProject.Core").is_dir())
 
     def test_convert_solution_package_reference_exposes_package_reference_in_project_graph(self) -> None:
-        output_root = self._run_convert(SUBJECTS_ROOT / "SolutionPackageReference", "SolutionPackageReference")
+        output_root = self._run_convert(SOLUTION_PACKAGE_REFERENCE_FIXTURE_ROOT, "solution-package-reference")
 
         graph = load_json(output_root / "project-graph.json")
         self.assertEqual("GoldenWithPackage.App", graph["entryProject"]["assemblyName"])
@@ -135,7 +141,7 @@ class ProjectGraphTests(unittest.TestCase):
         self.assertTrue(graph["dependencies"][0]["assemblyPath"].endswith("Newtonsoft.Json.dll"))
 
     def test_convert_solution_multi_project_preserves_golden_assembly_names(self) -> None:
-        output_root = self._run_convert(SUBJECTS_ROOT / "SolutionMultiProject", "SolutionMultiProject-canonical")
+        output_root = self._run_convert(SOLUTION_MULTI_PROJECT_FIXTURE_ROOT, "solution-multi-project-canonical")
 
         graph = load_json(output_root / "project-graph.json")
         self.assertEqual("GoldenMultiProject.App", graph["entryProject"]["assemblyName"])

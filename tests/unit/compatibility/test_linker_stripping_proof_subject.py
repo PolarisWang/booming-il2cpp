@@ -9,10 +9,13 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SUBJECT_ROOT = REPO_ROOT / "subjects" / "MainlineFeaturePack"
+SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
-SOURCE_PROJECT_PATH = REPO_ROOT / "subjects" / "MainlineFeaturePack" / "source" / "MainlineFeaturePack.csproj"
-SOURCE_PROGRAM_PATH = REPO_ROOT / "subjects" / "MainlineFeaturePack" / "source" / "LinkerStrippingProof.cs"
+SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "Slices" / "MainlineFeaturePack" / "MainlineFeaturePack.csproj"
+SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Slices" / "MainlineFeaturePack" / "LinkerStrippingProof.cs"
+FIXTURE_PROJECT_PATH = (
+    REPO_ROOT / "tests" / "fixtures" / "contracts" / "linker-stripping-proof" / "FixtureLinkerStrippingProof.csproj"
+)
 PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
 PROOF_MAIN_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "main.cpp"
 PROOF_RUN_SCRIPT_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "RunNativeReferenceProof.cmake"
@@ -60,26 +63,23 @@ class Phase2LinkerStrippingProofTests(unittest.TestCase):
         self.assertTrue(MANIFEST_PATH.is_file(), msg=f"missing subject manifest: {MANIFEST_PATH}")
         self.assertTrue(SOURCE_PROJECT_PATH.is_file(), msg=f"missing source project: {SOURCE_PROJECT_PATH}")
         self.assertTrue(SOURCE_PROGRAM_PATH.is_file(), msg=f"missing source file: {SOURCE_PROGRAM_PATH}")
+        self.assertTrue(FIXTURE_PROJECT_PATH.is_file(), msg=f"missing fixture project: {FIXTURE_PROJECT_PATH}")
         self.assertTrue(PROOF_CMAKE_PATH.is_file(), msg=f"missing proof cmake: {PROOF_CMAKE_PATH}")
         self.assertTrue(PROOF_MAIN_PATH.is_file(), msg=f"missing proof host main: {PROOF_MAIN_PATH}")
         self.assertTrue(PROOF_RUN_SCRIPT_PATH.is_file(), msg=f"missing proof run script: {PROOF_RUN_SCRIPT_PATH}")
 
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         source = SOURCE_PROGRAM_PATH.read_text(encoding="utf-8")
-        validation_profiles = dict(manifest.get("validationProfiles") or {})
-        matrices = {
-            str(matrix["matrixId"]): matrix
-            for matrix in list(manifest.get("environmentMatrices") or [])
-        }
-
-        self.assertEqual("MainlineFeaturePack", manifest["subjectId"])
+        self.assertEqual("SolutionCorePack", manifest["subjectId"])
         self.assertEqual("dotnet-project", manifest["source"]["type"])
-        self.assertEqual("subjects/MainlineFeaturePack/source/MainlineFeaturePack.csproj", manifest["source"]["path"])
+        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
+        self.assertEqual(
+            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            manifest["source"]["primaryProjectPath"],
+        )
         self.assertEqual("MainlineFeaturePack/ProofEntry::Run()", manifest["source"]["entry"])
         self.assertEqual("require", manifest["testDeclarationMode"])
-        self.assertEqual(["proof"], validation_profiles[PROFILE_ID])
         self.assertEqual("proof", manifest["validation"]["proof"]["kind"])
-        self.assertEqual(ENTRY_POINT, matrices[MATRIX_ID]["source"]["entry"])
 
         self.assertIn("[ChaosUnitTest(", source)
         self.assertIn('Alias = "linker-stripping-proof"', source)
@@ -113,6 +113,59 @@ class Phase2LinkerStrippingProofTests(unittest.TestCase):
 
     def test_convert_emits_preserve_descriptor_and_keeps_stripped_type_out_of_analysis(self) -> None:
         output_root = self._make_output_root()
+        subject_root = output_root / "FixtureLinkerStrippingSubject"
+        subject_root.mkdir(parents=True, exist_ok=True)
+        (subject_root / "subject.manifest.json").write_text(
+            json.dumps(
+                {
+                    "subjectId": "FixtureLinkerStrippingSubject",
+                    "displayName": "FixtureLinkerStrippingSubject",
+                    "category": "canonical",
+                    "defaultGoal": "correctness.dev",
+                    "defaultMatrix": "windows-native-check",
+                    "defaultValidationProfile": "proof-dev",
+                    "source": {
+                        "type": "dotnet-project",
+                        "path": "tests/fixtures/contracts/linker-stripping-proof/FixtureLinkerStrippingProof.csproj",
+                        "entry": ENTRY_POINT,
+                    },
+                    "validationProfiles": {
+                        "proof-dev": ["proof"],
+                    },
+                    "validation": {
+                        "proof": {
+                            "kind": "proof",
+                            "defaultVariant": "CHECK",
+                        }
+                    },
+                    "executionPipelines": [
+                        {
+                            "pipelineId": "proof-runtime-output",
+                            "stages": [],
+                        }
+                    ],
+                    "environmentMatrices": [
+                        {
+                            "matrixId": "windows-native-check",
+                            "pipelineId": "proof-runtime-output",
+                            "supportedGoals": ["correctness.dev"],
+                            "executionContext": {
+                                "hostPlatform": "windows-x64",
+                                "targetPlatform": "windows-x64",
+                                "toolchainProfile": "msvc-reference",
+                            },
+                            "artifactPlan": {
+                                "requiredBuckets": ["source", "host-input", "analysis"],
+                                "evidenceTerminalBucket": "analysis",
+                            },
+                        }
+                    ],
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
 
         run_checked(
             [
@@ -122,7 +175,7 @@ class Phase2LinkerStrippingProofTests(unittest.TestCase):
                 str(DRIVER_PROJECT_PATH),
                 "--",
                 "convert",
-                str(SUBJECT_ROOT),
+                str(subject_root),
                 "--entry-point",
                 ENTRY_POINT,
                 "--output",

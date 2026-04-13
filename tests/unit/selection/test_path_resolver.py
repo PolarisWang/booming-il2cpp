@@ -14,7 +14,6 @@ TRACE_MATRIX_ID = "windows-reference-check"
 PERF_SUBJECT_ID = "FixturePerfSubject"
 PERF_MATRIX_ID = "windows-perf-release"
 LEGACY_ARCHETYPE_SUBJECT_ID = "GoldenMultiProject"
-CANONICAL_ARCHETYPE_SUBJECT_ID = "SolutionMultiProject"
 
 
 def load_module(path: Path, module_name: str):
@@ -133,15 +132,15 @@ class PathResolverTests(unittest.TestCase):
             ),
         )
 
-    def test_subject_root_resolves_legacy_archetype_alias_to_canonical_solution_subject(self) -> None:
-        resolver_module = load_module(PATH_RESOLVER_MODULE_PATH, "chaos_path_resolver_legacy_archetype_alias")
+    def test_subject_root_does_not_rewrite_legacy_archetype_aliases(self) -> None:
+        resolver_module = load_module(PATH_RESOLVER_MODULE_PATH, "chaos_path_resolver_without_legacy_archetype_alias")
 
         self.assertEqual(
-            REPO_ROOT / "subjects" / CANONICAL_ARCHETYPE_SUBJECT_ID,
+            REPO_ROOT / "subjects" / LEGACY_ARCHETYPE_SUBJECT_ID,
             resolver_module.subject_root(REPO_ROOT, LEGACY_ARCHETYPE_SUBJECT_ID),
         )
         self.assertEqual(
-            REPO_ROOT / "subjects" / CANONICAL_ARCHETYPE_SUBJECT_ID / "subject.manifest.json",
+            REPO_ROOT / "subjects" / LEGACY_ARCHETYPE_SUBJECT_ID / "subject.manifest.json",
             resolver_module.subject_manifest_path(REPO_ROOT, LEGACY_ARCHETYPE_SUBJECT_ID),
         )
 

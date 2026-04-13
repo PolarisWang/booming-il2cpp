@@ -90,15 +90,7 @@ class CommandManifestTests(unittest.TestCase):
         manifest_module = load_manifest_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
         visible_command_ids = {command["id"] for command in manifest_module.list_commands(manifest)}
-        hidden_command_ids = {command["id"] for command in manifest_module.list_commands(manifest, include_hidden=True)}
-        smoke_spec = select_public_suite_spec(
-            "chaos_manifest_command_visibility_smoke",
-            host_platform="macos",
-            family="smoke",
-            required_stages=["build", "run"],
-        )
-        legacy_build_command_id = str(dict(smoke_spec.get("legacy_commands") or {}).get("build") or "")
-        legacy_run_command_id = str(dict(smoke_spec.get("legacy_commands") or {}).get("run") or "")
+        all_command_ids = {command["id"] for command in manifest_module.list_commands(manifest, include_hidden=True)}
 
         self.assertTrue(
             {
@@ -124,19 +116,19 @@ class CommandManifestTests(unittest.TestCase):
                 "test-summary",
             }.issubset(visible_command_ids)
         )
-        self.assertTrue(
-            {
-                "build-platform-windows-reference-desktop",
-                "build-platform-macos-reference-desktop",
-                "test-contract-analysis-schema",
-                "test-contract-managed-closure-bundle",
-                "test-contract-trace-schema",
-            }.issubset(hidden_command_ids)
-        )
-        self.assertNotIn("verify-roadmap-0-windows", hidden_command_ids)
-        self.assertNotIn("verify-roadmap-0-macos", hidden_command_ids)
-        self.assertNotIn(legacy_build_command_id, visible_command_ids)
-        self.assertNotIn(legacy_run_command_id, visible_command_ids)
+        self.assertNotIn("build-platform-windows-reference-desktop", all_command_ids)
+        self.assertNotIn("build-platform-macos-reference-desktop", all_command_ids)
+        self.assertNotIn("test-contract-analysis-schema", all_command_ids)
+        self.assertNotIn("test-contract-managed-closure-bundle", all_command_ids)
+        self.assertNotIn("test-contract-trace-schema", all_command_ids)
+        self.assertNotIn("test-workflow-runtime-baseline-windows", all_command_ids)
+        self.assertNotIn("test-workflow-runtime-baseline-macos", all_command_ids)
+        self.assertNotIn("test-workflow-roadmap-0-windows", all_command_ids)
+        self.assertNotIn("test-workflow-roadmap-0-macos", all_command_ids)
+        self.assertNotIn("verify-roadmap-0-windows", all_command_ids)
+        self.assertNotIn("verify-roadmap-0-macos", all_command_ids)
+        self.assertNotIn("build-smoke-helloworld", all_command_ids)
+        self.assertNotIn("test-smoke-helloworld", all_command_ids)
         self.assertNotIn("verify-roadmap-0-windows", visible_command_ids)
         self.assertTrue(
             {
@@ -149,37 +141,45 @@ class CommandManifestTests(unittest.TestCase):
             }.issubset(visible_command_ids)
         )
 
-    def test_manifest_routes_trace_checks_through_subject_entries(self) -> None:
-        manifest = json.loads(RUN_MANIFEST_PATH.read_text(encoding="utf-8"))
-        commands = {command["id"]: command for command in manifest["commands"]}
-
-        self.assertEqual("tests/contracts/native/abi", commands["build-native-contract-abi"]["source_dir"])
-        self.assertEqual("tests/contracts/native/bridge", commands["build-native-contract-bridge"]["source_dir"])
-        self.assertEqual("HostEmbeddingLite", commands["build-platform-windows-reference-desktop"]["subject_id"])
-        self.assertEqual("correctness.platform", commands["build-platform-windows-reference-desktop"]["goal_id"])
-        self.assertEqual("windows-managed-trace", commands["build-platform-windows-reference-desktop"]["matrix_id"])
-        self.assertEqual("HostEmbeddingLite", commands["build-platform-macos-reference-desktop"]["subject_id"])
-        self.assertEqual("correctness.platform", commands["build-platform-macos-reference-desktop"]["goal_id"])
-        self.assertEqual("macos-managed-trace", commands["build-platform-macos-reference-desktop"]["matrix_id"])
-        self.assertEqual("HostEmbeddingLite", commands["test-trace-compare-windows"]["subject_id"])
-        self.assertEqual("correctness.platform", commands["test-trace-compare-windows"]["goal_id"])
-        self.assertEqual("windows-managed-trace", commands["test-trace-compare-windows"]["matrix_id"])
-        self.assertEqual("HostEmbeddingLite", commands["test-trace-compare-macos"]["subject_id"])
-        self.assertEqual("correctness.platform", commands["test-trace-compare-macos"]["goal_id"])
-        self.assertEqual("macos-managed-trace", commands["test-trace-compare-macos"]["matrix_id"])
-
-    def test_manifest_points_legacy_smoke_commands_at_subject_sources(self) -> None:
-        manifest = json.loads(RUN_MANIFEST_PATH.read_text(encoding="utf-8"))
-        commands = {command["id"]: command for command in manifest["commands"]}
+    def test_public_specs_route_trace_checks_through_subject_entries(self) -> None:
         public_specs_module = load_public_specs_module("chaos_manifest_legacy_smoke_specs")
+        windows_trace = public_specs_module.find_public_test_suite_spec("contract", "trace-compare-windows")
+        macos_trace = public_specs_module.find_public_test_suite_spec("contract", "trace-compare-macos")
+        windows_gate = public_specs_module.find_public_test_suite_spec("gate", "windows-reference-desktop")
+        macos_gate = public_specs_module.find_public_test_suite_spec("gate", "macos-reference-desktop")
+
+        assert windows_trace is not None
+        assert macos_trace is not None
+        assert windows_gate is not None
+        assert macos_gate is not None
+
+        self.assertEqual("SolutionCorePack", windows_trace["execution"]["subject_id"])
+        self.assertEqual("correctness.platform", windows_trace["execution"]["goal_id"])
+        self.assertEqual("windows-managed-trace", windows_trace["execution"]["matrix_id"])
+        self.assertEqual("SolutionCorePack", macos_trace["execution"]["subject_id"])
+        self.assertEqual("correctness.platform", macos_trace["execution"]["goal_id"])
+        self.assertEqual("macos-managed-trace", macos_trace["execution"]["matrix_id"])
+        self.assertEqual("SolutionCorePack", windows_gate["execution"]["subject_id"])
+        self.assertEqual("correctness.platform", windows_gate["execution"]["goal_id"])
+        self.assertEqual("windows-managed-trace", windows_gate["execution"]["matrix_id"])
+        self.assertEqual("SolutionCorePack", macos_gate["execution"]["subject_id"])
+        self.assertEqual("correctness.platform", macos_gate["execution"]["goal_id"])
+        self.assertEqual("macos-managed-trace", macos_gate["execution"]["matrix_id"])
+
+    def test_public_smoke_specs_point_at_solution_core_slices(self) -> None:
+        public_specs_module = load_public_specs_module("chaos_manifest_public_smoke_specs")
 
         for spec in list(public_specs_module.PUBLIC_TEST_SPECS):
             if str(spec.get("family") or "") != "smoke":
                 continue
-            legacy_commands = dict(spec.get("legacy_commands") or {})
-            expected_path = f"subjects/{spec['suite']}/source/{spec['suite']}.csproj"
-            self.assertEqual(expected_path, commands[str(legacy_commands["build"])]["project_path"])
-            self.assertEqual(expected_path, commands[str(legacy_commands["run"])]["project_path"])
+            execution = dict(spec.get("execution") or {})
+            suite_name = str(spec["suite"])
+            project_name = str(execution["project_path"]).replace("\\", "/").split("/")[-1].removesuffix(".csproj")
+            expected_path = f"subjects/SolutionCorePack/source/Slices/{project_name}/{project_name}.csproj"
+            expected_dll_path = f"subjects/SolutionCorePack/source/Slices/{project_name}/bin/Release/net8.0/{project_name}.dll"
+            self.assertEqual(expected_path, str(execution["project_path"]).replace("\\", "/"))
+            self.assertEqual(expected_dll_path, str(execution["dll_path"]).replace("\\", "/"))
+            self.assertEqual(f"smoke/{suite_name}", str(spec["id"]))
 
     def test_parse_cli_supports_dynamic_unified_test_commands(self) -> None:
         manifest_module = load_manifest_module()
@@ -339,8 +339,8 @@ class CommandManifestTests(unittest.TestCase):
             manifest,
             "macos",
         )
-        self.assertEqual("test-workflow-runtime-baseline-macos", workflow_runtime_baseline["command"]["id"])
-        self.assertEqual("runtime-baseline-macos", workflow_runtime_baseline["target"])
+        self.assertEqual("test-family-suite", workflow_runtime_baseline["command"]["id"])
+        self.assertEqual("workflow/runtime-baseline-macos", workflow_runtime_baseline["target"])
 
     def test_parse_cli_supports_project_and_deploy_commands(self) -> None:
         manifest_module = load_manifest_module()
@@ -362,7 +362,7 @@ class CommandManifestTests(unittest.TestCase):
                 "project",
                 "subject",
                 "--id",
-                "subject/HelloWorldObject",
+                "subject/SolutionCorePack",
                 "--open-native-target",
                 "generated",
             ],
@@ -371,7 +371,7 @@ class CommandManifestTests(unittest.TestCase):
             "windows",
         )
         self.assertEqual("generate-project-subject", generate_subject["command"]["id"])
-        self.assertEqual("subject/HelloWorldObject", generate_subject["options"]["id"])
+        self.assertEqual("subject/SolutionCorePack", generate_subject["options"]["id"])
         self.assertEqual("generated", generate_subject["options"]["open-native-target"])
 
         generate_core = manifest_module.parse_cli(
@@ -390,7 +390,7 @@ class CommandManifestTests(unittest.TestCase):
                 "project",
                 "subject",
                 "--id",
-                "subject/HelloWorldObject",
+                "subject/SolutionCorePack",
                 "--matrix",
                 "windows-managed-trace",
                 "--native-target",

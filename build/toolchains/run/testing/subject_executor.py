@@ -79,7 +79,13 @@ def _reused_primary_evidence_paths(stage: dict[str, Any], manifest: dict[str, An
     if kind == "source-resolve":
         return _dedupe_non_empty([_rewrite_reused_bucket_path(stage, str(manifest.get("sourcePath") or ""))])
     if kind == "host-input-build":
-        return _dedupe_non_empty([_rewrite_reused_bucket_path(stage, str(manifest.get("primaryAssemblyPath") or ""))])
+        additional_assembly_paths = [str(value) for value in list(manifest.get("additionalAssemblyPaths") or []) if value]
+        return _dedupe_non_empty(
+            [
+                _rewrite_reused_bucket_path(stage, str(manifest.get("primaryAssemblyPath") or "")),
+                *[_rewrite_reused_bucket_path(stage, value) for value in additional_assembly_paths],
+            ]
+        )
     if kind == "analysis-frontend":
         return _dedupe_non_empty(
             [

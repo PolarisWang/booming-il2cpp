@@ -5,7 +5,9 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-HOST_EMBEDDING_PROGRAM_PATH = REPO_ROOT / "subjects" / "HostEmbeddingLite" / "source" / "Program.cs"
+HOST_EMBEDDING_PROGRAM_PATH = (
+    REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Slices" / "HostEmbeddingLite" / "Program.cs"
+)
 
 
 class Phase3HostEmbeddingOwnershipProtocolTests(unittest.TestCase):

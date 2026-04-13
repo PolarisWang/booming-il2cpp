@@ -48,16 +48,6 @@ RUNTIME_BASELINE_MACOS_PREPARE_STEPS = [
     ["build", "platform", "ios-arm64-packaging"],
     ["build", "platform", "linux-x64-packaging"],
 ]
-
-
-def _normalize_prepare_scope(scope: str) -> str:
-    mapping = {
-        "workflow-roadmap0-windows": "workflow-runtime-baseline-windows",
-        "workflow-roadmap0-macos": "workflow-runtime-baseline-macos",
-    }
-    return mapping.get(scope, scope)
-
-
 def resolve_prepare_scope(command_id: str) -> str:
     mapping = {
         "prepare": "global",
@@ -65,8 +55,6 @@ def resolve_prepare_scope(command_id: str) -> str:
         "prepare-smoke": "smoke",
         "prepare-workflow-runtime-baseline-windows": "workflow-runtime-baseline-windows",
         "prepare-workflow-runtime-baseline-macos": "workflow-runtime-baseline-macos",
-        "prepare-verify-roadmap-0-windows": "workflow-runtime-baseline-windows",
-        "prepare-verify-roadmap-0-macos": "workflow-runtime-baseline-macos",
     }
     return mapping[command_id]
 
@@ -84,7 +72,6 @@ def _unique_steps(steps: list[list[str]]) -> list[list[str]]:
 
 
 def _prepare_plan(scope: str, host_platform: str) -> list[list[str]]:
-    scope = _normalize_prepare_scope(scope)
     if scope == "android-host":
         return []
     if scope == "smoke":
@@ -107,7 +94,6 @@ def _prepare_plan(scope: str, host_platform: str) -> list[list[str]]:
 
 
 def _prepare_requires_cmake(scope: str, host_platform: str) -> bool:
-    scope = _normalize_prepare_scope(scope)
     if scope in {"workflow-runtime-baseline-windows", "workflow-runtime-baseline-macos"}:
         return True
     return scope == "global" and host_platform in {"windows", "macos"}
@@ -146,12 +132,10 @@ def _execute_prepare_step(
 
 
 def prepare_state_path(repo_root: Path, scope: str) -> Path:
-    scope = _normalize_prepare_scope(scope)
     return repo_root / "artifacts" / "run" / "prepare" / f"{scope}.json"
 
 
 def resolve_clean_paths(repo_root: Path, scope: str) -> list[Path]:
-    scope = _normalize_prepare_scope(scope)
     smoke_root = repo_root / "artifacts" / "smoke"
     run_root = repo_root / "artifacts" / "run"
     verify_root = repo_root / "artifacts" / "verify-runtime-baseline"

@@ -100,7 +100,7 @@ class BuildCommandTests(unittest.TestCase):
             REPO_ROOT
             / "artifacts"
             / "subjects"
-            / "HelloWorldObject"
+            / "SolutionCorePack"
             / "runs"
             / "subject-exec"
             / "analysis"
@@ -121,7 +121,7 @@ class BuildCommandTests(unittest.TestCase):
                             result = build_module.handle(command, REPO_ROOT, "windows", "build windows-x64-reference")
 
         self.assertEqual("ok", result.status)
-        refresh_mock.assert_called_once_with(REPO_ROOT, "HelloWorldObject", "windows-dev-output", "CHECK")
+        refresh_mock.assert_called_once_with(REPO_ROOT, "SolutionCorePack", "windows-native-check", "CHECK")
 
 
 if __name__ == "__main__":

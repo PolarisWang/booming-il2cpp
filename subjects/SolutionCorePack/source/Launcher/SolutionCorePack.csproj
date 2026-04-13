@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>SolutionCorePack</AssemblyName>
+    <RootNamespace>SolutionCorePack</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\reference\Chaos.TestFramework\Chaos.TestFramework.csproj" />
+    <ProjectReference Include="..\Slices\MainlineFeaturePack\MainlineFeaturePack.csproj" />
+    <ProjectReference Include="..\Slices\PerformanceFeaturePack\PerformanceFeaturePack.csproj" />
+    <ProjectReference Include="..\Archetypes\SolutionSimpleLib\App\GoldenSimpleLib.App.csproj" />
+    <ProjectReference Include="..\Archetypes\SolutionMultiProject\App\GoldenMultiProject.App.csproj" />
+    <ProjectReference Include="..\Archetypes\SolutionPackageReference\App\GoldenWithPackage.App.csproj" />
+  </ItemGroup>
+</Project>

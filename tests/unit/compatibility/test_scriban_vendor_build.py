@@ -13,7 +13,9 @@ SCRIBAN_DIRECTORY_BUILD_PROPS_PATH = REPO_ROOT / "third_party" / "scriban" / "sr
 MANAGED_DIRECTORY_BUILD_PROPS_PATH = REPO_ROOT / "src" / "managed" / "Directory.Build.props"
 SUBJECTS_DIRECTORY_BUILD_PROPS_PATH = REPO_ROOT / "subjects" / "Directory.Build.props"
 CONTRACTS_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "Chaos.IL2CPP.Contracts.csproj"
-MAINLINE_FEATURE_PACK_PROJECT_PATH = REPO_ROOT / "subjects" / "MainlineFeaturePack" / "source" / "MainlineFeaturePack.csproj"
+MAINLINE_FEATURE_PACK_PROJECT_PATH = (
+    REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Slices" / "MainlineFeaturePack" / "MainlineFeaturePack.csproj"
+)
 
 
 def _msbuild_compile_identities(project_path: Path, properties: list[str]) -> list[str]:

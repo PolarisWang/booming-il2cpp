@@ -35,6 +35,7 @@ MACOS_TRACE_SNAPSHOT_PATH = Path("tests/contracts/trace/snapshots/macos-warmup-t
 TRACE_SCHEMA_PATH = Path("tests/contracts/trace/schema/warmup-trace.schema.json")
 WINDOWS_REFERENCE_BUILD_TARGET = "chaos_subject_reference_proof"
 WINDOWS_REFERENCE_RUN_TARGET = "chaos_subject_reference_proof_run"
+WINDOWS_REFERENCE_CMAKE_BUILD_STRATEGY = "windows-reference-cmake"
 WINDOWS_DIRECT_BUILD_STRATEGY = "direct-msvc"
 WINDOWS_NATIVE_AOT_BUILD_TARGET = "chaos_subject_native_aot"
 WINDOWS_NATIVE_AOT_BUILD_STRATEGY = "direct-msvc-native-aot"
@@ -47,6 +48,8 @@ ANDROID_RUNTIME_ARGUMENT_ENVIRONMENTS = {
     "--heartbeat-interval-seconds=": "CHAOS_MOBILE_HOST_HEARTBEAT_INTERVAL_SECONDS",
     "--subject-id=": "CHAOS_MOBILE_HOST_SUBJECT_ID",
 }
+CHAOS_ENTRY_KIND_ARGUMENT_PREFIX = "--chaos-entry-kind="
+CHAOS_ENTRY_SLICE_ARGUMENT_PREFIX = "--chaos-entry-slice="
 VARIANT_MACROS = {
     "CHECK": {
         "codegen": ["CHAOS_VARIANT_CHECK", "CHAOS_VARIANT_NAME=CHECK"],
@@ -83,6 +86,44 @@ def _selection_runtime_arguments(selection: dict[str, Any]) -> list[str]:
 
 def _selection_workload_entry(selection: dict[str, Any]) -> str:
     return str(selection.get("workloadEntry") or "")
+
+
+def _selection_subject_entry_selection(selection: dict[str, Any]) -> dict[str, int]:
+    source = dict(selection.get("source") or {})
+    payload = source.get("entrySelection")
+    if payload is None:
+        return {}
+    if not isinstance(payload, dict):
+        raise RuntimeError("selection.source.entrySelection must be an object")
+
+    entry_kind = payload.get("entryKind")
+    entry_slice = payload.get("entrySlice")
+    if entry_kind is None and entry_slice is None:
+        return {}
+    if entry_kind is None or entry_slice is None:
+        raise RuntimeError("selection.source.entrySelection requires both entryKind and entrySlice")
+    if isinstance(entry_kind, bool) or not isinstance(entry_kind, int) or entry_kind < 0:
+        raise RuntimeError("selection.source.entrySelection.entryKind must be a non-negative integer")
+    if isinstance(entry_slice, bool) or not isinstance(entry_slice, int) or entry_slice < 0:
+        raise RuntimeError("selection.source.entrySelection.entrySlice must be a non-negative integer")
+
+    return {
+        "entryKind": int(entry_kind),
+        "entrySlice": int(entry_slice),
+    }
+
+
+def _selection_managed_runtime_arguments(selection: dict[str, Any]) -> list[str]:
+    runtime_arguments = _selection_runtime_arguments(selection)
+    subject_entry_selection = _selection_subject_entry_selection(selection)
+    if subject_entry_selection:
+        runtime_arguments.extend(
+            [
+                f"{CHAOS_ENTRY_KIND_ARGUMENT_PREFIX}{subject_entry_selection['entryKind']}",
+                f"{CHAOS_ENTRY_SLICE_ARGUMENT_PREFIX}{subject_entry_selection['entrySlice']}",
+            ]
+        )
+    return runtime_arguments
 
 
 def _android_runtime_environment_exports(runtime_arguments: list[str]) -> list[str]:
@@ -182,11 +223,7 @@ def _dotnet_intermediate_args(project_name: str, host_platform: str) -> list[str
     if intermediate_root is None:
         return []
 
-    intermediate_text = intermediate_root.as_posix() + "/$(MSBuildProjectName)/"
-    return [
-        f"-p:IntermediateOutputPath={intermediate_text}",
-        f"-p:MSBuildProjectExtensionsPath={intermediate_text}",
-    ]
+    return [f"-p:ChaosTempIntermediateRoot={intermediate_root.as_posix()}/"]
 
 
 def _success_result(
@@ -341,12 +378,14 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
     output_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     output_root.mkdir(parents=True, exist_ok=True)
     host_platform = str(request["selection"]["executionContext"]["hostPlatform"])
+    primary_project_path_text = subjects_module.resolve_source_primary_project_path(source)
+    primary_project_path = _resolve(repo_root, primary_project_path_text)
 
     _run_checked(
         [
             "dotnet",
             "build",
-            str(_resolve(repo_root, str(source["path"]))),
+            str(primary_project_path),
             "-c",
             "Release",
             "-m:1",
@@ -359,18 +398,33 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
     )
 
     subject_id = str(request["selection"]["subjectId"])
-    primary_assembly_path = output_root / f"{subject_id}.dll"
+    primary_assembly_path = output_root / f"{primary_project_path.stem}.dll"
+    solution_assembly_names = set(subjects_module.resolve_source_solution_assembly_names(repo_root, source))
+    additional_assembly_paths = [
+        _relative(repo_root, candidate)
+        for candidate in sorted(output_root.iterdir())
+        if candidate.is_file()
+        and candidate.suffix.lower() == ".dll"
+        and not candidate.samefile(primary_assembly_path)
+        and candidate.stem in solution_assembly_names
+    ]
     files = [
         _relative(repo_root, candidate)
         for candidate in sorted(output_root.iterdir())
         if candidate.is_file()
-        and candidate.suffix.lower() in {".dll", ".deps.json", ".runtimeconfig.json", ".pdb", ".exe"}
+        and (
+            candidate.suffix.lower() in {".dll", ".pdb", ".exe"}
+            or candidate.name.lower().endswith(".deps.json")
+            or candidate.name.lower().endswith(".runtimeconfig.json")
+        )
     ]
     manifest = {
         "subjectId": subject_id,
         "bucket": "host-input",
         "sourceManifestPath": str(request["upstream"]["source"]["manifestPath"]),
+        "primaryProjectPath": primary_project_path_text,
         "primaryAssemblyPath": _relative(repo_root, primary_assembly_path),
+        "additionalAssemblyPaths": additional_assembly_paths,
         "variant": _selection_variant(selection),
         "files": files,
     }
@@ -378,7 +432,7 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
     return _success_result(
         bucket_manifest_path=request["paths"]["manifestPath"],
         report_paths=[],
-        primary_evidence_paths=[_relative(repo_root, primary_assembly_path)],
+        primary_evidence_paths=[_relative(repo_root, primary_assembly_path), *additional_assembly_paths],
     )
 
 
@@ -407,12 +461,19 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
     variant = _selection_variant(selection)
     variant_macros = _variant_macros(variant)
     assembly_path = _resolve(repo_root, str(host_input_manifest["primaryAssemblyPath"]))
+    additional_assembly_paths = [
+        _resolve(repo_root, str(path))
+        for path in list(host_input_manifest.get("additionalAssemblyPaths") or [])
+        if str(path)
+    ]
     output_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     output_root.mkdir(parents=True, exist_ok=True)
     driver_arguments = ["dotnet", str(driver_dll_path), str(assembly_path), str(output_root)]
     entry_point_subject_id = str(dict(selection.get("source") or {}).get("entry") or "")
     if entry_point_subject_id:
         driver_arguments.extend(["--entry-point-subject-id", entry_point_subject_id])
+    for additional_assembly_path in additional_assembly_paths:
+        driver_arguments.extend(["--additional-assembly", str(additional_assembly_path)])
 
     _run_checked(
         driver_arguments,
@@ -571,14 +632,7 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
     selection = dict(request["selection"])
     variant = _selection_variant(selection)
     variant_macros = _variant_macros(variant)
-    compiler_path = tooling_module.find_visual_cpp_executable()
-    if not compiler_path:
-        raise RuntimeError("MSVC cl.exe not found for windows-x64 subject build")
-
-    developer_env = tooling_module.windows_developer_environment() or None
-    compile_flags, link_flags = _windows_variant_build_flags(variant)
     out_root = build_root / "out"
-    obj_root = build_root / "obj"
     generated_manifest_path = _resolve(repo_root, request["upstream"]["generated"]["manifestPath"])
     generated_manifest = read_json(generated_manifest_path) if generated_manifest_path.is_file() else {}
     if not isinstance(generated_manifest, dict):
@@ -589,29 +643,21 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
     if native_aot_build:
         if not generated_source_path_text:
             raise RuntimeError("generated manifest missing generatedSourcePath")
+        compiler_path = tooling_module.find_visual_cpp_executable()
+        if not compiler_path:
+            raise RuntimeError("MSVC cl.exe not found for windows-x64 subject build")
+
+        developer_env = tooling_module.windows_developer_environment() or None
+        compile_flags, link_flags = _windows_variant_build_flags(variant)
         host_source_path = repo_root / "src" / "native" / "benchmark-host" / "native_aot_main.cpp"
         generated_source_path = _resolve(repo_root, generated_source_path_text)
         output_executable_path = out_root / f"{WINDOWS_NATIVE_AOT_BUILD_TARGET}.exe"
         build_strategy = WINDOWS_NATIVE_AOT_BUILD_STRATEGY
         build_kind = "native-aot"
         pdb_name = "chaos_subject_native_aot.pdb"
-    else:
-        generated_root = generated_manifest_path.parent
-        host_source_path = repo_root / "subjects" / str(selection["subjectId"]) / "validation" / "proof" / "native-reference" / "main.cpp"
-        generated_source_path = (
-            _resolve(repo_root, generated_source_path_text)
-            if generated_source_path_text
-            else generated_root / "generated" / "native-reference.generated.cpp"
-        )
-        output_executable_path = out_root / f"{WINDOWS_REFERENCE_BUILD_TARGET}.exe"
-        build_strategy = WINDOWS_DIRECT_BUILD_STRATEGY
-        build_kind = "native-reference"
-        pdb_name = "chaos_subject_reference_proof.pdb"
-
-    out_root.mkdir(parents=True, exist_ok=True)
-    obj_root.mkdir(parents=True, exist_ok=True)
-
-    if native_aot_build:
+        obj_root = build_root / "obj"
+        out_root.mkdir(parents=True, exist_ok=True)
+        obj_root.mkdir(parents=True, exist_ok=True)
         include_roots = [
             repo_root / "src" / "native" / "benchmark-host",
         ]
@@ -619,48 +665,122 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
             host_source_path,
             generated_source_path,
         ]
-    else:
-        include_roots = [
-            repo_root / "contracts" / "native" / "v0",
-            repo_root / "contracts" / "engine" / "v0",
-            repo_root / "src" / "native" / "runtime-core",
-            repo_root / "src" / "native" / "engine-bridge",
-            repo_root / "src" / "native" / "bootstrap",
-            repo_root / "src" / "native" / "support",
-        ]
-        source_files = [
-            repo_root / "src" / "native" / "runtime-core" / "runtime_core.cpp",
-            repo_root / "src" / "native" / "engine-bridge" / "engine_bridge.cpp",
-            repo_root / "src" / "native" / "bootstrap" / "bootstrap.cpp",
-            repo_root / "src" / "native" / "support" / "support.cpp",
-            host_source_path,
-            generated_source_path,
-        ]
+        for source_file in source_files:
+            if not source_file.is_file():
+                raise RuntimeError(f"subject proof source is missing: {source_file}")
 
-    for source_file in source_files:
-        if not source_file.is_file():
-            raise RuntimeError(f"subject proof source is missing: {source_file}")
+        _run_checked(
+            [
+                str(compiler_path),
+                "/nologo",
+                "/std:c++17",
+                "/EHsc",
+                "/DWIN32",
+                "/D_WINDOWS",
+                "/DCHAOS_RUNTIME_ABI_STATIC",
+                *[f"/D{macro}" if '"' not in macro else f'/D{macro.replace("\"", "\\\"")}' for macro in variant_macros["native"]],
+                *compile_flags,
+                *[f"/I{include_root}" for include_root in include_roots],
+                f"/Fo{obj_root}\\",
+                f"/Fd{obj_root / pdb_name}",
+                f"/Fe{output_executable_path}",
+                *[str(source_file) for source_file in source_files],
+                *(["/link", *link_flags] if link_flags else []),
+            ],
+            repo_root=repo_root,
+            failure_message=f"subject native build failed: windows-x64-{build_kind}",
+            env=developer_env,
+        )
+
+        manifest = {
+            "subjectId": str(request["selection"]["subjectId"]),
+            "matrixId": str(request["selection"]["matrixId"]),
+            "bucket": "build",
+            "targetPlatform": str(request["selection"]["executionContext"]["targetPlatform"]),
+            "toolchainProfile": str(request["selection"]["executionContext"]["toolchainProfile"]),
+            "variant": variant,
+            "buildStrategy": build_strategy,
+            "buildKind": build_kind,
+            "compilerPath": str(compiler_path),
+            "variantMacros": {
+                "codegen": list(variant_macros["codegen"]),
+                "native": list(variant_macros["native"]),
+            },
+            "generatedManifestPath": str(request["upstream"]["generated"]["manifestPath"]),
+            "generatedSourcePath": _relative(repo_root, generated_source_path),
+            "hostSourcePath": _relative(repo_root, host_source_path),
+            "binaryRoot": _relative(repo_root, out_root),
+            "outputs": [_relative(repo_root, output_executable_path)],
+        }
+        write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
+        return _success_result(
+            bucket_manifest_path=request["paths"]["manifestPath"],
+            report_paths=[],
+            primary_evidence_paths=[_relative(repo_root, output_executable_path)],
+        )
+
+    generated_root = generated_manifest_path.parent
+    subject_proof_root = repo_root / "subjects" / str(selection["subjectId"]) / "validation" / "proof" / "native-reference"
+    host_source_path = subject_proof_root / "main.cpp"
+    generated_source_path = (
+        _resolve(repo_root, generated_source_path_text)
+        if generated_source_path_text
+        else generated_root / "generated" / "native-reference.generated.cpp"
+    )
+    runtime_root = build_root.parent / "runtime"
+    output_executable_path = out_root / f"{WINDOWS_REFERENCE_BUILD_TARGET}.exe"
+    required_paths = [
+        subject_proof_root / "CMakeLists.txt",
+        subject_proof_root / "RunNativeReferenceProof.cmake",
+        host_source_path,
+        generated_source_path,
+    ]
+    for required_path in required_paths:
+        if not required_path.is_file():
+            raise RuntimeError(f"subject proof source is missing: {required_path}")
+
+    cmake_path, developer_env, _ninja_path = _windows_native_cmake_context(repo_root)
+    generator = _windows_visual_studio_generator(repo_root)
+    instance_spec = tooling_module.detect_visual_studio_instance_spec(generator)
+    cmake_binary_dir = tooling_module.allocate_cmake_binary_dir(
+        build_root / "cmake",
+        host_platform="windows",
+        generator=generator,
+    )
 
     _run_checked(
         [
-            str(compiler_path),
-            "/nologo",
-            "/std:c++17",
-            "/EHsc",
-            "/DWIN32",
-            "/D_WINDOWS",
-            "/DCHAOS_RUNTIME_ABI_STATIC",
-            *[f"/D{macro}" if '"' not in macro else f'/D{macro.replace("\"", "\\\"")}' for macro in variant_macros["native"]],
-            *compile_flags,
-            *[f"/I{include_root}" for include_root in include_roots],
-            f"/Fo{obj_root}\\",
-            f"/Fd{obj_root / pdb_name}",
-            f"/Fe{output_executable_path}",
-            *[str(source_file) for source_file in source_files],
-            *(["/link", *link_flags] if link_flags else []),
+            cmake_path,
+            "-S",
+            str(repo_root),
+            "-B",
+            str(cmake_binary_dir),
+            "-G",
+            generator,
+            "-DROADMAP0_PRESET_TARGET=windows-x64-reference",
+            f"-DCHAOS_SUBJECT_VARIANT={variant}",
+            f"-DCHAOS_SUBJECT_PROOF_ROOT={subject_proof_root}",
+            f"-DCHAOS_SUBJECT_GENERATED_ROOT={generated_root}",
+            f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={out_root}",
+            f"-DCHAOS_SUBJECT_RUNTIME_ROOT={runtime_root}",
+            *([f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}"] if instance_spec else []),
         ],
         repo_root=repo_root,
-        failure_message=f"subject native build failed: windows-x64-{build_kind}",
+        failure_message="subject native build failed: windows-x64-native-reference-configure",
+        env=developer_env,
+    )
+    _run_checked(
+        [
+            cmake_path,
+            "--build",
+            str(cmake_binary_dir),
+            "--config",
+            "Release",
+            "--target",
+            WINDOWS_REFERENCE_BUILD_TARGET,
+        ],
+        repo_root=repo_root,
+        failure_message="subject native build failed: windows-x64-native-reference",
         env=developer_env,
     )
 
@@ -671,9 +791,8 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
         "targetPlatform": str(request["selection"]["executionContext"]["targetPlatform"]),
         "toolchainProfile": str(request["selection"]["executionContext"]["toolchainProfile"]),
         "variant": variant,
-        "buildStrategy": build_strategy,
-        "buildKind": build_kind,
-        "compilerPath": str(compiler_path),
+        "buildStrategy": WINDOWS_REFERENCE_CMAKE_BUILD_STRATEGY,
+        "buildKind": "native-reference",
         "variantMacros": {
             "codegen": list(variant_macros["codegen"]),
             "native": list(variant_macros["native"]),
@@ -683,6 +802,7 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
         "hostSourcePath": _relative(repo_root, host_source_path),
         "binaryRoot": _relative(repo_root, out_root),
         "outputs": [_relative(repo_root, output_executable_path)],
+        "cmakeBinaryDir": tooling_module.path_text(repo_root, cmake_binary_dir),
     }
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
     return _success_result(
@@ -1536,11 +1656,14 @@ def run_managed_runtime_output(*, repo_root: Path, request: dict[str, Any]) -> d
     if not isinstance(host_input_manifest, dict):
         raise RuntimeError("host-input manifest must be an object")
 
+    selection = dict(request["selection"])
     assembly_path = _resolve(repo_root, str(host_input_manifest["primaryAssemblyPath"]))
     runtime_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     runtime_root.mkdir(parents=True, exist_ok=True)
+    runtime_arguments = _selection_managed_runtime_arguments(selection)
+    subject_entry_selection = _selection_subject_entry_selection(selection)
 
-    completed = run_process(["dotnet", str(assembly_path)], cwd=repo_root)
+    completed = run_process(["dotnet", str(assembly_path), *runtime_arguments], cwd=repo_root)
     stdout_path = runtime_root / "stdout.log"
     stderr_path = runtime_root / "stderr.log"
     exit_code_path = runtime_root / "exit-code.txt"
@@ -1558,8 +1681,11 @@ def run_managed_runtime_output(*, repo_root: Path, request: dict[str, Any]) -> d
         "stdoutPath": _relative(repo_root, stdout_path),
         "stderrPath": _relative(repo_root, stderr_path),
         "exitCodePath": _relative(repo_root, exit_code_path),
+        "arguments": list(runtime_arguments),
         "outputLines": output_lines,
     }
+    if subject_entry_selection:
+        manifest["subjectEntrySelection"] = subject_entry_selection
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
 
     if completed.returncode != 0:

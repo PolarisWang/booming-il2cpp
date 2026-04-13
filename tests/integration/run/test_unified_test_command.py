@@ -29,60 +29,69 @@ def load_module(path: Path, module_name: str):
 
 
 class UnifiedTestCommandTests(unittest.TestCase):
-    def test_public_suite_resolution_maps_to_legacy_commands(self) -> None:
+    def test_public_suite_resolution_returns_direct_execution_specs(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command")
+        smoke_execution = test_module.resolve_public_test_execution_spec(
+            "smoke",
+            "managed-entry-basic",
+            host_platform="macos",
+        )
 
         self.assertEqual(
-            "build-smoke-helloworld",
-            test_module.resolve_legacy_test_command_id("smoke", "HelloWorld", stage="build", host_platform="macos"),
+            "smoke-run",
+            smoke_execution["kind"],
         )
         self.assertEqual(
-            "test-smoke-helloworld",
-            test_module.resolve_legacy_test_command_id("smoke", "HelloWorld", stage="all", host_platform="macos"),
+            "SolutionCorePack",
+            smoke_execution["targetSubjectId"],
         )
         self.assertEqual(
-            "test-contract-analysis-schema",
-            test_module.resolve_legacy_test_command_id("contract", "analysis-schema", stage="all", host_platform="macos"),
+            "contract-check",
+            test_module.resolve_public_test_execution_spec(
+                "contract",
+                "analysis-schema",
+                host_platform="macos",
+            )["kind"],
         )
         self.assertEqual(
-            "test-contract-trace-schema",
-            test_module.resolve_legacy_test_command_id("contract", "trace-schema", stage="all", host_platform="macos"),
+            "trace-compare",
+            test_module.resolve_public_test_execution_spec(
+                "contract",
+                "trace-compare-macos",
+                host_platform="macos",
+            )["kind"],
         )
         self.assertEqual(
-            "build-native-contract-abi",
-            test_module.resolve_legacy_test_command_id("contract", "native-abi", stage="all", host_platform="macos"),
+            "native-contract",
+            test_module.resolve_public_test_execution_spec(
+                "contract",
+                "native-abi",
+                host_platform="macos",
+            )["kind"],
         )
         self.assertEqual(
-            "build-native-contract-bridge",
-            test_module.resolve_legacy_test_command_id("contract", "native-bridge", stage="all", host_platform="macos"),
+            "registry-object",
+            test_module.resolve_public_test_execution_spec(
+                "workflow",
+                "runtime-baseline-macos",
+                host_platform="macos",
+            )["kind"],
         )
         self.assertEqual(
-            "test-workflow-runtime-baseline-macos",
-            test_module.resolve_legacy_test_command_id("workflow", "runtime-baseline-macos", stage="all", host_platform="macos"),
+            "platform-gate",
+            test_module.resolve_public_test_execution_spec(
+                "gate",
+                "linux-x64-packaging",
+                host_platform="macos",
+            )["kind"],
         )
         self.assertEqual(
-            "test-workflow-runtime-baseline-windows",
-            test_module.resolve_legacy_test_command_id("workflow", "runtime-baseline-windows", stage="all", host_platform="windows"),
-        )
-        self.assertEqual(
-            "build-platform-linux-x64-packaging",
-            test_module.resolve_legacy_test_command_id("gate", "linux-x64-packaging", stage="all", host_platform="macos"),
-        )
-        self.assertEqual(
-            "build-platform-ios-arm64-packaging",
-            test_module.resolve_legacy_test_command_id("gate", "ios-arm64-packaging", stage="all", host_platform="macos"),
-        )
-        self.assertEqual(
-            "build-platform-macos-reference-desktop",
-            test_module.resolve_legacy_test_command_id("gate", "macos-reference-desktop", stage="all", host_platform="macos"),
-        )
-        self.assertEqual(
-            "build-platform-android-arm64-smoke",
-            test_module.resolve_legacy_test_command_id("gate", "android-arm64-smoke", stage="all", host_platform="windows"),
-        )
-        self.assertEqual(
-            "build-platform-windows-reference-desktop",
-            test_module.resolve_legacy_test_command_id("gate", "windows-reference-desktop", stage="all", host_platform="windows"),
+            "reference-desktop-gate",
+            test_module.resolve_public_test_execution_spec(
+                "gate",
+                "macos-reference-desktop",
+                host_platform="macos",
+            )["kind"],
         )
 
     def test_public_test_list_surfaces_unified_suite_ids(self) -> None:
@@ -97,41 +106,28 @@ class UnifiedTestCommandTests(unittest.TestCase):
         self.assertIn("contract/trace-schema", item_ids)
         self.assertIn("contract/native-abi", item_ids)
         self.assertIn("contract/native-bridge", item_ids)
-        self.assertIn("smoke/HelloWorld", item_ids)
+        self.assertIn("smoke/managed-entry-basic", item_ids)
         self.assertIn("gate/ios-arm64-packaging", item_ids)
         self.assertIn("gate/linux-x64-packaging", item_ids)
         self.assertIn("gate/macos-reference-desktop", item_ids)
         self.assertIn("workflow/runtime-baseline-macos", item_ids)
-        self.assertNotIn("test-smoke-helloworld", item_ids)
-        self.assertNotIn("test-workflow-runtime-baseline-macos", item_ids)
 
         windows_items = test_module.list_public_test_suites(manifest, "windows")
         windows_item_ids = {item["id"] for item in windows_items}
         self.assertIn("gate/android-arm64-smoke", windows_item_ids)
         self.assertIn("gate/windows-reference-desktop", windows_item_ids)
 
-    def test_legacy_test_commands_gain_migration_guidance(self) -> None:
+    def test_removed_legacy_smoke_command_returns_migration_guidance(self) -> None:
         run_module = load_module(RUN_MODULE_PATH, "chaos_run_main_for_legacy_migration")
-        result_module = load_module(RESULT_MODULE_PATH, "chaos_run_result_for_legacy_migration")
-        result = result_module.CommandResult.success(
-            command="build smoke HelloWorld",
-            host_platform="macos",
-            target="HelloWorld",
-            payload={"artifacts": ["artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll"]},
-            text="build completed\n",
+        result = run_module.build_removed_command_migration_guidance(
+            "build smoke managed-entry-basic",
+            "macos",
         )
 
-        wrapped = run_module.add_legacy_test_migration_guidance(
-            {
-                "id": "build-smoke-helloworld",
-                "public": False,
-                "replacement_syntax": "test smoke HelloWorld --stage build",
-            },
-            result,
-        )
-
-        self.assertIn("Deprecated test command", wrapped.text)
-        self.assertEqual("test smoke HelloWorld --stage build", wrapped.payload["migration"]["replacementSyntax"])
+        self.assertIsNotNone(result)
+        assert result is not None
+        self.assertIn("Removed command", result.text or "")
+        self.assertEqual("test smoke managed-entry-basic --stage build", result.payload["migration"]["replacementSyntax"])
 
     def test_removed_verify_entrypoint_returns_migration_guidance(self) -> None:
         run_module = load_module(RUN_MODULE_PATH, "chaos_run_main_for_removed_verify_migration")

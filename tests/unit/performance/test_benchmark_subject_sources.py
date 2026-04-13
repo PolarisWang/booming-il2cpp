@@ -6,44 +6,40 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-BENCH_SUBJECT_ROOT = REPO_ROOT / "subjects"
 SHARED_PERF_PROJECT_PATH = "src/validation/perf/Benchmark.WorkloadEntry.PerfHarness/Benchmark.WorkloadEntry.PerfHarness.csproj"
-BENCHMARK_FEATURE_PACK_ROOT = BENCH_SUBJECT_ROOT / "PerformanceFeaturePack"
-HOT_UPDATE_HOST_PACK_ROOT = BENCH_SUBJECT_ROOT / "HotUpdateHostPack"
-MIXED_EXECUTION_FEATURE_PACK_ROOT = BENCH_SUBJECT_ROOT / "MixedExecutionFeaturePack"
-EXPECTED_HARNESS_ITERATIONS = {
-    "PerformanceFeaturePack": 2,
-    "MixedExecutionFeaturePack": 6,
-}
-CANONICAL_PERF_SUBJECTS = {
-    "PerformanceFeaturePack": {
-        "manifest_path": BENCHMARK_FEATURE_PACK_ROOT / "subject.manifest.json",
-        "source_path": "subjects/PerformanceFeaturePack/source/PerformanceFeaturePack.csproj",
-        "workload_entry": "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()",
+SOLUTION_CORE_PACK_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
+HOT_UPDATE_HOST_PACK_ROOT = REPO_ROOT / "subjects" / "HotUpdateHostPack"
+MIXED_EXECUTION_FEATURE_PACK_ROOT = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack"
+MANAGED_PERF_SUBJECTS = {
+    "HotUpdateHostPack": {
+        "manifest_path": HOT_UPDATE_HOST_PACK_ROOT / "subject.manifest.json",
+        "source_path": "subjects/HotUpdateHostPack/source/HotUpdateHostPack.sln",
+        "primary_project_path": "subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj",
+        "workload_entry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
+        "harness_iterations": 4,
     },
     "MixedExecutionFeaturePack": {
         "manifest_path": MIXED_EXECUTION_FEATURE_PACK_ROOT / "subject.manifest.json",
-        "source_path": "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj",
+        "source_path": "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln",
+        "primary_project_path": "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj",
         "workload_entry": "MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()",
+        "native_workload_entry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+        "harness_iterations": 6,
     },
 }
 
 
 class BenchmarkSubjectSourceTests(unittest.TestCase):
-    def test_benchmark_feature_pack_declares_first_batch_runtime_benchmarks(self) -> None:
-        manifest_path = BENCHMARK_FEATURE_PACK_ROOT / "subject.manifest.json"
-        project_path = BENCHMARK_FEATURE_PACK_ROOT / "source" / "PerformanceFeaturePack.csproj"
-        arithmetic_path = BENCHMARK_FEATURE_PACK_ROOT / "source" / "ArithmeticBenchmark.cs"
-        allocation_path = BENCHMARK_FEATURE_PACK_ROOT / "source" / "AllocationBenchmark.cs"
-        dispatch_path = BENCHMARK_FEATURE_PACK_ROOT / "source" / "DispatchBenchmark.cs"
-        generic_path = BENCHMARK_FEATURE_PACK_ROOT / "source" / "GenericBenchmark.cs"
+    def test_solution_core_pack_declares_internal_performance_slice_benchmarks(self) -> None:
+        manifest_path = SOLUTION_CORE_PACK_ROOT / "subject.manifest.json"
+        project_path = SOLUTION_CORE_PACK_ROOT / "source" / "Slices" / "PerformanceFeaturePack" / "PerformanceFeaturePack.csproj"
+        arithmetic_path = SOLUTION_CORE_PACK_ROOT / "source" / "Slices" / "PerformanceFeaturePack" / "ArithmeticBenchmark.cs"
+        allocation_path = SOLUTION_CORE_PACK_ROOT / "source" / "Slices" / "PerformanceFeaturePack" / "AllocationBenchmark.cs"
+        dispatch_path = SOLUTION_CORE_PACK_ROOT / "source" / "Slices" / "PerformanceFeaturePack" / "DispatchBenchmark.cs"
+        generic_path = SOLUTION_CORE_PACK_ROOT / "source" / "Slices" / "PerformanceFeaturePack" / "GenericBenchmark.cs"
 
-        self.assertTrue(manifest_path.is_file(), msg=f"missing manifest: {manifest_path}")
-        self.assertTrue(project_path.is_file(), msg=f"missing project: {project_path}")
-        self.assertTrue(arithmetic_path.is_file(), msg=f"missing arithmetic slice: {arithmetic_path}")
-        self.assertTrue(allocation_path.is_file(), msg=f"missing allocation slice: {allocation_path}")
-        self.assertTrue(dispatch_path.is_file(), msg=f"missing dispatch slice: {dispatch_path}")
-        self.assertTrue(generic_path.is_file(), msg=f"missing generic slice: {generic_path}")
+        for path in [manifest_path, project_path, arithmetic_path, allocation_path, dispatch_path, generic_path]:
+            self.assertTrue(path.is_file(), msg=f"missing solution core perf asset: {path}")
 
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         arithmetic_source = arithmetic_path.read_text(encoding="utf-8")
@@ -51,11 +47,17 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         dispatch_source = dispatch_path.read_text(encoding="utf-8")
         generic_source = generic_path.read_text(encoding="utf-8")
 
-        self.assertEqual("PerformanceFeaturePack", manifest["subjectId"])
-        self.assertEqual("subjects/PerformanceFeaturePack/source/PerformanceFeaturePack.csproj", manifest["source"]["path"])
+        self.assertEqual("SolutionCorePack", manifest["subjectId"])
+        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
+        self.assertEqual(
+            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            manifest["source"]["primaryProjectPath"],
+        )
         self.assertEqual("require", manifest["testDeclarationMode"])
-        self.assertEqual("PerformanceFeaturePack", manifest["displayName"])
         self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
+        native_perf_matrix = next(matrix for matrix in manifest["environmentMatrices"] if matrix["matrixId"] == "windows-native-perf")
+        self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", native_perf_matrix["source"]["entry"])
+        self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", native_perf_matrix["workloadEntry"])
 
         self.assertIn("ChaosBenchmark(", arithmetic_source)
         self.assertIn('Alias = "arithmetic-bench"', arithmetic_source)
@@ -77,38 +79,50 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn("ChaosRuntimeFeature.GenericSharing", generic_source)
         self.assertIn("Dictionary<string, int>", generic_source)
 
-    def test_all_bench_subjects_keep_perf_analysis_outside_subject_source(self) -> None:
+    def test_managed_benchmark_subjects_keep_perf_harness_external_while_solution_core_pack_uses_native_pipeline(self) -> None:
         self.assertTrue((REPO_ROOT / SHARED_PERF_PROJECT_PATH).is_file())
 
-        for subject_id, spec in CANONICAL_PERF_SUBJECTS.items():
+        for subject_id, spec in MANAGED_PERF_SUBJECTS.items():
             manifest_path = spec["manifest_path"]
-            self.assertTrue(manifest_path.is_file(), msg=f"missing canonical perf manifest: {manifest_path}")
+            self.assertTrue(manifest_path.is_file(), msg=f"missing managed perf manifest: {manifest_path}")
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             workload_entry = str(spec["workload_entry"])
 
             self.assertEqual(str(spec["source_path"]), manifest["source"]["path"])
+            self.assertEqual(str(spec["primary_project_path"]), manifest["source"]["primaryProjectPath"])
             self.assertEqual(workload_entry, manifest["workloadEntry"])
             self.assertEqual("require", manifest["testDeclarationMode"])
-            self.assertEqual(EXPECTED_HARNESS_ITERATIONS[subject_id], manifest["validation"]["perf"]["harnessIterations"])
+            self.assertEqual(spec["harness_iterations"], manifest["validation"]["perf"]["harnessIterations"])
             self.assertEqual(SHARED_PERF_PROJECT_PATH, manifest["validation"]["perf"]["project"])
             self.assertNotIn("Program::Main(System.String[])", json.dumps(manifest, ensure_ascii=False))
 
             for pipeline in manifest["executionPipelines"]:
-                pipeline_id = pipeline["pipelineId"]
                 stage_kinds = {stage["kind"] for stage in pipeline["stages"]}
-                if pipeline_id == "native-benchmark":
+                if pipeline["pipelineId"] == "native-benchmark":
                     self.assertIn("generated-native-aot", stage_kinds, msg=subject_id)
                     self.assertNotIn("generated-native-proof", stage_kinds, msg=subject_id)
 
             for matrix in manifest["environmentMatrices"]:
                 if matrix["pipelineId"] == "native-benchmark":
-                    self.assertEqual(workload_entry, matrix["source"]["entry"], msg=subject_id)
+                    native_workload_entry = str(spec.get("native_workload_entry") or workload_entry)
+                    self.assertEqual(native_workload_entry, matrix["source"]["entry"], msg=subject_id)
+
+        solution_core_manifest = json.loads((SOLUTION_CORE_PACK_ROOT / "subject.manifest.json").read_text(encoding="utf-8"))
+        self.assertNotIn("project", solution_core_manifest["validation"]["perf"])
+        self.assertNotIn("harnessIterations", solution_core_manifest["validation"]["perf"])
+        native_pipeline = next(
+            pipeline for pipeline in solution_core_manifest["executionPipelines"] if pipeline["pipelineId"] == "native-benchmark"
+        )
+        native_stage_kinds = {stage["kind"] for stage in native_pipeline["stages"]}
+        self.assertIn("generated-native-aot", native_stage_kinds)
+        self.assertNotIn("generated-native-proof", native_stage_kinds)
 
     def test_hot_update_host_pack_declares_hot_update_unit_and_benchmark_slices(self) -> None:
         manifest_path = HOT_UPDATE_HOST_PACK_ROOT / "subject.manifest.json"
         project_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "HotUpdateHostPack.csproj"
         skeleton_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "HotUpdateSkeletonProofEntry.cs"
         replacement_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "MethodReplacementProofEntry.cs"
+        shared_contract_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "SharedContractProofEntry.cs"
         rollback_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "VersionRollbackProofEntry.cs"
         dispatch_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "HotUpdateDispatchBenchmark.cs"
         load_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "HotUpdateLoadBenchmark.cs"
@@ -119,6 +133,7 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
             project_path,
             skeleton_path,
             replacement_path,
+            shared_contract_path,
             rollback_path,
             dispatch_path,
             load_path,
@@ -129,15 +144,24 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         skeleton_source = skeleton_path.read_text(encoding="utf-8")
         replacement_source = replacement_path.read_text(encoding="utf-8")
+        shared_contract_source = shared_contract_path.read_text(encoding="utf-8")
         rollback_source = rollback_path.read_text(encoding="utf-8")
         dispatch_source = dispatch_path.read_text(encoding="utf-8")
         load_source = load_path.read_text(encoding="utf-8")
         roundtrip_source = roundtrip_path.read_text(encoding="utf-8")
 
         self.assertEqual("HotUpdateHostPack", manifest["subjectId"])
-        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj", manifest["source"]["path"])
+        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.sln", manifest["source"]["path"])
+        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj", manifest["source"]["primaryProjectPath"])
         self.assertEqual("require", manifest["testDeclarationMode"])
         self.assertEqual("HotUpdateHostPack/Program::Main()", manifest["source"]["entry"])
+        self.assertEqual("HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
+        self.assertEqual("dotnet-solution", manifest["sourceModel"])
+        self.assertEqual(["proof"], manifest["validationProfiles"]["managed-output"])
+        self.assertEqual(["perf"], manifest["validationProfiles"]["perf-profile"])
+        self.assertEqual(4, manifest["validation"]["perf"]["harnessIterations"])
+        self.assertEqual(SHARED_PERF_PROJECT_PATH, manifest["validation"]["perf"]["project"])
+        self.assertEqual("HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()", manifest["environmentMatrices"][3]["source"]["entry"])
 
         self.assertIn("ChaosUnitTest(", skeleton_source)
         self.assertIn('Alias = "hot-update-skeleton-proof"', skeleton_source)
@@ -147,6 +171,10 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn("ChaosUnitTest(", replacement_source)
         self.assertIn('Alias = "method-replacement-proof"', replacement_source)
         self.assertIn("ChaosUnitCategory.HotUpdateContract", replacement_source)
+
+        self.assertIn("ChaosUnitTest(", shared_contract_source)
+        self.assertIn('Alias = "shared-contract-proof"', shared_contract_source)
+        self.assertIn("ContractIdentityWitness", shared_contract_source)
 
         self.assertIn("ChaosUnitTest(", rollback_source)
         self.assertIn('Alias = "version-rollback-proof"', rollback_source)
@@ -173,6 +201,7 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "MixedExecutionProofEntry.cs"
         lowering_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "InterpreterLoweringProofEntry.cs"
         benchmark_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "MixedExecutionBenchmark.cs"
+        native_benchmark_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "MixedExecutionNativeBenchmark.cs"
         arithmetic_support_project_path = (
             MIXED_EXECUTION_FEATURE_PACK_ROOT
             / "source"
@@ -186,6 +215,7 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
             proof_path,
             lowering_path,
             benchmark_path,
+            native_benchmark_path,
             arithmetic_support_project_path,
         ]:
             self.assertTrue(path.is_file(), msg=f"missing mixed execution feature pack asset: {path}")
@@ -194,11 +224,14 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         proof_source = proof_path.read_text(encoding="utf-8")
         lowering_source = lowering_path.read_text(encoding="utf-8")
         benchmark_source = benchmark_path.read_text(encoding="utf-8")
+        native_benchmark_source = native_benchmark_path.read_text(encoding="utf-8")
 
         self.assertEqual("MixedExecutionFeaturePack", manifest["subjectId"])
-        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", manifest["source"]["path"])
+        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln", manifest["source"]["path"])
+        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", manifest["source"]["primaryProjectPath"])
         self.assertEqual("require", manifest["testDeclarationMode"])
         self.assertEqual("MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
+        self.assertEqual("dotnet-solution", manifest["sourceModel"])
 
         self.assertIn("ChaosUnitTest(", proof_source)
         self.assertIn('Alias = "mixed-execution-proof"', proof_source)
@@ -213,8 +246,17 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn("ChaosBenchmark(", benchmark_source)
         self.assertIn('Alias = "mixed-execution-bench"', benchmark_source)
         self.assertIn("ChaosBenchmarkCategory.RuntimeDispatch", benchmark_source)
+        self.assertIn("public static int RunWorkload()", benchmark_source)
         self.assertIn("AotCompute", benchmark_source)
         self.assertIn("InterpreterCompute", benchmark_source)
+
+        self.assertEqual(
+            "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+            manifest["environmentMatrices"][2]["source"]["entry"],
+        )
+        self.assertIn("ChaosBenchmark(", native_benchmark_source)
+        self.assertIn('Alias = "mixed-execution-native-bench"', native_benchmark_source)
+        self.assertIn("public static int RunWorkload()", native_benchmark_source)
 
 
 if __name__ == "__main__":

@@ -92,14 +92,20 @@ public sealed class NativeAotEmitter
         ManagedClosureManifestArtifact closureManifest,
         string entrySubjectId)
     {
-        var inputAssemblyPath = ResolveInputAssemblyPath(managedClosureRoot, closureManifest.InputAssemblyPath);
+        var inputAssemblyPath = ResolveManifestAssemblyPath(managedClosureRoot, closureManifest.InputAssemblyPath);
+        var additionalAssemblyPaths = closureManifest.AdditionalAssemblyPaths?
+            .Where(path => !string.IsNullOrWhiteSpace(path))
+            .Select(path => ResolveManifestAssemblyPath(managedClosureRoot, path))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
         var loader = new LoaderStage();
-        var loadedAssembly = loader.Load(new ManagedClosureRequest(
+        var loadedWorld = loader.LoadMultiple(new ManagedClosureRequest(
             inputAssemblyPath,
             managedClosureRoot,
-            EntryPointSubjectIdOverride: entrySubjectId));
+            EntryPointSubjectIdOverride: entrySubjectId,
+            AdditionalAssemblyPaths: additionalAssemblyPaths));
 
-        var entryMethod = loadedAssembly.Methods.FirstOrDefault(method =>
+        var entryMethod = loadedWorld.Methods.FirstOrDefault(method =>
             string.Equals(method.SubjectId, entrySubjectId, StringComparison.Ordinal));
         if (entryMethod is null)
         {
@@ -110,17 +116,17 @@ public sealed class NativeAotEmitter
         return entryMethod;
     }
 
-    private static string ResolveInputAssemblyPath(string managedClosureRoot, string manifestInputAssemblyPath)
+    private static string ResolveManifestAssemblyPath(string managedClosureRoot, string manifestAssemblyPath)
     {
-        if (Path.IsPathRooted(manifestInputAssemblyPath))
+        if (Path.IsPathRooted(manifestAssemblyPath))
         {
-            return manifestInputAssemblyPath;
+            return manifestAssemblyPath;
         }
 
         var candidates = new[]
         {
-            Path.GetFullPath(manifestInputAssemblyPath, Environment.CurrentDirectory),
-            Path.GetFullPath(manifestInputAssemblyPath, managedClosureRoot),
+            Path.GetFullPath(manifestAssemblyPath, Environment.CurrentDirectory),
+            Path.GetFullPath(manifestAssemblyPath, managedClosureRoot),
         };
 
         foreach (var candidate in candidates)

@@ -487,6 +487,51 @@ def _find_primary_project_assembly(project_path: Path) -> Path | None:
     return None
 
 
+def _solution_assembly_paths(
+    repo_root: Path,
+    source: dict[str, Any],
+    *,
+    primary_project_path: Path,
+) -> list[Path]:
+    assembly_names = subjects_module.resolve_source_solution_assembly_names(repo_root, source)
+    if not assembly_names:
+        return []
+
+    primary_assembly = _find_primary_project_assembly(primary_project_path)
+    assembly_paths: list[Path] = []
+    seen: set[str] = set()
+
+    candidate_roots: list[Path] = []
+    if primary_assembly is not None:
+        candidate_roots.append(primary_assembly.parent)
+    candidate_roots.append(primary_project_path.parent)
+
+    for assembly_name in assembly_names:
+        candidates: list[Path] = []
+        for candidate_root in candidate_roots:
+            direct_candidate = candidate_root / f"{assembly_name}.dll"
+            if direct_candidate.is_file():
+                candidates.append(direct_candidate)
+            candidates.extend(
+                sorted(
+                    candidate_root.glob(f"bin/Debug/**/{assembly_name}.dll"),
+                    key=lambda candidate: (len(candidate.parts), str(candidate)),
+                )
+            )
+        for candidate in candidates:
+            if any(part in {"ref", "refint"} for part in candidate.parts):
+                continue
+            resolved = candidate.resolve()
+            key = str(resolved).lower() if os.name == "nt" else str(resolved)
+            if key in seen:
+                continue
+            seen.add(key)
+            assembly_paths.append(resolved)
+            break
+
+    return assembly_paths
+
+
 def _resolve_subject_assembly_paths(
     repo_root: Path,
     manifest: dict[str, Any],
@@ -495,40 +540,63 @@ def _resolve_subject_assembly_paths(
 ) -> list[Path]:
     source = dict(manifest.get("source") or {})
     source_type = str(source.get("type") or "")
-    project_path_text = str(source.get("path") or "")
-    if source_type != "dotnet-project" or not project_path_text:
+    if source_type != "dotnet-project":
         raise ValueError("declared test discovery currently requires source.type=dotnet-project")
 
+    project_path_text = subjects_module.resolve_source_primary_project_path(source)
     project_path = repo_root / project_path_text
     if not project_path.is_file():
         raise FileNotFoundError(f"subject source project missing: {project_path}")
 
-    existing_assembly = _find_primary_project_assembly(project_path)
-    if existing_assembly is not None:
-        return [existing_assembly]
+    source_path_text = str(source.get("path") or "").strip()
+    existing_solution_assemblies = _solution_assembly_paths(
+        repo_root,
+        source,
+        primary_project_path=project_path,
+    )
+    if existing_solution_assemblies:
+        return existing_solution_assemblies
+
+    existing_primary_assembly = _find_primary_project_assembly(project_path)
+    if existing_primary_assembly is not None:
+        return [existing_primary_assembly]
     if not build_if_missing:
         return []
+
+    build_target = project_path
+    if source_path_text.endswith(".sln"):
+        build_target = repo_root / source_path_text
+        if not build_target.is_file():
+            raise FileNotFoundError(f"subject source solution missing: {build_target}")
 
     completed = run_process(
         [
             "dotnet",
             "build",
-            str(project_path),
+            str(build_target),
             "-c",
             "Debug",
             "-m:1",
-            *_dotnet_intermediate_args(project_path.stem),
+            *_dotnet_intermediate_args(build_target.stem),
         ],
         cwd=repo_root,
     )
     if completed.returncode != 0:
         output = combine_process_output(completed)
-        raise RuntimeError(f"dotnet build failed: {project_path.relative_to(repo_root).as_posix()}\n{output}".strip())
+        raise RuntimeError(f"dotnet build failed: {build_target.relative_to(repo_root).as_posix()}\n{output}".strip())
 
-    built_assembly = _find_primary_project_assembly(project_path)
-    if built_assembly is None:
+    built_solution_assemblies = _solution_assembly_paths(
+        repo_root,
+        source,
+        primary_project_path=project_path,
+    )
+    if built_solution_assemblies:
+        return built_solution_assemblies
+
+    built_primary_assembly = _find_primary_project_assembly(project_path)
+    if built_primary_assembly is None:
         raise FileNotFoundError(f"built assembly missing for subject source project: {project_path}")
-    return [built_assembly]
+    return [built_primary_assembly]
 
 
 def build_subject_declared_test_catalog(

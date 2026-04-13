@@ -8,6 +8,6 @@
   "members": [
     {"type": "suite", "id": "contract/native-abi"},
     {"type": "suite", "id": "contract/native-bridge"},
-    {"type": "suite", "id": "smoke/PInvokeLite"}
+    {"type": "suite", "id": "smoke/native-interop-basic"}
   ]
 }

@@ -28,10 +28,10 @@ COMPATIBILITY_MATRIX_RUNNER_PATH = (
     REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "compatibility_matrix_runner.py"
 )
 COMPATIBILITY_MATRIX_CONFIG_PATH = (
-    REPO_ROOT / "subjects" / "CompatibilityMatrixProof" / "compatibility-matrix.json"
+    REPO_ROOT / "tests" / "fixtures" / "subjects" / "CompatibilityMatrixProof" / "compatibility-matrix.json"
 )
 COMPATIBILITY_MATRIX_SUBJECT_MANIFEST_PATH = (
-    REPO_ROOT / "subjects" / "CompatibilityMatrixProof" / "subject.manifest.json"
+    REPO_ROOT / "tests" / "fixtures" / "subjects" / "CompatibilityMatrixProof" / "subject.manifest.json"
 )
 COMPATIBILITY_MATRIX_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "compatibility-matrix"
 PERF_DASHBOARD_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "perf_dashboard.py"
@@ -274,19 +274,21 @@ class Phase8ProductizationGatesTests(unittest.TestCase):
         }
         self.assertTrue(
             {
-                ("GenericEcho", "windows-perf-dev", "perf.dev"),
-                ("GenericEcho", "windows-perf-release", "perf.release"),
-                ("MainlineFeaturePack", "windows-native-profile", "perf.profile"),
+                ("SolutionCorePack", "windows-native-perf", "perf.release"),
+                ("HotUpdateHostPack", "windows-managed-perf", "perf.release"),
+                ("MixedExecutionFeaturePack", "windows-managed-perf", "perf.release"),
+                ("MixedExecutionFeaturePack", "windows-native-perf", "perf.release"),
+                ("MixedExecutionFeaturePack", "windows-interpreter-perf", "perf.release"),
             }.issubset(discovered_entries)
         )
 
-        generic_echo_dev = next(
+        solution_core_pack_perf = next(
             entry
             for entry in config["entries"]
-            if entry["subjectId"] == "GenericEcho" and entry["matrixId"] == "windows-perf-dev"
+            if entry["subjectId"] == "SolutionCorePack" and entry["matrixId"] == "windows-native-perf"
         )
-        self.assertTrue(generic_echo_dev["baselinePath"].startswith("subjects/GenericEcho/baselines/perf/"))
-        self.assertIn("meanDurationMs", generic_echo_dev["metricKeys"])
+        self.assertTrue(solution_core_pack_perf["baselinePath"].startswith("subjects/SolutionCorePack/baselines/perf/"))
+        self.assertIn("meanDurationMs", solution_core_pack_perf["metricKeys"])
 
     def test_unsupported_feature_report_scanner_flags_fixture_patterns(self) -> None:
         report_module = load_module(

@@ -725,56 +725,23 @@ class RegistryCommandTests(unittest.TestCase):
             [item["id"] for item in result.payload["items"]],
         )
 
-    def test_legacy_runtime_baseline_system_id_maps_to_canonical_object(self) -> None:
+    def test_removed_runtime_baseline_system_alias_returns_not_found(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_system_dispatch_legacy_alias")
         manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_system_dispatch_legacy_alias")
-        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_system_dispatch_legacy_alias")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
-
-        def fake_session(
-            family: str,
-            suite: str,
-            stage: str,
-            repo_root: Path,
-            host_platform: str,
-            command_text: str,
-            manifest_payload: dict,
-        ):
-            del repo_root
-            del manifest_payload
-            request = session_module.TestRequest(
-                family=family,
-                suite=suite,
-                stage=stage,
-                command_text=command_text,
-            )
-            return session_module.SessionResult(
-                request=request,
-                host_platform=host_platform,
-                status="ok",
-                suite_results=[{"suiteId": request.suite_key, "status": "ok", "stageResults": {}}],
-                text=f"{request.suite_key} ok\n",
-                artifacts=[],
-                exit_code=0,
-            )
-
-        with patch.object(test_module, "_execute_public_test_session", side_effect=fake_session):
-            result = test_module.handle(
-                {"id": "test-system", "handler": "test.dispatch"},
-                REPO_ROOT,
-                "macos",
-                "test system --id system/roadmap-0-macos",
-                manifest,
-                {"id": "system/roadmap-0-macos"},
-            )
-
-        self.assertEqual("ok", result.status)
-        self.assertEqual("system/runtime-baseline-macos", result.target)
-        self.assertEqual("system/runtime-baseline-macos", result.payload["selectedObject"]["id"])
-        self.assertEqual(
-            "run test system --id system/runtime-baseline-macos",
-            result.payload["selectedObject"]["canonicalCommand"],
+        result = test_module.handle(
+            {"id": "test-system", "handler": "test.dispatch"},
+            REPO_ROOT,
+            "macos",
+            "test system --id system/roadmap-0-macos",
+            manifest,
+            {"id": "system/roadmap-0-macos"},
         )
+
+        self.assertEqual("error", result.status)
+        self.assertEqual("system/roadmap-0-macos", result.target)
+        self.assertEqual(["registry object not found: system/roadmap-0-macos"], result.errors)
+        self.assertEqual(2, result.payload["exitCode"])
 
     def test_linux_gate_system_dispatch_expands_registered_plan(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_linux_gate_system_dispatch")
@@ -831,56 +798,23 @@ class RegistryCommandTests(unittest.TestCase):
             [item["id"] for item in result.payload["items"]],
         )
 
-    def test_legacy_linux_gate_system_id_maps_to_canonical_object(self) -> None:
+    def test_removed_linux_gate_system_alias_returns_not_found(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_linux_gate_system_dispatch_legacy_alias")
         manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_linux_gate_system_dispatch_legacy_alias")
-        session_module = load_module(SESSION_MODULE_PATH, "chaos_run_session_linux_gate_system_dispatch_legacy_alias")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
-
-        def fake_session(
-            family: str,
-            suite: str,
-            stage: str,
-            repo_root: Path,
-            host_platform: str,
-            command_text: str,
-            manifest_payload: dict,
-        ):
-            del repo_root
-            del manifest_payload
-            request = session_module.TestRequest(
-                family=family,
-                suite=suite,
-                stage=stage,
-                command_text=command_text,
-            )
-            return session_module.SessionResult(
-                request=request,
-                host_platform=host_platform,
-                status="ok",
-                suite_results=[{"suiteId": request.suite_key, "status": "ok", "stageResults": {}}],
-                text=f"{request.suite_key} ok\n",
-                artifacts=[],
-                exit_code=0,
-            )
-
-        with patch.object(test_module, "_execute_public_test_session", side_effect=fake_session):
-            result = test_module.handle(
-                {"id": "test-system", "handler": "test.dispatch"},
-                REPO_ROOT,
-                "macos",
-                "test system --id system/roadmap-0-linux-packaging-gate",
-                manifest,
-                {"id": "system/roadmap-0-linux-packaging-gate"},
-            )
-
-        self.assertEqual("ok", result.status)
-        self.assertEqual("system/linux-packaging-gate", result.target)
-        self.assertEqual("system/linux-packaging-gate", result.payload["selectedObject"]["id"])
-        self.assertEqual(
-            "run test system --id system/linux-packaging-gate",
-            result.payload["selectedObject"]["canonicalCommand"],
+        result = test_module.handle(
+            {"id": "test-system", "handler": "test.dispatch"},
+            REPO_ROOT,
+            "macos",
+            "test system --id system/roadmap-0-linux-packaging-gate",
+            manifest,
+            {"id": "system/roadmap-0-linux-packaging-gate"},
         )
+
+        self.assertEqual("error", result.status)
+        self.assertEqual("system/roadmap-0-linux-packaging-gate", result.target)
+        self.assertEqual(["registry object not found: system/roadmap-0-linux-packaging-gate"], result.errors)
+        self.assertEqual(2, result.payload["exitCode"])
 
     def test_ios_gate_system_dispatch_expands_registered_plan(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_ios_gate_system_dispatch")

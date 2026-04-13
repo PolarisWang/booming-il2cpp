@@ -66,6 +66,11 @@ public sealed class CodeGenStage
             AssemblyName = linkedWorld.Assembly.Name,
             EntrySubjectId = linkedWorld.EntryPointSubjectId,
             InputAssemblyPath = ManagedNaming.NormalizePathForManifest(request.InputAssemblyPath, Environment.CurrentDirectory),
+            AdditionalAssemblyPaths = request.AdditionalAssemblyPaths?
+                .Where(path => !string.IsNullOrWhiteSpace(path))
+                .Select(path => ManagedNaming.NormalizePathForManifest(path, Environment.CurrentDirectory))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList(),
             InputModuleVersionId = linkedWorld.Assembly.ModuleVersionId.ToString(),
             Artifacts =
             [

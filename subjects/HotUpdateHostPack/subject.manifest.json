@@ -7,9 +7,16 @@
   "defaultValidationProfile": "managed-output",
   "source": {
     "type": "dotnet-project",
-    "path": "subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj",
-    "entry": "HotUpdateHostPack/Program::Main()"
+    "path": "subjects/HotUpdateHostPack/source/HotUpdateHostPack.sln",
+    "primaryProjectPath": "subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj",
+    "entry": "HotUpdateHostPack/Program::Main()",
+    "entrySelection": {
+      "entryKind": 1,
+      "entrySlice": 1
+    }
   },
+  "sourceModel": "dotnet-solution",
+  "workloadEntry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
   "testDeclarationMode": "require",
   "validationProfiles": {
     "managed-output": [
@@ -17,12 +24,22 @@
     ],
     "corruption-check": [
       "proof"
+    ],
+    "perf-profile": [
+      "perf"
     ]
   },
   "validation": {
     "proof": {
       "kind": "proof",
       "defaultVariant": "CHECK"
+    },
+    "perf": {
+      "kind": "perf",
+      "driver": "native-runtime-perf",
+      "project": "src/validation/perf/Benchmark.WorkloadEntry.PerfHarness/Benchmark.WorkloadEntry.PerfHarness.csproj",
+      "harnessIterations": 4,
+      "defaultVariant": "PROFILE"
     }
   },
   "expected": {
@@ -30,7 +47,9 @@
     "codegen": "subjects/HotUpdateHostPack/expected/codegen/",
     "runtime": "subjects/HotUpdateHostPack/expected/runtime/"
   },
-  "baselines": {},
+  "baselines": {
+    "perf": "subjects/HotUpdateHostPack/baselines/perf/"
+  },
   "tags": [
     "hot-update",
     "host",
@@ -80,6 +99,46 @@
           "bucket": "report",
           "dependsOn": [
             "runtime-managed-output"
+          ]
+        }
+      ]
+    },
+    {
+      "pipelineId": "managed-benchmark",
+      "displayName": "C# (.NET) benchmark",
+      "stages": [
+        {
+          "stageId": "source-resolve",
+          "kind": "source-resolve",
+          "scope": "shared",
+          "bucket": "source",
+          "dependsOn": []
+        },
+        {
+          "stageId": "host-input-build",
+          "kind": "host-input-build",
+          "scope": "shared",
+          "bucket": "host-input",
+          "dependsOn": [
+            "source-resolve"
+          ]
+        },
+        {
+          "stageId": "runtime-perf-collect",
+          "kind": "runtime-perf-collect",
+          "scope": "matrix",
+          "bucket": "runtime",
+          "dependsOn": [
+            "host-input-build"
+          ]
+        },
+        {
+          "stageId": "report-assemble",
+          "kind": "report-assemble",
+          "scope": "matrix",
+          "bucket": "report",
+          "dependsOn": [
+            "runtime-perf-collect"
           ]
         }
       ]
@@ -165,6 +224,37 @@
           "report"
         ],
         "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-managed-perf",
+      "pipelineId": "managed-benchmark",
+      "supportedGoals": [
+        "perf.release"
+      ],
+      "source": {
+        "entry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()"
+      },
+      "workloadEntry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "dotnet-managed",
+        "runtimeProfile": "managed-perf-release"
+      },
+      "validationIntent": {
+        "validationMode": "perf",
+        "adaptationLevel": "native-runtime",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "report"
       }
     }
   ]

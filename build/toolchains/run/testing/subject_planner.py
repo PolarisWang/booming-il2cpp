@@ -60,6 +60,27 @@ def _entry_artifact_paths(
     }
 
 
+def _normalize_source_entry_selection(source: dict[str, Any]) -> dict[str, int]:
+    payload = source.get("entrySelection")
+    if payload is None:
+        return {}
+    if not isinstance(payload, dict):
+        raise ValueError("source.entrySelection must be an object")
+
+    normalized: dict[str, int] = {}
+    for field_name in ("entryKind", "entrySlice"):
+        value = payload.get(field_name)
+        if value is None:
+            continue
+        if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+            raise ValueError(f"source.entrySelection.{field_name} must be a non-negative integer")
+        normalized[field_name] = int(value)
+
+    if normalized and set(normalized) != {"entryKind", "entrySlice"}:
+        raise ValueError("source.entrySelection requires both entryKind and entrySlice")
+    return normalized
+
+
 def build_plan(
     repo_root: Path,
     subject_id: str,
@@ -120,6 +141,9 @@ def build_plan(
     selected_source.update(dict(matrix.get("source") or {}))
     if source_entry is not None:
         selected_source["entry"] = source_entry
+    normalized_source_entry_selection = _normalize_source_entry_selection(selected_source)
+    if normalized_source_entry_selection:
+        selected_source["entrySelection"] = normalized_source_entry_selection
     selected_workload_entry = str(
         workload_entry
         or matrix.get("workloadEntry")
@@ -169,6 +193,7 @@ def build_plan(
                 "validationKind": validation_selection["validationKind"],
                 "variant": str(validation_selection["variant"]),
                 "sourceEntry": str(selected_source.get("entry") or ""),
+                "sourceEntrySelection": dict(normalized_source_entry_selection),
                 "workloadEntry": selected_workload_entry,
                 "stageId": stage_id,
                 "kind": kind,

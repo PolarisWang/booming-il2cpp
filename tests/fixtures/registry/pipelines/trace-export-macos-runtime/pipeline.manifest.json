@@ -11,7 +11,7 @@
       "id": "code",
       "title": "Code tests",
       "members": [
-        {"type": "suite", "id": "smoke/HostEmbeddingLite"}
+        {"type": "suite", "id": "smoke/host-embedding-basic"}
       ]
     },
     {

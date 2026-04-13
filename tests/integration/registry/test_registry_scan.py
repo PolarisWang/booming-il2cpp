@@ -33,11 +33,11 @@ class RegistryScanTests(unittest.TestCase):
     def test_registry_scan_collects_suites_modules_systems_and_pipelines(self) -> None:
         registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry")
         specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "chaos_run_public_specs")
-        native_proof_subject = select_subject_record(
-            "chaos_registry_scan_native_proof_subject",
+        windows_only_subject = select_subject_record(
+            "chaos_registry_scan_windows_only_subject",
             category="canonical",
             source_type="dotnet-project",
-            required_stage_kinds=["generated-native-proof"],
+            required_stage_kinds=["interpreter-runtime-perf"],
             required_host_platforms=["windows-x64"],
         )
 
@@ -53,7 +53,7 @@ class RegistryScanTests(unittest.TestCase):
         self.assertIn("contract/native-abi", object_ids)
         self.assertIn("contract/native-bridge", object_ids)
         self.assertIn("module/analysis/basic", object_ids)
-        self.assertIn("smoke/HelloWorld", object_ids)
+        self.assertIn("smoke/managed-entry-basic", object_ids)
         self.assertIn("module/managed-smoke/basic", object_ids)
         self.assertIn("module/reflection/basic", object_ids)
         self.assertIn("module/interop/basic", object_ids)
@@ -80,7 +80,9 @@ class RegistryScanTests(unittest.TestCase):
         self.assertNotIn("gate/windows-reference-desktop", object_ids)
         self.assertNotIn("system/android-startup-gate", object_ids)
         self.assertNotIn("system/windows-reference-gate", object_ids)
-        self.assertNotIn(f"subject/{native_proof_subject['subjectId']}", object_ids)
+        self.assertIn("subject/HotUpdateHostPack", object_ids)
+        self.assertIn("subject/SolutionCorePack", object_ids)
+        self.assertNotIn(f"subject/{windows_only_subject['subjectId']}", object_ids)
 
     def test_registry_scan_collects_windows_android_gate_objects(self) -> None:
         registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_windows_android_gate")
@@ -101,11 +103,11 @@ class RegistryScanTests(unittest.TestCase):
         )
         benchmark_subject = select_subject_record(
             "chaos_registry_scan_benchmark_subject",
-            category="benchmark",
+            category="canonical",
             source_type="dotnet-project",
             required_goal_ids=["perf.release"],
             required_validation_kinds=["perf"],
-            required_validation_drivers=["csharp-perf-harness"],
+            required_stage_kinds=["interpreter-runtime-perf"],
             required_host_platforms=["windows-x64"],
         )
 
@@ -123,13 +125,10 @@ class RegistryScanTests(unittest.TestCase):
         self.assertIn(f"subject/{canonical_subject['subjectId']}", object_ids)
         self.assertIn(f"subject/{native_proof_subject['subjectId']}", object_ids)
         self.assertIn(f"subject/{benchmark_subject['subjectId']}", object_ids)
-        self.assertIn("subject/SolutionSimpleLib", object_ids)
-        self.assertIn("subject/SolutionMultiProject", object_ids)
-        self.assertIn("subject/SolutionPackageReference", object_ids)
+        self.assertNotIn("subject/SolutionSimpleLib", object_ids)
+        self.assertNotIn("subject/SolutionMultiProject", object_ids)
+        self.assertNotIn("subject/SolutionPackageReference", object_ids)
         self.assertNotIn("subject/GoldenMultiProject", object_ids)
-        self.assertIn("subject/ReflectionLite", object_ids)
-        self.assertIn("subject/PInvokeLite", object_ids)
-        self.assertIn("subject/HostEmbeddingLite", object_ids)
         self.assertNotIn("system/linux-packaging-gate-macos-only", object_ids)
         canonical_item = next(
             item for item in index.flat_items if item["id"] == f"subject/{canonical_subject['subjectId']}"
@@ -147,12 +146,20 @@ class RegistryScanTests(unittest.TestCase):
             f"run test subject --id subject/{native_proof_subject['subjectId']}",
             subject_item["canonicalCommand"],
         )
-        self.assertEqual(["windows"], subject_item["supportedHosts"])
+        expected_supported_hosts = sorted(
+            {
+                "windows" if str(host).startswith("windows")
+                else "macos" if str(host).startswith("macos")
+                else str(host)
+                for host in native_proof_subject["capabilities"]["hostPlatforms"]
+            }
+        )
+        self.assertEqual(expected_supported_hosts, sorted(subject_item["supportedHosts"]))
         benchmark_item = next(
             item for item in index.flat_items if item["id"] == f"subject/{benchmark_subject['subjectId']}"
         )
-        self.assertEqual("benchmark", benchmark_item["category"])
-        self.assertEqual("perf.dev", benchmark_item["defaultGoalId"])
+        self.assertEqual("canonical", benchmark_item["category"])
+        self.assertEqual(str(benchmark_subject["manifest"]["defaultGoal"]), benchmark_item["defaultGoalId"])
         self.assertEqual(str(benchmark_subject["manifest"]["defaultMatrix"]), benchmark_item["defaultMatrixId"])
         self.assertEqual(benchmark_subject["manifest"]["executablePlan"], benchmark_item["executablePlan"])
         self.assertEqual(benchmark_subject["manifest"]["availability"], benchmark_item["availability"])
@@ -160,7 +167,7 @@ class RegistryScanTests(unittest.TestCase):
             f"run test subject --id subject/{benchmark_subject['subjectId']}",
             benchmark_item["canonicalCommand"],
         )
-        self.assertEqual(["perf.dev", "perf.release"], benchmark_item["goalIds"])
+        self.assertEqual(sorted(str(value) for value in benchmark_subject["capabilities"]["goalIds"]), sorted(benchmark_item["goalIds"]))
 
         analysis_module_item = next(item for item in index.flat_items if item["id"] == "module/analysis/basic")
         runtime_baseline_item = next(item for item in index.flat_items if item["id"] == "system/windows-reference-gate")
@@ -192,11 +199,11 @@ class RegistryScanTests(unittest.TestCase):
 
         self.assertEqual(
             [
-                "smoke/HelloWorld",
-                "smoke/GenericEcho",
-                "smoke/ReflectionLite",
-                "smoke/PInvokeLite",
-                "smoke/HostEmbeddingLite",
+                "smoke/managed-entry-basic",
+                "smoke/managed-generics-basic",
+                "smoke/reflection-basic",
+                "smoke/native-interop-basic",
+                "smoke/host-embedding-basic",
                 "contract/analysis-schema",
                 "contract/native-abi",
                 "contract/native-bridge",
@@ -218,7 +225,7 @@ class RegistryScanTests(unittest.TestCase):
 
         self.assertEqual(
             [
-                "smoke/HostEmbeddingLite",
+                "smoke/host-embedding-basic",
                 "contract/trace-schema",
                 "contract/trace-compare-macos",
             ],
@@ -239,11 +246,11 @@ class RegistryScanTests(unittest.TestCase):
 
         self.assertEqual(
             [
-                "smoke/HelloWorld",
-                "smoke/GenericEcho",
-                "smoke/ReflectionLite",
-                "smoke/PInvokeLite",
-                "smoke/HostEmbeddingLite",
+                "smoke/managed-entry-basic",
+                "smoke/managed-generics-basic",
+                "smoke/reflection-basic",
+                "smoke/native-interop-basic",
+                "smoke/host-embedding-basic",
                 "contract/analysis-schema",
                 "contract/native-abi",
                 "contract/native-bridge",
@@ -392,6 +399,80 @@ class RegistryScanTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_registry_scan_surfaces_retained_subject_default_entry_metadata(self) -> None:
+        registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_retained_subject_defaults")
+        specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "chaos_run_public_specs_retained_subject_defaults")
+
+        index = registry_module.scan_registry(
+            REPO_ROOT,
+            host_platform="windows",
+            public_suite_specs=specs_module.PUBLIC_TEST_SPECS,
+        )
+
+        hot_update_item = next(item for item in index.subjects if item["id"] == "subject/HotUpdateHostPack")
+        mixed_execution_item = next(item for item in index.subjects if item["id"] == "subject/MixedExecutionFeaturePack")
+        solution_core_item = next(item for item in index.subjects if item["id"] == "subject/SolutionCorePack")
+
+        self.assertEqual(
+            "subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj",
+            hot_update_item["defaultPrimaryProjectPath"],
+        )
+        self.assertEqual(
+            "HotUpdateHostPack/Program::Main()",
+            hot_update_item["defaultSourceEntry"],
+        )
+        self.assertEqual(
+            {
+                "entryKind": 1,
+                "entrySlice": 1,
+            },
+            hot_update_item["defaultSubjectEntrySelection"],
+        )
+        self.assertEqual(
+            "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
+            hot_update_item["defaultWorkloadEntry"],
+        )
+
+        self.assertEqual(
+            "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj",
+            mixed_execution_item["defaultPrimaryProjectPath"],
+        )
+        self.assertEqual(
+            "MixedExecutionFeaturePack/MixedExecutionProofEntry::Run()",
+            mixed_execution_item["defaultSourceEntry"],
+        )
+        self.assertEqual(
+            {
+                "entryKind": 1,
+                "entrySlice": 2,
+            },
+            mixed_execution_item["defaultSubjectEntrySelection"],
+        )
+        self.assertEqual(
+            "MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()",
+            mixed_execution_item["defaultWorkloadEntry"],
+        )
+
+        self.assertEqual(
+            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            solution_core_item["defaultPrimaryProjectPath"],
+        )
+        self.assertEqual(
+            "MainlineFeaturePack/ProofEntry::Run()",
+            solution_core_item["defaultSourceEntry"],
+        )
+        self.assertEqual(
+            {
+                "entryKind": 1,
+                "entrySlice": 7,
+            },
+            solution_core_item["defaultSubjectEntrySelection"],
+        )
+        self.assertEqual(
+            "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()",
+            solution_core_item["defaultWorkloadEntry"],
+        )
+
     def test_registry_scan_projects_engineering_and_declared_catalog_object_families(self) -> None:
         registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_compiled_object_families")
         specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "chaos_run_public_specs_compiled_object_families")
@@ -403,38 +484,38 @@ class RegistryScanTests(unittest.TestCase):
         )
 
         object_ids = {item["id"] for item in index.flat_items}
-        self.assertIn("engineering-validation/MainlineFeaturePack/project-graph", object_ids)
-        self.assertIn("engineering-workload/PerformanceFeaturePack/codegen", object_ids)
+        self.assertIn("engineering-validation/SolutionCorePack/project-graph", object_ids)
+        self.assertIn("engineering-workload/SolutionCorePack/codegen", object_ids)
         self.assertIn(
-            "declared-unit-test/MainlineFeaturePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()",
+            "declared-unit-test/SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()",
             object_ids,
         )
         self.assertIn(
-            "declared-benchmark/PerformanceFeaturePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()",
+            "declared-benchmark/SolutionCorePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()",
             object_ids,
         )
 
         declared_unit_item = next(
             item
             for item in index.flat_items
-            if item["id"] == "declared-unit-test/MainlineFeaturePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"
+            if item["id"] == "declared-unit-test/SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"
         )
         self.assertEqual("declared-unit-test", declared_unit_item["type"])
-        self.assertEqual("MainlineFeaturePack", declared_unit_item["subjectId"])
+        self.assertEqual("SolutionCorePack", declared_unit_item["subjectId"])
         self.assertEqual(
-            "run test declared-unit-test --id declared-unit-test/MainlineFeaturePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()",
+            "run test declared-unit-test --id declared-unit-test/SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()",
             declared_unit_item["canonicalCommand"],
         )
 
         engineering_workload_item = next(
             item
             for item in index.flat_items
-            if item["id"] == "engineering-workload/PerformanceFeaturePack/codegen"
+            if item["id"] == "engineering-workload/SolutionCorePack/codegen"
         )
         self.assertEqual("engineering-workload", engineering_workload_item["type"])
-        self.assertEqual("PerformanceFeaturePack", engineering_workload_item["subjectId"])
+        self.assertEqual("SolutionCorePack", engineering_workload_item["subjectId"])
         self.assertEqual(
-            "run test engineering-workload --id engineering-workload/PerformanceFeaturePack/codegen",
+            "run test engineering-workload --id engineering-workload/SolutionCorePack/codegen",
             engineering_workload_item["canonicalCommand"],
         )
 

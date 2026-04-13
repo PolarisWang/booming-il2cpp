@@ -17,7 +17,7 @@ project(roadmap0_preset_router LANGUAGES CXX)
 
 set(
     CHAOS_SUBJECT_PROOF_ROOT
-    "subjects/HelloWorldObject/validation/proof/native-reference"
+    "subjects/SolutionCorePack/validation/proof/native-reference"
     CACHE PATH
     "Subject-owned proof host directory for windows-x64-reference")
 set(

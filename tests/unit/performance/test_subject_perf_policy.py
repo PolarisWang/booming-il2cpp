@@ -39,13 +39,14 @@ class SubjectPerfPolicyTests(unittest.TestCase):
         perf_module = load_perf_module()
         subject_record = select_subject_record(
             "chaos_subject_perf_policy_record",
-            category="benchmark",
+            category="canonical",
             source_type="dotnet-project",
             required_goal_ids=["perf.release"],
             required_validation_kinds=["perf"],
+            required_validation_profile_ids=["perf-profile"],
         )
         subject_id = str(subject_record["subjectId"])
-        matrix_id = "windows-perf-release"
+        matrix_id = "windows-native-perf"
 
         repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
         repo_root.mkdir(parents=True, exist_ok=False)
@@ -91,8 +92,8 @@ class SubjectPerfPolicyTests(unittest.TestCase):
 
     def test_perf_subject_marks_missing_baseline_metrics_as_regression(self) -> None:
         perf_module = load_perf_module()
-        subject_id = "InterfaceDispatchProof"
-        matrix_id = "windows-native-profile"
+        subject_id = "SolutionCorePack"
+        matrix_id = "windows-native-perf"
 
         repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
         repo_root.mkdir(parents=True, exist_ok=False)

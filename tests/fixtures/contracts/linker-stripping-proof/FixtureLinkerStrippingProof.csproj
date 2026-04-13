@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>MainlineFeaturePack</AssemblyName>
+    <RootNamespace>MainlineFeaturePack</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\reference\Chaos.TestFramework\Chaos.TestFramework.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\..\subjects\SolutionCorePack\source\Slices\MainlineFeaturePack\LinkerStrippingProof.cs" Link="LinkerStrippingProof.cs" />
+  </ItemGroup>
+</Project>

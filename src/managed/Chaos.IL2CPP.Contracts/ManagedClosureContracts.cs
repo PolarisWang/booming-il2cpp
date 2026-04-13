@@ -821,6 +821,8 @@ public sealed record ManagedClosureManifestArtifact
 
     public required string InputAssemblyPath { get; init; }
 
+    public IReadOnlyList<string>? AdditionalAssemblyPaths { get; init; }
+
     public required string InputModuleVersionId { get; init; }
 
     public required IReadOnlyList<ManagedClosureArtifactRef> Artifacts { get; init; }

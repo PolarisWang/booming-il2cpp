@@ -12,8 +12,8 @@
       "id": "code",
       "title": "Code tests",
       "members": [
-        {"type": "suite", "id": "smoke/HelloWorld"},
-        {"type": "suite", "id": "smoke/GenericEcho"}
+        {"type": "suite", "id": "smoke/managed-entry-basic"},
+        {"type": "suite", "id": "smoke/managed-generics-basic"}
       ]
     },
     {

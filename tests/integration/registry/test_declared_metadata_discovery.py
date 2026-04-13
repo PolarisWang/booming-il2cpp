@@ -13,8 +13,12 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 COMPILED_CATALOG_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "compiled_catalog.py"
 FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures" / "contracts" / "declared-metadata"
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "declared-metadata-discovery"
-MAINLINE_FEATURE_PACK_PROJECT_PATH = REPO_ROOT / "subjects" / "MainlineFeaturePack" / "source" / "MainlineFeaturePack.csproj"
-BENCHMARK_FEATURE_PACK_PROJECT_PATH = REPO_ROOT / "subjects" / "PerformanceFeaturePack" / "source" / "PerformanceFeaturePack.csproj"
+SOLUTION_CORE_PACK_MAINLINE_SLICE_PROJECT_PATH = (
+    REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Slices" / "MainlineFeaturePack" / "MainlineFeaturePack.csproj"
+)
+SOLUTION_CORE_PACK_PERFORMANCE_SLICE_PROJECT_PATH = (
+    REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Slices" / "PerformanceFeaturePack" / "PerformanceFeaturePack.csproj"
+)
 HOT_UPDATE_HOST_PACK_PROJECT_PATH = REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "HotUpdateHostPack.csproj"
 MIXED_EXECUTION_FEATURE_PACK_PROJECT_PATH = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "MixedExecutionFeaturePack.csproj"
 
@@ -209,8 +213,8 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             catalog,
         )
 
-    def test_mainline_feature_pack_discovers_declared_unit_entries_from_real_subject_output(self) -> None:
-        catalog_module = load_module(COMPILED_CATALOG_MODULE_PATH, "chaos_declared_metadata_mainline_feature_pack")
+    def test_solution_core_pack_mainline_slice_discovers_declared_unit_entries_from_real_subject_output(self) -> None:
+        catalog_module = load_module(COMPILED_CATALOG_MODULE_PATH, "chaos_declared_metadata_solution_core_pack_mainline_slice")
 
         build_root = TEST_TMP_ROOT / "mainline-feature-pack" / uuid.uuid4().hex
         build_output_root = build_root / "build"
@@ -221,7 +225,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                 [
                     "dotnet",
                     "build",
-                    str(MAINLINE_FEATURE_PACK_PROJECT_PATH),
+                    str(SOLUTION_CORE_PACK_MAINLINE_SLICE_PROJECT_PATH),
                     "-c",
                     "Release",
                     "-o",
@@ -236,7 +240,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
 
             catalog = catalog_module.build_declared_test_catalog(
                 repo_root=REPO_ROOT,
-                subject_id="MainlineFeaturePack",
+                subject_id="SolutionCorePack",
                 declaration_mode="require",
                 assembly_paths=[assembly_path],
             )
@@ -301,8 +305,8 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
         finally:
             shutil.rmtree(build_root, ignore_errors=True)
 
-    def test_benchmark_feature_pack_discovers_declared_benchmark_entries_from_real_subject_output(self) -> None:
-        catalog_module = load_module(COMPILED_CATALOG_MODULE_PATH, "chaos_declared_metadata_benchmark_feature_pack")
+    def test_solution_core_pack_performance_slice_discovers_declared_benchmark_entries_from_real_subject_output(self) -> None:
+        catalog_module = load_module(COMPILED_CATALOG_MODULE_PATH, "chaos_declared_metadata_solution_core_pack_performance_slice")
 
         build_root = TEST_TMP_ROOT / "benchmark-feature-pack" / uuid.uuid4().hex
         build_output_root = build_root / "build"
@@ -313,7 +317,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                 [
                     "dotnet",
                     "build",
-                    str(BENCHMARK_FEATURE_PACK_PROJECT_PATH),
+                    str(SOLUTION_CORE_PACK_PERFORMANCE_SLICE_PROJECT_PATH),
                     "-c",
                     "Release",
                     "-o",
@@ -328,7 +332,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
 
             catalog = catalog_module.build_declared_test_catalog(
                 repo_root=REPO_ROOT,
-                subject_id="PerformanceFeaturePack",
+                subject_id="SolutionCorePack",
                 declaration_mode="require",
                 assembly_paths=[assembly_path],
             )
@@ -412,6 +416,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                 {
                     "HotUpdateHostPack.HotUpdateSkeletonProofEntry",
                     "HotUpdateHostPack.MethodReplacementProofEntry",
+                    "HotUpdateHostPack.SharedContractProofEntry",
                     "HotUpdateHostPack.VersionRollbackProofEntry",
                 },
                 set(unit_entries),
@@ -426,6 +431,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             )
             self.assertEqual("hot-update-skeleton-proof", unit_entries["HotUpdateHostPack.HotUpdateSkeletonProofEntry"]["alias"])
             self.assertEqual("method-replacement-proof", unit_entries["HotUpdateHostPack.MethodReplacementProofEntry"]["alias"])
+            self.assertEqual("shared-contract-proof", unit_entries["HotUpdateHostPack.SharedContractProofEntry"]["alias"])
             self.assertEqual("version-rollback-proof", unit_entries["HotUpdateHostPack.VersionRollbackProofEntry"]["alias"])
             self.assertEqual("hot-update-dispatch-bench", benchmark_entries["HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry"]["alias"])
             self.assertEqual("hot-update-load-bench", benchmark_entries["HotUpdateHostPack.HotUpdateLoadBenchmarkEntry"]["alias"])
@@ -488,12 +494,14 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             self.assertEqual(
                 {
                     "MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry",
+                    "MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry",
                 },
                 set(benchmark_entries),
             )
             self.assertEqual("mixed-execution-proof", unit_entries["MixedExecutionFeaturePack.MixedExecutionProofEntry"]["alias"])
             self.assertEqual("interpreter-lowering-proof", unit_entries["MixedExecutionFeaturePack.InterpreterLoweringProofEntry"]["alias"])
             self.assertEqual("mixed-execution-bench", benchmark_entries["MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry"]["alias"])
+            self.assertEqual("mixed-execution-native-bench", benchmark_entries["MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry"]["alias"])
         finally:
             shutil.rmtree(build_root, ignore_errors=True)
 

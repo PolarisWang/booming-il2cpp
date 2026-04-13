@@ -70,9 +70,9 @@ def _default_stage_results() -> dict[str, dict]:
     }
 
 
-def _suite_result_from_legacy_result(request: TestRequest, suite_spec: dict, legacy_result: CommandResult) -> dict:
+def _suite_result_from_execution_result(request: TestRequest, suite_spec: dict, execution_result: CommandResult) -> dict:
     stage_results = _default_stage_results()
-    status = "ok" if legacy_result.status == "ok" else "fail"
+    status = "ok" if execution_result.status == "ok" else "fail"
 
     if request.stage == "build":
         stage_results["build"] = _stage_result(status)
@@ -81,7 +81,7 @@ def _suite_result_from_legacy_result(request: TestRequest, suite_spec: dict, leg
             stage_results["build"] = _stage_result(status, implicit=True)
         stage_results["run"] = _stage_result(status)
     else:
-        if "build" in suite_spec["stages"] and suite_spec["family"] == "smoke":
+        if "build" in suite_spec["stages"]:
             stage_results["build"] = _stage_result(status)
         stage_results["run"] = _stage_result(status)
 
@@ -89,7 +89,7 @@ def _suite_result_from_legacy_result(request: TestRequest, suite_spec: dict, leg
         "suiteId": request.suite_key,
         "status": status,
         "stageResults": stage_results,
-        "artifacts": list(legacy_result.payload.get("artifacts", [])),
+        "artifacts": list(execution_result.payload.get("artifacts", [])),
     }
 
 
@@ -138,8 +138,7 @@ def execute_suite_session(
     repo_root: Path,
     host_platform: str,
     suite_spec: dict | None,
-    legacy_command: dict | None,
-    legacy_executor: Callable[[dict, Path, str, str], CommandResult],
+    suite_executor: Callable[[dict, Path, str, str, str], CommandResult],
 ) -> SessionResult:
     if suite_spec is None:
         return _unsupported_target_result(request, host_platform)
@@ -151,18 +150,21 @@ def execute_suite_session(
     if request.stage not in suite_spec["stages"]:
         return _unsupported_stage_result(request, host_platform)
 
-    if legacy_command is None:
-        return _unsupported_target_result(request, host_platform)
-
-    legacy_result = legacy_executor(legacy_command, repo_root, host_platform, request.command_text)
-    suite_result = _suite_result_from_legacy_result(request, suite_spec, legacy_result)
+    execution_result = suite_executor(
+        suite_spec,
+        repo_root,
+        host_platform,
+        request.command_text,
+        request.stage,
+    )
+    suite_result = _suite_result_from_execution_result(request, suite_spec, execution_result)
     return SessionResult(
         request=request,
         host_platform=host_platform,
-        status=legacy_result.status,
+        status=execution_result.status,
         suite_results=[suite_result],
-        text=legacy_result.text or "",
-        errors=list(legacy_result.errors),
-        artifacts=list(legacy_result.payload.get("artifacts", [])),
-        exit_code=0 if legacy_result.status == "ok" else 1,
+        text=execution_result.text or "",
+        errors=list(execution_result.errors),
+        artifacts=list(execution_result.payload.get("artifacts", [])),
+        exit_code=0 if execution_result.status == "ok" else 1,
     )

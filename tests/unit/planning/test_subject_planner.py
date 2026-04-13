@@ -12,6 +12,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[3]
 PLANNER_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_planner.py"
 SUBJECTS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subjects.py"
+FIXTURE_SUBJECTS_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects"
 
 
 def load_module(path: Path, module_name: str):
@@ -41,6 +42,32 @@ def select_subject_record(module_name: str, **filters: object):
     if not records:
         raise AssertionError(f"no subject record matched filters: {filters}")
     return subjects_module, sorted(records, key=lambda item: str(item["subjectId"]))[0]
+
+
+def _rewrite_fixture_manifest_paths(payload: object, fixture_subject_id: str) -> object:
+    prefix = f"tests/fixtures/subjects/{fixture_subject_id}/"
+    replacement = f"subjects/{fixture_subject_id}/"
+    if isinstance(payload, dict):
+        return {
+            key: _rewrite_fixture_manifest_paths(value, fixture_subject_id)
+            for key, value in payload.items()
+        }
+    if isinstance(payload, list):
+        return [_rewrite_fixture_manifest_paths(value, fixture_subject_id) for value in payload]
+    if isinstance(payload, str) and payload.startswith(prefix):
+        return replacement + payload.removeprefix(prefix)
+    return payload
+
+
+def clone_fixture_subject_repo(fixture_subject_id: str) -> tuple[Path, dict]:
+    repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"{fixture_subject_id}-{uuid.uuid4().hex}"
+    subject_root = repo_root / "subjects" / fixture_subject_id
+    shutil.copytree(FIXTURE_SUBJECTS_ROOT / fixture_subject_id, subject_root)
+    manifest_path = subject_root / "subject.manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest = _rewrite_fixture_manifest_paths(manifest, fixture_subject_id)
+    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return repo_root, manifest
 
 
 def expected_matrix_for_goal(manifest: dict, goal_id: str) -> dict:
@@ -178,37 +205,91 @@ class SubjectPlannerTests(unittest.TestCase):
 
     def test_planner_uses_perf_defaults_without_benchmark_name_coupling(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_perf_default")
-        subjects_module, record = select_subject_record(
-            "chaos_subject_planner_perf_default_record",
-            category="benchmark",
-            source_type="dotnet-project",
-            required_stage_kinds=["runtime-perf-collect"],
-            required_goal_ids=["perf.dev", "perf.release"],
-        )
-        manifest = record["manifest"]
-        subject_id = str(record["subjectId"])
-        run_id = "20260407-fixture-perf-default-001"
+        repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"perf-default-{uuid.uuid4().hex}"
+        manifest_path = repo_root / "subjects" / "FixtureBenchDefaults" / "subject.manifest.json"
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+        manifest = {
+            "subjectId": "FixtureBenchDefaults",
+            "displayName": "FixtureBenchDefaults",
+            "category": "benchmark",
+            "defaultGoal": "perf.release",
+            "defaultMatrix": "windows-managed-perf",
+            "defaultValidationProfile": "perf-profile",
+            "source": {
+                "type": "dotnet-project",
+                "path": "subjects/FixtureBenchDefaults/source/FixtureBenchDefaults.csproj",
+                "entry": "FixtureBenchDefaults/Program::Main()",
+            },
+            "workloadEntry": "FixtureBenchDefaults/Program::RunWorkload()",
+            "validationProfiles": {
+                "perf-profile": ["perf"],
+            },
+            "validation": {
+                "perf": {
+                    "kind": "perf",
+                    "driver": "native-runtime-perf",
+                    "defaultVariant": "PROFILE",
+                }
+            },
+            "executionPipelines": [
+                {
+                    "pipelineId": "managed-benchmark",
+                    "stages": [
+                        {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source", "dependsOn": []},
+                        {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input", "dependsOn": ["source-resolve"]},
+                        {"stageId": "runtime-perf-collect", "kind": "runtime-perf-collect", "scope": "matrix", "bucket": "runtime", "dependsOn": ["host-input-build"]},
+                        {"stageId": "report-assemble", "kind": "report-assemble", "scope": "matrix", "bucket": "report", "dependsOn": ["runtime-perf-collect"]},
+                    ],
+                }
+            ],
+            "environmentMatrices": [
+                {
+                    "matrixId": "windows-managed-perf",
+                    "pipelineId": "managed-benchmark",
+                    "supportedGoals": ["perf.release"],
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "dotnet-managed",
+                        "runtimeProfile": "managed-perf-release",
+                    },
+                    "validationIntent": {
+                        "validationMode": "perf",
+                        "adaptationLevel": "managed-runtime",
+                        "expectedOutcome": "pass",
+                    },
+                    "artifactPlan": {
+                        "requiredBuckets": ["source", "host-input", "runtime", "report"],
+                        "evidenceTerminalBucket": "report",
+                    },
+                }
+            ],
+        }
 
-        plan = planner_module.build_plan(REPO_ROOT, subject_id, run_id=run_id)
-        expected_matrix = subjects_module.find_matrix(manifest, str(manifest["defaultMatrix"]))
+        try:
+            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            run_id = "20260407-fixture-perf-default-001"
+            plan = planner_module.build_plan(repo_root, "FixtureBenchDefaults", run_id=run_id)
 
-        self.assertEqual(subject_id, plan["selection"]["subjectId"])
-        self.assertEqual(str(manifest["defaultGoal"]), plan["selection"]["goalId"])
-        self.assertEqual(str(expected_matrix["matrixId"]), plan["selection"]["matrixId"])
-        self.assertEqual(str(expected_matrix["pipelineId"]), plan["selection"]["pipelineId"])
-        self.assertEqual(
-            str(dict(expected_matrix["artifactPlan"])["evidenceTerminalBucket"]),
-            plan["selection"]["artifactPlan"]["evidenceTerminalBucket"],
-        )
+            self.assertEqual("FixtureBenchDefaults", plan["selection"]["subjectId"])
+            self.assertEqual("perf.release", plan["selection"]["goalId"])
+            self.assertEqual("windows-managed-perf", plan["selection"]["matrixId"])
+            self.assertEqual("managed-benchmark", plan["selection"]["pipelineId"])
+            self.assertEqual("report", plan["selection"]["artifactPlan"]["evidenceTerminalBucket"])
+            self.assertEqual("perf-profile", plan["selection"]["validationProfileId"])
+            self.assertEqual("PROFILE", plan["selection"]["variant"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_planner_selects_release_perf_matrix_without_subject_name_coupling(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_perf_release")
         subjects_module, record = select_subject_record(
             "chaos_subject_planner_perf_release_record",
-            category="benchmark",
+            category="canonical",
             source_type="dotnet-project",
             required_goal_ids=["perf.release"],
             required_stage_kinds=["runtime-perf-collect"],
+            required_validation_profile_ids=["perf-profile"],
         )
         manifest = record["manifest"]
         subject_id = str(record["subjectId"])
@@ -234,13 +315,13 @@ class SubjectPlannerTests(unittest.TestCase):
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_workload_entry")
         plan = planner_module.build_plan(
             REPO_ROOT,
-            "PerformanceFeaturePack",
+            "SolutionCorePack",
             goal_id="perf.release",
-            matrix_id="windows-managed-perf",
-            run_id="20260412-bencharithmetic-workload-entry-001",
+            matrix_id="windows-native-perf",
+            run_id="20260413-solutioncorepack-workload-entry-001",
         )
 
-        self.assertEqual("PerformanceFeaturePack", plan["selection"]["subjectId"])
+        self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
         self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
 
@@ -257,7 +338,24 @@ class SubjectPlannerTests(unittest.TestCase):
         )
 
         self.assertEqual("HotUpdateHostPack", plan["selection"]["subjectId"])
-        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj", plan["selection"]["source"]["path"])
+        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj", plan["selection"]["source"]["primaryProjectPath"])
+        self.assertEqual("HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
+        self.assertEqual("HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
+
+    def test_planner_surfaces_default_workload_entry_for_hot_update_host_pack_perf(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_hot_update_default_perf_entry")
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            "HotUpdateHostPack",
+            goal_id="perf.release",
+            matrix_id="windows-managed-perf",
+            run_id="20260413-hotupdatehostpack-default-workload-entry-001",
+        )
+
+        self.assertEqual("HotUpdateHostPack", plan["selection"]["subjectId"])
+        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj", plan["selection"]["source"]["primaryProjectPath"])
         self.assertEqual("HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
         self.assertEqual("HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
 
@@ -272,9 +370,26 @@ class SubjectPlannerTests(unittest.TestCase):
         )
 
         self.assertEqual("MixedExecutionFeaturePack", plan["selection"]["subjectId"])
-        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", plan["selection"]["source"]["path"])
+        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", plan["selection"]["source"]["primaryProjectPath"])
         self.assertEqual("MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
         self.assertEqual("MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
+
+    def test_planner_surfaces_native_perf_override_for_mixed_execution_feature_pack(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mixed_execution_native_perf_entry")
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            "MixedExecutionFeaturePack",
+            goal_id="perf.release",
+            matrix_id="windows-native-perf",
+            run_id="20260413-benchmixed-native-workload-entry-001",
+        )
+
+        self.assertEqual("MixedExecutionFeaturePack", plan["selection"]["subjectId"])
+        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", plan["selection"]["source"]["primaryProjectPath"])
+        self.assertEqual("MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
+        self.assertEqual("MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
 
     def test_planner_surfaces_explicit_proof_entry_for_hot_update_host_pack(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_hot_update_proof_shell")
@@ -301,19 +416,20 @@ class SubjectPlannerTests(unittest.TestCase):
         )
 
         self.assertEqual("MixedExecutionFeaturePack", plan["selection"]["subjectId"])
-        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", plan["selection"]["source"]["path"])
+        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", plan["selection"]["source"]["primaryProjectPath"])
         self.assertEqual("MixedExecutionFeaturePack/MixedExecutionProofEntry::Run()", plan["selection"]["source"]["entry"])
 
     def test_planner_can_override_declared_unit_entry_and_emit_family_specific_report_roots(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_declared_unit_selection")
         run_id = "20260413-mainline-array-ops-entry-selection-001"
-        stable_id = "MainlineFeaturePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"
+        stable_id = "SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"
 
         plan = planner_module.build_plan(
             REPO_ROOT,
-            "MainlineFeaturePack",
+            "SolutionCorePack",
             goal_id="correctness.dev",
-            matrix_id="windows-array-ops-check",
+            matrix_id="windows-native-check",
             run_id=run_id,
             source_entry="MainlineFeaturePack/ArrayOpsProofEntry::Run()",
             entry_selection={
@@ -333,22 +449,22 @@ class SubjectPlannerTests(unittest.TestCase):
             plan["selection"]["entrySelection"],
         )
         self.assertEqual(
-            f"artifacts/subjects/MainlineFeaturePack/runs/{run_id}/matrices/windows-array-ops-check/declared/unit/array-ops-proof/report.json",
+            f"artifacts/subjects/SolutionCorePack/runs/{run_id}/matrices/windows-native-check/declared/unit/array-ops-proof/report.json",
             plan["artifactsRoot"]["entryReportPath"],
         )
         self.assertEqual(
-            f"artifacts/subjects/MainlineFeaturePack/runs/{run_id}/declared/unit/array-ops-proof/summary.json",
+            f"artifacts/subjects/SolutionCorePack/runs/{run_id}/declared/unit/array-ops-proof/summary.json",
             plan["artifactsRoot"]["entrySummaryPath"],
         )
 
     def test_planner_can_override_declared_benchmark_entry_and_emit_family_specific_report_roots(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_declared_benchmark_selection")
         run_id = "20260413-performance-generic-bench-entry-selection-001"
-        stable_id = "PerformanceFeaturePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()"
+        stable_id = "SolutionCorePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()"
 
         plan = planner_module.build_plan(
             REPO_ROOT,
-            "PerformanceFeaturePack",
+            "SolutionCorePack",
             goal_id="perf.release",
             matrix_id="windows-native-perf",
             run_id=run_id,
@@ -372,13 +488,172 @@ class SubjectPlannerTests(unittest.TestCase):
             plan["selection"]["entrySelection"],
         )
         self.assertEqual(
-            f"artifacts/subjects/PerformanceFeaturePack/runs/{run_id}/matrices/windows-native-perf/declared/benchmark/generic-bench/report.json",
+            f"artifacts/subjects/SolutionCorePack/runs/{run_id}/matrices/windows-native-perf/declared/benchmark/generic-bench/report.json",
             plan["artifactsRoot"]["entryReportPath"],
         )
         self.assertEqual(
-            f"artifacts/subjects/PerformanceFeaturePack/runs/{run_id}/declared/benchmark/generic-bench/summary.json",
+            f"artifacts/subjects/SolutionCorePack/runs/{run_id}/declared/benchmark/generic-bench/summary.json",
             plan["artifactsRoot"]["entrySummaryPath"],
         )
+
+    def test_planner_surfaces_matrix_subject_entry_selection_for_solution_core_pack_managed_output(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_solution_core_subject_entry_selection")
+
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            "SolutionCorePack",
+            goal_id="correctness.dev",
+            matrix_id="windows-archetype-simple-lib-managed-output",
+            run_id="20260413-solution-core-simple-lib-entry-selection-001",
+        )
+
+        self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
+        self.assertEqual(
+            "subjects/SolutionCorePack/source/Archetypes/SolutionSimpleLib/App/GoldenSimpleLib.App.csproj",
+            plan["selection"]["source"]["primaryProjectPath"],
+        )
+        self.assertEqual(
+            "GoldenSimpleLib.App/Program::Main()",
+            plan["selection"]["source"]["entry"],
+        )
+        self.assertEqual(
+            {
+                "entryKind": 1,
+                "entrySlice": 4,
+            },
+            plan["selection"]["source"]["entrySelection"],
+        )
+
+    def test_planner_runtime_stage_fingerprint_changes_when_subject_entry_selection_changes(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_subject_entry_fingerprint")
+        repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"subject-entry-selection-{uuid.uuid4().hex}"
+        manifest_path = repo_root / "subjects" / "FixtureSubjectEntrySelection" / "subject.manifest.json"
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+
+        manifest = {
+            "subjectId": "FixtureSubjectEntrySelection",
+            "displayName": "FixtureSubjectEntrySelection",
+            "category": "canonical",
+            "defaultGoal": "correctness.dev",
+            "defaultMatrix": "windows-managed-output",
+            "defaultValidationProfile": "managed-output",
+            "source": {
+                "type": "dotnet-project",
+                "path": "subjects/FixtureSubjectEntrySelection/source/FixtureSubjectEntrySelection.csproj",
+                "entry": "FixtureSubjectEntrySelection/Program::Main()",
+            },
+            "validationProfiles": {
+                "managed-output": ["proof"],
+            },
+            "validation": {
+                "proof": {
+                    "kind": "proof",
+                    "defaultVariant": "CHECK",
+                }
+            },
+            "executionPipelines": [
+                {
+                    "pipelineId": "managed-runtime-output",
+                    "stages": [
+                        {
+                            "stageId": "source-resolve",
+                            "kind": "source-resolve",
+                            "scope": "shared",
+                            "bucket": "source",
+                            "dependsOn": [],
+                        },
+                        {
+                            "stageId": "host-input-build",
+                            "kind": "host-input-build",
+                            "scope": "shared",
+                            "bucket": "host-input",
+                            "dependsOn": ["source-resolve"],
+                        },
+                        {
+                            "stageId": "runtime-managed-output",
+                            "kind": "runtime-managed-output",
+                            "scope": "matrix",
+                            "bucket": "runtime",
+                            "dependsOn": ["host-input-build"],
+                        },
+                        {
+                            "stageId": "report-assemble",
+                            "kind": "report-assemble",
+                            "scope": "matrix",
+                            "bucket": "report",
+                            "dependsOn": ["runtime-managed-output"],
+                        },
+                    ],
+                }
+            ],
+            "environmentMatrices": [
+                {
+                    "matrixId": "windows-managed-output",
+                    "pipelineId": "managed-runtime-output",
+                    "supportedGoals": ["correctness.dev"],
+                    "source": {
+                        "entrySelection": {
+                            "entryKind": 1,
+                            "entrySlice": 1,
+                        },
+                    },
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "dotnet-managed",
+                        "runtimeProfile": "managed-output",
+                    },
+                    "validationIntent": {
+                        "validationMode": "output",
+                        "adaptationLevel": "observable-output",
+                        "expectedOutcome": "pass",
+                    },
+                    "artifactPlan": {
+                        "requiredBuckets": ["source", "host-input", "runtime", "report"],
+                        "evidenceTerminalBucket": "runtime",
+                    },
+                },
+            ],
+        }
+
+        try:
+            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+            first_plan = planner_module.build_plan(
+                repo_root,
+                "FixtureSubjectEntrySelection",
+                matrix_id="windows-managed-output",
+                run_id="fixture-subject-entry-selection-001",
+            )
+            manifest["environmentMatrices"][0]["source"]["entrySelection"]["entrySlice"] = 2
+            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            second_plan = planner_module.build_plan(
+                repo_root,
+                "FixtureSubjectEntrySelection",
+                matrix_id="windows-managed-output",
+                run_id="fixture-subject-entry-selection-001",
+            )
+
+            first_runtime_stage = next(stage for stage in first_plan["stagePlan"] if stage["kind"] == "runtime-managed-output")
+            second_runtime_stage = next(stage for stage in second_plan["stagePlan"] if stage["kind"] == "runtime-managed-output")
+
+            self.assertEqual(
+                {
+                    "entryKind": 1,
+                    "entrySlice": 1,
+                },
+                first_plan["selection"]["source"]["entrySelection"],
+            )
+            self.assertEqual(
+                {
+                    "entryKind": 1,
+                    "entrySlice": 2,
+                },
+                second_plan["selection"]["source"]["entrySelection"],
+            )
+            self.assertNotEqual(first_runtime_stage["fingerprint"], second_runtime_stage["fingerprint"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_planner_uses_canonical_pack_source_while_interpreter_support_project_remains_nested(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_interpreter_arithmetic_shell")
@@ -394,8 +669,12 @@ class SubjectPlannerTests(unittest.TestCase):
 
         self.assertEqual("MixedExecutionFeaturePack", plan["selection"]["subjectId"])
         self.assertEqual(
-            "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj",
+            "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln",
             plan["selection"]["source"]["path"],
+        )
+        self.assertEqual(
+            "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj",
+            plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("MixedExecutionFeaturePack/MixedExecutionProofEntry::Run()", plan["selection"]["source"]["entry"])
         self.assertTrue(support_project_path.is_file())
@@ -403,14 +682,14 @@ class SubjectPlannerTests(unittest.TestCase):
     def test_planner_selection_surfaces_thin_manifest_fields(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_thin_manifest_selection")
         subjects_module = load_subjects_module("chaos_subject_planner_thin_manifest_subjects")
-        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "PerformanceFeaturePack")
+        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "SolutionCorePack")
 
         plan = planner_module.build_plan(
             REPO_ROOT,
-            "PerformanceFeaturePack",
+            "SolutionCorePack",
             goal_id="perf.release",
-            matrix_id="windows-managed-perf",
-            run_id="20260412-bencharithmetic-thin-selection-001",
+            matrix_id="windows-native-perf",
+            run_id="20260413-solutioncorepack-thin-selection-001",
         )
 
         self.assertEqual(manifest["sourceModel"], plan["selection"]["sourceModel"])
@@ -424,13 +703,13 @@ class SubjectPlannerTests(unittest.TestCase):
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_native_workload_entry")
         plan = planner_module.build_plan(
             REPO_ROOT,
-            "PerformanceFeaturePack",
+            "SolutionCorePack",
             goal_id="perf.release",
             matrix_id="windows-native-perf",
-            run_id="20260412-bencharithmetic-native-workload-entry-001",
+            run_id="20260413-solutioncorepack-native-workload-entry-001",
         )
 
-        self.assertEqual("PerformanceFeaturePack", plan["selection"]["subjectId"])
+        self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
         self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
 
@@ -438,9 +717,10 @@ class SubjectPlannerTests(unittest.TestCase):
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_goal_only")
         _, record = select_subject_record(
             "chaos_subject_planner_goal_only_record",
-            category="benchmark",
+            category="canonical",
             source_type="dotnet-project",
             required_goal_ids=["perf.release"],
+            required_stage_kinds=["runtime-perf-collect"],
         )
         subject_id = str(record["subjectId"])
         expected_matrix = expected_matrix_for_goal(record["manifest"], "perf.release")
@@ -472,40 +752,36 @@ class SubjectPlannerTests(unittest.TestCase):
 
     def test_planner_selects_mobile_android_buildable_matrix_without_subject_name_coupling(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mobile_buildable")
-        _, record = select_subject_record(
-            "chaos_subject_planner_mobile_buildable_record",
-            category="canonical",
-            source_type="dotnet-project",
-            required_stage_kinds=["runtime-managed-output", "build-target"],
-            required_goal_ids=["correctness.dev", "correctness.platform"],
-            required_validation_profile_ids=["managed-output"],
-        )
-        subject_id = str(record["subjectId"])
-        run_id = "20260411-fixture-mobile-build-001"
+        repo_root, manifest = clone_fixture_subject_repo("MobileHelloWorldProof")
 
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            subject_id,
-            goal_id="correctness.platform",
-            run_id=run_id,
-        )
+        try:
+            subject_id = str(manifest["subjectId"])
+            run_id = "20260411-fixture-mobile-build-001"
+            plan = planner_module.build_plan(
+                repo_root,
+                subject_id,
+                goal_id="correctness.platform",
+                run_id=run_id,
+            )
 
-        self.assertEqual(subject_id, plan["selection"]["subjectId"])
-        self.assertEqual("correctness.platform", plan["selection"]["goalId"])
-        self.assertEqual("windows-android-buildable", plan["selection"]["matrixId"])
-        self.assertEqual("platform-buildable", plan["selection"]["pipelineId"])
-        self.assertEqual(
-            [
-                "source-resolve",
-                "host-input-build",
-                "analysis-frontend",
-                "generated-native-proof",
-                "build-target",
-                "report-assemble",
-            ],
-            [stage["stageId"] for stage in plan["stagePlan"]],
-        )
-        self.assertEqual("build", plan["selection"]["artifactPlan"]["evidenceTerminalBucket"])
+            self.assertEqual(subject_id, plan["selection"]["subjectId"])
+            self.assertEqual("correctness.platform", plan["selection"]["goalId"])
+            self.assertEqual("windows-android-buildable", plan["selection"]["matrixId"])
+            self.assertEqual("platform-buildable", plan["selection"]["pipelineId"])
+            self.assertEqual(
+                [
+                    "source-resolve",
+                    "host-input-build",
+                    "analysis-frontend",
+                    "generated-native-proof",
+                    "build-target",
+                    "report-assemble",
+                ],
+                [stage["stageId"] for stage in plan["stagePlan"]],
+            )
+            self.assertEqual("build", plan["selection"]["artifactPlan"]["evidenceTerminalBucket"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_planner_uses_default_validation_profile_and_variant(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_variant_default")
@@ -531,15 +807,16 @@ class SubjectPlannerTests(unittest.TestCase):
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_variant_override")
         subjects_module, record = select_subject_record(
             "chaos_subject_planner_variant_override_record",
-            category="benchmark",
+            category="canonical",
             source_type="dotnet-project",
             required_goal_ids=["perf.release"],
-            required_validation_profile_ids=["perf-release"],
+            required_stage_kinds=["runtime-perf-collect"],
+            required_validation_profile_ids=["perf-profile"],
         )
         manifest = record["manifest"]
         subject_id = str(record["subjectId"])
         selected_matrix = find_matrix_for_goal(subjects_module, manifest, "perf.release")
-        profile_id = "perf-release"
+        profile_id = "perf-profile"
         validation_kind = str(list(dict(manifest["validationProfiles"])[profile_id])[0])
 
         plan = planner_module.build_plan(
@@ -565,15 +842,16 @@ class SubjectPlannerTests(unittest.TestCase):
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_variant_fingerprint")
         subjects_module, record = select_subject_record(
             "chaos_subject_planner_variant_fingerprint_record",
-            category="benchmark",
+            category="canonical",
             source_type="dotnet-project",
             required_goal_ids=["perf.release"],
-            required_validation_profile_ids=["perf-release"],
+            required_stage_kinds=["runtime-perf-collect"],
+            required_validation_profile_ids=["perf-profile"],
         )
         manifest = record["manifest"]
         subject_id = str(record["subjectId"])
         selected_matrix = find_matrix_for_goal(subjects_module, manifest, "perf.release")
-        profile_id = "perf-release"
+        profile_id = "perf-profile"
 
         default_plan = planner_module.build_plan(
             REPO_ROOT,
@@ -685,41 +963,32 @@ class SubjectPlannerTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
-    def test_planner_selects_native_perf_matrix_for_mainline_feature_pack(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_native_perf")
-        _, record = select_subject_record(
-            "chaos_subject_planner_mainline_native_perf_record",
-            category="mainline",
-            source_type="dotnet-project",
-            required_stage_kinds=["native-runtime-perf"],
-            required_goal_ids=["perf.profile"],
-            required_validation_profile_ids=["perf-profile"],
-            required_validation_drivers=["native-runtime-perf"],
-        )
-        subject_id = str(record["subjectId"])
-        run_id = "20260409-fixture-mainline-native-perf-001"
+    def test_planner_selects_native_perf_matrix_for_solution_core_pack(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_solution_core_native_perf")
+        subject_id = "SolutionCorePack"
+        run_id = "20260413-fixture-solution-core-native-perf-001"
 
         plan = planner_module.build_plan(
             REPO_ROOT,
             subject_id,
-            goal_id="perf.profile",
+            goal_id="perf.release",
             validation_profile_id="perf-profile",
             variant="PROFILE",
             run_id=run_id,
         )
 
         self.assertEqual(subject_id, plan["selection"]["subjectId"])
-        self.assertEqual("perf.profile", plan["selection"]["goalId"])
-        self.assertEqual("windows-native-profile", plan["selection"]["matrixId"])
+        self.assertEqual("perf.release", plan["selection"]["goalId"])
+        self.assertEqual("windows-native-perf", plan["selection"]["matrixId"])
         self.assertEqual("perf-profile", plan["selection"]["validationProfileId"])
         self.assertEqual("PROFILE", plan["selection"]["variant"])
-        self.assertEqual("native-runtime-perf", plan["selection"]["pipelineId"])
+        self.assertEqual("native-benchmark", plan["selection"]["pipelineId"])
         self.assertEqual(
             [
                 "source-resolve",
                 "host-input-build",
                 "analysis-frontend",
-                "generated-native-proof",
+                "generated-native-aot",
                 "build-target",
                 "native-runtime-perf",
                 "report-assemble",
@@ -728,419 +997,215 @@ class SubjectPlannerTests(unittest.TestCase):
         )
         native_perf_stage = next(stage for stage in plan["stagePlan"] if stage["kind"] == "native-runtime-perf")
         self.assertEqual(
-            f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/windows-native-profile/runtime/runtime.manifest.json",
+            f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/windows-native-perf/runtime/runtime.manifest.json",
             native_perf_stage["paths"]["manifestPath"],
         )
         self.assertEqual("report", plan["selection"]["artifactPlan"]["evidenceTerminalBucket"])
 
-    def test_planner_uses_goal_aware_perf_defaults_for_native_perf_subject(self) -> None:
+    def test_planner_uses_goal_aware_perf_defaults_for_solution_core_pack_native_perf(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_native_perf_goal_defaults")
-        _, record = select_subject_record(
-            "chaos_subject_planner_native_perf_goal_defaults_record",
-            category="mainline",
-            source_type="dotnet-project",
-            required_goal_ids=["perf.profile"],
-            required_validation_profile_ids=["perf-profile"],
-            required_validation_drivers=["native-runtime-perf"],
-        )
-        subject_id = str(record["subjectId"])
-        run_id = "20260411-fixture-native-perf-goal-defaults-001"
-
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            subject_id,
-            goal_id="perf.profile",
-            run_id=run_id,
-        )
-
-        self.assertEqual(subject_id, plan["selection"]["subjectId"])
-        self.assertEqual("perf.profile", plan["selection"]["goalId"])
-        self.assertEqual("windows-native-profile", plan["selection"]["matrixId"])
-        self.assertEqual("perf-profile", plan["selection"]["validationProfileId"])
-        self.assertEqual("perf", plan["selection"]["validationKind"])
-        self.assertEqual("PROFILE", plan["selection"]["variant"])
-        self.assertEqual("native-runtime-perf", plan["selection"]["pipelineId"])
-
-    def test_planner_uses_goal_matching_perf_profile_when_goal_changes_perf_matrix(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_goal_matching_perf_profile")
-        _, record = select_subject_record(
-            "chaos_subject_planner_goal_matching_perf_profile_record",
-            category="benchmark",
-            source_type="dotnet-project",
-            required_goal_ids=["perf.dev", "perf.release"],
-            required_validation_profile_ids=["perf-dev", "perf-release"],
-            required_validation_drivers=["csharp-perf-harness"],
-        )
-        subject_id = str(record["subjectId"])
+        subject_id = "SolutionCorePack"
+        run_id = "20260413-fixture-solution-core-native-perf-goal-defaults-001"
 
         plan = planner_module.build_plan(
             REPO_ROOT,
             subject_id,
             goal_id="perf.release",
-            run_id="20260411-fixture-goal-matching-perf-profile-001",
+            run_id=run_id,
         )
 
+        self.assertEqual(subject_id, plan["selection"]["subjectId"])
         self.assertEqual("perf.release", plan["selection"]["goalId"])
-        self.assertEqual("windows-perf-release", plan["selection"]["matrixId"])
-        self.assertEqual("perf-release", plan["selection"]["validationProfileId"])
+        self.assertEqual("windows-native-perf", plan["selection"]["matrixId"])
+        self.assertEqual("perf-profile", plan["selection"]["validationProfileId"])
         self.assertEqual("perf", plan["selection"]["validationKind"])
         self.assertEqual("PROFILE", plan["selection"]["variant"])
+        self.assertEqual("native-benchmark", plan["selection"]["pipelineId"])
 
-    def test_planner_overlays_matrix_source_entry_for_mainline_feature_pack_capability_slice(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_capability_slice")
-        _, record = select_subject_record(
-            "chaos_subject_planner_mainline_capability_slice_record",
-            category="mainline",
-            source_type="dotnet-project",
-            required_goal_ids=["correctness.dev"],
-            required_validation_profile_ids=["proof-dispatch"],
-        )
-        subject_id = str(record["subjectId"])
-        run_id = "20260409-fixture-mainline-dispatch-slice-001"
+    def test_planner_uses_goal_matching_perf_profile_when_goal_changes_perf_matrix(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_goal_matching_perf_profile")
+        repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"goal-matching-perf-profile-{uuid.uuid4().hex}"
+        manifest_path = repo_root / "subjects" / "FixturePerfProfile" / "subject.manifest.json"
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
 
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            subject_id,
-            goal_id="correctness.dev",
-            matrix_id="windows-dispatch-check",
-            validation_profile_id="proof-dispatch",
-            run_id=run_id,
-        )
+        manifest = {
+            "subjectId": "FixturePerfProfile",
+            "displayName": "FixturePerfProfile",
+            "category": "canonical",
+            "defaultGoal": "perf.dev",
+            "defaultMatrix": "windows-managed-perf-dev",
+            "defaultValidationProfile": "perf-dev",
+            "source": {
+                "type": "dotnet-project",
+                "path": "subjects/FixturePerfProfile/source/FixturePerfProfile.csproj",
+                "entry": "FixturePerfProfile/Program::Main()",
+            },
+            "workloadEntry": "FixturePerfProfile/Program::RunWorkload()",
+            "validationProfiles": {
+                "perf-dev": ["perf"],
+                "perf-release": ["perf"],
+            },
+            "validation": {
+                "perf": {
+                    "kind": "perf",
+                    "driver": "csharp-perf-harness",
+                    "defaultVariant": "PROFILE",
+                }
+            },
+            "executionPipelines": [
+                {
+                    "pipelineId": "managed-benchmark",
+                    "stages": [
+                        {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source", "dependsOn": []},
+                        {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input", "dependsOn": ["source-resolve"]},
+                        {"stageId": "runtime-perf-collect", "kind": "runtime-perf-collect", "scope": "matrix", "bucket": "runtime", "dependsOn": ["host-input-build"]},
+                        {"stageId": "report-assemble", "kind": "report-assemble", "scope": "matrix", "bucket": "report", "dependsOn": ["runtime-perf-collect"]},
+                    ],
+                }
+            ],
+            "environmentMatrices": [
+                {
+                    "matrixId": "windows-managed-perf-dev",
+                    "pipelineId": "managed-benchmark",
+                    "supportedGoals": ["perf.dev"],
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "dotnet-managed",
+                        "runtimeProfile": "managed-perf-dev",
+                    },
+                    "validationIntent": {
+                        "validationMode": "perf",
+                        "adaptationLevel": "managed-runtime",
+                        "expectedOutcome": "pass",
+                    },
+                    "artifactPlan": {
+                        "requiredBuckets": ["source", "host-input", "runtime", "report"],
+                        "evidenceTerminalBucket": "report",
+                    },
+                },
+                {
+                    "matrixId": "windows-managed-perf-release",
+                    "pipelineId": "managed-benchmark",
+                    "supportedGoals": ["perf.release"],
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "dotnet-managed",
+                        "runtimeProfile": "managed-perf-release",
+                    },
+                    "validationIntent": {
+                        "validationMode": "perf",
+                        "adaptationLevel": "managed-runtime",
+                        "expectedOutcome": "pass",
+                    },
+                    "artifactPlan": {
+                        "requiredBuckets": ["source", "host-input", "runtime", "report"],
+                        "evidenceTerminalBucket": "report",
+                    },
+                },
+            ],
+        }
 
-        self.assertEqual("windows-dispatch-check", plan["selection"]["matrixId"])
-        self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("proof-dispatch", plan["selection"]["validationProfileId"])
-        self.assertEqual(
-            "MainlineFeaturePack/DispatchProofEntry::Run()",
-            plan["selection"]["source"]["entry"],
-        )
+        try:
+            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    def test_planner_overlays_matrix_source_entry_for_mainline_feature_pack_delegate_slice(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_delegate_slice")
-        _, record = select_subject_record(
-            "chaos_subject_planner_mainline_delegate_slice_record",
-            category="mainline",
-            source_type="dotnet-project",
-            required_goal_ids=["correctness.dev"],
-            required_validation_profile_ids=["proof-delegate"],
-        )
-        subject_id = str(record["subjectId"])
-        run_id = "20260409-fixture-mainline-delegate-slice-001"
+            plan = planner_module.build_plan(
+                repo_root,
+                "FixturePerfProfile",
+                goal_id="perf.release",
+                run_id="20260413-fixture-goal-matching-perf-profile-001",
+            )
 
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            subject_id,
-            goal_id="correctness.dev",
-            matrix_id="windows-delegate-check",
-            validation_profile_id="proof-delegate",
-            run_id=run_id,
-        )
-
-        self.assertEqual("windows-delegate-check", plan["selection"]["matrixId"])
-        self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("proof-delegate", plan["selection"]["validationProfileId"])
-        self.assertEqual(
-            "MainlineFeaturePack/DelegateProofEntry::Run()",
-            plan["selection"]["source"]["entry"],
-        )
-
-    def test_planner_overlays_matrix_source_entry_for_mainline_feature_pack_exception_slice(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_exception_slice")
-        _, record = select_subject_record(
-            "chaos_subject_planner_mainline_exception_slice_record",
-            category="mainline",
-            source_type="dotnet-project",
-            required_goal_ids=["correctness.dev"],
-            required_validation_profile_ids=["proof-exception"],
-        )
-        subject_id = str(record["subjectId"])
-        run_id = "20260409-fixture-mainline-exception-slice-001"
-
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            subject_id,
-            goal_id="correctness.dev",
-            matrix_id="windows-exception-check",
-            validation_profile_id="proof-exception",
-            run_id=run_id,
-        )
-
-        self.assertEqual("windows-exception-check", plan["selection"]["matrixId"])
-        self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("proof-exception", plan["selection"]["validationProfileId"])
-        self.assertEqual(
-            "MainlineFeaturePack/ExceptionProofEntry::Run()",
-            plan["selection"]["source"]["entry"],
-        )
-
-    def test_planner_overlays_matrix_source_entry_for_mainline_feature_pack_reflection_interop_closure_slice(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_reflection_interop_closure_slice")
-        _, record = select_subject_record(
-            "chaos_subject_planner_mainline_reflection_interop_closure_slice_record",
-            category="mainline",
-            source_type="dotnet-project",
-            required_goal_ids=["correctness.dev"],
-            required_validation_profile_ids=["proof-reflection-interop-closure"],
-        )
-        subject_id = str(record["subjectId"])
-        run_id = "20260409-fixture-mainline-reflection-interop-closure-slice-001"
-
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            subject_id,
-            goal_id="correctness.dev",
-            matrix_id="windows-reflection-interop-closure-check",
-            validation_profile_id="proof-reflection-interop-closure",
-            run_id=run_id,
-        )
-
-        self.assertEqual("windows-reflection-interop-closure-check", plan["selection"]["matrixId"])
-        self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("proof-reflection-interop-closure", plan["selection"]["validationProfileId"])
-        self.assertEqual(
-            "MainlineFeaturePack/ReflectionInteropClosureEntry::Run()",
-            plan["selection"]["source"]["entry"],
-        )
-
-    def test_planner_overlays_matrix_source_entry_for_mainline_feature_pack_interface_dispatch_slice(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_interface_dispatch_slice")
-        _, record = select_subject_record(
-            "chaos_subject_planner_mainline_interface_dispatch_slice_record",
-            category="mainline",
-            source_type="dotnet-project",
-            required_goal_ids=["correctness.dev"],
-            required_validation_profile_ids=["proof-interface-dispatch"],
-        )
-        subject_id = str(record["subjectId"])
-        run_id = "20260413-fixture-mainline-interface-dispatch-slice-001"
-
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            subject_id,
-            goal_id="correctness.dev",
-            matrix_id="windows-interface-dispatch-check",
-            validation_profile_id="proof-interface-dispatch",
-            run_id=run_id,
-        )
-
-        self.assertEqual("windows-interface-dispatch-check", plan["selection"]["matrixId"])
-        self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("proof-interface-dispatch", plan["selection"]["validationProfileId"])
-        self.assertEqual(
-            "MainlineFeaturePack/InterfaceDispatchProofEntry::Run()",
-            plan["selection"]["source"]["entry"],
-        )
-
-    def test_planner_overlays_matrix_source_entry_for_mainline_feature_pack_marshaling_slice(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_marshaling_slice")
-        _, record = select_subject_record(
-            "chaos_subject_planner_mainline_marshaling_slice_record",
-            category="mainline",
-            source_type="dotnet-project",
-            required_goal_ids=["correctness.dev"],
-            required_validation_profile_ids=["proof-marshaling"],
-        )
-        subject_id = str(record["subjectId"])
-        run_id = "20260413-fixture-mainline-marshaling-slice-001"
-
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            subject_id,
-            goal_id="correctness.dev",
-            matrix_id="windows-marshaling-check",
-            validation_profile_id="proof-marshaling",
-            run_id=run_id,
-        )
-
-        self.assertEqual("windows-marshaling-check", plan["selection"]["matrixId"])
-        self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("proof-marshaling", plan["selection"]["validationProfileId"])
-        self.assertEqual(
-            "MainlineFeaturePack/MarshalingProofEntry::Run()",
-            plan["selection"]["source"]["entry"],
-        )
-
-    def test_planner_selects_mainline_feature_pack_array_ops_slice_without_legacy_shell(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_array_ops_slice")
-
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            "MainlineFeaturePack",
-            goal_id="correctness.dev",
-            matrix_id="windows-array-ops-check",
-            validation_profile_id="proof-array-ops",
-            run_id="20260413-fixture-legacy-array-ops-shell-001",
-        )
-
-        self.assertEqual("MainlineFeaturePack", plan["selection"]["subjectId"])
-        self.assertEqual("windows-array-ops-check", plan["selection"]["matrixId"])
-        self.assertEqual("proof-array-ops", plan["selection"]["validationProfileId"])
-        self.assertEqual("subjects/MainlineFeaturePack/source/MainlineFeaturePack.csproj", plan["selection"]["source"]["path"])
-        self.assertEqual("MainlineFeaturePack/ArrayOpsProofEntry::Run()", plan["selection"]["source"]["entry"])
-        self.assertEqual({}, plan["selection"]["compatibility"])
-
-    def test_planner_selects_mainline_feature_pack_async_await_slice_without_legacy_shell(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_async_await_slice")
-
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            "MainlineFeaturePack",
-            goal_id="correctness.dev",
-            matrix_id="windows-async-await-check",
-            validation_profile_id="proof-async-await",
-            run_id="20260413-fixture-legacy-async-await-shell-001",
-        )
-
-        self.assertEqual("MainlineFeaturePack", plan["selection"]["subjectId"])
-        self.assertEqual("windows-async-await-check", plan["selection"]["matrixId"])
-        self.assertEqual("proof-async-await", plan["selection"]["validationProfileId"])
-        self.assertEqual("subjects/MainlineFeaturePack/source/MainlineFeaturePack.csproj", plan["selection"]["source"]["path"])
-        self.assertEqual("MainlineFeaturePack/AsyncAwaitProofEntry::Run()", plan["selection"]["source"]["entry"])
-        self.assertEqual({}, plan["selection"]["compatibility"])
-
-    def test_planner_selects_mainline_feature_pack_interface_dispatch_slice_without_legacy_shell(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_interface_dispatch_without_shell")
-
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            "MainlineFeaturePack",
-            goal_id="correctness.dev",
-            matrix_id="windows-interface-dispatch-check",
-            validation_profile_id="proof-interface-dispatch",
-            run_id="20260413-fixture-legacy-interface-dispatch-shell-001",
-        )
-
-        self.assertEqual("MainlineFeaturePack", plan["selection"]["subjectId"])
-        self.assertEqual("windows-interface-dispatch-check", plan["selection"]["matrixId"])
-        self.assertEqual("proof-interface-dispatch", plan["selection"]["validationProfileId"])
-        self.assertEqual("subjects/MainlineFeaturePack/source/MainlineFeaturePack.csproj", plan["selection"]["source"]["path"])
-        self.assertEqual("MainlineFeaturePack/InterfaceDispatchProofEntry::Run()", plan["selection"]["source"]["entry"])
-        self.assertEqual({}, plan["selection"]["compatibility"])
-
-    def test_planner_selects_mainline_feature_pack_marshaling_slice_without_legacy_shell(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_marshaling_without_shell")
-
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            "MainlineFeaturePack",
-            goal_id="correctness.dev",
-            matrix_id="windows-marshaling-check",
-            validation_profile_id="proof-marshaling",
-            run_id="20260413-fixture-legacy-marshaling-shell-001",
-        )
-
-        self.assertEqual("MainlineFeaturePack", plan["selection"]["subjectId"])
-        self.assertEqual("windows-marshaling-check", plan["selection"]["matrixId"])
-        self.assertEqual("proof-marshaling", plan["selection"]["validationProfileId"])
-        self.assertEqual("subjects/MainlineFeaturePack/source/MainlineFeaturePack.csproj", plan["selection"]["source"]["path"])
-        self.assertEqual("MainlineFeaturePack/MarshalingProofEntry::Run()", plan["selection"]["source"]["entry"])
-        self.assertEqual({}, plan["selection"]["compatibility"])
-
-    def test_planner_selects_mainline_feature_pack_cross_boundary_exception_slice_without_legacy_shell(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_mainline_cross_boundary_exception_without_shell")
-
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            "MainlineFeaturePack",
-            goal_id="correctness.dev",
-            matrix_id="windows-cross-boundary-eh-check",
-            validation_profile_id="proof-cross-boundary-exception",
-            run_id="20260413-fixture-legacy-cross-boundary-exception-shell-001",
-        )
-
-        self.assertEqual("MainlineFeaturePack", plan["selection"]["subjectId"])
-        self.assertEqual("windows-cross-boundary-eh-check", plan["selection"]["matrixId"])
-        self.assertEqual("proof-cross-boundary-exception", plan["selection"]["validationProfileId"])
-        self.assertEqual("subjects/MainlineFeaturePack/source/MainlineFeaturePack.csproj", plan["selection"]["source"]["path"])
-        self.assertEqual("MainlineFeaturePack/CrossBoundaryExceptionProofEntry::Run()", plan["selection"]["source"]["entry"])
-        self.assertEqual({}, plan["selection"]["compatibility"])
+            self.assertEqual("perf.release", plan["selection"]["goalId"])
+            self.assertEqual("windows-managed-perf-release", plan["selection"]["matrixId"])
+            self.assertEqual("perf-release", plan["selection"]["validationProfileId"])
+            self.assertEqual("perf", plan["selection"]["validationKind"])
+            self.assertEqual("PROFILE", plan["selection"]["variant"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_planner_selects_engine_output_pipeline_without_copying_engine_profile_into_selection(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_engine_output")
-        _, record = select_subject_record(
-            "chaos_subject_planner_engine_output_record",
-            category="canonical",
-            source_type="dotnet-project",
-            required_stage_kinds=["generated-engine-proof", "runtime-engine-observe"],
-            required_goal_ids=["correctness.dev"],
-        )
-        subject_id = str(record["subjectId"])
-        run_id = "20260410-fixture-engine-output-001"
+        repo_root, manifest = clone_fixture_subject_repo("EngineHostProof")
 
-        plan = planner_module.build_plan(REPO_ROOT, subject_id, run_id=run_id)
+        try:
+            subject_id = str(manifest["subjectId"])
+            run_id = "20260410-fixture-engine-output-001"
+            plan = planner_module.build_plan(repo_root, subject_id, run_id=run_id)
 
-        self.assertEqual(subject_id, plan["selection"]["subjectId"])
-        self.assertEqual("correctness.dev", plan["selection"]["goalId"])
-        self.assertEqual("windows-dev-output", plan["selection"]["matrixId"])
-        self.assertEqual("engine-runtime-output", plan["selection"]["pipelineId"])
-        self.assertNotIn("engineProofProfile", plan["selection"])
-        self.assertEqual(
-            [
-                "source-resolve",
-                "host-input-build",
-                "analysis-frontend",
-                "generated-engine-proof",
-                "build-target",
-                "runtime-engine-observe",
-                "report-assemble",
-            ],
-            [stage["stageId"] for stage in plan["stagePlan"]],
-        )
+            self.assertEqual(subject_id, plan["selection"]["subjectId"])
+            self.assertEqual("correctness.dev", plan["selection"]["goalId"])
+            self.assertEqual("windows-dev-output", plan["selection"]["matrixId"])
+            self.assertEqual("engine-runtime-output", plan["selection"]["pipelineId"])
+            self.assertNotIn("engineProofProfile", plan["selection"])
+            self.assertEqual(
+                [
+                    "source-resolve",
+                    "host-input-build",
+                    "analysis-frontend",
+                    "generated-engine-proof",
+                    "build-target",
+                    "runtime-engine-observe",
+                    "report-assemble",
+                ],
+                [stage["stageId"] for stage in plan["stagePlan"]],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_planner_selects_engine_trace_matrix_and_paths_without_subject_name_coupling(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_engine_trace")
-        subjects_module, record = select_subject_record(
-            "chaos_subject_planner_engine_trace_record",
-            category="canonical",
-            source_type="dotnet-project",
-            required_stage_kinds=["runtime-engine-trace-compare"],
-            required_goal_ids=["correctness.platform"],
-        )
-        manifest = record["manifest"]
-        subject_id = str(record["subjectId"])
-        trace_matrix = find_matrix_for_goal(
-            subjects_module,
-            manifest,
-            "correctness.platform",
-            required_stage_kind="runtime-engine-trace-compare",
-        )
-        run_id = "20260410-fixture-engine-trace-001"
+        repo_root, manifest = clone_fixture_subject_repo("EngineHostProof")
 
-        plan = planner_module.build_plan(
-            REPO_ROOT,
-            subject_id,
-            goal_id="correctness.platform",
-            matrix_id=str(trace_matrix["matrixId"]),
-            run_id=run_id,
-        )
+        try:
+            subjects_module = load_subjects_module("chaos_subject_planner_engine_trace_subjects")
+            subject_id = str(manifest["subjectId"])
+            trace_matrix = find_matrix_for_goal(
+                subjects_module,
+                manifest,
+                "correctness.platform",
+                required_stage_kind="runtime-engine-trace-compare",
+            )
+            run_id = "20260410-fixture-engine-trace-001"
 
-        self.assertEqual("windows-reference-trace", plan["selection"]["matrixId"])
-        self.assertEqual("engine-runtime-trace", plan["selection"]["pipelineId"])
-        self.assertEqual(
-            [
-                "source-resolve",
-                "host-input-build",
-                "analysis-frontend",
-                "generated-engine-proof",
-                "build-target",
-                "runtime-engine-observe",
-                "runtime-engine-trace-compare",
-                "report-assemble",
-            ],
-            [stage["stageId"] for stage in plan["stagePlan"]],
-        )
-        trace_stage = next(stage for stage in plan["stagePlan"] if stage["kind"] == "runtime-engine-trace-compare")
-        self.assertEqual(
-            subjects_module.stage_paths(
+            plan = planner_module.build_plan(
+                repo_root,
                 subject_id,
-                "windows-reference-trace",
+                goal_id="correctness.platform",
+                matrix_id=str(trace_matrix["matrixId"]),
                 run_id=run_id,
-                bucket="runtime",
-                scope="matrix",
-                kind="runtime-engine-trace-compare",
-            )["reportPaths"],
-            trace_stage["paths"]["reportPaths"],
-        )
+            )
+
+            self.assertEqual("windows-reference-trace", plan["selection"]["matrixId"])
+            self.assertEqual("engine-runtime-trace", plan["selection"]["pipelineId"])
+            self.assertEqual(
+                [
+                    "source-resolve",
+                    "host-input-build",
+                    "analysis-frontend",
+                    "generated-engine-proof",
+                    "build-target",
+                    "runtime-engine-observe",
+                    "runtime-engine-trace-compare",
+                    "report-assemble",
+                ],
+                [stage["stageId"] for stage in plan["stagePlan"]],
+            )
+            trace_stage = next(stage for stage in plan["stagePlan"] if stage["kind"] == "runtime-engine-trace-compare")
+            self.assertEqual(
+                subjects_module.stage_paths(
+                    subject_id,
+                    "windows-reference-trace",
+                    run_id=run_id,
+                    bucket="runtime",
+                    scope="matrix",
+                    kind="runtime-engine-trace-compare",
+                )["reportPaths"],
+                trace_stage["paths"]["reportPaths"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_planner_expands_shared_orchestration_profiles_before_building_plan(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_shared_profiles")

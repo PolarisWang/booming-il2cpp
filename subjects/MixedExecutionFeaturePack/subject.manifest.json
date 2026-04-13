@@ -7,9 +7,15 @@
   "defaultValidationProfile": "managed-output",
   "source": {
     "type": "dotnet-project",
-    "path": "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj",
-    "entry": "MixedExecutionFeaturePack/MixedExecutionProofEntry::Run()"
+    "path": "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln",
+    "primaryProjectPath": "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj",
+    "entry": "MixedExecutionFeaturePack/MixedExecutionProofEntry::Run()",
+    "entrySelection": {
+      "entryKind": 1,
+      "entrySlice": 2
+    }
   },
+  "sourceModel": "dotnet-solution",
   "workloadEntry": "MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()",
   "testDeclarationMode": "require",
   "validationProfiles": {
@@ -309,8 +315,9 @@
       "supportedGoals": [
         "perf.release"
       ],
+      "workloadEntry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
       "source": {
-        "entry": "MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()"
+        "entry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()"
       },
       "executionContext": {
         "hostPlatform": "windows-x64",

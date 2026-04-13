@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-INTERFACE_DISPATCH_SUBJECT_ROOT = REPO_ROOT / "subjects" / "MainlineFeaturePack"
+INTERFACE_DISPATCH_SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 INTERFACE_DISPATCH_MANIFEST_PATH = INTERFACE_DISPATCH_SUBJECT_ROOT / "subject.manifest.json"
 INTERFACE_DISPATCH_TEMPLATE_PATH = (
     REPO_ROOT
@@ -57,10 +57,10 @@ class Phase2PerfGovernanceTests(unittest.TestCase):
             for matrix in list(manifest.get("environmentMatrices") or [])
         }
 
-        self.assertEqual(["proof", "perf"], validation_profiles["perf-profile"])
+        self.assertEqual(["perf"], validation_profiles["perf-profile"])
         self.assertEqual("native-runtime-perf", validation["perf"]["driver"])
-        self.assertIn("native-runtime-perf", pipeline_ids)
-        self.assertIn("windows-native-profile", matrix_ids)
+        self.assertIn("native-benchmark", pipeline_ids)
+        self.assertIn("windows-native-perf", matrix_ids)
 
         baseline = json.loads(INTERFACE_DISPATCH_BASELINE_PATH.read_text(encoding="utf-8"))
         self.assertLessEqual(float(baseline["meanDurationMs"]), 80.0)
@@ -82,7 +82,10 @@ class Phase2PerfGovernanceTests(unittest.TestCase):
         script_source = CONVERT_PERF_SCRIPT_PATH.read_text(encoding="utf-8")
 
         self.assertLessEqual(float(baseline["convertDurationMs"]), 10000.0)
-        self.assertIn("SolutionMultiProject", script_source)
+        self.assertIn("tests", script_source)
+        self.assertIn("fixtures", script_source)
+        self.assertIn("solution-multi-project", script_source)
+        self.assertNotIn('REPO_ROOT / "subjects" / "SolutionMultiProject"', script_source)
         self.assertIn("evaluate_perf_suite", script_source)
         self.assertIn("convert-golden-multi-project", script_source)
 

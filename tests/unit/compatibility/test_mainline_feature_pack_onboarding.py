@@ -15,40 +15,16 @@ DRIVER_ENTRY_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Dri
 LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
 WORKERS_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_workers.py"
 CMAKE_PATH = REPO_ROOT / "CMakeLists.txt"
-MANIFEST_PATH = REPO_ROOT / "subjects" / "MainlineFeaturePack" / "subject.manifest.json"
-SOURCE_PROJECT_PATH = REPO_ROOT / "subjects" / "MainlineFeaturePack" / "source" / "MainlineFeaturePack.csproj"
-SOURCE_PROGRAM_PATH = REPO_ROOT / "subjects" / "MainlineFeaturePack" / "source" / "Program.cs"
-FRAMEWORK_PROJECT_REFERENCE = "../../../src/reference/Chaos.TestFramework/Chaos.TestFramework.csproj"
-UNIT_PROJECT_PATH = (
-    REPO_ROOT
-    / "subjects"
-    / "MainlineFeaturePack"
-    / "validation"
-    / "unit"
-    / "MainlineFeaturePack.Subject.UnitTests"
-    / "MainlineFeaturePack.Subject.UnitTests.csproj"
-)
-PROOF_CMAKE_PATH = (
-    REPO_ROOT
-    / "subjects"
-    / "MainlineFeaturePack"
-    / "validation"
-    / "proof"
-    / "native-reference"
-    / "CMakeLists.txt"
-)
-PERF_BASELINE_PATH = (
-    REPO_ROOT
-    / "subjects"
-    / "MainlineFeaturePack"
-    / "baselines"
-    / "perf"
-    / "windows-native-profile"
-    / "windows.json"
-)
+SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
+MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
+SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "Slices" / "MainlineFeaturePack" / "MainlineFeaturePack.csproj"
+SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Slices" / "MainlineFeaturePack" / "Program.cs"
+FRAMEWORK_PROJECT_REFERENCE = "../../../../../src/reference/Chaos.TestFramework/Chaos.TestFramework.csproj"
+PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
+PERF_BASELINE_PATH = SUBJECT_ROOT / "baselines" / "perf" / "windows-native-perf" / "windows.json"
 TRACE_COMPARE_PATH = REPO_ROOT / "tests" / "contracts" / "trace" / "compare-warmup-trace.py"
 WINDOWS_TRACE_SNAPSHOT_PATH = REPO_ROOT / "tests" / "contracts" / "trace" / "snapshots" / "windows-warmup-trace.snapshot.json"
-TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase4-mainline-feature-pack"
+TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "solution-core-pack-onboarding"
 
 
 def _dotnet_intermediate_args(intermediate_root: Path) -> list[str]:
@@ -71,7 +47,7 @@ def _run_checked(arguments: list[str], *, cwd: Path) -> str:
     return output
 
 
-class Phase4MainlineFeaturePackOnboardingTests(unittest.TestCase):
+class Phase4SolutionCorePackOnboardingTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
@@ -95,36 +71,47 @@ class Phase4MainlineFeaturePackOnboardingTests(unittest.TestCase):
         self.assertIn("CHAOS_SUBJECT_PROOF_ROOT", cmake_source)
         self.assertIn("add_subdirectory(\"${CHAOS_SUBJECT_PROOF_ROOT}\"", cmake_source)
         self.assertIn(
-            'host_source_path = repo_root / "subjects" / str(selection["subjectId"]) / "validation" / "proof" / "native-reference" / "main.cpp"',
+            'subject_proof_root = repo_root / "subjects" / str(selection["subjectId"]) / "validation" / "proof" / "native-reference"',
+            workers_source,
+        )
+        self.assertIn(
+            'host_source_path = subject_proof_root / "main.cpp"',
             workers_source,
         )
 
-    def test_mainline_feature_pack_manifest_and_tree_are_realized(self) -> None:
+    def test_solution_core_pack_manifest_and_mainline_slice_are_realized(self) -> None:
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         source_project_text = SOURCE_PROJECT_PATH.read_text(encoding="utf-8")
+        source_program_text = SOURCE_PROGRAM_PATH.read_text(encoding="utf-8")
         validation_profiles = dict(manifest.get("validationProfiles") or {})
         validation = dict(manifest.get("validation") or {})
 
-        self.assertEqual("MainlineFeaturePack/ProofEntry::Run()", manifest["source"]["entry"])
-        self.assertEqual("require", manifest["testDeclarationMode"])
-        self.assertEqual(["proof", "unit"], validation_profiles["proof-dev"])
-        self.assertEqual(["proof"], validation_profiles["trace-platform"])
-        self.assertEqual(["proof", "perf"], validation_profiles["perf-profile"])
+        self.assertEqual("SolutionCorePack", manifest["subjectId"])
+        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
         self.assertEqual(
-            "subjects/MainlineFeaturePack/validation/unit/MainlineFeaturePack.Subject.UnitTests/MainlineFeaturePack.Subject.UnitTests.csproj",
-            validation["unit"]["project"],
+            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            manifest["source"]["primaryProjectPath"],
         )
-        self.assertEqual("xunit", validation["unit"]["framework"])
+        self.assertEqual("MainlineFeaturePack/ProofEntry::Run()", manifest["source"]["entry"])
+        self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
+        self.assertEqual("dotnet-solution", manifest["sourceModel"])
+        self.assertEqual("require", manifest["testDeclarationMode"])
+        self.assertEqual(["proof"], validation_profiles["proof-dev"])
+        self.assertEqual(["proof"], validation_profiles["trace-platform"])
+        self.assertEqual(["perf"], validation_profiles["perf-profile"])
+        self.assertEqual("proof", validation["proof"]["kind"])
         self.assertEqual("native-runtime-perf", validation["perf"]["driver"])
+        self.assertNotIn("unit", validation)
         self.assertIn(FRAMEWORK_PROJECT_REFERENCE, source_project_text)
 
         self.assertTrue(SOURCE_PROJECT_PATH.is_file())
         self.assertTrue(SOURCE_PROGRAM_PATH.is_file())
-        self.assertTrue(UNIT_PROJECT_PATH.is_file())
         self.assertTrue(PROOF_CMAKE_PATH.is_file())
         self.assertTrue(PERF_BASELINE_PATH.is_file())
+        self.assertIn("[ChaosUnitTest(", source_program_text)
+        self.assertIn('Alias = "mainline-proof"', source_program_text)
 
-    def test_mainline_feature_pack_trace_export_matches_windows_snapshot(self) -> None:
+    def test_solution_core_pack_mainline_trace_export_matches_windows_snapshot(self) -> None:
         temp_root = Path(tempfile.mkdtemp(prefix="trace-export-", dir=str(TEST_TMP_ROOT)))
         try:
             build_output_root = temp_root / "build"

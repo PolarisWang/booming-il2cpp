@@ -30,16 +30,16 @@ class SelectorTests(unittest.TestCase):
 
         normalized = selectors_module.normalize_selector_options(
             "engineering-workload",
-            {"subject": "PerformanceFeaturePack", "kind": "codegen"},
+            {"subject": "SolutionCorePack", "kind": "codegen"},
         )
 
-        self.assertEqual("engineering-workload/PerformanceFeaturePack/codegen", normalized["id"])
-        self.assertEqual("PerformanceFeaturePack", normalized["subject"])
+        self.assertEqual("engineering-workload/SolutionCorePack/codegen", normalized["id"])
+        self.assertEqual("SolutionCorePack", normalized["subject"])
         self.assertEqual("codegen", normalized["kind"])
 
     def test_declared_selector_parses_stable_id(self) -> None:
         selectors_module = load_module(SELECTORS_MODULE_PATH, "chaos_selector_declared")
-        declared_id = "declared-unit-test/MainlineFeaturePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"
+        declared_id = "declared-unit-test/SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"
 
         normalized = selectors_module.normalize_selector_options(
             "declared-unit-test",
@@ -48,7 +48,7 @@ class SelectorTests(unittest.TestCase):
 
         self.assertEqual(declared_id, normalized["id"])
         self.assertEqual(
-            "MainlineFeaturePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()",
+            "SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()",
             normalized["stable_id"],
         )
 

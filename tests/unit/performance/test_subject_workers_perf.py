@@ -10,8 +10,6 @@ import uuid
 from pathlib import Path
 from unittest.mock import patch
 
-from tests.support import select_subject_record
-
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_WORKERS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_workers.py"
@@ -56,24 +54,15 @@ class SubjectWorkersPerfTests(unittest.TestCase):
 
     def test_runtime_perf_collect_runs_multiple_samples_and_records_perf_details(self) -> None:
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_perf_runtime")
-        subject_record = select_subject_record(
-            "chaos_subject_workers_perf_runtime_record",
-            category="benchmark",
-            source_type="dotnet-project",
-            required_goal_ids=["perf.release"],
-            required_validation_kinds=["perf"],
-            required_validation_drivers=["csharp-perf-harness"],
-        )
-        subject_id = str(subject_record["subjectId"])
+        subject_id = "FixtureManagedPerfSubject"
         run_id = "fixture-run-perf-runtime-001"
-        matrix_id = "windows-perf-release"
+        matrix_id = "windows-managed-perf"
         perf_project_path = posix_path(
-            "subjects",
-            subject_id,
+            "src",
             "validation",
             "perf",
-            f"{subject_id}.Subject.PerfHarness",
-            f"{subject_id}.Subject.PerfHarness.csproj",
+            "Benchmark.WorkloadEntry.PerfHarness",
+            "Benchmark.WorkloadEntry.PerfHarness.csproj",
         )
         perf_harness_dll_path = subject_run_path(
             subject_id,
@@ -82,7 +71,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
             matrix_id,
             "runtime",
             "harness",
-            f"{subject_id}.Subject.PerfHarness.dll",
+            "Benchmark.WorkloadEntry.PerfHarness.dll",
         )
         request = {
             "selection": {
@@ -258,9 +247,9 @@ class SubjectWorkersPerfTests(unittest.TestCase):
 
     def test_native_runtime_perf_runs_native_binary_samples_and_records_native_perf_artifacts(self) -> None:
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_native_perf_runtime")
-        subject_id = "MainlineFeaturePack"
+        subject_id = "FixtureNativePerfSubject"
         run_id = "fixture-run-native-perf-001"
-        matrix_id = "windows-native-profile"
+        matrix_id = "windows-native-perf"
         executable_path = subject_run_path(
             subject_id,
             run_id,
@@ -398,9 +387,9 @@ class SubjectWorkersPerfTests(unittest.TestCase):
 
     def test_native_runtime_perf_passes_subject_harness_iterations_override_to_host(self) -> None:
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_native_perf_iterations_override")
-        subject_id = "BenchArithmetic"
+        subject_id = "FixtureNativePerfIterationsSubject"
         run_id = "fixture-run-native-perf-iterations-override-001"
-        matrix_id = "windows-native-profile"
+        matrix_id = "windows-native-perf"
         executable_path = subject_run_path(
             subject_id,
             run_id,
@@ -499,9 +488,9 @@ class SubjectWorkersPerfTests(unittest.TestCase):
 
     def test_native_runtime_perf_collects_custom_numeric_metrics_from_payload(self) -> None:
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_native_perf_custom_metrics")
-        subject_id = "InterfaceDispatchProof"
+        subject_id = "FixtureDispatchPerfSubject"
         run_id = "fixture-run-interface-dispatch-native-perf-001"
-        matrix_id = "windows-native-profile"
+        matrix_id = "windows-native-perf"
         executable_path = subject_run_path(
             subject_id,
             run_id,
@@ -632,7 +621,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
 
     def test_mobile_native_perf_android_uses_target_platform_baseline_and_records_collector_details(self) -> None:
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_mobile_android_perf")
-        subject_id = "BenchArithmetic"
+        subject_id = "FixtureMobilePerfSubject"
         run_id = "fixture-run-mobile-android-perf-001"
         matrix_id = "android-arm64-native-perf"
         executable_path = subject_run_path(
@@ -653,7 +642,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
                     "hostPlatform": "windows-x64",
                     "targetPlatform": "android-arm64",
                     "runtimeProfile": "android-native-perf-profile",
-                    "runtimeArguments": ["--subject-id=BenchArithmetic"],
+                    "runtimeArguments": ["--subject-id=FixtureMobilePerfSubject"],
                 },
             },
             "upstream": {
@@ -734,7 +723,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
 
     def test_mobile_native_perf_ios_uses_cmake_binary_dir_and_target_platform_baseline(self) -> None:
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_mobile_ios_perf")
-        subject_id = "BenchArithmetic"
+        subject_id = "FixtureMobilePerfSubject"
         run_id = "fixture-run-mobile-ios-perf-001"
         matrix_id = "ios-arm64-native-perf"
         request = {

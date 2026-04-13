@@ -68,6 +68,11 @@ class AvailabilityStatus(str, Enum):
 _PROJECT_REFERENCE_PATTERN = re.compile(r"<ProjectReference(?:\s|>)", re.IGNORECASE)
 _PACKAGE_REFERENCE_PATTERN = re.compile(r"<PackageReference(?:\s|>)", re.IGNORECASE)
 _BINARY_REFERENCE_PATTERN = re.compile(r"<(?:Reference|HintPath)(?:\s|>)", re.IGNORECASE)
+_SOLUTION_PROJECT_PATTERN = re.compile(
+    r'^Project\("[^"]+"\)\s*=\s*"[^"]+",\s*"([^"]+\.csproj)"\s*,',
+    re.IGNORECASE,
+)
+_ASSEMBLY_NAME_PATTERN = re.compile(r"<AssemblyName>\s*([^<]+)\s*</AssemblyName>", re.IGNORECASE)
 _ORCHESTRATION_REF_FIELDS = (
     "matrixProfile",
     "pipelineProfile",
@@ -125,6 +130,59 @@ def _normalize_optional_string(value: Any, *, field_name: str) -> str:
     if not normalized:
         raise ValueError(f"{field_name} must be a non-empty string")
     return normalized
+
+
+def resolve_source_primary_project_path(source_or_manifest: dict[str, Any]) -> str:
+    payload = dict(source_or_manifest.get("source") or source_or_manifest)
+    source_path = str(payload.get("path") or "").strip()
+    primary_project_path = str(
+        payload.get("primaryProjectPath")
+        or payload.get("primaryProject")
+        or payload.get("projectPath")
+        or ""
+    ).strip()
+    if primary_project_path:
+        return primary_project_path
+    if source_path.endswith(".csproj"):
+        return source_path
+    raise ValueError("solution source requires source.primaryProjectPath")
+
+
+def resolve_source_solution_assembly_names(repo_root: Path, source_or_manifest: dict[str, Any]) -> list[str]:
+    payload = dict(source_or_manifest.get("source") or source_or_manifest)
+    source_path = str(payload.get("path") or "").strip()
+    if not source_path.endswith(".sln"):
+        return []
+
+    solution_path = Path(source_path)
+    if not solution_path.is_absolute():
+        solution_path = repo_root / solution_path
+    if not solution_path.is_file():
+        return []
+
+    assembly_names: list[str] = []
+    for line in solution_path.read_text(encoding="utf-8").splitlines():
+        match = _SOLUTION_PROJECT_PATTERN.match(line.strip())
+        if match is None:
+            continue
+
+        project_path = Path(match.group(1).replace("\\", "/"))
+        if not project_path.is_absolute():
+            project_path = solution_path.parent / project_path
+        if not project_path.is_file():
+            continue
+
+        project_text = project_path.read_text(encoding="utf-8")
+        assembly_name_match = _ASSEMBLY_NAME_PATTERN.search(project_text)
+        assembly_name = (
+            assembly_name_match.group(1).strip()
+            if assembly_name_match is not None
+            else project_path.stem
+        )
+        if assembly_name and assembly_name not in assembly_names:
+            assembly_names.append(assembly_name)
+
+    return assembly_names
 
 
 def _normalize_orchestration(payload: Any) -> dict[str, Any]:

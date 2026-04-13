@@ -10,6 +10,26 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECTS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subjects.py"
+RETAINED_SOLUTION_SUBJECT_IDS = {
+    "SolutionCorePack",
+    "HotUpdateHostPack",
+    "MixedExecutionFeaturePack",
+}
+SOLUTION_CORE_PACK_PIPELINE_IDS = {
+    "managed-runtime-output",
+    "managed-runtime-trace",
+    "proof-runtime-output",
+    "native-benchmark",
+}
+SOLUTION_CORE_PACK_MATRIX_IDS = {
+    "windows-archetype-simple-lib-managed-output",
+    "windows-archetype-multi-project-managed-output",
+    "windows-archetype-package-reference-managed-output",
+    "windows-native-check",
+    "windows-managed-trace",
+    "macos-managed-trace",
+    "windows-native-perf",
+}
 
 
 def load_module(path: Path, module_name: str):
@@ -96,7 +116,7 @@ class SubjectManifestSchemaTests(unittest.TestCase):
                 self.assertTrue(label)
                 self.assertTrue(str(baseline_path).startswith(f"subjects/{subject_id}/baselines/"))
 
-    def test_query_finds_trace_capable_canonical_subject_without_subject_name_coupling(self) -> None:
+    def test_query_finds_trace_capable_retained_solution_subject_without_subject_name_coupling(self) -> None:
         subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_query_trace")
         run_id = "20260407-hello-001"
 
@@ -106,12 +126,14 @@ class SubjectManifestSchemaTests(unittest.TestCase):
             source_type="dotnet-project",
             required_stage_kinds=[
                 "analysis-frontend",
+                "generated-native-aot",
                 "generated-native-proof",
+                "native-runtime-perf",
                 "runtime-trace-compare",
             ],
-            required_validation_profile_ids=["proof-dev"],
-            required_validation_kinds=["proof", "unit"],
-            required_validation_frameworks=["xunit"],
+            required_validation_profile_ids=["proof-dev", "trace-platform", "perf-profile"],
+            required_validation_kinds=["proof", "perf"],
+            required_validation_drivers=["native-runtime-perf"],
         )
         manifest = record["manifest"]
         subject_id = record["subjectId"]
@@ -167,74 +189,24 @@ class SubjectManifestSchemaTests(unittest.TestCase):
             runtime_paths["reportPaths"],
         )
 
-    def test_query_finds_perf_benchmark_subject_without_subject_name_coupling(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_query_perf")
+    def test_query_finds_solution_core_pack_native_aot_surface_without_subject_name_coupling(self) -> None:
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_query_solution_core_pack")
 
         record = subjects_module.require_single_subject_record(
             subjects_module.load_subject_records(REPO_ROOT),
-            category="benchmark",
-            source_type="dotnet-project",
-            required_stage_kinds=["runtime-perf-collect"],
-            required_goal_ids=["perf.dev", "perf.release"],
-            required_host_platforms=["windows-x64"],
-            required_validation_profile_ids=["perf-dev", "perf-release"],
-            required_validation_kinds=["perf"],
-            required_validation_drivers=["csharp-perf-harness"],
-        )
-        manifest = record["manifest"]
-        capabilities = record["capabilities"]
-
-        self.assertEqual("benchmark", capabilities["category"])
-        self.assertIn("runtime-perf-collect", capabilities["stageKinds"])
-        self.assertEqual({"perf.dev", "perf.release"}, set(capabilities["goalIds"]))
-        self.assertEqual("perf-dev", capabilities["defaultValidationProfile"])
-        self.assertEqual("dotnet-project", manifest["source"]["type"])
-        self.assertTrue(str(manifest["source"]["path"]).startswith(f"subjects/{record['subjectId']}/source/"))
-
-    def test_query_groups_managed_output_subjects_without_subject_name_list(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_query_managed_output")
-
-        records = subjects_module.query_subject_records(
-            subjects_module.load_subject_records(REPO_ROOT),
-            source_type="dotnet-project",
-            required_stage_kinds=["runtime-managed-output"],
-            required_goal_ids=["correctness.dev"],
-            required_host_platforms=["windows-x64", "macos-arm64", "linux-x64"],
-            required_validation_profile_ids=["managed-output"],
-            required_validation_kinds=["proof"],
-        )
-
-        self.assertGreaterEqual(len(records), 4)
-        for record in records:
-            manifest = record["manifest"]
-            capabilities = record["capabilities"]
-            compatibility = dict(manifest.get("compatibility") or {})
-            redirect_subject_id = str(compatibility.get("redirectToSubject") or "")
-            source_owner = redirect_subject_id or record["subjectId"]
-            self.assertIn(capabilities["category"], {"canonical", "diagnostic"})
-            self.assertTrue(str(manifest["source"]["path"]).startswith(f"subjects/{source_owner}/source/"))
-            self.assertEqual(
-                {"windows-x64", "macos-arm64", "linux-x64"},
-                set(capabilities["hostPlatforms"]),
-            )
-
-    def test_query_finds_mainline_feature_pack_planning_surface_without_subject_name_coupling(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_query_mainline_feature_pack")
-
-        record = subjects_module.require_single_subject_record(
-            subjects_module.load_subject_records(REPO_ROOT),
-            category="mainline",
+            category="canonical",
             source_type="dotnet-project",
             required_stage_kinds=[
                 "analysis-frontend",
                 "generated-native-proof",
-                "build-target",
+                "generated-native-aot",
                 "native-runtime-perf",
+                "runtime-trace-compare",
             ],
-            required_goal_ids=["correctness.dev", "correctness.platform", "perf.profile"],
-            required_host_platforms=["windows-x64"],
+            required_goal_ids=["correctness.dev", "correctness.platform", "perf.release"],
+            required_host_platforms=["windows-x64", "macos-arm64"],
+            required_validation_profile_ids=["proof-dev", "trace-platform", "managed-output", "perf-profile"],
             required_validation_kinds=["proof", "perf"],
-            required_validation_profile_ids=["proof-dev", "trace-platform", "perf-profile"],
             required_validation_drivers=["native-runtime-perf"],
         )
         manifest = record["manifest"]
@@ -247,628 +219,211 @@ class SubjectManifestSchemaTests(unittest.TestCase):
             str(matrix["matrixId"])
             for matrix in list(manifest.get("environmentMatrices") or [])
         }
-        native_matrix = subjects_module.find_matrix(manifest, "windows-native-profile")
 
-        self.assertEqual("MainlineFeaturePack", record["subjectId"])
-        self.assertEqual("mainline", capabilities["category"])
+        self.assertEqual("SolutionCorePack", record["subjectId"])
+        self.assertEqual("canonical", capabilities["category"])
+        self.assertEqual("dotnet-solution", capabilities["sourceModel"])
+        self.assertEqual("mixed", capabilities["dependencyModel"])
+        self.assertEqual("generated-native", capabilities["executablePlan"])
+        self.assertEqual("native-executable", capabilities["engineeringProfile"])
         self.assertEqual("require", capabilities["testDeclarationMode"])
-        self.assertEqual({"proof-runtime-output", "proof-runtime-trace", "native-runtime-perf"}, pipeline_ids)
+        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
         self.assertEqual(
-            {
-                "windows-native-check",
-                "windows-reference-trace",
-                "windows-array-ops-check",
-                "windows-async-await-check",
-                "windows-bitwise-ops-check",
-                "windows-branch-ops-check",
-                "windows-cross-boundary-eh-check",
-                "windows-conversion-ops-check",
-                "windows-delegate-chain-check",
-                "windows-generic-collection-check",
-                "windows-interface-dispatch-check",
-                "windows-linker-stripping-check",
-                "windows-marshaling-check",
-                "windows-nested-exception-check",
-                "windows-object-ops-check",
-                "windows-overflow-ops-check",
-                "windows-threading-check",
-                "windows-vtable-dispatch-check",
-                "windows-dispatch-check",
-                "windows-generic-layout-check",
-                "windows-array-boxing-check",
-                "windows-delegate-check",
-                "windows-exception-check",
-                "windows-reflection-interop-closure-check",
-                "windows-native-profile",
-            },
-            matrix_ids,
+            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            manifest["source"]["primaryProjectPath"],
         )
-        self.assertEqual("native-runtime-perf", str(native_matrix["pipelineId"]))
-        self.assertEqual(
-            ["source", "host-input", "analysis", "generated", "build", "runtime", "report"],
-            list(dict(native_matrix["artifactPlan"])["requiredBuckets"]),
+        self.assertEqual("MainlineFeaturePack/ProofEntry::Run()", manifest["source"]["entry"])
+        self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
+        self.assertEqual(SOLUTION_CORE_PACK_PIPELINE_IDS, pipeline_ids)
+        self.assertEqual(SOLUTION_CORE_PACK_MATRIX_IDS, matrix_ids)
+        self.assertEqual({"macos-arm64", "windows-x64"}, set(capabilities["hostPlatforms"]))
+        assert_matrix_source_entry(
+            self,
+            subjects_module,
+            manifest,
+            "windows-archetype-simple-lib-managed-output",
+            "GoldenSimpleLib.App/Program::Main()",
         )
-        self.assertEqual("report", str(dict(native_matrix["artifactPlan"])["evidenceTerminalBucket"]))
-
-    def test_mainline_feature_pack_manifest_declares_phase5_capability_slice_profiles_and_matrices(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase5_capability_slices")
-
-        record = subjects_module.require_single_subject_record(
-            subjects_module.load_subject_records(REPO_ROOT),
-            category="mainline",
-            source_type="dotnet-project",
-            required_validation_profile_ids=[
-                "proof-dispatch",
-                "proof-generic-layout",
-                "proof-array-boxing",
-            ],
+        assert_matrix_source_entry(
+            self,
+            subjects_module,
+            manifest,
+            "windows-managed-trace",
+            "HostEmbeddingLite/Program::Main(System.String[])",
         )
-        manifest = record["manifest"]
-        validation_profiles = dict(manifest.get("validationProfiles") or {})
-        matrix_ids = {
-            str(matrix["matrixId"])
-            for matrix in list(manifest.get("environmentMatrices") or [])
-        }
-        dispatch_matrix = subjects_module.find_matrix(manifest, "windows-dispatch-check")
-
-        self.assertEqual(["proof"], validation_profiles["proof-dispatch"])
-        self.assertEqual(["proof"], validation_profiles["proof-generic-layout"])
-        self.assertEqual(["proof"], validation_profiles["proof-array-boxing"])
-        self.assertEqual(
-            {
-                "windows-native-check",
-                "windows-reference-trace",
-                "windows-native-profile",
-                "windows-array-ops-check",
-                "windows-async-await-check",
-                "windows-bitwise-ops-check",
-                "windows-branch-ops-check",
-                "windows-cross-boundary-eh-check",
-                "windows-conversion-ops-check",
-                "windows-delegate-chain-check",
-                "windows-generic-collection-check",
-                "windows-interface-dispatch-check",
-                "windows-linker-stripping-check",
-                "windows-marshaling-check",
-                "windows-nested-exception-check",
-                "windows-object-ops-check",
-                "windows-overflow-ops-check",
-                "windows-threading-check",
-                "windows-vtable-dispatch-check",
-                "windows-dispatch-check",
-                "windows-generic-layout-check",
-                "windows-array-boxing-check",
-                "windows-delegate-check",
-                "windows-exception-check",
-                "windows-reflection-interop-closure-check",
-            },
-            matrix_ids,
-        )
-        self.assertEqual(
-            "MainlineFeaturePack/DispatchProofEntry::Run()",
-            str(dict(dispatch_matrix.get("source") or {})["entry"]),
+        assert_matrix_source_entry(
+            self,
+            subjects_module,
+            manifest,
+            "windows-native-perf",
+            "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()",
         )
 
-    def test_mainline_feature_pack_manifest_declares_phase6_capability_slice_profiles_and_matrices(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase6_capability_slices")
-
-        record = subjects_module.require_single_subject_record(
-            subjects_module.load_subject_records(REPO_ROOT),
-            category="mainline",
-            source_type="dotnet-project",
-            required_validation_profile_ids=[
-                "proof-delegate",
-                "proof-exception",
-                "proof-reflection-interop-closure",
-            ],
-        )
-        manifest = record["manifest"]
-        validation_profiles = dict(manifest.get("validationProfiles") or {})
-        matrix_ids = {
-            str(matrix["matrixId"])
-            for matrix in list(manifest.get("environmentMatrices") or [])
-        }
-        delegate_matrix = subjects_module.find_matrix(manifest, "windows-delegate-check")
-        exception_matrix = subjects_module.find_matrix(manifest, "windows-exception-check")
-        closure_matrix = subjects_module.find_matrix(manifest, "windows-reflection-interop-closure-check")
-
-        self.assertEqual(["proof"], validation_profiles["proof-delegate"])
-        self.assertEqual(["proof"], validation_profiles["proof-exception"])
-        self.assertEqual(["proof"], validation_profiles["proof-reflection-interop-closure"])
-        self.assertEqual(
-            {
-                "windows-native-check",
-                "windows-reference-trace",
-                "windows-native-profile",
-                "windows-array-ops-check",
-                "windows-async-await-check",
-                "windows-bitwise-ops-check",
-                "windows-branch-ops-check",
-                "windows-cross-boundary-eh-check",
-                "windows-conversion-ops-check",
-                "windows-delegate-chain-check",
-                "windows-generic-collection-check",
-                "windows-interface-dispatch-check",
-                "windows-linker-stripping-check",
-                "windows-marshaling-check",
-                "windows-nested-exception-check",
-                "windows-object-ops-check",
-                "windows-overflow-ops-check",
-                "windows-threading-check",
-                "windows-vtable-dispatch-check",
-                "windows-dispatch-check",
-                "windows-generic-layout-check",
-                "windows-array-boxing-check",
-                "windows-delegate-check",
-                "windows-exception-check",
-                "windows-reflection-interop-closure-check",
-            },
-            matrix_ids,
-        )
-        self.assertEqual(
-            "MainlineFeaturePack/DelegateProofEntry::Run()",
-            str(dict(delegate_matrix.get("source") or {})["entry"]),
-        )
-        self.assertEqual(
-            "MainlineFeaturePack/ExceptionProofEntry::Run()",
-            str(dict(exception_matrix.get("source") or {})["entry"]),
-        )
-        self.assertEqual(
-            "MainlineFeaturePack/ReflectionInteropClosureEntry::Run()",
-            str(dict(closure_matrix.get("source") or {})["entry"]),
-        )
-
-    def test_mainline_feature_pack_manifest_declares_batch2_legacy_slice_profiles_and_matrices(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase5_batch2_legacy_slices")
-
-        record = subjects_module.require_single_subject_record(
-            subjects_module.load_subject_records(REPO_ROOT),
-            category="mainline",
-            source_type="dotnet-project",
-            required_validation_profile_ids=[
-                "proof-array-ops",
-                "proof-bitwise-ops",
-                "proof-branch-ops",
-                "proof-conversion-ops",
-                "proof-object-ops",
-                "proof-overflow-ops",
-            ],
-        )
-        manifest = record["manifest"]
-        validation_profiles = dict(manifest.get("validationProfiles") or {})
-        matrix_ids = {
-            str(matrix["matrixId"])
-            for matrix in list(manifest.get("environmentMatrices") or [])
-        }
-        array_matrix = subjects_module.find_matrix(manifest, "windows-array-ops-check")
-        overflow_matrix = subjects_module.find_matrix(manifest, "windows-overflow-ops-check")
-
-        self.assertEqual(["proof"], validation_profiles["proof-array-ops"])
-        self.assertEqual(["proof"], validation_profiles["proof-bitwise-ops"])
-        self.assertEqual(["proof"], validation_profiles["proof-branch-ops"])
-        self.assertEqual(["proof"], validation_profiles["proof-conversion-ops"])
-        self.assertEqual(["proof"], validation_profiles["proof-object-ops"])
-        self.assertEqual(["proof"], validation_profiles["proof-overflow-ops"])
-        self.assertTrue(
-            {
-                "windows-array-ops-check",
-                "windows-bitwise-ops-check",
-                "windows-branch-ops-check",
-                "windows-conversion-ops-check",
-                "windows-object-ops-check",
-                "windows-overflow-ops-check",
-            }.issubset(matrix_ids)
-        )
-        self.assertEqual(
-            "MainlineFeaturePack/ArrayOpsProofEntry::Run()",
-            str(dict(array_matrix.get("source") or {})["entry"]),
-        )
-        self.assertEqual(
-            "MainlineFeaturePack/OverflowOpsProofEntry::Run()",
-            str(dict(overflow_matrix.get("source") or {})["entry"]),
-        )
-
-    def test_mainline_feature_pack_manifest_declares_batch3_runtime_slice_profiles_and_matrices(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase5_batch3_runtime_slices")
-
-        record = subjects_module.require_single_subject_record(
-            subjects_module.load_subject_records(REPO_ROOT),
-            category="mainline",
-            source_type="dotnet-project",
-            required_validation_profile_ids=[
-                "proof-async-await",
-                "proof-threading",
-                "proof-nested-exception",
-                "proof-generic-collection",
-                "proof-delegate-chain",
-            ],
-        )
-        manifest = record["manifest"]
-        validation_profiles = dict(manifest.get("validationProfiles") or {})
-        matrix_ids = {
-            str(matrix["matrixId"])
-            for matrix in list(manifest.get("environmentMatrices") or [])
-        }
-        async_matrix = subjects_module.find_matrix(manifest, "windows-async-await-check")
-        delegate_chain_matrix = subjects_module.find_matrix(manifest, "windows-delegate-chain-check")
-
-        self.assertEqual(["proof"], validation_profiles["proof-async-await"])
-        self.assertEqual(["proof"], validation_profiles["proof-threading"])
-        self.assertEqual(["proof"], validation_profiles["proof-nested-exception"])
-        self.assertEqual(["proof"], validation_profiles["proof-generic-collection"])
-        self.assertEqual(["proof"], validation_profiles["proof-delegate-chain"])
-        self.assertTrue(
-            {
-                "windows-async-await-check",
-                "windows-threading-check",
-                "windows-nested-exception-check",
-                "windows-generic-collection-check",
-                "windows-delegate-chain-check",
-            }.issubset(matrix_ids)
-        )
-        self.assertEqual(
-            "MainlineFeaturePack/AsyncAwaitProofEntry::Run()",
-            str(dict(async_matrix.get("source") or {})["entry"]),
-        )
-        self.assertEqual(
-            "MainlineFeaturePack/DelegateChainProofEntry::Run()",
-            str(dict(delegate_chain_matrix.get("source") or {})["entry"]),
-        )
-
-    def test_mainline_feature_pack_manifest_declares_batch4_advanced_slice_profiles_and_matrices(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase5_batch4_advanced_slices")
-
-        record = subjects_module.require_single_subject_record(
-            subjects_module.load_subject_records(REPO_ROOT),
-            category="mainline",
-            source_type="dotnet-project",
-            required_validation_profile_ids=[
-                "proof-interface-dispatch",
-                "proof-vtable-dispatch",
-                "proof-linker-stripping",
-                "proof-marshaling",
-                "proof-cross-boundary-exception",
-            ],
-        )
-        manifest = record["manifest"]
-        validation_profiles = dict(manifest.get("validationProfiles") or {})
-        matrix_ids = {
-            str(matrix["matrixId"])
-            for matrix in list(manifest.get("environmentMatrices") or [])
-        }
-        interface_matrix = subjects_module.find_matrix(manifest, "windows-interface-dispatch-check")
-        marshaling_matrix = subjects_module.find_matrix(manifest, "windows-marshaling-check")
-
-        self.assertEqual(["proof"], validation_profiles["proof-interface-dispatch"])
-        self.assertEqual(["proof"], validation_profiles["proof-vtable-dispatch"])
-        self.assertEqual(["proof"], validation_profiles["proof-linker-stripping"])
-        self.assertEqual(["proof"], validation_profiles["proof-marshaling"])
-        self.assertEqual(["proof"], validation_profiles["proof-cross-boundary-exception"])
-        self.assertTrue(
-            {
-                "windows-interface-dispatch-check",
-                "windows-vtable-dispatch-check",
-                "windows-linker-stripping-check",
-                "windows-marshaling-check",
-                "windows-cross-boundary-eh-check",
-            }.issubset(matrix_ids)
-        )
-        self.assertEqual(
-            "MainlineFeaturePack/InterfaceDispatchProofEntry::Run()",
-            str(dict(interface_matrix.get("source") or {})["entry"]),
-        )
-        self.assertEqual(
-            "MainlineFeaturePack/MarshalingProofEntry::Run()",
-            str(dict(marshaling_matrix.get("source") or {})["entry"]),
-        )
-
-    def test_engine_binding_subject_manifests_declare_minimal_windows_only_surface(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase7_engine_binding")
+    def test_query_finds_managed_benchmark_solution_subjects_without_subject_name_list(self) -> None:
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_query_managed_benchmark")
 
         records = subjects_module.query_subject_records(
             subjects_module.load_subject_records(REPO_ROOT),
             category="canonical",
             source_type="dotnet-project",
-            required_stage_kinds=[
-                "analysis-frontend",
-                "generated-engine-proof",
-                "runtime-engine-observe",
-                "runtime-engine-trace-compare",
-            ],
-            required_goal_ids=["correctness.dev", "correctness.platform"],
+            required_stage_kinds=["runtime-perf-collect"],
+            required_goal_ids=["perf.release"],
             required_host_platforms=["windows-x64"],
-            required_validation_profile_ids=["proof-dev", "trace-platform"],
-            required_validation_kinds=["proof"],
+            required_validation_profile_ids=["perf-profile"],
+            required_validation_kinds=["perf"],
+            required_validation_drivers=["native-runtime-perf"],
         )
 
         self.assertEqual(
-            {
-                "EngineLogWriteLite",
-                "EngineObjectHandleLite",
-                "EngineLifecycleCallbackLite",
-                "EngineHostProof",
-            },
+            {"HotUpdateHostPack", "MixedExecutionFeaturePack"},
             {str(record["subjectId"]) for record in records},
         )
 
-        expected_focus_area = {
-            "EngineLogWriteLite": "service-call",
-            "EngineObjectHandleLite": "object-handle",
-            "EngineLifecycleCallbackLite": "lifecycle-callback",
-            "EngineHostProof": "host-proof",
-        }
+        for record in records:
+            manifest = record["manifest"]
+            capabilities = record["capabilities"]
+
+            self.assertEqual("dotnet-solution", capabilities["sourceModel"])
+            self.assertEqual("require", capabilities["testDeclarationMode"])
+            self.assertIn("perf-profile", dict(manifest.get("validationProfiles") or {}))
+            self.assertTrue(str(manifest["source"]["path"]).startswith(f"subjects/{record['subjectId']}/source/"))
+            self.assertTrue(str(manifest.get("workloadEntry") or "").endswith("::RunWorkload()"))
+
+    def test_retained_solution_subjects_declare_solution_mode_and_require_explicit_test_contract(self) -> None:
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_retained_solution_mode")
+
+        records = [
+            record
+            for record in subjects_module.load_subject_records(REPO_ROOT)
+            if str(record["capabilities"]["sourceModel"]) == "dotnet-solution"
+        ]
+
+        self.assertEqual(RETAINED_SOLUTION_SUBJECT_IDS, {str(record["subjectId"]) for record in records})
 
         for record in records:
             manifest = record["manifest"]
-            profile = dict(manifest.get("engineProofProfile") or {})
-            pipeline_ids = {
-                str(pipeline.get("pipelineId") or "")
-                for pipeline in list(manifest.get("executionPipelines") or [])
-            }
-            matrix_ids = {
-                str(matrix.get("matrixId") or "")
-                for matrix in list(manifest.get("environmentMatrices") or [])
-            }
+            capabilities = record["capabilities"]
+            primary_project_path = REPO_ROOT / str(manifest["source"]["primaryProjectPath"])
 
-            self.assertEqual("engine-binding", str(profile.get("proofKind") or ""))
-            self.assertEqual(expected_focus_area[str(record["subjectId"])], str(profile.get("focusArea") or ""))
-            self.assertGreater(len(list(profile.get("expectedCapabilityIds") or [])), 0)
-            self.assertGreater(len(list(profile.get("expectedEvidenceKinds") or [])), 0)
-            self.assertEqual(
-                {"engine-runtime-output", "engine-runtime-trace"},
-                pipeline_ids,
-            )
-            self.assertEqual(
-                {"windows-dev-output", "windows-reference-trace"},
-                matrix_ids,
-            )
+            self.assertEqual("require", capabilities["testDeclarationMode"])
+            self.assertEqual("dotnet-solution", manifest["sourceModel"])
+            self.assertTrue(str(manifest["source"]["path"]).endswith(".sln"))
+            self.assertTrue(primary_project_path.is_file(), msg=f"missing primary project: {primary_project_path}")
 
-    def test_existing_subject_manifests_default_or_explicit_test_declaration_mode_match_contract(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_declaration_mode_default")
+    def test_retained_solution_subject_manifests_project_expected_thin_fields(self) -> None:
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_retained_thin_fields")
 
-        records = subjects_module.load_subject_records(REPO_ROOT)
-        self.assertGreater(len(records), 0)
-
-        explicit_modes = {
-            "HotUpdateHostPack": "require",
-            "MixedExecutionFeaturePack": "require",
-            "PerformanceFeaturePack": "require",
-            "MainlineFeaturePack": "require",
-            "BenchArithmetic": "none",
-            "BenchAllocation": "none",
-            "BenchDispatch": "none",
-            "BenchGeneric": "none",
-            "BenchHotUpdateDispatch": "none",
-            "BenchHotUpdateLoad": "none",
-            "BenchHotUpdateRoundtrip": "none",
-            "BenchMixed": "none",
-            "HotUpdateSkeletonProof": "none",
-            "MixedExecutionProof": "none",
-            "InterpreterArithmeticProof": "none",
-            "InterpreterLoweringProof": "none",
-            "ArrayOpsProof": "none",
-            "BitwiseOpsProof": "none",
-            "BranchOpsProof": "none",
-            "ConversionOpsProof": "none",
-            "ObjectOpsProof": "none",
-            "OverflowOpsProof": "none",
-            "AsyncAwaitProof": "none",
-            "ThreadingProof": "none",
-            "NestedExceptionProof": "none",
-            "GenericCollectionProof": "none",
-            "DelegateChainProof": "none",
-            "InterfaceDispatchProof": "none",
-            "VTableDispatchProof": "none",
-            "LinkerStrippingProof": "none",
-            "MarshalingProof": "none",
-            "CrossBoundaryExceptionProof": "none",
-        }
-        for record in records:
-            subject_id = str(record["subjectId"])
-            self.assertEqual(
-                explicit_modes.get(subject_id, "auto"),
-                record["capabilities"]["testDeclarationMode"],
-            )
-
-    def test_legacy_opcode_proof_subjects_can_project_canonical_mainline_source(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_legacy_ops_shells")
-        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "MainlineFeaturePack")
-        validation_profiles = dict(manifest.get("validationProfiles") or {})
-
-        expected_entries = {
-            "ArrayOpsProof": ("proof-array-ops", "windows-array-ops-check", "MainlineFeaturePack/ArrayOpsProofEntry::Run()"),
-            "BitwiseOpsProof": ("proof-bitwise-ops", "windows-bitwise-ops-check", "MainlineFeaturePack/BitwiseOpsProofEntry::Run()"),
-            "BranchOpsProof": ("proof-branch-ops", "windows-branch-ops-check", "MainlineFeaturePack/BranchOpsProofEntry::Run()"),
-            "ConversionOpsProof": ("proof-conversion-ops", "windows-conversion-ops-check", "MainlineFeaturePack/ConversionOpsProofEntry::Run()"),
-            "ObjectOpsProof": ("proof-object-ops", "windows-object-ops-check", "MainlineFeaturePack/ObjectOpsProofEntry::Run()"),
-            "OverflowOpsProof": ("proof-overflow-ops", "windows-overflow-ops-check", "MainlineFeaturePack/OverflowOpsProofEntry::Run()"),
+        expected_contracts = {
+            "SolutionCorePack": {
+                "sourceModel": "dotnet-solution",
+                "dependencyModel": "mixed",
+                "executablePlan": "generated-native",
+                "engineeringProfile": "native-executable",
+                "availability": {"macos-arm64": "ready", "windows-x64": "ready"},
+            },
+            "HotUpdateHostPack": {
+                "sourceModel": "dotnet-solution",
+                "dependencyModel": "project-reference",
+                "executablePlan": "managed-host",
+                "engineeringProfile": "managed-output",
+                "availability": {
+                    "linux-x64": "ready",
+                    "macos-arm64": "ready",
+                    "windows-x64": "ready",
+                },
+            },
+            "MixedExecutionFeaturePack": {
+                "sourceModel": "dotnet-solution",
+                "dependencyModel": "project-reference",
+                "executablePlan": "managed-host",
+                "engineeringProfile": "managed-output",
+                "availability": {"windows-x64": "ready"},
+            },
         }
 
-        self.assertEqual("subjects/MainlineFeaturePack/source/MainlineFeaturePack.csproj", manifest["source"]["path"])
-        self.assertEqual("require", subjects_module.manifest_capabilities(manifest)["testDeclarationMode"])
+        for subject_id, expected in expected_contracts.items():
+            manifest = subjects_module.load_subject_manifest(REPO_ROOT, subject_id)
+            capabilities = subjects_module.manifest_capabilities(manifest)
 
-        for profile_id, matrix_id, entry in expected_entries.values():
-            self.assertEqual(["proof"], validation_profiles[profile_id])
-            assert_matrix_source_entry(self, subjects_module, manifest, matrix_id, entry)
+            self.assertEqual(expected["sourceModel"], manifest["sourceModel"])
+            self.assertEqual(expected["dependencyModel"], manifest["dependencyModel"])
+            self.assertEqual(expected["executablePlan"], manifest["executablePlan"])
+            self.assertEqual(expected["engineeringProfile"], manifest["engineeringProfile"])
+            self.assertEqual(expected["availability"], manifest["availability"])
+            self.assertEqual(expected["sourceModel"], capabilities["sourceModel"])
+            self.assertEqual(expected["dependencyModel"], capabilities["dependencyModel"])
+            self.assertEqual(expected["executablePlan"], capabilities["executablePlan"])
+            self.assertEqual(expected["engineeringProfile"], capabilities["engineeringProfile"])
 
-    def test_legacy_pure_runtime_benchmark_subjects_can_project_canonical_benchmark_source(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_legacy_benchmark_shells")
-        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "PerformanceFeaturePack")
-
+    def test_retained_subject_sources_declare_chaos_attributes_in_csharp_api(self) -> None:
         expected_sources = {
-            "BenchArithmetic": ("subjects/PerformanceFeaturePack/source/ArithmeticBenchmark.cs", "ArithmeticBenchmarkEntry", 'Alias = "arithmetic-bench"'),
-            "BenchAllocation": ("subjects/PerformanceFeaturePack/source/AllocationBenchmark.cs", "AllocationBenchmarkEntry", 'Alias = "allocation-bench"'),
-            "BenchDispatch": ("subjects/PerformanceFeaturePack/source/DispatchBenchmark.cs", "DispatchBenchmarkEntry", 'Alias = "dispatch-bench"'),
-            "BenchGeneric": ("subjects/PerformanceFeaturePack/source/GenericBenchmark.cs", "GenericBenchmarkEntry", 'Alias = "generic-bench"'),
+            "subjects/SolutionCorePack/source/Slices/MainlineFeaturePack/Program.cs": [
+                "[ChaosUnitTest(",
+                'Alias = "mainline-proof"',
+            ],
+            "subjects/SolutionCorePack/source/Slices/PerformanceFeaturePack/ArithmeticBenchmark.cs": [
+                "[ChaosBenchmark(",
+                'Alias = "arithmetic-bench"',
+            ],
+            "subjects/HotUpdateHostPack/source/HotUpdateSkeletonProofEntry.cs": [
+                "[ChaosUnitTest(",
+                'Alias = "hot-update-skeleton-proof"',
+            ],
+            "subjects/HotUpdateHostPack/source/HotUpdateLoadBenchmark.cs": [
+                "[ChaosBenchmark(",
+                'Alias = "hot-update-load-bench"',
+            ],
+            "subjects/MixedExecutionFeaturePack/source/MixedExecutionProofEntry.cs": [
+                "[ChaosUnitTest(",
+                'Alias = "mixed-execution-proof"',
+            ],
+            "subjects/MixedExecutionFeaturePack/source/MixedExecutionBenchmark.cs": [
+                "[ChaosBenchmark(",
+                'Alias = "mixed-execution-bench"',
+            ],
+            "subjects/MixedExecutionFeaturePack/source/MixedExecutionNativeBenchmark.cs": [
+                "[ChaosBenchmark(",
+                'Alias = "mixed-execution-native-bench"',
+            ],
         }
 
-        self.assertEqual("subjects/PerformanceFeaturePack/source/PerformanceFeaturePack.csproj", manifest["source"]["path"])
-        self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
-        self.assertEqual("require", subjects_module.manifest_capabilities(manifest)["testDeclarationMode"])
-
-        for source_path, entry_class, alias in expected_sources.values():
-            source = (REPO_ROOT / source_path).read_text(encoding="utf-8")
-            self.assertIn("[ChaosBenchmark(", source)
-            self.assertIn(entry_class, source)
-            self.assertIn(alias, source)
-
-    def test_legacy_hot_update_benchmark_subjects_can_project_canonical_hot_update_host_source(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_legacy_hot_update_benchmark_shells")
-        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "HotUpdateHostPack")
-
-        expected_sources = {
-            "BenchHotUpdateDispatch": ("subjects/HotUpdateHostPack/source/HotUpdateDispatchBenchmark.cs", "HotUpdateDispatchBenchmarkEntry", 'Alias = "hot-update-dispatch-bench"'),
-            "BenchHotUpdateLoad": ("subjects/HotUpdateHostPack/source/HotUpdateLoadBenchmark.cs", "HotUpdateLoadBenchmarkEntry", 'Alias = "hot-update-load-bench"'),
-            "BenchHotUpdateRoundtrip": ("subjects/HotUpdateHostPack/source/HotUpdateRoundtripBenchmark.cs", "HotUpdateRoundtripBenchmarkEntry", 'Alias = "hot-update-roundtrip-bench"'),
-        }
-
-        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj", manifest["source"]["path"])
-        self.assertEqual("HotUpdateHostPack/Program::Main()", manifest["source"]["entry"])
-        self.assertEqual("require", subjects_module.manifest_capabilities(manifest)["testDeclarationMode"])
-
-        for source_path, entry_class, alias in expected_sources.values():
-            source = (REPO_ROOT / source_path).read_text(encoding="utf-8")
-            self.assertIn("[ChaosBenchmark(", source)
-            self.assertIn(entry_class, source)
-            self.assertIn(alias, source)
-
-    def test_legacy_hot_update_proof_subject_can_project_canonical_hot_update_host_source(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_legacy_hot_update_proof_shells")
-        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "HotUpdateHostPack")
-        source = (REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "HotUpdateSkeletonProofEntry.cs").read_text(encoding="utf-8")
-
-        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj", manifest["source"]["path"])
-        self.assertEqual("HotUpdateHostPack/Program::Main()", manifest["source"]["entry"])
-        self.assertEqual("require", subjects_module.manifest_capabilities(manifest)["testDeclarationMode"])
-        self.assertIn("[ChaosUnitTest(", source)
-        self.assertIn('Alias = "hot-update-skeleton-proof"', source)
-
-    def test_legacy_mixed_execution_benchmark_subject_can_project_canonical_mixed_execution_source(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_legacy_mixed_benchmark_shells")
-        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "MixedExecutionFeaturePack")
-        source = (REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "MixedExecutionBenchmark.cs").read_text(encoding="utf-8")
-
-        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", manifest["source"]["path"])
-        self.assertEqual("MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
-        self.assertEqual("require", subjects_module.manifest_capabilities(manifest)["testDeclarationMode"])
-        self.assertIn("[ChaosBenchmark(", source)
-        self.assertIn("MixedExecutionBenchmarkEntry", source)
-        self.assertIn('Alias = "mixed-execution-bench"', source)
-
-    def test_legacy_mixed_execution_proof_subjects_can_project_canonical_mixed_execution_source(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_legacy_mixed_proof_shells")
-        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "MixedExecutionFeaturePack")
-
-        proof_source = (REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "MixedExecutionProofEntry.cs").read_text(encoding="utf-8")
-        lowering_source = (REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "InterpreterLoweringProofEntry.cs").read_text(encoding="utf-8")
-
-        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", manifest["source"]["path"])
-        self.assertEqual("MixedExecutionFeaturePack/MixedExecutionProofEntry::Run()", manifest["source"]["entry"])
-        self.assertEqual("require", subjects_module.manifest_capabilities(manifest)["testDeclarationMode"])
-        self.assertIn("[ChaosUnitTest(", proof_source)
-        self.assertIn('Alias = "mixed-execution-proof"', proof_source)
-        self.assertIn("[ChaosUnitTest(", lowering_source)
-        self.assertIn('Alias = "interpreter-lowering-proof"', lowering_source)
+        for relative_path, required_fragments in expected_sources.items():
+            source = (REPO_ROOT / relative_path).read_text(encoding="utf-8")
+            for fragment in required_fragments:
+                self.assertIn(fragment, source, msg=relative_path)
 
     def test_interpreter_arithmetic_subject_projects_support_assembly_from_mixed_execution_feature_pack(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_legacy_interpreter_arithmetic_shell")
+        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_interpreter_arithmetic")
         manifest = subjects_module.load_subject_manifest(REPO_ROOT, "MixedExecutionFeaturePack")
-        project_path = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "InterpreterArithmeticProof" / "InterpreterArithmeticProof.csproj"
-        program_path = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "InterpreterArithmeticProof" / "Program.cs"
+        project_path = (
+            REPO_ROOT
+            / "subjects"
+            / "MixedExecutionFeaturePack"
+            / "source"
+            / "InterpreterArithmeticProof"
+            / "InterpreterArithmeticProof.csproj"
+        )
+        program_path = (
+            REPO_ROOT
+            / "subjects"
+            / "MixedExecutionFeaturePack"
+            / "source"
+            / "InterpreterArithmeticProof"
+            / "Program.cs"
+        )
         program_source = program_path.read_text(encoding="utf-8")
 
         self.assertTrue(project_path.is_file(), msg=f"missing nested interpreter arithmetic project: {project_path}")
         self.assertTrue(program_path.is_file(), msg=f"missing nested interpreter arithmetic program: {program_path}")
         self.assertEqual(
-            "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj",
+            "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln",
             manifest["source"]["path"],
         )
+        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", manifest["source"]["primaryProjectPath"])
+        self.assertEqual("dotnet-solution", manifest["sourceModel"])
         self.assertEqual("require", subjects_module.manifest_capabilities(manifest)["testDeclarationMode"])
         self.assertIn("namespace InterpreterArithmeticProof;", program_source)
         self.assertIn("public static int Main()", program_source)
-
-    def test_legacy_runtime_proof_subjects_can_project_canonical_mainline_source(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_legacy_runtime_shells")
-        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "MainlineFeaturePack")
-        validation_profiles = dict(manifest.get("validationProfiles") or {})
-
-        expected_entries = {
-            "AsyncAwaitProof": ("proof-async-await", "windows-async-await-check", "MainlineFeaturePack/AsyncAwaitProofEntry::Run()"),
-            "ThreadingProof": ("proof-threading", "windows-threading-check", "MainlineFeaturePack/ThreadingProofEntry::Run()"),
-            "NestedExceptionProof": ("proof-nested-exception", "windows-nested-exception-check", "MainlineFeaturePack/NestedExceptionProofEntry::Run()"),
-            "GenericCollectionProof": ("proof-generic-collection", "windows-generic-collection-check", "MainlineFeaturePack/GenericCollectionProofEntry::Run()"),
-            "DelegateChainProof": ("proof-delegate-chain", "windows-delegate-chain-check", "MainlineFeaturePack/DelegateChainProofEntry::Run()"),
-        }
-
-        self.assertEqual("subjects/MainlineFeaturePack/source/MainlineFeaturePack.csproj", manifest["source"]["path"])
-        self.assertEqual("require", subjects_module.manifest_capabilities(manifest)["testDeclarationMode"])
-
-        for profile_id, matrix_id, entry in expected_entries.values():
-            self.assertEqual(["proof"], validation_profiles[profile_id])
-            assert_matrix_source_entry(self, subjects_module, manifest, matrix_id, entry)
-
-    def test_legacy_advanced_mainline_proof_subjects_can_project_canonical_mainline_source(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_legacy_advanced_shells")
-        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "MainlineFeaturePack")
-        validation_profiles = dict(manifest.get("validationProfiles") or {})
-
-        expected_entries = {
-            "InterfaceDispatchProof": ("proof-interface-dispatch", "windows-interface-dispatch-check", "MainlineFeaturePack/InterfaceDispatchProofEntry::Run()"),
-            "VTableDispatchProof": ("proof-vtable-dispatch", "windows-vtable-dispatch-check", "MainlineFeaturePack/VTableDispatchProofEntry::Run()"),
-            "LinkerStrippingProof": ("proof-linker-stripping", "windows-linker-stripping-check", "MainlineFeaturePack/LinkerStrippingProofEntry::Run()"),
-            "MarshalingProof": ("proof-marshaling", "windows-marshaling-check", "MainlineFeaturePack/MarshalingProofEntry::Run()"),
-            "CrossBoundaryExceptionProof": ("proof-cross-boundary-exception", "windows-cross-boundary-eh-check", "MainlineFeaturePack/CrossBoundaryExceptionProofEntry::Run()"),
-        }
-
-        self.assertEqual("subjects/MainlineFeaturePack/source/MainlineFeaturePack.csproj", manifest["source"]["path"])
-        self.assertEqual("require", subjects_module.manifest_capabilities(manifest)["testDeclarationMode"])
-
-        for profile_id, matrix_id, entry in expected_entries.values():
-            self.assertEqual(["proof"], validation_profiles[profile_id])
-            assert_matrix_source_entry(self, subjects_module, manifest, matrix_id, entry)
-
-    def test_legacy_native_subject_manifest_projects_thin_fields_by_default(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_thin_native_defaults")
-
-        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "HelloWorldObject")
-        capabilities = subjects_module.manifest_capabilities(manifest)
-
-        self.assertEqual("dotnet-project-set", manifest["sourceModel"])
-        self.assertEqual("project-reference", manifest["dependencyModel"])
-        self.assertEqual("generated-native", manifest["executablePlan"])
-        self.assertEqual("native-executable", manifest["engineeringProfile"])
-        self.assertEqual(
-            {
-                "windows-x64": "ready",
-                "android-arm64": "ready",
-                "linux-x64": "ready",
-            },
-            manifest["availability"],
-        )
-        self.assertEqual({}, manifest["compatibility"])
-        self.assertEqual("dotnet-project-set", capabilities["sourceModel"])
-        self.assertEqual("project-reference", capabilities["dependencyModel"])
-        self.assertEqual("generated-native", capabilities["executablePlan"])
-        self.assertEqual("native-executable", capabilities["engineeringProfile"])
-
-    def test_legacy_benchmark_manifest_projects_thin_fields_from_default_matrix(self) -> None:
-        subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_thin_benchmark_defaults")
-
-        manifest = subjects_module.load_subject_manifest(REPO_ROOT, "PerformanceFeaturePack")
-        capabilities = subjects_module.manifest_capabilities(manifest)
-
-        self.assertEqual("dotnet-project-set", manifest["sourceModel"])
-        self.assertEqual("project-reference", manifest["dependencyModel"])
-        self.assertEqual("managed-host", manifest["executablePlan"])
-        self.assertEqual("managed-output", manifest["engineeringProfile"])
-        self.assertEqual(
-            {
-                "windows-x64": "ready",
-            },
-            manifest["availability"],
-        )
-        self.assertEqual("managed-host", capabilities["executablePlan"])
-        self.assertEqual("managed-output", capabilities["engineeringProfile"])
 
     def test_explicit_thin_manifest_fields_override_legacy_projection(self) -> None:
         subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_thin_explicit_override")

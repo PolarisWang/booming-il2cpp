@@ -1,0 +1,100 @@
+{
+  "subjectId": "FixtureSolutionSimpleLib",
+  "displayName": "FixtureSolutionSimpleLib",
+  "category": "fixture",
+  "defaultGoal": "correctness.dev",
+  "defaultMatrix": "windows-managed-output",
+  "defaultValidationProfile": "managed-output",
+  "source": {
+    "type": "dotnet-project",
+    "path": "subjects/SolutionCorePack/source/Archetypes/SolutionSimpleLib/SolutionSimpleLib.sln",
+    "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/SolutionSimpleLib/App/GoldenSimpleLib.App.csproj",
+    "entry": "GoldenSimpleLib.App/Program::Main()"
+  },
+  "sourceModel": "dotnet-solution",
+  "dependencyModel": "project-reference",
+  "executablePlan": "managed-host",
+  "engineeringProfile": "managed-output",
+  "validationProfiles": {
+    "managed-output": [
+      "proof"
+    ]
+  },
+  "validation": {
+    "proof": {
+      "kind": "proof",
+      "defaultVariant": "CHECK"
+    }
+  },
+  "executionPipelines": [
+    {
+      "pipelineId": "managed-runtime-output",
+      "displayName": "Managed runtime output",
+      "stages": [
+        {
+          "stageId": "source-resolve",
+          "kind": "source-resolve",
+          "scope": "shared",
+          "bucket": "source",
+          "dependsOn": []
+        },
+        {
+          "stageId": "host-input-build",
+          "kind": "host-input-build",
+          "scope": "shared",
+          "bucket": "host-input",
+          "dependsOn": [
+            "source-resolve"
+          ]
+        },
+        {
+          "stageId": "runtime-managed-output",
+          "kind": "runtime-managed-output",
+          "scope": "matrix",
+          "bucket": "runtime",
+          "dependsOn": [
+            "host-input-build"
+          ]
+        },
+        {
+          "stageId": "report-assemble",
+          "kind": "report-assemble",
+          "scope": "matrix",
+          "bucket": "report",
+          "dependsOn": [
+            "runtime-managed-output"
+          ]
+        }
+      ]
+    }
+  ],
+  "environmentMatrices": [
+    {
+      "matrixId": "windows-managed-output",
+      "pipelineId": "managed-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "dotnet-managed",
+        "runtimeProfile": "managed-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    }
+  ]
+}

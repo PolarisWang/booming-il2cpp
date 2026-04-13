@@ -15,7 +15,7 @@ internal static class MixedExecutionBenchmarkEntry
         WarmupCount = 1,
         IterationCount = 6,
         InvocationCount = 1000)]
-    public static long RunWorkload()
+    public static int RunWorkload()
     {
         s_interpreterFn = static x => x * 2 + 1;
 
@@ -28,7 +28,7 @@ internal static class MixedExecutionBenchmarkEntry
             checksum += v3;
         }
 
-        return checksum % 10000;
+        return (int)(checksum % 10000);
     }
 
     private static int AotCompute(int x)

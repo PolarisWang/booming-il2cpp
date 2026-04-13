@@ -1,0 +1,51 @@
+using System.Reflection;
+using Chaos.TestFramework;
+
+namespace SolutionCorePack;
+
+internal static class Program
+{
+    private static int Main(string[] args)
+    {
+        if (!ChaosSubjectEntryArguments.TryParse(args, out var selection) || selection.IsNone)
+        {
+            return InvokeStaticEntry("MainlineFeaturePack", "MainlineFeaturePack.ProofEntry", "Run");
+        }
+
+        return selection switch
+        {
+            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.SolutionMainlineProof } =>
+                InvokeStaticEntry("MainlineFeaturePack", "MainlineFeaturePack.ProofEntry", "Run"),
+            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.SolutionSimpleLibManagedOutput } =>
+                InvokeStaticEntry("GoldenSimpleLib.App", "GoldenSimpleLib.App.Program", "Main"),
+            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.SolutionMultiProjectManagedOutput } =>
+                InvokeStaticEntry("GoldenMultiProject.App", "GoldenMultiProject.App.Program", "Main"),
+            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.SolutionPackageReferenceManagedOutput } =>
+                InvokeStaticEntry("GoldenWithPackage.App", "GoldenWithPackage.App.Program", "Main"),
+            _ => throw new ArgumentOutOfRangeException(nameof(args), "unsupported SolutionCorePack entry selection."),
+        };
+    }
+
+    private static int InvokeStaticEntry(string assemblyName, string typeName, string methodName)
+    {
+        var assemblyPath = Path.Combine(AppContext.BaseDirectory, $"{assemblyName}.dll");
+        var assembly = File.Exists(assemblyPath)
+            ? Assembly.LoadFrom(assemblyPath)
+            : Assembly.Load(assemblyName);
+        var type = assembly.GetType(typeName, throwOnError: true, ignoreCase: false)
+            ?? throw new InvalidOperationException($"failed to load type '{typeName}'.");
+        var method = type.GetMethod(
+            methodName,
+            BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+            ?? throw new InvalidOperationException($"failed to load method '{typeName}::{methodName}'.");
+        var parameters = method.GetParameters();
+        object? result = parameters.Length switch
+        {
+            0 => method.Invoke(obj: null, parameters: null),
+            1 when parameters[0].ParameterType == typeof(string[]) => method.Invoke(obj: null, parameters: new object?[] { Array.Empty<string>() }),
+            _ => throw new InvalidOperationException($"unsupported method signature: '{typeName}::{methodName}'."),
+        };
+
+        return result is int exitCode ? exitCode : 0;
+    }
+}

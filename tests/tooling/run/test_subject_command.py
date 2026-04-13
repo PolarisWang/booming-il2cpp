@@ -228,7 +228,8 @@ class SubjectCommandTests(unittest.TestCase):
             required_host_platforms=["windows-x64"],
             required_goal_ids=["perf.release"],
             required_validation_kinds=["perf"],
-            required_validation_drivers=["csharp-perf-harness"],
+            required_validation_drivers=["native-runtime-perf"],
+            required_stage_kinds=["runtime-perf-collect"],
         )
         subject_id = str(subject_record["subjectId"])
         fixed_run_id = f"chaos-run-subject-perf-release-{uuid.uuid4().hex}"
@@ -330,13 +331,13 @@ class SubjectCommandTests(unittest.TestCase):
                         {"id": "test-subject", "handler": "test.dispatch"},
                         REPO_ROOT,
                         "windows",
-                        f"test subject --id subject/{subject_id} --goal perf.release --validation-profile perf-release --variant SHIP",
+                        f"test subject --id subject/{subject_id} --goal perf.release --validation-profile perf-profile --variant PROFILE",
                         manifest,
                         {
                             "id": f"subject/{subject_id}",
                             "goal": "perf.release",
-                            "validation_profile": "perf-release",
-                            "variant": "SHIP",
+                            "validation_profile": "perf-profile",
+                            "variant": "PROFILE",
                         },
                     )
 
@@ -344,8 +345,8 @@ class SubjectCommandTests(unittest.TestCase):
             self.assertEqual(f"subject/{subject_id}", result.target)
             run_id = result.payload["runId"]
             matrix_id = observed_selection["matrixId"]
-            self.assertEqual("perf-release", observed_selection["validationProfileId"])
-            self.assertEqual("SHIP", observed_selection["variant"])
+            self.assertEqual("perf-profile", observed_selection["validationProfileId"])
+            self.assertEqual("PROFILE", observed_selection["variant"])
             self.assertIn(
                 f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/{matrix_id}/pipeline-report/report.json",
                 result.payload["artifacts"],
@@ -368,21 +369,20 @@ class SubjectCommandTests(unittest.TestCase):
             for path, snapshot in snapshots.items():
                 restore_text(path, snapshot)
 
-    def test_subject_dispatch_runs_subject_owned_xunit_validation_and_surfaces_validation_artifacts(self) -> None:
-        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_subject_unit_validation")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_subject_unit_validation")
+    def test_subject_dispatch_retains_empty_validation_results_when_subject_has_no_subject_owned_validations(self) -> None:
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_subject_no_validation_artifacts")
+        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_subject_no_validation_artifacts")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
         subject_record = select_subject_record(
-            "chaos_run_subject_fixture_unit_validation",
+            "chaos_run_subject_fixture_no_validation_artifacts",
             category="canonical",
             source_type="dotnet-project",
-            required_validation_kinds=["unit"],
             required_validation_profile_ids=["proof-dev"],
-            required_validation_frameworks=["xunit"],
+            required_stage_kinds=["runtime-observe"],
             required_host_platforms=["windows-x64"],
         )
         subject_id = str(subject_record["subjectId"])
-        fixed_run_id = f"chaos-run-subject-unit-validation-{uuid.uuid4().hex}"
+        fixed_run_id = f"chaos-run-subject-no-validation-artifacts-{uuid.uuid4().hex}"
         subject_runs_root = REPO_ROOT / "artifacts" / "subjects" / subject_id / "runs"
         run_root = subject_runs_root / fixed_run_id
         subject_last_path = subject_runs_root / "last.json"
@@ -434,44 +434,13 @@ class SubjectCommandTests(unittest.TestCase):
             }
 
         def validation_side_effect(repo_root: Path, plan: dict, *, run_id: str) -> dict:
+            del repo_root
             del plan
-            summary_path = (
-                repo_root
-                / "artifacts"
-                / "subjects"
-                / subject_id
-                / "runs"
-                / run_id
-                / "matrices"
-                / "windows-dev-output"
-                / "validations"
-                / "unit"
-                / "summary.json"
-            )
-            trx_path = summary_path.parent / "results.trx"
-            summary_path.parent.mkdir(parents=True, exist_ok=True)
-            summary_path.write_text("{}", encoding="utf-8")
-            trx_path.write_text("", encoding="utf-8")
+            del run_id
             return {
                 "status": "ok",
-                "validationResults": [
-                    {
-                        "validationKind": "unit",
-                        "framework": "xunit",
-                        "matrixId": "windows-dev-output",
-                        "status": "ok",
-                        "summaryPath": str(summary_path.relative_to(repo_root).as_posix()),
-                        "trxPath": str(trx_path.relative_to(repo_root).as_posix()),
-                        "artifacts": [
-                            str(summary_path.relative_to(repo_root).as_posix()),
-                            str(trx_path.relative_to(repo_root).as_posix()),
-                        ],
-                    }
-                ],
-                "artifacts": [
-                    str(summary_path.relative_to(repo_root).as_posix()),
-                    str(trx_path.relative_to(repo_root).as_posix()),
-                ],
+                "validationResults": [],
+                "artifacts": [],
                 "errors": [],
             }
 
@@ -497,39 +466,28 @@ class SubjectCommandTests(unittest.TestCase):
                         )
 
             self.assertEqual("ok", result.status)
-            run_id = result.payload["runId"]
             matrix_result = result.payload["subjectResults"][0]
-            self.assertIn("validationResults", result.payload)
-            self.assertEqual(1, len(result.payload["validationResults"]))
-            validation_result = result.payload["validationResults"][0]
-            self.assertEqual("unit", validation_result["validationKind"])
-            self.assertEqual("xunit", validation_result["framework"])
-            self.assertEqual("ok", validation_result["status"])
-            self.assertEqual(
-                f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/{validation_result['matrixId']}/validations/unit/summary.json",
-                validation_result["summaryPath"],
-            )
-            self.assertIn(validation_result["summaryPath"], result.payload["artifacts"])
-            self.assertIn(validation_result["trxPath"], result.payload["artifacts"])
-            self.assertTrue((REPO_ROOT / validation_result["summaryPath"]).is_file())
+            self.assertEqual([], result.payload["validationResults"])
+            self.assertFalse(any("/validations/" in artifact for artifact in result.payload["artifacts"]))
             self.assertEqual(subject_id, matrix_result["subjectId"])
         finally:
             shutil.rmtree(run_root, ignore_errors=True)
             for path, snapshot in snapshots.items():
                 restore_text(path, snapshot)
 
-    def test_subject_dispatch_collects_native_perf_report_artifacts_for_mainline_subject(self) -> None:
+    def test_subject_dispatch_collects_native_perf_report_artifacts_for_solution_core_pack(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_subject_native_perf_dispatch")
         manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_subject_native_perf_dispatch")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
         subject_record = select_subject_record(
             "chaos_run_subject_fixture_native_perf_dispatch",
-            category="mainline",
+            category="canonical",
             source_type="dotnet-project",
-            required_goal_ids=["perf.profile"],
+            required_goal_ids=["perf.release"],
             required_stage_kinds=["native-runtime-perf"],
             required_validation_profile_ids=["perf-profile"],
             required_validation_drivers=["native-runtime-perf"],
+            required_host_platforms=["macos-arm64", "windows-x64"],
         )
         subject_id = str(subject_record["subjectId"])
         fixed_run_id = f"chaos-run-subject-native-perf-{uuid.uuid4().hex}"
@@ -636,11 +594,11 @@ class SubjectCommandTests(unittest.TestCase):
                         {"id": "test-subject", "handler": "test.dispatch"},
                         REPO_ROOT,
                         "windows",
-                        f"test subject --id subject/{subject_id} --goal perf.profile --validation-profile perf-profile --variant PROFILE",
+                        f"test subject --id subject/{subject_id} --goal perf.release --validation-profile perf-profile --variant PROFILE",
                         manifest,
                         {
                             "id": f"subject/{subject_id}",
-                            "goal": "perf.profile",
+                            "goal": "perf.release",
                             "validation_profile": "perf-profile",
                             "variant": "PROFILE",
                         },
@@ -678,12 +636,13 @@ class SubjectCommandTests(unittest.TestCase):
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
         subject_record = select_subject_record(
             "chaos_run_subject_fixture_native_perf_defaults",
-            category="mainline",
+            category="canonical",
             source_type="dotnet-project",
-            required_goal_ids=["perf.profile"],
+            required_goal_ids=["perf.release"],
             required_stage_kinds=["native-runtime-perf"],
             required_validation_profile_ids=["perf-profile"],
             required_validation_drivers=["native-runtime-perf"],
+            required_host_platforms=["macos-arm64", "windows-x64"],
         )
         subject_id = str(subject_record["subjectId"])
         fixed_run_id = f"chaos-run-subject-native-perf-defaults-{uuid.uuid4().hex}"
@@ -789,17 +748,17 @@ class SubjectCommandTests(unittest.TestCase):
                         {"id": "test-subject", "handler": "test.dispatch"},
                         REPO_ROOT,
                         "windows",
-                        f"test subject --id subject/{subject_id} --goal perf.profile",
+                        f"test subject --id subject/{subject_id} --goal perf.release",
                         manifest,
                         {
                             "id": f"subject/{subject_id}",
-                            "goal": "perf.profile",
+                            "goal": "perf.release",
                         },
                     )
 
             self.assertEqual("ok", result.status)
-            self.assertEqual("perf.profile", observed_selection["goalId"])
-            self.assertEqual("windows-native-profile", observed_selection["matrixId"])
+            self.assertEqual("perf.release", observed_selection["goalId"])
+            self.assertEqual("windows-native-perf", observed_selection["matrixId"])
             self.assertEqual("perf-profile", observed_selection["validationProfileId"])
             self.assertEqual("perf", observed_selection["validationKind"])
             self.assertEqual("PROFILE", observed_selection["variant"])

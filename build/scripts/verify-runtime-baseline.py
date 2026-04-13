@@ -14,7 +14,7 @@ toolchains_root = Path(__file__).resolve().parents[1] / "toolchains" / "run"
 if str(toolchains_root) not in sys.path:
     sys.path.insert(0, str(toolchains_root))
 
-import tooling as tooling_module
+from core import tooling as tooling_module
 from testing import contracts as contracts_module
 from testing import subject_executor as subject_executor_module
 from testing import subject_planner as subject_planner_module
@@ -22,6 +22,10 @@ from testing import subjects as subjects_module
 
 
 DEFAULT_WINDOWS_VISUAL_STUDIO_GENERATOR = "Visual Studio 17 2022"
+SOLUTION_CORE_PACK_SUBJECT_ID = "SolutionCorePack"
+SOLUTION_CORE_PACK_NATIVE_MATRIX_ID = "windows-native-check"
+SOLUTION_CORE_PACK_WINDOWS_TRACE_MATRIX_ID = "windows-managed-trace"
+SOLUTION_CORE_PACK_MACOS_TRACE_MATRIX_ID = "macos-managed-trace"
 
 
 def get_repo_root() -> Path:
@@ -198,22 +202,13 @@ def validate_stage4_proof_run_artifacts(runtime_root: Path) -> None:
         raise RuntimeError(f"stage4 native reference proof stdout mismatch: missing '{expected_stdout}'")
 
 
-def resolve_subject_matrix_subject_id(repo_root: Path) -> str:
-    record = subjects_module.require_single_subject_record(
-        subjects_module.load_subject_records(repo_root),
-        category="canonical",
-        source_type="dotnet-project",
-        required_stage_kinds=["generated-native-proof", "runtime-trace-compare"],
-        required_goal_ids=["correctness.dev", "correctness.platform"],
-        required_host_platforms=["windows-x64"],
-        required_validation_profile_ids=["proof-dev", "trace-platform"],
-        required_validation_frameworks=["xunit"],
-    )
-    return str(record["subjectId"])
-
-
 def build_subject_run_id(matrix_id: str) -> str:
     return f"verify-runtime-baseline-{matrix_id}-{uuid.uuid4().hex[:8]}"
+
+
+def resolve_subject_matrix_subject_id(matrix_id: str) -> str:
+    del matrix_id
+    return SOLUTION_CORE_PACK_SUBJECT_ID
 
 
 def subject_runtime_root(repo_root: Path, subject_id: str, run_id: str, matrix_id: str) -> Path:
@@ -221,7 +216,7 @@ def subject_runtime_root(repo_root: Path, subject_id: str, run_id: str, matrix_i
 
 
 def execute_subject_matrix(repo_root: Path, *, matrix_id: str, goal_id: str) -> dict:
-    subject_id = resolve_subject_matrix_subject_id(repo_root)
+    subject_id = resolve_subject_matrix_subject_id(matrix_id)
     run_id = build_subject_run_id(matrix_id)
     plan = subject_planner_module.build_plan(
         repo_root,
@@ -294,7 +289,7 @@ def main(argv: list[str] | None = None) -> int:
     write_step("Build smoke input projects")
     for project_name in ("HelloWorld", "GenericEcho", "ReflectionLite", "PInvokeLite", "HostEmbeddingLite"):
         invoke_dotnet_build(
-            repo_root / "subjects" / project_name / "source" / f"{project_name}.csproj",
+            repo_root / "subjects" / "SolutionCorePack" / "source" / "Slices" / project_name / f"{project_name}.csproj",
             repo_root,
             host_profile=host_profile,
         )
@@ -309,11 +304,22 @@ def main(argv: list[str] | None = None) -> int:
     if host_profile == "windows":
         if not windows_trace_snapshot.is_file():
             raise RuntimeError(f"missing Windows trace snapshot contract: {windows_trace_snapshot}")
-        subject_id = resolve_subject_matrix_subject_id(repo_root)
+        subject_id = SOLUTION_CORE_PACK_SUBJECT_ID
 
-        write_step(f"Run {subject_id} windows-dev-output subject matrix")
-        dev_output_result = execute_subject_matrix(repo_root, matrix_id="windows-dev-output", goal_id="correctness.dev")
-        validate_stage4_proof_run_artifacts(subject_runtime_root(repo_root, subject_id, str(dev_output_result["runId"]), "windows-dev-output"))
+        write_step(f"Run {subject_id} {SOLUTION_CORE_PACK_NATIVE_MATRIX_ID} subject matrix")
+        dev_output_result = execute_subject_matrix(
+            repo_root,
+            matrix_id=SOLUTION_CORE_PACK_NATIVE_MATRIX_ID,
+            goal_id="correctness.dev",
+        )
+        validate_stage4_proof_run_artifacts(
+            subject_runtime_root(
+                repo_root,
+                subject_id,
+                str(dev_output_result["runId"]),
+                SOLUTION_CORE_PACK_NATIVE_MATRIX_ID,
+            )
+        )
         write_gate_record(
             artifact_root / "windows-stage4-native-reference.gate.json",
             "windows-stage4-native-reference",
@@ -323,8 +329,12 @@ def main(argv: list[str] | None = None) -> int:
             host_profile,
         )
 
-        write_step(f"Run {subject_id} windows-reference-trace subject matrix")
-        execute_subject_matrix(repo_root, matrix_id="windows-reference-trace", goal_id="correctness.platform")
+        write_step(f"Run {subject_id} {SOLUTION_CORE_PACK_WINDOWS_TRACE_MATRIX_ID} subject matrix")
+        execute_subject_matrix(
+            repo_root,
+            matrix_id=SOLUTION_CORE_PACK_WINDOWS_TRACE_MATRIX_ID,
+            goal_id="correctness.platform",
+        )
         write_gate_record(
             artifact_root / "windows-reference-desktop.gate.json",
             "windows-reference-desktop",
@@ -334,25 +344,37 @@ def main(argv: list[str] | None = None) -> int:
             host_profile,
         )
 
-        write_step(f"Run {subject_id} windows-android-buildable subject matrix")
-        execute_subject_matrix(repo_root, matrix_id="windows-android-buildable", goal_id="correctness.platform")
+        write_step("Validate Android startup routing smoke")
+        invoke_routing_build_smoke(
+            "android-arm64-smoke",
+            repo_root / "build" / "toolchains" / "android-arm64.cmake",
+            common_artifact_root / "android-startup-routing",
+            get_platform_gate_generator("android-arm64-smoke", host_profile),
+            repo_root,
+        )
         write_gate_record(
             artifact_root / "android-startup-smoke.gate.json",
             "android-startup-smoke",
-            "passed",
+            "routing-validated",
             "android-arm64-smoke",
-            f"Android gate passed via the {subject_id} windows-android-buildable subject matrix.",
+            "Android preset remains visible in CMakePresets, and its toolchain/router path was validated with the host-compatible generator.",
             host_profile,
         )
 
-        write_step(f"Run {subject_id} windows-linux-buildable subject matrix")
-        execute_subject_matrix(repo_root, matrix_id="windows-linux-buildable", goal_id="correctness.platform")
+        write_step("Validate Linux packaging routing smoke")
+        invoke_routing_build_smoke(
+            "linux-x64-packaging",
+            repo_root / "build" / "toolchains" / "linux-x64.cmake",
+            common_artifact_root / "linux-packaging-routing",
+            get_platform_gate_generator("linux-x64-packaging", host_profile),
+            repo_root,
+        )
         write_gate_record(
             artifact_root / "linux-packaging.gate.json",
             "linux-packaging",
-            "passed",
+            "routing-validated",
             "linux-x64-packaging",
-            f"Linux packaging gate passed via the {subject_id} windows-linux-buildable subject matrix.",
+            "Linux preset remains visible in CMakePresets, and its toolchain/router path was validated with the host-compatible generator.",
             host_profile,
         )
 

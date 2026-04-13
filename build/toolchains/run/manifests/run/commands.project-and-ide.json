@@ -40,7 +40,7 @@
       "kind": "subject-workspace",
       "show_in_menu": true,
       "examples": [
-        "run generate project subject --id subject/HelloWorldObject"
+        "run generate project subject --id subject/SolutionCorePack"
       ]
     },
     {
@@ -83,7 +83,7 @@
       "project_kind": "subject",
       "show_in_menu": true,
       "examples": [
-        "run build project subject --id subject/HelloWorldObject"
+        "run build project subject --id subject/SolutionCorePack"
       ]
     },
     {

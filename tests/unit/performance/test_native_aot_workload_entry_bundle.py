@@ -14,10 +14,10 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 TOOLING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "tooling.py"
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
 DRIVER_DLL_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Driver.dll"
-SUBJECT_ID = "PerformanceFeaturePack"
+SUBJECT_ID = "SolutionCorePack"
 WORKLOAD_ENTRY = "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()"
-PROJECT_PATH = REPO_ROOT / "subjects" / "PerformanceFeaturePack" / "source" / "PerformanceFeaturePack.csproj"
-DLL_PATH = REPO_ROOT / "subjects" / "PerformanceFeaturePack" / "source" / "bin" / "Release" / "net8.0" / "PerformanceFeaturePack.dll"
+PROJECT_PATH = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Slices" / "PerformanceFeaturePack" / "PerformanceFeaturePack.csproj"
+DLL_PATH = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Slices" / "PerformanceFeaturePack" / "bin" / "Release" / "net8.0" / "PerformanceFeaturePack.dll"
 TEST_OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase-b-native-aot-workload-entry"
 
 

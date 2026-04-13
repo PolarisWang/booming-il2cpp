@@ -11,7 +11,7 @@ EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeR
 SUBJECT_WORKERS_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_workers.py"
 HOST_PROOF_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeReferenceProof.EngineHostProof.cpp.scriban"
 
-ENGINE_HOST_PROOF_ROOT = REPO_ROOT / "subjects" / "EngineHostProof"
+ENGINE_HOST_PROOF_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects" / "EngineHostProof"
 ENGINE_HOST_PROOF_MANIFEST_PATH = ENGINE_HOST_PROOF_ROOT / "subject.manifest.json"
 ENGINE_HOST_PROOF_PROJECT_PATH = ENGINE_HOST_PROOF_ROOT / "source" / "EngineHostProof.csproj"
 ENGINE_HOST_PROOF_PROGRAM_PATH = ENGINE_HOST_PROOF_ROOT / "source" / "Program.cs"
@@ -42,9 +42,13 @@ class Phase3EngineHostProofTests(unittest.TestCase):
         self.assertIn("engine.host-proof.minimal", emitter_source)
         self.assertIn("Templates/NativeReferenceProof.EngineHostProof.cpp.scriban", emitter_source)
 
-        self.assertIn('"engine-bridge"', workers_source)
-        self.assertIn('"engine_bridge.cpp"', workers_source)
-        self.assertIn('"contracts" / "engine" / "v0"', workers_source)
+        for required_fragment in [
+            "engineContractSummary",
+            "engineEmissionSummary",
+            "engineObservationSummary",
+            "expected.runtime for engine trace compare",
+        ]:
+            self.assertIn(required_fragment, workers_source)
 
         for required_fragment in [
             '#include "engine_bridge.h"',

@@ -464,11 +464,11 @@ class SubjectReportingTests(unittest.TestCase):
         reporting_module = load_module(SUBJECT_REPORTING_MODULE_PATH, "chaos_subject_reporting_entry_selection")
 
         summary = reporting_module.build_subject_summary(
-            subject_id="PerformanceFeaturePack",
+            subject_id="SolutionCorePack",
             requested_goal_id="perf.release",
             matrix_reports=[
                 {
-                    "subjectId": "PerformanceFeaturePack",
+                    "subjectId": "SolutionCorePack",
                     "goalId": "perf.release",
                     "matrixId": "windows-native-perf",
                     "validationProfileId": "perf-profile",
@@ -488,7 +488,7 @@ class SubjectReportingTests(unittest.TestCase):
             ],
             matrix_report_paths={
                 "windows-native-perf": run_bucket_path(
-                    "PerformanceFeaturePack",
+                    "SolutionCorePack",
                     "20260413-generic-bench-selection-001",
                     "matrices",
                     "windows-native-perf",
@@ -502,14 +502,14 @@ class SubjectReportingTests(unittest.TestCase):
             generated_at="2026-04-13T04:20:00Z",
             entry_selection={
                 "family": "declared-benchmark",
-                "stableId": "PerformanceFeaturePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()",
+                "stableId": "SolutionCorePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()",
                 "alias": "generic-bench",
             },
         )
         subject_result = reporting_module.build_subject_result(
             summary,
             subject_summary_path=run_bucket_path(
-                "PerformanceFeaturePack",
+                "SolutionCorePack",
                 "20260413-generic-bench-selection-001",
                 "declared",
                 "benchmark",
@@ -521,7 +521,7 @@ class SubjectReportingTests(unittest.TestCase):
         self.assertEqual(
             {
                 "family": "declared-benchmark",
-                "stableId": "PerformanceFeaturePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()",
+                "stableId": "SolutionCorePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()",
                 "alias": "generic-bench",
             },
             summary["entrySelection"],
@@ -530,7 +530,7 @@ class SubjectReportingTests(unittest.TestCase):
         self.assertEqual("generic-bench", subject_result["entrySelection"]["alias"])
         self.assertEqual(
             run_bucket_path(
-                "PerformanceFeaturePack",
+                "SolutionCorePack",
                 "20260413-generic-bench-selection-001",
                 "declared",
                 "benchmark",
@@ -542,25 +542,25 @@ class SubjectReportingTests(unittest.TestCase):
 
     def test_build_matrix_report_surfaces_native_perf_evidence_and_report_artifacts(self) -> None:
         reporting_module = load_module(SUBJECT_REPORTING_MODULE_PATH, "chaos_subject_reporting_native_perf")
-        run_id = "20260409-fixture-mainline-native-perf-001"
-        subject_id = "MainlineFeaturePack"
-        matrix_id = "windows-native-profile"
+        run_id = "20260413-solution-core-native-perf-001"
+        subject_id = "SolutionCorePack"
+        matrix_id = "windows-native-perf"
 
         plan = {
             "selection": {
                 "subjectId": subject_id,
                 "displayName": subject_id,
-                "goalId": "perf.profile",
+                "goalId": "perf.release",
                 "matrixId": matrix_id,
                 "validationProfileId": "perf-profile",
                 "validationKinds": ["perf"],
                 "validationKind": "perf",
                 "variant": "PROFILE",
-                "pipelineId": "native-runtime-perf",
+                "pipelineId": "native-benchmark",
                 "source": {
                     "type": "dotnet-project",
-                    "path": source_project_path(subject_id),
-                    "entry": source_entry(subject_id),
+                    "path": "subjects/SolutionCorePack/source/SolutionCorePack.sln",
+                    "entry": "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()",
                 },
                 "executionContext": {
                     "hostPlatform": "windows-x64",
@@ -582,7 +582,7 @@ class SubjectReportingTests(unittest.TestCase):
                 {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source"},
                 {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input"},
                 {"stageId": "analysis-frontend", "kind": "analysis-frontend", "scope": "shared", "bucket": "analysis"},
-                {"stageId": "generated-native-proof", "kind": "generated-native-proof", "scope": "shared", "bucket": "generated"},
+                {"stageId": "generated-native-aot", "kind": "generated-native-aot", "scope": "shared", "bucket": "generated"},
                 {"stageId": "build-target", "kind": "build-target", "scope": "matrix", "bucket": "build"},
                 {"stageId": "native-runtime-perf", "kind": "native-runtime-perf", "scope": "matrix", "bucket": "runtime"},
                 {"stageId": "report-assemble", "kind": "report-assemble", "scope": "matrix", "bucket": "report"},
@@ -591,7 +591,7 @@ class SubjectReportingTests(unittest.TestCase):
         execution_result = {
             "subjectId": subject_id,
             "matrixId": matrix_id,
-            "goalId": "perf.profile",
+            "goalId": "perf.release",
             "status": "ok",
             "terminalStageId": "report-assemble",
             "terminalBucket": "report",
@@ -663,7 +663,7 @@ class SubjectReportingTests(unittest.TestCase):
             )
 
             self.assertEqual("PROFILE", report["variant"])
-            self.assertEqual("native-runtime-perf", report["selection"]["pipelineId"])
+            self.assertEqual("native-benchmark", report["selection"]["pipelineId"])
             self.assertEqual(
                 {
                     "runtimePath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "perf.runtime.json"),

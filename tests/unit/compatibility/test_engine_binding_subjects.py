@@ -11,11 +11,12 @@ EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeR
 SUBJECT_WORKERS_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_workers.py"
 RUNTIME_CORE_PATH = REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_core.cpp"
 RUNTIME_CORE_HEADER_PATH = REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_core.h"
+ENGINE_FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects"
 ENGINE_SUBJECT_PROGRAM_PATHS = [
-    REPO_ROOT / "subjects" / "EngineLogWriteLite" / "source" / "Program.cs",
-    REPO_ROOT / "subjects" / "EngineObjectHandleLite" / "source" / "Program.cs",
-    REPO_ROOT / "subjects" / "EngineLifecycleCallbackLite" / "source" / "Program.cs",
-    REPO_ROOT / "subjects" / "EngineHostProof" / "source" / "Program.cs",
+    ENGINE_FIXTURE_ROOT / "EngineLogWriteLite" / "source" / "Program.cs",
+    ENGINE_FIXTURE_ROOT / "EngineObjectHandleLite" / "source" / "Program.cs",
+    ENGINE_FIXTURE_ROOT / "EngineLifecycleCallbackLite" / "source" / "Program.cs",
+    ENGINE_FIXTURE_ROOT / "EngineHostProof" / "source" / "Program.cs",
 ]
 
 
@@ -29,7 +30,7 @@ class Phase7EngineBindingTests(unittest.TestCase):
         ]
 
         for subject_id in subject_ids:
-            subject_root = REPO_ROOT / "subjects" / subject_id
+            subject_root = ENGINE_FIXTURE_ROOT / subject_id
             manifest_path = subject_root / "subject.manifest.json"
             project_path = subject_root / "source" / f"{subject_id}.csproj"
             program_path = subject_root / "source" / "Program.cs"
@@ -67,8 +68,13 @@ class Phase7EngineBindingTests(unittest.TestCase):
         ]:
             self.assertIn(stage_kind, workers_source)
 
-        self.assertIn('"engine-bridge"', workers_source)
-        self.assertIn('"engine_bridge.cpp"', workers_source)
+        for required_fragment in [
+            "engineContractSummary",
+            "engineEmissionSummary",
+            "engineObservationSummary",
+            "engineTraceCompareReportPaths",
+        ]:
+            self.assertIn(required_fragment, workers_source)
 
         for helper_name in [
             "EngineLogWrite",

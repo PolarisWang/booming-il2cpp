@@ -5,6 +5,8 @@ import sys
 import unittest
 from pathlib import Path
 
+from tests.support import select_public_suite_spec
+
 from .test_command_manifest import RUN_MANIFEST_PATH, load_manifest_module
 
 
@@ -144,10 +146,17 @@ class TuiTests(unittest.TestCase):
         tui_module = load_tui_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
         test_entry = next(entry for entry in tui_module.build_menu_entries(manifest, "windows") if entry.syntax == "test")
+        smoke_spec = select_public_suite_spec(
+            "chaos_integration_tui_smoke_suite",
+            host_platform="windows",
+            family="smoke",
+            required_stages=["all"],
+        )
+        suite_name = str(smoke_spec["suite"])
 
-        suite_answers = iter(["suite", "smoke HelloWorld"])
+        suite_answers = iter(["suite", f"smoke {suite_name}"])
         suite_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(suite_answers))
-        self.assertEqual(["test", "suite", "--family", "smoke", "--suite", "HelloWorld"], suite_argv)
+        self.assertEqual(["test", "suite", "--family", "smoke", "--suite", suite_name], suite_argv)
 
         module_answers = iter(["module", "managed-smoke basic"])
         module_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(module_answers))

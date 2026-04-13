@@ -29,8 +29,8 @@ except ImportError:
     from testing.events import build_event
 
 
-WINDOWS_REFERENCE_SUBJECT_ID = "HelloWorldObject"
-WINDOWS_REFERENCE_SUBJECT_MATRIX_ID = "windows-dev-output"
+WINDOWS_REFERENCE_SUBJECT_ID = "SolutionCorePack"
+WINDOWS_REFERENCE_SUBJECT_MATRIX_ID = "windows-native-check"
 WINDOWS_REFERENCE_SUBJECT_VARIANT = "CHECK"
 
 

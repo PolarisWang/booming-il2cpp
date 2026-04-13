@@ -263,10 +263,10 @@ class Phase7InterpreterMixedExecutionTests(unittest.TestCase):
                 str(INTERPRETER_LOWERING_PROJECT_PATH),
                 "-c",
                 "Release",
-                "--no-build",
                 proof_base_output,
                 "--",
-                "lowering-proof",
+                "--chaos-entry-kind=1",
+                "--chaos-entry-slice=3",
             ],
             cwd=REPO_ROOT,
         )

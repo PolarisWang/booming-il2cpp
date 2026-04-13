@@ -59,6 +59,73 @@ public enum ChaosBenchmarkCategory : byte
     HotUpdate = 4,
 }
 
+/// <summary>
+/// Defines the compact entry families used by retained subject launchers.
+/// </summary>
+public enum ChaosSubjectEntryKind : byte
+{
+    /// <summary>
+    /// No explicit entry was selected.
+    /// </summary>
+    None = 0,
+
+    /// <summary>
+    /// Correctness proof entry.
+    /// </summary>
+    Proof = 1,
+
+    /// <summary>
+    /// Benchmark workload entry.
+    /// </summary>
+    Benchmark = 2,
+}
+
+/// <summary>
+/// Defines the shared retained-subject entry slices.
+/// </summary>
+public enum ChaosSubjectSlice : ushort
+{
+    /// <summary>
+    /// No explicit slice was selected.
+    /// </summary>
+    None = 0,
+
+    /// <summary>
+    /// HotUpdateHostPack default skeleton proof slice.
+    /// </summary>
+    HotUpdateSkeletonProof = 1,
+
+    /// <summary>
+    /// MixedExecutionFeaturePack default mixed proof slice.
+    /// </summary>
+    MixedExecutionProof = 2,
+
+    /// <summary>
+    /// MixedExecutionFeaturePack interpreter lowering proof slice.
+    /// </summary>
+    InterpreterLoweringProof = 3,
+
+    /// <summary>
+    /// SolutionCorePack managed output slice for the simple library solution.
+    /// </summary>
+    SolutionSimpleLibManagedOutput = 4,
+
+    /// <summary>
+    /// SolutionCorePack managed output slice for the multi-project solution.
+    /// </summary>
+    SolutionMultiProjectManagedOutput = 5,
+
+    /// <summary>
+    /// SolutionCorePack managed output slice for the package-reference solution.
+    /// </summary>
+    SolutionPackageReferenceManagedOutput = 6,
+
+    /// <summary>
+    /// SolutionCorePack default mainline proof slice.
+    /// </summary>
+    SolutionMainlineProof = 7,
+}
+
 [Flags]
 /// <summary>
 /// Defines the standard metrics that a benchmark may emit.
@@ -163,6 +230,96 @@ public enum ChaosEvidenceKind : ushort
     /// Native symbol, export-table, or linker-result evidence.
     /// </summary>
     NativeSymbol = 1 << 3,
+}
+
+/// <summary>
+/// Represents a compact retained-subject entry selection.
+/// </summary>
+public readonly record struct ChaosSubjectEntrySelection(
+    ChaosSubjectEntryKind EntryKind,
+    ChaosSubjectSlice EntrySlice)
+{
+    /// <summary>
+    /// Gets a value indicating whether no explicit entry was selected.
+    /// </summary>
+    public bool IsNone => EntryKind == ChaosSubjectEntryKind.None && EntrySlice == ChaosSubjectSlice.None;
+}
+
+/// <summary>
+/// Parses compact retained-subject dispatch arguments.
+/// </summary>
+public static class ChaosSubjectEntryArguments
+{
+    /// <summary>
+    /// Prefix for the compact entry-kind command-line argument.
+    /// </summary>
+    public const string EntryKindPrefix = "--chaos-entry-kind=";
+
+    /// <summary>
+    /// Prefix for the compact entry-slice command-line argument.
+    /// </summary>
+    public const string EntrySlicePrefix = "--chaos-entry-slice=";
+
+    /// <summary>
+    /// Attempts to parse a compact retained-subject entry selection.
+    /// </summary>
+    public static bool TryParse(string[]? args, out ChaosSubjectEntrySelection selection)
+    {
+        byte? entryKind = null;
+        ushort? entrySlice = null;
+
+        foreach (var argument in args ?? Array.Empty<string>())
+        {
+            if (argument.StartsWith(EntryKindPrefix, StringComparison.Ordinal))
+            {
+                entryKind = ParseByte(argument, EntryKindPrefix, nameof(EntryKindPrefix));
+                continue;
+            }
+
+            if (argument.StartsWith(EntrySlicePrefix, StringComparison.Ordinal))
+            {
+                entrySlice = ParseUInt16(argument, EntrySlicePrefix, nameof(EntrySlicePrefix));
+            }
+        }
+
+        if (entryKind is null && entrySlice is null)
+        {
+            selection = default;
+            return false;
+        }
+
+        if (entryKind is null || entrySlice is null)
+        {
+            throw new ArgumentException("compact subject entry selection requires both kind and slice arguments.", nameof(args));
+        }
+
+        selection = new ChaosSubjectEntrySelection(
+            (ChaosSubjectEntryKind)entryKind.Value,
+            (ChaosSubjectSlice)entrySlice.Value);
+        return true;
+    }
+
+    private static byte ParseByte(string argument, string prefix, string argumentName)
+    {
+        var valueText = argument[prefix.Length..];
+        if (!byte.TryParse(valueText, out var value))
+        {
+            throw new ArgumentException($"invalid compact subject entry kind: {valueText}", argumentName);
+        }
+
+        return value;
+    }
+
+    private static ushort ParseUInt16(string argument, string prefix, string argumentName)
+    {
+        var valueText = argument[prefix.Length..];
+        if (!ushort.TryParse(valueText, out var value))
+        {
+            throw new ArgumentException($"invalid compact subject entry slice: {valueText}", argumentName);
+        }
+
+        return value;
+    }
 }
 
 /// <summary>

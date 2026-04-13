@@ -700,7 +700,7 @@ def resolve_entry_argv(
                 return None
             return ["test", "suite", "--family", parts[0], "--suite", parts[1]]
         if mode == "subject":
-            value = prompt_value_provider("Enter subject id, for example: HelloWorldObject: ").strip()
+            value = prompt_value_provider("Enter subject id, for example: SolutionCorePack: ").strip()
             if not value:
                 return None
             return ["test", "subject", "--subject", value]
@@ -742,7 +742,7 @@ def resolve_entry_argv(
         return ["test", "suite", "--family", parts[0], "--suite", parts[1]]
 
     if command_id == "test-subject":
-        value = prompt_value_provider("Enter subject id, for example: HelloWorldObject: ").strip()
+        value = prompt_value_provider("Enter subject id, for example: SolutionCorePack: ").strip()
         if not value:
             return None
         return ["test", "subject", "--subject", value]

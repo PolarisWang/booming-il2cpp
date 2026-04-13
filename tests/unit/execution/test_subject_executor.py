@@ -429,6 +429,200 @@ class SubjectExecutorTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_executor_restores_reused_host_input_additional_assemblies_into_primary_evidence(self) -> None:
+        executor_module = load_module(EXECUTOR_MODULE_PATH, "chaos_subject_executor_reused_host_input")
+        previous_run_id = "20260405-fixture-host-input-000"
+        current_run_id = "20260406-fixture-host-input-001"
+        subject_id = "FixtureSolutionHostInputSubject"
+        matrix_id = "windows-solution-proof"
+        goal_id = "correctness.solution-proof"
+
+        TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
+        repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
+            previous_manifest_path = repo_root / run_bucket_path(
+                subject_id,
+                previous_run_id,
+                "analysis",
+                "host-input",
+                "host-input.manifest.json",
+            )
+            previous_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            previous_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "subjectId": subject_id,
+                        "bucket": "host-input",
+                        "primaryAssemblyPath": run_bucket_path(
+                            subject_id,
+                            previous_run_id,
+                            "analysis",
+                            "host-input",
+                            "FixtureSolutionHostInput.App.dll",
+                        ),
+                        "additionalAssemblyPaths": [
+                            run_bucket_path(
+                                subject_id,
+                                previous_run_id,
+                                "analysis",
+                                "host-input",
+                                "FixtureSolutionHostInput.Helper.dll",
+                            )
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            plan = {
+                "planVersion": "v1",
+                "selection": {
+                    "subjectId": subject_id,
+                    "displayName": subject_id,
+                    "goalId": goal_id,
+                    "matrixId": matrix_id,
+                    "pipelineId": "proof-runtime-trace",
+                    "source": {
+                        "type": "dotnet-project",
+                        "path": Path("subjects", subject_id, "source", f"{subject_id}.sln").as_posix(),
+                        "primaryProjectPath": Path(
+                            "subjects",
+                            subject_id,
+                            "source",
+                            "App",
+                            "FixtureSolutionHostInput.App.csproj",
+                        ).as_posix(),
+                        "entry": "FixtureSolutionHostInput.App/Program::Main(System.String[])",
+                    },
+                    "validationIntent": {
+                        "validationMode": "trace",
+                        "adaptationLevel": "traceable",
+                        "expectedOutcome": "pass",
+                    },
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "msvc-reference",
+                        "runtimeProfile": "reference-trace",
+                    },
+                    "artifactPlan": {"evidenceTerminalBucket": "host-input"},
+                },
+                "stagePlan": [
+                    {
+                        "order": 1,
+                        "stageId": "host-input-build",
+                        "kind": "host-input-build",
+                        "scope": "shared",
+                        "bucket": "host-input",
+                        "dependsOn": [],
+                        "executionMode": "reused",
+                        "fingerprint": "f-host-input",
+                        "upstreamFingerprints": {},
+                        "reuse": {
+                            "decision": "match",
+                            "reason": "fingerprint-match",
+                            "existingManifestPath": run_bucket_path(
+                                subject_id,
+                                previous_run_id,
+                                "analysis",
+                                "host-input",
+                                "host-input.manifest.json",
+                            ),
+                        },
+                        "paths": {
+                            "bucketRoot": run_bucket_path(subject_id, current_run_id, "analysis", "host-input"),
+                            "manifestPath": run_bucket_path(
+                                subject_id,
+                                current_run_id,
+                                "analysis",
+                                "host-input",
+                                "host-input.manifest.json",
+                            ),
+                            "reportPaths": [],
+                        },
+                    },
+                    {
+                        "order": 2,
+                        "stageId": "report-assemble",
+                        "kind": "report-assemble",
+                        "scope": "matrix",
+                        "bucket": "report",
+                        "dependsOn": ["host-input-build"],
+                        "executionMode": "executed",
+                        "fingerprint": "f-report",
+                        "upstreamFingerprints": {"host-input": "f-host-input"},
+                        "reuse": {"decision": "absent", "reason": "manifest-missing"},
+                        "paths": {
+                            "bucketRoot": run_bucket_path(subject_id, current_run_id, "matrices", matrix_id, "pipeline-report"),
+                            "manifestPath": run_bucket_path(
+                                subject_id,
+                                current_run_id,
+                                "matrices",
+                                matrix_id,
+                                "pipeline-report",
+                                "report.json",
+                            ),
+                            "reportPaths": [],
+                        },
+                    },
+                ],
+            }
+
+            result = executor_module.execute_plan(repo_root, plan, run_id=current_run_id)
+
+            self.assertEqual("ok", result["status"])
+            self.assertEqual(
+                [
+                    run_bucket_path(
+                        subject_id,
+                        current_run_id,
+                        "analysis",
+                        "host-input",
+                        "FixtureSolutionHostInput.App.dll",
+                    ),
+                    run_bucket_path(
+                        subject_id,
+                        current_run_id,
+                        "analysis",
+                        "host-input",
+                        "FixtureSolutionHostInput.Helper.dll",
+                    ),
+                ],
+                result["stageResults"][0]["primaryEvidencePaths"],
+            )
+
+            report_path = repo_root / run_bucket_path(
+                subject_id,
+                current_run_id,
+                "matrices",
+                matrix_id,
+                "pipeline-report",
+                "report.json",
+            )
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+            self.assertEqual(
+                [
+                    run_bucket_path(
+                        subject_id,
+                        current_run_id,
+                        "analysis",
+                        "host-input",
+                        "FixtureSolutionHostInput.App.dll",
+                    ),
+                    run_bucket_path(
+                        subject_id,
+                        current_run_id,
+                        "analysis",
+                        "host-input",
+                        "FixtureSolutionHostInput.Helper.dll",
+                    ),
+                ],
+                report["stageResults"][0]["primaryEvidencePaths"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
 
 if __name__ == "__main__":
     unittest.main()

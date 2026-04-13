@@ -18,7 +18,7 @@ SCANNED_PATHS = [
     REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen",
     REPO_ROOT / "tests" / "contracts" / "native",
     REPO_ROOT / "tests" / "tooling" / "run",
-    REPO_ROOT / "subjects" / "HelloWorldObject" / "validation" / "proof" / "native-reference",
+    REPO_ROOT / "subjects" / "SolutionCorePack" / "validation" / "proof" / "native-reference",
     REPO_ROOT / "tests" / "unit" / "run",
 ]
 OPTIONAL_SCANNED_PATHS = [

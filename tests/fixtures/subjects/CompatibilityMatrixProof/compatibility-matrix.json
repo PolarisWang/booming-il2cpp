@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "v1",
+  "subjectId": "CompatibilityMatrixProof",
+  "projectPath": "tests/fixtures/subjects/CompatibilityMatrixProof/source/CompatibilityMatrixProof.csproj",
+  "aotVersions": [
+    "1.0.0",
+    "1.0.1",
+    "1.0.2"
+  ],
+  "hotUpdateVersions": [
+    {
+      "patchId": "patch-001",
+      "targetAotVersion": "1.0.0"
+    },
+    {
+      "patchId": "patch-002",
+      "targetAotVersion": "1.0.1"
+    },
+    {
+      "patchId": "patch-003",
+      "targetAotVersion": "1.0.2"
+    }
+  ],
+  "platforms": [
+    "windows-x64",
+    "android-arm64",
+    "ios-arm64"
+  ],
+  "additionalTestCases": [
+    {
+      "caseId": "reject-major-mismatch",
+      "aotVersion": "1.0.0",
+      "patchId": "patch-incompatible",
+      "targetAotVersion": "2.0.0",
+      "expected": "reject"
+    }
+  ]
+}

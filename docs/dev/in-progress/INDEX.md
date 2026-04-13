@@ -1,3 +1,3 @@
-# 进行中任务
-| 任务 | task_type | phase | 最近更新 | 下一步 | active |
+# In-Progress Tasks
+| task_id | task_type | phase | updated_at | next_step | active |
 | --- | --- | --- | --- | --- | --- |

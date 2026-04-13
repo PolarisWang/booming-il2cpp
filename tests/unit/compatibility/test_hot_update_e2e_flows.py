@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 import subprocess
 import unittest
 from pathlib import Path
@@ -37,16 +38,17 @@ METHOD_REPLACEMENT_SMOKE_SOURCE_PATH = REPO_ROOT / "tests" / "contracts" / "nati
 HOT_UPDATE_SKELETON_ROOT = REPO_ROOT / "subjects" / "HotUpdateHostPack"
 HOT_UPDATE_SKELETON_PROJECT_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "HotUpdateHostPack.csproj"
 HOT_UPDATE_SKELETON_PROGRAM_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "HotUpdateSkeletonProofEntry.cs"
+HOT_UPDATE_FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects"
 
-METHOD_REPLACEMENT_PROOF_ROOT = REPO_ROOT / "subjects" / "MethodReplacementProof"
+METHOD_REPLACEMENT_PROOF_ROOT = HOT_UPDATE_FIXTURE_ROOT / "MethodReplacementProof"
 METHOD_REPLACEMENT_PROOF_PROJECT_PATH = METHOD_REPLACEMENT_PROOF_ROOT / "source" / "MethodReplacementProof.csproj"
 METHOD_REPLACEMENT_PROOF_PROGRAM_PATH = METHOD_REPLACEMENT_PROOF_ROOT / "source" / "Program.cs"
 
-AUTO_BRIDGE_PROOF_ROOT = REPO_ROOT / "subjects" / "AutoBridgeProof"
+AUTO_BRIDGE_PROOF_ROOT = HOT_UPDATE_FIXTURE_ROOT / "AutoBridgeProof"
 AUTO_BRIDGE_PROOF_PROJECT_PATH = AUTO_BRIDGE_PROOF_ROOT / "source" / "AutoBridgeProof.csproj"
 AUTO_BRIDGE_PROOF_PROGRAM_PATH = AUTO_BRIDGE_PROOF_ROOT / "source" / "Program.cs"
 
-VERSION_ROLLBACK_PROOF_ROOT = REPO_ROOT / "subjects" / "VersionRollbackProof"
+VERSION_ROLLBACK_PROOF_ROOT = HOT_UPDATE_FIXTURE_ROOT / "VersionRollbackProof"
 VERSION_ROLLBACK_PROOF_PROJECT_PATH = VERSION_ROLLBACK_PROOF_ROOT / "source" / "VersionRollbackProof.csproj"
 VERSION_ROLLBACK_PROOF_PROGRAM_PATH = VERSION_ROLLBACK_PROOF_ROOT / "source" / "Program.cs"
 
@@ -283,6 +285,8 @@ class Phase9HotUpdateE2ETests(unittest.TestCase):
             self.assertIn(required_fragment, managed_output)
 
         build_root = TEST_TMP_ROOT / "native-method-replacement-smoke"
+        if build_root.exists():
+            shutil.rmtree(build_root)
         build_root.mkdir(parents=True, exist_ok=True)
         run_checked(
             [

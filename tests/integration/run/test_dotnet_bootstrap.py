@@ -7,6 +7,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from tests.support import select_public_suite_spec
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 TOOLING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "tooling.py"
@@ -53,7 +55,7 @@ class DotnetBootstrapTests(unittest.TestCase):
             return install
 
         outcome = tooling_module.ensure_dotnet_available(
-            "test smoke HelloWorld",
+            "test smoke managed-entry-basic",
             "macos",
             interactive=True,
             prompt=lambda _: "y",
@@ -69,7 +71,7 @@ class DotnetBootstrapTests(unittest.TestCase):
         tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_noninteractive")
 
         outcome = tooling_module.ensure_dotnet_available(
-            "test workflow roadmap-0-macos",
+            "test workflow runtime-baseline-macos",
             "macos",
             interactive=False,
             which=lambda executable: None,
@@ -82,9 +84,15 @@ class DotnetBootstrapTests(unittest.TestCase):
 
     def test_macos_interactive_session_requires_homebrew_for_auto_install(self) -> None:
         tooling_module = load_module(TOOLING_MODULE_PATH, "chaos_run_tooling_missing_brew")
+        smoke_spec = select_public_suite_spec(
+            "chaos_integration_dotnet_bootstrap_missing_brew_suite",
+            host_platform="macos",
+            family="smoke",
+            required_stages=["build"],
+        )
 
         outcome = tooling_module.ensure_dotnet_available(
-            "build smoke HelloWorld",
+            f"test smoke {smoke_spec['suite']} --stage build",
             "macos",
             interactive=True,
             prompt=lambda _: "y",
@@ -98,6 +106,14 @@ class DotnetBootstrapTests(unittest.TestCase):
 
     def test_build_smoke_project_checks_dotnet_before_running(self) -> None:
         build_module = load_module(BUILD_MODULE_PATH, "chaos_run_build_dotnet_gate")
+        smoke_spec = select_public_suite_spec(
+            "chaos_integration_dotnet_bootstrap_build_suite",
+            host_platform="macos",
+            family="smoke",
+            required_stages=["build", "run"],
+        )
+        suite_name = str(smoke_spec["suite"])
+        execution = dict(smoke_spec.get("execution") or {})
         bootstrap = build_module.tooling_module.ToolBootstrapResult(
             ready=False,
             output="Run `brew install --cask dotnet-sdk`, then retry.\n",
@@ -107,15 +123,15 @@ class DotnetBootstrapTests(unittest.TestCase):
         with patch.object(build_module.tooling_module, "ensure_dotnet_available", return_value=bootstrap):
             gated = build_module.handle(
                 {
-                    "id": "build-smoke-helloworld",
+                    "id": "synthetic-smoke-build",
                     "kind": "smoke-project",
-                    "project_path": "tests/smoke/input/HelloWorld/HelloWorld.csproj",
-                    "artifact_path": "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll",
-                    "target": "HelloWorld",
+                    "project_path": str(execution["project_path"]),
+                    "artifact_path": str(execution["artifact_path"]),
+                    "target": suite_name,
                 },
                 REPO_ROOT,
                 "macos",
-                "build smoke HelloWorld",
+                f"test smoke {suite_name} --stage build",
             )
 
         self.assertIn("brew install --cask dotnet-sdk", gated.text or "")
@@ -123,6 +139,14 @@ class DotnetBootstrapTests(unittest.TestCase):
 
     def test_smoke_test_checks_dotnet_before_running(self) -> None:
         test_module = load_module(TEST_MODULE_PATH, "chaos_run_test_dotnet_gate")
+        smoke_spec = select_public_suite_spec(
+            "chaos_integration_dotnet_bootstrap_test_suite",
+            host_platform="macos",
+            family="smoke",
+            required_stages=["run"],
+        )
+        suite_name = str(smoke_spec["suite"])
+        execution = dict(smoke_spec.get("execution") or {})
         bootstrap = test_module.tooling_module.ToolBootstrapResult(
             ready=False,
             output="Run `brew install --cask dotnet-sdk`, then retry.\n",
@@ -133,16 +157,16 @@ class DotnetBootstrapTests(unittest.TestCase):
             with patch.object(test_module, "run_process") as run_process_mock:
                 gated = test_module.handle(
                     {
-                        "id": "test-smoke-helloworld",
+                        "id": "synthetic-smoke-run",
                         "kind": "smoke-run",
-                        "project_path": "tests/smoke/input/HelloWorld/HelloWorld.csproj",
-                        "dll_path": "artifacts/smoke/bin/HelloWorld/Release/net8.0/HelloWorld.dll",
-                        "expected_patterns": ["Hello from managed smoke"],
-                        "target": "HelloWorld",
+                        "project_path": str(execution["project_path"]),
+                        "dll_path": str(execution["dll_path"]),
+                        "expected_patterns": list(execution["expected_patterns"]),
+                        "target": suite_name,
                     },
                     REPO_ROOT,
                     "macos",
-                    "test smoke HelloWorld",
+                    f"test smoke {suite_name}",
                 )
 
         self.assertIn("brew install --cask dotnet-sdk", gated.text or "")
@@ -153,6 +177,12 @@ class DotnetBootstrapTests(unittest.TestCase):
         manifest_module = load_module(REPO_ROOT / "build" / "toolchains" / "run" / "core" / "manifest.py", "chaos_run_manifest_dotnet_gate")
         test_module = load_module(TEST_MODULE_PATH, "chaos_run_test_workflow_dotnet_gate")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, REPO_ROOT / "build" / "toolchains" / "run" / "run_manifest.json")
+        workflow_spec = select_public_suite_spec(
+            "chaos_integration_dotnet_bootstrap_workflow_suite",
+            host_platform="macos",
+            family="workflow",
+            required_stages=["all"],
+        )
         bootstrap = test_module.tooling_module.ToolBootstrapResult(
             ready=False,
             output="Run `brew install --cask dotnet-sdk`, then retry.\n",
@@ -164,17 +194,14 @@ class DotnetBootstrapTests(unittest.TestCase):
                 with patch.object(test_module, "run_process") as run_process_mock:
                     gated = test_module.handle(
                         {
-                            "id": "test-workflow-roadmap-0-macos",
+                            "id": "test-family-suite",
                             "handler": "test.dispatch",
-                            "kind": "registry-object-alias",
-                            "target": "roadmap-0-macos",
-                            "registry_object_kind": "system",
-                            "registry_object_id": "system/roadmap-0-macos",
                         },
                         REPO_ROOT,
                         "macos",
-                        "test workflow roadmap-0-macos",
+                        f"test workflow {workflow_spec['suite']}",
                         manifest,
+                        {"family": "workflow", "suite": str(workflow_spec["suite"])},
                     )
 
         self.assertIn("brew install --cask dotnet-sdk", gated.text or "")

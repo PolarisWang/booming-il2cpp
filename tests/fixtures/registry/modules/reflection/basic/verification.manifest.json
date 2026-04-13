@@ -6,6 +6,6 @@
   "supportedHosts": ["windows", "macos", "linux"],
   "docRefs": ["wiki/06-测试验证/模块/reflection.md"],
   "members": [
-    {"type": "suite", "id": "smoke/ReflectionLite"}
+    {"type": "suite", "id": "smoke/reflection-basic"}
   ]
 }
