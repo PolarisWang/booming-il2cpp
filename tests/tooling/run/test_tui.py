@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from tests.support import select_public_suite_spec, select_subject_record
+from tests.support import select_public_suite_spec
 
 from .test_command_manifest import RUN_MANIFEST_PATH, load_manifest_module
 
@@ -32,6 +32,57 @@ def load_tui_module():
 
 def smoke_binary_artifact_path(suite_name: str) -> str:
     return Path("artifacts", "smoke", "bin", suite_name, "Release", "net8.0", f"{suite_name}.dll").as_posix()
+
+
+def make_project_subject_record(
+    subject_id: str = "FixtureProjectSubject",
+    *,
+    matrix_id: str = "windows-native-check",
+) -> dict[str, object]:
+    return {
+        "subject_id": subject_id,
+        "title": subject_id,
+        "manifest": {"defaultMatrix": matrix_id},
+        "matrices": [
+            {
+                "matrixId": matrix_id,
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                },
+            }
+        ],
+    }
+
+
+def make_subject_registry_index(tui_module, subject_id: str = "FixtureSubject"):
+    return tui_module.registry_module.RegistryIndex(
+        host_platform="windows",
+        suites=[],
+        subjects=[
+            {
+                "id": f"subject/{subject_id}",
+                "type": "subject",
+                "displayName": subject_id,
+                "subjectId": subject_id,
+                "defaultGoalId": "correctness.dev",
+                "defaultMatrixId": "windows-native-check",
+                "goalIds": ["correctness.dev"],
+                "matrixIds": ["windows-native-check"],
+                "supportedHosts": ["windows"],
+                "level": "subject",
+                "primaryModuleId": None,
+                "moduleIds": [],
+                "subsystemIds": [],
+                "docRefs": [],
+            }
+        ],
+        module_verifications=[],
+        system_scenarios=[],
+        pipelines=[],
+        errors=[],
+        warnings=[],
+    )
 
 
 @unittest.skip("legacy assertions superseded by unified test menu coverage")
@@ -756,18 +807,14 @@ class TuiUnifiedMenuTests(unittest.TestCase):
     def test_run_project_subject_flow_collects_specific_matrix_variant_and_refresh(self) -> None:
         tui_module = load_tui_module()
         fake_terminal = object()
-        subject_record = select_subject_record(
-            "chaos_tui_project_subject_flow",
-            source_type="dotnet-project",
-            required_host_platforms=["windows-x64"],
-        )
-        matrix_id = str(subject_record["manifest"]["defaultMatrix"])
+        subject_record = make_project_subject_record()
+        matrix_id = str(dict(subject_record["manifest"])["defaultMatrix"])
 
         selections = [
             tui_module.MenuEntry(
                 "Subjects",
-                {"id": "subject-option", "title": str(subject_record["subjectId"]), "subject_id": str(subject_record["subjectId"])},
-                str(subject_record["subjectId"]),
+                {"id": "subject-option", "title": str(subject_record["subject_id"]), "subject_id": str(subject_record["subject_id"])},
+                str(subject_record["subject_id"]),
                 [],
             ),
             tui_module.MenuEntry("范围", {"id": "scope-specific", "title": "指定目标", "scope": "specific"}, "specific", []),
@@ -777,9 +824,10 @@ class TuiUnifiedMenuTests(unittest.TestCase):
             tui_module.MenuEntry("Open", {"id": "open-generated-native", "title": "打开 generated native project", "open_native_target": "generated"}, "generated", []),
         ]
 
-        with patch.object(tui_module, "_run_menu_selection", side_effect=selections):
-            with patch.object(tui_module, "run_confirmation_screen", return_value=True):
-                argv = tui_module.run_project_subject_flow("generate-project-subject", "windows", terminal=fake_terminal)
+        with patch.object(tui_module, "_subject_records_for_host", return_value=[subject_record]):
+            with patch.object(tui_module, "_run_menu_selection", side_effect=selections):
+                with patch.object(tui_module, "run_confirmation_screen", return_value=True):
+                    argv = tui_module.run_project_subject_flow("generate-project-subject", "windows", terminal=fake_terminal)
 
         self.assertEqual(
             [
@@ -787,7 +835,7 @@ class TuiUnifiedMenuTests(unittest.TestCase):
                 "project",
                 "subject",
                 "--id",
-                f"subject/{subject_record['subjectId']}",
+                f"subject/{subject_record['subject_id']}",
                 "--matrix",
                 matrix_id,
                 "--variant",
@@ -802,18 +850,14 @@ class TuiUnifiedMenuTests(unittest.TestCase):
     def test_run_project_subject_flow_build_collects_generated_native_target(self) -> None:
         tui_module = load_tui_module()
         fake_terminal = object()
-        subject_record = select_subject_record(
-            "chaos_tui_project_subject_build_flow",
-            source_type="dotnet-project",
-            required_host_platforms=["windows-x64"],
-        )
-        matrix_id = str(subject_record["manifest"]["defaultMatrix"])
+        subject_record = make_project_subject_record(subject_id="FixtureProjectBuildSubject")
+        matrix_id = str(dict(subject_record["manifest"])["defaultMatrix"])
 
         selections = [
             tui_module.MenuEntry(
                 "Subjects",
-                {"id": "subject-option", "title": str(subject_record["subjectId"]), "subject_id": str(subject_record["subjectId"])},
-                str(subject_record["subjectId"]),
+                {"id": "subject-option", "title": str(subject_record["subject_id"]), "subject_id": str(subject_record["subject_id"])},
+                str(subject_record["subject_id"]),
                 [],
             ),
             tui_module.MenuEntry("范围", {"id": "scope-specific", "title": "指定目标", "scope": "specific"}, "specific", []),
@@ -821,9 +865,10 @@ class TuiUnifiedMenuTests(unittest.TestCase):
             tui_module.MenuEntry("Build", {"id": "build-generated-native", "title": "构建 generated native project", "native_target": "generated"}, "generated", []),
         ]
 
-        with patch.object(tui_module, "_run_menu_selection", side_effect=selections):
-            with patch.object(tui_module, "run_confirmation_screen", return_value=True):
-                argv = tui_module.run_project_subject_flow("build-project-subject", "windows", terminal=fake_terminal)
+        with patch.object(tui_module, "_subject_records_for_host", return_value=[subject_record]):
+            with patch.object(tui_module, "_run_menu_selection", side_effect=selections):
+                with patch.object(tui_module, "run_confirmation_screen", return_value=True):
+                    argv = tui_module.run_project_subject_flow("build-project-subject", "windows", terminal=fake_terminal)
 
         self.assertEqual(
             [
@@ -831,7 +876,7 @@ class TuiUnifiedMenuTests(unittest.TestCase):
                 "project",
                 "subject",
                 "--id",
-                f"subject/{subject_record['subjectId']}",
+                f"subject/{subject_record['subject_id']}",
                 "--matrix",
                 matrix_id,
                 "--native-target",
@@ -930,14 +975,14 @@ class TuiUnifiedMenuTests(unittest.TestCase):
 
     def test_build_test_subject_menu_entries_lists_registered_subjects(self) -> None:
         tui_module = load_tui_module()
-        subject_record = select_subject_record(
-            "chaos_tui_subject_menu_entries",
-            source_type="dotnet-project",
-            required_host_platforms=["windows-x64"],
-        )
-        subject_id = str(subject_record["subjectId"])
+        subject_id = "FixtureSubject"
 
-        entries = tui_module.build_test_subject_menu_entries("windows")
+        with patch.object(
+            tui_module.registry_module,
+            "scan_registry",
+            return_value=make_subject_registry_index(tui_module, subject_id),
+        ):
+            entries = tui_module.build_test_subject_menu_entries("windows")
 
         subject_entry = next(entry for entry in entries if entry.syntax == subject_id)
         self.assertEqual(["test", "subject", "--id", f"subject/{subject_id}"], subject_entry.argv)
@@ -1033,11 +1078,6 @@ class TuiUnifiedMenuTests(unittest.TestCase):
             family="smoke",
             required_stages=["all"],
         )
-        subject_record = select_subject_record(
-            "chaos_tui_unified_subject_selector",
-            source_type="dotnet-project",
-            required_host_platforms=["windows-x64"],
-        )
 
         suite_answers = iter(["suite", f"{smoke_spec['family']} {smoke_spec['suite']}"])
         suite_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(suite_answers))
@@ -1046,9 +1086,10 @@ class TuiUnifiedMenuTests(unittest.TestCase):
             suite_argv,
         )
 
-        subject_answers = iter(["subject", str(subject_record["subjectId"])])
+        subject_id = "FixtureSubject"
+        subject_answers = iter(["subject", subject_id])
         subject_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(subject_answers))
-        self.assertEqual(["test", "subject", "--subject", str(subject_record["subjectId"])], subject_argv)
+        self.assertEqual(["test", "subject", "--subject", subject_id], subject_argv)
 
         module_answers = iter(["module", "managed-smoke basic"])
         module_argv = tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: next(module_answers))
@@ -1124,13 +1165,8 @@ class TuiUnifiedMenuTests(unittest.TestCase):
 
     def test_render_test_progress_screen_highlights_subject_summary(self) -> None:
         tui_module = load_tui_module()
-        subject_record = select_subject_record(
-            "chaos_tui_subject_summary_highlight",
-            source_type="dotnet-project",
-            required_host_platforms=["windows-x64"],
-        )
-        subject_id = str(subject_record["subjectId"])
-        matrix_id = str(subject_record["manifest"]["defaultMatrix"])
+        subject_id = "FixtureSubject"
+        matrix_id = "windows-native-check"
         run_id = "fixture-run-summary-001"
         summary_path = f"artifacts/subjects/{subject_id}/runs/{run_id}/subject-report/summary.json"
         matrix_report_path = f"artifacts/subjects/{subject_id}/runs/{run_id}/matrices/{matrix_id}/pipeline-report/report.json"

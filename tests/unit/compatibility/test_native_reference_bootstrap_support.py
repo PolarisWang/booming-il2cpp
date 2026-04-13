@@ -3,9 +3,6 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
-from tests.support import select_subject_record
-
-
 REPO_ROOT = Path(__file__).resolve().parents[3]
 
 BOOTSTRAP_DIR = REPO_ROOT / "src" / "native" / "bootstrap"
@@ -23,14 +20,7 @@ SUPPORT_SOURCE_PATH = SUPPORT_DIR / "support.cpp"
 class NativeReferenceBootstrapSupportTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        subject_record = select_subject_record(
-            "chaos_native_reference_bootstrap_support_subject",
-            category="canonical",
-            source_type="dotnet-project",
-            required_stage_kinds=["generated-native-proof", "runtime-observe"],
-            required_validation_profile_ids=["proof-dev"],
-        )
-        cls.subject_id = str(subject_record["subjectId"])
+        cls.subject_id = "SolutionCorePack"
         cls.proof_host_dir = (
             REPO_ROOT / "subjects" / cls.subject_id / "validation" / "proof" / "native-reference"
         )

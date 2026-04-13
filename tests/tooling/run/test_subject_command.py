@@ -5,17 +5,15 @@ import json
 import shutil
 import sys
 import unittest
-import uuid
 from pathlib import Path
+from typing import Any
 from unittest.mock import patch
 
-from tests.support import select_subject_record
+from tests.support import make_temp_repo_root
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 TEST_COMMAND_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "test.py"
-MANIFEST_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "manifest.py"
-RUN_MANIFEST_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "run_manifest.json"
 
 
 def load_module(path: Path, module_name: str):
@@ -31,119 +29,262 @@ def load_module(path: Path, module_name: str):
     spec.loader.exec_module(module)
     return module
 
-def snapshot_text(path: Path) -> str | None:
-    if not path.is_file():
-        return None
-    return path.read_text(encoding="utf-8")
+
+def read_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
-def restore_text(path: Path, snapshot: str | None) -> None:
-    if snapshot is None:
-        try:
-            path.unlink()
-        except OSError:
-            pass
-        return
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(snapshot, encoding="utf-8")
+def make_subject_registry_index(
+    test_module,
+    *,
+    subject_id: str,
+    default_goal_id: str = "correctness.dev",
+    matrix_id: str = "windows-native-check",
+):
+    return test_module.registry_module.RegistryIndex(
+        host_platform="windows",
+        suites=[],
+        subjects=[
+            {
+                "id": f"subject/{subject_id}",
+                "type": "subject",
+                "displayName": subject_id,
+                "subjectId": subject_id,
+                "defaultGoalId": default_goal_id,
+                "defaultMatrixId": matrix_id,
+                "goalIds": [default_goal_id],
+                "matrixIds": [matrix_id],
+                "supportedHosts": ["windows"],
+                "level": "subject",
+                "primaryModuleId": None,
+                "moduleIds": [],
+                "subsystemIds": [],
+                "docRefs": [],
+                "canonicalCommand": f"run test subject --id subject/{subject_id}",
+            }
+        ],
+        module_verifications=[],
+        system_scenarios=[],
+        pipelines=[],
+        errors=[],
+        warnings=[],
+    )
+
+
+def make_subject_plan(
+    *,
+    subject_id: str,
+    run_id: str,
+    matrix_id: str,
+    goal_id: str,
+    stage_kind: str,
+    stage_bucket: str = "runtime",
+    validation_profile_id: str | None = None,
+    validation_kind: str | None = None,
+    variant: str | None = None,
+) -> dict[str, Any]:
+    runs_root = f"artifacts/subjects/{subject_id}/runs"
+    run_root = f"{runs_root}/{run_id}"
+    matrix_root = f"{run_root}/matrices/{matrix_id}"
+    pipeline_report_root = f"{matrix_root}/pipeline-report"
+    subject_report_root = f"{run_root}/subject-report"
+    selection = {
+        "subjectId": subject_id,
+        "matrixId": matrix_id,
+        "goalId": goal_id,
+        "pipelineId": f"pipeline/{matrix_id}",
+        "validationProfileId": validation_profile_id,
+        "validationKinds": [validation_kind] if validation_kind else [],
+        "validationKind": validation_kind,
+        "variant": variant,
+        "artifactPlan": {"evidenceTerminalBucket": stage_bucket},
+        "executionContext": {
+            "hostPlatform": "windows-x64",
+            "targetPlatform": "windows-x64",
+            "toolchainProfile": "windows-default",
+            "runtimeProfile": "coreclr",
+        },
+    }
+    return {
+        "selection": selection,
+        "stagePlan": [
+            {
+                "stageId": f"{stage_bucket}:{stage_kind}",
+                "kind": stage_kind,
+                "bucket": stage_bucket,
+                "scope": "matrix",
+                "paths": {
+                    "bucketRoot": f"{matrix_root}/{stage_bucket}",
+                    "manifestPath": f"{matrix_root}/{stage_bucket}/manifest.json",
+                    "reportPaths": [],
+                },
+            }
+        ],
+        "artifactsRoot": {
+            "runsRoot": runs_root,
+            "runRoot": run_root,
+            "runReportRoot": f"{run_root}/run-report",
+            "subjectReportRoot": subject_report_root,
+            "pipelineReportRoot": pipeline_report_root,
+            "entryReportPath": f"{pipeline_report_root}/report.json",
+            "entrySummaryPath": f"{subject_report_root}/summary.json",
+        },
+    }
+
+
+def make_build_plan_side_effect(
+    observed_selection: dict[str, str],
+    *,
+    subject_id: str,
+    expected_run_id: str,
+    default_goal_id: str = "correctness.dev",
+    default_matrix_id: str = "windows-native-check",
+    stage_kind: str = "runtime-observe",
+    stage_bucket: str = "runtime",
+    default_validation_profile_id: str | None = None,
+    default_validation_kind: str | None = None,
+):
+    def side_effect(
+        repo_root: Path,
+        subject_key: str,
+        *,
+        goal_id: str | None = None,
+        matrix_id: str | None = None,
+        validation_profile_id: str | None = None,
+        validation_kind: str | None = None,
+        variant: str | None = None,
+        run_id: str,
+        source_entry: str | None = None,
+        workload_entry: str | None = None,
+        entry_selection: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        del repo_root
+        del source_entry
+        del workload_entry
+        del entry_selection
+        if subject_key != subject_id:
+            raise AssertionError(f"unexpected subject id: {subject_key}")
+        if run_id != expected_run_id:
+            raise AssertionError(f"unexpected run id: {run_id}")
+        resolved_goal_id = goal_id or default_goal_id
+        resolved_matrix_id = matrix_id or default_matrix_id
+        resolved_validation_profile_id = validation_profile_id or default_validation_profile_id
+        resolved_validation_kind = validation_kind or default_validation_kind
+        observed_selection.update(
+            {
+                "subjectId": subject_id,
+                "matrixId": resolved_matrix_id,
+                "goalId": resolved_goal_id,
+                "validationProfileId": resolved_validation_profile_id or "",
+                "validationKind": resolved_validation_kind or "",
+                "variant": variant or "",
+                "terminalBucket": stage_bucket,
+            }
+        )
+        return make_subject_plan(
+            subject_id=subject_id,
+            run_id=run_id,
+            matrix_id=resolved_matrix_id,
+            goal_id=resolved_goal_id,
+            stage_kind=stage_kind,
+            stage_bucket=stage_bucket,
+            validation_profile_id=resolved_validation_profile_id,
+            validation_kind=resolved_validation_kind,
+            variant=variant,
+        )
+
+    return side_effect
+
+
+def build_execution_result(
+    plan: dict[str, Any],
+    *,
+    stage_kind: str,
+    duration_ms: int,
+    fingerprint: str,
+    details: dict[str, Any] | None = None,
+    primary_evidence_paths: list[str] | None = None,
+    terminal_bucket: str | None = None,
+) -> dict[str, Any]:
+    selection = dict(plan.get("selection") or {})
+    stage = next(
+        dict(candidate)
+        for candidate in list(plan.get("stagePlan") or [])
+        if str(candidate.get("kind") or "") == stage_kind
+    )
+    bucket_root = str(stage["paths"]["bucketRoot"])
+    return {
+        "subjectId": str(selection.get("subjectId") or ""),
+        "matrixId": str(selection.get("matrixId") or ""),
+        "goalId": str(selection.get("goalId") or ""),
+        "status": "ok",
+        "terminalStageId": str(stage["stageId"]),
+        "terminalBucket": terminal_bucket or str(dict(selection.get("artifactPlan") or {}).get("evidenceTerminalBucket") or stage["bucket"]),
+        "stageResults": [
+            {
+                "stageId": str(stage["stageId"]),
+                "kind": str(stage["kind"]),
+                "bucket": str(stage["bucket"]),
+                "status": "ok",
+                "planMode": "executed",
+                "actionTaken": "executed",
+                "invalidation": {"applied": False, "reason": None},
+                "manifestPath": str(stage["paths"]["manifestPath"]),
+                "reportPaths": list(stage["paths"]["reportPaths"]),
+                "primaryEvidencePaths": primary_evidence_paths or [f"{bucket_root}/stdout.log"],
+                "fingerprint": fingerprint,
+                "durationMs": duration_ms,
+                "diagnostics": {},
+                "details": details or {},
+                "failure": None,
+            }
+        ],
+        "errors": [],
+        "events": [],
+    }
+
+
+def empty_validation_outcome(*args: object, **kwargs: object) -> dict[str, Any]:
+    del args
+    del kwargs
+    return {
+        "status": "ok",
+        "validationResults": [],
+        "artifacts": [],
+        "errors": [],
+    }
 
 
 class SubjectCommandTests(unittest.TestCase):
     def test_subject_dispatch_routes_to_subject_planner_and_executor(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_subject_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_subject_dispatch")
-        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
-        subject_record = select_subject_record(
-            "chaos_run_subject_fixture_dispatch",
-            source_type="dotnet-project",
-            required_host_platforms=["windows-x64"],
-        )
-        subject_id = str(subject_record["subjectId"])
-        fixed_run_id = f"chaos-run-subject-dispatch-{uuid.uuid4().hex}"
+        repo_root = make_temp_repo_root("subject-command", "dispatch")
+        manifest: dict[str, Any] = {}
+        subject_id = "FixtureProjectDispatchSubject"
+        fixed_run_id = "chaos-run-subject-dispatch"
         observed_selection: dict[str, str] = {}
-        subject_runs_root = REPO_ROOT / "artifacts" / "subjects" / subject_id / "runs"
+        subject_runs_root = repo_root / "artifacts" / "subjects" / subject_id / "runs"
         run_root = subject_runs_root / fixed_run_id
         subject_last_path = subject_runs_root / "last.json"
         subject_current_path = subject_runs_root / "current.json"
-        global_logs_root = REPO_ROOT / "artifacts" / "logs" / "tests"
+        global_logs_root = repo_root / "artifacts" / "logs" / "tests"
         global_last_path = global_logs_root / "last.json"
         global_current_path = global_logs_root / "current.json"
-        snapshots = {
-            subject_last_path: snapshot_text(subject_last_path),
-            subject_current_path: snapshot_text(subject_current_path),
-            global_last_path: snapshot_text(global_last_path),
-            global_current_path: snapshot_text(global_current_path),
-        }
+        registry_index = make_subject_registry_index(test_module, subject_id=subject_id)
+        build_plan = make_build_plan_side_effect(
+            observed_selection,
+            subject_id=subject_id,
+            expected_run_id=fixed_run_id,
+        )
 
         def execute_plan_side_effect(repo_root: Path, plan: dict, **_: object) -> dict:
             del repo_root
-            selection = dict(plan.get("selection") or {})
-            observed_selection.update(
-                {
-                    "subjectId": str(selection.get("subjectId") or ""),
-                    "matrixId": str(selection.get("matrixId") or ""),
-                    "goalId": str(selection.get("goalId") or ""),
-                    "terminalBucket": str(dict(selection.get("artifactPlan") or {}).get("evidenceTerminalBucket") or ""),
-                }
+            return build_execution_result(
+                plan,
+                stage_kind="runtime-observe",
+                duration_ms=2,
+                fingerprint="dispatch-fingerprint",
             )
-            non_report_stages = [
-                dict(stage)
-                for stage in list(plan.get("stagePlan") or [])
-                if str(stage.get("bucket") or "") != "report"
-            ]
-            if not non_report_stages:
-                raise AssertionError("expected at least one non-report stage")
-
-            first_stage = non_report_stages[0]
-            terminal_stage = non_report_stages[-1]
-            stage_results = [
-                {
-                    "stageId": str(first_stage["stageId"]),
-                    "kind": str(first_stage["kind"]),
-                    "bucket": str(first_stage["bucket"]),
-                    "status": "ok",
-                    "planMode": "executed",
-                    "actionTaken": "executed",
-                    "invalidation": {"applied": False, "reason": None},
-                    "manifestPath": str(first_stage["paths"]["manifestPath"]),
-                    "reportPaths": list(first_stage["paths"]["reportPaths"]),
-                    "primaryEvidencePaths": [],
-                    "fingerprint": f"{first_stage['stageId']}-fingerprint",
-                    "durationMs": 1,
-                    "diagnostics": {},
-                    "failure": None,
-                }
-            ]
-            if str(terminal_stage["stageId"]) != str(first_stage["stageId"]):
-                stage_results.append(
-                    {
-                        "stageId": str(terminal_stage["stageId"]),
-                        "kind": str(terminal_stage["kind"]),
-                        "bucket": str(terminal_stage["bucket"]),
-                        "status": "ok",
-                        "planMode": "executed",
-                        "actionTaken": "executed",
-                        "invalidation": {"applied": False, "reason": None},
-                        "manifestPath": str(terminal_stage["paths"]["manifestPath"]),
-                        "reportPaths": list(terminal_stage["paths"]["reportPaths"]),
-                        "primaryEvidencePaths": [f"{terminal_stage['paths']['bucketRoot']}/stdout.log"],
-                        "fingerprint": f"{terminal_stage['stageId']}-fingerprint",
-                        "durationMs": 2,
-                        "diagnostics": {},
-                        "failure": None,
-                    }
-                )
-            return {
-                "subjectId": observed_selection["subjectId"],
-                "matrixId": observed_selection["matrixId"],
-                "goalId": observed_selection["goalId"],
-                "status": "ok",
-                "terminalStageId": str(terminal_stage["stageId"]),
-                "terminalBucket": observed_selection["terminalBucket"],
-                "stageResults": stage_results,
-                "errors": [],
-                "events": [],
-            }
 
         with patch.object(
             test_module,
@@ -151,20 +292,27 @@ class SubjectCommandTests(unittest.TestCase):
             side_effect=AssertionError("legacy suite session should not run for test subject"),
         ) as legacy_session:
             try:
-                with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
-                    with patch.object(
-                        test_module.subject_executor_module,
-                        "execute_plan",
-                        side_effect=execute_plan_side_effect,
-                    ) as execute_plan:
-                        result = test_module.handle(
-                            {"id": "test-subject", "handler": "test.dispatch"},
-                            REPO_ROOT,
-                            "windows",
-                            f"test subject --id subject/{subject_id}",
-                            manifest,
-                            {"id": f"subject/{subject_id}"},
-                        )
+                with patch.object(test_module, "_scan_registry", return_value=registry_index):
+                    with patch.object(test_module.subject_planner_module, "build_plan", side_effect=build_plan) as build_plan_mock:
+                        with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
+                            with patch.object(
+                                test_module.subject_executor_module,
+                                "execute_plan",
+                                side_effect=execute_plan_side_effect,
+                            ) as execute_plan:
+                                with patch.object(
+                                    test_module.subject_validations_module,
+                                    "run_subject_validations",
+                                    side_effect=empty_validation_outcome,
+                                ):
+                                    result = test_module.handle(
+                                        {"id": "test-subject", "handler": "test.dispatch"},
+                                        repo_root,
+                                        "windows",
+                                        f"test subject --id subject/{subject_id}",
+                                        manifest,
+                                        {"id": f"subject/{subject_id}"},
+                                    )
 
                 self.assertEqual("ok", result.status)
                 self.assertEqual(f"subject/{subject_id}", result.target)
@@ -184,8 +332,9 @@ class SubjectCommandTests(unittest.TestCase):
                     f"artifacts/subjects/{subject_id}/runs/{run_id}/subject-report/summary.json",
                     result.payload["artifacts"],
                 )
-                self.assertTrue((REPO_ROOT / result.payload["subjectResults"][0]["subjectSummaryPath"]).is_file())
+                self.assertTrue((repo_root / result.payload["subjectResults"][0]["subjectSummaryPath"]).is_file())
                 legacy_session.assert_not_called()
+                build_plan_mock.assert_called_once()
                 execute_plan.assert_called_once()
                 self.assertEqual(result.payload["runId"], execute_plan.call_args.kwargs["run_id"])
                 self.assertTrue(callable(execute_plan.call_args.kwargs["event_writer"]))
@@ -193,153 +342,117 @@ class SubjectCommandTests(unittest.TestCase):
                     f"artifacts/subjects/{subject_id}/runs/{run_id}/run-report/summary.json",
                     result.payload["summaryPath"],
                 )
-                subject_last = json.loads(subject_last_path.read_text(encoding="utf-8"))
+                subject_last = read_json(subject_last_path)
                 self.assertEqual(run_id, subject_last["runId"])
                 self.assertEqual(
                     f"artifacts/subjects/{subject_id}/runs/{run_id}/run-report/summary.json",
                     subject_last["summaryPath"],
                 )
-                global_last = json.loads(global_last_path.read_text(encoding="utf-8"))
+                global_last = read_json(global_last_path)
                 self.assertEqual(run_id, global_last["runId"])
                 self.assertEqual(
                     f"artifacts/subjects/{subject_id}/runs/{run_id}/run-report/summary.json",
                     global_last["summaryPath"],
                 )
                 if subject_current_path.is_file():
-                    subject_current = json.loads(subject_current_path.read_text(encoding="utf-8"))
+                    subject_current = read_json(subject_current_path)
                     self.assertEqual(run_id, subject_current["runId"])
                     self.assertEqual("ok", subject_current["status"])
                 if global_current_path.is_file():
-                    global_current = json.loads(global_current_path.read_text(encoding="utf-8"))
+                    global_current = read_json(global_current_path)
                     self.assertEqual(run_id, global_current["runId"])
                     self.assertEqual("ok", global_current["status"])
             finally:
-                shutil.rmtree(run_root, ignore_errors=True)
-                for path, snapshot in snapshots.items():
-                    restore_text(path, snapshot)
+                shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_subject_dispatch_collects_perf_release_report_artifacts_for_perf_subject(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_subject_perf_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_subject_perf_dispatch")
-        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
-        subject_record = select_subject_record(
-            "chaos_run_subject_fixture_perf_dispatch",
-            source_type="dotnet-project",
-            required_host_platforms=["windows-x64"],
-            required_goal_ids=["perf.release"],
-            required_validation_kinds=["perf"],
-            required_validation_drivers=["native-runtime-perf"],
-            required_stage_kinds=["runtime-perf-collect"],
-        )
-        subject_id = str(subject_record["subjectId"])
-        fixed_run_id = f"chaos-run-subject-perf-release-{uuid.uuid4().hex}"
+        repo_root = make_temp_repo_root("subject-command", "managed-perf")
+        manifest: dict[str, Any] = {}
+        subject_id = "FixtureManagedPerfSubject"
+        fixed_run_id = "chaos-run-subject-perf-release"
         observed_selection: dict[str, str] = {}
-        subject_runs_root = REPO_ROOT / "artifacts" / "subjects" / subject_id / "runs"
+        subject_runs_root = repo_root / "artifacts" / "subjects" / subject_id / "runs"
         run_root = subject_runs_root / fixed_run_id
         subject_last_path = subject_runs_root / "last.json"
         subject_current_path = subject_runs_root / "current.json"
-        global_logs_root = REPO_ROOT / "artifacts" / "logs" / "tests"
+        global_logs_root = repo_root / "artifacts" / "logs" / "tests"
         global_last_path = global_logs_root / "last.json"
         global_current_path = global_logs_root / "current.json"
-        snapshots = {
-            subject_last_path: snapshot_text(subject_last_path),
-            subject_current_path: snapshot_text(subject_current_path),
-            global_last_path: snapshot_text(global_last_path),
-            global_current_path: snapshot_text(global_current_path),
-        }
+        registry_index = make_subject_registry_index(
+            test_module,
+            subject_id=subject_id,
+            default_goal_id="perf.release",
+        )
+        build_plan = make_build_plan_side_effect(
+            observed_selection,
+            subject_id=subject_id,
+            expected_run_id=fixed_run_id,
+            default_goal_id="perf.release",
+            stage_kind="runtime-perf-collect",
+            default_validation_kind="perf",
+        )
 
         def execute_plan_side_effect(repo_root: Path, plan: dict, **_: object) -> dict:
             del repo_root
-            selection = dict(plan.get("selection") or {})
-            observed_selection.update(
-                {
-                    "subjectId": str(selection.get("subjectId") or ""),
-                    "matrixId": str(selection.get("matrixId") or ""),
-                    "goalId": str(selection.get("goalId") or ""),
-                    "validationProfileId": str(selection.get("validationProfileId") or ""),
-                    "variant": str(selection.get("variant") or ""),
-                }
-            )
-            perf_stage = next(
-                dict(stage)
-                for stage in list(plan.get("stagePlan") or [])
-                if str(stage.get("kind") or "") == "runtime-perf-collect"
-            )
-            return {
-                "subjectId": observed_selection["subjectId"],
-                "matrixId": observed_selection["matrixId"],
-                "goalId": observed_selection["goalId"],
-                "status": "ok",
-                "terminalStageId": str(perf_stage["stageId"]),
-                "terminalBucket": str(perf_stage["bucket"]),
-                "stageResults": [
-                    {
-                        "stageId": str(perf_stage["stageId"]),
-                        "kind": str(perf_stage["kind"]),
-                        "bucket": str(perf_stage["bucket"]),
-                        "status": "ok",
-                        "planMode": "executed",
-                        "actionTaken": "executed",
-                        "invalidation": {"applied": False, "reason": None},
-                        "manifestPath": str(perf_stage["paths"]["manifestPath"]),
-                        "reportPaths": list(perf_stage["paths"]["reportPaths"]),
-                        "primaryEvidencePaths": [
-                            f"{perf_stage['paths']['bucketRoot']}/stdout.log",
+            return build_execution_result(
+                plan,
+                stage_kind="runtime-perf-collect",
+                duration_ms=50,
+                fingerprint="runtime-fingerprint",
+                details={
+                    "performance": {
+                        "samples": [
+                            {"sampleIndex": 1, "durationMs": 12.0, "exitCode": 0},
+                            {"sampleIndex": 2, "durationMs": 14.0, "exitCode": 0},
                         ],
-                        "fingerprint": "runtime-fingerprint",
-                        "durationMs": 50,
-                        "diagnostics": {},
-                        "details": {
-                            "performance": {
-                                "samples": [
-                                    {"sampleIndex": 1, "durationMs": 12.0, "exitCode": 0},
-                                    {"sampleIndex": 2, "durationMs": 14.0, "exitCode": 0},
-                                ],
-                                "metrics": {
-                                    "sampleCount": 2,
-                                    "meanDurationMs": 13.0,
-                                    "minDurationMs": 12.0,
-                                    "maxDurationMs": 14.0,
-                                },
-                                "baselinePath": (
-                                    f"subjects/{observed_selection['subjectId']}/baselines/perf/"
-                                    f"{observed_selection['matrixId']}/windows.json"
-                                ),
-                                "baseline": {"meanDurationMs": 11.0},
-                                "baselineUpdated": False,
-                                "regressionStatus": "regressed",
-                                "regressions": [
-                                    {"metric": "meanDurationMs", "baseline": 11.0, "actual": 13.0, "delta": 2.0}
-                                ],
-                            }
+                        "metrics": {
+                            "sampleCount": 2,
+                            "meanDurationMs": 13.0,
+                            "minDurationMs": 12.0,
+                            "maxDurationMs": 14.0,
                         },
-                        "failure": None,
-                    },
-                ],
-                "errors": [],
-                "events": [],
-            }
+                        "baselinePath": (
+                            f"subjects/{observed_selection['subjectId']}/baselines/perf/"
+                            f"{observed_selection['matrixId']}/windows.json"
+                        ),
+                        "baseline": {"meanDurationMs": 11.0},
+                        "baselineUpdated": False,
+                        "regressionStatus": "regressed",
+                        "regressions": [
+                            {"metric": "meanDurationMs", "baseline": 11.0, "actual": 13.0, "delta": 2.0}
+                        ],
+                    }
+                },
+            )
 
         try:
-            with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
-                with patch.object(
-                    test_module.subject_executor_module,
-                    "execute_plan",
-                    side_effect=execute_plan_side_effect,
-                ):
-                    result = test_module.handle(
-                        {"id": "test-subject", "handler": "test.dispatch"},
-                        REPO_ROOT,
-                        "windows",
-                        f"test subject --id subject/{subject_id} --goal perf.release --validation-profile perf-profile --variant PROFILE",
-                        manifest,
-                        {
-                            "id": f"subject/{subject_id}",
-                            "goal": "perf.release",
-                            "validation_profile": "perf-profile",
-                            "variant": "PROFILE",
-                        },
-                    )
+            with patch.object(test_module, "_scan_registry", return_value=registry_index):
+                with patch.object(test_module.subject_planner_module, "build_plan", side_effect=build_plan):
+                    with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
+                        with patch.object(
+                            test_module.subject_executor_module,
+                            "execute_plan",
+                            side_effect=execute_plan_side_effect,
+                        ):
+                            with patch.object(
+                                test_module.subject_validations_module,
+                                "run_subject_validations",
+                                side_effect=empty_validation_outcome,
+                            ):
+                                result = test_module.handle(
+                                    {"id": "test-subject", "handler": "test.dispatch"},
+                                    repo_root,
+                                    "windows",
+                                    f"test subject --id subject/{subject_id} --goal perf.release --validation-profile perf-profile --variant PROFILE",
+                                    manifest,
+                                    {
+                                        "id": f"subject/{subject_id}",
+                                        "goal": "perf.release",
+                                        "validation_profile": "perf-profile",
+                                        "variant": "PROFILE",
+                                    },
+                                )
 
             self.assertEqual("ok", result.status)
             self.assertEqual(f"subject/{subject_id}", result.target)
@@ -365,105 +478,60 @@ class SubjectCommandTests(unittest.TestCase):
             )
             self.assertEqual(subject_id, result.payload["subjectResults"][0]["subjectId"])
         finally:
-            shutil.rmtree(run_root, ignore_errors=True)
-            for path, snapshot in snapshots.items():
-                restore_text(path, snapshot)
+            shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_subject_dispatch_retains_empty_validation_results_when_subject_has_no_subject_owned_validations(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_subject_no_validation_artifacts")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_subject_no_validation_artifacts")
-        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
-        subject_record = select_subject_record(
-            "chaos_run_subject_fixture_no_validation_artifacts",
-            category="canonical",
-            source_type="dotnet-project",
-            required_validation_profile_ids=["proof-dev"],
-            required_stage_kinds=["runtime-observe"],
-            required_host_platforms=["windows-x64"],
-        )
-        subject_id = str(subject_record["subjectId"])
-        fixed_run_id = f"chaos-run-subject-no-validation-artifacts-{uuid.uuid4().hex}"
-        subject_runs_root = REPO_ROOT / "artifacts" / "subjects" / subject_id / "runs"
+        repo_root = make_temp_repo_root("subject-command", "no-validation")
+        manifest: dict[str, Any] = {}
+        subject_id = "FixtureNoValidationSubject"
+        fixed_run_id = "chaos-run-subject-no-validation-artifacts"
+        subject_runs_root = repo_root / "artifacts" / "subjects" / subject_id / "runs"
         run_root = subject_runs_root / fixed_run_id
         subject_last_path = subject_runs_root / "last.json"
         subject_current_path = subject_runs_root / "current.json"
-        global_logs_root = REPO_ROOT / "artifacts" / "logs" / "tests"
+        global_logs_root = repo_root / "artifacts" / "logs" / "tests"
         global_last_path = global_logs_root / "last.json"
         global_current_path = global_logs_root / "current.json"
-        snapshots = {
-            subject_last_path: snapshot_text(subject_last_path),
-            subject_current_path: snapshot_text(subject_current_path),
-            global_last_path: snapshot_text(global_last_path),
-            global_current_path: snapshot_text(global_current_path),
-        }
+        registry_index = make_subject_registry_index(test_module, subject_id=subject_id)
+        build_plan = make_build_plan_side_effect(
+            {},
+            subject_id=subject_id,
+            expected_run_id=fixed_run_id,
+            stage_kind="runtime-observe",
+        )
 
         def execute_plan_side_effect(repo_root: Path, plan: dict, **_: object) -> dict:
             del repo_root
-            runtime_stage = next(
-                dict(stage)
-                for stage in list(plan.get("stagePlan") or [])
-                if str(stage.get("bucket") or "") == "runtime"
+            return build_execution_result(
+                plan,
+                stage_kind="runtime-observe",
+                duration_ms=20,
+                fingerprint="runtime-fingerprint",
             )
-            return {
-                "subjectId": str(plan["selection"]["subjectId"]),
-                "matrixId": str(plan["selection"]["matrixId"]),
-                "goalId": str(plan["selection"]["goalId"]),
-                "status": "ok",
-                "terminalStageId": str(runtime_stage["stageId"]),
-                "terminalBucket": str(runtime_stage["bucket"]),
-                "stageResults": [
-                    {
-                        "stageId": str(runtime_stage["stageId"]),
-                        "kind": str(runtime_stage["kind"]),
-                        "bucket": str(runtime_stage["bucket"]),
-                        "status": "ok",
-                        "planMode": "executed",
-                        "actionTaken": "executed",
-                        "invalidation": {"applied": False, "reason": None},
-                        "manifestPath": str(runtime_stage["paths"]["manifestPath"]),
-                        "reportPaths": list(runtime_stage["paths"]["reportPaths"]),
-                        "primaryEvidencePaths": [f"{runtime_stage['paths']['bucketRoot']}/stdout.log"],
-                        "fingerprint": "runtime-fingerprint",
-                        "durationMs": 20,
-                        "diagnostics": {},
-                        "failure": None,
-                    }
-                ],
-                "errors": [],
-                "events": [],
-            }
-
-        def validation_side_effect(repo_root: Path, plan: dict, *, run_id: str) -> dict:
-            del repo_root
-            del plan
-            del run_id
-            return {
-                "status": "ok",
-                "validationResults": [],
-                "artifacts": [],
-                "errors": [],
-            }
 
         try:
-            with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
-                with patch.object(
-                    test_module.subject_executor_module,
-                    "execute_plan",
-                    side_effect=execute_plan_side_effect,
-                ):
-                    with patch.object(
-                        test_module.subject_validations_module,
-                        "run_subject_validations",
-                        side_effect=validation_side_effect,
-                    ):
-                        result = test_module.handle(
-                            {"id": "test-subject", "handler": "test.dispatch"},
-                            REPO_ROOT,
-                            "windows",
-                            f"test subject --id subject/{subject_id}",
-                            manifest,
-                            {"id": f"subject/{subject_id}"},
-                        )
+            with patch.object(test_module, "_scan_registry", return_value=registry_index):
+                with patch.object(test_module.subject_planner_module, "build_plan", side_effect=build_plan):
+                    with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
+                        with patch.object(
+                            test_module.subject_executor_module,
+                            "execute_plan",
+                            side_effect=execute_plan_side_effect,
+                        ):
+                            with patch.object(
+                                test_module.subject_validations_module,
+                                "run_subject_validations",
+                                side_effect=empty_validation_outcome,
+                            ):
+                                result = test_module.handle(
+                                    {"id": "test-subject", "handler": "test.dispatch"},
+                                    repo_root,
+                                    "windows",
+                                    f"test subject --id subject/{subject_id}",
+                                    manifest,
+                                    {"id": f"subject/{subject_id}"},
+                                )
 
             self.assertEqual("ok", result.status)
             matrix_result = result.payload["subjectResults"][0]
@@ -471,138 +539,106 @@ class SubjectCommandTests(unittest.TestCase):
             self.assertFalse(any("/validations/" in artifact for artifact in result.payload["artifacts"]))
             self.assertEqual(subject_id, matrix_result["subjectId"])
         finally:
-            shutil.rmtree(run_root, ignore_errors=True)
-            for path, snapshot in snapshots.items():
-                restore_text(path, snapshot)
+            shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_subject_dispatch_collects_native_perf_report_artifacts_for_solution_core_pack(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_subject_native_perf_dispatch")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_subject_native_perf_dispatch")
-        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
-        subject_record = select_subject_record(
-            "chaos_run_subject_fixture_native_perf_dispatch",
-            category="canonical",
-            source_type="dotnet-project",
-            required_goal_ids=["perf.release"],
-            required_stage_kinds=["native-runtime-perf"],
-            required_validation_profile_ids=["perf-profile"],
-            required_validation_drivers=["native-runtime-perf"],
-            required_host_platforms=["macos-arm64", "windows-x64"],
-        )
-        subject_id = str(subject_record["subjectId"])
-        fixed_run_id = f"chaos-run-subject-native-perf-{uuid.uuid4().hex}"
+        repo_root = make_temp_repo_root("subject-command", "native-perf")
+        manifest: dict[str, Any] = {}
+        subject_id = "SolutionCorePack"
+        fixed_run_id = "chaos-run-subject-native-perf"
         observed_selection: dict[str, str] = {}
-        subject_runs_root = REPO_ROOT / "artifacts" / "subjects" / subject_id / "runs"
+        subject_runs_root = repo_root / "artifacts" / "subjects" / subject_id / "runs"
         run_root = subject_runs_root / fixed_run_id
         subject_last_path = subject_runs_root / "last.json"
         subject_current_path = subject_runs_root / "current.json"
-        global_logs_root = REPO_ROOT / "artifacts" / "logs" / "tests"
+        global_logs_root = repo_root / "artifacts" / "logs" / "tests"
         global_last_path = global_logs_root / "last.json"
         global_current_path = global_logs_root / "current.json"
-        snapshots = {
-            subject_last_path: snapshot_text(subject_last_path),
-            subject_current_path: snapshot_text(subject_current_path),
-            global_last_path: snapshot_text(global_last_path),
-            global_current_path: snapshot_text(global_current_path),
-        }
+        registry_index = make_subject_registry_index(
+            test_module,
+            subject_id=subject_id,
+            default_goal_id="perf.release",
+        )
+        build_plan = make_build_plan_side_effect(
+            observed_selection,
+            subject_id=subject_id,
+            expected_run_id=fixed_run_id,
+            default_goal_id="perf.release",
+            stage_kind="native-runtime-perf",
+            default_validation_kind="perf",
+        )
 
         def execute_plan_side_effect(repo_root: Path, plan: dict, **_: object) -> dict:
             del repo_root
-            selection = dict(plan.get("selection") or {})
-            observed_selection.update(
-                {
-                    "subjectId": str(selection.get("subjectId") or ""),
-                    "matrixId": str(selection.get("matrixId") or ""),
-                    "goalId": str(selection.get("goalId") or ""),
-                    "validationProfileId": str(selection.get("validationProfileId") or ""),
-                    "variant": str(selection.get("variant") or ""),
-                }
-            )
-            native_perf_stage = next(
-                dict(stage)
-                for stage in list(plan.get("stagePlan") or [])
-                if str(stage.get("kind") or "") == "native-runtime-perf"
-            )
-            return {
-                "subjectId": observed_selection["subjectId"],
-                "matrixId": observed_selection["matrixId"],
-                "goalId": observed_selection["goalId"],
-                "status": "ok",
-                "terminalStageId": str(native_perf_stage["stageId"]),
-                "terminalBucket": "report",
-                "stageResults": [
-                    {
-                        "stageId": str(native_perf_stage["stageId"]),
-                        "kind": str(native_perf_stage["kind"]),
-                        "bucket": str(native_perf_stage["bucket"]),
-                        "status": "ok",
-                        "planMode": "executed",
-                        "actionTaken": "executed",
-                        "invalidation": {"applied": False, "reason": None},
-                        "manifestPath": str(native_perf_stage["paths"]["manifestPath"]),
-                        "reportPaths": [],
-                        "primaryEvidencePaths": [
-                            f"{native_perf_stage['paths']['bucketRoot']}/perf.runtime.json",
-                            f"{native_perf_stage['paths']['bucketRoot']}/perf.samples.json",
-                        ],
-                        "fingerprint": "native-perf-fingerprint",
-                        "durationMs": 42,
-                        "diagnostics": {},
-                        "details": {
-                            "performance": {
-                                "samples": [
-                                    {"sampleIndex": 1, "durationMs": 17.0, "exitCode": 0},
-                                    {"sampleIndex": 2, "durationMs": 18.0, "exitCode": 0},
-                                ],
-                                "metrics": {
-                                    "sampleCount": 2,
-                                    "meanDurationMs": 17.5,
-                                    "minDurationMs": 17.0,
-                                    "maxDurationMs": 18.0,
-                                },
-                                "baselinePath": (
-                                    f"subjects/{observed_selection['subjectId']}/baselines/perf/"
-                                    f"{observed_selection['matrixId']}/windows.json"
-                                ),
-                                "baseline": {"meanDurationMs": 16.0},
-                                "baselineUpdated": False,
-                                "regressionStatus": "regressed",
-                                "regressions": [
-                                    {"metric": "meanDurationMs", "baseline": 16.0, "actual": 17.5, "delta": 1.5}
-                                ],
-                                "runtimeEvidence": {
-                                    "runtimePath": f"{native_perf_stage['paths']['bucketRoot']}/perf.runtime.json",
-                                    "samplesPath": f"{native_perf_stage['paths']['bucketRoot']}/perf.samples.json",
-                                },
-                            }
-                        },
-                        "failure": None,
-                    },
+            bucket_root = str(dict(plan["stagePlan"][0]["paths"])["bucketRoot"])
+            return build_execution_result(
+                plan,
+                stage_kind="native-runtime-perf",
+                duration_ms=42,
+                fingerprint="native-perf-fingerprint",
+                primary_evidence_paths=[
+                    f"{bucket_root}/perf.runtime.json",
+                    f"{bucket_root}/perf.samples.json",
                 ],
-                "errors": [],
-                "events": [],
-            }
+                details={
+                    "performance": {
+                        "samples": [
+                            {"sampleIndex": 1, "durationMs": 17.0, "exitCode": 0},
+                            {"sampleIndex": 2, "durationMs": 18.0, "exitCode": 0},
+                        ],
+                        "metrics": {
+                            "sampleCount": 2,
+                            "meanDurationMs": 17.5,
+                            "minDurationMs": 17.0,
+                            "maxDurationMs": 18.0,
+                        },
+                        "baselinePath": (
+                            f"subjects/{observed_selection['subjectId']}/baselines/perf/"
+                            f"{observed_selection['matrixId']}/windows.json"
+                        ),
+                        "baseline": {"meanDurationMs": 16.0},
+                        "baselineUpdated": False,
+                        "regressionStatus": "regressed",
+                        "regressions": [
+                            {"metric": "meanDurationMs", "baseline": 16.0, "actual": 17.5, "delta": 1.5}
+                        ],
+                        "runtimeEvidence": {
+                            "runtimePath": f"{bucket_root}/perf.runtime.json",
+                            "samplesPath": f"{bucket_root}/perf.samples.json",
+                        },
+                    }
+                },
+                terminal_bucket="report",
+            )
 
         try:
-            with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
-                with patch.object(
-                    test_module.subject_executor_module,
-                    "execute_plan",
-                    side_effect=execute_plan_side_effect,
-                ):
-                    result = test_module.handle(
-                        {"id": "test-subject", "handler": "test.dispatch"},
-                        REPO_ROOT,
-                        "windows",
-                        f"test subject --id subject/{subject_id} --goal perf.release --validation-profile perf-profile --variant PROFILE",
-                        manifest,
-                        {
-                            "id": f"subject/{subject_id}",
-                            "goal": "perf.release",
-                            "validation_profile": "perf-profile",
-                            "variant": "PROFILE",
-                        },
-                    )
+            with patch.object(test_module, "_scan_registry", return_value=registry_index):
+                with patch.object(test_module.subject_planner_module, "build_plan", side_effect=build_plan):
+                    with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
+                        with patch.object(
+                            test_module.subject_executor_module,
+                            "execute_plan",
+                            side_effect=execute_plan_side_effect,
+                        ):
+                            with patch.object(
+                                test_module.subject_validations_module,
+                                "run_subject_validations",
+                                side_effect=empty_validation_outcome,
+                            ):
+                                result = test_module.handle(
+                                    {"id": "test-subject", "handler": "test.dispatch"},
+                                    repo_root,
+                                    "windows",
+                                    f"test subject --id subject/{subject_id} --goal perf.release --validation-profile perf-profile --variant PROFILE",
+                                    manifest,
+                                    {
+                                        "id": f"subject/{subject_id}",
+                                        "goal": "perf.release",
+                                        "validation_profile": "perf-profile",
+                                        "variant": "PROFILE",
+                                    },
+                                )
 
             self.assertEqual("ok", result.status)
             run_id = result.payload["runId"]
@@ -626,146 +662,114 @@ class SubjectCommandTests(unittest.TestCase):
                 result.payload["artifacts"],
             )
         finally:
-            shutil.rmtree(run_root, ignore_errors=True)
-            for path, snapshot in snapshots.items():
-                restore_text(path, snapshot)
+            shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_subject_dispatch_uses_native_perf_defaults_when_validation_override_is_omitted(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_subject_native_perf_defaults")
-        manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_subject_native_perf_defaults")
-        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
-        subject_record = select_subject_record(
-            "chaos_run_subject_fixture_native_perf_defaults",
-            category="canonical",
-            source_type="dotnet-project",
-            required_goal_ids=["perf.release"],
-            required_stage_kinds=["native-runtime-perf"],
-            required_validation_profile_ids=["perf-profile"],
-            required_validation_drivers=["native-runtime-perf"],
-            required_host_platforms=["macos-arm64", "windows-x64"],
-        )
-        subject_id = str(subject_record["subjectId"])
-        fixed_run_id = f"chaos-run-subject-native-perf-defaults-{uuid.uuid4().hex}"
+        repo_root = make_temp_repo_root("subject-command", "native-perf-defaults")
+        manifest: dict[str, Any] = {}
+        subject_id = "SolutionCorePackDefaults"
+        fixed_run_id = "chaos-run-subject-native-perf-defaults"
         observed_selection: dict[str, str] = {}
-        subject_runs_root = REPO_ROOT / "artifacts" / "subjects" / subject_id / "runs"
+        subject_runs_root = repo_root / "artifacts" / "subjects" / subject_id / "runs"
         run_root = subject_runs_root / fixed_run_id
         subject_last_path = subject_runs_root / "last.json"
         subject_current_path = subject_runs_root / "current.json"
-        global_logs_root = REPO_ROOT / "artifacts" / "logs" / "tests"
+        global_logs_root = repo_root / "artifacts" / "logs" / "tests"
         global_last_path = global_logs_root / "last.json"
         global_current_path = global_logs_root / "current.json"
-        snapshots = {
-            subject_last_path: snapshot_text(subject_last_path),
-            subject_current_path: snapshot_text(subject_current_path),
-            global_last_path: snapshot_text(global_last_path),
-            global_current_path: snapshot_text(global_current_path),
-        }
+        registry_index = make_subject_registry_index(
+            test_module,
+            subject_id=subject_id,
+            default_goal_id="perf.release",
+            matrix_id="windows-native-perf",
+        )
+        build_plan = make_build_plan_side_effect(
+            observed_selection,
+            subject_id=subject_id,
+            expected_run_id=fixed_run_id,
+            default_goal_id="perf.release",
+            default_matrix_id="windows-native-perf",
+            stage_kind="native-runtime-perf",
+            default_validation_profile_id="perf-profile",
+            default_validation_kind="perf",
+        )
 
         def execute_plan_side_effect(repo_root: Path, plan: dict, **_: object) -> dict:
             del repo_root
-            selection = dict(plan.get("selection") or {})
-            observed_selection.update(
-                {
-                    "subjectId": str(selection.get("subjectId") or ""),
-                    "matrixId": str(selection.get("matrixId") or ""),
-                    "goalId": str(selection.get("goalId") or ""),
-                    "validationProfileId": str(selection.get("validationProfileId") or ""),
-                    "validationKind": str(selection.get("validationKind") or ""),
-                    "variant": str(selection.get("variant") or ""),
-                }
-            )
-            native_perf_stage = next(
-                dict(stage)
-                for stage in list(plan.get("stagePlan") or [])
-                if str(stage.get("kind") or "") == "native-runtime-perf"
-            )
-            return {
-                "subjectId": observed_selection["subjectId"],
-                "matrixId": observed_selection["matrixId"],
-                "goalId": observed_selection["goalId"],
-                "status": "ok",
-                "terminalStageId": str(native_perf_stage["stageId"]),
-                "terminalBucket": "report",
-                "stageResults": [
-                    {
-                        "stageId": str(native_perf_stage["stageId"]),
-                        "kind": str(native_perf_stage["kind"]),
-                        "bucket": str(native_perf_stage["bucket"]),
-                        "status": "ok",
-                        "planMode": "executed",
-                        "actionTaken": "executed",
-                        "invalidation": {"applied": False, "reason": None},
-                        "manifestPath": str(native_perf_stage["paths"]["manifestPath"]),
-                        "reportPaths": [],
-                        "primaryEvidencePaths": [
-                            f"{native_perf_stage['paths']['bucketRoot']}/perf.runtime.json",
-                            f"{native_perf_stage['paths']['bucketRoot']}/perf.samples.json",
-                        ],
-                        "fingerprint": "native-perf-defaults-fingerprint",
-                        "durationMs": 42,
-                        "diagnostics": {},
-                        "details": {
-                            "performance": {
-                                "samples": [
-                                    {"sampleIndex": 1, "durationMs": 4.5, "exitCode": 0},
-                                    {"sampleIndex": 2, "durationMs": 4.6, "exitCode": 0},
-                                ],
-                                "metrics": {
-                                    "sampleCount": 2,
-                                    "meanDurationMs": 4.55,
-                                    "minDurationMs": 4.5,
-                                    "maxDurationMs": 4.6,
-                                },
-                                "baselinePath": (
-                                    f"subjects/{observed_selection['subjectId']}/baselines/perf/"
-                                    f"{observed_selection['matrixId']}/windows.json"
-                                ),
-                                "baseline": {"meanDispatchNanoseconds": 5.0},
-                                "baselineUpdated": False,
-                                "regressionStatus": "ok",
-                                "regressions": [],
-                                "runtimeEvidence": {
-                                    "runtimePath": f"{native_perf_stage['paths']['bucketRoot']}/perf.runtime.json",
-                                    "samplesPath": f"{native_perf_stage['paths']['bucketRoot']}/perf.samples.json",
-                                },
-                            }
-                        },
-                        "failure": None,
-                    },
+            bucket_root = str(dict(plan["stagePlan"][0]["paths"])["bucketRoot"])
+            return build_execution_result(
+                plan,
+                stage_kind="native-runtime-perf",
+                duration_ms=42,
+                fingerprint="native-perf-defaults-fingerprint",
+                primary_evidence_paths=[
+                    f"{bucket_root}/perf.runtime.json",
+                    f"{bucket_root}/perf.samples.json",
                 ],
-                "errors": [],
-                "events": [],
-            }
+                details={
+                    "performance": {
+                        "samples": [
+                            {"sampleIndex": 1, "durationMs": 4.5, "exitCode": 0},
+                            {"sampleIndex": 2, "durationMs": 4.6, "exitCode": 0},
+                        ],
+                        "metrics": {
+                            "sampleCount": 2,
+                            "meanDurationMs": 4.55,
+                            "minDurationMs": 4.5,
+                            "maxDurationMs": 4.6,
+                        },
+                        "baselinePath": (
+                            f"subjects/{observed_selection['subjectId']}/baselines/perf/"
+                            f"{observed_selection['matrixId']}/windows.json"
+                        ),
+                        "baseline": {"meanDispatchNanoseconds": 5.0},
+                        "baselineUpdated": False,
+                        "regressionStatus": "ok",
+                        "regressions": [],
+                        "runtimeEvidence": {
+                            "runtimePath": f"{bucket_root}/perf.runtime.json",
+                            "samplesPath": f"{bucket_root}/perf.samples.json",
+                        },
+                    }
+                },
+                terminal_bucket="report",
+            )
 
         try:
-            with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
-                with patch.object(
-                    test_module.subject_executor_module,
-                    "execute_plan",
-                    side_effect=execute_plan_side_effect,
-                ):
-                    result = test_module.handle(
-                        {"id": "test-subject", "handler": "test.dispatch"},
-                        REPO_ROOT,
-                        "windows",
-                        f"test subject --id subject/{subject_id} --goal perf.release",
-                        manifest,
-                        {
-                            "id": f"subject/{subject_id}",
-                            "goal": "perf.release",
-                        },
-                    )
+            with patch.object(test_module, "_scan_registry", return_value=registry_index):
+                with patch.object(test_module.subject_planner_module, "build_plan", side_effect=build_plan):
+                    with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
+                        with patch.object(
+                            test_module.subject_executor_module,
+                            "execute_plan",
+                            side_effect=execute_plan_side_effect,
+                        ):
+                            with patch.object(
+                                test_module.subject_validations_module,
+                                "run_subject_validations",
+                                side_effect=empty_validation_outcome,
+                            ):
+                                result = test_module.handle(
+                                    {"id": "test-subject", "handler": "test.dispatch"},
+                                    repo_root,
+                                    "windows",
+                                    f"test subject --id subject/{subject_id} --goal perf.release",
+                                    manifest,
+                                    {
+                                        "id": f"subject/{subject_id}",
+                                        "goal": "perf.release",
+                                    },
+                                )
 
             self.assertEqual("ok", result.status)
             self.assertEqual("perf.release", observed_selection["goalId"])
             self.assertEqual("windows-native-perf", observed_selection["matrixId"])
             self.assertEqual("perf-profile", observed_selection["validationProfileId"])
             self.assertEqual("perf", observed_selection["validationKind"])
-            self.assertEqual("PROFILE", observed_selection["variant"])
+            self.assertEqual("", observed_selection["variant"])
         finally:
-            shutil.rmtree(run_root, ignore_errors=True)
-            for path, snapshot in snapshots.items():
-                restore_text(path, snapshot)
+            shutil.rmtree(repo_root, ignore_errors=True)
 
 
 if __name__ == "__main__":

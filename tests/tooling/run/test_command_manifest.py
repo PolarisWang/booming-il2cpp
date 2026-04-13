@@ -193,12 +193,7 @@ class CommandManifestTests(unittest.TestCase):
         family = str(smoke_spec["family"])
         suite_name = str(smoke_spec["suite"])
         suite_id = str(smoke_spec["id"])
-        subject_record = select_subject_record(
-            "chaos_manifest_parse_cli_subject",
-            source_type="dotnet-project",
-            required_host_platforms=["windows-x64"],
-        )
-        subject_id = str(subject_record["subjectId"])
+        subject_id = "FixtureSubject"
 
         suite = manifest_module.parse_cli(["test", family, suite_name], False, manifest, "macos")
         self.assertEqual("test-family-suite", suite["command"]["id"])

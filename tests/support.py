@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 import importlib.util
+import json
+import shutil
 import sys
+import uuid
 from pathlib import Path
 from typing import Any
 
@@ -9,6 +12,8 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SUBJECTS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subjects.py"
 PUBLIC_SPECS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "public_specs.py"
+FIXTURE_SUBJECTS_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects"
+TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests"
 
 
 def load_module(path: Path, module_name: str):
@@ -29,10 +34,86 @@ def load_subjects_module(module_name: str):
     return load_module(SUBJECTS_MODULE_PATH, module_name)
 
 
-def select_subject_record(module_name: str, **filters: object) -> dict[str, Any]:
+def write_json(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def make_temp_repo_root(area: str, prefix: str) -> Path:
+    repo_root = TEST_TMP_ROOT / area / f"{prefix}-{uuid.uuid4().hex}"
+    repo_root.mkdir(parents=True, exist_ok=False)
+    return repo_root
+
+
+def rewrite_fixture_manifest_paths(payload: object, fixture_subject_id: str) -> object:
+    prefix = f"tests/fixtures/subjects/{fixture_subject_id}/"
+    replacement = f"subjects/{fixture_subject_id}/"
+    if isinstance(payload, dict):
+        return {
+            key: rewrite_fixture_manifest_paths(value, fixture_subject_id)
+            for key, value in payload.items()
+        }
+    if isinstance(payload, list):
+        return [rewrite_fixture_manifest_paths(value, fixture_subject_id) for value in payload]
+    if isinstance(payload, str) and payload.startswith(prefix):
+        return replacement + payload.removeprefix(prefix)
+    return payload
+
+
+def clone_fixture_subject_repo(
+    fixture_subject_id: str,
+    *,
+    area: str = "fixture-subjects",
+) -> tuple[Path, dict[str, Any]]:
+    repo_root = make_temp_repo_root(area, fixture_subject_id.lower())
+    subject_root = repo_root / "subjects" / fixture_subject_id
+    shutil.copytree(FIXTURE_SUBJECTS_ROOT / fixture_subject_id, subject_root)
+    manifest_path = subject_root / "subject.manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest = rewrite_fixture_manifest_paths(manifest, fixture_subject_id)
+    write_json(manifest_path, manifest)
+    return repo_root, manifest
+
+
+def materialize_subject_manifest(repo_root: Path, manifest: dict[str, Any]) -> Path:
+    subject_id = str(manifest["subjectId"])
+    source = dict(manifest.get("source") or {})
+    relative_paths = [
+        str(source.get("path") or ""),
+        str(source.get("primaryProjectPath") or ""),
+    ]
+    validation = dict(manifest.get("validation") or {})
+    for validation_spec in validation.values():
+        relative_paths.append(str(dict(validation_spec).get("project") or ""))
+
+    for relative_path in relative_paths:
+        if not relative_path:
+            continue
+        materialized_path = repo_root / relative_path
+        materialized_path.parent.mkdir(parents=True, exist_ok=True)
+        if materialized_path.suffix:
+            materialized_path.write_text("<Project />\n", encoding="utf-8")
+        else:
+            materialized_path.mkdir(parents=True, exist_ok=True)
+
+    for expected_path in dict(manifest.get("expected") or {}).values():
+        (repo_root / str(expected_path)).mkdir(parents=True, exist_ok=True)
+    for baseline_path in dict(manifest.get("baselines") or {}).values():
+        target_path = repo_root / str(baseline_path)
+        if target_path.suffix:
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+        else:
+            target_path.mkdir(parents=True, exist_ok=True)
+
+    manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+    write_json(manifest_path, manifest)
+    return manifest_path
+
+
+def select_subject_record(module_name: str, *, repo_root: Path = REPO_ROOT, **filters: object) -> dict[str, Any]:
     subjects_module = load_subjects_module(module_name)
     records = subjects_module.query_subject_records(
-        subjects_module.load_subject_records(REPO_ROOT),
+        subjects_module.load_subject_records(repo_root),
         **filters,
     )
     if not records:

@@ -8,9 +8,6 @@ import unittest
 import uuid
 from pathlib import Path
 
-from tests.support import select_subject_record
-
-
 REPO_ROOT = Path(__file__).resolve().parents[3]
 PERF_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "perf.py"
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-perf-policy"
@@ -37,15 +34,7 @@ class SubjectPerfPolicyTests(unittest.TestCase):
 
     def test_perf_subject_uses_subject_aware_baseline_path_and_detects_regression(self) -> None:
         perf_module = load_perf_module()
-        subject_record = select_subject_record(
-            "chaos_subject_perf_policy_record",
-            category="canonical",
-            source_type="dotnet-project",
-            required_goal_ids=["perf.release"],
-            required_validation_kinds=["perf"],
-            required_validation_profile_ids=["perf-profile"],
-        )
-        subject_id = str(subject_record["subjectId"])
+        subject_id = "FixturePerfPolicySubject"
         matrix_id = "windows-native-perf"
 
         repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
@@ -92,7 +81,7 @@ class SubjectPerfPolicyTests(unittest.TestCase):
 
     def test_perf_subject_marks_missing_baseline_metrics_as_regression(self) -> None:
         perf_module = load_perf_module()
-        subject_id = "SolutionCorePack"
+        subject_id = "FixturePerfPolicySubject"
         matrix_id = "windows-native-perf"
 
         repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"

@@ -5,7 +5,7 @@ import sys
 import unittest
 from pathlib import Path
 
-from tests.support import select_public_suite_spec, select_subject_record
+from tests.support import select_public_suite_spec
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -35,12 +35,7 @@ class EventsSchemaTests(unittest.TestCase):
             family="smoke",
             required_stages=["run"],
         )
-        subject_record = select_subject_record(
-            "chaos_events_schema_subject",
-            source_type="dotnet-project",
-            required_stage_kinds=["runtime-trace-compare"],
-        )
-        subject_id = str(subject_record["subjectId"])
+        subject_id = "FixtureTraceSubject"
 
         event = events_module.build_event(
             "stage-finished",

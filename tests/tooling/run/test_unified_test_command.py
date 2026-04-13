@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from tests.support import select_public_suite_spec, select_subject_record
+from tests.support import select_public_suite_spec
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -87,12 +87,6 @@ class UnifiedTestCommandTests(unittest.TestCase):
         manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_for_test_all_subjects")
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_for_test_all_subjects")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
-        subject_record = select_subject_record(
-            "chaos_unified_test_all_subjects",
-            source_type="dotnet-project",
-            required_host_platforms=["windows-x64"],
-        )
-        expected_subject_id = f"subject/{subject_record['subjectId']}"
         index = test_module._scan_registry(REPO_ROOT, "windows")
         expected_subject_ids = {item["id"] for item in index.subjects}
         subject_calls: list[str] = []
@@ -170,8 +164,8 @@ class UnifiedTestCommandTests(unittest.TestCase):
 
         self.assertEqual("ok", result.status)
         item_ids = {item["id"] for item in result.payload["items"]}
+        self.assertTrue(expected_subject_ids)
         self.assertTrue(expected_subject_ids.issubset(item_ids))
-        self.assertIn(expected_subject_id, item_ids)
         self.assertEqual(expected_subject_ids, set(subject_calls))
         self.assertEqual(expected_subject_ids, {f"subject/{item['subjectId']}" for item in result.payload["subjectResults"]})
 
@@ -179,12 +173,7 @@ class UnifiedTestCommandTests(unittest.TestCase):
         manifest_module = load_module(MANIFEST_MODULE_PATH, "chaos_run_manifest_for_test_all_payload_summary")
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_for_test_all_payload_summary")
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
-        subject_record = select_subject_record(
-            "chaos_unified_test_all_payload_summary",
-            source_type="dotnet-project",
-            required_host_platforms=["windows-x64"],
-        )
-        subject_id = str(subject_record["subjectId"])
+        subject_id = "FixtureSubject"
         fake_index = test_module.registry_module.RegistryIndex(
             host_platform="windows",
             suites=[],
