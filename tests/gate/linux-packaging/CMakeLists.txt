@@ -1,13 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(roadmap0_linux_packaging_shell LANGUAGES CXX)
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    project(legacy_gate_linux_packaging_wrapper LANGUAGES NONE)
+endif()
 
-get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
-set(ARTIFACT_ROOT "${REPO_ROOT}/artifacts/platform/linux-packaging")
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${ARTIFACT_ROOT}")
-
-add_library(linux_packaging_shell STATIC packaging_shell.cpp)
-target_compile_features(linux_packaging_shell PRIVATE cxx_std_17)
+add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/../../integration/platform-hosts/linux-packaging" "${CMAKE_CURRENT_BINARY_DIR}/canonical")

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -8,24 +8,65 @@ import sys
 
 try:
     from ..core.common import read_json, write_json
+    from . import compiled_catalog as compiled_catalog_module
     from . import subjects as subjects_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from core.common import read_json, write_json
+    from testing import compiled_catalog as compiled_catalog_module
     from testing import subjects as subjects_module
+
+
+SUBJECT_EXECUTION_OBJECT_TYPES = {
+    "subject",
+    "engineering-validation",
+    "engineering-workload",
+    "declared-unit-test",
+    "declared-benchmark",
+}
+
+ENGINEERING_MATRIX_STAGE_KINDS: dict[str, tuple[str, ...]] = {
+    "project-graph": ("host-input-build", "analysis-frontend"),
+    "managed-build": ("host-input-build",),
+    "managed-runtime-output": ("runtime-managed-output",),
+    "native-executable-smoke": (
+        "runtime-observe",
+        "runtime-trace-compare",
+        "runtime-engine-observe",
+        "runtime-engine-trace-compare",
+        "native-runtime-perf",
+        "mobile-native-perf",
+        "build-target",
+    ),
+    "package-integrity": ("build-target",),
+    "device-deploy-smoke": ("build-target",),
+    "host-build": ("host-input-build",),
+    "patch-load": (),
+    "patch-roundtrip": (),
+    "patch-rollback": (),
+    "convert": ("analysis-frontend",),
+    "codegen": ("generated-native-aot", "generated-native-proof"),
+    "native-link": ("build-target",),
+    "device-package": ("build-target",),
+    "patch-generation": (),
+}
 
 
 @dataclass(frozen=True)
 class RegistryIndex:
     host_platform: str
-    suites: list[dict[str, Any]]
-    subjects: list[dict[str, Any]]
-    module_verifications: list[dict[str, Any]]
-    system_scenarios: list[dict[str, Any]]
-    pipelines: list[dict[str, Any]]
-    errors: list[str]
-    warnings: list[str]
+    suites: list[dict[str, Any]] = field(default_factory=list)
+    subjects: list[dict[str, Any]] = field(default_factory=list)
+    engineering_validations: list[dict[str, Any]] = field(default_factory=list)
+    engineering_workloads: list[dict[str, Any]] = field(default_factory=list)
+    declared_unit_tests: list[dict[str, Any]] = field(default_factory=list)
+    declared_benchmarks: list[dict[str, Any]] = field(default_factory=list)
+    module_verifications: list[dict[str, Any]] = field(default_factory=list)
+    system_scenarios: list[dict[str, Any]] = field(default_factory=list)
+    pipelines: list[dict[str, Any]] = field(default_factory=list)
+    errors: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
 
     @property
     def flat_items(self) -> list[dict[str, Any]]:
@@ -33,6 +74,10 @@ class RegistryIndex:
             [
                 *self.suites,
                 *self.subjects,
+                *self.engineering_validations,
+                *self.engineering_workloads,
+                *self.declared_unit_tests,
+                *self.declared_benchmarks,
                 *self.module_verifications,
                 *self.system_scenarios,
                 *self.pipelines,
@@ -45,6 +90,10 @@ class RegistryIndex:
             "hostPlatform": self.host_platform,
             "suites": self.suites,
             "subjects": self.subjects,
+            "engineeringValidations": self.engineering_validations,
+            "engineeringWorkloads": self.engineering_workloads,
+            "declaredUnitTests": self.declared_unit_tests,
+            "declaredBenchmarks": self.declared_benchmarks,
             "moduleVerifications": self.module_verifications,
             "systemScenarios": self.system_scenarios,
             "pipelines": self.pipelines,
@@ -52,6 +101,11 @@ class RegistryIndex:
             "errors": list(self.errors),
             "warnings": list(self.warnings),
         }
+
+
+CANONICAL_MODULE_MANIFEST_LAYOUT = "tests/fixtures/registry/modules/<module>/<profile>/verification.manifest.json"
+CANONICAL_SYSTEM_MANIFEST_LAYOUT = "tests/fixtures/registry/systems/<scenario>/scenario.manifest.json"
+CANONICAL_PIPELINE_MANIFEST_LAYOUT = "tests/fixtures/registry/pipelines/<pipeline>/pipeline.manifest.json"
 
 
 def _require_string(payload: dict[str, Any], field_name: str) -> str:
@@ -142,10 +196,33 @@ def _normalize_host_platform(host_platform: str) -> str:
     return host_platform
 
 
+def _matches_registry_collection_root(
+    collection_root: Path,
+    *,
+    canonical_name: str,
+) -> bool:
+    registry_root = collection_root.parent
+    return (
+        collection_root.name == canonical_name
+        and registry_root.name == "registry"
+        and registry_root.parent.name == "fixtures"
+        and registry_root.parent.parent.name == "tests"
+    )
+
+
+def _canonical_registry_collection_root(
+    repo_root: Path,
+    *,
+    canonical_parts: tuple[str, ...],
+) -> Path:
+    return repo_root.joinpath(*canonical_parts)
+
+
 def _load_module_manifest(path: Path) -> dict[str, Any]:
     payload = read_json(path)
-    if path.parent.parent.parent.name != "modules":
-        raise ValueError("module manifest path must be tests/registry/modules/<module>/<profile>/verification.manifest.json")
+    collection_root = path.parent.parent.parent
+    if not _matches_registry_collection_root(collection_root, canonical_name="modules"):
+        raise ValueError(f"module manifest path must be {CANONICAL_MODULE_MANIFEST_LAYOUT}")
     module_name = path.parent.parent.name
     profile = path.parent.name
     item = _base_registry_object(
@@ -169,8 +246,9 @@ def _load_module_manifest(path: Path) -> dict[str, Any]:
 
 def _load_system_manifest(path: Path) -> dict[str, Any]:
     payload = read_json(path)
-    if path.parent.parent.name != "system":
-        raise ValueError("system manifest path must be tests/registry/system/<scenario>/scenario.manifest.json")
+    collection_root = path.parent.parent
+    if not _matches_registry_collection_root(collection_root, canonical_name="systems"):
+        raise ValueError(f"system manifest path must be {CANONICAL_SYSTEM_MANIFEST_LAYOUT}")
     scenario = str(payload.get("scenarioId") or path.parent.name)
     if not scenario.strip():
         raise ValueError("scenarioId must be a non-empty string")
@@ -198,8 +276,9 @@ def _load_system_manifest(path: Path) -> dict[str, Any]:
 
 def _load_pipeline_manifest(path: Path) -> dict[str, Any]:
     payload = read_json(path)
-    if path.parent.parent.name != "pipelines":
-        raise ValueError("pipeline manifest path must be tests/registry/pipelines/<pipeline>/pipeline.manifest.json")
+    collection_root = path.parent.parent
+    if not _matches_registry_collection_root(collection_root, canonical_name="pipelines"):
+        raise ValueError(f"pipeline manifest path must be {CANONICAL_PIPELINE_MANIFEST_LAYOUT}")
     pipeline = path.parent.name
     primary_module_id = payload.get("primaryModuleId")
     if primary_module_id is not None and not isinstance(primary_module_id, str):
@@ -240,7 +319,7 @@ def _load_pipeline_manifest(path: Path) -> dict[str, Any]:
 
 
 def _load_subject_manifest(path: Path) -> dict[str, Any]:
-    payload = read_json(path)
+    payload = subjects_module.load_subject_manifest_file(path)
     if path.parent.parent.name != "subjects":
         raise ValueError("subject manifest path must be subjects/<subject>/subject.manifest.json")
 
@@ -276,6 +355,13 @@ def _load_subject_manifest(path: Path) -> dict[str, Any]:
     )
     item["subjectId"] = subject_id
     item["category"] = str(payload.get("category") or "")
+    item["sourceModel"] = str(payload.get("sourceModel") or "")
+    item["dependencyModel"] = str(payload.get("dependencyModel") or "")
+    item["executablePlan"] = str(payload.get("executablePlan") or "")
+    item["engineeringProfile"] = str(payload.get("engineeringProfile") or "")
+    item["orchestration"] = dict(payload.get("orchestration") or {})
+    item["availability"] = dict(payload.get("availability") or {})
+    item["compatibility"] = dict(payload.get("compatibility") or {})
     item["defaultGoalId"] = _require_string(payload, "defaultGoal")
     item["defaultMatrixId"] = _require_string(payload, "defaultMatrix")
     item["matrixIds"] = [str(matrix.get("matrixId") or "") for matrix in matrices]
@@ -360,12 +446,268 @@ def _read_doc_metadata(path: Path) -> dict[str, str]:
     return metadata
 
 
+def _subject_manifest_path(subject_item: dict[str, Any]) -> Path | None:
+    manifest_path = subject_item.get("manifestPath")
+    if not manifest_path:
+        return None
+    return Path(str(manifest_path))
+
+
+def _subject_execution_base(
+    subject_item: dict[str, Any],
+    *,
+    object_id: str,
+    object_type: str,
+    display_name: str,
+) -> dict[str, Any]:
+    item = _base_registry_object(
+        object_id=object_id,
+        object_type=object_type,
+        display_name=display_name,
+        level="subject",
+        manifest_path=_subject_manifest_path(subject_item),
+        primary_module_id=subject_item.get("primaryModuleId"),
+        module_ids=list(subject_item.get("moduleIds") or []),
+        subsystem_ids=list(subject_item.get("subsystemIds") or []),
+        supported_hosts=list(subject_item.get("supportedHosts") or []),
+        doc_refs=list(subject_item.get("docRefs") or []),
+    )
+    item["subjectId"] = str(subject_item.get("subjectId") or "")
+    item["category"] = str(subject_item.get("category") or "")
+    item["sourceModel"] = str(subject_item.get("sourceModel") or "")
+    item["dependencyModel"] = str(subject_item.get("dependencyModel") or "")
+    item["executablePlan"] = str(subject_item.get("executablePlan") or "")
+    item["engineeringProfile"] = str(subject_item.get("engineeringProfile") or "")
+    item["orchestration"] = dict(subject_item.get("orchestration") or {})
+    item["availability"] = dict(subject_item.get("availability") or {})
+    item["compatibility"] = dict(subject_item.get("compatibility") or {})
+    item["defaultGoalId"] = str(subject_item.get("defaultGoalId") or "")
+    item["defaultMatrixId"] = str(subject_item.get("defaultMatrixId") or "")
+    item["goalIds"] = list(subject_item.get("goalIds") or [])
+    item["matrixIds"] = list(subject_item.get("matrixIds") or [])
+    item["tags"] = list(subject_item.get("tags") or [])
+    item["resolvedMembers"] = [object_id]
+    item["deprecated"] = False
+    return item
+
+
+def _preferred_subject_matrices(manifest: dict[str, Any]) -> list[dict[str, Any]]:
+    default_matrix_id = str(manifest.get("defaultMatrix") or "")
+    matrices = [dict(matrix) for matrix in list(manifest.get("environmentMatrices") or [])]
+    if not default_matrix_id:
+        return matrices
+
+    ordered: list[dict[str, Any]] = []
+    for matrix in matrices:
+        if str(matrix.get("matrixId") or "") == default_matrix_id:
+            ordered.append(matrix)
+    for matrix in matrices:
+        if str(matrix.get("matrixId") or "") != default_matrix_id:
+            ordered.append(matrix)
+    return ordered
+
+
+def _matrix_goal_id(manifest: dict[str, Any], matrix: dict[str, Any]) -> str:
+    supported_goals = [str(goal_id) for goal_id in list(matrix.get("supportedGoals") or []) if str(goal_id)]
+    if supported_goals:
+        return supported_goals[0]
+    return str(manifest.get("defaultGoal") or "")
+
+
+def _matrix_stage_kinds(manifest: dict[str, Any], matrix: dict[str, Any]) -> set[str]:
+    pipeline = subjects_module.find_pipeline(manifest, str(matrix.get("pipelineId") or ""))
+    return set(subjects_module.pipeline_stage_kinds(pipeline))
+
+
+def _select_engineering_matrix(manifest: dict[str, Any], kind: str) -> tuple[str, str]:
+    candidate_stage_kinds = ENGINEERING_MATRIX_STAGE_KINDS.get(kind, ())
+    matrices = _preferred_subject_matrices(manifest)
+    for matrix in matrices:
+        execution_context = dict(matrix.get("executionContext") or {})
+        host_platform = str(execution_context.get("hostPlatform") or "")
+        target_platform = str(execution_context.get("targetPlatform") or "")
+        if kind in {"package-integrity", "device-deploy-smoke", "device-package"}:
+            if host_platform and target_platform and host_platform != target_platform:
+                return str(matrix.get("matrixId") or ""), _matrix_goal_id(manifest, matrix)
+            continue
+        if candidate_stage_kinds and _matrix_stage_kinds(manifest, matrix) & set(candidate_stage_kinds):
+            return str(matrix.get("matrixId") or ""), _matrix_goal_id(manifest, matrix)
+
+    default_matrix = subjects_module.find_matrix(manifest, str(manifest.get("defaultMatrix") or ""))
+    return str(default_matrix.get("matrixId") or ""), _matrix_goal_id(manifest, default_matrix)
+
+
+def _declared_source_entry(entry: dict[str, Any]) -> str:
+    assembly_name = str(entry.get("assemblyName") or "")
+    declaring_type = str(entry.get("declaringType") or "")
+    method_signature = str(entry.get("methodSignature") or "")
+    if not assembly_name or not declaring_type or not method_signature:
+        return ""
+    type_name = declaring_type.rsplit(".", 1)[-1]
+    return f"{assembly_name}/{type_name}::{method_signature}"
+
+
+def _select_declared_matrix(
+    manifest: dict[str, Any],
+    *,
+    source_entry: str,
+) -> tuple[str, str]:
+    if source_entry:
+        for matrix in _preferred_subject_matrices(manifest):
+            matrix_source = dict(matrix.get("source") or {})
+            matrix_entry = str(matrix.get("workloadEntry") or matrix_source.get("entry") or "")
+            if matrix_entry == source_entry:
+                return str(matrix.get("matrixId") or ""), _matrix_goal_id(manifest, matrix)
+
+    default_matrix = subjects_module.find_matrix(manifest, str(manifest.get("defaultMatrix") or ""))
+    return str(default_matrix.get("matrixId") or ""), _matrix_goal_id(manifest, default_matrix)
+
+
+def _engineering_registry_item(
+    *,
+    subject_item: dict[str, Any],
+    manifest: dict[str, Any],
+    family: str,
+    payload: dict[str, Any],
+) -> dict[str, Any]:
+    kind = str(payload.get("kind") or "")
+    default_matrix_id, default_goal_id = _select_engineering_matrix(manifest, kind)
+    item = _subject_execution_base(
+        subject_item,
+        object_id=str(payload.get("stableId") or ""),
+        object_type=family,
+        display_name=kind or str(payload.get("stableId") or ""),
+    )
+    item["kind"] = kind
+    item["defaultGoalId"] = default_goal_id or str(payload.get("defaultGoalId") or item.get("defaultGoalId") or "")
+    item["defaultMatrixId"] = default_matrix_id or str(payload.get("defaultMatrixId") or item.get("defaultMatrixId") or "")
+    item["goalIds"] = list(payload.get("goalIds") or item.get("goalIds") or [])
+    item["matrixIds"] = list(payload.get("matrixIds") or item.get("matrixIds") or [])
+    item["pipelineIds"] = list(payload.get("pipelineIds") or [])
+    return item
+
+
+def _declared_registry_item(
+    *,
+    subject_item: dict[str, Any],
+    manifest: dict[str, Any],
+    family: str,
+    payload: dict[str, Any],
+) -> dict[str, Any]:
+    stable_id = str(payload.get("stableId") or "")
+    source_entry = _declared_source_entry(payload)
+    default_matrix_id, default_goal_id = _select_declared_matrix(manifest, source_entry=source_entry)
+    item = _subject_execution_base(
+        subject_item,
+        object_id=f"{family}/{stable_id}",
+        object_type=family,
+        display_name=str(payload.get("alias") or stable_id),
+    )
+    item["stableId"] = stable_id
+    item["alias"] = str(payload.get("alias") or "")
+    item["assemblyName"] = str(payload.get("assemblyName") or "")
+    item["declaringType"] = str(payload.get("declaringType") or "")
+    item["methodName"] = str(payload.get("methodName") or "")
+    item["methodSignature"] = str(payload.get("methodSignature") or "")
+    item["sourceEntry"] = source_entry
+    item["workloadEntry"] = source_entry if family == "declared-benchmark" else ""
+    item["defaultGoalId"] = default_goal_id or item["defaultGoalId"]
+    item["defaultMatrixId"] = default_matrix_id or item["defaultMatrixId"]
+    return item
+
+
+def _compiled_registry_items_for_subject(
+    repo_root: Path,
+    subject_item: dict[str, Any],
+) -> tuple[dict[str, list[dict[str, Any]]], list[str]]:
+    subject_id = str(subject_item.get("subjectId") or "")
+    manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
+    errors: list[str] = []
+
+    try:
+        declared_catalog = compiled_catalog_module.build_subject_declared_test_catalog(
+            repo_root=repo_root,
+            subject_id=subject_id,
+        )
+    except (FileNotFoundError, RuntimeError, ValueError) as error:
+        errors.append(f"subject/{subject_id}: {error}")
+        declared_catalog = {
+            "subjectId": subject_id,
+            "declaredUnitTests": [],
+            "declaredBenchmarks": [],
+        }
+
+    try:
+        catalog = compiled_catalog_module.build_compiled_subject_catalog(
+            repo_root=repo_root,
+            subject_id=subject_id,
+            declared_catalog=declared_catalog,
+        )
+    except (FileNotFoundError, RuntimeError, ValueError) as error:
+        return {
+            "engineeringValidations": [],
+            "engineeringWorkloads": [],
+            "declaredUnitTests": [],
+            "declaredBenchmarks": [],
+        }, [*errors, f"subject/{subject_id}: {error}"]
+
+    engineering_validations = [
+        _engineering_registry_item(
+            subject_item=subject_item,
+            manifest=manifest,
+            family="engineering-validation",
+            payload=dict(payload),
+        )
+        for payload in list(catalog.get("engineeringValidations") or [])
+    ]
+    engineering_workloads = [
+        _engineering_registry_item(
+            subject_item=subject_item,
+            manifest=manifest,
+            family="engineering-workload",
+            payload=dict(payload),
+        )
+        for payload in list(catalog.get("engineeringWorkloads") or [])
+    ]
+    declared_unit_tests = [
+        _declared_registry_item(
+            subject_item=subject_item,
+            manifest=manifest,
+            family="declared-unit-test",
+            payload=dict(payload),
+        )
+        for payload in list(catalog.get("declaredUnitTests") or [])
+    ]
+    declared_benchmarks = [
+        _declared_registry_item(
+            subject_item=subject_item,
+            manifest=manifest,
+            family="declared-benchmark",
+            payload=dict(payload),
+        )
+        for payload in list(catalog.get("declaredBenchmarks") or [])
+    ]
+    return {
+        "engineeringValidations": engineering_validations,
+        "engineeringWorkloads": engineering_workloads,
+        "declaredUnitTests": declared_unit_tests,
+        "declaredBenchmarks": declared_benchmarks,
+    }, errors
+
+
 def _canonical_command(item: dict[str, Any]) -> str:
     object_type = str(item["type"])
     if object_type == "suite":
         return f"run test suite --id {item['id']}"
     if object_type == "subject":
         return f"run test subject --id {item['id']}"
+    if object_type in {
+        "engineering-validation",
+        "engineering-workload",
+        "declared-unit-test",
+        "declared-benchmark",
+    }:
+        return f"run test {object_type} --id {item['id']}"
     if object_type == "module":
         return f"run test module --id {item['id']}"
     if object_type == "system":
@@ -533,12 +875,23 @@ def scan_registry(
     host_platform: str,
     public_suite_specs: list[dict[str, Any]],
 ) -> RegistryIndex:
-    registry_root = repo_root / "tests" / "registry"
+    modules_root = _canonical_registry_collection_root(
+        repo_root,
+        canonical_parts=("tests", "fixtures", "registry", "modules"),
+    )
+    systems_root = _canonical_registry_collection_root(
+        repo_root,
+        canonical_parts=("tests", "fixtures", "registry", "systems"),
+    )
+    pipelines_root = _canonical_registry_collection_root(
+        repo_root,
+        canonical_parts=("tests", "fixtures", "registry", "pipelines"),
+    )
     suites = _suite_items(host_platform, public_suite_specs)
     subjects, subject_errors = _scan_directory(repo_root / "subjects", subjects_module.SUBJECT_MANIFEST_NAME, _load_subject_manifest)
-    modules, module_errors = _scan_directory(registry_root / "modules", "verification.manifest.json", _load_module_manifest)
-    systems, system_errors = _scan_directory(registry_root / "system", "scenario.manifest.json", _load_system_manifest)
-    pipelines, pipeline_errors = _scan_directory(registry_root / "pipelines", "pipeline.manifest.json", _load_pipeline_manifest)
+    modules, module_errors = _scan_directory(modules_root, "verification.manifest.json", _load_module_manifest)
+    systems, system_errors = _scan_directory(systems_root, "scenario.manifest.json", _load_system_manifest)
+    pipelines, pipeline_errors = _scan_directory(pipelines_root, "pipeline.manifest.json", _load_pipeline_manifest)
     subjects = _exclude_deprecated(subjects)
     modules = _exclude_deprecated(modules)
     systems = _exclude_deprecated(systems)
@@ -547,14 +900,30 @@ def scan_registry(
     modules = _filter_host_supported(modules, host_platform)
     systems = _filter_host_supported(systems, host_platform)
     pipelines = _filter_host_supported(pipelines, host_platform)
+    engineering_validations: list[dict[str, Any]] = []
+    engineering_workloads: list[dict[str, Any]] = []
+    declared_unit_tests: list[dict[str, Any]] = []
+    declared_benchmarks: list[dict[str, Any]] = []
+    compiled_errors: list[str] = []
+    for subject_item in subjects:
+        compiled_items, item_errors = _compiled_registry_items_for_subject(repo_root, subject_item)
+        engineering_validations.extend(compiled_items["engineeringValidations"])
+        engineering_workloads.extend(compiled_items["engineeringWorkloads"])
+        declared_unit_tests.extend(compiled_items["declaredUnitTests"])
+        declared_benchmarks.extend(compiled_items["declaredBenchmarks"])
+        compiled_errors.extend(item_errors)
     provisional = RegistryIndex(
         host_platform=host_platform,
         suites=suites,
         subjects=subjects,
+        engineering_validations=engineering_validations,
+        engineering_workloads=engineering_workloads,
+        declared_unit_tests=declared_unit_tests,
+        declared_benchmarks=declared_benchmarks,
         module_verifications=modules,
         system_scenarios=systems,
         pipelines=pipelines,
-        errors=[*subject_errors, *module_errors, *system_errors, *pipeline_errors],
+        errors=[*subject_errors, *compiled_errors, *module_errors, *system_errors, *pipeline_errors],
         warnings=[],
     )
     _decorate_registry_items(provisional)
@@ -563,6 +932,10 @@ def scan_registry(
         host_platform=provisional.host_platform,
         suites=provisional.suites,
         subjects=provisional.subjects,
+        engineering_validations=provisional.engineering_validations,
+        engineering_workloads=provisional.engineering_workloads,
+        declared_unit_tests=provisional.declared_unit_tests,
+        declared_benchmarks=provisional.declared_benchmarks,
         module_verifications=provisional.module_verifications,
         system_scenarios=provisional.system_scenarios,
         pipelines=provisional.pipelines,
@@ -621,7 +994,7 @@ def expand_execution_plan(index: RegistryIndex, object_id: str) -> list[dict[str
         item = find_registry_object(index, current_id)
         if item is None:
             raise ValueError(f"registry object not found: {current_id}")
-        if item["type"] in {"suite", "subject"}:
+        if item["type"] in SUBJECT_EXECUTION_OBJECT_TYPES or item["type"] == "suite":
             if current_id not in added_leaf_ids:
                 added_leaf_ids.add(current_id)
                 plan.append(item)

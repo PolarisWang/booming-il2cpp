@@ -29,7 +29,7 @@ class CommandManifestTests(unittest.TestCase):
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
 
         self.assertEqual(
-            ["Quick Start", "Build", "Test And Verify", "Environment", "Inspect"],
+            ["Quick Start", "Project And IDE", "Build", "Test And Verify", "Environment", "Inspect"],
             manifest_module.list_group_titles(manifest),
         )
 
@@ -73,6 +73,10 @@ class CommandManifestTests(unittest.TestCase):
                 "test-module",
                 "test-system",
                 "test-pipeline",
+                "test-engineering-validation",
+                "test-engineering-workload",
+                "test-declared-unit-test",
+                "test-declared-benchmark",
                 "test-registry-list",
                 "test-registry-refresh",
                 "test-registry-check-consistency",
@@ -156,6 +160,48 @@ class CommandManifestTests(unittest.TestCase):
         self.assertEqual("test-pipeline", pipeline_case["command"]["id"])
         self.assertEqual("pipeline/completion-runtime-core", pipeline_case["target"])
         self.assertEqual("completion-runtime-core", pipeline_case["options"]["pipeline"])
+
+        engineering_validation_case = manifest_module.parse_cli(
+            ["test", "engineering-validation", "--id", "engineering-validation/MainlineFeaturePack/project-graph"],
+            False,
+            manifest,
+            "windows",
+        )
+        self.assertEqual("test-engineering-validation", engineering_validation_case["command"]["id"])
+        self.assertEqual("engineering-validation/MainlineFeaturePack/project-graph", engineering_validation_case["target"])
+
+        engineering_workload_case = manifest_module.parse_cli(
+            ["test", "engineering-workload", "--id", "engineering-workload/PerformanceFeaturePack/codegen"],
+            False,
+            manifest,
+            "windows",
+        )
+        self.assertEqual("test-engineering-workload", engineering_workload_case["command"]["id"])
+        self.assertEqual("engineering-workload/PerformanceFeaturePack/codegen", engineering_workload_case["target"])
+
+        declared_unit_case = manifest_module.parse_cli(
+            ["test", "declared-unit-test", "--id", "declared-unit-test/MainlineFeaturePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"],
+            False,
+            manifest,
+            "windows",
+        )
+        self.assertEqual("test-declared-unit-test", declared_unit_case["command"]["id"])
+        self.assertEqual(
+            "declared-unit-test/MainlineFeaturePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()",
+            declared_unit_case["target"],
+        )
+
+        declared_benchmark_case = manifest_module.parse_cli(
+            ["test", "declared-benchmark", "--id", "declared-benchmark/PerformanceFeaturePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()"],
+            False,
+            manifest,
+            "windows",
+        )
+        self.assertEqual("test-declared-benchmark", declared_benchmark_case["command"]["id"])
+        self.assertEqual(
+            "declared-benchmark/PerformanceFeaturePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()",
+            declared_benchmark_case["target"],
+        )
 
         registry_refresh = manifest_module.parse_cli(["test", "registry", "refresh"], False, manifest, "macos")
         self.assertEqual("test-registry-refresh", registry_refresh["command"]["id"])

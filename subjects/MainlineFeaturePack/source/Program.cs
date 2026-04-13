@@ -1,3 +1,4 @@
+using Chaos.TestFramework;
 using System.IO;
 
 namespace MainlineFeaturePack;
@@ -19,6 +20,11 @@ internal sealed class FeatureBanner
 
 internal static class ProofEntry
 {
+    [ChaosUnitTest(
+        ChaosUnitCategory.RuntimeContract,
+        Alias = "mainline-proof",
+        Evidence = ChaosEvidenceKind.Stdout,
+        Priority = 1)]
     public static int Run()
     {
         var banner = new FeatureBanner("feature pack");

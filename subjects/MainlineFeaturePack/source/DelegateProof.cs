@@ -1,3 +1,5 @@
+using Chaos.TestFramework;
+
 namespace MainlineFeaturePack;
 
 internal delegate string MessageFormatter(string prefix);
@@ -44,6 +46,12 @@ internal static class DelegateStaticTail
 
 internal static class DelegateProofEntry
 {
+    [ChaosUnitTest(
+        ChaosUnitCategory.RuntimeContract,
+        Alias = "delegate-proof",
+        Requires = ChaosRuntimeFeature.Delegate,
+        Evidence = ChaosEvidenceKind.Stdout,
+        Priority = 5)]
     public static int Run()
     {
         var banner = new DelegateBanner("delegate proof");

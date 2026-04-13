@@ -96,7 +96,7 @@
       "syntax": "benchmark [--subject <id>] [--all] [--mode <managed|native|interpreter>] [--record] [--dashboard] [--open]",
       "show_in_menu": true,
       "examples": [
-        "run benchmark --subject BenchArithmetic --mode native --record",
+        "run benchmark --subject PerformanceFeaturePack --mode native --record",
         "run benchmark --all --record",
         "run benchmark --dashboard --open",
         "run benchmark status --all"
@@ -123,6 +123,60 @@
       "syntax": "test subject --id subject/<subject>",
       "show_in_menu": true,
       "examples": ["run test subject --id subject/<subject-id>"]
+    },
+    {
+      "id": "test-engineering-validation",
+      "title": "Run a subject engineering validation by selector or object id",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows"],
+      "tokens": ["test", "engineering-validation"],
+      "syntax": "test engineering-validation (--id engineering-validation/<subject>/<kind> | --subject <subject> --kind <kind>)",
+      "show_in_menu": true,
+      "examples": [
+        "run test engineering-validation --id engineering-validation/MainlineFeaturePack/project-graph",
+        "run test engineering-validation --subject MainlineFeaturePack --kind project-graph"
+      ]
+    },
+    {
+      "id": "test-engineering-workload",
+      "title": "Run a subject engineering workload by selector or object id",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows"],
+      "tokens": ["test", "engineering-workload"],
+      "syntax": "test engineering-workload (--id engineering-workload/<subject>/<kind> | --subject <subject> --kind <kind>)",
+      "show_in_menu": true,
+      "examples": [
+        "run test engineering-workload --id engineering-workload/PerformanceFeaturePack/codegen",
+        "run test engineering-workload --subject PerformanceFeaturePack --kind codegen"
+      ]
+    },
+    {
+      "id": "test-declared-unit-test",
+      "title": "Run a declared unit test by selector or object id",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows"],
+      "tokens": ["test", "declared-unit-test"],
+      "syntax": "test declared-unit-test --id declared-unit-test/<stable-id>",
+      "show_in_menu": true,
+      "examples": [
+        "run test declared-unit-test --id declared-unit-test/MainlineFeaturePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"
+      ]
+    },
+    {
+      "id": "test-declared-benchmark",
+      "title": "Run a declared benchmark by selector or object id",
+      "group": "Test And Verify",
+      "handler": "test.dispatch",
+      "platforms": ["windows"],
+      "tokens": ["test", "declared-benchmark"],
+      "syntax": "test declared-benchmark --id declared-benchmark/<stable-id>",
+      "show_in_menu": true,
+      "examples": [
+        "run test declared-benchmark --id declared-benchmark/PerformanceFeaturePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()"
+      ]
     },
     {
       "id": "test-module",

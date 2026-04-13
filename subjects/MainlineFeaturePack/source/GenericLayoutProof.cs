@@ -1,3 +1,5 @@
+using Chaos.TestFramework;
+
 namespace MainlineFeaturePack;
 
 internal sealed class GenericBox<T>
@@ -25,6 +27,12 @@ internal static class GenericEcho
 
 internal static class GenericLayoutProofEntry
 {
+    [ChaosUnitTest(
+        ChaosUnitCategory.RuntimeContract,
+        Alias = "generic-layout-proof",
+        Requires = ChaosRuntimeFeature.GenericSharing,
+        Evidence = ChaosEvidenceKind.Stdout,
+        Priority = 3)]
     public static int Run()
     {
         var box = new GenericBox<string>(GenericEcho.Echo("Generic layout native proof."));

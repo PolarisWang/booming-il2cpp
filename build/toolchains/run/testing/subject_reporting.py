@@ -259,6 +259,7 @@ def build_subject_summary(
     matrix_report_paths: dict[str, str],
     run_id: str,
     generated_at: str,
+    entry_selection: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     counts = _empty_status_counts()
     matrix_results: list[dict[str, Any]] = []
@@ -290,7 +291,7 @@ def build_subject_summary(
             }
         )
 
-    return {
+    summary = {
         "summaryVersion": "v1",
         "runId": run_id,
         "generatedAt": generated_at,
@@ -300,6 +301,9 @@ def build_subject_summary(
         "matrixStatusCounts": counts,
         "matrixResults": matrix_results,
     }
+    if entry_selection:
+        summary["entrySelection"] = dict(entry_selection)
+    return summary
 
 
 def build_subject_result(
@@ -307,13 +311,17 @@ def build_subject_result(
     *,
     subject_summary_path: str,
 ) -> dict[str, Any]:
-    return {
+    result = {
         "subjectId": str(subject_summary.get("subjectId") or ""),
         "requestedGoalId": str(subject_summary.get("requestedGoalId") or ""),
         "status": str(subject_summary.get("status") or "aborted"),
         "matrixStatusCounts": dict(subject_summary.get("matrixStatusCounts") or _empty_status_counts()),
         "subjectSummaryPath": subject_summary_path,
     }
+    entry_selection = dict(subject_summary.get("entrySelection") or {})
+    if entry_selection:
+        result["entrySelection"] = entry_selection
+    return result
 
 
 def _write_json_document(path: Path, payload: dict[str, Any]) -> None:

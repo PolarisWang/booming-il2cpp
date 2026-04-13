@@ -1,3 +1,5 @@
+using Chaos.TestFramework;
+
 namespace MainlineFeaturePack;
 
 internal static class BoxingSink
@@ -10,6 +12,11 @@ internal static class BoxingSink
 
 internal static class ArrayBoxingProofEntry
 {
+    [ChaosUnitTest(
+        ChaosUnitCategory.RuntimeContract,
+        Alias = "array-boxing-proof",
+        Evidence = ChaosEvidenceKind.Stdout,
+        Priority = 4)]
     public static int Run()
     {
         BoxingSink.Consume(42);

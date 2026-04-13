@@ -57,12 +57,12 @@ class UnifiedTestCommandTests(unittest.TestCase):
             test_module.resolve_legacy_test_command_id("contract", "native-bridge", stage="all", host_platform="macos"),
         )
         self.assertEqual(
-            "test-workflow-roadmap-0-macos",
-            test_module.resolve_legacy_test_command_id("workflow", "roadmap-0-macos", stage="all", host_platform="macos"),
+            "test-workflow-runtime-baseline-macos",
+            test_module.resolve_legacy_test_command_id("workflow", "runtime-baseline-macos", stage="all", host_platform="macos"),
         )
         self.assertEqual(
-            "test-workflow-roadmap-0-windows",
-            test_module.resolve_legacy_test_command_id("workflow", "roadmap-0-windows", stage="all", host_platform="windows"),
+            "test-workflow-runtime-baseline-windows",
+            test_module.resolve_legacy_test_command_id("workflow", "runtime-baseline-windows", stage="all", host_platform="windows"),
         )
         self.assertEqual(
             "build-platform-linux-x64-packaging",
@@ -101,9 +101,9 @@ class UnifiedTestCommandTests(unittest.TestCase):
         self.assertIn("gate/ios-arm64-packaging", item_ids)
         self.assertIn("gate/linux-x64-packaging", item_ids)
         self.assertIn("gate/macos-reference-desktop", item_ids)
-        self.assertIn("workflow/roadmap-0-macos", item_ids)
+        self.assertIn("workflow/runtime-baseline-macos", item_ids)
         self.assertNotIn("test-smoke-helloworld", item_ids)
-        self.assertNotIn("test-workflow-roadmap-0-macos", item_ids)
+        self.assertNotIn("test-workflow-runtime-baseline-macos", item_ids)
 
         windows_items = test_module.list_public_test_suites(manifest, "windows")
         windows_item_ids = {item["id"] for item in windows_items}
@@ -150,9 +150,9 @@ class UnifiedTestCommandTests(unittest.TestCase):
 
         self.assertEqual("error", result.status)
         self.assertIn("Removed command", result.text or "")
-        self.assertIn("run test workflow roadmap-0-macos", result.text or "")
+        self.assertIn("run test workflow runtime-baseline-macos", result.text or "")
         self.assertEqual("verify roadmap-0", result.payload["migration"]["removedCommand"])
-        self.assertEqual("test workflow roadmap-0-macos", result.payload["migration"]["replacementSyntax"])
+        self.assertEqual("test workflow runtime-baseline-macos", result.payload["migration"]["replacementSyntax"])
 
 
 if __name__ == "__main__":

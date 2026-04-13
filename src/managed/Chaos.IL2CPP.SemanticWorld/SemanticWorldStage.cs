@@ -321,8 +321,18 @@ public sealed class SemanticWorldStage
                 case "newarr":
                     capabilities.Add("requires-array-allocation");
                     break;
+                case "ldlen":
+                    capabilities.Add("requires-array-length-query");
+                    break;
                 case "stelem.ref":
                     capabilities.Add("requires-reference-array-store");
+                    break;
+                case "stelem":
+                    capabilities.Add("requires-value-array-store");
+                    break;
+                case "ldelem":
+                case "ldelema":
+                    capabilities.Add("requires-value-array-load");
                     break;
                 case "box":
                     capabilities.Add("requires-boxing");

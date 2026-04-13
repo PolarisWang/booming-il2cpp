@@ -1,0 +1,1 @@
+"""Registry-focused unit tests."""

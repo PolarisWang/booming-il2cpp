@@ -48,6 +48,13 @@ except ImportError:
 
 
 PUBLIC_TEST_SPECS = public_specs_module.PUBLIC_TEST_SPECS
+SUBJECT_EXECUTION_OBJECT_TYPES = {
+    "subject",
+    "engineering-validation",
+    "engineering-workload",
+    "declared-unit-test",
+    "declared-benchmark",
+}
 
 
 def find_public_test_suite_spec(family: str | None, suite: str | None) -> dict | None:
@@ -98,6 +105,10 @@ def _render_registry_list(index: registry_module.RegistryIndex) -> str:
     for title, items in (
         ("Suites", index.suites),
         ("Subjects", index.subjects),
+        ("Engineering Validations", index.engineering_validations),
+        ("Engineering Workloads", index.engineering_workloads),
+        ("Declared Unit Tests", index.declared_unit_tests),
+        ("Declared Benchmarks", index.declared_benchmarks),
         ("Module Verifications", index.module_verifications),
         ("System Scenarios", index.system_scenarios),
         ("Pipelines", index.pipelines),
@@ -106,6 +117,32 @@ def _render_registry_list(index: registry_module.RegistryIndex) -> str:
         for item in items:
             lines.append(f"- {item['id']}")
     return "\n".join(lines) + "\n"
+
+
+def _selected_object_entry_selection(selected_object: dict[str, Any]) -> dict[str, Any]:
+    object_type = str(selected_object.get("type") or "")
+    if object_type in {"engineering-validation", "engineering-workload"}:
+        kind = str(selected_object.get("kind") or "")
+        if not kind:
+            return {}
+        return {
+            "family": object_type,
+            "kind": kind,
+            "alias": kind,
+        }
+    if object_type in {"declared-unit-test", "declared-benchmark"}:
+        stable_id = str(selected_object.get("stableId") or "")
+        if not stable_id:
+            return {}
+        entry_selection = {
+            "family": object_type,
+            "stableId": stable_id,
+        }
+        alias = str(selected_object.get("alias") or "")
+        if alias:
+            entry_selection["alias"] = alias
+        return entry_selection
+    return {}
 
 
 def _handle_registry_dispatch(
@@ -730,6 +767,9 @@ def _write_json_document(path: Path, payload: dict[str, Any]) -> None:
 
 
 def _resolve_subject_matrix_report_path(plan: dict[str, Any]) -> str:
+    entry_report_path = str(dict(plan.get("artifactsRoot") or {}).get("entryReportPath") or "")
+    if entry_report_path:
+        return entry_report_path
     for stage in list(plan.get("stagePlan") or []):
         if str(stage.get("bucket") or "") == "report":
             return str(dict(stage.get("paths") or {}).get("manifestPath") or "")
@@ -763,12 +803,21 @@ def _run_subject_object(
     host_platform: str,
     command_text: str,
 ) -> CommandResult:
+    object_type = str(selected_object.get("type") or "")
     subject_key = str(normalized_options.get("subject") or selected_object.get("subjectId") or "")
     goal_id = str(normalized_options.get("goal") or "") or None
     matrix_id = str(normalized_options.get("matrix") or "") or None
+    if object_type != "subject":
+        goal_id = goal_id or str(selected_object.get("defaultGoalId") or "") or None
+        matrix_id = matrix_id or str(selected_object.get("defaultMatrixId") or "") or None
     validation_profile_id = str(normalized_options.get("validation_profile") or "") or None
     validation_kind = str(normalized_options.get("validation_kind") or "") or None
     variant = str(normalized_options.get("variant") or "") or None
+    source_entry = str(selected_object.get("sourceEntry") or "") or None
+    workload_entry = str(selected_object.get("workloadEntry") or "") or None
+    entry_selection = _selected_object_entry_selection(selected_object) or None
+    if object_type == "declared-unit-test":
+        workload_entry = None
     run_id = reporting_module.build_run_id(host_platform)
 
     try:
@@ -781,6 +830,9 @@ def _run_subject_object(
             validation_kind=validation_kind,
             variant=variant,
             run_id=run_id,
+            source_entry=source_entry,
+            workload_entry=workload_entry,
+            entry_selection=entry_selection,
         )
     except (FileNotFoundError, RuntimeError, ValueError) as error:
         return _with_selected_object_context(
@@ -870,7 +922,10 @@ def _run_subject_object(
     if matrix_report_path and (validation_results or validation_errors):
         _write_json_document(repo_root / matrix_report_path, matrix_report)
 
-    subject_summary_path = f"{plan['artifactsRoot']['subjectReportRoot']}/summary.json"
+    subject_summary_path = str(
+        dict(plan.get("artifactsRoot") or {}).get("entrySummaryPath")
+        or f"{plan['artifactsRoot']['subjectReportRoot']}/summary.json"
+    )
     subject_summary = subject_reporting_module.build_subject_summary(
         subject_id=str(selection.get("subjectId") or subject_key),
         requested_goal_id=str(selection.get("goalId") or goal_id or ""),
@@ -878,6 +933,7 @@ def _run_subject_object(
         matrix_report_paths={str(matrix_report.get("matrixId") or ""): matrix_report_path},
         run_id=str(run_context["runId"]),
         generated_at=generated_at,
+        entry_selection=entry_selection,
     )
     _write_json_document(repo_root / subject_summary_path, subject_summary)
     subject_result = subject_reporting_module.build_subject_result(
@@ -1202,7 +1258,7 @@ def _handle_registry_object_dispatch(
     object_id = str(selected_object["id"])
 
     stage = str(normalized_options.get("stage") or "all")
-    if object_kind == "subject":
+    if object_kind in SUBJECT_EXECUTION_OBJECT_TYPES:
         return _run_subject_object(
             index=index,
             selected_object=selected_object,

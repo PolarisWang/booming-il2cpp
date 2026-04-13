@@ -8,7 +8,7 @@ variable.
 Usage:
     from benchmark_dashboard_generator import generate, update_docs
     generate(repo_root, Path("docs/benchmark/dashboard.html"))
-    update_docs(repo_root, subject_id="BenchArithmetic")  # incremental update
+    update_docs(repo_root, subject_id="PerformanceFeaturePack")  # incremental update
 """
 from __future__ import annotations
 

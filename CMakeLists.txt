@@ -22,12 +22,12 @@ set(
     "Subject-owned proof host directory for windows-x64-reference")
 set(
     CHAOS_SUBJECT_ANDROID_HOST_ROOT
-    "tests/gate/android-smoke"
+    "tests/integration/platform-hosts/android-smoke"
     CACHE PATH
     "Subject-owned host directory for android-arm64-smoke")
 set(
     CHAOS_SUBJECT_IOS_HOST_ROOT
-    "tests/gate/ios-smoke"
+    "tests/integration/platform-hosts/ios-smoke"
     CACHE PATH
     "Subject-owned host directory for ios-arm64-packaging")
 
@@ -53,7 +53,7 @@ elseif(ROADMAP0_PRESET_TARGET STREQUAL "ios-arm64-packaging")
     enable_language(OBJCXX)
     add_subdirectory("${CHAOS_SUBJECT_IOS_HOST_ROOT}" "${CMAKE_BINARY_DIR}/ios-host")
 elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-packaging")
-    add_subdirectory(tests/gate/linux-packaging)
+    add_subdirectory(tests/integration/platform-hosts/linux-packaging)
 else()
     message(FATAL_ERROR "Unsupported ROADMAP0_PRESET_TARGET='${ROADMAP0_PRESET_TARGET}'")
 endif()

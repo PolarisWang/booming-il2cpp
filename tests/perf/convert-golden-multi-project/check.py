@@ -11,7 +11,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
-GOLDEN_SUBJECT_ROOT = REPO_ROOT / "subjects" / "golden" / "GoldenMultiProject"
+SOLUTION_SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionMultiProject"
 
 
 def load_perf_module():
@@ -39,7 +39,7 @@ def main() -> int:
                 str(DRIVER_PROJECT_PATH),
                 "--",
                 "convert",
-                str(GOLDEN_SUBJECT_ROOT),
+                str(SOLUTION_SUBJECT_ROOT),
                 "--output",
                 str(output_root),
             ],

@@ -1,3 +1,5 @@
+using Chaos.TestFramework;
+
 namespace MainlineFeaturePack;
 
 internal abstract class DispatchBase
@@ -22,6 +24,11 @@ internal sealed class DispatchLeaf : DispatchBase
 
 internal static class DispatchProofEntry
 {
+    [ChaosUnitTest(
+        ChaosUnitCategory.RuntimeContract,
+        Alias = "dispatch-proof",
+        Evidence = ChaosEvidenceKind.Stdout,
+        Priority = 2)]
     public static int Run()
     {
         DispatchBase instance = new DispatchLeaf("leaf");

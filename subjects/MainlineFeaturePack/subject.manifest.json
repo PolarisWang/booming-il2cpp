@@ -10,10 +10,59 @@
     "path": "subjects/MainlineFeaturePack/source/MainlineFeaturePack.csproj",
     "entry": "MainlineFeaturePack/ProofEntry::Run()"
   },
+  "testDeclarationMode": "require",
   "validationProfiles": {
     "proof-dev": [
       "proof",
       "unit"
+    ],
+    "proof-array-ops": [
+      "proof"
+    ],
+    "proof-async-await": [
+      "proof"
+    ],
+    "proof-bitwise-ops": [
+      "proof"
+    ],
+    "proof-branch-ops": [
+      "proof"
+    ],
+    "proof-conversion-ops": [
+      "proof"
+    ],
+    "proof-interface-dispatch": [
+      "proof"
+    ],
+    "proof-vtable-dispatch": [
+      "proof"
+    ],
+    "proof-linker-stripping": [
+      "proof"
+    ],
+    "proof-marshaling": [
+      "proof"
+    ],
+    "proof-cross-boundary-exception": [
+      "proof"
+    ],
+    "proof-delegate-chain": [
+      "proof"
+    ],
+    "proof-generic-collection": [
+      "proof"
+    ],
+    "proof-nested-exception": [
+      "proof"
+    ],
+    "proof-object-ops": [
+      "proof"
+    ],
+    "proof-overflow-ops": [
+      "proof"
+    ],
+    "proof-threading": [
+      "proof"
     ],
     "proof-dispatch": [
       "proof"
@@ -340,6 +389,534 @@
       "validationIntent": {
         "validationMode": "trace",
         "adaptationLevel": "traceable",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-array-ops-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/ArrayOpsProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-async-await-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/AsyncAwaitProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-bitwise-ops-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/BitwiseOpsProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-branch-ops-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/BranchOpsProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-conversion-ops-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/ConversionOpsProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-interface-dispatch-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/InterfaceDispatchProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-vtable-dispatch-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/VTableDispatchProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-linker-stripping-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/LinkerStrippingProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-marshaling-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/MarshalingProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-cross-boundary-eh-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/CrossBoundaryExceptionProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-delegate-chain-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/DelegateChainProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-generic-collection-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/GenericCollectionProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-nested-exception-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/NestedExceptionProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-object-ops-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/ObjectOpsProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-threading-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/ThreadingProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "analysis",
+          "generated",
+          "build",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-overflow-ops-check",
+      "pipelineId": "proof-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "MainlineFeaturePack/OverflowOpsProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "msvc-reference",
+        "runtimeProfile": "native-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
         "expectedOutcome": "pass"
       },
       "artifactPlan": {

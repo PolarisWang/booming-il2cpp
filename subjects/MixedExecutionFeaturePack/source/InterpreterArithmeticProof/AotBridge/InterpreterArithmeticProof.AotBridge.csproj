@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <BaseOutputPath>..\..\..\..\..\artifacts\.tmp-subject-build\InterpreterArithmeticProof.AotBridge\bin\</BaseOutputPath>
+    <AssemblyName>InterpreterArithmeticProof.AotBridge</AssemblyName>
+    <RootNamespace>InterpreterArithmeticProof.AotBridge</RootNamespace>
+  </PropertyGroup>
+</Project>

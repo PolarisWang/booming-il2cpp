@@ -14,6 +14,14 @@ except ImportError:
     from testing import subjects as subjects_module
 
 
+ENTRY_ARTIFACT_SEGMENTS: dict[str, tuple[str, str]] = {
+    "engineering-validation": ("engineering", "validations"),
+    "engineering-workload": ("engineering", "workloads"),
+    "declared-unit-test": ("declared", "unit"),
+    "declared-benchmark": ("declared", "benchmark"),
+}
+
+
 def _stable_fingerprint(payload: dict[str, Any]) -> str:
     encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()[:16]
@@ -21,6 +29,35 @@ def _stable_fingerprint(payload: dict[str, Any]) -> str:
 
 def _stage_exists(repo_root: Path, stage: dict[str, Any]) -> bool:
     return (repo_root / stage["paths"]["manifestPath"]).is_file()
+
+
+def _sanitize_entry_path_key(value: str) -> str:
+    normalized = "".join(character if character.isalnum() or character in {"-", "_", "."} else "-" for character in value)
+    normalized = normalized.strip("-._")
+    return normalized or "entry"
+
+
+def _entry_artifact_paths(
+    *,
+    subject_id: str,
+    matrix_id: str,
+    run_id: str,
+    entry_selection: dict[str, Any],
+) -> dict[str, str]:
+    family = str(entry_selection.get("family") or "")
+    if family not in ENTRY_ARTIFACT_SEGMENTS:
+        return {}
+
+    path_key = str(entry_selection.get("alias") or entry_selection.get("kind") or "")
+    if not path_key:
+        path_key = _sanitize_entry_path_key(str(entry_selection.get("stableId") or ""))
+    entry_root_prefix = "/".join(ENTRY_ARTIFACT_SEGMENTS[family])
+    run_root = f"artifacts/subjects/{subject_id}/runs/{run_id}"
+
+    return {
+        "entryReportPath": f"{run_root}/matrices/{matrix_id}/{entry_root_prefix}/{path_key}/report.json",
+        "entrySummaryPath": f"{run_root}/{entry_root_prefix}/{path_key}/summary.json",
+    }
 
 
 def build_plan(
@@ -33,6 +70,9 @@ def build_plan(
     validation_kind: str | None = None,
     variant: str | None = None,
     run_id: str | None = None,
+    source_entry: str | None = None,
+    workload_entry: str | None = None,
+    entry_selection: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
     selected_goal_id = goal_id or str(manifest["defaultGoal"])
@@ -69,12 +109,35 @@ def build_plan(
         raise ValueError(f"matrix '{selected_matrix_id}' does not support goal '{selected_goal_id}'")
 
     pipeline = subjects_module.find_pipeline(manifest, str(matrix["pipelineId"]))
-    artifacts_root = subjects_module.subject_artifact_roots(
-        subject_id,
-        selected_matrix_id,
-        run_id=selected_run_id,
+    artifacts_root = dict(
+        subjects_module.subject_artifact_roots(
+            subject_id,
+            selected_matrix_id,
+            run_id=selected_run_id,
+        )
     )
-    selected_workload_entry = str(matrix.get("workloadEntry") or manifest.get("workloadEntry") or "")
+    selected_source = dict(manifest["source"])
+    selected_source.update(dict(matrix.get("source") or {}))
+    if source_entry is not None:
+        selected_source["entry"] = source_entry
+    selected_workload_entry = str(
+        workload_entry
+        or matrix.get("workloadEntry")
+        or manifest.get("workloadEntry")
+        or ""
+    )
+    if selected_workload_entry and not str(selected_source.get("entry") or ""):
+        selected_source["entry"] = selected_workload_entry
+    normalized_entry_selection = dict(entry_selection or {})
+    if normalized_entry_selection:
+        artifacts_root.update(
+            _entry_artifact_paths(
+                subject_id=subject_id,
+                matrix_id=selected_matrix_id,
+                run_id=selected_run_id,
+                entry_selection=normalized_entry_selection,
+            )
+        )
 
     stage_plan: list[dict[str, Any]] = []
     stage_by_id: dict[str, dict[str, Any]] = {}
@@ -105,6 +168,7 @@ def build_plan(
                 "validationKinds": list(validation_selection["validationKinds"]),
                 "validationKind": validation_selection["validationKind"],
                 "variant": str(validation_selection["variant"]),
+                "sourceEntry": str(selected_source.get("entry") or ""),
                 "workloadEntry": selected_workload_entry,
                 "stageId": stage_id,
                 "kind": kind,
@@ -156,10 +220,7 @@ def build_plan(
         stage["executionMode"] = execution_mode
         stage["reuse"] = reuse
 
-    selected_source = dict(manifest["source"])
-    selected_source.update(dict(matrix.get("source") or {}))
-
-    return {
+    plan = {
         "planVersion": "v1",
         "request": {
             "subjectId": subject_id,
@@ -173,6 +234,13 @@ def build_plan(
         "selection": {
             "subjectId": subject_id,
             "displayName": str(manifest["displayName"]),
+            "sourceModel": str(manifest.get("sourceModel") or ""),
+            "dependencyModel": str(manifest.get("dependencyModel") or ""),
+            "executablePlan": str(manifest.get("executablePlan") or ""),
+            "engineeringProfile": str(manifest.get("engineeringProfile") or ""),
+            "orchestration": dict(manifest.get("orchestration") or {}),
+            "availability": dict(manifest.get("availability") or {}),
+            "compatibility": dict(manifest.get("compatibility") or {}),
             "goalId": selected_goal_id,
             "matrixId": selected_matrix_id,
             "validationProfileId": str(validation_selection["validationProfileId"]),
@@ -190,3 +258,6 @@ def build_plan(
         "artifactsRoot": artifacts_root,
         "stagePlan": stage_plan,
     }
+    if normalized_entry_selection:
+        plan["selection"]["entrySelection"] = normalized_entry_selection
+    return plan

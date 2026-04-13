@@ -118,7 +118,7 @@ class TuiTests(unittest.TestCase):
 
         entries = tui_module.build_menu_entries(manifest, "windows")
 
-        self.assertEqual(["prepare", "build", "test", "clean", "inspect"], [entry.syntax for entry in entries])
+        self.assertEqual(["prepare", "project", "build", "test", "clean", "inspect"], [entry.syntax for entry in entries])
         self.assertNotIn("verify", [entry.syntax for entry in entries])
 
     def test_test_submenu_exposes_new_registry_and_object_entries(self) -> None:

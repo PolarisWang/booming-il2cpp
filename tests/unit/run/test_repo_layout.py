@@ -15,6 +15,11 @@ FORBIDDEN_ACTIVE_PREFIX_SNIPPETS = [
     "boo" + "ming_",
     "boo" + "ming-",
 ]
+EXPECTED_PYTEST_INI_SNIPPETS = [
+    "[pytest]",
+    "testpaths = tests",
+    "norecursedirs = artifacts",
+]
 
 EXPECTED_MANAGED_PROJECTS: dict[str, list[str]] = {
     "Chaos.IL2CPP.Contracts": [],
@@ -58,6 +63,7 @@ EXPECTED_MANAGED_PROJECTS: dict[str, list[str]] = {
     ],
     "Chaos.IL2CPP.CodeGen": [
         "Chaos.IL2CPP.Contracts",
+        "Chaos.IL2CPP.Loader",
         "Chaos.IL2CPP.MetadataWriter",
         "Scriban",
     ],
@@ -77,14 +83,106 @@ ACTIVE_ANALYSIS_RETIREMENT_DOC_PATHS = [
     REPO_ROOT / "docs" / "architecture" / "subject-test-framework-v1" / "foundation-and-windows-cutover-v1.md",
     REPO_ROOT / "wiki" / "06-测试验证" / "模块" / "analysis.md",
 ]
-LEGACY_STAGE_TEST_NAMES = [
+RETIRED_RUN_TEST_NAMES = [
+    "test_phase2_aot_runtime_completeness.py",
+    "test_phase2_async_await_proof.py",
+    "test_phase2_core_contract_cutover.py",
+    "test_phase2_linker_stripping_proof.py",
+    "test_phase2_marshaling_proof.py",
+    "test_phase2_nested_exception_proof.py",
+    "test_phase2_perf_governance.py",
+    "test_phase2_threading_gc_proof.py",
+    "test_phase3_capability_driven_lowering.py",
+    "test_phase3_engine_binding_codegen_baseline.py",
+    "test_phase3_engine_bridge_minimal.py",
+    "test_phase3_engine_contract_freeze.py",
+    "test_phase3_engine_host_proof.py",
+    "test_phase3_host_embedding_ownership_protocol.py",
+    "test_phase4_mainline_feature_pack_onboarding.py",
+    "test_phase4_mobile_hello_world_proof.py",
+    "test_phase4_mobile_runtime_host_batch1.py",
+    "test_phase4_mobile_runtime_host_batch2_android.py",
+    "test_phase4_mobile_runtime_host_batch3_ios.py",
+    "test_phase5_capability_batch_a.py",
+    "test_phase5_hot_update_skeleton.py",
+    "test_phase6_capability_batch_b.py",
+    "test_phase6_metadata_supplement_bridge.py",
+    "test_phase7_engine_binding.py",
+    "test_phase7_interpreter_mixed_execution.py",
+    "test_phase8_mobile_foundation.py",
+    "test_phase8_productization_gates.py",
+    "test_phase9_hot_update_e2e.py",
+    "test_phase_b_aot_contract_split.py",
+    "test_phase_b_native_aot_workload_entry_bundle.py",
     "test_stage3_managed_minimal_closure.py",
     "test_stage4_bootstrap_support_skeleton.py",
     "test_stage4_native_reference_proof.py",
+    "test_stage4_runtime_core_skeleton.py",
     "test_stage5a_generic_echo_windows_reference.py",
     "test_stage5b_reflection_lite_windows_reference.py",
     "test_stage5c_pinvoke_lite_windows_reference.py",
 ]
+MIGRATED_COMPATIBILITY_TESTS = [
+    "test_interface_dispatch_aot_runtime_completeness.py",
+    "test_async_await_proof_subject.py",
+    "test_core_contract_cutover.py",
+    "test_linker_stripping_proof_subject.py",
+    "test_marshaling_proof_subject.py",
+    "test_nested_exception_proof_subject.py",
+    "test_threading_gc_proof_subject.py",
+    "test_capability_driven_lowering.py",
+    "test_engine_binding_codegen_baseline.py",
+    "test_engine_bridge_minimal.py",
+    "test_engine_contract_freeze.py",
+    "test_engine_host_proof_subject.py",
+    "test_host_embedding_ownership_protocol.py",
+    "test_mainline_feature_pack_onboarding.py",
+    "test_mobile_hello_world_proof_subject.py",
+    "test_mobile_runtime_host_foundation.py",
+    "test_mobile_runtime_host_android.py",
+    "test_mobile_runtime_host_ios.py",
+    "test_mainline_capability_batch_a.py",
+    "test_hot_update_skeleton_subject.py",
+    "test_mainline_capability_batch_b.py",
+    "test_metadata_supplement_bridge_subjects.py",
+    "test_engine_binding_subjects.py",
+    "test_interpreter_mixed_execution_subjects.py",
+    "test_mobile_foundation.py",
+    "test_hot_update_productization_gates.py",
+    "test_hot_update_e2e_flows.py",
+]
+MIGRATED_PERFORMANCE_TESTS = [
+    "test_perf_governance.py",
+    "test_native_aot_contract_split.py",
+    "test_native_aot_workload_entry_bundle.py",
+]
+PHASE1_GENERIC_UNIT_BUCKET_SHIMS = {
+    "test_subject_executor.py": "tests.unit.execution.test_subject_executor",
+    "test_subject_workers.py": "tests.unit.execution.test_subject_workers",
+    "test_deploy_core.py": "tests.unit.execution.test_deploy_core",
+    "test_subject_reporting.py": "tests.unit.reporting.test_subject_reporting",
+    "test_events_schema.py": "tests.unit.reporting.test_events_schema",
+    "test_traffic_light.py": "tests.unit.reporting.test_traffic_light",
+    "test_benchmark_command.py": "tests.unit.performance.test_benchmark_command",
+    "test_benchmark_comparison.py": "tests.unit.performance.test_benchmark_comparison",
+    "test_benchmark_subject_sources.py": "tests.unit.performance.test_benchmark_subject_sources",
+    "test_perf_policy.py": "tests.unit.performance.test_perf_policy",
+    "test_subject_perf_policy.py": "tests.unit.performance.test_subject_perf_policy",
+    "test_subject_workers_perf.py": "tests.unit.performance.test_subject_workers_perf",
+    "test_subject_planner.py": "tests.unit.planning.test_subject_planner",
+    "test_project_workspace.py": "tests.unit.planning.test_project_workspace",
+    "test_fingerprints.py": "tests.unit.planning.test_fingerprints",
+    "test_project_graph.py": "tests.unit.planning.test_project_graph",
+    "test_path_resolver.py": "tests.unit.selection.test_path_resolver",
+    "test_session.py": "tests.unit.selection.test_session",
+    "test_managed_closure_contract_bundle.py": "tests.unit.compatibility.test_managed_closure_contract_bundle",
+    "test_native_prefix_naming.py": "tests.unit.compatibility.test_native_prefix_naming",
+    "test_native_reference_bootstrap_support.py": "tests.unit.compatibility.test_native_reference_bootstrap_support",
+    "test_native_runtime_core.py": "tests.unit.compatibility.test_native_runtime_core",
+    "test_subject_contracts_source_cutover.py": "tests.unit.compatibility.test_subject_contracts_source_cutover",
+    "test_subject_manifest_schema.py": "tests.unit.compatibility.test_subject_manifest_schema",
+    "test_scriban_vendor_build.py": "tests.unit.compatibility.test_scriban_vendor_build",
+}
 
 
 def parse_project_references(project_path: Path) -> list[str]:
@@ -173,14 +271,108 @@ class RepoLayoutTests(unittest.TestCase):
         self.assertFalse((REPO_ROOT / "contracts" / "native" / "examples").exists())
         self.assertFalse((REPO_ROOT / "tests" / "contract").exists())
 
-    def test_tests_proof_tree_only_keeps_generic_guidance(self) -> None:
-        proof_root = REPO_ROOT / "tests" / "proof"
-        readme_path = proof_root / "README.md"
+    def test_phase8_proof_root_is_retired(self) -> None:
+        self.assertFalse((REPO_ROOT / "tests" / "proof").exists())
 
-        self.assertTrue(readme_path.is_file(), msg=f"missing proof guidance: {readme_path}")
-        self.assertFalse((proof_root / "hello-world-object").exists())
-        self.assertFalse((proof_root / "input").exists())
-        self.assertFalse((proof_root / "native-reference").exists())
+    def test_phase1_registry_buckets_and_integration_fixtures_exist(self) -> None:
+        integration_fixture_root = REPO_ROOT / "tests" / "fixtures" / "integration" / "catalog" / "repo"
+        unit_registry_root = REPO_ROOT / "tests" / "unit" / "registry"
+        integration_registry_root = REPO_ROOT / "tests" / "integration" / "registry"
+
+        self.assertTrue(integration_fixture_root.is_dir(), msg=f"missing integration fixture root: {integration_fixture_root}")
+        self.assertFalse((REPO_ROOT / "tests" / "integration" / "run" / "fixtures").exists())
+        self.assertTrue((unit_registry_root / "test_adapter_registry.py").is_file())
+        self.assertTrue((unit_registry_root / "test_suite_manifest.py").is_file())
+        self.assertTrue((integration_registry_root / "test_catalog_scan.py").is_file())
+        self.assertTrue((integration_registry_root / "test_case_discovery.py").is_file())
+        self.assertTrue((integration_registry_root / "test_registry_scan.py").is_file())
+
+    def test_phase8_platform_hosts_use_integration_canonical_root_with_gate_wrappers_only(self) -> None:
+        cmake_router = (REPO_ROOT / "CMakeLists.txt").read_text(encoding="utf-8")
+        canonical_root = REPO_ROOT / "tests" / "integration" / "platform-hosts"
+
+        self.assertIn("tests/integration/platform-hosts/android-smoke", cmake_router)
+        self.assertIn("tests/integration/platform-hosts/ios-smoke", cmake_router)
+        self.assertIn("tests/integration/platform-hosts/linux-packaging", cmake_router)
+        self.assertNotIn("tests/gate/android-smoke", cmake_router)
+        self.assertNotIn("tests/gate/ios-smoke", cmake_router)
+        self.assertNotIn("tests/gate/linux-packaging", cmake_router)
+
+        for relative_dir in ["android-smoke", "ios-smoke", "linux-packaging"]:
+            self.assertTrue((canonical_root / relative_dir / "CMakeLists.txt").is_file())
+
+        gate_wrapper = (REPO_ROOT / "tests" / "gate" / "android-smoke" / "CMakeLists.txt").read_text(encoding="utf-8")
+        self.assertIn("../../integration/platform-hosts/android-smoke", gate_wrapper)
+        self.assertFalse((REPO_ROOT / "tests" / "platform").exists())
+
+    def test_phase8_registry_manifests_use_fixtures_root_only(self) -> None:
+        fixture_registry_root = REPO_ROOT / "tests" / "fixtures" / "registry"
+
+        self.assertTrue((fixture_registry_root / "modules").is_dir())
+        self.assertTrue((fixture_registry_root / "systems").is_dir())
+        self.assertTrue((fixture_registry_root / "pipelines").is_dir())
+        self.assertTrue((fixture_registry_root / "systems" / "runtime-baseline-macos" / "scenario.manifest.json").is_file())
+        self.assertTrue((fixture_registry_root / "systems" / "runtime-baseline-windows" / "scenario.manifest.json").is_file())
+        self.assertEqual(
+            [],
+            [path.name for path in (fixture_registry_root / "systems").iterdir() if path.is_dir() and path.name.startswith("roadmap-0-")],
+        )
+        self.assertFalse((REPO_ROOT / "tests" / "registry").exists())
+
+    def test_phase1_generic_unit_buckets_exist(self) -> None:
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "execution" / "test_subject_executor.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "execution" / "test_subject_workers.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "reporting" / "test_subject_reporting.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "reporting" / "test_events_schema.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "performance" / "test_benchmark_command.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "performance" / "test_subject_workers_perf.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "planning" / "test_subject_planner.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "planning" / "test_project_workspace.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "planning" / "test_fingerprints.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "planning" / "test_project_graph.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "selection" / "test_path_resolver.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "selection" / "test_session.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "compatibility" / "test_managed_closure_contract_bundle.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "compatibility" / "test_native_reference_bootstrap_support.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "compatibility" / "test_native_runtime_core.py").is_file())
+        self.assertTrue((REPO_ROOT / "tests" / "unit" / "compatibility" / "test_subject_manifest_schema.py").is_file())
+
+        for file_name in MIGRATED_COMPATIBILITY_TESTS:
+            self.assertTrue((REPO_ROOT / "tests" / "unit" / "compatibility" / file_name).is_file(), msg=file_name)
+
+        for file_name in MIGRATED_PERFORMANCE_TESTS:
+            self.assertTrue((REPO_ROOT / "tests" / "unit" / "performance" / file_name).is_file(), msg=file_name)
+
+    def test_phase1_generic_run_entrypoints_are_compatibility_shims(self) -> None:
+        for file_name, canonical_import in PHASE1_GENERIC_UNIT_BUCKET_SHIMS.items():
+            content = (REPO_ROOT / "tests" / "unit" / "run" / file_name).read_text(encoding="utf-8").strip()
+            self.assertTrue(content.startswith('"""Legacy shim;'), msg=file_name)
+            self.assertIn(canonical_import, content, msg=file_name)
+
+    def test_phase1_run_bucket_only_keeps_repo_layout_and_generic_shims(self) -> None:
+        non_shim_entries: list[str] = []
+        for path in sorted((REPO_ROOT / "tests" / "unit" / "run").glob("test_*.py")):
+            first_line = path.read_text(encoding="utf-8").splitlines()[0]
+            if first_line.startswith('"""Legacy shim;'):
+                continue
+            non_shim_entries.append(path.name)
+
+        self.assertEqual(
+            sorted(
+                [
+                    "test_repo_layout.py",
+                ]
+            ),
+            non_shim_entries,
+        )
+
+    def test_phase1_root_pytest_collection_is_scoped_to_repo_tests(self) -> None:
+        pytest_ini = REPO_ROOT / "pytest.ini"
+        self.assertTrue(pytest_ini.is_file(), msg="pytest.ini must exist at repo root")
+
+        content = pytest_ini.read_text(encoding="utf-8")
+        for snippet in EXPECTED_PYTEST_INI_SNIPPETS:
+            self.assertIn(snippet, content)
 
     def test_subject_native_reference_cmake_treats_generated_cpp_as_existing_input(self) -> None:
         native_reference_cmake = (
@@ -244,7 +436,10 @@ class RepoLayoutTests(unittest.TestCase):
                 project_path = str(dict(validation_spec).get("project") or "")
                 if not project_path:
                     continue
-                self.assertTrue(project_path.startswith(f"subjects/{subject_id}/validation/"))
+                self.assertTrue(
+                    project_path.startswith(f"subjects/{subject_id}/validation/")
+                    or project_path.startswith("src/validation/perf/")
+                )
                 self.assertNotIn("/tests/", project_path.replace("\\", "/"))
 
             for expected_path in dict(manifest.get("expected") or {}).values():
@@ -253,16 +448,26 @@ class RepoLayoutTests(unittest.TestCase):
             for baseline_path in dict(manifest.get("baselines") or {}).values():
                 self.assertTrue(str(baseline_path).startswith(f"subjects/{subject_id}/baselines/"))
 
-    def test_root_tests_tree_does_not_keep_legacy_stage_subject_cases(self) -> None:
+    def test_phase8_subject_root_tree_does_not_keep_legacy_redirect_shells(self) -> None:
+        legacy_shells: list[str] = []
+        for manifest_path in sorted((REPO_ROOT / "subjects").glob("*/subject.manifest.json")):
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            compatibility = dict(manifest.get("compatibility") or {})
+            if (
+                str(compatibility.get("redirectToSubject") or "").strip()
+                or str(compatibility.get("redirectSubjectId") or "").strip()
+                or str(compatibility.get("redirectSubjectPath") or "").strip()
+            ):
+                legacy_shells.append(str(manifest_path.parent.relative_to(REPO_ROOT).as_posix()))
+
+        self.assertEqual([], legacy_shells)
+        self.assertFalse((REPO_ROOT / "subjects" / "golden").exists())
+
+    def test_root_tests_tree_does_not_keep_legacy_phase_or_stage_entries(self) -> None:
         offenders: list[str] = []
-        for file_name in LEGACY_STAGE_TEST_NAMES:
+        for file_name in RETIRED_RUN_TEST_NAMES:
             path = REPO_ROOT / "tests" / "unit" / "run" / file_name
-            content = path.read_text(encoding="utf-8")
-            normalized = content.strip()
-            if not normalized.startswith('"""Legacy shim;'):
-                offenders.append(str(path.relative_to(REPO_ROOT).as_posix()))
-                continue
-            if "\n" in normalized:
+            if path.exists():
                 offenders.append(str(path.relative_to(REPO_ROOT).as_posix()))
 
         self.assertEqual([], offenders)

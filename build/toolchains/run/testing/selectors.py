@@ -3,6 +3,17 @@ from __future__ import annotations
 from typing import Any
 
 
+ENGINEERING_SELECTOR_KINDS = {
+    "engineering-validation",
+    "engineering-workload",
+}
+
+DECLARED_SELECTOR_KINDS = {
+    "declared-unit-test",
+    "declared-benchmark",
+}
+
+
 def suite_id(family: str, suite: str) -> str:
     return f"{family}/{suite}"
 
@@ -21,6 +32,14 @@ def system_id(scenario: str) -> str:
 
 def pipeline_id(pipeline: str) -> str:
     return f"pipeline/{pipeline}"
+
+
+def engineering_id(family: str, subject: str, kind: str) -> str:
+    return f"{family}/{subject}/{kind}"
+
+
+def declared_id(family: str, stable_id: str) -> str:
+    return f"{family}/{stable_id}"
 
 
 def parse_suite_id(value: str) -> tuple[str, str]:
@@ -55,6 +74,20 @@ def parse_pipeline_id(value: str) -> str:
     parts = value.split("/")
     if len(parts) != 2 or parts[0] != "pipeline" or not parts[1]:
         raise ValueError(f"invalid pipeline id: {value}")
+    return parts[1]
+
+
+def parse_engineering_id(expected_family: str, value: str) -> tuple[str, str]:
+    parts = value.split("/")
+    if len(parts) != 3 or parts[0] != expected_family or not parts[1] or not parts[2]:
+        raise ValueError(f"invalid {expected_family} id: {value}")
+    return parts[1], parts[2]
+
+
+def parse_declared_id(expected_family: str, value: str) -> str:
+    parts = value.split("/", 1)
+    if len(parts) != 2 or parts[0] != expected_family or not parts[1]:
+        raise ValueError(f"invalid {expected_family} id: {value}")
     return parts[1]
 
 
@@ -116,6 +149,35 @@ def normalize_selector_options(kind: str, options: dict[str, Any]) -> dict[str, 
             if not pipeline:
                 raise ValueError("pipeline selector requires --id or --pipeline")
             normalized["id"] = pipeline_id(pipeline)
+        return normalized
+
+    if kind in ENGINEERING_SELECTOR_KINDS:
+        if object_id:
+            subject, engineering_kind = parse_engineering_id(kind, str(object_id))
+            normalized["subject"] = subject
+            normalized["kind"] = engineering_kind
+        else:
+            subject = str(normalized.get("subject") or "")
+            engineering_kind = str(normalized.get("kind") or "")
+            if not subject or not engineering_kind:
+                raise ValueError(f"{kind} selector requires --id or both --subject and --kind")
+            normalized["id"] = engineering_id(kind, subject, engineering_kind)
+        return normalized
+
+    if kind in DECLARED_SELECTOR_KINDS:
+        if object_id:
+            normalized["stable_id"] = parse_declared_id(kind, str(object_id))
+        else:
+            stable_id = str(
+                normalized.get("stable_id")
+                or normalized.get("stable-id")
+                or normalized.get("stableId")
+                or ""
+            )
+            if not stable_id:
+                raise ValueError(f"{kind} selector requires --id or --stable-id")
+            normalized["id"] = declared_id(kind, stable_id)
+            normalized["stable_id"] = stable_id
         return normalized
 
     raise ValueError(f"unsupported selector kind: {kind}")

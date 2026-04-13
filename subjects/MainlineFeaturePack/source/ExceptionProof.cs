@@ -1,3 +1,5 @@
+using Chaos.TestFramework;
+
 namespace MainlineFeaturePack;
 
 internal sealed class ExceptionThrower
@@ -32,6 +34,12 @@ internal sealed class ExceptionThrower
 
 internal static class ExceptionProofEntry
 {
+    [ChaosUnitTest(
+        ChaosUnitCategory.RuntimeContract,
+        Alias = "exception-proof",
+        Requires = ChaosRuntimeFeature.ExceptionFlow,
+        Evidence = ChaosEvidenceKind.Stdout,
+        Priority = 6)]
     public static int Run()
     {
         var thrower = new ExceptionThrower();

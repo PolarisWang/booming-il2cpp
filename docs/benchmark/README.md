@@ -14,7 +14,7 @@
 
 ```bash
 # 跑某个 subject 的 native benchmark 并记录
-run benchmark --subject BenchArithmetic --mode native --record
+run benchmark --subject PerformanceFeaturePack --mode native --record
 
 # 跑所有 Bench* subjects（全部模式）
 run benchmark --all --record

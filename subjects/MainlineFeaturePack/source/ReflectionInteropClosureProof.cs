@@ -1,3 +1,4 @@
+using Chaos.TestFramework;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -26,6 +27,12 @@ internal sealed class ReflectionClosureBox<T>
 
 internal static class ReflectionInteropClosureEntry
 {
+    [ChaosUnitTest(
+        ChaosUnitCategory.InteropContract,
+        Alias = "reflection-interop-closure-proof",
+        Requires = ChaosRuntimeFeature.Reflection | ChaosRuntimeFeature.NativeInterop,
+        Evidence = ChaosEvidenceKind.Stdout,
+        Priority = 7)]
     public static int Run()
     {
         Type closedType = typeof(ReflectionClosureBox<string>);

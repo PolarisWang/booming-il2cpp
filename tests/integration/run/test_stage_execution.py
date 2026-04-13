@@ -64,7 +64,7 @@ class StageExecutionTests(unittest.TestCase):
         with patch.object(run_module.manifest_module, "is_interactive_session", return_value=False):
             with patch.object(run_module.runtime_module, "detect_host_platform", return_value="macos-arm64"):
                 with patch.object(run_module.sys, "stdout", stdout):
-                    exit_code = run_module.main(["test", "workflow", "roadmap-0-windows"])
+                    exit_code = run_module.main(["test", "workflow", "runtime-baseline-windows"])
 
         self.assertEqual(2, exit_code)
         self.assertIn("not supported on host", stdout.getvalue())

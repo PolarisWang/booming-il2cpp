@@ -414,7 +414,7 @@ def _print_help() -> None:
     print("""usage: run benchmark [options]
 
 Options:
-  --subject <id>               Target subject (e.g. BenchArithmetic)
+  --subject <id>               Target subject (e.g. PerformanceFeaturePack)
   --all                        All Bench* subjects
   --mode <managed|native|interpreter>  Execution mode (default: all modes)
   --record                     Run benchmark and record result to records.jsonl
@@ -423,7 +423,7 @@ Options:
   status [--subject <id>]      Show latest benchmark records
 
 Examples:
-  run benchmark --subject BenchArithmetic --mode native --record
+  run benchmark --subject PerformanceFeaturePack --mode native --record
   run benchmark --all --record
   run benchmark --dashboard --open
   run benchmark status --all

@@ -1,16 +1,20 @@
 from __future__ import annotations
 
+from enum import Enum
 from pathlib import Path
+import re
 from typing import Any
 import sys
 
 try:
     from ..core.common import read_json
+    from . import declarations as declarations_module
     from . import path_resolver as path_resolver_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from core.common import read_json
+    from testing import declarations as declarations_module
     from testing import path_resolver as path_resolver_module
 
 
@@ -24,6 +28,345 @@ BUCKET_MANIFEST_NAMES = {
     "runtime": "runtime.manifest.json",
     "report": "report.json",
 }
+
+
+class SourceModel(str, Enum):
+    DOTNET_SOLUTION = "dotnet-solution"
+    DOTNET_PROJECT_SET = "dotnet-project-set"
+    HOST_PLUS_PATCH = "host-plus-patch"
+    MIXED_SOLUTION = "mixed-solution"
+
+
+class DependencyModel(str, Enum):
+    PROJECT_REFERENCE = "project-reference"
+    PACKAGE_REFERENCE = "package-reference"
+    BINARY_REFERENCE = "binary-reference"
+    MIXED = "mixed"
+
+
+class ExecutablePlan(str, Enum):
+    MANAGED_HOST = "managed-host"
+    GENERATED_NATIVE = "generated-native"
+    DEVICE_PACKAGE = "device-package"
+    HOST_PLUS_HOT_UPDATE_PATCH = "host-plus-hot-update-patch"
+
+
+class EngineeringProfile(str, Enum):
+    MANAGED_OUTPUT = "managed-output"
+    NATIVE_EXECUTABLE = "native-executable"
+    DEVICE_PACKAGE = "device-package"
+    HOT_UPDATE_HOST = "hot-update-host"
+
+
+class AvailabilityStatus(str, Enum):
+    READY = "ready"
+    PLANNED = "planned"
+    BLOCKED = "blocked"
+    UNSUPPORTED = "unsupported"
+
+
+_PROJECT_REFERENCE_PATTERN = re.compile(r"<ProjectReference(?:\s|>)", re.IGNORECASE)
+_PACKAGE_REFERENCE_PATTERN = re.compile(r"<PackageReference(?:\s|>)", re.IGNORECASE)
+_BINARY_REFERENCE_PATTERN = re.compile(r"<(?:Reference|HintPath)(?:\s|>)", re.IGNORECASE)
+_ORCHESTRATION_REF_FIELDS = (
+    "matrixProfile",
+    "pipelineProfile",
+    "budgetProfile",
+    "baselineProfile",
+)
+
+
+def _normalize_enum_value(
+    value: Any,
+    enum_type: type[Enum],
+    *,
+    field_name: str,
+) -> str:
+    try:
+        return enum_type(str(value).strip()).value
+    except ValueError as error:
+        raise ValueError(f"unsupported {field_name}: {value}") from error
+
+
+def _project_files(subject_root: Path) -> list[Path]:
+    source_root = subject_root / "source"
+    if not source_root.is_dir():
+        return []
+    return sorted(source_root.rglob("*.csproj"))
+
+
+def _derive_source_model(manifest_path: Path) -> str:
+    source_root = manifest_path.parent / "source"
+    if source_root.is_dir() and any(source_root.rglob("*.sln")):
+        return SourceModel.DOTNET_SOLUTION.value
+    return SourceModel.DOTNET_PROJECT_SET.value
+
+
+def _derive_dependency_model(manifest_path: Path) -> str:
+    dependency_kinds: set[str] = set()
+    for project_file in _project_files(manifest_path.parent):
+        content = project_file.read_text(encoding="utf-8")
+        if _PROJECT_REFERENCE_PATTERN.search(content):
+            dependency_kinds.add(DependencyModel.PROJECT_REFERENCE.value)
+        if _PACKAGE_REFERENCE_PATTERN.search(content):
+            dependency_kinds.add(DependencyModel.PACKAGE_REFERENCE.value)
+        if _BINARY_REFERENCE_PATTERN.search(content):
+            dependency_kinds.add(DependencyModel.BINARY_REFERENCE.value)
+
+    if not dependency_kinds:
+        return DependencyModel.PROJECT_REFERENCE.value
+    if len(dependency_kinds) == 1:
+        return next(iter(dependency_kinds))
+    return DependencyModel.MIXED.value
+
+
+def _normalize_optional_string(value: Any, *, field_name: str) -> str:
+    normalized = str(value or "").strip()
+    if not normalized:
+        raise ValueError(f"{field_name} must be a non-empty string")
+    return normalized
+
+
+def _normalize_orchestration(payload: Any) -> dict[str, Any]:
+    if payload is None:
+        return {}
+    if not isinstance(payload, dict):
+        raise ValueError("orchestration must be an object")
+
+    normalized: dict[str, Any] = {}
+    for key, value in payload.items():
+        if key in _ORCHESTRATION_REF_FIELDS:
+            if value is None:
+                continue
+            normalized[key] = _normalize_optional_string(value, field_name=f"orchestration.{key}")
+            continue
+        normalized[key] = value
+    return normalized
+
+
+def _load_shared_profile(
+    repo_root: Path,
+    *,
+    profile_path: Path,
+    field_name: str,
+    collection_name: str,
+) -> list[dict[str, Any]]:
+    if not profile_path.is_file():
+        raise FileNotFoundError(f"{field_name} not found: {profile_path}")
+
+    payload = read_json(profile_path)
+    if not isinstance(payload, dict):
+        raise RuntimeError(f"{field_name} must be an object: {profile_path}")
+
+    collection = payload.get(collection_name, [])
+    if collection is None:
+        return []
+    if not isinstance(collection, list):
+        raise RuntimeError(f"{field_name}.{collection_name} must be a list: {profile_path}")
+    return [dict(item) for item in collection if isinstance(item, dict)]
+
+
+def _merge_identified_objects(
+    shared_items: list[dict[str, Any]],
+    inline_items: list[dict[str, Any]],
+    *,
+    id_field: str,
+    field_name: str,
+) -> list[dict[str, Any]]:
+    merged: dict[str, dict[str, Any]] = {}
+    ordered_ids: list[str] = []
+
+    for collection_name, items in (("shared", shared_items), ("inline", inline_items)):
+        for item in items:
+            identifier = str(item.get(id_field) or "").strip()
+            if not identifier:
+                raise ValueError(f"{field_name} item from {collection_name} is missing {id_field}")
+            merged[identifier] = dict(item)
+            if identifier not in ordered_ids:
+                ordered_ids.append(identifier)
+
+    return [merged[identifier] for identifier in ordered_ids]
+
+
+def _apply_orchestration_profiles(
+    manifest: dict[str, Any],
+    *,
+    manifest_path: Path,
+) -> None:
+    orchestration = _normalize_orchestration(manifest.get("orchestration"))
+    manifest["orchestration"] = orchestration
+
+    repo_root = path_resolver_module.repo_root_from_subject_manifest(manifest_path)
+    shared_pipelines: list[dict[str, Any]] = []
+    shared_matrices: list[dict[str, Any]] = []
+
+    pipeline_profile_id = str(orchestration.get("pipelineProfile") or "")
+    if pipeline_profile_id:
+        shared_pipelines = _load_shared_profile(
+            repo_root,
+            profile_path=path_resolver_module.pipeline_profile_path(repo_root, pipeline_profile_id),
+            field_name="orchestration.pipelineProfile",
+            collection_name="executionPipelines",
+        )
+
+    matrix_profile_id = str(orchestration.get("matrixProfile") or "")
+    if matrix_profile_id:
+        shared_matrices = _load_shared_profile(
+            repo_root,
+            profile_path=path_resolver_module.matrix_profile_path(repo_root, matrix_profile_id),
+            field_name="orchestration.matrixProfile",
+            collection_name="environmentMatrices",
+        )
+
+    manifest["executionPipelines"] = _merge_identified_objects(
+        shared_pipelines,
+        [dict(item) for item in list(manifest.get("executionPipelines") or []) if isinstance(item, dict)],
+        id_field="pipelineId",
+        field_name="executionPipelines",
+    )
+    manifest["environmentMatrices"] = _merge_identified_objects(
+        shared_matrices,
+        [dict(item) for item in list(manifest.get("environmentMatrices") or []) if isinstance(item, dict)],
+        id_field="matrixId",
+        field_name="environmentMatrices",
+    )
+
+
+def _default_matrix(manifest: dict[str, Any]) -> dict[str, Any]:
+    matrices = list(manifest.get("environmentMatrices") or [])
+    if not matrices:
+        return {}
+    default_matrix_id = str(manifest.get("defaultMatrix") or "")
+    if default_matrix_id:
+        return find_matrix(manifest, default_matrix_id)
+    return dict(matrices[0])
+
+
+def _default_stage_kinds(manifest: dict[str, Any]) -> tuple[list[str], dict[str, Any]]:
+    matrix = _default_matrix(manifest)
+    pipeline_id = str(matrix.get("pipelineId") or "")
+    pipeline = find_pipeline(manifest, pipeline_id) if pipeline_id else {}
+    return pipeline_stage_kinds(pipeline), matrix
+
+
+def _derive_executable_plan(manifest: dict[str, Any]) -> str:
+    stage_kinds, matrix = _default_stage_kinds(manifest)
+    execution_context = dict(matrix.get("executionContext") or {})
+    host_platform = str(execution_context.get("hostPlatform") or "")
+    target_platform = str(execution_context.get("targetPlatform") or "")
+
+    if any("interpreter" in stage_kind or "hot-update" in stage_kind or "patch" in stage_kind for stage_kind in stage_kinds):
+        return ExecutablePlan.HOST_PLUS_HOT_UPDATE_PATCH.value
+    if host_platform and target_platform and host_platform != target_platform:
+        return ExecutablePlan.DEVICE_PACKAGE.value
+    if any(
+        stage_kind.startswith("generated-")
+        or stage_kind in {"analysis-frontend", "build-target", "runtime-observe", "runtime-trace-compare", "runtime-engine-observe", "runtime-engine-trace-compare", "native-runtime-perf", "mobile-native-perf"}
+        for stage_kind in stage_kinds
+    ):
+        return ExecutablePlan.GENERATED_NATIVE.value
+    return ExecutablePlan.MANAGED_HOST.value
+
+
+def _derive_engineering_profile(manifest: dict[str, Any]) -> str:
+    executable_plan = str(manifest.get("executablePlan") or "")
+    if executable_plan == ExecutablePlan.HOST_PLUS_HOT_UPDATE_PATCH.value:
+        return EngineeringProfile.HOT_UPDATE_HOST.value
+    if executable_plan == ExecutablePlan.DEVICE_PACKAGE.value:
+        return EngineeringProfile.DEVICE_PACKAGE.value
+    if executable_plan == ExecutablePlan.GENERATED_NATIVE.value:
+        return EngineeringProfile.NATIVE_EXECUTABLE.value
+    return EngineeringProfile.MANAGED_OUTPUT.value
+
+
+def _normalize_availability(payload: Any) -> dict[str, str]:
+    if payload is None:
+        return {}
+    if not isinstance(payload, dict):
+        raise ValueError("availability must be an object")
+    normalized: dict[str, str] = {}
+    for platform, status in payload.items():
+        platform_name = str(platform).strip()
+        if not platform_name:
+            raise ValueError("availability platform key must be non-empty")
+        normalized[platform_name] = _normalize_enum_value(
+            status,
+            AvailabilityStatus,
+            field_name="availability",
+        )
+    return dict(sorted(normalized.items()))
+
+
+def _derive_availability(manifest: dict[str, Any]) -> dict[str, str]:
+    availability: dict[str, str] = {}
+    for matrix in list(manifest.get("environmentMatrices") or []):
+        execution_context = dict(matrix.get("executionContext") or {})
+        target_platform = str(execution_context.get("targetPlatform") or "").strip()
+        if target_platform:
+            availability[target_platform] = AvailabilityStatus.READY.value
+    return dict(sorted(availability.items()))
+
+
+def _normalize_compatibility(payload: Any) -> dict[str, Any]:
+    if payload is None:
+        return {}
+    if not isinstance(payload, dict):
+        raise ValueError("compatibility must be an object")
+    return dict(payload)
+
+
+def normalize_subject_manifest(
+    manifest: dict[str, Any],
+    *,
+    manifest_path: Path,
+) -> dict[str, Any]:
+    normalized = dict(manifest)
+    _apply_orchestration_profiles(normalized, manifest_path=manifest_path)
+
+    source_model = normalized.get("sourceModel")
+    if source_model is None:
+        normalized["sourceModel"] = _derive_source_model(manifest_path)
+    else:
+        normalized["sourceModel"] = _normalize_enum_value(source_model, SourceModel, field_name="sourceModel")
+
+    dependency_model = normalized.get("dependencyModel")
+    if dependency_model is None:
+        normalized["dependencyModel"] = _derive_dependency_model(manifest_path)
+    else:
+        normalized["dependencyModel"] = _normalize_enum_value(
+            dependency_model,
+            DependencyModel,
+            field_name="dependencyModel",
+        )
+
+    executable_plan = normalized.get("executablePlan")
+    if executable_plan is None:
+        normalized["executablePlan"] = _derive_executable_plan(normalized)
+    else:
+        normalized["executablePlan"] = _normalize_enum_value(
+            executable_plan,
+            ExecutablePlan,
+            field_name="executablePlan",
+        )
+
+    engineering_profile = normalized.get("engineeringProfile")
+    if engineering_profile is None:
+        normalized["engineeringProfile"] = _derive_engineering_profile(normalized)
+    else:
+        normalized["engineeringProfile"] = _normalize_enum_value(
+            engineering_profile,
+            EngineeringProfile,
+            field_name="engineeringProfile",
+        )
+
+    availability = normalized.get("availability")
+    if availability is None:
+        normalized["availability"] = _derive_availability(normalized)
+    else:
+        normalized["availability"] = _normalize_availability(availability)
+
+    normalized["compatibility"] = _normalize_compatibility(normalized.get("compatibility"))
+    return normalized
 
 
 def discover_subject_manifests(repo_root: Path) -> list[Path]:
@@ -54,7 +397,7 @@ def load_subject_manifest_file(manifest_path: Path) -> dict[str, Any]:
     manifest = read_json(manifest_path)
     if not isinstance(manifest, dict):
         raise RuntimeError(f"subject manifest must be an object: {manifest_path}")
-    return manifest
+    return normalize_subject_manifest(manifest, manifest_path=manifest_path)
 
 
 def _sorted_unique(values: list[str]) -> list[str]:
@@ -87,6 +430,13 @@ def manifest_capabilities(manifest: dict[str, Any]) -> dict[str, Any]:
     return {
         "category": str(manifest.get("category") or ""),
         "sourceType": str(dict(manifest.get("source") or {}).get("type") or ""),
+        "sourceModel": str(manifest.get("sourceModel") or ""),
+        "dependencyModel": str(manifest.get("dependencyModel") or ""),
+        "executablePlan": str(manifest.get("executablePlan") or ""),
+        "engineeringProfile": str(manifest.get("engineeringProfile") or ""),
+        "orchestration": dict(manifest.get("orchestration") or {}),
+        "availability": dict(manifest.get("availability") or {}),
+        "compatibility": dict(manifest.get("compatibility") or {}),
         "defaultValidationProfile": str(manifest.get("defaultValidationProfile") or ""),
         "pipelineIds": _sorted_unique(
             [str(pipeline.get("pipelineId") or "") for pipeline in list(manifest.get("executionPipelines") or [])]
@@ -118,6 +468,7 @@ def manifest_capabilities(manifest: dict[str, Any]) -> dict[str, Any]:
         "validationProfileIds": _sorted_unique(list(validation_profiles.keys())),
         "validationFrameworks": _sorted_unique(frameworks),
         "validationDrivers": _sorted_unique(drivers),
+        "testDeclarationMode": declarations_module.test_declaration_mode(manifest).value,
     }
 
 
