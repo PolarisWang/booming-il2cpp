@@ -50,6 +50,7 @@ ANDROID_RUNTIME_ARGUMENT_ENVIRONMENTS = {
 }
 CHAOS_ENTRY_KIND_ARGUMENT_PREFIX = "--chaos-entry-kind="
 CHAOS_ENTRY_SLICE_ARGUMENT_PREFIX = "--chaos-entry-slice="
+CHAOS_SOURCE_ENTRY_ARGUMENT_PREFIX = "--chaos-source-entry="
 VARIANT_MACROS = {
     "CHECK": {
         "codegen": ["CHAOS_VARIANT_CHECK", "CHAOS_VARIANT_NAME=CHECK"],
@@ -144,6 +145,35 @@ def _selection_subject_entry_selection(selection: dict[str, Any]) -> dict[str, i
     }
 
 
+def _selection_declared_entry_selection(selection: dict[str, Any]) -> dict[str, str]:
+    payload = selection.get("entrySelection")
+    if payload is None:
+        return {}
+    if not isinstance(payload, dict):
+        raise RuntimeError("selection.entrySelection must be an object")
+
+    family = str(payload.get("family") or "").strip()
+    if family not in {"declared-unit-test", "declared-benchmark"}:
+        return {}
+
+    normalized = {"family": family}
+    stable_id = str(payload.get("stableId") or "").strip()
+    alias = str(payload.get("alias") or "").strip()
+    if stable_id:
+        normalized["stableId"] = stable_id
+    if alias:
+        normalized["alias"] = alias
+    return normalized
+
+
+def _selection_declared_source_entry(selection: dict[str, Any]) -> str:
+    declared_entry_selection = _selection_declared_entry_selection(selection)
+    if declared_entry_selection.get("family") != "declared-unit-test":
+        return ""
+    source = dict(selection.get("source") or {})
+    return str(source.get("entry") or "").strip()
+
+
 def _selection_managed_runtime_arguments(selection: dict[str, Any]) -> list[str]:
     runtime_arguments = _selection_runtime_arguments(selection)
     subject_entry_selection = _selection_subject_entry_selection(selection)
@@ -154,6 +184,9 @@ def _selection_managed_runtime_arguments(selection: dict[str, Any]) -> list[str]
                 f"{CHAOS_ENTRY_SLICE_ARGUMENT_PREFIX}{subject_entry_selection['entrySlice']}",
             ]
         )
+    declared_source_entry = _selection_declared_source_entry(selection)
+    if declared_source_entry:
+        runtime_arguments.append(f"{CHAOS_SOURCE_ENTRY_ARGUMENT_PREFIX}{declared_source_entry}")
     return runtime_arguments
 
 
@@ -1693,6 +1726,7 @@ def run_managed_runtime_output(*, repo_root: Path, request: dict[str, Any]) -> d
     runtime_root.mkdir(parents=True, exist_ok=True)
     runtime_arguments = _selection_managed_runtime_arguments(selection)
     subject_entry_selection = _selection_subject_entry_selection(selection)
+    declared_entry_selection = _selection_declared_entry_selection(selection)
 
     completed = run_process(["dotnet", str(assembly_path), *runtime_arguments], cwd=repo_root)
     stdout_path = runtime_root / "stdout.log"
@@ -1717,6 +1751,8 @@ def run_managed_runtime_output(*, repo_root: Path, request: dict[str, Any]) -> d
     }
     if subject_entry_selection:
         manifest["subjectEntrySelection"] = subject_entry_selection
+    if declared_entry_selection:
+        manifest["declaredEntrySelection"] = declared_entry_selection
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
 
     if completed.returncode != 0:

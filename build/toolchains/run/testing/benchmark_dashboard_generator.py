@@ -158,6 +158,67 @@ def _merge_case_meta(base: dict[str, Any], incoming: dict[str, Any]) -> dict[str
     return merged
 
 
+def _build_declared_case_lookup(declared_cases: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
+    lookup: dict[str, dict[str, str]] = {
+        "stableId": {},
+        "alias": {},
+        "displayName": {},
+        "workloadEntry": {},
+    }
+    collisions: dict[str, set[str]] = {
+        "alias": set(),
+        "displayName": set(),
+        "workloadEntry": set(),
+    }
+
+    for case_id, case_meta in declared_cases.items():
+        stable_id = str(case_meta.get("stableId") or case_id).strip()
+        if not stable_id:
+            continue
+        lookup["stableId"][stable_id] = stable_id
+        for field in ("alias", "displayName", "workloadEntry"):
+            value = str(case_meta.get(field) or "").strip()
+            if not value:
+                continue
+            existing = lookup[field].get(value)
+            if existing and existing != stable_id:
+                collisions[field].add(value)
+                continue
+            lookup[field][value] = stable_id
+
+    for field, values in collisions.items():
+        for value in values:
+            lookup[field].pop(value, None)
+
+    return lookup
+
+
+def _resolve_declared_case_id(
+    benchmark_case: dict[str, Any],
+    *,
+    declared_cases: dict[str, dict[str, Any]],
+    declared_case_lookup: dict[str, dict[str, str]],
+) -> str | None:
+    stable_id = str(benchmark_case.get("stableId") or benchmark_case.get("alias") or "").strip()
+    if not stable_id:
+        return None
+    if not declared_cases:
+        return stable_id
+
+    direct = declared_case_lookup["stableId"].get(stable_id)
+    if direct:
+        return direct
+
+    for field in ("alias", "displayName", "workloadEntry"):
+        value = str(benchmark_case.get(field) or "").strip()
+        if not value:
+            continue
+        resolved = declared_case_lookup[field].get(value)
+        if resolved:
+            return resolved
+    return None
+
+
 def _summary_benchmark_case_payload(case_payload: dict[str, Any]) -> dict[str, Any]:
     return {
         "caseId": str(case_payload.get("caseId") or case_payload.get("stableId") or ""),
@@ -629,6 +690,7 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
         summary_workload_entry = str(manifest.get("workloadEntry") or "")
         records_path = repo_root / "subjects" / subject_id / "benchmark-records" / "records.jsonl"
         declared_cases = _load_declared_benchmark_cases(repo_root, subject_id)
+        declared_case_lookup = _build_declared_case_lookup(declared_cases)
 
         seen_pairs: set[tuple[str, str]] = set()
         by_device: dict[str, dict[str, Any]] = {}
@@ -642,8 +704,16 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
                 benchmark_case = dict(record.get("benchmarkCase") or {})
                 case_id = str(benchmark_case.get("stableId") or benchmark_case.get("alias") or "").strip()
                 if case_id:
+                    resolved_case_id = _resolve_declared_case_id(
+                        benchmark_case,
+                        declared_cases=declared_cases,
+                        declared_case_lookup=declared_case_lookup,
+                    )
+                    if declared_cases and not resolved_case_id:
+                        continue
+                    canonical_case_id = resolved_case_id or case_id
                     record_case_meta = {
-                        "stableId": case_id,
+                        "stableId": canonical_case_id,
                         "deviceId": device_id,
                         "alias": str(benchmark_case.get("alias") or case_id),
                         "displayName": str(benchmark_case.get("displayName") or benchmark_case.get("alias") or case_id),
@@ -682,7 +752,7 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
                         "invocationCount": int(benchmark_case.get("invocationCount") or 0),
                     }
                     case_payload = case_records_by_device.setdefault(device_id, {}).setdefault(
-                        case_id,
+                        canonical_case_id,
                         {
                             "meta": {},
                             "records": {},
@@ -690,7 +760,7 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
                     )
                     case_payload["meta"] = _merge_case_meta(
                         case_payload["meta"],
-                        _merge_case_meta(dict(declared_cases.get(case_id) or {}), record_case_meta),
+                        _merge_case_meta(record_case_meta, dict(declared_cases.get(canonical_case_id) or {})),
                     )
                     if mode and mode not in case_payload["records"]:
                         case_payload["records"][mode] = record

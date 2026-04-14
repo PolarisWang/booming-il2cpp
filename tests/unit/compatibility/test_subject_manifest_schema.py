@@ -369,9 +369,9 @@ class SubjectManifestSchemaTests(unittest.TestCase):
 
     def test_retained_subject_sources_declare_chaos_attributes_in_csharp_api(self) -> None:
         expected_sources = {
-            "subjects/SolutionCorePack/source/FeatureSlices/CoreRuntimeFeatures/Program.cs": [
+            "subjects/SolutionCorePack/source/FeatureSlices/CoreRuntimeFeatures/AsyncAndThreading/TaskAndValueTaskFlowProof.cs": [
                 "[ChaosUnitTest(",
-                'Alias = "core-runtime-proof"',
+                'Alias = "task-valuetask-flow-proof"',
             ],
             "subjects/SolutionCorePack/source/Benchmarks/CoreRuntimeBenchmarks/PrimitivesAndOps/ArithmeticBenchmark.cs": [
                 "[ChaosBenchmark(",

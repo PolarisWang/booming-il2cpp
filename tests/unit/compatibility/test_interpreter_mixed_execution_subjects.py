@@ -415,6 +415,19 @@ class Phase7InterpreterMixedExecutionTests(unittest.TestCase):
         )
         self.assertEqual("", completed.stdout.strip())
 
+    def test_mixed_execution_host_program_supports_generic_declared_source_entry_selection(self) -> None:
+        host_program_source = MIXED_EXECUTION_HOST_PROGRAM_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "ChaosSourceEntryArguments.TryParse",
+            "MixedExecutionFeaturePack/InterpreterArithmeticProofEntry::Run()",
+            "MixedExecutionFeaturePack/InterpreterLoweringProofEntry::Run()",
+            "MixedExecutionFeaturePack/MixedGenericFlowProofEntry::Run()",
+            "MixedExecutionFeaturePack/MixedExceptionFlowProofEntry::Run()",
+            "MixedExecutionFeaturePack/MixedDelegateFlowProofEntry::Run()",
+        ]:
+            self.assertIn(required_fragment, host_program_source)
+
     def test_native_interpreter_vm_project_scaffold_and_dispatch_loop_exist(self) -> None:
         root_cmake_source = ROOT_CMAKE_PATH.read_text(encoding="utf-8")
         self.assertTrue(NATIVE_INTERPRETER_CMAKE_PATH.is_file(), msg=f"missing native interpreter cmake: {NATIVE_INTERPRETER_CMAKE_PATH}")

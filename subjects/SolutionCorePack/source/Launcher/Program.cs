@@ -7,6 +7,11 @@ internal static class Program
 {
     private static int Main(string[] args)
     {
+        if (ChaosSourceEntryArguments.TryParse(args, out var sourceEntrySelection) && !sourceEntrySelection.IsNone)
+        {
+            return InvokeSourceEntry(sourceEntrySelection.SourceEntry);
+        }
+
         if (!ChaosSubjectEntryArguments.TryParse(args, out var selection) || selection.IsNone)
         {
             return InvokeStaticEntry("CoreRuntimeFeatures", "CoreRuntimeFeatures.ProofEntry", "Run");
@@ -34,14 +39,35 @@ internal static class Program
         };
     }
 
+    private static int InvokeSourceEntry(string sourceEntry)
+    {
+        var assemblySeparator = sourceEntry.IndexOf('/');
+        var memberSeparator = sourceEntry.IndexOf("::", StringComparison.Ordinal);
+        if (assemblySeparator <= 0 || memberSeparator <= assemblySeparator + 1)
+        {
+            throw new ArgumentException($"unsupported SolutionCorePack source entry: '{sourceEntry}'.", nameof(sourceEntry));
+        }
+
+        var assemblyName = sourceEntry[..assemblySeparator];
+        var typeName = sourceEntry[(assemblySeparator + 1)..memberSeparator];
+        var methodSignature = sourceEntry[(memberSeparator + 2)..];
+        var parameterSeparator = methodSignature.IndexOf('(');
+        var methodName = parameterSeparator >= 0 ? methodSignature[..parameterSeparator] : methodSignature;
+        if (assemblyName.Length == 0 || typeName.Length == 0 || methodName.Length == 0)
+        {
+            throw new ArgumentException($"unsupported SolutionCorePack source entry: '{sourceEntry}'.", nameof(sourceEntry));
+        }
+
+        return InvokeStaticEntry(assemblyName, typeName, methodName);
+    }
+
     private static int InvokeStaticEntry(string assemblyName, string typeName, string methodName)
     {
         var assemblyPath = Path.Combine(AppContext.BaseDirectory, $"{assemblyName}.dll");
         var assembly = File.Exists(assemblyPath)
             ? Assembly.LoadFrom(assemblyPath)
             : Assembly.Load(assemblyName);
-        var type = assembly.GetType(typeName, throwOnError: true, ignoreCase: false)
-            ?? throw new InvalidOperationException($"failed to load type '{typeName}'.");
+        var type = ResolveType(assembly, typeName);
         var method = type.GetMethod(
             methodName,
             BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
@@ -55,5 +81,24 @@ internal static class Program
         };
 
         return result is int exitCode ? exitCode : 0;
+    }
+
+    private static Type ResolveType(Assembly assembly, string typeName)
+    {
+        var direct = assembly.GetType(typeName, throwOnError: false, ignoreCase: false);
+        if (direct is not null)
+        {
+            return direct;
+        }
+
+        foreach (var candidate in assembly.GetTypes())
+        {
+            if (string.Equals(candidate.Name, typeName, StringComparison.Ordinal))
+            {
+                return candidate;
+            }
+        }
+
+        throw new InvalidOperationException($"failed to load type '{typeName}'.");
     }
 }

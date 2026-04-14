@@ -20,12 +20,6 @@ internal sealed class FeatureBanner
 
 internal static class ProofEntry
 {
-    [ChaosUnitTest(
-        ChaosUnitCategory.RuntimeContract,
-        Alias = "core-runtime-proof",
-        CapabilityFamily = ChaosCapabilityFamily.RuntimeServices,
-        Capability = ChaosCapabilityItem.LoaderContract,
-        Priority = 1)]
     public static int Run()
     {
         var banner = new FeatureBanner("core runtime features");
@@ -44,25 +38,44 @@ internal static class ProofEntry
     [
         ArrayOpsProofEntry.Run,
         ArrayBoxingProofEntry.Run,
-        AsyncAwaitProofEntry.Run,
         BitwiseOpsProofEntry.Run,
         BranchOpsProofEntry.Run,
+        CustomAttributeLookupProofEntry.Run,
         ConversionOpsProofEntry.Run,
         CrossBoundaryExceptionProofEntry.Run,
+        DelegateCallbackInteropProofEntry.Run,
         DelegateChainProofEntry.Run,
         DelegateProofEntry.Run,
         DispatchProofEntry.Run,
         ExceptionProofEntry.Run,
+        FinallyAndFilterProofEntry.Run,
+        FunctionPointerProofEntry.Run,
+        GcSensitiveFlowProofEntry.Run,
         GenericCollectionProofEntry.Run,
+        GenericSharingBoundaryProofEntry.Run,
         GenericLayoutProofEntry.Run,
         InterfaceDispatchProofEntry.Run,
+        IteratorStateMachineProofEntry.Run,
+        LinkerPreserveContractProofEntry.Run,
         LinkerStrippingProofEntry.Run,
+        LoaderContractProofEntry.Run,
         MarshalingProofEntry.Run,
+        MemberMetadataLookupProofEntry.Run,
+        MonitorAndLockingProofEntry.Run,
+        NativeCallInteropProofEntry.Run,
         NestedExceptionProofEntry.Run,
-        ObjectOpsProofEntry.Run,
         OverflowOpsProofEntry.Run,
         ReflectionInteropClosureEntry.Run,
-        ThreadingProofEntry.Run,
+        RefStructAndStackallocProofEntry.Run,
+        RequiredInstantiationClosureProofEntry.Run,
+        ResourceLifecycleProofEntry.Run,
+        RuntimeHelpersProofEntry.Run,
+        SpanAndMemoryProofEntry.Run,
+        StructMarshalingProofEntry.Run,
+        TaskAndValueTaskFlowProofEntry.Run,
+        TaskSchedulingProofEntry.Run,
+        ThreadLocalStateProofEntry.Run,
+        UnsafePointerProofEntry.Run,
         VTableDispatchProofEntry.Run,
     ];
 }

@@ -264,64 +264,212 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             }
             self.assertEqual(
                 {
-                    "CoreRuntimeFeatures.ProofEntry",
                     "CoreRuntimeFeatures.ArrayOpsProofEntry",
-                    "CoreRuntimeFeatures.AsyncAwaitProofEntry",
                     "CoreRuntimeFeatures.BitwiseOpsProofEntry",
                     "CoreRuntimeFeatures.BranchOpsProofEntry",
                     "CoreRuntimeFeatures.ConversionOpsProofEntry",
-                    "CoreRuntimeFeatures.InterfaceDispatchProofEntry",
-                    "CoreRuntimeFeatures.VTableDispatchProofEntry",
-                    "CoreRuntimeFeatures.LinkerStrippingProofEntry",
-                    "CoreRuntimeFeatures.MarshalingProofEntry",
                     "CoreRuntimeFeatures.CrossBoundaryExceptionProofEntry",
-                    "CoreRuntimeFeatures.GenericCollectionProofEntry",
-                    "CoreRuntimeFeatures.ObjectOpsProofEntry",
-                    "CoreRuntimeFeatures.OverflowOpsProofEntry",
-                    "CoreRuntimeFeatures.ThreadingProofEntry",
-                    "CoreRuntimeFeatures.NestedExceptionProofEntry",
+                    "CoreRuntimeFeatures.CustomAttributeLookupProofEntry",
+                    "CoreRuntimeFeatures.DelegateCallbackInteropProofEntry",
                     "CoreRuntimeFeatures.DelegateChainProofEntry",
-                    "CoreRuntimeFeatures.DispatchProofEntry",
-                    "CoreRuntimeFeatures.GenericLayoutProofEntry",
                     "CoreRuntimeFeatures.ArrayBoxingProofEntry",
                     "CoreRuntimeFeatures.DelegateProofEntry",
                     "CoreRuntimeFeatures.ExceptionProofEntry",
+                    "CoreRuntimeFeatures.FinallyAndFilterProofEntry",
+                    "CoreRuntimeFeatures.FunctionPointerProofEntry",
+                    "CoreRuntimeFeatures.GcSensitiveFlowProofEntry",
+                    "CoreRuntimeFeatures.GenericCollectionProofEntry",
+                    "CoreRuntimeFeatures.GenericSharingBoundaryProofEntry",
+                    "CoreRuntimeFeatures.GenericLayoutProofEntry",
+                    "CoreRuntimeFeatures.InterfaceDispatchProofEntry",
+                    "CoreRuntimeFeatures.IteratorStateMachineProofEntry",
+                    "CoreRuntimeFeatures.LinkerPreserveContractProofEntry",
+                    "CoreRuntimeFeatures.LinkerStrippingProofEntry",
+                    "CoreRuntimeFeatures.LoaderContractProofEntry",
+                    "CoreRuntimeFeatures.MarshalingProofEntry",
+                    "CoreRuntimeFeatures.MemberMetadataLookupProofEntry",
+                    "CoreRuntimeFeatures.MonitorAndLockingProofEntry",
+                    "CoreRuntimeFeatures.NativeCallInteropProofEntry",
+                    "CoreRuntimeFeatures.NestedExceptionProofEntry",
+                    "CoreRuntimeFeatures.RefStructAndStackallocProofEntry",
+                    "CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry",
+                    "CoreRuntimeFeatures.ResourceLifecycleProofEntry",
                     "CoreRuntimeFeatures.ReflectionInteropClosureEntry",
+                    "CoreRuntimeFeatures.RuntimeHelpersProofEntry",
+                    "CoreRuntimeFeatures.SpanAndMemoryProofEntry",
+                    "CoreRuntimeFeatures.StructMarshalingProofEntry",
+                    "CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry",
+                    "CoreRuntimeFeatures.TaskSchedulingProofEntry",
+                    "CoreRuntimeFeatures.ThreadLocalStateProofEntry",
+                    "CoreRuntimeFeatures.UnsafePointerProofEntry",
+                    "CoreRuntimeFeatures.DispatchProofEntry",
+                    "CoreRuntimeFeatures.OverflowOpsProofEntry",
+                    "CoreRuntimeFeatures.VTableDispatchProofEntry",
                 },
                 set(unit_entries),
             )
-            self.assertEqual("core-runtime-proof", unit_entries["CoreRuntimeFeatures.ProofEntry"]["alias"])
             self.assertEqual("array-ops-proof", unit_entries["CoreRuntimeFeatures.ArrayOpsProofEntry"]["alias"])
-            self.assertEqual("async-await-proof", unit_entries["CoreRuntimeFeatures.AsyncAwaitProofEntry"]["alias"])
             self.assertEqual("bitwise-ops-proof", unit_entries["CoreRuntimeFeatures.BitwiseOpsProofEntry"]["alias"])
+            self.assertEqual(
+                "finally-filter-proof",
+                unit_entries["CoreRuntimeFeatures.FinallyAndFilterProofEntry"]["alias"],
+            )
+            self.assertEqual(
+                "gc-sensitive-flow-proof",
+                unit_entries["CoreRuntimeFeatures.GcSensitiveFlowProofEntry"]["alias"],
+            )
             self.assertEqual("interface-dispatch-proof", unit_entries["CoreRuntimeFeatures.InterfaceDispatchProofEntry"]["alias"])
+            self.assertEqual(
+                "iterator-state-machine-proof",
+                unit_entries["CoreRuntimeFeatures.IteratorStateMachineProofEntry"]["alias"],
+            )
             self.assertEqual("vtable-dispatch-proof", unit_entries["CoreRuntimeFeatures.VTableDispatchProofEntry"]["alias"])
             self.assertEqual("linker-stripping-proof", unit_entries["CoreRuntimeFeatures.LinkerStrippingProofEntry"]["alias"])
+            self.assertEqual("loader-contract-proof", unit_entries["CoreRuntimeFeatures.LoaderContractProofEntry"]["alias"])
             self.assertEqual("marshaling-proof", unit_entries["CoreRuntimeFeatures.MarshalingProofEntry"]["alias"])
+            self.assertEqual(
+                "monitor-locking-proof",
+                unit_entries["CoreRuntimeFeatures.MonitorAndLockingProofEntry"]["alias"],
+            )
             self.assertEqual("cross-boundary-exception-proof", unit_entries["CoreRuntimeFeatures.CrossBoundaryExceptionProofEntry"]["alias"])
+            self.assertEqual(
+                "custom-attribute-lookup-proof",
+                unit_entries["CoreRuntimeFeatures.CustomAttributeLookupProofEntry"]["alias"],
+            )
+            self.assertEqual(
+                "delegate-callback-interop-proof",
+                unit_entries["CoreRuntimeFeatures.DelegateCallbackInteropProofEntry"]["alias"],
+            )
+            self.assertEqual("function-pointer-proof", unit_entries["CoreRuntimeFeatures.FunctionPointerProofEntry"]["alias"])
             self.assertEqual("generic-collection-proof", unit_entries["CoreRuntimeFeatures.GenericCollectionProofEntry"]["alias"])
-            self.assertEqual("threading-proof", unit_entries["CoreRuntimeFeatures.ThreadingProofEntry"]["alias"])
+            self.assertEqual(
+                "generic-sharing-boundary-proof",
+                unit_entries["CoreRuntimeFeatures.GenericSharingBoundaryProofEntry"]["alias"],
+            )
+            self.assertEqual(
+                "linker-preserve-contract-proof",
+                unit_entries["CoreRuntimeFeatures.LinkerPreserveContractProofEntry"]["alias"],
+            )
             self.assertEqual("nested-exception-proof", unit_entries["CoreRuntimeFeatures.NestedExceptionProofEntry"]["alias"])
+            self.assertEqual(
+                "native-call-interop-proof",
+                unit_entries["CoreRuntimeFeatures.NativeCallInteropProofEntry"]["alias"],
+            )
+            self.assertEqual(
+                "member-metadata-lookup-proof",
+                unit_entries["CoreRuntimeFeatures.MemberMetadataLookupProofEntry"]["alias"],
+            )
+            self.assertEqual(
+                "ref-struct-stackalloc-proof",
+                unit_entries["CoreRuntimeFeatures.RefStructAndStackallocProofEntry"]["alias"],
+            )
+            self.assertEqual(
+                "required-instantiation-closure-proof",
+                unit_entries["CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry"]["alias"],
+            )
+            self.assertEqual(
+                "resource-lifecycle-proof",
+                unit_entries["CoreRuntimeFeatures.ResourceLifecycleProofEntry"]["alias"],
+            )
+            self.assertEqual("runtime-helpers-proof", unit_entries["CoreRuntimeFeatures.RuntimeHelpersProofEntry"]["alias"])
+            self.assertEqual("span-memory-proof", unit_entries["CoreRuntimeFeatures.SpanAndMemoryProofEntry"]["alias"])
+            self.assertEqual("struct-marshaling-proof", unit_entries["CoreRuntimeFeatures.StructMarshalingProofEntry"]["alias"])
+            self.assertEqual(
+                "task-valuetask-flow-proof",
+                unit_entries["CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry"]["alias"],
+            )
+            self.assertEqual("task-scheduling-proof", unit_entries["CoreRuntimeFeatures.TaskSchedulingProofEntry"]["alias"])
+            self.assertEqual("thread-local-state-proof", unit_entries["CoreRuntimeFeatures.ThreadLocalStateProofEntry"]["alias"])
+            self.assertEqual("unsafe-pointer-proof", unit_entries["CoreRuntimeFeatures.UnsafePointerProofEntry"]["alias"])
             self.assertEqual("delegate-chain-proof", unit_entries["CoreRuntimeFeatures.DelegateChainProofEntry"]["alias"])
             self.assertEqual("dispatch-proof", unit_entries["CoreRuntimeFeatures.DispatchProofEntry"]["alias"])
             self.assertTrue(all(entry["capabilityFamily"] > 0 for entry in unit_entries.values()))
             self.assertTrue(all(entry["capabilityItem"] > 0 for entry in unit_entries.values()))
             self.assertEqual(1, unit_entries["CoreRuntimeFeatures.ArrayOpsProofEntry"]["capabilityFamily"])
             self.assertEqual(6, unit_entries["CoreRuntimeFeatures.ArrayOpsProofEntry"]["capabilityItem"])
-            self.assertEqual(3, unit_entries["CoreRuntimeFeatures.AsyncAwaitProofEntry"]["capabilityFamily"])
-            self.assertEqual(14, unit_entries["CoreRuntimeFeatures.AsyncAwaitProofEntry"]["capabilityItem"])
+            self.assertEqual(3, unit_entries["CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry"]["capabilityFamily"])
+            self.assertEqual(15, unit_entries["CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry"]["capabilityItem"])
+            self.assertEqual(3, unit_entries["CoreRuntimeFeatures.IteratorStateMachineProofEntry"]["capabilityFamily"])
+            self.assertEqual(16, unit_entries["CoreRuntimeFeatures.IteratorStateMachineProofEntry"]["capabilityItem"])
+            self.assertEqual(5, unit_entries["CoreRuntimeFeatures.FinallyAndFilterProofEntry"]["capabilityFamily"])
+            self.assertEqual(29, unit_entries["CoreRuntimeFeatures.FinallyAndFilterProofEntry"]["capabilityItem"])
             self.assertEqual(2, unit_entries["CoreRuntimeFeatures.GenericCollectionProofEntry"]["capabilityFamily"])
             self.assertEqual(12, unit_entries["CoreRuntimeFeatures.GenericCollectionProofEntry"]["capabilityItem"])
-            self.assertEqual(8, unit_entries["CoreRuntimeFeatures.ThreadingProofEntry"]["capabilityFamily"])
-            self.assertEqual(35, unit_entries["CoreRuntimeFeatures.ThreadingProofEntry"]["capabilityItem"])
+            self.assertEqual(6, unit_entries["CoreRuntimeFeatures.CustomAttributeLookupProofEntry"]["capabilityFamily"])
+            self.assertEqual(21, unit_entries["CoreRuntimeFeatures.CustomAttributeLookupProofEntry"]["capabilityItem"])
+            self.assertEqual(7, unit_entries["CoreRuntimeFeatures.DelegateCallbackInteropProofEntry"]["capabilityFamily"])
+            self.assertEqual(34, unit_entries["CoreRuntimeFeatures.DelegateCallbackInteropProofEntry"]["capabilityItem"])
+            self.assertEqual(10, unit_entries["CoreRuntimeFeatures.FunctionPointerProofEntry"]["capabilityFamily"])
+            self.assertEqual(46, unit_entries["CoreRuntimeFeatures.FunctionPointerProofEntry"]["capabilityItem"])
+            self.assertEqual(12, unit_entries["CoreRuntimeFeatures.GenericSharingBoundaryProofEntry"]["capabilityFamily"])
+            self.assertEqual(52, unit_entries["CoreRuntimeFeatures.GenericSharingBoundaryProofEntry"]["capabilityItem"])
+            self.assertEqual(12, unit_entries["CoreRuntimeFeatures.LinkerPreserveContractProofEntry"]["capabilityFamily"])
+            self.assertEqual(25, unit_entries["CoreRuntimeFeatures.LinkerPreserveContractProofEntry"]["capabilityItem"])
+            self.assertEqual(6, unit_entries["CoreRuntimeFeatures.MemberMetadataLookupProofEntry"]["capabilityFamily"])
+            self.assertEqual(22, unit_entries["CoreRuntimeFeatures.MemberMetadataLookupProofEntry"]["capabilityItem"])
+            self.assertEqual(7, unit_entries["CoreRuntimeFeatures.NativeCallInteropProofEntry"]["capabilityFamily"])
+            self.assertEqual(31, unit_entries["CoreRuntimeFeatures.NativeCallInteropProofEntry"]["capabilityItem"])
+            self.assertEqual(10, unit_entries["CoreRuntimeFeatures.RefStructAndStackallocProofEntry"]["capabilityFamily"])
+            self.assertEqual(44, unit_entries["CoreRuntimeFeatures.RefStructAndStackallocProofEntry"]["capabilityItem"])
+            self.assertEqual(12, unit_entries["CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry"]["capabilityFamily"])
+            self.assertEqual(51, unit_entries["CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry"]["capabilityItem"])
+            self.assertEqual(8, unit_entries["CoreRuntimeFeatures.TaskSchedulingProofEntry"]["capabilityFamily"])
+            self.assertEqual(36, unit_entries["CoreRuntimeFeatures.TaskSchedulingProofEntry"]["capabilityItem"])
+            self.assertEqual(8, unit_entries["CoreRuntimeFeatures.MonitorAndLockingProofEntry"]["capabilityFamily"])
+            self.assertEqual(37, unit_entries["CoreRuntimeFeatures.MonitorAndLockingProofEntry"]["capabilityItem"])
+            self.assertEqual(8, unit_entries["CoreRuntimeFeatures.ThreadLocalStateProofEntry"]["capabilityFamily"])
+            self.assertEqual(38, unit_entries["CoreRuntimeFeatures.ThreadLocalStateProofEntry"]["capabilityItem"])
+            self.assertEqual(9, unit_entries["CoreRuntimeFeatures.RuntimeHelpersProofEntry"]["capabilityFamily"])
+            self.assertEqual(39, unit_entries["CoreRuntimeFeatures.RuntimeHelpersProofEntry"]["capabilityItem"])
+            self.assertEqual(9, unit_entries["CoreRuntimeFeatures.GcSensitiveFlowProofEntry"]["capabilityFamily"])
+            self.assertEqual(40, unit_entries["CoreRuntimeFeatures.GcSensitiveFlowProofEntry"]["capabilityItem"])
+            self.assertEqual(9, unit_entries["CoreRuntimeFeatures.ResourceLifecycleProofEntry"]["capabilityFamily"])
+            self.assertEqual(41, unit_entries["CoreRuntimeFeatures.ResourceLifecycleProofEntry"]["capabilityItem"])
+            self.assertEqual(9, unit_entries["CoreRuntimeFeatures.LoaderContractProofEntry"]["capabilityFamily"])
+            self.assertEqual(42, unit_entries["CoreRuntimeFeatures.LoaderContractProofEntry"]["capabilityItem"])
             self.assertEqual(6, unit_entries["CoreRuntimeFeatures.LinkerStrippingProofEntry"]["capabilityFamily"])
             self.assertEqual(26, unit_entries["CoreRuntimeFeatures.LinkerStrippingProofEntry"]["capabilityItem"])
+            self.assertEqual(10, unit_entries["CoreRuntimeFeatures.SpanAndMemoryProofEntry"]["capabilityFamily"])
+            self.assertEqual(43, unit_entries["CoreRuntimeFeatures.SpanAndMemoryProofEntry"]["capabilityItem"])
+            self.assertEqual(7, unit_entries["CoreRuntimeFeatures.StructMarshalingProofEntry"]["capabilityFamily"])
+            self.assertEqual(33, unit_entries["CoreRuntimeFeatures.StructMarshalingProofEntry"]["capabilityItem"])
+            self.assertEqual(10, unit_entries["CoreRuntimeFeatures.UnsafePointerProofEntry"]["capabilityFamily"])
+            self.assertEqual(45, unit_entries["CoreRuntimeFeatures.UnsafePointerProofEntry"]["capabilityItem"])
             self.assertEqual(1, unit_entries["CoreRuntimeFeatures.GenericCollectionProofEntry"]["requires"])
+            self.assertEqual(2, unit_entries["CoreRuntimeFeatures.CustomAttributeLookupProofEntry"]["requires"])
             self.assertEqual(8, unit_entries["CoreRuntimeFeatures.CrossBoundaryExceptionProofEntry"]["requires"])
+            self.assertEqual(20, unit_entries["CoreRuntimeFeatures.DelegateCallbackInteropProofEntry"]["requires"])
+            self.assertEqual(8, unit_entries["CoreRuntimeFeatures.FinallyAndFilterProofEntry"]["requires"])
             self.assertEqual(4, unit_entries["CoreRuntimeFeatures.DelegateChainProofEntry"]["requires"])
             self.assertEqual(4, unit_entries["CoreRuntimeFeatures.DelegateProofEntry"]["requires"])
             self.assertEqual(8, unit_entries["CoreRuntimeFeatures.ExceptionProofEntry"]["requires"])
+            self.assertEqual(2048, unit_entries["CoreRuntimeFeatures.FunctionPointerProofEntry"]["requires"])
+            self.assertEqual(8193, unit_entries["CoreRuntimeFeatures.GenericSharingBoundaryProofEntry"]["requires"])
+            self.assertEqual(4098, unit_entries["CoreRuntimeFeatures.LinkerPreserveContractProofEntry"]["requires"])
+            self.assertEqual(2, unit_entries["CoreRuntimeFeatures.MemberMetadataLookupProofEntry"]["requires"])
+            self.assertEqual(16, unit_entries["CoreRuntimeFeatures.NativeCallInteropProofEntry"]["requires"])
+            self.assertEqual(16896, unit_entries["CoreRuntimeFeatures.RefStructAndStackallocProofEntry"]["requires"])
             self.assertEqual(18, unit_entries["CoreRuntimeFeatures.ReflectionInteropClosureEntry"]["requires"])
+            self.assertEqual(1, unit_entries["CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry"]["requires"])
+            self.assertEqual(512, unit_entries["CoreRuntimeFeatures.SpanAndMemoryProofEntry"]["requires"])
+            self.assertEqual(16, unit_entries["CoreRuntimeFeatures.StructMarshalingProofEntry"]["requires"])
+            self.assertEqual(64, unit_entries["CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry"]["requires"])
+            self.assertEqual(384, unit_entries["CoreRuntimeFeatures.TaskSchedulingProofEntry"]["requires"])
+            self.assertEqual(256, unit_entries["CoreRuntimeFeatures.MonitorAndLockingProofEntry"]["requires"])
+            self.assertEqual(128, unit_entries["CoreRuntimeFeatures.ThreadLocalStateProofEntry"]["requires"])
+            self.assertEqual(1024, unit_entries["CoreRuntimeFeatures.UnsafePointerProofEntry"]["requires"])
+            self.assertEqual(5, unit_entries["CoreRuntimeFeatures.CustomAttributeLookupProofEntry"]["archetype"])
+            self.assertEqual(4, unit_entries["CoreRuntimeFeatures.DelegateCallbackInteropProofEntry"]["archetype"])
+            self.assertEqual(5, unit_entries["CoreRuntimeFeatures.FunctionPointerProofEntry"]["archetype"])
+            self.assertEqual(6, unit_entries["CoreRuntimeFeatures.GenericSharingBoundaryProofEntry"]["archetype"])
+            self.assertEqual(5, unit_entries["CoreRuntimeFeatures.LinkerPreserveContractProofEntry"]["archetype"])
+            self.assertEqual(5, unit_entries["CoreRuntimeFeatures.MemberMetadataLookupProofEntry"]["archetype"])
+            self.assertEqual(4, unit_entries["CoreRuntimeFeatures.NativeCallInteropProofEntry"]["archetype"])
+            self.assertEqual(5, unit_entries["CoreRuntimeFeatures.RefStructAndStackallocProofEntry"]["archetype"])
+            self.assertEqual(6, unit_entries["CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry"]["archetype"])
+            self.assertEqual(5, unit_entries["CoreRuntimeFeatures.SpanAndMemoryProofEntry"]["archetype"])
+            self.assertEqual(4, unit_entries["CoreRuntimeFeatures.StructMarshalingProofEntry"]["archetype"])
+            self.assertEqual(5, unit_entries["CoreRuntimeFeatures.UnsafePointerProofEntry"]["archetype"])
             self.assertTrue(all(entry["evidence"] == 0 for entry in unit_entries.values()))
         finally:
             shutil.rmtree(build_root, ignore_errors=True)
@@ -371,30 +519,141 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                 {
                     "CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry",
                     "CoreRuntimeBenchmarks.AllocationBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.DelegateCallbackInteropBenchmarkEntry",
                     "CoreRuntimeBenchmarks.DispatchBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry",
                     "CoreRuntimeBenchmarks.GenericBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.NativeCallInteropBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.SpanAndMemoryBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.StringAndUtf8MarshalingBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.StructMarshalingBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.TaskSchedulingBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.UnsafePointerBenchmarkEntry",
                 },
                 set(benchmark_entries),
             )
             self.assertEqual("arithmetic-bench", benchmark_entries["CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry"]["alias"])
             self.assertEqual("allocation-bench", benchmark_entries["CoreRuntimeBenchmarks.AllocationBenchmarkEntry"]["alias"])
+            self.assertEqual(
+                "delegate-callback-interop-bench",
+                benchmark_entries["CoreRuntimeBenchmarks.DelegateCallbackInteropBenchmarkEntry"]["alias"],
+            )
             self.assertEqual("dispatch-bench", benchmark_entries["CoreRuntimeBenchmarks.DispatchBenchmarkEntry"]["alias"])
+            self.assertEqual(
+                "function-pointer-bench",
+                benchmark_entries["CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry"]["alias"],
+            )
             self.assertEqual("generic-bench", benchmark_entries["CoreRuntimeBenchmarks.GenericBenchmarkEntry"]["alias"])
+            self.assertEqual(
+                "generic-sharing-boundary-bench",
+                benchmark_entries["CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry"]["alias"],
+            )
+            self.assertEqual(
+                "member-metadata-lookup-bench",
+                benchmark_entries["CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry"]["alias"],
+            )
+            self.assertEqual(
+                "monitor-locking-bench",
+                benchmark_entries["CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry"]["alias"],
+            )
+            self.assertEqual(
+                "native-call-interop-bench",
+                benchmark_entries["CoreRuntimeBenchmarks.NativeCallInteropBenchmarkEntry"]["alias"],
+            )
+            self.assertEqual(
+                "required-instantiation-closure-bench",
+                benchmark_entries["CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry"]["alias"],
+            )
+            self.assertEqual("span-memory-bench", benchmark_entries["CoreRuntimeBenchmarks.SpanAndMemoryBenchmarkEntry"]["alias"])
+            self.assertEqual(
+                "string-utf8-marshaling-bench",
+                benchmark_entries["CoreRuntimeBenchmarks.StringAndUtf8MarshalingBenchmarkEntry"]["alias"],
+            )
+            self.assertEqual(
+                "struct-marshaling-bench",
+                benchmark_entries["CoreRuntimeBenchmarks.StructMarshalingBenchmarkEntry"]["alias"],
+            )
+            self.assertEqual(
+                "task-valuetask-flow-bench",
+                benchmark_entries["CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry"]["alias"],
+            )
+            self.assertEqual(
+                "task-scheduling-bench",
+                benchmark_entries["CoreRuntimeBenchmarks.TaskSchedulingBenchmarkEntry"]["alias"],
+            )
+            self.assertEqual("unsafe-pointer-bench", benchmark_entries["CoreRuntimeBenchmarks.UnsafePointerBenchmarkEntry"]["alias"])
             self.assertTrue(all(entry["capabilityFamily"] > 0 for entry in benchmark_entries.values()))
             self.assertTrue(all(entry["capabilityItem"] > 0 for entry in benchmark_entries.values()))
             self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry"]["modes"])
             self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.AllocationBenchmarkEntry"]["modes"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.DelegateCallbackInteropBenchmarkEntry"]["modes"])
             self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.DispatchBenchmarkEntry"]["modes"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry"]["modes"])
             self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.GenericBenchmarkEntry"]["modes"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry"]["modes"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry"]["modes"])
+            self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry"]["modes"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.NativeCallInteropBenchmarkEntry"]["modes"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry"]["modes"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.SpanAndMemoryBenchmarkEntry"]["modes"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.StringAndUtf8MarshalingBenchmarkEntry"]["modes"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.StructMarshalingBenchmarkEntry"]["modes"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry"]["modes"])
+            self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.TaskSchedulingBenchmarkEntry"]["modes"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.UnsafePointerBenchmarkEntry"]["modes"])
             self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry"]["category"])
             self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.AllocationBenchmarkEntry"]["category"])
             self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry"]["capabilityFamily"])
             self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(7, benchmark_entries["CoreRuntimeBenchmarks.DelegateCallbackInteropBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(34, benchmark_entries["CoreRuntimeBenchmarks.DelegateCallbackInteropBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(10, benchmark_entries["CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(46, benchmark_entries["CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry"]["capabilityItem"])
             self.assertEqual(2, benchmark_entries["CoreRuntimeBenchmarks.GenericBenchmarkEntry"]["capabilityFamily"])
             self.assertEqual(12, benchmark_entries["CoreRuntimeBenchmarks.GenericBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(12, benchmark_entries["CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(52, benchmark_entries["CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(6, benchmark_entries["CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(22, benchmark_entries["CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(8, benchmark_entries["CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(37, benchmark_entries["CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(7, benchmark_entries["CoreRuntimeBenchmarks.NativeCallInteropBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(31, benchmark_entries["CoreRuntimeBenchmarks.NativeCallInteropBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(12, benchmark_entries["CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(51, benchmark_entries["CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(10, benchmark_entries["CoreRuntimeBenchmarks.SpanAndMemoryBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(43, benchmark_entries["CoreRuntimeBenchmarks.SpanAndMemoryBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(7, benchmark_entries["CoreRuntimeBenchmarks.StringAndUtf8MarshalingBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(32, benchmark_entries["CoreRuntimeBenchmarks.StringAndUtf8MarshalingBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(7, benchmark_entries["CoreRuntimeBenchmarks.StructMarshalingBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(33, benchmark_entries["CoreRuntimeBenchmarks.StructMarshalingBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(15, benchmark_entries["CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(8, benchmark_entries["CoreRuntimeBenchmarks.TaskSchedulingBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(36, benchmark_entries["CoreRuntimeBenchmarks.TaskSchedulingBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(10, benchmark_entries["CoreRuntimeBenchmarks.UnsafePointerBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(45, benchmark_entries["CoreRuntimeBenchmarks.UnsafePointerBenchmarkEntry"]["capabilityItem"])
             self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry"]["metrics"])
             self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.AllocationBenchmarkEntry"]["metrics"])
+            self.assertEqual(20, benchmark_entries["CoreRuntimeBenchmarks.DelegateCallbackInteropBenchmarkEntry"]["requires"])
+            self.assertEqual(2048, benchmark_entries["CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry"]["requires"])
             self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.GenericBenchmarkEntry"]["requires"])
+            self.assertEqual(8193, benchmark_entries["CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry"]["requires"])
+            self.assertEqual(2, benchmark_entries["CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry"]["requires"])
+            self.assertEqual(256, benchmark_entries["CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry"]["requires"])
+            self.assertEqual(16, benchmark_entries["CoreRuntimeBenchmarks.NativeCallInteropBenchmarkEntry"]["requires"])
+            self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry"]["requires"])
+            self.assertEqual(512, benchmark_entries["CoreRuntimeBenchmarks.SpanAndMemoryBenchmarkEntry"]["requires"])
+            self.assertEqual(16, benchmark_entries["CoreRuntimeBenchmarks.StringAndUtf8MarshalingBenchmarkEntry"]["requires"])
+            self.assertEqual(16, benchmark_entries["CoreRuntimeBenchmarks.StructMarshalingBenchmarkEntry"]["requires"])
+            self.assertEqual(64, benchmark_entries["CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry"]["requires"])
+            self.assertEqual(384, benchmark_entries["CoreRuntimeBenchmarks.TaskSchedulingBenchmarkEntry"]["requires"])
+            self.assertEqual(1024, benchmark_entries["CoreRuntimeBenchmarks.UnsafePointerBenchmarkEntry"]["requires"])
         finally:
             shutil.rmtree(build_root, ignore_errors=True)
 

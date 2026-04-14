@@ -37,8 +37,21 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         allocation_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "MemoryAndAllocation" / "AllocationBenchmark.cs"
         dispatch_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "ObjectModelAndDispatch" / "DispatchBenchmark.cs"
         generic_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "GenericsAndCollections" / "GenericBenchmark.cs"
+        task_flow_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "AsyncAndIterators" / "TaskAndValueTaskFlowBenchmark.cs"
+        task_scheduling_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "ThreadingAndSynchronization" / "TaskSchedulingBenchmark.cs"
+        monitor_locking_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "ThreadingAndSynchronization" / "MonitorAndLockingBenchmark.cs"
 
-        for path in [manifest_path, project_path, arithmetic_path, allocation_path, dispatch_path, generic_path]:
+        for path in [
+            manifest_path,
+            project_path,
+            arithmetic_path,
+            allocation_path,
+            dispatch_path,
+            generic_path,
+            task_flow_path,
+            task_scheduling_path,
+            monitor_locking_path,
+        ]:
             self.assertTrue(path.is_file(), msg=f"missing solution core perf asset: {path}")
 
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -46,6 +59,9 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         allocation_source = allocation_path.read_text(encoding="utf-8")
         dispatch_source = dispatch_path.read_text(encoding="utf-8")
         generic_source = generic_path.read_text(encoding="utf-8")
+        task_flow_source = task_flow_path.read_text(encoding="utf-8")
+        task_scheduling_source = task_scheduling_path.read_text(encoding="utf-8")
+        monitor_locking_source = monitor_locking_path.read_text(encoding="utf-8")
 
         self.assertEqual("SolutionCorePack", manifest["subjectId"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
@@ -90,6 +106,24 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn("Dictionary<string, int>", generic_source)
         self.assertIn("public static int RunWorkload()", generic_source)
         self.assertNotIn("public static long RunWorkload()", generic_source)
+
+        self.assertIn("ChaosBenchmark(", task_flow_source)
+        self.assertIn('Alias = "task-valuetask-flow-bench"', task_flow_source)
+        self.assertIn("ChaosCapabilityItem.TaskAndValueTaskFlow", task_flow_source)
+        self.assertIn("ChaosRuntimeFeature.AsyncStateMachine", task_flow_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native", task_flow_source)
+
+        self.assertIn("ChaosBenchmark(", task_scheduling_source)
+        self.assertIn('Alias = "task-scheduling-bench"', task_scheduling_source)
+        self.assertIn("ChaosCapabilityItem.TaskScheduling", task_scheduling_source)
+        self.assertIn("ChaosRuntimeFeature.Threading | ChaosRuntimeFeature.Synchronization", task_scheduling_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", task_scheduling_source)
+
+        self.assertIn("ChaosBenchmark(", monitor_locking_source)
+        self.assertIn('Alias = "monitor-locking-bench"', monitor_locking_source)
+        self.assertIn("ChaosCapabilityItem.MonitorAndLocking", monitor_locking_source)
+        self.assertIn("ChaosRuntimeFeature.Synchronization", monitor_locking_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", monitor_locking_source)
 
     def test_managed_benchmark_subjects_keep_perf_harness_external_and_solution_core_pack_adds_managed_baseline(self) -> None:
         self.assertTrue((REPO_ROOT / SHARED_PERF_PROJECT_PATH).is_file())

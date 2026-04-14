@@ -15,6 +15,7 @@ REFERENCE_BUNDLE_ROOT = REPO_ROOT / "assets" / "reference-bundles" / "dotnet-fou
 PROOF_HOST_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "main.cpp"
 PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
 PROOF_RUN_SCRIPT_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "RunNativeReferenceProof.cmake"
+LAUNCHER_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Launcher" / "Program.cs"
 
 
 class SolutionCorePackSubjectTests(unittest.TestCase):
@@ -116,6 +117,17 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         self.assertIn("RunNativeReference", proof_host_text)
         self.assertIn("chaos_subject_reference_proof", proof_cmake_text)
         self.assertIn("CHAOS_SUBJECT_GENERATED_SOURCE", proof_cmake_text)
+
+    def test_solution_core_launcher_supports_generic_declared_source_entry_selection(self) -> None:
+        launcher_source = LAUNCHER_PROGRAM_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "ChaosSourceEntryArguments.TryParse",
+            "return InvokeSourceEntry(sourceEntrySelection.SourceEntry);",
+            "return InvokeStaticEntry(assemblyName, typeName, methodName);",
+            "assembly.GetTypes()",
+        ]:
+            self.assertIn(required_fragment, launcher_source)
 
 
 if __name__ == "__main__":

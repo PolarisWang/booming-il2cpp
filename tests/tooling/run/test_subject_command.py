@@ -71,6 +71,61 @@ def make_subject_registry_index(
     )
 
 
+def make_declared_registry_index(
+    test_module,
+    *,
+    subject_id: str,
+    object_type: str,
+    stable_id: str,
+    alias: str,
+    source_entry: str,
+    workload_entry: str = "",
+    default_goal_id: str = "correctness.dev",
+    matrix_id: str = "windows-native-check",
+):
+    subject_index = make_subject_registry_index(
+        test_module,
+        subject_id=subject_id,
+        default_goal_id=default_goal_id,
+        matrix_id=matrix_id,
+    )
+    declared_object = {
+        "id": f"{object_type}/{stable_id}",
+        "type": object_type,
+        "displayName": alias,
+        "subjectId": subject_id,
+        "defaultGoalId": default_goal_id,
+        "defaultMatrixId": matrix_id,
+        "goalIds": [default_goal_id],
+        "matrixIds": [matrix_id],
+        "supportedHosts": ["windows"],
+        "level": "subject",
+        "primaryModuleId": None,
+        "moduleIds": [],
+        "subsystemIds": [],
+        "docRefs": [],
+        "canonicalCommand": f"run test {object_type} --id {object_type}/{stable_id}",
+        "stableId": stable_id,
+        "alias": alias,
+        "sourceEntry": source_entry,
+        "workloadEntry": workload_entry,
+    }
+    return test_module.registry_module.RegistryIndex(
+        host_platform="windows",
+        suites=[],
+        subjects=subject_index.subjects,
+        engineering_validations=[],
+        engineering_workloads=[],
+        declared_unit_tests=[declared_object] if object_type == "declared-unit-test" else [],
+        declared_benchmarks=[declared_object] if object_type == "declared-benchmark" else [],
+        module_verifications=[],
+        system_scenarios=[],
+        pipelines=[],
+        errors=[],
+        warnings=[],
+    )
+
+
 def make_subject_plan(
     *,
     subject_id: str,
@@ -768,6 +823,171 @@ class SubjectCommandTests(unittest.TestCase):
             self.assertEqual("perf-profile", observed_selection["validationProfileId"])
             self.assertEqual("perf", observed_selection["validationKind"])
             self.assertEqual("", observed_selection["variant"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_declared_unit_test_dispatch_passes_source_entry_selection_to_subject_planner(self) -> None:
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_declared_unit_alias")
+        repo_root = make_temp_repo_root("subject-command", "declared-unit-alias")
+        manifest: dict[str, Any] = {}
+        subject_id = "SolutionCorePack"
+        stable_id = "solution-core-proof"
+        alias = "solution-core-proof"
+        source_entry = "SolutionCorePack/Launcher.Program::RunProof()"
+        fixed_run_id = "chaos-run-declared-unit-alias"
+        registry_index = make_declared_registry_index(
+            test_module,
+            subject_id=subject_id,
+            object_type="declared-unit-test",
+            stable_id=stable_id,
+            alias=alias,
+            source_entry=source_entry,
+            workload_entry="should-be-cleared-for-unit-tests",
+        )
+        plan = make_subject_plan(
+            subject_id=subject_id,
+            run_id=fixed_run_id,
+            matrix_id="windows-native-check",
+            goal_id="correctness.dev",
+            stage_kind="runtime-observe",
+        )
+        execution_result = build_execution_result(
+            plan,
+            stage_kind="runtime-observe",
+            duration_ms=3,
+            fingerprint="declared-unit-alias-fingerprint",
+        )
+
+        try:
+            with patch.object(test_module, "_scan_registry", return_value=registry_index):
+                with patch.object(test_module.subject_planner_module, "build_plan", return_value=plan) as build_plan_mock:
+                    with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
+                        with patch.object(
+                            test_module.subject_executor_module,
+                            "execute_plan",
+                            return_value=execution_result,
+                        ):
+                            with patch.object(
+                                test_module.subject_validations_module,
+                                "run_subject_validations",
+                                side_effect=empty_validation_outcome,
+                            ):
+                                result = test_module.handle(
+                                    {
+                                        "id": "declared-unit-test-alias",
+                                        "kind": "registry-object-alias",
+                                        "registry_object_kind": "declared-unit-test",
+                                        "registry_object_id": f"declared-unit-test/{stable_id}",
+                                    },
+                                    repo_root,
+                                    "windows",
+                                    f"test declared-unit-test --id declared-unit-test/{stable_id}",
+                                    manifest,
+                                )
+
+            self.assertEqual("ok", result.status)
+            self.assertEqual(f"declared-unit-test/{stable_id}", result.target)
+            self.assertEqual(
+                f"declared-unit-test/{stable_id}",
+                result.payload["selectedObject"]["id"],
+            )
+            build_plan_mock.assert_called_once()
+            self.assertEqual(repo_root, build_plan_mock.call_args.args[0])
+            self.assertEqual(subject_id, build_plan_mock.call_args.args[1])
+            self.assertEqual(source_entry, build_plan_mock.call_args.kwargs["source_entry"])
+            self.assertIsNone(build_plan_mock.call_args.kwargs["workload_entry"])
+            self.assertEqual(
+                {
+                    "family": "declared-unit-test",
+                    "stableId": stable_id,
+                    "alias": alias,
+                },
+                build_plan_mock.call_args.kwargs["entry_selection"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_declared_benchmark_dispatch_passes_workload_entry_selection_to_subject_planner(self) -> None:
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_declared_benchmark_alias")
+        repo_root = make_temp_repo_root("subject-command", "declared-benchmark-alias")
+        manifest: dict[str, Any] = {}
+        subject_id = "SolutionCorePack"
+        stable_id = "solution-core-benchmark"
+        alias = "solution-core-benchmark"
+        source_entry = "SolutionCoreBenchmarks/DispatchBenchmarks::Proof()"
+        workload_entry = "SolutionCoreBenchmarks/DispatchBenchmarks::Workload()"
+        fixed_run_id = "chaos-run-declared-benchmark-alias"
+        registry_index = make_declared_registry_index(
+            test_module,
+            subject_id=subject_id,
+            object_type="declared-benchmark",
+            stable_id=stable_id,
+            alias=alias,
+            source_entry=source_entry,
+            workload_entry=workload_entry,
+            default_goal_id="perf.release",
+            matrix_id="windows-native-perf",
+        )
+        plan = make_subject_plan(
+            subject_id=subject_id,
+            run_id=fixed_run_id,
+            matrix_id="windows-native-perf",
+            goal_id="perf.release",
+            stage_kind="runtime-observe",
+        )
+        execution_result = build_execution_result(
+            plan,
+            stage_kind="runtime-observe",
+            duration_ms=4,
+            fingerprint="declared-benchmark-alias-fingerprint",
+        )
+
+        try:
+            with patch.object(test_module, "_scan_registry", return_value=registry_index):
+                with patch.object(test_module.subject_planner_module, "build_plan", return_value=plan) as build_plan_mock:
+                    with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
+                        with patch.object(
+                            test_module.subject_executor_module,
+                            "execute_plan",
+                            return_value=execution_result,
+                        ):
+                            with patch.object(
+                                test_module.subject_validations_module,
+                                "run_subject_validations",
+                                side_effect=empty_validation_outcome,
+                            ):
+                                result = test_module.handle(
+                                    {
+                                        "id": "declared-benchmark-alias",
+                                        "kind": "registry-object-alias",
+                                        "registry_object_kind": "declared-benchmark",
+                                        "registry_object_id": f"declared-benchmark/{stable_id}",
+                                    },
+                                    repo_root,
+                                    "windows",
+                                    f"test declared-benchmark --id declared-benchmark/{stable_id}",
+                                    manifest,
+                                )
+
+            self.assertEqual("ok", result.status)
+            self.assertEqual(f"declared-benchmark/{stable_id}", result.target)
+            self.assertEqual(
+                f"declared-benchmark/{stable_id}",
+                result.payload["selectedObject"]["id"],
+            )
+            build_plan_mock.assert_called_once()
+            self.assertEqual(repo_root, build_plan_mock.call_args.args[0])
+            self.assertEqual(subject_id, build_plan_mock.call_args.args[1])
+            self.assertEqual(source_entry, build_plan_mock.call_args.kwargs["source_entry"])
+            self.assertEqual(workload_entry, build_plan_mock.call_args.kwargs["workload_entry"])
+            self.assertEqual(
+                {
+                    "family": "declared-benchmark",
+                    "stableId": stable_id,
+                    "alias": alias,
+                },
+                build_plan_mock.call_args.kwargs["entry_selection"],
+            )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

@@ -3,22 +3,22 @@ task_id: 20260412-02-phase-b-benchmark-system
 title: Phase B — 三方 Benchmark 报告体系
 task_type: plan
 lifecycle_status: completed
-phase: executing
+phase: completed
 created_at: 2026-04-12 12:30:00 +08:00
 updated_at: 2026-04-12 12:30:00 +08:00
-current_dir: docs/dev/in-progress/20260412-02-phase-b-benchmark-system
+current_dir: docs/dev/completed/20260412-02-phase-b-benchmark-system
 parent_task_id: "20260411-10-post-phase7-development-roadmap"
 source_task_id: "20260411-10-post-phase7-development-roadmap"
 source_relation: child_of_roadmap_phase_B
-active: true
+active: false
 ---
 
 ## 关键文档
 
-- parent_roadmap: docs/dev/in-progress/20260411-10-post-phase7-development-roadmap/roadmap-v1-01.md
-- design: docs/dev/in-progress/20260411-10-post-phase7-development-roadmap/benchmark-design-v1-01.md
-- plan: docs/dev/in-progress/20260412-02-phase-b-benchmark-system/plan-v1-01.md
-- latest_progress: docs/dev/in-progress/20260412-02-phase-b-benchmark-system/notes/progress-v1-01.md
+- parent_roadmap: docs/dev/hanging/20260411-10-post-phase7-development-roadmap/roadmap-v1-01.md
+- design: docs/dev/hanging/20260411-10-post-phase7-development-roadmap/benchmark-design-v1-01.md
+- plan: docs/dev/completed/20260412-02-phase-b-benchmark-system/plan-v1-01.md
+- latest_progress: docs/dev/completed/20260412-02-phase-b-benchmark-system/notes/progress-v1-01.md
 
 ## 当前判断
 
@@ -32,7 +32,7 @@ active: true
 
 ## 下一步
 
-- next_action: 执行 Batch 1 — interpreter-runtime-perf stage worker
+- next_action: 无。本 child task 已完成；如需继续 benchmark backend 后续工作，请从 `docs/dev/hanging/20260411-10-post-phase7-development-roadmap/` 恢复。
 - trigger: 立即
 
 ## 风险

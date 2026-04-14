@@ -217,40 +217,25 @@ class Phase5HotUpdateSkeletonTests(unittest.TestCase):
 
     def test_hot_update_full_project_archetype_solution_is_wired_into_canonical_subject(self) -> None:
         solution_text = (CANONICAL_SUBJECT_ROOT / "source" / "HotUpdateHostPack.sln").read_text(encoding="utf-8")
-        program_source = CANONICAL_SUBJECT_PROGRAM_PATH.read_text(encoding="utf-8")
-        metadata_source = CANONICAL_METADATA_SUPPLEMENT_ENTRY_PATH.read_text(encoding="utf-8")
 
         self.assertIn(r"Host\Program.cs", CANONICAL_SUBJECT_PROGRAM_PATH.as_posix().replace("/", "\\"))
         self.assertIn(r"Host\Proofs\HotUpdateSkeletonProofEntry.cs", CANONICAL_SKELETON_ENTRY_PATH.as_posix().replace("/", "\\"))
         self.assertIn(r"Archetypes\FullProjectHotUpdateSolution\HostApp\GoldenHotUpdateHost.App.csproj", solution_text)
         self.assertIn(r"Archetypes\FullProjectHotUpdateSolution\SharedContracts\GoldenHotUpdate.SharedContracts.csproj", solution_text)
         self.assertIn(r"Archetypes\FullProjectHotUpdateSolution\PatchModules\GoldenHotUpdate.PatchModule.csproj", solution_text)
-        self.assertIn("MetadataSupplementProofEntry.Run", program_source)
-        self.assertIn("ChaosUnitTest(", metadata_source)
-        self.assertIn('Alias = "metadata-supplement-proof"', metadata_source)
-        self.assertIn("ChaosCapabilityFamily.HotUpdateWorkflow", metadata_source)
-        self.assertIn("ChaosCapabilityItem.HotUpdateMetadataSupplement", metadata_source)
-        self.assertIn("ChaosHotUpdateCapability.MetadataSupplement", metadata_source)
-        self.assertNotIn("Console.WriteLine", metadata_source)
 
-    def test_hot_update_skeleton_proof_program_exercises_aot_mixed_aot_and_corruption_rejection(self) -> None:
-        program_source = CANONICAL_SKELETON_ENTRY_PATH.read_text(encoding="utf-8")
+    def test_hot_update_host_program_supports_generic_declared_source_entry_selection(self) -> None:
+        host_program_source = CANONICAL_SUBJECT_PROGRAM_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
-            "Assert.Equal(1, beforeLoad);",
-            "Assert.True(loaded);",
-            "Assert.Equal(42, afterLoad);",
-            "Assert.Equal(RuntimeMode.Mixed, runtimeManager.Mode);",
-            "Assert.Equal(1, afterUnload);",
-            "Assert.Throws<InvalidDataException>(() => PackageReader.ReadFromDirectory(corruptPackageRoot));",
-            "LoadPackage",
-            "UnloadPackage",
-            "DispatchInt32",
-            "[HotUpdateSubjectId] = 42",
+            "ChaosSourceEntryArguments.TryParse",
+            "HotUpdateHostPack/HotUpdateSkeletonProofEntry::Run()",
+            "HotUpdateHostPack/MetadataSupplementProofEntry::Run()",
+            "HotUpdateHostPack/MethodReplacementProofEntry::Run()",
+            "HotUpdateHostPack/SharedContractProofEntry::Run()",
+            "HotUpdateHostPack/VersionRollbackProofEntry::Run()",
         ]:
-            self.assertIn(required_fragment, program_source)
-        self.assertNotIn("Console.WriteLine", program_source)
-        self.assertNotIn("ChaosEvidenceKind.Stdout", program_source)
+            self.assertIn(required_fragment, host_program_source)
 
     def test_subject_query_finds_hot_update_surface_without_subject_name_coupling(self) -> None:
         subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase5_hot_update")

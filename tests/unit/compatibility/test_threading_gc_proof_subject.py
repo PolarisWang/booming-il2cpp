@@ -9,7 +9,9 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
 SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
-SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "ThreadingProof.cs"
+MONITOR_SOURCE_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "MonitorAndLockingProof.cs"
+THREAD_LOCAL_SOURCE_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "ThreadLocalStateProof.cs"
+GC_SOURCE_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "RuntimeServices" / "GcSensitiveFlowProof.cs"
 PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
 PROOF_MAIN_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "main.cpp"
 PROOF_RUN_SCRIPT_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "RunNativeReferenceProof.cmake"
@@ -36,13 +38,17 @@ class Phase2ThreadingGcProofTests(unittest.TestCase):
     def test_threading_proof_subject_tree_realizes_phase2_batch3_slice(self) -> None:
         self.assertTrue(MANIFEST_PATH.is_file(), msg=f"missing subject manifest: {MANIFEST_PATH}")
         self.assertTrue(SOURCE_PROJECT_PATH.is_file(), msg=f"missing source project: {SOURCE_PROJECT_PATH}")
-        self.assertTrue(SOURCE_PROGRAM_PATH.is_file(), msg=f"missing source file: {SOURCE_PROGRAM_PATH}")
+        self.assertTrue(MONITOR_SOURCE_PATH.is_file(), msg=f"missing source file: {MONITOR_SOURCE_PATH}")
+        self.assertTrue(THREAD_LOCAL_SOURCE_PATH.is_file(), msg=f"missing source file: {THREAD_LOCAL_SOURCE_PATH}")
+        self.assertTrue(GC_SOURCE_PATH.is_file(), msg=f"missing source file: {GC_SOURCE_PATH}")
         self.assertTrue(PROOF_CMAKE_PATH.is_file(), msg=f"missing proof cmake: {PROOF_CMAKE_PATH}")
         self.assertTrue(PROOF_MAIN_PATH.is_file(), msg=f"missing proof host main: {PROOF_MAIN_PATH}")
         self.assertTrue(PROOF_RUN_SCRIPT_PATH.is_file(), msg=f"missing proof run script: {PROOF_RUN_SCRIPT_PATH}")
 
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
-        source = SOURCE_PROGRAM_PATH.read_text(encoding="utf-8")
+        monitor_source = MONITOR_SOURCE_PATH.read_text(encoding="utf-8")
+        thread_local_source = THREAD_LOCAL_SOURCE_PATH.read_text(encoding="utf-8")
+        gc_source = GC_SOURCE_PATH.read_text(encoding="utf-8")
 
         self.assertEqual("SolutionCorePack", manifest["subjectId"])
         self.assertEqual("dotnet-project", manifest["source"]["type"])
@@ -55,12 +61,23 @@ class Phase2ThreadingGcProofTests(unittest.TestCase):
         self.assertEqual("require", manifest["testDeclarationMode"])
         self.assertEqual("proof", manifest["validation"]["proof"]["kind"])
 
-        self.assertIn("[ChaosUnitTest(", source)
-        self.assertIn('Alias = "threading-proof"', source)
-        self.assertIn("[ThreadStatic]", source)
-        self.assertIn("lock (Gate)", source)
-        self.assertIn("volatile int SharedTotal", source)
-        self.assertIn("internal static class ThreadingProofEntry", source)
+        self.assertIn("[ChaosUnitTest(", monitor_source)
+        self.assertIn('Alias = "monitor-locking-proof"', monitor_source)
+        self.assertIn("lock (Gate)", monitor_source)
+        self.assertIn("Monitor.TryEnter(", monitor_source)
+        self.assertIn("internal static class MonitorAndLockingProofEntry", monitor_source)
+
+        self.assertIn("[ChaosUnitTest(", thread_local_source)
+        self.assertIn('Alias = "thread-local-state-proof"', thread_local_source)
+        self.assertIn("[ThreadStatic]", thread_local_source)
+        self.assertIn("workerBefore = ThreadLabel;", thread_local_source)
+        self.assertIn("internal static class ThreadLocalStateProofEntry", thread_local_source)
+
+        self.assertIn("[ChaosUnitTest(", gc_source)
+        self.assertIn('Alias = "gc-sensitive-flow-proof"', gc_source)
+        self.assertIn("GC.Collect();", gc_source)
+        self.assertIn("GC.WaitForPendingFinalizers();", gc_source)
+        self.assertIn("internal static class GcSensitiveFlowProofEntry", gc_source)
 
     def test_loader_semantic_and_linker_lock_threading_surface(self) -> None:
         contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")

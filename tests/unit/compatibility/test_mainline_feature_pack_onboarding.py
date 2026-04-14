@@ -19,6 +19,7 @@ SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
 SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
 SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "Program.cs"
+TASK_FLOW_PROOF_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "TaskAndValueTaskFlowProof.cs"
 SOURCE_SLICE_ROOT = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures"
 FRAMEWORK_PROJECT_REFERENCE = "../../../../../src/reference/Chaos.TestFramework/Chaos.TestFramework.csproj"
 PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
@@ -107,10 +108,12 @@ class Phase4SolutionCorePackOnboardingTests(unittest.TestCase):
 
         self.assertTrue(SOURCE_PROJECT_PATH.is_file())
         self.assertTrue(SOURCE_PROGRAM_PATH.is_file())
+        self.assertTrue(TASK_FLOW_PROOF_PATH.is_file())
         self.assertTrue(PROOF_CMAKE_PATH.is_file())
         self.assertTrue(PERF_BASELINE_PATH.is_file())
-        self.assertIn("[ChaosUnitTest(", source_program_text)
-        self.assertIn('Alias = "core-runtime-proof"', source_program_text)
+        self.assertNotIn("[ChaosUnitTest(", source_program_text)
+        self.assertIn("Assert.Equal(0, entry()", source_program_text)
+        self.assertIn('Alias = "task-valuetask-flow-proof"', TASK_FLOW_PROOF_PATH.read_text(encoding="utf-8"))
 
     def test_mainline_proof_sources_use_asserts_without_stdout_contracts(self) -> None:
         proof_sources = [SOURCE_PROGRAM_PATH, *sorted(SOURCE_SLICE_ROOT.rglob("*Proof.cs"))]
