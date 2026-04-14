@@ -7,8 +7,8 @@
   "defaultValidationProfile": "managed-output",
   "source": {
     "type": "dotnet-project",
-    "path": "subjects/SolutionCorePack/source/Archetypes/SolutionMultiProject/SolutionMultiProject.sln",
-    "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/SolutionMultiProject/App/GoldenMultiProject.App.csproj",
+    "path": "subjects/SolutionCorePack/source/Archetypes/MultiProjectSolution/MultiProjectSolution.sln",
+    "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/MultiProjectSolution/App/GoldenMultiProject.App.csproj",
     "entry": "GoldenMultiProject.App/Program::Main()"
   },
   "sourceModel": "dotnet-solution",

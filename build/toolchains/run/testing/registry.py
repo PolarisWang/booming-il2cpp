@@ -9,12 +9,14 @@ import sys
 try:
     from ..core.common import read_json, write_json
     from . import compiled_catalog as compiled_catalog_module
+    from . import declared_metadata_labels as declared_metadata_labels_module
     from . import subjects as subjects_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from core.common import read_json, write_json
     from testing import compiled_catalog as compiled_catalog_module
+    from testing import declared_metadata_labels as declared_metadata_labels_module
     from testing import subjects as subjects_module
 
 
@@ -360,6 +362,7 @@ def _load_subject_manifest(path: Path) -> dict[str, Any]:
     )
     item["subjectId"] = subject_id
     item["category"] = str(payload.get("category") or "")
+    item["subjectCategory"] = str(payload.get("category") or "")
     item["sourceModel"] = str(payload.get("sourceModel") or "")
     item["dependencyModel"] = str(payload.get("dependencyModel") or "")
     item["executablePlan"] = str(payload.get("executablePlan") or "")
@@ -483,6 +486,7 @@ def _subject_execution_base(
     )
     item["subjectId"] = str(subject_item.get("subjectId") or "")
     item["category"] = str(subject_item.get("category") or "")
+    item["subjectCategory"] = str(subject_item.get("category") or "")
     item["sourceModel"] = str(subject_item.get("sourceModel") or "")
     item["dependencyModel"] = str(subject_item.get("dependencyModel") or "")
     item["executablePlan"] = str(subject_item.get("executablePlan") or "")
@@ -620,6 +624,42 @@ def _declared_registry_item(
     item["methodSignature"] = str(payload.get("methodSignature") or "")
     item["sourceEntry"] = source_entry
     item["workloadEntry"] = source_entry if family == "declared-benchmark" else ""
+    item["category"] = int(payload.get("category") or 0)
+    item["categoryLabel"] = (
+        declared_metadata_labels_module.unit_category_label(payload.get("category"))
+        if family == "declared-unit-test"
+        else declared_metadata_labels_module.benchmark_category_label(payload.get("category"))
+    )
+    item["archetype"] = int(payload.get("archetype") or 0)
+    item["archetypeLabel"] = declared_metadata_labels_module.archetype_label(payload.get("archetype"))
+    item["hotUpdateCapability"] = int(payload.get("hotUpdateCapability") or 0)
+    item["hotUpdateCapabilityLabels"] = declared_metadata_labels_module.labels_from_mask(
+        payload.get("hotUpdateCapability"),
+        declared_metadata_labels_module.HOT_UPDATE_CAPABILITY_LABELS,
+    )
+    item["requires"] = int(payload.get("requires") or 0)
+    item["requirementLabels"] = declared_metadata_labels_module.labels_from_mask(
+        payload.get("requires"),
+        declared_metadata_labels_module.RUNTIME_FEATURE_LABELS,
+    )
+    if family == "declared-unit-test":
+        item["evidence"] = int(payload.get("evidence") or 0)
+        item["evidenceLabels"] = declared_metadata_labels_module.labels_from_mask(
+            payload.get("evidence"),
+            declared_metadata_labels_module.EVIDENCE_LABELS,
+        )
+        item["priority"] = int(payload.get("priority") or 0)
+    else:
+        item["metrics"] = int(payload.get("metrics") or 0)
+        item["metricLabels"] = declared_metadata_labels_module.labels_from_mask(
+            payload.get("metrics"),
+            declared_metadata_labels_module.METRIC_LABELS,
+        )
+        item["modes"] = int(payload.get("modes") or 0)
+        item["supportedModes"] = declared_metadata_labels_module.supported_modes_from_mask(payload.get("modes"))
+        item["warmupCount"] = int(payload.get("warmupCount") or 0)
+        item["iterationCount"] = int(payload.get("iterationCount") or 0)
+        item["invocationCount"] = int(payload.get("invocationCount") or 0)
     item["defaultGoalId"] = default_goal_id or item["defaultGoalId"]
     item["defaultMatrixId"] = default_matrix_id or item["defaultMatrixId"]
     return item

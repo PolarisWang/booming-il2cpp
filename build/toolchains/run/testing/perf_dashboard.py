@@ -7,12 +7,16 @@ import sys
 
 try:
     from ..core.common import read_json, write_json
+    from . import compiled_catalog as compiled_catalog_module
+    from . import declared_metadata_labels as declared_metadata_labels_module
     from . import path_resolver as path_resolver_module
     from . import subjects as subjects_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from core.common import read_json, write_json
+    from testing import compiled_catalog as compiled_catalog_module
+    from testing import declared_metadata_labels as declared_metadata_labels_module
     from testing import path_resolver as path_resolver_module
     from testing import subjects as subjects_module
 
@@ -53,11 +57,93 @@ def _status_counts(entries: list[dict[str, Any]]) -> dict[str, int]:
     }
 
 
+def _declared_source_entry(entry: dict[str, Any]) -> str:
+    assembly_name = str(entry.get("assemblyName") or "")
+    declaring_type = str(entry.get("declaringType") or "")
+    method_signature = str(entry.get("methodSignature") or "")
+    if not assembly_name or not declaring_type or not method_signature:
+        return ""
+    type_name = declaring_type.rsplit(".", 1)[-1]
+    return f"{assembly_name}/{type_name}::{method_signature}"
+
+
+def _load_declared_benchmark_cases(repo_root: Path, subject_id: str) -> dict[str, dict[str, Any]]:
+    try:
+        catalog = compiled_catalog_module.build_subject_declared_test_catalog(
+            repo_root=repo_root,
+            subject_id=subject_id,
+            force_build=False,
+        )
+    except Exception:
+        return {}
+
+    cases: dict[str, dict[str, Any]] = {}
+    for payload in list(dict(catalog).get("declaredBenchmarks") or []):
+        item = dict(payload or {})
+        stable_id = str(item.get("stableId") or "").strip()
+        if not stable_id:
+            continue
+        cases[stable_id] = {
+            "stableId": stable_id,
+            "alias": str(item.get("alias") or "").strip() or stable_id,
+            "displayName": str(item.get("alias") or "").strip() or stable_id,
+            "workloadEntry": _declared_source_entry(item),
+            "assemblyName": str(item.get("assemblyName") or ""),
+            "declaringType": str(item.get("declaringType") or ""),
+            "methodName": str(item.get("methodName") or ""),
+            "methodSignature": str(item.get("methodSignature") or ""),
+            "category": int(item.get("category") or 0),
+            "categoryLabel": declared_metadata_labels_module.benchmark_category_label(item.get("category")),
+            "metrics": int(item.get("metrics") or 0),
+            "metricLabels": declared_metadata_labels_module.labels_from_mask(
+                item.get("metrics"),
+                declared_metadata_labels_module.METRIC_LABELS,
+            ),
+            "modes": int(item.get("modes") or 0),
+            "supportedModes": declared_metadata_labels_module.supported_modes_from_mask(item.get("modes")),
+            "requires": int(item.get("requires") or 0),
+            "requirementLabels": declared_metadata_labels_module.labels_from_mask(
+                item.get("requires"),
+                declared_metadata_labels_module.RUNTIME_FEATURE_LABELS,
+            ),
+            "archetype": int(item.get("archetype") or 0),
+            "archetypeLabel": declared_metadata_labels_module.archetype_label(item.get("archetype")),
+            "hotUpdateCapability": int(item.get("hotUpdateCapability") or 0),
+            "hotUpdateCapabilityLabels": declared_metadata_labels_module.labels_from_mask(
+                item.get("hotUpdateCapability"),
+                declared_metadata_labels_module.HOT_UPDATE_CAPABILITY_LABELS,
+            ),
+            "warmupCount": int(item.get("warmupCount") or 0),
+            "iterationCount": int(item.get("iterationCount") or 0),
+            "invocationCount": int(item.get("invocationCount") or 0),
+        }
+    return cases
+
+
+def _summary_workload_entry(manifest: dict[str, Any], matrix: dict[str, Any]) -> str:
+    matrix_source = dict(matrix.get("source") or {})
+    return str(matrix.get("workloadEntry") or matrix_source.get("entry") or manifest.get("workloadEntry") or "")
+
+
+def _summary_benchmark_case(
+    declared_cases: dict[str, dict[str, Any]],
+    *,
+    workload_entry: str,
+) -> dict[str, Any] | None:
+    if not workload_entry:
+        return None
+    for case in declared_cases.values():
+        if str(case.get("workloadEntry") or "") == workload_entry:
+            return dict(case)
+    return None
+
+
 def build_perf_dashboard_config(repo_root: Path) -> dict[str, Any]:
     entries: list[dict[str, Any]] = []
     for record in subjects_module.discover_perf_subject_records(repo_root):
         subject_id = str(record["subjectId"])
         manifest = dict(record["manifest"])
+        declared_cases = _load_declared_benchmark_cases(repo_root, subject_id)
         for matrix in list(manifest.get("environmentMatrices") or []):
             matrix_payload = dict(matrix)
             matrix_id = str(matrix_payload.get("matrixId") or "")
@@ -92,6 +178,12 @@ def build_perf_dashboard_config(repo_root: Path) -> dict[str, Any]:
             if not baseline_path_text or not metric_keys:
                 continue
 
+            summary_workload_entry = _summary_workload_entry(manifest, matrix_payload)
+            summary_benchmark_case = _summary_benchmark_case(
+                declared_cases,
+                workload_entry=summary_workload_entry,
+            )
+
             for goal_id in supported_goals:
                 entries.append(
                     {
@@ -104,6 +196,9 @@ def build_perf_dashboard_config(repo_root: Path) -> dict[str, Any]:
                         "runtimeProfile": str(execution_context.get("runtimeProfile") or ""),
                         "baselinePath": baseline_path_text,
                         "metricKeys": metric_keys,
+                        "summaryWorkloadEntry": summary_workload_entry,
+                        "summaryBenchmarkCase": summary_benchmark_case,
+                        "declaredBenchmarkCaseCount": len(declared_cases),
                         "status": "ok",
                     }
                 )

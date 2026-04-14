@@ -73,6 +73,8 @@ public sealed partial class NativeReferenceLoweringPlanner
         "Templates/NativeReferenceProof.ReflectionInteropClosure.cpp.scriban";
     private const string ConsoleWriteLineStringIcall = "System.Console/System.Console::WriteLine(System.String)";
     private const string StringConcatPairIcall = "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
+    private const string AssertEqualStringMethod =
+        "Chaos.TestFramework/Assert::Equal<System.String>(System.String,System.String,System.String)";
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
@@ -409,7 +411,7 @@ public sealed partial class NativeReferenceLoweringPlanner
         var entryPointRegistration = GetRequiredRegistration(methodPointers, entryPointSubjectId);
         var entryPointMethod = GetRequiredMethod(methods, entryPointSubjectId);
         var entryPointInstructions = GetSingleBlockInstructions(entryPointMethod);
-        ValidateConstructorThenInstanceCallEntryPointShape(entryPointMethod, entryPointInstructions);
+        var writeLineStringIcall = ValidateConstructorThenInstanceCallEntryPointShape(entryPointMethod, entryPointInstructions);
 
         var constructorSubjectId = GetRequiredInstructionCallee(entryPointInstructions[1], entryPointMethod.SubjectId, 1);
         var declaredMethodSubjectId = GetRequiredInstructionCallee(entryPointInstructions[2], entryPointMethod.SubjectId, 2);
@@ -444,7 +446,6 @@ public sealed partial class NativeReferenceLoweringPlanner
             throw new InvalidOperationException(
                 $"dispatch lowering could not resolve override target for '{entryPointSubjectId}' from declared target '{declaredMethodSubjectId}' on instance type '{diagnosticConstructorTypeSubjectId}'. available methods: [{availableMethods}]. world BuildMessage methods: [{matchingNameMethods}]");
         }
-        var writeLineStringIcall = GetRequiredInstructionCallee(entryPointInstructions[3], entryPointMethod.SubjectId, 3);
         var constructorRegistration = GetRequiredRegistration(methodPointers, constructorSubjectId);
         var resolvedMethodRegistration = GetRequiredRegistration(methodPointers, resolvedMethodSubjectId);
         var constructorMethod = GetRequiredMethod(methods, constructorSubjectId);
@@ -605,21 +606,11 @@ public sealed partial class NativeReferenceLoweringPlanner
 
         if (MatchesInterfaceDispatchMessageCandidate(linkedWorld, entryCapabilities))
         {
-            RequireDependencyReason(
-                dependencyReasons,
-                "stdout-path",
-                ManagedInterfaceDispatchMessageMinimal,
-                linkedWorld.EntryPointSubjectId);
             return ManagedInterfaceDispatchMessageMinimal;
         }
 
         if (MatchesDispatchVirtualInstanceMessageCandidate(linkedWorld, entryCapabilities))
         {
-            RequireDependencyReason(
-                dependencyReasons,
-                "stdout-path",
-                ManagedDispatchVirtualInstanceMessageMinimal,
-                linkedWorld.EntryPointSubjectId);
             return ManagedDispatchVirtualInstanceMessageMinimal;
         }
 
@@ -759,7 +750,7 @@ public sealed partial class NativeReferenceLoweringPlanner
         LinkedWorldModel linkedWorld,
         IReadOnlyList<string> entryCapabilities)
     {
-        if (!entryCapabilities.Contains("requires-console-string-output", StringComparer.Ordinal))
+        if (!entryCapabilities.Contains("uses-virtual-call-site", StringComparer.Ordinal))
         {
             return false;
         }
@@ -767,7 +758,7 @@ public sealed partial class NativeReferenceLoweringPlanner
         var entryMethod = linkedWorld.Methods.FirstOrDefault(method =>
             string.Equals(method.SubjectId, linkedWorld.EntryPointSubjectId, StringComparison.Ordinal));
         var entryInstructions = TryGetSingleBlockInstructions(entryMethod);
-        if (entryInstructions is null || !IsConstructorThenInstanceCallEntryPointShape(entryInstructions))
+        if (entryInstructions is null || !IsConstructorThenInstanceCallProofEntryPointShape(entryInstructions))
         {
             return false;
         }
@@ -786,8 +777,7 @@ public sealed partial class NativeReferenceLoweringPlanner
         LinkedWorldModel linkedWorld,
         IReadOnlyList<string> entryCapabilities)
     {
-        if (!entryCapabilities.Contains("requires-console-string-output", StringComparer.Ordinal) ||
-            !entryCapabilities.Contains("uses-interface-call-site", StringComparer.Ordinal))
+        if (!entryCapabilities.Contains("uses-interface-call-site", StringComparer.Ordinal))
         {
             return false;
         }
@@ -795,7 +785,7 @@ public sealed partial class NativeReferenceLoweringPlanner
         var entryMethod = linkedWorld.Methods.FirstOrDefault(method =>
             string.Equals(method.SubjectId, linkedWorld.EntryPointSubjectId, StringComparison.Ordinal));
         var entryInstructions = TryGetSingleBlockInstructions(entryMethod);
-        if (entryInstructions is null || !IsConstructorThenInstanceCallEntryPointShape(entryInstructions))
+        if (entryInstructions is null || !IsConstructorThenInstanceCallProofEntryPointShape(entryInstructions))
         {
             return false;
         }
@@ -1164,11 +1154,10 @@ public sealed partial class NativeReferenceLoweringPlanner
         TypedIlMethodArtifact entryPointMethod,
         IReadOnlyList<TypedIlInstructionArtifact> entryPointInstructions)
     {
-        ValidateConstructorThenInstanceCallEntryPointShape(entryPointMethod, entryPointInstructions);
+        var writeLineStringIcall = ValidateConstructorThenInstanceCallEntryPointShape(entryPointMethod, entryPointInstructions);
 
         var constructorSubjectId = GetRequiredInstructionCallee(entryPointInstructions[1], entryPointMethod.SubjectId, 1);
         var instanceMethodSubjectId = GetRequiredInstructionCallee(entryPointInstructions[2], entryPointMethod.SubjectId, 2);
-        var writeLineStringIcall = GetRequiredInstructionCallee(entryPointInstructions[3], entryPointMethod.SubjectId, 3);
 
         var constructorRegistration = GetRequiredRegistration(methodPointers, constructorSubjectId);
         var instanceMethodRegistration = GetRequiredRegistration(methodPointers, instanceMethodSubjectId);
@@ -1383,7 +1372,7 @@ public sealed partial class NativeReferenceLoweringPlanner
     {
         loweringPlan = null;
 
-        if (!IsConstructorThenInstanceCallEntryPointShape(entryPointInstructions))
+        if (!IsConstructorThenInstanceCallProofEntryPointShape(entryPointInstructions))
         {
             return false;
         }
@@ -1425,7 +1414,16 @@ public sealed partial class NativeReferenceLoweringPlanner
     {
         loweringPlan = null;
 
-        if (!IsConstructorThenInstanceCallEntryPointShape(entryPointInstructions))
+        string writeLineStringIcall;
+        if (IsConstructorThenInstanceCallEntryPointShape(entryPointInstructions))
+        {
+            writeLineStringIcall = GetRequiredInstructionCallee(entryPointInstructions[3], entryPointMethod.SubjectId, 3);
+        }
+        else if (IsConstructorThenAssertStringEqualityEntryPointShape(entryPointInstructions))
+        {
+            writeLineStringIcall = ConsoleWriteLineStringIcall;
+        }
+        else
         {
             return false;
         }
@@ -1450,7 +1448,6 @@ public sealed partial class NativeReferenceLoweringPlanner
             return false;
         }
 
-        var writeLineStringIcall = GetRequiredInstructionCallee(entryPointInstructions[3], entryPointMethod.SubjectId, 3);
         var constructorRegistration = GetRequiredRegistration(methodPointers, constructorSubjectId);
         var resolvedMethodRegistration = GetRequiredRegistration(methodPointers, resolvedMethodSubjectId);
         var constructorMethod = GetRequiredMethod(methods, constructorSubjectId);
@@ -2330,6 +2327,28 @@ public sealed partial class NativeReferenceLoweringPlanner
                string.Equals(instructions[5].Op, "ret", StringComparison.Ordinal);
     }
 
+    private static bool IsConstructorThenInstanceCallProofEntryPointShape(IReadOnlyList<ManagedInstructionModel> instructions)
+    {
+        return IsConstructorThenInstanceCallEntryPointShape(instructions) ||
+               IsConstructorThenAssertStringEqualityEntryPointShape(instructions);
+    }
+
+    private static bool IsConstructorThenAssertStringEqualityEntryPointShape(IReadOnlyList<ManagedInstructionModel> instructions)
+    {
+        return instructions.Count == 10 &&
+               string.Equals(instructions[0].Op, "ldstr", StringComparison.Ordinal) &&
+               string.Equals(instructions[1].Op, "newobj", StringComparison.Ordinal) &&
+               string.Equals(instructions[2].Op, "callvirt", StringComparison.Ordinal) &&
+               string.Equals(instructions[3].Op, "stloc", StringComparison.Ordinal) &&
+               string.Equals(instructions[4].Op, "ldstr", StringComparison.Ordinal) &&
+               string.Equals(instructions[5].Op, "ldloc", StringComparison.Ordinal) &&
+               string.Equals(instructions[6].Op, "ldnull", StringComparison.Ordinal) &&
+               string.Equals(instructions[7].Op, "call", StringComparison.Ordinal) &&
+               string.Equals(instructions[7].Callee, AssertEqualStringMethod, StringComparison.Ordinal) &&
+               string.Equals(instructions[8].Op, "ldc.i4", StringComparison.Ordinal) &&
+               string.Equals(instructions[9].Op, "ret", StringComparison.Ordinal);
+    }
+
     private static bool IsConstructorThenInstanceCallEntryPointShape(IReadOnlyList<TypedIlInstructionArtifact> instructions)
     {
         return instructions.Count == 6 &&
@@ -2339,6 +2358,28 @@ public sealed partial class NativeReferenceLoweringPlanner
                string.Equals(instructions[3].Op, "call", StringComparison.Ordinal) &&
                string.Equals(instructions[4].Op, "ldc.i4", StringComparison.Ordinal) &&
                string.Equals(instructions[5].Op, "ret", StringComparison.Ordinal);
+    }
+
+    private static bool IsConstructorThenInstanceCallProofEntryPointShape(IReadOnlyList<TypedIlInstructionArtifact> instructions)
+    {
+        return IsConstructorThenInstanceCallEntryPointShape(instructions) ||
+               IsConstructorThenAssertStringEqualityEntryPointShape(instructions);
+    }
+
+    private static bool IsConstructorThenAssertStringEqualityEntryPointShape(IReadOnlyList<TypedIlInstructionArtifact> instructions)
+    {
+        return instructions.Count == 10 &&
+               string.Equals(instructions[0].Op, "ldstr", StringComparison.Ordinal) &&
+               string.Equals(instructions[1].Op, "newobj", StringComparison.Ordinal) &&
+               string.Equals(instructions[2].Op, "callvirt", StringComparison.Ordinal) &&
+               string.Equals(instructions[3].Op, "stloc", StringComparison.Ordinal) &&
+               string.Equals(instructions[4].Op, "ldstr", StringComparison.Ordinal) &&
+               string.Equals(instructions[5].Op, "ldloc", StringComparison.Ordinal) &&
+               string.Equals(instructions[6].Op, "ldnull", StringComparison.Ordinal) &&
+               string.Equals(instructions[7].Op, "call", StringComparison.Ordinal) &&
+               string.Equals(instructions[7].Callee, AssertEqualStringMethod, StringComparison.Ordinal) &&
+               string.Equals(instructions[8].Op, "ldc.i4", StringComparison.Ordinal) &&
+               string.Equals(instructions[9].Op, "ret", StringComparison.Ordinal);
     }
 
     private static bool IsStaticCallCtorGetterEntryPointShape(IReadOnlyList<TypedIlInstructionArtifact> instructions)
@@ -2451,26 +2492,45 @@ public sealed partial class NativeReferenceLoweringPlanner
                string.Equals(instructions[4].Op, "ret", StringComparison.Ordinal);
     }
 
-    private static void ValidateConstructorThenInstanceCallEntryPointShape(
+    private static string ValidateConstructorThenInstanceCallEntryPointShape(
         TypedIlMethodArtifact method,
         IReadOnlyList<TypedIlInstructionArtifact> instructions)
     {
         RequireMethodContract(method, "static-method", "has-canonical-body");
-        RequireCapability(method, "requires-console-string-output");
-        RequireInstructionCount(method, instructions, 6);
-        RequireInstructionOp(instructions[0], "ldstr", method.SubjectId, 0);
-        RequireInstructionOp(instructions[1], "newobj", method.SubjectId, 1);
-        RequireInstructionOp(instructions[2], "callvirt", method.SubjectId, 2);
-        RequireInstructionOp(instructions[3], "call", method.SubjectId, 3);
-        RequireInstructionOp(instructions[4], "ldc.i4", method.SubjectId, 4);
-        RequireInstructionOp(instructions[5], "ret", method.SubjectId, 5);
-        RequireInstructionCallee(instructions[3], ConsoleWriteLineStringIcall, method.SubjectId, 3);
-
-        if (GetRequiredOperandInt(instructions[4]) != 0)
+        if (IsConstructorThenInstanceCallEntryPointShape(instructions))
         {
-            throw new InvalidOperationException(
-                $"native-reference emitter expects '{method.SubjectId}' to return ldc.i4 0 before ret");
+            RequireCapability(method, "requires-console-string-output");
+            RequireInstructionCount(method, instructions, 6);
+            RequireInstructionOp(instructions[0], "ldstr", method.SubjectId, 0);
+            RequireInstructionOp(instructions[1], "newobj", method.SubjectId, 1);
+            RequireInstructionOp(instructions[2], "callvirt", method.SubjectId, 2);
+            RequireInstructionOp(instructions[3], "call", method.SubjectId, 3);
+            RequireInstructionOp(instructions[4], "ldc.i4", method.SubjectId, 4);
+            RequireInstructionOp(instructions[5], "ret", method.SubjectId, 5);
+            RequireInstructionCallee(instructions[3], ConsoleWriteLineStringIcall, method.SubjectId, 3);
+
+            if (GetRequiredOperandInt(instructions[4]) != 0)
+            {
+                throw new InvalidOperationException(
+                    $"native-reference emitter expects '{method.SubjectId}' to return ldc.i4 0 before ret");
+            }
+
+            return ConsoleWriteLineStringIcall;
         }
+
+        if (IsConstructorThenAssertStringEqualityEntryPointShape(instructions))
+        {
+            if (GetRequiredOperandInt(instructions[8]) != 0)
+            {
+                throw new InvalidOperationException(
+                    $"native-reference emitter expects '{method.SubjectId}' to return ldc.i4 0 before ret");
+            }
+
+            return ConsoleWriteLineStringIcall;
+        }
+
+        throw new InvalidOperationException(
+            $"native-reference emitter expects '{method.SubjectId}' to follow a supported constructor-then-instance-call proof shape");
     }
 
     private static void ValidateStaticCallCtorGetterEntryPointShape(

@@ -936,7 +936,7 @@
       "syntax": "test declared-unit-test --id declared-unit-test/<stable-id>",
       "show_in_menu": true,
       "examples": [
-        "run test declared-unit-test --id declared-unit-test/SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"
+        "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayOpsProofEntry::Run()"
       ]
     },
     {
@@ -954,7 +954,7 @@
       "syntax": "test declared-benchmark --id declared-benchmark/<stable-id>",
       "show_in_menu": true,
       "examples": [
-        "run test declared-benchmark --id declared-benchmark/SolutionCorePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()"
+        "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericBenchmarkEntry::RunWorkload()"
       ]
     },
     {

@@ -9,19 +9,27 @@ internal static class Program
     {
         if (!ChaosSubjectEntryArguments.TryParse(args, out var selection) || selection.IsNone)
         {
-            return InvokeStaticEntry("MainlineFeaturePack", "MainlineFeaturePack.ProofEntry", "Run");
+            return InvokeStaticEntry("CoreRuntimeFeatures", "CoreRuntimeFeatures.ProofEntry", "Run");
         }
 
         return selection switch
         {
-            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.SolutionMainlineProof } =>
-                InvokeStaticEntry("MainlineFeaturePack", "MainlineFeaturePack.ProofEntry", "Run"),
-            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.SolutionSimpleLibManagedOutput } =>
+            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.CoreRuntimeFeaturesProof } =>
+                InvokeStaticEntry("CoreRuntimeFeatures", "CoreRuntimeFeatures.ProofEntry", "Run"),
+            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.CoreRuntimeInterfaceDispatchProof } =>
+                InvokeStaticEntry("CoreRuntimeFeatures", "CoreRuntimeFeatures.InterfaceDispatchProofEntry", "Run"),
+            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.SimpleLibrarySolutionManagedOutput } =>
                 InvokeStaticEntry("GoldenSimpleLib.App", "GoldenSimpleLib.App.Program", "Main"),
-            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.SolutionMultiProjectManagedOutput } =>
+            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.MultiProjectSolutionManagedOutput } =>
                 InvokeStaticEntry("GoldenMultiProject.App", "GoldenMultiProject.App.Program", "Main"),
-            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.SolutionPackageReferenceManagedOutput } =>
+            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.PackageReferenceSolutionManagedOutput } =>
                 InvokeStaticEntry("GoldenWithPackage.App", "GoldenWithPackage.App.Program", "Main"),
+            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.ReferenceAssemblySolutionManagedOutput } =>
+                InvokeStaticEntry("GoldenReferenceAssembly.App", "GoldenReferenceAssembly.App.Program", "Main"),
+            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.CoreLibReferenceSolutionManagedOutput } =>
+                InvokeStaticEntry("GoldenCoreLibReference.App", "GoldenCoreLibReference.App.Program", "Main"),
+            { EntryKind: ChaosSubjectEntryKind.Proof, EntrySlice: ChaosSubjectSlice.MixedReferenceClosureSolutionManagedOutput } =>
+                InvokeStaticEntry("GoldenMixedReference.App", "GoldenMixedReference.App.Program", "Main"),
             _ => throw new ArgumentOutOfRangeException(nameof(args), "unsupported SolutionCorePack entry selection."),
         };
     }

@@ -420,7 +420,7 @@ class BenchmarkCommandTests(unittest.TestCase):
         benchmark_case = {
             "stableId": "bench-arithmetic",
             "alias": "arithmetic-bench",
-            "workloadEntry": "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()",
+                    "workloadEntry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
         }
 
         result = benchmark_module._run_subject_benchmark_pipeline(

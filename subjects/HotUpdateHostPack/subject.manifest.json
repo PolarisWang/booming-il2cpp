@@ -227,6 +227,37 @@
       }
     },
     {
+      "matrixId": "windows-archetype-full-project-managed-output",
+      "pipelineId": "managed-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "primaryProjectPath": "subjects/HotUpdateHostPack/source/Archetypes/FullProjectHotUpdateSolution/HostApp/GoldenHotUpdateHost.App.csproj",
+        "entry": "GoldenHotUpdateHost.App/Program::Main()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "dotnet-managed",
+        "runtimeProfile": "managed-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
       "matrixId": "windows-managed-perf",
       "pipelineId": "managed-benchmark",
       "supportedGoals": [

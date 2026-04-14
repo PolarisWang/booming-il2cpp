@@ -30,8 +30,16 @@ RUNTIME_CORE_SOURCE_PATH = REPO_ROOT / "src" / "native" / "runtime-core" / "runt
 CANONICAL_SUBJECT_ROOT = REPO_ROOT / "subjects" / "HotUpdateHostPack"
 CANONICAL_SUBJECT_MANIFEST_PATH = CANONICAL_SUBJECT_ROOT / "subject.manifest.json"
 CANONICAL_SUBJECT_PROJECT_PATH = CANONICAL_SUBJECT_ROOT / "source" / "HotUpdateHostPack.csproj"
-CANONICAL_SUBJECT_PROGRAM_PATH = CANONICAL_SUBJECT_ROOT / "source" / "Program.cs"
-CANONICAL_SKELETON_ENTRY_PATH = CANONICAL_SUBJECT_ROOT / "source" / "HotUpdateSkeletonProofEntry.cs"
+CANONICAL_SUBJECT_PROGRAM_PATH = CANONICAL_SUBJECT_ROOT / "source" / "Host" / "Program.cs"
+CANONICAL_SKELETON_ENTRY_PATH = CANONICAL_SUBJECT_ROOT / "source" / "Host" / "Proofs" / "HotUpdateSkeletonProofEntry.cs"
+CANONICAL_METADATA_SUPPLEMENT_ENTRY_PATH = (
+    CANONICAL_SUBJECT_ROOT / "source" / "Host" / "Proofs" / "MetadataSupplementProofEntry.cs"
+)
+CANONICAL_ARCHETYPE_ROOT = CANONICAL_SUBJECT_ROOT / "source" / "Archetypes" / "FullProjectHotUpdateSolution"
+CANONICAL_ARCHETYPE_SOLUTION_PATH = CANONICAL_ARCHETYPE_ROOT / "FullProjectHotUpdateSolution.sln"
+CANONICAL_ARCHETYPE_HOST_PROJECT_PATH = CANONICAL_ARCHETYPE_ROOT / "HostApp" / "GoldenHotUpdateHost.App.csproj"
+CANONICAL_ARCHETYPE_SHARED_PROJECT_PATH = CANONICAL_ARCHETYPE_ROOT / "SharedContracts" / "GoldenHotUpdate.SharedContracts.csproj"
+CANONICAL_ARCHETYPE_PATCH_PROJECT_PATH = CANONICAL_ARCHETYPE_ROOT / "PatchModules" / "GoldenHotUpdate.PatchModule.csproj"
 SUBJECTS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subjects.py"
 
 
@@ -173,13 +181,57 @@ class Phase5HotUpdateSkeletonTests(unittest.TestCase):
         self.assertEqual(["perf"], validation_profiles["perf-profile"])
         self.assertEqual({"managed-runtime-output", "managed-benchmark"}, pipeline_ids)
         self.assertEqual(
-            {"windows-managed-output", "macos-managed-output", "linux-managed-output", "windows-managed-perf"},
+            {
+                "windows-managed-output",
+                "macos-managed-output",
+                "linux-managed-output",
+                "windows-archetype-full-project-managed-output",
+                "windows-managed-perf",
+            },
             matrix_ids,
         )
 
         self.assertTrue(CANONICAL_SUBJECT_PROJECT_PATH.is_file())
         self.assertTrue(CANONICAL_SUBJECT_PROGRAM_PATH.is_file())
         self.assertTrue(CANONICAL_SKELETON_ENTRY_PATH.is_file())
+        self.assertTrue(CANONICAL_METADATA_SUPPLEMENT_ENTRY_PATH.is_file())
+        self.assertTrue(CANONICAL_ARCHETYPE_SOLUTION_PATH.is_file())
+        self.assertTrue(CANONICAL_ARCHETYPE_HOST_PROJECT_PATH.is_file())
+        self.assertTrue(CANONICAL_ARCHETYPE_SHARED_PROJECT_PATH.is_file())
+        self.assertTrue(CANONICAL_ARCHETYPE_PATCH_PROJECT_PATH.is_file())
+
+        full_project_matrix = next(
+            matrix
+            for matrix in list(canonical_manifest.get("environmentMatrices") or [])
+            if str(matrix["matrixId"]) == "windows-archetype-full-project-managed-output"
+        )
+        self.assertEqual("managed-runtime-output", full_project_matrix["pipelineId"])
+        self.assertEqual(
+            "subjects/HotUpdateHostPack/source/Archetypes/FullProjectHotUpdateSolution/HostApp/GoldenHotUpdateHost.App.csproj",
+            dict(full_project_matrix.get("source") or {})["primaryProjectPath"],
+        )
+        self.assertEqual(
+            "GoldenHotUpdateHost.App/Program::Main()",
+            dict(full_project_matrix.get("source") or {})["entry"],
+        )
+
+    def test_hot_update_full_project_archetype_solution_is_wired_into_canonical_subject(self) -> None:
+        solution_text = (CANONICAL_SUBJECT_ROOT / "source" / "HotUpdateHostPack.sln").read_text(encoding="utf-8")
+        program_source = CANONICAL_SUBJECT_PROGRAM_PATH.read_text(encoding="utf-8")
+        metadata_source = CANONICAL_METADATA_SUPPLEMENT_ENTRY_PATH.read_text(encoding="utf-8")
+
+        self.assertIn(r"Host\Program.cs", CANONICAL_SUBJECT_PROGRAM_PATH.as_posix().replace("/", "\\"))
+        self.assertIn(r"Host\Proofs\HotUpdateSkeletonProofEntry.cs", CANONICAL_SKELETON_ENTRY_PATH.as_posix().replace("/", "\\"))
+        self.assertIn(r"Archetypes\FullProjectHotUpdateSolution\HostApp\GoldenHotUpdateHost.App.csproj", solution_text)
+        self.assertIn(r"Archetypes\FullProjectHotUpdateSolution\SharedContracts\GoldenHotUpdate.SharedContracts.csproj", solution_text)
+        self.assertIn(r"Archetypes\FullProjectHotUpdateSolution\PatchModules\GoldenHotUpdate.PatchModule.csproj", solution_text)
+        self.assertIn("MetadataSupplementProofEntry.Run", program_source)
+        self.assertIn("ChaosUnitTest(", metadata_source)
+        self.assertIn('Alias = "metadata-supplement-proof"', metadata_source)
+        self.assertIn("ChaosCapabilityFamily.HotUpdateWorkflow", metadata_source)
+        self.assertIn("ChaosCapabilityItem.HotUpdateMetadataSupplement", metadata_source)
+        self.assertIn("ChaosHotUpdateCapability.MetadataSupplement", metadata_source)
+        self.assertNotIn("Console.WriteLine", metadata_source)
 
     def test_hot_update_skeleton_proof_program_exercises_aot_mixed_aot_and_corruption_rejection(self) -> None:
         program_source = CANONICAL_SKELETON_ENTRY_PATH.read_text(encoding="utf-8")

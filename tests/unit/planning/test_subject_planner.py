@@ -724,7 +724,7 @@ class SubjectPlannerTests(unittest.TestCase):
     def test_planner_can_override_declared_unit_entry_and_emit_family_specific_report_roots(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_declared_unit_selection")
         run_id = "20260413-mainline-array-ops-entry-selection-001"
-        stable_id = "SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"
+        stable_id = "SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayOpsProofEntry::Run()"
 
         plan = planner_module.build_plan(
             REPO_ROOT,
@@ -732,7 +732,7 @@ class SubjectPlannerTests(unittest.TestCase):
             goal_id="correctness.dev",
             matrix_id="windows-native-check",
             run_id=run_id,
-            source_entry="MainlineFeaturePack/ArrayOpsProofEntry::Run()",
+            source_entry="CoreRuntimeFeatures/ArrayOpsProofEntry::Run()",
             entry_selection={
                 "family": "declared-unit-test",
                 "stableId": stable_id,
@@ -740,7 +740,7 @@ class SubjectPlannerTests(unittest.TestCase):
             },
         )
 
-        self.assertEqual("MainlineFeaturePack/ArrayOpsProofEntry::Run()", plan["selection"]["source"]["entry"])
+        self.assertEqual("CoreRuntimeFeatures/ArrayOpsProofEntry::Run()", plan["selection"]["source"]["entry"])
         self.assertEqual(
             {
                 "family": "declared-unit-test",
@@ -761,7 +761,7 @@ class SubjectPlannerTests(unittest.TestCase):
     def test_planner_can_override_declared_benchmark_entry_and_emit_family_specific_report_roots(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_declared_benchmark_selection")
         run_id = "20260413-performance-generic-bench-entry-selection-001"
-        stable_id = "SolutionCorePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()"
+        stable_id = "SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericBenchmarkEntry::RunWorkload()"
 
         plan = planner_module.build_plan(
             REPO_ROOT,
@@ -769,8 +769,8 @@ class SubjectPlannerTests(unittest.TestCase):
             goal_id="perf.release",
             matrix_id="windows-native-perf",
             run_id=run_id,
-            source_entry="PerformanceFeaturePack/GenericBenchmarkEntry::RunWorkload()",
-            workload_entry="PerformanceFeaturePack/GenericBenchmarkEntry::RunWorkload()",
+            source_entry="CoreRuntimeBenchmarks/GenericBenchmarkEntry::RunWorkload()",
+            workload_entry="CoreRuntimeBenchmarks/GenericBenchmarkEntry::RunWorkload()",
             entry_selection={
                 "family": "declared-benchmark",
                 "stableId": stable_id,
@@ -778,8 +778,8 @@ class SubjectPlannerTests(unittest.TestCase):
             },
         )
 
-        self.assertEqual("PerformanceFeaturePack/GenericBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
-        self.assertEqual("PerformanceFeaturePack/GenericBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
+        self.assertEqual("CoreRuntimeBenchmarks/GenericBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
+        self.assertEqual("CoreRuntimeBenchmarks/GenericBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
         self.assertEqual(
             {
                 "family": "declared-benchmark",
@@ -810,7 +810,7 @@ class SubjectPlannerTests(unittest.TestCase):
 
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Archetypes/SolutionSimpleLib/App/GoldenSimpleLib.App.csproj",
+            "subjects/SolutionCorePack/source/Archetypes/SimpleLibrarySolution/App/GoldenSimpleLib.App.csproj",
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual(
@@ -821,6 +821,34 @@ class SubjectPlannerTests(unittest.TestCase):
             {
                 "entryKind": 1,
                 "entrySlice": 4,
+            },
+            plan["selection"]["source"]["entrySelection"],
+        )
+
+    def test_planner_surfaces_matrix_subject_entry_selection_for_solution_core_pack_reference_assembly_output(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_solution_core_reference_entry_selection")
+
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            "SolutionCorePack",
+            goal_id="correctness.dev",
+            matrix_id="windows-archetype-reference-assembly-managed-output",
+            run_id="20260414-solution-core-reference-entry-selection-001",
+        )
+
+        self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
+        self.assertEqual(
+            "subjects/SolutionCorePack/source/Archetypes/ReferenceAssemblySolution/App/GoldenReferenceAssembly.App.csproj",
+            plan["selection"]["source"]["primaryProjectPath"],
+        )
+        self.assertEqual(
+            "GoldenReferenceAssembly.App/Program::Main()",
+            plan["selection"]["source"]["entry"],
+        )
+        self.assertEqual(
+            {
+                "entryKind": 1,
+                "entrySlice": 8,
             },
             plan["selection"]["source"]["entrySelection"],
         )
@@ -956,7 +984,7 @@ class SubjectPlannerTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
-    def test_planner_uses_canonical_pack_source_while_interpreter_support_project_remains_nested(self) -> None:
+    def test_planner_uses_canonical_pack_source_while_interpreter_support_project_remains_in_archetype_tree(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_interpreter_arithmetic_shell")
         plan = planner_module.build_plan(
             REPO_ROOT,
@@ -966,7 +994,16 @@ class SubjectPlannerTests(unittest.TestCase):
             run_id="20260413-interpreterarithmeticproof-shell-entry-001",
         )
 
-        support_project_path = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "InterpreterArithmeticProof" / "InterpreterArithmeticProof.csproj"
+        support_project_path = (
+            REPO_ROOT
+            / "subjects"
+            / "MixedExecutionFeaturePack"
+            / "source"
+            / "Archetypes"
+            / "MixedBridgeSolution"
+            / "InterpreterArithmeticProof"
+            / "InterpreterArithmeticProof.csproj"
+        )
 
         self.assertEqual("MixedExecutionFeaturePack", plan["selection"]["subjectId"])
         self.assertEqual(
@@ -1011,8 +1048,8 @@ class SubjectPlannerTests(unittest.TestCase):
         )
 
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
-        self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
-        self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
+        self.assertEqual("CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
+        self.assertEqual("CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()", plan["selection"]["workloadEntry"])
 
     def test_planner_selects_first_matrix_supporting_requested_goal_when_matrix_is_omitted(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_goal_only")

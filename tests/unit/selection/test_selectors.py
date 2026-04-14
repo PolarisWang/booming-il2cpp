@@ -39,7 +39,7 @@ class SelectorTests(unittest.TestCase):
 
     def test_declared_selector_parses_stable_id(self) -> None:
         selectors_module = load_module(SELECTORS_MODULE_PATH, "chaos_selector_declared")
-        declared_id = "declared-unit-test/SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"
+        declared_id = "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayOpsProofEntry::Run()"
 
         normalized = selectors_module.normalize_selector_options(
             "declared-unit-test",
@@ -48,7 +48,7 @@ class SelectorTests(unittest.TestCase):
 
         self.assertEqual(declared_id, normalized["id"])
         self.assertEqual(
-            "SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()",
+            "SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayOpsProofEntry::Run()",
             normalized["stable_id"],
         )
 

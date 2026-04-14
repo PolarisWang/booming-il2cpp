@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GoldenCoreLibReference.App</RootNamespace>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <UseAppHost>false</UseAppHost>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.NETCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib">
+      <HintPath>..\..\..\..\..\..\assets\reference-bundles\dotnet-foundation\net8.0\mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="netstandard">
+      <HintPath>..\..\..\..\..\..\assets\reference-bundles\dotnet-foundation\net8.0\netstandard.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime">
+      <HintPath>..\..\..\..\..\..\assets\reference-bundles\dotnet-foundation\net8.0\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions">
+      <HintPath>..\..\..\..\..\..\assets\reference-bundles\dotnet-foundation\net8.0\System.Runtime.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Console">
+      <HintPath>..\..\..\..\..\..\assets\reference-bundles\dotnet-foundation\net8.0\System.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections">
+      <HintPath>..\..\..\..\..\..\assets\reference-bundles\dotnet-foundation\net8.0\System.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq">
+      <HintPath>..\..\..\..\..\..\assets\reference-bundles\dotnet-foundation\net8.0\System.Linq.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

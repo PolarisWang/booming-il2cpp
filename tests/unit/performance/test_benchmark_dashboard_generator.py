@@ -399,7 +399,7 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
                 benchmark_case={
                     "stableId": "arith",
                     "alias": "arithmetic-bench",
-                    "workloadEntry": "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()",
+                    "workloadEntry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
                 },
             )
             self._write_record(
@@ -411,7 +411,7 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
                 benchmark_case={
                     "stableId": "arith",
                     "alias": "arithmetic-bench",
-                    "workloadEntry": "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()",
+                    "workloadEntry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
                 },
             )
             self._write_record(
@@ -423,7 +423,7 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
                 benchmark_case={
                     "stableId": "dispatch",
                     "alias": "dispatch-bench",
-                    "workloadEntry": "PerformanceFeaturePack/DispatchBenchmarkEntry::RunWorkload()",
+                    "workloadEntry": "CoreRuntimeBenchmarks/DispatchBenchmarkEntry::RunWorkload()",
                 },
             )
             self._write_record(
@@ -435,7 +435,7 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
                 benchmark_case={
                     "stableId": "dispatch",
                     "alias": "dispatch-bench",
-                    "workloadEntry": "PerformanceFeaturePack/DispatchBenchmarkEntry::RunWorkload()",
+                    "workloadEntry": "CoreRuntimeBenchmarks/DispatchBenchmarkEntry::RunWorkload()",
                 },
             )
 
@@ -499,7 +499,7 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
                 benchmark_case={
                     "stableId": "allocation",
                     "alias": "allocation-bench",
-                    "workloadEntry": "PerformanceFeaturePack/AllocationBenchmarkEntry::RunWorkload()",
+                    "workloadEntry": "CoreRuntimeBenchmarks/AllocationBenchmarkEntry::RunWorkload()",
                     "supportedModes": ["managed"],
                     "category": 3,
                     "metrics": 3,
@@ -529,7 +529,7 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
         )
         repo_root = self._make_repo_root()
         docs_root = repo_root / "docs" / "benchmark"
-        workload_entry = "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()"
+        workload_entry = "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()"
 
         try:
             self._write_testing_support(repo_root)
@@ -563,8 +563,8 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
                     "stableId": "arith",
                     "alias": "arithmetic-bench",
                     "workloadEntry": workload_entry,
-                    "assemblyName": "PerformanceFeaturePack",
-                    "declaringType": "PerformanceFeaturePack.ArithmeticBenchmarkEntry",
+                    "assemblyName": "CoreRuntimeBenchmarks",
+                    "declaringType": "CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry",
                     "supportedModes": ["managed", "native"],
                 },
             )
@@ -578,8 +578,8 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
                     "stableId": "arith",
                     "alias": "arithmetic-bench",
                     "workloadEntry": workload_entry,
-                    "assemblyName": "PerformanceFeaturePack",
-                    "declaringType": "PerformanceFeaturePack.ArithmeticBenchmarkEntry",
+                    "assemblyName": "CoreRuntimeBenchmarks",
+                    "declaringType": "CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry",
                     "supportedModes": ["managed", "native"],
                 },
             )
@@ -589,7 +589,7 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
             subject_payload = json.loads((docs_root / "subjects" / "SolutionCorePack.json").read_text(encoding="utf-8"))
             self.assertEqual(workload_entry, subject_payload["summaryWorkloadEntry"])
             self.assertEqual("arithmetic-bench", subject_payload["summaryBenchmarkCase"]["displayName"])
-            self.assertEqual("PerformanceFeaturePack", subject_payload["summaryBenchmarkCase"]["assemblyName"])
+            self.assertEqual("CoreRuntimeBenchmarks", subject_payload["summaryBenchmarkCase"]["assemblyName"])
 
             overview_payload = json.loads((docs_root / "overview.json").read_text(encoding="utf-8"))
             self.assertEqual(
@@ -601,6 +601,74 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
             self.assertIn("Summary Workload", dashboard_html)
             self.assertIn("Solution Slice Breakdown", dashboard_html)
             self.assertIn("Latency vs Managed", dashboard_html)
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_update_docs_exposes_archetype_and_hot_update_case_metadata_for_dashboard_layout(self) -> None:
+        generator_module = load_module(
+            BENCHMARK_DASHBOARD_GENERATOR_MODULE_PATH,
+            "chaos_benchmark_dashboard_generator_case_contract_labels",
+        )
+        repo_root = self._make_repo_root()
+        docs_root = repo_root / "docs" / "benchmark"
+        workload_entry = "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()"
+
+        try:
+            self._write_testing_support(repo_root)
+            self._write_subject_manifest(
+                repo_root,
+                subject_id="HotUpdateHostPack",
+                supported_modes=["managed"],
+                workload_entry=workload_entry,
+            )
+            self._write_record(
+                repo_root,
+                subject_id="HotUpdateHostPack",
+                mode="managed",
+                mean_duration_ms=42.0,
+                mean_ops_per_second=250.0,
+            )
+            self._write_record(
+                repo_root,
+                subject_id="HotUpdateHostPack",
+                mode="managed",
+                mean_duration_ms=18.5,
+                mean_ops_per_second=540.0,
+                benchmark_case={
+                    "stableId": "hot-update-load",
+                    "alias": "hot-update-load-bench",
+                    "workloadEntry": workload_entry,
+                    "assemblyName": "HotUpdateHostPack",
+                    "declaringType": "HotUpdateHostPack.HotUpdateLoadBenchmarkEntry",
+                    "category": 4,
+                    "metrics": 1,
+                    "requires": 32,
+                    "archetype": 7,
+                    "hotUpdateCapability": 17,
+                    "supportedModes": ["managed"],
+                },
+            )
+
+            generator_module.update_docs(repo_root)
+
+            subject_payload = json.loads((docs_root / "subjects" / "HotUpdateHostPack.json").read_text(encoding="utf-8"))
+            self.assertEqual(
+                "Skeleton Patch Solution",
+                subject_payload["summaryBenchmarkCase"]["archetypeLabel"],
+            )
+            self.assertEqual(
+                ["Package Load", "Patch Integrity"],
+                subject_payload["summaryBenchmarkCase"]["hotUpdateCapabilityLabels"],
+            )
+            case_payload = subject_payload["benchmarkCasesByDevice"]["windows-x64-test-device"]["hot-update-load"]
+            self.assertEqual("Hot Update", case_payload["categoryLabel"])
+            self.assertEqual("Skeleton Patch Solution", case_payload["archetypeLabel"])
+            self.assertEqual(["Package Load", "Patch Integrity"], case_payload["hotUpdateCapabilityLabels"])
+            self.assertEqual(["Hot Update"], case_payload["requirementLabels"])
+
+            dashboard_html = (docs_root / "dashboard.html").read_text(encoding="utf-8")
+            self.assertIn("Solution Archetype", dashboard_html)
+            self.assertIn("Hot-Update Capability", dashboard_html)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

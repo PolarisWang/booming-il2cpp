@@ -8,8 +8,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
-SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "Slices" / "MainlineFeaturePack" / "MainlineFeaturePack.csproj"
-SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Slices" / "MainlineFeaturePack" / "MarshalingProof.cs"
+SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
+SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "InteropAndMarshaling" / "MarshalingProof.cs"
 PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
 PROOF_MAIN_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "main.cpp"
 PROOF_RUN_SCRIPT_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "RunNativeReferenceProof.cmake"
@@ -50,7 +50,7 @@ class Phase2MarshalingProofTests(unittest.TestCase):
             "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
             manifest["source"]["primaryProjectPath"],
         )
-        self.assertEqual("MainlineFeaturePack/ProofEntry::Run()", manifest["source"]["entry"])
+        self.assertEqual("CoreRuntimeFeatures/ProofEntry::Run()", manifest["source"]["entry"])
         self.assertEqual("require", manifest["testDeclarationMode"])
         self.assertEqual("proof", manifest["validation"]["proof"]["kind"])
 

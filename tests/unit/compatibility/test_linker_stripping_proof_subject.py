@@ -11,8 +11,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
-SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "Slices" / "MainlineFeaturePack" / "MainlineFeaturePack.csproj"
-SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Slices" / "MainlineFeaturePack" / "LinkerStrippingProof.cs"
+SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
+SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "ReflectionAndMetadata" / "LinkerStrippingProof.cs"
 FIXTURE_PROJECT_PATH = (
     REPO_ROOT / "tests" / "fixtures" / "contracts" / "linker-stripping-proof" / "FixtureLinkerStrippingProof.csproj"
 )
@@ -21,7 +21,7 @@ PROOF_MAIN_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "
 PROOF_RUN_SCRIPT_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "RunNativeReferenceProof.cmake"
 PROFILE_ID = "proof-linker-stripping"
 MATRIX_ID = "windows-linker-stripping-check"
-ENTRY_POINT = "MainlineFeaturePack/LinkerStrippingProofEntry::Run()"
+ENTRY_POINT = "CoreRuntimeFeatures/LinkerStrippingProofEntry::Run()"
 
 CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
 LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
@@ -77,7 +77,7 @@ class Phase2LinkerStrippingProofTests(unittest.TestCase):
             "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
             manifest["source"]["primaryProjectPath"],
         )
-        self.assertEqual("MainlineFeaturePack/ProofEntry::Run()", manifest["source"]["entry"])
+        self.assertEqual("CoreRuntimeFeatures/ProofEntry::Run()", manifest["source"]["entry"])
         self.assertEqual("require", manifest["testDeclarationMode"])
         self.assertEqual("proof", manifest["validation"]["proof"]["kind"])
 
@@ -200,12 +200,12 @@ class Phase2LinkerStrippingProofTests(unittest.TestCase):
             for registration in metadata_registration["registrations"]
         }
 
-        self.assertIn("MainlineFeaturePack/PreservedUnusedHarness", preserve_subject_ids)
-        self.assertNotIn("MainlineFeaturePack/StrippedUnusedHarness", preserve_subject_ids)
-        self.assertIn("MainlineFeaturePack/ReachableHarness", registered_subject_ids)
-        self.assertIn("MainlineFeaturePack/PreservedUnusedHarness", registered_subject_ids)
-        self.assertNotIn("MainlineFeaturePack/StrippedUnusedHarness", registered_subject_ids)
-        self.assertNotIn("MainlineFeaturePack/StrippedUnusedHarness::Marker()", registered_subject_ids)
+        self.assertIn("CoreRuntimeFeatures/PreservedUnusedHarness", preserve_subject_ids)
+        self.assertNotIn("CoreRuntimeFeatures/StrippedUnusedHarness", preserve_subject_ids)
+        self.assertIn("CoreRuntimeFeatures/ReachableHarness", registered_subject_ids)
+        self.assertIn("CoreRuntimeFeatures/PreservedUnusedHarness", registered_subject_ids)
+        self.assertNotIn("CoreRuntimeFeatures/StrippedUnusedHarness", registered_subject_ids)
+        self.assertNotIn("CoreRuntimeFeatures/StrippedUnusedHarness::Marker()", registered_subject_ids)
 
 
 if __name__ == "__main__":

@@ -3,40 +3,25 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+try:
+    from . import declared_metadata_labels as declared_metadata_labels_module
+except ImportError:
+    testing_root = Path(__file__).resolve().parent
+    if str(testing_root) not in sys.path:
+        sys.path.insert(0, str(testing_root))
+    import declared_metadata_labels as declared_metadata_labels_module
 
-_MODE_ORDER = ("managed", "native", "interpreter")
+
+_MODE_ORDER = declared_metadata_labels_module.MODE_ORDER
 _DEFAULT_PLATFORM = "windows-x64"
 _STALE_AFTER_DAYS = 7.0
-_MODE_FLAGS = {
-    "managed": 1 << 0,
-    "native": 1 << 1,
-    "interpreter": 1 << 2,
-}
-_ALL_MODE_FLAGS = sum(_MODE_FLAGS.values())
-_BENCHMARK_CATEGORY_LABELS = {
-    1: "Runtime Dispatch",
-    2: "Startup",
-    3: "Allocation",
-    4: "Hot Update",
-}
-_METRIC_LABELS = {
-    1 << 0: "Wall Clock",
-    1 << 1: "Managed Alloc",
-    1 << 2: "Native Alloc",
-    1 << 3: "Working Set",
-}
-_RUNTIME_FEATURE_LABELS = {
-    1 << 0: "Generic Sharing",
-    1 << 1: "Reflection",
-    1 << 2: "Delegate",
-    1 << 3: "Exception Flow",
-    1 << 4: "Native Interop",
-    1 << 5: "Hot Update",
-}
+_MODE_FLAGS = declared_metadata_labels_module.MODE_FLAGS
+_ALL_MODE_FLAGS = declared_metadata_labels_module.ALL_MODE_FLAGS
 
 
 def _load(name: str, path: Path):
@@ -53,21 +38,11 @@ def _sort_modes(values: list[str]) -> list[str]:
 
 
 def _supported_modes_from_mask(value: Any) -> list[str]:
-    try:
-        mask = int(value or 0)
-    except (TypeError, ValueError):
-        mask = 0
-    if mask <= 0:
-        mask = _ALL_MODE_FLAGS
-    return [mode for mode in _MODE_ORDER if mask & _MODE_FLAGS[mode]]
+    return declared_metadata_labels_module.supported_modes_from_mask(value)
 
 
 def _labels_from_mask(value: Any, labels: dict[int, str]) -> list[str]:
-    try:
-        mask = int(value or 0)
-    except (TypeError, ValueError):
-        mask = 0
-    return [label for bit, label in labels.items() if mask & bit]
+    return declared_metadata_labels_module.labels_from_mask(value, labels)
 
 
 def _normalize_platform_key(value: str) -> str:
@@ -144,13 +119,23 @@ def _load_declared_benchmark_cases(repo_root: Path, subject_id: str) -> dict[str
             "methodName": str(item.get("methodName") or ""),
             "methodSignature": str(item.get("methodSignature") or ""),
             "category": int(item.get("category") or 0),
-            "categoryLabel": _BENCHMARK_CATEGORY_LABELS.get(int(item.get("category") or 0), "Uncategorized"),
+            "categoryLabel": declared_metadata_labels_module.benchmark_category_label(item.get("category")),
             "metrics": int(item.get("metrics") or 0),
-            "metricLabels": _labels_from_mask(item.get("metrics"), _METRIC_LABELS),
+            "metricLabels": _labels_from_mask(item.get("metrics"), declared_metadata_labels_module.METRIC_LABELS),
             "modes": modes,
             "supportedModes": _supported_modes_from_mask(modes),
             "requires": int(item.get("requires") or 0),
-            "requirementLabels": _labels_from_mask(item.get("requires"), _RUNTIME_FEATURE_LABELS),
+            "requirementLabels": _labels_from_mask(
+                item.get("requires"),
+                declared_metadata_labels_module.RUNTIME_FEATURE_LABELS,
+            ),
+            "archetype": int(item.get("archetype") or 0),
+            "archetypeLabel": declared_metadata_labels_module.archetype_label(item.get("archetype")),
+            "hotUpdateCapability": int(item.get("hotUpdateCapability") or 0),
+            "hotUpdateCapabilityLabels": _labels_from_mask(
+                item.get("hotUpdateCapability"),
+                declared_metadata_labels_module.HOT_UPDATE_CAPABILITY_LABELS,
+            ),
             "warmupCount": int(item.get("warmupCount") or 0),
             "iterationCount": int(item.get("iterationCount") or 0),
             "invocationCount": int(item.get("invocationCount") or 0),
@@ -188,6 +173,10 @@ def _summary_benchmark_case_payload(case_payload: dict[str, Any]) -> dict[str, A
         "categoryLabel": str(case_payload.get("categoryLabel") or "Uncategorized"),
         "metricLabels": list(case_payload.get("metricLabels") or []),
         "requirementLabels": list(case_payload.get("requirementLabels") or []),
+        "archetype": int(case_payload.get("archetype") or 0),
+        "archetypeLabel": str(case_payload.get("archetypeLabel") or declared_metadata_labels_module.archetype_label(0)),
+        "hotUpdateCapability": int(case_payload.get("hotUpdateCapability") or 0),
+        "hotUpdateCapabilityLabels": list(case_payload.get("hotUpdateCapabilityLabels") or []),
         "supportedModes": _sort_modes(list(case_payload.get("supportedModes") or [])),
     }
 
@@ -565,6 +554,10 @@ def _build_case_summary(
         "metricLabels": list(meta.get("metricLabels") or []),
         "requires": int(meta.get("requires") or 0),
         "requirementLabels": list(meta.get("requirementLabels") or []),
+        "archetype": int(meta.get("archetype") or 0),
+        "archetypeLabel": str(meta.get("archetypeLabel") or declared_metadata_labels_module.archetype_label(0)),
+        "hotUpdateCapability": int(meta.get("hotUpdateCapability") or 0),
+        "hotUpdateCapabilityLabels": list(meta.get("hotUpdateCapabilityLabels") or []),
         "warmupCount": int(meta.get("warmupCount") or 0),
         "iterationCount": int(meta.get("iterationCount") or 0),
         "invocationCount": int(meta.get("invocationCount") or 0),
@@ -660,13 +653,30 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
                         "methodName": str(benchmark_case.get("methodName") or ""),
                         "methodSignature": str(benchmark_case.get("methodSignature") or ""),
                         "category": int(benchmark_case.get("category") or 0),
-                        "categoryLabel": _BENCHMARK_CATEGORY_LABELS.get(int(benchmark_case.get("category") or 0), "Uncategorized"),
+                        "categoryLabel": declared_metadata_labels_module.benchmark_category_label(
+                            benchmark_case.get("category")
+                        ),
                         "metrics": int(benchmark_case.get("metrics") or 0),
-                        "metricLabels": _labels_from_mask(benchmark_case.get("metrics"), _METRIC_LABELS),
+                        "metricLabels": _labels_from_mask(
+                            benchmark_case.get("metrics"),
+                            declared_metadata_labels_module.METRIC_LABELS,
+                        ),
                         "modes": int(benchmark_case.get("modes") or 0),
                         "supportedModes": list(benchmark_case.get("supportedModes") or _supported_modes_from_mask(benchmark_case.get("modes"))),
                         "requires": int(benchmark_case.get("requires") or 0),
-                        "requirementLabels": _labels_from_mask(benchmark_case.get("requires"), _RUNTIME_FEATURE_LABELS),
+                        "requirementLabels": _labels_from_mask(
+                            benchmark_case.get("requires"),
+                            declared_metadata_labels_module.RUNTIME_FEATURE_LABELS,
+                        ),
+                        "archetype": int(benchmark_case.get("archetype") or 0),
+                        "archetypeLabel": declared_metadata_labels_module.archetype_label(
+                            benchmark_case.get("archetype")
+                        ),
+                        "hotUpdateCapability": int(benchmark_case.get("hotUpdateCapability") or 0),
+                        "hotUpdateCapabilityLabels": _labels_from_mask(
+                            benchmark_case.get("hotUpdateCapability"),
+                            declared_metadata_labels_module.HOT_UPDATE_CAPABILITY_LABELS,
+                        ),
                         "warmupCount": int(benchmark_case.get("warmupCount") or 0),
                         "iterationCount": int(benchmark_case.get("iterationCount") or 0),
                         "invocationCount": int(benchmark_case.get("invocationCount") or 0),

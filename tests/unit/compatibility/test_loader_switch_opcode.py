@@ -6,8 +6,8 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
-MIXED_EXECUTION_PROOF_PATH = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "MixedExecutionProofEntry.cs"
-INTERPRETER_LOWERING_PROOF_PATH = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "InterpreterLoweringProofEntry.cs"
+MIXED_EXECUTION_PROOF_PATH = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "ManagedBridge" / "Proofs" / "MixedExecutionProofEntry.cs"
+INTERPRETER_LOWERING_PROOF_PATH = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "Lowering" / "InterpreterLoweringProofEntry.cs"
 SOLUTION_CORE_LAUNCHER_PATH = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Launcher" / "Program.cs"
 
 

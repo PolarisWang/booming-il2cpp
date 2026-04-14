@@ -1,9 +1,17 @@
 # Version Compatibility Matrix
 
+> Compatibility shorthand: `major 不兼容`, `major.minor` 相同视为同一 compatibility band。
+
 ## 版本对象
 
-- `AOT 主包版本`：宿主二进制与内置 metadata/bridge/runtime 的版本。
+- `AOT 主包版本`：宿主二进制与内置 metadata / bridge / runtime 的版本。
 - `hot update patch`：运行时加载的补丁包版本。
+
+## 关联文档
+
+- `full-project-hotupdate-workflow.md`
+- `release-checklist.md`
+- `unsupported-feature-policy.md`
 
 ## 版本编号规则
 
@@ -11,10 +19,10 @@
 
 - 使用 `major.minor.patch`。
 - `major` 表示破坏性架构变更。
-- `minor` 表示兼容面扩展或桥/metadata 变化。
+- `minor` 表示兼容面扩展或某类 metadata 变化。
 - `patch` 表示不改变 compatibility band 的修复。
 
-### hot update patch
+### Hot update patch
 
 - 同样使用 `major.minor.patch`。
 - patch 自身可以独立递增，但它面向的宿主 compatibility band 由 `TargetAotVersion` 决定。
@@ -24,7 +32,7 @@
 - 默认按 `major.minor` 判定 compatibility band。
 - `major.minor` 相同：兼容。
 - `patch` 不同：仍兼容。
-- `major 不兼容`。
+- `major` 不同：不兼容。
 - `minor` 不同：默认不兼容，除非后续引入显式兼容矩阵放宽规则。
 
 ## PackageValidator 落地规则

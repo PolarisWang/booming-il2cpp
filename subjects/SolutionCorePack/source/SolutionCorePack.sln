@@ -5,17 +5,31 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionCorePack", "Launcher\SolutionCorePack.csproj", "{4B6FAF7A-0AA6-4D39-9040-C61DD43AA77D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainlineFeaturePack", "Slices\MainlineFeaturePack\MainlineFeaturePack.csproj", "{A0BB3E3F-2A44-4778-91BF-3901E3A417D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreRuntimeFeatures", "FeatureSlices\CoreRuntimeFeatures\CoreRuntimeFeatures.csproj", "{A0BB3E3F-2A44-4778-91BF-3901E3A417D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerformanceFeaturePack", "Slices\PerformanceFeaturePack\PerformanceFeaturePack.csproj", "{F4E0F248-2D71-41B1-9E54-7B6B0C1A2D3A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreRuntimeBenchmarks", "Benchmarks\CoreRuntimeBenchmarks\CoreRuntimeBenchmarks.csproj", "{F4E0F248-2D71-41B1-9E54-7B6B0C1A2D3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenSimpleLib.App", "Archetypes\SolutionSimpleLib\App\GoldenSimpleLib.App.csproj", "{E0E86015-240B-42A8-A265-E5F97F26E7D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenSimpleLib.App", "Archetypes\SimpleLibrarySolution\App\GoldenSimpleLib.App.csproj", "{E0E86015-240B-42A8-A265-E5F97F26E7D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenMultiProject.App", "Archetypes\SolutionMultiProject\App\GoldenMultiProject.App.csproj", "{CBBCF1B0-F9EC-4932-A2BE-BD918E861F0A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenMultiProject.App", "Archetypes\MultiProjectSolution\App\GoldenMultiProject.App.csproj", "{CBBCF1B0-F9EC-4932-A2BE-BD918E861F0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenWithPackage.App", "Archetypes\SolutionPackageReference\App\GoldenWithPackage.App.csproj", "{E76491A7-7B56-4518-85B8-99898E4C0BE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenWithPackage.App", "Archetypes\PackageReferenceSolution\App\GoldenWithPackage.App.csproj", "{E76491A7-7B56-4518-85B8-99898E4C0BE7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Slices", "Slices", "{2389F34E-C4FF-4A93-85E2-5666D70122A3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FeatureSlices", "FeatureSlices", "{2389F34E-C4FF-4A93-85E2-5666D70122A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archetypes", "Archetypes", "{ADE02328-DE6C-435B-85E0-1248E41FA9EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReferenceAssemblySolution", "ReferenceAssemblySolution", "{6581A325-4660-49F7-88A2-F8EE4E3036E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenReferenceAssembly.App", "Archetypes\ReferenceAssemblySolution\App\GoldenReferenceAssembly.App.csproj", "{2A54A49C-3304-4279-9038-28D1A206FA3F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CoreLibReferenceSolution", "CoreLibReferenceSolution", "{CB98E54C-FD06-45C4-B130-A03194384FE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenCoreLibReference.App", "Archetypes\CoreLibReferenceSolution\App\GoldenCoreLibReference.App.csproj", "{95963B7C-A353-43DA-BC60-040C69677CA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MixedReferenceClosureSolution", "MixedReferenceClosureSolution", "{0784926B-B5CE-4A0D-B724-47151A9B0265}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenMixedReference.App", "Archetypes\MixedReferenceClosureSolution\App\GoldenMixedReference.App.csproj", "{CC4D9DB6-41D5-4B3E-BCDF-BB9BC129C1BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,7 +64,25 @@ Global
 		{E76491A7-7B56-4518-85B8-99898E4C0BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E76491A7-7B56-4518-85B8-99898E4C0BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E76491A7-7B56-4518-85B8-99898E4C0BE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A54A49C-3304-4279-9038-28D1A206FA3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A54A49C-3304-4279-9038-28D1A206FA3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A54A49C-3304-4279-9038-28D1A206FA3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A54A49C-3304-4279-9038-28D1A206FA3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95963B7C-A353-43DA-BC60-040C69677CA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95963B7C-A353-43DA-BC60-040C69677CA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95963B7C-A353-43DA-BC60-040C69677CA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95963B7C-A353-43DA-BC60-040C69677CA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC4D9DB6-41D5-4B3E-BCDF-BB9BC129C1BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC4D9DB6-41D5-4B3E-BCDF-BB9BC129C1BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC4D9DB6-41D5-4B3E-BCDF-BB9BC129C1BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC4D9DB6-41D5-4B3E-BCDF-BB9BC129C1BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{6581A325-4660-49F7-88A2-F8EE4E3036E8} = {ADE02328-DE6C-435B-85E0-1248E41FA9EE}
+		{2A54A49C-3304-4279-9038-28D1A206FA3F} = {6581A325-4660-49F7-88A2-F8EE4E3036E8}
+		{CB98E54C-FD06-45C4-B130-A03194384FE5} = {ADE02328-DE6C-435B-85E0-1248E41FA9EE}
+		{95963B7C-A353-43DA-BC60-040C69677CA2} = {CB98E54C-FD06-45C4-B130-A03194384FE5}
+		{0784926B-B5CE-4A0D-B724-47151A9B0265} = {ADE02328-DE6C-435B-85E0-1248E41FA9EE}
+		{CC4D9DB6-41D5-4B3E-BCDF-BB9BC129C1BA} = {0784926B-B5CE-4A0D-B724-47151A9B0265}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GoldenMixedReference.App</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\GoldenMixedReference.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ReferenceGreeter">
+      <HintPath>..\..\..\..\..\..\assets\reference-bundles\dotnet-foundation\lib\ReferenceGreeter.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
+  </ItemGroup>
+</Project>

@@ -8,12 +8,12 @@
     <RootNamespace>MixedExecutionFeaturePack</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="InterpreterArithmeticProof\\**\\*.cs" />
+    <Compile Remove="Archetypes\\**\\*.cs" />
     <ProjectReference Include="../../../src/reference/Chaos.TestFramework/Chaos.TestFramework.csproj" />
     <ProjectReference Include="../../../src/managed/Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.csproj" />
     <ProjectReference Include="../../../src/managed/Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.csproj" />
     <ProjectReference Include="../../../src/managed/Chaos.IL2CPP.Loader/Chaos.IL2CPP.Loader.csproj" />
     <ProjectReference Include="../../../src/managed/Chaos.IL2CPP.Interpreter/Chaos.IL2CPP.Interpreter.csproj" />
-    <ProjectReference Include="InterpreterArithmeticProof/InterpreterArithmeticProof.csproj" />
+    <ProjectReference Include="Archetypes/MixedBridgeSolution/InterpreterArithmeticProof/InterpreterArithmeticProof.csproj" />
   </ItemGroup>
 </Project>

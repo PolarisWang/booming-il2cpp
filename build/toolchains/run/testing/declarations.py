@@ -35,6 +35,10 @@ class DeclaredTestEntry:
     method_name: str = ""
     method_signature: str = ""
     category: int = 0
+    capability_family: int = 0
+    capability_item: int = 0
+    archetype: int = 0
+    hot_update_capability: int = 0
     metrics: int = 0
     modes: int = 0
     requires: int = 0
@@ -82,6 +86,10 @@ def _normalize_declared_entries(
                 method_name=str(payload.get("methodName") or payload.get("method_name") or ""),
                 method_signature=str(payload.get("methodSignature") or payload.get("method_signature") or ""),
                 category=int(payload.get("category") or 0),
+                capability_family=int(payload.get("capabilityFamily") or payload.get("capability_family") or 0),
+                capability_item=int(payload.get("capabilityItem") or payload.get("capability_item") or 0),
+                archetype=int(payload.get("archetype") or 0),
+                hot_update_capability=int(payload.get("hotUpdateCapability") or payload.get("hot_update_capability") or 0),
                 metrics=int(payload.get("metrics") or 0),
                 modes=int(payload.get("modes") or 0),
                 requires=int(payload.get("requires") or 0),

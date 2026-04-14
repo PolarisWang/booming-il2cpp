@@ -3,13 +3,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>MainlineFeaturePack</AssemblyName>
-    <RootNamespace>MainlineFeaturePack</RootNamespace>
+    <AssemblyName>CoreRuntimeFeatures</AssemblyName>
+    <RootNamespace>CoreRuntimeFeatures</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\reference\Chaos.TestFramework\Chaos.TestFramework.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\subjects\SolutionCorePack\source\Slices\MainlineFeaturePack\LinkerStrippingProof.cs" Link="LinkerStrippingProof.cs" />
+    <Compile Include="..\..\..\..\subjects\SolutionCorePack\source\FeatureSlices\CoreRuntimeFeatures\ReflectionAndMetadata\LinkerStrippingProof.cs" Link="LinkerStrippingProof.cs" />
   </ItemGroup>
 </Project>

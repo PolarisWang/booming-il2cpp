@@ -249,8 +249,20 @@ internal static class Program
                 case "Alias":
                     entry.Alias = reader.ReadSerializedString();
                     break;
+                case "CapabilityFamily":
+                    entry.CapabilityFamily = reader.ReadByte();
+                    break;
+                case "Capability":
+                    entry.CapabilityItem = reader.ReadUInt16();
+                    break;
                 case "Requires":
                     entry.Requires = reader.ReadUInt32();
+                    break;
+                case "Archetype":
+                    entry.Archetype = reader.ReadByte();
+                    break;
+                case "HotUpdateCapability":
+                    entry.HotUpdateCapability = reader.ReadUInt16();
                     break;
                 case "Evidence":
                     entry.Evidence = reader.ReadUInt16();
@@ -278,8 +290,20 @@ internal static class Program
                 case "Alias":
                     entry.Alias = reader.ReadSerializedString();
                     break;
+                case "CapabilityFamily":
+                    entry.CapabilityFamily = reader.ReadByte();
+                    break;
+                case "Capability":
+                    entry.CapabilityItem = reader.ReadUInt16();
+                    break;
                 case "Requires":
                     entry.Requires = reader.ReadUInt32();
+                    break;
+                case "Archetype":
+                    entry.Archetype = reader.ReadByte();
+                    break;
+                case "HotUpdateCapability":
+                    entry.HotUpdateCapability = reader.ReadUInt16();
                     break;
                 case "Modes":
                     entry.Modes = reader.ReadByte();
@@ -334,9 +358,25 @@ internal static class Program
         {
             return SerializationTypeCode.Byte;
         }
+        if (enumTypeName.EndsWith("ChaosCapabilityFamily", StringComparison.Ordinal))
+        {
+            return SerializationTypeCode.Byte;
+        }
+        if (enumTypeName.EndsWith("ChaosCapabilityItem", StringComparison.Ordinal))
+        {
+            return SerializationTypeCode.UInt16;
+        }
         if (enumTypeName.EndsWith("ChaosRuntimeFeature", StringComparison.Ordinal))
         {
             return SerializationTypeCode.UInt32;
+        }
+        if (enumTypeName.EndsWith("ChaosSolutionArchetype", StringComparison.Ordinal))
+        {
+            return SerializationTypeCode.Byte;
+        }
+        if (enumTypeName.EndsWith("ChaosHotUpdateCapability", StringComparison.Ordinal))
+        {
+            return SerializationTypeCode.UInt16;
         }
         if (enumTypeName.EndsWith("ChaosEvidenceKind", StringComparison.Ordinal))
         {
@@ -549,7 +589,15 @@ internal class DeclaredEntryBase
 
     public byte Category { get; set; }
 
+    public byte CapabilityFamily { get; set; }
+
+    public ushort CapabilityItem { get; set; }
+
     public uint Requires { get; set; }
+
+    public byte Archetype { get; set; }
+
+    public ushort HotUpdateCapability { get; set; }
 }
 
 internal sealed class DeclaredUnitEntry : DeclaredEntryBase
@@ -635,7 +683,11 @@ internal sealed class AttributeTypeProvider : ICustomAttributeTypeProvider<strin
             "Chaos.TestFramework.ChaosBenchmarkCategory" => PrimitiveTypeCode.Byte,
             "Chaos.TestFramework.ChaosMetric" => PrimitiveTypeCode.UInt16,
             "Chaos.TestFramework.ChaosExecutionMode" => PrimitiveTypeCode.Byte,
+            "Chaos.TestFramework.ChaosCapabilityFamily" => PrimitiveTypeCode.Byte,
+            "Chaos.TestFramework.ChaosCapabilityItem" => PrimitiveTypeCode.UInt16,
             "Chaos.TestFramework.ChaosRuntimeFeature" => PrimitiveTypeCode.UInt32,
+            "Chaos.TestFramework.ChaosSolutionArchetype" => PrimitiveTypeCode.Byte,
+            "Chaos.TestFramework.ChaosHotUpdateCapability" => PrimitiveTypeCode.UInt16,
             "Chaos.TestFramework.ChaosEvidenceKind" => PrimitiveTypeCode.UInt16,
             _ => PrimitiveTypeCode.Int32,
         };

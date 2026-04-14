@@ -9,7 +9,7 @@
     "type": "dotnet-project",
     "path": "subjects/SolutionCorePack/source/SolutionCorePack.sln",
     "primaryProjectPath": "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
-    "entry": "MainlineFeaturePack/ProofEntry::Run()",
+    "entry": "CoreRuntimeFeatures/ProofEntry::Run()",
     "entrySelection": {
       "entryKind": 1,
       "entrySlice": 7
@@ -20,7 +20,7 @@
   "executablePlan": "generated-native",
   "engineeringProfile": "native-executable",
   "testDeclarationMode": "require",
-  "workloadEntry": "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()",
+  "workloadEntry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
   "validationProfiles": {
     "proof-dev": [
       "proof"
@@ -339,7 +339,7 @@
       ],
       "source": {
         "entry": "GoldenSimpleLib.App/Program::Main()",
-        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/SolutionSimpleLib/App/GoldenSimpleLib.App.csproj",
+        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/SimpleLibrarySolution/App/GoldenSimpleLib.App.csproj",
         "entrySelection": {
           "entryKind": 1,
           "entrySlice": 4
@@ -374,7 +374,7 @@
       ],
       "source": {
         "entry": "GoldenMultiProject.App/Program::Main()",
-        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/SolutionMultiProject/App/GoldenMultiProject.App.csproj",
+        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/MultiProjectSolution/App/GoldenMultiProject.App.csproj",
         "entrySelection": {
           "entryKind": 1,
           "entrySlice": 5
@@ -409,10 +409,115 @@
       ],
       "source": {
         "entry": "GoldenWithPackage.App/Program::Main()",
-        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/SolutionPackageReference/App/GoldenWithPackage.App.csproj",
+        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/PackageReferenceSolution/App/GoldenWithPackage.App.csproj",
         "entrySelection": {
           "entryKind": 1,
           "entrySlice": 6
+        }
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "dotnet-managed",
+        "runtimeProfile": "managed-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-archetype-reference-assembly-managed-output",
+      "pipelineId": "managed-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "GoldenReferenceAssembly.App/Program::Main()",
+        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/ReferenceAssemblySolution/App/GoldenReferenceAssembly.App.csproj",
+        "entrySelection": {
+          "entryKind": 1,
+          "entrySlice": 8
+        }
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "dotnet-managed",
+        "runtimeProfile": "managed-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-archetype-corelib-reference-managed-output",
+      "pipelineId": "managed-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "GoldenCoreLibReference.App/Program::Main()",
+        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/CoreLibReferenceSolution/App/GoldenCoreLibReference.App.csproj",
+        "entrySelection": {
+          "entryKind": 1,
+          "entrySlice": 9
+        }
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "dotnet-managed",
+        "runtimeProfile": "managed-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
+      "matrixId": "windows-archetype-mixed-reference-closure-managed-output",
+      "pipelineId": "managed-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "entry": "GoldenMixedReference.App/Program::Main()",
+        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/MixedReferenceClosureSolution/App/GoldenMixedReference.App.csproj",
+        "entrySelection": {
+          "entryKind": 1,
+          "entrySlice": 10
         }
       },
       "executionContext": {
@@ -442,6 +547,13 @@
       "supportedGoals": [
         "correctness.dev"
       ],
+      "source": {
+          "entry": "CoreRuntimeFeatures/InterfaceDispatchProofEntry::Run()",
+        "entrySelection": {
+          "entryKind": 1,
+          "entrySlice": 11
+        }
+      },
       "executionContext": {
         "hostPlatform": "windows-x64",
         "targetPlatform": "windows-x64",
@@ -473,8 +585,8 @@
         "correctness.platform"
       ],
       "source": {
-        "primaryProjectPath": "subjects/SolutionCorePack/source/Slices/MainlineFeaturePack/MainlineFeaturePack.csproj",
-        "entry": "MainlineFeaturePack/Program::Main(System.String[])"
+        "primaryProjectPath": "subjects/SolutionCorePack/source/FeatureSlices/CoreRuntimeFeatures/CoreRuntimeFeatures.csproj",
+          "entry": "CoreRuntimeFeatures/Program::Main(System.String[])"
       },
       "executionContext": {
         "hostPlatform": "windows-x64",
@@ -504,8 +616,8 @@
         "correctness.platform"
       ],
       "source": {
-        "primaryProjectPath": "subjects/SolutionCorePack/source/Slices/MainlineFeaturePack/MainlineFeaturePack.csproj",
-        "entry": "MainlineFeaturePack/Program::Main(System.String[])"
+        "primaryProjectPath": "subjects/SolutionCorePack/source/FeatureSlices/CoreRuntimeFeatures/CoreRuntimeFeatures.csproj",
+          "entry": "CoreRuntimeFeatures/Program::Main(System.String[])"
       },
       "executionContext": {
         "hostPlatform": "macos-arm64",
@@ -529,43 +641,13 @@
       }
     },
     {
-      "matrixId": "windows-managed-perf",
-      "pipelineId": "managed-benchmark",
-      "supportedGoals": [
-        "perf.release"
-      ],
-      "source": {
-        "entry": "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()"
-      },
-      "executionContext": {
-        "hostPlatform": "windows-x64",
-        "targetPlatform": "windows-x64",
-        "toolchainProfile": "dotnet-managed",
-        "runtimeProfile": "managed-perf-release"
-      },
-      "validationIntent": {
-        "validationMode": "perf",
-        "adaptationLevel": "native-runtime",
-        "expectedOutcome": "pass"
-      },
-      "artifactPlan": {
-        "requiredBuckets": [
-          "source",
-          "host-input",
-          "runtime",
-          "report"
-        ],
-        "evidenceTerminalBucket": "report"
-      }
-    },
-    {
       "matrixId": "windows-native-perf",
       "pipelineId": "native-benchmark",
       "supportedGoals": [
         "perf.release"
       ],
       "source": {
-        "entry": "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()"
+          "entry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()"
       },
       "executionContext": {
         "hostPlatform": "windows-x64",
@@ -590,7 +672,37 @@
         ],
         "evidenceTerminalBucket": "report"
       },
-      "workloadEntry": "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()"
+      "workloadEntry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()"
+    },
+    {
+      "matrixId": "windows-managed-perf",
+      "pipelineId": "managed-benchmark",
+      "supportedGoals": [
+        "perf.release"
+      ],
+      "source": {
+          "entry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "dotnet-managed",
+        "runtimeProfile": "managed-perf-release"
+      },
+      "validationIntent": {
+        "validationMode": "perf",
+        "adaptationLevel": "native-runtime",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "report"
+      }
     }
   ]
 }

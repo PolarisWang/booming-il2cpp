@@ -1914,11 +1914,11 @@ class SubjectWorkersTests(unittest.TestCase):
         subject_id = "SolutionCorePack"
         run_id = "fixture-run-managed-perf-solution-slice-001"
         matrix_id = "windows-managed-perf"
-        workload_entry = "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()"
+        workload_entry = "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()"
         intermediate_root = TEST_TMP_ROOT / "dotnet-intermediates" / "fixture-managed-perf-solution-slice"
         perf_project_path = "src/validation/perf/Benchmark.WorkloadEntry.PerfHarness/Benchmark.WorkloadEntry.PerfHarness.csproj"
         primary_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "SolutionCorePack.dll")
-        slice_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "PerformanceFeaturePack.dll")
+        slice_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "CoreRuntimeBenchmarks.dll")
         request = {
             "selection": {
                 "subjectId": subject_id,

@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import shutil
+import subprocess
 import sys
 import unittest
 from pathlib import Path
@@ -14,6 +15,7 @@ from tests.support import clone_registry_fixture_tree, make_temp_repo_root, mate
 REPO_ROOT = Path(__file__).resolve().parents[3]
 REGISTRY_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "registry.py"
 PUBLIC_SPECS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "public_specs.py"
+HOT_UPDATE_HOST_PACK_PROJECT_PATH = REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "HotUpdateHostPack.csproj"
 
 
 def load_module(path: Path, module_name: str):
@@ -28,6 +30,22 @@ def load_module(path: Path, module_name: str):
     sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
+
+
+def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
+    completed = subprocess.run(
+        arguments,
+        cwd=cwd,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        check=False,
+    )
+    if completed.returncode != 0:
+        combined_output = "\n".join(part for part in [completed.stdout, completed.stderr] if part)
+        raise AssertionError(f"command failed ({completed.returncode}): {' '.join(arguments)}\n{combined_output}")
+    return completed
 
 
 def make_stage(
@@ -708,7 +726,7 @@ class RegistryScanTests(unittest.TestCase):
             mixed_execution_item["defaultSubjectEntrySelection"],
         )
         self.assertEqual(
-            "MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()",
+            "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
             mixed_execution_item["defaultWorkloadEntry"],
         )
 
@@ -717,24 +735,36 @@ class RegistryScanTests(unittest.TestCase):
             solution_core_item["defaultPrimaryProjectPath"],
         )
         self.assertEqual(
-            "MainlineFeaturePack/ProofEntry::Run()",
+            "CoreRuntimeFeatures/InterfaceDispatchProofEntry::Run()",
             solution_core_item["defaultSourceEntry"],
         )
         self.assertEqual(
             {
                 "entryKind": 1,
-                "entrySlice": 7,
+                "entrySlice": 11,
             },
             solution_core_item["defaultSubjectEntrySelection"],
         )
         self.assertEqual(
-            "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()",
+            "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
             solution_core_item["defaultWorkloadEntry"],
         )
 
     def test_registry_scan_projects_engineering_and_declared_catalog_object_families(self) -> None:
         registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_compiled_object_families")
         specs_module = load_module(PUBLIC_SPECS_MODULE_PATH, "chaos_run_public_specs_compiled_object_families")
+
+        run_checked(
+            [
+                "dotnet",
+                "build",
+                str(HOT_UPDATE_HOST_PACK_PROJECT_PATH),
+                "-c",
+                "Debug",
+                "-m:1",
+            ],
+            cwd=REPO_ROOT,
+        )
 
         index = registry_module.scan_registry(
             REPO_ROOT,
@@ -746,25 +776,30 @@ class RegistryScanTests(unittest.TestCase):
         self.assertIn("engineering-validation/SolutionCorePack/project-graph", object_ids)
         self.assertIn("engineering-workload/SolutionCorePack/codegen", object_ids)
         self.assertIn(
-            "declared-unit-test/SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()",
+            "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayOpsProofEntry::Run()",
             object_ids,
         )
         self.assertIn(
-            "declared-benchmark/SolutionCorePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()",
+            "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericBenchmarkEntry::RunWorkload()",
             object_ids,
         )
 
         declared_unit_item = next(
             item
             for item in index.flat_items
-            if item["id"] == "declared-unit-test/SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()"
+            if item["id"] == "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayOpsProofEntry::Run()"
         )
         self.assertEqual("declared-unit-test", declared_unit_item["type"])
         self.assertEqual("SolutionCorePack", declared_unit_item["subjectId"])
         self.assertEqual(
-            "run test declared-unit-test --id declared-unit-test/SolutionCorePack::MainlineFeaturePack::MainlineFeaturePack.ArrayOpsProofEntry::Run()",
+            "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayOpsProofEntry::Run()",
             declared_unit_item["canonicalCommand"],
         )
+        self.assertEqual(1, declared_unit_item["category"])
+        self.assertEqual("Runtime Contract", declared_unit_item["categoryLabel"])
+        self.assertEqual(0, declared_unit_item["archetype"])
+        self.assertEqual("Unspecified", declared_unit_item["archetypeLabel"])
+        self.assertEqual([], declared_unit_item["hotUpdateCapabilityLabels"])
 
         engineering_workload_item = next(
             item
@@ -777,6 +812,40 @@ class RegistryScanTests(unittest.TestCase):
             "run test engineering-workload --id engineering-workload/SolutionCorePack/codegen",
             engineering_workload_item["canonicalCommand"],
         )
+
+        hot_update_benchmark_item = next(
+            item
+            for item in index.flat_items
+            if item["id"] == "declared-benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()"
+        )
+        self.assertEqual(4, hot_update_benchmark_item["category"])
+        self.assertEqual("Hot Update", hot_update_benchmark_item["categoryLabel"])
+        self.assertEqual(7, hot_update_benchmark_item["archetype"])
+        self.assertEqual("Skeleton Patch Solution", hot_update_benchmark_item["archetypeLabel"])
+        self.assertEqual(17, hot_update_benchmark_item["hotUpdateCapability"])
+        self.assertEqual(
+            ["Package Load", "Patch Integrity"],
+            hot_update_benchmark_item["hotUpdateCapabilityLabels"],
+        )
+        self.assertEqual(["managed"], hot_update_benchmark_item["supportedModes"])
+        self.assertEqual(["Wall Clock"], hot_update_benchmark_item["metricLabels"])
+        self.assertEqual(["Hot Update"], hot_update_benchmark_item["requirementLabels"])
+
+        shared_contract_unit_item = next(
+            item
+            for item in index.flat_items
+            if item["id"] == "declared-unit-test/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.SharedContractProofEntry::Run()"
+        )
+        self.assertEqual(5, shared_contract_unit_item["category"])
+        self.assertEqual("Hot Update Contract", shared_contract_unit_item["categoryLabel"])
+        self.assertEqual(8, shared_contract_unit_item["archetype"])
+        self.assertEqual("Full Project Hot-Update Solution", shared_contract_unit_item["archetypeLabel"])
+        self.assertEqual(66, shared_contract_unit_item["hotUpdateCapability"])
+        self.assertEqual(
+            ["Shared Contract Binding", "Patch Callback Flow"],
+            shared_contract_unit_item["hotUpdateCapabilityLabels"],
+        )
+        self.assertEqual(["Hot Update"], shared_contract_unit_item["requirementLabels"])
 
 
 if __name__ == "__main__":

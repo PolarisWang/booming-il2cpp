@@ -14,10 +14,10 @@ COMPILED_CATALOG_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "tes
 FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures" / "contracts" / "declared-metadata"
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "declared-metadata-discovery"
 SOLUTION_CORE_PACK_MAINLINE_SLICE_PROJECT_PATH = (
-    REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Slices" / "MainlineFeaturePack" / "MainlineFeaturePack.csproj"
+    REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
 )
 SOLUTION_CORE_PACK_PERFORMANCE_SLICE_PROJECT_PATH = (
-    REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Slices" / "PerformanceFeaturePack" / "PerformanceFeaturePack.csproj"
+    REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "CoreRuntimeBenchmarks.csproj"
 )
 HOT_UPDATE_HOST_PACK_PROJECT_PATH = REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "HotUpdateHostPack.csproj"
 MIXED_EXECUTION_FEATURE_PACK_PROJECT_PATH = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "MixedExecutionFeaturePack.csproj"
@@ -153,7 +153,11 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
         self.assertEqual("VerifyOutput", unit_entry["methodName"])
         self.assertEqual("VerifyOutput()", unit_entry["methodSignature"])
         self.assertEqual(1, unit_entry["category"])
+        self.assertEqual(6, unit_entry["capabilityFamily"])
+        self.assertEqual(23, unit_entry["capabilityItem"])
         self.assertEqual(2, unit_entry["requires"])
+        self.assertEqual(4, unit_entry["archetype"])
+        self.assertEqual(8, unit_entry["hotUpdateCapability"])
         self.assertEqual(1, unit_entry["evidence"])
         self.assertEqual(3, unit_entry["priority"])
 
@@ -167,8 +171,12 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
         self.assertEqual("BenchmarkDispatch", benchmark_entry["methodName"])
         self.assertEqual("BenchmarkDispatch()", benchmark_entry["methodSignature"])
         self.assertEqual(1, benchmark_entry["category"])
+        self.assertEqual(2, benchmark_entry["capabilityFamily"])
+        self.assertEqual(10, benchmark_entry["capabilityItem"])
         self.assertEqual(3, benchmark_entry["metrics"])
         self.assertEqual(1, benchmark_entry["requires"])
+        self.assertEqual(8, benchmark_entry["archetype"])
+        self.assertEqual(3, benchmark_entry["hotUpdateCapability"])
         self.assertEqual(2, benchmark_entry["warmupCount"])
         self.assertEqual(12, benchmark_entry["iterationCount"])
         self.assertEqual(100, benchmark_entry["invocationCount"])
@@ -216,7 +224,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
     def test_solution_core_pack_mainline_slice_discovers_declared_unit_entries_from_real_subject_output(self) -> None:
         catalog_module = load_module(COMPILED_CATALOG_MODULE_PATH, "chaos_declared_metadata_solution_core_pack_mainline_slice")
 
-        build_root = TEST_TMP_ROOT / "mainline-feature-pack" / uuid.uuid4().hex
+        build_root = TEST_TMP_ROOT / "core-runtime-features" / uuid.uuid4().hex
         build_output_root = build_root / "build"
         intermediate_root = build_root / "obj"
         build_root.mkdir(parents=True, exist_ok=True)
@@ -235,7 +243,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                 ],
                 cwd=REPO_ROOT,
             )
-            assembly_path = build_output_root / "MainlineFeaturePack.dll"
+            assembly_path = build_output_root / "CoreRuntimeFeatures.dll"
             self.assertTrue(assembly_path.is_file(), msg=f"missing compiled subject dll: {assembly_path}")
 
             catalog = catalog_module.build_declared_test_catalog(
@@ -256,52 +264,64 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             }
             self.assertEqual(
                 {
-                    "MainlineFeaturePack.ProofEntry",
-                    "MainlineFeaturePack.ArrayOpsProofEntry",
-                    "MainlineFeaturePack.AsyncAwaitProofEntry",
-                    "MainlineFeaturePack.BitwiseOpsProofEntry",
-                    "MainlineFeaturePack.BranchOpsProofEntry",
-                    "MainlineFeaturePack.ConversionOpsProofEntry",
-                    "MainlineFeaturePack.InterfaceDispatchProofEntry",
-                    "MainlineFeaturePack.VTableDispatchProofEntry",
-                    "MainlineFeaturePack.LinkerStrippingProofEntry",
-                    "MainlineFeaturePack.MarshalingProofEntry",
-                    "MainlineFeaturePack.CrossBoundaryExceptionProofEntry",
-                    "MainlineFeaturePack.GenericCollectionProofEntry",
-                    "MainlineFeaturePack.ObjectOpsProofEntry",
-                    "MainlineFeaturePack.OverflowOpsProofEntry",
-                    "MainlineFeaturePack.ThreadingProofEntry",
-                    "MainlineFeaturePack.NestedExceptionProofEntry",
-                    "MainlineFeaturePack.DelegateChainProofEntry",
-                    "MainlineFeaturePack.DispatchProofEntry",
-                    "MainlineFeaturePack.GenericLayoutProofEntry",
-                    "MainlineFeaturePack.ArrayBoxingProofEntry",
-                    "MainlineFeaturePack.DelegateProofEntry",
-                    "MainlineFeaturePack.ExceptionProofEntry",
-                    "MainlineFeaturePack.ReflectionInteropClosureEntry",
+                    "CoreRuntimeFeatures.ProofEntry",
+                    "CoreRuntimeFeatures.ArrayOpsProofEntry",
+                    "CoreRuntimeFeatures.AsyncAwaitProofEntry",
+                    "CoreRuntimeFeatures.BitwiseOpsProofEntry",
+                    "CoreRuntimeFeatures.BranchOpsProofEntry",
+                    "CoreRuntimeFeatures.ConversionOpsProofEntry",
+                    "CoreRuntimeFeatures.InterfaceDispatchProofEntry",
+                    "CoreRuntimeFeatures.VTableDispatchProofEntry",
+                    "CoreRuntimeFeatures.LinkerStrippingProofEntry",
+                    "CoreRuntimeFeatures.MarshalingProofEntry",
+                    "CoreRuntimeFeatures.CrossBoundaryExceptionProofEntry",
+                    "CoreRuntimeFeatures.GenericCollectionProofEntry",
+                    "CoreRuntimeFeatures.ObjectOpsProofEntry",
+                    "CoreRuntimeFeatures.OverflowOpsProofEntry",
+                    "CoreRuntimeFeatures.ThreadingProofEntry",
+                    "CoreRuntimeFeatures.NestedExceptionProofEntry",
+                    "CoreRuntimeFeatures.DelegateChainProofEntry",
+                    "CoreRuntimeFeatures.DispatchProofEntry",
+                    "CoreRuntimeFeatures.GenericLayoutProofEntry",
+                    "CoreRuntimeFeatures.ArrayBoxingProofEntry",
+                    "CoreRuntimeFeatures.DelegateProofEntry",
+                    "CoreRuntimeFeatures.ExceptionProofEntry",
+                    "CoreRuntimeFeatures.ReflectionInteropClosureEntry",
                 },
                 set(unit_entries),
             )
-            self.assertEqual("mainline-proof", unit_entries["MainlineFeaturePack.ProofEntry"]["alias"])
-            self.assertEqual("array-ops-proof", unit_entries["MainlineFeaturePack.ArrayOpsProofEntry"]["alias"])
-            self.assertEqual("async-await-proof", unit_entries["MainlineFeaturePack.AsyncAwaitProofEntry"]["alias"])
-            self.assertEqual("bitwise-ops-proof", unit_entries["MainlineFeaturePack.BitwiseOpsProofEntry"]["alias"])
-            self.assertEqual("interface-dispatch-proof", unit_entries["MainlineFeaturePack.InterfaceDispatchProofEntry"]["alias"])
-            self.assertEqual("vtable-dispatch-proof", unit_entries["MainlineFeaturePack.VTableDispatchProofEntry"]["alias"])
-            self.assertEqual("linker-stripping-proof", unit_entries["MainlineFeaturePack.LinkerStrippingProofEntry"]["alias"])
-            self.assertEqual("marshaling-proof", unit_entries["MainlineFeaturePack.MarshalingProofEntry"]["alias"])
-            self.assertEqual("cross-boundary-exception-proof", unit_entries["MainlineFeaturePack.CrossBoundaryExceptionProofEntry"]["alias"])
-            self.assertEqual("generic-collection-proof", unit_entries["MainlineFeaturePack.GenericCollectionProofEntry"]["alias"])
-            self.assertEqual("threading-proof", unit_entries["MainlineFeaturePack.ThreadingProofEntry"]["alias"])
-            self.assertEqual("nested-exception-proof", unit_entries["MainlineFeaturePack.NestedExceptionProofEntry"]["alias"])
-            self.assertEqual("delegate-chain-proof", unit_entries["MainlineFeaturePack.DelegateChainProofEntry"]["alias"])
-            self.assertEqual("dispatch-proof", unit_entries["MainlineFeaturePack.DispatchProofEntry"]["alias"])
-            self.assertEqual(1, unit_entries["MainlineFeaturePack.GenericCollectionProofEntry"]["requires"])
-            self.assertEqual(8, unit_entries["MainlineFeaturePack.CrossBoundaryExceptionProofEntry"]["requires"])
-            self.assertEqual(4, unit_entries["MainlineFeaturePack.DelegateChainProofEntry"]["requires"])
-            self.assertEqual(4, unit_entries["MainlineFeaturePack.DelegateProofEntry"]["requires"])
-            self.assertEqual(8, unit_entries["MainlineFeaturePack.ExceptionProofEntry"]["requires"])
-            self.assertEqual(18, unit_entries["MainlineFeaturePack.ReflectionInteropClosureEntry"]["requires"])
+            self.assertEqual("core-runtime-proof", unit_entries["CoreRuntimeFeatures.ProofEntry"]["alias"])
+            self.assertEqual("array-ops-proof", unit_entries["CoreRuntimeFeatures.ArrayOpsProofEntry"]["alias"])
+            self.assertEqual("async-await-proof", unit_entries["CoreRuntimeFeatures.AsyncAwaitProofEntry"]["alias"])
+            self.assertEqual("bitwise-ops-proof", unit_entries["CoreRuntimeFeatures.BitwiseOpsProofEntry"]["alias"])
+            self.assertEqual("interface-dispatch-proof", unit_entries["CoreRuntimeFeatures.InterfaceDispatchProofEntry"]["alias"])
+            self.assertEqual("vtable-dispatch-proof", unit_entries["CoreRuntimeFeatures.VTableDispatchProofEntry"]["alias"])
+            self.assertEqual("linker-stripping-proof", unit_entries["CoreRuntimeFeatures.LinkerStrippingProofEntry"]["alias"])
+            self.assertEqual("marshaling-proof", unit_entries["CoreRuntimeFeatures.MarshalingProofEntry"]["alias"])
+            self.assertEqual("cross-boundary-exception-proof", unit_entries["CoreRuntimeFeatures.CrossBoundaryExceptionProofEntry"]["alias"])
+            self.assertEqual("generic-collection-proof", unit_entries["CoreRuntimeFeatures.GenericCollectionProofEntry"]["alias"])
+            self.assertEqual("threading-proof", unit_entries["CoreRuntimeFeatures.ThreadingProofEntry"]["alias"])
+            self.assertEqual("nested-exception-proof", unit_entries["CoreRuntimeFeatures.NestedExceptionProofEntry"]["alias"])
+            self.assertEqual("delegate-chain-proof", unit_entries["CoreRuntimeFeatures.DelegateChainProofEntry"]["alias"])
+            self.assertEqual("dispatch-proof", unit_entries["CoreRuntimeFeatures.DispatchProofEntry"]["alias"])
+            self.assertTrue(all(entry["capabilityFamily"] > 0 for entry in unit_entries.values()))
+            self.assertTrue(all(entry["capabilityItem"] > 0 for entry in unit_entries.values()))
+            self.assertEqual(1, unit_entries["CoreRuntimeFeatures.ArrayOpsProofEntry"]["capabilityFamily"])
+            self.assertEqual(6, unit_entries["CoreRuntimeFeatures.ArrayOpsProofEntry"]["capabilityItem"])
+            self.assertEqual(3, unit_entries["CoreRuntimeFeatures.AsyncAwaitProofEntry"]["capabilityFamily"])
+            self.assertEqual(14, unit_entries["CoreRuntimeFeatures.AsyncAwaitProofEntry"]["capabilityItem"])
+            self.assertEqual(2, unit_entries["CoreRuntimeFeatures.GenericCollectionProofEntry"]["capabilityFamily"])
+            self.assertEqual(12, unit_entries["CoreRuntimeFeatures.GenericCollectionProofEntry"]["capabilityItem"])
+            self.assertEqual(8, unit_entries["CoreRuntimeFeatures.ThreadingProofEntry"]["capabilityFamily"])
+            self.assertEqual(35, unit_entries["CoreRuntimeFeatures.ThreadingProofEntry"]["capabilityItem"])
+            self.assertEqual(6, unit_entries["CoreRuntimeFeatures.LinkerStrippingProofEntry"]["capabilityFamily"])
+            self.assertEqual(26, unit_entries["CoreRuntimeFeatures.LinkerStrippingProofEntry"]["capabilityItem"])
+            self.assertEqual(1, unit_entries["CoreRuntimeFeatures.GenericCollectionProofEntry"]["requires"])
+            self.assertEqual(8, unit_entries["CoreRuntimeFeatures.CrossBoundaryExceptionProofEntry"]["requires"])
+            self.assertEqual(4, unit_entries["CoreRuntimeFeatures.DelegateChainProofEntry"]["requires"])
+            self.assertEqual(4, unit_entries["CoreRuntimeFeatures.DelegateProofEntry"]["requires"])
+            self.assertEqual(8, unit_entries["CoreRuntimeFeatures.ExceptionProofEntry"]["requires"])
+            self.assertEqual(18, unit_entries["CoreRuntimeFeatures.ReflectionInteropClosureEntry"]["requires"])
             self.assertTrue(all(entry["evidence"] == 0 for entry in unit_entries.values()))
         finally:
             shutil.rmtree(build_root, ignore_errors=True)
@@ -309,7 +329,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
     def test_solution_core_pack_performance_slice_discovers_declared_benchmark_entries_from_real_subject_output(self) -> None:
         catalog_module = load_module(COMPILED_CATALOG_MODULE_PATH, "chaos_declared_metadata_solution_core_pack_performance_slice")
 
-        build_root = TEST_TMP_ROOT / "benchmark-feature-pack" / uuid.uuid4().hex
+        build_root = TEST_TMP_ROOT / "core-runtime-benchmarks" / uuid.uuid4().hex
         build_output_root = build_root / "build"
         intermediate_root = build_root / "obj"
         build_root.mkdir(parents=True, exist_ok=True)
@@ -328,7 +348,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                 ],
                 cwd=REPO_ROOT,
             )
-            assembly_path = build_output_root / "PerformanceFeaturePack.dll"
+            assembly_path = build_output_root / "CoreRuntimeBenchmarks.dll"
             self.assertTrue(assembly_path.is_file(), msg=f"missing compiled subject dll: {assembly_path}")
 
             catalog = catalog_module.build_declared_test_catalog(
@@ -349,26 +369,32 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             }
             self.assertEqual(
                 {
-                    "PerformanceFeaturePack.ArithmeticBenchmarkEntry",
-                    "PerformanceFeaturePack.AllocationBenchmarkEntry",
-                    "PerformanceFeaturePack.DispatchBenchmarkEntry",
-                    "PerformanceFeaturePack.GenericBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.AllocationBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.DispatchBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.GenericBenchmarkEntry",
                 },
                 set(benchmark_entries),
             )
-            self.assertEqual("arithmetic-bench", benchmark_entries["PerformanceFeaturePack.ArithmeticBenchmarkEntry"]["alias"])
-            self.assertEqual("allocation-bench", benchmark_entries["PerformanceFeaturePack.AllocationBenchmarkEntry"]["alias"])
-            self.assertEqual("dispatch-bench", benchmark_entries["PerformanceFeaturePack.DispatchBenchmarkEntry"]["alias"])
-            self.assertEqual("generic-bench", benchmark_entries["PerformanceFeaturePack.GenericBenchmarkEntry"]["alias"])
-            self.assertEqual(3, benchmark_entries["PerformanceFeaturePack.ArithmeticBenchmarkEntry"]["modes"])
-            self.assertEqual(1, benchmark_entries["PerformanceFeaturePack.AllocationBenchmarkEntry"]["modes"])
-            self.assertEqual(1, benchmark_entries["PerformanceFeaturePack.DispatchBenchmarkEntry"]["modes"])
-            self.assertEqual(1, benchmark_entries["PerformanceFeaturePack.GenericBenchmarkEntry"]["modes"])
-            self.assertEqual(1, benchmark_entries["PerformanceFeaturePack.ArithmeticBenchmarkEntry"]["category"])
-            self.assertEqual(3, benchmark_entries["PerformanceFeaturePack.AllocationBenchmarkEntry"]["category"])
-            self.assertEqual(1, benchmark_entries["PerformanceFeaturePack.ArithmeticBenchmarkEntry"]["metrics"])
-            self.assertEqual(3, benchmark_entries["PerformanceFeaturePack.AllocationBenchmarkEntry"]["metrics"])
-            self.assertEqual(1, benchmark_entries["PerformanceFeaturePack.GenericBenchmarkEntry"]["requires"])
+            self.assertEqual("arithmetic-bench", benchmark_entries["CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry"]["alias"])
+            self.assertEqual("allocation-bench", benchmark_entries["CoreRuntimeBenchmarks.AllocationBenchmarkEntry"]["alias"])
+            self.assertEqual("dispatch-bench", benchmark_entries["CoreRuntimeBenchmarks.DispatchBenchmarkEntry"]["alias"])
+            self.assertEqual("generic-bench", benchmark_entries["CoreRuntimeBenchmarks.GenericBenchmarkEntry"]["alias"])
+            self.assertTrue(all(entry["capabilityFamily"] > 0 for entry in benchmark_entries.values()))
+            self.assertTrue(all(entry["capabilityItem"] > 0 for entry in benchmark_entries.values()))
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry"]["modes"])
+            self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.AllocationBenchmarkEntry"]["modes"])
+            self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.DispatchBenchmarkEntry"]["modes"])
+            self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.GenericBenchmarkEntry"]["modes"])
+            self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry"]["category"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.AllocationBenchmarkEntry"]["category"])
+            self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(2, benchmark_entries["CoreRuntimeBenchmarks.GenericBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(12, benchmark_entries["CoreRuntimeBenchmarks.GenericBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry"]["metrics"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.AllocationBenchmarkEntry"]["metrics"])
+            self.assertEqual(1, benchmark_entries["CoreRuntimeBenchmarks.GenericBenchmarkEntry"]["requires"])
         finally:
             shutil.rmtree(build_root, ignore_errors=True)
 
@@ -420,6 +446,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             self.assertEqual(
                 {
                     "HotUpdateHostPack.HotUpdateSkeletonProofEntry",
+                    "HotUpdateHostPack.MetadataSupplementProofEntry",
                     "HotUpdateHostPack.MethodReplacementProofEntry",
                     "HotUpdateHostPack.SharedContractProofEntry",
                     "HotUpdateHostPack.VersionRollbackProofEntry",
@@ -435,12 +462,44 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                 set(benchmark_entries),
             )
             self.assertEqual("hot-update-skeleton-proof", unit_entries["HotUpdateHostPack.HotUpdateSkeletonProofEntry"]["alias"])
+            self.assertEqual("metadata-supplement-proof", unit_entries["HotUpdateHostPack.MetadataSupplementProofEntry"]["alias"])
             self.assertEqual("method-replacement-proof", unit_entries["HotUpdateHostPack.MethodReplacementProofEntry"]["alias"])
             self.assertEqual("shared-contract-proof", unit_entries["HotUpdateHostPack.SharedContractProofEntry"]["alias"])
             self.assertEqual("version-rollback-proof", unit_entries["HotUpdateHostPack.VersionRollbackProofEntry"]["alias"])
             self.assertEqual("hot-update-dispatch-bench", benchmark_entries["HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry"]["alias"])
             self.assertEqual("hot-update-load-bench", benchmark_entries["HotUpdateHostPack.HotUpdateLoadBenchmarkEntry"]["alias"])
             self.assertEqual("hot-update-roundtrip-bench", benchmark_entries["HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry"]["alias"])
+            self.assertTrue(all(entry["capabilityFamily"] > 0 for entry in unit_entries.values()))
+            self.assertTrue(all(entry["capabilityItem"] > 0 for entry in unit_entries.values()))
+            self.assertTrue(all(entry["capabilityFamily"] > 0 for entry in benchmark_entries.values()))
+            self.assertTrue(all(entry["capabilityItem"] > 0 for entry in benchmark_entries.values()))
+            self.assertEqual(13, unit_entries["HotUpdateHostPack.HotUpdateSkeletonProofEntry"]["capabilityFamily"])
+            self.assertEqual(54, unit_entries["HotUpdateHostPack.HotUpdateSkeletonProofEntry"]["capabilityItem"])
+            self.assertEqual(13, unit_entries["HotUpdateHostPack.MetadataSupplementProofEntry"]["capabilityFamily"])
+            self.assertEqual(57, unit_entries["HotUpdateHostPack.MetadataSupplementProofEntry"]["capabilityItem"])
+            self.assertEqual(13, unit_entries["HotUpdateHostPack.MethodReplacementProofEntry"]["capabilityFamily"])
+            self.assertEqual(56, unit_entries["HotUpdateHostPack.MethodReplacementProofEntry"]["capabilityItem"])
+            self.assertEqual(13, unit_entries["HotUpdateHostPack.SharedContractProofEntry"]["capabilityFamily"])
+            self.assertEqual(55, unit_entries["HotUpdateHostPack.SharedContractProofEntry"]["capabilityItem"])
+            self.assertEqual(13, unit_entries["HotUpdateHostPack.VersionRollbackProofEntry"]["capabilityFamily"])
+            self.assertEqual(59, unit_entries["HotUpdateHostPack.VersionRollbackProofEntry"]["capabilityItem"])
+            self.assertEqual(7, unit_entries["HotUpdateHostPack.HotUpdateSkeletonProofEntry"]["archetype"])
+            self.assertEqual(8, unit_entries["HotUpdateHostPack.MetadataSupplementProofEntry"]["archetype"])
+            self.assertEqual(7, unit_entries["HotUpdateHostPack.MethodReplacementProofEntry"]["archetype"])
+            self.assertEqual(8, unit_entries["HotUpdateHostPack.SharedContractProofEntry"]["archetype"])
+            self.assertEqual(9, unit_entries["HotUpdateHostPack.VersionRollbackProofEntry"]["archetype"])
+            self.assertEqual(13, benchmark_entries["HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(60, benchmark_entries["HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(13, benchmark_entries["HotUpdateHostPack.HotUpdateLoadBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(54, benchmark_entries["HotUpdateHostPack.HotUpdateLoadBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(13, benchmark_entries["HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(60, benchmark_entries["HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(7, benchmark_entries["HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry"]["archetype"])
+            self.assertEqual(7, benchmark_entries["HotUpdateHostPack.HotUpdateLoadBenchmarkEntry"]["archetype"])
+            self.assertEqual(8, benchmark_entries["HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry"]["archetype"])
+            self.assertEqual(1, benchmark_entries["HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry"]["modes"])
+            self.assertEqual(1, benchmark_entries["HotUpdateHostPack.HotUpdateLoadBenchmarkEntry"]["modes"])
+            self.assertEqual(1, benchmark_entries["HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry"]["modes"])
             self.assertTrue(all(entry["evidence"] == 0 for entry in unit_entries.values()))
         finally:
             shutil.rmtree(build_root, ignore_errors=True)
@@ -493,7 +552,11 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             self.assertEqual(
                 {
                     "MixedExecutionFeaturePack.MixedExecutionProofEntry",
+                    "MixedExecutionFeaturePack.InterpreterArithmeticProofEntry",
                     "MixedExecutionFeaturePack.InterpreterLoweringProofEntry",
+                    "MixedExecutionFeaturePack.MixedGenericFlowProofEntry",
+                    "MixedExecutionFeaturePack.MixedExceptionFlowProofEntry",
+                    "MixedExecutionFeaturePack.MixedDelegateFlowProofEntry",
                 },
                 set(unit_entries),
             )
@@ -505,9 +568,39 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                 set(benchmark_entries),
             )
             self.assertEqual("mixed-execution-proof", unit_entries["MixedExecutionFeaturePack.MixedExecutionProofEntry"]["alias"])
+            self.assertEqual("interpreter-arithmetic-proof", unit_entries["MixedExecutionFeaturePack.InterpreterArithmeticProofEntry"]["alias"])
             self.assertEqual("interpreter-lowering-proof", unit_entries["MixedExecutionFeaturePack.InterpreterLoweringProofEntry"]["alias"])
+            self.assertEqual("mixed-generic-flow-proof", unit_entries["MixedExecutionFeaturePack.MixedGenericFlowProofEntry"]["alias"])
+            self.assertEqual("mixed-exception-flow-proof", unit_entries["MixedExecutionFeaturePack.MixedExceptionFlowProofEntry"]["alias"])
+            self.assertEqual("mixed-delegate-flow-proof", unit_entries["MixedExecutionFeaturePack.MixedDelegateFlowProofEntry"]["alias"])
             self.assertEqual("mixed-execution-bench", benchmark_entries["MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry"]["alias"])
             self.assertEqual("mixed-execution-native-bench", benchmark_entries["MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry"]["alias"])
+            self.assertTrue(all(entry["capabilityFamily"] > 0 for entry in unit_entries.values()))
+            self.assertTrue(all(entry["capabilityItem"] > 0 for entry in unit_entries.values()))
+            self.assertTrue(all(entry["capabilityFamily"] > 0 for entry in benchmark_entries.values()))
+            self.assertTrue(all(entry["capabilityItem"] > 0 for entry in benchmark_entries.values()))
+            self.assertEqual(14, unit_entries["MixedExecutionFeaturePack.MixedExecutionProofEntry"]["capabilityFamily"])
+            self.assertEqual(61, unit_entries["MixedExecutionFeaturePack.MixedExecutionProofEntry"]["capabilityItem"])
+            self.assertEqual(14, unit_entries["MixedExecutionFeaturePack.InterpreterArithmeticProofEntry"]["capabilityFamily"])
+            self.assertEqual(63, unit_entries["MixedExecutionFeaturePack.InterpreterArithmeticProofEntry"]["capabilityItem"])
+            self.assertEqual(14, unit_entries["MixedExecutionFeaturePack.InterpreterLoweringProofEntry"]["capabilityFamily"])
+            self.assertEqual(62, unit_entries["MixedExecutionFeaturePack.InterpreterLoweringProofEntry"]["capabilityItem"])
+            self.assertEqual(14, unit_entries["MixedExecutionFeaturePack.MixedGenericFlowProofEntry"]["capabilityFamily"])
+            self.assertEqual(64, unit_entries["MixedExecutionFeaturePack.MixedGenericFlowProofEntry"]["capabilityItem"])
+            self.assertEqual(14, unit_entries["MixedExecutionFeaturePack.MixedExceptionFlowProofEntry"]["capabilityFamily"])
+            self.assertEqual(65, unit_entries["MixedExecutionFeaturePack.MixedExceptionFlowProofEntry"]["capabilityItem"])
+            self.assertEqual(14, unit_entries["MixedExecutionFeaturePack.MixedDelegateFlowProofEntry"]["capabilityFamily"])
+            self.assertEqual(66, unit_entries["MixedExecutionFeaturePack.MixedDelegateFlowProofEntry"]["capabilityItem"])
+            self.assertEqual(11, unit_entries["MixedExecutionFeaturePack.MixedExecutionProofEntry"]["archetype"])
+            self.assertEqual(11, unit_entries["MixedExecutionFeaturePack.InterpreterArithmeticProofEntry"]["archetype"])
+            self.assertEqual(11, unit_entries["MixedExecutionFeaturePack.InterpreterLoweringProofEntry"]["archetype"])
+            self.assertEqual(11, unit_entries["MixedExecutionFeaturePack.MixedGenericFlowProofEntry"]["archetype"])
+            self.assertEqual(11, unit_entries["MixedExecutionFeaturePack.MixedExceptionFlowProofEntry"]["archetype"])
+            self.assertEqual(11, unit_entries["MixedExecutionFeaturePack.MixedDelegateFlowProofEntry"]["archetype"])
+            self.assertEqual(14, benchmark_entries["MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(61, benchmark_entries["MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(14, benchmark_entries["MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(63, benchmark_entries["MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry"]["capabilityItem"])
             self.assertEqual(5, benchmark_entries["MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry"]["modes"])
             self.assertEqual(7, benchmark_entries["MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry"]["modes"])
             self.assertTrue(all(entry["evidence"] == 0 for entry in unit_entries.values()))

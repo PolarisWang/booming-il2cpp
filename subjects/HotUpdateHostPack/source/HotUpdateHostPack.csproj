@@ -8,6 +8,9 @@
     <RootNamespace>HotUpdateHostPack</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Archetypes\\**\\*.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="../../../src/reference/Chaos.TestFramework/Chaos.TestFramework.csproj" />
     <ProjectReference Include="../../../src/managed/Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.csproj" />
   </ItemGroup>

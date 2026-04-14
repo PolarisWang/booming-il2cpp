@@ -502,7 +502,7 @@ class SubjectReportingTests(unittest.TestCase):
             generated_at="2026-04-13T04:20:00Z",
             entry_selection={
                 "family": "declared-benchmark",
-                "stableId": "SolutionCorePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()",
+                    "stableId": "SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericBenchmarkEntry::RunWorkload()",
                 "alias": "generic-bench",
             },
         )
@@ -521,7 +521,7 @@ class SubjectReportingTests(unittest.TestCase):
         self.assertEqual(
             {
                 "family": "declared-benchmark",
-                "stableId": "SolutionCorePack::PerformanceFeaturePack::PerformanceFeaturePack.GenericBenchmarkEntry::RunWorkload()",
+                    "stableId": "SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericBenchmarkEntry::RunWorkload()",
                 "alias": "generic-bench",
             },
             summary["entrySelection"],
@@ -560,7 +560,7 @@ class SubjectReportingTests(unittest.TestCase):
                 "source": {
                     "type": "dotnet-project",
                     "path": "subjects/SolutionCorePack/source/SolutionCorePack.sln",
-                    "entry": "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()",
+                        "entry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
                 },
                 "executionContext": {
                     "hostPlatform": "windows-x64",

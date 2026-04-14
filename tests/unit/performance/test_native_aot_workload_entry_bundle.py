@@ -15,9 +15,9 @@ TOOLING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "too
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
 DRIVER_DLL_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Driver.dll"
 SUBJECT_ID = "SolutionCorePack"
-WORKLOAD_ENTRY = "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()"
-PROJECT_PATH = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Slices" / "PerformanceFeaturePack" / "PerformanceFeaturePack.csproj"
-DLL_PATH = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Slices" / "PerformanceFeaturePack" / "bin" / "Release" / "net8.0" / "PerformanceFeaturePack.dll"
+WORKLOAD_ENTRY = "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()"
+PROJECT_PATH = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "CoreRuntimeBenchmarks.csproj"
+DLL_PATH = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "bin" / "Release" / "net8.0" / "CoreRuntimeBenchmarks.dll"
 TEST_OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase-b-native-aot-workload-entry"
 
 

@@ -25,7 +25,7 @@ HOT_UPDATE_SKELETON_PROJECT_PATH = (
     REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "HotUpdateHostPack.csproj"
 )
 HOT_UPDATE_SKELETON_PROOF_PATH = (
-    REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "HotUpdateSkeletonProofEntry.cs"
+    REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "Host" / "Proofs" / "HotUpdateSkeletonProofEntry.cs"
 )
 COMPATIBILITY_MATRIX_RUNNER_PATH = (
     REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "compatibility_matrix_runner.py"
@@ -293,6 +293,46 @@ class Phase8ProductizationGatesTests(unittest.TestCase):
         )
         self.assertTrue(solution_core_pack_perf["baselinePath"].startswith("subjects/SolutionCorePack/baselines/perf/"))
         self.assertIn("meanDurationMs", solution_core_pack_perf["metricKeys"])
+        self.assertEqual(
+                    "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
+            solution_core_pack_perf["summaryWorkloadEntry"],
+        )
+        self.assertEqual(
+            "arithmetic-bench",
+            solution_core_pack_perf["summaryBenchmarkCase"]["displayName"],
+        )
+        self.assertEqual(
+            ["managed", "native"],
+            solution_core_pack_perf["summaryBenchmarkCase"]["supportedModes"],
+        )
+
+        hot_update_perf = next(
+            entry
+            for entry in config["entries"]
+            if entry["subjectId"] == "HotUpdateHostPack" and entry["matrixId"] == "windows-managed-perf"
+        )
+        self.assertEqual(
+            "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
+            hot_update_perf["summaryWorkloadEntry"],
+        )
+        self.assertEqual(
+            "hot-update-load-bench",
+            hot_update_perf["summaryBenchmarkCase"]["displayName"],
+        )
+        self.assertEqual(7, hot_update_perf["summaryBenchmarkCase"]["archetype"])
+        self.assertEqual(
+            "Skeleton Patch Solution",
+            hot_update_perf["summaryBenchmarkCase"]["archetypeLabel"],
+        )
+        self.assertEqual(17, hot_update_perf["summaryBenchmarkCase"]["hotUpdateCapability"])
+        self.assertEqual(
+            ["Package Load", "Patch Integrity"],
+            hot_update_perf["summaryBenchmarkCase"]["hotUpdateCapabilityLabels"],
+        )
+        self.assertEqual(
+            ["Hot Update"],
+            hot_update_perf["summaryBenchmarkCase"]["requirementLabels"],
+        )
 
     def test_unsupported_feature_report_scanner_flags_fixture_patterns(self) -> None:
         report_module = load_module(

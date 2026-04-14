@@ -37,7 +37,7 @@ METHOD_REPLACEMENT_SMOKE_SOURCE_PATH = REPO_ROOT / "tests" / "contracts" / "nati
 
 HOT_UPDATE_SKELETON_ROOT = REPO_ROOT / "subjects" / "HotUpdateHostPack"
 HOT_UPDATE_SKELETON_PROJECT_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "HotUpdateHostPack.csproj"
-HOT_UPDATE_SKELETON_PROGRAM_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "HotUpdateSkeletonProofEntry.cs"
+HOT_UPDATE_SKELETON_PROGRAM_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "Host" / "Proofs" / "HotUpdateSkeletonProofEntry.cs"
 HOT_UPDATE_FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects"
 
 METHOD_REPLACEMENT_PROOF_ROOT = HOT_UPDATE_FIXTURE_ROOT / "MethodReplacementProof"
@@ -53,9 +53,9 @@ VERSION_ROLLBACK_PROOF_PROJECT_PATH = VERSION_ROLLBACK_PROOF_ROOT / "source" / "
 VERSION_ROLLBACK_PROOF_PROGRAM_PATH = VERSION_ROLLBACK_PROOF_ROOT / "source" / "Program.cs"
 
 HOT_UPDATE_HOST_PROJECT_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "HotUpdateHostPack.csproj"
-BENCH_LOAD_SOURCE_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "HotUpdateLoadBenchmark.cs"
-BENCH_DISPATCH_SOURCE_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "HotUpdateDispatchBenchmark.cs"
-BENCH_ROUNDTRIP_SOURCE_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "HotUpdateRoundtripBenchmark.cs"
+BENCH_LOAD_SOURCE_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateLoadBenchmark.cs"
+BENCH_DISPATCH_SOURCE_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateDispatchBenchmark.cs"
+BENCH_ROUNDTRIP_SOURCE_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateRoundtripBenchmark.cs"
 
 
 def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:

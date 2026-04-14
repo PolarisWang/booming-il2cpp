@@ -33,7 +33,7 @@ class SharedIdentityModelTests(unittest.TestCase):
 
     def test_subject_entries_follow_frozen_entry_pattern(self) -> None:
         manifest_paths = sorted((REPO_ROOT / "subjects").rglob("subject.manifest.json"))
-        self.assertGreaterEqual(len(manifest_paths), 11)
+        self.assertEqual(3, len(manifest_paths))
 
         for manifest_path in manifest_paths:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))

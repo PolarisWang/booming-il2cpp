@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SOURCE_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Slices" / "MainlineFeaturePack"
+SOURCE_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "FeatureSlices" / "CoreRuntimeFeatures"
 LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
 SEMANTIC_WORLD_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.SemanticWorld" / "SemanticWorldStage.cs"
 LINKER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Linker" / "LinkerStage.cs"
@@ -34,9 +34,9 @@ ARRAY_BOXING_TEMPLATE_PATH = (
 
 class Phase5CapabilityBatchATests(unittest.TestCase):
     def test_mainline_feature_pack_source_tree_realizes_phase5_capability_proof_slices(self) -> None:
-        dispatch_source_path = SOURCE_ROOT / "DispatchProof.cs"
-        generic_layout_source_path = SOURCE_ROOT / "GenericLayoutProof.cs"
-        array_boxing_source_path = SOURCE_ROOT / "ArrayBoxingProof.cs"
+        dispatch_source_path = SOURCE_ROOT / "ObjectModelAndDispatch" / "DispatchProof.cs"
+        generic_layout_source_path = SOURCE_ROOT / "GenericsAndCollections" / "GenericLayoutProof.cs"
+        array_boxing_source_path = SOURCE_ROOT / "PrimitivesAndOps" / "ArrayBoxingProof.cs"
 
         self.assertTrue(dispatch_source_path.is_file(), msg=f"missing dispatch slice: {dispatch_source_path}")
         self.assertTrue(generic_layout_source_path.is_file(), msg=f"missing generic/layout slice: {generic_layout_source_path}")

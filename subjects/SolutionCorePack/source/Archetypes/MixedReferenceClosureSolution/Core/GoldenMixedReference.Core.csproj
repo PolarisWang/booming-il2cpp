@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>GoldenMixedReference.Core</RootNamespace>
+  </PropertyGroup>
+</Project>

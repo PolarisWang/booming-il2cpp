@@ -5,11 +5,13 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MixedExecutionFeaturePack", "MixedExecutionFeaturePack.csproj", "{A535395E-59AF-46B8-A59B-AA552C77C773}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpreterArithmeticProof", "InterpreterArithmeticProof\InterpreterArithmeticProof.csproj", "{E91FA038-E9F0-4F86-A092-C5AF299062BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpreterArithmeticProof", "Archetypes\MixedBridgeSolution\InterpreterArithmeticProof\InterpreterArithmeticProof.csproj", "{E91FA038-E9F0-4F86-A092-C5AF299062BB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InterpreterArithmeticProof", "InterpreterArithmeticProof", "{C23B7A2F-1793-4866-971B-210F3E97D4BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpreterArithmeticProof.AotBridge", "Archetypes\MixedBridgeSolution\InterpreterArithmeticProof\AotBridge\InterpreterArithmeticProof.AotBridge.csproj", "{26787B1C-7056-456B-AC27-3FF8D1F8651B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpreterArithmeticProof.AotBridge", "InterpreterArithmeticProof\AotBridge\InterpreterArithmeticProof.AotBridge.csproj", "{26787B1C-7056-456B-AC27-3FF8D1F8651B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Archetypes", "Archetypes", "{DD7A8729-01FE-4AFC-90CA-CC42E9234705}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MixedBridgeSolution", "MixedBridgeSolution", "{432E39C6-78A4-4ED6-A0EB-F8274CAF6822}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,7 +36,8 @@ Global
 		{26787B1C-7056-456B-AC27-3FF8D1F8651B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E91FA038-E9F0-4F86-A092-C5AF299062BB} = {C23B7A2F-1793-4866-971B-210F3E97D4BE}
-		{26787B1C-7056-456B-AC27-3FF8D1F8651B} = {C23B7A2F-1793-4866-971B-210F3E97D4BE}
+		{432E39C6-78A4-4ED6-A0EB-F8274CAF6822} = {DD7A8729-01FE-4AFC-90CA-CC42E9234705}
+		{E91FA038-E9F0-4F86-A092-C5AF299062BB} = {432E39C6-78A4-4ED6-A0EB-F8274CAF6822}
+		{26787B1C-7056-456B-AC27-3FF8D1F8651B} = {432E39C6-78A4-4ED6-A0EB-F8274CAF6822}
 	EndGlobalSection
 EndGlobal

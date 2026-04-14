@@ -241,6 +241,10 @@ def _declared_entry_from_raw(
         method_name=method_name,
         method_signature=method_signature,
         category=int(payload.get("category") or 0),
+        capability_family=int(payload.get("capabilityFamily") or 0),
+        capability_item=int(payload.get("capabilityItem") or 0),
+        archetype=int(payload.get("archetype") or 0),
+        hot_update_capability=int(payload.get("hotUpdateCapability") or 0),
         metrics=int(payload.get("metrics") or 0),
         modes=int(payload.get("modes") or 0),
         requires=int(payload.get("requires") or 0),
@@ -261,6 +265,10 @@ def _entry_to_dict(entry: declarations_module.DeclaredTestEntry) -> dict[str, An
         "methodName": entry.method_name,
         "methodSignature": entry.method_signature,
         "category": entry.category,
+        "capabilityFamily": entry.capability_family,
+        "capabilityItem": entry.capability_item,
+        "archetype": entry.archetype,
+        "hotUpdateCapability": entry.hot_update_capability,
         "requires": entry.requires,
     }
     if entry.kind is declarations_module.DeclaredTestKind.UNIT:
@@ -507,6 +515,13 @@ def _solution_assembly_paths(
     if primary_assembly is not None:
         candidate_roots.append(primary_assembly.parent)
     candidate_roots.append(primary_project_path.parent)
+    source_path_text = str(source.get("path") or "").strip()
+    if source_path_text.endswith(".sln"):
+        solution_path = Path(source_path_text)
+        if not solution_path.is_absolute():
+            solution_path = repo_root / solution_path
+        if solution_path.is_file():
+            candidate_roots.append(solution_path.parent)
 
     for assembly_name in assembly_names:
         candidates: list[Path] = []
@@ -517,6 +532,12 @@ def _solution_assembly_paths(
             candidates.extend(
                 sorted(
                     candidate_root.glob(f"bin/Debug/**/{assembly_name}.dll"),
+                    key=lambda candidate: (len(candidate.parts), str(candidate)),
+                )
+            )
+            candidates.extend(
+                sorted(
+                    candidate_root.glob(f"**/bin/Debug/**/{assembly_name}.dll"),
                     key=lambda candidate: (len(candidate.parts), str(candidate)),
                 )
             )

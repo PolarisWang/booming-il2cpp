@@ -19,15 +19,20 @@ SOLUTION_CORE_PACK_PIPELINE_IDS = {
     "managed-runtime-output",
     "managed-runtime-trace",
     "proof-runtime-output",
+    "managed-benchmark",
     "native-benchmark",
 }
 SOLUTION_CORE_PACK_MATRIX_IDS = {
     "windows-archetype-simple-lib-managed-output",
     "windows-archetype-multi-project-managed-output",
     "windows-archetype-package-reference-managed-output",
+    "windows-archetype-reference-assembly-managed-output",
+    "windows-archetype-corelib-reference-managed-output",
+    "windows-archetype-mixed-reference-closure-managed-output",
     "windows-native-check",
     "windows-managed-trace",
     "macos-managed-trace",
+    "windows-managed-perf",
     "windows-native-perf",
 }
 
@@ -232,8 +237,8 @@ class SubjectManifestSchemaTests(unittest.TestCase):
             "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
             manifest["source"]["primaryProjectPath"],
         )
-        self.assertEqual("MainlineFeaturePack/ProofEntry::Run()", manifest["source"]["entry"])
-        self.assertEqual("PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
+        self.assertEqual("CoreRuntimeFeatures/ProofEntry::Run()", manifest["source"]["entry"])
+        self.assertEqual("CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
         self.assertEqual(SOLUTION_CORE_PACK_PIPELINE_IDS, pipeline_ids)
         self.assertEqual(SOLUTION_CORE_PACK_MATRIX_IDS, matrix_ids)
         self.assertEqual({"macos-arm64", "windows-x64"}, set(capabilities["hostPlatforms"]))
@@ -249,14 +254,21 @@ class SubjectManifestSchemaTests(unittest.TestCase):
             subjects_module,
             manifest,
             "windows-managed-trace",
-            "MainlineFeaturePack/Program::Main(System.String[])",
+            "CoreRuntimeFeatures/Program::Main(System.String[])",
+        )
+        assert_matrix_source_entry(
+            self,
+            subjects_module,
+            manifest,
+            "windows-archetype-reference-assembly-managed-output",
+            "GoldenReferenceAssembly.App/Program::Main()",
         )
         assert_matrix_source_entry(
             self,
             subjects_module,
             manifest,
             "windows-native-perf",
-            "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()",
+            "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
         )
 
     def test_query_finds_managed_benchmark_solution_subjects_without_subject_name_list(self) -> None:
@@ -275,7 +287,7 @@ class SubjectManifestSchemaTests(unittest.TestCase):
         )
 
         self.assertEqual(
-            {"HotUpdateHostPack", "MixedExecutionFeaturePack"},
+            {"HotUpdateHostPack", "MixedExecutionFeaturePack", "SolutionCorePack"},
             {str(record["subjectId"]) for record in records},
         )
 
@@ -357,31 +369,31 @@ class SubjectManifestSchemaTests(unittest.TestCase):
 
     def test_retained_subject_sources_declare_chaos_attributes_in_csharp_api(self) -> None:
         expected_sources = {
-            "subjects/SolutionCorePack/source/Slices/MainlineFeaturePack/Program.cs": [
+            "subjects/SolutionCorePack/source/FeatureSlices/CoreRuntimeFeatures/Program.cs": [
                 "[ChaosUnitTest(",
-                'Alias = "mainline-proof"',
+                'Alias = "core-runtime-proof"',
             ],
-            "subjects/SolutionCorePack/source/Slices/PerformanceFeaturePack/ArithmeticBenchmark.cs": [
+            "subjects/SolutionCorePack/source/Benchmarks/CoreRuntimeBenchmarks/PrimitivesAndOps/ArithmeticBenchmark.cs": [
                 "[ChaosBenchmark(",
                 'Alias = "arithmetic-bench"',
             ],
-            "subjects/HotUpdateHostPack/source/HotUpdateSkeletonProofEntry.cs": [
+            "subjects/HotUpdateHostPack/source/Host/Proofs/HotUpdateSkeletonProofEntry.cs": [
                 "[ChaosUnitTest(",
                 'Alias = "hot-update-skeleton-proof"',
             ],
-            "subjects/HotUpdateHostPack/source/HotUpdateLoadBenchmark.cs": [
+            "subjects/HotUpdateHostPack/source/Host/Benchmarks/HotUpdateLoadBenchmark.cs": [
                 "[ChaosBenchmark(",
                 'Alias = "hot-update-load-bench"',
             ],
-            "subjects/MixedExecutionFeaturePack/source/MixedExecutionProofEntry.cs": [
+            "subjects/MixedExecutionFeaturePack/source/ManagedBridge/Proofs/MixedExecutionProofEntry.cs": [
                 "[ChaosUnitTest(",
                 'Alias = "mixed-execution-proof"',
             ],
-            "subjects/MixedExecutionFeaturePack/source/MixedExecutionBenchmark.cs": [
+            "subjects/MixedExecutionFeaturePack/source/ManagedBridge/Benchmarks/MixedExecutionBenchmark.cs": [
                 "[ChaosBenchmark(",
                 'Alias = "mixed-execution-bench"',
             ],
-            "subjects/MixedExecutionFeaturePack/source/MixedExecutionNativeBenchmark.cs": [
+            "subjects/MixedExecutionFeaturePack/source/ManagedBridge/Benchmarks/MixedExecutionNativeBenchmark.cs": [
                 "[ChaosBenchmark(",
                 'Alias = "mixed-execution-native-bench"',
             ],
@@ -400,6 +412,8 @@ class SubjectManifestSchemaTests(unittest.TestCase):
             / "subjects"
             / "MixedExecutionFeaturePack"
             / "source"
+            / "Archetypes"
+            / "MixedBridgeSolution"
             / "InterpreterArithmeticProof"
             / "InterpreterArithmeticProof.csproj"
         )
@@ -408,6 +422,8 @@ class SubjectManifestSchemaTests(unittest.TestCase):
             / "subjects"
             / "MixedExecutionFeaturePack"
             / "source"
+            / "Archetypes"
+            / "MixedBridgeSolution"
             / "InterpreterArithmeticProof"
             / "Program.cs"
         )

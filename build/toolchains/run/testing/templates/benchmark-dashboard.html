@@ -287,6 +287,8 @@ function summaryWorkloadMeta(subject) {
     if (summaryCase.assemblyName) pieces.push(summaryCase.assemblyName);
     if (summaryCase.declaringType) pieces.push(summaryCase.declaringType);
     if ((summaryCase.supportedModes || []).length) pieces.push((summaryCase.supportedModes || []).map(modeLabel).join(' / '));
+    if (summaryCase.archetypeLabel && summaryCase.archetypeLabel !== 'Unspecified') pieces.push(summaryCase.archetypeLabel);
+    if ((summaryCase.hotUpdateCapabilityLabels || []).length) pieces.push((summaryCase.hotUpdateCapabilityLabels || []).join(' / '));
     return pieces.join(' · ');
   }
   if (subject && subject.summaryWorkloadEntry) return `Summary Workload · ${subject.summaryWorkloadEntry}`;
@@ -465,6 +467,14 @@ function caseContractHtml(caseEntry) {
   const modeBadges = pillList((caseEntry.supportedModes || []).map(modeLabel), 'pill-accent');
   const metricBadges = pillList(caseEntry.metricLabels || [], 'pill-soft');
   const requirementBadges = pillList(caseEntry.requirementLabels || [], 'pill-warn');
+  const archetypeBadges = pillList(
+    caseEntry.archetypeLabel && caseEntry.archetypeLabel !== 'Unspecified' ? [caseEntry.archetypeLabel] : ['Unspecified'],
+    'pill-soft',
+  );
+  const hotUpdateBadges = pillList(
+    (caseEntry.hotUpdateCapabilityLabels || []).length ? caseEntry.hotUpdateCapabilityLabels : ['None'],
+    'pill-warn',
+  );
   return `
     <div class="case-contract">
       <div>
@@ -482,6 +492,14 @@ function caseContractHtml(caseEntry) {
       <div>
         <div class="section-kicker">Requires</div>
         <div class="pill-list">${requirementBadges}</div>
+      </div>
+      <div>
+        <div class="section-kicker">Solution Archetype</div>
+        <div class="pill-list">${archetypeBadges}</div>
+      </div>
+      <div>
+        <div class="section-kicker">Hot-Update Capability</div>
+        <div class="pill-list">${hotUpdateBadges}</div>
       </div>
       <div class="case-secondary">Warmup ${caseEntry.warmupCount || 0} · Iter ${caseEntry.iterationCount || 0} · Invoke ${caseEntry.invocationCount || 0}</div>
     </div>

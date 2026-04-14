@@ -280,6 +280,37 @@
       }
     },
     {
+      "matrixId": "windows-archetype-mixed-bridge-managed-output",
+      "pipelineId": "managed-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "primaryProjectPath": "subjects/MixedExecutionFeaturePack/source/Archetypes/MixedBridgeSolution/InterpreterArithmeticProof/InterpreterArithmeticProof.csproj",
+        "entry": "InterpreterArithmeticProof/Program::Main()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "dotnet-managed",
+        "runtimeProfile": "managed-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
       "matrixId": "windows-managed-perf",
       "pipelineId": "managed-benchmark",
       "supportedGoals": [

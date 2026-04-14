@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SOURCE_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Slices" / "MainlineFeaturePack"
+SOURCE_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "FeatureSlices" / "CoreRuntimeFeatures"
 CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
 LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
 SEMANTIC_WORLD_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.SemanticWorld" / "SemanticWorldStage.cs"
@@ -43,9 +43,9 @@ REFLECTION_INTEROP_TEMPLATE_PATH = (
 
 class Phase6CapabilityBatchBTests(unittest.TestCase):
     def test_mainline_feature_pack_source_tree_realizes_phase6_capability_proof_slices(self) -> None:
-        delegate_source_path = SOURCE_ROOT / "DelegateProof.cs"
-        exception_source_path = SOURCE_ROOT / "ExceptionProof.cs"
-        closure_source_path = SOURCE_ROOT / "ReflectionInteropClosureProof.cs"
+        delegate_source_path = SOURCE_ROOT / "ObjectModelAndDispatch" / "DelegateProof.cs"
+        exception_source_path = SOURCE_ROOT / "ExceptionsAndControlFlow" / "ExceptionProof.cs"
+        closure_source_path = SOURCE_ROOT / "ReflectionAndMetadata" / "ReflectionInteropClosureProof.cs"
 
         self.assertTrue(delegate_source_path.is_file(), msg=f"missing delegate slice: {delegate_source_path}")
         self.assertTrue(exception_source_path.is_file(), msg=f"missing exception slice: {exception_source_path}")

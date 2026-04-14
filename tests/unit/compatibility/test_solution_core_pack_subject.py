@@ -11,6 +11,7 @@ MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
 SOLUTION_PATH = SUBJECT_ROOT / "source" / "SolutionCorePack.sln"
 PRIMARY_PROJECT_PATH = SUBJECT_ROOT / "source" / "Launcher" / "SolutionCorePack.csproj"
 ARCHETYPE_ROOT = SUBJECT_ROOT / "source" / "Archetypes"
+REFERENCE_BUNDLE_ROOT = REPO_ROOT / "assets" / "reference-bundles" / "dotnet-foundation"
 PROOF_HOST_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "main.cpp"
 PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
 PROOF_RUN_SCRIPT_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "RunNativeReferenceProof.cmake"
@@ -30,9 +31,10 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
             "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
             manifest["source"]["primaryProjectPath"],
         )
-        self.assertEqual("MainlineFeaturePack/ProofEntry::Run()", manifest["source"]["entry"])
+        self.assertEqual("CoreRuntimeFeatures/ProofEntry::Run()", manifest["source"]["entry"])
+        self.assertEqual({"entryKind": 1, "entrySlice": 7}, manifest["source"]["entrySelection"])
         self.assertEqual(
-            "PerformanceFeaturePack/ArithmeticBenchmarkEntry::RunWorkload()",
+            "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
             manifest["workloadEntry"],
         )
 
@@ -44,28 +46,38 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         project_text = PRIMARY_PROJECT_PATH.read_text(encoding="utf-8")
 
         self.assertIn(r"Launcher\SolutionCorePack.csproj", solution_text)
-        self.assertIn(r"Slices\MainlineFeaturePack\MainlineFeaturePack.csproj", solution_text)
-        self.assertIn(r"Slices\PerformanceFeaturePack\PerformanceFeaturePack.csproj", solution_text)
-        self.assertIn(r"Archetypes\SolutionSimpleLib\App\GoldenSimpleLib.App.csproj", solution_text)
-        self.assertIn(r"Archetypes\SolutionMultiProject\App\GoldenMultiProject.App.csproj", solution_text)
-        self.assertIn(r"Archetypes\SolutionPackageReference\App\GoldenWithPackage.App.csproj", solution_text)
+        self.assertIn(r"FeatureSlices\CoreRuntimeFeatures\CoreRuntimeFeatures.csproj", solution_text)
+        self.assertIn(r"Benchmarks\CoreRuntimeBenchmarks\CoreRuntimeBenchmarks.csproj", solution_text)
+        self.assertIn(r"Archetypes\SimpleLibrarySolution\App\GoldenSimpleLib.App.csproj", solution_text)
+        self.assertIn(r"Archetypes\MultiProjectSolution\App\GoldenMultiProject.App.csproj", solution_text)
+        self.assertIn(r"Archetypes\PackageReferenceSolution\App\GoldenWithPackage.App.csproj", solution_text)
+        self.assertIn(r"Archetypes\ReferenceAssemblySolution\App\GoldenReferenceAssembly.App.csproj", solution_text)
+        self.assertIn(r"Archetypes\CoreLibReferenceSolution\App\GoldenCoreLibReference.App.csproj", solution_text)
+        self.assertIn(r"Archetypes\MixedReferenceClosureSolution\App\GoldenMixedReference.App.csproj", solution_text)
         self.assertNotIn(r"Slices\HelloWorld\HelloWorld.csproj", solution_text)
         self.assertNotIn(r"Slices\GenericEcho\GenericEcho.csproj", solution_text)
         self.assertNotIn(r"Slices\HelloWorldObject\HelloWorldObject.csproj", solution_text)
         self.assertNotIn(r"Slices\ReflectionLite\ReflectionLite.csproj", solution_text)
         self.assertNotIn(r"Slices\PInvokeLite\PInvokeLite.csproj", solution_text)
         self.assertNotIn(r"Slices\HostEmbeddingLite\HostEmbeddingLite.csproj", solution_text)
-        self.assertIn(r"..\Slices\MainlineFeaturePack\MainlineFeaturePack.csproj", project_text)
-        self.assertIn(r"..\Slices\PerformanceFeaturePack\PerformanceFeaturePack.csproj", project_text)
+        self.assertIn(r"..\FeatureSlices\CoreRuntimeFeatures\CoreRuntimeFeatures.csproj", project_text)
+        self.assertIn(r"..\Benchmarks\CoreRuntimeBenchmarks\CoreRuntimeBenchmarks.csproj", project_text)
+        self.assertIn(r"..\Archetypes\ReferenceAssemblySolution\App\GoldenReferenceAssembly.App.csproj", project_text)
+        self.assertIn(r"..\Archetypes\CoreLibReferenceSolution\App\GoldenCoreLibReference.App.csproj", project_text)
+        self.assertIn(r"..\Archetypes\MixedReferenceClosureSolution\App\GoldenMixedReference.App.csproj", project_text)
         self.assertNotIn(r"..\..\..\MainlineFeaturePack\source\MainlineFeaturePack.csproj", project_text)
         self.assertNotIn(r"..\..\..\PerformanceFeaturePack\source\PerformanceFeaturePack.csproj", project_text)
 
     def test_solution_core_pack_owns_internal_slices_and_legacy_subject_roots_are_removed(self) -> None:
-        self.assertTrue((ARCHETYPE_ROOT / "SolutionSimpleLib" / "SolutionSimpleLib.sln").is_file())
-        self.assertTrue((ARCHETYPE_ROOT / "SolutionMultiProject" / "SolutionMultiProject.sln").is_file())
-        self.assertTrue((ARCHETYPE_ROOT / "SolutionPackageReference" / "SolutionPackageReference.sln").is_file())
-        self.assertTrue((SUBJECT_ROOT / "source" / "Slices" / "MainlineFeaturePack" / "MainlineFeaturePack.csproj").is_file())
-        self.assertTrue((SUBJECT_ROOT / "source" / "Slices" / "PerformanceFeaturePack" / "PerformanceFeaturePack.csproj").is_file())
+        self.assertTrue((ARCHETYPE_ROOT / "SimpleLibrarySolution" / "SimpleLibrarySolution.sln").is_file())
+        self.assertTrue((ARCHETYPE_ROOT / "MultiProjectSolution" / "MultiProjectSolution.sln").is_file())
+        self.assertTrue((ARCHETYPE_ROOT / "PackageReferenceSolution" / "PackageReferenceSolution.sln").is_file())
+        self.assertTrue((ARCHETYPE_ROOT / "ReferenceAssemblySolution" / "ReferenceAssemblySolution.sln").is_file())
+        self.assertTrue((ARCHETYPE_ROOT / "CoreLibReferenceSolution" / "CoreLibReferenceSolution.sln").is_file())
+        self.assertTrue((ARCHETYPE_ROOT / "MixedReferenceClosureSolution" / "MixedReferenceClosureSolution.sln").is_file())
+        self.assertTrue((SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj").is_file())
+        self.assertTrue((SUBJECT_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "CoreRuntimeBenchmarks.csproj").is_file())
+        self.assertFalse((SUBJECT_ROOT / "source" / "Slices").exists())
         self.assertFalse((SUBJECT_ROOT / "source" / "Slices" / "HelloWorld").exists())
         self.assertFalse((SUBJECT_ROOT / "source" / "Slices" / "GenericEcho").exists())
         self.assertFalse((SUBJECT_ROOT / "source" / "Slices" / "HelloWorldObject").exists())
@@ -77,6 +89,20 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         self.assertFalse((REPO_ROOT / "subjects" / "SolutionPackageReference").exists())
         self.assertFalse((REPO_ROOT / "subjects" / "MainlineFeaturePack").exists())
         self.assertFalse((REPO_ROOT / "subjects" / "PerformanceFeaturePack").exists())
+
+    def test_solution_core_pack_owns_repository_reference_bundle_for_binary_reference_archetypes(self) -> None:
+        self.assertTrue(REFERENCE_BUNDLE_ROOT.is_dir(), msg=f"missing reference bundle root: {REFERENCE_BUNDLE_ROOT}")
+        self.assertTrue((REFERENCE_BUNDLE_ROOT / "lib" / "ReferenceGreeter.dll").is_file())
+        self.assertTrue((REFERENCE_BUNDLE_ROOT / "net8.0" / "System.Runtime.dll").is_file())
+        self.assertTrue((REFERENCE_BUNDLE_ROOT / "net8.0" / "System.Console.dll").is_file())
+        self.assertTrue((REFERENCE_BUNDLE_ROOT / "README.md").is_file())
+
+        corelib_project_path = (
+            SUBJECT_ROOT / "source" / "Archetypes" / "CoreLibReferenceSolution" / "App" / "GoldenCoreLibReference.App.csproj"
+        )
+        corelib_project_text = corelib_project_path.read_text(encoding="utf-8")
+        self.assertIn("<DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>", corelib_project_text)
+        self.assertIn('<FrameworkReference Include="Microsoft.NETCore.App" />', corelib_project_text)
 
     def test_solution_core_pack_declares_native_reference_proof_host(self) -> None:
         self.assertTrue(PROOF_HOST_PATH.is_file(), msg=f"missing proof host source: {PROOF_HOST_PATH}")

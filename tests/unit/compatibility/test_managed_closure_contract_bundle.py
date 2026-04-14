@@ -63,7 +63,7 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
             / cls.subject_pack_id
             / "source"
             / "Archetypes"
-            / "SolutionSimpleLib"
+            / "SimpleLibrarySolution"
             / "App"
             / "GoldenSimpleLib.App.csproj"
         )
@@ -73,7 +73,7 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
             / cls.subject_pack_id
             / "source"
             / "Archetypes"
-            / "SolutionSimpleLib"
+            / "SimpleLibrarySolution"
             / "App"
             / "bin"
             / "Release"

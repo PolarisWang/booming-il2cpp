@@ -2,6 +2,13 @@
 ???? `docs/dev` ????????
 | ?? | lifecycle_status | phase | ???? | ??? | active |
 | --- | --- | --- | --- | --- | --- |
+| [20260414-04-il2cpp-hotupdate-capability-expansion-roadmap](completed/20260414-04-il2cpp-hotupdate-capability-expansion-roadmap/STATUS.md) | completed | completed | 2026-04-14 11:52:29 +08:00 | 无。本 roadmap 已完成并归档；后续如需继续扩展 capability coverage 或新增长期基线，请另起 follow-up。 | false |
+| [20260414-11-phase-6-verification-and-archive](completed/20260414-11-phase-6-verification-and-archive/STATUS.md) | completed | completed | 2026-04-14 11:52:29 +08:00 | 无。本 child task 已完成并归档。 | false |
+| [20260414-10-phase-5-pipeline-reporting-and-docs-alignment](completed/20260414-10-phase-5-pipeline-reporting-and-docs-alignment/STATUS.md) | completed | completed | 2026-04-14 11:45:07 +08:00 | 返回父 roadmap，创建并执行 `20260414-11-phase-6-verification-and-archive`。 | false |
+| [20260414-08-phase-3-hotupdate-host-pack-full-project-workflow](completed/20260414-08-phase-3-hotupdate-host-pack-full-project-workflow/STATUS.md) | completed | completed | 2026-04-14 11:16:39 +08:00 | 返回父 roadmap，创建并执行 `20260414-09-phase-4-mixed-execution-capability-closure`。 | false |
+| [20260414-07-phase-2-solution-core-pack-mechanical-split](completed/20260414-07-phase-2-solution-core-pack-mechanical-split/STATUS.md) | completed | completed | 2026-04-14 11:04:15 +08:00 | 返回父 roadmap，创建并执行 `20260414-08-phase-3-hotupdate-host-pack-full-project-workflow`。 | false |
+| [20260414-06-phase-1-chaos-test-framework-metadata-expansion](completed/20260414-06-phase-1-chaos-test-framework-metadata-expansion/STATUS.md) | completed | completed | 2026-04-14 10:19:44 +08:00 | 返回父 roadmap，创建并执行 `20260414-07-phase-2-solution-core-pack-mechanical-split`。 | false |
+| [20260414-05-phase-0-capability-taxonomy-and-inventory-freeze](completed/20260414-05-phase-0-capability-taxonomy-and-inventory-freeze/STATUS.md) | completed | completed | 2026-04-14 10:20:00 +08:00 | 返回父 roadmap，创建并执行 `20260414-06-phase-1-chaos-test-framework-metadata-expansion`。 | false |
 | [20260413-30-tests-taxonomy-and-subject-project-pruning-roadmap](completed/20260413-30-tests-taxonomy-and-subject-project-pruning-roadmap/STATUS.md) | completed | archived | 2026-04-13 18:44:49 +08:00 | 无。本 roadmap 已完成并归档；如需继续压缩剩余 retained-smoke 之外的 subject 选择逻辑，请另起 follow-up。 | false |
 | [20260413-29-phase-4-unified-entry-and-registry-cutover](completed/20260413-29-phase-4-unified-entry-and-registry-cutover/STATUS.md) | completed | archived | 2026-04-13 13:39:09 +08:00 | 无。本 child task 已完成并归档。 | false |
 | [20260413-24-solution-core-pack-subject-consolidation](completed/20260413-24-solution-core-pack-subject-consolidation/STATUS.md) | completed | archived | 2026-04-13 13:39:09 +08:00 | 无。本 roadmap 已完成并归档；如需继续推进更大范围的 tests taxonomy 或新的 solution subject 规划，需要另起 follow-up。 | false |
@@ -74,4 +81,6 @@
 | [20260404-02-booming-docs-migration](completed/20260404-02-booming-docs-migration/STATUS.md) | completed | reviewing | 2026-04-04 13:57:28 +0800 | 鏃犮€傚闇€褰诲簳绉婚櫎 `docs/booming`锛岃鍙﹀紑 follow-up 澶勭悊鍘嗗彶璺緞娓呯悊銆?| false |
 | [20260404-01-skill-flow-refactor](completed/20260404-01-skill-flow-refactor/STATUS.md) | completed | reviewing | 2026-04-04 13:45:41 +0800 | 鏃犮€傚闇€缁х画鎻愬崌杩愯鏃堕獙璇佺ǔ瀹氭€э紝璇锋柊寤?follow-up 浠诲姟銆?| false |
 | [20260411-05-mobile-runtime-host](hanging/20260411-05-mobile-runtime-host/STATUS.md) | hanging | hanging | 2026-04-12 00:04:39 +08:00 | 濡傚悗缁渶瑕佹棤 waiver 鐨?mobile 鍙戝竷璇佹嵁锛屽噯澶?`macOS + Xcode` 瀹夸富鍚庢仮澶嶆湰浠诲姟锛岀户缁?Batch 3.4-3.7銆?.2-4.4锛屽苟鎸夐渶琛ラ綈 crash/perf/package baseline銆?| false |
+
+
 

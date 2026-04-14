@@ -20,15 +20,46 @@ LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "Loa
 ROOT_CMAKE_PATH = REPO_ROOT / "CMakeLists.txt"
 HOT_UPDATE_RUNTIME_MANAGER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.HotUpdate" / "RuntimeManager.cs"
 HOT_UPDATE_METHOD_REGISTRY_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.HotUpdate" / "HotUpdateMethodRegistry.cs"
-INTERPRETER_ARITHMETIC_PROJECT_PATH = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "InterpreterArithmeticProof" / "InterpreterArithmeticProof.csproj"
+INTERPRETER_ARITHMETIC_PROJECT_PATH = (
+    REPO_ROOT
+    / "subjects"
+    / "MixedExecutionFeaturePack"
+    / "source"
+    / "Archetypes"
+    / "MixedBridgeSolution"
+    / "InterpreterArithmeticProof"
+    / "InterpreterArithmeticProof.csproj"
+)
+MIXED_BRIDGE_SOLUTION_PATH = (
+    REPO_ROOT
+    / "subjects"
+    / "MixedExecutionFeaturePack"
+    / "source"
+    / "Archetypes"
+    / "MixedBridgeSolution"
+    / "MixedBridgeSolution.sln"
+)
 INTERPRETER_LOWERING_ROOT = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack"
 INTERPRETER_LOWERING_MANIFEST_PATH = INTERPRETER_LOWERING_ROOT / "subject.manifest.json"
 INTERPRETER_LOWERING_PROJECT_PATH = INTERPRETER_LOWERING_ROOT / "source" / "MixedExecutionFeaturePack.csproj"
-INTERPRETER_LOWERING_PROGRAM_PATH = INTERPRETER_LOWERING_ROOT / "source" / "InterpreterLoweringProofEntry.cs"
+INTERPRETER_LOWERING_PROGRAM_PATH = INTERPRETER_LOWERING_ROOT / "source" / "Lowering" / "InterpreterLoweringProofEntry.cs"
 MIXED_EXECUTION_PROOF_ROOT = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack"
 MIXED_EXECUTION_PROOF_MANIFEST_PATH = MIXED_EXECUTION_PROOF_ROOT / "subject.manifest.json"
 MIXED_EXECUTION_PROOF_PROJECT_PATH = MIXED_EXECUTION_PROOF_ROOT / "source" / "MixedExecutionFeaturePack.csproj"
-MIXED_EXECUTION_PROOF_PROGRAM_PATH = MIXED_EXECUTION_PROOF_ROOT / "source" / "MixedExecutionProofEntry.cs"
+MIXED_EXECUTION_PROOF_PROGRAM_PATH = MIXED_EXECUTION_PROOF_ROOT / "source" / "ManagedBridge" / "Proofs" / "MixedExecutionProofEntry.cs"
+INTERPRETER_ARITHMETIC_PROOF_PATH = (
+    MIXED_EXECUTION_PROOF_ROOT / "source" / "ManagedBridge" / "Proofs" / "InterpreterArithmeticProofEntry.cs"
+)
+MIXED_GENERIC_FLOW_PROOF_PATH = (
+    MIXED_EXECUTION_PROOF_ROOT / "source" / "ManagedBridge" / "Proofs" / "MixedGenericFlowProofEntry.cs"
+)
+MIXED_EXCEPTION_FLOW_PROOF_PATH = (
+    MIXED_EXECUTION_PROOF_ROOT / "source" / "ManagedBridge" / "Proofs" / "MixedExceptionFlowProofEntry.cs"
+)
+MIXED_DELEGATE_FLOW_PROOF_PATH = (
+    MIXED_EXECUTION_PROOF_ROOT / "source" / "ManagedBridge" / "Proofs" / "MixedDelegateFlowProofEntry.cs"
+)
+MIXED_EXECUTION_HOST_PROGRAM_PATH = MIXED_EXECUTION_PROOF_ROOT / "source" / "ManagedBridge" / "Program.cs"
 NATIVE_INTERPRETER_ROOT = REPO_ROOT / "src" / "native" / "interpreter"
 NATIVE_INTERPRETER_CMAKE_PATH = NATIVE_INTERPRETER_ROOT / "CMakeLists.txt"
 NATIVE_INTERPRETER_HEADER_PATH = NATIVE_INTERPRETER_ROOT / "interpreter_vm.h"
@@ -248,6 +279,7 @@ class Phase7InterpreterMixedExecutionTests(unittest.TestCase):
         self.assertTrue(INTERPRETER_LOWERING_MANIFEST_PATH.is_file(), msg=f"missing manifest: {INTERPRETER_LOWERING_MANIFEST_PATH}")
         self.assertTrue(INTERPRETER_LOWERING_PROJECT_PATH.is_file(), msg=f"missing project: {INTERPRETER_LOWERING_PROJECT_PATH}")
         self.assertTrue(INTERPRETER_LOWERING_PROGRAM_PATH.is_file(), msg=f"missing program: {INTERPRETER_LOWERING_PROGRAM_PATH}")
+        self.assertTrue(MIXED_BRIDGE_SOLUTION_PATH.is_file(), msg=f"missing mixed bridge solution: {MIXED_BRIDGE_SOLUTION_PATH}")
         lowering_source = INTERPRETER_LOWERING_PROGRAM_PATH.read_text(encoding="utf-8")
         for required_fragment in [
             'Assert.Equal("InterpreterArithmeticProof/NativeExports::Add(System.Int32,System.Int32)", method.SubjectId);',
@@ -323,7 +355,16 @@ class Phase7InterpreterMixedExecutionTests(unittest.TestCase):
         self.assertTrue(MIXED_EXECUTION_PROOF_MANIFEST_PATH.is_file(), msg=f"missing manifest: {MIXED_EXECUTION_PROOF_MANIFEST_PATH}")
         self.assertTrue(MIXED_EXECUTION_PROOF_PROJECT_PATH.is_file(), msg=f"missing project: {MIXED_EXECUTION_PROOF_PROJECT_PATH}")
         self.assertTrue(MIXED_EXECUTION_PROOF_PROGRAM_PATH.is_file(), msg=f"missing program: {MIXED_EXECUTION_PROOF_PROGRAM_PATH}")
+        self.assertTrue(INTERPRETER_ARITHMETIC_PROOF_PATH.is_file(), msg=f"missing program: {INTERPRETER_ARITHMETIC_PROOF_PATH}")
+        self.assertTrue(MIXED_GENERIC_FLOW_PROOF_PATH.is_file(), msg=f"missing program: {MIXED_GENERIC_FLOW_PROOF_PATH}")
+        self.assertTrue(MIXED_EXCEPTION_FLOW_PROOF_PATH.is_file(), msg=f"missing program: {MIXED_EXCEPTION_FLOW_PROOF_PATH}")
+        self.assertTrue(MIXED_DELEGATE_FLOW_PROOF_PATH.is_file(), msg=f"missing program: {MIXED_DELEGATE_FLOW_PROOF_PATH}")
         proof_source = MIXED_EXECUTION_PROOF_PROGRAM_PATH.read_text(encoding="utf-8")
+        interpreter_arithmetic_source = INTERPRETER_ARITHMETIC_PROOF_PATH.read_text(encoding="utf-8")
+        mixed_generic_source = MIXED_GENERIC_FLOW_PROOF_PATH.read_text(encoding="utf-8")
+        mixed_exception_source = MIXED_EXCEPTION_FLOW_PROOF_PATH.read_text(encoding="utf-8")
+        mixed_delegate_source = MIXED_DELEGATE_FLOW_PROOF_PATH.read_text(encoding="utf-8")
+        host_program_source = MIXED_EXECUTION_HOST_PROGRAM_PATH.read_text(encoding="utf-8")
         for required_fragment in [
             "Assert.Equal(22, beforeLoad);",
             "Assert.Equal(42, afterLoad);",
@@ -333,7 +374,23 @@ class Phase7InterpreterMixedExecutionTests(unittest.TestCase):
             "Assert.Equal(22, afterUnload);",
         ]:
             self.assertIn(required_fragment, proof_source)
+        self.assertIn("InterpreterArithmeticProofEntry.Run", host_program_source)
+        self.assertIn("MixedGenericFlowProofEntry.Run", host_program_source)
+        self.assertIn("MixedExceptionFlowProofEntry.Run", host_program_source)
+        self.assertIn("MixedDelegateFlowProofEntry.Run", host_program_source)
+        self.assertIn('Alias = "interpreter-arithmetic-proof"', interpreter_arithmetic_source)
+        self.assertIn("ChaosCapabilityItem.InterpreterArithmetic", interpreter_arithmetic_source)
+        self.assertIn('Alias = "mixed-generic-flow-proof"', mixed_generic_source)
+        self.assertIn("ChaosCapabilityItem.MixedGenericFlow", mixed_generic_source)
+        self.assertIn('Alias = "mixed-exception-flow-proof"', mixed_exception_source)
+        self.assertIn("ChaosCapabilityItem.MixedExceptionFlow", mixed_exception_source)
+        self.assertIn('Alias = "mixed-delegate-flow-proof"', mixed_delegate_source)
+        self.assertIn("ChaosCapabilityItem.MixedDelegateFlow", mixed_delegate_source)
         self.assertNotIn("Console.WriteLine", proof_source)
+        self.assertNotIn("Console.WriteLine", interpreter_arithmetic_source)
+        self.assertNotIn("Console.WriteLine", mixed_generic_source)
+        self.assertNotIn("Console.WriteLine", mixed_exception_source)
+        self.assertNotIn("Console.WriteLine", mixed_delegate_source)
         self.assertNotIn("ChaosEvidenceKind.Stdout", proof_source)
 
         proof_build_root = make_unique_build_root("mixed-proof")
