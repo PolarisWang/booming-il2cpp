@@ -10,11 +10,13 @@ from typing import Any
 
 try:
     from . import declared_metadata_labels as declared_metadata_labels_module
+    from . import workspace_declared_catalog as workspace_declared_catalog_module
 except ImportError:
     testing_root = Path(__file__).resolve().parent
     if str(testing_root) not in sys.path:
         sys.path.insert(0, str(testing_root))
     import declared_metadata_labels as declared_metadata_labels_module
+    import workspace_declared_catalog as workspace_declared_catalog_module
 
 
 _MODE_ORDER = declared_metadata_labels_module.MODE_ORDER
@@ -35,6 +37,10 @@ def _load(name: str, path: Path):
 def _sort_modes(values: list[str]) -> list[str]:
     order = {mode: index for index, mode in enumerate(_MODE_ORDER)}
     return sorted({str(value) for value in values if str(value)}, key=lambda item: order.get(item, 999))
+
+
+def _effective_supported_modes(configured_modes: list[str], latest_by_mode: dict[str, Any]) -> list[str]:
+    return _sort_modes(list(configured_modes or []) + [mode for mode in latest_by_mode if mode in _MODE_ORDER])
 
 
 def _supported_modes_from_mask(value: Any) -> list[str]:
@@ -91,6 +97,14 @@ def _declared_source_entry(entry: dict[str, Any]) -> str:
 
 
 def _load_declared_benchmark_cases(repo_root: Path, subject_id: str) -> dict[str, dict[str, Any]]:
+    workspace_catalog = workspace_declared_catalog_module.load_workspace_declared_catalog(
+        repo_root,
+        subject_id,
+        host_kind="benchmark-host",
+    )
+    if workspace_catalog is not None:
+        return _declared_benchmark_cases_from_catalog(workspace_catalog)
+
     testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
     try:
         compiled_catalog_mod = _load("compiled_catalog", testing_root / "compiled_catalog.py")
@@ -102,6 +116,10 @@ def _load_declared_benchmark_cases(repo_root: Path, subject_id: str) -> dict[str
     except Exception:
         return {}
 
+    return _declared_benchmark_cases_from_catalog(dict(catalog))
+
+
+def _declared_benchmark_cases_from_catalog(catalog: dict[str, Any]) -> dict[str, dict[str, Any]]:
     cases: dict[str, dict[str, Any]] = {}
     for payload in list(dict(catalog).get("declaredBenchmarks") or []):
         item = dict(payload or {})
@@ -109,7 +127,7 @@ def _load_declared_benchmark_cases(repo_root: Path, subject_id: str) -> dict[str
         if not stable_id:
             continue
         modes = int(item.get("modes") or 0)
-        cases[stable_id] = {
+        case_payload = {
             "stableId": stable_id,
             "alias": str(item.get("alias") or "").strip() or stable_id,
             "displayName": str(item.get("alias") or "").strip() or stable_id,
@@ -140,6 +158,10 @@ def _load_declared_benchmark_cases(repo_root: Path, subject_id: str) -> dict[str
             "iterationCount": int(item.get("iterationCount") or 0),
             "invocationCount": int(item.get("invocationCount") or 0),
         }
+        entry_index = item.get("entryIndex")
+        if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+            case_payload["entryIndex"] = int(entry_index)
+        cases[stable_id] = case_payload
     return cases
 
 
@@ -517,15 +539,16 @@ def _build_platform_summary(
     device_id = _choose_device_for_platform(by_device, platform_key)
     latest_by_mode = dict(by_device.get(device_id, {})) if device_id else {}
     mode_status: dict[str, dict[str, Any]] = {}
+    effective_supported_modes = _effective_supported_modes(supported_modes, latest_by_mode)
 
-    recorded_modes = _sort_modes([mode for mode in latest_by_mode if mode in supported_modes])
-    missing_modes = _sort_modes([mode for mode in supported_modes if mode not in latest_by_mode])
-    unsupported_modes = _sort_modes([mode for mode in _MODE_ORDER if mode not in supported_modes])
+    recorded_modes = _sort_modes([mode for mode in latest_by_mode if mode in effective_supported_modes])
+    missing_modes = _sort_modes([mode for mode in effective_supported_modes if mode not in latest_by_mode])
+    unsupported_modes = _sort_modes([mode for mode in _MODE_ORDER if mode not in effective_supported_modes])
 
     for mode in _MODE_ORDER:
         if mode in latest_by_mode:
             mode_status[mode] = _record_status_payload(mode, latest_by_mode[mode], device_id or "unknown")
-        elif mode in supported_modes:
+        elif mode in effective_supported_modes:
             mode_status[mode] = {"mode": mode, "status": "missing"}
         else:
             mode_status[mode] = {"mode": mode, "status": "unsupported"}
@@ -549,17 +572,17 @@ def _build_platform_summary(
         "platformId": platform_key,
         "deviceId": device_id,
         "deviceName": device_name,
-        "supportedModes": supported_modes,
+        "supportedModes": effective_supported_modes,
         "recordedModes": recorded_modes,
         "missingModes": missing_modes,
         "unsupportedModes": unsupported_modes,
         "modeStatus": mode_status,
         "coverage": {
-            "supportedModeCount": len(supported_modes),
+            "supportedModeCount": len(effective_supported_modes),
             "recordedModeCount": len(recorded_modes),
             "missingModeCount": len(missing_modes),
             "unsupportedModeCount": len(unsupported_modes),
-            "isComplete": len(supported_modes) > 0 and len(missing_modes) == 0,
+            "isComplete": len(effective_supported_modes) > 0 and len(missing_modes) == 0,
         },
         "lastRecordedAt": latest_ts or None,
         "gitCommit": (latest_record or {}).get("gitCommit"),
@@ -585,7 +608,10 @@ def _build_case_summary(
             if not platform_supported_modes or mode in platform_supported_modes
         ]
     )
-    supported_modes = declared_supported_modes or platform_supported_modes
+    supported_modes = _effective_supported_modes(
+        declared_supported_modes or platform_supported_modes,
+        latest_by_mode,
+    )
     mode_status: dict[str, dict[str, Any]] = {}
 
     recorded_modes = _sort_modes([mode for mode in latest_by_mode if mode in supported_modes])

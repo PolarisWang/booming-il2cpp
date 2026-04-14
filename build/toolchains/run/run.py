@@ -141,36 +141,6 @@ def build_operation_progress_callback(repo_root: Path, run_context: dict[str, An
     return _callback
 
 
-def add_legacy_test_migration_guidance(command: dict, result: CommandResult) -> CommandResult:
-    if command.get("public", True):
-        return result
-
-    replacement_syntax = command.get("replacement_syntax")
-    if not replacement_syntax:
-        return result
-
-    payload = dict(result.payload)
-    payload["migration"] = {
-        "deprecatedCommandId": command["id"],
-        "replacementSyntax": replacement_syntax,
-    }
-
-    guidance = f"Deprecated test command. Use `run {replacement_syntax}` instead.\n"
-    text = guidance + (result.text or "")
-
-    return CommandResult(
-        command=result.command,
-        status=result.status,
-        host_platform=result.host_platform,
-        target=result.target,
-        duration_ms=result.duration_ms,
-        checks=result.checks,
-        errors=result.errors,
-        payload=payload,
-        text=text,
-    )
-
-
 def attach_operation_report(
     result: CommandResult,
     *,
@@ -267,7 +237,7 @@ def execute_command(
             text="bootstrap is handled by the wrapper. Use run bootstrap --yes.\n",
         )
     if command["handler"] == "build.dispatch":
-        result = build_commands.handle(
+        return build_commands.handle(
             command,
             repo_root,
             host_platform,
@@ -275,13 +245,12 @@ def execute_command(
             options or {},
             progress_callback=progress_callback,
         )
-        return add_legacy_test_migration_guidance(command, result)
     if command["handler"] == "project.dispatch":
         return project_commands.handle(command, repo_root, host_platform, command_text, options or {}, progress_callback=progress_callback)
     if command["handler"] == "deploy.dispatch":
         return deploy_commands.handle(command, repo_root, host_platform, command_text, options or {})
     if command["handler"] == "test.dispatch":
-        result = test_commands.handle(
+        return test_commands.handle(
             command,
             repo_root,
             host_platform,
@@ -290,7 +259,6 @@ def execute_command(
             options or {},
             progress_callback=progress_callback,
         )
-        return add_legacy_test_migration_guidance(command, result)
     if command["handler"] == "doctor.dispatch":
         return doctor_commands.handle(repo_root, host_platform, command_text)
     if command["handler"] == "prepare.dispatch":

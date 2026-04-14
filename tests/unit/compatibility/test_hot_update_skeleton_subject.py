@@ -67,13 +67,14 @@ def load_module(path: Path, module_name: str):
 
 
 class Phase5HotUpdateSkeletonTests(unittest.TestCase):
-    def test_hot_update_project_isolation_and_solution_wiring(self) -> None:
-        solution_source = CORE_SOLUTION_PATH.read_text(encoding="utf-8")
-
+    def test_hot_update_project_isolation_and_legacy_solution_cutover(self) -> None:
         self.assertTrue(HOT_UPDATE_ROOT.is_dir(), msg=f"missing hot update root: {HOT_UPDATE_ROOT}")
         self.assertTrue(HOT_UPDATE_PROJECT_PATH.is_file(), msg=f"missing hot update project: {HOT_UPDATE_PROJECT_PATH}")
         self.assertEqual(["Chaos.IL2CPP.Contracts"], parse_project_references(HOT_UPDATE_PROJECT_PATH))
-        self.assertIn("Chaos.IL2CPP.HotUpdate", solution_source)
+        self.assertFalse(
+            CORE_SOLUTION_PATH.exists(),
+            msg=f"legacy static core solution should not exist anymore: {CORE_SOLUTION_PATH}",
+        )
 
     def test_hot_update_sources_define_package_reader_validator_runtime_manager_and_interpreter_stub(self) -> None:
         package_source = HOT_UPDATE_PACKAGE_PATH.read_text(encoding="utf-8")

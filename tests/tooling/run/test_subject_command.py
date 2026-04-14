@@ -34,6 +34,172 @@ def read_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def write_json(path: Path, payload: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+
+def write_subject_workspace(
+    repo_root: Path,
+    *,
+    subject_id: str,
+    matrix_id: str,
+    goal_ids: list[str],
+    unit_stable_id: str,
+    unit_alias: str,
+    unit_entry_index: int,
+    benchmark_stable_id: str,
+    benchmark_alias: str,
+    benchmark_entry_index: int,
+    include_native_proof: bool = True,
+) -> None:
+    workspace_root = repo_root / "solutions" / "subjects" / subject_id
+    managed_tests_root = workspace_root / "managed-tests"
+    generated_root = managed_tests_root / "Generated"
+    native_root = workspace_root / "native" / matrix_id
+
+    proof_project_path = managed_tests_root / f"{subject_id}.DeclaredProofHost.csproj"
+    benchmark_project_path = managed_tests_root / f"{subject_id}.DeclaredBenchmarkHost.csproj"
+    proof_source_path = generated_root / "ChaosGeneratedDeclaredTests.g.cs"
+    benchmark_source_path = generated_root / "ChaosGeneratedDeclaredBenchmarks.g.cs"
+    native_proof_project_path = native_root / "proof" / "chaos_subject_reference_proof.vcxproj"
+    catalog_path = generated_root / "declared-tests.catalog.json"
+    manifest_path = workspace_root / "workspace.manifest.json"
+
+    for path in [
+        proof_project_path,
+        benchmark_project_path,
+        proof_source_path,
+        benchmark_source_path,
+        native_proof_project_path,
+    ]:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("// fixture\n" if path.suffix == ".cs" else "<Project />\n", encoding="utf-8")
+
+    catalog_payload = {
+        "subjectId": subject_id,
+        "frameworkReferenced": True,
+        "subjectKind": "declared-test",
+        "warningCodes": [],
+        "declaredUnitTests": [
+            {
+                "stableId": unit_stable_id,
+                "entryIndex": unit_entry_index,
+                "alias": unit_alias,
+                "assemblyName": subject_id,
+                "declaringType": f"{subject_id}.Proofs",
+                "methodName": "Run",
+                "methodSignature": "Run()",
+                "category": 1,
+                "capabilityFamily": 1,
+                "capabilityItem": 1,
+                "archetype": 1,
+                "hotUpdateCapability": 0,
+                "requires": 0,
+                "evidence": 1,
+                "priority": 1,
+            }
+        ],
+        "declaredBenchmarks": [
+            {
+                "stableId": benchmark_stable_id,
+                "entryIndex": benchmark_entry_index,
+                "alias": benchmark_alias,
+                "assemblyName": subject_id,
+                "declaringType": f"{subject_id}.Benchmarks",
+                "methodName": "Run",
+                "methodSignature": "Run()",
+                "category": 1,
+                "capabilityFamily": 1,
+                "capabilityItem": 1,
+                "archetype": 1,
+                "hotUpdateCapability": 0,
+                "requires": 0,
+                "metrics": 1,
+                "modes": 1,
+                "warmupCount": 2,
+                "iterationCount": 5,
+                "invocationCount": 10,
+            }
+        ],
+    }
+    write_json(catalog_path, catalog_payload)
+
+    managed_test_projects = [
+        {
+            "projectId": f"managed-test/{subject_id}/proof-host",
+            "projectPath": proof_project_path.relative_to(repo_root).as_posix(),
+            "assemblyName": f"{subject_id}.DeclaredProofHost",
+            "hostKind": "proof-host",
+            "catalogPath": catalog_path.relative_to(repo_root).as_posix(),
+            "generatedSourcePath": proof_source_path.relative_to(repo_root).as_posix(),
+        },
+        {
+            "projectId": f"managed-test/{subject_id}/benchmark-host",
+            "projectPath": benchmark_project_path.relative_to(repo_root).as_posix(),
+            "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
+            "hostKind": "benchmark-host",
+            "catalogPath": catalog_path.relative_to(repo_root).as_posix(),
+            "generatedSourcePath": benchmark_source_path.relative_to(repo_root).as_posix(),
+        },
+    ]
+    native_test_projects = []
+    native_test_project_ids: list[str] = []
+    if include_native_proof:
+        native_test_projects.append(
+            {
+                "projectId": f"native-test/{subject_id}/{matrix_id}/proof-host",
+                "matrixId": matrix_id,
+                "projectPath": native_proof_project_path.relative_to(repo_root).as_posix(),
+                "configureRoot": native_root.relative_to(repo_root).as_posix(),
+                "targetPlatform": "windows-x64",
+                "toolchainProfile": "msvc-reference",
+                "deliveryKind": "direct-run-host",
+                "hostKind": "proof-host",
+                "managedTestProjectId": f"managed-test/{subject_id}/proof-host",
+                "buildArgs": ["--config", "Release", "--target", "chaos_subject_reference_proof"],
+            }
+        )
+        native_test_project_ids.append(f"native-test/{subject_id}/{matrix_id}/proof-host")
+
+    manifest_payload = {
+        "workspaceVersion": 2,
+        "kind": "subject-workspace",
+        "subjectId": subject_id,
+        "variant": "CHECK",
+        "defaultMatrixId": matrix_id,
+        "managedSolutionPath": f"solutions/subjects/{subject_id}/{subject_id}.sln",
+        "managedProjects": [
+            {
+                "projectId": f"managed/{subject_id}/{subject_id}",
+                "projectPath": f"subjects/{subject_id}/source/{subject_id}.csproj",
+                "assemblyName": subject_id,
+                "isPrimary": True,
+            }
+        ],
+        "managedTestProjects": managed_test_projects,
+        "nativeProjects": [],
+        "nativeTestProjects": native_test_projects,
+        "matrices": [
+            {
+                "matrixId": matrix_id,
+                "goalIds": list(goal_ids),
+                "hostPlatform": "windows-x64",
+                "targetPlatform": "windows-x64",
+                "toolchainProfile": "msvc-reference",
+                "managedProjectIds": [f"managed/{subject_id}/{subject_id}"],
+                "managedTestProjectIds": [
+                    f"managed-test/{subject_id}/proof-host",
+                    f"managed-test/{subject_id}/benchmark-host",
+                ],
+                "nativeProjectIds": [],
+                "nativeTestProjectIds": native_test_project_ids,
+            }
+        ],
+    }
+    write_json(manifest_path, manifest_payload)
+
+
 def make_subject_registry_index(
     test_module,
     *,
@@ -311,6 +477,190 @@ def empty_validation_outcome(*args: object, **kwargs: object) -> dict[str, Any]:
 
 
 class SubjectCommandTests(unittest.TestCase):
+    def test_subject_dispatch_prefers_workspace_manifest_v2_for_host_resolution(self) -> None:
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_subject_workspace_cutover")
+        repo_root = make_temp_repo_root("subject-command", "workspace-cutover")
+        manifest: dict[str, Any] = {}
+        subject_id = "FixtureWorkspaceSubject"
+        fixed_run_id = "chaos-run-subject-workspace-cutover"
+        workspace_matrix_id = "workspace-proof-matrix"
+        observed_selection: dict[str, str] = {}
+        registry_index = make_subject_registry_index(
+            test_module,
+            subject_id=subject_id,
+            default_goal_id="correctness.dev",
+            matrix_id="legacy-proof-matrix",
+        )
+        write_subject_workspace(
+            repo_root,
+            subject_id=subject_id,
+            matrix_id=workspace_matrix_id,
+            goal_ids=["correctness.dev"],
+            unit_stable_id=f"{subject_id}::Proofs::{subject_id}.Proofs::Run()",
+            unit_alias="workspace-proof",
+            unit_entry_index=5,
+            benchmark_stable_id=f"{subject_id}::Benchmarks::{subject_id}.Benchmarks::Run()",
+            benchmark_alias="workspace-benchmark",
+            benchmark_entry_index=8,
+        )
+        build_plan = make_build_plan_side_effect(
+            observed_selection,
+            subject_id=subject_id,
+            expected_run_id=fixed_run_id,
+            default_goal_id="correctness.dev",
+            default_matrix_id=workspace_matrix_id,
+        )
+
+        def execute_plan_side_effect(repo_root: Path, plan: dict, **_: object) -> dict:
+            del repo_root
+            return build_execution_result(
+                plan,
+                stage_kind="runtime-observe",
+                duration_ms=2,
+                fingerprint="workspace-cutover-fingerprint",
+            )
+
+        try:
+            with patch.object(test_module, "_scan_registry", return_value=registry_index):
+                with patch.object(test_module.subject_planner_module, "build_plan", side_effect=build_plan) as build_plan_mock:
+                    with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
+                        with patch.object(
+                            test_module.subject_executor_module,
+                            "execute_plan",
+                            side_effect=execute_plan_side_effect,
+                        ):
+                            with patch.object(
+                                test_module.subject_validations_module,
+                                "run_subject_validations",
+                                side_effect=empty_validation_outcome,
+                            ):
+                                result = test_module.handle(
+                                    {"id": "test-subject", "handler": "test.dispatch"},
+                                    repo_root,
+                                    "windows",
+                                    f"test subject --id subject/{subject_id}",
+                                    manifest,
+                                    {"id": f"subject/{subject_id}"},
+                                )
+
+            self.assertEqual("ok", result.status)
+            build_plan_mock.assert_called_once()
+            self.assertEqual(workspace_matrix_id, build_plan_mock.call_args.kwargs["matrix_id"])
+            self.assertEqual(workspace_matrix_id, observed_selection["matrixId"])
+            self.assertEqual(
+                {
+                    "subjectId": subject_id,
+                    "workspaceManifestPath": f"solutions/subjects/{subject_id}/workspace.manifest.json",
+                    "workspaceVersion": 2,
+                    "goalId": "correctness.dev",
+                    "matrixId": workspace_matrix_id,
+                    "hostKind": "proof-host",
+                    "catalogPath": f"solutions/subjects/{subject_id}/managed-tests/Generated/declared-tests.catalog.json",
+                    "managedTestProject": {
+                        "projectId": f"managed-test/{subject_id}/proof-host",
+                        "projectPath": f"solutions/subjects/{subject_id}/managed-tests/{subject_id}.DeclaredProofHost.csproj",
+                        "assemblyName": f"{subject_id}.DeclaredProofHost",
+                        "hostKind": "proof-host",
+                        "catalogPath": f"solutions/subjects/{subject_id}/managed-tests/Generated/declared-tests.catalog.json",
+                        "generatedSourcePath": f"solutions/subjects/{subject_id}/managed-tests/Generated/ChaosGeneratedDeclaredTests.g.cs",
+                    },
+                    "nativeTestProject": {
+                        "projectId": f"native-test/{subject_id}/{workspace_matrix_id}/proof-host",
+                        "matrixId": workspace_matrix_id,
+                        "projectPath": f"solutions/subjects/{subject_id}/native/{workspace_matrix_id}/proof/chaos_subject_reference_proof.vcxproj",
+                        "configureRoot": f"solutions/subjects/{subject_id}/native/{workspace_matrix_id}",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "msvc-reference",
+                        "deliveryKind": "direct-run-host",
+                        "hostKind": "proof-host",
+                        "managedTestProjectId": f"managed-test/{subject_id}/proof-host",
+                        "buildArgs": ["--config", "Release", "--target", "chaos_subject_reference_proof"],
+                    },
+                },
+                result.payload["workspaceExecution"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_subject_dispatch_allows_managed_only_workspace_manifest_for_proof_host(self) -> None:
+        test_module = load_module(
+            TEST_COMMAND_MODULE_PATH,
+            "chaos_run_test_command_subject_workspace_managed_only_proof",
+        )
+        repo_root = make_temp_repo_root("subject-command", "workspace-managed-only-proof")
+        manifest: dict[str, Any] = {}
+        subject_id = "FixtureManagedOnlyWorkspaceSubject"
+        fixed_run_id = "chaos-run-subject-workspace-managed-only-proof"
+        workspace_matrix_id = "workspace-managed-only-proof-matrix"
+        observed_selection: dict[str, str] = {}
+        registry_index = make_subject_registry_index(
+            test_module,
+            subject_id=subject_id,
+            default_goal_id="correctness.dev",
+            matrix_id="legacy-proof-matrix",
+        )
+        write_subject_workspace(
+            repo_root,
+            subject_id=subject_id,
+            matrix_id=workspace_matrix_id,
+            goal_ids=["correctness.dev"],
+            unit_stable_id=f"{subject_id}::Proofs::{subject_id}.Proofs::Run()",
+            unit_alias="workspace-proof",
+            unit_entry_index=5,
+            benchmark_stable_id=f"{subject_id}::Benchmarks::{subject_id}.Benchmarks::Run()",
+            benchmark_alias="workspace-benchmark",
+            benchmark_entry_index=8,
+            include_native_proof=False,
+        )
+        build_plan = make_build_plan_side_effect(
+            observed_selection,
+            subject_id=subject_id,
+            expected_run_id=fixed_run_id,
+            default_goal_id="correctness.dev",
+            default_matrix_id=workspace_matrix_id,
+        )
+
+        def execute_plan_side_effect(repo_root: Path, plan: dict, **_: object) -> dict:
+            del repo_root
+            return build_execution_result(
+                plan,
+                stage_kind="runtime-observe",
+                duration_ms=2,
+                fingerprint="managed-only-proof-fingerprint",
+            )
+
+        try:
+            with patch.object(test_module, "_scan_registry", return_value=registry_index):
+                with patch.object(test_module.subject_planner_module, "build_plan", side_effect=build_plan) as build_plan_mock:
+                    with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
+                        with patch.object(
+                            test_module.subject_executor_module,
+                            "execute_plan",
+                            side_effect=execute_plan_side_effect,
+                        ):
+                            with patch.object(
+                                test_module.subject_validations_module,
+                                "run_subject_validations",
+                                side_effect=empty_validation_outcome,
+                            ):
+                                result = test_module.handle(
+                                    {"id": "test-subject", "handler": "test.dispatch"},
+                                    repo_root,
+                                    "windows",
+                                    f"test subject --id subject/{subject_id}",
+                                    manifest,
+                                    {"id": f"subject/{subject_id}"},
+                                )
+
+            self.assertEqual("ok", result.status)
+            build_plan_mock.assert_called_once()
+            self.assertEqual(workspace_matrix_id, build_plan_mock.call_args.kwargs["matrix_id"])
+            self.assertEqual(workspace_matrix_id, observed_selection["matrixId"])
+            self.assertEqual("proof-host", result.payload["workspaceExecution"]["hostKind"])
+            self.assertIsNone(result.payload["workspaceExecution"]["nativeTestProject"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
     def test_subject_dispatch_routes_to_subject_planner_and_executor(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_subject_dispatch")
         repo_root = make_temp_repo_root("subject-command", "dispatch")
@@ -857,6 +1207,18 @@ class SubjectCommandTests(unittest.TestCase):
             duration_ms=3,
             fingerprint="declared-unit-alias-fingerprint",
         )
+        write_subject_workspace(
+            repo_root,
+            subject_id=subject_id,
+            matrix_id="workspace-proof-matrix",
+            goal_ids=["correctness.dev"],
+            unit_stable_id=stable_id,
+            unit_alias=alias,
+            unit_entry_index=7,
+            benchmark_stable_id=f"{subject_id}::Benchmarks::{subject_id}.Benchmarks::Run()",
+            benchmark_alias="workspace-benchmark",
+            benchmark_entry_index=9,
+        )
 
         try:
             with patch.object(test_module, "_scan_registry", return_value=registry_index):
@@ -874,15 +1236,14 @@ class SubjectCommandTests(unittest.TestCase):
                             ):
                                 result = test_module.handle(
                                     {
-                                        "id": "declared-unit-test-alias",
-                                        "kind": "registry-object-alias",
-                                        "registry_object_kind": "declared-unit-test",
-                                        "registry_object_id": f"declared-unit-test/{stable_id}",
+                                        "id": "test-declared-unit-test",
+                                        "handler": "test.dispatch",
                                     },
                                     repo_root,
                                     "windows",
                                     f"test declared-unit-test --id declared-unit-test/{stable_id}",
                                     manifest,
+                                    {"id": f"declared-unit-test/{stable_id}"},
                                 )
 
             self.assertEqual("ok", result.status)
@@ -894,6 +1255,7 @@ class SubjectCommandTests(unittest.TestCase):
             build_plan_mock.assert_called_once()
             self.assertEqual(repo_root, build_plan_mock.call_args.args[0])
             self.assertEqual(subject_id, build_plan_mock.call_args.args[1])
+            self.assertEqual("workspace-proof-matrix", build_plan_mock.call_args.kwargs["matrix_id"])
             self.assertEqual(source_entry, build_plan_mock.call_args.kwargs["source_entry"])
             self.assertIsNone(build_plan_mock.call_args.kwargs["workload_entry"])
             self.assertEqual(
@@ -901,9 +1263,95 @@ class SubjectCommandTests(unittest.TestCase):
                     "family": "declared-unit-test",
                     "stableId": stable_id,
                     "alias": alias,
+                    "entryIndex": 7,
                 },
                 build_plan_mock.call_args.kwargs["entry_selection"],
             )
+            self.assertEqual(7, result.payload["workspaceExecution"]["entryIndex"])
+            self.assertEqual("proof-host", result.payload["workspaceExecution"]["hostKind"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_declared_unit_test_dispatch_allows_managed_only_workspace_for_proof_host(self) -> None:
+        test_module = load_module(
+            TEST_COMMAND_MODULE_PATH,
+            "chaos_run_test_command_declared_unit_managed_only_proof",
+        )
+        repo_root = make_temp_repo_root("subject-command", "declared-unit-managed-only-proof")
+        manifest: dict[str, Any] = {}
+        subject_id = "SolutionCorePack"
+        stable_id = "solution-core-proof"
+        alias = "solution-core-proof"
+        source_entry = "SolutionCorePack/Launcher.Program::RunProof()"
+        fixed_run_id = "chaos-run-declared-unit-managed-only-proof"
+        registry_index = make_declared_registry_index(
+            test_module,
+            subject_id=subject_id,
+            object_type="declared-unit-test",
+            stable_id=stable_id,
+            alias=alias,
+            source_entry=source_entry,
+            workload_entry="should-be-cleared-for-unit-tests",
+        )
+        plan = make_subject_plan(
+            subject_id=subject_id,
+            run_id=fixed_run_id,
+            matrix_id="windows-native-check",
+            goal_id="correctness.dev",
+            stage_kind="runtime-observe",
+        )
+        execution_result = build_execution_result(
+            plan,
+            stage_kind="runtime-observe",
+            duration_ms=3,
+            fingerprint="declared-unit-managed-only-proof-fingerprint",
+        )
+        write_subject_workspace(
+            repo_root,
+            subject_id=subject_id,
+            matrix_id="workspace-proof-matrix",
+            goal_ids=["correctness.dev"],
+            unit_stable_id=stable_id,
+            unit_alias=alias,
+            unit_entry_index=7,
+            benchmark_stable_id=f"{subject_id}::Benchmarks::{subject_id}.Benchmarks::Run()",
+            benchmark_alias="workspace-benchmark",
+            benchmark_entry_index=9,
+            include_native_proof=False,
+        )
+
+        try:
+            with patch.object(test_module, "_scan_registry", return_value=registry_index):
+                with patch.object(test_module.subject_planner_module, "build_plan", return_value=plan) as build_plan_mock:
+                    with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
+                        with patch.object(
+                            test_module.subject_executor_module,
+                            "execute_plan",
+                            return_value=execution_result,
+                        ):
+                            with patch.object(
+                                test_module.subject_validations_module,
+                                "run_subject_validations",
+                                side_effect=empty_validation_outcome,
+                            ):
+                                result = test_module.handle(
+                                    {
+                                        "id": "test-declared-unit-test",
+                                        "handler": "test.dispatch",
+                                    },
+                                    repo_root,
+                                    "windows",
+                                    f"test declared-unit-test --id declared-unit-test/{stable_id}",
+                                    manifest,
+                                    {"id": f"declared-unit-test/{stable_id}"},
+                                )
+
+            self.assertEqual("ok", result.status)
+            build_plan_mock.assert_called_once()
+            self.assertEqual("workspace-proof-matrix", build_plan_mock.call_args.kwargs["matrix_id"])
+            self.assertEqual(7, result.payload["workspaceExecution"]["entryIndex"])
+            self.assertEqual("proof-host", result.payload["workspaceExecution"]["hostKind"])
+            self.assertIsNone(result.payload["workspaceExecution"]["nativeTestProject"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -941,6 +1389,19 @@ class SubjectCommandTests(unittest.TestCase):
             duration_ms=4,
             fingerprint="declared-benchmark-alias-fingerprint",
         )
+        write_subject_workspace(
+            repo_root,
+            subject_id=subject_id,
+            matrix_id="workspace-benchmark-matrix",
+            goal_ids=["perf.release"],
+            unit_stable_id=f"{subject_id}::Proofs::{subject_id}.Proofs::Run()",
+            unit_alias="workspace-proof",
+            unit_entry_index=4,
+            benchmark_stable_id=stable_id,
+            benchmark_alias=alias,
+            benchmark_entry_index=11,
+            include_native_proof=False,
+        )
 
         try:
             with patch.object(test_module, "_scan_registry", return_value=registry_index):
@@ -958,15 +1419,14 @@ class SubjectCommandTests(unittest.TestCase):
                             ):
                                 result = test_module.handle(
                                     {
-                                        "id": "declared-benchmark-alias",
-                                        "kind": "registry-object-alias",
-                                        "registry_object_kind": "declared-benchmark",
-                                        "registry_object_id": f"declared-benchmark/{stable_id}",
+                                        "id": "test-declared-benchmark",
+                                        "handler": "test.dispatch",
                                     },
                                     repo_root,
                                     "windows",
                                     f"test declared-benchmark --id declared-benchmark/{stable_id}",
                                     manifest,
+                                    {"id": f"declared-benchmark/{stable_id}"},
                                 )
 
             self.assertEqual("ok", result.status)
@@ -978,6 +1438,7 @@ class SubjectCommandTests(unittest.TestCase):
             build_plan_mock.assert_called_once()
             self.assertEqual(repo_root, build_plan_mock.call_args.args[0])
             self.assertEqual(subject_id, build_plan_mock.call_args.args[1])
+            self.assertEqual("workspace-benchmark-matrix", build_plan_mock.call_args.kwargs["matrix_id"])
             self.assertEqual(source_entry, build_plan_mock.call_args.kwargs["source_entry"])
             self.assertEqual(workload_entry, build_plan_mock.call_args.kwargs["workload_entry"])
             self.assertEqual(
@@ -985,9 +1446,118 @@ class SubjectCommandTests(unittest.TestCase):
                     "family": "declared-benchmark",
                     "stableId": stable_id,
                     "alias": alias,
+                    "entryIndex": 11,
                 },
                 build_plan_mock.call_args.kwargs["entry_selection"],
             )
+            self.assertEqual(11, result.payload["workspaceExecution"]["entryIndex"])
+            self.assertEqual("benchmark-host", result.payload["workspaceExecution"]["hostKind"])
+            self.assertIsNone(result.payload["workspaceExecution"]["nativeTestProject"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_engineering_validation_dispatch_keeps_pipeline_semantics_without_workspace_resolution(self) -> None:
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_engineering_validation_legacy")
+        repo_root = make_temp_repo_root("subject-command", "engineering-validation-legacy")
+        manifest: dict[str, Any] = {}
+        subject_id = "FixtureEngineeringSubject"
+        fixed_run_id = "chaos-run-engineering-validation-legacy"
+        observed_selection: dict[str, str] = {}
+        object_id = f"engineering-validation/{subject_id}/project-graph"
+        subject_registry_index = make_subject_registry_index(
+            test_module,
+            subject_id=subject_id,
+            default_goal_id="correctness.dev",
+            matrix_id="legacy-engineering-matrix",
+        )
+        engineering_object = {
+            "id": object_id,
+            "type": "engineering-validation",
+            "displayName": "project-graph",
+            "subjectId": subject_id,
+            "defaultGoalId": "correctness.dev",
+            "defaultMatrixId": "legacy-engineering-matrix",
+            "goalIds": ["correctness.dev"],
+            "matrixIds": ["legacy-engineering-matrix"],
+            "supportedHosts": ["windows"],
+            "level": "subject",
+            "primaryModuleId": None,
+            "moduleIds": [],
+            "subsystemIds": [],
+            "docRefs": [],
+            "canonicalCommand": f"run test engineering-validation --id {object_id}",
+            "kind": "project-graph",
+        }
+        registry_index = test_module.registry_module.RegistryIndex(
+            host_platform="windows",
+            suites=[],
+            subjects=subject_registry_index.subjects,
+            engineering_validations=[engineering_object],
+            engineering_workloads=[],
+            declared_unit_tests=[],
+            declared_benchmarks=[],
+            module_verifications=[],
+            system_scenarios=[],
+            pipelines=[],
+            errors=[],
+            warnings=[],
+        )
+        build_plan = make_build_plan_side_effect(
+            observed_selection,
+            subject_id=subject_id,
+            expected_run_id=fixed_run_id,
+            default_goal_id="correctness.dev",
+            default_matrix_id="legacy-engineering-matrix",
+        )
+
+        def execute_plan_side_effect(repo_root: Path, plan: dict, **_: object) -> dict:
+            del repo_root
+            return build_execution_result(
+                plan,
+                stage_kind="runtime-observe",
+                duration_ms=1,
+                fingerprint="engineering-validation-legacy-fingerprint",
+            )
+
+        try:
+            with patch.object(test_module, "_scan_registry", return_value=registry_index):
+                with patch.object(test_module.subject_planner_module, "build_plan", side_effect=build_plan) as build_plan_mock:
+                    with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
+                        with patch.object(
+                            test_module.subject_executor_module,
+                            "execute_plan",
+                            side_effect=execute_plan_side_effect,
+                        ):
+                            with patch.object(
+                                test_module.subject_validations_module,
+                                "run_subject_validations",
+                                side_effect=empty_validation_outcome,
+                            ):
+                                result = test_module.handle(
+                                    {
+                                        "id": "test-engineering-validation",
+                                        "handler": "test.dispatch",
+                                    },
+                                    repo_root,
+                                    "windows",
+                                    f"test engineering-validation --id {object_id}",
+                                    manifest,
+                                    {"id": object_id},
+                                )
+
+            self.assertEqual("ok", result.status)
+            build_plan_mock.assert_called_once()
+            self.assertEqual("legacy-engineering-matrix", build_plan_mock.call_args.kwargs["matrix_id"])
+            self.assertEqual(
+                {
+                    "family": "engineering-validation",
+                    "kind": "project-graph",
+                    "alias": "project-graph",
+                },
+                build_plan_mock.call_args.kwargs["entry_selection"],
+            )
+            self.assertNotIn("workspaceExecution", result.payload)
+            self.assertEqual("legacy-engineering-matrix", observed_selection["matrixId"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

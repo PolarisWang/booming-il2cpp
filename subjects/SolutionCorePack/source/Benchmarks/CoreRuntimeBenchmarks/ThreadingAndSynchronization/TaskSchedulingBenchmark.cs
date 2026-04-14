@@ -10,7 +10,7 @@ internal static class TaskSchedulingBenchmarkEntry
         Alias = "task-scheduling-bench",
         CapabilityFamily = ChaosCapabilityFamily.ThreadingAndSynchronization,
         Capability = ChaosCapabilityItem.TaskScheduling,
-        Modes = ChaosExecutionMode.Managed,
+        Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native,
         Requires = ChaosRuntimeFeature.Threading | ChaosRuntimeFeature.Synchronization,
         WarmupCount = 1,
         IterationCount = 2,

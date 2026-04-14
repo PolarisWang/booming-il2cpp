@@ -647,6 +647,7 @@
         "perf.release"
       ],
       "source": {
+          "primaryProjectPath": "subjects/SolutionCorePack/source/Benchmarks/CoreRuntimeBenchmarks/CoreRuntimeBenchmarks.csproj",
           "entry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()"
       },
       "executionContext": {
@@ -681,6 +682,7 @@
         "perf.release"
       ],
       "source": {
+          "primaryProjectPath": "subjects/SolutionCorePack/source/Benchmarks/CoreRuntimeBenchmarks/CoreRuntimeBenchmarks.csproj",
           "entry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()"
       },
       "executionContext": {

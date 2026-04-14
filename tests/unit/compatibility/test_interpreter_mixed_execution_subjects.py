@@ -101,16 +101,17 @@ def make_unique_build_root(prefix: str) -> Path:
 
 
 class Phase7InterpreterMixedExecutionTests(unittest.TestCase):
-    def test_interpreter_project_isolation_and_solution_wiring(self) -> None:
-        solution_source = CORE_SOLUTION_PATH.read_text(encoding="utf-8")
-
+    def test_interpreter_project_isolation_and_legacy_solution_cutover(self) -> None:
         self.assertTrue(INTERPRETER_ROOT.is_dir(), msg=f"missing interpreter root: {INTERPRETER_ROOT}")
         self.assertTrue(INTERPRETER_PROJECT_PATH.is_file(), msg=f"missing interpreter project: {INTERPRETER_PROJECT_PATH}")
         self.assertEqual(
             ["Chaos.IL2CPP.Contracts", "Chaos.IL2CPP.HotUpdate"],
             parse_project_references(INTERPRETER_PROJECT_PATH),
         )
-        self.assertIn("Chaos.IL2CPP.Interpreter", solution_source)
+        self.assertFalse(
+            CORE_SOLUTION_PATH.exists(),
+            msg=f"legacy static core solution should not exist anymore: {CORE_SOLUTION_PATH}",
+        )
         self.assertNotIn("Chaos.IL2CPP.CodeGen", parse_project_references(INTERPRETER_PROJECT_PATH))
 
     def test_interpreter_ir_surface_defines_methods_blocks_instructions_and_opcode_catalog(self) -> None:

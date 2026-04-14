@@ -63,22 +63,22 @@
           "status": "recorded",
           "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
           "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-          "recordedAt": "2026-04-14T04:01:56.915380Z",
-          "gitCommit": "a22e124",
+          "recordedAt": "2026-04-14T14:27:46.462775Z",
+          "gitCommit": "ce5f0ee",
           "metrics": {
             "sampleCount": 3,
-            "meanDurationMs": 65.543,
-            "minDurationMs": 62.388,
-            "maxDurationMs": 68.51,
+            "meanDurationMs": 73.959,
+            "minDurationMs": 72.856,
+            "maxDurationMs": 74.888,
             "meanChecksum": 4.0,
             "minChecksum": 4.0,
             "maxChecksum": 4.0,
-            "meanElapsedMilliseconds": 65.543,
-            "minElapsedMilliseconds": 62.388,
-            "maxElapsedMilliseconds": 68.51,
-            "meanOpsPerSecond": 61.118,
-            "minOpsPerSecond": 58.386,
-            "maxOpsPerSecond": 64.115
+            "meanElapsedMilliseconds": 73.959,
+            "minElapsedMilliseconds": 72.856,
+            "maxElapsedMilliseconds": 74.888,
+            "meanOpsPerSecond": 54.091,
+            "minOpsPerSecond": 53.413,
+            "maxOpsPerSecond": 54.903
           }
         },
         "native": {
@@ -97,8 +97,8 @@
         "unsupportedModeCount": 2,
         "isComplete": true
       },
-      "lastRecordedAt": "2026-04-14T04:01:56.915380Z",
-      "gitCommit": "a22e124",
+      "lastRecordedAt": "2026-04-14T14:27:46.462775Z",
+      "gitCommit": "ce5f0ee",
       "isStale": false,
       "comparison": {
         "nativeVsManaged": {
@@ -168,10 +168,10 @@
         "managedBaseline": {
           "mode": "managed",
           "status": "recorded",
-          "durationMs": 65.543,
-          "opsPerSecond": 61.118,
-          "recordedAt": "2026-04-14T04:01:56.915380Z",
-          "gitCommit": "a22e124"
+          "durationMs": 73.959,
+          "opsPerSecond": 54.091,
+          "recordedAt": "2026-04-14T14:27:46.462775Z",
+          "gitCommit": "ce5f0ee"
         },
         "relativeToManaged": {
           "native": {
@@ -205,7 +205,7 @@
   "latestByDevice": {
     "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd": {
       "managed": {
-        "runId": "20260414-040156-HotUpdateHostPack-managed",
+        "runId": "20260414-142746-HotUpdateHostPack-managed",
         "subject": "HotUpdateHostPack",
         "mode": "managed",
         "platform": "windows",
@@ -217,23 +217,23 @@
           "arch": "x64",
           "isSimulator": false
         },
-        "recordedAt": "2026-04-14T04:01:56.915380Z",
-        "gitCommit": "a22e124",
+        "recordedAt": "2026-04-14T14:27:46.462775Z",
+        "gitCommit": "ce5f0ee",
         "gitBranch": "main",
         "metrics": {
           "sampleCount": 3,
-          "meanDurationMs": 65.543,
-          "minDurationMs": 62.388,
-          "maxDurationMs": 68.51,
+          "meanDurationMs": 73.959,
+          "minDurationMs": 72.856,
+          "maxDurationMs": 74.888,
           "meanChecksum": 4.0,
           "minChecksum": 4.0,
           "maxChecksum": 4.0,
-          "meanElapsedMilliseconds": 65.543,
-          "minElapsedMilliseconds": 62.388,
-          "maxElapsedMilliseconds": 68.51,
-          "meanOpsPerSecond": 61.118,
-          "minOpsPerSecond": 58.386,
-          "maxOpsPerSecond": 64.115
+          "meanElapsedMilliseconds": 73.959,
+          "minElapsedMilliseconds": 72.856,
+          "maxElapsedMilliseconds": 74.888,
+          "meanOpsPerSecond": 54.091,
+          "minOpsPerSecond": 53.413,
+          "maxOpsPerSecond": 54.903
         }
       }
     }
@@ -285,22 +285,22 @@
             "status": "recorded",
             "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
             "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "recordedAt": "2026-04-14T04:02:00.616513Z",
-            "gitCommit": "a22e124",
+            "recordedAt": "2026-04-14T14:27:50.745754Z",
+            "gitCommit": "ce5f0ee",
             "metrics": {
               "sampleCount": 3,
-              "meanDurationMs": 3.557,
-              "minDurationMs": 3.214,
-              "maxDurationMs": 3.795,
+              "meanDurationMs": 3.874,
+              "minDurationMs": 3.575,
+              "maxDurationMs": 4.209,
               "meanChecksum": 8000.0,
               "minChecksum": 8000.0,
               "maxChecksum": 8000.0,
-              "meanElapsedMilliseconds": 3.557,
-              "minElapsedMilliseconds": 3.214,
-              "maxElapsedMilliseconds": 3.795,
-              "meanOpsPerSecond": 1130.342,
-              "minOpsPerSecond": 1053.935,
-              "maxOpsPerSecond": 1244.671
+              "meanElapsedMilliseconds": 3.874,
+              "minElapsedMilliseconds": 3.575,
+              "maxElapsedMilliseconds": 4.209,
+              "meanOpsPerSecond": 1037.054,
+              "minOpsPerSecond": 950.344,
+              "maxOpsPerSecond": 1118.881
             }
           },
           "native": {
@@ -323,10 +323,10 @@
           "managedBaseline": {
             "mode": "managed",
             "status": "recorded",
-            "durationMs": 3.557,
-            "opsPerSecond": 1130.342,
-            "recordedAt": "2026-04-14T04:02:00.616513Z",
-            "gitCommit": "a22e124"
+            "durationMs": 3.874,
+            "opsPerSecond": 1037.054,
+            "recordedAt": "2026-04-14T14:27:50.745754Z",
+            "gitCommit": "ce5f0ee"
           },
           "relativeToManaged": {
             "native": {
@@ -402,22 +402,22 @@
             "status": "recorded",
             "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
             "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "recordedAt": "2026-04-14T04:02:04.352418Z",
-            "gitCommit": "a22e124",
+            "recordedAt": "2026-04-14T14:27:55.295091Z",
+            "gitCommit": "ce5f0ee",
             "metrics": {
               "sampleCount": 3,
-              "meanDurationMs": 67.266,
-              "minDurationMs": 63.097,
-              "maxDurationMs": 70.684,
+              "meanDurationMs": 75.791,
+              "minDurationMs": 73.596,
+              "maxDurationMs": 78.791,
               "meanChecksum": 4.0,
               "minChecksum": 4.0,
               "maxChecksum": 4.0,
-              "meanElapsedMilliseconds": 67.266,
-              "minElapsedMilliseconds": 63.097,
-              "maxElapsedMilliseconds": 70.684,
-              "meanOpsPerSecond": 59.598,
-              "minOpsPerSecond": 56.59,
-              "maxOpsPerSecond": 63.394
+              "meanElapsedMilliseconds": 75.791,
+              "minElapsedMilliseconds": 73.596,
+              "maxElapsedMilliseconds": 78.791,
+              "meanOpsPerSecond": 52.82,
+              "minOpsPerSecond": 50.767,
+              "maxOpsPerSecond": 54.351
             }
           },
           "native": {
@@ -440,10 +440,10 @@
           "managedBaseline": {
             "mode": "managed",
             "status": "recorded",
-            "durationMs": 67.266,
-            "opsPerSecond": 59.598,
-            "recordedAt": "2026-04-14T04:02:04.352418Z",
-            "gitCommit": "a22e124"
+            "durationMs": 75.791,
+            "opsPerSecond": 52.82,
+            "recordedAt": "2026-04-14T14:27:55.295091Z",
+            "gitCommit": "ce5f0ee"
           },
           "relativeToManaged": {
             "native": {
@@ -519,22 +519,22 @@
             "status": "recorded",
             "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
             "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "recordedAt": "2026-04-14T04:02:07.951520Z",
-            "gitCommit": "a22e124",
+            "recordedAt": "2026-04-14T14:27:59.320789Z",
+            "gitCommit": "ce5f0ee",
             "metrics": {
               "sampleCount": 3,
-              "meanDurationMs": 4.35,
-              "minDurationMs": 4.155,
-              "maxDurationMs": 4.553,
+              "meanDurationMs": 4.562,
+              "minDurationMs": 4.449,
+              "maxDurationMs": 4.652,
               "meanChecksum": 6000.0,
               "minChecksum": 6000.0,
               "maxChecksum": 6000.0,
-              "meanElapsedMilliseconds": 4.35,
-              "minElapsedMilliseconds": 4.155,
-              "maxElapsedMilliseconds": 4.553,
-              "meanOpsPerSecond": 920.677,
-              "minOpsPerSecond": 878.445,
-              "maxOpsPerSecond": 962.626
+              "meanElapsedMilliseconds": 4.562,
+              "minElapsedMilliseconds": 4.449,
+              "maxElapsedMilliseconds": 4.652,
+              "meanOpsPerSecond": 877.149,
+              "minOpsPerSecond": 859.845,
+              "maxOpsPerSecond": 899.058
             }
           },
           "native": {
@@ -557,10 +557,10 @@
           "managedBaseline": {
             "mode": "managed",
             "status": "recorded",
-            "durationMs": 4.35,
-            "opsPerSecond": 920.677,
-            "recordedAt": "2026-04-14T04:02:07.951520Z",
-            "gitCommit": "a22e124"
+            "durationMs": 4.562,
+            "opsPerSecond": 877.149,
+            "recordedAt": "2026-04-14T14:27:59.320789Z",
+            "gitCommit": "ce5f0ee"
           },
           "relativeToManaged": {
             "native": {
@@ -624,7 +624,8 @@
       ],
       "warmupCount": 1,
       "iterationCount": 45,
-      "invocationCount": 1
+      "invocationCount": 1,
+      "entryIndex": 0
     },
     "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()": {
       "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()",
@@ -658,7 +659,8 @@
       ],
       "warmupCount": 1,
       "iterationCount": 8,
-      "invocationCount": 1
+      "invocationCount": 1,
+      "entryIndex": 1
     },
     "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry::RunWorkload()": {
       "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry::RunWorkload()",
@@ -692,7 +694,8 @@
       ],
       "warmupCount": 1,
       "iterationCount": 30,
-      "invocationCount": 1
+      "invocationCount": 1,
+      "entryIndex": 2
     }
   },
   "caseSummaryByDevice": {
@@ -707,6 +710,326 @@
   "history": {
     "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd": {
       "managed": [
+        {
+          "runId": "20260414-142746-HotUpdateHostPack-managed",
+          "subject": "HotUpdateHostPack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T14:27:46.462775Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 73.959,
+            "minDurationMs": 72.856,
+            "maxDurationMs": 74.888,
+            "meanChecksum": 4.0,
+            "minChecksum": 4.0,
+            "maxChecksum": 4.0,
+            "meanElapsedMilliseconds": 73.959,
+            "minElapsedMilliseconds": 72.856,
+            "maxElapsedMilliseconds": 74.888,
+            "meanOpsPerSecond": 54.091,
+            "minOpsPerSecond": 53.413,
+            "maxOpsPerSecond": 54.903
+          }
+        },
+        {
+          "runId": "20260414-141104-HotUpdateHostPack-managed",
+          "subject": "HotUpdateHostPack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T14:11:04.324726Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 72.805,
+            "minDurationMs": 70.258,
+            "maxDurationMs": 76.727,
+            "meanChecksum": 4.0,
+            "minChecksum": 4.0,
+            "maxChecksum": 4.0,
+            "meanElapsedMilliseconds": 72.805,
+            "minElapsedMilliseconds": 70.258,
+            "maxElapsedMilliseconds": 76.727,
+            "meanOpsPerSecond": 55.021,
+            "minOpsPerSecond": 52.133,
+            "maxOpsPerSecond": 56.933
+          }
+        },
+        {
+          "runId": "20260414-133925-HotUpdateHostPack-managed",
+          "subject": "HotUpdateHostPack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:39:25.988583Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 68.333,
+            "minDurationMs": 66.777,
+            "maxDurationMs": 69.519,
+            "meanChecksum": 4.0,
+            "minChecksum": 4.0,
+            "maxChecksum": 4.0,
+            "meanElapsedMilliseconds": 68.333,
+            "minElapsedMilliseconds": 66.777,
+            "maxElapsedMilliseconds": 69.519,
+            "meanOpsPerSecond": 58.554,
+            "minOpsPerSecond": 57.539,
+            "maxOpsPerSecond": 59.901
+          }
+        },
+        {
+          "runId": "20260414-132925-HotUpdateHostPack-managed",
+          "subject": "HotUpdateHostPack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:29:25.314088Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 67.905,
+            "minDurationMs": 65.572,
+            "maxDurationMs": 69.634,
+            "meanChecksum": 4.0,
+            "minChecksum": 4.0,
+            "maxChecksum": 4.0,
+            "meanElapsedMilliseconds": 67.905,
+            "minElapsedMilliseconds": 65.572,
+            "maxElapsedMilliseconds": 69.634,
+            "meanOpsPerSecond": 58.944,
+            "minOpsPerSecond": 57.444,
+            "maxOpsPerSecond": 61.001
+          }
+        },
+        {
+          "runId": "20260414-132125-HotUpdateHostPack-managed",
+          "subject": "HotUpdateHostPack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:21:25.324802Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 76.574,
+            "minDurationMs": 72.755,
+            "maxDurationMs": 83.673,
+            "meanChecksum": 4.0,
+            "minChecksum": 4.0,
+            "maxChecksum": 4.0,
+            "meanElapsedMilliseconds": 76.574,
+            "minElapsedMilliseconds": 72.755,
+            "maxElapsedMilliseconds": 83.673,
+            "meanOpsPerSecond": 52.453,
+            "minOpsPerSecond": 47.805,
+            "maxOpsPerSecond": 54.979
+          }
+        },
+        {
+          "runId": "20260414-125940-HotUpdateHostPack-managed",
+          "subject": "HotUpdateHostPack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:59:40.354565Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 70.311,
+            "minDurationMs": 65.118,
+            "maxDurationMs": 75.875,
+            "meanChecksum": 4.0,
+            "minChecksum": 4.0,
+            "maxChecksum": 4.0,
+            "meanElapsedMilliseconds": 70.311,
+            "minElapsedMilliseconds": 65.118,
+            "maxElapsedMilliseconds": 75.875,
+            "meanOpsPerSecond": 57.112,
+            "minOpsPerSecond": 52.718,
+            "maxOpsPerSecond": 61.427
+          }
+        },
+        {
+          "runId": "20260414-125409-HotUpdateHostPack-managed",
+          "subject": "HotUpdateHostPack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:54:09.105281Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 68.085,
+            "minDurationMs": 67.825,
+            "maxDurationMs": 68.27,
+            "meanChecksum": 4.0,
+            "minChecksum": 4.0,
+            "maxChecksum": 4.0,
+            "meanElapsedMilliseconds": 68.085,
+            "minElapsedMilliseconds": 67.825,
+            "maxElapsedMilliseconds": 68.27,
+            "meanOpsPerSecond": 58.75,
+            "minOpsPerSecond": 58.591,
+            "maxOpsPerSecond": 58.975
+          }
+        },
+        {
+          "runId": "20260414-122656-HotUpdateHostPack-managed",
+          "subject": "HotUpdateHostPack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:26:56.845429Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 68.535,
+            "minDurationMs": 64.106,
+            "maxDurationMs": 71.495,
+            "meanChecksum": 4.0,
+            "minChecksum": 4.0,
+            "maxChecksum": 4.0,
+            "meanElapsedMilliseconds": 68.535,
+            "minElapsedMilliseconds": 64.106,
+            "maxElapsedMilliseconds": 71.495,
+            "meanOpsPerSecond": 58.494,
+            "minOpsPerSecond": 55.948,
+            "maxOpsPerSecond": 62.397
+          }
+        },
+        {
+          "runId": "20260414-121733-HotUpdateHostPack-managed",
+          "subject": "HotUpdateHostPack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:17:33.432992Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 68.454,
+            "minDurationMs": 66.889,
+            "maxDurationMs": 71.093,
+            "meanChecksum": 4.0,
+            "minChecksum": 4.0,
+            "maxChecksum": 4.0,
+            "meanElapsedMilliseconds": 68.454,
+            "minElapsedMilliseconds": 66.889,
+            "maxElapsedMilliseconds": 71.093,
+            "meanOpsPerSecond": 58.477,
+            "minOpsPerSecond": 56.265,
+            "maxOpsPerSecond": 59.801
+          }
+        },
+        {
+          "runId": "20260414-120134-HotUpdateHostPack-managed",
+          "subject": "HotUpdateHostPack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:01:34.364008Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 62.706,
+            "minDurationMs": 61.414,
+            "maxDurationMs": 63.908,
+            "meanChecksum": 4.0,
+            "minChecksum": 4.0,
+            "maxChecksum": 4.0,
+            "meanElapsedMilliseconds": 62.706,
+            "minElapsedMilliseconds": 61.414,
+            "maxElapsedMilliseconds": 63.908,
+            "meanOpsPerSecond": 63.807,
+            "minOpsPerSecond": 62.59,
+            "maxOpsPerSecond": 65.131
+          }
+        },
         {
           "runId": "20260414-040156-HotUpdateHostPack-managed",
           "subject": "HotUpdateHostPack",
@@ -1025,70 +1348,6 @@
             "meanOpsPerSecond": 70.831,
             "minOpsPerSecond": 70.314,
             "maxOpsPerSecond": 71.74
-          }
-        },
-        {
-          "runId": "20260413-135705-HotUpdateHostPack-managed",
-          "subject": "HotUpdateHostPack",
-          "mode": "managed",
-          "platform": "windows",
-          "device": {
-            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "os": "Windows 10.0.26100",
-            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
-            "arch": "x64",
-            "isSimulator": false
-          },
-          "recordedAt": "2026-04-13T13:57:05.595715Z",
-          "gitCommit": "d0b7303",
-          "gitBranch": "main",
-          "metrics": {
-            "sampleCount": 3,
-            "meanDurationMs": 222.115,
-            "minDurationMs": 196.162,
-            "maxDurationMs": 255.461,
-            "meanChecksum": 4.0,
-            "minChecksum": 4.0,
-            "maxChecksum": 4.0,
-            "meanElapsedMilliseconds": 222.115,
-            "minElapsedMilliseconds": 196.162,
-            "maxElapsedMilliseconds": 255.461,
-            "meanOpsPerSecond": 18.226,
-            "minOpsPerSecond": 15.658,
-            "maxOpsPerSecond": 20.391
-          }
-        },
-        {
-          "runId": "20260413-134846-HotUpdateHostPack-managed",
-          "subject": "HotUpdateHostPack",
-          "mode": "managed",
-          "platform": "windows",
-          "device": {
-            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "os": "Windows 10.0.26100",
-            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
-            "arch": "x64",
-            "isSimulator": false
-          },
-          "recordedAt": "2026-04-13T13:48:46.708157Z",
-          "gitCommit": "d0b7303",
-          "gitBranch": "main",
-          "metrics": {
-            "sampleCount": 3,
-            "meanDurationMs": 52.531,
-            "minDurationMs": 50.8,
-            "maxDurationMs": 53.55,
-            "meanChecksum": 4.0,
-            "minChecksum": 4.0,
-            "maxChecksum": 4.0,
-            "meanElapsedMilliseconds": 52.531,
-            "minElapsedMilliseconds": 50.8,
-            "maxElapsedMilliseconds": 53.55,
-            "meanOpsPerSecond": 76.189,
-            "minOpsPerSecond": 74.697,
-            "maxOpsPerSecond": 78.74
           }
         }
       ]

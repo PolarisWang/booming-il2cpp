@@ -1,0 +1,139 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any
+
+
+WORKSPACE_MANIFEST_VERSION = 2
+
+
+def _subject_workspace_manifest_path(repo_root: Path, subject_id: str) -> Path:
+    return repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+
+
+def _load_workspace_manifest(repo_root: Path, subject_id: str) -> dict[str, Any] | None:
+    manifest_path = _subject_workspace_manifest_path(repo_root, subject_id)
+    if not manifest_path.is_file():
+        return None
+
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+
+    if not isinstance(manifest, dict):
+        return None
+
+    try:
+        workspace_version = int(manifest.get("workspaceVersion") or 0)
+    except (TypeError, ValueError):
+        return None
+    if workspace_version < WORKSPACE_MANIFEST_VERSION:
+        return None
+
+    return manifest
+
+
+def _load_subject_manifest(repo_root: Path, subject_id: str) -> dict[str, Any] | None:
+    manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+    if not manifest_path.is_file():
+        return None
+
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+
+    return manifest if isinstance(manifest, dict) else None
+
+
+def _is_relevant_source_file(path: Path) -> bool:
+    if not path.is_file():
+        return False
+    if path.suffix.lower() in {".cs", ".csproj", ".sln", ".props", ".targets"}:
+        return True
+    return path.name in {"Directory.Build.props", "Directory.Build.targets"}
+
+
+def _workspace_catalog_is_stale(repo_root: Path, subject_id: str, catalog_path: Path) -> bool:
+    try:
+        catalog_mtime = catalog_path.stat().st_mtime
+    except OSError:
+        return True
+
+    subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+    try:
+        if subject_manifest_path.is_file() and subject_manifest_path.stat().st_mtime > catalog_mtime:
+            return True
+    except OSError:
+        return True
+
+    subject_manifest = _load_subject_manifest(repo_root, subject_id)
+    if subject_manifest is None:
+        return False
+
+    source = dict(subject_manifest.get("source") or {})
+    source_path_text = str(source.get("path") or "").strip()
+    if not source_path_text:
+        return False
+
+    source_path = repo_root / source_path_text
+    source_root = source_path if source_path.is_dir() else source_path.parent
+    if not source_root.is_dir():
+        return False
+
+    for candidate in source_root.rglob("*"):
+        if not _is_relevant_source_file(candidate):
+            continue
+        try:
+            if candidate.stat().st_mtime > catalog_mtime:
+                return True
+        except OSError:
+            return True
+    return False
+
+
+def _managed_test_projects_with_catalogs(manifest: dict[str, Any], *, host_kind: str) -> list[dict[str, Any]]:
+    preferred: list[dict[str, Any]] = []
+    fallback: list[dict[str, Any]] = []
+    for item in list(manifest.get("managedTestProjects") or []):
+        if not isinstance(item, dict):
+            continue
+        catalog_path = str(item.get("catalogPath") or "").strip()
+        if not catalog_path:
+            continue
+        normalized_item = dict(item)
+        if str(item.get("hostKind") or "").strip() == host_kind:
+            preferred.append(normalized_item)
+            continue
+        fallback.append(normalized_item)
+    return [*preferred, *fallback]
+
+
+def load_workspace_declared_catalog(
+    repo_root: Path,
+    subject_id: str,
+    *,
+    host_kind: str,
+) -> dict[str, Any] | None:
+    manifest = _load_workspace_manifest(repo_root, subject_id)
+    if manifest is None:
+        return None
+
+    for project in _managed_test_projects_with_catalogs(manifest, host_kind=host_kind):
+        catalog_path = str(project.get("catalogPath") or "").strip()
+        if not catalog_path:
+            continue
+        catalog_abspath = repo_root / catalog_path
+        if not catalog_abspath.is_file():
+            continue
+        if _workspace_catalog_is_stale(repo_root, subject_id, catalog_abspath):
+            continue
+        try:
+            catalog = json.loads(catalog_abspath.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            continue
+        if isinstance(catalog, dict):
+            return catalog
+    return None

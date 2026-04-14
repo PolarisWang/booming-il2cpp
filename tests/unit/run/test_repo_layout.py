@@ -155,35 +155,6 @@ MIGRATED_PERFORMANCE_TESTS = [
     "test_native_aot_contract_split.py",
     "test_native_aot_workload_entry_bundle.py",
 ]
-PHASE1_GENERIC_UNIT_BUCKET_SHIMS = {
-    "test_subject_executor.py": "tests.unit.execution.test_subject_executor",
-    "test_subject_workers.py": "tests.unit.execution.test_subject_workers",
-    "test_deploy_core.py": "tests.unit.execution.test_deploy_core",
-    "test_subject_reporting.py": "tests.unit.reporting.test_subject_reporting",
-    "test_events_schema.py": "tests.unit.reporting.test_events_schema",
-    "test_traffic_light.py": "tests.unit.reporting.test_traffic_light",
-    "test_benchmark_command.py": "tests.unit.performance.test_benchmark_command",
-    "test_benchmark_comparison.py": "tests.unit.performance.test_benchmark_comparison",
-    "test_benchmark_subject_sources.py": "tests.unit.performance.test_benchmark_subject_sources",
-    "test_perf_policy.py": "tests.unit.performance.test_perf_policy",
-    "test_subject_perf_policy.py": "tests.unit.performance.test_subject_perf_policy",
-    "test_subject_workers_perf.py": "tests.unit.performance.test_subject_workers_perf",
-    "test_subject_planner.py": "tests.unit.planning.test_subject_planner",
-    "test_project_workspace.py": "tests.unit.planning.test_project_workspace",
-    "test_fingerprints.py": "tests.unit.planning.test_fingerprints",
-    "test_project_graph.py": "tests.unit.planning.test_project_graph",
-    "test_path_resolver.py": "tests.unit.selection.test_path_resolver",
-    "test_session.py": "tests.unit.selection.test_session",
-    "test_managed_closure_contract_bundle.py": "tests.unit.compatibility.test_managed_closure_contract_bundle",
-    "test_native_prefix_naming.py": "tests.unit.compatibility.test_native_prefix_naming",
-    "test_native_reference_bootstrap_support.py": "tests.unit.compatibility.test_native_reference_bootstrap_support",
-    "test_native_runtime_core.py": "tests.unit.compatibility.test_native_runtime_core",
-    "test_subject_contracts_source_cutover.py": "tests.unit.compatibility.test_subject_contracts_source_cutover",
-    "test_subject_manifest_schema.py": "tests.unit.compatibility.test_subject_manifest_schema",
-    "test_scriban_vendor_build.py": "tests.unit.compatibility.test_scriban_vendor_build",
-}
-
-
 def parse_project_references(project_path: Path) -> list[str]:
     root = ET.fromstring(project_path.read_text(encoding="utf-8"))
     references: list[str] = []
@@ -342,28 +313,13 @@ class RepoLayoutTests(unittest.TestCase):
         for file_name in MIGRATED_PERFORMANCE_TESTS:
             self.assertTrue((REPO_ROOT / "tests" / "unit" / "performance" / file_name).is_file(), msg=file_name)
 
-    def test_phase1_generic_run_entrypoints_are_compatibility_shims(self) -> None:
-        for file_name, canonical_import in PHASE1_GENERIC_UNIT_BUCKET_SHIMS.items():
-            content = (REPO_ROOT / "tests" / "unit" / "run" / file_name).read_text(encoding="utf-8").strip()
-            self.assertTrue(content.startswith('"""Legacy shim;'), msg=file_name)
-            self.assertIn(canonical_import, content, msg=file_name)
+    def test_phase5_run_bucket_keeps_only_repo_layout(self) -> None:
+        entries = sorted(path.name for path in (REPO_ROOT / "tests" / "unit" / "run").glob("test_*.py"))
+        self.assertEqual(["test_repo_layout.py"], entries)
 
-    def test_phase1_run_bucket_only_keeps_repo_layout_and_generic_shims(self) -> None:
-        non_shim_entries: list[str] = []
-        for path in sorted((REPO_ROOT / "tests" / "unit" / "run").glob("test_*.py")):
-            first_line = path.read_text(encoding="utf-8").splitlines()[0]
-            if first_line.startswith('"""Legacy shim;'):
-                continue
-            non_shim_entries.append(path.name)
-
-        self.assertEqual(
-            sorted(
-                [
-                    "test_repo_layout.py",
-                ]
-            ),
-            non_shim_entries,
-        )
+    def test_phase5_integration_run_bucket_does_not_keep_registry_shims(self) -> None:
+        for file_name in ["test_case_discovery.py", "test_catalog_scan.py", "test_registry_scan.py"]:
+            self.assertFalse((REPO_ROOT / "tests" / "integration" / "run" / file_name).exists(), msg=file_name)
 
     def test_phase1_root_pytest_collection_is_scoped_to_repo_tests(self) -> None:
         pytest_ini = REPO_ROOT / "pytest.ini"

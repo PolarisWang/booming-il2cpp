@@ -49,6 +49,56 @@ def write_windows_subject_native_project_stubs(
     proof_project.write_text(proof_text, encoding="utf-8")
 
 
+def declared_catalog_fixture(subject_id: str = "FixtureSubject") -> dict:
+    return {
+        "subjectId": subject_id,
+        "frameworkReferenced": True,
+        "subjectKind": "declared-test",
+        "warningCodes": [],
+        "declaredUnitTests": [
+            {
+                "stableId": f"{subject_id}::FixtureSubject::FixtureSubject.Proofs::Verify()",
+                "entryIndex": 0,
+                "alias": "fixture-proof",
+                "assemblyName": subject_id,
+                "declaringType": "FixtureSubject.Proofs",
+                "methodName": "Verify",
+                "methodSignature": "Verify()",
+                "category": 1,
+                "capabilityFamily": 1,
+                "capabilityItem": 1,
+                "archetype": 1,
+                "hotUpdateCapability": 0,
+                "requires": 0,
+                "evidence": 1,
+                "priority": 1,
+            }
+        ],
+        "declaredBenchmarks": [
+            {
+                "stableId": f"{subject_id}::FixtureSubject::FixtureSubject.Benchmarks::Run()",
+                "entryIndex": 0,
+                "alias": "fixture-benchmark",
+                "assemblyName": subject_id,
+                "declaringType": "FixtureSubject.Benchmarks",
+                "methodName": "Run",
+                "methodSignature": "Run()",
+                "category": 1,
+                "capabilityFamily": 1,
+                "capabilityItem": 1,
+                "archetype": 1,
+                "hotUpdateCapability": 0,
+                "requires": 0,
+                "metrics": 1,
+                "modes": 1,
+                "warmupCount": 2,
+                "iterationCount": 5,
+                "invocationCount": 10,
+            }
+        ],
+    }
+
+
 def write_windows_subject_native_solution_graph_stubs(configure_root: Path) -> None:
     project_specs = [
         ("ALL_BUILD.vcxproj", "ALL_BUILD"),
@@ -383,75 +433,123 @@ class ProjectWorkspaceTests(unittest.TestCase):
                 write_windows_subject_native_project_stubs(configure_root)
                 return completed
 
-            with patch.object(workspace_module.tooling_module, "cmake_environment", return_value=("cmake", {})):
-                with patch.object(workspace_module, "run_process", side_effect=configure_side_effect) as run_process_mock:
-                    result = workspace_module.generate_subject_workspace(
-                        repo_root,
-                        "windows",
-                        {"id": "subject/FixtureSubject"},
-                    )
+            with patch.object(workspace_module.compiled_catalog_module, "build_subject_declared_test_catalog", return_value=declared_catalog_fixture()):
+                with patch.object(workspace_module.tooling_module, "cmake_environment", return_value=("cmake", {})):
+                    with patch.object(workspace_module, "run_process", side_effect=configure_side_effect) as run_process_mock:
+                        result = workspace_module.generate_subject_workspace(
+                            repo_root,
+                            "windows",
+                            {"id": "subject/FixtureSubject"},
+                        )
 
             manifest_path = repo_root / result["manifestPath"]
             self.assertTrue(manifest_path.is_file())
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            self.assertEqual(2, manifest["workspaceVersion"])
             self.assertEqual("FixtureSubject", manifest["subjectId"])
             self.assertEqual("CHECK", manifest["variant"])
-            self.assertEqual(8, manifest["visualStudioStateVersion"])
-            self.assertEqual(
-                "solutions/subjects/FixtureSubject/generated/subject-exec",
-                manifest["generatedRoot"],
-            )
+            self.assertEqual("windows-dev-output", manifest["defaultMatrixId"])
             self.assertEqual(
                 "solutions/subjects/FixtureSubject/FixtureSubject.sln",
                 manifest["managedSolutionPath"],
             )
             self.assertEqual(
                 [
-                    "subjects/FixtureSubject/source/FixtureSubject.csproj",
-                    "subjects/FixtureSubject/validation/unit/FixtureSubject.Subject.UnitTests/FixtureSubject.Subject.UnitTests.csproj",
+                    {
+                        "projectId": "managed/FixtureSubject/FixtureSubject",
+                        "projectPath": "subjects/FixtureSubject/source/FixtureSubject.csproj",
+                        "assemblyName": "FixtureSubject",
+                        "isPrimary": True,
+                    },
                 ],
                 manifest["managedProjects"],
-            )
-            self.assertEqual(1, len(manifest["matrices"]))
-            self.assertEqual("windows-dev-output", manifest["matrices"][0]["matrixId"])
-            self.assertEqual(
-                "solutions/subjects/FixtureSubject/native/windows-dev-output",
-                manifest["matrices"][0]["configureRoot"],
             )
             self.assertEqual(
                 [
                     {
-                        "buildArgs": ["--config", "Release", "--target", "chaos_subject_generated_native"],
-                        "kind": "generated-native",
-                        "projectPath": "solutions/subjects/FixtureSubject/native/windows-dev-output/generated/chaos_subject_generated_native.vcxproj",
-                        "targetId": "chaos_subject_generated_native",
+                        "projectId": "managed-test/FixtureSubject/proof-host",
+                        "projectPath": "solutions/subjects/FixtureSubject/managed-tests/FixtureSubject.DeclaredProofHost.csproj",
+                        "assemblyName": "FixtureSubject.DeclaredProofHost",
+                        "hostKind": "proof-host",
+                        "catalogPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.catalog.json",
+                        "generatedSourcePath": "solutions/subjects/FixtureSubject/managed-tests/Generated/ChaosGeneratedDeclaredTests.g.cs",
                     },
                     {
-                        "buildArgs": ["--config", "Release", "--target", "chaos_subject_reference_proof"],
-                        "kind": "proof-native",
-                        "projectPath": "solutions/subjects/FixtureSubject/native/windows-dev-output/proof/chaos_subject_reference_proof.vcxproj",
-                        "targetId": "chaos_subject_reference_proof",
+                        "projectId": "managed-test/FixtureSubject/benchmark-host",
+                        "projectPath": "solutions/subjects/FixtureSubject/managed-tests/FixtureSubject.DeclaredBenchmarkHost.csproj",
+                        "assemblyName": "FixtureSubject.DeclaredBenchmarkHost",
+                        "hostKind": "benchmark-host",
+                        "catalogPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.catalog.json",
+                        "generatedSourcePath": "solutions/subjects/FixtureSubject/managed-tests/Generated/ChaosGeneratedDeclaredBenchmarks.g.cs",
                     },
                 ],
-                manifest["matrices"][0]["nativeProjects"],
-            )
-            self.assertEqual("chaos_subject_reference_proof", manifest["matrices"][0]["defaultOpenNativeProject"])
-            self.assertEqual("chaos_subject_reference_proof", manifest["matrices"][0]["defaultBuildNativeProject"])
-            self.assertEqual(
-                "solutions/subjects/FixtureSubject/native/windows-dev-output/generated/chaos_subject_generated_native.vcxproj",
-                manifest["matrices"][0]["generatedNativeProjectPath"],
+                manifest["managedTestProjects"],
             )
             self.assertEqual(
-                "solutions/subjects/FixtureSubject/native/windows-dev-output/proof/chaos_subject_reference_proof.vcxproj",
-                manifest["matrices"][0]["proofNativeProjectPath"],
+                [
+                    {
+                        "projectId": "native/FixtureSubject/windows-dev-output/generated-native",
+                        "matrixId": "windows-dev-output",
+                        "projectPath": "solutions/subjects/FixtureSubject/native/windows-dev-output/generated/chaos_subject_generated_native.vcxproj",
+                        "configureRoot": "solutions/subjects/FixtureSubject/native/windows-dev-output",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "msvc-reference",
+                        "deliveryKind": "generated-static-library",
+                        "buildArgs": ["--config", "Release", "--target", "chaos_subject_generated_native"],
+                    },
+                ],
+                manifest["nativeProjects"],
             )
             self.assertEqual(
-                "solutions/subjects/FixtureSubject/native/windows-dev-output/proof/chaos_subject_reference_proof.vcxproj",
-                manifest["matrices"][0]["nativeProjectPath"],
+                [
+                    {
+                        "projectId": "native-test/FixtureSubject/windows-dev-output/proof-host",
+                        "matrixId": "windows-dev-output",
+                        "projectPath": "solutions/subjects/FixtureSubject/native/windows-dev-output/proof/chaos_subject_reference_proof.vcxproj",
+                        "configureRoot": "solutions/subjects/FixtureSubject/native/windows-dev-output",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "msvc-reference",
+                        "deliveryKind": "direct-run-host",
+                        "hostKind": "proof-host",
+                        "managedTestProjectId": "managed-test/FixtureSubject/proof-host",
+                        "buildArgs": ["--config", "Release", "--target", "chaos_subject_reference_proof"],
+                    },
+                ],
+                manifest["nativeTestProjects"],
             )
+            self.assertEqual(1, len(manifest["matrices"]))
+            self.assertEqual(
+                {
+                    "matrixId": "windows-dev-output",
+                    "goalIds": ["correctness.dev"],
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "toolchainProfile": "msvc-reference",
+                    "managedProjectIds": ["managed/FixtureSubject/FixtureSubject"],
+                    "managedTestProjectIds": [
+                        "managed-test/FixtureSubject/proof-host",
+                        "managed-test/FixtureSubject/benchmark-host",
+                    ],
+                    "nativeProjectIds": ["native/FixtureSubject/windows-dev-output/generated-native"],
+                    "nativeTestProjectIds": ["native-test/FixtureSubject/windows-dev-output/proof-host"],
+                },
+                manifest["matrices"][0],
+            )
+            self.assertNotIn("visualStudioStateVersion", manifest)
+            self.assertNotIn("generatedRoot", manifest)
+            self.assertNotIn("defaultOpenNativeProject", manifest["matrices"][0])
+            self.assertNotIn("defaultBuildNativeProject", manifest["matrices"][0])
+            self.assertNotIn("generatedNativeProjectPath", manifest["matrices"][0])
+            self.assertNotIn("proofNativeProjectPath", manifest["matrices"][0])
+            self.assertNotIn("nativeProjectPath", manifest["matrices"][0])
             self.assertTrue((repo_root / manifest["managedSolutionPath"]).is_file())
-            self.assertTrue((repo_root / manifest["matrices"][0]["generatedNativeProjectPath"]).is_file())
-            self.assertTrue((repo_root / manifest["matrices"][0]["proofNativeProjectPath"]).is_file())
+            self.assertTrue((repo_root / manifest["nativeProjects"][0]["projectPath"]).is_file())
+            self.assertTrue((repo_root / manifest["nativeTestProjects"][0]["projectPath"]).is_file())
+            self.assertTrue((repo_root / manifest["managedTestProjects"][0]["projectPath"]).is_file())
+            self.assertTrue((repo_root / manifest["managedTestProjects"][1]["projectPath"]).is_file())
+            self.assertTrue((repo_root / manifest["managedTestProjects"][0]["generatedSourcePath"]).is_file())
+            self.assertTrue((repo_root / manifest["managedTestProjects"][1]["generatedSourcePath"]).is_file())
+            self.assertTrue((repo_root / manifest["managedTestProjects"][0]["catalogPath"]).is_file())
             mirrored_subject_exec_root = repo_root / "solutions" / "subjects" / "FixtureSubject" / "generated" / "subject-exec"
             self.assertTrue((mirrored_subject_exec_root / "analysis" / "generated" / "generated.manifest.json").is_file())
             self.assertTrue((mirrored_subject_exec_root / "analysis" / "generated" / "native-reference.plan.json").is_file())
@@ -460,7 +558,8 @@ class ProjectWorkspaceTests(unittest.TestCase):
             )
             solution_text = (repo_root / manifest["managedSolutionPath"]).read_text(encoding="utf-8")
             self.assertIn("FixtureSubject.csproj", solution_text)
-            self.assertIn("FixtureSubject.Subject.UnitTests.csproj", solution_text)
+            self.assertIn("FixtureSubject.DeclaredProofHost.csproj", solution_text)
+            self.assertIn("FixtureSubject.DeclaredBenchmarkHost.csproj", solution_text)
             self.assertIn("native/windows-dev-output/generated/chaos_subject_generated_native.vcxproj", solution_text)
             self.assertIn("native/windows-dev-output/proof/chaos_subject_reference_proof.vcxproj", solution_text)
             self.assertEqual(
@@ -479,6 +578,316 @@ class ProjectWorkspaceTests(unittest.TestCase):
                 ],
                 run_process_mock.call_args.args[0],
             )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_generate_subject_workspace_allows_managed_only_windows_subject_without_native_workspace(self) -> None:
+        workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_generate_managed_only")
+        repo_root = self._make_repo_root("subject-generate-managed-only")
+        self._write_managed_only_subject_fixture(repo_root)
+
+        try:
+            with patch.object(
+                workspace_module.compiled_catalog_module,
+                "build_subject_declared_test_catalog",
+                return_value=declared_catalog_fixture("ManagedOnlySubject"),
+            ):
+                with patch.object(
+                    workspace_module.tooling_module,
+                    "cmake_environment",
+                    side_effect=AssertionError("managed-only workspace generation should not request cmake"),
+                ):
+                    with patch.object(
+                        workspace_module,
+                        "refresh_subject_generated_root",
+                        side_effect=AssertionError("managed-only workspace generation should not refresh generated source"),
+                    ):
+                        with patch.object(
+                            workspace_module,
+                            "run_process",
+                            side_effect=AssertionError("managed-only workspace generation should not configure native projects"),
+                        ):
+                            result = workspace_module.generate_subject_workspace(
+                                repo_root,
+                                "windows",
+                                {"id": "subject/ManagedOnlySubject"},
+                            )
+
+            manifest_path = repo_root / result["manifestPath"]
+            self.assertTrue(manifest_path.is_file())
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            self.assertEqual("ManagedOnlySubject", manifest["subjectId"])
+            self.assertEqual("PROFILE", manifest["variant"])
+            self.assertEqual("windows-perf-dev", manifest["defaultMatrixId"])
+            self.assertEqual([], manifest["nativeProjects"])
+            self.assertEqual([], manifest["nativeTestProjects"])
+            self.assertEqual(1, len(manifest["matrices"]))
+            self.assertEqual(
+                {
+                    "matrixId": "windows-perf-dev",
+                    "goalIds": ["perf.dev"],
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "toolchainProfile": "dotnet-managed",
+                    "managedProjectIds": ["managed/ManagedOnlySubject/ManagedOnlySubject"],
+                    "managedTestProjectIds": [
+                        "managed-test/ManagedOnlySubject/proof-host",
+                        "managed-test/ManagedOnlySubject/benchmark-host",
+                    ],
+                    "nativeProjectIds": [],
+                    "nativeTestProjectIds": [],
+                },
+                manifest["matrices"][0],
+            )
+            self.assertTrue((repo_root / manifest["managedSolutionPath"]).is_file())
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_generate_subject_workspace_all_targets_skips_native_configure_for_managed_windows_matrix(self) -> None:
+        workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_generate_mixed_windows_matrices")
+        repo_root = self._make_repo_root("subject-generate-mixed-windows-matrices")
+        self._write_subject_fixture(repo_root)
+        completed = subprocess.CompletedProcess(["cmake"], 0, "", "")
+        subject_manifest_path = repo_root / "subjects" / "FixtureSubject" / "subject.manifest.json"
+        subject_manifest = json.loads(subject_manifest_path.read_text(encoding="utf-8"))
+        subject_manifest["executionPipelines"].append(
+            {
+                "pipelineId": "managed-runtime-output",
+                "stages": [
+                    {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source"},
+                    {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input"},
+                    {"stageId": "runtime-managed-output", "kind": "runtime-managed-output", "scope": "matrix", "bucket": "runtime"},
+                ],
+            }
+        )
+        subject_manifest["environmentMatrices"].append(
+            {
+                "matrixId": "windows-managed-output",
+                "pipelineId": "managed-runtime-output",
+                "supportedGoals": ["correctness.dev"],
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "toolchainProfile": "dotnet-managed",
+                },
+                "artifactPlan": {
+                    "evidenceTerminalBucket": "runtime",
+                },
+            }
+        )
+        write_json(subject_manifest_path, subject_manifest)
+
+        try:
+            def configure_side_effect(arguments: list[str], cwd: Path, env: dict[str, str] | None = None):
+                del cwd, env
+                configure_root = Path(arguments[arguments.index("-B") + 1])
+                if str(configure_root).endswith("windows-dev-output"):
+                    write_windows_subject_native_project_stubs(configure_root)
+                else:
+                    (configure_root / "linux-x64-packaging.vcxproj").parent.mkdir(parents=True, exist_ok=True)
+                    (configure_root / "linux-x64-packaging.vcxproj").write_text("<Project />\n", encoding="utf-8")
+                return completed
+
+            with patch.object(workspace_module.compiled_catalog_module, "build_subject_declared_test_catalog", return_value=declared_catalog_fixture()):
+                with patch.object(workspace_module, "refresh_subject_generated_root", return_value=None) as refresh_mock:
+                    with patch.object(workspace_module.tooling_module, "cmake_environment", return_value=("cmake", {})):
+                        with patch.object(workspace_module, "run_process", side_effect=configure_side_effect) as run_process_mock:
+                            result = workspace_module.generate_subject_workspace(
+                                repo_root,
+                                "windows",
+                                {"id": "subject/FixtureSubject", "all-targets": True},
+                            )
+
+            self.assertEqual(0, refresh_mock.call_count)
+            self.assertEqual(2, run_process_mock.call_count)
+            manifest = json.loads((repo_root / result["manifestPath"]).read_text(encoding="utf-8"))
+            matrices_by_id = {entry["matrixId"]: entry for entry in manifest["matrices"]}
+            self.assertEqual([], matrices_by_id["windows-managed-output"]["nativeProjectIds"])
+            self.assertEqual([], matrices_by_id["windows-managed-output"]["nativeTestProjectIds"])
+            self.assertEqual(
+                ["native/FixtureSubject/windows-dev-output/generated-native"],
+                matrices_by_id["windows-dev-output"]["nativeProjectIds"],
+            )
+            self.assertEqual(
+                ["native-test/FixtureSubject/windows-dev-output/proof-host"],
+                matrices_by_id["windows-dev-output"]["nativeTestProjectIds"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_generate_subject_workspace_all_targets_preserves_manifest_default_matrix(self) -> None:
+        workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_generate_preserve_default_matrix")
+        repo_root = self._make_repo_root("subject-generate-preserve-default-matrix")
+        self._write_subject_fixture(repo_root)
+        completed = subprocess.CompletedProcess(["cmake"], 0, "", "")
+        subject_manifest_path = repo_root / "subjects" / "FixtureSubject" / "subject.manifest.json"
+        subject_manifest = json.loads(subject_manifest_path.read_text(encoding="utf-8"))
+        subject_manifest["executionPipelines"].append(
+            {
+                "pipelineId": "managed-runtime-output",
+                "stages": [
+                    {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source"},
+                    {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input"},
+                    {"stageId": "runtime-managed-output", "kind": "runtime-managed-output", "scope": "matrix", "bucket": "runtime"},
+                ],
+            }
+        )
+        subject_manifest["environmentMatrices"] = [
+            {
+                "matrixId": "windows-managed-output",
+                "pipelineId": "managed-runtime-output",
+                "supportedGoals": ["correctness.dev"],
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "toolchainProfile": "dotnet-managed",
+                },
+                "artifactPlan": {
+                    "evidenceTerminalBucket": "runtime",
+                },
+            },
+            *subject_manifest["environmentMatrices"],
+        ]
+        write_json(subject_manifest_path, subject_manifest)
+
+        try:
+            def configure_side_effect(arguments: list[str], cwd: Path, env: dict[str, str] | None = None):
+                del cwd, env
+                configure_root = Path(arguments[arguments.index("-B") + 1])
+                if str(configure_root).endswith("windows-dev-output"):
+                    write_windows_subject_native_project_stubs(configure_root)
+                else:
+                    (configure_root / "linux-x64-packaging.vcxproj").parent.mkdir(parents=True, exist_ok=True)
+                    (configure_root / "linux-x64-packaging.vcxproj").write_text("<Project />\n", encoding="utf-8")
+                return completed
+
+            with patch.object(workspace_module.compiled_catalog_module, "build_subject_declared_test_catalog", return_value=declared_catalog_fixture()):
+                with patch.object(workspace_module.tooling_module, "cmake_environment", return_value=("cmake", {})):
+                    with patch.object(workspace_module, "run_process", side_effect=configure_side_effect):
+                        result = workspace_module.generate_subject_workspace(
+                            repo_root,
+                            "windows",
+                            {"id": "subject/FixtureSubject", "all-targets": True},
+                        )
+
+            manifest = json.loads((repo_root / result["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("windows-dev-output", manifest["defaultMatrixId"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_generate_subject_workspace_all_targets_skips_native_aot_workspace_configure(self) -> None:
+        workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_generate_native_aot_matrix")
+        repo_root = self._make_repo_root("subject-generate-native-aot-matrix")
+        self._write_subject_fixture(repo_root)
+        completed = subprocess.CompletedProcess(["cmake"], 0, "", "")
+        subject_manifest_path = repo_root / "subjects" / "FixtureSubject" / "subject.manifest.json"
+        subject_manifest = json.loads(subject_manifest_path.read_text(encoding="utf-8"))
+        subject_manifest["executionPipelines"].append(
+            {
+                "pipelineId": "native-aot-benchmark",
+                "stages": [
+                    {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source"},
+                    {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input"},
+                    {"stageId": "analysis-frontend", "kind": "analysis-frontend", "scope": "shared", "bucket": "analysis"},
+                    {"stageId": "generated-native-aot", "kind": "generated-native-aot", "scope": "shared", "bucket": "generated"},
+                ],
+            }
+        )
+        subject_manifest["environmentMatrices"].append(
+            {
+                "matrixId": "windows-native-perf",
+                "pipelineId": "native-aot-benchmark",
+                "supportedGoals": ["perf.release"],
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "toolchainProfile": "msvc-reference",
+                },
+                "artifactPlan": {
+                    "evidenceTerminalBucket": "report",
+                },
+            }
+        )
+        write_json(subject_manifest_path, subject_manifest)
+
+        try:
+            def configure_side_effect(arguments: list[str], cwd: Path, env: dict[str, str] | None = None):
+                del cwd, env
+                configure_root = Path(arguments[arguments.index("-B") + 1])
+                if str(configure_root).endswith("windows-dev-output"):
+                    write_windows_subject_native_project_stubs(configure_root)
+                else:
+                    (configure_root / "linux-x64-packaging.vcxproj").parent.mkdir(parents=True, exist_ok=True)
+                    (configure_root / "linux-x64-packaging.vcxproj").write_text("<Project />\n", encoding="utf-8")
+                return completed
+
+            def refresh_side_effect(
+                refresh_repo_root: Path,
+                subject_id: str,
+                matrix_id: str,
+                variant: str,
+                *,
+                run_id: str | None = None,
+            ) -> None:
+                del variant
+                generated_root = (
+                    refresh_repo_root
+                    / "artifacts"
+                    / "subjects"
+                    / subject_id
+                    / "runs"
+                    / (run_id or "subject-exec")
+                    / "analysis"
+                    / "generated"
+                )
+                (generated_root / "generated").mkdir(parents=True, exist_ok=True)
+                (generated_root / "generated.manifest.json").write_text(
+                    json.dumps({"matrixId": matrix_id}, indent=2) + "\n",
+                    encoding="utf-8",
+                )
+                if matrix_id == "windows-native-perf":
+                    (generated_root / "native-aot.manifest.json").write_text(
+                        json.dumps({"matrixId": matrix_id}, indent=2) + "\n",
+                        encoding="utf-8",
+                    )
+                    (generated_root / "native-aot.plan.json").write_text(
+                        json.dumps({"matrixId": matrix_id}, indent=2) + "\n",
+                        encoding="utf-8",
+                    )
+                    (generated_root / "generated" / "native-aot.generated.cpp").write_text(
+                        f"// native aot for {matrix_id}\n",
+                        encoding="utf-8",
+                    )
+                    return
+                (generated_root / "native-reference.manifest.json").write_text(
+                    json.dumps({"matrixId": matrix_id}, indent=2) + "\n",
+                    encoding="utf-8",
+                )
+                (generated_root / "native-reference.plan.json").write_text(
+                    json.dumps({"matrixId": matrix_id}, indent=2) + "\n",
+                    encoding="utf-8",
+                )
+                (generated_root / "generated" / "native-reference.generated.cpp").write_text(
+                    f"// proof for {matrix_id}\n",
+                    encoding="utf-8",
+                )
+
+            with patch.object(workspace_module.compiled_catalog_module, "build_subject_declared_test_catalog", return_value=declared_catalog_fixture()):
+                with patch.object(workspace_module, "refresh_subject_generated_root", side_effect=refresh_side_effect) as refresh_mock:
+                    with patch.object(workspace_module.tooling_module, "cmake_environment", return_value=("cmake", {})):
+                        with patch.object(workspace_module, "run_process", side_effect=configure_side_effect) as run_process_mock:
+                            result = workspace_module.generate_subject_workspace(
+                                repo_root,
+                                "windows",
+                                {"id": "subject/FixtureSubject", "all-targets": True, "refresh-generated": True},
+                            )
+
+            self.assertEqual(["windows-dev-output"], [call.args[2] for call in refresh_mock.call_args_list])
+            self.assertEqual(2, run_process_mock.call_count)
+            manifest = json.loads((repo_root / result["manifestPath"]).read_text(encoding="utf-8"))
+            matrices_by_id = {entry["matrixId"]: entry for entry in manifest["matrices"]}
+            self.assertEqual([], matrices_by_id["windows-native-perf"]["nativeProjectIds"])
+            self.assertEqual([], matrices_by_id["windows-native-perf"]["nativeTestProjectIds"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -519,7 +928,8 @@ class ProjectWorkspaceTests(unittest.TestCase):
 
             self.assertFalse((workspace_root / ".vs").exists())
             updated_manifest = json.loads((workspace_root / "workspace.manifest.json").read_text(encoding="utf-8"))
-            self.assertEqual(8, updated_manifest["visualStudioStateVersion"])
+            self.assertEqual(2, updated_manifest["workspaceVersion"])
+            self.assertNotIn("visualStudioStateVersion", updated_manifest)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -545,16 +955,132 @@ class ProjectWorkspaceTests(unittest.TestCase):
                     )
 
             manifest = json.loads((repo_root / result["manifestPath"]).read_text(encoding="utf-8"))
-            matrix = manifest["matrices"][0]
-            self.assertEqual("chaos_subject_generated_native", matrix["defaultOpenNativeProject"])
-            self.assertEqual("chaos_subject_generated_native", matrix["primaryOpenTarget"])
-            self.assertEqual(matrix["generatedNativeProjectPath"], matrix["nativeProjectPath"])
             self.assertIn(
                 {
                     "label": "Default native project",
                     "path": "solutions/subjects/FixtureSubject/native/windows-dev-output/generated/chaos_subject_generated_native.vcxproj",
                 },
                 result["importantOutputs"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_build_subject_workspace_supports_manifest_v2_project_routing(self) -> None:
+        workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_build_v2")
+        repo_root = self._make_repo_root("subject-build-v2")
+        self._write_subject_fixture(repo_root)
+        workspace_root = repo_root / "solutions" / "subjects" / "FixtureSubject"
+        build_root = workspace_root / "native" / "windows-dev-output"
+        build_root.mkdir(parents=True, exist_ok=True)
+        manifest_path = workspace_root / "workspace.manifest.json"
+        write_json(
+            manifest_path,
+            {
+                "workspaceVersion": 2,
+                "kind": "subject-workspace",
+                "subjectId": "FixtureSubject",
+                "variant": "CHECK",
+                "defaultMatrixId": "windows-dev-output",
+                "managedSolutionPath": "solutions/subjects/FixtureSubject/FixtureSubject.sln",
+                "managedProjects": [
+                    {
+                        "projectId": "managed/FixtureSubject/FixtureSubject",
+                        "projectPath": "subjects/FixtureSubject/source/FixtureSubject.csproj",
+                        "assemblyName": "FixtureSubject",
+                        "isPrimary": True,
+                    }
+                ],
+                "managedTestProjects": [
+                    {
+                        "projectId": "managed-test/FixtureSubject/proof-host",
+                        "projectPath": "solutions/subjects/FixtureSubject/managed-tests/FixtureSubject.DeclaredProofHost.csproj",
+                        "assemblyName": "FixtureSubject.DeclaredProofHost",
+                        "hostKind": "proof-host",
+                        "catalogPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.catalog.json",
+                        "generatedSourcePath": "solutions/subjects/FixtureSubject/managed-tests/Generated/ChaosGeneratedDeclaredTests.g.cs",
+                    }
+                ],
+                "nativeProjects": [
+                    {
+                        "projectId": "native/FixtureSubject/windows-dev-output/generated-native",
+                        "matrixId": "windows-dev-output",
+                        "projectPath": "solutions/subjects/FixtureSubject/native/windows-dev-output/generated/chaos_subject_generated_native.vcxproj",
+                        "configureRoot": "solutions/subjects/FixtureSubject/native/windows-dev-output",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "msvc-reference",
+                        "deliveryKind": "generated-static-library",
+                        "buildArgs": ["--config", "Release", "--target", "chaos_subject_generated_native"],
+                    }
+                ],
+                "nativeTestProjects": [
+                    {
+                        "projectId": "native-test/FixtureSubject/windows-dev-output/proof-host",
+                        "matrixId": "windows-dev-output",
+                        "projectPath": "solutions/subjects/FixtureSubject/native/windows-dev-output/proof/chaos_subject_reference_proof.vcxproj",
+                        "configureRoot": "solutions/subjects/FixtureSubject/native/windows-dev-output",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "msvc-reference",
+                        "deliveryKind": "direct-run-host",
+                        "hostKind": "proof-host",
+                        "managedTestProjectId": "managed-test/FixtureSubject/proof-host",
+                        "buildArgs": ["--config", "Release", "--target", "chaos_subject_reference_proof"],
+                    }
+                ],
+                "matrices": [
+                    {
+                        "matrixId": "windows-dev-output",
+                        "goalIds": ["correctness.dev"],
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "msvc-reference",
+                        "managedProjectIds": ["managed/FixtureSubject/FixtureSubject"],
+                        "managedTestProjectIds": ["managed-test/FixtureSubject/proof-host"],
+                        "nativeProjectIds": ["native/FixtureSubject/windows-dev-output/generated-native"],
+                        "nativeTestProjectIds": ["native-test/FixtureSubject/windows-dev-output/proof-host"],
+                    }
+                ],
+            },
+        )
+
+        managed_test_project_path = repo_root / "solutions" / "subjects" / "FixtureSubject" / "managed-tests" / "FixtureSubject.DeclaredProofHost.csproj"
+        managed_test_project_path.parent.mkdir(parents=True, exist_ok=True)
+        managed_test_project_path.write_text("<Project />\n", encoding="utf-8")
+
+        try:
+            with patch.object(workspace_module.tooling_module, "ensure_dotnet_available", return_value=workspace_module.tooling_module.ToolBootstrapResult(ready=True)):
+                with patch.object(
+                    workspace_module,
+                    "run_process",
+                    return_value=subprocess.CompletedProcess(["tool"], 0, "", ""),
+                ) as run_process_mock:
+                    result = workspace_module.build_subject_workspace(
+                        repo_root,
+                        "windows",
+                        {"id": "subject/FixtureSubject", "matrix": "windows-dev-output"},
+                    )
+
+            self.assertEqual("solutions/subjects/FixtureSubject/build.report.json", result["buildReportPath"])
+            report = json.loads((repo_root / result["buildReportPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(["windows-dev-output"], report["builtMatrices"])
+            self.assertEqual(
+                ["dotnet", "build", str(repo_root / "subjects" / "FixtureSubject" / "source" / "FixtureSubject.csproj"), "-c", "Release"],
+                run_process_mock.call_args_list[0].args[0],
+            )
+            self.assertEqual(
+                ["dotnet", "build", str(managed_test_project_path), "-c", "Release"],
+                run_process_mock.call_args_list[1].args[0],
+            )
+            self.assertEqual(
+                [
+                    "cmake",
+                    "--build",
+                    str(build_root),
+                    "--config",
+                    "Release",
+                    "--target",
+                    "chaos_subject_reference_proof",
+                ],
+                run_process_mock.call_args_list[2].args[0],
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
@@ -1095,7 +1621,7 @@ class ProjectWorkspaceTests(unittest.TestCase):
             self.assertNotIn('"native/windows-linux-buildable/linux-x64-packaging.vcxproj"', solution_text)
             project_count = solution_text.count('Project("{')
             folder_count = solution_text.count('Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}")')
-            self.assertEqual(6, project_count - folder_count)
+            self.assertEqual(5, project_count - folder_count)
             self.assertIn("NestedProjects", solution_text)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
@@ -1469,26 +1995,30 @@ class ProjectWorkspaceTests(unittest.TestCase):
             manifest = json.loads((repo_root / result["manifestPath"]).read_text(encoding="utf-8"))
             matrices_by_id = {matrix["matrixId"]: matrix for matrix in manifest["matrices"]}
 
-            self.assertEqual(
-                "solutions/subjects/FixtureSubject/generated/windows-dev-output/subject-exec",
-                matrices_by_id["windows-dev-output"]["generatedRoot"],
+            self.assertNotIn("generatedRoot", matrices_by_id["windows-dev-output"])
+            self.assertNotIn("generatedRoot", matrices_by_id["windows-reference-trace"])
+
+            workspace_root = repo_root / "solutions" / "subjects" / "FixtureSubject"
+            dev_generated_root = workspace_module._subject_generated_solution_root(
+                workspace_root,
+                matrix_id="windows-dev-output",
+                multi_matrix=True,
             )
-            self.assertEqual(
-                "solutions/subjects/FixtureSubject/generated/windows-reference-trace/subject-exec",
-                matrices_by_id["windows-reference-trace"]["generatedRoot"],
+            trace_generated_root = workspace_module._subject_generated_solution_root(
+                workspace_root,
+                matrix_id="windows-reference-trace",
+                multi_matrix=True,
             )
 
             dev_generated_source = (
-                repo_root
-                / matrices_by_id["windows-dev-output"]["generatedRoot"]
+                dev_generated_root
                 / "analysis"
                 / "generated"
                 / "generated"
                 / "native-reference.generated.cpp"
             )
             trace_generated_source = (
-                repo_root
-                / matrices_by_id["windows-reference-trace"]["generatedRoot"]
+                trace_generated_root
                 / "analysis"
                 / "generated"
                 / "generated"
@@ -1663,6 +2193,76 @@ class ProjectWorkspaceTests(unittest.TestCase):
                     "chaos_subject_reference_proof",
                 ],
                 run_process_mock.call_args_list[2].args[0],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_build_subject_workspace_skips_cmake_for_managed_only_matrix(self) -> None:
+        workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_build_managed_only")
+        repo_root = self._make_repo_root("subject-build-managed-only")
+        self._write_managed_only_subject_fixture(repo_root)
+        workspace_root = repo_root / "solutions" / "subjects" / "ManagedOnlySubject"
+        manifest_path = workspace_root / "workspace.manifest.json"
+        managed_test_project_path = workspace_root / "managed-tests" / "ManagedOnlySubject.DeclaredBenchmarkHost.csproj"
+        managed_test_project_path.parent.mkdir(parents=True, exist_ok=True)
+        managed_test_project_path.write_text("<Project />\n", encoding="utf-8")
+        write_json(
+            manifest_path,
+            {
+                "kind": "subject-workspace",
+                "subjectId": "ManagedOnlySubject",
+                "defaultMatrix": "windows-perf-dev",
+                "managedSolutionPath": "solutions/subjects/ManagedOnlySubject/ManagedOnlySubject.sln",
+                "managedProjects": [
+                    {
+                        "projectId": "managed/ManagedOnlySubject/ManagedOnlySubject",
+                        "projectPath": "subjects/ManagedOnlySubject/source/ManagedOnlySubject.csproj",
+                    }
+                ],
+                "managedTestProjects": [
+                    {
+                        "projectId": "managed-test/ManagedOnlySubject/benchmark-host",
+                        "projectPath": "solutions/subjects/ManagedOnlySubject/managed-tests/ManagedOnlySubject.DeclaredBenchmarkHost.csproj",
+                    }
+                ],
+                "nativeProjects": [],
+                "nativeTestProjects": [],
+                "matrices": [
+                    {
+                        "matrixId": "windows-perf-dev",
+                        "managedProjectIds": ["managed/ManagedOnlySubject/ManagedOnlySubject"],
+                        "managedTestProjectIds": ["managed-test/ManagedOnlySubject/benchmark-host"],
+                        "nativeProjectIds": [],
+                        "nativeTestProjectIds": [],
+                    }
+                ],
+            },
+        )
+
+        try:
+            with patch.object(workspace_module.tooling_module, "ensure_dotnet_available", return_value=workspace_module.tooling_module.ToolBootstrapResult(ready=True)):
+                with patch.object(
+                    workspace_module,
+                    "run_process",
+                    return_value=subprocess.CompletedProcess(["tool"], 0, "", ""),
+                ) as run_process_mock:
+                    result = workspace_module.build_subject_workspace(
+                        repo_root,
+                        "windows",
+                        {"id": "subject/ManagedOnlySubject", "matrix": "windows-perf-dev"},
+                    )
+
+            self.assertEqual("solutions/subjects/ManagedOnlySubject/build.report.json", result["buildReportPath"])
+            report = json.loads((repo_root / result["buildReportPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(["windows-perf-dev"], report["builtMatrices"])
+            self.assertEqual(2, run_process_mock.call_count)
+            self.assertEqual(
+                ["dotnet", "build", str(repo_root / "subjects" / "ManagedOnlySubject" / "source" / "ManagedOnlySubject.csproj"), "-c", "Release"],
+                run_process_mock.call_args_list[0].args[0],
+            )
+            self.assertEqual(
+                ["dotnet", "build", str(managed_test_project_path), "-c", "Release"],
+                run_process_mock.call_args_list[1].args[0],
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
@@ -1977,8 +2577,8 @@ class ProjectWorkspaceTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
-    def test_generate_all_workspaces_skips_subjects_without_workspace_generation_prerequisites(self) -> None:
-        workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_all_skip_unsupported")
+    def test_generate_all_workspaces_includes_managed_only_subjects_without_native_workspace_generation(self) -> None:
+        workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_all_include_managed_only")
         repo_root = self._make_repo_root("all-skip-unsupported")
         self._write_subject_fixture(repo_root)
         self._write_managed_only_subject_fixture(repo_root)
@@ -2005,10 +2605,13 @@ class ProjectWorkspaceTests(unittest.TestCase):
             aggregate_manifest = json.loads((repo_root / result["manifestPath"]).read_text(encoding="utf-8"))
             generation_report = json.loads((repo_root / "solutions" / "all" / "generation.report.json").read_text(encoding="utf-8"))
             self.assertEqual(
-                ["solutions/subjects/FixtureSubject/workspace.manifest.json"],
+                [
+                    "solutions/subjects/FixtureSubject/workspace.manifest.json",
+                    "solutions/subjects/ManagedOnlySubject/workspace.manifest.json",
+                ],
                 aggregate_manifest["subjectWorkspaceManifests"],
             )
-            self.assertEqual(["FixtureSubject"], generation_report["generatedSubjectIds"])
+            self.assertEqual(["FixtureSubject", "ManagedOnlySubject"], generation_report["generatedSubjectIds"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

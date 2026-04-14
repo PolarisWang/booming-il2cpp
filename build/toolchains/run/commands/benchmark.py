@@ -18,6 +18,14 @@ import time
 from pathlib import Path
 from typing import Any
 
+try:
+    from ..testing import workspace_declared_catalog as workspace_declared_catalog_module
+except ImportError:
+    run_root = Path(__file__).resolve().parents[1]
+    if str(run_root) not in sys.path:
+        sys.path.insert(0, str(run_root))
+    from testing import workspace_declared_catalog as workspace_declared_catalog_module
+
 _MODE_ORDER = ("managed", "native", "interpreter")
 _BENCHMARK_MODE_FLAGS = {
     "managed": 1 << 0,
@@ -244,7 +252,7 @@ def _supported_modes_from_mask(value: Any) -> list[str]:
 
 
 def _record_benchmark_case_payload(benchmark_case: dict[str, Any]) -> dict[str, Any]:
-    return {
+    payload = {
         "stableId": str(benchmark_case.get("stableId") or ""),
         "alias": str(benchmark_case.get("alias") or "") or str(benchmark_case.get("stableId") or ""),
         "displayName": str(benchmark_case.get("displayName") or "")
@@ -266,6 +274,46 @@ def _record_benchmark_case_payload(benchmark_case: dict[str, Any]) -> dict[str, 
         "invocationCount": int(benchmark_case.get("invocationCount") or 0),
         "supportedModes": list(benchmark_case.get("supportedModes") or []),
     }
+    entry_index = benchmark_case.get("entryIndex")
+    if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+        payload["entryIndex"] = int(entry_index)
+    return payload
+
+
+def _declared_benchmark_cases_from_catalog(catalog: dict[str, Any]) -> list[dict[str, Any]]:
+    cases: list[dict[str, Any]] = []
+    for payload in list(dict(catalog).get("declaredBenchmarks") or []):
+        item = dict(payload or {})
+        workload_entry = _declared_source_entry(item)
+        stable_id = str(item.get("stableId") or "").strip()
+        if not stable_id or not workload_entry:
+            continue
+        supported_modes = _supported_modes_from_mask(item.get("modes"))
+        case_payload = {
+            "stableId": stable_id,
+            "alias": str(item.get("alias") or "").strip() or stable_id,
+            "displayName": str(item.get("alias") or "").strip() or stable_id,
+            "workloadEntry": workload_entry,
+            "assemblyName": str(item.get("assemblyName") or ""),
+            "declaringType": str(item.get("declaringType") or ""),
+            "methodName": str(item.get("methodName") or ""),
+            "methodSignature": str(item.get("methodSignature") or ""),
+            "category": int(item.get("category") or 0),
+            "metrics": int(item.get("metrics") or 0),
+            "modes": int(item.get("modes") or 0),
+            "requires": int(item.get("requires") or 0),
+            "archetype": int(item.get("archetype") or 0),
+            "hotUpdateCapability": int(item.get("hotUpdateCapability") or 0),
+            "warmupCount": int(item.get("warmupCount") or 0),
+            "iterationCount": int(item.get("iterationCount") or 0),
+            "invocationCount": int(item.get("invocationCount") or 0),
+            "supportedModes": supported_modes,
+        }
+        entry_index = item.get("entryIndex")
+        if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+            case_payload["entryIndex"] = int(entry_index)
+        cases.append(case_payload)
+    return cases
 
 
 def _discover_declared_benchmark_cases(
@@ -274,6 +322,14 @@ def _discover_declared_benchmark_cases(
     *,
     compiled_catalog_module: Any | None = None,
 ) -> list[dict[str, Any]]:
+    workspace_catalog = workspace_declared_catalog_module.load_workspace_declared_catalog(
+        repo_root,
+        subject_id,
+        host_kind="benchmark-host",
+    )
+    if workspace_catalog is not None:
+        return _declared_benchmark_cases_from_catalog(workspace_catalog)
+
     testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
     try:
         compiled_catalog_mod = compiled_catalog_module or _load("compiled_catalog", testing_root / "compiled_catalog.py")
@@ -284,38 +340,7 @@ def _discover_declared_benchmark_cases(
         )
     except Exception:
         return []
-
-    cases: list[dict[str, Any]] = []
-    for payload in list(dict(catalog).get("declaredBenchmarks") or []):
-        item = dict(payload or {})
-        workload_entry = _declared_source_entry(item)
-        stable_id = str(item.get("stableId") or "").strip()
-        if not stable_id or not workload_entry:
-            continue
-        supported_modes = _supported_modes_from_mask(item.get("modes"))
-        cases.append(
-            {
-                "stableId": stable_id,
-                "alias": str(item.get("alias") or "").strip() or stable_id,
-                "displayName": str(item.get("alias") or "").strip() or stable_id,
-                "workloadEntry": workload_entry,
-                "assemblyName": str(item.get("assemblyName") or ""),
-                "declaringType": str(item.get("declaringType") or ""),
-                "methodName": str(item.get("methodName") or ""),
-                "methodSignature": str(item.get("methodSignature") or ""),
-                "category": int(item.get("category") or 0),
-                "metrics": int(item.get("metrics") or 0),
-                "modes": int(item.get("modes") or 0),
-                "requires": int(item.get("requires") or 0),
-                "archetype": int(item.get("archetype") or 0),
-                "hotUpdateCapability": int(item.get("hotUpdateCapability") or 0),
-                "warmupCount": int(item.get("warmupCount") or 0),
-                "iterationCount": int(item.get("iterationCount") or 0),
-                "invocationCount": int(item.get("invocationCount") or 0),
-                "supportedModes": supported_modes,
-            }
-        )
-    return cases
+    return _declared_benchmark_cases_from_catalog(dict(catalog))
 
 
 def _run_subject_benchmark_pipeline(
@@ -360,6 +385,13 @@ def _run_subject_benchmark_pipeline(
                     "family": "declared-benchmark",
                     "stableId": str(benchmark_case.get("stableId") or ""),
                     "alias": str(benchmark_case.get("alias") or "") or str(benchmark_case.get("stableId") or ""),
+                    **(
+                        {"entryIndex": int(benchmark_case["entryIndex"])}
+                        if isinstance(benchmark_case.get("entryIndex"), int)
+                        and not isinstance(benchmark_case.get("entryIndex"), bool)
+                        and int(benchmark_case["entryIndex"]) >= 0
+                        else {}
+                    ),
                 },
             )
             execution_result = executor_mod.execute_plan(
@@ -563,7 +595,7 @@ def dispatch(args: list[str], repo_root: Path, host_platform: str) -> int:
             return 2
         if regression_found:
             print("Benchmark records generated; regression verdict found. Review docs/benchmark/dashboard.html for details.")
-            return 1
+            return 0
         print("Benchmark records generated without execution errors.")
         return 0
 

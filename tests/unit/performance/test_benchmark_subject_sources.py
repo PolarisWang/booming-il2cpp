@@ -36,10 +36,90 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         arithmetic_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "PrimitivesAndOps" / "ArithmeticBenchmark.cs"
         allocation_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "MemoryAndAllocation" / "AllocationBenchmark.cs"
         dispatch_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "ObjectModelAndDispatch" / "DispatchBenchmark.cs"
+        delegate_callback_path = (
+            SOLUTION_CORE_PACK_ROOT
+            / "source"
+            / "Benchmarks"
+            / "CoreRuntimeBenchmarks"
+            / "ObjectModelAndDispatch"
+            / "DelegateCallbackInteropBenchmark.cs"
+        )
         generic_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "GenericsAndCollections" / "GenericBenchmark.cs"
+        generic_sharing_boundary_path = (
+            SOLUTION_CORE_PACK_ROOT
+            / "source"
+            / "Benchmarks"
+            / "CoreRuntimeBenchmarks"
+            / "GenericsAndCollections"
+            / "GenericSharingBoundaryBenchmark.cs"
+        )
+        required_instantiation_path = (
+            SOLUTION_CORE_PACK_ROOT
+            / "source"
+            / "Benchmarks"
+            / "CoreRuntimeBenchmarks"
+            / "GenericsAndCollections"
+            / "RequiredInstantiationClosureBenchmark.cs"
+        )
+        native_call_interop_path = (
+            SOLUTION_CORE_PACK_ROOT
+            / "source"
+            / "Benchmarks"
+            / "CoreRuntimeBenchmarks"
+            / "InteropAndMarshaling"
+            / "NativeCallInteropBenchmark.cs"
+        )
+        string_utf8_marshaling_path = (
+            SOLUTION_CORE_PACK_ROOT
+            / "source"
+            / "Benchmarks"
+            / "CoreRuntimeBenchmarks"
+            / "InteropAndMarshaling"
+            / "StringAndUtf8MarshalingBenchmark.cs"
+        )
+        struct_marshaling_path = (
+            SOLUTION_CORE_PACK_ROOT
+            / "source"
+            / "Benchmarks"
+            / "CoreRuntimeBenchmarks"
+            / "InteropAndMarshaling"
+            / "StructMarshalingBenchmark.cs"
+        )
         task_flow_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "AsyncAndIterators" / "TaskAndValueTaskFlowBenchmark.cs"
         task_scheduling_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "ThreadingAndSynchronization" / "TaskSchedulingBenchmark.cs"
         monitor_locking_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "ThreadingAndSynchronization" / "MonitorAndLockingBenchmark.cs"
+        member_metadata_lookup_path = (
+            SOLUTION_CORE_PACK_ROOT
+            / "source"
+            / "Benchmarks"
+            / "CoreRuntimeBenchmarks"
+            / "ReflectionAndMetadata"
+            / "MemberMetadataLookupBenchmark.cs"
+        )
+        function_pointer_path = (
+            SOLUTION_CORE_PACK_ROOT
+            / "source"
+            / "Benchmarks"
+            / "CoreRuntimeBenchmarks"
+            / "UnsafeAndLowLevel"
+            / "FunctionPointerBenchmark.cs"
+        )
+        span_memory_path = (
+            SOLUTION_CORE_PACK_ROOT
+            / "source"
+            / "Benchmarks"
+            / "CoreRuntimeBenchmarks"
+            / "UnsafeAndLowLevel"
+            / "SpanAndMemoryBenchmark.cs"
+        )
+        unsafe_pointer_path = (
+            SOLUTION_CORE_PACK_ROOT
+            / "source"
+            / "Benchmarks"
+            / "CoreRuntimeBenchmarks"
+            / "UnsafeAndLowLevel"
+            / "UnsafePointerBenchmark.cs"
+        )
 
         for path in [
             manifest_path,
@@ -47,10 +127,20 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
             arithmetic_path,
             allocation_path,
             dispatch_path,
+            delegate_callback_path,
             generic_path,
+            generic_sharing_boundary_path,
+            required_instantiation_path,
+            native_call_interop_path,
+            string_utf8_marshaling_path,
+            struct_marshaling_path,
             task_flow_path,
             task_scheduling_path,
             monitor_locking_path,
+            member_metadata_lookup_path,
+            function_pointer_path,
+            span_memory_path,
+            unsafe_pointer_path,
         ]:
             self.assertTrue(path.is_file(), msg=f"missing solution core perf asset: {path}")
 
@@ -58,10 +148,20 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         arithmetic_source = arithmetic_path.read_text(encoding="utf-8")
         allocation_source = allocation_path.read_text(encoding="utf-8")
         dispatch_source = dispatch_path.read_text(encoding="utf-8")
+        delegate_callback_source = delegate_callback_path.read_text(encoding="utf-8")
         generic_source = generic_path.read_text(encoding="utf-8")
+        generic_sharing_boundary_source = generic_sharing_boundary_path.read_text(encoding="utf-8")
+        required_instantiation_source = required_instantiation_path.read_text(encoding="utf-8")
+        native_call_interop_source = native_call_interop_path.read_text(encoding="utf-8")
+        string_utf8_marshaling_source = string_utf8_marshaling_path.read_text(encoding="utf-8")
+        struct_marshaling_source = struct_marshaling_path.read_text(encoding="utf-8")
         task_flow_source = task_flow_path.read_text(encoding="utf-8")
         task_scheduling_source = task_scheduling_path.read_text(encoding="utf-8")
         monitor_locking_source = monitor_locking_path.read_text(encoding="utf-8")
+        member_metadata_lookup_source = member_metadata_lookup_path.read_text(encoding="utf-8")
+        function_pointer_source = function_pointer_path.read_text(encoding="utf-8")
+        span_memory_source = span_memory_path.read_text(encoding="utf-8")
+        unsafe_pointer_source = unsafe_pointer_path.read_text(encoding="utf-8")
 
         self.assertEqual("SolutionCorePack", manifest["subjectId"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
@@ -71,7 +171,14 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         )
         self.assertEqual("require", manifest["testDeclarationMode"])
         self.assertEqual("CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
+        benchmark_project_path = (
+            "subjects/SolutionCorePack/source/Benchmarks/CoreRuntimeBenchmarks/CoreRuntimeBenchmarks.csproj"
+        )
+        managed_perf_matrix = next(matrix for matrix in manifest["environmentMatrices"] if matrix["matrixId"] == "windows-managed-perf")
         native_perf_matrix = next(matrix for matrix in manifest["environmentMatrices"] if matrix["matrixId"] == "windows-native-perf")
+        self.assertEqual(benchmark_project_path, managed_perf_matrix["source"]["primaryProjectPath"])
+        self.assertEqual(benchmark_project_path, native_perf_matrix["source"]["primaryProjectPath"])
+        self.assertEqual("CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()", managed_perf_matrix["source"]["entry"])
         self.assertEqual("CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()", native_perf_matrix["source"]["entry"])
         self.assertEqual("CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()", native_perf_matrix["workloadEntry"])
 
@@ -84,7 +191,7 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn("ChaosBenchmark(", allocation_source)
         self.assertIn('Alias = "allocation-bench"', allocation_source)
         self.assertIn("ChaosBenchmarkCategory.Allocation", allocation_source)
-        self.assertIn("Modes = ChaosExecutionMode.Managed", allocation_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native", allocation_source)
         self.assertIn("ChaosMetric.ManagedAllocBytes", allocation_source)
         self.assertIn("public static int RunWorkload()", allocation_source)
         self.assertNotIn("public static long RunWorkload()", allocation_source)
@@ -92,7 +199,7 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn("ChaosBenchmark(", dispatch_source)
         self.assertIn('Alias = "dispatch-bench"', dispatch_source)
         self.assertIn("ChaosBenchmarkCategory.RuntimeDispatch", dispatch_source)
-        self.assertIn("Modes = ChaosExecutionMode.Managed", dispatch_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native", dispatch_source)
         self.assertIn("DispatchShape first = new DispatchCircle(3.0);", dispatch_source)
         self.assertIn("(i & 3) switch", dispatch_source)
         self.assertNotIn("DispatchShape[] shapes", dispatch_source)
@@ -101,11 +208,28 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
 
         self.assertIn("ChaosBenchmark(", generic_source)
         self.assertIn('Alias = "generic-bench"', generic_source)
-        self.assertIn("Modes = ChaosExecutionMode.Managed", generic_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native", generic_source)
         self.assertIn("ChaosRuntimeFeature.GenericSharing", generic_source)
         self.assertIn("Dictionary<string, int>", generic_source)
         self.assertIn("public static int RunWorkload()", generic_source)
         self.assertNotIn("public static long RunWorkload()", generic_source)
+
+        for source_text, alias in [
+            (delegate_callback_source, "delegate-callback-interop-bench"),
+            (generic_sharing_boundary_source, "generic-sharing-boundary-bench"),
+            (required_instantiation_source, "required-instantiation-closure-bench"),
+            (native_call_interop_source, "native-call-interop-bench"),
+            (string_utf8_marshaling_source, "string-utf8-marshaling-bench"),
+            (struct_marshaling_source, "struct-marshaling-bench"),
+            (task_flow_source, "task-valuetask-flow-bench"),
+            (member_metadata_lookup_source, "member-metadata-lookup-bench"),
+            (function_pointer_source, "function-pointer-bench"),
+            (span_memory_source, "span-memory-bench"),
+            (unsafe_pointer_source, "unsafe-pointer-bench"),
+        ]:
+            self.assertIn("ChaosBenchmark(", source_text)
+            self.assertIn(f'Alias = "{alias}"', source_text)
+            self.assertIn("Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native", source_text)
 
         self.assertIn("ChaosBenchmark(", task_flow_source)
         self.assertIn('Alias = "task-valuetask-flow-bench"', task_flow_source)
@@ -117,13 +241,13 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn('Alias = "task-scheduling-bench"', task_scheduling_source)
         self.assertIn("ChaosCapabilityItem.TaskScheduling", task_scheduling_source)
         self.assertIn("ChaosRuntimeFeature.Threading | ChaosRuntimeFeature.Synchronization", task_scheduling_source)
-        self.assertIn("Modes = ChaosExecutionMode.Managed", task_scheduling_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native", task_scheduling_source)
 
         self.assertIn("ChaosBenchmark(", monitor_locking_source)
         self.assertIn('Alias = "monitor-locking-bench"', monitor_locking_source)
         self.assertIn("ChaosCapabilityItem.MonitorAndLocking", monitor_locking_source)
         self.assertIn("ChaosRuntimeFeature.Synchronization", monitor_locking_source)
-        self.assertIn("Modes = ChaosExecutionMode.Managed", monitor_locking_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native", monitor_locking_source)
 
     def test_managed_benchmark_subjects_keep_perf_harness_external_and_solution_core_pack_adds_managed_baseline(self) -> None:
         self.assertTrue((REPO_ROOT / SHARED_PERF_PROJECT_PATH).is_file())
@@ -169,6 +293,10 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertNotIn("generated-native-proof", native_stage_kinds)
         managed_perf_matrix = next(
             matrix for matrix in solution_core_manifest["environmentMatrices"] if matrix["matrixId"] == "windows-managed-perf"
+        )
+        self.assertEqual(
+            "subjects/SolutionCorePack/source/Benchmarks/CoreRuntimeBenchmarks/CoreRuntimeBenchmarks.csproj",
+            managed_perf_matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()", managed_perf_matrix["source"]["entry"])
         self.assertEqual("managed-benchmark", managed_perf_matrix["pipelineId"])

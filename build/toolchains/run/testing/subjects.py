@@ -148,6 +148,41 @@ def resolve_source_primary_project_path(source_or_manifest: dict[str, Any]) -> s
     raise ValueError("solution source requires source.primaryProjectPath")
 
 
+def resolve_source_solution_project_paths(repo_root: Path, source_or_manifest: dict[str, Any]) -> list[str]:
+    payload = dict(source_or_manifest.get("source") or source_or_manifest)
+    source_path = str(payload.get("path") or "").strip()
+    if source_path.endswith(".csproj"):
+        return [source_path]
+    if not source_path.endswith(".sln"):
+        return []
+
+    solution_path = Path(source_path)
+    if not solution_path.is_absolute():
+        solution_path = repo_root / solution_path
+    if not solution_path.is_file():
+        return []
+
+    project_paths: list[str] = []
+    for line in solution_path.read_text(encoding="utf-8").splitlines():
+        match = _SOLUTION_PROJECT_PATTERN.match(line.strip())
+        if match is None:
+            continue
+
+        project_path = Path(match.group(1).replace("\\", "/"))
+        if not project_path.is_absolute():
+            project_path = solution_path.parent / project_path
+        if not project_path.is_file():
+            continue
+
+        try:
+            normalized = project_path.relative_to(repo_root).as_posix()
+        except ValueError:
+            normalized = project_path.as_posix()
+        if normalized not in project_paths:
+            project_paths.append(normalized)
+    return project_paths
+
+
 def resolve_source_solution_assembly_names(repo_root: Path, source_or_manifest: dict[str, Any]) -> list[str]:
     payload = dict(source_or_manifest.get("source") or source_or_manifest)
     source_path = str(payload.get("path") or "").strip()

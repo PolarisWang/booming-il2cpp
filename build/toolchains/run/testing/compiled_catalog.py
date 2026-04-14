@@ -259,6 +259,7 @@ def _declared_entry_from_raw(
 def _entry_to_dict(entry: declarations_module.DeclaredTestEntry) -> dict[str, Any]:
     payload = {
         "stableId": entry.stable_id,
+        "entryIndex": entry.entry_index,
         "alias": entry.alias,
         "assemblyName": entry.assembly_name,
         "declaringType": entry.declaring_type,

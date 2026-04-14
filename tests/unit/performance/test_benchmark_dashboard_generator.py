@@ -7,6 +7,7 @@ import sys
 import unittest
 import uuid
 from pathlib import Path
+from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -118,6 +119,95 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
             ),
             encoding="utf-8",
         )
+
+    def _write_workspace_benchmark_fixture(
+        self,
+        repo_root: Path,
+        *,
+        subject_id: str,
+        stable_id: str,
+        alias: str,
+        entry_index: int,
+        assembly_name: str,
+        declaring_type: str,
+        method_name: str,
+        method_signature: str,
+        matrix_id: str = "workspace-benchmark-matrix",
+    ) -> None:
+        workspace_root = repo_root / "solutions" / "subjects" / subject_id
+        managed_tests_root = workspace_root / "managed-tests"
+        generated_root = managed_tests_root / "Generated"
+        project_path = managed_tests_root / f"{subject_id}.DeclaredBenchmarkHost.csproj"
+        generated_source_path = generated_root / "ChaosGeneratedDeclaredBenchmarks.g.cs"
+        catalog_path = generated_root / "declared-tests.catalog.json"
+        manifest_path = workspace_root / "workspace.manifest.json"
+
+        for path in [project_path, generated_source_path]:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("<Project />\n" if path.suffix == ".csproj" else "// fixture\n", encoding="utf-8")
+
+        catalog_payload = {
+            "subjectId": subject_id,
+            "frameworkReferenced": True,
+            "subjectKind": "declared-test",
+            "warningCodes": [],
+            "declaredUnitTests": [],
+            "declaredBenchmarks": [
+                {
+                    "stableId": stable_id,
+                    "entryIndex": entry_index,
+                    "alias": alias,
+                    "assemblyName": assembly_name,
+                    "declaringType": declaring_type,
+                    "methodName": method_name,
+                    "methodSignature": method_signature,
+                    "category": 1,
+                    "capabilityFamily": 1,
+                    "capabilityItem": 1,
+                    "archetype": 1,
+                    "hotUpdateCapability": 0,
+                    "requires": 0,
+                    "metrics": 1,
+                    "modes": 3,
+                    "warmupCount": 2,
+                    "iterationCount": 5,
+                    "invocationCount": 10,
+                }
+            ],
+        }
+        catalog_path.write_text(json.dumps(catalog_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+        manifest_payload: dict[str, Any] = {
+            "workspaceVersion": 2,
+            "kind": "subject-workspace",
+            "subjectId": subject_id,
+            "defaultMatrixId": matrix_id,
+            "managedProjects": [],
+            "managedTestProjects": [
+                {
+                    "projectId": f"managed-test/{subject_id}/benchmark-host",
+                    "projectPath": project_path.relative_to(repo_root).as_posix(),
+                    "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
+                    "hostKind": "benchmark-host",
+                    "catalogPath": catalog_path.relative_to(repo_root).as_posix(),
+                    "generatedSourcePath": generated_source_path.relative_to(repo_root).as_posix(),
+                }
+            ],
+            "nativeProjects": [],
+            "nativeTestProjects": [],
+            "matrices": [
+                {
+                    "matrixId": matrix_id,
+                    "goalIds": ["perf.release"],
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "managedTestProjectIds": [f"managed-test/{subject_id}/benchmark-host"],
+                    "nativeTestProjectIds": [],
+                }
+            ],
+        }
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+        manifest_path.write_text(json.dumps(manifest_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     def _write_subject_manifest(
         self,
@@ -485,7 +575,127 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
-    def test_update_docs_marks_case_mode_as_unsupported_when_record_metadata_excludes_mode(self) -> None:
+    def test_update_docs_uses_workspace_catalog_when_compiled_catalog_is_unavailable(self) -> None:
+        generator_module = load_module(
+            BENCHMARK_DASHBOARD_GENERATOR_MODULE_PATH,
+            "chaos_benchmark_dashboard_generator_workspace_catalog",
+        )
+        repo_root = self._make_repo_root()
+        docs_root = repo_root / "docs" / "benchmark"
+        testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
+
+        try:
+            self._write_testing_support(repo_root)
+            self._write_subject_manifest(
+                repo_root,
+                subject_id="SolutionCorePack",
+                supported_modes=["managed", "native"],
+            )
+            self._write_workspace_benchmark_fixture(
+                repo_root,
+                subject_id="SolutionCorePack",
+                stable_id="solution-core::arith",
+                alias="arithmetic-bench",
+                entry_index=9,
+                assembly_name="CoreRuntimeBenchmarks",
+                declaring_type="CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry",
+                method_name="RunWorkload",
+                method_signature="RunWorkload()",
+            )
+            (testing_root / "compiled_catalog.py").write_text(
+                "\n".join(
+                    [
+                        "from __future__ import annotations",
+                        "",
+                        "",
+                        "def build_subject_declared_test_catalog(*, repo_root, subject_id, force_build=False):",
+                        "    del repo_root, subject_id, force_build",
+                        "    raise RuntimeError('compiled catalog unavailable')",
+                        "",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            self._write_record(
+                repo_root,
+                subject_id="SolutionCorePack",
+                mode="managed",
+                mean_duration_ms=2.0,
+                mean_ops_per_second=5000.0,
+                benchmark_case={
+                    "stableId": "solution-core::arith",
+                    "workloadEntry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
+                },
+            )
+            self._write_record(
+                repo_root,
+                subject_id="SolutionCorePack",
+                mode="native",
+                mean_duration_ms=1.0,
+                mean_ops_per_second=10000.0,
+                benchmark_case={
+                    "stableId": "solution-core::arith",
+                    "workloadEntry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
+                },
+            )
+
+            generator_module.update_docs(repo_root)
+
+            subject_payload = json.loads((docs_root / "subjects" / "SolutionCorePack.json").read_text(encoding="utf-8"))
+            case_payload = subject_payload["benchmarkCasesByDevice"]["windows-x64-test-device"]["solution-core::arith"]
+            self.assertEqual("arithmetic-bench", case_payload["displayName"])
+            self.assertEqual(["managed", "native"], case_payload["supportedModes"])
+            self.assertEqual(2.0, case_payload["keyMetrics"]["managedBaseline"]["durationMs"])
+            self.assertEqual(2.0, case_payload["keyMetrics"]["nativeSpeedup"]["value"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_update_docs_records_subject_mode_when_data_exists_even_if_manifest_excludes_mode(self) -> None:
+        generator_module = load_module(
+            BENCHMARK_DASHBOARD_GENERATOR_MODULE_PATH,
+            "chaos_benchmark_dashboard_generator_subject_recorded_modes",
+        )
+        repo_root = self._make_repo_root()
+        docs_root = repo_root / "docs" / "benchmark"
+
+        try:
+            self._write_testing_support(repo_root)
+            self._write_subject_manifest(
+                repo_root,
+                subject_id="SolutionCorePack",
+                supported_modes=["managed"],
+            )
+            self._write_record(
+                repo_root,
+                subject_id="SolutionCorePack",
+                mode="managed",
+                mean_duration_ms=8.0,
+                mean_ops_per_second=1000.0,
+            )
+            self._write_record(
+                repo_root,
+                subject_id="SolutionCorePack",
+                mode="native",
+                mean_duration_ms=4.0,
+                mean_ops_per_second=2000.0,
+            )
+
+            generator_module.update_docs(repo_root)
+
+            overview_payload = json.loads((docs_root / "overview.json").read_text(encoding="utf-8"))
+            subject_payload = overview_payload["subjects"]["SolutionCorePack"]
+            self.assertEqual(["managed", "native"], subject_payload["supportedModes"])
+            self.assertEqual(["managed", "native"], subject_payload["recordedModes"])
+            self.assertEqual([], subject_payload["missingModes"])
+            self.assertEqual(["interpreter"], subject_payload["unsupportedModes"])
+            self.assertEqual("recorded", subject_payload["modeStatus"]["native"]["status"])
+
+            dashboard_html = (docs_root / "dashboard.html").read_text(encoding="utf-8")
+            self.assertIn('"supportedModes":["managed","native"]', dashboard_html.replace(" ", ""))
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_update_docs_records_case_mode_when_data_exists_even_if_record_metadata_excludes_mode(self) -> None:
         generator_module = load_module(
             BENCHMARK_DASHBOARD_GENERATOR_MODULE_PATH,
             "chaos_benchmark_dashboard_generator_case_supported_modes",
@@ -529,20 +739,38 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
                     "metrics": 3,
                 },
             )
+            self._write_record(
+                repo_root,
+                subject_id="SolutionCorePack",
+                mode="native",
+                mean_duration_ms=3.0,
+                mean_ops_per_second=5000.0,
+                benchmark_case={
+                    "stableId": "allocation",
+                    "alias": "allocation-bench",
+                    "workloadEntry": "CoreRuntimeBenchmarks/AllocationBenchmarkEntry::RunWorkload()",
+                    "supportedModes": ["managed"],
+                    "category": 3,
+                    "metrics": 3,
+                },
+            )
 
             generator_module.update_docs(repo_root)
 
             subject_payload = json.loads((docs_root / "subjects" / "SolutionCorePack.json").read_text(encoding="utf-8"))
             case_payload = subject_payload["benchmarkCasesByDevice"]["windows-x64-test-device"]["allocation"]
-            self.assertEqual(["managed"], case_payload["supportedModes"])
+            self.assertEqual(["managed", "native"], case_payload["supportedModes"])
+            self.assertEqual(["managed", "native"], case_payload["recordedModes"])
             self.assertEqual([], case_payload["missingModes"])
-            self.assertEqual(["native", "interpreter"], case_payload["unsupportedModes"])
-            self.assertEqual("unsupported", case_payload["modeStatus"]["native"]["status"])
-            self.assertEqual(1, subject_payload["caseSummaryByDevice"]["windows-x64-test-device"]["managedOnlyCaseCount"])
+            self.assertEqual(["interpreter"], case_payload["unsupportedModes"])
+            self.assertEqual("recorded", case_payload["modeStatus"]["native"]["status"])
+            self.assertEqual(0, subject_payload["caseSummaryByDevice"]["windows-x64-test-device"]["managedOnlyCaseCount"])
+            self.assertEqual(1, subject_payload["caseSummaryByDevice"]["windows-x64-test-device"]["crossModeCaseCount"])
+            self.assertEqual(2.0, case_payload["keyMetrics"]["nativeSpeedup"]["value"])
 
             dashboard_html = (docs_root / "dashboard.html").read_text(encoding="utf-8")
-            self.assertIn('"managedOnlyCaseCount": 1', dashboard_html)
-            self.assertIn('"supportedModes":["managed"]', dashboard_html.replace(" ", ""))
+            self.assertIn('"crossModeCaseCount": 1', dashboard_html)
+            self.assertIn('"supportedModes":["managed","native"]', dashboard_html.replace(" ", ""))
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

@@ -63,22 +63,22 @@
           "status": "recorded",
           "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
           "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-          "recordedAt": "2026-04-14T04:02:24.236719Z",
-          "gitCommit": "a22e124",
+          "recordedAt": "2026-04-14T14:28:05.104438Z",
+          "gitCommit": "ce5f0ee",
           "metrics": {
             "sampleCount": 3,
-            "meanDurationMs": 7.157,
-            "minDurationMs": 6.995,
-            "maxDurationMs": 7.26,
+            "meanDurationMs": 7.128,
+            "minDurationMs": 6.971,
+            "maxDurationMs": 7.247,
             "meanChecksum": 4394.0,
             "minChecksum": 4394.0,
             "maxChecksum": 4394.0,
-            "meanElapsedMilliseconds": 7.157,
-            "minElapsedMilliseconds": 6.995,
-            "maxElapsedMilliseconds": 7.26,
-            "meanOpsPerSecond": 838.594,
-            "minOpsPerSecond": 826.401,
-            "maxOpsPerSecond": 857.78
+            "meanElapsedMilliseconds": 7.128,
+            "minElapsedMilliseconds": 6.971,
+            "maxElapsedMilliseconds": 7.247,
+            "meanOpsPerSecond": 841.912,
+            "minOpsPerSecond": 827.929,
+            "maxOpsPerSecond": 860.672
           }
         },
         "native": {
@@ -86,22 +86,22 @@
           "status": "recorded",
           "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
           "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-          "recordedAt": "2026-04-14T04:02:53.681336Z",
-          "gitCommit": "a22e124",
+          "recordedAt": "2026-04-14T14:28:36.758415Z",
+          "gitCommit": "ce5f0ee",
           "metrics": {
             "sampleCount": 1,
-            "meanDurationMs": 6.667,
-            "minDurationMs": 6.667,
-            "maxDurationMs": 6.667,
+            "meanDurationMs": 6.414,
+            "minDurationMs": 6.414,
+            "maxDurationMs": 6.414,
             "meanChecksum": 4394.0,
             "minChecksum": 4394.0,
             "maxChecksum": 4394.0,
-            "meanElapsedMilliseconds": 6.667,
-            "minElapsedMilliseconds": 6.667,
-            "maxElapsedMilliseconds": 6.667,
-            "meanOpsPerSecond": 900.009,
-            "minOpsPerSecond": 900.009,
-            "maxOpsPerSecond": 900.009
+            "meanElapsedMilliseconds": 6.414,
+            "minElapsedMilliseconds": 6.414,
+            "maxElapsedMilliseconds": 6.414,
+            "meanOpsPerSecond": 935.497,
+            "minOpsPerSecond": 935.497,
+            "maxOpsPerSecond": 935.497
           }
         },
         "interpreter": {
@@ -109,22 +109,22 @@
           "status": "recorded",
           "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
           "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-          "recordedAt": "2026-04-14T04:03:16.686785Z",
-          "gitCommit": "a22e124",
+          "recordedAt": "2026-04-14T14:29:01.833833Z",
+          "gitCommit": "ce5f0ee",
           "metrics": {
             "sampleCount": 3,
-            "meanDurationMs": 7.157,
-            "minDurationMs": 6.946,
-            "maxDurationMs": 7.327,
+            "meanDurationMs": 7.086,
+            "minDurationMs": 7.029,
+            "maxDurationMs": 7.14,
             "meanChecksum": 4394.0,
             "minChecksum": 4394.0,
             "maxChecksum": 4394.0,
-            "meanElapsedMilliseconds": 7.157,
-            "minElapsedMilliseconds": 6.946,
-            "maxElapsedMilliseconds": 7.327,
-            "meanOpsPerSecond": 838.702,
-            "minOpsPerSecond": 818.889,
-            "maxOpsPerSecond": 863.757
+            "meanElapsedMilliseconds": 7.086,
+            "minElapsedMilliseconds": 7.029,
+            "maxElapsedMilliseconds": 7.14,
+            "meanOpsPerSecond": 846.739,
+            "minOpsPerSecond": 840.348,
+            "maxOpsPerSecond": 853.606
           }
         }
       },
@@ -135,71 +135,71 @@
         "unsupportedModeCount": 0,
         "isComplete": true
       },
-      "lastRecordedAt": "2026-04-14T04:03:16.686785Z",
-      "gitCommit": "a22e124",
+      "lastRecordedAt": "2026-04-14T14:29:01.833833Z",
+      "gitCommit": "ce5f0ee",
       "isStale": false,
       "comparison": {
         "nativeVsManaged": {
           "maxChecksum": 1.0,
-          "maxDurationMs": 0.92,
-          "maxElapsedMilliseconds": 0.92,
-          "maxOpsPerSecond": 1.05,
+          "maxDurationMs": 0.89,
+          "maxElapsedMilliseconds": 0.89,
+          "maxOpsPerSecond": 1.09,
           "meanChecksum": 1.0,
-          "meanDurationMs": 0.93,
-          "meanElapsedMilliseconds": 0.93,
-          "meanOpsPerSecond": 1.07,
+          "meanDurationMs": 0.9,
+          "meanElapsedMilliseconds": 0.9,
+          "meanOpsPerSecond": 1.11,
           "minChecksum": 1.0,
-          "minDurationMs": 0.95,
-          "minElapsedMilliseconds": 0.95,
-          "minOpsPerSecond": 1.09,
+          "minDurationMs": 0.92,
+          "minElapsedMilliseconds": 0.92,
+          "minOpsPerSecond": 1.13,
           "sampleCount": 0.33
         },
         "interpreterVsManaged": {
           "maxChecksum": 1.0,
-          "maxDurationMs": 1.01,
-          "maxElapsedMilliseconds": 1.01,
-          "maxOpsPerSecond": 1.01,
+          "maxDurationMs": 0.99,
+          "maxElapsedMilliseconds": 0.99,
+          "maxOpsPerSecond": 0.99,
           "meanChecksum": 1.0,
-          "meanDurationMs": 1.0,
-          "meanElapsedMilliseconds": 1.0,
-          "meanOpsPerSecond": 1.0,
+          "meanDurationMs": 0.99,
+          "meanElapsedMilliseconds": 0.99,
+          "meanOpsPerSecond": 1.01,
           "minChecksum": 1.0,
-          "minDurationMs": 0.99,
-          "minElapsedMilliseconds": 0.99,
-          "minOpsPerSecond": 0.99,
+          "minDurationMs": 1.01,
+          "minElapsedMilliseconds": 1.01,
+          "minOpsPerSecond": 1.02,
           "sampleCount": 1.0
         },
         "nativeVsInterpreter": {
           "maxChecksum": 1.0,
-          "maxDurationMs": 0.91,
-          "maxElapsedMilliseconds": 0.91,
-          "maxOpsPerSecond": 1.04,
+          "maxDurationMs": 0.9,
+          "maxElapsedMilliseconds": 0.9,
+          "maxOpsPerSecond": 1.1,
           "meanChecksum": 1.0,
-          "meanDurationMs": 0.93,
-          "meanElapsedMilliseconds": 0.93,
-          "meanOpsPerSecond": 1.07,
+          "meanDurationMs": 0.91,
+          "meanElapsedMilliseconds": 0.91,
+          "meanOpsPerSecond": 1.1,
           "minChecksum": 1.0,
-          "minDurationMs": 0.96,
-          "minElapsedMilliseconds": 0.96,
-          "minOpsPerSecond": 1.1,
+          "minDurationMs": 0.91,
+          "minElapsedMilliseconds": 0.91,
+          "minOpsPerSecond": 1.11,
           "sampleCount": 0.33
         },
-        "nativeSpeedup": 1.07,
-        "interpreterOverhead": 1.0
+        "nativeSpeedup": 1.11,
+        "interpreterOverhead": 0.99
       },
       "verdict": {
         "verdicts": {
           "nativeVsManaged": {
-            "actual": 1.07,
+            "actual": 1.11,
             "target": 2.0,
             "pass": false,
-            "label": "1.07x speedup"
+            "label": "1.11x speedup"
           },
           "interpreterVsManaged": {
-            "actual": 1.0,
+            "actual": 0.99,
             "target": 50.0,
             "pass": true,
-            "label": "1.00x overhead"
+            "label": "0.99x overhead"
           }
         },
         "overallPass": false
@@ -208,10 +208,10 @@
         "managedBaseline": {
           "mode": "managed",
           "status": "recorded",
-          "durationMs": 7.157,
-          "opsPerSecond": 838.594,
-          "recordedAt": "2026-04-14T04:02:24.236719Z",
-          "gitCommit": "a22e124"
+          "durationMs": 7.128,
+          "opsPerSecond": 841.912,
+          "recordedAt": "2026-04-14T14:28:05.104438Z",
+          "gitCommit": "ce5f0ee"
         },
         "relativeToManaged": {
           "native": {
@@ -219,13 +219,13 @@
             "status": "recorded",
             "direction": "faster",
             "ratio": {
-              "value": 1.07,
+              "value": 1.11,
               "basis": "latency"
             },
-            "durationMs": 6.667,
-            "opsPerSecond": 900.009,
-            "recordedAt": "2026-04-14T04:02:53.681336Z",
-            "gitCommit": "a22e124",
+            "durationMs": 6.414,
+            "opsPerSecond": 935.497,
+            "recordedAt": "2026-04-14T14:28:36.758415Z",
+            "gitCommit": "ce5f0ee",
             "baselineStatus": "recorded"
           },
           "interpreter": {
@@ -233,22 +233,22 @@
             "status": "recorded",
             "direction": "slower",
             "ratio": {
-              "value": 1.0,
+              "value": 0.99,
               "basis": "latency"
             },
-            "durationMs": 7.157,
-            "opsPerSecond": 838.702,
-            "recordedAt": "2026-04-14T04:03:16.686785Z",
-            "gitCommit": "a22e124",
+            "durationMs": 7.086,
+            "opsPerSecond": 846.739,
+            "recordedAt": "2026-04-14T14:29:01.833833Z",
+            "gitCommit": "ce5f0ee",
             "baselineStatus": "recorded"
           }
         },
         "nativeSpeedup": {
-          "value": 1.07,
+          "value": 1.11,
           "basis": "latency"
         },
         "interpreterOverhead": {
-          "value": 1.0,
+          "value": 0.99,
           "basis": "latency"
         }
       }
@@ -257,7 +257,7 @@
   "latestByDevice": {
     "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd": {
       "interpreter": {
-        "runId": "20260414-040316-MixedExecutionFeaturePack-interpreter",
+        "runId": "20260414-142901-MixedExecutionFeaturePack-interpreter",
         "subject": "MixedExecutionFeaturePack",
         "mode": "interpreter",
         "platform": "windows",
@@ -269,27 +269,27 @@
           "arch": "x64",
           "isSimulator": false
         },
-        "recordedAt": "2026-04-14T04:03:16.686785Z",
-        "gitCommit": "a22e124",
+        "recordedAt": "2026-04-14T14:29:01.833833Z",
+        "gitCommit": "ce5f0ee",
         "gitBranch": "main",
         "metrics": {
           "sampleCount": 3,
-          "meanDurationMs": 7.157,
-          "minDurationMs": 6.946,
-          "maxDurationMs": 7.327,
+          "meanDurationMs": 7.086,
+          "minDurationMs": 7.029,
+          "maxDurationMs": 7.14,
           "meanChecksum": 4394.0,
           "minChecksum": 4394.0,
           "maxChecksum": 4394.0,
-          "meanElapsedMilliseconds": 7.157,
-          "minElapsedMilliseconds": 6.946,
-          "maxElapsedMilliseconds": 7.327,
-          "meanOpsPerSecond": 838.702,
-          "minOpsPerSecond": 818.889,
-          "maxOpsPerSecond": 863.757
+          "meanElapsedMilliseconds": 7.086,
+          "minElapsedMilliseconds": 7.029,
+          "maxElapsedMilliseconds": 7.14,
+          "meanOpsPerSecond": 846.739,
+          "minOpsPerSecond": 840.348,
+          "maxOpsPerSecond": 853.606
         }
       },
       "native": {
-        "runId": "20260414-040253-MixedExecutionFeaturePack-native",
+        "runId": "20260414-142836-MixedExecutionFeaturePack-native",
         "subject": "MixedExecutionFeaturePack",
         "mode": "native",
         "platform": "windows",
@@ -301,27 +301,27 @@
           "arch": "x64",
           "isSimulator": false
         },
-        "recordedAt": "2026-04-14T04:02:53.681336Z",
-        "gitCommit": "a22e124",
+        "recordedAt": "2026-04-14T14:28:36.758415Z",
+        "gitCommit": "ce5f0ee",
         "gitBranch": "main",
         "metrics": {
           "sampleCount": 1,
-          "meanDurationMs": 6.667,
-          "minDurationMs": 6.667,
-          "maxDurationMs": 6.667,
+          "meanDurationMs": 6.414,
+          "minDurationMs": 6.414,
+          "maxDurationMs": 6.414,
           "meanChecksum": 4394.0,
           "minChecksum": 4394.0,
           "maxChecksum": 4394.0,
-          "meanElapsedMilliseconds": 6.667,
-          "minElapsedMilliseconds": 6.667,
-          "maxElapsedMilliseconds": 6.667,
-          "meanOpsPerSecond": 900.009,
-          "minOpsPerSecond": 900.009,
-          "maxOpsPerSecond": 900.009
+          "meanElapsedMilliseconds": 6.414,
+          "minElapsedMilliseconds": 6.414,
+          "maxElapsedMilliseconds": 6.414,
+          "meanOpsPerSecond": 935.497,
+          "minOpsPerSecond": 935.497,
+          "maxOpsPerSecond": 935.497
         }
       },
       "managed": {
-        "runId": "20260414-040224-MixedExecutionFeaturePack-managed",
+        "runId": "20260414-142805-MixedExecutionFeaturePack-managed",
         "subject": "MixedExecutionFeaturePack",
         "mode": "managed",
         "platform": "windows",
@@ -333,23 +333,23 @@
           "arch": "x64",
           "isSimulator": false
         },
-        "recordedAt": "2026-04-14T04:02:24.236719Z",
-        "gitCommit": "a22e124",
+        "recordedAt": "2026-04-14T14:28:05.104438Z",
+        "gitCommit": "ce5f0ee",
         "gitBranch": "main",
         "metrics": {
           "sampleCount": 3,
-          "meanDurationMs": 7.157,
-          "minDurationMs": 6.995,
-          "maxDurationMs": 7.26,
+          "meanDurationMs": 7.128,
+          "minDurationMs": 6.971,
+          "maxDurationMs": 7.247,
           "meanChecksum": 4394.0,
           "minChecksum": 4394.0,
           "maxChecksum": 4394.0,
-          "meanElapsedMilliseconds": 7.157,
-          "minElapsedMilliseconds": 6.995,
-          "maxElapsedMilliseconds": 7.26,
-          "meanOpsPerSecond": 838.594,
-          "minOpsPerSecond": 826.401,
-          "maxOpsPerSecond": 857.78
+          "meanElapsedMilliseconds": 7.128,
+          "minElapsedMilliseconds": 6.971,
+          "maxElapsedMilliseconds": 7.247,
+          "meanOpsPerSecond": 841.912,
+          "minOpsPerSecond": 827.929,
+          "maxOpsPerSecond": 860.672
         }
       }
     }
@@ -400,22 +400,22 @@
             "status": "recorded",
             "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
             "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "recordedAt": "2026-04-14T04:02:28.876570Z",
-            "gitCommit": "a22e124",
+            "recordedAt": "2026-04-14T14:28:10.602958Z",
+            "gitCommit": "ce5f0ee",
             "metrics": {
               "sampleCount": 3,
-              "meanDurationMs": 2.376,
-              "minDurationMs": 2.282,
-              "maxDurationMs": 2.534,
+              "meanDurationMs": 2.357,
+              "minDurationMs": 2.277,
+              "maxDurationMs": 2.482,
               "meanChecksum": 9632.0,
               "minChecksum": 9632.0,
               "maxChecksum": 9632.0,
-              "meanElapsedMilliseconds": 2.376,
-              "minElapsedMilliseconds": 2.282,
-              "maxElapsedMilliseconds": 2.534,
-              "meanOpsPerSecond": 2530.57,
-              "minOpsPerSecond": 2367.611,
-              "maxOpsPerSecond": 2629.503
+              "meanElapsedMilliseconds": 2.357,
+              "minElapsedMilliseconds": 2.277,
+              "maxElapsedMilliseconds": 2.482,
+              "meanOpsPerSecond": 2549.347,
+              "minOpsPerSecond": 2417.405,
+              "maxOpsPerSecond": 2634.583
             }
           },
           "native": {
@@ -427,22 +427,22 @@
             "status": "recorded",
             "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
             "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "recordedAt": "2026-04-14T04:03:21.509896Z",
-            "gitCommit": "a22e124",
+            "recordedAt": "2026-04-14T14:29:06.918243Z",
+            "gitCommit": "ce5f0ee",
             "metrics": {
               "sampleCount": 3,
-              "meanDurationMs": 2.425,
-              "minDurationMs": 2.325,
-              "maxDurationMs": 2.549,
+              "meanDurationMs": 2.339,
+              "minDurationMs": 2.279,
+              "maxDurationMs": 2.371,
               "meanChecksum": 9632.0,
               "minChecksum": 9632.0,
               "maxChecksum": 9632.0,
-              "meanElapsedMilliseconds": 2.425,
-              "minElapsedMilliseconds": 2.325,
-              "maxElapsedMilliseconds": 2.549,
-              "meanOpsPerSecond": 2477.512,
-              "minOpsPerSecond": 2353.68,
-              "maxOpsPerSecond": 2580.312
+              "meanElapsedMilliseconds": 2.339,
+              "minElapsedMilliseconds": 2.279,
+              "maxElapsedMilliseconds": 2.371,
+              "meanOpsPerSecond": 2566.135,
+              "minOpsPerSecond": 2530.898,
+              "maxOpsPerSecond": 2633.08
             }
           }
         },
@@ -457,10 +457,10 @@
           "managedBaseline": {
             "mode": "managed",
             "status": "recorded",
-            "durationMs": 2.376,
-            "opsPerSecond": 2530.57,
-            "recordedAt": "2026-04-14T04:02:28.876570Z",
-            "gitCommit": "a22e124"
+            "durationMs": 2.357,
+            "opsPerSecond": 2549.347,
+            "recordedAt": "2026-04-14T14:28:10.602958Z",
+            "gitCommit": "ce5f0ee"
           },
           "relativeToManaged": {
             "native": {
@@ -479,19 +479,19 @@
               "status": "recorded",
               "direction": "slower",
               "ratio": {
-                "value": 1.02,
+                "value": 0.99,
                 "basis": "latency"
               },
-              "durationMs": 2.425,
-              "opsPerSecond": 2477.512,
-              "recordedAt": "2026-04-14T04:03:21.509896Z",
-              "gitCommit": "a22e124",
+              "durationMs": 2.339,
+              "opsPerSecond": 2566.135,
+              "recordedAt": "2026-04-14T14:29:06.918243Z",
+              "gitCommit": "ce5f0ee",
               "baselineStatus": "recorded"
             }
           },
           "nativeSpeedup": null,
           "interpreterOverhead": {
-            "value": 1.02,
+            "value": 0.99,
             "basis": "latency"
           }
         }
@@ -538,22 +538,22 @@
             "status": "recorded",
             "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
             "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "recordedAt": "2026-04-14T04:02:33.625757Z",
-            "gitCommit": "a22e124",
+            "recordedAt": "2026-04-14T14:28:16.127501Z",
+            "gitCommit": "ce5f0ee",
             "metrics": {
               "sampleCount": 3,
-              "meanDurationMs": 7.296,
-              "minDurationMs": 7.113,
-              "maxDurationMs": 7.517,
+              "meanDurationMs": 6.973,
+              "minDurationMs": 6.901,
+              "maxDurationMs": 7.019,
               "meanChecksum": 4394.0,
               "minChecksum": 4394.0,
               "maxChecksum": 4394.0,
-              "meanElapsedMilliseconds": 7.296,
-              "minElapsedMilliseconds": 7.113,
-              "maxElapsedMilliseconds": 7.517,
-              "meanOpsPerSecond": 822.788,
-              "minOpsPerSecond": 798.201,
-              "maxOpsPerSecond": 843.479
+              "meanElapsedMilliseconds": 6.973,
+              "minElapsedMilliseconds": 6.901,
+              "maxElapsedMilliseconds": 7.019,
+              "meanOpsPerSecond": 860.546,
+              "minOpsPerSecond": 854.847,
+              "maxOpsPerSecond": 869.414
             }
           },
           "native": {
@@ -561,22 +561,22 @@
             "status": "recorded",
             "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
             "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "recordedAt": "2026-04-14T04:03:11.987945Z",
-            "gitCommit": "a22e124",
+            "recordedAt": "2026-04-14T14:28:56.643037Z",
+            "gitCommit": "ce5f0ee",
             "metrics": {
               "sampleCount": 1,
-              "meanDurationMs": 6.551,
-              "minDurationMs": 6.551,
-              "maxDurationMs": 6.551,
+              "meanDurationMs": 6.557,
+              "minDurationMs": 6.557,
+              "maxDurationMs": 6.557,
               "meanChecksum": 4394.0,
               "minChecksum": 4394.0,
               "maxChecksum": 4394.0,
-              "meanElapsedMilliseconds": 6.551,
-              "minElapsedMilliseconds": 6.551,
-              "maxElapsedMilliseconds": 6.551,
-              "meanOpsPerSecond": 915.821,
-              "minOpsPerSecond": 915.821,
-              "maxOpsPerSecond": 915.821
+              "meanElapsedMilliseconds": 6.557,
+              "minElapsedMilliseconds": 6.557,
+              "maxElapsedMilliseconds": 6.557,
+              "meanOpsPerSecond": 914.997,
+              "minOpsPerSecond": 914.997,
+              "maxOpsPerSecond": 914.997
             }
           },
           "interpreter": {
@@ -584,22 +584,22 @@
             "status": "recorded",
             "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
             "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "recordedAt": "2026-04-14T04:03:26.445062Z",
-            "gitCommit": "a22e124",
+            "recordedAt": "2026-04-14T14:29:12.018035Z",
+            "gitCommit": "ce5f0ee",
             "metrics": {
               "sampleCount": 3,
-              "meanDurationMs": 7.023,
-              "minDurationMs": 6.994,
-              "maxDurationMs": 7.04,
+              "meanDurationMs": 6.977,
+              "minDurationMs": 6.943,
+              "maxDurationMs": 7.045,
               "meanChecksum": 4394.0,
               "minChecksum": 4394.0,
               "maxChecksum": 4394.0,
-              "meanElapsedMilliseconds": 7.023,
-              "minElapsedMilliseconds": 6.994,
-              "maxElapsedMilliseconds": 7.04,
-              "meanOpsPerSecond": 854.274,
-              "minOpsPerSecond": 852.285,
-              "maxOpsPerSecond": 857.829
+              "meanElapsedMilliseconds": 6.977,
+              "minElapsedMilliseconds": 6.943,
+              "maxElapsedMilliseconds": 7.045,
+              "meanOpsPerSecond": 860.001,
+              "minOpsPerSecond": 851.68,
+              "maxOpsPerSecond": 864.18
             }
           }
         },
@@ -614,10 +614,10 @@
           "managedBaseline": {
             "mode": "managed",
             "status": "recorded",
-            "durationMs": 7.296,
-            "opsPerSecond": 822.788,
-            "recordedAt": "2026-04-14T04:02:33.625757Z",
-            "gitCommit": "a22e124"
+            "durationMs": 6.973,
+            "opsPerSecond": 860.546,
+            "recordedAt": "2026-04-14T14:28:16.127501Z",
+            "gitCommit": "ce5f0ee"
           },
           "relativeToManaged": {
             "native": {
@@ -625,13 +625,13 @@
               "status": "recorded",
               "direction": "faster",
               "ratio": {
-                "value": 1.11,
+                "value": 1.06,
                 "basis": "latency"
               },
-              "durationMs": 6.551,
-              "opsPerSecond": 915.821,
-              "recordedAt": "2026-04-14T04:03:11.987945Z",
-              "gitCommit": "a22e124",
+              "durationMs": 6.557,
+              "opsPerSecond": 914.997,
+              "recordedAt": "2026-04-14T14:28:56.643037Z",
+              "gitCommit": "ce5f0ee",
               "baselineStatus": "recorded"
             },
             "interpreter": {
@@ -639,22 +639,22 @@
               "status": "recorded",
               "direction": "slower",
               "ratio": {
-                "value": 0.96,
+                "value": 1.0,
                 "basis": "latency"
               },
-              "durationMs": 7.023,
-              "opsPerSecond": 854.274,
-              "recordedAt": "2026-04-14T04:03:26.445062Z",
-              "gitCommit": "a22e124",
+              "durationMs": 6.977,
+              "opsPerSecond": 860.001,
+              "recordedAt": "2026-04-14T14:29:12.018035Z",
+              "gitCommit": "ce5f0ee",
               "baselineStatus": "recorded"
             }
           },
           "nativeSpeedup": {
-            "value": 1.11,
+            "value": 1.06,
             "basis": "latency"
           },
           "interpreterOverhead": {
-            "value": 0.96,
+            "value": 1.0,
             "basis": "latency"
           }
         }
@@ -692,7 +692,8 @@
       "hotUpdateCapabilityLabels": [],
       "warmupCount": 1,
       "iterationCount": 6,
-      "invocationCount": 1000
+      "invocationCount": 1000,
+      "entryIndex": 0
     },
     "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()": {
       "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()",
@@ -723,7 +724,8 @@
       "hotUpdateCapabilityLabels": [],
       "warmupCount": 1,
       "iterationCount": 6,
-      "invocationCount": 1000
+      "invocationCount": 1000,
+      "entryIndex": 1
     }
   },
   "caseSummaryByDevice": {
@@ -738,6 +740,326 @@
   "history": {
     "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd": {
       "interpreter": [
+        {
+          "runId": "20260414-142901-MixedExecutionFeaturePack-interpreter",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "interpreter",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T14:29:01.833833Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 7.086,
+            "minDurationMs": 7.029,
+            "maxDurationMs": 7.14,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 7.086,
+            "minElapsedMilliseconds": 7.029,
+            "maxElapsedMilliseconds": 7.14,
+            "meanOpsPerSecond": 846.739,
+            "minOpsPerSecond": 840.348,
+            "maxOpsPerSecond": 853.606
+          }
+        },
+        {
+          "runId": "20260414-141221-MixedExecutionFeaturePack-interpreter",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "interpreter",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T14:12:21.033001Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 7.182,
+            "minDurationMs": 6.962,
+            "maxDurationMs": 7.464,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 7.182,
+            "minElapsedMilliseconds": 6.962,
+            "maxElapsedMilliseconds": 7.464,
+            "meanOpsPerSecond": 836.176,
+            "minOpsPerSecond": 803.891,
+            "maxOpsPerSecond": 861.834
+          }
+        },
+        {
+          "runId": "20260414-134034-MixedExecutionFeaturePack-interpreter",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "interpreter",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:40:34.498497Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.862,
+            "minDurationMs": 6.841,
+            "maxDurationMs": 6.889,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.862,
+            "minElapsedMilliseconds": 6.841,
+            "maxElapsedMilliseconds": 6.889,
+            "meanOpsPerSecond": 874.401,
+            "minOpsPerSecond": 871.004,
+            "maxOpsPerSecond": 877.078
+          }
+        },
+        {
+          "runId": "20260414-133034-MixedExecutionFeaturePack-interpreter",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "interpreter",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:30:34.384198Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.924,
+            "minDurationMs": 6.896,
+            "maxDurationMs": 6.966,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.924,
+            "minElapsedMilliseconds": 6.896,
+            "maxElapsedMilliseconds": 6.966,
+            "meanOpsPerSecond": 866.618,
+            "minOpsPerSecond": 861.326,
+            "maxOpsPerSecond": 870.032
+          }
+        },
+        {
+          "runId": "20260414-132235-MixedExecutionFeaturePack-interpreter",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "interpreter",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:22:35.807756Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.936,
+            "minDurationMs": 6.881,
+            "maxDurationMs": 6.968,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.936,
+            "minElapsedMilliseconds": 6.881,
+            "maxElapsedMilliseconds": 6.968,
+            "meanOpsPerSecond": 865.1,
+            "minOpsPerSecond": 861.067,
+            "maxOpsPerSecond": 871.954
+          }
+        },
+        {
+          "runId": "20260414-130101-MixedExecutionFeaturePack-interpreter",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "interpreter",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:01:01.138380Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.896,
+            "minDurationMs": 6.857,
+            "maxDurationMs": 6.955,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.896,
+            "minElapsedMilliseconds": 6.857,
+            "maxElapsedMilliseconds": 6.955,
+            "meanOpsPerSecond": 870.128,
+            "minOpsPerSecond": 862.701,
+            "maxOpsPerSecond": 875.031
+          }
+        },
+        {
+          "runId": "20260414-125529-MixedExecutionFeaturePack-interpreter",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "interpreter",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:55:29.568899Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.964,
+            "minDurationMs": 6.947,
+            "maxDurationMs": 6.987,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.964,
+            "minElapsedMilliseconds": 6.947,
+            "maxElapsedMilliseconds": 6.987,
+            "meanOpsPerSecond": 861.612,
+            "minOpsPerSecond": 858.738,
+            "maxOpsPerSecond": 863.657
+          }
+        },
+        {
+          "runId": "20260414-122819-MixedExecutionFeaturePack-interpreter",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "interpreter",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:28:19.171487Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.964,
+            "minDurationMs": 6.922,
+            "maxDurationMs": 7.035,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.964,
+            "minElapsedMilliseconds": 6.922,
+            "maxElapsedMilliseconds": 7.035,
+            "meanOpsPerSecond": 861.651,
+            "minOpsPerSecond": 852.927,
+            "maxOpsPerSecond": 866.751
+          }
+        },
+        {
+          "runId": "20260414-121849-MixedExecutionFeaturePack-interpreter",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "interpreter",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:18:49.261520Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.975,
+            "minDurationMs": 6.899,
+            "maxDurationMs": 7.06,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.975,
+            "minElapsedMilliseconds": 6.899,
+            "maxElapsedMilliseconds": 7.06,
+            "meanOpsPerSecond": 860.276,
+            "minOpsPerSecond": 849.846,
+            "maxOpsPerSecond": 869.742
+          }
+        },
+        {
+          "runId": "20260414-120300-MixedExecutionFeaturePack-interpreter",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "interpreter",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:03:00.525958Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.947,
+            "minDurationMs": 6.921,
+            "maxDurationMs": 6.995,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.947,
+            "minElapsedMilliseconds": 6.921,
+            "maxElapsedMilliseconds": 6.995,
+            "meanOpsPerSecond": 863.657,
+            "minOpsPerSecond": 857.792,
+            "maxOpsPerSecond": 866.902
+          }
+        },
         {
           "runId": "20260414-040316-MixedExecutionFeaturePack-interpreter",
           "subject": "MixedExecutionFeaturePack",
@@ -1028,6 +1350,326 @@
         }
       ],
       "native": [
+        {
+          "runId": "20260414-142836-MixedExecutionFeaturePack-native",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "native",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T14:28:36.758415Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 1,
+            "meanDurationMs": 6.414,
+            "minDurationMs": 6.414,
+            "maxDurationMs": 6.414,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.414,
+            "minElapsedMilliseconds": 6.414,
+            "maxElapsedMilliseconds": 6.414,
+            "meanOpsPerSecond": 935.497,
+            "minOpsPerSecond": 935.497,
+            "maxOpsPerSecond": 935.497
+          }
+        },
+        {
+          "runId": "20260414-141154-MixedExecutionFeaturePack-native",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "native",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T14:11:54.785486Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 1,
+            "meanDurationMs": 6.342,
+            "minDurationMs": 6.342,
+            "maxDurationMs": 6.342,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.342,
+            "minElapsedMilliseconds": 6.342,
+            "maxElapsedMilliseconds": 6.342,
+            "meanOpsPerSecond": 946.133,
+            "minOpsPerSecond": 946.133,
+            "maxOpsPerSecond": 946.133
+          }
+        },
+        {
+          "runId": "20260414-134010-MixedExecutionFeaturePack-native",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "native",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:40:10.730717Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 1,
+            "meanDurationMs": 6.284,
+            "minDurationMs": 6.284,
+            "maxDurationMs": 6.284,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.284,
+            "minElapsedMilliseconds": 6.284,
+            "maxElapsedMilliseconds": 6.284,
+            "meanOpsPerSecond": 954.806,
+            "minOpsPerSecond": 954.806,
+            "maxOpsPerSecond": 954.806
+          }
+        },
+        {
+          "runId": "20260414-133011-MixedExecutionFeaturePack-native",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "native",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:30:11.242270Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 1,
+            "meanDurationMs": 6.293,
+            "minDurationMs": 6.293,
+            "maxDurationMs": 6.293,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.293,
+            "minElapsedMilliseconds": 6.293,
+            "maxElapsedMilliseconds": 6.293,
+            "meanOpsPerSecond": 953.471,
+            "minOpsPerSecond": 953.471,
+            "maxOpsPerSecond": 953.471
+          }
+        },
+        {
+          "runId": "20260414-132211-MixedExecutionFeaturePack-native",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "native",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:22:11.020470Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 1,
+            "meanDurationMs": 6.535,
+            "minDurationMs": 6.535,
+            "maxDurationMs": 6.535,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.535,
+            "minElapsedMilliseconds": 6.535,
+            "maxElapsedMilliseconds": 6.535,
+            "meanOpsPerSecond": 918.203,
+            "minOpsPerSecond": 918.203,
+            "maxOpsPerSecond": 918.203
+          }
+        },
+        {
+          "runId": "20260414-130036-MixedExecutionFeaturePack-native",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "native",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:00:36.736222Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 1,
+            "meanDurationMs": 6.253,
+            "minDurationMs": 6.253,
+            "maxDurationMs": 6.253,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.253,
+            "minElapsedMilliseconds": 6.253,
+            "maxElapsedMilliseconds": 6.253,
+            "meanOpsPerSecond": 959.493,
+            "minOpsPerSecond": 959.493,
+            "maxOpsPerSecond": 959.493
+          }
+        },
+        {
+          "runId": "20260414-125505-MixedExecutionFeaturePack-native",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "native",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:55:05.551011Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 1,
+            "meanDurationMs": 6.281,
+            "minDurationMs": 6.281,
+            "maxDurationMs": 6.281,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.281,
+            "minElapsedMilliseconds": 6.281,
+            "maxElapsedMilliseconds": 6.281,
+            "meanOpsPerSecond": 955.262,
+            "minOpsPerSecond": 955.262,
+            "maxOpsPerSecond": 955.262
+          }
+        },
+        {
+          "runId": "20260414-122754-MixedExecutionFeaturePack-native",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "native",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:27:54.692447Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 1,
+            "meanDurationMs": 6.336,
+            "minDurationMs": 6.336,
+            "maxDurationMs": 6.336,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.336,
+            "minElapsedMilliseconds": 6.336,
+            "maxElapsedMilliseconds": 6.336,
+            "meanOpsPerSecond": 946.97,
+            "minOpsPerSecond": 946.97,
+            "maxOpsPerSecond": 946.97
+          }
+        },
+        {
+          "runId": "20260414-121825-MixedExecutionFeaturePack-native",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "native",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:18:25.433261Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 1,
+            "meanDurationMs": 6.274,
+            "minDurationMs": 6.274,
+            "maxDurationMs": 6.274,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.274,
+            "minElapsedMilliseconds": 6.274,
+            "maxElapsedMilliseconds": 6.274,
+            "meanOpsPerSecond": 956.251,
+            "minOpsPerSecond": 956.251,
+            "maxOpsPerSecond": 956.251
+          }
+        },
+        {
+          "runId": "20260414-120237-MixedExecutionFeaturePack-native",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "native",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:02:37.801526Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 1,
+            "meanDurationMs": 6.32,
+            "minDurationMs": 6.32,
+            "maxDurationMs": 6.32,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.32,
+            "minElapsedMilliseconds": 6.32,
+            "maxElapsedMilliseconds": 6.32,
+            "meanOpsPerSecond": 949.352,
+            "minOpsPerSecond": 949.352,
+            "maxOpsPerSecond": 949.352
+          }
+        },
         {
           "runId": "20260414-040253-MixedExecutionFeaturePack-native",
           "subject": "MixedExecutionFeaturePack",
@@ -1347,11 +1989,13 @@
             "minOpsPerSecond": 60000000.0,
             "maxOpsPerSecond": 60000000.0
           }
-        },
+        }
+      ],
+      "managed": [
         {
-          "runId": "20260413-135722-MixedExecutionFeaturePack-native",
+          "runId": "20260414-142805-MixedExecutionFeaturePack-managed",
           "subject": "MixedExecutionFeaturePack",
-          "mode": "native",
+          "mode": "managed",
           "platform": "windows",
           "device": {
             "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
@@ -1361,27 +2005,313 @@
             "arch": "x64",
             "isSimulator": false
           },
-          "recordedAt": "2026-04-13T13:57:22.116596Z",
-          "gitCommit": "d0b7303",
+          "recordedAt": "2026-04-14T14:28:05.104438Z",
+          "gitCommit": "ce5f0ee",
           "gitBranch": "main",
           "metrics": {
-            "sampleCount": 1,
-            "meanDurationMs": 0.0,
-            "minDurationMs": 0.0,
-            "maxDurationMs": 0.0,
-            "meanChecksum": 8292.0,
-            "minChecksum": 8292.0,
-            "maxChecksum": 8292.0,
-            "meanElapsedMilliseconds": 0.0,
-            "minElapsedMilliseconds": 0.0,
-            "maxElapsedMilliseconds": 0.0,
-            "meanOpsPerSecond": 60000000.0,
-            "minOpsPerSecond": 60000000.0,
-            "maxOpsPerSecond": 60000000.0
+            "sampleCount": 3,
+            "meanDurationMs": 7.128,
+            "minDurationMs": 6.971,
+            "maxDurationMs": 7.247,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 7.128,
+            "minElapsedMilliseconds": 6.971,
+            "maxElapsedMilliseconds": 7.247,
+            "meanOpsPerSecond": 841.912,
+            "minOpsPerSecond": 827.929,
+            "maxOpsPerSecond": 860.672
           }
-        }
-      ],
-      "managed": [
+        },
+        {
+          "runId": "20260414-141124-MixedExecutionFeaturePack-managed",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T14:11:24.241112Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 7.199,
+            "minDurationMs": 6.969,
+            "maxDurationMs": 7.544,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 7.199,
+            "minElapsedMilliseconds": 6.969,
+            "maxElapsedMilliseconds": 7.544,
+            "meanOpsPerSecond": 834.392,
+            "minOpsPerSecond": 795.313,
+            "maxOpsPerSecond": 860.919
+          }
+        },
+        {
+          "runId": "20260414-133942-MixedExecutionFeaturePack-managed",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:39:42.431517Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.897,
+            "minDurationMs": 6.894,
+            "maxDurationMs": 6.902,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.897,
+            "minElapsedMilliseconds": 6.894,
+            "maxElapsedMilliseconds": 6.902,
+            "meanOpsPerSecond": 869.969,
+            "minOpsPerSecond": 869.376,
+            "maxOpsPerSecond": 870.36
+          }
+        },
+        {
+          "runId": "20260414-132941-MixedExecutionFeaturePack-managed",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:29:41.393421Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.958,
+            "minDurationMs": 6.89,
+            "maxDurationMs": 7.046,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.958,
+            "minElapsedMilliseconds": 6.89,
+            "maxElapsedMilliseconds": 7.046,
+            "meanOpsPerSecond": 862.339,
+            "minOpsPerSecond": 851.511,
+            "maxOpsPerSecond": 870.827
+          }
+        },
+        {
+          "runId": "20260414-132141-MixedExecutionFeaturePack-managed",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:21:41.943239Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 7.147,
+            "minDurationMs": 6.945,
+            "maxDurationMs": 7.549,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 7.147,
+            "minElapsedMilliseconds": 6.945,
+            "maxElapsedMilliseconds": 7.549,
+            "meanOpsPerSecond": 840.824,
+            "minOpsPerSecond": 794.797,
+            "maxOpsPerSecond": 863.881
+          }
+        },
+        {
+          "runId": "20260414-130008-MixedExecutionFeaturePack-managed",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T13:00:08.197168Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 7.084,
+            "minDurationMs": 7.009,
+            "maxDurationMs": 7.177,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 7.084,
+            "minElapsedMilliseconds": 7.009,
+            "maxElapsedMilliseconds": 7.177,
+            "meanOpsPerSecond": 847.037,
+            "minOpsPerSecond": 836.016,
+            "maxOpsPerSecond": 856.091
+          }
+        },
+        {
+          "runId": "20260414-125437-MixedExecutionFeaturePack-managed",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:54:37.286800Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.995,
+            "minDurationMs": 6.854,
+            "maxDurationMs": 7.129,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.995,
+            "minElapsedMilliseconds": 6.854,
+            "maxElapsedMilliseconds": 7.129,
+            "meanOpsPerSecond": 857.908,
+            "minOpsPerSecond": 841.621,
+            "maxOpsPerSecond": 875.363
+          }
+        },
+        {
+          "runId": "20260414-122725-MixedExecutionFeaturePack-managed",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:27:25.252517Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 7.038,
+            "minDurationMs": 6.916,
+            "maxDurationMs": 7.173,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 7.038,
+            "minElapsedMilliseconds": 6.916,
+            "maxElapsedMilliseconds": 7.173,
+            "meanOpsPerSecond": 852.665,
+            "minOpsPerSecond": 836.458,
+            "maxOpsPerSecond": 867.553
+          }
+        },
+        {
+          "runId": "20260414-121759-MixedExecutionFeaturePack-managed",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:17:59.764637Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 7.168,
+            "minDurationMs": 6.995,
+            "maxDurationMs": 7.26,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 7.168,
+            "minElapsedMilliseconds": 6.995,
+            "maxElapsedMilliseconds": 7.26,
+            "meanOpsPerSecond": 837.34,
+            "minOpsPerSecond": 826.503,
+            "maxOpsPerSecond": 857.805
+          }
+        },
+        {
+          "runId": "20260414-120203-MixedExecutionFeaturePack-managed",
+          "subject": "MixedExecutionFeaturePack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-14T12:02:03.125665Z",
+          "gitCommit": "ce5f0ee",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 7.036,
+            "minDurationMs": 6.915,
+            "maxDurationMs": 7.275,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 7.036,
+            "minElapsedMilliseconds": 6.915,
+            "maxElapsedMilliseconds": 7.275,
+            "meanOpsPerSecond": 853.178,
+            "minOpsPerSecond": 824.754,
+            "maxOpsPerSecond": 867.616
+          }
+        },
         {
           "runId": "20260414-040224-MixedExecutionFeaturePack-managed",
           "subject": "MixedExecutionFeaturePack",
@@ -1701,70 +2631,6 @@
             "minOpsPerSecond": 2566.296,
             "maxOpsPerSecond": 2695.055
           }
-        },
-        {
-          "runId": "20260413-135712-MixedExecutionFeaturePack-managed",
-          "subject": "MixedExecutionFeaturePack",
-          "mode": "managed",
-          "platform": "windows",
-          "device": {
-            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "os": "Windows 10.0.26100",
-            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
-            "arch": "x64",
-            "isSimulator": false
-          },
-          "recordedAt": "2026-04-13T13:57:12.820352Z",
-          "gitCommit": "d0b7303",
-          "gitBranch": "main",
-          "metrics": {
-            "sampleCount": 3,
-            "meanDurationMs": 2.596,
-            "minDurationMs": 2.358,
-            "maxDurationMs": 2.793,
-            "meanChecksum": 9632.0,
-            "minChecksum": 9632.0,
-            "maxChecksum": 9632.0,
-            "meanElapsedMilliseconds": 2.596,
-            "minElapsedMilliseconds": 2.358,
-            "maxElapsedMilliseconds": 2.793,
-            "meanOpsPerSecond": 2322.622,
-            "minOpsPerSecond": 2148.305,
-            "maxOpsPerSecond": 2543.99
-          }
-        },
-        {
-          "runId": "20260413-134850-MixedExecutionFeaturePack-managed",
-          "subject": "MixedExecutionFeaturePack",
-          "mode": "managed",
-          "platform": "windows",
-          "device": {
-            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "os": "Windows 10.0.26100",
-            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
-            "arch": "x64",
-            "isSimulator": false
-          },
-          "recordedAt": "2026-04-13T13:48:50.477399Z",
-          "gitCommit": "d0b7303",
-          "gitBranch": "main",
-          "metrics": {
-            "sampleCount": 3,
-            "meanDurationMs": 2.266,
-            "minDurationMs": 2.231,
-            "maxDurationMs": 2.318,
-            "meanChecksum": 9632.0,
-            "minChecksum": 9632.0,
-            "maxChecksum": 9632.0,
-            "meanElapsedMilliseconds": 2.266,
-            "minElapsedMilliseconds": 2.231,
-            "maxElapsedMilliseconds": 2.318,
-            "meanOpsPerSecond": 2648.673,
-            "minOpsPerSecond": 2588.662,
-            "maxOpsPerSecond": 2689.859
-          }
         }
       ]
     }
@@ -1774,65 +2640,65 @@
       "comparison": {
         "nativeVsManaged": {
           "maxChecksum": 1.0,
-          "maxDurationMs": 0.92,
-          "maxElapsedMilliseconds": 0.92,
-          "maxOpsPerSecond": 1.05,
+          "maxDurationMs": 0.89,
+          "maxElapsedMilliseconds": 0.89,
+          "maxOpsPerSecond": 1.09,
           "meanChecksum": 1.0,
-          "meanDurationMs": 0.93,
-          "meanElapsedMilliseconds": 0.93,
-          "meanOpsPerSecond": 1.07,
+          "meanDurationMs": 0.9,
+          "meanElapsedMilliseconds": 0.9,
+          "meanOpsPerSecond": 1.11,
           "minChecksum": 1.0,
-          "minDurationMs": 0.95,
-          "minElapsedMilliseconds": 0.95,
-          "minOpsPerSecond": 1.09,
+          "minDurationMs": 0.92,
+          "minElapsedMilliseconds": 0.92,
+          "minOpsPerSecond": 1.13,
           "sampleCount": 0.33
         },
         "interpreterVsManaged": {
           "maxChecksum": 1.0,
-          "maxDurationMs": 1.01,
-          "maxElapsedMilliseconds": 1.01,
-          "maxOpsPerSecond": 1.01,
+          "maxDurationMs": 0.99,
+          "maxElapsedMilliseconds": 0.99,
+          "maxOpsPerSecond": 0.99,
           "meanChecksum": 1.0,
-          "meanDurationMs": 1.0,
-          "meanElapsedMilliseconds": 1.0,
-          "meanOpsPerSecond": 1.0,
+          "meanDurationMs": 0.99,
+          "meanElapsedMilliseconds": 0.99,
+          "meanOpsPerSecond": 1.01,
           "minChecksum": 1.0,
-          "minDurationMs": 0.99,
-          "minElapsedMilliseconds": 0.99,
-          "minOpsPerSecond": 0.99,
+          "minDurationMs": 1.01,
+          "minElapsedMilliseconds": 1.01,
+          "minOpsPerSecond": 1.02,
           "sampleCount": 1.0
         },
         "nativeVsInterpreter": {
           "maxChecksum": 1.0,
-          "maxDurationMs": 0.91,
-          "maxElapsedMilliseconds": 0.91,
-          "maxOpsPerSecond": 1.04,
+          "maxDurationMs": 0.9,
+          "maxElapsedMilliseconds": 0.9,
+          "maxOpsPerSecond": 1.1,
           "meanChecksum": 1.0,
-          "meanDurationMs": 0.93,
-          "meanElapsedMilliseconds": 0.93,
-          "meanOpsPerSecond": 1.07,
+          "meanDurationMs": 0.91,
+          "meanElapsedMilliseconds": 0.91,
+          "meanOpsPerSecond": 1.1,
           "minChecksum": 1.0,
-          "minDurationMs": 0.96,
-          "minElapsedMilliseconds": 0.96,
-          "minOpsPerSecond": 1.1,
+          "minDurationMs": 0.91,
+          "minElapsedMilliseconds": 0.91,
+          "minOpsPerSecond": 1.11,
           "sampleCount": 0.33
         },
-        "nativeSpeedup": 1.07,
-        "interpreterOverhead": 1.0
+        "nativeSpeedup": 1.11,
+        "interpreterOverhead": 0.99
       },
       "verdict": {
         "verdicts": {
           "nativeVsManaged": {
-            "actual": 1.07,
+            "actual": 1.11,
             "target": 2.0,
             "pass": false,
-            "label": "1.07x speedup"
+            "label": "1.11x speedup"
           },
           "interpreterVsManaged": {
-            "actual": 1.0,
+            "actual": 0.99,
             "target": 50.0,
             "pass": true,
-            "label": "1.00x overhead"
+            "label": "0.99x overhead"
           }
         },
         "overallPass": false

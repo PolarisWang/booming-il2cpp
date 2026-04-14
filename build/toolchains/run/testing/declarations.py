@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from enum import Enum
 from typing import Any, Iterable
 
@@ -29,6 +29,7 @@ class DeclarationWarningCode(str, Enum):
 class DeclaredTestEntry:
     kind: DeclaredTestKind
     stable_id: str
+    entry_index: int = -1
     alias: str | None = None
     assembly_name: str = ""
     declaring_type: str = ""
@@ -80,6 +81,7 @@ def _normalize_declared_entries(
             DeclaredTestEntry(
                 kind=kind,
                 stable_id=stable_id,
+                entry_index=int(payload.get("entryIndex") or payload.get("entry_index") or -1),
                 alias=alias_text,
                 assembly_name=str(payload.get("assemblyName") or payload.get("assembly_name") or ""),
                 declaring_type=str(payload.get("declaringType") or payload.get("declaring_type") or ""),
@@ -101,6 +103,13 @@ def _normalize_declared_entries(
             )
         )
     return entries
+
+
+def assign_declared_entry_indexes(entries: Iterable[DeclaredTestEntry]) -> list[DeclaredTestEntry]:
+    indexed_entries: list[DeclaredTestEntry] = []
+    for entry_index, entry in enumerate(sorted(entries, key=lambda item: item.stable_id)):
+        indexed_entries.append(replace(entry, entry_index=entry_index))
+    return indexed_entries
 
 
 def test_declaration_mode(manifest: dict[str, Any]) -> TestDeclarationMode:
@@ -201,8 +210,8 @@ def summarize_declaration_scan(
     return DeclarationScanSummary(
         mode=mode,
         framework_referenced=True,
-        declared_unit_tests=normalized_unit_tests,
-        declared_benchmarks=normalized_benchmarks,
+        declared_unit_tests=assign_declared_entry_indexes(normalized_unit_tests),
+        declared_benchmarks=assign_declared_entry_indexes(normalized_benchmarks),
         subject_kind=SubjectDeclarationKind.DECLARED_TEST,
         warning_codes=[],
     )

@@ -19,7 +19,7 @@ internal static class AllocationBenchmarkEntry
         Alias = "allocation-bench",
         CapabilityFamily = ChaosCapabilityFamily.RuntimeServices,
         Capability = ChaosCapabilityItem.GcSensitiveFlow,
-        Modes = ChaosExecutionMode.Managed,
+        Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native,
         WarmupCount = 1,
         IterationCount = 3,
         InvocationCount = 1)]

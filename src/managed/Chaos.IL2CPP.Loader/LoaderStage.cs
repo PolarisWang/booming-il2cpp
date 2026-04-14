@@ -588,6 +588,7 @@ public sealed class LoaderStage
             ILOpCode.Nop => null,
             ILOpCode.Volatile => null,
             ILOpCode.Constrained => SkipConstrainedInstruction(ref ilReader),
+            ILOpCode.Unaligned => SkipUnalignedInstruction(ref ilReader),
             ILOpCode.Ldtoken => DecodeLdtokenInstruction(metadataReader, typeResolver, typeModels, fieldOwners, methodOwners, ref ilReader),
             ILOpCode.Ldstr => DecodeLdstrInstruction(metadataReader, ref ilReader),
             ILOpCode.Ldftn => DecodeLdftnInstruction(metadataReader, typeResolver, typeModels, methodOwners, ref ilReader),
@@ -680,6 +681,9 @@ public sealed class LoaderStage
             ILOpCode.Stind_r4 => DecodeSimpleInstruction("stind.r4", "System.Void"),
             ILOpCode.Stind_r8 => DecodeSimpleInstruction("stind.r8", "System.Void"),
             ILOpCode.Stind_ref => DecodeSimpleInstruction("stind.ref", "System.Void"),
+            ILOpCode.Cpblk => new ManagedInstructionModel { Op = "cpblk", ResultType = "System.Void" },
+            ILOpCode.Localloc => new ManagedInstructionModel { Op = "localloc", ResultType = "System.IntPtr" },
+            ILOpCode.Conv_i => DecodeSimpleInstruction("conv.i", "System.IntPtr"),
             ILOpCode.Conv_i1 => DecodeSimpleInstruction("conv.i1", "System.SByte"),
             ILOpCode.Conv_i2 => DecodeSimpleInstruction("conv.i2", "System.Int16"),
             ILOpCode.Conv_i4 => new ManagedInstructionModel { Op = "conv.i4", ResultType = "System.Int32" },
@@ -687,6 +691,7 @@ public sealed class LoaderStage
             ILOpCode.Conv_ovf_i1 => DecodeSimpleInstruction("conv.ovf.i1", "System.SByte"),
             ILOpCode.Conv_r4 => DecodeSimpleInstruction("conv.r4", "System.Single"),
             ILOpCode.Conv_r8 => DecodeSimpleInstruction("conv.r8", "System.Double"),
+            ILOpCode.Conv_u => DecodeSimpleInstruction("conv.u", "System.IntPtr"),
             ILOpCode.Conv_u1 => DecodeSimpleInstruction("conv.u1", "System.Byte"),
             ILOpCode.Conv_u2 => DecodeSimpleInstruction("conv.u2", "System.UInt16"),
             ILOpCode.Add => DecodeSimpleInstruction("add", "System.Int32"),
@@ -1322,6 +1327,12 @@ public sealed class LoaderStage
     private static ManagedInstructionModel? SkipConstrainedInstruction(ref BlobReader ilReader)
     {
         ilReader.ReadInt32();
+        return null;
+    }
+
+    private static ManagedInstructionModel? SkipUnalignedInstruction(ref BlobReader ilReader)
+    {
+        ilReader.ReadByte();
         return null;
     }
 

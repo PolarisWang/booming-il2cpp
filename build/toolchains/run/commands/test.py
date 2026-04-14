@@ -6,7 +6,6 @@ from pathlib import Path
 from typing import Any, Callable
 
 try:
-    from ..core import manifest as manifest_module
     from .. import tui as tui_module
     from ..testing import catalog as catalog_module
     from ..testing import contracts as contracts_module
@@ -27,7 +26,6 @@ try:
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
-    from core import manifest as manifest_module
     import tui as tui_module
     from testing import catalog as catalog_module
     from testing import contracts as contracts_module
@@ -55,6 +53,17 @@ SUBJECT_EXECUTION_OBJECT_TYPES = {
     "declared-unit-test",
     "declared-benchmark",
 }
+WORKSPACE_SUBJECT_OBJECT_TYPES = {
+    "subject",
+    "declared-unit-test",
+    "declared-benchmark",
+}
+WORKSPACE_HOST_KIND_BY_OBJECT_TYPE = {
+    "subject": "proof-host",
+    "declared-unit-test": "proof-host",
+    "declared-benchmark": "benchmark-host",
+}
+WORKSPACE_MANIFEST_VERSION = 2
 
 
 def find_public_test_suite_spec(family: str | None, suite: str | None) -> dict | None:
@@ -148,6 +157,282 @@ def _selected_object_entry_selection(selected_object: dict[str, Any]) -> dict[st
             entry_selection["alias"] = alias
         return entry_selection
     return {}
+
+
+def _normalize_host_platform(host_platform: str) -> str:
+    if host_platform.startswith("windows"):
+        return "windows"
+    if host_platform.startswith("macos"):
+        return "macos"
+    if host_platform.startswith("linux"):
+        return "linux"
+    return host_platform
+
+
+def _relative_repo_path(repo_root: Path, path: Path) -> str:
+    try:
+        return path.relative_to(repo_root).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
+def _subject_workspace_manifest_path(repo_root: Path, subject_id: str) -> Path:
+    return repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+
+
+def _load_subject_workspace_manifest(repo_root: Path, subject_id: str) -> tuple[Path, dict[str, Any]] | None:
+    manifest_path = _subject_workspace_manifest_path(repo_root, subject_id)
+    if not manifest_path.is_file():
+        return None
+
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        raise RuntimeError(
+            f"workspace manifest is invalid: {_relative_repo_path(repo_root, manifest_path)}: {error.msg}"
+        ) from error
+
+    if not isinstance(manifest, dict):
+        raise RuntimeError(f"workspace manifest must be an object: {_relative_repo_path(repo_root, manifest_path)}")
+
+    workspace_version = int(manifest.get("workspaceVersion") or 0)
+    if workspace_version < WORKSPACE_MANIFEST_VERSION:
+        raise RuntimeError(
+            "workspace manifest version is not supported: "
+            f"{_relative_repo_path(repo_root, manifest_path)} (expected >= {WORKSPACE_MANIFEST_VERSION})"
+        )
+
+    return manifest_path, manifest
+
+
+def _workspace_matrices_by_id(manifest: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    matrices_by_id: dict[str, dict[str, Any]] = {}
+    for item in list(manifest.get("matrices") or []):
+        if not isinstance(item, dict):
+            continue
+        matrix_id = str(item.get("matrixId") or "").strip()
+        if not matrix_id:
+            continue
+        matrices_by_id[matrix_id] = dict(item)
+    return matrices_by_id
+
+
+def _resolve_workspace_matrix(
+    manifest: dict[str, Any],
+    *,
+    selected_object: dict[str, Any],
+    normalized_options: dict[str, Any],
+    host_platform: str,
+) -> dict[str, Any]:
+    matrices_by_id = _workspace_matrices_by_id(manifest)
+    if not matrices_by_id:
+        raise RuntimeError("workspace manifest does not declare any matrices")
+
+    normalized_host_platform = _normalize_host_platform(host_platform)
+    requested_matrix_id = str(normalized_options.get("matrix") or "").strip()
+    if requested_matrix_id:
+        matrix = dict(matrices_by_id.get(requested_matrix_id) or {})
+        if not matrix:
+            raise RuntimeError(f"workspace manifest does not contain matrix '{requested_matrix_id}'")
+        matrix_host_platform = _normalize_host_platform(str(matrix.get("hostPlatform") or ""))
+        if matrix_host_platform and matrix_host_platform != normalized_host_platform:
+            raise RuntimeError(
+                f"workspace matrix '{requested_matrix_id}' is not supported on host '{host_platform}'"
+            )
+        return matrix
+
+    candidate_matrix_ids = [
+        str(manifest.get("defaultMatrixId") or "").strip(),
+        str(selected_object.get("defaultMatrixId") or "").strip(),
+    ]
+    for matrix_id in candidate_matrix_ids:
+        if not matrix_id:
+            continue
+        matrix = dict(matrices_by_id.get(matrix_id) or {})
+        if not matrix:
+            continue
+        matrix_host_platform = _normalize_host_platform(str(matrix.get("hostPlatform") or ""))
+        if matrix_host_platform and matrix_host_platform != normalized_host_platform:
+            continue
+        return matrix
+
+    for matrix in matrices_by_id.values():
+        matrix_host_platform = _normalize_host_platform(str(matrix.get("hostPlatform") or ""))
+        if not matrix_host_platform or matrix_host_platform == normalized_host_platform:
+            return dict(matrix)
+
+    raise RuntimeError(f"workspace manifest does not contain a matrix for host '{host_platform}'")
+
+
+def _resolve_workspace_goal_id(
+    matrix: dict[str, Any],
+    *,
+    selected_object: dict[str, Any],
+    normalized_options: dict[str, Any],
+) -> str:
+    goal_ids = [str(goal_id).strip() for goal_id in list(matrix.get("goalIds") or []) if str(goal_id).strip()]
+    requested_goal_id = str(normalized_options.get("goal") or "").strip()
+    if requested_goal_id:
+        if goal_ids and requested_goal_id not in goal_ids:
+            raise RuntimeError(
+                f"workspace matrix '{matrix.get('matrixId')}' does not support goal '{requested_goal_id}'"
+            )
+        return requested_goal_id
+
+    default_goal_id = str(selected_object.get("defaultGoalId") or "").strip()
+    if default_goal_id and (not goal_ids or default_goal_id in goal_ids):
+        return default_goal_id
+    if goal_ids:
+        return goal_ids[0]
+    return default_goal_id
+
+
+def _resolve_workspace_host_kind(object_type: str) -> str:
+    host_kind = WORKSPACE_HOST_KIND_BY_OBJECT_TYPE.get(object_type, "")
+    if not host_kind:
+        raise RuntimeError(f"workspace host resolution is not supported for '{object_type}'")
+    return host_kind
+
+
+def _find_workspace_managed_test_project(manifest: dict[str, Any], host_kind: str) -> dict[str, Any]:
+    for item in list(manifest.get("managedTestProjects") or []):
+        if not isinstance(item, dict):
+            continue
+        if str(item.get("hostKind") or "") == host_kind:
+            return dict(item)
+    raise RuntimeError(f"workspace manifest does not declare a managed test project for host '{host_kind}'")
+
+
+def _find_workspace_native_test_project(
+    manifest: dict[str, Any],
+    *,
+    matrix_id: str,
+    host_kind: str,
+) -> dict[str, Any] | None:
+    for item in list(manifest.get("nativeTestProjects") or []):
+        if not isinstance(item, dict):
+            continue
+        if str(item.get("matrixId") or "") != matrix_id:
+            continue
+        if str(item.get("hostKind") or "") != host_kind:
+            continue
+        return dict(item)
+    return None
+
+
+def _load_workspace_declared_catalog(repo_root: Path, catalog_path: str) -> dict[str, Any]:
+    catalog_abspath = repo_root / catalog_path
+    if not catalog_abspath.is_file():
+        raise RuntimeError(f"workspace declared catalog is not available: {catalog_path}")
+    try:
+        catalog = json.loads(catalog_abspath.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        raise RuntimeError(f"workspace declared catalog is invalid: {catalog_path}: {error.msg}") from error
+    if not isinstance(catalog, dict):
+        raise RuntimeError(f"workspace declared catalog must be an object: {catalog_path}")
+    return catalog
+
+
+def _find_workspace_declared_catalog_entry(
+    catalog: dict[str, Any],
+    *,
+    object_type: str,
+    stable_id: str,
+    alias: str,
+) -> dict[str, Any] | None:
+    catalog_key = "declaredUnitTests" if object_type == "declared-unit-test" else "declaredBenchmarks"
+    entries = [dict(item) for item in list(catalog.get(catalog_key) or []) if isinstance(item, dict)]
+    for entry in entries:
+        if str(entry.get("stableId") or "") == stable_id:
+            return entry
+    if alias:
+        for entry in entries:
+            if str(entry.get("alias") or "") == alias:
+                return entry
+    return None
+
+
+def _resolve_workspace_execution(
+    repo_root: Path,
+    *,
+    selected_object: dict[str, Any],
+    normalized_options: dict[str, Any],
+    host_platform: str,
+) -> dict[str, Any] | None:
+    object_type = str(selected_object.get("type") or "")
+    if object_type not in WORKSPACE_SUBJECT_OBJECT_TYPES:
+        return None
+
+    subject_id = str(normalized_options.get("subject") or selected_object.get("subjectId") or "").strip()
+    if not subject_id:
+        return None
+
+    loaded_manifest = _load_subject_workspace_manifest(repo_root, subject_id)
+    if loaded_manifest is None:
+        return None
+
+    manifest_path, manifest = loaded_manifest
+    host_kind = _resolve_workspace_host_kind(object_type)
+    matrix = _resolve_workspace_matrix(
+        manifest,
+        selected_object=selected_object,
+        normalized_options=normalized_options,
+        host_platform=host_platform,
+    )
+    matrix_id = str(matrix.get("matrixId") or "").strip()
+    if not matrix_id:
+        raise RuntimeError("workspace matrix is missing matrixId")
+
+    goal_id = _resolve_workspace_goal_id(
+        matrix,
+        selected_object=selected_object,
+        normalized_options=normalized_options,
+    )
+    managed_test_project = _find_workspace_managed_test_project(manifest, host_kind)
+    catalog_path = str(managed_test_project.get("catalogPath") or "").strip()
+    if not catalog_path:
+        raise RuntimeError(f"workspace managed test project for host '{host_kind}' is missing catalogPath")
+
+    native_test_project = _find_workspace_native_test_project(
+        manifest,
+        matrix_id=matrix_id,
+        host_kind=host_kind,
+    )
+
+    execution = {
+        "subjectId": subject_id,
+        "workspaceManifestPath": _relative_repo_path(repo_root, manifest_path),
+        "workspaceVersion": int(manifest.get("workspaceVersion") or 0),
+        "goalId": goal_id,
+        "matrixId": matrix_id,
+        "hostKind": host_kind,
+        "catalogPath": catalog_path,
+        "managedTestProject": managed_test_project,
+        "nativeTestProject": native_test_project,
+    }
+
+    if object_type in {"declared-unit-test", "declared-benchmark"}:
+        stable_id = str(selected_object.get("stableId") or "").strip()
+        alias = str(selected_object.get("alias") or "").strip()
+        catalog = _load_workspace_declared_catalog(repo_root, catalog_path)
+        entry = _find_workspace_declared_catalog_entry(
+            catalog,
+            object_type=object_type,
+            stable_id=stable_id,
+            alias=alias,
+        )
+        if entry is None:
+            raise RuntimeError(
+                f"workspace declared catalog does not contain {object_type} '{stable_id or alias or '<missing>'}'"
+            )
+        try:
+            execution["entryIndex"] = int(entry.get("entryIndex"))
+        except (TypeError, ValueError) as error:
+            raise RuntimeError(
+                f"workspace declared catalog entry is missing a valid entryIndex: {catalog_path}"
+            ) from error
+
+    return execution
 
 
 def _handle_registry_dispatch(
@@ -417,22 +702,6 @@ def _handle_test_watch(command_text: str, repo_root: Path, host_platform: str, o
         payload={"eventsPath": str(events_path.relative_to(repo_root).as_posix())},
         text=tui_module.render_test_progress_screen(events, repo_root=repo_root),
     )
-
-
-def _execute_legacy_command(
-    legacy_command: dict,
-    repo_root: Path,
-    host_platform: str,
-    command_text: str,
-) -> CommandResult:
-    handler = legacy_command["handler"]
-    if handler == "build.dispatch":
-        return build_commands.handle(legacy_command, repo_root, host_platform, command_text)
-    manifest = manifest_module.load_run_manifest(
-        repo_root,
-        repo_root / "build" / "toolchains" / "run" / "run_manifest.json",
-    )
-    return handle(legacy_command, repo_root, host_platform, command_text, manifest)
 
 
 def _execute_public_suite_spec(
@@ -888,6 +1157,34 @@ def _run_subject_object(
     entry_selection = _selected_object_entry_selection(selected_object) or None
     if object_type == "declared-unit-test":
         workload_entry = None
+    try:
+        workspace_execution = _resolve_workspace_execution(
+            repo_root,
+            selected_object=selected_object,
+            normalized_options=normalized_options,
+            host_platform=host_platform,
+        )
+    except (FileNotFoundError, RuntimeError, ValueError) as error:
+        return _with_selected_object_context(
+            CommandResult.failure(
+                command=command_text,
+                host_platform=host_platform,
+                target=str(selected_object["id"]),
+                errors=[str(error)],
+                payload={"exitCode": 2},
+                text=f"{error}\n",
+            ),
+            selected_object,
+            index,
+        )
+
+    if workspace_execution is not None:
+        goal_id = str(workspace_execution.get("goalId") or "") or goal_id
+        matrix_id = str(workspace_execution.get("matrixId") or "") or matrix_id
+        entry_index = workspace_execution.get("entryIndex")
+        if entry_index is not None:
+            entry_selection = dict(entry_selection or {})
+            entry_selection["entryIndex"] = int(entry_index)
     run_id = reporting_module.build_run_id(host_platform)
 
     try:
@@ -1037,6 +1334,8 @@ def _run_subject_object(
         },
         "text": _render_subject_summary(subject_summary),
     }
+    if workspace_execution is not None:
+        kwargs["payload"]["workspaceExecution"] = workspace_execution
     if not succeeded:
         kwargs["errors"] = errors or [f"subject execution failed: {selected_object['id']}"]
     result = result_factory(**kwargs)
@@ -1382,7 +1681,17 @@ def _handle_public_test_dispatch(
         return _handle_test_summary(command_text, repo_root, host_platform, options)
     if command_id in {"test-registry-refresh", "test-registry-list", "test-registry-check-consistency"}:
         return _handle_registry_dispatch(command, repo_root, host_platform, command_text)
-    if command_id in {"test-suite", "test-subject", "test-module", "test-system", "test-pipeline"}:
+    if command_id in {
+        "test-suite",
+        "test-subject",
+        "test-engineering-validation",
+        "test-engineering-workload",
+        "test-declared-unit-test",
+        "test-declared-benchmark",
+        "test-module",
+        "test-system",
+        "test-pipeline",
+    }:
         return _handle_registry_object_dispatch(
             command_id.removeprefix("test-"),
             repo_root,
@@ -1630,6 +1939,10 @@ def handle(
     if command["id"] in {
         "test-suite",
         "test-subject",
+        "test-engineering-validation",
+        "test-engineering-workload",
+        "test-declared-unit-test",
+        "test-declared-benchmark",
         "test-module",
         "test-system",
         "test-pipeline",
@@ -1660,16 +1973,6 @@ def handle(
         return _run_contract_check(command, repo_root, host_platform, command_text)
     if kind == "python-unittest":
         return _run_python_unittest(command, repo_root, host_platform, command_text)
-    if kind == "registry-object-alias":
-        return _handle_registry_object_dispatch(
-            str(command["registry_object_kind"]),
-            repo_root,
-            host_platform,
-            command_text,
-            manifest or {},
-            {"id": str(command["registry_object_id"])},
-            progress_callback=progress_callback,
-        )
     if kind == "trace-compare":
         return _run_trace_compare(command, repo_root, host_platform, command_text)
 

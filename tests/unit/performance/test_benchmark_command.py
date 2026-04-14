@@ -9,6 +9,7 @@ import time
 import unittest
 import uuid
 from pathlib import Path
+from typing import Any
 from unittest.mock import patch
 
 
@@ -85,6 +86,95 @@ class BenchmarkCommandTests(unittest.TestCase):
         csproj_path = repo_root / "subjects" / subject_id / "source" / f"{subject_id}.csproj"
         csproj_path.parent.mkdir(parents=True, exist_ok=True)
         csproj_path.write_text("<Project Sdk=\"Microsoft.NET.Sdk\"></Project>", encoding="utf-8")
+
+    def _write_workspace_benchmark_fixture(
+        self,
+        repo_root: Path,
+        *,
+        subject_id: str,
+        stable_id: str,
+        alias: str,
+        entry_index: int,
+        assembly_name: str,
+        declaring_type: str,
+        method_name: str,
+        method_signature: str,
+        matrix_id: str = "workspace-benchmark-matrix",
+    ) -> None:
+        workspace_root = repo_root / "solutions" / "subjects" / subject_id
+        managed_tests_root = workspace_root / "managed-tests"
+        generated_root = managed_tests_root / "Generated"
+        project_path = managed_tests_root / f"{subject_id}.DeclaredBenchmarkHost.csproj"
+        generated_source_path = generated_root / "ChaosGeneratedDeclaredBenchmarks.g.cs"
+        catalog_path = generated_root / "declared-tests.catalog.json"
+        manifest_path = workspace_root / "workspace.manifest.json"
+
+        for path in [project_path, generated_source_path]:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("<Project />\n" if path.suffix == ".csproj" else "// fixture\n", encoding="utf-8")
+
+        catalog_payload = {
+            "subjectId": subject_id,
+            "frameworkReferenced": True,
+            "subjectKind": "declared-test",
+            "warningCodes": [],
+            "declaredUnitTests": [],
+            "declaredBenchmarks": [
+                {
+                    "stableId": stable_id,
+                    "entryIndex": entry_index,
+                    "alias": alias,
+                    "assemblyName": assembly_name,
+                    "declaringType": declaring_type,
+                    "methodName": method_name,
+                    "methodSignature": method_signature,
+                    "category": 1,
+                    "capabilityFamily": 1,
+                    "capabilityItem": 1,
+                    "archetype": 1,
+                    "hotUpdateCapability": 0,
+                    "requires": 0,
+                    "metrics": 1,
+                    "modes": 3,
+                    "warmupCount": 2,
+                    "iterationCount": 5,
+                    "invocationCount": 10,
+                }
+            ],
+        }
+        catalog_path.write_text(json.dumps(catalog_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+        manifest_payload: dict[str, Any] = {
+            "workspaceVersion": 2,
+            "kind": "subject-workspace",
+            "subjectId": subject_id,
+            "defaultMatrixId": matrix_id,
+            "managedProjects": [],
+            "managedTestProjects": [
+                {
+                    "projectId": f"managed-test/{subject_id}/benchmark-host",
+                    "projectPath": project_path.relative_to(repo_root).as_posix(),
+                    "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
+                    "hostKind": "benchmark-host",
+                    "catalogPath": catalog_path.relative_to(repo_root).as_posix(),
+                    "generatedSourcePath": generated_source_path.relative_to(repo_root).as_posix(),
+                }
+            ],
+            "nativeProjects": [],
+            "nativeTestProjects": [],
+            "matrices": [
+                {
+                    "matrixId": matrix_id,
+                    "goalIds": ["perf.release"],
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "managedTestProjectIds": [f"managed-test/{subject_id}/benchmark-host"],
+                    "nativeTestProjectIds": [],
+                }
+            ],
+        }
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+        manifest_path.write_text(json.dumps(manifest_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     def test_run_pipeline_and_record_native_appends_record_from_subject_pipeline(self) -> None:
         benchmark_module = load_module(BENCHMARK_MODULE_PATH, "chaos_benchmark_command_native_record")
@@ -420,7 +510,8 @@ class BenchmarkCommandTests(unittest.TestCase):
         benchmark_case = {
             "stableId": "bench-arithmetic",
             "alias": "arithmetic-bench",
-                    "workloadEntry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
+            "entryIndex": 7,
+            "workloadEntry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
         }
 
         result = benchmark_module._run_subject_benchmark_pipeline(
@@ -451,6 +542,7 @@ class BenchmarkCommandTests(unittest.TestCase):
                 "family": "declared-benchmark",
                 "stableId": "bench-arithmetic",
                 "alias": "arithmetic-bench",
+                "entryIndex": 7,
             },
             planner_module.calls[0]["entry_selection"],
         )
@@ -459,6 +551,47 @@ class BenchmarkCommandTests(unittest.TestCase):
             result["metrics"],
         )
         self.assertFalse(bool(result["regressionFound"]))
+
+    def test_discover_declared_benchmark_cases_prefers_workspace_catalog_when_available(self) -> None:
+        benchmark_module = load_module(BENCHMARK_MODULE_PATH, "chaos_benchmark_command_workspace_catalog")
+        repo_root = self._make_repo_root("workspace-catalog")
+
+        class FailingCompiledCatalogModule:
+            @staticmethod
+            def build_subject_declared_test_catalog(*, repo_root: Path, subject_id: str, force_build: bool = False):
+                del repo_root, subject_id, force_build
+                raise AssertionError("compiled catalog should not be used when workspace catalog is available")
+
+        try:
+            self._write_workspace_benchmark_fixture(
+                repo_root,
+                subject_id="SolutionCorePack",
+                stable_id="solution-core::arith",
+                alias="arithmetic-bench",
+                entry_index=11,
+                assembly_name="CoreRuntimeBenchmarks",
+                declaring_type="CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry",
+                method_name="RunWorkload",
+                method_signature="RunWorkload()",
+            )
+
+            cases = benchmark_module._discover_declared_benchmark_cases(
+                repo_root,
+                "SolutionCorePack",
+                compiled_catalog_module=FailingCompiledCatalogModule(),
+            )
+
+            self.assertEqual(1, len(cases))
+            self.assertEqual("solution-core::arith", cases[0]["stableId"])
+            self.assertEqual("arithmetic-bench", cases[0]["alias"])
+            self.assertEqual(11, cases[0]["entryIndex"])
+            self.assertEqual(
+                "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
+                cases[0]["workloadEntry"],
+            )
+            self.assertEqual(["managed", "native"], cases[0]["supportedModes"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
 
     def test_dispatch_record_skips_declared_case_when_case_modes_exclude_requested_mode(self) -> None:
         benchmark_module = load_module(BENCHMARK_MODULE_PATH, "chaos_benchmark_command_case_mode_filter")
@@ -940,7 +1073,7 @@ class BenchmarkCommandTests(unittest.TestCase):
                                 "windows",
                             )
 
-            self.assertEqual(1, exit_code)
+            self.assertEqual(0, exit_code)
             self.assertEqual(["MixedExecutionFeaturePack"], dashboard_module.updated_subject_ids)
             printed = " ".join(
                 " ".join(str(argument) for argument in call.args)

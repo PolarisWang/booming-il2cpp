@@ -2,6 +2,13 @@
 ???? `docs/dev` ????????
 | ?? | lifecycle_status | phase | ???? | ??? | active |
 | --- | --- | --- | --- | --- | --- |
+| [20260414-37-hybridclr-aligned-aot-hotupdate-development-plan](in-progress/20260414-37-hybridclr-aligned-aot-hotupdate-development-plan/STATUS.md) | in_progress | roadmap | 2026-04-14 23:34:39 +08:00 | 审阅 `roadmap-v1-01.md`，然后开始逐条讨论 Phase 0 的 Q0/Q1。 | true |
+| [20260414-36-planning-tests-genericization-followup](completed/20260414-36-planning-tests-genericization-followup/STATUS.md) | completed | completed | 2026-04-14 19:54:36 +08:00 | 无。本 follow-up 已完成并归档；后续若继续扩大 planning/registry/reporting 的 generic 化边界，请另起新任务。 | false |
+| [20260414-20-subject-generated-test-workspace-roadmap](completed/20260414-20-subject-generated-test-workspace-roadmap/STATUS.md) | completed | completed | 2026-04-14 18:37:13 +08:00 | 无。本 roadmap 已完成并归档；如需继续 generic 化 tests/planner 中残余的 retained-subject 逻辑，请另起 follow-up。 | false |
+| [20260414-33-phase-3-unified-test-entry-and-registry-cutover](completed/20260414-33-phase-3-unified-test-entry-and-registry-cutover/STATUS.md) | completed | completed | 2026-04-14 18:37:13 +08:00 | 无。本 child task 已完成；Phase 4/5 收口结果已并入父 roadmap 一并归档。 | false |
+| [20260414-32-phase-2-workspace-v2-and-native-test-project-generation](completed/20260414-32-phase-2-workspace-v2-and-native-test-project-generation/STATUS.md) | completed | completed | 2026-04-14 17:32:13 +08:00 | 返回父 roadmap，创建并执行 `20260414-33-phase-3-unified-test-entry-and-registry-cutover`。 | false |
+| [20260414-31-phase-1-declared-catalog-to-managed-test-host](completed/20260414-31-phase-1-declared-catalog-to-managed-test-host/STATUS.md) | completed | completed | 2026-04-14 17:04:51 +08:00 | 返回父 roadmap，创建并执行 `20260414-32-phase-2-workspace-v2-and-native-test-project-generation`。 | false |
+| [20260414-30-phase-0-generated-workspace-contract-and-legacy-inventory](completed/20260414-30-phase-0-generated-workspace-contract-and-legacy-inventory/STATUS.md) | completed | completed | 2026-04-14 16:49:05 +08:00 | 返回父 roadmap，创建并执行 `20260414-31-phase-1-declared-catalog-to-managed-test-host`。 | false |
 | [20260414-12-il2cpp-core-capability-development-roadmap](completed/20260414-12-il2cpp-core-capability-development-roadmap/STATUS.md) | completed | completed | 2026-04-14 15:14:44 +08:00 | 无。本 roadmap 已完成并归档；如需继续扩展 IL2CPP core capability coverage，请另起 follow-up。 | false |
 | [20260414-19-phase-6-mixed-execution-hotupdate-and-release-gates](completed/20260414-19-phase-6-mixed-execution-hotupdate-and-release-gates/STATUS.md) | completed | completed | 2026-04-14 14:07:36 +08:00 | 无。Phase 6 已完成，返回父 roadmap 做最终归档。 | false |
 | [20260414-18-phase-5-full-solution-and-productization-closure](completed/20260414-18-phase-5-full-solution-and-productization-closure/STATUS.md) | completed | completed | 2026-04-14 14:07:36 +08:00 | 返回父 roadmap，切入 `20260414-19-phase-6-mixed-execution-hotupdate-and-release-gates`。 | false |
@@ -89,6 +96,7 @@
 | [20260404-02-booming-docs-migration](completed/20260404-02-booming-docs-migration/STATUS.md) | completed | reviewing | 2026-04-04 13:57:28 +0800 | 鏃犮€傚闇€褰诲簳绉婚櫎 `docs/booming`锛岃鍙﹀紑 follow-up 澶勭悊鍘嗗彶璺緞娓呯悊銆?| false |
 | [20260404-01-skill-flow-refactor](completed/20260404-01-skill-flow-refactor/STATUS.md) | completed | reviewing | 2026-04-04 13:45:41 +0800 | 鏃犮€傚闇€缁х画鎻愬崌杩愯鏃堕獙璇佺ǔ瀹氭€э紝璇锋柊寤?follow-up 浠诲姟銆?| false |
 | [20260411-05-mobile-runtime-host](hanging/20260411-05-mobile-runtime-host/STATUS.md) | hanging | hanging | 2026-04-12 00:04:39 +08:00 | 濡傚悗缁渶瑕佹棤 waiver 鐨?mobile 鍙戝竷璇佹嵁锛屽噯澶?`macOS + Xcode` 瀹夸富鍚庢仮澶嶆湰浠诲姟锛岀户缁?Batch 3.4-3.7銆?.2-4.4锛屽苟鎸夐渶琛ラ綈 crash/perf/package baseline銆?| false |
+
 
 
 

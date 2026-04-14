@@ -10,6 +10,8 @@ from typing import Any
 try:
     from ..core import tooling as tooling_module
     from ..core.common import combine_process_output, read_json, run_process, write_json
+    from ..testing import compiled_catalog as compiled_catalog_module
+    from ..testing import generated_managed_hosts as generated_managed_hosts_module
     from ..testing import subject_executor as subject_executor_module
     from ..testing import subject_planner as subject_planner_module
     from ..testing import subjects as subjects_module
@@ -19,6 +21,8 @@ except ImportError:
     sys.path.insert(0, str(root))
     from core import tooling as tooling_module
     from core.common import combine_process_output, read_json, run_process, write_json
+    from testing import compiled_catalog as compiled_catalog_module
+    from testing import generated_managed_hosts as generated_managed_hosts_module
     from testing import subject_executor as subject_executor_module
     from testing import subject_planner as subject_planner_module
     from testing import subjects as subjects_module
@@ -42,6 +46,8 @@ VCX_PROJECT_TYPE_GUID = "8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942"
 SUBJECT_GENERATED_NATIVE_TARGET = "chaos_subject_generated_native"
 SUBJECT_PROOF_NATIVE_TARGET = "chaos_subject_reference_proof"
 SUBJECT_VISUAL_STUDIO_STATE_VERSION = 8
+SUBJECT_WORKSPACE_VERSION = 2
+_ASSEMBLY_NAME_PATTERN = re.compile(r"<AssemblyName>\s*([^<]+)\s*</AssemblyName>", re.IGNORECASE)
 CORE_MANAGED_PROJECTS = [
     "Chaos.IL2CPP.Contracts",
     "Chaos.IL2CPP.Loader",
@@ -951,18 +957,108 @@ def _subject_id_from_options(options: dict[str, object]) -> str:
     return subject_ref.split("/", 1)[1]
 
 
-def _subject_managed_projects(manifest: dict[str, Any]) -> list[str]:
-    projects = [str(dict(manifest.get("source") or {}).get("path") or "")]
-    validation = dict(manifest.get("validation") or {})
-    for item in validation.values():
-        project_path = str(dict(item).get("project") or "")
-        if project_path:
-            projects.append(project_path)
-    deduped: list[str] = []
-    for project_path in projects:
-        if project_path and project_path not in deduped:
-            deduped.append(project_path)
-    return deduped
+def _subject_source_project_paths(repo_root: Path, manifest: dict[str, Any]) -> list[str]:
+    project_paths = subjects_module.resolve_source_solution_project_paths(repo_root, manifest)
+    if project_paths:
+        return project_paths
+
+    primary_project_path = subjects_module.resolve_source_primary_project_path(manifest)
+    return [primary_project_path] if primary_project_path else []
+
+
+def _project_assembly_name(repo_root: Path, project_path_text: str) -> str:
+    project_path = repo_root / project_path_text
+    if project_path.is_file():
+        try:
+            project_text = project_path.read_text(encoding="utf-8")
+        except OSError:
+            project_text = ""
+        match = _ASSEMBLY_NAME_PATTERN.search(project_text)
+        if match is not None:
+            assembly_name = match.group(1).strip()
+            if assembly_name:
+                return assembly_name
+    return Path(project_path_text).stem
+
+
+def _subject_managed_projects(repo_root: Path, manifest: dict[str, Any]) -> list[dict[str, Any]]:
+    subject_id = str(manifest.get("subjectId") or "")
+    primary_project_path = subjects_module.resolve_source_primary_project_path(manifest)
+    project_records: list[dict[str, Any]] = []
+    for project_path in _subject_source_project_paths(repo_root, manifest):
+        project_records.append(
+            {
+                "projectId": f"managed/{subject_id}/{_normalize_project_name_fragment(Path(project_path).stem)}",
+                "projectPath": project_path,
+                "assemblyName": _project_assembly_name(repo_root, project_path),
+                "isPrimary": project_path == primary_project_path,
+            }
+        )
+    return project_records
+
+
+def _manifest_project_paths(entries: list[Any]) -> list[str]:
+    project_paths: list[str] = []
+    for entry in entries:
+        if isinstance(entry, dict):
+            project_path = str(entry.get("projectPath") or "")
+        else:
+            project_path = str(entry or "")
+        if project_path and project_path not in project_paths:
+            project_paths.append(project_path)
+    return project_paths
+
+
+def _manifest_workspace_version(manifest: dict[str, Any]) -> int:
+    try:
+        return int(manifest.get("workspaceVersion") or 0)
+    except (TypeError, ValueError):
+        return 0
+
+
+def _manifest_project_records_by_id(entries: list[Any]) -> dict[str, dict[str, Any]]:
+    records: dict[str, dict[str, Any]] = {}
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+        project_id = str(entry.get("projectId") or "").strip()
+        if not project_id:
+            continue
+        records[project_id] = dict(entry)
+    return records
+
+
+def _subject_matrix_native_entries(manifest: dict[str, Any], matrix: dict[str, Any]) -> list[dict[str, Any]]:
+    if _manifest_workspace_version(manifest) < SUBJECT_WORKSPACE_VERSION:
+        return [dict(item) for item in list(matrix.get("nativeProjects") or []) if isinstance(item, dict)]
+
+    records_by_id = {
+        **_manifest_project_records_by_id(list(manifest.get("nativeProjects") or [])),
+        **_manifest_project_records_by_id(list(manifest.get("nativeTestProjects") or [])),
+    }
+    entries: list[dict[str, Any]] = []
+    for project_id in [
+        *list(matrix.get("nativeProjectIds") or []),
+        *list(matrix.get("nativeTestProjectIds") or []),
+    ]:
+        record = dict(records_by_id.get(str(project_id) or "") or {})
+        if not record:
+            continue
+        if not str(record.get("projectPath") or ""):
+            continue
+        if not str(record.get("targetId") or ""):
+            record["targetId"] = Path(str(record["projectPath"])).stem
+        entries.append(record)
+    return entries
+
+
+def _subject_matrix_configure_root(manifest: dict[str, Any], matrix: dict[str, Any]) -> str:
+    native_entries = _subject_matrix_native_entries(manifest, matrix)
+    for entry in native_entries:
+        configure_root = str(entry.get("configureRoot") or "")
+        if configure_root:
+            return configure_root
+    return str(matrix.get("configureRoot") or "")
 
 
 def _subject_variant(manifest: dict[str, Any], options: dict[str, object]) -> str:
@@ -1011,6 +1107,59 @@ def _pipeline_has_generated_stage(manifest: dict[str, Any], pipeline_id: str) ->
     return False
 
 
+def _subject_matrix_pipeline_id(matrix: dict[str, Any]) -> str:
+    return str(matrix.get("pipelineId") or "")
+
+
+def _subject_matrix_target_platform(matrix: dict[str, Any]) -> str:
+    execution_context = dict(matrix.get("executionContext") or {})
+    return str(execution_context.get("targetPlatform") or "")
+
+
+def _subject_matrix_generated_stage_kind(manifest: dict[str, Any], matrix: dict[str, Any]) -> str:
+    pipeline_id = _subject_matrix_pipeline_id(matrix)
+    if not pipeline_id:
+        return ""
+    pipeline = subjects_module.find_pipeline(manifest, pipeline_id)
+    for stage in list(pipeline.get("stages") or []):
+        bucket = str(stage.get("bucket") or "")
+        kind = str(stage.get("kind") or "")
+        if bucket == "generated" or kind.startswith("generated-"):
+            return kind
+    return ""
+
+
+def _subject_matrix_has_generated_stage(manifest: dict[str, Any], matrix: dict[str, Any]) -> bool:
+    return bool(_subject_matrix_generated_stage_kind(manifest, matrix))
+
+
+def _subject_matrix_requires_workspace_configure(manifest: dict[str, Any], matrix: dict[str, Any]) -> bool:
+    generated_stage_kind = _subject_matrix_generated_stage_kind(manifest, matrix)
+    if generated_stage_kind not in {"generated-native-proof", "generated-engine-proof"}:
+        return False
+    return _subject_matrix_target_platform(matrix) in {"windows-x64", "android-arm64", "linux-x64"}
+
+
+def _subject_matrix_supports_workspace_generation(
+    repo_root: Path,
+    *,
+    subject_id: str,
+    manifest: dict[str, Any],
+    matrix: dict[str, Any],
+) -> bool:
+    generated_stage_kind = _subject_matrix_generated_stage_kind(manifest, matrix)
+    if not generated_stage_kind:
+        return True
+    if generated_stage_kind == "generated-native-aot":
+        return True
+
+    target_platform = _subject_matrix_target_platform(matrix)
+    if target_platform == "windows-x64":
+        proof_main_path = repo_root / "subjects" / subject_id / "validation" / "proof" / "native-reference" / "main.cpp"
+        return proof_main_path.is_file()
+    return target_platform in {"android-arm64", "linux-x64"}
+
+
 def _subject_supports_workspace_generation(repo_root: Path, subject_id: str, host_platform: str) -> bool:
     manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
     try:
@@ -1021,16 +1170,13 @@ def _subject_supports_workspace_generation(repo_root: Path, subject_id: str, hos
     if not selected_matrices:
         return False
 
-    proof_root = repo_root / "subjects" / subject_id / "validation" / "proof" / "native-reference"
-    proof_main_path = proof_root / "main.cpp"
     for matrix in selected_matrices:
-        pipeline_id = str(matrix.get("pipelineId") or "")
-        if not pipeline_id or not _pipeline_has_generated_stage(manifest, pipeline_id):
-            return False
-
-        execution_context = dict(matrix.get("executionContext") or {})
-        target_platform = str(execution_context.get("targetPlatform") or "")
-        if target_platform == "windows-x64" and not proof_main_path.is_file():
+        if not _subject_matrix_supports_workspace_generation(
+            repo_root,
+            subject_id=subject_id,
+            manifest=manifest,
+            matrix=matrix,
+        ):
             return False
 
     return True
@@ -1044,6 +1190,14 @@ def _subject_matrix_goal(manifest: dict[str, Any], matrix: dict[str, Any]) -> st
     if supported_goals:
         return supported_goals[0]
     raise RuntimeError(f"matrix '{matrix.get('matrixId')}' does not declare supportedGoals")
+
+
+def _subject_workspace_default_matrix_id(manifest: dict[str, Any], selected_matrices: list[dict[str, Any]]) -> str:
+    manifest_default_matrix_id = str(manifest.get("defaultMatrix") or "")
+    selected_matrix_ids = {str(matrix.get("matrixId") or "") for matrix in selected_matrices}
+    if manifest_default_matrix_id and manifest_default_matrix_id in selected_matrix_ids:
+        return manifest_default_matrix_id
+    return str(selected_matrices[0].get("matrixId") or "")
 
 
 def _materialize_subject_native_reference_source(
@@ -1266,9 +1420,32 @@ def _subject_native_projects(
 
 def _find_native_project(native_projects: list[dict[str, Any]], target_id: str) -> dict[str, Any] | None:
     for item in native_projects:
-        if str(item.get("targetId") or "") == target_id:
+        if _native_project_target_id(item) == target_id:
             return item
     return None
+
+
+def _find_native_project_by_project_id(native_projects: list[dict[str, Any]], project_id: str) -> dict[str, Any] | None:
+    for item in native_projects:
+        if str(item.get("projectId") or "") == project_id:
+            return item
+    return None
+
+
+def _native_project_target_id(native_project: dict[str, Any]) -> str:
+    target_id = str(native_project.get("targetId") or "").strip()
+    if target_id:
+        return target_id
+
+    build_args = [str(item) for item in list(native_project.get("buildArgs") or []) if str(item)]
+    target_id = _build_target_from_args(build_args, "")
+    if target_id:
+        return target_id
+
+    project_path = str(native_project.get("projectPath") or "").strip()
+    if project_path:
+        return Path(project_path).stem
+    return ""
 
 
 def _select_subject_native_target(
@@ -1301,16 +1478,111 @@ def _subject_native_project_path(native_projects: list[dict[str, Any]], target_i
     return project_path or None
 
 
-def _subject_solution_native_project_paths(native_projects: list[dict[str, Any]]) -> list[str]:
-    top_level_kinds = {
-        "generated-native",
-        "proof-native",
-    }
+def _subject_solution_native_project_paths(
+    native_projects: list[dict[str, Any]],
+    *,
+    target_platform: str,
+    host_platform: str,
+) -> list[str]:
+    if host_platform == "windows" and target_platform != "windows-x64":
+        return []
     return [
         str(item.get("projectPath") or "")
         for item in native_projects
-        if str(item.get("kind") or "") in top_level_kinds and str(item.get("projectPath") or "")
+        if str(item.get("projectPath") or "")
     ]
+
+
+def _declared_host_project_suffix(host_kind: str) -> str:
+    if host_kind == "proof-host":
+        return "DeclaredProofHost"
+    if host_kind == "benchmark-host":
+        return "DeclaredBenchmarkHost"
+    raise ValueError(f"unsupported declared host kind: {host_kind}")
+
+
+def _subject_managed_test_projects(
+    repo_root: Path,
+    *,
+    subject_id: str,
+    manifest: dict[str, Any],
+    workspace_root: Path,
+    managed_projects: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[str], list[dict[str, str]], list[str]]:
+    declared_catalog = compiled_catalog_module.build_subject_declared_test_catalog(
+        repo_root=repo_root,
+        subject_id=subject_id,
+    )
+    unit_entries = [dict(item) for item in list(declared_catalog.get("declaredUnitTests") or []) if isinstance(item, dict)]
+    benchmark_entries = [dict(item) for item in list(declared_catalog.get("declaredBenchmarks") or []) if isinstance(item, dict)]
+    if not unit_entries and not benchmark_entries:
+        return [], [], [], []
+
+    managed_tests_root = workspace_root / "managed-tests"
+    generated_root = managed_tests_root / "Generated"
+    generated_root.mkdir(parents=True, exist_ok=True)
+    catalog_path = generated_root / "declared-tests.catalog.json"
+    write_json(catalog_path, declared_catalog)
+
+    subject_project_references = [str(item.get("projectPath") or "") for item in managed_projects if str(item.get("projectPath") or "")]
+    records: list[dict[str, Any]] = []
+    solution_project_paths: list[str] = []
+    important_outputs: list[dict[str, str]] = []
+    artifacts = [_path_text(repo_root, catalog_path)]
+
+    host_specs = [
+        ("proof-host", unit_entries, "ChaosGeneratedDeclaredTests.g.cs"),
+        ("benchmark-host", benchmark_entries, "ChaosGeneratedDeclaredBenchmarks.g.cs"),
+    ]
+    for host_kind, entries, generated_source_name in host_specs:
+        if not entries:
+            continue
+
+        host_suffix = _declared_host_project_suffix(host_kind)
+        assembly_name = f"{subject_id}.{host_suffix}"
+        generated_source_path = generated_root / generated_source_name
+        project_path = managed_tests_root / f"{assembly_name}.csproj"
+        generated_source_path.write_text(
+            generated_managed_hosts_module.render_declared_test_host_source(
+                subject_id=subject_id,
+                host_kind=host_kind,
+                entries=entries,
+            ),
+            encoding="utf-8",
+        )
+        project_path.write_text(
+            generated_managed_hosts_module.render_declared_test_host_project(
+                subject_id=subject_id,
+                host_kind=host_kind,
+                project_references=subject_project_references,
+                assembly_name=assembly_name,
+            ),
+            encoding="utf-8",
+        )
+        record = {
+            "projectId": f"managed-test/{subject_id}/{host_kind}",
+            "projectPath": _path_text(repo_root, project_path),
+            "assemblyName": assembly_name,
+            "hostKind": host_kind,
+            "catalogPath": _path_text(repo_root, catalog_path),
+            "generatedSourcePath": _path_text(repo_root, generated_source_path),
+        }
+        records.append(record)
+        solution_project_paths.append(record["projectPath"])
+        important_outputs.append(
+            {
+                "label": "Proof host project" if host_kind == "proof-host" else "Benchmark host project",
+                "path": record["projectPath"],
+            }
+        )
+        artifacts.extend(
+            [
+                record["projectPath"],
+                record["generatedSourcePath"],
+            ]
+        )
+
+    return records, solution_project_paths, important_outputs, artifacts
 
 
 def _discover_subject_ids(repo_root: Path, host_platform: str) -> list[str]:
@@ -1341,14 +1613,22 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
     generated_matrix_ids = [
         str(matrix.get("matrixId") or "")
         for matrix in selected_matrices
-        if str(dict(matrix.get("executionContext") or {}).get("targetPlatform") or "") == "windows-x64"
+        if _subject_matrix_requires_workspace_configure(manifest, matrix) and _subject_matrix_target_platform(matrix) == "windows-x64"
     ]
     multi_matrix_generated = len(generated_matrix_ids) > 1
-    cmake_path, cmake_env = tooling_module.cmake_environment(repo_root)
-    if cmake_path is None:
-        raise RuntimeError("cmake not found")
+    configured_matrices = [
+        dict(matrix)
+        for matrix in selected_matrices
+        if _subject_matrix_requires_workspace_configure(manifest, matrix)
+    ]
+    cmake_path: str | None = None
+    cmake_env: dict[str, str] | None = None
+    if configured_matrices:
+        cmake_path, cmake_env = tooling_module.cmake_environment(repo_root)
+        if cmake_path is None:
+            raise RuntimeError("cmake not found")
 
-    managed_projects = _subject_managed_projects(manifest)
+    managed_projects = _subject_managed_projects(repo_root, manifest)
     workspace_root = _subject_workspace_root(repo_root, subject_id)
     solution_path = workspace_root / f"{subject_id}.sln"
     manifest_path = _subject_workspace_manifest_path(repo_root, subject_id)
@@ -1356,13 +1636,30 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
         _reset_stale_visual_studio_state(workspace_root, manifest_path)
     _clear_dir(workspace_root / "generated")
 
+    managed_test_projects, solution_managed_test_project_paths, managed_test_outputs, managed_test_artifacts = _subject_managed_test_projects(
+        repo_root,
+        subject_id=subject_id,
+        manifest=manifest,
+        workspace_root=workspace_root,
+        managed_projects=managed_projects,
+    )
+    managed_test_projects_by_host_kind = {
+        str(item.get("hostKind") or ""): str(item.get("projectId") or "")
+        for item in managed_test_projects
+        if str(item.get("hostKind") or "") and str(item.get("projectId") or "")
+    }
+
     matrix_payloads: list[dict[str, Any]] = []
     solution_native_project_paths: list[str] = []
+    workspace_native_projects: list[dict[str, Any]] = []
+    workspace_native_test_projects: list[dict[str, Any]] = []
     artifacts = [_path_text(repo_root, manifest_path)]
     important_outputs = [
         {"label": "Workspace manifest", "path": _path_text(repo_root, manifest_path)},
         {"label": "Managed solution", "path": _path_text(repo_root, solution_path)},
     ]
+    important_outputs.extend(managed_test_outputs)
+    artifacts.extend(managed_test_artifacts)
     console_parts: list[str] = []
     mirrored_generated_roots: dict[str, Path] = {}
     for matrix in selected_matrices:
@@ -1370,8 +1667,9 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
         _emit_progress(progress_callback, "artifact", f"{subject_id}/{matrix_id}")
         execution_context = dict(matrix.get("executionContext") or {})
         target_platform = str(execution_context.get("targetPlatform") or "")
+        matrix_requires_workspace_configure = _subject_matrix_requires_workspace_configure(manifest, matrix)
         mirrored_generated_root: Path | None = None
-        if target_platform == "windows-x64":
+        if matrix_requires_workspace_configure and target_platform == "windows-x64":
             generated_run_id = _subject_generated_run_id(matrix_id) if multi_matrix_generated else "subject-exec"
             _ensure_subject_generated_source(
                 repo_root,
@@ -1391,44 +1689,55 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
                 multi_matrix=multi_matrix_generated,
             )
             mirrored_generated_roots[matrix_id] = mirrored_generated_root
-        configure_root = workspace_root / "native" / matrix_id
-        _clear_dir(configure_root)
-        configure_root.parent.mkdir(parents=True, exist_ok=True)
-        configure_args, build_args, primary_open_target = _subject_configure_arguments(
-            repo_root,
-            subject_id=subject_id,
-            matrix=matrix,
-            variant=variant,
-            workspace_root=workspace_root,
-            mirrored_generated_root=mirrored_generated_root,
-            configure_root=configure_root,
-            cmake_path=cmake_path,
-            host_platform=host_platform,
-        )
-        output = _run_checked(configure_args, repo_root=repo_root, failure_message=f"subject workspace configure failed: {matrix_id}", env=cmake_env)
-        if output:
-            console_parts.append(output)
-        if host_platform == "windows":
-            _rewrite_configure_root_vcxproj_project_names(
-                configure_root,
-                matrix_id=matrix_id,
+        configure_root: Path | None = None
+        build_args: list[str] = []
+        primary_open_target = ""
+        native_projects: list[dict[str, Any]] = []
+        if matrix_requires_workspace_configure:
+            configure_root = workspace_root / "native" / matrix_id
+            _clear_dir(configure_root)
+            configure_root.parent.mkdir(parents=True, exist_ok=True)
+            configure_args, build_args, primary_open_target = _subject_configure_arguments(
+                repo_root,
+                subject_id=subject_id,
+                matrix=matrix,
+                variant=variant,
+                workspace_root=workspace_root,
+                mirrored_generated_root=mirrored_generated_root,
+                configure_root=configure_root,
+                cmake_path=cmake_path or "",
+                host_platform=host_platform,
+            )
+            output = _run_checked(
+                configure_args,
+                repo_root=repo_root,
+                failure_message=f"subject workspace configure failed: {matrix_id}",
+                env=cmake_env,
+            )
+            if output:
+                console_parts.append(output)
+            if host_platform == "windows":
+                _rewrite_configure_root_vcxproj_project_names(
+                    configure_root,
+                    matrix_id=matrix_id,
+                    primary_open_target=primary_open_target,
+                    target_platform=target_platform,
+                    host_platform=host_platform,
+                )
+                _rewrite_subject_facing_vcxproj_project_references(
+                    configure_root,
+                    target_platform=target_platform,
+                    host_platform=host_platform,
+                )
+
+            native_projects = _subject_native_projects(
+                repo_root,
+                configure_root=configure_root,
                 primary_open_target=primary_open_target,
                 target_platform=target_platform,
                 host_platform=host_platform,
             )
-            _rewrite_subject_facing_vcxproj_project_references(
-                configure_root,
-                target_platform=target_platform,
-                host_platform=host_platform,
-            )
 
-        native_projects = _subject_native_projects(
-            repo_root,
-            configure_root=configure_root,
-            primary_open_target=primary_open_target,
-            target_platform=target_platform,
-            host_platform=host_platform,
-        )
         default_build_native_target = _build_target_from_args(list(build_args), primary_open_target)
         default_open_native_target = _select_subject_native_target(
             requested_open_native_target,
@@ -1438,27 +1747,79 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
         native_project_path = _subject_native_project_path(native_projects, default_open_native_target)
         generated_native_project_path = _subject_native_project_path(native_projects, SUBJECT_GENERATED_NATIVE_TARGET)
         proof_native_project_path = _subject_native_project_path(native_projects, SUBJECT_PROOF_NATIVE_TARGET)
-        matrix_payloads.append(
-            {
+        matrix_native_project_ids: list[str] = []
+        matrix_native_test_project_ids: list[str] = []
+        for native_project in native_projects:
+            native_project_path_text = str(native_project.get("projectPath") or "")
+            if not native_project_path_text:
+                continue
+            target_id = str(native_project.get("targetId") or "") or Path(native_project_path_text).stem
+            base_payload = {
+                "projectPath": native_project_path_text,
+                "configureRoot": _path_text(repo_root, configure_root),
                 "matrixId": matrix_id,
                 "targetPlatform": target_platform,
                 "toolchainProfile": str(execution_context.get("toolchainProfile") or ""),
-                "configureRoot": _path_text(repo_root, configure_root),
-                "generatedRoot": _path_text(repo_root, mirrored_generated_root) if mirrored_generated_root is not None else None,
-                "nativeProjects": native_projects,
-                "defaultOpenNativeProject": default_open_native_target,
-                "defaultBuildNativeProject": default_build_native_target,
-                "generatedNativeProjectPath": generated_native_project_path,
-                "proofNativeProjectPath": proof_native_project_path,
-                "nativeProjectPath": native_project_path,
-                "buildArgs": list(build_args),
-                "primaryOpenTarget": default_open_native_target,
+                "buildArgs": [str(item) for item in list(native_project.get("buildArgs") or []) if str(item)],
+            }
+            if target_id == SUBJECT_GENERATED_NATIVE_TARGET:
+                project_id = f"native/{subject_id}/{matrix_id}/generated-native"
+                workspace_native_projects.append(
+                    {
+                        "projectId": project_id,
+                        **base_payload,
+                        "deliveryKind": "generated-static-library",
+                    }
+                )
+                matrix_native_project_ids.append(project_id)
+                continue
+            if target_id == SUBJECT_PROOF_NATIVE_TARGET:
+                project_id = f"native-test/{subject_id}/{matrix_id}/proof-host"
+                workspace_native_test_projects.append(
+                    {
+                        "projectId": project_id,
+                        **base_payload,
+                        "deliveryKind": "direct-run-host",
+                        "hostKind": "proof-host",
+                        "managedTestProjectId": managed_test_projects_by_host_kind.get("proof-host", ""),
+                    }
+                )
+                matrix_native_test_project_ids.append(project_id)
+                continue
+
+            project_id = f"native/{subject_id}/{matrix_id}/{_normalize_project_name_fragment(target_id)}"
+            workspace_native_projects.append(
+                {
+                    "projectId": project_id,
+                    **base_payload,
+                    "deliveryKind": "workspace-primary",
+                }
+            )
+            matrix_native_project_ids.append(project_id)
+        matrix_payloads.append(
+            {
+                "matrixId": matrix_id,
+                "goalIds": [str(item) for item in list(matrix.get("supportedGoals") or []) if str(item)],
+                "hostPlatform": str(execution_context.get("hostPlatform") or ""),
+                "targetPlatform": target_platform,
+                "toolchainProfile": str(execution_context.get("toolchainProfile") or ""),
+                "managedProjectIds": [str(item.get("projectId") or "") for item in managed_projects if str(item.get("projectId") or "")],
+                "managedTestProjectIds": [str(item.get("projectId") or "") for item in managed_test_projects if str(item.get("projectId") or "")],
+                "nativeProjectIds": matrix_native_project_ids,
+                "nativeTestProjectIds": matrix_native_test_project_ids,
             }
         )
         if mirrored_generated_root is not None:
             artifacts.append(_path_text(repo_root, mirrored_generated_root))
-        artifacts.append(_path_text(repo_root, configure_root))
-        solution_native_project_paths.extend(_subject_solution_native_project_paths(native_projects))
+        if configure_root is not None:
+            artifacts.append(_path_text(repo_root, configure_root))
+        solution_native_project_paths.extend(
+            _subject_solution_native_project_paths(
+                native_projects,
+                target_platform=target_platform,
+                host_platform=host_platform,
+            )
+        )
         label_suffix = f" ({matrix_id})" if len(selected_matrices) > 1 else ""
         if native_project_path:
             important_outputs.append({"label": f"Default native project{label_suffix}", "path": native_project_path})
@@ -1467,20 +1828,28 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
         if proof_native_project_path:
             important_outputs.append({"label": f"Proof native project{label_suffix}", "path": proof_native_project_path})
 
-    _write_solution_file(solution_path, repo_root, managed_projects, solution_native_project_paths)
+    _write_solution_file(
+        solution_path,
+        repo_root,
+        [
+            *_manifest_project_paths(list(managed_projects)),
+            *solution_managed_test_project_paths,
+        ],
+        solution_native_project_paths,
+    )
     artifacts.insert(1, _path_text(repo_root, solution_path))
 
     payload = {
+        "workspaceVersion": SUBJECT_WORKSPACE_VERSION,
         "kind": "subject-workspace",
         "subjectId": subject_id,
         "variant": variant,
-        "visualStudioStateVersion": SUBJECT_VISUAL_STUDIO_STATE_VERSION,
-        "defaultMatrix": str(selected_matrices[0].get("matrixId") or ""),
-        "generatedRoot": _path_text(repo_root, mirrored_generated_roots[str(selected_matrices[0].get("matrixId") or "")])
-        if str(selected_matrices[0].get("matrixId") or "") in mirrored_generated_roots
-        else None,
+        "defaultMatrixId": _subject_workspace_default_matrix_id(manifest, selected_matrices),
         "managedSolutionPath": _path_text(repo_root, solution_path),
         "managedProjects": managed_projects,
+        "managedTestProjects": managed_test_projects,
+        "nativeProjects": workspace_native_projects,
+        "nativeTestProjects": workspace_native_test_projects,
         "matrices": matrix_payloads,
     }
     write_json(manifest_path, payload)
@@ -1797,6 +2166,15 @@ def _subject_matrix_build_args(matrix: dict[str, Any], options: dict[str, object
         default_build_args,
         str(matrix.get("primaryOpenTarget") or ""),
     )
+    if not default_target:
+        for project_id in [str(item) for item in list(matrix.get("nativeTestProjectIds") or []) if str(item)]:
+            native_test_project = _find_native_project_by_project_id(native_projects, project_id)
+            default_target = _native_project_target_id(native_test_project or {})
+            if default_target:
+                break
+    if not default_target:
+        first_native_project = native_projects[0]
+        default_target = _native_project_target_id(first_native_project)
     selected_target = _select_subject_native_target(
         _text_option(options, "native-target"),
         native_projects,
@@ -1821,24 +2199,35 @@ def build_subject_workspace(repo_root: Path, host_platform: str, options: dict[s
     if not bootstrap.ready:
         raise RuntimeError("\n".join(bootstrap.errors) or bootstrap.output or "dotnet not available")
 
-    managed_projects = [str(item) for item in list(manifest.get("managedProjects") or []) if str(item)]
+    managed_projects = _manifest_project_paths(list(manifest.get("managedProjects") or []))
+    managed_test_projects = _manifest_project_paths(list(manifest.get("managedTestProjects") or []))
     matrices = [dict(item) for item in list(manifest.get("matrices") or []) if isinstance(item, dict)]
     selected = _selected_entries(
         matrices,
         explicit_name="matrix",
         all_name="all-targets",
-        default_key=str(manifest.get("defaultMatrix") or ""),
+        default_key=str(manifest.get("defaultMatrixId") or manifest.get("defaultMatrix") or ""),
         default_fallback_key="matrixId",
         options=options,
     )
 
-    console_parts = _build_managed_projects(repo_root, managed_projects)
+    console_parts = _build_managed_projects(repo_root, [*managed_projects, *managed_test_projects])
     for matrix in selected:
+        native_projects = _subject_matrix_native_entries(manifest, matrix)
+        configure_root = _subject_matrix_configure_root(manifest, matrix)
+        if not native_projects and not configure_root:
+            continue
         build_args = [
             "cmake",
             "--build",
-            str(repo_root / str(matrix["configureRoot"])),
-            *_subject_matrix_build_args(matrix, options),
+            str(repo_root / configure_root),
+            *_subject_matrix_build_args(
+                {
+                    **matrix,
+                    "nativeProjects": native_projects,
+                },
+                options,
+            ),
         ]
         output = _run_checked(build_args, repo_root=repo_root, failure_message=f"subject workspace build failed: {matrix['matrixId']}")
         if output:
@@ -1852,7 +2241,7 @@ def build_subject_workspace(repo_root: Path, host_platform: str, options: dict[s
             "subjectId": subject_id,
             "workspaceManifestPath": _path_text(repo_root, manifest_path),
             "builtMatrices": [str(item["matrixId"]) for item in selected],
-            "managedProjects": managed_projects,
+            "managedProjects": [*managed_projects, *managed_test_projects],
         },
     )
     return {

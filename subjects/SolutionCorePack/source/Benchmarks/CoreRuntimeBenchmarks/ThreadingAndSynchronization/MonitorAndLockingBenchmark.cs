@@ -12,7 +12,7 @@ internal static class MonitorAndLockingBenchmarkEntry
         Alias = "monitor-locking-bench",
         CapabilityFamily = ChaosCapabilityFamily.ThreadingAndSynchronization,
         Capability = ChaosCapabilityItem.MonitorAndLocking,
-        Modes = ChaosExecutionMode.Managed,
+        Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native,
         Requires = ChaosRuntimeFeature.Synchronization,
         WarmupCount = 1,
         IterationCount = 3,
