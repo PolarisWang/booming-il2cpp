@@ -6,13 +6,26 @@ public sealed class ILToIRLowering
 {
     public InterpreterIR Lower(IReadOnlyList<ManagedMethodModel> methods)
     {
+        var internalAssemblyNames = methods
+            .Select(method => method.AssemblyName)
+            .ToHashSet(StringComparer.Ordinal);
         return new InterpreterIR
         {
-            Methods = methods.Select(Lower).ToList(),
+            Methods = methods.Select(method => Lower(method, internalAssemblyNames)).ToList(),
         };
     }
 
     public IRMethod Lower(ManagedMethodModel method)
+    {
+        return Lower(
+            method,
+            new HashSet<string>(StringComparer.Ordinal)
+            {
+                method.AssemblyName,
+            });
+    }
+
+    private IRMethod Lower(ManagedMethodModel method, IReadOnlySet<string> internalAssemblyNames)
     {
         if (TryBuildOffsetBlocks(method, out var offsetBlocks, out var offsetToBlockIndex, out var blockIds))
         {
@@ -26,6 +39,7 @@ public sealed class ILToIRLowering
                     index,
                     blockIds,
                     offsetToBlockIndex,
+                    internalAssemblyNames,
                     locals,
                     stack,
                     ref temporaryIndex))
@@ -35,6 +49,16 @@ public sealed class ILToIRLowering
             {
                 MethodId = ManagedNaming.CreateMethodId(method),
                 SubjectId = method.SubjectId,
+                Identity = new ManagedMethodIdentityArtifact
+                {
+                    AssemblyName = method.AssemblyName,
+                    DeclaringTypeSubjectId = method.DeclaringTypeSubjectId,
+                    DefinitionSubjectId = method.DefinitionSubjectId,
+                    SubjectId = method.SubjectId,
+                    MethodId = ManagedNaming.CreateMethodId(method),
+                    Signature = method.Signature,
+                },
+                BodyAvailabilityCode = BodyAvailabilityResolver.Resolve(method),
                 Blocks = blocks,
                 ExceptionRegions = LowerExceptionRegions(method, offsetBlocks, offsetToBlockIndex),
             };
@@ -53,6 +77,7 @@ public sealed class ILToIRLowering
                 index,
                 fallbackBlockIds,
                 new Dictionary<int, int>(),
+                internalAssemblyNames,
                 fallbackLocals,
                 fallbackStack,
                 ref fallbackTemporaryIndex))
@@ -62,6 +87,16 @@ public sealed class ILToIRLowering
         {
             MethodId = ManagedNaming.CreateMethodId(method),
             SubjectId = method.SubjectId,
+            Identity = new ManagedMethodIdentityArtifact
+            {
+                AssemblyName = method.AssemblyName,
+                DeclaringTypeSubjectId = method.DeclaringTypeSubjectId,
+                DefinitionSubjectId = method.DefinitionSubjectId,
+                SubjectId = method.SubjectId,
+                MethodId = ManagedNaming.CreateMethodId(method),
+                Signature = method.Signature,
+            },
+            BodyAvailabilityCode = BodyAvailabilityResolver.Resolve(method),
             Blocks = fallbackBlocks,
         };
     }
@@ -240,6 +275,7 @@ public sealed class ILToIRLowering
         int blockIndex,
         IReadOnlyDictionary<string, int> blockIds,
         IReadOnlyDictionary<int, int> offsetToBlockIndex,
+        IReadOnlySet<string> internalAssemblyNames,
         IDictionary<int, IRTypeTag> locals,
         Stack<IROperand> stack,
         ref int temporaryIndex)
@@ -254,6 +290,7 @@ public sealed class ILToIRLowering
                 instruction,
                 blockIds,
                 offsetToBlockIndex,
+                internalAssemblyNames,
                 method.Body.ExceptionRegions,
                 locals,
                 stack,
@@ -272,6 +309,7 @@ public sealed class ILToIRLowering
         ManagedInstructionModel instruction,
         IReadOnlyDictionary<string, int> blockIds,
         IReadOnlyDictionary<int, int> offsetToBlockIndex,
+        IReadOnlySet<string> internalAssemblyNames,
         IReadOnlyList<ManagedExceptionRegionModel> exceptionRegions,
         IDictionary<int, IRTypeTag> locals,
         Stack<IROperand> stack,
@@ -291,8 +329,8 @@ public sealed class ILToIRLowering
             "mul" => LowerBinaryNumeric(IROpCode.Mul, instruction, stack, ref temporaryIndex),
             "div" => LowerBinaryNumeric(IROpCode.Div, instruction, stack, ref temporaryIndex),
             "rem" => LowerBinaryNumeric(IROpCode.Rem, instruction, stack, ref temporaryIndex),
-            "call" => LowerMethodCall(method, instruction, stack, ref temporaryIndex),
-            "callvirt" => LowerMethodCall(method, instruction, stack, ref temporaryIndex),
+            "call" => LowerMethodCall(method, instruction, internalAssemblyNames, stack, ref temporaryIndex),
+            "callvirt" => LowerMethodCall(method, instruction, internalAssemblyNames, stack, ref temporaryIndex),
             "ceq" => LowerBinaryNumeric(IROpCode.Ceq, instruction, stack, ref temporaryIndex),
             "clt" => LowerBinaryNumeric(IROpCode.Clt, instruction, stack, ref temporaryIndex),
             "cgt" => LowerBinaryNumeric(IROpCode.Cgt, instruction, stack, ref temporaryIndex),
@@ -457,6 +495,7 @@ public sealed class ILToIRLowering
     private static IRInstruction LowerMethodCall(
         ManagedMethodModel method,
         ManagedInstructionModel instruction,
+        IReadOnlySet<string> internalAssemblyNames,
         Stack<IROperand> stack,
         ref int temporaryIndex)
     {
@@ -470,7 +509,11 @@ public sealed class ILToIRLowering
             arguments[index] = Pop(stack, instruction.Op);
         }
 
-        var opCode = ResolveCallOpCode(method, instruction);
+        var dispatchKindCode = HybridDispatchResolver.ResolveInstruction(
+            method.AssemblyName,
+            internalAssemblyNames,
+            instruction);
+        var opCode = ResolveCallOpCode(instruction, dispatchKindCode);
         var resultType = MapTypeTag(instruction.ResultType);
         var operands = new List<IROperand>(capacity: arguments.Length + 1)
         {
@@ -493,6 +536,7 @@ public sealed class ILToIRLowering
         return new IRInstruction
         {
             OpCode = opCode,
+            DispatchKindCode = dispatchKindCode,
             Operands = operands,
             Result = result,
         };
@@ -605,17 +649,22 @@ public sealed class ILToIRLowering
         };
     }
 
-    private static IROpCode ResolveCallOpCode(ManagedMethodModel method, ManagedInstructionModel instruction)
+    private static IROpCode ResolveCallOpCode(
+        ManagedInstructionModel instruction,
+        HybridDispatchKind? dispatchKindCode)
     {
-        if (instruction.Reference is not null &&
-            !string.Equals(instruction.Reference.AssemblyName, method.AssemblyName, StringComparison.Ordinal))
+        if (dispatchKindCode is HybridDispatchKind.Bridge or HybridDispatchKind.ExternalRuntime)
         {
             return IROpCode.CallBridge;
         }
 
-        return string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal)
-            ? IROpCode.CallVirt
-            : IROpCode.Call;
+        if (dispatchKindCode == HybridDispatchKind.Virtual ||
+            string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal))
+        {
+            return IROpCode.CallVirt;
+        }
+
+        return IROpCode.Call;
     }
 
     private static int GetCallInputCount(ManagedInstructionModel instruction)
@@ -631,40 +680,7 @@ public sealed class ILToIRLowering
 
     private static int GetMethodParameterCount(string subjectId)
     {
-        var openParenthesis = subjectId.LastIndexOf('(');
-        var closeParenthesis = subjectId.LastIndexOf(')');
-        if (openParenthesis < 0 || closeParenthesis < openParenthesis)
-        {
-            throw new InvalidOperationException($"method subject id '{subjectId}' is missing parameter list.");
-        }
-
-        var parameterList = subjectId[(openParenthesis + 1)..closeParenthesis];
-        if (string.IsNullOrWhiteSpace(parameterList))
-        {
-            return 0;
-        }
-
-        var parameterCount = 1;
-        var genericDepth = 0;
-        foreach (var character in parameterList)
-        {
-            switch (character)
-            {
-                case '<':
-                case '[':
-                    genericDepth++;
-                    break;
-                case '>':
-                case ']':
-                    genericDepth--;
-                    break;
-                case ',' when genericDepth == 0:
-                    parameterCount++;
-                    break;
-            }
-        }
-
-        return parameterCount;
+        return ManagedMethodIdentityResolver.ResolveParameterCount(identity: null, fallbackSubjectId: subjectId);
     }
 
     private static IROperand CreateArgumentOperand(int index, IRTypeTag typeTag)

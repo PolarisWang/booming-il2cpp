@@ -529,10 +529,7 @@ class BenchmarkCommandTests(unittest.TestCase):
             "windows-managed-perf",
             planner_module.calls[0]["matrix_id"],
         )
-        self.assertEqual(
-            benchmark_case["workloadEntry"],
-            planner_module.calls[0]["source_entry"],
-        )
+        self.assertIsNone(planner_module.calls[0]["source_entry"])
         self.assertEqual(
             benchmark_case["workloadEntry"],
             planner_module.calls[0]["workload_entry"],

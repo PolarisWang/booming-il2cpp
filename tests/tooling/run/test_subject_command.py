@@ -246,6 +246,7 @@ def make_declared_registry_index(
     alias: str,
     source_entry: str,
     workload_entry: str = "",
+    entry_index: int | None = None,
     default_goal_id: str = "correctness.dev",
     matrix_id: str = "windows-native-check",
 ):
@@ -276,6 +277,8 @@ def make_declared_registry_index(
         "sourceEntry": source_entry,
         "workloadEntry": workload_entry,
     }
+    if entry_index is not None:
+        declared_object["entryIndex"] = entry_index
     return test_module.registry_module.RegistryIndex(
         host_platform="windows",
         suites=[],
@@ -1176,7 +1179,7 @@ class SubjectCommandTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
-    def test_declared_unit_test_dispatch_passes_source_entry_selection_to_subject_planner(self) -> None:
+    def test_declared_unit_test_dispatch_uses_workspace_entry_selection_without_source_entry_routing(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_declared_unit_alias")
         repo_root = make_temp_repo_root("subject-command", "declared-unit-alias")
         manifest: dict[str, Any] = {}
@@ -1256,7 +1259,7 @@ class SubjectCommandTests(unittest.TestCase):
             self.assertEqual(repo_root, build_plan_mock.call_args.args[0])
             self.assertEqual(subject_id, build_plan_mock.call_args.args[1])
             self.assertEqual("workspace-proof-matrix", build_plan_mock.call_args.kwargs["matrix_id"])
-            self.assertEqual(source_entry, build_plan_mock.call_args.kwargs["source_entry"])
+            self.assertIsNone(build_plan_mock.call_args.kwargs["source_entry"])
             self.assertIsNone(build_plan_mock.call_args.kwargs["workload_entry"])
             self.assertEqual(
                 {
@@ -1355,7 +1358,82 @@ class SubjectCommandTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
-    def test_declared_benchmark_dispatch_passes_workload_entry_selection_to_subject_planner(self) -> None:
+    def test_declared_unit_test_dispatch_carries_registry_entry_index_without_workspace_resolution(self) -> None:
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_declared_unit_registry_entry_index")
+        repo_root = make_temp_repo_root("subject-command", "declared-unit-registry-entry-index")
+        manifest: dict[str, Any] = {}
+        subject_id = "SolutionCorePack"
+        stable_id = "solution-core-proof"
+        alias = "solution-core-proof"
+        source_entry = "SolutionCorePack/Launcher.Program::RunProof()"
+        fixed_run_id = "chaos-run-declared-unit-registry-entry-index"
+        registry_index = make_declared_registry_index(
+            test_module,
+            subject_id=subject_id,
+            object_type="declared-unit-test",
+            stable_id=stable_id,
+            alias=alias,
+            source_entry=source_entry,
+            workload_entry="should-be-cleared-for-unit-tests",
+            entry_index=5,
+        )
+        plan = make_subject_plan(
+            subject_id=subject_id,
+            run_id=fixed_run_id,
+            matrix_id="windows-native-check",
+            goal_id="correctness.dev",
+            stage_kind="runtime-observe",
+        )
+        execution_result = build_execution_result(
+            plan,
+            stage_kind="runtime-observe",
+            duration_ms=3,
+            fingerprint="declared-unit-registry-entry-index-fingerprint",
+        )
+
+        try:
+            with patch.object(test_module, "_scan_registry", return_value=registry_index):
+                with patch.object(test_module.subject_planner_module, "build_plan", return_value=plan) as build_plan_mock:
+                    with patch.object(test_module.reporting_module, "build_run_id", return_value=fixed_run_id):
+                        with patch.object(
+                            test_module.subject_executor_module,
+                            "execute_plan",
+                            return_value=execution_result,
+                        ):
+                            with patch.object(
+                                test_module.subject_validations_module,
+                                "run_subject_validations",
+                                side_effect=empty_validation_outcome,
+                            ):
+                                result = test_module.handle(
+                                    {
+                                        "id": "test-declared-unit-test",
+                                        "handler": "test.dispatch",
+                                    },
+                                    repo_root,
+                                    "windows",
+                                    f"test declared-unit-test --id declared-unit-test/{stable_id}",
+                                    manifest,
+                                    {"id": f"declared-unit-test/{stable_id}"},
+                                )
+
+            self.assertEqual("ok", result.status)
+            self.assertEqual(source_entry, build_plan_mock.call_args.kwargs["source_entry"])
+            self.assertIsNone(build_plan_mock.call_args.kwargs["workload_entry"])
+            self.assertEqual(
+                {
+                    "family": "declared-unit-test",
+                    "stableId": stable_id,
+                    "alias": alias,
+                    "entryIndex": 5,
+                },
+                build_plan_mock.call_args.kwargs["entry_selection"],
+            )
+            self.assertNotIn("workspaceExecution", result.payload)
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_declared_benchmark_dispatch_keeps_workload_entry_without_duplicate_source_entry_routing(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_run_test_command_declared_benchmark_alias")
         repo_root = make_temp_repo_root("subject-command", "declared-benchmark-alias")
         manifest: dict[str, Any] = {}
@@ -1439,7 +1517,7 @@ class SubjectCommandTests(unittest.TestCase):
             self.assertEqual(repo_root, build_plan_mock.call_args.args[0])
             self.assertEqual(subject_id, build_plan_mock.call_args.args[1])
             self.assertEqual("workspace-benchmark-matrix", build_plan_mock.call_args.kwargs["matrix_id"])
-            self.assertEqual(source_entry, build_plan_mock.call_args.kwargs["source_entry"])
+            self.assertIsNone(build_plan_mock.call_args.kwargs["source_entry"])
             self.assertEqual(workload_entry, build_plan_mock.call_args.kwargs["workload_entry"])
             self.assertEqual(
                 {

@@ -1,3 +1,4 @@
+using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.HotUpdate;
 using Chaos.TestFramework;
 
@@ -5,7 +6,10 @@ namespace HotUpdateHostPack;
 
 internal static class VersionRollbackProofEntry
 {
-    private const string SubjectId = "VersionRollbackProof/HotPatch::GetValue()";
+    private static readonly ManagedMethodIdentityArtifact HotPatchValueIdentity =
+        ManagedMethodIdentityResolver.Create(
+            "VersionRollbackProof/HotPatch::GetValue()",
+            "System.Int32 HotPatch::GetValue()");
 
     [ChaosUnitTest(
         ChaosUnitCategory.HotUpdateContract,
@@ -50,38 +54,29 @@ internal static class VersionRollbackProofEntry
             runtimeManager.LoadPackage(
                 v1Root,
                 HotUpdatePackageSupport.CurrentAotVersion,
-                subjectIdToConstantInt32: new Dictionary<string, int>(StringComparer.Ordinal)
-                {
-                    [SubjectId] = 11,
-                });
-            var v1Value = runtimeManager.DispatchInt32(SubjectId, GetAotFallback);
+                CreateBindings(11));
+            var v1Value = runtimeManager.DispatchInt32(HotPatchValueIdentity, GetAotFallback);
             Assert.Equal(11, v1Value);
 
             runtimeManager.LoadPackage(
                 v2Root,
                 HotUpdatePackageSupport.CurrentAotVersion,
-                subjectIdToConstantInt32: new Dictionary<string, int>(StringComparer.Ordinal)
-                {
-                    [SubjectId] = 22,
-                });
-            var v2Value = runtimeManager.DispatchInt32(SubjectId, GetAotFallback);
+                CreateBindings(22));
+            var v2Value = runtimeManager.DispatchInt32(HotPatchValueIdentity, GetAotFallback);
             Assert.Equal(22, v2Value);
 
             runtimeManager.Rollback();
-            var rollbackToV1 = runtimeManager.DispatchInt32(SubjectId, GetAotFallback);
+            var rollbackToV1 = runtimeManager.DispatchInt32(HotPatchValueIdentity, GetAotFallback);
             Assert.Equal(11, rollbackToV1);
 
             runtimeManager.Rollback();
-            var rollbackToAot = runtimeManager.DispatchInt32(SubjectId, GetAotFallback);
+            var rollbackToAot = runtimeManager.DispatchInt32(HotPatchValueIdentity, GetAotFallback);
             Assert.Equal(5, rollbackToAot);
 
             var compatible = runtimeManager.LoadPackage(
                 incompatibleRoot,
                 HotUpdatePackageSupport.CurrentAotVersion,
-                subjectIdToConstantInt32: new Dictionary<string, int>(StringComparer.Ordinal)
-                {
-                    [SubjectId] = 99,
-                });
+                CreateBindings(99));
             Assert.False(compatible);
             return 0;
         }
@@ -97,5 +92,20 @@ internal static class VersionRollbackProofEntry
     private static int GetAotFallback()
     {
         return 5;
+    }
+
+    private static HotUpdateMethodBindingSet CreateBindings(int value)
+    {
+        return new HotUpdateMethodBindingSet
+        {
+            ConstantInt32Bindings =
+            [
+                new HotUpdateConstantInt32Binding
+                {
+                    Identity = HotPatchValueIdentity,
+                    ConstantValue = value,
+                },
+            ],
+        };
     }
 }

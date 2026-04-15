@@ -25,6 +25,7 @@ public sealed class DriverEntry
 
         Directory.CreateDirectory(result.OutputRootPath);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.TypedIlIr), result.TypedIlIr);
+        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.AotCoreIr), result.AotCoreIr);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.AotManifest), result.AotManifest);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.MetadataRegistration), result.MetadataRegistration);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.SupplementalMetadataTemplate), result.SupplementalMetadataTemplate);

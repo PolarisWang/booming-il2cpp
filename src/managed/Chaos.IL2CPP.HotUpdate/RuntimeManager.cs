@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Chaos.IL2CPP.Contracts;
 
 namespace Chaos.IL2CPP.HotUpdate;
 
@@ -19,8 +20,8 @@ public enum RuntimeMode
 
 public sealed class RuntimeManager
 {
+    private readonly HotUpdateAssemblyLoader _assemblyLoader = new();
     private readonly HotUpdateMethodRegistry _methodRegistry = new();
-    private readonly SupplementalMetadataLoader _supplementalMetadataLoader = new();
     private readonly Stack<RuntimeSnapshot> _history = new();
     private string? _currentAotVersion;
 
@@ -32,78 +33,33 @@ public sealed class RuntimeManager
 
     public LoadedHotUpdatePackage? LoadedPackage { get; private set; }
 
+    public SupplementalMetadataRegistry SupplementalMetadata { get; } = new();
+
     public string? LastError { get; private set; }
 
     public bool LoadPackage(
         string packageRootPath,
         string currentAotVersion,
-        IReadOnlyDictionary<string, int>? subjectIdToConstantInt32 = null,
-        IReadOnlyDictionary<string, Func<int, int>>? subjectIdToInt32Unary = null,
-        IReadOnlyDictionary<string, Func<IReadOnlyList<object?>, object?>>? subjectIdToGeneric = null)
+        HotUpdateMethodBindingSet bindings)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(packageRootPath);
+        ArgumentNullException.ThrowIfNull(bindings);
 
-        try
-        {
-            var package = PackageReader.ReadFromDirectory(packageRootPath);
-            LoadPackage(
-                package,
-                currentAotVersion,
-                subjectIdToConstantInt32 ?? new Dictionary<string, int>(StringComparer.Ordinal),
-                subjectIdToInt32Unary,
-                subjectIdToGeneric);
-            return true;
-        }
-        catch (Exception exception) when (exception is InvalidOperationException
-                                         or InvalidDataException
-                                         or FileNotFoundException
-                                         or DirectoryNotFoundException
-                                         or JsonException)
-        {
-            LastError = exception.Message;
-            return false;
-        }
+        return TryLoadPackage(
+            packageRootPath,
+            currentAotVersion,
+            package => LoadPackage(package, currentAotVersion, bindings));
     }
 
     public void LoadPackage(
         LoadedHotUpdatePackage package,
         string currentAotVersion,
-        IReadOnlyDictionary<string, int> subjectIdToConstantInt32,
-        IReadOnlyDictionary<string, Func<int, int>>? subjectIdToInt32Unary = null,
-        IReadOnlyDictionary<string, Func<IReadOnlyList<object?>, object?>>? subjectIdToGeneric = null)
+        HotUpdateMethodBindingSet bindings)
     {
         ArgumentNullException.ThrowIfNull(package);
-        ArgumentNullException.ThrowIfNull(subjectIdToConstantInt32);
+        ArgumentNullException.ThrowIfNull(bindings);
 
-        _history.Push(CaptureSnapshot());
-        PackageValidator.ValidateCompatibleTargetAotVersion(package, currentAotVersion);
-
-        _methodRegistry.Clear();
-        foreach (var pair in subjectIdToConstantInt32)
-        {
-            _methodRegistry.RegisterConstantInt32(pair.Key, pair.Value);
-        }
-
-        if (subjectIdToInt32Unary is not null)
-        {
-            foreach (var pair in subjectIdToInt32Unary)
-            {
-                RegisterInt32Unary(pair.Key, pair.Value);
-            }
-        }
-
-        if (subjectIdToGeneric is not null)
-        {
-            foreach (var pair in subjectIdToGeneric)
-            {
-                RegisterMethod(pair.Key, pair.Value);
-            }
-        }
-
-        LoadedPackage = package;
-        _currentAotVersion = currentAotVersion;
-        Mode = RuntimeMode.Mixed;
-        LastError = null;
+        ActivatePackage(package, currentAotVersion, () => ApplyBindings(bindings));
     }
 
     public void UnloadPackage()
@@ -112,6 +68,7 @@ public sealed class RuntimeManager
         LoadedPackage = null;
         _currentAotVersion = null;
         _methodRegistry.Clear();
+        SupplementalMetadata.Clear();
         Mode = RuntimeMode.Aot;
         LastError = null;
     }
@@ -158,12 +115,104 @@ public sealed class RuntimeManager
         };
     }
 
-    public int DispatchInt32(string subjectId, Func<int> aotFallback)
+    public int DispatchInt32(ManagedMethodIdentityArtifact identity, Func<int> aotFallback)
+    {
+        ArgumentNullException.ThrowIfNull(identity);
+        ArgumentNullException.ThrowIfNull(aotFallback);
+
+        return DispatchInt32Core(ManagedMethodIdentityResolver.ResolveSubjectId(identity), aotFallback);
+    }
+
+    public void RegisterInt32Unary(ManagedMethodIdentityArtifact identity, Func<int, int> target)
+    {
+        ArgumentNullException.ThrowIfNull(identity);
+        ArgumentNullException.ThrowIfNull(target);
+        RegisterInt32UnaryCore(ManagedMethodIdentityResolver.ResolveSubjectId(identity), target);
+    }
+
+    public void RegisterMethod(ManagedMethodIdentityArtifact identity, Func<IReadOnlyList<object?>, object?> target)
+    {
+        ArgumentNullException.ThrowIfNull(identity);
+        ArgumentNullException.ThrowIfNull(target);
+        RegisterMethodCore(ManagedMethodIdentityResolver.ResolveSubjectId(identity), target);
+    }
+
+    public int DispatchInt32Unary(ManagedMethodIdentityArtifact identity, int value, Func<int, int> aotFallback)
+    {
+        ArgumentNullException.ThrowIfNull(identity);
+        ArgumentNullException.ThrowIfNull(aotFallback);
+
+        return DispatchInt32UnaryCore(ManagedMethodIdentityResolver.ResolveSubjectId(identity), value, aotFallback);
+    }
+
+    private bool TryLoadPackage(
+        string packageRootPath,
+        string currentAotVersion,
+        Action<LoadedHotUpdatePackage> loadAction)
+    {
+        try
+        {
+            var package = _assemblyLoader.LoadFromDirectory(packageRootPath);
+            loadAction(package);
+            return true;
+        }
+        catch (Exception exception) when (exception is InvalidOperationException
+                                         or InvalidDataException
+                                         or FileNotFoundException
+                                         or DirectoryNotFoundException
+                                         or JsonException)
+        {
+            LastError = exception.Message;
+            return false;
+        }
+    }
+
+    private void ActivatePackage(
+        LoadedHotUpdatePackage package,
+        string currentAotVersion,
+        Action applyBindings)
+    {
+        _history.Push(CaptureSnapshot());
+        PackageValidator.ValidateCompatibleTargetAotVersion(package, currentAotVersion);
+
+        _methodRegistry.Clear();
+        applyBindings();
+        SupplementalMetadata.Activate(package);
+
+        LoadedPackage = package;
+        _currentAotVersion = currentAotVersion;
+        Mode = RuntimeMode.Mixed;
+        LastError = null;
+    }
+
+    private void ApplyBindings(HotUpdateMethodBindingSet bindings)
+    {
+        foreach (var binding in bindings.ConstantInt32Bindings)
+        {
+            _methodRegistry.RegisterConstantInt32(binding.Identity, binding.ConstantValue);
+        }
+
+        foreach (var binding in bindings.Int32UnaryBindings)
+        {
+            _methodRegistry.RegisterInt32UnaryBySubjectId(
+                ManagedMethodIdentityResolver.ResolveSubjectId(binding.Identity),
+                binding.Target);
+        }
+
+        foreach (var binding in bindings.GenericBindings)
+        {
+            _methodRegistry.RegisterMethodBySubjectId(
+                ManagedMethodIdentityResolver.ResolveSubjectId(binding.Identity),
+                binding.Target);
+        }
+    }
+
+    private int DispatchInt32Core(string subjectId, Func<int> aotFallback)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
         ArgumentNullException.ThrowIfNull(aotFallback);
 
-        if (IsMixedMode && _methodRegistry.TryDispatch(subjectId, Array.Empty<object?>(), out var mixedValue))
+        if (IsMixedMode && _methodRegistry.TryDispatchBySubjectId(subjectId, Array.Empty<object?>(), out var mixedValue))
         {
             return Convert.ToInt32(mixedValue);
         }
@@ -171,26 +220,26 @@ public sealed class RuntimeManager
         return aotFallback();
     }
 
-    public void RegisterInt32Unary(string subjectId, Func<int, int> target)
+    private void RegisterInt32UnaryCore(string subjectId, Func<int, int> target)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
         ArgumentNullException.ThrowIfNull(target);
-        _methodRegistry.RegisterInt32Unary(subjectId, target);
+        _methodRegistry.RegisterInt32UnaryBySubjectId(subjectId, target);
     }
 
-    public void RegisterMethod(string subjectId, Func<IReadOnlyList<object?>, object?> target)
+    private void RegisterMethodCore(string subjectId, Func<IReadOnlyList<object?>, object?> target)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
         ArgumentNullException.ThrowIfNull(target);
-        _methodRegistry.RegisterMethod(subjectId, target);
+        _methodRegistry.RegisterMethodBySubjectId(subjectId, target);
     }
 
-    public int DispatchInt32Unary(string subjectId, int value, Func<int, int> aotFallback)
+    private int DispatchInt32UnaryCore(string subjectId, int value, Func<int, int> aotFallback)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
         ArgumentNullException.ThrowIfNull(aotFallback);
 
-        if (IsMixedMode && _methodRegistry.TryDispatch(subjectId, [value], out var mixedValue))
+        if (IsMixedMode && _methodRegistry.TryDispatchBySubjectId(subjectId, [value], out var mixedValue))
         {
             return Convert.ToInt32(mixedValue);
         }
@@ -217,6 +266,15 @@ public sealed class RuntimeManager
         _currentAotVersion = snapshot.CurrentAotVersion;
         Mode = snapshot.Mode;
         _methodRegistry.Restore(snapshot.Registry);
+        if (snapshot.LoadedPackage is null)
+        {
+            SupplementalMetadata.Clear();
+        }
+        else
+        {
+            SupplementalMetadata.Activate(snapshot.LoadedPackage);
+        }
+
         LastError = null;
     }
 
@@ -293,13 +351,16 @@ public sealed class RuntimeManager
             return;
         }
 
-        try
+        if (SupplementalMetadata.ActiveMetadata is null)
         {
-            _supplementalMetadataLoader.LoadFromBytes(File.ReadAllBytes(supplementalMetadataPath));
+            issues.Add("supplemental metadata registry is empty while a hot update package is active.");
+            return;
         }
-        catch (Exception exception) when (exception is InvalidDataException or JsonException)
+
+        if (!ReferenceEquals(SupplementalMetadata.ActivePackage, package) ||
+            !ReferenceEquals(SupplementalMetadata.ActiveMetadata, package.SupplementalMetadata))
         {
-            issues.Add($"supplemental metadata is invalid: {exception.Message}");
+            issues.Add("supplemental metadata registry is not aligned with the loaded package.");
         }
     }
 

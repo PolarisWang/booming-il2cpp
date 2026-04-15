@@ -81,6 +81,7 @@ public static class PackageReader
             RootPath = packageRoot,
             Manifest = manifest,
             LoadedAssemblies = loadedAssemblies,
+            SupplementalMetadata = LoadedSupplementalMetadata.Empty,
         };
     }
 

@@ -956,54 +956,6 @@ public static class ChaosSubjectEntryArguments
 }
 
 /// <summary>
-/// Represents a declared source-entry override for retained-subject dispatch.
-/// </summary>
-public readonly record struct ChaosSourceEntrySelection(string SourceEntry)
-{
-    /// <summary>
-    /// Gets a value indicating whether no explicit source entry was selected.
-    /// </summary>
-    public bool IsNone => string.IsNullOrWhiteSpace(SourceEntry);
-}
-
-/// <summary>
-/// Parses declared source-entry dispatch arguments.
-/// </summary>
-public static class ChaosSourceEntryArguments
-{
-    /// <summary>
-    /// Prefix for the declared source-entry command-line argument.
-    /// </summary>
-    public const string SourceEntryPrefix = "--chaos-source-entry=";
-
-    /// <summary>
-    /// Attempts to parse a declared source-entry selection.
-    /// </summary>
-    public static bool TryParse(string[]? args, out ChaosSourceEntrySelection selection)
-    {
-        foreach (var argument in args ?? Array.Empty<string>())
-        {
-            if (!argument.StartsWith(SourceEntryPrefix, StringComparison.Ordinal))
-            {
-                continue;
-            }
-
-            var sourceEntry = argument[SourceEntryPrefix.Length..].Trim();
-            if (sourceEntry.Length == 0)
-            {
-                throw new ArgumentException("declared source-entry selection requires a non-empty source-entry argument.", nameof(args));
-            }
-
-            selection = new ChaosSourceEntrySelection(sourceEntry);
-            return true;
-        }
-
-        selection = default;
-        return false;
-    }
-}
-
-/// <summary>
 /// Marks a declared proof entry inside a subject solution.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]

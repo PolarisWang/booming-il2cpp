@@ -7,11 +7,6 @@ internal static class Program
 {
     private static int Main(string[] args)
     {
-        if (ChaosSourceEntryArguments.TryParse(args, out var sourceEntrySelection) && !sourceEntrySelection.IsNone)
-        {
-            return InvokeSourceEntry(sourceEntrySelection.SourceEntry);
-        }
-
         if (!ChaosSubjectEntryArguments.TryParse(args, out var selection) || selection.IsNone)
         {
             return InvokeStaticEntry("CoreRuntimeFeatures", "CoreRuntimeFeatures.ProofEntry", "Run");
@@ -37,28 +32,6 @@ internal static class Program
                 InvokeStaticEntry("GoldenMixedReference.App", "GoldenMixedReference.App.Program", "Main"),
             _ => throw new ArgumentOutOfRangeException(nameof(args), "unsupported SolutionCorePack entry selection."),
         };
-    }
-
-    private static int InvokeSourceEntry(string sourceEntry)
-    {
-        var assemblySeparator = sourceEntry.IndexOf('/');
-        var memberSeparator = sourceEntry.IndexOf("::", StringComparison.Ordinal);
-        if (assemblySeparator <= 0 || memberSeparator <= assemblySeparator + 1)
-        {
-            throw new ArgumentException($"unsupported SolutionCorePack source entry: '{sourceEntry}'.", nameof(sourceEntry));
-        }
-
-        var assemblyName = sourceEntry[..assemblySeparator];
-        var typeName = sourceEntry[(assemblySeparator + 1)..memberSeparator];
-        var methodSignature = sourceEntry[(memberSeparator + 2)..];
-        var parameterSeparator = methodSignature.IndexOf('(');
-        var methodName = parameterSeparator >= 0 ? methodSignature[..parameterSeparator] : methodSignature;
-        if (assemblyName.Length == 0 || typeName.Length == 0 || methodName.Length == 0)
-        {
-            throw new ArgumentException($"unsupported SolutionCorePack source entry: '{sourceEntry}'.", nameof(sourceEntry));
-        }
-
-        return InvokeStaticEntry(assemblyName, typeName, methodName);
     }
 
     private static int InvokeStaticEntry(string assemblyName, string typeName, string methodName)

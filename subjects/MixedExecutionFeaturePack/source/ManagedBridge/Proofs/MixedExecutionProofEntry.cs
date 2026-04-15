@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text.Json;
+using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.HotUpdate;
 using Chaos.IL2CPP.Interpreter;
 using Chaos.IL2CPP.Loader;
@@ -13,6 +14,14 @@ internal static class MixedExecutionProofEntry
     private const string AotBridgeSubjectId = "InterpreterArithmeticProof.AotBridge/AotBridgeExports::Add(System.Int32,System.Int32)";
     private const string EngineBridgeId = "mixed-engine-add-five";
     private const string EngineBridgeSubjectId = "MixedExecutionProof/Engine::AddFive(System.Int32)";
+    private static readonly ManagedMethodIdentityArtifact AotBridgeMethodIdentity =
+        ManagedMethodIdentityResolver.Create(
+            AotBridgeSubjectId,
+            "System.Int32 AotBridgeExports::Add(System.Int32,System.Int32)");
+    private static readonly ManagedMethodIdentityArtifact EngineBridgeMethodIdentity =
+        ManagedMethodIdentityResolver.Create(
+            EngineBridgeSubjectId,
+            "System.Int32 Engine::AddFive(System.Int32)");
 
     [ChaosUnitTest(
         ChaosUnitCategory.RuntimeContract,
@@ -34,7 +43,9 @@ internal static class MixedExecutionProofEntry
             var loweredMethods = BuildLoweredMethods(assemblyPath);
             var runtimeManager = new RuntimeManager();
             var addTwentyOneMethod = GetRequiredMethod(loweredMethods, "AddTwentyOne");
-            var subjectId = addTwentyOneMethod.SubjectId;
+            var addTwentyOneIdentity = addTwentyOneMethod.Identity
+                ?? throw new InvalidOperationException("AddTwentyOne lowering result is missing shared method identity.");
+            var addMethodIdentity = AotBridgeMethodIdentity;
             var interpreterInvoker = new ManagedInterpreterExecutor(
                 methodResolver: subject => loweredMethods[subject]).CreateInt32UnaryInvoker(addTwentyOneMethod);
             var aotBridgeMethod = GetRequiredMethod(loweredMethods, "CallAotBridgeAdd");
@@ -43,7 +54,7 @@ internal static class MixedExecutionProofEntry
             var realCatchMethod = GetRequiredMethod(loweredMethods, "DivideOrCatch");
             var realRethrowMethod = GetRequiredMethod(loweredMethods, "DivideOrRethrow");
             var realLeaveFinallyMethod = GetRequiredMethod(loweredMethods, "AddWithFinally");
-            var beforeLoad = runtimeManager.DispatchInt32Unary(subjectId, 21, static value => value + 1);
+            var beforeLoad = runtimeManager.DispatchInt32Unary(addTwentyOneIdentity, 21, static value => value + 1);
             Assert.Equal(22, beforeLoad);
 
             var packageRoot = CreatePackageRoot(workspace, assemblyPath);
@@ -51,13 +62,19 @@ internal static class MixedExecutionProofEntry
             runtimeManager.LoadPackage(
                 package,
                 CurrentAotVersion,
-                new Dictionary<string, int>(StringComparer.Ordinal),
-                new Dictionary<string, Func<int, int>>(StringComparer.Ordinal)
+                new HotUpdateMethodBindingSet
                 {
-                    [subjectId] = interpreterInvoker,
+                    Int32UnaryBindings =
+                    [
+                        new HotUpdateInt32UnaryBinding
+                        {
+                            Identity = addTwentyOneIdentity,
+                            Target = interpreterInvoker,
+                        },
+                    ],
                 });
 
-            var afterLoad = runtimeManager.DispatchInt32Unary(subjectId, 21, static value => value + 1);
+            var afterLoad = runtimeManager.DispatchInt32Unary(addTwentyOneIdentity, 21, static value => value + 1);
             Assert.Equal(42, afterLoad);
 
             var dispatcher = new BridgeDispatcher();
@@ -69,6 +86,7 @@ internal static class MixedExecutionProofEntry
                     new HotUpdateToAotBridgeEntry
                     {
                         BridgeId = AotBridgeSubjectId,
+                        AotIdentity = addMethodIdentity,
                         AotSubjectId = AotBridgeSubjectId,
                     },
                 ],
@@ -77,49 +95,56 @@ internal static class MixedExecutionProofEntry
                     new HotUpdateToEngineBridgeEntry
                     {
                         BridgeId = EngineBridgeId,
+                        EngineIdentity = EngineBridgeMethodIdentity,
                         EngineSubjectId = EngineBridgeSubjectId,
                     },
                 ],
                 DelegateWrappers = [],
             });
-            dispatcher.RegisterAotInt32BinaryTarget(AotBridgeSubjectId, static (left, right) => left + right);
-            dispatcher.RegisterEngineInt32UnaryTarget(EngineBridgeSubjectId, static value => value + 5);
+            dispatcher.RegisterAotInt32BinaryTarget(addMethodIdentity, static (left, right) => left + right);
+            dispatcher.RegisterEngineInt32UnaryTarget(EngineBridgeMethodIdentity, static value => value + 5);
 
-            var bridgeExecutor = new ManagedInterpreterExecutor((bridgeId, bridgeArguments) =>
+            var bridgeHandlers = new Dictionary<string, Func<IReadOnlyList<object?>, object?>>(StringComparer.Ordinal)
             {
-                if (string.Equals(bridgeId, AotBridgeSubjectId, StringComparison.Ordinal))
+                [AotBridgeSubjectId] = bridgeArguments =>
                 {
                     if (bridgeArguments.Count != 2)
                     {
-                        throw new InvalidOperationException($"bridge '{bridgeId}' expects 2 arguments.");
+                        throw new InvalidOperationException($"bridge '{AotBridgeSubjectId}' expects 2 arguments.");
                     }
 
                     return dispatcher.InvokeHotUpdateToAotInt32(
-                        bridgeId,
+                        AotBridgeSubjectId,
                         Convert.ToInt32(bridgeArguments[0]),
                         Convert.ToInt32(bridgeArguments[1]));
-                }
-
-                if (string.Equals(bridgeId, EngineBridgeId, StringComparison.Ordinal))
+                },
+                [EngineBridgeId] = bridgeArguments =>
                 {
                     if (bridgeArguments.Count != 1)
                     {
-                        throw new InvalidOperationException($"bridge '{bridgeId}' expects 1 argument.");
+                        throw new InvalidOperationException($"bridge '{EngineBridgeId}' expects 1 argument.");
                     }
 
-                    return dispatcher.InvokeHotUpdateToEngineInt32(bridgeId, Convert.ToInt32(bridgeArguments[0]));
-                }
-
-                if (string.Equals(bridgeId, "System.Private.CoreLib/System.String::get_Length()", StringComparison.Ordinal))
+                    return dispatcher.InvokeHotUpdateToEngineInt32(EngineBridgeId, Convert.ToInt32(bridgeArguments[0]));
+                },
+                ["System.Private.CoreLib/System.String::get_Length()"] = bridgeArguments =>
                 {
                     if (bridgeArguments.Count != 1 || bridgeArguments[0] is not string instance)
                     {
                         var receiver = bridgeArguments.Count == 0 ? null : bridgeArguments[0];
                         throw new InvalidOperationException(
-                            $"bridge '{bridgeId}' expects 1 string receiver but received count={bridgeArguments.Count}, type={receiver?.GetType().FullName ?? "<null>"}, value={receiver ?? "<null>"}.");
+                            $"bridge 'System.Private.CoreLib/System.String::get_Length()' expects 1 string receiver but received count={bridgeArguments.Count}, type={receiver?.GetType().FullName ?? "<null>"}, value={receiver ?? "<null>"}.");
                     }
 
                     return instance.Length;
+                },
+            };
+
+            var bridgeExecutor = new ManagedInterpreterExecutor((bridgeId, bridgeArguments) =>
+            {
+                if (bridgeHandlers.TryGetValue(bridgeId, out var handler))
+                {
+                    return handler(bridgeArguments);
                 }
 
                 throw new InvalidOperationException($"unsupported bridge '{bridgeId}'.");
@@ -172,7 +197,7 @@ internal static class MixedExecutionProofEntry
             Assert.Equal("ok", rethrowCaught);
 
             runtimeManager.UnloadPackage();
-            var afterUnload = runtimeManager.DispatchInt32Unary(subjectId, 21, static value => value + 1);
+            var afterUnload = runtimeManager.DispatchInt32Unary(addTwentyOneIdentity, 21, static value => value + 1);
             Assert.Equal(22, afterUnload);
             return 0;
         }

@@ -42,4 +42,6 @@ public sealed record LoadedHotUpdatePackage
     public required HotUpdatePackage Manifest { get; init; }
 
     public required IReadOnlyDictionary<string, LoadedAssemblyImage> LoadedAssemblies { get; init; }
+
+    public required LoadedSupplementalMetadata SupplementalMetadata { get; init; }
 }

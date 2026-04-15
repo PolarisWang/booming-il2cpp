@@ -13,19 +13,23 @@ import time
 try:
     from ..core.common import combine_process_output, read_json, run_process, write_json
     from ..core import tooling as tooling_module
+    from . import compiled_catalog as compiled_catalog_module
     from . import contracts as contracts_module
     from . import mobile_perf_collector
     from . import perf as perf_module
     from . import subjects as subjects_module
+    from . import workspace_declared_catalog as workspace_declared_catalog_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from core.common import combine_process_output, read_json, run_process, write_json
     from core import tooling as tooling_module
+    from testing import compiled_catalog as compiled_catalog_module
     from testing import contracts as contracts_module
     from testing import mobile_perf_collector
     from testing import perf as perf_module
     from testing import subjects as subjects_module
+    from testing import workspace_declared_catalog as workspace_declared_catalog_module
 
 
 DRIVER_PROJECT_PATH = Path("src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj")
@@ -50,7 +54,6 @@ ANDROID_RUNTIME_ARGUMENT_ENVIRONMENTS = {
 }
 CHAOS_ENTRY_KIND_ARGUMENT_PREFIX = "--chaos-entry-kind="
 CHAOS_ENTRY_SLICE_ARGUMENT_PREFIX = "--chaos-entry-slice="
-CHAOS_SOURCE_ENTRY_ARGUMENT_PREFIX = "--chaos-source-entry="
 VARIANT_MACROS = {
     "CHECK": {
         "codegen": ["CHAOS_VARIANT_CHECK", "CHAOS_VARIANT_NAME=CHECK"],
@@ -89,7 +92,21 @@ def _selection_workload_entry(selection: dict[str, Any]) -> str:
     return str(selection.get("workloadEntry") or "")
 
 
-def _workload_assembly_name(workload_entry: str) -> str:
+def _declared_source_entry(entry: dict[str, Any]) -> str:
+    assembly_name = str(entry.get("assemblyName") or "")
+    declaring_type = str(entry.get("declaringType") or "")
+    method_signature = str(entry.get("methodSignature") or "")
+    if not assembly_name or not declaring_type or not method_signature:
+        return ""
+
+    type_name = declaring_type.rsplit(".", 1)[-1]
+    return f"{assembly_name}/{type_name}::{method_signature}"
+
+
+def _workload_assembly_name(workload_entry: str, *, assembly_name: str = "") -> str:
+    explicit_assembly_name = str(assembly_name or "").strip()
+    if explicit_assembly_name:
+        return explicit_assembly_name
     return str(workload_entry or "").split("/", 1)[0].strip()
 
 
@@ -97,6 +114,8 @@ def _resolve_workload_assembly_path(
     repo_root: Path,
     host_input_manifest: dict[str, Any],
     workload_entry: str,
+    *,
+    assembly_name: str = "",
 ) -> tuple[str, Path | None]:
     candidate_paths = []
     primary_assembly_path_text = str(host_input_manifest.get("primaryAssemblyPath") or "")
@@ -108,7 +127,7 @@ def _resolve_workload_assembly_path(
         if str(path)
     )
 
-    workload_assembly_name = _workload_assembly_name(workload_entry)
+    workload_assembly_name = _workload_assembly_name(workload_entry, assembly_name=assembly_name)
     for candidate_path_text in candidate_paths:
         candidate_path = _resolve(repo_root, candidate_path_text)
         if workload_assembly_name and candidate_path.stem.lower() == workload_assembly_name.lower():
@@ -145,7 +164,7 @@ def _selection_subject_entry_selection(selection: dict[str, Any]) -> dict[str, i
     }
 
 
-def _selection_declared_entry_selection(selection: dict[str, Any]) -> dict[str, str]:
+def _selection_declared_entry_selection(selection: dict[str, Any]) -> dict[str, Any]:
     payload = selection.get("entrySelection")
     if payload is None:
         return {}
@@ -163,15 +182,107 @@ def _selection_declared_entry_selection(selection: dict[str, Any]) -> dict[str, 
         normalized["stableId"] = stable_id
     if alias:
         normalized["alias"] = alias
+    entry_index = payload.get("entryIndex")
+    if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+        normalized["entryIndex"] = int(entry_index)
     return normalized
 
 
-def _selection_declared_source_entry(selection: dict[str, Any]) -> str:
-    declared_entry_selection = _selection_declared_entry_selection(selection)
-    if declared_entry_selection.get("family") != "declared-unit-test":
-        return ""
-    source = dict(selection.get("source") or {})
-    return str(source.get("entry") or "").strip()
+def _load_subject_declared_catalog(
+    repo_root: Path,
+    *,
+    subject_id: str,
+    host_kind: str,
+) -> dict[str, Any] | None:
+    workspace_catalog = workspace_declared_catalog_module.load_workspace_declared_catalog(
+        repo_root,
+        subject_id,
+        host_kind=host_kind,
+    )
+    if isinstance(workspace_catalog, dict):
+        return workspace_catalog
+
+    try:
+        catalog = compiled_catalog_module.build_subject_declared_test_catalog(
+            repo_root=repo_root,
+            subject_id=subject_id,
+            force_build=False,
+        )
+    except Exception:
+        return None
+
+    return dict(catalog) if isinstance(catalog, dict) else None
+
+
+def _find_declared_catalog_entry(
+    catalog: dict[str, Any],
+    *,
+    family: str,
+    entry_selection: dict[str, Any],
+) -> dict[str, Any] | None:
+    catalog_key = "declaredUnitTests" if family == "declared-unit-test" else "declaredBenchmarks"
+    entries = [dict(item) for item in list(catalog.get(catalog_key) or []) if isinstance(item, dict)]
+
+    entry_index = entry_selection.get("entryIndex")
+    if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+        for entry in entries:
+            candidate_index = entry.get("entryIndex")
+            if isinstance(candidate_index, int) and not isinstance(candidate_index, bool) and candidate_index == entry_index:
+                return entry
+
+    stable_id = str(entry_selection.get("stableId") or "").strip()
+    if stable_id:
+        for entry in entries:
+            if str(entry.get("stableId") or "").strip() == stable_id:
+                return entry
+
+    alias = str(entry_selection.get("alias") or "").strip()
+    if alias:
+        for entry in entries:
+            if str(entry.get("alias") or "").strip() == alias:
+                return entry
+
+    return None
+
+
+def _resolve_declared_benchmark(selection: dict[str, Any], *, repo_root: Path, subject_id: str) -> dict[str, Any]:
+    entry_selection = _selection_declared_entry_selection(selection)
+    if str(entry_selection.get("family") or "") != "declared-benchmark":
+        return {}
+
+    catalog = _load_subject_declared_catalog(
+        repo_root,
+        subject_id=subject_id,
+        host_kind="benchmark-host",
+    )
+    if not isinstance(catalog, dict):
+        return {}
+
+    entry = _find_declared_catalog_entry(
+        catalog,
+        family="declared-benchmark",
+        entry_selection=entry_selection,
+    )
+    if entry is None:
+        return {}
+
+    payload = {
+        "stableId": str(entry.get("stableId") or entry_selection.get("stableId") or ""),
+        "alias": str(entry.get("alias") or entry_selection.get("alias") or ""),
+        "assemblyName": str(entry.get("assemblyName") or ""),
+        "declaringType": str(entry.get("declaringType") or ""),
+        "methodName": str(entry.get("methodName") or ""),
+        "methodSignature": str(entry.get("methodSignature") or ""),
+    }
+    entry_index = entry.get("entryIndex")
+    if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+        payload["entryIndex"] = int(entry_index)
+
+    workload_entry = _declared_source_entry(entry)
+    if workload_entry:
+        payload["workloadEntry"] = workload_entry
+
+    return payload
 
 
 def _selection_managed_runtime_arguments(selection: dict[str, Any]) -> list[str]:
@@ -184,9 +295,6 @@ def _selection_managed_runtime_arguments(selection: dict[str, Any]) -> list[str]
                 f"{CHAOS_ENTRY_SLICE_ARGUMENT_PREFIX}{subject_entry_selection['entrySlice']}",
             ]
         )
-    declared_source_entry = _selection_declared_source_entry(selection)
-    if declared_source_entry:
-        runtime_arguments.append(f"{CHAOS_SOURCE_ENTRY_ARGUMENT_PREFIX}{declared_source_entry}")
     return runtime_arguments
 
 
@@ -1891,11 +1999,24 @@ def _perf_harness_command(
     assembly_path: Path | None,
     workload_entry: str,
     mode: str,
+    declared_benchmark: dict[str, Any] | None = None,
 ) -> list[str]:
     arguments = ["dotnet", str(harness_dll_path), str(iterations)]
     if assembly_path is not None:
         arguments.extend(["--assembly", str(assembly_path)])
-    if workload_entry:
+
+    benchmark_meta = dict(declared_benchmark or {})
+    assembly_name = str(benchmark_meta.get("assemblyName") or "").strip()
+    declaring_type = str(benchmark_meta.get("declaringType") or "").strip()
+    method_name = str(benchmark_meta.get("methodName") or "").strip()
+    method_signature = str(benchmark_meta.get("methodSignature") or "").strip()
+    if assembly_name and declaring_type and method_name:
+        arguments.extend(["--assembly-name", assembly_name])
+        arguments.extend(["--declaring-type", declaring_type])
+        arguments.extend(["--method-name", method_name])
+        if method_signature:
+            arguments.extend(["--method-signature", method_signature])
+    elif workload_entry:
         arguments.extend(["--workload-entry", workload_entry])
     if mode:
         arguments.extend(["--mode", mode])
@@ -1919,7 +2040,8 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
     subject_id = str(selection["subjectId"])
     matrix_id = str(selection["matrixId"])
     variant = _selection_variant(selection)
-    workload_entry = _selection_workload_entry(selection)
+    declared_benchmark = _resolve_declared_benchmark(selection, repo_root=repo_root, subject_id=subject_id)
+    workload_entry = str(declared_benchmark.get("workloadEntry") or _selection_workload_entry(selection))
     host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
     runtime_profile = str(execution_context.get("runtimeProfile") or "")
     sample_count = _perf_sample_count(runtime_profile)
@@ -1943,6 +2065,7 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
         repo_root,
         host_input_manifest,
         workload_entry,
+        assembly_name=str(declared_benchmark.get("assemblyName") or ""),
     )
 
     stdout_path = runtime_root / "stdout.log"
@@ -1980,6 +2103,7 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
                 assembly_path=workload_assembly_path,
                 workload_entry=workload_entry,
                 mode="managed",
+                declared_benchmark=declared_benchmark or None,
             ),
             cwd=repo_root,
         )
@@ -2049,6 +2173,11 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
         "regressionStatus": str(performance["regressionStatus"]),
         "regressions": list(performance["regressions"]),
     }
+    declared_entry_selection = _selection_declared_entry_selection(selection)
+    if declared_entry_selection:
+        manifest["declaredEntrySelection"] = declared_entry_selection
+    if declared_benchmark:
+        manifest["declaredBenchmark"] = declared_benchmark
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
 
     if last_exit_code != 0:
@@ -2084,7 +2213,8 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
     subject_id = str(selection["subjectId"])
     matrix_id = str(selection["matrixId"])
     variant = _selection_variant(selection)
-    workload_entry = _selection_workload_entry(selection)
+    declared_benchmark = _resolve_declared_benchmark(selection, repo_root=repo_root, subject_id=subject_id)
+    workload_entry = str(declared_benchmark.get("workloadEntry") or _selection_workload_entry(selection))
     host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
     runtime_profile = str(execution_context.get("runtimeProfile") or "")
     sample_count = _perf_sample_count(runtime_profile)
@@ -2526,7 +2656,8 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
     subject_id = str(selection["subjectId"])
     matrix_id = str(selection["matrixId"])
     variant = _selection_variant(selection)
-    workload_entry = _selection_workload_entry(selection)
+    declared_benchmark = _resolve_declared_benchmark(selection, repo_root=repo_root, subject_id=subject_id)
+    workload_entry = str(declared_benchmark.get("workloadEntry") or _selection_workload_entry(selection))
     host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
     runtime_profile = str(execution_context.get("runtimeProfile") or "")
     sample_count = _perf_sample_count(runtime_profile)
@@ -2596,6 +2727,7 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
         repo_root,
         host_input_manifest,
         workload_entry,
+        assembly_name=str(declared_benchmark.get("assemblyName") or ""),
     )
 
     _run_checked(
@@ -2625,6 +2757,7 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
                 assembly_path=workload_assembly_path,
                 workload_entry=workload_entry,
                 mode="interpreter",
+                declared_benchmark=declared_benchmark or None,
             ),
             cwd=repo_root,
         )
@@ -2695,6 +2828,11 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
         "regressionStatus": str(performance["regressionStatus"]),
         "regressions": list(performance["regressions"]),
     }
+    declared_entry_selection = _selection_declared_entry_selection(selection)
+    if declared_entry_selection:
+        result_manifest["declaredEntrySelection"] = declared_entry_selection
+    if declared_benchmark:
+        result_manifest["declaredBenchmark"] = declared_benchmark
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), result_manifest)
 
     if last_exit_code != 0:

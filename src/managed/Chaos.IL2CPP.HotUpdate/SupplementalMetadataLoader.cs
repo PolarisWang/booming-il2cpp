@@ -36,6 +36,14 @@ public sealed class LoadedSupplementalMetadata
     private readonly Dictionary<int, SupplementalMetadataResolvedMethod> _methodsByToken;
     private readonly HashSet<string> _genericInstantiations;
 
+    public static LoadedSupplementalMetadata Empty { get; } = new(
+        new SupplementalMetadataPayload
+        {
+            Types = [],
+            Methods = [],
+            GenericInstantiations = [],
+        });
+
     public LoadedSupplementalMetadata(SupplementalMetadataPayload payload)
     {
         ArgumentNullException.ThrowIfNull(payload);

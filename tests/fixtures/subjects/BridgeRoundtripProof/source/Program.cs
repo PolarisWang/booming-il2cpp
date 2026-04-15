@@ -1,3 +1,4 @@
+using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.HotUpdate;
 
 internal interface IService
@@ -11,9 +12,18 @@ internal static class Program
     private const string MathBridgeId = "math-max";
     private const string EngineBridgeId = "engine-add-five";
     private const string DelegateWrapperId = "delegate-process";
-    private const string HotServiceSubjectId = "BridgeRoundtripProof/HotService::Process(System.Int32)";
-    private const string AotMathMaxSubjectId = "System.Math/System.Math::Max(System.Int32,System.Int32)";
-    private const string EngineAddFiveSubjectId = "BridgeRoundtripProof/Engine::AddFive(System.Int32)";
+    private static readonly ManagedMethodIdentityArtifact HotServiceIdentity =
+        ManagedMethodIdentityResolver.Create(
+            "BridgeRoundtripProof/HotService::Process(System.Int32)",
+            "System.Int32 HotService::Process(System.Int32)");
+    private static readonly ManagedMethodIdentityArtifact AotMathMaxIdentity =
+        ManagedMethodIdentityResolver.Create(
+            "System.Math/System.Math::Max(System.Int32,System.Int32)",
+            "System.Int32 System.Math::Max(System.Int32,System.Int32)");
+    private static readonly ManagedMethodIdentityArtifact EngineAddFiveIdentity =
+        ManagedMethodIdentityResolver.Create(
+            "BridgeRoundtripProof/Engine::AddFive(System.Int32)",
+            "System.Int32 Engine::AddFive(System.Int32)");
     private const string ExpectedAotToHotUpdateOutput = "bridge-aot-to-hot-update=42";
     private const string ExpectedHotUpdateToAotOutput = "bridge-hot-update-to-aot=2";
     private const string ExpectedHotUpdateToEngineOutput = "bridge-hot-update-to-engine=7";
@@ -29,7 +39,8 @@ internal static class Program
                 new AotToHotUpdateBridgeSpec
                 {
                     BridgeId = ServiceBridgeId,
-                    HotUpdateSubjectId = HotServiceSubjectId,
+                    HotUpdateIdentity = HotServiceIdentity,
+                    HotUpdateSubjectId = HotServiceIdentity.SubjectId,
                 },
             ],
             HotUpdateToAot =
@@ -37,7 +48,8 @@ internal static class Program
                 new HotUpdateToAotBridgeSpec
                 {
                     BridgeId = MathBridgeId,
-                    AotSubjectId = AotMathMaxSubjectId,
+                    AotIdentity = AotMathMaxIdentity,
+                    AotSubjectId = AotMathMaxIdentity.SubjectId,
                 },
             ],
             HotUpdateToEngine =
@@ -45,7 +57,8 @@ internal static class Program
                 new HotUpdateToEngineBridgeSpec
                 {
                     BridgeId = EngineBridgeId,
-                    EngineSubjectId = EngineAddFiveSubjectId,
+                    EngineIdentity = EngineAddFiveIdentity,
+                    EngineSubjectId = EngineAddFiveIdentity.SubjectId,
                 },
             ],
             DelegateWrappers =
@@ -53,16 +66,17 @@ internal static class Program
                 new DelegateWrapperSpec
                 {
                     WrapperId = DelegateWrapperId,
-                    HotUpdateSubjectId = HotServiceSubjectId,
+                    HotUpdateIdentity = HotServiceIdentity,
+                    HotUpdateSubjectId = HotServiceIdentity.SubjectId,
                 },
             ],
         });
 
         var dispatcher = new BridgeDispatcher();
         dispatcher.ApplyPlan(bridgePlan);
-        dispatcher.RegisterHotUpdateInt32UnaryTarget(HotServiceSubjectId, static value => value * 2);
-        dispatcher.RegisterAotInt32BinaryTarget(AotMathMaxSubjectId, Math.Max);
-        dispatcher.RegisterEngineInt32UnaryTarget(EngineAddFiveSubjectId, static value => value + 5);
+        dispatcher.RegisterHotUpdateInt32UnaryTarget(HotServiceIdentity, static value => value * 2);
+        dispatcher.RegisterAotInt32BinaryTarget(AotMathMaxIdentity, Math.Max);
+        dispatcher.RegisterEngineInt32UnaryTarget(EngineAddFiveIdentity, static value => value + 5);
 
         IService service = new BridgeBackedService(dispatcher);
 

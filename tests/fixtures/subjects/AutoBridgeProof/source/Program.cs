@@ -30,15 +30,15 @@ internal static class Program
         dispatcher.ApplyPlan(plan);
 
         var voidInvoked = false;
-        dispatcher.RegisterManagedTarget(hotUpdateMethods[0].SubjectId, _ =>
+        dispatcher.RegisterManagedTarget(ManagedMethodIdentityResolver.Create(hotUpdateMethods[0]), _ =>
         {
             voidInvoked = true;
             return null;
         });
-        dispatcher.RegisterManagedTarget(hotUpdateMethods[1].SubjectId, args => Convert.ToInt32(args[0]) + 1);
-        dispatcher.RegisterManagedTarget(hotUpdateMethods[2].SubjectId, args => Convert.ToInt32(args[0]) + Convert.ToInt32(args[1]));
-        dispatcher.RegisterManagedTarget(hotUpdateMethods[3].SubjectId, args => $"bridge-{args[0]}");
-        dispatcher.RegisterManagedTarget(hotUpdateMethods[4].SubjectId, args => args[0]);
+        dispatcher.RegisterManagedTarget(ManagedMethodIdentityResolver.Create(hotUpdateMethods[1]), args => Convert.ToInt32(args[0]) + 1);
+        dispatcher.RegisterManagedTarget(ManagedMethodIdentityResolver.Create(hotUpdateMethods[2]), args => Convert.ToInt32(args[0]) + Convert.ToInt32(args[1]));
+        dispatcher.RegisterManagedTarget(ManagedMethodIdentityResolver.Create(hotUpdateMethods[3]), args => $"bridge-{args[0]}");
+        dispatcher.RegisterManagedTarget(ManagedMethodIdentityResolver.Create(hotUpdateMethods[4]), args => args[0]);
 
         _ = dispatcher.Dispatch(hotUpdateMethods[0].SubjectId, Array.Empty<object?>());
         Console.WriteLine($"auto-bridge-void={(voidInvoked ? "ok" : "unexpected")}");

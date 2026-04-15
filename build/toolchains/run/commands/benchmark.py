@@ -379,7 +379,7 @@ def _run_subject_benchmark_pipeline(
                 goal_id="perf.release",
                 matrix_id=matrix_id,
                 run_id=run_id,
-                source_entry=workload_entry,
+                source_entry=None,
                 workload_entry=workload_entry,
                 entry_selection={
                     "family": "declared-benchmark",

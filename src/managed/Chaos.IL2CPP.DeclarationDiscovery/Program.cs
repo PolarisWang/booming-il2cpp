@@ -8,8 +8,61 @@ namespace Chaos.IL2CPP.DeclarationDiscovery;
 internal static class Program
 {
     private const string FrameworkAssemblyName = "Chaos.TestFramework";
-    private const string UnitTestAttributeName = "Chaos.TestFramework.ChaosUnitTestAttribute";
-    private const string BenchmarkAttributeName = "Chaos.TestFramework.ChaosBenchmarkAttribute";
+    private const string FrameworkNamespace = FrameworkAssemblyName;
+    private const string UnitTestAttributeName = FrameworkNamespace + ".ChaosUnitTestAttribute";
+    private const string BenchmarkAttributeName = FrameworkNamespace + ".ChaosBenchmarkAttribute";
+    private const string NamedArgumentAlias = "Alias";
+    private const string NamedArgumentCapabilityFamily = "CapabilityFamily";
+    private const string NamedArgumentCapability = "Capability";
+    private const string NamedArgumentRequires = "Requires";
+    private const string NamedArgumentArchetype = "Archetype";
+    private const string NamedArgumentHotUpdateCapability = "HotUpdateCapability";
+    private const string NamedArgumentEvidence = "Evidence";
+    private const string NamedArgumentPriority = "Priority";
+    private const string NamedArgumentModes = "Modes";
+    private const string NamedArgumentWarmupCount = "WarmupCount";
+    private const string NamedArgumentIterationCount = "IterationCount";
+    private const string NamedArgumentInvocationCount = "InvocationCount";
+
+    private delegate void NamedArgumentReader(ref BlobReader reader, DeclaredEntryBase entry, SerializationTypeCode typeCode);
+
+    private static readonly DeclarationAttributeSchema UnitTestSchema = new(UnitTestAttributeName, DeclaredAttributeKind.UnitTest);
+    private static readonly DeclarationAttributeSchema BenchmarkSchema = new(BenchmarkAttributeName, DeclaredAttributeKind.Benchmark);
+
+    private static readonly IReadOnlyDictionary<string, DeclarationAttributeSchema> DeclaredAttributeSchemas =
+        new Dictionary<string, DeclarationAttributeSchema>(StringComparer.Ordinal)
+        {
+            [UnitTestSchema.AttributeTypeName] = UnitTestSchema,
+            [BenchmarkSchema.AttributeTypeName] = BenchmarkSchema,
+        };
+
+    private static readonly IReadOnlyDictionary<string, NamedArgumentReader> UnitNamedArgumentReaders =
+        new Dictionary<string, NamedArgumentReader>(StringComparer.Ordinal)
+        {
+            [NamedArgumentAlias] = ReadAliasArgument,
+            [NamedArgumentCapabilityFamily] = ReadCapabilityFamilyArgument,
+            [NamedArgumentCapability] = ReadCapabilityArgument,
+            [NamedArgumentRequires] = ReadRequiresArgument,
+            [NamedArgumentArchetype] = ReadArchetypeArgument,
+            [NamedArgumentHotUpdateCapability] = ReadHotUpdateCapabilityArgument,
+            [NamedArgumentEvidence] = ReadEvidenceArgument,
+            [NamedArgumentPriority] = ReadPriorityArgument,
+        };
+
+    private static readonly IReadOnlyDictionary<string, NamedArgumentReader> BenchmarkNamedArgumentReaders =
+        new Dictionary<string, NamedArgumentReader>(StringComparer.Ordinal)
+        {
+            [NamedArgumentAlias] = ReadAliasArgument,
+            [NamedArgumentCapabilityFamily] = ReadCapabilityFamilyArgument,
+            [NamedArgumentCapability] = ReadCapabilityArgument,
+            [NamedArgumentRequires] = ReadRequiresArgument,
+            [NamedArgumentArchetype] = ReadArchetypeArgument,
+            [NamedArgumentHotUpdateCapability] = ReadHotUpdateCapabilityArgument,
+            [NamedArgumentModes] = ReadModesArgument,
+            [NamedArgumentWarmupCount] = ReadWarmupCountArgument,
+            [NamedArgumentIterationCount] = ReadIterationCountArgument,
+            [NamedArgumentInvocationCount] = ReadInvocationCountArgument,
+        };
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
@@ -138,27 +191,32 @@ internal static class Program
                         continue;
                     }
 
-                    if (string.Equals(attributeTypeName, UnitTestAttributeName, StringComparison.Ordinal))
+                    if (!TryResolveDeclaredAttributeSchema(attributeTypeName, out var schema))
                     {
-                        payload.FrameworkReferenced = true;
-                        payload.DeclaredUnitTests.Add(CreateUnitEntry(
-                            metadataReader,
-                            attributeHandle,
-                            assemblyName,
-                            declaringType,
-                            methodName,
-                            methodSignature));
+                        continue;
                     }
-                    else if (string.Equals(attributeTypeName, BenchmarkAttributeName, StringComparison.Ordinal))
+
+                    payload.FrameworkReferenced = true;
+                    switch (schema.Kind)
                     {
-                        payload.FrameworkReferenced = true;
-                        payload.DeclaredBenchmarks.Add(CreateBenchmarkEntry(
-                            metadataReader,
-                            attributeHandle,
-                            assemblyName,
-                            declaringType,
-                            methodName,
-                            methodSignature));
+                        case DeclaredAttributeKind.UnitTest:
+                            payload.DeclaredUnitTests.Add(CreateUnitEntry(
+                                metadataReader,
+                                attributeHandle,
+                                assemblyName,
+                                declaringType,
+                                methodName,
+                                methodSignature));
+                            break;
+                        case DeclaredAttributeKind.Benchmark:
+                            payload.DeclaredBenchmarks.Add(CreateBenchmarkEntry(
+                                metadataReader,
+                                attributeHandle,
+                                assemblyName,
+                                declaringType,
+                                methodName,
+                                methodSignature));
+                            break;
                     }
                 }
             }
@@ -197,7 +255,7 @@ internal static class Program
             MethodSignature = methodSignature,
             Category = reader.ReadByte(),
         };
-        ReadUnitNamedArguments(ref reader, entry);
+        ReadNamedArguments(ref reader, entry, UnitNamedArgumentReaders);
         return entry;
     }
 
@@ -220,7 +278,7 @@ internal static class Program
             Metrics = reader.ReadUInt16(),
             Modes = 7,
         };
-        ReadBenchmarkNamedArguments(ref reader, entry);
+        ReadNamedArguments(ref reader, entry, BenchmarkNamedArgumentReaders);
         return entry;
     }
 
@@ -236,48 +294,15 @@ internal static class Program
         return reader;
     }
 
-    private static void ReadUnitNamedArguments(ref BlobReader reader, DeclaredUnitEntry entry)
+    private static bool TryResolveDeclaredAttributeSchema(string attributeTypeName, out DeclarationAttributeSchema schema)
     {
-        var namedArgumentCount = reader.ReadUInt16();
-        for (var index = 0; index < namedArgumentCount; index++)
-        {
-            _ = reader.ReadByte();
-            var typeCode = ReadFieldOrPropertyType(ref reader);
-            var name = reader.ReadSerializedString() ?? string.Empty;
-            switch (name)
-            {
-                case "Alias":
-                    entry.Alias = reader.ReadSerializedString();
-                    break;
-                case "CapabilityFamily":
-                    entry.CapabilityFamily = reader.ReadByte();
-                    break;
-                case "Capability":
-                    entry.CapabilityItem = reader.ReadUInt16();
-                    break;
-                case "Requires":
-                    entry.Requires = reader.ReadUInt32();
-                    break;
-                case "Archetype":
-                    entry.Archetype = reader.ReadByte();
-                    break;
-                case "HotUpdateCapability":
-                    entry.HotUpdateCapability = reader.ReadUInt16();
-                    break;
-                case "Evidence":
-                    entry.Evidence = reader.ReadUInt16();
-                    break;
-                case "Priority":
-                    entry.Priority = reader.ReadByte();
-                    break;
-                default:
-                    SkipArgumentValue(ref reader, typeCode);
-                    break;
-            }
-        }
+        return DeclaredAttributeSchemas.TryGetValue(attributeTypeName, out schema!);
     }
 
-    private static void ReadBenchmarkNamedArguments(ref BlobReader reader, DeclaredBenchmarkEntry entry)
+    private static void ReadNamedArguments(
+        ref BlobReader reader,
+        DeclaredEntryBase entry,
+        IReadOnlyDictionary<string, NamedArgumentReader> namedArgumentReaders)
     {
         var namedArgumentCount = reader.ReadUInt16();
         for (var index = 0; index < namedArgumentCount; index++)
@@ -285,42 +310,13 @@ internal static class Program
             _ = reader.ReadByte();
             var typeCode = ReadFieldOrPropertyType(ref reader);
             var name = reader.ReadSerializedString() ?? string.Empty;
-            switch (name)
+            if (namedArgumentReaders.TryGetValue(name, out var namedArgumentReader))
             {
-                case "Alias":
-                    entry.Alias = reader.ReadSerializedString();
-                    break;
-                case "CapabilityFamily":
-                    entry.CapabilityFamily = reader.ReadByte();
-                    break;
-                case "Capability":
-                    entry.CapabilityItem = reader.ReadUInt16();
-                    break;
-                case "Requires":
-                    entry.Requires = reader.ReadUInt32();
-                    break;
-                case "Archetype":
-                    entry.Archetype = reader.ReadByte();
-                    break;
-                case "HotUpdateCapability":
-                    entry.HotUpdateCapability = reader.ReadUInt16();
-                    break;
-                case "Modes":
-                    entry.Modes = reader.ReadByte();
-                    break;
-                case "WarmupCount":
-                    entry.WarmupCount = reader.ReadByte();
-                    break;
-                case "IterationCount":
-                    entry.IterationCount = reader.ReadUInt16();
-                    break;
-                case "InvocationCount":
-                    entry.InvocationCount = reader.ReadUInt16();
-                    break;
-                default:
-                    SkipArgumentValue(ref reader, typeCode);
-                    break;
+                namedArgumentReader(ref reader, entry, typeCode);
+                continue;
             }
+
+            SkipArgumentValue(ref reader, typeCode);
         }
     }
 
@@ -333,6 +329,96 @@ internal static class Program
         }
 
         return typeCode;
+    }
+
+    private static void ReadAliasArgument(ref BlobReader reader, DeclaredEntryBase entry, SerializationTypeCode typeCode)
+    {
+        entry.Alias = reader.ReadSerializedString();
+    }
+
+    private static void ReadCapabilityFamilyArgument(ref BlobReader reader, DeclaredEntryBase entry, SerializationTypeCode typeCode)
+    {
+        entry.CapabilityFamily = reader.ReadByte();
+    }
+
+    private static void ReadCapabilityArgument(ref BlobReader reader, DeclaredEntryBase entry, SerializationTypeCode typeCode)
+    {
+        entry.CapabilityItem = reader.ReadUInt16();
+    }
+
+    private static void ReadRequiresArgument(ref BlobReader reader, DeclaredEntryBase entry, SerializationTypeCode typeCode)
+    {
+        entry.Requires = reader.ReadUInt32();
+    }
+
+    private static void ReadArchetypeArgument(ref BlobReader reader, DeclaredEntryBase entry, SerializationTypeCode typeCode)
+    {
+        entry.Archetype = reader.ReadByte();
+    }
+
+    private static void ReadHotUpdateCapabilityArgument(ref BlobReader reader, DeclaredEntryBase entry, SerializationTypeCode typeCode)
+    {
+        entry.HotUpdateCapability = reader.ReadUInt16();
+    }
+
+    private static void ReadEvidenceArgument(ref BlobReader reader, DeclaredEntryBase entry, SerializationTypeCode typeCode)
+    {
+        if (entry is not DeclaredUnitEntry unitEntry)
+        {
+            throw new BadImageFormatException("unit-test attribute schema was bound to a non-unit entry");
+        }
+
+        unitEntry.Evidence = reader.ReadUInt16();
+    }
+
+    private static void ReadPriorityArgument(ref BlobReader reader, DeclaredEntryBase entry, SerializationTypeCode typeCode)
+    {
+        if (entry is not DeclaredUnitEntry unitEntry)
+        {
+            throw new BadImageFormatException("unit-test attribute schema was bound to a non-unit entry");
+        }
+
+        unitEntry.Priority = reader.ReadByte();
+    }
+
+    private static void ReadModesArgument(ref BlobReader reader, DeclaredEntryBase entry, SerializationTypeCode typeCode)
+    {
+        if (entry is not DeclaredBenchmarkEntry benchmarkEntry)
+        {
+            throw new BadImageFormatException("benchmark attribute schema was bound to a non-benchmark entry");
+        }
+
+        benchmarkEntry.Modes = reader.ReadByte();
+    }
+
+    private static void ReadWarmupCountArgument(ref BlobReader reader, DeclaredEntryBase entry, SerializationTypeCode typeCode)
+    {
+        if (entry is not DeclaredBenchmarkEntry benchmarkEntry)
+        {
+            throw new BadImageFormatException("benchmark attribute schema was bound to a non-benchmark entry");
+        }
+
+        benchmarkEntry.WarmupCount = reader.ReadByte();
+    }
+
+    private static void ReadIterationCountArgument(ref BlobReader reader, DeclaredEntryBase entry, SerializationTypeCode typeCode)
+    {
+        if (entry is not DeclaredBenchmarkEntry benchmarkEntry)
+        {
+            throw new BadImageFormatException("benchmark attribute schema was bound to a non-benchmark entry");
+        }
+
+        benchmarkEntry.IterationCount = reader.ReadUInt16();
+    }
+
+    private static void ReadInvocationCountArgument(ref BlobReader reader, DeclaredEntryBase entry, SerializationTypeCode typeCode)
+    {
+        if (entry is not DeclaredBenchmarkEntry benchmarkEntry)
+        {
+            throw new BadImageFormatException("benchmark attribute schema was bound to a non-benchmark entry");
+        }
+
+        benchmarkEntry.InvocationCount = reader.ReadUInt16();
     }
 
     private static SerializationTypeCode EnumUnderlyingType(string? enumTypeName)
@@ -386,52 +472,30 @@ internal static class Program
         return SerializationTypeCode.Int32;
     }
 
+    private static object? ReadAttributeArgumentValue(ref BlobReader reader, SerializationTypeCode typeCode)
+    {
+        return typeCode switch
+        {
+            SerializationTypeCode.Boolean => reader.ReadBoolean(),
+            SerializationTypeCode.Byte => reader.ReadByte(),
+            SerializationTypeCode.Char => reader.ReadUInt16(),
+            SerializationTypeCode.Int16 => reader.ReadInt16(),
+            SerializationTypeCode.Int32 => reader.ReadInt32(),
+            SerializationTypeCode.Int64 => reader.ReadInt64(),
+            SerializationTypeCode.SByte => reader.ReadSByte(),
+            SerializationTypeCode.Single => reader.ReadSingle(),
+            SerializationTypeCode.Double => reader.ReadDouble(),
+            SerializationTypeCode.String => reader.ReadSerializedString(),
+            SerializationTypeCode.UInt16 => reader.ReadUInt16(),
+            SerializationTypeCode.UInt32 => reader.ReadUInt32(),
+            SerializationTypeCode.UInt64 => reader.ReadUInt64(),
+            _ => throw new BadImageFormatException($"unsupported attribute argument type: {typeCode}"),
+        };
+    }
+
     private static void SkipArgumentValue(ref BlobReader reader, SerializationTypeCode typeCode)
     {
-        switch (typeCode)
-        {
-            case SerializationTypeCode.Boolean:
-                _ = reader.ReadBoolean();
-                return;
-            case SerializationTypeCode.Byte:
-                _ = reader.ReadByte();
-                return;
-            case SerializationTypeCode.Char:
-                _ = reader.ReadUInt16();
-                return;
-            case SerializationTypeCode.Int16:
-                _ = reader.ReadInt16();
-                return;
-            case SerializationTypeCode.Int32:
-                _ = reader.ReadInt32();
-                return;
-            case SerializationTypeCode.Int64:
-                _ = reader.ReadInt64();
-                return;
-            case SerializationTypeCode.SByte:
-                _ = reader.ReadSByte();
-                return;
-            case SerializationTypeCode.Single:
-                _ = reader.ReadSingle();
-                return;
-            case SerializationTypeCode.Double:
-                _ = reader.ReadDouble();
-                return;
-            case SerializationTypeCode.String:
-                _ = reader.ReadSerializedString();
-                return;
-            case SerializationTypeCode.UInt16:
-                _ = reader.ReadUInt16();
-                return;
-            case SerializationTypeCode.UInt32:
-                _ = reader.ReadUInt32();
-                return;
-            case SerializationTypeCode.UInt64:
-                _ = reader.ReadUInt64();
-                return;
-            default:
-                throw new BadImageFormatException($"unsupported attribute argument type: {typeCode}");
-        }
+        _ = ReadAttributeArgumentValue(ref reader, typeCode);
     }
 
     private static string BuildMethodSignature(MetadataReader metadataReader, MethodDefinitionHandle methodHandle)
@@ -565,6 +629,15 @@ internal static class Program
         };
     }
 }
+
+internal enum DeclaredAttributeKind : byte
+{
+    None = 0,
+    UnitTest = 1,
+    Benchmark = 2,
+}
+
+internal sealed record DeclarationAttributeSchema(string AttributeTypeName, DeclaredAttributeKind Kind);
 
 internal sealed class DeclarationScanPayload
 {

@@ -1,3 +1,4 @@
+using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.HotUpdate;
 using Chaos.TestFramework;
 
@@ -6,7 +7,10 @@ namespace MixedExecutionFeaturePack;
 internal static class MixedDelegateFlowProofEntry
 {
     private const string DelegateWrapperId = "mixed-delegate-wrapper";
-    private const string HotUpdateSubjectId = "MixedDelegateFlowProof/HotService::Process(System.Int32)";
+    private static readonly ManagedMethodIdentityArtifact HotUpdateIdentity =
+        ManagedMethodIdentityResolver.Create(
+            "MixedDelegateFlowProof/HotService::Process(System.Int32)",
+            "System.Int32 HotService::Process(System.Int32)");
 
     [ChaosUnitTest(
         ChaosUnitCategory.RuntimeContract,
@@ -25,14 +29,15 @@ internal static class MixedDelegateFlowProofEntry
                 new DelegateWrapperSpec
                 {
                     WrapperId = DelegateWrapperId,
-                    HotUpdateSubjectId = HotUpdateSubjectId,
+                    HotUpdateIdentity = HotUpdateIdentity,
+                    HotUpdateSubjectId = HotUpdateIdentity.SubjectId,
                 },
             ],
         });
 
         var dispatcher = new BridgeDispatcher();
         dispatcher.ApplyPlan(plan);
-        dispatcher.RegisterHotUpdateInt32UnaryTarget(HotUpdateSubjectId, static value => value * 2);
+        dispatcher.RegisterHotUpdateInt32UnaryTarget(HotUpdateIdentity, static value => value * 2);
 
         var callback = dispatcher.CreateAotDelegateWrapper(DelegateWrapperId);
         Assert.Equal(42, callback(21));

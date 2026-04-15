@@ -151,7 +151,8 @@ class Phase8ProductizationGatesTests(unittest.TestCase):
             "Rollback()",
             "GetActivePatches()",
             "ValidateIntegrity()",
-            "SupplementalMetadataLoader",
+            "HotUpdateAssemblyLoader",
+            "SupplementalMetadataRegistry",
             "PackageValidator.ValidateCompatibleTargetAotVersion",
         ]:
             self.assertIn(required_fragment, runtime_manager_source)

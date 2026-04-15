@@ -1,3 +1,5 @@
+using Chaos.IL2CPP.Contracts;
+
 namespace Chaos.IL2CPP.Interpreter;
 
 public sealed record InterpreterIR
@@ -10,6 +12,10 @@ public sealed record IRMethod
     public required string MethodId { get; init; }
 
     public required string SubjectId { get; init; }
+
+    public ManagedMethodIdentityArtifact? Identity { get; init; }
+
+    public BodyAvailabilityCode? BodyAvailabilityCode { get; init; }
 
     public IReadOnlyList<IRBasicBlock> Blocks { get; init; } = [];
 
@@ -26,6 +32,8 @@ public sealed record IRBasicBlock
 public sealed record IRInstruction
 {
     public required IROpCode OpCode { get; init; }
+
+    public HybridDispatchKind? DispatchKindCode { get; init; }
 
     public IReadOnlyList<IROperand> Operands { get; init; } = [];
 

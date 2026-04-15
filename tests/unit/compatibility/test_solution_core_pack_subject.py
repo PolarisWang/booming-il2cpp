@@ -118,16 +118,18 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         self.assertIn("chaos_subject_reference_proof", proof_cmake_text)
         self.assertIn("CHAOS_SUBJECT_GENERATED_SOURCE", proof_cmake_text)
 
-    def test_solution_core_launcher_supports_generic_declared_source_entry_selection(self) -> None:
+    def test_solution_core_launcher_uses_compact_subject_entry_selection_only(self) -> None:
         launcher_source = LAUNCHER_PROGRAM_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
-            "ChaosSourceEntryArguments.TryParse",
-            "return InvokeSourceEntry(sourceEntrySelection.SourceEntry);",
-            "return InvokeStaticEntry(assemblyName, typeName, methodName);",
-            "assembly.GetTypes()",
+            "ChaosSubjectEntryArguments.TryParse",
+            "ChaosSubjectEntryKind.Proof",
+            "ChaosSubjectSlice.CoreRuntimeFeaturesProof",
+            "ChaosSubjectSlice.CoreRuntimeInterfaceDispatchProof",
         ]:
             self.assertIn(required_fragment, launcher_source)
+        self.assertNotIn("ChaosSourceEntryArguments.TryParse", launcher_source)
+        self.assertNotIn("InvokeSourceEntry(", launcher_source)
 
 
 if __name__ == "__main__":

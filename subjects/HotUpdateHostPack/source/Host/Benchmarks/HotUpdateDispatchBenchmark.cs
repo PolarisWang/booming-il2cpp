@@ -1,3 +1,4 @@
+using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.HotUpdate;
 using Chaos.TestFramework;
 
@@ -5,8 +6,11 @@ namespace HotUpdateHostPack;
 
 internal static class HotUpdateDispatchBenchmarkEntry
 {
-    private const string SubjectId = "BenchHotUpdateDispatch/HotPatch::AddOne(System.Int32)";
     private const int IterationCount = 1000;
+    private static readonly ManagedMethodIdentityArtifact BenchmarkIdentity =
+        ManagedMethodIdentityResolver.Create(
+            "BenchHotUpdateDispatch/HotPatch::AddOne(System.Int32)",
+            "System.Int32 HotPatch::AddOne(System.Int32)");
 
     [ChaosBenchmark(
         ChaosBenchmarkCategory.HotUpdate,
@@ -24,12 +28,12 @@ internal static class HotUpdateDispatchBenchmarkEntry
     public static int RunWorkload()
     {
         var runtimeManager = new RuntimeManager();
-        runtimeManager.RegisterInt32Unary(SubjectId, static value => value + 1);
+        runtimeManager.RegisterInt32Unary(BenchmarkIdentity, static value => value + 1);
 
         var checksum = 0;
         for (var index = 0; index < IterationCount; index++)
         {
-            checksum += runtimeManager.DispatchInt32Unary(SubjectId, index, static value => value);
+            checksum += runtimeManager.DispatchInt32Unary(BenchmarkIdentity, index, static value => value);
         }
 
         return checksum;

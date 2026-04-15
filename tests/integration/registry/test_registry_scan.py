@@ -696,19 +696,22 @@ class RegistryScanTests(unittest.TestCase):
         )
         self.assertEqual(
             "HotUpdateHostPack/Program::Main()",
-            hot_update_item["defaultSourceEntry"],
+            hot_update_item["displaySourceEntry"],
         )
         self.assertEqual(
             {
                 "entryKind": 1,
                 "entrySlice": 1,
             },
-            hot_update_item["defaultSubjectEntrySelection"],
+            hot_update_item["displaySubjectEntrySelection"],
         )
         self.assertEqual(
             "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
-            hot_update_item["defaultWorkloadEntry"],
+            hot_update_item["displayWorkloadEntry"],
         )
+        self.assertNotIn("defaultSourceEntry", hot_update_item)
+        self.assertNotIn("defaultSubjectEntrySelection", hot_update_item)
+        self.assertNotIn("defaultWorkloadEntry", hot_update_item)
 
         self.assertEqual(
             "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj",
@@ -716,19 +719,22 @@ class RegistryScanTests(unittest.TestCase):
         )
         self.assertEqual(
             "MixedExecutionFeaturePack/MixedExecutionProofEntry::Run()",
-            mixed_execution_item["defaultSourceEntry"],
+            mixed_execution_item["displaySourceEntry"],
         )
         self.assertEqual(
             {
                 "entryKind": 1,
                 "entrySlice": 2,
             },
-            mixed_execution_item["defaultSubjectEntrySelection"],
+            mixed_execution_item["displaySubjectEntrySelection"],
         )
         self.assertEqual(
             "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
-            mixed_execution_item["defaultWorkloadEntry"],
+            mixed_execution_item["displayWorkloadEntry"],
         )
+        self.assertNotIn("defaultSourceEntry", mixed_execution_item)
+        self.assertNotIn("defaultSubjectEntrySelection", mixed_execution_item)
+        self.assertNotIn("defaultWorkloadEntry", mixed_execution_item)
 
         self.assertEqual(
             "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
@@ -736,19 +742,22 @@ class RegistryScanTests(unittest.TestCase):
         )
         self.assertEqual(
             "CoreRuntimeFeatures/InterfaceDispatchProofEntry::Run()",
-            solution_core_item["defaultSourceEntry"],
+            solution_core_item["displaySourceEntry"],
         )
         self.assertEqual(
             {
                 "entryKind": 1,
                 "entrySlice": 11,
             },
-            solution_core_item["defaultSubjectEntrySelection"],
+            solution_core_item["displaySubjectEntrySelection"],
         )
         self.assertEqual(
             "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
-            solution_core_item["defaultWorkloadEntry"],
+            solution_core_item["displayWorkloadEntry"],
         )
+        self.assertNotIn("defaultSourceEntry", solution_core_item)
+        self.assertNotIn("defaultSubjectEntrySelection", solution_core_item)
+        self.assertNotIn("defaultWorkloadEntry", solution_core_item)
 
     def test_registry_scan_projects_engineering_and_declared_catalog_object_families(self) -> None:
         registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_compiled_object_families")
@@ -797,6 +806,8 @@ class RegistryScanTests(unittest.TestCase):
         )
         self.assertEqual(1, declared_unit_item["category"])
         self.assertEqual("Runtime Contract", declared_unit_item["categoryLabel"])
+        self.assertIsInstance(declared_unit_item["entryIndex"], int)
+        self.assertGreaterEqual(declared_unit_item["entryIndex"], 0)
         self.assertEqual(0, declared_unit_item["archetype"])
         self.assertEqual("Unspecified", declared_unit_item["archetypeLabel"])
         self.assertEqual([], declared_unit_item["hotUpdateCapabilityLabels"])
@@ -827,6 +838,8 @@ class RegistryScanTests(unittest.TestCase):
             ["Package Load", "Patch Integrity"],
             hot_update_benchmark_item["hotUpdateCapabilityLabels"],
         )
+        self.assertIsInstance(hot_update_benchmark_item["entryIndex"], int)
+        self.assertGreaterEqual(hot_update_benchmark_item["entryIndex"], 0)
         self.assertEqual(["managed"], hot_update_benchmark_item["supportedModes"])
         self.assertEqual(["Wall Clock"], hot_update_benchmark_item["metricLabels"])
         self.assertEqual(["Hot Update"], hot_update_benchmark_item["requirementLabels"])

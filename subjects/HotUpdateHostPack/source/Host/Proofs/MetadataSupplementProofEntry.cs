@@ -13,6 +13,14 @@ internal static class MetadataSupplementProofEntry
     private const string PackageSubjectId = "MetadataSupplementProof/HotPatch::Apply()";
     private const int AotListInt32Token = 0x02000001;
     private const int AotListAddMethodToken = 0x06000001;
+    private static readonly ManagedMethodIdentityArtifact AotListAddMethodIdentity =
+        ManagedMethodIdentityResolver.Create(
+            AotListAddMethodSubjectId,
+            "System.Void System.Collections.Generic.List<System.Int32>::Add(System.Int32)");
+    private static readonly ManagedMethodIdentityArtifact PackageIdentity =
+        ManagedMethodIdentityResolver.Create(
+            PackageSubjectId,
+            "System.Int32 HotPatch::Apply()");
 
     [ChaosUnitTest(
         ChaosUnitCategory.HotUpdateContract,
@@ -89,9 +97,16 @@ internal static class MetadataSupplementProofEntry
             var loaded = runtimeManager.LoadPackage(
                 packageRoot,
                 HotUpdatePackageSupport.CurrentAotVersion,
-                subjectIdToConstantInt32: new Dictionary<string, int>(StringComparer.Ordinal)
+                new HotUpdateMethodBindingSet
                 {
-                    [PackageSubjectId] = 1,
+                    ConstantInt32Bindings =
+                    [
+                        new HotUpdateConstantInt32Binding
+                        {
+                            Identity = PackageIdentity,
+                            ConstantValue = 1,
+                        },
+                    ],
                 });
 
             Assert.True(loaded);
@@ -99,19 +114,21 @@ internal static class MetadataSupplementProofEntry
             Assert.True(integrity.IsValid);
             Assert.Equal(1, runtimeManager.GetActivePatches().Count);
 
-            var loadedMetadata = new SupplementalMetadataLoader().LoadFromBytes(payloadBytes);
-            Assert.True(loadedMetadata.TryGetTypeBySubjectId(HotUpdateTypeSubjectId, out var hotUpdateType));
+            Assert.NotNull(runtimeManager.SupplementalMetadata.ActiveMetadata);
+            Assert.True(runtimeManager.SupplementalMetadata.TryGetMethod(PackageIdentity, out var packageMethod));
+            Assert.NotNull(packageMethod);
+            Assert.True(runtimeManager.SupplementalMetadata.TryGetTypeBySubjectId(HotUpdateTypeSubjectId, out var hotUpdateType));
             Assert.NotNull(hotUpdateType);
-            Assert.True(loadedMetadata.TryGetTypeByToken(hotUpdateType!.MetadataToken, out var hotUpdateTypeByToken));
+            Assert.True(runtimeManager.SupplementalMetadata.TryGetTypeByToken(hotUpdateType!.MetadataToken, out var hotUpdateTypeByToken));
             Assert.NotNull(hotUpdateTypeByToken);
             Assert.Equal(HotUpdateTypeSubjectId, hotUpdateTypeByToken!.SubjectId);
-            Assert.True(loadedMetadata.TryGetTypeBySubjectId(AotListInt32SubjectId, out _));
-            Assert.True(loadedMetadata.TryGetMethodBySubjectId(AotListAddMethodSubjectId, out var aotMethod));
+            Assert.True(runtimeManager.SupplementalMetadata.TryGetTypeBySubjectId(AotListInt32SubjectId, out _));
+            Assert.True(runtimeManager.SupplementalMetadata.TryGetMethod(AotListAddMethodIdentity, out var aotMethod));
             Assert.NotNull(aotMethod);
-            Assert.True(loadedMetadata.TryGetMethodByToken(AotListAddMethodToken, out var aotMethodByToken));
+            Assert.True(runtimeManager.SupplementalMetadata.TryGetMethodByToken(AotListAddMethodToken, out var aotMethodByToken));
             Assert.NotNull(aotMethodByToken);
             Assert.Equal(AotListAddMethodSubjectId, aotMethodByToken!.SubjectId);
-            Assert.True(loadedMetadata.HasGenericInstantiation(stringListSubjectId));
+            Assert.True(runtimeManager.SupplementalMetadata.HasGenericInstantiation(stringListSubjectId));
 
             var values = new List<string> { "hot", "update" };
             values.Add("ok");

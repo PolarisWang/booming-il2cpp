@@ -18,6 +18,7 @@ TOOLING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "too
 DRIVER_DLL_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Driver.dll"
 EXPECTED_BUNDLE_ARTIFACTS = (
     "typed-il-ir.json",
+    "aot-core-ir.json",
     "aot-manifest.json",
     "metadata-registration.json",
     "code-registration.json",
@@ -166,6 +167,7 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         self.assertEqual(
             [
                 "typed-il-ir.json",
+                "aot-core-ir.json",
                 "aot-manifest.json",
                 "metadata-registration.json",
                 "hot-update/supplemental-metadata-template.json",
@@ -247,9 +249,22 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         self.assertEqual(["GoldenSimpleLib.App/Program::Main()"], sorted(methods.keys()))
 
         main_method = methods["GoldenSimpleLib.App/Program::Main()"]
+        self.assertEqual("GoldenSimpleLib.App", main_method["identity"]["assemblyName"])
+        self.assertEqual("GoldenSimpleLib.App/Program", main_method["identity"]["declaringTypeSubjectId"])
+        self.assertEqual("GoldenSimpleLib.App/Program::Main()", main_method["identity"]["subjectId"])
+        self.assertEqual(main_method["methodId"], main_method["identity"]["methodId"])
         self.assertEqual("static-method", main_method["methodRole"])
         self.assertEqual("has-canonical-body", main_method["bodyAvailability"])
+        self.assertEqual(2, main_method["bodyAvailabilityCode"])
         self.assertEqual(["requires-console-string-output"], main_method["capabilities"])
+        self.assertEqual(
+            [4, 4],
+            [
+                instruction["dispatchKindCode"]
+                for instruction in main_method["blocks"][0]["instructions"]
+                if instruction["op"] == "call"
+            ],
+        )
         self.assertEqual(
             [
                 "GoldenSimpleLib.Library/Greeter::BuildMessage()",

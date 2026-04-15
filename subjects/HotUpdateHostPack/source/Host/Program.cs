@@ -13,23 +13,8 @@ internal static class Program
         VersionRollbackProofEntry.Run,
     ];
 
-    private static readonly IReadOnlyDictionary<string, Func<int>> DeclaredProofEntriesBySourceEntry =
-        new Dictionary<string, Func<int>>(StringComparer.Ordinal)
-        {
-            ["HotUpdateHostPack/HotUpdateSkeletonProofEntry::Run()"] = HotUpdateSkeletonProofEntry.Run,
-            ["HotUpdateHostPack/MetadataSupplementProofEntry::Run()"] = MetadataSupplementProofEntry.Run,
-            ["HotUpdateHostPack/MethodReplacementProofEntry::Run()"] = MethodReplacementProofEntry.Run,
-            ["HotUpdateHostPack/SharedContractProofEntry::Run()"] = SharedContractProofEntry.Run,
-            ["HotUpdateHostPack/VersionRollbackProofEntry::Run()"] = VersionRollbackProofEntry.Run,
-        };
-
     public static int Main(string[] args)
     {
-        if (ChaosSourceEntryArguments.TryParse(args, out var sourceEntrySelection) && !sourceEntrySelection.IsNone)
-        {
-            return RunSelectedProof(sourceEntrySelection.SourceEntry);
-        }
-
         if (!ChaosSubjectEntryArguments.TryParse(args, out var selection) || selection.IsNone)
         {
             return RunAll(DefaultProofEntries);
@@ -50,15 +35,5 @@ internal static class Program
         }
 
         return 0;
-    }
-
-    private static int RunSelectedProof(string sourceEntry)
-    {
-        if (DeclaredProofEntriesBySourceEntry.TryGetValue(sourceEntry, out var entry))
-        {
-            return entry();
-        }
-
-        throw new ArgumentOutOfRangeException(nameof(sourceEntry), "unsupported HotUpdateHostPack source entry.");
     }
 }

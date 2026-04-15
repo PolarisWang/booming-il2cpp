@@ -108,7 +108,10 @@ class Phase9HotUpdateE2ETests(unittest.TestCase):
             "GetActivePatches()",
             "DispatchInt32(",
             "DispatchInt32Unary(",
-            "PackageReader.ReadFromDirectory",
+            "HotUpdateAssemblyLoader",
+            "_assemblyLoader.LoadFromDirectory(",
+            "SupplementalMetadataRegistry",
+            "SupplementalMetadata.Activate(package);",
         ]:
             self.assertIn(required_fragment, runtime_manager_source)
 

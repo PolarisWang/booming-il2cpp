@@ -1,3 +1,5 @@
+using Chaos.IL2CPP.Contracts;
+
 namespace Chaos.IL2CPP.HotUpdate;
 
 public sealed class HotUpdateMethodRegistry
@@ -6,76 +8,46 @@ public sealed class HotUpdateMethodRegistry
     private readonly Dictionary<string, Func<int, int>> _int32UnaryEntries = new(StringComparer.Ordinal);
     private readonly Dictionary<string, Func<IReadOnlyList<object?>, object?>> _genericEntries = new(StringComparer.Ordinal);
 
-    public void RegisterConstantInt32(string subjectId, int constantValue)
+    public void RegisterConstantInt32(ManagedMethodIdentityArtifact identity, int constantValue)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
-        var stub = new ConstantInt32InterpreterStub(constantValue);
-        _entries[subjectId] = stub;
-        _genericEntries[subjectId] = _ => stub.Execute();
+        ArgumentNullException.ThrowIfNull(identity);
+        RegisterConstantInt32Core(ManagedMethodIdentityResolver.ResolveSubjectId(identity), constantValue);
     }
 
-    public void RegisterInt32Unary(string subjectId, Func<int, int> target)
+    public void RegisterInt32Unary(ManagedMethodIdentityArtifact identity, Func<int, int> target)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
-        ArgumentNullException.ThrowIfNull(target);
-        _int32UnaryEntries[subjectId] = target;
-        _genericEntries[subjectId] = args =>
-        {
-            if (args.Count != 1)
-            {
-                throw new InvalidOperationException($"hot update unary entry '{subjectId}' expects 1 argument.");
-            }
-
-            return target(Convert.ToInt32(args[0]));
-        };
+        ArgumentNullException.ThrowIfNull(identity);
+        RegisterInt32UnaryBySubjectId(ManagedMethodIdentityResolver.ResolveSubjectId(identity), target);
     }
 
-    public void RegisterMethod(string subjectId, Func<IReadOnlyList<object?>, object?> target)
+    public void RegisterMethod(ManagedMethodIdentityArtifact identity, Func<IReadOnlyList<object?>, object?> target)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
-        ArgumentNullException.ThrowIfNull(target);
-        _genericEntries[subjectId] = target;
+        ArgumentNullException.ThrowIfNull(identity);
+        RegisterMethodBySubjectId(ManagedMethodIdentityResolver.ResolveSubjectId(identity), target);
     }
 
-    public bool TryGet(string subjectId, out ConstantInt32InterpreterStub? stub)
+    public bool TryGet(ManagedMethodIdentityArtifact identity, out ConstantInt32InterpreterStub? stub)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
-        return _entries.TryGetValue(subjectId, out stub);
+        ArgumentNullException.ThrowIfNull(identity);
+        return TryGetCore(ManagedMethodIdentityResolver.ResolveSubjectId(identity), out stub);
     }
 
-    public bool TryGetInt32Unary(string subjectId, out Func<int, int>? target)
+    public bool TryGetInt32Unary(ManagedMethodIdentityArtifact identity, out Func<int, int>? target)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
-        return _int32UnaryEntries.TryGetValue(subjectId, out target);
+        ArgumentNullException.ThrowIfNull(identity);
+        return TryGetInt32UnaryCore(ManagedMethodIdentityResolver.ResolveSubjectId(identity), out target);
     }
 
-    public bool TryDispatchInt32Unary(string subjectId, int value, out int result)
+    public bool TryDispatchInt32Unary(ManagedMethodIdentityArtifact identity, int value, out int result)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
-
-        if (_int32UnaryEntries.TryGetValue(subjectId, out var target))
-        {
-            result = target(value);
-            return true;
-        }
-
-        result = default;
-        return false;
+        ArgumentNullException.ThrowIfNull(identity);
+        return TryDispatchInt32UnaryCore(ManagedMethodIdentityResolver.ResolveSubjectId(identity), value, out result);
     }
 
-    public bool TryDispatch(string subjectId, IReadOnlyList<object?> arguments, out object? result)
+    public bool TryDispatch(ManagedMethodIdentityArtifact identity, IReadOnlyList<object?> arguments, out object? result)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
-        ArgumentNullException.ThrowIfNull(arguments);
-
-        if (_genericEntries.TryGetValue(subjectId, out var target))
-        {
-            result = target(arguments);
-            return true;
-        }
-
-        result = default;
-        return false;
+        ArgumentNullException.ThrowIfNull(identity);
+        return TryDispatchBySubjectId(ManagedMethodIdentityResolver.ResolveSubjectId(identity), arguments, out result);
     }
 
     public HotUpdateMethodRegistrySnapshot Snapshot()
@@ -117,6 +89,78 @@ public sealed class HotUpdateMethodRegistry
         _entries.Clear();
         _int32UnaryEntries.Clear();
         _genericEntries.Clear();
+    }
+
+    private void RegisterConstantInt32Core(string subjectId, int constantValue)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+        var stub = new ConstantInt32InterpreterStub(constantValue);
+        _entries[subjectId] = stub;
+        _genericEntries[subjectId] = _ => stub.Execute();
+    }
+
+    internal void RegisterInt32UnaryBySubjectId(string subjectId, Func<int, int> target)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+        ArgumentNullException.ThrowIfNull(target);
+        _int32UnaryEntries[subjectId] = target;
+        _genericEntries[subjectId] = args =>
+        {
+            if (args.Count != 1)
+            {
+                throw new InvalidOperationException($"hot update unary entry '{subjectId}' expects 1 argument.");
+            }
+
+            return target(Convert.ToInt32(args[0]));
+        };
+    }
+
+    internal void RegisterMethodBySubjectId(string subjectId, Func<IReadOnlyList<object?>, object?> target)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+        ArgumentNullException.ThrowIfNull(target);
+        _genericEntries[subjectId] = target;
+    }
+
+    private bool TryGetCore(string subjectId, out ConstantInt32InterpreterStub? stub)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+        return _entries.TryGetValue(subjectId, out stub);
+    }
+
+    private bool TryGetInt32UnaryCore(string subjectId, out Func<int, int>? target)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+        return _int32UnaryEntries.TryGetValue(subjectId, out target);
+    }
+
+    private bool TryDispatchInt32UnaryCore(string subjectId, int value, out int result)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+
+        if (_int32UnaryEntries.TryGetValue(subjectId, out var target))
+        {
+            result = target(value);
+            return true;
+        }
+
+        result = default;
+        return false;
+    }
+
+    internal bool TryDispatchBySubjectId(string subjectId, IReadOnlyList<object?> arguments, out object? result)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+        ArgumentNullException.ThrowIfNull(arguments);
+
+        if (_genericEntries.TryGetValue(subjectId, out var target))
+        {
+            result = target(arguments);
+            return true;
+        }
+
+        result = default;
+        return false;
     }
 }
 

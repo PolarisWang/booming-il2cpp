@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.HotUpdate;
 
 namespace VersionRollbackProof;
@@ -6,7 +7,10 @@ namespace VersionRollbackProof;
 internal static class Program
 {
     private const string CurrentAotVersion = "1.0.0";
-    private const string SubjectId = "VersionRollbackProof/HotPatch::GetValue()";
+    private static readonly ManagedMethodIdentityArtifact HotPatchValueIdentity =
+        ManagedMethodIdentityResolver.Create(
+            "VersionRollbackProof/HotPatch::GetValue()",
+            "System.Int32 HotPatch::GetValue()");
 
     private static int Main(string[] args)
     {
@@ -23,34 +27,25 @@ internal static class Program
             runtimeManager.LoadPackage(
                 v1Root,
                 CurrentAotVersion,
-                subjectIdToConstantInt32: new Dictionary<string, int>(StringComparer.Ordinal)
-                {
-                    [SubjectId] = 11,
-                });
-            Console.WriteLine($"version-rollback-v1={runtimeManager.DispatchInt32(SubjectId, GetAotFallback)}");
+                CreateBindings(11));
+            Console.WriteLine($"version-rollback-v1={runtimeManager.DispatchInt32(HotPatchValueIdentity, GetAotFallback)}");
 
             runtimeManager.LoadPackage(
                 v2Root,
                 CurrentAotVersion,
-                subjectIdToConstantInt32: new Dictionary<string, int>(StringComparer.Ordinal)
-                {
-                    [SubjectId] = 22,
-                });
-            Console.WriteLine($"version-rollback-v2={runtimeManager.DispatchInt32(SubjectId, GetAotFallback)}");
+                CreateBindings(22));
+            Console.WriteLine($"version-rollback-v2={runtimeManager.DispatchInt32(HotPatchValueIdentity, GetAotFallback)}");
 
             runtimeManager.Rollback();
-            Console.WriteLine($"version-rollback-back-v1={runtimeManager.DispatchInt32(SubjectId, GetAotFallback)}");
+            Console.WriteLine($"version-rollback-back-v1={runtimeManager.DispatchInt32(HotPatchValueIdentity, GetAotFallback)}");
 
             runtimeManager.Rollback();
-            Console.WriteLine($"version-rollback-back-aot={runtimeManager.DispatchInt32(SubjectId, GetAotFallback)}");
+            Console.WriteLine($"version-rollback-back-aot={runtimeManager.DispatchInt32(HotPatchValueIdentity, GetAotFallback)}");
 
             var compatible = runtimeManager.LoadPackage(
                 incompatibleRoot,
                 CurrentAotVersion,
-                subjectIdToConstantInt32: new Dictionary<string, int>(StringComparer.Ordinal)
-                {
-                    [SubjectId] = 99,
-                });
+                CreateBindings(99));
             Console.WriteLine($"version-rollback-compatibility={(compatible ? "unexpected" : "rejected")}");
             return compatible ? 1 : 0;
         }
@@ -68,6 +63,21 @@ internal static class Program
         return 5;
     }
 
+    private static HotUpdateMethodBindingSet CreateBindings(int value)
+    {
+        return new HotUpdateMethodBindingSet
+        {
+            ConstantInt32Bindings =
+            [
+                new HotUpdateConstantInt32Binding
+                {
+                    Identity = HotPatchValueIdentity,
+                    ConstantValue = value,
+                },
+            ],
+        };
+    }
+
     private static string CreatePackageRoot(string workspaceRoot, string suffix, string targetAotVersion)
     {
         var packageRoot = Path.Combine(workspaceRoot, suffix);
@@ -75,7 +85,15 @@ internal static class Program
 
         var assemblyBytes = new byte[] { 0x56, 0x52, 0x50, 0x31 };
         File.WriteAllBytes(Path.Combine(packageRoot, "HotPatch.dll"), assemblyBytes);
-        File.WriteAllText(Path.Combine(packageRoot, "metadata-supplement.bin"), "{}");
+        File.WriteAllText(
+            Path.Combine(packageRoot, "metadata-supplement.bin"),
+            """
+            {
+              "Types": [],
+              "Methods": [],
+              "GenericInstantiations": []
+            }
+            """);
 
         var manifest = new HotUpdatePackage
         {

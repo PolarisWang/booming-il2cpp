@@ -2,7 +2,6 @@ using System.Globalization;
 using System.Text;
 using System.Text.Json;
 using Chaos.IL2CPP.Contracts;
-using Chaos.IL2CPP.Loader;
 
 namespace Chaos.IL2CPP.CodeGen;
 
@@ -17,13 +16,15 @@ public sealed class NativeAotEmitter
     {
         var managedClosureRoot = Path.GetFullPath(request.ManagedClosureRootPath);
         var loweringPlanPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.NativeAotLoweringPlan);
+        var aotCoreIrPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.AotCoreIr);
         var closureManifestPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.ClosureManifest);
         var loweringPlan = LoadRequiredJson<NativeAotLoweringPlanArtifact>(loweringPlanPath);
+        var aotCoreIr = LoadRequiredJson<AotCoreIrArtifact>(aotCoreIrPath);
         var closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath);
         ValidateLoweringPlan(loweringPlan, closureManifest);
 
-        var entryMethod = LoadEntryMethod(managedClosureRoot, closureManifest, loweringPlan.EntrySubjectId);
-        var translationUnit = BuildGeneratedTranslationUnit(loweringPlan, entryMethod);
+        var entryMethod = LoadEntryMethod(aotCoreIr, loweringPlan.EntrySubjectId);
+        var translationUnit = BuildGeneratedTranslationUnit(loweringPlan, aotCoreIr, entryMethod);
         var generatedSource = new NativeAotGeneratedSource
         {
             RelativePath = NativeAotArtifactNames.GeneratedTranslationUnit,
@@ -66,7 +67,6 @@ public sealed class NativeAotEmitter
         RequireStringField(loweringPlan.EntrySymbol, nameof(loweringPlan.EntrySymbol));
         RequireStringField(loweringPlan.EntryMethodToken, nameof(loweringPlan.EntryMethodToken));
         RequireStringField(loweringPlan.WorkloadAbi, nameof(loweringPlan.WorkloadAbi));
-        RequireStringField(closureManifest.InputAssemblyPath, nameof(closureManifest.InputAssemblyPath));
 
         if (!string.Equals(loweringPlan.PlanKind, "generic-managed-entry", StringComparison.Ordinal))
         {
@@ -87,74 +87,34 @@ public sealed class NativeAotEmitter
         }
     }
 
-    private static ManagedMethodModel LoadEntryMethod(
-        string managedClosureRoot,
-        ManagedClosureManifestArtifact closureManifest,
+    private static AotCoreIrMethodArtifact LoadEntryMethod(
+        AotCoreIrArtifact aotCoreIr,
         string entrySubjectId)
     {
-        var inputAssemblyPath = ResolveManifestAssemblyPath(managedClosureRoot, closureManifest.InputAssemblyPath);
-        var additionalAssemblyPaths = closureManifest.AdditionalAssemblyPaths?
-            .Where(path => !string.IsNullOrWhiteSpace(path))
-            .Select(path => ResolveManifestAssemblyPath(managedClosureRoot, path))
-            .Distinct(StringComparer.OrdinalIgnoreCase)
-            .ToList();
-        var loader = new LoaderStage();
-        var loadedWorld = loader.LoadMultiple(new ManagedClosureRequest(
-            inputAssemblyPath,
-            managedClosureRoot,
-            EntryPointSubjectIdOverride: entrySubjectId,
-            AdditionalAssemblyPaths: additionalAssemblyPaths));
-
-        var entryMethod = loadedWorld.Methods.FirstOrDefault(method =>
+        var entryMethod = aotCoreIr.Methods.FirstOrDefault(method =>
             string.Equals(method.SubjectId, entrySubjectId, StringComparison.Ordinal));
         if (entryMethod is null)
         {
             throw new InvalidOperationException(
-                $"managed closure entry method '{entrySubjectId}' is missing from '{inputAssemblyPath}'");
+                $"aot-core-ir entry method '{entrySubjectId}' is missing from generated closure artifacts");
         }
 
         return entryMethod;
     }
 
-    private static string ResolveManifestAssemblyPath(string managedClosureRoot, string manifestAssemblyPath)
-    {
-        if (Path.IsPathRooted(manifestAssemblyPath))
-        {
-            return manifestAssemblyPath;
-        }
-
-        var candidates = new[]
-        {
-            Path.GetFullPath(manifestAssemblyPath, Environment.CurrentDirectory),
-            Path.GetFullPath(manifestAssemblyPath, managedClosureRoot),
-        };
-
-        foreach (var candidate in candidates)
-        {
-            if (File.Exists(candidate))
-            {
-                return candidate;
-            }
-        }
-
-        return candidates[0];
-    }
-
     private static string BuildGeneratedTranslationUnit(
         NativeAotLoweringPlanArtifact loweringPlan,
-        ManagedMethodModel entryMethod)
+        AotCoreIrArtifact aotCoreIr,
+        AotCoreIrMethodArtifact entryMethod)
     {
         ValidateEntryMethod(entryMethod);
+        if (!string.Equals(entryMethod.NativeSymbol, loweringPlan.EntrySymbol, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"native-aot entry symbol '{loweringPlan.EntrySymbol}' does not match aot-core-ir symbol '{entryMethod.NativeSymbol}'");
+        }
 
-        var instructions = FlattenInstructions(entryMethod);
-        ValidateInstructions(entryMethod, instructions);
-
-        var localsCount = DetermineLocalsCount(instructions);
-        var stackCapacity = Math.Max(instructions.Count, 1);
-        var firstOffset = GetRequiredIlOffset(instructions[0]);
-        var offsets = instructions
-            .Select(GetRequiredIlOffset)
-            .ToHashSet();
+        var reachableMethods = CollectReachableMethods(aotCoreIr, entryMethod);
 
         var builder = new StringBuilder();
         builder.AppendLine("#include <array>");
@@ -214,11 +174,88 @@ public sealed class NativeAotEmitter
         builder.AppendLine("}");
         builder.AppendLine("}");
         builder.AppendLine();
+
+        foreach (var method in reachableMethods)
+        {
+            builder.AppendLine(FormatMethodDeclaration(method));
+        }
+        builder.AppendLine();
+
+        foreach (var method in reachableMethods)
+        {
+            EmitManagedMethod(builder, method);
+            builder.AppendLine();
+        }
+
         builder.AppendLine($"// Native AOT entry for {loweringPlan.EntrySubjectId}");
         builder.AppendLine($"// Managed symbol: {loweringPlan.EntrySymbol}");
         builder.AppendLine($"extern \"C\" int {loweringPlan.NativeEntryFunctionName}(void)");
         builder.AppendLine("{");
-        builder.AppendLine($"    std::array<std::int32_t, {Math.Max(localsCount, 1)}> chaos_locals{{}};");
+        builder.AppendLine($"    return {entryMethod.NativeSymbol}();");
+        builder.AppendLine("}");
+        return builder.ToString();
+    }
+
+    private static IReadOnlyList<AotCoreIrMethodArtifact> CollectReachableMethods(
+        AotCoreIrArtifact aotCoreIr,
+        AotCoreIrMethodArtifact entryMethod)
+    {
+        var methods = aotCoreIr.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
+        var ordered = new List<AotCoreIrMethodArtifact>();
+        var visited = new HashSet<string>(StringComparer.Ordinal);
+
+        void Visit(AotCoreIrMethodArtifact method)
+        {
+            if (!visited.Add(method.SubjectId))
+            {
+                return;
+            }
+
+            foreach (var instruction in method.Instructions)
+            {
+                if (!string.Equals(instruction.Op, "call", StringComparison.Ordinal) ||
+                    string.IsNullOrWhiteSpace(instruction.Callee) ||
+                    !methods.TryGetValue(instruction.Callee, out var calleeMethod))
+                {
+                    continue;
+                }
+
+                Visit(calleeMethod);
+            }
+
+            ordered.Add(method);
+        }
+
+        Visit(entryMethod);
+        return ordered;
+    }
+
+    private static string FormatMethodDeclaration(AotCoreIrMethodArtifact method)
+    {
+        return $"extern \"C\" {MapDirectCallReturnType(method.ReturnType)} {method.NativeSymbol}({FormatMethodParameterSignature(method.ParameterCount)});";
+    }
+
+    private static void EmitManagedMethod(
+        StringBuilder builder,
+        AotCoreIrMethodArtifact method)
+    {
+        ValidateMethod(method);
+
+        var instructions = method.Instructions;
+        ValidateInstructions(method, instructions);
+
+        var stackCapacity = Math.Max(instructions.Count, 1);
+        var firstOffset = GetRequiredIlOffset(instructions[0]);
+        var offsets = instructions
+            .Select(GetRequiredIlOffset)
+            .ToHashSet();
+
+        builder.AppendLine($"// Managed method: {method.SubjectId}");
+        builder.AppendLine(
+            $"extern \"C\" {MapDirectCallReturnType(method.ReturnType)} {method.NativeSymbol}({FormatMethodParameterSignature(method.ParameterCount)})");
+        builder.AppendLine("{");
+        builder.AppendLine($"    std::array<std::int32_t, {Math.Max(method.ParameterCount, 1)}> chaos_args{{{FormatMethodArgumentInitializer(method.ParameterCount)}}};");
+        builder.AppendLine($"    std::array<std::int32_t, {Math.Max(method.LocalCount, 1)}> chaos_locals{{}};");
         builder.AppendLine($"    std::array<std::int32_t, {stackCapacity}> chaos_eval_stack{{}};");
         builder.AppendLine("    std::size_t chaos_stack_top = 0;");
         builder.AppendLine();
@@ -231,30 +268,18 @@ public sealed class NativeAotEmitter
             var offset = GetRequiredIlOffset(instruction);
             int? nextOffset = index + 1 < instructions.Count ? GetRequiredIlOffset(instructions[index + 1]) : null;
             builder.AppendLine($"chaos_ip_{offset}:");
-            EmitInstruction(builder, instruction, nextOffset, offsets);
+            EmitInstruction(builder, method, instruction, nextOffset, offsets);
             builder.AppendLine();
         }
 
         builder.AppendLine("}");
-        return builder.ToString();
     }
 
-    private static IReadOnlyList<ManagedInstructionModel> FlattenInstructions(ManagedMethodModel entryMethod)
+    private static void ValidateEntryMethod(AotCoreIrMethodArtifact entryMethod)
     {
-        return entryMethod.Body.Blocks
-            .SelectMany(block => block.Instructions)
-            .ToList();
-    }
+        ValidateMethod(entryMethod);
 
-    private static void ValidateEntryMethod(ManagedMethodModel entryMethod)
-    {
-        if (!entryMethod.IsStatic)
-        {
-            throw new NotSupportedException(
-                $"native-aot entry '{entryMethod.SubjectId}' must be static");
-        }
-
-        if (entryMethod.Parameters.Count != 0)
+        if (entryMethod.ParameterCount != 0)
         {
             throw new NotSupportedException(
                 $"native-aot entry '{entryMethod.SubjectId}' must not take parameters");
@@ -265,17 +290,34 @@ public sealed class NativeAotEmitter
             throw new NotSupportedException(
                 $"native-aot entry '{entryMethod.SubjectId}' must return System.Int32");
         }
+    }
 
-        if (entryMethod.Body.ExceptionRegions.Count != 0)
+    private static void ValidateMethod(AotCoreIrMethodArtifact method)
+    {
+        if (!method.IsStatic)
         {
             throw new NotSupportedException(
-                $"native-aot entry '{entryMethod.SubjectId}' does not support exception regions");
+                $"native-aot method '{method.SubjectId}' must be static");
+        }
+
+        if (string.IsNullOrWhiteSpace(method.NativeSymbol))
+        {
+            throw new InvalidOperationException(
+                $"native-aot method '{method.SubjectId}' is missing native symbol metadata");
+        }
+
+        _ = MapDirectCallReturnType(method.ReturnType);
+
+        if (method.ExceptionRegionCount != 0)
+        {
+            throw new NotSupportedException(
+                $"native-aot method '{method.SubjectId}' does not support exception regions");
         }
     }
 
     private static void ValidateInstructions(
-        ManagedMethodModel entryMethod,
-        IReadOnlyList<ManagedInstructionModel> instructions)
+        AotCoreIrMethodArtifact entryMethod,
+        IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
     {
         if (instructions.Count == 0)
         {
@@ -295,26 +337,10 @@ public sealed class NativeAotEmitter
         }
     }
 
-    private static int DetermineLocalsCount(IReadOnlyList<ManagedInstructionModel> instructions)
-    {
-        var maxLocalIndex = -1;
-        foreach (var instruction in instructions)
-        {
-            if (!string.Equals(instruction.Op, "ldloc", StringComparison.Ordinal) &&
-                !string.Equals(instruction.Op, "stloc", StringComparison.Ordinal))
-            {
-                continue;
-            }
-
-            maxLocalIndex = Math.Max(maxLocalIndex, GetRequiredIntOperand(instruction));
-        }
-
-        return maxLocalIndex + 1;
-    }
-
     private static void EmitInstruction(
         StringBuilder builder,
-        ManagedInstructionModel instruction,
+        AotCoreIrMethodArtifact method,
+        AotCoreIrInstructionArtifact instruction,
         int? nextOffset,
         IReadOnlySet<int> offsets)
     {
@@ -323,6 +349,12 @@ public sealed class NativeAotEmitter
             case "ldc.i4":
                 builder.AppendLine(
                     $"    chaos_eval_stack[chaos_stack_top++] = {FormatInt32Literal(GetRequiredIntOperand(instruction))};");
+                AppendGotoNext(builder, nextOffset, instruction.Op);
+                return;
+
+            case "ldarg":
+                builder.AppendLine(
+                    $"    chaos_eval_stack[chaos_stack_top++] = chaos_args[{GetRequiredIntOperand(instruction)}];");
                 AppendGotoNext(builder, nextOffset, instruction.Op);
                 return;
 
@@ -358,6 +390,10 @@ public sealed class NativeAotEmitter
                 EmitBinaryArithmetic(builder, "chaos_rem", nextOffset, instruction.Op);
                 return;
 
+            case "call":
+                EmitDirectCall(builder, instruction, nextOffset, instruction.Op);
+                return;
+
             case "br":
                 builder.AppendLine($"    goto chaos_ip_{GetRequiredBranchTarget(instruction, offsets)};");
                 return;
@@ -367,13 +403,52 @@ public sealed class NativeAotEmitter
                 return;
 
             case "ret":
-                builder.AppendLine("    return chaos_eval_stack[--chaos_stack_top];");
+                if (string.Equals(method.ReturnType, "System.Void", StringComparison.Ordinal))
+                {
+                    builder.AppendLine("    return;");
+                }
+                else
+                {
+                    builder.AppendLine("    return chaos_eval_stack[--chaos_stack_top];");
+                }
                 return;
 
             default:
                 throw new NotSupportedException(
                     $"native-aot lowering does not support opcode '{instruction.Op}'");
         }
+    }
+
+    private static void EmitDirectCall(
+        StringBuilder builder,
+        AotCoreIrInstructionArtifact instruction,
+        int? nextOffset,
+        string op)
+    {
+        var targetSymbol = GetRequiredTargetSymbol(instruction);
+        var parameterCount = GetRequiredTargetParameterCount(instruction);
+        var mappedReturnType = MapDirectCallReturnType(instruction.TargetReturnType);
+
+        builder.AppendLine("    {");
+        for (var parameterIndex = parameterCount - 1; parameterIndex >= 0; parameterIndex--)
+        {
+            builder.AppendLine(
+                $"        const auto chaos_arg_{parameterIndex} = chaos_eval_stack[--chaos_stack_top];");
+        }
+
+        var invocation = $"{targetSymbol}({FormatDirectCallArgumentList(parameterCount)})";
+        if (string.Equals(mappedReturnType, "void", StringComparison.Ordinal))
+        {
+            builder.AppendLine($"        {invocation};");
+        }
+        else
+        {
+            builder.AppendLine($"        const auto chaos_result = {invocation};");
+            builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = chaos_result;");
+        }
+
+        builder.AppendLine("    }");
+        AppendGotoNext(builder, nextOffset, op);
     }
 
     private static void EmitBinaryArithmetic(
@@ -394,7 +469,7 @@ public sealed class NativeAotEmitter
     private static void EmitComparisonBranch(
         StringBuilder builder,
         string comparisonOperator,
-        ManagedInstructionModel instruction,
+        AotCoreIrInstructionArtifact instruction,
         int? nextOffset,
         IReadOnlySet<int> offsets)
     {
@@ -429,7 +504,7 @@ public sealed class NativeAotEmitter
     }
 
     private static int GetRequiredBranchTarget(
-        ManagedInstructionModel instruction,
+        AotCoreIrInstructionArtifact instruction,
         IReadOnlySet<int> offsets)
     {
         var targetOffset = GetRequiredIntOperand(instruction);
@@ -442,26 +517,97 @@ public sealed class NativeAotEmitter
         return targetOffset;
     }
 
-    private static int GetRequiredIlOffset(ManagedInstructionModel instruction)
+    private static int GetRequiredIlOffset(AotCoreIrInstructionArtifact instruction)
     {
-        if (instruction.IlOffset is null)
-        {
-            throw new InvalidOperationException(
-                $"native-aot lowering requires IL offsets; opcode '{instruction.Op}' did not provide one");
-        }
-
-        return instruction.IlOffset.Value;
+        return instruction.IlOffset;
     }
 
-    private static int GetRequiredIntOperand(ManagedInstructionModel instruction)
+    private static int GetRequiredIntOperand(AotCoreIrInstructionArtifact instruction)
     {
         if (instruction.Operand is int value)
         {
             return value;
         }
 
+        if (instruction.Operand is JsonElement element &&
+            element.ValueKind == JsonValueKind.Number &&
+            element.TryGetInt32(out var jsonValue))
+        {
+            return jsonValue;
+        }
+
         throw new InvalidOperationException(
             $"opcode '{instruction.Op}' requires an Int32 operand for native-aot lowering");
+    }
+
+    private static string GetRequiredTargetSymbol(AotCoreIrInstructionArtifact instruction)
+    {
+        if (!string.IsNullOrWhiteSpace(instruction.TargetSymbol))
+        {
+            return instruction.TargetSymbol;
+        }
+
+        throw new NotSupportedException(
+            $"native-aot lowering does not support unresolved call target '{instruction.Callee ?? "<null>"}'");
+    }
+
+    private static int GetRequiredTargetParameterCount(AotCoreIrInstructionArtifact instruction)
+    {
+        if (instruction.TargetParameterCount is int parameterCount && parameterCount >= 0)
+        {
+            return parameterCount;
+        }
+
+        throw new NotSupportedException(
+            $"native-aot lowering does not support call target '{instruction.TargetSymbol ?? instruction.Callee ?? "<null>"}' without parameter metadata");
+    }
+
+    private static string MapDirectCallReturnType(string? targetReturnType)
+    {
+        return targetReturnType switch
+        {
+            "System.Int32" => "std::int32_t",
+            "System.Void" => "void",
+            _ => throw new NotSupportedException(
+                $"native-aot lowering does not support direct-call return type '{targetReturnType ?? "<null>"}'"),
+        };
+    }
+
+    private static string FormatMethodParameterSignature(int parameterCount)
+    {
+        if (parameterCount < 0)
+        {
+            throw new NotSupportedException("native-aot lowering requires a non-negative parameter count.");
+        }
+
+        if (parameterCount == 0)
+        {
+            return "void";
+        }
+
+        return string.Join(
+            ", ",
+            Enumerable.Range(0, parameterCount).Select(index => $"std::int32_t chaos_arg_{index}"));
+    }
+
+    private static string FormatMethodArgumentInitializer(int parameterCount)
+    {
+        if (parameterCount == 0)
+        {
+            return string.Empty;
+        }
+
+        return string.Join(", ", Enumerable.Range(0, parameterCount).Select(index => $"chaos_arg_{index}"));
+    }
+
+    private static string FormatDirectCallArgumentList(int parameterCount)
+    {
+        if (parameterCount == 0)
+        {
+            return string.Empty;
+        }
+
+        return string.Join(", ", Enumerable.Range(0, parameterCount).Select(index => $"chaos_arg_{index}"));
     }
 
     private static string FormatInt32Literal(int value)

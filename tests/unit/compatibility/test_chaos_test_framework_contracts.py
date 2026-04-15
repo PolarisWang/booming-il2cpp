@@ -79,6 +79,8 @@ class ChaosTestFrameworkContractTests(unittest.TestCase):
         self.assertIn("SimpleLibrarySolution = 1", contract_text)
         self.assertIn("PackageLoad = 1 << 0", contract_text)
         self.assertIn("MetadataSupplement = 1 << 12", contract_text)
+        self.assertNotIn("public readonly record struct ChaosSourceEntrySelection", contract_text)
+        self.assertNotIn("public static class ChaosSourceEntryArguments", contract_text)
 
     def test_declaration_contract_module_normalizes_modes(self) -> None:
         declarations_module = load_module(DECLARATIONS_MODULE_PATH, "chaos_declaration_contract_modes")

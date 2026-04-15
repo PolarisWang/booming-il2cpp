@@ -141,6 +141,7 @@ def build_plan(
     selected_source.update(dict(matrix.get("source") or {}))
     if source_entry is not None:
         selected_source["entry"] = source_entry
+    explicit_workload_entry = workload_entry is not None
     normalized_source_entry_selection = _normalize_source_entry_selection(selected_source)
     if normalized_source_entry_selection:
         selected_source["entrySelection"] = normalized_source_entry_selection
@@ -150,7 +151,10 @@ def build_plan(
         or manifest.get("workloadEntry")
         or ""
     )
-    if selected_workload_entry and not str(selected_source.get("entry") or ""):
+    if explicit_workload_entry:
+        if selected_workload_entry:
+            selected_source["entry"] = selected_workload_entry
+    elif selected_workload_entry and not str(selected_source.get("entry") or ""):
         selected_source["entry"] = selected_workload_entry
     normalized_entry_selection = dict(entry_selection or {})
     if normalized_entry_selection:
@@ -195,6 +199,7 @@ def build_plan(
                 "sourceEntry": str(selected_source.get("entry") or ""),
                 "sourceEntrySelection": dict(normalized_source_entry_selection),
                 "workloadEntry": selected_workload_entry,
+                "entrySelection": dict(normalized_entry_selection),
                 "stageId": stage_id,
                 "kind": kind,
                 "bucket": bucket,

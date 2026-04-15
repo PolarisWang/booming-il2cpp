@@ -1,3 +1,4 @@
+using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.HotUpdate;
 using Chaos.TestFramework;
 
@@ -5,8 +6,14 @@ namespace HotUpdateHostPack;
 
 internal static class HotUpdateSkeletonProofEntry
 {
-    private const string HotUpdateSubjectId = "HotUpdateSkeletonProof/Helper::GetValue()";
-    private const string HotUpdateAddSubjectId = "HotUpdateSkeletonProof/HotPatch::Add()";
+    private static readonly ManagedMethodIdentityArtifact HotUpdateValueIdentity =
+        ManagedMethodIdentityResolver.Create(
+            "HotUpdateSkeletonProof/Helper::GetValue()",
+            "System.Int32 Helper::GetValue()");
+    private static readonly ManagedMethodIdentityArtifact HotUpdateAddIdentity =
+        ManagedMethodIdentityResolver.Create(
+            "HotUpdateSkeletonProof/HotPatch::Add()",
+            "System.Int32 HotPatch::Add()");
 
     [ChaosUnitTest(
         ChaosUnitCategory.HotUpdateContract,
@@ -27,7 +34,7 @@ internal static class HotUpdateSkeletonProofEntry
         try
         {
             var runtimeManager = new RuntimeManager();
-            var beforeLoad = runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue);
+            var beforeLoad = runtimeManager.DispatchInt32(HotUpdateValueIdentity, Helper.GetValue);
             Assert.Equal(1, beforeLoad);
 
             var validPackageRoot = HotUpdatePackageSupport.CreatePackageRoot(
@@ -40,15 +47,11 @@ internal static class HotUpdateSkeletonProofEntry
             var loaded = runtimeManager.LoadPackage(
                 validPackageRoot,
                 HotUpdatePackageSupport.CurrentAotVersion,
-                subjectIdToConstantInt32: new Dictionary<string, int>(StringComparer.Ordinal)
-                {
-                    [HotUpdateSubjectId] = 42,
-                    [HotUpdateAddSubjectId] = 7,
-                });
+                CreateBindings(42, 7));
             Assert.True(loaded);
 
-            var afterLoad = runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue);
-            var dispatchValue = runtimeManager.DispatchInt32(HotUpdateAddSubjectId, GetAotAddFallback);
+            var afterLoad = runtimeManager.DispatchInt32(HotUpdateValueIdentity, Helper.GetValue);
+            var dispatchValue = runtimeManager.DispatchInt32(HotUpdateAddIdentity, GetAotAddFallback);
             var integrityAfterLoad = runtimeManager.ValidateIntegrity();
             var activePatchesAfterLoad = runtimeManager.GetActivePatches().Count;
             Assert.Equal(42, afterLoad);
@@ -57,8 +60,8 @@ internal static class HotUpdateSkeletonProofEntry
             Assert.True(integrityAfterLoad.IsValid);
             Assert.Equal(1, activePatchesAfterLoad);
             runtimeManager.Rollback();
-            var afterRollback = runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue);
-            var afterRollbackDispatch = runtimeManager.DispatchInt32(HotUpdateAddSubjectId, GetAotAddFallback);
+            var afterRollback = runtimeManager.DispatchInt32(HotUpdateValueIdentity, Helper.GetValue);
+            var afterRollbackDispatch = runtimeManager.DispatchInt32(HotUpdateAddIdentity, GetAotAddFallback);
             var activePatchesAfterRollback = runtimeManager.GetActivePatches().Count;
             var integrityAfterRollback = runtimeManager.ValidateIntegrity();
             Assert.Equal(1, afterRollback);
@@ -69,15 +72,11 @@ internal static class HotUpdateSkeletonProofEntry
             runtimeManager.LoadPackage(
                 validPackageRoot,
                 HotUpdatePackageSupport.CurrentAotVersion,
-                subjectIdToConstantInt32: new Dictionary<string, int>(StringComparer.Ordinal)
-                {
-                    [HotUpdateSubjectId] = 42,
-                    [HotUpdateAddSubjectId] = 7,
-                });
-            var afterReapply = runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue);
+                CreateBindings(42, 7));
+            var afterReapply = runtimeManager.DispatchInt32(HotUpdateValueIdentity, Helper.GetValue);
             Assert.Equal(42, afterReapply);
             runtimeManager.UnloadPackage();
-            var afterUnload = runtimeManager.DispatchInt32(HotUpdateSubjectId, Helper.GetValue);
+            var afterUnload = runtimeManager.DispatchInt32(HotUpdateValueIdentity, Helper.GetValue);
             Assert.Equal(1, afterUnload);
 
             var corruptPackageRoot = HotUpdatePackageSupport.CreatePackageRoot(
@@ -104,6 +103,26 @@ internal static class HotUpdateSkeletonProofEntry
     private static int GetAotAddFallback()
     {
         return 3;
+    }
+
+    private static HotUpdateMethodBindingSet CreateBindings(int value, int addValue)
+    {
+        return new HotUpdateMethodBindingSet
+        {
+            ConstantInt32Bindings =
+            [
+                new HotUpdateConstantInt32Binding
+                {
+                    Identity = HotUpdateValueIdentity,
+                    ConstantValue = value,
+                },
+                new HotUpdateConstantInt32Binding
+                {
+                    Identity = HotUpdateAddIdentity,
+                    ConstantValue = addValue,
+                },
+            ],
+        };
     }
 
     private static class Helper

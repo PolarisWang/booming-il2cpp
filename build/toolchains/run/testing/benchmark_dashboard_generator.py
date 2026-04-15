@@ -183,11 +183,13 @@ def _merge_case_meta(base: dict[str, Any], incoming: dict[str, Any]) -> dict[str
 def _build_declared_case_lookup(declared_cases: dict[str, dict[str, Any]]) -> dict[str, dict[str, str]]:
     lookup: dict[str, dict[str, str]] = {
         "stableId": {},
+        "entryIndex": {},
         "alias": {},
         "displayName": {},
         "workloadEntry": {},
     }
     collisions: dict[str, set[str]] = {
+        "entryIndex": set(),
         "alias": set(),
         "displayName": set(),
         "workloadEntry": set(),
@@ -198,6 +200,14 @@ def _build_declared_case_lookup(declared_cases: dict[str, dict[str, Any]]) -> di
         if not stable_id:
             continue
         lookup["stableId"][stable_id] = stable_id
+        entry_index = case_meta.get("entryIndex")
+        if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+            entry_index_key = str(int(entry_index))
+            existing_entry = lookup["entryIndex"].get(entry_index_key)
+            if existing_entry and existing_entry != stable_id:
+                collisions["entryIndex"].add(entry_index_key)
+            else:
+                lookup["entryIndex"][entry_index_key] = stable_id
         for field in ("alias", "displayName", "workloadEntry"):
             value = str(case_meta.get(field) or "").strip()
             if not value:
@@ -231,6 +241,12 @@ def _resolve_declared_case_id(
     if direct:
         return direct
 
+    entry_index = benchmark_case.get("entryIndex")
+    if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+        resolved = declared_case_lookup["entryIndex"].get(str(int(entry_index)))
+        if resolved:
+            return resolved
+
     for field in ("alias", "displayName", "workloadEntry"):
         value = str(benchmark_case.get(field) or "").strip()
         if not value:
@@ -248,6 +264,7 @@ def _summary_benchmark_case_payload(case_payload: dict[str, Any]) -> dict[str, A
         "alias": str(case_payload.get("alias") or case_payload.get("displayName") or ""),
         "displayName": str(case_payload.get("displayName") or case_payload.get("alias") or ""),
         "workloadEntry": str(case_payload.get("workloadEntry") or ""),
+        "entryIndex": int(case_payload.get("entryIndex") or 0),
         "assemblyName": str(case_payload.get("assemblyName") or ""),
         "declaringType": str(case_payload.get("declaringType") or ""),
         "methodName": str(case_payload.get("methodName") or ""),
@@ -631,6 +648,7 @@ def _build_case_summary(
         "displayName": str(meta.get("displayName") or meta.get("alias") or case_id),
         "alias": str(meta.get("alias") or case_id),
         "workloadEntry": str(meta.get("workloadEntry") or ""),
+        "entryIndex": int(meta.get("entryIndex") or 0),
         "assemblyName": str(meta.get("assemblyName") or ""),
         "declaringType": str(meta.get("declaringType") or ""),
         "methodName": str(meta.get("methodName") or ""),
@@ -777,6 +795,9 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
                         "iterationCount": int(benchmark_case.get("iterationCount") or 0),
                         "invocationCount": int(benchmark_case.get("invocationCount") or 0),
                     }
+                    entry_index = benchmark_case.get("entryIndex")
+                    if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+                        record_case_meta["entryIndex"] = int(entry_index)
                     case_payload = case_records_by_device.setdefault(device_id, {}).setdefault(
                         canonical_case_id,
                         {

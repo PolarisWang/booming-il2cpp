@@ -225,18 +225,20 @@ class Phase5HotUpdateSkeletonTests(unittest.TestCase):
         self.assertIn(r"Archetypes\FullProjectHotUpdateSolution\SharedContracts\GoldenHotUpdate.SharedContracts.csproj", solution_text)
         self.assertIn(r"Archetypes\FullProjectHotUpdateSolution\PatchModules\GoldenHotUpdate.PatchModule.csproj", solution_text)
 
-    def test_hot_update_host_program_supports_generic_declared_source_entry_selection(self) -> None:
+    def test_hot_update_host_program_uses_compact_subject_entry_selection_only(self) -> None:
         host_program_source = CANONICAL_SUBJECT_PROGRAM_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
-            "ChaosSourceEntryArguments.TryParse",
-            "HotUpdateHostPack/HotUpdateSkeletonProofEntry::Run()",
-            "HotUpdateHostPack/MetadataSupplementProofEntry::Run()",
-            "HotUpdateHostPack/MethodReplacementProofEntry::Run()",
-            "HotUpdateHostPack/SharedContractProofEntry::Run()",
-            "HotUpdateHostPack/VersionRollbackProofEntry::Run()",
+            "ChaosSubjectEntryArguments.TryParse",
+            "HotUpdateSkeletonProofEntry.Run",
+            "MetadataSupplementProofEntry.Run",
+            "MethodReplacementProofEntry.Run",
+            "SharedContractProofEntry.Run",
+            "VersionRollbackProofEntry.Run",
         ]:
             self.assertIn(required_fragment, host_program_source)
+        self.assertNotIn("ChaosSourceEntryArguments.TryParse", host_program_source)
+        self.assertNotIn("DeclaredProofEntriesBySourceEntry", host_program_source)
 
     def test_subject_query_finds_hot_update_surface_without_subject_name_coupling(self) -> None:
         subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase5_hot_update")

@@ -15,13 +15,15 @@ public sealed class CodeGenStage
             .ToDictionary(shape => shape.SubjectId, StringComparer.Ordinal);
         var methodCapabilities = linkedWorld.CapabilityBundles.Methods
             .ToDictionary(bundle => bundle.SubjectId, bundle => bundle.Capabilities, StringComparer.Ordinal);
+        var internalAssemblyNames = linkedWorld.Assemblies
+            .Select(assembly => assembly.Name)
+            .ToHashSet(StringComparer.Ordinal);
         var typedIl = new TypedIlIrArtifact
         {
             Methods = linkedWorld.Methods
-                .Select(method => ToTypedIlMethodArtifact(method, methodShapes, methodCapabilities))
+                .Select(method => ToTypedIlMethodArtifact(method, methodShapes, methodCapabilities, internalAssemblyNames))
                 .ToList(),
         };
-
         var codeRegistration = new CodeRegistrationArtifact
         {
             Modules = linkedWorld.Assemblies
@@ -41,6 +43,7 @@ public sealed class CodeGenStage
                 })
                 .ToList(),
         };
+        var aotCoreIr = new AotCoreIrLowering().Create(linkedWorld, typedIl, codeRegistration);
         var loweringPlanner = new NativeReferenceLoweringPlanner();
         NativeReferenceLoweringPlanArtifact nativeReferenceLoweringPlan;
         try
@@ -75,6 +78,7 @@ public sealed class CodeGenStage
             Artifacts =
             [
                 new ManagedClosureArtifactRef { Kind = "typedIlIr", Path = ManagedClosureArtifactNames.TypedIlIr },
+                new ManagedClosureArtifactRef { Kind = "aotCoreIr", Path = ManagedClosureArtifactNames.AotCoreIr },
                 new ManagedClosureArtifactRef { Kind = "aotManifest", Path = ManagedClosureArtifactNames.AotManifest },
                 new ManagedClosureArtifactRef { Kind = "metadataRegistration", Path = ManagedClosureArtifactNames.MetadataRegistration },
                 new ManagedClosureArtifactRef { Kind = "supplementalMetadataTemplate", Path = ManagedClosureArtifactNames.SupplementalMetadataTemplate },
@@ -90,6 +94,7 @@ public sealed class CodeGenStage
         {
             OutputRootPath = request.OutputRootPath,
             TypedIlIr = typedIl,
+            AotCoreIr = aotCoreIr,
             AotManifest = metadataWriterOutput.AotManifest,
             MetadataRegistration = metadataWriterOutput.MetadataRegistration,
             SupplementalMetadataTemplate = metadataWriterOutput.SupplementalMetadataTemplate,
@@ -200,7 +205,8 @@ public sealed class CodeGenStage
     private static TypedIlMethodArtifact ToTypedIlMethodArtifact(
         ManagedMethodModel method,
         IReadOnlyDictionary<string, MethodShapeModel> methodShapes,
-        IReadOnlyDictionary<string, IReadOnlyList<string>> methodCapabilities)
+        IReadOnlyDictionary<string, IReadOnlyList<string>> methodCapabilities,
+        IReadOnlySet<string> internalAssemblyNames)
     {
         var methodShape = GetRequiredMethodShape(methodShapes, method.SubjectId);
         var capabilities = GetRequiredCapabilities(methodCapabilities, method.SubjectId);
@@ -210,8 +216,18 @@ public sealed class CodeGenStage
             MethodId = ManagedNaming.CreateMethodId(method),
             SubjectId = method.SubjectId,
             Signature = method.Signature,
+            Identity = new ManagedMethodIdentityArtifact
+            {
+                AssemblyName = method.AssemblyName,
+                DeclaringTypeSubjectId = method.DeclaringTypeSubjectId,
+                DefinitionSubjectId = method.DefinitionSubjectId,
+                SubjectId = method.SubjectId,
+                MethodId = ManagedNaming.CreateMethodId(method),
+                Signature = method.Signature,
+            },
             MethodRole = methodShape.MethodRole,
             BodyAvailability = methodShape.BodyAvailability,
+            BodyAvailabilityCode = methodShape.BodyAvailabilityCode,
             Capabilities = capabilities,
             Parameters = method.Parameters.Select(parameter => new TypedIlParameterArtifact
             {
@@ -221,7 +237,9 @@ public sealed class CodeGenStage
             Blocks = method.Body.Blocks.Select(block => new TypedIlBlockArtifact
             {
                 BlockId = block.BlockId,
-                Instructions = block.Instructions.Select(ToTypedIlInstructionArtifact).ToList(),
+                Instructions = block.Instructions
+                    .Select(instruction => ToTypedIlInstructionArtifact(method, internalAssemblyNames, instruction))
+                    .ToList(),
             }).ToList(),
         };
     }
@@ -252,7 +270,10 @@ public sealed class CodeGenStage
             $"missing method capability bundle for '{subjectId}' during typed-il generation");
     }
 
-    private static TypedIlInstructionArtifact ToTypedIlInstructionArtifact(ManagedInstructionModel instruction)
+    private static TypedIlInstructionArtifact ToTypedIlInstructionArtifact(
+        ManagedMethodModel method,
+        IReadOnlySet<string> internalAssemblyNames,
+        ManagedInstructionModel instruction)
     {
         return new TypedIlInstructionArtifact
         {
@@ -260,6 +281,10 @@ public sealed class CodeGenStage
             Operand = instruction.Operand,
             ResultType = instruction.ResultType,
             Callee = instruction.Callee,
+            DispatchKindCode = HybridDispatchResolver.ResolveInstruction(
+                method.AssemblyName,
+                internalAssemblyNames,
+                instruction),
         };
     }
 }

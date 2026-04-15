@@ -1,6 +1,12 @@
 ﻿# ?????
 | ?? | lifecycle_status | phase | ???? | ??? | active |
 | --- | --- | --- | --- | --- | --- |
+| [20260414-37-hybridclr-aligned-aot-hotupdate-development-plan](20260414-37-hybridclr-aligned-aot-hotupdate-development-plan/STATUS.md) | roadmap | completed | 2026-04-15 06:42:00 +08:00 | 无。本 roadmap 已完成并归档；后续若继续扩张 AOT core IR gap 或 owner-subject evidence，请从当前基线另起 follow-up。 | false |
+| [20260415-05-phase-4-aot-core-ir-and-native-codegen-strengthening](20260415-05-phase-4-aot-core-ir-and-native-codegen-strengthening/STATUS.md) | plan | completed | 2026-04-15 06:24:00 +08:00 | 返回父 roadmap，执行 Phase 5/6 的复用审计、项目级回归与最终归档。 | false |
+| [20260415-04-phase-3-hotupdate-runtime-and-supplemental-metadata-foundation](20260415-04-phase-3-hotupdate-runtime-and-supplemental-metadata-foundation/STATUS.md) | plan | completed | 2026-04-15 04:18:56 +08:00 | 返回父 roadmap，创建并执行 Phase 4: AOT Core IR And Native Codegen Strengthening child task。 | false |
+| [20260415-03-phase-2-typed-il-shared-contract-and-hybrid-dispatch-foundation](20260415-03-phase-2-typed-il-shared-contract-and-hybrid-dispatch-foundation/STATUS.md) | plan | completed | 2026-04-15 03:37:41 +08:00 | 返回父 roadmap，创建并执行 Phase 3: HotUpdate Runtime And Supplemental Metadata Foundation child task。 | false |
+| [20260415-02-phase-1-subject-source-reshape-and-test-metadata-cutover](20260415-02-phase-1-subject-source-reshape-and-test-metadata-cutover/STATUS.md) | plan | completed | 2026-04-15 01:52:44 +08:00 | 返回父 roadmap，创建并执行 `Phase 2: Typed-IL Shared Contract And Hybrid Dispatch Foundation` child task。 | false |
+| [20260415-01-phase-0-contract-freeze-and-aot-translation-ledgers](20260415-01-phase-0-contract-freeze-and-aot-translation-ledgers/STATUS.md) | plan | completed | 2026-04-15 00:29:10 +08:00 | 返回父 roadmap，创建并执行 `Phase 1: Subject Source Reshape And Test Metadata Cutover` child task。 | false |
 | [20260414-36-planning-tests-genericization-followup](20260414-36-planning-tests-genericization-followup/STATUS.md) | design | completed | 2026-04-14 19:54:36 +08:00 | 无。本 follow-up 已完成并归档；后续若继续扩大 planning/registry/reporting 的 generic 化边界，请另起新任务。 | false |
 | [20260414-20-subject-generated-test-workspace-roadmap](20260414-20-subject-generated-test-workspace-roadmap/STATUS.md) | roadmap | completed | 2026-04-14 18:37:13 +08:00 | 无。本 roadmap 已完成并归档；如需继续 generic 化 tests/planner 中残余的 retained-subject 逻辑，请另起 follow-up。 | false |
 | [20260414-33-phase-3-unified-test-entry-and-registry-cutover](20260414-33-phase-3-unified-test-entry-and-registry-cutover/STATUS.md) | plan | completed | 2026-04-14 18:37:13 +08:00 | 无。本 child task 已完成；Phase 4/5 收口结果已并入父 roadmap 一并归档。 | false |
@@ -94,6 +100,8 @@
 | [20260403-02-unified-test-framework](20260403-02-unified-test-framework/STATUS.md) | completed | archived | 2026-04-04 14:09:00 +0800 | 鏃犮€?| false |
 | [20260404-02-booming-docs-migration](20260404-02-booming-docs-migration/STATUS.md) | completed | reviewing | 2026-04-04 13:57:28 +0800 | 鏃犮€傚闇€褰诲簳绉婚櫎 `docs/booming`锛岃鍙﹀紑 follow-up 澶勭悊鍘嗗彶璺緞娓呯悊銆?| false |
 | [20260404-01-skill-flow-refactor](20260404-01-skill-flow-refactor/STATUS.md) | completed | reviewing | 2026-04-04 13:45:41 +0800 | 鏃犮€傚闇€缁х画鎻愬崌杩愯鏃堕獙璇佺ǔ瀹氭€э紝璇锋柊寤?follow-up 浠诲姟銆?| false |
+
+
 
 
 

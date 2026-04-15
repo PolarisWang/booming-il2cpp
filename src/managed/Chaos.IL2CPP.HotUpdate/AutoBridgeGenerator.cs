@@ -42,6 +42,7 @@ public sealed class AutoBridgeGenerator
             {
                 BridgeId = method.SubjectId,
                 TargetSubjectId = method.SubjectId,
+                TargetIdentity = ManagedMethodIdentityResolver.Create(method),
                 SignatureKey = signatureKey,
             });
         }

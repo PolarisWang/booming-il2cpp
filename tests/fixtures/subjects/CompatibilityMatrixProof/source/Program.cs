@@ -373,6 +373,7 @@ internal static class Program
                 Signature = "signed-proof",
             },
             LoadedAssemblies = new Dictionary<string, LoadedAssemblyImage>(StringComparer.Ordinal),
+            SupplementalMetadata = LoadedSupplementalMetadata.Empty,
         };
 
         try

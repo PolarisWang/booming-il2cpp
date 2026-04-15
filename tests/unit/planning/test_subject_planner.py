@@ -551,8 +551,8 @@ class SubjectPlannerTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
-    def test_planner_surfaces_explicit_workload_entry_for_solution_style_perf_subject(self) -> None:
-        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_explicit_solution_workload_entry")
+    def test_planner_uses_explicit_workload_entry_as_effective_source_entry_for_solution_style_perf_subject(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_explicit_solution_workload_entry_only")
         subject_id = "FixtureExplicitPerfSubject"
         repo_root, manifest = create_subject_repo(
             "explicit-solution-workload",
@@ -567,7 +567,6 @@ class SubjectPlannerTests(unittest.TestCase):
                 goal_id="perf.release",
                 matrix_id="windows-managed-perf",
                 run_id="20260413-explicit-solution-workload-entry-001",
-                source_entry=explicit_entry,
                 workload_entry=explicit_entry,
             )
 
@@ -576,6 +575,125 @@ class SubjectPlannerTests(unittest.TestCase):
             self.assertEqual(str(manifest["source"]["primaryProjectPath"]), plan["selection"]["source"]["primaryProjectPath"])
             self.assertEqual(explicit_entry, plan["selection"]["source"]["entry"])
             self.assertEqual(explicit_entry, plan["selection"]["workloadEntry"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_stage_fingerprint_changes_when_declared_entry_selection_changes(self) -> None:
+        planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_declared_entry_fingerprint")
+        repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"declared-entry-selection-{uuid.uuid4().hex}"
+        manifest_path = repo_root / "subjects" / "FixtureDeclaredEntrySelection" / "subject.manifest.json"
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+
+        manifest = {
+            "subjectId": "FixtureDeclaredEntrySelection",
+            "displayName": "FixtureDeclaredEntrySelection",
+            "category": "benchmark",
+            "defaultGoal": "perf.release",
+            "defaultMatrix": "windows-managed-perf",
+            "defaultValidationProfile": "perf-profile",
+            "source": {
+                "type": "dotnet-project",
+                "path": "subjects/FixtureDeclaredEntrySelection/source/FixtureDeclaredEntrySelection.csproj",
+                "entry": "FixtureDeclaredEntrySelection/Program::Main()",
+            },
+            "workloadEntry": "FixtureDeclaredEntrySelection/Program::RunWorkload()",
+            "validationProfiles": {
+                "perf-profile": ["perf"],
+            },
+            "validation": {
+                "perf": {
+                    "kind": "perf",
+                    "driver": "csharp-perf-harness",
+                    "defaultVariant": "PROFILE",
+                }
+            },
+            "executionPipelines": [
+                {
+                    "pipelineId": "managed-benchmark",
+                    "stages": [
+                        {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source", "dependsOn": []},
+                        {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input", "dependsOn": ["source-resolve"]},
+                        {"stageId": "runtime-perf-collect", "kind": "runtime-perf-collect", "scope": "matrix", "bucket": "runtime", "dependsOn": ["host-input-build"]},
+                        {"stageId": "report-assemble", "kind": "report-assemble", "scope": "matrix", "bucket": "report", "dependsOn": ["runtime-perf-collect"]},
+                    ],
+                }
+            ],
+            "environmentMatrices": [
+                {
+                    "matrixId": "windows-managed-perf",
+                    "pipelineId": "managed-benchmark",
+                    "supportedGoals": ["perf.release"],
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "dotnet-managed",
+                        "runtimeProfile": "managed-perf-release",
+                    },
+                    "validationIntent": {
+                        "validationMode": "perf",
+                        "adaptationLevel": "managed-runtime",
+                        "expectedOutcome": "pass",
+                    },
+                    "artifactPlan": {
+                        "requiredBuckets": ["source", "host-input", "runtime", "report"],
+                        "evidenceTerminalBucket": "report",
+                    },
+                }
+            ],
+        }
+
+        try:
+            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+            first_plan = planner_module.build_plan(
+                repo_root,
+                "FixtureDeclaredEntrySelection",
+                goal_id="perf.release",
+                matrix_id="windows-managed-perf",
+                run_id="fixture-declared-entry-selection",
+                entry_selection={
+                    "family": "declared-benchmark",
+                    "stableId": "bench/a",
+                    "alias": "bench-a",
+                    "entryIndex": 1,
+                },
+            )
+            second_plan = planner_module.build_plan(
+                repo_root,
+                "FixtureDeclaredEntrySelection",
+                goal_id="perf.release",
+                matrix_id="windows-managed-perf",
+                run_id="fixture-declared-entry-selection",
+                entry_selection={
+                    "family": "declared-benchmark",
+                    "stableId": "bench/b",
+                    "alias": "bench-b",
+                    "entryIndex": 2,
+                },
+            )
+
+            first_runtime_stage = next(stage for stage in first_plan["stagePlan"] if stage["kind"] == "runtime-perf-collect")
+            second_runtime_stage = next(stage for stage in second_plan["stagePlan"] if stage["kind"] == "runtime-perf-collect")
+
+            self.assertEqual(
+                {
+                    "family": "declared-benchmark",
+                    "stableId": "bench/a",
+                    "alias": "bench-a",
+                    "entryIndex": 1,
+                },
+                first_plan["selection"]["entrySelection"],
+            )
+            self.assertEqual(
+                {
+                    "family": "declared-benchmark",
+                    "stableId": "bench/b",
+                    "alias": "bench-b",
+                    "entryIndex": 2,
+                },
+                second_plan["selection"]["entrySelection"],
+            )
+            self.assertNotEqual(first_runtime_stage["fingerprint"], second_runtime_stage["fingerprint"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

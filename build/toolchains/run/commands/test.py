@@ -155,6 +155,9 @@ def _selected_object_entry_selection(selected_object: dict[str, Any]) -> dict[st
         alias = str(selected_object.get("alias") or "")
         if alias:
             entry_selection["alias"] = alias
+        entry_index = selected_object.get("entryIndex")
+        if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+            entry_selection["entryIndex"] = int(entry_index)
         return entry_selection
     return {}
 
@@ -1185,6 +1188,11 @@ def _run_subject_object(
         if entry_index is not None:
             entry_selection = dict(entry_selection or {})
             entry_selection["entryIndex"] = int(entry_index)
+        if object_type == "declared-unit-test":
+            source_entry = None
+            workload_entry = None
+        elif object_type == "declared-benchmark":
+            source_entry = None
     run_id = reporting_module.build_run_id(host_platform)
 
     try:

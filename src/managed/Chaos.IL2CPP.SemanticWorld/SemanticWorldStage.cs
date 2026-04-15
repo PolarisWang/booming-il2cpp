@@ -115,11 +115,16 @@ public sealed class SemanticWorldStage
                 SubjectId = property.SubjectId,
                 Kind = "property-definition",
             }).ToList(),
-            Methods = canonicalMethods.Select(method => new MethodShapeModel
+            Methods = canonicalMethods.Select(method =>
             {
-                SubjectId = method.SubjectId,
-                MethodRole = ResolveMethodRole(method),
-                BodyAvailability = ResolveBodyAvailability(method),
+                var bodyAvailabilityCode = BodyAvailabilityResolver.Resolve(method);
+                return new MethodShapeModel
+                {
+                    SubjectId = method.SubjectId,
+                    MethodRole = ResolveMethodRole(method),
+                    BodyAvailability = BodyAvailabilityResolver.ToLegacyLabel(bodyAvailabilityCode),
+                    BodyAvailabilityCode = bodyAvailabilityCode,
+                };
             }).ToList(),
         };
     }
@@ -250,14 +255,6 @@ public sealed class SemanticWorldStage
         return method.IsStatic
             ? "static-method"
             : "instance-method";
-    }
-
-    private static string ResolveBodyAvailability(ManagedMethodModel method)
-    {
-        return method.Import is null &&
-               method.Body.Blocks.Any(block => block.Instructions.Count > 0)
-            ? "has-canonical-body"
-            : "no-canonical-body";
     }
 
     private static IReadOnlyList<string> ResolveMethodCapabilities(

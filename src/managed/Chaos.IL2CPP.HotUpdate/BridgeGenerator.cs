@@ -1,3 +1,5 @@
+using Chaos.IL2CPP.Contracts;
+
 namespace Chaos.IL2CPP.HotUpdate;
 
 public sealed class BridgeGenerator
@@ -12,31 +14,48 @@ public sealed class BridgeGenerator
                 .Select(spec => new AotToHotUpdateBridgeEntry
                 {
                     BridgeId = RequireValue(spec.BridgeId, nameof(spec.BridgeId)),
-                    HotUpdateSubjectId = RequireValue(spec.HotUpdateSubjectId, nameof(spec.HotUpdateSubjectId)),
+                    HotUpdateSubjectId = ResolveSubjectId(spec.HotUpdateIdentity, spec.HotUpdateSubjectId, nameof(spec.HotUpdateSubjectId)),
+                    HotUpdateIdentity = spec.HotUpdateIdentity,
                 })
                 .ToList(),
             HotUpdateToAot = request.HotUpdateToAot
                 .Select(spec => new HotUpdateToAotBridgeEntry
                 {
                     BridgeId = RequireValue(spec.BridgeId, nameof(spec.BridgeId)),
-                    AotSubjectId = RequireValue(spec.AotSubjectId, nameof(spec.AotSubjectId)),
+                    AotSubjectId = ResolveSubjectId(spec.AotIdentity, spec.AotSubjectId, nameof(spec.AotSubjectId)),
+                    AotIdentity = spec.AotIdentity,
                 })
                 .ToList(),
             HotUpdateToEngine = request.HotUpdateToEngine
                 .Select(spec => new HotUpdateToEngineBridgeEntry
                 {
                     BridgeId = RequireValue(spec.BridgeId, nameof(spec.BridgeId)),
-                    EngineSubjectId = RequireValue(spec.EngineSubjectId, nameof(spec.EngineSubjectId)),
+                    EngineSubjectId = ResolveSubjectId(spec.EngineIdentity, spec.EngineSubjectId, nameof(spec.EngineSubjectId)),
+                    EngineIdentity = spec.EngineIdentity,
                 })
                 .ToList(),
             DelegateWrappers = request.DelegateWrappers
                 .Select(spec => new DelegateWrapperEntry
                 {
                     WrapperId = RequireValue(spec.WrapperId, nameof(spec.WrapperId)),
-                    HotUpdateSubjectId = RequireValue(spec.HotUpdateSubjectId, nameof(spec.HotUpdateSubjectId)),
+                    HotUpdateSubjectId = ResolveSubjectId(spec.HotUpdateIdentity, spec.HotUpdateSubjectId, nameof(spec.HotUpdateSubjectId)),
+                    HotUpdateIdentity = spec.HotUpdateIdentity,
                 })
                 .ToList(),
         };
+    }
+
+    private static string ResolveSubjectId(
+        ManagedMethodIdentityArtifact? identity,
+        string? subjectId,
+        string parameterName)
+    {
+        if (identity is not null)
+        {
+            return ManagedMethodIdentityResolver.ResolveSubjectId(identity);
+        }
+
+        return RequireValue(subjectId, parameterName);
     }
 
     private static string RequireValue(string? value, string parameterName)
@@ -65,28 +84,36 @@ public sealed record AotToHotUpdateBridgeSpec
 {
     public required string BridgeId { get; init; }
 
-    public required string HotUpdateSubjectId { get; init; }
+    public string? HotUpdateSubjectId { get; init; }
+
+    public ManagedMethodIdentityArtifact? HotUpdateIdentity { get; init; }
 }
 
 public sealed record HotUpdateToAotBridgeSpec
 {
     public required string BridgeId { get; init; }
 
-    public required string AotSubjectId { get; init; }
+    public string? AotSubjectId { get; init; }
+
+    public ManagedMethodIdentityArtifact? AotIdentity { get; init; }
 }
 
 public sealed record HotUpdateToEngineBridgeSpec
 {
     public required string BridgeId { get; init; }
 
-    public required string EngineSubjectId { get; init; }
+    public string? EngineSubjectId { get; init; }
+
+    public ManagedMethodIdentityArtifact? EngineIdentity { get; init; }
 }
 
 public sealed record DelegateWrapperSpec
 {
     public required string WrapperId { get; init; }
 
-    public required string HotUpdateSubjectId { get; init; }
+    public string? HotUpdateSubjectId { get; init; }
+
+    public ManagedMethodIdentityArtifact? HotUpdateIdentity { get; init; }
 }
 
 public sealed record BridgePlan
@@ -107,6 +134,8 @@ public sealed record AotToHotUpdateBridgeEntry
     public required string BridgeId { get; init; }
 
     public required string HotUpdateSubjectId { get; init; }
+
+    public ManagedMethodIdentityArtifact? HotUpdateIdentity { get; init; }
 }
 
 public sealed record HotUpdateToAotBridgeEntry
@@ -114,6 +143,8 @@ public sealed record HotUpdateToAotBridgeEntry
     public required string BridgeId { get; init; }
 
     public required string AotSubjectId { get; init; }
+
+    public ManagedMethodIdentityArtifact? AotIdentity { get; init; }
 }
 
 public sealed record HotUpdateToEngineBridgeEntry
@@ -121,6 +152,8 @@ public sealed record HotUpdateToEngineBridgeEntry
     public required string BridgeId { get; init; }
 
     public required string EngineSubjectId { get; init; }
+
+    public ManagedMethodIdentityArtifact? EngineIdentity { get; init; }
 }
 
 public sealed record DelegateWrapperEntry
@@ -128,6 +161,8 @@ public sealed record DelegateWrapperEntry
     public required string WrapperId { get; init; }
 
     public required string HotUpdateSubjectId { get; init; }
+
+    public ManagedMethodIdentityArtifact? HotUpdateIdentity { get; init; }
 }
 
 public sealed record AutoGeneratedBridgeEntry
@@ -135,6 +170,8 @@ public sealed record AutoGeneratedBridgeEntry
     public required string BridgeId { get; init; }
 
     public required string TargetSubjectId { get; init; }
+
+    public ManagedMethodIdentityArtifact? TargetIdentity { get; init; }
 
     public required string SignatureKey { get; init; }
 }

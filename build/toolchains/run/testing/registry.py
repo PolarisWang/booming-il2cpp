@@ -54,6 +54,12 @@ ENGINEERING_MATRIX_STAGE_KINDS: dict[str, tuple[str, ...]] = {
     "patch-generation": (),
 }
 
+DECLARED_BENCHMARK_MATRIX_STAGE_KINDS: dict[str, tuple[str, ...]] = {
+    "managed": ("runtime-perf-collect",),
+    "native": ("native-runtime-perf", "mobile-native-perf"),
+    "interpreter": ("interpreter-runtime-perf",),
+}
+
 
 @dataclass(frozen=True)
 class RegistryIndex:
@@ -383,9 +389,9 @@ def _load_subject_manifest(path: Path) -> dict[str, Any]:
     )
     item["tags"] = _string_list(payload, "tags")
     item["defaultPrimaryProjectPath"] = subjects_module.resolve_source_primary_project_path(resolved_source)
-    item["defaultSourceEntry"] = str(resolved_source.get("entry") or "")
-    item["defaultSubjectEntrySelection"] = default_subject_entry_selection
-    item["defaultWorkloadEntry"] = str(default_matrix.get("workloadEntry") or payload.get("workloadEntry") or "")
+    item["displaySourceEntry"] = str(resolved_source.get("entry") or "")
+    item["displaySubjectEntrySelection"] = default_subject_entry_selection
+    item["displayWorkloadEntry"] = str(default_matrix.get("workloadEntry") or payload.get("workloadEntry") or "")
     item["resolvedMembers"] = _resolved_member_ids(item)
     item["deprecated"] = _deprecated_flag(payload)
     return item
@@ -563,8 +569,29 @@ def _declared_source_entry(entry: dict[str, Any]) -> str:
 def _select_declared_matrix(
     manifest: dict[str, Any],
     *,
+    family: str,
+    payload: dict[str, Any],
     source_entry: str,
 ) -> tuple[str, str]:
+    if family == "declared-benchmark":
+        supported_modes = declared_metadata_labels_module.supported_modes_from_mask(payload.get("modes"))
+        candidate_stage_kinds = {
+            stage_kind
+            for mode in supported_modes
+            for stage_kind in DECLARED_BENCHMARK_MATRIX_STAGE_KINDS.get(mode, ())
+        }
+        perf_fallback: tuple[str, str] | None = None
+        for matrix in _preferred_subject_matrices(manifest):
+            goal_id = _matrix_goal_id(manifest, matrix)
+            if not goal_id.startswith("perf."):
+                continue
+            if perf_fallback is None:
+                perf_fallback = (str(matrix.get("matrixId") or ""), goal_id)
+            if candidate_stage_kinds and _matrix_stage_kinds(manifest, matrix) & candidate_stage_kinds:
+                return str(matrix.get("matrixId") or ""), goal_id
+        if perf_fallback is not None:
+            return perf_fallback
+
     if source_entry:
         for matrix in _preferred_subject_matrices(manifest):
             matrix_source = dict(matrix.get("source") or {})
@@ -609,7 +636,12 @@ def _declared_registry_item(
 ) -> dict[str, Any]:
     stable_id = str(payload.get("stableId") or "")
     source_entry = _declared_source_entry(payload)
-    default_matrix_id, default_goal_id = _select_declared_matrix(manifest, source_entry=source_entry)
+    default_matrix_id, default_goal_id = _select_declared_matrix(
+        manifest,
+        family=family,
+        payload=payload,
+        source_entry=source_entry,
+    )
     item = _subject_execution_base(
         subject_item,
         object_id=f"{family}/{stable_id}",
@@ -624,6 +656,9 @@ def _declared_registry_item(
     item["methodSignature"] = str(payload.get("methodSignature") or "")
     item["sourceEntry"] = source_entry
     item["workloadEntry"] = source_entry if family == "declared-benchmark" else ""
+    entry_index = payload.get("entryIndex")
+    if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+        item["entryIndex"] = int(entry_index)
     item["category"] = int(payload.get("category") or 0)
     item["categoryLabel"] = (
         declared_metadata_labels_module.unit_category_label(payload.get("category"))

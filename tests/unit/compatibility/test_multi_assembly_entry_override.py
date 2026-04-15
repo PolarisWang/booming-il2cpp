@@ -104,7 +104,15 @@ class MultiAssemblyEntryOverrideTests(unittest.TestCase):
                     "    public static int Run()",
                     "    {",
                     "        var left = 40;",
-                    "        return left + 2;",
+                    "        return Helper.Add(left, 2);",
+                    "    }",
+                    "}",
+                    "",
+                    "public static class Helper",
+                    "{",
+                    "    public static int Add(int left, int right)",
+                    "    {",
+                    "        return left + right;",
                     "    }",
                     "}",
                     "",
@@ -200,6 +208,30 @@ class MultiAssemblyEntryOverrideTests(unittest.TestCase):
             entry_subject_id,
             {method["subjectId"] for method in typed_il["methods"]},
         )
+        aot_core_ir = load_json(analysis_root / "aot-core-ir.json")
+        entry_method = next(
+            method
+            for method in aot_core_ir["methods"]
+            if method["subjectId"] == entry_subject_id
+        )
+        call_instruction = next(
+            instruction
+            for instruction in entry_method["instructions"]
+            if instruction["op"] == "call"
+        )
+        self.assertEqual("Library", call_instruction["reference"]["assemblyName"])
+        self.assertEqual("method", call_instruction["reference"]["subjectKind"])
+        self.assertEqual(
+            "Library/Helper::Add(System.Int32,System.Int32)",
+            call_instruction["reference"]["subjectId"],
+        )
+        code_registration = load_json(analysis_root / "code-registration.json")
+        helper_add_symbol = next(
+            registration["symbol"]
+            for module in code_registration["modules"]
+            for registration in module["registrations"]
+            if registration["subjectId"] == "Library/Helper::Add(System.Int32,System.Int32)"
+        )
 
         run_checked(
             [
@@ -214,10 +246,14 @@ class MultiAssemblyEntryOverrideTests(unittest.TestCase):
 
         native_aot_manifest = load_json(generated_root / "native-aot.manifest.json")
         self.assertEqual(entry_subject_id, native_aot_manifest["entrySubjectId"])
-        self.assertTrue(
-            (generated_root / "generated" / "native-aot.generated.cpp").is_file(),
-            msg="missing native-aot generated source",
+        generated_cpp_path = generated_root / "generated" / "native-aot.generated.cpp"
+        self.assertTrue(generated_cpp_path.is_file(), msg="missing native-aot generated source")
+        generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
+        self.assertIn(
+            f'extern "C" std::int32_t {helper_add_symbol}(std::int32_t chaos_arg_0, std::int32_t chaos_arg_1)\n{{',
+            generated_cpp,
         )
+        self.assertIn(f"{helper_add_symbol}(", generated_cpp)
 
 
 if __name__ == "__main__":

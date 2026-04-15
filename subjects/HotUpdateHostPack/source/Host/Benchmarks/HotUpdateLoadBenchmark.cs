@@ -1,3 +1,4 @@
+using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.HotUpdate;
 using Chaos.TestFramework;
 
@@ -5,7 +6,10 @@ namespace HotUpdateHostPack;
 
 internal static class HotUpdateLoadBenchmarkEntry
 {
-    private const string SubjectId = "BenchHotUpdateLoad/HotPatch::GetValue()";
+    private static readonly ManagedMethodIdentityArtifact BenchmarkIdentity =
+        ManagedMethodIdentityResolver.Create(
+            "BenchHotUpdateLoad/HotPatch::GetValue()",
+            "System.Int32 HotPatch::GetValue()");
 
     [ChaosBenchmark(
         ChaosBenchmarkCategory.HotUpdate,
@@ -39,9 +43,16 @@ internal static class HotUpdateLoadBenchmarkEntry
             var loaded = runtimeManager.LoadPackage(
                 packageRoot,
                 HotUpdatePackageSupport.CurrentAotVersion,
-                subjectIdToConstantInt32: new Dictionary<string, int>(StringComparer.Ordinal)
+                new HotUpdateMethodBindingSet
                 {
-                    [SubjectId] = 1,
+                    ConstantInt32Bindings =
+                    [
+                        new HotUpdateConstantInt32Binding
+                        {
+                            Identity = BenchmarkIdentity,
+                            ConstantValue = 1,
+                        },
+                    ],
                 });
             return loaded ? 1 : 0;
         }
