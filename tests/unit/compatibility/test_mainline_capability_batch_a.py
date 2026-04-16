@@ -34,32 +34,50 @@ ARRAY_BOXING_TEMPLATE_PATH = (
 
 class Phase5CapabilityBatchATests(unittest.TestCase):
     def test_mainline_feature_pack_source_tree_realizes_phase5_capability_proof_slices(self) -> None:
+        generic_instantiation_source_path = SOURCE_ROOT / "GenericsAndCollections" / "GenericInstantiationProof.cs"
+        generic_constraint_source_path = SOURCE_ROOT / "GenericsAndCollections" / "GenericConstraintProof.cs"
         dispatch_source_path = SOURCE_ROOT / "ObjectModelAndDispatch" / "DispatchProof.cs"
         generic_layout_source_path = SOURCE_ROOT / "GenericsAndCollections" / "GenericLayoutProof.cs"
         array_boxing_source_path = SOURCE_ROOT / "PrimitivesAndOps" / "ArrayBoxingProof.cs"
 
+        self.assertTrue(generic_instantiation_source_path.is_file(), msg=f"missing generic/instantiation slice: {generic_instantiation_source_path}")
+        self.assertTrue(generic_constraint_source_path.is_file(), msg=f"missing generic/constraint slice: {generic_constraint_source_path}")
         self.assertTrue(dispatch_source_path.is_file(), msg=f"missing dispatch slice: {dispatch_source_path}")
         self.assertTrue(generic_layout_source_path.is_file(), msg=f"missing generic/layout slice: {generic_layout_source_path}")
         self.assertTrue(array_boxing_source_path.is_file(), msg=f"missing array/boxing slice: {array_boxing_source_path}")
 
+        generic_instantiation_source = generic_instantiation_source_path.read_text(encoding="utf-8")
+        generic_constraint_source = generic_constraint_source_path.read_text(encoding="utf-8")
         dispatch_source = dispatch_source_path.read_text(encoding="utf-8")
         generic_layout_source = generic_layout_source_path.read_text(encoding="utf-8")
         array_boxing_source = array_boxing_source_path.read_text(encoding="utf-8")
 
-        self.assertIn("internal abstract class DispatchBase", dispatch_source)
-        self.assertIn("internal sealed class DispatchLeaf", dispatch_source)
+        self.assertIn("internal sealed class GenericInstantiationBox<T>", generic_instantiation_source)
+        self.assertIn("internal static class GenericInstantiationProofEntry", generic_instantiation_source)
+        self.assertIn("Capability = ChaosCapabilityItem.GenericInstantiation", generic_instantiation_source)
+        self.assertIn("CreatePair<int, string>", generic_instantiation_source)
+
+        self.assertIn("internal interface IGenericConstraintFormatter<T>", generic_constraint_source)
+        self.assertIn("where T : struct", generic_constraint_source)
+        self.assertIn("internal static class GenericConstraintProofEntry", generic_constraint_source)
+        self.assertIn("Capability = ChaosCapabilityItem.GenericConstraint", generic_constraint_source)
+
+        self.assertIn("internal abstract class DispatchBase<T>", dispatch_source)
+        self.assertIn("internal sealed class DispatchLeaf<T> : DispatchBase<T>", dispatch_source)
         self.assertIn("internal static class DispatchProofEntry", dispatch_source)
-        self.assertIn("DispatchBase instance = new DispatchLeaf(", dispatch_source)
+        self.assertIn("DispatchBase<int> instance = new DispatchLeaf<int>(42);", dispatch_source)
 
         self.assertIn("internal sealed class GenericBox<T>", generic_layout_source)
+        self.assertIn("public readonly T Value;", generic_layout_source)
         self.assertIn("internal static class GenericEcho", generic_layout_source)
         self.assertIn("internal static class GenericLayoutProofEntry", generic_layout_source)
-        self.assertIn("GenericBox<string>", generic_layout_source)
+        self.assertIn("GenericBox<int>", generic_layout_source)
 
         self.assertIn("internal static class BoxingSink", array_boxing_source)
         self.assertIn("internal static class ArrayBoxingProofEntry", array_boxing_source)
         self.assertIn("BoxingSink.Consume(42);", array_boxing_source)
-        self.assertIn("new FeatureBanner[]", array_boxing_source)
+        self.assertIn("ChaosAssertState.Reset();", array_boxing_source)
+        self.assertIn("object[] values = new object[1];", array_boxing_source)
 
     def test_loader_semantic_and_linker_lock_batch_a_surface(self) -> None:
         loader_source = LOADER_STAGE_PATH.read_text(encoding="utf-8")

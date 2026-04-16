@@ -148,6 +148,9 @@ public sealed class MetadataWriterStage
                     AssemblyName = type.AssemblyName,
                     SubjectId = type.SubjectId,
                     DefinitionSubjectId = type.DefinitionSubjectId,
+                    GenericContext = ManagedNaming.TryCreateGenericContext(
+                        type.SubjectId,
+                        type.DefinitionSubjectId),
                     MetadataToken = type.MetadataToken,
                 })
                 .ToList(),
@@ -157,6 +160,9 @@ public sealed class MetadataWriterStage
                     AssemblyName = method.AssemblyName,
                     SubjectId = method.SubjectId,
                     DefinitionSubjectId = method.DefinitionSubjectId,
+                    GenericContext = ManagedNaming.TryCreateGenericContext(
+                        method.SubjectId,
+                        method.DefinitionSubjectId),
                     DeclaringTypeSubjectId = method.DeclaringTypeSubjectId,
                     MetadataToken = method.MetadataToken,
                     ParameterCount = method.Parameters.Count,

@@ -8,6 +8,7 @@
     "alias": "hot-update-load-bench",
     "displayName": "hot-update-load-bench",
     "workloadEntry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
+    "entryIndex": 1,
     "assemblyName": "HotUpdateHostPack",
     "declaringType": "HotUpdateHostPack.HotUpdateLoadBenchmarkEntry",
     "methodName": "RunWorkload",
@@ -27,6 +28,21 @@
       "Package Load",
       "Patch Integrity"
     ],
+    "capabilityFamily": 13,
+    "capabilityFamilyLabel": "Hot Update Workflow",
+    "capabilityItem": 54,
+    "capabilityItemLabel": "Package Load",
+    "ownerSubjectId": "HotUpdateHostPack",
+    "supportStates": [
+      3,
+      2
+    ],
+    "supportStateLabels": [
+      "BridgeDispatch",
+      "InterpreterReady"
+    ],
+    "proofRequired": true,
+    "benchmarkRequired": true,
     "supportedModes": [
       "managed"
     ]
@@ -79,15 +95,21 @@
             "meanOpsPerSecond": 54.091,
             "minOpsPerSecond": 53.413,
             "maxOpsPerSecond": 54.903
-          }
+          },
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
         },
         "native": {
           "mode": "native",
-          "status": "unsupported"
+          "status": "unsupported",
+          "reasonCode": "unsupported-by-contract",
+          "reasonLabel": "This mode is not declared by the subject manifest."
         },
         "interpreter": {
           "mode": "interpreter",
-          "status": "unsupported"
+          "status": "unsupported",
+          "reasonCode": "unsupported-by-contract",
+          "reasonLabel": "This mode is not declared by the subject manifest."
         }
       },
       "coverage": {
@@ -168,6 +190,8 @@
         "managedBaseline": {
           "mode": "managed",
           "status": "recorded",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured.",
           "durationMs": 73.959,
           "opsPerSecond": 54.091,
           "recordedAt": "2026-04-14T14:27:46.462775Z",
@@ -177,24 +201,32 @@
           "native": {
             "mode": "native",
             "status": "unsupported",
+            "reasonCode": "unsupported-by-contract",
+            "reasonLabel": "This mode is not declared by the subject manifest.",
             "direction": "faster",
             "ratio": null,
             "durationMs": null,
             "opsPerSecond": null,
             "recordedAt": null,
             "gitCommit": null,
-            "baselineStatus": "recorded"
+            "baselineStatus": "recorded",
+            "baselineReasonCode": "recorded",
+            "baselineReasonLabel": "Benchmark record captured."
           },
           "interpreter": {
             "mode": "interpreter",
             "status": "unsupported",
+            "reasonCode": "unsupported-by-contract",
+            "reasonLabel": "This mode is not declared by the subject manifest.",
             "direction": "slower",
             "ratio": null,
             "durationMs": null,
             "opsPerSecond": null,
             "recordedAt": null,
             "gitCommit": null,
-            "baselineStatus": "recorded"
+            "baselineStatus": "recorded",
+            "baselineReasonCode": "recorded",
+            "baselineReasonLabel": "Benchmark record captured."
           }
         },
         "nativeSpeedup": null,
@@ -245,6 +277,7 @@
         "displayName": "hot-update-dispatch-bench",
         "alias": "hot-update-dispatch-bench",
         "workloadEntry": "HotUpdateHostPack/HotUpdateDispatchBenchmarkEntry::RunWorkload()",
+        "entryIndex": 0,
         "assemblyName": "HotUpdateHostPack",
         "declaringType": "HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry",
         "methodName": "RunWorkload",
@@ -265,6 +298,21 @@
         "hotUpdateCapabilityLabels": [
           "Patch Callback Flow"
         ],
+        "capabilityFamily": 13,
+        "capabilityFamilyLabel": "Hot Update Workflow",
+        "capabilityItem": 60,
+        "capabilityItemLabel": "Patch Callback Flow",
+        "ownerSubjectId": "HotUpdateHostPack",
+        "supportStates": [
+          3,
+          2
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
         "warmupCount": 1,
         "iterationCount": 45,
         "invocationCount": 1,
@@ -301,15 +349,21 @@
               "meanOpsPerSecond": 1037.054,
               "minOpsPerSecond": 950.344,
               "maxOpsPerSecond": 1118.881
-            }
+            },
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured."
           },
           "native": {
             "mode": "native",
-            "status": "unsupported"
+            "status": "unsupported",
+            "reasonCode": "unsupported-by-contract",
+            "reasonLabel": "This mode is not declared by the case contract."
           },
           "interpreter": {
             "mode": "interpreter",
-            "status": "unsupported"
+            "status": "unsupported",
+            "reasonCode": "unsupported-by-contract",
+            "reasonLabel": "This mode is not declared by the case contract."
           }
         },
         "coverage": {
@@ -323,6 +377,8 @@
           "managedBaseline": {
             "mode": "managed",
             "status": "recorded",
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured.",
             "durationMs": 3.874,
             "opsPerSecond": 1037.054,
             "recordedAt": "2026-04-14T14:27:50.745754Z",
@@ -332,24 +388,32 @@
             "native": {
               "mode": "native",
               "status": "unsupported",
+              "reasonCode": "unsupported-by-contract",
+              "reasonLabel": "This mode is not declared by the case contract.",
               "direction": "faster",
               "ratio": null,
               "durationMs": null,
               "opsPerSecond": null,
               "recordedAt": null,
               "gitCommit": null,
-              "baselineStatus": "recorded"
+              "baselineStatus": "recorded",
+              "baselineReasonCode": "recorded",
+              "baselineReasonLabel": "Benchmark record captured."
             },
             "interpreter": {
               "mode": "interpreter",
               "status": "unsupported",
+              "reasonCode": "unsupported-by-contract",
+              "reasonLabel": "This mode is not declared by the case contract.",
               "direction": "slower",
               "ratio": null,
               "durationMs": null,
               "opsPerSecond": null,
               "recordedAt": null,
               "gitCommit": null,
-              "baselineStatus": "recorded"
+              "baselineStatus": "recorded",
+              "baselineReasonCode": "recorded",
+              "baselineReasonLabel": "Benchmark record captured."
             }
           },
           "nativeSpeedup": null,
@@ -361,6 +425,7 @@
         "displayName": "hot-update-load-bench",
         "alias": "hot-update-load-bench",
         "workloadEntry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
+        "entryIndex": 1,
         "assemblyName": "HotUpdateHostPack",
         "declaringType": "HotUpdateHostPack.HotUpdateLoadBenchmarkEntry",
         "methodName": "RunWorkload",
@@ -382,6 +447,21 @@
           "Package Load",
           "Patch Integrity"
         ],
+        "capabilityFamily": 13,
+        "capabilityFamilyLabel": "Hot Update Workflow",
+        "capabilityItem": 54,
+        "capabilityItemLabel": "Package Load",
+        "ownerSubjectId": "HotUpdateHostPack",
+        "supportStates": [
+          3,
+          2
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
         "warmupCount": 1,
         "iterationCount": 8,
         "invocationCount": 1,
@@ -418,15 +498,21 @@
               "meanOpsPerSecond": 52.82,
               "minOpsPerSecond": 50.767,
               "maxOpsPerSecond": 54.351
-            }
+            },
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured."
           },
           "native": {
             "mode": "native",
-            "status": "unsupported"
+            "status": "unsupported",
+            "reasonCode": "unsupported-by-contract",
+            "reasonLabel": "This mode is not declared by the case contract."
           },
           "interpreter": {
             "mode": "interpreter",
-            "status": "unsupported"
+            "status": "unsupported",
+            "reasonCode": "unsupported-by-contract",
+            "reasonLabel": "This mode is not declared by the case contract."
           }
         },
         "coverage": {
@@ -440,6 +526,8 @@
           "managedBaseline": {
             "mode": "managed",
             "status": "recorded",
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured.",
             "durationMs": 75.791,
             "opsPerSecond": 52.82,
             "recordedAt": "2026-04-14T14:27:55.295091Z",
@@ -449,24 +537,32 @@
             "native": {
               "mode": "native",
               "status": "unsupported",
+              "reasonCode": "unsupported-by-contract",
+              "reasonLabel": "This mode is not declared by the case contract.",
               "direction": "faster",
               "ratio": null,
               "durationMs": null,
               "opsPerSecond": null,
               "recordedAt": null,
               "gitCommit": null,
-              "baselineStatus": "recorded"
+              "baselineStatus": "recorded",
+              "baselineReasonCode": "recorded",
+              "baselineReasonLabel": "Benchmark record captured."
             },
             "interpreter": {
               "mode": "interpreter",
               "status": "unsupported",
+              "reasonCode": "unsupported-by-contract",
+              "reasonLabel": "This mode is not declared by the case contract.",
               "direction": "slower",
               "ratio": null,
               "durationMs": null,
               "opsPerSecond": null,
               "recordedAt": null,
               "gitCommit": null,
-              "baselineStatus": "recorded"
+              "baselineStatus": "recorded",
+              "baselineReasonCode": "recorded",
+              "baselineReasonLabel": "Benchmark record captured."
             }
           },
           "nativeSpeedup": null,
@@ -478,6 +574,7 @@
         "displayName": "hot-update-roundtrip-bench",
         "alias": "hot-update-roundtrip-bench",
         "workloadEntry": "HotUpdateHostPack/HotUpdateRoundtripBenchmarkEntry::RunWorkload()",
+        "entryIndex": 2,
         "assemblyName": "HotUpdateHostPack",
         "declaringType": "HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry",
         "methodName": "RunWorkload",
@@ -499,6 +596,21 @@
           "Shared Contract Binding",
           "Patch Callback Flow"
         ],
+        "capabilityFamily": 13,
+        "capabilityFamilyLabel": "Hot Update Workflow",
+        "capabilityItem": 60,
+        "capabilityItemLabel": "Patch Callback Flow",
+        "ownerSubjectId": "HotUpdateHostPack",
+        "supportStates": [
+          3,
+          2
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
         "warmupCount": 1,
         "iterationCount": 30,
         "invocationCount": 1,
@@ -535,15 +647,21 @@
               "meanOpsPerSecond": 877.149,
               "minOpsPerSecond": 859.845,
               "maxOpsPerSecond": 899.058
-            }
+            },
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured."
           },
           "native": {
             "mode": "native",
-            "status": "unsupported"
+            "status": "unsupported",
+            "reasonCode": "unsupported-by-contract",
+            "reasonLabel": "This mode is not declared by the case contract."
           },
           "interpreter": {
             "mode": "interpreter",
-            "status": "unsupported"
+            "status": "unsupported",
+            "reasonCode": "unsupported-by-contract",
+            "reasonLabel": "This mode is not declared by the case contract."
           }
         },
         "coverage": {
@@ -557,6 +675,8 @@
           "managedBaseline": {
             "mode": "managed",
             "status": "recorded",
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured.",
             "durationMs": 4.562,
             "opsPerSecond": 877.149,
             "recordedAt": "2026-04-14T14:27:59.320789Z",
@@ -566,24 +686,32 @@
             "native": {
               "mode": "native",
               "status": "unsupported",
+              "reasonCode": "unsupported-by-contract",
+              "reasonLabel": "This mode is not declared by the case contract.",
               "direction": "faster",
               "ratio": null,
               "durationMs": null,
               "opsPerSecond": null,
               "recordedAt": null,
               "gitCommit": null,
-              "baselineStatus": "recorded"
+              "baselineStatus": "recorded",
+              "baselineReasonCode": "recorded",
+              "baselineReasonLabel": "Benchmark record captured."
             },
             "interpreter": {
               "mode": "interpreter",
               "status": "unsupported",
+              "reasonCode": "unsupported-by-contract",
+              "reasonLabel": "This mode is not declared by the case contract.",
               "direction": "slower",
               "ratio": null,
               "durationMs": null,
               "opsPerSecond": null,
               "recordedAt": null,
               "gitCommit": null,
-              "baselineStatus": "recorded"
+              "baselineStatus": "recorded",
+              "baselineReasonCode": "recorded",
+              "baselineReasonLabel": "Benchmark record captured."
             }
           },
           "nativeSpeedup": null,
@@ -625,6 +753,21 @@
       "warmupCount": 1,
       "iterationCount": 45,
       "invocationCount": 1,
+      "capabilityFamily": 13,
+      "capabilityFamilyLabel": "Hot Update Workflow",
+      "capabilityItem": 60,
+      "capabilityItemLabel": "Patch Callback Flow",
+      "ownerSubjectId": "HotUpdateHostPack",
+      "supportStates": [
+        3,
+        2
+      ],
+      "supportStateLabels": [
+        "BridgeDispatch",
+        "InterpreterReady"
+      ],
+      "proofRequired": true,
+      "benchmarkRequired": true,
       "entryIndex": 0
     },
     "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()": {
@@ -660,6 +803,21 @@
       "warmupCount": 1,
       "iterationCount": 8,
       "invocationCount": 1,
+      "capabilityFamily": 13,
+      "capabilityFamilyLabel": "Hot Update Workflow",
+      "capabilityItem": 54,
+      "capabilityItemLabel": "Package Load",
+      "ownerSubjectId": "HotUpdateHostPack",
+      "supportStates": [
+        3,
+        2
+      ],
+      "supportStateLabels": [
+        "BridgeDispatch",
+        "InterpreterReady"
+      ],
+      "proofRequired": true,
+      "benchmarkRequired": true,
       "entryIndex": 1
     },
     "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry::RunWorkload()": {
@@ -695,6 +853,21 @@
       "warmupCount": 1,
       "iterationCount": 30,
       "invocationCount": 1,
+      "capabilityFamily": 13,
+      "capabilityFamilyLabel": "Hot Update Workflow",
+      "capabilityItem": 60,
+      "capabilityItemLabel": "Patch Callback Flow",
+      "ownerSubjectId": "HotUpdateHostPack",
+      "supportStates": [
+        3,
+        2
+      ],
+      "supportStateLabels": [
+        "BridgeDispatch",
+        "InterpreterReady"
+      ],
+      "proofRequired": true,
+      "benchmarkRequired": true,
       "entryIndex": 2
     }
   },

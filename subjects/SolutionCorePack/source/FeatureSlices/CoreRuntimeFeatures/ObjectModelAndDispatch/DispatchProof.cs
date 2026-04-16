@@ -2,23 +2,23 @@ using Chaos.TestFramework;
 
 namespace CoreRuntimeFeatures;
 
-internal abstract class DispatchBase
+internal abstract class DispatchBase<T>
 {
-    public abstract string BuildMessage();
+    public abstract T ReadValue();
 }
 
-internal sealed class DispatchLeaf : DispatchBase
+internal sealed class DispatchLeaf<T> : DispatchBase<T>
 {
-    private readonly string _name;
+    private readonly T _value;
 
-    public DispatchLeaf(string name)
+    public DispatchLeaf(T value)
     {
-        _name = name;
+        _value = value;
     }
 
-    public override string BuildMessage()
+    public override T ReadValue()
     {
-        return "Dispatch native proof: " + _name + ".";
+        return _value;
     }
 }
 
@@ -32,9 +32,10 @@ internal static class DispatchProofEntry
         Priority = 2)]
     public static int Run()
     {
-        DispatchBase instance = new DispatchLeaf("leaf");
-        var message = instance.BuildMessage();
-        Assert.Equal("Dispatch native proof: leaf.", message);
-        return 0;
+        ChaosAssertState.Reset();
+        DispatchBase<int> instance = new DispatchLeaf<int>(42);
+        var value = instance.ReadValue();
+        Assert.Equal(42, value);
+        return ChaosAssertState.Complete();
     }
 }

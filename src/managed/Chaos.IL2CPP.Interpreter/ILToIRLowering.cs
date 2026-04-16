@@ -9,9 +9,11 @@ public sealed class ILToIRLowering
         var internalAssemblyNames = methods
             .Select(method => method.AssemblyName)
             .ToHashSet(StringComparer.Ordinal);
+        var methodsBySubjectId = methods
+            .ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
         return new InterpreterIR
         {
-            Methods = methods.Select(method => Lower(method, internalAssemblyNames)).ToList(),
+            Methods = methods.Select(method => Lower(method, internalAssemblyNames, methodsBySubjectId)).ToList(),
         };
     }
 
@@ -22,10 +24,17 @@ public sealed class ILToIRLowering
             new HashSet<string>(StringComparer.Ordinal)
             {
                 method.AssemblyName,
+            },
+            new Dictionary<string, ManagedMethodModel>(StringComparer.Ordinal)
+            {
+                [method.SubjectId] = method,
             });
     }
 
-    private IRMethod Lower(ManagedMethodModel method, IReadOnlySet<string> internalAssemblyNames)
+    private IRMethod Lower(
+        ManagedMethodModel method,
+        IReadOnlySet<string> internalAssemblyNames,
+        IReadOnlyDictionary<string, ManagedMethodModel> methodsBySubjectId)
     {
         if (TryBuildOffsetBlocks(method, out var offsetBlocks, out var offsetToBlockIndex, out var blockIds))
         {
@@ -40,6 +49,7 @@ public sealed class ILToIRLowering
                     blockIds,
                     offsetToBlockIndex,
                     internalAssemblyNames,
+                    methodsBySubjectId,
                     locals,
                     stack,
                     ref temporaryIndex))
@@ -78,6 +88,7 @@ public sealed class ILToIRLowering
                 fallbackBlockIds,
                 new Dictionary<int, int>(),
                 internalAssemblyNames,
+                methodsBySubjectId,
                 fallbackLocals,
                 fallbackStack,
                 ref fallbackTemporaryIndex))
@@ -276,6 +287,7 @@ public sealed class ILToIRLowering
         IReadOnlyDictionary<string, int> blockIds,
         IReadOnlyDictionary<int, int> offsetToBlockIndex,
         IReadOnlySet<string> internalAssemblyNames,
+        IReadOnlyDictionary<string, ManagedMethodModel> methodsBySubjectId,
         IDictionary<int, IRTypeTag> locals,
         Stack<IROperand> stack,
         ref int temporaryIndex)
@@ -291,6 +303,7 @@ public sealed class ILToIRLowering
                 blockIds,
                 offsetToBlockIndex,
                 internalAssemblyNames,
+                methodsBySubjectId,
                 method.Body.ExceptionRegions,
                 locals,
                 stack,
@@ -310,6 +323,7 @@ public sealed class ILToIRLowering
         IReadOnlyDictionary<string, int> blockIds,
         IReadOnlyDictionary<int, int> offsetToBlockIndex,
         IReadOnlySet<string> internalAssemblyNames,
+        IReadOnlyDictionary<string, ManagedMethodModel> methodsBySubjectId,
         IReadOnlyList<ManagedExceptionRegionModel> exceptionRegions,
         IDictionary<int, IRTypeTag> locals,
         Stack<IROperand> stack,
@@ -329,8 +343,8 @@ public sealed class ILToIRLowering
             "mul" => LowerBinaryNumeric(IROpCode.Mul, instruction, stack, ref temporaryIndex),
             "div" => LowerBinaryNumeric(IROpCode.Div, instruction, stack, ref temporaryIndex),
             "rem" => LowerBinaryNumeric(IROpCode.Rem, instruction, stack, ref temporaryIndex),
-            "call" => LowerMethodCall(method, instruction, internalAssemblyNames, stack, ref temporaryIndex),
-            "callvirt" => LowerMethodCall(method, instruction, internalAssemblyNames, stack, ref temporaryIndex),
+            "call" => LowerMethodCall(method, instruction, internalAssemblyNames, methodsBySubjectId, stack, ref temporaryIndex),
+            "callvirt" => LowerMethodCall(method, instruction, internalAssemblyNames, methodsBySubjectId, stack, ref temporaryIndex),
             "ceq" => LowerBinaryNumeric(IROpCode.Ceq, instruction, stack, ref temporaryIndex),
             "clt" => LowerBinaryNumeric(IROpCode.Clt, instruction, stack, ref temporaryIndex),
             "cgt" => LowerBinaryNumeric(IROpCode.Cgt, instruction, stack, ref temporaryIndex),
@@ -496,6 +510,7 @@ public sealed class ILToIRLowering
         ManagedMethodModel method,
         ManagedInstructionModel instruction,
         IReadOnlySet<string> internalAssemblyNames,
+        IReadOnlyDictionary<string, ManagedMethodModel> methodsBySubjectId,
         Stack<IROperand> stack,
         ref int temporaryIndex)
     {
@@ -512,7 +527,8 @@ public sealed class ILToIRLowering
         var dispatchKindCode = HybridDispatchResolver.ResolveInstruction(
             method.AssemblyName,
             internalAssemblyNames,
-            instruction);
+            instruction,
+            methodsBySubjectId);
         var opCode = ResolveCallOpCode(instruction, dispatchKindCode);
         var resultType = MapTypeTag(instruction.ResultType);
         var operands = new List<IROperand>(capacity: arguments.Length + 1)

@@ -8,6 +8,7 @@ import sys
 
 try:
     from ..core.common import read_json, write_json
+    from . import capability_coverage as capability_coverage_module
     from . import compiled_catalog as compiled_catalog_module
     from . import declared_metadata_labels as declared_metadata_labels_module
     from . import subjects as subjects_module
@@ -15,6 +16,7 @@ except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from core.common import read_json, write_json
+    from testing import capability_coverage as capability_coverage_module
     from testing import compiled_catalog as compiled_catalog_module
     from testing import declared_metadata_labels as declared_metadata_labels_module
     from testing import subjects as subjects_module
@@ -665,6 +667,19 @@ def _declared_registry_item(
         if family == "declared-unit-test"
         else declared_metadata_labels_module.benchmark_category_label(payload.get("category"))
     )
+    capability_contract = capability_coverage_module.resolve_capability_contract(
+        capability_family=payload.get("capabilityFamily"),
+        capability_item=payload.get("capabilityItem"),
+    )
+    item["capabilityFamily"] = int(capability_contract["capabilityFamily"])
+    item["capabilityFamilyLabel"] = str(capability_contract["capabilityFamilyLabel"])
+    item["capabilityItem"] = int(capability_contract["capabilityItem"])
+    item["capabilityItemLabel"] = str(capability_contract["capabilityItemLabel"])
+    item["ownerSubjectId"] = str(capability_contract["ownerSubjectId"])
+    item["supportStates"] = [int(value) for value in list(capability_contract["supportStates"])]
+    item["supportStateLabels"] = [str(value) for value in list(capability_contract["supportStateLabels"])]
+    item["proofRequired"] = bool(capability_contract["proofRequired"])
+    item["benchmarkRequired"] = bool(capability_contract["benchmarkRequired"])
     item["archetype"] = int(payload.get("archetype") or 0)
     item["archetypeLabel"] = declared_metadata_labels_module.archetype_label(payload.get("archetype"))
     item["hotUpdateCapability"] = int(payload.get("hotUpdateCapability") or 0)

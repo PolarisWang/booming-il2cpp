@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import shutil
 import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -505,6 +507,10 @@ class CompiledSubjectCatalogTests(unittest.TestCase):
             assembly_path.parent.mkdir(parents=True, exist_ok=True)
             assembly_path.write_text("", encoding="utf-8")
             write_json(manifest_path, manifest)
+            os.utime(solution_path, (1000, 1000))
+            os.utime(project_path, (1000, 1000))
+            os.utime(manifest_path, (1000, 1000))
+            os.utime(assembly_path, (2000, 2000))
 
             assembly_paths = compiled_catalog_module._resolve_subject_assembly_paths(
                 repo_root,
@@ -622,6 +628,12 @@ EndGlobal
             app_assembly_path.write_text("", encoding="utf-8")
             support_assembly_path.write_text("", encoding="utf-8")
             write_json(manifest_path, manifest)
+            os.utime(solution_path, (1000, 1000))
+            os.utime(app_project_path, (1000, 1000))
+            os.utime(support_project_path, (1000, 1000))
+            os.utime(manifest_path, (1000, 1000))
+            os.utime(app_assembly_path, (2000, 2000))
+            os.utime(support_assembly_path, (2000, 2000))
 
             assembly_paths = compiled_catalog_module._resolve_subject_assembly_paths(
                 repo_root,
@@ -636,6 +648,140 @@ EndGlobal
                 ],
                 assembly_paths,
             )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_declared_catalog_rebuilds_stale_solution_assemblies_even_when_output_exists(self) -> None:
+        compiled_catalog_module = load_module(COMPILED_CATALOG_MODULE_PATH, "chaos_compiled_subject_catalog_solution_stale")
+        repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "compiled-subject-catalog" / "solution-stale"
+        manifest_path = repo_root / "subjects" / "FixtureSolutionCatalog" / "subject.manifest.json"
+        solution_path = repo_root / "subjects" / "FixtureSolutionCatalog" / "source" / "FixtureSolutionCatalog.sln"
+        project_path = repo_root / "subjects" / "FixtureSolutionCatalog" / "source" / "App" / "FixtureSolutionCatalog.App.csproj"
+        source_file_path = repo_root / "subjects" / "FixtureSolutionCatalog" / "source" / "App" / "Slice.cs"
+        assembly_path = (
+            repo_root
+            / "subjects"
+            / "FixtureSolutionCatalog"
+            / "source"
+            / "App"
+            / "bin"
+            / "Debug"
+            / "net8.0"
+            / "FixtureSolutionCatalog.App.dll"
+        )
+
+        manifest = {
+            "subjectId": "FixtureSolutionCatalog",
+            "displayName": "FixtureSolutionCatalog",
+            "category": "canonical",
+            "defaultGoal": "correctness.dev",
+            "defaultMatrix": "windows-managed-output",
+            "defaultValidationProfile": "proof-dev",
+            "source": {
+                "type": "dotnet-project",
+                "path": "subjects/FixtureSolutionCatalog/source/FixtureSolutionCatalog.sln",
+                "primaryProjectPath": "subjects/FixtureSolutionCatalog/source/App/FixtureSolutionCatalog.App.csproj",
+                "entry": "FixtureSolutionCatalog.App/Program::Main()",
+            },
+            "sourceModel": "dotnet-solution",
+            "engineeringProfile": "managed-output",
+            "validationProfiles": {
+                "proof-dev": ["proof"],
+            },
+            "validation": {
+                "proof": {
+                    "kind": "proof",
+                    "defaultVariant": "CHECK",
+                }
+            },
+            "executionPipelines": [
+                {
+                    "pipelineId": "managed-runtime-output",
+                    "stages": [
+                        {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source", "dependsOn": []},
+                        {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input", "dependsOn": ["source-resolve"]},
+                        {"stageId": "runtime-managed-output", "kind": "runtime-managed-output", "scope": "matrix", "bucket": "runtime", "dependsOn": ["host-input-build"]},
+                        {"stageId": "report-assemble", "kind": "report-assemble", "scope": "matrix", "bucket": "report", "dependsOn": ["runtime-managed-output"]},
+                    ],
+                }
+            ],
+            "environmentMatrices": [
+                {
+                    "matrixId": "windows-managed-output",
+                    "pipelineId": "managed-runtime-output",
+                    "supportedGoals": ["correctness.dev"],
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "dotnet-managed",
+                        "runtimeProfile": "managed-output",
+                    },
+                    "validationIntent": {
+                        "validationMode": "output",
+                        "adaptationLevel": "observable-output",
+                        "expectedOutcome": "pass",
+                    },
+                    "artifactPlan": {
+                        "requiredBuckets": ["source", "host-input", "runtime", "report"],
+                        "evidenceTerminalBucket": "runtime",
+                    },
+                }
+            ],
+        }
+
+        solution_text = """
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixtureSolutionCatalog.App", "App\\FixtureSolutionCatalog.App.csproj", "{11111111-1111-1111-1111-111111111111}"
+EndProject
+Global
+EndGlobal
+""".lstrip()
+
+        build_calls: list[list[str]] = []
+
+        def fake_run_process(arguments: list[str], cwd: Path):
+            build_calls.append(list(arguments))
+            assembly_path.parent.mkdir(parents=True, exist_ok=True)
+            assembly_path.write_text("", encoding="utf-8")
+            os.utime(assembly_path, (3000, 3000))
+
+            class CompletedProcess:
+                returncode = 0
+                stdout = ""
+                stderr = ""
+
+            return CompletedProcess()
+
+        try:
+            solution_path.parent.mkdir(parents=True, exist_ok=True)
+            project_path.parent.mkdir(parents=True, exist_ok=True)
+            solution_path.write_text(solution_text, encoding="utf-8")
+            project_path.write_text(
+                "<Project Sdk=\"Microsoft.NET.Sdk\"><PropertyGroup><AssemblyName>FixtureSolutionCatalog.App</AssemblyName></PropertyGroup></Project>\n",
+                encoding="utf-8",
+            )
+            source_file_path.write_text("internal static class Slice { }\n", encoding="utf-8")
+            assembly_path.parent.mkdir(parents=True, exist_ok=True)
+            assembly_path.write_text("", encoding="utf-8")
+            write_json(manifest_path, manifest)
+
+            os.utime(assembly_path, (1000, 1000))
+            os.utime(solution_path, (2000, 2000))
+            os.utime(project_path, (2000, 2000))
+            os.utime(source_file_path, (2000, 2000))
+            os.utime(manifest_path, (2000, 2000))
+
+            with mock.patch.object(compiled_catalog_module, "run_process", side_effect=fake_run_process):
+                assembly_paths = compiled_catalog_module._resolve_subject_assembly_paths(
+                    repo_root,
+                    manifest,
+                    build_if_missing=False,
+                )
+
+            self.assertEqual([assembly_path.resolve()], assembly_paths)
+            self.assertEqual(1, len(build_calls))
+            self.assertEqual("dotnet", build_calls[0][0])
+            self.assertEqual("build", build_calls[0][1])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

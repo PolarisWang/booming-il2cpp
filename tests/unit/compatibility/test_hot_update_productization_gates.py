@@ -306,6 +306,23 @@ class Phase8ProductizationGatesTests(unittest.TestCase):
             ["managed", "native"],
             solution_core_pack_perf["summaryBenchmarkCase"]["supportedModes"],
         )
+        self.assertEqual(
+            "SolutionCorePack",
+            solution_core_pack_perf["summaryBenchmarkCase"]["ownerSubjectId"],
+        )
+        self.assertEqual(
+            "Primitives And Ops",
+            solution_core_pack_perf["summaryBenchmarkCase"]["capabilityFamilyLabel"],
+        )
+        self.assertEqual(
+            "Arithmetic Ops",
+            solution_core_pack_perf["summaryBenchmarkCase"]["capabilityItemLabel"],
+        )
+        self.assertEqual(
+            ["NativeGenerated"],
+            solution_core_pack_perf["summaryBenchmarkCase"]["supportStateLabels"],
+        )
+        self.assertTrue(solution_core_pack_perf["summaryBenchmarkCase"]["benchmarkRequired"])
 
         hot_update_perf = next(
             entry
@@ -334,6 +351,23 @@ class Phase8ProductizationGatesTests(unittest.TestCase):
             ["Hot Update"],
             hot_update_perf["summaryBenchmarkCase"]["requirementLabels"],
         )
+        self.assertEqual(
+            "HotUpdateHostPack",
+            hot_update_perf["summaryBenchmarkCase"]["ownerSubjectId"],
+        )
+        self.assertEqual(
+            "Hot Update Workflow",
+            hot_update_perf["summaryBenchmarkCase"]["capabilityFamilyLabel"],
+        )
+        self.assertEqual(
+            "Package Load",
+            hot_update_perf["summaryBenchmarkCase"]["capabilityItemLabel"],
+        )
+        self.assertEqual(
+            ["BridgeDispatch", "InterpreterReady"],
+            hot_update_perf["summaryBenchmarkCase"]["supportStateLabels"],
+        )
+        self.assertTrue(hot_update_perf["summaryBenchmarkCase"]["benchmarkRequired"])
 
     def test_unsupported_feature_report_scanner_flags_fixture_patterns(self) -> None:
         report_module = load_module(
@@ -382,6 +416,77 @@ class Phase8ProductizationGatesTests(unittest.TestCase):
             self.assertTrue(output_path.is_file())
         finally:
             shutil.rmtree(fixture_root, ignore_errors=True)
+
+    def test_declared_contract_report_distinguishes_reporting_owned_missing_proof_and_missing_benchmark(self) -> None:
+        report_module = load_module(
+            UNSUPPORTED_FEATURE_REPORT_MODULE_PATH,
+            "chaos_unsupported_feature_report_phase8_contracts",
+        )
+
+        report = report_module.build_declared_contract_status_report(
+            declared_unit_tests=[
+                {
+                    "subjectId": "SolutionCorePack",
+                    "stableId": "solution-core/native-call-proof",
+                    "capabilityFamily": 7,
+                    "capabilityItem": 31,
+                },
+                {
+                    "subjectId": "SolutionCorePack",
+                    "stableId": "solution-core/closure-proof",
+                    "capabilityFamily": 12,
+                    "capabilityItem": 51,
+                },
+                {
+                    "subjectId": "SolutionCorePack",
+                    "stableId": "solution-core/runtime-trace-proof",
+                    "capabilityFamily": 11,
+                    "capabilityItem": 47,
+                },
+            ],
+            declared_benchmarks=[
+                {
+                    "subjectId": "SolutionCorePack",
+                    "stableId": "solution-core/native-call-bench",
+                    "capabilityFamily": 7,
+                    "capabilityItem": 31,
+                },
+                {
+                    "subjectId": "HotUpdateHostPack",
+                    "stableId": "hot-update/package-load-bench",
+                    "capabilityFamily": 13,
+                    "capabilityItem": 54,
+                },
+            ],
+        )
+
+        self.assertEqual("v1", report["reportVersion"])
+        self.assertEqual("fail", report["status"])
+        self.assertEqual(4, report["statusCounts"]["total"])
+        self.assertEqual(2, report["statusCounts"]["ok"])
+        self.assertEqual(2, report["statusCounts"]["fail"])
+        self.assertEqual(1, report["classificationCounts"]["proofOptional"])
+        self.assertEqual(1, report["classificationCounts"]["missingProof"])
+        self.assertEqual(1, report["classificationCounts"]["missingBenchmark"])
+        self.assertEqual(1, report["classificationCounts"]["ok"])
+
+        results_by_item = {
+            int(item["capabilityItem"]): item
+            for item in report["contractResults"]
+        }
+        self.assertEqual("ok", results_by_item[31]["classification"])
+        self.assertEqual("missingBenchmark", results_by_item[51]["classification"])
+        self.assertEqual("missingProof", results_by_item[54]["classification"])
+        self.assertEqual("proofOptional", results_by_item[47]["classification"])
+        self.assertEqual(
+            "reporting-owned-proof-optional",
+            results_by_item[47]["reasonCode"],
+        )
+        self.assertTrue(results_by_item[47]["proofOptional"])
+        self.assertTrue(results_by_item[47]["reportingOwned"])
+        self.assertFalse(results_by_item[47]["missingProof"])
+        self.assertFalse(results_by_item[47]["missingBenchmark"])
+        self.assertFalse(results_by_item[47]["unsupported"])
 
     def test_soak_harness_collects_samples_for_successful_iterations(self) -> None:
         soak_module = load_module(

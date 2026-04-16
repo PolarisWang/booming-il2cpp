@@ -27,14 +27,15 @@ internal sealed class TypeNameProvider : ISignatureTypeProvider<string, Signatur
 
     public string GetFunctionPointerType(MethodSignature<string> signature)
     {
-        throw new NotSupportedException("function pointers are not supported in the Stage 3 loader");
+        return FunctionPointerTypeFormatter.Format(
+            signature.Header,
+            signature.ParameterTypes,
+            signature.ReturnType);
     }
 
     public string GetGenericInstantiation(string genericType, ImmutableArray<string> typeArguments)
     {
-        return typeArguments.Any(IsGenericPlaceholder)
-            ? genericType
-            : ManagedNaming.CreateInstantiatedTypeDisplayName(genericType, typeArguments);
+        return ManagedNaming.CreateInstantiatedTypeDisplayName(genericType, typeArguments);
     }
 
     public string GetGenericMethodParameter(SignatureContext<string>? genericContext, int index)
@@ -138,25 +139,17 @@ internal sealed class TypeIdentityProvider : ISignatureTypeProvider<TypeIdentity
 
     public TypeIdentity GetFunctionPointerType(MethodSignature<TypeIdentity> signature)
     {
-        throw new NotSupportedException("function pointers are not supported in the Stage 3 loader");
+        return _resolver.CreateSimpleTypeIdentity(
+            _resolver.CurrentAssemblyName,
+            FunctionPointerTypeFormatter.Format(
+                signature.Header,
+                signature.ParameterTypes.Select(parameterType => parameterType.DisplayName),
+                signature.ReturnType.DisplayName));
     }
 
     public TypeIdentity GetGenericInstantiation(TypeIdentity genericType, ImmutableArray<TypeIdentity> typeArguments)
     {
         var argumentDisplayNames = typeArguments.Select(argument => argument.DisplayName).ToImmutableArray();
-        if (argumentDisplayNames.Any(IsGenericPlaceholder))
-        {
-            return new TypeIdentity
-            {
-                AssemblyName = genericType.AssemblyName,
-                SubjectId = genericType.DefinitionSubjectId,
-                DisplayName = genericType.DefinitionDisplayName,
-                DefinitionSubjectId = genericType.DefinitionSubjectId,
-                DefinitionDisplayName = genericType.DefinitionDisplayName,
-                TypeArguments = argumentDisplayNames,
-            };
-        }
-
         return new TypeIdentity
         {
             AssemblyName = genericType.AssemblyName,
@@ -250,5 +243,21 @@ internal sealed class TypeIdentityProvider : ISignatureTypeProvider<TypeIdentity
     private static bool IsGenericPlaceholder(string value)
     {
         return value.StartsWith("!", StringComparison.Ordinal);
+    }
+}
+
+internal static class FunctionPointerTypeFormatter
+{
+    public static string Format(
+        SignatureHeader header,
+        IEnumerable<string> parameterTypes,
+        string returnType)
+    {
+        var prefix = header.CallingConvention == SignatureCallingConvention.Unmanaged
+            ? "delegate* unmanaged"
+            : "delegate* managed";
+        var signatureParts = parameterTypes
+            .Concat([returnType]);
+        return $"{prefix}<{string.Join(",", signatureParts)}>";
     }
 }

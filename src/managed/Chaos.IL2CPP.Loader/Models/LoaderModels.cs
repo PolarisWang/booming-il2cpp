@@ -73,6 +73,8 @@ internal sealed record MethodSummary : MethodReferenceSummary
 
     public required bool IsStatic { get; init; }
 
+    public required bool IsVirtual { get; init; }
+
     public bool IsPreserved { get; init; }
 
     public bool IsUnmanagedCallersOnly { get; init; }

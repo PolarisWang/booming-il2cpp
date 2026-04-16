@@ -155,11 +155,162 @@ public static class ManagedNaming
         return builder.ToString();
     }
 
+    public static GenericContextArtifact? TryCreateGenericContext(string subjectId, string definitionSubjectId)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(definitionSubjectId);
+
+        IReadOnlyList<string> typeArguments;
+        IReadOnlyList<string> methodArguments;
+
+        if (subjectId.Contains("::", StringComparison.Ordinal) &&
+            definitionSubjectId.Contains("::", StringComparison.Ordinal))
+        {
+            var declaringTypeSubjectId = GetDeclaringTypeSubjectId(subjectId);
+            var definitionDeclaringTypeSubjectId = GetDeclaringTypeSubjectId(definitionSubjectId);
+            typeArguments = TryExtractTypeArguments(declaringTypeSubjectId, definitionDeclaringTypeSubjectId);
+            methodArguments = LooksLikeMethodSubjectId(subjectId) && LooksLikeMethodSubjectId(definitionSubjectId)
+                ? TryExtractMethodArguments(subjectId, definitionSubjectId)
+                : [];
+        }
+        else
+        {
+            typeArguments = TryExtractTypeArguments(subjectId, definitionSubjectId);
+            methodArguments = [];
+        }
+
+        var hasTypeArguments = typeArguments.Count > 0;
+        var hasMethodArguments = methodArguments.Count > 0;
+        if (!hasTypeArguments && !hasMethodArguments)
+        {
+            return null;
+        }
+
+        return new GenericContextArtifact
+        {
+            ContextKind = hasTypeArguments && hasMethodArguments
+                ? GenericContextKind.TypeAndMethodInstantiation
+                : hasTypeArguments
+                    ? GenericContextKind.TypeInstantiation
+                    : GenericContextKind.MethodInstantiation,
+            DefinitionSubjectId = definitionSubjectId,
+            TypeArguments = typeArguments,
+            MethodArguments = methodArguments,
+        };
+    }
+
     private static string GetTypeIdentityPart(string assemblyName, string? namespaceName, string typeName)
     {
         return string.Equals(namespaceName, assemblyName, StringComparison.Ordinal) || string.IsNullOrEmpty(namespaceName)
             ? typeName
             : $"{namespaceName}.{typeName}";
+    }
+
+    private static bool LooksLikeMethodSubjectId(string subjectId)
+    {
+        return subjectId.Contains("::", StringComparison.Ordinal) &&
+               subjectId.EndsWith(")", StringComparison.Ordinal);
+    }
+
+    private static string GetDeclaringTypeSubjectId(string subjectId)
+    {
+        var separatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
+        if (separatorIndex <= 0)
+        {
+            throw new InvalidOperationException($"subject id '{subjectId}' is missing declaring type information.");
+        }
+
+        return subjectId[..separatorIndex];
+    }
+
+    private static IReadOnlyList<string> TryExtractTypeArguments(string subjectId, string definitionSubjectId)
+    {
+        var strippedDefinition = StripGenericArity(definitionSubjectId);
+        if (string.Equals(subjectId, definitionSubjectId, StringComparison.Ordinal) ||
+            string.Equals(subjectId, strippedDefinition, StringComparison.Ordinal) ||
+            !subjectId.StartsWith(strippedDefinition, StringComparison.Ordinal) ||
+            subjectId.Length <= strippedDefinition.Length + 1 ||
+            subjectId[strippedDefinition.Length] != '<' ||
+            subjectId[^1] != '>')
+        {
+            return [];
+        }
+
+        return SplitTopLevelArguments(subjectId[(strippedDefinition.Length + 1)..^1]);
+    }
+
+    private static IReadOnlyList<string> TryExtractMethodArguments(string subjectId, string definitionSubjectId)
+    {
+        var methodName = GetMethodName(subjectId);
+        var definitionMethodName = GetMethodName(definitionSubjectId);
+        var strippedDefinitionMethodName = StripGenericArity(definitionMethodName);
+
+        if (string.Equals(methodName, definitionMethodName, StringComparison.Ordinal) ||
+            string.Equals(methodName, strippedDefinitionMethodName, StringComparison.Ordinal) ||
+            !methodName.StartsWith(strippedDefinitionMethodName, StringComparison.Ordinal) ||
+            methodName.Length <= strippedDefinitionMethodName.Length + 1 ||
+            methodName[strippedDefinitionMethodName.Length] != '<' ||
+            methodName[^1] != '>')
+        {
+            return [];
+        }
+
+        return SplitTopLevelArguments(methodName[(strippedDefinitionMethodName.Length + 1)..^1]);
+    }
+
+    private static string GetMethodName(string subjectId)
+    {
+        var separatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
+        var parameterListIndex = subjectId.LastIndexOf('(');
+        if (separatorIndex <= 0 || parameterListIndex <= separatorIndex + 2)
+        {
+            throw new InvalidOperationException($"subject id '{subjectId}' is missing method name.");
+        }
+
+        return subjectId[(separatorIndex + 2)..parameterListIndex];
+    }
+
+    private static IReadOnlyList<string> SplitTopLevelArguments(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return [];
+        }
+
+        var arguments = new List<string>();
+        var builder = new System.Text.StringBuilder();
+        var genericDepth = 0;
+
+        foreach (var character in value)
+        {
+            switch (character)
+            {
+                case '<':
+                case '[':
+                    genericDepth++;
+                    builder.Append(character);
+                    break;
+                case '>':
+                case ']':
+                    genericDepth--;
+                    builder.Append(character);
+                    break;
+                case ',' when genericDepth == 0:
+                    arguments.Add(builder.ToString().Trim());
+                    builder.Clear();
+                    break;
+                default:
+                    builder.Append(character);
+                    break;
+            }
+        }
+
+        if (builder.Length > 0)
+        {
+            arguments.Add(builder.ToString().Trim());
+        }
+
+        return arguments;
     }
 
     private static string ToKebabCase(string value)
@@ -248,6 +399,12 @@ public sealed record ManagedTypeModel
 
     public bool IsInterface { get; init; }
 
+    public bool IsValueType { get; init; }
+
+    public string? BaseTypeSubjectId { get; init; }
+
+    public IReadOnlyList<string>? ImplementedInterfaceSubjectIds { get; init; }
+
     public bool IsPreserved { get; init; }
 
     public required int MetadataToken { get; init; }
@@ -315,6 +472,8 @@ public sealed record ManagedMethodModel
 
     public required bool IsStatic { get; init; }
 
+    public required bool IsVirtual { get; init; }
+
     public bool IsPreserved { get; init; }
 
     public bool IsUnmanagedCallersOnly { get; init; }
@@ -368,6 +527,8 @@ public sealed record ManagedExceptionRegionModel
 
     public required int HandlerLength { get; init; }
 
+    public int? FilterOffset { get; init; }
+
     public string? CatchTypeSubjectId { get; init; }
 }
 
@@ -383,6 +544,8 @@ public sealed record ManagedInstructionModel
 
     public string? Callee { get; init; }
 
+    public ManagedCallSiteSignature? CallSiteSignature { get; init; }
+
     public ManagedInstructionReference? Reference { get; init; }
 }
 
@@ -393,6 +556,29 @@ public sealed record ManagedInstructionReference
     public required string SubjectKind { get; init; }
 
     public required string SubjectId { get; init; }
+}
+
+/// <summary>
+/// Canonical call-site kinds carried by managed / typed-il / AOT core instruction artifacts.
+/// </summary>
+public enum ManagedCallSiteKind : byte
+{
+    /// <summary>
+    /// Call site describes an indirect call through a function pointer.
+    /// </summary>
+    FunctionPointer = 1,
+}
+
+/// <summary>
+/// Stable call-site signature metadata needed by indirect-call instructions such as <c>calli</c>.
+/// </summary>
+public sealed record ManagedCallSiteSignature
+{
+    public required ManagedCallSiteKind KindCode { get; init; }
+
+    public required string ReturnType { get; init; }
+
+    public required IReadOnlyList<string> ParameterTypes { get; init; }
 }
 
 public sealed record CanonicalSubjectsModel
@@ -471,6 +657,38 @@ public enum HybridDispatchKind : byte
     Bridge = 3,
     ExternalRuntime = 4,
     Unsupported = 5,
+}
+
+/// <summary>
+/// Encodes whether a generic context is carried by a closed type, a closed method, or both.
+/// </summary>
+public enum GenericContextKind : byte
+{
+    /// <summary>
+    /// Closed context comes from the declaring type instantiation.
+    /// </summary>
+    TypeInstantiation = 1,
+
+    /// <summary>
+    /// Closed context comes from the method instantiation.
+    /// </summary>
+    MethodInstantiation = 2,
+
+    /// <summary>
+    /// Closed context carries both declaring-type and method instantiation arguments.
+    /// </summary>
+    TypeAndMethodInstantiation = 3,
+}
+
+public sealed record GenericContextArtifact
+{
+    public required GenericContextKind ContextKind { get; init; }
+
+    public required string DefinitionSubjectId { get; init; }
+
+    public IReadOnlyList<string>? TypeArguments { get; init; }
+
+    public IReadOnlyList<string>? MethodArguments { get; init; }
 }
 
 public sealed record ManagedMethodIdentityArtifact
@@ -676,7 +894,8 @@ public static class HybridDispatchResolver
     public static HybridDispatchKind? ResolveInstruction(
         string callerAssemblyName,
         IReadOnlySet<string> internalAssemblyNames,
-        ManagedInstructionModel instruction)
+        ManagedInstructionModel instruction,
+        IReadOnlyDictionary<string, ManagedMethodModel>? methodsBySubjectId = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(callerAssemblyName);
         ArgumentNullException.ThrowIfNull(internalAssemblyNames);
@@ -704,9 +923,22 @@ public static class HybridDispatchResolver
             return HybridDispatchKind.Bridge;
         }
 
-        return string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal)
-            ? HybridDispatchKind.Virtual
-            : HybridDispatchKind.Direct;
+        if (!string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal))
+        {
+            return HybridDispatchKind.Direct;
+        }
+
+        var calleeSubjectId = instruction.Callee ?? instruction.Reference?.SubjectId;
+        if (!string.IsNullOrWhiteSpace(calleeSubjectId) &&
+            methodsBySubjectId is not null &&
+            methodsBySubjectId.TryGetValue(calleeSubjectId, out var calleeMethod))
+        {
+            return calleeMethod.IsVirtual
+                ? HybridDispatchKind.Virtual
+                : HybridDispatchKind.Direct;
+        }
+
+        return HybridDispatchKind.Virtual;
     }
 
     private static string? TryGetAssemblyNameFromSubjectId(string? subjectId)
@@ -893,6 +1125,257 @@ public sealed record TypedIlIrArtifact
     public required IReadOnlyList<TypedIlMethodArtifact> Methods { get; init; }
 }
 
+/// <summary>
+/// Canonical reference kinds carried by <see cref="AotCoreIrArtifact"/>.
+/// </summary>
+public enum AotCoreIrReferenceKind : byte
+{
+    /// <summary>
+    /// Reference points to a managed type subject.
+    /// </summary>
+    Type = 1,
+
+    /// <summary>
+    /// Reference points to a managed field subject.
+    /// </summary>
+    Field = 2,
+
+    /// <summary>
+    /// Reference points to a managed method subject.
+    /// </summary>
+    Method = 3,
+}
+
+/// <summary>
+/// Minimal type-shape information carried by <see cref="AotCoreIrReferenceArtifact"/>.
+/// </summary>
+public enum AotCoreIrTypeShapeKind : byte
+{
+    /// <summary>
+    /// Type is a reference type.
+    /// </summary>
+    ReferenceType = 1,
+
+    /// <summary>
+    /// Type is a value type.
+    /// </summary>
+    ValueType = 2,
+
+    /// <summary>
+    /// Type is an interface.
+    /// </summary>
+    InterfaceType = 3,
+}
+
+/// <summary>
+/// Minimal object/runtime services required by the current AOT core IR slice.
+/// </summary>
+public enum AotCoreIrRuntimeServiceKind : byte
+{
+    /// <summary>
+    /// Allocates an object instance and wires constructor dispatch.
+    /// </summary>
+    NewObject = 1,
+
+    /// <summary>
+    /// Loads an instance field value.
+    /// </summary>
+    LoadInstanceField = 2,
+
+    /// <summary>
+    /// Stores an instance field value.
+    /// </summary>
+    StoreInstanceField = 3,
+
+    /// <summary>
+    /// Loads a static field value.
+    /// </summary>
+    LoadStaticField = 4,
+
+    /// <summary>
+    /// Stores a static field value.
+    /// </summary>
+    StoreStaticField = 5,
+
+    /// <summary>
+    /// Allocates a managed array.
+    /// </summary>
+    NewArray = 6,
+
+    /// <summary>
+    /// Performs a checked reference cast.
+    /// </summary>
+    CastClass = 7,
+
+    /// <summary>
+    /// Performs an instance-of compatible cast probe.
+    /// </summary>
+    IsInst = 8,
+
+    /// <summary>
+    /// Boxes a value type into a managed object.
+    /// </summary>
+    Box = 9,
+
+    /// <summary>
+    /// Produces a managed pointer to boxed storage.
+    /// </summary>
+    Unbox = 10,
+
+    /// <summary>
+    /// Extracts a value from boxed storage.
+    /// </summary>
+    UnboxAny = 11,
+
+    /// <summary>
+    /// Loads a managed array element.
+    /// </summary>
+    LoadArrayElement = 12,
+
+    /// <summary>
+    /// Stores a managed array element.
+    /// </summary>
+    StoreArrayElement = 13,
+
+    /// <summary>
+    /// Initializes value-type storage through a managed pointer.
+    /// </summary>
+    InitObject = 14,
+}
+
+/// <summary>
+/// Encodes managed EH region shape after lowering into AOT Core IR.
+/// </summary>
+public enum AotCoreIrExceptionRegionKind : byte
+{
+    /// <summary>
+    /// Typed catch handler.
+    /// </summary>
+    Catch = 1,
+
+    /// <summary>
+    /// Finally handler.
+    /// </summary>
+    Finally = 2,
+
+    /// <summary>
+    /// Fault handler.
+    /// </summary>
+    Fault = 3,
+
+    /// <summary>
+    /// Filtered catch handler.
+    /// </summary>
+    Filter = 4,
+}
+
+/// <summary>
+/// Encodes the lowered ABI carrier used by Native AOT direct-call signatures.
+/// </summary>
+public enum AotCoreIrAbiCarrierKind : byte
+{
+    /// <summary>
+    /// Method returns no value.
+    /// </summary>
+    Void = 0,
+
+    /// <summary>
+    /// 32-bit integer carrier.
+    /// </summary>
+    Int32 = 1,
+
+    /// <summary>
+    /// Native pointer-sized integer carrier.
+    /// </summary>
+    NativeInt = 2,
+
+    /// <summary>
+    /// Value type travels by value through the native ABI.
+    /// </summary>
+    ValueTypeByValue = 3,
+
+    /// <summary>
+    /// Signed 8-bit integer carrier.
+    /// </summary>
+    Int8 = 4,
+
+    /// <summary>
+    /// Unsigned 8-bit integer carrier.
+    /// </summary>
+    UInt8 = 5,
+
+    /// <summary>
+    /// Signed 16-bit integer carrier.
+    /// </summary>
+    Int16 = 6,
+
+    /// <summary>
+    /// Unsigned 16-bit integer carrier.
+    /// </summary>
+    UInt16 = 7,
+
+    /// <summary>
+    /// 32-bit floating-point carrier.
+    /// </summary>
+    Float32 = 8,
+
+    /// <summary>
+    /// 64-bit floating-point carrier.
+    /// </summary>
+    Float64 = 9,
+
+    /// <summary>
+    /// Signed 64-bit integer carrier.
+    /// </summary>
+    Int64 = 10,
+
+    /// <summary>
+    /// Unsigned 64-bit integer carrier.
+    /// </summary>
+    UInt64 = 11,
+}
+
+/// <summary>
+/// Minimal ABI slot information consumed by Native AOT lowering.
+/// </summary>
+public sealed record AotCoreIrAbiSlotArtifact
+{
+    public required AotCoreIrAbiCarrierKind CarrierKindCode { get; init; }
+
+    public string? TypeSubjectId { get; init; }
+
+    public AotCoreIrTypeShapeKind TypeShape { get; init; }
+}
+
+public sealed record AotCoreIrReferenceArtifact
+{
+    public required AotCoreIrReferenceKind Kind { get; init; }
+
+    public required string AssemblyName { get; init; }
+
+    public required string SubjectId { get; init; }
+
+    public GenericContextArtifact? GenericContext { get; init; }
+
+    public AotCoreIrTypeShapeKind TypeShape { get; init; }
+
+    public string? ArrayElementSubjectId { get; init; }
+
+    public AotCoreIrTypeShapeKind ArrayElementTypeShape { get; init; }
+
+    public string? ArrayElementBaseTypeSubjectId { get; init; }
+
+    public IReadOnlyList<string>? ArrayElementImplementedInterfaceSubjectIds { get; init; }
+
+    public string? BaseTypeSubjectId { get; init; }
+
+    public IReadOnlyList<string>? ImplementedInterfaceSubjectIds { get; init; }
+
+    public string? DeclaringTypeSubjectId { get; init; }
+
+    public AotCoreIrTypeShapeKind DeclaringTypeShape { get; init; }
+}
+
 public sealed record AotCoreIrArtifact
 {
     public string FormatVersion { get; init; } = "v0";
@@ -912,19 +1395,44 @@ public sealed record AotCoreIrMethodArtifact
 
     public required ManagedMethodIdentityArtifact Identity { get; init; }
 
+    public GenericContextArtifact? GenericContext { get; init; }
+
     public required string NativeSymbol { get; init; }
 
     public required bool IsStatic { get; init; }
 
     public required string ReturnType { get; init; }
 
+    public required AotCoreIrAbiSlotArtifact ReturnAbi { get; init; }
+
     public required int ParameterCount { get; init; }
+
+    public required IReadOnlyList<AotCoreIrAbiSlotArtifact> ParameterAbis { get; init; }
 
     public required int LocalCount { get; init; }
 
     public required int ExceptionRegionCount { get; init; }
 
+    public required IReadOnlyList<AotCoreIrExceptionRegionArtifact> ExceptionRegions { get; init; }
+
     public required IReadOnlyList<AotCoreIrInstructionArtifact> Instructions { get; init; }
+}
+
+public sealed record AotCoreIrExceptionRegionArtifact
+{
+    public required AotCoreIrExceptionRegionKind HandlingKindCode { get; init; }
+
+    public required int TryOffset { get; init; }
+
+    public required int TryLength { get; init; }
+
+    public required int HandlerOffset { get; init; }
+
+    public required int HandlerLength { get; init; }
+
+    public int? FilterOffset { get; init; }
+
+    public string? CatchTypeSubjectId { get; init; }
 }
 
 public sealed record AotCoreIrInstructionArtifact
@@ -939,7 +1447,13 @@ public sealed record AotCoreIrInstructionArtifact
 
     public string? Callee { get; init; }
 
+    public ManagedCallSiteSignature? CallSiteSignature { get; init; }
+
     public ManagedInstructionReference? Reference { get; init; }
+
+    public AotCoreIrReferenceArtifact? TargetReference { get; init; }
+
+    public AotCoreIrRuntimeServiceKind? RuntimeServiceKind { get; init; }
 
     public string? TargetSymbol { get; init; }
 
@@ -996,6 +1510,10 @@ public sealed record TypedIlInstructionArtifact
     public string? ResultType { get; init; }
 
     public string? Callee { get; init; }
+
+    public ManagedCallSiteSignature? CallSiteSignature { get; init; }
+
+    public ManagedInstructionReference? Reference { get; init; }
 
     public HybridDispatchKind? DispatchKindCode { get; init; }
 }
@@ -1083,6 +1601,8 @@ public sealed record SupplementalMetadataTypeTemplateEntry
 
     public required string DefinitionSubjectId { get; init; }
 
+    public GenericContextArtifact? GenericContext { get; init; }
+
     public required int MetadataToken { get; init; }
 }
 
@@ -1093,6 +1613,8 @@ public sealed record SupplementalMetadataMethodTemplateEntry
     public required string SubjectId { get; init; }
 
     public required string DefinitionSubjectId { get; init; }
+
+    public GenericContextArtifact? GenericContext { get; init; }
 
     public required string DeclaringTypeSubjectId { get; init; }
 

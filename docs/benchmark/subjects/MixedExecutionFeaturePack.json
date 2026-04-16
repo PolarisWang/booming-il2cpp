@@ -8,6 +8,7 @@
     "alias": "mixed-execution-native-bench",
     "displayName": "mixed-execution-native-bench",
     "workloadEntry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+    "entryIndex": 1,
     "assemblyName": "MixedExecutionFeaturePack",
     "declaringType": "MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry",
     "methodName": "RunWorkload",
@@ -22,6 +23,23 @@
     "archetypeLabel": "Mixed Bridge Solution",
     "hotUpdateCapability": 0,
     "hotUpdateCapabilityLabels": [],
+    "capabilityFamily": 14,
+    "capabilityFamilyLabel": "Mixed Execution",
+    "capabilityItem": 63,
+    "capabilityItemLabel": "Interpreter Arithmetic",
+    "ownerSubjectId": "MixedExecutionFeaturePack",
+    "supportStates": [
+      3,
+      2,
+      1
+    ],
+    "supportStateLabels": [
+      "BridgeDispatch",
+      "InterpreterReady",
+      "NativeGenerated"
+    ],
+    "proofRequired": true,
+    "benchmarkRequired": true,
     "supportedModes": [
       "managed",
       "native",
@@ -79,7 +97,9 @@
             "meanOpsPerSecond": 841.912,
             "minOpsPerSecond": 827.929,
             "maxOpsPerSecond": 860.672
-          }
+          },
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
         },
         "native": {
           "mode": "native",
@@ -102,7 +122,9 @@
             "meanOpsPerSecond": 935.497,
             "minOpsPerSecond": 935.497,
             "maxOpsPerSecond": 935.497
-          }
+          },
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
         },
         "interpreter": {
           "mode": "interpreter",
@@ -125,7 +147,9 @@
             "meanOpsPerSecond": 846.739,
             "minOpsPerSecond": 840.348,
             "maxOpsPerSecond": 853.606
-          }
+          },
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
         }
       },
       "coverage": {
@@ -208,6 +232,8 @@
         "managedBaseline": {
           "mode": "managed",
           "status": "recorded",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured.",
           "durationMs": 7.128,
           "opsPerSecond": 841.912,
           "recordedAt": "2026-04-14T14:28:05.104438Z",
@@ -217,6 +243,8 @@
           "native": {
             "mode": "native",
             "status": "recorded",
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured.",
             "direction": "faster",
             "ratio": {
               "value": 1.11,
@@ -226,11 +254,15 @@
             "opsPerSecond": 935.497,
             "recordedAt": "2026-04-14T14:28:36.758415Z",
             "gitCommit": "ce5f0ee",
-            "baselineStatus": "recorded"
+            "baselineStatus": "recorded",
+            "baselineReasonCode": "recorded",
+            "baselineReasonLabel": "Benchmark record captured."
           },
           "interpreter": {
             "mode": "interpreter",
             "status": "recorded",
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured.",
             "direction": "slower",
             "ratio": {
               "value": 0.99,
@@ -240,7 +272,9 @@
             "opsPerSecond": 846.739,
             "recordedAt": "2026-04-14T14:29:01.833833Z",
             "gitCommit": "ce5f0ee",
-            "baselineStatus": "recorded"
+            "baselineStatus": "recorded",
+            "baselineReasonCode": "recorded",
+            "baselineReasonLabel": "Benchmark record captured."
           }
         },
         "nativeSpeedup": {
@@ -361,6 +395,7 @@
         "displayName": "mixed-execution-bench",
         "alias": "mixed-execution-bench",
         "workloadEntry": "MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()",
+        "entryIndex": 0,
         "assemblyName": "MixedExecutionFeaturePack",
         "declaringType": "MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry",
         "methodName": "RunWorkload",
@@ -379,6 +414,23 @@
         "archetypeLabel": "Mixed Bridge Solution",
         "hotUpdateCapability": 0,
         "hotUpdateCapabilityLabels": [],
+        "capabilityFamily": 14,
+        "capabilityFamilyLabel": "Mixed Execution",
+        "capabilityItem": 61,
+        "capabilityItemLabel": "Mixed Bridge Dispatch",
+        "ownerSubjectId": "MixedExecutionFeaturePack",
+        "supportStates": [
+          3,
+          2,
+          1
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
         "warmupCount": 1,
         "iterationCount": 6,
         "invocationCount": 1000,
@@ -416,11 +468,15 @@
               "meanOpsPerSecond": 2549.347,
               "minOpsPerSecond": 2417.405,
               "maxOpsPerSecond": 2634.583
-            }
+            },
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured."
           },
           "native": {
             "mode": "native",
-            "status": "unsupported"
+            "status": "unsupported",
+            "reasonCode": "unsupported-by-contract",
+            "reasonLabel": "This mode is not declared by the case contract."
           },
           "interpreter": {
             "mode": "interpreter",
@@ -443,7 +499,9 @@
               "meanOpsPerSecond": 2566.135,
               "minOpsPerSecond": 2530.898,
               "maxOpsPerSecond": 2633.08
-            }
+            },
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured."
           }
         },
         "coverage": {
@@ -457,6 +515,8 @@
           "managedBaseline": {
             "mode": "managed",
             "status": "recorded",
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured.",
             "durationMs": 2.357,
             "opsPerSecond": 2549.347,
             "recordedAt": "2026-04-14T14:28:10.602958Z",
@@ -466,17 +526,23 @@
             "native": {
               "mode": "native",
               "status": "unsupported",
+              "reasonCode": "unsupported-by-contract",
+              "reasonLabel": "This mode is not declared by the case contract.",
               "direction": "faster",
               "ratio": null,
               "durationMs": null,
               "opsPerSecond": null,
               "recordedAt": null,
               "gitCommit": null,
-              "baselineStatus": "recorded"
+              "baselineStatus": "recorded",
+              "baselineReasonCode": "recorded",
+              "baselineReasonLabel": "Benchmark record captured."
             },
             "interpreter": {
               "mode": "interpreter",
               "status": "recorded",
+              "reasonCode": "recorded",
+              "reasonLabel": "Benchmark record captured.",
               "direction": "slower",
               "ratio": {
                 "value": 0.99,
@@ -486,7 +552,9 @@
               "opsPerSecond": 2566.135,
               "recordedAt": "2026-04-14T14:29:06.918243Z",
               "gitCommit": "ce5f0ee",
-              "baselineStatus": "recorded"
+              "baselineStatus": "recorded",
+              "baselineReasonCode": "recorded",
+              "baselineReasonLabel": "Benchmark record captured."
             }
           },
           "nativeSpeedup": null,
@@ -501,6 +569,7 @@
         "displayName": "mixed-execution-native-bench",
         "alias": "mixed-execution-native-bench",
         "workloadEntry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+        "entryIndex": 1,
         "assemblyName": "MixedExecutionFeaturePack",
         "declaringType": "MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry",
         "methodName": "RunWorkload",
@@ -517,6 +586,23 @@
         "archetypeLabel": "Mixed Bridge Solution",
         "hotUpdateCapability": 0,
         "hotUpdateCapabilityLabels": [],
+        "capabilityFamily": 14,
+        "capabilityFamilyLabel": "Mixed Execution",
+        "capabilityItem": 63,
+        "capabilityItemLabel": "Interpreter Arithmetic",
+        "ownerSubjectId": "MixedExecutionFeaturePack",
+        "supportStates": [
+          3,
+          2,
+          1
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
         "warmupCount": 1,
         "iterationCount": 6,
         "invocationCount": 1000,
@@ -554,7 +640,9 @@
               "meanOpsPerSecond": 860.546,
               "minOpsPerSecond": 854.847,
               "maxOpsPerSecond": 869.414
-            }
+            },
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured."
           },
           "native": {
             "mode": "native",
@@ -577,7 +665,9 @@
               "meanOpsPerSecond": 914.997,
               "minOpsPerSecond": 914.997,
               "maxOpsPerSecond": 914.997
-            }
+            },
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured."
           },
           "interpreter": {
             "mode": "interpreter",
@@ -600,7 +690,9 @@
               "meanOpsPerSecond": 860.001,
               "minOpsPerSecond": 851.68,
               "maxOpsPerSecond": 864.18
-            }
+            },
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured."
           }
         },
         "coverage": {
@@ -614,6 +706,8 @@
           "managedBaseline": {
             "mode": "managed",
             "status": "recorded",
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured.",
             "durationMs": 6.973,
             "opsPerSecond": 860.546,
             "recordedAt": "2026-04-14T14:28:16.127501Z",
@@ -623,6 +717,8 @@
             "native": {
               "mode": "native",
               "status": "recorded",
+              "reasonCode": "recorded",
+              "reasonLabel": "Benchmark record captured.",
               "direction": "faster",
               "ratio": {
                 "value": 1.06,
@@ -632,11 +728,15 @@
               "opsPerSecond": 914.997,
               "recordedAt": "2026-04-14T14:28:56.643037Z",
               "gitCommit": "ce5f0ee",
-              "baselineStatus": "recorded"
+              "baselineStatus": "recorded",
+              "baselineReasonCode": "recorded",
+              "baselineReasonLabel": "Benchmark record captured."
             },
             "interpreter": {
               "mode": "interpreter",
               "status": "recorded",
+              "reasonCode": "recorded",
+              "reasonLabel": "Benchmark record captured.",
               "direction": "slower",
               "ratio": {
                 "value": 1.0,
@@ -646,7 +746,9 @@
               "opsPerSecond": 860.001,
               "recordedAt": "2026-04-14T14:29:12.018035Z",
               "gitCommit": "ce5f0ee",
-              "baselineStatus": "recorded"
+              "baselineStatus": "recorded",
+              "baselineReasonCode": "recorded",
+              "baselineReasonLabel": "Benchmark record captured."
             }
           },
           "nativeSpeedup": {
@@ -693,6 +795,23 @@
       "warmupCount": 1,
       "iterationCount": 6,
       "invocationCount": 1000,
+      "capabilityFamily": 14,
+      "capabilityFamilyLabel": "Mixed Execution",
+      "capabilityItem": 61,
+      "capabilityItemLabel": "Mixed Bridge Dispatch",
+      "ownerSubjectId": "MixedExecutionFeaturePack",
+      "supportStates": [
+        3,
+        2,
+        1
+      ],
+      "supportStateLabels": [
+        "BridgeDispatch",
+        "InterpreterReady",
+        "NativeGenerated"
+      ],
+      "proofRequired": true,
+      "benchmarkRequired": true,
       "entryIndex": 0
     },
     "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()": {
@@ -725,6 +844,23 @@
       "warmupCount": 1,
       "iterationCount": 6,
       "invocationCount": 1000,
+      "capabilityFamily": 14,
+      "capabilityFamilyLabel": "Mixed Execution",
+      "capabilityItem": 63,
+      "capabilityItemLabel": "Interpreter Arithmetic",
+      "ownerSubjectId": "MixedExecutionFeaturePack",
+      "supportStates": [
+        3,
+        2,
+        1
+      ],
+      "supportStateLabels": [
+        "BridgeDispatch",
+        "InterpreterReady",
+        "NativeGenerated"
+      ],
+      "proofRequired": true,
+      "benchmarkRequired": true,
       "entryIndex": 1
     }
   },

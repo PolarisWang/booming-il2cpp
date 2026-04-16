@@ -8,6 +8,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
 CODEGEN_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "CodeGenStage.cs"
 NATIVE_AOT_EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeAotEmitter.cs"
+NATIVE_AOT_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeAotLoweringPlanner.cs"
 AOT_CORE_IR_LOWERING_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "AotCoreIrLowering.cs"
 
 
@@ -58,7 +59,7 @@ class Phase4AotCoreIrContractTests(unittest.TestCase):
     def test_aot_core_ir_direct_call_contract_is_exposed(self) -> None:
         contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")
         lowering_source = AOT_CORE_IR_LOWERING_PATH.read_text(encoding="utf-8")
-        emitter_source = NATIVE_AOT_EMITTER_PATH.read_text(encoding="utf-8")
+        planner_source = NATIVE_AOT_PLANNER_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
             "string? TargetSymbol",
@@ -83,7 +84,7 @@ class Phase4AotCoreIrContractTests(unittest.TestCase):
             "instruction.TargetParameterCount",
             "instruction.TargetReturnType",
         ]:
-            self.assertIn(required_fragment, emitter_source)
+            self.assertIn(required_fragment, planner_source)
 
     def test_aot_core_ir_instruction_reference_carrier_is_exposed(self) -> None:
         contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")

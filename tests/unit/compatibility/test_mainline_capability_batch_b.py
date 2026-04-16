@@ -44,14 +44,20 @@ REFLECTION_INTEROP_TEMPLATE_PATH = (
 class Phase6CapabilityBatchBTests(unittest.TestCase):
     def test_mainline_feature_pack_source_tree_realizes_phase6_capability_proof_slices(self) -> None:
         delegate_source_path = SOURCE_ROOT / "ObjectModelAndDispatch" / "DelegateProof.cs"
+        lambda_source_path = SOURCE_ROOT / "ObjectModelAndDispatch" / "LambdaClosureCaptureProof.cs"
+        event_callback_source_path = SOURCE_ROOT / "ObjectModelAndDispatch" / "EventCallbackFlowProof.cs"
         exception_source_path = SOURCE_ROOT / "ExceptionsAndControlFlow" / "ExceptionProof.cs"
         closure_source_path = SOURCE_ROOT / "ReflectionAndMetadata" / "ReflectionInteropClosureProof.cs"
 
         self.assertTrue(delegate_source_path.is_file(), msg=f"missing delegate slice: {delegate_source_path}")
+        self.assertTrue(lambda_source_path.is_file(), msg=f"missing lambda slice: {lambda_source_path}")
+        self.assertTrue(event_callback_source_path.is_file(), msg=f"missing event callback slice: {event_callback_source_path}")
         self.assertTrue(exception_source_path.is_file(), msg=f"missing exception slice: {exception_source_path}")
         self.assertTrue(closure_source_path.is_file(), msg=f"missing closure slice: {closure_source_path}")
 
         delegate_source = delegate_source_path.read_text(encoding="utf-8")
+        lambda_source = lambda_source_path.read_text(encoding="utf-8")
+        event_callback_source = event_callback_source_path.read_text(encoding="utf-8")
         exception_source = exception_source_path.read_text(encoding="utf-8")
         closure_source = closure_source_path.read_text(encoding="utf-8")
 
@@ -61,6 +67,18 @@ class Phase6CapabilityBatchBTests(unittest.TestCase):
         self.assertIn("internal static class DelegateProofEntry", delegate_source)
         self.assertIn("MessageFormatter formatter = banner.BuildMessage;", delegate_source)
         self.assertIn("TailFormatter tail = DelegateStaticTail.AppendBang;", delegate_source)
+
+        self.assertIn("internal sealed class LambdaClosureCaptureBox", lambda_source)
+        self.assertIn("internal static class LambdaClosureCaptureProofEntry", lambda_source)
+        self.assertIn('Alias = "lambda-closure-capture-proof"', lambda_source)
+        self.assertIn("Capability = ChaosCapabilityItem.LambdaClosureCapture", lambda_source)
+        self.assertIn("Func<int, int> addSeed", lambda_source)
+
+        self.assertIn("internal sealed class EventCallbackFlowHub", event_callback_source)
+        self.assertIn("internal static class EventCallbackFlowProofEntry", event_callback_source)
+        self.assertIn('Alias = "event-callback-flow-proof"', event_callback_source)
+        self.assertIn("Capability = ChaosCapabilityItem.EventCallbackFlow", event_callback_source)
+        self.assertIn("Occurred += OnOccurred;", event_callback_source)
 
         self.assertIn("internal sealed class ExceptionThrower", exception_source)
         self.assertIn("internal static class ExceptionProofEntry", exception_source)

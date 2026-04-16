@@ -8,11 +8,17 @@ import sys
 
 try:
     from ..core.common import write_json
+    from . import public_specs as public_specs_module
+    from . import registry as registry_module
+    from . import release_evidence_contracts as release_evidence_contracts_module
     from . import subjects as subjects_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from core.common import write_json
+    from testing import public_specs as public_specs_module
+    from testing import registry as registry_module
+    from testing import release_evidence_contracts as release_evidence_contracts_module
     from testing import subjects as subjects_module
 
 
@@ -118,10 +124,19 @@ def build_repo_unsupported_feature_report(repo_root: Path) -> dict[str, Any]:
             all_findings.append(finding_with_subject)
 
     counts = _status_counts(all_findings)
+    registry_index = registry_module.scan_registry(
+        repo_root,
+        host_platform="windows",
+        public_suite_specs=public_specs_module.PUBLIC_TEST_SPECS,
+    )
+    contract_report = build_declared_contract_status_report(
+        declared_unit_tests=registry_index.declared_unit_tests,
+        declared_benchmarks=registry_index.declared_benchmarks,
+    )
     return {
         "reportVersion": "v1",
         "generatedAt": _utc_timestamp(),
-        "status": "fail" if all_findings else "ok",
+        "status": "fail" if all_findings or contract_report["status"] == "fail" else "ok",
         "statusCounts": counts,
         "ruleCount": len(RULES),
         "rules": [
@@ -135,7 +150,22 @@ def build_repo_unsupported_feature_report(repo_root: Path) -> dict[str, Any]:
         ],
         "subjectResults": subject_results,
         "findings": all_findings,
+        "contractStatusCounts": dict(contract_report.get("statusCounts") or {}),
+        "contractClassificationCounts": dict(contract_report.get("classificationCounts") or {}),
+        "contractSubjectResults": list(contract_report.get("subjectResults") or []),
+        "contractResults": list(contract_report.get("contractResults") or []),
     }
+
+
+def build_declared_contract_status_report(
+    *,
+    declared_unit_tests: list[dict[str, Any]] | None = None,
+    declared_benchmarks: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    return release_evidence_contracts_module.build_declared_contract_status_report(
+        declared_unit_tests=declared_unit_tests,
+        declared_benchmarks=declared_benchmarks,
+    )
 
 
 def write_unsupported_feature_report(path: Path, payload: dict[str, Any]) -> None:

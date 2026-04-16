@@ -72,6 +72,34 @@ def make_manifest() -> dict[str, object]:
     }
 
 
+def make_subject_item() -> dict[str, object]:
+    return {
+        "subjectId": "FixtureBenchSubject",
+        "category": "canonical",
+        "sourceModel": "dotnet-solution",
+        "dependencyModel": "project-reference",
+        "executablePlan": "generated-native",
+        "engineeringProfile": "native-executable",
+        "orchestration": {},
+        "availability": {"windows-x64": "ready"},
+        "compatibility": {},
+        "defaultGoalId": "correctness.dev",
+        "defaultMatrixId": "windows-proof",
+        "goalIds": ["correctness.dev", "perf.release"],
+        "matrixIds": [
+            "windows-proof",
+            "windows-native-perf",
+            "windows-managed-perf",
+            "windows-interpreter-perf",
+        ],
+        "tags": [],
+        "supportedHosts": ["windows"],
+        "docRefs": [],
+        "moduleIds": [],
+        "subsystemIds": [],
+    }
+
+
 class DeclaredRegistryMatrixSelectionTests(unittest.TestCase):
     def test_declared_benchmark_prefers_matching_mode_matrix_without_workload_string_matching(self) -> None:
         registry_module = load_registry_module()
@@ -102,6 +130,42 @@ class DeclaredRegistryMatrixSelectionTests(unittest.TestCase):
 
         self.assertEqual("windows-native-perf", matrix_id)
         self.assertEqual("perf.release", goal_id)
+
+    def test_declared_registry_item_exposes_capability_owner_support_and_labels(self) -> None:
+        registry_module = load_registry_module()
+        manifest = make_manifest()
+
+        item = registry_module._declared_registry_item(
+            subject_item=make_subject_item(),
+            manifest=manifest,
+            family="declared-unit-test",
+            payload={
+                "stableId": "FixtureBenchSubject::Fixture.Tests::Fixture.InterOp::Run()",
+                "alias": "native-call-interop-proof",
+                "assemblyName": "Fixture.Tests",
+                "declaringType": "Fixture.InterOp",
+                "methodName": "Run",
+                "methodSignature": "Run()",
+                "category": 3,
+                "capabilityFamily": 7,
+                "capabilityItem": 31,
+                "archetype": 0,
+                "hotUpdateCapability": 0,
+                "requires": 16,
+                "evidence": 4,
+                "priority": 2,
+            },
+        )
+
+        self.assertEqual(7, item["capabilityFamily"])
+        self.assertEqual("Interop And Marshaling", item["capabilityFamilyLabel"])
+        self.assertEqual(31, item["capabilityItem"])
+        self.assertEqual("Native Call Interop", item["capabilityItemLabel"])
+        self.assertEqual("SolutionCorePack", item["ownerSubjectId"])
+        self.assertEqual([1, 5], item["supportStates"])
+        self.assertEqual(["NativeGenerated", "ExternalRuntime"], item["supportStateLabels"])
+        self.assertTrue(item["proofRequired"])
+        self.assertTrue(item["benchmarkRequired"])
 
 
 if __name__ == "__main__":

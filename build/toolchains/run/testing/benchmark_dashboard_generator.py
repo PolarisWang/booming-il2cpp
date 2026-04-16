@@ -9,12 +9,14 @@ from pathlib import Path
 from typing import Any
 
 try:
+    from . import capability_coverage as capability_coverage_module
     from . import declared_metadata_labels as declared_metadata_labels_module
     from . import workspace_declared_catalog as workspace_declared_catalog_module
 except ImportError:
     testing_root = Path(__file__).resolve().parent
     if str(testing_root) not in sys.path:
         sys.path.insert(0, str(testing_root))
+    import capability_coverage as capability_coverage_module
     import declared_metadata_labels as declared_metadata_labels_module
     import workspace_declared_catalog as workspace_declared_catalog_module
 
@@ -49,6 +51,59 @@ def _supported_modes_from_mask(value: Any) -> list[str]:
 
 def _labels_from_mask(value: Any, labels: dict[int, str]) -> list[str]:
     return declared_metadata_labels_module.labels_from_mask(value, labels)
+
+
+def _capability_contract_payload(item: dict[str, Any]) -> dict[str, Any]:
+    contract = capability_coverage_module.resolve_capability_contract(
+        capability_family=item.get("capabilityFamily"),
+        capability_item=item.get("capabilityItem"),
+    )
+    return {
+        "capabilityFamily": int(contract.get("capabilityFamily") or 0),
+        "capabilityFamilyLabel": str(contract.get("capabilityFamilyLabel") or ""),
+        "capabilityItem": int(contract.get("capabilityItem") or 0),
+        "capabilityItemLabel": str(contract.get("capabilityItemLabel") or ""),
+        "ownerSubjectId": str(contract.get("ownerSubjectId") or ""),
+        "supportStates": [int(value) for value in list(contract.get("supportStates") or [])],
+        "supportStateLabels": [str(value) for value in list(contract.get("supportStateLabels") or [])],
+        "proofRequired": bool(contract.get("proofRequired", False)),
+        "benchmarkRequired": bool(contract.get("benchmarkRequired", False)),
+    }
+
+
+def _mode_reason_payload(*, status: str, declared_by: str) -> dict[str, str]:
+    if status == "recorded":
+        return {
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured.",
+        }
+    if status == "missing":
+        return {
+            "reasonCode": "missing-record",
+            "reasonLabel": f"Declared by {declared_by}, but no benchmark record was found.",
+        }
+    return {
+        "reasonCode": "unsupported-by-contract",
+        "reasonLabel": f"This mode is not declared by the {declared_by}.",
+    }
+
+
+def _baseline_unavailable_reason(managed_entry: dict[str, Any]) -> dict[str, str]:
+    baseline_reason_code = str(managed_entry.get("reasonCode") or "")
+    if baseline_reason_code == "missing-record":
+        return {
+            "reasonCode": "baseline-missing-record",
+            "reasonLabel": "Managed baseline is declared, but no benchmark record was found.",
+        }
+    if baseline_reason_code == "unsupported-by-contract":
+        return {
+            "reasonCode": "baseline-unsupported-by-contract",
+            "reasonLabel": "Managed baseline is not declared by this contract.",
+        }
+    return {
+        "reasonCode": "baseline-unavailable",
+        "reasonLabel": "Managed baseline must be recorded before relative comparison is available.",
+    }
 
 
 def _normalize_platform_key(value: str) -> str:
@@ -158,6 +213,7 @@ def _declared_benchmark_cases_from_catalog(catalog: dict[str, Any]) -> dict[str,
             "iterationCount": int(item.get("iterationCount") or 0),
             "invocationCount": int(item.get("invocationCount") or 0),
         }
+        case_payload.update(_capability_contract_payload(item))
         entry_index = item.get("entryIndex")
         if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
             case_payload["entryIndex"] = int(entry_index)
@@ -277,6 +333,15 @@ def _summary_benchmark_case_payload(case_payload: dict[str, Any]) -> dict[str, A
         "archetypeLabel": str(case_payload.get("archetypeLabel") or declared_metadata_labels_module.archetype_label(0)),
         "hotUpdateCapability": int(case_payload.get("hotUpdateCapability") or 0),
         "hotUpdateCapabilityLabels": list(case_payload.get("hotUpdateCapabilityLabels") or []),
+        "capabilityFamily": int(case_payload.get("capabilityFamily") or 0),
+        "capabilityFamilyLabel": str(case_payload.get("capabilityFamilyLabel") or ""),
+        "capabilityItem": int(case_payload.get("capabilityItem") or 0),
+        "capabilityItemLabel": str(case_payload.get("capabilityItemLabel") or ""),
+        "ownerSubjectId": str(case_payload.get("ownerSubjectId") or ""),
+        "supportStates": [int(value) for value in list(case_payload.get("supportStates") or [])],
+        "supportStateLabels": [str(value) for value in list(case_payload.get("supportStateLabels") or [])],
+        "proofRequired": bool(case_payload.get("proofRequired", False)),
+        "benchmarkRequired": bool(case_payload.get("benchmarkRequired", False)),
         "supportedModes": _sort_modes(list(case_payload.get("supportedModes") or [])),
     }
 
@@ -426,7 +491,7 @@ def _supported_modes_for_platform(
 
 def _record_status_payload(mode: str, record: dict[str, Any], device_id: str) -> dict[str, Any]:
     device = dict(record.get("device") or {})
-    return {
+    payload = {
         "mode": mode,
         "status": "recorded",
         "deviceId": device_id,
@@ -435,6 +500,8 @@ def _record_status_payload(mode: str, record: dict[str, Any], device_id: str) ->
         "gitCommit": record.get("gitCommit"),
         "metrics": dict(record.get("metrics") or {}),
     }
+    payload.update(_mode_reason_payload(status="recorded", declared_by="runtime execution"))
+    return payload
 
 
 def _baseline_metric_payload(entry: dict[str, Any]) -> dict[str, Any]:
@@ -442,6 +509,8 @@ def _baseline_metric_payload(entry: dict[str, Any]) -> dict[str, Any]:
     return {
         "mode": str(entry.get("mode") or "managed"),
         "status": str(entry.get("status") or "unsupported"),
+        "reasonCode": str(entry.get("reasonCode") or ""),
+        "reasonLabel": str(entry.get("reasonLabel") or ""),
         "durationMs": _metric_value(metrics, "meanDurationMs"),
         "opsPerSecond": _metric_value(metrics, "meanOpsPerSecond"),
         "recordedAt": entry.get("recordedAt"),
@@ -462,6 +531,8 @@ def _relative_to_managed_payload(
     payload = {
         "mode": mode,
         "status": current_status,
+        "reasonCode": str(current_entry.get("reasonCode") or ""),
+        "reasonLabel": str(current_entry.get("reasonLabel") or ""),
         "direction": "faster" if mode == "native" else "slower",
         "ratio": None,
         "durationMs": None,
@@ -469,12 +540,15 @@ def _relative_to_managed_payload(
         "recordedAt": current_entry.get("recordedAt"),
         "gitCommit": current_entry.get("gitCommit"),
         "baselineStatus": managed_status,
+        "baselineReasonCode": str(managed_entry.get("reasonCode") or ""),
+        "baselineReasonLabel": str(managed_entry.get("reasonLabel") or ""),
     }
 
     if current_status != "recorded":
         return payload
     if managed_status != "recorded":
         payload["status"] = "baseline-unavailable"
+        payload.update(_baseline_unavailable_reason(managed_entry))
         return payload
 
     current_metrics = dict(current_entry.get("metrics") or {})
@@ -566,9 +640,17 @@ def _build_platform_summary(
         if mode in latest_by_mode:
             mode_status[mode] = _record_status_payload(mode, latest_by_mode[mode], device_id or "unknown")
         elif mode in effective_supported_modes:
-            mode_status[mode] = {"mode": mode, "status": "missing"}
+            mode_status[mode] = {
+                "mode": mode,
+                "status": "missing",
+                **_mode_reason_payload(status="missing", declared_by="subject manifest"),
+            }
         else:
-            mode_status[mode] = {"mode": mode, "status": "unsupported"}
+            mode_status[mode] = {
+                "mode": mode,
+                "status": "unsupported",
+                **_mode_reason_payload(status="unsupported", declared_by="subject manifest"),
+            }
 
     latest_record = max(list(latest_by_mode.values()), key=_record_sort_key, default=None)
     latest_ts = str(latest_record.get("recordedAt") or "") if latest_record else ""
@@ -639,9 +721,17 @@ def _build_case_summary(
         if mode in latest_by_mode:
             mode_status[mode] = _record_status_payload(mode, latest_by_mode[mode], str(meta.get("deviceId") or "unknown"))
         elif mode in supported_modes:
-            mode_status[mode] = {"mode": mode, "status": "missing"}
+            mode_status[mode] = {
+                "mode": mode,
+                "status": "missing",
+                **_mode_reason_payload(status="missing", declared_by="case contract"),
+            }
         else:
-            mode_status[mode] = {"mode": mode, "status": "unsupported"}
+            mode_status[mode] = {
+                "mode": mode,
+                "status": "unsupported",
+                **_mode_reason_payload(status="unsupported", declared_by="case contract"),
+            }
 
     return {
         "caseId": case_id,
@@ -663,6 +753,15 @@ def _build_case_summary(
         "archetypeLabel": str(meta.get("archetypeLabel") or declared_metadata_labels_module.archetype_label(0)),
         "hotUpdateCapability": int(meta.get("hotUpdateCapability") or 0),
         "hotUpdateCapabilityLabels": list(meta.get("hotUpdateCapabilityLabels") or []),
+        "capabilityFamily": int(meta.get("capabilityFamily") or 0),
+        "capabilityFamilyLabel": str(meta.get("capabilityFamilyLabel") or ""),
+        "capabilityItem": int(meta.get("capabilityItem") or 0),
+        "capabilityItemLabel": str(meta.get("capabilityItemLabel") or ""),
+        "ownerSubjectId": str(meta.get("ownerSubjectId") or ""),
+        "supportStates": [int(value) for value in list(meta.get("supportStates") or [])],
+        "supportStateLabels": [str(value) for value in list(meta.get("supportStateLabels") or [])],
+        "proofRequired": bool(meta.get("proofRequired", False)),
+        "benchmarkRequired": bool(meta.get("benchmarkRequired", False)),
         "warmupCount": int(meta.get("warmupCount") or 0),
         "iterationCount": int(meta.get("iterationCount") or 0),
         "invocationCount": int(meta.get("invocationCount") or 0),
@@ -795,6 +894,7 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
                         "iterationCount": int(benchmark_case.get("iterationCount") or 0),
                         "invocationCount": int(benchmark_case.get("invocationCount") or 0),
                     }
+                    record_case_meta.update(_capability_contract_payload(benchmark_case))
                     entry_index = benchmark_case.get("entryIndex")
                     if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
                         record_case_meta["entryIndex"] = int(entry_index)

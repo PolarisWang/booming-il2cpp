@@ -5,7 +5,7 @@ task_type: plan
 lifecycle_status: completed
 phase: completed
 created_at: 2026-04-15 04:18:56 +08:00
-updated_at: 2026-04-15 06:24:00 +08:00
+updated_at: 2026-04-15 07:15:00 +08:00
 current_dir: docs/dev/completed/20260415-05-phase-4-aot-core-ir-and-native-codegen-strengthening
 parent_task_id: 20260414-37-hybridclr-aligned-aot-hotupdate-development-plan
 source_task_id: 20260414-37-hybridclr-aligned-aot-hotupdate-development-plan
@@ -15,9 +15,9 @@ active: false
 
 ## 关键文档
 
-- parent_status: docs/dev/completed/20260414-37-hybridclr-aligned-aot-hotupdate-development-plan/STATUS.md
-- parent_roadmap: docs/dev/completed/20260414-37-hybridclr-aligned-aot-hotupdate-development-plan/roadmap-v1-01.md
-- parent_design: docs/dev/completed/20260414-37-hybridclr-aligned-aot-hotupdate-development-plan/design-v1-01.md
+- parent_status: docs/dev/in-progress/20260414-37-hybridclr-aligned-aot-hotupdate-development-plan/STATUS.md
+- parent_roadmap: docs/dev/in-progress/20260414-37-hybridclr-aligned-aot-hotupdate-development-plan/roadmap-v1-02.md
+- parent_review: docs/dev/in-progress/20260414-37-hybridclr-aligned-aot-hotupdate-development-plan/review-v1-02.md
 - phase_2_status: docs/dev/completed/20260415-03-phase-2-typed-il-shared-contract-and-hybrid-dispatch-foundation/STATUS.md
 - phase_3_status: docs/dev/completed/20260415-04-phase-3-hotupdate-runtime-and-supplemental-metadata-foundation/STATUS.md
 - plan: docs/dev/completed/20260415-05-phase-4-aot-core-ir-and-native-codegen-strengthening/plan-v1-01.md
@@ -25,37 +25,47 @@ active: false
 
 ## 当前结论
 
-- `AotCoreIr` 已正式进入 managed closure contract，`DriverEntry` 会稳定落盘 `aot-core-ir.json`。
-- `CodeGenStage` 现在以 `typed-il -> AotCoreIr -> NativeAotEmitter` 为正式主线；`NativeAotEmitter` 不再直接消费 loader model。
-- `AotCoreIr` 已携带 `NativeSymbol`、direct-call target metadata 与 `ManagedInstructionReference`，足以承接当前 native-aot 已支持的最小闭环。
-- `NativeAotEmitter` 已能基于 `AotCoreIr` 发出 entry method、reachable static helper definition 与最小 direct-call 路径。
-- generic / exception / object model / metadata closure 的未覆盖面已通过 `aot-core-ir-codegen-gap-ledger-v1-01.md` 显式冻结；这些缺口不会再以隐式“暂未验证”形式漂移。
-- 结论：Phase 4 的退出标准按“建立稳定中层 contract 并显式冻结剩余 gap”口径已满足，可以归档并把后续覆盖扩张交回 parent roadmap 的 Phase 5/6 收口。
+- 本子任务已完成，但其作用现在被重新解释为 `Phase 4A`，而不是父 roadmap 原定义下完整的 `Phase 4`。
+- 已完成范围：
+  - `AotCoreIr` 正式进入 managed closure contract
+  - `CodeGenStage` 改为 `typed-il -> AotCoreIr -> NativeAotEmitter`
+  - `NativeAotEmitter` 打通最小静态 direct-call + reachable helper emission
+  - `ManagedInstructionReference`、`NativeSymbol` 与 direct-call metadata 进入中层
+  - 当前 codegen gap 被显式冻结
+- 未完成范围：
+  - object model
+  - generic / sharing
+  - metadata closure
+  - exceptions
+  - dispatch widening
+  - ABI/type-system widening
+- 因此：
+  - 本子任务继续保持 completed
+  - 但父 roadmap 已重新打开，并将本子任务视作 `Phase 4A` 已完成切片
 
 ## 最近摘要
 
-- 2026-04-15 04:18:56 +08:00: 创建 Phase 4 child task，锁定 `AotCoreIr` contract、closure artifact 暴露面与 `NativeAotEmitter` 消费边界。
-- 2026-04-15 04:55:11 +08:00: 完成 Task 1-2；`AotCoreIr` contract、direct-call metadata 与 reachable static helper emission 落地。
-- 2026-04-15 05:02:07 +08:00: 完成 Task 3-4；instruction reference carrier 进入 `AotCoreIr`，并建立 codegen gap ledger。
-- 2026-04-15 06:24:00 +08:00: 完成 Task 5 收口判断；确认 Phase 4 不再需要继续扩写临时 emitter patch，后续 feature coverage 与 engineering gate 由 parent roadmap 复用既有 owner-subject 闭环继续完成。
+- 2026-04-15 04:18:56 +08:00: 创建子任务，锁定 `AotCoreIr` contract、closure artifact 与 emitter 消费边界。
+- 2026-04-15 04:55:11 +08:00: 完成 Task 1-2；`AotCoreIr` contract、direct-call metadata 与 reachable helper emission 落地。
+- 2026-04-15 05:02:07 +08:00: 完成 Task 3-4；instruction reference carrier 进入 `AotCoreIr`，并建立 gap ledger。
+- 2026-04-15 07:15:00 +08:00: 父 roadmap 经 post-closeout 审查后重新打开；本子任务被重新归类为 `Phase 4A` 已完成切片。
 
 ## 下一步
 
-- next_action: 返回父 roadmap，执行 Phase 5/6 的复用审计、项目级回归与最终归档。
+- next_action: 由父 roadmap 跟踪并执行 `20260415-06-phase-4b-aot-core-ir-object-model-and-runtime-surface`。
 - owner: codex
-- trigger: Phase 4 已完成并归档。
+- trigger: parent roadmap `roadmap-v1-02.md` 已把 4B-4D 重新列为待执行阶段，且 4B 子任务已经正式建档。
 
 ## 风险 / 阻塞
 
 ### risks
 
-- `AotCoreIr` 当前仍只覆盖最小 native-aot 子集；后续 generic / exception / object model / metadata closure 扩张必须继续围绕 gap ledger 做增量切片，不能回退成 ad-hoc opcode patch。
-- 若后续 owner-subject capability 扩张不回写 translation surface / unsupported ledgers，会重新产生“代码已有，外层证据链缺失”的漂移。
+- 如果后续继续直接 patch emitter，而不是先扩 `AotCoreIr` contract，会破坏本子任务作为“正式中层入口”的意义。
+- 如果把本子任务误读成“完整 Phase 4 已完成”，会继续误导 Phase 5/6 的关闭判断。
 
 ### blockers
 
 - 当前无功能 blocker。
-- 本机仍存在遗留输出目录占用风险；涉及 subject 可执行 build/run 的验证继续使用唯一 `BaseOutputPath`。
 
 ## 验证
 
@@ -73,4 +83,4 @@ active: false
 ## wiki
 
 - 本子任务继续仅在 docs/dev 沉淀执行痕迹。
-- 待 parent roadmap 完成后，再统一评估是否把 `typed-il -> AotCoreIr -> native` 的长期关系补入 docs/architecture。
+- 长期结构说明应跟随后续 4B-4D 完成度统一整理。

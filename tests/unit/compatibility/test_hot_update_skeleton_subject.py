@@ -32,6 +32,7 @@ CANONICAL_SUBJECT_MANIFEST_PATH = CANONICAL_SUBJECT_ROOT / "subject.manifest.jso
 CANONICAL_SUBJECT_PROJECT_PATH = CANONICAL_SUBJECT_ROOT / "source" / "HotUpdateHostPack.csproj"
 CANONICAL_SUBJECT_PROGRAM_PATH = CANONICAL_SUBJECT_ROOT / "source" / "Host" / "Program.cs"
 CANONICAL_SKELETON_ENTRY_PATH = CANONICAL_SUBJECT_ROOT / "source" / "Host" / "Proofs" / "HotUpdateSkeletonProofEntry.cs"
+CANONICAL_PATCH_INTEGRITY_ENTRY_PATH = CANONICAL_SUBJECT_ROOT / "source" / "Host" / "Proofs" / "PatchIntegrityProofEntry.cs"
 CANONICAL_METADATA_SUPPLEMENT_ENTRY_PATH = (
     CANONICAL_SUBJECT_ROOT / "source" / "Host" / "Proofs" / "MetadataSupplementProofEntry.cs"
 )
@@ -195,6 +196,7 @@ class Phase5HotUpdateSkeletonTests(unittest.TestCase):
         self.assertTrue(CANONICAL_SUBJECT_PROJECT_PATH.is_file())
         self.assertTrue(CANONICAL_SUBJECT_PROGRAM_PATH.is_file())
         self.assertTrue(CANONICAL_SKELETON_ENTRY_PATH.is_file())
+        self.assertTrue(CANONICAL_PATCH_INTEGRITY_ENTRY_PATH.is_file())
         self.assertTrue(CANONICAL_METADATA_SUPPLEMENT_ENTRY_PATH.is_file())
         self.assertTrue(CANONICAL_ARCHETYPE_SOLUTION_PATH.is_file())
         self.assertTrue(CANONICAL_ARCHETYPE_HOST_PROJECT_PATH.is_file())
@@ -231,6 +233,7 @@ class Phase5HotUpdateSkeletonTests(unittest.TestCase):
         for required_fragment in [
             "ChaosSubjectEntryArguments.TryParse",
             "HotUpdateSkeletonProofEntry.Run",
+            "PatchIntegrityProofEntry.Run",
             "MetadataSupplementProofEntry.Run",
             "MethodReplacementProofEntry.Run",
             "SharedContractProofEntry.Run",
@@ -239,6 +242,16 @@ class Phase5HotUpdateSkeletonTests(unittest.TestCase):
             self.assertIn(required_fragment, host_program_source)
         self.assertNotIn("ChaosSourceEntryArguments.TryParse", host_program_source)
         self.assertNotIn("DeclaredProofEntriesBySourceEntry", host_program_source)
+
+    def test_patch_integrity_proof_declares_hot_update_integrity_slice(self) -> None:
+        proof_source = CANONICAL_PATCH_INTEGRITY_ENTRY_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("[ChaosUnitTest(", proof_source)
+        self.assertIn('Alias = "patch-integrity-proof"', proof_source)
+        self.assertIn("Capability = ChaosCapabilityItem.PatchIntegrity", proof_source)
+        self.assertIn("HotUpdateCapability = ChaosHotUpdateCapability.PatchIntegrity", proof_source)
+        self.assertIn("PackageReader.ReadFromDirectory", proof_source)
+        self.assertIn("Assert.Throws<InvalidDataException>", proof_source)
 
     def test_subject_query_finds_hot_update_surface_without_subject_name_coupling(self) -> None:
         subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_phase5_hot_update")

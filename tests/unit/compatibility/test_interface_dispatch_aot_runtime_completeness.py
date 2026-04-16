@@ -56,10 +56,11 @@ class Phase2AotRuntimeCompletenessTests(unittest.TestCase):
 
         self.assertIn("[ChaosUnitTest(", source)
         self.assertIn('Alias = "interface-dispatch-proof"', source)
-        self.assertIn("internal interface IMessageBuilder", source)
-        self.assertIn("internal sealed class InterfaceMessageBuilder", source)
+        self.assertIn("internal interface IDispatchValue<T>", source)
+        self.assertIn("internal sealed class InterfaceValue<T>", source)
         self.assertIn("internal static class InterfaceDispatchProofEntry", source)
-        self.assertIn("((IMessageBuilder)new InterfaceMessageBuilder(", source)
+        self.assertIn("IDispatchValue<int> value = new InterfaceValue<int>(21);", source)
+        self.assertIn("Assert.Equal(21, value.ReadValue());", source)
 
     def test_loader_semantic_and_linker_lock_interface_dispatch_surface(self) -> None:
         contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")

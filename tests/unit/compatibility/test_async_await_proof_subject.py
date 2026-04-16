@@ -9,6 +9,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
 SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
+ASYNC_AWAIT_SOURCE_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "AsyncAwaitProof.cs"
 TASK_FLOW_SOURCE_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "TaskAndValueTaskFlowProof.cs"
 ITERATOR_SOURCE_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "IteratorStateMachineProof.cs"
 PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
@@ -36,6 +37,7 @@ class Phase2AsyncAwaitProofTests(unittest.TestCase):
     def test_async_await_subject_tree_realizes_phase2_batch2_proof_slice(self) -> None:
         self.assertTrue(MANIFEST_PATH.is_file(), msg=f"missing subject manifest: {MANIFEST_PATH}")
         self.assertTrue(SOURCE_PROJECT_PATH.is_file(), msg=f"missing source project: {SOURCE_PROJECT_PATH}")
+        self.assertTrue(ASYNC_AWAIT_SOURCE_PATH.is_file(), msg=f"missing source file: {ASYNC_AWAIT_SOURCE_PATH}")
         self.assertTrue(TASK_FLOW_SOURCE_PATH.is_file(), msg=f"missing source file: {TASK_FLOW_SOURCE_PATH}")
         self.assertTrue(ITERATOR_SOURCE_PATH.is_file(), msg=f"missing source file: {ITERATOR_SOURCE_PATH}")
         self.assertTrue(PROOF_CMAKE_PATH.is_file(), msg=f"missing proof cmake: {PROOF_CMAKE_PATH}")
@@ -43,6 +45,7 @@ class Phase2AsyncAwaitProofTests(unittest.TestCase):
         self.assertTrue(PROOF_RUN_SCRIPT_PATH.is_file(), msg=f"missing proof run script: {PROOF_RUN_SCRIPT_PATH}")
 
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+        async_await_source = ASYNC_AWAIT_SOURCE_PATH.read_text(encoding="utf-8")
         task_flow_source = TASK_FLOW_SOURCE_PATH.read_text(encoding="utf-8")
         iterator_source = ITERATOR_SOURCE_PATH.read_text(encoding="utf-8")
         self.assertEqual("SolutionCorePack", manifest["subjectId"])
@@ -55,6 +58,13 @@ class Phase2AsyncAwaitProofTests(unittest.TestCase):
         self.assertEqual("CoreRuntimeFeatures/ProofEntry::Run()", manifest["source"]["entry"])
         self.assertEqual("require", manifest["testDeclarationMode"])
         self.assertEqual("proof", manifest["validation"]["proof"]["kind"])
+
+        self.assertIn("[ChaosUnitTest(", async_await_source)
+        self.assertIn('Alias = "async-await-proof"', async_await_source)
+        self.assertIn("Capability = ChaosCapabilityItem.AsyncAwait", async_await_source)
+        self.assertIn("async Task<int> ComputeAsync(int seed)", async_await_source)
+        self.assertIn("await Task.Yield();", async_await_source)
+        self.assertIn("internal static class AsyncAwaitProofEntry", async_await_source)
 
         self.assertIn("[ChaosUnitTest(", task_flow_source)
         self.assertIn('Alias = "task-valuetask-flow-proof"', task_flow_source)

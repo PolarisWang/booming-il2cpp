@@ -147,7 +147,7 @@ class NativeAotWorkloadEntryBundleTests(unittest.TestCase):
         self.assertIn("chaos_ip_30", generated_cpp)
         self.assertIn("5000000", generated_cpp)
         self.assertIn("if (chaos_left < chaos_right)", generated_cpp)
-        self.assertIn("return chaos_eval_stack[--chaos_stack_top];", generated_cpp)
+        self.assertIn("return static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);", generated_cpp)
         self.assertNotIn("(void)\"BenchArithmetic_Program_RunWorkload\"", generated_cpp)
 
 

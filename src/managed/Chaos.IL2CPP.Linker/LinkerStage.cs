@@ -1,3 +1,4 @@
+using System.Globalization;
 using Chaos.IL2CPP.Contracts;
 
 namespace Chaos.IL2CPP.Linker;
@@ -112,6 +113,16 @@ public sealed class LinkerStage
             reachableFieldIds,
             reachablePropertyIds,
             reachableTypeIds);
+        IncludeInterfaceDispatchImplementationClosure(
+            semanticWorld,
+            methodMap,
+            fieldMap,
+            propertyMap,
+            typeMap,
+            reachableMethodIds,
+            reachableFieldIds,
+            reachablePropertyIds,
+            reachableTypeIds);
         IncludeGenericTypeDefinitions(reachableTypeIds, typeMap);
 
         return new ReachableClosure(
@@ -190,6 +201,79 @@ public sealed class LinkerStage
             reachableFieldIds,
             reachablePropertyIds,
             reachableTypeIds);
+    }
+
+    private static void IncludeInterfaceDispatchImplementationClosure(
+        SemanticWorldModel semanticWorld,
+        IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
+        IReadOnlyDictionary<string, ManagedFieldModel> fieldMap,
+        IReadOnlyDictionary<string, ManagedPropertyModel> propertyMap,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
+        HashSet<string> reachableMethodIds,
+        HashSet<string> reachableFieldIds,
+        HashSet<string> reachablePropertyIds,
+        HashSet<string> reachableTypeIds)
+    {
+        while (true)
+        {
+            var pendingMethods = new Queue<ManagedMethodModel>();
+            var reachableTypeSnapshot = reachableTypeIds.ToArray();
+            var reachableMethodSnapshot = semanticWorld.Methods
+                .Where(method => reachableMethodIds.Contains(method.SubjectId))
+                .ToArray();
+
+            foreach (var method in reachableMethodSnapshot)
+            {
+                foreach (var instruction in method.Body.Blocks.SelectMany(block => block.Instructions))
+                {
+                    if (!string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal) ||
+                        string.IsNullOrWhiteSpace(instruction.Callee) ||
+                        !methodMap.TryGetValue(instruction.Callee, out var slotMethod) ||
+                        !typeMap.TryGetValue(slotMethod.DeclaringTypeSubjectId, out var slotType) ||
+                        !slotType.IsInterface)
+                    {
+                        continue;
+                    }
+
+                    foreach (var candidateTypeSubjectId in reachableTypeSnapshot)
+                    {
+                        if (!typeMap.TryGetValue(candidateTypeSubjectId, out var candidateType) ||
+                            candidateType.IsInterface ||
+                            !ImplementsInterface(candidateType, slotType, typeMap))
+                        {
+                            continue;
+                        }
+
+                        foreach (var candidateMethod in semanticWorld.Methods.Where(candidate =>
+                                     string.Equals(candidate.DeclaringTypeSubjectId, candidateType.SubjectId, StringComparison.Ordinal) &&
+                                     MatchesVirtualDispatchSignature(candidate, slotMethod)))
+                        {
+                            if (!reachableMethodIds.Contains(candidateMethod.SubjectId))
+                            {
+                                pendingMethods.Enqueue(candidateMethod);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (pendingMethods.Count == 0)
+            {
+                return;
+            }
+
+            ExpandReachableMethods(
+                semanticWorld,
+                methodMap,
+                fieldMap,
+                propertyMap,
+                typeMap,
+                pendingMethods,
+                reachableMethodIds,
+                reachableFieldIds,
+                reachablePropertyIds,
+                reachableTypeIds);
+        }
     }
 
     private static void ExpandReachableMethods(
@@ -735,24 +819,24 @@ public sealed class LinkerStage
         int instructionIndex,
         string declaredTargetSubjectId)
     {
-        if (instructionIndex <= 0) {
+        if (instructionIndex <= 0 ||
+            !methodMap.TryGetValue(declaredTargetSubjectId, out var declaredMethod))
+        {
             return null;
         }
 
-        var precedingInstruction = instructions[instructionIndex - 1];
-        if (!string.Equals(precedingInstruction.Op, "newobj", StringComparison.Ordinal) ||
-            string.IsNullOrWhiteSpace(precedingInstruction.Callee)) {
+        var constructorTypeSubjectId = TryResolveReceiverConstructorTypeSubjectId(
+            instructions,
+            instructionIndex,
+            declaredMethod.Parameters.Count);
+        if (string.IsNullOrWhiteSpace(constructorTypeSubjectId))
+        {
             return null;
         }
-
-        var constructorTypeSubjectId = GetDeclaringTypeSubjectId(precedingInstruction.Callee);
         var declaredTypeSubjectId = GetDeclaringTypeSubjectId(declaredTargetSubjectId);
-        if (string.Equals(constructorTypeSubjectId, declaredTypeSubjectId, StringComparison.Ordinal)) {
+        if (string.Equals(constructorTypeSubjectId, declaredTypeSubjectId, StringComparison.Ordinal))
+        {
             return declaredTargetSubjectId;
-        }
-
-        if (!methodMap.TryGetValue(declaredTargetSubjectId, out var declaredMethod)) {
-            return null;
         }
 
         var exactMatch = methodMap.Values.FirstOrDefault(candidate =>
@@ -773,6 +857,110 @@ public sealed class LinkerStage
             string.Equals(candidate.Name, declaredMethod.Name, StringComparison.Ordinal) &&
             candidate.Body.Blocks.Any(block => block.Instructions.Count > 0))
             ?.SubjectId;
+    }
+
+    private static string? TryResolveReceiverConstructorTypeSubjectId(
+        IReadOnlyList<ManagedInstructionModel> instructions,
+        int instructionIndex,
+        int parameterCount)
+    {
+        var receiverInstructionIndex = instructionIndex - parameterCount - 1;
+        if (receiverInstructionIndex < 0)
+        {
+            return null;
+        }
+
+        var receiverInstruction = instructions[receiverInstructionIndex];
+        if (string.Equals(receiverInstruction.Op, "newobj", StringComparison.Ordinal) &&
+            !string.IsNullOrWhiteSpace(receiverInstruction.Callee))
+        {
+            return GetDeclaringTypeSubjectId(receiverInstruction.Callee);
+        }
+
+        if (!string.Equals(receiverInstruction.Op, "ldloc", StringComparison.Ordinal) ||
+            !TryGetLocalIndex(receiverInstruction.Operand, out var localIndex))
+        {
+            return null;
+        }
+
+        for (var instructionCursor = receiverInstructionIndex - 1; instructionCursor > 0; instructionCursor--)
+        {
+            var storeInstruction = instructions[instructionCursor];
+            if (!string.Equals(storeInstruction.Op, "stloc", StringComparison.Ordinal) ||
+                !TryGetLocalIndex(storeInstruction.Operand, out var storedLocalIndex) ||
+                storedLocalIndex != localIndex)
+            {
+                continue;
+            }
+
+            var valueProducer = instructions[instructionCursor - 1];
+            if (string.Equals(valueProducer.Op, "newobj", StringComparison.Ordinal) &&
+                !string.IsNullOrWhiteSpace(valueProducer.Callee))
+            {
+                return GetDeclaringTypeSubjectId(valueProducer.Callee);
+            }
+
+            return null;
+        }
+
+        return null;
+    }
+
+    private static bool TryGetLocalIndex(object? operand, out int localIndex)
+    {
+        switch (operand)
+        {
+            case int intValue:
+                localIndex = intValue;
+                return true;
+            case long longValue when longValue is >= int.MinValue and <= int.MaxValue:
+                localIndex = (int)longValue;
+                return true;
+            case string stringValue when int.TryParse(stringValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out var parsedLocalIndex):
+                localIndex = parsedLocalIndex;
+                return true;
+            default:
+                localIndex = default;
+                return false;
+        }
+    }
+
+    private static bool MatchesVirtualDispatchSignature(
+        ManagedMethodModel candidateMethod,
+        ManagedMethodModel slotMethod)
+    {
+        return !candidateMethod.IsStatic &&
+               string.Equals(candidateMethod.Name, slotMethod.Name, StringComparison.Ordinal) &&
+               string.Equals(candidateMethod.ReturnType, slotMethod.ReturnType, StringComparison.Ordinal) &&
+               candidateMethod.Parameters.Select(parameter => parameter.Type).SequenceEqual(
+                   slotMethod.Parameters.Select(parameter => parameter.Type),
+                   StringComparer.Ordinal);
+    }
+
+    private static bool ImplementsInterface(
+        ManagedTypeModel candidateType,
+        ManagedTypeModel interfaceType,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
+    {
+        return candidateType.ImplementedInterfaceSubjectIds is not null &&
+               candidateType.ImplementedInterfaceSubjectIds.Any(candidateInterfaceSubjectId =>
+                   MatchesInterfaceSubjectId(candidateInterfaceSubjectId, interfaceType, typeMap));
+    }
+
+    private static bool MatchesInterfaceSubjectId(
+        string candidateInterfaceSubjectId,
+        ManagedTypeModel interfaceType,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
+    {
+        if (string.Equals(candidateInterfaceSubjectId, interfaceType.SubjectId, StringComparison.Ordinal) ||
+            string.Equals(candidateInterfaceSubjectId, interfaceType.DefinitionSubjectId, StringComparison.Ordinal))
+        {
+            return true;
+        }
+
+        return typeMap.TryGetValue(candidateInterfaceSubjectId, out var candidateInterfaceType) &&
+               (string.Equals(candidateInterfaceType.SubjectId, interfaceType.SubjectId, StringComparison.Ordinal) ||
+                string.Equals(candidateInterfaceType.DefinitionSubjectId, interfaceType.DefinitionSubjectId, StringComparison.Ordinal));
     }
 
     private static IReadOnlyList<ManagedTypeModel> OrderTypes(

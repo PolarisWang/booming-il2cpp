@@ -112,6 +112,18 @@ CAPABILITY_ITEM_LABELS = {
     64: "Mixed Generic Flow",
     65: "Mixed Exception Flow",
     66: "Mixed Delegate Flow",
+    67: "Object Cast And Type Check",
+    68: "Array Covariance",
+}
+
+BODY_AVAILABILITY_LABELS = {
+    0: "None",
+    1: "NativeGenerated",
+    2: "InterpreterReady",
+    3: "BridgeDispatch",
+    4: "MetadataOnly",
+    5: "ExternalRuntime",
+    6: "Unsupported",
 }
 
 METRIC_LABELS = {
@@ -205,6 +217,14 @@ def capability_family_label(value: Any) -> str:
 
 def capability_item_label(value: Any) -> str:
     return CAPABILITY_ITEM_LABELS.get(_int_value(value), "Unknown")
+
+
+def body_availability_label(value: Any) -> str:
+    return BODY_AVAILABILITY_LABELS.get(_int_value(value), "Unknown")
+
+
+def body_availability_labels(values: list[Any] | tuple[Any, ...]) -> list[str]:
+    return [body_availability_label(value) for value in values]
 
 
 def archetype_label(value: Any) -> str:

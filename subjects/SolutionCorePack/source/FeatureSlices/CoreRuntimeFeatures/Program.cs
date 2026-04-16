@@ -3,81 +3,74 @@ using System.IO;
 
 namespace CoreRuntimeFeatures;
 
-internal sealed class FeatureBanner
-{
-    private readonly string _name;
-
-    public FeatureBanner(string name)
-    {
-        _name = name;
-    }
-
-    public string BuildMessage()
-    {
-        return "Core runtime proof: " + _name + ".";
-    }
-}
-
 internal static class ProofEntry
 {
     public static int Run()
     {
-        var banner = new FeatureBanner("core runtime features");
-        var message = banner.BuildMessage();
-        Assert.Equal("Core runtime proof: core runtime features.", message);
-
-        foreach (var entry in AllProofEntries)
-        {
-            Assert.Equal(0, entry(), "core runtime proof entry returned non-zero exit code.");
-        }
+        RunProof(AsyncAwaitProofEntry.Run());
+        RunProof(ArrayCovarianceProofEntry.Run());
+        RunProof(ArrayOpsProofEntry.Run());
+        RunProof(ArrayBoxingProofEntry.Run());
+        RunProof(BitwiseOpsProofEntry.Run());
+        RunProof(BranchOpsProofEntry.Run());
+        RunProof(BoxedStructFieldReadProofEntry.Run());
+        RunProof(CustomAttributeLookupProofEntry.Run());
+        RunProof(ConversionOpsProofEntry.Run());
+        RunProof(IntegerCarrierProofEntry.Run());
+        RunProof(CrossBoundaryExceptionProofEntry.Run());
+        RunProof(CastTypeCheckProofEntry.Run());
+        RunProof(AotClosureValidationProofEntry.Run());
+        RunProof(DelegateCallbackInteropProofEntry.Run());
+        RunProof(DelegateChainProofEntry.Run());
+        RunProof(DelegateProofEntry.Run());
+        RunProof(DirectCallVirtProofEntry.Run());
+        RunProof(DispatchProofEntry.Run());
+        RunProof(EventCallbackFlowProofEntry.Run());
+        RunProof(ExceptionProofEntry.Run());
+        RunProof(FinallyAndFilterProofEntry.Run());
+        RunProof(FunctionPointerProofEntry.Run());
+        RunProof(GcSensitiveFlowProofEntry.Run());
+        RunProof(GenericCollectionProofEntry.Run());
+        RunProof(GenericConstraintProofEntry.Run());
+        RunProof(GenericInstantiationProofEntry.Run());
+        RunProof(GenericSharingBoundaryProofEntry.Run());
+        RunProof(GenericLayoutProofEntry.Run());
+        RunProof(InterfaceDispatchProofEntry.Run());
+        RunProof(IteratorStateMachineProofEntry.Run());
+        RunProof(LambdaClosureCaptureProofEntry.Run());
+        RunProof(LinkerPreserveContractProofEntry.Run());
+        RunProof(LinkerStrippingProofEntry.Run());
+        RunProof(LoaderContractProofEntry.Run());
+        RunProof(MarshalingProofEntry.Run());
+        RunProof(MemberMetadataLookupProofEntry.Run());
+        RunProof(MetadataSupplementProofEntry.Run());
+        RunProof(MonitorAndLockingProofEntry.Run());
+        RunProof(NativeCallInteropProofEntry.Run());
+        RunProof(NestedExceptionProofEntry.Run());
+        RunProof(ObjectFieldProofEntry.Run());
+        RunProof(ObjectReturnProofEntry.Run());
+        RunProof(OverflowOpsProofEntry.Run());
+        RunProof(ReflectionInteropClosureEntry.Run());
+        RunProof(RefStructAndStackallocProofEntry.Run());
+        RunProof(RequiredInstantiationClosureProofEntry.Run());
+        RunProof(ResourceLifecycleProofEntry.Run());
+        RunProof(RuntimeHelpersProofEntry.Run());
+        RunProof(SpanAndMemoryProofEntry.Run());
+        RunProof(StructMarshalingProofEntry.Run());
+        RunProof(TaskAndValueTaskFlowProofEntry.Run());
+        RunProof(TaskSchedulingProofEntry.Run());
+        RunProof(ThreadingProofEntry.Run());
+        RunProof(ThreadLocalStateProofEntry.Run());
+        RunProof(UnsafePointerProofEntry.Run());
+        RunProof(VTableDispatchProofEntry.Run());
 
         return 0;
     }
 
-    private static readonly Func<int>[] AllProofEntries =
-    [
-        ArrayOpsProofEntry.Run,
-        ArrayBoxingProofEntry.Run,
-        BitwiseOpsProofEntry.Run,
-        BranchOpsProofEntry.Run,
-        CustomAttributeLookupProofEntry.Run,
-        ConversionOpsProofEntry.Run,
-        CrossBoundaryExceptionProofEntry.Run,
-        DelegateCallbackInteropProofEntry.Run,
-        DelegateChainProofEntry.Run,
-        DelegateProofEntry.Run,
-        DispatchProofEntry.Run,
-        ExceptionProofEntry.Run,
-        FinallyAndFilterProofEntry.Run,
-        FunctionPointerProofEntry.Run,
-        GcSensitiveFlowProofEntry.Run,
-        GenericCollectionProofEntry.Run,
-        GenericSharingBoundaryProofEntry.Run,
-        GenericLayoutProofEntry.Run,
-        InterfaceDispatchProofEntry.Run,
-        IteratorStateMachineProofEntry.Run,
-        LinkerPreserveContractProofEntry.Run,
-        LinkerStrippingProofEntry.Run,
-        LoaderContractProofEntry.Run,
-        MarshalingProofEntry.Run,
-        MemberMetadataLookupProofEntry.Run,
-        MonitorAndLockingProofEntry.Run,
-        NativeCallInteropProofEntry.Run,
-        NestedExceptionProofEntry.Run,
-        OverflowOpsProofEntry.Run,
-        ReflectionInteropClosureEntry.Run,
-        RefStructAndStackallocProofEntry.Run,
-        RequiredInstantiationClosureProofEntry.Run,
-        ResourceLifecycleProofEntry.Run,
-        RuntimeHelpersProofEntry.Run,
-        SpanAndMemoryProofEntry.Run,
-        StructMarshalingProofEntry.Run,
-        TaskAndValueTaskFlowProofEntry.Run,
-        TaskSchedulingProofEntry.Run,
-        ThreadLocalStateProofEntry.Run,
-        UnsafePointerProofEntry.Run,
-        VTableDispatchProofEntry.Run,
-    ];
+    private static void RunProof(int exitCode)
+    {
+        Assert.Equal(0, exitCode);
+    }
 }
 
 internal static class TraceDocumentFactory

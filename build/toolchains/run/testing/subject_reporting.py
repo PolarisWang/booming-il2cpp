@@ -3,6 +3,14 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Any
+import sys
+
+try:
+    from . import release_evidence_contracts as release_evidence_contracts_module
+except ImportError:
+    root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(root))
+    from testing import release_evidence_contracts as release_evidence_contracts_module
 
 
 def _copy_execution_context(selection: dict[str, Any]) -> dict[str, Any]:
@@ -260,6 +268,8 @@ def build_subject_summary(
     run_id: str,
     generated_at: str,
     entry_selection: dict[str, Any] | None = None,
+    declared_unit_tests: list[dict[str, Any]] | None = None,
+    declared_benchmarks: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     counts = _empty_status_counts()
     matrix_results: list[dict[str, Any]] = []
@@ -303,6 +313,11 @@ def build_subject_summary(
     }
     if entry_selection:
         summary["entrySelection"] = dict(entry_selection)
+    if declared_unit_tests or declared_benchmarks:
+        summary["releaseEvidenceSummary"] = release_evidence_contracts_module.build_declared_contract_status_report(
+            declared_unit_tests=declared_unit_tests,
+            declared_benchmarks=declared_benchmarks,
+        )
     return summary
 
 
@@ -321,6 +336,9 @@ def build_subject_result(
     entry_selection = dict(subject_summary.get("entrySelection") or {})
     if entry_selection:
         result["entrySelection"] = entry_selection
+    release_evidence_summary = dict(subject_summary.get("releaseEvidenceSummary") or {})
+    if release_evidence_summary:
+        result["releaseEvidenceSummary"] = release_evidence_summary
     return result
 
 

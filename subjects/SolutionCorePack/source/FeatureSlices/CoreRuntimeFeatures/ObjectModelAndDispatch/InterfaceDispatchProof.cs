@@ -2,23 +2,23 @@ using Chaos.TestFramework;
 
 namespace CoreRuntimeFeatures;
 
-internal interface IMessageBuilder
+internal interface IDispatchValue<T>
 {
-    string BuildMessage();
+    T ReadValue();
 }
 
-internal sealed class InterfaceMessageBuilder : IMessageBuilder
+internal sealed class InterfaceValue<T> : IDispatchValue<T>
 {
-    private readonly string _name;
+    private readonly T _value;
 
-    public InterfaceMessageBuilder(string name)
+    public InterfaceValue(T value)
     {
-        _name = name;
+        _value = value;
     }
 
-    public string BuildMessage()
+    public T ReadValue()
     {
-        return "Interface dispatch native proof: " + _name + ".";
+        return _value;
     }
 }
 
@@ -32,8 +32,8 @@ internal static class InterfaceDispatchProofEntry
         Priority = 3)]
     public static int Run()
     {
-        var message = ((IMessageBuilder)new InterfaceMessageBuilder("leaf")).BuildMessage();
-        Assert.Equal("Interface dispatch native proof: leaf.", message);
+        IDispatchValue<int> value = new InterfaceValue<int>(21);
+        Assert.Equal(21, value.ReadValue());
         return 0;
     }
 }

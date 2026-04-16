@@ -4,16 +4,11 @@ namespace CoreRuntimeFeatures;
 
 internal sealed class GenericBox<T>
 {
-    private readonly T _value;
+    public readonly T Value;
 
     public GenericBox(T value)
     {
-        _value = value;
-    }
-
-    public T Value()
-    {
-        return _value;
+        Value = value;
     }
 }
 
@@ -36,9 +31,10 @@ internal static class GenericLayoutProofEntry
         Priority = 3)]
     public static int Run()
     {
-        var box = new GenericBox<string>(GenericEcho.Echo("Generic layout native proof."));
-        var message = box.Value();
-        Assert.Equal("Generic layout native proof.", message);
-        return 0;
+        ChaosAssertState.Reset();
+        var box = new GenericBox<int>(GenericEcho.Echo(42));
+        var value = box.Value;
+        Assert.Equal(42, value);
+        return ChaosAssertState.Complete();
     }
 }

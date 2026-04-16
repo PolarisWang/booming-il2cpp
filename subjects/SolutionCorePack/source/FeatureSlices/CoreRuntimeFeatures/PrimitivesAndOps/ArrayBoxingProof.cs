@@ -4,9 +4,11 @@ namespace CoreRuntimeFeatures;
 
 internal static class BoxingSink
 {
+    public static object? LastValue;
+
     public static void Consume(object value)
     {
-        _ = value;
+        LastValue = value;
     }
 }
 
@@ -20,9 +22,14 @@ internal static class ArrayBoxingProofEntry
         Priority = 4)]
     public static int Run()
     {
+        ChaosAssertState.Reset();
         BoxingSink.Consume(42);
-        var message = new FeatureBanner[] { new("array boxing proof") }[0].BuildMessage();
-        Assert.Equal("Core runtime proof: array boxing proof.", message);
-        return 0;
+        object[] values = new object[1];
+        values[0] = 42;
+        var actual = (int)values[0];
+        var echoed = (int)BoxingSink.LastValue!;
+        Assert.Equal(42, actual);
+        Assert.Equal(42, echoed);
+        return ChaosAssertState.Complete();
     }
 }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-14T14:46:20.911022+00:00",
+  "generatedAt": "2026-04-15T16:18:06.290326+00:00",
   "defaultPlatform": "windows-x64",
   "availablePlatforms": [
     "windows-x64"
@@ -17,7 +17,7 @@
     "recordedModeCount": 6,
     "missingModeCount": 0,
     "unsupportedModeCount": 3,
-    "latestRecordedAt": "2026-04-14T14:42:19.215772Z"
+    "latestRecordedAt": "2026-04-15T16:15:58.586697Z"
   },
   "platformSummaries": {
     "windows-x64": {
@@ -28,7 +28,7 @@
       "recordedModeCount": 6,
       "missingModeCount": 0,
       "unsupportedModeCount": 3,
-      "latestRecordedAt": "2026-04-14T14:42:19.215772Z"
+      "latestRecordedAt": "2026-04-15T16:15:58.586697Z"
     }
   },
   "subjects": {
@@ -46,6 +46,7 @@
         "alias": "hot-update-load-bench",
         "displayName": "hot-update-load-bench",
         "workloadEntry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
+        "entryIndex": 1,
         "assemblyName": "HotUpdateHostPack",
         "declaringType": "HotUpdateHostPack.HotUpdateLoadBenchmarkEntry",
         "methodName": "RunWorkload",
@@ -65,6 +66,21 @@
           "Package Load",
           "Patch Integrity"
         ],
+        "capabilityFamily": 13,
+        "capabilityFamilyLabel": "Hot Update Workflow",
+        "capabilityItem": 54,
+        "capabilityItemLabel": "Package Load",
+        "ownerSubjectId": "HotUpdateHostPack",
+        "supportStates": [
+          3,
+          2
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
         "supportedModes": [
           "managed"
         ]
@@ -116,15 +132,21 @@
                 "meanOpsPerSecond": 54.091,
                 "minOpsPerSecond": 53.413,
                 "maxOpsPerSecond": 54.903
-              }
+              },
+              "reasonCode": "recorded",
+              "reasonLabel": "Benchmark record captured."
             },
             "native": {
               "mode": "native",
-              "status": "unsupported"
+              "status": "unsupported",
+              "reasonCode": "unsupported-by-contract",
+              "reasonLabel": "This mode is not declared by the subject manifest."
             },
             "interpreter": {
               "mode": "interpreter",
-              "status": "unsupported"
+              "status": "unsupported",
+              "reasonCode": "unsupported-by-contract",
+              "reasonLabel": "This mode is not declared by the subject manifest."
             }
           },
           "coverage": {
@@ -205,6 +227,8 @@
             "managedBaseline": {
               "mode": "managed",
               "status": "recorded",
+              "reasonCode": "recorded",
+              "reasonLabel": "Benchmark record captured.",
               "durationMs": 73.959,
               "opsPerSecond": 54.091,
               "recordedAt": "2026-04-14T14:27:46.462775Z",
@@ -214,24 +238,32 @@
               "native": {
                 "mode": "native",
                 "status": "unsupported",
+                "reasonCode": "unsupported-by-contract",
+                "reasonLabel": "This mode is not declared by the subject manifest.",
                 "direction": "faster",
                 "ratio": null,
                 "durationMs": null,
                 "opsPerSecond": null,
                 "recordedAt": null,
                 "gitCommit": null,
-                "baselineStatus": "recorded"
+                "baselineStatus": "recorded",
+                "baselineReasonCode": "recorded",
+                "baselineReasonLabel": "Benchmark record captured."
               },
               "interpreter": {
                 "mode": "interpreter",
                 "status": "unsupported",
+                "reasonCode": "unsupported-by-contract",
+                "reasonLabel": "This mode is not declared by the subject manifest.",
                 "direction": "slower",
                 "ratio": null,
                 "durationMs": null,
                 "opsPerSecond": null,
                 "recordedAt": null,
                 "gitCommit": null,
-                "baselineStatus": "recorded"
+                "baselineStatus": "recorded",
+                "baselineReasonCode": "recorded",
+                "baselineReasonLabel": "Benchmark record captured."
               }
             },
             "nativeSpeedup": null,
@@ -275,15 +307,21 @@
             "meanOpsPerSecond": 54.091,
             "minOpsPerSecond": 53.413,
             "maxOpsPerSecond": 54.903
-          }
+          },
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
         },
         "native": {
           "mode": "native",
-          "status": "unsupported"
+          "status": "unsupported",
+          "reasonCode": "unsupported-by-contract",
+          "reasonLabel": "This mode is not declared by the subject manifest."
         },
         "interpreter": {
           "mode": "interpreter",
-          "status": "unsupported"
+          "status": "unsupported",
+          "reasonCode": "unsupported-by-contract",
+          "reasonLabel": "This mode is not declared by the subject manifest."
         }
       },
       "coverage": {
@@ -364,6 +402,8 @@
         "managedBaseline": {
           "mode": "managed",
           "status": "recorded",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured.",
           "durationMs": 73.959,
           "opsPerSecond": 54.091,
           "recordedAt": "2026-04-14T14:27:46.462775Z",
@@ -373,24 +413,32 @@
           "native": {
             "mode": "native",
             "status": "unsupported",
+            "reasonCode": "unsupported-by-contract",
+            "reasonLabel": "This mode is not declared by the subject manifest.",
             "direction": "faster",
             "ratio": null,
             "durationMs": null,
             "opsPerSecond": null,
             "recordedAt": null,
             "gitCommit": null,
-            "baselineStatus": "recorded"
+            "baselineStatus": "recorded",
+            "baselineReasonCode": "recorded",
+            "baselineReasonLabel": "Benchmark record captured."
           },
           "interpreter": {
             "mode": "interpreter",
             "status": "unsupported",
+            "reasonCode": "unsupported-by-contract",
+            "reasonLabel": "This mode is not declared by the subject manifest.",
             "direction": "slower",
             "ratio": null,
             "durationMs": null,
             "opsPerSecond": null,
             "recordedAt": null,
             "gitCommit": null,
-            "baselineStatus": "recorded"
+            "baselineStatus": "recorded",
+            "baselineReasonCode": "recorded",
+            "baselineReasonLabel": "Benchmark record captured."
           }
         },
         "nativeSpeedup": null,
@@ -411,6 +459,7 @@
         "alias": "mixed-execution-native-bench",
         "displayName": "mixed-execution-native-bench",
         "workloadEntry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+        "entryIndex": 1,
         "assemblyName": "MixedExecutionFeaturePack",
         "declaringType": "MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry",
         "methodName": "RunWorkload",
@@ -425,6 +474,23 @@
         "archetypeLabel": "Mixed Bridge Solution",
         "hotUpdateCapability": 0,
         "hotUpdateCapabilityLabels": [],
+        "capabilityFamily": 14,
+        "capabilityFamilyLabel": "Mixed Execution",
+        "capabilityItem": 63,
+        "capabilityItemLabel": "Interpreter Arithmetic",
+        "ownerSubjectId": "MixedExecutionFeaturePack",
+        "supportStates": [
+          3,
+          2,
+          1
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
         "supportedModes": [
           "managed",
           "native",
@@ -479,7 +545,9 @@
                 "meanOpsPerSecond": 841.912,
                 "minOpsPerSecond": 827.929,
                 "maxOpsPerSecond": 860.672
-              }
+              },
+              "reasonCode": "recorded",
+              "reasonLabel": "Benchmark record captured."
             },
             "native": {
               "mode": "native",
@@ -502,7 +570,9 @@
                 "meanOpsPerSecond": 935.497,
                 "minOpsPerSecond": 935.497,
                 "maxOpsPerSecond": 935.497
-              }
+              },
+              "reasonCode": "recorded",
+              "reasonLabel": "Benchmark record captured."
             },
             "interpreter": {
               "mode": "interpreter",
@@ -525,7 +595,9 @@
                 "meanOpsPerSecond": 846.739,
                 "minOpsPerSecond": 840.348,
                 "maxOpsPerSecond": 853.606
-              }
+              },
+              "reasonCode": "recorded",
+              "reasonLabel": "Benchmark record captured."
             }
           },
           "coverage": {
@@ -608,6 +680,8 @@
             "managedBaseline": {
               "mode": "managed",
               "status": "recorded",
+              "reasonCode": "recorded",
+              "reasonLabel": "Benchmark record captured.",
               "durationMs": 7.128,
               "opsPerSecond": 841.912,
               "recordedAt": "2026-04-14T14:28:05.104438Z",
@@ -617,6 +691,8 @@
               "native": {
                 "mode": "native",
                 "status": "recorded",
+                "reasonCode": "recorded",
+                "reasonLabel": "Benchmark record captured.",
                 "direction": "faster",
                 "ratio": {
                   "value": 1.11,
@@ -626,11 +702,15 @@
                 "opsPerSecond": 935.497,
                 "recordedAt": "2026-04-14T14:28:36.758415Z",
                 "gitCommit": "ce5f0ee",
-                "baselineStatus": "recorded"
+                "baselineStatus": "recorded",
+                "baselineReasonCode": "recorded",
+                "baselineReasonLabel": "Benchmark record captured."
               },
               "interpreter": {
                 "mode": "interpreter",
                 "status": "recorded",
+                "reasonCode": "recorded",
+                "reasonLabel": "Benchmark record captured.",
                 "direction": "slower",
                 "ratio": {
                   "value": 0.99,
@@ -640,7 +720,9 @@
                 "opsPerSecond": 846.739,
                 "recordedAt": "2026-04-14T14:29:01.833833Z",
                 "gitCommit": "ce5f0ee",
-                "baselineStatus": "recorded"
+                "baselineStatus": "recorded",
+                "baselineReasonCode": "recorded",
+                "baselineReasonLabel": "Benchmark record captured."
               }
             },
             "nativeSpeedup": {
@@ -691,7 +773,9 @@
             "meanOpsPerSecond": 841.912,
             "minOpsPerSecond": 827.929,
             "maxOpsPerSecond": 860.672
-          }
+          },
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
         },
         "native": {
           "mode": "native",
@@ -714,7 +798,9 @@
             "meanOpsPerSecond": 935.497,
             "minOpsPerSecond": 935.497,
             "maxOpsPerSecond": 935.497
-          }
+          },
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
         },
         "interpreter": {
           "mode": "interpreter",
@@ -737,7 +823,9 @@
             "meanOpsPerSecond": 846.739,
             "minOpsPerSecond": 840.348,
             "maxOpsPerSecond": 853.606
-          }
+          },
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
         }
       },
       "coverage": {
@@ -820,6 +908,8 @@
         "managedBaseline": {
           "mode": "managed",
           "status": "recorded",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured.",
           "durationMs": 7.128,
           "opsPerSecond": 841.912,
           "recordedAt": "2026-04-14T14:28:05.104438Z",
@@ -829,6 +919,8 @@
           "native": {
             "mode": "native",
             "status": "recorded",
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured.",
             "direction": "faster",
             "ratio": {
               "value": 1.11,
@@ -838,11 +930,15 @@
             "opsPerSecond": 935.497,
             "recordedAt": "2026-04-14T14:28:36.758415Z",
             "gitCommit": "ce5f0ee",
-            "baselineStatus": "recorded"
+            "baselineStatus": "recorded",
+            "baselineReasonCode": "recorded",
+            "baselineReasonLabel": "Benchmark record captured."
           },
           "interpreter": {
             "mode": "interpreter",
             "status": "recorded",
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured.",
             "direction": "slower",
             "ratio": {
               "value": 0.99,
@@ -852,7 +948,9 @@
             "opsPerSecond": 846.739,
             "recordedAt": "2026-04-14T14:29:01.833833Z",
             "gitCommit": "ce5f0ee",
-            "baselineStatus": "recorded"
+            "baselineStatus": "recorded",
+            "baselineReasonCode": "recorded",
+            "baselineReasonLabel": "Benchmark record captured."
           }
         },
         "nativeSpeedup": {
@@ -879,6 +977,7 @@
         "alias": "arithmetic-bench",
         "displayName": "arithmetic-bench",
         "workloadEntry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
+        "entryIndex": 1,
         "assemblyName": "CoreRuntimeBenchmarks",
         "declaringType": "CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry",
         "methodName": "RunWorkload",
@@ -893,16 +992,29 @@
         "archetypeLabel": "Unspecified",
         "hotUpdateCapability": 0,
         "hotUpdateCapabilityLabels": [],
+        "capabilityFamily": 1,
+        "capabilityFamilyLabel": "Primitives And Ops",
+        "capabilityItem": 1,
+        "capabilityItemLabel": "Arithmetic Ops",
+        "ownerSubjectId": "SolutionCorePack",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
         "supportedModes": [
           "managed",
           "native"
         ]
       },
       "caseSummary": {
-        "caseCount": 17,
-        "crossModeCaseCount": 17,
+        "caseCount": 19,
+        "crossModeCaseCount": 19,
         "managedOnlyCaseCount": 0,
-        "fullyRecordedCaseCount": 1,
+        "fullyRecordedCaseCount": 3,
         "missingCaseCount": 16
       },
       "platforms": {
@@ -930,50 +1042,56 @@
               "status": "recorded",
               "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
               "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-              "recordedAt": "2026-04-14T14:29:15.238010Z",
-              "gitCommit": "ce5f0ee",
+              "recordedAt": "2026-04-15T16:15:58.586697Z",
+              "gitCommit": "e1c32ec",
               "metrics": {
                 "sampleCount": 3,
-                "meanDurationMs": 26.586,
-                "minDurationMs": 25.554,
-                "maxDurationMs": 28.318,
+                "meanDurationMs": 27.318,
+                "minDurationMs": 26.889,
+                "maxDurationMs": 27.757,
                 "meanChecksum": 2804.0,
                 "minChecksum": 2804.0,
                 "maxChecksum": 2804.0,
-                "meanElapsedMilliseconds": 26.586,
-                "minElapsedMilliseconds": 25.554,
-                "maxElapsedMilliseconds": 28.318,
-                "meanOpsPerSecond": 150.77,
-                "minOpsPerSecond": 141.254,
-                "maxOpsPerSecond": 156.531
-              }
+                "meanElapsedMilliseconds": 27.318,
+                "minElapsedMilliseconds": 26.889,
+                "maxElapsedMilliseconds": 27.757,
+                "meanOpsPerSecond": 146.447,
+                "minOpsPerSecond": 144.109,
+                "maxOpsPerSecond": 148.758
+              },
+              "reasonCode": "recorded",
+              "reasonLabel": "Benchmark record captured."
             },
             "native": {
               "mode": "native",
               "status": "recorded",
               "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
               "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-              "recordedAt": "2026-04-14T14:42:19.215772Z",
-              "gitCommit": "ce5f0ee",
+              "recordedAt": "2026-04-15T16:09:17.408441Z",
+              "gitCommit": "e1c32ec",
               "metrics": {
                 "sampleCount": 1,
-                "meanDurationMs": 24.171,
-                "minDurationMs": 24.171,
-                "maxDurationMs": 24.171,
+                "meanDurationMs": 25.935,
+                "minDurationMs": 25.935,
+                "maxDurationMs": 25.935,
                 "meanChecksum": 2804.0,
                 "minChecksum": 2804.0,
                 "maxChecksum": 2804.0,
-                "meanElapsedMilliseconds": 24.171,
-                "minElapsedMilliseconds": 24.171,
-                "maxElapsedMilliseconds": 24.171,
-                "meanOpsPerSecond": 165.486,
-                "minOpsPerSecond": 165.486,
-                "maxOpsPerSecond": 165.486
-              }
+                "meanElapsedMilliseconds": 25.935,
+                "minElapsedMilliseconds": 25.935,
+                "maxElapsedMilliseconds": 25.935,
+                "meanOpsPerSecond": 154.232,
+                "minOpsPerSecond": 154.232,
+                "maxOpsPerSecond": 154.232
+              },
+              "reasonCode": "recorded",
+              "reasonLabel": "Benchmark record captured."
             },
             "interpreter": {
               "mode": "interpreter",
-              "status": "unsupported"
+              "status": "unsupported",
+              "reasonCode": "unsupported-by-contract",
+              "reasonLabel": "This mode is not declared by the subject manifest."
             }
           },
           "coverage": {
@@ -983,23 +1101,23 @@
             "unsupportedModeCount": 1,
             "isComplete": true
           },
-          "lastRecordedAt": "2026-04-14T14:42:19.215772Z",
-          "gitCommit": "ce5f0ee",
+          "lastRecordedAt": "2026-04-15T16:15:58.586697Z",
+          "gitCommit": "e1c32ec",
           "isStale": false,
           "comparison": {
             "nativeVsManaged": {
               "maxChecksum": 1.0,
-              "maxDurationMs": 0.85,
-              "maxElapsedMilliseconds": 0.85,
-              "maxOpsPerSecond": 1.06,
+              "maxDurationMs": 0.93,
+              "maxElapsedMilliseconds": 0.93,
+              "maxOpsPerSecond": 1.04,
               "meanChecksum": 1.0,
-              "meanDurationMs": 0.91,
-              "meanElapsedMilliseconds": 0.91,
-              "meanOpsPerSecond": 1.1,
+              "meanDurationMs": 0.95,
+              "meanElapsedMilliseconds": 0.95,
+              "meanOpsPerSecond": 1.05,
               "minChecksum": 1.0,
-              "minDurationMs": 0.95,
-              "minElapsedMilliseconds": 0.95,
-              "minOpsPerSecond": 1.17,
+              "minDurationMs": 0.96,
+              "minElapsedMilliseconds": 0.96,
+              "minOpsPerSecond": 1.07,
               "sampleCount": 0.33
             },
             "interpreterVsManaged": {
@@ -1032,16 +1150,16 @@
               "minOpsPerSecond": null,
               "sampleCount": null
             },
-            "nativeSpeedup": 1.1,
+            "nativeSpeedup": 1.05,
             "interpreterOverhead": null
           },
           "verdict": {
             "verdicts": {
               "nativeVsManaged": {
-                "actual": 1.1,
+                "actual": 1.05,
                 "target": 2.0,
                 "pass": false,
-                "label": "1.10x speedup"
+                "label": "1.05x speedup"
               },
               "interpreterVsManaged": {
                 "actual": null,
@@ -1055,40 +1173,50 @@
             "managedBaseline": {
               "mode": "managed",
               "status": "recorded",
-              "durationMs": 26.586,
-              "opsPerSecond": 150.77,
-              "recordedAt": "2026-04-14T14:29:15.238010Z",
-              "gitCommit": "ce5f0ee"
+              "reasonCode": "recorded",
+              "reasonLabel": "Benchmark record captured.",
+              "durationMs": 27.318,
+              "opsPerSecond": 146.447,
+              "recordedAt": "2026-04-15T16:15:58.586697Z",
+              "gitCommit": "e1c32ec"
             },
             "relativeToManaged": {
               "native": {
                 "mode": "native",
                 "status": "recorded",
+                "reasonCode": "recorded",
+                "reasonLabel": "Benchmark record captured.",
                 "direction": "faster",
                 "ratio": {
-                  "value": 1.1,
+                  "value": 1.05,
                   "basis": "latency"
                 },
-                "durationMs": 24.171,
-                "opsPerSecond": 165.486,
-                "recordedAt": "2026-04-14T14:42:19.215772Z",
-                "gitCommit": "ce5f0ee",
-                "baselineStatus": "recorded"
+                "durationMs": 25.935,
+                "opsPerSecond": 154.232,
+                "recordedAt": "2026-04-15T16:09:17.408441Z",
+                "gitCommit": "e1c32ec",
+                "baselineStatus": "recorded",
+                "baselineReasonCode": "recorded",
+                "baselineReasonLabel": "Benchmark record captured."
               },
               "interpreter": {
                 "mode": "interpreter",
                 "status": "unsupported",
+                "reasonCode": "unsupported-by-contract",
+                "reasonLabel": "This mode is not declared by the subject manifest.",
                 "direction": "slower",
                 "ratio": null,
                 "durationMs": null,
                 "opsPerSecond": null,
                 "recordedAt": null,
                 "gitCommit": null,
-                "baselineStatus": "recorded"
+                "baselineStatus": "recorded",
+                "baselineReasonCode": "recorded",
+                "baselineReasonLabel": "Benchmark record captured."
               }
             },
             "nativeSpeedup": {
-              "value": 1.1,
+              "value": 1.05,
               "basis": "latency"
             },
             "interpreterOverhead": null
@@ -1116,50 +1244,56 @@
           "status": "recorded",
           "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
           "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-          "recordedAt": "2026-04-14T14:29:15.238010Z",
-          "gitCommit": "ce5f0ee",
+          "recordedAt": "2026-04-15T16:15:58.586697Z",
+          "gitCommit": "e1c32ec",
           "metrics": {
             "sampleCount": 3,
-            "meanDurationMs": 26.586,
-            "minDurationMs": 25.554,
-            "maxDurationMs": 28.318,
+            "meanDurationMs": 27.318,
+            "minDurationMs": 26.889,
+            "maxDurationMs": 27.757,
             "meanChecksum": 2804.0,
             "minChecksum": 2804.0,
             "maxChecksum": 2804.0,
-            "meanElapsedMilliseconds": 26.586,
-            "minElapsedMilliseconds": 25.554,
-            "maxElapsedMilliseconds": 28.318,
-            "meanOpsPerSecond": 150.77,
-            "minOpsPerSecond": 141.254,
-            "maxOpsPerSecond": 156.531
-          }
+            "meanElapsedMilliseconds": 27.318,
+            "minElapsedMilliseconds": 26.889,
+            "maxElapsedMilliseconds": 27.757,
+            "meanOpsPerSecond": 146.447,
+            "minOpsPerSecond": 144.109,
+            "maxOpsPerSecond": 148.758
+          },
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
         },
         "native": {
           "mode": "native",
           "status": "recorded",
           "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
           "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-          "recordedAt": "2026-04-14T14:42:19.215772Z",
-          "gitCommit": "ce5f0ee",
+          "recordedAt": "2026-04-15T16:09:17.408441Z",
+          "gitCommit": "e1c32ec",
           "metrics": {
             "sampleCount": 1,
-            "meanDurationMs": 24.171,
-            "minDurationMs": 24.171,
-            "maxDurationMs": 24.171,
+            "meanDurationMs": 25.935,
+            "minDurationMs": 25.935,
+            "maxDurationMs": 25.935,
             "meanChecksum": 2804.0,
             "minChecksum": 2804.0,
             "maxChecksum": 2804.0,
-            "meanElapsedMilliseconds": 24.171,
-            "minElapsedMilliseconds": 24.171,
-            "maxElapsedMilliseconds": 24.171,
-            "meanOpsPerSecond": 165.486,
-            "minOpsPerSecond": 165.486,
-            "maxOpsPerSecond": 165.486
-          }
+            "meanElapsedMilliseconds": 25.935,
+            "minElapsedMilliseconds": 25.935,
+            "maxElapsedMilliseconds": 25.935,
+            "meanOpsPerSecond": 154.232,
+            "minOpsPerSecond": 154.232,
+            "maxOpsPerSecond": 154.232
+          },
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
         },
         "interpreter": {
           "mode": "interpreter",
-          "status": "unsupported"
+          "status": "unsupported",
+          "reasonCode": "unsupported-by-contract",
+          "reasonLabel": "This mode is not declared by the subject manifest."
         }
       },
       "coverage": {
@@ -1169,23 +1303,23 @@
         "unsupportedModeCount": 1,
         "isComplete": true
       },
-      "lastRecordedAt": "2026-04-14T14:42:19.215772Z",
-      "gitCommit": "ce5f0ee",
+      "lastRecordedAt": "2026-04-15T16:15:58.586697Z",
+      "gitCommit": "e1c32ec",
       "isStale": false,
       "comparison": {
         "nativeVsManaged": {
           "maxChecksum": 1.0,
-          "maxDurationMs": 0.85,
-          "maxElapsedMilliseconds": 0.85,
-          "maxOpsPerSecond": 1.06,
+          "maxDurationMs": 0.93,
+          "maxElapsedMilliseconds": 0.93,
+          "maxOpsPerSecond": 1.04,
           "meanChecksum": 1.0,
-          "meanDurationMs": 0.91,
-          "meanElapsedMilliseconds": 0.91,
-          "meanOpsPerSecond": 1.1,
+          "meanDurationMs": 0.95,
+          "meanElapsedMilliseconds": 0.95,
+          "meanOpsPerSecond": 1.05,
           "minChecksum": 1.0,
-          "minDurationMs": 0.95,
-          "minElapsedMilliseconds": 0.95,
-          "minOpsPerSecond": 1.17,
+          "minDurationMs": 0.96,
+          "minElapsedMilliseconds": 0.96,
+          "minOpsPerSecond": 1.07,
           "sampleCount": 0.33
         },
         "interpreterVsManaged": {
@@ -1218,16 +1352,16 @@
           "minOpsPerSecond": null,
           "sampleCount": null
         },
-        "nativeSpeedup": 1.1,
+        "nativeSpeedup": 1.05,
         "interpreterOverhead": null
       },
       "verdict": {
         "verdicts": {
           "nativeVsManaged": {
-            "actual": 1.1,
+            "actual": 1.05,
             "target": 2.0,
             "pass": false,
-            "label": "1.10x speedup"
+            "label": "1.05x speedup"
           },
           "interpreterVsManaged": {
             "actual": null,
@@ -1241,40 +1375,50 @@
         "managedBaseline": {
           "mode": "managed",
           "status": "recorded",
-          "durationMs": 26.586,
-          "opsPerSecond": 150.77,
-          "recordedAt": "2026-04-14T14:29:15.238010Z",
-          "gitCommit": "ce5f0ee"
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured.",
+          "durationMs": 27.318,
+          "opsPerSecond": 146.447,
+          "recordedAt": "2026-04-15T16:15:58.586697Z",
+          "gitCommit": "e1c32ec"
         },
         "relativeToManaged": {
           "native": {
             "mode": "native",
             "status": "recorded",
+            "reasonCode": "recorded",
+            "reasonLabel": "Benchmark record captured.",
             "direction": "faster",
             "ratio": {
-              "value": 1.1,
+              "value": 1.05,
               "basis": "latency"
             },
-            "durationMs": 24.171,
-            "opsPerSecond": 165.486,
-            "recordedAt": "2026-04-14T14:42:19.215772Z",
-            "gitCommit": "ce5f0ee",
-            "baselineStatus": "recorded"
+            "durationMs": 25.935,
+            "opsPerSecond": 154.232,
+            "recordedAt": "2026-04-15T16:09:17.408441Z",
+            "gitCommit": "e1c32ec",
+            "baselineStatus": "recorded",
+            "baselineReasonCode": "recorded",
+            "baselineReasonLabel": "Benchmark record captured."
           },
           "interpreter": {
             "mode": "interpreter",
             "status": "unsupported",
+            "reasonCode": "unsupported-by-contract",
+            "reasonLabel": "This mode is not declared by the subject manifest.",
             "direction": "slower",
             "ratio": null,
             "durationMs": null,
             "opsPerSecond": null,
             "recordedAt": null,
             "gitCommit": null,
-            "baselineStatus": "recorded"
+            "baselineStatus": "recorded",
+            "baselineReasonCode": "recorded",
+            "baselineReasonLabel": "Benchmark record captured."
           }
         },
         "nativeSpeedup": {
-          "value": 1.1,
+          "value": 1.05,
           "basis": "latency"
         },
         "interpreterOverhead": null

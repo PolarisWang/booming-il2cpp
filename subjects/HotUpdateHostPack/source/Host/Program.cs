@@ -7,6 +7,7 @@ internal static class Program
     private static readonly Func<int>[] DefaultProofEntries =
     [
         HotUpdateSkeletonProofEntry.Run,
+        PatchIntegrityProofEntry.Run,
         MetadataSupplementProofEntry.Run,
         MethodReplacementProofEntry.Run,
         SharedContractProofEntry.Run,

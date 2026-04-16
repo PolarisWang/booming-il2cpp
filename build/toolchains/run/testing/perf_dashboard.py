@@ -7,6 +7,7 @@ import sys
 
 try:
     from ..core.common import read_json, write_json
+    from . import capability_coverage as capability_coverage_module
     from . import compiled_catalog as compiled_catalog_module
     from . import declared_metadata_labels as declared_metadata_labels_module
     from . import path_resolver as path_resolver_module
@@ -15,6 +16,7 @@ except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from core.common import read_json, write_json
+    from testing import capability_coverage as capability_coverage_module
     from testing import compiled_catalog as compiled_catalog_module
     from testing import declared_metadata_labels as declared_metadata_labels_module
     from testing import path_resolver as path_resolver_module
@@ -67,6 +69,24 @@ def _declared_source_entry(entry: dict[str, Any]) -> str:
     return f"{assembly_name}/{type_name}::{method_signature}"
 
 
+def _capability_contract_payload(item: dict[str, Any]) -> dict[str, Any]:
+    contract = capability_coverage_module.resolve_capability_contract(
+        capability_family=item.get("capabilityFamily"),
+        capability_item=item.get("capabilityItem"),
+    )
+    return {
+        "capabilityFamily": int(contract.get("capabilityFamily") or 0),
+        "capabilityFamilyLabel": str(contract.get("capabilityFamilyLabel") or ""),
+        "capabilityItem": int(contract.get("capabilityItem") or 0),
+        "capabilityItemLabel": str(contract.get("capabilityItemLabel") or ""),
+        "ownerSubjectId": str(contract.get("ownerSubjectId") or ""),
+        "supportStates": [int(value) for value in list(contract.get("supportStates") or [])],
+        "supportStateLabels": [str(value) for value in list(contract.get("supportStateLabels") or [])],
+        "proofRequired": bool(contract.get("proofRequired", False)),
+        "benchmarkRequired": bool(contract.get("benchmarkRequired", False)),
+    }
+
+
 def _load_declared_benchmark_cases(repo_root: Path, subject_id: str) -> dict[str, dict[str, Any]]:
     try:
         catalog = compiled_catalog_module.build_subject_declared_test_catalog(
@@ -117,6 +137,7 @@ def _load_declared_benchmark_cases(repo_root: Path, subject_id: str) -> dict[str
             "iterationCount": int(item.get("iterationCount") or 0),
             "invocationCount": int(item.get("invocationCount") or 0),
         }
+        cases[stable_id].update(_capability_contract_payload(item))
     return cases
 
 

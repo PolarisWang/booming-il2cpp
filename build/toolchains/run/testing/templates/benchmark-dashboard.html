@@ -254,6 +254,24 @@ function formatDate(value) {
   if (Number.isNaN(date.getTime())) return String(value);
   return date.toLocaleString();
 }
+function statusReasonCode(entry) {
+  return String((entry && entry.reasonCode) || '');
+}
+function statusReasonLabel(entry, fallback) {
+  return String((entry && entry.reasonLabel) || fallback || 'No benchmark data available.');
+}
+function relativeStatusFigure(relative) {
+  if (!relative) return 'No comparison';
+  const reasonCode = statusReasonCode(relative);
+  if (relative.status === 'missing') return 'Missing record';
+  if (relative.status === 'unsupported') return 'Unsupported by contract';
+  if (relative.status === 'baseline-unavailable') {
+    if (reasonCode === 'baseline-missing-record') return 'Baseline missing';
+    if (reasonCode === 'baseline-unsupported-by-contract') return 'Baseline unsupported';
+    return 'No baseline';
+  }
+  return 'No comparison';
+}
 function coverageLabel(entry) {
   const coverage = entry.coverage || {};
   return `${coverage.recordedModeCount || 0}/${coverage.supportedModeCount || 0} recorded`;
@@ -286,7 +304,10 @@ function summaryWorkloadMeta(subject) {
     const pieces = ['Summary Workload'];
     if (summaryCase.assemblyName) pieces.push(summaryCase.assemblyName);
     if (summaryCase.declaringType) pieces.push(summaryCase.declaringType);
+    if (summaryCase.ownerSubjectId) pieces.push(`owner ${summaryCase.ownerSubjectId}`);
+    if (summaryCase.capabilityItemLabel) pieces.push(summaryCase.capabilityItemLabel);
     if ((summaryCase.supportedModes || []).length) pieces.push((summaryCase.supportedModes || []).map(modeLabel).join(' / '));
+    if ((summaryCase.supportStateLabels || []).length) pieces.push((summaryCase.supportStateLabels || []).join(' / '));
     if (summaryCase.archetypeLabel && summaryCase.archetypeLabel !== 'Unspecified') pieces.push(summaryCase.archetypeLabel);
     if ((summaryCase.hotUpdateCapabilityLabels || []).length) pieces.push((summaryCase.hotUpdateCapabilityLabels || []).join(' / '));
     return pieces.join(' · ');
@@ -298,12 +319,12 @@ function baselineFigure(baseline) {
   if (!baseline) return 'No managed baseline';
   if (baseline.status === 'recorded') return formatDurationValue(baseline.durationMs);
   if (baseline.status === 'missing') return 'Missing baseline';
+  if (baseline.status === 'unsupported') return 'Unsupported';
   return 'No managed baseline';
 }
 function baselineMeta(baseline) {
   if (!baseline) return 'Managed benchmark data is unavailable.';
-  if (baseline.status === 'missing') return 'Managed mode is declared, but no benchmark record was found.';
-  if (baseline.status !== 'recorded') return 'This subject has no managed benchmark baseline.';
+  if (baseline.status !== 'recorded') return statusReasonLabel(baseline, 'This subject has no managed benchmark baseline.');
   const pieces = [];
   if (baseline.opsPerSecond != null) pieces.push(formatOpsValue(baseline.opsPerSecond));
   if (baseline.recordedAt) pieces.push(formatDate(baseline.recordedAt));
@@ -328,17 +349,13 @@ function formatLatencyDelta(currentDuration, baselineDuration) {
 }
 function relativeFigure(relative) {
   if (!relative) return 'No comparison';
-  if (relative.status === 'missing') return 'Missing record';
-  if (relative.status === 'unsupported') return 'Unsupported';
-  if (relative.status === 'baseline-unavailable') return 'No baseline';
+  if (relative.status !== 'recorded') return relativeStatusFigure(relative);
   if (!relative.ratio || relative.ratio.value == null) return 'No comparable data';
   return `${relative.ratio.value.toFixed(2)}x ${relative.direction}`;
 }
 function relativeMeta(relative) {
   if (!relative) return 'No comparison available.';
-  if (relative.status === 'missing') return 'Mode is declared, but no benchmark record was found.';
-  if (relative.status === 'unsupported') return 'This mode is not declared by the subject manifest.';
-  if (relative.status === 'baseline-unavailable') return 'Managed baseline must be recorded before relative comparison is available.';
+  if (relative.status !== 'recorded') return statusReasonLabel(relative, 'No comparison available.');
   const pieces = [];
   if (relative.durationMs != null) pieces.push(formatDurationValue(relative.durationMs));
   if (relative.opsPerSecond != null) pieces.push(formatOpsValue(relative.opsPerSecond));
@@ -348,16 +365,12 @@ function relativeMeta(relative) {
 }
 function deltaFigure(relative) {
   if (!relative) return 'No comparison';
-  if (relative.status === 'missing') return 'Missing record';
-  if (relative.status === 'unsupported') return 'Unsupported';
-  if (relative.status === 'baseline-unavailable') return 'No baseline';
+  if (relative.status !== 'recorded') return relativeStatusFigure(relative);
   return formatDurationValue(relative.durationMs);
 }
 function deltaMeta(relative, baseline) {
   if (!relative) return 'No comparison available.';
-  if (relative.status === 'missing') return 'Mode is declared, but no benchmark record was found.';
-  if (relative.status === 'unsupported') return 'This mode is not declared by the subject contract.';
-  if (relative.status === 'baseline-unavailable') return 'Managed baseline must be recorded before relative comparison is available.';
+  if (relative.status !== 'recorded') return statusReasonLabel(relative, 'No comparison available.');
   const delta = formatLatencyDelta(relative.durationMs, baseline && baseline.durationMs);
   const pieces = [];
   if (delta) pieces.push(`<span class="${delta.className}">${delta.value}</span>`);
@@ -368,8 +381,7 @@ function deltaMeta(relative, baseline) {
 }
 function modeMeta(mode, modeEntry, keyMetrics) {
   const status = modeEntry.status || 'unsupported';
-  if (status === 'missing') return 'Manifest declares support but no benchmark record was found.';
-  if (status === 'unsupported') return 'This mode is not declared by the subject manifest.';
+  if (status !== 'recorded') return statusReasonLabel(modeEntry, 'No benchmark data available.');
   if (mode === 'managed') return `Baseline reference · ${baselineMeta((keyMetrics || {}).managedBaseline)}`;
   const relative = (((keyMetrics || {}).relativeToManaged || {})[mode]) || null;
   const figure = relativeFigure(relative);
@@ -380,8 +392,11 @@ function modeMeta(mode, modeEntry, keyMetrics) {
 }
 function formatModeEvidence(modeEntry) {
   const status = (modeEntry || {}).status || 'unsupported';
-  if (status === 'missing') return 'Missing record';
-  if (status === 'unsupported') return 'Unsupported';
+  if (status !== 'recorded') {
+    const reasonCode = statusReasonCode(modeEntry);
+    const reasonLabel = statusReasonLabel(modeEntry, status);
+    return reasonCode ? `${reasonLabel} (${reasonCode})` : reasonLabel;
+  }
   const metrics = (modeEntry || {}).metrics || {};
   const pieces = [];
   const duration = metricValue(metrics, 'meanDurationMs');
@@ -467,6 +482,16 @@ function caseContractHtml(caseEntry) {
   const modeBadges = pillList((caseEntry.supportedModes || []).map(modeLabel), 'pill-accent');
   const metricBadges = pillList(caseEntry.metricLabels || [], 'pill-soft');
   const requirementBadges = pillList(caseEntry.requirementLabels || [], 'pill-warn');
+  const supportStateBadges = pillList(
+    (caseEntry.supportStateLabels || []).length ? caseEntry.supportStateLabels : ['Unspecified'],
+    'pill-soft',
+  );
+  const contractBadges = [
+    caseEntry.benchmarkRequired ? 'Benchmark Required' : 'Benchmark Optional',
+    caseEntry.proofRequired ? 'Proof Required' : 'Proof Optional',
+  ];
+  if (!caseEntry.proofRequired && !caseEntry.benchmarkRequired) contractBadges.push('Reporting Owned');
+  const contractBadgeHtml = pillList(contractBadges, 'pill-accent');
   const archetypeBadges = pillList(
     caseEntry.archetypeLabel && caseEntry.archetypeLabel !== 'Unspecified' ? [caseEntry.archetypeLabel] : ['Unspecified'],
     'pill-soft',
@@ -479,11 +504,31 @@ function caseContractHtml(caseEntry) {
     <div class="case-contract">
       <div>
         <div class="case-secondary">${caseEntry.categoryLabel || 'Uncategorized'}</div>
-        <div class="pill-list">${modeBadges}</div>
+        <div class="case-secondary">${caseEntry.capabilityFamilyLabel || 'Unknown Family'}</div>
       </div>
       <div>
         <div class="case-secondary">${caseEntry.declaringType || caseEntry.workloadEntry || caseEntry.caseId}</div>
         <div class="case-secondary">${caseEntry.methodSignature || ''}</div>
+      </div>
+      <div>
+        <div class="section-kicker">Owner Subject</div>
+        <div class="pill-list">${pillList([caseEntry.ownerSubjectId || 'Unassigned'], 'pill-accent')}</div>
+      </div>
+      <div>
+        <div class="section-kicker">Capability</div>
+        <div class="pill-list">${pillList([caseEntry.capabilityItemLabel || 'Unknown Capability'], 'pill-accent')}</div>
+      </div>
+      <div>
+        <div class="section-kicker">Support State</div>
+        <div class="pill-list">${supportStateBadges}</div>
+      </div>
+      <div>
+        <div class="section-kicker">Requirement Contract</div>
+        <div class="pill-list">${contractBadgeHtml}</div>
+      </div>
+      <div>
+        <div class="section-kicker">Execution Modes</div>
+        <div class="pill-list">${modeBadges}</div>
       </div>
       <div>
         <div class="section-kicker">Metrics</div>

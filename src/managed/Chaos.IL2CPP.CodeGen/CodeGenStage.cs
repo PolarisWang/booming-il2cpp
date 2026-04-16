@@ -18,10 +18,17 @@ public sealed class CodeGenStage
         var internalAssemblyNames = linkedWorld.Assemblies
             .Select(assembly => assembly.Name)
             .ToHashSet(StringComparer.Ordinal);
+        var methodsBySubjectId = linkedWorld.Methods
+            .ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
         var typedIl = new TypedIlIrArtifact
         {
             Methods = linkedWorld.Methods
-                .Select(method => ToTypedIlMethodArtifact(method, methodShapes, methodCapabilities, internalAssemblyNames))
+                .Select(method => ToTypedIlMethodArtifact(
+                    method,
+                    methodShapes,
+                    methodCapabilities,
+                    internalAssemblyNames,
+                    methodsBySubjectId))
                 .ToList(),
         };
         var codeRegistration = new CodeRegistrationArtifact
@@ -206,7 +213,8 @@ public sealed class CodeGenStage
         ManagedMethodModel method,
         IReadOnlyDictionary<string, MethodShapeModel> methodShapes,
         IReadOnlyDictionary<string, IReadOnlyList<string>> methodCapabilities,
-        IReadOnlySet<string> internalAssemblyNames)
+        IReadOnlySet<string> internalAssemblyNames,
+        IReadOnlyDictionary<string, ManagedMethodModel> methodsBySubjectId)
     {
         var methodShape = GetRequiredMethodShape(methodShapes, method.SubjectId);
         var capabilities = GetRequiredCapabilities(methodCapabilities, method.SubjectId);
@@ -238,7 +246,11 @@ public sealed class CodeGenStage
             {
                 BlockId = block.BlockId,
                 Instructions = block.Instructions
-                    .Select(instruction => ToTypedIlInstructionArtifact(method, internalAssemblyNames, instruction))
+                    .Select(instruction => ToTypedIlInstructionArtifact(
+                        method,
+                        internalAssemblyNames,
+                        methodsBySubjectId,
+                        instruction))
                     .ToList(),
             }).ToList(),
         };
@@ -273,6 +285,7 @@ public sealed class CodeGenStage
     private static TypedIlInstructionArtifact ToTypedIlInstructionArtifact(
         ManagedMethodModel method,
         IReadOnlySet<string> internalAssemblyNames,
+        IReadOnlyDictionary<string, ManagedMethodModel> methodsBySubjectId,
         ManagedInstructionModel instruction)
     {
         return new TypedIlInstructionArtifact
@@ -281,10 +294,13 @@ public sealed class CodeGenStage
             Operand = instruction.Operand,
             ResultType = instruction.ResultType,
             Callee = instruction.Callee,
+            CallSiteSignature = instruction.CallSiteSignature,
+            Reference = instruction.Reference,
             DispatchKindCode = HybridDispatchResolver.ResolveInstruction(
                 method.AssemblyName,
                 internalAssemblyNames,
-                instruction),
+                instruction,
+                methodsBySubjectId),
         };
     }
 }

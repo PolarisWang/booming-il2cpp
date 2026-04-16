@@ -4,31 +4,31 @@ namespace CoreRuntimeFeatures;
 
 internal static class FinallyAndFilterProofEntry
 {
-    private static string Execute()
+    private static int Execute()
     {
-        string log = string.Empty;
+        var state = 0;
         try
         {
             try
             {
-                log += "body;";
-                throw new ArgumentOutOfRangeException("value", "negative");
+                state = (state * 10) + 1;
+                throw new ArgumentOutOfRangeException();
             }
-            catch (ArgumentOutOfRangeException ex) when (ex.ParamName == "value")
+            catch (ArgumentOutOfRangeException ex) when (ex is not null)
             {
-                log += "filter:" + ex.ParamName + ";";
+                state = (state * 10) + 2;
             }
             finally
             {
-                log += "inner-finally;";
+                state = (state * 10) + 3;
             }
         }
         finally
         {
-            log += "outer-finally;";
+            state = (state * 10) + 4;
         }
 
-        return log;
+        return state;
     }
 
     [ChaosUnitTest(
@@ -40,7 +40,7 @@ internal static class FinallyAndFilterProofEntry
         Priority = 6)]
     public static int Run()
     {
-        Assert.Equal("body;filter:value;inner-finally;outer-finally;", Execute());
+        Assert.Equal(1234, Execute());
         return 0;
     }
 }

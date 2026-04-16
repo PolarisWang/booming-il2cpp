@@ -308,6 +308,9 @@ public sealed class LoaderStage
             DefinitionSubjectId = typeIdentity.DefinitionSubjectId,
             DisplayName = typeIdentity.DisplayName,
             IsInterface = typeDefinition.Attributes.HasFlag(TypeAttributes.Interface),
+            IsValueType = ResolveIsValueType(metadataReader, typeResolver, typeDefinition),
+            BaseTypeSubjectId = ResolveBaseTypeSubjectId(metadataReader, typeResolver, typeDefinition),
+            ImplementedInterfaceSubjectIds = ResolveImplementedInterfaceSubjectIds(metadataReader, typeResolver, typeDefinition),
             IsPreserved = HasPreserveAttribute(metadataReader, typeHandle),
             MetadataToken = MetadataTokens.GetToken(typeHandle),
         };
@@ -495,6 +498,7 @@ public sealed class LoaderStage
                 DefinitionSubjectId = methodSummary.DefinitionSubjectId,
                 Signature = methodSummary.Signature,
                 IsStatic = methodSummary.IsStatic,
+                IsVirtual = methodSummary.IsVirtual,
                 IsPreserved = methodSummary.IsPreserved,
                 IsUnmanagedCallersOnly = methodSummary.IsUnmanagedCallersOnly,
                 MetadataToken = methodSummary.MetadataToken,
@@ -601,11 +605,16 @@ public sealed class LoaderStage
             ILOpCode.Initobj => DecodeInitobjInstruction(metadataReader, typeResolver, ref ilReader),
             ILOpCode.Ldobj => DecodeLdobjInstruction(metadataReader, typeResolver, ref ilReader),
             ILOpCode.Stobj => DecodeStobjInstruction(metadataReader, typeResolver, ref ilReader),
+            ILOpCode.Mkrefany => DecodeMkrefanyInstruction(metadataReader, typeResolver, ref ilReader),
+            ILOpCode.Refanytype => DecodeSimpleInstruction("refanytype", "System.RuntimeTypeHandle"),
+            ILOpCode.Refanyval => DecodeRefanyvalInstruction(metadataReader, typeResolver, ref ilReader),
+            ILOpCode.Sizeof => DecodeSizeofInstruction(metadataReader, typeResolver, ref ilReader),
+            ILOpCode.Arglist => new ManagedInstructionModel { Op = "arglist", ResultType = "System.RuntimeArgumentHandle" },
             ILOpCode.Newobj => DecodeMethodReferenceInstruction(metadataReader, typeResolver, typeModels, methodOwners, opCode, ref ilReader),
             ILOpCode.Box => DecodeBoxInstruction(metadataReader, typeResolver, ref ilReader),
             ILOpCode.Unbox => DecodeUnboxInstruction(metadataReader, typeResolver, ref ilReader),
             ILOpCode.Unbox_any => DecodeUnboxAnyInstruction(metadataReader, typeResolver, ref ilReader),
-            ILOpCode.Calli => DecodeCalliInstruction(ref ilReader),
+            ILOpCode.Calli => DecodeCalliInstruction(metadataReader, typeResolver, methodSummary, ref ilReader),
             ILOpCode.Call => DecodeMethodReferenceInstruction(metadataReader, typeResolver, typeModels, methodOwners, opCode, ref ilReader),
             ILOpCode.Callvirt => DecodeMethodReferenceInstruction(metadataReader, typeResolver, typeModels, methodOwners, opCode, ref ilReader),
             ILOpCode.Stfld => DecodeFieldReferenceInstruction(metadataReader, typeResolver, fieldOwners, opCode, ref ilReader),
@@ -689,6 +698,7 @@ public sealed class LoaderStage
             ILOpCode.Conv_i4 => new ManagedInstructionModel { Op = "conv.i4", ResultType = "System.Int32" },
             ILOpCode.Conv_i8 => DecodeSimpleInstruction("conv.i8", "System.Int64"),
             ILOpCode.Conv_ovf_i1 => DecodeSimpleInstruction("conv.ovf.i1", "System.SByte"),
+            ILOpCode.Conv_ovf_u1 => DecodeSimpleInstruction("conv.ovf.u1", "System.Byte"),
             ILOpCode.Conv_r4 => DecodeSimpleInstruction("conv.r4", "System.Single"),
             ILOpCode.Conv_r8 => DecodeSimpleInstruction("conv.r8", "System.Double"),
             ILOpCode.Conv_u => DecodeSimpleInstruction("conv.u", "System.IntPtr"),
@@ -733,6 +743,8 @@ public sealed class LoaderStage
             ILOpCode.Ble_s => DecodeBranchInstruction("ble", ReadBranchTargetSByte(ref ilReader)),
             ILOpCode.Bge => DecodeBranchInstruction("bge", ReadBranchTargetInt32(ref ilReader)),
             ILOpCode.Bge_s => DecodeBranchInstruction("bge", ReadBranchTargetSByte(ref ilReader)),
+            ILOpCode.Bge_un => DecodeBranchInstruction("bge.un", ReadBranchTargetInt32(ref ilReader)),
+            ILOpCode.Bge_un_s => DecodeBranchInstruction("bge.un", ReadBranchTargetSByte(ref ilReader)),
             ILOpCode.Switch => DecodeSwitchInstruction(ref ilReader),
             ILOpCode.Leave => DecodeLeaveInstruction(ReadBranchTargetInt32(ref ilReader)),
             ILOpCode.Leave_s => DecodeLeaveInstruction(ReadBranchTargetSByte(ref ilReader)),
@@ -765,6 +777,9 @@ public sealed class LoaderStage
                 ILOpCode.Isinst => "isinst",
                 ILOpCode.Initobj => "initobj",
                 ILOpCode.Ldobj => "ldobj",
+                ILOpCode.Mkrefany => "mkrefany",
+                ILOpCode.Refanyval => "refanyval",
+                ILOpCode.Sizeof => "sizeof",
                 ILOpCode.Ldelema => "ldelema",
                 ILOpCode.Ldelem => "ldelem",
                 ILOpCode.Stobj => "stobj",
@@ -782,6 +797,9 @@ public sealed class LoaderStage
                 ILOpCode.Isinst => typeIdentity.SubjectId,
                 ILOpCode.Initobj => "System.Void",
                 ILOpCode.Ldobj => typeIdentity.SubjectId,
+                ILOpCode.Mkrefany => "System.TypedReference",
+                ILOpCode.Refanyval => "System.IntPtr",
+                ILOpCode.Sizeof => "System.Int32",
                 ILOpCode.Ldelema => "System.IntPtr",
                 ILOpCode.Ldelem => typeIdentity.SubjectId,
                 ILOpCode.Stobj => "System.Void",
@@ -891,6 +909,33 @@ public sealed class LoaderStage
     {
         var instruction = DecodeTypeReferenceInstruction(metadataReader, typeResolver, ILOpCode.Ldobj, ref ilReader);
         return instruction with { Op = "ldobj" };
+    }
+
+    private static ManagedInstructionModel DecodeMkrefanyInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeTypeReferenceInstruction(metadataReader, typeResolver, ILOpCode.Mkrefany, ref ilReader);
+        return instruction with { Op = "mkrefany" };
+    }
+
+    private static ManagedInstructionModel DecodeRefanyvalInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeTypeReferenceInstruction(metadataReader, typeResolver, ILOpCode.Refanyval, ref ilReader);
+        return instruction with { Op = "refanyval" };
+    }
+
+    private static ManagedInstructionModel DecodeSizeofInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        ref BlobReader ilReader)
+    {
+        var instruction = DecodeTypeReferenceInstruction(metadataReader, typeResolver, ILOpCode.Sizeof, ref ilReader);
+        return instruction with { Op = "sizeof" };
     }
 
     private static ManagedInstructionModel DecodeStobjInstruction(
@@ -1284,14 +1329,54 @@ public sealed class LoaderStage
         };
     }
 
-    private static ManagedInstructionModel DecodeCalliInstruction(ref BlobReader ilReader)
+    private static ManagedInstructionModel DecodeCalliInstruction(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        MethodSummary methodSummary,
+        ref BlobReader ilReader)
     {
+        var token = ilReader.ReadInt32();
+        var handle = MetadataTokens.Handle(token);
+        if (handle.Kind != HandleKind.StandaloneSignature)
+        {
+            throw new NotSupportedException($"unsupported calli signature handle kind in loader: {handle.Kind}");
+        }
+
+        var signature = metadataReader
+            .GetStandaloneSignature((StandaloneSignatureHandle)handle)
+            .DecodeMethodSignature(typeResolver.TypeNameProvider, CreateSignatureContext(methodSummary));
+        var parameterTypes = signature.ParameterTypes.ToArray();
+
         return new ManagedInstructionModel
         {
             Op = "calli",
-            Operand = ilReader.ReadInt32(),
-            ResultType = "System.Object",
+            Operand = token,
+            ResultType = signature.ReturnType,
+            CallSiteSignature = new ManagedCallSiteSignature
+            {
+                KindCode = ManagedCallSiteKind.FunctionPointer,
+                ReturnType = signature.ReturnType,
+                ParameterTypes = parameterTypes,
+            },
         };
+    }
+
+    private static SignatureContext<string>? CreateSignatureContext(MethodReferenceSummary methodSummary)
+    {
+        var typeArguments = methodSummary.Substitutions
+            .Where(pair => pair.Key.StartsWith("!", StringComparison.Ordinal) && !pair.Key.StartsWith("!!", StringComparison.Ordinal))
+            .OrderBy(pair => pair.Key, StringComparer.Ordinal)
+            .Select(pair => pair.Value)
+            .ToImmutableArray();
+        var methodArguments = methodSummary.Substitutions
+            .Where(pair => pair.Key.StartsWith("!!", StringComparison.Ordinal))
+            .OrderBy(pair => pair.Key, StringComparer.Ordinal)
+            .Select(pair => pair.Value)
+            .ToImmutableArray();
+
+        return typeArguments.IsDefaultOrEmpty && methodArguments.IsDefaultOrEmpty
+            ? null
+            : new SignatureContext<string>(typeArguments, methodArguments);
     }
 
     private static ManagedInstructionModel DecodeBranchInstruction(string op, int delta)
@@ -1407,6 +1492,7 @@ public sealed class LoaderStage
                 TryLength = region.TryLength,
                 HandlerOffset = region.HandlerOffset,
                 HandlerLength = region.HandlerLength,
+                FilterOffset = region.Kind == ExceptionRegionKind.Filter ? region.FilterOffset : null,
                 CatchTypeSubjectId = region.Kind == ExceptionRegionKind.Catch && !region.CatchType.IsNil
                     ? typeResolver.ResolveTypeIdentity(region.CatchType).SubjectId
                     : null,
@@ -1523,6 +1609,7 @@ public sealed class LoaderStage
             ParameterTypes = parameterTypes,
             Signature = ManagedNaming.CreateMethodSignature(signature.ReturnType, declaringType.DisplayName, methodName, parameterTypes),
             IsStatic = methodDefinition.Attributes.HasFlag(MethodAttributes.Static),
+            IsVirtual = methodDefinition.Attributes.HasFlag(MethodAttributes.Virtual),
             IsPreserved = isPreserved,
             IsUnmanagedCallersOnly = isUnmanagedCallersOnly,
             MetadataToken = MetadataTokens.GetToken(handle),
@@ -1559,13 +1646,13 @@ public sealed class LoaderStage
         MemberReferenceHandle handle)
     {
         var memberReference = metadataReader.GetMemberReference(handle);
-        var declaringType = typeResolver.ResolveTypeIdentity(memberReference.Parent);
+        var declaringType = ResolveMemberReferenceDeclaringType(metadataReader, typeResolver, memberReference);
         var signature = memberReference.DecodeMethodSignature(
             typeResolver.TypeNameProvider,
             typeResolver.CreateTypeNameContext(declaringType));
         var parameterTypes = signature.ParameterTypes.ToArray();
         var methodName = metadataReader.GetString(memberReference.Name);
-        var definitionSignature = memberReference.DecodeMethodSignature(typeResolver.TypeNameProvider, null);
+        var definitionSignature = ResolveMemberReferenceDefinitionSignature(metadataReader, typeResolver, memberReference);
         var definitionParameterTypes = definitionSignature.ParameterTypes.ToArray();
 
         return new MethodReferenceSummary
@@ -1584,6 +1671,35 @@ public sealed class LoaderStage
             MetadataToken = MetadataTokens.GetToken(handle),
             Substitutions = CreateSubstitutionMap(declaringType.TypeArguments, []),
         };
+    }
+
+    private static TypeIdentity ResolveMemberReferenceDeclaringType(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        MemberReference memberReference)
+    {
+        if (memberReference.Parent.Kind == HandleKind.MethodDefinition)
+        {
+            var parentMethod = metadataReader.GetMethodDefinition((MethodDefinitionHandle)memberReference.Parent);
+            return typeResolver.ResolveTypeIdentity(parentMethod.GetDeclaringType());
+        }
+
+        return typeResolver.ResolveTypeIdentity(memberReference.Parent);
+    }
+
+    private static MethodSignature<string> ResolveMemberReferenceDefinitionSignature(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        MemberReference memberReference)
+    {
+        if (memberReference.Parent.Kind == HandleKind.MethodDefinition)
+        {
+            return metadataReader
+                .GetMethodDefinition((MethodDefinitionHandle)memberReference.Parent)
+                .DecodeSignature(typeResolver.TypeNameProvider, null);
+        }
+
+        return memberReference.DecodeMethodSignature(typeResolver.TypeNameProvider, null);
     }
 
     private static MethodReferenceSummary DescribeMethodSpecification(
@@ -1828,6 +1944,7 @@ public sealed class LoaderStage
             }
 
             var definitionType = existingTypeSubjects[typeIdentity.DefinitionSubjectId];
+            var typeSubstitutions = CreateSubstitutionMap(typeIdentity.TypeArguments, []);
             materializedTypes[typeIdentity.SubjectId] = new ManagedTypeModel
             {
                 AssemblyName = typeIdentity.AssemblyName,
@@ -1837,6 +1954,21 @@ public sealed class LoaderStage
                 DefinitionSubjectId = typeIdentity.DefinitionSubjectId,
                 DisplayName = typeIdentity.DisplayName,
                 IsInterface = definitionType.IsInterface,
+                IsValueType = definitionType.IsValueType,
+                BaseTypeSubjectId = definitionType.BaseTypeSubjectId is null
+                    ? null
+                    : SubstituteText(
+                        definitionType.BaseTypeSubjectId,
+                        typeSubstitutions,
+                        new Dictionary<string, string>(StringComparer.Ordinal)),
+                ImplementedInterfaceSubjectIds = definitionType.ImplementedInterfaceSubjectIds is null
+                    ? null
+                    : definitionType.ImplementedInterfaceSubjectIds
+                        .Select(interfaceSubjectId => SubstituteText(
+                            interfaceSubjectId,
+                            typeSubstitutions,
+                            new Dictionary<string, string>(StringComparer.Ordinal)))
+                        .ToList(),
                 IsPreserved = definitionType.IsPreserved,
                 MetadataToken = MetadataTokens.GetToken(typeSpecificationHandle),
             };
@@ -1985,6 +2117,7 @@ public sealed class LoaderStage
                     definitionMethod.Name,
                     parameters.Select(parameter => parameter.Type).ToList()),
                 IsStatic = definitionMethod.IsStatic,
+                IsVirtual = definitionMethod.IsVirtual,
                 IsPreserved = definitionMethod.IsPreserved,
                 IsUnmanagedCallersOnly = definitionMethod.IsUnmanagedCallersOnly,
                 MetadataToken = syntheticMethodMetadataToken++,
@@ -2127,6 +2260,7 @@ public sealed class LoaderStage
                 methodReference.Name,
                 parameters.Select(parameter => parameter.Type).ToList()),
             IsStatic = definitionMethod.IsStatic,
+            IsVirtual = definitionMethod.IsVirtual,
             IsPreserved = definitionMethod.IsPreserved,
             IsUnmanagedCallersOnly = definitionMethod.IsUnmanagedCallersOnly,
             MetadataToken = methodReference.MetadataToken,
@@ -2134,6 +2268,89 @@ public sealed class LoaderStage
             Import = null,
             Body = SubstituteMethodBody(definitionMethod.Body, methodReference.Substitutions, subjectSubstitutions),
         };
+    }
+
+    private static bool ResolveIsValueType(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        TypeDefinition typeDefinition)
+    {
+        _ = metadataReader;
+        if (typeDefinition.Attributes.HasFlag(TypeAttributes.Interface) ||
+            typeDefinition.BaseType.IsNil)
+        {
+            return false;
+        }
+
+        var baseTypeIdentity = typeResolver.ResolveTypeIdentity(typeDefinition.BaseType);
+        return string.Equals(baseTypeIdentity.DefinitionSubjectId, "System.Private.CoreLib/System.ValueType", StringComparison.Ordinal)
+            || string.Equals(baseTypeIdentity.DefinitionSubjectId, "System.Private.CoreLib/System.Enum", StringComparison.Ordinal);
+    }
+
+    private static string? ResolveBaseTypeSubjectId(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        TypeDefinition typeDefinition)
+    {
+        _ = metadataReader;
+        if (typeDefinition.Attributes.HasFlag(TypeAttributes.Interface) ||
+            typeDefinition.BaseType.IsNil)
+        {
+            return null;
+        }
+
+        var baseTypeIdentity = typeResolver.ResolveTypeIdentity(typeDefinition.BaseType);
+        return baseTypeIdentity.SubjectId;
+    }
+
+    private static IReadOnlyList<string> ResolveImplementedInterfaceSubjectIds(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        TypeDefinition typeDefinition)
+    {
+        var implementedInterfaceSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var interfaceImplementationHandle in typeDefinition.GetInterfaceImplementations())
+        {
+            var interfaceImplementation = metadataReader.GetInterfaceImplementation(interfaceImplementationHandle);
+            CollectImplementedInterfaceSubjectIds(
+                metadataReader,
+                typeResolver,
+                interfaceImplementation.Interface,
+                implementedInterfaceSubjectIds);
+        }
+
+        return implementedInterfaceSubjectIds
+            .OrderBy(interfaceSubjectId => interfaceSubjectId, StringComparer.Ordinal)
+            .ToList();
+    }
+
+    private static void CollectImplementedInterfaceSubjectIds(
+        MetadataReader metadataReader,
+        MetadataTypeResolver typeResolver,
+        EntityHandle interfaceHandle,
+        ISet<string> implementedInterfaceSubjectIds)
+    {
+        var interfaceIdentity = typeResolver.ResolveTypeIdentity(interfaceHandle);
+        if (!implementedInterfaceSubjectIds.Add(interfaceIdentity.SubjectId))
+        {
+            return;
+        }
+
+        if (interfaceHandle.Kind != HandleKind.TypeDefinition)
+        {
+            return;
+        }
+
+        var interfaceDefinition = metadataReader.GetTypeDefinition((TypeDefinitionHandle)interfaceHandle);
+        foreach (var interfaceImplementationHandle in interfaceDefinition.GetInterfaceImplementations())
+        {
+            var interfaceImplementation = metadataReader.GetInterfaceImplementation(interfaceImplementationHandle);
+            CollectImplementedInterfaceSubjectIds(
+                metadataReader,
+                typeResolver,
+                interfaceImplementation.Interface,
+                implementedInterfaceSubjectIds);
+        }
     }
 
     private static bool HasPreserveAttribute(
@@ -2198,6 +2415,7 @@ public sealed class LoaderStage
                 TryLength = region.TryLength,
                 HandlerOffset = region.HandlerOffset,
                 HandlerLength = region.HandlerLength,
+                FilterOffset = region.FilterOffset,
                 CatchTypeSubjectId = region.CatchTypeSubjectId is null
                     ? null
                     : SubstituteText(region.CatchTypeSubjectId, substitutions, subjectSubstitutions),
@@ -2216,6 +2434,19 @@ public sealed class LoaderStage
                     Callee = instruction.Callee is null
                         ? null
                         : SubstituteText(instruction.Callee, substitutions, subjectSubstitutions),
+                    CallSiteSignature = instruction.CallSiteSignature is null
+                        ? null
+                        : new ManagedCallSiteSignature
+                        {
+                            KindCode = instruction.CallSiteSignature.KindCode,
+                            ReturnType = SubstituteText(
+                                instruction.CallSiteSignature.ReturnType,
+                                substitutions,
+                                subjectSubstitutions),
+                            ParameterTypes = instruction.CallSiteSignature.ParameterTypes
+                                .Select(parameterType => SubstituteText(parameterType, substitutions, subjectSubstitutions))
+                                .ToList(),
+                        },
                     Reference = instruction.Reference is null
                         ? null
                         : new ManagedInstructionReference

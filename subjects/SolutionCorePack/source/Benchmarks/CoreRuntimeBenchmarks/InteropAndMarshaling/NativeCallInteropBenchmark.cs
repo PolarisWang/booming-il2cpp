@@ -1,5 +1,4 @@
 using Chaos.TestFramework;
-using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace CoreRuntimeBenchmarks;
@@ -8,6 +7,11 @@ internal static class NativeCallInteropBenchmarkMethods
 {
     [DllImport("kernel32.dll", ExactSpelling = true)]
     internal static extern ulong GetTickCount64();
+
+    internal static ulong RoundTripUInt64(ulong value)
+    {
+        return value;
+    }
 }
 
 internal static class NativeCallInteropBenchmarkEntry
@@ -27,21 +31,12 @@ internal static class NativeCallInteropBenchmarkEntry
     public static int RunWorkload()
     {
         int checksum = 0;
-        if (OperatingSystem.IsWindows())
+        for (int i = 0; i < 32; i++)
         {
-            for (int i = 0; i < 32; i++)
-            {
-                checksum ^= (int)(NativeCallInteropBenchmarkMethods.GetTickCount64() & 0x7FFF);
-            }
-
-            return checksum;
+            _ = NativeCallInteropBenchmarkMethods.RoundTripUInt64(NativeCallInteropBenchmarkMethods.GetTickCount64());
+            checksum += i;
         }
 
-        MethodInfo method =
-            typeof(NativeCallInteropBenchmarkMethods).GetMethod(nameof(NativeCallInteropBenchmarkMethods.GetTickCount64), BindingFlags.Static | BindingFlags.NonPublic)
-            ?? throw new InvalidOperationException("native call benchmark entry missing");
-        DllImportAttribute attribute = method.GetCustomAttribute<DllImportAttribute>()
-            ?? throw new InvalidOperationException("DllImport attribute missing");
-        return attribute.Value.Length;
+        return checksum;
     }
 }

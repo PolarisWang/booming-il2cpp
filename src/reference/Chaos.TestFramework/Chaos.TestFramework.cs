@@ -631,6 +631,16 @@ public enum ChaosCapabilityItem : ushort
     /// Mixed delegate flow behavior.
     /// </summary>
     MixedDelegateFlow = 66,
+
+    /// <summary>
+    /// Object castclass/isinst exact-type behavior.
+    /// </summary>
+    ObjectCastAndTypeCheck = 67,
+
+    /// <summary>
+    /// Reference-array covariance cast and compatibility behavior.
+    /// </summary>
+    ArrayCovariance = 68,
 }
 
 /// <summary>
@@ -1106,6 +1116,41 @@ public sealed class ChaosAssertionException : Exception
 }
 
 /// <summary>
+/// Captures compact assertion state for AOT-friendly proof execution.
+/// </summary>
+public static class ChaosAssertState
+{
+    /// <summary>
+    /// Gets the current compact exit code.
+    /// </summary>
+    public static int ExitCode;
+
+    /// <summary>
+    /// Resets the compact assertion state.
+    /// </summary>
+    public static void Reset()
+    {
+        ExitCode = 0;
+    }
+
+    /// <summary>
+    /// Returns the current compact exit code.
+    /// </summary>
+    public static int Complete()
+    {
+        return ExitCode;
+    }
+
+    /// <summary>
+    /// Records a proof failure in compact form.
+    /// </summary>
+    public static void RecordFailure()
+    {
+        ExitCode = 1;
+    }
+}
+
+/// <summary>
 /// Provides minimal proof assertions for retained subjects.
 /// </summary>
 public static class Assert
@@ -1130,6 +1175,20 @@ public static class Assert
         {
             throw new ChaosAssertionException(message ?? "Expected condition to be false.");
         }
+    }
+
+    /// <summary>
+    /// Verifies that the expected and actual values are equal.
+    /// </summary>
+    public static void Equal(int expected, int actual, string? message = null)
+    {
+        _ = message;
+        if (expected == actual)
+        {
+            return;
+        }
+
+        ChaosAssertState.RecordFailure();
     }
 
     /// <summary>

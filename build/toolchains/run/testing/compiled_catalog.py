@@ -105,6 +105,8 @@ _NATIVE_EXECUTION_STAGE_KINDS = {
     "mobile-native-perf",
 }
 
+_RELEVANT_SOURCE_SUFFIXES = {".cs", ".csproj", ".sln", ".props", ".targets"}
+
 
 def _host_platform_name() -> str:
     if os.name == "nt":
@@ -139,6 +141,56 @@ def _normalize_assembly_paths(repo_root: Path, assembly_paths: Iterable[str | Pa
     if not normalized:
         raise ValueError("assembly_paths must not be empty")
     return normalized
+
+
+def _is_relevant_source_file(path: Path) -> bool:
+    if not path.is_file():
+        return False
+    if path.suffix.lower() in _RELEVANT_SOURCE_SUFFIXES:
+        return True
+    return path.name in {"Directory.Build.props", "Directory.Build.targets"}
+
+
+def _assemblies_are_stale(
+    repo_root: Path,
+    manifest: dict[str, Any],
+    assembly_paths: list[Path],
+) -> bool:
+    try:
+        assembly_mtime = min(path.stat().st_mtime for path in assembly_paths)
+    except (OSError, ValueError):
+        return True
+
+    subject_id = str(manifest.get("subjectId") or "").strip()
+    if subject_id:
+        subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+        try:
+            if subject_manifest_path.is_file() and subject_manifest_path.stat().st_mtime > assembly_mtime:
+                return True
+        except OSError:
+            return True
+
+    source = dict(manifest.get("source") or {})
+    source_path_text = str(source.get("path") or "").strip()
+    if not source_path_text:
+        return False
+
+    source_path = Path(source_path_text)
+    if not source_path.is_absolute():
+        source_path = repo_root / source_path
+    source_root = source_path if source_path.is_dir() else source_path.parent
+    if not source_root.is_dir():
+        return False
+
+    for candidate in source_root.rglob("*"):
+        if not _is_relevant_source_file(candidate):
+            continue
+        try:
+            if candidate.stat().st_mtime > assembly_mtime:
+                return True
+        except OSError:
+            return True
+    return False
 
 
 def ensure_declaration_discovery_tool(repo_root: Path) -> Path:
@@ -574,6 +626,7 @@ def _resolve_subject_assembly_paths(
         raise FileNotFoundError(f"subject source project missing: {project_path}")
 
     source_path_text = str(source.get("path") or "").strip()
+    stale_existing_output = False
     if not force_build:
         existing_solution_assemblies = _solution_assembly_paths(
             repo_root,
@@ -581,13 +634,17 @@ def _resolve_subject_assembly_paths(
             primary_project_path=project_path,
         )
         if existing_solution_assemblies:
-            return existing_solution_assemblies
+            if not _assemblies_are_stale(repo_root, manifest, existing_solution_assemblies):
+                return existing_solution_assemblies
+            stale_existing_output = True
 
         existing_primary_assembly = _find_primary_project_assembly(project_path)
         if existing_primary_assembly is not None:
-            return [existing_primary_assembly]
+            if not _assemblies_are_stale(repo_root, manifest, [existing_primary_assembly]):
+                return [existing_primary_assembly]
+            stale_existing_output = True
 
-    if not build_if_missing and not force_build:
+    if not build_if_missing and not force_build and not stale_existing_output:
         return []
 
     build_target = project_path

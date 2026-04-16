@@ -1,0 +1,23 @@
+{{~ for include in includes ~}}
+#include {{ include }}
+{{ end ~}}
+
+namespace
+{
+{{ object_model_section }}
+}
+
+{{~ for declaration in method_declarations ~}}
+{{ declaration }}
+{{ end ~}}
+
+{{~ for method_section in method_sections ~}}
+{{ method_section }}
+
+{{ end ~}}
+// Native AOT entry for {{ entry_subject_id }}
+// Managed symbol: {{ entry_symbol }}
+extern "C" int {{ native_entry_function_name }}(void)
+{
+    return {{ entry_native_symbol }}();
+}
