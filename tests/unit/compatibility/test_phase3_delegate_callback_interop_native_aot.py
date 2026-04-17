@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import shutil
 import subprocess
@@ -17,7 +17,7 @@ PROJECT_PATH = (
     / "subjects"
     / "SolutionCorePack"
     / "source"
-    / "FeatureSlices"
+    / "Proofs"
     / "CoreRuntimeFeatures"
     / "CoreRuntimeFeatures.csproj"
 )
@@ -26,7 +26,7 @@ DLL_PATH = (
     / "subjects"
     / "SolutionCorePack"
     / "source"
-    / "FeatureSlices"
+    / "Proofs"
     / "CoreRuntimeFeatures"
     / "bin"
     / "Release"
@@ -116,6 +116,30 @@ class Phase3DelegateCallbackInteropNativeAotTests(unittest.TestCase):
         self.assertIn("chaos_type_CoreRuntimeFeatures_DelegateCallbackInteropHandler", generated_cpp)
         self.assertIn(
             "reinterpret_cast<std::int32_t(*)(std::int32_t chaos_arg_0)>(chaos_delegate->chaos_delegate_method_ptr)",
+            generated_cpp,
+        )
+        self.assertIn(
+            "if (chaos_delegate->chaos_delegate_target == static_cast<std::intptr_t>(0) &&",
+            generated_cpp,
+        )
+        self.assertIn(
+            "chaos_delegate->chaos_delegate_invocation_count == static_cast<std::intptr_t>(0))",
+            generated_cpp,
+        )
+        self.assertIn(
+            "chaos_bridge->delegate_target = chaos_delegate->chaos_delegate_target;",
+            generated_cpp,
+        )
+        self.assertIn(
+            "chaos_bridge->delegate_invocation_list = chaos_delegate->chaos_delegate_invocation_list;",
+            generated_cpp,
+        )
+        self.assertIn(
+            "chaos_delegate->chaos_delegate_target = chaos_bridge->delegate_target;",
+            generated_cpp,
+        )
+        self.assertIn(
+            "chaos_delegate->chaos_delegate_invocation_count = chaos_bridge->delegate_invocation_count;",
             generated_cpp,
         )
 

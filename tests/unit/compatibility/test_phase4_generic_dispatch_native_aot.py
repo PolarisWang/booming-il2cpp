@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import shutil
 import subprocess
@@ -15,7 +15,7 @@ PROJECT_PATH = (
     / "subjects"
     / "SolutionCorePack"
     / "source"
-    / "FeatureSlices"
+    / "Proofs"
     / "CoreRuntimeFeatures"
     / "CoreRuntimeFeatures.csproj"
 )
@@ -24,7 +24,7 @@ DLL_PATH = (
     / "subjects"
     / "SolutionCorePack"
     / "source"
-    / "FeatureSlices"
+    / "Proofs"
     / "CoreRuntimeFeatures"
     / "bin"
     / "Release"
@@ -38,7 +38,7 @@ DISPATCH_SOURCE_PATH = (
     / "subjects"
     / "SolutionCorePack"
     / "source"
-    / "FeatureSlices"
+    / "Proofs"
     / "CoreRuntimeFeatures"
     / "ObjectModelAndDispatch"
     / "DispatchProof.cs"
@@ -48,7 +48,7 @@ INTERFACE_SOURCE_PATH = (
     / "subjects"
     / "SolutionCorePack"
     / "source"
-    / "FeatureSlices"
+    / "Proofs"
     / "CoreRuntimeFeatures"
     / "ObjectModelAndDispatch"
     / "InterfaceDispatchProof.cs"

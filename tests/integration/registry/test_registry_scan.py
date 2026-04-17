@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import importlib.util
 import json
@@ -698,17 +698,8 @@ class RegistryScanTests(unittest.TestCase):
             "HotUpdateHostPack/Program::Main()",
             hot_update_item["displaySourceEntry"],
         )
-        self.assertEqual(
-            {
-                "entryKind": 1,
-                "entrySlice": 1,
-            },
-            hot_update_item["displaySubjectEntrySelection"],
-        )
-        self.assertEqual(
-            "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
-            hot_update_item["displayWorkloadEntry"],
-        )
+        self.assertNotIn("displaySubjectEntrySelection", hot_update_item)
+        self.assertNotIn("displayWorkloadEntry", hot_update_item)
         self.assertNotIn("defaultSourceEntry", hot_update_item)
         self.assertNotIn("defaultSubjectEntrySelection", hot_update_item)
         self.assertNotIn("defaultWorkloadEntry", hot_update_item)
@@ -721,40 +712,22 @@ class RegistryScanTests(unittest.TestCase):
             "MixedExecutionFeaturePack/MixedExecutionProofEntry::Run()",
             mixed_execution_item["displaySourceEntry"],
         )
-        self.assertEqual(
-            {
-                "entryKind": 1,
-                "entrySlice": 2,
-            },
-            mixed_execution_item["displaySubjectEntrySelection"],
-        )
-        self.assertEqual(
-            "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
-            mixed_execution_item["displayWorkloadEntry"],
-        )
+        self.assertNotIn("displaySubjectEntrySelection", mixed_execution_item)
+        self.assertNotIn("displayWorkloadEntry", mixed_execution_item)
         self.assertNotIn("defaultSourceEntry", mixed_execution_item)
         self.assertNotIn("defaultSubjectEntrySelection", mixed_execution_item)
         self.assertNotIn("defaultWorkloadEntry", mixed_execution_item)
 
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
             solution_core_item["defaultPrimaryProjectPath"],
         )
         self.assertEqual(
             "CoreRuntimeFeatures/InterfaceDispatchProofEntry::Run()",
             solution_core_item["displaySourceEntry"],
         )
-        self.assertEqual(
-            {
-                "entryKind": 1,
-                "entrySlice": 11,
-            },
-            solution_core_item["displaySubjectEntrySelection"],
-        )
-        self.assertEqual(
-            "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
-            solution_core_item["displayWorkloadEntry"],
-        )
+        self.assertNotIn("displaySubjectEntrySelection", solution_core_item)
+        self.assertNotIn("displayWorkloadEntry", solution_core_item)
         self.assertNotIn("defaultSourceEntry", solution_core_item)
         self.assertNotIn("defaultSubjectEntrySelection", solution_core_item)
         self.assertNotIn("defaultWorkloadEntry", solution_core_item)
@@ -863,3 +836,4 @@ class RegistryScanTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

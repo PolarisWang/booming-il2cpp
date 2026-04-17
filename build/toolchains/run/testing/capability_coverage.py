@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from enum import IntEnum
+import json
 from pathlib import Path
 from typing import Any
 import sys
@@ -23,219 +24,9 @@ class BodyAvailabilityCode(IntEnum):
     UNSUPPORTED = 6
 
 
-_OWNER_SUBJECT_BY_FAMILY: dict[int, str] = {
-    1: "SolutionCorePack",
-    2: "SolutionCorePack",
-    3: "SolutionCorePack",
-    4: "SolutionCorePack",
-    5: "SolutionCorePack",
-    6: "SolutionCorePack",
-    7: "SolutionCorePack",
-    8: "SolutionCorePack",
-    9: "SolutionCorePack",
-    10: "SolutionCorePack",
-    11: "SolutionCorePack",
-    12: "SolutionCorePack",
-    13: "HotUpdateHostPack",
-    14: "MixedExecutionFeaturePack",
-}
-
-_CAPABILITY_FAMILY_BY_ITEM: dict[int, int] = {
-    1: 1,
-    2: 1,
-    3: 1,
-    4: 1,
-    5: 1,
-    6: 1,
-    7: 1,
-    8: 2,
-    9: 2,
-    10: 2,
-    11: 2,
-    12: 2,
-    13: 2,
-    14: 3,
-    15: 3,
-    16: 3,
-    17: 4,
-    18: 4,
-    19: 4,
-    20: 4,
-    21: 6,
-    22: 6,
-    23: 6,
-    24: 6,
-    25: 6,
-    26: 6,
-    27: 5,
-    28: 5,
-    29: 5,
-    30: 5,
-    31: 7,
-    32: 7,
-    33: 7,
-    34: 7,
-    35: 8,
-    36: 8,
-    37: 8,
-    38: 8,
-    39: 9,
-    40: 9,
-    41: 9,
-    42: 9,
-    43: 10,
-    44: 10,
-    45: 10,
-    46: 10,
-    47: 11,
-    48: 11,
-    49: 11,
-    50: 11,
-    51: 12,
-    52: 12,
-    53: 12,
-    54: 13,
-    55: 13,
-    56: 13,
-    57: 13,
-    58: 13,
-    59: 13,
-    60: 13,
-    61: 14,
-    62: 14,
-    63: 14,
-    64: 14,
-    65: 14,
-    66: 14,
-    67: 2,
-    68: 2,
-}
-
-_SUPPORT_STATES_BY_ITEM: dict[int, tuple[BodyAvailabilityCode, ...]] = {
-    1: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    2: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    3: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    4: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    5: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    6: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    7: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    8: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    9: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    10: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    11: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    12: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    13: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    14: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    15: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    16: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    17: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    18: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    19: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    20: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    21: (BodyAvailabilityCode.METADATA_ONLY, BodyAvailabilityCode.NATIVE_GENERATED),
-    22: (BodyAvailabilityCode.METADATA_ONLY, BodyAvailabilityCode.NATIVE_GENERATED),
-    23: (BodyAvailabilityCode.METADATA_ONLY,),
-    24: (BodyAvailabilityCode.METADATA_ONLY, BodyAvailabilityCode.NATIVE_GENERATED),
-    25: (BodyAvailabilityCode.METADATA_ONLY, BodyAvailabilityCode.NATIVE_GENERATED),
-    26: (BodyAvailabilityCode.METADATA_ONLY, BodyAvailabilityCode.NATIVE_GENERATED),
-    27: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    28: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    29: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    30: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    31: (BodyAvailabilityCode.NATIVE_GENERATED, BodyAvailabilityCode.EXTERNAL_RUNTIME),
-    32: (BodyAvailabilityCode.NATIVE_GENERATED, BodyAvailabilityCode.EXTERNAL_RUNTIME),
-    33: (BodyAvailabilityCode.NATIVE_GENERATED, BodyAvailabilityCode.EXTERNAL_RUNTIME),
-    34: (BodyAvailabilityCode.NATIVE_GENERATED, BodyAvailabilityCode.EXTERNAL_RUNTIME),
-    35: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    36: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    37: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    38: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    39: (BodyAvailabilityCode.NATIVE_GENERATED, BodyAvailabilityCode.METADATA_ONLY),
-    40: (BodyAvailabilityCode.NATIVE_GENERATED, BodyAvailabilityCode.METADATA_ONLY),
-    41: (BodyAvailabilityCode.NATIVE_GENERATED, BodyAvailabilityCode.METADATA_ONLY),
-    42: (BodyAvailabilityCode.NATIVE_GENERATED, BodyAvailabilityCode.METADATA_ONLY),
-    43: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    44: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    45: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    46: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    47: (BodyAvailabilityCode.METADATA_ONLY, BodyAvailabilityCode.UNSUPPORTED),
-    48: (BodyAvailabilityCode.METADATA_ONLY, BodyAvailabilityCode.UNSUPPORTED),
-    49: (BodyAvailabilityCode.METADATA_ONLY, BodyAvailabilityCode.UNSUPPORTED),
-    50: (BodyAvailabilityCode.METADATA_ONLY, BodyAvailabilityCode.UNSUPPORTED),
-    51: (BodyAvailabilityCode.METADATA_ONLY, BodyAvailabilityCode.NATIVE_GENERATED),
-    52: (BodyAvailabilityCode.METADATA_ONLY, BodyAvailabilityCode.NATIVE_GENERATED),
-    53: (BodyAvailabilityCode.METADATA_ONLY, BodyAvailabilityCode.NATIVE_GENERATED),
-    54: (BodyAvailabilityCode.BRIDGE_DISPATCH, BodyAvailabilityCode.INTERPRETER_READY),
-    55: (BodyAvailabilityCode.BRIDGE_DISPATCH, BodyAvailabilityCode.INTERPRETER_READY),
-    56: (BodyAvailabilityCode.BRIDGE_DISPATCH, BodyAvailabilityCode.INTERPRETER_READY),
-    57: (BodyAvailabilityCode.BRIDGE_DISPATCH, BodyAvailabilityCode.INTERPRETER_READY),
-    58: (BodyAvailabilityCode.BRIDGE_DISPATCH, BodyAvailabilityCode.INTERPRETER_READY),
-    59: (BodyAvailabilityCode.BRIDGE_DISPATCH, BodyAvailabilityCode.INTERPRETER_READY),
-    60: (BodyAvailabilityCode.BRIDGE_DISPATCH, BodyAvailabilityCode.INTERPRETER_READY),
-    61: (
-        BodyAvailabilityCode.BRIDGE_DISPATCH,
-        BodyAvailabilityCode.INTERPRETER_READY,
-        BodyAvailabilityCode.NATIVE_GENERATED,
-    ),
-    62: (
-        BodyAvailabilityCode.BRIDGE_DISPATCH,
-        BodyAvailabilityCode.INTERPRETER_READY,
-        BodyAvailabilityCode.NATIVE_GENERATED,
-    ),
-    63: (
-        BodyAvailabilityCode.BRIDGE_DISPATCH,
-        BodyAvailabilityCode.INTERPRETER_READY,
-        BodyAvailabilityCode.NATIVE_GENERATED,
-    ),
-    64: (
-        BodyAvailabilityCode.BRIDGE_DISPATCH,
-        BodyAvailabilityCode.INTERPRETER_READY,
-        BodyAvailabilityCode.NATIVE_GENERATED,
-    ),
-    65: (
-        BodyAvailabilityCode.BRIDGE_DISPATCH,
-        BodyAvailabilityCode.INTERPRETER_READY,
-        BodyAvailabilityCode.NATIVE_GENERATED,
-    ),
-    66: (
-        BodyAvailabilityCode.BRIDGE_DISPATCH,
-        BodyAvailabilityCode.INTERPRETER_READY,
-        BodyAvailabilityCode.NATIVE_GENERATED,
-    ),
-    67: (BodyAvailabilityCode.NATIVE_GENERATED,),
-    68: (BodyAvailabilityCode.NATIVE_GENERATED,),
-}
-
-_BENCHMARK_REQUIRED_ITEMS = {
-    1,
-    10,
-    11,
-    15,
-    22,
-    31,
-    32,
-    33,
-    34,
-    36,
-    37,
-    43,
-    45,
-    46,
-    51,
-    52,
-    54,
-    56,
-    60,
-    61,
-    63,
-}
-
-_PROOF_OPTIONAL_ITEMS = {
-    47,
-    48,
-    49,
-    50,
-}
+_SUPPORTED_SCHEMA_VERSION = 1
+_DEFAULT_REPO_ROOT = Path(__file__).resolve().parents[4]
+_FEATURE_CONTRACT_CACHE: dict[str, dict[int, dict[str, Any]]] = {}
 
 
 def _int_value(value: Any) -> int:
@@ -245,24 +36,134 @@ def _int_value(value: Any) -> int:
         return 0
 
 
-def resolve_capability_contract(*, capability_family: Any, capability_item: Any) -> dict[str, Any]:
+def _bool_value(value: Any, *, default: bool) -> bool:
+    if value is None:
+        return default
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return bool(value)
+    if isinstance(value, str):
+        normalized = value.strip().lower()
+        if normalized in {"1", "true", "yes"}:
+            return True
+        if normalized in {"0", "false", "no", ""}:
+            return False
+    return default
+
+
+def _normalize_repo_root(repo_root: Path | str | None) -> Path:
+    if repo_root is None:
+        return _DEFAULT_REPO_ROOT
+    if isinstance(repo_root, Path):
+        return repo_root
+    return Path(repo_root)
+
+
+def _subject_features_root(repo_root: Path) -> Path:
+    return repo_root / "subjects"
+
+
+def _cache_key(repo_root: Path) -> str:
+    return str(repo_root.resolve())
+
+
+def _normalize_feature_entry(*, subject_id: str, raw_entry: Any) -> dict[str, Any] | None:
+    if not isinstance(raw_entry, dict):
+        return None
+
+    capability_item = _int_value(raw_entry.get("capabilityItem"))
+    if capability_item <= 0:
+        return None
+
+    support_states = [
+        _int_value(state)
+        for state in raw_entry.get("supportStates", [])
+        if _int_value(state) >= 0
+    ]
+
+    return {
+        "capabilityFamily": _int_value(raw_entry.get("capabilityFamily")),
+        "capabilityItem": capability_item,
+        "ownerSubjectId": subject_id,
+        "supportStates": support_states,
+        "proofRequired": _bool_value(raw_entry.get("proofRequired"), default=True),
+        "benchmarkRequired": _bool_value(raw_entry.get("benchmarkRequired"), default=False),
+    }
+
+
+def _load_feature_contracts(repo_root: Path) -> dict[int, dict[str, Any]]:
+    cache_key = _cache_key(repo_root)
+    cached_contracts = _FEATURE_CONTRACT_CACHE.get(cache_key)
+    if cached_contracts is not None:
+        return cached_contracts
+
+    contracts_by_item: dict[int, dict[str, Any]] = {}
+    subjects_root = _subject_features_root(repo_root)
+    if not subjects_root.is_dir():
+        _FEATURE_CONTRACT_CACHE[cache_key] = contracts_by_item
+        return contracts_by_item
+
+    for feature_path in sorted(subjects_root.glob("*/subject.features.json")):
+        payload = json.loads(feature_path.read_text(encoding="utf-8"))
+        schema_version = _int_value(payload.get("schemaVersion"))
+        if schema_version != _SUPPORTED_SCHEMA_VERSION:
+            raise ValueError(f"unsupported subject.features.json schemaVersion: {feature_path}")
+
+        subject_id = str(payload.get("subjectId") or feature_path.parent.name).strip()
+        if not subject_id:
+            raise ValueError(f"subject.features.json missing subjectId: {feature_path}")
+
+        for raw_entry in payload.get("features", []):
+            normalized_entry = _normalize_feature_entry(subject_id=subject_id, raw_entry=raw_entry)
+            if normalized_entry is None:
+                continue
+
+            capability_item = int(normalized_entry["capabilityItem"])
+            existing_entry = contracts_by_item.get(capability_item)
+            if existing_entry is not None and existing_entry["ownerSubjectId"] != subject_id:
+                raise ValueError(
+                    "duplicate capability ownership in subject.features.json: "
+                    f"item={capability_item}, owners={existing_entry['ownerSubjectId']} and {subject_id}"
+                )
+            contracts_by_item[capability_item] = normalized_entry
+
+    _FEATURE_CONTRACT_CACHE[cache_key] = contracts_by_item
+    return contracts_by_item
+
+
+def resolve_capability_contract(
+    *,
+    capability_family: Any,
+    capability_item: Any,
+    repo_root: Path | str | None = None,
+) -> dict[str, Any]:
     capability_item_value = _int_value(capability_item)
     declared_family_value = _int_value(capability_family)
-    mapped_family_value = _CAPABILITY_FAMILY_BY_ITEM.get(capability_item_value, 0)
-    resolved_family_value = declared_family_value or mapped_family_value
-    support_states = [
-        int(state)
-        for state in _SUPPORT_STATES_BY_ITEM.get(capability_item_value, ())
-    ]
+    contracts_by_item = _load_feature_contracts(_normalize_repo_root(repo_root))
+    feature_contract = contracts_by_item.get(capability_item_value)
+
+    resolved_family_value = declared_family_value
+    support_states: list[int] = []
+    owner_subject_id = ""
+    proof_required = True
+    benchmark_required = False
+
+    if feature_contract is not None:
+        resolved_family_value = _int_value(feature_contract.get("capabilityFamily")) or declared_family_value
+        support_states = [int(state) for state in feature_contract.get("supportStates", [])]
+        owner_subject_id = str(feature_contract.get("ownerSubjectId") or "")
+        proof_required = bool(feature_contract.get("proofRequired"))
+        benchmark_required = bool(feature_contract.get("benchmarkRequired"))
 
     return {
         "capabilityFamily": resolved_family_value,
         "capabilityFamilyLabel": declared_metadata_labels_module.capability_family_label(resolved_family_value),
         "capabilityItem": capability_item_value,
         "capabilityItemLabel": declared_metadata_labels_module.capability_item_label(capability_item_value),
-        "ownerSubjectId": _OWNER_SUBJECT_BY_FAMILY.get(resolved_family_value, ""),
+        "ownerSubjectId": owner_subject_id,
         "supportStates": support_states,
         "supportStateLabels": declared_metadata_labels_module.body_availability_labels(support_states),
-        "proofRequired": capability_item_value not in _PROOF_OPTIONAL_ITEMS,
-        "benchmarkRequired": capability_item_value in _BENCHMARK_REQUIRED_ITEMS,
+        "proofRequired": proof_required,
+        "benchmarkRequired": benchmark_required,
     }

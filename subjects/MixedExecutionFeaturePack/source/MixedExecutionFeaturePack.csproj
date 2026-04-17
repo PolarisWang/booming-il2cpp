@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -8,13 +8,17 @@
     <RootNamespace>MixedExecutionFeaturePack</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Archetypes\\**\\*.cs" />
+    <Compile Remove="EngineeringScenarios\\**\\*.cs" />
     <ProjectReference Include="../../../src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj" />
     <ProjectReference Include="../../../src/managed/Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.csproj" />
     <ProjectReference Include="../../../src/managed/Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.csproj" />
     <ProjectReference Include="../../../src/managed/Chaos.IL2CPP.Loader/Chaos.IL2CPP.Loader.csproj" />
     <ProjectReference Include="../../../src/managed/Chaos.IL2CPP.Interpreter/Chaos.IL2CPP.Interpreter.csproj" />
-    <ProjectReference Include="Archetypes/MixedBridgeSolution/InterpreterArithmeticProof/InterpreterArithmeticProof.csproj" />
+    <ProjectReference Include="EngineeringScenarios/MixedBridgeSolution/InterpreterArithmeticProof/InterpreterArithmeticProof.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="MixedExecutionFeaturePack.DeclaredProofHost" />
+    <InternalsVisibleTo Include="MixedExecutionFeaturePack.DeclaredBenchmarkHost" />
   </ItemGroup>
 </Project>
 

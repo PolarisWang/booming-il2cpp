@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SOURCE_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "FeatureSlices" / "CoreRuntimeFeatures"
+SOURCE_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Proofs" / "CoreRuntimeFeatures"
 METADATA_SUPPLEMENT_SOURCE_PATH = SOURCE_ROOT / "ReflectionAndMetadata" / "MetadataSupplementProof.cs"
 AOT_CLOSURE_VALIDATION_SOURCE_PATH = SOURCE_ROOT / "GenericsAndCollections" / "AotClosureValidationProof.cs"
 

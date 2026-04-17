@@ -10,6 +10,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 GENERATED_MANAGED_HOSTS_MODULE_PATH = (
     REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "generated_managed_hosts.py"
 )
+TEMPLATES_ROOT = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "templates"
 
 
 def load_module(path: Path, module_name: str):
@@ -58,6 +59,16 @@ def make_declared_entry(
 
 
 class GeneratedManagedHostsTests(unittest.TestCase):
+    def test_generated_managed_host_renderers_are_backed_by_template_assets(self) -> None:
+        module_source = GENERATED_MANAGED_HOSTS_MODULE_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("templates/managed-proof-host.cs.tmpl", module_source)
+        self.assertIn("templates/managed-benchmark-host.cs.tmpl", module_source)
+        self.assertIn("templates/managed-declared-host.csproj.tmpl", module_source)
+        self.assertTrue((TEMPLATES_ROOT / "managed-proof-host.cs.tmpl").is_file())
+        self.assertTrue((TEMPLATES_ROOT / "managed-benchmark-host.cs.tmpl").is_file())
+        self.assertTrue((TEMPLATES_ROOT / "managed-declared-host.csproj.tmpl").is_file())
+
     def test_assign_entry_indexes_sorts_each_family_by_stable_id(self) -> None:
         generated_hosts_module = load_module(
             GENERATED_MANAGED_HOSTS_MODULE_PATH,

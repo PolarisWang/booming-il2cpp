@@ -28,7 +28,9 @@
 - Python 测试优先模板化，尽量少保留手写 C# fixture。
 - 手工 benchmark、dashboard 结果和控制台输出都不能替代自动化测试。
 - managed 层测试结果优先使用 `Chaos.TestFramework.Sdk.Assert`，不要依赖 `Console.WriteLine` 再外部判定。
+- 测试阶段遇到 `dotnet build` / `dotnet test` / `msbuild` 编译崩溃时，必须先查根因并修复，不能靠重试或跳过当前验证继续。
 
 ## 最近变更
 
+- `2026-04-17`：新增测试阶段 `dotnet` 编译崩溃闸门，要求编译崩溃先追根因再继续红绿循环。
 - `2026-04-17`：补充仓库级 TDD 规则，正式覆盖 `Chaos.TestFramework`、collection file、generated runner、dashboard 和 IL2CPP codegen 主线。

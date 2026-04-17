@@ -73,6 +73,7 @@ class WorkspaceDeclaredCollectionTests(unittest.TestCase):
         collection_path.write_text(
             json.dumps(
                 {
+                    "schemaVersion": 1,
                     "subjectId": subject_id,
                     "declaredBenchmarks": [{"stableId": "allocation", "alias": "allocation-bench", "modes": 1}],
                 },
@@ -121,6 +122,7 @@ class WorkspaceDeclaredCollectionTests(unittest.TestCase):
                 host_kind="benchmark-host",
             )
             self.assertIsNotNone(collection)
+            self.assertEqual(1, collection["schemaVersion"])
             self.assertEqual("allocation-bench", collection["declaredBenchmarks"][0]["alias"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)

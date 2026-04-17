@@ -3,6 +3,8 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
+from tests.support import read_contracts_source
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
@@ -19,7 +21,6 @@ MIXED_EXECUTION_PROOF_ENTRY_PATH = (
     / "subjects"
     / "MixedExecutionFeaturePack"
     / "source"
-    / "ManagedBridge"
     / "Proofs"
     / "MixedExecutionProofEntry.cs"
 )
@@ -28,7 +29,6 @@ MIXED_DELEGATE_FLOW_PROOF_ENTRY_PATH = (
     / "subjects"
     / "MixedExecutionFeaturePack"
     / "source"
-    / "ManagedBridge"
     / "Proofs"
     / "MixedDelegateFlowProofEntry.cs"
 )
@@ -109,7 +109,7 @@ BRIDGE_ROUNDTRIP_FIXTURE_PATH = (
 
 class Phase2RuntimeSharedContractConsumerTests(unittest.TestCase):
     def test_contracts_expose_shared_method_identity_helpers_for_runtime_consumers(self) -> None:
-        contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")
+        contracts_source = read_contracts_source(REPO_ROOT)
 
         for required_fragment in [
             "class ManagedMethodIdentityResolver",

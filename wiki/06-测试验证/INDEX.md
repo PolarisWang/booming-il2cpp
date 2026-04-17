@@ -39,9 +39,15 @@
 - native 与 hotupdate 的执行细节通过 manifest 分层，不污染 collection contract。
 - dashboard 和报告只消费正式产物，不能替代 collection contract 本身。
 - Python 自动化测试优先模板化；手工 benchmark、dashboard 观察和控制台输出都不能替代自动化验证。
+- 测试阶段只要 `dotnet build` / `dotnet test` / `msbuild` 发生编译崩溃，就必须先检查崩溃原因并修复；不能靠重试、跳过或降级为环境噪音继续推进。
+- `subject.features.json` 是 owner subject 与 proof / benchmark obligation 的正式 authority。
+- canonical proof / benchmark / host correctness 不允许使用 `Console.WriteLine` / `ChaosEvidenceKind.Stdout`。
+- product pipeline 不允许回退到旧入口协议或旧 subject 命名。
 - 不保留长期 `Annotation` alias 或旧双轨入口。
 
 ## 最近更新
 
 - `2026-04-17`：新增 [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md)，固定 AOT 主线 feature 的 owner subject、自测顺序与 collector/registry/workspace 三层闸门。
 - `2026-04-17`：把主线升级为 `Sdk + Runtime + collector + manifest` 分层，并明确 `Assert` 下沉到 `Sdk`、native/hotupdate 分别采用各宿主和 patch/host 分离。
+- `2026-04-17`：新增测试阶段 `dotnet` 编译崩溃闸门；编译崩溃必须先查根因并修复，不能靠重试或跳过继续测试。
+- `2026-04-18`：补充 `subject.features.json` authority、canonical verification 禁止 stdout 判定，以及旧入口协议/旧目录语义 purge contract。

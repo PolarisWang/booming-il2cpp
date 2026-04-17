@@ -697,6 +697,112 @@ class SubjectPlannerTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_declared_benchmark_selection_ignores_manifest_workload_entry_without_explicit_override(self) -> None:
+        planner_module = load_module(
+            PLANNER_MODULE_PATH,
+            "chaos_subject_planner_declared_entry_ignores_manifest_workload",
+        )
+        repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"declared-entry-workload-{uuid.uuid4().hex}"
+        manifest_path = repo_root / "subjects" / "FixtureDeclaredWorkloadIsolation" / "subject.manifest.json"
+        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+
+        manifest = {
+            "subjectId": "FixtureDeclaredWorkloadIsolation",
+            "displayName": "FixtureDeclaredWorkloadIsolation",
+            "category": "benchmark",
+            "defaultGoal": "perf.release",
+            "defaultMatrix": "windows-managed-perf",
+            "defaultValidationProfile": "perf-profile",
+            "source": {
+                "type": "dotnet-project",
+                "path": "subjects/FixtureDeclaredWorkloadIsolation/source/FixtureDeclaredWorkloadIsolation.csproj",
+                "entry": "FixtureDeclaredWorkloadIsolation/Program::Main()",
+            },
+            "workloadEntry": "FixtureDeclaredWorkloadIsolation/Program::RunWorkloadA()",
+            "validationProfiles": {
+                "perf-profile": ["perf"],
+            },
+            "validation": {
+                "perf": {
+                    "kind": "perf",
+                    "driver": "csharp-perf-harness",
+                    "defaultVariant": "PROFILE",
+                }
+            },
+            "executionPipelines": [
+                {
+                    "pipelineId": "managed-benchmark",
+                    "stages": [
+                        {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source", "dependsOn": []},
+                        {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input", "dependsOn": ["source-resolve"]},
+                        {"stageId": "runtime-perf-collect", "kind": "runtime-perf-collect", "scope": "matrix", "bucket": "runtime", "dependsOn": ["host-input-build"]},
+                        {"stageId": "report-assemble", "kind": "report-assemble", "scope": "matrix", "bucket": "report", "dependsOn": ["runtime-perf-collect"]},
+                    ],
+                }
+            ],
+            "environmentMatrices": [
+                {
+                    "matrixId": "windows-managed-perf",
+                    "pipelineId": "managed-benchmark",
+                    "supportedGoals": ["perf.release"],
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "dotnet-managed",
+                        "runtimeProfile": "managed-perf-release",
+                    },
+                    "validationIntent": {
+                        "validationMode": "perf",
+                        "adaptationLevel": "managed-runtime",
+                        "expectedOutcome": "pass",
+                    },
+                    "artifactPlan": {
+                        "requiredBuckets": ["source", "host-input", "runtime", "report"],
+                        "evidenceTerminalBucket": "report",
+                    },
+                }
+            ],
+        }
+
+        try:
+            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+            plan = planner_module.build_plan(
+                repo_root,
+                "FixtureDeclaredWorkloadIsolation",
+                goal_id="perf.release",
+                matrix_id="windows-managed-perf",
+                run_id="fixture-declared-workload-isolation",
+                entry_selection={
+                    "family": "declared-benchmark",
+                    "stableId": "bench/a",
+                    "alias": "bench-a",
+                    "entryIndex": 1,
+                },
+            )
+
+            manifest["workloadEntry"] = "FixtureDeclaredWorkloadIsolation/Program::RunWorkloadB()"
+            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            updated_plan = planner_module.build_plan(
+                repo_root,
+                "FixtureDeclaredWorkloadIsolation",
+                goal_id="perf.release",
+                matrix_id="windows-managed-perf",
+                run_id="fixture-declared-workload-isolation",
+                entry_selection={
+                    "family": "declared-benchmark",
+                    "stableId": "bench/a",
+                    "alias": "bench-a",
+                    "entryIndex": 1,
+                },
+            )
+
+            self.assertEqual("", plan["selection"]["workloadEntry"])
+            self.assertEqual("", updated_plan["selection"]["workloadEntry"])
+            self.assertEqual(plan["stagePlan"][0]["fingerprint"], updated_plan["stagePlan"][0]["fingerprint"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
     def test_planner_surfaces_matrix_workload_entry_for_solution_style_perf_subject(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_solution_style_matrix_workload_entry")
         subject_id = "FixtureMatrixPerfSubject"

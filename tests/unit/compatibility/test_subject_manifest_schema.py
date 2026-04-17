@@ -234,7 +234,7 @@ class SubjectManifestSchemaTests(unittest.TestCase):
         self.assertEqual("require", capabilities["testDeclarationMode"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
             manifest["source"]["primaryProjectPath"],
         )
         self.assertEqual("CoreRuntimeFeatures/ProofEntry::Run()", manifest["source"]["entry"])
@@ -337,7 +337,7 @@ class SubjectManifestSchemaTests(unittest.TestCase):
                 "sourceModel": "dotnet-solution",
                 "dependencyModel": "project-reference",
                 "executablePlan": "managed-host",
-                "engineeringProfile": "managed-output",
+                "engineeringProfile": "hot-update-host",
                 "availability": {
                     "linux-x64": "ready",
                     "macos-arm64": "ready",
@@ -369,7 +369,7 @@ class SubjectManifestSchemaTests(unittest.TestCase):
 
     def test_retained_subject_sources_declare_chaos_attributes_in_csharp_api(self) -> None:
         expected_sources = {
-            "subjects/SolutionCorePack/source/FeatureSlices/CoreRuntimeFeatures/AsyncAndThreading/TaskAndValueTaskFlowProof.cs": [
+            "subjects/SolutionCorePack/source/Proofs/CoreRuntimeFeatures/AsyncAndThreading/TaskAndValueTaskFlowProof.cs": [
                 "[ChaosUnitTest(",
                 'Alias = "task-valuetask-flow-proof"',
             ],
@@ -385,15 +385,15 @@ class SubjectManifestSchemaTests(unittest.TestCase):
                 "[ChaosBenchmark(",
                 'Alias = "hot-update-load-bench"',
             ],
-            "subjects/MixedExecutionFeaturePack/source/ManagedBridge/Proofs/MixedExecutionProofEntry.cs": [
+            "subjects/MixedExecutionFeaturePack/source/Proofs/MixedExecutionProofEntry.cs": [
                 "[ChaosUnitTest(",
                 'Alias = "mixed-execution-proof"',
             ],
-            "subjects/MixedExecutionFeaturePack/source/ManagedBridge/Benchmarks/MixedExecutionBenchmark.cs": [
+            "subjects/MixedExecutionFeaturePack/source/Benchmarks/MixedExecutionBenchmark.cs": [
                 "[ChaosBenchmark(",
                 'Alias = "mixed-execution-bench"',
             ],
-            "subjects/MixedExecutionFeaturePack/source/ManagedBridge/Benchmarks/MixedExecutionNativeBenchmark.cs": [
+            "subjects/MixedExecutionFeaturePack/source/Benchmarks/MixedExecutionNativeBenchmark.cs": [
                 "[ChaosBenchmark(",
                 'Alias = "mixed-execution-native-bench"',
             ],
@@ -412,7 +412,7 @@ class SubjectManifestSchemaTests(unittest.TestCase):
             / "subjects"
             / "MixedExecutionFeaturePack"
             / "source"
-            / "Archetypes"
+            / "EngineeringScenarios"
             / "MixedBridgeSolution"
             / "InterpreterArithmeticProof"
             / "InterpreterArithmeticProof.csproj"
@@ -422,7 +422,7 @@ class SubjectManifestSchemaTests(unittest.TestCase):
             / "subjects"
             / "MixedExecutionFeaturePack"
             / "source"
-            / "Archetypes"
+            / "EngineeringScenarios"
             / "MixedBridgeSolution"
             / "InterpreterArithmeticProof"
             / "Program.cs"
@@ -758,3 +758,4 @@ class SubjectManifestSchemaTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

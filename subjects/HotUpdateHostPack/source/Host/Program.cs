@@ -8,6 +8,7 @@ internal static class Program
     [
         HotUpdateSkeletonProofEntry.Run,
         PatchIntegrityProofEntry.Run,
+        PatchCallbackFlowProofEntry.Run,
         MetadataSupplementProofEntry.Run,
         MethodReplacementProofEntry.Run,
         SharedContractProofEntry.Run,

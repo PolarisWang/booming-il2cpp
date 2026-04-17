@@ -726,7 +726,7 @@ public sealed partial class NativeAotLoweringPlanner
 		stringBuilder6.AppendLine(ref handler);
 	}
 
-	private static void EmitLinearFieldLoad(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
+	private void EmitLinearFieldLoad(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
 	{
 		AotCoreIrReferenceArtifact requiredTargetReference = GetRequiredTargetReference(instruction);
 		if (requiredTargetReference.Kind != AotCoreIrReferenceKind.Field)
@@ -737,6 +737,7 @@ public sealed partial class NativeAotLoweringPlanner
 		StringBuilder.AppendInterpolatedStringHandler handler;
 		if (instruction.RuntimeServiceKind == AotCoreIrRuntimeServiceKind.LoadStaticField)
 		{
+			EmitStaticInitializationForField(builder, requiredTargetReference.SubjectId, indentation);
 			stringBuilder = builder;
 			StringBuilder stringBuilder2 = stringBuilder;
 			handler = new StringBuilder.AppendInterpolatedStringHandler(39, 2, stringBuilder);

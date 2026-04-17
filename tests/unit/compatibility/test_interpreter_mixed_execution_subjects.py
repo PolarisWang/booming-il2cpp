@@ -6,6 +6,8 @@ import uuid
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+from tests.support import read_loader_stage_source
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 CORE_SOLUTION_PATH = REPO_ROOT / "solutions" / "core" / "windows" / "chaos-il2cpp-core.sln"
@@ -25,7 +27,7 @@ INTERPRETER_ARITHMETIC_PROJECT_PATH = (
     / "subjects"
     / "MixedExecutionFeaturePack"
     / "source"
-    / "Archetypes"
+    / "EngineeringScenarios"
     / "MixedBridgeSolution"
     / "InterpreterArithmeticProof"
     / "InterpreterArithmeticProof.csproj"
@@ -35,31 +37,31 @@ MIXED_BRIDGE_SOLUTION_PATH = (
     / "subjects"
     / "MixedExecutionFeaturePack"
     / "source"
-    / "Archetypes"
+    / "EngineeringScenarios"
     / "MixedBridgeSolution"
     / "MixedBridgeSolution.sln"
 )
 INTERPRETER_LOWERING_ROOT = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack"
 INTERPRETER_LOWERING_MANIFEST_PATH = INTERPRETER_LOWERING_ROOT / "subject.manifest.json"
 INTERPRETER_LOWERING_PROJECT_PATH = INTERPRETER_LOWERING_ROOT / "source" / "MixedExecutionFeaturePack.csproj"
-INTERPRETER_LOWERING_PROGRAM_PATH = INTERPRETER_LOWERING_ROOT / "source" / "Lowering" / "InterpreterLoweringProofEntry.cs"
+INTERPRETER_LOWERING_PROGRAM_PATH = INTERPRETER_LOWERING_ROOT / "source" / "Proofs" / "InterpreterLoweringProofEntry.cs"
 MIXED_EXECUTION_PROOF_ROOT = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack"
 MIXED_EXECUTION_PROOF_MANIFEST_PATH = MIXED_EXECUTION_PROOF_ROOT / "subject.manifest.json"
 MIXED_EXECUTION_PROOF_PROJECT_PATH = MIXED_EXECUTION_PROOF_ROOT / "source" / "MixedExecutionFeaturePack.csproj"
-MIXED_EXECUTION_PROOF_PROGRAM_PATH = MIXED_EXECUTION_PROOF_ROOT / "source" / "ManagedBridge" / "Proofs" / "MixedExecutionProofEntry.cs"
+MIXED_EXECUTION_PROOF_PROGRAM_PATH = MIXED_EXECUTION_PROOF_ROOT / "source" / "Proofs" / "MixedExecutionProofEntry.cs"
 INTERPRETER_ARITHMETIC_PROOF_PATH = (
-    MIXED_EXECUTION_PROOF_ROOT / "source" / "ManagedBridge" / "Proofs" / "InterpreterArithmeticProofEntry.cs"
+    MIXED_EXECUTION_PROOF_ROOT / "source" / "Proofs" / "InterpreterArithmeticProofEntry.cs"
 )
 MIXED_GENERIC_FLOW_PROOF_PATH = (
-    MIXED_EXECUTION_PROOF_ROOT / "source" / "ManagedBridge" / "Proofs" / "MixedGenericFlowProofEntry.cs"
+    MIXED_EXECUTION_PROOF_ROOT / "source" / "Proofs" / "MixedGenericFlowProofEntry.cs"
 )
 MIXED_EXCEPTION_FLOW_PROOF_PATH = (
-    MIXED_EXECUTION_PROOF_ROOT / "source" / "ManagedBridge" / "Proofs" / "MixedExceptionFlowProofEntry.cs"
+    MIXED_EXECUTION_PROOF_ROOT / "source" / "Proofs" / "MixedExceptionFlowProofEntry.cs"
 )
 MIXED_DELEGATE_FLOW_PROOF_PATH = (
-    MIXED_EXECUTION_PROOF_ROOT / "source" / "ManagedBridge" / "Proofs" / "MixedDelegateFlowProofEntry.cs"
+    MIXED_EXECUTION_PROOF_ROOT / "source" / "Proofs" / "MixedDelegateFlowProofEntry.cs"
 )
-MIXED_EXECUTION_HOST_PROGRAM_PATH = MIXED_EXECUTION_PROOF_ROOT / "source" / "ManagedBridge" / "Program.cs"
+MIXED_EXECUTION_HOST_PROGRAM_PATH = MIXED_EXECUTION_PROOF_ROOT / "source" / "Host" / "Program.cs"
 NATIVE_INTERPRETER_ROOT = REPO_ROOT / "src" / "native" / "interpreter"
 NATIVE_INTERPRETER_CMAKE_PATH = NATIVE_INTERPRETER_ROOT / "CMakeLists.txt"
 NATIVE_INTERPRETER_HEADER_PATH = NATIVE_INTERPRETER_ROOT / "interpreter_vm.h"
@@ -226,7 +228,7 @@ class Phase7InterpreterMixedExecutionTests(unittest.TestCase):
             self.assertIn(required_fragment, lowering_source)
 
     def test_loader_stage_exposes_arithmetic_and_comparison_instructions_for_lowering_input(self) -> None:
-        loader_source = LOADER_STAGE_PATH.read_text(encoding="utf-8")
+        loader_source = read_loader_stage_source(REPO_ROOT)
 
         for required_fragment in [
             "ILOpCode.Add",
@@ -249,7 +251,7 @@ class Phase7InterpreterMixedExecutionTests(unittest.TestCase):
             self.assertIn(required_fragment, loader_source)
 
     def test_loader_and_lowering_support_relational_branch_opcodes(self) -> None:
-        loader_source = LOADER_STAGE_PATH.read_text(encoding="utf-8")
+        loader_source = read_loader_stage_source(REPO_ROOT)
         lowering_source = IL_TO_IR_LOWERING_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [

@@ -18,6 +18,7 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 - managed/native/hotupdate test host 都只消费 collection file
 - native / hotupdate 的执行绑定通过 manifest 分层
 - bugfix 必须先补自动测试
+- 测试阶段的 `dotnet` 编译崩溃必须追根因并修复，不能靠重试绕过
 - file-level codegen 默认 Scriban
 - 迁移完成后删除旧命名和旧双轨逻辑
 
@@ -58,6 +59,15 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 2. `tests/contracts/**` 的 contract / snapshot 测试
 3. `tests/integration/**` 的端到端测试
 4. subject 级实跑
+
+### 1.5 测试阶段 dotnet 编译崩溃是阻断缺陷
+
+在任何测试阶段，只要 `dotnet build` / `dotnet test` / `msbuild` 发生编译崩溃：
+
+- 不得继续后续测试并宣称当前阶段通过
+- 不得用重复执行、跳过 case 或“环境偶发”掩盖问题
+- 必须收集失败的 project / target / task、退出码、stderr、binlog 与崩溃堆栈或 dump 信息（如果可用）
+- 必须按 `dev:systematic-debugging` 追根因并修复，再重新运行受影响验证
 
 ### 2. `Sdk` 与 `Runtime` 分层
 

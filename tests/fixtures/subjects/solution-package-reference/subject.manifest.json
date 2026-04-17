@@ -1,4 +1,4 @@
-{
+﻿{
   "subjectId": "FixtureSolutionPackageReference",
   "displayName": "FixtureSolutionPackageReference",
   "category": "fixture",
@@ -7,8 +7,8 @@
   "defaultValidationProfile": "managed-output",
   "source": {
     "type": "dotnet-project",
-    "path": "subjects/SolutionCorePack/source/Archetypes/PackageReferenceSolution/PackageReferenceSolution.sln",
-    "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/PackageReferenceSolution/App/GoldenWithPackage.App.csproj",
+    "path": "subjects/SolutionCorePack/source/EngineeringScenarios/PackageReferenceSolution/PackageReferenceSolution.sln",
+    "primaryProjectPath": "subjects/SolutionCorePack/source/EngineeringScenarios/PackageReferenceSolution/App/GoldenWithPackage.App.csproj",
     "entry": "GoldenWithPackage.App/Program::Main()"
   },
   "sourceModel": "dotnet-solution",
@@ -98,3 +98,4 @@
     }
   ]
 }
+

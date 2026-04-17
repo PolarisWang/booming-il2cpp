@@ -1,0 +1,15 @@
+set(CHAOS_SUBJECT_GENERATED_INPUT_SOURCE "@@GENERATED_INPUT_SOURCE@@")
+
+if(NOT EXISTS "${CHAOS_SUBJECT_GENERATED_INPUT_SOURCE}")
+    message(FATAL_ERROR "Missing generated subject source: ${CHAOS_SUBJECT_GENERATED_INPUT_SOURCE}")
+endif()
+
+add_library(chaos_subject_generated_native STATIC EXCLUDE_FROM_ALL
+    "${CHAOS_SUBJECT_GENERATED_INPUT_SOURCE}")
+chaos_configure_subject_target(chaos_subject_generated_native)
+
+set_target_properties(
+    chaos_subject_generated_native
+    PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY "${CHAOS_SUBJECT_BUILD_OUT_ROOT}"
+        ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CHAOS_SUBJECT_BUILD_OUT_ROOT}")

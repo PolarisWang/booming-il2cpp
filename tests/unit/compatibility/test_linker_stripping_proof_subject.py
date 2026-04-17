@@ -7,25 +7,21 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import read_contracts_source, read_linker_stage_source, read_loader_stage_source
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
-SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
-SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "ReflectionAndMetadata" / "LinkerStrippingProof.cs"
+SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
+SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "ReflectionAndMetadata" / "LinkerStrippingProof.cs"
 FIXTURE_PROJECT_PATH = (
     REPO_ROOT / "tests" / "fixtures" / "contracts" / "linker-stripping-proof" / "FixtureLinkerStrippingProof.csproj"
 )
-PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
-PROOF_MAIN_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "main.cpp"
-PROOF_RUN_SCRIPT_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "RunNativeReferenceProof.cmake"
 PROFILE_ID = "proof-linker-stripping"
 MATRIX_ID = "windows-linker-stripping-check"
 ENTRY_POINT = "CoreRuntimeFeatures/LinkerStrippingProofEntry::Run()"
 
-CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
-LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
-LINKER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Linker" / "LinkerStage.cs"
 CODEGEN_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "CodeGenStage.cs"
 DRIVER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "DriverEntry.cs"
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -64,9 +60,6 @@ class Phase2LinkerStrippingProofTests(unittest.TestCase):
         self.assertTrue(SOURCE_PROJECT_PATH.is_file(), msg=f"missing source project: {SOURCE_PROJECT_PATH}")
         self.assertTrue(SOURCE_PROGRAM_PATH.is_file(), msg=f"missing source file: {SOURCE_PROGRAM_PATH}")
         self.assertTrue(FIXTURE_PROJECT_PATH.is_file(), msg=f"missing fixture project: {FIXTURE_PROJECT_PATH}")
-        self.assertTrue(PROOF_CMAKE_PATH.is_file(), msg=f"missing proof cmake: {PROOF_CMAKE_PATH}")
-        self.assertTrue(PROOF_MAIN_PATH.is_file(), msg=f"missing proof host main: {PROOF_MAIN_PATH}")
-        self.assertTrue(PROOF_RUN_SCRIPT_PATH.is_file(), msg=f"missing proof run script: {PROOF_RUN_SCRIPT_PATH}")
 
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         source = SOURCE_PROGRAM_PATH.read_text(encoding="utf-8")
@@ -74,7 +67,7 @@ class Phase2LinkerStrippingProofTests(unittest.TestCase):
         self.assertEqual("dotnet-project", manifest["source"]["type"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
             manifest["source"]["primaryProjectPath"],
         )
         self.assertEqual("CoreRuntimeFeatures/ProofEntry::Run()", manifest["source"]["entry"])
@@ -90,9 +83,9 @@ class Phase2LinkerStrippingProofTests(unittest.TestCase):
         self.assertIn("internal static class LinkerStrippingProofEntry", source)
 
     def test_contract_loader_and_linker_lock_preserve_aware_stripping_surface(self) -> None:
-        contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")
-        loader_source = LOADER_STAGE_PATH.read_text(encoding="utf-8")
-        linker_source = LINKER_STAGE_PATH.read_text(encoding="utf-8")
+        contracts_source = read_contracts_source(REPO_ROOT)
+        loader_source = read_loader_stage_source(REPO_ROOT)
+        linker_source = read_linker_stage_source(REPO_ROOT)
 
         self.assertIn('public const string PreserveDescriptor = "preserve-descriptor.json";', contracts_source)
         self.assertGreaterEqual(contracts_source.count("public bool IsPreserved { get; init; }"), 4)
@@ -210,3 +203,4 @@ class Phase2LinkerStrippingProofTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

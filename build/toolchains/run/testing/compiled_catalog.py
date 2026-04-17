@@ -22,8 +22,8 @@ except ImportError:
     from testing import subjects as subjects_module
 
 
-DISCOVERY_PROJECT_PATH = Path("src/managed/Chaos.IL2CPP.DeclarationDiscovery/Chaos.IL2CPP.DeclarationDiscovery.csproj")
-DISCOVERY_DLL_PATH = Path("src/managed/Chaos.IL2CPP.DeclarationDiscovery/bin/Release/net8.0/Chaos.IL2CPP.DeclarationDiscovery.dll")
+DISCOVERY_PROJECT_PATH = Path("src/tools/Chaos.TestFramework.CollectionGen/Chaos.TestFramework.CollectionGen.csproj")
+DISCOVERY_DLL_PATH = Path("src/tools/Chaos.TestFramework.CollectionGen/bin/Release/net8.0/Chaos.TestFramework.CollectionGen.dll")
 _DISCOVERY_TOOL_CACHE: Path | None = None
 
 
@@ -106,6 +106,7 @@ _NATIVE_EXECUTION_STAGE_KINDS = {
 }
 
 _RELEVANT_SOURCE_SUFFIXES = {".cs", ".csproj", ".sln", ".props", ".targets"}
+_COLLECTION_SCHEMA_VERSION = 1
 
 
 def _host_platform_name() -> str:
@@ -495,6 +496,7 @@ def build_declared_test_catalog(
             declared_benchmarks=[],
         )
         return {
+            "schemaVersion": _COLLECTION_SCHEMA_VERSION,
             "subjectId": subject_id,
             "frameworkReferenced": summary.framework_referenced,
             "subjectKind": summary.subject_kind.value,
@@ -528,6 +530,7 @@ def build_declared_test_catalog(
         declared_benchmarks=declared_benchmarks,
     )
     return {
+        "schemaVersion": _COLLECTION_SCHEMA_VERSION,
         "subjectId": subject_id,
         "frameworkReferenced": summary.framework_referenced,
         "subjectKind": summary.subject_kind.value,
@@ -713,6 +716,7 @@ def build_subject_declared_test_catalog(
             declared_benchmarks=[],
         )
         return {
+            "schemaVersion": _COLLECTION_SCHEMA_VERSION,
             "subjectId": subject_id,
             "frameworkReferenced": summary.framework_referenced,
             "subjectKind": summary.subject_kind.value,

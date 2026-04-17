@@ -13,6 +13,7 @@ from unittest.mock import patch
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 PROJECT_WORKSPACE_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "subject" / "project_workspace.py"
+SUBJECT_TEMPLATES_ROOT = REPO_ROOT / "build" / "toolchains" / "run" / "subject" / "templates"
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "project-workspace"
 
 
@@ -268,6 +269,24 @@ def write_windows_subject_native_solution_graph_stubs(configure_root: Path) -> N
 
 
 class ProjectWorkspaceTests(unittest.TestCase):
+    def test_native_workspace_materialization_is_backed_by_template_assets(self) -> None:
+        module_source = PROJECT_WORKSPACE_MODULE_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("templates/native-reference-workspace.cmake.tmpl", module_source)
+        self.assertIn("templates/native-generated.cmake.tmpl", module_source)
+        self.assertIn("templates/native-proof.cmake.tmpl", module_source)
+        self.assertIn("templates/native-proof-main.cpp.tmpl", module_source)
+        self.assertIn("templates/native-proof-run.cmake.tmpl", module_source)
+        self.assertIn("templates/native-aot-workspace.cmake.tmpl", module_source)
+        self.assertIn("templates/native-benchmark.cmake.tmpl", module_source)
+        self.assertTrue((SUBJECT_TEMPLATES_ROOT / "native-reference-workspace.cmake.tmpl").is_file())
+        self.assertTrue((SUBJECT_TEMPLATES_ROOT / "native-generated.cmake.tmpl").is_file())
+        self.assertTrue((SUBJECT_TEMPLATES_ROOT / "native-proof.cmake.tmpl").is_file())
+        self.assertTrue((SUBJECT_TEMPLATES_ROOT / "native-proof-main.cpp.tmpl").is_file())
+        self.assertTrue((SUBJECT_TEMPLATES_ROOT / "native-proof-run.cmake.tmpl").is_file())
+        self.assertTrue((SUBJECT_TEMPLATES_ROOT / "native-aot-workspace.cmake.tmpl").is_file())
+        self.assertTrue((SUBJECT_TEMPLATES_ROOT / "native-benchmark.cmake.tmpl").is_file())
+
     @classmethod
     def setUpClass(cls) -> None:
         TEST_TMP_ROOT.mkdir(parents=True, exist_ok=True)
@@ -277,7 +296,13 @@ class ProjectWorkspaceTests(unittest.TestCase):
         repo_root.mkdir(parents=True, exist_ok=False)
         return repo_root
 
-    def _write_subject_fixture(self, repo_root: Path, *, subject_id: str = "FixtureSubject") -> None:
+    def _write_subject_fixture(
+        self,
+        repo_root: Path,
+        *,
+        subject_id: str = "FixtureSubject",
+        include_legacy_native_reference: bool = True,
+    ) -> None:
         source_project = repo_root / "subjects" / subject_id / "source" / f"{subject_id}.csproj"
         unit_project = (
             repo_root
@@ -296,9 +321,10 @@ class ProjectWorkspaceTests(unittest.TestCase):
         source_project.write_text("<Project />\n", encoding="utf-8")
         unit_project.parent.mkdir(parents=True, exist_ok=True)
         unit_project.write_text("<Project />\n", encoding="utf-8")
-        native_reference_root.mkdir(parents=True, exist_ok=True)
-        (native_reference_root / "CMakeLists.txt").write_text("cmake_minimum_required(VERSION 3.20)\n", encoding="utf-8")
-        (native_reference_root / "main.cpp").write_text("int main() { return 0; }\n", encoding="utf-8")
+        if include_legacy_native_reference:
+            native_reference_root.mkdir(parents=True, exist_ok=True)
+            (native_reference_root / "CMakeLists.txt").write_text("cmake_minimum_required(VERSION 3.20)\n", encoding="utf-8")
+            (native_reference_root / "main.cpp").write_text("int main() { return 0; }\n", encoding="utf-8")
         (generated_root / "generated").mkdir(parents=True, exist_ok=True)
         (generated_root / "generated.manifest.json").write_text("{}\n", encoding="utf-8")
         (generated_root / "native-reference.manifest.json").write_text("{}\n", encoding="utf-8")
@@ -821,6 +847,47 @@ class ProjectWorkspaceTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_generate_subject_workspace_materializes_template_based_proof_host_without_legacy_subject_source(self) -> None:
+        workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_generate_template_proof_host")
+        repo_root = self._make_repo_root("subject-generate-template-proof-host")
+        self._write_subject_fixture(repo_root, include_legacy_native_reference=False)
+        completed = subprocess.CompletedProcess(["cmake"], 0, "", "")
+
+        try:
+            def configure_side_effect(arguments: list[str], cwd: Path, env: dict[str, str] | None = None):
+                del cwd, env
+                configure_root = Path(arguments[arguments.index("-B") + 1])
+                write_windows_subject_native_project_stubs(configure_root)
+                return completed
+
+            with patch.object(workspace_module.compiled_catalog_module, "build_subject_declared_test_catalog", return_value=declared_catalog_fixture()):
+                with patch.object(workspace_module.tooling_module, "cmake_environment", return_value=("cmake", {})):
+                    with patch.object(workspace_module, "run_process", side_effect=configure_side_effect):
+                        result = workspace_module.generate_subject_workspace(
+                            repo_root,
+                            "windows",
+                            {"id": "subject/FixtureSubject"},
+                        )
+
+            manifest = json.loads((repo_root / result["manifestPath"]).read_text(encoding="utf-8"))
+            proof_host_path = (
+                repo_root
+                / "solutions"
+                / "subjects"
+                / "FixtureSubject"
+                / "native-source"
+                / "windows-dev-output"
+                / "proof"
+                / "main.cpp"
+            )
+            self.assertTrue(proof_host_path.is_file())
+            self.assertTrue((repo_root / manifest["nativeTestProjects"][0]["projectPath"]).is_file())
+            proof_host_text = proof_host_path.read_text(encoding="utf-8")
+            self.assertIn('options.image_name_utf8 = "FixtureSubject";', proof_host_text)
+            self.assertIn('constexpr const char* kRuntimeTag = "subject-reference-proof";', proof_host_text)
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
     def test_generate_subject_workspace_writes_hotupdate_patch_and_test_projects(self) -> None:
         workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_generate_hotupdate")
         repo_root = self._make_repo_root("subject-generate-hotupdate")
@@ -890,6 +957,73 @@ class ProjectWorkspaceTests(unittest.TestCase):
             self.assertIn(
                 '<Compile Include="Generated/ChaosGeneratedHotUpdateBenchmarkHost.g.cs" />',
                 benchmark_project_text,
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_generate_subject_workspace_overwrites_existing_hotupdate_collection_with_latest_catalog(self) -> None:
+        workspace_module = load_module(
+            PROJECT_WORKSPACE_MODULE_PATH,
+            "chaos_project_workspace_subject_generate_hotupdate_overwrite_collection",
+        )
+        subject_id = "FixtureHotUpdateSubject"
+        repo_root = self._make_repo_root("subject-generate-hotupdate-overwrite-collection")
+        self._write_hotupdate_subject_fixture(repo_root, subject_id=subject_id)
+        stale_collection_path = (
+            repo_root
+            / "solutions"
+            / "subjects"
+            / subject_id
+            / "hotupdate-tests"
+            / "Generated"
+            / "declared-tests.collection.json"
+        )
+        write_json(
+            stale_collection_path,
+            {
+                "subjectId": subject_id,
+                "declaredUnitTests": [],
+                "declaredBenchmarks": [
+                    {
+                        "stableId": f"{subject_id}::stale",
+                        "entryIndex": 0,
+                        "alias": "stale-hotupdate-benchmark",
+                    }
+                ],
+            },
+        )
+        refreshed_catalog = hotupdate_declared_catalog_fixture(subject_id)
+        refreshed_catalog["declaredBenchmarks"][0]["entryIndex"] = 3
+        refreshed_catalog["declaredBenchmarks"][0]["alias"] = "hotupdate-benchmark-refreshed"
+
+        try:
+            with patch.object(
+                workspace_module.compiled_catalog_module,
+                "build_subject_declared_test_catalog",
+                return_value=refreshed_catalog,
+            ):
+                workspace_module.generate_subject_workspace(
+                    repo_root,
+                    "windows",
+                    {"id": f"subject/{subject_id}"},
+                )
+
+            collection_payload = json.loads(stale_collection_path.read_text(encoding="utf-8"))
+            binding_manifest_path = stale_collection_path.with_name("declared-tests.binding.json")
+            binding_payload = json.loads(binding_manifest_path.read_text(encoding="utf-8"))
+
+            self.assertEqual(refreshed_catalog, collection_payload)
+            self.assertEqual(
+                3,
+                next(
+                    entry["entryIndex"]
+                    for entry in binding_payload["entryBindings"]
+                    if entry["hostKind"] == "benchmark-host"
+                ),
+            )
+            self.assertEqual(
+                "hotupdate-benchmark-refreshed",
+                collection_payload["declaredBenchmarks"][0]["alias"],
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
@@ -2951,6 +3085,40 @@ class ProjectWorkspaceTests(unittest.TestCase):
                 aggregate_manifest["subjectWorkspaceManifests"],
             )
             self.assertEqual(["FixtureSubject", "ManagedOnlySubject"], generation_report["generatedSubjectIds"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_generate_all_workspaces_discovers_subject_without_legacy_native_reference_source(self) -> None:
+        workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_all_include_template_proof_host_subject")
+        repo_root = self._make_repo_root("all-include-template-proof-host-subject")
+        self._write_subject_fixture(repo_root, include_legacy_native_reference=False)
+        self._write_core_fixture(repo_root)
+        completed = subprocess.CompletedProcess(["cmake"], 0, "", "")
+
+        try:
+            def configure_side_effect(arguments: list[str], cwd: Path, env: dict[str, str] | None = None):
+                del cwd, env
+                configure_root = Path(arguments[arguments.index("-B") + 1])
+                (configure_root / "chaos_subject_reference_proof.vcxproj").parent.mkdir(parents=True, exist_ok=True)
+                (configure_root / "chaos_subject_reference_proof.vcxproj").write_text("<Project />\n", encoding="utf-8")
+                return completed
+
+            with patch.object(workspace_module, "refresh_subject_generated_root", return_value=None):
+                with patch.object(workspace_module.tooling_module, "cmake_environment", return_value=("cmake", {})):
+                    with patch.object(workspace_module, "run_process", side_effect=configure_side_effect):
+                        result = workspace_module.generate_all_workspaces(
+                            repo_root,
+                            "windows",
+                            {"host": "windows"},
+                        )
+
+            aggregate_manifest = json.loads((repo_root / result["manifestPath"]).read_text(encoding="utf-8"))
+            generation_report = json.loads((repo_root / "solutions" / "all" / "generation.report.json").read_text(encoding="utf-8"))
+            self.assertEqual(
+                ["solutions/subjects/FixtureSubject/workspace.manifest.json"],
+                aggregate_manifest["subjectWorkspaceManifests"],
+            )
+            self.assertEqual(["FixtureSubject"], generation_report["generatedSubjectIds"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

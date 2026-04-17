@@ -10,6 +10,8 @@ namespace Chaos.TestFramework.Runtime;
 /// </summary>
 public static class ChaosTestCollectionLoader
 {
+    private const int SupportedSchemaVersion = 1;
+
     private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web)
     {
         PropertyNameCaseInsensitive = true,
@@ -33,7 +35,14 @@ public static class ChaosTestCollectionLoader
         var collection = JsonSerializer.Deserialize<ChaosTestCollection>(
             File.ReadAllText(collectionPath),
             JsonOptions);
-        return collection ?? new ChaosTestCollection();
+        collection ??= new ChaosTestCollection();
+        if (collection.SchemaVersion != SupportedSchemaVersion)
+        {
+            throw new InvalidOperationException(
+                $"collection '{collectionPath}' has unsupported collection schemaVersion {collection.SchemaVersion}; expected {SupportedSchemaVersion}.");
+        }
+
+        return collection;
     }
 
     /// <summary>

@@ -33,14 +33,15 @@ CANONICAL_SUBJECT_PROJECT_PATH = CANONICAL_SUBJECT_ROOT / "source" / "HotUpdateH
 CANONICAL_SUBJECT_PROGRAM_PATH = CANONICAL_SUBJECT_ROOT / "source" / "Host" / "Program.cs"
 CANONICAL_SKELETON_ENTRY_PATH = CANONICAL_SUBJECT_ROOT / "source" / "Host" / "Proofs" / "HotUpdateSkeletonProofEntry.cs"
 CANONICAL_PATCH_INTEGRITY_ENTRY_PATH = CANONICAL_SUBJECT_ROOT / "source" / "Host" / "Proofs" / "PatchIntegrityProofEntry.cs"
+CANONICAL_PATCH_CALLBACK_ENTRY_PATH = CANONICAL_SUBJECT_ROOT / "source" / "Host" / "Proofs" / "PatchCallbackFlowProofEntry.cs"
 CANONICAL_METADATA_SUPPLEMENT_ENTRY_PATH = (
     CANONICAL_SUBJECT_ROOT / "source" / "Host" / "Proofs" / "MetadataSupplementProofEntry.cs"
 )
-CANONICAL_ARCHETYPE_ROOT = CANONICAL_SUBJECT_ROOT / "source" / "Archetypes" / "FullProjectHotUpdateSolution"
+CANONICAL_ARCHETYPE_ROOT = CANONICAL_SUBJECT_ROOT / "source" / "EngineeringScenarios" / "FullProjectHotUpdateSolution"
 CANONICAL_ARCHETYPE_SOLUTION_PATH = CANONICAL_ARCHETYPE_ROOT / "FullProjectHotUpdateSolution.sln"
 CANONICAL_ARCHETYPE_HOST_PROJECT_PATH = CANONICAL_ARCHETYPE_ROOT / "HostApp" / "GoldenHotUpdateHost.App.csproj"
 CANONICAL_ARCHETYPE_SHARED_PROJECT_PATH = CANONICAL_ARCHETYPE_ROOT / "SharedContracts" / "GoldenHotUpdate.SharedContracts.csproj"
-CANONICAL_ARCHETYPE_PATCH_PROJECT_PATH = CANONICAL_ARCHETYPE_ROOT / "PatchModules" / "GoldenHotUpdate.PatchModule.csproj"
+CANONICAL_ARCHETYPE_PATCH_PROJECT_PATH = CANONICAL_ARCHETYPE_ROOT / "Patch" / "GoldenHotUpdate.PatchModule.csproj"
 SUBJECTS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subjects.py"
 
 
@@ -197,6 +198,7 @@ class Phase5HotUpdateSkeletonTests(unittest.TestCase):
         self.assertTrue(CANONICAL_SUBJECT_PROGRAM_PATH.is_file())
         self.assertTrue(CANONICAL_SKELETON_ENTRY_PATH.is_file())
         self.assertTrue(CANONICAL_PATCH_INTEGRITY_ENTRY_PATH.is_file())
+        self.assertTrue(CANONICAL_PATCH_CALLBACK_ENTRY_PATH.is_file())
         self.assertTrue(CANONICAL_METADATA_SUPPLEMENT_ENTRY_PATH.is_file())
         self.assertTrue(CANONICAL_ARCHETYPE_SOLUTION_PATH.is_file())
         self.assertTrue(CANONICAL_ARCHETYPE_HOST_PROJECT_PATH.is_file())
@@ -210,7 +212,7 @@ class Phase5HotUpdateSkeletonTests(unittest.TestCase):
         )
         self.assertEqual("managed-runtime-output", full_project_matrix["pipelineId"])
         self.assertEqual(
-            "subjects/HotUpdateHostPack/source/Archetypes/FullProjectHotUpdateSolution/HostApp/GoldenHotUpdateHost.App.csproj",
+            "subjects/HotUpdateHostPack/source/EngineeringScenarios/FullProjectHotUpdateSolution/HostApp/GoldenHotUpdateHost.App.csproj",
             dict(full_project_matrix.get("source") or {})["primaryProjectPath"],
         )
         self.assertEqual(
@@ -223,9 +225,9 @@ class Phase5HotUpdateSkeletonTests(unittest.TestCase):
 
         self.assertIn(r"Host\Program.cs", CANONICAL_SUBJECT_PROGRAM_PATH.as_posix().replace("/", "\\"))
         self.assertIn(r"Host\Proofs\HotUpdateSkeletonProofEntry.cs", CANONICAL_SKELETON_ENTRY_PATH.as_posix().replace("/", "\\"))
-        self.assertIn(r"Archetypes\FullProjectHotUpdateSolution\HostApp\GoldenHotUpdateHost.App.csproj", solution_text)
-        self.assertIn(r"Archetypes\FullProjectHotUpdateSolution\SharedContracts\GoldenHotUpdate.SharedContracts.csproj", solution_text)
-        self.assertIn(r"Archetypes\FullProjectHotUpdateSolution\PatchModules\GoldenHotUpdate.PatchModule.csproj", solution_text)
+        self.assertIn(r"EngineeringScenarios\FullProjectHotUpdateSolution\HostApp\GoldenHotUpdateHost.App.csproj", solution_text)
+        self.assertIn(r"EngineeringScenarios\FullProjectHotUpdateSolution\SharedContracts\GoldenHotUpdate.SharedContracts.csproj", solution_text)
+        self.assertIn(r"EngineeringScenarios\FullProjectHotUpdateSolution\Patch\GoldenHotUpdate.PatchModule.csproj", solution_text)
 
     def test_hot_update_host_program_uses_compact_subject_entry_selection_only(self) -> None:
         host_program_source = CANONICAL_SUBJECT_PROGRAM_PATH.read_text(encoding="utf-8")
@@ -234,6 +236,7 @@ class Phase5HotUpdateSkeletonTests(unittest.TestCase):
             "ChaosSubjectEntryArguments.TryParse",
             "HotUpdateSkeletonProofEntry.Run",
             "PatchIntegrityProofEntry.Run",
+            "PatchCallbackFlowProofEntry.Run",
             "MetadataSupplementProofEntry.Run",
             "MethodReplacementProofEntry.Run",
             "SharedContractProofEntry.Run",

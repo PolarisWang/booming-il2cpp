@@ -286,7 +286,7 @@
         "correctness.dev"
       ],
       "source": {
-        "primaryProjectPath": "subjects/MixedExecutionFeaturePack/source/Archetypes/MixedBridgeSolution/InterpreterArithmeticProof/InterpreterArithmeticProof.csproj",
+        "primaryProjectPath": "subjects/MixedExecutionFeaturePack/source/EngineeringScenarios/MixedBridgeSolution/InterpreterArithmeticProof/InterpreterArithmeticProof.csproj",
         "entry": "InterpreterArithmeticProof/Program::Main()"
       },
       "executionContext": {

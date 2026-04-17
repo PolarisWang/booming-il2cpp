@@ -268,6 +268,13 @@ public sealed partial class NativeAotLoweringPlanner
 			TrackReferenceType(declaringTypeSubjectId, "System.Private.CoreLib/System.Object");
 			hashSet.Add(additionalInstanceFieldSubjectId);
 		}
+		foreach (StaticInitializationPlan value9 in _staticInitializationSupport.PlansByTypeSubjectId.Values)
+		{
+			foreach (StaticInitializationAction action in value9.Actions)
+			{
+				TrackReferenceType(action.ConstructedTypeSubjectId, null);
+			}
+		}
 		int num = 2;
 		foreach (string item in referenceTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
 		{

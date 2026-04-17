@@ -84,6 +84,7 @@ schema 规则：
 - Python 单测优先通过模板拉起最小 managed/native/hotupdate 样例
 - 尽量减少长期保留的手写 C# fixture
 - benchmark 手工复跑、控制台日志或 dashboard 结果，不能替代正式自动测试
+- 测试阶段如果 `dotnet build` / `dotnet test` / `msbuild` 编译崩溃，必须先检查崩溃原因并修复，再继续后续验证
 
 ### 2.8 file-level codegen 默认 Scriban
 
@@ -105,6 +106,15 @@ schema 规则：
 - 旧 runner / registry / discovery 双轨逻辑
 - 已被模板替代的旧 fixture
 - 已被 manifest 机制替代的旧绑定路径
+- canonical subject 的 formal proof / benchmark / host correctness 资产中出现 `Console.WriteLine` 或 `ChaosEvidenceKind.Stdout`
+
+### 2.10 owner subject 与 obligation authority
+
+- `subject.features.json` 是 completed feature 的 owner subject 与 proof / benchmark obligation authority
+- 当前 canonical owner subjects 固定为 `SolutionCorePack`、`MixedExecutionFeaturePack`、`HotUpdateHostPack`
+- `proofRequired = true` 的 feature 必须在 owner subject 中存在正式 proof 资产
+- `benchmarkRequired = true` 的 feature 必须在 owner subject 中存在正式 benchmark 资产
+- engineering scenario 可以保留 `Program.cs` 用于全工程样例或启动，但 canonical proof / benchmark correctness 不允许依赖 stdout 判定
 
 ## 3. 推荐结构
 
@@ -215,6 +225,15 @@ tests/
 3. `tests/integration/**` 的端到端流水线测试
 4. subject 级 managed/native/hotupdate 实跑
 
+### 5.3 测试阶段 dotnet 编译崩溃闸门
+
+在任何测试或验证阶段，只要 `dotnet build` / `dotnet test` / `msbuild` 发生编译崩溃：
+
+- 当前验证立即视为失败
+- 必须保留并检查失败的 project / target / task、退出码、stderr、binlog 与崩溃堆栈或 dump 信息（如果可用）
+- 必须先查明根因并修复，再重新运行受影响的验证对象
+- 不允许通过重试、跳过当前测试或把崩溃降级成“环境偶发”继续推进
+
 ## 6. IL2CPP 代码生成规范
 
 推荐结构：
@@ -261,3 +280,8 @@ AOT 主线新增 feature 的执行顺序以 [`wiki/06-测试验证/AOT新Feature
 - 先判定 capability 的 `owner subject`
 - 先过 `collector -> registry -> workspace` 三层接线闸门
 - benchmark 只作为补充证据，不替代 correctness 验收
+
+## 9. Legacy Cutover Contract
+
+- product pipeline 不得回退到 `ChaosSourceEntryArguments`、`DeclaredProofEntriesBySourceEntry` 或旧 subject 命名协议
+- canonical subject 不得重新引入 `validation`、`Archetypes`、`FeatureSlices`、`PatchModules`、`ManagedBridge`、`Lowering`、`Launcher` 等旧目录语义

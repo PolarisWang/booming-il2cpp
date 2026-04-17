@@ -490,7 +490,42 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				return false;
 			}
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), $"extern \"C\" std::intptr_t {GetExternalRuntimeHelperSymbol(callee)}(std::intptr_t chaos_arg_0)\n{{\n    if (chaos_arg_0 == static_cast<std::intptr_t>(0))\n    {{\n        return static_cast<std::intptr_t>(0);\n    }}\n\n    auto* chaos_delegate = reinterpret_cast<{GetNativeTypeSymbol(typeSubjectId)}*>(chaos_arg_0);\n    if (chaos_delegate->chaos_delegate_target != static_cast<std::intptr_t>(0) ||\n        chaos_delegate->chaos_delegate_invocation_count != static_cast<std::intptr_t>(0))\n    {{\n        std::abort();\n    }}\n\n    return chaos_delegate->chaos_delegate_method_ptr;\n}}", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(typeSubjectId, AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
+			var helperSymbol = GetExternalRuntimeHelperSymbol(callee);
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, helperSymbol, $$"""
+extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
+{
+    struct chaos_delegate_function_pointer_bridge
+    {
+        std::uint64_t magic = 0;
+        std::intptr_t delegate_target = 0;
+        std::intptr_t delegate_method_ptr = 0;
+        std::intptr_t delegate_invocation_list = 0;
+        std::intptr_t delegate_invocation_count = 0;
+    };
+
+    constexpr std::uint64_t chaos_delegate_function_pointer_bridge_magic = 0x4348414F535F4446ULL;
+
+    if (chaos_arg_0 == static_cast<std::intptr_t>(0))
+    {
+        return static_cast<std::intptr_t>(0);
+    }
+
+    auto* chaos_delegate = reinterpret_cast<{{GetNativeTypeSymbol(typeSubjectId)}}*>(chaos_arg_0);
+    if (chaos_delegate->chaos_delegate_target == static_cast<std::intptr_t>(0) &&
+        chaos_delegate->chaos_delegate_invocation_count == static_cast<std::intptr_t>(0))
+    {
+        return chaos_delegate->chaos_delegate_method_ptr;
+    }
+
+    auto* chaos_bridge = new chaos_delegate_function_pointer_bridge{};
+    chaos_bridge->magic = chaos_delegate_function_pointer_bridge_magic;
+    chaos_bridge->delegate_target = chaos_delegate->chaos_delegate_target;
+    chaos_bridge->delegate_method_ptr = chaos_delegate->chaos_delegate_method_ptr;
+    chaos_bridge->delegate_invocation_list = chaos_delegate->chaos_delegate_invocation_list;
+    chaos_bridge->delegate_invocation_count = chaos_delegate->chaos_delegate_invocation_count;
+    return reinterpret_cast<std::intptr_t>(chaos_bridge);
+}
+""", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(typeSubjectId, AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
 			return true;
 		}
 		if (TryReadSingleGenericTypeArgument(callee, "System.Runtime.InteropServices/Marshal::GetDelegateForFunctionPointer<", out typeSubjectId))
@@ -499,7 +534,41 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				return false;
 			}
-			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), $"extern \"C\" std::intptr_t {GetExternalRuntimeHelperSymbol(callee)}(std::intptr_t chaos_arg_0)\n{{\n    auto* chaos_delegate = new {GetNativeTypeSymbol(typeSubjectId)}{{}};\n    chaos_delegate->header.type_id = {GetNativeTypeIdSymbol(typeSubjectId)};\n    chaos_delegate->chaos_delegate_target = static_cast<std::intptr_t>(0);\n    chaos_delegate->chaos_delegate_method_ptr = chaos_arg_0;\n    return reinterpret_cast<std::intptr_t>(chaos_delegate);\n}}", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()), CreateNativeIntAbiSlot(typeSubjectId, AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
+			var helperSymbol = GetExternalRuntimeHelperSymbol(callee);
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, helperSymbol, $$"""
+extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
+{
+    struct chaos_delegate_function_pointer_bridge
+    {
+        std::uint64_t magic = 0;
+        std::intptr_t delegate_target = 0;
+        std::intptr_t delegate_method_ptr = 0;
+        std::intptr_t delegate_invocation_list = 0;
+        std::intptr_t delegate_invocation_count = 0;
+    };
+
+    constexpr std::uint64_t chaos_delegate_function_pointer_bridge_magic = 0x4348414F535F4446ULL;
+
+    auto* chaos_delegate = new {{GetNativeTypeSymbol(typeSubjectId)}}{};
+    chaos_delegate->header.type_id = {{GetNativeTypeIdSymbol(typeSubjectId)}};
+    if (chaos_arg_0 != static_cast<std::intptr_t>(0))
+    {
+        const auto* chaos_bridge = reinterpret_cast<const chaos_delegate_function_pointer_bridge*>(chaos_arg_0);
+        if (chaos_bridge->magic == chaos_delegate_function_pointer_bridge_magic)
+        {
+            chaos_delegate->chaos_delegate_target = chaos_bridge->delegate_target;
+            chaos_delegate->chaos_delegate_method_ptr = chaos_bridge->delegate_method_ptr;
+            chaos_delegate->chaos_delegate_invocation_list = chaos_bridge->delegate_invocation_list;
+            chaos_delegate->chaos_delegate_invocation_count = chaos_bridge->delegate_invocation_count;
+            return reinterpret_cast<std::intptr_t>(chaos_delegate);
+        }
+    }
+
+    chaos_delegate->chaos_delegate_target = static_cast<std::intptr_t>(0);
+    chaos_delegate->chaos_delegate_method_ptr = chaos_arg_0;
+    return reinterpret_cast<std::intptr_t>(chaos_delegate);
+}
+""", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()), CreateNativeIntAbiSlot(typeSubjectId, AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
 			return true;
 		}
 		return false;

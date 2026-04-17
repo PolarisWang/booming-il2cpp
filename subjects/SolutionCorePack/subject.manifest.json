@@ -8,7 +8,7 @@
   "source": {
     "type": "dotnet-project",
     "path": "subjects/SolutionCorePack/source/SolutionCorePack.sln",
-    "primaryProjectPath": "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+    "primaryProjectPath": "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
     "entry": "CoreRuntimeFeatures/ProofEntry::Run()",
     "entrySelection": {
       "entryKind": 1,
@@ -339,7 +339,7 @@
       ],
       "source": {
         "entry": "GoldenSimpleLib.App/Program::Main()",
-        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/SimpleLibrarySolution/App/GoldenSimpleLib.App.csproj",
+        "primaryProjectPath": "subjects/SolutionCorePack/source/EngineeringScenarios/SimpleLibrarySolution/App/GoldenSimpleLib.App.csproj",
         "entrySelection": {
           "entryKind": 1,
           "entrySlice": 4
@@ -374,7 +374,7 @@
       ],
       "source": {
         "entry": "GoldenMultiProject.App/Program::Main()",
-        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/MultiProjectSolution/App/GoldenMultiProject.App.csproj",
+        "primaryProjectPath": "subjects/SolutionCorePack/source/EngineeringScenarios/MultiProjectSolution/App/GoldenMultiProject.App.csproj",
         "entrySelection": {
           "entryKind": 1,
           "entrySlice": 5
@@ -409,7 +409,7 @@
       ],
       "source": {
         "entry": "GoldenWithPackage.App/Program::Main()",
-        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/PackageReferenceSolution/App/GoldenWithPackage.App.csproj",
+        "primaryProjectPath": "subjects/SolutionCorePack/source/EngineeringScenarios/PackageReferenceSolution/App/GoldenWithPackage.App.csproj",
         "entrySelection": {
           "entryKind": 1,
           "entrySlice": 6
@@ -444,7 +444,7 @@
       ],
       "source": {
         "entry": "GoldenReferenceAssembly.App/Program::Main()",
-        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/ReferenceAssemblySolution/App/GoldenReferenceAssembly.App.csproj",
+        "primaryProjectPath": "subjects/SolutionCorePack/source/EngineeringScenarios/ReferenceAssemblySolution/App/GoldenReferenceAssembly.App.csproj",
         "entrySelection": {
           "entryKind": 1,
           "entrySlice": 8
@@ -479,7 +479,7 @@
       ],
       "source": {
         "entry": "GoldenCoreLibReference.App/Program::Main()",
-        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/CoreLibReferenceSolution/App/GoldenCoreLibReference.App.csproj",
+        "primaryProjectPath": "subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/App/GoldenCoreLibReference.App.csproj",
         "entrySelection": {
           "entryKind": 1,
           "entrySlice": 9
@@ -514,7 +514,7 @@
       ],
       "source": {
         "entry": "GoldenMixedReference.App/Program::Main()",
-        "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/MixedReferenceClosureSolution/App/GoldenMixedReference.App.csproj",
+        "primaryProjectPath": "subjects/SolutionCorePack/source/EngineeringScenarios/MixedReferenceClosureSolution/App/GoldenMixedReference.App.csproj",
         "entrySelection": {
           "entryKind": 1,
           "entrySlice": 10
@@ -585,7 +585,7 @@
         "correctness.platform"
       ],
       "source": {
-        "primaryProjectPath": "subjects/SolutionCorePack/source/FeatureSlices/CoreRuntimeFeatures/CoreRuntimeFeatures.csproj",
+        "primaryProjectPath": "subjects/SolutionCorePack/source/Proofs/CoreRuntimeFeatures/CoreRuntimeFeatures.csproj",
           "entry": "CoreRuntimeFeatures/Program::Main(System.String[])"
       },
       "executionContext": {
@@ -616,7 +616,7 @@
         "correctness.platform"
       ],
       "source": {
-        "primaryProjectPath": "subjects/SolutionCorePack/source/FeatureSlices/CoreRuntimeFeatures/CoreRuntimeFeatures.csproj",
+        "primaryProjectPath": "subjects/SolutionCorePack/source/Proofs/CoreRuntimeFeatures/CoreRuntimeFeatures.csproj",
           "entry": "CoreRuntimeFeatures/Program::Main(System.String[])"
       },
       "executionContext": {

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "subjectId": "HotUpdateHostPack",
+  "engineeringScenarios": [
+    {
+      "code": 1,
+      "id": "full-project-hotupdate-solution",
+      "sourcePath": "subjects/HotUpdateHostPack/source/EngineeringScenarios/FullProjectHotUpdateSolution"
+    }
+  ],
+  "features": [
+    { "capabilityFamily": 13, "capabilityItem": 54, "supportStates": [3, 2], "proofRequired": true, "benchmarkRequired": true },
+    { "capabilityFamily": 13, "capabilityItem": 55, "supportStates": [3, 2], "proofRequired": true, "benchmarkRequired": false },
+    { "capabilityFamily": 13, "capabilityItem": 56, "supportStates": [3, 2], "proofRequired": true, "benchmarkRequired": true },
+    { "capabilityFamily": 13, "capabilityItem": 57, "supportStates": [3, 2], "proofRequired": true, "benchmarkRequired": false },
+    { "capabilityFamily": 13, "capabilityItem": 58, "supportStates": [3, 2], "proofRequired": true, "benchmarkRequired": false },
+    { "capabilityFamily": 13, "capabilityItem": 59, "supportStates": [3, 2], "proofRequired": true, "benchmarkRequired": false },
+    { "capabilityFamily": 13, "capabilityItem": 60, "supportStates": [3, 2], "proofRequired": true, "benchmarkRequired": true }
+  ]
+}

@@ -5,6 +5,7 @@ import json
 import shutil
 import subprocess
 import sys
+import time
 import unittest
 import uuid
 from pathlib import Path
@@ -106,11 +107,9 @@ class SubjectWorkersTests(unittest.TestCase):
 
         repo_root = self._make_repo_root("windows-build")
         try:
-            for relative_path in [
-                Path("subjects") / subject_id / "validation" / "proof" / "native-reference" / "main.cpp",
-                Path("subjects") / subject_id / "validation" / "proof" / "native-reference" / "CMakeLists.txt",
-                Path("subjects") / subject_id / "validation" / "proof" / "native-reference" / "RunNativeReferenceProof.cmake",
-                Path("artifacts")
+            generated_source_path = (
+                repo_root
+                / "artifacts"
                 / "subjects"
                 / subject_id
                 / "runs"
@@ -118,34 +117,44 @@ class SubjectWorkersTests(unittest.TestCase):
                 / "analysis"
                 / "generated"
                 / "generated"
-                / "native-reference.generated.cpp",
-            ]:
-                absolute_path = repo_root / relative_path
-                absolute_path.parent.mkdir(parents=True, exist_ok=True)
-                absolute_path.write_text("// fixture\n", encoding="utf-8")
+                / "native-reference.generated.cpp"
+            )
+            generated_source_path.parent.mkdir(parents=True, exist_ok=True)
+            generated_source_path.write_text("// fixture\n", encoding="utf-8")
+            expected_cmake_source_root = (
+                repo_root
+                / "artifacts"
+                / "subjects"
+                / subject_id
+                / "runs"
+                / run_id
+                / "matrices"
+                / matrix_id
+                / "build"
+                / "cmake-src"
+            )
 
             with patch.object(workers_module.tooling_module, "cmake_environment", return_value=(str(expected_cmake_path), {})):
                 with patch.object(workers_module.tooling_module, "windows_developer_environment", return_value=expected_env):
                     with patch.object(workers_module.tooling_module, "detect_visual_studio_generator", return_value="Visual Studio 18 2026"):
                         with patch.object(workers_module.tooling_module, "detect_visual_studio_instance_spec", return_value=instance_spec):
                             with patch.object(workers_module.tooling_module, "allocate_cmake_binary_dir", return_value=expected_cmake_dir):
-                                with patch.object(workers_module, "_run_checked") as run_checked_mock:
-                                    result = workers_module.run_build_target(repo_root=repo_root, request=request)
+                                with patch.object(workers_module, "_workspace_manifest_is_stale", return_value=False):
+                                    with patch.object(workers_module, "_run_checked") as run_checked_mock:
+                                        result = workers_module.run_build_target(repo_root=repo_root, request=request)
 
             self.assertEqual("ok", result["status"])
             self.assertEqual(
                 [
                     str(expected_cmake_path),
                     "-S",
-                    str(repo_root),
+                    str(expected_cmake_source_root),
                     "-B",
                     str(expected_cmake_dir),
                     "-G",
                     "Visual Studio 18 2026",
-                    "-DROADMAP0_PRESET_TARGET=windows-x64-reference",
+                    f"-DCHAOS_SUBJECT_REPO_ROOT={repo_root}",
                     "-DCHAOS_SUBJECT_VARIANT=CHECK",
-                    f"-DCHAOS_SUBJECT_PROOF_ROOT={repo_root / 'subjects' / subject_id / 'validation' / 'proof' / 'native-reference'}",
-                    f"-DCHAOS_SUBJECT_GENERATED_ROOT={repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'analysis' / 'generated'}",
                     f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'out'}",
                     f"-DCHAOS_SUBJECT_RUNTIME_ROOT={repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'runtime'}",
                     f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}",
@@ -185,6 +194,10 @@ class SubjectWorkersTests(unittest.TestCase):
             self.assertEqual(
                 [subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "out", f"{WINDOWS_REFERENCE_BUILD_TARGET}.exe")],
                 manifest["outputs"],
+            )
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "cmake-src", "proof", "main.cpp"),
+                manifest["hostSourcePath"],
             )
             self.assertEqual(expected_cmake_dir.as_posix(), manifest["cmakeBinaryDir"])
         finally:
@@ -386,6 +399,7 @@ class SubjectWorkersTests(unittest.TestCase):
                 subject_run_path(subject_id, run_id, "analysis", "generated", "native-reference.plan.json"),
                 manifest["nativeReferencePlanPath"],
             )
+            self.assertNotIn("workloadEntry", manifest)
             self.assertNotIn("nativeProofManifestPath", manifest)
             self.assertNotIn("nativeProofPlanPath", manifest)
         finally:
@@ -627,8 +641,9 @@ class SubjectWorkersTests(unittest.TestCase):
                     with patch.object(workers_module.tooling_module, "detect_visual_studio_generator", return_value="Visual Studio 18 2026"):
                         with patch.object(workers_module.tooling_module, "detect_visual_studio_instance_spec", return_value=instance_spec):
                             with patch.object(workers_module.tooling_module, "allocate_cmake_binary_dir", return_value=expected_cmake_dir):
-                                with patch.object(workers_module, "_run_checked") as run_checked_mock:
-                                    result = workers_module.run_build_target(repo_root=repo_root, request=request)
+                                with patch.object(workers_module, "_workspace_manifest_is_stale", return_value=False):
+                                    with patch.object(workers_module, "_run_checked") as run_checked_mock:
+                                        result = workers_module.run_build_target(repo_root=repo_root, request=request)
 
             self.assertEqual("ok", result["status"])
             self.assertEqual(
@@ -651,10 +666,10 @@ class SubjectWorkersTests(unittest.TestCase):
                     str(expected_cmake_dir),
                     "-G",
                     "Visual Studio 18 2026",
-                    f"-DCHAOS_SUBJECT_BENCHMARK_HOST_MAIN={repo_root / 'src' / 'native' / 'benchmark-host' / 'native_aot_main.cpp'}",
-                    f"-DCHAOS_SUBJECT_GENERATED_INPUT_SOURCE={repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'analysis' / 'generated' / 'generated' / 'native-aot.generated.cpp'}",
+                    f"-DCHAOS_SUBJECT_BENCHMARK_HOST_MAIN={(repo_root / 'src' / 'native' / 'benchmark-host' / 'native_aot_main.cpp').as_posix()}",
+                    f"-DCHAOS_SUBJECT_GENERATED_INPUT_SOURCE={(repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'analysis' / 'generated' / 'generated' / 'native-aot.generated.cpp').as_posix()}",
                     "-DCHAOS_SUBJECT_VARIANT=PROFILE",
-                    f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'out'}",
+                    f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={(repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'out').as_posix()}",
                     f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}",
                 ],
                 run_checked_mock.call_args_list[0].args[0],
@@ -673,6 +688,24 @@ class SubjectWorkersTests(unittest.TestCase):
             )
             self.assertEqual(expected_env, run_checked_mock.call_args_list[0].kwargs["env"])
             self.assertEqual(expected_env, run_checked_mock.call_args_list[1].kwargs["env"])
+
+            cmake_source_root = (
+                repo_root
+                / "artifacts"
+                / "subjects"
+                / subject_id
+                / "runs"
+                / run_id
+                / "matrices"
+                / matrix_id
+                / "build"
+                / "cmake-src"
+            )
+            workspace_cmakelists = (cmake_source_root / "CMakeLists.txt").read_text(encoding="utf-8")
+            benchmark_cmakelists = (cmake_source_root / "benchmark" / "CMakeLists.txt").read_text(encoding="utf-8")
+            self.assertIn("third_party/bdwgc", workspace_cmakelists)
+            self.assertIn("src/native/hot-update", workspace_cmakelists)
+            self.assertIn("chaos_hot_update", benchmark_cmakelists)
 
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
             self.assertEqual("PROFILE", manifest["variant"])
@@ -705,9 +738,156 @@ class SubjectWorkersTests(unittest.TestCase):
             self.assertEqual(matrix_id, dispatch_manifest["matrixId"])
             self.assertEqual("benchmark-host", dispatch_manifest["hostKind"])
             self.assertEqual(collection_path, dispatch_manifest["collectionPath"])
-            self.assertEqual(workload_entry, dispatch_manifest["workloadEntry"])
+            self.assertNotIn("workloadEntry", dispatch_manifest)
             self.assertEqual("RunNativeAot", dispatch_manifest["nativeEntryFunctionName"])
             self.assertEqual(11, dispatch_manifest["entrySelection"]["entryIndex"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_windows_build_target_infers_benchmark_host_for_native_perf_without_declared_entry_selection(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_windows_native_aot_cmake_summary_build")
+        subject_id = "FixtureNativeAotSummarySubject"
+        run_id = "fixture-run-native-aot-summary-build-001"
+        matrix_id = "windows-native-perf"
+        collection_path = posix_path(
+            "solutions",
+            "subjects",
+            subject_id,
+            "managed-tests",
+            "Generated",
+            "declared-tests.collection.json",
+        )
+        expected_cmake_path = self._make_non_repo_path("cmake", "bin", "cmake.exe")
+        expected_cmake_dir = self._make_non_repo_path("cmake-builds", "subject-native-aot-summary-1234")
+        instance_spec = f"{self._make_non_repo_path('visual-studio', '18', 'Professional')},version=18.4.11626.88"
+
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "PROFILE",
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "runtimeProfile": "native-perf-profile",
+                    "toolchainProfile": "msvc-reference",
+                },
+            },
+            "upstream": {
+                "generated": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("windows-native-aot-summary-build")
+        try:
+            for relative_path in [
+                Path("src/native/benchmark-host/native_aot_main.cpp"),
+                Path("artifacts")
+                / "subjects"
+                / subject_id
+                / "runs"
+                / run_id
+                / "analysis"
+                / "generated"
+                / "generated"
+                / "native-aot.generated.cpp",
+            ]:
+                absolute_path = repo_root / relative_path
+                absolute_path.parent.mkdir(parents=True, exist_ok=True)
+                absolute_path.write_text("// fixture\n", encoding="utf-8")
+
+            generated_manifest_path = repo_root / request["upstream"]["generated"]["manifestPath"]
+            generated_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            generated_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "generatedSourcePath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated", "native-aot.generated.cpp"),
+                        "nativeAotManifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "native-aot.manifest.json"),
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+            workspace_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            workspace_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "workspaceVersion": 2,
+                        "subjectId": subject_id,
+                        "managedTestProjects": [
+                            {
+                                "projectId": f"managed-test/{subject_id}/benchmark-host",
+                                "projectPath": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "managed-tests",
+                                    f"{subject_id}.DeclaredBenchmarkHost.csproj",
+                                ),
+                                "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
+                                "hostKind": "benchmark-host",
+                                "collectionPath": collection_path,
+                            }
+                        ],
+                        "nativeTestProjects": [
+                            {
+                                "projectId": f"native-test/{subject_id}/{matrix_id}/benchmark-host",
+                                "matrixId": matrix_id,
+                                "projectPath": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "native",
+                                    matrix_id,
+                                    "benchmark",
+                                    "chaos_subject_native_aot.vcxproj",
+                                ),
+                                "configureRoot": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "native",
+                                    matrix_id,
+                                ),
+                                "hostKind": "benchmark-host",
+                                "managedTestProjectId": f"managed-test/{subject_id}/benchmark-host",
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            with patch.object(workers_module.tooling_module, "cmake_environment", return_value=(str(expected_cmake_path), {})):
+                with patch.object(workers_module.tooling_module, "windows_developer_environment", return_value={}):
+                    with patch.object(workers_module.tooling_module, "detect_visual_studio_generator", return_value="Visual Studio 18 2026"):
+                        with patch.object(workers_module.tooling_module, "detect_visual_studio_instance_spec", return_value=instance_spec):
+                            with patch.object(workers_module.tooling_module, "allocate_cmake_binary_dir", return_value=expected_cmake_dir):
+                                with patch.object(workers_module, "_workspace_manifest_is_stale", return_value=False):
+                                    with patch.object(workers_module, "_run_checked") as run_checked_mock:
+                                        result = workers_module.run_build_target(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            self.assertEqual(
+                "benchmark-host",
+                json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))["hostKind"],
+            )
+            dispatch_manifest = json.loads(
+                (
+                    repo_root
+                    / subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "benchmark.dispatch.manifest.json")
+                ).read_text(encoding="utf-8")
+            )
+            self.assertEqual({}, dispatch_manifest["entrySelection"])
+            self.assertEqual(2, run_checked_mock.call_count)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -1829,6 +2009,278 @@ class SubjectWorkersTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_host_input_build_regenerates_stale_workspace_before_using_declared_benchmark_host(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_host_input_workspace_benchmark_host_refresh")
+        subject_id = "FixtureWorkspaceBenchmarkHostRefreshSubject"
+        run_id = "fixture-run-host-input-workspace-benchmark-host-refresh-001"
+        intermediate_root = TEST_TMP_ROOT / "dotnet-intermediates" / "fixture-host-input-workspace-benchmark-host-refresh-1234"
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "entrySelection": {
+                    "family": "declared-benchmark",
+                    "stableId": f"{subject_id}::{subject_id}::{subject_id}.Benchmarks::RunWorkload()",
+                    "alias": "workspace-benchmark-refresh",
+                    "entryIndex": 11,
+                },
+                "source": {
+                    "type": "dotnet-project",
+                    "path": subject_source_path(subject_id),
+                    "entry": f"{subject_id}/Program::Main(System.String[])",
+                },
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                },
+            },
+            "upstream": {
+                "source": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "source", "source.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "analysis", "host-input"),
+                "manifestPath": subject_run_path(subject_id, run_id, "analysis", "host-input", "host-input.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("host-input-build-workspace-benchmark-host-refresh")
+        try:
+            source_root = repo_root / "subjects" / subject_id / "source"
+            source_root.mkdir(parents=True, exist_ok=True)
+            (source_root / f"{subject_id}.csproj").write_text("<Project />\n", encoding="utf-8")
+
+            workspace_root = repo_root / "solutions" / "subjects" / subject_id
+            stale_managed_tests_root = workspace_root / "managed-tests"
+            stale_generated_root = stale_managed_tests_root / "Generated"
+            stale_generated_root.mkdir(parents=True, exist_ok=True)
+            stale_host_project_path = stale_managed_tests_root / "StaleBenchmarkHost.csproj"
+            stale_host_project_path.write_text("<Project />\n", encoding="utf-8")
+            stale_collection_path = stale_generated_root / "declared-tests.collection.json"
+            stale_collection_path.write_text('{"declaredBenchmarks":[{"entryIndex":1}]}', encoding="utf-8")
+            workspace_manifest_path = workspace_root / "workspace.manifest.json"
+            workspace_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "workspaceVersion": 2,
+                        "subjectId": subject_id,
+                        "managedTestProjects": [
+                            {
+                                "projectId": f"managed-test/{subject_id}/benchmark-host",
+                                "projectPath": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "managed-tests",
+                                    "StaleBenchmarkHost.csproj",
+                                ),
+                                "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
+                                "hostKind": "benchmark-host",
+                                "collectionPath": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "managed-tests",
+                                    "Generated",
+                                    "declared-tests.collection.json",
+                                ),
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            time.sleep(1.1)
+            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+            subject_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "subjectId": subject_id,
+                        "source": {
+                            "type": "dotnet-project",
+                            "path": subject_source_path(subject_id),
+                            "primaryProjectPath": subject_source_path(subject_id),
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            refreshed_host_project_path = stale_managed_tests_root / f"{subject_id}.DeclaredBenchmarkHost.csproj"
+            expected_output_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "host-input"
+
+            def fake_generate_subject_workspace(
+                repo_root_arg: Path,
+                host_platform_arg: str,
+                options_arg: dict[str, object],
+                **kwargs: object,
+            ) -> dict[str, object]:
+                del kwargs
+                self.assertEqual(repo_root, repo_root_arg)
+                self.assertEqual("windows", host_platform_arg)
+                self.assertEqual(f"subject/{subject_id}", options_arg["id"])
+                self.assertTrue(bool(options_arg["all-targets"]))
+                self.assertTrue(bool(options_arg["refresh-generated"]))
+
+                refreshed_host_project_path.write_text("<Project />\n", encoding="utf-8")
+                stale_collection_path.write_text('{"declaredBenchmarks":[{"entryIndex":11}]}', encoding="utf-8")
+                workspace_manifest_path.write_text(
+                    json.dumps(
+                        {
+                            "workspaceVersion": 2,
+                            "subjectId": subject_id,
+                            "managedTestProjects": [
+                                {
+                                    "projectId": f"managed-test/{subject_id}/benchmark-host",
+                                    "projectPath": posix_path(
+                                        "solutions",
+                                        "subjects",
+                                        subject_id,
+                                        "managed-tests",
+                                        f"{subject_id}.DeclaredBenchmarkHost.csproj",
+                                    ),
+                                    "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
+                                    "hostKind": "benchmark-host",
+                                    "collectionPath": posix_path(
+                                        "solutions",
+                                        "subjects",
+                                        subject_id,
+                                        "managed-tests",
+                                        "Generated",
+                                        "declared-tests.collection.json",
+                                    ),
+                                }
+                            ],
+                        }
+                    ),
+                    encoding="utf-8",
+                )
+                return {
+                    "manifestPath": posix_path("solutions", "subjects", subject_id, "workspace.manifest.json"),
+                }
+
+            class FakeProjectWorkspaceModule:
+                @staticmethod
+                def generate_subject_workspace(
+                    repo_root_arg: Path,
+                    host_platform_arg: str,
+                    options_arg: dict[str, object],
+                    **kwargs: object,
+                ) -> dict[str, object]:
+                    return fake_generate_subject_workspace(
+                        repo_root_arg,
+                        host_platform_arg,
+                        options_arg,
+                        **kwargs,
+                    )
+
+            def fake_run_checked(arguments: list[str], *, repo_root: Path, failure_message: str) -> str:
+                del failure_message
+                self.assertEqual(
+                    [
+                        "dotnet",
+                        "build",
+                        str(refreshed_host_project_path),
+                        "-c",
+                        "Release",
+                        "-m:1",
+                        "-o",
+                        str(expected_output_root),
+                        f"-p:ChaosTempIntermediateRoot={intermediate_root.as_posix()}/",
+                    ],
+                    arguments,
+                )
+                expected_output_root.mkdir(parents=True, exist_ok=True)
+                for file_name in [
+                    f"{subject_id}.DeclaredBenchmarkHost.dll",
+                    f"{subject_id}.DeclaredBenchmarkHost.deps.json",
+                    f"{subject_id}.DeclaredBenchmarkHost.pdb",
+                    f"{subject_id}.dll",
+                    "Chaos.TestFramework.Sdk.dll",
+                    "Chaos.TestFramework.Runtime.dll",
+                ]:
+                    (expected_output_root / file_name).write_text("", encoding="utf-8")
+                return ""
+
+            with patch.object(workers_module.tooling_module, "allocate_dotnet_intermediate_dir", return_value=intermediate_root):
+                with patch.object(workers_module, "_load_project_workspace_module", return_value=FakeProjectWorkspaceModule()):
+                    with patch.object(workers_module, "_run_checked", side_effect=fake_run_checked):
+                        result = workers_module.run_dotnet_host_input_builder(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(
+                posix_path("solutions", "subjects", subject_id, "managed-tests", f"{subject_id}.DeclaredBenchmarkHost.csproj"),
+                manifest["primaryProjectPath"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_workspace_manifest_generation_does_not_reenter_itself(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_workspace_manifest_reentry_guard")
+        subject_id = "FixtureWorkspaceManifestReentryGuardSubject"
+        selection = {
+            "subjectId": subject_id,
+            "executionContext": {
+                "hostPlatform": "windows-x64",
+            },
+        }
+
+        repo_root = self._make_repo_root("workspace-manifest-reentry-guard")
+        try:
+            workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+            nested_results: list[tuple[Path, dict[str, object]] | None] = []
+            generate_calls = 0
+
+            class FakeProjectWorkspaceModule:
+                @staticmethod
+                def generate_subject_workspace(
+                    repo_root_arg: Path,
+                    host_platform_arg: str,
+                    options_arg: dict[str, object],
+                    **kwargs: object,
+                ) -> dict[str, object]:
+                    nonlocal generate_calls
+                    del kwargs
+                    generate_calls += 1
+                    self.assertEqual(repo_root, repo_root_arg)
+                    self.assertEqual("windows", host_platform_arg)
+                    self.assertEqual(f"subject/{subject_id}", options_arg["id"])
+                    self.assertTrue(bool(options_arg["all-targets"]))
+                    self.assertTrue(bool(options_arg["refresh-generated"]))
+                    self.assertTrue(bool(options_arg["auto-refresh-missing-generated"]))
+
+                    nested_results.append(workers_module._ensure_subject_workspace_manifest(repo_root, selection))
+
+                    workspace_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+                    workspace_manifest_path.write_text(
+                        json.dumps(
+                            {
+                                "workspaceVersion": 2,
+                                "subjectId": subject_id,
+                                "managedTestProjects": [],
+                                "nativeTestProjects": [],
+                                "hotupdateTestProjects": [],
+                            }
+                        ),
+                        encoding="utf-8",
+                    )
+                    return {
+                        "manifestPath": posix_path("solutions", "subjects", subject_id, "workspace.manifest.json"),
+                    }
+
+            with patch.object(workers_module, "_load_project_workspace_module", return_value=FakeProjectWorkspaceModule):
+                loaded_manifest = workers_module._ensure_subject_workspace_manifest(repo_root, selection)
+
+            self.assertIsNotNone(loaded_manifest)
+            self.assertEqual(1, generate_calls)
+            self.assertEqual([None], nested_results)
+            self.assertEqual(workspace_manifest_path, loaded_manifest[0])
+            self.assertEqual(subject_id, loaded_manifest[1]["subjectId"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
     def test_host_input_build_uses_workspace_hotupdate_host_and_records_binding_manifest(self) -> None:
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_host_input_workspace_hotupdate_host")
         subject_id = "FixtureHotUpdateHostSubject"
@@ -2860,6 +3312,7 @@ class SubjectWorkersTests(unittest.TestCase):
             )
 
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("legacy-workload-entry", manifest["benchmarkResolutionKind"])
             self.assertEqual(workload_entry, manifest["workloadEntry"])
             self.assertEqual(assembly_path, manifest["workloadAssemblyPath"])
             self.assertEqual(perf_project_path, manifest["perfHarnessProjectPath"])
@@ -3000,6 +3453,7 @@ class SubjectWorkersTests(unittest.TestCase):
             )
 
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("legacy-workload-entry", manifest["benchmarkResolutionKind"])
             self.assertEqual("interpreter", manifest["mode"])
             self.assertEqual(workload_entry, manifest["workloadEntry"])
             self.assertEqual(assembly_path, manifest["workloadAssemblyPath"])
@@ -3279,6 +3733,7 @@ class SubjectWorkersTests(unittest.TestCase):
             )
 
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("declared-reflection", manifest["benchmarkResolutionKind"])
             self.assertEqual(resolved_workload_entry, manifest["workloadEntry"])
             self.assertEqual(slice_assembly_path, manifest["workloadAssemblyPath"])
             self.assertEqual(11, manifest["declaredEntrySelection"]["entryIndex"])
@@ -3434,8 +3889,6 @@ class SubjectWorkersTests(unittest.TestCase):
                     collection_path,
                     "--entry-index",
                     "11",
-                    "--workload-entry",
-                    resolved_workload_entry,
                     "--mode",
                     "managed",
                 ],
@@ -3443,6 +3896,7 @@ class SubjectWorkersTests(unittest.TestCase):
             )
 
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("collection-entry", manifest["benchmarkResolutionKind"])
             self.assertEqual(resolved_workload_entry, manifest["workloadEntry"])
             self.assertEqual(slice_assembly_path, manifest["workloadAssemblyPath"])
             self.assertEqual(11, manifest["declaredEntrySelection"]["entryIndex"])
@@ -3608,8 +4062,6 @@ class SubjectWorkersTests(unittest.TestCase):
                     "8",
                     "--binding-manifest-path",
                     binding_manifest_path,
-                    "--workload-entry",
-                    resolved_workload_entry,
                     "--mode",
                     "managed",
                 ],
@@ -3766,8 +4218,6 @@ class SubjectWorkersTests(unittest.TestCase):
                     collection_path,
                     "--entry-index",
                     "11",
-                    "--workload-entry",
-                    resolved_workload_entry,
                     "--mode",
                     "interpreter",
                 ],
@@ -3775,6 +4225,7 @@ class SubjectWorkersTests(unittest.TestCase):
             )
 
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("collection-entry", manifest["benchmarkResolutionKind"])
             self.assertEqual(resolved_workload_entry, manifest["workloadEntry"])
             self.assertEqual(slice_assembly_path, manifest["workloadAssemblyPath"])
             self.assertEqual(11, manifest["declaredEntrySelection"]["entryIndex"])
@@ -3940,8 +4391,6 @@ class SubjectWorkersTests(unittest.TestCase):
                     "8",
                     "--binding-manifest-path",
                     binding_manifest_path,
-                    "--workload-entry",
-                    resolved_workload_entry,
                     "--mode",
                     "interpreter",
                 ],

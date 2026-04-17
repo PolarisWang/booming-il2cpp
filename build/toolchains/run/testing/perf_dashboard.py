@@ -146,6 +146,38 @@ def _summary_workload_entry(manifest: dict[str, Any], matrix: dict[str, Any]) ->
     return str(matrix.get("workloadEntry") or matrix_source.get("entry") or manifest.get("workloadEntry") or "")
 
 
+def _resolve_summary_benchmark_case(
+    declared_cases: dict[str, dict[str, Any]],
+    *,
+    configured_workload_entry: str,
+) -> dict[str, Any] | None:
+    summary_case = _summary_benchmark_case(
+        declared_cases,
+        workload_entry=configured_workload_entry,
+    )
+    if summary_case is not None:
+        return summary_case
+
+    for case_id in sorted(declared_cases):
+        case = dict(declared_cases[case_id] or {})
+        if str(case.get("workloadEntry") or "").strip():
+            return case
+    return None
+
+
+def _resolve_summary_workload_entry(
+    manifest: dict[str, Any],
+    matrix: dict[str, Any],
+    *,
+    summary_benchmark_case: dict[str, Any] | None,
+) -> str:
+    if summary_benchmark_case is not None:
+        workload_entry = str(summary_benchmark_case.get("workloadEntry") or "").strip()
+        if workload_entry:
+            return workload_entry
+    return _summary_workload_entry(manifest, matrix)
+
+
 def _summary_benchmark_case(
     declared_cases: dict[str, dict[str, Any]],
     *,
@@ -199,10 +231,15 @@ def build_perf_dashboard_config(repo_root: Path) -> dict[str, Any]:
             if not baseline_path_text or not metric_keys:
                 continue
 
-            summary_workload_entry = _summary_workload_entry(manifest, matrix_payload)
-            summary_benchmark_case = _summary_benchmark_case(
+            configured_workload_entry = _summary_workload_entry(manifest, matrix_payload)
+            summary_benchmark_case = _resolve_summary_benchmark_case(
                 declared_cases,
-                workload_entry=summary_workload_entry,
+                configured_workload_entry=configured_workload_entry,
+            )
+            summary_workload_entry = _resolve_summary_workload_entry(
+                manifest,
+                matrix_payload,
+                summary_benchmark_case=summary_benchmark_case,
             )
 
             for goal_id in supported_goals:

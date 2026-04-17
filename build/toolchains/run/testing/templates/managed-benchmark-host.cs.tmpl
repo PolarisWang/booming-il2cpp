@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using Chaos.TestFramework.Runtime;
+
+namespace @@NAMESPACE@@;
+
+public sealed record DeclaredBenchmarkEntry(
+    int EntryIndex,
+    string StableId,
+    string Alias,
+    string AssemblyName,
+    string DeclaringType,
+    string MethodName,
+    string MethodSignature,
+    byte Category,
+    byte CapabilityFamily,
+    ushort CapabilityItem,
+    byte Archetype,
+    ushort HotUpdateCapability,
+    uint Requires,
+    ushort Metrics,
+    byte Modes,
+    byte WarmupCount,
+    ushort IterationCount,
+    ushort InvocationCount);
+
+public static class @@CLASS_NAME@@
+{
+    public static IReadOnlyList<DeclaredBenchmarkEntry> Entries { get; } = new DeclaredBenchmarkEntry[]
+    {
+@@ENTRY_RECORDS@@
+    };
+
+    public static int Main(string[] args)
+    {
+        var request = ChaosManagedHostArguments.Parse(args);
+        ChaosTestCollectionLoader.EnsureEntryExists(request.CollectionPath, ChaosManagedHostKind.Benchmark, request.EntryIndex);
+        return Execute(request.EntryIndex);
+    }
+
+    public static int Execute(int entryIndex)
+    {
+        switch (entryIndex)
+        {
+@@SWITCH_CASES@@
+            default:
+                throw new ArgumentOutOfRangeException(nameof(entryIndex), entryIndex, "Unknown declared benchmark entry index.");
+        }
+    }
+}

@@ -5,13 +5,20 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-DISCOVERY_PROGRAM_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.DeclarationDiscovery" / "Program.cs"
+COLLECTION_GEN_PROGRAM_PATH = REPO_ROOT / "src" / "tools" / "Chaos.TestFramework.CollectionGen" / "Program.cs"
+LEGACY_DISCOVERY_PROGRAM_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.DeclarationDiscovery" / "Program.cs"
 
 
 class DeclaredMetadataDiscoveryContractTests(unittest.TestCase):
+    def test_collection_generator_lives_in_test_framework_tools_boundary(self) -> None:
+        self.assertTrue(COLLECTION_GEN_PROGRAM_PATH.is_file(), msg=f"missing collection generator source: {COLLECTION_GEN_PROGRAM_PATH}")
+        self.assertFalse(
+            LEGACY_DISCOVERY_PROGRAM_PATH.exists(),
+            msg=f"legacy IL2CPP discovery tool should be removed: {LEGACY_DISCOVERY_PROGRAM_PATH}",
+        )
+
     def test_declaration_discovery_centralizes_attribute_schema_mapping(self) -> None:
-        self.assertTrue(DISCOVERY_PROGRAM_PATH.is_file(), msg=f"missing discovery source: {DISCOVERY_PROGRAM_PATH}")
-        discovery_source = DISCOVERY_PROGRAM_PATH.read_text(encoding="utf-8")
+        discovery_source = COLLECTION_GEN_PROGRAM_PATH.read_text(encoding="utf-8")
 
         self.assertIn("DeclarationAttributeSchema", discovery_source)
         self.assertIn("TryResolveDeclaredAttributeSchema", discovery_source)

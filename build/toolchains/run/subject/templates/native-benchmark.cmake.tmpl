@@ -1,0 +1,23 @@
+set(CHAOS_SUBJECT_BENCHMARK_HOST_MAIN "@@BENCHMARK_MAIN@@")
+
+if(NOT EXISTS "${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
+    message(FATAL_ERROR "Missing subject benchmark host source: ${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
+endif()
+
+add_executable(chaos_subject_native_aot EXCLUDE_FROM_ALL
+    "${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
+chaos_configure_subject_target(chaos_subject_native_aot)
+target_link_libraries(
+    chaos_subject_native_aot
+    PRIVATE
+        chaos_subject_generated_native
+        chaos_runtime_core
+        chaos_hot_update
+        chaos_bootstrap
+        chaos_support)
+
+set_target_properties(
+    chaos_subject_native_aot
+    PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CHAOS_SUBJECT_BUILD_OUT_ROOT}"
+        RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CHAOS_SUBJECT_BUILD_OUT_ROOT}")

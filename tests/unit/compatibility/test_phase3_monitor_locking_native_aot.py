@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import json
 import shutil
@@ -18,7 +18,7 @@ PROJECT_PATH = (
     / "subjects"
     / "SolutionCorePack"
     / "source"
-    / "FeatureSlices"
+    / "Proofs"
     / "CoreRuntimeFeatures"
     / "CoreRuntimeFeatures.csproj"
 )
@@ -27,7 +27,7 @@ DLL_PATH = (
     / "subjects"
     / "SolutionCorePack"
     / "source"
-    / "FeatureSlices"
+    / "Proofs"
     / "CoreRuntimeFeatures"
     / "bin"
     / "Release"
@@ -38,6 +38,8 @@ ENTRY_SUBJECT_ID = "CoreRuntimeFeatures/MonitorAndLockingProofEntry::Run()"
 INCREMENT_SUBJECT_ID = "CoreRuntimeFeatures/MonitorAndLockingProofEntry::Increment(System.Int32)"
 OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase3-monitor-locking-native-aot"
 GENERATED_CPP_RELATIVE_PATH = Path("generated") / "native-aot.generated.cpp"
+TYPE_INIT_SYMBOL = "chaos_ensure_type_initialized_CoreRuntimeFeatures_MonitorAndLockingProofEntry"
+STATIC_GATE_SYMBOL = "chaos_static_CoreRuntimeFeatures_MonitorAndLockingProofEntry__Gate"
 
 
 def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -154,6 +156,17 @@ class Phase3MonitorLockingNativeAotTests(unittest.TestCase):
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
         self.assertIn("// Managed method: CoreRuntimeFeatures/MonitorAndLockingProofEntry::Run()", generated_cpp)
         self.assertIn("// Managed method: CoreRuntimeFeatures/MonitorAndLockingProofEntry::Increment(System.Int32)", generated_cpp)
+
+    def test_emit_native_aot_materializes_static_gate_initializer_before_monitor_access(self) -> None:
+        self._ensure_native_emitted()
+
+        generated_cpp_path = self.emit_root / GENERATED_CPP_RELATIVE_PATH
+        generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
+
+        self.assertIn(f"void {TYPE_INIT_SYMBOL}()", generated_cpp)
+        self.assertIn(f"if ({STATIC_GATE_SYMBOL} == static_cast<std::intptr_t>(0))", generated_cpp)
+        self.assertIn(f"{STATIC_GATE_SYMBOL} = reinterpret_cast<std::intptr_t>(", generated_cpp)
+        self.assertIn(f"{TYPE_INIT_SYMBOL}();", generated_cpp)
 
 
 if __name__ == "__main__":

@@ -15,20 +15,16 @@ SUPPORT_DIR = REPO_ROOT / "src" / "native" / "support"
 SUPPORT_CMAKE_PATH = SUPPORT_DIR / "CMakeLists.txt"
 SUPPORT_HEADER_PATH = SUPPORT_DIR / "support.h"
 SUPPORT_SOURCE_PATH = SUPPORT_DIR / "support.cpp"
+SUBJECT_TEMPLATE_ROOT = REPO_ROOT / "build" / "toolchains" / "run" / "subject" / "templates"
+PROOF_WORKSPACE_TEMPLATE_PATH = SUBJECT_TEMPLATE_ROOT / "native-reference-workspace.cmake.tmpl"
+PROOF_GENERATED_TEMPLATE_PATH = SUBJECT_TEMPLATE_ROOT / "native-generated.cmake.tmpl"
+PROOF_HOST_TEMPLATE_PATH = SUBJECT_TEMPLATE_ROOT / "native-proof-main.cpp.tmpl"
+PROOF_CMAKE_TEMPLATE_PATH = SUBJECT_TEMPLATE_ROOT / "native-proof.cmake.tmpl"
+PROOF_RUN_SCRIPT_TEMPLATE_PATH = SUBJECT_TEMPLATE_ROOT / "native-proof-run.cmake.tmpl"
 
 
 class NativeReferenceBootstrapSupportTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.subject_id = "SolutionCorePack"
-        cls.proof_host_dir = (
-            REPO_ROOT / "subjects" / cls.subject_id / "validation" / "proof" / "native-reference"
-        )
-        cls.proof_host_cmake_path = cls.proof_host_dir / "CMakeLists.txt"
-        cls.proof_host_main_path = cls.proof_host_dir / "main.cpp"
-        cls.proof_host_run_script_path = cls.proof_host_dir / "RunNativeReferenceProof.cmake"
-
-    def test_bootstrap_support_and_proof_host_skeleton_files_exist(self) -> None:
+    def test_bootstrap_support_and_generic_proof_host_templates_exist(self) -> None:
         expected_paths = [
             BOOTSTRAP_DIR,
             BOOTSTRAP_CMAKE_PATH,
@@ -38,10 +34,12 @@ class NativeReferenceBootstrapSupportTests(unittest.TestCase):
             SUPPORT_CMAKE_PATH,
             SUPPORT_HEADER_PATH,
             SUPPORT_SOURCE_PATH,
-            self.proof_host_dir,
-            self.proof_host_cmake_path,
-            self.proof_host_main_path,
-            self.proof_host_run_script_path,
+            SUBJECT_TEMPLATE_ROOT,
+            PROOF_WORKSPACE_TEMPLATE_PATH,
+            PROOF_GENERATED_TEMPLATE_PATH,
+            PROOF_HOST_TEMPLATE_PATH,
+            PROOF_CMAKE_TEMPLATE_PATH,
+            PROOF_RUN_SCRIPT_TEMPLATE_PATH,
         ]
 
         for path in expected_paths:
@@ -97,12 +95,18 @@ class NativeReferenceBootstrapSupportTests(unittest.TestCase):
         for marker in required_markers:
             self.assertIn(marker, support_text)
 
-    def test_proof_host_skeleton_consumes_generated_translation_unit(self) -> None:
-        proof_host_cmake_text = self.proof_host_cmake_path.read_text(encoding="utf-8")
-        proof_host_main_text = self.proof_host_main_path.read_text(encoding="utf-8")
-        proof_host_run_script_text = self.proof_host_run_script_path.read_text(encoding="utf-8")
+    def test_proof_host_templates_consume_generated_translation_unit(self) -> None:
+        proof_workspace_text = PROOF_WORKSPACE_TEMPLATE_PATH.read_text(encoding="utf-8")
+        proof_generated_text = PROOF_GENERATED_TEMPLATE_PATH.read_text(encoding="utf-8")
+        proof_host_main_text = PROOF_HOST_TEMPLATE_PATH.read_text(encoding="utf-8")
+        proof_host_cmake_text = PROOF_CMAKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+        proof_host_run_script_text = PROOF_RUN_SCRIPT_TEMPLATE_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("native-reference.generated.cpp", proof_host_cmake_text)
+        self.assertIn("add_subdirectory(generated)", proof_workspace_text)
+        self.assertIn("add_subdirectory(proof)", proof_workspace_text)
+        self.assertIn("CHAOS_SUBJECT_REPO_ROOT", proof_workspace_text)
+        self.assertIn("CHAOS_SUBJECT_GENERATED_INPUT_SOURCE", proof_generated_text)
+        self.assertIn("chaos_subject_generated_native", proof_generated_text)
         self.assertIn("chaos_runtime_core", proof_host_cmake_text)
         self.assertIn("chaos_bootstrap", proof_host_cmake_text)
         self.assertIn("chaos_support", proof_host_cmake_text)
@@ -114,7 +118,7 @@ class NativeReferenceBootstrapSupportTests(unittest.TestCase):
             "RunNativeReference",
             "chaos_runtime_get_abi_v0",
             "chaos_codegen_get_bridge_v0",
-            "windows-x64-reference",
+            "kHostName = \"windows-x64-reference\"",
             "CodeRegistrationV0",
             "MetadataRegistrationV0",
             "CodegenRegistrationOptionsV0",
@@ -130,7 +134,7 @@ class NativeReferenceBootstrapSupportTests(unittest.TestCase):
             "RESULT_VARIABLE proof_exit_code",
             "OUTPUT_FILE",
             "ERROR_FILE",
-            "CHAOS_SUBJECT_REFERENCE_EXIT_CODE_PATH",
+            "CHAOS_SUBJECT_PROOF_EXIT_CODE_PATH",
         ]
 
         for marker in run_script_markers:

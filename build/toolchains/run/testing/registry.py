@@ -354,7 +354,6 @@ def _load_subject_manifest(path: Path) -> dict[str, Any]:
     default_matrix = subjects_module.find_matrix(payload, _require_string(payload, "defaultMatrix"))
     resolved_source = dict(payload.get("source") or {})
     resolved_source.update(dict(default_matrix.get("source") or {}))
-    default_subject_entry_selection = dict(resolved_source.get("entrySelection") or {})
 
     item = _base_registry_object(
         object_id=f"subject/{subject_id}",
@@ -392,8 +391,6 @@ def _load_subject_manifest(path: Path) -> dict[str, Any]:
     item["tags"] = _string_list(payload, "tags")
     item["defaultPrimaryProjectPath"] = subjects_module.resolve_source_primary_project_path(resolved_source)
     item["displaySourceEntry"] = str(resolved_source.get("entry") or "")
-    item["displaySubjectEntrySelection"] = default_subject_entry_selection
-    item["displayWorkloadEntry"] = str(default_matrix.get("workloadEntry") or payload.get("workloadEntry") or "")
     item["resolvedMembers"] = _resolved_member_ids(item)
     item["deprecated"] = _deprecated_flag(payload)
     return item

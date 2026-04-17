@@ -8,11 +8,15 @@
     <RootNamespace>HotUpdateHostPack</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Archetypes\\**\\*.cs" />
+    <Compile Remove="EngineeringScenarios\\**\\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../../src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj" />
     <ProjectReference Include="../../../src/managed/Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="HotUpdateHostPack.DeclaredProofHost" />
+    <InternalsVisibleTo Include="HotUpdateHostPack.DeclaredBenchmarkHost" />
   </ItemGroup>
 </Project>
 

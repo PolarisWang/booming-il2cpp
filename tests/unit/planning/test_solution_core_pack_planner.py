@@ -28,7 +28,7 @@ class SolutionCorePackPlannerTests(unittest.TestCase):
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("CoreRuntimeFeatures/InterfaceDispatchProofEntry::Run()", plan["selection"]["source"]["entry"])
@@ -77,7 +77,7 @@ class SolutionCorePackPlannerTests(unittest.TestCase):
         self.assertEqual("managed-runtime-output", plan["selection"]["pipelineId"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Archetypes/SimpleLibrarySolution/App/GoldenSimpleLib.App.csproj",
+            "subjects/SolutionCorePack/source/EngineeringScenarios/SimpleLibrarySolution/App/GoldenSimpleLib.App.csproj",
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenSimpleLib.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -97,7 +97,7 @@ class SolutionCorePackPlannerTests(unittest.TestCase):
         self.assertEqual("managed-runtime-output", plan["selection"]["pipelineId"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Archetypes/MultiProjectSolution/App/GoldenMultiProject.App.csproj",
+            "subjects/SolutionCorePack/source/EngineeringScenarios/MultiProjectSolution/App/GoldenMultiProject.App.csproj",
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenMultiProject.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -117,7 +117,7 @@ class SolutionCorePackPlannerTests(unittest.TestCase):
         self.assertEqual("managed-runtime-output", plan["selection"]["pipelineId"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Archetypes/PackageReferenceSolution/App/GoldenWithPackage.App.csproj",
+            "subjects/SolutionCorePack/source/EngineeringScenarios/PackageReferenceSolution/App/GoldenWithPackage.App.csproj",
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenWithPackage.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -137,7 +137,7 @@ class SolutionCorePackPlannerTests(unittest.TestCase):
         self.assertEqual("managed-runtime-output", plan["selection"]["pipelineId"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Archetypes/ReferenceAssemblySolution/App/GoldenReferenceAssembly.App.csproj",
+            "subjects/SolutionCorePack/source/EngineeringScenarios/ReferenceAssemblySolution/App/GoldenReferenceAssembly.App.csproj",
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenReferenceAssembly.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -157,7 +157,7 @@ class SolutionCorePackPlannerTests(unittest.TestCase):
         self.assertEqual("managed-runtime-output", plan["selection"]["pipelineId"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Archetypes/CoreLibReferenceSolution/App/GoldenCoreLibReference.App.csproj",
+            "subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/App/GoldenCoreLibReference.App.csproj",
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenCoreLibReference.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -177,7 +177,7 @@ class SolutionCorePackPlannerTests(unittest.TestCase):
         self.assertEqual("managed-runtime-output", plan["selection"]["pipelineId"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Archetypes/MixedReferenceClosureSolution/App/GoldenMixedReference.App.csproj",
+            "subjects/SolutionCorePack/source/EngineeringScenarios/MixedReferenceClosureSolution/App/GoldenMixedReference.App.csproj",
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenMixedReference.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -271,7 +271,7 @@ class SolutionCorePackPlannerTests(unittest.TestCase):
 
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Archetypes/SimpleLibrarySolution/App/GoldenSimpleLib.App.csproj",
+            "subjects/SolutionCorePack/source/EngineeringScenarios/SimpleLibrarySolution/App/GoldenSimpleLib.App.csproj",
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenSimpleLib.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -296,7 +296,7 @@ class SolutionCorePackPlannerTests(unittest.TestCase):
 
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Archetypes/ReferenceAssemblySolution/App/GoldenReferenceAssembly.App.csproj",
+            "subjects/SolutionCorePack/source/EngineeringScenarios/ReferenceAssemblySolution/App/GoldenReferenceAssembly.App.csproj",
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenReferenceAssembly.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -426,7 +426,7 @@ class RetainedSubjectPlannerTests(unittest.TestCase):
             / "subjects"
             / "MixedExecutionFeaturePack"
             / "source"
-            / "Archetypes"
+            / "EngineeringScenarios"
             / "MixedBridgeSolution"
             / "InterpreterArithmeticProof"
             / "InterpreterArithmeticProof.csproj"
@@ -447,3 +447,4 @@ class RetainedSubjectPlannerTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

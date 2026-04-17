@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -25,6 +27,82 @@ def load_module(path: Path, module_name: str):
 
 
 class Phase5OwnerSubjectCoverageTests(unittest.TestCase):
+    def test_capability_contract_can_be_loaded_from_subject_feature_authority_files(self) -> None:
+        capability_coverage = load_module(CAPABILITY_COVERAGE_MODULE_PATH, "chaos_phase5_capability_coverage_file_authority")
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir)
+            solution_features_path = repo_root / "subjects" / "SolutionCorePack" / "subject.features.json"
+            mixed_features_path = repo_root / "subjects" / "MixedExecutionFeaturePack" / "subject.features.json"
+            solution_features_path.parent.mkdir(parents=True, exist_ok=True)
+            mixed_features_path.parent.mkdir(parents=True, exist_ok=True)
+
+            solution_features_path.write_text(
+                json.dumps(
+                    {
+                        "schemaVersion": 1,
+                        "subjectId": "SolutionCorePack",
+                        "engineeringScenarios": [],
+                        "features": [
+                            {
+                                "capabilityFamily": 2,
+                                "capabilityItem": 501,
+                                "supportStates": [1, 4],
+                                "proofRequired": True,
+                                "benchmarkRequired": False,
+                            }
+                        ],
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            mixed_features_path.write_text(
+                json.dumps(
+                    {
+                        "schemaVersion": 1,
+                        "subjectId": "MixedExecutionFeaturePack",
+                        "engineeringScenarios": [],
+                        "features": [
+                            {
+                                "capabilityFamily": 14,
+                                "capabilityItem": 601,
+                                "supportStates": [3, 2, 1],
+                                "proofRequired": True,
+                                "benchmarkRequired": True,
+                            }
+                        ],
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            solution_contract = capability_coverage.resolve_capability_contract(
+                capability_family=0,
+                capability_item=501,
+                repo_root=repo_root,
+            )
+            mixed_contract = capability_coverage.resolve_capability_contract(
+                capability_family=0,
+                capability_item=601,
+                repo_root=repo_root,
+            )
+
+            self.assertEqual("SolutionCorePack", solution_contract["ownerSubjectId"])
+            self.assertEqual([1, 4], solution_contract["supportStates"])
+            self.assertTrue(solution_contract["proofRequired"])
+            self.assertFalse(solution_contract["benchmarkRequired"])
+
+            self.assertEqual("MixedExecutionFeaturePack", mixed_contract["ownerSubjectId"])
+            self.assertEqual([3, 2, 1], mixed_contract["supportStates"])
+            self.assertTrue(mixed_contract["proofRequired"])
+            self.assertTrue(mixed_contract["benchmarkRequired"])
+
     def test_capability_contract_resolves_solution_core_owner_and_support_states(self) -> None:
         capability_coverage = load_module(CAPABILITY_COVERAGE_MODULE_PATH, "chaos_phase5_capability_coverage_solution_core")
 

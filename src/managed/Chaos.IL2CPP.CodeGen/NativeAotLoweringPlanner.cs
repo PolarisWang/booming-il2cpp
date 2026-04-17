@@ -400,12 +400,16 @@ public sealed partial class NativeAotLoweringPlanner
             reachableMethods,
             closureManifest,
             metadataRegistration);
-        var externalRuntimeHelpers = CollectExternalRuntimeHelpers(reachableMethods);
+        _staticInitializationSupport = BuildStaticInitializationSupportModel(
+            reachableMethods,
+            closureManifest);
+        var externalRuntimeHelpers = CollectExternalRuntimeHelpers(reachableMethods, _staticInitializationSupport);
         var objectModelBuilder = new StringBuilder();
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
         EmitObjectModelDeclarations(objectModelBuilder, reachableMethods);
         EmitDelegateRuntimeSupportDefinitions(objectModelBuilder, reachableMethods, externalRuntimeHelpers);
         EmitExternalRuntimeHelperDefinitions(objectModelBuilder, externalRuntimeHelpers);
+        EmitStaticInitializationDefinitions(objectModelBuilder);
 
         var methodDeclarations = reachableMethods
             .Select(FormatMethodDeclaration)

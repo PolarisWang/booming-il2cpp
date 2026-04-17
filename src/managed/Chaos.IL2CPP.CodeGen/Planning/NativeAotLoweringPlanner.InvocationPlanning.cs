@@ -91,7 +91,8 @@ public sealed partial class NativeAotLoweringPlanner
     }
 
     private IReadOnlyList<ExternalRuntimeHelperDefinition> CollectExternalRuntimeHelpers(
-        IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
+        IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
+        StaticInitializationSupportModel staticInitializationSupport)
     {
         var helpersBySubjectId = new Dictionary<string, ExternalRuntimeHelperDefinition>(StringComparer.Ordinal);
         foreach (var method in reachableMethods)
@@ -104,6 +105,14 @@ public sealed partial class NativeAotLoweringPlanner
                     continue;
                 }
 
+                helpersBySubjectId[helperDefinition!.SubjectId] = helperDefinition;
+            }
+        }
+
+        foreach (var subjectId in staticInitializationSupport.RequiredExternalRuntimeHelperSubjectIds)
+        {
+            if (TryCreateExternalRuntimeHelperDefinition(subjectId, out var helperDefinition))
+            {
                 helpersBySubjectId[helperDefinition!.SubjectId] = helperDefinition;
             }
         }

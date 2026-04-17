@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import json
 import shutil
@@ -17,7 +17,7 @@ PROJECT_PATH = (
     / "subjects"
     / "SolutionCorePack"
     / "source"
-    / "FeatureSlices"
+    / "Proofs"
     / "CoreRuntimeFeatures"
     / "CoreRuntimeFeatures.csproj"
 )
@@ -26,7 +26,7 @@ DLL_PATH = (
     / "subjects"
     / "SolutionCorePack"
     / "source"
-    / "FeatureSlices"
+    / "Proofs"
     / "CoreRuntimeFeatures"
     / "bin"
     / "Release"

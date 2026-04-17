@@ -32,4 +32,5 @@
 
 ## 最近更新
 
+- `2026-04-17`：更新 `dev-systematic-debugging`、`dev-test-driven-development`、`dev-verification-before-completion` 与 `dev-project-test-governance`，新增测试阶段 `dotnet` 编译崩溃必须追根因并修复的规则。
 - `2026-04-17`：新增 `dev-project-test-governance`，并把 `subjects/test/Chaos.TestFramework/collection/runner/codegen` 相关任务正式接入主技能入口。

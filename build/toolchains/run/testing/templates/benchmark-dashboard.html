@@ -116,6 +116,7 @@
     font-size: 0.74rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
   }
   .status-recorded { background: rgba(22,101,52,0.12); color: var(--ok); }
+  .status-stale { background: rgba(185,28,28,0.12); color: var(--danger); }
   .status-missing { background: rgba(194,65,12,0.12); color: var(--warn); }
   .status-unsupported { background: rgba(107,114,128,0.12); color: var(--soft); }
   .metric-figure { font-size: 1.45rem; font-weight: 700; line-height: 1.15; }
@@ -260,11 +261,18 @@ function statusReasonCode(entry) {
 function statusReasonLabel(entry, fallback) {
   return String((entry && entry.reasonLabel) || fallback || 'No benchmark data available.');
 }
+function staleReasonLabel(entry) {
+  return String((entry && entry.staleReasonLabel) || 'This record is older than the latest subject commit.');
+}
+function appendStaleNote(pieces, entry) {
+  if (entry && entry.isStale) pieces.push(staleReasonLabel(entry));
+}
 function relativeStatusFigure(relative) {
   if (!relative) return 'No comparison';
   const reasonCode = statusReasonCode(relative);
   if (relative.status === 'missing') return 'Missing record';
   if (relative.status === 'unsupported') return 'Unsupported by contract';
+  if (relative.status === 'stale') return 'Stale record';
   if (relative.status === 'baseline-unavailable') {
     if (reasonCode === 'baseline-missing-record') return 'Baseline missing';
     if (reasonCode === 'baseline-unsupported-by-contract') return 'Baseline unsupported';
@@ -329,6 +337,7 @@ function baselineMeta(baseline) {
   if (baseline.opsPerSecond != null) pieces.push(formatOpsValue(baseline.opsPerSecond));
   if (baseline.recordedAt) pieces.push(formatDate(baseline.recordedAt));
   if (baseline.gitCommit) pieces.push(baseline.gitCommit);
+  appendStaleNote(pieces, baseline);
   return pieces.join(' · ') || 'Managed mean duration baseline';
 }
 function latencyDeltaValue(currentDuration, baselineDuration) {
@@ -361,6 +370,7 @@ function relativeMeta(relative) {
   if (relative.opsPerSecond != null) pieces.push(formatOpsValue(relative.opsPerSecond));
   if (relative.ratio && relative.ratio.basis) pieces.push(`via ${relative.ratio.basis}`);
   if (relative.recordedAt) pieces.push(formatDate(relative.recordedAt));
+  appendStaleNote(pieces, relative);
   return pieces.join(' · ') || 'No comparable data';
 }
 function deltaFigure(relative) {
@@ -377,6 +387,7 @@ function deltaMeta(relative, baseline) {
   if (relative.ratio && relative.ratio.value != null) pieces.push(`${relative.ratio.value.toFixed(2)}x ${relative.direction}`);
   if (relative.opsPerSecond != null) pieces.push(formatOpsValue(relative.opsPerSecond));
   if (relative.recordedAt) pieces.push(formatDate(relative.recordedAt));
+  appendStaleNote(pieces, relative);
   return pieces.join(' · ') || 'No comparable data';
 }
 function modeMeta(mode, modeEntry, keyMetrics) {
@@ -404,6 +415,7 @@ function formatModeEvidence(modeEntry) {
   if (duration != null) pieces.push(formatDurationValue(duration));
   if (ops != null) pieces.push(formatOpsValue(ops));
   if ((modeEntry || {}).recordedAt) pieces.push(formatDate(modeEntry.recordedAt));
+  appendStaleNote(pieces, modeEntry);
   return pieces.join(' · ') || 'No record';
 }
 function pillList(labels, variantClass) {
@@ -422,6 +434,8 @@ function groupCasesByAssembly(caseEntries) {
         crossModeCaseCount: 0,
         managedOnlyCaseCount: 0,
         missingCaseCount: 0,
+        staleCaseCount: 0,
+        attentionCaseCount: 0,
         supportedModes: new Set(),
         caseLabels: [],
       };
@@ -431,6 +445,8 @@ function groupCasesByAssembly(caseEntries) {
     if ((caseEntry.supportedModes || []).length >= 2) group.crossModeCaseCount += 1;
     if ((caseEntry.supportedModes || []).length === 1 && caseEntry.supportedModes[0] === 'managed') group.managedOnlyCaseCount += 1;
     if ((caseEntry.missingModes || []).length > 0) group.missingCaseCount += 1;
+    if (caseEntry.isStale) group.staleCaseCount += 1;
+    if ((caseEntry.missingModes || []).length > 0 || caseEntry.isStale) group.attentionCaseCount += 1;
     (caseEntry.supportedModes || []).forEach((mode) => group.supportedModes.add(mode));
     group.caseLabels.push(caseEntry.displayName || caseEntry.caseId);
   });
@@ -447,7 +463,7 @@ function caseFilterMatch(caseEntry, filterValue) {
   const missingModes = caseEntry.missingModes || [];
   if (filterValue === 'cross-mode') return supportedModes.length >= 2;
   if (filterValue === 'managed-only') return supportedModes.length === 1 && supportedModes[0] === 'managed';
-  if (filterValue === 'attention') return missingModes.length > 0;
+  if (filterValue === 'attention') return missingModes.length > 0 || !!caseEntry.isStale;
   return true;
 }
 function caseModeCell(caseEntry, mode) {
@@ -464,6 +480,7 @@ function caseModeCell(caseEntry, mode) {
   return `
     <div class="case-mode-cell">
       <span class="status-badge status-${status}">${status}</span>
+      ${modeEntry.isStale ? '<span class="status-badge status-stale">stale</span>' : ''}
       <div class="mode-evidence">
         <div class="metric-figure">${primary}</div>
         <div class="metric-meta">${secondary}</div>
@@ -595,7 +612,7 @@ function renderOverview() {
       const meta = modeMeta(mode, modeEntry, keyMetrics);
       return `
         <div class="mode-card">
-          <header><h4>${modeLabel(mode)}</h4><span class="status-badge status-${status}">${status}</span></header>
+          <header><h4>${modeLabel(mode)}</h4><span class="status-badge status-${status}">${status}</span>${modeEntry.isStale ? '<span class="status-badge status-stale">stale</span>' : ''}</header>
           <div class="metric-figure">${metricText}</div>
           <div class="metric-meta">${meta}</div>
         </div>
@@ -622,7 +639,7 @@ function renderOverview() {
           <div class="case-card"><span class="label">Cases</span><strong>${caseSummary.caseCount || 0}</strong><small>Declared benchmark entries</small></div>
           <div class="case-card"><span class="label">Cross-mode</span><strong>${caseSummary.crossModeCaseCount || 0}</strong><small>Comparable against managed</small></div>
           <div class="case-card"><span class="label">Managed-only</span><strong>${caseSummary.managedOnlyCaseCount || 0}</strong><small>Diagnostic slices not in native AOT</small></div>
-          <div class="case-card"><span class="label">Case Gaps</span><strong>${caseSummary.missingCaseCount || 0}</strong><small>Cases with missing supported-mode data</small></div>
+          <div class="case-card"><span class="label">Needs Attention</span><strong>${caseSummary.attentionCaseCount || 0}</strong><small>${caseSummary.missingCaseCount || 0} gaps · ${caseSummary.staleCaseCount || 0} stale</small></div>
         </div>
         <div class="mode-grid">${modeCards}</div>
       </article>
@@ -691,7 +708,7 @@ function renderDetail() {
       <div class="case-card"><span class="label">Cases</span><strong>${caseSummary.caseCount || 0}</strong><small>Declared benchmark cases on this device view</small></div>
       <div class="case-card"><span class="label">Cross-mode</span><strong>${caseSummary.crossModeCaseCount || 0}</strong><small>Managed baseline with at least one comparison mode</small></div>
       <div class="case-card"><span class="label">Managed-only</span><strong>${caseSummary.managedOnlyCaseCount || 0}</strong><small>Intentional diagnostics outside native AOT scope</small></div>
-      <div class="case-card"><span class="label">Needs Attention</span><strong>${caseSummary.missingCaseCount || 0}</strong><small>Cases missing supported-mode records</small></div>
+      <div class="case-card"><span class="label">Needs Attention</span><strong>${caseSummary.attentionCaseCount || 0}</strong><small>${caseSummary.missingCaseCount || 0} gaps · ${caseSummary.staleCaseCount || 0} stale</small></div>
     </div>
   `;
   const history = ((((subject.history || {})[deviceId]) || {})[trendMode]) || [];
@@ -731,7 +748,7 @@ function renderDetail() {
     <div class="slice-card">
       <span class="label">${slice.assemblyName}</span>
       <strong>${slice.caseCount}</strong>
-      <small>${slice.crossModeCaseCount} cross-mode · ${slice.managedOnlyCaseCount} managed-only · ${slice.missingCaseCount} gaps</small>
+      <small>${slice.crossModeCaseCount} cross-mode · ${slice.managedOnlyCaseCount} managed-only · ${slice.attentionCaseCount} attention · ${slice.missingCaseCount} gaps · ${slice.staleCaseCount} stale</small>
       <div class="pill-list">${pillList((slice.supportedModes || []).map(modeLabel), 'pill-accent')}</div>
       <div class="summary-note">${(slice.caseLabels || []).join(' · ')}</div>
     </div>

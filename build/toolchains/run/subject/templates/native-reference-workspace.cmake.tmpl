@@ -1,0 +1,88 @@
+cmake_minimum_required(VERSION 3.20)
+
+project(chaos_subject_native_workspace LANGUAGES CXX)
+
+if(NOT DEFINED CHAOS_SUBJECT_REPO_ROOT OR CHAOS_SUBJECT_REPO_ROOT STREQUAL "")
+    message(FATAL_ERROR "CHAOS_SUBJECT_REPO_ROOT is required")
+endif()
+
+set(REPO_ROOT "${CHAOS_SUBJECT_REPO_ROOT}")
+set(CHAOS_SUBJECT_VARIANT "CHECK" CACHE STRING "Variant selector for the current subject reference fixture")
+set_property(CACHE CHAOS_SUBJECT_VARIANT PROPERTY STRINGS CHECK PROFILE SHIP)
+
+set(CHAOS_SUBJECT_BUILD_OUT_ROOT
+    "${REPO_ROOT}/artifacts/subjects/FixtureSubject/runs/subject-exec/matrices/windows-dev-output/build/out"
+    CACHE PATH "Build output root for the current subject reference fixture")
+set(CHAOS_SUBJECT_RUNTIME_ROOT
+    "${REPO_ROOT}/artifacts/subjects/FixtureSubject/runs/subject-exec/matrices/windows-dev-output/runtime"
+    CACHE PATH "Runtime evidence root for the current subject reference fixture")
+
+function(chaos_apply_subject_variant target_name)
+    if(CHAOS_SUBJECT_VARIANT STREQUAL "CHECK")
+        target_compile_definitions(
+            "${target_name}"
+            PRIVATE
+                CHAOS_VARIANT_CHECK
+                "CHAOS_VARIANT_NAME=\\"CHECK\\"")
+        target_compile_options(
+            "${target_name}"
+            PRIVATE
+                $<$<CXX_COMPILER_ID:MSVC>:/Od /Zi>
+                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O0 -g>)
+        return()
+    endif()
+
+    if(CHAOS_SUBJECT_VARIANT STREQUAL "PROFILE")
+        target_compile_definitions(
+            "${target_name}"
+            PRIVATE
+                CHAOS_VARIANT_PROFILE
+                "CHAOS_VARIANT_NAME=\\"PROFILE\\"")
+        target_compile_options(
+            "${target_name}"
+            PRIVATE
+                $<$<CXX_COMPILER_ID:MSVC>:/O2 /DNDEBUG>
+                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O3 -DNDEBUG>)
+        return()
+    endif()
+
+    if(CHAOS_SUBJECT_VARIANT STREQUAL "SHIP")
+        target_compile_definitions(
+            "${target_name}"
+            PRIVATE
+                CHAOS_VARIANT_SHIP
+                "CHAOS_VARIANT_NAME=\\"SHIP\\"")
+        target_compile_options(
+            "${target_name}"
+            PRIVATE
+                $<$<CXX_COMPILER_ID:MSVC>:/O2 /GL /DNDEBUG>
+                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O3 -DNDEBUG>)
+        target_link_options(
+            "${target_name}"
+            PRIVATE
+                $<$<CXX_COMPILER_ID:MSVC>:/LTCG>)
+        return()
+    endif()
+
+    message(FATAL_ERROR "Unsupported CHAOS_SUBJECT_VARIANT='${CHAOS_SUBJECT_VARIANT}'")
+endfunction()
+
+function(chaos_configure_subject_target target_name)
+    target_compile_features("${target_name}" PRIVATE cxx_std_17)
+    target_include_directories(
+        "${target_name}"
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/bootstrap"
+            "${REPO_ROOT}/src/native/support")
+    chaos_apply_subject_variant("${target_name}")
+endfunction()
+
+add_subdirectory("${REPO_ROOT}/third_party/bdwgc" "bdwgc")
+add_subdirectory("${REPO_ROOT}/src/native/runtime-core" "runtime-core")
+add_subdirectory("${REPO_ROOT}/src/native/hot-update" "hot-update")
+add_subdirectory("${REPO_ROOT}/src/native/support" "support")
+add_subdirectory("${REPO_ROOT}/src/native/bootstrap" "bootstrap")
+add_subdirectory(generated)
+add_subdirectory(proof)

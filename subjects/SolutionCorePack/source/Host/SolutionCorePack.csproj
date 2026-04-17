@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>SolutionCorePack</AssemblyName>
+    <RootNamespace>SolutionCorePack</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
+    <ProjectReference Include="..\Proofs\CoreRuntimeFeatures\CoreRuntimeFeatures.csproj" />
+    <ProjectReference Include="..\Benchmarks\CoreRuntimeBenchmarks\CoreRuntimeBenchmarks.csproj" />
+    <ProjectReference Include="..\EngineeringScenarios\SimpleLibrarySolution\App\GoldenSimpleLib.App.csproj" />
+    <ProjectReference Include="..\EngineeringScenarios\MultiProjectSolution\App\GoldenMultiProject.App.csproj" />
+    <ProjectReference Include="..\EngineeringScenarios\PackageReferenceSolution\App\GoldenWithPackage.App.csproj" />
+    <ProjectReference Include="..\EngineeringScenarios\ReferenceAssemblySolution\App\GoldenReferenceAssembly.App.csproj" />
+    <ProjectReference Include="..\EngineeringScenarios\CoreLibReferenceSolution\App\GoldenCoreLibReference.App.csproj" />
+    <ProjectReference Include="..\EngineeringScenarios\MixedReferenceClosureSolution\App\GoldenMixedReference.App.csproj" />
+  </ItemGroup>
+</Project>
+

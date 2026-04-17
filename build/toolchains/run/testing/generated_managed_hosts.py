@@ -1,11 +1,23 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from typing import Any, Iterable
+import sys
+
+try:
+    from . import template_assets as template_assets_module
+except ImportError:
+    root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(root))
+    from testing import template_assets as template_assets_module
 
 
 _FRAMEWORK_PROJECT_REFERENCE = "../../../../src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj"
 _RUNTIME_PROJECT_REFERENCE = "../../../../src/reference/Chaos.TestFramework.Runtime/Chaos.TestFramework.Runtime.csproj"
+_PROOF_HOST_TEMPLATE = "templates/managed-proof-host.cs.tmpl"
+_BENCHMARK_HOST_TEMPLATE = "templates/managed-benchmark-host.cs.tmpl"
+_HOST_PROJECT_TEMPLATE = "templates/managed-declared-host.csproj.tmpl"
 
 
 def assign_entry_indexes(entries: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -44,32 +56,19 @@ def render_declared_test_host_project(
 ) -> str:
     project_name = assembly_name or _host_class_name(subject_id=subject_id, host_kind=host_kind)
     references = [_FRAMEWORK_PROJECT_REFERENCE, _RUNTIME_PROJECT_REFERENCE, *list(project_references)]
-    lines = [
-        '<Project Sdk="Microsoft.NET.Sdk">',
-        "  <PropertyGroup>",
-        "    <TargetFramework>net8.0</TargetFramework>",
-        "    <OutputType>Exe</OutputType>",
-        "    <ImplicitUsings>enable</ImplicitUsings>",
-        "    <Nullable>enable</Nullable>",
-        "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>",
-        f"    <AssemblyName>{project_name}</AssemblyName>",
-        f"    <RootNamespace>{project_name}</RootNamespace>",
-        "  </PropertyGroup>",
-        "  <ItemGroup>",
-    ]
-    for reference in references:
-        lines.append(f'    <ProjectReference Include="{_xml_escape(str(reference))}" />')
-    lines.extend(
-        [
-            "  </ItemGroup>",
-            "  <ItemGroup>",
-            f'    <Compile Include="{_xml_escape(str(generated_source_path))}" />',
-            "  </ItemGroup>",
-            "</Project>",
-            "",
-        ]
+    project_reference_items = "\n".join(
+        f'    <ProjectReference Include="{_xml_escape(str(reference))}" />'
+        for reference in references
     )
-    return "\n".join(lines)
+    return template_assets_module.render_template(
+        owner_file=__file__,
+        relative_template_path=_HOST_PROJECT_TEMPLATE,
+        replacements={
+            "ASSEMBLY_NAME": _xml_escape(project_name),
+            "PROJECT_REFERENCES": project_reference_items,
+            "GENERATED_SOURCE_PATH": _xml_escape(str(generated_source_path)),
+        },
+    )
 
 
 def _render_proof_host_source(
@@ -78,38 +77,37 @@ def _render_proof_host_source(
     class_name: str,
     entries: list[dict[str, Any]],
 ) -> str:
-    lines = [
-        "using System;",
-        "using Chaos.TestFramework;",
-        "using Chaos.TestFramework.Runtime;",
-        "",
-        f"namespace {namespace_name};",
-        "",
-        f"public static class {class_name}",
-        "{",
-        "    public static int Main(string[] args)",
-        "    {",
-        "        var request = ChaosManagedHostArguments.Parse(args);",
-        "        ChaosTestCollectionLoader.EnsureEntryExists(request.CollectionPath, ChaosManagedHostKind.Proof, request.EntryIndex);",
-        "        try",
-        "        {",
-        "            ChaosAssertState.Reset();",
-        "            Execute(request.EntryIndex);",
-        "            return ChaosAssertState.Complete();",
-        "        }",
-        "        catch (ChaosAssertionException exception)",
-        "        {",
-        "            Console.Error.WriteLine(exception.Message);",
-        "            ChaosAssertState.RecordFailure();",
-        "            return ChaosAssertState.Complete();",
-        "        }",
-        "    }",
-        "",
-        "    public static int Execute(int entryIndex)",
-        "    {",
-        "        switch (entryIndex)",
-        "        {",
-    ]
+    return template_assets_module.render_template(
+        owner_file=__file__,
+        relative_template_path=_PROOF_HOST_TEMPLATE,
+        replacements={
+            "NAMESPACE": namespace_name,
+            "CLASS_NAME": class_name,
+            "SWITCH_CASES": _render_switch_cases(entries),
+        },
+    )
+
+
+def _render_benchmark_host_source(
+    *,
+    namespace_name: str,
+    class_name: str,
+    entries: list[dict[str, Any]],
+) -> str:
+    return template_assets_module.render_template(
+        owner_file=__file__,
+        relative_template_path=_BENCHMARK_HOST_TEMPLATE,
+        replacements={
+            "NAMESPACE": namespace_name,
+            "CLASS_NAME": class_name,
+            "ENTRY_RECORDS": _render_benchmark_entries(entries),
+            "SWITCH_CASES": _render_switch_cases(entries),
+        },
+    )
+
+
+def _render_switch_cases(entries: list[dict[str, Any]]) -> str:
+    lines: list[str] = []
     for entry in entries:
         entry_index = int(entry.get("entryIndex", -1))
         declaring_type = str(entry.get("declaringType") or "")
@@ -121,57 +119,11 @@ def _render_proof_host_source(
                 "                return 0;",
             ]
         )
-    lines.extend(
-        [
-            '            default:',
-            '                throw new ArgumentOutOfRangeException(nameof(entryIndex), entryIndex, "Unknown declared proof entry index.");',
-            "        }",
-            "    }",
-            "}",
-            "",
-        ]
-    )
     return "\n".join(lines)
 
 
-def _render_benchmark_host_source(
-    *,
-    namespace_name: str,
-    class_name: str,
-    entries: list[dict[str, Any]],
-) -> str:
-    lines = [
-        "using System;",
-        "using System.Collections.Generic;",
-        "using Chaos.TestFramework.Runtime;",
-        "",
-        f"namespace {namespace_name};",
-        "",
-        "public sealed record DeclaredBenchmarkEntry(",
-        "    int EntryIndex,",
-        "    string StableId,",
-        "    string Alias,",
-        "    string AssemblyName,",
-        "    string DeclaringType,",
-        "    string MethodName,",
-        "    string MethodSignature,",
-        "    byte Category,",
-        "    byte CapabilityFamily,",
-        "    ushort CapabilityItem,",
-        "    byte Archetype,",
-        "    ushort HotUpdateCapability,",
-        "    uint Requires,",
-        "    ushort Metrics,",
-        "    byte Modes,",
-        "    byte WarmupCount,",
-        "    ushort IterationCount,",
-        "    ushort InvocationCount);",
-        "",
-        f"public static class {class_name}",
-        "{",
-        "    public static IReadOnlyList<DeclaredBenchmarkEntry> Entries { get; } = new DeclaredBenchmarkEntry[]",
-        "    {",
-    ]
+def _render_benchmark_entries(entries: list[dict[str, Any]]) -> str:
+    lines: list[str] = []
     for entry in entries:
         lines.extend(
             [
@@ -196,44 +148,6 @@ def _render_benchmark_host_source(
                 f"            InvocationCount: {int(entry.get('invocationCount') or 0)}),",
             ]
         )
-    lines.extend(
-        [
-            "    };",
-            "",
-            "    public static int Main(string[] args)",
-            "    {",
-            "        var request = ChaosManagedHostArguments.Parse(args);",
-            "        ChaosTestCollectionLoader.EnsureEntryExists(request.CollectionPath, ChaosManagedHostKind.Benchmark, request.EntryIndex);",
-            "        return Execute(request.EntryIndex);",
-            "    }",
-            "",
-            "    public static int Execute(int entryIndex)",
-            "    {",
-            "        switch (entryIndex)",
-            "        {",
-        ]
-    )
-    for entry in entries:
-        entry_index = int(entry.get("entryIndex", -1))
-        declaring_type = str(entry.get("declaringType") or "")
-        method_name = str(entry.get("methodName") or "")
-        lines.extend(
-            [
-                f"            case {entry_index}:",
-                f"                global::{declaring_type}.{method_name}();",
-                "                return 0;",
-            ]
-        )
-    lines.extend(
-        [
-            '            default:',
-            '                throw new ArgumentOutOfRangeException(nameof(entryIndex), entryIndex, "Unknown declared benchmark entry index.");',
-            "        }",
-            "    }",
-            "}",
-            "",
-        ]
-    )
     return "\n".join(lines)
 
 

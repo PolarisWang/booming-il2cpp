@@ -14,6 +14,7 @@ try:
     from ..testing import compiled_catalog as compiled_catalog_module
     from ..testing import generated_hotupdate_hosts as generated_hotupdate_hosts_module
     from ..testing import generated_managed_hosts as generated_managed_hosts_module
+    from ..testing import template_assets as template_assets_module
     from ..testing import subject_executor as subject_executor_module
     from ..testing import subject_planner as subject_planner_module
     from ..testing import subjects as subjects_module
@@ -26,6 +27,7 @@ except ImportError:
     from testing import compiled_catalog as compiled_catalog_module
     from testing import generated_hotupdate_hosts as generated_hotupdate_hosts_module
     from testing import generated_managed_hosts as generated_managed_hosts_module
+    from testing import template_assets as template_assets_module
     from testing import subject_executor as subject_executor_module
     from testing import subject_planner as subject_planner_module
     from testing import subjects as subjects_module
@@ -116,302 +118,13 @@ DEFAULT_CORE_TARGET_BY_HOST = {
     "macos": "macos-reference",
     "linux": "linux-x64",
 }
-GENERIC_SUBJECT_REFERENCE_RUN_SCRIPT = """if(NOT DEFINED CHAOS_SUBJECT_PROOF_EXE OR CHAOS_SUBJECT_PROOF_EXE STREQUAL "")
-    message(FATAL_ERROR "CHAOS_SUBJECT_PROOF_EXE is required")
-endif()
-
-if(NOT DEFINED CHAOS_SUBJECT_PROOF_RUN_OUTPUT_ROOT OR CHAOS_SUBJECT_PROOF_RUN_OUTPUT_ROOT STREQUAL "")
-    message(FATAL_ERROR "CHAOS_SUBJECT_PROOF_RUN_OUTPUT_ROOT is required")
-endif()
-
-if(NOT DEFINED CHAOS_SUBJECT_PROOF_STDOUT_PATH OR CHAOS_SUBJECT_PROOF_STDOUT_PATH STREQUAL "")
-    message(FATAL_ERROR "CHAOS_SUBJECT_PROOF_STDOUT_PATH is required")
-endif()
-
-if(NOT DEFINED CHAOS_SUBJECT_PROOF_STDERR_PATH OR CHAOS_SUBJECT_PROOF_STDERR_PATH STREQUAL "")
-    message(FATAL_ERROR "CHAOS_SUBJECT_PROOF_STDERR_PATH is required")
-endif()
-
-if(NOT DEFINED CHAOS_SUBJECT_PROOF_EXIT_CODE_PATH OR CHAOS_SUBJECT_PROOF_EXIT_CODE_PATH STREQUAL "")
-    message(FATAL_ERROR "CHAOS_SUBJECT_PROOF_EXIT_CODE_PATH is required")
-endif()
-
-file(MAKE_DIRECTORY "${CHAOS_SUBJECT_PROOF_RUN_OUTPUT_ROOT}")
-
-execute_process(
-    COMMAND "${CHAOS_SUBJECT_PROOF_EXE}"
-    WORKING_DIRECTORY "${CHAOS_SUBJECT_PROOF_RUN_OUTPUT_ROOT}"
-    RESULT_VARIABLE proof_exit_code
-    OUTPUT_FILE "${CHAOS_SUBJECT_PROOF_STDOUT_PATH}"
-    ERROR_FILE "${CHAOS_SUBJECT_PROOF_STDERR_PATH}")
-
-file(WRITE "${CHAOS_SUBJECT_PROOF_EXIT_CODE_PATH}" "${proof_exit_code}\n")
-
-if(NOT proof_exit_code EQUAL 0)
-    message(FATAL_ERROR
-        "Subject native reference proof failed with exit code ${proof_exit_code}; "
-        "see ${CHAOS_SUBJECT_PROOF_STDOUT_PATH}, ${CHAOS_SUBJECT_PROOF_STDERR_PATH}, and ${CHAOS_SUBJECT_PROOF_EXIT_CODE_PATH}.")
-endif()
-"""
-SUBJECT_NATIVE_WORKSPACE_CMAKELISTS_TEMPLATE = """cmake_minimum_required(VERSION 3.20)
-
-project(chaos_subject_native_workspace LANGUAGES CXX)
-
-if(NOT DEFINED CHAOS_SUBJECT_REPO_ROOT OR CHAOS_SUBJECT_REPO_ROOT STREQUAL "")
-    message(FATAL_ERROR "CHAOS_SUBJECT_REPO_ROOT is required")
-endif()
-
-set(REPO_ROOT "${CHAOS_SUBJECT_REPO_ROOT}")
-set(CHAOS_SUBJECT_VARIANT "CHECK" CACHE STRING "Variant selector for the current subject reference fixture")
-set_property(CACHE CHAOS_SUBJECT_VARIANT PROPERTY STRINGS CHECK PROFILE SHIP)
-
-set(CHAOS_SUBJECT_BUILD_OUT_ROOT
-    "${REPO_ROOT}/artifacts/subjects/FixtureSubject/runs/subject-exec/matrices/windows-dev-output/build/out"
-    CACHE PATH "Build output root for the current subject reference fixture")
-set(CHAOS_SUBJECT_RUNTIME_ROOT
-    "${REPO_ROOT}/artifacts/subjects/FixtureSubject/runs/subject-exec/matrices/windows-dev-output/runtime"
-    CACHE PATH "Runtime evidence root for the current subject reference fixture")
-
-function(chaos_apply_subject_variant target_name)
-    if(CHAOS_SUBJECT_VARIANT STREQUAL "CHECK")
-        target_compile_definitions(
-            "${target_name}"
-            PRIVATE
-                CHAOS_VARIANT_CHECK
-                "CHAOS_VARIANT_NAME=\\"CHECK\\"")
-        target_compile_options(
-            "${target_name}"
-            PRIVATE
-                $<$<CXX_COMPILER_ID:MSVC>:/Od /Zi>
-                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O0 -g>)
-        return()
-    endif()
-
-    if(CHAOS_SUBJECT_VARIANT STREQUAL "PROFILE")
-        target_compile_definitions(
-            "${target_name}"
-            PRIVATE
-                CHAOS_VARIANT_PROFILE
-                "CHAOS_VARIANT_NAME=\\"PROFILE\\"")
-        target_compile_options(
-            "${target_name}"
-            PRIVATE
-                $<$<CXX_COMPILER_ID:MSVC>:/O2 /DNDEBUG>
-                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O3 -DNDEBUG>)
-        return()
-    endif()
-
-    if(CHAOS_SUBJECT_VARIANT STREQUAL "SHIP")
-        target_compile_definitions(
-            "${target_name}"
-            PRIVATE
-                CHAOS_VARIANT_SHIP
-                "CHAOS_VARIANT_NAME=\\"SHIP\\"")
-        target_compile_options(
-            "${target_name}"
-            PRIVATE
-                $<$<CXX_COMPILER_ID:MSVC>:/O2 /GL /DNDEBUG>
-                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O3 -DNDEBUG>)
-        target_link_options(
-            "${target_name}"
-            PRIVATE
-                $<$<CXX_COMPILER_ID:MSVC>:/LTCG>)
-        return()
-    endif()
-
-    message(FATAL_ERROR "Unsupported CHAOS_SUBJECT_VARIANT='${CHAOS_SUBJECT_VARIANT}'")
-endfunction()
-
-function(chaos_configure_subject_target target_name)
-    target_compile_features("${target_name}" PRIVATE cxx_std_17)
-    target_include_directories(
-        "${target_name}"
-        PRIVATE
-            "${REPO_ROOT}/contracts/native/v0"
-            "${REPO_ROOT}/src/native/runtime-core"
-            "${REPO_ROOT}/src/native/bootstrap"
-            "${REPO_ROOT}/src/native/support")
-    chaos_apply_subject_variant("${target_name}")
-endfunction()
-
-add_subdirectory("${REPO_ROOT}/src/native/runtime-core" "runtime-core")
-add_subdirectory("${REPO_ROOT}/src/native/support" "support")
-add_subdirectory("${REPO_ROOT}/src/native/bootstrap" "bootstrap")
-add_subdirectory(generated)
-add_subdirectory(proof)
-"""
-
-GENERIC_SUBJECT_GENERATED_CMAKELISTS_TEMPLATE = """set(CHAOS_SUBJECT_GENERATED_INPUT_SOURCE "@@GENERATED_INPUT_SOURCE@@")
-
-if(NOT EXISTS "${CHAOS_SUBJECT_GENERATED_INPUT_SOURCE}")
-    message(FATAL_ERROR "Missing generated subject source: ${CHAOS_SUBJECT_GENERATED_INPUT_SOURCE}")
-endif()
-
-add_library(chaos_subject_generated_native STATIC EXCLUDE_FROM_ALL
-    "${CHAOS_SUBJECT_GENERATED_INPUT_SOURCE}")
-chaos_configure_subject_target(chaos_subject_generated_native)
-
-set_target_properties(
-    chaos_subject_generated_native
-    PROPERTIES
-        ARCHIVE_OUTPUT_DIRECTORY "${CHAOS_SUBJECT_BUILD_OUT_ROOT}"
-        ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CHAOS_SUBJECT_BUILD_OUT_ROOT}")
-"""
-
-GENERIC_SUBJECT_PROOF_CMAKELISTS_TEMPLATE = """set(CHAOS_SUBJECT_PROOF_HOST_MAIN "@@PROOF_MAIN@@")
-set(CHAOS_SUBJECT_PROOF_RUN_SCRIPT "${CMAKE_CURRENT_LIST_DIR}/RunSubjectProof.cmake")
-set(CHAOS_SUBJECT_PROOF_STDOUT_LOG "${CHAOS_SUBJECT_RUNTIME_ROOT}/stdout.log")
-set(CHAOS_SUBJECT_PROOF_STDERR_LOG "${CHAOS_SUBJECT_RUNTIME_ROOT}/stderr.log")
-set(CHAOS_SUBJECT_PROOF_EXIT_CODE_PATH "${CHAOS_SUBJECT_RUNTIME_ROOT}/exit-code.txt")
-
-if(NOT EXISTS "${CHAOS_SUBJECT_PROOF_HOST_MAIN}")
-    message(FATAL_ERROR "Missing subject proof host source: ${CHAOS_SUBJECT_PROOF_HOST_MAIN}")
-endif()
-
-add_executable(chaos_subject_reference_proof EXCLUDE_FROM_ALL
-    "${CHAOS_SUBJECT_PROOF_HOST_MAIN}")
-chaos_configure_subject_target(chaos_subject_reference_proof)
-target_link_libraries(
-    chaos_subject_reference_proof
-    PRIVATE
-        chaos_subject_generated_native
-        chaos_runtime_core
-        chaos_bootstrap
-        chaos_support)
-
-add_custom_target(chaos_subject_reference_proof_run
-    BYPRODUCTS
-        "${CHAOS_SUBJECT_PROOF_STDOUT_LOG}"
-        "${CHAOS_SUBJECT_PROOF_STDERR_LOG}"
-        "${CHAOS_SUBJECT_PROOF_EXIT_CODE_PATH}"
-    COMMAND "${CMAKE_COMMAND}" -E make_directory "${CHAOS_SUBJECT_RUNTIME_ROOT}"
-    COMMAND "${CMAKE_COMMAND}"
-        "-DCHAOS_SUBJECT_PROOF_EXE=$<TARGET_FILE:chaos_subject_reference_proof>"
-        "-DCHAOS_SUBJECT_PROOF_RUN_OUTPUT_ROOT=${CHAOS_SUBJECT_RUNTIME_ROOT}"
-        "-DCHAOS_SUBJECT_PROOF_STDOUT_PATH=${CHAOS_SUBJECT_PROOF_STDOUT_LOG}"
-        "-DCHAOS_SUBJECT_PROOF_STDERR_PATH=${CHAOS_SUBJECT_PROOF_STDERR_LOG}"
-        "-DCHAOS_SUBJECT_PROOF_EXIT_CODE_PATH=${CHAOS_SUBJECT_PROOF_EXIT_CODE_PATH}"
-        -P "${CHAOS_SUBJECT_PROOF_RUN_SCRIPT}"
-    DEPENDS
-        chaos_subject_reference_proof
-    VERBATIM)
-
-set_target_properties(
-    chaos_subject_reference_proof
-    PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CHAOS_SUBJECT_BUILD_OUT_ROOT}"
-        RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CHAOS_SUBJECT_BUILD_OUT_ROOT}")
-"""
-
-SUBJECT_NATIVE_AOT_WORKSPACE_CMAKELISTS_TEMPLATE = """cmake_minimum_required(VERSION 3.20)
-
-project(chaos_subject_native_aot_workspace LANGUAGES CXX)
-
-if(NOT DEFINED CHAOS_SUBJECT_REPO_ROOT OR CHAOS_SUBJECT_REPO_ROOT STREQUAL "")
-    message(FATAL_ERROR "CHAOS_SUBJECT_REPO_ROOT is required")
-endif()
-
-set(REPO_ROOT "${CHAOS_SUBJECT_REPO_ROOT}")
-set(CHAOS_SUBJECT_VARIANT "CHECK" CACHE STRING "Variant selector for the current subject native benchmark fixture")
-set_property(CACHE CHAOS_SUBJECT_VARIANT PROPERTY STRINGS CHECK PROFILE SHIP)
-
-set(CHAOS_SUBJECT_BUILD_OUT_ROOT
-    "${REPO_ROOT}/artifacts/subjects/FixtureSubject/runs/subject-exec/matrices/windows-native-perf/build/out"
-    CACHE PATH "Build output root for the current subject native benchmark fixture")
-
-function(chaos_apply_subject_variant target_name)
-    if(CHAOS_SUBJECT_VARIANT STREQUAL "CHECK")
-        target_compile_definitions(
-            "${target_name}"
-            PRIVATE
-                CHAOS_VARIANT_CHECK
-                "CHAOS_VARIANT_NAME=\\"CHECK\\"")
-        target_compile_options(
-            "${target_name}"
-            PRIVATE
-                $<$<CXX_COMPILER_ID:MSVC>:/Od /Zi>
-                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O0 -g>)
-        return()
-    endif()
-
-    if(CHAOS_SUBJECT_VARIANT STREQUAL "PROFILE")
-        target_compile_definitions(
-            "${target_name}"
-            PRIVATE
-                CHAOS_VARIANT_PROFILE
-                "CHAOS_VARIANT_NAME=\\"PROFILE\\"")
-        target_compile_options(
-            "${target_name}"
-            PRIVATE
-                $<$<CXX_COMPILER_ID:MSVC>:/O2 /DNDEBUG>
-                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O3 -DNDEBUG>)
-        return()
-    endif()
-
-    if(CHAOS_SUBJECT_VARIANT STREQUAL "SHIP")
-        target_compile_definitions(
-            "${target_name}"
-            PRIVATE
-                CHAOS_VARIANT_SHIP
-                "CHAOS_VARIANT_NAME=\\"SHIP\\"")
-        target_compile_options(
-            "${target_name}"
-            PRIVATE
-                $<$<CXX_COMPILER_ID:MSVC>:/O2 /GL /DNDEBUG>
-                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O3 -DNDEBUG>)
-        target_link_options(
-            "${target_name}"
-            PRIVATE
-                $<$<CXX_COMPILER_ID:MSVC>:/LTCG>)
-        return()
-    endif()
-
-    message(FATAL_ERROR "Unsupported CHAOS_SUBJECT_VARIANT='${CHAOS_SUBJECT_VARIANT}'")
-endfunction()
-
-function(chaos_configure_subject_target target_name)
-    target_compile_features("${target_name}" PRIVATE cxx_std_17)
-    target_include_directories(
-        "${target_name}"
-        PRIVATE
-            "${REPO_ROOT}/contracts/native/v0"
-            "${REPO_ROOT}/src/native/runtime-core"
-            "${REPO_ROOT}/src/native/bootstrap"
-            "${REPO_ROOT}/src/native/support"
-            "${REPO_ROOT}/src/native/benchmark-host")
-    chaos_apply_subject_variant("${target_name}")
-endfunction()
-
-add_subdirectory("${REPO_ROOT}/src/native/runtime-core" "runtime-core")
-add_subdirectory("${REPO_ROOT}/src/native/support" "support")
-add_subdirectory("${REPO_ROOT}/src/native/bootstrap" "bootstrap")
-add_subdirectory(generated)
-add_subdirectory(benchmark)
-"""
-
-GENERIC_SUBJECT_BENCHMARK_CMAKELISTS_TEMPLATE = """set(CHAOS_SUBJECT_BENCHMARK_HOST_MAIN "@@BENCHMARK_MAIN@@")
-
-if(NOT EXISTS "${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
-    message(FATAL_ERROR "Missing subject benchmark host source: ${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
-endif()
-
-add_executable(chaos_subject_native_aot EXCLUDE_FROM_ALL
-    "${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
-chaos_configure_subject_target(chaos_subject_native_aot)
-target_link_libraries(
-    chaos_subject_native_aot
-    PRIVATE
-        chaos_subject_generated_native
-        chaos_runtime_core
-        chaos_bootstrap
-        chaos_support)
-
-set_target_properties(
-    chaos_subject_native_aot
-    PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CHAOS_SUBJECT_BUILD_OUT_ROOT}"
-        RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CHAOS_SUBJECT_BUILD_OUT_ROOT}")
-"""
+_NATIVE_REFERENCE_RUN_SCRIPT_TEMPLATE = "templates/native-proof-run.cmake.tmpl"
+_NATIVE_REFERENCE_WORKSPACE_TEMPLATE = "templates/native-reference-workspace.cmake.tmpl"
+_NATIVE_GENERATED_TEMPLATE = "templates/native-generated.cmake.tmpl"
+_NATIVE_PROOF_TEMPLATE = "templates/native-proof.cmake.tmpl"
+_NATIVE_PROOF_MAIN_TEMPLATE = "templates/native-proof-main.cpp.tmpl"
+_NATIVE_AOT_WORKSPACE_TEMPLATE = "templates/native-aot-workspace.cmake.tmpl"
+_NATIVE_BENCHMARK_TEMPLATE = "templates/native-benchmark.cmake.tmpl"
 
 
 def _path_text(repo_root: Path, path: Path) -> str:
@@ -1311,10 +1024,7 @@ def _subject_matrix_supports_workspace_generation(
         return True
 
     target_platform = _subject_matrix_target_platform(matrix)
-    if target_platform == "windows-x64":
-        proof_main_path = repo_root / "subjects" / subject_id / "validation" / "proof" / "native-reference" / "main.cpp"
-        return proof_main_path.is_file()
-    return target_platform in {"android-arm64", "linux-x64"}
+    return target_platform in {"windows-x64", "android-arm64", "linux-x64"}
 
 
 def _subject_supports_workspace_generation(repo_root: Path, subject_id: str, host_platform: str) -> bool:
@@ -1365,30 +1075,55 @@ def _materialize_subject_native_reference_source(
     matrix_id: str,
     generated_source_path: Path,
 ) -> Path:
-    proof_root = repo_root / "subjects" / subject_id / "validation" / "proof" / "native-reference"
-    proof_main_path = proof_root / "main.cpp"
-    if not proof_main_path.is_file():
-        raise RuntimeError(f"subject proof source is missing: {proof_main_path}")
-
     materialized_root = _subject_materialized_source_root(workspace_root, matrix_id)
     _clear_dir(materialized_root)
     materialized_root.mkdir(parents=True, exist_ok=True)
     (materialized_root / "generated").mkdir(parents=True, exist_ok=True)
     (materialized_root / "proof").mkdir(parents=True, exist_ok=True)
+    proof_main_path = materialized_root / "proof" / "main.cpp"
     (materialized_root / "CMakeLists.txt").write_text(
-        SUBJECT_NATIVE_WORKSPACE_CMAKELISTS_TEMPLATE,
+        template_assets_module.read_template(
+            owner_file=__file__,
+            relative_template_path=_NATIVE_REFERENCE_WORKSPACE_TEMPLATE,
+        ),
         encoding="utf-8",
     )
     (materialized_root / "generated" / "CMakeLists.txt").write_text(
-        GENERIC_SUBJECT_GENERATED_CMAKELISTS_TEMPLATE.replace("@@GENERATED_INPUT_SOURCE@@", generated_source_path.as_posix()),
+        template_assets_module.render_template(
+            owner_file=__file__,
+            relative_template_path=_NATIVE_GENERATED_TEMPLATE,
+            replacements={
+                "GENERATED_INPUT_SOURCE": generated_source_path.as_posix(),
+            },
+        ),
+        encoding="utf-8",
+    )
+    proof_main_path.write_text(
+        template_assets_module.render_template(
+            owner_file=__file__,
+            relative_template_path=_NATIVE_PROOF_MAIN_TEMPLATE,
+            replacements={
+                "IMAGE_NAME": subject_id,
+                "RUNTIME_TAG": "subject-reference-proof",
+            },
+        ),
         encoding="utf-8",
     )
     (materialized_root / "proof" / "CMakeLists.txt").write_text(
-        GENERIC_SUBJECT_PROOF_CMAKELISTS_TEMPLATE.replace("@@PROOF_MAIN@@", proof_main_path.as_posix()),
+        template_assets_module.render_template(
+            owner_file=__file__,
+            relative_template_path=_NATIVE_PROOF_TEMPLATE,
+            replacements={
+                "PROOF_MAIN": proof_main_path.as_posix(),
+            },
+        ),
         encoding="utf-8",
     )
     (materialized_root / "proof" / "RunSubjectProof.cmake").write_text(
-        GENERIC_SUBJECT_REFERENCE_RUN_SCRIPT,
+        template_assets_module.read_template(
+            owner_file=__file__,
+            relative_template_path=_NATIVE_REFERENCE_RUN_SCRIPT_TEMPLATE,
+        ),
         encoding="utf-8",
     )
     return materialized_root
@@ -1410,15 +1145,30 @@ def _materialize_subject_native_aot_source(
     (materialized_root / "generated").mkdir(parents=True, exist_ok=True)
     (materialized_root / "benchmark").mkdir(parents=True, exist_ok=True)
     (materialized_root / "CMakeLists.txt").write_text(
-        SUBJECT_NATIVE_AOT_WORKSPACE_CMAKELISTS_TEMPLATE,
+        template_assets_module.read_template(
+            owner_file=__file__,
+            relative_template_path=_NATIVE_AOT_WORKSPACE_TEMPLATE,
+        ),
         encoding="utf-8",
     )
     (materialized_root / "generated" / "CMakeLists.txt").write_text(
-        GENERIC_SUBJECT_GENERATED_CMAKELISTS_TEMPLATE.replace("@@GENERATED_INPUT_SOURCE@@", generated_source_path.as_posix()),
+        template_assets_module.render_template(
+            owner_file=__file__,
+            relative_template_path=_NATIVE_GENERATED_TEMPLATE,
+            replacements={
+                "GENERATED_INPUT_SOURCE": generated_source_path.as_posix(),
+            },
+        ),
         encoding="utf-8",
     )
     (materialized_root / "benchmark" / "CMakeLists.txt").write_text(
-        GENERIC_SUBJECT_BENCHMARK_CMAKELISTS_TEMPLATE.replace("@@BENCHMARK_MAIN@@", benchmark_main_path.as_posix()),
+        template_assets_module.render_template(
+            owner_file=__file__,
+            relative_template_path=_NATIVE_BENCHMARK_TEMPLATE,
+            replacements={
+                "BENCHMARK_MAIN": benchmark_main_path.as_posix(),
+            },
+        ),
         encoding="utf-8",
     )
     return materialized_root
@@ -1888,8 +1638,7 @@ def _subject_hotupdate_test_projects(
     generated_root = hotupdate_tests_root / "Generated"
     generated_root.mkdir(parents=True, exist_ok=True)
     collection_path = generated_root / "declared-tests.collection.json"
-    if not collection_path.is_file():
-        write_json(collection_path, declared_catalog)
+    write_json(collection_path, declared_catalog)
     binding_manifest_path = generated_root / "declared-tests.binding.json"
     patch_project_ids = [str(item.get("projectId") or "") for item in hotupdate_patch_projects if str(item.get("projectId") or "")]
     patch_assembly_names = [str(item.get("assemblyName") or "") for item in hotupdate_patch_projects if str(item.get("assemblyName") or "")]

@@ -10,11 +10,8 @@ from tests.support import read_linker_stage_source, read_loader_stage_source, re
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
-SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
-SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "ExceptionsAndControlFlow" / "NestedExceptionProof.cs"
-PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
-PROOF_MAIN_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "main.cpp"
-PROOF_RUN_SCRIPT_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "RunNativeReferenceProof.cmake"
+SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
+SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "ExceptionsAndControlFlow" / "NestedExceptionProof.cs"
 PROFILE_ID = "proof-nested-exception"
 MATRIX_ID = "windows-nested-exception-check"
 
@@ -46,9 +43,6 @@ class Phase2NestedExceptionProofTests(unittest.TestCase):
         self.assertTrue(MANIFEST_PATH.is_file(), msg=f"missing subject manifest: {MANIFEST_PATH}")
         self.assertTrue(SOURCE_PROJECT_PATH.is_file(), msg=f"missing source project: {SOURCE_PROJECT_PATH}")
         self.assertTrue(SOURCE_PROGRAM_PATH.is_file(), msg=f"missing source file: {SOURCE_PROGRAM_PATH}")
-        self.assertTrue(PROOF_CMAKE_PATH.is_file(), msg=f"missing proof cmake: {PROOF_CMAKE_PATH}")
-        self.assertTrue(PROOF_MAIN_PATH.is_file(), msg=f"missing proof host main: {PROOF_MAIN_PATH}")
-        self.assertTrue(PROOF_RUN_SCRIPT_PATH.is_file(), msg=f"missing proof run script: {PROOF_RUN_SCRIPT_PATH}")
 
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         source = SOURCE_PROGRAM_PATH.read_text(encoding="utf-8")
@@ -56,7 +50,7 @@ class Phase2NestedExceptionProofTests(unittest.TestCase):
         self.assertEqual("dotnet-project", manifest["source"]["type"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
             manifest["source"]["primaryProjectPath"],
         )
         self.assertEqual("CoreRuntimeFeatures/ProofEntry::Run()", manifest["source"]["entry"])
@@ -105,3 +99,4 @@ class Phase2NestedExceptionProofTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

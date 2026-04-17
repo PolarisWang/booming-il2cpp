@@ -37,9 +37,9 @@ HOTUPDATE_PATCH_PROJECT_PATH = (
     / "subjects"
     / "HotUpdateHostPack"
     / "source"
-    / "Archetypes"
+    / "EngineeringScenarios"
     / "FullProjectHotUpdateSolution"
-    / "PatchModules"
+    / "Patch"
     / "GoldenHotUpdate.PatchModule.csproj"
 )
 HOTUPDATE_SHARED_CONTRACTS_PROJECT_PATH = (
@@ -47,7 +47,7 @@ HOTUPDATE_SHARED_CONTRACTS_PROJECT_PATH = (
     / "subjects"
     / "HotUpdateHostPack"
     / "source"
-    / "Archetypes"
+    / "EngineeringScenarios"
     / "FullProjectHotUpdateSolution"
     / "SharedContracts"
     / "GoldenHotUpdate.SharedContracts.csproj"
@@ -158,8 +158,6 @@ class PerfHarnessHotUpdateBenchmarkHostIntegrationTests(unittest.TestCase):
                 "0",
                 "--binding-manifest-path",
                 str(BINDING_MANIFEST_PATH.relative_to(REPO_ROOT)).replace("\\", "/"),
-                "--workload-entry",
-                "HotUpdateHostPack/HotUpdateDispatchBenchmarkEntry::RunWorkload()",
                 "--mode",
                 "managed",
             ],

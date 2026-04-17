@@ -185,9 +185,9 @@ class RepoLayoutTests(unittest.TestCase):
         verify_py = (REPO_ROOT / "build" / "scripts" / "verify-runtime-baseline.py").read_text(encoding="utf-8")
         verify_ps1 = (REPO_ROOT / "build" / "scripts" / "verify-runtime-baseline.ps1").read_text(encoding="utf-8")
 
-        self.assertIn("subjects/SolutionCorePack/validation/proof/native-reference", cmake_router)
         self.assertIn("tests/contracts/native/abi", cmake_router)
         self.assertIn("tests/contracts/native/bridge", cmake_router)
+        self.assertNotIn("subjects/SolutionCorePack/validation/proof/native-reference", cmake_router)
         self.assertNotIn("tests/proof/native-reference/HelloWorldObject", cmake_router)
         self.assertNotIn("tests/proof/native-reference/GenericEchoClosedMinimal", cmake_router)
         self.assertNotIn("tests/proof/native-reference/ReflectionLiteQueryMinimal", cmake_router)
@@ -332,15 +332,15 @@ class RepoLayoutTests(unittest.TestCase):
     def test_subject_native_reference_cmake_treats_generated_cpp_as_existing_input(self) -> None:
         native_reference_cmake = (
             REPO_ROOT
-            / "subjects"
-            / "SolutionCorePack"
-            / "validation"
-            / "proof"
-            / "native-reference"
-            / "CMakeLists.txt"
+            / "build"
+            / "toolchains"
+            / "run"
+            / "subject"
+            / "templates"
+            / "native-generated.cmake.tmpl"
         ).read_text(encoding="utf-8")
 
-        self.assertIn('if(NOT EXISTS "${CHAOS_SUBJECT_GENERATED_SOURCE}")', native_reference_cmake)
+        self.assertIn('if(NOT EXISTS "${CHAOS_SUBJECT_GENERATED_INPUT_SOURCE}")', native_reference_cmake)
         self.assertNotIn("GENERATED TRUE", native_reference_cmake)
 
     def test_python_tests_do_not_hardcode_user_specific_temp_paths(self) -> None:

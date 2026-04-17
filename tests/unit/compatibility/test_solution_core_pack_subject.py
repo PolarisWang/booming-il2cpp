@@ -9,13 +9,10 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
 SOLUTION_PATH = SUBJECT_ROOT / "source" / "SolutionCorePack.sln"
-PRIMARY_PROJECT_PATH = SUBJECT_ROOT / "source" / "Launcher" / "SolutionCorePack.csproj"
-ARCHETYPE_ROOT = SUBJECT_ROOT / "source" / "Archetypes"
+PRIMARY_PROJECT_PATH = SUBJECT_ROOT / "source" / "Host" / "SolutionCorePack.csproj"
+ARCHETYPE_ROOT = SUBJECT_ROOT / "source" / "EngineeringScenarios"
 REFERENCE_BUNDLE_ROOT = REPO_ROOT / "assets" / "reference-bundles" / "dotnet-foundation"
-PROOF_HOST_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "main.cpp"
-PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
-PROOF_RUN_SCRIPT_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "RunNativeReferenceProof.cmake"
-LAUNCHER_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Launcher" / "Program.cs"
+LAUNCHER_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Host" / "Program.cs"
 
 
 class SolutionCorePackSubjectTests(unittest.TestCase):
@@ -29,7 +26,7 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         self.assertEqual("dotnet-solution", manifest["sourceModel"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
             manifest["source"]["primaryProjectPath"],
         )
         self.assertEqual("CoreRuntimeFeatures/ProofEntry::Run()", manifest["source"]["entry"])
@@ -46,26 +43,26 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         solution_text = SOLUTION_PATH.read_text(encoding="utf-8")
         project_text = PRIMARY_PROJECT_PATH.read_text(encoding="utf-8")
 
-        self.assertIn(r"Launcher\SolutionCorePack.csproj", solution_text)
-        self.assertIn(r"FeatureSlices\CoreRuntimeFeatures\CoreRuntimeFeatures.csproj", solution_text)
+        self.assertIn(r"Host\SolutionCorePack.csproj", solution_text)
+        self.assertIn(r"Proofs\CoreRuntimeFeatures\CoreRuntimeFeatures.csproj", solution_text)
         self.assertIn(r"Benchmarks\CoreRuntimeBenchmarks\CoreRuntimeBenchmarks.csproj", solution_text)
-        self.assertIn(r"Archetypes\SimpleLibrarySolution\App\GoldenSimpleLib.App.csproj", solution_text)
-        self.assertIn(r"Archetypes\MultiProjectSolution\App\GoldenMultiProject.App.csproj", solution_text)
-        self.assertIn(r"Archetypes\PackageReferenceSolution\App\GoldenWithPackage.App.csproj", solution_text)
-        self.assertIn(r"Archetypes\ReferenceAssemblySolution\App\GoldenReferenceAssembly.App.csproj", solution_text)
-        self.assertIn(r"Archetypes\CoreLibReferenceSolution\App\GoldenCoreLibReference.App.csproj", solution_text)
-        self.assertIn(r"Archetypes\MixedReferenceClosureSolution\App\GoldenMixedReference.App.csproj", solution_text)
+        self.assertIn(r"EngineeringScenarios\SimpleLibrarySolution\App\GoldenSimpleLib.App.csproj", solution_text)
+        self.assertIn(r"EngineeringScenarios\MultiProjectSolution\App\GoldenMultiProject.App.csproj", solution_text)
+        self.assertIn(r"EngineeringScenarios\PackageReferenceSolution\App\GoldenWithPackage.App.csproj", solution_text)
+        self.assertIn(r"EngineeringScenarios\ReferenceAssemblySolution\App\GoldenReferenceAssembly.App.csproj", solution_text)
+        self.assertIn(r"EngineeringScenarios\CoreLibReferenceSolution\App\GoldenCoreLibReference.App.csproj", solution_text)
+        self.assertIn(r"EngineeringScenarios\MixedReferenceClosureSolution\App\GoldenMixedReference.App.csproj", solution_text)
         self.assertNotIn(r"Slices\HelloWorld\HelloWorld.csproj", solution_text)
         self.assertNotIn(r"Slices\GenericEcho\GenericEcho.csproj", solution_text)
         self.assertNotIn(r"Slices\HelloWorldObject\HelloWorldObject.csproj", solution_text)
         self.assertNotIn(r"Slices\ReflectionLite\ReflectionLite.csproj", solution_text)
         self.assertNotIn(r"Slices\PInvokeLite\PInvokeLite.csproj", solution_text)
         self.assertNotIn(r"Slices\HostEmbeddingLite\HostEmbeddingLite.csproj", solution_text)
-        self.assertIn(r"..\FeatureSlices\CoreRuntimeFeatures\CoreRuntimeFeatures.csproj", project_text)
+        self.assertIn(r"..\Proofs\CoreRuntimeFeatures\CoreRuntimeFeatures.csproj", project_text)
         self.assertIn(r"..\Benchmarks\CoreRuntimeBenchmarks\CoreRuntimeBenchmarks.csproj", project_text)
-        self.assertIn(r"..\Archetypes\ReferenceAssemblySolution\App\GoldenReferenceAssembly.App.csproj", project_text)
-        self.assertIn(r"..\Archetypes\CoreLibReferenceSolution\App\GoldenCoreLibReference.App.csproj", project_text)
-        self.assertIn(r"..\Archetypes\MixedReferenceClosureSolution\App\GoldenMixedReference.App.csproj", project_text)
+        self.assertIn(r"..\EngineeringScenarios\ReferenceAssemblySolution\App\GoldenReferenceAssembly.App.csproj", project_text)
+        self.assertIn(r"..\EngineeringScenarios\CoreLibReferenceSolution\App\GoldenCoreLibReference.App.csproj", project_text)
+        self.assertIn(r"..\EngineeringScenarios\MixedReferenceClosureSolution\App\GoldenMixedReference.App.csproj", project_text)
         self.assertNotIn(r"..\..\..\MainlineFeaturePack\source\MainlineFeaturePack.csproj", project_text)
         self.assertNotIn(r"..\..\..\PerformanceFeaturePack\source\PerformanceFeaturePack.csproj", project_text)
 
@@ -76,7 +73,7 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         self.assertTrue((ARCHETYPE_ROOT / "ReferenceAssemblySolution" / "ReferenceAssemblySolution.sln").is_file())
         self.assertTrue((ARCHETYPE_ROOT / "CoreLibReferenceSolution" / "CoreLibReferenceSolution.sln").is_file())
         self.assertTrue((ARCHETYPE_ROOT / "MixedReferenceClosureSolution" / "MixedReferenceClosureSolution.sln").is_file())
-        self.assertTrue((SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj").is_file())
+        self.assertTrue((SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj").is_file())
         self.assertTrue((SUBJECT_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "CoreRuntimeBenchmarks.csproj").is_file())
         self.assertFalse((SUBJECT_ROOT / "source" / "Slices").exists())
         self.assertFalse((SUBJECT_ROOT / "source" / "Slices" / "HelloWorld").exists())
@@ -99,24 +96,14 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         self.assertTrue((REFERENCE_BUNDLE_ROOT / "README.md").is_file())
 
         corelib_project_path = (
-            SUBJECT_ROOT / "source" / "Archetypes" / "CoreLibReferenceSolution" / "App" / "GoldenCoreLibReference.App.csproj"
+            SUBJECT_ROOT / "source" / "EngineeringScenarios" / "CoreLibReferenceSolution" / "App" / "GoldenCoreLibReference.App.csproj"
         )
         corelib_project_text = corelib_project_path.read_text(encoding="utf-8")
         self.assertIn("<DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>", corelib_project_text)
         self.assertIn('<FrameworkReference Include="Microsoft.NETCore.App" />', corelib_project_text)
 
-    def test_solution_core_pack_declares_native_reference_proof_host(self) -> None:
-        self.assertTrue(PROOF_HOST_PATH.is_file(), msg=f"missing proof host source: {PROOF_HOST_PATH}")
-        self.assertTrue(PROOF_CMAKE_PATH.is_file(), msg=f"missing proof cmake: {PROOF_CMAKE_PATH}")
-        self.assertTrue(PROOF_RUN_SCRIPT_PATH.is_file(), msg=f"missing proof run script: {PROOF_RUN_SCRIPT_PATH}")
-
-        proof_host_text = PROOF_HOST_PATH.read_text(encoding="utf-8")
-        proof_cmake_text = PROOF_CMAKE_PATH.read_text(encoding="utf-8")
-
-        self.assertIn('options.image_name_utf8 = "SolutionCorePack";', proof_host_text)
-        self.assertIn("RunNativeReference", proof_host_text)
-        self.assertIn("chaos_subject_reference_proof", proof_cmake_text)
-        self.assertIn("CHAOS_SUBJECT_GENERATED_SOURCE", proof_cmake_text)
+    def test_solution_core_pack_deletes_legacy_subject_owned_native_reference_host(self) -> None:
+        self.assertFalse((SUBJECT_ROOT / "validation").exists())
 
     def test_solution_core_launcher_uses_compact_subject_entry_selection_only(self) -> None:
         launcher_source = LAUNCHER_PROGRAM_PATH.read_text(encoding="utf-8")
@@ -134,3 +121,5 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+

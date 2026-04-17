@@ -59,6 +59,13 @@ description: 在实现任何功能、修复任何 bug、调整任何长期规则
 - managed 层验证应优先使用 `Chaos.TestFramework.Sdk` 中的 `Assert`
 - 不要依赖 `Console.WriteLine` 再在外部脚本里解析成功失败
 
+### 6. 测试阶段遇到 dotnet 编译崩溃时，必须先查根因
+
+- `dotnet build` / `dotnet test` / `msbuild` 在测试阶段崩溃，视为阻断性失败，而不是可忽略噪音
+- 先保留失败的 project / target / task、退出码、stderr、binlog 与崩溃堆栈或 dump 信息（如果可用）
+- 立即进入 `dev:systematic-debugging`，定位崩溃原因并修复后，才能继续后续测试
+- 不允许通过“多试几次”、“临时跳过该测试”、“先继续别的验证”或“只记录崩溃现象不修复”来绕过
+
 ## 最小循环
 
 1. 写失败测试
@@ -74,11 +81,13 @@ description: 在实现任何功能、修复任何 bug、调整任何长期规则
 - 为了图快直接把逻辑塞进现有大 fixture
 - 只修 dashboard 显示，不补 collection 或数据生产端测试
 - 只看 benchmark 页面，不验证数据生产链路
+- `dotnet` 编译崩溃后直接重试或把它降级成“环境偶发问题”
 
 ## 结束前检查
 
 - 是否先看到了失败测试
 - 是否把 bug 沉淀为模板化或 contract 化测试
+- 如果测试阶段发生过 `dotnet` 编译崩溃，是否已经查明根因并修复
 - 是否避免继续扩大字符串协议面
 - 是否没有把测试框架逻辑混进 IL2CPP Core IR / planner / emitter
 - 是否保留了清晰的模块边界

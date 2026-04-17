@@ -1186,7 +1186,7 @@ class SubjectCommandTests(unittest.TestCase):
         subject_id = "SolutionCorePack"
         stable_id = "solution-core-proof"
         alias = "solution-core-proof"
-        source_entry = "SolutionCorePack/Launcher.Program::RunProof()"
+        source_entry = "CoreRuntimeFeatures/ProofEntry::Run()"
         fixed_run_id = "chaos-run-declared-unit-alias"
         registry_index = make_declared_registry_index(
             test_module,
@@ -1285,7 +1285,7 @@ class SubjectCommandTests(unittest.TestCase):
         subject_id = "SolutionCorePack"
         stable_id = "solution-core-proof"
         alias = "solution-core-proof"
-        source_entry = "SolutionCorePack/Launcher.Program::RunProof()"
+        source_entry = "CoreRuntimeFeatures/ProofEntry::Run()"
         fixed_run_id = "chaos-run-declared-unit-managed-only-proof"
         registry_index = make_declared_registry_index(
             test_module,
@@ -1365,7 +1365,7 @@ class SubjectCommandTests(unittest.TestCase):
         subject_id = "SolutionCorePack"
         stable_id = "solution-core-proof"
         alias = "solution-core-proof"
-        source_entry = "SolutionCorePack/Launcher.Program::RunProof()"
+        source_entry = "CoreRuntimeFeatures/ProofEntry::Run()"
         fixed_run_id = "chaos-run-declared-unit-registry-entry-index"
         registry_index = make_declared_registry_index(
             test_module,

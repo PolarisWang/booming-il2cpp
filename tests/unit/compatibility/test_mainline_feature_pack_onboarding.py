@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import json
 import shutil
@@ -17,12 +17,18 @@ WORKERS_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject
 CMAKE_PATH = REPO_ROOT / "CMakeLists.txt"
 SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
-SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
-SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "Program.cs"
-TASK_FLOW_PROOF_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "TaskAndValueTaskFlowProof.cs"
-SOURCE_SLICE_ROOT = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures"
+SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
+SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "Program.cs"
+TASK_FLOW_PROOF_PATH = SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "TaskAndValueTaskFlowProof.cs"
+SOURCE_SLICE_ROOT = SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures"
 FRAMEWORK_PROJECT_REFERENCE = "../../../../../src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj"
 PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
+GENERIC_NATIVE_REFERENCE_WORKSPACE_TEMPLATE_PATH = (
+    REPO_ROOT / "build" / "toolchains" / "run" / "subject" / "templates" / "native-reference-workspace.cmake.tmpl"
+)
+GENERIC_NATIVE_PROOF_TEMPLATE_PATH = (
+    REPO_ROOT / "build" / "toolchains" / "run" / "subject" / "templates" / "native-proof.cmake.tmpl"
+)
 PERF_BASELINE_PATH = SUBJECT_ROOT / "baselines" / "perf" / "windows-native-perf" / "windows.json"
 TRACE_COMPARE_PATH = REPO_ROOT / "tests" / "contracts" / "trace" / "compare-warmup-trace.py"
 WINDOWS_TRACE_SNAPSHOT_PATH = REPO_ROOT / "tests" / "contracts" / "trace" / "snapshots" / "windows-warmup-trace.snapshot.json"
@@ -70,14 +76,15 @@ class Phase4SolutionCorePackOnboardingTests(unittest.TestCase):
         cmake_source = CMAKE_PATH.read_text(encoding="utf-8")
         workers_source = WORKERS_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("CHAOS_SUBJECT_PROOF_ROOT", cmake_source)
-        self.assertIn("add_subdirectory(\"${CHAOS_SUBJECT_PROOF_ROOT}\"", cmake_source)
-        self.assertIn(
+        self.assertNotIn("CHAOS_SUBJECT_PROOF_ROOT", cmake_source)
+        self.assertNotIn("add_subdirectory(\"${CHAOS_SUBJECT_PROOF_ROOT}\"", cmake_source)
+        self.assertNotIn(
             'subject_proof_root = repo_root / "subjects" / str(selection["subjectId"]) / "validation" / "proof" / "native-reference"',
             workers_source,
         )
+        self.assertIn("_materialize_windows_native_reference_cmake_source(", workers_source)
         self.assertIn(
-            'host_source_path = subject_proof_root / "main.cpp"',
+            'f"-DCHAOS_SUBJECT_REPO_ROOT={repo_root}"',
             workers_source,
         )
 
@@ -91,7 +98,7 @@ class Phase4SolutionCorePackOnboardingTests(unittest.TestCase):
         self.assertEqual("SolutionCorePack", manifest["subjectId"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
             manifest["source"]["primaryProjectPath"],
         )
         self.assertEqual("CoreRuntimeFeatures/ProofEntry::Run()", manifest["source"]["entry"])
@@ -109,7 +116,9 @@ class Phase4SolutionCorePackOnboardingTests(unittest.TestCase):
         self.assertTrue(SOURCE_PROJECT_PATH.is_file())
         self.assertTrue(SOURCE_PROGRAM_PATH.is_file())
         self.assertTrue(TASK_FLOW_PROOF_PATH.is_file())
-        self.assertTrue(PROOF_CMAKE_PATH.is_file())
+        self.assertFalse(PROOF_CMAKE_PATH.exists())
+        self.assertTrue(GENERIC_NATIVE_REFERENCE_WORKSPACE_TEMPLATE_PATH.is_file())
+        self.assertTrue(GENERIC_NATIVE_PROOF_TEMPLATE_PATH.is_file())
         self.assertTrue(PERF_BASELINE_PATH.is_file())
         self.assertNotIn("[ChaosUnitTest(", source_program_text)
         self.assertIn("Assert.Equal(0, exitCode);", source_program_text)
@@ -176,4 +185,5 @@ class Phase4SolutionCorePackOnboardingTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
 

@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import shutil
 import subprocess
@@ -14,7 +14,7 @@ COMPILED_CATALOG_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "tes
 FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures" / "contracts" / "declared-metadata"
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "declared-metadata-discovery"
 SOLUTION_CORE_PACK_MAINLINE_SLICE_PROJECT_PATH = (
-    REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
+    REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Proofs" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
 )
 SOLUTION_CORE_PACK_PERFORMANCE_SLICE_PROJECT_PATH = (
     REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "CoreRuntimeBenchmarks.csproj"
@@ -101,8 +101,12 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             assembly_paths=[self.declared_entries_dll],
         )
 
+        self.assertEqual(1, runtime_only["schemaVersion"])
+        self.assertEqual(1, framework_only["schemaVersion"])
+        self.assertEqual(1, declared["schemaVersion"])
         self.assertEqual(
             {
+                "schemaVersion": 1,
                 "subjectId": "RuntimeOnlySubject",
                 "frameworkReferenced": False,
                 "subjectKind": "runtime-only",
@@ -114,6 +118,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
         )
         self.assertEqual(
             {
+                "schemaVersion": 1,
                 "subjectId": "FrameworkOnlySubject",
                 "frameworkReferenced": True,
                 "subjectKind": "runtime-only",
@@ -211,8 +216,10 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             assembly_paths=[self.declared_entries_dll],
         )
 
+        self.assertEqual(1, catalog["schemaVersion"])
         self.assertEqual(
             {
+                "schemaVersion": 1,
                 "subjectId": "CompatibilityShellSubject",
                 "frameworkReferenced": False,
                 "subjectKind": "runtime-only",
@@ -268,6 +275,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                 {
                     "CoreRuntimeFeatures.AbiWideningProofEntry",
                     "CoreRuntimeFeatures.AotClosureValidationProofEntry",
+                    "CoreRuntimeFeatures.ArithmeticOpsProofEntry",
                     "CoreRuntimeFeatures.ArrayOpsProofEntry",
                     "CoreRuntimeFeatures.ArrayCovarianceProofEntry",
                     "CoreRuntimeFeatures.BitwiseOpsProofEntry",
@@ -327,6 +335,10 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                     "CoreRuntimeFeatures.VTableDispatchProofEntry",
                 },
                 set(unit_entries),
+            )
+            self.assertEqual(
+                "arithmetic-ops-proof",
+                unit_entries["CoreRuntimeFeatures.ArithmeticOpsProofEntry"]["alias"],
             )
             self.assertEqual("array-ops-proof", unit_entries["CoreRuntimeFeatures.ArrayOpsProofEntry"]["alias"])
             self.assertEqual("bitwise-ops-proof", unit_entries["CoreRuntimeFeatures.BitwiseOpsProofEntry"]["alias"])
@@ -405,6 +417,8 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             self.assertEqual("dispatch-proof", unit_entries["CoreRuntimeFeatures.DispatchProofEntry"]["alias"])
             self.assertTrue(all(entry["capabilityFamily"] > 0 for entry in unit_entries.values()))
             self.assertTrue(all(entry["capabilityItem"] > 0 for entry in unit_entries.values()))
+            self.assertEqual(1, unit_entries["CoreRuntimeFeatures.ArithmeticOpsProofEntry"]["capabilityFamily"])
+            self.assertEqual(1, unit_entries["CoreRuntimeFeatures.ArithmeticOpsProofEntry"]["capabilityItem"])
             self.assertEqual(1, unit_entries["CoreRuntimeFeatures.ArrayOpsProofEntry"]["capabilityFamily"])
             self.assertEqual(6, unit_entries["CoreRuntimeFeatures.ArrayOpsProofEntry"]["capabilityItem"])
             self.assertEqual(3, unit_entries["CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry"]["capabilityFamily"])
@@ -544,6 +558,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                     "CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry",
                     "CoreRuntimeBenchmarks.FloatingPointCarrierBenchmarkEntry",
                     "CoreRuntimeBenchmarks.GenericBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry",
                     "CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry",
                     "CoreRuntimeBenchmarks.IntegerCarrierBenchmarkEntry",
                     "CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry",
@@ -573,6 +588,10 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                 benchmark_entries["CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry"]["alias"],
             )
             self.assertEqual("generic-bench", benchmark_entries["CoreRuntimeBenchmarks.GenericBenchmarkEntry"]["alias"])
+            self.assertEqual(
+                "generic-interface-dispatch-bench",
+                benchmark_entries["CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry"]["alias"],
+            )
             self.assertEqual(
                 "generic-sharing-boundary-bench",
                 benchmark_entries["CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry"]["alias"],
@@ -619,6 +638,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.DispatchBenchmarkEntry"]["modes"])
             self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry"]["modes"])
             self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.GenericBenchmarkEntry"]["modes"])
+            self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry"]["modes"])
             self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry"]["modes"])
             self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry"]["modes"])
             self.assertEqual(3, benchmark_entries["CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry"]["modes"])
@@ -640,6 +660,8 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             self.assertEqual(46, benchmark_entries["CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry"]["capabilityItem"])
             self.assertEqual(2, benchmark_entries["CoreRuntimeBenchmarks.GenericBenchmarkEntry"]["capabilityFamily"])
             self.assertEqual(12, benchmark_entries["CoreRuntimeBenchmarks.GenericBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(2, benchmark_entries["CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(11, benchmark_entries["CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry"]["capabilityItem"])
             self.assertEqual(12, benchmark_entries["CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry"]["capabilityFamily"])
             self.assertEqual(52, benchmark_entries["CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry"]["capabilityItem"])
             self.assertEqual(6, benchmark_entries["CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry"]["capabilityFamily"])
@@ -732,6 +754,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                     "HotUpdateHostPack.MetadataSupplementProofEntry",
                     "HotUpdateHostPack.MethodReplacementProofEntry",
                     "HotUpdateHostPack.PatchIntegrityProofEntry",
+                    "HotUpdateHostPack.PatchCallbackFlowProofEntry",
                     "HotUpdateHostPack.SharedContractProofEntry",
                     "HotUpdateHostPack.VersionRollbackProofEntry",
                 },
@@ -741,6 +764,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                 {
                     "HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry",
                     "HotUpdateHostPack.HotUpdateLoadBenchmarkEntry",
+                    "HotUpdateHostPack.MethodReplacementBenchmarkEntry",
                     "HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry",
                 },
                 set(benchmark_entries),
@@ -748,10 +772,12 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             self.assertEqual("hot-update-skeleton-proof", unit_entries["HotUpdateHostPack.HotUpdateSkeletonProofEntry"]["alias"])
             self.assertEqual("metadata-supplement-proof", unit_entries["HotUpdateHostPack.MetadataSupplementProofEntry"]["alias"])
             self.assertEqual("method-replacement-proof", unit_entries["HotUpdateHostPack.MethodReplacementProofEntry"]["alias"])
+            self.assertEqual("patch-callback-flow-proof", unit_entries["HotUpdateHostPack.PatchCallbackFlowProofEntry"]["alias"])
             self.assertEqual("shared-contract-proof", unit_entries["HotUpdateHostPack.SharedContractProofEntry"]["alias"])
             self.assertEqual("version-rollback-proof", unit_entries["HotUpdateHostPack.VersionRollbackProofEntry"]["alias"])
             self.assertEqual("hot-update-dispatch-bench", benchmark_entries["HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry"]["alias"])
             self.assertEqual("hot-update-load-bench", benchmark_entries["HotUpdateHostPack.HotUpdateLoadBenchmarkEntry"]["alias"])
+            self.assertEqual("method-replacement-bench", benchmark_entries["HotUpdateHostPack.MethodReplacementBenchmarkEntry"]["alias"])
             self.assertEqual("hot-update-roundtrip-bench", benchmark_entries["HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry"]["alias"])
             self.assertTrue(all(entry["capabilityFamily"] > 0 for entry in unit_entries.values()))
             self.assertTrue(all(entry["capabilityItem"] > 0 for entry in unit_entries.values()))
@@ -763,6 +789,8 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             self.assertEqual(57, unit_entries["HotUpdateHostPack.MetadataSupplementProofEntry"]["capabilityItem"])
             self.assertEqual(13, unit_entries["HotUpdateHostPack.MethodReplacementProofEntry"]["capabilityFamily"])
             self.assertEqual(56, unit_entries["HotUpdateHostPack.MethodReplacementProofEntry"]["capabilityItem"])
+            self.assertEqual(13, unit_entries["HotUpdateHostPack.PatchCallbackFlowProofEntry"]["capabilityFamily"])
+            self.assertEqual(60, unit_entries["HotUpdateHostPack.PatchCallbackFlowProofEntry"]["capabilityItem"])
             self.assertEqual(13, unit_entries["HotUpdateHostPack.SharedContractProofEntry"]["capabilityFamily"])
             self.assertEqual(55, unit_entries["HotUpdateHostPack.SharedContractProofEntry"]["capabilityItem"])
             self.assertEqual(13, unit_entries["HotUpdateHostPack.VersionRollbackProofEntry"]["capabilityFamily"])
@@ -770,19 +798,24 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
             self.assertEqual(7, unit_entries["HotUpdateHostPack.HotUpdateSkeletonProofEntry"]["archetype"])
             self.assertEqual(8, unit_entries["HotUpdateHostPack.MetadataSupplementProofEntry"]["archetype"])
             self.assertEqual(7, unit_entries["HotUpdateHostPack.MethodReplacementProofEntry"]["archetype"])
+            self.assertEqual(7, unit_entries["HotUpdateHostPack.PatchCallbackFlowProofEntry"]["archetype"])
             self.assertEqual(8, unit_entries["HotUpdateHostPack.SharedContractProofEntry"]["archetype"])
             self.assertEqual(9, unit_entries["HotUpdateHostPack.VersionRollbackProofEntry"]["archetype"])
             self.assertEqual(13, benchmark_entries["HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry"]["capabilityFamily"])
             self.assertEqual(60, benchmark_entries["HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry"]["capabilityItem"])
             self.assertEqual(13, benchmark_entries["HotUpdateHostPack.HotUpdateLoadBenchmarkEntry"]["capabilityFamily"])
             self.assertEqual(54, benchmark_entries["HotUpdateHostPack.HotUpdateLoadBenchmarkEntry"]["capabilityItem"])
+            self.assertEqual(13, benchmark_entries["HotUpdateHostPack.MethodReplacementBenchmarkEntry"]["capabilityFamily"])
+            self.assertEqual(56, benchmark_entries["HotUpdateHostPack.MethodReplacementBenchmarkEntry"]["capabilityItem"])
             self.assertEqual(13, benchmark_entries["HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry"]["capabilityFamily"])
             self.assertEqual(60, benchmark_entries["HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry"]["capabilityItem"])
             self.assertEqual(7, benchmark_entries["HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry"]["archetype"])
             self.assertEqual(7, benchmark_entries["HotUpdateHostPack.HotUpdateLoadBenchmarkEntry"]["archetype"])
+            self.assertEqual(7, benchmark_entries["HotUpdateHostPack.MethodReplacementBenchmarkEntry"]["archetype"])
             self.assertEqual(8, benchmark_entries["HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry"]["archetype"])
             self.assertEqual(1, benchmark_entries["HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry"]["modes"])
             self.assertEqual(1, benchmark_entries["HotUpdateHostPack.HotUpdateLoadBenchmarkEntry"]["modes"])
+            self.assertEqual(1, benchmark_entries["HotUpdateHostPack.MethodReplacementBenchmarkEntry"]["modes"])
             self.assertEqual(1, benchmark_entries["HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry"]["modes"])
             self.assertTrue(all(entry["evidence"] == 0 for entry in unit_entries.values()))
         finally:

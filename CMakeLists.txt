@@ -16,11 +16,6 @@ endif()
 project(roadmap0_preset_router LANGUAGES CXX)
 
 set(
-    CHAOS_SUBJECT_PROOF_ROOT
-    "subjects/SolutionCorePack/validation/proof/native-reference"
-    CACHE PATH
-    "Subject-owned proof host directory for windows-x64-reference")
-set(
     CHAOS_SUBJECT_ANDROID_HOST_ROOT
     "tests/integration/platform-hosts/android-smoke"
     CACHE PATH
@@ -39,7 +34,6 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     add_subdirectory(src/native/engine-bridge)
     add_subdirectory(src/native/support)
     add_subdirectory(src/native/bootstrap)
-    add_subdirectory("${CHAOS_SUBJECT_PROOF_ROOT}" "${CMAKE_BINARY_DIR}/subject-proof")
     add_subdirectory(tests/contracts/native/abi)
     add_subdirectory(tests/contracts/native/engine-binding)
     add_subdirectory(tests/contracts/native/hot-update)

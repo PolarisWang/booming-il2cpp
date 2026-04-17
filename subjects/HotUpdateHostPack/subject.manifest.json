@@ -19,7 +19,7 @@
   "engineeringProfile": "hot-update-host",
   "hotUpdate": {
     "patchProjectPaths": [
-      "subjects/HotUpdateHostPack/source/Archetypes/FullProjectHotUpdateSolution/PatchModules/GoldenHotUpdate.PatchModule.csproj"
+      "subjects/HotUpdateHostPack/source/EngineeringScenarios/FullProjectHotUpdateSolution/Patch/GoldenHotUpdate.PatchModule.csproj"
     ]
   },
   "workloadEntry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
@@ -239,7 +239,7 @@
         "correctness.dev"
       ],
       "source": {
-        "primaryProjectPath": "subjects/HotUpdateHostPack/source/Archetypes/FullProjectHotUpdateSolution/HostApp/GoldenHotUpdateHost.App.csproj",
+        "primaryProjectPath": "subjects/HotUpdateHostPack/source/EngineeringScenarios/FullProjectHotUpdateSolution/HostApp/GoldenHotUpdateHost.App.csproj",
         "entry": "GoldenHotUpdateHost.App/Program::Main()"
       },
       "executionContext": {

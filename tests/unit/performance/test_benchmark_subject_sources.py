@@ -45,6 +45,14 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
             / "DelegateCallbackInteropBenchmark.cs"
         )
         generic_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "GenericsAndCollections" / "GenericBenchmark.cs"
+        generic_interface_dispatch_path = (
+            SOLUTION_CORE_PACK_ROOT
+            / "source"
+            / "Benchmarks"
+            / "CoreRuntimeBenchmarks"
+            / "ObjectModelAndDispatch"
+            / "GenericInterfaceDispatchBenchmark.cs"
+        )
         generic_sharing_boundary_path = (
             SOLUTION_CORE_PACK_ROOT
             / "source"
@@ -129,6 +137,7 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
             dispatch_path,
             delegate_callback_path,
             generic_path,
+            generic_interface_dispatch_path,
             generic_sharing_boundary_path,
             required_instantiation_path,
             native_call_interop_path,
@@ -150,6 +159,7 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         dispatch_source = dispatch_path.read_text(encoding="utf-8")
         delegate_callback_source = delegate_callback_path.read_text(encoding="utf-8")
         generic_source = generic_path.read_text(encoding="utf-8")
+        generic_interface_dispatch_source = generic_interface_dispatch_path.read_text(encoding="utf-8")
         generic_sharing_boundary_source = generic_sharing_boundary_path.read_text(encoding="utf-8")
         required_instantiation_source = required_instantiation_path.read_text(encoding="utf-8")
         native_call_interop_source = native_call_interop_path.read_text(encoding="utf-8")
@@ -166,7 +176,7 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertEqual("SolutionCorePack", manifest["subjectId"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
             manifest["source"]["primaryProjectPath"],
         )
         self.assertEqual("require", manifest["testDeclarationMode"])
@@ -213,6 +223,12 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn("Dictionary<string, int>", generic_source)
         self.assertIn("public static int RunWorkload()", generic_source)
         self.assertNotIn("public static long RunWorkload()", generic_source)
+
+        self.assertIn("ChaosBenchmark(", generic_interface_dispatch_source)
+        self.assertIn('Alias = "generic-interface-dispatch-bench"', generic_interface_dispatch_source)
+        self.assertIn("ChaosCapabilityItem.GenericInterfaceDispatch", generic_interface_dispatch_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native", generic_interface_dispatch_source)
+        self.assertIn("IGenericDispatchValue<int>", generic_interface_dispatch_source)
 
         for source_text, alias in [
             (delegate_callback_source, "delegate-callback-interop-bench"),
@@ -306,19 +322,21 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         project_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "HotUpdateHostPack.csproj"
         program_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Program.cs"
         skeleton_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Proofs" / "HotUpdateSkeletonProofEntry.cs"
+        patch_callback_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Proofs" / "PatchCallbackFlowProofEntry.cs"
         replacement_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Proofs" / "MethodReplacementProofEntry.cs"
         shared_proof_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Proofs" / "SharedContractProofEntry.cs"
         shared_contract_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "SharedContracts" / "ContractIdentityWitness.cs"
         rollback_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Proofs" / "VersionRollbackProofEntry.cs"
         dispatch_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateDispatchBenchmark.cs"
         load_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateLoadBenchmark.cs"
+        method_replacement_benchmark_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Benchmarks" / "MethodReplacementBenchmark.cs"
         roundtrip_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateRoundtripBenchmark.cs"
-        package_support_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "PatchModules" / "HotUpdatePackageSupport.cs"
+        package_support_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Patch" / "HotUpdatePackageSupport.cs"
         full_project_solution_path = (
-            HOT_UPDATE_HOST_PACK_ROOT / "source" / "Archetypes" / "FullProjectHotUpdateSolution" / "FullProjectHotUpdateSolution.sln"
+            HOT_UPDATE_HOST_PACK_ROOT / "source" / "EngineeringScenarios" / "FullProjectHotUpdateSolution" / "FullProjectHotUpdateSolution.sln"
         )
         full_project_host_path = (
-            HOT_UPDATE_HOST_PACK_ROOT / "source" / "Archetypes" / "FullProjectHotUpdateSolution" / "HostApp" / "Program.cs"
+            HOT_UPDATE_HOST_PACK_ROOT / "source" / "EngineeringScenarios" / "FullProjectHotUpdateSolution" / "HostApp" / "Program.cs"
         )
 
         for path in [
@@ -326,12 +344,14 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
             project_path,
             program_path,
             skeleton_path,
+            patch_callback_path,
             replacement_path,
             shared_proof_path,
             shared_contract_path,
             rollback_path,
             dispatch_path,
             load_path,
+            method_replacement_benchmark_path,
             roundtrip_path,
             package_support_path,
             full_project_solution_path,
@@ -342,12 +362,14 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         program_source = program_path.read_text(encoding="utf-8")
         skeleton_source = skeleton_path.read_text(encoding="utf-8")
+        patch_callback_source = patch_callback_path.read_text(encoding="utf-8")
         replacement_source = replacement_path.read_text(encoding="utf-8")
         shared_proof_source = shared_proof_path.read_text(encoding="utf-8")
         shared_contract_source = shared_contract_path.read_text(encoding="utf-8")
         rollback_source = rollback_path.read_text(encoding="utf-8")
         dispatch_source = dispatch_path.read_text(encoding="utf-8")
         load_source = load_path.read_text(encoding="utf-8")
+        method_replacement_benchmark_source = method_replacement_benchmark_path.read_text(encoding="utf-8")
         roundtrip_source = roundtrip_path.read_text(encoding="utf-8")
         package_support_source = package_support_path.read_text(encoding="utf-8")
         full_project_host_source = full_project_host_path.read_text(encoding="utf-8")
@@ -369,12 +391,13 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
             matrix for matrix in manifest["environmentMatrices"] if matrix["matrixId"] == "windows-archetype-full-project-managed-output"
         )
         self.assertEqual(
-            "subjects/HotUpdateHostPack/source/Archetypes/FullProjectHotUpdateSolution/HostApp/GoldenHotUpdateHost.App.csproj",
+            "subjects/HotUpdateHostPack/source/EngineeringScenarios/FullProjectHotUpdateSolution/HostApp/GoldenHotUpdateHost.App.csproj",
             archetype_matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenHotUpdateHost.App/Program::Main()", archetype_matrix["source"]["entry"])
 
         self.assertIn("HotUpdateSkeletonProofEntry.Run", program_source)
+        self.assertIn("PatchCallbackFlowProofEntry.Run", program_source)
         self.assertIn("MethodReplacementProofEntry.Run", program_source)
         self.assertIn("SharedContractProofEntry.Run", program_source)
         self.assertIn("VersionRollbackProofEntry.Run", program_source)
@@ -394,6 +417,13 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn("ChaosHotUpdateCapability.MethodReplacement", replacement_source)
         self.assertNotIn("Console.WriteLine", replacement_source)
         self.assertNotIn("ChaosEvidenceKind.Stdout", replacement_source)
+
+        self.assertIn("ChaosUnitTest(", patch_callback_source)
+        self.assertIn('Alias = "patch-callback-flow-proof"', patch_callback_source)
+        self.assertIn("ChaosCapabilityItem.PatchCallbackFlow", patch_callback_source)
+        self.assertIn("ChaosHotUpdateCapability.PatchCallbackFlow", patch_callback_source)
+        self.assertNotIn("Console.WriteLine", patch_callback_source)
+        self.assertNotIn("ChaosEvidenceKind.Stdout", patch_callback_source)
 
         self.assertIn("ChaosUnitTest(", shared_proof_source)
         self.assertIn('Alias = "shared-contract-proof"', shared_proof_source)
@@ -424,6 +454,12 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn("Modes = ChaosExecutionMode.Managed", load_source)
         self.assertIn("ChaosHotUpdateCapability.PackageLoad", load_source)
 
+        self.assertIn("ChaosBenchmark(", method_replacement_benchmark_source)
+        self.assertIn('Alias = "method-replacement-bench"', method_replacement_benchmark_source)
+        self.assertIn("ChaosCapabilityItem.MethodReplacement", method_replacement_benchmark_source)
+        self.assertIn("ChaosHotUpdateCapability.MethodReplacement", method_replacement_benchmark_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", method_replacement_benchmark_source)
+
         self.assertIn("ChaosBenchmark(", roundtrip_source)
         self.assertIn('Alias = "hot-update-roundtrip-bench"', roundtrip_source)
         self.assertIn("ChaosBenchmarkCategory.HotUpdate", roundtrip_source)
@@ -439,23 +475,23 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
     def test_mixed_execution_feature_pack_declares_mixed_interpreter_unit_and_benchmark_slices(self) -> None:
         manifest_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "subject.manifest.json"
         project_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "MixedExecutionFeaturePack.csproj"
-        program_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "ManagedBridge" / "Program.cs"
-        proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "ManagedBridge" / "Proofs" / "MixedExecutionProofEntry.cs"
-        arithmetic_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "ManagedBridge" / "Proofs" / "InterpreterArithmeticProofEntry.cs"
-        lowering_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Lowering" / "InterpreterLoweringProofEntry.cs"
-        generic_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "ManagedBridge" / "Proofs" / "MixedGenericFlowProofEntry.cs"
-        exception_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "ManagedBridge" / "Proofs" / "MixedExceptionFlowProofEntry.cs"
-        delegate_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "ManagedBridge" / "Proofs" / "MixedDelegateFlowProofEntry.cs"
-        benchmark_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "ManagedBridge" / "Benchmarks" / "MixedExecutionBenchmark.cs"
-        native_benchmark_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "ManagedBridge" / "Benchmarks" / "MixedExecutionNativeBenchmark.cs"
+        program_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Host" / "Program.cs"
+        proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Proofs" / "MixedExecutionProofEntry.cs"
+        arithmetic_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Proofs" / "InterpreterArithmeticProofEntry.cs"
+        lowering_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Proofs" / "InterpreterLoweringProofEntry.cs"
+        generic_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Proofs" / "MixedGenericFlowProofEntry.cs"
+        exception_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Proofs" / "MixedExceptionFlowProofEntry.cs"
+        delegate_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Proofs" / "MixedDelegateFlowProofEntry.cs"
+        benchmark_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Benchmarks" / "MixedExecutionBenchmark.cs"
+        native_benchmark_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Benchmarks" / "MixedExecutionNativeBenchmark.cs"
         support_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Interpreter" / "InterpreterArithmeticSupport.cs"
         support_solution_path = (
-            MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Archetypes" / "MixedBridgeSolution" / "MixedBridgeSolution.sln"
+            MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "EngineeringScenarios" / "MixedBridgeSolution" / "MixedBridgeSolution.sln"
         )
         arithmetic_support_project_path = (
             MIXED_EXECUTION_FEATURE_PACK_ROOT
             / "source"
-            / "Archetypes"
+            / "EngineeringScenarios"
             / "MixedBridgeSolution"
             / "InterpreterArithmeticProof"
             / "InterpreterArithmeticProof.csproj"
@@ -501,7 +537,7 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
             matrix for matrix in manifest["environmentMatrices"] if matrix["matrixId"] == "windows-archetype-mixed-bridge-managed-output"
         )
         self.assertEqual(
-            "subjects/MixedExecutionFeaturePack/source/Archetypes/MixedBridgeSolution/InterpreterArithmeticProof/InterpreterArithmeticProof.csproj",
+            "subjects/MixedExecutionFeaturePack/source/EngineeringScenarios/MixedBridgeSolution/InterpreterArithmeticProof/InterpreterArithmeticProof.csproj",
             archetype_matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("InterpreterArithmeticProof/Program::Main()", archetype_matrix["source"]["entry"])
@@ -588,3 +624,4 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

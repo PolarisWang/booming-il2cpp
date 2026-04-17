@@ -1,0 +1,44 @@
+set(CHAOS_SUBJECT_PROOF_HOST_MAIN "@@PROOF_MAIN@@")
+set(CHAOS_SUBJECT_PROOF_RUN_SCRIPT "${CMAKE_CURRENT_LIST_DIR}/RunSubjectProof.cmake")
+set(CHAOS_SUBJECT_PROOF_STDOUT_LOG "${CHAOS_SUBJECT_RUNTIME_ROOT}/stdout.log")
+set(CHAOS_SUBJECT_PROOF_STDERR_LOG "${CHAOS_SUBJECT_RUNTIME_ROOT}/stderr.log")
+set(CHAOS_SUBJECT_PROOF_EXIT_CODE_PATH "${CHAOS_SUBJECT_RUNTIME_ROOT}/exit-code.txt")
+
+if(NOT EXISTS "${CHAOS_SUBJECT_PROOF_HOST_MAIN}")
+    message(FATAL_ERROR "Missing subject proof host source: ${CHAOS_SUBJECT_PROOF_HOST_MAIN}")
+endif()
+
+add_executable(chaos_subject_reference_proof EXCLUDE_FROM_ALL
+    "${CHAOS_SUBJECT_PROOF_HOST_MAIN}")
+chaos_configure_subject_target(chaos_subject_reference_proof)
+target_link_libraries(
+    chaos_subject_reference_proof
+    PRIVATE
+        chaos_subject_generated_native
+        chaos_runtime_core
+        chaos_hot_update
+        chaos_bootstrap
+        chaos_support)
+
+add_custom_target(chaos_subject_reference_proof_run
+    BYPRODUCTS
+        "${CHAOS_SUBJECT_PROOF_STDOUT_LOG}"
+        "${CHAOS_SUBJECT_PROOF_STDERR_LOG}"
+        "${CHAOS_SUBJECT_PROOF_EXIT_CODE_PATH}"
+    COMMAND "${CMAKE_COMMAND}" -E make_directory "${CHAOS_SUBJECT_RUNTIME_ROOT}"
+    COMMAND "${CMAKE_COMMAND}"
+        "-DCHAOS_SUBJECT_PROOF_EXE=$<TARGET_FILE:chaos_subject_reference_proof>"
+        "-DCHAOS_SUBJECT_PROOF_RUN_OUTPUT_ROOT=${CHAOS_SUBJECT_RUNTIME_ROOT}"
+        "-DCHAOS_SUBJECT_PROOF_STDOUT_PATH=${CHAOS_SUBJECT_PROOF_STDOUT_LOG}"
+        "-DCHAOS_SUBJECT_PROOF_STDERR_PATH=${CHAOS_SUBJECT_PROOF_STDERR_LOG}"
+        "-DCHAOS_SUBJECT_PROOF_EXIT_CODE_PATH=${CHAOS_SUBJECT_PROOF_EXIT_CODE_PATH}"
+        -P "${CHAOS_SUBJECT_PROOF_RUN_SCRIPT}"
+    DEPENDS
+        chaos_subject_reference_proof
+    VERBATIM)
+
+set_target_properties(
+    chaos_subject_reference_proof
+    PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CHAOS_SUBJECT_BUILD_OUT_ROOT}"
+        RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CHAOS_SUBJECT_BUILD_OUT_ROOT}")

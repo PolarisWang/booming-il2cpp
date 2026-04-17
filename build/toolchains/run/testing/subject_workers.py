@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -19,6 +20,7 @@ try:
     from . import mobile_perf_collector
     from . import perf as perf_module
     from . import subjects as subjects_module
+    from . import template_assets as template_assets_module
     from . import workspace_manifests as workspace_manifests_module
     from . import workspace_declared_collection as workspace_declared_collection_module
 except ImportError:
@@ -31,6 +33,7 @@ except ImportError:
     from testing import mobile_perf_collector
     from testing import perf as perf_module
     from testing import subjects as subjects_module
+    from testing import template_assets as template_assets_module
     from testing import workspace_manifests as workspace_manifests_module
     from testing import workspace_declared_collection as workspace_declared_collection_module
 
@@ -75,6 +78,22 @@ VARIANT_MACROS = {
     },
 }
 ENGINE_OBSERVE_PREFIX = "CHAOS_ENGINE_OBSERVE "
+_SUBJECT_TEMPLATE_OWNER_FILE = Path(__file__).resolve().parents[1] / "subject" / "project_workspace.py"
+_PROJECT_WORKSPACE_MODULE_PATH = Path(__file__).resolve().parents[1] / "subject" / "project_workspace.py"
+_NATIVE_REFERENCE_RUN_SCRIPT_TEMPLATE = "templates/native-proof-run.cmake.tmpl"
+_NATIVE_REFERENCE_WORKSPACE_TEMPLATE = "templates/native-reference-workspace.cmake.tmpl"
+_NATIVE_GENERATED_TEMPLATE = "templates/native-generated.cmake.tmpl"
+_NATIVE_PROOF_TEMPLATE = "templates/native-proof.cmake.tmpl"
+_NATIVE_PROOF_MAIN_TEMPLATE = "templates/native-proof-main.cpp.tmpl"
+_WORKSPACE_MANIFEST_RELEVANT_KEYS = (
+    "projectPath",
+    "collectionPath",
+    "generatedSourcePath",
+    "bindingManifestPath",
+    "configureRoot",
+)
+_PROJECT_WORKSPACE_MODULE_CACHE: Any | None = None
+_ACTIVE_WORKSPACE_MANIFEST_GENERATIONS: set[str] = set()
 
 
 def _render_windows_native_aot_workspace_cmakelists(repo_root: Path) -> str:
@@ -163,7 +182,9 @@ function(chaos_configure_subject_target target_name)
     chaos_apply_subject_variant("${{target_name}}")
 endfunction()
 
+add_subdirectory("{repo_root_text}/third_party/bdwgc" "bdwgc")
 add_subdirectory("{repo_root_text}/src/native/runtime-core" "runtime-core")
+add_subdirectory("{repo_root_text}/src/native/hot-update" "hot-update")
 add_subdirectory("{repo_root_text}/src/native/support" "support")
 add_subdirectory("{repo_root_text}/src/native/bootstrap" "bootstrap")
 add_subdirectory(generated)
@@ -201,6 +222,7 @@ target_link_libraries(
     PRIVATE
         chaos_subject_generated_native
         chaos_runtime_core
+        chaos_hot_update
         chaos_bootstrap
         chaos_support)
 
@@ -233,13 +255,60 @@ def _selection_workload_entry(selection: dict[str, Any]) -> str:
     return str(selection.get("workloadEntry") or "")
 
 
+def _declared_benchmark_has_reflection_contract(declared_benchmark: dict[str, Any] | None) -> bool:
+    benchmark_meta = dict(declared_benchmark or {})
+    return bool(
+        str(benchmark_meta.get("assemblyName") or "").strip()
+        and str(benchmark_meta.get("declaringType") or "").strip()
+        and str(benchmark_meta.get("methodName") or "").strip()
+    )
+
+
+def _benchmark_resolution_kind(
+    *,
+    workload_entry: str,
+    declared_benchmark: dict[str, Any] | None,
+    host_kind: str = "",
+    collection_path: str = "",
+    entry_index: int | None = None,
+) -> str:
+    if host_kind == "benchmark-host" and collection_path and isinstance(entry_index, int) and entry_index >= 0:
+        return "collection-entry"
+    if _declared_benchmark_has_reflection_contract(declared_benchmark):
+        return "declared-reflection"
+    if workload_entry:
+        return "legacy-workload-entry"
+    return "unresolved"
+
+
 def _selection_workspace_host_kind(selection: dict[str, Any]) -> str:
     entry_selection = _selection_declared_entry_selection(selection)
     family = str(entry_selection.get("family") or "")
-    return {
+    host_kind = {
         "declared-unit-test": "proof-host",
         "declared-benchmark": "benchmark-host",
     }.get(family, "")
+    if host_kind:
+        return host_kind
+
+    execution_context = dict(selection.get("executionContext") or {})
+    goal_id = str(selection.get("goalId") or "").strip().lower()
+    matrix_id = str(selection.get("matrixId") or "").strip().lower()
+    runtime_profile = str(execution_context.get("runtimeProfile") or "").strip().lower()
+    toolchain_profile = str(execution_context.get("toolchainProfile") or "").strip().lower()
+    selector_haystack = " ".join(
+        value
+        for value in (
+            goal_id,
+            matrix_id,
+            runtime_profile,
+            toolchain_profile,
+        )
+        if value
+    )
+    if "perf" in selector_haystack or "benchmark" in selector_haystack:
+        return "benchmark-host"
+    return ""
 
 
 def _declared_source_entry(entry: dict[str, Any]) -> str:
@@ -338,6 +407,177 @@ def _selection_declared_entry_selection(selection: dict[str, Any]) -> dict[str, 
     return normalized
 
 
+def _load_project_workspace_module() -> Any:
+    global _PROJECT_WORKSPACE_MODULE_CACHE
+    if _PROJECT_WORKSPACE_MODULE_CACHE is not None:
+        return _PROJECT_WORKSPACE_MODULE_CACHE
+
+    spec = importlib.util.spec_from_file_location(
+        "chaos_subject_project_workspace_runtime",
+        _PROJECT_WORKSPACE_MODULE_PATH,
+    )
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"unable to load project workspace module: {_PROJECT_WORKSPACE_MODULE_PATH}")
+
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    _PROJECT_WORKSPACE_MODULE_CACHE = module
+    return module
+
+
+def _workspace_manifest_referenced_paths(manifest: dict[str, Any]) -> list[str]:
+    referenced_paths: list[str] = []
+    for collection_name in (
+        "managedProjects",
+        "managedTestProjects",
+        "nativeProjects",
+        "nativeTestProjects",
+        "hotupdatePatchProjects",
+        "hotupdateTestProjects",
+    ):
+        for item in list(manifest.get(collection_name) or []):
+            if not isinstance(item, dict):
+                continue
+            for field_name in _WORKSPACE_MANIFEST_RELEVANT_KEYS:
+                field_value = str(item.get(field_name) or "").strip()
+                if field_value and field_value not in referenced_paths:
+                    referenced_paths.append(field_value)
+    return referenced_paths
+
+
+def _workspace_manifest_missing_outputs(repo_root: Path, manifest: dict[str, Any]) -> bool:
+    for relative_path in _workspace_manifest_referenced_paths(manifest):
+        candidate_path = _resolve(repo_root, relative_path)
+        if candidate_path.exists():
+            continue
+        return True
+    return False
+
+
+def _is_relevant_workspace_source_file(path: Path) -> bool:
+    if not path.is_file():
+        return False
+    if path.suffix.lower() in {".cs", ".csproj", ".sln", ".props", ".targets"}:
+        return True
+    return path.name in {"Directory.Build.props", "Directory.Build.targets"}
+
+
+def _load_subject_manifest_payload(repo_root: Path, subject_id: str) -> dict[str, Any] | None:
+    manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+    if not manifest_path.is_file():
+        return None
+    try:
+        payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return payload if isinstance(payload, dict) else None
+
+
+def _workspace_manifest_is_stale(
+    repo_root: Path,
+    *,
+    subject_id: str,
+    manifest_path: Path,
+    manifest: dict[str, Any],
+) -> bool:
+    if _workspace_manifest_missing_outputs(repo_root, manifest):
+        return True
+
+    try:
+        manifest_mtime = manifest_path.stat().st_mtime
+    except OSError:
+        return True
+
+    subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+    try:
+        if subject_manifest_path.is_file() and subject_manifest_path.stat().st_mtime > manifest_mtime:
+            return True
+    except OSError:
+        return True
+
+    subject_manifest = _load_subject_manifest_payload(repo_root, subject_id)
+    if subject_manifest is None:
+        return False
+
+    source = dict(subject_manifest.get("source") or {})
+    source_path_text = str(source.get("path") or "").strip()
+    if not source_path_text:
+        return False
+
+    source_path = _resolve(repo_root, source_path_text)
+    source_root = source_path if source_path.is_dir() else source_path.parent
+    if not source_root.is_dir():
+        return False
+
+    for candidate in source_root.rglob("*"):
+        if not _is_relevant_workspace_source_file(candidate):
+            continue
+        try:
+            if candidate.stat().st_mtime > manifest_mtime:
+                return True
+        except OSError:
+            return True
+    return False
+
+
+def _ensure_subject_workspace_manifest(
+    repo_root: Path,
+    selection: dict[str, Any],
+) -> tuple[Path, dict[str, Any]] | None:
+    subject_id = str(selection.get("subjectId") or "").strip()
+    if not subject_id:
+        return None
+
+    loaded_manifest = workspace_manifests_module.load_subject_workspace_manifest(repo_root, subject_id)
+    loaded_manifest_fresh = False
+    if loaded_manifest is not None:
+        manifest_path, manifest = loaded_manifest
+        loaded_manifest_fresh = not _workspace_manifest_is_stale(
+            repo_root,
+            subject_id=subject_id,
+            manifest_path=manifest_path,
+            manifest=manifest,
+        )
+        if loaded_manifest_fresh:
+            return manifest_path, manifest
+
+    # Workspace generation can execute host-input stages to refresh generated
+    # sources. Those stages must not recursively request the same workspace
+    # manifest again, or subject-exec loops indefinitely.
+    if subject_id in _ACTIVE_WORKSPACE_MANIFEST_GENERATIONS:
+        return loaded_manifest if loaded_manifest_fresh else None
+
+    execution_context = dict(selection.get("executionContext") or {})
+    host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
+    if not host_platform:
+        return loaded_manifest
+
+    project_workspace_module = _load_project_workspace_module()
+    options: dict[str, Any] = {
+        "id": f"subject/{subject_id}",
+        "auto-refresh-missing-generated": True,
+        "refresh-generated": True,
+    }
+    matrix_id = str(selection.get("matrixId") or "").strip()
+    if matrix_id:
+        options["matrix"] = matrix_id
+    else:
+        options["all-targets"] = True
+    variant = str(selection.get("variant") or "").strip()
+    if variant:
+        options["variant"] = variant
+    _ACTIVE_WORKSPACE_MANIFEST_GENERATIONS.add(subject_id)
+    try:
+        project_workspace_module.generate_subject_workspace(
+            repo_root,
+            host_platform,
+            options,
+        )
+    finally:
+        _ACTIVE_WORKSPACE_MANIFEST_GENERATIONS.discard(subject_id)
+    return workspace_manifests_module.load_subject_workspace_manifest(repo_root, subject_id)
+
+
 def _resolve_workspace_managed_host(
     repo_root: Path,
     selection: dict[str, Any],
@@ -350,7 +590,7 @@ def _resolve_workspace_managed_host(
     if not subject_id:
         return None
 
-    loaded_manifest = workspace_manifests_module.load_subject_workspace_manifest(repo_root, subject_id)
+    loaded_manifest = _ensure_subject_workspace_manifest(repo_root, selection)
     if loaded_manifest is None:
         return None
     _, manifest = loaded_manifest
@@ -400,7 +640,7 @@ def _resolve_workspace_hotupdate_test_host(
     if not subject_id:
         return None
 
-    loaded_manifest = workspace_manifests_module.load_subject_workspace_manifest(repo_root, subject_id)
+    loaded_manifest = _ensure_subject_workspace_manifest(repo_root, selection)
     if loaded_manifest is None:
         return None
     _, manifest = loaded_manifest
@@ -438,7 +678,7 @@ def _resolve_workspace_hotupdate_patch_projects(
     if not subject_id:
         return []
 
-    loaded_manifest = workspace_manifests_module.load_subject_workspace_manifest(repo_root, subject_id)
+    loaded_manifest = _ensure_subject_workspace_manifest(repo_root, selection)
     if loaded_manifest is None:
         return []
     _, manifest = loaded_manifest
@@ -472,7 +712,7 @@ def _resolve_workspace_native_test_host(
     if not subject_id or not matrix_id:
         return None
 
-    loaded_manifest = workspace_manifests_module.load_subject_workspace_manifest(repo_root, subject_id)
+    loaded_manifest = _ensure_subject_workspace_manifest(repo_root, selection)
     if loaded_manifest is None:
         return None
     _, manifest = loaded_manifest
@@ -693,6 +933,70 @@ def _materialize_windows_native_aot_cmake_source(
     return source_root
 
 
+def _materialize_windows_native_reference_cmake_source(
+    repo_root: Path,
+    *,
+    build_root: Path,
+    subject_id: str,
+    generated_source_path: Path,
+) -> Path:
+    del repo_root
+
+    source_root = build_root / "cmake-src"
+    if source_root.exists():
+        shutil.rmtree(source_root)
+    (source_root / "generated").mkdir(parents=True, exist_ok=True)
+    (source_root / "proof").mkdir(parents=True, exist_ok=True)
+
+    proof_main_path = source_root / "proof" / "main.cpp"
+    (source_root / "CMakeLists.txt").write_text(
+        template_assets_module.read_template(
+            owner_file=_SUBJECT_TEMPLATE_OWNER_FILE,
+            relative_template_path=_NATIVE_REFERENCE_WORKSPACE_TEMPLATE,
+        ),
+        encoding="utf-8",
+    )
+    (source_root / "generated" / "CMakeLists.txt").write_text(
+        template_assets_module.render_template(
+            owner_file=_SUBJECT_TEMPLATE_OWNER_FILE,
+            relative_template_path=_NATIVE_GENERATED_TEMPLATE,
+            replacements={
+                "GENERATED_INPUT_SOURCE": generated_source_path.as_posix(),
+            },
+        ),
+        encoding="utf-8",
+    )
+    proof_main_path.write_text(
+        template_assets_module.render_template(
+            owner_file=_SUBJECT_TEMPLATE_OWNER_FILE,
+            relative_template_path=_NATIVE_PROOF_MAIN_TEMPLATE,
+            replacements={
+                "IMAGE_NAME": subject_id,
+                "RUNTIME_TAG": "subject-reference-proof",
+            },
+        ),
+        encoding="utf-8",
+    )
+    (source_root / "proof" / "CMakeLists.txt").write_text(
+        template_assets_module.render_template(
+            owner_file=_SUBJECT_TEMPLATE_OWNER_FILE,
+            relative_template_path=_NATIVE_PROOF_TEMPLATE,
+            replacements={
+                "PROOF_MAIN": proof_main_path.as_posix(),
+            },
+        ),
+        encoding="utf-8",
+    )
+    (source_root / "proof" / "RunSubjectProof.cmake").write_text(
+        template_assets_module.read_template(
+            owner_file=_SUBJECT_TEMPLATE_OWNER_FILE,
+            relative_template_path=_NATIVE_REFERENCE_RUN_SCRIPT_TEMPLATE,
+        ),
+        encoding="utf-8",
+    )
+    return source_root
+
+
 def _native_benchmark_dispatch_manifest_path(build_root: Path) -> Path:
     return build_root / "benchmark.dispatch.manifest.json"
 
@@ -703,7 +1007,6 @@ def _write_native_benchmark_dispatch_manifest(
     build_root: Path,
     selection: dict[str, Any],
     collection_path: str,
-    workload_entry: str,
     entry_selection: dict[str, Any],
 ) -> str:
     dispatch_manifest_path = _native_benchmark_dispatch_manifest_path(build_root)
@@ -714,7 +1017,6 @@ def _write_native_benchmark_dispatch_manifest(
             "matrixId": str(selection.get("matrixId") or ""),
             "hostKind": "benchmark-host",
             "collectionPath": collection_path,
-            "workloadEntry": workload_entry,
             "nativeEntryFunctionName": "RunNativeAot",
             "entrySelection": dict(entry_selection),
         },
@@ -1153,7 +1455,6 @@ def _run_native_generated_emitter(
         "validationKind": selection.get("validationKind"),
         "variant": variant,
         "codegenMacros": list(variant_macros["codegen"]),
-        "workloadEntry": _selection_workload_entry(selection),
         "generatedSourcePath": _relative(repo_root, output_root / "generated" / generated_source_name),
         manifest_key: _relative(repo_root, output_root / manifest_name),
         plan_key: _relative(repo_root, output_root / plan_name),
@@ -1250,14 +1551,11 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
             if not source_file.is_file():
                 raise RuntimeError(f"subject proof source is missing: {source_file}")
 
-        declared_benchmark = _resolve_declared_benchmark(selection, repo_root=repo_root, subject_id=str(selection["subjectId"]))
-        workload_entry = str(declared_benchmark.get("workloadEntry") or _selection_workload_entry(selection))
         dispatch_manifest_path = _write_native_benchmark_dispatch_manifest(
             repo_root,
             build_root=build_root,
             selection=selection,
             collection_path=collection_path,
-            workload_entry=workload_entry,
             entry_selection=_selection_declared_entry_selection(selection),
         )
 
@@ -1281,10 +1579,10 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
                 str(cmake_binary_dir),
                 "-G",
                 generator,
-                f"-DCHAOS_SUBJECT_BENCHMARK_HOST_MAIN={host_source_path}",
-                f"-DCHAOS_SUBJECT_GENERATED_INPUT_SOURCE={generated_source_path}",
+                f"-DCHAOS_SUBJECT_BENCHMARK_HOST_MAIN={host_source_path.as_posix()}",
+                f"-DCHAOS_SUBJECT_GENERATED_INPUT_SOURCE={generated_source_path.as_posix()}",
                 f"-DCHAOS_SUBJECT_VARIANT={variant}",
-                f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={out_root}",
+                f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={out_root.as_posix()}",
                 *([f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}"] if instance_spec else []),
             ],
             repo_root=repo_root,
@@ -1338,8 +1636,6 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
         )
 
     generated_root = generated_manifest_path.parent
-    subject_proof_root = repo_root / "subjects" / str(selection["subjectId"]) / "validation" / "proof" / "native-reference"
-    host_source_path = subject_proof_root / "main.cpp"
     generated_source_path = (
         _resolve(repo_root, generated_source_path_text)
         if generated_source_path_text
@@ -1347,15 +1643,17 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
     )
     runtime_root = build_root.parent / "runtime"
     output_executable_path = out_root / f"{WINDOWS_REFERENCE_BUILD_TARGET}.exe"
-    required_paths = [
-        subject_proof_root / "CMakeLists.txt",
-        subject_proof_root / "RunNativeReferenceProof.cmake",
-        host_source_path,
-        generated_source_path,
-    ]
-    for required_path in required_paths:
-        if not required_path.is_file():
-            raise RuntimeError(f"subject proof source is missing: {required_path}")
+    if not generated_source_path.is_file():
+        raise RuntimeError(f"subject proof source is missing: {generated_source_path}")
+
+    out_root.mkdir(parents=True, exist_ok=True)
+    cmake_source_root = _materialize_windows_native_reference_cmake_source(
+        repo_root,
+        build_root=build_root,
+        subject_id=str(selection["subjectId"]),
+        generated_source_path=generated_source_path,
+    )
+    host_source_path = cmake_source_root / "proof" / "main.cpp"
 
     cmake_path, developer_env, _ninja_path = _windows_native_cmake_context(repo_root)
     generator = _windows_visual_studio_generator(repo_root)
@@ -1370,15 +1668,13 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
         [
             cmake_path,
             "-S",
-            str(repo_root),
+            str(cmake_source_root),
             "-B",
             str(cmake_binary_dir),
             "-G",
             generator,
-            "-DROADMAP0_PRESET_TARGET=windows-x64-reference",
+            f"-DCHAOS_SUBJECT_REPO_ROOT={repo_root}",
             f"-DCHAOS_SUBJECT_VARIANT={variant}",
-            f"-DCHAOS_SUBJECT_PROOF_ROOT={subject_proof_root}",
-            f"-DCHAOS_SUBJECT_GENERATED_ROOT={generated_root}",
             f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={out_root}",
             f"-DCHAOS_SUBJECT_RUNTIME_ROOT={runtime_root}",
             *([f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}"] if instance_spec else []),
@@ -2476,8 +2772,6 @@ def _perf_harness_command(
         arguments.extend(["--entry-index", str(entry_index)])
         if binding_manifest_path:
             arguments.extend(["--binding-manifest-path", binding_manifest_path])
-        if workload_entry:
-            arguments.extend(["--workload-entry", workload_entry])
         if mode:
             arguments.extend(["--mode", mode])
         return arguments
@@ -2587,6 +2881,13 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
             collection_entry_index = int(candidate_entry_index)
         else:
             collection_entry_index = None
+    benchmark_resolution_kind = _benchmark_resolution_kind(
+        workload_entry=workload_entry,
+        declared_benchmark=declared_benchmark or None,
+        host_kind=host_kind,
+        collection_path=collection_path,
+        entry_index=collection_entry_index,
+    )
 
     for sample_index in range(sample_count):
         started = time.perf_counter()
@@ -2656,6 +2957,7 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
         "variant": variant,
         "hostInputManifestPath": str(request["upstream"]["host-input"]["manifestPath"]),
         "workloadEntry": workload_entry,
+        "benchmarkResolutionKind": benchmark_resolution_kind,
         "workloadAssemblyPath": workload_assembly_path_text,
         "perfHarnessProjectPath": perf_project_path,
         "perfHarnessDllPath": _relative(repo_root, harness_dll_path),
@@ -3272,6 +3574,13 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
             collection_entry_index = int(candidate_entry_index)
         else:
             collection_entry_index = None
+    benchmark_resolution_kind = _benchmark_resolution_kind(
+        workload_entry=workload_entry,
+        declared_benchmark=declared_benchmark or None,
+        host_kind=host_kind,
+        collection_path=collection_path,
+        entry_index=collection_entry_index,
+    )
 
     for sample_index in range(sample_count):
         started = time.perf_counter()
@@ -3342,6 +3651,7 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
         "variant": variant,
         "mode": "interpreter",
         "workloadEntry": workload_entry,
+        "benchmarkResolutionKind": benchmark_resolution_kind,
         "workloadAssemblyPath": workload_assembly_path_text,
         "harnessProjectPath": harness_project_path_str,
         "harnessDllPath": _relative(repo_root, harness_dll_path),

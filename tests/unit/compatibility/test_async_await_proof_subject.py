@@ -10,13 +10,10 @@ from tests.support import read_linker_stage_source, read_loader_stage_source, re
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
-SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
-ASYNC_AWAIT_SOURCE_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "AsyncAwaitProof.cs"
-TASK_FLOW_SOURCE_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "TaskAndValueTaskFlowProof.cs"
-ITERATOR_SOURCE_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "IteratorStateMachineProof.cs"
-PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
-PROOF_MAIN_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "main.cpp"
-PROOF_RUN_SCRIPT_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "RunNativeReferenceProof.cmake"
+SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
+ASYNC_AWAIT_SOURCE_PATH = SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "AsyncAwaitProof.cs"
+TASK_FLOW_SOURCE_PATH = SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "TaskAndValueTaskFlowProof.cs"
+ITERATOR_SOURCE_PATH = SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "IteratorStateMachineProof.cs"
 PROFILE_ID = "proof-async-await"
 MATRIX_ID = "windows-async-await-check"
 
@@ -50,9 +47,6 @@ class Phase2AsyncAwaitProofTests(unittest.TestCase):
         self.assertTrue(ASYNC_AWAIT_SOURCE_PATH.is_file(), msg=f"missing source file: {ASYNC_AWAIT_SOURCE_PATH}")
         self.assertTrue(TASK_FLOW_SOURCE_PATH.is_file(), msg=f"missing source file: {TASK_FLOW_SOURCE_PATH}")
         self.assertTrue(ITERATOR_SOURCE_PATH.is_file(), msg=f"missing source file: {ITERATOR_SOURCE_PATH}")
-        self.assertTrue(PROOF_CMAKE_PATH.is_file(), msg=f"missing proof cmake: {PROOF_CMAKE_PATH}")
-        self.assertTrue(PROOF_MAIN_PATH.is_file(), msg=f"missing proof host main: {PROOF_MAIN_PATH}")
-        self.assertTrue(PROOF_RUN_SCRIPT_PATH.is_file(), msg=f"missing proof run script: {PROOF_RUN_SCRIPT_PATH}")
 
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
         async_await_source = ASYNC_AWAIT_SOURCE_PATH.read_text(encoding="utf-8")
@@ -62,7 +56,7 @@ class Phase2AsyncAwaitProofTests(unittest.TestCase):
         self.assertEqual("dotnet-project", manifest["source"]["type"])
         self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Launcher/SolutionCorePack.csproj",
+            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
             manifest["source"]["primaryProjectPath"],
         )
         self.assertEqual("CoreRuntimeFeatures/ProofEntry::Run()", manifest["source"]["entry"])
@@ -117,3 +111,4 @@ class Phase2AsyncAwaitProofTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

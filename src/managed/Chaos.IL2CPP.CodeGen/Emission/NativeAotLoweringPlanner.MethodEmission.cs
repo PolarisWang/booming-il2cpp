@@ -72,6 +72,7 @@ public sealed partial class NativeAotLoweringPlanner
 		stringBuilder6.AppendLine(ref handler);
 		builder.AppendLine("    std::size_t chaos_stack_top = 0;");
 		EmitAbiArgumentInitialization(builder, methodAbiParameterSlots);
+		EmitStaticInitializationPrologue(builder, method);
 		builder.AppendLine();
 		if (TryCreateCatchOnlyExceptionMethodShape(method, out CatchOnlyExceptionMethodShape catchOnlyShape))
 		{
@@ -1676,7 +1677,7 @@ public sealed partial class NativeAotLoweringPlanner
 		AppendGotoNext(builder, nextOffset, op);
 	}
 
-	private static void EmitFieldLoad(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
+	private void EmitFieldLoad(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
 	{
 		AotCoreIrReferenceArtifact requiredTargetReference = GetRequiredTargetReference(instruction);
 		if (requiredTargetReference.Kind != AotCoreIrReferenceKind.Field)
@@ -1685,6 +1686,7 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		if (instruction.RuntimeServiceKind == AotCoreIrRuntimeServiceKind.LoadStaticField)
 		{
+			EmitStaticInitializationForField(builder, requiredTargetReference.SubjectId, "    ");
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder2 = stringBuilder;
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(43, 1, stringBuilder);
@@ -1736,7 +1738,7 @@ public sealed partial class NativeAotLoweringPlanner
 		AppendGotoNext(builder, nextOffset, op);
 	}
 
-	private static void EmitFieldAddress(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
+	private void EmitFieldAddress(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
 	{
 		AotCoreIrReferenceArtifact requiredTargetReference = GetRequiredTargetReference(instruction);
 		if (requiredTargetReference.Kind != AotCoreIrReferenceKind.Field)
@@ -1745,6 +1747,7 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		if (instruction.RuntimeServiceKind == AotCoreIrRuntimeServiceKind.LoadStaticField)
 		{
+			EmitStaticInitializationForField(builder, requiredTargetReference.SubjectId, "    ");
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder2 = stringBuilder;
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(77, 1, stringBuilder);
@@ -1795,7 +1798,7 @@ public sealed partial class NativeAotLoweringPlanner
 		AppendGotoNext(builder, nextOffset, op);
 	}
 
-	private static void EmitFieldStore(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
+	private void EmitFieldStore(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
 	{
 		AotCoreIrReferenceArtifact requiredTargetReference = GetRequiredTargetReference(instruction);
 		if (requiredTargetReference.Kind != AotCoreIrReferenceKind.Field)
@@ -1806,6 +1809,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        const auto chaos_value = chaos_eval_stack[--chaos_stack_top];");
 		if (instruction.RuntimeServiceKind == AotCoreIrRuntimeServiceKind.StoreStaticField)
 		{
+			EmitStaticInitializationForField(builder, requiredTargetReference.SubjectId, "        ");
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder2 = stringBuilder;
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(23, 1, stringBuilder);

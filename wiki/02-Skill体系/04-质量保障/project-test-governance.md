@@ -16,11 +16,14 @@
 - collection file 是 managed/native/hotupdate 的唯一跨执行形态契约
 - collection file 统一由 `.NET 8` collector 分析 managed project 中的 `Sdk` 声明后产出
 - managed test host、native test host、hotupdate test host 统一消费 collection file
+- `subject.features.json` 是 owner subject 与 proof / benchmark obligation 的真源
 - native / hotupdate 的执行绑定细节通过 manifest 分层
 - bugfix 必须先补自动测试，再动实现
+- 测试阶段的 `dotnet` 编译崩溃必须先查根因并修复，不能通过重试、跳过或环境借口绕过
 - Python 测试优先模板化，不再长期堆一次性 C# fixture
 - file-level codegen 默认 Scriban
 - 不保留长期 `Annotation` alias 与旧双轨逻辑
+- canonical proof / benchmark / host correctness 不允许使用 `Console.WriteLine` / `ChaosEvidenceKind.Stdout`
 
 ## 适用任务
 
@@ -40,4 +43,6 @@
 
 ## 最近变更
 
+- `2026-04-17`：新增测试阶段 `dotnet` 编译崩溃闸门，要求收集崩溃证据、追根因并修复后再继续验证。
 - `2026-04-17`：确认采用 `Annotation -> Sdk` 方案，`Assert` 下沉到 `Sdk`，并要求 roadmap 显式包含旧写法清理与 compatibility alias 删除。
+- `2026-04-18`：补充 `subject.features.json` owner/obligation authority、canonical verification 禁止 stdout 判定，以及旧入口协议与旧目录语义 purge contract。

@@ -81,6 +81,12 @@ def _normalize_source_entry_selection(source: dict[str, Any]) -> dict[str, int]:
     return normalized
 
 
+def _entry_selection_family(entry_selection: dict[str, Any] | None) -> str:
+    if not isinstance(entry_selection, dict):
+        return ""
+    return str(entry_selection.get("family") or "").strip()
+
+
 def build_plan(
     repo_root: Path,
     subject_id: str,
@@ -142,13 +148,24 @@ def build_plan(
     if source_entry is not None:
         selected_source["entry"] = source_entry
     explicit_workload_entry = workload_entry is not None
-    normalized_source_entry_selection = _normalize_source_entry_selection(selected_source)
+    normalized_entry_selection = dict(entry_selection or {})
+    entry_selection_family = _entry_selection_family(normalized_entry_selection)
+    normalized_source_entry_selection = (
+        {}
+        if entry_selection_family == "declared-benchmark"
+        else _normalize_source_entry_selection(selected_source)
+    )
     if normalized_source_entry_selection:
         selected_source["entrySelection"] = normalized_source_entry_selection
+    else:
+        selected_source.pop("entrySelection", None)
     selected_workload_entry = str(
         workload_entry
-        or matrix.get("workloadEntry")
-        or manifest.get("workloadEntry")
+        or (
+            ""
+            if entry_selection_family == "declared-benchmark"
+            else matrix.get("workloadEntry") or manifest.get("workloadEntry")
+        )
         or ""
     )
     if explicit_workload_entry:
@@ -156,7 +173,6 @@ def build_plan(
             selected_source["entry"] = selected_workload_entry
     elif selected_workload_entry and not str(selected_source.get("entry") or ""):
         selected_source["entry"] = selected_workload_entry
-    normalized_entry_selection = dict(entry_selection or {})
     if normalized_entry_selection:
         artifacts_root.update(
             _entry_artifact_paths(

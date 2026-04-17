@@ -88,6 +88,39 @@ def _mode_reason_payload(*, status: str, declared_by: str) -> dict[str, str]:
     }
 
 
+def _record_git_commit(record: dict[str, Any]) -> str:
+    return str(record.get("gitCommit") or "").strip()
+
+
+def _stale_record_reason(*, latest_git_commit: str, latest_recorded_at: str) -> dict[str, str]:
+    pieces = ["This record was captured on an older commit than the latest selected subject record."]
+    if latest_git_commit:
+        pieces.append(f"Latest commit: {latest_git_commit}.")
+    if latest_recorded_at:
+        pieces.append(f"Latest record time: {latest_recorded_at}.")
+    return {
+        "staleReasonCode": "stale-record",
+        "staleReasonLabel": " ".join(pieces),
+    }
+
+
+def _cross_commit_comparison_reason(*, current_commit: str, managed_commit: str) -> dict[str, str]:
+    return {
+        "reasonCode": "cross-commit-record",
+        "reasonLabel": (
+            "Managed baseline and comparison record were captured from different commits "
+            f"({managed_commit or 'unknown'} vs {current_commit or 'unknown'}); relative comparison is hidden."
+        ),
+    }
+
+
+def _stale_comparison_note() -> dict[str, str]:
+    return {
+        "staleReasonCode": "stale-record",
+        "staleReasonLabel": "This comparison is not from the latest subject commit.",
+    }
+
+
 def _baseline_unavailable_reason(managed_entry: dict[str, Any]) -> dict[str, str]:
     baseline_reason_code = str(managed_entry.get("reasonCode") or "")
     if baseline_reason_code == "missing-record":
@@ -367,6 +400,37 @@ def _find_summary_benchmark_case(
     return None
 
 
+def _resolve_summary_workload_entry(
+    manifest: dict[str, Any],
+    *,
+    benchmark_cases_by_device: dict[str, dict[str, Any]],
+    declared_cases: dict[str, dict[str, Any]],
+) -> str:
+    manifest_workload_entry = str(manifest.get("workloadEntry") or "").strip()
+    if manifest_workload_entry:
+        summary_case = _find_summary_benchmark_case(
+            manifest_workload_entry,
+            benchmark_cases_by_device=benchmark_cases_by_device,
+            declared_cases=declared_cases,
+        )
+        if summary_case is not None:
+            return manifest_workload_entry
+
+    for case_id in sorted(declared_cases):
+        workload_entry = str(dict(declared_cases[case_id]).get("workloadEntry") or "").strip()
+        if workload_entry:
+            return workload_entry
+
+    for device_id in sorted(benchmark_cases_by_device):
+        cases = dict(benchmark_cases_by_device.get(device_id) or {})
+        for case_id in sorted(cases):
+            workload_entry = str(dict(cases[case_id]).get("workloadEntry") or "").strip()
+            if workload_entry:
+                return workload_entry
+
+    return manifest_workload_entry
+
+
 def _ratio(numerator: float | None, denominator: float | None) -> float | None:
     if numerator is None or denominator is None or denominator == 0.0:
         return None
@@ -499,9 +563,47 @@ def _record_status_payload(mode: str, record: dict[str, Any], device_id: str) ->
         "recordedAt": record.get("recordedAt"),
         "gitCommit": record.get("gitCommit"),
         "metrics": dict(record.get("metrics") or {}),
+        "isStale": False,
+        "staleReasonCode": "",
+        "staleReasonLabel": "",
     }
     payload.update(_mode_reason_payload(status="recorded", declared_by="runtime execution"))
     return payload
+
+
+def _mark_stale_record_entries(mode_status: dict[str, dict[str, Any]]) -> list[str]:
+    recorded_entries = [
+        (mode, entry)
+        for mode, entry in mode_status.items()
+        if str(entry.get("status") or "") == "recorded"
+    ]
+    latest_entry = max((entry for _, entry in recorded_entries), key=_record_sort_key, default=None)
+    latest_git_commit = _record_git_commit(latest_entry or {})
+    latest_recorded_at = str((latest_entry or {}).get("recordedAt") or "")
+    stale_modes: list[str] = []
+
+    for _, entry in recorded_entries:
+        entry["isStale"] = False
+        entry["staleReasonCode"] = ""
+        entry["staleReasonLabel"] = ""
+
+    if not latest_git_commit:
+        return stale_modes
+
+    for mode, entry in recorded_entries:
+        entry_git_commit = _record_git_commit(entry)
+        if not entry_git_commit or entry_git_commit == latest_git_commit:
+            continue
+        entry["isStale"] = True
+        entry.update(
+            _stale_record_reason(
+                latest_git_commit=latest_git_commit,
+                latest_recorded_at=latest_recorded_at,
+            )
+        )
+        stale_modes.append(mode)
+
+    return _sort_modes(stale_modes)
 
 
 def _baseline_metric_payload(entry: dict[str, Any]) -> dict[str, Any]:
@@ -515,6 +617,9 @@ def _baseline_metric_payload(entry: dict[str, Any]) -> dict[str, Any]:
         "opsPerSecond": _metric_value(metrics, "meanOpsPerSecond"),
         "recordedAt": entry.get("recordedAt"),
         "gitCommit": entry.get("gitCommit"),
+        "isStale": bool(entry.get("isStale", False)),
+        "staleReasonCode": str(entry.get("staleReasonCode") or ""),
+        "staleReasonLabel": str(entry.get("staleReasonLabel") or ""),
     }
 
 
@@ -527,6 +632,10 @@ def _relative_to_managed_payload(
     managed_entry = dict(mode_status.get("managed") or {})
     current_status = str(current_entry.get("status") or "unsupported")
     managed_status = str(managed_entry.get("status") or "unsupported")
+    current_git_commit = _record_git_commit(current_entry)
+    managed_git_commit = _record_git_commit(managed_entry)
+    current_is_stale = bool(current_entry.get("isStale", False))
+    managed_is_stale = bool(managed_entry.get("isStale", False))
 
     payload = {
         "mode": mode,
@@ -542,6 +651,9 @@ def _relative_to_managed_payload(
         "baselineStatus": managed_status,
         "baselineReasonCode": str(managed_entry.get("reasonCode") or ""),
         "baselineReasonLabel": str(managed_entry.get("reasonLabel") or ""),
+        "isStale": current_is_stale or managed_is_stale,
+        "staleReasonCode": "",
+        "staleReasonLabel": "",
     }
 
     if current_status != "recorded":
@@ -550,6 +662,17 @@ def _relative_to_managed_payload(
         payload["status"] = "baseline-unavailable"
         payload.update(_baseline_unavailable_reason(managed_entry))
         return payload
+    if current_git_commit and managed_git_commit and current_git_commit != managed_git_commit:
+        payload["status"] = "stale"
+        payload.update(
+            _cross_commit_comparison_reason(
+                current_commit=current_git_commit,
+                managed_commit=managed_git_commit,
+            )
+        )
+        return payload
+    if payload["isStale"]:
+        payload.update(_stale_comparison_note())
 
     current_metrics = dict(current_entry.get("metrics") or {})
     managed_metrics = dict(managed_entry.get("metrics") or {})
@@ -652,6 +775,7 @@ def _build_platform_summary(
                 **_mode_reason_payload(status="unsupported", declared_by="subject manifest"),
             }
 
+    stale_modes = _mark_stale_record_entries(mode_status)
     latest_record = max(list(latest_by_mode.values()), key=_record_sort_key, default=None)
     latest_ts = str(latest_record.get("recordedAt") or "") if latest_record else ""
     latest_dt = _parse_timestamp(latest_ts)
@@ -659,6 +783,8 @@ def _build_platform_summary(
     if latest_dt is not None:
         age_days = (datetime.now(timezone.utc) - latest_dt.astimezone(timezone.utc)).total_seconds() / 86400.0
         is_stale = age_days > _STALE_AFTER_DAYS
+    if stale_modes:
+        is_stale = True
 
     comparison_payload = dict(comparisons.get(device_id) or {}) if device_id else {}
     device_name = ""
@@ -674,14 +800,17 @@ def _build_platform_summary(
         "supportedModes": effective_supported_modes,
         "recordedModes": recorded_modes,
         "missingModes": missing_modes,
+        "staleModes": stale_modes,
         "unsupportedModes": unsupported_modes,
         "modeStatus": mode_status,
         "coverage": {
             "supportedModeCount": len(effective_supported_modes),
             "recordedModeCount": len(recorded_modes),
             "missingModeCount": len(missing_modes),
+            "staleModeCount": len(stale_modes),
             "unsupportedModeCount": len(unsupported_modes),
-            "isComplete": len(effective_supported_modes) > 0 and len(missing_modes) == 0,
+            "isComplete": len(effective_supported_modes) > 0 and len(missing_modes) == 0 and len(stale_modes) == 0,
+            "needsAttention": bool(missing_modes or stale_modes),
         },
         "lastRecordedAt": latest_ts or None,
         "gitCommit": (latest_record or {}).get("gitCommit"),
@@ -733,6 +862,7 @@ def _build_case_summary(
                 **_mode_reason_payload(status="unsupported", declared_by="case contract"),
             }
 
+    stale_modes = _mark_stale_record_entries(mode_status)
     return {
         "caseId": case_id,
         "displayName": str(meta.get("displayName") or meta.get("alias") or case_id),
@@ -768,14 +898,18 @@ def _build_case_summary(
         "supportedModes": supported_modes,
         "recordedModes": recorded_modes,
         "missingModes": missing_modes,
+        "staleModes": stale_modes,
         "unsupportedModes": unsupported_modes,
         "modeStatus": mode_status,
+        "isStale": bool(stale_modes),
         "coverage": {
             "supportedModeCount": len(supported_modes),
             "recordedModeCount": len(recorded_modes),
             "missingModeCount": len(missing_modes),
+            "staleModeCount": len(stale_modes),
             "unsupportedModeCount": len(unsupported_modes),
-            "isComplete": len(supported_modes) > 0 and len(missing_modes) == 0,
+            "isComplete": len(supported_modes) > 0 and len(missing_modes) == 0 and len(stale_modes) == 0,
+            "needsAttention": bool(missing_modes or stale_modes),
         },
         "keyMetrics": _key_metrics_from_mode_status(mode_status),
     }
@@ -784,12 +918,16 @@ def _build_case_summary(
 def _summarize_case_entries(entries: list[dict[str, Any]]) -> dict[str, Any]:
     cross_mode_count = sum(1 for entry in entries if len(list(entry.get("supportedModes") or [])) >= 2)
     managed_only_count = sum(1 for entry in entries if list(entry.get("supportedModes") or []) == ["managed"])
+    stale_case_count = sum(1 for entry in entries if bool(entry.get("isStale")))
+    missing_case_count = sum(1 for entry in entries if bool(entry.get("missingModes")))
     return {
         "caseCount": len(entries),
         "crossModeCaseCount": cross_mode_count,
         "managedOnlyCaseCount": managed_only_count,
         "fullyRecordedCaseCount": sum(1 for entry in entries if bool(dict(entry.get("coverage") or {}).get("isComplete"))),
-        "missingCaseCount": sum(1 for entry in entries if bool(entry.get("missingModes"))),
+        "missingCaseCount": missing_case_count,
+        "staleCaseCount": stale_case_count,
+        "attentionCaseCount": sum(1 for entry in entries if bool(entry.get("missingModes")) or bool(entry.get("isStale"))),
     }
 
 
@@ -830,7 +968,6 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
     for subject_id in subject_ids:
         manifest = subjects_mod.load_subject_manifest(repo_root, subject_id)
         display_name = str(manifest.get("displayName") or subject_id)
-        summary_workload_entry = str(manifest.get("workloadEntry") or "")
         records_path = repo_root / "subjects" / subject_id / "benchmark-records" / "records.jsonl"
         declared_cases = _load_declared_benchmark_cases(repo_root, subject_id)
         declared_case_lookup = _build_declared_case_lookup(declared_cases)
@@ -978,6 +1115,11 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
                 for case_id, case_payload in sorted(cases.items())
             }
 
+        summary_workload_entry = _resolve_summary_workload_entry(
+            manifest,
+            benchmark_cases_by_device=benchmark_cases_by_device,
+            declared_cases=declared_cases,
+        )
         summary_benchmark_case = _find_summary_benchmark_case(
             summary_workload_entry,
             benchmark_cases_by_device=benchmark_cases_by_device,

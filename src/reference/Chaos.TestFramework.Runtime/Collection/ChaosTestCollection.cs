@@ -8,6 +8,31 @@ namespace Chaos.TestFramework.Runtime;
 public sealed class ChaosTestCollection
 {
     /// <summary>
+    /// Gets or sets the collection schema version.
+    /// </summary>
+    public int SchemaVersion { get; set; } = 1;
+
+    /// <summary>
+    /// Gets or sets the owning subject id.
+    /// </summary>
+    public string SubjectId { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the source assembly referenced the test framework.
+    /// </summary>
+    public bool FrameworkReferenced { get; set; }
+
+    /// <summary>
+    /// Gets or sets the high-level subject kind.
+    /// </summary>
+    public string SubjectKind { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the declaration scan warning codes.
+    /// </summary>
+    public List<string> WarningCodes { get; set; } = [];
+
+    /// <summary>
     /// Gets or sets the declared proof entries.
     /// </summary>
     public List<ChaosTestCollectionEntry> DeclaredUnitTests { get; set; } = [];

@@ -8,9 +8,9 @@ from tests.support import read_loader_stage_source
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
-MIXED_EXECUTION_PROOF_PATH = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "ManagedBridge" / "Proofs" / "MixedExecutionProofEntry.cs"
-INTERPRETER_LOWERING_PROOF_PATH = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "Lowering" / "InterpreterLoweringProofEntry.cs"
-SOLUTION_CORE_LAUNCHER_PATH = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Launcher" / "Program.cs"
+MIXED_EXECUTION_PROOF_PATH = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "Proofs" / "MixedExecutionProofEntry.cs"
+INTERPRETER_LOWERING_PROOF_PATH = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "Proofs" / "InterpreterLoweringProofEntry.cs"
+SOLUTION_CORE_LAUNCHER_PATH = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Host" / "Program.cs"
 
 
 class LoaderSwitchOpcodeTests(unittest.TestCase):

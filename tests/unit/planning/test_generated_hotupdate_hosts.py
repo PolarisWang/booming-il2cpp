@@ -10,6 +10,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 GENERATED_HOTUPDATE_HOSTS_MODULE_PATH = (
     REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "generated_hotupdate_hosts.py"
 )
+TEMPLATES_ROOT = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "templates"
 
 
 def load_module(path: Path, module_name: str):
@@ -27,6 +28,16 @@ def load_module(path: Path, module_name: str):
 
 
 class GeneratedHotUpdateHostsTests(unittest.TestCase):
+    def test_generated_hotupdate_host_renderers_are_backed_by_template_assets(self) -> None:
+        module_source = GENERATED_HOTUPDATE_HOSTS_MODULE_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("templates/hotupdate-proof-host.cs.tmpl", module_source)
+        self.assertIn("templates/hotupdate-benchmark-host.cs.tmpl", module_source)
+        self.assertIn("templates/hotupdate-host.csproj.tmpl", module_source)
+        self.assertTrue((TEMPLATES_ROOT / "hotupdate-proof-host.cs.tmpl").is_file())
+        self.assertTrue((TEMPLATES_ROOT / "hotupdate-benchmark-host.cs.tmpl").is_file())
+        self.assertTrue((TEMPLATES_ROOT / "hotupdate-host.csproj.tmpl").is_file())
+
     def test_render_declared_hotupdate_benchmark_host_source_exposes_invoke_workload_surface(self) -> None:
         generated_hosts_module = load_module(
             GENERATED_HOTUPDATE_HOSTS_MODULE_PATH,

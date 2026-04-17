@@ -269,6 +269,16 @@ public sealed partial class NativeAotLoweringPlanner
 		return "chaos_static_" + SanitizeSubjectId(subjectId);
 	}
 
+	private static string GetNativeTypeInitializationFunctionSymbol(string typeSubjectId)
+	{
+		return "chaos_ensure_type_initialized_" + SanitizeSubjectId(typeSubjectId);
+	}
+
+	private static string GetNativeTypeInitializationOnceFlagSymbol(string typeSubjectId)
+	{
+		return "chaos_type_init_once_" + SanitizeSubjectId(typeSubjectId);
+	}
+
 	private static string GetNativeBoxTypeSymbol(string subjectId)
 	{
 		return "chaos_boxed_type_" + SanitizeSubjectId(subjectId);

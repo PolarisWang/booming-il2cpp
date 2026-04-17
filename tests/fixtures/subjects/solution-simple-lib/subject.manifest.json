@@ -1,4 +1,4 @@
-{
+﻿{
   "subjectId": "FixtureSolutionSimpleLib",
   "displayName": "FixtureSolutionSimpleLib",
   "category": "fixture",
@@ -7,8 +7,8 @@
   "defaultValidationProfile": "managed-output",
   "source": {
     "type": "dotnet-project",
-    "path": "subjects/SolutionCorePack/source/Archetypes/SimpleLibrarySolution/SimpleLibrarySolution.sln",
-    "primaryProjectPath": "subjects/SolutionCorePack/source/Archetypes/SimpleLibrarySolution/App/GoldenSimpleLib.App.csproj",
+    "path": "subjects/SolutionCorePack/source/EngineeringScenarios/SimpleLibrarySolution/SimpleLibrarySolution.sln",
+    "primaryProjectPath": "subjects/SolutionCorePack/source/EngineeringScenarios/SimpleLibrarySolution/App/GoldenSimpleLib.App.csproj",
     "entry": "GoldenSimpleLib.App/Program::Main()"
   },
   "sourceModel": "dotnet-solution",
@@ -98,3 +98,4 @@
     }
   ]
 }
+
