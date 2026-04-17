@@ -15,6 +15,13 @@
 - IL2CPP codegen 与文件结构规则
 - 旧写法清理规则
 
+## 1.1 Authority 边界
+
+- 本文档拥有统一测试主线、分层边界、collection / manifest / codegen contract 的 authority。
+- [`wiki/06-测试验证/INDEX.md`](../../wiki/06-测试验证/INDEX.md) 拥有正式验证入口、对象导航与 completion 前的对象选择顺序。
+- [`wiki/06-测试验证/AOT新Feature接入自测规范.md`](../../wiki/06-测试验证/AOT新Feature接入自测规范.md) 拥有 AOT 新 capability 的 intake、owner subject、proof / benchmark / hotupdate obligation 与 formal verification 顺序。
+- 计划和执行阶段命中 AOT / IL2CPP / test governance 任务时，必须把 authority 文档中的 obligation 显式写入计划，而不是留给实现时临时判断。
+
 ## 2. 强制规则
 
 ### 2.1 managed solution 只直接引用 `Chaos.TestFramework.Sdk`
@@ -115,6 +122,16 @@ schema 规则：
 - `proofRequired = true` 的 feature 必须在 owner subject 中存在正式 proof 资产
 - `benchmarkRequired = true` 的 feature 必须在 owner subject 中存在正式 benchmark 资产
 - engineering scenario 可以保留 `Program.cs` 用于全工程样例或启动，但 canonical proof / benchmark correctness 不允许依赖 stdout 判定
+- 命中 AOT onboarding 的计划必须显式冻结：
+  - `capabilityFamily`
+  - `capabilityItem`
+  - `ownerSubjectId`
+  - `proofRequired`
+  - `benchmarkRequired`
+  - `hotupdateImpact`
+  - `formalVerificationObjects`
+  - `requiredGates`
+- 这些字段的深层判定与执行顺序由 `wiki/06-测试验证/AOT新Feature接入自测规范.md` 继续定义
 
 ## 3. 推荐结构
 
@@ -279,6 +296,8 @@ AOT 主线新增 feature 的执行顺序以 [`wiki/06-测试验证/AOT新Feature
 
 - 先判定 capability 的 `owner subject`
 - 先过 `collector -> registry -> workspace` 三层接线闸门
+- 计划中应显式写出 `formalVerificationObjects` 与 `requiredGates`
+- `completed` 前必须先跑这些正式对象，不能用“项目测试套件大致通过”替代
 - benchmark 只作为补充证据，不替代 correctness 验收
 
 ## 9. Legacy Cutover Contract

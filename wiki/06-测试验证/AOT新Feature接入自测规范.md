@@ -12,6 +12,13 @@
 - `collector -> registry -> workspace` 属于接线闸门，必须先过，再进入 proof 执行。
 - 不先写散的 demo，不靠 `Console.WriteLine` 做外置判定。
 
+## 0. Authority 边界
+
+- 本文档拥有 AOT capability intake、owner subject、proof / benchmark / hotupdate obligation 与 formal verification 顺序的 authority。
+- [`../../docs/architecture/managed-native-hotupdate-test-pipeline.md`](../../docs/architecture/managed-native-hotupdate-test-pipeline.md) 只负责统一测试主线与分层边界。
+- [`INDEX.md`](./INDEX.md) 负责正式验证入口、对象导航与 completion 前对象优先级。
+- 命中本规范的计划，必须把 obligation 显式写入 `plan-v1-01.md`；不允许留到实现时临时决定。
+
 ## 1. 适用范围
 
 以下改动默认适用本规范：
@@ -113,10 +120,17 @@
 - 本次改动对应哪个 `capabilityFamily`
 - 本次改动对应哪个 `capabilityItem`
 - `ownerSubjectId` 是什么
-- 是否要求 benchmark
-- hotupdate 影响等级是 `None / Smoke / Proof`
+- `proofRequired` 是什么
+- `benchmarkRequired` 是什么
+- `hotupdateImpact` 是 `None / Smoke / Proof`
+- `formalVerificationObjects` 是哪些正式对象或 declared entry
+- `requiredGates` 是什么；未显式改写时默认 `collector -> registry -> workspace`
 
-不允许先写 demo 或先随手放进某个 subject，再回头补归属。
+约束：
+
+- `formalVerificationObjects` 用于定义 completed 前必须执行的正式验证对象
+- 如果暂时没有可复用的正式对象，先补 object 或 case，再把它写回 `formalVerificationObjects`
+- 不允许先写 demo 或先随手放进某个 subject，再回头补归属与 obligation
 
 ### Step 1: 先补最小失败自动化测试
 
@@ -159,9 +173,9 @@ managed proof 是该 capability 的语义真源，用来先证明“语义本身
 
 纯 correctness feature 不强行补 benchmark。
 
-### Step 4: 先过 collector / registry / workspace 三个接线闸门
+### Step 4: 先过 `requiredGates`
 
-这一步不是 correctness 验收，而是接线验收。三层都过，才能继续跑 proof。
+这一步不是 correctness 验收，而是接线验收。默认 gate 是 `collector -> registry -> workspace`；计划改写 gate 时，必须给出明确理由。
 
 推荐先执行：
 
@@ -257,7 +271,7 @@ run test declared-benchmark --id declared-benchmark/<stable-id>
 
 benchmark 的职责是补充成本证据，不替代 correctness 层。
 
-### Step 9: 回归受影响主线
+### Step 9: 回归受影响主线与 formal verification objects
 
 最后必须跑受影响回归，而不是只看单个 entry。
 
@@ -266,19 +280,22 @@ benchmark 的职责是补充成本证据，不替代 correctness 层。
 - owner subject 的受影响 declared proof / benchmark
 - 相关 consumer smoke（如果存在）
 - 受影响 pipeline / module / system 验证
+- `formalVerificationObjects` 中声明的全部对象
 
 ## 5. 完成标准
 
 一个 AOT 新 feature 满足以下条件，才算完成接入：
 
 - capability 与 owner subject 已明确
+- obligation 已在计划中显式冻结：`capabilityFamily`、`capabilityItem`、`ownerSubjectId`、`proofRequired`、`benchmarkRequired`、`hotupdateImpact`、`formalVerificationObjects`、`requiredGates`
 - `tests/unit` 或 `tests/contracts` 已锁住最小 contract
 - owner subject 中存在 canonical managed proof
 - 按需存在 canonical benchmark
-- collector / registry / workspace 三个闸门已通过
+- `requiredGates` 已通过
 - managed proof 已通过
 - native proof 已通过
 - 命中 hotupdate 触发条件时，对应 hotupdate smoke / proof 已通过
+- `formalVerificationObjects` 已全部通过；如果原本缺失，已补齐正式对象或 case 并通过
 - 受影响回归已通过
 
 ## 6. 反模式

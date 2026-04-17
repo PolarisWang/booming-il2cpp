@@ -5,7 +5,7 @@
 ## 基本信息
 
 - 分层：主线工作流
-- 项目职责：输出可执行计划，并写明设计文档路径与知识沉淀落点
+- 项目职责：输出可执行计划，并冻结 design path、知识沉淀落点、obligation intake 与固定收尾约束
 - 实现路径：`.codex/skills/dev-writing-plans/SKILL.md`
 - 状态：`active`
 
@@ -14,18 +14,27 @@
 - 让执行阶段能稳定维护任务目录中的 `STATUS.md`、`ACTIVE.md` 与进度文档
 - 让每个任务的知识沉淀目标尽量明确
 - 让任务总数可被执行阶段稳定确认
+- 让任务在完成后进入“审视架构合理性 -> 测试通过 -> 归档 completed -> 合并&提交”固定收尾链路
 
-## 输出
+## AOT / IL2CPP / Test Governance Intake
 
-- 计划文档
-- 设计文档路径引用
-- 预期知识沉淀目标
+命中测试治理主线的计划，必须显式冻结：
 
-## 项目规则
+- `capabilityFamily`
+- `capabilityItem`
+- `ownerSubjectId`
+- `proofRequired`
+- `benchmarkRequired`
+- `hotupdateImpact`
+- `formalVerificationObjects`
+- `requiredGates`
 
-- 不要让执行者猜设计文档路径、任务总数或 wiki 落点
-- 任务结构应写明知识沉淀目标或“无”
+约束：
+
+- 非适用字段也必须显式写值，不能省略
+- `formalVerificationObjects` 必须写正式对象或 declared entry，而不是“后续跑测试”
+- `requiredGates` 默认至少覆盖 `collector -> registry -> workspace`
 
 ## 最近变更
 
-- `2026-04-04`：计划文档默认落到当前任务目录，并为 `STATUS.md + ACTIVE.md` 执行模型准备上下文。
+- `2026-04-18`：新增 AOT / IL2CPP / test governance intake 字段，要求 plan 先冻结 obligation，再进入执行。

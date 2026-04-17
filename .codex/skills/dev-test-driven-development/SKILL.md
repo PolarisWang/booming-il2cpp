@@ -11,6 +11,19 @@ description: 在实现任何功能、修复任何 bug、调整任何长期规则
 
 如果你没有亲眼看到测试先失败，再因为你的改动变绿，就不要声称这次改动是可靠的。
 
+## 边界
+
+本技能只拥有 RED-GREEN-REFACTOR 纪律。
+
+以下 authority 不由本技能定义，而是由 `dev:project-test-governance` 与 `wiki/06-测试验证/AOT新Feature接入自测规范.md` 持有：
+
+- `ownerSubjectId`
+- `proofRequired`
+- `benchmarkRequired`
+- `hotupdateImpact`
+- `formalVerificationObjects`
+- `requiredGates`
+
 ## 使用时机
 
 - 新功能
@@ -21,50 +34,33 @@ description: 在实现任何功能、修复任何 bug、调整任何长期规则
 
 ## 仓库补充规则
 
-### 1. 以下改动必须先补自动化测试
+### 1. 以下改动必须先补失败测试
 
 - IL2CPP compiler / loader / linker / semantic world / codegen
 - `Chaos.TestFramework.Sdk` / `Chaos.TestFramework.Runtime`
-- UnitTest / Benchmark / HotUpdate collection file schema 或 loader
-- managed / native / hotupdate runner 生成逻辑
+- UnitTest / Benchmark / HotUpdate collection file schema、loader、runner
 - benchmark dashboard 数据聚合或展示逻辑
 - subject planner、subject discovery、generated solution pipeline
 
 ### 2. 测试优先级
 
-优先用下面的顺序沉淀失败用例：
-
 1. `tests/unit/**` 下的 Python 模板化单测
 2. `tests/contracts/**` 下的 contract / snapshot / schema 测试
 3. `tests/integration/**` 下的端到端流程测试
-4. 必要时才新增长期保留的 C# canonical template 或 canonical subject
+4. 必要时新增 canonical template 或 canonical subject
 
-### 3. Python 测试优先模板化
+### 3. 手工结果不能替代测试
 
-- 优先复用 `tests/templates/`
-- 优先通过临时工作目录实例化最小 managed/native/hotupdate 样例
-- 不要为单个 bug 长期保留手写的小型 C# fixture，除非它已经被提升为公共模板或正式 subject
+- 手工 benchmark、dashboard 结果和控制台输出都不能替代自动化测试
+- managed 层验证优先使用 `Chaos.TestFramework.Sdk.Assert`
+- 不要依赖 `Console.WriteLine` 再做外部判定
 
-### 4. 手工结果不能替代测试
+### 4. 测试阶段遇到 `dotnet` 编译崩溃时，必须先查根因
 
-以下都不能作为唯一验证证据：
-
-- 手工跑 benchmark
-- 手工看 dashboard
-- 手工看控制台输出
-- 手工跑 subject 再肉眼判断
-
-### 5. 对测试框架本身也要用正式断言
-
-- managed 层验证应优先使用 `Chaos.TestFramework.Sdk` 中的 `Assert`
-- 不要依赖 `Console.WriteLine` 再在外部脚本里解析成功失败
-
-### 6. 测试阶段遇到 dotnet 编译崩溃时，必须先查根因
-
-- `dotnet build` / `dotnet test` / `msbuild` 在测试阶段崩溃，视为阻断性失败，而不是可忽略噪音
-- 先保留失败的 project / target / task、退出码、stderr、binlog 与崩溃堆栈或 dump 信息（如果可用）
-- 立即进入 `dev:systematic-debugging`，定位崩溃原因并修复后，才能继续后续测试
-- 不允许通过“多试几次”、“临时跳过该测试”、“先继续别的验证”或“只记录崩溃现象不修复”来绕过
+- `dotnet build` / `dotnet test` / `msbuild` 在测试阶段崩溃，视为阻断性失败
+- 先保留失败的 project / target / task、退出码、`stderr`、`binlog` 与崩溃堆栈或 dump 信息（如果可用）
+- 立即进入 `dev:systematic-debugging`
+- 根因未修复前，不得继续后续测试
 
 ## 最小循环
 
@@ -78,16 +74,6 @@ description: 在实现任何功能、修复任何 bug、调整任何长期规则
 
 - 先改实现，之后再补测试
 - 只补手工脚本，不补自动化用例
-- 为了图快直接把逻辑塞进现有大 fixture
 - 只修 dashboard 显示，不补 collection 或数据生产端测试
 - 只看 benchmark 页面，不验证数据生产链路
 - `dotnet` 编译崩溃后直接重试或把它降级成“环境偶发问题”
-
-## 结束前检查
-
-- 是否先看到了失败测试
-- 是否把 bug 沉淀为模板化或 contract 化测试
-- 如果测试阶段发生过 `dotnet` 编译崩溃，是否已经查明根因并修复
-- 是否避免继续扩大字符串协议面
-- 是否没有把测试框架逻辑混进 IL2CPP Core IR / planner / emitter
-- 是否保留了清晰的模块边界

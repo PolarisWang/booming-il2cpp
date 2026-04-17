@@ -28,41 +28,33 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
 - bug、回归、异常结果：先用 `systematic-debugging`
 - 完成前的结果确认：用 `verification-before-completion`
 
-### 2. 本仓库测试主线相关任务必须先走 `project-test-governance`
+### 2. 命中测试治理或 AOT obligation 任务时，先走 `project-test-governance`
 
 只要任务涉及以下任一内容，在进入计划或实现前必须使用 `project-test-governance`：
 
-- `subjects/` 的结构、入口、合并、迁移或删除
-- `tests/` 的模板、contract、integration、planner 或 runner 逻辑
-- `Chaos.TestFramework` 的 API、分层、执行逻辑或结果汇总
-- UnitTest / Benchmark / HotUpdate 的 attribute、collection file、schema、loader、runner
-- managed / native / hotupdate 测试主线
-- benchmark dashboard、benchmark 数据汇总或展示
-- generated runner、generated test solution、native test solution
-- 文件级 codegen、emitter、template loader、`NativeAotEmitter`
+- `subjects/`、`tests/`、`Chaos.TestFramework`、collection file、manifest、runner、dashboard、generated codegen
+- managed / native / hotupdate 测试主线或 `.NET 8` collector
+- AOT / IL2CPP 新 feature 接入
+- `ownerSubjectId`、`proofRequired`、`benchmarkRequired`、`hotupdateImpact` 之类的 obligation 变更
+- `formalVerificationObjects`、`requiredGates`、`completed` gate 或正式验证对象选择逻辑
 
-### 3. 不要把 `docs/dev/ACTIVE.md` 当成每一步都要拦截用户的总开关
+### 3. 工作流映射
+
+- “设计一个新功能 / 规范 / 架构”：
+  `brainstorming -> writing-plans`，如果是多阶段主线则转 `roadmap`
+- “继续执行现有 roadmap / plan”：
+  `executing-plans`
+- “修这个 bug / 回归 / benchmark 异常 / 测试阶段 dotnet 崩溃”：
+  `systematic-debugging -> project-test-governance -> test-driven-development`
+- “AOT 新 feature / owner subject / proof-benchmark obligation 调整”：
+  `project-test-governance -> writing-plans`
+- “调整 subject/test/runner/codegen 主线”：
+  `project-test-governance -> writing-plans` 或 `executing-plans`
+
+### 4. 不要把 `docs/dev/ACTIVE.md` 当成每一步都要拦截用户的总开关
 
 - 小范围阅读、局部核对、低风险验证可以直接处理
 - 一旦进入新的正式主线任务，再由计划/执行类技能负责更新 `docs/dev/ACTIVE.md`、`STATUS.md` 和索引
-
-## 技能优先顺序
-
-1. 流程技能
-2. 规划/执行技能
-3. 领域技能
-4. 收口与验证技能
-
-## 工作流映射
-
-- “设计一个新功能 / 规范 / 架构”:
-  `brainstorming -> writing-plans`，如果是多阶段主线则转 `roadmap`
-- “继续执行现有 roadmap / plan”:
-  `executing-plans`
-- “修这个 bug / 回归 / benchmark 数据异常”:
-  `systematic-debugging -> project-test-governance -> test-driven-development`
-- “调整 subject/test/runner/codegen 主线”:
-  `project-test-governance -> writing-plans` 或 `executing-plans`
 
 ## 红旗
 
@@ -72,7 +64,7 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
 - “这只是测试目录的小改动，不算测试治理”
 - “先把 benchmark 跑通，之后再补自动化测试”
 - “先把 emitter 拼出来，模板后面再说”
-- “这次只是改 dashboard，不需要碰 collection contract”
+- “formal verification object 后面再补，现在先归档 completed”
 
 ## 关联技能
 

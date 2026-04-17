@@ -1,6 +1,7 @@
 # 已完成任务
 | task_id | task_type | phase | updated_at | summary | active |
 | --- | --- | --- | --- | --- | --- |
+| [20260417-04-aot-skill-flow-and-token-optimization-plan](20260417-04-aot-skill-flow-and-token-optimization-plan/STATUS.md) | plan | completed | 2026-04-17 23:54:00 +08:00 | 已完成 AOT skill flow authority freeze、formal verification gate 接线与热路径 token slimming，文本验证与场景审查通过。 | false |
 | [20260417-03-subject-feature-matrix-rebaseline-plan](20260417-03-subject-feature-matrix-rebaseline-plan/STATUS.md) | roadmap | completed | 2026-04-17 17:12:13 +08:00 | 已完成 `Phase 0~6`：canonical subject authority、completed feature remigration、legacy purge contract、主干回归与文档收口全部落地。 | false |
 | [20260417-03-phase-4-completed-feature-remigration-and-verification-rebuild](20260417-03-phase-4-completed-feature-remigration-and-verification-rebuild/STATUS.md) | plan | completed | 2026-04-17 17:12:13 +08:00 | 已补齐 feature obligation 缺口资产，收口 declared metadata / registry / benchmark source，并跑绿 `156 passed` 主干回归集。 | false |
 | [20260417-03-phase-3-subject-system-full-rebirth](20260417-03-phase-3-subject-system-full-rebirth/STATUS.md) | plan | completed | 2026-04-17 23:40:00 +08:00 | 已完成 canonical subject 结构重生，删除 `validation/proof/native-reference` 旁路，并跑绿 Phase 3 回归 `12 passed / 126 passed / 98 passed`。 | false |

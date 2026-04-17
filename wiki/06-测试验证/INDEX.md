@@ -2,6 +2,15 @@
 
 > 项目级测试与验证知识的正式入口。当前主线以 collection-driven 的 managed/native/hotupdate 流程为准。
 
+## Authority 分工
+
+- [`../../docs/architecture/managed-native-hotupdate-test-pipeline.md`](../../docs/architecture/managed-native-hotupdate-test-pipeline.md)
+  - 拥有 pipeline、分层、collection / manifest / codegen contract 边界
+- [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md)
+  - 拥有 capability intake、owner subject、proof / benchmark / hotupdate obligation 与 formal verification 顺序
+- 本 `INDEX.md`
+  - 拥有正式验证入口、对象导航、completion 前对象优先级与跨页面总入口
+
 ## 正式主线
 
 - 主线定义：`managed solution -> dotnet 8 collection analysis -> collection files -> managed test project -> native project -> native test project -> hotupdate patch project + hotupdate test host project`
@@ -42,6 +51,8 @@
 - 测试阶段只要 `dotnet build` / `dotnet test` / `msbuild` 发生编译崩溃，就必须先检查崩溃原因并修复；不能靠重试、跳过或降级为环境噪音继续推进。
 - `subject.features.json` 是 owner subject 与 proof / benchmark obligation 的正式 authority。
 - canonical proof / benchmark / host correctness 不允许使用 `Console.WriteLine` / `ChaosEvidenceKind.Stdout`。
+- obligation-driven AOT / IL2CPP 任务在计划中必须显式声明 `formalVerificationObjects` 与 `requiredGates`。
+- `completed` 前必须先通过计划声明或 authority 要求的正式验证对象，不能只用“项目测试套件大致通过”替代。
 - product pipeline 不允许回退到旧入口协议或旧 subject 命名。
 - 不保留长期 `Annotation` alias 或旧双轨入口。
 
@@ -51,3 +62,4 @@
 - `2026-04-17`：把主线升级为 `Sdk + Runtime + collector + manifest` 分层，并明确 `Assert` 下沉到 `Sdk`、native/hotupdate 分别采用各宿主和 patch/host 分离。
 - `2026-04-17`：新增测试阶段 `dotnet` 编译崩溃闸门；编译崩溃必须先查根因并修复，不能靠重试或跳过继续测试。
 - `2026-04-18`：补充 `subject.features.json` authority、canonical verification 禁止 stdout 判定，以及旧入口协议/旧目录语义 purge contract。
+- `2026-04-18`：明确 architecture / AOT onboarding spec / 本索引三层 authority 分工，并要求 completion 前先跑 formal verification objects。

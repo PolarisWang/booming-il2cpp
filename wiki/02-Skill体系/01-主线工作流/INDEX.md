@@ -22,7 +22,10 @@
 
 - 主线工作流页只解释“项目里怎么用”，不复制原始 `SKILL.md`。
 - 涉及 `ACTIVE.md` 的主线必须和执行守卫保持一致。
+- 命中 AOT / IL2CPP / test governance 的主线任务，先走 `project-test-governance`，再进入 plan 或 execute。
+- `completed` 前的正式验证对象选择由质量保障层的 `verification-before-completion` 统一负责。
 
 ## 最近更新
 
 - `2026-04-04`：加入 roadmap 主线，并将执行上下文说明切换到 `docs/dev`。
+- `2026-04-18`：补充 AOT obligation-driven 计划字段与 formal verification gate 的主线映射。

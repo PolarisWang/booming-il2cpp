@@ -5,32 +5,30 @@
 ## 基本信息
 
 - 分层：质量保障
-- 项目职责：为代码、skill、planner、runner 和 dashboard 改动提供红绿重构纪律
+- 项目职责：提供 RED-GREEN-REFACTOR 纪律，不持有 owner / obligation authority
 - 实现路径：`.codex/skills/dev-test-driven-development/SKILL.md`
 - 状态：`project`
 
 ## 本项目补充规则
 
-- IL2CPP compiler / loader / linker / semantic world / codegen 改动，必须先补失败测试。
-- `Chaos.TestFramework.Sdk` / `Chaos.TestFramework.Runtime` 改动，必须先补失败测试。
-- UnitTest / Benchmark / HotUpdate collection schema、loader、runner、dashboard 改动，必须先补失败测试。
-- subject planner、generated solution pipeline、native/hotupdate test 主线改动，必须先补失败测试。
+- IL2CPP compiler / loader / linker / semantic world / codegen 改动，必须先补失败测试
+- `Chaos.TestFramework.Sdk` / `Chaos.TestFramework.Runtime` 改动，必须先补失败测试
+- UnitTest / Benchmark / HotUpdate collection schema、loader、runner、dashboard 改动，必须先补失败测试
+- subject planner、generated solution pipeline、native/hotupdate test 主线改动，必须先补失败测试
+- 手工 benchmark、dashboard 结果和控制台输出都不能替代自动化测试
+- 测试阶段遇到 `dotnet build` / `dotnet test` / `msbuild` 编译崩溃时，必须先查根因并修复
 
-## 测试优先级
+## Authority 划分
 
-1. `tests/unit/**` 下的 Python 模板化单测
-2. `tests/contracts/**` 下的 contract / snapshot / schema 测试
-3. `tests/integration/**` 下的端到端流程测试
-4. 必要时新增 canonical template 或 canonical subject
+以下字段不由本 skill 定义，而由 `project-test-governance` 与 `wiki/06-测试验证/AOT新Feature接入自测规范.md` 持有：
 
-## 仓库约束
-
-- Python 测试优先模板化，尽量少保留手写 C# fixture。
-- 手工 benchmark、dashboard 结果和控制台输出都不能替代自动化测试。
-- managed 层测试结果优先使用 `Chaos.TestFramework.Sdk.Assert`，不要依赖 `Console.WriteLine` 再外部判定。
-- 测试阶段遇到 `dotnet build` / `dotnet test` / `msbuild` 编译崩溃时，必须先查根因并修复，不能靠重试或跳过当前验证继续。
+- `ownerSubjectId`
+- `proofRequired`
+- `benchmarkRequired`
+- `hotupdateImpact`
+- `formalVerificationObjects`
+- `requiredGates`
 
 ## 最近变更
 
-- `2026-04-17`：新增测试阶段 `dotnet` 编译崩溃闸门，要求编译崩溃先追根因再继续红绿循环。
-- `2026-04-17`：补充仓库级 TDD 规则，正式覆盖 `Chaos.TestFramework`、collection file、generated runner、dashboard 和 IL2CPP codegen 主线。
+- `2026-04-18`：明确 TDD 只负责红绿重构纪律，不再承担 owner / obligation authority。

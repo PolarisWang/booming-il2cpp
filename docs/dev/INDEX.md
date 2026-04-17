@@ -4,6 +4,7 @@
 
 | task_id | lifecycle_status | phase | updated_at | summary | active |
 | --- | --- | --- | --- | --- | --- |
+| [20260417-04-aot-skill-flow-and-token-optimization-plan](completed/20260417-04-aot-skill-flow-and-token-optimization-plan/STATUS.md) | completed | completed | 2026-04-17 23:54:00 +08:00 | 已完成 AOT skill flow authority freeze、formal verification gate 接线与热路径 token slimming，文本验证与场景审查通过。 | false |
 | [20260417-03-subject-feature-matrix-rebaseline-plan](completed/20260417-03-subject-feature-matrix-rebaseline-plan/STATUS.md) | completed | completed | 2026-04-17 17:12:13 +08:00 | 已完成 `Phase 0~6`：canonical subject authority、completed feature remigration、legacy purge contract、主干回归与文档收口全部落地。 | false |
 | [20260417-03-phase-4-completed-feature-remigration-and-verification-rebuild](completed/20260417-03-phase-4-completed-feature-remigration-and-verification-rebuild/STATUS.md) | completed | completed | 2026-04-17 17:12:13 +08:00 | 已补齐 feature obligation 缺口资产，收口 declared metadata / registry / benchmark source，并跑绿 `156 passed` 主干回归集。 | false |
 | [20260417-03-phase-2-business-pipeline-rebuild](completed/20260417-03-phase-2-business-pipeline-rebuild/STATUS.md) | completed | completed | 2026-04-17 15:40:38 +08:00 | 已收口 business pipeline rebuild，generated bucket 删除无用 `workloadEntry`，阶段回归结果 `167 passed`。 | false |

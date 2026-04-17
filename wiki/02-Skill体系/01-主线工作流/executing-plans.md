@@ -5,14 +5,9 @@
 ## 基本信息
 
 - 分层：主线工作流
-- 项目职责：执行计划、维护任务目录状态、在完成时把任务目录移动到 `completed/`
+- 项目职责：执行计划、维护任务目录状态，并在完成时按“架构审视 -> formal verification + 测试 -> completed 归档 -> 合并&提交”固定顺序收尾
 - 实现路径：`.codex/skills/dev-executing-plans/SKILL.md`
 - 状态：`active`
-
-## 触发时机
-
-- 已经有明确计划文档，且当前会话要顺序执行任务时
-- 子 agent 不是标准路径，或当前选择直接在本会话执行时
 
 ## 在本项目中的作用
 
@@ -21,14 +16,16 @@
 - 创建或更新 `docs/dev/ACTIVE.md`
 - 每任务后更新 `STATUS.md`、`ACTIVE.md`、`notes/progress-*.md` 与索引
 - 有长期知识时调用 `project-wiki-maintenance`
-- 全部任务完成后将目录移动到 `docs/dev/completed/`
+- obligation-driven 任务在 `completed` 前必须先消费 [`verification-before-completion`](../04-%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C/verification-before-completion.md)
 
 ## 项目规则
 
 - 用户不能手动选择 `completed`
-- `completed` 只能在“任务全完成 + 验证通过 + wiki 更新完成”后自动产生
-- 没有长期知识时，也要在 `STATUS.md` 或最新 `notes/progress-*.md` 写明“本任务无 wiki 更新”
+- `completed` 只能在“任务全完成 + formal verification gate 通过 + 架构合理性审视通过 + 受影响测试通过 + wiki 更新完成”后自动产生
+- 命中 `ownerSubjectId`、`proofRequired`、`benchmarkRequired`、`hotupdateImpact`、`formalVerificationObjects`、`requiredGates` 等字段时，视为 obligation-driven
+- obligation-driven 任务至少要确认 `requiredGates`、managed proof、native proof、按需 hotupdate proof / benchmark、以及全部 `formalVerificationObjects`
+- 测试阶段如果出现 `dotnet` 编译崩溃，必须先查根因并修复，不能绕过
 
 ## 最近变更
 
-- `2026-04-04`：执行主线从 `CURRENT.md + history` 迁移到 `STATUS.md + ACTIVE.md + 目录终态`。
+- `2026-04-18`：把 AOT obligation-driven formal verification gate 接入 `completed` 判定。

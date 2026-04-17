@@ -33,6 +33,29 @@ description: 当你有规格说明或多步骤任务的需求时，在接触代�
   - 预期知识沉淀位置
   - 关键测试与验证命令
   - 执行时如何维护 `STATUS.md` / `ACTIVE.md` / `notes/progress-*.md`
+- 计划必须显式考虑固定收尾链路：`审视架构合理性 -> 测试通过 -> 归档 completed -> 合并&提交`
+
+## AOT / IL2CPP / Test Governance Intake
+
+如果任务命中 `project-test-governance`，计划头部必须显式冻结 obligation，不能省略。
+
+固定字段如下：
+
+- `capabilityFamily`
+- `capabilityItem`
+- `ownerSubjectId`
+- `proofRequired`
+- `benchmarkRequired`
+- `hotupdateImpact`
+- `formalVerificationObjects`
+- `requiredGates`
+
+约束：
+
+- 非适用字段也要明确写 `n/a`、`false` 或 `[]`
+- `formalVerificationObjects` 要写正式对象或 declared entry，而不是“后续跑测试”
+- `requiredGates` 默认至少覆盖 `collector -> registry -> workspace`
+- 命中 AOT onboarding 的计划，不能只写“跑测试”，必须写清 managed/native/hotupdate/proof/benchmark obligation
 
 ## 计划文档头部
 
@@ -47,9 +70,21 @@ description: 当你有规格说明或多步骤任务的需求时，在接触代�
 
 **技术栈：** [关键技术/库]
 
+**AOT/IL2CPP/Test Governance Intake：**
+- capabilityFamily: [值或 n/a]
+- capabilityItem: [值或 n/a]
+- ownerSubjectId: [值或 n/a]
+- proofRequired: [true/false]
+- benchmarkRequired: [true/false]
+- hotupdateImpact: [None/Smoke/Proof 或 n/a]
+- formalVerificationObjects: [对象列表或 []]
+- requiredGates: [例如 collector -> registry -> workspace]
+
 **设计文档：** [design 文档路径]
 
 **预期知识沉淀：** [主要 wiki 目标路径，或“按任务决定”]
+
+**收尾约束：** 执行完成后必须进入“审视架构合理性 -> 测试通过 -> 归档 completed -> 合并&提交”固定链路。
 
 ---
 ```

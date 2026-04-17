@@ -16,9 +16,12 @@
 - 质量保障 skill 负责“先补测试、再改实现、最后验证”。
 - 测试阶段如果 `dotnet build` / `dotnet test` / `msbuild` 编译崩溃，必须先查根因并修复，再继续测试或声明完成。
 - `project-test-governance` 是本仓库测试主线与测试框架的正式治理入口。
+- `verification-before-completion` 是本仓库 completion 前 formal object 选择器。
+- `test-driven-development` 只负责 RED-GREEN-REFACTOR，不持有 owner / obligation authority。
 - `subjects/`、`tests/`、`Chaos.TestFramework`、collection file、runner、dashboard、generated codegen 相关任务，必须优先参考本层。
 
 ## 最近更新
 
 - `2026-04-17`：把测试阶段 `dotnet` 编译崩溃处理提升为质量保障层共识规则，绑定到调试、TDD、完成前验证和测试治理。
 - `2026-04-17`：新增 `project-test-governance`，把统一测试主线和 Scriban/codegen 规则正式纳入质量保障层。
+- `2026-04-18`：补充 obligation-driven AOT completion gate，明确 `verification-before-completion` 负责 formal object 选择，`test-driven-development` 只负责 TDD 纪律。
