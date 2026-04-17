@@ -55,6 +55,16 @@ public sealed partial class NativeAotLoweringPlanner
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), "extern \"C\" std::intptr_t " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0)\n{\n    return chaos_create_memory_int32(chaos_arg_0);\n}", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
 			return true;
 		}
+		if (TryReadSingleGenericTypeArgument(callee, "System.Memory/System.MemoryExtensions::AsMemory<", out string typeSubjectId4) && IsInt32ElementType(typeSubjectId4) && callee.Contains("(System.Int32[],System.Int32,System.Int32)", StringComparison.Ordinal))
+		{
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), "extern \"C\" std::intptr_t " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0, std::int32_t chaos_arg_1, std::int32_t chaos_arg_2)\n{\n    return chaos_create_array_memory_int32(chaos_arg_0, chaos_arg_1, chaos_arg_2);\n}", new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+			{
+				CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+				CreateInt32AbiSlot(),
+				CreateInt32AbiSlot()
+			}), CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
+			return true;
+		}
 		string methodDeclaringTypeSubjectId = GetMethodDeclaringTypeSubjectId(callee);
 		string methodName = GetMethodName(callee);
 		if (TryReadGenericArgumentList(methodDeclaringTypeSubjectId, "System.Private.CoreLib/System.Span<", out string genericArgumentList))
@@ -62,6 +72,11 @@ public sealed partial class NativeAotLoweringPlanner
 			IReadOnlyList<string> readOnlyList = SplitTopLevelGenericArguments(genericArgumentList);
 			if (readOnlyList.Count == 1 && IsInt32ElementType(readOnlyList[0]))
 			{
+				if (string.Equals(methodName, "op_Implicit", StringComparison.Ordinal) && callee.Contains("(System.Int32[])", StringComparison.Ordinal))
+				{
+					helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), "extern \"C\" std::intptr_t " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0)\n{\n    if (chaos_arg_0 == static_cast<std::intptr_t>(0))\n    {\n        return chaos_create_raw_span_int32(nullptr, 0, false);\n    }\n\n    auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_arg_0);\n    return chaos_create_array_span_int32(chaos_arg_0, 0, static_cast<std::int32_t>(chaos_array->length));\n}", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
+					return true;
+				}
 				if (string.Equals(methodName, "get_Item", StringComparison.Ordinal))
 				{
 					helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), "extern \"C\" std::intptr_t " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0, std::int32_t chaos_arg_1)\n{\n    const auto chaos_span_handle = *chaos_resolve_native_int_slot(chaos_arg_0);\n    return chaos_span_int32_get_item_address(chaos_span_handle, chaos_arg_1);\n}", new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]

@@ -1,0 +1,89 @@
+﻿{
+    "schemaVersion":  2,
+    "taskId":  "20260418-02-phase-0-framework-pack-catalog-and-asset-policy",
+    "generatedAt":  "2026-04-18T02:05:18.7827959+08:00",
+    "framework":  "Microsoft.NETCore.App",
+    "selectedVersions":  {
+                             "net8":  "8.0.11",
+                             "net10":  "10.0.6"
+                         },
+    "refVsRuntime":  {
+                         "net8":  {
+                                      "sharedCount":  163,
+                                      "refOnlyCount":  0,
+                                      "runtimeOnlyCount":  17,
+                                      "refOnlyAssemblies":  [
+
+                                                            ],
+                                      "runtimeOnlyAssemblies":  [
+                                                                    "clretwrc.dll",
+                                                                    "clrgc.dll",
+                                                                    "clrjit.dll",
+                                                                    "coreclr.dll",
+                                                                    "hostpolicy.dll",
+                                                                    "Microsoft.DiaSymReader.Native.amd64.dll",
+                                                                    "mscordaccore.dll",
+                                                                    "mscordaccore_amd64_amd64_8.0.1124.51707.dll",
+                                                                    "mscordbi.dll",
+                                                                    "mscorrc.dll",
+                                                                    "msquic.dll",
+                                                                    "System.IO.Compression.Native.dll",
+                                                                    "System.Private.CoreLib.dll",
+                                                                    "System.Private.DataContractSerialization.dll",
+                                                                    "System.Private.Uri.dll",
+                                                                    "System.Private.Xml.dll",
+                                                                    "System.Private.Xml.Linq.dll"
+                                                                ]
+                                  },
+                         "net10":  {
+                                       "sharedCount":  167,
+                                       "refOnlyCount":  0,
+                                       "runtimeOnlyCount":  18,
+                                       "refOnlyAssemblies":  [
+
+                                                             ],
+                                       "runtimeOnlyAssemblies":  [
+                                                                     "clretwrc.dll",
+                                                                     "clrgc.dll",
+                                                                     "clrgcexp.dll",
+                                                                     "clrjit.dll",
+                                                                     "coreclr.dll",
+                                                                     "hostpolicy.dll",
+                                                                     "Microsoft.DiaSymReader.Native.amd64.dll",
+                                                                     "mscordaccore.dll",
+                                                                     "mscordaccore_amd64_amd64_10.0.626.17701.dll",
+                                                                     "mscordbi.dll",
+                                                                     "mscorrc.dll",
+                                                                     "msquic.dll",
+                                                                     "System.IO.Compression.Native.dll",
+                                                                     "System.Private.CoreLib.dll",
+                                                                     "System.Private.DataContractSerialization.dll",
+                                                                     "System.Private.Uri.dll",
+                                                                     "System.Private.Xml.dll",
+                                                                     "System.Private.Xml.Linq.dll"
+                                                                 ]
+                                   }
+                     },
+    "net8VsNet10":  {
+                        "refAddedInNet10":  [
+                                                "System.IO.Pipelines",
+                                                "System.Linq.AsyncEnumerable",
+                                                "System.Net.ServerSentEvents",
+                                                "System.Threading.AccessControl"
+                                            ],
+                        "refRemovedFromNet10":  [
+
+                                                ],
+                        "runtimeAddedInNet10":  [
+                                                    "clrgcexp",
+                                                    "mscordaccore_amd64_amd64_10.0.626.17701",
+                                                    "System.IO.Pipelines",
+                                                    "System.Linq.AsyncEnumerable",
+                                                    "System.Net.ServerSentEvents",
+                                                    "System.Threading.AccessControl"
+                                                ],
+                        "runtimeRemovedFromNet10":  [
+                                                        "mscordaccore_amd64_amd64_8.0.1124.51707"
+                                                    ]
+                    }
+}

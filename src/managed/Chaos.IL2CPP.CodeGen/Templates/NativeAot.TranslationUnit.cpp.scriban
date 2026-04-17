@@ -17,7 +17,7 @@ namespace
 {{ end ~}}
 // Native AOT entry for {{ entry_subject_id }}
 // Managed symbol: {{ entry_symbol }}
-extern "C" int {{ native_entry_function_name }}(void)
+extern "C" int {{ native_entry_function_name }}(std::int32_t chaos_entry_index)
 {
-    return {{ entry_native_symbol }}();
+    return {{ entry_native_symbol }}({{ entry_bridge_arguments }});
 }

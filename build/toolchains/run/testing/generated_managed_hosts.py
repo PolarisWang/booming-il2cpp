@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Any, Iterable
 import sys
@@ -22,8 +21,24 @@ _HOST_PROJECT_TEMPLATE = "templates/managed-declared-host.csproj.tmpl"
 
 def assign_entry_indexes(entries: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
     normalized_entries = [dict(entry) for entry in entries]
+    sorted_entries = [
+        dict(entry)
+        for entry in sorted(normalized_entries, key=lambda item: str(item.get("stableId") or ""))
+    ]
+    explicit_entry_indexes = [
+        entry.get("entryIndex")
+        for entry in sorted_entries
+    ]
+    if explicit_entry_indexes and all(
+        isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0
+        for entry_index in explicit_entry_indexes
+    ):
+        if len({int(entry_index) for entry_index in explicit_entry_indexes}) != len(explicit_entry_indexes):
+            raise ValueError("declared entries require unique explicit entryIndex values")
+        return sorted_entries
+
     indexed_entries: list[dict[str, Any]] = []
-    for entry_index, entry in enumerate(sorted(normalized_entries, key=lambda item: str(item.get("stableId") or ""))):
+    for entry_index, entry in enumerate(sorted_entries):
         indexed_entry = dict(entry)
         indexed_entry["entryIndex"] = entry_index
         indexed_entries.append(indexed_entry)
@@ -100,7 +115,6 @@ def _render_benchmark_host_source(
         replacements={
             "NAMESPACE": namespace_name,
             "CLASS_NAME": class_name,
-            "ENTRY_RECORDS": _render_benchmark_entries(entries),
             "SWITCH_CASES": _render_switch_cases(entries),
         },
     )
@@ -117,35 +131,6 @@ def _render_switch_cases(entries: list[dict[str, Any]]) -> str:
                 f"            case {entry_index}:",
                 f"                global::{declaring_type}.{method_name}();",
                 "                return 0;",
-            ]
-        )
-    return "\n".join(lines)
-
-
-def _render_benchmark_entries(entries: list[dict[str, Any]]) -> str:
-    lines: list[str] = []
-    for entry in entries:
-        lines.extend(
-            [
-                "        new(",
-                f"            EntryIndex: {int(entry.get('entryIndex', -1))},",
-                f"            StableId: {_csharp_string(str(entry.get('stableId') or ''))},",
-                f"            Alias: {_csharp_string(str(entry.get('alias') or ''))},",
-                f"            AssemblyName: {_csharp_string(str(entry.get('assemblyName') or ''))},",
-                f"            DeclaringType: {_csharp_string(str(entry.get('declaringType') or ''))},",
-                f"            MethodName: {_csharp_string(str(entry.get('methodName') or ''))},",
-                f"            MethodSignature: {_csharp_string(str(entry.get('methodSignature') or ''))},",
-                f"            Category: {int(entry.get('category') or 0)},",
-                f"            CapabilityFamily: {int(entry.get('capabilityFamily') or 0)},",
-                f"            CapabilityItem: {int(entry.get('capabilityItem') or 0)},",
-                f"            Archetype: {int(entry.get('archetype') or 0)},",
-                f"            HotUpdateCapability: {int(entry.get('hotUpdateCapability') or 0)},",
-                f"            Requires: {int(entry.get('requires') or 0)},",
-                f"            Metrics: {int(entry.get('metrics') or 0)},",
-                f"            Modes: {int(entry.get('modes') or 0)},",
-                f"            WarmupCount: {int(entry.get('warmupCount') or 0)},",
-                f"            IterationCount: {int(entry.get('iterationCount') or 0)},",
-                f"            InvocationCount: {int(entry.get('invocationCount') or 0)}),",
             ]
         )
     return "\n".join(lines)
@@ -185,11 +170,6 @@ def _prepare_entries(entries: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
 def _sanitize_identifier(value: str) -> str:
     sanitized = "".join(character if character.isalnum() else "_" for character in value.strip())
     return sanitized or "GeneratedHost"
-
-
-def _csharp_string(value: str) -> str:
-    return json.dumps(value)
-
 
 def _xml_escape(value: str) -> str:
     return (

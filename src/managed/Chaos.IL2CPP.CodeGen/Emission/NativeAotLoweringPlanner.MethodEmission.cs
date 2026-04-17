@@ -120,9 +120,21 @@ public sealed partial class NativeAotLoweringPlanner
 	private static void ValidateEntryMethod(AotCoreIrMethodArtifact entryMethod)
 	{
 		ValidateMethod(entryMethod);
-		if (entryMethod.ParameterCount != 0)
+		if (entryMethod.ParameterCount == 1)
 		{
-			throw new NotSupportedException("native-aot entry '" + entryMethod.SubjectId + "' must not take parameters");
+			if (entryMethod.ParameterAbis.Count != 1)
+			{
+				throw new NotSupportedException($"native-aot entry supports only zero-parameter or single-int32 entry methods, but '{entryMethod.SubjectId}' has inconsistent abi metadata");
+			}
+			AotCoreIrAbiCarrierKind carrierKindCode = entryMethod.ParameterAbis[0].CarrierKindCode;
+			if (carrierKindCode != AotCoreIrAbiCarrierKind.Int32)
+			{
+				throw new NotSupportedException($"native-aot entry supports only zero-parameter or single-int32 entry methods, but '{entryMethod.SubjectId}' uses carrier '{carrierKindCode}'.");
+			}
+		}
+		else if (entryMethod.ParameterCount != 0)
+		{
+			throw new NotSupportedException($"native-aot entry supports only zero-parameter or single-int32 entry methods, but '{entryMethod.SubjectId}' has {entryMethod.ParameterCount} parameters.");
 		}
 		if (!string.Equals(entryMethod.ReturnType, "System.Int32", StringComparison.Ordinal))
 		{

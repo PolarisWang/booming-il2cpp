@@ -84,7 +84,7 @@ public sealed class NativeAotEmitter
                 $"unsupported native-aot lowering plan kind '{loweringPlan.PlanKind}'");
         }
 
-        if (!string.Equals(loweringPlan.WorkloadAbi, "int(void)", StringComparison.Ordinal))
+        if (!string.Equals(loweringPlan.WorkloadAbi, "int(int32)", StringComparison.Ordinal))
         {
             throw new NotSupportedException(
                 $"unsupported native-aot workload ABI '{loweringPlan.WorkloadAbi}'");
@@ -128,6 +128,7 @@ public sealed class NativeAotEmitter
             ["entry_symbol"] = templateModel.EntrySymbol,
             ["entry_native_symbol"] = templateModel.EntryNativeSymbol,
             ["native_entry_function_name"] = templateModel.NativeEntryFunctionName,
+            ["entry_bridge_arguments"] = templateModel.EntryBridgeArguments,
         };
         return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetTranslationUnitTemplate(), model);
     }

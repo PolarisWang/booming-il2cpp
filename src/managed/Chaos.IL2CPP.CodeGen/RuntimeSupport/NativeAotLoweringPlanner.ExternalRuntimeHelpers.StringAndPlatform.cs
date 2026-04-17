@@ -50,6 +50,11 @@ public sealed partial class NativeAotLoweringPlanner
 			}), CreateNativeIntAbiSlot(), new HashSet<int> { 0, 1 });
 			return true;
 		}
+		if (string.Equals(callee, StringGetLengthMethodSubjectId, StringComparison.Ordinal))
+		{
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), $"extern \"C\" std::int32_t {GetExternalRuntimeHelperSymbol(callee)}(std::intptr_t chaos_arg_0)\n{{\n    if (chaos_arg_0 == static_cast<std::intptr_t>(0))\n    {{\n        std::abort();\n    }}\n\n    auto* chaos_string = reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_0);\n    return static_cast<std::int32_t>(chaos_string->length);\n}}", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(StringTypeSubjectId, AotCoreIrTypeShapeKind.ReferenceType)), CreateInt32AbiSlot(), new HashSet<int> { 0 });
+			return true;
+		}
 		if (string.Equals(callee, "System.Private.CoreLib/System.String::StartsWith(System.String,System.StringComparison)", StringComparison.Ordinal))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), $"extern \"C\" std::intptr_t {GetExternalRuntimeHelperSymbol(callee)}(std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1, std::int32_t chaos_arg_2)\n{{\n    if (chaos_arg_2 != {4})\n    {{\n        std::abort();\n    }}\n\n    if (chaos_arg_1 == static_cast<std::intptr_t>(0))\n    {{\n        std::abort();\n    }}\n\n    auto* chaos_instance = reinterpret_cast<{GetNativeTypeSymbol("System.Private.CoreLib/System.String")}*>(chaos_arg_0);\n    auto* chaos_prefix = reinterpret_cast<{GetNativeTypeSymbol("System.Private.CoreLib/System.String")}*>(chaos_arg_1);\n    const auto chaos_instance_length = static_cast<std::size_t>(chaos_instance->length);\n    const auto chaos_prefix_length = static_cast<std::size_t>(chaos_prefix->length);\n    if (chaos_prefix_length > chaos_instance_length)\n    {{\n        return static_cast<std::intptr_t>(0);\n    }}\n\n    if (chaos_prefix_length == 0)\n    {{\n        return static_cast<std::intptr_t>(1);\n    }}\n\n    const char* chaos_instance_utf8 = chaos_reflection_get_string_utf8(chaos_arg_0);\n    const char* chaos_prefix_utf8 = chaos_reflection_get_string_utf8(chaos_arg_1);\n    if ((chaos_instance_utf8 == nullptr && chaos_instance_length != 0) ||\n        (chaos_prefix_utf8 == nullptr && chaos_prefix_length != 0))\n    {{\n        std::abort();\n    }}\n\n    return std::memcmp(chaos_instance_utf8, chaos_prefix_utf8, chaos_prefix_length) == 0\n        ? static_cast<std::intptr_t>(1)\n        : static_cast<std::intptr_t>(0);\n}}", new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
@@ -577,6 +582,43 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
 	private bool TryCreateMarshalingRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
 	{
 		helperDefinition = null;
+		AotCoreIrAbiSlotArtifact voidReturnAbi = new AotCoreIrAbiSlotArtifact
+		{
+			CarrierKindCode = AotCoreIrAbiCarrierKind.Void,
+			TypeShape = (AotCoreIrTypeShapeKind)0
+		};
+		if (TryReadSingleGenericTypeArgument(callee, MarshalSizeOfMethodPrefix, out string valueTypeNameOrSubjectId) && TryCreateResolvedTypeAbiSlot(valueTypeNameOrSubjectId, out AotCoreIrAbiSlotArtifact valueTypeAbi) && valueTypeAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue)
+		{
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), $"extern \"C\" std::int32_t {GetExternalRuntimeHelperSymbol(callee)}()\n{{\n    return static_cast<std::int32_t>(sizeof({GetRequiredAbiValueTypeSymbol(valueTypeAbi)}));\n}}", Array.Empty<AotCoreIrAbiSlotArtifact>(), CreateInt32AbiSlot(), EmptyRawArgumentIndices);
+			return true;
+		}
+		if (string.Equals(callee, MarshalAllocHGlobalInt32MethodSubjectId, StringComparison.Ordinal))
+		{
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), $"extern \"C\" std::intptr_t {GetExternalRuntimeHelperSymbol(callee)}(std::int32_t chaos_arg_0)\n{{\n    if (chaos_arg_0 < 0)\n    {{\n        std::abort();\n    }}\n\n    const auto chaos_size = static_cast<std::size_t>(chaos_arg_0 == 0 ? 1 : chaos_arg_0);\n    auto* chaos_buffer = std::malloc(chaos_size);\n    if (chaos_buffer == nullptr)\n    {{\n        std::abort();\n    }}\n\n    return reinterpret_cast<std::intptr_t>(chaos_buffer);\n}}", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateInt32AbiSlot()), CreateNativeIntAbiSlot(), EmptyRawArgumentIndices);
+			return true;
+		}
+		if (string.Equals(callee, MarshalFreeHGlobalMethodSubjectId, StringComparison.Ordinal))
+		{
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), "extern \"C\" void " + GetExternalRuntimeHelperSymbol(callee) + "(std::intptr_t chaos_arg_0)\n{\n    if (chaos_arg_0 != static_cast<std::intptr_t>(0))\n    {\n        std::free(reinterpret_cast<void*>(chaos_arg_0));\n    }\n}", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()), voidReturnAbi, new HashSet<int> { 0 });
+			return true;
+		}
+		if (TryReadSingleGenericTypeArgument(callee, MarshalStructureToPtrMethodPrefix, out valueTypeNameOrSubjectId) && TryCreateResolvedTypeAbiSlot(valueTypeNameOrSubjectId, out valueTypeAbi) && valueTypeAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue)
+		{
+			string valueTypeSymbol = GetRequiredAbiValueTypeSymbol(valueTypeAbi);
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), $"extern \"C\" void {GetExternalRuntimeHelperSymbol(callee)}({valueTypeSymbol} chaos_arg_0, std::intptr_t chaos_arg_1, std::intptr_t chaos_arg_2)\n{{\n    if (chaos_arg_1 == static_cast<std::intptr_t>(0) || chaos_arg_2 != static_cast<std::intptr_t>(0))\n    {{\n        std::abort();\n    }}\n\n    *reinterpret_cast<{valueTypeSymbol}*>(chaos_arg_1) = chaos_arg_0;\n}}", new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+			{
+				valueTypeAbi,
+				CreateNativeIntAbiSlot(),
+				CreateNativeIntAbiSlot()
+			}), voidReturnAbi, EmptyRawArgumentIndices);
+			return true;
+		}
+		if (TryReadSingleGenericTypeArgument(callee, MarshalPtrToStructureMethodPrefix, out valueTypeNameOrSubjectId) && TryCreateResolvedTypeAbiSlot(valueTypeNameOrSubjectId, out valueTypeAbi) && valueTypeAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue)
+		{
+			string valueTypeSymbol2 = GetRequiredAbiValueTypeSymbol(valueTypeAbi);
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), $"extern \"C\" {valueTypeSymbol2} {GetExternalRuntimeHelperSymbol(callee)}(std::intptr_t chaos_arg_0)\n{{\n    if (chaos_arg_0 == static_cast<std::intptr_t>(0))\n    {{\n        std::abort();\n    }}\n\n    return *reinterpret_cast<{valueTypeSymbol2}*>(chaos_arg_0);\n}}", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()), valueTypeAbi, new HashSet<int> { 0 });
+			return true;
+		}
 		if (string.Equals(callee, "System.Runtime.InteropServices/Marshal::StringToCoTaskMemUTF8(System.String)", StringComparison.Ordinal))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), $"extern \"C\" std::intptr_t {GetExternalRuntimeHelperSymbol(callee)}(std::intptr_t chaos_arg_0)\n{{\n    if (chaos_arg_0 == static_cast<std::intptr_t>(0))\n    {{\n        return static_cast<std::intptr_t>(0);\n    }}\n\n    auto* chaos_string = reinterpret_cast<{GetNativeTypeSymbol("System.Private.CoreLib/System.String")}*>(chaos_arg_0);\n    const auto chaos_length = static_cast<std::size_t>(chaos_string->length);\n    const auto* chaos_utf8_data = chaos_string->utf8_data;\n    if (chaos_length != 0 && chaos_utf8_data == nullptr)\n    {{\n        std::abort();\n    }}\n\n    auto* chaos_buffer = static_cast<char*>(std::malloc(chaos_length + 1));\n    if (chaos_buffer == nullptr)\n    {{\n        std::abort();\n    }}\n\n    if (chaos_length != 0)\n    {{\n        std::memcpy(chaos_buffer, chaos_utf8_data, chaos_length);\n    }}\n\n    chaos_buffer[chaos_length] = '\\0';\n    return reinterpret_cast<std::intptr_t>(chaos_buffer);\n}}", new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(), new HashSet<int> { 0 });

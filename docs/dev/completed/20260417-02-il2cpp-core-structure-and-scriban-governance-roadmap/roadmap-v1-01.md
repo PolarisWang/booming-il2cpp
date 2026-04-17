@@ -220,8 +220,8 @@ Status: in-progress
 
 ## 7. 依赖
 
-- `docs/dev/in-progress/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/brainstorm-v1-01.md`
-- `docs/dev/in-progress/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/design-v1-01.md`
+- `docs/dev/abandoned/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/brainstorm-v1-01.md`
+- `docs/dev/abandoned/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/design-v1-01.md`
 - `src/managed/Chaos.IL2CPP.CodeGen/NativeAotLoweringPlanner.cs`
 - `src/managed/Chaos.IL2CPP.CodeGen/NativeAotEmitter.cs`
 - `src/managed/Chaos.IL2CPP.CodeGen/NativeReferenceLoweringPlanner.cs`

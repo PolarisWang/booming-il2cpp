@@ -45,6 +45,16 @@ def find_managed_test_project(manifest: dict[str, Any], *, host_kind: str) -> di
     return None
 
 
+def find_managed_test_project_by_id(manifest: dict[str, Any], *, project_id: str) -> dict[str, Any] | None:
+    for item in list(manifest.get("managedTestProjects") or []):
+        if not isinstance(item, dict):
+            continue
+        if str(item.get("projectId") or "").strip() != project_id:
+            continue
+        return dict(item)
+    return None
+
+
 def find_native_test_project(
     manifest: dict[str, Any],
     *,

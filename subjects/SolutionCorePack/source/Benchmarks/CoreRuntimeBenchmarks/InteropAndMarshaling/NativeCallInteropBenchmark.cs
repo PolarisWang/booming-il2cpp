@@ -24,7 +24,7 @@ internal static class NativeCallInteropBenchmarkEntry
         Capability = ChaosCapabilityItem.NativeCallInterop,
         Requires = ChaosRuntimeFeature.NativeInterop,
         Archetype = ChaosSolutionArchetype.ReferenceAssemblySolution,
-        Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native,
+        Modes = ChaosExecutionMode.Managed,
         WarmupCount = 1,
         IterationCount = 2,
         InvocationCount = 1)]

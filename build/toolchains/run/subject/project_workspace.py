@@ -12,6 +12,7 @@ try:
     from ..core import tooling as tooling_module
     from ..core.common import combine_process_output, read_json, run_process, write_json
     from ..testing import compiled_catalog as compiled_catalog_module
+    from ..testing import declared_metadata_labels as declared_metadata_labels_module
     from ..testing import generated_hotupdate_hosts as generated_hotupdate_hosts_module
     from ..testing import generated_managed_hosts as generated_managed_hosts_module
     from ..testing import template_assets as template_assets_module
@@ -25,6 +26,7 @@ except ImportError:
     from core import tooling as tooling_module
     from core.common import combine_process_output, read_json, run_process, write_json
     from testing import compiled_catalog as compiled_catalog_module
+    from testing import declared_metadata_labels as declared_metadata_labels_module
     from testing import generated_hotupdate_hosts as generated_hotupdate_hosts_module
     from testing import generated_managed_hosts as generated_managed_hosts_module
     from testing import template_assets as template_assets_module
@@ -1492,12 +1494,17 @@ def _subject_solution_native_project_paths(
     ]
 
 
-def _declared_host_project_suffix(host_kind: str) -> str:
+def _declared_host_project_suffix(host_kind: str, *, native_filtered: bool = False) -> str:
     if host_kind == "proof-host":
         return "DeclaredProofHost"
     if host_kind == "benchmark-host":
-        return "DeclaredBenchmarkHost"
+        return "DeclaredBenchmarkNativeHost" if native_filtered else "DeclaredBenchmarkHost"
     raise ValueError(f"unsupported declared host kind: {host_kind}")
+
+
+def _declared_benchmark_supports_mode(entry: dict[str, Any], mode: str) -> bool:
+    supported_modes = declared_metadata_labels_module.supported_modes_from_mask(entry.get("modes"))
+    return mode in supported_modes
 
 
 def _subject_managed_test_projects(
@@ -1528,16 +1535,28 @@ def _subject_managed_test_projects(
     solution_project_paths: list[str] = []
     important_outputs: list[dict[str, str]] = []
     artifacts = [_path_text(repo_root, collection_path)]
+    native_benchmark_entries = [
+        dict(entry)
+        for entry in benchmark_entries
+        if _declared_benchmark_supports_mode(entry, "native")
+    ]
 
     host_specs = [
-        ("proof-host", unit_entries, "ChaosGeneratedDeclaredTests.g.cs"),
-        ("benchmark-host", benchmark_entries, "ChaosGeneratedDeclaredBenchmarks.g.cs"),
+        ("proof-host", "proof-host", unit_entries, "ChaosGeneratedDeclaredTests.g.cs", False),
+        ("benchmark-host", "benchmark-host", benchmark_entries, "ChaosGeneratedDeclaredBenchmarks.g.cs", False),
+        (
+            "benchmark-host-native",
+            "benchmark-host",
+            native_benchmark_entries,
+            "ChaosGeneratedDeclaredNativeBenchmarks.g.cs",
+            True,
+        ),
     ]
-    for host_kind, entries, generated_source_name in host_specs:
+    for project_id_suffix, host_kind, entries, generated_source_name, native_filtered in host_specs:
         if not entries:
             continue
 
-        host_suffix = _declared_host_project_suffix(host_kind)
+        host_suffix = _declared_host_project_suffix(host_kind, native_filtered=native_filtered)
         assembly_name = f"{subject_id}.{host_suffix}"
         generated_source_path = generated_root / generated_source_name
         project_path = managed_tests_root / f"{assembly_name}.csproj"
@@ -1564,7 +1583,7 @@ def _subject_managed_test_projects(
             encoding="utf-8",
         )
         record = {
-            "projectId": f"managed-test/{subject_id}/{host_kind}",
+            "projectId": f"managed-test/{subject_id}/{project_id_suffix}",
             "projectPath": _path_text(repo_root, project_path),
             "assemblyName": assembly_name,
             "hostKind": host_kind,
@@ -1800,11 +1819,20 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
         declared_catalog=declared_catalog,
         hotupdate_patch_projects=hotupdate_patch_projects,
     )
-    managed_test_projects_by_host_kind = {
-        str(item.get("hostKind") or ""): str(item.get("projectId") or "")
-        for item in managed_test_projects
-        if str(item.get("hostKind") or "") and str(item.get("projectId") or "")
-    }
+    managed_test_projects_by_host_kind: dict[str, str] = {}
+    for item in managed_test_projects:
+        host_kind = str(item.get("hostKind") or "")
+        project_id = str(item.get("projectId") or "")
+        if host_kind and project_id and host_kind not in managed_test_projects_by_host_kind:
+            managed_test_projects_by_host_kind[host_kind] = project_id
+    native_benchmark_managed_test_project_id = next(
+        (
+            str(item.get("projectId") or "")
+            for item in managed_test_projects
+            if str(item.get("projectId") or "").endswith("/benchmark-host-native")
+        ),
+        "",
+    )
     hotupdate_test_projects_by_host_kind = {
         str(item.get("hostKind") or ""): str(item.get("projectId") or "")
         for item in hotupdate_test_projects
@@ -1976,7 +2004,8 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
                         **base_payload,
                         "deliveryKind": "direct-run-host",
                         "hostKind": "benchmark-host",
-                        "managedTestProjectId": managed_test_projects_by_host_kind.get("benchmark-host", ""),
+                        "managedTestProjectId": native_benchmark_managed_test_project_id
+                        or managed_test_projects_by_host_kind.get("benchmark-host", ""),
                     }
                 )
                 matrix_native_test_project_ids.append(project_id)

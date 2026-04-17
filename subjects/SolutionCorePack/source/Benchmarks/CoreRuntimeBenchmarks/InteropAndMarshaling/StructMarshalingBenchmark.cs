@@ -29,25 +29,19 @@ internal static class StructMarshalingBenchmarkEntry
         IntPtr buffer = Marshal.AllocHGlobal(Marshal.SizeOf<StructMarshalingBenchmarkRecord>());
         int checksum = 0;
 
-        try
+        for (int i = 0; i < 64; i++)
         {
-            for (int i = 0; i < 64; i++)
+            var record = new StructMarshalingBenchmarkRecord
             {
-                var record = new StructMarshalingBenchmarkRecord
-                {
-                    Count = i,
-                    Ratio = i + 0.5,
-                };
+                Count = i,
+                Ratio = i + 0.5,
+            };
 
-                Marshal.StructureToPtr(record, buffer, fDeleteOld: false);
-                StructMarshalingBenchmarkRecord roundTrip = Marshal.PtrToStructure<StructMarshalingBenchmarkRecord>(buffer);
-                checksum += roundTrip.Count + (int)roundTrip.Ratio;
-            }
+            Marshal.StructureToPtr(record, buffer, fDeleteOld: false);
+            StructMarshalingBenchmarkRecord roundTrip = Marshal.PtrToStructure<StructMarshalingBenchmarkRecord>(buffer);
+            checksum += roundTrip.Count + (int)roundTrip.Ratio;
         }
-        finally
-        {
-            Marshal.FreeHGlobal(buffer);
-        }
+        Marshal.FreeHGlobal(buffer);
 
         return checksum % 10000;
     }

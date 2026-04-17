@@ -18,7 +18,7 @@ Status: in-progress
 
 - `tests/unit/compatibility/test_phase2_aot_core_ir_ldtoken_target_reference.py`
 - `src/managed/Chaos.IL2CPP.CodeGen/AotCoreIrLowering.cs`
-- `docs/dev/in-progress/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/STATUS.md`
+- `docs/dev/abandoned/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/STATUS.md`
 - `docs/dev/in-progress/20260416-04-phase-2-aot-core-ir-semantic-surface-expansion/STATUS.md`
 
 ## 验证命令

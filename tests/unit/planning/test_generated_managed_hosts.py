@@ -101,6 +101,44 @@ class GeneratedManagedHostsTests(unittest.TestCase):
         )
         self.assertEqual([0, 1], [entry["entryIndex"] for entry in indexed_entries])
 
+    def test_assign_entry_indexes_preserves_explicit_entry_indexes_when_present(self) -> None:
+        generated_hosts_module = load_module(
+            GENERATED_MANAGED_HOSTS_MODULE_PATH,
+            "chaos_generated_managed_hosts_explicit_entry_index",
+        )
+
+        entries = [
+            {
+                **make_declared_entry(
+                    stable_id="FixtureSubject::FixtureSubject::FixtureSubject.ZetaBenchmarks::Run()",
+                    alias="zeta-bench",
+                    declaring_type="FixtureSubject.ZetaBenchmarks",
+                    method_name="Run",
+                ),
+                "entryIndex": 11,
+            },
+            {
+                **make_declared_entry(
+                    stable_id="FixtureSubject::FixtureSubject::FixtureSubject.AlphaBenchmarks::Run()",
+                    alias="alpha-bench",
+                    declaring_type="FixtureSubject.AlphaBenchmarks",
+                    method_name="Run",
+                ),
+                "entryIndex": 7,
+            },
+        ]
+
+        indexed_entries = generated_hosts_module.assign_entry_indexes(entries)
+
+        self.assertEqual(
+            [
+                "FixtureSubject::FixtureSubject::FixtureSubject.AlphaBenchmarks::Run()",
+                "FixtureSubject::FixtureSubject::FixtureSubject.ZetaBenchmarks::Run()",
+            ],
+            [entry["stableId"] for entry in indexed_entries],
+        )
+        self.assertEqual([7, 11], [entry["entryIndex"] for entry in indexed_entries])
+
     def test_render_declared_proof_host_source_uses_numeric_dispatch_and_direct_wrappers(self) -> None:
         generated_hosts_module = load_module(
             GENERATED_MANAGED_HOSTS_MODULE_PATH,
@@ -144,7 +182,7 @@ class GeneratedManagedHostsTests(unittest.TestCase):
         self.assertNotIn("sourceEntry", source_text)
         self.assertNotIn("Dictionary<string, Func<int>>", source_text)
 
-    def test_render_declared_benchmark_host_source_emits_entry_metadata_table(self) -> None:
+    def test_render_declared_benchmark_host_source_dispatches_without_embedded_metadata_table(self) -> None:
         generated_hosts_module = load_module(
             GENERATED_MANAGED_HOSTS_MODULE_PATH,
             "chaos_generated_managed_benchmark_host",
@@ -170,17 +208,13 @@ class GeneratedManagedHostsTests(unittest.TestCase):
 
         self.assertIn("ChaosManagedHostKind.Benchmark", source_text)
         self.assertIn("ChaosTestCollectionLoader.EnsureEntryExists", source_text)
-        self.assertIn("public static IReadOnlyList<DeclaredBenchmarkEntry> Entries", source_text)
-        self.assertIn('"generic-bench"', source_text)
-        self.assertIn('"FixtureSubject::FixtureSubject::FixtureSubject.GenericBenchmarks::Run()"', source_text)
-        self.assertIn("EntryIndex: 0", source_text)
-        self.assertIn('AssemblyName: "FixtureSubject"', source_text)
-        self.assertIn('DeclaringType: "FixtureSubject.GenericBenchmarks"', source_text)
-        self.assertIn('MethodName: "Run"', source_text)
-        self.assertIn('MethodSignature: "Run()"', source_text)
-        self.assertIn("WarmupCount: 2", source_text)
-        self.assertIn("IterationCount: 5", source_text)
-        self.assertIn("InvocationCount: 10", source_text)
+        self.assertIn("public static int Execute(int entryIndex)", source_text)
+        self.assertIn("case 0:", source_text)
+        self.assertIn("global::FixtureSubject.GenericBenchmarks.Run();", source_text)
+        self.assertNotIn("DeclaredBenchmarkEntry", source_text)
+        self.assertNotIn("public static IReadOnlyList", source_text)
+        self.assertNotIn('"generic-bench"', source_text)
+        self.assertNotIn("WarmupCount:", source_text)
 
     def test_render_declared_test_host_source_rejects_empty_catalog(self) -> None:
         generated_hosts_module = load_module(

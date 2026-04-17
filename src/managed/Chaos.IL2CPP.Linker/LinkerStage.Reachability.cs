@@ -197,8 +197,7 @@ public sealed partial class LinkerStage
                     if (!string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal) ||
                         string.IsNullOrWhiteSpace(instruction.Callee) ||
                         !methodMap.TryGetValue(instruction.Callee, out var slotMethod) ||
-                        !typeMap.TryGetValue(slotMethod.DeclaringTypeSubjectId, out var slotType) ||
-                        !slotType.IsInterface)
+                        !typeMap.TryGetValue(slotMethod.DeclaringTypeSubjectId, out var slotType))
                     {
                         continue;
                     }
@@ -207,7 +206,7 @@ public sealed partial class LinkerStage
                     {
                         if (!typeMap.TryGetValue(candidateTypeSubjectId, out var candidateType) ||
                             candidateType.IsInterface ||
-                            !ImplementsInterface(candidateType, slotType, typeMap))
+                            !IsCompatibleVirtualDispatchTargetType(candidateType, slotType, typeMap))
                         {
                             continue;
                         }

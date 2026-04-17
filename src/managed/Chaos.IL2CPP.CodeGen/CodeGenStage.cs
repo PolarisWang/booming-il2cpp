@@ -187,7 +187,7 @@ public sealed class CodeGenStage
             NativeEntryFunctionName = "RunNativeAot",
             EntrySymbol = entrySymbol,
             EntryMethodToken = entryMethodToken,
-            WorkloadAbi = "int(void)",
+            WorkloadAbi = "int(int32)",
         };
     }
 

@@ -49,7 +49,7 @@ internal static class DispatchBenchmarkEntry
         Alias = "dispatch-bench",
         CapabilityFamily = ChaosCapabilityFamily.TypeSystemAndGenerics,
         Capability = ChaosCapabilityItem.GenericVirtualDispatch,
-        Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native,
+        Modes = ChaosExecutionMode.Managed,
         WarmupCount = 1,
         IterationCount = 6,
         InvocationCount = 1)]

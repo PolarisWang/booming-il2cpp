@@ -23,6 +23,8 @@ public sealed partial class NativeAotLoweringPlanner
         "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String,System.String)";
     private const string StringEqualityMethodSubjectId =
         "System.Private.CoreLib/System.String::op_Equality(System.String,System.String)";
+    private const string StringGetLengthMethodSubjectId =
+        "System.Private.CoreLib/System.String::get_Length()";
     private const string StringStartsWithComparisonMethodSubjectId =
         "System.Private.CoreLib/System.String::StartsWith(System.String,System.StringComparison)";
     private const string StringContainsComparisonMethodSubjectId =
@@ -141,6 +143,16 @@ public sealed partial class NativeAotLoweringPlanner
         "System.Runtime.InteropServices/Marshal::PtrToStringUTF8(System.IntPtr)";
     private const string MarshalFreeCoTaskMemMethodSubjectId =
         "System.Runtime.InteropServices/Marshal::FreeCoTaskMem(System.IntPtr)";
+    private const string MarshalAllocHGlobalInt32MethodSubjectId =
+        "System.Runtime.InteropServices/Marshal::AllocHGlobal(System.Int32)";
+    private const string MarshalFreeHGlobalMethodSubjectId =
+        "System.Runtime.InteropServices/Marshal::FreeHGlobal(System.IntPtr)";
+    private const string MarshalSizeOfMethodPrefix =
+        "System.Runtime.InteropServices/Marshal::SizeOf<";
+    private const string MarshalStructureToPtrMethodPrefix =
+        "System.Runtime.InteropServices/Marshal::StructureToPtr<";
+    private const string MarshalPtrToStructureMethodPrefix =
+        "System.Runtime.InteropServices/Marshal::PtrToStructure<";
     private const int StringComparisonOrdinalValue = 4;
     private const string DllImportAttributeDisplayName = "DllImportAttribute";
     private const string DllImportAttributeTypeSubjectId = "System.Runtime.InteropServices/DllImportAttribute";
@@ -421,6 +433,7 @@ public sealed partial class NativeAotLoweringPlanner
                 MethodSource = BuildMethodSource(method),
             })
             .ToArray();
+        var entryBridgeArguments = BuildEntryBridgeArguments(entryMethod);
 
         return new NativeAotTemplateModel
         {
@@ -449,7 +462,33 @@ public sealed partial class NativeAotLoweringPlanner
             EntrySymbol = loweringPlan.EntrySymbol,
             EntryNativeSymbol = entryMethod.NativeSymbol,
             NativeEntryFunctionName = loweringPlan.NativeEntryFunctionName,
+            EntryBridgeArguments = entryBridgeArguments,
         };
+    }
+
+    private static string BuildEntryBridgeArguments(AotCoreIrMethodArtifact entryMethod)
+    {
+        ArgumentNullException.ThrowIfNull(entryMethod);
+
+        if (entryMethod.ParameterCount == 0)
+        {
+            return "";
+        }
+
+        if (entryMethod.ParameterCount != 1 || entryMethod.ParameterAbis.Count != 1)
+        {
+            throw new NotSupportedException(
+                $"native-aot entry bridge supports only zero-parameter or single-int32 entry methods, but '{entryMethod.SubjectId}' has {entryMethod.ParameterCount} parameters.");
+        }
+
+        var carrierKind = entryMethod.ParameterAbis[0].CarrierKindCode;
+        if (carrierKind != AotCoreIrAbiCarrierKind.Int32)
+        {
+            throw new NotSupportedException(
+                $"native-aot entry bridge supports only System.Int32 entry parameters, but '{entryMethod.SubjectId}' uses carrier '{carrierKind}'.");
+        }
+
+        return "chaos_entry_index";
     }
 
     private string BuildMethodSource(AotCoreIrMethodArtifact method)
@@ -1686,6 +1725,8 @@ public sealed record NativeAotTemplateModel
     public required string EntryNativeSymbol { get; init; }
 
     public required string NativeEntryFunctionName { get; init; }
+
+    public required string EntryBridgeArguments { get; init; }
 }
 
 public sealed record NativeAotMethodTemplateModel

@@ -100,6 +100,7 @@ class BenchmarkCommandTests(unittest.TestCase):
         method_name: str,
         method_signature: str,
         matrix_id: str = "workspace-benchmark-matrix",
+        native_host_assembly_name: str | None = None,
     ) -> None:
         workspace_root = repo_root / "solutions" / "subjects" / subject_id
         managed_tests_root = workspace_root / "managed-tests"
@@ -108,8 +109,14 @@ class BenchmarkCommandTests(unittest.TestCase):
         generated_source_path = generated_root / "ChaosGeneratedDeclaredBenchmarks.g.cs"
         collection_path = generated_root / "declared-tests.collection.json"
         manifest_path = workspace_root / "workspace.manifest.json"
+        native_host_project_path = managed_tests_root / f"{subject_id}.DeclaredBenchmarkNativeHost.csproj"
+        native_host_generated_source_path = generated_root / "ChaosGeneratedDeclaredNativeBenchmarks.g.cs"
 
-        for path in [project_path, generated_source_path]:
+        materialized_paths = [project_path, generated_source_path]
+        if native_host_assembly_name:
+            materialized_paths.extend([native_host_project_path, native_host_generated_source_path])
+
+        for path in materialized_paths:
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("<Project />\n" if path.suffix == ".csproj" else "// fixture\n", encoding="utf-8")
 
@@ -144,32 +151,58 @@ class BenchmarkCommandTests(unittest.TestCase):
         }
         collection_path.write_text(json.dumps(collection_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+        managed_test_projects = [
+            {
+                "projectId": f"managed-test/{subject_id}/benchmark-host",
+                "projectPath": project_path.relative_to(repo_root).as_posix(),
+                "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
+                "hostKind": "benchmark-host",
+                "collectionPath": collection_path.relative_to(repo_root).as_posix(),
+                "generatedSourcePath": generated_source_path.relative_to(repo_root).as_posix(),
+            }
+        ]
+        native_test_projects: list[dict[str, Any]] = []
+        if native_host_assembly_name:
+            managed_test_projects.append(
+                {
+                    "projectId": f"managed-test/{subject_id}/benchmark-host-native",
+                    "projectPath": native_host_project_path.relative_to(repo_root).as_posix(),
+                    "assemblyName": native_host_assembly_name,
+                    "hostKind": "benchmark-host",
+                    "collectionPath": collection_path.relative_to(repo_root).as_posix(),
+                    "generatedSourcePath": native_host_generated_source_path.relative_to(repo_root).as_posix(),
+                }
+            )
+            native_test_projects.append(
+                {
+                    "projectId": f"native-test/{subject_id}/{matrix_id}/benchmark-host",
+                    "matrixId": matrix_id,
+                    "projectPath": (
+                        workspace_root / "native" / matrix_id / "benchmark" / "chaos_subject_native_aot.vcxproj"
+                    ).relative_to(repo_root).as_posix(),
+                    "configureRoot": (workspace_root / "native" / matrix_id).relative_to(repo_root).as_posix(),
+                    "hostKind": "benchmark-host",
+                    "managedTestProjectId": f"managed-test/{subject_id}/benchmark-host-native",
+                }
+            )
+
         manifest_payload: dict[str, Any] = {
             "workspaceVersion": 2,
             "kind": "subject-workspace",
             "subjectId": subject_id,
             "defaultMatrixId": matrix_id,
             "managedProjects": [],
-            "managedTestProjects": [
-                {
-                    "projectId": f"managed-test/{subject_id}/benchmark-host",
-                    "projectPath": project_path.relative_to(repo_root).as_posix(),
-                    "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
-                    "hostKind": "benchmark-host",
-                    "collectionPath": collection_path.relative_to(repo_root).as_posix(),
-                    "generatedSourcePath": generated_source_path.relative_to(repo_root).as_posix(),
-                }
-            ],
+            "managedTestProjects": managed_test_projects,
             "nativeProjects": [],
-            "nativeTestProjects": [],
+            "nativeTestProjects": native_test_projects,
             "matrices": [
                 {
                     "matrixId": matrix_id,
                     "goalIds": ["perf.release"],
                     "hostPlatform": "windows-x64",
                     "targetPlatform": "windows-x64",
-                    "managedTestProjectIds": [f"managed-test/{subject_id}/benchmark-host"],
-                    "nativeTestProjectIds": [],
+                    "managedTestProjectIds": [str(item["projectId"]) for item in managed_test_projects],
+                    "nativeTestProjectIds": [str(item["projectId"]) for item in native_test_projects],
                 }
             ],
         }
@@ -549,6 +582,135 @@ class BenchmarkCommandTests(unittest.TestCase):
         )
         self.assertFalse(bool(result["regressionFound"]))
 
+    def test_declared_benchmark_host_source_entry_uses_workspace_benchmark_host_assembly_name(self) -> None:
+        benchmark_module = load_module(BENCHMARK_MODULE_PATH, "chaos_benchmark_command_benchmark_host_source_entry")
+        repo_root = self._make_repo_root("benchmark-host-source-entry")
+        try:
+            self._write_workspace_benchmark_fixture(
+                repo_root,
+                subject_id="SolutionCorePack",
+                stable_id="solution-core::arith",
+                alias="arithmetic-bench",
+                entry_index=11,
+                assembly_name="CoreRuntimeBenchmarks",
+                declaring_type="CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry",
+                method_name="RunWorkload",
+                method_signature="RunWorkload()",
+            )
+
+            source_entry = benchmark_module._declared_benchmark_host_source_entry(
+                repo_root,
+                "SolutionCorePack",
+            )
+
+            self.assertEqual(
+                "SolutionCorePack.DeclaredBenchmarkHost/"
+                "Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute(System.Int32)",
+                source_entry,
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_declared_benchmark_host_source_entry_prefers_native_test_managed_host_for_native_matrix(self) -> None:
+        benchmark_module = load_module(BENCHMARK_MODULE_PATH, "chaos_benchmark_command_native_benchmark_host_source_entry")
+        repo_root = self._make_repo_root("native-benchmark-host-source-entry")
+        try:
+            self._write_workspace_benchmark_fixture(
+                repo_root,
+                subject_id="SolutionCorePack",
+                stable_id="solution-core::arith",
+                alias="arithmetic-bench",
+                entry_index=11,
+                assembly_name="CoreRuntimeBenchmarks",
+                declaring_type="CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry",
+                method_name="RunWorkload",
+                method_signature="RunWorkload()",
+                matrix_id="windows-native-perf",
+                native_host_assembly_name="SolutionCorePack.DeclaredBenchmarkNativeHost",
+            )
+
+            source_entry = benchmark_module._declared_benchmark_host_source_entry(
+                repo_root,
+                "SolutionCorePack",
+                matrix_id="windows-native-perf",
+            )
+
+            self.assertEqual(
+                "SolutionCorePack.DeclaredBenchmarkNativeHost/"
+                "Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute(System.Int32)",
+                source_entry,
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_declared_benchmark_host_source_entry_refreshes_workspace_when_native_binding_is_missing(self) -> None:
+        benchmark_module = load_module(BENCHMARK_MODULE_PATH, "chaos_benchmark_command_refresh_native_benchmark_host_source_entry")
+        repo_root = self._make_repo_root("refresh-native-benchmark-host-source-entry")
+        regenerate_calls: list[tuple[str, str, dict[str, object]]] = []
+        try:
+            self._write_workspace_benchmark_fixture(
+                repo_root,
+                subject_id="SolutionCorePack",
+                stable_id="solution-core::arith",
+                alias="arithmetic-bench",
+                entry_index=11,
+                assembly_name="CoreRuntimeBenchmarks",
+                declaring_type="CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry",
+                method_name="RunWorkload",
+                method_signature="RunWorkload()",
+                matrix_id="windows-native-perf",
+            )
+
+            class FakeProjectWorkspaceModule:
+                @staticmethod
+                def generate_subject_workspace(repo_root: Path, host_platform: str, options: dict[str, object], *, progress_callback=None):
+                    del progress_callback
+                    regenerate_calls.append((str(repo_root), host_platform, dict(options)))
+                    self._write_workspace_benchmark_fixture(
+                        repo_root,
+                        subject_id="SolutionCorePack",
+                        stable_id="solution-core::arith",
+                        alias="arithmetic-bench",
+                        entry_index=11,
+                        assembly_name="CoreRuntimeBenchmarks",
+                        declaring_type="CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry",
+                        method_name="RunWorkload",
+                        method_signature="RunWorkload()",
+                        matrix_id="windows-native-perf",
+                        native_host_assembly_name="SolutionCorePack.DeclaredBenchmarkNativeHost",
+                    )
+                    return {}
+
+            source_entry = benchmark_module._declared_benchmark_host_source_entry(
+                repo_root,
+                "SolutionCorePack",
+                matrix_id="windows-native-perf",
+                host_platform="windows-x64",
+                project_workspace_module=FakeProjectWorkspaceModule(),
+            )
+
+            self.assertEqual(1, len(regenerate_calls))
+            self.assertEqual(
+                (
+                    str(repo_root),
+                    "windows",
+                    {
+                        "id": "subject/SolutionCorePack",
+                        "matrix": "windows-native-perf",
+                        "variant": "PROFILE",
+                        "auto-refresh-missing-generated": True,
+                    },
+                ),
+                regenerate_calls[0],
+            )
+            self.assertEqual(
+                "SolutionCorePack.DeclaredBenchmarkNativeHost/"
+                "Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute(System.Int32)",
+                source_entry,
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
     def test_discover_declared_benchmark_cases_prefers_workspace_collection_when_available(self) -> None:
         benchmark_module = load_module(BENCHMARK_MODULE_PATH, "chaos_benchmark_command_workspace_collection")
         repo_root = self._make_repo_root("workspace-collection")
@@ -590,8 +752,8 @@ class BenchmarkCommandTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
-    def test_dispatch_record_skips_declared_case_when_case_modes_exclude_requested_mode(self) -> None:
-        benchmark_module = load_module(BENCHMARK_MODULE_PATH, "chaos_benchmark_command_case_mode_filter")
+    def test_dispatch_record_native_declared_cases_use_shared_native_helper(self) -> None:
+        benchmark_module = load_module(BENCHMARK_MODULE_PATH, "chaos_benchmark_command_native_shared_dispatch")
         repo_root = self._make_repo_root("case-mode-filter")
         try:
             self._write_subject_fixture(
@@ -654,7 +816,7 @@ class BenchmarkCommandTests(unittest.TestCase):
                         ],
                     }
 
-            scheduled_runs: list[tuple[str, str, str | None]] = []
+            scheduled_native_cases: list[str] = []
 
             def fake_load(name: str, path: Path):
                 del path
@@ -686,30 +848,35 @@ class BenchmarkCommandTests(unittest.TestCase):
                     },
                 ]
 
-            def fake_run_pipeline_and_record(
+            def fake_run_native_declared_benchmark_records(
                 *,
                 repo_root: Path,
                 subject_id: str,
-                mode: str,
                 device: dict[str, object],
                 records_mod: FakeRecordsModule,
                 host_platform: str,
-                benchmark_case: dict[str, object] | None = None,
-            ) -> dict[str, object]:
+                benchmark_cases: list[dict[str, object]],
+            ) -> list[dict[str, object]]:
                 del repo_root, device, records_mod, host_platform
-                scheduled_runs.append((subject_id, mode, None if benchmark_case is None else str(benchmark_case["alias"])))
-                return {
-                    "record": {
-                        "subject": subject_id,
-                        "mode": mode,
-                        "metrics": {"meanDurationMs": 1.0},
-                    },
-                    "regressionFound": False,
-                }
+                scheduled_native_cases.extend(str(item["alias"]) for item in benchmark_cases)
+                return [
+                    {
+                        "record": {
+                            "subject": subject_id,
+                            "mode": "native",
+                            "metrics": {"meanDurationMs": 1.0},
+                        },
+                        "regressionFound": False,
+                    }
+                ]
 
             with patch.object(benchmark_module, "_load", side_effect=fake_load):
                 with patch.object(benchmark_module, "_discover_declared_benchmark_cases", side_effect=fake_discover_declared_benchmark_cases):
-                    with patch.object(benchmark_module, "_run_pipeline_and_record", side_effect=fake_run_pipeline_and_record):
+                    with patch.object(
+                        benchmark_module,
+                        "_run_native_declared_benchmark_records",
+                        side_effect=fake_run_native_declared_benchmark_records,
+                    ):
                         exit_code = benchmark_module.dispatch(
                             ["--subject", "MixedExecutionFeaturePack", "--mode", "native", "--record"],
                             repo_root,
@@ -718,11 +885,8 @@ class BenchmarkCommandTests(unittest.TestCase):
 
             self.assertEqual(0, exit_code)
             self.assertEqual(
-                [
-                    ("MixedExecutionFeaturePack", "native", None),
-                    ("MixedExecutionFeaturePack", "native", "mixed-execution-native-bench"),
-                ],
-                scheduled_runs,
+                ["mixed-execution-native-bench"],
+                scheduled_native_cases,
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)

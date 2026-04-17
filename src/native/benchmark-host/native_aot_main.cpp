@@ -1,9 +1,10 @@
 #include <chrono>
+#include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 
-extern "C" int RunNativeAot(void);
+extern "C" int RunNativeAot(std::int32_t entryIndex);
 
 namespace {
 
@@ -23,6 +24,19 @@ int ParseIterations(int argc, char** argv) {
     return iterations;
 }
 
+std::int32_t ParseEntryIndex(int argc, char** argv) {
+    std::int32_t entry_index = 0;
+    for (int index = 1; index + 1 < argc; index += 2) {
+        if (std::strcmp(argv[index], "--entry-index") != 0) {
+            continue;
+        }
+
+        entry_index = static_cast<std::int32_t>(std::atoi(argv[index + 1]));
+    }
+
+    return entry_index;
+}
+
 long long NormalizeChecksum(long long checksum) {
     const long long normalized = checksum % 10000LL;
     return normalized < 0 ? -normalized : normalized;
@@ -32,10 +46,11 @@ long long NormalizeChecksum(long long checksum) {
 
 int main(int argc, char** argv) {
     const int iterations = ParseIterations(argc, argv);
+    const std::int32_t entry_index = ParseEntryIndex(argc, argv);
     const auto started = std::chrono::steady_clock::now();
     long long checksum = 0;
     for (int index = 0; index < iterations; ++index) {
-        checksum += static_cast<long long>(RunNativeAot());
+        checksum += static_cast<long long>(RunNativeAot(entry_index));
     }
     const auto elapsed = std::chrono::duration<double, std::milli>(
         std::chrono::steady_clock::now() - started);

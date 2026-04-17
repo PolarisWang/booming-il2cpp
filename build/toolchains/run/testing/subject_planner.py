@@ -169,7 +169,7 @@ def build_plan(
         or ""
     )
     if explicit_workload_entry:
-        if selected_workload_entry:
+        if source_entry is None and selected_workload_entry:
             selected_source["entry"] = selected_workload_entry
     elif selected_workload_entry and not str(selected_source.get("entry") or ""):
         selected_source["entry"] = selected_workload_entry

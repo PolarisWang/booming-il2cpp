@@ -29,17 +29,11 @@ internal static class StructMarshalingProofEntry
         };
 
         IntPtr buffer = Marshal.AllocHGlobal(Marshal.SizeOf<StructMarshalingRecord>());
-        try
-        {
-            Marshal.StructureToPtr(value, buffer, fDeleteOld: false);
-            StructMarshalingRecord roundTrip = Marshal.PtrToStructure<StructMarshalingRecord>(buffer);
+        Marshal.StructureToPtr(value, buffer, fDeleteOld: false);
+        StructMarshalingRecord roundTrip = Marshal.PtrToStructure<StructMarshalingRecord>(buffer);
 
-            Assert.Equal(42.0, roundTrip.Count + roundTrip.Ratio);
-        }
-        finally
-        {
-            Marshal.FreeHGlobal(buffer);
-        }
+        Marshal.FreeHGlobal(buffer);
+        Assert.Equal(42.0, roundTrip.Count + roundTrip.Ratio);
 
         return 0;
     }

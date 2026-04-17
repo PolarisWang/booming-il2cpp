@@ -271,7 +271,7 @@ public sealed partial class NativeAotLoweringPlanner
 			subjectId = typeNameOrSubjectId;
 			return true;
 		}
-		string[] array = (from candidate in _methodsBySubjectId.Keys.Select(GetMethodDeclaringTypeSubjectId).Distinct<string>(StringComparer.Ordinal)
+		string[] array = (from candidate in _methodsBySubjectId.Keys.Select(GetMethodDeclaringTypeSubjectId).Concat(_valueTypeSubjectIds).Distinct<string>(StringComparer.Ordinal)
 			where MatchesTypeName(candidate, typeNameOrSubjectId)
 			select candidate).OrderBy<string, string>((string candidate) => candidate, StringComparer.Ordinal).ToArray();
 		if (array.Length == 1)

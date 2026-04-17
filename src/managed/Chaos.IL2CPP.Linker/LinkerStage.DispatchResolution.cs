@@ -155,4 +155,83 @@ public sealed partial class LinkerStage
                 string.Equals(candidateInterfaceType.DefinitionSubjectId, interfaceType.DefinitionSubjectId, StringComparison.Ordinal));
     }
 
+    private static bool IsCompatibleVirtualDispatchTargetType(
+        ManagedTypeModel candidateType,
+        ManagedTypeModel slotType,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
+    {
+        return slotType.IsInterface
+            ? ImplementsInterface(candidateType, slotType, typeMap)
+            : DerivesFromOrMatchesType(candidateType, slotType, typeMap);
+    }
+
+    private static bool DerivesFromOrMatchesType(
+        ManagedTypeModel candidateType,
+        ManagedTypeModel slotType,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
+    {
+        var currentSubjectId = candidateType.SubjectId;
+        var currentDefinitionSubjectId = candidateType.DefinitionSubjectId;
+
+        while (!string.IsNullOrWhiteSpace(currentSubjectId))
+        {
+            if (MatchesTypeSubjectId(currentSubjectId, currentDefinitionSubjectId, slotType))
+            {
+                return true;
+            }
+
+            var baseTypeSubjectId = TryResolveBaseTypeSubjectId(currentSubjectId, currentDefinitionSubjectId, typeMap);
+            if (string.IsNullOrWhiteSpace(baseTypeSubjectId))
+            {
+                return false;
+            }
+
+            if (typeMap.TryGetValue(baseTypeSubjectId, out var baseType))
+            {
+                currentSubjectId = baseType.SubjectId;
+                currentDefinitionSubjectId = baseType.DefinitionSubjectId;
+                continue;
+            }
+
+            currentSubjectId = baseTypeSubjectId;
+            currentDefinitionSubjectId = baseTypeSubjectId;
+        }
+
+        return false;
+    }
+
+    private static string? TryResolveBaseTypeSubjectId(
+        string currentSubjectId,
+        string currentDefinitionSubjectId,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
+    {
+        if (typeMap.TryGetValue(currentSubjectId, out var currentType) &&
+            !string.IsNullOrWhiteSpace(currentType.BaseTypeSubjectId))
+        {
+            return currentType.BaseTypeSubjectId;
+        }
+
+        if (!string.IsNullOrWhiteSpace(currentDefinitionSubjectId) &&
+            typeMap.TryGetValue(currentDefinitionSubjectId, out var currentDefinitionType) &&
+            !string.IsNullOrWhiteSpace(currentDefinitionType.BaseTypeSubjectId))
+        {
+            return currentDefinitionType.BaseTypeSubjectId;
+        }
+
+        return null;
+    }
+
+    private static bool MatchesTypeSubjectId(
+        string? candidateSubjectId,
+        string? candidateDefinitionSubjectId,
+        ManagedTypeModel slotType)
+    {
+        return (!string.IsNullOrWhiteSpace(candidateSubjectId) &&
+                (string.Equals(candidateSubjectId, slotType.SubjectId, StringComparison.Ordinal) ||
+                 string.Equals(candidateSubjectId, slotType.DefinitionSubjectId, StringComparison.Ordinal))) ||
+               (!string.IsNullOrWhiteSpace(candidateDefinitionSubjectId) &&
+                (string.Equals(candidateDefinitionSubjectId, slotType.SubjectId, StringComparison.Ordinal) ||
+                 string.Equals(candidateDefinitionSubjectId, slotType.DefinitionSubjectId, StringComparison.Ordinal)));
+    }
+
 }

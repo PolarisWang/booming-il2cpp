@@ -19,6 +19,7 @@
   <ItemGroup>
     <InternalsVisibleTo Include="MixedExecutionFeaturePack.DeclaredProofHost" />
     <InternalsVisibleTo Include="MixedExecutionFeaturePack.DeclaredBenchmarkHost" />
+    <InternalsVisibleTo Include="MixedExecutionFeaturePack.DeclaredBenchmarkNativeHost" />
   </ItemGroup>
 </Project>
 

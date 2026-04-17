@@ -33,6 +33,7 @@ _BENCHMARK_MODE_FLAGS = {
     "interpreter": 1 << 2,
 }
 _ALL_BENCHMARK_MODE_FLAGS = sum(_BENCHMARK_MODE_FLAGS.values())
+_BENCHMARK_HOST_EXECUTE_PARAMETER_TYPES = ("System.Int32",)
 
 
 def _load(name: str, path: Path):
@@ -41,6 +42,11 @@ def _load(name: str, path: Path):
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)  # type: ignore[union-attr]
     return mod
+
+
+def _sanitize_identifier(value: str) -> str:
+    sanitized = "".join(character if character.isalnum() else "_" for character in str(value).strip())
+    return sanitized or "GeneratedHost"
 
 
 def _normalize_host_platform(host_platform: str) -> str:
@@ -241,6 +247,149 @@ def _declared_source_entry(entry: dict[str, Any]) -> str:
     return f"{assembly_name}/{type_name}::{method_signature}"
 
 
+def _declared_benchmark_host_source_entry(
+    repo_root: Path,
+    subject_id: str,
+    *,
+    matrix_id: str = "",
+    host_platform: str = "",
+    workspace_manifests_module: Any | None = None,
+    project_workspace_module: Any | None = None,
+) -> str:
+    testing_root = Path(__file__).resolve().parents[1] / "testing"
+    workspace_manifests_mod = workspace_manifests_module or _load(
+        "workspace_manifests",
+        testing_root / "workspace_manifests.py",
+    )
+    assembly_name = f"{subject_id}.DeclaredBenchmarkHost"
+    loaded_manifest = workspace_manifests_mod.load_subject_workspace_manifest(repo_root, subject_id)
+    if matrix_id and not _workspace_manifest_supports_native_benchmark_host(
+        loaded_manifest,
+        matrix_id=matrix_id,
+        workspace_manifests_module=workspace_manifests_mod,
+    ):
+        refreshed_manifest = _refresh_workspace_manifest_for_native_benchmark(
+            repo_root,
+            subject_id,
+            matrix_id=matrix_id,
+            host_platform=host_platform,
+            workspace_manifests_module=workspace_manifests_mod,
+            project_workspace_module=project_workspace_module,
+        )
+        if refreshed_manifest is not None:
+            loaded_manifest = refreshed_manifest
+    if loaded_manifest is not None:
+        _, manifest = loaded_manifest
+        managed_test_project = None
+        if matrix_id:
+            native_test_project = workspace_manifests_mod.find_native_test_project(
+                manifest,
+                matrix_id=matrix_id,
+                host_kind="benchmark-host",
+            )
+            managed_test_project_id = (
+                str(native_test_project.get("managedTestProjectId") or "").strip()
+                if isinstance(native_test_project, dict)
+                else ""
+            )
+            if managed_test_project_id and hasattr(workspace_manifests_mod, "find_managed_test_project_by_id"):
+                managed_test_project = workspace_manifests_mod.find_managed_test_project_by_id(
+                    manifest,
+                    project_id=managed_test_project_id,
+                )
+        if managed_test_project is None:
+            managed_test_project = workspace_manifests_mod.find_managed_test_project(
+                manifest,
+                host_kind="benchmark-host",
+            )
+        if isinstance(managed_test_project, dict):
+            candidate_assembly_name = str(managed_test_project.get("assemblyName") or "").strip()
+            if candidate_assembly_name:
+                assembly_name = candidate_assembly_name
+
+    sanitized_subject_id = _sanitize_identifier(subject_id)
+    namespace_name = f"Chaos.Generated.ManagedTests.{sanitized_subject_id}"
+    class_name = f"{sanitized_subject_id}DeclaredBenchmarkHost"
+    parameter_signature = ",".join(_BENCHMARK_HOST_EXECUTE_PARAMETER_TYPES)
+    return f"{assembly_name}/{namespace_name}.{class_name}::Execute({parameter_signature})"
+
+
+def _workspace_manifest_supports_native_benchmark_host(
+    loaded_manifest: tuple[Path, dict[str, Any]] | None,
+    *,
+    matrix_id: str,
+    workspace_manifests_module: Any,
+) -> bool:
+    if loaded_manifest is None:
+        return False
+
+    _, manifest = loaded_manifest
+    requested_matrix_id = str(matrix_id or "").strip()
+    if not requested_matrix_id:
+        return True
+
+    matrix_exists = any(
+        str(item.get("matrixId") or "").strip() == requested_matrix_id
+        for item in list(manifest.get("matrices") or [])
+        if isinstance(item, dict)
+    )
+    if not matrix_exists:
+        return False
+
+    native_test_project = workspace_manifests_module.find_native_test_project(
+        manifest,
+        matrix_id=requested_matrix_id,
+        host_kind="benchmark-host",
+    )
+    if not isinstance(native_test_project, dict):
+        return False
+
+    managed_test_project_id = str(native_test_project.get("managedTestProjectId") or "").strip()
+    if not managed_test_project_id:
+        return False
+
+    managed_test_project = None
+    if hasattr(workspace_manifests_module, "find_managed_test_project_by_id"):
+        managed_test_project = workspace_manifests_module.find_managed_test_project_by_id(
+            manifest,
+            project_id=managed_test_project_id,
+        )
+    if not isinstance(managed_test_project, dict):
+        return False
+
+    return bool(str(managed_test_project.get("assemblyName") or "").strip())
+
+
+def _refresh_workspace_manifest_for_native_benchmark(
+    repo_root: Path,
+    subject_id: str,
+    *,
+    matrix_id: str,
+    host_platform: str,
+    workspace_manifests_module: Any,
+    project_workspace_module: Any | None = None,
+) -> tuple[Path, dict[str, Any]] | None:
+    normalized_host_platform = _normalize_host_platform(host_platform)
+    if not matrix_id or not normalized_host_platform:
+        return workspace_manifests_module.load_subject_workspace_manifest(repo_root, subject_id)
+
+    project_workspace_mod = project_workspace_module or _load(
+        "project_workspace",
+        Path(__file__).resolve().parents[1] / "subject" / "project_workspace.py",
+    )
+    project_workspace_mod.generate_subject_workspace(
+        repo_root,
+        normalized_host_platform,
+        {
+            "id": f"subject/{subject_id}",
+            "matrix": matrix_id,
+            "variant": "PROFILE",
+            "auto-refresh-missing-generated": True,
+        },
+    )
+    return workspace_manifests_module.load_subject_workspace_manifest(repo_root, subject_id)
+
+
 def _supported_modes_from_mask(value: Any) -> list[str]:
     try:
         mask = int(value or 0)
@@ -278,6 +427,71 @@ def _record_benchmark_case_payload(benchmark_case: dict[str, Any]) -> dict[str, 
     if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
         payload["entryIndex"] = int(entry_index)
     return payload
+
+
+def _benchmark_case_supports_mode(benchmark_case: dict[str, Any], mode: str) -> bool:
+    supported_modes = [str(item) for item in list(benchmark_case.get("supportedModes") or _MODE_ORDER) if str(item)]
+    return mode in supported_modes
+
+
+def _declared_benchmark_entry_selection(benchmark_case: dict[str, Any]) -> dict[str, Any]:
+    payload: dict[str, Any] = {
+        "family": "declared-benchmark",
+        "stableId": str(benchmark_case.get("stableId") or ""),
+        "alias": str(benchmark_case.get("alias") or "") or str(benchmark_case.get("stableId") or ""),
+    }
+    entry_index = benchmark_case.get("entryIndex")
+    if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+        payload["entryIndex"] = int(entry_index)
+    return payload
+
+
+def _benchmark_case_run_fragment(benchmark_case: dict[str, Any]) -> str:
+    return _sanitize_identifier(
+        str(benchmark_case.get("alias") or benchmark_case.get("stableId") or "case")
+    ).lower()
+
+
+def _append_benchmark_record(
+    *,
+    repo_root: Path,
+    subject_id: str,
+    mode: str,
+    device: dict[str, Any],
+    records_mod: Any,
+    host_platform: str,
+    metrics: dict[str, Any],
+    regression_found: bool,
+    benchmark_case: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    import subprocess
+    import datetime
+
+    try:
+        git_out = subprocess.check_output(
+            ["git", "rev-parse", "--short", "HEAD"],
+            text=True,
+            cwd=repo_root,
+            timeout=5,
+        ).strip()
+    except Exception:
+        git_out = "unknown"
+
+    record: dict[str, Any] = {
+        "runId": f"{datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%d-%H%M%S')}-{subject_id}-{mode}",
+        "subject": subject_id,
+        "mode": mode,
+        "platform": str(host_platform),
+        "device": device,
+        "recordedAt": datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
+        "gitCommit": git_out,
+        "gitBranch": "main",
+        "metrics": dict(metrics),
+    }
+    if benchmark_case is not None:
+        record["benchmarkCase"] = _record_benchmark_case_payload(benchmark_case)
+    records_mod.append_record(repo_root, record)
+    return {"record": record, "regressionFound": regression_found}
 
 
 def _declared_benchmark_cases_from_catalog(catalog: dict[str, Any]) -> list[dict[str, Any]]:
@@ -353,6 +567,7 @@ def _run_subject_benchmark_pipeline(
     planner_module: Any | None = None,
     executor_module: Any | None = None,
     benchmark_case: dict[str, Any] | None = None,
+    source_entry: str | None = None,
 ) -> dict[str, Any]:
     testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
     subjects_mod = subjects_module or _load("subjects", testing_root / "subjects.py")
@@ -379,20 +594,9 @@ def _run_subject_benchmark_pipeline(
                 goal_id="perf.release",
                 matrix_id=matrix_id,
                 run_id=run_id,
-                source_entry=None,
+                source_entry=source_entry,
                 workload_entry=workload_entry,
-                entry_selection={
-                    "family": "declared-benchmark",
-                    "stableId": str(benchmark_case.get("stableId") or ""),
-                    "alias": str(benchmark_case.get("alias") or "") or str(benchmark_case.get("stableId") or ""),
-                    **(
-                        {"entryIndex": int(benchmark_case["entryIndex"])}
-                        if isinstance(benchmark_case.get("entryIndex"), int)
-                        and not isinstance(benchmark_case.get("entryIndex"), bool)
-                        and int(benchmark_case["entryIndex"]) >= 0
-                        else {}
-                    ),
-                },
+                entry_selection=_declared_benchmark_entry_selection(benchmark_case),
             )
             execution_result = executor_mod.execute_plan(
                 repo_root,
@@ -417,6 +621,9 @@ def _run_subject_benchmark_pipeline(
     return {
         "metrics": dict(performance["metrics"]),
         "regressionFound": performance["regressionStatus"] == "regressed",
+        "executionResult": execution_result,
+        "matrixId": matrix_id,
+        "runId": run_id,
     }
 
 
@@ -429,7 +636,20 @@ def _run_native_benchmark_pipeline(
     planner_module: Any | None = None,
     executor_module: Any | None = None,
     benchmark_case: dict[str, Any] | None = None,
+    source_entry: str | None = None,
 ) -> dict[str, Any]:
+    resolved_source_entry = source_entry
+    if benchmark_case is not None and not resolved_source_entry:
+        testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
+        subjects_mod = subjects_module or _load("subjects", testing_root / "subjects.py")
+        manifest = subjects_mod.load_subject_manifest(repo_root, subject_id)
+        matrix_id = _select_benchmark_matrix_id(manifest, mode="native", host_platform=host_platform)
+        resolved_source_entry = _declared_benchmark_host_source_entry(
+            repo_root,
+            subject_id,
+            matrix_id=matrix_id,
+            host_platform=host_platform,
+        )
     return _run_subject_benchmark_pipeline(
         repo_root=repo_root,
         subject_id=subject_id,
@@ -439,7 +659,256 @@ def _run_native_benchmark_pipeline(
         planner_module=planner_module,
         executor_module=executor_module,
         benchmark_case=benchmark_case,
+        source_entry=resolved_source_entry,
     )
+
+
+def _select_summary_benchmark_case(
+    manifest: dict[str, Any],
+    *,
+    benchmark_cases: list[dict[str, Any]],
+    mode: str,
+) -> dict[str, Any] | None:
+    supported_cases = [dict(item) for item in benchmark_cases if _benchmark_case_supports_mode(item, mode)]
+    if not supported_cases:
+        return None
+
+    manifest_workload_entry = str(manifest.get("workloadEntry") or "").strip()
+    if manifest_workload_entry:
+        for benchmark_case in supported_cases:
+            if str(benchmark_case.get("workloadEntry") or "").strip() == manifest_workload_entry:
+                return benchmark_case
+
+    return min(
+        supported_cases,
+        key=lambda item: (
+            str(item.get("stableId") or ""),
+            str(item.get("alias") or ""),
+        ),
+    )
+
+
+def _extract_stage_manifest_path(
+    execution_result: dict[str, Any],
+    *,
+    bucket: str,
+    kind: str = "",
+) -> str:
+    for stage_result in reversed(list(execution_result.get("stageResults") or [])):
+        if kind and str(stage_result.get("kind") or "") != kind:
+            continue
+        if bucket and str(stage_result.get("bucket") or "") != bucket:
+            continue
+        manifest_path = str(stage_result.get("manifestPath") or "").strip()
+        if manifest_path:
+            return manifest_path
+    return ""
+
+
+def _runtime_stage_from_plan(plan: dict[str, Any], *, preferred_kind: str) -> dict[str, Any] | None:
+    for stage in list(plan.get("stagePlan") or []):
+        if str(stage.get("kind") or "") == preferred_kind:
+            return dict(stage)
+    for stage in list(plan.get("stagePlan") or []):
+        if str(stage.get("bucket") or "") == "runtime":
+            return dict(stage)
+    return None
+
+
+def _run_native_benchmark_case_with_shared_build(
+    *,
+    repo_root: Path,
+    subject_id: str,
+    host_platform: str,
+    benchmark_case: dict[str, Any],
+    build_manifest_path: str,
+    matrix_id: str,
+    base_run_id: str,
+    planner_module: Any | None = None,
+    subject_workers_module: Any | None = None,
+    source_entry: str | None = None,
+) -> dict[str, Any]:
+    testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
+    planner_mod = planner_module or _load("subject_planner", testing_root / "subject_planner.py")
+    subject_workers_mod = subject_workers_module or _load("subject_workers", testing_root / "subject_workers.py")
+    resolved_source_entry = source_entry or _declared_benchmark_host_source_entry(
+        repo_root,
+        subject_id,
+        matrix_id=matrix_id,
+        host_platform=host_platform,
+    )
+    run_id = f"{base_run_id}-{_benchmark_case_run_fragment(benchmark_case)}"
+    plan = planner_mod.build_plan(
+        repo_root,
+        subject_id,
+        goal_id="perf.release",
+        matrix_id=matrix_id,
+        run_id=run_id,
+        source_entry=resolved_source_entry,
+        workload_entry=str(benchmark_case.get("workloadEntry") or ""),
+        entry_selection=_declared_benchmark_entry_selection(benchmark_case),
+    )
+    runtime_stage = _runtime_stage_from_plan(
+        plan,
+        preferred_kind=_preferred_runtime_stage_kind("native"),
+    )
+    if runtime_stage is None:
+        return {"error": f"native benchmark plan did not produce a runtime stage for {subject_id}"}
+
+    worker_result = subject_workers_mod.run_native_runtime_perf(
+        repo_root=repo_root,
+        request={
+            "selection": dict(plan["selection"]),
+            "upstream": {
+                "build": {
+                    "manifestPath": build_manifest_path,
+                }
+            },
+            "paths": dict(runtime_stage["paths"]),
+        },
+    )
+    if str(worker_result.get("status") or "") != "ok":
+        return {"error": str(worker_result.get("failure") or f"native benchmark execution failed for {subject_id}")}
+
+    performance = dict(dict(worker_result.get("details") or {}).get("performance") or {})
+    metrics = dict(performance.get("metrics") or {})
+    if not metrics:
+        return {"error": f"native benchmark did not produce runtime metrics for {subject_id}"}
+
+    return {
+        "metrics": metrics,
+        "regressionFound": str(performance.get("regressionStatus") or "") == "regressed",
+        "workerResult": worker_result,
+    }
+
+
+def _run_native_declared_benchmark_records(
+    *,
+    repo_root: Path,
+    subject_id: str,
+    device: dict[str, Any],
+    records_mod: Any,
+    host_platform: str,
+    benchmark_cases: list[dict[str, Any]],
+    subjects_module: Any | None = None,
+    planner_module: Any | None = None,
+    executor_module: Any | None = None,
+    subject_workers_module: Any | None = None,
+) -> list[dict[str, Any]]:
+    testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
+    subjects_mod = subjects_module or _load("subjects", testing_root / "subjects.py")
+    native_cases = [dict(item) for item in benchmark_cases if _benchmark_case_supports_mode(item, "native")]
+    if not native_cases:
+        return []
+
+    manifest = subjects_mod.load_subject_manifest(repo_root, subject_id)
+    summary_case = _select_summary_benchmark_case(
+        manifest,
+        benchmark_cases=native_cases,
+        mode="native",
+    )
+    if summary_case is None:
+        return []
+
+    source_entry = _declared_benchmark_host_source_entry(
+        repo_root,
+        subject_id,
+        matrix_id=_select_benchmark_matrix_id(manifest, mode="native", host_platform=host_platform),
+        host_platform=host_platform,
+    )
+    summary_pipeline_result = _run_native_benchmark_pipeline(
+        repo_root=repo_root,
+        subject_id=subject_id,
+        host_platform=host_platform,
+        subjects_module=subjects_mod,
+        planner_module=planner_module,
+        executor_module=executor_module,
+        benchmark_case=summary_case,
+        source_entry=source_entry,
+    )
+    if "error" in summary_pipeline_result:
+        return [summary_pipeline_result]
+
+    execution_result = dict(summary_pipeline_result.get("executionResult") or {})
+    build_manifest_path = ""
+    if len(native_cases) > 1:
+        build_manifest_path = _extract_stage_manifest_path(
+            execution_result,
+            bucket="build",
+            kind="build-target",
+        )
+        if not build_manifest_path:
+            return [{"error": f"native benchmark build did not produce a reusable build manifest for {subject_id}"}]
+
+    results = [
+        _append_benchmark_record(
+            repo_root=repo_root,
+            subject_id=subject_id,
+            mode="native",
+            device=device,
+            records_mod=records_mod,
+            host_platform=host_platform,
+            metrics=dict(summary_pipeline_result["metrics"]),
+            regression_found=bool(summary_pipeline_result["regressionFound"]),
+        ),
+        _append_benchmark_record(
+            repo_root=repo_root,
+            subject_id=subject_id,
+            mode="native",
+            device=device,
+            records_mod=records_mod,
+            host_platform=host_platform,
+            metrics=dict(summary_pipeline_result["metrics"]),
+            regression_found=bool(summary_pipeline_result["regressionFound"]),
+            benchmark_case=summary_case,
+        ),
+    ]
+
+    matrix_id = str(summary_pipeline_result.get("matrixId") or "")
+    base_run_id = str(summary_pipeline_result.get("runId") or f"benchmark-{subject_id}-native")
+    summary_case_key = (
+        str(summary_case.get("stableId") or ""),
+        str(summary_case.get("alias") or ""),
+    )
+    for benchmark_case in native_cases:
+        candidate_case_key = (
+            str(benchmark_case.get("stableId") or ""),
+            str(benchmark_case.get("alias") or ""),
+        )
+        if candidate_case_key == summary_case_key:
+            continue
+
+        case_pipeline_result = _run_native_benchmark_case_with_shared_build(
+            repo_root=repo_root,
+            subject_id=subject_id,
+            host_platform=host_platform,
+            benchmark_case=benchmark_case,
+            build_manifest_path=build_manifest_path,
+            matrix_id=matrix_id,
+            base_run_id=base_run_id,
+            planner_module=planner_module,
+            subject_workers_module=subject_workers_module,
+            source_entry=source_entry,
+        )
+        if "error" in case_pipeline_result:
+            results.append(case_pipeline_result)
+            continue
+
+        results.append(
+            _append_benchmark_record(
+                repo_root=repo_root,
+                subject_id=subject_id,
+                mode="native",
+                device=device,
+                records_mod=records_mod,
+                host_platform=host_platform,
+                metrics=dict(case_pipeline_result["metrics"]),
+                regression_found=bool(case_pipeline_result["regressionFound"]),
+                benchmark_case=benchmark_case,
+            )
+        )
+
+    return results
 
 
 def dispatch(args: list[str], repo_root: Path, host_platform: str) -> int:
@@ -550,6 +1019,28 @@ def dispatch(args: list[str], repo_root: Path, host_platform: str) -> int:
         for sid, modes_to_run in subject_run_plan:
             benchmark_cases = _discover_declared_benchmark_cases(repo_root, sid)
             for m in modes_to_run:
+                supported_benchmark_cases = [
+                    dict(item)
+                    for item in benchmark_cases
+                    if _benchmark_case_supports_mode(item, m)
+                ]
+                if m == "native" and supported_benchmark_cases:
+                    native_results = _run_native_declared_benchmark_records(
+                        repo_root=repo_root,
+                        subject_id=sid,
+                        device=device,
+                        records_mod=records_mod,
+                        host_platform=host_platform,
+                        benchmark_cases=supported_benchmark_cases,
+                    )
+                    for native_result in native_results:
+                        _print_result(sid, m, device, native_result)
+                        if native_result.get("error"):
+                            errors_found = True
+                        if native_result.get("regressionFound"):
+                            regression_found = True
+                    continue
+
                 result = _run_pipeline_and_record(
                     repo_root=repo_root,
                     subject_id=sid,
@@ -564,10 +1055,7 @@ def dispatch(args: list[str], repo_root: Path, host_platform: str) -> int:
                 if result.get("regressionFound"):
                     regression_found = True
 
-                for benchmark_case in benchmark_cases:
-                    supported_modes = list(benchmark_case.get("supportedModes") or _MODE_ORDER)
-                    if m not in supported_modes:
-                        continue
+                for benchmark_case in supported_benchmark_cases:
                     case_result = _run_pipeline_and_record(
                         repo_root=repo_root,
                         subject_id=sid,
@@ -624,9 +1112,6 @@ def _run_pipeline_and_record(
     All modes flow through the subject planner/executor pipeline so the same
     workload contract is consumed by managed, native and interpreter benchmarks.
     """
-    import subprocess
-    import datetime
-
     manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
     if not manifest_path.exists():
         return {"error": f"subject not found: {subject_id}"}
@@ -658,31 +1143,17 @@ def _run_pipeline_and_record(
     if not metrics:
         return {"error": f"{mode} benchmark returned no metrics for {subject_id}"}
 
-    try:
-        git_out = subprocess.check_output(
-            ["git", "rev-parse", "--short", "HEAD"],
-            text=True, cwd=repo_root, timeout=5,
-        ).strip()
-    except Exception:
-        git_out = "unknown"
-
-    plat_name = str(host_platform)
-    record: dict[str, Any] = {
-        "runId": f"{datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%d-%H%M%S')}-{subject_id}-{mode}",
-        "subject": subject_id,
-        "mode": mode,
-        "platform": plat_name,
-        "device": device,
-        "recordedAt": datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
-        "gitCommit": git_out,
-        "gitBranch": "main",
-        "metrics": metrics,
-    }
-    if benchmark_case is not None:
-        record["benchmarkCase"] = _record_benchmark_case_payload(benchmark_case)
-    records_mod.append_record(repo_root, record)
-
-    return {"record": record, "regressionFound": regression_found}
+    return _append_benchmark_record(
+        repo_root=repo_root,
+        subject_id=subject_id,
+        mode=mode,
+        device=device,
+        records_mod=records_mod,
+        host_platform=host_platform,
+        metrics=metrics,
+        regression_found=regression_found,
+        benchmark_case=benchmark_case,
+    )
 
 def _print_result(subject_id: str, mode: str, device: dict[str, Any], result: dict[str, Any]) -> None:
     if "error" in result:

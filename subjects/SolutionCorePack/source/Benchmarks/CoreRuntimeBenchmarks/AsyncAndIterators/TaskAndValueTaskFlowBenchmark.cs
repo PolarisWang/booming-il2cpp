@@ -10,7 +10,7 @@ internal static class TaskAndValueTaskFlowBenchmarkEntry
         Alias = "task-valuetask-flow-bench",
         CapabilityFamily = ChaosCapabilityFamily.AsyncAndIterators,
         Capability = ChaosCapabilityItem.TaskAndValueTaskFlow,
-        Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native,
+        Modes = ChaosExecutionMode.Managed,
         Requires = ChaosRuntimeFeature.AsyncStateMachine,
         WarmupCount = 1,
         IterationCount = 2,

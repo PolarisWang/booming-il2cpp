@@ -473,6 +473,36 @@ def _load_subject_manifest_payload(repo_root: Path, subject_id: str) -> dict[str
     return payload if isinstance(payload, dict) else None
 
 
+def _workspace_generation_dependency_paths() -> list[Path]:
+    testing_root = Path(__file__).resolve().parent
+    run_root = testing_root.parent
+    dependency_paths = [
+        Path(__file__).resolve(),
+        _PROJECT_WORKSPACE_MODULE_PATH,
+        testing_root / "compiled_catalog.py",
+        testing_root / "generated_managed_hosts.py",
+        testing_root / "generated_hotupdate_hosts.py",
+        testing_root / "template_assets.py",
+    ]
+    for templates_root in (
+        testing_root / "templates",
+        run_root / "subject" / "templates",
+    ):
+        if not templates_root.is_dir():
+            continue
+        dependency_paths.extend(candidate for candidate in sorted(templates_root.rglob("*")) if candidate.is_file())
+
+    unique_paths: list[Path] = []
+    seen_paths: set[str] = set()
+    for candidate in dependency_paths:
+        normalized = str(candidate.resolve())
+        if normalized in seen_paths:
+            continue
+        seen_paths.add(normalized)
+        unique_paths.append(candidate)
+    return unique_paths
+
+
 def _workspace_manifest_is_stale(
     repo_root: Path,
     *,
@@ -494,6 +524,16 @@ def _workspace_manifest_is_stale(
             return True
     except OSError:
         return True
+
+    # Workspace-managed hosts are generated from Python emitters and Scriban-like
+    # text templates under build/toolchains/run. When those change, the workspace
+    # has to be regenerated even if the subject source tree itself is untouched.
+    for dependency_path in _workspace_generation_dependency_paths():
+        try:
+            if dependency_path.stat().st_mtime > manifest_mtime:
+                return True
+        except OSError:
+            return True
 
     subject_manifest = _load_subject_manifest_payload(repo_root, subject_id)
     if subject_manifest is None:
@@ -595,7 +635,9 @@ def _resolve_workspace_managed_host(
         return None
     _, manifest = loaded_manifest
 
-    managed_test_project = workspace_manifests_module.find_managed_test_project(manifest, host_kind=host_kind)
+    managed_test_project = _resolve_native_benchmark_workspace_managed_host(manifest, selection)
+    if managed_test_project is None:
+        managed_test_project = workspace_manifests_module.find_managed_test_project(manifest, host_kind=host_kind)
     if managed_test_project is None:
         return None
 
@@ -610,6 +652,46 @@ def _resolve_workspace_managed_host(
         "projectPath": project_path,
         "collectionPath": collection_path,
     }
+
+
+def _resolve_native_benchmark_workspace_managed_host(
+    manifest: dict[str, Any],
+    selection: dict[str, Any],
+) -> dict[str, Any] | None:
+    entry_selection = _selection_declared_entry_selection(selection)
+    if str(entry_selection.get("family") or "") != "declared-benchmark":
+        return None
+
+    matrix_id = str(selection.get("matrixId") or "").strip()
+    if not matrix_id:
+        return None
+
+    native_test_project = workspace_manifests_module.find_native_test_project(
+        manifest,
+        matrix_id=matrix_id,
+        host_kind="benchmark-host",
+    )
+    if native_test_project is None:
+        return None
+
+    managed_test_project_id = str(native_test_project.get("managedTestProjectId") or "").strip()
+    if not managed_test_project_id:
+        return None
+
+    if hasattr(workspace_manifests_module, "find_managed_test_project_by_id"):
+        managed_test_project = workspace_manifests_module.find_managed_test_project_by_id(
+            manifest,
+            project_id=managed_test_project_id,
+        )
+        if managed_test_project is not None:
+            return managed_test_project
+
+    for item in list(manifest.get("managedTestProjects") or []):
+        if not isinstance(item, dict):
+            continue
+        if str(item.get("projectId") or "").strip() == managed_test_project_id:
+            return dict(item)
+    return None
 
 
 def _selection_uses_hotupdate_host(selection: dict[str, Any]) -> bool:
@@ -908,12 +990,11 @@ def _windows_native_cmake_context(repo_root: Path) -> tuple[str, dict[str, str] 
     return cmake_path or "cmake", developer_env or None, ninja_path
 
 
-def _materialize_windows_native_aot_cmake_source(
+def _materialize_windows_native_aot_cmake_source_at(
     repo_root: Path,
     *,
-    build_root: Path,
+    source_root: Path,
 ) -> Path:
-    source_root = build_root / "cmake-src"
     if source_root.exists():
         shutil.rmtree(source_root)
     (source_root / "generated").mkdir(parents=True, exist_ok=True)
@@ -931,6 +1012,61 @@ def _materialize_windows_native_aot_cmake_source(
         encoding="utf-8",
     )
     return source_root
+
+
+def _materialize_windows_native_aot_cmake_source(
+    repo_root: Path,
+    *,
+    build_root: Path,
+) -> Path:
+    return _materialize_windows_native_aot_cmake_source_at(
+        repo_root,
+        source_root=build_root / "cmake-src",
+    )
+
+
+def _materialize_workspace_windows_native_aot_cmake_source(
+    repo_root: Path,
+    *,
+    subject_id: str,
+    matrix_id: str,
+) -> Path:
+    workspace_source_root = repo_root / "solutions" / "subjects" / subject_id / "native-source" / matrix_id
+    return _materialize_windows_native_aot_cmake_source_at(
+        repo_root,
+        source_root=workspace_source_root,
+    )
+
+
+def _resolve_windows_native_aot_cmake_layout(
+    repo_root: Path,
+    *,
+    selection: dict[str, Any],
+    build_root: Path,
+    workspace_native_test_host: dict[str, str],
+    generator: str,
+) -> tuple[Path, Path]:
+    configure_root_text = str(workspace_native_test_host.get("configureRoot") or "").strip()
+    subject_id = str(selection.get("subjectId") or "").strip()
+    matrix_id = str(selection.get("matrixId") or "").strip()
+    if configure_root_text and subject_id and matrix_id:
+        cmake_source_root = _materialize_workspace_windows_native_aot_cmake_source(
+            repo_root,
+            subject_id=subject_id,
+            matrix_id=matrix_id,
+        )
+        cmake_binary_dir = _resolve(repo_root, configure_root_text)
+        cmake_binary_dir.parent.mkdir(parents=True, exist_ok=True)
+        return cmake_source_root, cmake_binary_dir
+
+    return (
+        _materialize_windows_native_aot_cmake_source(repo_root, build_root=build_root),
+        tooling_module.allocate_cmake_binary_dir(
+            build_root / "cmake",
+            host_platform="windows",
+            generator=generator,
+        ),
+    )
 
 
 def _materialize_windows_native_reference_cmake_source(
@@ -1560,13 +1696,14 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
         )
 
         out_root.mkdir(parents=True, exist_ok=True)
-        cmake_source_root = _materialize_windows_native_aot_cmake_source(repo_root, build_root=build_root)
         cmake_path, developer_env, _ninja_path = _windows_native_cmake_context(repo_root)
         generator = _windows_visual_studio_generator(repo_root)
         instance_spec = tooling_module.detect_visual_studio_instance_spec(generator)
-        cmake_binary_dir = tooling_module.allocate_cmake_binary_dir(
-            build_root / "cmake",
-            host_platform="windows",
+        cmake_source_root, cmake_binary_dir = _resolve_windows_native_aot_cmake_layout(
+            repo_root,
+            selection=selection,
+            build_root=build_root,
+            workspace_native_test_host=workspace_native_test_host,
             generator=generator,
         )
 
@@ -2797,10 +2934,17 @@ def _perf_harness_command(
     return arguments
 
 
-def _native_perf_command(*, native_executable_path: Path, iterations: int) -> list[str]:
+def _native_perf_command(
+    *,
+    native_executable_path: Path,
+    iterations: int,
+    entry_index: int | None = None,
+) -> list[str]:
     arguments = [str(native_executable_path)]
     if iterations > 1:
         arguments.extend(["--iterations", str(iterations)])
+    if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+        arguments.extend(["--entry-index", str(entry_index)])
     return arguments
 
 
@@ -3030,6 +3174,14 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
         validation_spec=validation_spec,
         default_iterations=1,
     )
+    declared_entry_selection = _selection_declared_entry_selection(selection)
+    collection_entry_index = declared_entry_selection.get("entryIndex")
+    if not (isinstance(collection_entry_index, int) and not isinstance(collection_entry_index, bool) and collection_entry_index >= 0):
+        candidate_entry_index = declared_benchmark.get("entryIndex")
+        if isinstance(candidate_entry_index, int) and not isinstance(candidate_entry_index, bool) and candidate_entry_index >= 0:
+            collection_entry_index = int(candidate_entry_index)
+        else:
+            collection_entry_index = None
     output_paths = [str(value) for value in list(build_manifest.get("outputs") or []) if str(value)]
     if not output_paths:
         raise RuntimeError("native perf build manifest missing outputs")
@@ -3060,7 +3212,11 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
         )
         started = time.perf_counter()
         completed = run_process(
-            _native_perf_command(native_executable_path=native_executable_path, iterations=iterations),
+            _native_perf_command(
+                native_executable_path=native_executable_path,
+                iterations=iterations,
+                entry_index=collection_entry_index,
+            ),
             cwd=repo_root,
         )
         duration_ms = round((time.perf_counter() - started) * 1000, 3)
@@ -3177,6 +3333,8 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
         manifest["collectionPath"] = collection_path
     if dispatch_manifest_path:
         manifest["dispatchManifestPath"] = dispatch_manifest_path
+    if isinstance(collection_entry_index, int) and collection_entry_index >= 0:
+        manifest["entryIndex"] = int(collection_entry_index)
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
 
     if last_exit_code != 0:

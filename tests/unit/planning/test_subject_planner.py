@@ -578,6 +578,59 @@ class SubjectPlannerTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_planner_preserves_explicit_source_entry_when_workload_entry_is_also_provided(self) -> None:
+        planner_module = load_module(
+            PLANNER_MODULE_PATH,
+            "chaos_subject_planner_preserve_explicit_source_entry_with_workload_override",
+        )
+        subject_id = "FixtureBenchmarkHostPerfSubject"
+        benchmark_host_entry = (
+            f"{subject_id}.DeclaredBenchmarkHost/"
+            f"Chaos.Generated.ManagedTests.{subject_id}.{subject_id}DeclaredBenchmarkHost::Execute(System.Int32)"
+        )
+        workload_entry = f"{subject_id}/Benchmarks::RunHotPath()"
+        repo_root, manifest = create_subject_repo(
+            "preserve-explicit-source-entry-with-workload",
+            build_solution_style_managed_perf_subject_manifest(
+                subject_id,
+                source_entry=f"{subject_id}/Program::Main()",
+                workload_entry=f"{subject_id}/Benchmarks::RunDefault()",
+            ),
+        )
+
+        try:
+            plan = planner_module.build_plan(
+                repo_root,
+                subject_id,
+                goal_id="perf.release",
+                matrix_id="windows-managed-perf",
+                run_id="20260417-preserve-explicit-source-entry-001",
+                source_entry=benchmark_host_entry,
+                workload_entry=workload_entry,
+                entry_selection={
+                    "family": "declared-benchmark",
+                    "stableId": "fixture-benchmark-hot-path",
+                    "alias": "hot-path",
+                    "entryIndex": 7,
+                },
+            )
+
+            self.assertEqual(str(manifest["subjectId"]), plan["selection"]["subjectId"])
+            self.assertEqual(str(manifest["source"]["path"]), plan["selection"]["source"]["path"])
+            self.assertEqual(benchmark_host_entry, plan["selection"]["source"]["entry"])
+            self.assertEqual(workload_entry, plan["selection"]["workloadEntry"])
+            self.assertEqual(
+                {
+                    "family": "declared-benchmark",
+                    "stableId": "fixture-benchmark-hot-path",
+                    "alias": "hot-path",
+                    "entryIndex": 7,
+                },
+                plan["selection"]["entrySelection"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
     def test_stage_fingerprint_changes_when_declared_entry_selection_changes(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_declared_entry_fingerprint")
         repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"declared-entry-selection-{uuid.uuid4().hex}"

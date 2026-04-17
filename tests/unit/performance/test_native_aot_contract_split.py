@@ -15,8 +15,19 @@ BENCH_ARITHMETIC_MANIFEST_PATH = REPO_ROOT / "subjects" / "SolutionCorePack" / "
 SUBJECT_WORKERS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_workers.py"
 SUBJECT_EXECUTOR_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_executor.py"
 MANAGED_CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
+MANAGED_ARTIFACT_MODELS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureArtifactModels.cs"
 DRIVER_ENTRY_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "DriverEntry.cs"
 CODEGEN_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "CodeGenStage.cs"
+NATIVE_AOT_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeAotLoweringPlanner.cs"
+NATIVE_AOT_METHOD_EMISSION_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Emission" / "NativeAotLoweringPlanner.MethodEmission.cs"
+)
+NATIVE_AOT_TRANSLATION_TEMPLATE_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeAot.TranslationUnit.cpp.scriban"
+)
+NATIVE_AOT_LOWERING_PLAN_SAMPLE_PATH = (
+    REPO_ROOT / "tests" / "contracts" / "analysis" / "v0" / "samples" / "native-aot.lowering-plan.min.json"
+)
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase-b-aot-contract-split"
 
 
@@ -130,7 +141,6 @@ class PhaseBAotContractSplitTests(unittest.TestCase):
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
             self.assertEqual(subject_id, manifest["subjectId"])
             self.assertEqual("generated", manifest["bucket"])
-            self.assertEqual(f"{subject_id}/Program::RunWorkload()", manifest["workloadEntry"])
             self.assertEqual(
                 subject_run_path(subject_id, run_id, "analysis", "generated", "generated", "native-aot.generated.cpp"),
                 manifest["generatedSourcePath"],
@@ -145,6 +155,7 @@ class PhaseBAotContractSplitTests(unittest.TestCase):
             )
             self.assertNotIn("nativeReferenceManifestPath", manifest)
             self.assertNotIn("nativeReferencePlanPath", manifest)
+            self.assertNotIn("workloadEntry", manifest)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -176,14 +187,15 @@ class PhaseBAotContractSplitTests(unittest.TestCase):
 
     def test_managed_sources_freeze_native_aot_contract_split_markers(self) -> None:
         contracts_source = MANAGED_CONTRACTS_PATH.read_text(encoding="utf-8")
+        artifact_models_source = MANAGED_ARTIFACT_MODELS_PATH.read_text(encoding="utf-8")
         driver_source = DRIVER_ENTRY_PATH.read_text(encoding="utf-8")
         codegen_source = CODEGEN_STAGE_PATH.read_text(encoding="utf-8")
 
         self.assertIn('NativeAotLoweringPlan = "native-aot.lowering-plan.json"', contracts_source)
-        self.assertIn("public sealed record NativeAotRequest", contracts_source)
-        self.assertIn("public sealed record NativeAotLoweringPlanArtifact", contracts_source)
-        self.assertIn("public sealed record NativeAotManifestArtifact", contracts_source)
-        self.assertIn("public sealed record NativeAotResult", contracts_source)
+        self.assertIn("public sealed record NativeAotRequest", artifact_models_source)
+        self.assertIn("public sealed record NativeAotLoweringPlanArtifact", artifact_models_source)
+        self.assertIn("public sealed record NativeAotManifestArtifact", artifact_models_source)
+        self.assertIn("public sealed record NativeAotResult", artifact_models_source)
 
         self.assertIn('"emit-native-aot"', driver_source)
         self.assertIn("RunLegacyEmitNativeAot", driver_source)
@@ -192,6 +204,27 @@ class PhaseBAotContractSplitTests(unittest.TestCase):
         self.assertIn("NativeAotLoweringPlanArtifact", codegen_source)
         self.assertIn("CreateNativeAotLoweringPlan(", codegen_source)
         self.assertIn("NativeAotLoweringPlan =", codegen_source)
+
+    def test_native_aot_shared_benchmark_host_contract_supports_int32_entry_bridge(self) -> None:
+        planner_source = NATIVE_AOT_PLANNER_PATH.read_text(encoding="utf-8")
+        method_emission_source = NATIVE_AOT_METHOD_EMISSION_PATH.read_text(encoding="utf-8")
+        template_source = NATIVE_AOT_TRANSLATION_TEMPLATE_PATH.read_text(encoding="utf-8")
+        lowering_plan_sample = json.loads(NATIVE_AOT_LOWERING_PLAN_SAMPLE_PATH.read_text(encoding="utf-8"))
+
+        self.assertIn(
+            "supports only zero-parameter or single-int32 entry methods",
+            planner_source,
+        )
+        self.assertIn(
+            "supports only zero-parameter or single-int32 entry methods",
+            method_emission_source,
+        )
+        self.assertNotIn("must not take parameters", method_emission_source)
+        self.assertIn(
+            'extern "C" int {{ native_entry_function_name }}(std::int32_t chaos_entry_index)',
+            template_source,
+        )
+        self.assertEqual("int(int32)", lowering_plan_sample["workloadAbi"])
 
 
 if __name__ == "__main__":

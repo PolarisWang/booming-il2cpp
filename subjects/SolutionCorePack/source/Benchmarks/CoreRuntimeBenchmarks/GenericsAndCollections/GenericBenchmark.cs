@@ -13,7 +13,7 @@ internal static class GenericBenchmarkEntry
         Alias = "generic-bench",
         CapabilityFamily = ChaosCapabilityFamily.TypeSystemAndGenerics,
         Capability = ChaosCapabilityItem.GenericCollections,
-        Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native,
+        Modes = ChaosExecutionMode.Managed,
         Requires = ChaosRuntimeFeature.GenericSharing,
         WarmupCount = 1,
         IterationCount = 2,

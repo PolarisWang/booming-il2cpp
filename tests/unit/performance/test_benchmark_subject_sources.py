@@ -154,6 +154,7 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
             self.assertTrue(path.is_file(), msg=f"missing solution core perf asset: {path}")
 
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        project_source = project_path.read_text(encoding="utf-8")
         arithmetic_source = arithmetic_path.read_text(encoding="utf-8")
         allocation_source = allocation_path.read_text(encoding="utf-8")
         dispatch_source = dispatch_path.read_text(encoding="utf-8")
@@ -186,6 +187,8 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         )
         managed_perf_matrix = next(matrix for matrix in manifest["environmentMatrices"] if matrix["matrixId"] == "windows-managed-perf")
         native_perf_matrix = next(matrix for matrix in manifest["environmentMatrices"] if matrix["matrixId"] == "windows-native-perf")
+        self.assertIn('<InternalsVisibleTo Include="SolutionCorePack.DeclaredBenchmarkHost" />', project_source)
+        self.assertIn('<InternalsVisibleTo Include="SolutionCorePack.DeclaredBenchmarkNativeHost" />', project_source)
         self.assertEqual(benchmark_project_path, managed_perf_matrix["source"]["primaryProjectPath"])
         self.assertEqual(benchmark_project_path, native_perf_matrix["source"]["primaryProjectPath"])
         self.assertEqual("CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()", managed_perf_matrix["source"]["entry"])
@@ -209,7 +212,7 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn("ChaosBenchmark(", dispatch_source)
         self.assertIn('Alias = "dispatch-bench"', dispatch_source)
         self.assertIn("ChaosBenchmarkCategory.RuntimeDispatch", dispatch_source)
-        self.assertIn("Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native", dispatch_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", dispatch_source)
         self.assertIn("DispatchShape first = new DispatchCircle(3.0);", dispatch_source)
         self.assertIn("(i & 3) switch", dispatch_source)
         self.assertNotIn("DispatchShape[] shapes", dispatch_source)
@@ -218,7 +221,7 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
 
         self.assertIn("ChaosBenchmark(", generic_source)
         self.assertIn('Alias = "generic-bench"', generic_source)
-        self.assertIn("Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native", generic_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", generic_source)
         self.assertIn("ChaosRuntimeFeature.GenericSharing", generic_source)
         self.assertIn("Dictionary<string, int>", generic_source)
         self.assertIn("public static int RunWorkload()", generic_source)
@@ -234,14 +237,9 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
             (delegate_callback_source, "delegate-callback-interop-bench"),
             (generic_sharing_boundary_source, "generic-sharing-boundary-bench"),
             (required_instantiation_source, "required-instantiation-closure-bench"),
-            (native_call_interop_source, "native-call-interop-bench"),
             (string_utf8_marshaling_source, "string-utf8-marshaling-bench"),
             (struct_marshaling_source, "struct-marshaling-bench"),
-            (task_flow_source, "task-valuetask-flow-bench"),
-            (member_metadata_lookup_source, "member-metadata-lookup-bench"),
             (function_pointer_source, "function-pointer-bench"),
-            (span_memory_source, "span-memory-bench"),
-            (unsafe_pointer_source, "unsafe-pointer-bench"),
         ]:
             self.assertIn("ChaosBenchmark(", source_text)
             self.assertIn(f'Alias = "{alias}"', source_text)
@@ -251,13 +249,39 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertIn('Alias = "task-valuetask-flow-bench"', task_flow_source)
         self.assertIn("ChaosCapabilityItem.TaskAndValueTaskFlow", task_flow_source)
         self.assertIn("ChaosRuntimeFeature.AsyncStateMachine", task_flow_source)
-        self.assertIn("Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native", task_flow_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", task_flow_source)
 
         self.assertIn("ChaosBenchmark(", task_scheduling_source)
         self.assertIn('Alias = "task-scheduling-bench"', task_scheduling_source)
         self.assertIn("ChaosCapabilityItem.TaskScheduling", task_scheduling_source)
         self.assertIn("ChaosRuntimeFeature.Threading | ChaosRuntimeFeature.Synchronization", task_scheduling_source)
-        self.assertIn("Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native", task_scheduling_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", task_scheduling_source)
+        self.assertIn("task.GetAwaiter().GetResult() + 1", task_scheduling_source)
+        self.assertNotIn("task.Result + 1", task_scheduling_source)
+
+        self.assertIn("ChaosBenchmark(", unsafe_pointer_source)
+        self.assertIn('Alias = "unsafe-pointer-bench"', unsafe_pointer_source)
+        self.assertIn("ChaosCapabilityItem.UnsafePointer", unsafe_pointer_source)
+        self.assertIn("ChaosRuntimeFeature.UnsafePointer", unsafe_pointer_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", unsafe_pointer_source)
+
+        self.assertIn("ChaosBenchmark(", span_memory_source)
+        self.assertIn('Alias = "span-memory-bench"', span_memory_source)
+        self.assertIn("ChaosCapabilityItem.SpanAndMemory", span_memory_source)
+        self.assertIn("ChaosRuntimeFeature.SpanMemory", span_memory_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", span_memory_source)
+
+        self.assertIn("ChaosBenchmark(", member_metadata_lookup_source)
+        self.assertIn('Alias = "member-metadata-lookup-bench"', member_metadata_lookup_source)
+        self.assertIn("ChaosCapabilityItem.MemberMetadataLookup", member_metadata_lookup_source)
+        self.assertIn("ChaosRuntimeFeature.Reflection", member_metadata_lookup_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", member_metadata_lookup_source)
+
+        self.assertIn("ChaosBenchmark(", native_call_interop_source)
+        self.assertIn('Alias = "native-call-interop-bench"', native_call_interop_source)
+        self.assertIn("ChaosCapabilityItem.NativeCallInterop", native_call_interop_source)
+        self.assertIn("ChaosRuntimeFeature.NativeInterop", native_call_interop_source)
+        self.assertIn("Modes = ChaosExecutionMode.Managed", native_call_interop_source)
 
         self.assertIn("ChaosBenchmark(", monitor_locking_source)
         self.assertIn('Alias = "monitor-locking-bench"', monitor_locking_source)
@@ -360,6 +384,7 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
             self.assertTrue(path.is_file(), msg=f"missing hot-update host pack asset: {path}")
 
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        project_source = project_path.read_text(encoding="utf-8")
         program_source = program_path.read_text(encoding="utf-8")
         skeleton_source = skeleton_path.read_text(encoding="utf-8")
         patch_callback_source = patch_callback_path.read_text(encoding="utf-8")
@@ -516,6 +541,7 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
             self.assertTrue(path.is_file(), msg=f"missing mixed execution feature pack asset: {path}")
 
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        project_source = project_path.read_text(encoding="utf-8")
         program_source = program_path.read_text(encoding="utf-8")
         proof_source = proof_path.read_text(encoding="utf-8")
         arithmetic_proof_source = arithmetic_proof_path.read_text(encoding="utf-8")
@@ -533,6 +559,8 @@ class BenchmarkSubjectSourceTests(unittest.TestCase):
         self.assertEqual("require", manifest["testDeclarationMode"])
         self.assertEqual("MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
         self.assertEqual("dotnet-solution", manifest["sourceModel"])
+        self.assertIn('<InternalsVisibleTo Include="MixedExecutionFeaturePack.DeclaredBenchmarkHost" />', project_source)
+        self.assertIn('<InternalsVisibleTo Include="MixedExecutionFeaturePack.DeclaredBenchmarkNativeHost" />', project_source)
         archetype_matrix = next(
             matrix for matrix in manifest["environmentMatrices"] if matrix["matrixId"] == "windows-archetype-mixed-bridge-managed-output"
         )

@@ -23,13 +23,11 @@ internal static class StringAndUtf8MarshalingBenchmarkEntry
         for (int i = 0; i < 64; i++)
         {
             IntPtr buffer = Marshal.StringToCoTaskMemUTF8("marshal-" + i);
-            try
+            string? value = Marshal.PtrToStringUTF8(buffer);
+            Marshal.FreeCoTaskMem(buffer);
+            if (value is not null)
             {
-                checksum += Marshal.PtrToStringUTF8(buffer)?.Length ?? 0;
-            }
-            finally
-            {
-                Marshal.FreeCoTaskMem(buffer);
+                checksum += value.Length;
             }
         }
 

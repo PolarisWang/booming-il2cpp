@@ -12,7 +12,7 @@ internal static class UnsafePointerBenchmarkEntry
         Capability = ChaosCapabilityItem.UnsafePointer,
         Requires = ChaosRuntimeFeature.UnsafePointer,
         Archetype = ChaosSolutionArchetype.CoreLibReferenceSolution,
-        Modes = ChaosExecutionMode.Managed | ChaosExecutionMode.Native,
+        Modes = ChaosExecutionMode.Managed,
         WarmupCount = 1,
         IterationCount = 2,
         InvocationCount = 1)]

@@ -19,8 +19,8 @@ active: false
 
 ## 关键文档
 
-- parent_status: `docs/dev/in-progress/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/STATUS.md`
-- parent_roadmap: `docs/dev/in-progress/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/roadmap-v1-01.md`
+- parent_status: `docs/dev/abandoned/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/STATUS.md`
+- parent_roadmap: `docs/dev/abandoned/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/roadmap-v1-01.md`
 - design: `docs/dev/completed/20260416-04-phase-2-aot-core-ir-semantic-surface-expansion/design-v1-02.md`
 - plan: `docs/dev/completed/20260416-04-phase-2-aot-core-ir-semantic-surface-expansion/plan-v1-02.md`
 - progress_note: `docs/dev/completed/20260416-04-phase-2-aot-core-ir-semantic-surface-expansion/notes/progress-20260416-1036.md`

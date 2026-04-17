@@ -18,8 +18,8 @@ Status: completed
 
 - `tests/unit/compatibility/test_phase1_loader_vararg_decode.py`
 - `src/managed/Chaos.IL2CPP.Loader/LoaderStage.cs`
-- `docs/dev/in-progress/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/STATUS.md`
-- `docs/dev/in-progress/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/roadmap-v1-01.md`
+- `docs/dev/abandoned/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/STATUS.md`
+- `docs/dev/abandoned/20260416-01-aot-core-ir-gap-audit-and-next-expansion-roadmap/roadmap-v1-01.md`
 
 ## 验证命令
 
