@@ -4,6 +4,13 @@ import json
 import unittest
 from pathlib import Path
 
+from tests.support import (
+    read_contracts_source,
+    read_linker_stage_source,
+    read_loader_stage_source,
+    read_native_reference_planner_source,
+)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
@@ -22,6 +29,14 @@ SEMANTIC_WORLD_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.SemanticWorl
 LINKER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Linker" / "LinkerStage.cs"
 LOWERING_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceLoweringPlanner.cs"
 EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceProofEmitter.cs"
+CATALOG_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofCatalog.cs"
+)
 TEMPLATE_PATH = (
     REPO_ROOT
     / "src"
@@ -65,10 +80,10 @@ class Phase2MarshalingProofTests(unittest.TestCase):
         self.assertIn("internal static class MarshalingProofEntry", source)
 
     def test_contract_loader_semantic_and_linker_lock_marshaling_surface(self) -> None:
-        contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")
-        loader_source = LOADER_STAGE_PATH.read_text(encoding="utf-8")
+        contracts_source = read_contracts_source(REPO_ROOT)
+        loader_source = read_loader_stage_source(REPO_ROOT)
         semantic_world_source = SEMANTIC_WORLD_PATH.read_text(encoding="utf-8")
-        linker_source = LINKER_STAGE_PATH.read_text(encoding="utf-8")
+        linker_source = read_linker_stage_source(REPO_ROOT)
 
         self.assertIn("public bool IsUnmanagedCallersOnly { get; init; }", contracts_source)
         self.assertIn("HasUnmanagedCallersOnlyAttribute(", loader_source)
@@ -78,16 +93,18 @@ class Phase2MarshalingProofTests(unittest.TestCase):
         self.assertIn("utf8-string-marshal", linker_source)
 
     def test_codegen_surface_freezes_marshaling_lowering_family(self) -> None:
-        planner_source = LOWERING_PLANNER_PATH.read_text(encoding="utf-8")
+        planner_source = read_native_reference_planner_source(REPO_ROOT)
         emitter_source = EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = CATALOG_PATH.read_text(encoding="utf-8")
 
         self.assertTrue(TEMPLATE_PATH.is_file(), msg=f"missing marshaling template: {TEMPLATE_PATH}")
         template_source = TEMPLATE_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("interop.marshaling-utf8-export.minimal", planner_source)
+        self.assertIn("interop.marshaling-utf8-export.minimal", catalog_source)
+        self.assertIn("NativeReferenceProofCatalog.MarshalingUtf8ExportMinimal", planner_source)
         self.assertIn("MatchesMarshalingUtf8ExportCandidate(", planner_source)
         self.assertIn("TryCreateMarshalingUtf8ExportLoweringPlan(", planner_source)
-        self.assertIn("interop.marshaling-utf8-export.minimal", emitter_source)
+        self.assertIn("NativeReferenceProofCatalog.MarshalingUtf8ExportMinimal", emitter_source)
         self.assertIn("case MarshalingUtf8ExportMinimal:", emitter_source)
         self.assertIn("marshal-ok", template_source)
         self.assertIn("export-ok", template_source)

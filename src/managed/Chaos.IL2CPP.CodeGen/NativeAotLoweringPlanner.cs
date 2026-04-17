@@ -1,13 +1,149 @@
 using System.Globalization;
+using System.Reflection;
+using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.Json;
 using Chaos.IL2CPP.Contracts;
 
 namespace Chaos.IL2CPP.CodeGen;
 
-public sealed class NativeAotLoweringPlanner
+public sealed partial class NativeAotLoweringPlanner
 {
     private const string OverflowExceptionTypeSubjectId = "System.Private.CoreLib/System.OverflowException";
+    private const string ObjectTypeSubjectId = "System.Private.CoreLib/System.Object";
+    private const string ObjectCtorMethodSubjectId = "System.Private.CoreLib/System.Object::.ctor()";
+    private const string DelegateTypeSubjectId = "System.Private.CoreLib/System.Delegate";
+    private const string MulticastDelegateTypeSubjectId = "System.Private.CoreLib/System.MulticastDelegate";
+    private const string StringTypeSubjectId = "System.Private.CoreLib/System.String";
+    private const string PairStringConcatMethodSubjectId =
+        "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
+    private const string QuadStringConcatMethodSubjectId =
+        "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String,System.String)";
+    private const string StringEqualityMethodSubjectId =
+        "System.Private.CoreLib/System.String::op_Equality(System.String,System.String)";
+    private const string StringStartsWithComparisonMethodSubjectId =
+        "System.Private.CoreLib/System.String::StartsWith(System.String,System.StringComparison)";
+    private const string StringContainsComparisonMethodSubjectId =
+        "System.Private.CoreLib/System.String::Contains(System.String,System.StringComparison)";
+    private const string StringJoinStringEnumerableMethodSubjectId =
+        "System.Private.CoreLib/System.String::Join(System.String,System.Collections.Generic.IEnumerable<System.String>)";
+    private const string StringJoinGenericEnumerableMethodPrefix =
+        "System.Private.CoreLib/System.String::Join<";
+    private const string ExceptionCtorWithMessageMethodSubjectId =
+        "System.Private.CoreLib/System.Exception::.ctor(System.String)";
+    private const string InvalidOperationExceptionCtorWithMessageMethodSubjectId =
+        "System.Private.CoreLib/System.InvalidOperationException::.ctor(System.String)";
+    private const string ArgumentOutOfRangeExceptionCtorWithParamNameAndMessageMethodSubjectId =
+        "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor(System.String,System.String)";
+    private const string ExceptionGetMessageMethodSubjectId =
+        "System.Private.CoreLib/System.Exception::get_Message()";
+    private const string ArgumentExceptionGetParamNameMethodSubjectId =
+        "System.Private.CoreLib/System.ArgumentException::get_ParamName()";
+    private const string TypeTypeSubjectId = "System.Private.CoreLib/System.Type";
+    private const string MethodInfoTypeSubjectId = "System.Private.CoreLib/System.Reflection.MethodInfo";
+    private const string ConstructorInfoTypeSubjectId = "System.Private.CoreLib/System.Reflection.ConstructorInfo";
+    private const string FieldInfoTypeSubjectId = "System.Private.CoreLib/System.Reflection.FieldInfo";
+    private const string ParameterInfoTypeSubjectId = "System.Private.CoreLib/System.Reflection.ParameterInfo";
+    private const string AssemblyTypeSubjectId = "System.Private.CoreLib/System.Reflection.Assembly";
+    private const string AssemblyNameTypeSubjectId = "System.Private.CoreLib/System.Reflection.AssemblyName";
+    private const string MemberInfoIsDefinedMethodSubjectId =
+        "System.Private.CoreLib/System.Reflection.MemberInfo::IsDefined(System.Type,System.Boolean)";
+    private const string MemberInfoGetNameMethodSubjectId =
+        "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name()";
+    private const string MemberInfoGetDeclaringTypeMethodSubjectId =
+        "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType()";
+    private const string MemberInfoGetMetadataTokenMethodSubjectId =
+        "System.Private.CoreLib/System.Reflection.MemberInfo::get_MetadataToken()";
+    private const string ObjectEqualsMethodSubjectId = "System.Private.CoreLib/System.Object::Equals(System.Object)";
+    private const string EnvironmentGetCurrentManagedThreadIdMethodSubjectId =
+        "System.Private.CoreLib/System.Environment::get_CurrentManagedThreadId()";
+    private const string GcCollectMethodSubjectId = "System.Private.CoreLib/System.GC::Collect()";
+    private const string GcWaitForPendingFinalizersMethodSubjectId = "System.Private.CoreLib/System.GC::WaitForPendingFinalizers()";
+    private const string GcKeepAliveMethodSubjectId = "System.Private.CoreLib/System.GC::KeepAlive(System.Object)";
+    private const string MonitorEnterMethodSubjectId = "System.Threading/Monitor::Enter(System.Object,System.Boolean&)";
+    private const string MonitorExitMethodSubjectId = "System.Threading/Monitor::Exit(System.Object)";
+    private const string MonitorTryEnterTimeSpanMethodSubjectId = "System.Threading/Monitor::TryEnter(System.Object,System.TimeSpan,System.Boolean&)";
+    private const string ThreadTypeSubjectId = "System.Threading.Thread/System.Threading.Thread";
+    private const string ThreadStartDelegateTypeSubjectId = "System.Threading.Thread/System.Threading.ThreadStart";
+    private const string ThreadConstructorMethodSubjectId =
+        "System.Threading.Thread/System.Threading.Thread::.ctor(System.Threading.ThreadStart)";
+    private const string ThreadStartMethodSubjectId = "System.Threading.Thread/System.Threading.Thread::Start()";
+    private const string ThreadJoinMethodSubjectId = "System.Threading.Thread/System.Threading.Thread::Join()";
+    private const string ThreadCurrentThreadGetterMethodSubjectId =
+        "System.Threading.Thread/System.Threading.Thread::get_CurrentThread()";
+    private const string ThreadGetNameMethodSubjectId = "System.Threading.Thread/System.Threading.Thread::get_Name()";
+    private const string ThreadSetNameMethodSubjectId =
+        "System.Threading.Thread/System.Threading.Thread::set_Name(System.String)";
+    private const string DelegateCombineMethodSubjectId = "System.Private.CoreLib/System.Delegate::Combine(System.Delegate,System.Delegate)";
+    private const string DelegateRemoveMethodSubjectId = "System.Private.CoreLib/System.Delegate::Remove(System.Delegate,System.Delegate)";
+    private const string MethodBaseInvokeMethodSubjectId = "System.Private.CoreLib/System.Reflection.MethodBase::Invoke(System.Object,System.Object[])";
+    private const string OperatingSystemIsWindowsMethodSubjectId = "System.Private.CoreLib/System.OperatingSystem::IsWindows()";
+    private const string OperatingSystemIsLinuxMethodSubjectId = "System.Private.CoreLib/System.OperatingSystem::IsLinux()";
+    private const string OperatingSystemIsMacOsMethodSubjectId = "System.Private.CoreLib/System.OperatingSystem::IsMacOS()";
+    private const string InterlockedCompareExchangeMethodPrefix = "System.Threading/Interlocked::CompareExchange<";
+    private const string ListTypeSubjectIdPrefix = "System.Collections/System.Collections.Generic.List<";
+    private const string DictionaryTypeSubjectIdPrefix = "System.Collections/System.Collections.Generic.Dictionary<";
+    private const string ReadOnlyCollectionTypeSubjectIdPrefix = "System.Private.CoreLib/System.Collections.Generic.IReadOnlyCollection<";
+    private const string ReadOnlyListTypeSubjectIdPrefix = "System.Private.CoreLib/System.Collections.Generic.IReadOnlyList<";
+    private const string SpanTypeSubjectIdPrefix = "System.Private.CoreLib/System.Span<";
+    private const string ReadOnlySpanTypeSubjectIdPrefix = "System.Private.CoreLib/System.ReadOnlySpan<";
+    private const string MemoryTypeSubjectIdPrefix = "System.Private.CoreLib/System.Memory<";
+    private const string TimeSpanTypeSubjectId = "System.Private.CoreLib/System.TimeSpan";
+    private const string TimeSpanFromMillisecondsMethodSubjectId =
+        "System.Private.CoreLib/System.TimeSpan::FromMilliseconds(System.Double)";
+    private const string InitializeArrayMethodSubjectId =
+        "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)";
+    private const string RuntimeHelpersCreateSpanMethodPrefix =
+        "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan<";
+    private const string MemoryExtensionsAsSpanMethodPrefix =
+        "System.Memory/System.MemoryExtensions::AsSpan<";
+    private const string MemoryExtensionsAsMemoryMethodPrefix =
+        "System.Memory/System.MemoryExtensions::AsMemory<";
+    private const string GetTypeFromHandleMethodSubjectId = "System.Private.CoreLib/System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)";
+    private const string GetTypeHandleMethodSubjectId = "System.Private.CoreLib/System.Type::get_TypeHandle()";
+    private const string GetFieldMethodSubjectId = "System.Private.CoreLib/System.Type::GetField(System.String)";
+    private const string GetMethodByNameMethodSubjectId = "System.Private.CoreLib/System.Type::GetMethod(System.String)";
+    private const string GetAssemblyMethodSubjectId = "System.Private.CoreLib/System.Type::get_Assembly()";
+    private const string GetGenericArgumentsMethodSubjectId = "System.Private.CoreLib/System.Type::GetGenericArguments()";
+    private const string GetGenericTypeDefinitionMethodSubjectId = "System.Private.CoreLib/System.Type::GetGenericTypeDefinition()";
+    private const string GetConstructorsMethodSubjectId = "System.Private.CoreLib/System.Type::GetConstructors(System.Reflection.BindingFlags)";
+    private const string AssemblyGetTypeMethodSubjectId = "System.Private.CoreLib/System.Reflection.Assembly::GetType(System.String)";
+    private const string TypeGetTypeByNameMethodSubjectId = "System.Private.CoreLib/System.Type::GetType(System.String)";
+    private const string AssemblyGetNameMethodSubjectId = "System.Private.CoreLib/System.Reflection.Assembly::GetName()";
+    private const string AssemblyNameGetNameMethodSubjectId = "System.Private.CoreLib/System.Reflection.AssemblyName::get_Name()";
+    private const string GetMethodMethodSubjectId = "System.Private.CoreLib/System.Type::GetMethod(System.String,System.Reflection.BindingFlags)";
+    private const string GetMethodHandleMethodSubjectId = "System.Private.CoreLib/System.Reflection.MethodBase::get_MethodHandle()";
+    private const string GetParametersMethodSubjectId = "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters()";
+    private const string MakeGenericMethodMethodSubjectId = "System.Private.CoreLib/System.Reflection.MethodInfo::MakeGenericMethod(System.Type[])";
+    private const string ParameterInfoGetNameMethodSubjectId = "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Name()";
+    private const string Int32ToStringMethodSubjectId = "System.Private.CoreLib/System.Int32::ToString()";
+    private const string SingleToStringWithFormatMethodSubjectId = "System.Private.CoreLib/System.Single::ToString(System.String)";
+    private const string DoubleToStringWithFormatMethodSubjectId = "System.Private.CoreLib/System.Double::ToString(System.String)";
+    private const string DefaultInterpolatedStringHandlerCtorMethodSubjectId =
+        "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::.ctor(System.Int32,System.Int32)";
+    private const string DefaultInterpolatedStringHandlerAppendFormattedStringMethodSubjectId =
+        "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted(System.String)";
+    private const string DefaultInterpolatedStringHandlerAppendLiteralMethodSubjectId =
+        "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendLiteral(System.String)";
+    private const string DefaultInterpolatedStringHandlerAppendFormattedInt32MethodSubjectId =
+        "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted<System.Int32>(System.Int32)";
+    private const string DefaultInterpolatedStringHandlerToStringAndClearMethodSubjectId =
+        "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::ToStringAndClear()";
+    private const string MarshalGetFunctionPointerForDelegateMethodPrefix =
+        "System.Runtime.InteropServices/Marshal::GetFunctionPointerForDelegate<";
+    private const string MarshalGetDelegateForFunctionPointerMethodPrefix =
+        "System.Runtime.InteropServices/Marshal::GetDelegateForFunctionPointer<";
+    private const string MarshalStringToCoTaskMemUtf8MethodSubjectId =
+        "System.Runtime.InteropServices/Marshal::StringToCoTaskMemUTF8(System.String)";
+    private const string MarshalPtrToStringUtf8MethodSubjectId =
+        "System.Runtime.InteropServices/Marshal::PtrToStringUTF8(System.IntPtr)";
+    private const string MarshalFreeCoTaskMemMethodSubjectId =
+        "System.Runtime.InteropServices/Marshal::FreeCoTaskMem(System.IntPtr)";
+    private const int StringComparisonOrdinalValue = 4;
+    private const string DllImportAttributeDisplayName = "DllImportAttribute";
+    private const string DllImportAttributeTypeSubjectId = "System.Runtime.InteropServices/DllImportAttribute";
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
@@ -23,10 +159,87 @@ public sealed class NativeAotLoweringPlanner
     private IReadOnlyDictionary<string, HashSet<string>> _referenceTypeImplementedInterfaceSubjectIds =
         new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
 
+    private IReadOnlySet<string> _valueTypeSubjectIds =
+        new HashSet<string>(StringComparer.Ordinal);
+
+    private CustomAttributeSupportModel _customAttributeSupport = CustomAttributeSupportModel.Empty;
+    private AssemblyReflectionSupportModel _assemblyReflectionSupport = AssemblyReflectionSupportModel.Empty;
+    private ReflectionMemberSupportModel _reflectionMemberSupport = ReflectionMemberSupportModel.Empty;
+    private StaticFieldDataSupportModel _staticFieldDataSupport = StaticFieldDataSupportModel.Empty;
+
+    private static readonly IReadOnlySet<int> EmptyRawArgumentIndices = new HashSet<int>();
+
     private readonly record struct InvocationTarget(
         string TargetSymbol,
         IReadOnlyList<AotCoreIrAbiSlotArtifact> ParameterAbis,
-        AotCoreIrAbiSlotArtifact ReturnAbi);
+        AotCoreIrAbiSlotArtifact ReturnAbi,
+        IReadOnlySet<int> RawArgumentIndices);
+
+    private sealed record ExternalRuntimeHelperDefinition(
+        string SubjectId,
+        string TargetSymbol,
+        string Source,
+        IReadOnlyList<AotCoreIrAbiSlotArtifact> ParameterAbis,
+        AotCoreIrAbiSlotArtifact ReturnAbi,
+        IReadOnlySet<int> RawArgumentIndices);
+
+    private sealed record EnumerableJoinSupportVariant(
+        string EnumerableTypeSubjectId,
+        AotCoreIrMethodArtifact GetEnumeratorMethod,
+        AotCoreIrMethodArtifact MoveNextMethod,
+        AotCoreIrMethodArtifact GetCurrentMethod);
+
+    private sealed record AssemblyReflectionTypeEntry(
+        string AssemblyName,
+        string TypeSubjectId,
+        string TypeDisplayName);
+
+    private sealed record AssemblyReflectionSupportModel(
+        IReadOnlyList<AssemblyReflectionTypeEntry> TypeEntries)
+    {
+        public static readonly AssemblyReflectionSupportModel Empty = new([]);
+    }
+
+    private sealed record ReflectionMemberTypeEntry(
+        string TypeSubjectId,
+        string TypeName,
+        string? GenericDefinitionTypeSubjectId,
+        IReadOnlyList<string> GenericArgumentTypeSubjectIds,
+        int GenericParameterCount,
+        int MetadataToken);
+
+    private sealed record ReflectionMemberFieldEntry(
+        string DeclaringTypeSubjectId,
+        string FieldName,
+        int MetadataToken);
+
+    private sealed record ReflectionMemberMethodEntry(
+        string MethodSubjectId,
+        string DeclaringTypeSubjectId,
+        string MethodName,
+        IReadOnlyList<string> ParameterNames,
+        bool IsConstructor,
+        int MetadataToken);
+
+    private sealed record ReflectionMemberSupportModel(
+        IReadOnlyList<ReflectionMemberTypeEntry> TypeEntries,
+        IReadOnlyList<ReflectionMemberFieldEntry> FieldEntries,
+        IReadOnlyList<ReflectionMemberMethodEntry> MethodEntries)
+    {
+        public static readonly ReflectionMemberSupportModel Empty = new([], [], []);
+    }
+
+    private sealed record StaticFieldDataEntry(
+        string FieldSubjectId,
+        string MemberType,
+        IReadOnlyList<byte> Bytes);
+
+    private sealed record StaticFieldDataSupportModel(
+        IReadOnlyDictionary<string, StaticFieldDataEntry> EntriesBySubjectId)
+    {
+        public static readonly StaticFieldDataSupportModel Empty =
+            new(new Dictionary<string, StaticFieldDataEntry>(StringComparer.Ordinal));
+    }
 
     private sealed record CatchOnlyExceptionMethodShape(
         AotCoreIrExceptionRegionArtifact ExceptionRegion,
@@ -35,9 +248,41 @@ public sealed class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrInstructionArtifact> HandlerInstructions,
         IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
 
+    private sealed record FilterOnlyExceptionMethodShape(
+        AotCoreIrExceptionRegionArtifact FilterRegion,
+        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TryInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> FilterInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> HandlerInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
+
+    private sealed record CatchAndFinallyExceptionMethodShape(
+        AotCoreIrExceptionRegionArtifact CatchRegion,
+        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> InnerTryInstructions,
+        FinallyHandlerShape? InnerFinallyHandler,
+        IReadOnlyList<AotCoreIrInstructionArtifact> PostInnerTryInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> HandlerInstructions,
+        IReadOnlyList<FinallyHandlerShape> OuterFinallyHandlers,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
+
+    private sealed record FinallyOnlyExceptionMethodShape(
+        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TryInstructions,
+        IReadOnlyList<FinallyHandlerShape> FinallyHandlers,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
+
     private sealed record FinallyHandlerShape(
         AotCoreIrExceptionRegionArtifact ExceptionRegion,
         IReadOnlyList<AotCoreIrInstructionArtifact> Instructions);
+
+    private sealed record FinallyHandlerGuardShape(
+        IReadOnlyList<AotCoreIrInstructionArtifact> ConditionInstructions,
+        bool BranchWhenNonZeroToEnd);
+
+    private sealed record FinallyHandlerEmissionPlan(
+        FinallyHandlerGuardShape? Guard,
+        IReadOnlyList<AotCoreIrInstructionArtifact> BodyInstructions);
 
     private sealed record FilterAndFinallyExceptionMethodShape(
         AotCoreIrExceptionRegionArtifact FilterRegion,
@@ -48,14 +293,83 @@ public sealed class NativeAotLoweringPlanner
         IReadOnlyList<FinallyHandlerShape> FinallyHandlers,
         IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
 
+    private sealed record CustomAttributeSupportModel(
+        IReadOnlyDictionary<string, string> QueryAttributeTypeByCallee,
+        IReadOnlyDictionary<string, string> SyntheticGetterFieldByMethodSubjectId,
+        IReadOnlyList<CustomAttributeMaterializationPlan> Materializations,
+        IReadOnlySet<string> AdditionalReferenceTypeSubjectIds,
+        IReadOnlySet<string> AdditionalInstanceFieldSubjectIds,
+        bool RequiresStringSupport,
+        bool UsesMemberInfoIsDefined)
+    {
+        public static readonly CustomAttributeSupportModel Empty = new(
+            new Dictionary<string, string>(StringComparer.Ordinal),
+            new Dictionary<string, string>(StringComparer.Ordinal),
+            [],
+            new HashSet<string>(StringComparer.Ordinal),
+            new HashSet<string>(StringComparer.Ordinal),
+            false,
+            false);
+    }
+
+    private enum CustomAttributeTargetKind : byte
+    {
+        Type = 1,
+        Method = 2,
+    }
+
+    private enum CustomAttributeLiteralKind : byte
+    {
+        Null = 0,
+        Boolean = 1,
+        Byte = 2,
+        Int16 = 3,
+        Int32 = 4,
+        Int64 = 5,
+        UInt16 = 6,
+        UInt32 = 7,
+        UInt64 = 8,
+        String = 9,
+    }
+
+    private sealed record CustomAttributeLiteralValue(
+        CustomAttributeLiteralKind Kind,
+        object? Value);
+
+    private sealed record CustomAttributeFieldAssignment(
+        string FieldSubjectId,
+        CustomAttributeLiteralValue Value);
+
+    private sealed record CustomAttributeMaterializationPlan(
+        CustomAttributeTargetKind TargetKind,
+        string TargetSubjectId,
+        string AttributeTypeSubjectId,
+        IReadOnlyList<CustomAttributeFieldAssignment> Assignments);
+
+    private readonly record struct MetadataTypeIdentity(
+        string AssemblyName,
+        string NamespaceName,
+        string TypeName)
+    {
+        public string SubjectId => ManagedNaming.CreateTypeSubjectId(AssemblyName, NamespaceName, TypeName);
+
+        public string DisplayName => ManagedNaming.CreateTypeDisplayName(AssemblyName, NamespaceName, TypeName);
+    }
+
     public NativeAotTemplateModel Create(
         NativeAotLoweringPlanArtifact loweringPlan,
         AotCoreIrArtifact aotCoreIr,
-        AotCoreIrMethodArtifact entryMethod)
+        AotCoreIrMethodArtifact entryMethod,
+        ManagedClosureManifestArtifact closureManifest,
+        MetadataRegistrationArtifact metadataRegistration,
+        SupplementalMetadataTemplateArtifact supplementalMetadataTemplate)
     {
         ArgumentNullException.ThrowIfNull(loweringPlan);
         ArgumentNullException.ThrowIfNull(aotCoreIr);
         ArgumentNullException.ThrowIfNull(entryMethod);
+        ArgumentNullException.ThrowIfNull(closureManifest);
+        ArgumentNullException.ThrowIfNull(metadataRegistration);
+        ArgumentNullException.ThrowIfNull(supplementalMetadataTemplate);
 
         ValidateEntryMethod(entryMethod);
         if (!string.Equals(entryMethod.NativeSymbol, loweringPlan.EntrySymbol, StringComparison.Ordinal))
@@ -67,11 +381,31 @@ public sealed class NativeAotLoweringPlanner
         _methodsBySubjectId = aotCoreIr.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
         _referenceTypeBaseSubjectIds = CollectReferenceTypeBaseSubjectIds(aotCoreIr);
         _referenceTypeImplementedInterfaceSubjectIds = CollectReferenceTypeImplementedInterfaceSubjectIds(aotCoreIr);
+        _valueTypeSubjectIds = CollectValueTypeSubjectIds(aotCoreIr);
 
         var reachableMethods = CollectReachableMethods(aotCoreIr, entryMethod);
+        _customAttributeSupport = BuildCustomAttributeSupportModel(
+            reachableMethods,
+            closureManifest,
+            supplementalMetadataTemplate);
+        _assemblyReflectionSupport = BuildAssemblyReflectionSupportModel(
+            reachableMethods,
+            closureManifest,
+            supplementalMetadataTemplate);
+        _reflectionMemberSupport = BuildReflectionMemberSupportModel(
+            reachableMethods,
+            closureManifest,
+            supplementalMetadataTemplate);
+        _staticFieldDataSupport = BuildStaticFieldDataSupportModel(
+            reachableMethods,
+            closureManifest,
+            metadataRegistration);
+        var externalRuntimeHelpers = CollectExternalRuntimeHelpers(reachableMethods);
         var objectModelBuilder = new StringBuilder();
-        EmitRuntimePrelude(objectModelBuilder);
+        EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
         EmitObjectModelDeclarations(objectModelBuilder, reachableMethods);
+        EmitDelegateRuntimeSupportDefinitions(objectModelBuilder, reachableMethods, externalRuntimeHelpers);
+        EmitExternalRuntimeHelperDefinitions(objectModelBuilder, externalRuntimeHelpers);
 
         var methodDeclarations = reachableMethods
             .Select(FormatMethodDeclaration)
@@ -91,9 +425,18 @@ public sealed class NativeAotLoweringPlanner
                 "<array>",
                 "<cstddef>",
                 "<cstdint>",
+                "<cstdio>",
                 "<cstdlib>",
                 "<cstring>",
                 "<limits>",
+                "<chrono>",
+                "<memory>",
+                "<mutex>",
+                "<string>",
+                "<thread>",
+                "<unordered_map>",
+                "<utility>",
+                "<vector>",
             ],
             ObjectModelCode = objectModelBuilder.ToString().TrimEnd(),
             MethodDeclarations = methodDeclarations,
@@ -117,4022 +460,1208 @@ public sealed class NativeAotLoweringPlanner
         return builder.ToString().TrimEnd();
     }
 
-    private static void EmitRuntimePrelude(StringBuilder builder)
-    {
-        builder.AppendLine("static_assert(sizeof(std::intptr_t) == sizeof(std::uint64_t), \"native-aot ABI lowering requires 64-bit intptr_t\");");
-        builder.AppendLine();
-        builder.AppendLine("struct chaos_managed_exception");
-        builder.AppendLine("{");
-        builder.AppendLine("    std::intptr_t object_value = 0;");
-        builder.AppendLine("};");
-        builder.AppendLine();
-        builder.AppendLine("template <typename TAction>");
-        builder.AppendLine("struct chaos_finally_scope_guard");
-        builder.AppendLine("{");
-        builder.AppendLine("    explicit chaos_finally_scope_guard(TAction init_action)");
-        builder.AppendLine("        : action(init_action)");
-        builder.AppendLine("    {");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    chaos_finally_scope_guard(const chaos_finally_scope_guard&) = delete;");
-        builder.AppendLine("    chaos_finally_scope_guard& operator=(const chaos_finally_scope_guard&) = delete;");
-        builder.AppendLine();
-        builder.AppendLine("    ~chaos_finally_scope_guard()");
-        builder.AppendLine("    {");
-        builder.AppendLine("        if (active)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            action();");
-        builder.AppendLine("        }");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    TAction action;");
-        builder.AppendLine("    bool active = true;");
-        builder.AppendLine("};");
-        builder.AppendLine();
-        builder.AppendLine("template <typename TAction>");
-        builder.AppendLine("chaos_finally_scope_guard<TAction> chaos_make_finally_scope_guard(TAction action)");
-        builder.AppendLine("{");
-        builder.AppendLine("    return chaos_finally_scope_guard<TAction>(action);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_store_float32(float value) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    std::uint32_t bits = 0;");
-        builder.AppendLine("    std::memcpy(&bits, &value, sizeof(value));");
-        builder.AppendLine("    return static_cast<std::intptr_t>(static_cast<std::uint64_t>(bits));");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("float chaos_load_float32(std::intptr_t value) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    const auto bits = static_cast<std::uint32_t>(static_cast<std::uint64_t>(value));");
-        builder.AppendLine("    float result = 0.0f;");
-        builder.AppendLine("    std::memcpy(&result, &bits, sizeof(result));");
-        builder.AppendLine("    return result;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_store_float64(double value) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    std::uint64_t bits = 0;");
-        builder.AppendLine("    std::memcpy(&bits, &value, sizeof(value));");
-        builder.AppendLine("    std::intptr_t result = 0;");
-        builder.AppendLine("    std::memcpy(&result, &bits, sizeof(result));");
-        builder.AppendLine("    return result;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("double chaos_load_float64(std::intptr_t value) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    std::uint64_t bits = 0;");
-        builder.AppendLine("    std::memcpy(&bits, &value, sizeof(bits));");
-        builder.AppendLine("    double result = 0.0;");
-        builder.AppendLine("    std::memcpy(&result, &bits, sizeof(result));");
-        builder.AppendLine("    return result;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_store_int64(std::int64_t value) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    std::intptr_t result = 0;");
-        builder.AppendLine("    std::memcpy(&result, &value, sizeof(result));");
-        builder.AppendLine("    return result;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::int64_t chaos_load_int64(std::intptr_t value) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    std::int64_t result = 0;");
-        builder.AppendLine("    std::memcpy(&result, &value, sizeof(result));");
-        builder.AppendLine("    return result;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_store_uint64(std::uint64_t value) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    std::intptr_t result = 0;");
-        builder.AppendLine("    std::memcpy(&result, &value, sizeof(result));");
-        builder.AppendLine("    return result;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::uint64_t chaos_load_uint64(std::intptr_t value) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    std::uint64_t result = 0;");
-        builder.AppendLine("    std::memcpy(&result, &value, sizeof(result));");
-        builder.AppendLine("    return result;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::int32_t chaos_wrap_add(std::int32_t left, std::int32_t right) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    return static_cast<std::int32_t>(");
-        builder.AppendLine("        static_cast<std::uint32_t>(left) + static_cast<std::uint32_t>(right));");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::int32_t chaos_wrap_sub(std::int32_t left, std::int32_t right) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    return static_cast<std::int32_t>(");
-        builder.AppendLine("        static_cast<std::uint32_t>(left) - static_cast<std::uint32_t>(right));");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::int32_t chaos_wrap_mul(std::int32_t left, std::int32_t right) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    return static_cast<std::int32_t>(");
-        builder.AppendLine("        static_cast<std::uint32_t>(left) * static_cast<std::uint32_t>(right));");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::int32_t chaos_div(std::int32_t left, std::int32_t right)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (right == 0)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        std::abort();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    if (left == std::numeric_limits<std::int32_t>::min() && right == -1)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        std::abort();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return static_cast<std::int32_t>(left / right);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::int32_t chaos_rem(std::int32_t left, std::int32_t right)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (right == 0)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        std::abort();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    if (left == std::numeric_limits<std::int32_t>::min() && right == -1)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return 0;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return static_cast<std::int32_t>(left % right);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::int32_t chaos_shift_left_int32(std::int32_t value, std::int32_t amount) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    const auto shift = static_cast<std::uint32_t>(amount) & 31U;");
-        builder.AppendLine("    return static_cast<std::int32_t>(static_cast<std::uint32_t>(value) << shift);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::int32_t chaos_shift_right_int32(std::int32_t value, std::int32_t amount) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    const auto shift = static_cast<std::uint32_t>(amount) & 31U;");
-        builder.AppendLine("    if (shift == 0U)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return value;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    const auto bits = static_cast<std::uint32_t>(value);");
-        builder.AppendLine("    if (value >= 0)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return static_cast<std::int32_t>(bits >> shift);");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    const auto fill = std::numeric_limits<std::uint32_t>::max() << (32U - shift);");
-        builder.AppendLine("    return static_cast<std::int32_t>((bits >> shift) | fill);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::int32_t chaos_shift_right_un_int32(std::int32_t value, std::int32_t amount) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    const auto shift = static_cast<std::uint32_t>(amount) & 31U;");
-        builder.AppendLine("    return static_cast<std::int32_t>(static_cast<std::uint32_t>(value) >> shift);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_checked_conv_ovf_i1(std::intptr_t value)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (value < static_cast<std::intptr_t>(std::numeric_limits<std::int8_t>::min()) ||");
-        builder.AppendLine("        value > static_cast<std::intptr_t>(std::numeric_limits<std::int8_t>::max()))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        std::abort();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return static_cast<std::intptr_t>(static_cast<std::int8_t>(value));");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_checked_conv_ovf_u1(std::intptr_t value)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (value < static_cast<std::intptr_t>(0) ||");
-        builder.AppendLine("        value > static_cast<std::intptr_t>(std::numeric_limits<std::uint8_t>::max()))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        std::abort();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return static_cast<std::intptr_t>(static_cast<std::uint8_t>(value));");
-        builder.AppendLine("}");
-        builder.AppendLine();
-    }
-
-    private IReadOnlyList<AotCoreIrMethodArtifact> CollectReachableMethods(
-        AotCoreIrArtifact aotCoreIr,
-        AotCoreIrMethodArtifact entryMethod)
-    {
-        var ordered = new List<AotCoreIrMethodArtifact>();
-        var visited = new HashSet<string>(StringComparer.Ordinal);
-
-        void Visit(AotCoreIrMethodArtifact method)
-        {
-            if (!visited.Add(method.SubjectId))
-            {
-                return;
-            }
-
-            foreach (var instruction in method.Instructions)
-            {
-                foreach (var reachableMethod in ResolveReachableMethods(instruction))
-                {
-                    Visit(reachableMethod);
-                }
-            }
-
-            ordered.Add(method);
-        }
-
-        Visit(entryMethod);
-        return ordered;
-    }
-
-    private IReadOnlyList<AotCoreIrMethodArtifact> ResolveReachableMethods(
-        AotCoreIrInstructionArtifact instruction)
-    {
-        if (string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal))
-        {
-            return instruction.DispatchKindCode == HybridDispatchKind.Virtual
-                ? ResolveVirtualDispatchTargets(instruction)
-                : ResolveDirectReachableMethods(instruction);
-        }
-
-        if (!string.Equals(instruction.Op, "call", StringComparison.Ordinal))
-        {
-            return [];
-        }
-
-        return ResolveDirectReachableMethods(instruction);
-    }
-
-    private IReadOnlyList<AotCoreIrMethodArtifact> ResolveDirectReachableMethods(
-        AotCoreIrInstructionArtifact instruction)
-    {
-        if (string.IsNullOrWhiteSpace(instruction.Callee))
-        {
-            return [];
-        }
-
-        var calleeMethod = TryGetLowerableMethod(instruction.Callee);
-        return calleeMethod is null ? [] : [calleeMethod];
-    }
-
-    private IReadOnlyList<AotCoreIrMethodArtifact> ResolveVirtualDispatchTargets(
-        AotCoreIrInstructionArtifact instruction)
-    {
-        var dispatchSlotMethod = ResolveRequiredDispatchSlotMethod(instruction);
-        var slotDeclaringTypeSubjectId = dispatchSlotMethod.Identity.DeclaringTypeSubjectId;
-        var slotDeclaringTypeDefinitionSubjectId = GetDeclaringTypeSubjectId(dispatchSlotMethod.Identity.DefinitionSubjectId);
-        var slotSignatureSuffix = GetMethodSignatureSuffix(dispatchSlotMethod.SubjectId);
-
-        return _methodsBySubjectId.Values
-            .Where(method =>
-                !method.IsStatic &&
-                CanEmitMethodBody(method) &&
-                string.Equals(GetMethodSignatureSuffix(method.SubjectId), slotSignatureSuffix, StringComparison.Ordinal) &&
-                IsTypeCompatibleWithSlot(
-                    method.Identity.DeclaringTypeSubjectId,
-                    GetDeclaringTypeSubjectId(method.Identity.DefinitionSubjectId),
-                    slotDeclaringTypeSubjectId,
-                    slotDeclaringTypeDefinitionSubjectId))
-            .OrderBy(method => method.SubjectId, StringComparer.Ordinal)
-            .ToArray();
-    }
-
-    private AotCoreIrMethodArtifact ResolveRequiredDispatchSlotMethod(AotCoreIrInstructionArtifact instruction)
-    {
-        var subjectId = !string.IsNullOrWhiteSpace(instruction.Callee)
-            ? instruction.Callee
-            : instruction.TargetReference?.SubjectId;
-        if (string.IsNullOrWhiteSpace(subjectId) ||
-            !_methodsBySubjectId.TryGetValue(subjectId, out var dispatchSlotMethod))
-        {
-            throw new NotSupportedException(
-                $"native-aot lowering does not support unresolved dispatch slot '{instruction.Callee ?? instruction.TargetReference?.SubjectId ?? "<null>"}'.");
-        }
-
-        return dispatchSlotMethod;
-    }
-
-    private InvocationTarget ResolveDirectInvocationTarget(AotCoreIrInstructionArtifact instruction)
-    {
-        if (!string.IsNullOrWhiteSpace(instruction.Callee) &&
-            TryGetLowerableMethod(instruction.Callee) is { } lowerableMethod)
-        {
-            return new InvocationTarget(
-                lowerableMethod.NativeSymbol,
-                GetMethodAbiParameterSlots(lowerableMethod),
-                lowerableMethod.ReturnAbi);
-        }
-
-        return new InvocationTarget(
-            GetRequiredTargetSymbol(instruction),
-            CreateLegacyAbiParameterSlots(GetRequiredTargetParameterCount(instruction)),
-            CreateLegacyReturnAbiSlot(instruction.TargetReturnType));
-    }
-
-    private AotCoreIrMethodArtifact? TryGetLowerableMethod(string? subjectId)
-    {
-        if (string.IsNullOrWhiteSpace(subjectId) ||
-            !_methodsBySubjectId.TryGetValue(subjectId, out var method) ||
-            !CanEmitMethodBody(method))
-        {
-            return null;
-        }
-
-        return method;
-    }
-
-    private bool IsTypeCompatibleWithSlot(
-        string candidateTypeSubjectId,
-        string candidateTypeDefinitionSubjectId,
-        string slotDeclaringTypeSubjectId,
-        string slotDeclaringTypeDefinitionSubjectId)
-    {
-        var currentTypeSubjectId = candidateTypeSubjectId;
-        var currentTypeDefinitionSubjectId = candidateTypeDefinitionSubjectId;
-        while (!string.IsNullOrWhiteSpace(currentTypeSubjectId))
-        {
-            if (MatchesTypeSubjectId(
-                    currentTypeSubjectId,
-                    currentTypeDefinitionSubjectId,
-                    slotDeclaringTypeSubjectId,
-                    slotDeclaringTypeDefinitionSubjectId) ||
-                ImplementsInterface(
-                    currentTypeSubjectId,
-                    currentTypeDefinitionSubjectId,
-                    slotDeclaringTypeSubjectId,
-                    slotDeclaringTypeDefinitionSubjectId))
-            {
-                return true;
-            }
-
-            if (!TryGetBaseTypeSubjectId(
-                    currentTypeSubjectId,
-                    currentTypeDefinitionSubjectId,
-                    out var baseTypeSubjectId) ||
-                string.IsNullOrWhiteSpace(baseTypeSubjectId))
-            {
-                break;
-            }
-
-            currentTypeSubjectId = baseTypeSubjectId;
-            currentTypeDefinitionSubjectId = baseTypeSubjectId;
-        }
-
-        return false;
-    }
-
-    private bool ImplementsInterface(
-        string candidateTypeSubjectId,
-        string candidateTypeDefinitionSubjectId,
-        string slotDeclaringTypeSubjectId,
-        string slotDeclaringTypeDefinitionSubjectId)
-    {
-        return ImplementsInterface(candidateTypeSubjectId, slotDeclaringTypeSubjectId, slotDeclaringTypeDefinitionSubjectId) ||
-               ImplementsInterface(candidateTypeDefinitionSubjectId, slotDeclaringTypeSubjectId, slotDeclaringTypeDefinitionSubjectId);
-    }
-
-    private bool ImplementsInterface(
-        string candidateTypeSubjectId,
-        string slotDeclaringTypeSubjectId,
-        string slotDeclaringTypeDefinitionSubjectId)
-    {
-        if (string.IsNullOrWhiteSpace(candidateTypeSubjectId) ||
-            !_referenceTypeImplementedInterfaceSubjectIds.TryGetValue(candidateTypeSubjectId, out var implementedInterfaceSubjectIds))
-        {
-            return false;
-        }
-
-        return implementedInterfaceSubjectIds.Any(interfaceSubjectId =>
-            IsEquivalentTypeSubjectId(interfaceSubjectId, slotDeclaringTypeSubjectId, slotDeclaringTypeDefinitionSubjectId));
-    }
-
-    private bool TryGetBaseTypeSubjectId(
-        string candidateTypeSubjectId,
-        string candidateTypeDefinitionSubjectId,
-        out string? baseTypeSubjectId)
-    {
-        if (_referenceTypeBaseSubjectIds.TryGetValue(candidateTypeSubjectId, out baseTypeSubjectId))
-        {
-            return true;
-        }
-
-        if (_referenceTypeBaseSubjectIds.TryGetValue(candidateTypeDefinitionSubjectId, out baseTypeSubjectId))
-        {
-            return true;
-        }
-
-        baseTypeSubjectId = null;
-        return false;
-    }
-
-    private static bool MatchesTypeSubjectId(
-        string candidateTypeSubjectId,
-        string candidateTypeDefinitionSubjectId,
-        string slotDeclaringTypeSubjectId,
-        string slotDeclaringTypeDefinitionSubjectId)
-    {
-        return IsEquivalentTypeSubjectId(candidateTypeSubjectId, slotDeclaringTypeSubjectId, slotDeclaringTypeDefinitionSubjectId) ||
-               IsEquivalentTypeSubjectId(candidateTypeDefinitionSubjectId, slotDeclaringTypeSubjectId, slotDeclaringTypeDefinitionSubjectId);
-    }
-
-    private static bool IsEquivalentTypeSubjectId(
-        string? candidateTypeSubjectId,
-        string slotDeclaringTypeSubjectId,
-        string slotDeclaringTypeDefinitionSubjectId)
-    {
-        return !string.IsNullOrWhiteSpace(candidateTypeSubjectId) &&
-               (string.Equals(candidateTypeSubjectId, slotDeclaringTypeSubjectId, StringComparison.Ordinal) ||
-                string.Equals(candidateTypeSubjectId, slotDeclaringTypeDefinitionSubjectId, StringComparison.Ordinal));
-    }
-
-    private static string FormatMethodDeclaration(AotCoreIrMethodArtifact method)
-    {
-        return $"extern \"C\" {MapAbiSlotReturnType(method.ReturnAbi)} {method.NativeSymbol}({FormatAbiSlotParameterSignature(GetMethodAbiParameterSlots(method))});";
-    }
-
-    private void EmitManagedMethod(
+    private static void EmitExternalRuntimeHelperDefinitions(
         StringBuilder builder,
-        AotCoreIrMethodArtifact method)
+        IReadOnlyList<ExternalRuntimeHelperDefinition> externalRuntimeHelpers)
     {
-        ValidateMethod(method);
-
-        var instructions = method.Instructions;
-        ValidateInstructions(method, instructions);
-        var abiParameterSlots = GetMethodAbiParameterSlots(method);
-        var stackCapacity = Math.Max(instructions.Count, 1);
-        var nextOffsetsByIlOffset = CreateNextOffsets(instructions);
-        var offsets = instructions
-            .Select(GetRequiredIlOffset)
-            .ToHashSet();
-
-        builder.AppendLine($"// Managed method: {method.SubjectId}");
-        builder.AppendLine(
-            $"extern \"C\" {MapAbiSlotReturnType(method.ReturnAbi)} {method.NativeSymbol}({FormatAbiSlotParameterSignature(abiParameterSlots)})");
-        builder.AppendLine("{");
-        builder.AppendLine($"    std::array<std::intptr_t, {Math.Max(abiParameterSlots.Count, 1)}> chaos_args{{}};");
-        builder.AppendLine($"    std::array<std::intptr_t, {Math.Max(method.LocalCount, 1)}> chaos_locals{{}};");
-        builder.AppendLine($"    std::array<std::intptr_t, {stackCapacity}> chaos_eval_stack{{}};");
-        builder.AppendLine("    std::size_t chaos_stack_top = 0;");
-        EmitAbiArgumentInitialization(builder, abiParameterSlots);
-        builder.AppendLine();
-
-        if (TryCreateCatchOnlyExceptionMethodShape(method, out var catchOnlyShape))
+        foreach (var helper in externalRuntimeHelpers)
         {
-            EmitCatchOnlyExceptionMethodBody(
-                builder,
-                method,
-                catchOnlyShape!,
-                nextOffsetsByIlOffset,
-                offsets);
-            builder.AppendLine("}");
-            return;
-        }
-
-        if (TryCreateFilterAndFinallyExceptionMethodShape(method, out var filterAndFinallyShape))
-        {
-            EmitFilterAndFinallyExceptionMethodBody(
-                builder,
-                method,
-                filterAndFinallyShape!,
-                nextOffsetsByIlOffset,
-                offsets);
-            builder.AppendLine("}");
-            return;
-        }
-
-        var firstOffset = GetRequiredIlOffset(instructions[0]);
-        builder.AppendLine($"    goto chaos_ip_{firstOffset};");
-        builder.AppendLine();
-        EmitInstructionRange(builder, method, instructions, nextOffsetsByIlOffset, offsets);
-        builder.AppendLine("}");
-    }
-
-    private static void ValidateEntryMethod(AotCoreIrMethodArtifact entryMethod)
-    {
-        ValidateMethod(entryMethod);
-
-        if (entryMethod.ParameterCount != 0)
-        {
-            throw new NotSupportedException(
-                $"native-aot entry '{entryMethod.SubjectId}' must not take parameters");
-        }
-
-        if (!string.Equals(entryMethod.ReturnType, "System.Int32", StringComparison.Ordinal))
-        {
-            throw new NotSupportedException(
-                $"native-aot entry '{entryMethod.SubjectId}' must return System.Int32");
-        }
-    }
-
-    private static void ValidateMethod(AotCoreIrMethodArtifact method)
-    {
-        if (string.IsNullOrWhiteSpace(method.NativeSymbol))
-        {
-            throw new InvalidOperationException(
-                $"native-aot method '{method.SubjectId}' is missing native symbol metadata");
-        }
-
-        _ = MapAbiSlotReturnType(method.ReturnAbi);
-
-        if (method.ExceptionRegionCount != 0 &&
-            !TryCreateCatchOnlyExceptionMethodShape(method, out _) &&
-            !TryCreateFilterAndFinallyExceptionMethodShape(method, out _))
-        {
-            throw new NotSupportedException(
-                $"native-aot method '{method.SubjectId}' does not support current exception region shape");
-        }
-    }
-
-    private static void ValidateInstructions(
-        AotCoreIrMethodArtifact entryMethod,
-        IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
-    {
-        if (instructions.Count == 0)
-        {
-            throw new InvalidOperationException(
-                $"native-aot entry '{entryMethod.SubjectId}' does not contain instructions");
-        }
-
-        var seenOffsets = new HashSet<int>();
-        foreach (var instruction in instructions)
-        {
-            var offset = GetRequiredIlOffset(instruction);
-            if (!seenOffsets.Add(offset))
-            {
-                throw new InvalidOperationException(
-                    $"native-aot entry '{entryMethod.SubjectId}' contains duplicate IL offset {offset}");
-            }
-        }
-    }
-
-    private void EmitInstruction(
-        StringBuilder builder,
-        AotCoreIrMethodArtifact method,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        IReadOnlySet<int> offsets)
-    {
-        var targetReference = instruction.TargetReference;
-        if (targetReference?.GenericContext is not null)
-        {
-            builder.AppendLine($"    {FormatGenericContextComment(targetReference.GenericContext)}");
-        }
-
-        switch (instruction.Op)
-        {
-            case "ldc.i4":
-                builder.AppendLine(
-                    $"    chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>({FormatInt32Literal(GetRequiredIntOperand(instruction))});");
-                AppendGotoNext(builder, nextOffset, instruction.Op);
-                return;
-
-            case "ldc.i8":
-                builder.AppendLine(
-                    $"    chaos_eval_stack[chaos_stack_top++] = chaos_store_int64({FormatInt64Literal(GetRequiredInt64Operand(instruction))});");
-                AppendGotoNext(builder, nextOffset, instruction.Op);
-                return;
-
-            case "ldc.r4":
-                builder.AppendLine(
-                    $"    chaos_eval_stack[chaos_stack_top++] = chaos_store_float32({FormatFloat32Literal(GetRequiredSingleOperand(instruction))});");
-                AppendGotoNext(builder, nextOffset, instruction.Op);
-                return;
-
-            case "ldc.r8":
-                builder.AppendLine(
-                    $"    chaos_eval_stack[chaos_stack_top++] = chaos_store_float64({FormatFloat64Literal(GetRequiredDoubleOperand(instruction))});");
-                AppendGotoNext(builder, nextOffset, instruction.Op);
-                return;
-
-            case "ldarg":
-                builder.AppendLine(
-                    $"    chaos_eval_stack[chaos_stack_top++] = chaos_args[{GetRequiredIntOperand(instruction)}];");
-                AppendGotoNext(builder, nextOffset, instruction.Op);
-                return;
-
-            case "ldarga":
-                EmitLoadArgumentAddress(builder, method, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "ldnull":
-                builder.AppendLine("    chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>(0);");
-                AppendGotoNext(builder, nextOffset, instruction.Op);
-                return;
-
-            case "dup":
-                builder.AppendLine("    chaos_eval_stack[chaos_stack_top] = chaos_eval_stack[chaos_stack_top - 1];");
-                builder.AppendLine("    chaos_stack_top++;");
-                AppendGotoNext(builder, nextOffset, instruction.Op);
-                return;
-
-            case "conv.i4":
-                builder.AppendLine(
-                    "    chaos_eval_stack[chaos_stack_top - 1] = static_cast<std::intptr_t>(static_cast<std::int32_t>(chaos_eval_stack[chaos_stack_top - 1]));");
-                AppendGotoNext(builder, nextOffset, instruction.Op);
-                return;
-
-            case "conv.i1":
-                EmitStackTopConversion(builder, "std::int8_t", nextOffset, instruction.Op);
-                return;
-
-            case "conv.i2":
-                EmitStackTopConversion(builder, "std::int16_t", nextOffset, instruction.Op);
-                return;
-
-            case "conv.i8":
-                EmitStackTopConversion(builder, "std::int64_t", nextOffset, instruction.Op);
-                return;
-
-            case "conv.r4":
-                EmitStackTopFloatingPointConversion(builder, "float", "chaos_store_float32", nextOffset, instruction.Op);
-                return;
-
-            case "conv.r8":
-                EmitStackTopFloatingPointConversion(builder, "double", "chaos_store_float64", nextOffset, instruction.Op);
-                return;
-
-            case "conv.u":
-                EmitStackTopConversion(builder, "std::uintptr_t", nextOffset, instruction.Op);
-                return;
-
-            case "conv.u1":
-                EmitStackTopConversion(builder, "std::uint8_t", nextOffset, instruction.Op);
-                return;
-
-            case "conv.u2":
-                EmitStackTopConversion(builder, "std::uint16_t", nextOffset, instruction.Op);
-                return;
-
-            case "conv.ovf.i1":
-                EmitCheckedStackTopConversion(
-                    builder,
-                    "std::int8_t",
-                    "std::numeric_limits<std::int8_t>::min()",
-                    "std::numeric_limits<std::int8_t>::max()",
-                    nextOffset,
-                    instruction.Op);
-                return;
-
-            case "conv.ovf.u1":
-                EmitCheckedStackTopConversion(
-                    builder,
-                    "std::uint8_t",
-                    "0",
-                    "std::numeric_limits<std::uint8_t>::max()",
-                    nextOffset,
-                    instruction.Op);
-                return;
-
-            case "cgt.un":
-                builder.AppendLine("    {");
-                builder.AppendLine(
-                    "        const auto chaos_right = static_cast<std::uintptr_t>(chaos_eval_stack[--chaos_stack_top]);");
-                builder.AppendLine(
-                    "        const auto chaos_left = static_cast<std::uintptr_t>(chaos_eval_stack[--chaos_stack_top]);");
-                builder.AppendLine(
-                    "        chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>(chaos_left > chaos_right ? 1 : 0);");
-                builder.AppendLine("    }");
-                AppendGotoNext(builder, nextOffset, instruction.Op);
-                return;
-
-            case "ldloc":
-                builder.AppendLine(
-                    $"    chaos_eval_stack[chaos_stack_top++] = chaos_locals[{GetRequiredIntOperand(instruction)}];");
-                AppendGotoNext(builder, nextOffset, instruction.Op);
-                return;
-
-            case "pop":
-                builder.AppendLine("    chaos_stack_top--;");
-                AppendGotoNext(builder, nextOffset, instruction.Op);
-                return;
-
-            case "ldloca":
-                EmitLoadLocalAddress(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "stloc":
-                builder.AppendLine(
-                    $"    chaos_locals[{GetRequiredIntOperand(instruction)}] = chaos_eval_stack[--chaos_stack_top];");
-                AppendGotoNext(builder, nextOffset, instruction.Op);
-                return;
-
-            case "add":
-                EmitBinaryArithmetic(builder, "chaos_wrap_add", nextOffset, instruction.Op);
-                return;
-
-            case "add.ovf":
-                EmitOverflowingBinaryArithmetic(builder, instruction, "+", nextOffset, instruction.Op);
-                return;
-
-            case "sub":
-                EmitBinaryArithmetic(builder, "chaos_wrap_sub", nextOffset, instruction.Op);
-                return;
-
-            case "sub.ovf":
-                EmitOverflowingBinaryArithmetic(builder, instruction, "-", nextOffset, instruction.Op);
-                return;
-
-            case "mul":
-                EmitBinaryArithmetic(builder, "chaos_wrap_mul", nextOffset, instruction.Op);
-                return;
-
-            case "mul.ovf":
-                EmitOverflowingBinaryArithmetic(builder, instruction, "*", nextOffset, instruction.Op);
-                return;
-
-            case "div":
-                EmitBinaryArithmetic(builder, "chaos_div", nextOffset, instruction.Op);
-                return;
-
-            case "rem":
-                EmitBinaryArithmetic(builder, "chaos_rem", nextOffset, instruction.Op);
-                return;
-
-            case "shl":
-                EmitShift(builder, instruction, "chaos_shift_left_int32", nextOffset, instruction.Op);
-                return;
-
-            case "shr":
-                EmitShift(builder, instruction, "chaos_shift_right_int32", nextOffset, instruction.Op);
-                return;
-
-            case "shr.un":
-                EmitShift(builder, instruction, "chaos_shift_right_un_int32", nextOffset, instruction.Op);
-                return;
-
-            case "not":
-                EmitBitwiseNot(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "and":
-                EmitBinaryBitwise(builder, "&", nextOffset, instruction.Op);
-                return;
-
-            case "or":
-                EmitBinaryBitwise(builder, "|", nextOffset, instruction.Op);
-                return;
-
-            case "xor":
-                EmitBinaryBitwise(builder, "^", nextOffset, instruction.Op);
-                return;
-
-            case "call":
-                EmitDirectCall(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "callvirt":
-                EmitCallVirt(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "newobj":
-                EmitNewObject(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "throw":
-                builder.AppendLine("    throw chaos_managed_exception{chaos_eval_stack[--chaos_stack_top]};");
-                return;
-
-            case "newarr":
-                EmitNewArray(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "ldlen":
-                EmitArrayLength(builder, nextOffset, instruction.Op);
-                return;
-
-            case "ldelema":
-                EmitArrayElementAddress(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "castclass":
-                EmitCastClass(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "isinst":
-                EmitIsInst(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "ldfld":
-            case "ldsfld":
-                EmitFieldLoad(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "stfld":
-            case "stsfld":
-                EmitFieldStore(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "ldelem":
-            case "ldelem.ref":
-                EmitArrayLoad(builder, nextOffset, instruction.Op);
-                return;
-
-            case "stelem":
-            case "stelem.ref":
-                EmitArrayStore(builder, nextOffset, instruction.Op);
-                return;
-
-            case "ldind.i4":
-                EmitLoadIndirectInt32(builder, nextOffset, instruction.Op);
-                return;
-
-            case "stind.i4":
-                EmitStoreIndirectInt32(builder, nextOffset, instruction.Op);
-                return;
-
-            case "box":
-                EmitBox(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "unbox":
-                EmitUnbox(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "unbox.any":
-                EmitUnboxAny(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "initobj":
-                EmitInitObj(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "ldobj":
-                EmitLoadObjectValue(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "stobj":
-                EmitStoreObjectValue(builder, instruction, nextOffset, instruction.Op);
-                return;
-
-            case "br":
-                builder.AppendLine($"    goto chaos_ip_{GetRequiredBranchTarget(instruction, offsets)};");
-                return;
-
-            case "brtrue":
-                EmitTruthBranch(builder, shouldBranchWhenNonZero: true, instruction, nextOffset, offsets);
-                return;
-
-            case "leave":
-                builder.AppendLine($"    goto chaos_ip_{GetRequiredBranchTarget(instruction, offsets)};");
-                return;
-
-            case "beq":
-                EmitComparisonBranch(builder, "==", instruction, nextOffset, offsets);
-                return;
-
-            case "blt":
-                EmitComparisonBranch(builder, "<", instruction, nextOffset, offsets);
-                return;
-
-            case "bgt":
-                EmitComparisonBranch(builder, ">", instruction, nextOffset, offsets);
-                return;
-
-            case "ble":
-                EmitComparisonBranch(builder, "<=", instruction, nextOffset, offsets);
-                return;
-
-            case "bge":
-                EmitComparisonBranch(builder, ">=", instruction, nextOffset, offsets);
-                return;
-
-            case "bge.un":
-                EmitUnsignedComparisonBranch(builder, ">=", instruction, nextOffset, offsets);
-                return;
-
-            case "bne.un":
-                EmitComparisonBranch(builder, "!=", instruction, nextOffset, offsets);
-                return;
-
-            case "ret":
-                EmitMethodReturn(builder, method.ReturnAbi);
-                return;
-
-            default:
-                throw new NotSupportedException(
-                    $"native-aot lowering does not support opcode '{instruction.Op}'");
-        }
-    }
-
-    private void EmitDirectCall(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var invocationTarget = ResolveDirectInvocationTarget(instruction);
-        EmitResolvedInvocation(
-            builder,
-            invocationTarget.TargetSymbol,
-            invocationTarget.ParameterAbis,
-            invocationTarget.ReturnAbi,
-            nextOffset,
-            op,
-            enforceInstanceNullCheck: false);
-    }
-
-    private void EmitCallVirt(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        switch (instruction.DispatchKindCode ?? HybridDispatchKind.None)
-        {
-            case HybridDispatchKind.None:
-            case HybridDispatchKind.Direct:
-                var directTarget = ResolveDirectInvocationTarget(instruction);
-                EmitResolvedInvocation(
-                    builder,
-                    directTarget.TargetSymbol,
-                    directTarget.ParameterAbis,
-                    directTarget.ReturnAbi,
-                    nextOffset,
-                    op,
-                    enforceInstanceNullCheck: true);
-                return;
-
-            case HybridDispatchKind.Virtual:
-                EmitVirtualDispatchCall(builder, instruction, nextOffset, op);
-                return;
-
-            default:
-                throw new NotSupportedException(
-                    $"native-aot lowering does not support callvirt dispatch kind '{instruction.DispatchKindCode}'.");
-        }
-    }
-
-    private static void EmitResolvedInvocation(
-        StringBuilder builder,
-        string targetSymbol,
-        IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis,
-        AotCoreIrAbiSlotArtifact returnAbi,
-        int? nextOffset,
-        string op,
-        bool enforceInstanceNullCheck)
-    {
-        var mappedReturnType = MapAbiSlotReturnType(returnAbi);
-
-        builder.AppendLine("    {");
-        for (var parameterIndex = parameterAbis.Count - 1; parameterIndex >= 0; parameterIndex--)
-        {
-            builder.AppendLine(
-                $"        const auto chaos_raw_arg_{parameterIndex} = chaos_eval_stack[--chaos_stack_top];");
-            builder.AppendLine(
-                $"        const auto chaos_arg_{parameterIndex} = {FormatInboundAbiArgumentExpression(parameterAbis[parameterIndex], $"chaos_raw_arg_{parameterIndex}")};");
-        }
-
-        if (enforceInstanceNullCheck && parameterAbis.Count > 0)
-        {
-            builder.AppendLine("        if (chaos_arg_0 == static_cast<std::intptr_t>(0))");
-            builder.AppendLine("        {");
-            builder.AppendLine("            std::abort();");
-            builder.AppendLine("        }");
-        }
-
-        var invocation = $"{targetSymbol}({FormatAbiInvocationArgumentList(parameterAbis)})";
-        if (string.Equals(mappedReturnType, "void", StringComparison.Ordinal))
-        {
-            builder.AppendLine($"        {invocation};");
-        }
-        else
-        {
-            builder.AppendLine($"        const auto chaos_result = {invocation};");
-            EmitAbiReturnPush(builder, returnAbi, "chaos_result", "        ");
-        }
-
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private void EmitVirtualDispatchCall(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var dispatchSlotMethod = ResolveRequiredDispatchSlotMethod(instruction);
-        var dispatchTargets = ResolveVirtualDispatchTargets(instruction);
-        if (dispatchTargets.Count == 0)
-        {
-            throw new NotSupportedException(
-                $"native-aot lowering could not resolve virtual dispatch targets for '{instruction.Callee ?? dispatchSlotMethod.SubjectId}'.");
-        }
-
-        var abiParameterSlots = GetMethodAbiParameterSlots(dispatchSlotMethod);
-        var mappedReturnType = MapAbiSlotReturnType(dispatchSlotMethod.ReturnAbi);
-        var dispatchLabel = $"chaos_callvirt_done_{instruction.IlOffset}";
-
-        builder.AppendLine("    {");
-        for (var parameterIndex = abiParameterSlots.Count - 1; parameterIndex >= 0; parameterIndex--)
-        {
-            builder.AppendLine(
-                $"        const auto chaos_raw_arg_{parameterIndex} = chaos_eval_stack[--chaos_stack_top];");
-            builder.AppendLine(
-                $"        const auto chaos_arg_{parameterIndex} = {FormatInboundAbiArgumentExpression(abiParameterSlots[parameterIndex], $"chaos_raw_arg_{parameterIndex}")};");
-        }
-
-        builder.AppendLine("        const auto chaos_instance = chaos_arg_0;");
-        builder.AppendLine("        if (chaos_instance == static_cast<std::intptr_t>(0))");
-        builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
-        builder.AppendLine("        }");
-        builder.AppendLine("        auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_instance);");
-        if (!string.Equals(mappedReturnType, "void", StringComparison.Ordinal))
-        {
-            builder.AppendLine($"        {mappedReturnType} chaos_callvirt_result{{}};");
-        }
-
-        builder.AppendLine("        switch (chaos_header->type_id)");
-        builder.AppendLine("        {");
-        foreach (var dispatchTarget in dispatchTargets)
-        {
-            builder.AppendLine($"            case {GetNativeTypeIdSymbol(dispatchTarget.Identity.DeclaringTypeSubjectId)}:");
-            if (string.Equals(mappedReturnType, "void", StringComparison.Ordinal))
-            {
-                builder.AppendLine(
-                    $"                {dispatchTarget.NativeSymbol}({FormatAbiInvocationArgumentList(abiParameterSlots, "chaos_instance")});");
-            }
-            else
-            {
-                builder.AppendLine(
-                    $"                chaos_callvirt_result = {dispatchTarget.NativeSymbol}({FormatAbiInvocationArgumentList(abiParameterSlots, "chaos_instance")});");
-            }
-
-            builder.AppendLine($"                goto {dispatchLabel};");
-        }
-
-        builder.AppendLine("            default:");
-        builder.AppendLine("                break;");
-        builder.AppendLine("        }");
-        builder.AppendLine();
-        builder.AppendLine("        auto chaos_current_type_id = chaos_get_base_type_id(chaos_header->type_id);");
-        builder.AppendLine("        while (chaos_current_type_id != static_cast<std::intptr_t>(0))");
-        builder.AppendLine("        {");
-        builder.AppendLine("            switch (chaos_current_type_id)");
-        builder.AppendLine("            {");
-        foreach (var dispatchTarget in dispatchTargets)
-        {
-            builder.AppendLine($"                case {GetNativeTypeIdSymbol(dispatchTarget.Identity.DeclaringTypeSubjectId)}:");
-            if (string.Equals(mappedReturnType, "void", StringComparison.Ordinal))
-            {
-                builder.AppendLine(
-                    $"                    {dispatchTarget.NativeSymbol}({FormatAbiInvocationArgumentList(abiParameterSlots, "chaos_instance")});");
-            }
-            else
-            {
-                builder.AppendLine(
-                    $"                    chaos_callvirt_result = {dispatchTarget.NativeSymbol}({FormatAbiInvocationArgumentList(abiParameterSlots, "chaos_instance")});");
-            }
-
-            builder.AppendLine($"                    goto {dispatchLabel};");
-        }
-
-        builder.AppendLine("                default:");
-        builder.AppendLine("                    break;");
-        builder.AppendLine("            }");
-        builder.AppendLine();
-        builder.AppendLine("            chaos_current_type_id = chaos_get_base_type_id(chaos_current_type_id);");
-        builder.AppendLine("        }");
-        builder.AppendLine();
-        builder.AppendLine("        std::abort();");
-        builder.AppendLine($"{dispatchLabel}:");
-        if (!string.Equals(mappedReturnType, "void", StringComparison.Ordinal))
-        {
-            EmitAbiReturnPush(builder, dispatchSlotMethod.ReturnAbi, "chaos_callvirt_result", "        ");
-        }
-
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitBinaryArithmetic(
-        StringBuilder builder,
-        string helperName,
-        int? nextOffset,
-        string op)
-    {
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_right = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        const auto chaos_left = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine(
-            $"        chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>({helperName}(chaos_left, chaos_right));");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitBinaryBitwise(
-        StringBuilder builder,
-        string operation,
-        int? nextOffset,
-        string op)
-    {
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_right = chaos_load_uint64(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        const auto chaos_left = chaos_load_uint64(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine(
-            $"        chaos_eval_stack[chaos_stack_top++] = chaos_store_uint64(chaos_left {operation} chaos_right);");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitShift(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        string helperName,
-        int? nextOffset,
-        string op)
-    {
-        RequireInt32IntegralResultType(instruction);
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_shift = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        const auto chaos_value = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine(
-            $"        chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>({helperName}(chaos_value, chaos_shift));");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitBitwiseNot(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        RequireInt32IntegralResultType(instruction);
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_value = static_cast<std::int32_t>(chaos_eval_stack[chaos_stack_top - 1]);");
-        builder.AppendLine("        chaos_eval_stack[chaos_stack_top - 1] = static_cast<std::intptr_t>(~chaos_value);");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitStackTopConversion(
-        StringBuilder builder,
-        string castType,
-        int? nextOffset,
-        string op)
-    {
-        builder.AppendLine(
-            $"    chaos_eval_stack[chaos_stack_top - 1] = static_cast<std::intptr_t>(static_cast<{castType}>(chaos_eval_stack[chaos_stack_top - 1]));");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitStackTopFloatingPointConversion(
-        StringBuilder builder,
-        string castType,
-        string storeHelperName,
-        int? nextOffset,
-        string op)
-    {
-        builder.AppendLine(
-            $"    chaos_eval_stack[chaos_stack_top - 1] = {storeHelperName}(static_cast<{castType}>(chaos_eval_stack[chaos_stack_top - 1]));");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private void EmitCheckedStackTopConversion(
-        StringBuilder builder,
-        string castType,
-        string minValueExpression,
-        string maxValueExpression,
-        int? nextOffset,
-        string op)
-    {
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_value = chaos_eval_stack[chaos_stack_top - 1];");
-        builder.AppendLine(
-            $"        if (chaos_value < static_cast<std::intptr_t>({minValueExpression}) ||");
-        builder.AppendLine(
-            $"            chaos_value > static_cast<std::intptr_t>({maxValueExpression}))");
-        builder.AppendLine("        {");
-        EmitThrowOverflowException(builder, "            ");
-        builder.AppendLine("        }");
-        builder.AppendLine(
-            $"        chaos_eval_stack[chaos_stack_top - 1] = static_cast<std::intptr_t>(static_cast<{castType}>(chaos_value));");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private void EmitOverflowingBinaryArithmetic(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        string operation,
-        int? nextOffset,
-        string op)
-    {
-        RequireInt32IntegralResultType(instruction);
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_right = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        const auto chaos_left = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine(
-            $"        const auto chaos_wide = static_cast<std::int64_t>(chaos_left) {operation} static_cast<std::int64_t>(chaos_right);");
-        builder.AppendLine("        if (chaos_wide < static_cast<std::int64_t>(std::numeric_limits<std::int32_t>::min()) ||");
-        builder.AppendLine("            chaos_wide > static_cast<std::int64_t>(std::numeric_limits<std::int32_t>::max()))");
-        builder.AppendLine("        {");
-        EmitThrowOverflowException(builder, "            ");
-        builder.AppendLine("        }");
-        builder.AppendLine(
-            "        chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>(static_cast<std::int32_t>(chaos_wide));");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private void EmitThrowOverflowException(
-        StringBuilder builder,
-        string indentation)
-    {
-        builder.AppendLine(
-            $"{indentation}auto* chaos_exception = new {GetNativeTypeSymbol(OverflowExceptionTypeSubjectId)}{{}};");
-        builder.AppendLine(
-            $"{indentation}chaos_exception->header.type_id = {GetNativeTypeIdSymbol(OverflowExceptionTypeSubjectId)};");
-        builder.AppendLine(
-            $"{indentation}throw chaos_managed_exception{{reinterpret_cast<std::intptr_t>(chaos_exception)}};");
-    }
-
-    private static void EmitLoadLocalAddress(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        builder.AppendLine(
-            $"    chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(&chaos_locals[{GetRequiredIntOperand(instruction)}]) | chaos_managed_pointer_local_slot_tag;");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitLoadArgumentAddress(
-        StringBuilder builder,
-        AotCoreIrMethodArtifact method,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var argumentIndex = GetRequiredIntOperand(instruction);
-        var argumentAbi = GetRequiredMethodAbiParameterSlot(method, argumentIndex);
-        switch (argumentAbi.CarrierKindCode)
-        {
-            case AotCoreIrAbiCarrierKind.NativeInt:
-                builder.AppendLine(
-                    $"    chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(&chaos_args[{argumentIndex}]) | chaos_managed_pointer_local_slot_tag;");
-                break;
-
-            case AotCoreIrAbiCarrierKind.ValueTypeByValue:
-                builder.AppendLine(
-                    $"    chaos_eval_stack[chaos_stack_top++] = chaos_args[{argumentIndex}];");
-                break;
-
-            default:
-                throw new NotSupportedException(
-                    $"native-aot lowering does not support ldarga for ABI carrier '{argumentAbi.CarrierKindCode}'.");
-        }
-
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitNewObject(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var targetReference = GetRequiredTargetReference(instruction);
-        if (targetReference.Kind != AotCoreIrReferenceKind.Type)
-        {
-            throw new NotSupportedException(
-                $"native-aot newobj requires type target reference, got '{targetReference.Kind}'.");
-        }
-
-        builder.AppendLine(
-            $"    auto* chaos_object = new {GetNativeTypeSymbol(targetReference.SubjectId)}{{}};");
-        builder.AppendLine(
-            $"    chaos_object->header.type_id = {GetNativeTypeIdSymbol(targetReference.SubjectId)};");
-        builder.AppendLine(
-            "    chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(chaos_object);");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitNewArray(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var targetReference = GetRequiredTargetReference(instruction);
-        if (targetReference.Kind != AotCoreIrReferenceKind.Type)
-        {
-            throw new NotSupportedException(
-                $"native-aot newarr requires type target reference, got '{targetReference.Kind}'.");
-        }
-
-        var elementSubjectId = HasArrayElementReference(targetReference)
-            ? targetReference.ArrayElementSubjectId
-            : targetReference.SubjectId;
-        var elementTypeShape = HasArrayElementReference(targetReference)
-            ? targetReference.ArrayElementTypeShape
-            : targetReference.TypeShape;
-
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_length = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        if (chaos_length < 0)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
-        builder.AppendLine("        }");
-        builder.AppendLine("        auto* chaos_array = new chaos_managed_array{};");
-        builder.AppendLine("        chaos_array->header.type_id = chaos_type_id_managed_array;");
-        builder.AppendLine(
-            $"        chaos_array->element_type_shape = {GetNativeTypeShapeValue(elementTypeShape)};");
-        builder.AppendLine(
-            $"        chaos_array->element_type_id = {GetRuntimeTypeIdExpression(elementSubjectId, elementTypeShape)};");
-        builder.AppendLine("        chaos_array->length = static_cast<std::intptr_t>(chaos_length);");
-        builder.AppendLine(
-            "        chaos_array->elements = chaos_length == 0 ? nullptr : new std::intptr_t[static_cast<std::size_t>(chaos_length)]{};");
-        builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(chaos_array);");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitArrayLength(
-        StringBuilder builder,
-        int? nextOffset,
-        string op)
-    {
-        builder.AppendLine("    {");
-        builder.AppendLine("        auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        if (chaos_array == nullptr)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
-        builder.AppendLine("        }");
-        builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = chaos_array->length;");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitArrayElementAddress(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var targetReference = GetRequiredTargetReference(instruction);
-        if (targetReference.Kind != AotCoreIrReferenceKind.Type)
-        {
-            throw new NotSupportedException(
-                $"native-aot ldelema requires type target reference, got '{targetReference.Kind}'.");
-        }
-
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_index = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        if (chaos_array == nullptr)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
-        builder.AppendLine("        }");
-        builder.AppendLine("        if (chaos_index < 0 || static_cast<std::intptr_t>(chaos_index) >= chaos_array->length)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
-        builder.AppendLine("        }");
-        builder.AppendLine(
-            "        chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(&chaos_array->elements[static_cast<std::size_t>(chaos_index)]);");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitCastClass(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var targetReference = GetRequiredTargetReference(instruction);
-        if (targetReference.Kind != AotCoreIrReferenceKind.Type)
-        {
-            throw new NotSupportedException(
-                $"native-aot castclass requires type target reference, got '{targetReference.Kind}'.");
-        }
-
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_value = chaos_eval_stack[chaos_stack_top - 1];");
-        builder.AppendLine("        if (chaos_value != static_cast<std::intptr_t>(0))");
-        builder.AppendLine("        {");
-        builder.AppendLine("            auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_value);");
-        if (HasArrayElementReference(targetReference))
-        {
-            builder.AppendLine("            if (chaos_header->type_id != chaos_type_id_managed_array)");
-            builder.AppendLine("            {");
-            builder.AppendLine("                std::abort();");
-            builder.AppendLine("            }");
-            builder.AppendLine("            auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_value);");
-            builder.AppendLine(
-                $"            if (!chaos_is_array_type_compatible(chaos_array->element_type_shape, chaos_array->element_type_id, {GetNativeTypeShapeValue(targetReference.ArrayElementTypeShape)}, {GetRuntimeTypeIdExpression(targetReference.ArrayElementSubjectId, targetReference.ArrayElementTypeShape)}))");
-        }
-        else if (targetReference.TypeShape == AotCoreIrTypeShapeKind.InterfaceType)
-        {
-            builder.AppendLine(
-                $"            if (!chaos_does_type_implement_interface(chaos_header->type_id, {GetNativeTypeIdSymbol(targetReference.SubjectId)}))");
-        }
-        else if (targetReference.TypeShape == AotCoreIrTypeShapeKind.ReferenceType)
-        {
-            builder.AppendLine(
-                $"            if (!chaos_is_type_compatible(chaos_header->type_id, {GetNativeTypeIdSymbol(targetReference.SubjectId)}))");
-        }
-        else
-        {
-            builder.AppendLine(
-                $"            if (chaos_header->type_id != {GetNativeTypeIdSymbol(targetReference.SubjectId)})");
-        }
-        builder.AppendLine("            {");
-        builder.AppendLine("                std::abort();");
-        builder.AppendLine("            }");
-        builder.AppendLine("        }");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitIsInst(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var targetReference = GetRequiredTargetReference(instruction);
-        if (targetReference.Kind != AotCoreIrReferenceKind.Type)
-        {
-            throw new NotSupportedException(
-                $"native-aot isinst requires type target reference, got '{targetReference.Kind}'.");
-        }
-
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_value = chaos_eval_stack[--chaos_stack_top];");
-        builder.AppendLine("        auto chaos_matches = false;");
-        builder.AppendLine("        if (chaos_value != static_cast<std::intptr_t>(0))");
-        builder.AppendLine("        {");
-        builder.AppendLine("            auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_value);");
-        if (HasArrayElementReference(targetReference))
-        {
-            builder.AppendLine("            if (chaos_header->type_id == chaos_type_id_managed_array)");
-            builder.AppendLine("            {");
-            builder.AppendLine("                auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_value);");
-            builder.AppendLine(
-                $"                chaos_matches = chaos_is_array_type_compatible(chaos_array->element_type_shape, chaos_array->element_type_id, {GetNativeTypeShapeValue(targetReference.ArrayElementTypeShape)}, {GetRuntimeTypeIdExpression(targetReference.ArrayElementSubjectId, targetReference.ArrayElementTypeShape)});");
-            builder.AppendLine("            }");
-        }
-        else if (targetReference.TypeShape == AotCoreIrTypeShapeKind.InterfaceType)
-        {
-            builder.AppendLine(
-                $"            chaos_matches = chaos_does_type_implement_interface(chaos_header->type_id, {GetNativeTypeIdSymbol(targetReference.SubjectId)});");
-        }
-        else if (targetReference.TypeShape == AotCoreIrTypeShapeKind.ReferenceType)
-        {
-            builder.AppendLine(
-                $"            chaos_matches = chaos_is_type_compatible(chaos_header->type_id, {GetNativeTypeIdSymbol(targetReference.SubjectId)});");
-        }
-        else
-        {
-            builder.AppendLine(
-                $"            chaos_matches = chaos_header->type_id == {GetNativeTypeIdSymbol(targetReference.SubjectId)};");
-        }
-        builder.AppendLine("        }");
-        builder.AppendLine(
-            "        chaos_eval_stack[chaos_stack_top++] = chaos_matches ? chaos_value : static_cast<std::intptr_t>(0);");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitFieldLoad(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var targetReference = GetRequiredTargetReference(instruction);
-        if (targetReference.Kind != AotCoreIrReferenceKind.Field)
-        {
-            throw new NotSupportedException(
-                $"native-aot field load requires field target reference, got '{targetReference.Kind}'.");
-        }
-
-        if (instruction.RuntimeServiceKind == AotCoreIrRuntimeServiceKind.LoadStaticField)
-        {
-            builder.AppendLine(
-                $"    chaos_eval_stack[chaos_stack_top++] = {GetNativeStaticFieldSymbol(targetReference.SubjectId)};");
-            AppendGotoNext(builder, nextOffset, op);
-            return;
-        }
-
-        builder.AppendLine("    {");
-        if (targetReference.DeclaringTypeShape == AotCoreIrTypeShapeKind.ValueType)
-        {
-            var declaringTypeSubjectId = GetRequiredDeclaringTypeSubjectId(targetReference);
-            builder.AppendLine(
-                $"        auto* chaos_value = chaos_resolve_managed_value_pointer<{GetNativeValueTypeSymbol(declaringTypeSubjectId)}>(chaos_eval_stack[--chaos_stack_top]);");
-            builder.AppendLine(
-                $"        chaos_eval_stack[chaos_stack_top++] = chaos_value->{GetNativeFieldMemberName(targetReference.SubjectId)};");
-        }
-        else
-        {
-            var declaringTypeSubjectId = GetRequiredDeclaringTypeSubjectId(targetReference);
-            builder.AppendLine(
-                $"        auto* chaos_object = reinterpret_cast<{GetNativeTypeSymbol(declaringTypeSubjectId)}*>(chaos_eval_stack[--chaos_stack_top]);");
-            builder.AppendLine(
-                $"        chaos_eval_stack[chaos_stack_top++] = chaos_object->{GetNativeFieldMemberName(targetReference.SubjectId)};");
-        }
-
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitFieldStore(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var targetReference = GetRequiredTargetReference(instruction);
-        if (targetReference.Kind != AotCoreIrReferenceKind.Field)
-        {
-            throw new NotSupportedException(
-                $"native-aot field store requires field target reference, got '{targetReference.Kind}'.");
-        }
-
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_value = chaos_eval_stack[--chaos_stack_top];");
-        if (instruction.RuntimeServiceKind == AotCoreIrRuntimeServiceKind.StoreStaticField)
-        {
-            builder.AppendLine($"        {GetNativeStaticFieldSymbol(targetReference.SubjectId)} = chaos_value;");
-        }
-        else
-        {
-            var declaringTypeSubjectId = GetRequiredDeclaringTypeSubjectId(targetReference);
-            if (targetReference.DeclaringTypeShape == AotCoreIrTypeShapeKind.ValueType)
-            {
-                builder.AppendLine(
-                    $"        auto* chaos_value_owner = chaos_resolve_managed_value_pointer<{GetNativeValueTypeSymbol(declaringTypeSubjectId)}>(chaos_eval_stack[--chaos_stack_top]);");
-                builder.AppendLine(
-                    $"        chaos_value_owner->{GetNativeFieldMemberName(targetReference.SubjectId)} = chaos_value;");
-            }
-            else
-            {
-                builder.AppendLine(
-                    $"        auto* chaos_object = reinterpret_cast<{GetNativeTypeSymbol(declaringTypeSubjectId)}*>(chaos_eval_stack[--chaos_stack_top]);");
-                builder.AppendLine(
-                    $"        chaos_object->{GetNativeFieldMemberName(targetReference.SubjectId)} = chaos_value;");
-            }
-        }
-
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitArrayLoad(
-        StringBuilder builder,
-        int? nextOffset,
-        string op)
-    {
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_index = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        if (chaos_array == nullptr)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
-        builder.AppendLine("        }");
-        builder.AppendLine("        if (chaos_index < 0 || static_cast<std::intptr_t>(chaos_index) >= chaos_array->length)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
-        builder.AppendLine("        }");
-        builder.AppendLine(
-            "        chaos_eval_stack[chaos_stack_top++] = chaos_array->elements[static_cast<std::size_t>(chaos_index)];");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitArrayStore(
-        StringBuilder builder,
-        int? nextOffset,
-        string op)
-    {
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_value = chaos_eval_stack[--chaos_stack_top];");
-        builder.AppendLine("        const auto chaos_index = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        if (chaos_array == nullptr)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
-        builder.AppendLine("        }");
-        builder.AppendLine("        if (chaos_index < 0 || static_cast<std::intptr_t>(chaos_index) >= chaos_array->length)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
-        builder.AppendLine("        }");
-        if (string.Equals(op, "stelem.ref", StringComparison.Ordinal))
-        {
-            builder.AppendLine("        if (!chaos_is_array_store_compatible(chaos_array, chaos_value))");
-            builder.AppendLine("        {");
-            builder.AppendLine("            std::abort();");
-            builder.AppendLine("        }");
-        }
-        builder.AppendLine(
-            "        chaos_array->elements[static_cast<std::size_t>(chaos_index)] = chaos_value;");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitLoadIndirectInt32(
-        StringBuilder builder,
-        int? nextOffset,
-        string op)
-    {
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_address = chaos_eval_stack[--chaos_stack_top];");
-        builder.AppendLine("        if (chaos_address == static_cast<std::intptr_t>(0))");
-        builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
-        builder.AppendLine("        }");
-        builder.AppendLine(
-            "        const auto chaos_value = static_cast<std::int32_t>(*reinterpret_cast<std::intptr_t*>(chaos_address));");
-        builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>(chaos_value);");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitStoreIndirectInt32(
-        StringBuilder builder,
-        int? nextOffset,
-        string op)
-    {
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_value = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        const auto chaos_address = chaos_eval_stack[--chaos_stack_top];");
-        builder.AppendLine("        if (chaos_address == static_cast<std::intptr_t>(0))");
-        builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
-        builder.AppendLine("        }");
-        builder.AppendLine("        *reinterpret_cast<std::intptr_t*>(chaos_address) = static_cast<std::intptr_t>(chaos_value);");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitBox(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var targetReference = GetRequiredTargetReference(instruction);
-        if (targetReference.Kind != AotCoreIrReferenceKind.Type)
-        {
-            throw new NotSupportedException(
-                $"native-aot box requires type target reference, got '{targetReference.Kind}'.");
-        }
-
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_value = chaos_eval_stack[--chaos_stack_top];");
-        builder.AppendLine(
-            $"        auto* chaos_boxed = new {GetNativeBoxTypeSymbol(targetReference.SubjectId)}{{}};");
-        builder.AppendLine(
-            $"        chaos_boxed->header.type_id = {GetNativeBoxTypeIdSymbol(targetReference.SubjectId)};");
-        if (RequiresStructuredValueTypePayload(targetReference))
-        {
-            builder.AppendLine(
-                $"        auto* chaos_payload = chaos_resolve_managed_value_pointer<{GetNativeValueTypeSymbol(targetReference.SubjectId)}>(chaos_value);");
-            builder.AppendLine("        chaos_boxed->value = *chaos_payload;");
-        }
-        else
-        {
-            builder.AppendLine("        chaos_boxed->value = chaos_value;");
-        }
-
-        builder.AppendLine(
-            "        chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(chaos_boxed);");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitUnbox(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var targetReference = GetRequiredTargetReference(instruction);
-        if (targetReference.Kind != AotCoreIrReferenceKind.Type)
-        {
-            throw new NotSupportedException(
-                $"native-aot unbox requires type target reference, got '{targetReference.Kind}'.");
-        }
-
-        builder.AppendLine("    {");
-        builder.AppendLine(
-            $"        auto* chaos_boxed = reinterpret_cast<{GetNativeBoxTypeSymbol(targetReference.SubjectId)}*>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        if (chaos_boxed == nullptr)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
-        builder.AppendLine("        }");
-        builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(&chaos_boxed->value);");
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitUnboxAny(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var targetReference = GetRequiredTargetReference(instruction);
-        if (targetReference.Kind != AotCoreIrReferenceKind.Type)
-        {
-            throw new NotSupportedException(
-                $"native-aot unbox.any requires type target reference, got '{targetReference.Kind}'.");
-        }
-
-        builder.AppendLine("    {");
-        builder.AppendLine(
-            $"        auto* chaos_boxed = reinterpret_cast<{GetNativeBoxTypeSymbol(targetReference.SubjectId)}*>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine("        if (chaos_boxed == nullptr)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
-        builder.AppendLine("        }");
-        if (RequiresStructuredValueTypePayload(targetReference))
-        {
-            builder.AppendLine(
-                $"        auto* chaos_value = new {GetNativeValueTypeSymbol(targetReference.SubjectId)}{{}};");
-            builder.AppendLine("        *chaos_value = chaos_boxed->value;");
-            builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(chaos_value);");
-        }
-        else
-        {
-            builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = chaos_boxed->value;");
-        }
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitLoadObjectValue(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var targetReference = GetRequiredTargetReference(instruction);
-        if (targetReference.Kind != AotCoreIrReferenceKind.Type)
-        {
-            throw new NotSupportedException(
-                $"native-aot ldobj requires type target reference, got '{targetReference.Kind}'.");
-        }
-
-        builder.AppendLine("    {");
-        if (RequiresStructuredValueTypePayload(targetReference))
-        {
-            builder.AppendLine(
-                $"        auto* chaos_source = chaos_resolve_managed_value_pointer<{GetNativeValueTypeSymbol(targetReference.SubjectId)}>(chaos_eval_stack[--chaos_stack_top]);");
-            builder.AppendLine(
-                $"        auto* chaos_value = new {GetNativeValueTypeSymbol(targetReference.SubjectId)}{{}};");
-            builder.AppendLine("        *chaos_value = *chaos_source;");
-            builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(chaos_value);");
-        }
-        else
-        {
-            builder.AppendLine(
-                "        auto* chaos_source = chaos_resolve_managed_value_pointer<std::intptr_t>(chaos_eval_stack[--chaos_stack_top]);");
-            builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = *chaos_source;");
-        }
-
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitStoreObjectValue(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var targetReference = GetRequiredTargetReference(instruction);
-        if (targetReference.Kind != AotCoreIrReferenceKind.Type)
-        {
-            throw new NotSupportedException(
-                $"native-aot stobj requires type target reference, got '{targetReference.Kind}'.");
-        }
-
-        builder.AppendLine("    {");
-        if (RequiresStructuredValueTypePayload(targetReference))
-        {
-            builder.AppendLine(
-                $"        auto* chaos_source = reinterpret_cast<{GetNativeValueTypeSymbol(targetReference.SubjectId)}*>(chaos_eval_stack[--chaos_stack_top]);");
-            builder.AppendLine(
-                $"        auto* chaos_destination = chaos_resolve_managed_value_pointer<{GetNativeValueTypeSymbol(targetReference.SubjectId)}>(chaos_eval_stack[--chaos_stack_top]);");
-            builder.AppendLine("        if (chaos_source == nullptr)");
-            builder.AppendLine("        {");
-            builder.AppendLine("            std::abort();");
-            builder.AppendLine("        }");
-            builder.AppendLine("        *chaos_destination = *chaos_source;");
-        }
-        else
-        {
-            builder.AppendLine("        const auto chaos_value = chaos_eval_stack[--chaos_stack_top];");
-            builder.AppendLine(
-                "        auto* chaos_destination = chaos_resolve_managed_value_pointer<std::intptr_t>(chaos_eval_stack[--chaos_stack_top]);");
-            builder.AppendLine("        *chaos_destination = chaos_value;");
-        }
-
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitInitObj(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        string op)
-    {
-        var targetReference = GetRequiredTargetReference(instruction);
-        if (targetReference.Kind != AotCoreIrReferenceKind.Type)
-        {
-            throw new NotSupportedException(
-                $"native-aot initobj requires type target reference, got '{targetReference.Kind}'.");
-        }
-
-        builder.AppendLine("    {");
-        if (RequiresStructuredValueTypePayload(targetReference))
-        {
-            builder.AppendLine(
-                $"        auto* chaos_value = chaos_resolve_managed_value_pointer<{GetNativeValueTypeSymbol(targetReference.SubjectId)}>(chaos_eval_stack[--chaos_stack_top]);");
-            builder.AppendLine($"        *chaos_value = {GetNativeValueTypeSymbol(targetReference.SubjectId)}{{}};");
-        }
-        else
-        {
-            builder.AppendLine("        const auto chaos_address = chaos_eval_stack[--chaos_stack_top];");
-            builder.AppendLine("        if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)");
-            builder.AppendLine("        {");
-            builder.AppendLine(
-                "            auto* chaos_slot = reinterpret_cast<std::intptr_t*>(static_cast<std::uintptr_t>(chaos_address & ~chaos_managed_pointer_local_slot_tag));");
-            builder.AppendLine("            *chaos_slot = static_cast<std::intptr_t>(0);");
-            builder.AppendLine("        }");
-            builder.AppendLine("        else");
-            builder.AppendLine("        {");
-            builder.AppendLine("            *reinterpret_cast<std::intptr_t*>(chaos_address) = static_cast<std::intptr_t>(0);");
-            builder.AppendLine("        }");
-        }
-
-        builder.AppendLine("    }");
-        AppendGotoNext(builder, nextOffset, op);
-    }
-
-    private static void EmitComparisonBranch(
-        StringBuilder builder,
-        string comparisonOperator,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        IReadOnlySet<int> offsets)
-    {
-        if (nextOffset is null)
-        {
-            throw new InvalidOperationException(
-                $"branch opcode '{instruction.Op}' cannot terminate the method");
-        }
-
-        var branchTarget = GetRequiredBranchTarget(instruction, offsets);
-        var operandType = comparisonOperator is "==" or "!="
-            ? "std::intptr_t"
-            : "std::int32_t";
-        builder.AppendLine("    {");
-        builder.AppendLine(
-            $"        const auto chaos_right = static_cast<{operandType}>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine(
-            $"        const auto chaos_left = static_cast<{operandType}>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine(
-            $"        if (chaos_left {comparisonOperator} chaos_right)");
-        builder.AppendLine("        {");
-        builder.AppendLine($"            goto chaos_ip_{branchTarget};");
-        builder.AppendLine("        }");
-        builder.AppendLine("    }");
-        builder.AppendLine($"    goto chaos_ip_{nextOffset.Value};");
-    }
-
-    private static void EmitUnsignedComparisonBranch(
-        StringBuilder builder,
-        string comparisonOperator,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        IReadOnlySet<int> offsets)
-    {
-        if (nextOffset is null)
-        {
-            throw new InvalidOperationException(
-                $"branch opcode '{instruction.Op}' cannot terminate the method");
-        }
-
-        var branchTarget = GetRequiredBranchTarget(instruction, offsets);
-        builder.AppendLine("    {");
-        builder.AppendLine(
-            "        const auto chaos_right = static_cast<std::uint32_t>(static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]));");
-        builder.AppendLine(
-            "        const auto chaos_left = static_cast<std::uint32_t>(static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]));");
-        builder.AppendLine(
-            $"        if (chaos_left {comparisonOperator} chaos_right)");
-        builder.AppendLine("        {");
-        builder.AppendLine($"            goto chaos_ip_{branchTarget};");
-        builder.AppendLine("        }");
-        builder.AppendLine("    }");
-        builder.AppendLine($"    goto chaos_ip_{nextOffset.Value};");
-    }
-
-    private static void EmitTruthBranch(
-        StringBuilder builder,
-        bool shouldBranchWhenNonZero,
-        AotCoreIrInstructionArtifact instruction,
-        int? nextOffset,
-        IReadOnlySet<int> offsets)
-    {
-        if (nextOffset is null)
-        {
-            throw new InvalidOperationException(
-                $"branch opcode '{instruction.Op}' cannot terminate the method");
-        }
-
-        var branchTarget = GetRequiredBranchTarget(instruction, offsets);
-        builder.AppendLine("    {");
-        builder.AppendLine("        const auto chaos_condition = chaos_eval_stack[--chaos_stack_top];");
-        builder.AppendLine(
-            shouldBranchWhenNonZero
-                ? "        if (chaos_condition != static_cast<std::intptr_t>(0))"
-                : "        if (chaos_condition == static_cast<std::intptr_t>(0))");
-        builder.AppendLine("        {");
-        builder.AppendLine($"            goto chaos_ip_{branchTarget};");
-        builder.AppendLine("        }");
-        builder.AppendLine("    }");
-        builder.AppendLine($"    goto chaos_ip_{nextOffset.Value};");
-    }
-
-    private static void AppendGotoNext(StringBuilder builder, int? nextOffset, string op)
-    {
-        if (nextOffset is null)
-        {
-            throw new InvalidOperationException(
-                $"opcode '{op}' cannot be the final instruction in the method");
-        }
-
-        builder.AppendLine($"    goto chaos_ip_{nextOffset.Value};");
-    }
-
-    private void EmitInstructionRange(
-        StringBuilder builder,
-        AotCoreIrMethodArtifact method,
-        IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
-        IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset,
-        IReadOnlySet<int> offsets)
-    {
-        foreach (var instruction in instructions)
-        {
-            var offset = GetRequiredIlOffset(instruction);
-            builder.AppendLine($"chaos_ip_{offset}:");
-            EmitInstruction(builder, method, instruction, nextOffsetsByIlOffset[offset], offsets);
+            builder.AppendLine(helper.Source);
             builder.AppendLine();
         }
     }
 
-    private void EmitCatchOnlyExceptionMethodBody(
+    private void EmitDelegateRuntimeSupportDefinitions(
         StringBuilder builder,
-        AotCoreIrMethodArtifact method,
-        CatchOnlyExceptionMethodShape catchOnlyShape,
-        IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset,
-        IReadOnlySet<int> offsets)
+        IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
+        IReadOnlyList<ExternalRuntimeHelperDefinition> externalRuntimeHelpers)
     {
-        EmitLinearInstructionSequence(builder, catchOnlyShape.PrefixInstructions, "    ");
-        if (catchOnlyShape.PrefixInstructions.Count > 0)
-        {
-            builder.AppendLine();
-        }
-
-        builder.AppendLine("    try");
-        builder.AppendLine("    {");
-        builder.AppendLine($"        goto chaos_ip_{GetRequiredIlOffset(catchOnlyShape.TryInstructions[0])};");
-        builder.AppendLine();
-        EmitInstructionRange(builder, method, catchOnlyShape.TryInstructions, nextOffsetsByIlOffset, offsets);
-        builder.AppendLine("    }");
-        builder.AppendLine("    catch (const chaos_managed_exception& chaos_exception)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_exception.object_value);");
-        builder.AppendLine("        if (chaos_header == nullptr)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            throw;");
-        builder.AppendLine("        }");
-        builder.AppendLine(
-            $"        if (!chaos_is_type_compatible(chaos_header->type_id, {GetNativeTypeIdSymbol(catchOnlyShape.ExceptionRegion.CatchTypeSubjectId!)}))");
-        builder.AppendLine("        {");
-        builder.AppendLine("            throw;");
-        builder.AppendLine("        }");
-        builder.AppendLine("        chaos_eval_stack[chaos_stack_top++] = chaos_exception.object_value;");
-        builder.AppendLine($"        goto chaos_ip_{GetRequiredIlOffset(catchOnlyShape.HandlerInstructions[0])};");
-        builder.AppendLine();
-        EmitInstructionRange(builder, method, catchOnlyShape.HandlerInstructions, nextOffsetsByIlOffset, offsets);
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        EmitInstructionRange(builder, method, catchOnlyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
-    }
-
-    private void EmitFilterAndFinallyExceptionMethodBody(
-        StringBuilder builder,
-        AotCoreIrMethodArtifact method,
-        FilterAndFinallyExceptionMethodShape filterAndFinallyShape,
-        IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset,
-        IReadOnlySet<int> offsets)
-    {
-        EmitLinearInstructionSequence(builder, filterAndFinallyShape.PrefixInstructions, "    ");
-        if (filterAndFinallyShape.PrefixInstructions.Count > 0)
-        {
-            builder.AppendLine();
-        }
-
-        EmitNestedFinallyScopes(
-            builder,
-            method,
-            filterAndFinallyShape,
-            0,
-            nextOffsetsByIlOffset,
-            offsets);
-
-        builder.AppendLine();
-        EmitInstructionRange(builder, method, filterAndFinallyShape.TailInstructions, nextOffsetsByIlOffset, offsets);
-    }
-
-    private void EmitNestedFinallyScopes(
-        StringBuilder builder,
-        AotCoreIrMethodArtifact method,
-        FilterAndFinallyExceptionMethodShape filterAndFinallyShape,
-        int finallyIndex,
-        IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset,
-        IReadOnlySet<int> offsets)
-    {
-        if (finallyIndex >= filterAndFinallyShape.FinallyHandlers.Count)
-        {
-            EmitFilterAndFinallyTryCatchCore(
-                builder,
-                method,
-                filterAndFinallyShape,
-                nextOffsetsByIlOffset,
-                offsets);
-            return;
-        }
-
-        builder.AppendLine("    {");
-        builder.AppendLine($"        auto chaos_finally_guard_{finallyIndex} = chaos_make_finally_scope_guard([&]()");
-        builder.AppendLine("        {");
-        EmitLinearInstructionSequence(
-            builder,
-            filterAndFinallyShape.FinallyHandlers[finallyIndex].Instructions
-                .Take(filterAndFinallyShape.FinallyHandlers[finallyIndex].Instructions.Count - 1)
-                .ToArray(),
-            "            ");
-        builder.AppendLine("        });");
-        EmitNestedFinallyScopes(
-            builder,
-            method,
-            filterAndFinallyShape,
-            finallyIndex + 1,
-            nextOffsetsByIlOffset,
-            offsets);
-        builder.AppendLine("    }");
-    }
-
-    private void EmitFilterAndFinallyTryCatchCore(
-        StringBuilder builder,
-        AotCoreIrMethodArtifact method,
-        FilterAndFinallyExceptionMethodShape filterAndFinallyShape,
-        IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset,
-        IReadOnlySet<int> offsets)
-    {
-        builder.AppendLine("        try");
-        builder.AppendLine("        {");
-        builder.AppendLine($"            goto chaos_ip_{GetRequiredIlOffset(filterAndFinallyShape.TryInstructions[0])};");
-        builder.AppendLine();
-        EmitInstructionRange(builder, method, filterAndFinallyShape.TryInstructions, nextOffsetsByIlOffset, offsets);
-        builder.AppendLine("        }");
-        builder.AppendLine("        catch (const chaos_managed_exception& chaos_exception)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            chaos_eval_stack[chaos_stack_top++] = chaos_exception.object_value;");
-        builder.AppendLine($"            goto chaos_ip_{GetRequiredIlOffset(filterAndFinallyShape.FilterInstructions[0])};");
-        builder.AppendLine();
-        EmitFilterInstructionRange(
-            builder,
-            method,
-            filterAndFinallyShape,
-            nextOffsetsByIlOffset,
-            offsets);
-        builder.AppendLine("        }");
-    }
-
-    private void EmitFilterInstructionRange(
-        StringBuilder builder,
-        AotCoreIrMethodArtifact method,
-        FilterAndFinallyExceptionMethodShape filterAndFinallyShape,
-        IReadOnlyDictionary<int, int?> nextOffsetsByIlOffset,
-        IReadOnlySet<int> offsets)
-    {
-        var handlerStartOffset = GetRequiredIlOffset(filterAndFinallyShape.HandlerInstructions[0]);
-        foreach (var instruction in filterAndFinallyShape.FilterInstructions)
-        {
-            var offset = GetRequiredIlOffset(instruction);
-            builder.AppendLine($"chaos_ip_{offset}:");
-            if (string.Equals(instruction.Op, "endfilter", StringComparison.Ordinal))
-            {
-                builder.AppendLine("    if (chaos_eval_stack[--chaos_stack_top] == static_cast<std::intptr_t>(0))");
-                builder.AppendLine("    {");
-                builder.AppendLine("        throw;");
-                builder.AppendLine("    }");
-                builder.AppendLine("    chaos_eval_stack[chaos_stack_top++] = chaos_exception.object_value;");
-                builder.AppendLine($"    goto chaos_ip_{handlerStartOffset};");
-            }
-            else
-            {
-                EmitInstruction(builder, method, instruction, nextOffsetsByIlOffset[offset], offsets);
-            }
-
-            builder.AppendLine();
-        }
-
-        EmitInstructionRange(
-            builder,
-            method,
-            filterAndFinallyShape.HandlerInstructions,
-            nextOffsetsByIlOffset,
-            offsets);
-    }
-
-    private static void EmitLinearInstructionSequence(
-        StringBuilder builder,
-        IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
-        string indentation)
-    {
-        foreach (var instruction in instructions)
-        {
-            EmitLinearInstruction(builder, instruction, indentation);
-        }
-    }
-
-    private static void EmitLinearInstruction(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        string indentation)
-    {
-        switch (instruction.Op)
-        {
-            case "ldc.i4":
-                builder.AppendLine(
-                    $"{indentation}chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>({FormatInt32Literal(GetRequiredIntOperand(instruction))});");
-                return;
-
-            case "ldc.i8":
-                builder.AppendLine(
-                    $"{indentation}chaos_eval_stack[chaos_stack_top++] = chaos_store_int64({FormatInt64Literal(GetRequiredInt64Operand(instruction))});");
-                return;
-
-            case "ldloc":
-                builder.AppendLine(
-                    $"{indentation}chaos_eval_stack[chaos_stack_top++] = chaos_locals[{GetRequiredIntOperand(instruction)}];");
-                return;
-
-            case "stloc":
-                builder.AppendLine(
-                    $"{indentation}chaos_locals[{GetRequiredIntOperand(instruction)}] = chaos_eval_stack[--chaos_stack_top];");
-                return;
-
-            case "ldnull":
-                builder.AppendLine($"{indentation}chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>(0);");
-                return;
-
-            case "cgt.un":
-                builder.AppendLine($"{indentation}{{");
-                builder.AppendLine(
-                    $"{indentation}    const auto chaos_right = static_cast<std::uintptr_t>(chaos_eval_stack[--chaos_stack_top]);");
-                builder.AppendLine(
-                    $"{indentation}    const auto chaos_left = static_cast<std::uintptr_t>(chaos_eval_stack[--chaos_stack_top]);");
-                builder.AppendLine(
-                    $"{indentation}    chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>(chaos_left > chaos_right ? 1 : 0);");
-                builder.AppendLine($"{indentation}}}");
-                return;
-
-            case "add":
-                EmitLinearBinaryArithmetic(builder, indentation, "chaos_wrap_add");
-                return;
-
-            case "sub":
-                EmitLinearBinaryArithmetic(builder, indentation, "chaos_wrap_sub");
-                return;
-
-            case "mul":
-                EmitLinearBinaryArithmetic(builder, indentation, "chaos_wrap_mul");
-                return;
-
-            case "div":
-                EmitLinearBinaryArithmetic(builder, indentation, "chaos_div");
-                return;
-
-            case "rem":
-                EmitLinearBinaryArithmetic(builder, indentation, "chaos_rem");
-                return;
-
-            case "shl":
-                EmitLinearShift(builder, instruction, indentation, "chaos_shift_left_int32");
-                return;
-
-            case "shr":
-                EmitLinearShift(builder, instruction, indentation, "chaos_shift_right_int32");
-                return;
-
-            case "shr.un":
-                EmitLinearShift(builder, instruction, indentation, "chaos_shift_right_un_int32");
-                return;
-
-            case "not":
-                EmitLinearBitwiseNot(builder, instruction, indentation);
-                return;
-
-            case "and":
-                EmitLinearBinaryBitwise(builder, indentation, "&");
-                return;
-
-            case "or":
-                EmitLinearBinaryBitwise(builder, indentation, "|");
-                return;
-
-            case "xor":
-                EmitLinearBinaryBitwise(builder, indentation, "^");
-                return;
-
-            default:
-                throw new NotSupportedException(
-                    $"native-aot structured EH linear lowering does not support opcode '{instruction.Op}'.");
-        }
-    }
-
-    private static void EmitLinearBinaryArithmetic(
-        StringBuilder builder,
-        string indentation,
-        string helperName)
-    {
-        builder.AppendLine($"{indentation}{{");
-        builder.AppendLine(
-            $"{indentation}    const auto chaos_right = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine(
-            $"{indentation}    const auto chaos_left = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine(
-            $"{indentation}    chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>({helperName}(chaos_left, chaos_right));");
-        builder.AppendLine($"{indentation}}}");
-    }
-
-    private static void EmitLinearBinaryBitwise(
-        StringBuilder builder,
-        string indentation,
-        string operation)
-    {
-        builder.AppendLine($"{indentation}{{");
-        builder.AppendLine(
-            $"{indentation}    const auto chaos_right = chaos_load_uint64(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine(
-            $"{indentation}    const auto chaos_left = chaos_load_uint64(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine(
-            $"{indentation}    chaos_eval_stack[chaos_stack_top++] = chaos_store_uint64(chaos_left {operation} chaos_right);");
-        builder.AppendLine($"{indentation}}}");
-    }
-
-    private static void EmitLinearShift(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        string indentation,
-        string helperName)
-    {
-        RequireInt32IntegralResultType(instruction);
-        builder.AppendLine($"{indentation}{{");
-        builder.AppendLine(
-            $"{indentation}    const auto chaos_shift = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine(
-            $"{indentation}    const auto chaos_value = static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-        builder.AppendLine(
-            $"{indentation}    chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>({helperName}(chaos_value, chaos_shift));");
-        builder.AppendLine($"{indentation}}}");
-    }
-
-    private static void EmitLinearBitwiseNot(
-        StringBuilder builder,
-        AotCoreIrInstructionArtifact instruction,
-        string indentation)
-    {
-        RequireInt32IntegralResultType(instruction);
-        builder.AppendLine($"{indentation}{{");
-        builder.AppendLine(
-            $"{indentation}    const auto chaos_value = static_cast<std::int32_t>(chaos_eval_stack[chaos_stack_top - 1]);");
-        builder.AppendLine(
-            $"{indentation}    chaos_eval_stack[chaos_stack_top - 1] = static_cast<std::intptr_t>(~chaos_value);");
-        builder.AppendLine($"{indentation}}}");
-    }
-
-    private static IReadOnlyDictionary<int, int?> CreateNextOffsets(
-        IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
-    {
-        var nextOffsetsByIlOffset = new Dictionary<int, int?>(instructions.Count);
-        for (var index = 0; index < instructions.Count; index++)
-        {
-            var offset = GetRequiredIlOffset(instructions[index]);
-            nextOffsetsByIlOffset[offset] = index + 1 < instructions.Count
-                ? GetRequiredIlOffset(instructions[index + 1])
-                : null;
-        }
-
-        return nextOffsetsByIlOffset;
-    }
-
-    private static bool TryCreateCatchOnlyExceptionMethodShape(
-        AotCoreIrMethodArtifact method,
-        out CatchOnlyExceptionMethodShape? catchOnlyShape)
-    {
-        catchOnlyShape = null;
-        if (method.ExceptionRegions.Count != 1)
-        {
-            return false;
-        }
-
-        var exceptionRegion = method.ExceptionRegions[0];
-        if (exceptionRegion.HandlingKindCode != AotCoreIrExceptionRegionKind.Catch ||
-            exceptionRegion.FilterOffset is not null ||
-            string.IsNullOrWhiteSpace(exceptionRegion.CatchTypeSubjectId))
-        {
-            return false;
-        }
-
-        var orderedInstructions = method.Instructions
-            .OrderBy(GetRequiredIlOffset)
-            .ToArray();
-        if (orderedInstructions.Length == 0)
-        {
-            return false;
-        }
-
-        var tryEndOffset = checked(exceptionRegion.TryOffset + exceptionRegion.TryLength);
-        var handlerEndOffset = checked(exceptionRegion.HandlerOffset + exceptionRegion.HandlerLength);
-        if (tryEndOffset != exceptionRegion.HandlerOffset)
-        {
-            return false;
-        }
-
-        var prefixInstructions = orderedInstructions
-            .Where(instruction => GetRequiredIlOffset(instruction) < exceptionRegion.TryOffset)
-            .ToArray();
-        var tryInstructions = orderedInstructions
-            .Where(instruction =>
-            {
-                var offset = GetRequiredIlOffset(instruction);
-                return offset >= exceptionRegion.TryOffset && offset < tryEndOffset;
-            })
-            .ToArray();
-        var handlerInstructions = orderedInstructions
-            .Where(instruction =>
-            {
-                var offset = GetRequiredIlOffset(instruction);
-                return offset >= exceptionRegion.HandlerOffset && offset < handlerEndOffset;
-            })
-            .ToArray();
-        var tailInstructions = orderedInstructions
-            .Where(instruction => GetRequiredIlOffset(instruction) >= handlerEndOffset)
-            .ToArray();
-        if (tryInstructions.Length == 0 ||
-            handlerInstructions.Length < 2 ||
-            tailInstructions.Length == 0 ||
-            orderedInstructions.Length != prefixInstructions.Length + tryInstructions.Length + handlerInstructions.Length + tailInstructions.Length)
-        {
-            return false;
-        }
-
-        if (!string.Equals(handlerInstructions[0].Op, "pop", StringComparison.Ordinal) ||
-            !string.Equals(tryInstructions[^1].Op, "leave", StringComparison.Ordinal) ||
-            !string.Equals(handlerInstructions[^1].Op, "leave", StringComparison.Ordinal))
-        {
-            return false;
-        }
-
-        var leaveTarget = GetRequiredIntOperand(tryInstructions[^1]);
-        if (leaveTarget != GetRequiredIntOperand(handlerInstructions[^1]) ||
-            leaveTarget != GetRequiredIlOffset(tailInstructions[0]))
-        {
-            return false;
-        }
-
-        if (prefixInstructions.Any(instruction => IsUnsupportedStructuredExceptionControlFlow(instruction.Op)) ||
-            tryInstructions[..^1].Any(instruction => IsUnsupportedStructuredExceptionControlFlow(instruction.Op)) ||
-            handlerInstructions[1..^1].Any(instruction => IsUnsupportedStructuredExceptionControlFlow(instruction.Op)) ||
-            tailInstructions.Any(instruction => string.Equals(instruction.Op, "leave", StringComparison.Ordinal)))
-        {
-            return false;
-        }
-
-        catchOnlyShape = new CatchOnlyExceptionMethodShape(
-            exceptionRegion,
-            prefixInstructions,
-            tryInstructions,
-            handlerInstructions,
-            tailInstructions);
-        return true;
-    }
-
-    private static bool TryCreateFilterAndFinallyExceptionMethodShape(
-        AotCoreIrMethodArtifact method,
-        out FilterAndFinallyExceptionMethodShape? filterAndFinallyShape)
-    {
-        filterAndFinallyShape = null;
-        if (method.ExceptionRegions.Count < 2)
-        {
-            return false;
-        }
-
-        var filterRegions = method.ExceptionRegions
-            .Where(region => region.HandlingKindCode == AotCoreIrExceptionRegionKind.Filter)
-            .ToArray();
-        var finallyRegions = method.ExceptionRegions
-            .Where(region => region.HandlingKindCode == AotCoreIrExceptionRegionKind.Finally)
-            .OrderBy(region => region.TryLength)
-            .ToArray();
-        if (filterRegions.Length != 1 ||
-            finallyRegions.Length == 0 ||
-            method.ExceptionRegions.Any(region =>
-                region.HandlingKindCode != AotCoreIrExceptionRegionKind.Filter &&
-                region.HandlingKindCode != AotCoreIrExceptionRegionKind.Finally))
-        {
-            return false;
-        }
-
-        var filterRegion = filterRegions[0];
-        if (filterRegion.FilterOffset is null)
-        {
-            return false;
-        }
-
-        var orderedInstructions = method.Instructions
-            .OrderBy(GetRequiredIlOffset)
-            .ToArray();
-        if (orderedInstructions.Length == 0)
-        {
-            return false;
-        }
-
-        var rootTryOffset = filterRegion.TryOffset;
-        var filterOffset = filterRegion.FilterOffset.Value;
-        var filterHandlerEnd = checked(filterRegion.HandlerOffset + filterRegion.HandlerLength);
-        if (checked(filterRegion.TryOffset + filterRegion.TryLength) != filterOffset)
-        {
-            return false;
-        }
-
-        var nextSegmentOffset = filterHandlerEnd;
-        foreach (var finallyRegion in finallyRegions)
-        {
-            if (finallyRegion.TryOffset != rootTryOffset ||
-                checked(rootTryOffset + finallyRegion.TryLength) != finallyRegion.HandlerOffset ||
-                finallyRegion.HandlerOffset != nextSegmentOffset ||
-                finallyRegion.FilterOffset is not null ||
-                !string.IsNullOrWhiteSpace(finallyRegion.CatchTypeSubjectId))
-            {
-                return false;
-            }
-
-            nextSegmentOffset = checked(finallyRegion.HandlerOffset + finallyRegion.HandlerLength);
-        }
-
-        var prefixInstructions = orderedInstructions
-            .Where(instruction => GetRequiredIlOffset(instruction) < rootTryOffset)
-            .ToArray();
-        var tryInstructions = orderedInstructions
-            .Where(instruction =>
-            {
-                var offset = GetRequiredIlOffset(instruction);
-                return offset >= rootTryOffset && offset < filterOffset;
-            })
-            .ToArray();
-        var filterInstructions = orderedInstructions
-            .Where(instruction =>
-            {
-                var offset = GetRequiredIlOffset(instruction);
-                return offset >= filterOffset && offset < filterRegion.HandlerOffset;
-            })
-            .ToArray();
-        var handlerInstructions = orderedInstructions
-            .Where(instruction =>
-            {
-                var offset = GetRequiredIlOffset(instruction);
-                return offset >= filterRegion.HandlerOffset && offset < filterHandlerEnd;
-            })
-            .ToArray();
-        var finallyHandlersInnerToOuter = finallyRegions
-            .Select(finallyRegion =>
-            {
-                var handlerEnd = checked(finallyRegion.HandlerOffset + finallyRegion.HandlerLength);
-                var instructions = orderedInstructions
-                    .Where(instruction =>
-                    {
-                        var offset = GetRequiredIlOffset(instruction);
-                        return offset >= finallyRegion.HandlerOffset && offset < handlerEnd;
-                    })
-                    .ToArray();
-                return new FinallyHandlerShape(finallyRegion, instructions);
-            })
-            .ToArray();
-        var tailInstructions = orderedInstructions
-            .Where(instruction => GetRequiredIlOffset(instruction) >= nextSegmentOffset)
-            .ToArray();
-        var accountedInstructionCount = prefixInstructions.Length +
-                                       tryInstructions.Length +
-                                       filterInstructions.Length +
-                                       handlerInstructions.Length +
-                                       finallyHandlersInnerToOuter.Sum(shape => shape.Instructions.Count) +
-                                       tailInstructions.Length;
-        if (accountedInstructionCount != orderedInstructions.Length ||
-            tryInstructions.Length == 0 ||
-            filterInstructions.Length == 0 ||
-            handlerInstructions.Length < 2 ||
-            tailInstructions.Length == 0)
-        {
-            return false;
-        }
-
-        if (!string.Equals(filterInstructions[^1].Op, "endfilter", StringComparison.Ordinal) ||
-            !string.Equals(handlerInstructions[^1].Op, "leave", StringComparison.Ordinal) ||
-            finallyHandlersInnerToOuter.Any(shape =>
-                shape.Instructions.Count == 0 ||
-                !string.Equals(shape.Instructions[^1].Op, "endfinally", StringComparison.Ordinal)))
-        {
-            return false;
-        }
-
-        if (GetRequiredIntOperand(handlerInstructions[^1]) != GetRequiredIlOffset(tailInstructions[0]))
-        {
-            return false;
-        }
-
-        if (prefixInstructions.Any(instruction => !IsStructuredEhLinearInstructionSupported(instruction.Op)) ||
-            finallyHandlersInnerToOuter
-                .SelectMany(shape => shape.Instructions.Take(shape.Instructions.Count - 1))
-                .Any(instruction => !IsStructuredEhLinearInstructionSupported(instruction.Op)))
-        {
-            return false;
-        }
-
-        filterAndFinallyShape = new FilterAndFinallyExceptionMethodShape(
-            filterRegion,
-            prefixInstructions,
-            tryInstructions,
-            filterInstructions,
-            handlerInstructions,
-            finallyHandlersInnerToOuter.Reverse().ToArray(),
-            tailInstructions);
-        return true;
-    }
-
-    private static bool IsUnsupportedStructuredExceptionControlFlow(string op)
-    {
-        return string.Equals(op, "br", StringComparison.Ordinal) ||
-               string.Equals(op, "blt", StringComparison.Ordinal) ||
-               string.Equals(op, "bne.un", StringComparison.Ordinal) ||
-               string.Equals(op, "leave", StringComparison.Ordinal) ||
-               string.Equals(op, "ret", StringComparison.Ordinal);
-    }
-
-    private static bool IsStructuredEhLinearInstructionSupported(string op)
-    {
-        return op is "ldc.i4" or
-               "ldloc" or
-               "stloc" or
-               "ldnull" or
-               "cgt.un" or
-               "add" or
-               "sub" or
-               "mul" or
-               "div" or
-               "rem";
-    }
-
-    private static int GetRequiredBranchTarget(
-        AotCoreIrInstructionArtifact instruction,
-        IReadOnlySet<int> offsets)
-    {
-        var targetOffset = GetRequiredIntOperand(instruction);
-        if (!offsets.Contains(targetOffset))
-        {
-            throw new InvalidOperationException(
-                $"opcode '{instruction.Op}' targets missing IL offset {targetOffset}");
-        }
-
-        return targetOffset;
-    }
-
-    private static int GetRequiredIlOffset(AotCoreIrInstructionArtifact instruction)
-    {
-        return instruction.IlOffset;
-    }
-
-    private static int GetRequiredIntOperand(AotCoreIrInstructionArtifact instruction)
-    {
-        if (instruction.Operand is int value)
-        {
-            return value;
-        }
-
-        if (instruction.Operand is JsonElement element &&
-            element.ValueKind == JsonValueKind.Number &&
-            element.TryGetInt32(out var jsonValue))
-        {
-            return jsonValue;
-        }
-
-        throw new InvalidOperationException(
-            $"opcode '{instruction.Op}' requires an Int32 operand for native-aot lowering");
-    }
-
-    private static void RequireInt32IntegralResultType(AotCoreIrInstructionArtifact instruction)
-    {
-        if (string.Equals(instruction.ResultType, "System.Int32", StringComparison.Ordinal) ||
-            string.Equals(instruction.ResultType, "System.UInt32", StringComparison.Ordinal))
+        if (!externalRuntimeHelpers.Any(helper =>
+                string.Equals(helper.SubjectId, DelegateCombineMethodSubjectId, StringComparison.Ordinal) ||
+                string.Equals(helper.SubjectId, DelegateRemoveMethodSubjectId, StringComparison.Ordinal)))
         {
             return;
         }
 
-        throw new NotSupportedException(
-            $"native-aot lowering does not support opcode '{instruction.Op}' for result type '{instruction.ResultType ?? "<null>"}'.");
-    }
-
-    private static long GetRequiredInt64Operand(AotCoreIrInstructionArtifact instruction)
-    {
-        if (instruction.Operand is long value)
-        {
-            return value;
-        }
-
-        if (instruction.Operand is int intValue)
-        {
-            return intValue;
-        }
-
-        if (instruction.Operand is JsonElement element &&
-            element.ValueKind == JsonValueKind.Number &&
-            element.TryGetInt64(out var jsonValue))
-        {
-            return jsonValue;
-        }
-
-        throw new InvalidOperationException(
-            $"opcode '{instruction.Op}' requires an Int64 operand for native-aot lowering");
-    }
-
-    private static float GetRequiredSingleOperand(AotCoreIrInstructionArtifact instruction)
-    {
-        if (instruction.Operand is float floatValue)
-        {
-            return floatValue;
-        }
-
-        if (instruction.Operand is double doubleValue)
-        {
-            return checked((float)doubleValue);
-        }
-
-        if (instruction.Operand is JsonElement element &&
-            element.ValueKind == JsonValueKind.Number &&
-            element.TryGetSingle(out var jsonValue))
-        {
-            return jsonValue;
-        }
-
-        throw new InvalidOperationException(
-            $"opcode '{instruction.Op}' requires a Single operand for native-aot lowering");
-    }
-
-    private static double GetRequiredDoubleOperand(AotCoreIrInstructionArtifact instruction)
-    {
-        if (instruction.Operand is double doubleValue)
-        {
-            return doubleValue;
-        }
-
-        if (instruction.Operand is float floatValue)
-        {
-            return floatValue;
-        }
-
-        if (instruction.Operand is JsonElement element &&
-            element.ValueKind == JsonValueKind.Number &&
-            element.TryGetDouble(out var jsonValue))
-        {
-            return jsonValue;
-        }
-
-        throw new InvalidOperationException(
-            $"opcode '{instruction.Op}' requires a Double operand for native-aot lowering");
-    }
-
-    private static string GetRequiredTargetSymbol(AotCoreIrInstructionArtifact instruction)
-    {
-        if (!string.IsNullOrWhiteSpace(instruction.TargetSymbol))
-        {
-            return instruction.TargetSymbol;
-        }
-
-        throw new NotSupportedException(
-            $"native-aot lowering does not support unresolved call target '{instruction.Callee ?? "<null>"}'");
-    }
-
-    private static int GetRequiredTargetParameterCount(AotCoreIrInstructionArtifact instruction)
-    {
-        if (instruction.TargetParameterCount is int parameterCount && parameterCount >= 0)
-        {
-            return parameterCount;
-        }
-
-        throw new NotSupportedException(
-            $"native-aot lowering does not support call target '{instruction.TargetSymbol ?? instruction.Callee ?? "<null>"}' without parameter metadata");
-    }
-
-    private static AotCoreIrReferenceArtifact GetRequiredTargetReference(AotCoreIrInstructionArtifact instruction)
-    {
-        if (instruction.TargetReference is not null)
-        {
-            return instruction.TargetReference;
-        }
-
-        throw new NotSupportedException(
-            $"native-aot lowering does not support opcode '{instruction.Op}' without target reference metadata");
-    }
-
-    private static void EmitMethodReturn(StringBuilder builder, AotCoreIrAbiSlotArtifact returnAbi)
-    {
-        switch (returnAbi.CarrierKindCode)
-        {
-            case AotCoreIrAbiCarrierKind.Void:
-                builder.AppendLine("    return;");
-                return;
-
-            case AotCoreIrAbiCarrierKind.Int32:
-                builder.AppendLine("    return static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
-                return;
-
-            case AotCoreIrAbiCarrierKind.Int8:
-                builder.AppendLine("    return static_cast<std::int8_t>(chaos_eval_stack[--chaos_stack_top]);");
-                return;
-
-            case AotCoreIrAbiCarrierKind.UInt8:
-                builder.AppendLine("    return static_cast<std::uint8_t>(chaos_eval_stack[--chaos_stack_top]);");
-                return;
-
-            case AotCoreIrAbiCarrierKind.Int16:
-                builder.AppendLine("    return static_cast<std::int16_t>(chaos_eval_stack[--chaos_stack_top]);");
-                return;
-
-            case AotCoreIrAbiCarrierKind.UInt16:
-                builder.AppendLine("    return static_cast<std::uint16_t>(chaos_eval_stack[--chaos_stack_top]);");
-                return;
-
-            case AotCoreIrAbiCarrierKind.Float32:
-                builder.AppendLine("    return chaos_load_float32(chaos_eval_stack[--chaos_stack_top]);");
-                return;
-
-            case AotCoreIrAbiCarrierKind.Float64:
-                builder.AppendLine("    return chaos_load_float64(chaos_eval_stack[--chaos_stack_top]);");
-                return;
-
-            case AotCoreIrAbiCarrierKind.Int64:
-                builder.AppendLine("    return chaos_load_int64(chaos_eval_stack[--chaos_stack_top]);");
-                return;
-
-            case AotCoreIrAbiCarrierKind.UInt64:
-                builder.AppendLine("    return chaos_load_uint64(chaos_eval_stack[--chaos_stack_top]);");
-                return;
-
-            case AotCoreIrAbiCarrierKind.NativeInt:
-                builder.AppendLine("    return chaos_eval_stack[--chaos_stack_top];");
-                return;
-
-            case AotCoreIrAbiCarrierKind.ValueTypeByValue:
-                builder.AppendLine(
-                    $"    return *chaos_resolve_managed_value_pointer<{GetRequiredAbiValueTypeSymbol(returnAbi)}>(chaos_eval_stack[--chaos_stack_top]);");
-                return;
-
-            default:
-                throw new NotSupportedException(
-                    $"native-aot lowering does not support ABI return carrier '{returnAbi.CarrierKindCode}'.");
-        }
-    }
-
-    private static void EmitAbiReturnPush(
-        StringBuilder builder,
-        AotCoreIrAbiSlotArtifact returnAbi,
-        string resultExpression,
-        string indentation)
-    {
-        switch (returnAbi.CarrierKindCode)
-        {
-            case AotCoreIrAbiCarrierKind.Int32:
-            case AotCoreIrAbiCarrierKind.Int8:
-            case AotCoreIrAbiCarrierKind.UInt8:
-            case AotCoreIrAbiCarrierKind.Int16:
-            case AotCoreIrAbiCarrierKind.UInt16:
-            case AotCoreIrAbiCarrierKind.NativeInt:
-                builder.AppendLine(
-                    $"{indentation}chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>({resultExpression});");
-                return;
-
-            case AotCoreIrAbiCarrierKind.Float32:
-                builder.AppendLine(
-                    $"{indentation}chaos_eval_stack[chaos_stack_top++] = chaos_store_float32({resultExpression});");
-                return;
-
-            case AotCoreIrAbiCarrierKind.Float64:
-                builder.AppendLine(
-                    $"{indentation}chaos_eval_stack[chaos_stack_top++] = chaos_store_float64({resultExpression});");
-                return;
-
-            case AotCoreIrAbiCarrierKind.Int64:
-                builder.AppendLine(
-                    $"{indentation}chaos_eval_stack[chaos_stack_top++] = chaos_store_int64({resultExpression});");
-                return;
-
-            case AotCoreIrAbiCarrierKind.UInt64:
-                builder.AppendLine(
-                    $"{indentation}chaos_eval_stack[chaos_stack_top++] = chaos_store_uint64({resultExpression});");
-                return;
-
-            case AotCoreIrAbiCarrierKind.ValueTypeByValue:
-                builder.AppendLine(
-                    $"{indentation}auto* chaos_result_storage = new {GetRequiredAbiValueTypeSymbol(returnAbi)}{{}};");
-                builder.AppendLine($"{indentation}*chaos_result_storage = {resultExpression};");
-                builder.AppendLine(
-                    $"{indentation}chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(chaos_result_storage);");
-                return;
-
-            default:
-                throw new NotSupportedException(
-                    $"native-aot lowering does not support pushing ABI return carrier '{returnAbi.CarrierKindCode}'.");
-        }
-    }
-
-    private static bool CanEmitMethodBody(AotCoreIrMethodArtifact method)
-    {
-        return method.Instructions.Count > 0;
-    }
-
-    private static IReadOnlyList<AotCoreIrAbiSlotArtifact> GetMethodAbiParameterSlots(AotCoreIrMethodArtifact method)
-    {
-        ArgumentNullException.ThrowIfNull(method);
-        if (method.IsStatic)
-        {
-            return method.ParameterAbis;
-        }
-
-        var parameterSlots = new List<AotCoreIrAbiSlotArtifact>(checked(method.ParameterAbis.Count + 1))
-        {
-            CreateNativeIntAbiSlot(method.Identity.DeclaringTypeSubjectId, AotCoreIrTypeShapeKind.ReferenceType),
-        };
-        parameterSlots.AddRange(method.ParameterAbis);
-        return parameterSlots;
-    }
-
-    private static AotCoreIrAbiSlotArtifact GetRequiredMethodAbiParameterSlot(
-        AotCoreIrMethodArtifact method,
-        int argumentIndex)
-    {
-        var abiParameterSlots = GetMethodAbiParameterSlots(method);
-        if (argumentIndex < 0 || argumentIndex >= abiParameterSlots.Count)
-        {
-            throw new InvalidOperationException(
-                $"native-aot lowering could not resolve argument slot {argumentIndex} for '{method.SubjectId}'.");
-        }
-
-        return abiParameterSlots[argumentIndex];
-    }
-
-    private static IReadOnlyList<AotCoreIrAbiSlotArtifact> CreateLegacyAbiParameterSlots(int parameterCount)
-    {
-        if (parameterCount < 0)
-        {
-            throw new NotSupportedException("native-aot lowering requires a non-negative parameter count.");
-        }
-
-        if (parameterCount == 0)
-        {
-            return [];
-        }
-
-        return Enumerable.Range(0, parameterCount)
-            .Select(_ => CreateNativeIntAbiSlot())
+        var delegateTypeSubjectIds = CollectReachableDelegateTypeSubjectIds(reachableMethods)
+            .Where(subjectId =>
+                !string.Equals(subjectId, DelegateTypeSubjectId, StringComparison.Ordinal) &&
+                !string.Equals(subjectId, MulticastDelegateTypeSubjectId, StringComparison.Ordinal))
             .ToArray();
-    }
 
-    private static AotCoreIrAbiSlotArtifact CreateLegacyReturnAbiSlot(string? returnType)
-    {
-        return returnType switch
-        {
-            "System.Void" => new AotCoreIrAbiSlotArtifact
-            {
-                CarrierKindCode = AotCoreIrAbiCarrierKind.Void,
-                TypeShape = default,
-            },
-            "System.Int32" => new AotCoreIrAbiSlotArtifact
-            {
-                CarrierKindCode = AotCoreIrAbiCarrierKind.Int32,
-                TypeShape = AotCoreIrTypeShapeKind.ValueType,
-            },
-            "System.SByte" => new AotCoreIrAbiSlotArtifact
-            {
-                CarrierKindCode = AotCoreIrAbiCarrierKind.Int8,
-                TypeShape = AotCoreIrTypeShapeKind.ValueType,
-            },
-            "System.Byte" => new AotCoreIrAbiSlotArtifact
-            {
-                CarrierKindCode = AotCoreIrAbiCarrierKind.UInt8,
-                TypeShape = AotCoreIrTypeShapeKind.ValueType,
-            },
-            "System.Int16" => new AotCoreIrAbiSlotArtifact
-            {
-                CarrierKindCode = AotCoreIrAbiCarrierKind.Int16,
-                TypeShape = AotCoreIrTypeShapeKind.ValueType,
-            },
-            "System.UInt16" => new AotCoreIrAbiSlotArtifact
-            {
-                CarrierKindCode = AotCoreIrAbiCarrierKind.UInt16,
-                TypeShape = AotCoreIrTypeShapeKind.ValueType,
-            },
-            "System.Single" => new AotCoreIrAbiSlotArtifact
-            {
-                CarrierKindCode = AotCoreIrAbiCarrierKind.Float32,
-                TypeShape = AotCoreIrTypeShapeKind.ValueType,
-            },
-            "System.Double" => new AotCoreIrAbiSlotArtifact
-            {
-                CarrierKindCode = AotCoreIrAbiCarrierKind.Float64,
-                TypeShape = AotCoreIrTypeShapeKind.ValueType,
-            },
-            "System.Int64" => new AotCoreIrAbiSlotArtifact
-            {
-                CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
-                TypeShape = AotCoreIrTypeShapeKind.ValueType,
-            },
-            "System.UInt64" => new AotCoreIrAbiSlotArtifact
-            {
-                CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64,
-                TypeShape = AotCoreIrTypeShapeKind.ValueType,
-            },
-            _ when !string.IsNullOrWhiteSpace(returnType) => CreateNativeIntAbiSlot(),
-            _ => throw new NotSupportedException(
-                $"native-aot lowering does not support unresolved legacy return type '{returnType ?? "<null>"}'."),
-        };
-    }
-
-    private static AotCoreIrAbiSlotArtifact CreateNativeIntAbiSlot(
-        string? typeSubjectId = null,
-        AotCoreIrTypeShapeKind typeShape = default)
-    {
-        return new AotCoreIrAbiSlotArtifact
-        {
-            CarrierKindCode = AotCoreIrAbiCarrierKind.NativeInt,
-            TypeSubjectId = typeSubjectId,
-            TypeShape = typeShape,
-        };
-    }
-
-    private static string MapAbiSlotReturnType(AotCoreIrAbiSlotArtifact abiSlot)
-    {
-        return abiSlot.CarrierKindCode switch
-        {
-            AotCoreIrAbiCarrierKind.Void => "void",
-            AotCoreIrAbiCarrierKind.Int32 => "std::int32_t",
-            AotCoreIrAbiCarrierKind.Int8 => "std::int8_t",
-            AotCoreIrAbiCarrierKind.UInt8 => "std::uint8_t",
-            AotCoreIrAbiCarrierKind.Int16 => "std::int16_t",
-            AotCoreIrAbiCarrierKind.UInt16 => "std::uint16_t",
-            AotCoreIrAbiCarrierKind.Float32 => "float",
-            AotCoreIrAbiCarrierKind.Float64 => "double",
-            AotCoreIrAbiCarrierKind.Int64 => "std::int64_t",
-            AotCoreIrAbiCarrierKind.UInt64 => "std::uint64_t",
-            AotCoreIrAbiCarrierKind.NativeInt => "std::intptr_t",
-            AotCoreIrAbiCarrierKind.ValueTypeByValue => GetRequiredAbiValueTypeSymbol(abiSlot),
-            _ => throw new NotSupportedException(
-                $"native-aot lowering does not support ABI return carrier '{abiSlot.CarrierKindCode}'."),
-        };
-    }
-
-    private static string FormatAbiSlotParameterSignature(IReadOnlyList<AotCoreIrAbiSlotArtifact> abiSlots)
-    {
-        ArgumentNullException.ThrowIfNull(abiSlots);
-        if (abiSlots.Count == 0)
-        {
-            return "void";
-        }
-
-        return string.Join(
-            ", ",
-            abiSlots.Select((slot, index) => $"{MapAbiSlotParameterType(slot)} chaos_arg_{index}"));
-    }
-
-    private static void EmitAbiArgumentInitialization(
-        StringBuilder builder,
-        IReadOnlyList<AotCoreIrAbiSlotArtifact> abiSlots)
-    {
-        for (var parameterIndex = 0; parameterIndex < abiSlots.Count; parameterIndex++)
-        {
-            var abiSlot = abiSlots[parameterIndex];
-            switch (abiSlot.CarrierKindCode)
-            {
-                case AotCoreIrAbiCarrierKind.Int32:
-                case AotCoreIrAbiCarrierKind.Int8:
-                case AotCoreIrAbiCarrierKind.UInt8:
-                case AotCoreIrAbiCarrierKind.Int16:
-                case AotCoreIrAbiCarrierKind.UInt16:
-                case AotCoreIrAbiCarrierKind.NativeInt:
-                    builder.AppendLine(
-                        $"    chaos_args[{parameterIndex}] = static_cast<std::intptr_t>(chaos_arg_{parameterIndex});");
-                    break;
-
-                case AotCoreIrAbiCarrierKind.Float32:
-                    builder.AppendLine(
-                        $"    chaos_args[{parameterIndex}] = chaos_store_float32(chaos_arg_{parameterIndex});");
-                    break;
-
-                case AotCoreIrAbiCarrierKind.Float64:
-                    builder.AppendLine(
-                        $"    chaos_args[{parameterIndex}] = chaos_store_float64(chaos_arg_{parameterIndex});");
-                    break;
-
-                case AotCoreIrAbiCarrierKind.Int64:
-                    builder.AppendLine(
-                        $"    chaos_args[{parameterIndex}] = chaos_store_int64(chaos_arg_{parameterIndex});");
-                    break;
-
-                case AotCoreIrAbiCarrierKind.UInt64:
-                    builder.AppendLine(
-                        $"    chaos_args[{parameterIndex}] = chaos_store_uint64(chaos_arg_{parameterIndex});");
-                    break;
-
-                case AotCoreIrAbiCarrierKind.ValueTypeByValue:
-                    builder.AppendLine($"    auto chaos_abi_param_{parameterIndex} = chaos_arg_{parameterIndex};");
-                    builder.AppendLine(
-                        $"    chaos_args[{parameterIndex}] = reinterpret_cast<std::intptr_t>(&chaos_abi_param_{parameterIndex});");
-                    break;
-
-                default:
-                    throw new NotSupportedException(
-                        $"native-aot lowering does not support ABI parameter carrier '{abiSlot.CarrierKindCode}'.");
-            }
-        }
-    }
-
-    private static string FormatAbiInvocationArgumentList(
-        IReadOnlyList<AotCoreIrAbiSlotArtifact> abiSlots,
-        string? firstArgumentOverride = null)
-    {
-        if (abiSlots.Count == 0)
-        {
-            return string.Empty;
-        }
-
-        return string.Join(
-            ", ",
-            abiSlots.Select((slot, index) =>
-            {
-                var sourceName = index == 0 && !string.IsNullOrWhiteSpace(firstArgumentOverride)
-                    ? firstArgumentOverride!
-                    : $"chaos_arg_{index}";
-                return FormatAbiArgumentExpression(slot, sourceName);
-            }));
-    }
-
-    private static string FormatAbiArgumentExpression(
-        AotCoreIrAbiSlotArtifact abiSlot,
-        string sourceName)
-    {
-        return abiSlot.CarrierKindCode switch
-        {
-            AotCoreIrAbiCarrierKind.Int32 => $"static_cast<std::int32_t>({sourceName})",
-            AotCoreIrAbiCarrierKind.Int8 => $"static_cast<std::int8_t>({sourceName})",
-            AotCoreIrAbiCarrierKind.UInt8 => $"static_cast<std::uint8_t>({sourceName})",
-            AotCoreIrAbiCarrierKind.Int16 => $"static_cast<std::int16_t>({sourceName})",
-            AotCoreIrAbiCarrierKind.UInt16 => $"static_cast<std::uint16_t>({sourceName})",
-            AotCoreIrAbiCarrierKind.Float32 => $"chaos_load_float32({sourceName})",
-            AotCoreIrAbiCarrierKind.Float64 => $"chaos_load_float64({sourceName})",
-            AotCoreIrAbiCarrierKind.Int64 => $"chaos_load_int64({sourceName})",
-            AotCoreIrAbiCarrierKind.UInt64 => $"chaos_load_uint64({sourceName})",
-            AotCoreIrAbiCarrierKind.NativeInt => sourceName,
-            AotCoreIrAbiCarrierKind.ValueTypeByValue =>
-                $"*chaos_resolve_managed_value_pointer<{GetRequiredAbiValueTypeSymbol(abiSlot)}>({sourceName})",
-            _ => throw new NotSupportedException(
-                $"native-aot lowering does not support ABI argument carrier '{abiSlot.CarrierKindCode}'."),
-        };
-    }
-
-    private static string FormatInboundAbiArgumentExpression(
-        AotCoreIrAbiSlotArtifact abiSlot,
-        string sourceName)
-    {
-        return abiSlot.CarrierKindCode switch
-        {
-            AotCoreIrAbiCarrierKind.NativeInt => $"chaos_normalize_native_int_argument({sourceName})",
-            _ => sourceName,
-        };
-    }
-
-    private static string MapAbiSlotParameterType(AotCoreIrAbiSlotArtifact abiSlot)
-    {
-        return abiSlot.CarrierKindCode switch
-        {
-            AotCoreIrAbiCarrierKind.Int32 => "std::int32_t",
-            AotCoreIrAbiCarrierKind.Int8 => "std::int8_t",
-            AotCoreIrAbiCarrierKind.UInt8 => "std::uint8_t",
-            AotCoreIrAbiCarrierKind.Int16 => "std::int16_t",
-            AotCoreIrAbiCarrierKind.UInt16 => "std::uint16_t",
-            AotCoreIrAbiCarrierKind.Float32 => "float",
-            AotCoreIrAbiCarrierKind.Float64 => "double",
-            AotCoreIrAbiCarrierKind.Int64 => "std::int64_t",
-            AotCoreIrAbiCarrierKind.UInt64 => "std::uint64_t",
-            AotCoreIrAbiCarrierKind.NativeInt => "std::intptr_t",
-            AotCoreIrAbiCarrierKind.ValueTypeByValue => GetRequiredAbiValueTypeSymbol(abiSlot),
-            _ => throw new NotSupportedException(
-                $"native-aot lowering does not support ABI parameter carrier '{abiSlot.CarrierKindCode}'."),
-        };
-    }
-
-    private static string GetRequiredAbiValueTypeSymbol(AotCoreIrAbiSlotArtifact abiSlot)
-    {
-        if (abiSlot.CarrierKindCode != AotCoreIrAbiCarrierKind.ValueTypeByValue ||
-            string.IsNullOrWhiteSpace(abiSlot.TypeSubjectId))
-        {
-            throw new NotSupportedException(
-                $"native-aot lowering requires a value-type ABI slot with subject metadata, got '{abiSlot.CarrierKindCode}'.");
-        }
-
-        return GetNativeValueTypeSymbol(abiSlot.TypeSubjectId);
-    }
-
-    private static string FormatInt32Literal(int value)
-    {
-        return value == int.MinValue
-            ? "std::numeric_limits<std::int32_t>::min()"
-            : value.ToString(CultureInfo.InvariantCulture);
-    }
-
-    private static string FormatInt64Literal(long value)
-    {
-        return value == long.MinValue
-            ? "std::numeric_limits<std::int64_t>::min()"
-            : value.ToString(CultureInfo.InvariantCulture) + "LL";
-    }
-
-    private static string FormatFloat32Literal(float value)
-    {
-        return value.ToString("R", CultureInfo.InvariantCulture) + "f";
-    }
-
-    private static string FormatFloat64Literal(double value)
-    {
-        return value.ToString("R", CultureInfo.InvariantCulture);
-    }
-
-    private static void RequireStringField(string? value, string fieldName)
-    {
-        if (string.IsNullOrWhiteSpace(value))
-        {
-            throw new InvalidOperationException(
-                $"native-aot lowering plan requires non-empty field '{fieldName}'");
-        }
-    }
-
-    private static T LoadRequiredJson<T>(string path)
-    {
-        if (!File.Exists(path))
-        {
-            throw new FileNotFoundException($"required native-aot lowering plan is missing: {path}", path);
-        }
-
-        var value = JsonSerializer.Deserialize<T>(File.ReadAllText(path), JsonOptions);
-        if (value is null)
-        {
-            throw new InvalidOperationException($"failed to deserialize native-aot lowering plan: {path}");
-        }
-
-        return value;
-    }
-
-    private void EmitObjectModelDeclarations(
-        StringBuilder builder,
-        IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
-    {
-        var referenceTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
-        var referenceTypeBaseSubjectIds = new Dictionary<string, string?>(StringComparer.Ordinal);
-        var interfaceTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
-        var referenceTypeImplementedInterfaceSubjectIds = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
-        var valueTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
-        var instanceFieldSubjectIds = new HashSet<string>(StringComparer.Ordinal);
-        var staticFieldSubjectIds = new HashSet<string>(StringComparer.Ordinal);
-        var boxedTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
-
-        void TrackInterfaceType(string subjectId)
-        {
-            interfaceTypeSubjectIds.Add(subjectId);
-        }
-
-        void TrackReferenceType(
-            string subjectId,
-            string? baseTypeSubjectId,
-            IReadOnlyList<string>? implementedInterfaceSubjectIds = null)
-        {
-            if (string.IsNullOrWhiteSpace(baseTypeSubjectId) &&
-                _referenceTypeBaseSubjectIds.TryGetValue(subjectId, out var resolvedBaseTypeSubjectId) &&
-                !string.IsNullOrWhiteSpace(resolvedBaseTypeSubjectId))
-            {
-                baseTypeSubjectId = resolvedBaseTypeSubjectId;
-            }
-
-            if (implementedInterfaceSubjectIds is null &&
-                _referenceTypeImplementedInterfaceSubjectIds.TryGetValue(subjectId, out var resolvedImplementedInterfaceSubjectIds) &&
-                resolvedImplementedInterfaceSubjectIds.Count > 0)
-            {
-                implementedInterfaceSubjectIds = resolvedImplementedInterfaceSubjectIds
-                    .OrderBy(value => value, StringComparer.Ordinal)
-                    .ToArray();
-            }
-
-            referenceTypeSubjectIds.Add(subjectId);
-            if (!referenceTypeBaseSubjectIds.ContainsKey(subjectId))
-            {
-                referenceTypeBaseSubjectIds[subjectId] = null;
-            }
-
-            if (!referenceTypeImplementedInterfaceSubjectIds.ContainsKey(subjectId))
-            {
-                referenceTypeImplementedInterfaceSubjectIds[subjectId] = new HashSet<string>(StringComparer.Ordinal);
-            }
-
-            if (!string.IsNullOrWhiteSpace(baseTypeSubjectId))
-            {
-                referenceTypeBaseSubjectIds[subjectId] = baseTypeSubjectId;
-                referenceTypeSubjectIds.Add(baseTypeSubjectId);
-                if (!referenceTypeBaseSubjectIds.ContainsKey(baseTypeSubjectId))
-                {
-                    referenceTypeBaseSubjectIds[baseTypeSubjectId] = null;
-                }
-
-                if (!referenceTypeImplementedInterfaceSubjectIds.ContainsKey(baseTypeSubjectId))
-                {
-                    referenceTypeImplementedInterfaceSubjectIds[baseTypeSubjectId] = new HashSet<string>(StringComparer.Ordinal);
-                }
-            }
-
-            if (implementedInterfaceSubjectIds is null)
-            {
-                return;
-            }
-
-            foreach (var interfaceSubjectId in implementedInterfaceSubjectIds)
-            {
-                referenceTypeImplementedInterfaceSubjectIds[subjectId].Add(interfaceSubjectId);
-                TrackInterfaceType(interfaceSubjectId);
-            }
-        }
-
-        void TrackCarrierType(
-            string subjectId,
-            AotCoreIrTypeShapeKind typeShape,
-            string? baseTypeSubjectId = null,
-            IReadOnlyList<string>? implementedInterfaceSubjectIds = null)
-        {
-            if (string.IsNullOrWhiteSpace(subjectId))
-            {
-                return;
-            }
-
-            switch (typeShape)
-            {
-                case AotCoreIrTypeShapeKind.ValueType:
-                    valueTypeSubjectIds.Add(subjectId);
-                    break;
-
-                case AotCoreIrTypeShapeKind.InterfaceType:
-                    TrackInterfaceType(subjectId);
-                    break;
-
-                case AotCoreIrTypeShapeKind.ReferenceType:
-                    TrackReferenceType(subjectId, baseTypeSubjectId, implementedInterfaceSubjectIds);
-                    break;
-            }
-        }
-
-        void TrackAbiSlotCarrier(AotCoreIrAbiSlotArtifact abiSlot)
-        {
-            if (abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue &&
-                !string.IsNullOrWhiteSpace(abiSlot.TypeSubjectId))
-            {
-                valueTypeSubjectIds.Add(abiSlot.TypeSubjectId!);
-            }
-        }
-
-        builder.AppendLine("struct chaos_object_header");
+        builder.AppendLine("using chaos_delegate_invocation_list = std::vector<std::intptr_t>;");
+        builder.AppendLine();
+        builder.AppendLine("chaos_type_System_Private_CoreLib_System_Delegate* chaos_require_delegate(std::intptr_t chaos_delegate_value)");
         builder.AppendLine("{");
-        builder.AppendLine("    std::intptr_t type_id = 0;");
-        builder.AppendLine("};");
-        builder.AppendLine();
-        builder.AppendLine("constexpr std::intptr_t chaos_type_id_managed_array = 1;");
-        builder.AppendLine();
-        builder.AppendLine("struct chaos_managed_array");
-        builder.AppendLine("{");
-        builder.AppendLine("    chaos_object_header header{};");
-        builder.AppendLine("    std::uint8_t element_type_shape = 0;");
-        builder.AppendLine("    std::intptr_t element_type_id = 0;");
-        builder.AppendLine("    std::intptr_t length = 0;");
-        builder.AppendLine("    std::intptr_t* elements = nullptr;");
-        builder.AppendLine("};");
-        builder.AppendLine();
-        builder.AppendLine("constexpr std::uint8_t chaos_type_shape_reference = 1;");
-        builder.AppendLine("constexpr std::uint8_t chaos_type_shape_value = 2;");
-        builder.AppendLine("constexpr std::uint8_t chaos_type_shape_interface = 3;");
-        builder.AppendLine();
-        builder.AppendLine("constexpr std::intptr_t chaos_managed_pointer_local_slot_tag = 1;");
-        builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_normalize_native_int_argument(std::intptr_t chaos_value) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    if ((chaos_value & chaos_managed_pointer_local_slot_tag) == 0)");
+        builder.AppendLine("    if (chaos_delegate_value == static_cast<std::intptr_t>(0))");
         builder.AppendLine("    {");
-        builder.AppendLine("        return chaos_value;");
+        builder.AppendLine("        std::abort();");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        builder.AppendLine("    return reinterpret_cast<chaos_type_System_Private_CoreLib_System_Delegate*>(chaos_delegate_value);");
+        builder.AppendLine("}");
+        builder.AppendLine();
+        builder.AppendLine("const chaos_delegate_invocation_list* chaos_try_get_delegate_invocation_list(");
+        builder.AppendLine("    const chaos_type_System_Private_CoreLib_System_Delegate* chaos_delegate) noexcept");
+        builder.AppendLine("{");
+        builder.AppendLine("    if (chaos_delegate == nullptr ||");
+        builder.AppendLine("        chaos_delegate->chaos_delegate_invocation_list == static_cast<std::intptr_t>(0) ||");
+        builder.AppendLine("        chaos_delegate->chaos_delegate_invocation_count <= static_cast<std::intptr_t>(0))");
+        builder.AppendLine("    {");
+        builder.AppendLine("        return nullptr;");
         builder.AppendLine("    }");
         builder.AppendLine();
         builder.AppendLine(
-            "    auto* chaos_slot = reinterpret_cast<std::intptr_t*>(static_cast<std::uintptr_t>(chaos_value & ~chaos_managed_pointer_local_slot_tag));");
-        builder.AppendLine("    return *chaos_slot;");
+            "    return reinterpret_cast<const chaos_delegate_invocation_list*>(chaos_delegate->chaos_delegate_invocation_list);");
         builder.AppendLine("}");
         builder.AppendLine();
-        builder.AppendLine("template <typename TValue>");
-        builder.AppendLine("TValue* chaos_resolve_managed_value_pointer(std::intptr_t chaos_managed_pointer)");
+        builder.AppendLine("bool chaos_delegate_single_entry_equals(std::intptr_t chaos_left_value, std::intptr_t chaos_right_value) noexcept");
         builder.AppendLine("{");
-        builder.AppendLine("    if ((chaos_managed_pointer & chaos_managed_pointer_local_slot_tag) != 0)");
-        builder.AppendLine("    {");
-        builder.AppendLine(
-            "        auto* chaos_slot = reinterpret_cast<std::intptr_t*>(static_cast<std::uintptr_t>(chaos_managed_pointer & ~chaos_managed_pointer_local_slot_tag));");
-        builder.AppendLine("        if (*chaos_slot == static_cast<std::intptr_t>(0))");
-        builder.AppendLine("        {");
-        builder.AppendLine("            *chaos_slot = reinterpret_cast<std::intptr_t>(new TValue{});");
-        builder.AppendLine("        }");
-        builder.AppendLine("        return reinterpret_cast<TValue*>(*chaos_slot);");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return reinterpret_cast<TValue*>(chaos_managed_pointer);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-
-        foreach (var method in reachableMethods)
-        {
-            TrackAbiSlotCarrier(method.ReturnAbi);
-            foreach (var parameterAbi in method.ParameterAbis)
-            {
-                TrackAbiSlotCarrier(parameterAbi);
-            }
-
-            foreach (var exceptionRegion in method.ExceptionRegions)
-            {
-                if (exceptionRegion.HandlingKindCode == AotCoreIrExceptionRegionKind.Catch &&
-                    !string.IsNullOrWhiteSpace(exceptionRegion.CatchTypeSubjectId))
-                {
-                    TrackReferenceType(exceptionRegion.CatchTypeSubjectId!, null);
-                }
-            }
-
-            foreach (var instruction in method.Instructions)
-            {
-                if (instruction.Op is "add.ovf" or "sub.ovf" or "mul.ovf" or "conv.ovf.i1" or "conv.ovf.u1")
-                {
-                    TrackReferenceType(OverflowExceptionTypeSubjectId, null);
-                }
-
-                var targetReference = instruction.TargetReference;
-                if (targetReference is null)
-                {
-                    continue;
-                }
-
-                if (targetReference.Kind == AotCoreIrReferenceKind.Type &&
-                    instruction.RuntimeServiceKind is AotCoreIrRuntimeServiceKind.NewObject or AotCoreIrRuntimeServiceKind.NewArray or AotCoreIrRuntimeServiceKind.CastClass or AotCoreIrRuntimeServiceKind.IsInst)
-                {
-                    if (HasArrayElementReference(targetReference))
-                    {
-                        TrackCarrierType(
-                            targetReference.ArrayElementSubjectId!,
-                            targetReference.ArrayElementTypeShape,
-                            targetReference.ArrayElementBaseTypeSubjectId,
-                            targetReference.ArrayElementImplementedInterfaceSubjectIds);
-                    }
-                    else
-                    {
-                        TrackCarrierType(
-                            targetReference.SubjectId,
-                            targetReference.TypeShape,
-                            targetReference.BaseTypeSubjectId,
-                            targetReference.ImplementedInterfaceSubjectIds);
-                    }
-
-                    continue;
-                }
-
-                if (targetReference.Kind == AotCoreIrReferenceKind.Type &&
-                    instruction.RuntimeServiceKind is AotCoreIrRuntimeServiceKind.Box or AotCoreIrRuntimeServiceKind.Unbox or AotCoreIrRuntimeServiceKind.UnboxAny)
-                {
-                    if (targetReference.TypeShape == AotCoreIrTypeShapeKind.ValueType)
-                    {
-                        valueTypeSubjectIds.Add(targetReference.SubjectId);
-                    }
-
-                    boxedTypeSubjectIds.Add(targetReference.SubjectId);
-                    continue;
-                }
-
-                if (targetReference.Kind == AotCoreIrReferenceKind.Type &&
-                    instruction.RuntimeServiceKind == AotCoreIrRuntimeServiceKind.InitObject)
-                {
-                    if (targetReference.TypeShape == AotCoreIrTypeShapeKind.ValueType)
-                    {
-                        valueTypeSubjectIds.Add(targetReference.SubjectId);
-                    }
-
-                    continue;
-                }
-
-                if (targetReference.Kind == AotCoreIrReferenceKind.Type &&
-                    instruction.Op is "ldobj" or "stobj")
-                {
-                    if (targetReference.TypeShape == AotCoreIrTypeShapeKind.ValueType)
-                    {
-                        valueTypeSubjectIds.Add(targetReference.SubjectId);
-                    }
-
-                    continue;
-                }
-
-                if (targetReference.Kind != AotCoreIrReferenceKind.Field)
-                {
-                    continue;
-                }
-
-                var declaringTypeSubjectId = GetRequiredDeclaringTypeSubjectId(targetReference);
-                if (targetReference.DeclaringTypeShape == AotCoreIrTypeShapeKind.ValueType)
-                {
-                    valueTypeSubjectIds.Add(declaringTypeSubjectId);
-                }
-                else
-                {
-                    TrackReferenceType(declaringTypeSubjectId, null);
-                }
-
-                if (instruction.RuntimeServiceKind is AotCoreIrRuntimeServiceKind.LoadStaticField or AotCoreIrRuntimeServiceKind.StoreStaticField)
-                {
-                    staticFieldSubjectIds.Add(targetReference.SubjectId);
-                }
-                else
-                {
-                    instanceFieldSubjectIds.Add(targetReference.SubjectId);
-                }
-            }
-        }
-
-        var nextTypeId = 2;
-        foreach (var typeSubjectId in referenceTypeSubjectIds.OrderBy(value => value, StringComparer.Ordinal))
-        {
-            builder.AppendLine($"constexpr std::intptr_t {GetNativeTypeIdSymbol(typeSubjectId)} = {nextTypeId};");
-            nextTypeId++;
-        }
-
-        foreach (var typeSubjectId in interfaceTypeSubjectIds.OrderBy(value => value, StringComparer.Ordinal))
-        {
-            builder.AppendLine($"constexpr std::intptr_t {GetNativeTypeIdSymbol(typeSubjectId)} = {nextTypeId};");
-            nextTypeId++;
-        }
-
-        foreach (var typeSubjectId in boxedTypeSubjectIds.OrderBy(value => value, StringComparer.Ordinal))
-        {
-            builder.AppendLine($"constexpr std::intptr_t {GetNativeBoxTypeIdSymbol(typeSubjectId)} = {nextTypeId};");
-            nextTypeId++;
-        }
-
-        if (referenceTypeSubjectIds.Count > 0 || boxedTypeSubjectIds.Count > 0)
-        {
-            builder.AppendLine();
-        }
-
-        builder.AppendLine("std::intptr_t chaos_get_base_type_id(std::intptr_t chaos_type_id) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    switch (chaos_type_id)");
-        builder.AppendLine("    {");
-        foreach (var typeSubjectId in referenceTypeSubjectIds.OrderBy(value => value, StringComparer.Ordinal))
-        {
-            if (!referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out var baseTypeSubjectId) ||
-                string.IsNullOrWhiteSpace(baseTypeSubjectId))
-            {
-                continue;
-            }
-
-            builder.AppendLine($"        case {GetNativeTypeIdSymbol(typeSubjectId)}:");
-            builder.AppendLine($"            return {GetNativeTypeIdSymbol(baseTypeSubjectId)};");
-        }
-
-        builder.AppendLine("        default:");
-        builder.AppendLine("            return static_cast<std::intptr_t>(0);");
-        builder.AppendLine("    }");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("bool chaos_is_type_compatible(std::intptr_t chaos_actual_type_id, std::intptr_t chaos_target_type_id) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    auto chaos_current_type_id = chaos_actual_type_id;");
-        builder.AppendLine("    while (chaos_current_type_id != static_cast<std::intptr_t>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        if (chaos_current_type_id == chaos_target_type_id)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            return true;");
-        builder.AppendLine("        }");
-        builder.AppendLine();
-        builder.AppendLine("        chaos_current_type_id = chaos_get_base_type_id(chaos_current_type_id);");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return false;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("bool chaos_type_implements_interface(std::intptr_t chaos_actual_type_id, std::intptr_t chaos_target_interface_type_id) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    switch (chaos_actual_type_id)");
-        builder.AppendLine("    {");
-        foreach (var typeSubjectId in referenceTypeSubjectIds.OrderBy(value => value, StringComparer.Ordinal))
-        {
-            builder.AppendLine($"        case {GetNativeTypeIdSymbol(typeSubjectId)}:");
-            if (referenceTypeImplementedInterfaceSubjectIds.TryGetValue(typeSubjectId, out var implementedInterfaces) &&
-                implementedInterfaces.Count > 0)
-            {
-                var interfaceChecks = string.Join(
-                    " || ",
-                    implementedInterfaces
-                        .OrderBy(value => value, StringComparer.Ordinal)
-                        .Select(interfaceSubjectId =>
-                            $"chaos_target_interface_type_id == {GetNativeTypeIdSymbol(interfaceSubjectId)}"));
-                builder.AppendLine($"            return {interfaceChecks};");
-            }
-            else
-            {
-                builder.AppendLine("            return false;");
-            }
-        }
-
-        builder.AppendLine("        default:");
-        builder.AppendLine("            return false;");
-        builder.AppendLine("    }");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("bool chaos_does_type_implement_interface(std::intptr_t chaos_actual_type_id, std::intptr_t chaos_target_interface_type_id) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    auto chaos_current_type_id = chaos_actual_type_id;");
-        builder.AppendLine("    while (chaos_current_type_id != static_cast<std::intptr_t>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        if (chaos_type_implements_interface(chaos_current_type_id, chaos_target_interface_type_id))");
-        builder.AppendLine("        {");
-        builder.AppendLine("            return true;");
-        builder.AppendLine("        }");
-        builder.AppendLine();
-        builder.AppendLine("        chaos_current_type_id = chaos_get_base_type_id(chaos_current_type_id);");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return false;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("bool chaos_is_array_type_compatible(");
-        builder.AppendLine("    std::uint8_t chaos_actual_element_shape,");
-        builder.AppendLine("    std::intptr_t chaos_actual_element_type_id,");
-        builder.AppendLine("    std::uint8_t chaos_target_element_shape,");
-        builder.AppendLine("    std::intptr_t chaos_target_element_type_id) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_actual_element_shape == chaos_type_shape_reference)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        if (chaos_target_element_shape == chaos_type_shape_reference)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            return chaos_is_type_compatible(chaos_actual_element_type_id, chaos_target_element_type_id);");
-        builder.AppendLine("        }");
-        builder.AppendLine();
-        builder.AppendLine("        if (chaos_target_element_shape == chaos_type_shape_interface)");
-        builder.AppendLine("        {");
-        builder.AppendLine("            return chaos_does_type_implement_interface(chaos_actual_element_type_id, chaos_target_element_type_id);");
-        builder.AppendLine("        }");
-        builder.AppendLine();
-        builder.AppendLine("        return false;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return chaos_actual_element_shape == chaos_target_element_shape");
-        builder.AppendLine("        && chaos_actual_element_type_id == chaos_target_element_type_id;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, std::intptr_t chaos_value) noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_array == nullptr)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return false;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    if (chaos_value == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("    if (chaos_left_value == chaos_right_value)");
         builder.AppendLine("    {");
         builder.AppendLine("        return true;");
         builder.AppendLine("    }");
         builder.AppendLine();
-        builder.AppendLine("    auto* chaos_header = reinterpret_cast<chaos_object_header*>(chaos_value);");
-        builder.AppendLine("    if (chaos_array->element_type_shape == chaos_type_shape_interface)");
+        builder.AppendLine("    if (chaos_left_value == static_cast<std::intptr_t>(0) ||");
+        builder.AppendLine("        chaos_right_value == static_cast<std::intptr_t>(0))");
         builder.AppendLine("    {");
-        builder.AppendLine("        return chaos_does_type_implement_interface(chaos_header->type_id, chaos_array->element_type_id);");
+        builder.AppendLine("        return false;");
         builder.AppendLine("    }");
         builder.AppendLine();
-        builder.AppendLine("    if (chaos_array->element_type_shape == chaos_type_shape_reference)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return chaos_is_type_compatible(chaos_header->type_id, chaos_array->element_type_id);");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return false;");
+        builder.AppendLine("    const auto* chaos_left = reinterpret_cast<const chaos_type_System_Private_CoreLib_System_Delegate*>(chaos_left_value);");
+        builder.AppendLine("    const auto* chaos_right = reinterpret_cast<const chaos_type_System_Private_CoreLib_System_Delegate*>(chaos_right_value);");
+        builder.AppendLine("    return chaos_left->header.type_id == chaos_right->header.type_id &&");
+        builder.AppendLine("           chaos_left->chaos_delegate_target == chaos_right->chaos_delegate_target &&");
+        builder.AppendLine("           chaos_left->chaos_delegate_method_ptr == chaos_right->chaos_delegate_method_ptr;");
         builder.AppendLine("}");
         builder.AppendLine();
-
-        foreach (var typeSubjectId in GetReferenceTypeEmissionOrder(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
+        builder.AppendLine("void chaos_delegate_append_flattened_entries(");
+        builder.AppendLine("    chaos_delegate_invocation_list& chaos_entries,");
+        builder.AppendLine("    std::intptr_t chaos_delegate_value)");
+        builder.AppendLine("{");
+        builder.AppendLine("    if (chaos_delegate_value == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("    {");
+        builder.AppendLine("        return;");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        builder.AppendLine("    auto* chaos_delegate = chaos_require_delegate(chaos_delegate_value);");
+        builder.AppendLine("    const auto* chaos_invocation_list = chaos_try_get_delegate_invocation_list(chaos_delegate);");
+        builder.AppendLine("    if (chaos_invocation_list == nullptr)");
+        builder.AppendLine("    {");
+        builder.AppendLine("        if (chaos_delegate->chaos_delegate_method_ptr == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("        {");
+        builder.AppendLine("            std::abort();");
+        builder.AppendLine("        }");
+        builder.AppendLine();
+        builder.AppendLine("        chaos_entries.push_back(chaos_delegate_value);");
+        builder.AppendLine("        return;");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        builder.AppendLine(
+            "    if (static_cast<std::intptr_t>(chaos_invocation_list->size()) != chaos_delegate->chaos_delegate_invocation_count)");
+        builder.AppendLine("    {");
+        builder.AppendLine("        std::abort();");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        builder.AppendLine("    for (const auto chaos_entry_value : *chaos_invocation_list)");
+        builder.AppendLine("    {");
+        builder.AppendLine("        chaos_delegate_append_flattened_entries(chaos_entries, chaos_entry_value);");
+        builder.AppendLine("    }");
+        builder.AppendLine("}");
+        builder.AppendLine();
+        builder.AppendLine("void chaos_delegate_validate_entry_types(const chaos_delegate_invocation_list& chaos_entries)");
+        builder.AppendLine("{");
+        builder.AppendLine("    if (chaos_entries.empty())");
+        builder.AppendLine("    {");
+        builder.AppendLine("        return;");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        builder.AppendLine("    const auto* chaos_first = chaos_require_delegate(chaos_entries.front());");
+        builder.AppendLine("    for (const auto chaos_entry_value : chaos_entries)");
+        builder.AppendLine("    {");
+        builder.AppendLine("        const auto* chaos_entry = chaos_require_delegate(chaos_entry_value);");
+        builder.AppendLine("        if (chaos_entry->header.type_id != chaos_first->header.type_id)");
+        builder.AppendLine("        {");
+        builder.AppendLine("            std::abort();");
+        builder.AppendLine("        }");
+        builder.AppendLine("    }");
+        builder.AppendLine("}");
+        builder.AppendLine();
+        builder.AppendLine("std::intptr_t chaos_delegate_allocate_with_type_id(std::intptr_t chaos_delegate_type_id)");
+        builder.AppendLine("{");
+        builder.AppendLine("    switch (chaos_delegate_type_id)");
+        builder.AppendLine("    {");
+        foreach (var delegateTypeSubjectId in delegateTypeSubjectIds)
         {
-            if (referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out var baseTypeSubjectId) &&
-                !string.IsNullOrWhiteSpace(baseTypeSubjectId) &&
-                referenceTypeSubjectIds.Contains(baseTypeSubjectId))
-            {
-                builder.AppendLine($"struct {GetNativeTypeSymbol(typeSubjectId)} : public {GetNativeTypeSymbol(baseTypeSubjectId)}");
-            }
-            else
-            {
-                builder.AppendLine($"struct {GetNativeTypeSymbol(typeSubjectId)}");
-            }
-
-            builder.AppendLine("{");
-            if (!referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out var resolvedBaseTypeSubjectId) ||
-                string.IsNullOrWhiteSpace(resolvedBaseTypeSubjectId) ||
-                !referenceTypeSubjectIds.Contains(resolvedBaseTypeSubjectId))
-            {
-                builder.AppendLine("    chaos_object_header header{};");
-            }
-
-            var instanceFields = instanceFieldSubjectIds
-                .Where(fieldSubjectId => string.Equals(GetDeclaringTypeSubjectId(fieldSubjectId), typeSubjectId, StringComparison.Ordinal))
-                .OrderBy(fieldSubjectId => fieldSubjectId, StringComparer.Ordinal)
-                .ToList();
-
-            if (instanceFields.Count == 0)
-            {
-                builder.AppendLine("};");
-                builder.AppendLine();
-                continue;
-            }
-
-            foreach (var fieldSubjectId in instanceFields)
-            {
-                builder.AppendLine($"    std::intptr_t {GetNativeFieldMemberName(fieldSubjectId)} = 0;");
-            }
-
-            builder.AppendLine("};");
-            builder.AppendLine();
+            builder.AppendLine($"        case {GetNativeTypeIdSymbol(delegateTypeSubjectId)}:");
+            builder.AppendLine("        {");
+            builder.AppendLine($"            auto* chaos_delegate = new {GetNativeTypeSymbol(delegateTypeSubjectId)}{{}};");
+            builder.AppendLine($"            chaos_delegate->header.type_id = {GetNativeTypeIdSymbol(delegateTypeSubjectId)};");
+            builder.AppendLine("            return reinterpret_cast<std::intptr_t>(chaos_delegate);");
+            builder.AppendLine("        }");
         }
 
-        foreach (var typeSubjectId in valueTypeSubjectIds.OrderBy(value => value, StringComparer.Ordinal))
-        {
-            builder.AppendLine($"struct {GetNativeValueTypeSymbol(typeSubjectId)}");
-            builder.AppendLine("{");
-
-            var instanceFields = instanceFieldSubjectIds
-                .Where(fieldSubjectId => string.Equals(GetDeclaringTypeSubjectId(fieldSubjectId), typeSubjectId, StringComparison.Ordinal))
-                .OrderBy(fieldSubjectId => fieldSubjectId, StringComparer.Ordinal)
-                .ToList();
-
-            if (instanceFields.Count == 0)
-            {
-                builder.AppendLine("};");
-                builder.AppendLine();
-                continue;
-            }
-
-            foreach (var fieldSubjectId in instanceFields)
-            {
-                builder.AppendLine($"    std::intptr_t {GetNativeFieldMemberName(fieldSubjectId)} = 0;");
-            }
-
-            builder.AppendLine("};");
-            builder.AppendLine();
-        }
-
-        foreach (var typeSubjectId in boxedTypeSubjectIds.OrderBy(value => value, StringComparer.Ordinal))
-        {
-            builder.AppendLine($"struct {GetNativeBoxTypeSymbol(typeSubjectId)}");
-            builder.AppendLine("{");
-            builder.AppendLine("    chaos_object_header header{};");
-            if (IsStructuredValueTypeSubjectId(typeSubjectId))
-            {
-                builder.AppendLine($"    {GetNativeValueTypeSymbol(typeSubjectId)} value{{}};");
-            }
-            else
-            {
-                builder.AppendLine("    std::intptr_t value = 0;");
-            }
-
-            builder.AppendLine("};");
-            builder.AppendLine();
-        }
-
-        foreach (var fieldSubjectId in staticFieldSubjectIds.OrderBy(value => value, StringComparer.Ordinal))
-        {
-            builder.AppendLine($"std::intptr_t {GetNativeStaticFieldSymbol(fieldSubjectId)} = 0;");
-        }
-
-        if (staticFieldSubjectIds.Count > 0)
-        {
-            builder.AppendLine();
-        }
+        builder.AppendLine("        default:");
+        builder.AppendLine("            std::abort();");
+        builder.AppendLine("    }");
+        builder.AppendLine("}");
+        builder.AppendLine();
+        builder.AppendLine("std::intptr_t chaos_delegate_create_multicast_like(");
+        builder.AppendLine("    std::intptr_t chaos_template_delegate_value,");
+        builder.AppendLine("    const chaos_delegate_invocation_list& chaos_entries)");
+        builder.AppendLine("{");
+        builder.AppendLine("    if (chaos_entries.empty())");
+        builder.AppendLine("    {");
+        builder.AppendLine("        return static_cast<std::intptr_t>(0);");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        builder.AppendLine("    if (chaos_entries.size() == 1)");
+        builder.AppendLine("    {");
+        builder.AppendLine("        return chaos_entries.front();");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        builder.AppendLine("    const auto* chaos_template_delegate = chaos_require_delegate(chaos_template_delegate_value);");
+        builder.AppendLine(
+            "    const auto chaos_delegate_value = chaos_delegate_allocate_with_type_id(chaos_template_delegate->header.type_id);");
+        builder.AppendLine("    auto* chaos_delegate = chaos_require_delegate(chaos_delegate_value);");
+        builder.AppendLine("    auto* chaos_invocation_list = new chaos_delegate_invocation_list(chaos_entries);");
+        builder.AppendLine("    chaos_delegate->chaos_delegate_target = static_cast<std::intptr_t>(0);");
+        builder.AppendLine("    chaos_delegate->chaos_delegate_method_ptr = static_cast<std::intptr_t>(0);");
+        builder.AppendLine(
+            "    chaos_delegate->chaos_delegate_invocation_list = reinterpret_cast<std::intptr_t>(chaos_invocation_list);");
+        builder.AppendLine(
+            "    chaos_delegate->chaos_delegate_invocation_count = static_cast<std::intptr_t>(chaos_invocation_list->size());");
+        builder.AppendLine("    return chaos_delegate_value;");
+        builder.AppendLine("}");
+        builder.AppendLine();
+        builder.AppendLine("std::intptr_t chaos_delegate_combine(std::intptr_t chaos_left_value, std::intptr_t chaos_right_value)");
+        builder.AppendLine("{");
+        builder.AppendLine("    if (chaos_left_value == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("    {");
+        builder.AppendLine("        return chaos_right_value;");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        builder.AppendLine("    if (chaos_right_value == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("    {");
+        builder.AppendLine("        return chaos_left_value;");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        builder.AppendLine("    chaos_delegate_invocation_list chaos_entries{};");
+        builder.AppendLine("    chaos_delegate_append_flattened_entries(chaos_entries, chaos_left_value);");
+        builder.AppendLine("    chaos_delegate_append_flattened_entries(chaos_entries, chaos_right_value);");
+        builder.AppendLine("    chaos_delegate_validate_entry_types(chaos_entries);");
+        builder.AppendLine("    return chaos_delegate_create_multicast_like(chaos_left_value, chaos_entries);");
+        builder.AppendLine("}");
+        builder.AppendLine();
+        builder.AppendLine("std::intptr_t chaos_delegate_remove(std::intptr_t chaos_source_value, std::intptr_t chaos_value_to_remove)");
+        builder.AppendLine("{");
+        builder.AppendLine("    if (chaos_source_value == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("    {");
+        builder.AppendLine("        return static_cast<std::intptr_t>(0);");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        builder.AppendLine("    if (chaos_value_to_remove == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("    {");
+        builder.AppendLine("        return chaos_source_value;");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        builder.AppendLine("    chaos_delegate_invocation_list chaos_source_entries{};");
+        builder.AppendLine("    chaos_delegate_invocation_list chaos_remove_entries{};");
+        builder.AppendLine("    chaos_delegate_append_flattened_entries(chaos_source_entries, chaos_source_value);");
+        builder.AppendLine("    chaos_delegate_append_flattened_entries(chaos_remove_entries, chaos_value_to_remove);");
+        builder.AppendLine("    if (chaos_remove_entries.empty() || chaos_source_entries.size() < chaos_remove_entries.size())");
+        builder.AppendLine("    {");
+        builder.AppendLine("        return chaos_source_value;");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        builder.AppendLine(
+            "    for (std::intptr_t chaos_start = static_cast<std::intptr_t>(chaos_source_entries.size() - chaos_remove_entries.size());");
+        builder.AppendLine("         chaos_start >= static_cast<std::intptr_t>(0);");
+        builder.AppendLine("         --chaos_start)");
+        builder.AppendLine("    {");
+        builder.AppendLine("        bool chaos_matches = true;");
+        builder.AppendLine("        for (std::size_t chaos_index = 0; chaos_index < chaos_remove_entries.size(); ++chaos_index)");
+        builder.AppendLine("        {");
+        builder.AppendLine(
+            "            if (!chaos_delegate_single_entry_equals(chaos_source_entries[static_cast<std::size_t>(chaos_start) + chaos_index], chaos_remove_entries[chaos_index]))");
+        builder.AppendLine("            {");
+        builder.AppendLine("                chaos_matches = false;");
+        builder.AppendLine("                break;");
+        builder.AppendLine("            }");
+        builder.AppendLine("        }");
+        builder.AppendLine();
+        builder.AppendLine("        if (!chaos_matches)");
+        builder.AppendLine("        {");
+        builder.AppendLine("            continue;");
+        builder.AppendLine("        }");
+        builder.AppendLine();
+        builder.AppendLine(
+            "        chaos_source_entries.erase(chaos_source_entries.begin() + static_cast<std::size_t>(chaos_start), chaos_source_entries.begin() + static_cast<std::size_t>(chaos_start) + chaos_remove_entries.size());");
+        builder.AppendLine("        if (chaos_source_entries.empty())");
+        builder.AppendLine("        {");
+        builder.AppendLine("            return static_cast<std::intptr_t>(0);");
+        builder.AppendLine("        }");
+        builder.AppendLine();
+        builder.AppendLine("        if (chaos_source_entries.size() == 1)");
+        builder.AppendLine("        {");
+        builder.AppendLine("            return chaos_source_entries.front();");
+        builder.AppendLine("        }");
+        builder.AppendLine();
+        builder.AppendLine("        return chaos_delegate_create_multicast_like(chaos_source_value, chaos_source_entries);");
+        builder.AppendLine("    }");
+        builder.AppendLine();
+        builder.AppendLine("    return chaos_source_value;");
+        builder.AppendLine("}");
+        builder.AppendLine();
     }
 
-    private static IReadOnlyList<string> GetReferenceTypeEmissionOrder(
-        IReadOnlySet<string> referenceTypeSubjectIds,
-        IReadOnlyDictionary<string, string?> referenceTypeBaseSubjectIds)
+    private IReadOnlyList<string> CollectReachableDelegateTypeSubjectIds(
+        IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
     {
-        var ordered = new List<string>();
-        var visited = new HashSet<string>(StringComparer.Ordinal);
-        var visiting = new HashSet<string>(StringComparer.Ordinal);
+        var subjectIds = new HashSet<string>(StringComparer.Ordinal);
 
-        void Visit(string typeSubjectId)
-        {
-            if (visited.Contains(typeSubjectId))
-            {
-                return;
-            }
-
-            if (!visiting.Add(typeSubjectId))
-            {
-                throw new InvalidOperationException(
-                    $"reference type inheritance cycle detected for '{typeSubjectId}'.");
-            }
-
-            if (referenceTypeBaseSubjectIds.TryGetValue(typeSubjectId, out var baseTypeSubjectId) &&
-                !string.IsNullOrWhiteSpace(baseTypeSubjectId) &&
-                referenceTypeSubjectIds.Contains(baseTypeSubjectId))
-            {
-                Visit(baseTypeSubjectId);
-            }
-
-            visiting.Remove(typeSubjectId);
-            visited.Add(typeSubjectId);
-            ordered.Add(typeSubjectId);
-        }
-
-        foreach (var typeSubjectId in referenceTypeSubjectIds.OrderBy(value => value, StringComparer.Ordinal))
-        {
-            Visit(typeSubjectId);
-        }
-
-        return ordered;
-    }
-
-    private static IReadOnlyDictionary<string, string?> CollectReferenceTypeBaseSubjectIds(
-        AotCoreIrArtifact aotCoreIr)
-    {
-        var baseTypeSubjectIds = new Dictionary<string, string?>(StringComparer.Ordinal);
-
-        foreach (var method in aotCoreIr.Methods)
+        foreach (var method in reachableMethods)
         {
             foreach (var instruction in method.Instructions)
             {
-                var targetReference = instruction.TargetReference;
-                if (targetReference is null)
+                if (instruction.TargetReference is { Kind: AotCoreIrReferenceKind.Type } targetReference &&
+                    IsDelegateTypeSubjectId(targetReference.SubjectId, _referenceTypeBaseSubjectIds))
+                {
+                    subjectIds.Add(targetReference.SubjectId);
+                }
+
+                if (!string.IsNullOrWhiteSpace(instruction.Callee) &&
+                    instruction.Callee.Contains("::Invoke(", StringComparison.Ordinal))
+                {
+                    var declaringTypeSubjectId = GetMethodDeclaringTypeSubjectId(instruction.Callee);
+                    if (IsDelegateTypeSubjectId(declaringTypeSubjectId, _referenceTypeBaseSubjectIds))
+                    {
+                        subjectIds.Add(declaringTypeSubjectId);
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(instruction.Callee) &&
+                    TryReadSingleGenericTypeArgument(
+                        instruction.Callee,
+                        MarshalGetFunctionPointerForDelegateMethodPrefix,
+                        out var marshalDelegateTypeSubjectId) &&
+                    TryResolveReferenceTypeSubjectId(marshalDelegateTypeSubjectId, out marshalDelegateTypeSubjectId) &&
+                    IsDelegateTypeSubjectId(marshalDelegateTypeSubjectId, _referenceTypeBaseSubjectIds))
+                {
+                    subjectIds.Add(marshalDelegateTypeSubjectId);
+                }
+
+                if (!string.IsNullOrWhiteSpace(instruction.Callee) &&
+                    TryReadSingleGenericTypeArgument(
+                        instruction.Callee,
+                        MarshalGetDelegateForFunctionPointerMethodPrefix,
+                        out marshalDelegateTypeSubjectId) &&
+                    TryResolveReferenceTypeSubjectId(marshalDelegateTypeSubjectId, out marshalDelegateTypeSubjectId) &&
+                    IsDelegateTypeSubjectId(marshalDelegateTypeSubjectId, _referenceTypeBaseSubjectIds))
+                {
+                    subjectIds.Add(marshalDelegateTypeSubjectId);
+                }
+            }
+        }
+
+        if (subjectIds.Count > 0)
+        {
+            subjectIds.Add(DelegateTypeSubjectId);
+            subjectIds.Add(MulticastDelegateTypeSubjectId);
+        }
+
+        return subjectIds
+            .OrderBy(subjectId => subjectId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    private static IReadOnlyDictionary<string, string> BuildClosureAssemblyPathByName(
+        ManagedClosureManifestArtifact closureManifest)
+    {
+        var pathsByAssemblyName = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var assemblyPath in EnumerateClosureAssemblyPaths(closureManifest))
+        {
+            using var stream = File.OpenRead(assemblyPath);
+            using var peReader = new PEReader(stream);
+            if (!peReader.HasMetadata)
+            {
+                continue;
+            }
+
+            var metadataReader = peReader.GetMetadataReader();
+            var assemblyName = metadataReader.GetString(metadataReader.GetAssemblyDefinition().Name);
+            pathsByAssemblyName[assemblyName] = assemblyPath;
+        }
+
+        return pathsByAssemblyName;
+    }
+
+    private static bool TryParseStaticFieldDataSize(
+        string memberType,
+        out int size)
+    {
+        const string marker = "__StaticArrayInitTypeSize=";
+        size = 0;
+        var markerIndex = memberType.IndexOf(marker, StringComparison.Ordinal);
+        if (markerIndex < 0)
+        {
+            return false;
+        }
+
+        return int.TryParse(
+            memberType[(markerIndex + marker.Length)..],
+            NumberStyles.None,
+            CultureInfo.InvariantCulture,
+            out size) &&
+               size >= 0;
+    }
+
+    private static bool TryLoadStaticFieldDataBytes(
+        string assemblyPath,
+        string fieldSubjectId,
+        int size,
+        out IReadOnlyList<byte> bytes)
+    {
+        bytes = Array.Empty<byte>();
+        using var stream = File.OpenRead(assemblyPath);
+        using var peReader = new PEReader(stream);
+        if (!peReader.HasMetadata)
+        {
+            return false;
+        }
+
+        var metadataReader = peReader.GetMetadataReader();
+        var assemblyName = metadataReader.GetString(metadataReader.GetAssemblyDefinition().Name);
+        if (!TryResolveFieldDefinitionHandle(
+                metadataReader,
+                assemblyName,
+                fieldSubjectId,
+                out var fieldHandle))
+        {
+            return false;
+        }
+
+        var fieldDefinition = metadataReader.GetFieldDefinition(fieldHandle);
+        var relativeVirtualAddress = fieldDefinition.GetRelativeVirtualAddress();
+        if (relativeVirtualAddress <= 0)
+        {
+            return false;
+        }
+
+        var sectionData = peReader.GetSectionData(relativeVirtualAddress);
+        if (sectionData.Length < size)
+        {
+            return false;
+        }
+
+        bytes = sectionData.GetReader(0, size).ReadBytes(size);
+        return true;
+    }
+
+    private static bool TryResolveFieldDefinitionHandle(
+        MetadataReader metadataReader,
+        string assemblyName,
+        string fieldSubjectId,
+        out FieldDefinitionHandle fieldHandle)
+    {
+        fieldHandle = default;
+        var declaringTypeSubjectId = GetDeclaringTypeSubjectId(fieldSubjectId);
+        var fieldName = GetFieldName(fieldSubjectId);
+
+        foreach (var candidateTypeHandle in metadataReader.TypeDefinitions)
+        {
+            if (!TryResolveTypeDefinitionIdentity(
+                    metadataReader,
+                    assemblyName,
+                    candidateTypeHandle,
+                    out var typeIdentity) ||
+                !string.Equals(typeIdentity.SubjectId, declaringTypeSubjectId, StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            var typeDefinition = metadataReader.GetTypeDefinition(candidateTypeHandle);
+            foreach (var candidateFieldHandle in typeDefinition.GetFields())
+            {
+                var candidateFieldDefinition = metadataReader.GetFieldDefinition(candidateFieldHandle);
+                if (string.Equals(
+                        metadataReader.GetString(candidateFieldDefinition.Name),
+                        fieldName,
+                        StringComparison.Ordinal))
+                {
+                    fieldHandle = candidateFieldHandle;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        return false;
+    }
+
+    private static bool TryResolveTypeDefinitionHandleForReflectionMemberEntry(
+        SupplementalMetadataTypeTemplateEntry typeEntry,
+        IReadOnlyList<SupplementalMetadataTypeTemplateEntry> assemblyTypeEntries,
+        out TypeDefinitionHandle typeDefinitionHandle)
+    {
+        if (TryCreateMetadataEntityHandle(typeEntry.MetadataToken, out var handle) &&
+            handle.Kind == HandleKind.TypeDefinition)
+        {
+            typeDefinitionHandle = (TypeDefinitionHandle)handle;
+            return true;
+        }
+
+        if (string.IsNullOrWhiteSpace(typeEntry.DefinitionSubjectId) ||
+            string.Equals(typeEntry.SubjectId, typeEntry.DefinitionSubjectId, StringComparison.Ordinal))
+        {
+            typeDefinitionHandle = default;
+            return false;
+        }
+
+        var definitionEntry = assemblyTypeEntries.FirstOrDefault(candidate =>
+            string.Equals(candidate.SubjectId, typeEntry.DefinitionSubjectId, StringComparison.Ordinal));
+        if (definitionEntry is null)
+        {
+            typeDefinitionHandle = default;
+            return false;
+        }
+
+        if (TryCreateMetadataEntityHandle(definitionEntry.MetadataToken, out handle) &&
+            handle.Kind == HandleKind.TypeDefinition)
+        {
+            typeDefinitionHandle = (TypeDefinitionHandle)handle;
+            return true;
+        }
+
+        typeDefinitionHandle = default;
+        return false;
+    }
+
+    private static bool TryResolveMethodDefinitionForReflectionMemberEntry(
+        MetadataReader metadataReader,
+        SupplementalMetadataMethodTemplateEntry methodEntry,
+        IReadOnlyList<SupplementalMetadataTypeTemplateEntry> assemblyTypeEntries,
+        out MethodDefinitionHandle methodDefinitionHandle)
+    {
+        if (TryCreateMetadataEntityHandle(methodEntry.MetadataToken, out var handle) &&
+            handle.Kind == HandleKind.MethodDefinition)
+        {
+            methodDefinitionHandle = (MethodDefinitionHandle)handle;
+            return true;
+        }
+
+        if (string.IsNullOrWhiteSpace(methodEntry.DefinitionSubjectId))
+        {
+            methodDefinitionHandle = default;
+            return false;
+        }
+
+        var definitionDeclaringTypeSubjectId = GetMethodDeclaringTypeSubjectId(methodEntry.DefinitionSubjectId);
+        var definitionTypeEntry = assemblyTypeEntries.FirstOrDefault(candidate =>
+            string.Equals(candidate.SubjectId, definitionDeclaringTypeSubjectId, StringComparison.Ordinal));
+        if (definitionTypeEntry is null ||
+            !TryResolveTypeDefinitionHandleForReflectionMemberEntry(
+                definitionTypeEntry,
+                assemblyTypeEntries,
+                out var typeDefinitionHandle))
+        {
+            methodDefinitionHandle = default;
+            return false;
+        }
+
+        var metadataMethodName = GetMetadataMethodNameForReflectionMemberDefinition(methodEntry.DefinitionSubjectId);
+        var typeDefinition = metadataReader.GetTypeDefinition(typeDefinitionHandle);
+        foreach (var candidateHandle in typeDefinition.GetMethods())
+        {
+            var candidateDefinition = metadataReader.GetMethodDefinition(candidateHandle);
+            if (!string.Equals(
+                    metadataReader.GetString(candidateDefinition.Name),
+                    metadataMethodName,
+                    StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            if (GetMethodParameterCount(metadataReader, candidateDefinition) != methodEntry.ParameterCount)
+            {
+                continue;
+            }
+
+            methodDefinitionHandle = candidateHandle;
+            return true;
+        }
+
+        methodDefinitionHandle = default;
+        return false;
+    }
+
+    private static bool TryCreateMetadataEntityHandle(int metadataToken, out EntityHandle handle)
+    {
+        if (metadataToken == 0)
+        {
+            handle = default;
+            return false;
+        }
+
+        try
+        {
+            handle = MetadataTokens.EntityHandle(metadataToken);
+            return !handle.IsNil;
+        }
+        catch (ArgumentException)
+        {
+            handle = default;
+            return false;
+        }
+    }
+
+    private static string GetMetadataMethodNameForReflectionMemberDefinition(string methodSubjectId)
+    {
+        var methodName = GetMethodName(methodSubjectId);
+        var genericArgumentIndex = methodName.IndexOf('<');
+        if (genericArgumentIndex >= 0)
+        {
+            methodName = methodName[..genericArgumentIndex];
+        }
+
+        return ManagedNaming.StripGenericArity(methodName);
+    }
+
+    private static int GetMethodParameterCount(MetadataReader metadataReader, MethodDefinition methodDefinition)
+    {
+        return methodDefinition.GetParameters()
+            .Select(parameterHandle => metadataReader.GetParameter(parameterHandle))
+            .Count(parameter => parameter.SequenceNumber > 0);
+    }
+
+    private void CollectCustomAttributeMaterializations(
+        MetadataReader metadataReader,
+        string currentAssemblyName,
+        string targetSubjectId,
+        CustomAttributeTargetKind targetKind,
+        CustomAttributeHandleCollection attributeHandles,
+        IReadOnlySet<string> queriedDisplayNames,
+        IReadOnlySet<string> memberInfoIsDefinedAttributeTypeSubjectIds,
+        IDictionary<string, string> displayNameToSubjectId,
+        ICollection<CustomAttributeMaterializationPlan> materializations,
+        ISet<string> materializationKeys)
+    {
+        foreach (var attributeHandle in attributeHandles)
+        {
+            if (!TryGetAttributeTypeIdentity(metadataReader, currentAssemblyName, attributeHandle, out var attributeTypeIdentity))
+            {
+                continue;
+            }
+
+            var isExplicitQuery = queriedDisplayNames.Contains(attributeTypeIdentity.DisplayName);
+            var isRequestedByIsDefined = memberInfoIsDefinedAttributeTypeSubjectIds.Contains(attributeTypeIdentity.SubjectId);
+            if (!isExplicitQuery && !isRequestedByIsDefined)
+            {
+                continue;
+            }
+
+            if (isExplicitQuery)
+            {
+                RegisterCustomAttributeTypeSubjectId(
+                    attributeTypeIdentity.DisplayName,
+                    attributeTypeIdentity.SubjectId,
+                    displayNameToSubjectId);
+            }
+
+            var key = $"{(byte)targetKind}:{targetSubjectId}:{attributeTypeIdentity.SubjectId}";
+            if (!materializationKeys.Add(key))
+            {
+                continue;
+            }
+
+            materializations.Add(CreateCustomAttributeMaterializationPlan(
+                metadataReader,
+                targetSubjectId,
+                targetKind,
+                attributeHandle,
+                attributeTypeIdentity.SubjectId));
+        }
+    }
+
+    private void CollectSyntheticMethodCustomAttributeMaterializations(
+        MetadataReader metadataReader,
+        string targetSubjectId,
+        MethodDefinition methodDefinition,
+        IReadOnlySet<string> queriedDisplayNames,
+        IReadOnlySet<string> memberInfoIsDefinedAttributeTypeSubjectIds,
+        IDictionary<string, string> displayNameToSubjectId,
+        ICollection<CustomAttributeMaterializationPlan> materializations,
+        ISet<string> materializationKeys)
+    {
+        if ((memberInfoIsDefinedAttributeTypeSubjectIds.Contains(DllImportAttributeTypeSubjectId) ||
+             queriedDisplayNames.Contains(DllImportAttributeDisplayName)) &&
+            methodDefinition.Attributes.HasFlag(MethodAttributes.PinvokeImpl))
+        {
+            if (queriedDisplayNames.Contains(DllImportAttributeDisplayName))
+            {
+                RegisterCustomAttributeTypeSubjectId(
+                    DllImportAttributeDisplayName,
+                    DllImportAttributeTypeSubjectId,
+                    displayNameToSubjectId);
+            }
+
+            var key = $"{(byte)CustomAttributeTargetKind.Method}:{targetSubjectId}:{DllImportAttributeTypeSubjectId}";
+            if (materializationKeys.Add(key))
+            {
+                materializations.Add(CreateDllImportAttributeMaterializationPlan(metadataReader, targetSubjectId, methodDefinition));
+            }
+        }
+    }
+
+    private CustomAttributeMaterializationPlan CreateDllImportAttributeMaterializationPlan(
+        MetadataReader metadataReader,
+        string targetSubjectId,
+        MethodDefinition methodDefinition)
+    {
+        var import = methodDefinition.GetImport();
+        var moduleReference = metadataReader.GetModuleReference(import.Module);
+        var moduleName = metadataReader.GetString(moduleReference.Name);
+        var entryPointName = import.Name.IsNil
+            ? metadataReader.GetString(methodDefinition.Name)
+            : metadataReader.GetString(import.Name);
+        var assignments = new List<CustomAttributeFieldAssignment>
+        {
+            new(
+                ResolveAttributeStorageField(DllImportAttributeTypeSubjectId, "Value"),
+                new CustomAttributeLiteralValue(CustomAttributeLiteralKind.String, moduleName)),
+            new(
+                ResolveAttributeStorageField(DllImportAttributeTypeSubjectId, "EntryPoint"),
+                new CustomAttributeLiteralValue(CustomAttributeLiteralKind.String, entryPointName)),
+        };
+
+        if (import.Attributes.HasFlag(MethodImportAttributes.ExactSpelling))
+        {
+            assignments.Add(new CustomAttributeFieldAssignment(
+                ResolveAttributeStorageField(DllImportAttributeTypeSubjectId, "ExactSpelling"),
+                new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Boolean, true)));
+        }
+
+        if (import.Attributes.HasFlag(MethodImportAttributes.SetLastError))
+        {
+            assignments.Add(new CustomAttributeFieldAssignment(
+                ResolveAttributeStorageField(DllImportAttributeTypeSubjectId, "SetLastError"),
+                new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Boolean, true)));
+        }
+
+        return new CustomAttributeMaterializationPlan(
+            CustomAttributeTargetKind.Method,
+            targetSubjectId,
+            DllImportAttributeTypeSubjectId,
+            assignments);
+    }
+
+    private CustomAttributeMaterializationPlan CreateCustomAttributeMaterializationPlan(
+        MetadataReader metadataReader,
+        string targetSubjectId,
+        CustomAttributeTargetKind targetKind,
+        CustomAttributeHandle attributeHandle,
+        string attributeTypeSubjectId)
+    {
+        var attribute = metadataReader.GetCustomAttribute(attributeHandle);
+        var decodedValue = attribute.DecodeValue(NativeAotCustomAttributeTypeProvider.Instance);
+        var constructorParameterNames = GetAttributeConstructorParameterNames(metadataReader, attribute.Constructor);
+        var assignments = new List<CustomAttributeFieldAssignment>();
+
+        for (var index = 0; index < decodedValue.FixedArguments.Length; index++)
+        {
+            var memberName = ResolveFixedArgumentMemberName(
+                attributeTypeSubjectId,
+                constructorParameterNames,
+                index,
+                decodedValue.FixedArguments.Length);
+            assignments.Add(new CustomAttributeFieldAssignment(
+                ResolveAttributeStorageField(attributeTypeSubjectId, memberName),
+                CreateCustomAttributeLiteralValue(decodedValue.FixedArguments[index].Value)));
+        }
+
+        foreach (var namedArgument in decodedValue.NamedArguments)
+        {
+            if (string.IsNullOrWhiteSpace(namedArgument.Name))
+            {
+                throw new NotSupportedException(
+                    $"native-aot custom-attribute materialization found an unnamed argument on '{attributeTypeSubjectId}'.");
+            }
+
+            assignments.Add(new CustomAttributeFieldAssignment(
+                ResolveAttributeStorageField(attributeTypeSubjectId, namedArgument.Name),
+                CreateCustomAttributeLiteralValue(namedArgument.Value)));
+        }
+
+        return new CustomAttributeMaterializationPlan(
+            targetKind,
+            targetSubjectId,
+            attributeTypeSubjectId,
+            assignments);
+    }
+
+    private static IReadOnlySet<string> CollectMemberInfoIsDefinedAttributeTypeSubjectIds(
+        IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
+    {
+        var attributeTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var method in reachableMethods)
+        {
+            for (var index = 0; index < method.Instructions.Count; index++)
+            {
+                var instruction = method.Instructions[index];
+                if (!string.Equals(instruction.Callee, MemberInfoIsDefinedMethodSubjectId, StringComparison.Ordinal))
                 {
                     continue;
                 }
 
-                if (targetReference.Kind == AotCoreIrReferenceKind.Type &&
-                    targetReference.TypeShape == AotCoreIrTypeShapeKind.ReferenceType)
+                if (!TryResolveMemberInfoIsDefinedAttributeTypeSubjectId(method.Instructions, index, out var attributeTypeSubjectId) ||
+                    string.IsNullOrWhiteSpace(attributeTypeSubjectId))
                 {
-                    baseTypeSubjectIds[targetReference.SubjectId] = targetReference.BaseTypeSubjectId;
+                    throw new NotSupportedException(
+                        $"native-aot custom-attribute IsDefined requires a direct typeof(T) attribute argument in '{method.SubjectId}' at IL offset {instruction.IlOffset}.");
                 }
 
-                if (!string.IsNullOrWhiteSpace(targetReference.ArrayElementSubjectId) &&
-                    targetReference.ArrayElementTypeShape == AotCoreIrTypeShapeKind.ReferenceType)
-                {
-                    baseTypeSubjectIds[targetReference.ArrayElementSubjectId] = targetReference.ArrayElementBaseTypeSubjectId;
-                }
+                attributeTypeSubjectIds.Add(attributeTypeSubjectId!);
             }
         }
 
-        return baseTypeSubjectIds;
+        return attributeTypeSubjectIds;
     }
 
-    private static IReadOnlyDictionary<string, HashSet<string>> CollectReferenceTypeImplementedInterfaceSubjectIds(
-        AotCoreIrArtifact aotCoreIr)
+    private static bool TryResolveMemberInfoIsDefinedAttributeTypeSubjectId(
+        IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
+        int callIndex,
+        out string? attributeTypeSubjectId)
     {
-        var implementedInterfaceSubjectIds = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
-
-        static void TrackImplementedInterfaces(
-            IDictionary<string, HashSet<string>> implementedInterfaceSubjectIds,
-            string? typeSubjectId,
-            IReadOnlyList<string>? interfaceSubjectIds)
+        attributeTypeSubjectId = null;
+        if (callIndex < 3 ||
+            !string.Equals(instructions[callIndex - 1].Op, "ldc.i4", StringComparison.Ordinal) ||
+            !string.Equals(instructions[callIndex - 2].Callee, GetTypeFromHandleMethodSubjectId, StringComparison.Ordinal))
         {
-            if (string.IsNullOrWhiteSpace(typeSubjectId) ||
-                interfaceSubjectIds is null ||
-                interfaceSubjectIds.Count == 0)
+            return false;
+        }
+
+        var loadTokenInstruction = instructions[callIndex - 3];
+        if (!string.Equals(loadTokenInstruction.Op, "ldtoken", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        if (loadTokenInstruction.TargetReference?.Kind == AotCoreIrReferenceKind.Type &&
+            !string.IsNullOrWhiteSpace(loadTokenInstruction.TargetReference.SubjectId))
+        {
+            attributeTypeSubjectId = loadTokenInstruction.TargetReference.SubjectId;
+            return true;
+        }
+
+        if (loadTokenInstruction.Operand is string directSubjectId &&
+            !string.IsNullOrWhiteSpace(directSubjectId))
+        {
+            attributeTypeSubjectId = directSubjectId;
+            return true;
+        }
+
+        if (loadTokenInstruction.Operand is JsonElement { ValueKind: JsonValueKind.String } element)
+        {
+            var jsonSubjectId = element.GetString();
+            if (!string.IsNullOrWhiteSpace(jsonSubjectId))
             {
-                return;
-            }
-
-            if (!implementedInterfaceSubjectIds.TryGetValue(typeSubjectId, out var trackedInterfaces))
-            {
-                trackedInterfaces = new HashSet<string>(StringComparer.Ordinal);
-                implementedInterfaceSubjectIds[typeSubjectId] = trackedInterfaces;
-            }
-
-            foreach (var interfaceSubjectId in interfaceSubjectIds)
-            {
-                if (!string.IsNullOrWhiteSpace(interfaceSubjectId))
-                {
-                    trackedInterfaces.Add(interfaceSubjectId);
-                }
+                attributeTypeSubjectId = jsonSubjectId;
+                return true;
             }
         }
 
-        foreach (var method in aotCoreIr.Methods)
+        return false;
+    }
+
+    private static IReadOnlyList<string> GetAttributeConstructorParameterNames(
+        MetadataReader metadataReader,
+        EntityHandle constructorHandle)
+    {
+        if (constructorHandle.Kind != HandleKind.MethodDefinition)
         {
-            foreach (var instruction in method.Instructions)
-            {
-                var targetReference = instruction.TargetReference;
-                if (targetReference is null)
-                {
-                    continue;
-                }
-
-                if (targetReference.Kind == AotCoreIrReferenceKind.Type &&
-                    targetReference.TypeShape == AotCoreIrTypeShapeKind.ReferenceType)
-                {
-                    TrackImplementedInterfaces(
-                        implementedInterfaceSubjectIds,
-                        targetReference.SubjectId,
-                        targetReference.ImplementedInterfaceSubjectIds);
-                }
-
-                if (!string.IsNullOrWhiteSpace(targetReference.ArrayElementSubjectId) &&
-                    targetReference.ArrayElementTypeShape == AotCoreIrTypeShapeKind.ReferenceType)
-                {
-                    TrackImplementedInterfaces(
-                        implementedInterfaceSubjectIds,
-                        targetReference.ArrayElementSubjectId,
-                        targetReference.ArrayElementImplementedInterfaceSubjectIds);
-                }
-            }
+            return [];
         }
 
-        return implementedInterfaceSubjectIds;
+        var methodDefinition = metadataReader.GetMethodDefinition((MethodDefinitionHandle)constructorHandle);
+        return methodDefinition.GetParameters()
+            .Select(handle => metadataReader.GetString(metadataReader.GetParameter(handle).Name))
+            .Where(name => !string.IsNullOrWhiteSpace(name))
+            .ToArray();
     }
 
-    private static string GetDeclaringTypeSubjectId(string fieldSubjectId)
+    private static void RegisterCustomAttributeTypeSubjectId(
+        string displayName,
+        string subjectId,
+        IDictionary<string, string> displayNameToSubjectId)
     {
-        var separatorIndex = fieldSubjectId.IndexOf("::", StringComparison.Ordinal);
-        if (separatorIndex <= 0)
+        if (displayNameToSubjectId.TryGetValue(displayName, out var existingSubjectId) &&
+            !string.Equals(existingSubjectId, subjectId, StringComparison.Ordinal))
         {
-            throw new InvalidOperationException(
-                $"field subject '{fieldSubjectId}' is missing declaring type information");
+            throw new NotSupportedException(
+                $"native-aot custom-attribute lookup found ambiguous attribute type '{displayName}'.");
         }
 
-        return fieldSubjectId[..separatorIndex];
+        displayNameToSubjectId[displayName] = subjectId;
     }
 
-    private static string GetMethodSignatureSuffix(string subjectId)
+    private string ResolveFixedArgumentMemberName(
+        string attributeTypeSubjectId,
+        IReadOnlyList<string> constructorParameterNames,
+        int argumentIndex,
+        int totalArgumentCount)
     {
-        var separatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
-        if (separatorIndex <= 0 || separatorIndex + 2 >= subjectId.Length)
+        if (argumentIndex < constructorParameterNames.Count &&
+            !string.IsNullOrWhiteSpace(constructorParameterNames[argumentIndex]))
         {
-            throw new InvalidOperationException(
-                $"method subject '{subjectId}' is missing method signature information");
+            var parameterName = constructorParameterNames[argumentIndex];
+            return char.ToUpperInvariant(parameterName[0]) + parameterName[1..];
         }
 
-        return subjectId[(separatorIndex + 2)..];
-    }
-
-    private static string GetRequiredDeclaringTypeSubjectId(AotCoreIrReferenceArtifact targetReference)
-    {
-        if (!string.IsNullOrWhiteSpace(targetReference.DeclaringTypeSubjectId))
+        if (totalArgumentCount == 1)
         {
-            return targetReference.DeclaringTypeSubjectId;
+            return "Value";
         }
 
-        return GetDeclaringTypeSubjectId(targetReference.SubjectId);
+        throw new NotSupportedException(
+            $"native-aot custom-attribute materialization could not bind fixed argument #{argumentIndex} for '{attributeTypeSubjectId}'.");
     }
 
-    private static string GetNativeTypeSymbol(string subjectId)
+    private string ResolveAttributeStorageField(
+        string attributeTypeSubjectId,
+        string memberName)
     {
-        return $"chaos_type_{SanitizeSubjectId(subjectId)}";
-    }
-
-    private static string GetNativeValueTypeSymbol(string subjectId)
-    {
-        return $"chaos_valuetype_{SanitizeSubjectId(subjectId)}";
-    }
-
-    private static string GetNativeFieldMemberName(string subjectId)
-    {
-        return $"field_{SanitizeSubjectId(subjectId)}";
-    }
-
-    private static string GetNativeStaticFieldSymbol(string subjectId)
-    {
-        return $"chaos_static_{SanitizeSubjectId(subjectId)}";
-    }
-
-    private static string GetNativeBoxTypeSymbol(string subjectId)
-    {
-        return $"chaos_boxed_type_{SanitizeSubjectId(subjectId)}";
-    }
-
-    private static string GetNativeTypeIdSymbol(string subjectId)
-    {
-        return $"chaos_type_id_{SanitizeSubjectId(subjectId)}";
-    }
-
-    private static string GetNativeBoxTypeIdSymbol(string subjectId)
-    {
-        return $"chaos_boxed_type_id_{SanitizeSubjectId(subjectId)}";
-    }
-
-    private static bool HasArrayElementReference(AotCoreIrReferenceArtifact targetReference)
-    {
-        return !string.IsNullOrWhiteSpace(targetReference.ArrayElementSubjectId);
-    }
-
-    private static string GetRuntimeTypeIdExpression(
-        string? subjectId,
-        AotCoreIrTypeShapeKind typeShape)
-    {
-        if (string.IsNullOrWhiteSpace(subjectId) || typeShape == AotCoreIrTypeShapeKind.ValueType)
+        var getterSubjectId = ManagedNaming.CreateMethodSubjectId(attributeTypeSubjectId, $"get_{memberName}", []);
+        if (_methodsBySubjectId.TryGetValue(getterSubjectId, out var getterMethod) &&
+            TryGetAutoGetterStorageFieldSubjectId(getterMethod, out var fieldSubjectId) &&
+            !string.IsNullOrWhiteSpace(fieldSubjectId))
         {
-            return "static_cast<std::intptr_t>(0)";
+            return fieldSubjectId!;
         }
 
-        return GetNativeTypeIdSymbol(subjectId);
+        return ManagedNaming.CreateFieldSubjectId(attributeTypeSubjectId, memberName);
     }
 
-    private static byte GetNativeTypeShapeValue(AotCoreIrTypeShapeKind typeShape)
+    private static bool TryGetAutoGetterStorageFieldSubjectId(
+        AotCoreIrMethodArtifact method,
+        out string? fieldSubjectId)
     {
-        return typeShape switch
+        fieldSubjectId = null;
+        if (method.IsStatic || method.ParameterCount != 0)
         {
-            AotCoreIrTypeShapeKind.ReferenceType => 1,
-            AotCoreIrTypeShapeKind.ValueType => 2,
-            AotCoreIrTypeShapeKind.InterfaceType => 3,
-            _ => 0,
+            return false;
+        }
+
+        var fieldLoads = method.Instructions
+            .Where(instruction =>
+                string.Equals(instruction.Op, "ldfld", StringComparison.Ordinal) &&
+                instruction.TargetReference?.Kind == AotCoreIrReferenceKind.Field &&
+                !string.IsNullOrWhiteSpace(instruction.TargetReference.SubjectId))
+            .Select(instruction => instruction.TargetReference!.SubjectId)
+            .Distinct(StringComparer.Ordinal)
+            .ToArray();
+        if (fieldLoads.Length != 1)
+        {
+            return false;
+        }
+
+        fieldSubjectId = fieldLoads[0];
+        return true;
+    }
+
+    private static CustomAttributeLiteralValue CreateCustomAttributeLiteralValue(object? value)
+    {
+        return value switch
+        {
+            null => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Null, null),
+            bool booleanValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Boolean, booleanValue),
+            byte byteValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Byte, byteValue),
+            sbyte byteValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Int16, (short)byteValue),
+            short shortValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Int16, shortValue),
+            int intValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Int32, intValue),
+            long longValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.Int64, longValue),
+            ushort shortValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.UInt16, shortValue),
+            uint intValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.UInt32, intValue),
+            ulong longValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.UInt64, longValue),
+            char charValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.UInt16, (ushort)charValue),
+            string stringValue => new CustomAttributeLiteralValue(CustomAttributeLiteralKind.String, stringValue),
+            _ => throw new NotSupportedException(
+                $"native-aot custom-attribute materialization does not support literal value '{value.GetType().FullName}'."),
         };
     }
 
-    private static bool RequiresStructuredValueTypePayload(AotCoreIrReferenceArtifact targetReference)
+    private static IEnumerable<string> EnumerateClosureAssemblyPaths(
+        ManagedClosureManifestArtifact closureManifest)
     {
-        return targetReference.TypeShape == AotCoreIrTypeShapeKind.ValueType &&
-               IsStructuredValueTypeSubjectId(targetReference.SubjectId);
-    }
+        yield return Path.GetFullPath(closureManifest.InputAssemblyPath);
 
-    private static bool IsStructuredValueTypeSubjectId(string subjectId)
-    {
-        return !string.Equals(subjectId, "System.Private.CoreLib/System.Int32", StringComparison.Ordinal);
-    }
-
-    private static string SanitizeSubjectId(string subjectId)
-    {
-        var builder = new StringBuilder(subjectId.Length);
-        foreach (var character in subjectId)
+        if (closureManifest.AdditionalAssemblyPaths is null)
         {
-            builder.Append(char.IsLetterOrDigit(character) ? character : '_');
+            yield break;
         }
 
-        if (builder.Length == 0)
+        foreach (var assemblyPath in closureManifest.AdditionalAssemblyPaths)
         {
-            builder.Append("subject");
+            yield return Path.GetFullPath(assemblyPath);
         }
-
-        if (char.IsDigit(builder[0]))
-        {
-            builder.Insert(0, '_');
-        }
-
-        return builder.ToString();
     }
 
-    private static string FormatGenericContextComment(GenericContextArtifact genericContext)
+    private static bool TryParseCustomAttributeQueryCallee(
+        string? callee,
+        out string? attributeDisplayName)
     {
-        ArgumentNullException.ThrowIfNull(genericContext);
-
-        return
-            $"// Generic context: definition={genericContext.DefinitionSubjectId}; type={FormatGenericArgumentList(genericContext.TypeArguments)}; method={FormatGenericArgumentList(genericContext.MethodArguments)}";
-    }
-
-    private static string FormatGenericArgumentList(IReadOnlyList<string>? arguments)
-    {
-        if (arguments is null || arguments.Count == 0)
+        const string prefix = "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute<";
+        const string suffix = ">(System.Reflection.MemberInfo)";
+        attributeDisplayName = null;
+        if (string.IsNullOrWhiteSpace(callee) ||
+            !callee.StartsWith(prefix, StringComparison.Ordinal) ||
+            !callee.EndsWith(suffix, StringComparison.Ordinal))
         {
-            return "[]";
+            return false;
         }
 
-        return $"[{string.Join(", ", arguments)}]";
+        attributeDisplayName = callee[prefix.Length..^suffix.Length];
+        return !string.IsNullOrWhiteSpace(attributeDisplayName);
+    }
+
+    private static bool TryParseAttributeGetterMethodSubjectId(
+        string? subjectId,
+        out string? attributeTypeSubjectId,
+        out string? memberName)
+    {
+        attributeTypeSubjectId = null;
+        memberName = null;
+        if (string.IsNullOrWhiteSpace(subjectId) ||
+            !subjectId.EndsWith("()", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var separatorIndex = subjectId.IndexOf("::get_", StringComparison.Ordinal);
+        if (separatorIndex <= 0)
+        {
+            return false;
+        }
+
+        attributeTypeSubjectId = subjectId[..separatorIndex];
+        memberName = subjectId.Substring(separatorIndex + "::get_".Length, subjectId.Length - separatorIndex - "::get_".Length - 2);
+        return !string.IsNullOrWhiteSpace(attributeTypeSubjectId) &&
+               !string.IsNullOrWhiteSpace(memberName);
+    }
+
+    private static bool TryGetAttributeTypeIdentity(
+        MetadataReader metadataReader,
+        string currentAssemblyName,
+        CustomAttributeHandle attributeHandle,
+        out MetadataTypeIdentity attributeTypeIdentity)
+    {
+        var attribute = metadataReader.GetCustomAttribute(attributeHandle);
+        return TryResolveTypeIdentity(metadataReader, currentAssemblyName, attribute.Constructor, out attributeTypeIdentity);
+    }
+
+    private static bool TryResolveTypeIdentity(
+        MetadataReader metadataReader,
+        string currentAssemblyName,
+        EntityHandle constructorOrTypeHandle,
+        out MetadataTypeIdentity typeIdentity)
+    {
+        switch (constructorOrTypeHandle.Kind)
+        {
+            case HandleKind.MethodDefinition:
+                var methodDefinition = metadataReader.GetMethodDefinition((MethodDefinitionHandle)constructorOrTypeHandle);
+                return TryResolveTypeDefinitionIdentity(
+                    metadataReader,
+                    currentAssemblyName,
+                    methodDefinition.GetDeclaringType(),
+                    out typeIdentity);
+            case HandleKind.MemberReference:
+                var memberReference = metadataReader.GetMemberReference((MemberReferenceHandle)constructorOrTypeHandle);
+                return TryResolveTypeIdentity(metadataReader, currentAssemblyName, memberReference.Parent, out typeIdentity);
+            case HandleKind.TypeDefinition:
+                return TryResolveTypeDefinitionIdentity(
+                    metadataReader,
+                    currentAssemblyName,
+                    (TypeDefinitionHandle)constructorOrTypeHandle,
+                    out typeIdentity);
+            case HandleKind.TypeReference:
+                return TryResolveTypeReferenceIdentity(
+                    metadataReader,
+                    currentAssemblyName,
+                    (TypeReferenceHandle)constructorOrTypeHandle,
+                    out typeIdentity);
+            default:
+                typeIdentity = default;
+                return false;
+        }
+    }
+
+    private static bool TryResolveTypeDefinitionIdentity(
+        MetadataReader metadataReader,
+        string currentAssemblyName,
+        TypeDefinitionHandle handle,
+        out MetadataTypeIdentity typeIdentity)
+    {
+        var typeDefinition = metadataReader.GetTypeDefinition(handle);
+        var typeName = metadataReader.GetString(typeDefinition.Name);
+        var namespaceName = metadataReader.GetString(typeDefinition.Namespace);
+        var declaringTypeHandle = typeDefinition.GetDeclaringType();
+        if (!declaringTypeHandle.IsNil &&
+            TryResolveTypeDefinitionIdentity(metadataReader, currentAssemblyName, declaringTypeHandle, out var declaringTypeIdentity))
+        {
+            typeIdentity = declaringTypeIdentity with
+            {
+                TypeName = $"{declaringTypeIdentity.TypeName}+{typeName}",
+            };
+            return true;
+        }
+
+        typeIdentity = new MetadataTypeIdentity(currentAssemblyName, namespaceName, typeName);
+        return true;
+    }
+
+    private static bool TryResolveTypeReferenceIdentity(
+        MetadataReader metadataReader,
+        string currentAssemblyName,
+        TypeReferenceHandle handle,
+        out MetadataTypeIdentity typeIdentity)
+    {
+        var typeReference = metadataReader.GetTypeReference(handle);
+        var typeName = metadataReader.GetString(typeReference.Name);
+        var namespaceName = metadataReader.GetString(typeReference.Namespace);
+        switch (typeReference.ResolutionScope.Kind)
+        {
+            case HandleKind.AssemblyReference:
+                var assemblyReference = metadataReader.GetAssemblyReference((AssemblyReferenceHandle)typeReference.ResolutionScope);
+                typeIdentity = new MetadataTypeIdentity(
+                    metadataReader.GetString(assemblyReference.Name),
+                    namespaceName,
+                    typeName);
+                return true;
+
+            case HandleKind.TypeReference:
+                if (TryResolveTypeReferenceIdentity(
+                        metadataReader,
+                        currentAssemblyName,
+                        (TypeReferenceHandle)typeReference.ResolutionScope,
+                        out var declaringTypeIdentity))
+                {
+                    typeIdentity = declaringTypeIdentity with
+                    {
+                        TypeName = $"{declaringTypeIdentity.TypeName}+{typeName}",
+                    };
+                    return true;
+                }
+
+                break;
+
+            case HandleKind.ModuleDefinition:
+            case HandleKind.AssemblyDefinition:
+                typeIdentity = new MetadataTypeIdentity(currentAssemblyName, namespaceName, typeName);
+                return true;
+        }
+
+        typeIdentity = default;
+        return false;
+    }
+}
+
+internal sealed class NativeAotCustomAttributeTypeProvider : ICustomAttributeTypeProvider<string>
+{
+    public static readonly NativeAotCustomAttributeTypeProvider Instance = new();
+
+    private NativeAotCustomAttributeTypeProvider()
+    {
+    }
+
+    public string GetPrimitiveType(PrimitiveTypeCode typeCode)
+    {
+        return typeCode switch
+        {
+            PrimitiveTypeCode.Boolean => "bool",
+            PrimitiveTypeCode.Byte => "byte",
+            PrimitiveTypeCode.Char => "char",
+            PrimitiveTypeCode.Double => "double",
+            PrimitiveTypeCode.Int16 => "short",
+            PrimitiveTypeCode.Int32 => "int",
+            PrimitiveTypeCode.Int64 => "long",
+            PrimitiveTypeCode.Object => "object",
+            PrimitiveTypeCode.SByte => "sbyte",
+            PrimitiveTypeCode.Single => "float",
+            PrimitiveTypeCode.String => "string",
+            PrimitiveTypeCode.UInt16 => "ushort",
+            PrimitiveTypeCode.UInt32 => "uint",
+            PrimitiveTypeCode.UInt64 => "ulong",
+            _ => typeCode.ToString(),
+        };
+    }
+
+    public string GetSystemType()
+    {
+        return "System.Type";
+    }
+
+    public string GetSZArrayType(string elementType)
+    {
+        return $"{elementType}[]";
+    }
+
+    public string GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind)
+    {
+        return NativeAotCustomAttributeTypeNameResolver.GetTypeName(reader, handle);
+    }
+
+    public string GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind)
+    {
+        return NativeAotCustomAttributeTypeNameResolver.GetTypeName(reader, handle);
+    }
+
+    public string GetTypeFromSerializedName(string name)
+    {
+        return name;
+    }
+
+    public PrimitiveTypeCode GetUnderlyingEnumType(string type)
+    {
+        return PrimitiveTypeCode.Int32;
+    }
+
+    public bool IsSystemType(string type)
+    {
+        return string.Equals(type, "System.Type", StringComparison.Ordinal);
+    }
+}
+
+internal static class NativeAotCustomAttributeTypeNameResolver
+{
+    public static string GetTypeName(MetadataReader metadataReader, TypeDefinitionHandle handle)
+    {
+        var typeDefinition = metadataReader.GetTypeDefinition(handle);
+        var typeName = metadataReader.GetString(typeDefinition.Name);
+        var namespaceName = metadataReader.GetString(typeDefinition.Namespace);
+        var declaringTypeHandle = typeDefinition.GetDeclaringType();
+        if (!declaringTypeHandle.IsNil)
+        {
+            return $"{GetTypeName(metadataReader, declaringTypeHandle)}+{typeName}";
+        }
+
+        return string.IsNullOrEmpty(namespaceName)
+            ? typeName
+            : $"{namespaceName}.{typeName}";
+    }
+
+    public static string GetTypeName(MetadataReader metadataReader, TypeReferenceHandle handle)
+    {
+        var typeReference = metadataReader.GetTypeReference(handle);
+        var typeName = metadataReader.GetString(typeReference.Name);
+        var namespaceName = metadataReader.GetString(typeReference.Namespace);
+        if (typeReference.ResolutionScope.Kind == HandleKind.TypeReference)
+        {
+            return $"{GetTypeName(metadataReader, (TypeReferenceHandle)typeReference.ResolutionScope)}+{typeName}";
+        }
+
+        return string.IsNullOrEmpty(namespaceName)
+            ? typeName
+            : $"{namespaceName}.{typeName}";
     }
 }
 
@@ -4161,3 +1690,5 @@ public sealed record NativeAotMethodTemplateModel
 
     public required string MethodSource { get; init; }
 }
+
+

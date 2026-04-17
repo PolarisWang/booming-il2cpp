@@ -4,6 +4,13 @@ import json
 import unittest
 from pathlib import Path
 
+from tests.support import (
+    read_contracts_source,
+    read_linker_stage_source,
+    read_loader_stage_source,
+    read_native_reference_planner_source,
+)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
@@ -23,6 +30,14 @@ SEMANTIC_WORLD_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.SemanticWorl
 LINKER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Linker" / "LinkerStage.cs"
 LOWERING_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceLoweringPlanner.cs"
 EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceProofEmitter.cs"
+CATALOG_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofCatalog.cs"
+)
 TEMPLATE_PATH = (
     REPO_ROOT
     / "src"
@@ -91,10 +106,10 @@ class Phase2ThreadingGcProofTests(unittest.TestCase):
         self.assertIn("internal static class GcSensitiveFlowProofEntry", gc_source)
 
     def test_loader_semantic_and_linker_lock_threading_surface(self) -> None:
-        contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")
-        loader_source = LOADER_STAGE_PATH.read_text(encoding="utf-8")
+        contracts_source = read_contracts_source(REPO_ROOT)
+        loader_source = read_loader_stage_source(REPO_ROOT)
         semantic_world_source = SEMANTIC_WORLD_PATH.read_text(encoding="utf-8")
-        linker_source = LINKER_STAGE_PATH.read_text(encoding="utf-8")
+        linker_source = read_linker_stage_source(REPO_ROOT)
 
         self.assertIn("public bool IsThreadStatic { get; init; }", contracts_source)
         self.assertIn("fieldDefinition.Attributes.HasFlag(FieldAttributes.Static)", loader_source)
@@ -105,18 +120,20 @@ class Phase2ThreadingGcProofTests(unittest.TestCase):
         self.assertIn("monitor-enter-exit", linker_source)
 
     def test_codegen_and_runtime_core_freeze_threading_gc_proof_surface(self) -> None:
-        planner_source = LOWERING_PLANNER_PATH.read_text(encoding="utf-8")
+        planner_source = read_native_reference_planner_source(REPO_ROOT)
         emitter_source = EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = CATALOG_PATH.read_text(encoding="utf-8")
         runtime_header_source = RUNTIME_CORE_HEADER_PATH.read_text(encoding="utf-8")
         runtime_source = RUNTIME_CORE_SOURCE_PATH.read_text(encoding="utf-8")
 
         self.assertTrue(TEMPLATE_PATH.is_file(), msg=f"missing threading template: {TEMPLATE_PATH}")
         template_source = TEMPLATE_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("managed-threading.threadstatic-monitor.minimal", planner_source)
+        self.assertIn("managed-threading.threadstatic-monitor.minimal", catalog_source)
+        self.assertIn("NativeReferenceProofCatalog.ManagedThreadingThreadStaticMonitorMinimal", planner_source)
         self.assertIn("MatchesThreadingThreadStaticMonitorCandidate(", planner_source)
         self.assertIn("TryCreateThreadingThreadStaticMonitorLoweringPlan(", planner_source)
-        self.assertIn("managed-threading.threadstatic-monitor.minimal", emitter_source)
+        self.assertIn("NativeReferenceProofCatalog.ManagedThreadingThreadStaticMonitorMinimal", emitter_source)
         self.assertIn("case ManagedThreadingThreadStaticMonitorMinimal:", emitter_source)
 
         self.assertIn("ThreadStaticInt32Add(", runtime_header_source)

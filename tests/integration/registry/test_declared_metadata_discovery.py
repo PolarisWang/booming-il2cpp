@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import shutil
 import subprocess
@@ -187,7 +187,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
         catalog_module = load_module(COMPILED_CATALOG_MODULE_PATH, "chaos_declared_metadata_catalog_metadata_only")
 
         isolated_dll_path = self._copy_fixture_output(self.declared_entries_dll)
-        framework_dll_path = isolated_dll_path.parent / "Chaos.TestFramework.dll"
+        framework_dll_path = isolated_dll_path.parent / "Chaos.TestFramework.Sdk.dll"
         self.assertTrue(framework_dll_path.is_file(), msg=f"missing copied framework dll: {framework_dll_path}")
         framework_dll_path.unlink()
 
@@ -282,6 +282,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                     "CoreRuntimeFeatures.ArrayBoxingProofEntry",
                     "CoreRuntimeFeatures.AsyncAwaitProofEntry",
                     "CoreRuntimeFeatures.DelegateProofEntry",
+                    "CoreRuntimeFeatures.DirectCallVirtProofEntry",
                     "CoreRuntimeFeatures.EventCallbackFlowProofEntry",
                     "CoreRuntimeFeatures.ExceptionCatchProofEntry",
                     "CoreRuntimeFeatures.ExceptionProofEntry",
@@ -319,6 +320,7 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                     "CoreRuntimeFeatures.TaskSchedulingProofEntry",
                     "CoreRuntimeFeatures.ThreadingProofEntry",
                     "CoreRuntimeFeatures.ThreadLocalStateProofEntry",
+                    "CoreRuntimeFeatures.UInt64BitwiseProofEntry",
                     "CoreRuntimeFeatures.UnsafePointerProofEntry",
                     "CoreRuntimeFeatures.DispatchProofEntry",
                     "CoreRuntimeFeatures.OverflowOpsProofEntry",
@@ -548,11 +550,13 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
                     "CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry",
                     "CoreRuntimeBenchmarks.NativeCallInteropBenchmarkEntry",
                     "CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.ShiftOpsBenchmarkEntry",
                     "CoreRuntimeBenchmarks.SpanAndMemoryBenchmarkEntry",
                     "CoreRuntimeBenchmarks.StringAndUtf8MarshalingBenchmarkEntry",
                     "CoreRuntimeBenchmarks.StructMarshalingBenchmarkEntry",
                     "CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry",
                     "CoreRuntimeBenchmarks.TaskSchedulingBenchmarkEntry",
+                    "CoreRuntimeBenchmarks.UInt64BitwiseBenchmarkEntry",
                     "CoreRuntimeBenchmarks.UnsafePointerBenchmarkEntry",
                 },
                 set(benchmark_entries),
@@ -890,3 +894,4 @@ class DeclaredMetadataDiscoveryTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

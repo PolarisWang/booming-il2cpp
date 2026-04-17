@@ -15,12 +15,12 @@ internal static class LoaderContractProofEntry
     {
         Assembly current = typeof(LoaderContractProofEntry).Assembly;
         Type? self = current.GetType("CoreRuntimeFeatures.LoaderContractProofEntry");
-        Type? frameworkAssert = Type.GetType("Chaos.TestFramework.Assert, Chaos.TestFramework");
+        Type? frameworkAssert = Type.GetType("Chaos.TestFramework.Assert, Chaos.TestFramework.Sdk");
 
         Assert.Equal("CoreRuntimeFeatures", current.GetName().Name);
         Assert.NotNull(self);
         Assert.NotNull(frameworkAssert);
-        Assert.Equal("Chaos.TestFramework", frameworkAssert.Assembly.GetName().Name);
+        Assert.Equal("Chaos.TestFramework.Sdk", frameworkAssert.Assembly.GetName().Name);
         return 0;
     }
 }

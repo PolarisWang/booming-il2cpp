@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-15T16:18:06.290326+00:00",
+  "generatedAt": "2026-04-16T16:21:08.148193+00:00",
   "defaultPlatform": "windows-x64",
   "availablePlatforms": [
     "windows-x64"
@@ -17,7 +17,7 @@
     "recordedModeCount": 6,
     "missingModeCount": 0,
     "unsupportedModeCount": 3,
-    "latestRecordedAt": "2026-04-15T16:15:58.586697Z"
+    "latestRecordedAt": "2026-04-16T16:12:48.658133Z"
   },
   "platformSummaries": {
     "windows-x64": {
@@ -28,7 +28,7 @@
       "recordedModeCount": 6,
       "missingModeCount": 0,
       "unsupportedModeCount": 3,
-      "latestRecordedAt": "2026-04-15T16:15:58.586697Z"
+      "latestRecordedAt": "2026-04-16T16:12:48.658133Z"
     }
   },
   "subjects": {
@@ -116,22 +116,22 @@
               "status": "recorded",
               "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
               "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-              "recordedAt": "2026-04-14T14:27:46.462775Z",
-              "gitCommit": "ce5f0ee",
+              "recordedAt": "2026-04-16T15:24:07.564381Z",
+              "gitCommit": "876ce31",
               "metrics": {
                 "sampleCount": 3,
-                "meanDurationMs": 73.959,
-                "minDurationMs": 72.856,
-                "maxDurationMs": 74.888,
+                "meanDurationMs": 96.208,
+                "minDurationMs": 85.092,
+                "maxDurationMs": 115.753,
                 "meanChecksum": 4.0,
                 "minChecksum": 4.0,
                 "maxChecksum": 4.0,
-                "meanElapsedMilliseconds": 73.959,
-                "minElapsedMilliseconds": 72.856,
-                "maxElapsedMilliseconds": 74.888,
-                "meanOpsPerSecond": 54.091,
-                "minOpsPerSecond": 53.413,
-                "maxOpsPerSecond": 54.903
+                "meanElapsedMilliseconds": 96.208,
+                "minElapsedMilliseconds": 85.092,
+                "maxElapsedMilliseconds": 115.753,
+                "meanOpsPerSecond": 42.378,
+                "minOpsPerSecond": 34.556,
+                "maxOpsPerSecond": 47.008
               },
               "reasonCode": "recorded",
               "reasonLabel": "Benchmark record captured."
@@ -156,8 +156,8 @@
             "unsupportedModeCount": 2,
             "isComplete": true
           },
-          "lastRecordedAt": "2026-04-14T14:27:46.462775Z",
-          "gitCommit": "ce5f0ee",
+          "lastRecordedAt": "2026-04-16T15:24:07.564381Z",
+          "gitCommit": "876ce31",
           "isStale": false,
           "comparison": {
             "nativeVsManaged": {
@@ -229,10 +229,10 @@
               "status": "recorded",
               "reasonCode": "recorded",
               "reasonLabel": "Benchmark record captured.",
-              "durationMs": 73.959,
-              "opsPerSecond": 54.091,
-              "recordedAt": "2026-04-14T14:27:46.462775Z",
-              "gitCommit": "ce5f0ee"
+              "durationMs": 96.208,
+              "opsPerSecond": 42.378,
+              "recordedAt": "2026-04-16T15:24:07.564381Z",
+              "gitCommit": "876ce31"
             },
             "relativeToManaged": {
               "native": {
@@ -291,22 +291,22 @@
           "status": "recorded",
           "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
           "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-          "recordedAt": "2026-04-14T14:27:46.462775Z",
-          "gitCommit": "ce5f0ee",
+          "recordedAt": "2026-04-16T15:24:07.564381Z",
+          "gitCommit": "876ce31",
           "metrics": {
             "sampleCount": 3,
-            "meanDurationMs": 73.959,
-            "minDurationMs": 72.856,
-            "maxDurationMs": 74.888,
+            "meanDurationMs": 96.208,
+            "minDurationMs": 85.092,
+            "maxDurationMs": 115.753,
             "meanChecksum": 4.0,
             "minChecksum": 4.0,
             "maxChecksum": 4.0,
-            "meanElapsedMilliseconds": 73.959,
-            "minElapsedMilliseconds": 72.856,
-            "maxElapsedMilliseconds": 74.888,
-            "meanOpsPerSecond": 54.091,
-            "minOpsPerSecond": 53.413,
-            "maxOpsPerSecond": 54.903
+            "meanElapsedMilliseconds": 96.208,
+            "minElapsedMilliseconds": 85.092,
+            "maxElapsedMilliseconds": 115.753,
+            "meanOpsPerSecond": 42.378,
+            "minOpsPerSecond": 34.556,
+            "maxOpsPerSecond": 47.008
           },
           "reasonCode": "recorded",
           "reasonLabel": "Benchmark record captured."
@@ -331,8 +331,8 @@
         "unsupportedModeCount": 2,
         "isComplete": true
       },
-      "lastRecordedAt": "2026-04-14T14:27:46.462775Z",
-      "gitCommit": "ce5f0ee",
+      "lastRecordedAt": "2026-04-16T15:24:07.564381Z",
+      "gitCommit": "876ce31",
       "isStale": false,
       "comparison": {
         "nativeVsManaged": {
@@ -404,10 +404,10 @@
           "status": "recorded",
           "reasonCode": "recorded",
           "reasonLabel": "Benchmark record captured.",
-          "durationMs": 73.959,
-          "opsPerSecond": 54.091,
-          "recordedAt": "2026-04-14T14:27:46.462775Z",
-          "gitCommit": "ce5f0ee"
+          "durationMs": 96.208,
+          "opsPerSecond": 42.378,
+          "recordedAt": "2026-04-16T15:24:07.564381Z",
+          "gitCommit": "876ce31"
         },
         "relativeToManaged": {
           "native": {
@@ -529,22 +529,22 @@
               "status": "recorded",
               "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
               "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-              "recordedAt": "2026-04-14T14:28:05.104438Z",
-              "gitCommit": "ce5f0ee",
+              "recordedAt": "2026-04-16T15:24:59.714415Z",
+              "gitCommit": "876ce31",
               "metrics": {
                 "sampleCount": 3,
-                "meanDurationMs": 7.128,
-                "minDurationMs": 6.971,
-                "maxDurationMs": 7.247,
+                "meanDurationMs": 7.033,
+                "minDurationMs": 6.905,
+                "maxDurationMs": 7.231,
                 "meanChecksum": 4394.0,
                 "minChecksum": 4394.0,
                 "maxChecksum": 4394.0,
-                "meanElapsedMilliseconds": 7.128,
-                "minElapsedMilliseconds": 6.971,
-                "maxElapsedMilliseconds": 7.247,
-                "meanOpsPerSecond": 841.912,
-                "minOpsPerSecond": 827.929,
-                "maxOpsPerSecond": 860.672
+                "meanElapsedMilliseconds": 7.033,
+                "minElapsedMilliseconds": 6.905,
+                "maxElapsedMilliseconds": 7.231,
+                "meanOpsPerSecond": 853.493,
+                "minOpsPerSecond": 829.807,
+                "maxOpsPerSecond": 868.986
               },
               "reasonCode": "recorded",
               "reasonLabel": "Benchmark record captured."
@@ -554,22 +554,22 @@
               "status": "recorded",
               "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
               "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-              "recordedAt": "2026-04-14T14:28:36.758415Z",
-              "gitCommit": "ce5f0ee",
+              "recordedAt": "2026-04-16T15:25:45.344884Z",
+              "gitCommit": "876ce31",
               "metrics": {
                 "sampleCount": 1,
-                "meanDurationMs": 6.414,
-                "minDurationMs": 6.414,
-                "maxDurationMs": 6.414,
+                "meanDurationMs": 8.526,
+                "minDurationMs": 8.526,
+                "maxDurationMs": 8.526,
                 "meanChecksum": 4394.0,
                 "minChecksum": 4394.0,
                 "maxChecksum": 4394.0,
-                "meanElapsedMilliseconds": 6.414,
-                "minElapsedMilliseconds": 6.414,
-                "maxElapsedMilliseconds": 6.414,
-                "meanOpsPerSecond": 935.497,
-                "minOpsPerSecond": 935.497,
-                "maxOpsPerSecond": 935.497
+                "meanElapsedMilliseconds": 8.526,
+                "minElapsedMilliseconds": 8.526,
+                "maxElapsedMilliseconds": 8.526,
+                "meanOpsPerSecond": 703.713,
+                "minOpsPerSecond": 703.713,
+                "maxOpsPerSecond": 703.713
               },
               "reasonCode": "recorded",
               "reasonLabel": "Benchmark record captured."
@@ -579,22 +579,22 @@
               "status": "recorded",
               "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
               "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-              "recordedAt": "2026-04-14T14:29:01.833833Z",
-              "gitCommit": "ce5f0ee",
+              "recordedAt": "2026-04-16T15:26:19.780498Z",
+              "gitCommit": "876ce31",
               "metrics": {
                 "sampleCount": 3,
-                "meanDurationMs": 7.086,
-                "minDurationMs": 7.029,
-                "maxDurationMs": 7.14,
+                "meanDurationMs": 7.049,
+                "minDurationMs": 6.968,
+                "maxDurationMs": 7.203,
                 "meanChecksum": 4394.0,
                 "minChecksum": 4394.0,
                 "maxChecksum": 4394.0,
-                "meanElapsedMilliseconds": 7.086,
-                "minElapsedMilliseconds": 7.029,
-                "maxElapsedMilliseconds": 7.14,
-                "meanOpsPerSecond": 846.739,
-                "minOpsPerSecond": 840.348,
-                "maxOpsPerSecond": 853.606
+                "meanElapsedMilliseconds": 7.049,
+                "minElapsedMilliseconds": 6.968,
+                "maxElapsedMilliseconds": 7.203,
+                "meanOpsPerSecond": 851.435,
+                "minOpsPerSecond": 832.975,
+                "maxOpsPerSecond": 861.067
               },
               "reasonCode": "recorded",
               "reasonLabel": "Benchmark record captured."
@@ -607,71 +607,71 @@
             "unsupportedModeCount": 0,
             "isComplete": true
           },
-          "lastRecordedAt": "2026-04-14T14:29:01.833833Z",
-          "gitCommit": "ce5f0ee",
+          "lastRecordedAt": "2026-04-16T15:26:19.780498Z",
+          "gitCommit": "876ce31",
           "isStale": false,
           "comparison": {
             "nativeVsManaged": {
               "maxChecksum": 1.0,
-              "maxDurationMs": 0.89,
-              "maxElapsedMilliseconds": 0.89,
-              "maxOpsPerSecond": 1.09,
+              "maxDurationMs": 1.18,
+              "maxElapsedMilliseconds": 1.18,
+              "maxOpsPerSecond": 0.81,
               "meanChecksum": 1.0,
-              "meanDurationMs": 0.9,
-              "meanElapsedMilliseconds": 0.9,
-              "meanOpsPerSecond": 1.11,
+              "meanDurationMs": 1.21,
+              "meanElapsedMilliseconds": 1.21,
+              "meanOpsPerSecond": 0.82,
               "minChecksum": 1.0,
-              "minDurationMs": 0.92,
-              "minElapsedMilliseconds": 0.92,
-              "minOpsPerSecond": 1.13,
+              "minDurationMs": 1.23,
+              "minElapsedMilliseconds": 1.23,
+              "minOpsPerSecond": 0.85,
               "sampleCount": 0.33
             },
             "interpreterVsManaged": {
               "maxChecksum": 1.0,
-              "maxDurationMs": 0.99,
-              "maxElapsedMilliseconds": 0.99,
+              "maxDurationMs": 1.0,
+              "maxElapsedMilliseconds": 1.0,
               "maxOpsPerSecond": 0.99,
               "meanChecksum": 1.0,
-              "meanDurationMs": 0.99,
-              "meanElapsedMilliseconds": 0.99,
-              "meanOpsPerSecond": 1.01,
+              "meanDurationMs": 1.0,
+              "meanElapsedMilliseconds": 1.0,
+              "meanOpsPerSecond": 1.0,
               "minChecksum": 1.0,
               "minDurationMs": 1.01,
               "minElapsedMilliseconds": 1.01,
-              "minOpsPerSecond": 1.02,
+              "minOpsPerSecond": 1.0,
               "sampleCount": 1.0
             },
             "nativeVsInterpreter": {
               "maxChecksum": 1.0,
-              "maxDurationMs": 0.9,
-              "maxElapsedMilliseconds": 0.9,
-              "maxOpsPerSecond": 1.1,
+              "maxDurationMs": 1.18,
+              "maxElapsedMilliseconds": 1.18,
+              "maxOpsPerSecond": 0.82,
               "meanChecksum": 1.0,
-              "meanDurationMs": 0.91,
-              "meanElapsedMilliseconds": 0.91,
-              "meanOpsPerSecond": 1.1,
+              "meanDurationMs": 1.21,
+              "meanElapsedMilliseconds": 1.21,
+              "meanOpsPerSecond": 0.83,
               "minChecksum": 1.0,
-              "minDurationMs": 0.91,
-              "minElapsedMilliseconds": 0.91,
-              "minOpsPerSecond": 1.11,
+              "minDurationMs": 1.22,
+              "minElapsedMilliseconds": 1.22,
+              "minOpsPerSecond": 0.84,
               "sampleCount": 0.33
             },
-            "nativeSpeedup": 1.11,
-            "interpreterOverhead": 0.99
+            "nativeSpeedup": 0.82,
+            "interpreterOverhead": 1.0
           },
           "verdict": {
             "verdicts": {
               "nativeVsManaged": {
-                "actual": 1.11,
+                "actual": 0.82,
                 "target": 2.0,
                 "pass": false,
-                "label": "1.11x speedup"
+                "label": "0.82x speedup"
               },
               "interpreterVsManaged": {
-                "actual": 0.99,
+                "actual": 1.0,
                 "target": 50.0,
                 "pass": true,
-                "label": "0.99x overhead"
+                "label": "1.00x overhead"
               }
             },
             "overallPass": false
@@ -682,10 +682,10 @@
               "status": "recorded",
               "reasonCode": "recorded",
               "reasonLabel": "Benchmark record captured.",
-              "durationMs": 7.128,
-              "opsPerSecond": 841.912,
-              "recordedAt": "2026-04-14T14:28:05.104438Z",
-              "gitCommit": "ce5f0ee"
+              "durationMs": 7.033,
+              "opsPerSecond": 853.493,
+              "recordedAt": "2026-04-16T15:24:59.714415Z",
+              "gitCommit": "876ce31"
             },
             "relativeToManaged": {
               "native": {
@@ -695,13 +695,13 @@
                 "reasonLabel": "Benchmark record captured.",
                 "direction": "faster",
                 "ratio": {
-                  "value": 1.11,
+                  "value": 0.82,
                   "basis": "latency"
                 },
-                "durationMs": 6.414,
-                "opsPerSecond": 935.497,
-                "recordedAt": "2026-04-14T14:28:36.758415Z",
-                "gitCommit": "ce5f0ee",
+                "durationMs": 8.526,
+                "opsPerSecond": 703.713,
+                "recordedAt": "2026-04-16T15:25:45.344884Z",
+                "gitCommit": "876ce31",
                 "baselineStatus": "recorded",
                 "baselineReasonCode": "recorded",
                 "baselineReasonLabel": "Benchmark record captured."
@@ -713,24 +713,24 @@
                 "reasonLabel": "Benchmark record captured.",
                 "direction": "slower",
                 "ratio": {
-                  "value": 0.99,
+                  "value": 1.0,
                   "basis": "latency"
                 },
-                "durationMs": 7.086,
-                "opsPerSecond": 846.739,
-                "recordedAt": "2026-04-14T14:29:01.833833Z",
-                "gitCommit": "ce5f0ee",
+                "durationMs": 7.049,
+                "opsPerSecond": 851.435,
+                "recordedAt": "2026-04-16T15:26:19.780498Z",
+                "gitCommit": "876ce31",
                 "baselineStatus": "recorded",
                 "baselineReasonCode": "recorded",
                 "baselineReasonLabel": "Benchmark record captured."
               }
             },
             "nativeSpeedup": {
-              "value": 1.11,
+              "value": 0.82,
               "basis": "latency"
             },
             "interpreterOverhead": {
-              "value": 0.99,
+              "value": 1.0,
               "basis": "latency"
             }
           }
@@ -757,22 +757,22 @@
           "status": "recorded",
           "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
           "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-          "recordedAt": "2026-04-14T14:28:05.104438Z",
-          "gitCommit": "ce5f0ee",
+          "recordedAt": "2026-04-16T15:24:59.714415Z",
+          "gitCommit": "876ce31",
           "metrics": {
             "sampleCount": 3,
-            "meanDurationMs": 7.128,
-            "minDurationMs": 6.971,
-            "maxDurationMs": 7.247,
+            "meanDurationMs": 7.033,
+            "minDurationMs": 6.905,
+            "maxDurationMs": 7.231,
             "meanChecksum": 4394.0,
             "minChecksum": 4394.0,
             "maxChecksum": 4394.0,
-            "meanElapsedMilliseconds": 7.128,
-            "minElapsedMilliseconds": 6.971,
-            "maxElapsedMilliseconds": 7.247,
-            "meanOpsPerSecond": 841.912,
-            "minOpsPerSecond": 827.929,
-            "maxOpsPerSecond": 860.672
+            "meanElapsedMilliseconds": 7.033,
+            "minElapsedMilliseconds": 6.905,
+            "maxElapsedMilliseconds": 7.231,
+            "meanOpsPerSecond": 853.493,
+            "minOpsPerSecond": 829.807,
+            "maxOpsPerSecond": 868.986
           },
           "reasonCode": "recorded",
           "reasonLabel": "Benchmark record captured."
@@ -782,22 +782,22 @@
           "status": "recorded",
           "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
           "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-          "recordedAt": "2026-04-14T14:28:36.758415Z",
-          "gitCommit": "ce5f0ee",
+          "recordedAt": "2026-04-16T15:25:45.344884Z",
+          "gitCommit": "876ce31",
           "metrics": {
             "sampleCount": 1,
-            "meanDurationMs": 6.414,
-            "minDurationMs": 6.414,
-            "maxDurationMs": 6.414,
+            "meanDurationMs": 8.526,
+            "minDurationMs": 8.526,
+            "maxDurationMs": 8.526,
             "meanChecksum": 4394.0,
             "minChecksum": 4394.0,
             "maxChecksum": 4394.0,
-            "meanElapsedMilliseconds": 6.414,
-            "minElapsedMilliseconds": 6.414,
-            "maxElapsedMilliseconds": 6.414,
-            "meanOpsPerSecond": 935.497,
-            "minOpsPerSecond": 935.497,
-            "maxOpsPerSecond": 935.497
+            "meanElapsedMilliseconds": 8.526,
+            "minElapsedMilliseconds": 8.526,
+            "maxElapsedMilliseconds": 8.526,
+            "meanOpsPerSecond": 703.713,
+            "minOpsPerSecond": 703.713,
+            "maxOpsPerSecond": 703.713
           },
           "reasonCode": "recorded",
           "reasonLabel": "Benchmark record captured."
@@ -807,22 +807,22 @@
           "status": "recorded",
           "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
           "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-          "recordedAt": "2026-04-14T14:29:01.833833Z",
-          "gitCommit": "ce5f0ee",
+          "recordedAt": "2026-04-16T15:26:19.780498Z",
+          "gitCommit": "876ce31",
           "metrics": {
             "sampleCount": 3,
-            "meanDurationMs": 7.086,
-            "minDurationMs": 7.029,
-            "maxDurationMs": 7.14,
+            "meanDurationMs": 7.049,
+            "minDurationMs": 6.968,
+            "maxDurationMs": 7.203,
             "meanChecksum": 4394.0,
             "minChecksum": 4394.0,
             "maxChecksum": 4394.0,
-            "meanElapsedMilliseconds": 7.086,
-            "minElapsedMilliseconds": 7.029,
-            "maxElapsedMilliseconds": 7.14,
-            "meanOpsPerSecond": 846.739,
-            "minOpsPerSecond": 840.348,
-            "maxOpsPerSecond": 853.606
+            "meanElapsedMilliseconds": 7.049,
+            "minElapsedMilliseconds": 6.968,
+            "maxElapsedMilliseconds": 7.203,
+            "meanOpsPerSecond": 851.435,
+            "minOpsPerSecond": 832.975,
+            "maxOpsPerSecond": 861.067
           },
           "reasonCode": "recorded",
           "reasonLabel": "Benchmark record captured."
@@ -835,71 +835,71 @@
         "unsupportedModeCount": 0,
         "isComplete": true
       },
-      "lastRecordedAt": "2026-04-14T14:29:01.833833Z",
-      "gitCommit": "ce5f0ee",
+      "lastRecordedAt": "2026-04-16T15:26:19.780498Z",
+      "gitCommit": "876ce31",
       "isStale": false,
       "comparison": {
         "nativeVsManaged": {
           "maxChecksum": 1.0,
-          "maxDurationMs": 0.89,
-          "maxElapsedMilliseconds": 0.89,
-          "maxOpsPerSecond": 1.09,
+          "maxDurationMs": 1.18,
+          "maxElapsedMilliseconds": 1.18,
+          "maxOpsPerSecond": 0.81,
           "meanChecksum": 1.0,
-          "meanDurationMs": 0.9,
-          "meanElapsedMilliseconds": 0.9,
-          "meanOpsPerSecond": 1.11,
+          "meanDurationMs": 1.21,
+          "meanElapsedMilliseconds": 1.21,
+          "meanOpsPerSecond": 0.82,
           "minChecksum": 1.0,
-          "minDurationMs": 0.92,
-          "minElapsedMilliseconds": 0.92,
-          "minOpsPerSecond": 1.13,
+          "minDurationMs": 1.23,
+          "minElapsedMilliseconds": 1.23,
+          "minOpsPerSecond": 0.85,
           "sampleCount": 0.33
         },
         "interpreterVsManaged": {
           "maxChecksum": 1.0,
-          "maxDurationMs": 0.99,
-          "maxElapsedMilliseconds": 0.99,
+          "maxDurationMs": 1.0,
+          "maxElapsedMilliseconds": 1.0,
           "maxOpsPerSecond": 0.99,
           "meanChecksum": 1.0,
-          "meanDurationMs": 0.99,
-          "meanElapsedMilliseconds": 0.99,
-          "meanOpsPerSecond": 1.01,
+          "meanDurationMs": 1.0,
+          "meanElapsedMilliseconds": 1.0,
+          "meanOpsPerSecond": 1.0,
           "minChecksum": 1.0,
           "minDurationMs": 1.01,
           "minElapsedMilliseconds": 1.01,
-          "minOpsPerSecond": 1.02,
+          "minOpsPerSecond": 1.0,
           "sampleCount": 1.0
         },
         "nativeVsInterpreter": {
           "maxChecksum": 1.0,
-          "maxDurationMs": 0.9,
-          "maxElapsedMilliseconds": 0.9,
-          "maxOpsPerSecond": 1.1,
+          "maxDurationMs": 1.18,
+          "maxElapsedMilliseconds": 1.18,
+          "maxOpsPerSecond": 0.82,
           "meanChecksum": 1.0,
-          "meanDurationMs": 0.91,
-          "meanElapsedMilliseconds": 0.91,
-          "meanOpsPerSecond": 1.1,
+          "meanDurationMs": 1.21,
+          "meanElapsedMilliseconds": 1.21,
+          "meanOpsPerSecond": 0.83,
           "minChecksum": 1.0,
-          "minDurationMs": 0.91,
-          "minElapsedMilliseconds": 0.91,
-          "minOpsPerSecond": 1.11,
+          "minDurationMs": 1.22,
+          "minElapsedMilliseconds": 1.22,
+          "minOpsPerSecond": 0.84,
           "sampleCount": 0.33
         },
-        "nativeSpeedup": 1.11,
-        "interpreterOverhead": 0.99
+        "nativeSpeedup": 0.82,
+        "interpreterOverhead": 1.0
       },
       "verdict": {
         "verdicts": {
           "nativeVsManaged": {
-            "actual": 1.11,
+            "actual": 0.82,
             "target": 2.0,
             "pass": false,
-            "label": "1.11x speedup"
+            "label": "0.82x speedup"
           },
           "interpreterVsManaged": {
-            "actual": 0.99,
+            "actual": 1.0,
             "target": 50.0,
             "pass": true,
-            "label": "0.99x overhead"
+            "label": "1.00x overhead"
           }
         },
         "overallPass": false
@@ -910,10 +910,10 @@
           "status": "recorded",
           "reasonCode": "recorded",
           "reasonLabel": "Benchmark record captured.",
-          "durationMs": 7.128,
-          "opsPerSecond": 841.912,
-          "recordedAt": "2026-04-14T14:28:05.104438Z",
-          "gitCommit": "ce5f0ee"
+          "durationMs": 7.033,
+          "opsPerSecond": 853.493,
+          "recordedAt": "2026-04-16T15:24:59.714415Z",
+          "gitCommit": "876ce31"
         },
         "relativeToManaged": {
           "native": {
@@ -923,13 +923,13 @@
             "reasonLabel": "Benchmark record captured.",
             "direction": "faster",
             "ratio": {
-              "value": 1.11,
+              "value": 0.82,
               "basis": "latency"
             },
-            "durationMs": 6.414,
-            "opsPerSecond": 935.497,
-            "recordedAt": "2026-04-14T14:28:36.758415Z",
-            "gitCommit": "ce5f0ee",
+            "durationMs": 8.526,
+            "opsPerSecond": 703.713,
+            "recordedAt": "2026-04-16T15:25:45.344884Z",
+            "gitCommit": "876ce31",
             "baselineStatus": "recorded",
             "baselineReasonCode": "recorded",
             "baselineReasonLabel": "Benchmark record captured."
@@ -941,24 +941,24 @@
             "reasonLabel": "Benchmark record captured.",
             "direction": "slower",
             "ratio": {
-              "value": 0.99,
+              "value": 1.0,
               "basis": "latency"
             },
-            "durationMs": 7.086,
-            "opsPerSecond": 846.739,
-            "recordedAt": "2026-04-14T14:29:01.833833Z",
-            "gitCommit": "ce5f0ee",
+            "durationMs": 7.049,
+            "opsPerSecond": 851.435,
+            "recordedAt": "2026-04-16T15:26:19.780498Z",
+            "gitCommit": "876ce31",
             "baselineStatus": "recorded",
             "baselineReasonCode": "recorded",
             "baselineReasonLabel": "Benchmark record captured."
           }
         },
         "nativeSpeedup": {
-          "value": 1.11,
+          "value": 0.82,
           "basis": "latency"
         },
         "interpreterOverhead": {
-          "value": 0.99,
+          "value": 1.0,
           "basis": "latency"
         }
       }
@@ -1011,11 +1011,11 @@
         ]
       },
       "caseSummary": {
-        "caseCount": 19,
-        "crossModeCaseCount": 19,
+        "caseCount": 21,
+        "crossModeCaseCount": 21,
         "managedOnlyCaseCount": 0,
-        "fullyRecordedCaseCount": 3,
-        "missingCaseCount": 16
+        "fullyRecordedCaseCount": 9,
+        "missingCaseCount": 12
       },
       "platforms": {
         "windows-x64": {
@@ -1042,22 +1042,22 @@
               "status": "recorded",
               "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
               "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-              "recordedAt": "2026-04-15T16:15:58.586697Z",
-              "gitCommit": "e1c32ec",
+              "recordedAt": "2026-04-16T15:27:03.908412Z",
+              "gitCommit": "876ce31",
               "metrics": {
                 "sampleCount": 3,
-                "meanDurationMs": 27.318,
-                "minDurationMs": 26.889,
-                "maxDurationMs": 27.757,
+                "meanDurationMs": 25.679,
+                "minDurationMs": 25.48,
+                "maxDurationMs": 25.808,
                 "meanChecksum": 2804.0,
                 "minChecksum": 2804.0,
                 "maxChecksum": 2804.0,
-                "meanElapsedMilliseconds": 27.318,
-                "minElapsedMilliseconds": 26.889,
-                "maxElapsedMilliseconds": 27.757,
-                "meanOpsPerSecond": 146.447,
-                "minOpsPerSecond": 144.109,
-                "maxOpsPerSecond": 148.758
+                "meanElapsedMilliseconds": 25.679,
+                "minElapsedMilliseconds": 25.48,
+                "maxElapsedMilliseconds": 25.808,
+                "meanOpsPerSecond": 155.776,
+                "minOpsPerSecond": 154.993,
+                "maxOpsPerSecond": 156.984
               },
               "reasonCode": "recorded",
               "reasonLabel": "Benchmark record captured."
@@ -1067,22 +1067,22 @@
               "status": "recorded",
               "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
               "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-              "recordedAt": "2026-04-15T16:09:17.408441Z",
-              "gitCommit": "e1c32ec",
+              "recordedAt": "2026-04-16T16:12:48.658133Z",
+              "gitCommit": "876ce31",
               "metrics": {
                 "sampleCount": 1,
-                "meanDurationMs": 25.935,
-                "minDurationMs": 25.935,
-                "maxDurationMs": 25.935,
+                "meanDurationMs": 25.708,
+                "minDurationMs": 25.708,
+                "maxDurationMs": 25.708,
                 "meanChecksum": 2804.0,
                 "minChecksum": 2804.0,
                 "maxChecksum": 2804.0,
-                "meanElapsedMilliseconds": 25.935,
-                "minElapsedMilliseconds": 25.935,
-                "maxElapsedMilliseconds": 25.935,
-                "meanOpsPerSecond": 154.232,
-                "minOpsPerSecond": 154.232,
-                "maxOpsPerSecond": 154.232
+                "meanElapsedMilliseconds": 25.708,
+                "minElapsedMilliseconds": 25.708,
+                "maxElapsedMilliseconds": 25.708,
+                "meanOpsPerSecond": 155.596,
+                "minOpsPerSecond": 155.596,
+                "maxOpsPerSecond": 155.596
               },
               "reasonCode": "recorded",
               "reasonLabel": "Benchmark record captured."
@@ -1101,23 +1101,23 @@
             "unsupportedModeCount": 1,
             "isComplete": true
           },
-          "lastRecordedAt": "2026-04-15T16:15:58.586697Z",
-          "gitCommit": "e1c32ec",
+          "lastRecordedAt": "2026-04-16T16:12:48.658133Z",
+          "gitCommit": "876ce31",
           "isStale": false,
           "comparison": {
             "nativeVsManaged": {
               "maxChecksum": 1.0,
-              "maxDurationMs": 0.93,
-              "maxElapsedMilliseconds": 0.93,
-              "maxOpsPerSecond": 1.04,
+              "maxDurationMs": 1.0,
+              "maxElapsedMilliseconds": 1.0,
+              "maxOpsPerSecond": 0.99,
               "meanChecksum": 1.0,
-              "meanDurationMs": 0.95,
-              "meanElapsedMilliseconds": 0.95,
-              "meanOpsPerSecond": 1.05,
+              "meanDurationMs": 1.0,
+              "meanElapsedMilliseconds": 1.0,
+              "meanOpsPerSecond": 1.0,
               "minChecksum": 1.0,
-              "minDurationMs": 0.96,
-              "minElapsedMilliseconds": 0.96,
-              "minOpsPerSecond": 1.07,
+              "minDurationMs": 1.01,
+              "minElapsedMilliseconds": 1.01,
+              "minOpsPerSecond": 1.0,
               "sampleCount": 0.33
             },
             "interpreterVsManaged": {
@@ -1150,16 +1150,16 @@
               "minOpsPerSecond": null,
               "sampleCount": null
             },
-            "nativeSpeedup": 1.05,
+            "nativeSpeedup": 1.0,
             "interpreterOverhead": null
           },
           "verdict": {
             "verdicts": {
               "nativeVsManaged": {
-                "actual": 1.05,
+                "actual": 1.0,
                 "target": 2.0,
                 "pass": false,
-                "label": "1.05x speedup"
+                "label": "1.00x speedup"
               },
               "interpreterVsManaged": {
                 "actual": null,
@@ -1175,10 +1175,10 @@
               "status": "recorded",
               "reasonCode": "recorded",
               "reasonLabel": "Benchmark record captured.",
-              "durationMs": 27.318,
-              "opsPerSecond": 146.447,
-              "recordedAt": "2026-04-15T16:15:58.586697Z",
-              "gitCommit": "e1c32ec"
+              "durationMs": 25.679,
+              "opsPerSecond": 155.776,
+              "recordedAt": "2026-04-16T15:27:03.908412Z",
+              "gitCommit": "876ce31"
             },
             "relativeToManaged": {
               "native": {
@@ -1188,13 +1188,13 @@
                 "reasonLabel": "Benchmark record captured.",
                 "direction": "faster",
                 "ratio": {
-                  "value": 1.05,
+                  "value": 1.0,
                   "basis": "latency"
                 },
-                "durationMs": 25.935,
-                "opsPerSecond": 154.232,
-                "recordedAt": "2026-04-15T16:09:17.408441Z",
-                "gitCommit": "e1c32ec",
+                "durationMs": 25.708,
+                "opsPerSecond": 155.596,
+                "recordedAt": "2026-04-16T16:12:48.658133Z",
+                "gitCommit": "876ce31",
                 "baselineStatus": "recorded",
                 "baselineReasonCode": "recorded",
                 "baselineReasonLabel": "Benchmark record captured."
@@ -1216,7 +1216,7 @@
               }
             },
             "nativeSpeedup": {
-              "value": 1.05,
+              "value": 1.0,
               "basis": "latency"
             },
             "interpreterOverhead": null
@@ -1244,22 +1244,22 @@
           "status": "recorded",
           "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
           "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-          "recordedAt": "2026-04-15T16:15:58.586697Z",
-          "gitCommit": "e1c32ec",
+          "recordedAt": "2026-04-16T15:27:03.908412Z",
+          "gitCommit": "876ce31",
           "metrics": {
             "sampleCount": 3,
-            "meanDurationMs": 27.318,
-            "minDurationMs": 26.889,
-            "maxDurationMs": 27.757,
+            "meanDurationMs": 25.679,
+            "minDurationMs": 25.48,
+            "maxDurationMs": 25.808,
             "meanChecksum": 2804.0,
             "minChecksum": 2804.0,
             "maxChecksum": 2804.0,
-            "meanElapsedMilliseconds": 27.318,
-            "minElapsedMilliseconds": 26.889,
-            "maxElapsedMilliseconds": 27.757,
-            "meanOpsPerSecond": 146.447,
-            "minOpsPerSecond": 144.109,
-            "maxOpsPerSecond": 148.758
+            "meanElapsedMilliseconds": 25.679,
+            "minElapsedMilliseconds": 25.48,
+            "maxElapsedMilliseconds": 25.808,
+            "meanOpsPerSecond": 155.776,
+            "minOpsPerSecond": 154.993,
+            "maxOpsPerSecond": 156.984
           },
           "reasonCode": "recorded",
           "reasonLabel": "Benchmark record captured."
@@ -1269,22 +1269,22 @@
           "status": "recorded",
           "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
           "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-          "recordedAt": "2026-04-15T16:09:17.408441Z",
-          "gitCommit": "e1c32ec",
+          "recordedAt": "2026-04-16T16:12:48.658133Z",
+          "gitCommit": "876ce31",
           "metrics": {
             "sampleCount": 1,
-            "meanDurationMs": 25.935,
-            "minDurationMs": 25.935,
-            "maxDurationMs": 25.935,
+            "meanDurationMs": 25.708,
+            "minDurationMs": 25.708,
+            "maxDurationMs": 25.708,
             "meanChecksum": 2804.0,
             "minChecksum": 2804.0,
             "maxChecksum": 2804.0,
-            "meanElapsedMilliseconds": 25.935,
-            "minElapsedMilliseconds": 25.935,
-            "maxElapsedMilliseconds": 25.935,
-            "meanOpsPerSecond": 154.232,
-            "minOpsPerSecond": 154.232,
-            "maxOpsPerSecond": 154.232
+            "meanElapsedMilliseconds": 25.708,
+            "minElapsedMilliseconds": 25.708,
+            "maxElapsedMilliseconds": 25.708,
+            "meanOpsPerSecond": 155.596,
+            "minOpsPerSecond": 155.596,
+            "maxOpsPerSecond": 155.596
           },
           "reasonCode": "recorded",
           "reasonLabel": "Benchmark record captured."
@@ -1303,23 +1303,23 @@
         "unsupportedModeCount": 1,
         "isComplete": true
       },
-      "lastRecordedAt": "2026-04-15T16:15:58.586697Z",
-      "gitCommit": "e1c32ec",
+      "lastRecordedAt": "2026-04-16T16:12:48.658133Z",
+      "gitCommit": "876ce31",
       "isStale": false,
       "comparison": {
         "nativeVsManaged": {
           "maxChecksum": 1.0,
-          "maxDurationMs": 0.93,
-          "maxElapsedMilliseconds": 0.93,
-          "maxOpsPerSecond": 1.04,
+          "maxDurationMs": 1.0,
+          "maxElapsedMilliseconds": 1.0,
+          "maxOpsPerSecond": 0.99,
           "meanChecksum": 1.0,
-          "meanDurationMs": 0.95,
-          "meanElapsedMilliseconds": 0.95,
-          "meanOpsPerSecond": 1.05,
+          "meanDurationMs": 1.0,
+          "meanElapsedMilliseconds": 1.0,
+          "meanOpsPerSecond": 1.0,
           "minChecksum": 1.0,
-          "minDurationMs": 0.96,
-          "minElapsedMilliseconds": 0.96,
-          "minOpsPerSecond": 1.07,
+          "minDurationMs": 1.01,
+          "minElapsedMilliseconds": 1.01,
+          "minOpsPerSecond": 1.0,
           "sampleCount": 0.33
         },
         "interpreterVsManaged": {
@@ -1352,16 +1352,16 @@
           "minOpsPerSecond": null,
           "sampleCount": null
         },
-        "nativeSpeedup": 1.05,
+        "nativeSpeedup": 1.0,
         "interpreterOverhead": null
       },
       "verdict": {
         "verdicts": {
           "nativeVsManaged": {
-            "actual": 1.05,
+            "actual": 1.0,
             "target": 2.0,
             "pass": false,
-            "label": "1.05x speedup"
+            "label": "1.00x speedup"
           },
           "interpreterVsManaged": {
             "actual": null,
@@ -1377,10 +1377,10 @@
           "status": "recorded",
           "reasonCode": "recorded",
           "reasonLabel": "Benchmark record captured.",
-          "durationMs": 27.318,
-          "opsPerSecond": 146.447,
-          "recordedAt": "2026-04-15T16:15:58.586697Z",
-          "gitCommit": "e1c32ec"
+          "durationMs": 25.679,
+          "opsPerSecond": 155.776,
+          "recordedAt": "2026-04-16T15:27:03.908412Z",
+          "gitCommit": "876ce31"
         },
         "relativeToManaged": {
           "native": {
@@ -1390,13 +1390,13 @@
             "reasonLabel": "Benchmark record captured.",
             "direction": "faster",
             "ratio": {
-              "value": 1.05,
+              "value": 1.0,
               "basis": "latency"
             },
-            "durationMs": 25.935,
-            "opsPerSecond": 154.232,
-            "recordedAt": "2026-04-15T16:09:17.408441Z",
-            "gitCommit": "e1c32ec",
+            "durationMs": 25.708,
+            "opsPerSecond": 155.596,
+            "recordedAt": "2026-04-16T16:12:48.658133Z",
+            "gitCommit": "876ce31",
             "baselineStatus": "recorded",
             "baselineReasonCode": "recorded",
             "baselineReasonLabel": "Benchmark record captured."
@@ -1418,7 +1418,7 @@
           }
         },
         "nativeSpeedup": {
-          "value": 1.05,
+          "value": 1.0,
           "basis": "latency"
         },
         "interpreterOverhead": null

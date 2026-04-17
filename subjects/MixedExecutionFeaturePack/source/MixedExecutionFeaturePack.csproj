@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -9,7 +9,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Archetypes\\**\\*.cs" />
-    <ProjectReference Include="../../../src/reference/Chaos.TestFramework/Chaos.TestFramework.csproj" />
+    <ProjectReference Include="../../../src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj" />
     <ProjectReference Include="../../../src/managed/Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.csproj" />
     <ProjectReference Include="../../../src/managed/Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.csproj" />
     <ProjectReference Include="../../../src/managed/Chaos.IL2CPP.Loader/Chaos.IL2CPP.Loader.csproj" />
@@ -17,3 +17,4 @@
     <ProjectReference Include="Archetypes/MixedBridgeSolution/InterpreterArithmeticProof/InterpreterArithmeticProof.csproj" />
   </ItemGroup>
 </Project>
+

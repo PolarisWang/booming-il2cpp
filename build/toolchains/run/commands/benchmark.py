@@ -19,12 +19,12 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from ..testing import workspace_declared_catalog as workspace_declared_catalog_module
+    from ..testing import workspace_declared_collection as workspace_declared_collection_module
 except ImportError:
     run_root = Path(__file__).resolve().parents[1]
     if str(run_root) not in sys.path:
         sys.path.insert(0, str(run_root))
-    from testing import workspace_declared_catalog as workspace_declared_catalog_module
+    from testing import workspace_declared_collection as workspace_declared_collection_module
 
 _MODE_ORDER = ("managed", "native", "interpreter")
 _BENCHMARK_MODE_FLAGS = {
@@ -322,13 +322,13 @@ def _discover_declared_benchmark_cases(
     *,
     compiled_catalog_module: Any | None = None,
 ) -> list[dict[str, Any]]:
-    workspace_catalog = workspace_declared_catalog_module.load_workspace_declared_catalog(
+    workspace_collection = workspace_declared_collection_module.load_workspace_declared_collection(
         repo_root,
         subject_id,
         host_kind="benchmark-host",
     )
-    if workspace_catalog is not None:
-        return _declared_benchmark_cases_from_catalog(workspace_catalog)
+    if workspace_collection is not None:
+        return _declared_benchmark_cases_from_catalog(workspace_collection)
 
     testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
     try:

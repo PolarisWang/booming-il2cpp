@@ -16,6 +16,12 @@
     }
   },
   "sourceModel": "dotnet-solution",
+  "engineeringProfile": "hot-update-host",
+  "hotUpdate": {
+    "patchProjectPaths": [
+      "subjects/HotUpdateHostPack/source/Archetypes/FullProjectHotUpdateSolution/PatchModules/GoldenHotUpdate.PatchModule.csproj"
+    ]
+  },
   "workloadEntry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
   "testDeclarationMode": "require",
   "validationProfiles": {

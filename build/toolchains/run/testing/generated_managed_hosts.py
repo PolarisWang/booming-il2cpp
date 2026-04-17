@@ -4,7 +4,8 @@ import json
 from typing import Any, Iterable
 
 
-_FRAMEWORK_PROJECT_REFERENCE = "../../../../src/reference/Chaos.TestFramework/Chaos.TestFramework.csproj"
+_FRAMEWORK_PROJECT_REFERENCE = "../../../../src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj"
+_RUNTIME_PROJECT_REFERENCE = "../../../../src/reference/Chaos.TestFramework.Runtime/Chaos.TestFramework.Runtime.csproj"
 
 
 def assign_entry_indexes(entries: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -38,16 +39,19 @@ def render_declared_test_host_project(
     subject_id: str,
     host_kind: str,
     project_references: Iterable[str],
+    generated_source_path: str,
     assembly_name: str | None = None,
 ) -> str:
     project_name = assembly_name or _host_class_name(subject_id=subject_id, host_kind=host_kind)
-    references = [_FRAMEWORK_PROJECT_REFERENCE, *list(project_references)]
+    references = [_FRAMEWORK_PROJECT_REFERENCE, _RUNTIME_PROJECT_REFERENCE, *list(project_references)]
     lines = [
         '<Project Sdk="Microsoft.NET.Sdk">',
         "  <PropertyGroup>",
         "    <TargetFramework>net8.0</TargetFramework>",
+        "    <OutputType>Exe</OutputType>",
         "    <ImplicitUsings>enable</ImplicitUsings>",
         "    <Nullable>enable</Nullable>",
+        "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>",
         f"    <AssemblyName>{project_name}</AssemblyName>",
         f"    <RootNamespace>{project_name}</RootNamespace>",
         "  </PropertyGroup>",
@@ -57,6 +61,9 @@ def render_declared_test_host_project(
         lines.append(f'    <ProjectReference Include="{_xml_escape(str(reference))}" />')
     lines.extend(
         [
+            "  </ItemGroup>",
+            "  <ItemGroup>",
+            f'    <Compile Include="{_xml_escape(str(generated_source_path))}" />',
             "  </ItemGroup>",
             "</Project>",
             "",
@@ -73,11 +80,31 @@ def _render_proof_host_source(
 ) -> str:
     lines = [
         "using System;",
+        "using Chaos.TestFramework;",
+        "using Chaos.TestFramework.Runtime;",
         "",
         f"namespace {namespace_name};",
         "",
         f"public static class {class_name}",
         "{",
+        "    public static int Main(string[] args)",
+        "    {",
+        "        var request = ChaosManagedHostArguments.Parse(args);",
+        "        ChaosTestCollectionLoader.EnsureEntryExists(request.CollectionPath, ChaosManagedHostKind.Proof, request.EntryIndex);",
+        "        try",
+        "        {",
+        "            ChaosAssertState.Reset();",
+        "            Execute(request.EntryIndex);",
+        "            return ChaosAssertState.Complete();",
+        "        }",
+        "        catch (ChaosAssertionException exception)",
+        "        {",
+        "            Console.Error.WriteLine(exception.Message);",
+        "            ChaosAssertState.RecordFailure();",
+        "            return ChaosAssertState.Complete();",
+        "        }",
+        "    }",
+        "",
         "    public static int Execute(int entryIndex)",
         "    {",
         "        switch (entryIndex)",
@@ -116,6 +143,7 @@ def _render_benchmark_host_source(
     lines = [
         "using System;",
         "using System.Collections.Generic;",
+        "using Chaos.TestFramework.Runtime;",
         "",
         f"namespace {namespace_name};",
         "",
@@ -123,6 +151,10 @@ def _render_benchmark_host_source(
         "    int EntryIndex,",
         "    string StableId,",
         "    string Alias,",
+        "    string AssemblyName,",
+        "    string DeclaringType,",
+        "    string MethodName,",
+        "    string MethodSignature,",
         "    byte Category,",
         "    byte CapabilityFamily,",
         "    ushort CapabilityItem,",
@@ -144,25 +176,36 @@ def _render_benchmark_host_source(
         lines.extend(
             [
                 "        new(",
-                f"            entryIndex: {int(entry.get('entryIndex', -1))},",
-                f"            stableId: {_csharp_string(str(entry.get('stableId') or ''))},",
-                f"            alias: {_csharp_string(str(entry.get('alias') or ''))},",
-                f"            category: {int(entry.get('category') or 0)},",
-                f"            capabilityFamily: {int(entry.get('capabilityFamily') or 0)},",
-                f"            capabilityItem: {int(entry.get('capabilityItem') or 0)},",
-                f"            archetype: {int(entry.get('archetype') or 0)},",
-                f"            hotUpdateCapability: {int(entry.get('hotUpdateCapability') or 0)},",
-                f"            requires: {int(entry.get('requires') or 0)},",
-                f"            metrics: {int(entry.get('metrics') or 0)},",
-                f"            modes: {int(entry.get('modes') or 0)},",
-                f"            warmupCount: {int(entry.get('warmupCount') or 0)},",
-                f"            iterationCount: {int(entry.get('iterationCount') or 0)},",
-                f"            invocationCount: {int(entry.get('invocationCount') or 0)}),",
+                f"            EntryIndex: {int(entry.get('entryIndex', -1))},",
+                f"            StableId: {_csharp_string(str(entry.get('stableId') or ''))},",
+                f"            Alias: {_csharp_string(str(entry.get('alias') or ''))},",
+                f"            AssemblyName: {_csharp_string(str(entry.get('assemblyName') or ''))},",
+                f"            DeclaringType: {_csharp_string(str(entry.get('declaringType') or ''))},",
+                f"            MethodName: {_csharp_string(str(entry.get('methodName') or ''))},",
+                f"            MethodSignature: {_csharp_string(str(entry.get('methodSignature') or ''))},",
+                f"            Category: {int(entry.get('category') or 0)},",
+                f"            CapabilityFamily: {int(entry.get('capabilityFamily') or 0)},",
+                f"            CapabilityItem: {int(entry.get('capabilityItem') or 0)},",
+                f"            Archetype: {int(entry.get('archetype') or 0)},",
+                f"            HotUpdateCapability: {int(entry.get('hotUpdateCapability') or 0)},",
+                f"            Requires: {int(entry.get('requires') or 0)},",
+                f"            Metrics: {int(entry.get('metrics') or 0)},",
+                f"            Modes: {int(entry.get('modes') or 0)},",
+                f"            WarmupCount: {int(entry.get('warmupCount') or 0)},",
+                f"            IterationCount: {int(entry.get('iterationCount') or 0)},",
+                f"            InvocationCount: {int(entry.get('invocationCount') or 0)}),",
             ]
         )
     lines.extend(
         [
             "    };",
+            "",
+            "    public static int Main(string[] args)",
+            "    {",
+            "        var request = ChaosManagedHostArguments.Parse(args);",
+            "        ChaosTestCollectionLoader.EnsureEntryExists(request.CollectionPath, ChaosManagedHostKind.Benchmark, request.EntryIndex);",
+            "        return Execute(request.EntryIndex);",
+            "    }",
             "",
             "    public static int Execute(int entryIndex)",
             "    {",

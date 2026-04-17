@@ -181,7 +181,7 @@ def summarize_declaration_scan(
         )
 
     if mode is TestDeclarationMode.REQUIRE and not framework_referenced:
-        raise ValueError("testDeclarationMode=require requires Chaos.TestFramework to be referenced")
+        raise ValueError("testDeclarationMode=require requires Chaos.TestFramework.Sdk to be referenced")
 
     if mode is TestDeclarationMode.REQUIRE and not has_declarations:
         raise ValueError("testDeclarationMode=require requires at least one declared test entry")

@@ -1,46 +1,47 @@
 # 06-测试验证 INDEX
 
-> 项目级测试与验证知识的唯一正式入口�?
+> 项目级测试与验证知识的正式入口。当前主线以 collection-driven 的 managed/native/hotupdate 流程为准。
 
-## 子类�?
+## 正式主线
 
-| 类别 | 说明 | 索引 |
-| --- | --- | --- |
-| `模块` | 模块验证对象与主模块映射 | [`模块/INDEX.md`](./模块/INDEX.md) |
-| `整体验证场景` | system 对象说明与入�?| [`整体验证场景/INDEX.md`](./整体验证场景/INDEX.md) |
-| `测试管线` | pipeline 对象说明与入�?| [`测试管线/INDEX.md`](./测试管线/INDEX.md) |
+- 主线定义：`managed solution -> dotnet 8 collection analysis -> collection files -> managed test project -> native project -> native test project -> hotupdate patch project + hotupdate test host project`
+- 测试声明：由 `Chaos.TestFramework.Sdk` 中的 attribute 在 managed solution 中声明。
+- collection 产生：由 `.NET 8` collector 分析 managed project 中的 `Sdk` 声明并输出 collection file。
+- 执行与断言：
+  - `Sdk` 提供 subject-side `Assert`
+  - `Runtime` 提供执行宿主、collection loader、benchmark harness、reporting
+- 跨执行形态契约：UnitTest / Benchmark / HotUpdate collection file 是 managed/native/hotupdate test host 的统一输入。
 
-## 重要文档
+## 优先阅读
 
 | 文档 | 主题 | 说明 |
 | --- | --- | --- |
-| [`测试分层.md`](./测试分层.md) | code/module/system/pipeline | 说明验证层级和对象边�?|
-| [`模块映射.md`](./模块映射.md) | 主模块归�?| 说明 `primaryModuleId`、`moduleIds`、`subsystemIds` |
-| [`新增测试接入规范.md`](./新增测试接入规范.md) | 新增验证接入 | 说明重要验证如何升级�?case 或对�?|
-| [`临时例外登记.md`](./临时例外登记.md) | 临时例外 | 说明事件驱动失效和登记规�?|
-| [`subject-public-entry-and-reporting-cutover.md`](./subject-public-entry-and-reporting-cutover.md) | subject public entry | 说明 `subject` registry/public command、subject summary �?session `subjectResults` 的结果入�?|
-| [`subject-perf-and-smoke-baselines.md`](./subject-perf-and-smoke-baselines.md) | subject perf / smoke baseline | 说明 `subjects/*/source` canonical smoke source、subject-aware perf baseline 路径�?perf report 落点 |
+| [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md) | AOT 新 feature 自测 | 说明 owner subject、hotupdate 触发条件、collector/registry/workspace 接线闸门与标准验收顺序 |
+| [`新增测试接入规范.md`](./新增测试接入规范.md) | 新增测试接入 | 说明如何在 subject source 中声明测试，并接入 collection-driven 主线 |
+| [`../04-工具与集成/统一测试框架.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md) | 统一测试框架 | 说明 `Sdk / Runtime / collector / manifest` 分层 |
+| [`subject-public-entry-and-reporting-cutover.md`](./subject-public-entry-and-reporting-cutover.md) | subject 统一入口 | 说明 subject 入口、public command 和结果落点 |
+| [`subject-perf-and-smoke-baselines.md`](./subject-perf-and-smoke-baselines.md) | perf / smoke baseline | 说明 subject 的 perf baseline、smoke 验证与报告路径 |
+
+## 子类别
+
+| 类别 | 说明 | 索引 |
+| --- | --- | --- |
+| `模块` | 模块级验证对象与映射 | [`模块/INDEX.md`](./模块/INDEX.md) |
+| `整体验证场景` | system 级验证对象与入口 | [`整体验证场景/INDEX.md`](./整体验证场景/INDEX.md) |
+| `测试管线` | pipeline 级验证对象与入口 | [`测试管线/INDEX.md`](./测试管线/INDEX.md) |
 
 ## 本层规则
 
-- 项目级测试知识只应以本目录作为正式入口�?
-- 重要验证必须升级成正�?case、module、system �?pipeline 对象，不能长期停留在临时手工步骤�?
-- registry �?`tests/registry/**` �?`subjects/**/subject.manifest.json` 作为运行时注册源，以本目录页面作为说明和回退入口�?
-- skill 应优先读�?`artifacts/tests/registry/current/index.json` �?`run test registry list --json`，再�?`docRefs` 回退到本目录页面�?
-- subject 结果的正式真源是 `subject-report/summary.json`、matrix `report.json` �?session `subjectResults`，不�?`suiteResults`�?
+- 本目录是测试与验证规则的正式知识入口，不再以临时脚本或零散说明替代。
+- `subjects/` 只保留 managed solution 级 source。
+- subject / managed project 只直接引用 `Chaos.TestFramework.Sdk`。
+- collection file 由 `.NET 8` collector 统一产出；三端执行项目只消费它，不重复扫描 `Sdk`。
+- native 与 hotupdate 的执行细节通过 manifest 分层，不污染 collection contract。
+- dashboard 和报告只消费正式产物，不能替代 collection contract 本身。
+- Python 自动化测试优先模板化；手工 benchmark、dashboard 观察和控制台输出都不能替代自动化验证。
+- 不保留长期 `Annotation` alias 或旧双轨入口。
 
-## 最近更�?
+## 最近更新
 
-- `2026-04-06`：新�?`subject-public-entry-and-reporting-cutover.md`，固�?`subject` registry/public command/TUI 入口�?subject reporting 结果定位顺序�?
-- `2026-04-07`：新�?`subject-perf-and-smoke-baselines.md`，固�?smoke 项目�?canonical `subjects/*/source` 约束，以�?`subject` perf baseline / report / release artifact 的正式路径�?
-- `2026-04-06`：补�?`managed-closure` 的模块验证与 completion 管线对象，并�?Stage 3 closure bundle 验证接入统一 registry / `run test` 入口�?
-- `2026-04-04`：建立项目级测试与验证主入口，并接入 `module/system/pipeline` 注册对象�?
-## 2026-04-07 �������
-
-- [`subject-public-entry-and-reporting-runs.md`](./subject-public-entry-and-reporting-runs.md)��`subject/<subject-id>` public entry �� run-scoped report ��ѯ˳��
-- [`subject-perf-and-smoke-baselines-runs.md`](./subject-perf-and-smoke-baselines-runs.md)��`subjects/*/source`��`validation/unit|perf` �� perf baseline ��ʽ·����
-- [`subject-mainline-traceability-and-variants.md`](./subject-mainline-traceability-and-variants.md)��`analysis -> codegen -> native -> report&perf` �������� `CHECK|PROFILE|SHIP` ����
-
-## 2026-04-08 ����
-
-- `subject-mainline-traceability-and-variants.md` �Ѳ��� Windows native cmake + VsDevCmd + Ninja Multi-Config ����temp scratch Ŀ¼�߽��� `CHECK|PROFILE|SHIP` native ����������
+- `2026-04-17`：新增 [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md)，固定 AOT 主线 feature 的 owner subject、自测顺序与 collector/registry/workspace 三层闸门。
+- `2026-04-17`：把主线升级为 `Sdk + Runtime + collector + manifest` 分层，并明确 `Assert` 下沉到 `Sdk`、native/hotupdate 分别采用各宿主和 patch/host 分离。

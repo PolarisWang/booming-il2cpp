@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import json
 import shutil
@@ -32,8 +32,8 @@ DLL_PATH = (
     / "net8.0"
     / "CoreRuntimeFeatures.dll"
 )
-TEST_FRAMEWORK_PROJECT_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework" / "Chaos.TestFramework.csproj"
-TEST_FRAMEWORK_DLL_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework" / "bin" / "Release" / "net8.0" / "Chaos.TestFramework.dll"
+TEST_FRAMEWORK_PROJECT_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"
+TEST_FRAMEWORK_DLL_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "bin" / "Release" / "net8.0" / "Chaos.TestFramework.Sdk.dll"
 ENTRY_SUBJECT_ID = "CoreRuntimeFeatures/FinallyAndFilterProofEntry::Run()"
 EXECUTE_SUBJECT_ID = "CoreRuntimeFeatures/FinallyAndFilterProofEntry::Execute()"
 TEST_OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase3-finally-filter-native-aot"
@@ -157,3 +157,4 @@ class Phase3FinallyFilterNativeAotTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

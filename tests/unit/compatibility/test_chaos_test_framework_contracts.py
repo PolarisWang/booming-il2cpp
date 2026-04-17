@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import importlib.util
 import sys
@@ -7,9 +7,9 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-FRAMEWORK_ROOT = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework"
-FRAMEWORK_PROJECT_PATH = FRAMEWORK_ROOT / "Chaos.TestFramework.csproj"
-FRAMEWORK_CONTRACT_PATH = FRAMEWORK_ROOT / "Chaos.TestFramework.cs"
+FRAMEWORK_ROOT = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk"
+FRAMEWORK_PROJECT_PATH = FRAMEWORK_ROOT / "Chaos.TestFramework.Sdk.csproj"
+FRAMEWORK_CONTRACT_PATH = FRAMEWORK_ROOT / "Chaos.TestFramework.Sdk.cs"
 DECLARATIONS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "declarations.py"
 
 
@@ -37,6 +37,7 @@ class ChaosTestFrameworkContractTests(unittest.TestCase):
         contract_text = FRAMEWORK_CONTRACT_PATH.read_text(encoding="utf-8")
 
         self.assertIn("<TargetFramework>net8.0</TargetFramework>", project_text)
+        self.assertIn("<AssemblyName>Chaos.TestFramework.Sdk</AssemblyName>", project_text)
         self.assertIn("namespace Chaos.TestFramework;", contract_text)
         self.assertIn("public enum ChaosUnitCategory : byte", contract_text)
         self.assertIn("public enum ChaosBenchmarkCategory : byte", contract_text)
@@ -143,3 +144,4 @@ class ChaosTestFrameworkContractTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

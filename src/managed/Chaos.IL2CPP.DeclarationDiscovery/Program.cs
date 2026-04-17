@@ -7,8 +7,8 @@ namespace Chaos.IL2CPP.DeclarationDiscovery;
 
 internal static class Program
 {
-    private const string FrameworkAssemblyName = "Chaos.TestFramework";
-    private const string FrameworkNamespace = FrameworkAssemblyName;
+    private const string FrameworkAssemblyName = "Chaos.TestFramework.Sdk";
+    private const string FrameworkNamespace = "Chaos.TestFramework";
     private const string UnitTestAttributeName = FrameworkNamespace + ".ChaosUnitTestAttribute";
     private const string BenchmarkAttributeName = FrameworkNamespace + ".ChaosBenchmarkAttribute";
     private const string NamedArgumentAlias = "Alias";

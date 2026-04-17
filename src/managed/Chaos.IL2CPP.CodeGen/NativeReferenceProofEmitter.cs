@@ -8,77 +8,42 @@ namespace Chaos.IL2CPP.CodeGen;
 
 public sealed class NativeReferenceProofEmitter
 {
-    private const string ManagedAsyncAwaitIntMinimal =
-        "managed-async.awaitable-int.minimal";
-    private const string ManagedThreadingThreadStaticMonitorMinimal =
-        "managed-threading.threadstatic-monitor.minimal";
-    private const string ManagedInterfaceDispatchMessageMinimal =
-        "managed-dispatch.interface-message.minimal";
-    private const string ManagedDispatchVirtualInstanceMessageMinimal =
-        "managed-dispatch.virtual-instance-message.minimal";
-    private const string ManagedObjectCapturedStateInstanceMessageMinimal =
-        "managed-object.captured-state-instance-message.minimal";
-    private const string ManagedGenericStaticForwarderCapturedGetterMinimal =
-        "managed-generic.static-forwarder-captured-getter.minimal";
-    private const string ManagedArraysBoxingReferenceArrayBoxedIntMinimal =
-        "managed-arrays-boxing.reference-array-boxed-int.minimal";
-    private const string DelegateClosedTargetRelayMinimal =
-        "managed-delegates.closed-target-relay-message.minimal";
-    private const string NestedExceptionThrowCatchFinallyMinimal =
-        "managed-exceptions.nested-throw-catch-finally.minimal";
-    private const string ExceptionThrowCatchFinallyMinimal =
-        "managed-exceptions.throw-catch-finally-message.minimal";
-    private const string ReflectionInteropClosureMinimal =
-        "managed-reflection-interop.closure.minimal";
-    private const string ReflectionClosedTypeQueryMinimal =
-        "reflection.closed-type-query.minimal";
-    private const string MarshalingUtf8ExportMinimal =
-        "interop.marshaling-utf8-export.minimal";
-    private const string InteropPInvokeDirectCallMinimal =
-        "interop.pinvoke-direct-call.minimal";
-    private const string EngineLogWriteMinimal =
-        "engine.log-write.minimal";
-    private const string EngineObjectHandleRoundtripMinimal =
-        "engine.object-handle.roundtrip.minimal";
-    private const string EngineLifecycleCallbackMinimal =
-        "engine.lifecycle-callback.minimal";
-    private const string EngineHostProofMinimal =
-        "engine.host-proof.minimal";
-    private const string GeneratedTranslationUnitTemplateRelativePath = "Templates/NativeReferenceProof.cpp.scriban";
-    private const string DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.DispatchVirtualInstanceMessage.cpp.scriban";
-    private const string InterfaceDispatchMessageGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.InterfaceDispatchMessage.cpp.scriban";
-    private const string AsyncAwaitIntGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.AsyncAwaitInt.cpp.scriban";
-    private const string ThreadingThreadStaticMonitorGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.ThreadingThreadStaticMonitor.cpp.scriban";
-    private const string StaticCallCtorGetterGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.StaticCallCtorGetter.cpp.scriban";
-    private const string ArrayBoxingReferenceArrayGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.ArrayBoxingReferenceArray.cpp.scriban";
-    private const string ReflectionQueryMinimalGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.ReflectionQueryMinimal.cpp.scriban";
-    private const string MarshalingUtf8ExportGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.MarshalingUtf8Export.cpp.scriban";
-    private const string PInvokeDllImportMinimalGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.PInvokeDllImportMinimal.cpp.scriban";
-    private const string DelegateClosedTargetRelayGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.DelegateClosedTargetRelay.cpp.scriban";
-    private const string NestedExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.NestedExceptionThrowCatchFinally.cpp.scriban";
-    private const string ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.ExceptionThrowCatchFinally.cpp.scriban";
-    private const string ReflectionInteropClosureGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.ReflectionInteropClosure.cpp.scriban";
-    private const string EngineLogWriteGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.EngineLogWrite.cpp.scriban";
-    private const string EngineObjectHandleGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.EngineObjectHandle.cpp.scriban";
-    private const string EngineLifecycleCallbackGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.EngineLifecycleCallback.cpp.scriban";
-    private const string EngineHostProofGeneratedTranslationUnitTemplateRelativePath =
-        "Templates/NativeReferenceProof.EngineHostProof.cpp.scriban";
+    private const string ManagedAsyncAwaitIntMinimal = NativeReferenceProofCatalog.ManagedAsyncAwaitIntMinimal;
+    private const string ManagedThreadingThreadStaticMonitorMinimal = NativeReferenceProofCatalog.ManagedThreadingThreadStaticMonitorMinimal;
+    private const string ManagedInterfaceDispatchMessageMinimal = NativeReferenceProofCatalog.ManagedInterfaceDispatchMessageMinimal;
+    private const string ManagedDispatchVirtualInstanceMessageMinimal = NativeReferenceProofCatalog.ManagedDispatchVirtualInstanceMessageMinimal;
+    private const string ManagedObjectCapturedStateInstanceMessageMinimal = NativeReferenceProofCatalog.ManagedObjectCapturedStateInstanceMessageMinimal;
+    private const string ManagedGenericStaticForwarderCapturedGetterMinimal = NativeReferenceProofCatalog.ManagedGenericStaticForwarderCapturedGetterMinimal;
+    private const string ManagedArraysBoxingReferenceArrayBoxedIntMinimal = NativeReferenceProofCatalog.ManagedArraysBoxingReferenceArrayBoxedIntMinimal;
+    private const string DelegateClosedTargetRelayMinimal = NativeReferenceProofCatalog.DelegateClosedTargetRelayMinimal;
+    private const string NestedExceptionThrowCatchFinallyMinimal = NativeReferenceProofCatalog.NestedExceptionThrowCatchFinallyMinimal;
+    private const string ExceptionThrowCatchFinallyMinimal = NativeReferenceProofCatalog.ExceptionThrowCatchFinallyMinimal;
+    private const string ReflectionInteropClosureMinimal = NativeReferenceProofCatalog.ReflectionInteropClosureMinimal;
+    private const string ReflectionClosedTypeQueryMinimal = NativeReferenceProofCatalog.ReflectionClosedTypeQueryMinimal;
+    private const string MarshalingUtf8ExportMinimal = NativeReferenceProofCatalog.MarshalingUtf8ExportMinimal;
+    private const string InteropPInvokeDirectCallMinimal = NativeReferenceProofCatalog.InteropPInvokeDirectCallMinimal;
+    private const string EngineLogWriteMinimal = NativeReferenceProofCatalog.EngineLogWriteMinimal;
+    private const string EngineObjectHandleRoundtripMinimal = NativeReferenceProofCatalog.EngineObjectHandleRoundtripMinimal;
+    private const string EngineLifecycleCallbackMinimal = NativeReferenceProofCatalog.EngineLifecycleCallbackMinimal;
+    private const string EngineHostProofMinimal = NativeReferenceProofCatalog.EngineHostProofMinimal;
+    private const string GeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.GeneratedTranslationUnitTemplateRelativePath;
+    private const string DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath;
+    private const string InterfaceDispatchMessageGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.InterfaceDispatchMessageGeneratedTranslationUnitTemplateRelativePath;
+    private const string AsyncAwaitIntGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.AsyncAwaitIntGeneratedTranslationUnitTemplateRelativePath;
+    private const string ThreadingThreadStaticMonitorGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.ThreadingThreadStaticMonitorGeneratedTranslationUnitTemplateRelativePath;
+    private const string StaticCallCtorGetterGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.StaticCallCtorGetterGeneratedTranslationUnitTemplateRelativePath;
+    private const string ArrayBoxingReferenceArrayGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.ArrayBoxingReferenceArrayGeneratedTranslationUnitTemplateRelativePath;
+    private const string ReflectionQueryMinimalGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.ReflectionQueryMinimalGeneratedTranslationUnitTemplateRelativePath;
+    private const string MarshalingUtf8ExportGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.MarshalingUtf8ExportGeneratedTranslationUnitTemplateRelativePath;
+    private const string PInvokeDllImportMinimalGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.PInvokeDllImportMinimalGeneratedTranslationUnitTemplateRelativePath;
+    private const string DelegateClosedTargetRelayGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.DelegateClosedTargetRelayGeneratedTranslationUnitTemplateRelativePath;
+    private const string NestedExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.NestedExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath;
+    private const string ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath;
+    private const string ReflectionInteropClosureGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.ReflectionInteropClosureGeneratedTranslationUnitTemplateRelativePath;
+    private const string EngineLogWriteGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.EngineLogWriteGeneratedTranslationUnitTemplateRelativePath;
+    private const string EngineObjectHandleGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.EngineObjectHandleGeneratedTranslationUnitTemplateRelativePath;
+    private const string EngineLifecycleCallbackGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.EngineLifecycleCallbackGeneratedTranslationUnitTemplateRelativePath;
+    private const string EngineHostProofGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.EngineHostProofGeneratedTranslationUnitTemplateRelativePath;
     private const string ConsoleWriteLineStringIcall = "System.Console/System.Console::WriteLine(System.String)";
     private const string StringConcatPairIcall = "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
 
@@ -86,60 +51,6 @@ public sealed class NativeReferenceProofEmitter
     {
         PropertyNameCaseInsensitive = true,
     };
-
-    private static readonly Lazy<Template> GeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(GeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> InterfaceDispatchMessageGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(InterfaceDispatchMessageGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> AsyncAwaitIntGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(AsyncAwaitIntGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> ThreadingThreadStaticMonitorGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(ThreadingThreadStaticMonitorGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> StaticCallCtorGetterGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(StaticCallCtorGetterGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> ArrayBoxingReferenceArrayGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(ArrayBoxingReferenceArrayGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> ReflectionQueryMinimalGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(ReflectionQueryMinimalGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> MarshalingUtf8ExportGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(MarshalingUtf8ExportGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> PInvokeDllImportMinimalGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(PInvokeDllImportMinimalGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> DelegateClosedTargetRelayGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(DelegateClosedTargetRelayGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> NestedExceptionThrowCatchFinallyGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(NestedExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> ReflectionInteropClosureGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(ReflectionInteropClosureGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> EngineLogWriteGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(EngineLogWriteGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> EngineObjectHandleGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(EngineObjectHandleGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> EngineLifecycleCallbackGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(EngineLifecycleCallbackGeneratedTranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> EngineHostProofGeneratedTranslationUnitTemplate =
-        new(() => LoadTemplate(EngineHostProofGeneratedTranslationUnitTemplateRelativePath));
 
     public NativeReferenceProofResult Generate(NativeReferenceProofRequest request)
     {
@@ -182,17 +93,9 @@ public sealed class NativeReferenceProofEmitter
     private static string BuildGeneratedTranslationUnit(
         NativeReferenceLoweringPlanArtifact loweringPlan)
     {
-        var context = new TemplateContext();
-        context.PushGlobal(CreateTemplateModel(loweringPlan));
-
-        try
-        {
-            return GetTemplateForPlan(loweringPlan.PlanKind).Render(context);
-        }
-        finally
-        {
-            context.PopGlobal();
-        }
+        return ScribanTemplateRenderer.RenderTemplate(
+            GetTemplateForPlan(loweringPlan.PlanKind),
+            CreateTemplateModel(loweringPlan));
     }
 
     private static void ValidateManagedLoweringPlan(NativeReferenceLoweringPlanArtifact loweringPlan)
@@ -789,48 +692,9 @@ public sealed class NativeReferenceProofEmitter
         return true;
     }
 
-    private static Template LoadTemplate(string relativeTemplatePath)
-    {
-        var templatePath = Path.Combine(AppContext.BaseDirectory, relativeTemplatePath.Replace('/', Path.DirectorySeparatorChar));
-        if (!File.Exists(templatePath))
-        {
-            throw new FileNotFoundException("required Scriban template is missing", templatePath);
-        }
-
-        var template = Template.Parse(File.ReadAllText(templatePath), templatePath);
-        if (!template.HasErrors)
-        {
-            return template;
-        }
-
-        throw new InvalidOperationException(
-            $"failed to parse Scriban template '{relativeTemplatePath}':{Environment.NewLine}{string.Join(Environment.NewLine, template.Messages)}");
-    }
-
     private static Template GetTemplateForPlan(string planKind)
     {
-        return planKind switch
-        {
-            ManagedAsyncAwaitIntMinimal => AsyncAwaitIntGeneratedTranslationUnitTemplate.Value,
-            ManagedThreadingThreadStaticMonitorMinimal => ThreadingThreadStaticMonitorGeneratedTranslationUnitTemplate.Value,
-            ManagedInterfaceDispatchMessageMinimal => InterfaceDispatchMessageGeneratedTranslationUnitTemplate.Value,
-            ManagedDispatchVirtualInstanceMessageMinimal => DispatchVirtualInstanceMessageGeneratedTranslationUnitTemplate.Value,
-            ManagedObjectCapturedStateInstanceMessageMinimal => GeneratedTranslationUnitTemplate.Value,
-            ManagedGenericStaticForwarderCapturedGetterMinimal => StaticCallCtorGetterGeneratedTranslationUnitTemplate.Value,
-            ManagedArraysBoxingReferenceArrayBoxedIntMinimal => ArrayBoxingReferenceArrayGeneratedTranslationUnitTemplate.Value,
-            DelegateClosedTargetRelayMinimal => DelegateClosedTargetRelayGeneratedTranslationUnitTemplate.Value,
-            NestedExceptionThrowCatchFinallyMinimal => NestedExceptionThrowCatchFinallyGeneratedTranslationUnitTemplate.Value,
-            ExceptionThrowCatchFinallyMinimal => ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplate.Value,
-            ReflectionInteropClosureMinimal => ReflectionInteropClosureGeneratedTranslationUnitTemplate.Value,
-            ReflectionClosedTypeQueryMinimal => ReflectionQueryMinimalGeneratedTranslationUnitTemplate.Value,
-            MarshalingUtf8ExportMinimal => MarshalingUtf8ExportGeneratedTranslationUnitTemplate.Value,
-            InteropPInvokeDirectCallMinimal => PInvokeDllImportMinimalGeneratedTranslationUnitTemplate.Value,
-            EngineLogWriteMinimal => EngineLogWriteGeneratedTranslationUnitTemplate.Value,
-            EngineObjectHandleRoundtripMinimal => EngineObjectHandleGeneratedTranslationUnitTemplate.Value,
-            EngineLifecycleCallbackMinimal => EngineLifecycleCallbackGeneratedTranslationUnitTemplate.Value,
-            EngineHostProofMinimal => EngineHostProofGeneratedTranslationUnitTemplate.Value,
-            _ => throw new InvalidOperationException($"unsupported native-reference lowering plan kind '{planKind}'"),
-        };
+        return NativeReferenceProofCatalog.GetTemplateForPlan(planKind);
     }
 
     private static ScriptObject CreateTemplateModel(NativeReferenceLoweringPlanArtifact loweringPlan)
@@ -1396,4 +1260,5 @@ public sealed class NativeReferenceProofEmitter
         return value;
     }
 }
+
 

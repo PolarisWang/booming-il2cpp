@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -7,9 +7,10 @@
     <RootNamespace>CoreRuntimeFeatures</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\reference\Chaos.TestFramework\Chaos.TestFramework.csproj" />
+    <ProjectReference Include="..\..\..\..\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\..\subjects\SolutionCorePack\source\FeatureSlices\CoreRuntimeFeatures\ReflectionAndMetadata\LinkerStrippingProof.cs" Link="LinkerStrippingProof.cs" />
   </ItemGroup>
 </Project>
+

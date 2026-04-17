@@ -19,6 +19,7 @@ try:
     from ..testing import subject_planner as subject_planner_module
     from ..testing import subject_reporting as subject_reporting_module
     from ..testing import subject_validations as subject_validations_module
+    from ..subject import project_workspace as project_workspace_module
     from ..core import tooling as tooling_module
     from ..core.common import combine_process_output, run_process
     from ..commands import build as build_commands
@@ -39,6 +40,7 @@ except ImportError:
     from testing import subject_planner as subject_planner_module
     from testing import subject_reporting as subject_reporting_module
     from testing import subject_validations as subject_validations_module
+    from subject import project_workspace as project_workspace_module
     from core import tooling as tooling_module
     from core.common import combine_process_output, run_process
     from commands import build as build_commands
@@ -220,6 +222,94 @@ def _workspace_matrices_by_id(manifest: dict[str, Any]) -> dict[str, dict[str, A
     return matrices_by_id
 
 
+def _workspace_requested_matrix_id(selected_object: dict[str, Any], normalized_options: dict[str, Any]) -> str:
+    del selected_object
+    return str(normalized_options.get("matrix") or "").strip()
+
+
+def _workspace_has_matrix_for_host(manifest: dict[str, Any], matrix_id: str, *, host_platform: str) -> bool:
+    if not matrix_id:
+        return True
+
+    matrix = dict(_workspace_matrices_by_id(manifest).get(matrix_id) or {})
+    if not matrix:
+        return False
+
+    matrix_host_platform = _normalize_host_platform(str(matrix.get("hostPlatform") or ""))
+    normalized_host_platform = _normalize_host_platform(host_platform)
+    if matrix_host_platform and matrix_host_platform != normalized_host_platform:
+        return False
+    return True
+
+
+def _regenerate_subject_workspace_manifest(
+    repo_root: Path,
+    *,
+    subject_id: str,
+    host_platform: str,
+) -> tuple[Path, dict[str, Any]]:
+    project_workspace_module.generate_subject_workspace(
+        repo_root,
+        host_platform,
+        {
+            "id": f"subject/{subject_id}",
+            "all-targets": True,
+            "auto-refresh-missing-generated": True,
+        },
+    )
+    loaded_manifest = _load_subject_workspace_manifest(repo_root, subject_id)
+    if loaded_manifest is None:
+        raise RuntimeError(
+            "workspace manifest is missing after regeneration: "
+            f"solutions/subjects/{subject_id}/workspace.manifest.json"
+    )
+    return loaded_manifest
+
+
+def _workspace_requested_goal_id(selected_object: dict[str, Any], normalized_options: dict[str, Any]) -> str:
+    requested_goal_id = str(normalized_options.get("goal") or "").strip()
+    if requested_goal_id:
+        return requested_goal_id
+
+    if str(selected_object.get("type") or "").strip() == "subject":
+        return ""
+
+    return str(selected_object.get("defaultGoalId") or "").strip()
+
+
+def _workspace_requires_manifest_regeneration(
+    manifest: dict[str, Any],
+    *,
+    selected_object: dict[str, Any],
+    normalized_options: dict[str, Any],
+    host_platform: str,
+) -> bool:
+    requested_matrix_id = _workspace_requested_matrix_id(selected_object, normalized_options)
+    if requested_matrix_id and not _workspace_has_matrix_for_host(manifest, requested_matrix_id, host_platform=host_platform):
+        return True
+
+    requested_goal_id = _workspace_requested_goal_id(selected_object, normalized_options)
+    if not requested_goal_id:
+        return False
+
+    try:
+        matrix = _resolve_workspace_matrix(
+            manifest,
+            selected_object=selected_object,
+            normalized_options=normalized_options,
+            host_platform=host_platform,
+        )
+        resolved_goal_id = _resolve_workspace_goal_id(
+            matrix,
+            selected_object=selected_object,
+            normalized_options=normalized_options,
+        )
+    except RuntimeError:
+        return True
+
+    return resolved_goal_id != requested_goal_id
+
+
 def _resolve_workspace_matrix(
     manifest: dict[str, Any],
     *,
@@ -244,10 +334,17 @@ def _resolve_workspace_matrix(
             )
         return matrix
 
-    candidate_matrix_ids = [
-        str(manifest.get("defaultMatrixId") or "").strip(),
-        str(selected_object.get("defaultMatrixId") or "").strip(),
-    ]
+    object_type = str(selected_object.get("type") or "").strip()
+    if object_type == "subject":
+        candidate_matrix_ids = [
+            str(manifest.get("defaultMatrixId") or "").strip(),
+            str(selected_object.get("defaultMatrixId") or "").strip(),
+        ]
+    else:
+        candidate_matrix_ids = [
+            str(selected_object.get("defaultMatrixId") or "").strip(),
+            str(manifest.get("defaultMatrixId") or "").strip(),
+        ]
     for matrix_id in candidate_matrix_ids:
         if not matrix_id:
             continue
@@ -323,28 +420,28 @@ def _find_workspace_native_test_project(
     return None
 
 
-def _load_workspace_declared_catalog(repo_root: Path, catalog_path: str) -> dict[str, Any]:
-    catalog_abspath = repo_root / catalog_path
-    if not catalog_abspath.is_file():
-        raise RuntimeError(f"workspace declared catalog is not available: {catalog_path}")
+def _load_workspace_declared_collection(repo_root: Path, collection_path: str) -> dict[str, Any]:
+    collection_abspath = repo_root / collection_path
+    if not collection_abspath.is_file():
+        raise RuntimeError(f"workspace declared collection is not available: {collection_path}")
     try:
-        catalog = json.loads(catalog_abspath.read_text(encoding="utf-8"))
+        collection = json.loads(collection_abspath.read_text(encoding="utf-8"))
     except json.JSONDecodeError as error:
-        raise RuntimeError(f"workspace declared catalog is invalid: {catalog_path}: {error.msg}") from error
-    if not isinstance(catalog, dict):
-        raise RuntimeError(f"workspace declared catalog must be an object: {catalog_path}")
-    return catalog
+        raise RuntimeError(f"workspace declared collection is invalid: {collection_path}: {error.msg}") from error
+    if not isinstance(collection, dict):
+        raise RuntimeError(f"workspace declared collection must be an object: {collection_path}")
+    return collection
 
 
-def _find_workspace_declared_catalog_entry(
-    catalog: dict[str, Any],
+def _find_workspace_declared_collection_entry(
+    collection: dict[str, Any],
     *,
     object_type: str,
     stable_id: str,
     alias: str,
 ) -> dict[str, Any] | None:
-    catalog_key = "declaredUnitTests" if object_type == "declared-unit-test" else "declaredBenchmarks"
-    entries = [dict(item) for item in list(catalog.get(catalog_key) or []) if isinstance(item, dict)]
+    collection_key = "declaredUnitTests" if object_type == "declared-unit-test" else "declaredBenchmarks"
+    entries = [dict(item) for item in list(collection.get(collection_key) or []) if isinstance(item, dict)]
     for entry in entries:
         if str(entry.get("stableId") or "") == stable_id:
             return entry
@@ -375,6 +472,18 @@ def _resolve_workspace_execution(
         return None
 
     manifest_path, manifest = loaded_manifest
+    if _workspace_requires_manifest_regeneration(
+        manifest,
+        selected_object=selected_object,
+        normalized_options=normalized_options,
+        host_platform=host_platform,
+    ):
+        manifest_path, manifest = _regenerate_subject_workspace_manifest(
+            repo_root,
+            subject_id=subject_id,
+            host_platform=host_platform,
+        )
+
     host_kind = _resolve_workspace_host_kind(object_type)
     matrix = _resolve_workspace_matrix(
         manifest,
@@ -392,9 +501,9 @@ def _resolve_workspace_execution(
         normalized_options=normalized_options,
     )
     managed_test_project = _find_workspace_managed_test_project(manifest, host_kind)
-    catalog_path = str(managed_test_project.get("catalogPath") or "").strip()
-    if not catalog_path:
-        raise RuntimeError(f"workspace managed test project for host '{host_kind}' is missing catalogPath")
+    collection_path = str(managed_test_project.get("collectionPath") or "").strip()
+    if not collection_path:
+        raise RuntimeError(f"workspace managed test project for host '{host_kind}' is missing collectionPath")
 
     native_test_project = _find_workspace_native_test_project(
         manifest,
@@ -409,7 +518,7 @@ def _resolve_workspace_execution(
         "goalId": goal_id,
         "matrixId": matrix_id,
         "hostKind": host_kind,
-        "catalogPath": catalog_path,
+        "collectionPath": collection_path,
         "managedTestProject": managed_test_project,
         "nativeTestProject": native_test_project,
     }
@@ -417,22 +526,22 @@ def _resolve_workspace_execution(
     if object_type in {"declared-unit-test", "declared-benchmark"}:
         stable_id = str(selected_object.get("stableId") or "").strip()
         alias = str(selected_object.get("alias") or "").strip()
-        catalog = _load_workspace_declared_catalog(repo_root, catalog_path)
-        entry = _find_workspace_declared_catalog_entry(
-            catalog,
+        collection = _load_workspace_declared_collection(repo_root, collection_path)
+        entry = _find_workspace_declared_collection_entry(
+            collection,
             object_type=object_type,
             stable_id=stable_id,
             alias=alias,
         )
         if entry is None:
             raise RuntimeError(
-                f"workspace declared catalog does not contain {object_type} '{stable_id or alias or '<missing>'}'"
+                f"workspace declared collection does not contain {object_type} '{stable_id or alias or '<missing>'}'"
             )
         try:
             execution["entryIndex"] = int(entry.get("entryIndex"))
         except (TypeError, ValueError) as error:
             raise RuntimeError(
-                f"workspace declared catalog entry is missing a valid entryIndex: {catalog_path}"
+                f"workspace declared collection entry is missing a valid entryIndex: {collection_path}"
             ) from error
 
     return execution

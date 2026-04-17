@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
+import shutil
 import shlex
 import subprocess
 from typing import Any
@@ -18,7 +19,8 @@ try:
     from . import mobile_perf_collector
     from . import perf as perf_module
     from . import subjects as subjects_module
-    from . import workspace_declared_catalog as workspace_declared_catalog_module
+    from . import workspace_manifests as workspace_manifests_module
+    from . import workspace_declared_collection as workspace_declared_collection_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
@@ -29,7 +31,8 @@ except ImportError:
     from testing import mobile_perf_collector
     from testing import perf as perf_module
     from testing import subjects as subjects_module
-    from testing import workspace_declared_catalog as workspace_declared_catalog_module
+    from testing import workspace_manifests as workspace_manifests_module
+    from testing import workspace_declared_collection as workspace_declared_collection_module
 
 
 DRIVER_PROJECT_PATH = Path("src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj")
@@ -40,6 +43,7 @@ TRACE_SCHEMA_PATH = Path("tests/contracts/trace/schema/warmup-trace.schema.json"
 WINDOWS_REFERENCE_BUILD_TARGET = "chaos_subject_reference_proof"
 WINDOWS_REFERENCE_RUN_TARGET = "chaos_subject_reference_proof_run"
 WINDOWS_REFERENCE_CMAKE_BUILD_STRATEGY = "windows-reference-cmake"
+WINDOWS_BENCHMARK_CMAKE_BUILD_STRATEGY = "windows-benchmark-cmake"
 WINDOWS_DIRECT_BUILD_STRATEGY = "direct-msvc"
 WINDOWS_NATIVE_AOT_BUILD_TARGET = "chaos_subject_native_aot"
 WINDOWS_NATIVE_AOT_BUILD_STRATEGY = "direct-msvc-native-aot"
@@ -54,6 +58,8 @@ ANDROID_RUNTIME_ARGUMENT_ENVIRONMENTS = {
 }
 CHAOS_ENTRY_KIND_ARGUMENT_PREFIX = "--chaos-entry-kind="
 CHAOS_ENTRY_SLICE_ARGUMENT_PREFIX = "--chaos-entry-slice="
+CHAOS_COLLECTION_PATH_ARGUMENT_PREFIX = "--collection-path="
+CHAOS_ENTRY_INDEX_ARGUMENT_PREFIX = "--entry-index="
 VARIANT_MACROS = {
     "CHECK": {
         "codegen": ["CHAOS_VARIANT_CHECK", "CHAOS_VARIANT_NAME=CHECK"],
@@ -69,6 +75,141 @@ VARIANT_MACROS = {
     },
 }
 ENGINE_OBSERVE_PREFIX = "CHAOS_ENGINE_OBSERVE "
+
+
+def _render_windows_native_aot_workspace_cmakelists(repo_root: Path) -> str:
+    repo_root_text = repo_root.as_posix()
+    return f"""cmake_minimum_required(VERSION 3.20)
+
+project(chaos_subject_native_aot_workspace LANGUAGES CXX)
+
+if(NOT DEFINED CHAOS_SUBJECT_BENCHMARK_HOST_MAIN OR CHAOS_SUBJECT_BENCHMARK_HOST_MAIN STREQUAL "")
+    message(FATAL_ERROR "CHAOS_SUBJECT_BENCHMARK_HOST_MAIN is required")
+endif()
+
+if(NOT DEFINED CHAOS_SUBJECT_GENERATED_INPUT_SOURCE OR CHAOS_SUBJECT_GENERATED_INPUT_SOURCE STREQUAL "")
+    message(FATAL_ERROR "CHAOS_SUBJECT_GENERATED_INPUT_SOURCE is required")
+endif()
+
+if(NOT DEFINED CHAOS_SUBJECT_BUILD_OUT_ROOT OR CHAOS_SUBJECT_BUILD_OUT_ROOT STREQUAL "")
+    message(FATAL_ERROR "CHAOS_SUBJECT_BUILD_OUT_ROOT is required")
+endif()
+
+set(REPO_ROOT "{repo_root_text}")
+set(CHAOS_SUBJECT_VARIANT "CHECK" CACHE STRING "Variant selector for the current subject benchmark fixture")
+set_property(CACHE CHAOS_SUBJECT_VARIANT PROPERTY STRINGS CHECK PROFILE SHIP)
+
+function(chaos_apply_subject_variant target_name)
+    if(CHAOS_SUBJECT_VARIANT STREQUAL "CHECK")
+        target_compile_definitions(
+            "${{target_name}}"
+            PRIVATE
+                CHAOS_VARIANT_CHECK
+                "CHAOS_VARIANT_NAME=\\"CHECK\\"")
+        target_compile_options(
+            "${{target_name}}"
+            PRIVATE
+                $<$<CXX_COMPILER_ID:MSVC>:/Od /Zi>
+                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O0 -g>)
+        return()
+    endif()
+
+    if(CHAOS_SUBJECT_VARIANT STREQUAL "PROFILE")
+        target_compile_definitions(
+            "${{target_name}}"
+            PRIVATE
+                CHAOS_VARIANT_PROFILE
+                "CHAOS_VARIANT_NAME=\\"PROFILE\\"")
+        target_compile_options(
+            "${{target_name}}"
+            PRIVATE
+                $<$<CXX_COMPILER_ID:MSVC>:/O2 /DNDEBUG>
+                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O3 -DNDEBUG>)
+        return()
+    endif()
+
+    if(CHAOS_SUBJECT_VARIANT STREQUAL "SHIP")
+        target_compile_definitions(
+            "${{target_name}}"
+            PRIVATE
+                CHAOS_VARIANT_SHIP
+                "CHAOS_VARIANT_NAME=\\"SHIP\\"")
+        target_compile_options(
+            "${{target_name}}"
+            PRIVATE
+                $<$<CXX_COMPILER_ID:MSVC>:/O2 /GL /DNDEBUG>
+                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O3 -DNDEBUG>)
+        target_link_options(
+            "${{target_name}}"
+            PRIVATE
+                $<$<CXX_COMPILER_ID:MSVC>:/LTCG>)
+        return()
+    endif()
+
+    message(FATAL_ERROR "Unsupported CHAOS_SUBJECT_VARIANT='${{CHAOS_SUBJECT_VARIANT}}'")
+endfunction()
+
+function(chaos_configure_subject_target target_name)
+    target_compile_features("${{target_name}}" PRIVATE cxx_std_17)
+    target_compile_definitions("${{target_name}}" PRIVATE CHAOS_RUNTIME_ABI_STATIC)
+    target_include_directories(
+        "${{target_name}}"
+        PRIVATE
+            "${{REPO_ROOT}}/contracts/native/v0"
+            "${{REPO_ROOT}}/src/native/runtime-core"
+            "${{REPO_ROOT}}/src/native/bootstrap"
+            "${{REPO_ROOT}}/src/native/support"
+            "${{REPO_ROOT}}/src/native/benchmark-host")
+    chaos_apply_subject_variant("${{target_name}}")
+endfunction()
+
+add_subdirectory("{repo_root_text}/src/native/runtime-core" "runtime-core")
+add_subdirectory("{repo_root_text}/src/native/support" "support")
+add_subdirectory("{repo_root_text}/src/native/bootstrap" "bootstrap")
+add_subdirectory(generated)
+add_subdirectory(benchmark)
+"""
+
+
+def _render_windows_native_aot_generated_cmakelists() -> str:
+    return """if(NOT EXISTS "${CHAOS_SUBJECT_GENERATED_INPUT_SOURCE}")
+    message(FATAL_ERROR "Missing generated subject source: ${CHAOS_SUBJECT_GENERATED_INPUT_SOURCE}")
+endif()
+
+add_library(chaos_subject_generated_native STATIC EXCLUDE_FROM_ALL
+    "${CHAOS_SUBJECT_GENERATED_INPUT_SOURCE}")
+chaos_configure_subject_target(chaos_subject_generated_native)
+
+set_target_properties(
+    chaos_subject_generated_native
+    PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY "${CHAOS_SUBJECT_BUILD_OUT_ROOT}"
+        ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CHAOS_SUBJECT_BUILD_OUT_ROOT}")
+"""
+
+
+def _render_windows_native_aot_benchmark_cmakelists() -> str:
+    return """if(NOT EXISTS "${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
+    message(FATAL_ERROR "Missing benchmark host source: ${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
+endif()
+
+add_executable(chaos_subject_native_aot EXCLUDE_FROM_ALL
+    "${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
+chaos_configure_subject_target(chaos_subject_native_aot)
+target_link_libraries(
+    chaos_subject_native_aot
+    PRIVATE
+        chaos_subject_generated_native
+        chaos_runtime_core
+        chaos_bootstrap
+        chaos_support)
+
+set_target_properties(
+    chaos_subject_native_aot
+    PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CHAOS_SUBJECT_BUILD_OUT_ROOT}"
+        RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CHAOS_SUBJECT_BUILD_OUT_ROOT}")
+"""
 
 
 def _resolve(repo_root: Path, relative_path: str) -> Path:
@@ -90,6 +231,15 @@ def _selection_runtime_arguments(selection: dict[str, Any]) -> list[str]:
 
 def _selection_workload_entry(selection: dict[str, Any]) -> str:
     return str(selection.get("workloadEntry") or "")
+
+
+def _selection_workspace_host_kind(selection: dict[str, Any]) -> str:
+    entry_selection = _selection_declared_entry_selection(selection)
+    family = str(entry_selection.get("family") or "")
+    return {
+        "declared-unit-test": "proof-host",
+        "declared-benchmark": "benchmark-host",
+    }.get(family, "")
 
 
 def _declared_source_entry(entry: dict[str, Any]) -> str:
@@ -188,22 +338,178 @@ def _selection_declared_entry_selection(selection: dict[str, Any]) -> dict[str, 
     return normalized
 
 
-def _load_subject_declared_catalog(
+def _resolve_workspace_managed_host(
+    repo_root: Path,
+    selection: dict[str, Any],
+) -> dict[str, str] | None:
+    host_kind = _selection_workspace_host_kind(selection)
+    if not host_kind:
+        return None
+
+    subject_id = str(selection.get("subjectId") or "").strip()
+    if not subject_id:
+        return None
+
+    loaded_manifest = workspace_manifests_module.load_subject_workspace_manifest(repo_root, subject_id)
+    if loaded_manifest is None:
+        return None
+    _, manifest = loaded_manifest
+
+    managed_test_project = workspace_manifests_module.find_managed_test_project(manifest, host_kind=host_kind)
+    if managed_test_project is None:
+        return None
+
+    project_path = str(managed_test_project.get("projectPath") or "").strip()
+    collection_path = str(managed_test_project.get("collectionPath") or "").strip()
+    if not project_path or not collection_path:
+        return None
+
+    return {
+        "projectId": str(managed_test_project.get("projectId") or "").strip(),
+        "hostKind": host_kind,
+        "projectPath": project_path,
+        "collectionPath": collection_path,
+    }
+
+
+def _selection_uses_hotupdate_host(selection: dict[str, Any]) -> bool:
+    engineering_profile = str(selection.get("engineeringProfile") or "").strip().lower()
+    if engineering_profile == subjects_module.EngineeringProfile.HOT_UPDATE_HOST.value:
+        return True
+
+    execution_context = dict(selection.get("executionContext") or {})
+    for field_name in ("runtimeProfile", "toolchainProfile"):
+        normalized = str(execution_context.get(field_name) or "").strip().lower()
+        if "hot-update" in normalized or "hotupdate" in normalized:
+            return True
+    return False
+
+
+def _resolve_workspace_hotupdate_test_host(
+    repo_root: Path,
+    selection: dict[str, Any],
+) -> dict[str, str] | None:
+    if not _selection_uses_hotupdate_host(selection):
+        return None
+
+    host_kind = _selection_workspace_host_kind(selection)
+    if not host_kind:
+        return None
+
+    subject_id = str(selection.get("subjectId") or "").strip()
+    if not subject_id:
+        return None
+
+    loaded_manifest = workspace_manifests_module.load_subject_workspace_manifest(repo_root, subject_id)
+    if loaded_manifest is None:
+        return None
+    _, manifest = loaded_manifest
+
+    hotupdate_test_project = workspace_manifests_module.find_hotupdate_test_project(
+        manifest,
+        host_kind=host_kind,
+    )
+    if hotupdate_test_project is None:
+        return None
+
+    project_path = str(hotupdate_test_project.get("projectPath") or "").strip()
+    collection_path = str(hotupdate_test_project.get("collectionPath") or "").strip()
+    binding_manifest_path = str(hotupdate_test_project.get("bindingManifestPath") or "").strip()
+    if not project_path or not collection_path or not binding_manifest_path:
+        return None
+
+    return {
+        "projectId": str(hotupdate_test_project.get("projectId") or "").strip(),
+        "hostKind": host_kind,
+        "projectPath": project_path,
+        "collectionPath": collection_path,
+        "bindingManifestPath": binding_manifest_path,
+    }
+
+
+def _resolve_workspace_hotupdate_patch_projects(
+    repo_root: Path,
+    selection: dict[str, Any],
+) -> list[dict[str, str]]:
+    if not _selection_uses_hotupdate_host(selection):
+        return []
+
+    subject_id = str(selection.get("subjectId") or "").strip()
+    if not subject_id:
+        return []
+
+    loaded_manifest = workspace_manifests_module.load_subject_workspace_manifest(repo_root, subject_id)
+    if loaded_manifest is None:
+        return []
+    _, manifest = loaded_manifest
+
+    matrix_id = str(selection.get("matrixId") or "").strip()
+    records = workspace_manifests_module.find_hotupdate_patch_projects(
+        manifest,
+        matrix_id=matrix_id,
+    )
+    return [
+        {
+            "projectId": str(record.get("projectId") or "").strip(),
+            "projectPath": str(record.get("projectPath") or "").strip(),
+            "assemblyName": str(record.get("assemblyName") or "").strip(),
+        }
+        for record in records
+        if str(record.get("projectPath") or "").strip()
+    ]
+
+
+def _resolve_workspace_native_test_host(
+    repo_root: Path,
+    selection: dict[str, Any],
+) -> dict[str, str] | None:
+    host_kind = _selection_workspace_host_kind(selection)
+    if not host_kind:
+        return None
+
+    subject_id = str(selection.get("subjectId") or "").strip()
+    matrix_id = str(selection.get("matrixId") or "").strip()
+    if not subject_id or not matrix_id:
+        return None
+
+    loaded_manifest = workspace_manifests_module.load_subject_workspace_manifest(repo_root, subject_id)
+    if loaded_manifest is None:
+        return None
+    _, manifest = loaded_manifest
+
+    native_test_project = workspace_manifests_module.find_native_test_project(
+        manifest,
+        matrix_id=matrix_id,
+        host_kind=host_kind,
+    )
+    if native_test_project is None:
+        return None
+
+    return {
+        "projectId": str(native_test_project.get("projectId") or "").strip(),
+        "projectPath": str(native_test_project.get("projectPath") or "").strip(),
+        "configureRoot": str(native_test_project.get("configureRoot") or "").strip(),
+        "hostKind": host_kind,
+        "managedTestProjectId": str(native_test_project.get("managedTestProjectId") or "").strip(),
+    }
+
+
+def _load_subject_declared_collection(
     repo_root: Path,
     *,
     subject_id: str,
     host_kind: str,
 ) -> dict[str, Any] | None:
-    workspace_catalog = workspace_declared_catalog_module.load_workspace_declared_catalog(
+    workspace_collection = workspace_declared_collection_module.load_workspace_declared_collection(
         repo_root,
         subject_id,
         host_kind=host_kind,
     )
-    if isinstance(workspace_catalog, dict):
-        return workspace_catalog
+    if isinstance(workspace_collection, dict):
+        return workspace_collection
 
     try:
-        catalog = compiled_catalog_module.build_subject_declared_test_catalog(
+        collection = compiled_catalog_module.build_subject_declared_test_catalog(
             repo_root=repo_root,
             subject_id=subject_id,
             force_build=False,
@@ -211,17 +517,17 @@ def _load_subject_declared_catalog(
     except Exception:
         return None
 
-    return dict(catalog) if isinstance(catalog, dict) else None
+    return dict(collection) if isinstance(collection, dict) else None
 
 
-def _find_declared_catalog_entry(
-    catalog: dict[str, Any],
+def _find_declared_collection_entry(
+    collection: dict[str, Any],
     *,
     family: str,
     entry_selection: dict[str, Any],
 ) -> dict[str, Any] | None:
-    catalog_key = "declaredUnitTests" if family == "declared-unit-test" else "declaredBenchmarks"
-    entries = [dict(item) for item in list(catalog.get(catalog_key) or []) if isinstance(item, dict)]
+    collection_key = "declaredUnitTests" if family == "declared-unit-test" else "declaredBenchmarks"
+    entries = [dict(item) for item in list(collection.get(collection_key) or []) if isinstance(item, dict)]
 
     entry_index = entry_selection.get("entryIndex")
     if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
@@ -250,16 +556,16 @@ def _resolve_declared_benchmark(selection: dict[str, Any], *, repo_root: Path, s
     if str(entry_selection.get("family") or "") != "declared-benchmark":
         return {}
 
-    catalog = _load_subject_declared_catalog(
+    collection = _load_subject_declared_collection(
         repo_root,
         subject_id=subject_id,
         host_kind="benchmark-host",
     )
-    if not isinstance(catalog, dict):
+    if not isinstance(collection, dict):
         return {}
 
-    entry = _find_declared_catalog_entry(
-        catalog,
+    entry = _find_declared_collection_entry(
+        collection,
         family="declared-benchmark",
         entry_selection=entry_selection,
     )
@@ -360,6 +666,60 @@ def _windows_native_cmake_context(repo_root: Path) -> tuple[str, dict[str, str] 
     developer_env = tooling_module.windows_developer_environment()
     ninja_path = tooling_module.find_ninja_executable()
     return cmake_path or "cmake", developer_env or None, ninja_path
+
+
+def _materialize_windows_native_aot_cmake_source(
+    repo_root: Path,
+    *,
+    build_root: Path,
+) -> Path:
+    source_root = build_root / "cmake-src"
+    if source_root.exists():
+        shutil.rmtree(source_root)
+    (source_root / "generated").mkdir(parents=True, exist_ok=True)
+    (source_root / "benchmark").mkdir(parents=True, exist_ok=True)
+    (source_root / "CMakeLists.txt").write_text(
+        _render_windows_native_aot_workspace_cmakelists(repo_root),
+        encoding="utf-8",
+    )
+    (source_root / "generated" / "CMakeLists.txt").write_text(
+        _render_windows_native_aot_generated_cmakelists(),
+        encoding="utf-8",
+    )
+    (source_root / "benchmark" / "CMakeLists.txt").write_text(
+        _render_windows_native_aot_benchmark_cmakelists(),
+        encoding="utf-8",
+    )
+    return source_root
+
+
+def _native_benchmark_dispatch_manifest_path(build_root: Path) -> Path:
+    return build_root / "benchmark.dispatch.manifest.json"
+
+
+def _write_native_benchmark_dispatch_manifest(
+    repo_root: Path,
+    *,
+    build_root: Path,
+    selection: dict[str, Any],
+    collection_path: str,
+    workload_entry: str,
+    entry_selection: dict[str, Any],
+) -> str:
+    dispatch_manifest_path = _native_benchmark_dispatch_manifest_path(build_root)
+    write_json(
+        dispatch_manifest_path,
+        {
+            "subjectId": str(selection.get("subjectId") or ""),
+            "matrixId": str(selection.get("matrixId") or ""),
+            "hostKind": "benchmark-host",
+            "collectionPath": collection_path,
+            "workloadEntry": workload_entry,
+            "nativeEntryFunctionName": "RunNativeAot",
+            "entrySelection": dict(entry_selection),
+        },
+    )
+    return _relative(repo_root, dispatch_manifest_path)
 
 
 def _normalize_host_platform(host_platform: str) -> str:
@@ -550,7 +910,18 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
     output_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     output_root.mkdir(parents=True, exist_ok=True)
     host_platform = str(request["selection"]["executionContext"]["hostPlatform"])
-    primary_project_path_text = subjects_module.resolve_source_primary_project_path(source)
+    hotupdate_host = _resolve_workspace_hotupdate_test_host(repo_root, selection)
+    hotupdate_patch_projects = _resolve_workspace_hotupdate_patch_projects(repo_root, selection)
+    managed_host = _resolve_workspace_managed_host(repo_root, selection)
+    primary_project_path_text = (
+        str(hotupdate_host["projectPath"])
+        if hotupdate_host is not None
+        else (
+            str(managed_host["projectPath"])
+            if managed_host is not None
+            else subjects_module.resolve_source_primary_project_path(source)
+        )
+    )
     primary_project_path = _resolve(repo_root, primary_project_path_text)
 
     _run_checked(
@@ -569,9 +940,42 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
         failure_message=f"dotnet build failed: {source['path']}",
     )
 
+    if hotupdate_host is not None:
+        supporting_project_paths = [
+            subjects_module.resolve_source_primary_project_path(source),
+            *[
+                str(item.get("projectPath") or "")
+                for item in hotupdate_patch_projects
+                if str(item.get("projectPath") or "")
+            ],
+        ]
+        built_project_paths: set[str] = set()
+        for supporting_project_path_text in supporting_project_paths:
+            if not supporting_project_path_text or supporting_project_path_text in built_project_paths:
+                continue
+            built_project_paths.add(supporting_project_path_text)
+            supporting_project_path = _resolve(repo_root, supporting_project_path_text)
+            _run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(supporting_project_path),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    "-o",
+                    str(output_root),
+                    *_dotnet_intermediate_args(str(request["selection"]["subjectId"]), host_platform),
+                ],
+                repo_root=repo_root,
+                failure_message=f"dotnet build failed: {supporting_project_path_text}",
+            )
+
     subject_id = str(request["selection"]["subjectId"])
     primary_assembly_path = output_root / f"{primary_project_path.stem}.dll"
     solution_assembly_names = set(subjects_module.resolve_source_solution_assembly_names(repo_root, source))
+    if not solution_assembly_names:
+        solution_assembly_names.add(Path(subjects_module.resolve_source_primary_project_path(source)).stem)
     additional_assembly_paths = [
         _relative(repo_root, candidate)
         for candidate in sorted(output_root.iterdir())
@@ -600,6 +1004,12 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
         "variant": _selection_variant(selection),
         "files": files,
     }
+    selected_host = hotupdate_host or managed_host
+    if selected_host is not None:
+        manifest["hostKind"] = str(selected_host["hostKind"])
+        manifest["collectionPath"] = str(selected_host["collectionPath"])
+    if hotupdate_host is not None:
+        manifest["bindingManifestPath"] = str(hotupdate_host["bindingManifestPath"])
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
     return _success_result(
         bucket_manifest_path=request["paths"]["manifestPath"],
@@ -815,52 +1225,84 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
     if native_aot_build:
         if not generated_source_path_text:
             raise RuntimeError("generated manifest missing generatedSourcePath")
-        compiler_path = tooling_module.find_visual_cpp_executable()
-        if not compiler_path:
-            raise RuntimeError("MSVC cl.exe not found for windows-x64 subject build")
+        workspace_managed_host = _resolve_workspace_managed_host(repo_root, selection)
+        if workspace_managed_host is None or str(workspace_managed_host.get("hostKind") or "") != "benchmark-host":
+            raise RuntimeError("workspace benchmark host contract missing for native-aot build")
+        workspace_native_test_host = _resolve_workspace_native_test_host(repo_root, selection) or {}
+        collection_path = str(workspace_managed_host.get("collectionPath") or "").strip()
+        managed_test_project_id = str(
+            workspace_native_test_host.get("managedTestProjectId")
+            or workspace_managed_host.get("projectId")
+            or ""
+        ).strip()
+        if not collection_path:
+            raise RuntimeError("workspace benchmark host contract missing collectionPath")
+        if not managed_test_project_id:
+            raise RuntimeError("workspace benchmark host contract missing managedTestProjectId")
 
-        developer_env = tooling_module.windows_developer_environment() or None
-        compile_flags, link_flags = _windows_variant_build_flags(variant)
         host_source_path = repo_root / "src" / "native" / "benchmark-host" / "native_aot_main.cpp"
         generated_source_path = _resolve(repo_root, generated_source_path_text)
         output_executable_path = out_root / f"{WINDOWS_NATIVE_AOT_BUILD_TARGET}.exe"
-        build_strategy = WINDOWS_NATIVE_AOT_BUILD_STRATEGY
-        build_kind = "native-aot"
-        pdb_name = "chaos_subject_native_aot.pdb"
-        obj_root = build_root / "obj"
-        out_root.mkdir(parents=True, exist_ok=True)
-        obj_root.mkdir(parents=True, exist_ok=True)
-        include_roots = [
-            repo_root / "src" / "native" / "benchmark-host",
-        ]
-        source_files = [
+        for source_file in [
             host_source_path,
             generated_source_path,
-        ]
-        for source_file in source_files:
+        ]:
             if not source_file.is_file():
                 raise RuntimeError(f"subject proof source is missing: {source_file}")
 
+        declared_benchmark = _resolve_declared_benchmark(selection, repo_root=repo_root, subject_id=str(selection["subjectId"]))
+        workload_entry = str(declared_benchmark.get("workloadEntry") or _selection_workload_entry(selection))
+        dispatch_manifest_path = _write_native_benchmark_dispatch_manifest(
+            repo_root,
+            build_root=build_root,
+            selection=selection,
+            collection_path=collection_path,
+            workload_entry=workload_entry,
+            entry_selection=_selection_declared_entry_selection(selection),
+        )
+
+        out_root.mkdir(parents=True, exist_ok=True)
+        cmake_source_root = _materialize_windows_native_aot_cmake_source(repo_root, build_root=build_root)
+        cmake_path, developer_env, _ninja_path = _windows_native_cmake_context(repo_root)
+        generator = _windows_visual_studio_generator(repo_root)
+        instance_spec = tooling_module.detect_visual_studio_instance_spec(generator)
+        cmake_binary_dir = tooling_module.allocate_cmake_binary_dir(
+            build_root / "cmake",
+            host_platform="windows",
+            generator=generator,
+        )
+
         _run_checked(
             [
-                str(compiler_path),
-                "/nologo",
-                "/std:c++17",
-                "/EHsc",
-                "/DWIN32",
-                "/D_WINDOWS",
-                "/DCHAOS_RUNTIME_ABI_STATIC",
-                *[f"/D{macro}" if '"' not in macro else f'/D{macro.replace("\"", "\\\"")}' for macro in variant_macros["native"]],
-                *compile_flags,
-                *[f"/I{include_root}" for include_root in include_roots],
-                f"/Fo{obj_root}\\",
-                f"/Fd{obj_root / pdb_name}",
-                f"/Fe{output_executable_path}",
-                *[str(source_file) for source_file in source_files],
-                *(["/link", *link_flags] if link_flags else []),
+                str(cmake_path),
+                "-S",
+                str(cmake_source_root),
+                "-B",
+                str(cmake_binary_dir),
+                "-G",
+                generator,
+                f"-DCHAOS_SUBJECT_BENCHMARK_HOST_MAIN={host_source_path}",
+                f"-DCHAOS_SUBJECT_GENERATED_INPUT_SOURCE={generated_source_path}",
+                f"-DCHAOS_SUBJECT_VARIANT={variant}",
+                f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={out_root}",
+                *([f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}"] if instance_spec else []),
             ],
             repo_root=repo_root,
-            failure_message=f"subject native build failed: windows-x64-{build_kind}",
+            failure_message="subject native build failed: windows-x64-native-aot-configure",
+            env=developer_env,
+        )
+        _run_checked(
+            [
+                str(cmake_path),
+                "--build",
+                str(cmake_binary_dir),
+                "--config",
+                "Release",
+                "--target",
+                WINDOWS_NATIVE_AOT_BUILD_TARGET,
+            ],
+            repo_root=repo_root,
+            failure_message="subject native build failed: windows-x64-native-aot",
             env=developer_env,
         )
 
@@ -871,9 +1313,8 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
             "targetPlatform": str(request["selection"]["executionContext"]["targetPlatform"]),
             "toolchainProfile": str(request["selection"]["executionContext"]["toolchainProfile"]),
             "variant": variant,
-            "buildStrategy": build_strategy,
-            "buildKind": build_kind,
-            "compilerPath": str(compiler_path),
+            "buildStrategy": WINDOWS_BENCHMARK_CMAKE_BUILD_STRATEGY,
+            "buildKind": "native-aot",
             "variantMacros": {
                 "codegen": list(variant_macros["codegen"]),
                 "native": list(variant_macros["native"]),
@@ -883,6 +1324,11 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
             "hostSourcePath": _relative(repo_root, host_source_path),
             "binaryRoot": _relative(repo_root, out_root),
             "outputs": [_relative(repo_root, output_executable_path)],
+            "cmakeBinaryDir": tooling_module.path_text(repo_root, cmake_binary_dir),
+            "hostKind": "benchmark-host",
+            "collectionPath": collection_path,
+            "managedTestProjectId": managed_test_project_id,
+            "dispatchManifestPath": dispatch_manifest_path,
         }
         write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
         return _success_result(
@@ -1832,9 +2278,25 @@ def run_managed_runtime_output(*, repo_root: Path, request: dict[str, Any]) -> d
     assembly_path = _resolve(repo_root, str(host_input_manifest["primaryAssemblyPath"]))
     runtime_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     runtime_root.mkdir(parents=True, exist_ok=True)
-    runtime_arguments = _selection_managed_runtime_arguments(selection)
     subject_entry_selection = _selection_subject_entry_selection(selection)
     declared_entry_selection = _selection_declared_entry_selection(selection)
+    collection_path = str(host_input_manifest.get("collectionPath") or "").strip()
+    binding_manifest_path = str(host_input_manifest.get("bindingManifestPath") or "").strip()
+    host_kind = str(host_input_manifest.get("hostKind") or "").strip()
+    if host_kind == "proof-host" and collection_path:
+        runtime_arguments = _selection_runtime_arguments(selection)
+        entry_index = declared_entry_selection.get("entryIndex")
+        if isinstance(entry_index, bool) or not isinstance(entry_index, int) or entry_index < 0:
+            raise RuntimeError("managed proof host requires selection.entrySelection.entryIndex")
+        runtime_arguments.extend(
+            [
+                f"{CHAOS_COLLECTION_PATH_ARGUMENT_PREFIX}{collection_path}",
+                *([f"--binding-manifest-path={binding_manifest_path}"] if binding_manifest_path else []),
+                f"{CHAOS_ENTRY_INDEX_ARGUMENT_PREFIX}{int(entry_index)}",
+            ]
+        )
+    else:
+        runtime_arguments = _selection_managed_runtime_arguments(selection)
 
     completed = run_process(["dotnet", str(assembly_path), *runtime_arguments], cwd=repo_root)
     stdout_path = runtime_root / "stdout.log"
@@ -1857,10 +2319,12 @@ def run_managed_runtime_output(*, repo_root: Path, request: dict[str, Any]) -> d
         "arguments": list(runtime_arguments),
         "outputLines": output_lines,
     }
-    if subject_entry_selection:
+    if subject_entry_selection and not (host_kind == "proof-host" and collection_path):
         manifest["subjectEntrySelection"] = subject_entry_selection
     if declared_entry_selection:
         manifest["declaredEntrySelection"] = declared_entry_selection
+    if binding_manifest_path:
+        manifest["bindingManifestPath"] = binding_manifest_path
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
 
     if completed.returncode != 0:
@@ -2000,8 +2464,24 @@ def _perf_harness_command(
     workload_entry: str,
     mode: str,
     declared_benchmark: dict[str, Any] | None = None,
+    host_assembly_path: Path | None = None,
+    collection_path: str = "",
+    binding_manifest_path: str = "",
+    entry_index: int | None = None,
 ) -> list[str]:
     arguments = ["dotnet", str(harness_dll_path), str(iterations)]
+    if host_assembly_path is not None and collection_path and isinstance(entry_index, int) and entry_index >= 0:
+        arguments.extend(["--host-assembly", str(host_assembly_path)])
+        arguments.extend(["--collection-path", collection_path])
+        arguments.extend(["--entry-index", str(entry_index)])
+        if binding_manifest_path:
+            arguments.extend(["--binding-manifest-path", binding_manifest_path])
+        if workload_entry:
+            arguments.extend(["--workload-entry", workload_entry])
+        if mode:
+            arguments.extend(["--mode", mode])
+        return arguments
+
     if assembly_path is not None:
         arguments.extend(["--assembly", str(assembly_path)])
 
@@ -2067,6 +2547,12 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
         workload_entry,
         assembly_name=str(declared_benchmark.get("assemblyName") or ""),
     )
+    host_kind = str(host_input_manifest.get("hostKind") or "").strip()
+    collection_path = str(host_input_manifest.get("collectionPath") or "").strip()
+    binding_manifest_path = str(host_input_manifest.get("bindingManifestPath") or "").strip()
+    host_assembly_path = None
+    if host_kind == "benchmark-host" and collection_path:
+        host_assembly_path = _resolve(repo_root, str(host_input_manifest["primaryAssemblyPath"]))
 
     stdout_path = runtime_root / "stdout.log"
     stderr_path = runtime_root / "stderr.log"
@@ -2093,6 +2579,14 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
     stderr_chunks: list[str] = []
     output_lines: list[str] = []
     last_exit_code = 0
+    declared_entry_selection = _selection_declared_entry_selection(selection)
+    collection_entry_index = declared_entry_selection.get("entryIndex")
+    if not (isinstance(collection_entry_index, int) and not isinstance(collection_entry_index, bool) and collection_entry_index >= 0):
+        candidate_entry_index = declared_benchmark.get("entryIndex")
+        if isinstance(candidate_entry_index, int) and not isinstance(candidate_entry_index, bool) and candidate_entry_index >= 0:
+            collection_entry_index = int(candidate_entry_index)
+        else:
+            collection_entry_index = None
 
     for sample_index in range(sample_count):
         started = time.perf_counter()
@@ -2104,6 +2598,10 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
                 workload_entry=workload_entry,
                 mode="managed",
                 declared_benchmark=declared_benchmark or None,
+                host_assembly_path=host_assembly_path,
+                collection_path=collection_path,
+                binding_manifest_path=binding_manifest_path,
+                entry_index=collection_entry_index,
             ),
             cwd=repo_root,
         )
@@ -2173,11 +2671,15 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
         "regressionStatus": str(performance["regressionStatus"]),
         "regressions": list(performance["regressions"]),
     }
-    declared_entry_selection = _selection_declared_entry_selection(selection)
     if declared_entry_selection:
         manifest["declaredEntrySelection"] = declared_entry_selection
     if declared_benchmark:
         manifest["declaredBenchmark"] = declared_benchmark
+    if host_kind == "benchmark-host" and collection_path:
+        manifest["hostKind"] = host_kind
+        manifest["collectionPath"] = collection_path
+    if binding_manifest_path:
+        manifest["bindingManifestPath"] = binding_manifest_path
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
 
     if last_exit_code != 0:
@@ -2364,6 +2866,15 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
         "regressionStatus": str(performance["regressionStatus"]),
         "regressions": list(performance["regressions"]),
     }
+    host_kind = str(build_manifest.get("hostKind") or "").strip()
+    collection_path = str(build_manifest.get("collectionPath") or "").strip()
+    dispatch_manifest_path = str(build_manifest.get("dispatchManifestPath") or "").strip()
+    if host_kind:
+        manifest["hostKind"] = host_kind
+    if collection_path:
+        manifest["collectionPath"] = collection_path
+    if dispatch_manifest_path:
+        manifest["dispatchManifestPath"] = dispatch_manifest_path
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
 
     if last_exit_code != 0:
@@ -2729,6 +3240,12 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
         workload_entry,
         assembly_name=str(declared_benchmark.get("assemblyName") or ""),
     )
+    host_kind = str(host_input_manifest.get("hostKind") or "").strip()
+    collection_path = str(host_input_manifest.get("collectionPath") or "").strip()
+    binding_manifest_path = str(host_input_manifest.get("bindingManifestPath") or "").strip()
+    host_assembly_path = None
+    if host_kind == "benchmark-host" and collection_path:
+        host_assembly_path = _resolve(repo_root, str(host_input_manifest["primaryAssemblyPath"]))
 
     _run_checked(
         [
@@ -2747,6 +3264,14 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
     stderr_chunks: list[str] = []
     output_lines: list[str] = []
     last_exit_code = 0
+    declared_entry_selection = _selection_declared_entry_selection(selection)
+    collection_entry_index = declared_entry_selection.get("entryIndex")
+    if not (isinstance(collection_entry_index, int) and not isinstance(collection_entry_index, bool) and collection_entry_index >= 0):
+        candidate_entry_index = declared_benchmark.get("entryIndex")
+        if isinstance(candidate_entry_index, int) and not isinstance(candidate_entry_index, bool) and candidate_entry_index >= 0:
+            collection_entry_index = int(candidate_entry_index)
+        else:
+            collection_entry_index = None
 
     for sample_index in range(sample_count):
         started = time.perf_counter()
@@ -2758,6 +3283,10 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
                 workload_entry=workload_entry,
                 mode="interpreter",
                 declared_benchmark=declared_benchmark or None,
+                host_assembly_path=host_assembly_path,
+                collection_path=collection_path,
+                binding_manifest_path=binding_manifest_path,
+                entry_index=collection_entry_index,
             ),
             cwd=repo_root,
         )
@@ -2828,11 +3357,15 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
         "regressionStatus": str(performance["regressionStatus"]),
         "regressions": list(performance["regressions"]),
     }
-    declared_entry_selection = _selection_declared_entry_selection(selection)
     if declared_entry_selection:
         result_manifest["declaredEntrySelection"] = declared_entry_selection
     if declared_benchmark:
         result_manifest["declaredBenchmark"] = declared_benchmark
+    if host_kind == "benchmark-host" and collection_path:
+        result_manifest["hostKind"] = host_kind
+        result_manifest["collectionPath"] = collection_path
+    if binding_manifest_path:
+        result_manifest["bindingManifestPath"] = binding_manifest_path
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), result_manifest)
 
     if last_exit_code != 0:

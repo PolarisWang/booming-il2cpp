@@ -1,29 +1,15 @@
 using System.Text.Json;
 using Chaos.IL2CPP.Contracts;
-using Scriban;
 using Scriban.Runtime;
 
 namespace Chaos.IL2CPP.CodeGen;
 
 public sealed class NativeAotEmitter
 {
-    private const string TranslationUnitTemplateRelativePath = "Templates/NativeAot.TranslationUnit.cpp.scriban";
-    private const string ObjectModelTemplateRelativePath = "Templates/NativeAot.ObjectModel.cpp.scriban";
-    private const string MethodTemplateRelativePath = "Templates/NativeAot.Method.cpp.scriban";
-
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNameCaseInsensitive = true,
     };
-
-    private static readonly Lazy<Template> TranslationUnitTemplate =
-        new(() => LoadTemplate(TranslationUnitTemplateRelativePath));
-
-    private static readonly Lazy<Template> ObjectModelTemplate =
-        new(() => LoadTemplate(ObjectModelTemplateRelativePath));
-
-    private static readonly Lazy<Template> MethodTemplate =
-        new(() => LoadTemplate(MethodTemplateRelativePath));
 
     public NativeAotResult Generate(NativeAotRequest request)
     {
@@ -31,13 +17,23 @@ public sealed class NativeAotEmitter
         var loweringPlanPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.NativeAotLoweringPlan);
         var aotCoreIrPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.AotCoreIr);
         var closureManifestPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.ClosureManifest);
+        var metadataRegistrationPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.MetadataRegistration);
+        var supplementalMetadataTemplatePath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.SupplementalMetadataTemplate);
         var loweringPlan = LoadRequiredJson<NativeAotLoweringPlanArtifact>(loweringPlanPath);
         var aotCoreIr = LoadRequiredJson<AotCoreIrArtifact>(aotCoreIrPath);
         var closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath);
+        var metadataRegistration = LoadRequiredJson<MetadataRegistrationArtifact>(metadataRegistrationPath);
+        var supplementalMetadataTemplate = LoadRequiredJson<SupplementalMetadataTemplateArtifact>(supplementalMetadataTemplatePath);
         ValidateLoweringPlan(loweringPlan, closureManifest);
 
         var entryMethod = LoadEntryMethod(aotCoreIr, loweringPlan.EntrySubjectId);
-        var templateModel = new NativeAotLoweringPlanner().Create(loweringPlan, aotCoreIr, entryMethod);
+        var templateModel = new NativeAotLoweringPlanner().Create(
+            loweringPlan,
+            aotCoreIr,
+            entryMethod,
+            closureManifest,
+            metadataRegistration,
+            supplementalMetadataTemplate);
         var translationUnit = BuildGeneratedTranslationUnit(templateModel);
         var generatedSource = new NativeAotGeneratedSource
         {
@@ -133,7 +129,7 @@ public sealed class NativeAotEmitter
             ["entry_native_symbol"] = templateModel.EntryNativeSymbol,
             ["native_entry_function_name"] = templateModel.NativeEntryFunctionName,
         };
-        return RenderTemplate(TranslationUnitTemplate.Value, model);
+        return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetTranslationUnitTemplate(), model);
     }
 
     private static string BuildObjectModelSection(NativeAotTemplateModel templateModel)
@@ -142,7 +138,7 @@ public sealed class NativeAotEmitter
         {
             ["object_model_code"] = templateModel.ObjectModelCode,
         };
-        return RenderTemplate(ObjectModelTemplate.Value, model);
+        return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetObjectModelTemplate(), model);
     }
 
     private static string BuildMethodSection(NativeAotMethodTemplateModel methodModel)
@@ -152,40 +148,7 @@ public sealed class NativeAotEmitter
             ["subject_id"] = methodModel.SubjectId,
             ["method_source"] = methodModel.MethodSource,
         };
-        return RenderTemplate(MethodTemplate.Value, model);
-    }
-
-    private static string RenderTemplate(Template template, ScriptObject model)
-    {
-        var context = new TemplateContext();
-        context.PushGlobal(model);
-
-        try
-        {
-            return template.Render(context).TrimEnd();
-        }
-        finally
-        {
-            context.PopGlobal();
-        }
-    }
-
-    private static Template LoadTemplate(string relativeTemplatePath)
-    {
-        var templatePath = Path.Combine(AppContext.BaseDirectory, relativeTemplatePath.Replace('/', Path.DirectorySeparatorChar));
-        if (!File.Exists(templatePath))
-        {
-            throw new FileNotFoundException("required Scriban template is missing", templatePath);
-        }
-
-        var template = Template.Parse(File.ReadAllText(templatePath), templatePath);
-        if (!template.HasErrors)
-        {
-            return template;
-        }
-
-        throw new InvalidOperationException(
-            $"failed to parse Scriban template '{relativeTemplatePath}':{Environment.NewLine}{string.Join(Environment.NewLine, template.Messages)}");
+        return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetMethodTemplate(), model);
     }
 
     private static T LoadRequiredJson<T>(string path)

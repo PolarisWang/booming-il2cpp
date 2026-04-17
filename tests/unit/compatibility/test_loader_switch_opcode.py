@@ -3,6 +3,8 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
+from tests.support import read_loader_stage_source
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
@@ -22,7 +24,7 @@ class LoaderSwitchOpcodeTests(unittest.TestCase):
         self.assertIn("return selection switch", solution_core_launcher_source)
 
     def test_loader_stage_decodes_current_retained_subject_branch_and_prefix_il(self) -> None:
-        loader_source = LOADER_STAGE_PATH.read_text(encoding="utf-8")
+        loader_source = read_loader_stage_source(REPO_ROOT)
 
         for required_fragment in [
             "ILOpCode.Switch",

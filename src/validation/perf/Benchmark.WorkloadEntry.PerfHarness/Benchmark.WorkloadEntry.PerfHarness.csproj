@@ -5,4 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\reference\Chaos.TestFramework.Runtime\Chaos.TestFramework.Runtime.csproj" />
+  </ItemGroup>
 </Project>

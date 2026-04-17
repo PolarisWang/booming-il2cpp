@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import shutil
 import sys
 import uuid
@@ -11,6 +12,7 @@ try:
     from ..core import tooling as tooling_module
     from ..core.common import combine_process_output, read_json, run_process, write_json
     from ..testing import compiled_catalog as compiled_catalog_module
+    from ..testing import generated_hotupdate_hosts as generated_hotupdate_hosts_module
     from ..testing import generated_managed_hosts as generated_managed_hosts_module
     from ..testing import subject_executor as subject_executor_module
     from ..testing import subject_planner as subject_planner_module
@@ -22,6 +24,7 @@ except ImportError:
     from core import tooling as tooling_module
     from core.common import combine_process_output, read_json, run_process, write_json
     from testing import compiled_catalog as compiled_catalog_module
+    from testing import generated_hotupdate_hosts as generated_hotupdate_hosts_module
     from testing import generated_managed_hosts as generated_managed_hosts_module
     from testing import subject_executor as subject_executor_module
     from testing import subject_planner as subject_planner_module
@@ -45,6 +48,7 @@ CSHARP_PROJECT_TYPE_GUID = "9A19103F-16F7-4668-BE54-9A1E7A4F7556"
 VCX_PROJECT_TYPE_GUID = "8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942"
 SUBJECT_GENERATED_NATIVE_TARGET = "chaos_subject_generated_native"
 SUBJECT_PROOF_NATIVE_TARGET = "chaos_subject_reference_proof"
+SUBJECT_BENCHMARK_NATIVE_TARGET = "chaos_subject_native_aot"
 SUBJECT_VISUAL_STUDIO_STATE_VERSION = 8
 SUBJECT_WORKSPACE_VERSION = 2
 _ASSEMBLY_NAME_PATTERN = re.compile(r"<AssemblyName>\s*([^<]+)\s*</AssemblyName>", re.IGNORECASE)
@@ -299,12 +303,126 @@ set_target_properties(
         RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CHAOS_SUBJECT_BUILD_OUT_ROOT}")
 """
 
+SUBJECT_NATIVE_AOT_WORKSPACE_CMAKELISTS_TEMPLATE = """cmake_minimum_required(VERSION 3.20)
+
+project(chaos_subject_native_aot_workspace LANGUAGES CXX)
+
+if(NOT DEFINED CHAOS_SUBJECT_REPO_ROOT OR CHAOS_SUBJECT_REPO_ROOT STREQUAL "")
+    message(FATAL_ERROR "CHAOS_SUBJECT_REPO_ROOT is required")
+endif()
+
+set(REPO_ROOT "${CHAOS_SUBJECT_REPO_ROOT}")
+set(CHAOS_SUBJECT_VARIANT "CHECK" CACHE STRING "Variant selector for the current subject native benchmark fixture")
+set_property(CACHE CHAOS_SUBJECT_VARIANT PROPERTY STRINGS CHECK PROFILE SHIP)
+
+set(CHAOS_SUBJECT_BUILD_OUT_ROOT
+    "${REPO_ROOT}/artifacts/subjects/FixtureSubject/runs/subject-exec/matrices/windows-native-perf/build/out"
+    CACHE PATH "Build output root for the current subject native benchmark fixture")
+
+function(chaos_apply_subject_variant target_name)
+    if(CHAOS_SUBJECT_VARIANT STREQUAL "CHECK")
+        target_compile_definitions(
+            "${target_name}"
+            PRIVATE
+                CHAOS_VARIANT_CHECK
+                "CHAOS_VARIANT_NAME=\\"CHECK\\"")
+        target_compile_options(
+            "${target_name}"
+            PRIVATE
+                $<$<CXX_COMPILER_ID:MSVC>:/Od /Zi>
+                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O0 -g>)
+        return()
+    endif()
+
+    if(CHAOS_SUBJECT_VARIANT STREQUAL "PROFILE")
+        target_compile_definitions(
+            "${target_name}"
+            PRIVATE
+                CHAOS_VARIANT_PROFILE
+                "CHAOS_VARIANT_NAME=\\"PROFILE\\"")
+        target_compile_options(
+            "${target_name}"
+            PRIVATE
+                $<$<CXX_COMPILER_ID:MSVC>:/O2 /DNDEBUG>
+                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O3 -DNDEBUG>)
+        return()
+    endif()
+
+    if(CHAOS_SUBJECT_VARIANT STREQUAL "SHIP")
+        target_compile_definitions(
+            "${target_name}"
+            PRIVATE
+                CHAOS_VARIANT_SHIP
+                "CHAOS_VARIANT_NAME=\\"SHIP\\"")
+        target_compile_options(
+            "${target_name}"
+            PRIVATE
+                $<$<CXX_COMPILER_ID:MSVC>:/O2 /GL /DNDEBUG>
+                $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-O3 -DNDEBUG>)
+        target_link_options(
+            "${target_name}"
+            PRIVATE
+                $<$<CXX_COMPILER_ID:MSVC>:/LTCG>)
+        return()
+    endif()
+
+    message(FATAL_ERROR "Unsupported CHAOS_SUBJECT_VARIANT='${CHAOS_SUBJECT_VARIANT}'")
+endfunction()
+
+function(chaos_configure_subject_target target_name)
+    target_compile_features("${target_name}" PRIVATE cxx_std_17)
+    target_include_directories(
+        "${target_name}"
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/bootstrap"
+            "${REPO_ROOT}/src/native/support"
+            "${REPO_ROOT}/src/native/benchmark-host")
+    chaos_apply_subject_variant("${target_name}")
+endfunction()
+
+add_subdirectory("${REPO_ROOT}/src/native/runtime-core" "runtime-core")
+add_subdirectory("${REPO_ROOT}/src/native/support" "support")
+add_subdirectory("${REPO_ROOT}/src/native/bootstrap" "bootstrap")
+add_subdirectory(generated)
+add_subdirectory(benchmark)
+"""
+
+GENERIC_SUBJECT_BENCHMARK_CMAKELISTS_TEMPLATE = """set(CHAOS_SUBJECT_BENCHMARK_HOST_MAIN "@@BENCHMARK_MAIN@@")
+
+if(NOT EXISTS "${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
+    message(FATAL_ERROR "Missing subject benchmark host source: ${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
+endif()
+
+add_executable(chaos_subject_native_aot EXCLUDE_FROM_ALL
+    "${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
+chaos_configure_subject_target(chaos_subject_native_aot)
+target_link_libraries(
+    chaos_subject_native_aot
+    PRIVATE
+        chaos_subject_generated_native
+        chaos_runtime_core
+        chaos_bootstrap
+        chaos_support)
+
+set_target_properties(
+    chaos_subject_native_aot
+    PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CHAOS_SUBJECT_BUILD_OUT_ROOT}"
+        RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CHAOS_SUBJECT_BUILD_OUT_ROOT}")
+"""
+
 
 def _path_text(repo_root: Path, path: Path) -> str:
     try:
         return path.relative_to(repo_root).as_posix()
     except ValueError:
         return path.as_posix()
+
+
+def _relative_path_text(base_path: Path, target_path: Path) -> str:
+    return os.path.relpath(target_path, start=base_path).replace("\\", "/")
 
 
 def _normalize_host_platform(host_platform: str) -> str:
@@ -331,6 +449,8 @@ def _native_target_alias(target_ref: str) -> str:
         return SUBJECT_GENERATED_NATIVE_TARGET
     if target_id in {"proof", "proof-native"}:
         return SUBJECT_PROOF_NATIVE_TARGET
+    if target_id in {"benchmark", "benchmark-host", "native-aot"}:
+        return SUBJECT_BENCHMARK_NATIVE_TARGET
     return target_ref.strip()
 
 
@@ -533,9 +653,17 @@ def _rewrite_subject_facing_vcxproj_project_references(
         target_platform=target_platform,
         host_platform=host_platform,
     )
+    benchmark_project_path = _subject_native_project_file_path(
+        configure_root,
+        target_id=SUBJECT_BENCHMARK_NATIVE_TARGET,
+        target_platform=target_platform,
+        host_platform=host_platform,
+    )
 
     _filter_vcxproj_project_references(generated_project_path, set())
     _filter_vcxproj_project_references(proof_project_path, set())
+    if benchmark_project_path.is_file():
+        _filter_vcxproj_project_references(benchmark_project_path, set())
 
 
 def _subject_native_project_file_path(
@@ -550,6 +678,8 @@ def _subject_native_project_file_path(
             return configure_root / "generated" / f"{target_id}.vcxproj"
         if target_id == SUBJECT_PROOF_NATIVE_TARGET:
             return configure_root / "proof" / f"{target_id}.vcxproj"
+        if target_id == SUBJECT_BENCHMARK_NATIVE_TARGET:
+            return configure_root / "benchmark" / f"{target_id}.vcxproj"
 
     return configure_root / f"{target_id}.vcxproj"
 
@@ -789,8 +919,22 @@ def _subject_generated_root(repo_root: Path, subject_id: str, *, run_id: str = "
     return _subject_generated_run_root(repo_root, subject_id, run_id=run_id) / "analysis" / "generated"
 
 
-def _subject_generated_source_path(repo_root: Path, subject_id: str, *, run_id: str = "subject-exec") -> Path:
-    return _subject_generated_root(repo_root, subject_id, run_id=run_id) / "generated" / "native-reference.generated.cpp"
+def _generated_stage_source_name(generated_stage_kind: str) -> str:
+    if generated_stage_kind == "generated-native-aot":
+        return "native-aot.generated.cpp"
+    return "native-reference.generated.cpp"
+
+
+def _subject_generated_source_path(
+    repo_root: Path,
+    subject_id: str,
+    *,
+    generated_stage_kind: str,
+    run_id: str = "subject-exec",
+) -> Path:
+    return _subject_generated_root(repo_root, subject_id, run_id=run_id) / "generated" / _generated_stage_source_name(
+        generated_stage_kind
+    )
 
 
 def _subject_generated_source_is_stale(generated_source_path: Path) -> bool:
@@ -820,8 +964,8 @@ def _subject_generated_solution_root(workspace_root: Path, *, matrix_id: str, mu
     return workspace_root / "generated" / "subject-exec"
 
 
-def _subject_generated_solution_source_path(generated_solution_root: Path) -> Path:
-    return generated_solution_root / "analysis" / "generated" / "generated" / "native-reference.generated.cpp"
+def _subject_generated_solution_source_path(generated_solution_root: Path, *, generated_stage_kind: str) -> Path:
+    return generated_solution_root / "analysis" / "generated" / "generated" / _generated_stage_source_name(generated_stage_kind)
 
 
 def _ensure_subject_generated_source(
@@ -829,12 +973,18 @@ def _ensure_subject_generated_source(
     *,
     subject_id: str,
     matrix_id: str,
+    generated_stage_kind: str,
     variant: str,
     run_id: str = "subject-exec",
     refresh_generated: bool,
     refresh_if_missing: bool = False,
 ) -> None:
-    generated_source_path = _subject_generated_source_path(repo_root, subject_id, run_id=run_id)
+    generated_source_path = _subject_generated_source_path(
+        repo_root,
+        subject_id,
+        generated_stage_kind=generated_stage_kind,
+        run_id=run_id,
+    )
     if (
         refresh_generated
         or (refresh_if_missing and not generated_source_path.is_file())
@@ -852,6 +1002,7 @@ def _mirror_subject_generated_run(
     workspace_root: Path,
     subject_id: str,
     matrix_id: str,
+    generated_stage_kind: str,
     run_id: str = "subject-exec",
     multi_matrix: bool,
 ) -> Path:
@@ -864,7 +1015,10 @@ def _mirror_subject_generated_run(
     mirrored_root.parent.mkdir(parents=True, exist_ok=True)
     shutil.copytree(generated_run_root, mirrored_root)
 
-    mirrored_source_path = _subject_generated_solution_source_path(mirrored_root)
+    mirrored_source_path = _subject_generated_solution_source_path(
+        mirrored_root,
+        generated_stage_kind=generated_stage_kind,
+    )
     if not mirrored_source_path.is_file():
         raise RuntimeError(f"subject-exec generated source mirror is missing for subject '{subject_id}'")
     return mirrored_root
@@ -1135,9 +1289,12 @@ def _subject_matrix_has_generated_stage(manifest: dict[str, Any], matrix: dict[s
 
 def _subject_matrix_requires_workspace_configure(manifest: dict[str, Any], matrix: dict[str, Any]) -> bool:
     generated_stage_kind = _subject_matrix_generated_stage_kind(manifest, matrix)
-    if generated_stage_kind not in {"generated-native-proof", "generated-engine-proof"}:
-        return False
-    return _subject_matrix_target_platform(matrix) in {"windows-x64", "android-arm64", "linux-x64"}
+    target_platform = _subject_matrix_target_platform(matrix)
+    if generated_stage_kind in {"generated-native-proof", "generated-engine-proof"}:
+        return target_platform in {"windows-x64", "android-arm64", "linux-x64"}
+    if generated_stage_kind == "generated-native-aot":
+        return target_platform == "windows-x64"
+    return False
 
 
 def _subject_matrix_supports_workspace_generation(
@@ -1237,6 +1394,36 @@ def _materialize_subject_native_reference_source(
     return materialized_root
 
 
+def _materialize_subject_native_aot_source(
+    repo_root: Path,
+    *,
+    workspace_root: Path,
+    subject_id: str,
+    matrix_id: str,
+    generated_source_path: Path,
+) -> Path:
+    benchmark_main_path = repo_root / "src" / "native" / "benchmark-host" / "native_aot_main.cpp"
+
+    materialized_root = _subject_materialized_source_root(workspace_root, matrix_id)
+    _clear_dir(materialized_root)
+    materialized_root.mkdir(parents=True, exist_ok=True)
+    (materialized_root / "generated").mkdir(parents=True, exist_ok=True)
+    (materialized_root / "benchmark").mkdir(parents=True, exist_ok=True)
+    (materialized_root / "CMakeLists.txt").write_text(
+        SUBJECT_NATIVE_AOT_WORKSPACE_CMAKELISTS_TEMPLATE,
+        encoding="utf-8",
+    )
+    (materialized_root / "generated" / "CMakeLists.txt").write_text(
+        GENERIC_SUBJECT_GENERATED_CMAKELISTS_TEMPLATE.replace("@@GENERATED_INPUT_SOURCE@@", generated_source_path.as_posix()),
+        encoding="utf-8",
+    )
+    (materialized_root / "benchmark" / "CMakeLists.txt").write_text(
+        GENERIC_SUBJECT_BENCHMARK_CMAKELISTS_TEMPLATE.replace("@@BENCHMARK_MAIN@@", benchmark_main_path.as_posix()),
+        encoding="utf-8",
+    )
+    return materialized_root
+
+
 def _generated_stage_cutoff(stages: list[dict[str, Any]]) -> int:
     for index in range(len(stages) - 1, -1, -1):
         stage = stages[index]
@@ -1293,6 +1480,7 @@ def _subject_configure_arguments(
     *,
     subject_id: str,
     matrix: dict[str, Any],
+    generated_stage_kind: str,
     variant: str,
     workspace_root: Path,
     mirrored_generated_root: Path | None,
@@ -1309,12 +1497,41 @@ def _subject_configure_arguments(
     if target_platform == "windows-x64":
         if mirrored_generated_root is None:
             raise RuntimeError(f"matrix '{matrix_id}' is missing mirrored generated source")
+        generated_source_path = _subject_generated_solution_source_path(
+            mirrored_generated_root,
+            generated_stage_kind=generated_stage_kind,
+        )
+        if generated_stage_kind == "generated-native-aot":
+            source_root = _materialize_subject_native_aot_source(
+                repo_root,
+                workspace_root=workspace_root,
+                subject_id=subject_id,
+                matrix_id=matrix_id,
+                generated_source_path=generated_source_path,
+            )
+            configure_args = [
+                cmake_path,
+                "-S",
+                str(source_root),
+                "-B",
+                str(configure_root),
+                "-G",
+                WINDOWS_VISUAL_STUDIO_GENERATOR,
+                f"-DCHAOS_SUBJECT_REPO_ROOT={repo_root.as_posix()}",
+                f"-DCHAOS_SUBJECT_VARIANT={variant}",
+                f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={out_root}",
+            ]
+            return (
+                configure_args,
+                ["--config", "Release", "--target", SUBJECT_BENCHMARK_NATIVE_TARGET],
+                SUBJECT_BENCHMARK_NATIVE_TARGET,
+            )
         source_root = _materialize_subject_native_reference_source(
             repo_root,
             workspace_root=workspace_root,
             subject_id=subject_id,
             matrix_id=matrix_id,
-            generated_source_path=_subject_generated_solution_source_path(mirrored_generated_root),
+            generated_source_path=generated_source_path,
         )
         configure_args = [
             cmake_path,
@@ -1362,6 +1579,7 @@ def _subject_native_projects(
     *,
     configure_root: Path,
     primary_open_target: str,
+    generated_stage_kind: str,
     target_platform: str,
     host_platform: str,
 ) -> list[dict[str, Any]]:
@@ -1369,6 +1587,37 @@ def _subject_native_projects(
         return []
 
     if target_platform == "windows-x64":
+        if generated_stage_kind == "generated-native-aot":
+            return [
+                {
+                    "targetId": SUBJECT_GENERATED_NATIVE_TARGET,
+                    "kind": "generated-native",
+                    "projectPath": _path_text(
+                        repo_root,
+                        _subject_native_project_file_path(
+                            configure_root,
+                            target_id=SUBJECT_GENERATED_NATIVE_TARGET,
+                            target_platform=target_platform,
+                            host_platform=host_platform,
+                        ),
+                    ),
+                    "buildArgs": ["--config", "Release", "--target", SUBJECT_GENERATED_NATIVE_TARGET],
+                },
+                {
+                    "targetId": SUBJECT_BENCHMARK_NATIVE_TARGET,
+                    "kind": "benchmark-native",
+                    "projectPath": _path_text(
+                        repo_root,
+                        _subject_native_project_file_path(
+                            configure_root,
+                            target_id=SUBJECT_BENCHMARK_NATIVE_TARGET,
+                            target_platform=target_platform,
+                            host_platform=host_platform,
+                        ),
+                    ),
+                    "buildArgs": ["--config", "Release", "--target", SUBJECT_BENCHMARK_NATIVE_TARGET],
+                },
+            ]
         return [
             {
                 "targetId": SUBJECT_GENERATED_NATIVE_TARGET,
@@ -1521,14 +1770,14 @@ def _subject_managed_test_projects(
     managed_tests_root = workspace_root / "managed-tests"
     generated_root = managed_tests_root / "Generated"
     generated_root.mkdir(parents=True, exist_ok=True)
-    catalog_path = generated_root / "declared-tests.catalog.json"
-    write_json(catalog_path, declared_catalog)
+    collection_path = generated_root / "declared-tests.collection.json"
+    write_json(collection_path, declared_catalog)
 
     subject_project_references = [str(item.get("projectPath") or "") for item in managed_projects if str(item.get("projectPath") or "")]
     records: list[dict[str, Any]] = []
     solution_project_paths: list[str] = []
     important_outputs: list[dict[str, str]] = []
-    artifacts = [_path_text(repo_root, catalog_path)]
+    artifacts = [_path_text(repo_root, collection_path)]
 
     host_specs = [
         ("proof-host", unit_entries, "ChaosGeneratedDeclaredTests.g.cs"),
@@ -1542,6 +1791,10 @@ def _subject_managed_test_projects(
         assembly_name = f"{subject_id}.{host_suffix}"
         generated_source_path = generated_root / generated_source_name
         project_path = managed_tests_root / f"{assembly_name}.csproj"
+        project_references = [
+            _relative_path_text(project_path.parent, repo_root / reference_path)
+            for reference_path in subject_project_references
+        ]
         generated_source_path.write_text(
             generated_managed_hosts_module.render_declared_test_host_source(
                 subject_id=subject_id,
@@ -1554,7 +1807,8 @@ def _subject_managed_test_projects(
             generated_managed_hosts_module.render_declared_test_host_project(
                 subject_id=subject_id,
                 host_kind=host_kind,
-                project_references=subject_project_references,
+                project_references=project_references,
+                generated_source_path=_relative_path_text(project_path.parent, generated_source_path),
                 assembly_name=assembly_name,
             ),
             encoding="utf-8",
@@ -1564,7 +1818,7 @@ def _subject_managed_test_projects(
             "projectPath": _path_text(repo_root, project_path),
             "assemblyName": assembly_name,
             "hostKind": host_kind,
-            "catalogPath": _path_text(repo_root, catalog_path),
+            "collectionPath": _path_text(repo_root, collection_path),
             "generatedSourcePath": _path_text(repo_root, generated_source_path),
         }
         records.append(record)
@@ -1572,6 +1826,143 @@ def _subject_managed_test_projects(
         important_outputs.append(
             {
                 "label": "Proof host project" if host_kind == "proof-host" else "Benchmark host project",
+                "path": record["projectPath"],
+            }
+        )
+        artifacts.extend(
+            [
+                record["projectPath"],
+                record["generatedSourcePath"],
+            ]
+        )
+
+    return records, solution_project_paths, important_outputs, artifacts
+
+
+def _subject_hotupdate_patch_projects(
+    repo_root: Path,
+    *,
+    subject_id: str,
+    manifest: dict[str, Any],
+    managed_projects: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    hotupdate = dict(manifest.get("hotUpdate") or manifest.get("hotupdate") or {})
+    patch_project_paths = [str(item) for item in list(hotupdate.get("patchProjectPaths") or []) if str(item)]
+    if not patch_project_paths:
+        return []
+
+    managed_projects_by_path = {
+        str(item.get("projectPath") or ""): dict(item)
+        for item in managed_projects
+        if str(item.get("projectPath") or "")
+    }
+    records: list[dict[str, Any]] = []
+    for project_path in patch_project_paths:
+        managed_project = dict(managed_projects_by_path.get(project_path) or {})
+        project_id_suffix = _normalize_project_name_fragment(Path(project_path).stem)
+        records.append(
+            {
+                "projectId": f"hotupdate-patch/{subject_id}/{project_id_suffix}",
+                "managedProjectId": str(managed_project.get("projectId") or ""),
+                "projectPath": project_path,
+                "assemblyName": _project_assembly_name(repo_root, project_path),
+            }
+        )
+    return records
+
+
+def _subject_hotupdate_test_projects(
+    repo_root: Path,
+    *,
+    subject_id: str,
+    workspace_root: Path,
+    declared_catalog: dict[str, Any],
+    hotupdate_patch_projects: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[str], list[dict[str, str]], list[str]]:
+    unit_entries = [dict(item) for item in list(declared_catalog.get("declaredUnitTests") or []) if isinstance(item, dict)]
+    benchmark_entries = [dict(item) for item in list(declared_catalog.get("declaredBenchmarks") or []) if isinstance(item, dict)]
+    if not hotupdate_patch_projects or (not unit_entries and not benchmark_entries):
+        return [], [], [], []
+
+    hotupdate_tests_root = workspace_root / "hotupdate-tests"
+    generated_root = hotupdate_tests_root / "Generated"
+    generated_root.mkdir(parents=True, exist_ok=True)
+    collection_path = generated_root / "declared-tests.collection.json"
+    if not collection_path.is_file():
+        write_json(collection_path, declared_catalog)
+    binding_manifest_path = generated_root / "declared-tests.binding.json"
+    patch_project_ids = [str(item.get("projectId") or "") for item in hotupdate_patch_projects if str(item.get("projectId") or "")]
+    patch_assembly_names = [str(item.get("assemblyName") or "") for item in hotupdate_patch_projects if str(item.get("assemblyName") or "")]
+    entry_bindings = [
+        {
+            "hostKind": host_kind,
+            "entryIndex": int(entry.get("entryIndex") or 0),
+            "assemblyName": str(entry.get("assemblyName") or ""),
+            "stableId": str(entry.get("stableId") or ""),
+        }
+        for host_kind, entries in (
+            ("proof-host", unit_entries),
+            ("benchmark-host", benchmark_entries),
+        )
+        for entry in entries
+        if str(entry.get("assemblyName") or "")
+    ]
+    write_json(
+        binding_manifest_path,
+        {
+            "subjectId": subject_id,
+            "collectionPath": _path_text(repo_root, collection_path),
+            "patchProjectIds": patch_project_ids,
+            "patchAssemblyNames": patch_assembly_names,
+            "entryBindings": entry_bindings,
+        },
+    )
+
+    records: list[dict[str, Any]] = []
+    solution_project_paths: list[str] = []
+    important_outputs: list[dict[str, str]] = []
+    artifacts = [
+        _path_text(repo_root, binding_manifest_path),
+    ]
+    host_specs = [
+        ("proof-host", unit_entries, "ChaosGeneratedHotUpdateProofHost.g.cs", f"{subject_id}.HotUpdateProofHost"),
+        ("benchmark-host", benchmark_entries, "ChaosGeneratedHotUpdateBenchmarkHost.g.cs", f"{subject_id}.HotUpdateBenchmarkHost"),
+    ]
+    for host_kind, entries, generated_source_name, assembly_name in host_specs:
+        if not entries:
+            continue
+
+        generated_source_path = generated_root / generated_source_name
+        project_path = hotupdate_tests_root / f"{assembly_name}.csproj"
+        generated_source_path.write_text(
+            generated_hotupdate_hosts_module.render_declared_hotupdate_host_source(
+                subject_id=subject_id,
+                host_kind=host_kind,
+            ),
+            encoding="utf-8",
+        )
+        project_path.write_text(
+            generated_hotupdate_hosts_module.render_declared_hotupdate_host_project(
+                assembly_name=assembly_name,
+                generated_source_path=_relative_path_text(project_path.parent, generated_source_path),
+            ),
+            encoding="utf-8",
+        )
+        record = {
+            "projectId": f"hotupdate-test/{subject_id}/{host_kind}",
+            "projectPath": _path_text(repo_root, project_path),
+            "assemblyName": assembly_name,
+            "hostKind": host_kind,
+            "collectionPath": _path_text(repo_root, collection_path),
+            "bindingManifestPath": _path_text(repo_root, binding_manifest_path),
+            "generatedSourcePath": _path_text(repo_root, generated_source_path),
+            "patchProjectIds": patch_project_ids,
+        }
+        records.append(record)
+        solution_project_paths.append(record["projectPath"])
+        important_outputs.append(
+            {
+                "label": "Hotupdate proof host project" if host_kind == "proof-host" else "Hotupdate benchmark host project",
                 "path": record["projectPath"],
             }
         )
@@ -1643,9 +2034,31 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
         workspace_root=workspace_root,
         managed_projects=managed_projects,
     )
+    declared_catalog = compiled_catalog_module.build_subject_declared_test_catalog(
+        repo_root=repo_root,
+        subject_id=subject_id,
+    )
+    hotupdate_patch_projects = _subject_hotupdate_patch_projects(
+        repo_root,
+        subject_id=subject_id,
+        manifest=manifest,
+        managed_projects=managed_projects,
+    )
+    hotupdate_test_projects, solution_hotupdate_test_project_paths, hotupdate_test_outputs, hotupdate_test_artifacts = _subject_hotupdate_test_projects(
+        repo_root,
+        subject_id=subject_id,
+        workspace_root=workspace_root,
+        declared_catalog=declared_catalog,
+        hotupdate_patch_projects=hotupdate_patch_projects,
+    )
     managed_test_projects_by_host_kind = {
         str(item.get("hostKind") or ""): str(item.get("projectId") or "")
         for item in managed_test_projects
+        if str(item.get("hostKind") or "") and str(item.get("projectId") or "")
+    }
+    hotupdate_test_projects_by_host_kind = {
+        str(item.get("hostKind") or ""): str(item.get("projectId") or "")
+        for item in hotupdate_test_projects
         if str(item.get("hostKind") or "") and str(item.get("projectId") or "")
     }
 
@@ -1653,13 +2066,17 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
     solution_native_project_paths: list[str] = []
     workspace_native_projects: list[dict[str, Any]] = []
     workspace_native_test_projects: list[dict[str, Any]] = []
+    workspace_hotupdate_patch_projects = list(hotupdate_patch_projects)
+    workspace_hotupdate_test_projects = list(hotupdate_test_projects)
     artifacts = [_path_text(repo_root, manifest_path)]
     important_outputs = [
         {"label": "Workspace manifest", "path": _path_text(repo_root, manifest_path)},
         {"label": "Managed solution", "path": _path_text(repo_root, solution_path)},
     ]
     important_outputs.extend(managed_test_outputs)
+    important_outputs.extend(hotupdate_test_outputs)
     artifacts.extend(managed_test_artifacts)
+    artifacts.extend(hotupdate_test_artifacts)
     console_parts: list[str] = []
     mirrored_generated_roots: dict[str, Path] = {}
     for matrix in selected_matrices:
@@ -1667,6 +2084,7 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
         _emit_progress(progress_callback, "artifact", f"{subject_id}/{matrix_id}")
         execution_context = dict(matrix.get("executionContext") or {})
         target_platform = str(execution_context.get("targetPlatform") or "")
+        generated_stage_kind = _subject_matrix_generated_stage_kind(manifest, matrix)
         matrix_requires_workspace_configure = _subject_matrix_requires_workspace_configure(manifest, matrix)
         mirrored_generated_root: Path | None = None
         if matrix_requires_workspace_configure and target_platform == "windows-x64":
@@ -1675,6 +2093,7 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
                 repo_root,
                 subject_id=subject_id,
                 matrix_id=matrix_id,
+                generated_stage_kind=generated_stage_kind,
                 variant=variant,
                 run_id=generated_run_id,
                 refresh_generated=refresh_generated or multi_matrix_generated,
@@ -1685,6 +2104,7 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
                 workspace_root=workspace_root,
                 subject_id=subject_id,
                 matrix_id=matrix_id,
+                generated_stage_kind=generated_stage_kind,
                 run_id=generated_run_id,
                 multi_matrix=multi_matrix_generated,
             )
@@ -1701,6 +2121,7 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
                 repo_root,
                 subject_id=subject_id,
                 matrix=matrix,
+                generated_stage_kind=generated_stage_kind,
                 variant=variant,
                 workspace_root=workspace_root,
                 mirrored_generated_root=mirrored_generated_root,
@@ -1734,6 +2155,7 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
                 repo_root,
                 configure_root=configure_root,
                 primary_open_target=primary_open_target,
+                generated_stage_kind=generated_stage_kind,
                 target_platform=target_platform,
                 host_platform=host_platform,
             )
@@ -1747,8 +2169,19 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
         native_project_path = _subject_native_project_path(native_projects, default_open_native_target)
         generated_native_project_path = _subject_native_project_path(native_projects, SUBJECT_GENERATED_NATIVE_TARGET)
         proof_native_project_path = _subject_native_project_path(native_projects, SUBJECT_PROOF_NATIVE_TARGET)
+        benchmark_native_project_path = _subject_native_project_path(native_projects, SUBJECT_BENCHMARK_NATIVE_TARGET)
         matrix_native_project_ids: list[str] = []
         matrix_native_test_project_ids: list[str] = []
+        matrix_hotupdate_patch_project_ids = [
+            str(item.get("projectId") or "")
+            for item in hotupdate_patch_projects
+            if str(item.get("projectId") or "")
+        ]
+        matrix_hotupdate_test_project_ids = [
+            project_id
+            for host_kind, project_id in hotupdate_test_projects_by_host_kind.items()
+            if host_kind in {"proof-host", "benchmark-host"} and project_id
+        ]
         for native_project in native_projects:
             native_project_path_text = str(native_project.get("projectPath") or "")
             if not native_project_path_text:
@@ -1786,6 +2219,19 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
                 )
                 matrix_native_test_project_ids.append(project_id)
                 continue
+            if target_id == SUBJECT_BENCHMARK_NATIVE_TARGET:
+                project_id = f"native-test/{subject_id}/{matrix_id}/benchmark-host"
+                workspace_native_test_projects.append(
+                    {
+                        "projectId": project_id,
+                        **base_payload,
+                        "deliveryKind": "direct-run-host",
+                        "hostKind": "benchmark-host",
+                        "managedTestProjectId": managed_test_projects_by_host_kind.get("benchmark-host", ""),
+                    }
+                )
+                matrix_native_test_project_ids.append(project_id)
+                continue
 
             project_id = f"native/{subject_id}/{matrix_id}/{_normalize_project_name_fragment(target_id)}"
             workspace_native_projects.append(
@@ -1807,6 +2253,16 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
                 "managedTestProjectIds": [str(item.get("projectId") or "") for item in managed_test_projects if str(item.get("projectId") or "")],
                 "nativeProjectIds": matrix_native_project_ids,
                 "nativeTestProjectIds": matrix_native_test_project_ids,
+                **(
+                    {"hotupdatePatchProjectIds": matrix_hotupdate_patch_project_ids}
+                    if matrix_hotupdate_patch_project_ids
+                    else {}
+                ),
+                **(
+                    {"hotupdateTestProjectIds": matrix_hotupdate_test_project_ids}
+                    if matrix_hotupdate_test_project_ids
+                    else {}
+                ),
             }
         )
         if mirrored_generated_root is not None:
@@ -1827,6 +2283,8 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
             important_outputs.append({"label": f"Generated native project{label_suffix}", "path": generated_native_project_path})
         if proof_native_project_path:
             important_outputs.append({"label": f"Proof native project{label_suffix}", "path": proof_native_project_path})
+        if benchmark_native_project_path:
+            important_outputs.append({"label": f"Benchmark native project{label_suffix}", "path": benchmark_native_project_path})
 
     _write_solution_file(
         solution_path,
@@ -1834,6 +2292,7 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
         [
             *_manifest_project_paths(list(managed_projects)),
             *solution_managed_test_project_paths,
+            *solution_hotupdate_test_project_paths,
         ],
         solution_native_project_paths,
     )
@@ -1852,6 +2311,10 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
         "nativeTestProjects": workspace_native_test_projects,
         "matrices": matrix_payloads,
     }
+    if workspace_hotupdate_patch_projects:
+        payload["hotupdatePatchProjects"] = workspace_hotupdate_patch_projects
+    if workspace_hotupdate_test_projects:
+        payload["hotupdateTestProjects"] = workspace_hotupdate_test_projects
     write_json(manifest_path, payload)
     return {
         "manifestPath": _path_text(repo_root, manifest_path),
@@ -2201,6 +2664,7 @@ def build_subject_workspace(repo_root: Path, host_platform: str, options: dict[s
 
     managed_projects = _manifest_project_paths(list(manifest.get("managedProjects") or []))
     managed_test_projects = _manifest_project_paths(list(manifest.get("managedTestProjects") or []))
+    hotupdate_test_projects = _manifest_project_paths(list(manifest.get("hotupdateTestProjects") or []))
     matrices = [dict(item) for item in list(manifest.get("matrices") or []) if isinstance(item, dict)]
     selected = _selected_entries(
         matrices,
@@ -2211,7 +2675,7 @@ def build_subject_workspace(repo_root: Path, host_platform: str, options: dict[s
         options=options,
     )
 
-    console_parts = _build_managed_projects(repo_root, [*managed_projects, *managed_test_projects])
+    console_parts = _build_managed_projects(repo_root, [*managed_projects, *managed_test_projects, *hotupdate_test_projects])
     for matrix in selected:
         native_projects = _subject_matrix_native_entries(manifest, matrix)
         configure_root = _subject_matrix_configure_root(manifest, matrix)
@@ -2241,7 +2705,7 @@ def build_subject_workspace(repo_root: Path, host_platform: str, options: dict[s
             "subjectId": subject_id,
             "workspaceManifestPath": _path_text(repo_root, manifest_path),
             "builtMatrices": [str(item["matrixId"]) for item in selected],
-            "managedProjects": [*managed_projects, *managed_test_projects],
+            "managedProjects": [*managed_projects, *managed_test_projects, *hotupdate_test_projects],
         },
     )
     return {

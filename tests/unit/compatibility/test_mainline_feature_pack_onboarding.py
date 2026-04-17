@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import json
 import shutil
@@ -21,7 +21,7 @@ SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFe
 SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "Program.cs"
 TASK_FLOW_PROOF_PATH = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures" / "AsyncAndThreading" / "TaskAndValueTaskFlowProof.cs"
 SOURCE_SLICE_ROOT = SUBJECT_ROOT / "source" / "FeatureSlices" / "CoreRuntimeFeatures"
-FRAMEWORK_PROJECT_REFERENCE = "../../../../../src/reference/Chaos.TestFramework/Chaos.TestFramework.csproj"
+FRAMEWORK_PROJECT_REFERENCE = "../../../../../src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj"
 PROOF_CMAKE_PATH = SUBJECT_ROOT / "validation" / "proof" / "native-reference" / "CMakeLists.txt"
 PERF_BASELINE_PATH = SUBJECT_ROOT / "baselines" / "perf" / "windows-native-perf" / "windows.json"
 TRACE_COMPARE_PATH = REPO_ROOT / "tests" / "contracts" / "trace" / "compare-warmup-trace.py"
@@ -112,7 +112,7 @@ class Phase4SolutionCorePackOnboardingTests(unittest.TestCase):
         self.assertTrue(PROOF_CMAKE_PATH.is_file())
         self.assertTrue(PERF_BASELINE_PATH.is_file())
         self.assertNotIn("[ChaosUnitTest(", source_program_text)
-        self.assertIn("Assert.Equal(0, entry()", source_program_text)
+        self.assertIn("Assert.Equal(0, exitCode);", source_program_text)
         self.assertIn('Alias = "task-valuetask-flow-proof"', TASK_FLOW_PROOF_PATH.read_text(encoding="utf-8"))
 
     def test_mainline_proof_sources_use_asserts_without_stdout_contracts(self) -> None:
@@ -176,3 +176,4 @@ class Phase4SolutionCorePackOnboardingTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

@@ -3,12 +3,17 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
+from tests.support import read_contracts_source, read_loader_stage_source
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
 AOT_CORE_IR_LOWERING_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "AotCoreIrLowering.cs"
 NATIVE_AOT_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeAotLoweringPlanner.cs"
 NATIVE_AOT_EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeAotEmitter.cs"
+NATIVE_AOT_INVOCATION_PLANNING_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Planning" / "NativeAotLoweringPlanner.InvocationPlanning.cs"
+NATIVE_AOT_METHOD_EMISSION_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Emission" / "NativeAotLoweringPlanner.MethodEmission.cs"
+NATIVE_AOT_OBJECT_MODEL_EMISSION_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Emission" / "NativeAotLoweringPlanner.ObjectModelEmission.cs"
 LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
 NATIVE_AOT_TRANSLATION_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeAot.TranslationUnit.cpp.scriban"
 NATIVE_AOT_OBJECT_MODEL_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeAot.ObjectModel.cpp.scriban"
@@ -17,7 +22,7 @@ NATIVE_AOT_METHOD_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.
 
 class Phase4BAotCoreIrObjectModelTests(unittest.TestCase):
     def test_contracts_expose_object_reference_and_runtime_service_carriers(self) -> None:
-        contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")
+        contracts_source = read_contracts_source(REPO_ROOT)
 
         for required_fragment in [
             "public enum AotCoreIrReferenceKind : byte",
@@ -62,8 +67,8 @@ class Phase4BAotCoreIrObjectModelTests(unittest.TestCase):
             self.assertIn(required_fragment, contracts_source)
 
     def test_loader_exposes_value_type_shape_and_base_type_identity_in_managed_type_model(self) -> None:
-        contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")
-        loader_source = LOADER_STAGE_PATH.read_text(encoding="utf-8")
+        contracts_source = read_contracts_source(REPO_ROOT)
+        loader_source = read_loader_stage_source(REPO_ROOT)
 
         for required_fragment in [
             "public bool IsValueType { get; init; }",
@@ -140,11 +145,22 @@ class Phase4BAotCoreIrObjectModelTests(unittest.TestCase):
 
     def test_native_aot_planner_exposes_first_batch_object_model_entrypoints(self) -> None:
         planner_source = NATIVE_AOT_PLANNER_PATH.read_text(encoding="utf-8")
+        invocation_planning_source = NATIVE_AOT_INVOCATION_PLANNING_PATH.read_text(encoding="utf-8")
+        method_emission_source = NATIVE_AOT_METHOD_EMISSION_PATH.read_text(encoding="utf-8")
+        object_model_emission_source = NATIVE_AOT_OBJECT_MODEL_EMISSION_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
-            "public sealed class NativeAotLoweringPlanner",
+            "public sealed partial class NativeAotLoweringPlanner",
             "public NativeAotTemplateModel Create(",
+        ]:
+            self.assertIn(required_fragment, planner_source)
+
+        for required_fragment in [
             "CollectReachableMethods(",
+        ]:
+            self.assertIn(required_fragment, invocation_planning_source)
+
+        for required_fragment in [
             "FormatMethodDeclaration(",
             "EmitManagedMethod(",
             "EmitNewObject(",
@@ -166,30 +182,39 @@ class Phase4BAotCoreIrObjectModelTests(unittest.TestCase):
             "EmitBox(",
             "EmitUnbox(",
             "EmitUnboxAny(",
+        ]:
+            self.assertIn(required_fragment, method_emission_source)
+
+        for required_fragment in [
             "EmitObjectModelDeclarations(",
             "chaos_is_array_type_compatible(",
             "chaos_is_array_store_compatible(",
         ]:
-            self.assertIn(required_fragment, planner_source)
+            self.assertIn(required_fragment, object_model_emission_source)
 
     def test_native_aot_emitter_uses_scriban_templates_and_planner(self) -> None:
         emitter_source = NATIVE_AOT_EMITTER_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
-            "using Scriban;",
             "using Scriban.Runtime;",
             "new NativeAotLoweringPlanner()",
-            "Templates/NativeAot.TranslationUnit.cpp.scriban",
-            "Templates/NativeAot.ObjectModel.cpp.scriban",
-            "Templates/NativeAot.Method.cpp.scriban",
-            "TemplateContext",
-            "Render(context)",
-            "LoadTemplate(",
+            "NativeAotTemplateCatalog.GetTranslationUnitTemplate()",
+            "NativeAotTemplateCatalog.GetObjectModelTemplate()",
+            "NativeAotTemplateCatalog.GetMethodTemplate()",
+            "ScribanTemplateRenderer.RenderTemplate(",
             "BuildObjectModelSection(",
             "BuildMethodSection(",
             "BuildGeneratedTranslationUnit(",
         ]:
             self.assertIn(required_fragment, emitter_source)
+
+        for retired_fragment in [
+            "using Scriban;",
+            "TemplateContext",
+            "Render(context)",
+            "LoadTemplate(",
+        ]:
+            self.assertNotIn(retired_fragment, emitter_source)
 
         self.assertTrue(NATIVE_AOT_PLANNER_PATH.is_file(), msg=f"missing planner source: {NATIVE_AOT_PLANNER_PATH}")
         self.assertTrue(NATIVE_AOT_TRANSLATION_TEMPLATE_PATH.is_file(), msg=f"missing translation template: {NATIVE_AOT_TRANSLATION_TEMPLATE_PATH}")

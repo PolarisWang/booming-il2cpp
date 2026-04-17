@@ -4,10 +4,20 @@ import json
 import unittest
 from pathlib import Path
 
+from tests.support import read_native_reference_planner_source
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 LOWERING_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceLoweringPlanner.cs"
 EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceProofEmitter.cs"
+CATALOG_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofCatalog.cs"
+)
 SUBJECT_WORKERS_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_workers.py"
 HOST_PROOF_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeReferenceProof.EngineHostProof.cpp.scriban"
 
@@ -32,15 +42,18 @@ class Phase3EngineHostProofTests(unittest.TestCase):
         )
 
     def test_engine_host_proof_codegen_and_worker_surface_lock_minimal_host_chain(self) -> None:
-        planner_source = LOWERING_PLANNER_PATH.read_text(encoding="utf-8")
+        planner_source = read_native_reference_planner_source(REPO_ROOT)
         emitter_source = EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = CATALOG_PATH.read_text(encoding="utf-8")
         workers_source = SUBJECT_WORKERS_PATH.read_text(encoding="utf-8")
         template_source = HOST_PROOF_TEMPLATE_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("engine.host-proof.minimal", planner_source)
+        self.assertIn("engine.host-proof.minimal", catalog_source)
+        self.assertIn("Templates/NativeReferenceProof.EngineHostProof.cpp.scriban", catalog_source)
+        self.assertIn("NativeReferenceProofCatalog.EngineHostProofMinimal", planner_source)
         self.assertIn("EngineHostProof/EngineHostEntry::Run()", planner_source)
-        self.assertIn("engine.host-proof.minimal", emitter_source)
-        self.assertIn("Templates/NativeReferenceProof.EngineHostProof.cpp.scriban", emitter_source)
+        self.assertIn("NativeReferenceProofCatalog.EngineHostProofMinimal", emitter_source)
+        self.assertIn("NativeReferenceProofCatalog.GetTemplateForPlan(", emitter_source)
 
         for required_fragment in [
             "engineContractSummary",

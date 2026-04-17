@@ -79,22 +79,22 @@
           "status": "recorded",
           "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
           "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-          "recordedAt": "2026-04-14T14:27:46.462775Z",
-          "gitCommit": "ce5f0ee",
+          "recordedAt": "2026-04-16T15:24:07.564381Z",
+          "gitCommit": "876ce31",
           "metrics": {
             "sampleCount": 3,
-            "meanDurationMs": 73.959,
-            "minDurationMs": 72.856,
-            "maxDurationMs": 74.888,
+            "meanDurationMs": 96.208,
+            "minDurationMs": 85.092,
+            "maxDurationMs": 115.753,
             "meanChecksum": 4.0,
             "minChecksum": 4.0,
             "maxChecksum": 4.0,
-            "meanElapsedMilliseconds": 73.959,
-            "minElapsedMilliseconds": 72.856,
-            "maxElapsedMilliseconds": 74.888,
-            "meanOpsPerSecond": 54.091,
-            "minOpsPerSecond": 53.413,
-            "maxOpsPerSecond": 54.903
+            "meanElapsedMilliseconds": 96.208,
+            "minElapsedMilliseconds": 85.092,
+            "maxElapsedMilliseconds": 115.753,
+            "meanOpsPerSecond": 42.378,
+            "minOpsPerSecond": 34.556,
+            "maxOpsPerSecond": 47.008
           },
           "reasonCode": "recorded",
           "reasonLabel": "Benchmark record captured."
@@ -119,8 +119,8 @@
         "unsupportedModeCount": 2,
         "isComplete": true
       },
-      "lastRecordedAt": "2026-04-14T14:27:46.462775Z",
-      "gitCommit": "ce5f0ee",
+      "lastRecordedAt": "2026-04-16T15:24:07.564381Z",
+      "gitCommit": "876ce31",
       "isStale": false,
       "comparison": {
         "nativeVsManaged": {
@@ -192,10 +192,10 @@
           "status": "recorded",
           "reasonCode": "recorded",
           "reasonLabel": "Benchmark record captured.",
-          "durationMs": 73.959,
-          "opsPerSecond": 54.091,
-          "recordedAt": "2026-04-14T14:27:46.462775Z",
-          "gitCommit": "ce5f0ee"
+          "durationMs": 96.208,
+          "opsPerSecond": 42.378,
+          "recordedAt": "2026-04-16T15:24:07.564381Z",
+          "gitCommit": "876ce31"
         },
         "relativeToManaged": {
           "native": {
@@ -237,7 +237,7 @@
   "latestByDevice": {
     "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd": {
       "managed": {
-        "runId": "20260414-142746-HotUpdateHostPack-managed",
+        "runId": "20260416-152407-HotUpdateHostPack-managed",
         "subject": "HotUpdateHostPack",
         "mode": "managed",
         "platform": "windows",
@@ -249,23 +249,23 @@
           "arch": "x64",
           "isSimulator": false
         },
-        "recordedAt": "2026-04-14T14:27:46.462775Z",
-        "gitCommit": "ce5f0ee",
+        "recordedAt": "2026-04-16T15:24:07.564381Z",
+        "gitCommit": "876ce31",
         "gitBranch": "main",
         "metrics": {
           "sampleCount": 3,
-          "meanDurationMs": 73.959,
-          "minDurationMs": 72.856,
-          "maxDurationMs": 74.888,
+          "meanDurationMs": 96.208,
+          "minDurationMs": 85.092,
+          "maxDurationMs": 115.753,
           "meanChecksum": 4.0,
           "minChecksum": 4.0,
           "maxChecksum": 4.0,
-          "meanElapsedMilliseconds": 73.959,
-          "minElapsedMilliseconds": 72.856,
-          "maxElapsedMilliseconds": 74.888,
-          "meanOpsPerSecond": 54.091,
-          "minOpsPerSecond": 53.413,
-          "maxOpsPerSecond": 54.903
+          "meanElapsedMilliseconds": 96.208,
+          "minElapsedMilliseconds": 85.092,
+          "maxElapsedMilliseconds": 115.753,
+          "meanOpsPerSecond": 42.378,
+          "minOpsPerSecond": 34.556,
+          "maxOpsPerSecond": 47.008
         }
       }
     }
@@ -333,22 +333,22 @@
             "status": "recorded",
             "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
             "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "recordedAt": "2026-04-14T14:27:50.745754Z",
-            "gitCommit": "ce5f0ee",
+            "recordedAt": "2026-04-16T15:24:14.892082Z",
+            "gitCommit": "876ce31",
             "metrics": {
               "sampleCount": 3,
-              "meanDurationMs": 3.874,
-              "minDurationMs": 3.575,
-              "maxDurationMs": 4.209,
+              "meanDurationMs": 4.633,
+              "minDurationMs": 4.505,
+              "maxDurationMs": 4.699,
               "meanChecksum": 8000.0,
               "minChecksum": 8000.0,
               "maxChecksum": 8000.0,
-              "meanElapsedMilliseconds": 3.874,
-              "minElapsedMilliseconds": 3.575,
-              "maxElapsedMilliseconds": 4.209,
-              "meanOpsPerSecond": 1037.054,
-              "minOpsPerSecond": 950.344,
-              "maxOpsPerSecond": 1118.881
+              "meanElapsedMilliseconds": 4.633,
+              "minElapsedMilliseconds": 4.505,
+              "maxElapsedMilliseconds": 4.699,
+              "meanOpsPerSecond": 863.735,
+              "minOpsPerSecond": 851.227,
+              "maxOpsPerSecond": 887.843
             },
             "reasonCode": "recorded",
             "reasonLabel": "Benchmark record captured."
@@ -379,10 +379,10 @@
             "status": "recorded",
             "reasonCode": "recorded",
             "reasonLabel": "Benchmark record captured.",
-            "durationMs": 3.874,
-            "opsPerSecond": 1037.054,
-            "recordedAt": "2026-04-14T14:27:50.745754Z",
-            "gitCommit": "ce5f0ee"
+            "durationMs": 4.633,
+            "opsPerSecond": 863.735,
+            "recordedAt": "2026-04-16T15:24:14.892082Z",
+            "gitCommit": "876ce31"
           },
           "relativeToManaged": {
             "native": {
@@ -482,22 +482,22 @@
             "status": "recorded",
             "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
             "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "recordedAt": "2026-04-14T14:27:55.295091Z",
-            "gitCommit": "ce5f0ee",
+            "recordedAt": "2026-04-16T15:24:20.750918Z",
+            "gitCommit": "876ce31",
             "metrics": {
               "sampleCount": 3,
-              "meanDurationMs": 75.791,
-              "minDurationMs": 73.596,
-              "maxDurationMs": 78.791,
+              "meanDurationMs": 81.794,
+              "minDurationMs": 75.748,
+              "maxDurationMs": 87.222,
               "meanChecksum": 4.0,
               "minChecksum": 4.0,
               "maxChecksum": 4.0,
-              "meanElapsedMilliseconds": 75.791,
-              "minElapsedMilliseconds": 73.596,
-              "maxElapsedMilliseconds": 78.791,
-              "meanOpsPerSecond": 52.82,
-              "minOpsPerSecond": 50.767,
-              "maxOpsPerSecond": 54.351
+              "meanElapsedMilliseconds": 81.794,
+              "minElapsedMilliseconds": 75.748,
+              "maxElapsedMilliseconds": 87.222,
+              "meanOpsPerSecond": 49.068,
+              "minOpsPerSecond": 45.86,
+              "maxOpsPerSecond": 52.806
             },
             "reasonCode": "recorded",
             "reasonLabel": "Benchmark record captured."
@@ -528,10 +528,10 @@
             "status": "recorded",
             "reasonCode": "recorded",
             "reasonLabel": "Benchmark record captured.",
-            "durationMs": 75.791,
-            "opsPerSecond": 52.82,
-            "recordedAt": "2026-04-14T14:27:55.295091Z",
-            "gitCommit": "ce5f0ee"
+            "durationMs": 81.794,
+            "opsPerSecond": 49.068,
+            "recordedAt": "2026-04-16T15:24:20.750918Z",
+            "gitCommit": "876ce31"
           },
           "relativeToManaged": {
             "native": {
@@ -631,22 +631,22 @@
             "status": "recorded",
             "deviceId": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
             "deviceName": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "recordedAt": "2026-04-14T14:27:59.320789Z",
-            "gitCommit": "ce5f0ee",
+            "recordedAt": "2026-04-16T15:24:26.527558Z",
+            "gitCommit": "876ce31",
             "metrics": {
               "sampleCount": 3,
-              "meanDurationMs": 4.562,
-              "minDurationMs": 4.449,
-              "maxDurationMs": 4.652,
+              "meanDurationMs": 5.611,
+              "minDurationMs": 5.011,
+              "maxDurationMs": 6.2,
               "meanChecksum": 6000.0,
               "minChecksum": 6000.0,
               "maxChecksum": 6000.0,
-              "meanElapsedMilliseconds": 4.562,
-              "minElapsedMilliseconds": 4.449,
-              "maxElapsedMilliseconds": 4.652,
-              "meanOpsPerSecond": 877.149,
-              "minOpsPerSecond": 859.845,
-              "maxOpsPerSecond": 899.058
+              "meanElapsedMilliseconds": 5.611,
+              "minElapsedMilliseconds": 5.011,
+              "maxElapsedMilliseconds": 6.2,
+              "meanOpsPerSecond": 718.225,
+              "minOpsPerSecond": 645.14,
+              "maxOpsPerSecond": 798.196
             },
             "reasonCode": "recorded",
             "reasonLabel": "Benchmark record captured."
@@ -677,10 +677,10 @@
             "status": "recorded",
             "reasonCode": "recorded",
             "reasonLabel": "Benchmark record captured.",
-            "durationMs": 4.562,
-            "opsPerSecond": 877.149,
-            "recordedAt": "2026-04-14T14:27:59.320789Z",
-            "gitCommit": "ce5f0ee"
+            "durationMs": 5.611,
+            "opsPerSecond": 718.225,
+            "recordedAt": "2026-04-16T15:24:26.527558Z",
+            "gitCommit": "876ce31"
           },
           "relativeToManaged": {
             "native": {
@@ -883,6 +883,38 @@
   "history": {
     "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd": {
       "managed": [
+        {
+          "runId": "20260416-152407-HotUpdateHostPack-managed",
+          "subject": "HotUpdateHostPack",
+          "mode": "managed",
+          "platform": "windows",
+          "device": {
+            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
+            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
+            "os": "Windows 10.0.26100",
+            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+            "arch": "x64",
+            "isSimulator": false
+          },
+          "recordedAt": "2026-04-16T15:24:07.564381Z",
+          "gitCommit": "876ce31",
+          "gitBranch": "main",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 96.208,
+            "minDurationMs": 85.092,
+            "maxDurationMs": 115.753,
+            "meanChecksum": 4.0,
+            "minChecksum": 4.0,
+            "maxChecksum": 4.0,
+            "meanElapsedMilliseconds": 96.208,
+            "minElapsedMilliseconds": 85.092,
+            "maxElapsedMilliseconds": 115.753,
+            "meanOpsPerSecond": 42.378,
+            "minOpsPerSecond": 34.556,
+            "maxOpsPerSecond": 47.008
+          }
+        },
         {
           "runId": "20260414-142746-HotUpdateHostPack-managed",
           "subject": "HotUpdateHostPack",
@@ -1489,38 +1521,6 @@
             "meanOpsPerSecond": 71.644,
             "minOpsPerSecond": 69.578,
             "maxOpsPerSecond": 72.915
-          }
-        },
-        {
-          "runId": "20260413-140107-HotUpdateHostPack-managed",
-          "subject": "HotUpdateHostPack",
-          "mode": "managed",
-          "platform": "windows",
-          "device": {
-            "id": "windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-            "name": "Windows PC (AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD)",
-            "os": "Windows 10.0.26100",
-            "cpu": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
-            "arch": "x64",
-            "isSimulator": false
-          },
-          "recordedAt": "2026-04-13T14:01:07.253002Z",
-          "gitCommit": "d0b7303",
-          "gitBranch": "main",
-          "metrics": {
-            "sampleCount": 3,
-            "meanDurationMs": 56.477,
-            "minDurationMs": 55.757,
-            "maxDurationMs": 56.888,
-            "meanChecksum": 4.0,
-            "minChecksum": 4.0,
-            "maxChecksum": 4.0,
-            "meanElapsedMilliseconds": 56.477,
-            "minElapsedMilliseconds": 55.757,
-            "maxElapsedMilliseconds": 56.888,
-            "meanOpsPerSecond": 70.831,
-            "minOpsPerSecond": 70.314,
-            "maxOpsPerSecond": 71.74
           }
         }
       ]

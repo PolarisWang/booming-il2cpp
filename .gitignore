@@ -1,6 +1,5 @@
 # Local workflow state
 .booming/
-.codex/
 .claude/
 docs/executions/
 
@@ -55,3 +54,4 @@ compile_commands.json
 
 # Temporary scratch directories
 .tmp_*/
+.tmp-tools/

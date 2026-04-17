@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import importlib.util
 import sys
@@ -119,6 +119,11 @@ class GeneratedManagedHostsTests(unittest.TestCase):
             entries=proof_entries,
         )
 
+        self.assertIn("ChaosManagedHostArguments.Parse(args)", source_text)
+        self.assertIn("ChaosTestCollectionLoader.EnsureEntryExists", source_text)
+        self.assertIn("ChaosManagedHostKind.Proof", source_text)
+        self.assertIn("ChaosAssertState.Reset();", source_text)
+        self.assertIn("return ChaosAssertState.Complete();", source_text)
         self.assertIn("public static int Execute(int entryIndex)", source_text)
         self.assertIn("switch (entryIndex)", source_text)
         self.assertIn("case 0:", source_text)
@@ -152,13 +157,19 @@ class GeneratedManagedHostsTests(unittest.TestCase):
             entries=benchmark_entries,
         )
 
+        self.assertIn("ChaosManagedHostKind.Benchmark", source_text)
+        self.assertIn("ChaosTestCollectionLoader.EnsureEntryExists", source_text)
         self.assertIn("public static IReadOnlyList<DeclaredBenchmarkEntry> Entries", source_text)
         self.assertIn('"generic-bench"', source_text)
         self.assertIn('"FixtureSubject::FixtureSubject::FixtureSubject.GenericBenchmarks::Run()"', source_text)
-        self.assertIn("entryIndex: 0", source_text)
-        self.assertIn("warmupCount: 2", source_text)
-        self.assertIn("iterationCount: 5", source_text)
-        self.assertIn("invocationCount: 10", source_text)
+        self.assertIn("EntryIndex: 0", source_text)
+        self.assertIn('AssemblyName: "FixtureSubject"', source_text)
+        self.assertIn('DeclaringType: "FixtureSubject.GenericBenchmarks"', source_text)
+        self.assertIn('MethodName: "Run"', source_text)
+        self.assertIn('MethodSignature: "Run()"', source_text)
+        self.assertIn("WarmupCount: 2", source_text)
+        self.assertIn("IterationCount: 5", source_text)
+        self.assertIn("InvocationCount: 10", source_text)
 
     def test_render_declared_test_host_source_rejects_empty_catalog(self) -> None:
         generated_hosts_module = load_module(
@@ -205,16 +216,23 @@ class GeneratedManagedHostsTests(unittest.TestCase):
             subject_id="FixtureSubject",
             host_kind="proof-host",
             project_references=[
-                "subjects/FixtureSubject/source/FixtureSubject.csproj",
-                "subjects/FixtureSubject/source/FixtureSubject.Support.csproj",
+                "../../../../subjects/FixtureSubject/source/FixtureSubject.csproj",
+                "../../../../subjects/FixtureSubject/source/FixtureSubject.Support.csproj",
             ],
+            generated_source_path="Generated/ChaosGeneratedDeclaredTests.g.cs",
+            assembly_name="FixtureSubject.DeclaredProofHost",
         )
 
-        self.assertIn("Chaos.TestFramework.csproj", project_text)
-        self.assertIn("subjects/FixtureSubject/source/FixtureSubject.csproj", project_text)
-        self.assertIn("subjects/FixtureSubject/source/FixtureSubject.Support.csproj", project_text)
+        self.assertIn("Chaos.TestFramework.Sdk.csproj", project_text)
+        self.assertIn("Chaos.TestFramework.Runtime.csproj", project_text)
+        self.assertIn("../../../../subjects/FixtureSubject/source/FixtureSubject.csproj", project_text)
+        self.assertIn("../../../../subjects/FixtureSubject/source/FixtureSubject.Support.csproj", project_text)
         self.assertIn("<TargetFramework>net8.0</TargetFramework>", project_text)
+        self.assertIn("<OutputType>Exe</OutputType>", project_text)
+        self.assertIn("<EnableDefaultCompileItems>false</EnableDefaultCompileItems>", project_text)
+        self.assertIn('<Compile Include="Generated/ChaosGeneratedDeclaredTests.g.cs" />', project_text)
 
 
 if __name__ == "__main__":
     unittest.main()
+

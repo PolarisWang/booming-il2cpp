@@ -139,14 +139,14 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
         generated_root = managed_tests_root / "Generated"
         project_path = managed_tests_root / f"{subject_id}.DeclaredBenchmarkHost.csproj"
         generated_source_path = generated_root / "ChaosGeneratedDeclaredBenchmarks.g.cs"
-        catalog_path = generated_root / "declared-tests.catalog.json"
+        collection_path = generated_root / "declared-tests.collection.json"
         manifest_path = workspace_root / "workspace.manifest.json"
 
         for path in [project_path, generated_source_path]:
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("<Project />\n" if path.suffix == ".csproj" else "// fixture\n", encoding="utf-8")
 
-        catalog_payload = {
+        collection_payload = {
             "subjectId": subject_id,
             "frameworkReferenced": True,
             "subjectKind": "declared-test",
@@ -175,7 +175,7 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
                 }
             ],
         }
-        catalog_path.write_text(json.dumps(catalog_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        collection_path.write_text(json.dumps(collection_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
         manifest_payload: dict[str, Any] = {
             "workspaceVersion": 2,
@@ -189,7 +189,7 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
                     "projectPath": project_path.relative_to(repo_root).as_posix(),
                     "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
                     "hostKind": "benchmark-host",
-                    "catalogPath": catalog_path.relative_to(repo_root).as_posix(),
+                "collectionPath": collection_path.relative_to(repo_root).as_posix(),
                     "generatedSourcePath": generated_source_path.relative_to(repo_root).as_posix(),
                 }
             ],
@@ -610,7 +610,7 @@ class BenchmarkDashboardGeneratorTests(unittest.TestCase):
                         "",
                         "def build_subject_declared_test_catalog(*, repo_root, subject_id, force_build=False):",
                         "    del repo_root, subject_id, force_build",
-                        "    raise RuntimeError('compiled catalog unavailable')",
+                        "    raise RuntimeError('compiled collection unavailable')",
                         "",
                     ]
                 ),

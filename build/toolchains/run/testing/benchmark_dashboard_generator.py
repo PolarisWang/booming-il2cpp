@@ -11,14 +11,14 @@ from typing import Any
 try:
     from . import capability_coverage as capability_coverage_module
     from . import declared_metadata_labels as declared_metadata_labels_module
-    from . import workspace_declared_catalog as workspace_declared_catalog_module
+    from . import workspace_declared_collection as workspace_declared_collection_module
 except ImportError:
     testing_root = Path(__file__).resolve().parent
     if str(testing_root) not in sys.path:
         sys.path.insert(0, str(testing_root))
     import capability_coverage as capability_coverage_module
     import declared_metadata_labels as declared_metadata_labels_module
-    import workspace_declared_catalog as workspace_declared_catalog_module
+    import workspace_declared_collection as workspace_declared_collection_module
 
 
 _MODE_ORDER = declared_metadata_labels_module.MODE_ORDER
@@ -152,13 +152,13 @@ def _declared_source_entry(entry: dict[str, Any]) -> str:
 
 
 def _load_declared_benchmark_cases(repo_root: Path, subject_id: str) -> dict[str, dict[str, Any]]:
-    workspace_catalog = workspace_declared_catalog_module.load_workspace_declared_catalog(
+    workspace_collection = workspace_declared_collection_module.load_workspace_declared_collection(
         repo_root,
         subject_id,
         host_kind="benchmark-host",
     )
-    if workspace_catalog is not None:
-        return _declared_benchmark_cases_from_catalog(workspace_catalog)
+    if workspace_collection is not None:
+        return _declared_benchmark_cases_from_catalog(workspace_collection)
 
     testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
     try:

@@ -8,6 +8,10 @@ public sealed class SemanticWorldStage
         "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String)";
     private const string PairStringConcatSubjectId =
         "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
+    private const string StringJoinStringEnumerableSubjectId =
+        "System.Private.CoreLib/System.String::Join(System.String,System.Collections.Generic.IEnumerable<System.String>)";
+    private const string GenericStringJoinEnumerableSubjectIdPrefix =
+        "System.Private.CoreLib/System.String::Join<";
     private const string ConsoleWriteLineStringSubjectId =
         "System.Console/System.Console::WriteLine(System.String)";
     private const string TypeGetTypeFromHandleSubjectId =
@@ -403,6 +407,11 @@ public sealed class SemanticWorldStage
                 capabilities.Add("requires-monitor-enter-exit");
             }
 
+            if (IsStringJoinEnumerableSurface(instruction.Callee))
+            {
+                capabilities.Add("requires-string-join-enumerable");
+            }
+
             if (reference is not null &&
                 internalAssemblyNames.Contains(reference.AssemblyName) &&
                 importMethods.Contains(reference.SubjectId))
@@ -501,6 +510,18 @@ public sealed class SemanticWorldStage
                (subjectId.Contains("TaskAwaiter", StringComparison.Ordinal) ||
                 subjectId.Contains("::GetAwaiter(", StringComparison.Ordinal) ||
                 subjectId.Contains("::GetResult(", StringComparison.Ordinal));
+    }
+
+    private static bool IsStringJoinEnumerableSurface(string? subjectId)
+    {
+        if (string.IsNullOrWhiteSpace(subjectId))
+        {
+            return false;
+        }
+
+        return string.Equals(subjectId, StringJoinStringEnumerableSubjectId, StringComparison.Ordinal) ||
+               (subjectId.StartsWith(GenericStringJoinEnumerableSubjectIdPrefix, StringComparison.Ordinal) &&
+                subjectId.Contains("(System.String,System.Collections.Generic.IEnumerable<", StringComparison.Ordinal));
     }
 
     private static bool IsInterfaceDispatchCallee(

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\\SharedContracts\\GoldenHotUpdate.SharedContracts.csproj" />
     <ProjectReference Include="..\\PatchModules\\GoldenHotUpdate.PatchModule.csproj" />
-    <ProjectReference Include="..\\..\\..\\..\\..\\..\\src\\reference\\Chaos.TestFramework\\Chaos.TestFramework.csproj" />
+    <ProjectReference Include="..\\..\\..\\..\\..\\..\\src\\reference\\Chaos.TestFramework.Sdk\\Chaos.TestFramework.Sdk.csproj" />
   </ItemGroup>
 </Project>
+

@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import shutil
 import subprocess
@@ -42,8 +42,8 @@ DLL_PATH = (
     / "net8.0"
     / "CoreRuntimeFeatures.dll"
 )
-TEST_FRAMEWORK_PROJECT_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework" / "Chaos.TestFramework.csproj"
-TEST_FRAMEWORK_DLL_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework" / "bin" / "Release" / "net8.0" / "Chaos.TestFramework.dll"
+TEST_FRAMEWORK_PROJECT_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"
+TEST_FRAMEWORK_DLL_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "bin" / "Release" / "net8.0" / "Chaos.TestFramework.Sdk.dll"
 ENTRY_SUBJECT_ID = "CoreRuntimeFeatures/ExceptionCatchProofEntry::Run()"
 TEST_OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase4d-exception-native-aot"
 
@@ -162,3 +162,4 @@ class Phase4DExceptionNativeAotTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

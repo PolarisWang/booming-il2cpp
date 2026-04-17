@@ -29,6 +29,57 @@ def load_module(path: Path, module_name: str):
     spec.loader.exec_module(module)
     return module
 
+
+def read_text_bundle(*paths: Path) -> str:
+    return "\n".join(path.read_text(encoding="utf-8") for path in paths)
+
+
+def read_contracts_source(repo_root: Path = REPO_ROOT) -> str:
+    contracts_root = repo_root / "src" / "managed" / "Chaos.IL2CPP.Contracts"
+    return read_text_bundle(
+        contracts_root / "ManagedClosureContracts.cs",
+        contracts_root / "ManagedNaming.cs",
+        contracts_root / "ManagedClosureModels.cs",
+        contracts_root / "ManagedMethodIdentityContracts.cs",
+        contracts_root / "ManagedSemanticWorldContracts.cs",
+        contracts_root / "TypedIlAndAotCoreIrContracts.cs",
+        contracts_root / "ManagedClosureArtifactModels.cs",
+    )
+
+
+def read_loader_stage_source(repo_root: Path = REPO_ROOT) -> str:
+    loader_root = repo_root / "src" / "managed" / "Chaos.IL2CPP.Loader"
+    return read_text_bundle(
+        loader_root / "LoaderStage.cs",
+        loader_root / "LoaderStage.CrossAssemblyInstantiation.cs",
+        loader_root / "LoaderStage.AssemblyLoading.cs",
+        loader_root / "LoaderStage.InstructionDecoding.cs",
+        loader_root / "LoaderStage.MetadataResolution.cs",
+        loader_root / "LoaderStage.GenericMaterialization.cs",
+    )
+
+
+def read_linker_stage_source(repo_root: Path = REPO_ROOT) -> str:
+    linker_root = repo_root / "src" / "managed" / "Chaos.IL2CPP.Linker"
+    return read_text_bundle(
+        linker_root / "LinkerStage.cs",
+        linker_root / "LinkerStage.Reachability.cs",
+        linker_root / "LinkerStage.OptimizationFacts.cs",
+        linker_root / "LinkerStage.DispatchResolution.cs",
+        linker_root / "LinkerStage.OutputProjection.cs",
+    )
+
+
+def read_native_reference_planner_source(repo_root: Path = REPO_ROOT) -> str:
+    codegen_root = repo_root / "src" / "managed" / "Chaos.IL2CPP.CodeGen"
+    reference_root = codegen_root / "ReferenceProof"
+    return read_text_bundle(
+        codegen_root / "NativeReferenceLoweringPlanner.cs",
+        reference_root / "NativeReferenceLoweringPlanner.EngineAndFamilySelection.cs",
+        reference_root / "NativeReferenceLoweringPlanner.PlanBuilders.cs",
+        reference_root / "NativeReferenceLoweringPlanner.ShapeValidation.cs",
+    )
+
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

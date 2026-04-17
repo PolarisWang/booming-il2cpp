@@ -40,6 +40,7 @@ def write_windows_subject_native_project_stubs(
     *,
     generated_text: str = "<Project />\n",
     proof_text: str = "<Project />\n",
+    benchmark_text: str | None = None,
 ) -> None:
     generated_project = configure_root / "generated" / "chaos_subject_generated_native.vcxproj"
     proof_project = configure_root / "proof" / "chaos_subject_reference_proof.vcxproj"
@@ -47,6 +48,10 @@ def write_windows_subject_native_project_stubs(
     proof_project.parent.mkdir(parents=True, exist_ok=True)
     generated_project.write_text(generated_text, encoding="utf-8")
     proof_project.write_text(proof_text, encoding="utf-8")
+    if benchmark_text is not None:
+        benchmark_project = configure_root / "benchmark" / "chaos_subject_native_aot.vcxproj"
+        benchmark_project.parent.mkdir(parents=True, exist_ok=True)
+        benchmark_project.write_text(benchmark_text, encoding="utf-8")
 
 
 def declared_catalog_fixture(subject_id: str = "FixtureSubject") -> dict:
@@ -94,6 +99,57 @@ def declared_catalog_fixture(subject_id: str = "FixtureSubject") -> dict:
                 "warmupCount": 2,
                 "iterationCount": 5,
                 "invocationCount": 10,
+            }
+        ],
+    }
+
+
+def hotupdate_declared_catalog_fixture(subject_id: str = "FixtureHotUpdateSubject") -> dict:
+    patch_assembly_name = f"{subject_id}.Patch"
+    return {
+        "subjectId": subject_id,
+        "frameworkReferenced": True,
+        "subjectKind": "declared-test",
+        "warningCodes": [],
+        "declaredUnitTests": [
+            {
+                "stableId": f"{subject_id}::{patch_assembly_name}::{patch_assembly_name}.Proofs::Verify()",
+                "entryIndex": 0,
+                "alias": "hotupdate-proof",
+                "assemblyName": patch_assembly_name,
+                "declaringType": f"{patch_assembly_name}.Proofs",
+                "methodName": "Verify",
+                "methodSignature": "Verify()",
+                "category": 5,
+                "capabilityFamily": 13,
+                "capabilityItem": 54,
+                "archetype": 8,
+                "hotUpdateCapability": 1,
+                "requires": 32,
+                "evidence": 1,
+                "priority": 1,
+            }
+        ],
+        "declaredBenchmarks": [
+            {
+                "stableId": f"{subject_id}::{patch_assembly_name}::{patch_assembly_name}.Benchmarks::RunWorkload()",
+                "entryIndex": 0,
+                "alias": "hotupdate-benchmark",
+                "assemblyName": patch_assembly_name,
+                "declaringType": f"{patch_assembly_name}.Benchmarks",
+                "methodName": "RunWorkload",
+                "methodSignature": "RunWorkload()",
+                "category": 4,
+                "capabilityFamily": 13,
+                "capabilityItem": 54,
+                "archetype": 8,
+                "hotUpdateCapability": 1,
+                "requires": 32,
+                "metrics": 1,
+                "modes": 5,
+                "warmupCount": 1,
+                "iterationCount": 5,
+                "invocationCount": 1,
             }
         ],
     }
@@ -420,6 +476,175 @@ class ProjectWorkspaceTests(unittest.TestCase):
             },
         )
 
+    def _write_hotupdate_subject_fixture(
+        self,
+        repo_root: Path,
+        *,
+        subject_id: str = "FixtureHotUpdateSubject",
+    ) -> None:
+        source_root = repo_root / "subjects" / subject_id / "source"
+        host_project = source_root / "Host" / f"{subject_id}.Host.csproj"
+        patch_project = source_root / "Patch" / f"{subject_id}.Patch.csproj"
+        shared_project = source_root / "Shared" / f"{subject_id}.Shared.csproj"
+        solution_path = source_root / f"{subject_id}.sln"
+
+        host_project.parent.mkdir(parents=True, exist_ok=True)
+        patch_project.parent.mkdir(parents=True, exist_ok=True)
+        shared_project.parent.mkdir(parents=True, exist_ok=True)
+        host_project.write_text(
+            "\n".join(
+                [
+                    "<Project>",
+                    "  <PropertyGroup>",
+                    f"    <AssemblyName>{subject_id}.Host</AssemblyName>",
+                    "  </PropertyGroup>",
+                    "</Project>",
+                    "",
+                ]
+            ),
+            encoding="utf-8",
+        )
+        patch_project.write_text(
+            "\n".join(
+                [
+                    "<Project>",
+                    "  <PropertyGroup>",
+                    f"    <AssemblyName>{subject_id}.Patch</AssemblyName>",
+                    "  </PropertyGroup>",
+                    "</Project>",
+                    "",
+                ]
+            ),
+            encoding="utf-8",
+        )
+        shared_project.write_text(
+            "\n".join(
+                [
+                    "<Project>",
+                    "  <PropertyGroup>",
+                    f"    <AssemblyName>{subject_id}.Shared</AssemblyName>",
+                    "  </PropertyGroup>",
+                    "</Project>",
+                    "",
+                ]
+            ),
+            encoding="utf-8",
+        )
+        solution_path.write_text(
+            "\n".join(
+                [
+                    "Project(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"Host\", \"Host\\\\"
+                    f"{subject_id}.Host.csproj\", \"{{11111111-1111-1111-1111-111111111111}}\"",
+                    "EndProject",
+                    "Project(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"Patch\", \"Patch\\\\"
+                    f"{subject_id}.Patch.csproj\", \"{{22222222-2222-2222-2222-222222222222}}\"",
+                    "EndProject",
+                    "Project(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"Shared\", \"Shared\\\\"
+                    f"{subject_id}.Shared.csproj\", \"{{33333333-3333-3333-3333-333333333333}}\"",
+                    "EndProject",
+                    "",
+                ]
+            ),
+            encoding="utf-8",
+        )
+
+        write_json(
+            repo_root / "subjects" / subject_id / "subject.manifest.json",
+            {
+                "subjectId": subject_id,
+                "displayName": subject_id,
+                "defaultGoal": "correctness.dev",
+                "defaultMatrix": "windows-hotupdate-proof",
+                "defaultValidationProfile": "proof-dev",
+                "engineeringProfile": "hot-update-host",
+                "source": {
+                    "type": "dotnet-project",
+                    "path": f"subjects/{subject_id}/source/{subject_id}.sln",
+                    "primaryProjectPath": f"subjects/{subject_id}/source/Host/{subject_id}.Host.csproj",
+                    "entry": f"{subject_id}.Host/Program::Main()",
+                },
+                "hotUpdate": {
+                    "patchProjectPaths": [
+                        f"subjects/{subject_id}/source/Patch/{subject_id}.Patch.csproj",
+                    ]
+                },
+                "validationProfiles": {
+                    "proof-dev": ["proof"],
+                    "perf-dev": ["perf"],
+                },
+                "validation": {
+                    "proof": {
+                        "kind": "proof",
+                        "defaultVariant": "CHECK",
+                    },
+                    "perf": {
+                        "kind": "perf",
+                        "driver": "interpreter-runtime-perf",
+                        "project": "src/validation/perf/Benchmark.WorkloadEntry.PerfHarness/Benchmark.WorkloadEntry.PerfHarness.csproj",
+                        "defaultVariant": "PROFILE",
+                    },
+                },
+                "executionPipelines": [
+                    {
+                        "pipelineId": "hotupdate-proof",
+                        "stages": [
+                            {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source"},
+                            {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input"},
+                            {"stageId": "runtime-managed-output", "kind": "runtime-managed-output", "scope": "matrix", "bucket": "runtime"},
+                        ],
+                    },
+                    {
+                        "pipelineId": "hotupdate-benchmark",
+                        "stages": [
+                            {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source"},
+                            {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input"},
+                            {"stageId": "interpreter-runtime-perf", "kind": "interpreter-runtime-perf", "scope": "matrix", "bucket": "runtime"},
+                        ],
+                    },
+                ],
+                "environmentMatrices": [
+                    {
+                        "matrixId": "windows-hotupdate-proof",
+                        "pipelineId": "hotupdate-proof",
+                        "supportedGoals": ["correctness.dev"],
+                        "executionContext": {
+                            "hostPlatform": "windows-x64",
+                            "targetPlatform": "windows-x64",
+                            "toolchainProfile": "dotnet-managed",
+                            "runtimeProfile": "hot-update-proof",
+                        },
+                        "validationIntent": {
+                            "validationMode": "output",
+                            "adaptationLevel": "hot-update-host",
+                            "expectedOutcome": "pass",
+                        },
+                        "artifactPlan": {
+                            "evidenceTerminalBucket": "runtime",
+                        },
+                    },
+                    {
+                        "matrixId": "windows-hotupdate-benchmark",
+                        "pipelineId": "hotupdate-benchmark",
+                        "supportedGoals": ["perf.release"],
+                        "executionContext": {
+                            "hostPlatform": "windows-x64",
+                            "targetPlatform": "windows-x64",
+                            "toolchainProfile": "dotnet-managed",
+                            "runtimeProfile": "hot-update-benchmark",
+                        },
+                        "validationIntent": {
+                            "validationMode": "perf",
+                            "adaptationLevel": "hot-update-host",
+                            "expectedOutcome": "pass",
+                        },
+                        "artifactPlan": {
+                            "evidenceTerminalBucket": "runtime",
+                        },
+                    },
+                ],
+            },
+        )
+
     def test_generate_subject_workspace_writes_manifest_solution_and_native_configure_root(self) -> None:
         workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_generate")
         repo_root = self._make_repo_root("subject-generate")
@@ -471,7 +696,7 @@ class ProjectWorkspaceTests(unittest.TestCase):
                         "projectPath": "solutions/subjects/FixtureSubject/managed-tests/FixtureSubject.DeclaredProofHost.csproj",
                         "assemblyName": "FixtureSubject.DeclaredProofHost",
                         "hostKind": "proof-host",
-                        "catalogPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.catalog.json",
+                    "collectionPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.collection.json",
                         "generatedSourcePath": "solutions/subjects/FixtureSubject/managed-tests/Generated/ChaosGeneratedDeclaredTests.g.cs",
                     },
                     {
@@ -479,7 +704,7 @@ class ProjectWorkspaceTests(unittest.TestCase):
                         "projectPath": "solutions/subjects/FixtureSubject/managed-tests/FixtureSubject.DeclaredBenchmarkHost.csproj",
                         "assemblyName": "FixtureSubject.DeclaredBenchmarkHost",
                         "hostKind": "benchmark-host",
-                        "catalogPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.catalog.json",
+                    "collectionPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.collection.json",
                         "generatedSourcePath": "solutions/subjects/FixtureSubject/managed-tests/Generated/ChaosGeneratedDeclaredBenchmarks.g.cs",
                     },
                 ],
@@ -549,7 +774,22 @@ class ProjectWorkspaceTests(unittest.TestCase):
             self.assertTrue((repo_root / manifest["managedTestProjects"][1]["projectPath"]).is_file())
             self.assertTrue((repo_root / manifest["managedTestProjects"][0]["generatedSourcePath"]).is_file())
             self.assertTrue((repo_root / manifest["managedTestProjects"][1]["generatedSourcePath"]).is_file())
-            self.assertTrue((repo_root / manifest["managedTestProjects"][0]["catalogPath"]).is_file())
+            self.assertTrue((repo_root / manifest["managedTestProjects"][0]["collectionPath"]).is_file())
+            proof_project_text = (repo_root / manifest["managedTestProjects"][0]["projectPath"]).read_text(encoding="utf-8")
+            benchmark_project_text = (repo_root / manifest["managedTestProjects"][1]["projectPath"]).read_text(encoding="utf-8")
+            self.assertIn("<EnableDefaultCompileItems>false</EnableDefaultCompileItems>", proof_project_text)
+            self.assertIn(
+                '<Compile Include="Generated/ChaosGeneratedDeclaredTests.g.cs" />',
+                proof_project_text,
+            )
+            self.assertIn(
+                '<Compile Include="Generated/ChaosGeneratedDeclaredBenchmarks.g.cs" />',
+                benchmark_project_text,
+            )
+            self.assertIn(
+                '<ProjectReference Include="../../../../subjects/FixtureSubject/source/FixtureSubject.csproj" />',
+                proof_project_text,
+            )
             mirrored_subject_exec_root = repo_root / "solutions" / "subjects" / "FixtureSubject" / "generated" / "subject-exec"
             self.assertTrue((mirrored_subject_exec_root / "analysis" / "generated" / "generated.manifest.json").is_file())
             self.assertTrue((mirrored_subject_exec_root / "analysis" / "generated" / "native-reference.plan.json").is_file())
@@ -577,6 +817,79 @@ class ProjectWorkspaceTests(unittest.TestCase):
                     f"-DCHAOS_SUBJECT_RUNTIME_ROOT={repo_root / 'solutions' / 'subjects' / 'FixtureSubject' / 'native' / 'windows-dev-output' / 'runtime'}",
                 ],
                 run_process_mock.call_args.args[0],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_generate_subject_workspace_writes_hotupdate_patch_and_test_projects(self) -> None:
+        workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_generate_hotupdate")
+        repo_root = self._make_repo_root("subject-generate-hotupdate")
+        self._write_hotupdate_subject_fixture(repo_root)
+
+        try:
+            with patch.object(
+                workspace_module.compiled_catalog_module,
+                "build_subject_declared_test_catalog",
+                return_value=hotupdate_declared_catalog_fixture(),
+            ):
+                result = workspace_module.generate_subject_workspace(
+                    repo_root,
+                    "windows",
+                    {"id": "subject/FixtureHotUpdateSubject"},
+                )
+
+            manifest = json.loads((repo_root / result["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(
+                [
+                    {
+                        "projectId": "hotupdate-patch/FixtureHotUpdateSubject/FixtureHotUpdateSubject_Patch",
+                        "managedProjectId": "managed/FixtureHotUpdateSubject/FixtureHotUpdateSubject_Patch",
+                        "projectPath": "subjects/FixtureHotUpdateSubject/source/Patch/FixtureHotUpdateSubject.Patch.csproj",
+                        "assemblyName": "FixtureHotUpdateSubject.Patch",
+                    }
+                ],
+                manifest["hotupdatePatchProjects"],
+            )
+            self.assertEqual(
+                [
+                    "hotupdate-test/FixtureHotUpdateSubject/proof-host",
+                    "hotupdate-test/FixtureHotUpdateSubject/benchmark-host",
+                ],
+                [item["projectId"] for item in manifest["hotupdateTestProjects"]],
+            )
+            self.assertEqual(
+                [
+                    "hotupdate-patch/FixtureHotUpdateSubject/FixtureHotUpdateSubject_Patch",
+                ],
+                manifest["matrices"][0]["hotupdatePatchProjectIds"],
+            )
+            self.assertEqual(
+                [
+                    "hotupdate-test/FixtureHotUpdateSubject/proof-host",
+                    "hotupdate-test/FixtureHotUpdateSubject/benchmark-host",
+                ],
+                manifest["matrices"][0]["hotupdateTestProjectIds"],
+            )
+            for host_project in manifest["hotupdateTestProjects"]:
+                self.assertTrue((repo_root / host_project["projectPath"]).is_file())
+                self.assertTrue((repo_root / host_project["generatedSourcePath"]).is_file())
+                self.assertTrue((repo_root / host_project["bindingManifestPath"]).is_file())
+                self.assertEqual(
+                    [
+                        "hotupdate-patch/FixtureHotUpdateSubject/FixtureHotUpdateSubject_Patch",
+                    ],
+                    host_project["patchProjectIds"],
+                )
+            proof_project_text = (repo_root / manifest["hotupdateTestProjects"][0]["projectPath"]).read_text(encoding="utf-8")
+            benchmark_project_text = (repo_root / manifest["hotupdateTestProjects"][1]["projectPath"]).read_text(encoding="utf-8")
+            self.assertIn("<EnableDefaultCompileItems>false</EnableDefaultCompileItems>", proof_project_text)
+            self.assertIn(
+                '<Compile Include="Generated/ChaosGeneratedHotUpdateProofHost.g.cs" />',
+                proof_project_text,
+            )
+            self.assertIn(
+                '<Compile Include="Generated/ChaosGeneratedHotUpdateBenchmarkHost.g.cs" />',
+                benchmark_project_text,
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
@@ -775,8 +1088,8 @@ class ProjectWorkspaceTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
-    def test_generate_subject_workspace_all_targets_skips_native_aot_workspace_configure(self) -> None:
-        workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_generate_native_aot_matrix")
+    def test_generate_subject_workspace_all_targets_includes_native_aot_workspace_configure(self) -> None:
+        workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_generate_native_aot_workspace")
         repo_root = self._make_repo_root("subject-generate-native-aot-matrix")
         self._write_subject_fixture(repo_root)
         completed = subprocess.CompletedProcess(["cmake"], 0, "", "")
@@ -816,6 +1129,8 @@ class ProjectWorkspaceTests(unittest.TestCase):
                 configure_root = Path(arguments[arguments.index("-B") + 1])
                 if str(configure_root).endswith("windows-dev-output"):
                     write_windows_subject_native_project_stubs(configure_root)
+                elif str(configure_root).endswith("windows-native-perf"):
+                    write_windows_subject_native_project_stubs(configure_root, benchmark_text="<Project />\n")
                 else:
                     (configure_root / "linux-x64-packaging.vcxproj").parent.mkdir(parents=True, exist_ok=True)
                     (configure_root / "linux-x64-packaging.vcxproj").write_text("<Project />\n", encoding="utf-8")
@@ -882,12 +1197,36 @@ class ProjectWorkspaceTests(unittest.TestCase):
                                 {"id": "subject/FixtureSubject", "all-targets": True, "refresh-generated": True},
                             )
 
-            self.assertEqual(["windows-dev-output"], [call.args[2] for call in refresh_mock.call_args_list])
-            self.assertEqual(2, run_process_mock.call_count)
+            self.assertEqual(
+                ["windows-dev-output", "windows-native-perf"],
+                [call.args[2] for call in refresh_mock.call_args_list],
+            )
+            self.assertEqual(3, run_process_mock.call_count)
             manifest = json.loads((repo_root / result["manifestPath"]).read_text(encoding="utf-8"))
             matrices_by_id = {entry["matrixId"]: entry for entry in manifest["matrices"]}
-            self.assertEqual([], matrices_by_id["windows-native-perf"]["nativeProjectIds"])
-            self.assertEqual([], matrices_by_id["windows-native-perf"]["nativeTestProjectIds"])
+            self.assertEqual(
+                ["native/FixtureSubject/windows-native-perf/generated-native"],
+                matrices_by_id["windows-native-perf"]["nativeProjectIds"],
+            )
+            self.assertEqual(
+                ["native-test/FixtureSubject/windows-native-perf/benchmark-host"],
+                matrices_by_id["windows-native-perf"]["nativeTestProjectIds"],
+            )
+            benchmark_native_test_project = next(
+                item
+                for item in manifest["nativeTestProjects"]
+                if item["projectId"] == "native-test/FixtureSubject/windows-native-perf/benchmark-host"
+            )
+            self.assertEqual("benchmark-host", benchmark_native_test_project["hostKind"])
+            self.assertEqual(
+                "managed-test/FixtureSubject/benchmark-host",
+                benchmark_native_test_project["managedTestProjectId"],
+            )
+            self.assertEqual(
+                "solutions/subjects/FixtureSubject/native/windows-native-perf/benchmark/chaos_subject_native_aot.vcxproj",
+                benchmark_native_test_project["projectPath"],
+            )
+            self.assertTrue((repo_root / benchmark_native_test_project["projectPath"]).is_file())
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -996,7 +1335,7 @@ class ProjectWorkspaceTests(unittest.TestCase):
                         "projectPath": "solutions/subjects/FixtureSubject/managed-tests/FixtureSubject.DeclaredProofHost.csproj",
                         "assemblyName": "FixtureSubject.DeclaredProofHost",
                         "hostKind": "proof-host",
-                        "catalogPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.catalog.json",
+                    "collectionPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.collection.json",
                         "generatedSourcePath": "solutions/subjects/FixtureSubject/managed-tests/Generated/ChaosGeneratedDeclaredTests.g.cs",
                     }
                 ],

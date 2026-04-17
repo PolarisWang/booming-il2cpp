@@ -3,6 +3,13 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
+from tests.support import (
+    read_contracts_source,
+    read_linker_stage_source,
+    read_loader_stage_source,
+    read_native_reference_planner_source,
+)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SOURCE_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "FeatureSlices" / "CoreRuntimeFeatures"
@@ -12,6 +19,14 @@ SEMANTIC_WORLD_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.SemanticWorl
 LINKER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Linker" / "LinkerStage.cs"
 LOWERING_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceLoweringPlanner.cs"
 EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceProofEmitter.cs"
+CATALOG_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofCatalog.cs"
+)
 BOOTSTRAP_PATH = REPO_ROOT / "src" / "native" / "bootstrap" / "bootstrap.cpp"
 RUNTIME_CORE_PATH = REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_core.cpp"
 RUNTIME_CORE_HEADER_PATH = REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_core.h"
@@ -95,10 +110,10 @@ class Phase6CapabilityBatchBTests(unittest.TestCase):
         self.assertIn("internal static class ReflectionInteropClosureEntry", closure_source)
 
     def test_contract_loader_semantic_and_linker_lock_batch_b_surface(self) -> None:
-        contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")
-        loader_source = LOADER_STAGE_PATH.read_text(encoding="utf-8")
+        contracts_source = read_contracts_source(REPO_ROOT)
+        loader_source = read_loader_stage_source(REPO_ROOT)
         semantic_world_source = SEMANTIC_WORLD_PATH.read_text(encoding="utf-8")
-        linker_source = LINKER_STAGE_PATH.read_text(encoding="utf-8")
+        linker_source = read_linker_stage_source(REPO_ROOT)
 
         self.assertIn("public required IReadOnlyList<ManagedExceptionRegionModel> ExceptionRegions { get; init; }", contracts_source)
         self.assertIn("public sealed record ManagedExceptionRegionModel", contracts_source)
@@ -146,8 +161,9 @@ class Phase6CapabilityBatchBTests(unittest.TestCase):
         )
 
     def test_codegen_and_native_side_freeze_batch_b_lowering_and_helper_surface(self) -> None:
-        planner_source = LOWERING_PLANNER_PATH.read_text(encoding="utf-8")
+        planner_source = read_native_reference_planner_source(REPO_ROOT)
         emitter_source = EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = CATALOG_PATH.read_text(encoding="utf-8")
         bootstrap_source = BOOTSTRAP_PATH.read_text(encoding="utf-8")
         runtime_core_source = RUNTIME_CORE_PATH.read_text(encoding="utf-8")
         runtime_core_header_source = RUNTIME_CORE_HEADER_PATH.read_text(encoding="utf-8")
@@ -159,13 +175,14 @@ class Phase6CapabilityBatchBTests(unittest.TestCase):
             msg=f"missing reflection/interop closure template: {REFLECTION_INTEROP_TEMPLATE_PATH}",
         )
 
-        for lowering_family in [
-            "managed-delegates.closed-target-relay-message.minimal",
-            "managed-exceptions.throw-catch-finally-message.minimal",
-            "managed-reflection-interop.closure.minimal",
+        for constant_name, lowering_family in [
+            ("DelegateClosedTargetRelayMinimal", "managed-delegates.closed-target-relay-message.minimal"),
+            ("ExceptionThrowCatchFinallyMinimal", "managed-exceptions.throw-catch-finally-message.minimal"),
+            ("ReflectionInteropClosureMinimal", "managed-reflection-interop.closure.minimal"),
         ]:
-            self.assertIn(lowering_family, planner_source)
-            self.assertIn(lowering_family, emitter_source)
+            self.assertIn(lowering_family, catalog_source)
+            self.assertIn(f"NativeReferenceProofCatalog.{constant_name}", planner_source)
+            self.assertIn(f"NativeReferenceProofCatalog.{constant_name}", emitter_source)
 
         self.assertIn("TryCreateDelegateClosedTargetRelayLoweringPlan(", planner_source)
         self.assertIn("TryCreateExceptionThrowCatchFinallyLoweringPlan(", planner_source)

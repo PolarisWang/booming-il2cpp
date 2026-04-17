@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>12.0</LangVersion>
+    <AssemblyName>Chaos.TestFramework.Sdk</AssemblyName>
+    <RootNamespace>Chaos.TestFramework</RootNamespace>
+  </PropertyGroup>
+</Project>

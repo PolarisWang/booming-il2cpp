@@ -739,7 +739,7 @@ def build_compiled_subject_catalog(
         declared_subject_id = str(declared_catalog.get("subjectId") or "")
         if declared_subject_id and declared_subject_id != subject_id:
             raise ValueError(
-                f"declared catalog subjectId mismatch: expected {subject_id}, got {declared_subject_id}"
+                f"declared collection subjectId mismatch: expected {subject_id}, got {declared_subject_id}"
             )
         declared_unit_tests = list(declared_catalog.get("declaredUnitTests") or [])
         declared_benchmarks = list(declared_catalog.get("declaredBenchmarks") or [])

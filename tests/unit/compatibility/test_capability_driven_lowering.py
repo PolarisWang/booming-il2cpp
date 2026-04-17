@@ -9,6 +9,14 @@ CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "Man
 CODEGEN_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "CodeGenStage.cs"
 LOWERING_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceLoweringPlanner.cs"
 EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceProofEmitter.cs"
+CATALOG_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofCatalog.cs"
+)
 
 
 class Phase3CapabilityDrivenLoweringTests(unittest.TestCase):
@@ -33,14 +41,16 @@ class Phase3CapabilityDrivenLoweringTests(unittest.TestCase):
 
     def test_lowering_family_vocabulary_is_frozen_in_codegen_planner(self) -> None:
         planner_source = LOWERING_PLANNER_PATH.read_text(encoding="utf-8")
+        catalog_source = CATALOG_PATH.read_text(encoding="utf-8")
 
-        for lowering_family in [
-            "managed-object.captured-state-instance-message.minimal",
-            "managed-generic.static-forwarder-captured-getter.minimal",
-            "reflection.closed-type-query.minimal",
-            "interop.pinvoke-direct-call.minimal",
+        for constant_name, lowering_family in [
+            ("ManagedObjectCapturedStateInstanceMessageMinimal", "managed-object.captured-state-instance-message.minimal"),
+            ("ManagedGenericStaticForwarderCapturedGetterMinimal", "managed-generic.static-forwarder-captured-getter.minimal"),
+            ("ReflectionClosedTypeQueryMinimal", "reflection.closed-type-query.minimal"),
+            ("InteropPInvokeDirectCallMinimal", "interop.pinvoke-direct-call.minimal"),
         ]:
-            self.assertIn(lowering_family, planner_source)
+            self.assertIn(lowering_family, catalog_source)
+            self.assertIn(f"NativeReferenceProofCatalog.{constant_name}", planner_source)
 
 
 if __name__ == "__main__":

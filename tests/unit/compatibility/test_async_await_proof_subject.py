@@ -4,6 +4,8 @@ import json
 import unittest
 from pathlib import Path
 
+from tests.support import read_linker_stage_source, read_loader_stage_source, read_native_reference_planner_source
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
@@ -23,6 +25,14 @@ SEMANTIC_WORLD_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.SemanticWorl
 LINKER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Linker" / "LinkerStage.cs"
 LOWERING_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceLoweringPlanner.cs"
 EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceProofEmitter.cs"
+CATALOG_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofCatalog.cs"
+)
 TEMPLATE_PATH = (
     REPO_ROOT
     / "src"
@@ -79,9 +89,9 @@ class Phase2AsyncAwaitProofTests(unittest.TestCase):
         self.assertIn("internal static class IteratorStateMachineProofEntry", iterator_source)
 
     def test_loader_semantic_and_linker_lock_async_state_machine_surface(self) -> None:
-        loader_source = LOADER_STAGE_PATH.read_text(encoding="utf-8")
+        loader_source = read_loader_stage_source(REPO_ROOT)
         semantic_world_source = SEMANTIC_WORLD_PATH.read_text(encoding="utf-8")
-        linker_source = LINKER_STAGE_PATH.read_text(encoding="utf-8")
+        linker_source = read_linker_stage_source(REPO_ROOT)
 
         self.assertNotIn("if (!typeDefinition.GetDeclaringType().IsNil)", loader_source)
         self.assertIn("requires-async-state-machine", semantic_world_source)
@@ -89,14 +99,16 @@ class Phase2AsyncAwaitProofTests(unittest.TestCase):
         self.assertIn("compiler-generated-async-state-machine", linker_source)
 
     def test_codegen_surface_freezes_async_await_lowering_family(self) -> None:
-        planner_source = LOWERING_PLANNER_PATH.read_text(encoding="utf-8")
+        planner_source = read_native_reference_planner_source(REPO_ROOT)
         emitter_source = EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = CATALOG_PATH.read_text(encoding="utf-8")
 
         self.assertTrue(TEMPLATE_PATH.is_file(), msg=f"missing async/await template: {TEMPLATE_PATH}")
         template_source = TEMPLATE_PATH.read_text(encoding="utf-8")
 
-        self.assertIn("managed-async.awaitable-int.minimal", planner_source)
-        self.assertIn("managed-async.awaitable-int.minimal", emitter_source)
+        self.assertIn("managed-async.awaitable-int.minimal", catalog_source)
+        self.assertIn("NativeReferenceProofCatalog.ManagedAsyncAwaitIntMinimal", planner_source)
+        self.assertIn("NativeReferenceProofCatalog.ManagedAsyncAwaitIntMinimal", emitter_source)
         self.assertIn("MatchesAsyncAwaitIntCandidate(", planner_source)
         self.assertIn("TryCreateAsyncAwaitIntLoweringPlan(", planner_source)
         self.assertIn("case ManagedAsyncAwaitIntMinimal:", emitter_source)

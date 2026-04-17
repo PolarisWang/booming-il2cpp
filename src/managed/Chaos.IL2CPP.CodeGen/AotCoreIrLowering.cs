@@ -76,10 +76,10 @@ public sealed class AotCoreIrLowering
                         $"typed-il opcode mismatch for '{method.SubjectId}' at block '{block.BlockId}', index {index}.");
                 }
 
-                if (managedInstruction.IlOffset is null)
-                {
-                    return null;
-                }
+                var ilOffset = managedInstruction.IlOffset
+                               ?? (instructions.Count == 0
+                                   ? 0
+                                   : instructions[^1].IlOffset + 1);
 
                 var directCallTarget = ResolveDirectCallTarget(typedInstruction, managedMethods, targetSymbols);
 
@@ -87,7 +87,7 @@ public sealed class AotCoreIrLowering
                 {
                     Op = typedInstruction.Op,
                     Operand = typedInstruction.Operand,
-                    IlOffset = managedInstruction.IlOffset.Value,
+                    IlOffset = ilOffset,
                     ResultType = typedInstruction.ResultType,
                     Callee = typedInstruction.Callee,
                     CallSiteSignature = typedInstruction.CallSiteSignature,
