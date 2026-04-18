@@ -73,7 +73,8 @@ function(chaos_configure_subject_target target_name)
             "${REPO_ROOT}/src/native/runtime-core"
             "${REPO_ROOT}/src/native/bootstrap"
             "${REPO_ROOT}/src/native/support"
-            "${REPO_ROOT}/src/native/benchmark-host")
+            "${REPO_ROOT}/src/native/benchmark-host"
+            "${REPO_ROOT}/src/native/proof-host")
     chaos_apply_subject_variant("${target_name}")
 endfunction()
 
@@ -83,4 +84,4 @@ add_subdirectory("${REPO_ROOT}/src/native/hot-update" "hot-update")
 add_subdirectory("${REPO_ROOT}/src/native/support" "support")
 add_subdirectory("${REPO_ROOT}/src/native/bootstrap" "bootstrap")
 add_subdirectory(generated)
-add_subdirectory(benchmark)
+add_subdirectory(@@HOST_SUBDIR@@)

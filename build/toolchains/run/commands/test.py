@@ -247,15 +247,31 @@ def _regenerate_subject_workspace_manifest(
     *,
     subject_id: str,
     host_platform: str,
+    selected_object: dict[str, Any],
+    normalized_options: dict[str, Any],
 ) -> tuple[Path, dict[str, Any]]:
+    options: dict[str, Any] = {
+        "id": f"subject/{subject_id}",
+        "auto-refresh-missing-generated": True,
+        "refresh-generated": True,
+    }
+    matrix_id = _workspace_requested_matrix_id(selected_object, normalized_options) or str(
+        selected_object.get("defaultMatrixId") or ""
+    ).strip()
+    if matrix_id:
+        options["matrix"] = matrix_id
+    else:
+        options["all-targets"] = True
+    variant = str(normalized_options.get("variant") or "").strip()
+    if variant:
+        options["variant"] = variant
+    entry_selection = _selected_object_entry_selection(selected_object)
+    if entry_selection and "matrix" in options:
+        options["entry-selection"] = dict(entry_selection)
     project_workspace_module.generate_subject_workspace(
         repo_root,
         host_platform,
-        {
-            "id": f"subject/{subject_id}",
-            "all-targets": True,
-            "auto-refresh-missing-generated": True,
-        },
+        options,
     )
     loaded_manifest = _load_subject_workspace_manifest(repo_root, subject_id)
     if loaded_manifest is None:
@@ -482,6 +498,8 @@ def _resolve_workspace_execution(
             repo_root,
             subject_id=subject_id,
             host_platform=host_platform,
+            selected_object=selected_object,
+            normalized_options=normalized_options,
         )
 
     host_kind = _resolve_workspace_host_kind(object_type)

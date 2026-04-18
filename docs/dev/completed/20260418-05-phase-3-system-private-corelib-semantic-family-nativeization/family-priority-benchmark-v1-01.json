@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "taskId": "20260418-05-phase-3-system-private-corelib-semantic-family-nativeization",
+  "generatedAt": "2026-04-18T10:21:38.0596145+08:00",
+  "elapsedMs": 235,
+  "targetFrameworks": {
+    "net10.0": {
+      "elapsedMs": 6,
+      "familyCount": 6,
+      "totalPublicMemberCount": 32489
+    },
+    "net8.0": {
+      "elapsedMs": 2,
+      "familyCount": 6,
+      "totalPublicMemberCount": 26154
+    }
+  }
+}

@@ -43,6 +43,18 @@ class SolutionCorePackRegistryTests(unittest.TestCase):
         self.assertEqual("windows-native-check", subject_item["defaultMatrixId"])
         self.assertEqual("dotnet-solution", subject_item["sourceModel"])
 
+        managed_build_item = next(
+            item
+            for item in index.flat_items
+            if item["id"] == "engineering-validation/SolutionCorePack/managed-build"
+        )
+        self.assertEqual("engineering-validation", managed_build_item["type"])
+        self.assertEqual("correctness.dev", managed_build_item["defaultGoalId"])
+        self.assertEqual(
+            "windows-archetype-simple-lib-managed-output",
+            managed_build_item["defaultMatrixId"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

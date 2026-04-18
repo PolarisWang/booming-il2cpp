@@ -23,25 +23,34 @@
 ### 2.2 `.NET 10`
 
 - sourceKind: `repo-frozen-snapshot`
-- selectedVersion: `pending-snapshot-import`
-- targetRoots:
-  - ref: `assets/framework-packs/dotnet-foundation/net10/ref`
-  - runtime: `assets/framework-packs/dotnet-foundation/net10/runtime`
+- selectedVersion:
+  - ref: `10.0.6`
+  - runtime: `10.0.6`
+- selectedRoots:
+  - ref: `D:\agent\booming-il2cpp\assets\framework-packs\dotnet-foundation\net10\ref`
+  - runtime: `D:\agent\booming-il2cpp\assets\framework-packs\dotnet-foundation\net10\runtime`
+- provenance:
+  - importedFrom:
+    - ref: `C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\10.0.6\ref\net10.0`
+    - runtime: `C:\Program Files\dotnet\shared\Microsoft.NETCore.App\10.0.6`
+  - importPolicy:
+    - 本次由本机官方 `.NET 10` 安装导入到仓库
+    - 导入后以 repo-frozen snapshot 作为唯一 canonical source
+    - 后续消费读取仓库快照，不直接依赖 machine-global `.NET 10`
 - decision:
-  - 当前执行环境不依赖 machine-global `.NET 10`
   - `.NET 10` 统一冻结为仓库内快照
-  - 在 snapshot 未导入前，`Phase 0` 只允许推进 policy / catalog contract，不允许宣称可重现 `.NET 10` foundation path
+  - 本机官方安装只承担 snapshot provenance，不承担后续执行期 source model
+  - `Phase 0` 可以把 `.NET 10` foundation path 视为可重现输入层
 
 ## 3. 选择理由
 
 - `.NET 8` 已在当前机器具备官方安装，可先作为实测 catalog baseline。
-- `.NET 10` 当前机器缺失，继续把它视为外部预装会让 CI 与跨机会话重现性失控。
+- `.NET 10` 虽然当前机器已具备官方安装，但继续把它视为执行期外部预装仍会让 CI 与跨机会话重现性失控。
 - 将 `.NET 10` 固定为 repo-frozen snapshot 后，后续 `FrameworkPackResolver` 可以对 `net8` 与 `net10` 采用统一的“显式 source record + version lock”模型，只是 root 不同。
 
 ## 4. 非目标
 
-- 本文档不决定 `.NET 10` 最终具体 patch 版本号。
-- 本文档不负责导入 snapshot 本体。
+- 本文档不负责后续 `.NET 10` patch 升级策略；当前 `Phase 0` 已锁定 `10.0.6`。
 - 本文档不负责 facade/shim/classification 语义。
 
 ## 5. 对后续阶段的约束
@@ -54,9 +63,9 @@
   - `present/missing`
 - 如果后续决定把 `.NET 8` 也切为 repo snapshot，必须新开 follow-up，并同步重写本 policy。
 
-## 6. 当前 blocker
+## 6. 当前 blocker 状态
 
-- blocker: `.NET 10` snapshot 尚未导入仓库。
+- blocker: `none`
 - impact:
-  - 可以继续推进 `.NET 8` catalog baseline
-  - 不可以宣称 `.NET 10` 可重现或可比较
+  - `Phase 0` 可以 closed 并进入 `Phase 1`
+  - 后续 phase 可以把 `.NET 10` 视为可重现、可比较的 foundation 输入层

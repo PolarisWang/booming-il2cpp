@@ -112,6 +112,10 @@ public sealed partial class NativeAotLoweringPlanner
 				{
 					TrackReferenceType("System.Private.CoreLib/System.String", null);
 				}
+				if (TryGetTestFrameworkAssertStateFieldSubjectId(instruction.Callee, out string helperStaticFieldSubjectId) && !string.IsNullOrWhiteSpace(helperStaticFieldSubjectId))
+				{
+					hashSet2.Add(helperStaticFieldSubjectId);
+				}
 				if (string.Equals(instruction.Callee, "System.Private.CoreLib/System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.Type::get_TypeHandle()", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.Type::GetField(System.String)", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.Type::GetMethod(System.String)", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.Type::GetGenericArguments()", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType()", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.Type::GetMethod(System.String,System.Reflection.BindingFlags)", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.Type::get_Assembly()", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.Type::GetGenericTypeDefinition()", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.Type::GetConstructors(System.Reflection.BindingFlags)", StringComparison.Ordinal))
 				{
 					TrackReferenceType("System.Private.CoreLib/System.Type", "System.Private.CoreLib/System.Object");

@@ -406,6 +406,159 @@ class SubjectWorkersTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_native_proof_emitter_routes_declared_unit_test_selection_through_native_aot(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_native_proof_emitter_declared_unit_test")
+        subject_id = "FixtureGeneratedDeclaredProofSubject"
+        run_id = "fixture-run-generated-declared-proof-001"
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "entrySelection": {
+                    "family": "declared-unit-test",
+                    "stableId": f"{subject_id}::{subject_id}::{subject_id}.Proofs::Run()",
+                    "alias": "fixture-proof",
+                    "entryIndex": 7,
+                },
+            },
+            "upstream": {
+                "analysis": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "analysis", "analysis.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "analysis", "generated"),
+                "manifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("native-proof-emitter-declared-proof")
+        try:
+            analysis_manifest_path = repo_root / request["upstream"]["analysis"]["manifestPath"]
+            analysis_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            analysis_manifest_path.write_text("{}", encoding="utf-8")
+
+            expected_analysis_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "analysis"
+            expected_output_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "generated"
+
+            def fake_run_checked(arguments: list[str], *, repo_root: Path, failure_message: str) -> str:
+                del failure_message
+                self.assertEqual(
+                    [
+                        "dotnet",
+                        str(repo_root / "driver" / "Chaos.IL2CPP.Driver.dll"),
+                        "emit-native-aot",
+                        str(expected_analysis_root),
+                        str(expected_output_root),
+                    ],
+                    arguments,
+                )
+                (expected_output_root / "generated").mkdir(parents=True, exist_ok=True)
+                (expected_output_root / "generated" / "native-aot.generated.cpp").write_text("// generated", encoding="utf-8")
+                (expected_output_root / "native-aot.manifest.json").write_text("{}", encoding="utf-8")
+                (expected_output_root / "native-aot.plan.json").write_text("{}", encoding="utf-8")
+                return ""
+
+            with patch.object(workers_module, "_ensure_driver_built", return_value=repo_root / "driver" / "Chaos.IL2CPP.Driver.dll"):
+                with patch.object(workers_module, "_run_checked", side_effect=fake_run_checked):
+                    result = workers_module.run_native_proof_emitter(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "generated", "generated", "native-aot.generated.cpp"),
+                manifest["generatedSourcePath"],
+            )
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "generated", "native-aot.manifest.json"),
+                manifest["nativeAotManifestPath"],
+            )
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "generated", "native-aot.plan.json"),
+                manifest["nativeAotPlanPath"],
+            )
+            self.assertNotIn("nativeReferenceManifestPath", manifest)
+            self.assertNotIn("nativeReferencePlanPath", manifest)
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_native_proof_emitter_routes_subject_entry_selection_through_native_aot(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_native_proof_emitter_subject_entry_selection")
+        subject_id = "FixtureGeneratedManagedEntrySubject"
+        run_id = "fixture-run-generated-managed-entry-001"
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "source": {
+                    "entry": f"{subject_id}/Program::Run()",
+                    "entrySelection": {
+                        "entryKind": 1,
+                        "entrySlice": 11,
+                    },
+                },
+            },
+            "upstream": {
+                "analysis": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "analysis", "analysis.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "analysis", "generated"),
+                "manifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("native-proof-emitter-subject-entry-selection")
+        try:
+            analysis_manifest_path = repo_root / request["upstream"]["analysis"]["manifestPath"]
+            analysis_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            analysis_manifest_path.write_text("{}", encoding="utf-8")
+
+            expected_analysis_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "analysis"
+            expected_output_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "generated"
+
+            def fake_run_checked(arguments: list[str], *, repo_root: Path, failure_message: str) -> str:
+                del failure_message
+                self.assertEqual(
+                    [
+                        "dotnet",
+                        str(repo_root / "driver" / "Chaos.IL2CPP.Driver.dll"),
+                        "emit-native-aot",
+                        str(expected_analysis_root),
+                        str(expected_output_root),
+                    ],
+                    arguments,
+                )
+                (expected_output_root / "generated").mkdir(parents=True, exist_ok=True)
+                (expected_output_root / "generated" / "native-aot.generated.cpp").write_text("// generated", encoding="utf-8")
+                (expected_output_root / "native-aot.manifest.json").write_text("{}", encoding="utf-8")
+                (expected_output_root / "native-aot.plan.json").write_text("{}", encoding="utf-8")
+                return ""
+
+            with patch.object(workers_module, "_ensure_driver_built", return_value=repo_root / "driver" / "Chaos.IL2CPP.Driver.dll"):
+                with patch.object(workers_module, "_run_checked", side_effect=fake_run_checked):
+                    result = workers_module.run_native_proof_emitter(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "generated", "generated", "native-aot.generated.cpp"),
+                manifest["generatedSourcePath"],
+            )
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "generated", "native-aot.manifest.json"),
+                manifest["nativeAotManifestPath"],
+            )
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "generated", "native-aot.plan.json"),
+                manifest["nativeAotPlanPath"],
+            )
+            self.assertNotIn("nativeReferenceManifestPath", manifest)
+            self.assertNotIn("nativeReferencePlanPath", manifest)
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
     def test_windows_validate_only_build_uses_visual_studio_generator_and_records_non_repo_cmake_binary_dir(self) -> None:
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_windows_validate_only")
         subject_id = "FixtureValidateOnlySubject"
@@ -726,6 +879,419 @@ class SubjectWorkersTests(unittest.TestCase):
             self.assertNotIn("workloadEntry", dispatch_manifest)
             self.assertEqual("RunNativeAot", dispatch_manifest["nativeEntryFunctionName"])
             self.assertEqual(11, dispatch_manifest["entrySelection"]["entryIndex"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_windows_build_target_routes_subject_entry_selection_native_aot_through_benchmark_host_contract(self) -> None:
+        workers_module = load_module(
+            SUBJECT_WORKERS_MODULE_PATH,
+            "chaos_subject_workers_windows_native_aot_subject_entry_build",
+        )
+        subject_id = "FixtureNativeAotManagedEntrySubject"
+        run_id = "fixture-run-native-aot-managed-entry-build-001"
+        matrix_id = "windows-native-check"
+        collection_path = posix_path(
+            "solutions",
+            "subjects",
+            subject_id,
+            "managed-tests",
+            "Generated",
+            "declared-tests.collection.json",
+        )
+        expected_cmake_path = self._make_non_repo_path("cmake", "bin", "cmake.exe")
+        expected_configure_root = posix_path(
+            "solutions",
+            "subjects",
+            subject_id,
+            "native",
+            matrix_id,
+        )
+        instance_spec = f"{self._make_non_repo_path('visual-studio', '18', 'Professional')},version=18.4.11626.88"
+        expected_env = {
+            "Path": r"C:\VS\bin;C:\Windows\System32",
+            "INCLUDE": r"C:\VS\include",
+            "LIB": r"C:\VS\lib",
+        }
+
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "CHECK",
+                "source": {
+                    "entry": f"{subject_id}/Program::RunSelected()",
+                    "entrySelection": {
+                        "entryKind": 1,
+                        "entrySlice": 11,
+                    },
+                },
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "toolchainProfile": "msvc-reference",
+                },
+            },
+            "upstream": {
+                "generated": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("windows-native-aot-subject-entry-build")
+        try:
+            for relative_path in [
+                Path("src/native/benchmark-host/native_aot_main.cpp"),
+                Path("artifacts")
+                / "subjects"
+                / subject_id
+                / "runs"
+                / run_id
+                / "analysis"
+                / "generated"
+                / "generated"
+                / "native-aot.generated.cpp",
+            ]:
+                absolute_path = repo_root / relative_path
+                absolute_path.parent.mkdir(parents=True, exist_ok=True)
+                absolute_path.write_text("// fixture\n", encoding="utf-8")
+
+            generated_manifest_path = repo_root / request["upstream"]["generated"]["manifestPath"]
+            generated_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            generated_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "generatedSourcePath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated", "native-aot.generated.cpp"),
+                        "nativeAotManifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "native-aot.manifest.json"),
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+            workspace_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            workspace_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "workspaceVersion": 2,
+                        "subjectId": subject_id,
+                        "managedTestProjects": [
+                            {
+                                "projectId": f"managed-test/{subject_id}/benchmark-host",
+                                "projectPath": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "managed-tests",
+                                    f"{subject_id}.DeclaredBenchmarkHost.csproj",
+                                ),
+                                "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
+                                "hostKind": "benchmark-host",
+                                "collectionPath": collection_path,
+                            }
+                        ],
+                        "nativeTestProjects": [
+                            {
+                                "projectId": f"native-test/{subject_id}/{matrix_id}/benchmark-host",
+                                "matrixId": matrix_id,
+                                "projectPath": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "native",
+                                    matrix_id,
+                                    "benchmark",
+                                    "chaos_subject_native_aot.vcxproj",
+                                ),
+                                "configureRoot": expected_configure_root,
+                                "hostKind": "benchmark-host",
+                                "managedTestProjectId": f"managed-test/{subject_id}/benchmark-host",
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            expected_cmake_dir = repo_root / expected_configure_root
+            expected_cmake_source_root = repo_root / "solutions" / "subjects" / subject_id / "native-source" / matrix_id
+            with patch.object(workers_module.tooling_module, "cmake_environment", return_value=(str(expected_cmake_path), {})):
+                with patch.object(workers_module.tooling_module, "windows_developer_environment", return_value=expected_env):
+                    with patch.object(workers_module.tooling_module, "detect_visual_studio_generator", return_value="Visual Studio 18 2026"):
+                        with patch.object(workers_module.tooling_module, "detect_visual_studio_instance_spec", return_value=instance_spec):
+                            with patch.object(workers_module.tooling_module, "allocate_cmake_binary_dir") as allocate_cmake_binary_dir_mock:
+                                with patch.object(workers_module, "_workspace_manifest_is_stale", return_value=False):
+                                    with patch.object(workers_module, "_run_checked") as run_checked_mock:
+                                        result = workers_module.run_build_target(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            self.assertEqual(
+                [
+                    str(expected_cmake_path),
+                    "-S",
+                    str(expected_cmake_source_root),
+                    "-B",
+                    str(expected_cmake_dir),
+                    "-G",
+                    "Visual Studio 18 2026",
+                    f"-DCHAOS_SUBJECT_BENCHMARK_HOST_MAIN={(repo_root / 'src' / 'native' / 'benchmark-host' / 'native_aot_main.cpp').as_posix()}",
+                    f"-DCHAOS_SUBJECT_GENERATED_INPUT_SOURCE={(repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'analysis' / 'generated' / 'generated' / 'native-aot.generated.cpp').as_posix()}",
+                    "-DCHAOS_SUBJECT_VARIANT=CHECK",
+                    f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={(repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'out').as_posix()}",
+                    f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}",
+                ],
+                run_checked_mock.call_args_list[0].args[0],
+            )
+            self.assertEqual(
+                [
+                    str(expected_cmake_path),
+                    "--build",
+                    str(expected_cmake_dir),
+                    "--config",
+                    "Release",
+                    "--target",
+                    WINDOWS_NATIVE_AOT_BUILD_TARGET,
+                ],
+                run_checked_mock.call_args_list[1].args[0],
+            )
+            self.assertEqual(expected_env, run_checked_mock.call_args_list[0].kwargs["env"])
+            self.assertEqual(expected_env, run_checked_mock.call_args_list[1].kwargs["env"])
+            allocate_cmake_binary_dir_mock.assert_not_called()
+
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("CHECK", manifest["variant"])
+            self.assertEqual("windows-benchmark-cmake", manifest["buildStrategy"])
+            self.assertEqual("native-aot", manifest["buildKind"])
+            self.assertEqual("benchmark-host", manifest["hostKind"])
+            self.assertEqual(collection_path, manifest["collectionPath"])
+            self.assertEqual(
+                f"managed-test/{subject_id}/benchmark-host",
+                manifest["managedTestProjectId"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_windows_build_target_routes_declared_unit_test_native_aot_through_proof_host_contract(self) -> None:
+        workers_module = load_module(
+            SUBJECT_WORKERS_MODULE_PATH,
+            "chaos_subject_workers_windows_native_aot_proof_host_build",
+        )
+        subject_id = "FixtureNativeAotProofSubject"
+        run_id = "fixture-run-native-aot-proof-build-001"
+        matrix_id = "windows-native-check"
+        collection_path = posix_path(
+            "solutions",
+            "subjects",
+            subject_id,
+            "managed-tests",
+            "Generated",
+            "declared-tests.collection.json",
+        )
+        expected_cmake_path = self._make_non_repo_path("cmake", "bin", "cmake.exe")
+        expected_configure_root = posix_path(
+            "solutions",
+            "subjects",
+            subject_id,
+            "native",
+            matrix_id,
+        )
+        instance_spec = f"{self._make_non_repo_path('visual-studio', '18', 'Professional')},version=18.4.11626.88"
+        expected_env = {
+            "Path": r"C:\VS\bin;C:\Windows\System32",
+            "INCLUDE": r"C:\VS\include",
+            "LIB": r"C:\VS\lib",
+        }
+
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "CHECK",
+                "entrySelection": {
+                    "family": "declared-unit-test",
+                    "stableId": f"{subject_id}::{subject_id}::{subject_id}.Proofs::Run()",
+                    "alias": "fixture-proof",
+                    "entryIndex": 7,
+                },
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "toolchainProfile": "msvc-reference",
+                    "runtimeProfile": "native-proof-output",
+                },
+            },
+            "upstream": {
+                "generated": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("windows-native-aot-proof-build")
+        try:
+            for relative_path in [
+                Path("src/native/proof-host/native_aot_main.cpp"),
+                Path("artifacts")
+                / "subjects"
+                / subject_id
+                / "runs"
+                / run_id
+                / "analysis"
+                / "generated"
+                / "generated"
+                / "native-aot.generated.cpp",
+            ]:
+                absolute_path = repo_root / relative_path
+                absolute_path.parent.mkdir(parents=True, exist_ok=True)
+                absolute_path.write_text("// fixture\n", encoding="utf-8")
+
+            generated_manifest_path = repo_root / request["upstream"]["generated"]["manifestPath"]
+            generated_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            generated_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "generatedSourcePath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated", "native-aot.generated.cpp"),
+                        "nativeAotManifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "native-aot.manifest.json"),
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+            workspace_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            workspace_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "workspaceVersion": 2,
+                        "subjectId": subject_id,
+                        "managedTestProjects": [
+                            {
+                                "projectId": f"managed-test/{subject_id}/proof-host",
+                                "projectPath": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "managed-tests",
+                                    f"{subject_id}.DeclaredProofHost.csproj",
+                                ),
+                                "assemblyName": f"{subject_id}.DeclaredProofHost",
+                                "hostKind": "proof-host",
+                                "collectionPath": collection_path,
+                            }
+                        ],
+                        "nativeTestProjects": [
+                            {
+                                "projectId": f"native-test/{subject_id}/{matrix_id}/proof-host",
+                                "matrixId": matrix_id,
+                                "projectPath": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "native",
+                                    matrix_id,
+                                    "proof",
+                                    "chaos_subject_reference_proof.vcxproj",
+                                ),
+                                "configureRoot": expected_configure_root,
+                                "hostKind": "proof-host",
+                                "managedTestProjectId": f"managed-test/{subject_id}/proof-host",
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            expected_cmake_dir = repo_root / expected_configure_root
+            expected_cmake_source_root = repo_root / "solutions" / "subjects" / subject_id / "native-source" / matrix_id
+            with patch.object(workers_module.tooling_module, "cmake_environment", return_value=(str(expected_cmake_path), {})):
+                with patch.object(workers_module.tooling_module, "windows_developer_environment", return_value=expected_env):
+                    with patch.object(workers_module.tooling_module, "detect_visual_studio_generator", return_value="Visual Studio 18 2026"):
+                        with patch.object(workers_module.tooling_module, "detect_visual_studio_instance_spec", return_value=instance_spec):
+                            with patch.object(workers_module.tooling_module, "allocate_cmake_binary_dir") as allocate_cmake_binary_dir_mock:
+                                with patch.object(workers_module, "_workspace_manifest_is_stale", return_value=False):
+                                    with patch.object(workers_module, "_run_checked") as run_checked_mock:
+                                        result = workers_module.run_build_target(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            self.assertEqual(
+                [
+                    str(expected_cmake_path),
+                    "-S",
+                    str(expected_cmake_source_root),
+                    "-B",
+                    str(expected_cmake_dir),
+                    "-G",
+                    "Visual Studio 18 2026",
+                    f"-DCHAOS_SUBJECT_HOST_MAIN={(repo_root / 'src' / 'native' / 'proof-host' / 'native_aot_main.cpp').as_posix()}",
+                    f"-DCHAOS_SUBJECT_GENERATED_INPUT_SOURCE={(repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'analysis' / 'generated' / 'generated' / 'native-aot.generated.cpp').as_posix()}",
+                    "-DCHAOS_SUBJECT_VARIANT=CHECK",
+                    f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={(repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'out').as_posix()}",
+                    f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}",
+                ],
+                run_checked_mock.call_args_list[0].args[0],
+            )
+            self.assertEqual(
+                [
+                    str(expected_cmake_path),
+                    "--build",
+                    str(expected_cmake_dir),
+                    "--config",
+                    "Release",
+                    "--target",
+                    WINDOWS_NATIVE_AOT_BUILD_TARGET,
+                ],
+                run_checked_mock.call_args_list[1].args[0],
+            )
+            self.assertEqual(expected_env, run_checked_mock.call_args_list[0].kwargs["env"])
+            self.assertEqual(expected_env, run_checked_mock.call_args_list[1].kwargs["env"])
+            allocate_cmake_binary_dir_mock.assert_not_called()
+
+            proof_cmakelists = (expected_cmake_source_root / "proof" / "CMakeLists.txt").read_text(encoding="utf-8")
+            self.assertIn("chaos_subject_native_aot", proof_cmakelists)
+
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("CHECK", manifest["variant"])
+            self.assertEqual("windows-native-aot-cmake", manifest["buildStrategy"])
+            self.assertEqual("native-aot", manifest["buildKind"])
+            self.assertEqual("proof-host", manifest["hostKind"])
+            self.assertEqual(collection_path, manifest["collectionPath"])
+            self.assertEqual(
+                f"managed-test/{subject_id}/proof-host",
+                manifest["managedTestProjectId"],
+            )
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "generated", "generated", "native-aot.generated.cpp"),
+                manifest["generatedSourcePath"],
+            )
+            self.assertEqual(
+                posix_path("src", "native", "proof-host", "native_aot_main.cpp"),
+                manifest["hostSourcePath"],
+            )
+            self.assertEqual(
+                [subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "out", f"{WINDOWS_NATIVE_AOT_BUILD_TARGET}.exe")],
+                manifest["outputs"],
+            )
+            self.assertEqual(
+                {
+                    "family": "declared-unit-test",
+                    "stableId": f"{subject_id}::{subject_id}::{subject_id}.Proofs::Run()",
+                    "alias": "fixture-proof",
+                    "entryIndex": 7,
+                },
+                manifest["entrySelection"],
+            )
+            self.assertNotIn("dispatchManifestPath", manifest)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -1319,6 +1885,216 @@ class SubjectWorkersTests(unittest.TestCase):
             )
             self.assertEqual(
                 "native proof ok\n",
+                (repo_root / manifest["stdoutPath"]).read_text(encoding="utf-8"),
+            )
+            self.assertEqual(
+                "0\n",
+                (repo_root / manifest["exitCodePath"]).read_text(encoding="utf-8"),
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_runtime_observe_executes_native_aot_proof_host_output_with_declared_entry_arguments(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_runtime_observe_native_aot_proof_host")
+        subject_id = "FixtureRuntimeObserveNativeAotProofSubject"
+        run_id = "fixture-run-runtime-observe-native-aot-proof-001"
+        matrix_id = "windows-native-check"
+        collection_path = posix_path(
+            "solutions",
+            "subjects",
+            subject_id,
+            "managed-tests",
+            "Generated",
+            "declared-tests.collection.json",
+        )
+        executable_path = subject_run_path(
+            subject_id,
+            run_id,
+            "matrices",
+            matrix_id,
+            "build",
+            "out",
+            f"{WINDOWS_NATIVE_AOT_BUILD_TARGET}.exe",
+        )
+
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "CHECK",
+                "entrySelection": {
+                    "family": "declared-unit-test",
+                    "stableId": f"{subject_id}::{subject_id}::{subject_id}.Proofs::Run()",
+                    "alias": "fixture-proof",
+                    "entryIndex": 7,
+                },
+                "executionContext": {
+                    "runtimeArguments": [
+                        "--heartbeat-interval-seconds=5",
+                    ],
+                },
+            },
+            "upstream": {
+                "build": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("runtime-observe-native-aot-proof")
+        try:
+            build_manifest_path = repo_root / request["upstream"]["build"]["manifestPath"]
+            build_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            build_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "buildStrategy": "windows-native-aot-cmake",
+                        "buildKind": "native-aot",
+                        "hostKind": "proof-host",
+                        "collectionPath": collection_path,
+                        "outputs": [executable_path],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            completed = subprocess.CompletedProcess(
+                [str(repo_root / executable_path)],
+                0,
+                "native aot proof ok\n",
+                "",
+            )
+
+            with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
+                result = workers_module.run_runtime_observe(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            run_process_mock.assert_called_once_with(
+                [
+                    str(repo_root / executable_path),
+                    "--heartbeat-interval-seconds=5",
+                    f"--collection-path={collection_path}",
+                    "--entry-index=7",
+                ],
+                cwd=repo_root / request["paths"]["bucketRoot"],
+            )
+
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("proof-host", manifest["hostKind"])
+            self.assertEqual(collection_path, manifest["collectionPath"])
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stdout.log"),
+                manifest["stdoutPath"],
+            )
+            self.assertEqual(
+                "native aot proof ok\n",
+                (repo_root / manifest["stdoutPath"]).read_text(encoding="utf-8"),
+            )
+            self.assertEqual(
+                "0\n",
+                (repo_root / manifest["exitCodePath"]).read_text(encoding="utf-8"),
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_runtime_observe_executes_native_aot_benchmark_host_output_for_subject_entry_selection(self) -> None:
+        workers_module = load_module(
+            SUBJECT_WORKERS_MODULE_PATH,
+            "chaos_subject_workers_runtime_observe_native_aot_benchmark_host",
+        )
+        subject_id = "FixtureRuntimeObserveNativeAotBenchmarkSubject"
+        run_id = "fixture-run-runtime-observe-native-aot-benchmark-001"
+        matrix_id = "windows-native-check"
+        collection_path = posix_path(
+            "solutions",
+            "subjects",
+            subject_id,
+            "managed-tests",
+            "Generated",
+            "declared-tests.collection.json",
+        )
+        executable_path = subject_run_path(
+            subject_id,
+            run_id,
+            "matrices",
+            matrix_id,
+            "build",
+            "out",
+            f"{WINDOWS_NATIVE_AOT_BUILD_TARGET}.exe",
+        )
+
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "CHECK",
+                "source": {
+                    "entry": f"{subject_id}/Program::RunSelected()",
+                    "entrySelection": {
+                        "entryKind": 1,
+                        "entrySlice": 11,
+                    },
+                },
+            },
+            "upstream": {
+                "build": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("runtime-observe-native-aot-benchmark")
+        try:
+            build_manifest_path = repo_root / request["upstream"]["build"]["manifestPath"]
+            build_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            build_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "buildStrategy": "windows-benchmark-cmake",
+                        "buildKind": "native-aot",
+                        "hostKind": "benchmark-host",
+                        "collectionPath": collection_path,
+                        "outputs": [executable_path],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            completed = subprocess.CompletedProcess(
+                [str(repo_root / executable_path)],
+                0,
+                "{\"elapsedMilliseconds\":0.123,\"opsPerSecond\":8123.0,\"checksum\":42}\n",
+                "",
+            )
+
+            with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
+                result = workers_module.run_runtime_observe(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            run_process_mock.assert_called_once_with(
+                [str(repo_root / executable_path)],
+                cwd=repo_root / request["paths"]["bucketRoot"],
+            )
+
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual("benchmark-host", manifest["hostKind"])
+            self.assertEqual(collection_path, manifest["collectionPath"])
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stdout.log"),
+                manifest["stdoutPath"],
+            )
+            self.assertEqual(
+                "{\"elapsedMilliseconds\":0.123,\"opsPerSecond\":8123.0,\"checksum\":42}\n",
                 (repo_root / manifest["stdoutPath"]).read_text(encoding="utf-8"),
             )
             self.assertEqual(
@@ -1997,6 +2773,136 @@ class SubjectWorkersTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_host_input_build_keeps_source_project_for_subject_entry_selection_managed_output(self) -> None:
+        workers_module = load_module(
+            SUBJECT_WORKERS_MODULE_PATH,
+            "chaos_subject_workers_host_input_subject_entry_managed_output",
+        )
+        subject_id = "FixtureWorkspaceManagedEntryOutputSubject"
+        run_id = "fixture-run-host-input-subject-entry-managed-output-001"
+        intermediate_root = TEST_TMP_ROOT / "dotnet-intermediates" / "fixture-host-input-subject-entry-managed-output-1234"
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": "windows-managed-output",
+                "source": {
+                    "type": "dotnet-project",
+                    "path": subject_source_path(subject_id),
+                    "entry": f"{subject_id}/Program::Main(System.String[])",
+                    "entrySelection": {
+                        "entryKind": 1,
+                        "entrySlice": 3,
+                    },
+                },
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                },
+            },
+            "upstream": {
+                "source": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "source", "source.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "analysis", "host-input"),
+                "manifestPath": subject_run_path(subject_id, run_id, "analysis", "host-input", "host-input.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("host-input-build-subject-entry-managed-output")
+        try:
+            source_root = repo_root / "subjects" / subject_id / "source"
+            source_root.mkdir(parents=True, exist_ok=True)
+            source_project_path = source_root / f"{subject_id}.csproj"
+            source_project_path.write_text("<Project />\n", encoding="utf-8")
+
+            workspace_root = repo_root / "solutions" / "subjects" / subject_id
+            managed_tests_root = workspace_root / "managed-tests"
+            generated_root = managed_tests_root / "Generated"
+            generated_root.mkdir(parents=True, exist_ok=True)
+            benchmark_host_project_path = managed_tests_root / f"{subject_id}.DeclaredBenchmarkHost.csproj"
+            benchmark_host_project_path.write_text("<Project />\n", encoding="utf-8")
+            collection_path = generated_root / "declared-tests.collection.json"
+            collection_path.write_text('{"declaredBenchmarks":[{"entryIndex":11}]}', encoding="utf-8")
+            workspace_manifest_path = workspace_root / "workspace.manifest.json"
+            workspace_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "workspaceVersion": 2,
+                        "subjectId": subject_id,
+                        "managedTestProjects": [
+                            {
+                                "projectId": f"managed-test/{subject_id}/benchmark-host",
+                                "projectPath": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "managed-tests",
+                                    f"{subject_id}.DeclaredBenchmarkHost.csproj",
+                                ),
+                                "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
+                                "hostKind": "benchmark-host",
+                                "collectionPath": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "managed-tests",
+                                    "Generated",
+                                    "declared-tests.collection.json",
+                                ),
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            expected_output_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "host-input"
+
+            def fake_run_checked(arguments: list[str], *, repo_root: Path, failure_message: str) -> str:
+                del failure_message
+                self.assertEqual(
+                    [
+                        "dotnet",
+                        "build",
+                        str(source_project_path),
+                        "-c",
+                        "Release",
+                        "-m:1",
+                        "-o",
+                        str(expected_output_root),
+                        f"-p:ChaosTempIntermediateRoot={intermediate_root.as_posix()}/",
+                    ],
+                    arguments,
+                )
+                expected_output_root.mkdir(parents=True, exist_ok=True)
+                for file_name in [
+                    f"{subject_id}.dll",
+                    f"{subject_id}.deps.json",
+                    f"{subject_id}.pdb",
+                    "Chaos.TestFramework.Sdk.dll",
+                ]:
+                    (expected_output_root / file_name).write_text("", encoding="utf-8")
+                return ""
+
+            with patch.object(workers_module.tooling_module, "allocate_dotnet_intermediate_dir", return_value=intermediate_root):
+                with patch.object(workers_module, "_workspace_manifest_is_stale", return_value=False):
+                    with patch.object(workers_module, "_run_checked", side_effect=fake_run_checked):
+                        result = workers_module.run_dotnet_host_input_builder(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(subject_source_path(subject_id), manifest["primaryProjectPath"])
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.dll"),
+                manifest["primaryAssemblyPath"],
+            )
+            self.assertEqual([], manifest["additionalAssemblyPaths"])
+            self.assertNotIn("hostKind", manifest)
+            self.assertNotIn("collectionPath", manifest)
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
     def test_host_input_build_regenerates_stale_workspace_before_using_declared_benchmark_host(self) -> None:
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_host_input_workspace_benchmark_host_refresh")
         subject_id = "FixtureWorkspaceBenchmarkHostRefreshSubject"
@@ -2451,6 +3357,76 @@ class SubjectWorkersTests(unittest.TestCase):
             self.assertIsNotNone(loaded_manifest)
             self.assertEqual(1, generate_calls)
             self.assertEqual([None], nested_results)
+            self.assertEqual(workspace_manifest_path, loaded_manifest[0])
+            self.assertEqual(subject_id, loaded_manifest[1]["subjectId"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_workspace_manifest_generation_passes_declared_entry_selection_to_project_workspace(self) -> None:
+        workers_module = load_module(
+            SUBJECT_WORKERS_MODULE_PATH,
+            "chaos_subject_workers_workspace_manifest_declared_entry_selection",
+        )
+        subject_id = "FixtureWorkspaceDeclaredEntrySelectionSubject"
+        selection = {
+            "subjectId": subject_id,
+            "matrixId": "windows-native-check",
+            "variant": "CHECK",
+            "entrySelection": {
+                "family": "declared-unit-test",
+                "stableId": f"{subject_id}::{subject_id}::{subject_id}.Proofs::Run()",
+                "alias": "workspace-proof",
+                "entryIndex": 7,
+            },
+            "executionContext": {
+                "hostPlatform": "windows-x64",
+            },
+        }
+
+        repo_root = self._make_repo_root("workspace-manifest-declared-entry-selection")
+        try:
+            workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+
+            class FakeProjectWorkspaceModule:
+                @staticmethod
+                def generate_subject_workspace(
+                    repo_root_arg: Path,
+                    host_platform_arg: str,
+                    options_arg: dict[str, object],
+                    **kwargs: object,
+                ) -> dict[str, object]:
+                    del kwargs
+                    self.assertEqual(repo_root, repo_root_arg)
+                    self.assertEqual("windows", host_platform_arg)
+                    self.assertEqual(f"subject/{subject_id}", options_arg["id"])
+                    self.assertEqual("windows-native-check", options_arg["matrix"])
+                    self.assertEqual("CHECK", options_arg["variant"])
+                    self.assertTrue(bool(options_arg["refresh-generated"]))
+                    self.assertTrue(bool(options_arg["auto-refresh-missing-generated"]))
+                    self.assertEqual(selection["entrySelection"], options_arg["entry-selection"])
+                    self.assertNotIn("all-targets", options_arg)
+
+                    workspace_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+                    workspace_manifest_path.write_text(
+                        json.dumps(
+                            {
+                                "workspaceVersion": 2,
+                                "subjectId": subject_id,
+                                "managedTestProjects": [],
+                                "nativeTestProjects": [],
+                                "hotupdateTestProjects": [],
+                            }
+                        ),
+                        encoding="utf-8",
+                    )
+                    return {
+                        "manifestPath": posix_path("solutions", "subjects", subject_id, "workspace.manifest.json"),
+                    }
+
+            with patch.object(workers_module, "_load_project_workspace_module", return_value=FakeProjectWorkspaceModule):
+                loaded_manifest = workers_module._ensure_subject_workspace_manifest(repo_root, selection)
+
+            self.assertIsNotNone(loaded_manifest)
             self.assertEqual(workspace_manifest_path, loaded_manifest[0])
             self.assertEqual(subject_id, loaded_manifest[1]["subjectId"])
         finally:

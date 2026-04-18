@@ -158,6 +158,89 @@ def _text_option(options: dict[str, object], name: str) -> str:
     return str(options.get(name) or "").strip()
 
 
+def _entry_selection_host_kind(entry_selection: dict[str, Any] | None) -> str:
+    if not isinstance(entry_selection, dict):
+        return ""
+    family = str(entry_selection.get("family") or "").strip()
+    return {
+        "declared-unit-test": "proof-host",
+        "declared-benchmark": "benchmark-host",
+    }.get(family, "")
+
+
+def _declared_entry_selection_option(options: dict[str, object]) -> dict[str, Any]:
+    payload = options.get("entry-selection")
+    if payload is None:
+        return {}
+    if not isinstance(payload, dict):
+        raise RuntimeError("subject workspace option 'entry-selection' must be an object")
+
+    family = str(payload.get("family") or "").strip()
+    if family not in {"declared-unit-test", "declared-benchmark"}:
+        return {}
+
+    normalized: dict[str, Any] = {"family": family}
+    stable_id = str(payload.get("stableId") or "").strip()
+    alias = str(payload.get("alias") or "").strip()
+    if stable_id:
+        normalized["stableId"] = stable_id
+    if alias:
+        normalized["alias"] = alias
+    entry_index = payload.get("entryIndex")
+    if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+        normalized["entryIndex"] = int(entry_index)
+    return normalized
+
+
+def _source_entry_selection(source: dict[str, Any] | None) -> dict[str, int]:
+    if not isinstance(source, dict):
+        return {}
+
+    payload = source.get("entrySelection")
+    if payload is None:
+        return {}
+    if not isinstance(payload, dict):
+        raise RuntimeError("subject source entrySelection must be an object")
+
+    entry_kind = payload.get("entryKind")
+    entry_slice = payload.get("entrySlice")
+    if entry_kind is None and entry_slice is None:
+        return {}
+    if entry_kind is None or entry_slice is None:
+        raise RuntimeError("subject source entrySelection requires both entryKind and entrySlice")
+    if isinstance(entry_kind, bool) or not isinstance(entry_kind, int) or entry_kind < 0:
+        raise RuntimeError("subject source entrySelection.entryKind must be a non-negative integer")
+    if isinstance(entry_slice, bool) or not isinstance(entry_slice, int) or entry_slice < 0:
+        raise RuntimeError("subject source entrySelection.entrySlice must be a non-negative integer")
+
+    return {
+        "entryKind": int(entry_kind),
+        "entrySlice": int(entry_slice),
+    }
+
+
+def _subject_matrix_source_entry_selection(manifest: dict[str, Any], matrix: dict[str, Any]) -> dict[str, int]:
+    source = dict(manifest.get("source") or {})
+    source.update(dict(matrix.get("source") or {}))
+    return _source_entry_selection(source)
+
+
+def _effective_generated_stage_kind(
+    generated_stage_kind: str,
+    entry_selection: dict[str, Any] | None,
+    subject_entry_selection: dict[str, int] | None = None,
+) -> str:
+    if (
+        generated_stage_kind == "generated-native-proof"
+        and (
+            _entry_selection_host_kind(entry_selection) == "proof-host"
+            or bool(subject_entry_selection)
+        )
+    ):
+        return "generated-native-aot"
+    return generated_stage_kind
+
+
 def _native_target_alias(target_ref: str) -> str:
     target_id = target_ref.strip().lower()
     if target_id in {"generated", "generated-native"}:
@@ -387,6 +470,7 @@ def _subject_native_project_file_path(
     target_id: str,
     target_platform: str,
     host_platform: str,
+    host_kind: str = "",
 ) -> Path:
     if host_platform == "windows" and target_platform == "windows-x64":
         if target_id == SUBJECT_GENERATED_NATIVE_TARGET:
@@ -394,6 +478,8 @@ def _subject_native_project_file_path(
         if target_id == SUBJECT_PROOF_NATIVE_TARGET:
             return configure_root / "proof" / f"{target_id}.vcxproj"
         if target_id == SUBJECT_BENCHMARK_NATIVE_TARGET:
+            if host_kind == "proof-host":
+                return configure_root / "proof" / f"{target_id}.vcxproj"
             return configure_root / "benchmark" / f"{target_id}.vcxproj"
 
     return configure_root / f"{target_id}.vcxproj"
@@ -693,6 +779,7 @@ def _ensure_subject_generated_source(
     run_id: str = "subject-exec",
     refresh_generated: bool,
     refresh_if_missing: bool = False,
+    entry_selection: dict[str, Any] | None = None,
 ) -> None:
     generated_source_path = _subject_generated_source_path(
         repo_root,
@@ -705,7 +792,16 @@ def _ensure_subject_generated_source(
         or (refresh_if_missing and not generated_source_path.is_file())
         or _subject_generated_source_is_stale(generated_source_path)
     ):
-        refresh_subject_generated_root(repo_root, subject_id, matrix_id, variant, run_id=run_id)
+        refresh_kwargs: dict[str, Any] = {"run_id": run_id}
+        if entry_selection:
+            refresh_kwargs["entry_selection"] = dict(entry_selection)
+        refresh_subject_generated_root(
+            repo_root,
+            subject_id,
+            matrix_id,
+            variant,
+            **refresh_kwargs,
+        )
 
     if not generated_source_path.is_file():
         raise RuntimeError(f"subject-exec generated root is missing for subject '{subject_id}'")
@@ -1138,18 +1234,27 @@ def _materialize_subject_native_aot_source(
     subject_id: str,
     matrix_id: str,
     generated_source_path: Path,
+    host_kind: str = "",
 ) -> Path:
-    benchmark_main_path = repo_root / "src" / "native" / "benchmark-host" / "native_aot_main.cpp"
+    host_subdir = "proof" if host_kind == "proof-host" else "benchmark"
+    host_main_path = (
+        repo_root / "src" / "native" / "proof-host" / "native_aot_main.cpp"
+        if host_kind == "proof-host"
+        else repo_root / "src" / "native" / "benchmark-host" / "native_aot_main.cpp"
+    )
 
     materialized_root = _subject_materialized_source_root(workspace_root, matrix_id)
     _clear_dir(materialized_root)
     materialized_root.mkdir(parents=True, exist_ok=True)
     (materialized_root / "generated").mkdir(parents=True, exist_ok=True)
-    (materialized_root / "benchmark").mkdir(parents=True, exist_ok=True)
+    (materialized_root / host_subdir).mkdir(parents=True, exist_ok=True)
     (materialized_root / "CMakeLists.txt").write_text(
-        template_assets_module.read_template(
+        template_assets_module.render_template(
             owner_file=__file__,
             relative_template_path=_NATIVE_AOT_WORKSPACE_TEMPLATE,
+            replacements={
+                "HOST_SUBDIR": host_subdir,
+            },
         ),
         encoding="utf-8",
     )
@@ -1163,12 +1268,12 @@ def _materialize_subject_native_aot_source(
         ),
         encoding="utf-8",
     )
-    (materialized_root / "benchmark" / "CMakeLists.txt").write_text(
+    (materialized_root / host_subdir / "CMakeLists.txt").write_text(
         template_assets_module.render_template(
             owner_file=__file__,
             relative_template_path=_NATIVE_BENCHMARK_TEMPLATE,
             replacements={
-                "BENCHMARK_MAIN": benchmark_main_path.as_posix(),
+                "BENCHMARK_MAIN": host_main_path.as_posix(),
             },
         ),
         encoding="utf-8",
@@ -1193,6 +1298,7 @@ def refresh_subject_generated_root(
     variant: str,
     *,
     run_id: str | None = None,
+    entry_selection: dict[str, Any] | None = None,
 ) -> None:
     selected_run_id = run_id or "subject-exec"
     _clear_dir(_subject_generated_run_root(repo_root, subject_id, run_id=selected_run_id))
@@ -1206,6 +1312,7 @@ def refresh_subject_generated_root(
         matrix_id=matrix_id,
         variant=variant,
         run_id=selected_run_id,
+        entry_selection=entry_selection,
     )
     stages = [dict(stage) for stage in list(plan.get("stagePlan") or [])]
     cutoff = _generated_stage_cutoff(stages)
@@ -1239,6 +1346,7 @@ def _subject_configure_arguments(
     configure_root: Path,
     cmake_path: str,
     host_platform: str,
+    host_kind: str = "",
 ) -> tuple[list[str], list[str], str]:
     matrix_id = str(matrix.get("matrixId") or "")
     execution_context = dict(matrix.get("executionContext") or {})
@@ -1260,6 +1368,7 @@ def _subject_configure_arguments(
                 subject_id=subject_id,
                 matrix_id=matrix_id,
                 generated_source_path=generated_source_path,
+                host_kind=host_kind,
             )
             configure_args = [
                 cmake_path,
@@ -1334,12 +1443,14 @@ def _subject_native_projects(
     generated_stage_kind: str,
     target_platform: str,
     host_platform: str,
+    host_kind: str = "",
 ) -> list[dict[str, Any]]:
     if host_platform != "windows":
         return []
 
     if target_platform == "windows-x64":
         if generated_stage_kind == "generated-native-aot":
+            native_test_host_kind = host_kind if host_kind in {"proof-host", "benchmark-host"} else "benchmark-host"
             return [
                 {
                     "targetId": SUBJECT_GENERATED_NATIVE_TARGET,
@@ -1351,13 +1462,15 @@ def _subject_native_projects(
                             target_id=SUBJECT_GENERATED_NATIVE_TARGET,
                             target_platform=target_platform,
                             host_platform=host_platform,
+                            host_kind=native_test_host_kind,
                         ),
                     ),
                     "buildArgs": ["--config", "Release", "--target", SUBJECT_GENERATED_NATIVE_TARGET],
                 },
                 {
                     "targetId": SUBJECT_BENCHMARK_NATIVE_TARGET,
-                    "kind": "benchmark-native",
+                    "kind": "proof-native" if native_test_host_kind == "proof-host" else "benchmark-native",
+                    "hostKind": native_test_host_kind,
                     "projectPath": _path_text(
                         repo_root,
                         _subject_native_project_file_path(
@@ -1365,6 +1478,7 @@ def _subject_native_projects(
                             target_id=SUBJECT_BENCHMARK_NATIVE_TARGET,
                             target_platform=target_platform,
                             host_platform=host_platform,
+                            host_kind=native_test_host_kind,
                         ),
                     ),
                     "buildArgs": ["--config", "Release", "--target", SUBJECT_BENCHMARK_NATIVE_TARGET],
@@ -1376,30 +1490,32 @@ def _subject_native_projects(
                 "kind": "generated-native",
                 "projectPath": _path_text(
                     repo_root,
-                    _subject_native_project_file_path(
-                        configure_root,
-                        target_id=SUBJECT_GENERATED_NATIVE_TARGET,
-                        target_platform=target_platform,
-                        host_platform=host_platform,
+                        _subject_native_project_file_path(
+                            configure_root,
+                            target_id=SUBJECT_GENERATED_NATIVE_TARGET,
+                            target_platform=target_platform,
+                            host_platform=host_platform,
+                            host_kind=host_kind,
+                        ),
                     ),
-                ),
-                "buildArgs": ["--config", "Release", "--target", SUBJECT_GENERATED_NATIVE_TARGET],
-            },
-            {
+                    "buildArgs": ["--config", "Release", "--target", SUBJECT_GENERATED_NATIVE_TARGET],
+                },
+                {
                 "targetId": SUBJECT_PROOF_NATIVE_TARGET,
                 "kind": "proof-native",
                 "projectPath": _path_text(
                     repo_root,
-                    _subject_native_project_file_path(
-                        configure_root,
-                        target_id=SUBJECT_PROOF_NATIVE_TARGET,
-                        target_platform=target_platform,
-                        host_platform=host_platform,
+                        _subject_native_project_file_path(
+                            configure_root,
+                            target_id=SUBJECT_PROOF_NATIVE_TARGET,
+                            target_platform=target_platform,
+                            host_platform=host_platform,
+                            host_kind=host_kind,
+                        ),
                     ),
-                ),
-                "buildArgs": ["--config", "Release", "--target", SUBJECT_PROOF_NATIVE_TARGET],
-            },
-        ]
+                    "buildArgs": ["--config", "Release", "--target", SUBJECT_PROOF_NATIVE_TARGET],
+                },
+            ]
 
     return [
         {
@@ -1412,6 +1528,7 @@ def _subject_native_projects(
                     target_id=primary_open_target,
                     target_platform=target_platform,
                     host_platform=host_platform,
+                    host_kind=host_kind,
                 ),
             ),
             "buildArgs": [],
@@ -1765,6 +1882,8 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
     subject_id = _subject_id_from_options(options)
     manifest = subjects_module.load_subject_manifest(repo_root, subject_id)
     variant = _subject_variant(manifest, options)
+    entry_selection = _declared_entry_selection_option(options)
+    declared_host_kind = _entry_selection_host_kind(entry_selection)
     requested_open_native_target = _text_option(options, "open-native-target")
     selected_matrices = _subject_selected_matrices(manifest, host_platform, options)
     refresh_generated = _flag(options, "refresh-generated")
@@ -1862,6 +1981,12 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
         execution_context = dict(matrix.get("executionContext") or {})
         target_platform = str(execution_context.get("targetPlatform") or "")
         generated_stage_kind = _subject_matrix_generated_stage_kind(manifest, matrix)
+        subject_entry_selection = _subject_matrix_source_entry_selection(manifest, matrix)
+        effective_generated_stage_kind = _effective_generated_stage_kind(
+            generated_stage_kind,
+            entry_selection,
+            subject_entry_selection,
+        )
         matrix_requires_workspace_configure = _subject_matrix_requires_workspace_configure(manifest, matrix)
         mirrored_generated_root: Path | None = None
         if matrix_requires_workspace_configure and target_platform == "windows-x64":
@@ -1870,18 +1995,19 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
                 repo_root,
                 subject_id=subject_id,
                 matrix_id=matrix_id,
-                generated_stage_kind=generated_stage_kind,
+                generated_stage_kind=effective_generated_stage_kind,
                 variant=variant,
                 run_id=generated_run_id,
                 refresh_generated=refresh_generated or multi_matrix_generated,
                 refresh_if_missing=auto_refresh_missing_generated,
+                entry_selection=entry_selection or None,
             )
             mirrored_generated_root = _mirror_subject_generated_run(
                 repo_root,
                 workspace_root=workspace_root,
                 subject_id=subject_id,
                 matrix_id=matrix_id,
-                generated_stage_kind=generated_stage_kind,
+                generated_stage_kind=effective_generated_stage_kind,
                 run_id=generated_run_id,
                 multi_matrix=multi_matrix_generated,
             )
@@ -1898,13 +2024,14 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
                 repo_root,
                 subject_id=subject_id,
                 matrix=matrix,
-                generated_stage_kind=generated_stage_kind,
+                generated_stage_kind=effective_generated_stage_kind,
                 variant=variant,
                 workspace_root=workspace_root,
                 mirrored_generated_root=mirrored_generated_root,
                 configure_root=configure_root,
                 cmake_path=cmake_path or "",
                 host_platform=host_platform,
+                host_kind=declared_host_kind,
             )
             output = _run_checked(
                 configure_args,
@@ -1932,9 +2059,10 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
                 repo_root,
                 configure_root=configure_root,
                 primary_open_target=primary_open_target,
-                generated_stage_kind=generated_stage_kind,
+                generated_stage_kind=effective_generated_stage_kind,
                 target_platform=target_platform,
                 host_platform=host_platform,
+                host_kind=declared_host_kind,
             )
 
         default_build_native_target = _build_target_from_args(list(build_args), primary_open_target)
@@ -1964,6 +2092,7 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
             if not native_project_path_text:
                 continue
             target_id = str(native_project.get("targetId") or "") or Path(native_project_path_text).stem
+            native_project_host_kind = str(native_project.get("hostKind") or "").strip()
             base_payload = {
                 "projectPath": native_project_path_text,
                 "configureRoot": _path_text(repo_root, configure_root),
@@ -1983,7 +2112,7 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
                 )
                 matrix_native_project_ids.append(project_id)
                 continue
-            if target_id == SUBJECT_PROOF_NATIVE_TARGET:
+            if native_project_host_kind == "proof-host" or target_id == SUBJECT_PROOF_NATIVE_TARGET:
                 project_id = f"native-test/{subject_id}/{matrix_id}/proof-host"
                 workspace_native_test_projects.append(
                     {
@@ -1996,7 +2125,7 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
                 )
                 matrix_native_test_project_ids.append(project_id)
                 continue
-            if target_id == SUBJECT_BENCHMARK_NATIVE_TARGET:
+            if native_project_host_kind == "benchmark-host" or target_id == SUBJECT_BENCHMARK_NATIVE_TARGET:
                 project_id = f"native-test/{subject_id}/{matrix_id}/benchmark-host"
                 workspace_native_test_projects.append(
                     {

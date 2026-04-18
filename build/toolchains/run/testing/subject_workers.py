@@ -47,6 +47,7 @@ WINDOWS_REFERENCE_BUILD_TARGET = "chaos_subject_reference_proof"
 WINDOWS_REFERENCE_RUN_TARGET = "chaos_subject_reference_proof_run"
 WINDOWS_REFERENCE_CMAKE_BUILD_STRATEGY = "windows-reference-cmake"
 WINDOWS_BENCHMARK_CMAKE_BUILD_STRATEGY = "windows-benchmark-cmake"
+WINDOWS_NATIVE_AOT_CMAKE_BUILD_STRATEGY = "windows-native-aot-cmake"
 WINDOWS_DIRECT_BUILD_STRATEGY = "direct-msvc"
 WINDOWS_NATIVE_AOT_BUILD_TARGET = "chaos_subject_native_aot"
 WINDOWS_NATIVE_AOT_BUILD_STRATEGY = "direct-msvc-native-aot"
@@ -96,14 +97,18 @@ _PROJECT_WORKSPACE_MODULE_CACHE: Any | None = None
 _ACTIVE_WORKSPACE_MANIFEST_GENERATIONS: set[str] = set()
 
 
-def _render_windows_native_aot_workspace_cmakelists(repo_root: Path) -> str:
+def _render_windows_native_aot_workspace_cmakelists(repo_root: Path, *, host_subdir: str) -> str:
     repo_root_text = repo_root.as_posix()
     return f"""cmake_minimum_required(VERSION 3.20)
 
 project(chaos_subject_native_aot_workspace LANGUAGES CXX)
 
-if(NOT DEFINED CHAOS_SUBJECT_BENCHMARK_HOST_MAIN OR CHAOS_SUBJECT_BENCHMARK_HOST_MAIN STREQUAL "")
-    message(FATAL_ERROR "CHAOS_SUBJECT_BENCHMARK_HOST_MAIN is required")
+if((NOT DEFINED CHAOS_SUBJECT_HOST_MAIN OR CHAOS_SUBJECT_HOST_MAIN STREQUAL "") AND DEFINED CHAOS_SUBJECT_BENCHMARK_HOST_MAIN AND NOT CHAOS_SUBJECT_BENCHMARK_HOST_MAIN STREQUAL "")
+    set(CHAOS_SUBJECT_HOST_MAIN "${{CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}}")
+endif()
+
+if(NOT DEFINED CHAOS_SUBJECT_HOST_MAIN OR CHAOS_SUBJECT_HOST_MAIN STREQUAL "")
+    message(FATAL_ERROR "CHAOS_SUBJECT_HOST_MAIN is required")
 endif()
 
 if(NOT DEFINED CHAOS_SUBJECT_GENERATED_INPUT_SOURCE OR CHAOS_SUBJECT_GENERATED_INPUT_SOURCE STREQUAL "")
@@ -178,7 +183,8 @@ function(chaos_configure_subject_target target_name)
             "${{REPO_ROOT}}/src/native/runtime-core"
             "${{REPO_ROOT}}/src/native/bootstrap"
             "${{REPO_ROOT}}/src/native/support"
-            "${{REPO_ROOT}}/src/native/benchmark-host")
+            "${{REPO_ROOT}}/src/native/benchmark-host"
+            "${{REPO_ROOT}}/src/native/proof-host")
     chaos_apply_subject_variant("${{target_name}}")
 endfunction()
 
@@ -188,7 +194,7 @@ add_subdirectory("{repo_root_text}/src/native/hot-update" "hot-update")
 add_subdirectory("{repo_root_text}/src/native/support" "support")
 add_subdirectory("{repo_root_text}/src/native/bootstrap" "bootstrap")
 add_subdirectory(generated)
-add_subdirectory(benchmark)
+add_subdirectory({host_subdir})
 """
 
 
@@ -209,13 +215,13 @@ set_target_properties(
 """
 
 
-def _render_windows_native_aot_benchmark_cmakelists() -> str:
-    return """if(NOT EXISTS "${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
-    message(FATAL_ERROR "Missing benchmark host source: ${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
+def _render_windows_native_aot_host_cmakelists() -> str:
+    return """if(NOT EXISTS "${CHAOS_SUBJECT_HOST_MAIN}")
+    message(FATAL_ERROR "Missing native-aot host source: ${CHAOS_SUBJECT_HOST_MAIN}")
 endif()
 
 add_executable(chaos_subject_native_aot EXCLUDE_FROM_ALL
-    "${CHAOS_SUBJECT_BENCHMARK_HOST_MAIN}")
+    "${CHAOS_SUBJECT_HOST_MAIN}")
 chaos_configure_subject_target(chaos_subject_native_aot)
 target_link_libraries(
     chaos_subject_native_aot
@@ -307,6 +313,15 @@ def _selection_workspace_host_kind(selection: dict[str, Any]) -> str:
         if value
     )
     if "perf" in selector_haystack or "benchmark" in selector_haystack:
+        return "benchmark-host"
+    return ""
+
+
+def _selection_native_aot_workspace_host_kind(selection: dict[str, Any]) -> str:
+    host_kind = _selection_workspace_host_kind(selection)
+    if host_kind:
+        return host_kind
+    if _selection_subject_entry_selection(selection):
         return "benchmark-host"
     return ""
 
@@ -606,6 +621,9 @@ def _ensure_subject_workspace_manifest(
     variant = str(selection.get("variant") or "").strip()
     if variant:
         options["variant"] = variant
+    entry_selection = _selection_declared_entry_selection(selection)
+    if entry_selection and "matrix" in options:
+        options["entry-selection"] = dict(entry_selection)
     _ACTIVE_WORKSPACE_MANIFEST_GENERATIONS.add(subject_id)
     try:
         project_workspace_module.generate_subject_workspace(
@@ -621,8 +639,10 @@ def _ensure_subject_workspace_manifest(
 def _resolve_workspace_managed_host(
     repo_root: Path,
     selection: dict[str, Any],
+    *,
+    host_kind_override: str = "",
 ) -> dict[str, str] | None:
-    host_kind = _selection_workspace_host_kind(selection)
+    host_kind = str(host_kind_override or "").strip() or _selection_workspace_host_kind(selection)
     if not host_kind:
         return None
 
@@ -784,8 +804,10 @@ def _resolve_workspace_hotupdate_patch_projects(
 def _resolve_workspace_native_test_host(
     repo_root: Path,
     selection: dict[str, Any],
+    *,
+    host_kind_override: str = "",
 ) -> dict[str, str] | None:
-    host_kind = _selection_workspace_host_kind(selection)
+    host_kind = str(host_kind_override or "").strip() or _selection_workspace_host_kind(selection)
     if not host_kind:
         return None
 
@@ -994,21 +1016,23 @@ def _materialize_windows_native_aot_cmake_source_at(
     repo_root: Path,
     *,
     source_root: Path,
+    host_kind: str,
 ) -> Path:
+    host_subdir = "proof" if host_kind == "proof-host" else "benchmark"
     if source_root.exists():
         shutil.rmtree(source_root)
     (source_root / "generated").mkdir(parents=True, exist_ok=True)
-    (source_root / "benchmark").mkdir(parents=True, exist_ok=True)
+    (source_root / host_subdir).mkdir(parents=True, exist_ok=True)
     (source_root / "CMakeLists.txt").write_text(
-        _render_windows_native_aot_workspace_cmakelists(repo_root),
+        _render_windows_native_aot_workspace_cmakelists(repo_root, host_subdir=host_subdir),
         encoding="utf-8",
     )
     (source_root / "generated" / "CMakeLists.txt").write_text(
         _render_windows_native_aot_generated_cmakelists(),
         encoding="utf-8",
     )
-    (source_root / "benchmark" / "CMakeLists.txt").write_text(
-        _render_windows_native_aot_benchmark_cmakelists(),
+    (source_root / host_subdir / "CMakeLists.txt").write_text(
+        _render_windows_native_aot_host_cmakelists(),
         encoding="utf-8",
     )
     return source_root
@@ -1018,10 +1042,12 @@ def _materialize_windows_native_aot_cmake_source(
     repo_root: Path,
     *,
     build_root: Path,
+    host_kind: str,
 ) -> Path:
     return _materialize_windows_native_aot_cmake_source_at(
         repo_root,
         source_root=build_root / "cmake-src",
+        host_kind=host_kind,
     )
 
 
@@ -1030,11 +1056,13 @@ def _materialize_workspace_windows_native_aot_cmake_source(
     *,
     subject_id: str,
     matrix_id: str,
+    host_kind: str,
 ) -> Path:
     workspace_source_root = repo_root / "solutions" / "subjects" / subject_id / "native-source" / matrix_id
     return _materialize_windows_native_aot_cmake_source_at(
         repo_root,
         source_root=workspace_source_root,
+        host_kind=host_kind,
     )
 
 
@@ -1045,6 +1073,7 @@ def _resolve_windows_native_aot_cmake_layout(
     build_root: Path,
     workspace_native_test_host: dict[str, str],
     generator: str,
+    host_kind: str,
 ) -> tuple[Path, Path]:
     configure_root_text = str(workspace_native_test_host.get("configureRoot") or "").strip()
     subject_id = str(selection.get("subjectId") or "").strip()
@@ -1054,13 +1083,14 @@ def _resolve_windows_native_aot_cmake_layout(
             repo_root,
             subject_id=subject_id,
             matrix_id=matrix_id,
+            host_kind=host_kind,
         )
         cmake_binary_dir = _resolve(repo_root, configure_root_text)
         cmake_binary_dir.parent.mkdir(parents=True, exist_ok=True)
         return cmake_source_root, cmake_binary_dir
 
     return (
-        _materialize_windows_native_aot_cmake_source(repo_root, build_root=build_root),
+        _materialize_windows_native_aot_cmake_source(repo_root, build_root=build_root, host_kind=host_kind),
         tooling_module.allocate_cmake_binary_dir(
             build_root / "cmake",
             host_platform="windows",
@@ -1619,6 +1649,11 @@ def _run_native_generated_emitter(
 
 
 def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dict[str, Any]:
+    selection = dict(request.get("selection") or {})
+    entry_selection = _selection_declared_entry_selection(selection)
+    subject_entry_selection = _selection_subject_entry_selection(selection)
+    if str(entry_selection.get("family") or "") == "declared-unit-test" or subject_entry_selection:
+        return run_native_aot_emitter(repo_root=repo_root, request=request)
     return _run_native_generated_emitter(
         repo_root=repo_root,
         request=request,
@@ -1662,10 +1697,21 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
     if native_aot_build:
         if not generated_source_path_text:
             raise RuntimeError("generated manifest missing generatedSourcePath")
-        workspace_managed_host = _resolve_workspace_managed_host(repo_root, selection)
-        if workspace_managed_host is None or str(workspace_managed_host.get("hostKind") or "") != "benchmark-host":
-            raise RuntimeError("workspace benchmark host contract missing for native-aot build")
-        workspace_native_test_host = _resolve_workspace_native_test_host(repo_root, selection) or {}
+        expected_host_kind = _selection_native_aot_workspace_host_kind(selection) or "benchmark-host"
+        if expected_host_kind not in {"proof-host", "benchmark-host"}:
+            raise RuntimeError(f"unsupported native-aot host kind: {expected_host_kind}")
+        workspace_managed_host = _resolve_workspace_managed_host(
+            repo_root,
+            selection,
+            host_kind_override=expected_host_kind,
+        )
+        if workspace_managed_host is None or str(workspace_managed_host.get("hostKind") or "") != expected_host_kind:
+            raise RuntimeError(f"workspace {expected_host_kind} contract missing for native-aot build")
+        workspace_native_test_host = _resolve_workspace_native_test_host(
+            repo_root,
+            selection,
+            host_kind_override=expected_host_kind,
+        ) or {}
         collection_path = str(workspace_managed_host.get("collectionPath") or "").strip()
         managed_test_project_id = str(
             workspace_native_test_host.get("managedTestProjectId")
@@ -1673,11 +1719,15 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
             or ""
         ).strip()
         if not collection_path:
-            raise RuntimeError("workspace benchmark host contract missing collectionPath")
+            raise RuntimeError(f"workspace {expected_host_kind} contract missing collectionPath")
         if not managed_test_project_id:
-            raise RuntimeError("workspace benchmark host contract missing managedTestProjectId")
+            raise RuntimeError(f"workspace {expected_host_kind} contract missing managedTestProjectId")
 
-        host_source_path = repo_root / "src" / "native" / "benchmark-host" / "native_aot_main.cpp"
+        host_source_path = (
+            repo_root / "src" / "native" / "proof-host" / "native_aot_main.cpp"
+            if expected_host_kind == "proof-host"
+            else repo_root / "src" / "native" / "benchmark-host" / "native_aot_main.cpp"
+        )
         generated_source_path = _resolve(repo_root, generated_source_path_text)
         output_executable_path = out_root / f"{WINDOWS_NATIVE_AOT_BUILD_TARGET}.exe"
         for source_file in [
@@ -1687,13 +1737,15 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
             if not source_file.is_file():
                 raise RuntimeError(f"subject proof source is missing: {source_file}")
 
-        dispatch_manifest_path = _write_native_benchmark_dispatch_manifest(
-            repo_root,
-            build_root=build_root,
-            selection=selection,
-            collection_path=collection_path,
-            entry_selection=_selection_declared_entry_selection(selection),
-        )
+        dispatch_manifest_path = ""
+        if expected_host_kind == "benchmark-host":
+            dispatch_manifest_path = _write_native_benchmark_dispatch_manifest(
+                repo_root,
+                build_root=build_root,
+                selection=selection,
+                collection_path=collection_path,
+                entry_selection=_selection_declared_entry_selection(selection),
+            )
 
         out_root.mkdir(parents=True, exist_ok=True)
         cmake_path, developer_env, _ninja_path = _windows_native_cmake_context(repo_root)
@@ -1705,6 +1757,7 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
             build_root=build_root,
             workspace_native_test_host=workspace_native_test_host,
             generator=generator,
+            host_kind=expected_host_kind,
         )
 
         _run_checked(
@@ -1716,7 +1769,11 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
                 str(cmake_binary_dir),
                 "-G",
                 generator,
-                f"-DCHAOS_SUBJECT_BENCHMARK_HOST_MAIN={host_source_path.as_posix()}",
+                *(
+                    [f"-DCHAOS_SUBJECT_HOST_MAIN={host_source_path.as_posix()}"]
+                    if expected_host_kind == "proof-host"
+                    else [f"-DCHAOS_SUBJECT_BENCHMARK_HOST_MAIN={host_source_path.as_posix()}"]
+                ),
                 f"-DCHAOS_SUBJECT_GENERATED_INPUT_SOURCE={generated_source_path.as_posix()}",
                 f"-DCHAOS_SUBJECT_VARIANT={variant}",
                 f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={out_root.as_posix()}",
@@ -1748,7 +1805,11 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
             "targetPlatform": str(request["selection"]["executionContext"]["targetPlatform"]),
             "toolchainProfile": str(request["selection"]["executionContext"]["toolchainProfile"]),
             "variant": variant,
-            "buildStrategy": WINDOWS_BENCHMARK_CMAKE_BUILD_STRATEGY,
+            "buildStrategy": (
+                WINDOWS_NATIVE_AOT_CMAKE_BUILD_STRATEGY
+                if expected_host_kind == "proof-host"
+                else WINDOWS_BENCHMARK_CMAKE_BUILD_STRATEGY
+            ),
             "buildKind": "native-aot",
             "variantMacros": {
                 "codegen": list(variant_macros["codegen"]),
@@ -1760,11 +1821,15 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
             "binaryRoot": _relative(repo_root, out_root),
             "outputs": [_relative(repo_root, output_executable_path)],
             "cmakeBinaryDir": tooling_module.path_text(repo_root, cmake_binary_dir),
-            "hostKind": "benchmark-host",
+            "hostKind": expected_host_kind,
             "collectionPath": collection_path,
             "managedTestProjectId": managed_test_project_id,
-            "dispatchManifestPath": dispatch_manifest_path,
         }
+        if dispatch_manifest_path:
+            manifest["dispatchManifestPath"] = dispatch_manifest_path
+        entry_selection = _selection_declared_entry_selection(selection)
+        if expected_host_kind == "proof-host" and entry_selection:
+            manifest["entrySelection"] = dict(entry_selection)
         write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
         return _success_result(
             bucket_manifest_path=request["paths"]["manifestPath"],
@@ -2304,6 +2369,7 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
     if not isinstance(build_manifest, dict):
         raise RuntimeError("build manifest must be an object")
 
+    selection = dict(request["selection"])
     runtime_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     runtime_root.mkdir(parents=True, exist_ok=True)
 
@@ -2311,6 +2377,65 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
     stderr_path = runtime_root / "stderr.log"
     exit_code_path = runtime_root / "exit-code.txt"
     build_strategy = str(build_manifest.get("buildStrategy") or "")
+    host_kind = str(build_manifest.get("hostKind") or "").strip()
+
+    if (
+        build_strategy in {WINDOWS_NATIVE_AOT_CMAKE_BUILD_STRATEGY, WINDOWS_BENCHMARK_CMAKE_BUILD_STRATEGY}
+        and host_kind in {"proof-host", "benchmark-host"}
+    ):
+        output_paths = [str(value) for value in list(build_manifest.get("outputs") or []) if str(value)]
+        if not output_paths:
+            raise RuntimeError(f"{build_strategy} build manifest missing outputs")
+
+        native_executable_path = _resolve(repo_root, output_paths[0])
+        runtime_arguments = _selection_runtime_arguments(selection)
+        collection_path = str(build_manifest.get("collectionPath") or "").strip()
+        if host_kind == "proof-host" and collection_path:
+            runtime_arguments.append(f"{CHAOS_COLLECTION_PATH_ARGUMENT_PREFIX}{collection_path}")
+        entry_selection = _selection_declared_entry_selection(selection)
+        entry_index = entry_selection.get("entryIndex")
+        if isinstance(entry_index, int) and not isinstance(entry_index, bool) and entry_index >= 0:
+            runtime_arguments.append(f"{CHAOS_ENTRY_INDEX_ARGUMENT_PREFIX}{entry_index}")
+        completed = run_process([str(native_executable_path), *runtime_arguments], cwd=runtime_root)
+        stdout_path.write_text(completed.stdout or "", encoding="utf-8")
+        stderr_path.write_text(completed.stderr or "", encoding="utf-8")
+        exit_code_path.write_text(f"{completed.returncode}\n", encoding="utf-8")
+
+        manifest = {
+            "subjectId": str(selection["subjectId"]),
+            "matrixId": str(selection["matrixId"]),
+            "bucket": "runtime",
+            "variant": _selection_variant(selection),
+            "buildManifestPath": str(request["upstream"]["build"]["manifestPath"]),
+            "stdoutPath": _relative(repo_root, stdout_path),
+            "stderrPath": _relative(repo_root, stderr_path),
+            "exitCodePath": _relative(repo_root, exit_code_path),
+            "tracePaths": [],
+            "hostKind": host_kind,
+        }
+        if collection_path:
+            manifest["collectionPath"] = collection_path
+        write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
+
+        if completed.returncode != 0:
+            return {
+                "status": "fail",
+                "bucketManifestPath": request["paths"]["manifestPath"],
+                "reportPaths": [],
+                "primaryEvidencePaths": [manifest["stdoutPath"], manifest["exitCodePath"]],
+                "metrics": {"durationMs": 0},
+                "diagnostics": {"stdoutPath": manifest["stdoutPath"], "stderrPath": manifest["stderrPath"]},
+                "details": {},
+                "failure": f"subject proof run failed: {native_executable_path}",
+            }
+
+        return _success_result(
+            bucket_manifest_path=request["paths"]["manifestPath"],
+            report_paths=[],
+            primary_evidence_paths=[manifest["stdoutPath"], manifest["exitCodePath"]],
+            stdout_path=manifest["stdoutPath"],
+            stderr_path=manifest["stderrPath"],
+        )
 
     if build_strategy == WINDOWS_DIRECT_BUILD_STRATEGY:
         output_paths = [str(value) for value in list(build_manifest.get("outputs") or []) if str(value)]
@@ -2324,10 +2449,10 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
         exit_code_path.write_text(f"{completed.returncode}\n", encoding="utf-8")
 
         manifest = {
-            "subjectId": str(request["selection"]["subjectId"]),
-            "matrixId": str(request["selection"]["matrixId"]),
+            "subjectId": str(selection["subjectId"]),
+            "matrixId": str(selection["matrixId"]),
             "bucket": "runtime",
-            "variant": _selection_variant(dict(request["selection"])),
+            "variant": _selection_variant(selection),
             "buildManifestPath": str(request["upstream"]["build"]["manifestPath"]),
             "stdoutPath": _relative(repo_root, stdout_path),
             "stderrPath": _relative(repo_root, stderr_path),
@@ -2361,7 +2486,6 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
         if not output_paths:
             raise RuntimeError("android-native-cmake build manifest missing outputs")
 
-        selection = dict(request["selection"])
         execution_context = dict(selection.get("executionContext") or {})
         runtime_arguments = _selection_runtime_arguments(selection)
         host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))

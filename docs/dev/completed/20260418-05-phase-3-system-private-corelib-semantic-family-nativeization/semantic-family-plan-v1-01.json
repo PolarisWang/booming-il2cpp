@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "taskId": "20260418-05-phase-3-system-private-corelib-semantic-family-nativeization",
+  "generatedAt": "2026-04-18T10:21:38.0500102+08:00",
+  "targetFrameworks": {
+    "net10.0": {
+      "familyCount": 6,
+      "totalPublicMemberCount": 32489,
+      "families": {
+        "abstract": {
+          "priority": 6,
+          "memberCount": 1039,
+          "sampleMembers": [
+            "System.Buffers.ArrayPool\u00601::Rent/1",
+            "System.Buffers.ArrayPool\u00601::Return/2",
+            "System.Buffers.Binary.BinaryPrimitives\u002BIEndiannessReverser\u00601::Reverse/1",
+            "System.Buffers.Binary.BinaryPrimitives\u002BIEndiannessReverser\u00601::Reverse/1",
+            "System.Buffers.Binary.BinaryPrimitives\u002BIEndiannessReverser\u00601::Reverse/1",
+            "System.Buffers.IMemoryOwner\u00601::Memory",
+            "System.Buffers.IMemoryOwner\u00601::get_Memory/0",
+            "System.Buffers.IPinnable::Pin/1",
+            "System.Buffers.IPinnable::Unpin/0",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BINegator::ExtractMask/1",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BINegator::ExtractMask/1",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BINegator::NegateIfNeeded/1",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BINegator::NegateIfNeeded/1",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BINegator::NegateIfNeeded/1",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BIOptimizations::PackSources/2",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BIOptimizations::PackSources/2",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BIResultMapper\u00602::FirstIndexOverlapped\u00601/4",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BIResultMapper\u00602::FirstIndexOverlapped\u00601/4",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BIResultMapper\u00602::FirstIndex\u00601/3",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BIResultMapper\u00602::FirstIndex\u00601/3"
+          ]
+        },
+        "field-metadata": {
+          "priority": 5,
+          "memberCount": 3962,
+          "sampleMembers": [
+            "Internal.Runtime.InteropServices.ComActivator\u002B\u003C\u003Ec__DisplayClass14_0::resolver",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory\u002BValidatedInterfaceKind::IDispatch",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory\u002BValidatedInterfaceKind::IUnknown",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory\u002BValidatedInterfaceKind::ManagedType",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory\u002BValidatedInterfaceKind::value__",
+            "Internal.Runtime.InteropServices.ComponentActivator\u002B\u003C\u003Ec__DisplayClass15_0::resolver",
+            "Internal.Runtime.InteropServices.InMemoryAssemblyLoader\u002B\u003C\u003Ec__DisplayClass7_0::resolver",
+            "Interop\u002BAdvapi32\u002BACCESS_MODE::DENY_ACCESS",
+            "Interop\u002BAdvapi32\u002BACCESS_MODE::GRANT_ACCESS",
+            "Interop\u002BAdvapi32\u002BACCESS_MODE::NOT_USED_ACCESS",
+            "Interop\u002BAdvapi32\u002BACCESS_MODE::REVOKE_ACCESS",
+            "Interop\u002BAdvapi32\u002BACCESS_MODE::SET_ACCESS",
+            "Interop\u002BAdvapi32\u002BACCESS_MODE::SET_AUDIT_FAILURE",
+            "Interop\u002BAdvapi32\u002BACCESS_MODE::SET_AUDIT_SUCCESS",
+            "Interop\u002BAdvapi32\u002BACCESS_MODE::value__",
+            "Interop\u002BAdvapi32\u002BACE::Header",
+            "Interop\u002BAdvapi32\u002BACE::Mask",
+            "Interop\u002BAdvapi32\u002BACE::SidStart",
+            "Interop\u002BAdvapi32\u002BACE_HEADER::AceFlags",
+            "Interop\u002BAdvapi32\u002BACE_HEADER::AceSize"
+          ]
+        },
+        "internal-call": {
+          "priority": 2,
+          "memberCount": 71,
+          "sampleMembers": [
+            "System.Environment::CurrentManagedThreadId",
+            "System.Environment::ExitCode",
+            "System.Environment::get_CurrentManagedThreadId/0",
+            "System.Environment::get_ExitCode/0",
+            "System.Environment::set_ExitCode/1",
+            "System.GC::GetAllocatedBytesForCurrentThread/0",
+            "System.Math::Acos/1",
+            "System.Math::Acosh/1",
+            "System.Math::Asin/1",
+            "System.Math::Asinh/1",
+            "System.Math::Atan/1",
+            "System.Math::Atan2/2",
+            "System.Math::Atanh/1",
+            "System.Math::Cbrt/1",
+            "System.Math::Ceiling/1",
+            "System.Math::Cos/1",
+            "System.Math::Cosh/1",
+            "System.Math::Exp/1",
+            "System.Math::Floor/1",
+            "System.Math::FusedMultiplyAdd/3"
+          ]
+        },
+        "managed-cil": {
+          "priority": 1,
+          "memberCount": 27137,
+          "sampleMembers": [
+            "Internal.Console\u002BError::Write/1",
+            "Internal.Console\u002BError::WriteLine/0",
+            "Internal.Console::Write/1",
+            "Internal.Console::WriteLine/0",
+            "Internal.Console::WriteLine/1",
+            "Internal.Runtime.InteropServices.ComActivator\u002B\u003C\u003Ec__DisplayClass14_0::.ctor/0",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory\u002BValidatedInterfaceType::Kind",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory\u002BValidatedInterfaceType::ManagedType",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory\u002BValidatedInterfaceType::get_Kind/0",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory\u002BValidatedInterfaceType::get_ManagedType/0",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory\u002BValidatedInterfaceType::set_Kind/1",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory\u002BValidatedInterfaceType::set_ManagedType/1",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory::.ctor/2",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory::CreateAggregatedObject/2",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory::CreateInstance/3",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory::CreateValidatedInterfaceType/3",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory::GetObjectAsInterface/2",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory::LockServer/1",
+            "Internal.Runtime.InteropServices.ComActivator\u002BLicenseClassFactory::.ctor/2",
+            "Internal.Runtime.InteropServices.ComActivator\u002BLicenseClassFactory::CreateInstance/3"
+          ]
+        },
+        "pinvoke": {
+          "priority": 4,
+          "memberCount": 4,
+          "sampleMembers": [
+            "Interop\u002BKernel32::GetCurrentThreadId/0",
+            "Interop\u002BNtDll::NtQueryDirectoryFile/11",
+            "Interop\u002BNtDll::RtlNtStatusToDosError/1",
+            "Interop\u002BUser32::SendMessageTimeout/7"
+          ]
+        },
+        "runtime-special": {
+          "priority": 3,
+          "memberCount": 276,
+          "sampleMembers": [
+            "Internal.Runtime.InteropServices.ComponentActivator\u002BComponentEntryPoint::.ctor/2",
+            "Internal.Runtime.InteropServices.ComponentActivator\u002BComponentEntryPoint::Invoke/2",
+            "Interop\u002BHostPolicy\u002Bcorehost_error_writer_fn::.ctor/2",
+            "Interop\u002BHostPolicy\u002Bcorehost_error_writer_fn::Invoke/1",
+            "Interop\u002BHostPolicy\u002Bcorehost_resolve_component_dependencies_result_fn::.ctor/2",
+            "Interop\u002BHostPolicy\u002Bcorehost_resolve_component_dependencies_result_fn::Invoke/3",
+            "System.Action::.ctor/2",
+            "System.Action::BeginInvoke/2",
+            "System.Action::EndInvoke/1",
+            "System.Action::Invoke/0",
+            "System.Action\u006010::.ctor/2",
+            "System.Action\u006010::BeginInvoke/12",
+            "System.Action\u006010::EndInvoke/1",
+            "System.Action\u006010::Invoke/10",
+            "System.Action\u006011::.ctor/2",
+            "System.Action\u006011::BeginInvoke/13",
+            "System.Action\u006011::EndInvoke/1",
+            "System.Action\u006011::Invoke/11",
+            "System.Action\u006012::.ctor/2",
+            "System.Action\u006012::BeginInvoke/14"
+          ]
+        }
+      }
+    },
+    "net8.0": {
+      "familyCount": 6,
+      "totalPublicMemberCount": 26154,
+      "families": {
+        "abstract": {
+          "priority": 6,
+          "memberCount": 949,
+          "sampleMembers": [
+            "System.Buffers.ArrayPool\u00601::Rent/1",
+            "System.Buffers.ArrayPool\u00601::Return/2",
+            "System.Buffers.Binary.BinaryPrimitives\u002BIEndiannessReverser\u00601::Reverse/1",
+            "System.Buffers.Binary.BinaryPrimitives\u002BIEndiannessReverser\u00601::Reverse/1",
+            "System.Buffers.Binary.BinaryPrimitives\u002BIEndiannessReverser\u00601::Reverse/1",
+            "System.Buffers.IMemoryOwner\u00601::Memory",
+            "System.Buffers.IMemoryOwner\u00601::get_Memory/0",
+            "System.Buffers.IPinnable::Pin/1",
+            "System.Buffers.IPinnable::Unpin/0",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BINegator::ExtractMask/1",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BINegator::ExtractMask/1",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BINegator::NegateIfNeeded/1",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BINegator::NegateIfNeeded/1",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BINegator::NegateIfNeeded/1",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BIOptimizations::PackSources/2",
+            "System.Buffers.IndexOfAnyAsciiSearcher\u002BIOptimizations::PackSources/2",
+            "System.Buffers.MemoryManager\u00601::Dispose/1",
+            "System.Buffers.MemoryManager\u00601::GetSpan/0",
+            "System.Buffers.MemoryManager\u00601::Pin/1",
+            "System.Buffers.MemoryManager\u00601::Unpin/0"
+          ]
+        },
+        "field-metadata": {
+          "priority": 5,
+          "memberCount": 3658,
+          "sampleMembers": [
+            "Internal.Runtime.InteropServices.ComActivator\u002B\u003C\u003Ec__DisplayClass16_0::resolver",
+            "Internal.Runtime.InteropServices.ComponentActivator\u002B\u003C\u003Ec__DisplayClass15_0::resolver",
+            "Internal.Runtime.InteropServices.InMemoryAssemblyLoader\u002B\u003C\u003Ec__DisplayClass7_0::resolver",
+            "Interop\u002BAdvapi32\u002BActivityControl::EVENT_ACTIVITY_CTRL_CREATE_ID",
+            "Interop\u002BAdvapi32\u002BActivityControl::EVENT_ACTIVITY_CTRL_CREATE_SET_ID",
+            "Interop\u002BAdvapi32\u002BActivityControl::EVENT_ACTIVITY_CTRL_GET_ID",
+            "Interop\u002BAdvapi32\u002BActivityControl::EVENT_ACTIVITY_CTRL_GET_SET_ID",
+            "Interop\u002BAdvapi32\u002BActivityControl::EVENT_ACTIVITY_CTRL_SET_ID",
+            "Interop\u002BAdvapi32\u002BActivityControl::value__",
+            "Interop\u002BAdvapi32\u002BEVENT_FILTER_DESCRIPTOR::Ptr",
+            "Interop\u002BAdvapi32\u002BEVENT_FILTER_DESCRIPTOR::Size",
+            "Interop\u002BAdvapi32\u002BEVENT_FILTER_DESCRIPTOR::Type",
+            "Interop\u002BAdvapi32\u002BEVENT_INFO_CLASS::BinaryTrackInfo",
+            "Interop\u002BAdvapi32\u002BEVENT_INFO_CLASS::SetEnableAllKeywords",
+            "Interop\u002BAdvapi32\u002BEVENT_INFO_CLASS::SetTraits",
+            "Interop\u002BAdvapi32\u002BEVENT_INFO_CLASS::value__",
+            "Interop\u002BAdvapi32\u002BTOKEN_ELEVATION::TokenIsElevated",
+            "Interop\u002BAdvapi32\u002BTOKEN_INFORMATION_CLASS::MaxTokenInfoClass",
+            "Interop\u002BAdvapi32\u002BTOKEN_INFORMATION_CLASS::TokenAccessInformation",
+            "Interop\u002BAdvapi32\u002BTOKEN_INFORMATION_CLASS::TokenAppContainerNumber"
+          ]
+        },
+        "internal-call": {
+          "priority": 2,
+          "memberCount": 117,
+          "sampleMembers": [
+            "System.ArgIterator::GetRemainingCount/0",
+            "System.Diagnostics.Debugger::IsAttached",
+            "System.Diagnostics.Debugger::IsLogging/0",
+            "System.Diagnostics.Debugger::get_IsAttached/0",
+            "System.Environment::CurrentManagedThreadId",
+            "System.Environment::ExitCode",
+            "System.Environment::FailFast/1",
+            "System.Environment::FailFast/2",
+            "System.Environment::TickCount",
+            "System.Environment::TickCount64",
+            "System.Environment::get_CurrentManagedThreadId/0",
+            "System.Environment::get_ExitCode/0",
+            "System.Environment::get_TickCount/0",
+            "System.Environment::get_TickCount64/0",
+            "System.Environment::set_ExitCode/1",
+            "System.GC::GetAllocatedBytesForCurrentThread/0",
+            "System.GC::GetGeneration/1",
+            "System.GC::GetTotalAllocatedBytes/1",
+            "System.Math::Acos/1",
+            "System.Math::Acosh/1"
+          ]
+        },
+        "managed-cil": {
+          "priority": 1,
+          "memberCount": 21152,
+          "sampleMembers": [
+            "Internal.Console\u002BError::Write/1",
+            "Internal.Console::Write/1",
+            "Internal.Console::WriteLine/0",
+            "Internal.Console::WriteLine/1",
+            "Internal.Runtime.InteropServices.ComActivator\u002B\u003C\u003Ec__DisplayClass16_0::.ctor/0",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory::.ctor/2",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory::CreateAggregatedObject/2",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory::CreateInstance/3",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory::GetObjectAsInterface/2",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory::GetValidatedInterfaceType/3",
+            "Internal.Runtime.InteropServices.ComActivator\u002BBasicClassFactory::LockServer/1",
+            "Internal.Runtime.InteropServices.ComActivator\u002BLicenseClassFactory::.ctor/2",
+            "Internal.Runtime.InteropServices.ComActivator\u002BLicenseClassFactory::CreateInstance/3",
+            "Internal.Runtime.InteropServices.ComActivator\u002BLicenseClassFactory::CreateInstanceLic/5",
+            "Internal.Runtime.InteropServices.ComActivator\u002BLicenseClassFactory::GetLicInfo/1",
+            "Internal.Runtime.InteropServices.ComActivator\u002BLicenseClassFactory::LockServer/1",
+            "Internal.Runtime.InteropServices.ComActivator\u002BLicenseClassFactory::RequestLicKey/2",
+            "Internal.Runtime.InteropServices.ComponentActivator\u002B\u003C\u003Ec__DisplayClass15_0::.ctor/0",
+            "Internal.Runtime.InteropServices.InMemoryAssemblyLoader\u002B\u003C\u003Ec__DisplayClass7_0::.ctor/0",
+            "Interop\u002BNtDll\u002BFILE_FULL_DIR_INFORMATION::FileName"
+          ]
+        },
+        "pinvoke": {
+          "priority": 4,
+          "memberCount": 4,
+          "sampleMembers": [
+            "Interop\u002BKernel32::GetCurrentThreadId/0",
+            "Interop\u002BNtDll::NtQueryDirectoryFile/11",
+            "Interop\u002BNtDll::RtlNtStatusToDosError/1",
+            "Interop\u002BUser32::SendMessageTimeout/7"
+          ]
+        },
+        "runtime-special": {
+          "priority": 3,
+          "memberCount": 274,
+          "sampleMembers": [
+            "Internal.Runtime.InteropServices.ComponentActivator\u002BComponentEntryPoint::.ctor/2",
+            "Internal.Runtime.InteropServices.ComponentActivator\u002BComponentEntryPoint::Invoke/2",
+            "Interop\u002BHostPolicy\u002Bcorehost_error_writer_fn::.ctor/2",
+            "Interop\u002BHostPolicy\u002Bcorehost_error_writer_fn::Invoke/1",
+            "Interop\u002BHostPolicy\u002Bcorehost_resolve_component_dependencies_result_fn::.ctor/2",
+            "Interop\u002BHostPolicy\u002Bcorehost_resolve_component_dependencies_result_fn::Invoke/3",
+            "System.Action::.ctor/2",
+            "System.Action::BeginInvoke/2",
+            "System.Action::EndInvoke/1",
+            "System.Action::Invoke/0",
+            "System.Action\u006010::.ctor/2",
+            "System.Action\u006010::BeginInvoke/12",
+            "System.Action\u006010::EndInvoke/1",
+            "System.Action\u006010::Invoke/10",
+            "System.Action\u006011::.ctor/2",
+            "System.Action\u006011::BeginInvoke/13",
+            "System.Action\u006011::EndInvoke/1",
+            "System.Action\u006011::Invoke/11",
+            "System.Action\u006012::.ctor/2",
+            "System.Action\u006012::BeginInvoke/14"
+          ]
+        }
+      }
+    }
+  }
+}

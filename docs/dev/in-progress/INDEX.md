@@ -1,5 +1,5 @@
 # 进行中任务
 | task_id | task_type | phase | updated_at | next_step | active |
 | --- | --- | --- | --- | --- | --- |
-| [20260418-02-phase-0-framework-pack-catalog-and-asset-policy](20260418-02-phase-0-framework-pack-catalog-and-asset-policy/STATUS.md) | plan | executing | 2026-04-18 01:56:05 +08:00 | 保持 Phase 0 为 `in_progress`；已生成首批基线产物，等待 `.NET 10` snapshot 入仓。 | true |
-| [20260418-01-dotnet-foundation-pack-nativeization-roadmap](20260418-01-dotnet-foundation-pack-nativeization-roadmap/STATUS.md) | roadmap | roadmap | 2026-04-18 01:56:05 +08:00 | 继续由子任务 `20260418-02` 承接 Phase 0 framework pack catalog 与 asset policy。 | false |
+| [20260418-06-dependency-driven-core-bcl-layer-nativeization](20260418-06-dependency-driven-core-bcl-layer-nativeization/STATUS.md) | plan | planning | 2026-04-18 11:33:19 +08:00 | 已建立 dependency-layer child task，下一步冻结 layer plan 输入 authority 与首层 ready / blocked 分类。 | true |
+| [20260418-01-dotnet-foundation-pack-nativeization-roadmap](20260418-01-dotnet-foundation-pack-nativeization-roadmap/STATUS.md) | roadmap | roadmap | 2026-04-18 11:33:19 +08:00 | 已归档 `20260418-05`，并激活 `20260418-06` dependency-layer child task。 | false |

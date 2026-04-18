@@ -1,0 +1,662 @@
+{
+  "schemaVersion": 1,
+  "taskId": "20260418-03-phase-1-contract-facade-and-shim-certification-lane",
+  "generatedAt": "2026-04-18T02:50:06.7461008+08:00",
+  "seedAssemblies": [
+    "System",
+    "System.Core",
+    "System.Runtime",
+    "mscorlib",
+    "netstandard"
+  ],
+  "targetFrameworks": {
+    "net10.0": {
+      "selectedVersion": "10.0.6",
+      "sourceKind": "repo-frozen-snapshot",
+      "candidateAssemblyCount": 21,
+      "candidateAssemblies": {
+        "System": {
+          "fileName": "System.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.dll",
+          "seedReasons": [
+            "seed"
+          ],
+          "publicTypeDefinitionCount": 0,
+          "forwardedTypeCount": 964,
+          "publicMemberCount": 0,
+          "bindingTargetAssemblyCount": 38,
+          "contractCompleteEligible": true
+        },
+        "System.Collections": {
+          "fileName": "System.Collections.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Collections.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Collections.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 43,
+          "forwardedTypeCount": 1,
+          "publicMemberCount": 558,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Collections.NonGeneric": {
+          "fileName": "System.Collections.NonGeneric.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Collections.NonGeneric.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Collections.NonGeneric.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 9,
+          "forwardedTypeCount": 4,
+          "publicMemberCount": 153,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.ComponentModel.TypeConverter": {
+          "fileName": "System.ComponentModel.TypeConverter.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.ComponentModel.TypeConverter.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.ComponentModel.TypeConverter.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 217,
+          "forwardedTypeCount": 9,
+          "publicMemberCount": 1906,
+          "bindingTargetAssemblyCount": 3,
+          "contractCompleteEligible": true
+        },
+        "System.Core": {
+          "fileName": "System.Core.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Core.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Core.dll",
+          "seedReasons": [
+            "seed"
+          ],
+          "publicTypeDefinitionCount": 0,
+          "forwardedTypeCount": 249,
+          "publicMemberCount": 0,
+          "bindingTargetAssemblyCount": 12,
+          "contractCompleteEligible": true
+        },
+        "System.Data.Common": {
+          "fileName": "System.Data.Common.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Data.Common.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Data.Common.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 173,
+          "forwardedTypeCount": 1,
+          "publicMemberCount": 3271,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.IO.Pipes.AccessControl": {
+          "fileName": "System.IO.Pipes.AccessControl.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.IO.Pipes.AccessControl.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.IO.Pipes.AccessControl.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 6,
+          "forwardedTypeCount": 1,
+          "publicMemberCount": 33,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Memory": {
+          "fileName": "System.Memory.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Memory.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Memory.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 21,
+          "forwardedTypeCount": 13,
+          "publicMemberCount": 623,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Net.Requests": {
+          "fileName": "System.Net.Requests.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Net.Requests.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Net.Requests.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 30,
+          "forwardedTypeCount": 2,
+          "publicMemberCount": 687,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.ObjectModel": {
+          "fileName": "System.ObjectModel.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.ObjectModel.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.ObjectModel.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 20,
+          "forwardedTypeCount": 3,
+          "publicMemberCount": 135,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Reflection.Primitives": {
+          "fileName": "System.Reflection.Primitives.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Reflection.Primitives.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Reflection.Primitives.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 7,
+          "forwardedTypeCount": 9,
+          "publicMemberCount": 327,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Runtime": {
+          "fileName": "System.Runtime.dll",
+          "classification": "contract-facade",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Runtime.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Runtime.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure",
+            "seed"
+          ],
+          "publicTypeDefinitionCount": 935,
+          "forwardedTypeCount": 0,
+          "publicMemberCount": 12543,
+          "bindingTargetAssemblyCount": 1,
+          "contractCompleteEligible": true
+        },
+        "System.Runtime.CompilerServices.VisualC": {
+          "fileName": "System.Runtime.CompilerServices.VisualC.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Runtime.CompilerServices.VisualC.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Runtime.CompilerServices.VisualC.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 16,
+          "forwardedTypeCount": 4,
+          "publicMemberCount": 7,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Runtime.InteropServices": {
+          "fileName": "System.Runtime.InteropServices.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Runtime.InteropServices.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Runtime.InteropServices.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 211,
+          "forwardedTypeCount": 9,
+          "publicMemberCount": 1603,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Runtime.Serialization.Formatters": {
+          "fileName": "System.Runtime.Serialization.Formatters.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Runtime.Serialization.Formatters.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Runtime.Serialization.Formatters.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 16,
+          "forwardedTypeCount": 8,
+          "publicMemberCount": 144,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Runtime.Serialization.Primitives": {
+          "fileName": "System.Runtime.Serialization.Primitives.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Runtime.Serialization.Primitives.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Runtime.Serialization.Primitives.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 10,
+          "forwardedTypeCount": 7,
+          "publicMemberCount": 92,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Runtime.Serialization.Xml": {
+          "fileName": "System.Runtime.Serialization.Xml.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Runtime.Serialization.Xml.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Runtime.Serialization.Xml.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 32,
+          "forwardedTypeCount": 1,
+          "publicMemberCount": 472,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Xml.XPath": {
+          "fileName": "System.Xml.XPath.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Xml.XPath.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Xml.XPath.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 2,
+          "forwardedTypeCount": 12,
+          "publicMemberCount": 14,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Xml.XmlSerializer": {
+          "fileName": "System.Xml.XmlSerializer.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\System.Xml.XmlSerializer.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\System.Xml.XmlSerializer.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 58,
+          "forwardedTypeCount": 12,
+          "publicMemberCount": 767,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "mscorlib": {
+          "fileName": "mscorlib.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\mscorlib.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\mscorlib.dll",
+          "seedReasons": [
+            "seed"
+          ],
+          "publicTypeDefinitionCount": 0,
+          "forwardedTypeCount": 1260,
+          "publicMemberCount": 0,
+          "bindingTargetAssemblyCount": 33,
+          "contractCompleteEligible": true
+        },
+        "netstandard": {
+          "fileName": "netstandard.dll",
+          "classification": "compat-shim",
+          "sourceKind": "repo-frozen-snapshot",
+          "refPath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\ref\\netstandard.dll",
+          "runtimePath": "D:\\agent\\booming-il2cpp\\assets\\framework-packs\\dotnet-foundation\\net10\\runtime\\netstandard.dll",
+          "seedReasons": [
+            "seed"
+          ],
+          "publicTypeDefinitionCount": 0,
+          "forwardedTypeCount": 2611,
+          "publicMemberCount": 0,
+          "bindingTargetAssemblyCount": 79,
+          "contractCompleteEligible": true
+        }
+      }
+    },
+    "net8.0": {
+      "selectedVersion": "8.0.11",
+      "sourceKind": "machine-global-official-installation",
+      "candidateAssemblyCount": 19,
+      "candidateAssemblies": {
+        "System": {
+          "fileName": "System.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.dll",
+          "seedReasons": [
+            "seed"
+          ],
+          "publicTypeDefinitionCount": 0,
+          "forwardedTypeCount": 963,
+          "publicMemberCount": 0,
+          "bindingTargetAssemblyCount": 38,
+          "contractCompleteEligible": true
+        },
+        "System.Collections.NonGeneric": {
+          "fileName": "System.Collections.NonGeneric.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.Collections.NonGeneric.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.Collections.NonGeneric.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 9,
+          "forwardedTypeCount": 4,
+          "publicMemberCount": 153,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.ComponentModel.TypeConverter": {
+          "fileName": "System.ComponentModel.TypeConverter.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.ComponentModel.TypeConverter.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.ComponentModel.TypeConverter.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 217,
+          "forwardedTypeCount": 9,
+          "publicMemberCount": 1878,
+          "bindingTargetAssemblyCount": 3,
+          "contractCompleteEligible": true
+        },
+        "System.Core": {
+          "fileName": "System.Core.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.Core.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.Core.dll",
+          "seedReasons": [
+            "seed"
+          ],
+          "publicTypeDefinitionCount": 0,
+          "forwardedTypeCount": 248,
+          "publicMemberCount": 0,
+          "bindingTargetAssemblyCount": 12,
+          "contractCompleteEligible": true
+        },
+        "System.Data.Common": {
+          "fileName": "System.Data.Common.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.Data.Common.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.Data.Common.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 173,
+          "forwardedTypeCount": 1,
+          "publicMemberCount": 3269,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Memory": {
+          "fileName": "System.Memory.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.Memory.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.Memory.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 21,
+          "forwardedTypeCount": 12,
+          "publicMemberCount": 590,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Net.Requests": {
+          "fileName": "System.Net.Requests.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.Net.Requests.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.Net.Requests.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 26,
+          "forwardedTypeCount": 2,
+          "publicMemberCount": 596,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.ObjectModel": {
+          "fileName": "System.ObjectModel.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.ObjectModel.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.ObjectModel.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 20,
+          "forwardedTypeCount": 3,
+          "publicMemberCount": 135,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Reflection.Primitives": {
+          "fileName": "System.Reflection.Primitives.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.Reflection.Primitives.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.Reflection.Primitives.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 7,
+          "forwardedTypeCount": 9,
+          "publicMemberCount": 325,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Runtime": {
+          "fileName": "System.Runtime.dll",
+          "classification": "contract-facade",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.Runtime.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.Runtime.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure",
+            "seed"
+          ],
+          "publicTypeDefinitionCount": 890,
+          "forwardedTypeCount": 0,
+          "publicMemberCount": 12141,
+          "bindingTargetAssemblyCount": 1,
+          "contractCompleteEligible": true
+        },
+        "System.Runtime.CompilerServices.VisualC": {
+          "fileName": "System.Runtime.CompilerServices.VisualC.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.Runtime.CompilerServices.VisualC.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.Runtime.CompilerServices.VisualC.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 16,
+          "forwardedTypeCount": 4,
+          "publicMemberCount": 7,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Runtime.InteropServices": {
+          "fileName": "System.Runtime.InteropServices.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.Runtime.InteropServices.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.Runtime.InteropServices.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 198,
+          "forwardedTypeCount": 9,
+          "publicMemberCount": 1546,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Runtime.Serialization.Formatters": {
+          "fileName": "System.Runtime.Serialization.Formatters.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.Runtime.Serialization.Formatters.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.Runtime.Serialization.Formatters.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 16,
+          "forwardedTypeCount": 8,
+          "publicMemberCount": 144,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Runtime.Serialization.Primitives": {
+          "fileName": "System.Runtime.Serialization.Primitives.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.Runtime.Serialization.Primitives.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.Runtime.Serialization.Primitives.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 10,
+          "forwardedTypeCount": 7,
+          "publicMemberCount": 92,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Runtime.Serialization.Xml": {
+          "fileName": "System.Runtime.Serialization.Xml.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.Runtime.Serialization.Xml.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.Runtime.Serialization.Xml.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 32,
+          "forwardedTypeCount": 1,
+          "publicMemberCount": 458,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Xml.XPath": {
+          "fileName": "System.Xml.XPath.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.Xml.XPath.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.Xml.XPath.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 2,
+          "forwardedTypeCount": 12,
+          "publicMemberCount": 14,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "System.Xml.XmlSerializer": {
+          "fileName": "System.Xml.XmlSerializer.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\System.Xml.XmlSerializer.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\System.Xml.XmlSerializer.dll",
+          "seedReasons": [
+            "forwarded-target-closure",
+            "reference-closure"
+          ],
+          "publicTypeDefinitionCount": 58,
+          "forwardedTypeCount": 12,
+          "publicMemberCount": 761,
+          "bindingTargetAssemblyCount": 2,
+          "contractCompleteEligible": true
+        },
+        "mscorlib": {
+          "fileName": "mscorlib.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\mscorlib.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\mscorlib.dll",
+          "seedReasons": [
+            "seed"
+          ],
+          "publicTypeDefinitionCount": 0,
+          "forwardedTypeCount": 1256,
+          "publicMemberCount": 0,
+          "bindingTargetAssemblyCount": 32,
+          "contractCompleteEligible": true
+        },
+        "netstandard": {
+          "fileName": "netstandard.dll",
+          "classification": "compat-shim",
+          "sourceKind": "machine-global-official-installation",
+          "refPath": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Ref\\8.0.11\\ref\\net8.0\\netstandard.dll",
+          "runtimePath": "C:\\Program Files\\dotnet\\shared\\Microsoft.NETCore.App\\8.0.11\\netstandard.dll",
+          "seedReasons": [
+            "seed"
+          ],
+          "publicTypeDefinitionCount": 0,
+          "forwardedTypeCount": 2604,
+          "publicMemberCount": 0,
+          "bindingTargetAssemblyCount": 80,
+          "contractCompleteEligible": true
+        }
+      }
+    }
+  }
+}

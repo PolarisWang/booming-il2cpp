@@ -1,0 +1,1601 @@
+{
+  "schemaVersion": 1,
+  "taskId": "20260418-05-phase-3-system-private-corelib-semantic-family-nativeization",
+  "generatedAt": "2026-04-18T10:21:38.0770056+08:00",
+  "batchName": "corelib-semantic-family-batch-01",
+  "ownerSubjectId": "SolutionCorePack",
+  "registrySnapshotPath": "D:/agent/booming-il2cpp/artifacts/tests/registry/current/index.json",
+  "subjectManifestPath": "D:/agent/booming-il2cpp/subjects/SolutionCorePack/subject.manifest.json",
+  "selectionPolicy": "priority-and-existing-proof-coverage",
+  "selectedBatchFamilyNames": [
+    "managed-cil",
+    "internal-call",
+    "field-metadata"
+  ],
+  "targetFrameworks": {
+    "net10.0": {
+      "selectedFamilyCount": 3,
+      "selectedMemberCount": 31170,
+      "selectedFamilies": {
+        "field-metadata": {
+          "priority": 5,
+          "memberCount": 3962,
+          "requiredProofs": [
+            "layout-proof",
+            "conformance",
+            "benchmark"
+          ],
+          "coverageNotes": [
+            "Focuses the first metadata batch on lookup-heavy proofs that exercise field and member registration paths.",
+            "Keeps codegen workload explicit because metadata families are sensitive to registration and supplemental output shape."
+          ],
+          "nativeProofs": [
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "member-metadata-lookup-proof",
+              "displayName": "member-metadata-lookup-proof",
+              "sourceEntry": "CoreRuntimeFeatures/MemberMetadataLookupProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Reflection And Metadata",
+              "capabilityItemLabel": "Member Metadata Lookup",
+              "categoryLabel": "Metadata Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CustomAttributeLookupProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "custom-attribute-lookup-proof",
+              "displayName": "custom-attribute-lookup-proof",
+              "sourceEntry": "CoreRuntimeFeatures/CustomAttributeLookupProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CustomAttributeLookupProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Reflection And Metadata",
+              "capabilityItemLabel": "Custom Attribute Lookup",
+              "categoryLabel": "Metadata Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MetadataSupplementProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "metadata-supplement-proof",
+              "displayName": "metadata-supplement-proof",
+              "sourceEntry": "CoreRuntimeFeatures/MetadataSupplementProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MetadataSupplementProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Reflection And Metadata",
+              "capabilityItemLabel": "Metadata Supplement",
+              "categoryLabel": "Metadata Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ReflectionInteropClosureEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "reflection-interop-closure-proof",
+              "displayName": "reflection-interop-closure-proof",
+              "sourceEntry": "CoreRuntimeFeatures/ReflectionInteropClosureEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ReflectionInteropClosureEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Reflection And Metadata",
+              "capabilityItemLabel": "Metadata Closure",
+              "categoryLabel": "Interop Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "conformanceGates": [
+            {
+              "id": "engineering-validation/SolutionCorePack/native-executable-smoke",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "native-executable-smoke",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/native-executable-smoke",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-validation/SolutionCorePack/project-graph",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "project-graph",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/project-graph",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "benchmarks": [
+            {
+              "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry::RunWorkload()",
+              "type": "declared-benchmark",
+              "alias": "member-metadata-lookup-bench",
+              "displayName": "member-metadata-lookup-bench",
+              "sourceEntry": "CoreRuntimeBenchmarks/MemberMetadataLookupBenchmarkEntry::RunWorkload()",
+              "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry::RunWorkload()",
+              "defaultGoalId": "perf.release",
+              "defaultMatrixId": "windows-managed-perf",
+              "capabilityFamilyLabel": "Reflection And Metadata",
+              "capabilityItemLabel": "Member Metadata Lookup",
+              "categoryLabel": "Runtime Dispatch",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "engineeringWorkloads": [
+            {
+              "id": "engineering-workload/SolutionCorePack/codegen",
+              "type": "engineering-workload",
+              "alias": null,
+              "displayName": "codegen",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/codegen",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-workload/SolutionCorePack/convert",
+              "type": "engineering-workload",
+              "alias": null,
+              "displayName": "convert",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/convert",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ]
+        },
+        "internal-call": {
+          "priority": 2,
+          "memberCount": 71,
+          "requiredProofs": [
+            "helper-contract-proof",
+            "native-proof",
+            "conformance",
+            "benchmark"
+          ],
+          "coverageNotes": [
+            "Anchors runtime-backed helper obligations to concrete threading and runtime-helper proofs.",
+            "Uses native smoke plus conversion/link workloads as the conformance floor before expanding deeper helper families."
+          ],
+          "nativeProofs": [
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RuntimeHelpersProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "runtime-helpers-proof",
+              "displayName": "runtime-helpers-proof",
+              "sourceEntry": "CoreRuntimeFeatures/RuntimeHelpersProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RuntimeHelpersProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Runtime Services",
+              "capabilityItemLabel": "Runtime Helpers",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "threading-proof",
+              "displayName": "threading-proof",
+              "sourceEntry": "CoreRuntimeFeatures/ThreadingProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Threading And Synchronization",
+              "capabilityItemLabel": "Threading",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MonitorAndLockingProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "monitor-locking-proof",
+              "displayName": "monitor-locking-proof",
+              "sourceEntry": "CoreRuntimeFeatures/MonitorAndLockingProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MonitorAndLockingProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Threading And Synchronization",
+              "capabilityItemLabel": "Monitor And Locking",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "task-scheduling-proof",
+              "displayName": "task-scheduling-proof",
+              "sourceEntry": "CoreRuntimeFeatures/TaskSchedulingProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Threading And Synchronization",
+              "capabilityItemLabel": "Task Scheduling",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "conformanceGates": [
+            {
+              "id": "engineering-validation/SolutionCorePack/native-executable-smoke",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "native-executable-smoke",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/native-executable-smoke",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-validation/SolutionCorePack/project-graph",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "project-graph",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/project-graph",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "benchmarks": [
+            {
+              "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry::RunWorkload()",
+              "type": "declared-benchmark",
+              "alias": "monitor-locking-bench",
+              "displayName": "monitor-locking-bench",
+              "sourceEntry": "CoreRuntimeBenchmarks/MonitorAndLockingBenchmarkEntry::RunWorkload()",
+              "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry::RunWorkload()",
+              "defaultGoalId": "perf.release",
+              "defaultMatrixId": "windows-native-perf",
+              "capabilityFamilyLabel": "Threading And Synchronization",
+              "capabilityItemLabel": "Monitor And Locking",
+              "categoryLabel": "Runtime Dispatch",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskSchedulingBenchmarkEntry::RunWorkload()",
+              "type": "declared-benchmark",
+              "alias": "task-scheduling-bench",
+              "displayName": "task-scheduling-bench",
+              "sourceEntry": "CoreRuntimeBenchmarks/TaskSchedulingBenchmarkEntry::RunWorkload()",
+              "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskSchedulingBenchmarkEntry::RunWorkload()",
+              "defaultGoalId": "perf.release",
+              "defaultMatrixId": "windows-managed-perf",
+              "capabilityFamilyLabel": "Threading And Synchronization",
+              "capabilityItemLabel": "Task Scheduling",
+              "categoryLabel": "Runtime Dispatch",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "engineeringWorkloads": [
+            {
+              "id": "engineering-workload/SolutionCorePack/convert",
+              "type": "engineering-workload",
+              "alias": null,
+              "displayName": "convert",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/convert",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-workload/SolutionCorePack/native-link",
+              "type": "engineering-workload",
+              "alias": null,
+              "displayName": "native-link",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/native-link",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ]
+        },
+        "managed-cil": {
+          "priority": 1,
+          "memberCount": 27137,
+          "requiredProofs": [
+            "native-proof",
+            "conformance",
+            "benchmark"
+          ],
+          "coverageNotes": [
+            "Covers canonical managed method bodies that already have runnable SolutionCorePack proofs.",
+            "Pairs native proof entries with managed/native benchmark workloads to keep semantic-family progress measurable."
+          ],
+          "nativeProofs": [
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "arithmetic-ops-proof",
+              "displayName": "arithmetic-ops-proof",
+              "sourceEntry": "CoreRuntimeFeatures/ArithmeticOpsProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Primitives And Ops",
+              "capabilityItemLabel": "Arithmetic Ops",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AsyncAwaitProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "async-await-proof",
+              "displayName": "async-await-proof",
+              "sourceEntry": "CoreRuntimeFeatures/AsyncAwaitProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AsyncAwaitProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Async And Iterators",
+              "capabilityItemLabel": "Async Await",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "delegate-proof",
+              "displayName": "delegate-proof",
+              "sourceEntry": "CoreRuntimeFeatures/DelegateProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Delegates And Closures",
+              "capabilityItemLabel": "Delegate Invocation",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ExceptionProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "exception-proof",
+              "displayName": "exception-proof",
+              "sourceEntry": "CoreRuntimeFeatures/ExceptionProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ExceptionProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Exceptions And Control Flow",
+              "capabilityItemLabel": "Exception Basic",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.InterfaceDispatchProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "interface-dispatch-proof",
+              "displayName": "interface-dispatch-proof",
+              "sourceEntry": "CoreRuntimeFeatures/InterfaceDispatchProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.InterfaceDispatchProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Type System And Generics",
+              "capabilityItemLabel": "Generic Interface Dispatch",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "task-valuetask-flow-proof",
+              "displayName": "task-valuetask-flow-proof",
+              "sourceEntry": "CoreRuntimeFeatures/TaskAndValueTaskFlowProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Async And Iterators",
+              "capabilityItemLabel": "Task And ValueTask Flow",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "conformanceGates": [
+            {
+              "id": "engineering-validation/SolutionCorePack/managed-build",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "managed-build",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/managed-build",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-archetype-simple-lib-managed-output",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-validation/SolutionCorePack/managed-runtime-output",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "managed-runtime-output",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/managed-runtime-output",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-archetype-simple-lib-managed-output",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-validation/SolutionCorePack/native-executable-smoke",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "native-executable-smoke",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/native-executable-smoke",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-validation/SolutionCorePack/project-graph",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "project-graph",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/project-graph",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "benchmarks": [
+            {
+              "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry::RunWorkload()",
+              "type": "declared-benchmark",
+              "alias": "arithmetic-bench",
+              "displayName": "arithmetic-bench",
+              "sourceEntry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
+              "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry::RunWorkload()",
+              "defaultGoalId": "perf.release",
+              "defaultMatrixId": "windows-native-perf",
+              "capabilityFamilyLabel": "Primitives And Ops",
+              "capabilityItemLabel": "Arithmetic Ops",
+              "categoryLabel": "Runtime Dispatch",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DispatchBenchmarkEntry::RunWorkload()",
+              "type": "declared-benchmark",
+              "alias": "dispatch-bench",
+              "displayName": "dispatch-bench",
+              "sourceEntry": "CoreRuntimeBenchmarks/DispatchBenchmarkEntry::RunWorkload()",
+              "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DispatchBenchmarkEntry::RunWorkload()",
+              "defaultGoalId": "perf.release",
+              "defaultMatrixId": "windows-managed-perf",
+              "capabilityFamilyLabel": "Type System And Generics",
+              "capabilityItemLabel": "Generic Virtual Dispatch",
+              "categoryLabel": "Runtime Dispatch",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()",
+              "type": "declared-benchmark",
+              "alias": "task-valuetask-flow-bench",
+              "displayName": "task-valuetask-flow-bench",
+              "sourceEntry": "CoreRuntimeBenchmarks/TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()",
+              "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()",
+              "defaultGoalId": "perf.release",
+              "defaultMatrixId": "windows-managed-perf",
+              "capabilityFamilyLabel": "Async And Iterators",
+              "capabilityItemLabel": "Task And ValueTask Flow",
+              "categoryLabel": "Runtime Dispatch",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "engineeringWorkloads": [
+            {
+              "id": "engineering-workload/SolutionCorePack/codegen",
+              "type": "engineering-workload",
+              "alias": null,
+              "displayName": "codegen",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/codegen",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-workload/SolutionCorePack/convert",
+              "type": "engineering-workload",
+              "alias": null,
+              "displayName": "convert",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/convert",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-workload/SolutionCorePack/native-link",
+              "type": "engineering-workload",
+              "alias": null,
+              "displayName": "native-link",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/native-link",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ]
+        }
+      },
+      "issueCount": 0,
+      "issues": []
+    },
+    "net8.0": {
+      "selectedFamilyCount": 3,
+      "selectedMemberCount": 24927,
+      "selectedFamilies": {
+        "field-metadata": {
+          "priority": 5,
+          "memberCount": 3658,
+          "requiredProofs": [
+            "layout-proof",
+            "conformance",
+            "benchmark"
+          ],
+          "coverageNotes": [
+            "Focuses the first metadata batch on lookup-heavy proofs that exercise field and member registration paths.",
+            "Keeps codegen workload explicit because metadata families are sensitive to registration and supplemental output shape."
+          ],
+          "nativeProofs": [
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "member-metadata-lookup-proof",
+              "displayName": "member-metadata-lookup-proof",
+              "sourceEntry": "CoreRuntimeFeatures/MemberMetadataLookupProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Reflection And Metadata",
+              "capabilityItemLabel": "Member Metadata Lookup",
+              "categoryLabel": "Metadata Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CustomAttributeLookupProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "custom-attribute-lookup-proof",
+              "displayName": "custom-attribute-lookup-proof",
+              "sourceEntry": "CoreRuntimeFeatures/CustomAttributeLookupProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CustomAttributeLookupProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Reflection And Metadata",
+              "capabilityItemLabel": "Custom Attribute Lookup",
+              "categoryLabel": "Metadata Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MetadataSupplementProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "metadata-supplement-proof",
+              "displayName": "metadata-supplement-proof",
+              "sourceEntry": "CoreRuntimeFeatures/MetadataSupplementProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MetadataSupplementProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Reflection And Metadata",
+              "capabilityItemLabel": "Metadata Supplement",
+              "categoryLabel": "Metadata Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ReflectionInteropClosureEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "reflection-interop-closure-proof",
+              "displayName": "reflection-interop-closure-proof",
+              "sourceEntry": "CoreRuntimeFeatures/ReflectionInteropClosureEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ReflectionInteropClosureEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Reflection And Metadata",
+              "capabilityItemLabel": "Metadata Closure",
+              "categoryLabel": "Interop Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "conformanceGates": [
+            {
+              "id": "engineering-validation/SolutionCorePack/native-executable-smoke",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "native-executable-smoke",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/native-executable-smoke",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-validation/SolutionCorePack/project-graph",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "project-graph",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/project-graph",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "benchmarks": [
+            {
+              "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry::RunWorkload()",
+              "type": "declared-benchmark",
+              "alias": "member-metadata-lookup-bench",
+              "displayName": "member-metadata-lookup-bench",
+              "sourceEntry": "CoreRuntimeBenchmarks/MemberMetadataLookupBenchmarkEntry::RunWorkload()",
+              "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry::RunWorkload()",
+              "defaultGoalId": "perf.release",
+              "defaultMatrixId": "windows-managed-perf",
+              "capabilityFamilyLabel": "Reflection And Metadata",
+              "capabilityItemLabel": "Member Metadata Lookup",
+              "categoryLabel": "Runtime Dispatch",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "engineeringWorkloads": [
+            {
+              "id": "engineering-workload/SolutionCorePack/codegen",
+              "type": "engineering-workload",
+              "alias": null,
+              "displayName": "codegen",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/codegen",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-workload/SolutionCorePack/convert",
+              "type": "engineering-workload",
+              "alias": null,
+              "displayName": "convert",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/convert",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ]
+        },
+        "internal-call": {
+          "priority": 2,
+          "memberCount": 117,
+          "requiredProofs": [
+            "helper-contract-proof",
+            "native-proof",
+            "conformance",
+            "benchmark"
+          ],
+          "coverageNotes": [
+            "Anchors runtime-backed helper obligations to concrete threading and runtime-helper proofs.",
+            "Uses native smoke plus conversion/link workloads as the conformance floor before expanding deeper helper families."
+          ],
+          "nativeProofs": [
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RuntimeHelpersProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "runtime-helpers-proof",
+              "displayName": "runtime-helpers-proof",
+              "sourceEntry": "CoreRuntimeFeatures/RuntimeHelpersProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RuntimeHelpersProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Runtime Services",
+              "capabilityItemLabel": "Runtime Helpers",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "threading-proof",
+              "displayName": "threading-proof",
+              "sourceEntry": "CoreRuntimeFeatures/ThreadingProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Threading And Synchronization",
+              "capabilityItemLabel": "Threading",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MonitorAndLockingProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "monitor-locking-proof",
+              "displayName": "monitor-locking-proof",
+              "sourceEntry": "CoreRuntimeFeatures/MonitorAndLockingProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MonitorAndLockingProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Threading And Synchronization",
+              "capabilityItemLabel": "Monitor And Locking",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "task-scheduling-proof",
+              "displayName": "task-scheduling-proof",
+              "sourceEntry": "CoreRuntimeFeatures/TaskSchedulingProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Threading And Synchronization",
+              "capabilityItemLabel": "Task Scheduling",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "conformanceGates": [
+            {
+              "id": "engineering-validation/SolutionCorePack/native-executable-smoke",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "native-executable-smoke",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/native-executable-smoke",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-validation/SolutionCorePack/project-graph",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "project-graph",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/project-graph",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "benchmarks": [
+            {
+              "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry::RunWorkload()",
+              "type": "declared-benchmark",
+              "alias": "monitor-locking-bench",
+              "displayName": "monitor-locking-bench",
+              "sourceEntry": "CoreRuntimeBenchmarks/MonitorAndLockingBenchmarkEntry::RunWorkload()",
+              "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry::RunWorkload()",
+              "defaultGoalId": "perf.release",
+              "defaultMatrixId": "windows-native-perf",
+              "capabilityFamilyLabel": "Threading And Synchronization",
+              "capabilityItemLabel": "Monitor And Locking",
+              "categoryLabel": "Runtime Dispatch",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskSchedulingBenchmarkEntry::RunWorkload()",
+              "type": "declared-benchmark",
+              "alias": "task-scheduling-bench",
+              "displayName": "task-scheduling-bench",
+              "sourceEntry": "CoreRuntimeBenchmarks/TaskSchedulingBenchmarkEntry::RunWorkload()",
+              "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskSchedulingBenchmarkEntry::RunWorkload()",
+              "defaultGoalId": "perf.release",
+              "defaultMatrixId": "windows-managed-perf",
+              "capabilityFamilyLabel": "Threading And Synchronization",
+              "capabilityItemLabel": "Task Scheduling",
+              "categoryLabel": "Runtime Dispatch",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "engineeringWorkloads": [
+            {
+              "id": "engineering-workload/SolutionCorePack/convert",
+              "type": "engineering-workload",
+              "alias": null,
+              "displayName": "convert",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/convert",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-workload/SolutionCorePack/native-link",
+              "type": "engineering-workload",
+              "alias": null,
+              "displayName": "native-link",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/native-link",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ]
+        },
+        "managed-cil": {
+          "priority": 1,
+          "memberCount": 21152,
+          "requiredProofs": [
+            "native-proof",
+            "conformance",
+            "benchmark"
+          ],
+          "coverageNotes": [
+            "Covers canonical managed method bodies that already have runnable SolutionCorePack proofs.",
+            "Pairs native proof entries with managed/native benchmark workloads to keep semantic-family progress measurable."
+          ],
+          "nativeProofs": [
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "arithmetic-ops-proof",
+              "displayName": "arithmetic-ops-proof",
+              "sourceEntry": "CoreRuntimeFeatures/ArithmeticOpsProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Primitives And Ops",
+              "capabilityItemLabel": "Arithmetic Ops",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AsyncAwaitProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "async-await-proof",
+              "displayName": "async-await-proof",
+              "sourceEntry": "CoreRuntimeFeatures/AsyncAwaitProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AsyncAwaitProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Async And Iterators",
+              "capabilityItemLabel": "Async Await",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "delegate-proof",
+              "displayName": "delegate-proof",
+              "sourceEntry": "CoreRuntimeFeatures/DelegateProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Delegates And Closures",
+              "capabilityItemLabel": "Delegate Invocation",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ExceptionProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "exception-proof",
+              "displayName": "exception-proof",
+              "sourceEntry": "CoreRuntimeFeatures/ExceptionProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ExceptionProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Exceptions And Control Flow",
+              "capabilityItemLabel": "Exception Basic",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.InterfaceDispatchProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "interface-dispatch-proof",
+              "displayName": "interface-dispatch-proof",
+              "sourceEntry": "CoreRuntimeFeatures/InterfaceDispatchProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.InterfaceDispatchProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Type System And Generics",
+              "capabilityItemLabel": "Generic Interface Dispatch",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run()",
+              "type": "declared-unit-test",
+              "alias": "task-valuetask-flow-proof",
+              "displayName": "task-valuetask-flow-proof",
+              "sourceEntry": "CoreRuntimeFeatures/TaskAndValueTaskFlowProofEntry::Run()",
+              "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run()",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": "Async And Iterators",
+              "capabilityItemLabel": "Task And ValueTask Flow",
+              "categoryLabel": "Runtime Contract",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "conformanceGates": [
+            {
+              "id": "engineering-validation/SolutionCorePack/managed-build",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "managed-build",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/managed-build",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-archetype-simple-lib-managed-output",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-validation/SolutionCorePack/managed-runtime-output",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "managed-runtime-output",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/managed-runtime-output",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-archetype-simple-lib-managed-output",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-validation/SolutionCorePack/native-executable-smoke",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "native-executable-smoke",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/native-executable-smoke",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-validation/SolutionCorePack/project-graph",
+              "type": "engineering-validation",
+              "alias": null,
+              "displayName": "project-graph",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/project-graph",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "benchmarks": [
+            {
+              "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry::RunWorkload()",
+              "type": "declared-benchmark",
+              "alias": "arithmetic-bench",
+              "displayName": "arithmetic-bench",
+              "sourceEntry": "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
+              "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry::RunWorkload()",
+              "defaultGoalId": "perf.release",
+              "defaultMatrixId": "windows-native-perf",
+              "capabilityFamilyLabel": "Primitives And Ops",
+              "capabilityItemLabel": "Arithmetic Ops",
+              "categoryLabel": "Runtime Dispatch",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DispatchBenchmarkEntry::RunWorkload()",
+              "type": "declared-benchmark",
+              "alias": "dispatch-bench",
+              "displayName": "dispatch-bench",
+              "sourceEntry": "CoreRuntimeBenchmarks/DispatchBenchmarkEntry::RunWorkload()",
+              "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DispatchBenchmarkEntry::RunWorkload()",
+              "defaultGoalId": "perf.release",
+              "defaultMatrixId": "windows-managed-perf",
+              "capabilityFamilyLabel": "Type System And Generics",
+              "capabilityItemLabel": "Generic Virtual Dispatch",
+              "categoryLabel": "Runtime Dispatch",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()",
+              "type": "declared-benchmark",
+              "alias": "task-valuetask-flow-bench",
+              "displayName": "task-valuetask-flow-bench",
+              "sourceEntry": "CoreRuntimeBenchmarks/TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()",
+              "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()",
+              "defaultGoalId": "perf.release",
+              "defaultMatrixId": "windows-managed-perf",
+              "capabilityFamilyLabel": "Async And Iterators",
+              "capabilityItemLabel": "Task And ValueTask Flow",
+              "categoryLabel": "Runtime Dispatch",
+              "pipelineIds": [],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ],
+          "engineeringWorkloads": [
+            {
+              "id": "engineering-workload/SolutionCorePack/codegen",
+              "type": "engineering-workload",
+              "alias": null,
+              "displayName": "codegen",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/codegen",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-workload/SolutionCorePack/convert",
+              "type": "engineering-workload",
+              "alias": null,
+              "displayName": "convert",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/convert",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            },
+            {
+              "id": "engineering-workload/SolutionCorePack/native-link",
+              "type": "engineering-workload",
+              "alias": null,
+              "displayName": "native-link",
+              "sourceEntry": null,
+              "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/native-link",
+              "defaultGoalId": "correctness.dev",
+              "defaultMatrixId": "windows-native-check",
+              "capabilityFamilyLabel": null,
+              "capabilityItemLabel": null,
+              "categoryLabel": null,
+              "pipelineIds": [
+                "managed-runtime-output",
+                "managed-runtime-trace",
+                "proof-runtime-output",
+                "managed-benchmark",
+                "native-benchmark"
+              ],
+              "supportedHosts": [
+                "macos",
+                "windows"
+              ]
+            }
+          ]
+        }
+      },
+      "issueCount": 0,
+      "issues": []
+    }
+  }
+}

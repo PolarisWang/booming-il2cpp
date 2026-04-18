@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "taskId": "20260418-05-phase-3-system-private-corelib-semantic-family-nativeization",
+  "generatedAt": "2026-04-18T10:21:38.0595544+08:00",
+  "targetFrameworks": {
+    "net10.0": {
+      "familyCount": 6,
+      "families": {
+        "abstract": {
+          "priority": 6,
+          "memberCount": 1039,
+          "requiredProofs": [
+            "contract-proof"
+          ]
+        },
+        "field-metadata": {
+          "priority": 5,
+          "memberCount": 3962,
+          "requiredProofs": [
+            "layout-proof",
+            "conformance"
+          ]
+        },
+        "internal-call": {
+          "priority": 2,
+          "memberCount": 71,
+          "requiredProofs": [
+            "helper-contract-proof",
+            "native-proof",
+            "conformance",
+            "benchmark"
+          ]
+        },
+        "managed-cil": {
+          "priority": 1,
+          "memberCount": 27137,
+          "requiredProofs": [
+            "native-proof",
+            "conformance",
+            "benchmark"
+          ]
+        },
+        "pinvoke": {
+          "priority": 4,
+          "memberCount": 4,
+          "requiredProofs": [
+            "interop-proof",
+            "native-proof",
+            "conformance"
+          ]
+        },
+        "runtime-special": {
+          "priority": 3,
+          "memberCount": 276,
+          "requiredProofs": [
+            "helper-contract-proof",
+            "native-proof",
+            "conformance"
+          ]
+        }
+      },
+      "issueCount": 0,
+      "issues": []
+    },
+    "net8.0": {
+      "familyCount": 6,
+      "families": {
+        "abstract": {
+          "priority": 6,
+          "memberCount": 949,
+          "requiredProofs": [
+            "contract-proof"
+          ]
+        },
+        "field-metadata": {
+          "priority": 5,
+          "memberCount": 3658,
+          "requiredProofs": [
+            "layout-proof",
+            "conformance"
+          ]
+        },
+        "internal-call": {
+          "priority": 2,
+          "memberCount": 117,
+          "requiredProofs": [
+            "helper-contract-proof",
+            "native-proof",
+            "conformance",
+            "benchmark"
+          ]
+        },
+        "managed-cil": {
+          "priority": 1,
+          "memberCount": 21152,
+          "requiredProofs": [
+            "native-proof",
+            "conformance",
+            "benchmark"
+          ]
+        },
+        "pinvoke": {
+          "priority": 4,
+          "memberCount": 4,
+          "requiredProofs": [
+            "interop-proof",
+            "native-proof",
+            "conformance"
+          ]
+        },
+        "runtime-special": {
+          "priority": 3,
+          "memberCount": 274,
+          "requiredProofs": [
+            "helper-contract-proof",
+            "native-proof",
+            "conformance"
+          ]
+        }
+      },
+      "issueCount": 0,
+      "issues": []
+    }
+  }
+}

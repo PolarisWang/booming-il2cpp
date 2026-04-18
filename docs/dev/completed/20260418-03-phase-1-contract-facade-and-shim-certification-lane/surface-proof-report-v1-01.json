@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "taskId": "20260418-03-phase-1-contract-facade-and-shim-certification-lane",
+  "generatedAt": "2026-04-18T02:50:06.7561996+08:00",
+  "targetFrameworks": {
+    "net10.0": {
+      "candidateAssemblyCount": 21,
+      "publicTypeDefinitionCount": 1806,
+      "forwardedTypeCount": 5180,
+      "publicMemberCount": 23335,
+      "unresolvedForwardedTypeCount": 0,
+      "unresolvedPublicTypeCount": 0,
+      "contractCompleteEligibleAssemblyCount": 21,
+      "issueCount": 0,
+      "issues": []
+    },
+    "net8.0": {
+      "candidateAssemblyCount": 19,
+      "publicTypeDefinitionCount": 1695,
+      "forwardedTypeCount": 5164,
+      "publicMemberCount": 22109,
+      "unresolvedForwardedTypeCount": 0,
+      "unresolvedPublicTypeCount": 0,
+      "contractCompleteEligibleAssemblyCount": 19,
+      "issueCount": 0,
+      "issues": []
+    }
+  }
+}

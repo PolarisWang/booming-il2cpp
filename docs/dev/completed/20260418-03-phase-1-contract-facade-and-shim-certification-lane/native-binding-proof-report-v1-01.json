@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "taskId": "20260418-03-phase-1-contract-facade-and-shim-certification-lane",
+  "generatedAt": "2026-04-18T02:50:06.7562445+08:00",
+  "targetFrameworks": {
+    "net10.0": {
+      "bindingsCheckedCount": 207,
+      "resolvedBindingTargetCount": 207,
+      "unresolvedBindingTargetCount": 0,
+      "missingRuntimeAssemblyCount": 0,
+      "issues": []
+    },
+    "net8.0": {
+      "bindingsCheckedCount": 205,
+      "resolvedBindingTargetCount": 205,
+      "unresolvedBindingTargetCount": 0,
+      "missingRuntimeAssemblyCount": 0,
+      "issues": []
+    }
+  }
+}

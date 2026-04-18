@@ -1,6 +1,7 @@
 # 已完成任务
 | task_id | task_type | phase | updated_at | summary | active |
 | --- | --- | --- | --- | --- | --- |
+| [20260418-05-phase-3-system-private-corelib-semantic-family-nativeization](20260418-05-phase-3-system-private-corelib-semantic-family-nativeization/STATUS.md) | plan | completed | 2026-04-18 11:21:56 +08:00 | 已完成首批 `managed-cil` / `internal-call` / `field-metadata` semantic-family batch 实跑，修复 subject-entry host 路由回归，并收口 proof / conformance / engineering workload / benchmark 闭环。 | false |
 | [20260417-04-aot-skill-flow-and-token-optimization-plan](20260417-04-aot-skill-flow-and-token-optimization-plan/STATUS.md) | plan | completed | 2026-04-17 23:54:00 +08:00 | 已完成 AOT skill flow authority freeze、formal verification gate 接线与热路径 token slimming，文本验证与场景审查通过。 | false |
 | [20260417-03-subject-feature-matrix-rebaseline-plan](20260417-03-subject-feature-matrix-rebaseline-plan/STATUS.md) | roadmap | completed | 2026-04-17 17:12:13 +08:00 | 已完成 `Phase 0~6`：canonical subject authority、completed feature remigration、legacy purge contract、主干回归与文档收口全部落地。 | false |
 | [20260417-03-phase-4-completed-feature-remigration-and-verification-rebuild](20260417-03-phase-4-completed-feature-remigration-and-verification-rebuild/STATUS.md) | plan | completed | 2026-04-17 17:12:13 +08:00 | 已补齐 feature obligation 缺口资产，收口 declared metadata / registry / benchmark source，并跑绿 `156 passed` 主干回归集。 | false |

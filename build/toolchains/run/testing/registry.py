@@ -56,6 +56,10 @@ ENGINEERING_MATRIX_STAGE_KINDS: dict[str, tuple[str, ...]] = {
     "patch-generation": (),
 }
 
+ENGINEERING_MATRIX_STAGE_PRIORITY: dict[str, tuple[tuple[str, ...], ...]] = {
+    "managed-build": (("runtime-managed-output",), ("host-input-build",)),
+}
+
 DECLARED_BENCHMARK_MATRIX_STAGE_KINDS: dict[str, tuple[str, ...]] = {
     "managed": ("runtime-perf-collect",),
     "native": ("native-runtime-perf", "mobile-native-perf"),
@@ -540,6 +544,10 @@ def _matrix_stage_kinds(manifest: dict[str, Any], matrix: dict[str, Any]) -> set
 def _select_engineering_matrix(manifest: dict[str, Any], kind: str) -> tuple[str, str]:
     candidate_stage_kinds = ENGINEERING_MATRIX_STAGE_KINDS.get(kind, ())
     matrices = _preferred_subject_matrices(manifest)
+    matrix_stage_kinds = {
+        str(matrix.get("matrixId") or ""): _matrix_stage_kinds(manifest, matrix)
+        for matrix in matrices
+    }
     for matrix in matrices:
         execution_context = dict(matrix.get("executionContext") or {})
         host_platform = str(execution_context.get("hostPlatform") or "")
@@ -548,7 +556,14 @@ def _select_engineering_matrix(manifest: dict[str, Any], kind: str) -> tuple[str
             if host_platform and target_platform and host_platform != target_platform:
                 return str(matrix.get("matrixId") or ""), _matrix_goal_id(manifest, matrix)
             continue
-        if candidate_stage_kinds and _matrix_stage_kinds(manifest, matrix) & set(candidate_stage_kinds):
+    for preferred_stage_kinds in ENGINEERING_MATRIX_STAGE_PRIORITY.get(kind, ()):
+        preferred_stage_kind_set = set(preferred_stage_kinds)
+        for matrix in matrices:
+            if matrix_stage_kinds.get(str(matrix.get("matrixId") or ""), set()) & preferred_stage_kind_set:
+                return str(matrix.get("matrixId") or ""), _matrix_goal_id(manifest, matrix)
+    candidate_stage_kind_set = set(candidate_stage_kinds)
+    for matrix in matrices:
+        if candidate_stage_kind_set and matrix_stage_kinds.get(str(matrix.get("matrixId") or ""), set()) & candidate_stage_kind_set:
             return str(matrix.get("matrixId") or ""), _matrix_goal_id(manifest, matrix)
 
     default_matrix = subjects_module.find_matrix(manifest, str(manifest.get("defaultMatrix") or ""))

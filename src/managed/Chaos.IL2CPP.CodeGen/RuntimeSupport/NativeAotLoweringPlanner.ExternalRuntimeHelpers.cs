@@ -62,6 +62,10 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return true;
 		}
+		if (TryCreateTestFrameworkRuntimeHelperDefinition(callee, out helperDefinition))
+		{
+			return true;
+		}
 		if (TryCreateAsyncRuntimeHelperDefinition(callee, out helperDefinition))
 		{
 			return true;

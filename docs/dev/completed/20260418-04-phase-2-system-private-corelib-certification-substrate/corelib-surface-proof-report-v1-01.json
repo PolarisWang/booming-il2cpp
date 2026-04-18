@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "taskId": "20260418-04-phase-2-system-private-corelib-certification-substrate",
+  "generatedAt": "2026-04-18T03:13:02.7366607+08:00",
+  "targetFrameworks": {
+    "net10.0": {
+      "publicTypeCount": 2276,
+      "publicMethodCount": 26175,
+      "publicPropertyCount": 2332,
+      "publicFieldCount": 3962,
+      "publicEventCount": 20,
+      "unresolvedPublicTypeCount": 0,
+      "issueCount": 0,
+      "issues": []
+    },
+    "net8.0": {
+      "publicTypeCount": 2045,
+      "publicMethodCount": 20394,
+      "publicPropertyCount": 2082,
+      "publicFieldCount": 3658,
+      "publicEventCount": 20,
+      "unresolvedPublicTypeCount": 0,
+      "issueCount": 0,
+      "issues": []
+    }
+  }
+}
