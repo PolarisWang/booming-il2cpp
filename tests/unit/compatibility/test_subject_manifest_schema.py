@@ -109,7 +109,7 @@ class SubjectManifestSchemaTests(unittest.TestCase):
                 if project_path:
                     self.assertTrue(
                         project_path.startswith(f"subjects/{subject_id}/validation/")
-                        or project_path.startswith("src/validation/perf/")
+                        or project_path.startswith("src/tools/Chaos.IL2CPP.Tools.")
                     )
                     self.assertTrue((REPO_ROOT / project_path).is_file())
 

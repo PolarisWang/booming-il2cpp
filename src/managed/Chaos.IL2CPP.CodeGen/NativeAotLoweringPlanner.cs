@@ -419,6 +419,11 @@ public sealed partial class NativeAotLoweringPlanner
         var objectModelBuilder = new StringBuilder();
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
         EmitObjectModelDeclarations(objectModelBuilder, reachableMethods);
+        EmitReachableMethodForwardDeclarations(objectModelBuilder, reachableMethods);
+        if (externalRuntimeHelpers.Any(helper => IsSpanRuntimeHelperSubjectId(helper.SubjectId)))
+        {
+            EmitSpanRuntimePrelude(objectModelBuilder, _staticFieldDataSupport);
+        }
         EmitDelegateRuntimeSupportDefinitions(objectModelBuilder, reachableMethods, externalRuntimeHelpers);
         EmitExternalRuntimeHelperDefinitions(objectModelBuilder, externalRuntimeHelpers);
         EmitStaticInitializationDefinitions(objectModelBuilder);

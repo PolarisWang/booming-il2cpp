@@ -279,6 +279,32 @@ public sealed partial class NativeAotLoweringPlanner
 				TrackReferenceType(action.ConstructedTypeSubjectId, null);
 			}
 		}
+		if (_reflectionMemberSupport.TypeEntries.Count > 0 || _reflectionMemberSupport.FieldEntries.Count > 0 || _reflectionMemberSupport.MethodEntries.Count > 0)
+		{
+			TrackReferenceType("System.Private.CoreLib/System.Type", "System.Private.CoreLib/System.Object");
+		}
+		if (_reflectionMemberSupport.FieldEntries.Count > 0)
+		{
+			TrackReferenceType("System.Private.CoreLib/System.Reflection.FieldInfo", "System.Private.CoreLib/System.Object");
+		}
+		if (_reflectionMemberSupport.MethodEntries.Count > 0)
+		{
+			TrackReferenceType("System.Private.CoreLib/System.Reflection.ParameterInfo", "System.Private.CoreLib/System.Object");
+			if (_reflectionMemberSupport.MethodEntries.Any((ReflectionMemberMethodEntry entry) => entry.IsConstructor))
+			{
+				TrackReferenceType("System.Private.CoreLib/System.Reflection.ConstructorInfo", "System.Private.CoreLib/System.Object");
+			}
+			if (_reflectionMemberSupport.MethodEntries.Any((ReflectionMemberMethodEntry entry) => !entry.IsConstructor))
+			{
+				TrackReferenceType("System.Private.CoreLib/System.Reflection.MethodInfo", "System.Private.CoreLib/System.Object");
+			}
+		}
+		if (_assemblyReflectionSupport.TypeEntries.Count > 0)
+		{
+			TrackReferenceType("System.Private.CoreLib/System.Type", "System.Private.CoreLib/System.Object");
+			TrackReferenceType("System.Private.CoreLib/System.Reflection.Assembly", "System.Private.CoreLib/System.Object");
+			TrackReferenceType("System.Private.CoreLib/System.Reflection.AssemblyName", "System.Private.CoreLib/System.Object");
+		}
 		int num = 2;
 		foreach (string item in referenceTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
 		{
@@ -306,6 +332,19 @@ public sealed partial class NativeAotLoweringPlanner
 			stringBuilder3.AppendLine(ref handler);
 			num++;
 		}
+		foreach (string item3 in valueTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
+		{
+			StringBuilder stringBuilder = builder;
+			StringBuilder stringBuilder17 = stringBuilder;
+			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+			handler.AppendLiteral("constexpr std::intptr_t ");
+			handler.AppendFormatted(GetNativeTypeIdSymbol(item3));
+			handler.AppendLiteral(" = ");
+			handler.AppendFormatted(num);
+			handler.AppendLiteral(";");
+			stringBuilder17.AppendLine(ref handler);
+			num++;
+		}
 		foreach (string item3 in hashSet3.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
 		{
 			StringBuilder stringBuilder = builder;
@@ -319,7 +358,7 @@ public sealed partial class NativeAotLoweringPlanner
 			stringBuilder4.AppendLine(ref handler);
 			num++;
 		}
-		if (referenceTypeSubjectIds.Count > 0 || hashSet3.Count > 0)
+		if (referenceTypeSubjectIds.Count > 0 || interfaceTypeSubjectIds.Count > 0 || valueTypeSubjectIds.Count > 0 || hashSet3.Count > 0)
 		{
 			builder.AppendLine();
 		}
@@ -670,9 +709,9 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("};");
 			builder.AppendLine();
 		}
-		EmitObjectEqualityHelpers(builder, referenceTypeSubjectIds, hashSet3);
-		EmitReflectionObjectHelpers(builder, referenceTypeSubjectIds, hashSet3);
-		EmitExceptionMetadataHelpers(builder);
+		EmitObjectEqualityHelpers(builder, reachableMethods, referenceTypeSubjectIds, hashSet3);
+		EmitReflectionObjectHelpers(builder, reachableMethods, referenceTypeSubjectIds, hashSet3);
+		EmitExceptionMetadataHelpers(builder, reachableMethods);
 		foreach (string item11 in hashSet2.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
 		{
 			StringBuilder stringBuilder = builder;

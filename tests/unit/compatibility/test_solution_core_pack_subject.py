@@ -12,6 +12,7 @@ SOLUTION_PATH = SUBJECT_ROOT / "source" / "SolutionCorePack.sln"
 PRIMARY_PROJECT_PATH = SUBJECT_ROOT / "source" / "Host" / "SolutionCorePack.csproj"
 ARCHETYPE_ROOT = SUBJECT_ROOT / "source" / "EngineeringScenarios"
 REFERENCE_BUNDLE_ROOT = REPO_ROOT / "assets" / "reference-bundles" / "dotnet-foundation"
+CONTROLLED_DLL_ROOT = REPO_ROOT / "src" / "dll" / "dotnet-foundation"
 LAUNCHER_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Host" / "Program.cs"
 
 
@@ -88,12 +89,16 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         self.assertFalse((REPO_ROOT / "subjects" / "MainlineFeaturePack").exists())
         self.assertFalse((REPO_ROOT / "subjects" / "PerformanceFeaturePack").exists())
 
-    def test_solution_core_pack_owns_repository_reference_bundle_for_binary_reference_archetypes(self) -> None:
+    def test_solution_core_pack_owns_repository_reference_bundle_and_controlled_official_dll_root(self) -> None:
         self.assertTrue(REFERENCE_BUNDLE_ROOT.is_dir(), msg=f"missing reference bundle root: {REFERENCE_BUNDLE_ROOT}")
         self.assertTrue((REFERENCE_BUNDLE_ROOT / "lib" / "ReferenceGreeter.dll").is_file())
-        self.assertTrue((REFERENCE_BUNDLE_ROOT / "net8.0" / "System.Runtime.dll").is_file())
-        self.assertTrue((REFERENCE_BUNDLE_ROOT / "net8.0" / "System.Console.dll").is_file())
         self.assertTrue((REFERENCE_BUNDLE_ROOT / "README.md").is_file())
+        self.assertTrue(CONTROLLED_DLL_ROOT.is_dir(), msg=f"missing controlled dll root: {CONTROLLED_DLL_ROOT}")
+        self.assertTrue((CONTROLLED_DLL_ROOT / "README.md").is_file())
+        self.assertTrue((CONTROLLED_DLL_ROOT / "net8.0" / "ref" / "System.Runtime.dll").is_file())
+        self.assertTrue((CONTROLLED_DLL_ROOT / "net8.0" / "ref" / "System.Console.dll").is_file())
+        self.assertTrue((CONTROLLED_DLL_ROOT / "net8.0" / "runtime" / "System.Private.CoreLib.dll").is_file())
+        self.assertTrue((CONTROLLED_DLL_ROOT / "net10.0" / "runtime" / "System.Private.CoreLib.dll").is_file())
 
         corelib_project_path = (
             SUBJECT_ROOT / "source" / "EngineeringScenarios" / "CoreLibReferenceSolution" / "App" / "GoldenCoreLibReference.App.csproj"
@@ -101,6 +106,23 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         corelib_project_text = corelib_project_path.read_text(encoding="utf-8")
         self.assertIn("<DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>", corelib_project_text)
         self.assertIn('<FrameworkReference Include="Microsoft.NETCore.App" />', corelib_project_text)
+        for name in [
+            "mscorlib.dll",
+            "netstandard.dll",
+            "System.Runtime.dll",
+            "System.Runtime.Extensions.dll",
+            "System.Console.dll",
+            "System.Collections.dll",
+            "System.Linq.dll",
+        ]:
+            self.assertIn(
+                fr"..\..\..\..\..\..\src\dll\dotnet-foundation\net8.0\ref\{name}",
+                corelib_project_text,
+            )
+        self.assertNotIn(
+            r"..\..\..\..\..\..\assets\reference-bundles\dotnet-foundation\net8.0\System.Runtime.dll",
+            corelib_project_text,
+        )
 
     def test_solution_core_pack_deletes_legacy_subject_owned_native_reference_host(self) -> None:
         self.assertFalse((SUBJECT_ROOT / "validation").exists())

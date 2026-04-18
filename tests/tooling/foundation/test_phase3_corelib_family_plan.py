@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-PROJECT_PATH = REPO_ROOT / "src" / "tools" / "Chaos.FoundationPack.Analysis" / "Chaos.FoundationPack.Analysis.csproj"
+PROJECT_PATH = REPO_ROOT / "src" / "tools" / "Chaos.IL2CPP.Tools.FoundationPack.Analysis" / "Chaos.IL2CPP.Tools.FoundationPack.Analysis.csproj"
 PHASE2_DIR = (
     REPO_ROOT
     / "docs"

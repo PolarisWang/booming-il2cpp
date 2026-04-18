@@ -379,9 +379,13 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool IsAsyncRuntimeHelperSubjectId(string subjectId)
 	{
-		if (!subjectId.Contains("AsyncTaskMethodBuilder<System.Int32>", StringComparison.Ordinal) && !subjectId.Contains("YieldAwaitable", StringComparison.Ordinal) && !subjectId.Contains("TaskAwaiter<System.Int32>", StringComparison.Ordinal) && !string.Equals(subjectId, "System.Private.CoreLib/System.Threading.Tasks.Task::Yield()", StringComparison.Ordinal))
+		if (!subjectId.Contains("AsyncTaskMethodBuilder<System.Int32>", StringComparison.Ordinal) && !subjectId.Contains("AsyncValueTaskMethodBuilder<System.Int32>", StringComparison.Ordinal) && !subjectId.Contains("YieldAwaitable", StringComparison.Ordinal) && !subjectId.Contains("TaskAwaiter<System.Int32>", StringComparison.Ordinal) && !subjectId.Contains("ValueTaskAwaiter<System.Int32>", StringComparison.Ordinal) && !string.Equals(subjectId, "System.Private.CoreLib/System.Threading.Tasks.Task::Yield()", StringComparison.Ordinal))
 		{
-			return string.Equals(subjectId, "System.Private.CoreLib/System.Threading.Tasks.Task<System.Int32>::GetAwaiter()", StringComparison.Ordinal);
+			if (!string.Equals(subjectId, "System.Private.CoreLib/System.Threading.Tasks.Task<System.Int32>::GetAwaiter()", StringComparison.Ordinal))
+			{
+				return string.Equals(subjectId, "System.Private.CoreLib/System.Threading.Tasks.ValueTask<System.Int32>::GetAwaiter()", StringComparison.Ordinal);
+			}
+			return true;
 		}
 		return true;
 	}
@@ -436,9 +440,14 @@ public sealed partial class NativeAotLoweringPlanner
 		return true;
 	}
 
-	private bool UsesDefaultInterpolatedStringHandlerHelpers()
+	private static bool UsesReachableInstruction(IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods, Func<AotCoreIrInstructionArtifact, bool> predicate)
 	{
-		return _methodsBySubjectId.Values.Any((AotCoreIrMethodArtifact method) => method.Instructions.Any((AotCoreIrInstructionArtifact instruction) => IsDefaultInterpolatedStringHandlerHelperSubjectId(instruction.Callee ?? string.Empty)));
+		return reachableMethods.Any((AotCoreIrMethodArtifact method) => method.Instructions.Any(predicate));
+	}
+
+	private bool UsesDefaultInterpolatedStringHandlerHelpers(IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
+	{
+		return UsesReachableInstruction(reachableMethods, (AotCoreIrInstructionArtifact instruction) => IsDefaultInterpolatedStringHandlerHelperSubjectId(instruction.Callee ?? string.Empty));
 	}
 
 	private static string GetPseudoMetadataHandleLiteral(string subjectId, uint prefix)
@@ -464,7 +473,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static string GetRuntimeTypeIdExpression(string? subjectId, AotCoreIrTypeShapeKind typeShape)
 	{
-		if (string.IsNullOrWhiteSpace(subjectId) || typeShape == AotCoreIrTypeShapeKind.ValueType)
+		if (string.IsNullOrWhiteSpace(subjectId))
 		{
 			return "static_cast<std::intptr_t>(0)";
 		}

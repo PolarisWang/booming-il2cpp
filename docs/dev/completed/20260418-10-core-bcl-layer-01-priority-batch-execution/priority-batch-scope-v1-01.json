@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "taskId": "20260418-10-core-bcl-layer-01-priority-batch-execution",
+  "generatedAt": "2026-04-18T13:17:03+08:00",
+  "sourceTaskId": "20260418-06-dependency-driven-core-bcl-layer-nativeization",
+  "ownerSubjectId": "SolutionCorePack",
+  "layerName": "core-bcl-layer-01",
+  "selectionStrategy": "representative-priority-batch",
+  "targetFrameworks": [
+    "net8.0",
+    "net10.0"
+  ],
+  "assemblyGroups": {
+    "collections": [
+      "System.Collections",
+      "System.Collections.Concurrent",
+      "System.Collections.NonGeneric"
+    ],
+    "memory": [
+      "System.Memory"
+    ],
+    "threading": [
+      "System.Threading",
+      "System.Threading.Channels",
+      "System.Threading.Tasks.Dataflow"
+    ],
+    "console": [
+      "System.Console"
+    ]
+  },
+  "selectedAssemblies": [
+    "System.Collections",
+    "System.Collections.Concurrent",
+    "System.Collections.NonGeneric",
+    "System.Memory",
+    "System.Threading",
+    "System.Threading.Channels",
+    "System.Threading.Tasks.Dataflow",
+    "System.Console"
+  ],
+  "requiredGates": [
+    "collector",
+    "registry",
+    "workspace",
+    "dependency-layer-proof",
+    "benchmark"
+  ],
+  "monitorSignals": [
+    "certified-assembly-count",
+    "blocked-assembly-count",
+    "layer-completion-rate",
+    "layer-nativeization-throughput",
+    "layer-compile-time-ms",
+    "native-proof-pass-rate",
+    "benchmark-regression-delta"
+  ],
+  "formalProofAliases": [
+    "aot-closure-validation-proof",
+    "generic-collection-proof",
+    "required-instantiation-closure-proof",
+    "span-memory-proof",
+    "threading-proof",
+    "monitor-locking-proof"
+  ],
+  "formalBenchmarkAliases": [
+    "generic-bench",
+    "required-instantiation-closure-bench",
+    "span-memory-bench",
+    "task-scheduling-bench"
+  ],
+  "engineeringValidationIds": [
+    "engineering-validation/SolutionCorePack/managed-build",
+    "engineering-validation/SolutionCorePack/managed-runtime-output",
+    "engineering-validation/SolutionCorePack/native-executable-smoke",
+    "engineering-validation/SolutionCorePack/project-graph"
+  ],
+  "engineeringWorkloadIds": [
+    "engineering-workload/SolutionCorePack/codegen",
+    "engineering-workload/SolutionCorePack/convert",
+    "engineering-workload/SolutionCorePack/native-link"
+  ]
+}

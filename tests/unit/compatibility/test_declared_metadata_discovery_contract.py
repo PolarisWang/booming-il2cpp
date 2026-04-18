@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-COLLECTION_GEN_PROGRAM_PATH = REPO_ROOT / "src" / "tools" / "Chaos.TestFramework.CollectionGen" / "Program.cs"
+COLLECTION_GEN_PROGRAM_PATH = REPO_ROOT / "src" / "tools" / "Chaos.IL2CPP.Tools.TestFramework.CollectionGen" / "Program.cs"
 LEGACY_DISCOVERY_PROGRAM_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.DeclarationDiscovery" / "Program.cs"
 
 

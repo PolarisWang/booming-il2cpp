@@ -22,8 +22,8 @@ except ImportError:
     from testing import subjects as subjects_module
 
 
-DISCOVERY_PROJECT_PATH = Path("src/tools/Chaos.TestFramework.CollectionGen/Chaos.TestFramework.CollectionGen.csproj")
-DISCOVERY_DLL_PATH = Path("src/tools/Chaos.TestFramework.CollectionGen/bin/Release/net8.0/Chaos.TestFramework.CollectionGen.dll")
+DISCOVERY_PROJECT_PATH = Path("src/tools/Chaos.IL2CPP.Tools.TestFramework.CollectionGen/Chaos.IL2CPP.Tools.TestFramework.CollectionGen.csproj")
+DISCOVERY_DLL_PATH = Path("src/tools/Chaos.IL2CPP.Tools.TestFramework.CollectionGen/bin/Release/net8.0/Chaos.IL2CPP.Tools.TestFramework.CollectionGen.dll")
 _DISCOVERY_TOOL_CACHE: Path | None = None
 
 

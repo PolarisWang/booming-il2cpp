@@ -12,10 +12,9 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 HARNESS_PROJECT_PATH = (
     REPO_ROOT
     / "src"
-    / "validation"
-    / "perf"
-    / "Benchmark.WorkloadEntry.PerfHarness"
-    / "Benchmark.WorkloadEntry.PerfHarness.csproj"
+    / "tools"
+    / "Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness"
+    / "Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.csproj"
 )
 HOTUPDATE_BENCHMARK_HOST_PROJECT_PATH = (
     REPO_ROOT
@@ -82,7 +81,7 @@ class PerfHarnessHotUpdateBenchmarkHostIntegrationTests(unittest.TestCase):
             / uuid.uuid4().hex
         )
         harness_output_root = test_output_root / "harness"
-        harness_dll_path = harness_output_root / "Benchmark.WorkloadEntry.PerfHarness.dll"
+        harness_dll_path = harness_output_root / "Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.dll"
         hotupdate_benchmark_host_output_root = test_output_root / "host"
         hotupdate_benchmark_host_dll_path = (
             hotupdate_benchmark_host_output_root / "HotUpdateHostPack.HotUpdateBenchmarkHost.dll"

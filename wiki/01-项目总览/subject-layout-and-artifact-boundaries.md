@@ -4,7 +4,7 @@
 
 ## 正式边界
 
-- `src/` 只保留 il2cpp 核心实现，不放 subject 源码、subject unit test、perf harness 或 native proof host
+- `src/` 保留 il2cpp 核心实现与共享工具；共享 collector / generator / perf harness 统一放在 `src/tools/Chaos.IL2CPP.Tools.*`，不放 subject 源码或 subject-owned validation host
 - `tests/` 只保留通用测试基础设施与通用验证资产，例如 tooling、registry、contract trace 对比脚本、平台 gate
 - `subjects/<subject-id>/` 是测试工程正式根目录，承载 `source/`、`validation/`、`expected/`、`baselines/`
 - `contracts/` 是正式契约根目录，artifact/native schema、sample、snapshot 与文档都应落在这里

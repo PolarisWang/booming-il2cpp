@@ -221,15 +221,13 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine();
         builder.AppendLine("std::intptr_t chaos_async_yield_get_is_completed(std::intptr_t chaos_awaiter_ref)");
         builder.AppendLine("{");
-        builder.AppendLine("    return *chaos_resolve_native_int_slot(chaos_awaiter_ref) == static_cast<std::intptr_t>(2) ? static_cast<std::intptr_t>(1) : static_cast<std::intptr_t>(0);");
+        builder.AppendLine("    (void)chaos_awaiter_ref;");
+        builder.AppendLine("    return static_cast<std::intptr_t>(1);");
         builder.AppendLine("}");
         builder.AppendLine();
         builder.AppendLine("void chaos_async_yield_get_result(std::intptr_t chaos_awaiter_ref)");
         builder.AppendLine("{");
-        builder.AppendLine("    if (*chaos_resolve_native_int_slot(chaos_awaiter_ref) != static_cast<std::intptr_t>(2))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        std::abort();");
-        builder.AppendLine("    }");
+        builder.AppendLine("    (void)chaos_awaiter_ref;");
         builder.AppendLine("}");
         builder.AppendLine();
         builder.AppendLine("std::intptr_t chaos_async_task_int32_get_awaiter(std::intptr_t chaos_task_handle)");

@@ -48,7 +48,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_perf_harness_declared_metadata")
 
         command = workers_module._perf_harness_command(
-            harness_dll_path=Path("artifacts/harness/Benchmark.WorkloadEntry.PerfHarness.dll"),
+            harness_dll_path=Path("artifacts/harness/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.dll"),
             iterations=7,
             assembly_path=Path("artifacts/subjects/SolutionCorePack/CoreRuntimeBenchmarks.dll"),
             workload_entry="CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
@@ -66,7 +66,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
         self.assertEqual(
             [
                 "dotnet",
-                str(Path("artifacts/harness/Benchmark.WorkloadEntry.PerfHarness.dll")),
+                str(Path("artifacts/harness/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.dll")),
                 "7",
                 "--assembly",
                 str(Path("artifacts/subjects/SolutionCorePack/CoreRuntimeBenchmarks.dll")),
@@ -143,10 +143,9 @@ class SubjectWorkersPerfTests(unittest.TestCase):
         matrix_id = "windows-managed-perf"
         perf_project_path = posix_path(
             "src",
-            "validation",
-            "perf",
-            "Benchmark.WorkloadEntry.PerfHarness",
-            "Benchmark.WorkloadEntry.PerfHarness.csproj",
+            "tools",
+            "Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness",
+            "Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.csproj",
         )
         perf_harness_dll_path = subject_run_path(
             subject_id,
@@ -155,7 +154,7 @@ class SubjectWorkersPerfTests(unittest.TestCase):
             matrix_id,
             "runtime",
             "harness",
-            "Benchmark.WorkloadEntry.PerfHarness.dll",
+            "Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.dll",
         )
         request = {
             "selection": {

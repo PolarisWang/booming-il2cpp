@@ -17,9 +17,9 @@ namespace Chaos.IL2CPP.CodeGen;
 
 public sealed partial class NativeAotLoweringPlanner
 {
-	private void EmitObjectEqualityHelpers(StringBuilder builder, IReadOnlySet<string> referenceTypeSubjectIds, IReadOnlySet<string> boxedTypeSubjectIds)
+	private void EmitObjectEqualityHelpers(StringBuilder builder, IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods, IReadOnlySet<string> referenceTypeSubjectIds, IReadOnlySet<string> boxedTypeSubjectIds)
 	{
-		if (!_methodsBySubjectId.Values.Any((AotCoreIrMethodArtifact method) => method.Instructions.Any((AotCoreIrInstructionArtifact instruction) => string.Equals(instruction.Callee, "System.Private.CoreLib/System.Object::Equals(System.Object)", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.String::op_Equality(System.String,System.String)", StringComparison.Ordinal) || IsCollectionRuntimeHelperSubjectId(instruction.Callee ?? string.Empty))))
+		if (!UsesReachableInstruction(reachableMethods, (AotCoreIrInstructionArtifact instruction) => string.Equals(instruction.Callee, "System.Private.CoreLib/System.Object::Equals(System.Object)", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.String::op_Equality(System.String,System.String)", StringComparison.Ordinal) || IsCollectionRuntimeHelperSubjectId(instruction.Callee ?? string.Empty)))
 		{
 			return;
 		}

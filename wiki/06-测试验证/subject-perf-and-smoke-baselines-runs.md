@@ -7,7 +7,7 @@ objectType: guide
 
 - `subjects/<subject-id>/source/`：正式 smoke/source 工程
 - `subjects/<subject-id>/validation/unit/`：正式 unit test 工程
-- `subjects/<subject-id>/validation/perf/`：正式 perf harness
+- `src/tools/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness/`：共享 perf harness；subject manifest 的 `validation.perf.project` 统一指向这里
 
 当前统一约束：
 
@@ -40,4 +40,5 @@ objectType: guide
 
 ## 最近更新
 
-- `2026-04-07`：新增 subject-owned smoke/unit/perf 与 run-scoped perf 结果规则页。
+- 2026-04-07：新增 subject-owned smoke/unit/perf 与 run-scoped perf 结果规则页。
+- 2026-04-18：共享 perf harness 从 src/validation/ 合并到 src/tools/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness/。

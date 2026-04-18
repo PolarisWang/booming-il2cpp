@@ -1,6 +1,8 @@
 # 已完成任务
 | task_id | task_type | phase | updated_at | summary | active |
 | --- | --- | --- | --- | --- | --- |
+| [20260418-10-core-bcl-layer-01-priority-batch-execution](20260418-10-core-bcl-layer-01-priority-batch-execution/STATUS.md) | plan | completed | 2026-04-18 14:27:06 +08:00 | 已完成 representative priority batch 的 `6` 个 proof、`4` 个 engineering validation、`4` 个 benchmark 真跑闭环，生成 proof/benchmark summary 并归档。 | false |
+| [20260418-06-dependency-driven-core-bcl-layer-nativeization](20260418-06-dependency-driven-core-bcl-layer-nativeization/STATUS.md) | plan | completed | 2026-04-18 13:06:12 +08:00 | 已冻结 dependency-layer authority、生成 layer/nativeization artifacts，并通过 foundation tooling 与 compatibility 验证。 | false |
 | [20260418-05-phase-3-system-private-corelib-semantic-family-nativeization](20260418-05-phase-3-system-private-corelib-semantic-family-nativeization/STATUS.md) | plan | completed | 2026-04-18 11:21:56 +08:00 | 已完成首批 `managed-cil` / `internal-call` / `field-metadata` semantic-family batch 实跑，修复 subject-entry host 路由回归，并收口 proof / conformance / engineering workload / benchmark 闭环。 | false |
 | [20260417-04-aot-skill-flow-and-token-optimization-plan](20260417-04-aot-skill-flow-and-token-optimization-plan/STATUS.md) | plan | completed | 2026-04-17 23:54:00 +08:00 | 已完成 AOT skill flow authority freeze、formal verification gate 接线与热路径 token slimming，文本验证与场景审查通过。 | false |
 | [20260417-03-subject-feature-matrix-rebaseline-plan](20260417-03-subject-feature-matrix-rebaseline-plan/STATUS.md) | roadmap | completed | 2026-04-17 17:12:13 +08:00 | 已完成 `Phase 0~6`：canonical subject authority、completed feature remigration、legacy purge contract、主干回归与文档收口全部落地。 | false |

@@ -617,7 +617,7 @@ class ProjectWorkspaceTests(unittest.TestCase):
                     "perf": {
                         "kind": "perf",
                         "driver": "interpreter-runtime-perf",
-                        "project": "src/validation/perf/Benchmark.WorkloadEntry.PerfHarness/Benchmark.WorkloadEntry.PerfHarness.csproj",
+                        "project": "src/tools/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.csproj",
                         "defaultVariant": "PROFILE",
                     },
                 },

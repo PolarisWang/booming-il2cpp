@@ -22,6 +22,19 @@ public sealed partial class NativeAotLoweringPlanner
 		return $"extern \"C\" {MapAbiSlotReturnType(method.ReturnAbi)} {method.NativeSymbol}({FormatAbiSlotParameterSignature(GetMethodAbiParameterSlots(method))});";
 	}
 
+	private static void EmitReachableMethodForwardDeclarations(StringBuilder builder, IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
+	{
+		foreach (AotCoreIrMethodArtifact reachableMethod in reachableMethods)
+		{
+			builder.AppendLine(FormatMethodDeclaration(reachableMethod));
+		}
+
+		if (reachableMethods.Count > 0)
+		{
+			builder.AppendLine();
+		}
+	}
+
 	private void EmitManagedMethod(StringBuilder builder, AotCoreIrMethodArtifact method)
 	{
 		ValidateMethod(method);

@@ -222,11 +222,6 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine("}");
         builder.AppendLine();
 
-        if (externalRuntimeHelpers.Any(helper => IsSpanRuntimeHelperSubjectId(helper.SubjectId)))
-        {
-            EmitSpanRuntimePrelude(builder, staticFieldDataSupport);
-        }
-
         if (externalRuntimeHelpers.Any(helper => IsCollectionRuntimeHelperSubjectId(helper.SubjectId)))
         {
             EmitCollectionRuntimePrelude(builder);
@@ -383,6 +378,8 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine("    chaos_entry->read_only = chaos_read_only;");
         builder.AppendLine("    return reinterpret_cast<std::intptr_t>(chaos_entry);");
         builder.AppendLine("}");
+        builder.AppendLine();
+        builder.AppendLine("std::intptr_t chaos_create_array_memory_int32(std::intptr_t chaos_array_value, std::int32_t chaos_start, std::int32_t chaos_length);");
         builder.AppendLine();
         builder.AppendLine("std::intptr_t chaos_create_memory_int32(std::intptr_t chaos_array_value)");
         builder.AppendLine("{");

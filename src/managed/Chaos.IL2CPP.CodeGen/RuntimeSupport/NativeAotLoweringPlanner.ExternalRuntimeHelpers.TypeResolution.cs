@@ -34,7 +34,15 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return true;
 		}
+		if (TryParseAsyncValueTaskBuilderStartStateMachineType(callee, out stateMachineTypeName))
+		{
+			return true;
+		}
 		if (TryParseAsyncTaskBuilderAwaitUnsafeOnCompleted(callee, out string _, out stateMachineTypeName))
+		{
+			return true;
+		}
+		if (TryParseAsyncValueTaskBuilderAwaitUnsafeOnCompleted(callee, out string _, out stateMachineTypeName))
 		{
 			return true;
 		}
@@ -43,8 +51,28 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool TryParseAsyncTaskBuilderStartStateMachineType(string callee, out string? stateMachineTypeName)
 	{
+		return TryParseAsyncBuilderStartStateMachineType(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Int32>", out stateMachineTypeName);
+	}
+
+	private static bool TryParseAsyncTaskBuilderAwaitUnsafeOnCompleted(string callee, out string? awaiterTypeName, out string? stateMachineTypeName)
+	{
+		return TryParseAsyncBuilderAwaitUnsafeOnCompleted(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Int32>", out awaiterTypeName, out stateMachineTypeName);
+	}
+
+	private static bool TryParseAsyncValueTaskBuilderStartStateMachineType(string callee, out string? stateMachineTypeName)
+	{
+		return TryParseAsyncBuilderStartStateMachineType(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder<System.Int32>", out stateMachineTypeName);
+	}
+
+	private static bool TryParseAsyncValueTaskBuilderAwaitUnsafeOnCompleted(string callee, out string? awaiterTypeName, out string? stateMachineTypeName)
+	{
+		return TryParseAsyncBuilderAwaitUnsafeOnCompleted(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder<System.Int32>", out awaiterTypeName, out stateMachineTypeName);
+	}
+
+	private static bool TryParseAsyncBuilderStartStateMachineType(string callee, string builderSubjectPrefix, out string? stateMachineTypeName)
+	{
 		stateMachineTypeName = null;
-		if (!TryReadGenericArgumentList(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Int32>::Start<", out string genericArgumentList))
+		if (!TryReadGenericArgumentList(callee, builderSubjectPrefix + "::Start<", out string genericArgumentList))
 		{
 			return false;
 		}
@@ -57,11 +85,11 @@ public sealed partial class NativeAotLoweringPlanner
 		return true;
 	}
 
-	private static bool TryParseAsyncTaskBuilderAwaitUnsafeOnCompleted(string callee, out string? awaiterTypeName, out string? stateMachineTypeName)
+	private static bool TryParseAsyncBuilderAwaitUnsafeOnCompleted(string callee, string builderSubjectPrefix, out string? awaiterTypeName, out string? stateMachineTypeName)
 	{
 		awaiterTypeName = null;
 		stateMachineTypeName = null;
-		if (!TryReadGenericArgumentList(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Int32>::AwaitUnsafeOnCompleted<", out string genericArgumentList))
+		if (!TryReadGenericArgumentList(callee, builderSubjectPrefix + "::AwaitUnsafeOnCompleted<", out string genericArgumentList))
 		{
 			return false;
 		}

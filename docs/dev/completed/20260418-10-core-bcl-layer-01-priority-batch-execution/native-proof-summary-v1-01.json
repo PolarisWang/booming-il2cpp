@@ -1,0 +1,212 @@
+{
+  "schemaVersion": 1,
+  "taskId": "20260418-10-core-bcl-layer-01-priority-batch-execution",
+  "generatedAt": "2026-04-18T14:27:06+08:00",
+  "sourceScopePath": "docs/dev/completed/20260418-10-core-bcl-layer-01-priority-batch-execution/priority-batch-scope-v1-01.json",
+  "ownerSubjectId": "SolutionCorePack",
+  "layerName": "core-bcl-layer-01",
+  "selectionStrategy": "representative-priority-batch",
+  "selectedAssemblies": [
+    "System.Collections",
+    "System.Collections.Concurrent",
+    "System.Collections.NonGeneric",
+    "System.Memory",
+    "System.Threading",
+    "System.Threading.Channels",
+    "System.Threading.Tasks.Dataflow",
+    "System.Console"
+  ],
+  "representativeBatchAssemblyCount": 8,
+  "layerReadyAssemblyCount": 29,
+  "representativeCoverageRate": 0.275862,
+  "requiredGates": [
+    "collector",
+    "registry",
+    "workspace",
+    "dependency-layer-proof",
+    "benchmark"
+  ],
+  "gateResults": [
+    {
+      "gate": "collector",
+      "status": "ok",
+      "canonicalCommand": "python build/toolchains/run/run.py test registry refresh --json",
+      "historyPath": "artifacts/tests/registry/history/20260418-141046/index.json",
+      "currentPath": "artifacts/tests/registry/current/index.json",
+      "durationMs": 6049
+    },
+    {
+      "gate": "registry",
+      "status": "ok",
+      "canonicalCommand": "python build/toolchains/run/run.py test registry refresh --json",
+      "historyPath": "artifacts/tests/registry/history/20260418-141046/index.json",
+      "currentPath": "artifacts/tests/registry/current/index.json",
+      "durationMs": 6049
+    },
+    {
+      "gate": "workspace",
+      "status": "ok",
+      "evidenceIds": [
+        "engineering-validation/SolutionCorePack/managed-build",
+        "engineering-validation/SolutionCorePack/managed-runtime-output",
+        "engineering-validation/SolutionCorePack/native-executable-smoke",
+        "engineering-validation/SolutionCorePack/project-graph"
+      ]
+    },
+    {
+      "gate": "dependency-layer-proof",
+      "status": "ok",
+      "proofAliases": [
+        "aot-closure-validation-proof",
+        "generic-collection-proof",
+        "span-memory-proof",
+        "threading-proof",
+        "monitor-locking-proof",
+        "required-instantiation-closure-proof"
+      ]
+    },
+    {
+      "gate": "benchmark",
+      "status": "ok",
+      "benchmarkAliases": [
+        "generic-bench",
+        "span-memory-bench",
+        "task-scheduling-bench",
+        "required-instantiation-closure-bench"
+      ]
+    }
+  ],
+  "proofs": [
+    {
+      "alias": "aot-closure-validation-proof",
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()",
+      "runId": "20260418-141336-windows-1a51",
+      "finalStatus": "ok",
+      "exitCode": 0,
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141336-windows-1a51/run-report/summary.json",
+      "eventsPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141336-windows-1a51/run-report/events.jsonl",
+      "consolePath": "artifacts/subjects/SolutionCorePack/runs/20260418-141336-windows-1a51/run-report/console.log",
+      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141336-windows-1a51/declared/unit/aot-closure-validation-proof/summary.json"
+    },
+    {
+      "alias": "generic-collection-proof",
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericCollectionProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericCollectionProofEntry::Run()",
+      "runId": "20260418-141411-windows-21a5",
+      "finalStatus": "ok",
+      "exitCode": 0,
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141411-windows-21a5/run-report/summary.json",
+      "eventsPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141411-windows-21a5/run-report/events.jsonl",
+      "consolePath": "artifacts/subjects/SolutionCorePack/runs/20260418-141411-windows-21a5/run-report/console.log",
+      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141411-windows-21a5/declared/unit/generic-collection-proof/summary.json"
+    },
+    {
+      "alias": "span-memory-proof",
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.SpanAndMemoryProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.SpanAndMemoryProofEntry::Run()",
+      "runId": "20260418-141448-windows-fe56",
+      "finalStatus": "ok",
+      "exitCode": 0,
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141448-windows-fe56/run-report/summary.json",
+      "eventsPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141448-windows-fe56/run-report/events.jsonl",
+      "consolePath": "artifacts/subjects/SolutionCorePack/runs/20260418-141448-windows-fe56/run-report/console.log",
+      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141448-windows-fe56/declared/unit/span-memory-proof/summary.json"
+    },
+    {
+      "alias": "threading-proof",
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()",
+      "runId": "20260418-141524-windows-5381",
+      "finalStatus": "ok",
+      "exitCode": 0,
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141524-windows-5381/run-report/summary.json",
+      "eventsPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141524-windows-5381/run-report/events.jsonl",
+      "consolePath": "artifacts/subjects/SolutionCorePack/runs/20260418-141524-windows-5381/run-report/console.log",
+      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141524-windows-5381/declared/unit/threading-proof/summary.json"
+    },
+    {
+      "alias": "monitor-locking-proof",
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MonitorAndLockingProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MonitorAndLockingProofEntry::Run()",
+      "runId": "20260418-141604-windows-41cc",
+      "finalStatus": "ok",
+      "exitCode": 0,
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141604-windows-41cc/run-report/summary.json",
+      "eventsPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141604-windows-41cc/run-report/events.jsonl",
+      "consolePath": "artifacts/subjects/SolutionCorePack/runs/20260418-141604-windows-41cc/run-report/console.log",
+      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141604-windows-41cc/declared/unit/monitor-locking-proof/summary.json"
+    },
+    {
+      "alias": "required-instantiation-closure-proof",
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run()",
+      "runId": "20260418-141641-windows-cf1c",
+      "finalStatus": "ok",
+      "exitCode": 0,
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141641-windows-cf1c/run-report/summary.json",
+      "eventsPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141641-windows-cf1c/run-report/events.jsonl",
+      "consolePath": "artifacts/subjects/SolutionCorePack/runs/20260418-141641-windows-cf1c/run-report/console.log",
+      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141641-windows-cf1c/declared/unit/required-instantiation-closure-proof/summary.json"
+    }
+  ],
+  "engineeringValidations": [
+    {
+      "kind": "managed-build",
+      "id": "engineering-validation/SolutionCorePack/managed-build",
+      "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/managed-build",
+      "runId": "20260418-141843-windows-fc17",
+      "finalStatus": "ok",
+      "exitCode": 0,
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141843-windows-fc17/run-report/summary.json",
+      "eventsPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141843-windows-fc17/run-report/events.jsonl",
+      "consolePath": "artifacts/subjects/SolutionCorePack/runs/20260418-141843-windows-fc17/run-report/console.log",
+      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141843-windows-fc17/engineering/validations/managed-build/summary.json"
+    },
+    {
+      "kind": "managed-runtime-output",
+      "id": "engineering-validation/SolutionCorePack/managed-runtime-output",
+      "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/managed-runtime-output",
+      "runId": "20260418-141852-windows-3789",
+      "finalStatus": "ok",
+      "exitCode": 0,
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141852-windows-3789/run-report/summary.json",
+      "eventsPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141852-windows-3789/run-report/events.jsonl",
+      "consolePath": "artifacts/subjects/SolutionCorePack/runs/20260418-141852-windows-3789/run-report/console.log",
+      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141852-windows-3789/engineering/validations/managed-runtime-output/summary.json"
+    },
+    {
+      "kind": "native-executable-smoke",
+      "id": "engineering-validation/SolutionCorePack/native-executable-smoke",
+      "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/native-executable-smoke",
+      "runId": "20260418-141900-windows-f6e3",
+      "finalStatus": "ok",
+      "exitCode": 0,
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141900-windows-f6e3/run-report/summary.json",
+      "eventsPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141900-windows-f6e3/run-report/events.jsonl",
+      "consolePath": "artifacts/subjects/SolutionCorePack/runs/20260418-141900-windows-f6e3/run-report/console.log",
+      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141900-windows-f6e3/engineering/validations/native-executable-smoke/summary.json"
+    },
+    {
+      "kind": "project-graph",
+      "id": "engineering-validation/SolutionCorePack/project-graph",
+      "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/project-graph",
+      "runId": "20260418-141958-windows-a576",
+      "finalStatus": "ok",
+      "exitCode": 0,
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141958-windows-a576/run-report/summary.json",
+      "eventsPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141958-windows-a576/run-report/events.jsonl",
+      "consolePath": "artifacts/subjects/SolutionCorePack/runs/20260418-141958-windows-a576/run-report/console.log",
+      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141958-windows-a576/engineering/validations/project-graph/summary.json"
+    }
+  ],
+  "aggregate": {
+    "proofCount": 6,
+    "proofPassCount": 6,
+    "engineeringValidationCount": 4,
+    "engineeringValidationPassCount": 4,
+    "dotnetCrashObserved": false,
+    "representativeBatchStatus": "ok",
+    "archiveRecommended": true
+  }
+}

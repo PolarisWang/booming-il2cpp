@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import importlib.util
 import json
@@ -4764,7 +4764,7 @@ class SubjectWorkersTests(unittest.TestCase):
         matrix_id = "windows-managed-perf"
         workload_entry = "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()"
         intermediate_root = TEST_TMP_ROOT / "dotnet-intermediates" / "fixture-managed-perf-solution-slice"
-        perf_project_path = "src/validation/perf/Benchmark.WorkloadEntry.PerfHarness/Benchmark.WorkloadEntry.PerfHarness.csproj"
+        perf_project_path = "src/tools/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.csproj"
         primary_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "SolutionCorePack.dll")
         slice_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "CoreRuntimeBenchmarks.dll")
         request = {
@@ -4847,7 +4847,7 @@ class SubjectWorkersTests(unittest.TestCase):
                 / matrix_id
                 / "runtime"
                 / "harness"
-                / "Benchmark.WorkloadEntry.PerfHarness.dll"
+                / "Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.dll"
             )
 
             with patch.object(workers_module.tooling_module, "allocate_dotnet_intermediate_dir", return_value=intermediate_root):
@@ -4890,7 +4890,7 @@ class SubjectWorkersTests(unittest.TestCase):
         legacy_workload_entry = "LegacyBenchmarks/LegacyEntry::RunWorkload()"
         resolved_workload_entry = "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()"
         intermediate_root = TEST_TMP_ROOT / "dotnet-intermediates" / "fixture-managed-perf-declared-entry-index"
-        perf_project_path = "src/validation/perf/Benchmark.WorkloadEntry.PerfHarness/Benchmark.WorkloadEntry.PerfHarness.csproj"
+        perf_project_path = "src/tools/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.csproj"
         primary_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "SolutionCorePack.dll")
         slice_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "CoreRuntimeBenchmarks.dll")
         request = {
@@ -4979,7 +4979,7 @@ class SubjectWorkersTests(unittest.TestCase):
                 / matrix_id
                 / "runtime"
                 / "harness"
-                / "Benchmark.WorkloadEntry.PerfHarness.dll"
+                / "Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.dll"
             )
 
             workspace_catalog = {
@@ -5055,7 +5055,7 @@ class SubjectWorkersTests(unittest.TestCase):
             "declared-tests.collection.json",
         )
         intermediate_root = TEST_TMP_ROOT / "dotnet-intermediates" / "fixture-managed-perf-workspace-benchmark-host"
-        perf_project_path = "src/validation/perf/Benchmark.WorkloadEntry.PerfHarness/Benchmark.WorkloadEntry.PerfHarness.csproj"
+        perf_project_path = "src/tools/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.csproj"
         benchmark_host_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "SolutionCorePack.DeclaredBenchmarkHost.dll")
         slice_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "CoreRuntimeBenchmarks.dll")
         request = {
@@ -5146,7 +5146,7 @@ class SubjectWorkersTests(unittest.TestCase):
                 / matrix_id
                 / "runtime"
                 / "harness"
-                / "Benchmark.WorkloadEntry.PerfHarness.dll"
+                / "Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.dll"
             )
 
             workspace_catalog = {
@@ -5226,7 +5226,7 @@ class SubjectWorkersTests(unittest.TestCase):
             "Generated",
             "declared-tests.binding.json",
         )
-        perf_project_path = "src/validation/perf/Benchmark.WorkloadEntry.PerfHarness/Benchmark.WorkloadEntry.PerfHarness.csproj"
+        perf_project_path = "src/tools/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.csproj"
         benchmark_host_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "HotUpdateHostPack.HotUpdateBenchmarkHost.dll")
         slice_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "HotUpdateHostPack.Patch.dll")
         request = {
@@ -5318,7 +5318,7 @@ class SubjectWorkersTests(unittest.TestCase):
                 / matrix_id
                 / "runtime"
                 / "harness"
-                / "Benchmark.WorkloadEntry.PerfHarness.dll"
+                / "Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.dll"
             )
 
             workspace_catalog = {
@@ -5385,7 +5385,7 @@ class SubjectWorkersTests(unittest.TestCase):
             "Generated",
             "declared-tests.collection.json",
         )
-        perf_project_path = "src/validation/perf/Benchmark.WorkloadEntry.PerfHarness/Benchmark.WorkloadEntry.PerfHarness.csproj"
+        perf_project_path = "src/tools/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.csproj"
         benchmark_host_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "SolutionCorePack.DeclaredBenchmarkHost.dll")
         slice_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "CoreRuntimeBenchmarks.dll")
         request = {
@@ -5476,7 +5476,7 @@ class SubjectWorkersTests(unittest.TestCase):
                 / matrix_id
                 / "runtime"
                 / "harness"
-                / "Benchmark.WorkloadEntry.PerfHarness.dll"
+                / "Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.dll"
             )
 
             workspace_catalog = {
@@ -5555,7 +5555,7 @@ class SubjectWorkersTests(unittest.TestCase):
             "Generated",
             "declared-tests.binding.json",
         )
-        perf_project_path = "src/validation/perf/Benchmark.WorkloadEntry.PerfHarness/Benchmark.WorkloadEntry.PerfHarness.csproj"
+        perf_project_path = "src/tools/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.csproj"
         benchmark_host_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "HotUpdateHostPack.HotUpdateBenchmarkHost.dll")
         slice_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "HotUpdateHostPack.Patch.dll")
         request = {
@@ -5647,7 +5647,7 @@ class SubjectWorkersTests(unittest.TestCase):
                 / matrix_id
                 / "runtime"
                 / "harness"
-                / "Benchmark.WorkloadEntry.PerfHarness.dll"
+                / "Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.dll"
             )
 
             workspace_catalog = {

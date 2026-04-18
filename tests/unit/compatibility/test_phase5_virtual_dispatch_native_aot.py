@@ -120,6 +120,16 @@ class Phase5VirtualDispatchNativeAotTests(unittest.TestCase):
 
         self.assertIn("// Managed method: CoreRuntimeBenchmarks/RequiredInstantiationClosureBenchmarkEntry::RunWorkload()", generated_cpp)
         self.assertIn("chaos_external_runtime_System_Private_CoreLib_System_String__get_Length__", generated_cpp)
+        self.assertIn(
+            "constexpr std::intptr_t chaos_type_id_System_Private_CoreLib_System_Int32 =",
+            generated_cpp,
+            msg="value-type array/list runtime helpers must have a stable int32 type id available",
+        )
+        self.assertIn(
+            "chaos_array->element_type_id = chaos_type_id_System_Private_CoreLib_System_Int32;",
+            generated_cpp,
+            msg="int32 arrays must carry the emitted int32 type id so IReadOnlyList<int> helpers can match them at runtime",
+        )
 
     def test_emit_native_aot_succeeds_for_span_and_memory_benchmark(self) -> None:
         generated_cpp = self._emit("CoreRuntimeBenchmarks/SpanAndMemoryBenchmarkEntry::RunWorkload()")
@@ -127,6 +137,27 @@ class Phase5VirtualDispatchNativeAotTests(unittest.TestCase):
         self.assertIn("// Managed method: CoreRuntimeBenchmarks/SpanAndMemoryBenchmarkEntry::RunWorkload()", generated_cpp)
         self.assertIn("chaos_create_array_span_int32", generated_cpp)
         self.assertIn("chaos_create_array_memory_int32", generated_cpp)
+        self.assertLess(
+            generated_cpp.index("struct chaos_managed_array"),
+            generated_cpp.index("std::intptr_t chaos_create_array_span_int32("),
+            msg="span runtime helpers must be emitted after the managed array object model",
+        )
+        self.assertLess(
+            generated_cpp.index("std::intptr_t chaos_create_array_memory_int32("),
+            generated_cpp.index("std::intptr_t chaos_create_memory_int32("),
+            msg="array memory helper must be declared before the wrapper helper uses it",
+        )
+        self.assertIn(
+            "\n".join(
+                [
+                    "        auto* chaos_array = new chaos_managed_array{};",
+                    "        chaos_array->header.type_id = chaos_type_id_managed_array;",
+                    "        chaos_array->element_type_shape = 2;",
+                ]
+            ),
+            generated_cpp,
+            msg="int32 arrays must be emitted as value-type arrays so span/memory helpers do not abort at runtime",
+        )
 
     def test_emit_native_aot_succeeds_for_string_and_utf8_marshaling_benchmark(self) -> None:
         generated_cpp = self._emit("CoreRuntimeBenchmarks/StringAndUtf8MarshalingBenchmarkEntry::RunWorkload()")
@@ -142,6 +173,36 @@ class Phase5VirtualDispatchNativeAotTests(unittest.TestCase):
         self.assertIn("chaos_external_runtime_System_Runtime_InteropServices_Marshal__SizeOf_", generated_cpp)
         self.assertIn("chaos_external_runtime_System_Runtime_InteropServices_Marshal__StructureToPtr_", generated_cpp)
         self.assertIn("chaos_external_runtime_System_Runtime_InteropServices_Marshal__PtrToStructure_", generated_cpp)
+
+    def test_emit_native_aot_succeeds_for_task_and_valuetask_benchmark(self) -> None:
+        generated_cpp = self._emit("CoreRuntimeBenchmarks/TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()")
+
+        self.assertIn("// Managed method: CoreRuntimeBenchmarks/TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()", generated_cpp)
+        self.assertIn(
+            "CoreRuntimeBenchmarks_TaskAndValueTaskFlowBenchmarkEntry__ComputeValueTaskAsync_d__2_MoveNext",
+            generated_cpp,
+            msg="value-task state-machine continuation must still be emitted into the generated native AOT source",
+        )
+        self.assertIn(
+            "chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_AsyncValueTaskMethodBuilder_System_Int32___Create__",
+            generated_cpp,
+            msg="value-task async state machines must emit a Create helper instead of leaving the builder unresolved",
+        )
+        self.assertIn(
+            "chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_AsyncValueTaskMethodBuilder_System_Int32___get_Task__",
+            generated_cpp,
+            msg="value-task async state machines must materialize the builder get_Task helper for the returned ValueTask<int>",
+        )
+        self.assertIn(
+            "chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_ValueTask_System_Int32___GetAwaiter__",
+            generated_cpp,
+            msg="ValueTask<int>.GetAwaiter() must be lowered through a native helper so the benchmark can consume the returned ValueTask",
+        )
+        self.assertIn(
+            "chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter_System_Int32___GetResult__",
+            generated_cpp,
+            msg="ValueTaskAwaiter<int>.GetResult() must be emitted so the benchmark can synchronously observe the async result",
+        )
 
 
 if __name__ == "__main__":

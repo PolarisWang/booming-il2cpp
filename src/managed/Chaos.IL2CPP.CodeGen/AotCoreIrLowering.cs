@@ -417,13 +417,14 @@ public sealed class AotCoreIrLowering
         IReadOnlyDictionary<string, ManagedTypeModel> managedTypes)
     {
         var managedType = TryResolveManagedType(typeIdentity, assemblyName, managedTypes);
+        var resolvedTypeShape = ResolveTypeShape(managedType, typeIdentity);
         if (string.Equals(typeIdentity, "System.Void", StringComparison.Ordinal))
         {
             return new AotCoreIrAbiSlotArtifact
             {
                 CarrierKindCode = AotCoreIrAbiCarrierKind.Void,
                 TypeSubjectId = managedType?.SubjectId,
-                TypeShape = managedType is null ? default : ResolveTypeShape(managedType),
+                TypeShape = resolvedTypeShape,
             };
         }
 
@@ -433,7 +434,7 @@ public sealed class AotCoreIrLowering
             {
                 CarrierKindCode = AotCoreIrAbiCarrierKind.Int32,
                 TypeSubjectId = managedType?.SubjectId,
-                TypeShape = managedType is null ? default : ResolveTypeShape(managedType),
+                TypeShape = resolvedTypeShape,
             };
         }
 
@@ -443,7 +444,7 @@ public sealed class AotCoreIrLowering
             {
                 CarrierKindCode = AotCoreIrAbiCarrierKind.Int8,
                 TypeSubjectId = managedType?.SubjectId,
-                TypeShape = managedType is null ? default : ResolveTypeShape(managedType),
+                TypeShape = resolvedTypeShape,
             };
         }
 
@@ -453,7 +454,7 @@ public sealed class AotCoreIrLowering
             {
                 CarrierKindCode = AotCoreIrAbiCarrierKind.UInt8,
                 TypeSubjectId = managedType?.SubjectId,
-                TypeShape = managedType is null ? default : ResolveTypeShape(managedType),
+                TypeShape = resolvedTypeShape,
             };
         }
 
@@ -463,7 +464,7 @@ public sealed class AotCoreIrLowering
             {
                 CarrierKindCode = AotCoreIrAbiCarrierKind.Int16,
                 TypeSubjectId = managedType?.SubjectId,
-                TypeShape = managedType is null ? default : ResolveTypeShape(managedType),
+                TypeShape = resolvedTypeShape,
             };
         }
 
@@ -473,7 +474,7 @@ public sealed class AotCoreIrLowering
             {
                 CarrierKindCode = AotCoreIrAbiCarrierKind.UInt16,
                 TypeSubjectId = managedType?.SubjectId,
-                TypeShape = managedType is null ? default : ResolveTypeShape(managedType),
+                TypeShape = resolvedTypeShape,
             };
         }
 
@@ -483,7 +484,7 @@ public sealed class AotCoreIrLowering
             {
                 CarrierKindCode = AotCoreIrAbiCarrierKind.Float32,
                 TypeSubjectId = managedType?.SubjectId,
-                TypeShape = managedType is null ? default : ResolveTypeShape(managedType),
+                TypeShape = resolvedTypeShape,
             };
         }
 
@@ -493,7 +494,7 @@ public sealed class AotCoreIrLowering
             {
                 CarrierKindCode = AotCoreIrAbiCarrierKind.Float64,
                 TypeSubjectId = managedType?.SubjectId,
-                TypeShape = managedType is null ? default : ResolveTypeShape(managedType),
+                TypeShape = resolvedTypeShape,
             };
         }
 
@@ -503,7 +504,7 @@ public sealed class AotCoreIrLowering
             {
                 CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
                 TypeSubjectId = managedType?.SubjectId,
-                TypeShape = managedType is null ? default : ResolveTypeShape(managedType),
+                TypeShape = resolvedTypeShape,
             };
         }
 
@@ -513,7 +514,7 @@ public sealed class AotCoreIrLowering
             {
                 CarrierKindCode = AotCoreIrAbiCarrierKind.UInt64,
                 TypeSubjectId = managedType?.SubjectId,
-                TypeShape = managedType is null ? default : ResolveTypeShape(managedType),
+                TypeShape = resolvedTypeShape,
             };
         }
 
@@ -533,7 +534,7 @@ public sealed class AotCoreIrLowering
         {
             CarrierKindCode = AotCoreIrAbiCarrierKind.NativeInt,
             TypeSubjectId = managedType?.SubjectId,
-            TypeShape = managedType is null ? default : ResolveTypeShape(managedType),
+            TypeShape = resolvedTypeShape,
         };
     }
 
@@ -644,7 +645,7 @@ public sealed class AotCoreIrLowering
             GenericContext = ManagedNaming.TryCreateGenericContext(
                 subjectId,
                 managedType?.DefinitionSubjectId ?? subjectId),
-            TypeShape = ResolveTypeShape(managedType),
+            TypeShape = ResolveTypeShape(managedType, subjectId),
             ArrayElementSubjectId = ResolveArrayElementSubjectId(subjectId),
             ArrayElementTypeShape = ResolveArrayElementTypeShape(managedTypes, ResolveArrayElementSubjectId(subjectId)),
             ArrayElementBaseTypeSubjectId = arrayElementType?.BaseTypeSubjectId,
@@ -691,11 +692,15 @@ public sealed class AotCoreIrLowering
         };
     }
 
-    private static AotCoreIrTypeShapeKind ResolveTypeShape(ManagedTypeModel? managedType)
+    private static AotCoreIrTypeShapeKind ResolveTypeShape(
+        ManagedTypeModel? managedType,
+        string? fallbackTypeIdentityOrSubjectId = null)
     {
         if (managedType is null)
         {
-            return AotCoreIrTypeShapeKind.ReferenceType;
+            return IsKnownValueTypeIdentity(fallbackTypeIdentityOrSubjectId)
+                ? AotCoreIrTypeShapeKind.ValueType
+                : AotCoreIrTypeShapeKind.ReferenceType;
         }
 
         if (managedType.IsInterface)
@@ -726,7 +731,53 @@ public sealed class AotCoreIrLowering
 
         return managedTypes.TryGetValue(arrayElementSubjectId, out var arrayElementType)
             ? ResolveTypeShape(arrayElementType)
-            : AotCoreIrTypeShapeKind.ReferenceType;
+            : ResolveTypeShape(null, arrayElementSubjectId);
+    }
+
+    private static bool IsKnownValueTypeIdentity(string? typeIdentityOrSubjectId)
+    {
+        return typeIdentityOrSubjectId switch
+        {
+            "System.Boolean" => true,
+            "System.Byte" => true,
+            "System.Char" => true,
+            "System.Double" => true,
+            "System.Int16" => true,
+            "System.Int32" => true,
+            "System.Int64" => true,
+            "System.IntPtr" => true,
+            "System.RuntimeArgumentHandle" => true,
+            "System.RuntimeFieldHandle" => true,
+            "System.RuntimeMethodHandle" => true,
+            "System.RuntimeTypeHandle" => true,
+            "System.SByte" => true,
+            "System.Single" => true,
+            "System.TypedReference" => true,
+            "System.UInt16" => true,
+            "System.UInt32" => true,
+            "System.UInt64" => true,
+            "System.UIntPtr" => true,
+            "System.Private.CoreLib/System.Boolean" => true,
+            "System.Private.CoreLib/System.Byte" => true,
+            "System.Private.CoreLib/System.Char" => true,
+            "System.Private.CoreLib/System.Double" => true,
+            "System.Private.CoreLib/System.Int16" => true,
+            "System.Private.CoreLib/System.Int32" => true,
+            "System.Private.CoreLib/System.Int64" => true,
+            "System.Private.CoreLib/System.IntPtr" => true,
+            "System.Private.CoreLib/System.RuntimeArgumentHandle" => true,
+            "System.Private.CoreLib/System.RuntimeFieldHandle" => true,
+            "System.Private.CoreLib/System.RuntimeMethodHandle" => true,
+            "System.Private.CoreLib/System.RuntimeTypeHandle" => true,
+            "System.Private.CoreLib/System.SByte" => true,
+            "System.Private.CoreLib/System.Single" => true,
+            "System.Private.CoreLib/System.TypedReference" => true,
+            "System.Private.CoreLib/System.UInt16" => true,
+            "System.Private.CoreLib/System.UInt32" => true,
+            "System.Private.CoreLib/System.UInt64" => true,
+            "System.Private.CoreLib/System.UIntPtr" => true,
+            _ => false,
+        };
     }
 
     private static string GetDeclaringTypeSubjectId(string fieldSubjectId)

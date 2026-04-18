@@ -11,6 +11,7 @@ Status: in-progress
 
 - 单 DLL 的全部公开 API / IL 语义都必须可 native 化
 - 单 DLL 认证结果可审计、可追溯
+- 共享 proof / benchmark / engineering gate 证据必须可回填为逐 DLL `full certified` 结论
 - 每个阶段都有明确的 native proof / benchmark / monitor signals
 - `.NET 8` 与 `.NET 10` 保持同构执行路径
 
@@ -112,15 +113,46 @@ Status: in-progress
 - goal:
   - 基于 dependency graph 自动分层，逐层完成核心 `System.*` DLL 认证
 - exit_criteria:
+  - 当前层内每个 DLL 均产出 machine-readable `assembly-certification-report` 且 `finalStatus = ok`
   - 当前层内全部 DLL 均已 certified
   - 下一层所依赖的 foundation DLL 已无 blocker
+- staged_acceptance:
+  - `gameplay-core-ready`
+    - goal:
+      - 证明当前 foundation DLL 已足以支撑基础游戏业务逻辑，不必等待整个 `core-bcl-layer-01` 全量收口后才给出阶段结论
+    - scope:
+      - 来自 `20260418-10-core-bcl-layer-01-priority-batch-execution` 的 `8` 个基线 DLL:
+        - `System.Collections`
+        - `System.Collections.Concurrent`
+        - `System.Collections.NonGeneric`
+        - `System.Memory`
+        - `System.Threading`
+        - `System.Threading.Channels`
+        - `System.Threading.Tasks.Dataflow`
+        - `System.Console`
+      - 当前 dependency-layer 核心补齐 `7` 个 DLL:
+        - `System.ComponentModel`
+        - `System.Runtime.Numerics`
+        - `System.Text.Encodings.Web`
+        - `System.Text.Encoding.CodePages`
+        - `System.IO.Compression`
+        - `System.Reflection.TypeExtensions`
+        - `System.Runtime.Serialization.Primitives`
+    - acceptance:
+      - 上述 `15` 个 DLL 都必须存在各自的 `assembly-certification-report/<assembly>.json`
+      - 上述 `15` 个 DLL 都必须 `finalStatus = ok`
+      - 每个 DLL 都必须同时满足“完整 native 化四层判定”：`surface complete -> semantic complete -> native executable evidence complete -> per-DLL certified complete`
+    - note:
+      - `gameplay-core-ready` 只是 `dependency-layer` 内的阶段性收口目标，不等于 `core-bcl-layer-01 completed`
 - deliverables:
   - `layer-plan.json`
   - `assembly-nativeization-plan/<assembly>.json`
+  - `assembly-certification-report/<assembly>.json`
+  - `layer-certification-summary.json`
   - per-layer `native-proof-summary.json`
   - per-layer `nativeization-throughput-benchmark.json`
 - status:
-  - planned
+  - in-progress
 
 ### Complex BCL And Common External DLL Lane
 
@@ -172,7 +204,7 @@ Status: in-progress
 | `contract-lane` | facade/shim native binding proof | facade manifest generation time | assemblies classified, public surface mapped |
 | `corelib-substrate` | corelib surface + semantic proof | corelib ledger build time | public members total, semantic coverage |
 | `semantic-family` | corelib per-family native proof + conformance | string/array/generic/dispatch/reflection family benchmark | runtime-backed implemented, native pass rate |
-| `dependency-layer` | per-layer DLL native proof | nativeization throughput + layer compile time | certified assemblies, layer completion rate |
+| `dependency-layer` | per-layer DLL native proof + per-assembly certification closeout | nativeization throughput + layer compile time | certified assemblies, layer completion rate, assembly certification pass rate |
 | `complex-bcl-and-external` | complex DLL / external DLL conformance proof | representative external DLL benchmark | external pass rate, performance delta |
 | `hotupdate-consumer` | hotupdate bind/invoke/semantic proof | patch load/bind/call overhead benchmark | hotupdate pass rate, overhead trend |
 | `net10-delta` | `.NET 10` delta proof | net8 vs net10 regression benchmark | delta resolved count, cross-version regressions |
@@ -185,7 +217,9 @@ Status: in-progress
 | `20260418-03-phase-1-contract-facade-and-shim-certification-lane` | `contract-lane` | `completed` | `codex` | 收口 facade/shim 公开 surface 与 canonical owner 映射 | `20260418-02` |
 | `20260418-04-phase-2-system-private-corelib-certification-substrate` | `corelib-substrate` | `completed` | `codex` | 搭建 corelib 整 DLL 认证底座与 helper contract | `20260418-03` |
 | `20260418-05-phase-3-system-private-corelib-semantic-family-nativeization` | `semantic-family` | `completed` | `codex` | 已完成首批 corelib semantic-family execution entry 与 proof / conformance / benchmark 实跑闭环 | `20260418-04` |
-| `20260418-06-dependency-driven-core-bcl-layer-nativeization` | `dependency-layer` | `planned` | `codex` | 依赖驱动分层推进核心 `System.*` DLL 认证 | `20260418-05-phase-3-system-private-corelib-semantic-family-nativeization` |
+| `20260418-06-dependency-driven-core-bcl-layer-nativeization` | `dependency-layer` | `completed` | `codex` | 已冻结 dependency-layer authority、layer plan、proof/benchmark lane 与 per-assembly execution plan | `20260418-05-phase-3-system-private-corelib-semantic-family-nativeization` |
+| `20260418-10-core-bcl-layer-01-priority-batch-execution` | `dependency-layer` | `completed` | `codex` | 已完成 `System.Collections` / `System.Memory` / `System.Threading` / `System.Console` representative batch 的真实 proof / benchmark / engineering gate 闭环 | `20260418-06-dependency-driven-core-bcl-layer-nativeization` |
+| `20260418-11-core-bcl-layer-01-remaining-ready-dll-execution` | `dependency-layer` | `in-progress` | `codex` | 执行剩余 `21` 个 ready DLL 的 formal objects，并把共享 run evidence 回填为逐 DLL certification closeout | `20260418-10-core-bcl-layer-01-priority-batch-execution` |
 | `20260418-07-complex-bcl-and-common-external-dll-lane` | `complex-bcl-and-external` | `planned` | `codex` | 收口复杂 BCL 与常用外部 DLL | `20260418-06-dependency-driven-core-bcl-layer-nativeization` |
 | `20260418-08-hotupdate-consumer-validation` | `hotupdate-consumer` | `planned` | `codex` | 用 hotupdate host/patch 验证已认证 foundation 底座 | `20260418-06-dependency-driven-core-bcl-layer-nativeization` |
 | `20260418-09-dotnet10-delta-closure-and-release-gates` | `net10-delta` | `planned` | `codex` | 完成 `.NET 10` delta 闭环与跨版本 gate | `20260418-06-dependency-driven-core-bcl-layer-nativeization` |
@@ -234,5 +268,7 @@ Status: in-progress
 2. `20260418-03-phase-1-contract-facade-and-shim-certification-lane` 已完成并归档。
 3. `20260418-04-phase-2-system-private-corelib-certification-substrate` 已完成并归档。
 4. `20260418-05-phase-3-system-private-corelib-semantic-family-nativeization` 已完成并归档。
-5. 立即激活 `20260418-06-dependency-driven-core-bcl-layer-nativeization`
-6. 继续推进核心 `System.*` 分层、复杂 BCL、外部 DLL、hotupdate consumer 与 `.NET 10` delta closure
+5. `20260418-06-dependency-driven-core-bcl-layer-nativeization` 已完成并归档
+6. `20260418-10-core-bcl-layer-01-priority-batch-execution` 已完成并归档。
+7. `20260418-11-core-bcl-layer-01-remaining-ready-dll-execution` 进行中；先把 `gameplay-core-ready` 作为 `dependency-layer` 阶段性验收目标固化下来，再在剩余 `21` 个 ready DLL 上推进 shared execution evidence 与逐 DLL `assembly-certification-report`。
+8. 只有当 `gameplay-core-ready` 达成且 layer-01 剩余 DLL 继续完成逐 DLL full-certified closeout 后，再推进更高 layer、复杂 BCL、外部 DLL、hotupdate consumer 与 `.NET 10` delta closure。

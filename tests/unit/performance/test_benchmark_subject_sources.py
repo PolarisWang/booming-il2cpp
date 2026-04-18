@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SHARED_PERF_PROJECT_PATH = "src/validation/perf/Benchmark.WorkloadEntry.PerfHarness/Benchmark.WorkloadEntry.PerfHarness.csproj"
+SHARED_PERF_PROJECT_PATH = "src/tools/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.csproj"
 SOLUTION_CORE_PACK_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
 HOT_UPDATE_HOST_PACK_ROOT = REPO_ROOT / "subjects" / "HotUpdateHostPack"
 MIXED_EXECUTION_FEATURE_PACK_ROOT = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack"

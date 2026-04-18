@@ -393,7 +393,7 @@ class RepoLayoutTests(unittest.TestCase):
                     continue
                 self.assertTrue(
                     project_path.startswith(f"subjects/{subject_id}/validation/")
-                    or project_path.startswith("src/validation/perf/")
+                    or project_path.startswith("src/tools/Chaos.IL2CPP.Tools.")
                 )
                 self.assertNotIn("/tests/", project_path.replace("\\", "/"))
 
