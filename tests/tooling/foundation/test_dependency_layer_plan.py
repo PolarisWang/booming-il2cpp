@@ -55,7 +55,7 @@ class DependencyLayerNativeizationGeneratorTests(unittest.TestCase):
     def tearDown(self) -> None:
         shutil.rmtree(self.output_dir, ignore_errors=True)
 
-    def _run_generator(self) -> dict[str, object]:
+    def _run_generator(self, certified_assemblies_path: Path | None = None) -> dict[str, object]:
         refresh_completed = subprocess.run(
             [
                 sys.executable,
@@ -76,8 +76,7 @@ class DependencyLayerNativeizationGeneratorTests(unittest.TestCase):
             msg=f"registry refresh stdout:\n{refresh_completed.stdout}\n\nstderr:\n{refresh_completed.stderr}",
         )
 
-        completed = subprocess.run(
-            [
+        command = [
                 "dotnet",
                 "run",
                 "--project",
@@ -96,7 +95,12 @@ class DependencyLayerNativeizationGeneratorTests(unittest.TestCase):
                 str(self.output_dir),
                 "--task-id",
                 "dependency-layer-nativeization-test",
-            ],
+            ]
+        if certified_assemblies_path is not None:
+            command.extend(["--certified-assemblies-path", str(certified_assemblies_path)])
+
+        completed = subprocess.run(
+            command,
             cwd=REPO_ROOT,
             capture_output=True,
             text=True,
@@ -193,6 +197,83 @@ class DependencyLayerNativeizationGeneratorTests(unittest.TestCase):
             self.assertIn("engineering-workload/SolutionCorePack/native-link", workload_ids)
             self.assertIn("certified-assembly-count", monitor_signals)
             self.assertIn("layer-nativeization-throughput", monitor_signals)
+
+    def test_generator_can_advance_after_certified_layer_report(self) -> None:
+        first_run = self._run_generator()
+        first_layer_plan = dict(first_run["layer_plan"])
+        first_assembly_plans = dict(first_run["assembly_plans"])
+
+        certified_path = self.output_dir / "certified-layer-01.json"
+        certified_path.write_text(
+            json.dumps(
+                {
+                    "certifiedAssemblies": sorted(
+                        {
+                            plan["assemblyName"]
+                            for plan in first_assembly_plans.values()
+                        }
+                    )
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        self.output_dir = TEST_TMP_ROOT / f"run-{uuid.uuid4().hex}"
+        self.output_dir.mkdir(parents=True, exist_ok=False)
+        second_run = self._run_generator(certified_path)
+
+        layer_plan = dict(second_run["layer_plan"])
+        assembly_plans = dict(second_run["assembly_plans"])
+
+        for tfm in ("net8.0", "net10.0"):
+            tfm_plan = dict(dict(layer_plan["targetFrameworks"])[tfm])
+            layers = dict(tfm_plan["layers"])
+            first_ready_layer_name = tfm_plan["firstReadyLayerName"]
+
+            self.assertEqual("core-bcl-layer-02", first_ready_layer_name)
+            self.assertEqual("certified", dict(layers["core-bcl-layer-01"])["readinessStatus"])
+            self.assertEqual("ready", dict(layers[first_ready_layer_name])["readinessStatus"])
+
+        first_layer_assemblies = {
+            plan["assemblyName"]
+            for plan in first_assembly_plans.values()
+        }
+        second_layer_assemblies = {
+            plan["assemblyName"]
+            for plan in assembly_plans.values()
+        }
+        self.assertFalse(first_layer_assemblies & second_layer_assemblies)
+        self.assertIn("System.Linq", second_layer_assemblies)
+        self.assertIn("System.Collections.Immutable", second_layer_assemblies)
+
+    def test_generator_handles_fully_certified_candidate_set(self) -> None:
+        first_run = self._run_generator()
+        first_layer_plan = dict(first_run["layer_plan"])
+
+        all_candidate_assemblies: set[str] = set()
+        for framework_payload in dict(first_layer_plan["targetFrameworks"]).values():
+            for layer_payload in dict(framework_payload["layers"]).values():
+                all_candidate_assemblies.update(dict(layer_payload["assemblies"]).keys())
+
+        certified_path = self.output_dir / "certified-all-candidates.json"
+        certified_path.write_text(
+            json.dumps({"certifiedAssemblies": sorted(all_candidate_assemblies)}),
+            encoding="utf-8",
+        )
+
+        self.output_dir = TEST_TMP_ROOT / f"run-{uuid.uuid4().hex}"
+        self.output_dir.mkdir(parents=True, exist_ok=False)
+        final_run = self._run_generator(certified_path)
+
+        layer_plan = dict(final_run["layer_plan"])
+        assembly_plans = dict(final_run["assembly_plans"])
+        self.assertEqual({}, assembly_plans)
+
+        for framework_payload in dict(layer_plan["targetFrameworks"]).values():
+            tfm_plan = dict(framework_payload)
+            self.assertIsNone(tfm_plan["firstReadyLayerName"])
+            for layer_payload in dict(tfm_plan["layers"]).values():
+                self.assertEqual("certified", dict(layer_payload)["readinessStatus"])
 
 
 if __name__ == "__main__":

@@ -28,7 +28,7 @@ internal static class Program
 
         if (args.Length == 0)
         {
-            Console.Error.WriteLine("usage: Chaos.IL2CPP.Tools.FoundationPack.Analysis <phase1|phase2|phase3|dependency-layer> [options]");
+            Console.Error.WriteLine("usage: Chaos.IL2CPP.Tools.FoundationPack.Analysis <phase1|phase2|phase3|dependency-layer|dependency-layer-certify|dependency-layer-summarize> [options]");
             return 1;
         }
 
@@ -42,6 +42,8 @@ internal static class Program
                 "phase2" => ExecutePhase2(options),
                 "phase3" => ExecutePhase3(options),
                 "dependency-layer" => ExecuteDependencyLayer(options),
+                "dependency-layer-certify" => ExecuteDependencyLayerCertify(options),
+                "dependency-layer-summarize" => ExecuteDependencyLayerSummarize(options),
                 _ => throw new ArgumentException($"unsupported command: {command}"),
             };
         }
@@ -169,7 +171,6 @@ internal static class Program
                                    !string.IsNullOrWhiteSpace(configuredRegistrySnapshotPath)
             ? configuredRegistrySnapshotPath
             : Path.Combine(Environment.CurrentDirectory, "artifacts", "tests", "registry", "current", "index.json");
-
         var outputRoot = Path.GetFullPath(outputDirectory);
         Directory.CreateDirectory(outputRoot);
 
@@ -264,6 +265,10 @@ internal static class Program
                                    !string.IsNullOrWhiteSpace(configuredRegistrySnapshotPath)
             ? configuredRegistrySnapshotPath
             : Path.Combine(Environment.CurrentDirectory, "artifacts", "tests", "registry", "current", "index.json");
+        var additionalCertifiedAssemblies = options.TryGetValue("--certified-assemblies-path", out var certifiedAssembliesPath) &&
+                                            !string.IsNullOrWhiteSpace(certifiedAssembliesPath)
+            ? LoadCertifiedAssemblyNames(certifiedAssembliesPath)
+            : [];
 
         var outputRoot = Path.GetFullPath(outputDirectory);
         Directory.CreateDirectory(outputRoot);
@@ -276,7 +281,8 @@ internal static class Program
             phase2Directory,
             phase3Directory,
             taskId,
-            registrySnapshotPath);
+            registrySnapshotPath,
+            additionalCertifiedAssemblies);
 
         WriteJson(Path.Combine(outputRoot, "layer-plan-v1-01.json"), artifacts.LayerPlan);
         WriteJson(Path.Combine(outputRoot, "proof-benchmark-lane-v1-01.json"), artifacts.ProofBenchmarkLane);
@@ -286,6 +292,136 @@ internal static class Program
             WriteJson(Path.Combine(assemblyPlanDirectory, $"{assemblyPlan.Key}.json"), assemblyPlan.Value);
         }
 
+        return 0;
+    }
+
+    private static string[] LoadCertifiedAssemblyNames(string path)
+    {
+        using var stream = File.OpenRead(path);
+        using var document = JsonDocument.Parse(stream);
+        var root = document.RootElement;
+        if (root.TryGetProperty("certifiedAssemblies", out var certifiedAssemblies))
+        {
+            return certifiedAssemblies.EnumerateArray()
+                .Select(static value => value.GetString())
+                .Where(static value => !string.IsNullOrWhiteSpace(value))
+                .Select(static value => value!)
+                .Distinct(StringComparer.Ordinal)
+                .OrderBy(static value => value, StringComparer.Ordinal)
+                .ToArray();
+        }
+
+        if (root.TryGetProperty("certificationReports", out var certificationReports))
+        {
+            return certificationReports.EnumerateArray()
+                .Where(static value => string.Equals(GetOptionalString(value, "finalStatus"), "ok", StringComparison.OrdinalIgnoreCase))
+                .Select(static value => GetOptionalString(value, "assemblyName"))
+                .Where(static value => !string.IsNullOrWhiteSpace(value))
+                .Select(static value => value!)
+                .Distinct(StringComparer.Ordinal)
+                .OrderBy(static value => value, StringComparer.Ordinal)
+                .ToArray();
+        }
+
+        throw new InvalidOperationException($"certified assembly file '{path}' must contain certifiedAssemblies or certificationReports.");
+    }
+
+    private static string? GetOptionalString(JsonElement value, string propertyName)
+    {
+        return value.TryGetProperty(propertyName, out var property) && property.ValueKind == JsonValueKind.String
+            ? property.GetString()
+            : null;
+    }
+
+    private static int ExecuteDependencyLayerCertify(IReadOnlyDictionary<string, string> options)
+    {
+        var assemblyPlanDirectory = GetRequiredOption(options, "--assembly-plan-dir");
+        var proofSummaryPath = GetRequiredOption(options, "--proof-summary");
+        var benchmarkSummaryPath = GetRequiredOption(options, "--benchmark-summary");
+        var outputDirectory = GetRequiredOption(options, "--output-dir");
+        var taskId = GetRequiredOption(options, "--task-id");
+
+        var outputRoot = Path.GetFullPath(outputDirectory);
+        Directory.CreateDirectory(outputRoot);
+
+        var reports = DependencyLayerCertificationReportBuilder.Build(
+            assemblyPlanDirectory,
+            proofSummaryPath,
+            benchmarkSummaryPath,
+            taskId);
+
+        foreach (var report in reports)
+        {
+            WriteJson(Path.Combine(outputRoot, $"{report.Key}.json"), report.Value);
+        }
+
+        return 0;
+    }
+
+    private static int ExecuteDependencyLayerSummarize(IReadOnlyDictionary<string, string> options)
+    {
+        var sourceScopePath = GetRequiredOption(options, "--source-scope");
+        var proofSummaryPath = GetRequiredOption(options, "--proof-summary");
+        var benchmarkSummaryPath = GetRequiredOption(options, "--benchmark-summary");
+        var reportDirectory = GetRequiredOption(options, "--report-dir");
+        var outputPath = GetRequiredOption(options, "--output-path");
+        var taskId = GetRequiredOption(options, "--task-id");
+
+        var normalizedReportDirectory = Path.GetFullPath(reportDirectory);
+        if (!Directory.Exists(normalizedReportDirectory))
+        {
+            throw new DirectoryNotFoundException($"dependency layer report directory missing: {normalizedReportDirectory}");
+        }
+
+        var certificationReports = Directory.GetFiles(normalizedReportDirectory, "*.json")
+            .OrderBy(static value => Path.GetFileNameWithoutExtension(value), NameComparer)
+            .Select(path =>
+            {
+                using var stream = File.OpenRead(path);
+                using var document = JsonDocument.Parse(stream);
+                var root = document.RootElement;
+                return new DependencyLayerCertificationSummaryReport(
+                    GetRequiredString(root, "assemblyName"),
+                    GetRequiredString(root, "finalStatus"),
+                    GetRequiredString(root, "reportState"),
+                    NormalizePath(Path.Combine(reportDirectory, Path.GetFileName(path))));
+            })
+            .ToArray();
+
+        var ok = certificationReports.Count(static report => string.Equals(report.FinalStatus, "ok", StringComparison.OrdinalIgnoreCase));
+        var blocked = certificationReports.Count(static report => string.Equals(report.FinalStatus, "blocked", StringComparison.OrdinalIgnoreCase));
+        var failed = certificationReports.Count(static report => string.Equals(report.FinalStatus, "failed", StringComparison.OrdinalIgnoreCase));
+        var finalStatus = failed > 0
+            ? "failed"
+            : blocked > 0 || certificationReports.Length == 0
+                ? "blocked"
+                : "ok";
+
+        var output = new DependencyLayerCertificationSummaryPayload
+        {
+            TaskId = taskId,
+            SourceScopePath = NormalizePath(sourceScopePath),
+            ProofSummaryPath = NormalizePath(proofSummaryPath),
+            BenchmarkSummaryPath = NormalizePath(benchmarkSummaryPath),
+            ReportDirectory = NormalizePath(reportDirectory),
+            LayerStatus = new DependencyLayerCertificationSummaryStatus
+            {
+                FinalStatus = finalStatus,
+                Total = certificationReports.Length,
+                Ok = ok,
+                Blocked = blocked,
+                Failed = failed,
+            },
+            CertificationReports = certificationReports,
+        };
+
+        var outputDirectory = Path.GetDirectoryName(Path.GetFullPath(outputPath));
+        if (!string.IsNullOrWhiteSpace(outputDirectory))
+        {
+            Directory.CreateDirectory(outputDirectory);
+        }
+
+        WriteJson(outputPath, output);
         return 0;
     }
 
@@ -299,9 +435,25 @@ internal static class Program
         return value;
     }
 
+    private static string GetRequiredString(JsonElement value, string propertyName)
+    {
+        var result = GetOptionalString(value, propertyName);
+        if (string.IsNullOrWhiteSpace(result))
+        {
+            throw new InvalidOperationException($"string property '{propertyName}' is required.");
+        }
+
+        return result;
+    }
+
     private static void WriteJson<T>(string path, T payload)
     {
         File.WriteAllText(path, JsonSerializer.Serialize(payload, JsonOptions), new System.Text.UTF8Encoding(false));
+    }
+
+    private static string NormalizePath(string path)
+    {
+        return path.Replace('\\', '/');
     }
 
     private static Phase2TargetFrameworkAnalysisResult AnalyzeCoreLibTargetFramework(
@@ -1668,6 +1820,46 @@ internal sealed class Phase1ClassificationPayload
 
     public SortedDictionary<string, ClassificationFrameworkPayload> TargetFrameworks { get; set; } = new(StringComparer.Ordinal);
 }
+
+internal sealed class DependencyLayerCertificationSummaryPayload
+{
+    public int SchemaVersion { get; set; } = 1;
+
+    public string TaskId { get; set; } = string.Empty;
+
+    public DateTimeOffset GeneratedAt { get; set; } = DateTimeOffset.Now;
+
+    public string SourceScopePath { get; set; } = string.Empty;
+
+    public string ProofSummaryPath { get; set; } = string.Empty;
+
+    public string BenchmarkSummaryPath { get; set; } = string.Empty;
+
+    public string ReportDirectory { get; set; } = string.Empty;
+
+    public DependencyLayerCertificationSummaryStatus LayerStatus { get; set; } = new();
+
+    public DependencyLayerCertificationSummaryReport[] CertificationReports { get; set; } = [];
+}
+
+internal sealed class DependencyLayerCertificationSummaryStatus
+{
+    public string FinalStatus { get; set; } = string.Empty;
+
+    public int Total { get; set; }
+
+    public int Ok { get; set; }
+
+    public int Blocked { get; set; }
+
+    public int Failed { get; set; }
+}
+
+internal sealed record DependencyLayerCertificationSummaryReport(
+    string AssemblyName,
+    string FinalStatus,
+    string ReportState,
+    string ReportPath);
 
 internal sealed class ClassificationFrameworkPayload
 {

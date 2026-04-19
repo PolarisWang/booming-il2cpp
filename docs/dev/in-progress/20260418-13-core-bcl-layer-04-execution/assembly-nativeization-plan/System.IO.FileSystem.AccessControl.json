@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 1,
+  "taskId": "20260418-13-core-bcl-layer-04-execution",
+  "generatedAt": "2026-04-19T09:47:10.9214364+08:00",
+  "assemblyName": "System.IO.FileSystem.AccessControl",
+  "selectionReason": "first-ready-layer",
+  "ownerSubjectId": "SolutionCorePack",
+  "subjectManifestPath": "D:/agent/booming-il2cpp/subjects/SolutionCorePack/subject.manifest.json",
+  "requiredGates": [
+    "collector",
+    "registry",
+    "workspace",
+    "dependency-layer-proof",
+    "benchmark"
+  ],
+  "monitorSignals": [
+    "certified-assembly-count",
+    "blocked-assembly-count",
+    "layer-completion-rate",
+    "layer-nativeization-throughput",
+    "layer-compile-time-ms",
+    "native-proof-pass-rate",
+    "benchmark-regression-delta"
+  ],
+  "nativeProofs": [
+    {
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()",
+      "type": "declared-unit-test",
+      "alias": "aot-closure-validation-proof",
+      "displayName": "aot-closure-validation-proof",
+      "sourceEntry": "CoreRuntimeFeatures/AotClosureValidationProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": "Linker And Aot Closure",
+      "capabilityItemLabel": "Aot Closure Validation",
+      "categoryLabel": "Metadata Contract",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run()",
+      "type": "declared-unit-test",
+      "alias": "required-instantiation-closure-proof",
+      "displayName": "required-instantiation-closure-proof",
+      "sourceEntry": "CoreRuntimeFeatures/RequiredInstantiationClosureProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run()",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": "Linker And Aot Closure",
+      "capabilityItemLabel": "Required Instantiation Closure",
+      "categoryLabel": "Metadata Contract",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.SpanAndMemoryProofEntry::Run()",
+      "type": "declared-unit-test",
+      "alias": "span-memory-proof",
+      "displayName": "span-memory-proof",
+      "sourceEntry": "CoreRuntimeFeatures/SpanAndMemoryProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.SpanAndMemoryProofEntry::Run()",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": "Unsafe And Low Level",
+      "capabilityItemLabel": "Span And Memory",
+      "categoryLabel": "Interop Contract",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run()",
+      "type": "declared-unit-test",
+      "alias": "task-valuetask-flow-proof",
+      "displayName": "task-valuetask-flow-proof",
+      "sourceEntry": "CoreRuntimeFeatures/TaskAndValueTaskFlowProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run()",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": "Async And Iterators",
+      "capabilityItemLabel": "Task And ValueTask Flow",
+      "categoryLabel": "Runtime Contract",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    }
+  ],
+  "benchmarks": [
+    {
+      "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.AllocationBenchmarkEntry::RunWorkload()",
+      "type": "declared-benchmark",
+      "alias": "allocation-bench",
+      "displayName": "allocation-bench",
+      "sourceEntry": "CoreRuntimeBenchmarks/AllocationBenchmarkEntry::RunWorkload()",
+      "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.AllocationBenchmarkEntry::RunWorkload()",
+      "defaultGoalId": "perf.release",
+      "defaultMatrixId": "windows-native-perf",
+      "capabilityFamilyLabel": "Runtime Services",
+      "capabilityItemLabel": "Gc Sensitive Flow",
+      "categoryLabel": "Allocation",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry::RunWorkload()",
+      "type": "declared-benchmark",
+      "alias": "required-instantiation-closure-bench",
+      "displayName": "required-instantiation-closure-bench",
+      "sourceEntry": "CoreRuntimeBenchmarks/RequiredInstantiationClosureBenchmarkEntry::RunWorkload()",
+      "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry::RunWorkload()",
+      "defaultGoalId": "perf.release",
+      "defaultMatrixId": "windows-native-perf",
+      "capabilityFamilyLabel": "Linker And Aot Closure",
+      "capabilityItemLabel": "Required Instantiation Closure",
+      "categoryLabel": "Runtime Dispatch",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()",
+      "type": "declared-benchmark",
+      "alias": "task-valuetask-flow-bench",
+      "displayName": "task-valuetask-flow-bench",
+      "sourceEntry": "CoreRuntimeBenchmarks/TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()",
+      "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()",
+      "defaultGoalId": "perf.release",
+      "defaultMatrixId": "windows-managed-perf",
+      "capabilityFamilyLabel": "Async And Iterators",
+      "capabilityItemLabel": "Task And ValueTask Flow",
+      "categoryLabel": "Runtime Dispatch",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    }
+  ],
+  "conformanceGates": [
+    {
+      "id": "engineering-validation/SolutionCorePack/managed-build",
+      "type": "engineering-validation",
+      "alias": null,
+      "displayName": "managed-build",
+      "sourceEntry": null,
+      "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/managed-build",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-archetype-simple-lib-managed-output",
+      "capabilityFamilyLabel": null,
+      "capabilityItemLabel": null,
+      "categoryLabel": null,
+      "pipelineIds": [
+        "managed-runtime-output",
+        "managed-runtime-trace",
+        "proof-runtime-output",
+        "managed-benchmark",
+        "native-benchmark"
+      ],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "engineering-validation/SolutionCorePack/managed-runtime-output",
+      "type": "engineering-validation",
+      "alias": null,
+      "displayName": "managed-runtime-output",
+      "sourceEntry": null,
+      "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/managed-runtime-output",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-archetype-simple-lib-managed-output",
+      "capabilityFamilyLabel": null,
+      "capabilityItemLabel": null,
+      "categoryLabel": null,
+      "pipelineIds": [
+        "managed-runtime-output",
+        "managed-runtime-trace",
+        "proof-runtime-output",
+        "managed-benchmark",
+        "native-benchmark"
+      ],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "engineering-validation/SolutionCorePack/native-executable-smoke",
+      "type": "engineering-validation",
+      "alias": null,
+      "displayName": "native-executable-smoke",
+      "sourceEntry": null,
+      "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/native-executable-smoke",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": null,
+      "capabilityItemLabel": null,
+      "categoryLabel": null,
+      "pipelineIds": [
+        "managed-runtime-output",
+        "managed-runtime-trace",
+        "proof-runtime-output",
+        "managed-benchmark",
+        "native-benchmark"
+      ],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "engineering-validation/SolutionCorePack/project-graph",
+      "type": "engineering-validation",
+      "alias": null,
+      "displayName": "project-graph",
+      "sourceEntry": null,
+      "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/project-graph",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": null,
+      "capabilityItemLabel": null,
+      "categoryLabel": null,
+      "pipelineIds": [
+        "managed-runtime-output",
+        "managed-runtime-trace",
+        "proof-runtime-output",
+        "managed-benchmark",
+        "native-benchmark"
+      ],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    }
+  ],
+  "engineeringWorkloads": [
+    {
+      "id": "engineering-workload/SolutionCorePack/codegen",
+      "type": "engineering-workload",
+      "alias": null,
+      "displayName": "codegen",
+      "sourceEntry": null,
+      "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/codegen",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": null,
+      "capabilityItemLabel": null,
+      "categoryLabel": null,
+      "pipelineIds": [
+        "managed-runtime-output",
+        "managed-runtime-trace",
+        "proof-runtime-output",
+        "managed-benchmark",
+        "native-benchmark"
+      ],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "engineering-workload/SolutionCorePack/convert",
+      "type": "engineering-workload",
+      "alias": null,
+      "displayName": "convert",
+      "sourceEntry": null,
+      "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/convert",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": null,
+      "capabilityItemLabel": null,
+      "categoryLabel": null,
+      "pipelineIds": [
+        "managed-runtime-output",
+        "managed-runtime-trace",
+        "proof-runtime-output",
+        "managed-benchmark",
+        "native-benchmark"
+      ],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "engineering-workload/SolutionCorePack/native-link",
+      "type": "engineering-workload",
+      "alias": null,
+      "displayName": "native-link",
+      "sourceEntry": null,
+      "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/native-link",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": null,
+      "capabilityItemLabel": null,
+      "categoryLabel": null,
+      "pipelineIds": [
+        "managed-runtime-output",
+        "managed-runtime-trace",
+        "proof-runtime-output",
+        "managed-benchmark",
+        "native-benchmark"
+      ],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    }
+  ],
+  "targetFrameworks": {
+    "net10.0": {
+      "selectedVersion": "10.0.6",
+      "sourceKind": "repo-frozen-snapshot",
+      "layerName": "core-bcl-layer-04",
+      "status": "ready",
+      "classification": "implementation",
+      "surfaceContractCertified": false,
+      "publicTypeDefinitionCount": 8,
+      "publicMemberCount": 89,
+      "runtimeMethodBodyCount": 153,
+      "capabilityFamilies": [
+        "io-and-networking"
+      ],
+      "dependencyAssemblies": [
+        "System.Runtime",
+        "System.Security.AccessControl",
+        "System.Security.Principal.Windows"
+      ],
+      "candidateDependencyAssemblies": [
+        "System.Security.AccessControl",
+        "System.Security.Principal.Windows"
+      ],
+      "certifiedDependencyAssemblies": [
+        "System.Private.CoreLib",
+        "System.Runtime",
+        "System.Security.AccessControl",
+        "System.Security.Principal.Windows"
+      ],
+      "externalDependencyAssemblies": [],
+      "blockerReasons": []
+    },
+    "net8.0": {
+      "selectedVersion": "8.0.11",
+      "sourceKind": "machine-global-official-installation",
+      "layerName": "core-bcl-layer-04",
+      "status": "ready",
+      "classification": "implementation",
+      "surfaceContractCertified": false,
+      "publicTypeDefinitionCount": 8,
+      "publicMemberCount": 89,
+      "runtimeMethodBodyCount": 150,
+      "capabilityFamilies": [
+        "io-and-networking"
+      ],
+      "dependencyAssemblies": [
+        "System.Runtime",
+        "System.Security.AccessControl",
+        "System.Security.Principal.Windows"
+      ],
+      "candidateDependencyAssemblies": [
+        "System.Security.AccessControl",
+        "System.Security.Principal.Windows"
+      ],
+      "certifiedDependencyAssemblies": [
+        "System.Private.CoreLib",
+        "System.Runtime",
+        "System.Security.AccessControl",
+        "System.Security.Principal.Windows"
+      ],
+      "externalDependencyAssemblies": [],
+      "blockerReasons": []
+    }
+  }
+}

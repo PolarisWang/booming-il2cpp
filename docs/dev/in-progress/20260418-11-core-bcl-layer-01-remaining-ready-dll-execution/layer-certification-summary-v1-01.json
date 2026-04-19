@@ -1,0 +1,199 @@
+﻿{
+    "schemaVersion":  1,
+    "taskId":  "20260418-11-core-bcl-layer-01-remaining-ready-dll-execution",
+    "generatedAt":  "2026-04-19T09:26:49+08:00",
+    "sourceScopePath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/remaining-ready-scope-v1-01.json",
+    "proofSummaryPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/layer-ready-proof-summary-v1-01.json",
+    "benchmarkSummaryPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/layer-ready-throughput-benchmark-v1-01.json",
+    "reportDirectory":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report",
+    "gameplayCoreReady":  {
+                              "status":  "ok",
+                              "total":  15,
+                              "ok":  15,
+                              "blocked":  0,
+                              "failed":  0
+                          },
+    "layerStatus":  {
+                        "finalStatus":  "ok",
+                        "total":  29,
+                        "ok":  29,
+                        "blocked":  0,
+                        "failed":  0
+                    },
+    "certificationReports":  [
+                                 {
+                                     "assemblyName":  "System.Collections",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Collections.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Collections.Concurrent",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Collections.Concurrent.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Collections.NonGeneric",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Collections.NonGeneric.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.ComponentModel",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.ComponentModel.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Console",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Console.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Diagnostics.DiagnosticSource",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Diagnostics.DiagnosticSource.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Diagnostics.FileVersionInfo",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Diagnostics.FileVersionInfo.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Diagnostics.StackTrace",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Diagnostics.StackTrace.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Formats.Tar",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Formats.Tar.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.IO.Compression",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.IO.Compression.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.IO.FileSystem.DriveInfo",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.IO.FileSystem.DriveInfo.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.IO.IsolatedStorage",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.IO.IsolatedStorage.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.IO.Pipes",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.IO.Pipes.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Memory",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Memory.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Reflection.DispatchProxy",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Reflection.DispatchProxy.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Reflection.TypeExtensions",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Reflection.TypeExtensions.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Resources.Writer",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Resources.Writer.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Runtime.CompilerServices.VisualC",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Runtime.CompilerServices.VisualC.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Runtime.InteropServices.JavaScript",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Runtime.InteropServices.JavaScript.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Runtime.Numerics",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Runtime.Numerics.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Runtime.Serialization.Primitives",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Runtime.Serialization.Primitives.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Security.Claims",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Security.Claims.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Text.Encoding.CodePages",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Text.Encoding.CodePages.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Text.Encodings.Web",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Text.Encodings.Web.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Text.RegularExpressions",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Text.RegularExpressions.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Threading",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Threading.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Threading.Channels",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Threading.Channels.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Threading.Tasks.Dataflow",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Threading.Tasks.Dataflow.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Xml.XPath.XDocument",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/System.Xml.XPath.XDocument.json"
+                                 }
+                             ]
+}

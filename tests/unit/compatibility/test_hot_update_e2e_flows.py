@@ -53,6 +53,7 @@ VERSION_ROLLBACK_PROOF_PROJECT_PATH = VERSION_ROLLBACK_PROOF_ROOT / "source" / "
 VERSION_ROLLBACK_PROOF_PROGRAM_PATH = VERSION_ROLLBACK_PROOF_ROOT / "source" / "Program.cs"
 
 HOT_UPDATE_HOST_PROJECT_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "HotUpdateHostPack.csproj"
+PATCH_CALLBACK_PROOF_SOURCE_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "Host" / "Proofs" / "PatchCallbackFlowProofEntry.cs"
 BENCH_LOAD_SOURCE_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateLoadBenchmark.cs"
 BENCH_DISPATCH_SOURCE_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateDispatchBenchmark.cs"
 BENCH_ROUNDTRIP_SOURCE_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateRoundtripBenchmark.cs"
@@ -382,6 +383,17 @@ class Phase9HotUpdateE2ETests(unittest.TestCase):
             ["dotnet", "build", str(HOT_UPDATE_HOST_PROJECT_PATH), "-c", "Release", "-m:1"],
             cwd=REPO_ROOT,
         )
+
+    def test_patch_callback_flow_and_dispatch_benchmark_use_loaded_mixed_runtime_path(self) -> None:
+        self.assertTrue(PATCH_CALLBACK_PROOF_SOURCE_PATH.is_file(), msg=f"missing proof source: {PATCH_CALLBACK_PROOF_SOURCE_PATH}")
+        self.assertTrue(BENCH_DISPATCH_SOURCE_PATH.is_file(), msg=f"missing benchmark source: {BENCH_DISPATCH_SOURCE_PATH}")
+
+        for source_path in [PATCH_CALLBACK_PROOF_SOURCE_PATH, BENCH_DISPATCH_SOURCE_PATH]:
+            source_text = source_path.read_text(encoding="utf-8")
+            self.assertIn("LoadPackage(", source_text)
+            self.assertIn("Int32UnaryBindings", source_text)
+            self.assertIn("Assert.Equal(RuntimeMode.Mixed", source_text)
+            self.assertLess(source_text.index("LoadPackage("), source_text.index("DispatchInt32Unary("))
 
 
 if __name__ == "__main__":

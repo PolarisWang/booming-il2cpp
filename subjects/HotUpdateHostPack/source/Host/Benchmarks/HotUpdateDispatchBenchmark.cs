@@ -27,15 +27,50 @@ internal static class HotUpdateDispatchBenchmarkEntry
         InvocationCount = 1)]
     public static int RunWorkload()
     {
-        var runtimeManager = new RuntimeManager();
-        runtimeManager.RegisterInt32Unary(BenchmarkIdentity, static value => value + 1);
+        var workspace = Path.Combine(Path.GetTempPath(), $"bench-hot-update-dispatch-{Guid.NewGuid():N}");
+        Directory.CreateDirectory(workspace);
 
-        var checksum = 0;
-        for (var index = 0; index < IterationCount; index++)
+        try
         {
-            checksum += runtimeManager.DispatchInt32Unary(BenchmarkIdentity, index, static value => value);
-        }
+            var packageRoot = HotUpdatePackageSupport.CreatePackageRoot(
+                workspace,
+                "dispatch",
+                HotUpdatePackageSupport.CurrentAotVersion,
+                "BenchHotUpdateDispatch/HotPatch::AddOne(System.Int32)",
+                [0x48, 0x55, 0x44, 0x31],
+                "dispatch-benchmark");
+            var runtimeManager = new RuntimeManager();
+            var loaded = runtimeManager.LoadPackage(
+                packageRoot,
+                HotUpdatePackageSupport.CurrentAotVersion,
+                new HotUpdateMethodBindingSet
+                {
+                    Int32UnaryBindings =
+                    [
+                        new HotUpdateInt32UnaryBinding
+                        {
+                            Identity = BenchmarkIdentity,
+                            Target = static value => value + 1,
+                        },
+                    ],
+                });
+            Assert.True(loaded);
+            Assert.Equal(RuntimeMode.Mixed, runtimeManager.Mode);
 
-        return checksum;
+            var checksum = 0;
+            for (var index = 0; index < IterationCount; index++)
+            {
+                checksum += runtimeManager.DispatchInt32Unary(BenchmarkIdentity, index, static value => value);
+            }
+
+            return checksum;
+        }
+        finally
+        {
+            if (Directory.Exists(workspace))
+            {
+                Directory.Delete(workspace, recursive: true);
+            }
+        }
     }
 }

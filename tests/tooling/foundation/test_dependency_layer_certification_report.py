@@ -90,8 +90,12 @@ class DependencyLayerCertificationReportTests(unittest.TestCase):
         self.assertEqual("System.Collections", report["assemblyName"])
         self.assertEqual("SolutionCorePack", report["ownerSubjectId"])
         self.assertEqual(["net10.0", "net8.0"], sorted(report["targetFrameworks"]))
-        self.assertEqual([], report["blockedReasons"])
-        self.assertEqual("ok", report["finalStatus"])
+        self.assertEqual("evidence-ready", report["reportState"])
+        self.assertEqual("blocked", report["finalStatus"])
+        self.assertIn(
+            "missing-native-proof:declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DispatchProofEntry::Run()",
+            report["blockedReasons"],
+        )
         self.assertEqual("throughput-only", report["benchmarkAcceptance"])
         self.assertEqual(5, len(report["gateResults"]))
         self.assertGreater(len(report["nativeProofResults"]), 0)
@@ -101,6 +105,85 @@ class DependencyLayerCertificationReportTests(unittest.TestCase):
         self.assertTrue(report["evidencePaths"]["assemblyPlanPath"].endswith("System.Collections.json"))
         self.assertTrue(report["evidencePaths"]["proofSummaryPath"].endswith("native-proof-summary-v1-01.json"))
         self.assertTrue(report["evidencePaths"]["benchmarkSummaryPath"].endswith("nativeization-throughput-benchmark-v1-01.json"))
+
+    def test_summarizer_projects_per_dll_reports_into_layer_summary(self) -> None:
+        certify_completed = subprocess.run(
+            [
+                "dotnet",
+                "run",
+                "--project",
+                str(PROJECT_PATH),
+                "--",
+                "dependency-layer-certify",
+                "--assembly-plan-dir",
+                str(ASSEMBLY_PLAN_DIR),
+                "--proof-summary",
+                str(PROOF_SUMMARY_PATH),
+                "--benchmark-summary",
+                str(BENCHMARK_SUMMARY_PATH),
+                "--output-dir",
+                str(self.output_dir),
+                "--task-id",
+                "dependency-layer-certify-test",
+            ],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(
+            0,
+            certify_completed.returncode,
+            msg=f"stdout:\n{certify_completed.stdout}\n\nstderr:\n{certify_completed.stderr}",
+        )
+
+        summary_path = self.output_dir / "layer-certification-summary-v1-01.json"
+        summarize_completed = subprocess.run(
+            [
+                "dotnet",
+                "run",
+                "--project",
+                str(PROJECT_PATH),
+                "--",
+                "dependency-layer-summarize",
+                "--source-scope",
+                str(self.output_dir / "scope.json"),
+                "--proof-summary",
+                str(PROOF_SUMMARY_PATH),
+                "--benchmark-summary",
+                str(BENCHMARK_SUMMARY_PATH),
+                "--report-dir",
+                str(self.output_dir),
+                "--output-path",
+                str(summary_path),
+                "--task-id",
+                "dependency-layer-summary-test",
+            ],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+
+        self.assertEqual(
+            0,
+            summarize_completed.returncode,
+            msg=f"stdout:\n{summarize_completed.stdout}\n\nstderr:\n{summarize_completed.stderr}",
+        )
+
+        summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        self.assertEqual("dependency-layer-summary-test", summary["taskId"])
+        self.assertEqual("blocked", summary["layerStatus"]["finalStatus"])
+        self.assertEqual(8, summary["layerStatus"]["total"])
+        self.assertEqual(0, summary["layerStatus"]["ok"])
+        self.assertEqual(8, summary["layerStatus"]["blocked"])
+        self.assertEqual(0, summary["layerStatus"]["failed"])
+        self.assertEqual(
+            sorted(report["assemblyName"] for report in summary["certificationReports"]),
+            [report["assemblyName"] for report in summary["certificationReports"]],
+        )
+        self.assertTrue(summary["proofSummaryPath"].endswith("native-proof-summary-v1-01.json"))
+        self.assertTrue(summary["benchmarkSummaryPath"].endswith("nativeization-throughput-benchmark-v1-01.json"))
 
 
 if __name__ == "__main__":

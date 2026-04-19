@@ -58,7 +58,8 @@ internal static class DependencyLayerArtifactsBuilder
         string phase2Directory,
         string phase3Directory,
         string taskId,
-        string registrySnapshotPath)
+        string registrySnapshotPath,
+        IReadOnlyCollection<string>? additionalCertifiedAssemblies = null)
     {
         var catalog = Phase0Catalog.Load(catalogPath);
         var phase1Index = DependencyPhase1ContractLaneIndex.Load(phase1Directory);
@@ -66,11 +67,12 @@ internal static class DependencyLayerArtifactsBuilder
         var phase3Index = DependencyPhase3ExecutionIndex.Load(phase3Directory);
         var registry = DependencyRegistrySnapshotIndex.Load(registrySnapshotPath);
 
+        var certifiedAssemblySet = new HashSet<string>(additionalCertifiedAssemblies ?? [], NameComparer);
         var layerModelsByFramework = new SortedDictionary<string, DependencyFrameworkModel>(NameComparer);
         foreach (var source in catalog.Sources.OrderBy(static value => value.TargetFramework, NameComparer))
         {
             var phase1Framework = phase1Index.GetRequiredFramework(source.TargetFramework);
-            var layerModel = BuildFrameworkModel(source, phase1Framework);
+            var layerModel = BuildFrameworkModel(source, phase1Framework, certifiedAssemblySet);
             layerModelsByFramework[source.TargetFramework] = layerModel;
         }
 
@@ -207,7 +209,8 @@ internal static class DependencyLayerArtifactsBuilder
 
     private static DependencyFrameworkModel BuildFrameworkModel(
         FrameworkCatalogSource source,
-        DependencyPhase1FrameworkIndex phase1Framework)
+        DependencyPhase1FrameworkIndex phase1Framework,
+        IReadOnlySet<string> additionalCertifiedAssemblies)
     {
         var refAssemblies = Program.LoadAssemblies(source.RefRootPath, MetadataPreference.Ref);
         var runtimeAssemblies = Program.LoadAssemblies(source.RuntimeRootPath, MetadataPreference.Runtime);
@@ -279,6 +282,7 @@ internal static class DependencyLayerArtifactsBuilder
                 .ToArray();
             assembly.CertifiedDependencyAssemblies = assembly.DependencyAssemblies
                 .Where(phase1Framework.IsContractCompleteEligible)
+                .Concat(assembly.DependencyAssemblies.Where(additionalCertifiedAssemblies.Contains))
                 .Append("System.Private.CoreLib")
                 .Distinct(NameComparer)
                 .OrderBy(static value => value, NameComparer)
@@ -292,7 +296,7 @@ internal static class DependencyLayerArtifactsBuilder
         }
 
         var componentModels = BuildComponentModels(candidateAssemblies);
-        var layers = BuildLayerModels(componentModels, candidateAssemblies);
+        var layers = BuildLayerModels(componentModels, candidateAssemblies, additionalCertifiedAssemblies);
 
         return new DependencyFrameworkModel(
             source.TargetFramework,
@@ -425,7 +429,8 @@ internal static class DependencyLayerArtifactsBuilder
 
     private static SortedDictionary<string, DependencyLayerModel> BuildLayerModels(
         IReadOnlyDictionary<int, DependencyComponentModel> components,
-        IReadOnlyDictionary<string, DependencyAssemblyModel> assemblies)
+        IReadOnlyDictionary<string, DependencyAssemblyModel> assemblies,
+        IReadOnlySet<string> additionalCertifiedAssemblies)
     {
         var layersByOrder = new SortedDictionary<int, DependencyLayerModel>();
         foreach (var component in components.Values.OrderBy(static value => value.LayerOrder).ThenBy(static value => value.ComponentId))
@@ -452,18 +457,38 @@ internal static class DependencyLayerArtifactsBuilder
             }
         }
 
+        var completedOrders = new HashSet<int>();
         foreach (var layer in layersByOrder.Values)
         {
-            layer.ReadinessStatus = layer.Order == 1 ? "ready" : "blocked";
+            if (layer.AssemblyNames.All(additionalCertifiedAssemblies.Contains))
+            {
+                completedOrders.Add(layer.Order);
+            }
+        }
+
+        foreach (var layer in layersByOrder.Values)
+        {
+            layer.ReadinessStatus = layer.AssemblyNames.All(additionalCertifiedAssemblies.Contains)
+                ? "certified"
+                : (layer.UpstreamLayerNames
+                    .Select(ExtractLayerOrder)
+                    .All(completedOrders.Contains)
+                    ? "ready"
+                    : "blocked");
+
             foreach (var assemblyName in layer.AssemblyNames.OrderBy(static value => value, NameComparer))
             {
                 var assembly = assemblies[assemblyName];
                 assembly.LayerName = layer.LayerName;
                 assembly.LayerOrder = layer.Order;
-                assembly.Status = layer.ReadinessStatus == "ready" ? "ready" : "blocked";
-                assembly.BlockerReasons = layer.Order == 1
+                assembly.Status = layer.ReadinessStatus == "certified"
+                    ? "certified"
+                    : (layer.ReadinessStatus == "ready" ? "ready" : "blocked");
+                assembly.BlockerReasons = layer.ReadinessStatus == "ready"
+                    || layer.ReadinessStatus == "certified"
                     ? []
                     : layer.UpstreamLayerNames.OrderBy(static value => value, NameComparer)
+                        .Where(value => !completedOrders.Contains(ExtractLayerOrder(value)))
                         .Select(static value => $"waiting-on:{value}")
                         .ToArray();
                 foreach (var capabilityFamily in assembly.CapabilityFamilies)
@@ -476,6 +501,12 @@ internal static class DependencyLayerArtifactsBuilder
         return new SortedDictionary<string, DependencyLayerModel>(
             layersByOrder.Values.ToDictionary(static value => value.LayerName, static value => value, NameComparer),
             NameComparer);
+
+        static int ExtractLayerOrder(string layerName)
+        {
+            const string prefix = "core-bcl-layer-";
+            return int.Parse(layerName[prefix.Length..]);
+        }
     }
 
     private static SortedDictionary<string, DependencyAssemblyNativeizationPlanPayload> BuildAssemblyPlans(
@@ -487,7 +518,12 @@ internal static class DependencyLayerArtifactsBuilder
 
         foreach (var framework in layerModelsByFramework.Values)
         {
-            var readyLayer = framework.Layers[framework.FirstReadyLayerName];
+            if (framework.FirstReadyLayerName is not { } firstReadyLayerName)
+            {
+                continue;
+            }
+
+            var readyLayer = framework.Layers[firstReadyLayerName];
             foreach (var assemblyName in readyLayer.AssemblyNames)
             {
                 if (!planAssemblies.TryGetValue(assemblyName, out var frameworks))
@@ -539,7 +575,7 @@ internal static class DependencyLayerArtifactsBuilder
                 {
                     SelectedVersion = framework.SelectedVersion,
                     SourceKind = framework.SourceKind,
-                    LayerName = framework.FirstReadyLayerName,
+                    LayerName = framework.FirstReadyLayerName ?? string.Empty,
                     Status = assembly.Status,
                     Classification = assembly.Classification,
                     SurfaceContractCertified = assembly.SurfaceContractCertified,
@@ -826,7 +862,10 @@ internal sealed class DependencyFrameworkModel
 
     public int ContractCertifiedAssemblyCount => ContractCertifiedAssemblies.Count;
 
-    public string FirstReadyLayerName => Layers.Values.OrderBy(static value => value.Order).First(static value => value.ReadinessStatus == "ready").LayerName;
+    public string? FirstReadyLayerName => Layers.Values
+        .OrderBy(static value => value.Order)
+        .FirstOrDefault(static value => value.ReadinessStatus == "ready")
+        ?.LayerName;
 }
 
 internal sealed class DependencyAssemblyModel
@@ -1263,7 +1302,7 @@ internal sealed class DependencyLayerPlanFrameworkPayload
     public int SharedSystemAssemblyCount { get; set; }
     public int CandidateAssemblyCount { get; set; }
     public int LayerCount { get; set; }
-    public string FirstReadyLayerName { get; set; } = string.Empty;
+    public string? FirstReadyLayerName { get; set; }
     public SortedDictionary<string, DependencyLayerPlanLayerPayload> Layers { get; set; } = new(StringComparer.Ordinal);
 }
 

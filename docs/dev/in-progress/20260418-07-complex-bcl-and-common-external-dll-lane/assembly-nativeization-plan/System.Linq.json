@@ -1,0 +1,421 @@
+{
+  "schemaVersion": 1,
+  "taskId": "20260418-07-complex-bcl-and-common-external-dll-lane",
+  "generatedAt": "2026-04-19T09:36:18.767269+08:00",
+  "assemblyName": "System.Linq",
+  "selectionReason": "first-ready-layer",
+  "ownerSubjectId": "SolutionCorePack",
+  "subjectManifestPath": "D:/agent/booming-il2cpp/subjects/SolutionCorePack/subject.manifest.json",
+  "requiredGates": [
+    "collector",
+    "registry",
+    "workspace",
+    "dependency-layer-proof",
+    "benchmark"
+  ],
+  "monitorSignals": [
+    "certified-assembly-count",
+    "blocked-assembly-count",
+    "layer-completion-rate",
+    "layer-nativeization-throughput",
+    "layer-compile-time-ms",
+    "native-proof-pass-rate",
+    "benchmark-regression-delta"
+  ],
+  "nativeProofs": [
+    {
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()",
+      "type": "declared-unit-test",
+      "alias": "aot-closure-validation-proof",
+      "displayName": "aot-closure-validation-proof",
+      "sourceEntry": "CoreRuntimeFeatures/AotClosureValidationProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": "Linker And Aot Closure",
+      "capabilityItemLabel": "Aot Closure Validation",
+      "categoryLabel": "Metadata Contract",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DispatchProofEntry::Run()",
+      "type": "declared-unit-test",
+      "alias": "dispatch-proof",
+      "displayName": "dispatch-proof",
+      "sourceEntry": "CoreRuntimeFeatures/DispatchProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DispatchProofEntry::Run()",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": "Type System And Generics",
+      "capabilityItemLabel": "Generic Virtual Dispatch",
+      "categoryLabel": "Runtime Contract",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericCollectionProofEntry::Run()",
+      "type": "declared-unit-test",
+      "alias": "generic-collection-proof",
+      "displayName": "generic-collection-proof",
+      "sourceEntry": "CoreRuntimeFeatures/GenericCollectionProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericCollectionProofEntry::Run()",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": "Type System And Generics",
+      "capabilityItemLabel": "Generic Collections",
+      "categoryLabel": "Runtime Contract",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericInstantiationProofEntry::Run()",
+      "type": "declared-unit-test",
+      "alias": "generic-instantiation-proof",
+      "displayName": "generic-instantiation-proof",
+      "sourceEntry": "CoreRuntimeFeatures/GenericInstantiationProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericInstantiationProofEntry::Run()",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": "Type System And Generics",
+      "capabilityItemLabel": "Generic Instantiation",
+      "categoryLabel": "Runtime Contract",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run()",
+      "type": "declared-unit-test",
+      "alias": "required-instantiation-closure-proof",
+      "displayName": "required-instantiation-closure-proof",
+      "sourceEntry": "CoreRuntimeFeatures/RequiredInstantiationClosureProofEntry::Run()",
+      "canonicalCommand": "run test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run()",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": "Linker And Aot Closure",
+      "capabilityItemLabel": "Required Instantiation Closure",
+      "categoryLabel": "Metadata Contract",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    }
+  ],
+  "benchmarks": [
+    {
+      "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DispatchBenchmarkEntry::RunWorkload()",
+      "type": "declared-benchmark",
+      "alias": "dispatch-bench",
+      "displayName": "dispatch-bench",
+      "sourceEntry": "CoreRuntimeBenchmarks/DispatchBenchmarkEntry::RunWorkload()",
+      "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DispatchBenchmarkEntry::RunWorkload()",
+      "defaultGoalId": "perf.release",
+      "defaultMatrixId": "windows-managed-perf",
+      "capabilityFamilyLabel": "Type System And Generics",
+      "capabilityItemLabel": "Generic Virtual Dispatch",
+      "categoryLabel": "Runtime Dispatch",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericBenchmarkEntry::RunWorkload()",
+      "type": "declared-benchmark",
+      "alias": "generic-bench",
+      "displayName": "generic-bench",
+      "sourceEntry": "CoreRuntimeBenchmarks/GenericBenchmarkEntry::RunWorkload()",
+      "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericBenchmarkEntry::RunWorkload()",
+      "defaultGoalId": "perf.release",
+      "defaultMatrixId": "windows-managed-perf",
+      "capabilityFamilyLabel": "Type System And Generics",
+      "capabilityItemLabel": "Generic Collections",
+      "categoryLabel": "Runtime Dispatch",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry::RunWorkload()",
+      "type": "declared-benchmark",
+      "alias": "generic-interface-dispatch-bench",
+      "displayName": "generic-interface-dispatch-bench",
+      "sourceEntry": "CoreRuntimeBenchmarks/GenericInterfaceDispatchBenchmarkEntry::RunWorkload()",
+      "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry::RunWorkload()",
+      "defaultGoalId": "perf.release",
+      "defaultMatrixId": "windows-native-perf",
+      "capabilityFamilyLabel": "Type System And Generics",
+      "capabilityItemLabel": "Generic Interface Dispatch",
+      "categoryLabel": "Runtime Dispatch",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry::RunWorkload()",
+      "type": "declared-benchmark",
+      "alias": "required-instantiation-closure-bench",
+      "displayName": "required-instantiation-closure-bench",
+      "sourceEntry": "CoreRuntimeBenchmarks/RequiredInstantiationClosureBenchmarkEntry::RunWorkload()",
+      "canonicalCommand": "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry::RunWorkload()",
+      "defaultGoalId": "perf.release",
+      "defaultMatrixId": "windows-native-perf",
+      "capabilityFamilyLabel": "Linker And Aot Closure",
+      "capabilityItemLabel": "Required Instantiation Closure",
+      "categoryLabel": "Runtime Dispatch",
+      "pipelineIds": [],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    }
+  ],
+  "conformanceGates": [
+    {
+      "id": "engineering-validation/SolutionCorePack/managed-build",
+      "type": "engineering-validation",
+      "alias": null,
+      "displayName": "managed-build",
+      "sourceEntry": null,
+      "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/managed-build",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-archetype-simple-lib-managed-output",
+      "capabilityFamilyLabel": null,
+      "capabilityItemLabel": null,
+      "categoryLabel": null,
+      "pipelineIds": [
+        "managed-runtime-output",
+        "managed-runtime-trace",
+        "proof-runtime-output",
+        "managed-benchmark",
+        "native-benchmark"
+      ],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "engineering-validation/SolutionCorePack/managed-runtime-output",
+      "type": "engineering-validation",
+      "alias": null,
+      "displayName": "managed-runtime-output",
+      "sourceEntry": null,
+      "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/managed-runtime-output",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-archetype-simple-lib-managed-output",
+      "capabilityFamilyLabel": null,
+      "capabilityItemLabel": null,
+      "categoryLabel": null,
+      "pipelineIds": [
+        "managed-runtime-output",
+        "managed-runtime-trace",
+        "proof-runtime-output",
+        "managed-benchmark",
+        "native-benchmark"
+      ],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "engineering-validation/SolutionCorePack/native-executable-smoke",
+      "type": "engineering-validation",
+      "alias": null,
+      "displayName": "native-executable-smoke",
+      "sourceEntry": null,
+      "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/native-executable-smoke",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": null,
+      "capabilityItemLabel": null,
+      "categoryLabel": null,
+      "pipelineIds": [
+        "managed-runtime-output",
+        "managed-runtime-trace",
+        "proof-runtime-output",
+        "managed-benchmark",
+        "native-benchmark"
+      ],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "engineering-validation/SolutionCorePack/project-graph",
+      "type": "engineering-validation",
+      "alias": null,
+      "displayName": "project-graph",
+      "sourceEntry": null,
+      "canonicalCommand": "run test engineering-validation --id engineering-validation/SolutionCorePack/project-graph",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": null,
+      "capabilityItemLabel": null,
+      "categoryLabel": null,
+      "pipelineIds": [
+        "managed-runtime-output",
+        "managed-runtime-trace",
+        "proof-runtime-output",
+        "managed-benchmark",
+        "native-benchmark"
+      ],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    }
+  ],
+  "engineeringWorkloads": [
+    {
+      "id": "engineering-workload/SolutionCorePack/codegen",
+      "type": "engineering-workload",
+      "alias": null,
+      "displayName": "codegen",
+      "sourceEntry": null,
+      "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/codegen",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": null,
+      "capabilityItemLabel": null,
+      "categoryLabel": null,
+      "pipelineIds": [
+        "managed-runtime-output",
+        "managed-runtime-trace",
+        "proof-runtime-output",
+        "managed-benchmark",
+        "native-benchmark"
+      ],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "engineering-workload/SolutionCorePack/convert",
+      "type": "engineering-workload",
+      "alias": null,
+      "displayName": "convert",
+      "sourceEntry": null,
+      "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/convert",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": null,
+      "capabilityItemLabel": null,
+      "categoryLabel": null,
+      "pipelineIds": [
+        "managed-runtime-output",
+        "managed-runtime-trace",
+        "proof-runtime-output",
+        "managed-benchmark",
+        "native-benchmark"
+      ],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    },
+    {
+      "id": "engineering-workload/SolutionCorePack/native-link",
+      "type": "engineering-workload",
+      "alias": null,
+      "displayName": "native-link",
+      "sourceEntry": null,
+      "canonicalCommand": "run test engineering-workload --id engineering-workload/SolutionCorePack/native-link",
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-native-check",
+      "capabilityFamilyLabel": null,
+      "capabilityItemLabel": null,
+      "categoryLabel": null,
+      "pipelineIds": [
+        "managed-runtime-output",
+        "managed-runtime-trace",
+        "proof-runtime-output",
+        "managed-benchmark",
+        "native-benchmark"
+      ],
+      "supportedHosts": [
+        "macos",
+        "windows"
+      ]
+    }
+  ],
+  "targetFrameworks": {
+    "net10.0": {
+      "selectedVersion": "10.0.6",
+      "sourceKind": "repo-frozen-snapshot",
+      "layerName": "core-bcl-layer-02",
+      "status": "ready",
+      "classification": "implementation",
+      "surfaceContractCertified": false,
+      "publicTypeDefinitionCount": 5,
+      "publicMemberCount": 243,
+      "runtimeMethodBodyCount": 1354,
+      "capabilityFamilies": [
+        "collections-and-generics"
+      ],
+      "dependencyAssemblies": [
+        "System.Collections",
+        "System.Runtime"
+      ],
+      "candidateDependencyAssemblies": [
+        "System.Collections"
+      ],
+      "certifiedDependencyAssemblies": [
+        "System.Collections",
+        "System.Private.CoreLib",
+        "System.Runtime"
+      ],
+      "externalDependencyAssemblies": [],
+      "blockerReasons": []
+    },
+    "net8.0": {
+      "selectedVersion": "8.0.11",
+      "sourceKind": "machine-global-official-installation",
+      "layerName": "core-bcl-layer-02",
+      "status": "ready",
+      "classification": "implementation",
+      "surfaceContractCertified": false,
+      "publicTypeDefinitionCount": 5,
+      "publicMemberCount": 231,
+      "runtimeMethodBodyCount": 1149,
+      "capabilityFamilies": [
+        "collections-and-generics"
+      ],
+      "dependencyAssemblies": [
+        "System.Collections",
+        "System.Runtime"
+      ],
+      "candidateDependencyAssemblies": [
+        "System.Collections"
+      ],
+      "certifiedDependencyAssemblies": [
+        "System.Collections",
+        "System.Private.CoreLib",
+        "System.Runtime"
+      ],
+      "externalDependencyAssemblies": [],
+      "blockerReasons": []
+    }
+  }
+}

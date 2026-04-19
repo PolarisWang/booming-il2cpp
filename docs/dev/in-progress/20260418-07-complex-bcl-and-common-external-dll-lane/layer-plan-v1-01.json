@@ -1,0 +1,4933 @@
+{
+  "schemaVersion": 1,
+  "taskId": "20260418-07-complex-bcl-and-common-external-dll-lane",
+  "generatedAt": "2026-04-19T09:36:18.7673979+08:00",
+  "inputAuthorities": {
+    "phase0CatalogPath": "D:/agent/booming-il2cpp/docs/dev/completed/20260418-02-phase-0-framework-pack-catalog-and-asset-policy/framework-catalog-v1-01.json",
+    "phase1Directory": "D:/agent/booming-il2cpp/docs/dev/completed/20260418-03-phase-1-contract-facade-and-shim-certification-lane",
+    "phase2Directory": "D:/agent/booming-il2cpp/docs/dev/completed/20260418-04-phase-2-system-private-corelib-certification-substrate",
+    "phase3Directory": "D:/agent/booming-il2cpp/docs/dev/completed/20260418-05-phase-3-system-private-corelib-semantic-family-nativeization",
+    "registrySnapshotPath": "D:/agent/booming-il2cpp/artifacts/tests/registry/current/index.json"
+  },
+  "certifiedBaseline": {
+    "ownerSubjectId": "SolutionCorePack",
+    "phase3BatchName": "corelib-semantic-family-batch-01",
+    "phase3SemanticFamilies": [
+      "managed-cil",
+      "internal-call",
+      "field-metadata"
+    ],
+    "targetFrameworks": {
+      "net10.0": {
+        "contractCertifiedAssemblyCount": 21,
+        "contractCertifiedAssemblies": [
+          "System",
+          "System.Collections",
+          "System.Collections.NonGeneric",
+          "System.ComponentModel.TypeConverter",
+          "System.Core",
+          "System.Data.Common",
+          "System.IO.Pipes.AccessControl",
+          "System.Memory",
+          "System.Net.Requests",
+          "System.ObjectModel",
+          "System.Reflection.Primitives",
+          "System.Runtime",
+          "System.Runtime.CompilerServices.VisualC",
+          "System.Runtime.InteropServices",
+          "System.Runtime.Serialization.Formatters",
+          "System.Runtime.Serialization.Primitives",
+          "System.Runtime.Serialization.Xml",
+          "System.Xml.XPath",
+          "System.Xml.XmlSerializer",
+          "mscorlib",
+          "netstandard"
+        ],
+        "coreLibHelperKindCount": 6,
+        "coreLibHelperKinds": [
+          "abstract",
+          "field-metadata",
+          "internal-call",
+          "managed-cil",
+          "pinvoke",
+          "runtime-special"
+        ]
+      },
+      "net8.0": {
+        "contractCertifiedAssemblyCount": 19,
+        "contractCertifiedAssemblies": [
+          "System",
+          "System.Collections.NonGeneric",
+          "System.ComponentModel.TypeConverter",
+          "System.Core",
+          "System.Data.Common",
+          "System.Memory",
+          "System.Net.Requests",
+          "System.ObjectModel",
+          "System.Reflection.Primitives",
+          "System.Runtime",
+          "System.Runtime.CompilerServices.VisualC",
+          "System.Runtime.InteropServices",
+          "System.Runtime.Serialization.Formatters",
+          "System.Runtime.Serialization.Primitives",
+          "System.Runtime.Serialization.Xml",
+          "System.Xml.XPath",
+          "System.Xml.XmlSerializer",
+          "mscorlib",
+          "netstandard"
+        ],
+        "coreLibHelperKindCount": 6,
+        "coreLibHelperKinds": [
+          "abstract",
+          "field-metadata",
+          "internal-call",
+          "managed-cil",
+          "pinvoke",
+          "runtime-special"
+        ]
+      }
+    }
+  },
+  "targetFrameworks": {
+    "net10.0": {
+      "selectedVersion": "10.0.6",
+      "sourceKind": "repo-frozen-snapshot",
+      "sharedSystemAssemblyCount": 159,
+      "candidateAssemblyCount": 83,
+      "layerCount": 7,
+      "firstReadyLayerName": "core-bcl-layer-02",
+      "layers": {
+        "core-bcl-layer-01": {
+          "order": 1,
+          "readinessStatus": "certified",
+          "assemblyCount": 29,
+          "readyAssemblyCount": 0,
+          "blockedAssemblyCount": 0,
+          "upstreamLayerNames": [],
+          "capabilityFamilies": [
+            "collections-and-generics",
+            "io-and-networking",
+            "reflection-and-metadata",
+            "runtime-services",
+            "text-and-encoding",
+            "threading-and-async",
+            "unsafe-and-low-level"
+          ],
+          "assemblyPlanPaths": [],
+          "assemblies": {
+            "System.Collections": {
+              "classification": "compat-shim",
+              "status": "certified",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 43,
+              "publicMemberCount": 558,
+              "runtimeMethodBodyCount": 769,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Collections.Concurrent": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 11,
+              "publicMemberCount": 165,
+              "runtimeMethodBodyCount": 432,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Collections.NonGeneric": {
+              "classification": "compat-shim",
+              "status": "certified",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 9,
+              "publicMemberCount": 153,
+              "runtimeMethodBodyCount": 298,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.ComponentModel": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 5,
+              "publicMemberCount": 13,
+              "runtimeMethodBodyCount": 4,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Console": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 8,
+              "publicMemberCount": 328,
+              "runtimeMethodBodyCount": 395,
+              "capabilityFamilies": [
+                "text-and-encoding"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Diagnostics.DiagnosticSource": {
+              "classification": "compat-shim",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 46,
+              "publicMemberCount": 537,
+              "runtimeMethodBodyCount": 1165,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Diagnostics.FileVersionInfo": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 1,
+              "publicMemberCount": 56,
+              "runtimeMethodBodyCount": 40,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Diagnostics.StackTrace": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 19,
+              "publicMemberCount": 175,
+              "runtimeMethodBodyCount": 21,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Formats.Tar": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 12,
+              "publicMemberCount": 115,
+              "runtimeMethodBodyCount": 434,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.IO.Compression": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 10,
+              "publicMemberCount": 191,
+              "runtimeMethodBodyCount": 832,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.IO.FileSystem.DriveInfo": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 3,
+              "publicMemberCount": 34,
+              "runtimeMethodBodyCount": 60,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.IO.IsolatedStorage": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 6,
+              "publicMemberCount": 137,
+              "runtimeMethodBodyCount": 176,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.IO.Pipes": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 11,
+              "publicMemberCount": 157,
+              "runtimeMethodBodyCount": 316,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Memory": {
+              "classification": "compat-shim",
+              "status": "certified",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 21,
+              "publicMemberCount": 623,
+              "runtimeMethodBodyCount": 224,
+              "capabilityFamilies": [
+                "unsafe-and-low-level"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Reflection.DispatchProxy": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 1,
+              "publicMemberCount": 4,
+              "runtimeMethodBodyCount": 75,
+              "capabilityFamilies": [
+                "reflection-and-metadata"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Reflection.TypeExtensions": {
+              "classification": "compat-shim",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 7,
+              "publicMemberCount": 53,
+              "runtimeMethodBodyCount": 60,
+              "capabilityFamilies": [
+                "reflection-and-metadata"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Resources.Writer": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 19,
+              "runtimeMethodBodyCount": 37,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Runtime.CompilerServices.VisualC": {
+              "classification": "compat-shim",
+              "status": "certified",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 16,
+              "publicMemberCount": 7,
+              "runtimeMethodBodyCount": 12,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Runtime.InteropServices.JavaScript": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 30,
+              "publicMemberCount": 195,
+              "runtimeMethodBodyCount": 231,
+              "capabilityFamilies": [
+                "unsafe-and-low-level"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Runtime.Numerics": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 293,
+              "runtimeMethodBodyCount": 623,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Runtime.Serialization.Primitives": {
+              "classification": "compat-shim",
+              "status": "certified",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 10,
+              "publicMemberCount": 92,
+              "runtimeMethodBodyCount": 62,
+              "capabilityFamilies": [
+                "reflection-and-metadata"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Security.Claims": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 7,
+              "publicMemberCount": 220,
+              "runtimeMethodBodyCount": 197,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Text.Encoding.CodePages": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 1,
+              "publicMemberCount": 5,
+              "runtimeMethodBodyCount": 437,
+              "capabilityFamilies": [
+                "text-and-encoding"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Text.Encodings.Web": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 7,
+              "publicMemberCount": 374,
+              "runtimeMethodBodyCount": 315,
+              "capabilityFamilies": [
+                "text-and-encoding"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Text.RegularExpressions": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 19,
+              "publicMemberCount": 323,
+              "runtimeMethodBodyCount": 1523,
+              "capabilityFamilies": [
+                "text-and-encoding"
+              ],
+              "dependencyAssemblies": [
+                "System.Reflection.Emit.ILGeneration",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [
+                "System.Reflection.Emit.ILGeneration"
+              ],
+              "blockerReasons": []
+            },
+            "System.Threading": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 37,
+              "publicMemberCount": 431,
+              "runtimeMethodBodyCount": 136,
+              "capabilityFamilies": [
+                "threading-and-async"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Threading.Channels": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 11,
+              "publicMemberCount": 69,
+              "runtimeMethodBodyCount": 311,
+              "capabilityFamilies": [
+                "threading-and-async"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Threading.Tasks.Dataflow": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 23,
+              "publicMemberCount": 249,
+              "runtimeMethodBodyCount": 1167,
+              "capabilityFamilies": [
+                "threading-and-async"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Xml.XPath.XDocument": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 9,
+              "runtimeMethodBodyCount": 3,
+              "capabilityFamilies": [
+                "reflection-and-metadata"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime",
+                "System.Xml.ReaderWriter",
+                "System.Xml.XDocument"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [
+                "System.Xml.ReaderWriter",
+                "System.Xml.XDocument"
+              ],
+              "blockerReasons": []
+            }
+          }
+        },
+        "core-bcl-layer-02": {
+          "order": 2,
+          "readinessStatus": "ready",
+          "assemblyCount": 12,
+          "readyAssemblyCount": 12,
+          "blockedAssemblyCount": 0,
+          "upstreamLayerNames": [
+            "core-bcl-layer-01"
+          ],
+          "capabilityFamilies": [
+            "collections-and-generics",
+            "io-and-networking",
+            "reflection-and-metadata",
+            "runtime-services",
+            "threading-and-async",
+            "unsafe-and-low-level"
+          ],
+          "assemblyPlanPaths": [
+            "assembly-nativeization-plan/System.Collections.Immutable.json",
+            "assembly-nativeization-plan/System.Formats.Asn1.json",
+            "assembly-nativeization-plan/System.IO.Compression.Brotli.json",
+            "assembly-nativeization-plan/System.IO.Compression.ZipFile.json",
+            "assembly-nativeization-plan/System.IO.Pipelines.json",
+            "assembly-nativeization-plan/System.Linq.json",
+            "assembly-nativeization-plan/System.Net.ServerSentEvents.json",
+            "assembly-nativeization-plan/System.ObjectModel.json",
+            "assembly-nativeization-plan/System.Runtime.InteropServices.json",
+            "assembly-nativeization-plan/System.Runtime.Serialization.Formatters.json",
+            "assembly-nativeization-plan/System.Security.Principal.Windows.json",
+            "assembly-nativeization-plan/System.Threading.Tasks.Parallel.json"
+          ],
+          "assemblies": {
+            "System.Collections.Immutable": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 46,
+              "publicMemberCount": 841,
+              "runtimeMethodBodyCount": 2147,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Formats.Asn1": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 10,
+              "publicMemberCount": 215,
+              "runtimeMethodBodyCount": 340,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Runtime",
+                "System.Runtime.Numerics"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections",
+                "System.Runtime.Numerics"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Runtime.Numerics"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.IO.Compression.Brotli": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 4,
+              "publicMemberCount": 52,
+              "runtimeMethodBodyCount": 118,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.IO.Compression",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.IO.Compression"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.IO.Compression",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.IO.Compression.ZipFile": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 46,
+              "runtimeMethodBodyCount": 113,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.IO.Compression",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.IO.Compression"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.IO.Compression",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.IO.Pipelines": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 11,
+              "publicMemberCount": 99,
+              "runtimeMethodBodyCount": 437,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Memory",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Memory"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Memory",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Linq": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 5,
+              "publicMemberCount": 243,
+              "runtimeMethodBodyCount": 1354,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Net.ServerSentEvents": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 5,
+              "publicMemberCount": 26,
+              "runtimeMethodBodyCount": 101,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Memory",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Memory"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Memory",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.ObjectModel": {
+              "classification": "compat-shim",
+              "status": "ready",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 20,
+              "publicMemberCount": 135,
+              "runtimeMethodBodyCount": 170,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Runtime.InteropServices": {
+              "classification": "compat-shim",
+              "status": "ready",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 211,
+              "publicMemberCount": 1603,
+              "runtimeMethodBodyCount": 197,
+              "capabilityFamilies": [
+                "unsafe-and-low-level"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Runtime.Serialization.Formatters": {
+              "classification": "compat-shim",
+              "status": "ready",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 16,
+              "publicMemberCount": 144,
+              "runtimeMethodBodyCount": 263,
+              "capabilityFamilies": [
+                "reflection-and-metadata"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.NonGeneric"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Security.Principal.Windows": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 12,
+              "publicMemberCount": 259,
+              "runtimeMethodBodyCount": 271,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime",
+                "System.Security.Claims"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Security.Claims"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Security.Claims"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Threading.Tasks.Parallel": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 4,
+              "publicMemberCount": 67,
+              "runtimeMethodBodyCount": 195,
+              "capabilityFamilies": [
+                "threading-and-async"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.Concurrent",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Concurrent"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.Concurrent",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            }
+          }
+        },
+        "core-bcl-layer-03": {
+          "order": 3,
+          "readinessStatus": "blocked",
+          "assemblyCount": 10,
+          "readyAssemblyCount": 0,
+          "blockedAssemblyCount": 10,
+          "upstreamLayerNames": [
+            "core-bcl-layer-01",
+            "core-bcl-layer-02"
+          ],
+          "capabilityFamilies": [
+            "collections-and-generics",
+            "io-and-networking",
+            "reflection-and-metadata",
+            "runtime-services",
+            "text-and-encoding"
+          ],
+          "assemblyPlanPaths": [],
+          "assemblies": {
+            "System.ComponentModel.Primitives": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 30,
+              "publicMemberCount": 276,
+              "runtimeMethodBodyCount": 205,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.ComponentModel",
+                "System.ObjectModel",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.ComponentModel",
+                "System.ObjectModel"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.ComponentModel",
+                "System.ObjectModel",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.IO.MemoryMappedFiles": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 8,
+              "publicMemberCount": 69,
+              "runtimeMethodBodyCount": 122,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Runtime.InteropServices"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Linq.AsyncEnumerable": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 190,
+              "runtimeMethodBodyCount": 1855,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Linq",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections",
+                "System.Linq"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Linq.Expressions": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 77,
+              "publicMemberCount": 1065,
+              "runtimeMethodBodyCount": 4677,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.ObjectModel",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ObjectModel"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.ObjectModel",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Linq.Parallel": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 6,
+              "publicMemberCount": 213,
+              "runtimeMethodBodyCount": 1367,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.Concurrent",
+                "System.Linq",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.Concurrent",
+                "System.Linq"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.Concurrent",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Net.Primitives": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 34,
+              "publicMemberCount": 523,
+              "runtimeMethodBodyCount": 469,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "Microsoft.Win32.Primitives",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Runtime.InteropServices"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "externalDependencyAssemblies": [
+                "Microsoft.Win32.Primitives"
+              ],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Reflection.Metadata": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 266,
+              "publicMemberCount": 2950,
+              "runtimeMethodBodyCount": 3514,
+              "capabilityFamilies": [
+                "reflection-and-metadata"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.Immutable",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Immutable"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Security.AccessControl": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 47,
+              "publicMemberCount": 540,
+              "runtimeMethodBodyCount": 499,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Runtime",
+                "System.Security.Principal.Windows"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Security.Principal.Windows"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Text.Json": {
+              "classification": "compat-shim",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 84,
+              "publicMemberCount": 1401,
+              "runtimeMethodBodyCount": 3975,
+              "capabilityFamilies": [
+                "text-and-encoding"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.Concurrent",
+                "System.IO.Pipelines",
+                "System.Memory",
+                "System.Runtime",
+                "System.Text.Encodings.Web"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.Concurrent",
+                "System.IO.Pipelines",
+                "System.Memory",
+                "System.Text.Encodings.Web"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.Concurrent",
+                "System.Memory",
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Text.Encodings.Web"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Transactions.Local": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 34,
+              "publicMemberCount": 186,
+              "runtimeMethodBodyCount": 1651,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Runtime.InteropServices"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            }
+          }
+        },
+        "core-bcl-layer-04": {
+          "order": 4,
+          "readinessStatus": "blocked",
+          "assemblyCount": 14,
+          "readyAssemblyCount": 0,
+          "blockedAssemblyCount": 14,
+          "upstreamLayerNames": [
+            "core-bcl-layer-01",
+            "core-bcl-layer-02",
+            "core-bcl-layer-03"
+          ],
+          "capabilityFamilies": [
+            "collections-and-generics",
+            "io-and-networking",
+            "reflection-and-metadata",
+            "runtime-services",
+            "threading-and-async"
+          ],
+          "assemblyPlanPaths": [],
+          "assemblies": {
+            "System.Collections.Specialized": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 12,
+              "publicMemberCount": 230,
+              "runtimeMethodBodyCount": 298,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.ComponentModel.Primitives",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ComponentModel.Primitives"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.ComponentModel.EventBasedAsync": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 11,
+              "publicMemberCount": 81,
+              "runtimeMethodBodyCount": 65,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.Primitives",
+                "System.Runtime",
+                "System.Threading"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.Primitives",
+                "System.Threading"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.ComponentModel",
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Threading"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.ComponentModel.TypeConverter": {
+              "classification": "compat-shim",
+              "status": "blocked",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 217,
+              "publicMemberCount": 1906,
+              "runtimeMethodBodyCount": 2009,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.ComponentModel",
+                "System.ComponentModel.Primitives",
+                "System.ObjectModel",
+                "System.Resources.Writer",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.ComponentModel",
+                "System.ComponentModel.Primitives",
+                "System.ObjectModel",
+                "System.Resources.Writer"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.ComponentModel",
+                "System.ObjectModel",
+                "System.Private.CoreLib",
+                "System.Resources.Writer",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Drawing.Primitives": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 10,
+              "publicMemberCount": 800,
+              "runtimeMethodBodyCount": 447,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.ComponentModel.Primitives",
+                "System.Numerics.Vectors",
+                "System.ObjectModel",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ComponentModel.Primitives",
+                "System.ObjectModel"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.ObjectModel",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [
+                "System.Numerics.Vectors"
+              ],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.IO.FileSystem.AccessControl": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 8,
+              "publicMemberCount": 89,
+              "runtimeMethodBodyCount": 153,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime",
+                "System.Security.AccessControl",
+                "System.Security.Principal.Windows"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Security.AccessControl",
+                "System.Security.Principal.Windows"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.IO.FileSystem.Watcher": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 11,
+              "publicMemberCount": 112,
+              "runtimeMethodBodyCount": 149,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.ComponentModel.Primitives",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ComponentModel.Primitives"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Linq.Queryable": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 5,
+              "publicMemberCount": 172,
+              "runtimeMethodBodyCount": 259,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Linq",
+                "System.Linq.Expressions",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Linq",
+                "System.Linq.Expressions"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Net.NameResolution": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 36,
+              "runtimeMethodBodyCount": 182,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Net.Primitives",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Net.Primitives"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Net.NetworkInformation": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 36,
+              "publicMemberCount": 571,
+              "runtimeMethodBodyCount": 455,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "Microsoft.Win32.Primitives",
+                "System.Net.Primitives",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Net.Primitives"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [
+                "Microsoft.Win32.Primitives"
+              ],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Net.Sockets": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 31,
+              "publicMemberCount": 823,
+              "runtimeMethodBodyCount": 1077,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Net.Primitives",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Net.Primitives"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Net.WebProxy": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 35,
+              "runtimeMethodBodyCount": 50,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Net.Primitives",
+                "System.Runtime",
+                "System.Text.RegularExpressions"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Net.Primitives",
+                "System.Text.RegularExpressions"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Text.RegularExpressions"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Reflection.Emit": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 12,
+              "publicMemberCount": 675,
+              "runtimeMethodBodyCount": 785,
+              "capabilityFamilies": [
+                "reflection-and-metadata"
+              ],
+              "dependencyAssemblies": [
+                "System.Diagnostics.StackTrace",
+                "System.Reflection.Emit.ILGeneration",
+                "System.Reflection.Metadata",
+                "System.Reflection.Primitives",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Diagnostics.StackTrace",
+                "System.Reflection.Metadata",
+                "System.Runtime.InteropServices"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Diagnostics.StackTrace",
+                "System.Private.CoreLib",
+                "System.Reflection.Primitives",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "externalDependencyAssemblies": [
+                "System.Reflection.Emit.ILGeneration"
+              ],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Security.Cryptography": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 229,
+              "publicMemberCount": 3652,
+              "runtimeMethodBodyCount": 5870,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Formats.Asn1",
+                "System.Net.Primitives",
+                "System.Runtime",
+                "System.Runtime.InteropServices",
+                "System.Runtime.Numerics"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Formats.Asn1",
+                "System.Net.Primitives",
+                "System.Runtime.InteropServices",
+                "System.Runtime.Numerics"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Runtime.InteropServices",
+                "System.Runtime.Numerics"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Threading.AccessControl": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 16,
+              "publicMemberCount": 122,
+              "runtimeMethodBodyCount": 144,
+              "capabilityFamilies": [
+                "threading-and-async"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime",
+                "System.Security.AccessControl",
+                "System.Security.Principal.Windows",
+                "System.Threading"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Security.AccessControl",
+                "System.Security.Principal.Windows",
+                "System.Threading"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Threading"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            }
+          }
+        },
+        "core-bcl-layer-05": {
+          "order": 5,
+          "readinessStatus": "blocked",
+          "assemblyCount": 9,
+          "readyAssemblyCount": 0,
+          "blockedAssemblyCount": 9,
+          "upstreamLayerNames": [
+            "core-bcl-layer-01",
+            "core-bcl-layer-02",
+            "core-bcl-layer-03",
+            "core-bcl-layer-04"
+          ],
+          "capabilityFamilies": [
+            "io-and-networking",
+            "runtime-services"
+          ],
+          "assemblyPlanPaths": [],
+          "assemblies": {
+            "System.ComponentModel.Annotations": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 47,
+              "publicMemberCount": 358,
+              "runtimeMethodBodyCount": 495,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.TypeConverter",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.TypeConverter"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.TypeConverter",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Data.Common": {
+              "classification": "compat-shim",
+              "status": "blocked",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 173,
+              "publicMemberCount": 3271,
+              "runtimeMethodBodyCount": 6484,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.Primitives",
+                "System.ComponentModel.TypeConverter",
+                "System.ObjectModel",
+                "System.Runtime",
+                "System.Transactions.Local",
+                "System.Xml.ReaderWriter"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.Primitives",
+                "System.ComponentModel.TypeConverter",
+                "System.ObjectModel",
+                "System.Transactions.Local"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.TypeConverter",
+                "System.ObjectModel",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [
+                "System.Xml.ReaderWriter"
+              ],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Diagnostics.Process": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 15,
+              "publicMemberCount": 348,
+              "runtimeMethodBodyCount": 681,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Collections.Specialized",
+                "System.ComponentModel.Primitives",
+                "System.Diagnostics.FileVersionInfo",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Collections.Specialized",
+                "System.ComponentModel.Primitives",
+                "System.Diagnostics.FileVersionInfo",
+                "System.Runtime.InteropServices"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Diagnostics.FileVersionInfo",
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Diagnostics.TraceSource": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 22,
+              "publicMemberCount": 296,
+              "runtimeMethodBodyCount": 336,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Collections.Specialized",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Collections.Specialized"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Net.Ping": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 7,
+              "publicMemberCount": 87,
+              "runtimeMethodBodyCount": 135,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.ComponentModel.EventBasedAsync",
+                "System.ComponentModel.Primitives",
+                "System.Net.Primitives",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ComponentModel.EventBasedAsync",
+                "System.ComponentModel.Primitives",
+                "System.Net.Primitives"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Net.Security": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 27,
+              "publicMemberCount": 814,
+              "runtimeMethodBodyCount": 1116,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.NonGeneric",
+                "System.Memory",
+                "System.Net.Primitives",
+                "System.Runtime",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.NonGeneric",
+                "System.Memory",
+                "System.Net.Primitives",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.NonGeneric",
+                "System.Memory",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Net.WebHeaderCollection": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 3,
+              "publicMemberCount": 111,
+              "runtimeMethodBodyCount": 73,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Specialized"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Net.WebSockets": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 13,
+              "publicMemberCount": 192,
+              "runtimeMethodBodyCount": 388,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "Microsoft.Win32.Primitives",
+                "System.Collections.Specialized",
+                "System.Net.Primitives",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.Net.Primitives"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [
+                "Microsoft.Win32.Primitives"
+              ],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Web.HttpUtility": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 32,
+              "runtimeMethodBodyCount": 78,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Specialized"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            }
+          }
+        },
+        "core-bcl-layer-06": {
+          "order": 6,
+          "readinessStatus": "blocked",
+          "assemblyCount": 5,
+          "readyAssemblyCount": 0,
+          "blockedAssemblyCount": 5,
+          "upstreamLayerNames": [
+            "core-bcl-layer-01",
+            "core-bcl-layer-03",
+            "core-bcl-layer-04",
+            "core-bcl-layer-05"
+          ],
+          "capabilityFamilies": [
+            "io-and-networking",
+            "runtime-services"
+          ],
+          "assemblyPlanPaths": [],
+          "assemblies": {
+            "System.Diagnostics.TextWriterTraceListener": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 4,
+              "publicMemberCount": 47,
+              "runtimeMethodBodyCount": 75,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Diagnostics.TraceSource",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Diagnostics.TraceSource"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05"
+              ]
+            },
+            "System.Net.Http": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 61,
+              "publicMemberCount": 1011,
+              "runtimeMethodBodyCount": 3256,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Diagnostics.DiagnosticSource",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Runtime",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Diagnostics.DiagnosticSource",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Diagnostics.DiagnosticSource",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05"
+              ]
+            },
+            "System.Net.HttpListener": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 11,
+              "publicMemberCount": 228,
+              "runtimeMethodBodyCount": 942,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "Microsoft.Win32.Primitives",
+                "System.Collections.Specialized",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Net.WebHeaderCollection",
+                "System.Net.WebSockets",
+                "System.Runtime",
+                "System.Security.Claims",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Net.WebHeaderCollection",
+                "System.Net.WebSockets",
+                "System.Security.Claims",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Security.Claims"
+              ],
+              "externalDependencyAssemblies": [
+                "Microsoft.Win32.Primitives"
+              ],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05"
+              ]
+            },
+            "System.Net.Quic": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 13,
+              "publicMemberCount": 181,
+              "runtimeMethodBodyCount": 610,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Runtime",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05"
+              ]
+            },
+            "System.Net.Requests": {
+              "classification": "compat-shim",
+              "status": "blocked",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 30,
+              "publicMemberCount": 687,
+              "runtimeMethodBodyCount": 943,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Net.WebHeaderCollection",
+                "System.Runtime",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Net.WebHeaderCollection",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05"
+              ]
+            }
+          }
+        },
+        "core-bcl-layer-07": {
+          "order": 7,
+          "readinessStatus": "blocked",
+          "assemblyCount": 4,
+          "readyAssemblyCount": 0,
+          "blockedAssemblyCount": 4,
+          "upstreamLayerNames": [
+            "core-bcl-layer-03",
+            "core-bcl-layer-04",
+            "core-bcl-layer-05",
+            "core-bcl-layer-06"
+          ],
+          "capabilityFamilies": [
+            "io-and-networking"
+          ],
+          "assemblyPlanPaths": [],
+          "assemblies": {
+            "System.Net.Http.Json": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 3,
+              "publicMemberCount": 69,
+              "runtimeMethodBodyCount": 184,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Net.Http",
+                "System.Net.Primitives",
+                "System.Runtime",
+                "System.Text.Json"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Net.Http",
+                "System.Net.Primitives",
+                "System.Text.Json"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05",
+                "waiting-on:core-bcl-layer-06"
+              ]
+            },
+            "System.Net.Mail": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 30,
+              "publicMemberCount": 385,
+              "runtimeMethodBodyCount": 945,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.ComponentModel.EventBasedAsync",
+                "System.Net.Primitives",
+                "System.Net.Requests",
+                "System.Runtime",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.ComponentModel.EventBasedAsync",
+                "System.Net.Primitives",
+                "System.Net.Requests",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Net.Requests",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05",
+                "waiting-on:core-bcl-layer-06"
+              ]
+            },
+            "System.Net.WebClient": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 23,
+              "publicMemberCount": 241,
+              "runtimeMethodBodyCount": 348,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.ComponentModel.EventBasedAsync",
+                "System.ComponentModel.Primitives",
+                "System.Net.Primitives",
+                "System.Net.Requests",
+                "System.Net.WebHeaderCollection",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.ComponentModel.EventBasedAsync",
+                "System.ComponentModel.Primitives",
+                "System.Net.Primitives",
+                "System.Net.Requests",
+                "System.Net.WebHeaderCollection"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Net.Requests",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05",
+                "waiting-on:core-bcl-layer-06"
+              ]
+            },
+            "System.Net.WebSockets.Client": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 67,
+              "runtimeMethodBodyCount": 150,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Net.Http",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Net.WebSockets",
+                "System.Runtime",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Net.Http",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Net.WebSockets",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05",
+                "waiting-on:core-bcl-layer-06"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "net8.0": {
+      "selectedVersion": "8.0.11",
+      "sourceKind": "machine-global-official-installation",
+      "sharedSystemAssemblyCount": 155,
+      "candidateAssemblyCount": 80,
+      "layerCount": 8,
+      "firstReadyLayerName": "core-bcl-layer-02",
+      "layers": {
+        "core-bcl-layer-01": {
+          "order": 1,
+          "readinessStatus": "certified",
+          "assemblyCount": 29,
+          "readyAssemblyCount": 0,
+          "blockedAssemblyCount": 0,
+          "upstreamLayerNames": [],
+          "capabilityFamilies": [
+            "collections-and-generics",
+            "io-and-networking",
+            "reflection-and-metadata",
+            "runtime-services",
+            "text-and-encoding",
+            "threading-and-async",
+            "unsafe-and-low-level"
+          ],
+          "assemblyPlanPaths": [],
+          "assemblies": {
+            "System.Collections": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 35,
+              "publicMemberCount": 463,
+              "runtimeMethodBodyCount": 621,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Collections.Concurrent": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 10,
+              "publicMemberCount": 152,
+              "runtimeMethodBodyCount": 419,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Collections.NonGeneric": {
+              "classification": "compat-shim",
+              "status": "certified",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 9,
+              "publicMemberCount": 153,
+              "runtimeMethodBodyCount": 293,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.ComponentModel": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 5,
+              "publicMemberCount": 13,
+              "runtimeMethodBodyCount": 4,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Console": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 8,
+              "publicMemberCount": 324,
+              "runtimeMethodBodyCount": 389,
+              "capabilityFamilies": [
+                "text-and-encoding"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Diagnostics.DiagnosticSource": {
+              "classification": "compat-shim",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 42,
+              "publicMemberCount": 480,
+              "runtimeMethodBodyCount": 944,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Diagnostics.FileVersionInfo": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 1,
+              "publicMemberCount": 56,
+              "runtimeMethodBodyCount": 40,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Diagnostics.StackTrace": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 18,
+              "publicMemberCount": 167,
+              "runtimeMethodBodyCount": 21,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Formats.Tar": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 12,
+              "publicMemberCount": 113,
+              "runtimeMethodBodyCount": 420,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.IO.Compression": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 8,
+              "publicMemberCount": 171,
+              "runtimeMethodBodyCount": 619,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.IO.FileSystem.DriveInfo": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 3,
+              "publicMemberCount": 34,
+              "runtimeMethodBodyCount": 56,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.IO.IsolatedStorage": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 6,
+              "publicMemberCount": 137,
+              "runtimeMethodBodyCount": 173,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.IO.Pipes": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 10,
+              "publicMemberCount": 138,
+              "runtimeMethodBodyCount": 310,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Memory": {
+              "classification": "compat-shim",
+              "status": "certified",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 21,
+              "publicMemberCount": 590,
+              "runtimeMethodBodyCount": 221,
+              "capabilityFamilies": [
+                "unsafe-and-low-level"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Reflection.DispatchProxy": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 1,
+              "publicMemberCount": 4,
+              "runtimeMethodBodyCount": 71,
+              "capabilityFamilies": [
+                "reflection-and-metadata"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Reflection.TypeExtensions": {
+              "classification": "compat-shim",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 7,
+              "publicMemberCount": 53,
+              "runtimeMethodBodyCount": 59,
+              "capabilityFamilies": [
+                "reflection-and-metadata"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Resources.Writer": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 19,
+              "runtimeMethodBodyCount": 36,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Runtime.CompilerServices.VisualC": {
+              "classification": "compat-shim",
+              "status": "certified",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 16,
+              "publicMemberCount": 7,
+              "runtimeMethodBodyCount": 12,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Runtime.InteropServices.JavaScript": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 30,
+              "publicMemberCount": 195,
+              "runtimeMethodBodyCount": 228,
+              "capabilityFamilies": [
+                "unsafe-and-low-level"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Runtime.Numerics": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 293,
+              "runtimeMethodBodyCount": 550,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Runtime.Serialization.Primitives": {
+              "classification": "compat-shim",
+              "status": "certified",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 10,
+              "publicMemberCount": 92,
+              "runtimeMethodBodyCount": 61,
+              "capabilityFamilies": [
+                "reflection-and-metadata"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Security.Claims": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 7,
+              "publicMemberCount": 217,
+              "runtimeMethodBodyCount": 188,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Text.Encoding.CodePages": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 1,
+              "publicMemberCount": 5,
+              "runtimeMethodBodyCount": 426,
+              "capabilityFamilies": [
+                "text-and-encoding"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Text.Encodings.Web": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 7,
+              "publicMemberCount": 374,
+              "runtimeMethodBodyCount": 332,
+              "capabilityFamilies": [
+                "text-and-encoding"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Text.RegularExpressions": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 18,
+              "publicMemberCount": 313,
+              "runtimeMethodBodyCount": 1386,
+              "capabilityFamilies": [
+                "text-and-encoding"
+              ],
+              "dependencyAssemblies": [
+                "System.Reflection.Emit.ILGeneration",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [
+                "System.Reflection.Emit.ILGeneration"
+              ],
+              "blockerReasons": []
+            },
+            "System.Threading": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 36,
+              "publicMemberCount": 402,
+              "runtimeMethodBodyCount": 133,
+              "capabilityFamilies": [
+                "threading-and-async"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Threading.Channels": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 10,
+              "publicMemberCount": 63,
+              "runtimeMethodBodyCount": 224,
+              "capabilityFamilies": [
+                "threading-and-async"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Threading.Tasks.Dataflow": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 23,
+              "publicMemberCount": 249,
+              "runtimeMethodBodyCount": 1166,
+              "capabilityFamilies": [
+                "threading-and-async"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Xml.XPath.XDocument": {
+              "classification": "implementation",
+              "status": "certified",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 9,
+              "runtimeMethodBodyCount": 3,
+              "capabilityFamilies": [
+                "reflection-and-metadata"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime",
+                "System.Xml.ReaderWriter",
+                "System.Xml.XDocument"
+              ],
+              "candidateDependencyAssemblies": [],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [
+                "System.Xml.ReaderWriter",
+                "System.Xml.XDocument"
+              ],
+              "blockerReasons": []
+            }
+          }
+        },
+        "core-bcl-layer-02": {
+          "order": 2,
+          "readinessStatus": "ready",
+          "assemblyCount": 11,
+          "readyAssemblyCount": 11,
+          "blockedAssemblyCount": 0,
+          "upstreamLayerNames": [
+            "core-bcl-layer-01"
+          ],
+          "capabilityFamilies": [
+            "collections-and-generics",
+            "io-and-networking",
+            "reflection-and-metadata",
+            "runtime-services",
+            "text-and-encoding",
+            "threading-and-async",
+            "unsafe-and-low-level"
+          ],
+          "assemblyPlanPaths": [
+            "assembly-nativeization-plan/System.Collections.Immutable.json",
+            "assembly-nativeization-plan/System.Formats.Asn1.json",
+            "assembly-nativeization-plan/System.IO.Compression.Brotli.json",
+            "assembly-nativeization-plan/System.IO.Compression.ZipFile.json",
+            "assembly-nativeization-plan/System.Linq.json",
+            "assembly-nativeization-plan/System.ObjectModel.json",
+            "assembly-nativeization-plan/System.Runtime.InteropServices.json",
+            "assembly-nativeization-plan/System.Runtime.Serialization.Formatters.json",
+            "assembly-nativeization-plan/System.Security.Principal.Windows.json",
+            "assembly-nativeization-plan/System.Text.Json.json",
+            "assembly-nativeization-plan/System.Threading.Tasks.Parallel.json"
+          ],
+          "assemblies": {
+            "System.Collections.Immutable": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 44,
+              "publicMemberCount": 820,
+              "runtimeMethodBodyCount": 1999,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Formats.Asn1": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 10,
+              "publicMemberCount": 210,
+              "runtimeMethodBodyCount": 335,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Runtime",
+                "System.Runtime.Numerics"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections",
+                "System.Runtime.Numerics"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Runtime.Numerics"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.IO.Compression.Brotli": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 3,
+              "publicMemberCount": 47,
+              "runtimeMethodBodyCount": 112,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.IO.Compression",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.IO.Compression"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.IO.Compression",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.IO.Compression.ZipFile": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 23,
+              "runtimeMethodBodyCount": 53,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.IO.Compression",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.IO.Compression"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.IO.Compression",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Linq": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 5,
+              "publicMemberCount": 231,
+              "runtimeMethodBodyCount": 1149,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.ObjectModel": {
+              "classification": "compat-shim",
+              "status": "ready",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 20,
+              "publicMemberCount": 135,
+              "runtimeMethodBodyCount": 162,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Runtime.InteropServices": {
+              "classification": "compat-shim",
+              "status": "ready",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 198,
+              "publicMemberCount": 1546,
+              "runtimeMethodBodyCount": 180,
+              "capabilityFamilies": [
+                "unsafe-and-low-level"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Runtime.Serialization.Formatters": {
+              "classification": "compat-shim",
+              "status": "ready",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 16,
+              "publicMemberCount": 144,
+              "runtimeMethodBodyCount": 660,
+              "capabilityFamilies": [
+                "reflection-and-metadata"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.NonGeneric"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Security.Principal.Windows": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 12,
+              "publicMemberCount": 259,
+              "runtimeMethodBodyCount": 268,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime",
+                "System.Security.Claims"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Security.Claims"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Security.Claims"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Text.Json": {
+              "classification": "compat-shim",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 77,
+              "publicMemberCount": 1222,
+              "runtimeMethodBodyCount": 3536,
+              "capabilityFamilies": [
+                "text-and-encoding"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.Concurrent",
+                "System.Memory",
+                "System.Runtime",
+                "System.Text.Encodings.Web"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.Concurrent",
+                "System.Memory",
+                "System.Text.Encodings.Web"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.Concurrent",
+                "System.Memory",
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Text.Encodings.Web"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            },
+            "System.Threading.Tasks.Parallel": {
+              "classification": "implementation",
+              "status": "ready",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 4,
+              "publicMemberCount": 67,
+              "runtimeMethodBodyCount": 196,
+              "capabilityFamilies": [
+                "threading-and-async"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.Concurrent",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Concurrent"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.Concurrent",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": []
+            }
+          }
+        },
+        "core-bcl-layer-03": {
+          "order": 3,
+          "readinessStatus": "blocked",
+          "assemblyCount": 9,
+          "readyAssemblyCount": 0,
+          "blockedAssemblyCount": 9,
+          "upstreamLayerNames": [
+            "core-bcl-layer-01",
+            "core-bcl-layer-02"
+          ],
+          "capabilityFamilies": [
+            "collections-and-generics",
+            "io-and-networking",
+            "reflection-and-metadata",
+            "runtime-services"
+          ],
+          "assemblyPlanPaths": [],
+          "assemblies": {
+            "System.ComponentModel.Primitives": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 30,
+              "publicMemberCount": 276,
+              "runtimeMethodBodyCount": 202,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.ComponentModel",
+                "System.ObjectModel",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.ComponentModel",
+                "System.ObjectModel"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.ComponentModel",
+                "System.ObjectModel",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.IO.MemoryMappedFiles": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 8,
+              "publicMemberCount": 69,
+              "runtimeMethodBodyCount": 119,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Runtime.InteropServices"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Linq.Expressions": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 77,
+              "publicMemberCount": 1065,
+              "runtimeMethodBodyCount": 4684,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.ObjectModel",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ObjectModel"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.ObjectModel",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Linq.Parallel": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 6,
+              "publicMemberCount": 213,
+              "runtimeMethodBodyCount": 1366,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.Concurrent",
+                "System.Linq",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.Concurrent",
+                "System.Linq"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.Concurrent",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Net.Primitives": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 34,
+              "publicMemberCount": 515,
+              "runtimeMethodBodyCount": 460,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "Microsoft.Win32.Primitives",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Runtime.InteropServices"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "externalDependencyAssemblies": [
+                "Microsoft.Win32.Primitives"
+              ],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Reflection.Emit": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 11,
+              "publicMemberCount": 659,
+              "runtimeMethodBodyCount": 385,
+              "capabilityFamilies": [
+                "reflection-and-metadata"
+              ],
+              "dependencyAssemblies": [
+                "System.Reflection.Emit.ILGeneration",
+                "System.Reflection.Primitives",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Runtime.InteropServices"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Reflection.Primitives",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "externalDependencyAssemblies": [
+                "System.Reflection.Emit.ILGeneration"
+              ],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Reflection.Metadata": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 263,
+              "publicMemberCount": 2881,
+              "runtimeMethodBodyCount": 3360,
+              "capabilityFamilies": [
+                "reflection-and-metadata"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.Immutable",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Immutable"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Security.AccessControl": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 47,
+              "publicMemberCount": 540,
+              "runtimeMethodBodyCount": 496,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Runtime",
+                "System.Security.Principal.Windows"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Security.Principal.Windows"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            },
+            "System.Transactions.Local": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 34,
+              "publicMemberCount": 186,
+              "runtimeMethodBodyCount": 1649,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Runtime.InteropServices"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02"
+              ]
+            }
+          }
+        },
+        "core-bcl-layer-04": {
+          "order": 4,
+          "readinessStatus": "blocked",
+          "assemblyCount": 12,
+          "readyAssemblyCount": 0,
+          "blockedAssemblyCount": 12,
+          "upstreamLayerNames": [
+            "core-bcl-layer-01",
+            "core-bcl-layer-02",
+            "core-bcl-layer-03"
+          ],
+          "capabilityFamilies": [
+            "collections-and-generics",
+            "io-and-networking",
+            "runtime-services"
+          ],
+          "assemblyPlanPaths": [],
+          "assemblies": {
+            "System.Collections.Specialized": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 12,
+              "publicMemberCount": 230,
+              "runtimeMethodBodyCount": 295,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.ComponentModel.Primitives",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ComponentModel.Primitives"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.ComponentModel.EventBasedAsync": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 11,
+              "publicMemberCount": 81,
+              "runtimeMethodBodyCount": 64,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.Primitives",
+                "System.Runtime",
+                "System.Threading"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.Primitives",
+                "System.Threading"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.ComponentModel",
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Threading"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.ComponentModel.TypeConverter": {
+              "classification": "compat-shim",
+              "status": "blocked",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 217,
+              "publicMemberCount": 1878,
+              "runtimeMethodBodyCount": 1923,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.ComponentModel",
+                "System.ComponentModel.Primitives",
+                "System.ObjectModel",
+                "System.Resources.Writer",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.ComponentModel",
+                "System.ComponentModel.Primitives",
+                "System.ObjectModel",
+                "System.Resources.Writer"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.ComponentModel",
+                "System.ObjectModel",
+                "System.Private.CoreLib",
+                "System.Resources.Writer",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Drawing.Primitives": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 10,
+              "publicMemberCount": 797,
+              "runtimeMethodBodyCount": 438,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.ComponentModel.Primitives",
+                "System.Numerics.Vectors",
+                "System.ObjectModel",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ComponentModel.Primitives",
+                "System.ObjectModel"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.ObjectModel",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [
+                "System.Numerics.Vectors"
+              ],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.IO.FileSystem.AccessControl": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 8,
+              "publicMemberCount": 89,
+              "runtimeMethodBodyCount": 150,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Runtime",
+                "System.Security.AccessControl",
+                "System.Security.Principal.Windows"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Security.AccessControl",
+                "System.Security.Principal.Windows"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.IO.FileSystem.Watcher": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 11,
+              "publicMemberCount": 112,
+              "runtimeMethodBodyCount": 142,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.ComponentModel.Primitives",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ComponentModel.Primitives"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Linq.Queryable": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 5,
+              "publicMemberCount": 161,
+              "runtimeMethodBodyCount": 245,
+              "capabilityFamilies": [
+                "collections-and-generics"
+              ],
+              "dependencyAssemblies": [
+                "System.Linq",
+                "System.Linq.Expressions",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Linq",
+                "System.Linq.Expressions"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Net.NameResolution": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 36,
+              "runtimeMethodBodyCount": 141,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Net.Primitives",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Net.Primitives"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Net.NetworkInformation": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 36,
+              "publicMemberCount": 571,
+              "runtimeMethodBodyCount": 452,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "Microsoft.Win32.Primitives",
+                "System.Net.Primitives",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Net.Primitives"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [
+                "Microsoft.Win32.Primitives"
+              ],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Net.Sockets": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 31,
+              "publicMemberCount": 822,
+              "runtimeMethodBodyCount": 1071,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Net.Primitives",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Net.Primitives"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Net.WebProxy": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 35,
+              "runtimeMethodBodyCount": 50,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Net.Primitives",
+                "System.Runtime",
+                "System.Text.RegularExpressions"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Net.Primitives",
+                "System.Text.RegularExpressions"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Text.RegularExpressions"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            },
+            "System.Security.Cryptography": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 206,
+              "publicMemberCount": 2947,
+              "runtimeMethodBodyCount": 4533,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Formats.Asn1",
+                "System.Net.Primitives",
+                "System.Runtime",
+                "System.Runtime.InteropServices",
+                "System.Runtime.Numerics"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Formats.Asn1",
+                "System.Net.Primitives",
+                "System.Runtime.InteropServices",
+                "System.Runtime.Numerics"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Runtime.InteropServices",
+                "System.Runtime.Numerics"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03"
+              ]
+            }
+          }
+        },
+        "core-bcl-layer-05": {
+          "order": 5,
+          "readinessStatus": "blocked",
+          "assemblyCount": 9,
+          "readyAssemblyCount": 0,
+          "blockedAssemblyCount": 9,
+          "upstreamLayerNames": [
+            "core-bcl-layer-01",
+            "core-bcl-layer-02",
+            "core-bcl-layer-03",
+            "core-bcl-layer-04"
+          ],
+          "capabilityFamilies": [
+            "io-and-networking",
+            "runtime-services"
+          ],
+          "assemblyPlanPaths": [],
+          "assemblies": {
+            "System.ComponentModel.Annotations": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 47,
+              "publicMemberCount": 357,
+              "runtimeMethodBodyCount": 494,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.TypeConverter",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.TypeConverter"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.TypeConverter",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Data.Common": {
+              "classification": "compat-shim",
+              "status": "blocked",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 173,
+              "publicMemberCount": 3269,
+              "runtimeMethodBodyCount": 6457,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.Primitives",
+                "System.ComponentModel.TypeConverter",
+                "System.ObjectModel",
+                "System.Runtime",
+                "System.Transactions.Local",
+                "System.Xml.ReaderWriter"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.Primitives",
+                "System.ComponentModel.TypeConverter",
+                "System.ObjectModel",
+                "System.Transactions.Local"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.ComponentModel",
+                "System.ComponentModel.TypeConverter",
+                "System.ObjectModel",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [
+                "System.Xml.ReaderWriter"
+              ],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Diagnostics.Process": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 15,
+              "publicMemberCount": 345,
+              "runtimeMethodBodyCount": 663,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Collections.Specialized",
+                "System.ComponentModel.Primitives",
+                "System.Diagnostics.FileVersionInfo",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Collections.Specialized",
+                "System.ComponentModel.Primitives",
+                "System.Diagnostics.FileVersionInfo",
+                "System.Runtime.InteropServices"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Diagnostics.FileVersionInfo",
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Runtime.InteropServices"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Diagnostics.TraceSource": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 22,
+              "publicMemberCount": 296,
+              "runtimeMethodBodyCount": 333,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Collections.Specialized",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Collections.Specialized"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections.NonGeneric",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Net.Ping": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 7,
+              "publicMemberCount": 87,
+              "runtimeMethodBodyCount": 134,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.ComponentModel.EventBasedAsync",
+                "System.ComponentModel.Primitives",
+                "System.Net.Primitives",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.ComponentModel.EventBasedAsync",
+                "System.ComponentModel.Primitives",
+                "System.Net.Primitives"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Net.Security": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 27,
+              "publicMemberCount": 797,
+              "runtimeMethodBodyCount": 1063,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.NonGeneric",
+                "System.Memory",
+                "System.Net.Primitives",
+                "System.Runtime",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.NonGeneric",
+                "System.Memory",
+                "System.Net.Primitives",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Collections.NonGeneric",
+                "System.Memory",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Net.WebHeaderCollection": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 3,
+              "publicMemberCount": 111,
+              "runtimeMethodBodyCount": 76,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Specialized"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Net.WebSockets": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 12,
+              "publicMemberCount": 156,
+              "runtimeMethodBodyCount": 263,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "Microsoft.Win32.Primitives",
+                "System.Collections.Specialized",
+                "System.Net.Primitives",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.Net.Primitives"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [
+                "Microsoft.Win32.Primitives"
+              ],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            },
+            "System.Web.HttpUtility": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 32,
+              "runtimeMethodBodyCount": 72,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Specialized"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04"
+              ]
+            }
+          }
+        },
+        "core-bcl-layer-06": {
+          "order": 6,
+          "readinessStatus": "blocked",
+          "assemblyCount": 5,
+          "readyAssemblyCount": 0,
+          "blockedAssemblyCount": 5,
+          "upstreamLayerNames": [
+            "core-bcl-layer-01",
+            "core-bcl-layer-03",
+            "core-bcl-layer-04",
+            "core-bcl-layer-05"
+          ],
+          "capabilityFamilies": [
+            "io-and-networking",
+            "runtime-services"
+          ],
+          "assemblyPlanPaths": [],
+          "assemblies": {
+            "System.Diagnostics.TextWriterTraceListener": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 4,
+              "publicMemberCount": 47,
+              "runtimeMethodBodyCount": 74,
+              "capabilityFamilies": [
+                "runtime-services"
+              ],
+              "dependencyAssemblies": [
+                "System.Diagnostics.TraceSource",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Diagnostics.TraceSource"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05"
+              ]
+            },
+            "System.Net.Http": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 61,
+              "publicMemberCount": 1002,
+              "runtimeMethodBodyCount": 3133,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Diagnostics.DiagnosticSource",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Runtime",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Diagnostics.DiagnosticSource",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Diagnostics.DiagnosticSource",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05"
+              ]
+            },
+            "System.Net.HttpListener": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 11,
+              "publicMemberCount": 228,
+              "runtimeMethodBodyCount": 941,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "Microsoft.Win32.Primitives",
+                "System.Collections.Specialized",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Net.WebHeaderCollection",
+                "System.Net.WebSockets",
+                "System.Runtime",
+                "System.Security.Claims",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Net.WebHeaderCollection",
+                "System.Net.WebSockets",
+                "System.Security.Claims",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime",
+                "System.Security.Claims"
+              ],
+              "externalDependencyAssemblies": [
+                "Microsoft.Win32.Primitives"
+              ],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05"
+              ]
+            },
+            "System.Net.Quic": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 11,
+              "publicMemberCount": 146,
+              "runtimeMethodBodyCount": 447,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Runtime",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Collections",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05"
+              ]
+            },
+            "System.Net.ServicePoint": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 4,
+              "publicMemberCount": 91,
+              "runtimeMethodBodyCount": 65,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Runtime",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05"
+              ]
+            }
+          }
+        },
+        "core-bcl-layer-07": {
+          "order": 7,
+          "readinessStatus": "blocked",
+          "assemblyCount": 4,
+          "readyAssemblyCount": 0,
+          "blockedAssemblyCount": 4,
+          "upstreamLayerNames": [
+            "core-bcl-layer-02",
+            "core-bcl-layer-03",
+            "core-bcl-layer-04",
+            "core-bcl-layer-05",
+            "core-bcl-layer-06"
+          ],
+          "capabilityFamilies": [
+            "io-and-networking"
+          ],
+          "assemblyPlanPaths": [],
+          "assemblies": {
+            "System.Net.Http.Json": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 3,
+              "publicMemberCount": 69,
+              "runtimeMethodBodyCount": 182,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Net.Http",
+                "System.Net.Primitives",
+                "System.Runtime",
+                "System.Text.Json"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Net.Http",
+                "System.Net.Primitives",
+                "System.Text.Json"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05",
+                "waiting-on:core-bcl-layer-06"
+              ]
+            },
+            "System.Net.Mail": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 30,
+              "publicMemberCount": 380,
+              "runtimeMethodBodyCount": 1066,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.ComponentModel.EventBasedAsync",
+                "System.Net.Primitives",
+                "System.Net.ServicePoint",
+                "System.Runtime",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.ComponentModel.EventBasedAsync",
+                "System.Net.Primitives",
+                "System.Net.ServicePoint",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05",
+                "waiting-on:core-bcl-layer-06"
+              ]
+            },
+            "System.Net.Requests": {
+              "classification": "compat-shim",
+              "status": "blocked",
+              "surfaceContractCertified": true,
+              "publicTypeDefinitionCount": 26,
+              "publicMemberCount": 596,
+              "runtimeMethodBodyCount": 826,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Net.ServicePoint",
+                "System.Net.WebHeaderCollection",
+                "System.Runtime",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Net.ServicePoint",
+                "System.Net.WebHeaderCollection",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05",
+                "waiting-on:core-bcl-layer-06"
+              ]
+            },
+            "System.Net.WebSockets.Client": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 2,
+              "publicMemberCount": 64,
+              "runtimeMethodBodyCount": 144,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Net.Http",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Net.WebSockets",
+                "System.Runtime",
+                "System.Security.Cryptography"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Net.Http",
+                "System.Net.Primitives",
+                "System.Net.Security",
+                "System.Net.WebSockets",
+                "System.Security.Cryptography"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-02",
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05",
+                "waiting-on:core-bcl-layer-06"
+              ]
+            }
+          }
+        },
+        "core-bcl-layer-08": {
+          "order": 8,
+          "readinessStatus": "blocked",
+          "assemblyCount": 1,
+          "readyAssemblyCount": 0,
+          "blockedAssemblyCount": 1,
+          "upstreamLayerNames": [
+            "core-bcl-layer-03",
+            "core-bcl-layer-04",
+            "core-bcl-layer-05",
+            "core-bcl-layer-07"
+          ],
+          "capabilityFamilies": [
+            "io-and-networking"
+          ],
+          "assemblyPlanPaths": [],
+          "assemblies": {
+            "System.Net.WebClient": {
+              "classification": "implementation",
+              "status": "blocked",
+              "surfaceContractCertified": false,
+              "publicTypeDefinitionCount": 23,
+              "publicMemberCount": 241,
+              "runtimeMethodBodyCount": 347,
+              "capabilityFamilies": [
+                "io-and-networking"
+              ],
+              "dependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.ComponentModel.EventBasedAsync",
+                "System.ComponentModel.Primitives",
+                "System.Net.Primitives",
+                "System.Net.Requests",
+                "System.Net.WebHeaderCollection",
+                "System.Runtime"
+              ],
+              "candidateDependencyAssemblies": [
+                "System.Collections.Specialized",
+                "System.ComponentModel.EventBasedAsync",
+                "System.ComponentModel.Primitives",
+                "System.Net.Primitives",
+                "System.Net.Requests",
+                "System.Net.WebHeaderCollection"
+              ],
+              "certifiedDependencyAssemblies": [
+                "System.Net.Requests",
+                "System.Private.CoreLib",
+                "System.Runtime"
+              ],
+              "externalDependencyAssemblies": [],
+              "blockerReasons": [
+                "waiting-on:core-bcl-layer-03",
+                "waiting-on:core-bcl-layer-04",
+                "waiting-on:core-bcl-layer-05",
+                "waiting-on:core-bcl-layer-07"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

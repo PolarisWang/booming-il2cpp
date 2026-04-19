@@ -4,51 +4,42 @@
 
 - 2026-04-18 14:56:35 +08:00
 - 2026-04-18 19:41:19 +08:00
+- 2026-04-18 22:47:46 +08:00
+- 2026-04-18 23:16:14 +08:00
+- 2026-04-19 00:18:00 +08:00
 
 ## 本轮完成
 
-- 新建 `20260418-11-core-bcl-layer-01-remaining-ready-dll-execution` child task。
-- 冻结 `core-bcl-layer-01` 剩余 `21` 个 ready DLL，覆盖 runtime-services、io-and-networking、reflection-and-metadata、text-and-encoding、unsafe-and-low-level 五类能力。
-- 生成 `remaining-ready-scope-v1-01.json`，明确 selected assemblies、required gates、monitor signals 与聚合后的 formal verification aliases。
-- 补齐 design / plan / STATUS 基础骨架，并重新建立 `docs/dev/ACTIVE.md` 指针。
-- 将 `gameplay-core-ready` 并入当前 child，固定为 `15` 个 DLL 的阶段性验收目标。
-- 把“DLL 完整 native 化”明确为 `surface complete -> semantic complete -> native executable evidence complete -> per-DLL certified complete` 四层判定。
-- 将 `gameplay-core-ready` 的范围、优先顺序与 machine-readable milestone 落入 design / plan / scope JSON / roadmap。
+- 冻结 `remaining-ready-scope-v1-01.json`，明确剩余 `21` 个 ready DLL、`gameplay-core-ready` 里程碑与 formal verification intake。
+- 补齐并执行当前 child 所需 proof / benchmark / engineering validation，修复 `function-pointer-bench` 暴露出的 native codegen `ldftn` 重载取址问题。
+- 明确 `TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()` 为 managed-only benchmark，不把它当作 native benchmark 通过依据。
+- 生成当前 child 的 proof / benchmark machine-readable summary：
+  - `native-proof-summary-v1-01.json`
+  - `nativeization-throughput-benchmark-v1-01.json`
+- 首轮把 remaining-ready `21` 个 DLL 投影为 `assembly-certification-report/*.json`。
+- 发现 baseline `8` 个 DLL 仍依赖代表批次中的 `generic/threading` 旧证据后，合并 `20260418-10` 的缺失 proof / benchmark，生成 layer-ready union summary：
+  - `layer-ready-proof-summary-v1-01.json`
+  - `layer-ready-throughput-benchmark-v1-01.json`
+- 使用 union summary 重跑全量 certify，完成 `29` 个 ready DLL 的逐 DLL report 收口，并生成 `layer-certification-summary-v1-01.json`。
 
-## 当前判断
+## 收口结果
 
-- `20260418-10` 已把 representative execution template 跑通，当前最有价值的推进不是再做新的代表切片，而是直接消化剩余 ready DLL。
-- `gameplay-core-ready` 现在成为当前 child 的第一阶段验收口径，先证明基础游戏业务逻辑所需的核心 DLL 已经可以逐 DLL 收口。
-- 下一步先补 `20260418-10` 的 `8` 个基线 DLL report 输入，再刷新 registry snapshot，并优先投影当前 `7` 个 gameplay core DLL。
+- `gameplay-core-ready`: `15/15 finalStatus = ok`
+- `core-bcl-layer-01` ready set: `29/29 finalStatus = ok`
+- 当前 child 已完成，可从父 roadmap 视角把 `dependency-layer` 阶段标记为已收口
 
 ## 验证
 
-- `Get-Content docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/design-v1-01.md -Raw | Out-Null`
+- `python build/toolchains/run/run.py test registry refresh --json`
+  - 结果: `status = ok`, `historyPath = artifacts/tests/registry/history/20260419-000228/index.json`
+- `dotnet run --project src/tools/Chaos.IL2CPP.Tools.FoundationPack.Analysis/Chaos.IL2CPP.Tools.FoundationPack.Analysis.csproj -- dependency-layer-certify --assembly-plan-dir docs/dev/completed/20260418-06-dependency-driven-core-bcl-layer-nativeization/assembly-nativeization-plan --proof-summary docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/layer-ready-proof-summary-v1-01.json --benchmark-summary docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/layer-ready-throughput-benchmark-v1-01.json --output-dir docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report --task-id 20260418-11-core-bcl-layer-01-remaining-ready-dll-execution`
   - 结果: 通过
-- `Get-Content docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/plan-v1-01.md -Raw | Out-Null`
+- `Get-ChildItem docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/assembly-certification-report/*.json | ForEach-Object { Get-Content $_.FullName -Raw | ConvertFrom-Json | Out-Null }`
+  - 结果: `29` 份 report 全部可解析
+- `Get-Content docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/layer-certification-summary-v1-01.json -Raw | ConvertFrom-Json | Out-Null`
   - 结果: 通过
-- `Get-Content docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/dll-full-certified-acceptance-path-v1-01.md -Raw | Out-Null`
-  - 结果: 通过
-- `Get-Content docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/remaining-ready-scope-v1-01.json -Raw | ConvertFrom-Json | Out-Null`
-  - 结果: 通过
-## 2026-04-18 22:47 追加记录
 
-- 已清理 `Chaos.IL2CPP.CodeGen.dll` 构建锁，并恢复 `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -c Release` 的稳定通过。
-- 已复验 async native-aot 相关最小单测集，`test_phase3_async_task_builder_native_aot.py` 与 `test_phase5_virtual_dispatch_native_aot.py -k task_and_valuetask_benchmark` 全部通过。
-- 已确认 `TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()` 在当前仓库 authority 下是 managed-only benchmark：源码标记 `Modes = ChaosExecutionMode.Managed`，declared benchmark 矩阵选择逻辑也会按 mode 选中 `windows-managed-perf`。
-- 因此，这一条 benchmark 不再作为 native benchmark blocker 继续追；当前 child 的下一执行点重新回到 `20260418-10` 的 `8` 个 baseline DLL report 输入映射。
+## 说明
 
-## 2026-04-18 22:47 验证
-
-- `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -c Release`
-  - 结果: 通过
-- `python -m pytest tests/unit/compatibility/test_phase3_async_task_builder_native_aot.py -q`
-  - 结果: `2 passed`
-- `python -m pytest tests/unit/compatibility/test_phase5_virtual_dispatch_native_aot.py -k task_and_valuetask_benchmark -q`
-  - 结果: `1 passed, 5 deselected`
-- `python build/toolchains/run/run.py test declared-benchmark --id "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()" --json`
-  - 结果: run id `20260418-224041-windows-ad67`，`finalStatus = ok`，仅 `windows-managed-perf`
-- `python -m pytest tests/unit/registry/test_declared_registry_matrix_selection.py -q`
-  - 结果: `3 passed`
-- `python -m pytest tests/unit/performance/test_benchmark_subject_sources.py -k solution_core_pack_declares_internal_performance_slice_benchmarks -q`
-  - 结果: `1 passed, 3 deselected`
+- 本轮没有验证 `managed -> native -> hotupdate` 全链路。
+- 本轮没有修改长期 wiki authority；新增内容仅是当前 child 的执行证据与收口结果。

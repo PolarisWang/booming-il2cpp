@@ -22,14 +22,49 @@ internal static class PatchCallbackFlowProofEntry
         Priority = 2)]
     public static int Run()
     {
-        var runtimeManager = new RuntimeManager();
-        runtimeManager.RegisterInt32Unary(CallbackIdentity, static value => value + 1);
+        var workspace = Path.Combine(Path.GetTempPath(), $"patch-callback-flow-proof-{Guid.NewGuid():N}");
+        Directory.CreateDirectory(workspace);
 
-        var first = runtimeManager.DispatchInt32Unary(CallbackIdentity, 41, static value => value);
-        var second = runtimeManager.DispatchInt32Unary(CallbackIdentity, 10, static value => value - 1);
+        try
+        {
+            var packageRoot = HotUpdatePackageSupport.CreatePackageRoot(
+                workspace,
+                "callback",
+                HotUpdatePackageSupport.CurrentAotVersion,
+                "PatchCallbackFlowProof/HotPatch::AddOne(System.Int32)",
+                [0x50, 0x43, 0x46, 0x31],
+                "callback-flow-proof");
+            var runtimeManager = new RuntimeManager();
+            var loaded = runtimeManager.LoadPackage(
+                packageRoot,
+                HotUpdatePackageSupport.CurrentAotVersion,
+                new HotUpdateMethodBindingSet
+                {
+                    Int32UnaryBindings =
+                    [
+                        new HotUpdateInt32UnaryBinding
+                        {
+                            Identity = CallbackIdentity,
+                            Target = static value => value + 1,
+                        },
+                    ],
+                });
+            Assert.True(loaded);
+            Assert.Equal(RuntimeMode.Mixed, runtimeManager.Mode);
 
-        Assert.Equal(42, first);
-        Assert.Equal(11, second);
-        return 0;
+            var first = runtimeManager.DispatchInt32Unary(CallbackIdentity, 41, static value => value);
+            var second = runtimeManager.DispatchInt32Unary(CallbackIdentity, 10, static value => value - 1);
+
+            Assert.Equal(42, first);
+            Assert.Equal(11, second);
+            return 0;
+        }
+        finally
+        {
+            if (Directory.Exists(workspace))
+            {
+                Directory.Delete(workspace, recursive: true);
+            }
+        }
     }
 }

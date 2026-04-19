@@ -117,21 +117,28 @@
 
 从 `20260418-06` 的逐程序集 plan 聚合得到，本轮需要执行：
 
-- `11` 个 unique native proofs：
+- `16` 个 unique native proofs：
+  - `async-await-proof`
   - `abi-widening-proof`
   - `aot-closure-validation-proof`
   - `conversion-ops-proof`
   - `direct-callvirt-proof`
+  - `dispatch-proof`
   - `function-pointer-proof`
+  - `generic-instantiation-proof`
   - `member-metadata-lookup-proof`
   - `metadata-supplement-proof`
   - `reflection-interop-closure-proof`
   - `required-instantiation-closure-proof`
   - `span-memory-proof`
+  - `task-scheduling-proof`
   - `task-valuetask-flow-proof`
-- `7` 个 unique benchmarks：
+  - `thread-local-state-proof`
+- `9` 个 unique benchmarks：
   - `allocation-bench`
+  - `dispatch-bench`
   - `function-pointer-bench`
+  - `generic-interface-dispatch-bench`
   - `member-metadata-lookup-bench`
   - `required-instantiation-closure-bench`
   - `span-memory-bench`

@@ -15,18 +15,25 @@
 - formalVerificationObjects:
   - `docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/remaining-ready-scope-v1-01.json`
   - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()`
+  - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AsyncAwaitProofEntry::Run()`
   - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()`
   - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ConversionOpsProofEntry::Run()`
   - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DirectCallVirtProofEntry::Run()`
+  - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DispatchProofEntry::Run()`
   - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.FunctionPointerProofEntry::Run()`
+  - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericInstantiationProofEntry::Run()`
   - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()`
   - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MetadataSupplementProofEntry::Run()`
   - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ReflectionInteropClosureEntry::Run()`
   - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run()`
   - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.SpanAndMemoryProofEntry::Run()`
+  - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()`
   - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run()`
+  - `declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadLocalStateProofEntry::Run()`
   - `declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.AllocationBenchmarkEntry::RunWorkload()`
+  - `declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DispatchBenchmarkEntry::RunWorkload()`
   - `declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry::RunWorkload()`
+  - `declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry::RunWorkload()`
   - `declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry::RunWorkload()`
   - `declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry::RunWorkload()`
   - `declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.SpanAndMemoryBenchmarkEntry::RunWorkload()`
@@ -46,18 +53,18 @@
 
 ---
 
-Status: in-progress
+Status: completed
 
 ## 计划清单
 
-- [ ] 步骤 1: 冻结剩余 `21` 个 ready DLL 的 scope、程序集清单、`gameplay-core-ready` milestone 与 formal verification objects
-- [ ] 步骤 2: 校对逐程序集 plan 聚合出的 unique proof / benchmark / engineering gate 映射，并把“完整 native 化四层判定”接到逐 DLL closeout criteria
-- [ ] 步骤 3: 对接 `20260418-10` 代表性批次的 `8` 个基线 DLL 证据，明确 `gameplay-core-ready` 的 baseline report 输入
-- [ ] 步骤 4: 执行 `11` 个 unique native proofs，并记录 run evidence
-- [ ] 步骤 5: 执行 `4` 个 engineering validations 与 `7` 个 benchmarks，并记录 throughput / gate 结果
-- [ ] 步骤 6: 先按优先顺序回填当前 `7` 个核心 DLL 的 shared run evidence，并与基线 `8` 个 DLL 一起评估 `gameplay-core-ready`
-- [ ] 步骤 7: 再补齐剩余 tail DLL 的 `assembly-certification-report/<assembly>.json`，生成 `layer-certification-summary-v1-01.json`
-- [ ] 步骤 8: 同步 child / parent `STATUS.md`、`docs/dev/ACTIVE.md`、progress note 与索引，并根据 `gameplay-core-ready` 与整层逐 DLL report 判断是否继续收口 `core-bcl-layer-01`
+- [x] 步骤 1: 冻结剩余 `21` 个 ready DLL 的 scope、程序集清单、`gameplay-core-ready` milestone 与 formal verification objects
+- [x] 步骤 2: 校对逐程序集 plan 聚合出的 unique proof / benchmark / engineering gate 映射，并把“完整 native 化四层判定”接到逐 DLL closeout criteria
+- [x] 步骤 3: 对接 `20260418-10` 代表性批次的 `8` 个基线 DLL 证据，明确 `gameplay-core-ready` 的 baseline report 输入
+- [x] 步骤 4: 执行 `16` 个 unique native proofs，并记录 run evidence
+- [x] 步骤 5: 执行 `4` 个 engineering validations 与 `9` 个 benchmarks，并记录 throughput / gate 结果
+- [x] 步骤 6: 先按优先顺序回填当前 `7` 个核心 DLL 的 shared run evidence，并与基线 `8` 个 DLL 一起评估 `gameplay-core-ready`
+- [x] 步骤 7: 再补齐剩余 tail DLL 的 `assembly-certification-report/<assembly>.json`，生成 `layer-certification-summary-v1-01.json`
+- [x] 步骤 8: 同步 child / parent `STATUS.md`、`docs/dev/ACTIVE.md`、progress note 与索引，并根据 `gameplay-core-ready` 与整层逐 DLL report 判断是否继续收口 `core-bcl-layer-01`
 
 ## 需要创建或修改的文件
 
@@ -81,22 +88,29 @@ Status: in-progress
 - `Get-Content docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/remaining-ready-scope-v1-01.json -Raw | ConvertFrom-Json | Out-Null`
 - `python build/toolchains/run/run.py test registry refresh --json`
 - `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run() --json`
+- `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AsyncAwaitProofEntry::Run() --json`
 - `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run() --json`
 - `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ConversionOpsProofEntry::Run() --json`
 - `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DirectCallVirtProofEntry::Run() --json`
+- `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DispatchProofEntry::Run() --json`
 - `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.FunctionPointerProofEntry::Run() --json`
+- `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericInstantiationProofEntry::Run() --json`
 - `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run() --json`
 - `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MetadataSupplementProofEntry::Run() --json`
 - `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ReflectionInteropClosureEntry::Run() --json`
 - `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run() --json`
 - `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.SpanAndMemoryProofEntry::Run() --json`
+- `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run() --json`
 - `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run() --json`
+- `python build/toolchains/run/run.py test declared-unit-test --id declared-unit-test/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadLocalStateProofEntry::Run() --json`
 - `python build/toolchains/run/run.py test engineering-validation --id engineering-validation/SolutionCorePack/managed-build --json`
 - `python build/toolchains/run/run.py test engineering-validation --id engineering-validation/SolutionCorePack/managed-runtime-output --json`
 - `python build/toolchains/run/run.py test engineering-validation --id engineering-validation/SolutionCorePack/native-executable-smoke --json`
 - `python build/toolchains/run/run.py test engineering-validation --id engineering-validation/SolutionCorePack/project-graph --json`
 - `python build/toolchains/run/run.py test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.AllocationBenchmarkEntry::RunWorkload() --json`
+- `python build/toolchains/run/run.py test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DispatchBenchmarkEntry::RunWorkload() --json`
 - `python build/toolchains/run/run.py test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry::RunWorkload() --json`
+- `python build/toolchains/run/run.py test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry::RunWorkload() --json`
 - `python build/toolchains/run/run.py test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry::RunWorkload() --json`
 - `python build/toolchains/run/run.py test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry::RunWorkload() --json`
 - `python build/toolchains/run/run.py test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.SpanAndMemoryBenchmarkEntry::RunWorkload() --json`

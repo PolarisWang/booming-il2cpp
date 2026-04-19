@@ -1017,9 +1017,29 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private void EmitLoadFunctionPointer(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
 	{
-		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(77, 1, builder);
-		handler.AppendLiteral("    chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(&");
-		handler.AppendFormatted(GetRequiredFunctionPointerTargetSymbol(instruction));
+		string functionPointerExpression;
+		if (!string.IsNullOrWhiteSpace(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact targetMethod))
+		{
+			IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(targetMethod);
+			string text = MapAbiSlotReturnType(targetMethod.ReturnAbi);
+			string text2 = FormatAbiSlotParameterSignature(methodAbiParameterSlots);
+			string arg = string.IsNullOrWhiteSpace(text2) ? (text + "(*)()") : (text + "(*)(" + text2 + ")");
+			string text3 = FormatAbiInvocationArgumentList(methodAbiParameterSlots);
+			string text4 = string.IsNullOrWhiteSpace(text3)
+				? targetMethod.NativeSymbol + "()"
+				: targetMethod.NativeSymbol + "(" + text3 + ")";
+			string text5 = string.Equals(text, "void", StringComparison.Ordinal)
+				? "{ " + text4 + "; }"
+				: "{ return " + text4 + "; }";
+			functionPointerExpression = $"static_cast<{arg}>(+[]({text2}) -> {text} {text5})";
+		}
+		else
+		{
+			functionPointerExpression = "&" + GetRequiredFunctionPointerTargetSymbol(instruction);
+		}
+		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(66, 1, builder);
+		handler.AppendLiteral("    chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(");
+		handler.AppendFormatted(functionPointerExpression);
 		handler.AppendLiteral(");");
 		builder.AppendLine(ref handler);
 		AppendGotoNext(builder, nextOffset, op);

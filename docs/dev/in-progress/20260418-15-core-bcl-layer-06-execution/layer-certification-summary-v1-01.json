@@ -1,0 +1,54 @@
+﻿{
+    "schemaVersion":  1,
+    "taskId":  "20260418-15-core-bcl-layer-06-execution",
+    "generatedAt":  "2026-04-19T09:51:30+08:00",
+    "sourceScopePath":  "docs/dev/in-progress/20260418-15-core-bcl-layer-06-execution/core-bcl-layer-06-scope-v1-01.json",
+    "proofSummaryPath":  "docs/dev/in-progress/20260418-15-core-bcl-layer-06-execution/native-proof-summary-v1-01.json",
+    "benchmarkSummaryPath":  "docs/dev/in-progress/20260418-15-core-bcl-layer-06-execution/nativeization-throughput-benchmark-v1-01.json",
+    "reportDirectory":  "docs/dev/in-progress/20260418-15-core-bcl-layer-06-execution/assembly-certification-report",
+    "layerStatus":  {
+                        "finalStatus":  "ok",
+                        "total":  6,
+                        "ok":  6,
+                        "blocked":  0,
+                        "failed":  0
+                    },
+    "certificationReports":  [
+                                 {
+                                     "assemblyName":  "System.Diagnostics.TextWriterTraceListener",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-15-core-bcl-layer-06-execution/assembly-certification-report/System.Diagnostics.TextWriterTraceListener.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Net.Http",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-15-core-bcl-layer-06-execution/assembly-certification-report/System.Net.Http.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Net.HttpListener",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-15-core-bcl-layer-06-execution/assembly-certification-report/System.Net.HttpListener.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Net.Quic",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-15-core-bcl-layer-06-execution/assembly-certification-report/System.Net.Quic.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Net.Requests",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-15-core-bcl-layer-06-execution/assembly-certification-report/System.Net.Requests.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Net.ServicePoint",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-15-core-bcl-layer-06-execution/assembly-certification-report/System.Net.ServicePoint.json"
+                                 }
+                             ]
+}

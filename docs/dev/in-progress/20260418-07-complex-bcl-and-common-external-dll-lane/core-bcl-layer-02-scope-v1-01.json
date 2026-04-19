@@ -1,0 +1,118 @@
+﻿{
+    "schemaVersion":  1,
+    "taskId":  "20260418-07-complex-bcl-and-common-external-dll-lane",
+    "generatedAt":  "2026-04-19T09:38:36+08:00",
+    "sourceTaskId":  "20260418-01-dotnet-foundation-pack-nativeization-roadmap",
+    "ownerSubjectId":  "SolutionCorePack",
+    "layerName":  "core-bcl-layer-02",
+    "selectionStrategy":  "certified-baseline-unlocked-next-ready-layer",
+    "certifiedInputPath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/layer-certification-summary-v1-01.json",
+    "targetFrameworks":  [
+                             "net8.0",
+                             "net10.0"
+                         ],
+    "selectedAssemblies":  [
+                               "System.Collections.Immutable",
+                               "System.Formats.Asn1",
+                               "System.IO.Compression.Brotli",
+                               "System.IO.Compression.ZipFile",
+                               "System.IO.Pipelines",
+                               "System.Linq",
+                               "System.Net.ServerSentEvents",
+                               "System.ObjectModel",
+                               "System.Runtime.InteropServices",
+                               "System.Runtime.Serialization.Formatters",
+                               "System.Security.Principal.Windows",
+                               "System.Text.Json",
+                               "System.Threading.Tasks.Parallel"
+                           ],
+    "targetFrameworkAssemblyGroups":  {
+                                          "net8.0":  [
+                                                         "System.Collections.Immutable",
+                                                         "System.Formats.Asn1",
+                                                         "System.IO.Compression.Brotli",
+                                                         "System.IO.Compression.ZipFile",
+                                                         "System.Linq",
+                                                         "System.ObjectModel",
+                                                         "System.Runtime.InteropServices",
+                                                         "System.Runtime.Serialization.Formatters",
+                                                         "System.Security.Principal.Windows",
+                                                         "System.Text.Json",
+                                                         "System.Threading.Tasks.Parallel"
+                                                     ],
+                                          "net10.0":  [
+                                                          "System.Collections.Immutable",
+                                                          "System.Formats.Asn1",
+                                                          "System.IO.Compression.Brotli",
+                                                          "System.IO.Compression.ZipFile",
+                                                          "System.IO.Pipelines",
+                                                          "System.Linq",
+                                                          "System.Net.ServerSentEvents",
+                                                          "System.ObjectModel",
+                                                          "System.Runtime.InteropServices",
+                                                          "System.Runtime.Serialization.Formatters",
+                                                          "System.Security.Principal.Windows",
+                                                          "System.Threading.Tasks.Parallel"
+                                                      ]
+                                      },
+    "requiredGates":  [
+                          "collector",
+                          "registry",
+                          "workspace",
+                          "dependency-layer-proof",
+                          "benchmark"
+                      ],
+    "formalProofAliases":  [
+                               "abi-widening-proof",
+                               "aot-closure-validation-proof",
+                               "async-await-proof",
+                               "conversion-ops-proof",
+                               "direct-callvirt-proof",
+                               "dispatch-proof",
+                               "function-pointer-proof",
+                               "generic-collection-proof",
+                               "generic-instantiation-proof",
+                               "member-metadata-lookup-proof",
+                               "metadata-supplement-proof",
+                               "reflection-interop-closure-proof",
+                               "required-instantiation-closure-proof",
+                               "span-memory-proof",
+                               "task-scheduling-proof",
+                               "task-valuetask-flow-proof",
+                               "threading-proof",
+                               "thread-local-state-proof"
+                           ],
+    "formalBenchmarkAliases":  [
+                                   "allocation-bench",
+                                   "dispatch-bench",
+                                   "function-pointer-bench",
+                                   "generic-bench",
+                                   "generic-interface-dispatch-bench",
+                                   "member-metadata-lookup-bench",
+                                   "required-instantiation-closure-bench",
+                                   "span-memory-bench",
+                                   "string-utf8-marshaling-bench",
+                                   "task-scheduling-bench",
+                                   "task-valuetask-flow-bench"
+                               ],
+    "engineeringValidationIds":  [
+                                     "engineering-validation/SolutionCorePack/managed-build",
+                                     "engineering-validation/SolutionCorePack/managed-runtime-output",
+                                     "engineering-validation/SolutionCorePack/native-executable-smoke",
+                                     "engineering-validation/SolutionCorePack/project-graph"
+                                 ],
+    "engineeringWorkloadIds":  [
+                                   "engineering-workload/SolutionCorePack/codegen",
+                                   "engineering-workload/SolutionCorePack/convert",
+                                   "engineering-workload/SolutionCorePack/native-link"
+                               ],
+    "monitorSignals":  [
+                           "certified-assembly-count",
+                           "blocked-assembly-count",
+                           "layer-completion-rate",
+                           "layer-nativeization-throughput",
+                           "layer-compile-time-ms",
+                           "native-proof-pass-rate",
+                           "benchmark-regression-delta"
+                       ]
+}

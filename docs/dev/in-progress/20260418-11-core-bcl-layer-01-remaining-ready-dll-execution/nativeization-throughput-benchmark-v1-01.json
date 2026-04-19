@@ -1,0 +1,221 @@
+{
+    "schemaVersion":  1,
+    "taskId":  "20260418-11-core-bcl-layer-01-remaining-ready-dll-execution",
+    "generatedAt":  "2026-04-19T00:08:28+08:00",
+    "sourceScopePath":  "docs/dev/in-progress/20260418-11-core-bcl-layer-01-remaining-ready-dll-execution/remaining-ready-scope-v1-01.json",
+    "ownerSubjectId":  "SolutionCorePack",
+    "layerName":  "core-bcl-layer-01",
+    "selectionStrategy":  "remaining-ready-dll-batch",
+    "selectedAssemblies":  [
+                               "System.ComponentModel",
+                               "System.Diagnostics.DiagnosticSource",
+                               "System.Diagnostics.FileVersionInfo",
+                               "System.Diagnostics.StackTrace",
+                               "System.Formats.Tar",
+                               "System.IO.Compression",
+                               "System.IO.FileSystem.DriveInfo",
+                               "System.IO.IsolatedStorage",
+                               "System.IO.Pipes",
+                               "System.Reflection.DispatchProxy",
+                               "System.Reflection.TypeExtensions",
+                               "System.Resources.Writer",
+                               "System.Runtime.CompilerServices.VisualC",
+                               "System.Runtime.InteropServices.JavaScript",
+                               "System.Runtime.Numerics",
+                               "System.Runtime.Serialization.Primitives",
+                               "System.Security.Claims",
+                               "System.Text.Encoding.CodePages",
+                               "System.Text.Encodings.Web",
+                               "System.Text.RegularExpressions",
+                               "System.Xml.XPath.XDocument"
+                           ],
+    "remainingReadyAssemblyCount":  21,
+    "layerReadyAssemblyCount":  29,
+    "benchmarks":  [
+                       {
+                           "alias":  "allocation-bench",
+                           "id":  "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.AllocationBenchmarkEntry::RunWorkload()",
+                           "canonicalCommand":  "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.AllocationBenchmarkEntry::RunWorkload()",
+                           "runId":  "20260418-234026-windows-a028",
+                           "status":  "ok",
+                           "regressionStatus":  "ok",
+                           "metrics":  {
+                                           "sampleCount":  1,
+                                           "meanDurationMs":  6.729,
+                                           "meanOpsPerSecond":  594.433
+                                       },
+                           "summaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-234026-windows-a028/run-report/summary.json",
+                           "subjectSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-234026-windows-a028/declared/benchmark/allocation-bench/summary.json",
+                           "perfSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-234026-windows-a028/matrices/windows-native-perf/declared/benchmark/pipeline-report/report/perf-summary.json",
+                           "baselineComparePath":  "artifacts/subjects/SolutionCorePack/runs/20260418-234026-windows-a028/matrices/windows-native-perf/declared/benchmark/pipeline-report/report/perf-baseline-compare.json",
+                           "samplesPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-234026-windows-a028/matrices/windows-native-perf/declared/benchmark/pipeline-report/report/perf-metrics.json"
+                       },
+                       {
+                           "alias":  "dispatch-bench",
+                           "id":  "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DispatchBenchmarkEntry::RunWorkload()",
+                           "canonicalCommand":  "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DispatchBenchmarkEntry::RunWorkload()",
+                           "runId":  "20260418-232819-windows-9eb0",
+                           "status":  "ok",
+                           "regressionStatus":  "no-baseline",
+                           "metrics":  {
+                                           "sampleCount":  3,
+                                           "meanDurationMs":  1.105,
+                                           "meanOpsPerSecond":  3619.92
+                                       },
+                           "summaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-232819-windows-9eb0/run-report/summary.json",
+                           "subjectSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-232819-windows-9eb0/declared/benchmark/dispatch-bench/summary.json",
+                           "perfSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-232819-windows-9eb0/matrices/windows-managed-perf/declared/benchmark/validations/perf/summary.json",
+                           "baselineComparePath":  "artifacts/subjects/SolutionCorePack/runs/20260418-232819-windows-9eb0/matrices/windows-managed-perf/declared/benchmark/validations/perf/baseline-compare.json",
+                           "samplesPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-232819-windows-9eb0/matrices/windows-managed-perf/declared/benchmark/validations/perf/samples.json"
+                       },
+                       {
+                           "alias":  "function-pointer-bench",
+                           "id":  "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry::RunWorkload()",
+                           "canonicalCommand":  "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry::RunWorkload()",
+                           "runId":  "20260418-235121-windows-1ebe",
+                           "status":  "ok",
+                           "regressionStatus":  "ok",
+                           "metrics":  {
+                                           "sampleCount":  1,
+                                           "meanDurationMs":  0.001,
+                                           "meanOpsPerSecond":  3076923.077
+                                       },
+                           "summaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235121-windows-1ebe/run-report/summary.json",
+                           "subjectSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235121-windows-1ebe/declared/benchmark/function-pointer-bench/summary.json",
+                           "perfSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235121-windows-1ebe/matrices/windows-native-perf/declared/benchmark/pipeline-report/report/perf-summary.json",
+                           "baselineComparePath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235121-windows-1ebe/matrices/windows-native-perf/declared/benchmark/pipeline-report/report/perf-baseline-compare.json",
+                           "samplesPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235121-windows-1ebe/matrices/windows-native-perf/declared/benchmark/pipeline-report/report/perf-metrics.json"
+                       },
+                       {
+                           "alias":  "generic-interface-dispatch-bench",
+                           "id":  "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry::RunWorkload()",
+                           "canonicalCommand":  "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry::RunWorkload()",
+                           "runId":  "20260418-232904-windows-f366",
+                           "status":  "ok",
+                           "regressionStatus":  "no-baseline",
+                           "metrics":  {
+                                           "sampleCount":  3,
+                                           "meanDurationMs":  1.085,
+                                           "meanOpsPerSecond":  3693.471
+                                       },
+                           "summaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-232904-windows-f366/run-report/summary.json",
+                           "subjectSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-232904-windows-f366/declared/benchmark/generic-interface-dispatch-bench/summary.json",
+                           "perfSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-232904-windows-f366/matrices/windows-managed-perf/declared/benchmark/validations/perf/summary.json",
+                           "baselineComparePath":  "artifacts/subjects/SolutionCorePack/runs/20260418-232904-windows-f366/matrices/windows-managed-perf/declared/benchmark/validations/perf/baseline-compare.json",
+                           "samplesPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-232904-windows-f366/matrices/windows-managed-perf/declared/benchmark/validations/perf/samples.json"
+                       },
+                       {
+                           "alias":  "member-metadata-lookup-bench",
+                           "id":  "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry::RunWorkload()",
+                           "canonicalCommand":  "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry::RunWorkload()",
+                           "runId":  "20260418-235221-windows-1f9f",
+                           "status":  "ok",
+                           "regressionStatus":  "ok",
+                           "metrics":  {
+                                           "sampleCount":  1,
+                                           "meanDurationMs":  0.072,
+                                           "meanOpsPerSecond":  55710.306
+                                       },
+                           "summaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235221-windows-1f9f/run-report/summary.json",
+                           "subjectSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235221-windows-1f9f/declared/benchmark/member-metadata-lookup-bench/summary.json",
+                           "perfSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235221-windows-1f9f/matrices/windows-native-perf/declared/benchmark/pipeline-report/report/perf-summary.json",
+                           "baselineComparePath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235221-windows-1f9f/matrices/windows-native-perf/declared/benchmark/pipeline-report/report/perf-baseline-compare.json",
+                           "samplesPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235221-windows-1f9f/matrices/windows-native-perf/declared/benchmark/pipeline-report/report/perf-metrics.json"
+                       },
+                       {
+                           "alias":  "required-instantiation-closure-bench",
+                           "id":  "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry::RunWorkload()",
+                           "canonicalCommand":  "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry::RunWorkload()",
+                           "runId":  "20260418-142209-windows-2118",
+                           "status":  "ok",
+                           "regressionStatus":  "no-baseline",
+                           "metrics":  {
+                                           "sampleCount":  3,
+                                           "meanDurationMs":  0.419,
+                                           "meanOpsPerSecond":  9565.572
+                                       },
+                           "summaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-142209-windows-2118/run-report/summary.json",
+                           "subjectSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-142209-windows-2118/declared/benchmark/required-instantiation-closure-bench/summary.json",
+                           "perfSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-142209-windows-2118/matrices/windows-managed-perf/declared/benchmark/validations/perf/summary.json",
+                           "baselineComparePath":  "artifacts/subjects/SolutionCorePack/runs/20260418-142209-windows-2118/matrices/windows-managed-perf/declared/benchmark/validations/perf/baseline-compare.json",
+                           "samplesPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-142209-windows-2118/matrices/windows-managed-perf/declared/benchmark/validations/perf/samples.json"
+                       },
+                       {
+                           "alias":  "span-memory-bench",
+                           "id":  "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.SpanAndMemoryBenchmarkEntry::RunWorkload()",
+                           "canonicalCommand":  "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.SpanAndMemoryBenchmarkEntry::RunWorkload()",
+                           "runId":  "20260418-142132-windows-8aab",
+                           "status":  "ok",
+                           "regressionStatus":  "no-baseline",
+                           "metrics":  {
+                                           "sampleCount":  3,
+                                           "meanDurationMs":  0.762,
+                                           "meanOpsPerSecond":  5686.031
+                                       },
+                           "summaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-142132-windows-8aab/run-report/summary.json",
+                           "subjectSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-142132-windows-8aab/declared/benchmark/span-memory-bench/summary.json",
+                           "perfSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-142132-windows-8aab/matrices/windows-managed-perf/declared/benchmark/validations/perf/summary.json",
+                           "baselineComparePath":  "artifacts/subjects/SolutionCorePack/runs/20260418-142132-windows-8aab/matrices/windows-managed-perf/declared/benchmark/validations/perf/baseline-compare.json",
+                           "samplesPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-142132-windows-8aab/matrices/windows-managed-perf/declared/benchmark/validations/perf/samples.json"
+                       },
+                       {
+                           "alias":  "string-utf8-marshaling-bench",
+                           "id":  "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.StringAndUtf8MarshalingBenchmarkEntry::RunWorkload()",
+                           "canonicalCommand":  "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.StringAndUtf8MarshalingBenchmarkEntry::RunWorkload()",
+                           "runId":  "20260418-235311-windows-67fb",
+                           "status":  "ok",
+                           "regressionStatus":  "ok",
+                           "metrics":  {
+                                           "sampleCount":  1,
+                                           "meanDurationMs":  0.069,
+                                           "meanOpsPerSecond":  57887.12
+                                       },
+                           "summaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235311-windows-67fb/run-report/summary.json",
+                           "subjectSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235311-windows-67fb/declared/benchmark/string-utf8-marshaling-bench/summary.json",
+                           "perfSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235311-windows-67fb/matrices/windows-native-perf/declared/benchmark/pipeline-report/report/perf-summary.json",
+                           "baselineComparePath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235311-windows-67fb/matrices/windows-native-perf/declared/benchmark/pipeline-report/report/perf-baseline-compare.json",
+                           "samplesPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-235311-windows-67fb/matrices/windows-native-perf/declared/benchmark/pipeline-report/report/perf-metrics.json"
+                       },
+                       {
+                           "alias":  "task-valuetask-flow-bench",
+                           "id":  "declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()",
+                           "canonicalCommand":  "run test declared-benchmark --id declared-benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()",
+                           "runId":  "20260418-224041-windows-ad67",
+                           "status":  "ok",
+                           "regressionStatus":  "no-baseline",
+                           "metrics":  {
+                                           "sampleCount":  3,
+                                           "meanDurationMs":  3.429,
+                                           "meanOpsPerSecond":  1171.913
+                                       },
+                           "summaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-224041-windows-ad67/run-report/summary.json",
+                           "subjectSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-224041-windows-ad67/declared/benchmark/task-valuetask-flow-bench/summary.json",
+                           "perfSummaryPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-224041-windows-ad67/matrices/windows-managed-perf/declared/benchmark/validations/perf/summary.json",
+                           "baselineComparePath":  "artifacts/subjects/SolutionCorePack/runs/20260418-224041-windows-ad67/matrices/windows-managed-perf/declared/benchmark/validations/perf/baseline-compare.json",
+                           "samplesPath":  "artifacts/subjects/SolutionCorePack/runs/20260418-224041-windows-ad67/matrices/windows-managed-perf/declared/benchmark/validations/perf/samples.json"
+                       }
+                   ],
+    "throughputSignals":  {
+                              "nativeProofPassRate":  1,
+                              "benchmarkPassRate":  1,
+                              "meanOpsPerSecond":  357205.76,
+                              "minOpsPerSecond":  594.433,
+                              "maxOpsPerSecond":  3076923.077,
+                              "regressionStatusCounts":  [
+                                                             {
+                                                                 "status":  "no-baseline",
+                                                                 "count":  5
+                                                             },
+                                                             {
+                                                                 "status":  "ok",
+                                                                 "count":  4
+                                                             }
+                                                         ],
+                              "dotnetCrashObserved":  false
+                          },
+    "decision":  {
+                     "status":  "ok",
+                     "archiveRecommended":  false,
+                     "note":  "remaining-ready batch benchmarks completed; declared managed-only throughput evidence is preserved, and native perf evidence now covers allocation/function-pointer/member-metadata/string-utf8 paths"
+                 }
+}

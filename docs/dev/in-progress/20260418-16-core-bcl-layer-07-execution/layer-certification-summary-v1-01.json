@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "taskId": "20260418-16-core-bcl-layer-07-execution",
+  "generatedAt": "2026-04-19T09:57:37.0727816+08:00",
+  "sourceScopePath": "docs/dev/in-progress/20260418-16-core-bcl-layer-07-execution/core-bcl-layer-07-scope-v1-01.json",
+  "proofSummaryPath": "docs/dev/in-progress/20260418-16-core-bcl-layer-07-execution/native-proof-summary-v1-01.json",
+  "benchmarkSummaryPath": "docs/dev/in-progress/20260418-16-core-bcl-layer-07-execution/nativeization-throughput-benchmark-v1-01.json",
+  "reportDirectory": "docs/dev/in-progress/20260418-16-core-bcl-layer-07-execution/assembly-certification-report",
+  "layerStatus": {
+    "finalStatus": "ok",
+    "total": 5,
+    "ok": 5,
+    "blocked": 0,
+    "failed": 0
+  },
+  "certificationReports": [
+    {
+      "assemblyName": "System.Net.Http.Json",
+      "finalStatus": "ok",
+      "reportState": "ok",
+      "reportPath": "docs/dev/in-progress/20260418-16-core-bcl-layer-07-execution/assembly-certification-report/System.Net.Http.Json.json"
+    },
+    {
+      "assemblyName": "System.Net.Mail",
+      "finalStatus": "ok",
+      "reportState": "ok",
+      "reportPath": "docs/dev/in-progress/20260418-16-core-bcl-layer-07-execution/assembly-certification-report/System.Net.Mail.json"
+    },
+    {
+      "assemblyName": "System.Net.Requests",
+      "finalStatus": "ok",
+      "reportState": "ok",
+      "reportPath": "docs/dev/in-progress/20260418-16-core-bcl-layer-07-execution/assembly-certification-report/System.Net.Requests.json"
+    },
+    {
+      "assemblyName": "System.Net.WebClient",
+      "finalStatus": "ok",
+      "reportState": "ok",
+      "reportPath": "docs/dev/in-progress/20260418-16-core-bcl-layer-07-execution/assembly-certification-report/System.Net.WebClient.json"
+    },
+    {
+      "assemblyName": "System.Net.WebSockets.Client",
+      "finalStatus": "ok",
+      "reportState": "ok",
+      "reportPath": "docs/dev/in-progress/20260418-16-core-bcl-layer-07-execution/assembly-certification-report/System.Net.WebSockets.Client.json"
+    }
+  ]
+}

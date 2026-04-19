@@ -1,0 +1,35 @@
+﻿{
+    "schemaVersion":  1,
+    "taskId":  "20260418-15-core-bcl-layer-06-execution",
+    "generatedAt":  "2026-04-19T09:51:03+08:00",
+    "ownerSubjectId":  "SolutionCorePack",
+    "layerName":  "core-bcl-layer-06",
+    "selectedAssemblies":  [
+                               "System.Diagnostics.TextWriterTraceListener",
+                               "System.Net.Http",
+                               "System.Net.HttpListener",
+                               "System.Net.Quic",
+                               "System.Net.Requests",
+                               "System.Net.ServicePoint"
+                           ],
+    "requiredGates":  [
+                          "collector",
+                          "registry",
+                          "workspace",
+                          "dependency-layer-proof",
+                          "benchmark"
+                      ],
+    "formalProofAliases":  [
+                               "abi-widening-proof",
+                               "aot-closure-validation-proof",
+                               "direct-callvirt-proof",
+                               "required-instantiation-closure-proof",
+                               "span-memory-proof",
+                               "task-valuetask-flow-proof"
+                           ],
+    "formalBenchmarkAliases":  [
+                                   "allocation-bench",
+                                   "required-instantiation-closure-bench",
+                                   "task-valuetask-flow-bench"
+                               ]
+}

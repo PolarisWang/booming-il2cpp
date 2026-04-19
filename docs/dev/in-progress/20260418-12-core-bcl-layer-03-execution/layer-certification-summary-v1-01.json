@@ -1,0 +1,84 @@
+﻿{
+    "schemaVersion":  1,
+    "taskId":  "20260418-12-core-bcl-layer-03-execution",
+    "generatedAt":  "2026-04-19T09:46:15+08:00",
+    "sourceScopePath":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/core-bcl-layer-03-scope-v1-01.json",
+    "proofSummaryPath":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/native-proof-summary-v1-01.json",
+    "benchmarkSummaryPath":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/nativeization-throughput-benchmark-v1-01.json",
+    "reportDirectory":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/assembly-certification-report",
+    "layerStatus":  {
+                        "finalStatus":  "ok",
+                        "total":  11,
+                        "ok":  11,
+                        "blocked":  0,
+                        "failed":  0
+                    },
+    "certificationReports":  [
+                                 {
+                                     "assemblyName":  "System.ComponentModel.Primitives",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/assembly-certification-report/System.ComponentModel.Primitives.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.IO.MemoryMappedFiles",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/assembly-certification-report/System.IO.MemoryMappedFiles.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Linq.AsyncEnumerable",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/assembly-certification-report/System.Linq.AsyncEnumerable.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Linq.Expressions",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/assembly-certification-report/System.Linq.Expressions.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Linq.Parallel",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/assembly-certification-report/System.Linq.Parallel.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Net.Primitives",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/assembly-certification-report/System.Net.Primitives.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Reflection.Emit",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/assembly-certification-report/System.Reflection.Emit.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Reflection.Metadata",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/assembly-certification-report/System.Reflection.Metadata.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Security.AccessControl",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/assembly-certification-report/System.Security.AccessControl.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Text.Json",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/assembly-certification-report/System.Text.Json.json"
+                                 },
+                                 {
+                                     "assemblyName":  "System.Transactions.Local",
+                                     "finalStatus":  "ok",
+                                     "reportState":  "ok",
+                                     "reportPath":  "docs/dev/in-progress/20260418-12-core-bcl-layer-03-execution/assembly-certification-report/System.Transactions.Local.json"
+                                 }
+                             ]
+}
