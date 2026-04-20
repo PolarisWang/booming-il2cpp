@@ -118,6 +118,8 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringProducerForwarderCtorInstanceCallForwarderConsoleWriteLineStub.cpp.scriban";
     public const string RuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineStub.cpp.scriban";
     public const string RuntimeSkeletonStaticLiteralStringReturnStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticLiteralStringReturnStub.cpp.scriban";
     public const string RuntimeSkeletonStaticStringProducerConsoleWriteLineStubTemplateRelativePath =
@@ -285,6 +287,11 @@ internal static class NativeReferenceProofCatalog
     public static Template GetRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineStubTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineStubTemplateRelativePath);
     }
 
     public static Template GetRuntimeSkeletonStaticLiteralStringReturnStubTemplate()
