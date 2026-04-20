@@ -1,0 +1,160 @@
+struct {{ stub_name }}_ProducerArgs
+{
+    void** return_value;
+};
+
+struct {{ stub_name }}_ManagedArgs
+{
+    void* instance;
+    void** return_value;
+};
+
+struct {{ stub_name }}_ForwarderArgs
+{
+    void* value;
+    void** return_value;
+};
+
+int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)managed_args;
+    if (bridge == nullptr || code_registration == nullptr || options == nullptr || runtime == nullptr || thread == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_READY;
+    }
+    const char* image_name = options->image_name_utf8 != nullptr
+        ? options->image_name_utf8 : {{ assembly_name_literal }};
+    ImageHandle image = reinterpret_cast<ImageHandle>(const_cast<char*>(image_name));
+    TypeInfoHandle reference_type = bridge->resolve_type_by_token(image, {{ reference_type_token }});
+    FieldInfoHandle captured_field = bridge->resolve_field_by_token(image, {{ captured_field_token }});
+    if (reference_type == nullptr || captured_field == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+    if (abi->class_init(runtime, reference_type) != CHAOS_RUNTIME_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    void* produced_value = nullptr;
+    {{ stub_name }}_ProducerArgs producer_args
+    {
+        &produced_value
+    };
+    const int32_t producer_status = {{ producer_stub_name }}(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        &producer_args);
+    if (producer_status != CHAOS_BRIDGE_STATUS_OK || produced_value == nullptr) {
+        return producer_status != CHAOS_BRIDGE_STATUS_OK
+            ? producer_status
+            : CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    void* constructed_instance = abi->object_new(runtime, thread, reference_type);
+    if (constructed_instance == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    if (abi->field_set_value(
+            runtime,
+            thread,
+            captured_field,
+            constructed_instance,
+            &produced_value,
+            sizeof(produced_value)) != CHAOS_RUNTIME_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    void* instance_message = nullptr;
+    {{ stub_name }}_ManagedArgs instance_call_args
+    {
+        constructed_instance,
+        &instance_message
+    };
+    const int32_t instance_call_status = {{ instance_call_stub_name }}(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        &instance_call_args);
+    if (instance_call_status != CHAOS_BRIDGE_STATUS_OK || instance_message == nullptr) {
+        return instance_call_status != CHAOS_BRIDGE_STATUS_OK
+            ? instance_call_status
+            : CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    void* initial_forwarded_message = nullptr;
+    {{ stub_name }}_ForwarderArgs initial_forwarder_args
+    {
+        instance_message,
+        &initial_forwarded_message
+    };
+    const int32_t initial_forwarder_status = {{ initial_forwarder_stub_name }}(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        &initial_forwarder_args);
+    if (initial_forwarder_status != CHAOS_BRIDGE_STATUS_OK || initial_forwarded_message == nullptr) {
+        return initial_forwarder_status != CHAOS_BRIDGE_STATUS_OK
+            ? initial_forwarder_status
+            : CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    void* middle_forwarded_message = nullptr;
+    {{ stub_name }}_ForwarderArgs middle_forwarder_args
+    {
+        initial_forwarded_message,
+        &middle_forwarded_message
+    };
+    const int32_t middle_forwarder_status = {{ middle_forwarder_stub_name }}(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        &middle_forwarder_args);
+    if (middle_forwarder_status != CHAOS_BRIDGE_STATUS_OK || middle_forwarded_message == nullptr) {
+        return middle_forwarder_status != CHAOS_BRIDGE_STATUS_OK
+            ? middle_forwarder_status
+            : CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    void* forwarded_message = nullptr;
+    {{ stub_name }}_ForwarderArgs terminal_forwarder_args
+    {
+        middle_forwarded_message,
+        &forwarded_message
+    };
+    const int32_t terminal_forwarder_status = {{ terminal_forwarder_stub_name }}(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        &terminal_forwarder_args);
+    if (terminal_forwarder_status != CHAOS_BRIDGE_STATUS_OK || forwarded_message == nullptr) {
+        return terminal_forwarder_status != CHAOS_BRIDGE_STATUS_OK
+            ? terminal_forwarder_status
+            : CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    void* raw_write_line_string = bridge->resolve_icall({{ console_write_line_string_icall_literal }});
+    if (raw_write_line_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+    const auto write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
+    return write_line_string(runtime, thread, forwarded_message);
+}

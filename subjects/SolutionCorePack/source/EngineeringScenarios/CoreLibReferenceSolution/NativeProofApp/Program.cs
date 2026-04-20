@@ -186,4 +186,16 @@ internal static class Program
         Console.WriteLine(EchoValue(EchoValue(new EchoHolder(EchoValue(BuildLiteralMessage())).GetValue())));
         return 0;
     }
+
+    private static int ComposeProducedForwardedForwardedForwardedRender()
+    {
+        Console.WriteLine(EchoValue(EchoValue(EchoValue(new Holder(BuildLiteralMessage()).Render()))));
+        return 0;
+    }
+
+    private static int ComposeProducedForwardedForwardedForwardedEcho()
+    {
+        Console.WriteLine(EchoValue(EchoValue(EchoValue(new EchoHolder(BuildLiteralMessage()).GetValue()))));
+        return 0;
+    }
 }

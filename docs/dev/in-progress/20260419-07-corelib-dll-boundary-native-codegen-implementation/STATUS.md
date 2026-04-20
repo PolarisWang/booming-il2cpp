@@ -36,7 +36,8 @@ updated_at: 2026-04-20 14:01:53 +08:00
 updated_at: 2026-04-20 14:11:37 +08:00
 updated_at: 2026-04-20 14:20:40 +08:00
 updated_at: 2026-04-20 14:34:00 +08:00
-latest_stop_point: after widening the canonical CoreLib packet to `translationUnitMethodCount = 27` with the symmetric double-forwarder family, this slice added the combined-side triple-hop helper family to the actual `GoldenCoreLibReference.NativeProofApp` proof packet: `static string producer -> forwarder -> ctor -> instance-call(string) -> forwarder -> forwarder -> Console.WriteLine`. The new generic lowering was proven with an unused render path (`ComposeForwardedProducedForwardedForwardedRender`) and then with an unused getter path (`ComposeForwardedProducedForwardedForwardedEcho`). Real combined proof run `20260420-143306-windows-72fc` passed, the observable proof output remained unchanged, the canonical audit widened to `translationUnitMethodCount = 29`, `runtimeSkeletonReservedStubCount` stayed `0`, and `fullCoreLibTranslated` remains `false`
+updated_at: 2026-04-20 14:43:30 +08:00
+latest_stop_point: after widening the canonical CoreLib packet to `translationUnitMethodCount = 29` with the combined-side triple-hop family, this slice added the symmetric triple-terminal-forwarder helper family to the actual `GoldenCoreLibReference.NativeProofApp` proof packet: `static string producer -> ctor -> instance-call(string) -> forwarder -> forwarder -> forwarder -> Console.WriteLine`. The new generic lowering was proven with an unused render path (`ComposeProducedForwardedForwardedForwardedRender`) and then with an unused getter path (`ComposeProducedForwardedForwardedForwardedEcho`). Real combined proof run `20260420-144201-windows-a617` passed, the observable proof output remained unchanged, the canonical audit widened to `translationUnitMethodCount = 31`, `runtimeSkeletonReservedStubCount` stayed `0`, and `fullCoreLibTranslated` remains `false`
 current_dir: docs/dev/in-progress/20260419-07-corelib-dll-boundary-native-codegen-implementation
 parent_task_id: 20260419-01-foundation-dll-translation-audit-roadmap
 source_task_id: 20260419-03-system-private-corelib-full-verification
@@ -65,7 +66,7 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
 - Keep `windows-corelib-reference-native-hotupdate-proof` as the canonical combined proof anchor:
   - its matrix-level audit path and narrowness metrics are now stable again after widening the canonical proof packet itself
   - the current audited truth boundary is now:
-    - `translationUnitMethodCount = 29`
+    - `translationUnitMethodCount = 31`
     - `runtimeSkeletonReservedStubCount = 0`
     - `fullCoreLibTranslated = false`
 - Continue widening executable runtime-skeleton coverage inside the actual `GoldenCoreLibReference.NativeProofApp` proof packet before adding more detached lanes:
@@ -86,9 +87,10 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
     - static string producer -> forwarder -> ctor -> instance-call(string) -> forwarder -> `Console.WriteLine`
     - static string producer -> ctor -> instance-call(string) -> forwarder -> forwarder -> `Console.WriteLine`
     - static string producer -> forwarder -> ctor -> instance-call(string) -> forwarder -> forwarder -> `Console.WriteLine`
+    - static string producer -> ctor -> instance-call(string) -> forwarder -> forwarder -> forwarder -> `Console.WriteLine`
   - the strongest next candidate is now either:
-    - one more cheap terminal-forwarder extension, such as `static string producer -> ctor -> instance-call(string) -> forwarder -> forwarder -> forwarder -> Console.WriteLine`
-    - or, if that stops paying off cleanly, a reassessment point before switching to `async/await`
+    - the matching combined-side four-hop synchronous family, if we still want one more cheap string-pipeline extension
+    - or a deliberate pivot to `async/await`, because the marginal packet-widening yield per new helper is starting to fall
   - if the next synchronous family no longer lands cheaply, stop and reassess whether `async/await` is finally the better packet-widening target
 
 ## Current Progress
@@ -1689,3 +1691,38 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
       - `forwarded_message`
       - `field_set_value`
       - `field_get_value`
+- Added one more assembly-agnostic runtime-skeleton helper for a producer/object/instance-call/forwarder/forwarder/forwarder/write-line chain:
+  - `src/managed/Chaos.IL2CPP.CodeGen/Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub.cpp.scriban`
+  - `NativeReferenceProofEmitter` now recognizes:
+    - `TryBuildAssemblyBoundStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub(...)`
+  - `NativeReferenceProofCatalog` now exposes:
+    - `GetRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStubTemplate()`
+- Widened the canonical packet with the symmetric triple-terminal-forwarder render variant:
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/NativeProofApp/Program.cs`
+    - added `ComposeProducedForwardedForwardedForwardedRender():System.Int32`
+  - this family is intentionally not called from `Main`, so the observable proof output is unchanged while full-assembly-closure translation still has to lower:
+    - producer -> ctor -> render -> forwarder -> forwarder -> forwarder -> `Console.WriteLine`
+- Widened the canonical packet with the symmetric triple-terminal-forwarder getter companion:
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/NativeProofApp/Program.cs`
+    - added `ComposeProducedForwardedForwardedForwardedEcho():System.Int32`
+  - this family is intentionally not called from `Main`, so the observable proof output is unchanged while full-assembly-closure translation still has to lower:
+    - producer -> ctor -> getter -> forwarder -> forwarder -> forwarder -> `Console.WriteLine`
+  - together with the previous render variant, this confirms the new symmetric triple-terminal-forwarder helper covers both:
+    - field-backed render instance calls
+    - field getter instance calls
+- Re-ran the canonical packet after adding the symmetric triple-terminal-forwarder family:
+  - `python -m pytest tests/unit/compatibility/test_solution_core_pack_subject.py tests/unit/compatibility/test_full_assembly_closure_codegen_contracts.py -q`
+    - Result: `29 passed`
+  - `dotnet build src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj -c Release -m:1`
+    - Result: build succeeded, `121 warnings`, `0 errors`
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-corelib-reference-native-hotupdate-proof --json`
+    - run id = `20260420-144201-windows-a617`
+    - summary = `ok`
+    - canonical audit path remains:
+      - `matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/native-hotupdate-audit.json`
+    - audit now reports:
+      - `nativeGeneration.translationUnitMethodCount = 31`
+      - `nativeGeneration.runtimeSkeletonReservedStubCount = 0`
+      - `truthBoundary.fullCoreLibTranslated = false`
+    - runtime stdout:
+      - `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`

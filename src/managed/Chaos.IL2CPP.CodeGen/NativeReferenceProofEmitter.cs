@@ -566,6 +566,18 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             return staticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineStub;
         }
 
+        if (TryBuildAssemblyBoundStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodsBySubjectId,
+                methodStubNamesBySubjectId,
+                stubName,
+                out var staticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub))
+        {
+            return staticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub;
+        }
+
         if (TryBuildAssemblyBoundStaticLiteralStringReturnStub(
                 subjectId,
                 methodsBySubjectId,
@@ -2829,6 +2841,142 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
             NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        IReadOnlyDictionary<string, string> methodStubNamesBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Int32", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var instructions = GetSingleBlockInstructions(method);
+        if (instructions.Count != 9 ||
+            !string.Equals(instructions[0].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[1].Op, "newobj", StringComparison.Ordinal) ||
+            !string.Equals(instructions[2].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[3].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[4].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[5].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[6].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[7].Op, "ldc.i4", StringComparison.Ordinal) ||
+            !string.Equals(instructions[8].Op, "ret", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var producerSubjectId = GetRequiredInstructionCallee(instructions[0], method.SubjectId, 0);
+        var constructorSubjectId = GetRequiredInstructionCallee(instructions[1], method.SubjectId, 1);
+        var instanceCallSubjectId = GetRequiredInstructionCallee(instructions[2], method.SubjectId, 2);
+        var initialForwarderSubjectId = GetRequiredInstructionCallee(instructions[3], method.SubjectId, 3);
+        var middleForwarderSubjectId = GetRequiredInstructionCallee(instructions[4], method.SubjectId, 4);
+        var terminalForwarderSubjectId = GetRequiredInstructionCallee(instructions[5], method.SubjectId, 5);
+        if (string.Equals(producerSubjectId, subjectId, StringComparison.Ordinal) ||
+            !methodStubNamesBySubjectId.TryGetValue(producerSubjectId, out var producerStubName) ||
+            !methodStubNamesBySubjectId.TryGetValue(instanceCallSubjectId, out var instanceCallStubName) ||
+            !methodStubNamesBySubjectId.TryGetValue(initialForwarderSubjectId, out var initialForwarderStubName) ||
+            !methodStubNamesBySubjectId.TryGetValue(middleForwarderSubjectId, out var middleForwarderStubName) ||
+            !methodStubNamesBySubjectId.TryGetValue(terminalForwarderSubjectId, out var terminalForwarderStubName) ||
+            !methodsBySubjectId.TryGetValue(producerSubjectId, out var producerMethod) ||
+            !methodsBySubjectId.TryGetValue(constructorSubjectId, out var constructorMethod) ||
+            !methodsBySubjectId.TryGetValue(instanceCallSubjectId, out var instanceCallMethod) ||
+            !methodsBySubjectId.TryGetValue(initialForwarderSubjectId, out var initialForwarderMethod) ||
+            !methodsBySubjectId.TryGetValue(middleForwarderSubjectId, out var middleForwarderMethod) ||
+            !methodsBySubjectId.TryGetValue(terminalForwarderSubjectId, out var terminalForwarderMethod) ||
+            !string.Equals(GetMethodReturnType(producerSubjectId), "System.String", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(instanceCallSubjectId), "System.String", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(initialForwarderSubjectId), "System.String", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(middleForwarderSubjectId), "System.String", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(terminalForwarderSubjectId), "System.String", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> constructorInstructions;
+        IReadOnlyList<TypedIlInstructionArtifact> instanceCallInstructions;
+        IReadOnlyList<TypedIlInstructionArtifact> initialForwarderInstructions;
+        IReadOnlyList<TypedIlInstructionArtifact> middleForwarderInstructions;
+        IReadOnlyList<TypedIlInstructionArtifact> terminalForwarderInstructions;
+        try
+        {
+            _ = GetSingleBlockInstructions(producerMethod);
+            constructorInstructions = GetSingleBlockInstructions(constructorMethod);
+            instanceCallInstructions = GetSingleBlockInstructions(instanceCallMethod);
+            initialForwarderInstructions = GetSingleBlockInstructions(initialForwarderMethod);
+            middleForwarderInstructions = GetSingleBlockInstructions(middleForwarderMethod);
+            terminalForwarderInstructions = GetSingleBlockInstructions(terminalForwarderMethod);
+            ValidateConstructorShape(constructorMethod, constructorInstructions);
+            ValidateSingleArgumentForwarderShape(initialForwarderMethod, initialForwarderInstructions);
+            ValidateSingleArgumentForwarderShape(middleForwarderMethod, middleForwarderInstructions);
+            ValidateSingleArgumentForwarderShape(terminalForwarderMethod, terminalForwarderInstructions);
+        }
+        catch
+        {
+            return false;
+        }
+
+        string loadedFieldSubjectId;
+        try
+        {
+            loadedFieldSubjectId = GetCapturedFieldSubjectIdForSupportedStringInstanceMethod(instanceCallMethod, instanceCallInstructions);
+        }
+        catch
+        {
+            return false;
+        }
+
+        var constructorTypeSubjectId = GetDeclaringTypeSubjectId(constructorSubjectId);
+        var instanceCallTypeSubjectId = GetDeclaringTypeSubjectId(instanceCallSubjectId);
+        if (!string.Equals(constructorTypeSubjectId, instanceCallTypeSubjectId, StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var storedFieldSubjectId = GetRequiredOperandString(constructorInstructions[4]);
+        if (!string.Equals(storedFieldSubjectId, loadedFieldSubjectId, StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var writeLineTarget = GetRequiredInstructionCallee(instructions[6], method.SubjectId, 6);
+        if (!IsConsoleWriteLineStringTarget(writeLineTarget) ||
+            GetRequiredOperandInt(instructions[7]) != 0)
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(assemblyName),
+            ["producer_stub_name"] = producerStubName,
+            ["instance_call_stub_name"] = instanceCallStubName,
+            ["initial_forwarder_stub_name"] = initialForwarderStubName,
+            ["middle_forwarder_stub_name"] = middleForwarderStubName,
+            ["terminal_forwarder_stub_name"] = terminalForwarderStubName,
+            ["reference_type_token"] = CreateTypeTokenLiteral(metadataRegistration, constructorTypeSubjectId),
+            ["captured_field_token"] = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "field", storedFieldSubjectId)),
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStubTemplate(),
             model);
         return true;
     }
