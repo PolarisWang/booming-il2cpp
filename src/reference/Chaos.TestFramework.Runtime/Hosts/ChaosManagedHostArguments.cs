@@ -8,6 +8,11 @@ namespace Chaos.TestFramework.Runtime;
 public static class ChaosManagedHostArguments
 {
     /// <summary>
+    /// Prefix for the host-kind argument.
+    /// </summary>
+    public const string HostKindPrefix = "--host-kind=";
+
+    /// <summary>
     /// Prefix for the collection-path argument.
     /// </summary>
     public const string CollectionPathPrefix = "--collection-path=";
@@ -16,6 +21,35 @@ public static class ChaosManagedHostArguments
     /// Prefix for the entry-index argument.
     /// </summary>
     public const string EntryIndexPrefix = "--entry-index=";
+
+    /// <summary>
+    /// Parses the host kind for the shared managed runtime host.
+    /// </summary>
+    public static ChaosManagedHostKind ParseHostKind(string[]? args)
+    {
+        foreach (var argument in args ?? Array.Empty<string>())
+        {
+            if (!argument.StartsWith(HostKindPrefix, StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            var value = argument[HostKindPrefix.Length..];
+            if (string.Equals(value, "proof", StringComparison.OrdinalIgnoreCase))
+            {
+                return ChaosManagedHostKind.Proof;
+            }
+
+            if (string.Equals(value, "benchmark", StringComparison.OrdinalIgnoreCase))
+            {
+                return ChaosManagedHostKind.Benchmark;
+            }
+
+            throw new ArgumentException($"invalid managed host kind: {value}", nameof(args));
+        }
+
+        throw new ArgumentException("managed host requires --host-kind.", nameof(args));
+    }
 
     /// <summary>
     /// Parses managed host arguments.

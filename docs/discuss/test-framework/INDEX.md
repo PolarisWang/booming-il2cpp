@@ -13,3 +13,5 @@
   - 第一版 design 草案。
 - `20260406-03-test-framework-reboot-design-v1-02.md`
   - 更完整的正式设计讨论稿。
+- `20260420-01-managed-host-no-per-subject-projects.md`
+  - 决策：managed proof / benchmark 已切到共享 `Chaos.TestFramework.Runtime` 宿主，subject 目录下禁止新增 `DeclaredProofHost`、`DeclaredBenchmarkHost`；现存 `Program.cs` / `ProofEntry` 仅允许保留为 native 过渡契约，不再参与 managed 执行。

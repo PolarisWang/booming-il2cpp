@@ -290,6 +290,11 @@ def _clear_dir(path: Path) -> None:
         shutil.rmtree(path, ignore_errors=True)
 
 
+def _remove_file_if_exists(path: Path) -> None:
+    if path.is_file():
+        path.unlink()
+
+
 def _run_checked(
     arguments: list[str],
     *,
@@ -635,14 +640,20 @@ def _write_solution_file(
         "MinimumVisualStudioVersion = 10.0.40219.1",
     ]
 
-    project_records = [
-        (relative_project_path, CSHARP_PROJECT_TYPE_GUID)
-        for relative_project_path in managed_project_paths
-    ]
-    project_records.extend(
-        (relative_project_path, VCX_PROJECT_TYPE_GUID)
-        for relative_project_path in list(native_project_paths or [])
-    )
+    project_records: list[tuple[str, str]] = []
+    seen_project_paths: set[tuple[str, str]] = set()
+    for relative_project_path in managed_project_paths:
+        record = (relative_project_path, CSHARP_PROJECT_TYPE_GUID)
+        if record in seen_project_paths:
+            continue
+        seen_project_paths.add(record)
+        project_records.append(record)
+    for relative_project_path in list(native_project_paths or []):
+        record = (relative_project_path, VCX_PROJECT_TYPE_GUID)
+        if record in seen_project_paths:
+            continue
+        seen_project_paths.add(record)
+        project_records.append(record)
     project_names = _solution_project_names(
         [relative_project_path for relative_project_path, _ in project_records]
     )
@@ -1705,12 +1716,12 @@ def _subject_solution_native_project_paths(
     ]
 
 
-def _declared_host_project_suffix(host_kind: str, *, native_filtered: bool = False) -> str:
-    if host_kind == "proof-host":
-        return "DeclaredProofHost"
-    if host_kind == "benchmark-host":
-        return "DeclaredBenchmarkNativeHost" if native_filtered else "DeclaredBenchmarkHost"
-    raise ValueError(f"unsupported declared host kind: {host_kind}")
+def _native_benchmark_host_project_suffix(*, host_kind: str, native_filtered: bool) -> str:
+    if host_kind != "benchmark-host" or not native_filtered:
+        raise ValueError(
+            "managed workspace generation only supports the transitional native benchmark host suffix"
+        )
+    return "DeclaredBenchmarkNativeHost"
 
 
 def _declared_benchmark_supports_mode(entry: dict[str, Any], mode: str) -> bool:
@@ -1738,6 +1749,13 @@ def _subject_managed_test_projects(
     managed_tests_root = workspace_root / "managed-tests"
     generated_root = managed_tests_root / "Generated"
     generated_root.mkdir(parents=True, exist_ok=True)
+    for obsolete_path in (
+        managed_tests_root / f"{subject_id}.DeclaredProofHost.csproj",
+        managed_tests_root / f"{subject_id}.DeclaredBenchmarkHost.csproj",
+        generated_root / "ChaosGeneratedDeclaredTests.g.cs",
+        generated_root / "ChaosGeneratedDeclaredBenchmarks.g.cs",
+    ):
+        _remove_file_if_exists(obsolete_path)
     collection_path = generated_root / "declared-tests.collection.json"
     write_json(collection_path, declared_catalog)
 
@@ -1746,15 +1764,35 @@ def _subject_managed_test_projects(
     solution_project_paths: list[str] = []
     important_outputs: list[dict[str, str]] = []
     artifacts = [_path_text(repo_root, collection_path)]
+    shared_runtime_project_path = _path_text(
+        repo_root,
+        repo_root / "src" / "reference" / "Chaos.TestFramework.Runtime" / "Chaos.TestFramework.Runtime.csproj",
+    )
     native_benchmark_entries = [
         dict(entry)
         for entry in benchmark_entries
         if _declared_benchmark_supports_mode(entry, "native")
     ]
 
+    for project_id_suffix, host_kind, entries in (
+        ("proof-host", "proof-host", unit_entries),
+        ("benchmark-host", "benchmark-host", benchmark_entries),
+    ):
+        if not entries:
+            continue
+
+        records.append(
+            {
+                "projectId": f"managed-test/{subject_id}/{project_id_suffix}",
+                "projectPath": shared_runtime_project_path,
+                "assemblyName": "Chaos.TestFramework.Runtime",
+                "hostKind": host_kind,
+                "collectionPath": _path_text(repo_root, collection_path),
+                "executionModel": "shared-runtime-host",
+            }
+        )
+
     host_specs = [
-        ("proof-host", "proof-host", unit_entries, "ChaosGeneratedDeclaredTests.g.cs", False),
-        ("benchmark-host", "benchmark-host", benchmark_entries, "ChaosGeneratedDeclaredBenchmarks.g.cs", False),
         (
             "benchmark-host-native",
             "benchmark-host",
@@ -1767,7 +1805,10 @@ def _subject_managed_test_projects(
         if not entries:
             continue
 
-        host_suffix = _declared_host_project_suffix(host_kind, native_filtered=native_filtered)
+        host_suffix = _native_benchmark_host_project_suffix(
+            host_kind=host_kind,
+            native_filtered=native_filtered,
+        )
         assembly_name = f"{subject_id}.{host_suffix}"
         generated_source_path = generated_root / generated_source_name
         project_path = managed_tests_root / f"{assembly_name}.csproj"
@@ -1803,12 +1844,7 @@ def _subject_managed_test_projects(
         }
         records.append(record)
         solution_project_paths.append(record["projectPath"])
-        important_outputs.append(
-            {
-                "label": "Proof host project" if host_kind == "proof-host" else "Benchmark host project",
-                "path": record["projectPath"],
-            }
-        )
+        important_outputs.append({"label": "Benchmark host project", "path": record["projectPath"]})
         artifacts.extend(
             [
                 record["projectPath"],

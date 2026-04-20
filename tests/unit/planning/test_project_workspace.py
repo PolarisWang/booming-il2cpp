@@ -307,6 +307,24 @@ class ProjectWorkspaceTests(unittest.TestCase):
         repo_root.mkdir(parents=True, exist_ok=False)
         return repo_root
 
+    def _write_shared_runtime_fixture(self, repo_root: Path) -> None:
+        runtime_project = repo_root / "src" / "reference" / "Chaos.TestFramework.Runtime" / "Chaos.TestFramework.Runtime.csproj"
+        runtime_project.parent.mkdir(parents=True, exist_ok=True)
+        runtime_project.write_text(
+            "\n".join(
+                [
+                    '<Project Sdk="Microsoft.NET.Sdk">',
+                    "  <PropertyGroup>",
+                    "    <TargetFramework>net8.0</TargetFramework>",
+                    "    <OutputType>Exe</OutputType>",
+                    "  </PropertyGroup>",
+                    "</Project>",
+                    "",
+                ]
+            ),
+            encoding="utf-8",
+        )
+
     def _write_subject_fixture(
         self,
         repo_root: Path,
@@ -328,6 +346,7 @@ class ProjectWorkspaceTests(unittest.TestCase):
         subject_exec_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / "subject-exec"
         generated_root = subject_exec_root / "analysis" / "generated"
 
+        self._write_shared_runtime_fixture(repo_root)
         source_project.parent.mkdir(parents=True, exist_ok=True)
         source_project.write_text("<Project />\n", encoding="utf-8")
         unit_project.parent.mkdir(parents=True, exist_ok=True)
@@ -466,6 +485,7 @@ class ProjectWorkspaceTests(unittest.TestCase):
             / f"{subject_id}.Subject.PerfHarness.csproj"
         )
 
+        self._write_shared_runtime_fixture(repo_root)
         source_project.parent.mkdir(parents=True, exist_ok=True)
         source_project.write_text("<Project />\n", encoding="utf-8")
         perf_project.parent.mkdir(parents=True, exist_ok=True)
@@ -745,19 +765,19 @@ class ProjectWorkspaceTests(unittest.TestCase):
                 [
                     {
                         "projectId": "managed-test/FixtureSubject/proof-host",
-                        "projectPath": "solutions/subjects/FixtureSubject/managed-tests/FixtureSubject.DeclaredProofHost.csproj",
-                        "assemblyName": "FixtureSubject.DeclaredProofHost",
+                        "projectPath": "src/reference/Chaos.TestFramework.Runtime/Chaos.TestFramework.Runtime.csproj",
+                        "assemblyName": "Chaos.TestFramework.Runtime",
                         "hostKind": "proof-host",
-                    "collectionPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.collection.json",
-                        "generatedSourcePath": "solutions/subjects/FixtureSubject/managed-tests/Generated/ChaosGeneratedDeclaredTests.g.cs",
+                        "collectionPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.collection.json",
+                        "executionModel": "shared-runtime-host",
                     },
                     {
                         "projectId": "managed-test/FixtureSubject/benchmark-host",
-                        "projectPath": "solutions/subjects/FixtureSubject/managed-tests/FixtureSubject.DeclaredBenchmarkHost.csproj",
-                        "assemblyName": "FixtureSubject.DeclaredBenchmarkHost",
+                        "projectPath": "src/reference/Chaos.TestFramework.Runtime/Chaos.TestFramework.Runtime.csproj",
+                        "assemblyName": "Chaos.TestFramework.Runtime",
                         "hostKind": "benchmark-host",
-                    "collectionPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.collection.json",
-                        "generatedSourcePath": "solutions/subjects/FixtureSubject/managed-tests/Generated/ChaosGeneratedDeclaredBenchmarks.g.cs",
+                        "collectionPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.collection.json",
+                        "executionModel": "shared-runtime-host",
                     },
                 ],
                 manifest["managedTestProjects"],
@@ -824,24 +844,7 @@ class ProjectWorkspaceTests(unittest.TestCase):
             self.assertTrue((repo_root / manifest["nativeTestProjects"][0]["projectPath"]).is_file())
             self.assertTrue((repo_root / manifest["managedTestProjects"][0]["projectPath"]).is_file())
             self.assertTrue((repo_root / manifest["managedTestProjects"][1]["projectPath"]).is_file())
-            self.assertTrue((repo_root / manifest["managedTestProjects"][0]["generatedSourcePath"]).is_file())
-            self.assertTrue((repo_root / manifest["managedTestProjects"][1]["generatedSourcePath"]).is_file())
             self.assertTrue((repo_root / manifest["managedTestProjects"][0]["collectionPath"]).is_file())
-            proof_project_text = (repo_root / manifest["managedTestProjects"][0]["projectPath"]).read_text(encoding="utf-8")
-            benchmark_project_text = (repo_root / manifest["managedTestProjects"][1]["projectPath"]).read_text(encoding="utf-8")
-            self.assertIn("<EnableDefaultCompileItems>false</EnableDefaultCompileItems>", proof_project_text)
-            self.assertIn(
-                '<Compile Include="Generated/ChaosGeneratedDeclaredTests.g.cs" />',
-                proof_project_text,
-            )
-            self.assertIn(
-                '<Compile Include="Generated/ChaosGeneratedDeclaredBenchmarks.g.cs" />',
-                benchmark_project_text,
-            )
-            self.assertIn(
-                '<ProjectReference Include="../../../../subjects/FixtureSubject/source/FixtureSubject.csproj" />',
-                proof_project_text,
-            )
             mirrored_subject_exec_root = repo_root / "solutions" / "subjects" / "FixtureSubject" / "generated" / "subject-exec"
             self.assertTrue((mirrored_subject_exec_root / "analysis" / "generated" / "generated.manifest.json").is_file())
             self.assertTrue((mirrored_subject_exec_root / "analysis" / "generated" / "native-reference.plan.json").is_file())
@@ -850,8 +853,8 @@ class ProjectWorkspaceTests(unittest.TestCase):
             )
             solution_text = (repo_root / manifest["managedSolutionPath"]).read_text(encoding="utf-8")
             self.assertIn("FixtureSubject.csproj", solution_text)
-            self.assertIn("FixtureSubject.DeclaredProofHost.csproj", solution_text)
-            self.assertIn("FixtureSubject.DeclaredBenchmarkHost.csproj", solution_text)
+            self.assertNotIn("FixtureSubject.DeclaredProofHost.csproj", solution_text)
+            self.assertNotIn("FixtureSubject.DeclaredBenchmarkHost.csproj", solution_text)
             self.assertIn("native/windows-dev-output/generated/chaos_subject_generated_native.vcxproj", solution_text)
             self.assertIn("native/windows-dev-output/proof/chaos_subject_reference_proof.vcxproj", solution_text)
             self.assertEqual(
@@ -1061,10 +1064,10 @@ class ProjectWorkspaceTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
-    def test_generate_subject_workspace_overwrites_existing_managed_benchmark_host_with_latest_template(self) -> None:
+    def test_generate_subject_workspace_removes_obsolete_managed_benchmark_host_artifacts(self) -> None:
         workspace_module = load_module(
             PROJECT_WORKSPACE_MODULE_PATH,
-            "chaos_project_workspace_subject_generate_managed_benchmark_host_refresh",
+            "chaos_project_workspace_subject_generate_managed_benchmark_host_cleanup",
         )
         subject_id = "FixtureSubject"
         repo_root = self._make_repo_root("subject-generate-managed-benchmark-host-refresh")
@@ -1117,11 +1120,17 @@ class ProjectWorkspaceTests(unittest.TestCase):
                             {"id": f"subject/{subject_id}"},
                         )
 
-            refreshed_host_text = stale_host_path.read_text(encoding="utf-8")
-            self.assertIn("public static int Execute(int entryIndex)", refreshed_host_text)
-            self.assertIn("switch (entryIndex)", refreshed_host_text)
-            self.assertNotIn("DeclaredBenchmarkEntry", refreshed_host_text)
-            self.assertNotIn("Entries { get; }", refreshed_host_text)
+            self.assertFalse(stale_host_path.exists())
+            self.assertFalse(
+                (
+                    repo_root
+                    / "solutions"
+                    / "subjects"
+                    / subject_id
+                    / "managed-tests"
+                    / f"{subject_id}.DeclaredBenchmarkHost.csproj"
+                ).exists()
+            )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

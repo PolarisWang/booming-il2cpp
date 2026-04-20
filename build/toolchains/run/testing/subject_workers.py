@@ -62,8 +62,10 @@ ANDROID_RUNTIME_ARGUMENT_ENVIRONMENTS = {
 }
 CHAOS_ENTRY_KIND_ARGUMENT_PREFIX = "--chaos-entry-kind="
 CHAOS_ENTRY_SLICE_ARGUMENT_PREFIX = "--chaos-entry-slice="
+CHAOS_HOST_KIND_ARGUMENT_PREFIX = "--host-kind="
 CHAOS_COLLECTION_PATH_ARGUMENT_PREFIX = "--collection-path="
 CHAOS_ENTRY_INDEX_ARGUMENT_PREFIX = "--entry-index="
+SHARED_RUNTIME_HOST_EXECUTION_MODEL = "shared-runtime-host"
 VARIANT_MACROS = {
     "CHECK": {
         "codegen": ["CHAOS_VARIANT_CHECK", "CHAOS_VARIANT_NAME=CHECK"],
@@ -736,6 +738,7 @@ def _resolve_workspace_managed_host(
         "hostKind": host_kind,
         "projectPath": project_path,
         "collectionPath": collection_path,
+        "executionModel": str(managed_test_project.get("executionModel") or "").strip(),
     }
 
 
@@ -1552,7 +1555,10 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
     hotupdate_host = _resolve_workspace_hotupdate_test_host(repo_root, selection)
     hotupdate_patch_projects = _resolve_workspace_hotupdate_patch_projects(repo_root, selection)
     managed_host = _resolve_workspace_managed_host(repo_root, selection)
-    native_primary_project_path_text = subjects_module.resolve_source_primary_project_path(source)
+    source_primary_project_path_text = subjects_module.resolve_source_primary_project_path(source)
+    native_primary_project_path_text = source_primary_project_path_text
+    host_execution_model = str(managed_host.get("executionModel") or "").strip() if managed_host is not None else ""
+    use_shared_runtime_host = host_execution_model == SHARED_RUNTIME_HOST_EXECUTION_MODEL
     use_native_hotupdate_chain = bool(
         hotupdate_host is not None
         and bool(source.get("fullAssemblyClosure"))
@@ -1568,27 +1574,35 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
             else (
                 str(managed_host["projectPath"])
                 if managed_host is not None
-                else native_primary_project_path_text
+                else source_primary_project_path_text
             )
         )
     )
     primary_project_path = _resolve(repo_root, primary_project_path_text)
+    build_project_path_texts = [primary_project_path_text]
+    if use_shared_runtime_host:
+        build_project_path_texts = [source_primary_project_path_text, primary_project_path_text]
 
-    _run_checked(
-        [
-            "dotnet",
-            "build",
-            str(primary_project_path),
-            "-c",
-            "Release",
-            "-m:1",
-            "-o",
-            str(output_root),
-            *_dotnet_intermediate_args(str(request["selection"]["subjectId"]), host_platform),
-        ],
-        repo_root=repo_root,
-        failure_message=f"dotnet build failed: {source['path']}",
-    )
+    built_project_paths: set[str] = set()
+    for build_project_path_text in build_project_path_texts:
+        if not build_project_path_text or build_project_path_text in built_project_paths:
+            continue
+        built_project_paths.add(build_project_path_text)
+        _run_checked(
+            [
+                "dotnet",
+                "build",
+                str(_resolve(repo_root, build_project_path_text)),
+                "-c",
+                "Release",
+                "-m:1",
+                "-o",
+                str(output_root),
+                *_dotnet_intermediate_args(str(request["selection"]["subjectId"]), host_platform),
+            ],
+            repo_root=repo_root,
+            failure_message=f"dotnet build failed: {build_project_path_text}",
+        )
 
     if hotupdate_host is not None:
         supporting_project_paths = [
@@ -1662,6 +1676,9 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
     if selected_host is not None:
         manifest["hostKind"] = str(selected_host["hostKind"])
         manifest["collectionPath"] = str(selected_host["collectionPath"])
+        host_execution_model = str(selected_host.get("executionModel") or "").strip()
+        if host_execution_model:
+            manifest["hostExecutionModel"] = host_execution_model
     if hotupdate_host is not None:
         manifest["bindingManifestPath"] = str(hotupdate_host["bindingManifestPath"])
     if use_native_hotupdate_chain and hotupdate_host is not None:
@@ -3074,7 +3091,21 @@ def run_managed_runtime_output(*, repo_root: Path, request: dict[str, Any]) -> d
     collection_path = str(host_input_manifest.get("collectionPath") or "").strip()
     binding_manifest_path = str(host_input_manifest.get("bindingManifestPath") or "").strip()
     host_kind = str(host_input_manifest.get("hostKind") or "").strip()
-    if host_kind == "proof-host" and collection_path:
+    host_execution_model = str(host_input_manifest.get("hostExecutionModel") or "").strip()
+    if host_kind in {"proof-host", "benchmark-host"} and collection_path and host_execution_model == SHARED_RUNTIME_HOST_EXECUTION_MODEL:
+        runtime_arguments = _selection_runtime_arguments(selection)
+        entry_index = declared_entry_selection.get("entryIndex")
+        if isinstance(entry_index, bool) or not isinstance(entry_index, int) or entry_index < 0:
+            raise RuntimeError("managed host requires selection.entrySelection.entryIndex")
+        runtime_arguments.extend(
+            [
+                f"{CHAOS_HOST_KIND_ARGUMENT_PREFIX}{'proof' if host_kind == 'proof-host' else 'benchmark'}",
+                f"{CHAOS_COLLECTION_PATH_ARGUMENT_PREFIX}{collection_path}",
+                *([f"--binding-manifest-path={binding_manifest_path}"] if binding_manifest_path else []),
+                f"{CHAOS_ENTRY_INDEX_ARGUMENT_PREFIX}{int(entry_index)}",
+            ]
+        )
+    elif host_kind == "proof-host" and collection_path:
         runtime_arguments = _selection_runtime_arguments(selection)
         entry_index = declared_entry_selection.get("entryIndex")
         if isinstance(entry_index, bool) or not isinstance(entry_index, int) or entry_index < 0:
@@ -3267,6 +3298,8 @@ def _perf_harness_command(
     mode: str,
     declared_benchmark: dict[str, Any] | None = None,
     host_assembly_path: Path | None = None,
+    host_kind: str = "",
+    host_execution_model: str = "",
     collection_path: str = "",
     binding_manifest_path: str = "",
     entry_index: int | None = None,
@@ -3274,6 +3307,8 @@ def _perf_harness_command(
     arguments = ["dotnet", str(harness_dll_path), str(iterations)]
     if host_assembly_path is not None and collection_path and isinstance(entry_index, int) and entry_index >= 0:
         arguments.extend(["--host-assembly", str(host_assembly_path)])
+        if host_execution_model == SHARED_RUNTIME_HOST_EXECUTION_MODEL and host_kind in {"proof-host", "benchmark-host"}:
+            arguments.extend(["--host-kind", "proof" if host_kind == "proof-host" else "benchmark"])
         arguments.extend(["--collection-path", collection_path])
         arguments.extend(["--entry-index", str(entry_index)])
         if binding_manifest_path:
@@ -3355,6 +3390,7 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
         assembly_name=str(declared_benchmark.get("assemblyName") or ""),
     )
     host_kind = str(host_input_manifest.get("hostKind") or "").strip()
+    host_execution_model = str(host_input_manifest.get("hostExecutionModel") or "").strip()
     collection_path = str(host_input_manifest.get("collectionPath") or "").strip()
     binding_manifest_path = str(host_input_manifest.get("bindingManifestPath") or "").strip()
     host_assembly_path = None
@@ -3413,6 +3449,8 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
                 mode="managed",
                 declared_benchmark=declared_benchmark or None,
                 host_assembly_path=host_assembly_path,
+                host_kind=host_kind,
+                host_execution_model=host_execution_model,
                 collection_path=collection_path,
                 binding_manifest_path=binding_manifest_path,
                 entry_index=collection_entry_index,
@@ -4070,6 +4108,7 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
         assembly_name=str(declared_benchmark.get("assemblyName") or ""),
     )
     host_kind = str(host_input_manifest.get("hostKind") or "").strip()
+    host_execution_model = str(host_input_manifest.get("hostExecutionModel") or "").strip()
     collection_path = str(host_input_manifest.get("collectionPath") or "").strip()
     binding_manifest_path = str(host_input_manifest.get("bindingManifestPath") or "").strip()
     host_assembly_path = None
@@ -4120,6 +4159,8 @@ def run_interpreter_runtime_perf(*, repo_root: Path, request: dict[str, Any]) ->
                 mode="interpreter",
                 declared_benchmark=declared_benchmark or None,
                 host_assembly_path=host_assembly_path,
+                host_kind=host_kind,
+                host_execution_model=host_execution_model,
                 collection_path=collection_path,
                 binding_manifest_path=binding_manifest_path,
                 entry_index=collection_entry_index,

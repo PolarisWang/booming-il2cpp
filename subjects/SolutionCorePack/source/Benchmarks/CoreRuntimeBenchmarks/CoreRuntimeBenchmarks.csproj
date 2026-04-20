@@ -12,7 +12,6 @@
     <ProjectReference Include="../../../../../src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <InternalsVisibleTo Include="SolutionCorePack.DeclaredBenchmarkHost" />
     <InternalsVisibleTo Include="SolutionCorePack.DeclaredBenchmarkNativeHost" />
   </ItemGroup>
 </Project>

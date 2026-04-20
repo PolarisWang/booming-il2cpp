@@ -20,6 +20,8 @@ WINDOWS_REFERENCE_BUILD_TARGET = "chaos_subject_reference_proof"
 WINDOWS_REFERENCE_RUN_TARGET = "chaos_subject_reference_proof_run"
 WINDOWS_REFERENCE_CMAKE_BUILD_STRATEGY = "windows-reference-cmake"
 WINDOWS_NATIVE_AOT_BUILD_TARGET = "chaos_subject_native_aot"
+SHARED_RUNTIME_PROJECT_PATH = "src/reference/Chaos.TestFramework.Runtime/Chaos.TestFramework.Runtime.csproj"
+SHARED_RUNTIME_ASSEMBLY_NAME = "Chaos.TestFramework.Runtime"
 
 
 def load_module(path: Path, module_name: str):
@@ -2923,8 +2925,6 @@ class SubjectWorkersTests(unittest.TestCase):
             managed_tests_root = workspace_root / "managed-tests"
             generated_root = managed_tests_root / "Generated"
             generated_root.mkdir(parents=True, exist_ok=True)
-            proof_host_project_path = managed_tests_root / f"{subject_id}.DeclaredProofHost.csproj"
-            proof_host_project_path.write_text("<Project />\n", encoding="utf-8")
             collection_path = generated_root / "declared-tests.collection.json"
             collection_path.write_text('{"declaredUnitTests":[{"entryIndex":7}]}', encoding="utf-8")
             workspace_manifest_path = workspace_root / "workspace.manifest.json"
@@ -2936,14 +2936,8 @@ class SubjectWorkersTests(unittest.TestCase):
                         "managedTestProjects": [
                             {
                                 "projectId": f"managed-test/{subject_id}/proof-host",
-                                "projectPath": posix_path(
-                                    "solutions",
-                                    "subjects",
-                                    subject_id,
-                                    "managed-tests",
-                                    f"{subject_id}.DeclaredProofHost.csproj",
-                                ),
-                                "assemblyName": f"{subject_id}.DeclaredProofHost",
+                                "projectPath": SHARED_RUNTIME_PROJECT_PATH,
+                                "assemblyName": SHARED_RUNTIME_ASSEMBLY_NAME,
                                 "hostKind": "proof-host",
                                 "collectionPath": posix_path(
                                     "solutions",
@@ -2953,6 +2947,7 @@ class SubjectWorkersTests(unittest.TestCase):
                                     "Generated",
                                     "declared-tests.collection.json",
                                 ),
+                                "executionModel": "shared-runtime-host",
                             }
                         ],
                     }
@@ -2960,29 +2955,41 @@ class SubjectWorkersTests(unittest.TestCase):
                 encoding="utf-8",
             )
             expected_output_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "host-input"
+            source_project_path = repo_root / "subjects" / subject_id / "source" / f"{subject_id}.csproj"
+            expected_calls: list[list[str]] = [
+                [
+                    "dotnet",
+                    "build",
+                    str(source_project_path),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    "-o",
+                    str(expected_output_root),
+                    f"-p:ChaosTempIntermediateRoot={intermediate_root.as_posix()}/",
+                ],
+                [
+                    "dotnet",
+                    "build",
+                    str(repo_root / SHARED_RUNTIME_PROJECT_PATH),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    "-o",
+                    str(expected_output_root),
+                    f"-p:ChaosTempIntermediateRoot={intermediate_root.as_posix()}/",
+                ],
+            ]
 
             def fake_run_checked(arguments: list[str], *, repo_root: Path, failure_message: str) -> str:
                 del failure_message
-                self.assertEqual(
-                    [
-                        "dotnet",
-                        "build",
-                        str(proof_host_project_path),
-                        "-c",
-                        "Release",
-                        "-m:1",
-                        "-o",
-                        str(expected_output_root),
-                        f"-p:ChaosTempIntermediateRoot={intermediate_root.as_posix()}/",
-                    ],
-                    arguments,
-                )
+                self.assertTrue(expected_calls)
+                self.assertEqual(expected_calls.pop(0), arguments)
                 expected_output_root.mkdir(parents=True, exist_ok=True)
                 for file_name in [
-                    f"{subject_id}.DeclaredProofHost.dll",
-                    f"{subject_id}.DeclaredProofHost.deps.json",
-                    f"{subject_id}.DeclaredProofHost.pdb",
                     f"{subject_id}.dll",
+                    f"{subject_id}.pdb",
+                    "Chaos.TestFramework.Runtime.deps.json",
                     "Chaos.TestFramework.Sdk.dll",
                     "Chaos.TestFramework.Runtime.dll",
                 ]:
@@ -2995,18 +3002,17 @@ class SubjectWorkersTests(unittest.TestCase):
                         result = workers_module.run_dotnet_host_input_builder(repo_root=repo_root, request=request)
 
             self.assertEqual("ok", result["status"])
+            self.assertEqual([], expected_calls)
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
-            self.assertEqual(
-                posix_path("solutions", "subjects", subject_id, "managed-tests", f"{subject_id}.DeclaredProofHost.csproj"),
-                manifest["primaryProjectPath"],
-            )
+            self.assertEqual(SHARED_RUNTIME_PROJECT_PATH, manifest["primaryProjectPath"])
             self.assertEqual("proof-host", manifest["hostKind"])
             self.assertEqual(
                 posix_path("solutions", "subjects", subject_id, "managed-tests", "Generated", "declared-tests.collection.json"),
                 manifest["collectionPath"],
             )
+            self.assertEqual("shared-runtime-host", manifest["hostExecutionModel"])
             self.assertEqual(
-                subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.DeclaredProofHost.dll"),
+                subject_run_path(subject_id, run_id, "analysis", "host-input", "Chaos.TestFramework.Runtime.dll"),
                 manifest["primaryAssemblyPath"],
             )
             self.assertEqual(
@@ -3015,7 +3021,7 @@ class SubjectWorkersTests(unittest.TestCase):
             )
             self.assertEqual(
                 [
-                    subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.DeclaredProofHost.dll"),
+                    subject_run_path(subject_id, run_id, "analysis", "host-input", "Chaos.TestFramework.Runtime.dll"),
                     subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.dll"),
                 ],
                 result["primaryEvidencePaths"],
@@ -3068,8 +3074,6 @@ class SubjectWorkersTests(unittest.TestCase):
             managed_tests_root = workspace_root / "managed-tests"
             generated_root = managed_tests_root / "Generated"
             generated_root.mkdir(parents=True, exist_ok=True)
-            benchmark_host_project_path = managed_tests_root / f"{subject_id}.DeclaredBenchmarkHost.csproj"
-            benchmark_host_project_path.write_text("<Project />\n", encoding="utf-8")
             collection_path = generated_root / "declared-tests.collection.json"
             collection_path.write_text('{"declaredBenchmarks":[{"entryIndex":11}]}', encoding="utf-8")
             workspace_manifest_path = workspace_root / "workspace.manifest.json"
@@ -3081,14 +3085,8 @@ class SubjectWorkersTests(unittest.TestCase):
                         "managedTestProjects": [
                             {
                                 "projectId": f"managed-test/{subject_id}/benchmark-host",
-                                "projectPath": posix_path(
-                                    "solutions",
-                                    "subjects",
-                                    subject_id,
-                                    "managed-tests",
-                                    f"{subject_id}.DeclaredBenchmarkHost.csproj",
-                                ),
-                                "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
+                                "projectPath": SHARED_RUNTIME_PROJECT_PATH,
+                                "assemblyName": SHARED_RUNTIME_ASSEMBLY_NAME,
                                 "hostKind": "benchmark-host",
                                 "collectionPath": posix_path(
                                     "solutions",
@@ -3098,6 +3096,7 @@ class SubjectWorkersTests(unittest.TestCase):
                                     "Generated",
                                     "declared-tests.collection.json",
                                 ),
+                                "executionModel": "shared-runtime-host",
                             }
                         ],
                     }
@@ -3105,29 +3104,41 @@ class SubjectWorkersTests(unittest.TestCase):
                 encoding="utf-8",
             )
             expected_output_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "host-input"
+            source_project_path = repo_root / "subjects" / subject_id / "source" / f"{subject_id}.csproj"
+            expected_calls = [
+                [
+                    "dotnet",
+                    "build",
+                    str(source_project_path),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    "-o",
+                    str(expected_output_root),
+                    f"-p:ChaosTempIntermediateRoot={intermediate_root.as_posix()}/",
+                ],
+                [
+                    "dotnet",
+                    "build",
+                    str(repo_root / SHARED_RUNTIME_PROJECT_PATH),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    "-o",
+                    str(expected_output_root),
+                    f"-p:ChaosTempIntermediateRoot={intermediate_root.as_posix()}/",
+                ],
+            ]
 
             def fake_run_checked(arguments: list[str], *, repo_root: Path, failure_message: str) -> str:
                 del failure_message
-                self.assertEqual(
-                    [
-                        "dotnet",
-                        "build",
-                        str(benchmark_host_project_path),
-                        "-c",
-                        "Release",
-                        "-m:1",
-                        "-o",
-                        str(expected_output_root),
-                        f"-p:ChaosTempIntermediateRoot={intermediate_root.as_posix()}/",
-                    ],
-                    arguments,
-                )
+                self.assertTrue(expected_calls)
+                self.assertEqual(expected_calls.pop(0), arguments)
                 expected_output_root.mkdir(parents=True, exist_ok=True)
                 for file_name in [
-                    f"{subject_id}.DeclaredBenchmarkHost.dll",
-                    f"{subject_id}.DeclaredBenchmarkHost.deps.json",
-                    f"{subject_id}.DeclaredBenchmarkHost.pdb",
                     f"{subject_id}.dll",
+                    f"{subject_id}.pdb",
+                    "Chaos.TestFramework.Runtime.deps.json",
                     "Chaos.TestFramework.Sdk.dll",
                     "Chaos.TestFramework.Runtime.dll",
                 ]:
@@ -3140,18 +3151,17 @@ class SubjectWorkersTests(unittest.TestCase):
                         result = workers_module.run_dotnet_host_input_builder(repo_root=repo_root, request=request)
 
             self.assertEqual("ok", result["status"])
+            self.assertEqual([], expected_calls)
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
-            self.assertEqual(
-                posix_path("solutions", "subjects", subject_id, "managed-tests", f"{subject_id}.DeclaredBenchmarkHost.csproj"),
-                manifest["primaryProjectPath"],
-            )
+            self.assertEqual(SHARED_RUNTIME_PROJECT_PATH, manifest["primaryProjectPath"])
             self.assertEqual("benchmark-host", manifest["hostKind"])
             self.assertEqual(
                 posix_path("solutions", "subjects", subject_id, "managed-tests", "Generated", "declared-tests.collection.json"),
                 manifest["collectionPath"],
             )
+            self.assertEqual("shared-runtime-host", manifest["hostExecutionModel"])
             self.assertEqual(
-                subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.DeclaredBenchmarkHost.dll"),
+                subject_run_path(subject_id, run_id, "analysis", "host-input", "Chaos.TestFramework.Runtime.dll"),
                 manifest["primaryAssemblyPath"],
             )
             self.assertEqual(
@@ -3389,7 +3399,6 @@ class SubjectWorkersTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            refreshed_host_project_path = stale_managed_tests_root / f"{subject_id}.DeclaredBenchmarkHost.csproj"
             expected_output_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "host-input"
 
             def fake_generate_subject_workspace(
@@ -3405,7 +3414,6 @@ class SubjectWorkersTests(unittest.TestCase):
                 self.assertTrue(bool(options_arg["all-targets"]))
                 self.assertTrue(bool(options_arg["refresh-generated"]))
 
-                refreshed_host_project_path.write_text("<Project />\n", encoding="utf-8")
                 stale_collection_path.write_text('{"declaredBenchmarks":[{"entryIndex":11}]}', encoding="utf-8")
                 workspace_manifest_path.write_text(
                     json.dumps(
@@ -3415,14 +3423,8 @@ class SubjectWorkersTests(unittest.TestCase):
                             "managedTestProjects": [
                                 {
                                     "projectId": f"managed-test/{subject_id}/benchmark-host",
-                                    "projectPath": posix_path(
-                                        "solutions",
-                                        "subjects",
-                                        subject_id,
-                                        "managed-tests",
-                                        f"{subject_id}.DeclaredBenchmarkHost.csproj",
-                                    ),
-                                    "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
+                                    "projectPath": SHARED_RUNTIME_PROJECT_PATH,
+                                    "assemblyName": SHARED_RUNTIME_ASSEMBLY_NAME,
                                     "hostKind": "benchmark-host",
                                     "collectionPath": posix_path(
                                         "solutions",
@@ -3432,6 +3434,7 @@ class SubjectWorkersTests(unittest.TestCase):
                                         "Generated",
                                         "declared-tests.collection.json",
                                     ),
+                                    "executionModel": "shared-runtime-host",
                                 }
                             ],
                         }
@@ -3457,28 +3460,40 @@ class SubjectWorkersTests(unittest.TestCase):
                         **kwargs,
                     )
 
+            source_project_path = repo_root / "subjects" / subject_id / "source" / f"{subject_id}.csproj"
+            expected_calls = [
+                [
+                    "dotnet",
+                    "build",
+                    str(source_project_path),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    "-o",
+                    str(expected_output_root),
+                    f"-p:ChaosTempIntermediateRoot={intermediate_root.as_posix()}/",
+                ],
+                [
+                    "dotnet",
+                    "build",
+                    str(repo_root / SHARED_RUNTIME_PROJECT_PATH),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    "-o",
+                    str(expected_output_root),
+                    f"-p:ChaosTempIntermediateRoot={intermediate_root.as_posix()}/",
+                ],
+            ]
+
             def fake_run_checked(arguments: list[str], *, repo_root: Path, failure_message: str) -> str:
                 del failure_message
-                self.assertEqual(
-                    [
-                        "dotnet",
-                        "build",
-                        str(refreshed_host_project_path),
-                        "-c",
-                        "Release",
-                        "-m:1",
-                        "-o",
-                        str(expected_output_root),
-                        f"-p:ChaosTempIntermediateRoot={intermediate_root.as_posix()}/",
-                    ],
-                    arguments,
-                )
+                self.assertTrue(expected_calls)
+                self.assertEqual(expected_calls.pop(0), arguments)
                 expected_output_root.mkdir(parents=True, exist_ok=True)
                 for file_name in [
-                    f"{subject_id}.DeclaredBenchmarkHost.dll",
-                    f"{subject_id}.DeclaredBenchmarkHost.deps.json",
-                    f"{subject_id}.DeclaredBenchmarkHost.pdb",
                     f"{subject_id}.dll",
+                    "Chaos.TestFramework.Runtime.deps.json",
                     "Chaos.TestFramework.Sdk.dll",
                     "Chaos.TestFramework.Runtime.dll",
                 ]:
@@ -3491,11 +3506,9 @@ class SubjectWorkersTests(unittest.TestCase):
                         result = workers_module.run_dotnet_host_input_builder(repo_root=repo_root, request=request)
 
             self.assertEqual("ok", result["status"])
+            self.assertEqual([], expected_calls)
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
-            self.assertEqual(
-                posix_path("solutions", "subjects", subject_id, "managed-tests", f"{subject_id}.DeclaredBenchmarkHost.csproj"),
-                manifest["primaryProjectPath"],
-            )
+            self.assertEqual(SHARED_RUNTIME_PROJECT_PATH, manifest["primaryProjectPath"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -4525,7 +4538,7 @@ class SubjectWorkersTests(unittest.TestCase):
         subject_id = "FixtureManagedRuntimeSubject"
         run_id = "fixture-run-managed-output-proof-host-001"
         matrix_id = "windows-managed-output"
-        assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.DeclaredProofHost.dll")
+        assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "Chaos.TestFramework.Runtime.dll")
         collection_path = posix_path(
             "solutions",
             "subjects",
@@ -4579,6 +4592,7 @@ class SubjectWorkersTests(unittest.TestCase):
                         "primaryAssemblyPath": assembly_path,
                         "hostKind": "proof-host",
                         "collectionPath": collection_path,
+                        "hostExecutionModel": "shared-runtime-host",
                     }
                 ),
                 encoding="utf-8",
@@ -4589,6 +4603,7 @@ class SubjectWorkersTests(unittest.TestCase):
                     "dotnet",
                     str(repo_root / assembly_path),
                     "--heartbeat-interval-seconds=5",
+                    "--host-kind=proof",
                     f"--collection-path={collection_path}",
                     "--entry-index=7",
                 ],
@@ -4606,6 +4621,7 @@ class SubjectWorkersTests(unittest.TestCase):
                     "dotnet",
                     str(repo_root / assembly_path),
                     "--heartbeat-interval-seconds=5",
+                    "--host-kind=proof",
                     f"--collection-path={collection_path}",
                     "--entry-index=7",
                 ],
@@ -4616,6 +4632,7 @@ class SubjectWorkersTests(unittest.TestCase):
             self.assertEqual(
                 [
                     "--heartbeat-interval-seconds=5",
+                    "--host-kind=proof",
                     f"--collection-path={collection_path}",
                     "--entry-index=7",
                 ],
@@ -5774,7 +5791,7 @@ class SubjectWorkersTests(unittest.TestCase):
         )
         intermediate_root = TEST_TMP_ROOT / "dotnet-intermediates" / "fixture-managed-perf-workspace-benchmark-host"
         perf_project_path = "src/tools/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.csproj"
-        benchmark_host_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "SolutionCorePack.DeclaredBenchmarkHost.dll")
+        benchmark_host_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "Chaos.TestFramework.Runtime.dll")
         slice_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "CoreRuntimeBenchmarks.dll")
         request = {
             "selection": {
@@ -5816,6 +5833,7 @@ class SubjectWorkersTests(unittest.TestCase):
                         "additionalAssemblyPaths": [slice_assembly_path],
                         "hostKind": "benchmark-host",
                         "collectionPath": collection_path,
+                        "hostExecutionModel": "shared-runtime-host",
                     }
                 ),
                 encoding="utf-8",
@@ -5899,6 +5917,8 @@ class SubjectWorkersTests(unittest.TestCase):
                     "4",
                     "--host-assembly",
                     str(repo_root / benchmark_host_assembly_path),
+                    "--host-kind",
+                    "benchmark",
                     "--collection-path",
                     collection_path,
                     "--entry-index",
@@ -6104,7 +6124,7 @@ class SubjectWorkersTests(unittest.TestCase):
             "declared-tests.collection.json",
         )
         perf_project_path = "src/tools/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.csproj"
-        benchmark_host_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "SolutionCorePack.DeclaredBenchmarkHost.dll")
+        benchmark_host_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "Chaos.TestFramework.Runtime.dll")
         slice_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "CoreRuntimeBenchmarks.dll")
         request = {
             "selection": {
@@ -6146,6 +6166,7 @@ class SubjectWorkersTests(unittest.TestCase):
                         "additionalAssemblyPaths": [slice_assembly_path],
                         "hostKind": "benchmark-host",
                         "collectionPath": collection_path,
+                        "hostExecutionModel": "shared-runtime-host",
                     }
                 ),
                 encoding="utf-8",
@@ -6228,6 +6249,8 @@ class SubjectWorkersTests(unittest.TestCase):
                     "4",
                     "--host-assembly",
                     str(repo_root / benchmark_host_assembly_path),
+                    "--host-kind",
+                    "benchmark",
                     "--collection-path",
                     collection_path,
                     "--entry-index",

@@ -64,19 +64,33 @@
 - native 使用 `native dispatch manifest`。
 - hotupdate 使用 `hotupdate binding manifest`。
 
-### 2.5 native test project 只消费契约化输入
+### 2.5 managed test host 由 `Chaos.TestFramework.Runtime` 统一提供，禁止 per-subject 宿主项目
+
+managed test host 的执行入口集中在 `Chaos.TestFramework.Runtime`：
+
+- `ChaosProofRunner.Run(string[] args)` — 解析 `--collection-path` / `--entry-index`，从 collection file 定位条目并执行 proof
+- `ChaosBenchmarkRunner.Run(string[] args)` — 解析 `--collection-path` / `--entry-index`，从 collection file 定位条目并执行 benchmark
+
+- `proof-host` / `benchmark-host` 必须解析到共享 runtime host `src/reference/Chaos.TestFramework.Runtime/Chaos.TestFramework.Runtime.csproj`
+- **禁止**在 subject 目录下继续生成 `DeclaredProofHost`、`DeclaredBenchmarkHost` 或其他仅服务 managed proof / benchmark 的 per-subject 宿主项目
+- workspace 生成阶段必须清理历史 per-subject 宿主残留，包括旧 `Declared*Host.csproj` 与 `ChaosGeneratedDeclaredTests.g.cs` / `ChaosGeneratedDeclaredBenchmarks.g.cs`
+- 若 subject 中仍保留 `Program.cs`、`ProofEntry`、`BenchmarkEntry`，它们只能作为 native owner contract、trace/export 或兼容过渡入口存在，不得再参与 managed proof / benchmark 执行
+
+subject `.csproj` 中的 `<InternalsVisibleTo>` 仅在 native / transitional generation 仍需要编译期访问时保留；shared runtime host 路径不再要求 per-subject host friend access。
+
+### 2.6 native test project 采用薄宿主
 
 - native test project 负责加载 collection file 和 native dispatch manifest。
 - native test project 不直接依赖 `Chaos.TestFramework.Runtime` DLL。
 - 但必须遵守 `Runtime` 定义的执行协议与结果协议。
 
-### 2.6 hotupdate 采用 patch / host 分离
+### 2.7 hotupdate 采用 patch/host 分离
 
-- hotupdate patch project 只引用 `Sdk`。
-- hotupdate test host project 引用 `Sdk + Runtime`。
-- host 负责 collection 消费、patch 装载、绑定、执行与结果汇总。
+- hotupdate patch project 只引用 `Sdk`
+- hotupdate test host project 引用 `Sdk + Runtime`
+- host 负责 collection 消费、patch 装载、绑定、执行与结果汇总
 
-### 2.7 Python 测试与代码生成必须优先模板化
+### 2.8 Python 测试与代码生成必须优先模板化
 
 - Python 单测优先通过模板拉起最小 managed / native / hotupdate 样例。
 - Python 侧新增或重构代码生成时，优先使用 `Scriban` 模板，不继续扩散新的 `.tmpl` / `f-string` / `.format()` 主线。
@@ -85,7 +99,7 @@
 - benchmark 手工复跑、控制台日志或 dashboard 结果不能替代正式自动测试。
 - 任何测试阶段一旦出现 `dotnet build` / `dotnet test` / `msbuild` 编译崩溃，当前验证立即视为失败，必须先定位并修复根因。
 
-### 2.8 file-level codegen 默认 Scriban
+### 2.9 file-level codegen 默认 Scriban
 
 以下场景默认使用 Scriban：
 
@@ -102,7 +116,7 @@
 - 功能不满足时，先扩展 `Scriban`，不新增长期平行拼串路径。
 - 具体使用说明与扩展顺序以 [`../../wiki/04-工具与集成/scriban-usage-and-codegen-rules.md`](../../wiki/04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/scriban-usage-and-codegen-rules.md) 为准。
 
-### 2.9 cutover 后删除旧写法
+### 2.10 迁移完成后删除旧写法
 
 禁止长期保留：
 
@@ -113,7 +127,7 @@
 - 已被 manifest 替代的旧绑定路径
 - canonical proof / benchmark correctness 依赖 `Console.WriteLine` 或 `ChaosEvidenceKind.Stdout`
 
-### 2.10 owner subject 是 obligation authority
+### 2.11 owner subject 与 obligation authority
 
 - `subject.features.json` 是 completed feature 的 owner subject 与 proof / benchmark obligation authority。
 - 当前 canonical owner subjects 固定为 `SolutionCorePack`、`MixedExecutionFeaturePack`、`HotUpdateHostPack`。
@@ -290,6 +304,9 @@ AOT 主线新增 feature 的正式顺序以 `wiki/06-测试验证/AOT新Feature�
 
 - product pipeline 不得回退到 `ChaosSourceEntryArguments`、`DeclaredProofEntriesBySourceEntry` 或旧 subject 命名协议
 - canonical subject 不得重新引入 `validation`、`Archetypes`、`FeatureSlices`、`PatchModules`、`ManagedBridge`、`Lowering`、`Launcher` 等旧目录语义
+- subject 目录下不得出现 `DeclaredProofHost`、`DeclaredBenchmarkHost` 或任何形式的 per-subject managed test host 项目；managed proof / benchmark 必须统一走 `Chaos.TestFramework.Runtime`
+- 若 `CoreRuntimeFeatures` 等 subject 程序集中仍保留 `Program.cs`、`ProofEntry`、`BenchmarkEntry`，其职责必须限于 native owner contract、trace/export 或兼容过渡，不得再承担 managed proof / benchmark 入口
+- subject 程序集的 managed test entry 必须且只能通过 `[ChaosUnitTest]` / `[ChaosBenchmark]` 声明；collection file 由 `CollectionGen` 工具在构建期统一扫描产出，运行期不得重复自行扫描 attribute
 
 ## 10. `System.Private.CoreLib.dll` 到 `SolutionCorePack` proof 的实际文件流向
 

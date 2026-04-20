@@ -210,6 +210,8 @@ internal static class Program
 
         var arguments = new List<string>
         {
+            "--host-kind",
+            string.IsNullOrWhiteSpace(options.HostKind) ? "benchmark" : options.HostKind,
             ChaosManagedHostArguments.CollectionPathPrefix + options.CollectionPath,
         };
         if (!string.IsNullOrWhiteSpace(options.BindingManifestPath))
@@ -426,6 +428,7 @@ internal static class Program
         int Iterations,
         string AssemblyPath,
         string HostAssemblyPath,
+        string HostKind,
         string CollectionPath,
         int EntryIndex,
         string BindingManifestPath,
@@ -449,6 +452,7 @@ internal static class Program
 
             string assemblyPath = string.Empty;
             string hostAssemblyPath = string.Empty;
+            string hostKind = string.Empty;
             string collectionPath = string.Empty;
             var entryIndex = -1;
             string bindingManifestPath = string.Empty;
@@ -476,6 +480,12 @@ internal static class Program
                 if (string.Equals(name, "--host-assembly", StringComparison.Ordinal))
                 {
                     hostAssemblyPath = value;
+                    continue;
+                }
+
+                if (string.Equals(name, "--host-kind", StringComparison.Ordinal))
+                {
+                    hostKind = value;
                     continue;
                 }
 
@@ -540,6 +550,7 @@ internal static class Program
                 iterations,
                 assemblyPath,
                 hostAssemblyPath,
+                hostKind,
                 collectionPath,
                 entryIndex,
                 bindingManifestPath,

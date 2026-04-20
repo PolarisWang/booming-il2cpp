@@ -30,12 +30,12 @@
 | [`mobile-host-subject-routing-v1.md`](./mobile-host-subject-routing-v1.md) | mobile host subject routing | 说明 `MobileHelloWorldProof` 的 subject-scoped Android / iOS host root 与 route fallback 规则。 |
 | [`native-perf-and-convert-baselines-v1.md`](./native-perf-and-convert-baselines-v1.md) | native perf and convert baseline | 固化 `native-runtime-perf` payload、`tests/perf/*` 约束与 convert perf baseline。 |
 | [`engine-binding-stub-baseline-v1.md`](./engine-binding-stub-baseline-v1.md) | engine binding stub baseline | 固化 `Chaos.IL2CPP.EngineBinding`、`[EngineExport]` / `[EngineCallback]` 标注入口与 smoke / compile-only baseline。 |
+| [`统一测试框架.md`](./统一测试框架.md) | 统一测试框架 `run test` | 更新 shared runtime host 约束：managed proof / benchmark 禁止 per-subject host，现存 `Program.cs` / `ProofEntry` 仅可作为 native 过渡契约。 |
 | [`il2cpp-core-structure-and-scriban-governance.md`](./il2cpp-core-structure-and-scriban-governance.md) | IL2CPP core structure and Scriban governance | 固化 `IL2CPP` 核心代码层的 planner / emitter / template 结构治理，以及 ObjectModel / ExternalRuntimeHelpers / Loader / Linker / Contracts 的长期拆分边界。 |
 | [`scriban-usage-and-codegen-rules.md`](./scriban-usage-and-codegen-rules.md) | Scriban usage and codegen rules | 说明 `Scriban` 在 IL2CPP 与 Python codegen 中的正式使用方式、扩展顺序与禁止事项。 |
 | [`project-graph-ingestion-v1.md`](./project-graph-ingestion-v1.md) | project graph ingestion | 固化 `Chaos.IL2CPP.ProjectGraph`、`project-graph.json` 与 golden convert 接线。 |
 | [`共享-contract-v0.md`](./共享-contract-v0.md) | 共享 contract v0 | 固化 `contracts/shared/v0/` 的长期约束、验证入口与使用边界。 |
 | [`统一入口脚本.md`](./统一入口脚本.md) | 统一入口脚本 `run.*` | 固化 bootstrap、TUI、prepare / clean、`--json` 与 harness 接线规则。 |
-| [`统一测试框架.md`](./统一测试框架.md) | 统一测试框架 `run test` | 固化 suite manifest、summary / final-summary 与测试入口约束。 |
 | [`unified-project-workspaces-and-deploy-core.md`](./unified-project-workspaces-and-deploy-core.md) | project workspaces and deploy core | 固化 `generate/build project`、`deploy core`、`subject-exec` 与 `artifacts/projects/**` / `deploy/core/**` 边界。 |
 | [`Claude技能测试入口.md`](./Claude技能测试入口.md) | Claude 技能测试入口 | 固化 `.codex/tests/claude-code/` 的入口与约束。 |
 

@@ -1,5 +1,6 @@
 using Chaos.TestFramework;
 using System.IO;
+using System.Reflection;
 
 namespace CoreRuntimeFeatures;
 
@@ -7,70 +8,21 @@ internal static class ProofEntry
 {
     public static int Run()
     {
-        RunProof(AsyncAwaitProofEntry.Run());
-        RunProof(ArithmeticOpsProofEntry.Run());
-        RunProof(ArrayCovarianceProofEntry.Run());
-        RunProof(ArrayOpsProofEntry.Run());
-        RunProof(ArrayBoxingProofEntry.Run());
-        RunProof(BitwiseOpsProofEntry.Run());
-        RunProof(BranchOpsProofEntry.Run());
-        RunProof(BoxedStructFieldReadProofEntry.Run());
-        RunProof(CustomAttributeLookupProofEntry.Run());
-        RunProof(ConversionOpsProofEntry.Run());
-        RunProof(IntegerCarrierProofEntry.Run());
-        RunProof(CrossBoundaryExceptionProofEntry.Run());
-        RunProof(CastTypeCheckProofEntry.Run());
-        RunProof(AotClosureValidationProofEntry.Run());
-        RunProof(DelegateCallbackInteropProofEntry.Run());
-        RunProof(DelegateChainProofEntry.Run());
-        RunProof(DelegateProofEntry.Run());
-        RunProof(DirectCallVirtProofEntry.Run());
-        RunProof(DispatchProofEntry.Run());
-        RunProof(EventCallbackFlowProofEntry.Run());
-        RunProof(ExceptionProofEntry.Run());
-        RunProof(FinallyAndFilterProofEntry.Run());
-        RunProof(FunctionPointerProofEntry.Run());
-        RunProof(GcSensitiveFlowProofEntry.Run());
-        RunProof(GenericCollectionProofEntry.Run());
-        RunProof(GenericConstraintProofEntry.Run());
-        RunProof(GenericInstantiationProofEntry.Run());
-        RunProof(GenericSharingBoundaryProofEntry.Run());
-        RunProof(GenericLayoutProofEntry.Run());
-        RunProof(InterfaceDispatchProofEntry.Run());
-        RunProof(IteratorStateMachineProofEntry.Run());
-        RunProof(LambdaClosureCaptureProofEntry.Run());
-        RunProof(LinkerPreserveContractProofEntry.Run());
-        RunProof(LinkerStrippingProofEntry.Run());
-        RunProof(LoaderContractProofEntry.Run());
-        RunProof(MarshalingProofEntry.Run());
-        RunProof(MemberMetadataLookupProofEntry.Run());
-        RunProof(MetadataSupplementProofEntry.Run());
-        RunProof(MonitorAndLockingProofEntry.Run());
-        RunProof(NativeCallInteropProofEntry.Run());
-        RunProof(NestedExceptionProofEntry.Run());
-        RunProof(ObjectFieldProofEntry.Run());
-        RunProof(ObjectReturnProofEntry.Run());
-        RunProof(OverflowOpsProofEntry.Run());
-        RunProof(ReflectionInteropClosureEntry.Run());
-        RunProof(RefStructAndStackallocProofEntry.Run());
-        RunProof(RequiredInstantiationClosureProofEntry.Run());
-        RunProof(ResourceLifecycleProofEntry.Run());
-        RunProof(RuntimeHelpersProofEntry.Run());
-        RunProof(SpanAndMemoryProofEntry.Run());
-        RunProof(StructMarshalingProofEntry.Run());
-        RunProof(TaskAndValueTaskFlowProofEntry.Run());
-        RunProof(TaskSchedulingProofEntry.Run());
-        RunProof(ThreadingProofEntry.Run());
-        RunProof(ThreadLocalStateProofEntry.Run());
-        RunProof(UnsafePointerProofEntry.Run());
-        RunProof(VTableDispatchProofEntry.Run());
+        var proofMethods = typeof(ProofEntry).Assembly
+            .GetTypes()
+            .SelectMany(t => t.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
+            .Where(m => m.IsDefined(typeof(ChaosUnitTestAttribute), inherit: false))
+            .OrderBy(m => m.DeclaringType!.FullName, StringComparer.Ordinal)
+            .ThenBy(m => m.Name, StringComparer.Ordinal)
+            .ToList();
+
+        foreach (var method in proofMethods)
+        {
+            var exitCode = (int)method.Invoke(obj: null, parameters: null)!;
+            Assert.Equal(0, exitCode);
+        }
 
         return 0;
-    }
-
-    private static void RunProof(int exitCode)
-    {
-        Assert.Equal(0, exitCode);
     }
 }
 

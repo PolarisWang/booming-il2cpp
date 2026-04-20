@@ -50,6 +50,14 @@ public static class ChaosTestCollectionLoader
     /// </summary>
     public static void EnsureEntryExists(string collectionPath, ChaosManagedHostKind hostKind, int entryIndex)
     {
+        ResolveEntry(collectionPath, hostKind, entryIndex);
+    }
+
+    /// <summary>
+    /// Resolves a collection entry by host kind and entry index.
+    /// </summary>
+    public static ChaosTestCollectionEntry ResolveEntry(string collectionPath, ChaosManagedHostKind hostKind, int entryIndex)
+    {
         if (entryIndex < 0)
         {
             throw new ArgumentOutOfRangeException(nameof(entryIndex), entryIndex, "entry index must be non-negative.");
@@ -59,9 +67,10 @@ public static class ChaosTestCollectionLoader
         var entries = hostKind == ChaosManagedHostKind.Proof
             ? collection.DeclaredUnitTests
             : collection.DeclaredBenchmarks;
-        if (entries.Any(entry => entry.EntryIndex == entryIndex))
+        var entry = entries.FirstOrDefault(candidate => candidate.EntryIndex == entryIndex);
+        if (entry is not null)
         {
-            return;
+            return entry;
         }
 
         throw new InvalidOperationException(

@@ -14,6 +14,8 @@ from tests.support import make_temp_repo_root
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 TEST_COMMAND_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "commands" / "test.py"
+SHARED_RUNTIME_PROJECT_PATH = "src/reference/Chaos.TestFramework.Runtime/Chaos.TestFramework.Runtime.csproj"
+SHARED_RUNTIME_ASSEMBLY_NAME = "Chaos.TestFramework.Runtime"
 
 
 def load_module(path: Path, module_name: str):
@@ -58,23 +60,13 @@ def write_subject_workspace(
     generated_root = managed_tests_root / "Generated"
     native_root = workspace_root / "native" / matrix_id
 
-    proof_project_path = managed_tests_root / f"{subject_id}.DeclaredProofHost.csproj"
-    benchmark_project_path = managed_tests_root / f"{subject_id}.DeclaredBenchmarkHost.csproj"
-    proof_source_path = generated_root / "ChaosGeneratedDeclaredTests.g.cs"
-    benchmark_source_path = generated_root / "ChaosGeneratedDeclaredBenchmarks.g.cs"
     native_proof_project_path = native_root / "proof" / "chaos_subject_reference_proof.vcxproj"
     collection_path = generated_root / "declared-tests.collection.json"
     manifest_path = workspace_root / "workspace.manifest.json"
 
-    for path in [
-        proof_project_path,
-        benchmark_project_path,
-        proof_source_path,
-        benchmark_source_path,
-        native_proof_project_path,
-    ]:
+    for path in [native_proof_project_path]:
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text("// fixture\n" if path.suffix == ".cs" else "<Project />\n", encoding="utf-8")
+        path.write_text("<Project />\n", encoding="utf-8")
 
     collection_payload = {
         "subjectId": subject_id,
@@ -128,19 +120,19 @@ def write_subject_workspace(
     managed_test_projects = [
         {
             "projectId": f"managed-test/{subject_id}/proof-host",
-            "projectPath": proof_project_path.relative_to(repo_root).as_posix(),
-            "assemblyName": f"{subject_id}.DeclaredProofHost",
+            "projectPath": SHARED_RUNTIME_PROJECT_PATH,
+            "assemblyName": SHARED_RUNTIME_ASSEMBLY_NAME,
             "hostKind": "proof-host",
             "collectionPath": collection_path.relative_to(repo_root).as_posix(),
-            "generatedSourcePath": proof_source_path.relative_to(repo_root).as_posix(),
+            "executionModel": "shared-runtime-host",
         },
         {
             "projectId": f"managed-test/{subject_id}/benchmark-host",
-            "projectPath": benchmark_project_path.relative_to(repo_root).as_posix(),
-            "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
+            "projectPath": SHARED_RUNTIME_PROJECT_PATH,
+            "assemblyName": SHARED_RUNTIME_ASSEMBLY_NAME,
             "hostKind": "benchmark-host",
             "collectionPath": collection_path.relative_to(repo_root).as_posix(),
-            "generatedSourcePath": benchmark_source_path.relative_to(repo_root).as_posix(),
+            "executionModel": "shared-runtime-host",
         },
     ]
     native_test_projects = []
@@ -561,11 +553,11 @@ class SubjectCommandTests(unittest.TestCase):
                     "collectionPath": f"solutions/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json",
                     "managedTestProject": {
                         "projectId": f"managed-test/{subject_id}/proof-host",
-                        "projectPath": f"solutions/subjects/{subject_id}/managed-tests/{subject_id}.DeclaredProofHost.csproj",
-                        "assemblyName": f"{subject_id}.DeclaredProofHost",
+                        "projectPath": SHARED_RUNTIME_PROJECT_PATH,
+                        "assemblyName": SHARED_RUNTIME_ASSEMBLY_NAME,
                         "hostKind": "proof-host",
-                    "collectionPath": f"solutions/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json",
-                        "generatedSourcePath": f"solutions/subjects/{subject_id}/managed-tests/Generated/ChaosGeneratedDeclaredTests.g.cs",
+                        "collectionPath": f"solutions/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json",
+                        "executionModel": "shared-runtime-host",
                     },
                     "nativeTestProject": {
                         "projectId": f"native-test/{subject_id}/{workspace_matrix_id}/proof-host",
@@ -1790,13 +1782,17 @@ class SubjectCommandTests(unittest.TestCase):
             self.assertEqual(1, len(regenerated_calls))
             self.assertEqual(repo_root, regenerated_calls[0]["repo_root"])
             self.assertEqual("windows", regenerated_calls[0]["host_platform"])
+            self.assertEqual(f"subject/{subject_id}", regenerated_calls[0]["options"]["id"])
+            self.assertTrue(bool(regenerated_calls[0]["options"]["auto-refresh-missing-generated"]))
+            self.assertTrue(bool(regenerated_calls[0]["options"]["refresh-generated"]))
+            self.assertEqual("windows-managed-perf", regenerated_calls[0]["options"]["matrix"])
             self.assertEqual(
                 {
-                    "id": f"subject/{subject_id}",
-                    "all-targets": True,
-                    "auto-refresh-missing-generated": True,
+                    "family": "declared-benchmark",
+                    "stableId": stable_id,
+                    "alias": alias,
                 },
-                regenerated_calls[0]["options"],
+                regenerated_calls[0]["options"]["entry-selection"],
             )
             build_plan_mock.assert_called_once()
             self.assertEqual("windows-managed-perf", build_plan_mock.call_args.kwargs["matrix_id"])

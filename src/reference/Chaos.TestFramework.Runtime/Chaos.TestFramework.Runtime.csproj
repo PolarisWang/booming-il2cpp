@@ -4,6 +4,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>12.0</LangVersion>
+    <OutputType>Exe</OutputType>
     <AssemblyName>Chaos.TestFramework.Runtime</AssemblyName>
     <RootNamespace>Chaos.TestFramework.Runtime</RootNamespace>
   </PropertyGroup>
