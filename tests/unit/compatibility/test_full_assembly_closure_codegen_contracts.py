@@ -702,5 +702,53 @@ class FullAssemblyClosureCodegenContractTests(unittest.TestCase):
         ]:
             self.assertIn(required_fragment, template_source)
 
+    def test_runtime_skeleton_static_string_producer_ctor_instance_call_forwarder_forwarder_write_line_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.StaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineStub",
+            "GetRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn(
+            "RuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineStubTemplateRelativePath",
+            catalog_source,
+        )
+
+        for required_fragment in [
+            "_ProducerArgs",
+            "_ManagedArgs",
+            "_ForwarderArgs",
+            "producer_stub_name",
+            "instance_call_stub_name",
+            "initial_forwarder_stub_name",
+            "terminal_forwarder_stub_name",
+            "reference_type_token",
+            "captured_field_token",
+            "produced_value",
+            "initial_forwarded_message",
+            "forwarded_message",
+            "field_set_value",
+            "write_line_string",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
 if __name__ == "__main__":
     unittest.main()
