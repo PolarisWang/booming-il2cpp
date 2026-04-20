@@ -390,6 +390,46 @@ class FullAssemblyClosureCodegenContractTests(unittest.TestCase):
         ]:
             self.assertIn(required_fragment, write_line_template_source)
 
+    def test_runtime_skeleton_static_string_forwarder_write_line_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        forwarder_write_line_template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.StaticStringForwarderConsoleWriteLineStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticStringForwarderConsoleWriteLineStub",
+            "GetRuntimeSkeletonStaticStringForwarderConsoleWriteLineStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn(
+            "RuntimeSkeletonStaticStringForwarderConsoleWriteLineStubTemplateRelativePath",
+            catalog_source,
+        )
+
+        for required_fragment in [
+            "_ForwarderArgs",
+            "target_stub_name",
+            "input_value",
+            "forwarder_args",
+            "resolve_icall",
+            "write_line_string",
+        ]:
+            self.assertIn(required_fragment, forwarder_write_line_template_source)
+
 
 if __name__ == "__main__":
     unittest.main()

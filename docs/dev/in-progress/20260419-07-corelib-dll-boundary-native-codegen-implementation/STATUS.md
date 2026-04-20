@@ -27,7 +27,8 @@ updated_at: 2026-04-20 11:08:40 +08:00
 updated_at: 2026-04-20 11:23:52 +08:00
 updated_at: 2026-04-20 12:14:34 +08:00
 updated_at: 2026-04-20 12:24:04 +08:00
-latest_stop_point: after keeping the canonical combined CoreLib-first `native -> hotupdate` audit anchor stable, this slice widened the actual `GoldenCoreLibReference.NativeProofApp` proof packet through three additional distinct executable families while preserving the observable proof output: first an unused `staticCallCtorGetter`-style family (`EchoHolder::.ctor`, `EchoHolder::GetValue`, `EchoValue`, `ComposeEcho`) was added together with new assembly-agnostic runtime-skeleton helpers for `static string forwarder` and `string field getter`; then an unused direct literal writer `ComposeLiteral` exercised the existing direct `Console.WriteLine` lowering path; finally an unused `static string producer -> Console.WriteLine` family (`BuildLiteralMessage`, `ComposeStaticMessage`) landed with two new generic helpers for `static literal string return` and `static string producer write-line`. Real native proof run `20260420-122327-windows-4812` and real combined run `20260420-122244-windows-a6b5` both passed, and the canonical audit widened to `translationUnitMethodCount = 15` while still preserving `runtimeSkeletonReservedStubCount = 0` and `fullCoreLibTranslated = false`
+updated_at: 2026-04-20 12:36:10 +08:00
+latest_stop_point: after stabilizing the canonical CoreLib-first `native -> hotupdate` audit anchor at `translationUnitMethodCount = 15`, this slice widened the actual `GoldenCoreLibReference.NativeProofApp` proof packet by one more distinct executable family: an unused `static string forwarder -> Console.WriteLine` chain (`ComposeForwardedLiteral`) built on top of the existing `EchoValue(System.String)` forwarder, together with a new generic runtime-skeleton helper template for forwarding a synthesized literal through a one-argument string stub and then writing the returned string to `System.Console`. Real native proof run `20260420-123402-windows-8388` and real combined run `20260420-123533-windows-1919` both passed, the observable proof output remained unchanged, the canonical audit widened to `translationUnitMethodCount = 16`, `runtimeSkeletonReservedStubCount` stayed `0`, and `fullCoreLibTranslated` remains `false`
 current_dir: docs/dev/in-progress/20260419-07-corelib-dll-boundary-native-codegen-implementation
 parent_task_id: 20260419-01-foundation-dll-translation-audit-roadmap
 source_task_id: 20260419-03-system-private-corelib-full-verification
@@ -56,7 +57,7 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
 - Keep `windows-corelib-reference-native-hotupdate-proof` as the canonical combined proof anchor:
   - its matrix-level audit path and narrowness metrics are now stable again after widening the canonical proof packet itself
   - the current audited truth boundary is now:
-    - `translationUnitMethodCount = 15`
+    - `translationUnitMethodCount = 16`
     - `runtimeSkeletonReservedStubCount = 0`
     - `fullCoreLibTranslated = false`
 - Continue widening executable runtime-skeleton coverage inside the actual `GoldenCoreLibReference.NativeProofApp` proof packet before adding more detached lanes:
@@ -65,6 +66,7 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
     - constructor + field-backed-render family
     - static-int forwarder family
     - static string forwarder + field getter family
+    - static string forwarder -> `Console.WriteLine`
     - direct literal `Console.WriteLine`
     - static string producer -> `Console.WriteLine`
   - the strongest next candidate is now either:
@@ -1274,6 +1276,45 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
       - `matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/native-hotupdate-audit.json`
     - audit now reports:
       - `nativeGeneration.translationUnitMethodCount = 15`
+      - `nativeGeneration.runtimeSkeletonReservedStubCount = 0`
+      - `truthBoundary.fullCoreLibTranslated = false`
+    - runtime stdout:
+      - `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`
+- Added one more assembly-agnostic runtime-skeleton helper for a forwarded literal writer:
+  - `src/managed/Chaos.IL2CPP.CodeGen/Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringForwarderConsoleWriteLineStub.cpp.scriban`
+  - `NativeReferenceProofEmitter` now recognizes:
+    - `TryBuildAssemblyBoundStaticStringForwarderConsoleWriteLineStub(...)`
+  - `NativeReferenceProofCatalog` now exposes:
+    - `GetRuntimeSkeletonStaticStringForwarderConsoleWriteLineStubTemplate()`
+- Widened the canonical packet with an unused `static string forwarder -> Console.WriteLine` family:
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/NativeProofApp/Program.cs`
+    - added `ComposeForwardedLiteral():System.Int32`
+  - this family is intentionally not called from `Main`, so the observable proof output is unchanged while full-assembly-closure translation still has to lower an additional higher-order call chain that first forwards a synthesized string literal through `EchoValue(System.String)` and then passes the returned string to `Console.WriteLine`
+- Re-ran the canonical packet after adding the forwarded-literal family:
+  - `python -m pytest tests/unit/compatibility/test_solution_core_pack_subject.py tests/unit/compatibility/test_full_assembly_closure_codegen_contracts.py tests/unit/planning/test_solution_core_pack_planner.py tests/unit/reporting/test_subject_reporting.py tests/contracts/shared/test_foundation_dll_translation_audit_schema.py -q`
+    - Result: `64 passed`
+  - `dotnet build src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj -c Release -m:1`
+    - Result: build succeeded, `121 warnings`, `0 errors`
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-corelib-reference-native-proof --json`
+    - run id = `20260420-123402-windows-8388`
+    - summary = `ok`
+    - runtime stdout:
+      - `corelib-reference-native:System.Private.CoreLib|System.Runtime|System.Console`
+    - generated lowering plan now reports:
+      - `translationUnitMethodCount = 16`
+      - added method subject:
+        - `Program::ComposeForwardedLiteral:System.Int32()`
+    - generated runtime page now contains:
+      - `Program::ComposeForwardedLiteral:System.Int32()`
+      - `corelib-reference-forwarded:System.Private.CoreLib|System.Console`
+      - `_ForwarderArgs`
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-corelib-reference-native-hotupdate-proof --json`
+    - run id = `20260420-123533-windows-1919`
+    - summary = `ok`
+    - canonical audit path remains:
+      - `matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/native-hotupdate-audit.json`
+    - audit now reports:
+      - `nativeGeneration.translationUnitMethodCount = 16`
       - `nativeGeneration.runtimeSkeletonReservedStubCount = 0`
       - `truthBoundary.fullCoreLibTranslated = false`
     - runtime stdout:

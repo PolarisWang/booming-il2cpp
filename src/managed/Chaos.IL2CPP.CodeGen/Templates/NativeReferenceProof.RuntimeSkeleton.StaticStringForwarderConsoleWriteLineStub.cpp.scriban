@@ -1,0 +1,54 @@
+struct {{ stub_name }}_ForwarderArgs
+{
+    void* value;
+    void** return_value;
+};
+
+int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)managed_args;
+    if (bridge == nullptr || code_registration == nullptr || options == nullptr || runtime == nullptr || thread == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_READY;
+    }
+    void* input_value = abi->string_new_utf8(runtime, thread, {{ literal }}, {{ literal_byte_count }}u);
+    if (input_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    void* message = nullptr;
+    {{ stub_name }}_ForwarderArgs forwarder_args
+    {
+        input_value,
+        &message
+    };
+    const int32_t forwarder_status = {{ target_stub_name }}(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        &forwarder_args);
+    if (forwarder_status != CHAOS_BRIDGE_STATUS_OK || message == nullptr) {
+        return forwarder_status != CHAOS_BRIDGE_STATUS_OK
+            ? forwarder_status
+            : CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    void* raw_write_line_string = bridge->resolve_icall({{ console_write_line_string_icall_literal }});
+    if (raw_write_line_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+    const auto write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
+    return write_line_string(runtime, thread, message);
+}
