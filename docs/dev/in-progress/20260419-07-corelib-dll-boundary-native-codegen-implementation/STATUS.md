@@ -32,7 +32,8 @@ updated_at: 2026-04-20 12:53:20 +08:00
 updated_at: 2026-04-20 13:05:40 +08:00
 updated_at: 2026-04-20 13:24:00 +08:00
 updated_at: 2026-04-20 13:56:33 +08:00
-latest_stop_point: after widening the canonical CoreLib packet to `translationUnitMethodCount = 19` with a producer-ctor-render-write-line chain, this slice added two more higher-order executable helper families to the actual `GoldenCoreLibReference.NativeProofApp` proof packet: an unused `static string producer -> ctor -> instance-call(string) -> forwarder -> Console.WriteLine` chain (`ComposeProducedForwardedRender` / `ComposeProducedForwardedEcho`) and an unused `static string producer -> forwarder -> ctor -> instance-call(string) -> Console.WriteLine` chain (`ComposeForwardedProducedEcho`). Real combined proof run `20260420-135505-windows-1a5a` passed, the observable proof output remained unchanged, the canonical audit widened to `translationUnitMethodCount = 22`, `runtimeSkeletonReservedStubCount` stayed `0`, and `fullCoreLibTranslated` remains `false`
+updated_at: 2026-04-20 14:01:53 +08:00
+latest_stop_point: after widening the canonical CoreLib packet to `translationUnitMethodCount = 22` with the first reorder helper families, this slice proved the existing generic `producer -> forwarder -> ctor -> instance-call(string) -> Console.WriteLine` lowering also covers the field-backed `Render()` branch without any emitter changes by adding an unused `ComposeForwardedProducedRender` method (`static string producer -> forwarder -> ctor -> render -> Console.WriteLine`) to the actual `GoldenCoreLibReference.NativeProofApp` proof packet. Real combined proof run `20260420-140012-windows-f26f` passed, the observable proof output remained unchanged, the canonical audit widened to `translationUnitMethodCount = 23`, `runtimeSkeletonReservedStubCount` stayed `0`, and `fullCoreLibTranslated` remains `false`
 current_dir: docs/dev/in-progress/20260419-07-corelib-dll-boundary-native-codegen-implementation
 parent_task_id: 20260419-01-foundation-dll-translation-audit-roadmap
 source_task_id: 20260419-03-system-private-corelib-full-verification
@@ -61,7 +62,7 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
 - Keep `windows-corelib-reference-native-hotupdate-proof` as the canonical combined proof anchor:
   - its matrix-level audit path and narrowness metrics are now stable again after widening the canonical proof packet itself
   - the current audited truth boundary is now:
-    - `translationUnitMethodCount = 22`
+    - `translationUnitMethodCount = 23`
     - `runtimeSkeletonReservedStubCount = 0`
     - `fullCoreLibTranslated = false`
 - Continue widening executable runtime-skeleton coverage inside the actual `GoldenCoreLibReference.NativeProofApp` proof packet before adding more detached lanes:
@@ -78,9 +79,11 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
     - static string producer -> ctor -> render -> `Console.WriteLine`
     - static string producer -> ctor -> instance-call(string) -> forwarder -> `Console.WriteLine`
     - static string producer -> forwarder -> ctor -> instance-call(string) -> `Console.WriteLine`
-  - the strongest next candidate is still another reorder variant that reuses the current generic helper set while keeping `runtimeSkeletonReservedStubCount = 0`:
-    - for example `static string producer -> forwarder -> ctor -> render -> Console.WriteLine`
-  - keep delaying `async/await` until the remaining low-risk synchronous families stop yielding cheap packet widening
+    - static string producer -> forwarder -> ctor -> render -> `Console.WriteLine`
+  - the strongest next candidate now needs one more helper composition rather than just another canonical method:
+    - for example `static string producer -> forwarder -> ctor -> render -> forwarder -> Console.WriteLine`
+    - or `static string producer -> forwarder -> ctor -> getter -> forwarder -> Console.WriteLine`
+  - keep delaying `async/await` until the remaining low-risk synchronous multi-hop string families stop yielding cheap packet widening
 
 ## Current Progress
 
@@ -1488,3 +1491,31 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
       - `truthBoundary.fullCoreLibTranslated = false`
     - runtime stdout:
       - `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`
+- Widened the canonical packet with one more unused reorder variant that required no new emitter logic:
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/NativeProofApp/Program.cs`
+    - added `ComposeForwardedProducedRender():System.Int32`
+  - this family is intentionally not called from `Main`, so the observable proof output is unchanged while full-assembly-closure translation still has to lower:
+    - producer -> forwarder -> ctor -> render -> `Console.WriteLine`
+  - this confirms the existing generic `TryBuildAssemblyBoundStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineStub(...)` lowering already covers both:
+    - field getter instance calls
+    - field-backed render instance calls
+- Re-ran the canonical packet after adding the forwarded-produced-render variant:
+  - `python -m pytest tests/unit/compatibility/test_solution_core_pack_subject.py -q`
+    - Result: `9 passed`
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-corelib-reference-native-hotupdate-proof --json`
+    - run id = `20260420-140012-windows-f26f`
+    - summary = `ok`
+    - canonical audit path remains:
+      - `matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/native-hotupdate-audit.json`
+    - audit now reports:
+      - `nativeGeneration.translationUnitMethodCount = 23`
+      - `nativeGeneration.runtimeSkeletonReservedStubCount = 0`
+      - `truthBoundary.fullCoreLibTranslated = false`
+    - runtime stdout:
+      - `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`
+    - generated runtime page now contains:
+      - `Program::ComposeForwardedProducedRender:System.Int32()`
+      - `forwarded_value`
+      - `field_set_value`
+      - `field_get_value`
+      - `Program+Holder::Render:System.String()`

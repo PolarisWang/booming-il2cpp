@@ -144,4 +144,10 @@ internal static class Program
         Console.WriteLine(new EchoHolder(EchoValue(BuildLiteralMessage())).GetValue());
         return 0;
     }
+
+    private static int ComposeForwardedProducedRender()
+    {
+        Console.WriteLine(new Holder(EchoValue(BuildLiteralMessage())).Render());
+        return 0;
+    }
 }

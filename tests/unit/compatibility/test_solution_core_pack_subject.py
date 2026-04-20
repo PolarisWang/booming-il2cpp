@@ -636,6 +636,8 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         self.assertIn('Console.WriteLine(EchoValue(new EchoHolder(BuildLiteralMessage()).GetValue()));', program_source)
         self.assertIn("private static int ComposeForwardedProducedEcho()", program_source)
         self.assertIn('Console.WriteLine(new EchoHolder(EchoValue(BuildLiteralMessage())).GetValue());', program_source)
+        self.assertIn("private static int ComposeForwardedProducedRender()", program_source)
+        self.assertIn('Console.WriteLine(new Holder(EchoValue(BuildLiteralMessage())).Render());', program_source)
         self.assertIn('new Holder("System.Private.CoreLib").Render()', program_source)
         self.assertIn("Console.WriteLine(", program_source)
 
