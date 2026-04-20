@@ -114,4 +114,10 @@ internal static class Program
         Console.WriteLine(EchoValue(BuildLiteralMessage()));
         return 0;
     }
+
+    private static int ComposeProducedEcho()
+    {
+        Console.WriteLine(new EchoHolder(BuildLiteralMessage()).GetValue());
+        return 0;
+    }
 }
