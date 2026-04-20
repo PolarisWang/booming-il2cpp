@@ -1,9 +1,19 @@
 # docs/dev 任务索引
 
-当前无 active 任务。
+当前 active 任务：
+
+- [20260419-07-corelib-dll-boundary-native-codegen-implementation](in-progress/20260419-07-corelib-dll-boundary-native-codegen-implementation/STATUS.md)
 
 | task_id | lifecycle_status | phase | updated_at | summary | active |
 | --- | --- | --- | --- | --- | --- |
+| [20260419-07-corelib-dll-boundary-native-codegen-implementation](in-progress/20260419-07-corelib-dll-boundary-native-codegen-implementation/STATUS.md) | in-progress | planning | 2026-04-19 13:55:00 +08:00 | 下一步：实现 CoreLib DLL-boundary native/codegen/hotupdate 真实路径，解除 full verification blocker。 | true |
+| [20260419-03-system-private-corelib-full-verification](in-progress/20260419-03-system-private-corelib-full-verification/STATUS.md) | completed | completed-blocked | 2026-04-19 13:55:00 +08:00 | CoreLib audit skeleton 与 blocker normalization 已完成；full verification 仍 blocked，不能进入 Complex BCL 13 DLL。 | false |
+| [20260419-06-corelib-hotupdate-proof-normalization](in-progress/20260419-06-corelib-hotupdate-proof-normalization/STATUS.md) | completed | completed | 2026-04-19 13:50:00 +08:00 | 已归一化 CoreLib-specific hotupdate proof 要求，HotUpdateHostPack 旧验证仅作为 related evidence。 | false |
+| [20260419-05-corelib-full-native-proof-normalization](in-progress/20260419-05-corelib-full-native-proof-normalization/STATUS.md) | completed | completed | 2026-04-19 13:40:00 +08:00 | 已归一化 CoreLib DLL-boundary native proof 要求，六个 semantic family 均需明确证据。 | false |
+| [20260419-04-corelib-codegen-review-inventory](in-progress/20260419-04-corelib-codegen-review-inventory/STATUS.md) | completed | completed | 2026-04-19 13:30:00 +08:00 | 已确认现有 generated artifacts 是 entry-driven，不能关闭 CoreLib DLL-boundary codegen review blocker。 | false |
+| [20260419-03-system-private-corelib-full-verification](in-progress/20260419-03-system-private-corelib-full-verification/STATUS.md) | in-progress | planning | 2026-04-19 13:15:00 +08:00 | CoreLib audit packet skeleton 已建立；三个 blocker 已拆成 codegen/native/hotupdate 子任务。 | false |
+| [20260419-02-audit-schema-and-foundation-solution-freeze](in-progress/20260419-02-audit-schema-and-foundation-solution-freeze/STATUS.md) | completed | completed | 2026-04-19 12:40:00 +08:00 | Phase 0 完成：audit/codegen schema 与 `FoundationDllTranslationSolution` 骨架已冻结，测试和 Release build 通过。 | false |
+| [20260419-01-foundation-dll-translation-audit-roadmap](in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md) | in-progress | roadmap | 2026-04-19 12:40:00 +08:00 | audit-first DLL translation roadmap 已创建；Phase 0 已完成，下一步进入 CoreLib full verification。 | false |
 | [20260418-01-dotnet-foundation-pack-nativeization-roadmap](in-progress/20260418-01-dotnet-foundation-pack-nativeization-roadmap/STATUS.md) | completed | completed | 2026-04-19 10:22:00 +08:00 | Roadmap 已完成：dependency-layer 终态、HotUpdate consumer validation、`.NET 10` delta closure 均已收口。 | false |
 | [20260418-09-dotnet10-delta-closure-and-release-gates](in-progress/20260418-09-dotnet10-delta-closure-and-release-gates/STATUS.md) | completed | completed | 2026-04-19 10:18:00 +08:00 | `.NET 10` managed ref delta `4/4 certified`，`net10.0.firstReadyLayerName = null`。 | false |
 | [20260418-08-hotupdate-consumer-validation](in-progress/20260418-08-hotupdate-consumer-validation/STATUS.md) | completed | completed | 2026-04-19 10:16:00 +08:00 | `HotUpdateHostPack` proof `7/7 ok`、benchmark `4/4 ok`、engineering/workload `8/8 ok`。 | false |

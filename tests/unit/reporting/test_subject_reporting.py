@@ -38,6 +38,11 @@ def run_bucket_path(subject_id: str, run_id: str, *parts: str) -> str:
     return Path("artifacts", "subjects", subject_id, "runs", run_id, *parts).as_posix()
 
 
+def write_json(path: Path, payload: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+
 def source_project_path(subject_id: str) -> str:
     return Path("subjects", subject_id, "source", f"{subject_id}.csproj").as_posix()
 
@@ -381,6 +386,202 @@ class SubjectReportingTests(unittest.TestCase):
             self.assertTrue(samples_path.is_file())
             samples_payload = json.loads(samples_path.read_text(encoding="utf-8"))
             self.assertEqual(2, len(samples_payload["samples"]))
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_materialize_matrix_report_artifacts_writes_native_hotupdate_audit(self) -> None:
+        reporting_module = load_module(SUBJECT_REPORTING_MODULE_PATH, "chaos_subject_reporting_native_hotupdate_audit")
+        subject_id = "FixtureNativeHotUpdateSubject"
+        matrix_id = "windows-corelib-reference-native-hotupdate-proof"
+        run_id = "20260420-fixture-native-hotupdate-001"
+        report_path = run_bucket_path(subject_id, run_id, "matrices", matrix_id, "pipeline-report", "report.json")
+        host_input_manifest_path = run_bucket_path(subject_id, run_id, "analysis", "host-input", "host-input.manifest.json")
+        generated_manifest_path = run_bucket_path(subject_id, run_id, "analysis", "generated", "generated.manifest.json")
+        native_reference_manifest_path = run_bucket_path(subject_id, run_id, "analysis", "generated", "native-reference.manifest.json")
+        build_manifest_path = run_bucket_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json")
+        runtime_manifest_path = run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json")
+
+        plan = {
+            "selection": {
+                "subjectId": subject_id,
+                "goalId": "correctness.dev",
+                "matrixId": matrix_id,
+                "validationProfileId": "proof-dev",
+                "validationKinds": ["proof"],
+                "variant": "CHECK",
+                "pipelineId": "native-hotupdate-proof-output",
+                "entrySelection": {
+                    "family": "declared-unit-test",
+                    "stableId": f"{subject_id}::Patch::Patch.Proofs::Run()",
+                    "alias": "native-hotupdate-proof",
+                    "entryIndex": 60,
+                },
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "toolchainProfile": "msvc-reference",
+                    "runtimeProfile": "native-hotupdate-proof-output",
+                },
+                "artifactPlan": {
+                    "requiredBuckets": ["source", "host-input", "analysis", "generated", "build", "runtime", "report"],
+                    "evidenceTerminalBucket": "runtime",
+                },
+            },
+            "stagePlan": [
+                {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input"},
+                {"stageId": "generated-native-proof", "kind": "generated-native-proof", "scope": "shared", "bucket": "generated"},
+                {"stageId": "build-target", "kind": "build-target", "scope": "matrix", "bucket": "build"},
+                {"stageId": "runtime-managed-output", "kind": "runtime-managed-output", "scope": "matrix", "bucket": "runtime"},
+                {"stageId": "report-assemble", "kind": "report-assemble", "scope": "matrix", "bucket": "report"},
+            ],
+        }
+        execution_result = {
+            "subjectId": subject_id,
+            "matrixId": matrix_id,
+            "goalId": "correctness.dev",
+            "status": "ok",
+            "terminalStageId": "runtime-managed-output",
+            "terminalBucket": "runtime",
+            "stageResults": [
+                {
+                    "stageId": "host-input-build",
+                    "kind": "host-input-build",
+                    "bucket": "host-input",
+                    "status": "ok",
+                    "manifestPath": host_input_manifest_path,
+                    "reportPaths": [],
+                    "primaryEvidencePaths": [run_bucket_path(subject_id, run_id, "analysis", "host-input", "NativeProofApp.dll")],
+                    "diagnostics": {"stdoutPath": None, "stderrPath": None},
+                },
+                {
+                    "stageId": "generated-native-proof",
+                    "kind": "generated-native-proof",
+                    "bucket": "generated",
+                    "status": "ok",
+                    "manifestPath": generated_manifest_path,
+                    "reportPaths": [],
+                    "primaryEvidencePaths": [run_bucket_path(subject_id, run_id, "analysis", "generated", "generated", "native-reference.generated.cpp")],
+                    "diagnostics": {"stdoutPath": None, "stderrPath": None},
+                },
+                {
+                    "stageId": "build-target",
+                    "kind": "build-target",
+                    "bucket": "build",
+                    "status": "ok",
+                    "manifestPath": build_manifest_path,
+                    "reportPaths": [],
+                    "primaryEvidencePaths": [run_bucket_path(subject_id, run_id, "matrices", matrix_id, "build", "out", "chaos_subject_reference_proof.exe")],
+                    "diagnostics": {"stdoutPath": None, "stderrPath": None},
+                },
+                {
+                    "stageId": "runtime-managed-output",
+                    "kind": "runtime-managed-output",
+                    "bucket": "runtime",
+                    "status": "ok",
+                    "manifestPath": runtime_manifest_path,
+                    "reportPaths": [],
+                    "primaryEvidencePaths": [run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stdout.log")],
+                    "diagnostics": {
+                        "stdoutPath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stdout.log"),
+                        "stderrPath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stderr.log"),
+                    },
+                },
+            ],
+            "errors": [],
+        }
+
+        repo_root = TEST_TMP_ROOT / f"native-hotupdate-audit-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
+            write_json(
+                repo_root / host_input_manifest_path,
+                {
+                    "primaryProjectPath": "subjects/Fixture/NativeProofApp.csproj",
+                    "primaryAssemblyPath": run_bucket_path(subject_id, run_id, "analysis", "host-input", "NativeProofApp.dll"),
+                    "additionalAssemblyPaths": [run_bucket_path(subject_id, run_id, "analysis", "host-input", "Patch.dll")],
+                    "managedRuntimeProjectPath": "solutions/subjects/Fixture/hotupdate-tests/Fixture.HotUpdateProofHost.csproj",
+                    "managedRuntimeAssemblyPath": run_bucket_path(subject_id, run_id, "analysis", "host-input", "Fixture.HotUpdateProofHost.dll"),
+                    "collectionPath": "solutions/subjects/Fixture/hotupdate-tests/Generated/declared-tests.collection.json",
+                    "bindingManifestPath": "solutions/subjects/Fixture/hotupdate-tests/Generated/declared-tests.binding.json",
+                },
+            )
+            write_json(
+                repo_root / generated_manifest_path,
+                {
+                    "generatedSourcePath": run_bucket_path(subject_id, run_id, "analysis", "generated", "generated", "native-reference.generated.cpp"),
+                    "generatedSourcePaths": [
+                        run_bucket_path(subject_id, run_id, "analysis", "generated", "generated", "native-reference.generated.cpp"),
+                        run_bucket_path(subject_id, run_id, "analysis", "generated", "generated", "runtime", "native-reference.runtime-skeleton.page-0001.cpp"),
+                    ],
+                    "nativeReferenceManifestPath": native_reference_manifest_path,
+                    "nativeReferencePlanPath": run_bucket_path(subject_id, run_id, "analysis", "generated", "native-reference.plan.json"),
+                },
+            )
+            write_json(
+                repo_root / native_reference_manifest_path,
+                {
+                    "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
+                    "preferredAssemblyDispatchSubjectId": "Fixture.NativeProofApp/Program::Main:System.Int32()",
+                    "translationUnitPageCount": 1,
+                },
+            )
+            write_json(
+                repo_root / build_manifest_path,
+                {
+                    "buildKind": "native-reference",
+                    "buildStrategy": "windows-reference-cmake",
+                    "hostSourcePath": "solutions/subjects/Fixture/native-source/proof/main.cpp",
+                    "generatedSourcePaths": [
+                        run_bucket_path(subject_id, run_id, "analysis", "generated", "generated", "native-reference.generated.cpp"),
+                    ],
+                    "outputs": [
+                        run_bucket_path(subject_id, run_id, "matrices", matrix_id, "build", "out", "chaos_subject_reference_proof.exe"),
+                    ],
+                },
+            )
+            write_json(
+                repo_root / runtime_manifest_path,
+                {
+                    "managedRuntimeAssemblyPath": run_bucket_path(subject_id, run_id, "analysis", "host-input", "Fixture.HotUpdateProofHost.dll"),
+                    "nativePrimaryAssemblyPath": run_bucket_path(subject_id, run_id, "analysis", "host-input", "NativeProofApp.dll"),
+                    "nativeGeneratedManifestPath": generated_manifest_path,
+                    "nativeBuildManifestPath": build_manifest_path,
+                    "bindingManifestPath": "solutions/subjects/Fixture/hotupdate-tests/Generated/declared-tests.binding.json",
+                    "arguments": ["--entry-index=60"],
+                    "outputLines": ["corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3"],
+                    "stdoutPath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stdout.log"),
+                    "stderrPath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stderr.log"),
+                    "exitCodePath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "exit-code.txt"),
+                },
+            )
+
+            report = reporting_module.build_matrix_report(
+                plan,
+                execution_result,
+                run_id=run_id,
+                generated_at="2026-04-20T01:44:18Z",
+            )
+            report_artifacts = reporting_module.materialize_matrix_report_artifacts(
+                repo_root,
+                matrix_report_path=report_path,
+                matrix_report=report,
+            )
+
+            audit_path = run_bucket_path(subject_id, run_id, "matrices", matrix_id, "pipeline-report", "report", "native-hotupdate-audit.json")
+            self.assertEqual([audit_path], report_artifacts)
+            self.assertEqual(audit_path, report["nativeHotupdateAudit"]["artifactPath"])
+            self.assertEqual(native_reference_manifest_path, report["nativeHotupdateAudit"]["nativeReferenceManifestPath"])
+            self.assertEqual(build_manifest_path, report["nativeHotupdateAudit"]["nativeBuildManifestPath"])
+            self.assertEqual(
+                ["corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3"],
+                report["nativeHotupdateAudit"]["outputLines"],
+            )
+
+            audit_payload = json.loads((repo_root / audit_path).read_text(encoding="utf-8"))
+            self.assertEqual("native-hotupdate-audit", audit_payload["artifactKind"])
+            self.assertEqual("assembly-bound-native-reference-skeleton", audit_payload["nativeGeneration"]["runtimeExecutionKind"])
+            self.assertEqual("native-reference", audit_payload["nativeBuild"]["buildKind"])
+            self.assertEqual(False, audit_payload["truthBoundary"]["fullCoreLibTranslated"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

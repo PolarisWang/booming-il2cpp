@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 0,
+  "assemblyName": "System.Private.CoreLib",
+  "sourceReports": [
+    "docs/dev/completed/20260418-04-phase-2-system-private-corelib-certification-substrate/corelib-semantic-proof-report-v1-01.json",
+    "docs/dev/completed/20260418-05-phase-3-system-private-corelib-semantic-family-nativeization/family-proof-matrix-v1-01.json"
+  ],
+  "targetFrameworks": {
+    "net8.0": {
+      "publicMemberCount": 26154,
+      "classifiedPublicMemberCount": 26154,
+      "unclassifiedPublicMemberCount": 0,
+      "familyCount": 6,
+      "families": {
+        "managed-cil": 21152,
+        "internal-call": 117,
+        "runtime-special": 274,
+        "pinvoke": 4,
+        "field-metadata": 3658,
+        "abstract": 949
+      }
+    },
+    "net10.0": {
+      "publicMemberCount": 32489,
+      "classifiedPublicMemberCount": 32489,
+      "unclassifiedPublicMemberCount": 0,
+      "familyCount": 6,
+      "families": {
+        "managed-cil": 27137,
+        "internal-call": 71,
+        "runtime-special": 276,
+        "pinvoke": 4,
+        "field-metadata": 3962,
+        "abstract": 1039
+      }
+    }
+  },
+  "status": "imported"
+}
+

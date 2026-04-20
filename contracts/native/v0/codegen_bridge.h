@@ -53,6 +53,15 @@ typedef struct CodegenRegistrationOptionsV0 {
 } CodegenRegistrationOptionsV0;
 
 /*
+ * Assembly-bound native-reference dispatch request consumed by
+ * RunNativeReferenceAssembly-style generated entry points.
+ */
+typedef struct NativeReferenceAssemblyDispatchRequestV0 {
+    const char* subject_id_utf8;
+    void* managed_args;
+} NativeReferenceAssemblyDispatchRequestV0;
+
+/*
  * Process-wide helper surface consumed by generated C++.
  * Query helpers return null or status codes, while managed semantic failures
  * surface through controlled exception exits.

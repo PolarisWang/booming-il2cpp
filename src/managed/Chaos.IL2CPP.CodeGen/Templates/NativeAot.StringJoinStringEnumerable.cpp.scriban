@@ -1,0 +1,87 @@
+extern "C" std::intptr_t {{ helper_symbol }}(std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1)
+{
+    if (chaos_arg_1 == static_cast<std::intptr_t>(0))
+    {
+        std::abort();
+    }
+
+    const char* chaos_separator_utf8 = chaos_arg_0 == static_cast<std::intptr_t>(0)
+        ? ""
+        : chaos_reflection_get_string_utf8(chaos_arg_0);
+    std::string chaos_joined;
+    bool chaos_first = true;
+    auto chaos_append_separator = [&]()
+    {
+        if (chaos_first)
+        {
+            chaos_first = false;
+            return;
+        }
+
+        if (chaos_separator_utf8 != nullptr)
+        {
+            chaos_joined += chaos_separator_utf8;
+        }
+    };
+
+    auto* chaos_enumerable_header = reinterpret_cast<chaos_object_header*>(chaos_arg_1);
+    if (chaos_enumerable_header->type_id == chaos_type_id_managed_array)
+    {
+        auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_arg_1);
+        if (chaos_array->element_type_shape != {{ reference_type_shape_value }} ||
+            chaos_array->element_type_id != {{ string_type_id_symbol }})
+        {
+            std::abort();
+        }
+
+        for (std::intptr_t chaos_index = 0; chaos_index < chaos_array->length; chaos_index++)
+        {
+            chaos_append_separator();
+            const auto chaos_current = chaos_array->elements[static_cast<std::size_t>(chaos_index)];
+            if (chaos_current == static_cast<std::intptr_t>(0))
+            {
+                continue;
+            }
+
+            const char* chaos_current_utf8 = chaos_reflection_get_string_utf8(chaos_current);
+            if (chaos_current_utf8 != nullptr)
+            {
+                chaos_joined += chaos_current_utf8;
+            }
+        }
+
+        return chaos_reflection_create_string_utf8_copy(chaos_joined.c_str(), chaos_joined.size());
+    }
+
+{{~ for entry in variant_entries }}
+    if (chaos_enumerable_header->type_id == {{ entry.enumerable_type_id_symbol }})
+    {
+        const auto chaos_enumerator = {{ entry.get_enumerator_symbol }}(chaos_arg_1);
+        while (true)
+        {
+            const auto chaos_has_next = {{ entry.move_next_symbol }}(chaos_enumerator);
+            if (chaos_has_next == static_cast<std::intptr_t>(0))
+            {
+                break;
+            }
+
+            chaos_append_separator();
+            const auto chaos_current = {{ entry.get_current_symbol }}(chaos_enumerator);
+            if (chaos_current == static_cast<std::intptr_t>(0))
+            {
+                continue;
+            }
+
+            const char* chaos_current_utf8 = chaos_reflection_get_string_utf8(chaos_current);
+            if (chaos_current_utf8 != nullptr)
+            {
+                chaos_joined += chaos_current_utf8;
+            }
+        }
+
+        return chaos_reflection_create_string_utf8_copy(chaos_joined.c_str(), chaos_joined.size());
+    }
+
+{{~ end }}
+    std::abort();
+}

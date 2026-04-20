@@ -18,6 +18,8 @@ LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "Loa
 NATIVE_AOT_TRANSLATION_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeAot.TranslationUnit.cpp.scriban"
 NATIVE_AOT_OBJECT_MODEL_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeAot.ObjectModel.cpp.scriban"
 NATIVE_AOT_METHOD_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeAot.Method.cpp.scriban"
+NATIVE_AOT_AUDIT_SUMMARY_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeAot.AuditSummary.cpp.scriban"
+NATIVE_AOT_AUDIT_PAGE_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Templates" / "NativeAot.AuditPage.cpp.scriban"
 
 
 class Phase4BAotCoreIrObjectModelTests(unittest.TestCase):
@@ -205,6 +207,8 @@ class Phase4BAotCoreIrObjectModelTests(unittest.TestCase):
             "BuildObjectModelSection(",
             "BuildMethodSection(",
             "BuildGeneratedTranslationUnit(",
+            "NativeAotTemplateCatalog.GetAssemblyFullClosureAuditSummaryTemplate()",
+            "NativeAotTemplateCatalog.GetAssemblyFullClosureAuditPageTemplate()",
         ]:
             self.assertIn(required_fragment, emitter_source)
 
@@ -220,6 +224,8 @@ class Phase4BAotCoreIrObjectModelTests(unittest.TestCase):
         self.assertTrue(NATIVE_AOT_TRANSLATION_TEMPLATE_PATH.is_file(), msg=f"missing translation template: {NATIVE_AOT_TRANSLATION_TEMPLATE_PATH}")
         self.assertTrue(NATIVE_AOT_OBJECT_MODEL_TEMPLATE_PATH.is_file(), msg=f"missing object model template: {NATIVE_AOT_OBJECT_MODEL_TEMPLATE_PATH}")
         self.assertTrue(NATIVE_AOT_METHOD_TEMPLATE_PATH.is_file(), msg=f"missing method template: {NATIVE_AOT_METHOD_TEMPLATE_PATH}")
+        self.assertTrue(NATIVE_AOT_AUDIT_SUMMARY_TEMPLATE_PATH.is_file(), msg=f"missing audit summary template: {NATIVE_AOT_AUDIT_SUMMARY_TEMPLATE_PATH}")
+        self.assertTrue(NATIVE_AOT_AUDIT_PAGE_TEMPLATE_PATH.is_file(), msg=f"missing audit page template: {NATIVE_AOT_AUDIT_PAGE_TEMPLATE_PATH}")
 
 
 if __name__ == "__main__":

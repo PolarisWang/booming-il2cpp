@@ -11,7 +11,7 @@ public sealed partial class LinkerStage
     {
         var reachableClosure = ComputeReachableClosure(semanticWorld);
         var orderedMethods = reachableClosure.Methods
-            .OrderBy(method => string.Equals(method.SubjectId, semanticWorld.EntryPointSubjectId, StringComparison.Ordinal) ? 0 : 1)
+            .OrderBy(method => string.IsNullOrWhiteSpace(semanticWorld.EntryPointSubjectId) ? 1 : string.Equals(method.SubjectId, semanticWorld.EntryPointSubjectId, StringComparison.Ordinal) ? 0 : 1)
             .ThenBy(method => method.MetadataToken)
             .ToList();
         var orderedTypes = OrderTypes(reachableClosure.Types, orderedMethods);
@@ -26,11 +26,18 @@ public sealed partial class LinkerStage
         var semanticShapes = FilterSemanticShapes(semanticWorld, orderedTypes, orderedFields, orderedProperties, orderedMethods);
         var capabilityBundles = FilterCapabilityBundles(semanticWorld, orderedMethods);
         var optimizationFacts = BuildOptimizationFacts(semanticWorld, orderedTypes, orderedFields, orderedMethods);
-        var preserveDescriptor = BuildPreserveDescriptor(orderedTypes, orderedFields, orderedProperties, orderedMethods);
+        var preserveDescriptor = BuildPreserveDescriptor(
+            semanticWorld.Assembly.Name,
+            semanticWorld.FullAssemblyClosure,
+            orderedTypes,
+            orderedFields,
+            orderedProperties,
+            orderedMethods);
 
         return new LinkedWorldModel
         {
             InputAssemblyPath = semanticWorld.InputAssemblyPath,
+            FullAssemblyClosure = semanticWorld.FullAssemblyClosure,
             Assembly = semanticWorld.Assembly,
             Assemblies = semanticWorld.Assemblies,
             EntryPointSubjectId = semanticWorld.EntryPointSubjectId,

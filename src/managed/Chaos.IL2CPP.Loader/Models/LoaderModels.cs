@@ -31,6 +31,8 @@ internal record class MethodReferenceSummary
 
     public required string Name { get; init; }
 
+    public int GenericParameterCount { get; init; }
+
     public required string SubjectId { get; init; }
 
     public required string DefinitionSubjectId { get; init; }

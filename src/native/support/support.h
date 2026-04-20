@@ -13,6 +13,13 @@ void* CHAOS_RUNTIME_ABI_CALL ConcatStringPair(
     const void* left_string,
     const void* right_string);
 
+void* CHAOS_RUNTIME_ABI_CALL ConcatStringTriple(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    const void* first_string,
+    const void* second_string,
+    const void* third_string);
+
 int32_t CHAOS_RUNTIME_ABI_CALL WriteLineString(
     RuntimeState* runtime_state,
     ThreadState* thread_state,

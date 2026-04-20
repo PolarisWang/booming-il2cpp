@@ -18,6 +18,8 @@ constexpr const char* kConsoleWriteLineStringIcall =
     "System.Console/System.Console::WriteLine(System.String)";
 constexpr const char* kStringConcatPairIcall =
     "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
+constexpr const char* kStringConcatTripleIcall =
+    "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String)";
 constexpr const char* kDelegateCombineIcall =
     "System.Private.CoreLib/System.Delegate::Combine(System.Delegate,System.Delegate)";
 constexpr const char* kDelegateRemoveIcall =
@@ -539,6 +541,10 @@ void* CHAOS_RUNTIME_ABI_CALL ResolveIcall(const char* icall_name_utf8) {
 
     if (std::strcmp(icall_name_utf8, kStringConcatPairIcall) == 0) {
         return reinterpret_cast<void*>(&chaos::il2cpp::support::ConcatStringPair);
+    }
+
+    if (std::strcmp(icall_name_utf8, kStringConcatTripleIcall) == 0) {
+        return reinterpret_cast<void*>(&chaos::il2cpp::support::ConcatStringTriple);
     }
 
     if (std::strcmp(icall_name_utf8, kDelegateCombineIcall) == 0) {

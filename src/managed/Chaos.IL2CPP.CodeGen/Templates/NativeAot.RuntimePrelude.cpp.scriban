@@ -1,0 +1,209 @@
+static_assert(sizeof(std::intptr_t) == sizeof(std::uint64_t), "native-aot ABI lowering requires 64-bit intptr_t");
+
+constexpr std::intptr_t chaos_managed_pointer_local_slot_tag = 1;
+constexpr std::intptr_t chaos_raw_int32_pointer_tag = 2;
+
+struct chaos_managed_exception
+{
+    std::intptr_t object_value = 0;
+};
+
+template <typename TAction>
+struct chaos_finally_scope_guard
+{
+    explicit chaos_finally_scope_guard(TAction init_action)
+        : action(init_action)
+    {
+    }
+
+    chaos_finally_scope_guard(const chaos_finally_scope_guard&) = delete;
+    chaos_finally_scope_guard& operator=(const chaos_finally_scope_guard&) = delete;
+
+    ~chaos_finally_scope_guard()
+    {
+        if (active)
+        {
+            action();
+        }
+    }
+
+    TAction action;
+    bool active = true;
+};
+
+template <typename TAction>
+chaos_finally_scope_guard<TAction> chaos_make_finally_scope_guard(TAction action)
+{
+    return chaos_finally_scope_guard<TAction>(action);
+}
+
+std::intptr_t chaos_store_float32(float value) noexcept
+{
+    std::uint32_t bits = 0;
+    std::memcpy(&bits, &value, sizeof(value));
+    return static_cast<std::intptr_t>(static_cast<std::uint64_t>(bits));
+}
+
+float chaos_load_float32(std::intptr_t value) noexcept
+{
+    const auto bits = static_cast<std::uint32_t>(static_cast<std::uint64_t>(value));
+    float result = 0.0f;
+    std::memcpy(&result, &bits, sizeof(result));
+    return result;
+}
+
+std::intptr_t chaos_store_float64(double value) noexcept
+{
+    std::uint64_t bits = 0;
+    std::memcpy(&bits, &value, sizeof(value));
+    std::intptr_t result = 0;
+    std::memcpy(&result, &bits, sizeof(result));
+    return result;
+}
+
+double chaos_load_float64(std::intptr_t value) noexcept
+{
+    std::uint64_t bits = 0;
+    std::memcpy(&bits, &value, sizeof(bits));
+    double result = 0.0;
+    std::memcpy(&result, &bits, sizeof(result));
+    return result;
+}
+
+std::intptr_t chaos_store_int64(std::int64_t value) noexcept
+{
+    std::intptr_t result = 0;
+    std::memcpy(&result, &value, sizeof(result));
+    return result;
+}
+
+std::int64_t chaos_load_int64(std::intptr_t value) noexcept
+{
+    std::int64_t result = 0;
+    std::memcpy(&result, &value, sizeof(result));
+    return result;
+}
+
+std::intptr_t chaos_store_uint64(std::uint64_t value) noexcept
+{
+    std::intptr_t result = 0;
+    std::memcpy(&result, &value, sizeof(result));
+    return result;
+}
+
+std::uint64_t chaos_load_uint64(std::intptr_t value) noexcept
+{
+    std::uint64_t result = 0;
+    std::memcpy(&result, &value, sizeof(result));
+    return result;
+}
+
+std::int32_t chaos_wrap_add(std::int32_t left, std::int32_t right) noexcept
+{
+    return static_cast<std::int32_t>(
+        static_cast<std::uint32_t>(left) + static_cast<std::uint32_t>(right));
+}
+
+std::int32_t chaos_wrap_sub(std::int32_t left, std::int32_t right) noexcept
+{
+    return static_cast<std::int32_t>(
+        static_cast<std::uint32_t>(left) - static_cast<std::uint32_t>(right));
+}
+
+std::int32_t chaos_wrap_mul(std::int32_t left, std::int32_t right) noexcept
+{
+    return static_cast<std::int32_t>(
+        static_cast<std::uint32_t>(left) * static_cast<std::uint32_t>(right));
+}
+
+std::int32_t chaos_div(std::int32_t left, std::int32_t right)
+{
+    if (right == 0)
+    {
+        std::abort();
+    }
+
+    if (left == std::numeric_limits<std::int32_t>::min() && right == -1)
+    {
+        std::abort();
+    }
+
+    return static_cast<std::int32_t>(left / right);
+}
+
+std::int32_t chaos_rem(std::int32_t left, std::int32_t right)
+{
+    if (right == 0)
+    {
+        std::abort();
+    }
+
+    if (left == std::numeric_limits<std::int32_t>::min() && right == -1)
+    {
+        return 0;
+    }
+
+    return static_cast<std::int32_t>(left % right);
+}
+
+std::int32_t chaos_shift_left_int32(std::int32_t value, std::int32_t amount) noexcept
+{
+    const auto shift = static_cast<std::uint32_t>(amount) & 31U;
+    return static_cast<std::int32_t>(static_cast<std::uint32_t>(value) << shift);
+}
+
+std::int32_t chaos_shift_right_int32(std::int32_t value, std::int32_t amount) noexcept
+{
+    const auto shift = static_cast<std::uint32_t>(amount) & 31U;
+    if (shift == 0U)
+    {
+        return value;
+    }
+
+    const auto bits = static_cast<std::uint32_t>(value);
+    if (value >= 0)
+    {
+        return static_cast<std::int32_t>(bits >> shift);
+    }
+
+    const auto fill = std::numeric_limits<std::uint32_t>::max() << (32U - shift);
+    return static_cast<std::int32_t>((bits >> shift) | fill);
+}
+
+std::int32_t chaos_shift_right_un_int32(std::int32_t value, std::int32_t amount) noexcept
+{
+    const auto shift = static_cast<std::uint32_t>(amount) & 31U;
+    return static_cast<std::int32_t>(static_cast<std::uint32_t>(value) >> shift);
+}
+
+std::intptr_t chaos_checked_conv_ovf_i1(std::intptr_t value)
+{
+    if (value < static_cast<std::intptr_t>(std::numeric_limits<std::int8_t>::min()) ||
+        value > static_cast<std::intptr_t>(std::numeric_limits<std::int8_t>::max()))
+    {
+        std::abort();
+    }
+
+    return static_cast<std::intptr_t>(static_cast<std::int8_t>(value));
+}
+
+std::intptr_t chaos_checked_conv_ovf_u1(std::intptr_t value)
+{
+    if (value < static_cast<std::intptr_t>(0) ||
+        value > static_cast<std::intptr_t>(std::numeric_limits<std::uint8_t>::max()))
+    {
+        std::abort();
+    }
+
+    return static_cast<std::intptr_t>(static_cast<std::uint8_t>(value));
+}
+
+std::intptr_t* chaos_resolve_native_int_slot(std::intptr_t chaos_address)
+{
+    if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+    {
+        return reinterpret_cast<std::intptr_t*>(static_cast<std::uintptr_t>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+    }
+
+    return reinterpret_cast<std::intptr_t*>(chaos_address);
+}

@@ -57,6 +57,22 @@ class SubjectContractsSourceCutoverTests(unittest.TestCase):
         contracts_module.assert_json_files_parse(contracts_module.analysis_contract_json_paths(REPO_ROOT))
         contracts_module.validate_analysis_contracts(REPO_ROOT)
 
+    def test_analysis_contract_validation_supports_boolean_schema_fields(self) -> None:
+        contracts_module = load_module(CONTRACTS_MODULE_PATH, "chaos_subject_contracts_boolean_schema")
+
+        contracts_module.assert_json_matches_schema(
+            False,
+            {"type": "boolean", "const": False},
+            "fixture.booleanConst",
+        )
+
+        with self.assertRaisesRegex(RuntimeError, "schema type mismatch"):
+            contracts_module.assert_json_matches_schema(
+                0,
+                {"type": "boolean"},
+                "fixture.booleanType",
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -419,6 +419,15 @@ def _find_workspace_managed_test_project(manifest: dict[str, Any], host_kind: st
     raise RuntimeError(f"workspace manifest does not declare a managed test project for host '{host_kind}'")
 
 
+def _find_workspace_hotupdate_test_project(manifest: dict[str, Any], host_kind: str) -> dict[str, Any] | None:
+    for item in list(manifest.get("hotupdateTestProjects") or []):
+        if not isinstance(item, dict):
+            continue
+        if str(item.get("hostKind") or "") == host_kind:
+            return dict(item)
+    return None
+
+
 def _find_workspace_native_test_project(
     manifest: dict[str, Any],
     *,
@@ -518,7 +527,13 @@ def _resolve_workspace_execution(
         selected_object=selected_object,
         normalized_options=normalized_options,
     )
-    managed_test_project = _find_workspace_managed_test_project(manifest, host_kind)
+    uses_hotupdate_host = int(selected_object.get("hotUpdateCapability") or 0) > 0
+    hotupdate_test_project = _find_workspace_hotupdate_test_project(manifest, host_kind) if uses_hotupdate_host else None
+    managed_test_project = (
+        dict(hotupdate_test_project)
+        if hotupdate_test_project is not None
+        else _find_workspace_managed_test_project(manifest, host_kind)
+    )
     collection_path = str(managed_test_project.get("collectionPath") or "").strip()
     if not collection_path:
         raise RuntimeError(f"workspace managed test project for host '{host_kind}' is missing collectionPath")
@@ -540,6 +555,9 @@ def _resolve_workspace_execution(
         "managedTestProject": managed_test_project,
         "nativeTestProject": native_test_project,
     }
+    binding_manifest_path = str(managed_test_project.get("bindingManifestPath") or "").strip()
+    if binding_manifest_path:
+        execution["bindingManifestPath"] = binding_manifest_path
 
     if object_type in {"declared-unit-test", "declared-benchmark"}:
         stable_id = str(selected_object.get("stableId") or "").strip()
@@ -552,9 +570,48 @@ def _resolve_workspace_execution(
             alias=alias,
         )
         if entry is None:
-            raise RuntimeError(
-                f"workspace declared collection does not contain {object_type} '{stable_id or alias or '<missing>'}'"
+            manifest_path, manifest = _regenerate_subject_workspace_manifest(
+                repo_root,
+                subject_id=subject_id,
+                host_platform=host_platform,
+                selected_object=selected_object,
+                normalized_options=normalized_options,
             )
+            execution["workspaceManifestPath"] = _relative_repo_path(repo_root, manifest_path)
+            execution["workspaceVersion"] = int(manifest.get("workspaceVersion") or 0)
+            hotupdate_test_project = _find_workspace_hotupdate_test_project(manifest, host_kind) if uses_hotupdate_host else None
+            managed_test_project = (
+                dict(hotupdate_test_project)
+                if hotupdate_test_project is not None
+                else _find_workspace_managed_test_project(manifest, host_kind)
+            )
+            collection_path = str(managed_test_project.get("collectionPath") or "").strip()
+            if not collection_path:
+                raise RuntimeError(f"workspace managed test project for host '{host_kind}' is missing collectionPath")
+            execution["collectionPath"] = collection_path
+            execution["managedTestProject"] = managed_test_project
+            binding_manifest_path = str(managed_test_project.get("bindingManifestPath") or "").strip()
+            if binding_manifest_path:
+                execution["bindingManifestPath"] = binding_manifest_path
+            else:
+                execution.pop("bindingManifestPath", None)
+            native_test_project = _find_workspace_native_test_project(
+                manifest,
+                matrix_id=matrix_id,
+                host_kind=host_kind,
+            )
+            execution["nativeTestProject"] = native_test_project
+            collection = _load_workspace_declared_collection(repo_root, collection_path)
+            entry = _find_workspace_declared_collection_entry(
+                collection,
+                object_type=object_type,
+                stable_id=stable_id,
+                alias=alias,
+            )
+            if entry is None:
+                raise RuntimeError(
+                    f"workspace declared collection does not contain {object_type} '{stable_id or alias or '<missing>'}'"
+                )
         try:
             execution["entryIndex"] = int(entry.get("entryIndex"))
         except (TypeError, ValueError) as error:
@@ -1236,15 +1293,15 @@ def _write_json_document(path: Path, payload: dict[str, Any]) -> None:
 
 
 def _resolve_subject_matrix_report_path(plan: dict[str, Any]) -> str:
-    entry_report_path = str(dict(plan.get("artifactsRoot") or {}).get("entryReportPath") or "")
-    if entry_report_path:
-        return entry_report_path
     for stage in list(plan.get("stagePlan") or []):
         if str(stage.get("bucket") or "") == "report":
             return str(dict(stage.get("paths") or {}).get("manifestPath") or "")
     pipeline_report_root = str(dict(plan.get("artifactsRoot") or {}).get("pipelineReportRoot") or "")
     if pipeline_report_root:
         return f"{pipeline_report_root}/report.json"
+    entry_report_path = str(dict(plan.get("artifactsRoot") or {}).get("entryReportPath") or "")
+    if entry_report_path:
+        return entry_report_path
     return ""
 
 

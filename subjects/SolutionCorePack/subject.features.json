@@ -21,6 +21,61 @@
       "code": 4,
       "id": "solution-mixed-reference-closure",
       "sourcePath": "subjects/SolutionCorePack/source/EngineeringScenarios/MixedReferenceClosureSolution"
+    },
+    {
+      "code": 5,
+      "id": "solution-foundation-dll-translation",
+      "sourcePath": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution"
+    },
+    {
+      "code": 6,
+      "id": "solution-static-call-ctor-getter",
+      "sourcePath": "subjects/SolutionCorePack/source/EngineeringScenarios/StaticCallCtorGetterSolution"
+    },
+    {
+      "code": 7,
+      "id": "solution-constructor-then-instance-call",
+      "sourcePath": "subjects/SolutionCorePack/source/EngineeringScenarios/ConstructorThenInstanceCallSolution"
+    },
+    {
+      "code": 8,
+      "id": "solution-delegate-closed-target-relay",
+      "sourcePath": "subjects/SolutionCorePack/source/EngineeringScenarios/DelegateClosedTargetRelaySolution"
+    },
+    {
+      "code": 9,
+      "id": "solution-exception-throw-catch-finally",
+      "sourcePath": "subjects/SolutionCorePack/source/EngineeringScenarios/ExceptionThrowCatchFinallySolution"
+    },
+    {
+      "code": 10,
+      "id": "solution-nested-exception-throw-catch-finally",
+      "sourcePath": "subjects/SolutionCorePack/source/EngineeringScenarios/NestedExceptionThrowCatchFinallySolution"
+    },
+    {
+      "code": 11,
+      "id": "solution-marshaling-utf8-export",
+      "sourcePath": "subjects/SolutionCorePack/source/EngineeringScenarios/MarshalingUtf8ExportSolution"
+    },
+    {
+      "code": 12,
+      "id": "solution-reflection-interop-closure",
+      "sourcePath": "subjects/SolutionCorePack/source/EngineeringScenarios/ReflectionInteropClosureSolution"
+    },
+    {
+      "code": 13,
+      "id": "solution-pinvoke-direct-call",
+      "sourcePath": "subjects/SolutionCorePack/source/EngineeringScenarios/PInvokeDirectCallSolution"
+    },
+    {
+      "code": 14,
+      "id": "solution-array-boxing-reference-array",
+      "sourcePath": "subjects/SolutionCorePack/source/EngineeringScenarios/ArrayBoxingReferenceArraySolution"
+    },
+    {
+      "code": 15,
+      "id": "solution-interface-dispatch-message",
+      "sourcePath": "subjects/SolutionCorePack/source/EngineeringScenarios/InterfaceDispatchMessageSolution"
     }
   ],
   "features": [

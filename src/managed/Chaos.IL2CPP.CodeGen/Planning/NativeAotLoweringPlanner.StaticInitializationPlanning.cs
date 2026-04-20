@@ -70,7 +70,8 @@ public sealed partial class NativeAotLoweringPlanner
             closureManifest.InputAssemblyPath,
             Path.GetDirectoryName(closureManifest.InputAssemblyPath) ?? closureManifest.InputAssemblyPath,
             closureManifest.EntrySubjectId,
-            closureManifest.AdditionalAssemblyPaths));
+            closureManifest.AdditionalAssemblyPaths,
+            FullAssemblyClosure: closureManifest.FullAssemblyClosure));
         var loadedMethodsBySubjectId = loadedWorld.Methods
             .GroupBy(method => method.SubjectId, StringComparer.Ordinal)
             .ToDictionary(group => group.Key, group => group.First(), StringComparer.Ordinal);
@@ -85,7 +86,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         foreach (var typeSubjectId in candidateTypeSubjectIds.OrderBy(value => value, StringComparer.Ordinal))
         {
-            var cctorSubjectId = ManagedNaming.CreateMethodSubjectId(typeSubjectId, ".cctor", []);
+            var cctorSubjectId = ManagedNaming.CreateMethodSubjectId(typeSubjectId, ".cctor", "System.Void", []);
             if (!loadedMethodsBySubjectId.TryGetValue(cctorSubjectId, out var cctorMethod))
             {
                 continue;

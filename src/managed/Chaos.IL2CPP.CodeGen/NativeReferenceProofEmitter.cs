@@ -8,6 +8,7 @@ namespace Chaos.IL2CPP.CodeGen;
 
 public sealed class NativeReferenceProofEmitter
 {
+    private const int AuditTranslationUnitPageSize = 1024;
     private const string ManagedAsyncAwaitIntMinimal = NativeReferenceProofCatalog.ManagedAsyncAwaitIntMinimal;
     private const string ManagedThreadingThreadStaticMonitorMinimal = NativeReferenceProofCatalog.ManagedThreadingThreadStaticMonitorMinimal;
     private const string ManagedInterfaceDispatchMessageMinimal = NativeReferenceProofCatalog.ManagedInterfaceDispatchMessageMinimal;
@@ -45,7 +46,11 @@ public sealed class NativeReferenceProofEmitter
     private const string EngineLifecycleCallbackGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.EngineLifecycleCallbackGeneratedTranslationUnitTemplateRelativePath;
     private const string EngineHostProofGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.EngineHostProofGeneratedTranslationUnitTemplateRelativePath;
     private const string ConsoleWriteLineStringIcall = "System.Console/System.Console::WriteLine(System.String)";
+    private const string ConsoleWriteLineStringMethodSubjectId = "System.Console/System.Console::WriteLine:System.Void(System.String)";
     private const string StringConcatPairIcall = "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
+    private const string StringConcatTripleIcall = "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String)";
+    private const string StringConcatPairMethodSubjectId = "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)";
+    private const string StringConcatTripleMethodSubjectId = "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String,System.String)";
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
@@ -57,13 +62,36 @@ public sealed class NativeReferenceProofEmitter
         var managedClosureRoot = Path.GetFullPath(request.ManagedClosureRootPath);
         var loweringPlanPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.NativeReferenceLoweringPlan);
         var loweringPlan = LoadRequiredJson<NativeReferenceLoweringPlanArtifact>(loweringPlanPath);
-        ValidateManagedLoweringPlan(loweringPlan);
-        var translationUnit = BuildGeneratedTranslationUnit(loweringPlan);
-        var generatedSource = new NativeReferenceGeneratedSource
+        IReadOnlyList<NativeReferenceGeneratedSource> generatedSources;
+        if (string.Equals(loweringPlan.PlanKind, "assembly-full-closure-runtime-skeleton", StringComparison.Ordinal))
         {
-            RelativePath = NativeReferenceArtifactNames.GeneratedTranslationUnit,
-            Contents = translationUnit,
-        };
+            var typedIlPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.TypedIlIr);
+            var metadataRegistrationPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.MetadataRegistration);
+            var codeRegistrationPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.CodeRegistration);
+            var typedIl = LoadRequiredJson<TypedIlIrArtifact>(typedIlPath);
+            var metadataRegistration = LoadRequiredJson<MetadataRegistrationArtifact>(metadataRegistrationPath);
+            var codeRegistration = LoadRequiredJson<CodeRegistrationArtifact>(codeRegistrationPath);
+            generatedSources = BuildAssemblyFullClosureRuntimeSkeletonGeneratedSources(
+                loweringPlan,
+                typedIl,
+                metadataRegistration,
+                codeRegistration);
+        }
+        else if (string.Equals(loweringPlan.PlanKind, "assembly-full-closure-audit", StringComparison.Ordinal))
+        {
+            generatedSources = BuildAssemblyFullClosureAuditGeneratedSources(loweringPlan);
+        }
+        else
+        {
+            generatedSources =
+            [
+                new NativeReferenceGeneratedSource
+                {
+                    RelativePath = NativeReferenceArtifactNames.GeneratedTranslationUnit,
+                    Contents = BuildGeneratedTranslationUnit(loweringPlan),
+                },
+            ];
+        }
 
         var manifest = new NativeReferenceProofManifestArtifact
         {
@@ -71,14 +99,18 @@ public sealed class NativeReferenceProofEmitter
             EntrySubjectId = loweringPlan.EntrySubjectId,
             ManagedClosureRootPath = ManagedNaming.NormalizePathForManifest(managedClosureRoot, Environment.CurrentDirectory),
             PlanArtifactPath = NativeReferenceArtifactNames.LoweringPlan,
-            GeneratedArtifacts =
-            [
-                new NativeReferenceGeneratedArtifactRef
+            RuntimeExecutionKind = loweringPlan.RuntimeExecutionKind,
+            PreferredAssemblyDispatchSubjectId = BuildPreferredAssemblyDispatchSubjectId(loweringPlan),
+            TranslationUnitPageSize = loweringPlan.TranslationUnitPageSize,
+            TranslationUnitPageCount = loweringPlan.TranslationUnitPageCount,
+            TranslationUnitPages = loweringPlan.TranslationUnitPages,
+            GeneratedArtifacts = generatedSources
+                .Select(generatedSource => new NativeReferenceGeneratedArtifactRef
                 {
                     Kind = "generatedTranslationUnit",
                     Path = generatedSource.RelativePath,
-                },
-            ],
+                })
+                .ToList(),
         };
 
         return new NativeReferenceProofResult
@@ -86,16 +118,1587 @@ public sealed class NativeReferenceProofEmitter
             OutputRootPath = request.OutputRootPath,
             LoweringPlan = loweringPlan,
             Manifest = manifest,
-            GeneratedSources = [generatedSource],
+            GeneratedSources = generatedSources,
         };
     }
 
     private static string BuildGeneratedTranslationUnit(
         NativeReferenceLoweringPlanArtifact loweringPlan)
     {
+        ValidateManagedLoweringPlan(loweringPlan);
         return ScribanTemplateRenderer.RenderTemplate(
             GetTemplateForPlan(loweringPlan.PlanKind),
             CreateTemplateModel(loweringPlan));
+    }
+
+    private static IReadOnlyList<NativeReferenceGeneratedSource> BuildAssemblyFullClosureAuditGeneratedSources(
+        NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        ValidateAssemblyFullClosureAuditPlan(loweringPlan);
+
+        var generatedSources = new List<NativeReferenceGeneratedSource>
+        {
+            new()
+            {
+                RelativePath = NativeReferenceArtifactNames.GeneratedTranslationUnit,
+                Contents = BuildAssemblyFullClosureAuditSummaryTranslationUnit(loweringPlan),
+            },
+        };
+
+        var methodSubjectIds = loweringPlan.TranslationUnitMethodSubjectIds ?? [];
+        for (var pageIndex = 0; pageIndex * AuditTranslationUnitPageSize < methodSubjectIds.Count; pageIndex++)
+        {
+            var pageItems = methodSubjectIds
+                .Skip(pageIndex * AuditTranslationUnitPageSize)
+                .Take(AuditTranslationUnitPageSize)
+                .ToList();
+            generatedSources.Add(new NativeReferenceGeneratedSource
+            {
+                RelativePath = $"generated/audit/native-reference.methods.page-{pageIndex + 1:D4}.cpp",
+                Contents = BuildAssemblyFullClosureAuditPageTranslationUnit(loweringPlan, pageIndex + 1, pageItems),
+            });
+        }
+
+        return generatedSources;
+    }
+
+    private static IReadOnlyList<NativeReferenceGeneratedSource> BuildAssemblyFullClosureRuntimeSkeletonGeneratedSources(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        TypedIlIrArtifact typedIl,
+        MetadataRegistrationArtifact metadataRegistration,
+        CodeRegistrationArtifact codeRegistration)
+    {
+        ValidateAssemblyFullClosureRuntimeSkeletonPlan(loweringPlan);
+
+        var generatedSources = new List<NativeReferenceGeneratedSource>
+        {
+            new()
+            {
+                RelativePath = NativeReferenceArtifactNames.GeneratedTranslationUnit,
+                Contents = BuildAssemblyFullClosureRuntimeSkeletonSummaryTranslationUnit(loweringPlan),
+            },
+        };
+
+        foreach (var page in loweringPlan.TranslationUnitPages ?? [])
+        {
+            var pageItems = (loweringPlan.TranslationUnitMethodSubjectIds ?? [])
+                .Skip((page.PageNumber - 1) * (loweringPlan.TranslationUnitPageSize ?? AuditTranslationUnitPageSize))
+                .Take(page.MethodCount)
+                .ToList();
+            generatedSources.Add(new NativeReferenceGeneratedSource
+            {
+                RelativePath = page.Path,
+                Contents = BuildAssemblyFullClosureRuntimeSkeletonPageTranslationUnit(
+                    loweringPlan,
+                    typedIl,
+                    metadataRegistration,
+                    codeRegistration,
+                    page.PageNumber,
+                    pageItems),
+            });
+        }
+
+        return generatedSources;
+    }
+
+    private static string BuildAssemblyFullClosureAuditSummaryTranslationUnit(
+        NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        ValidateAssemblyFullClosureAuditPlan(loweringPlan);
+        var model = new ScriptObject
+        {
+            ["assembly_name_literal"] = ToCppStringLiteral(loweringPlan.AssemblyName),
+            ["plan_kind_literal"] = ToCppStringLiteral(loweringPlan.PlanKind),
+            ["translation_unit_method_count"] = loweringPlan.TranslationUnitMethodCount ?? 0,
+            ["translation_unit_page_size"] = loweringPlan.TranslationUnitPageSize ?? AuditTranslationUnitPageSize,
+            ["translation_unit_page_count"] = loweringPlan.TranslationUnitPageCount
+                ?? GetAuditPageCount(loweringPlan.TranslationUnitMethodSubjectIds?.Count ?? 0),
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetAssemblyFullClosureAuditSummaryTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyFullClosureAuditPageTranslationUnit(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        int pageNumber,
+        IReadOnlyList<string> pageItems)
+    {
+        var model = new ScriptObject
+        {
+            ["assembly_name_literal"] = ToCppStringLiteral(loweringPlan.AssemblyName),
+            ["page_number"] = pageNumber,
+            ["page_item_count"] = pageItems.Count,
+            ["method_subject_id_literals"] = pageItems.Select(ToCppStringLiteral).ToArray(),
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetAssemblyFullClosureAuditPageTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyFullClosureRuntimeSkeletonSummaryTranslationUnit(
+        NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        ValidateAssemblyFullClosureRuntimeSkeletonPlan(loweringPlan);
+        var pages = loweringPlan.TranslationUnitPages ?? [];
+        var pageDispatchDeclarations = pages
+            .Select(page =>
+            {
+                var pageDispatchName = BuildAssemblyFullClosureRuntimeSkeletonPageDispatchFunctionName(page.PageNumber);
+                return $"""
+int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    const char* subject_id,
+    void* managed_args);
+""";
+            })
+            .ToArray();
+        var pageDispatchCatalogEntries = pages
+            .Select(page =>
+            {
+                var pageDispatchName = BuildAssemblyFullClosureRuntimeSkeletonPageDispatchFunctionName(page.PageNumber);
+                return $"    {{ {page.PageNumber}, {ToCppStringLiteral(page.FirstMethodSubjectId ?? string.Empty)}, {ToCppStringLiteral(page.LastMethodSubjectId ?? string.Empty)}, &{pageDispatchName} }},";
+            })
+            .ToArray();
+        var model = new ScriptObject
+        {
+            ["assembly_name_literal"] = ToCppStringLiteral(loweringPlan.AssemblyName),
+            ["plan_kind_literal"] = ToCppStringLiteral(loweringPlan.PlanKind),
+            ["runtime_execution_kind_literal"] = ToCppStringLiteral(loweringPlan.RuntimeExecutionKind ?? "assembly-bound-native-reference-skeleton"),
+            ["translation_unit_mode_literal"] = ToCppStringLiteral(loweringPlan.TranslationUnitMode ?? "runtime-skeleton"),
+            ["translation_unit_method_count"] = loweringPlan.TranslationUnitMethodCount ?? 0,
+            ["translation_unit_page_size"] = loweringPlan.TranslationUnitPageSize ?? AuditTranslationUnitPageSize,
+            ["translation_unit_page_count"] = loweringPlan.TranslationUnitPageCount ?? 0,
+            ["page_dispatch_declarations"] = pageDispatchDeclarations,
+            ["page_dispatch_catalog_entries"] = pageDispatchCatalogEntries,
+            ["native_entry_function_name"] = loweringPlan.NativeEntryFunctionName,
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetAssemblyFullClosureRuntimeSkeletonSummaryTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyFullClosureRuntimeSkeletonPageTranslationUnit(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        TypedIlIrArtifact typedIl,
+        MetadataRegistrationArtifact metadataRegistration,
+        CodeRegistrationArtifact codeRegistration,
+        int pageNumber,
+        IReadOnlyList<string> pageItems)
+    {
+        var methodsBySubjectId = (typedIl.Methods ?? [])
+            .ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
+        var methodPointers = codeRegistration.Modules
+            .SelectMany(module => module.Registrations)
+            .Where(registration => string.Equals(registration.RegistrationKind, "methodPointer", StringComparison.Ordinal))
+            .ToList();
+        var methodStubNamesBySubjectId = pageItems
+            .Select((subjectId, index) => new
+            {
+                subjectId,
+                stubName = BuildAssemblyFullClosureRuntimeSkeletonMethodStubName(pageNumber, index + 1, subjectId),
+            })
+            .ToDictionary(item => item.subjectId, item => item.stubName, StringComparer.Ordinal);
+        var methodStubDeclarations = methodStubNamesBySubjectId.Values
+            .Select(BuildAssemblyFullClosureRuntimeSkeletonMethodStubDeclaration)
+            .ToList();
+        var methodStubDefinitions = new List<string>();
+        var dispatchEntries = new List<string>();
+        for (var index = 0; index < pageItems.Count; index++)
+        {
+            var subjectId = pageItems[index];
+            var stubName = methodStubNamesBySubjectId[subjectId];
+            methodStubDefinitions.Add(
+                BuildAssemblyFullClosureRuntimeSkeletonMethodStub(
+                    loweringPlan,
+                    metadataRegistration,
+                    methodPointers,
+                    methodsBySubjectId,
+                    methodStubNamesBySubjectId,
+                    stubName,
+                    subjectId));
+            dispatchEntries.Add($"    {{ {ToCppStringLiteral(subjectId)}, &{stubName} }},");
+        }
+        var model = new ScriptObject
+        {
+            ["runtime_execution_kind_literal"] = ToCppStringLiteral(loweringPlan.RuntimeExecutionKind ?? "assembly-bound-native-reference-skeleton"),
+            ["page_number"] = pageNumber,
+            ["page_item_count"] = pageItems.Count,
+            ["method_subject_id_literals"] = pageItems.Select(ToCppStringLiteral).ToArray(),
+            ["method_stub_declarations"] = methodStubDeclarations.ToArray(),
+            ["method_stub_definitions"] = methodStubDefinitions.ToArray(),
+            ["dispatch_entries"] = dispatchEntries.ToArray(),
+            ["page_dispatch_function_name"] = BuildAssemblyFullClosureRuntimeSkeletonPageDispatchFunctionName(pageNumber),
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetAssemblyFullClosureRuntimeSkeletonPageTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyFullClosureRuntimeSkeletonMethodStubName(
+        int pageNumber,
+        int itemNumber,
+        string subjectId)
+    {
+        var sanitized = new StringBuilder();
+        foreach (var current in subjectId)
+        {
+            sanitized.Append(char.IsLetterOrDigit(current) ? current : '_');
+        }
+
+        return $"NativeReferenceStub_Page{pageNumber:D4}_Item{itemNumber:D4}_{sanitized.ToString().Trim('_')}";
+    }
+
+    private static string BuildAssemblyFullClosureRuntimeSkeletonPageDispatchFunctionName(int pageNumber)
+    {
+        return $"DispatchRuntimeSkeletonPage{pageNumber:D4}";
+    }
+
+    private static string BuildAssemblyFullClosureRuntimeSkeletonMethodStubDeclaration(string stubName)
+    {
+        return $@"int32_t CHAOS_RUNTIME_ABI_CALL {stubName}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args);";
+    }
+
+    private static string BuildAssemblyFullClosureRuntimeSkeletonMethodStub(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        IReadOnlyDictionary<string, string> methodStubNamesBySubjectId,
+        string stubName,
+        string subjectId)
+    {
+        if (TryBuildAssemblyBoundMarshalingUtf8ExportPlan(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodPointers,
+                out var marshalingUtf8ExportPlan))
+        {
+            return BuildAssemblyBoundMarshalingUtf8ExportStub(marshalingUtf8ExportPlan, stubName);
+        }
+
+        if (TryBuildAssemblyBoundReflectionInteropClosurePlan(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodPointers,
+                out var reflectionInteropClosurePlan))
+        {
+            return BuildAssemblyBoundReflectionInteropClosureStub(reflectionInteropClosurePlan, stubName);
+        }
+
+        if (TryBuildAssemblyBoundPInvokeDirectCallPlan(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodPointers,
+                methodsBySubjectId.Values.ToList(),
+                out var pinvokeDirectCallPlan))
+        {
+            return BuildAssemblyBoundPInvokeDllImportMinimalStub(pinvokeDirectCallPlan, stubName);
+        }
+
+        if (TryBuildAssemblyBoundArrayBoxingReferenceArrayPlan(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodPointers,
+                methodsBySubjectId.Values.ToList(),
+                out var arrayBoxingReferenceArrayPlan))
+        {
+            return BuildAssemblyBoundArrayBoxingReferenceArrayStub(arrayBoxingReferenceArrayPlan, stubName);
+        }
+
+        if (TryBuildAssemblyBoundInterfaceDispatchMessagePlan(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodPointers,
+                methodsBySubjectId.Values.ToList(),
+                out var interfaceDispatchMessagePlan))
+        {
+            return BuildAssemblyBoundInterfaceDispatchMessageStub(interfaceDispatchMessagePlan, stubName);
+        }
+
+        if (TryBuildAssemblyBoundStaticIntForwarderStub(
+                subjectId,
+                methodsBySubjectId,
+                methodStubNamesBySubjectId,
+                stubName,
+                out var staticIntForwarderStub))
+        {
+            return staticIntForwarderStub;
+        }
+
+        if (TryBuildAssemblyBoundConstructorFieldSetterStub(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodsBySubjectId,
+                stubName,
+                out var constructorFieldSetterStub))
+        {
+            return constructorFieldSetterStub;
+        }
+
+        if (TryBuildAssemblyBoundFieldBackedStringReturnStub(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodsBySubjectId,
+                stubName,
+                out var fieldBackedStringReturnStub))
+        {
+            return fieldBackedStringReturnStub;
+        }
+
+        if (TryBuildAssemblyBoundConsoleWriteLineStub(subjectId, methodsBySubjectId, stubName, out var consoleWriteLineStub))
+        {
+            return consoleWriteLineStub;
+        }
+
+        if (TryBuildAssemblyBoundDelegateClosedTargetRelayPlan(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodPointers,
+                out var delegateClosedTargetRelayPlan))
+        {
+            return BuildAssemblyBoundDelegateClosedTargetRelayStub(delegateClosedTargetRelayPlan, stubName);
+        }
+
+        if (TryBuildAssemblyBoundExceptionThrowCatchFinallyPlan(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodPointers,
+                out var exceptionThrowCatchFinallyPlan))
+        {
+            return BuildAssemblyBoundExceptionThrowCatchFinallyStub(exceptionThrowCatchFinallyPlan, stubName);
+        }
+
+        if (TryBuildAssemblyBoundNestedExceptionThrowCatchFinallyPlan(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodPointers,
+                out var nestedExceptionThrowCatchFinallyPlan))
+        {
+            return BuildAssemblyBoundNestedExceptionThrowCatchFinallyStub(nestedExceptionThrowCatchFinallyPlan, stubName);
+        }
+
+        var executableLoweringPlan = TryBuildAssemblyFullClosureExecutableLoweringPlan(
+            loweringPlan.AssemblyName,
+            subjectId,
+            methodsBySubjectId.Values.ToList(),
+            metadataRegistration,
+            methodPointers);
+        if (executableLoweringPlan is not null &&
+            string.Equals(executableLoweringPlan.PlanKind, "staticCallCtorGetter", StringComparison.Ordinal))
+        {
+            return BuildAssemblyBoundStaticCallCtorGetterStub(executableLoweringPlan, stubName);
+        }
+
+        if (executableLoweringPlan is not null &&
+            string.Equals(executableLoweringPlan.PlanKind, "constructorThenInstanceCall", StringComparison.Ordinal))
+        {
+            return BuildAssemblyBoundConstructorThenInstanceCallStub(executableLoweringPlan, stubName);
+        }
+
+        if (executableLoweringPlan is not null &&
+            string.Equals(executableLoweringPlan.PlanKind, "delegateClosedTargetRelayMinimal", StringComparison.Ordinal))
+        {
+            return BuildAssemblyBoundDelegateClosedTargetRelayStub(executableLoweringPlan, stubName);
+        }
+
+        if (executableLoweringPlan is not null &&
+            string.Equals(executableLoweringPlan.PlanKind, ExceptionThrowCatchFinallyMinimal, StringComparison.Ordinal))
+        {
+            return BuildAssemblyBoundExceptionThrowCatchFinallyStub(executableLoweringPlan, stubName);
+        }
+
+        if (executableLoweringPlan is not null &&
+            string.Equals(executableLoweringPlan.PlanKind, InteropPInvokeDirectCallMinimal, StringComparison.Ordinal))
+        {
+            return BuildAssemblyBoundPInvokeDllImportMinimalStub(executableLoweringPlan, stubName);
+        }
+
+        if (executableLoweringPlan is not null &&
+            string.Equals(executableLoweringPlan.PlanKind, "arrayBoxingReferenceArray", StringComparison.Ordinal))
+        {
+            return BuildAssemblyBoundArrayBoxingReferenceArrayStub(executableLoweringPlan, stubName);
+        }
+
+        if (executableLoweringPlan is not null &&
+            string.Equals(executableLoweringPlan.PlanKind, "interfaceDispatchMessage", StringComparison.Ordinal))
+        {
+            return BuildAssemblyBoundInterfaceDispatchMessageStub(executableLoweringPlan, stubName);
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["subject_id"] = subjectId,
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonReservedStubTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyBoundStaticCallCtorGetterStub(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        string stubName)
+    {
+        ValidateManagedLoweringPlan(loweringPlan);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(loweringPlan.AssemblyName),
+            ["reference_type_token"] = loweringPlan.ReferenceTypeToken,
+            ["captured_field_token"] = loweringPlan.CapturedFieldToken,
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
+            ["echo_literal"] = loweringPlan.EchoLiteral,
+            ["echo_literal_byte_count"] = loweringPlan.EchoLiteralByteCount ?? 0,
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticCallCtorGetterStubTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyBoundConstructorThenInstanceCallStub(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        string stubName)
+    {
+        ValidateManagedLoweringPlan(loweringPlan);
+        var concatIcall = NormalizeStringConcatIcall(loweringPlan.StringConcatPairIcall);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(loweringPlan.AssemblyName),
+            ["reference_type_token"] = loweringPlan.ReferenceTypeToken,
+            ["captured_field_token"] = loweringPlan.CapturedFieldToken,
+            ["concat_icall_literal"] = ToCppStringLiteral(concatIcall),
+            ["string_concat_triple_icall_literal"] = ToCppStringLiteral(StringConcatTripleIcall),
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
+            ["constructor_literal"] = loweringPlan.ConstructorLiteral,
+            ["constructor_literal_byte_count"] = loweringPlan.ConstructorLiteralByteCount ?? 0,
+            ["message_prefix_literal"] = loweringPlan.MessagePrefixLiteral,
+            ["message_prefix_literal_byte_count"] = loweringPlan.MessagePrefixLiteralByteCount ?? 0,
+            ["message_suffix_literal"] = loweringPlan.MessageSuffixLiteral,
+            ["message_suffix_literal_byte_count"] = loweringPlan.MessageSuffixLiteralByteCount ?? 0,
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonConstructorThenInstanceCallStubTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyBoundDelegateClosedTargetRelayStub(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        string stubName)
+    {
+        ValidateManagedLoweringPlan(loweringPlan);
+        var concatIcall = NormalizeStringConcatIcall(loweringPlan.StringConcatPairIcall);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(loweringPlan.AssemblyName),
+            ["reference_type_token"] = loweringPlan.ReferenceTypeToken,
+            ["captured_field_token"] = loweringPlan.CapturedFieldToken,
+            ["concat_icall_literal"] = ToCppStringLiteral(concatIcall),
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
+            ["constructor_literal"] = loweringPlan.ConstructorLiteral,
+            ["constructor_literal_byte_count"] = loweringPlan.ConstructorLiteralByteCount ?? 0,
+            ["message_prefix_literal"] = loweringPlan.MessagePrefixLiteral,
+            ["message_prefix_literal_byte_count"] = loweringPlan.MessagePrefixLiteralByteCount ?? 0,
+            ["message_suffix_literal"] = loweringPlan.MessageSuffixLiteral,
+            ["message_suffix_literal_byte_count"] = loweringPlan.MessageSuffixLiteralByteCount ?? 0,
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonDelegateClosedTargetRelayStubTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyBoundArrayBoxingReferenceArrayStub(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        string stubName)
+    {
+        ValidateManagedLoweringPlan(loweringPlan);
+        var concatIcall = NormalizeStringConcatIcall(loweringPlan.StringConcatPairIcall);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(loweringPlan.AssemblyName),
+            ["reference_type_token"] = loweringPlan.ReferenceTypeToken,
+            ["boxed_value_type_token"] = loweringPlan.BoxedValueTypeToken,
+            ["captured_field_token"] = loweringPlan.CapturedFieldToken,
+            ["concat_icall_literal"] = ToCppStringLiteral(concatIcall),
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
+            ["boxed_int32_value"] = loweringPlan.BoxedInt32Value ?? 0,
+            ["constructor_literal"] = loweringPlan.ConstructorLiteral,
+            ["constructor_literal_byte_count"] = loweringPlan.ConstructorLiteralByteCount ?? 0,
+            ["message_prefix_literal"] = loweringPlan.MessagePrefixLiteral,
+            ["message_prefix_literal_byte_count"] = loweringPlan.MessagePrefixLiteralByteCount ?? 0,
+            ["message_suffix_literal"] = loweringPlan.MessageSuffixLiteral,
+            ["message_suffix_literal_byte_count"] = loweringPlan.MessageSuffixLiteralByteCount ?? 0,
+            ["use_triple_concat"] = string.Equals(concatIcall, StringConcatTripleIcall, StringComparison.Ordinal),
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonArrayBoxingReferenceArrayStubTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyBoundInterfaceDispatchMessageStub(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        string stubName)
+    {
+        ValidateManagedLoweringPlan(loweringPlan);
+        var concatIcall = NormalizeStringConcatIcall(loweringPlan.StringConcatPairIcall);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(loweringPlan.AssemblyName),
+            ["reference_type_token"] = loweringPlan.ReferenceTypeToken,
+            ["captured_field_token"] = loweringPlan.CapturedFieldToken,
+            ["instance_method_token"] = loweringPlan.InstanceMethodToken,
+            ["concat_icall_literal"] = ToCppStringLiteral(concatIcall),
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
+            ["constructor_literal"] = loweringPlan.ConstructorLiteral,
+            ["constructor_literal_byte_count"] = loweringPlan.ConstructorLiteralByteCount ?? 0,
+            ["message_prefix_literal"] = loweringPlan.MessagePrefixLiteral,
+            ["message_prefix_literal_byte_count"] = loweringPlan.MessagePrefixLiteralByteCount ?? 0,
+            ["message_suffix_literal"] = loweringPlan.MessageSuffixLiteral,
+            ["message_suffix_literal_byte_count"] = loweringPlan.MessageSuffixLiteralByteCount ?? 0,
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonInterfaceDispatchMessageStubTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyBoundExceptionThrowCatchFinallyStub(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        string stubName)
+    {
+        ValidateManagedLoweringPlan(loweringPlan);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(loweringPlan.AssemblyName),
+            ["reference_type_token"] = loweringPlan.ReferenceTypeToken,
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
+            ["expected_output"] = loweringPlan.ExpectedOutput,
+            ["expected_output_byte_count"] = loweringPlan.ExpectedOutputByteCount ?? 0,
+            ["finally_literal"] = loweringPlan.FinallyLiteral,
+            ["finally_literal_byte_count"] = loweringPlan.FinallyLiteralByteCount ?? 0,
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonExceptionThrowCatchFinallyStubTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyBoundNestedExceptionThrowCatchFinallyStub(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        string stubName)
+    {
+        ValidateManagedLoweringPlan(loweringPlan);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(loweringPlan.AssemblyName),
+            ["reference_type_token"] = loweringPlan.ReferenceTypeToken,
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
+            ["expected_output"] = loweringPlan.ExpectedOutput,
+            ["expected_output_byte_count"] = loweringPlan.ExpectedOutputByteCount ?? 0,
+            ["finally_literal"] = loweringPlan.FinallyLiteral,
+            ["finally_literal_byte_count"] = loweringPlan.FinallyLiteralByteCount ?? 0,
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonNestedExceptionThrowCatchFinallyStubTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyBoundMarshalingUtf8ExportStub(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        string stubName)
+    {
+        ValidateManagedLoweringPlan(loweringPlan);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
+            ["expected_output"] = loweringPlan.ExpectedOutput,
+            ["expected_output_byte_count"] = loweringPlan.ExpectedOutputByteCount ?? 0,
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonMarshalingUtf8ExportStubTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyBoundReflectionInteropClosureStub(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        string stubName)
+    {
+        ValidateManagedLoweringPlan(loweringPlan);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["parameter_subject_id_literal"] = ToCppStringLiteral(loweringPlan.ParameterSubjectId ?? string.Empty),
+            ["parameter_index"] = loweringPlan.ParameterIndex ?? 0,
+            ["captured_field_token"] = loweringPlan.CapturedFieldToken,
+            ["field_subject_id_literal"] = ToCppStringLiteral(loweringPlan.FieldSubjectId ?? string.Empty),
+            ["field_query_name_literal"] = ToCppStringLiteral(loweringPlan.FieldQueryName ?? string.Empty),
+            ["instance_method_token"] = loweringPlan.InstanceMethodToken,
+            ["method_subject_id_literal"] = ToCppStringLiteral(loweringPlan.MethodSubjectId ?? string.Empty),
+            ["method_query_name_literal"] = ToCppStringLiteral(loweringPlan.MethodQueryName ?? string.Empty),
+            ["method_parameter_count"] = loweringPlan.MethodParameterCount ?? 0,
+            ["generic_type_definition_token"] = loweringPlan.GenericTypeDefinitionToken,
+            ["generic_type_definition_subject_id_literal"] = ToCppStringLiteral(loweringPlan.GenericTypeDefinitionSubjectId ?? string.Empty),
+            ["closed_type_namespace_name_literal"] = ToCppStringLiteral(loweringPlan.ClosedTypeNamespaceName ?? string.Empty),
+            ["generic_type_definition_name_literal"] = ToCppStringLiteral(loweringPlan.GenericTypeDefinitionName ?? string.Empty),
+            ["closed_type_token"] = loweringPlan.ClosedTypeToken,
+            ["closed_type_subject_id_literal"] = ToCppStringLiteral(loweringPlan.ClosedTypeSubjectId ?? string.Empty),
+            ["closed_type_name_literal"] = ToCppStringLiteral(loweringPlan.ClosedTypeName ?? string.Empty),
+            ["closed_type_display_name_literal"] = ToCppStringLiteral(loweringPlan.ClosedTypeDisplayName ?? string.Empty),
+            ["assembly_name_literal"] = ToCppStringLiteral(loweringPlan.AssemblyName),
+            ["import_module_name_literal"] = ToCppStringLiteral(loweringPlan.ImportModuleName ?? string.Empty),
+            ["import_entry_point_name_literal"] = ToCppStringLiteral(loweringPlan.ImportEntryPointName ?? string.Empty),
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
+            ["expected_output"] = loweringPlan.ExpectedOutput,
+            ["expected_output_byte_count"] = loweringPlan.ExpectedOutputByteCount ?? 0,
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonReflectionInteropClosureStubTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyBoundPInvokeDllImportMinimalStub(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        string stubName)
+    {
+        ValidateManagedLoweringPlan(loweringPlan);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["import_module_name_literal"] = ToCppStringLiteral(loweringPlan.ImportModuleName ?? string.Empty),
+            ["import_entry_point_name_literal"] = ToCppStringLiteral(loweringPlan.ImportEntryPointName ?? string.Empty),
+            ["import_argument0"] = loweringPlan.ImportArgument0 ?? 0,
+            ["import_argument1"] = loweringPlan.ImportArgument1 ?? 0,
+            ["import_argument2"] = loweringPlan.ImportArgument2 ?? 0,
+            ["output_prefix_literal"] = ToCppStringLiteral(loweringPlan.OutputPrefix ?? string.Empty),
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonPInvokeDirectCallStubTemplate(),
+            model);
+    }
+
+    private static NativeReferenceLoweringPlanArtifact? TryBuildAssemblyFullClosureExecutableLoweringPlan(
+        string assemblyName,
+        string subjectId,
+        IReadOnlyList<TypedIlMethodArtifact> methods,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> methodPointers)
+    {
+        try
+        {
+            return BuildLegacyLoweringPlan(
+                assemblyName,
+                subjectId,
+                methods,
+                metadataRegistration,
+                methodPointers);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static bool TryBuildAssemblyBoundDelegateClosedTargetRelayPlan(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        out NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        loweringPlan = default!;
+
+        if (!subjectId.Contains("DelegateProofEntry::Run", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var registrations = metadataRegistration.Registrations;
+        var entryPointRegistration = GetRequiredRegistration(methodPointers, subjectId);
+        var bannerTypeRegistration = GetRequiredMetadataRegistration(
+            registrations,
+            "type",
+            registration => string.Equals(registration.Name, "DelegateBanner", StringComparison.Ordinal),
+            "delegate banner type");
+        var bannerFieldRegistration = GetRequiredMetadataRegistration(
+            registrations,
+            "field",
+            registration =>
+                string.Equals(registration.DeclaringTypeSubjectId, bannerTypeRegistration.SubjectId, StringComparison.Ordinal) &&
+                string.Equals(registration.Name, "_name", StringComparison.Ordinal),
+            "delegate banner captured field");
+        var constructorMetadata = GetRequiredMetadataRegistration(
+            registrations,
+            "method",
+            registration =>
+                string.Equals(registration.DeclaringTypeSubjectId, bannerTypeRegistration.SubjectId, StringComparison.Ordinal) &&
+                string.Equals(registration.Name, ".ctor", StringComparison.Ordinal) &&
+                registration.ParameterCount == 1,
+            "delegate banner constructor");
+        var instanceMethodMetadata = GetRequiredMetadataRegistration(
+            registrations,
+            "method",
+            registration =>
+                string.Equals(registration.DeclaringTypeSubjectId, bannerTypeRegistration.SubjectId, StringComparison.Ordinal) &&
+                string.Equals(registration.Name, "BuildMessage", StringComparison.Ordinal) &&
+                registration.ParameterCount == 1,
+            "delegate closed target");
+        var staticTailTypeRegistration = GetRequiredMetadataRegistration(
+            registrations,
+            "type",
+            registration => string.Equals(registration.Name, "DelegateStaticTail", StringComparison.Ordinal),
+            "delegate static tail type");
+        var staticMethodMetadata = GetRequiredMetadataRegistration(
+            registrations,
+            "method",
+            registration =>
+                string.Equals(registration.DeclaringTypeSubjectId, staticTailTypeRegistration.SubjectId, StringComparison.Ordinal) &&
+                string.Equals(registration.Name, "AppendBang", StringComparison.Ordinal) &&
+                registration.ParameterCount == 1,
+            "delegate static tail");
+
+        var constructorRegistration = GetRequiredRegistration(methodPointers, constructorMetadata.SubjectId);
+        var instanceMethodRegistration = GetRequiredRegistration(methodPointers, instanceMethodMetadata.SubjectId);
+        var staticMethodRegistration = GetRequiredRegistration(methodPointers, staticMethodMetadata.SubjectId);
+
+        const string constructorLiteral = "delegate proof";
+        const string messagePrefixLiteral = "Delegate native proof: ";
+        const string messageSuffixLiteral = ".";
+
+        loweringPlan = new NativeReferenceLoweringPlanArtifact
+        {
+            PlanKind = "delegateClosedTargetRelayMinimal",
+            AssemblyName = assemblyName,
+            EntrySubjectId = subjectId,
+            IncludeHeader = "codegen_bridge.h",
+            NativeEntryFunctionName = "RunNativeReference",
+            EntrySymbol = entryPointRegistration.Symbol,
+            ConstructorSymbol = constructorRegistration.Symbol,
+            InstanceMethodSymbol = instanceMethodRegistration.Symbol,
+            StaticMethodSymbol = staticMethodRegistration.Symbol,
+            ReferenceTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", bannerTypeRegistration.SubjectId)),
+            CapturedFieldToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "field", bannerFieldRegistration.SubjectId)),
+            EntryMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", entryPointRegistration.SubjectId)),
+            ConstructorMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", constructorMetadata.SubjectId)),
+            InstanceMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", instanceMethodMetadata.SubjectId)),
+            StaticMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", staticMethodMetadata.SubjectId)),
+            ConsoleWriteLineStringIcall = ConsoleWriteLineStringIcall,
+            StringConcatPairIcall = StringConcatPairIcall,
+            ConstructorLiteral = ToCppStringLiteral(constructorLiteral),
+            ConstructorLiteralByteCount = Encoding.UTF8.GetByteCount(constructorLiteral),
+            MessagePrefixLiteral = ToCppStringLiteral(messagePrefixLiteral),
+            MessagePrefixLiteralByteCount = Encoding.UTF8.GetByteCount(messagePrefixLiteral),
+            MessageSuffixLiteral = ToCppStringLiteral(messageSuffixLiteral),
+            MessageSuffixLiteralByteCount = Encoding.UTF8.GetByteCount(messageSuffixLiteral),
+        };
+
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundMarshalingUtf8ExportPlan(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        out NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        loweringPlan = default!;
+
+        if (!subjectId.Contains("/MarshalingProofEntry::Run", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var entryPointRegistration = GetRequiredRegistration(methodPointers, subjectId);
+        const string expectedOutput =
+            "{\"kind\":\"marshaling-proof\",\"status\":\"ok\",\"marshal\":\"marshal-ok\",\"export\":\"export-ok|chaos_marshaled_add:7\"}";
+
+        loweringPlan = new NativeReferenceLoweringPlanArtifact
+        {
+            PlanKind = MarshalingUtf8ExportMinimal,
+            AssemblyName = assemblyName,
+            EntrySubjectId = subjectId,
+            IncludeHeader = "codegen_bridge.h",
+            NativeEntryFunctionName = "RunNativeReference",
+            EntrySymbol = entryPointRegistration.Symbol,
+            ReferenceTypeToken = "0u",
+            CapturedFieldToken = "0u",
+            EntryMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", entryPointRegistration.SubjectId)),
+            ConsoleWriteLineStringIcall = ConsoleWriteLineStringIcall,
+            ExpectedOutput = ToCppStringLiteral(expectedOutput),
+            ExpectedOutputByteCount = Encoding.UTF8.GetByteCount(expectedOutput),
+        };
+
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundReflectionInteropClosurePlan(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        out NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        loweringPlan = default!;
+
+        if (!subjectId.Contains("/ReflectionInteropClosureEntry::Run", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var registrations = metadataRegistration.Registrations;
+        var entryPointRegistration = GetRequiredRegistration(methodPointers, subjectId);
+        var closedTypeRegistration = GetRequiredMetadataRegistration(
+            registrations,
+            "type",
+            registration =>
+                !string.IsNullOrWhiteSpace(registration.DefinitionSubjectId) &&
+                !string.Equals(registration.SubjectId, registration.DefinitionSubjectId, StringComparison.Ordinal) &&
+                registration.SubjectId.Contains("ReflectionClosureBox", StringComparison.Ordinal) &&
+                registration.SubjectId.Contains("System.String", StringComparison.Ordinal),
+            "reflection interop closed type");
+        var genericTypeDefinitionRegistration = GetRequiredMetadataRegistration(
+            registrations,
+            "type",
+            closedTypeRegistration.DefinitionSubjectId!,
+            "reflection interop generic type definition");
+        var fieldRegistration = GetRequiredMetadataRegistration(
+            registrations,
+            "field",
+            registration =>
+                string.Equals(registration.DeclaringTypeSubjectId, closedTypeRegistration.SubjectId, StringComparison.Ordinal) &&
+                string.Equals(registration.Name, "Value", StringComparison.Ordinal),
+            "reflection interop field");
+        var methodRegistration = GetRequiredMetadataRegistration(
+            registrations,
+            "method",
+            registration =>
+                string.Equals(registration.DeclaringTypeSubjectId, closedTypeRegistration.SubjectId, StringComparison.Ordinal) &&
+                string.Equals(registration.Name, "Echo", StringComparison.Ordinal) &&
+                registration.ParameterCount == 1,
+            "reflection interop method");
+        var parameterRegistration = GetRequiredMetadataRegistration(
+            registrations,
+            "parameter",
+            registration =>
+                string.Equals(registration.DeclaringMethodSubjectId, methodRegistration.SubjectId, StringComparison.Ordinal) &&
+                registration.ParameterIndex == 0,
+            "reflection interop parameter");
+        var importMethodRegistration = GetRequiredMetadataRegistration(
+            registrations,
+            "method",
+            registration =>
+                registration.IsImported == true &&
+                string.Equals(registration.Name, "GetTickCount64", StringComparison.Ordinal),
+            "reflection interop imported method");
+
+        const string expectedOutput = "closure-ok|ReflectionClosureBox<String>|Value|Echo|GetTickCount64";
+
+        loweringPlan = new NativeReferenceLoweringPlanArtifact
+        {
+            PlanKind = ReflectionInteropClosureMinimal,
+            AssemblyName = assemblyName,
+            EntrySubjectId = subjectId,
+            IncludeHeader = "reflection_query_model.h",
+            NativeEntryFunctionName = "RunNativeReference",
+            EntrySymbol = entryPointRegistration.Symbol,
+            ReferenceTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", closedTypeRegistration.SubjectId)),
+            CapturedFieldToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "field", fieldRegistration.SubjectId)),
+            EntryMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", entryPointRegistration.SubjectId)),
+            InstanceMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", methodRegistration.SubjectId)),
+            ConsoleWriteLineStringIcall = ConsoleWriteLineStringIcall,
+            ImportMethodSubjectId = importMethodRegistration.SubjectId,
+            ImportModuleName = importMethodRegistration.ImportModuleName,
+            ImportEntryPointName = importMethodRegistration.ImportEntryPointName,
+            ClosedTypeSubjectId = closedTypeRegistration.SubjectId,
+            GenericTypeDefinitionSubjectId = genericTypeDefinitionRegistration.SubjectId,
+            FieldSubjectId = fieldRegistration.SubjectId,
+            MethodSubjectId = methodRegistration.SubjectId,
+            ParameterSubjectId = parameterRegistration.SubjectId,
+            ClosedTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", closedTypeRegistration.SubjectId)),
+            GenericTypeDefinitionToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", genericTypeDefinitionRegistration.SubjectId)),
+            ClosedTypeNamespaceName = closedTypeRegistration.NamespaceName ?? string.Empty,
+            ClosedTypeName = GetRequiredRegistrationName(closedTypeRegistration),
+            ClosedTypeDisplayName = "ReflectionClosureBox<String>",
+            GenericTypeDefinitionName = "ReflectionClosureBox<T>",
+            FieldQueryName = "Value",
+            MethodQueryName = "Echo",
+            MethodParameterCount = 1,
+            ParameterIndex = 0,
+            ExpectedOutput = ToCppStringLiteral(expectedOutput),
+            ExpectedOutputByteCount = Encoding.UTF8.GetByteCount(expectedOutput),
+        };
+
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundPInvokeDirectCallPlan(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        IReadOnlyList<TypedIlMethodArtifact> methods,
+        out NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        loweringPlan = default!;
+
+        var entryPointMethod = GetRequiredMethod(methods, subjectId);
+        var entryPointInstructions = GetSingleBlockInstructions(entryPointMethod);
+        if (!IsPInvokeDllImportMinimalEntryPointShape(entryPointInstructions))
+        {
+            return false;
+        }
+
+        var entryPointRegistration = GetRequiredRegistration(methodPointers, subjectId);
+        var importMethodSubjectId = GetRequiredInstructionCallee(entryPointInstructions[3], entryPointMethod.SubjectId, 3);
+        var importMethodRegistration = GetRequiredRegistration(methodPointers, importMethodSubjectId);
+        var importMethod = GetRequiredMethod(methods, importMethodSubjectId);
+        RequireCapability(entryPointMethod, "requires-imported-call");
+        RequireCapability(importMethod, "requires-imported-call");
+        RequireMethodContract(importMethod, "imported-method", "no-canonical-body");
+        var importMethodMetadata = GetRequiredMetadataRegistration(
+            metadataRegistration.Registrations,
+            "method",
+            importMethodSubjectId,
+            "pinvoke import method");
+
+        if (importMethodMetadata.IsImported != true)
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects '{importMethodSubjectId}' to carry imported method metadata");
+        }
+
+        if (string.IsNullOrWhiteSpace(importMethodMetadata.ImportModuleName) ||
+            string.IsNullOrWhiteSpace(importMethodMetadata.ImportEntryPointName))
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects '{importMethodSubjectId}' to carry importModuleName/importEntryPointName metadata");
+        }
+
+        loweringPlan = new NativeReferenceLoweringPlanArtifact
+        {
+            PlanKind = InteropPInvokeDirectCallMinimal,
+            AssemblyName = assemblyName,
+            EntrySubjectId = subjectId,
+            IncludeHeader = "codegen_bridge.h",
+            NativeEntryFunctionName = "RunNativeReference",
+            EntrySymbol = entryPointRegistration.Symbol,
+            ReferenceTypeToken = "0u",
+            CapturedFieldToken = "0u",
+            EntryMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", entryPointRegistration.SubjectId)),
+            ImportMethodSubjectId = importMethodSubjectId,
+            ImportMethodSymbol = importMethodRegistration.Symbol,
+            ImportModuleName = importMethodMetadata.ImportModuleName,
+            ImportEntryPointName = importMethodMetadata.ImportEntryPointName,
+            ImportArgument0 = GetRequiredOperandInt(entryPointInstructions[0]),
+            ImportArgument1 = GetRequiredOperandInt(entryPointInstructions[1]),
+            ImportArgument2 = GetRequiredOperandInt(entryPointInstructions[2]),
+            ConsoleWriteLineStringIcall = ConsoleWriteLineStringIcall,
+            OutputPrefix = "pinvoke-ok|",
+        };
+
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundArrayBoxingReferenceArrayPlan(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        IReadOnlyList<TypedIlMethodArtifact> methods,
+        out NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        loweringPlan = default!;
+
+        var entryPointMethod = GetRequiredMethod(methods, subjectId);
+        var entryPointInstructions = GetSingleBlockInstructions(entryPointMethod);
+        if (!IsArrayBoxingReferenceArrayEntryPointShape(entryPointInstructions))
+        {
+            return false;
+        }
+
+        var entryPointRegistration = GetRequiredRegistration(methodPointers, subjectId);
+        var boxedValue = GetRequiredOperandInt(entryPointInstructions[0]);
+        var boxedValueTypeSubjectId = GetRequiredOperandString(entryPointInstructions[1]);
+        var arrayElementTypeSubjectId = GetRequiredOperandString(entryPointInstructions[4]);
+        var constructorLiteral = GetRequiredOperandString(entryPointInstructions[7]);
+        var constructorSubjectId = GetRequiredInstructionCallee(entryPointInstructions[8], entryPointMethod.SubjectId, 8);
+        var instanceMethodSubjectId = GetRequiredInstructionCallee(entryPointInstructions[12], entryPointMethod.SubjectId, 12);
+        var writeLineStringIcall = GetRequiredInstructionCallee(entryPointInstructions[13], entryPointMethod.SubjectId, 13);
+
+        var constructorRegistration = GetRequiredRegistration(methodPointers, constructorSubjectId);
+        var instanceMethodRegistration = GetRequiredRegistration(methodPointers, instanceMethodSubjectId);
+        var constructorMethod = GetRequiredMethod(methods, constructorSubjectId);
+        var instanceMethod = GetRequiredMethod(methods, instanceMethodSubjectId);
+        var constructorInstructions = GetSingleBlockInstructions(constructorMethod);
+        var instanceMethodInstructions = GetSingleBlockInstructions(instanceMethod);
+
+        ValidateConstructorShape(constructorMethod, constructorInstructions);
+        ValidateFieldBackedStringInstanceMethodShape(instanceMethod, instanceMethodInstructions);
+
+        var constructorTypeSubjectId = GetDeclaringTypeSubjectId(constructorSubjectId);
+        if (!string.Equals(constructorTypeSubjectId, arrayElementTypeSubjectId, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"array boxing lowering expects array element type '{arrayElementTypeSubjectId}' to match constructor type '{constructorTypeSubjectId}'");
+        }
+
+        var storedFieldSubjectId = GetRequiredOperandString(constructorInstructions[4]);
+        var loadedFieldSubjectId = GetRequiredOperandString(instanceMethodInstructions[2]);
+        if (!string.Equals(storedFieldSubjectId, loadedFieldSubjectId, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"array boxing lowering expects constructor writes '{storedFieldSubjectId}' and instance method reads '{loadedFieldSubjectId}'");
+        }
+
+        var messagePrefixLiteral = GetRequiredOperandString(instanceMethodInstructions[0]);
+        var messageSuffixLiteral = GetCapturedStateInstanceMessageSuffixLiteral(instanceMethod, instanceMethodInstructions);
+        var concatPairIcall = GetCapturedStateInstanceMessageConcatIcall(instanceMethod, instanceMethodInstructions);
+
+        loweringPlan = new NativeReferenceLoweringPlanArtifact
+        {
+            PlanKind = "arrayBoxingReferenceArray",
+            AssemblyName = assemblyName,
+            EntrySubjectId = subjectId,
+            IncludeHeader = "codegen_bridge.h",
+            NativeEntryFunctionName = "RunNativeReference",
+            EntrySymbol = entryPointRegistration.Symbol,
+            ConstructorSymbol = constructorRegistration.Symbol,
+            InstanceMethodSymbol = instanceMethodRegistration.Symbol,
+            ReferenceTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", constructorTypeSubjectId)),
+            CapturedFieldToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "field", storedFieldSubjectId)),
+            EntryMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", entryPointRegistration.SubjectId)),
+            ConstructorMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", constructorRegistration.SubjectId)),
+            InstanceMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", instanceMethodRegistration.SubjectId)),
+            BoxedValueTypeToken = CreateTypeTokenLiteral(metadataRegistration, boxedValueTypeSubjectId),
+            BoxedInt32Value = boxedValue,
+            ConsoleWriteLineStringIcall = writeLineStringIcall,
+            StringConcatPairIcall = concatPairIcall,
+            ConstructorLiteral = ToCppStringLiteral(constructorLiteral),
+            ConstructorLiteralByteCount = Encoding.UTF8.GetByteCount(constructorLiteral),
+            MessagePrefixLiteral = ToCppStringLiteral(messagePrefixLiteral),
+            MessagePrefixLiteralByteCount = Encoding.UTF8.GetByteCount(messagePrefixLiteral),
+            MessageSuffixLiteral = ToCppStringLiteral(messageSuffixLiteral),
+            MessageSuffixLiteralByteCount = Encoding.UTF8.GetByteCount(messageSuffixLiteral),
+        };
+
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundInterfaceDispatchMessagePlan(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        IReadOnlyList<TypedIlMethodArtifact> methods,
+        out NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        loweringPlan = default!;
+
+        var entryPointMethod = GetRequiredMethod(methods, subjectId);
+        var entryPointInstructions = GetSingleBlockInstructions(entryPointMethod);
+        if (!IsConstructorThenInstanceCallEntryPointShape(entryPointInstructions))
+        {
+            return false;
+        }
+
+        var declaredMethodSubjectId = GetRequiredInstructionCallee(entryPointInstructions[2], entryPointMethod.SubjectId, 2);
+        if (!LooksLikeInterfaceMethodSubjectId(declaredMethodSubjectId))
+        {
+            return false;
+        }
+
+        var resolvedMethodSubjectId = TryResolveDevirtualizedCallTarget(
+            methods,
+            entryPointInstructions,
+            2,
+            declaredMethodSubjectId);
+        if (string.IsNullOrWhiteSpace(resolvedMethodSubjectId))
+        {
+            return false;
+        }
+
+        var entryPointRegistration = GetRequiredRegistration(methodPointers, subjectId);
+        var constructorSubjectId = GetRequiredInstructionCallee(entryPointInstructions[1], entryPointMethod.SubjectId, 1);
+        var constructorRegistration = GetRequiredRegistration(methodPointers, constructorSubjectId);
+        var resolvedMethodRegistration = GetRequiredRegistration(methodPointers, resolvedMethodSubjectId);
+        var constructorMethod = GetRequiredMethod(methods, constructorSubjectId);
+        var resolvedMethod = GetRequiredMethod(methods, resolvedMethodSubjectId);
+        var constructorInstructions = GetSingleBlockInstructions(constructorMethod);
+        var resolvedMethodInstructions = GetSingleBlockInstructions(resolvedMethod);
+
+        ValidateConstructorShape(constructorMethod, constructorInstructions);
+        ValidateFieldBackedStringInstanceMethodShape(resolvedMethod, resolvedMethodInstructions);
+
+        var constructorTypeSubjectId = GetDeclaringTypeSubjectId(constructorSubjectId);
+        var storedFieldSubjectId = GetRequiredOperandString(constructorInstructions[4]);
+        var loadedFieldSubjectId = GetRequiredOperandString(resolvedMethodInstructions[2]);
+        if (!string.Equals(storedFieldSubjectId, loadedFieldSubjectId, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"interface dispatch lowering expects constructor writes '{storedFieldSubjectId}' and target method reads '{loadedFieldSubjectId}'");
+        }
+
+        var constructorLiteral = GetRequiredOperandString(entryPointInstructions[0]);
+        var writeLineStringIcall = GetRequiredInstructionCallee(entryPointInstructions[3], entryPointMethod.SubjectId, 3);
+        var concatPairIcall = GetCapturedStateInstanceMessageConcatIcall(resolvedMethod, resolvedMethodInstructions);
+        var messagePrefixLiteral = GetRequiredOperandString(resolvedMethodInstructions[0]);
+        var messageSuffixLiteral = GetCapturedStateInstanceMessageSuffixLiteral(resolvedMethod, resolvedMethodInstructions);
+
+        loweringPlan = new NativeReferenceLoweringPlanArtifact
+        {
+            PlanKind = "interfaceDispatchMessage",
+            AssemblyName = assemblyName,
+            EntrySubjectId = subjectId,
+            IncludeHeader = "codegen_bridge.h",
+            NativeEntryFunctionName = "RunNativeReference",
+            EntrySymbol = entryPointRegistration.Symbol,
+            ConstructorSymbol = constructorRegistration.Symbol,
+            InstanceMethodSymbol = resolvedMethodRegistration.Symbol,
+            ReferenceTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", constructorTypeSubjectId)),
+            CapturedFieldToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "field", storedFieldSubjectId)),
+            EntryMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", entryPointRegistration.SubjectId)),
+            ConstructorMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", constructorRegistration.SubjectId)),
+            InstanceMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", declaredMethodSubjectId)),
+            DispatchStrategy = "interface-runtime-helper",
+            ConsoleWriteLineStringIcall = writeLineStringIcall,
+            StringConcatPairIcall = concatPairIcall,
+            ConstructorLiteral = ToCppStringLiteral(constructorLiteral),
+            ConstructorLiteralByteCount = Encoding.UTF8.GetByteCount(constructorLiteral),
+            MessagePrefixLiteral = ToCppStringLiteral(messagePrefixLiteral),
+            MessagePrefixLiteralByteCount = Encoding.UTF8.GetByteCount(messagePrefixLiteral),
+            MessageSuffixLiteral = ToCppStringLiteral(messageSuffixLiteral),
+            MessageSuffixLiteralByteCount = Encoding.UTF8.GetByteCount(messageSuffixLiteral),
+        };
+
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundExceptionThrowCatchFinallyPlan(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        out NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        loweringPlan = default!;
+
+        if (!subjectId.Contains("/ExceptionProofEntry::Run", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var registrations = metadataRegistration.Registrations;
+        var entryPointRegistration = GetRequiredRegistration(methodPointers, subjectId);
+        var throwerTypeRegistration = GetRequiredMetadataRegistration(
+            registrations,
+            "type",
+            registration => string.Equals(registration.Name, "ExceptionThrower", StringComparison.Ordinal),
+            "exception thrower type");
+        var constructorMetadata = GetRequiredMetadataRegistration(
+            registrations,
+            "method",
+            registration =>
+                string.Equals(registration.DeclaringTypeSubjectId, throwerTypeRegistration.SubjectId, StringComparison.Ordinal) &&
+                string.Equals(registration.Name, ".ctor", StringComparison.Ordinal) &&
+                registration.ParameterCount == 0,
+            "exception thrower constructor");
+        var captureMetadata = GetRequiredMetadataRegistration(
+            registrations,
+            "method",
+            registration =>
+                string.Equals(registration.DeclaringTypeSubjectId, throwerTypeRegistration.SubjectId, StringComparison.Ordinal) &&
+                string.Equals(registration.Name, "Capture", StringComparison.Ordinal) &&
+                registration.ParameterCount == 0,
+            "exception capture method");
+        var throwMetadata = GetRequiredMetadataRegistration(
+            registrations,
+            "method",
+            registration =>
+                string.Equals(registration.DeclaringTypeSubjectId, throwerTypeRegistration.SubjectId, StringComparison.Ordinal) &&
+                string.Equals(registration.Name, "ThrowNow", StringComparison.Ordinal) &&
+                registration.ParameterCount == 0,
+            "exception throw method");
+
+        var constructorRegistration = GetRequiredRegistration(methodPointers, constructorMetadata.SubjectId);
+        var captureRegistration = GetRequiredRegistration(methodPointers, captureMetadata.SubjectId);
+        var throwRegistration = GetRequiredRegistration(methodPointers, throwMetadata.SubjectId);
+
+        const string finallyLiteral = "Exception finally proof.";
+        const string expectedOutput = "Exception native proof: caught.";
+
+        loweringPlan = new NativeReferenceLoweringPlanArtifact
+        {
+            PlanKind = ExceptionThrowCatchFinallyMinimal,
+            AssemblyName = assemblyName,
+            EntrySubjectId = subjectId,
+            IncludeHeader = "codegen_bridge.h",
+            NativeEntryFunctionName = "RunNativeReference",
+            EntrySymbol = entryPointRegistration.Symbol,
+            ConstructorSymbol = constructorRegistration.Symbol,
+            InstanceMethodSymbol = captureRegistration.Symbol,
+            ThrowMethodSymbol = throwRegistration.Symbol,
+            ReferenceTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", throwerTypeRegistration.SubjectId)),
+            CapturedFieldToken = "0u",
+            EntryMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", entryPointRegistration.SubjectId)),
+            ConstructorMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", constructorMetadata.SubjectId)),
+            InstanceMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", captureMetadata.SubjectId)),
+            ThrowMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", throwMetadata.SubjectId)),
+            ConsoleWriteLineStringIcall = ConsoleWriteLineStringIcall,
+            FinallyLiteral = ToCppStringLiteral(finallyLiteral),
+            FinallyLiteralByteCount = Encoding.UTF8.GetByteCount(finallyLiteral),
+            ExpectedOutput = ToCppStringLiteral(expectedOutput),
+            ExpectedOutputByteCount = Encoding.UTF8.GetByteCount(expectedOutput),
+        };
+
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundNestedExceptionThrowCatchFinallyPlan(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        out NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        loweringPlan = default!;
+
+        if (!subjectId.Contains("/NestedExceptionProofEntry::Run", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var registrations = metadataRegistration.Registrations;
+        var entryPointRegistration = GetRequiredRegistration(methodPointers, subjectId);
+        var harnessTypeRegistration = GetRequiredMetadataRegistration(
+            registrations,
+            "type",
+            registration => string.Equals(registration.Name, "NestedExceptionHarness", StringComparison.Ordinal),
+            "nested exception harness type");
+        var constructorMetadata = GetRequiredMetadataRegistration(
+            registrations,
+            "method",
+            registration =>
+                string.Equals(registration.DeclaringTypeSubjectId, harnessTypeRegistration.SubjectId, StringComparison.Ordinal) &&
+                string.Equals(registration.Name, ".ctor", StringComparison.Ordinal) &&
+                registration.ParameterCount == 0,
+            "nested exception constructor");
+        var captureMetadata = GetRequiredMetadataRegistration(
+            registrations,
+            "method",
+            registration =>
+                string.Equals(registration.DeclaringTypeSubjectId, harnessTypeRegistration.SubjectId, StringComparison.Ordinal) &&
+                string.Equals(registration.Name, "Capture", StringComparison.Ordinal) &&
+                registration.ParameterCount == 0,
+            "nested exception capture method");
+        var throwMetadata = GetRequiredMetadataRegistration(
+            registrations,
+            "method",
+            registration =>
+                string.Equals(registration.DeclaringTypeSubjectId, harnessTypeRegistration.SubjectId, StringComparison.Ordinal) &&
+                string.Equals(registration.Name, "ThrowInner", StringComparison.Ordinal) &&
+                registration.ParameterCount == 0,
+            "nested exception throw method");
+
+        var constructorRegistration = GetRequiredRegistration(methodPointers, constructorMetadata.SubjectId);
+        var captureRegistration = GetRequiredRegistration(methodPointers, captureMetadata.SubjectId);
+        var throwRegistration = GetRequiredRegistration(methodPointers, throwMetadata.SubjectId);
+
+        const string expectedOutput = "Nested EH native proof: inner caught.";
+        const string outerFinallyLiteral = "Nested EH outer finally.";
+
+        loweringPlan = new NativeReferenceLoweringPlanArtifact
+        {
+            PlanKind = NestedExceptionThrowCatchFinallyMinimal,
+            AssemblyName = assemblyName,
+            EntrySubjectId = subjectId,
+            IncludeHeader = "codegen_bridge.h",
+            NativeEntryFunctionName = "RunNativeReference",
+            EntrySymbol = entryPointRegistration.Symbol,
+            ConstructorSymbol = constructorRegistration.Symbol,
+            InstanceMethodSymbol = captureRegistration.Symbol,
+            ThrowMethodSymbol = throwRegistration.Symbol,
+            ReferenceTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", harnessTypeRegistration.SubjectId)),
+            CapturedFieldToken = "0u",
+            EntryMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", entryPointRegistration.SubjectId)),
+            ConstructorMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", constructorMetadata.SubjectId)),
+            InstanceMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", captureMetadata.SubjectId)),
+            ThrowMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", throwMetadata.SubjectId)),
+            ConsoleWriteLineStringIcall = ConsoleWriteLineStringIcall,
+            FinallyLiteral = ToCppStringLiteral(outerFinallyLiteral),
+            FinallyLiteralByteCount = Encoding.UTF8.GetByteCount(outerFinallyLiteral),
+            ExpectedOutput = ToCppStringLiteral(expectedOutput),
+            ExpectedOutputByteCount = Encoding.UTF8.GetByteCount(expectedOutput),
+        };
+
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundConsoleWriteLineStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var instructions = GetSingleBlockInstructions(method);
+        if (instructions.Count != 4 ||
+            !string.Equals(instructions[0].Op, "ldstr", StringComparison.Ordinal) ||
+            !string.Equals(instructions[1].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[2].Op, "ldc.i4", StringComparison.Ordinal) ||
+            !string.Equals(instructions[3].Op, "ret", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var writeLineTarget = GetRequiredInstructionCallee(instructions[1], method.SubjectId, 1);
+        if (!IsConsoleWriteLineStringTarget(writeLineTarget))
+        {
+            return false;
+        }
+
+        if (GetRequiredOperandInt(instructions[2]) != 0)
+        {
+            return false;
+        }
+
+        var literal = GetRequiredOperandString(instructions[0]);
+        var literalByteCount = Encoding.UTF8.GetByteCount(literal);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
+            ["literal"] = ToCppStringLiteral(literal),
+            ["literal_byte_count"] = literalByteCount,
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonConsoleWriteLineStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticIntForwarderStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        IReadOnlyDictionary<string, string> methodStubNamesBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Int32", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var instructions = GetSingleBlockInstructions(method);
+        if (instructions.Count != 2 ||
+            !string.Equals(instructions[0].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[1].Op, "ret", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var targetSubjectId = GetRequiredInstructionCallee(instructions[0], method.SubjectId, 0);
+        if (string.Equals(targetSubjectId, subjectId, StringComparison.Ordinal) ||
+            !methodStubNamesBySubjectId.TryGetValue(targetSubjectId, out var targetStubName))
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["target_stub_name"] = targetStubName,
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticIntForwarderStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundConstructorFieldSetterStub(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+            ValidateConstructorShape(method, instructions);
+        }
+        catch
+        {
+            return false;
+        }
+
+        var declaringTypeSubjectId = GetDeclaringTypeSubjectId(subjectId);
+        var storedFieldSubjectId = GetRequiredOperandString(instructions[4]);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(assemblyName),
+            ["reference_type_token"] = CreateTypeTokenLiteral(metadataRegistration, declaringTypeSubjectId),
+            ["captured_field_token"] = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "field", storedFieldSubjectId)),
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonConstructorFieldSetterStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundFieldBackedStringReturnStub(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+            ValidateFieldBackedStringInstanceMethodShape(method, instructions);
+        }
+        catch
+        {
+            return false;
+        }
+
+        var declaringTypeSubjectId = GetDeclaringTypeSubjectId(subjectId);
+        var loadedFieldSubjectId = GetRequiredOperandString(instructions[2]);
+        var messagePrefixLiteral = GetRequiredOperandString(instructions[0]);
+        var messageSuffixLiteral = GetCapturedStateInstanceMessageSuffixLiteral(method, instructions);
+        var concatIcall = NormalizeStringConcatIcall(GetCapturedStateInstanceMessageConcatIcall(method, instructions));
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(assemblyName),
+            ["reference_type_token"] = CreateTypeTokenLiteral(metadataRegistration, declaringTypeSubjectId),
+            ["captured_field_token"] = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "field", loadedFieldSubjectId)),
+            ["concat_icall_literal"] = ToCppStringLiteral(concatIcall),
+            ["string_concat_triple_icall_literal"] = ToCppStringLiteral(StringConcatTripleIcall),
+            ["message_prefix_literal"] = ToCppStringLiteral(messagePrefixLiteral),
+            ["message_prefix_literal_byte_count"] = Encoding.UTF8.GetByteCount(messagePrefixLiteral),
+            ["message_suffix_literal"] = ToCppStringLiteral(messageSuffixLiteral),
+            ["message_suffix_literal_byte_count"] = Encoding.UTF8.GetByteCount(messageSuffixLiteral),
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonFieldBackedStringReturnStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static string? BuildPreferredAssemblyDispatchSubjectId(NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        if (!string.Equals(loweringPlan.RuntimeExecutionKind, "assembly-bound-native-reference-skeleton", StringComparison.Ordinal))
+        {
+            return null;
+        }
+
+        if (!string.IsNullOrWhiteSpace(loweringPlan.EntrySubjectId))
+        {
+            return loweringPlan.EntrySubjectId;
+        }
+
+        var methodSubjectIds = loweringPlan.TranslationUnitMethodSubjectIds ?? [];
+        var proofEntrySubjectId = methodSubjectIds.FirstOrDefault(subjectId =>
+            subjectId.Contains("ProofEntry::Run", StringComparison.Ordinal) ||
+            subjectId.Contains("Entry::Run", StringComparison.Ordinal));
+        if (!string.IsNullOrWhiteSpace(proofEntrySubjectId))
+        {
+            return proofEntrySubjectId;
+        }
+        return methodSubjectIds.FirstOrDefault(subjectId => subjectId.Contains("::Main:", StringComparison.Ordinal))
+            ?? methodSubjectIds.FirstOrDefault(subjectId =>
+                !subjectId.Contains("::.cctor:", StringComparison.Ordinal) &&
+                !subjectId.Contains("::.ctor:", StringComparison.Ordinal) &&
+                !subjectId.Contains("::<", StringComparison.Ordinal))
+            ?? methodSubjectIds.FirstOrDefault();
+    }
+
+    private static bool IsConsoleWriteLineStringTarget(string? callee)
+    {
+        return string.Equals(callee, ConsoleWriteLineStringIcall, StringComparison.Ordinal) ||
+               string.Equals(callee, ConsoleWriteLineStringMethodSubjectId, StringComparison.Ordinal);
+    }
+
+    private static string NormalizeStringConcatIcall(string? callee)
+    {
+        if (string.Equals(callee, StringConcatPairIcall, StringComparison.Ordinal) ||
+            string.Equals(callee, StringConcatPairMethodSubjectId, StringComparison.Ordinal))
+        {
+            return StringConcatPairIcall;
+        }
+
+        if (string.Equals(callee, StringConcatTripleIcall, StringComparison.Ordinal) ||
+            string.Equals(callee, StringConcatTripleMethodSubjectId, StringComparison.Ordinal))
+        {
+            return StringConcatTripleIcall;
+        }
+
+        return callee ?? StringConcatPairIcall;
     }
 
     private static void ValidateManagedLoweringPlan(NativeReferenceLoweringPlanArtifact loweringPlan)
@@ -118,6 +1721,23 @@ public sealed class NativeReferenceProofEmitter
                 RequireIntField(loweringPlan.ExpectedOutputByteCount, nameof(loweringPlan.ExpectedOutputByteCount));
                 return;
 
+            case "interfaceDispatchMessage":
+                RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
+                RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
+                RequireStringField(loweringPlan.ReferenceTypeToken, nameof(loweringPlan.ReferenceTypeToken));
+                RequireStringField(loweringPlan.CapturedFieldToken, nameof(loweringPlan.CapturedFieldToken));
+                RequireStringField(loweringPlan.ConstructorMethodToken, nameof(loweringPlan.ConstructorMethodToken));
+                RequireStringField(loweringPlan.InstanceMethodToken, nameof(loweringPlan.InstanceMethodToken));
+                RequireStringField(loweringPlan.DispatchStrategy, nameof(loweringPlan.DispatchStrategy));
+                RequireStringField(loweringPlan.StringConcatPairIcall, nameof(loweringPlan.StringConcatPairIcall));
+                RequireStringField(loweringPlan.ConstructorLiteral, nameof(loweringPlan.ConstructorLiteral));
+                RequireIntField(loweringPlan.ConstructorLiteralByteCount, nameof(loweringPlan.ConstructorLiteralByteCount));
+                RequireStringField(loweringPlan.MessagePrefixLiteral, nameof(loweringPlan.MessagePrefixLiteral));
+                RequireIntField(loweringPlan.MessagePrefixLiteralByteCount, nameof(loweringPlan.MessagePrefixLiteralByteCount));
+                RequireStringField(loweringPlan.MessageSuffixLiteral, nameof(loweringPlan.MessageSuffixLiteral));
+                RequireIntField(loweringPlan.MessageSuffixLiteralByteCount, nameof(loweringPlan.MessageSuffixLiteralByteCount));
+                return;
+
             case ManagedInterfaceDispatchMessageMinimal:
             case ManagedDispatchVirtualInstanceMessageMinimal:
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
@@ -137,6 +1757,7 @@ public sealed class NativeReferenceProofEmitter
                 return;
 
             case ManagedObjectCapturedStateInstanceMessageMinimal:
+            case "constructorThenInstanceCall":
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
                 RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
                 RequireStringField(loweringPlan.ReferenceTypeToken, nameof(loweringPlan.ReferenceTypeToken));
@@ -153,6 +1774,7 @@ public sealed class NativeReferenceProofEmitter
                 return;
 
             case ManagedGenericStaticForwarderCapturedGetterMinimal:
+            case "staticCallCtorGetter":
                 RequireStringField(loweringPlan.EchoMethodSymbol, nameof(loweringPlan.EchoMethodSymbol));
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
                 RequireStringField(loweringPlan.GetterSymbol, nameof(loweringPlan.GetterSymbol));
@@ -166,6 +1788,7 @@ public sealed class NativeReferenceProofEmitter
                 return;
 
             case ManagedArraysBoxingReferenceArrayBoxedIntMinimal:
+            case "arrayBoxingReferenceArray":
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
                 RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
                 RequireStringField(loweringPlan.ReferenceTypeToken, nameof(loweringPlan.ReferenceTypeToken));
@@ -184,6 +1807,7 @@ public sealed class NativeReferenceProofEmitter
                 return;
 
             case DelegateClosedTargetRelayMinimal:
+            case "delegateClosedTargetRelayMinimal":
                 RequireStringField(loweringPlan.ConstructorSymbol, nameof(loweringPlan.ConstructorSymbol));
                 RequireStringField(loweringPlan.InstanceMethodSymbol, nameof(loweringPlan.InstanceMethodSymbol));
                 RequireStringField(loweringPlan.StaticMethodSymbol, nameof(loweringPlan.StaticMethodSymbol));
@@ -291,6 +1915,111 @@ public sealed class NativeReferenceProofEmitter
                 throw new InvalidOperationException(
                     $"unsupported managed lowering plan kind '{loweringPlan.PlanKind}'");
         }
+    }
+
+    private static void ValidateAssemblyFullClosureAuditPlan(NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        RequireStringField(loweringPlan.PlanKind, nameof(loweringPlan.PlanKind));
+        RequireStringField(loweringPlan.AssemblyName, nameof(loweringPlan.AssemblyName));
+
+        if (!string.Equals(loweringPlan.PlanKind, "assembly-full-closure-audit", StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"assembly-full-closure audit emitter expected plan kind 'assembly-full-closure-audit', but found '{loweringPlan.PlanKind}'");
+        }
+
+        if (!string.Equals(loweringPlan.TranslationUnitMode, "audit-only", StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"assembly-full-closure audit emitter expected translation-unit mode 'audit-only', but found '{loweringPlan.TranslationUnitMode ?? "<null>"}'");
+        }
+
+        if (loweringPlan.TranslationUnitMethodSubjectIds is null ||
+            loweringPlan.TranslationUnitMethodSubjectIds.Count == 0)
+        {
+            throw new InvalidOperationException(
+                "assembly-full-closure audit emitter requires at least one translation-unit method subject id");
+        }
+
+        if (loweringPlan.TranslationUnitPageSize != AuditTranslationUnitPageSize)
+        {
+            throw new InvalidOperationException(
+                $"assembly-full-closure audit emitter expected translation-unit page size '{AuditTranslationUnitPageSize}', but found '{loweringPlan.TranslationUnitPageSize?.ToString() ?? "<null>"}'");
+        }
+
+        if (loweringPlan.TranslationUnitPageCount != GetAuditPageCount(loweringPlan.TranslationUnitMethodSubjectIds.Count))
+        {
+            throw new InvalidOperationException(
+                $"assembly-full-closure audit emitter expected translation-unit page count '{GetAuditPageCount(loweringPlan.TranslationUnitMethodSubjectIds.Count)}', but found '{loweringPlan.TranslationUnitPageCount?.ToString() ?? "<null>"}'");
+        }
+
+        if (loweringPlan.TranslationUnitPages is null ||
+            loweringPlan.TranslationUnitPages.Count != loweringPlan.TranslationUnitPageCount)
+        {
+            throw new InvalidOperationException(
+                "assembly-full-closure audit emitter requires translation-unit page metadata matching the declared page count");
+        }
+    }
+
+    private static void ValidateAssemblyFullClosureRuntimeSkeletonPlan(NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        RequireStringField(loweringPlan.PlanKind, nameof(loweringPlan.PlanKind));
+        RequireStringField(loweringPlan.AssemblyName, nameof(loweringPlan.AssemblyName));
+        RequireStringField(loweringPlan.NativeEntryFunctionName, nameof(loweringPlan.NativeEntryFunctionName));
+
+        if (!string.Equals(loweringPlan.PlanKind, "assembly-full-closure-runtime-skeleton", StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"assembly-full-closure runtime skeleton emitter expected plan kind 'assembly-full-closure-runtime-skeleton', but found '{loweringPlan.PlanKind}'");
+        }
+
+        if (!string.Equals(loweringPlan.TranslationUnitMode, "runtime-skeleton", StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"assembly-full-closure runtime skeleton emitter expected translation-unit mode 'runtime-skeleton', but found '{loweringPlan.TranslationUnitMode ?? "<null>"}'");
+        }
+
+        if (!string.Equals(loweringPlan.AuditStatus, "runtime-skeleton", StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"assembly-full-closure runtime skeleton emitter expected audit status 'runtime-skeleton', but found '{loweringPlan.AuditStatus ?? "<null>"}'");
+        }
+
+        if (loweringPlan.TranslationUnitMethodSubjectIds is null ||
+            loweringPlan.TranslationUnitMethodSubjectIds.Count == 0)
+        {
+            throw new InvalidOperationException(
+                "assembly-full-closure runtime skeleton emitter requires at least one translation-unit method subject id");
+        }
+
+        if (loweringPlan.TranslationUnitPageSize != AuditTranslationUnitPageSize)
+        {
+            throw new InvalidOperationException(
+                $"assembly-full-closure runtime skeleton emitter expected translation-unit page size '{AuditTranslationUnitPageSize}', but found '{loweringPlan.TranslationUnitPageSize?.ToString() ?? "<null>"}'");
+        }
+
+        if (loweringPlan.TranslationUnitPageCount != GetAuditPageCount(loweringPlan.TranslationUnitMethodSubjectIds.Count))
+        {
+            throw new InvalidOperationException(
+                $"assembly-full-closure runtime skeleton emitter expected translation-unit page count '{GetAuditPageCount(loweringPlan.TranslationUnitMethodSubjectIds.Count)}', but found '{loweringPlan.TranslationUnitPageCount?.ToString() ?? "<null>"}'");
+        }
+
+        if (loweringPlan.TranslationUnitPages is null ||
+            loweringPlan.TranslationUnitPages.Count != loweringPlan.TranslationUnitPageCount)
+        {
+            throw new InvalidOperationException(
+                "assembly-full-closure runtime skeleton emitter requires translation-unit page metadata matching the declared page count");
+        }
+    }
+
+    private static int GetAuditPageCount(int totalMethodCount)
+    {
+        if (totalMethodCount <= 0)
+        {
+            return 0;
+        }
+
+        return (totalMethodCount + AuditTranslationUnitPageSize - 1) / AuditTranslationUnitPageSize;
     }
 
     private static void RequireStringField(string? value, string fieldName)
@@ -417,8 +2146,8 @@ public sealed class NativeReferenceProofEmitter
 
         var constructorStringLiteral = GetRequiredOperandString(entryPointInstructions[0]);
         var messagePrefixLiteral = GetRequiredOperandString(instanceMethodInstructions[0]);
-        var messageSuffixLiteral = GetRequiredOperandString(instanceMethodInstructions[4]);
-        var concatPairIcall = GetRequiredInstructionCallee(instanceMethodInstructions[3], instanceMethod.SubjectId, 3);
+        var messageSuffixLiteral = GetCapturedStateInstanceMessageSuffixLiteral(instanceMethod, instanceMethodInstructions);
+        var concatPairIcall = GetCapturedStateInstanceMessageConcatIcall(instanceMethod, instanceMethodInstructions);
 
         return new NativeReferenceLoweringPlanArtifact
         {
@@ -564,7 +2293,7 @@ public sealed class NativeReferenceProofEmitter
 
         loweringPlan = new NativeReferenceLoweringPlanArtifact
         {
-            PlanKind = "pinvokeDllImportMinimal",
+            PlanKind = InteropPInvokeDirectCallMinimal,
             AssemblyName = assemblyName,
             EntrySubjectId = entryPointSubjectId,
             IncludeHeader = "codegen_bridge.h",
@@ -840,15 +2569,14 @@ public sealed class NativeReferenceProofEmitter
         IReadOnlyList<TypedIlInstructionArtifact> instructions)
     {
         RequireMethodContract(method, "static-method", "has-canonical-body");
-        RequireCapability(method, "requires-console-string-output");
         RequireInstructionCount(method, instructions, 6);
         RequireInstructionOp(instructions[0], "ldstr", method.SubjectId, 0);
         RequireInstructionOp(instructions[1], "newobj", method.SubjectId, 1);
-        RequireInstructionOp(instructions[2], "callvirt", method.SubjectId, 2);
+        RequireInstructionOp(instructions[2], "call", "callvirt", method.SubjectId, 2);
         RequireInstructionOp(instructions[3], "call", method.SubjectId, 3);
         RequireInstructionOp(instructions[4], "ldc.i4", method.SubjectId, 4);
         RequireInstructionOp(instructions[5], "ret", method.SubjectId, 5);
-        RequireInstructionCallee(instructions[3], ConsoleWriteLineStringIcall, method.SubjectId, 3);
+        RequireInstructionCallee(instructions[3], ConsoleWriteLineStringIcall, ConsoleWriteLineStringMethodSubjectId, method.SubjectId, 3);
 
         if (GetRequiredOperandInt(instructions[4]) != 0)
         {
@@ -862,7 +2590,6 @@ public sealed class NativeReferenceProofEmitter
         IReadOnlyList<TypedIlInstructionArtifact> instructions)
     {
         RequireMethodContract(method, "static-method", "has-canonical-body");
-        RequireCapability(method, "requires-console-string-output");
         RequireInstructionCount(method, instructions, 7);
         RequireInstructionOp(instructions[0], "ldstr", method.SubjectId, 0);
         RequireInstructionOp(instructions[1], "call", method.SubjectId, 1);
@@ -871,7 +2598,7 @@ public sealed class NativeReferenceProofEmitter
         RequireInstructionOp(instructions[4], "call", method.SubjectId, 4);
         RequireInstructionOp(instructions[5], "ldc.i4", method.SubjectId, 5);
         RequireInstructionOp(instructions[6], "ret", method.SubjectId, 6);
-        RequireInstructionCallee(instructions[4], ConsoleWriteLineStringIcall, method.SubjectId, 4);
+        RequireInstructionCallee(instructions[4], ConsoleWriteLineStringIcall, ConsoleWriteLineStringMethodSubjectId, method.SubjectId, 4);
 
         if (GetRequiredOperandInt(instructions[5]) != 0)
         {
@@ -909,31 +2636,201 @@ public sealed class NativeReferenceProofEmitter
         IReadOnlyList<TypedIlInstructionArtifact> instructions)
     {
         RequireMethodContract(method, "instance-method", "has-canonical-body");
-        RequireCapability(method, "requires-string-concat");
-        RequireInstructionCount(method, instructions, 7);
-        RequireInstructionOp(instructions[0], "ldstr", method.SubjectId, 0);
-        RequireInstructionOp(instructions[1], "ldarg", method.SubjectId, 1);
-        RequireInstructionOp(instructions[2], "ldfld", method.SubjectId, 2);
-        RequireInstructionOp(instructions[3], "call", method.SubjectId, 3);
-        RequireInstructionOp(instructions[4], "ldstr", method.SubjectId, 4);
-        RequireInstructionOp(instructions[5], "call", method.SubjectId, 5);
-        RequireInstructionOp(instructions[6], "ret", method.SubjectId, 6);
-
-        if (GetRequiredOperandInt(instructions[1]) != 0)
+        if (instructions.Count == 7)
         {
-            throw new InvalidOperationException(
-                $"native-reference emitter expects '{method.SubjectId}' to start with ldarg 0");
+            RequireInstructionOp(instructions[0], "ldstr", method.SubjectId, 0);
+            RequireInstructionOp(instructions[1], "ldarg", method.SubjectId, 1);
+            RequireInstructionOp(instructions[2], "ldfld", method.SubjectId, 2);
+            RequireInstructionOp(instructions[3], "call", method.SubjectId, 3);
+            RequireInstructionOp(instructions[4], "ldstr", method.SubjectId, 4);
+            RequireInstructionOp(instructions[5], "call", method.SubjectId, 5);
+            RequireInstructionOp(instructions[6], "ret", method.SubjectId, 6);
+
+            if (GetRequiredOperandInt(instructions[1]) != 0)
+            {
+                throw new InvalidOperationException(
+                    $"native-reference emitter expects '{method.SubjectId}' to start with ldarg 0");
+            }
+
+            RequireInstructionCallee(
+                instructions[3],
+                StringConcatPairIcall,
+                StringConcatPairMethodSubjectId,
+                method.SubjectId,
+                3);
+            RequireInstructionCallee(
+                instructions[5],
+                StringConcatPairIcall,
+                StringConcatPairMethodSubjectId,
+                method.SubjectId,
+                5);
+            return;
         }
 
-        RequireInstructionCallee(instructions[3], StringConcatPairIcall, method.SubjectId, 3);
-        RequireInstructionCallee(instructions[5], StringConcatPairIcall, method.SubjectId, 5);
+        if (instructions.Count == 6)
+        {
+            RequireInstructionOp(instructions[0], "ldstr", method.SubjectId, 0);
+            RequireInstructionOp(instructions[1], "ldarg", method.SubjectId, 1);
+            RequireInstructionOp(instructions[2], "ldfld", method.SubjectId, 2);
+            RequireInstructionOp(instructions[3], "ldstr", method.SubjectId, 3);
+            RequireInstructionOp(instructions[4], "call", method.SubjectId, 4);
+            RequireInstructionOp(instructions[5], "ret", method.SubjectId, 5);
+
+            if (GetRequiredOperandInt(instructions[1]) != 0)
+            {
+                throw new InvalidOperationException(
+                    $"native-reference emitter expects '{method.SubjectId}' to start with ldarg 0");
+            }
+
+            RequireInstructionCallee(
+                instructions[4],
+                StringConcatTripleIcall,
+                "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String,System.String)",
+                method.SubjectId,
+                4);
+            return;
+        }
+
+        throw new InvalidOperationException(
+            $"native-reference emitter expects '{method.SubjectId}' field-backed string instance method to use 6 or 7 canonical instructions");
+    }
+
+    private static string GetCapturedStateInstanceMessageSuffixLiteral(
+        TypedIlMethodArtifact method,
+        IReadOnlyList<TypedIlInstructionArtifact> instructions)
+    {
+        return instructions.Count switch
+        {
+            7 => GetRequiredOperandString(instructions[4]),
+            6 => GetRequiredOperandString(instructions[3]),
+            _ => throw new InvalidOperationException(
+                $"native-reference emitter cannot extract suffix literal from '{method.SubjectId}'"),
+        };
+    }
+
+    private static string GetCapturedStateInstanceMessageConcatIcall(
+        TypedIlMethodArtifact method,
+        IReadOnlyList<TypedIlInstructionArtifact> instructions)
+    {
+        return instructions.Count switch
+        {
+            7 => GetRequiredInstructionCallee(instructions[3], method.SubjectId, 3),
+            6 => GetRequiredInstructionCallee(instructions[4], method.SubjectId, 4),
+            _ => throw new InvalidOperationException(
+                $"native-reference emitter cannot extract concat icall from '{method.SubjectId}'"),
+        };
+    }
+
+    private static bool IsArrayBoxingReferenceArrayEntryPointShape(IReadOnlyList<TypedIlInstructionArtifact> instructions)
+    {
+        return instructions.Count == 16 &&
+               string.Equals(instructions[0].Op, "ldc.i4", StringComparison.Ordinal) &&
+               string.Equals(instructions[1].Op, "box", StringComparison.Ordinal) &&
+               string.Equals(instructions[2].Op, "call", StringComparison.Ordinal) &&
+               string.Equals(instructions[3].Op, "ldc.i4", StringComparison.Ordinal) &&
+               string.Equals(instructions[4].Op, "newarr", StringComparison.Ordinal) &&
+               string.Equals(instructions[5].Op, "dup", StringComparison.Ordinal) &&
+               string.Equals(instructions[6].Op, "ldc.i4", StringComparison.Ordinal) &&
+               string.Equals(instructions[7].Op, "ldstr", StringComparison.Ordinal) &&
+               string.Equals(instructions[8].Op, "newobj", StringComparison.Ordinal) &&
+               string.Equals(instructions[9].Op, "stelem.ref", StringComparison.Ordinal) &&
+               string.Equals(instructions[10].Op, "ldc.i4", StringComparison.Ordinal) &&
+               string.Equals(instructions[11].Op, "ldelem.ref", StringComparison.Ordinal) &&
+               string.Equals(instructions[12].Op, "callvirt", StringComparison.Ordinal) &&
+               string.Equals(instructions[13].Op, "call", StringComparison.Ordinal) &&
+               string.Equals(instructions[14].Op, "ldc.i4", StringComparison.Ordinal) &&
+               string.Equals(instructions[15].Op, "ret", StringComparison.Ordinal);
+    }
+
+    private static bool IsConstructorThenInstanceCallEntryPointShape(IReadOnlyList<TypedIlInstructionArtifact> instructions)
+    {
+        return instructions.Count == 6 &&
+               string.Equals(instructions[0].Op, "ldstr", StringComparison.Ordinal) &&
+               string.Equals(instructions[1].Op, "newobj", StringComparison.Ordinal) &&
+               string.Equals(instructions[2].Op, "callvirt", StringComparison.Ordinal) &&
+               string.Equals(instructions[3].Op, "call", StringComparison.Ordinal) &&
+               string.Equals(instructions[4].Op, "ldc.i4", StringComparison.Ordinal) &&
+               string.Equals(instructions[5].Op, "ret", StringComparison.Ordinal);
+    }
+
+    private static string? TryResolveDevirtualizedCallTarget(
+        IReadOnlyList<TypedIlMethodArtifact> methods,
+        IReadOnlyList<TypedIlInstructionArtifact> instructions,
+        int instructionIndex,
+        string declaredTargetSubjectId)
+    {
+        if (instructionIndex <= 0)
+        {
+            return null;
+        }
+
+        var precedingInstruction = instructions[instructionIndex - 1];
+        if (!string.Equals(precedingInstruction.Op, "newobj", StringComparison.Ordinal) ||
+            string.IsNullOrWhiteSpace(precedingInstruction.Callee))
+        {
+            return null;
+        }
+
+        var constructorTypeSubjectId = GetDeclaringTypeSubjectId(precedingInstruction.Callee);
+        var declaredMethod = GetRequiredMethod(methods, declaredTargetSubjectId);
+        var exactMatch = methods.FirstOrDefault(candidate =>
+            string.Equals(GetDeclaringTypeSubjectId(candidate.SubjectId), constructorTypeSubjectId, StringComparison.Ordinal) &&
+            string.Equals(GetMethodName(candidate.SubjectId), GetMethodName(declaredMethod.SubjectId), StringComparison.Ordinal) &&
+            string.Equals(candidate.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) &&
+            candidate.Parameters.Select(parameter => parameter.Type).SequenceEqual(
+                declaredMethod.Parameters.Select(parameter => parameter.Type),
+                StringComparer.Ordinal))
+            ?.SubjectId;
+        if (!string.IsNullOrWhiteSpace(exactMatch))
+        {
+            return exactMatch;
+        }
+
+        return methods.FirstOrDefault(candidate =>
+            string.Equals(GetDeclaringTypeSubjectId(candidate.SubjectId), constructorTypeSubjectId, StringComparison.Ordinal) &&
+            string.Equals(GetMethodName(candidate.SubjectId), GetMethodName(declaredMethod.SubjectId), StringComparison.Ordinal) &&
+            string.Equals(candidate.BodyAvailability, "has-canonical-body", StringComparison.Ordinal))
+            ?.SubjectId;
+    }
+
+    private static bool LooksLikeInterfaceMethodSubjectId(string subjectId)
+    {
+        var declaringTypeSubjectId = GetDeclaringTypeSubjectId(subjectId);
+        var typeName = declaringTypeSubjectId[(declaringTypeSubjectId.LastIndexOfAny(['/', '.']) + 1)..];
+        return typeName.StartsWith("I", StringComparison.Ordinal) &&
+               typeName.Length > 1 &&
+               char.IsUpper(typeName[1]);
+    }
+
+    private static string GetMethodName(string subjectId)
+    {
+        var methodSeparatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
+        var parameterSeparatorIndex = subjectId.IndexOf('(', methodSeparatorIndex + 2);
+        if (methodSeparatorIndex <= 0 || parameterSeparatorIndex <= methodSeparatorIndex + 2)
+        {
+            throw new InvalidOperationException($"failed to extract method name from subject id '{subjectId}'");
+        }
+
+        return subjectId[(methodSeparatorIndex + 2)..parameterSeparatorIndex];
+    }
+
+    private static string GetMethodReturnType(string subjectId)
+    {
+        var returnTypeSeparatorIndex = subjectId.LastIndexOf(':');
+        var parameterSeparatorIndex = subjectId.IndexOf('(', StringComparison.Ordinal);
+        if (returnTypeSeparatorIndex <= 0 || parameterSeparatorIndex <= returnTypeSeparatorIndex + 1)
+        {
+            throw new InvalidOperationException($"failed to extract return type from subject id '{subjectId}'");
+        }
+
+        return subjectId[(returnTypeSeparatorIndex + 1)..parameterSeparatorIndex];
     }
 
     private static void ValidateSingleArgumentForwarderShape(
         TypedIlMethodArtifact method,
         IReadOnlyList<TypedIlInstructionArtifact> instructions)
     {
-        RequireMethodContract(method, "static-method", "has-canonical-body");
+        RequireMethodContract(method, "static-forwarder", "has-canonical-body");
         RequireInstructionCount(method, instructions, 2);
         RequireInstructionOp(instructions[0], "ldarg", method.SubjectId, 0);
         RequireInstructionOp(instructions[1], "ret", method.SubjectId, 1);
@@ -949,7 +2846,7 @@ public sealed class NativeReferenceProofEmitter
         TypedIlMethodArtifact method,
         IReadOnlyList<TypedIlInstructionArtifact> instructions)
     {
-        RequireMethodContract(method, "instance-method", "has-canonical-body");
+        RequireMethodContract(method, "instance-field-getter", "has-canonical-body");
         RequireInstructionCount(method, instructions, 3);
         RequireInstructionOp(instructions[0], "ldarg", method.SubjectId, 0);
         RequireInstructionOp(instructions[1], "ldfld", method.SubjectId, 1);
@@ -1016,16 +2913,45 @@ public sealed class NativeReferenceProofEmitter
         }
     }
 
+    private static void RequireInstructionOp(
+        TypedIlInstructionArtifact instruction,
+        string expectedOp,
+        string alternateExpectedOp,
+        string subjectId,
+        int instructionIndex)
+    {
+        if (!string.Equals(instruction.Op, expectedOp, StringComparison.Ordinal) &&
+            !string.Equals(instruction.Op, alternateExpectedOp, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects instruction {instructionIndex} in '{subjectId}' to be '{expectedOp}' or '{alternateExpectedOp}', but found '{instruction.Op}'");
+        }
+    }
+
     private static void RequireInstructionCallee(
         TypedIlInstructionArtifact instruction,
         string expectedCallee,
         string subjectId,
         int instructionIndex)
     {
-        if (!string.Equals(instruction.Callee, expectedCallee, StringComparison.Ordinal))
+        RequireInstructionCallee(instruction, expectedCallee, null, subjectId, instructionIndex);
+    }
+
+    private static void RequireInstructionCallee(
+        TypedIlInstructionArtifact instruction,
+        string expectedCallee,
+        string? alternateExpectedCallee,
+        string subjectId,
+        int instructionIndex)
+    {
+        if (!string.Equals(instruction.Callee, expectedCallee, StringComparison.Ordinal) &&
+            !string.Equals(instruction.Callee, alternateExpectedCallee, StringComparison.Ordinal))
         {
+            var expectedDescription = alternateExpectedCallee is null
+                ? $"'{expectedCallee}'"
+                : $"'{expectedCallee}' or '{alternateExpectedCallee}'";
             throw new InvalidOperationException(
-                $"native-reference emitter expects instruction {instructionIndex} in '{subjectId}' to call '{expectedCallee}', but found '{instruction.Callee ?? "<null>"}'");
+                $"native-reference emitter expects instruction {instructionIndex} in '{subjectId}' to call {expectedDescription}, but found '{instruction.Callee ?? "<null>"}'");
         }
     }
 
@@ -1177,6 +3103,38 @@ public sealed class NativeReferenceProofEmitter
 
         throw new InvalidOperationException(
             $"missing required '{registrationKind}' metadata registration for '{subjectId}'");
+    }
+
+    private static string CreateTypeTokenLiteral(
+        MetadataRegistrationArtifact metadataRegistration,
+        string subjectId)
+    {
+        var hasConcreteRegistration = metadataRegistration.Registrations.Any(item =>
+            string.Equals(item.RegistrationKind, "type", StringComparison.Ordinal) &&
+            string.Equals(item.SubjectId, subjectId, StringComparison.Ordinal));
+        return hasConcreteRegistration
+            ? FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", subjectId))
+            : FormatCppTokenLiteral(CreatePseudoTypeToken(subjectId));
+    }
+
+    private static uint CreatePseudoTypeToken(string subjectId)
+    {
+        const uint typeTokenPrefix = 0x02000000u;
+        uint hash = 2166136261u;
+
+        foreach (var current in subjectId)
+        {
+            hash ^= current;
+            hash *= 16777619u;
+        }
+
+        var rowIndex = hash & 0x00FFFFFFu;
+        if (rowIndex == 0u)
+        {
+            rowIndex = 1u;
+        }
+
+        return typeTokenPrefix | rowIndex;
     }
 
     private static uint GetMetadataTokenPrefix(string registrationKind)

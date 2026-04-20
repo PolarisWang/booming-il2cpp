@@ -220,18 +220,44 @@ def _source_entry_selection(source: dict[str, Any] | None) -> dict[str, int]:
 
 
 def _subject_matrix_source_entry_selection(manifest: dict[str, Any], matrix: dict[str, Any]) -> dict[str, int]:
+    matrix_source = dict(matrix.get("source") or {})
+    if "entry" in matrix_source and "entrySelection" not in matrix_source:
+        return {}
+
     source = dict(manifest.get("source") or {})
-    source.update(dict(matrix.get("source") or {}))
+    source.update(matrix_source)
     return _source_entry_selection(source)
+
+
+def _matrix_uses_native_hotupdate_chain(matrix: dict[str, Any], manifest: dict[str, Any]) -> bool:
+    execution_context = dict(matrix.get("executionContext") or {})
+    matrix_source = dict(matrix.get("source") or {})
+    source = dict(manifest.get("source") or {})
+    source.update(matrix_source)
+    runtime_profile = str(execution_context.get("runtimeProfile") or "").strip().lower()
+    toolchain_profile = str(execution_context.get("toolchainProfile") or "").strip().lower()
+    engineering_profile = str(matrix.get("engineeringProfile") or manifest.get("engineeringProfile") or "").strip().lower()
+    uses_hotupdate = engineering_profile == subjects_module.EngineeringProfile.HOT_UPDATE_HOST.value or (
+        "hot-update" in runtime_profile or "hotupdate" in runtime_profile or "hot-update" in toolchain_profile or "hotupdate" in toolchain_profile
+    )
+    return bool(
+        uses_hotupdate
+        and bool(source.get("fullAssemblyClosure"))
+        and runtime_profile == "native-hotupdate-proof-output"
+        and toolchain_profile != "dotnet-managed"
+    )
 
 
 def _effective_generated_stage_kind(
     generated_stage_kind: str,
     entry_selection: dict[str, Any] | None,
     subject_entry_selection: dict[str, int] | None = None,
+    *,
+    uses_native_hotupdate_chain: bool = False,
 ) -> str:
     if (
         generated_stage_kind == "generated-native-proof"
+        and not uses_native_hotupdate_chain
         and (
             _entry_selection_host_kind(entry_selection) == "proof-host"
             or bool(subject_entry_selection)
@@ -1032,6 +1058,10 @@ def _subject_variant(manifest: dict[str, Any], options: dict[str, object]) -> st
     return str(selection["variant"])
 
 
+def _subject_generated_run_id_override(options: dict[str, object]) -> str:
+    return _text_option(options, "generated-run-id")
+
+
 def _subject_selected_matrices(manifest: dict[str, Any], host_platform: str, options: dict[str, object]) -> list[dict[str, Any]]:
     requested_matrix_id = _text_option(options, "matrix")
     all_targets = _flag(options, "all-targets")
@@ -1173,6 +1203,45 @@ def _materialize_subject_native_reference_source(
     matrix_id: str,
     generated_source_path: Path,
 ) -> Path:
+    def _native_reference_generated_source_paths(primary_generated_source_path: Path) -> list[Path]:
+        generated_source_paths = [primary_generated_source_path]
+        native_reference_manifest_path = primary_generated_source_path.parent.parent / "native-reference.manifest.json"
+        if not native_reference_manifest_path.is_file():
+            return generated_source_paths
+
+        native_reference_manifest = read_json(native_reference_manifest_path)
+        if not isinstance(native_reference_manifest, dict):
+            return generated_source_paths
+
+        discovered_paths: list[Path] = []
+        for artifact in list(native_reference_manifest.get("generatedArtifacts") or []):
+            if not isinstance(artifact, dict):
+                continue
+            if str(artifact.get("kind") or "").strip() != "generatedTranslationUnit":
+                continue
+            artifact_path = str(artifact.get("path") or "").strip()
+            if artifact_path:
+                discovered_paths.append(primary_generated_source_path.parent.parent / artifact_path)
+
+        if not discovered_paths:
+            for page in list(native_reference_manifest.get("translationUnitPages") or []):
+                if not isinstance(page, dict):
+                    continue
+                page_path = str(page.get("path") or "").strip()
+                if page_path:
+                    discovered_paths.append(primary_generated_source_path.parent.parent / page_path)
+
+        for path in discovered_paths:
+            if path not in generated_source_paths:
+                generated_source_paths.append(path)
+        return generated_source_paths
+
+    def _render_cmake_source_list(paths: list[Path]) -> str:
+        entries = [f'    "{path.as_posix()}"' for path in paths]
+        if not entries:
+            raise RuntimeError("generated source list cannot be empty")
+        return "\n".join(entries)
+
     materialized_root = _subject_materialized_source_root(workspace_root, matrix_id)
     _clear_dir(materialized_root)
     materialized_root.mkdir(parents=True, exist_ok=True)
@@ -1191,10 +1260,33 @@ def _materialize_subject_native_reference_source(
             owner_file=__file__,
             relative_template_path=_NATIVE_GENERATED_TEMPLATE,
             replacements={
-                "GENERATED_INPUT_SOURCE": generated_source_path.as_posix(),
+                "GENERATED_INPUT_SOURCES": _render_cmake_source_list(
+                    _native_reference_generated_source_paths(generated_source_path)
+                ),
             },
         ),
         encoding="utf-8",
+    )
+    native_reference_manifest_path = generated_source_path.parent.parent / "native-reference.manifest.json"
+    runtime_execution_kind = ""
+    assembly_dispatch_subject_id = ""
+    if native_reference_manifest_path.is_file():
+        native_reference_manifest = read_json(native_reference_manifest_path)
+        if isinstance(native_reference_manifest, dict):
+            runtime_execution_kind = str(native_reference_manifest.get("runtimeExecutionKind") or "").strip()
+            assembly_dispatch_subject_id = str(
+                native_reference_manifest.get("preferredAssemblyDispatchSubjectId") or ""
+            ).strip()
+            translation_unit_pages = [
+                dict(item)
+                for item in list(native_reference_manifest.get("translationUnitPages") or [])
+                if isinstance(item, dict)
+            ]
+            if not assembly_dispatch_subject_id and translation_unit_pages:
+                assembly_dispatch_subject_id = str(translation_unit_pages[0].get("firstMethodSubjectId") or "").strip()
+    use_assembly_bound_dispatch = (
+        runtime_execution_kind == "assembly-bound-native-reference-skeleton"
+        and bool(assembly_dispatch_subject_id)
     )
     proof_main_path.write_text(
         template_assets_module.render_template(
@@ -1203,6 +1295,8 @@ def _materialize_subject_native_reference_source(
             replacements={
                 "IMAGE_NAME": subject_id,
                 "RUNTIME_TAG": "subject-reference-proof",
+                "USE_ASSEMBLY_BOUND_DISPATCH": "true" if use_assembly_bound_dispatch else "false",
+                "ASSEMBLY_DISPATCH_SUBJECT_ID": assembly_dispatch_subject_id,
             },
         ),
         encoding="utf-8",
@@ -1263,7 +1357,7 @@ def _materialize_subject_native_aot_source(
             owner_file=__file__,
             relative_template_path=_NATIVE_GENERATED_TEMPLATE,
             replacements={
-                "GENERATED_INPUT_SOURCE": generated_source_path.as_posix(),
+                "GENERATED_INPUT_SOURCES": f'    "{generated_source_path.as_posix()}"',
             },
         ),
         encoding="utf-8",
@@ -1888,6 +1982,7 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
     selected_matrices = _subject_selected_matrices(manifest, host_platform, options)
     refresh_generated = _flag(options, "refresh-generated")
     auto_refresh_missing_generated = _flag(options, "auto-refresh-missing-generated")
+    generated_run_id_override = _subject_generated_run_id_override(options)
     generated_matrix_ids = [
         str(matrix.get("matrixId") or "")
         for matrix in selected_matrices
@@ -1986,11 +2081,15 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
             generated_stage_kind,
             entry_selection,
             subject_entry_selection,
+            uses_native_hotupdate_chain=_matrix_uses_native_hotupdate_chain(matrix, manifest),
         )
         matrix_requires_workspace_configure = _subject_matrix_requires_workspace_configure(manifest, matrix)
         mirrored_generated_root: Path | None = None
         if matrix_requires_workspace_configure and target_platform == "windows-x64":
-            generated_run_id = _subject_generated_run_id(matrix_id) if multi_matrix_generated else "subject-exec"
+            generated_run_id = (
+                generated_run_id_override
+                or (_subject_generated_run_id(matrix_id) if multi_matrix_generated else "subject-exec")
+            )
             _ensure_subject_generated_source(
                 repo_root,
                 subject_id=subject_id,

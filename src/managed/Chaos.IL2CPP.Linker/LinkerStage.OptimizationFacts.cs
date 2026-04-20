@@ -112,6 +112,8 @@ public sealed partial class LinkerStage
     }
 
     private static PreserveDescriptorArtifact BuildPreserveDescriptor(
+        string inputAssemblyName,
+        bool fullAssemblyClosure,
         IReadOnlyList<ManagedTypeModel> orderedTypes,
         IReadOnlyList<ManagedFieldModel> orderedFields,
         IReadOnlyList<ManagedPropertyModel> orderedProperties,
@@ -156,6 +158,56 @@ public sealed partial class LinkerStage
                         Preserve = "signature",
                         Reason = "preserve-attribute",
                     }))
+            .Concat(
+                fullAssemblyClosure
+                    ? orderedTypes
+                        .Where(type => string.Equals(type.AssemblyName, inputAssemblyName, StringComparison.Ordinal))
+                        .Select(type => new PreserveDescriptorEntry
+                        {
+                            SubjectKind = "type",
+                            SubjectId = type.SubjectId,
+                            Preserve = "all",
+                            Reason = "full-assembly-closure",
+                        })
+                    : [])
+            .Concat(
+                fullAssemblyClosure
+                    ? orderedFields
+                        .Where(field => string.Equals(field.AssemblyName, inputAssemblyName, StringComparison.Ordinal))
+                        .Select(field => new PreserveDescriptorEntry
+                        {
+                            SubjectKind = "field",
+                            SubjectId = field.SubjectId,
+                            Preserve = "members",
+                            Reason = "full-assembly-closure",
+                        })
+                    : [])
+            .Concat(
+                fullAssemblyClosure
+                    ? orderedProperties
+                        .Where(property => string.Equals(property.AssemblyName, inputAssemblyName, StringComparison.Ordinal))
+                        .Select(property => new PreserveDescriptorEntry
+                        {
+                            SubjectKind = "property",
+                            SubjectId = property.SubjectId,
+                            Preserve = "members",
+                            Reason = "full-assembly-closure",
+                        })
+                    : [])
+            .Concat(
+                fullAssemblyClosure
+                    ? orderedMethods
+                        .Where(method => string.Equals(method.AssemblyName, inputAssemblyName, StringComparison.Ordinal))
+                        .Select(method => new PreserveDescriptorEntry
+                        {
+                            SubjectKind = "method",
+                            SubjectId = method.SubjectId,
+                            Preserve = "signature",
+                            Reason = "full-assembly-closure",
+                        })
+                    : [])
+            .GroupBy(entry => $"{entry.SubjectKind}:{entry.SubjectId}", StringComparer.Ordinal)
+            .Select(group => group.First())
             .ToList();
 
         return new PreserveDescriptorArtifact

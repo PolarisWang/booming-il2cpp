@@ -171,6 +171,8 @@ public sealed record ManagedClosureManifestArtifact
 
     public IReadOnlyList<string>? AdditionalAssemblyPaths { get; init; }
 
+    public bool FullAssemblyClosure { get; init; }
+
     public required string InputModuleVersionId { get; init; }
 
     public required IReadOnlyList<ManagedClosureArtifactRef> Artifacts { get; init; }
@@ -230,6 +232,19 @@ public sealed record NativeReferenceGeneratedArtifactRef
     public required string Path { get; init; }
 }
 
+public sealed record AuditTranslationUnitPageArtifact
+{
+    public required int PageNumber { get; init; }
+
+    public required int MethodCount { get; init; }
+
+    public required string Path { get; init; }
+
+    public string? FirstMethodSubjectId { get; init; }
+
+    public string? LastMethodSubjectId { get; init; }
+}
+
 public sealed record NativeReferenceProofManifestArtifact
 {
     public string FormatVersion { get; init; } = "v0";
@@ -243,6 +258,16 @@ public sealed record NativeReferenceProofManifestArtifact
     public required string ManagedClosureRootPath { get; init; }
 
     public required string PlanArtifactPath { get; init; }
+
+    public string? RuntimeExecutionKind { get; init; }
+
+    public string? PreferredAssemblyDispatchSubjectId { get; init; }
+
+    public int? TranslationUnitPageSize { get; init; }
+
+    public int? TranslationUnitPageCount { get; init; }
+
+    public IReadOnlyList<AuditTranslationUnitPageArtifact>? TranslationUnitPages { get; init; }
 
     public required IReadOnlyList<NativeReferenceGeneratedArtifactRef> GeneratedArtifacts { get; init; }
 }
@@ -267,6 +292,12 @@ public sealed record NativeAotManifestArtifact
     public required string ManagedClosureRootPath { get; init; }
 
     public required string PlanArtifactPath { get; init; }
+
+    public int? TranslationUnitPageSize { get; init; }
+
+    public int? TranslationUnitPageCount { get; init; }
+
+    public IReadOnlyList<AuditTranslationUnitPageArtifact>? TranslationUnitPages { get; init; }
 
     public required IReadOnlyList<NativeAotGeneratedArtifactRef> GeneratedArtifacts { get; init; }
 }
@@ -310,6 +341,24 @@ public sealed record NativeReferenceLoweringPlanArtifact
     public required string NativeEntryFunctionName { get; init; }
 
     public required string EntrySymbol { get; init; }
+
+    public string? RuntimeExecutionKind { get; init; }
+
+    public string? TranslationUnitMode { get; init; }
+
+    public IReadOnlyList<string>? TranslationUnitMethodSubjectIds { get; init; }
+
+    public int? TranslationUnitMethodCount { get; init; }
+
+    public int? TranslationUnitPageSize { get; init; }
+
+    public int? TranslationUnitPageCount { get; init; }
+
+    public IReadOnlyList<AuditTranslationUnitPageArtifact>? TranslationUnitPages { get; init; }
+
+    public string? AuditStatus { get; init; }
+
+    public string? AuditMessage { get; init; }
 
     public string? ConstructorSymbol { get; init; }
 
@@ -449,6 +498,22 @@ public sealed record NativeAotLoweringPlanArtifact
     public required string EntryMethodToken { get; init; }
 
     public required string WorkloadAbi { get; init; }
+
+    public string? TranslationUnitMode { get; init; }
+
+    public IReadOnlyList<string>? TranslationUnitMethodSubjectIds { get; init; }
+
+    public int? TranslationUnitMethodCount { get; init; }
+
+    public int? TranslationUnitPageSize { get; init; }
+
+    public int? TranslationUnitPageCount { get; init; }
+
+    public IReadOnlyList<AuditTranslationUnitPageArtifact>? TranslationUnitPages { get; init; }
+
+    public string? AuditStatus { get; init; }
+
+    public string? AuditMessage { get; init; }
 }
 
 public sealed record NativeReferenceGeneratedSource

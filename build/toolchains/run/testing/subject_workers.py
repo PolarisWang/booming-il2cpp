@@ -215,6 +215,66 @@ set_target_properties(
 """
 
 
+def _render_cmake_source_list(paths: list[Path]) -> str:
+    entries = [f'    "{path.as_posix()}"' for path in paths]
+    if not entries:
+        raise RuntimeError("generated source list cannot be empty")
+    return "\n".join(entries)
+
+
+def _generated_translation_unit_paths(
+    output_root: Path,
+    *,
+    manifest_name: str,
+    primary_generated_source_name: str,
+) -> list[Path]:
+    primary_generated_source_path = output_root / "generated" / primary_generated_source_name
+    generated_source_paths = [primary_generated_source_path]
+    manifest_path = output_root / manifest_name
+    if not manifest_path.is_file():
+        return generated_source_paths
+
+    manifest = read_json(manifest_path)
+    if not isinstance(manifest, dict):
+        return generated_source_paths
+
+    discovered_paths: list[Path] = []
+    for artifact in list(manifest.get("generatedArtifacts") or []):
+        if not isinstance(artifact, dict):
+            continue
+        if str(artifact.get("kind") or "").strip() != "generatedTranslationUnit":
+            continue
+        artifact_path = str(artifact.get("path") or "").strip()
+        if artifact_path:
+            discovered_paths.append(output_root / artifact_path)
+
+    if not discovered_paths:
+        for page in list(manifest.get("translationUnitPages") or []):
+            if not isinstance(page, dict):
+                continue
+            page_path = str(page.get("path") or "").strip()
+            if page_path:
+                discovered_paths.append(output_root / page_path)
+
+    for path in discovered_paths:
+        if path not in generated_source_paths:
+            generated_source_paths.append(path)
+    return generated_source_paths
+
+
+def _generated_source_paths_from_manifest(generated_manifest: dict[str, Any]) -> list[str]:
+    generated_source_paths = [
+        str(value).strip()
+        for value in list(generated_manifest.get("generatedSourcePaths") or [])
+        if str(value).strip()
+    ]
+    if generated_source_paths:
+        return generated_source_paths
+
+    generated_source_path = str(generated_manifest.get("generatedSourcePath") or "").strip()
+    return [generated_source_path] if generated_source_path else []
+
+
 def _render_windows_native_aot_host_cmakelists() -> str:
     return """if(NOT EXISTS "${CHAOS_SUBJECT_HOST_MAIN}")
     message(FATAL_ERROR "Missing native-aot host source: ${CHAOS_SUBJECT_HOST_MAIN}")
@@ -314,6 +374,8 @@ def _selection_workspace_host_kind(selection: dict[str, Any]) -> str:
     )
     if "perf" in selector_haystack or "benchmark" in selector_haystack:
         return "benchmark-host"
+    if _selection_uses_hotupdate_host(selection):
+        return "proof-host"
     return ""
 
 
@@ -613,6 +675,9 @@ def _ensure_subject_workspace_manifest(
         "auto-refresh-missing-generated": True,
         "refresh-generated": True,
     }
+    run_id = str(selection.get("runId") or "").strip()
+    if run_id:
+        options["generated-run-id"] = run_id
     matrix_id = str(selection.get("matrixId") or "").strip()
     if matrix_id:
         options["matrix"] = matrix_id
@@ -725,6 +790,19 @@ def _selection_uses_hotupdate_host(selection: dict[str, Any]) -> bool:
         if "hot-update" in normalized or "hotupdate" in normalized:
             return True
     return False
+
+
+def _selection_uses_native_hotupdate_chain(selection: dict[str, Any]) -> bool:
+    execution_context = dict(selection.get("executionContext") or {})
+    source = dict(selection.get("source") or {})
+    runtime_profile = str(execution_context.get("runtimeProfile") or "").strip().lower()
+    toolchain_profile = str(execution_context.get("toolchainProfile") or "").strip().lower()
+    return bool(
+        _selection_uses_hotupdate_host(selection)
+        and bool(source.get("fullAssemblyClosure"))
+        and runtime_profile == "native-hotupdate-proof-output"
+        and toolchain_profile != "dotnet-managed"
+    )
 
 
 def _resolve_workspace_hotupdate_test_host(
@@ -1104,15 +1182,31 @@ def _materialize_windows_native_reference_cmake_source(
     *,
     build_root: Path,
     subject_id: str,
-    generated_source_path: Path,
+    generated_source_paths: list[Path],
 ) -> Path:
     del repo_root
 
     source_root = build_root / "cmake-src"
+    return _materialize_windows_native_reference_cmake_source_at(
+        source_root,
+        subject_id=subject_id,
+        generated_source_paths=generated_source_paths,
+    )
+
+
+def _materialize_windows_native_reference_cmake_source_at(
+    source_root: Path,
+    *,
+    subject_id: str,
+    generated_source_paths: list[Path],
+) -> Path:
     if source_root.exists():
         shutil.rmtree(source_root)
     (source_root / "generated").mkdir(parents=True, exist_ok=True)
     (source_root / "proof").mkdir(parents=True, exist_ok=True)
+    if not generated_source_paths:
+        raise RuntimeError("generated source paths are required for native-reference CMake source")
+    generated_source_path = generated_source_paths[0]
 
     proof_main_path = source_root / "proof" / "main.cpp"
     (source_root / "CMakeLists.txt").write_text(
@@ -1127,10 +1221,32 @@ def _materialize_windows_native_reference_cmake_source(
             owner_file=_SUBJECT_TEMPLATE_OWNER_FILE,
             relative_template_path=_NATIVE_GENERATED_TEMPLATE,
             replacements={
-                "GENERATED_INPUT_SOURCE": generated_source_path.as_posix(),
+                "GENERATED_INPUT_SOURCES": _render_cmake_source_list(generated_source_paths),
             },
         ),
         encoding="utf-8",
+    )
+    native_reference_manifest_path = generated_source_path.parent.parent / "native-reference.manifest.json"
+    runtime_execution_kind = ""
+    assembly_dispatch_subject_id = ""
+    if native_reference_manifest_path.is_file():
+        native_reference_manifest = read_json(native_reference_manifest_path)
+        if isinstance(native_reference_manifest, dict):
+            runtime_execution_kind = str(native_reference_manifest.get("runtimeExecutionKind") or "").strip()
+            assembly_dispatch_subject_id = str(
+                native_reference_manifest.get("preferredAssemblyDispatchSubjectId") or ""
+            ).strip()
+            translation_unit_pages = [
+                dict(item)
+                for item in list(native_reference_manifest.get("translationUnitPages") or [])
+                if isinstance(item, dict)
+            ]
+            if not assembly_dispatch_subject_id and translation_unit_pages:
+                assembly_dispatch_subject_id = str(translation_unit_pages[0].get("firstMethodSubjectId") or "").strip()
+
+    use_assembly_bound_dispatch = (
+        runtime_execution_kind == "assembly-bound-native-reference-skeleton"
+        and bool(assembly_dispatch_subject_id)
     )
     proof_main_path.write_text(
         template_assets_module.render_template(
@@ -1139,6 +1255,8 @@ def _materialize_windows_native_reference_cmake_source(
             replacements={
                 "IMAGE_NAME": subject_id,
                 "RUNTIME_TAG": "subject-reference-proof",
+                "USE_ASSEMBLY_BOUND_DISPATCH": "true" if use_assembly_bound_dispatch else "false",
+                "ASSEMBLY_DISPATCH_SUBJECT_ID": assembly_dispatch_subject_id,
             },
         ),
         encoding="utf-8",
@@ -1161,6 +1279,59 @@ def _materialize_windows_native_reference_cmake_source(
         encoding="utf-8",
     )
     return source_root
+
+
+def _materialize_workspace_windows_native_reference_cmake_source(
+    repo_root: Path,
+    *,
+    subject_id: str,
+    matrix_id: str,
+    generated_source_paths: list[Path],
+) -> Path:
+    workspace_source_root = repo_root / "solutions" / "subjects" / subject_id / "native-source" / matrix_id
+    return _materialize_windows_native_reference_cmake_source_at(
+        workspace_source_root,
+        subject_id=subject_id,
+        generated_source_paths=generated_source_paths,
+    )
+
+
+def _resolve_windows_native_reference_cmake_layout(
+    repo_root: Path,
+    *,
+    selection: dict[str, Any],
+    build_root: Path,
+    workspace_native_test_host: dict[str, str],
+    generator: str,
+    generated_source_paths: list[Path],
+) -> tuple[Path, Path]:
+    configure_root_text = str(workspace_native_test_host.get("configureRoot") or "").strip()
+    subject_id = str(selection.get("subjectId") or "").strip()
+    matrix_id = str(selection.get("matrixId") or "").strip()
+    if configure_root_text and subject_id and matrix_id:
+        cmake_source_root = _materialize_workspace_windows_native_reference_cmake_source(
+            repo_root,
+            subject_id=subject_id,
+            matrix_id=matrix_id,
+            generated_source_paths=generated_source_paths,
+        )
+        cmake_binary_dir = _resolve(repo_root, configure_root_text)
+        cmake_binary_dir.parent.mkdir(parents=True, exist_ok=True)
+        return cmake_source_root, cmake_binary_dir
+
+    return (
+        _materialize_windows_native_reference_cmake_source(
+            repo_root,
+            build_root=build_root,
+            subject_id=subject_id,
+            generated_source_paths=generated_source_paths,
+        ),
+        tooling_module.allocate_cmake_binary_dir(
+            build_root / "cmake",
+            host_platform="windows",
+            generator=generator,
+        ),
+    )
 
 
 def _native_benchmark_dispatch_manifest_path(build_root: Path) -> Path:
@@ -1381,13 +1552,24 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
     hotupdate_host = _resolve_workspace_hotupdate_test_host(repo_root, selection)
     hotupdate_patch_projects = _resolve_workspace_hotupdate_patch_projects(repo_root, selection)
     managed_host = _resolve_workspace_managed_host(repo_root, selection)
+    native_primary_project_path_text = subjects_module.resolve_source_primary_project_path(source)
+    use_native_hotupdate_chain = bool(
+        hotupdate_host is not None
+        and bool(source.get("fullAssemblyClosure"))
+        and str(selection.get("matrixId") or "").strip()
+        and str(dict(selection.get("executionContext") or {}).get("toolchainProfile") or "").strip().lower() != "dotnet-managed"
+    )
     primary_project_path_text = (
-        str(hotupdate_host["projectPath"])
-        if hotupdate_host is not None
+        native_primary_project_path_text
+        if use_native_hotupdate_chain
         else (
-            str(managed_host["projectPath"])
-            if managed_host is not None
-            else subjects_module.resolve_source_primary_project_path(source)
+            str(hotupdate_host["projectPath"])
+            if hotupdate_host is not None
+            else (
+                str(managed_host["projectPath"])
+                if managed_host is not None
+                else native_primary_project_path_text
+            )
         )
     )
     primary_project_path = _resolve(repo_root, primary_project_path_text)
@@ -1410,14 +1592,18 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
 
     if hotupdate_host is not None:
         supporting_project_paths = [
-            subjects_module.resolve_source_primary_project_path(source),
+            *(
+                [str(hotupdate_host.get("projectPath") or "")]
+                if use_native_hotupdate_chain and str(hotupdate_host.get("projectPath") or "").strip()
+                else []
+            ),
             *[
                 str(item.get("projectPath") or "")
                 for item in hotupdate_patch_projects
                 if str(item.get("projectPath") or "")
             ],
         ]
-        built_project_paths: set[str] = set()
+        built_project_paths: set[str] = {primary_project_path_text}
         for supporting_project_path_text in supporting_project_paths:
             if not supporting_project_path_text or supporting_project_path_text in built_project_paths:
                 continue
@@ -1478,6 +1664,14 @@ def run_dotnet_host_input_builder(*, repo_root: Path, request: dict[str, Any]) -
         manifest["collectionPath"] = str(selected_host["collectionPath"])
     if hotupdate_host is not None:
         manifest["bindingManifestPath"] = str(hotupdate_host["bindingManifestPath"])
+    if use_native_hotupdate_chain and hotupdate_host is not None:
+        managed_runtime_project_path_text = str(hotupdate_host.get("projectPath") or "").strip()
+        if managed_runtime_project_path_text:
+            manifest["managedRuntimeProjectPath"] = managed_runtime_project_path_text
+            manifest["managedRuntimeAssemblyPath"] = _relative(
+                repo_root,
+                output_root / f"{Path(managed_runtime_project_path_text).stem}.dll",
+            )
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
     return _success_result(
         bucket_manifest_path=request["paths"]["manifestPath"],
@@ -1519,11 +1713,14 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
     output_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     output_root.mkdir(parents=True, exist_ok=True)
     driver_arguments = ["dotnet", str(driver_dll_path), str(assembly_path), str(output_root)]
-    entry_point_subject_id = str(dict(selection.get("source") or {}).get("entry") or "")
+    selection_source = dict(selection.get("source") or {})
+    entry_point_subject_id = str(selection_source.get("entry") or "")
     if entry_point_subject_id:
         driver_arguments.extend(["--entry-point-subject-id", entry_point_subject_id])
     for additional_assembly_path in additional_assembly_paths:
         driver_arguments.extend(["--additional-assembly", str(additional_assembly_path)])
+    if bool(selection_source.get("fullAssemblyClosure")):
+        driver_arguments.append("--full-assembly-closure")
 
     _run_checked(
         driver_arguments,
@@ -1556,6 +1753,7 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
         "validationProfileId": selection.get("validationProfileId"),
         "validationKind": selection.get("validationKind"),
         "variant": variant,
+        "fullAssemblyClosure": bool(selection_source.get("fullAssemblyClosure")),
         "codegenMacros": list(variant_macros["codegen"]),
         "artifacts": {
             "typedIlIrPath": _relative(repo_root, output_root / "typed-il-ir.json"),
@@ -1613,6 +1811,14 @@ def _run_native_generated_emitter(
         failure_message=f"{failure_label} failed: {analysis_root}",
     )
 
+    generated_source_paths = [
+        _relative(repo_root, path)
+        for path in _generated_translation_unit_paths(
+            output_root,
+            manifest_name=manifest_name,
+            primary_generated_source_name=generated_source_name,
+        )
+    ]
     generated_manifest = {
         "subjectId": str(request["selection"]["subjectId"]),
         "bucket": "generated",
@@ -1621,7 +1827,8 @@ def _run_native_generated_emitter(
         "validationKind": selection.get("validationKind"),
         "variant": variant,
         "codegenMacros": list(variant_macros["codegen"]),
-        "generatedSourcePath": _relative(repo_root, output_root / "generated" / generated_source_name),
+        "generatedSourcePath": generated_source_paths[0],
+        "generatedSourcePaths": generated_source_paths,
         manifest_key: _relative(repo_root, output_root / manifest_name),
         plan_key: _relative(repo_root, output_root / plan_name),
     }
@@ -1641,7 +1848,7 @@ def _run_native_generated_emitter(
         bucket_manifest_path=request["paths"]["manifestPath"],
         report_paths=[],
         primary_evidence_paths=[
-            generated_manifest["generatedSourcePath"],
+            *list(generated_manifest["generatedSourcePaths"]),
             str(generated_manifest[manifest_key]),
         ],
         details=details,
@@ -1652,7 +1859,9 @@ def run_native_proof_emitter(*, repo_root: Path, request: dict[str, Any]) -> dic
     selection = dict(request.get("selection") or {})
     entry_selection = _selection_declared_entry_selection(selection)
     subject_entry_selection = _selection_subject_entry_selection(selection)
-    if str(entry_selection.get("family") or "") == "declared-unit-test" or subject_entry_selection:
+    if not _selection_uses_native_hotupdate_chain(selection) and (
+        str(entry_selection.get("family") or "") == "declared-unit-test" or subject_entry_selection
+    ):
         return run_native_aot_emitter(repo_root=repo_root, request=request)
     return _run_native_generated_emitter(
         repo_root=repo_root,
@@ -1692,6 +1901,7 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
     if not isinstance(generated_manifest, dict):
         raise RuntimeError("generated manifest must be an object")
     generated_source_path_text = str(generated_manifest.get("generatedSourcePath") or "")
+    generated_source_path_texts = _generated_source_paths_from_manifest(generated_manifest)
     native_aot_build = str(generated_manifest.get("nativeAotManifestPath") or "") != ""
 
     if native_aot_build:
@@ -1838,33 +2048,37 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
         )
 
     generated_root = generated_manifest_path.parent
-    generated_source_path = (
-        _resolve(repo_root, generated_source_path_text)
-        if generated_source_path_text
-        else generated_root / "generated" / "native-reference.generated.cpp"
-    )
+    generated_source_paths = [
+        _resolve(repo_root, value)
+        for value in generated_source_path_texts
+    ]
+    if not generated_source_paths:
+        generated_source_paths = [generated_root / "generated" / "native-reference.generated.cpp"]
+    generated_source_path = generated_source_paths[0]
     runtime_root = build_root.parent / "runtime"
     output_executable_path = out_root / f"{WINDOWS_REFERENCE_BUILD_TARGET}.exe"
-    if not generated_source_path.is_file():
-        raise RuntimeError(f"subject proof source is missing: {generated_source_path}")
+    for source_path in generated_source_paths:
+        if not source_path.is_file():
+            raise RuntimeError(f"subject proof source is missing: {source_path}")
 
     out_root.mkdir(parents=True, exist_ok=True)
-    cmake_source_root = _materialize_windows_native_reference_cmake_source(
-        repo_root,
-        build_root=build_root,
-        subject_id=str(selection["subjectId"]),
-        generated_source_path=generated_source_path,
-    )
-    host_source_path = cmake_source_root / "proof" / "main.cpp"
-
     cmake_path, developer_env, _ninja_path = _windows_native_cmake_context(repo_root)
     generator = _windows_visual_studio_generator(repo_root)
     instance_spec = tooling_module.detect_visual_studio_instance_spec(generator)
-    cmake_binary_dir = tooling_module.allocate_cmake_binary_dir(
-        build_root / "cmake",
-        host_platform="windows",
+    workspace_native_test_host = _resolve_workspace_native_test_host(
+        repo_root,
+        selection,
+        host_kind_override="proof-host",
+    ) or {}
+    cmake_source_root, cmake_binary_dir = _resolve_windows_native_reference_cmake_layout(
+        repo_root,
+        selection=selection,
+        build_root=build_root,
+        workspace_native_test_host=workspace_native_test_host,
         generator=generator,
+        generated_source_paths=generated_source_paths,
     )
+    host_source_path = cmake_source_root / "proof" / "main.cpp"
 
     _run_checked(
         [
@@ -1915,6 +2129,7 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
         },
         "generatedManifestPath": str(request["upstream"]["generated"]["manifestPath"]),
         "generatedSourcePath": _relative(repo_root, generated_source_path),
+        "generatedSourcePaths": [_relative(repo_root, path) for path in generated_source_paths],
         "hostSourcePath": _relative(repo_root, host_source_path),
         "binaryRoot": _relative(repo_root, out_root),
         "outputs": [_relative(repo_root, output_executable_path)],
@@ -2581,20 +2796,6 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
     cmake_path, developer_env, _ninja_path = _windows_native_cmake_context(repo_root)
     cmake_binary_dir = _resolve(repo_root, str(build_manifest["cmakeBinaryDir"]))
 
-    _run_checked(
-        [
-            cmake_path,
-            "--build",
-            str(cmake_binary_dir),
-            "--config",
-            "Release",
-            "--target",
-            WINDOWS_REFERENCE_RUN_TARGET,
-        ],
-        repo_root=repo_root,
-        failure_message="subject proof run failed: windows-x64-reference",
-        env=developer_env,
-    )
     manifest = {
         "subjectId": str(request["selection"]["subjectId"]),
         "matrixId": str(request["selection"]["matrixId"]),
@@ -2606,6 +2807,34 @@ def run_runtime_observe(*, repo_root: Path, request: dict[str, Any]) -> dict[str
         "exitCodePath": _relative(repo_root, exit_code_path),
         "tracePaths": [],
     }
+    try:
+        _run_checked(
+            [
+                cmake_path,
+                "--build",
+                str(cmake_binary_dir),
+                "--config",
+                "Release",
+                "--target",
+                WINDOWS_REFERENCE_RUN_TARGET,
+            ],
+            repo_root=repo_root,
+            failure_message="subject proof run failed: windows-x64-reference",
+            env=developer_env,
+        )
+    except Exception as exception:
+        write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
+        return {
+            "status": "fail",
+            "bucketManifestPath": request["paths"]["manifestPath"],
+            "reportPaths": [],
+            "primaryEvidencePaths": [manifest["stdoutPath"], manifest["stderrPath"], manifest["exitCodePath"]],
+            "metrics": {"durationMs": 0},
+            "diagnostics": {"stdoutPath": manifest["stdoutPath"], "stderrPath": manifest["stderrPath"]},
+            "details": {},
+            "failure": str(exception),
+        }
+
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
     return _success_result(
         bucket_manifest_path=request["paths"]["manifestPath"],
@@ -2832,7 +3061,12 @@ def run_managed_runtime_output(*, repo_root: Path, request: dict[str, Any]) -> d
         raise RuntimeError("host-input manifest must be an object")
 
     selection = dict(request["selection"])
-    assembly_path = _resolve(repo_root, str(host_input_manifest["primaryAssemblyPath"]))
+    native_primary_assembly_path_text = str(host_input_manifest["primaryAssemblyPath"])
+    managed_runtime_assembly_path_text = str(host_input_manifest.get("managedRuntimeAssemblyPath") or "").strip()
+    assembly_path = _resolve(
+        repo_root,
+        managed_runtime_assembly_path_text or native_primary_assembly_path_text,
+    )
     runtime_root = _resolve(repo_root, request["paths"]["bucketRoot"])
     runtime_root.mkdir(parents=True, exist_ok=True)
     subject_entry_selection = _selection_subject_entry_selection(selection)
@@ -2882,6 +3116,17 @@ def run_managed_runtime_output(*, repo_root: Path, request: dict[str, Any]) -> d
         manifest["declaredEntrySelection"] = declared_entry_selection
     if binding_manifest_path:
         manifest["bindingManifestPath"] = binding_manifest_path
+    if managed_runtime_assembly_path_text:
+        manifest["managedRuntimeAssemblyPath"] = managed_runtime_assembly_path_text
+        manifest["nativePrimaryAssemblyPath"] = native_primary_assembly_path_text
+    generated_upstream = dict(request.get("upstream", {}).get("generated") or {})
+    build_upstream = dict(request.get("upstream", {}).get("build") or {})
+    generated_manifest_path = str(generated_upstream.get("manifestPath") or "").strip()
+    build_manifest_path = str(build_upstream.get("manifestPath") or "").strip()
+    if generated_manifest_path:
+        manifest["nativeGeneratedManifestPath"] = generated_manifest_path
+    if build_manifest_path:
+        manifest["nativeBuildManifestPath"] = build_manifest_path
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), manifest)
 
     if completed.returncode != 0:

@@ -359,7 +359,9 @@ public sealed partial class LoaderStage
         {
             var propertyDefinition = metadataReader.GetPropertyDefinition(propertyHandle);
             var propertyName = metadataReader.GetString(propertyDefinition.Name);
-            var propertyType = propertyDefinition.DecodeSignature(typeResolver.TypeNameProvider, null).ReturnType;
+            var propertySignature = propertyDefinition.DecodeSignature(typeResolver.TypeNameProvider, null);
+            var propertyType = propertySignature.ReturnType;
+            var indexParameterTypes = propertySignature.ParameterTypes.ToList();
             var isPreserved = HasPreserveAttribute(metadataReader, propertyHandle);
 
             models.Add(new ManagedPropertyModel
@@ -368,8 +370,9 @@ public sealed partial class LoaderStage
                 DeclaringTypeSubjectId = typeModel.SubjectId,
                 Name = propertyName,
                 PropertyType = propertyType,
-                SubjectId = ManagedNaming.CreatePropertySubjectId(typeModel.SubjectId, propertyName),
-                DefinitionSubjectId = ManagedNaming.CreatePropertySubjectId(typeModel.DefinitionSubjectId, propertyName),
+                IndexParameterTypes = indexParameterTypes,
+                SubjectId = ManagedNaming.CreatePropertySubjectId(typeModel.SubjectId, propertyName, indexParameterTypes),
+                DefinitionSubjectId = ManagedNaming.CreatePropertySubjectId(typeModel.DefinitionSubjectId, propertyName, indexParameterTypes),
                 IsPreserved = isPreserved,
                 MetadataToken = MetadataTokens.GetToken(propertyHandle),
             });
@@ -414,6 +417,7 @@ public sealed partial class LoaderStage
                 DeclaringTypeSubjectId = typeModel.SubjectId,
                 DeclaringTypeDisplayName = typeModel.DisplayName,
                 Name = methodSummary.Name,
+                GenericParameterCount = methodSummary.GenericParameterCount,
                 ReturnType = methodSummary.ReturnType,
                 SubjectId = methodSummary.SubjectId,
                 DefinitionSubjectId = methodSummary.DefinitionSubjectId,

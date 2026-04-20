@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 0,
+  "assemblyName": "System.Private.CoreLib",
+  "sourceInputs": [
+    {
+      "path": "src/dll/dotnet-foundation/net10.0/runtime/System.Private.CoreLib.dll",
+      "classification": "runtime-dll",
+      "sha256": null
+    }
+  ],
+  "dllBoundaryInventory": "artifacts/foundation/System.Private.CoreLib/dll-boundary-inventory.json",
+  "generatedFiles": [
+    {
+      "path": "artifacts/foundation/System.Private.CoreLib/generated/native-reference.generated.cpp",
+      "classification": "native-reference",
+      "sha256": null
+    },
+    {
+      "path": "artifacts/foundation/System.Private.CoreLib/generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
+      "classification": "native-reference-runtime-page",
+      "sha256": null
+    }
+  ],
+  "nativeDispatchManifest": "artifacts/foundation/System.Private.CoreLib/native-reference.manifest.json",
+  "hotupdateBindingManifest": "artifacts/foundation/System.Private.CoreLib/hotupdate-binding.manifest.json",
+  "runtimeHelpers": [
+    {
+      "name": "System.Console/System.Console::WriteLine(System.String)",
+      "bindingStatus": "bound"
+    },
+    {
+      "name": "System.String::Concat(System.String,System.String)",
+      "bindingStatus": "bound"
+    }
+  ],
+  "coverage": {
+    "publicMembersTotal": 1,
+    "publicMembersCodegenCovered": 0,
+    "uncoveredMembers": [
+      "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+    ]
+  },
+  "findings": [
+    {
+      "id": "foundation-codegen-review.runtime-skeleton",
+      "severity": "warning",
+      "summary": "Runtime skeleton dispatch is present, but executable per-method lowering is still pending."
+    }
+  ],
+  "finalStatus": "blocked"
+}

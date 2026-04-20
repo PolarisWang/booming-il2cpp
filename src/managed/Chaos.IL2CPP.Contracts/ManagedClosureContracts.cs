@@ -4,7 +4,8 @@ public sealed record ManagedClosureRequest(
     string InputAssemblyPath,
     string OutputRootPath,
     string? EntryPointSubjectIdOverride = null,
-    IReadOnlyList<string>? AdditionalAssemblyPaths = null);
+    IReadOnlyList<string>? AdditionalAssemblyPaths = null,
+    bool FullAssemblyClosure = false);
 
 public static class ManagedClosureArtifactNames
 {

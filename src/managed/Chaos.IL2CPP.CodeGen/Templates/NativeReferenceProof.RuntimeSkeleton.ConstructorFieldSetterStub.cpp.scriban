@@ -1,0 +1,49 @@
+struct {{ stub_name }}_ManagedArgs
+{
+    void* instance;
+    void* value;
+};
+
+int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)code_registration;
+    (void)metadata_registration;
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr || managed_args == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    const auto* request = static_cast<const {{ stub_name }}_ManagedArgs*>(managed_args);
+    if (request->instance == nullptr || request->value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_READY;
+    }
+    const char* image_name = options->image_name_utf8 != nullptr
+        ? options->image_name_utf8 : {{ assembly_name_literal }};
+    ImageHandle image = reinterpret_cast<ImageHandle>(const_cast<char*>(image_name));
+    TypeInfoHandle reference_type = bridge->resolve_type_by_token(image, {{ reference_type_token }});
+    FieldInfoHandle captured_field = bridge->resolve_field_by_token(image, {{ captured_field_token }});
+    if (reference_type == nullptr || captured_field == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+    if (abi->class_init(runtime, reference_type) != CHAOS_RUNTIME_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    return abi->field_set_value(
+               runtime,
+               thread,
+               captured_field,
+               request->instance,
+               &request->value,
+               sizeof(request->value)) == CHAOS_RUNTIME_STATUS_OK
+        ? CHAOS_BRIDGE_STATUS_OK
+        : CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+}

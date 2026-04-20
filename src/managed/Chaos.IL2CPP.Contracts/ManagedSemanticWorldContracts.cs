@@ -23,6 +23,8 @@ public sealed record SemanticWorldModel
 {
     public required string InputAssemblyPath { get; init; }
 
+    public required bool FullAssemblyClosure { get; init; }
+
     public required AssemblyIdentityModel Assembly { get; init; }
 
     public required IReadOnlyList<AssemblyIdentityModel> Assemblies { get; init; }
@@ -47,6 +49,8 @@ public sealed record SemanticWorldModel
 public sealed record LinkedWorldModel
 {
     public required string InputAssemblyPath { get; init; }
+
+    public required bool FullAssemblyClosure { get; init; }
 
     public required AssemblyIdentityModel Assembly { get; init; }
 

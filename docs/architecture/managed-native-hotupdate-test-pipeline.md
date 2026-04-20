@@ -76,10 +76,12 @@
 - hotupdate test host project 引用 `Sdk + Runtime`。
 - host 负责 collection 消费、patch 装载、绑定、执行与结果汇总。
 
-### 2.7 Python 测试必须模板化
+### 2.7 Python 测试与代码生成必须优先模板化
 
 - Python 单测优先通过模板拉起最小 managed / native / hotupdate 样例。
+- Python 侧新增或重构代码生成时，优先使用 `Scriban` 模板，不继续扩散新的 `.tmpl` / `f-string` / `.format()` 主线。
 - 尽量减少长期保留的手写 C# fixture。
+- 如果模板能力不足，先扩展 `Scriban` 的模型、函数、渲染支撑或语法，不新增长期手写字符串拼接生成路径。
 - benchmark 手工复跑、控制台日志或 dashboard 结果不能替代正式自动测试。
 - 任何测试阶段一旦出现 `dotnet build` / `dotnet test` / `msbuild` 编译崩溃，当前验证立即视为失败，必须先定位并修复根因。
 
@@ -93,6 +95,12 @@
 - manifest 相关整文件生成
 - IL2CPP 整体 C# / C++ 发射
 - `NativeAotEmitter` 文件级输出
+- Python 侧新增结构化文本代码生成
+
+补充约束：
+
+- 功能不满足时，先扩展 `Scriban`，不新增长期平行拼串路径。
+- 具体使用说明与扩展顺序以 [`../../wiki/04-工具与集成/scriban-usage-and-codegen-rules.md`](../../wiki/04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/scriban-usage-and-codegen-rules.md) 为准。
 
 ### 2.9 cutover 后删除旧写法
 
@@ -232,6 +240,7 @@ src/managed/Chaos.IL2CPP.CodeGen/
   Planner/
   Emitter/
   RuntimeSupport/
+  Templating/
   Templates/
 ```
 
@@ -240,7 +249,14 @@ src/managed/Chaos.IL2CPP.CodeGen/
 - `Planner`: lowering、closure、dispatch、ABI planning
 - `Emitter`: plan 到文件的渲染
 - `RuntimeSupport`: helper / prelude / support contract
+- `Templating`: Scriban model / adapter / renderer / catalog
 - `Templates`: Scriban 模板
+
+强制规则：
+
+- IL2CPP 核心结构化文本产物必须优先通过 `Scriban` 生成。
+- Python 侧新增或重构代码生成同样必须优先通过 `Scriban` 落地。
+- 模板能力不足时，优先扩展 `Scriban` 模型、函数、渲染支撑与语法；禁止把长期主线回退为手写拼串。
 
 ## 7. 验收标准
 
@@ -252,8 +268,8 @@ src/managed/Chaos.IL2CPP.CodeGen/
 - managed / native / hotupdate 执行链都由 collection file 驱动。
 - native dispatch manifest 与 hotupdate binding manifest 边界清晰。
 - `Sdk` 与 `Runtime` 边界清晰。
-- Python 测试优先模板化。
-- file-level codegen 默认 Scriban。
+- Python 测试与代码生成优先模板化。
+- file-level codegen 默认 Scriban，且功能不足时先扩展 `Scriban`。
 - 不保留长期 compatibility alias。
 
 ## 8. AOT 新 feature 接入验证

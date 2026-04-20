@@ -16,3 +16,10 @@ target_include_directories(
     PRIVATE
         "${REPO_ROOT}/contracts/native/v0")
 
+add_library(codegen_bridge_assembly_bound_compile_only OBJECT compile_only_assembly_bound_native_reference_smoke.cpp)
+target_compile_features(codegen_bridge_assembly_bound_compile_only PRIVATE cxx_std_17)
+target_include_directories(
+    codegen_bridge_assembly_bound_compile_only
+    PRIVATE
+        "${REPO_ROOT}/contracts/native/v0")
+

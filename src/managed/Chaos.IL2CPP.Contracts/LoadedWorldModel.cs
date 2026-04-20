@@ -4,6 +4,8 @@ public sealed record LoadedWorldModel
 {
     public required string InputAssemblyPath { get; init; }
 
+    public required bool FullAssemblyClosure { get; init; }
+
     public required AssemblyIdentityModel Assembly { get; init; }
 
     public required string EntryPointSubjectId { get; init; }

@@ -109,7 +109,8 @@ public sealed partial class LoaderStage
 
     private static LoadedAssemblyModel ResolveEntryAssembly(
         IReadOnlyList<LoadedAssemblyModel> loadedAssemblies,
-        string? entryPointSubjectIdOverride)
+        string? entryPointSubjectIdOverride,
+        bool fullAssemblyClosure)
     {
         if (!string.IsNullOrWhiteSpace(entryPointSubjectIdOverride))
         {
@@ -126,6 +127,11 @@ public sealed partial class LoaderStage
 
         var primaryAssembly = loadedAssemblies[0];
         if (!string.IsNullOrWhiteSpace(primaryAssembly.EntryPointSubjectId))
+        {
+            return primaryAssembly;
+        }
+
+        if (fullAssemblyClosure)
         {
             return primaryAssembly;
         }

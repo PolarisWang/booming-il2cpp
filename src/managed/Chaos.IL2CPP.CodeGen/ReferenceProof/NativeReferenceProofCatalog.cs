@@ -76,6 +76,44 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.EngineLifecycleCallback.cpp.scriban";
     public const string EngineHostProofGeneratedTranslationUnitTemplateRelativePath =
         "Templates/NativeReferenceProof.EngineHostProof.cpp.scriban";
+    public const string AssemblyFullClosureAuditSummaryTemplateRelativePath =
+        "Templates/NativeReferenceProof.AuditSummary.cpp.scriban";
+    public const string AssemblyFullClosureAuditPageTemplateRelativePath =
+        "Templates/NativeReferenceProof.AuditPage.cpp.scriban";
+    public const string AssemblyFullClosureRuntimeSkeletonSummaryTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeletonSummary.cpp.scriban";
+    public const string AssemblyFullClosureRuntimeSkeletonPageTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeletonPage.cpp.scriban";
+    public const string RuntimeSkeletonReservedStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.ReservedStub.cpp.scriban";
+    public const string RuntimeSkeletonConstructorFieldSetterStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.ConstructorFieldSetterStub.cpp.scriban";
+    public const string RuntimeSkeletonFieldBackedStringReturnStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.FieldBackedStringReturnStub.cpp.scriban";
+    public const string RuntimeSkeletonConsoleWriteLineStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.ConsoleWriteLineStub.cpp.scriban";
+    public const string RuntimeSkeletonMarshalingUtf8ExportStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.MarshalingUtf8ExportStub.cpp.scriban";
+    public const string RuntimeSkeletonPInvokeDirectCallStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.PInvokeDirectCallStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticCallCtorGetterStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticCallCtorGetterStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticIntForwarderStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticIntForwarderStub.cpp.scriban";
+    public const string RuntimeSkeletonConstructorThenInstanceCallStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.ConstructorThenInstanceCallStub.cpp.scriban";
+    public const string RuntimeSkeletonDelegateClosedTargetRelayStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.DelegateClosedTargetRelayStub.cpp.scriban";
+    public const string RuntimeSkeletonArrayBoxingReferenceArrayStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.ArrayBoxingReferenceArrayStub.cpp.scriban";
+    public const string RuntimeSkeletonInterfaceDispatchMessageStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.InterfaceDispatchMessageStub.cpp.scriban";
+    public const string RuntimeSkeletonReflectionInteropClosureStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.ReflectionInteropClosureStub.cpp.scriban";
+    public const string RuntimeSkeletonExceptionThrowCatchFinallyStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.ExceptionThrowCatchFinallyStub.cpp.scriban";
+    public const string RuntimeSkeletonNestedExceptionThrowCatchFinallyStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.NestedExceptionThrowCatchFinallyStub.cpp.scriban";
 
     private static readonly IReadOnlyDictionary<string, string> TemplateRelativePathByPlanKind =
         new Dictionary<string, string>(StringComparer.Ordinal)
@@ -116,6 +154,101 @@ internal static class NativeReferenceProofCatalog
     public static Template GetTemplateForPlan(string planKind)
     {
         return ScribanTemplateRenderer.LoadTemplate(GetRequiredTemplateRelativePath(planKind));
+    }
+
+    public static Template GetAssemblyFullClosureAuditSummaryTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(AssemblyFullClosureAuditSummaryTemplateRelativePath);
+    }
+
+    public static Template GetAssemblyFullClosureAuditPageTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(AssemblyFullClosureAuditPageTemplateRelativePath);
+    }
+
+    public static Template GetAssemblyFullClosureRuntimeSkeletonSummaryTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(AssemblyFullClosureRuntimeSkeletonSummaryTemplateRelativePath);
+    }
+
+    public static Template GetAssemblyFullClosureRuntimeSkeletonPageTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(AssemblyFullClosureRuntimeSkeletonPageTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonReservedStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonReservedStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonConstructorFieldSetterStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonConstructorFieldSetterStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonFieldBackedStringReturnStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonFieldBackedStringReturnStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonConsoleWriteLineStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonConsoleWriteLineStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonMarshalingUtf8ExportStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonMarshalingUtf8ExportStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonPInvokeDirectCallStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonPInvokeDirectCallStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStaticCallCtorGetterStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticCallCtorGetterStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStaticIntForwarderStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticIntForwarderStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonConstructorThenInstanceCallStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonConstructorThenInstanceCallStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonDelegateClosedTargetRelayStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonDelegateClosedTargetRelayStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonArrayBoxingReferenceArrayStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonArrayBoxingReferenceArrayStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonInterfaceDispatchMessageStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonInterfaceDispatchMessageStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonReflectionInteropClosureStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonReflectionInteropClosureStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonExceptionThrowCatchFinallyStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonExceptionThrowCatchFinallyStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonNestedExceptionThrowCatchFinallyStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonNestedExceptionThrowCatchFinallyStubTemplateRelativePath);
     }
 
     public static string GetRequiredTemplateRelativePath(string planKind)

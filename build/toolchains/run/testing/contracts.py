@@ -28,6 +28,8 @@ def test_json_schema_type(value: object, schema_type: str) -> bool:
         return isinstance(value, str)
     if schema_type == "integer":
         return isinstance(value, int) and not isinstance(value, bool)
+    if schema_type == "boolean":
+        return isinstance(value, bool)
     raise RuntimeError(f"unsupported schema type: {schema_type}")
 
 
@@ -36,8 +38,17 @@ def assert_json_matches_schema(value: object, schema: dict[str, Any], path: str)
         raise RuntimeError(f"schema const mismatch at {path}: expected '{schema['const']}' actual '{value}'")
 
     schema_type = schema.get("type")
-    if schema_type is not None and not test_json_schema_type(value, str(schema_type)):
-        raise RuntimeError(f"schema type mismatch at {path}: expected '{schema_type}'")
+    if schema_type is not None:
+        schema_types = [str(item) for item in schema_type] if isinstance(schema_type, list) else [str(schema_type)]
+        if value is None:
+            type_matches = "null" in schema_types
+        else:
+            type_matches = any(
+                current_type != "null" and test_json_schema_type(value, current_type)
+                for current_type in schema_types
+            )
+        if not type_matches:
+            raise RuntimeError(f"schema type mismatch at {path}: expected '{schema_type}'")
 
     if "enum" in schema and value not in schema["enum"]:
         raise RuntimeError(f"schema enum mismatch at {path}: value '{value}' not allowed")

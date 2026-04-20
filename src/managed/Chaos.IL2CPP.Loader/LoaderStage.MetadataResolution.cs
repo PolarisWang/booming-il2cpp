@@ -90,7 +90,13 @@ public sealed partial class LoaderStage
             .ToList();
 
         var methodName = metadataReader.GetString(methodDefinition.Name);
-        var subjectId = ManagedNaming.CreateMethodSubjectId(declaringType.SubjectId, methodName, parameterTypes);
+        var genericParameterCount = methodDefinition.GetGenericParameters().Count;
+        var subjectId = ManagedNaming.CreateMethodSubjectId(
+            declaringType.SubjectId,
+            methodName,
+            signature.ReturnType,
+            parameterTypes,
+            genericParameterCount);
         var import = TryDescribeMethodImport(metadataReader, methodDefinition);
         var isPreserved = HasPreserveAttribute(metadataReader, handle);
         var isUnmanagedCallersOnly = HasUnmanagedCallersOnlyAttribute(metadataReader, handle);
@@ -101,6 +107,7 @@ public sealed partial class LoaderStage
             DeclaringTypeSubjectId = declaringType.SubjectId,
             DeclaringTypeDisplayName = declaringType.DisplayName,
             Name = methodName,
+            GenericParameterCount = genericParameterCount,
             ReturnType = signature.ReturnType,
             SubjectId = subjectId,
             DefinitionSubjectId = subjectId,
@@ -159,11 +166,19 @@ public sealed partial class LoaderStage
             DeclaringTypeSubjectId = declaringType.SubjectId,
             DeclaringTypeDisplayName = declaringType.DisplayName,
             Name = methodName,
-            SubjectId = ManagedNaming.CreateMethodSubjectId(declaringType.SubjectId, methodName, parameterTypes),
+            GenericParameterCount = GetMemberReferenceGenericParameterCount(memberReference),
+            SubjectId = ManagedNaming.CreateMethodSubjectId(
+                declaringType.SubjectId,
+                methodName,
+                signature.ReturnType,
+                parameterTypes,
+                GetMemberReferenceGenericParameterCount(memberReference)),
             DefinitionSubjectId = ManagedNaming.CreateMethodSubjectId(
                 declaringType.DefinitionSubjectId,
                 methodName,
-                definitionParameterTypes),
+                definitionSignature.ReturnType,
+                definitionParameterTypes,
+                GetDefinitionGenericParameterCount(metadataReader, memberReference.Parent)),
             ReturnType = signature.ReturnType,
             ParameterTypes = parameterTypes,
             MetadataToken = MetadataTokens.GetToken(handle),
@@ -210,7 +225,8 @@ public sealed partial class LoaderStage
         var methodSpecification = metadataReader.GetMethodSpecification(handle);
         var methodArguments = methodSpecification.DecodeSignature(typeResolver.TypeNameProvider, null).ToImmutableArray();
         var baseReference = ResolveMethodReference(metadataReader, typeResolver, typeModels, methodOwners, methodSpecification.Method);
-        var methodName = methodArguments.Any(argument => !argument.StartsWith("!", StringComparison.Ordinal))
+        var hasClosedMethodArguments = methodArguments.Any(argument => !argument.StartsWith("!", StringComparison.Ordinal));
+        var methodName = hasClosedMethodArguments
             ? ManagedNaming.CreateGenericMethodName(baseReference.Name, methodArguments)
             : baseReference.Name;
         var substitutions = baseReference.Substitutions.SetItems(CreateSubstitutionMap([], methodArguments));
@@ -242,12 +258,39 @@ public sealed partial class LoaderStage
             DeclaringTypeSubjectId = baseReference.DeclaringTypeSubjectId,
             DeclaringTypeDisplayName = baseReference.DeclaringTypeDisplayName,
             Name = methodName,
-            SubjectId = ManagedNaming.CreateMethodSubjectId(baseReference.DeclaringTypeSubjectId, methodName, parameterTypes),
+            GenericParameterCount = baseReference.GenericParameterCount,
+            SubjectId = ManagedNaming.CreateMethodSubjectId(
+                baseReference.DeclaringTypeSubjectId,
+                methodName,
+                closedSignature.ReturnType,
+                parameterTypes,
+                hasClosedMethodArguments ? 0 : baseReference.GenericParameterCount),
             DefinitionSubjectId = baseReference.DefinitionSubjectId,
             ReturnType = closedSignature.ReturnType,
             ParameterTypes = parameterTypes,
             MetadataToken = MetadataTokens.GetToken(handle),
             Substitutions = substitutions,
+        };
+    }
+
+    private static int GetMemberReferenceGenericParameterCount(MemberReference memberReference)
+    {
+        return memberReference.Signature.IsNil
+            ? 0
+            : memberReference.DecodeMethodSignature(new GenericArityTypeProvider(), null).GenericParameterCount;
+    }
+
+    private static int GetDefinitionGenericParameterCount(
+        MetadataReader metadataReader,
+        EntityHandle parentHandle)
+    {
+        return parentHandle.Kind switch
+        {
+            HandleKind.MethodDefinition => metadataReader
+                .GetMethodDefinition((MethodDefinitionHandle)parentHandle)
+                .GetGenericParameters()
+                .Count,
+            _ => 0,
         };
     }
 

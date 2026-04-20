@@ -1,0 +1,16 @@
+// assembly-full-closure-audit
+// page {{ page_number }}
+#include <cstddef>
+
+namespace chaos::il2cpp::audit
+{
+constexpr const char* kAssemblyName = {{ assembly_name_literal }};
+constexpr std::size_t translation_unit_page_number = {{ page_number }};
+constexpr std::size_t translation_unit_page_item_count = {{ page_item_count }};
+constexpr const char* kTranslationUnitMethodSubjectIds[] =
+{
+{{~ for subject_id_literal in method_subject_id_literals ~}}
+    {{ subject_id_literal }},
+{{~ end ~}}
+};
+} // namespace chaos::il2cpp::audit

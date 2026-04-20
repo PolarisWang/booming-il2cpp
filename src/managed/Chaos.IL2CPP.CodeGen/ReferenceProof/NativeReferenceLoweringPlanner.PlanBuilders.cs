@@ -640,7 +640,7 @@ public sealed partial class NativeReferenceLoweringPlanner
     {
         loweringPlan = null;
 
-        if (!entryPointSubjectId.Contains("DelegateProofEntry::Run()", StringComparison.Ordinal))
+        if (!entryPointSubjectId.Contains("DelegateProofEntry::Run", StringComparison.Ordinal))
         {
             return false;
         }
@@ -736,7 +736,7 @@ public sealed partial class NativeReferenceLoweringPlanner
     {
         loweringPlan = null;
 
-        if (!entryPointSubjectId.Contains("ExceptionProofEntry::Run()", StringComparison.Ordinal))
+        if (!entryPointSubjectId.Contains("ExceptionProofEntry::Run", StringComparison.Ordinal))
         {
             return false;
         }
@@ -816,7 +816,7 @@ public sealed partial class NativeReferenceLoweringPlanner
     {
         loweringPlan = null;
 
-        if (!entryPointSubjectId.Contains("NestedExceptionProofEntry::Run()", StringComparison.Ordinal))
+        if (!entryPointSubjectId.Contains("NestedExceptionProofEntry::Run", StringComparison.Ordinal))
         {
             return false;
         }
@@ -895,7 +895,7 @@ public sealed partial class NativeReferenceLoweringPlanner
     {
         loweringPlan = null;
 
-        if (!entryPointSubjectId.Contains("ReflectionInteropClosureEntry::Run()", StringComparison.Ordinal))
+        if (!entryPointSubjectId.Contains("ReflectionInteropClosureEntry::Run", StringComparison.Ordinal))
         {
             return false;
         }
@@ -1062,7 +1062,7 @@ public sealed partial class NativeReferenceLoweringPlanner
     {
         loweringPlan = null;
 
-        if (!entryPointSubjectId.Contains("MarshalingProofEntry::Run()", StringComparison.Ordinal))
+        if (!entryPointSubjectId.Contains("MarshalingProofEntry::Run", StringComparison.Ordinal))
         {
             return false;
         }

@@ -7,12 +7,24 @@ public sealed partial class LinkerStage
 {
     private static ReachableClosure ComputeReachableClosure(SemanticWorldModel semanticWorld)
     {
+        if (semanticWorld.FullAssemblyClosure &&
+            semanticWorld.Assemblies.Count == 1)
+        {
+            return new ReachableClosure(
+                semanticWorld.Types,
+                semanticWorld.Fields,
+                semanticWorld.Properties,
+                semanticWorld.Methods);
+        }
+
         var methodMap = semanticWorld.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
         var fieldMap = semanticWorld.Fields.ToDictionary(field => field.SubjectId, StringComparer.Ordinal);
         var propertyMap = semanticWorld.Properties.ToDictionary(property => property.SubjectId, StringComparer.Ordinal);
         var typeMap = semanticWorld.Types.ToDictionary(type => type.SubjectId, StringComparer.Ordinal);
 
-        if (!methodMap.TryGetValue(semanticWorld.EntryPointSubjectId, out var entryPointMethod))
+        ManagedMethodModel? entryPointMethod = null;
+        if (!string.IsNullOrWhiteSpace(semanticWorld.EntryPointSubjectId) &&
+            !methodMap.TryGetValue(semanticWorld.EntryPointSubjectId, out entryPointMethod))
         {
             throw new InvalidOperationException(
                 $"linker entry point '{semanticWorld.EntryPointSubjectId}' is missing from semantic world");
@@ -23,7 +35,10 @@ public sealed partial class LinkerStage
         var reachablePropertyIds = new HashSet<string>(StringComparer.Ordinal);
         var reachableTypeIds = new HashSet<string>(StringComparer.Ordinal);
         var pendingMethods = new Queue<ManagedMethodModel>();
-        pendingMethods.Enqueue(entryPointMethod);
+        if (entryPointMethod is not null)
+        {
+            pendingMethods.Enqueue(entryPointMethod);
+        }
 
         ExpandReachableMethods(
             semanticWorld,
@@ -32,6 +47,16 @@ public sealed partial class LinkerStage
             propertyMap,
             typeMap,
             pendingMethods,
+            reachableMethodIds,
+            reachableFieldIds,
+            reachablePropertyIds,
+            reachableTypeIds);
+        IncludeFullAssemblyClosure(
+            semanticWorld,
+            methodMap,
+            fieldMap,
+            propertyMap,
+            typeMap,
             reachableMethodIds,
             reachableFieldIds,
             reachablePropertyIds,
@@ -98,6 +123,63 @@ public sealed partial class LinkerStage
             semanticWorld.Fields.Where(field => reachableFieldIds.Contains(field.SubjectId)).ToList(),
             semanticWorld.Properties.Where(property => reachablePropertyIds.Contains(property.SubjectId)).ToList(),
             semanticWorld.Methods.Where(method => reachableMethodIds.Contains(method.SubjectId)).ToList());
+    }
+
+    private static void IncludeFullAssemblyClosure(
+        SemanticWorldModel semanticWorld,
+        IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
+        IReadOnlyDictionary<string, ManagedFieldModel> fieldMap,
+        IReadOnlyDictionary<string, ManagedPropertyModel> propertyMap,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
+        HashSet<string> reachableMethodIds,
+        HashSet<string> reachableFieldIds,
+        HashSet<string> reachablePropertyIds,
+        HashSet<string> reachableTypeIds)
+    {
+        if (!semanticWorld.FullAssemblyClosure)
+        {
+            return;
+        }
+
+        var pendingMethods = new Queue<ManagedMethodModel>();
+        foreach (var type in semanticWorld.Types.Where(candidate =>
+                     string.Equals(candidate.AssemblyName, semanticWorld.Assembly.Name, StringComparison.Ordinal)))
+        {
+            reachableTypeIds.Add(type.SubjectId);
+        }
+
+        foreach (var field in semanticWorld.Fields.Where(candidate =>
+                     string.Equals(candidate.AssemblyName, semanticWorld.Assembly.Name, StringComparison.Ordinal)))
+        {
+            reachableFieldIds.Add(field.SubjectId);
+            reachableTypeIds.Add(field.DeclaringTypeSubjectId);
+        }
+
+        foreach (var property in semanticWorld.Properties.Where(candidate =>
+                     string.Equals(candidate.AssemblyName, semanticWorld.Assembly.Name, StringComparison.Ordinal)))
+        {
+            reachablePropertyIds.Add(property.SubjectId);
+            reachableTypeIds.Add(property.DeclaringTypeSubjectId);
+        }
+
+        foreach (var method in semanticWorld.Methods.Where(candidate =>
+                     string.Equals(candidate.AssemblyName, semanticWorld.Assembly.Name, StringComparison.Ordinal) &&
+                     !reachableMethodIds.Contains(candidate.SubjectId)))
+        {
+            pendingMethods.Enqueue(method);
+        }
+
+        ExpandReachableMethods(
+            semanticWorld,
+            methodMap,
+            fieldMap,
+            propertyMap,
+            typeMap,
+            pendingMethods,
+            reachableMethodIds,
+            reachableFieldIds,
+            reachablePropertyIds,
+            reachableTypeIds);
     }
 
     private static void IncludePreservedClosure(

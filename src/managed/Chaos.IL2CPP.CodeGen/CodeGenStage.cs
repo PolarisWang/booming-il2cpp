@@ -4,6 +4,8 @@ namespace Chaos.IL2CPP.CodeGen;
 
 public sealed class CodeGenStage
 {
+    private const int AuditTranslationUnitPageSize = 1024;
+
     public string Name => "CodeGen";
 
     public ManagedClosureResult Generate(
@@ -51,19 +53,26 @@ public sealed class CodeGenStage
                 .ToList(),
         };
         var aotCoreIr = new AotCoreIrLowering().Create(linkedWorld, typedIl, codeRegistration);
-        var loweringPlanner = new NativeReferenceLoweringPlanner();
         NativeReferenceLoweringPlanArtifact nativeReferenceLoweringPlan;
-        try
+        if (linkedWorld.FullAssemblyClosure && string.IsNullOrWhiteSpace(linkedWorld.EntryPointSubjectId))
         {
-            nativeReferenceLoweringPlan = loweringPlanner.Create(
-                linkedWorld,
-                typedIl,
-                metadataWriterOutput.MetadataRegistration,
-                codeRegistration);
+            nativeReferenceLoweringPlan = CreateAssemblyFullClosureNativeReferenceRuntimeSkeletonPlan(linkedWorld, codeRegistration);
         }
-        catch when (ShouldFallbackToGenericLoweringPlan(linkedWorld))
+        else
         {
-            nativeReferenceLoweringPlan = CreateGenericLoweringPlan(linkedWorld, codeRegistration);
+            var loweringPlanner = new NativeReferenceLoweringPlanner();
+            try
+            {
+                nativeReferenceLoweringPlan = loweringPlanner.Create(
+                    linkedWorld,
+                    typedIl,
+                    metadataWriterOutput.MetadataRegistration,
+                    codeRegistration);
+            }
+            catch when (ShouldFallbackToGenericLoweringPlan(linkedWorld))
+            {
+                nativeReferenceLoweringPlan = CreateGenericLoweringPlan(linkedWorld, codeRegistration);
+            }
         }
 
         var nativeAotLoweringPlan = CreateNativeAotLoweringPlan(
@@ -81,6 +90,7 @@ public sealed class CodeGenStage
                 .Select(path => ManagedNaming.NormalizePathForManifest(path, Environment.CurrentDirectory))
                 .Distinct(StringComparer.OrdinalIgnoreCase)
                 .ToList(),
+            FullAssemblyClosure = request.FullAssemblyClosure,
             InputModuleVersionId = linkedWorld.Assembly.ModuleVersionId.ToString(),
             Artifacts =
             [
@@ -161,11 +171,55 @@ public sealed class CodeGenStage
         };
     }
 
+    private static NativeReferenceLoweringPlanArtifact CreateAssemblyFullClosureNativeReferenceRuntimeSkeletonPlan(
+        LinkedWorldModel linkedWorld,
+        CodeRegistrationArtifact codeRegistration)
+    {
+        var methodSubjectIds = linkedWorld.Methods
+            .Select(method => method.SubjectId)
+            .Distinct(StringComparer.Ordinal)
+            .OrderBy(subjectId => subjectId, StringComparer.Ordinal)
+            .ToList();
+        var firstMethodSymbol = codeRegistration.Modules
+            .SelectMany(module => module.Registrations)
+            .FirstOrDefault(registration => string.Equals(registration.RegistrationKind, "methodPointer", StringComparison.Ordinal))
+            ?.Symbol
+            ?? $"{linkedWorld.Assembly.Name}_assembly_audit";
+
+        return new NativeReferenceLoweringPlanArtifact
+        {
+            PlanKind = "assembly-full-closure-runtime-skeleton",
+            AssemblyName = linkedWorld.Assembly.Name,
+            EntrySubjectId = linkedWorld.EntryPointSubjectId,
+            IncludeHeader = "codegen_bridge.h",
+            NativeEntryFunctionName = "RunNativeReferenceAssembly",
+            EntrySymbol = firstMethodSymbol,
+            RuntimeExecutionKind = "assembly-bound-native-reference-skeleton",
+            TranslationUnitMode = "runtime-skeleton",
+            TranslationUnitMethodSubjectIds = methodSubjectIds,
+            TranslationUnitMethodCount = methodSubjectIds.Count,
+            TranslationUnitPageSize = AuditTranslationUnitPageSize,
+            TranslationUnitPageCount = GetAuditPageCount(methodSubjectIds.Count),
+            TranslationUnitPages = BuildAuditTranslationUnitPages(methodSubjectIds, "generated/runtime/native-reference.runtime-skeleton"),
+            AuditStatus = "runtime-skeleton",
+            AuditMessage = "assembly-bound full-closure native-reference runtime skeleton is emitted; executable per-method translation remains unimplemented",
+            ReferenceTypeToken = "0u",
+            CapturedFieldToken = "0u",
+            EntryMethodToken = "0u",
+            ConsoleWriteLineStringIcall = "System.Console/System.Console::WriteLine(System.String)",
+        };
+    }
+
     private static NativeAotLoweringPlanArtifact CreateNativeAotLoweringPlan(
         LinkedWorldModel linkedWorld,
         MetadataRegistrationArtifact metadataRegistration,
         CodeRegistrationArtifact codeRegistration)
     {
+        if (linkedWorld.FullAssemblyClosure && string.IsNullOrWhiteSpace(linkedWorld.EntryPointSubjectId))
+        {
+            return CreateAssemblyFullClosureNativeAotAuditPlan(linkedWorld, codeRegistration);
+        }
+
         var entrySymbol = codeRegistration.Modules
             .SelectMany(module => module.Registrations)
             .FirstOrDefault(registration => string.Equals(registration.SubjectId, linkedWorld.EntryPointSubjectId, StringComparison.Ordinal))
@@ -189,6 +243,75 @@ public sealed class CodeGenStage
             EntryMethodToken = entryMethodToken,
             WorkloadAbi = "int(int32)",
         };
+    }
+
+    private static NativeAotLoweringPlanArtifact CreateAssemblyFullClosureNativeAotAuditPlan(
+        LinkedWorldModel linkedWorld,
+        CodeRegistrationArtifact codeRegistration)
+    {
+        var methodSubjectIds = linkedWorld.Methods
+            .Select(method => method.SubjectId)
+            .Distinct(StringComparer.Ordinal)
+            .OrderBy(subjectId => subjectId, StringComparer.Ordinal)
+            .ToList();
+        var firstMethodSymbol = codeRegistration.Modules
+            .SelectMany(module => module.Registrations)
+            .FirstOrDefault(registration => string.Equals(registration.RegistrationKind, "methodPointer", StringComparison.Ordinal))
+            ?.Symbol
+            ?? $"{linkedWorld.Assembly.Name}_assembly_audit";
+
+        return new NativeAotLoweringPlanArtifact
+        {
+            PlanKind = "assembly-full-closure-audit",
+            AssemblyName = linkedWorld.Assembly.Name,
+            EntrySubjectId = linkedWorld.EntryPointSubjectId,
+            NativeEntryFunctionName = "RunNativeAotAudit",
+            EntrySymbol = firstMethodSymbol,
+            EntryMethodToken = "0u",
+            WorkloadAbi = "audit-only",
+            TranslationUnitMode = "audit-only",
+            TranslationUnitMethodSubjectIds = methodSubjectIds,
+            TranslationUnitMethodCount = methodSubjectIds.Count,
+            TranslationUnitPageSize = AuditTranslationUnitPageSize,
+            TranslationUnitPageCount = GetAuditPageCount(methodSubjectIds.Count),
+            TranslationUnitPages = BuildAuditTranslationUnitPages(methodSubjectIds, "generated/audit/native-aot.methods"),
+            AuditStatus = "not-yet-emittable",
+            AuditMessage = "assembly-bound full-closure native-aot emission is not implemented",
+        };
+    }
+
+    private static IReadOnlyList<AuditTranslationUnitPageArtifact> BuildAuditTranslationUnitPages(
+        IReadOnlyList<string> methodSubjectIds,
+        string pathPrefix)
+    {
+        var pages = new List<AuditTranslationUnitPageArtifact>();
+        for (var pageIndex = 0; pageIndex * AuditTranslationUnitPageSize < methodSubjectIds.Count; pageIndex++)
+        {
+            var pageItems = methodSubjectIds
+                .Skip(pageIndex * AuditTranslationUnitPageSize)
+                .Take(AuditTranslationUnitPageSize)
+                .ToList();
+            pages.Add(new AuditTranslationUnitPageArtifact
+            {
+                PageNumber = pageIndex + 1,
+                MethodCount = pageItems.Count,
+                Path = $"{pathPrefix}.page-{pageIndex + 1:D4}.cpp",
+                FirstMethodSubjectId = pageItems.FirstOrDefault(),
+                LastMethodSubjectId = pageItems.LastOrDefault(),
+            });
+        }
+
+        return pages;
+    }
+
+    private static int GetAuditPageCount(int totalMethodCount)
+    {
+        if (totalMethodCount <= 0)
+        {
+            return 0;
+        }
+
+        return (totalMethodCount + AuditTranslationUnitPageSize - 1) / AuditTranslationUnitPageSize;
     }
 
     private static string FormatCppTokenLiteral(

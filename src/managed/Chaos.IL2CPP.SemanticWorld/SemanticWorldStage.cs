@@ -45,6 +45,7 @@ public sealed class SemanticWorldStage
         return new SemanticWorldModel
         {
             InputAssemblyPath = loadedWorld.InputAssemblyPath,
+            FullAssemblyClosure = loadedWorld.FullAssemblyClosure,
             Assembly = loadedWorld.Assembly,
             Assemblies = loadedWorld.Assemblies.Select(assembly => assembly.Assembly).ToList(),
             EntryPointSubjectId = loadedWorld.EntryPointSubjectId,

@@ -1,37 +1,45 @@
-﻿# 04-宸ュ叿涓庨泦鎴?INDEX
+# 04-工具与集成 INDEX
 
-## 鑼冨洿璇存槑
-- `2026-04-17`: ?? `il2cpp-core-structure-and-scriban-governance.md`??? `ObjectModel` / `ExternalRuntimeHelpers` ?????`LoaderStage` / `LinkerStage` / `ManagedClosureContracts` ?????????????
+## 范围说明
 
-- 璁板綍椤圭洰绾у伐鍏峰叆鍙ｃ€侀泦鎴愯竟鐣屻€乸roof baseline 涓庨暱鏈熺ǔ瀹氱殑鎿嶄綔绾︽潫銆?- 涓嶈褰曞崟娆′换鍔℃祦姘淬€佷复鏃惰瘖鏂垨浠呭鏌愭鎵ц鏈夋晥鐨勪笂涓嬫枃銆?- 鎵ц鏃ュ織淇濈暀鍦?`docs/dev/<lifecycle>/<task_id>/`锛涙矇娣€鍚庣殑闀挎湡鐭ヨ瘑鍐嶈繘鍏ユ湰鐩綍銆?
-## 瀛愬垎绫?
-| 鍒嗙被 | 璇存槑 | 绱㈠紩 |
+- 记录项目级工具入口、集成边界、proof baseline 与长期稳定的操作约束。
+- 不记录单次任务流水、临时诊断或只对某次执行有效的上下文。
+- 执行日志保留在 `docs/dev/<lifecycle>/<task_id>/`；沉淀后的长期知识再进入本目录。
+
+最近更新：
+
+- `2026-04-17`：更新 `il2cpp-core-structure-and-scriban-governance.md`，收口 `ObjectModel` / `ExternalRuntimeHelpers`，并同步 `LoaderStage` / `LinkerStage` / `ManagedClosureContracts` 的结构治理结论。
+- `2026-04-19`：新增 `scriban-usage-and-codegen-rules.md`，明确 IL2CPP / Python codegen 默认优先 `Scriban`，能力不足时先扩展 `Scriban`。
+
+## 子分类
+
+| 分类 | 说明 | 索引 |
 | --- | --- | --- |
-| `-` | 褰撳墠鐩綍鐩存帴缁存姢宸ュ叿涓庨泦鎴愪富棰橀〉 | `-` |
+| `-` | 当前目录直接维护工具与集成主题页 | `-` |
 
-## 鍏抽敭椤甸潰
+## 关键页面
 
-| 椤甸潰 | 涓婚 | 鎽樿 |
+| 页面 | 主题 | 摘要 |
 | --- | --- | --- |
-| [`hot-update-interpreter-vm-v1.md`](./hot-update-interpreter-vm-v1.md) | hot update interpreter vm | 鍥哄寲鍘熺敓 `InterpreterVM` 鐨?`InterpreterValue`銆?4 鏉?opcode catalog銆乶ative smoke 杈圭晫锛屼互鍙婁笌 managed interpreter 鐨勮亴璐ｅ垎灞傘€?|
-| [`hot-update-e2e-runtime-baseline-v1.md`](./hot-update-e2e-runtime-baseline-v1.md) | hot update e2e runtime baseline | 鍥哄寲 Phase C 鐨?package load銆佹柟娉曟浛鎹€乤uto bridge銆佸洖婊氥€乥enchmark CLI 涓庨獙璇佸叆鍙ｃ€?|
-| [`interpreter-lowering-and-native-smoke-baseline-v1.md`](./interpreter-lowering-and-native-smoke-baseline-v1.md) | interpreter lowering銆乵ixed execution 涓?native smoke baseline | 鍥哄寲 Phase 7 鐨勭湡瀹?lowering proof銆乻ame-assembly `Call` / `CallVirt` 鎵ц銆佺湡瀹?EH lowering銆乣try/catch` / `rethrow` / `try/finally` 鏈€灏?managed proof銆佸瓧绗︿覆妗ユ墽琛?proof銆乶ative `InterpreterVM` smoke proof 涓?Windows 鏂囦欢閿佽閬胯鍒欍€?|
-| [`metadata-supplement-bridge-baseline-v1.md`](./metadata-supplement-bridge-baseline-v1.md) | metadata supplement 涓?bridge baseline | 鍥哄寲 Phase 6 鐨?supplemental metadata template銆乥ridge baseline銆乸roof 涓庨」鐩骇楠岃瘉鍏ュ彛銆?|
-| [`hot-update-skeleton-v1.md`](./hot-update-skeleton-v1.md) | hot update skeleton | 鍥哄寲 `Chaos.IL2CPP.HotUpdate` 鐨勯」鐩竟鐣屻€乸ackage 褰㈢姸銆乺untime mode 璇箟涓?`HotUpdateSkeletonProof`銆?|
-| [`engine-host-proof-baseline-v1.md`](./engine-host-proof-baseline-v1.md) | engine host proof baseline | 鍥哄寲 `EngineHostProof` 鐨?host proof build銆乴ifecycle stress 涓?`HostEmbeddingLite` ownership 鍩虹嚎銆?|
-| [`mobile-host-subject-routing-v1.md`](./mobile-host-subject-routing-v1.md) | mobile host subject routing | 璇存槑 `MobileHelloWorldProof` 鐨?subject-scoped Android/iOS host root銆乺oot CMake cache 鍙橀噺涓?mobile route fallback 瑙勫垯銆?|
-| [`native-perf-and-convert-baselines-v1.md`](./native-perf-and-convert-baselines-v1.md) | native perf 涓?convert baseline | 鍥哄寲 `native-runtime-perf` payload銆乣tests/perf/*` 绾︽潫涓?convert perf baseline銆?|
-| [`engine-binding-stub-baseline-v1.md`](./engine-binding-stub-baseline-v1.md) | engine binding stub baseline | 鍥哄寲 `Chaos.IL2CPP.EngineBinding`銆乣[EngineExport]` / `[EngineCallback]` 鏍囨敞鍏ュ彛涓?smoke / compile-only baseline銆?|
-| [`il2cpp-core-structure-and-scriban-governance.md`](./il2cpp-core-structure-and-scriban-governance.md) | IL2CPP core structure and Scriban governance | ?? `IL2CPP` ??????????????planner/emitter/template ???ObjectModel / ExternalRuntimeHelpers / Loader / Linker / Contracts ??????????????? |
-| [`project-graph-ingestion-v1.md`](./project-graph-ingestion-v1.md) | project graph ingestion | 鍥哄寲 `Chaos.IL2CPP.ProjectGraph`銆乣project-graph.json` 涓?golden convert 鎺ョ嚎銆?|
-| [`鍏变韩-contract-v0.md`](./鍏变韩-contract-v0.md) | 鍏变韩 contract v0 | 鍥哄寲 `contracts/shared/v0/` 鐨勯暱鏈熺害鏉熴€侀獙璇佸叆鍙ｄ笌浣跨敤杈圭晫銆?|
-| [`缁熶竴鍏ュ彛鑴氭湰.md`](./缁熶竴鍏ュ彛鑴氭湰.md) | 缁熶竴鍏ュ彛鑴氭湰 `run.*` | 鍥哄寲 bootstrap銆乀UI銆乸repare/clean銆乣--json` 涓?harness 鎺ョ嚎瑙勫垯銆?|
-| [`缁熶竴娴嬭瘯妗嗘灦.md`](./缁熶竴娴嬭瘯妗嗘灦.md) | 缁熶竴娴嬭瘯妗嗘灦 `run test` | 鍥哄寲 suite manifest銆乻ummary/final-summary 涓庢祴璇曞叆鍙ｇ害鏉熴€?|
-| [`unified-project-workspaces-and-deploy-core.md`](./unified-project-workspaces-and-deploy-core.md) | project workspaces 涓?deploy core | 鍥哄寲 `generate/build project`銆乣deploy core`銆乣subject-exec` 涓?`artifacts/projects/**` / `deploy/core/**` 杈圭晫銆?|
-| [`Claude鎶€鑳芥祴璇曞叆鍙?md`](./Claude鎶€鑳芥祴璇曞叆鍙?md) | Claude 鎶€鑳芥祴璇曞叆鍙?| 鍥哄寲 `.codex/tests/claude-code/` 鐨勫叆鍙ｄ笌绾︽潫銆?|
+| [`hot-update-interpreter-vm-v1.md`](./hot-update-interpreter-vm-v1.md) | hot update interpreter vm | 固化原生 `InterpreterVM` 的 `InterpreterValue`、opcode catalog、native smoke 边界，以及与 managed interpreter 的职责分层。 |
+| [`hot-update-e2e-runtime-baseline-v1.md`](./hot-update-e2e-runtime-baseline-v1.md) | hot update e2e runtime baseline | 固化 package load、方法替换、auto bridge、回滚、benchmark CLI 与验证入口。 |
+| [`interpreter-lowering-and-native-smoke-baseline-v1.md`](./interpreter-lowering-and-native-smoke-baseline-v1.md) | interpreter lowering and native smoke baseline | 固化 lowering proof、EH lowering、字符串桥执行 proof 与 native `InterpreterVM` smoke proof。 |
+| [`metadata-supplement-bridge-baseline-v1.md`](./metadata-supplement-bridge-baseline-v1.md) | metadata supplement bridge baseline | 固化 supplemental metadata template、bridge baseline、proof 与项目级验证入口。 |
+| [`hot-update-skeleton-v1.md`](./hot-update-skeleton-v1.md) | hot update skeleton | 固化 `Chaos.IL2CPP.HotUpdate` 的项目边界、package 形状、runtime mode 与 `HotUpdateSkeletonProof`。 |
+| [`engine-host-proof-baseline-v1.md`](./engine-host-proof-baseline-v1.md) | engine host proof baseline | 固化 `EngineHostProof` 的 host proof build、lifecycle stress 与 `HostEmbeddingLite` ownership 基线。 |
+| [`mobile-host-subject-routing-v1.md`](./mobile-host-subject-routing-v1.md) | mobile host subject routing | 说明 `MobileHelloWorldProof` 的 subject-scoped Android / iOS host root 与 route fallback 规则。 |
+| [`native-perf-and-convert-baselines-v1.md`](./native-perf-and-convert-baselines-v1.md) | native perf and convert baseline | 固化 `native-runtime-perf` payload、`tests/perf/*` 约束与 convert perf baseline。 |
+| [`engine-binding-stub-baseline-v1.md`](./engine-binding-stub-baseline-v1.md) | engine binding stub baseline | 固化 `Chaos.IL2CPP.EngineBinding`、`[EngineExport]` / `[EngineCallback]` 标注入口与 smoke / compile-only baseline。 |
+| [`il2cpp-core-structure-and-scriban-governance.md`](./il2cpp-core-structure-and-scriban-governance.md) | IL2CPP core structure and Scriban governance | 固化 `IL2CPP` 核心代码层的 planner / emitter / template 结构治理，以及 ObjectModel / ExternalRuntimeHelpers / Loader / Linker / Contracts 的长期拆分边界。 |
+| [`scriban-usage-and-codegen-rules.md`](./scriban-usage-and-codegen-rules.md) | Scriban usage and codegen rules | 说明 `Scriban` 在 IL2CPP 与 Python codegen 中的正式使用方式、扩展顺序与禁止事项。 |
+| [`project-graph-ingestion-v1.md`](./project-graph-ingestion-v1.md) | project graph ingestion | 固化 `Chaos.IL2CPP.ProjectGraph`、`project-graph.json` 与 golden convert 接线。 |
+| [`共享-contract-v0.md`](./共享-contract-v0.md) | 共享 contract v0 | 固化 `contracts/shared/v0/` 的长期约束、验证入口与使用边界。 |
+| [`统一入口脚本.md`](./统一入口脚本.md) | 统一入口脚本 `run.*` | 固化 bootstrap、TUI、prepare / clean、`--json` 与 harness 接线规则。 |
+| [`统一测试框架.md`](./统一测试框架.md) | 统一测试框架 `run test` | 固化 suite manifest、summary / final-summary 与测试入口约束。 |
+| [`unified-project-workspaces-and-deploy-core.md`](./unified-project-workspaces-and-deploy-core.md) | project workspaces and deploy core | 固化 `generate/build project`、`deploy core`、`subject-exec` 与 `artifacts/projects/**` / `deploy/core/**` 边界。 |
+| [`Claude技能测试入口.md`](./Claude技能测试入口.md) | Claude 技能测试入口 | 固化 `.codex/tests/claude-code/` 的入口与约束。 |
 
-## 缁存姢绾﹀畾
+## 维护约定
 
-- 椤甸潰蹇呴』鎬荤粨鍙鐢ㄧ粨璁猴紝鑰屼笉鏄鍒朵换鍔¤繃绋嬨€?- 鏂板椤甸潰鏃跺繀椤诲悓姝ユ洿鏂版湰鐩綍 `INDEX.md`锛涘褰卞搷涓婂眰瀵艰埅锛屽啀鏇存柊 `wiki/INDEX.md`銆?
-## 鏈€杩戝彉鏇?
-| [`il2cpp-core-structure-and-scriban-governance.md`](./il2cpp-core-structure-and-scriban-governance.md) | IL2CPP core structure and Scriban governance | ?? `IL2CPP` ??????????????planner/emitter/template ???ObjectModel / ExternalRuntimeHelpers / Loader / Linker / Contracts ??????????????? |
+- 页面必须总结可复用结论，而不是复制任务过程。
+- 新增页面时必须同步更新本目录 `INDEX.md`；如影响上层导航，再更新 `wiki/INDEX.md`。

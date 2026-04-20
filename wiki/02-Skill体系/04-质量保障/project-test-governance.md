@@ -25,7 +25,7 @@
 - `subject.features.json` 是 owner subject 与 proof / benchmark obligation 的真源
 - canonical proof / benchmark / host correctness 不允许依赖 `Console.WriteLine` / `ChaosEvidenceKind.Stdout`
 - 测试阶段的 `dotnet` 编译崩溃必须先查根因并修复
-- file-level codegen 默认 Scriban
+- IL2CPP / Python file-level codegen 默认 Scriban，能力不足时先扩展 Scriban
 - cutover 完成后删除旧 alias、旧命名和旧双轨逻辑
 
 ## 命中 AOT / IL2CPP / test-flow 任务时必须先冻结

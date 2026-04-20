@@ -101,9 +101,16 @@ def _reused_primary_evidence_paths(stage: dict[str, Any], manifest: dict[str, An
             or manifest.get("nativeProofManifestPath")
             or ""
         )
+        generated_source_paths = [
+            str(value)
+            for value in list(manifest.get("generatedSourcePaths") or [])
+            if str(value)
+        ]
+        if not generated_source_paths:
+            generated_source_paths = [str(manifest.get("generatedSourcePath") or "")]
         return _dedupe_non_empty(
             [
-                _rewrite_reused_bucket_path(stage, str(manifest.get("generatedSourcePath") or "")),
+                *[_rewrite_reused_bucket_path(stage, value) for value in generated_source_paths],
                 _rewrite_reused_bucket_path(stage, native_reference_manifest_path),
             ]
         )

@@ -19,17 +19,25 @@ public static class ManagedNaming
         return $"{declaringTypeSubjectId}::{fieldName}";
     }
 
-    public static string CreatePropertySubjectId(string declaringTypeSubjectId, string propertyName)
+    public static string CreatePropertySubjectId(
+        string declaringTypeSubjectId,
+        string propertyName,
+        IReadOnlyList<string>? indexParameterTypes = null)
     {
-        return $"{declaringTypeSubjectId}::property:{propertyName}";
+        var parameterSignature = indexParameterTypes is { Count: > 0 }
+            ? $"[{string.Join(",", indexParameterTypes)}]"
+            : string.Empty;
+        return $"{declaringTypeSubjectId}::property:{propertyName}{parameterSignature}";
     }
 
     public static string CreateMethodSubjectId(
         string declaringTypeSubjectId,
         string methodName,
-        IReadOnlyList<string> parameterTypes)
+        string returnType,
+        IReadOnlyList<string> parameterTypes,
+        int genericParameterCount = 0)
     {
-        return $"{declaringTypeSubjectId}::{methodName}({string.Join(",", parameterTypes)})";
+        return $"{declaringTypeSubjectId}::{CreateMethodIdentityName(methodName, genericParameterCount)}:{returnType}({string.Join(",", parameterTypes)})";
     }
 
     public static string CreateParameterSubjectId(string methodSubjectId, int parameterIndex, string parameterName)
@@ -63,6 +71,13 @@ public static class ManagedNaming
     public static string CreateGenericMethodName(string methodName, IReadOnlyList<string> genericArguments)
     {
         return $"{methodName}<{string.Join(",", genericArguments)}>";
+    }
+
+    public static string CreateMethodIdentityName(string methodName, int genericParameterCount = 0)
+    {
+        return genericParameterCount > 0
+            ? $"{StripGenericArity(methodName)}`{genericParameterCount}"
+            : methodName;
     }
 
     public static string CreateMethodId(ManagedMethodModel method)
@@ -241,12 +256,15 @@ public static class ManagedNaming
     {
         var separatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
         var parameterListIndex = subjectId.LastIndexOf('(');
-        if (separatorIndex <= 0 || parameterListIndex <= separatorIndex + 2)
+        var returnTypeSeparatorIndex = subjectId.LastIndexOf(':', parameterListIndex >= 0 ? parameterListIndex : subjectId.Length - 1);
+        if (separatorIndex <= 0 ||
+            parameterListIndex <= separatorIndex + 2 ||
+            returnTypeSeparatorIndex <= separatorIndex + 2)
         {
             throw new InvalidOperationException($"subject id '{subjectId}' is missing method name.");
         }
 
-        return subjectId[(separatorIndex + 2)..parameterListIndex];
+        return subjectId[(separatorIndex + 2)..returnTypeSeparatorIndex];
     }
 
     private static IReadOnlyList<string> SplitTopLevelArguments(string value)

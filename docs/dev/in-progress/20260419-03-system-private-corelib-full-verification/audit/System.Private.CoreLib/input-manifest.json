@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 0,
+  "assemblyName": "System.Private.CoreLib",
+  "sourceInputs": [
+    {
+      "tfm": "net8.0",
+      "kind": "runtime",
+      "path": "src/dll/dotnet-foundation/net8.0/runtime/System.Private.CoreLib.dll",
+      "sizeBytes": 13175088
+    },
+    {
+      "tfm": "net10.0",
+      "kind": "runtime",
+      "path": "src/dll/dotnet-foundation/net10.0/runtime/System.Private.CoreLib.dll",
+      "sizeBytes": 16013584
+    }
+  ],
+  "authorityReferences": [
+    "docs/architecture/reference-assembly-and-corelib-policy.md",
+    "docs/dev/completed/20260418-04-phase-2-system-private-corelib-certification-substrate/corelib-surface-proof-report-v1-01.json",
+    "docs/dev/completed/20260418-04-phase-2-system-private-corelib-certification-substrate/corelib-semantic-proof-report-v1-01.json"
+  ]
+}
+

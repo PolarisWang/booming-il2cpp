@@ -1,0 +1,52 @@
+extern "C" std::intptr_t {{ helper_symbol }}(std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1)
+{
+    if (chaos_arg_1 == static_cast<std::intptr_t>(0))
+    {
+        std::abort();
+    }
+
+    const char* chaos_separator_utf8 = chaos_arg_0 == static_cast<std::intptr_t>(0)
+        ? ""
+        : chaos_reflection_get_string_utf8(chaos_arg_0);
+    std::string chaos_joined;
+    bool chaos_first = true;
+    auto chaos_append_separator = [&]()
+    {
+        if (chaos_first)
+        {
+            chaos_first = false;
+            return;
+        }
+
+        if (chaos_separator_utf8 != nullptr)
+        {
+            chaos_joined += chaos_separator_utf8;
+        }
+    };
+
+    auto* chaos_enumerable_header = reinterpret_cast<chaos_object_header*>(chaos_arg_1);
+{{~ for entry in variant_entries }}
+    if (chaos_enumerable_header->type_id == {{ entry.enumerable_type_id_symbol }})
+    {
+        const auto chaos_enumerator = {{ entry.get_enumerator_symbol }}(chaos_arg_1);
+        while (true)
+        {
+            const auto chaos_has_next = {{ entry.move_next_symbol }}(chaos_enumerator);
+            if (chaos_has_next == static_cast<std::intptr_t>(0))
+            {
+                break;
+            }
+
+            chaos_append_separator();
+            const auto chaos_current = {{ entry.get_current_symbol }}(chaos_enumerator);
+            char chaos_buffer[64]{};
+            std::snprintf(chaos_buffer, sizeof(chaos_buffer), "%d", static_cast<std::int32_t>(chaos_current));
+            chaos_joined += chaos_buffer;
+        }
+
+        return chaos_reflection_create_string_utf8_copy(chaos_joined.c_str(), chaos_joined.size());
+    }
+
+{{~ end }}
+    std::abort();
+}

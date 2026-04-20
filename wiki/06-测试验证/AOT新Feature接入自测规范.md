@@ -28,6 +28,11 @@
 - 调整会影响 managed/native/hotupdate 可观察行为的 feature
 - 调整 declared proof / declared benchmark 的 capability 归属与执行链路
 
+补充约束：
+
+- 只要改动涉及结构化文本 generated file shape，默认应遵循 `Scriban` 优先规则。
+- 模板能力不足时，先扩展 `Scriban`，具体规范见 [`../04-工具与集成/scriban-usage-and-codegen-rules.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/scriban-usage-and-codegen-rules.md)。
+
 ## 2. 核心结论
 
 ### 2.1 验收层级

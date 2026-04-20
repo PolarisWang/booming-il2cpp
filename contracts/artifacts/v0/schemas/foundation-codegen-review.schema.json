@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Foundation DLL Codegen Review v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "assemblyName",
+    "sourceInputs",
+    "dllBoundaryInventory",
+    "generatedFiles",
+    "nativeDispatchManifest",
+    "hotupdateBindingManifest",
+    "runtimeHelpers",
+    "coverage",
+    "findings",
+    "finalStatus"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 0
+    },
+    "assemblyName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceInputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/fileEntry"
+      }
+    },
+    "dllBoundaryInventory": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generatedFiles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/fileEntry"
+      }
+    },
+    "nativeDispatchManifest": {
+      "type": ["string", "null"]
+    },
+    "hotupdateBindingManifest": {
+      "type": ["string", "null"]
+    },
+    "runtimeHelpers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "bindingStatus"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bindingStatus": {
+            "type": "string",
+            "enum": ["bound", "missing", "not-required"]
+          }
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "publicMembersTotal",
+        "publicMembersCodegenCovered",
+        "uncoveredMembers"
+      ],
+      "properties": {
+        "publicMembersTotal": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "publicMembersCodegenCovered": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "uncoveredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "severity", "summary"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["info", "warning", "error", "blocking"]
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "finalStatus": {
+      "type": "string",
+      "enum": ["pending", "approved", "rejected", "blocked"]
+    }
+  },
+  "$defs": {
+    "fileEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "classification": {
+            "type": ["string", "null"]
+          },
+          "sha256": {
+            "type": ["string", "null"]
+          }
+        }
+    }
+  }
+}

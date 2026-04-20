@@ -1,0 +1,23 @@
+struct chaos_monitor_runtime_entry
+{
+    std::recursive_timed_mutex mutex{};
+};
+
+chaos_monitor_runtime_entry& chaos_require_monitor_runtime_entry(std::intptr_t chaos_object_value)
+{
+    if (chaos_object_value == static_cast<std::intptr_t>(0))
+    {
+        std::abort();
+    }
+
+    static std::mutex chaos_monitor_table_mutex;
+    static std::unordered_map<std::intptr_t, std::unique_ptr<chaos_monitor_runtime_entry>> chaos_monitor_table;
+    std::lock_guard<std::mutex> chaos_guard(chaos_monitor_table_mutex);
+    auto& chaos_entry = chaos_monitor_table[chaos_object_value];
+    if (!chaos_entry)
+    {
+        chaos_entry = std::make_unique<chaos_monitor_runtime_entry>();
+    }
+
+    return *chaos_entry;
+}

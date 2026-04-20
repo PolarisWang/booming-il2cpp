@@ -1,5 +1,6 @@
 using System.Text;
 using Chaos.IL2CPP.Contracts;
+using Scriban.Runtime;
 
 namespace Chaos.IL2CPP.CodeGen;
 
@@ -11,19 +12,25 @@ public sealed partial class NativeAotLoweringPlanner
                      value => value.TypeSubjectId,
                      StringComparer.Ordinal))
         {
-            builder.AppendLine($"std::once_flag {GetNativeTypeInitializationOnceFlagSymbol(plan.TypeSubjectId)};");
-            builder.AppendLine();
-            builder.AppendLine($"void {GetNativeTypeInitializationFunctionSymbol(plan.TypeSubjectId)}()");
-            builder.AppendLine("{");
-            builder.AppendLine($"    std::call_once({GetNativeTypeInitializationOnceFlagSymbol(plan.TypeSubjectId)}, []()");
-            builder.AppendLine("    {");
+            var actionBuilder = new StringBuilder();
             foreach (var action in plan.Actions)
             {
-                EmitStaticInitializationAction(builder, action, "        ");
+                EmitStaticInitializationAction(actionBuilder, action, "        ");
             }
 
-            builder.AppendLine("    });");
-            builder.AppendLine("}");
+            var model = new ScriptObject
+            {
+                ["once_flag_symbol"] = GetNativeTypeInitializationOnceFlagSymbol(plan.TypeSubjectId),
+                ["initialization_function_symbol"] = GetNativeTypeInitializationFunctionSymbol(plan.TypeSubjectId),
+                ["action_block"] = actionBuilder.Length == 0
+                    ? string.Empty
+                    : actionBuilder.ToString().TrimEnd() + Environment.NewLine,
+            };
+
+            builder.AppendLine(
+                ScribanTemplateRenderer.RenderTemplate(
+                    NativeAotTemplateCatalog.GetStaticInitializationDefinitionTemplate(),
+                    model).TrimEnd());
             builder.AppendLine();
         }
     }
@@ -38,7 +45,7 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
 
-        builder.AppendLine($"    {GetNativeTypeInitializationFunctionSymbol(plan.TypeSubjectId)}();");
+        AppendStaticInitializationCall(builder, GetNativeTypeInitializationFunctionSymbol(plan.TypeSubjectId), "    ");
     }
 
     private void EmitStaticInitializationForField(
@@ -52,7 +59,7 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
 
-        builder.AppendLine($"{indentation}{GetNativeTypeInitializationFunctionSymbol(plan.TypeSubjectId)}();");
+        AppendStaticInitializationCall(builder, GetNativeTypeInitializationFunctionSymbol(plan.TypeSubjectId), indentation);
     }
 
     private void EmitStaticInitializationAction(
@@ -84,18 +91,43 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
-        builder.AppendLine($"{indentation}if ({GetNativeStaticFieldSymbol(action.FieldSubjectId)} == static_cast<std::intptr_t>(0))");
-        builder.AppendLine($"{indentation}{{");
-        builder.AppendLine($"{indentation}    auto* chaos_object = new {GetNativeTypeSymbol(action.ConstructedTypeSubjectId)}{{}};");
-        builder.AppendLine($"{indentation}    chaos_object->header.type_id = {GetNativeTypeIdSymbol(action.ConstructedTypeSubjectId)};");
+        var model = new ScriptObject
+        {
+            ["indentation"] = indentation,
+            ["static_field_symbol"] = GetNativeStaticFieldSymbol(action.FieldSubjectId),
+            ["native_type_symbol"] = GetNativeTypeSymbol(action.ConstructedTypeSubjectId),
+            ["native_type_id_symbol"] = GetNativeTypeIdSymbol(action.ConstructedTypeSubjectId),
+            ["constructor_block"] = string.Empty,
+        };
+
         if (!action.ElideConstructorCall)
         {
             var resolvedInvocationTarget = invocationTarget!.Value;
-            builder.AppendLine($"{indentation}    const auto chaos_arg_0 = reinterpret_cast<std::intptr_t>(chaos_object);");
-            builder.AppendLine($"{indentation}    {resolvedInvocationTarget.TargetSymbol}({FormatAbiInvocationArgumentList(resolvedInvocationTarget.ParameterAbis)});");
+            model["constructor_block"] =
+                $"{indentation}    const auto chaos_arg_0 = reinterpret_cast<std::intptr_t>(chaos_object);{Environment.NewLine}" +
+                $"{indentation}    {resolvedInvocationTarget.TargetSymbol}({FormatAbiInvocationArgumentList(resolvedInvocationTarget.ParameterAbis)});{Environment.NewLine}";
         }
 
-        builder.AppendLine($"{indentation}    {GetNativeStaticFieldSymbol(action.FieldSubjectId)} = reinterpret_cast<std::intptr_t>(chaos_object);");
-        builder.AppendLine($"{indentation}}}");
+        builder.AppendLine(
+            ScribanTemplateRenderer.RenderTemplate(
+                NativeAotTemplateCatalog.GetStaticInitializationActionTemplate(),
+                model).TrimEnd());
+    }
+
+    private static void AppendStaticInitializationCall(
+        StringBuilder builder,
+        string initializationFunctionSymbol,
+        string indentation)
+    {
+        var model = new ScriptObject
+        {
+            ["indentation"] = indentation,
+            ["initialization_function_symbol"] = initializationFunctionSymbol,
+        };
+
+        builder.AppendLine(
+            ScribanTemplateRenderer.RenderTemplate(
+                NativeAotTemplateCatalog.GetStaticInitializationCallTemplate(),
+                model).TrimEnd());
     }
 }

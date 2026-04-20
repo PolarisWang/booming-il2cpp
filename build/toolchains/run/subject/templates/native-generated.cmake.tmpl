@@ -1,11 +1,19 @@
-set(CHAOS_SUBJECT_GENERATED_INPUT_SOURCE "@@GENERATED_INPUT_SOURCE@@")
+set(CHAOS_SUBJECT_GENERATED_INPUT_SOURCES
+@@GENERATED_INPUT_SOURCES@@
+)
 
-if(NOT EXISTS "${CHAOS_SUBJECT_GENERATED_INPUT_SOURCE}")
-    message(FATAL_ERROR "Missing generated subject source: ${CHAOS_SUBJECT_GENERATED_INPUT_SOURCE}")
+if(NOT CHAOS_SUBJECT_GENERATED_INPUT_SOURCES)
+    message(FATAL_ERROR "CHAOS_SUBJECT_GENERATED_INPUT_SOURCES is required")
 endif()
 
+foreach(chaos_generated_source IN LISTS CHAOS_SUBJECT_GENERATED_INPUT_SOURCES)
+    if(NOT EXISTS "${chaos_generated_source}")
+        message(FATAL_ERROR "Missing generated subject source: ${chaos_generated_source}")
+    endif()
+endforeach()
+
 add_library(chaos_subject_generated_native STATIC EXCLUDE_FROM_ALL
-    "${CHAOS_SUBJECT_GENERATED_INPUT_SOURCE}")
+    ${CHAOS_SUBJECT_GENERATED_INPUT_SOURCES})
 chaos_configure_subject_target(chaos_subject_generated_native)
 
 set_target_properties(

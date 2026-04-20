@@ -1,0 +1,8 @@
+std::once_flag {{ once_flag_symbol }};
+
+void {{ initialization_function_symbol }}()
+{
+    std::call_once({{ once_flag_symbol }}, []()
+    {
+{{ action_block }}    });
+}

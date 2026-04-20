@@ -48,6 +48,9 @@ class SubjectAuthorityFreezeTests(unittest.TestCase):
                 "solution-reference-assembly",
                 "solution-corelib-reference",
                 "solution-mixed-reference-closure",
+                "solution-foundation-dll-translation",
+                "solution-static-call-ctor-getter",
+                "solution-constructor-then-instance-call",
             },
             scenarios,
         )

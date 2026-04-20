@@ -1,0 +1,950 @@
+---
+task_id: 20260419-07-corelib-dll-boundary-native-codegen-implementation
+title: CoreLib DLL Boundary Native Codegen Implementation
+task_type: plan
+lifecycle_status: in-progress
+phase: implementation
+created_at: 2026-04-19 13:55:00 +08:00
+updated_at: 2026-04-19 13:55:00 +08:00
+updated_at: 2026-04-19 16:25:00 +08:00
+updated_at: 2026-04-19 15:25:13 +08:00
+updated_at: 2026-04-19 17:24:00 +08:00
+updated_at: 2026-04-19 18:15:00 +08:00
+updated_at: 2026-04-19 16:30:00 +08:00
+updated_at: 2026-04-19 19:03:00 +08:00
+updated_at: 2026-04-19 20:12:00 +08:00
+updated_at: 2026-04-19 21:05:00 +08:00
+updated_at: 2026-04-19 22:12:00 +08:00
+updated_at: 2026-04-19 22:24:00 +08:00
+updated_at: 2026-04-19 22:45:00 +08:00
+updated_at: 2026-04-19 23:05:00 +08:00
+updated_at: 2026-04-19 23:28:00 +08:00
+updated_at: 2026-04-20 00:36:00 +08:00
+updated_at: 2026-04-20 01:10:00 +08:00
+latest_stop_point: the narrow CoreLib-first combined chain is now both runnable and contract-frozen: after adding `contracts/artifacts/v0/schemas/native-hotupdate-audit.schema.json` plus sample/snapshot assets, real matrix run `20260420-020614-windows-0ebd` again passed `windows-corelib-reference-native-hotupdate-proof` end-to-end with `analysis-frontend = ok`, `generated-native-proof = ok`, `build-target = ok`, `runtime-managed-output = ok`, runtime stdout `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`, and a schema-backed `native-hotupdate-audit.json`; this still remains only a narrow `GoldenCoreLibReference.NativeProofApp` proof packet rather than full `System.Private.CoreLib` DLL-body translation
+current_dir: docs/dev/in-progress/20260419-07-corelib-dll-boundary-native-codegen-implementation
+parent_task_id: 20260419-01-foundation-dll-translation-audit-roadmap
+source_task_id: 20260419-03-system-private-corelib-full-verification
+source_relation: unblocker-for-corelib-full-verification
+design_doc: docs/dev/in-progress/20260419-07-corelib-dll-boundary-native-codegen-implementation/design-v1-01.md
+plan_doc: docs/dev/in-progress/20260419-07-corelib-dll-boundary-native-codegen-implementation/plan-v1-01.md
+total_tasks: 6
+current_task: use the newly verified and schema-frozen narrow CoreLib-first `native -> hotupdate` bridge as the audit anchor, with matrix-level audit output now canonicalized, then continue widening assembly-bound native-reference executable method families without overstating CoreLib completion
+active: true
+---
+
+## Purpose
+
+Implement the missing real path needed to move `System.Private.CoreLib` from `blocked` toward full verification:
+
+- DLL-boundary nativeization/codegen inventory.
+- DLL-boundary native proof execution evidence.
+- CoreLib-specific hotupdate proof packet.
+
+## Starting Constraint
+
+Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full verification is no longer blocked.
+
+## Immediate Next Step
+
+- Keep `windows-corelib-reference-native-hotupdate-proof` as the canonical combined proof anchor, but reduce review ambiguity:
+  - make failure/success reporting distinguish incomplete audit payloads from verified audit payloads
+  - keep the matrix-level pipeline report as the one canonical review surface while leaving declared entry summaries as lightweight navigation views
+  - then continue widening the executable method-family coverage needed before this can represent meaningful `System.Private.CoreLib` DLL-boundary translation
+
+## Current Progress
+
+- Added `FullAssemblyClosure` to `ManagedClosureRequest` and propagated it through:
+  - loader `LoadedWorldModel`
+  - semantic world `SemanticWorldModel`
+  - linker `LinkedWorldModel`
+  - closure manifest `ManagedClosureManifestArtifact`
+- Added CLI support:
+  - `chaos-il2cpp convert ... --full-assembly-closure`
+  - legacy managed closure request parser `--full-assembly-closure`
+- Updated linker reachability:
+  - when `FullAssemblyClosure = true`, all types/fields/properties/methods belonging to the input assembly are forced into reachable closure before metadata/codegen projection
+- Updated preserve descriptor generation:
+  - emits `Reason = "full-assembly-closure"` entries for the input assembly surface
+  - de-dupes preserve entries against preserve-attribute entries
+- Updated native AOT static initialization planner to round-trip the new closure mode from `closure.manifest.json`
+- Landed CoreLib method identity fixes needed for real full closure:
+  - method subject-id now includes return type and generic arity
+  - `ManagedNaming.GetMethodName(...)` parses method name before the return-type separator
+  - open generic `MethodSpec` identities preserve base generic arity instead of collapsing to non-generic identity
+- Fixed full-assembly-closure no-entry behavior end-to-end:
+  - loader accepts the primary assembly when `FullAssemblyClosure = true`
+  - linker no longer requires an entry seed when `EntryPointSubjectId = ""`
+  - single-assembly full closure can fast-path to the whole semantic world as reachable
+- Fixed driver JSON serialization for real CoreLib constants:
+  - `JsonNumberHandling.AllowNamedFloatingPointLiterals`
+- Added/updated tests for the above slices:
+  - `test_loader_method_identity_generic_arity.py`
+  - `test_full_assembly_closure_without_entry_point.py`
+  - `test_driver_json_named_floating_point_literals.py`
+  - `test_linker_stripping_proof_subject.py`
+- Added assembly-bound audit plan support for full-assembly-closure codegen:
+  - `NativeReferenceLoweringPlanArtifact` and `NativeAotLoweringPlanArtifact` now expose:
+    - `translationUnitMode`
+    - `translationUnitMethodSubjectIds`
+    - `translationUnitMethodCount`
+    - `translationUnitPageSize`
+    - `translationUnitPageCount`
+    - `translationUnitPages`
+    - `auditStatus`
+    - `auditMessage`
+  - `CodeGenStage` now emits `planKind = "assembly-full-closure-audit"` instead of reusing placeholder entry plans when:
+    - `FullAssemblyClosure = true`
+    - `EntryPointSubjectId = ""`
+  - native emitters now fail explicitly for this plan kind rather than pretending an entry-point lowering exists
+- Added verification coverage for the new contract and artifact shape:
+  - `test_full_assembly_closure_codegen_contracts.py`
+  - `test_full_assembly_closure_codegen_audit_plan.py`
+- Re-ran real `System.Private.CoreLib` direct convert into:
+  - `artifacts/.tmp/corelib-full-closure-analysis-20260419-audit`
+  - result exits `0` and writes full artifacts through codegen
+- Captured real CoreLib codegen audit evidence:
+  - `closure.manifest.json`
+    - `assemblyName = "System.Private.CoreLib"`
+    - `entrySubjectId = ""`
+    - `fullAssemblyClosure = true`
+  - `native-reference.lowering-plan.json`
+    - `planKind = "assembly-full-closure-audit"`
+    - `translationUnitMode = "audit-only"`
+    - `translationUnitMethodCount = 83859`
+    - `auditStatus = "not-yet-emittable"`
+  - `native-aot.lowering-plan.json`
+    - `planKind = "assembly-full-closure-audit"`
+    - `translationUnitMode = "audit-only"`
+    - `translationUnitMethodCount = 83859`
+    - `auditStatus = "not-yet-emittable"`
+- Upgraded assembly-bound emitters from explicit failure to review-only artifact generation:
+  - `emit-native-reference` now generates:
+    - one summary translation unit
+    - paged audit files under `generated/audit/`
+  - `emit-native-aot` now generates:
+    - one summary translation unit
+    - paged audit files under `generated/audit/`
+  - both review bundles serialize manifests and plan snapshots under their output roots
+- Normalized explicit paging metadata across audit contracts:
+  - lowering plans now freeze:
+    - page size
+    - page count
+    - per-page artifact path
+    - per-page first/last method subject id
+  - review manifests now round-trip the same paging metadata instead of forcing downstream audit tooling to infer pages from directory scans
+- Added and passed contract coverage for the new explicit paging metadata:
+  - `test_full_assembly_closure_codegen_contracts.py`
+  - `test_full_assembly_closure_codegen_audit_plan.py`
+- Upgraded the assembly-bound `native-reference` path from review-only audit to executable runtime skeleton emission:
+  - `CodeGenStage` now lowers `native-reference` full-assembly-closure no-entry requests to:
+    - `planKind = "assembly-full-closure-runtime-skeleton"`
+    - `nativeEntryFunctionName = "RunNativeReferenceAssembly"`
+    - `runtimeExecutionKind = "assembly-bound-native-reference-skeleton"`
+    - `translationUnitMode = "runtime-skeleton"`
+    - page artifacts under `generated/runtime/`
+  - `NativeReferenceProofEmitter` now emits:
+    - one summary translation unit exporting `RunNativeReferenceAssembly(...)`
+    - one compatibility forwarder `RunNativeReference(...)`
+    - paged runtime skeleton files under `generated/runtime/`
+  - generated skeleton currently:
+    - registers codegen
+    - bootstraps runtime
+    - can decode an assembly-bound dispatch request and route by subject id across paged dispatch catalogs
+    - still returns `CHAOS_BRIDGE_STATUS_NOT_SUPPORTED` at per-method stub level
+    - does **not** yet execute per-method translated bodies
+- Upgraded runtime-skeleton page/summary output from static page inventory to minimal cross-page dispatch skeleton:
+  - summary translation unit now emits:
+    - `NativeReferenceAssemblyDispatchRequest`
+    - `kPageDispatchCatalog`
+    - `DispatchAssemblySubject(...)`
+    - one forward declaration per page dispatch function (`DispatchRuntimeSkeletonPageXXXX`)
+  - each runtime page now emits:
+    - per-method stub functions
+    - `kPageMethodDispatch`
+    - page-local dispatch function (`DispatchRuntimeSkeletonPageXXXX`) that resolves exact subject-id matches
+  - fresh GoldenSimpleLib and CoreLib reruns confirm both summary/page outputs carry the new dispatch skeleton
+- Promoted the assembly-bound host request ABI to public native contract surface:
+  - `contracts/native/v0/codegen_bridge.h` now declares `NativeReferenceAssemblyDispatchRequestV0`
+  - added native samples/compile-only smoke:
+    - `tests/contracts/native/v0/samples/bridge/assembly-bound-dispatch.cpp`
+    - `tests/contracts/native/bridge/compile_only_assembly_bound_native_reference_smoke.cpp`
+  - added compatibility coverage in `test_native_reference_bootstrap_support.py`
+- Wired template-based native proof hosts to the assembly-bound runtime skeleton contract:
+  - `build/toolchains/run/subject/templates/native-proof-main.cpp.tmpl` now:
+    - declares both `RunNativeReference(...)` and `RunNativeReferenceAssembly(...)`
+    - can emit `NativeReferenceAssemblyDispatchRequestV0`
+    - switches between legacy and assembly-bound invocation via template-time flags
+  - `build/toolchains/run/subject/project_workspace.py` now inspects `native-reference.manifest.json`
+    - when `runtimeExecutionKind = "assembly-bound-native-reference-skeleton"`, it first prefers `preferredAssemblyDispatchSubjectId`
+    - falls back to the first page's first subject id only when no explicit preferred subject is available
+    - template-generated proof host then calls `RunNativeReferenceAssembly(...)` instead of always passing `nullptr` to `RunNativeReference(...)`
+  - planning coverage added in `test_project_workspace.py`
+- Verified CoreLib paged review output shape:
+  - previous audit-only snapshot contained `82` native-reference audit pages and `82` native-aot audit pages
+  - page `0001` currently holds `1024` method subject ids
+  - lowering plans and manifests both list the first and last page artifacts (`page-0001` through `page-0082`)
+  - generated summary translation units expose:
+    - `translation_unit_method_count = 83790`
+    - `translation_unit_page_size = 1024`
+    - `translation_unit_page_count = 82`
+- Verified new runtime-skeleton split on fresh reruns:
+  - GoldenSimpleLib:
+    - `native-reference` emits runtime skeleton under `generated/runtime/native-reference.runtime-skeleton.page-0001.cpp`
+    - `native-aot` remains under `generated/audit/native-aot.methods.page-0001.cpp`
+  - CoreLib:
+    - `native-reference` emits `83` runtime skeleton pages under `generated/runtime/`
+    - `native-aot` emits `83` audit pages under `generated/audit/`
+    - native-reference summary exports `RunNativeReferenceAssembly(...)` and returns `CHAOS_BRIDGE_STATUS_NOT_SUPPORTED`
+- Landed the first executable per-method assembly-bound runtime-skeleton slice:
+  - `NativeReferenceProofManifestArtifact` now carries `preferredAssemblyDispatchSubjectId`
+  - runtime/workspace proof hosts consume this explicit subject id instead of implicitly trusting page ordering
+  - `NativeReferenceProofEmitter` now recognizes a minimal canonical shape:
+    - `ldstr`
+    - `call System.Console::WriteLine(System.String)`
+    - `ldc.i4 0`
+    - `ret`
+  - matching runtime-skeleton stubs now emit executable code instead of unconditional `CHAOS_BRIDGE_STATUS_NOT_SUPPORTED`
+  - `FoundationDllTranslationSolution/App/Program.cs` was normalized to this minimal, auditable proof shape while preserving the visible foundation DLL set in stdout
+- Real subject-visible proof now succeeds for the foundation DLL translation lane:
+  - run id: `20260419-foundation-dll-native-proof-subject-visible-008`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `foundation-dll-translation:System.Private.CoreLib|System.Runtime|System.Collections|System.Linq`
+  - exit code:
+    - `0`
+  - generated runtime page now contains an executable stub for:
+    - `FoundationDllTranslation.App/Program::Main:System.Int32()`
+  - generated manifest now freezes:
+    - `preferredAssemblyDispatchSubjectId = "FoundationDllTranslation.App/Program::Main:System.Int32()"`
+- Real subject-visible proof now also succeeds for the constructor-backed instance-message lane:
+  - run id: `20260419-200715-windows-1552`
+  - matrix: `windows-constructor-then-instance-call-native-proof`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `constructor-then-instance-call:System.Console|System.Private.CoreLib`
+  - exit code:
+    - `0`
+  - generated runtime page now contains an executable stub for:
+    - `ConstructorThenInstanceCall.App/Program::Main:System.Int32()`
+  - generated manifest now freezes:
+    - `preferredAssemblyDispatchSubjectId = "ConstructorThenInstanceCall.App/Program::Main:System.Int32()"`
+- Real subject-visible proof now succeeds for the array boxing/reference-array lane:
+  - run id: `20260419-235551-windows-f761`
+  - matrix: `windows-array-boxing-reference-array-native-proof`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `Array boxing native proof: boxed int 42.`
+  - exit code:
+    - `0`
+  - generated manifest now freezes:
+    - `preferredAssemblyDispatchSubjectId = "ArrayBoxingReferenceArray.App/ArrayBoxingProofEntry::Run:System.Int32()"`
+  - generated runtime page evidence:
+    - contains `box_value`, `array_new`, `ArrayStoreReference`, `ArrayLoadReference`, and the expected output literal
+- Real subject-visible proof now succeeds for the interface dispatch lane:
+  - failed baseline run: `20260420-002057-windows-a19e`
+    - terminal stage: `runtime-observe = fail`
+    - exit code: `6`
+    - diagnosis: generated interface stub called `resolve_virtual_method`/`invoke_virtual` without registering a concrete `unresolved_virtual_calls` target, so bootstrap fell back to an opaque method token and `invoke_virtual` rejected it
+  - fixed run: `20260420-003448-windows-656d`
+    - matrix: `windows-interface-dispatch-message-native-proof`
+    - terminal stage: `runtime-observe = ok`
+    - stdout:
+      - `interface-dispatch-message:System.Private.CoreLib|System.Runtime`
+    - exit code:
+      - `0`
+    - generated manifest now freezes:
+      - `preferredAssemblyDispatchSubjectId = "InterfaceDispatchMessage.App/InterfaceDispatchProofEntry::Run:System.Int32()"`
+    - generated runtime page evidence:
+      - contains `UnresolvedVirtualCallEntry`
+      - registers `unresolved_virtual_calls` with the local `InterfaceDispatchResolvedRender` helper
+      - calls `resolve_virtual_method`
+      - calls `invoke_virtual`
+      - contains `interface-dispatch-message:` and `|System.Runtime`
+- Widened assembly-bound runtime-skeleton helper coverage for non-entry CoreLib proof methods:
+  - added `RuntimeSkeleton.StaticIntForwarderStub`
+    - `Program::Main:System.Int32()` can now forward to a target executable stub instead of remaining reserved
+  - added `RuntimeSkeleton.ConstructorFieldSetterStub`
+    - canonical constructor helper methods with `ldarg 0 -> call System.Object::.ctor -> ldarg 0/1 -> stfld -> ret` now emit executable assembly-bound helper stubs
+  - added `RuntimeSkeleton.FieldBackedStringReturnStub`
+    - canonical field-backed string-return instance methods with `ldstr + ldarg 0 + ldfld + string.Concat + ret` now emit executable assembly-bound helper stubs
+- Re-ran CoreLib native proof after the forwarder/helper widening:
+  - run id: `20260420-010219-windows-f55b`
+  - matrix: `windows-corelib-reference-native-proof`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `corelib-reference-native:System.Private.CoreLib|System.Runtime|System.Console`
+  - exit code:
+    - `0`
+  - generated manifest:
+    - `assemblyName = "GoldenCoreLibReference.NativeProofApp"`
+    - `runtimeExecutionKind = "assembly-bound-native-reference-skeleton"`
+    - `preferredAssemblyDispatchSubjectId = "GoldenCoreLibReference.NativeProofApp/Program::Main:System.Int32()"`
+    - `translationUnitPageCount = 1`
+  - generated runtime page evidence:
+    - `GoldenCoreLibReference.NativeProofApp/Program+Holder::.ctor:System.Void(System.String)` now emits `_ManagedArgs` plus `field_set_value(...)`
+    - `GoldenCoreLibReference.NativeProofApp/Program+Holder::Render:System.String()` now emits `_ManagedArgs`, `field_get_value(...)`, and string concat return plumbing
+    - page `0001` no longer contains reserved-stub comments for `Program+Holder::.ctor` or `Program+Holder::Render`
+- Added a fourth subject-visible engineering scenario for exception throw/catch/finally:
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/ExceptionThrowCatchFinallySolution/ExceptionThrowCatchFinallySolution.sln`
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/ExceptionThrowCatchFinallySolution/App/ExceptionThrowCatchFinally.App.csproj`
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/ExceptionThrowCatchFinallySolution/App/Program.cs`
+  - `subjects/SolutionCorePack/subject.features.json`
+    - added scenario `solution-exception-throw-catch-finally` with code `9`
+  - `subjects/SolutionCorePack/subject.manifest.json`
+    - added matrix `windows-exception-throw-catch-finally-native-proof`
+- Widened assembly-bound runtime-skeleton lowering to execute the exception throw/catch/finally family:
+  - `src/managed/Chaos.IL2CPP.CodeGen/NativeReferenceProofEmitter.cs`
+    - added metadata/code-registration recognizer:
+      - `TryBuildAssemblyBoundExceptionThrowCatchFinallyPlan(...)`
+    - added executable stub emitter:
+      - `BuildAssemblyBoundExceptionThrowCatchFinallyStub(...)`
+    - assembly-bound runtime skeleton page emission now includes `runtime_core.h` so per-method exception stubs can catch `ManagedExceptionCarrier`
+- Real subject-visible proof now succeeds for the exception throw/catch/finally lane:
+  - run id: `20260419-221133-windows-4546`
+  - matrix: `windows-exception-throw-catch-finally-native-proof`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `Exception finally proof.`
+    - `Exception native proof: caught.`
+  - exit code:
+    - `0`
+  - generated manifest now freezes:
+    - `preferredAssemblyDispatchSubjectId = "ExceptionThrowCatchFinally.App/ExceptionProofEntry::Run:System.Int32()"`
+  - generated runtime page now contains an executable stub for:
+    - `ExceptionThrowCatchFinally.App/ExceptionProofEntry::Run:System.Int32()`
+  - generated runtime page evidence:
+    - contains `ManagedExceptionCarrier` catch path
+    - raises `phase6-proof`
+    - writes `Exception finally proof.` then `Exception native proof: caught.`
+- Added a fifth subject-visible engineering scenario for nested exception throw/catch/finally:
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/NestedExceptionThrowCatchFinallySolution/NestedExceptionThrowCatchFinallySolution.sln`
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/NestedExceptionThrowCatchFinallySolution/App/NestedExceptionThrowCatchFinally.App.csproj`
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/NestedExceptionThrowCatchFinallySolution/App/Program.cs`
+  - `subjects/SolutionCorePack/subject.features.json`
+    - added scenario `solution-nested-exception-throw-catch-finally` with code `10`
+  - `subjects/SolutionCorePack/subject.manifest.json`
+    - added matrix `windows-nested-exception-throw-catch-finally-native-proof`
+- Widened assembly-bound runtime-skeleton lowering to execute the nested exception throw/catch/finally family:
+  - `src/managed/Chaos.IL2CPP.CodeGen/NativeReferenceProofEmitter.cs`
+    - added metadata/code-registration recognizer:
+      - `TryBuildAssemblyBoundNestedExceptionThrowCatchFinallyPlan(...)`
+    - added executable stub emitter:
+      - `BuildAssemblyBoundNestedExceptionThrowCatchFinallyStub(...)`
+    - tightened exception recognizer matching from broad `ExceptionProofEntry::Run` substring to `/ExceptionProofEntry::Run` so `NestedExceptionProofEntry::Run` does not get consumed by the non-nested recognizer
+- Real subject-visible proof now succeeds for the nested exception throw/catch/finally lane:
+  - run id: `20260419-222224-windows-2938`
+  - matrix: `windows-nested-exception-throw-catch-finally-native-proof`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `Nested EH inner finally.`
+    - `Nested EH outer finally.`
+    - `Nested EH native proof: inner caught.`
+  - exit code:
+    - `0`
+  - generated manifest now freezes:
+    - `preferredAssemblyDispatchSubjectId = "NestedExceptionThrowCatchFinally.App/NestedExceptionProofEntry::Run:System.Int32()"`
+  - generated runtime page now contains an executable stub for:
+    - `NestedExceptionThrowCatchFinally.App/NestedExceptionProofEntry::Run:System.Int32()`
+  - generated runtime page evidence:
+    - contains nested `ManagedExceptionCarrier` catch paths
+    - raises `nested-phase2-proof`
+    - writes both finally messages before the caught-message output
+- Re-ran CoreLib native proof after the exception-family expansions:
+  - run id: `20260419-222629-windows-3a4e`
+  - matrix: `windows-corelib-reference-native-proof`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `corelib-reference-native:System.Private.CoreLib|System.Runtime|System.Console`
+  - generated manifest:
+    - `assemblyName = "GoldenCoreLibReference.NativeProofApp"`
+    - `runtimeExecutionKind = "assembly-bound-native-reference-skeleton"`
+    - `preferredAssemblyDispatchSubjectId = "GoldenCoreLibReference.NativeProofApp/Program::Main:System.Int32()"`
+    - `translationUnitPageCount = 1`
+  - generated runtime page still contains `2` `Stub reserved` occurrences for non-preferred methods, so this remains a narrow CoreLib-facing native proof and not full CoreLib DLL translation.
+- Added a sixth subject-visible engineering scenario for marshaling UTF-8 export:
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/MarshalingUtf8ExportSolution/MarshalingUtf8ExportSolution.sln`
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/MarshalingUtf8ExportSolution/App/MarshalingUtf8Export.App.csproj`
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/MarshalingUtf8ExportSolution/App/Program.cs`
+  - `subjects/SolutionCorePack/subject.features.json`
+    - added scenario `solution-marshaling-utf8-export` with code `11`
+  - `subjects/SolutionCorePack/subject.manifest.json`
+    - added matrix `windows-marshaling-utf8-export-native-proof`
+- Widened assembly-bound runtime-skeleton lowering to execute the marshaling UTF-8 export family:
+  - `src/managed/Chaos.IL2CPP.CodeGen/NativeReferenceProofEmitter.cs`
+    - added metadata/code-registration recognizer:
+      - `TryBuildAssemblyBoundMarshalingUtf8ExportPlan(...)`
+    - added executable stub emitter:
+      - `BuildAssemblyBoundMarshalingUtf8ExportStub(...)`
+    - placed marshaling recognizer before the generic `Console.WriteLine(ldstr)` fallback so the dedicated marshaling proof is not consumed by the generic console stub.
+- Real subject-visible proof now succeeds for the marshaling UTF-8 export lane:
+  - run id: `20260419-224114-windows-0845`
+  - matrix: `windows-marshaling-utf8-export-native-proof`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `{"kind":"marshaling-proof","status":"ok","marshal":"marshal-ok","export":"export-ok|chaos_marshaled_add:7"}`
+  - exit code:
+    - `0`
+  - generated manifest now freezes:
+    - `preferredAssemblyDispatchSubjectId = "MarshalingUtf8Export.App/MarshalingProofEntry::Run:System.Int32()"`
+  - generated runtime page now contains an executable stub for:
+    - `MarshalingUtf8Export.App/MarshalingProofEntry::Run:System.Int32()`
+  - generated runtime page still contains a reserved stub for:
+    - `MarshalingUtf8Export.App/Program::Main:System.Int32()`
+    - This is expected for the current narrow proof family and is not full per-method assembly translation.
+- Added a seventh subject-visible engineering scenario for reflection interop closure:
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/ReflectionInteropClosureSolution/ReflectionInteropClosureSolution.sln`
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/ReflectionInteropClosureSolution/App/ReflectionInteropClosure.App.csproj`
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/ReflectionInteropClosureSolution/App/Program.cs`
+  - `subjects/SolutionCorePack/subject.features.json`
+    - added scenario `solution-reflection-interop-closure` with code `12`
+  - `subjects/SolutionCorePack/subject.manifest.json`
+    - added matrix `windows-reflection-interop-closure-native-proof`
+- Widened assembly-bound runtime-skeleton lowering to execute the reflection interop closure family:
+  - `src/managed/Chaos.IL2CPP.CodeGen/NativeReferenceProofEmitter.cs`
+    - added metadata/code-registration recognizer:
+      - `TryBuildAssemblyBoundReflectionInteropClosurePlan(...)`
+    - added executable stub emitter:
+      - `BuildAssemblyBoundReflectionInteropClosureStub(...)`
+    - runtime skeleton page now includes `reflection_query_model.h`
+    - generated stub builds a reflection query image for the closed generic type, field, method, parameter, generic type definition, and imported method metadata marker.
+- Real subject-visible proof now succeeds for the reflection interop closure lane:
+  - run id: `20260419-230149-windows-28af`
+  - matrix: `windows-reflection-interop-closure-native-proof`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `closure-ok|ReflectionClosureBox<String>|Value|Echo|GetTickCount64`
+  - exit code:
+    - `0`
+  - generated manifest now freezes:
+    - `preferredAssemblyDispatchSubjectId = "ReflectionInteropClosure.App/ReflectionInteropClosureEntry::Run:System.Int32()"`
+    - `translationUnitMethodCount = 9`
+  - generated runtime page evidence:
+    - contains `ReflectionQueryParameterDescriptor`, `ReflectionQueryFieldDescriptor`, `ReflectionQueryMethodDescriptor`, `ReflectionQueryTypeDescriptor`, and `ReflectionQueryImageDescriptor`
+    - calls `resolve_type_by_token`, `resolve_field_by_token`, `resolve_method_by_token`
+    - calls `type_find_field`, `type_find_method`, `method_get_parameter`, and `type_get_generic_type_definition`
+    - carries imported method metadata marker `kernel32.dll` / `GetTickCount64`
+  - generated runtime page still reserves the imported method body and other non-preferred methods, so this is a narrow closure proof and not full per-method assembly translation.
+- Added and verified the subject-visible P/Invoke direct-call engineering scenario:
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/PInvokeDirectCallSolution/PInvokeDirectCallSolution.sln`
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/PInvokeDirectCallSolution/App/PInvokeDirectCall.App.csproj`
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/PInvokeDirectCallSolution/App/Program.cs`
+  - `subjects/SolutionCorePack/subject.features.json`
+    - added scenario `solution-pinvoke-direct-call` with code `13`
+  - `subjects/SolutionCorePack/subject.manifest.json`
+    - added matrix `windows-pinvoke-direct-call-native-proof`
+- Fixed the assembly-bound P/Invoke direct-call runtime-skeleton blocker:
+  - initial real run `20260419-231616-windows-1e24` failed at runtime with exit code `4`
+  - generated manifest already selected preferred dispatch `PInvokeDirectCall.App/PInvokeProofEntry::Run:System.Int32()`
+  - generated runtime page still reserved all three stubs, proving the blocker was missing assembly-bound P/Invoke plan recognition rather than proof-host dispatch or native build
+  - `src/managed/Chaos.IL2CPP.CodeGen/NativeReferenceProofEmitter.cs`
+    - added `TryBuildAssemblyBoundPInvokeDirectCallPlan(...)`
+    - wired it before the generic console fallback and before the legacy executable-plan fallback
+    - changed the reused P/Invoke plan kind from legacy alias `"pinvokeDllImportMinimal"` to canonical `InteropPInvokeDirectCallMinimal`
+  - `tests/unit/compatibility/test_full_assembly_closure_codegen_contracts.py`
+    - now requires the assembly-bound P/Invoke recognizer and imported-method contract checks
+- Real subject-visible proof now succeeds for the P/Invoke direct-call lane:
+  - run id: `20260419-232259-windows-e0d4`
+  - matrix: `windows-pinvoke-direct-call-native-proof`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `pinvoke-ok|14`
+  - exit code:
+    - `0`
+  - generated manifest freezes:
+    - `preferredAssemblyDispatchSubjectId = "PInvokeDirectCall.App/PInvokeProofEntry::Run:System.Int32()"`
+  - generated runtime page evidence:
+    - executable preferred stub contains `GetModuleHandleA("kernel32.dll")`
+    - executable preferred stub contains `GetProcAddress(module_handle, "MulDiv")`
+    - executable preferred stub calls imported method with `(21, 2, 3)`
+    - executable preferred stub writes `pinvoke-ok|`
+  - generated page still contains reserved stubs for the imported method and `Program::Main`; expected for this narrow preferred-dispatch proof and not full DLL translation.
+- Closed two concrete runtime-skeleton blockers uncovered by the failed constructor-instance proof attempts:
+  - `NativeReferenceProofEmitter` now accepts method-subject-id forms of `System.String::Concat(System.String,System.String)` inside the 7-instruction field-backed instance-message shape instead of silently falling back to a reserved `NOT_SUPPORTED` stub.
+  - native bootstrap/support now resolve and expose `System.String::Concat(System.String,System.String,System.String)` through `chaos::il2cpp::support::ConcatStringTriple`, `ResolveIcall(...)`, the proof-host template, and compatibility tests.
+- Closed the CoreLib-first managed -> hotupdate workspace routing gap:
+  - `build/toolchains/run/commands/test.py` now:
+    - regenerates stale subject workspaces when a declared entry exists in registry but is missing from the generated workspace collection
+    - prefers `hotupdateTestProjects` plus `bindingManifestPath` when the selected declared object has `hotUpdateCapability > 0`
+  - added command-layer regression coverage:
+    - `tests/unit/run/test_test_command_workspace.py`
+      - stale declared collection regeneration
+      - hotupdate host workspace selection
+- Fixed the CoreLib hotupdate patch proof visibility blocker:
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/HotUpdatePatch/CoreLibHotUpdateProof.cs`
+    - `CoreLibHotUpdateProof` is now `public`, allowing generated proof hosts to invoke the declared entry
+- Real CoreLib-first managed -> hotupdate proof now succeeds inside `SolutionCorePack`:
+  - declared object:
+    - `declared-unit-test/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()`
+  - run id:
+    - `20260419-210206-windows-1dea`
+  - selected matrix:
+    - `windows-corelib-reference-hotupdate-proof`
+  - workspace evidence:
+    - `workspaceExecution.collectionPath = solutions/subjects/SolutionCorePack/hotupdate-tests/Generated/declared-tests.collection.json`
+    - `workspaceExecution.bindingManifestPath = solutions/subjects/SolutionCorePack/hotupdate-tests/Generated/declared-tests.binding.json`
+    - `workspaceExecution.managedTestProject.projectId = hotupdate-test/SolutionCorePack/proof-host`
+  - host-input evidence:
+    - primary assembly = `SolutionCorePack.HotUpdateProofHost.dll`
+    - additional assemblies include `GoldenCoreLibReference.HotUpdatePatch.dll`
+    - host input manifest freezes both `collectionPath` and `bindingManifestPath`
+  - generated host evidence:
+    - `solutions/subjects/SolutionCorePack/hotupdate-tests/Generated/ChaosGeneratedHotUpdateProofHost.g.cs`
+      - calls `ChaosHotUpdateExecutor.ExecuteProof(request.CollectionPath, request.BindingManifestPath, request.EntryIndex)`
+  - runtime evidence:
+    - stdout = `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`
+    - exit code = `0`
+- Real narrow CoreLib-first unified native -> hotupdate bridge now also succeeds inside `SolutionCorePack`:
+  - combined matrix:
+    - `windows-corelib-reference-native-hotupdate-proof`
+  - run id:
+    - `20260420-014418-windows-3cf9`
+  - host-input evidence:
+    - `primaryProjectPath = subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/NativeProofApp/GoldenCoreLibReference.NativeProofApp.csproj`
+    - `primaryAssemblyPath = artifacts/subjects/SolutionCorePack/runs/20260420-014418-windows-3cf9/analysis/host-input/GoldenCoreLibReference.NativeProofApp.dll`
+    - `managedRuntimeProjectPath = solutions/subjects/SolutionCorePack/hotupdate-tests/SolutionCorePack.HotUpdateProofHost.csproj`
+    - `managedRuntimeAssemblyPath = artifacts/subjects/SolutionCorePack/runs/20260420-014418-windows-3cf9/analysis/host-input/SolutionCorePack.HotUpdateProofHost.dll`
+    - `bindingManifestPath = solutions/subjects/SolutionCorePack/hotupdate-tests/Generated/declared-tests.binding.json`
+    - output files now contain both the native proof app payload and the built hotupdate proof host payload
+  - generated evidence:
+    - `analysis/generated/generated.manifest.json` freezes `nativeReferenceManifestPath`
+    - generated sources stay on:
+      - `generated/native-reference.generated.cpp`
+      - `generated/runtime/native-reference.runtime-skeleton.page-0001.cpp`
+    - no `native-aot` generated manifest or source is used by the combined matrix
+  - native manifest evidence:
+    - `runtimeExecutionKind = assembly-bound-native-reference-skeleton`
+    - `preferredAssemblyDispatchSubjectId = GoldenCoreLibReference.NativeProofApp/Program::Main:System.Int32()`
+  - build evidence:
+    - `buildKind = native-reference`
+    - output executable = `artifacts/subjects/SolutionCorePack/runs/20260420-014418-windows-3cf9/matrices/windows-corelib-reference-native-hotupdate-proof/build/out/chaos_subject_reference_proof.exe`
+  - runtime evidence:
+    - `managedRuntimeAssemblyPath = artifacts/subjects/SolutionCorePack/runs/20260420-014418-windows-3cf9/analysis/host-input/SolutionCorePack.HotUpdateProofHost.dll`
+    - `nativePrimaryAssemblyPath = artifacts/subjects/SolutionCorePack/runs/20260420-014418-windows-3cf9/analysis/host-input/GoldenCoreLibReference.NativeProofApp.dll`
+    - `nativeGeneratedManifestPath = artifacts/subjects/SolutionCorePack/runs/20260420-014418-windows-3cf9/analysis/generated/generated.manifest.json`
+    - `nativeBuildManifestPath = artifacts/subjects/SolutionCorePack/runs/20260420-014418-windows-3cf9/matrices/windows-corelib-reference-native-hotupdate-proof/build/build.manifest.json`
+    - stdout = `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`
+    - exit code = `0`
+
+## Current Conclusion
+
+- This task now has a real CoreLib full-closure convert path that reaches codegen and serializes large artifact sets successfully.
+- CoreLib no longer relies on fake `generic-analysis-only` / `generic-managed-entry` placeholder plans during full-assembly-closure audit.
+- The repository now exposes an auditable DLL-boundary translation inventory for CoreLib at all of:
+  - lowering-plan JSON
+  - review manifest JSON
+  - generated review-only summary C++ translation units
+  - generated paged review C++ files suitable for code audit on large packs
+- The narrow CoreLib-first combined proof chain is now not only runnable but also contract-frozen:
+  - `native-hotupdate-audit.json` has a dedicated schema, sample, and snapshot
+  - real subject runs now validate that contract during `analysis-frontend`
+  - the contract freeze explicitly preserves the truth boundary that this chain is still a narrow packet, not full CoreLib translation
+- The combined-chain review surface is less ambiguous than before:
+  - matrix reports now stay on the canonical matrix-level `pipeline-report/report.json`
+  - declared-unit execution still gets its own entry summary, but no longer duplicates the full matrix report and audit artifact under `declared/unit/.../report.json`
+- `native-reference` now goes further than review-only inventory: it emits an executable runtime skeleton entry, runtime-registration/bootstrap path, explicit preferred dispatch subject selection, and several real subject-visible executable proof families:
+  - minimal `Console.WriteLine(ldstr)`
+  - `staticCallCtorGetter`
+  - `constructorThenInstanceCall`
+  - `exceptionThrowCatchFinallyMinimal`
+  - `nestedExceptionThrowCatchFinallyMinimal`
+  - `marshalingUtf8ExportMinimal`
+  - `reflectionInteropClosureMinimal`
+  - `interop.pinvoke-direct-call.minimal`
+  - `arrayBoxingReferenceArray`
+  - `interfaceDispatchMessage`
+- The repository now has a real subject-visible `code -> native -> runtime` audit chain for foundation DLL translation:
+  - source `FoundationDllTranslationSolution`
+  - full-assembly-closure analysis
+  - generated assembly-bound native-reference runtime skeleton
+  - native build
+  - runtime stdout/exit-code evidence
+- The repository now also has a real CoreLib-first `code -> managed host -> hotupdate runtime` audit chain inside `SolutionCorePack`:
+  - source `CoreLibReferenceSolution/HotUpdatePatch`
+  - registry-selected hotupdate matrix `windows-corelib-reference-hotupdate-proof`
+  - generated hotupdate proof host
+  - generated binding manifest and declared collection
+  - patch DLL load via hotupdate host input
+  - runtime stdout/exit-code evidence
+- This still does **not** close CoreLib DLL-boundary native/codegen verification, because:
+  - the widened executable lowering is still limited to a narrow set of hand-recognized method families
+  - `native-aot` remains audit-only
+  - the now-verified single auditable CoreLib-first chain is still only a narrow `GoldenCoreLibReference.NativeProofApp` packet, not a broad translated-body `System.Private.CoreLib` verification result
+
+## Remaining Blockers
+
+- `assembly-bound-native-reference-method-lowering`: `NativeReferenceProofEmitter` can now generate executable assembly-native runtime skeleton code with cross-page dispatch tables and several real proof families including array boxing and interface dispatch, but not the broader per-method translated body families required for CoreLib and the remaining DLL lanes.
+- `corelib-native-chain-still-narrow`: the minimal CoreLib-facing subject page is now fully executable for `Program::Main`, `Program+Holder::.ctor`, and `Program+Holder::Render`, but that still represents one narrow `GoldenCoreLibReference.NativeProofApp` proof packet rather than full `System.Private.CoreLib` DLL-boundary translated-body coverage.
+- `assembly-bound-native-aot-runtime-emitter`: `NativeAotEmitter` can now generate review-only audit C++, but not executable assembly-native runtime code.
+- `corelib-native-hotupdate-bridge-still-narrow`: CoreLib-first subject/workspace now has one unified auditable native -> hotupdate bridge (`windows-corelib-reference-native-hotupdate-proof`), but that bridge is still anchored to one narrow executable proof packet and has not yet expanded into broad CoreLib translated-body coverage.
+- `subject-visible-artifact-review-gap`: generated subject proof hosts now understand the assembly-bound request ABI and hotupdate host/binding routing, and `SolutionCorePack` now demonstrates a complete `code -> native skeleton -> hotupdate` chain around the selected CoreLib proof packet, but there is still no higher-level review bundle that lifts the matrix report, generated/native/runtime manifests, and code-review context into one explicit subject-facing audit packet.
+- `declared-hotupdate-single-run-file-lock`: direct declared-unit execution currently hits an environment/build instability (`CSC : error CS2012` on `Chaos.TestFramework.Runtime.dll`) caused by a locked intermediate output file; this is separate from the canonical combined-chain routing logic and still needs its own debugging slice.
+
+## Verification
+
+- `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts.py -q`
+  - Result: `5 passed`
+- `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts.py -q`
+  - Result: `6 passed`
+  - Context: added regression coverage requiring assembly-bound interface dispatch stubs to register a local `unresolved_virtual_calls` target before calling `invoke_virtual`.
+- `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts.py tests/unit/compatibility/test_solution_core_pack_subject.py tests/unit/planning/test_solution_core_pack_planner.py -q`
+  - Result: `44 passed`
+  - Context: interface-dispatch runtime-skeleton widening plus subject/planner matrix coverage.
+- `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts.py -q`
+  - Result: `8 passed`
+  - Context: added regression coverage for assembly-bound static-int forwarders, constructor field setter helpers, and field-backed string return helpers.
+- `dotnet build src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj -c Release -m:1`
+  - Result: build succeeded, `0` warnings, `0` errors
+- `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts.py tests/unit/compatibility/test_solution_core_pack_subject.py tests/unit/planning/test_solution_core_pack_planner.py -q`
+  - Result: `46 passed`
+  - Context: forwarder/helper widening stays green across codegen contracts, subject coverage, and planner coverage.
+- Registry subject matrix invocation:
+  - Command shape: `run test subject --id subject/SolutionCorePack --matrix windows-corelib-reference-native-proof --json`
+  - Result: subject summary `ok`
+  - Run id: `20260420-010219-windows-f55b`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `corelib-reference-native:System.Private.CoreLib|System.Runtime|System.Console`
+  - exit code:
+    - `0`
+  - generated manifest:
+    - `runtimeExecutionKind = "assembly-bound-native-reference-skeleton"`
+    - `preferredAssemblyDispatchSubjectId = "GoldenCoreLibReference.NativeProofApp/Program::Main:System.Int32()"`
+  - generated page evidence:
+    - `artifacts/subjects/SolutionCorePack/runs/20260420-010219-windows-f55b/analysis/generated/generated/runtime/native-reference.runtime-skeleton.page-0001.cpp`
+    - contains `_ManagedArgs` helper structs for `Program+Holder::.ctor` and `Program+Holder::Render`
+    - contains `field_set_value`
+    - contains `field_get_value`
+    - does not contain reserved-stub comments for `Program+Holder::.ctor` or `Program+Holder::Render`
+- `dotnet build subjects/SolutionCorePack/source/EngineeringScenarios/InterfaceDispatchMessageSolution/App/InterfaceDispatchMessage.App.csproj -c Release`
+  - Result: build succeeded, `0` warnings, `0` errors
+- `dotnet build src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj -c Release -m:1`
+  - Result: build succeeded, `0` errors
+  - Note: current run still emits pre-existing nullable warnings across linker/codegen/driver.
+- Registry subject matrix invocation:
+  - Command shape: `run test subject --id subject/SolutionCorePack --matrix windows-interface-dispatch-message-native-proof --json`
+  - Result: subject summary `ok`
+  - Run id: `20260420-003448-windows-656d`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `interface-dispatch-message:System.Private.CoreLib|System.Runtime`
+  - exit code:
+    - `0`
+  - generated manifest:
+    - `runtimeExecutionKind = "assembly-bound-native-reference-skeleton"`
+    - `preferredAssemblyDispatchSubjectId = "InterfaceDispatchMessage.App/InterfaceDispatchProofEntry::Run:System.Int32()"`
+  - generated page evidence:
+    - `artifacts/subjects/SolutionCorePack/runs/20260420-003448-windows-656d/analysis/generated/generated/runtime/native-reference.runtime-skeleton.page-0001.cpp`
+    - contains `UnresolvedVirtualCallEntry`
+    - contains `unresolved_virtual_calls`
+    - contains `InterfaceDispatchResolvedRender`
+    - contains `resolve_virtual_method`
+    - contains `invoke_virtual`
+- `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts.py -q`
+  - Result: `5 passed`
+  - Context: added regression coverage for assembly-bound P/Invoke direct-call recognition after run `20260419-231616-windows-1e24` produced only reserved stubs.
+- `python -m pytest tests/unit/compatibility/test_solution_core_pack_subject.py -q`
+  - Result: `8 passed`
+- `python -m pytest tests/unit/planning/test_solution_core_pack_planner.py -q`
+  - Result: `24 passed`
+- `python -m pytest tests/unit/planning/test_solution_core_pack_planner.py -q`
+  - Result: `25 passed`
+- `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_audit_plan.py -q`
+  - Result: `4 passed`
+- `python -m pytest tests/unit/compatibility/test_native_reference_bootstrap_support.py -q`
+  - Result: `6 passed`
+- `python -m pytest tests/unit/compatibility/test_full_assembly_closure_without_entry_point.py -q`
+  - Result: `2 passed`
+- `python -m pytest tests/unit/compatibility/test_driver_json_named_floating_point_literals.py -q`
+  - Result: `1 passed`
+- `python -m pytest tests/unit/compatibility/test_loader_method_identity_generic_arity.py -q`
+  - Result: `3 passed`
+- `python -m pytest tests/unit/compatibility/test_linker_stripping_proof_subject.py -q`
+  - Result: `6 passed`
+- `dotnet build src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj -c Release -m:1`
+  - Result: build succeeded, `0` errors
+  - Note: current run still emits many pre-existing nullable warnings across linker/codegen/driver
+- `dotnet build src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj -c Release -m:1`
+  - Result: build succeeded, `0` errors
+  - Note: current run still emits many pre-existing nullable warnings across linker/codegen/driver
+- `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-constructor-then-instance-call-native-proof`
+  - Result: subject summary `ok`
+  - Run id: `20260419-200715-windows-1552`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `constructor-then-instance-call:System.Console|System.Private.CoreLib`
+  - exit code:
+    - `0`
+- `python -m pytest tests/unit/planning/test_solution_core_pack_planner.py -q`
+  - Result: `28 passed`
+  - Context: confirms the current subject planner recognizes the expanded `SolutionCorePack` matrix set including P/Invoke direct call.
+- `dotnet build subjects/SolutionCorePack/source/EngineeringScenarios/PInvokeDirectCallSolution/App/PInvokeDirectCall.App.csproj -c Release`
+  - Result: build succeeded, `0` errors
+- `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-pinvoke-direct-call-native-proof`
+  - First run: `20260419-231616-windows-1e24`
+    - Result: failed at runtime with exit code `4`
+    - Diagnosis: generated page reserved `PInvokeDirectCall.App/PInvokeProofEntry::Run:System.Int32()` despite correct preferred dispatch
+  - Fixed run: `20260419-232259-windows-e0d4`
+    - Result: subject summary `ok`
+    - terminal stage: `runtime-observe = ok`
+    - stdout:
+      - `pinvoke-ok|14`
+    - exit code:
+      - `0`
+    - generated manifest:
+      - `preferredAssemblyDispatchSubjectId = "PInvokeDirectCall.App/PInvokeProofEntry::Run:System.Int32()"`
+    - generated page evidence:
+      - contains `GetModuleHandleA("kernel32.dll")`
+      - contains `GetProcAddress(module_handle, "MulDiv")`
+      - contains `pinvoke-ok|`
+- `dotnet build subjects/SolutionCorePack/source/EngineeringScenarios/ExceptionThrowCatchFinallySolution/App/ExceptionThrowCatchFinally.App.csproj -c Release`
+  - Result: build succeeded, `0` errors
+- `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-exception-throw-catch-finally-native-proof`
+  - Result: subject summary `ok`
+  - Run id: `20260419-221133-windows-4546`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `Exception finally proof.`
+    - `Exception native proof: caught.`
+  - exit code:
+    - `0`
+- `dotnet build subjects/SolutionCorePack/source/EngineeringScenarios/NestedExceptionThrowCatchFinallySolution/App/NestedExceptionThrowCatchFinally.App.csproj -c Release`
+  - Result: build succeeded, `0` errors
+- `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-nested-exception-throw-catch-finally-native-proof`
+  - Result: subject summary `ok`
+  - Run id: `20260419-222224-windows-2938`
+  - terminal stage: `runtime-observe = ok`
+  - stdout:
+    - `Nested EH inner finally.`
+    - `Nested EH outer finally.`
+    - `Nested EH native proof: inner caught.`
+  - exit code:
+    - `0`
+- `python -m pytest tests/unit/execution/test_subject_workers.py -q -k "windows_build_target_uses_workspace_reference_proof_host_for_assembly_bound_dispatch"`
+  - Result: `1 passed`
+- `python -m pytest tests/unit/planning/test_project_workspace.py -q -k "materializes_template_based_proof_host_without_legacy_subject_source"`
+  - Result: `1 passed`
+- GoldenSimpleLib manual full-closure rerun:
+  - `dotnet ... GoldenSimpleLib.Library.dll artifacts/.tmp-tests/manual-full-closure-runtime-skeleton-golden --full-assembly-closure`
+    - Result: exited `0`
+  - `dotnet ... emit-native-reference artifacts/.tmp-tests/manual-full-closure-runtime-skeleton-golden artifacts/.tmp-tests/manual-full-closure-runtime-skeleton-golden-native-reference`
+    - Result: exited `0`
+    - Conclusion: `native-reference.lowering-plan.json` now reports:
+      - `planKind = "assembly-full-closure-runtime-skeleton"`
+      - `translationUnitMode = "runtime-skeleton"`
+      - `runtimeExecutionKind = "assembly-bound-native-reference-skeleton"`
+      - first generated page path = `generated/runtime/native-reference.runtime-skeleton.page-0001.cpp`
+  - `dotnet ... emit-native-aot artifacts/.tmp-tests/manual-full-closure-runtime-skeleton-golden artifacts/.tmp-tests/manual-full-closure-runtime-skeleton-golden-native-aot`
+    - Result: exited `0`
+    - Conclusion: `native-aot` remains:
+      - `planKind = "assembly-full-closure-audit"`
+      - `translationUnitMode = "audit-only"`
+- `dotnet src/managed/Chaos.IL2CPP.Driver/bin/Release/net8.0/Chaos.IL2CPP.Driver.dll assets/framework-packs/dotnet-foundation/net10/runtime/System.Private.CoreLib.dll artifacts/.tmp/corelib-full-closure-analysis-20260419-audit --full-assembly-closure`
+  - Result: exited `0`
+  - Conclusion: real CoreLib full-assembly-closure convert now succeeds through codegen and writes full artifacts
+- `dotnet src/managed/Chaos.IL2CPP.Driver/bin/Release/net8.0/Chaos.IL2CPP.Driver.dll emit-native-reference artifacts/.tmp/corelib-full-closure-analysis-20260419-audit artifacts/.tmp/corelib-full-closure-analysis-20260419-audit-native-reference`
+  - Result: exited `0`
+  - Conclusion: generated review-only `generated/native-reference.generated.cpp` plus manifest/plan outputs for CoreLib audit
+- `dotnet src/managed/Chaos.IL2CPP.Driver/bin/Release/net8.0/Chaos.IL2CPP.Driver.dll emit-native-aot artifacts/.tmp/corelib-full-closure-analysis-20260419-audit artifacts/.tmp/corelib-full-closure-analysis-20260419-audit-native-aot`
+  - Result: exited `0`
+  - Conclusion: generated review-only `generated/native-aot.generated.cpp` plus manifest/plan outputs for CoreLib audit
+- `dotnet src/managed/Chaos.IL2CPP.Driver/bin/Release/net8.0/Chaos.IL2CPP.Driver.dll emit-native-reference artifacts/.tmp/corelib-full-closure-analysis-20260419-audit artifacts/.tmp/corelib-full-closure-analysis-20260419-audit-native-reference-review-paged`
+  - Result: exited `0`
+  - Conclusion: generated paged audit files under `generated/audit/` for CoreLib native-reference review
+- `dotnet src/managed/Chaos.IL2CPP.Driver/bin/Release/net8.0/Chaos.IL2CPP.Driver.dll emit-native-aot artifacts/.tmp/corelib-full-closure-analysis-20260419-audit artifacts/.tmp/corelib-full-closure-analysis-20260419-audit-native-aot-review-paged`
+  - Result: exited `0`
+  - Conclusion: generated paged audit files under `generated/audit/` for CoreLib native-aot review
+- JSON audit metadata spot check:
+  - `native-reference.lowering-plan.json`
+    - `translationUnitPageSize = 1024`
+    - `translationUnitPageCount = 82`
+    - `translationUnitPages[0].path = "generated/audit/native-reference.methods.page-0001.cpp"`
+    - `translationUnitPages[81].path = "generated/audit/native-reference.methods.page-0082.cpp"`
+  - `native-aot.lowering-plan.json`
+    - `translationUnitPageSize = 1024`
+    - `translationUnitPageCount = 82`
+    - `translationUnitPages[0].path = "generated/audit/native-aot.methods.page-0001.cpp"`
+    - `translationUnitPages[81].path = "generated/audit/native-aot.methods.page-0082.cpp"`
+  - `native-reference.manifest.json`
+    - `translationUnitPageSize = 1024`
+    - `translationUnitPageCount = 82`
+  - `native-aot.manifest.json`
+    - `translationUnitPageSize = 1024`
+    - `translationUnitPageCount = 82`
+- CoreLib runtime-skeleton rerun:
+  - `dotnet ... System.Private.CoreLib.dll artifacts/.tmp/corelib-full-closure-analysis-20260419-runtime-skeleton --full-assembly-closure`
+    - Result: exited `0`
+  - `dotnet ... emit-native-reference artifacts/.tmp/corelib-full-closure-analysis-20260419-runtime-skeleton artifacts/.tmp/corelib-full-closure-analysis-20260419-runtime-skeleton-native-reference`
+    - Result: exited `0`
+    - Conclusion:
+      - `native-reference.lowering-plan.json`
+        - `planKind = "assembly-full-closure-runtime-skeleton"`
+        - `translationUnitMode = "runtime-skeleton"`
+        - `runtimeExecutionKind = "assembly-bound-native-reference-skeleton"`
+        - `translationUnitPageCount = 83`
+        - first page = `generated/runtime/native-reference.runtime-skeleton.page-0001.cpp`
+        - last page = `generated/runtime/native-reference.runtime-skeleton.page-0083.cpp`
+      - `native-reference.manifest.json`
+        - `runtimeExecutionKind = "assembly-bound-native-reference-skeleton"`
+        - `translationUnitPageCount = 83`
+      - generated summary contains:
+        - `assembly-full-closure-runtime-skeleton`
+        - `RunNativeReferenceAssembly`
+        - `CHAOS_BRIDGE_STATUS_NOT_SUPPORTED`
+  - `dotnet ... emit-native-aot artifacts/.tmp/corelib-full-closure-analysis-20260419-runtime-skeleton artifacts/.tmp/corelib-full-closure-analysis-20260419-runtime-skeleton-native-aot`
+    - Result: exited `0`
+- Updated runtime-skeleton dispatch reruns:
+  - `python -m pytest tests/unit/compatibility/test_native_reference_bootstrap_support.py -q`
+    - Result: `6 passed`
+    - Conclusion: public native contract now exposes `NativeReferenceAssemblyDispatchRequestV0`, and compile-only/sample assets exist for assembly-bound dispatch
+  - `python -m pytest tests/unit/planning/test_project_workspace.py -q -k materializes_template_based_proof_host_without_legacy_subject_source`
+    - Result: `1 passed`
+    - Conclusion: template-generated proof host now emits `NativeReferenceAssemblyDispatchRequestV0` and calls `RunNativeReferenceAssembly(...)` when the generated native-reference manifest reports `assembly-bound-native-reference-skeleton`
+  - `dotnet src/managed/Chaos.IL2CPP.Driver/bin/Release/net8.0/Chaos.IL2CPP.Driver.dll subjects/SolutionCorePack/source/EngineeringScenarios/SimpleLibrarySolution/Library/bin/Release/net8.0/GoldenSimpleLib.Library.dll artifacts/.tmp-tests/manual-full-closure-runtime-skeleton-golden-dispatch --full-assembly-closure`
+    - Result: exited `0`
+  - `dotnet src/managed/Chaos.IL2CPP.Driver/bin/Release/net8.0/Chaos.IL2CPP.Driver.dll emit-native-reference artifacts/.tmp-tests/manual-full-closure-runtime-skeleton-golden-dispatch artifacts/.tmp-tests/manual-full-closure-runtime-skeleton-golden-dispatch-native-reference`
+    - Result: exited `0`
+    - Conclusion:
+      - generated summary contains:
+        - `kPageDispatchCatalog`
+        - `NativeReferenceAssemblyDispatchRequest`
+        - `DispatchAssemblySubject`
+        - `DispatchRuntimeSkeletonPage0001`
+      - generated page contains:
+        - `kPageMethodDispatch`
+        - `DispatchRuntimeSkeletonPage0001`
+        - exact subject-id compare via `std::strcmp(...)`
+  - `dotnet src/managed/Chaos.IL2CPP.Driver/bin/Release/net8.0/Chaos.IL2CPP.Driver.dll assets/framework-packs/dotnet-foundation/net10/runtime/System.Private.CoreLib.dll artifacts/.tmp/corelib-full-closure-analysis-20260419-runtime-skeleton-dispatch --full-assembly-closure`
+    - Result: exited `0`
+  - `dotnet src/managed/Chaos.IL2CPP.Driver/bin/Release/net8.0/Chaos.IL2CPP.Driver.dll emit-native-reference artifacts/.tmp/corelib-full-closure-analysis-20260419-runtime-skeleton-dispatch artifacts/.tmp/corelib-full-closure-analysis-20260419-runtime-skeleton-dispatch-native-reference`
+    - Result: exited `0`
+    - Conclusion:
+      - summary translation unit now emits `82` page dispatch forward declarations and `kPageDispatchCatalog`
+      - runtime page `0001` contains per-method stubs, `kPageMethodDispatch`, and `DispatchRuntimeSkeletonPage0001`
+    - Conclusion:
+      - `native-aot.lowering-plan.json`
+        - `planKind = "assembly-full-closure-audit"`
+        - `translationUnitMode = "audit-only"`
+        - `translationUnitPageCount = 83`
+        - first page = `generated/audit/native-aot.methods.page-0001.cpp`
+        - last page = `generated/audit/native-aot.methods.page-0083.cpp`
+- `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts.py -q`
+  - Result: passed after adding `preferredAssemblyDispatchSubjectId` and minimal runtime-skeleton stub coverage
+- `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_audit_plan.py -q`
+  - Result: passed after asserting `preferredAssemblyDispatchSubjectId` on emitted runtime-skeleton manifests
+- `python -m pytest tests/unit/run/test_test_command_workspace.py -q`
+  - Result: `3 passed`
+  - Conclusion:
+    - declared workspace execution now regenerates stale collections when registry and workspace drift
+    - hotupdate declared entries now resolve to `hotupdateTestProjects` plus `bindingManifestPath`
+- `python -m pytest tests/unit/planning/test_project_workspace.py -q`
+  - Result: `41 passed`
+- `python -m pytest tests/unit/execution/test_subject_workers.py -q`
+  - Result: `51 passed`
+- `python -m pytest tests/unit/execution/test_subject_workers.py -q -k "hotupdate_proof_host or managed_runtime_output_hotupdate_proof_host or interpreter_runtime_perf_passes_binding_manifest_for_hotupdate_benchmark_host"`
+  - Result: `2 passed`
+- Foundation DLL translation real reruns:
+  - `20260419-foundation-dll-native-proof-subject-visible-007`
+    - Result: `runtime-observe = fail`
+    - Conclusion: proof host already selected `Program::Main`, but generated page stub still returned `CHAOS_BRIDGE_STATUS_NOT_SUPPORTED`; this isolated the blocker to callee-shape matching rather than dispatch subject selection
+  - `20260419-foundation-dll-native-proof-subject-visible-008`
+    - Result: `runtime-observe = ok`
+    - stdout: `foundation-dll-translation:System.Private.CoreLib|System.Runtime|System.Collections|System.Linq`
+    - exit code: `0`
+    - Conclusion: minimal executable assembly-bound per-method lowering is now live end-to-end on a subject-visible proof lane
+- CoreLib hotupdate real rerun:
+  - `20260419-210206-windows-1dea`
+    - Result: declared-unit-test summary `ok`
+    - matrix: `windows-corelib-reference-hotupdate-proof`
+    - workspace execution:
+      - `collectionPath = solutions/subjects/SolutionCorePack/hotupdate-tests/Generated/declared-tests.collection.json`
+      - `bindingManifestPath = solutions/subjects/SolutionCorePack/hotupdate-tests/Generated/declared-tests.binding.json`
+      - `managedTestProject.projectId = hotupdate-test/SolutionCorePack/proof-host`
+    - host input manifest:
+      - primary assembly = `SolutionCorePack.HotUpdateProofHost.dll`
+      - includes patch assembly = `GoldenCoreLibReference.HotUpdatePatch.dll`
+    - stdout:
+      - `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`
+    - exit code:
+      - `0`
+- Combined CoreLib native -> hotupdate real reruns:
+  - `python -m pytest tests/unit/execution/test_subject_workers.py -q -k "native_proof_emitter or native_hotupdate_chain or hotupdate_proof_host"`
+    - Result: `7 passed`
+  - `python -m pytest tests/unit/planning/test_project_workspace.py -q -k "effective_generated_stage_kind or refresh_subject_generated_root_passes_declared_entry_selection_to_planner or materializes_template_based_proof_host_without_legacy_subject_source"`
+    - Result: `3 passed`
+  - `python -m pytest tests/unit/compatibility/test_solution_core_pack_subject.py tests/unit/planning/test_solution_core_pack_planner.py tests/unit/planning/test_project_workspace.py tests/unit/execution/test_subject_workers.py -q`
+    - Result: `135 passed`
+  - `dotnet build src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj -c Release -m:1`
+    - Result: build succeeded, `0` warnings, `0` errors
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-corelib-reference-native-hotupdate-proof --json`
+    - Final verified run:
+      - run id = `20260420-014418-windows-3cf9`
+      - summary = `ok`
+      - `host-input-build = ok`
+      - `analysis-frontend = ok`
+      - `generated-native-proof = ok`
+      - `build-target = ok`
+      - `runtime-managed-output = ok`
+      - runtime stdout = `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`
+      - exit code = `0`
+    - Intermediate failures resolved during this slice:
+      - `20260420-013011-windows-6a24`
+        - failed because combined chain incorrectly rerouted to `native-aot`
+      - `20260420-013527-windows-202d`
+        - failed because subject workspace still looked for the combined chain under `generated-native-aot`
+      - `20260420-013956-windows-3920`
+        - failed because host-input manifest recorded `managedRuntimeAssemblyPath` without actually building `SolutionCorePack.HotUpdateProofHost.dll`
+- Combined audit schema / validator freeze reruns:
+  - `python -m pytest tests/unit/compatibility/test_subject_contracts_source_cutover.py -q`
+    - Result: `3 passed`
+    - Conclusion: analysis contract validation now supports boolean schema fields and boolean `const`
+  - `python -m pytest tests/contracts/shared/test_foundation_dll_translation_audit_schema.py -q`
+    - Result: `4 passed`
+    - Conclusion: `native-hotupdate-audit.schema.json` plus sample/snapshot assets are now contract-frozen
+  - `python -m pytest tests/unit/reporting/test_subject_reporting.py tests/unit/compatibility/test_subject_contracts_source_cutover.py tests/contracts/shared/test_foundation_dll_translation_audit_schema.py -q`
+    - Result: `15 passed`
+    - Conclusion: reporting and contract validation agree on the combined audit artifact shape
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-corelib-reference-native-hotupdate-proof --json`
+    - First rerun after adding the schema:
+      - run id = `20260420-020321-windows-a002`
+      - summary = `fail`
+      - failure stage = `analysis-frontend`
+      - diagnosis = lightweight contract validator did not support schema type `boolean`
+    - Fixed rerun:
+      - run id = `20260420-020614-windows-0ebd`
+      - summary = `ok`
+      - `analysis-frontend = ok`
+      - `generated-native-proof = ok`
+      - `build-target = ok`
+      - `runtime-managed-output = ok`
+      - runtime stdout = `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`
+      - canonical pipeline report now again exposes:
+        - `pipeline-report/report/native-hotupdate-audit.json`
+      - audit payload still freezes:
+        - `coreLibScope = "narrow-proof-packet"`
+        - `nativeReferenceScope = "assembly-bound-runtime-skeleton"`
+        - `nativeAotScope = "not-used-by-this-combined-proof"`
+        - `fullCoreLibTranslated = false`
+- Combined audit path canonicalization reruns:
+  - `python -m pytest tests/unit/run/test_test_command_workspace.py tests/unit/reporting/test_subject_reporting.py -q`
+    - Result: `12 passed`
+    - Conclusion: command-layer path selection now keeps matrix report output on the canonical matrix-level pipeline-report path even when the selected object is a declared unit test
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-corelib-reference-native-hotupdate-proof --json`
+    - run id = `20260420-021527-windows-6fc9`
+    - summary = `ok`
+    - artifacts now contain:
+      - matrix-level `pipeline-report/report.json`
+      - declared-entry summary only
+      - one matrix-level `pipeline-report/report/native-hotupdate-audit.json`
+    - verification:
+      - no `declared/unit/corelib-reference-hotupdate-proof/report.json`
+      - only one `native-hotupdate-audit.json` exists under the run root
+  - `python build/toolchains/run/run.py test declared-unit-test --id "declared-unit-test/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()" --json`
+    - run id = `20260420-021527-windows-d41b`
+    - summary = `fail`
+    - unrelated environment/build blocker:
+      - `CSC : error CS2012` could not open `src/reference/Chaos.TestFramework.Runtime/obj/Release/net8.0/Chaos.TestFramework.Runtime.dll` because it was locked by another process
+    - despite the build failure, artifact routing still stayed canonical:
+      - matrix-level `pipeline-report/report.json`
+      - declared-entry summary only
+      - one matrix-level `pipeline-report/report/native-hotupdate-audit.json`

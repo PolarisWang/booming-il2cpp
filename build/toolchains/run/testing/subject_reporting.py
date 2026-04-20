@@ -347,6 +347,106 @@ def _write_json_document(path: Path, payload: dict[str, Any]) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def _read_json_document(repo_root: Path, relative_path: str) -> dict[str, Any]:
+    path = repo_root / relative_path
+    if not path.is_file():
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return dict(payload) if isinstance(payload, dict) else {}
+
+
+def _stage_manifest_path(matrix_report: dict[str, Any], stage_id: str) -> str:
+    for stage_result in list(matrix_report.get("stageResults") or []):
+        if str(dict(stage_result).get("stageId") or "") == stage_id:
+            return str(dict(stage_result).get("manifestPath") or "")
+    return ""
+
+
+def _relative_artifact_path(repo_root: Path, path: Path) -> str:
+    try:
+        return path.relative_to(repo_root).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
+def _native_hotupdate_audit_payload(repo_root: Path, matrix_report: dict[str, Any]) -> dict[str, Any]:
+    host_input_manifest_path = _stage_manifest_path(matrix_report, "host-input-build")
+    generated_manifest_path = _stage_manifest_path(matrix_report, "generated-native-proof")
+    build_manifest_path = _stage_manifest_path(matrix_report, "build-target")
+    runtime_manifest_path = _stage_manifest_path(matrix_report, "runtime-managed-output")
+
+    host_input_manifest = _read_json_document(repo_root, host_input_manifest_path)
+    generated_manifest = _read_json_document(repo_root, generated_manifest_path)
+    build_manifest = _read_json_document(repo_root, build_manifest_path)
+    runtime_manifest = _read_json_document(repo_root, runtime_manifest_path)
+
+    native_reference_manifest_path = str(generated_manifest.get("nativeReferenceManifestPath") or "").strip()
+    native_reference_manifest = _read_json_document(repo_root, native_reference_manifest_path)
+
+    return {
+        "reportVersion": "v1",
+        "artifactKind": "native-hotupdate-audit",
+        "runId": str(matrix_report.get("runId") or ""),
+        "subjectId": str(matrix_report.get("subjectId") or ""),
+        "matrixId": str(matrix_report.get("matrixId") or ""),
+        "status": str(matrix_report.get("status") or ""),
+        "pipelineId": str(dict(matrix_report.get("selection") or {}).get("pipelineId") or ""),
+        "entrySelection": dict(dict(matrix_report.get("selection") or {}).get("entrySelection") or {}),
+        "hostInput": {
+            "manifestPath": host_input_manifest_path,
+            "primaryProjectPath": str(host_input_manifest.get("primaryProjectPath") or ""),
+            "primaryAssemblyPath": str(host_input_manifest.get("primaryAssemblyPath") or ""),
+            "additionalAssemblyPaths": list(host_input_manifest.get("additionalAssemblyPaths") or []),
+            "managedRuntimeProjectPath": str(host_input_manifest.get("managedRuntimeProjectPath") or ""),
+            "managedRuntimeAssemblyPath": str(host_input_manifest.get("managedRuntimeAssemblyPath") or ""),
+            "collectionPath": str(host_input_manifest.get("collectionPath") or ""),
+            "bindingManifestPath": str(host_input_manifest.get("bindingManifestPath") or ""),
+        },
+        "nativeGeneration": {
+            "manifestPath": generated_manifest_path,
+            "generatedSourcePath": str(generated_manifest.get("generatedSourcePath") or ""),
+            "generatedSourcePaths": list(generated_manifest.get("generatedSourcePaths") or []),
+            "nativeReferenceManifestPath": native_reference_manifest_path,
+            "nativeReferencePlanPath": str(generated_manifest.get("nativeReferencePlanPath") or ""),
+            "nativeAotManifestPath": str(generated_manifest.get("nativeAotManifestPath") or ""),
+            "runtimeExecutionKind": str(native_reference_manifest.get("runtimeExecutionKind") or ""),
+            "preferredAssemblyDispatchSubjectId": str(native_reference_manifest.get("preferredAssemblyDispatchSubjectId") or ""),
+            "translationUnitPageCount": native_reference_manifest.get("translationUnitPageCount"),
+        },
+        "nativeBuild": {
+            "manifestPath": build_manifest_path,
+            "buildKind": str(build_manifest.get("buildKind") or ""),
+            "buildStrategy": str(build_manifest.get("buildStrategy") or ""),
+            "hostSourcePath": str(build_manifest.get("hostSourcePath") or ""),
+            "generatedSourcePaths": list(build_manifest.get("generatedSourcePaths") or []),
+            "outputs": list(build_manifest.get("outputs") or []),
+        },
+        "hotupdateRuntime": {
+            "manifestPath": runtime_manifest_path,
+            "managedRuntimeAssemblyPath": str(runtime_manifest.get("managedRuntimeAssemblyPath") or ""),
+            "nativePrimaryAssemblyPath": str(runtime_manifest.get("nativePrimaryAssemblyPath") or ""),
+            "nativeGeneratedManifestPath": str(runtime_manifest.get("nativeGeneratedManifestPath") or ""),
+            "nativeBuildManifestPath": str(runtime_manifest.get("nativeBuildManifestPath") or ""),
+            "collectionPath": str(host_input_manifest.get("collectionPath") or ""),
+            "bindingManifestPath": str(runtime_manifest.get("bindingManifestPath") or ""),
+            "arguments": list(runtime_manifest.get("arguments") or []),
+            "outputLines": list(runtime_manifest.get("outputLines") or []),
+            "stdoutPath": str(runtime_manifest.get("stdoutPath") or ""),
+            "stderrPath": str(runtime_manifest.get("stderrPath") or ""),
+            "exitCodePath": str(runtime_manifest.get("exitCodePath") or ""),
+        },
+        "truthBoundary": {
+            "coreLibScope": "narrow-proof-packet",
+            "nativeReferenceScope": "assembly-bound-runtime-skeleton",
+            "nativeAotScope": "not-used-by-this-combined-proof",
+            "fullCoreLibTranslated": False,
+        },
+    }
+
+
 def materialize_matrix_report_artifacts(
     repo_root: Path,
     *,
@@ -356,10 +456,27 @@ def materialize_matrix_report_artifacts(
     performance = dict(matrix_report.get("performance") or {})
     matrix_report["releaseReportPaths"] = list(matrix_report.get("releaseReportPaths") or [])
     matrix_report["reportArtifacts"] = list(matrix_report.get("reportArtifacts") or [])
+    pipeline_id = str(dict(matrix_report.get("selection") or {}).get("pipelineId") or "")
+    if pipeline_id == "native-hotupdate-proof-output":
+        matrix_root = Path(matrix_report_path).parent.parent
+        audit_path = matrix_root / "pipeline-report" / "report" / "native-hotupdate-audit.json"
+        audit_payload = _native_hotupdate_audit_payload(repo_root, matrix_report)
+        _write_json_document(repo_root / audit_path, audit_payload)
+        audit_path_text = _relative_artifact_path(repo_root, audit_path)
+        if audit_path_text not in matrix_report["reportArtifacts"]:
+            matrix_report["reportArtifacts"].append(audit_path_text)
+        matrix_report["nativeHotupdateAudit"] = {
+            "artifactPath": audit_path_text,
+            "status": str(audit_payload.get("status") or ""),
+            "nativeReferenceManifestPath": audit_payload["nativeGeneration"]["nativeReferenceManifestPath"],
+            "nativeBuildManifestPath": audit_payload["hotupdateRuntime"]["nativeBuildManifestPath"],
+            "managedRuntimeAssemblyPath": audit_payload["hotupdateRuntime"]["managedRuntimeAssemblyPath"],
+            "stdoutPath": audit_payload["hotupdateRuntime"]["stdoutPath"],
+            "outputLines": list(audit_payload["hotupdateRuntime"]["outputLines"]),
+        }
     if not performance:
         return list(matrix_report["reportArtifacts"])
 
-    pipeline_id = str(dict(matrix_report.get("selection") or {}).get("pipelineId") or "")
     stage_kinds = {
         str(stage_result.get("kind") or "")
         for stage_result in list(matrix_report.get("stageResults") or [])

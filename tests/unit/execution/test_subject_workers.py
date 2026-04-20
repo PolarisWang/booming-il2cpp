@@ -204,6 +204,201 @@ class SubjectWorkersTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_windows_build_target_uses_workspace_reference_proof_host_for_assembly_bound_dispatch(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_workspace_reference_build")
+        subject_id = "FixtureAssemblyBoundSubject"
+        run_id = "fixture-run-native-reference-workspace-build-001"
+        matrix_id = "windows-foundation-dll-translation-native-proof"
+        expected_cmake_path = self._make_non_repo_path("cmake", "bin", "cmake.exe")
+        expected_configure_root = posix_path("solutions", "subjects", subject_id, "native", matrix_id)
+        instance_spec = f"{self._make_non_repo_path('visual-studio', '18', 'Professional')},version=18.4.11626.88"
+        expected_env = {
+            "Path": r"C:\VS\bin;C:\Windows\System32",
+            "INCLUDE": r"C:\VS\include",
+            "LIB": r"C:\VS\lib",
+        }
+        first_subject_id = f"{subject_id}/Program+<>c::.cctor:System.Void()"
+        preferred_subject_id = f"{subject_id}/Program::Main:System.Int32()"
+        generated_source_path_text = subject_run_path(
+            subject_id,
+            run_id,
+            "analysis",
+            "generated",
+            "generated",
+            "native-reference.generated.cpp",
+        )
+
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "variant": "CHECK",
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "toolchainProfile": "msvc-reference",
+                },
+            },
+            "upstream": {
+                "generated": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("windows-reference-workspace-build")
+        try:
+            generated_source_path = repo_root / generated_source_path_text
+            generated_source_path.parent.mkdir(parents=True, exist_ok=True)
+            generated_source_path.write_text("// generated native-reference fixture\n", encoding="utf-8")
+            generated_page_path_text = subject_run_path(
+                subject_id,
+                run_id,
+                "analysis",
+                "generated",
+                "generated",
+                "runtime",
+                "native-reference.runtime-skeleton.page-0001.cpp",
+            )
+            generated_page_path = repo_root / generated_page_path_text
+            generated_page_path.parent.mkdir(parents=True, exist_ok=True)
+            generated_page_path.write_text("// generated runtime page fixture\n", encoding="utf-8")
+
+            generated_manifest_path = repo_root / request["upstream"]["generated"]["manifestPath"]
+            generated_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            generated_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "generatedSourcePath": generated_source_path_text,
+                        "generatedSourcePaths": [
+                            generated_source_path_text,
+                            generated_page_path_text,
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            (generated_manifest_path.parent / "native-reference.manifest.json").write_text(
+                json.dumps(
+                    {
+                        "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
+                        "preferredAssemblyDispatchSubjectId": preferred_subject_id,
+                        "translationUnitPages": [
+                            {
+                                "pageNumber": 1,
+                                "methodCount": 1,
+                                "firstMethodSubjectId": first_subject_id,
+                                "lastMethodSubjectId": first_subject_id,
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+            workspace_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            workspace_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "workspaceVersion": 2,
+                        "subjectId": subject_id,
+                        "nativeTestProjects": [
+                            {
+                                "projectId": f"native-test/{subject_id}/{matrix_id}/proof-host",
+                                "matrixId": matrix_id,
+                                "projectPath": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "native",
+                                    matrix_id,
+                                    "proof",
+                                    "chaos_subject_reference_proof.vcxproj",
+                                ),
+                                "configureRoot": expected_configure_root,
+                                "hostKind": "proof-host",
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            expected_cmake_dir = repo_root / expected_configure_root
+            expected_cmake_source_root = repo_root / "solutions" / "subjects" / subject_id / "native-source" / matrix_id
+            with patch.object(workers_module.tooling_module, "cmake_environment", return_value=(str(expected_cmake_path), {})):
+                with patch.object(workers_module.tooling_module, "windows_developer_environment", return_value=expected_env):
+                    with patch.object(workers_module.tooling_module, "detect_visual_studio_generator", return_value="Visual Studio 18 2026"):
+                        with patch.object(workers_module.tooling_module, "detect_visual_studio_instance_spec", return_value=instance_spec):
+                            with patch.object(workers_module.tooling_module, "allocate_cmake_binary_dir") as allocate_cmake_binary_dir_mock:
+                                with patch.object(workers_module, "_workspace_manifest_is_stale", return_value=False):
+                                    with patch.object(workers_module, "_run_checked") as run_checked_mock:
+                                        result = workers_module.run_build_target(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            self.assertEqual(
+                [
+                    str(expected_cmake_path),
+                    "-S",
+                    str(expected_cmake_source_root),
+                    "-B",
+                    str(expected_cmake_dir),
+                    "-G",
+                    "Visual Studio 18 2026",
+                    f"-DCHAOS_SUBJECT_REPO_ROOT={repo_root}",
+                    "-DCHAOS_SUBJECT_VARIANT=CHECK",
+                    f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'build' / 'out'}",
+                    f"-DCHAOS_SUBJECT_RUNTIME_ROOT={repo_root / 'artifacts' / 'subjects' / subject_id / 'runs' / run_id / 'matrices' / matrix_id / 'runtime'}",
+                    f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}",
+                ],
+                run_checked_mock.call_args_list[0].args[0],
+            )
+            self.assertEqual(
+                [
+                    str(expected_cmake_path),
+                    "--build",
+                    str(expected_cmake_dir),
+                    "--config",
+                    "Release",
+                    "--target",
+                    WINDOWS_REFERENCE_BUILD_TARGET,
+                ],
+                run_checked_mock.call_args_list[1].args[0],
+            )
+            allocate_cmake_binary_dir_mock.assert_not_called()
+
+            proof_host_text = (expected_cmake_source_root / "proof" / "main.cpp").read_text(encoding="utf-8")
+            self.assertIn("NativeReferenceAssemblyDispatchRequestV0 request = {};", proof_host_text)
+            self.assertIn("RunNativeReferenceAssembly(", proof_host_text)
+            self.assertIn(preferred_subject_id, proof_host_text)
+            generated_cmake_text = (expected_cmake_source_root / "generated" / "CMakeLists.txt").read_text(encoding="utf-8")
+            self.assertIn(generated_source_path.as_posix(), generated_cmake_text)
+            self.assertIn(generated_page_path.as_posix(), generated_cmake_text)
+
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(WINDOWS_REFERENCE_CMAKE_BUILD_STRATEGY, manifest["buildStrategy"])
+            self.assertEqual("native-reference", manifest["buildKind"])
+            self.assertEqual(
+                [
+                    generated_source_path_text,
+                    generated_page_path_text,
+                ],
+                manifest["generatedSourcePaths"],
+            )
+            self.assertEqual(
+                posix_path("solutions", "subjects", subject_id, "native-source", matrix_id, "proof", "main.cpp"),
+                manifest["hostSourcePath"],
+            )
+            self.assertEqual(expected_configure_root, manifest["cmakeBinaryDir"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
     def test_frontend_pipeline_worker_records_analysis_bundle_under_subject_artifacts(self) -> None:
         workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_frontend_pipeline")
         subject_id = "FixtureAnalysisSubject"
@@ -214,6 +409,7 @@ class SubjectWorkersTests(unittest.TestCase):
                 "variant": "CHECK",
                 "source": {
                     "entry": f"{subject_id}/ProofEntry::Run()",
+                    "fullAssemblyClosure": True,
                 },
             },
             "upstream": {
@@ -276,6 +472,7 @@ class SubjectWorkersTests(unittest.TestCase):
                         f"{subject_id}/ProofEntry::Run()",
                         "--additional-assembly",
                         str(expected_additional_host_input),
+                        "--full-assembly-closure",
                     ],
                     arguments,
                 )
@@ -304,6 +501,7 @@ class SubjectWorkersTests(unittest.TestCase):
             self.assertEqual(subject_id, manifest["subjectId"])
             self.assertEqual("analysis", manifest["bucket"])
             self.assertEqual("proof-input-bundle", manifest["bundleKind"])
+            self.assertTrue(manifest["fullAssemblyClosure"])
             self.assertEqual(
                 subject_run_path(subject_id, run_id, "analysis", "analysis", "typed-il-ir.json"),
                 manifest["artifacts"]["typedIlIrPath"],
@@ -371,7 +569,28 @@ class SubjectWorkersTests(unittest.TestCase):
                 )
                 (expected_output_root / "generated").mkdir(parents=True, exist_ok=True)
                 (expected_output_root / "generated" / "native-reference.generated.cpp").write_text("// generated", encoding="utf-8")
-                (expected_output_root / "native-reference.manifest.json").write_text("{}", encoding="utf-8")
+                (expected_output_root / "generated" / "runtime").mkdir(parents=True, exist_ok=True)
+                (expected_output_root / "generated" / "runtime" / "native-reference.runtime-skeleton.page-0001.cpp").write_text(
+                    "// generated page",
+                    encoding="utf-8",
+                )
+                (expected_output_root / "native-reference.manifest.json").write_text(
+                    json.dumps(
+                        {
+                            "generatedArtifacts": [
+                                {
+                                    "kind": "generatedTranslationUnit",
+                                    "path": "generated/native-reference.generated.cpp",
+                                },
+                                {
+                                    "kind": "generatedTranslationUnit",
+                                    "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
+                                },
+                            ]
+                        }
+                    ),
+                    encoding="utf-8",
+                )
                 (expected_output_root / "native-reference.plan.json").write_text("{}", encoding="utf-8")
                 return ""
 
@@ -391,6 +610,13 @@ class SubjectWorkersTests(unittest.TestCase):
             self.assertEqual(
                 subject_run_path(subject_id, run_id, "analysis", "generated", "generated", "native-reference.generated.cpp"),
                 manifest["generatedSourcePath"],
+            )
+            self.assertEqual(
+                [
+                    subject_run_path(subject_id, run_id, "analysis", "generated", "generated", "native-reference.generated.cpp"),
+                    subject_run_path(subject_id, run_id, "analysis", "generated", "generated", "runtime", "native-reference.runtime-skeleton.page-0001.cpp"),
+                ],
+                manifest["generatedSourcePaths"],
             )
             self.assertEqual(
                 subject_run_path(subject_id, run_id, "analysis", "generated", "native-reference.manifest.json"),
@@ -556,6 +782,94 @@ class SubjectWorkersTests(unittest.TestCase):
             )
             self.assertNotIn("nativeReferenceManifestPath", manifest)
             self.assertNotIn("nativeReferencePlanPath", manifest)
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_native_proof_emitter_keeps_native_reference_for_native_hotupdate_chain(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_native_proof_emitter_native_hotupdate_chain")
+        subject_id = "FixtureGeneratedNativeHotUpdateChainSubject"
+        run_id = "fixture-run-generated-native-hotupdate-chain-001"
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": "windows-corelib-reference-native-hotupdate-proof",
+                "engineeringProfile": "hot-update-host",
+                "entrySelection": {
+                    "family": "declared-unit-test",
+                    "stableId": f"{subject_id}::{subject_id}.Patch::{subject_id}.Patch.Proofs::Run()",
+                    "alias": "native-hotupdate-proof",
+                    "entryIndex": 7,
+                },
+                "source": {
+                    "type": "dotnet-project",
+                    "entry": "",
+                    "fullAssemblyClosure": True,
+                },
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "toolchainProfile": "msvc-reference",
+                    "runtimeProfile": "native-hotupdate-proof-output",
+                },
+            },
+            "upstream": {
+                "analysis": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "analysis", "analysis.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "analysis", "generated"),
+                "manifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("native-proof-emitter-native-hotupdate-chain")
+        try:
+            analysis_manifest_path = repo_root / request["upstream"]["analysis"]["manifestPath"]
+            analysis_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            analysis_manifest_path.write_text("{}", encoding="utf-8")
+
+            expected_analysis_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "analysis"
+            expected_output_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "generated"
+
+            def fake_run_checked(arguments: list[str], *, repo_root: Path, failure_message: str) -> str:
+                del failure_message
+                self.assertEqual(
+                    [
+                        "dotnet",
+                        str(repo_root / "driver" / "Chaos.IL2CPP.Driver.dll"),
+                        "emit-native-reference",
+                        str(expected_analysis_root),
+                        str(expected_output_root),
+                    ],
+                    arguments,
+                )
+                (expected_output_root / "generated").mkdir(parents=True, exist_ok=True)
+                (expected_output_root / "generated" / "native-reference.generated.cpp").write_text("// generated", encoding="utf-8")
+                (expected_output_root / "native-reference.manifest.json").write_text("{}", encoding="utf-8")
+                (expected_output_root / "native-reference.plan.json").write_text("{}", encoding="utf-8")
+                return ""
+
+            with patch.object(workers_module, "_ensure_driver_built", return_value=repo_root / "driver" / "Chaos.IL2CPP.Driver.dll"):
+                with patch.object(workers_module, "_run_checked", side_effect=fake_run_checked):
+                    result = workers_module.run_native_proof_emitter(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "generated", "generated", "native-reference.generated.cpp"),
+                manifest["generatedSourcePath"],
+            )
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "generated", "native-reference.manifest.json"),
+                manifest["nativeReferenceManifestPath"],
+            )
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "generated", "native-reference.plan.json"),
+                manifest["nativeReferencePlanPath"],
+            )
+            self.assertNotIn("nativeAotManifestPath", manifest)
+            self.assertNotIn("nativeAotPlanPath", manifest)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -1813,6 +2127,80 @@ class SubjectWorkersTests(unittest.TestCase):
                 build_args[3:],
             )
             self.assertEqual(expected_env, run_checked_mock.call_args.kwargs["env"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_runtime_observe_records_manifest_when_windows_reference_run_target_fails(self) -> None:
+        workers_module = load_module(SUBJECT_WORKERS_MODULE_PATH, "chaos_subject_workers_runtime_observe_failure_manifest")
+        subject_id = "FixtureRuntimeObserveSubject"
+        run_id = "fixture-run-runtime-observe-fail-001"
+        matrix_id = "windows-reference-check"
+
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+            },
+            "upstream": {
+                "build": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("runtime-observe-fail")
+        try:
+            expected_cmake_dir = self._make_non_repo_path("cmake-builds", "native-reference-run-fail-1234")
+            expected_cmake_path = self._make_non_repo_path("cmake", "bin", "cmake.exe")
+            expected_env = {
+                "Path": r"C:\VS\bin;C:\Windows\System32",
+                "INCLUDE": r"C:\VS\include",
+                "LIB": r"C:\VS\lib",
+            }
+            runtime_root = repo_root / request["paths"]["bucketRoot"]
+            runtime_root.mkdir(parents=True, exist_ok=True)
+            (runtime_root / "stdout.log").write_text("", encoding="utf-8")
+            (runtime_root / "stderr.log").write_text("native reference failed\n", encoding="utf-8")
+            (runtime_root / "exit-code.txt").write_text("4\n", encoding="utf-8")
+
+            build_manifest_path = repo_root / request["upstream"]["build"]["manifestPath"]
+            build_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            build_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "cmakeBinaryDir": expected_cmake_dir.as_posix(),
+                        "outputs": [],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            with patch.object(workers_module.tooling_module, "cmake_environment", return_value=(str(expected_cmake_path), {})):
+                with patch.object(workers_module.tooling_module, "windows_developer_environment", return_value=expected_env):
+                    with patch.object(workers_module, "_run_checked", side_effect=RuntimeError("subject proof run failed: windows-x64-reference")):
+                        result = workers_module.run_runtime_observe(repo_root=repo_root, request=request)
+
+            self.assertEqual("fail", result["status"])
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stdout.log"),
+                manifest["stdoutPath"],
+            )
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stderr.log"),
+                manifest["stderrPath"],
+            )
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "exit-code.txt"),
+                manifest["exitCodePath"],
+            )
+            self.assertIn(manifest["stderrPath"], result["primaryEvidencePaths"])
+            self.assertIn("windows-x64-reference", result["failure"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -3786,7 +4174,219 @@ class SubjectWorkersTests(unittest.TestCase):
                 [
                     "dotnet",
                     "build",
-                    str(host_project_path),
+                    str(patch_project_path),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    "-o",
+                    str(expected_output_root),
+                    f"-p:ChaosTempIntermediateRoot={intermediate_root.as_posix()}/",
+                ],
+                captured_arguments[1],
+            )
+            self.assertEqual(2, len(captured_arguments))
+
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(
+                posix_path("solutions", "subjects", subject_id, "hotupdate-tests", f"{subject_id}.HotUpdateProofHost.csproj"),
+                manifest["primaryProjectPath"],
+            )
+            self.assertEqual("proof-host", manifest["hostKind"])
+            self.assertEqual(
+                posix_path("solutions", "subjects", subject_id, "hotupdate-tests", "Generated", "declared-tests.collection.json"),
+                manifest["collectionPath"],
+            )
+            self.assertEqual(
+                posix_path("solutions", "subjects", subject_id, "hotupdate-tests", "Generated", "declared-tests.binding.json"),
+                manifest["bindingManifestPath"],
+            )
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.HotUpdateProofHost.dll"),
+                manifest["primaryAssemblyPath"],
+            )
+            self.assertEqual(
+                [
+                    subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.Patch.dll"),
+                ],
+                manifest["additionalAssemblyPaths"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_host_input_build_keeps_native_primary_assembly_for_native_hotupdate_chain(self) -> None:
+        workers_module = load_module(
+            SUBJECT_WORKERS_MODULE_PATH,
+            "chaos_subject_workers_host_input_native_hotupdate_chain",
+        )
+        subject_id = "FixtureHotUpdateHostSubject"
+        run_id = "fixture-run-host-input-native-hotupdate-chain-001"
+        intermediate_root = TEST_TMP_ROOT / "dotnet-intermediates" / "fixture-host-input-native-hotupdate-chain-1234"
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": "windows-corelib-reference-native-hotupdate-proof",
+                "engineeringProfile": "hot-update-host",
+                "entrySelection": {
+                    "family": "declared-unit-test",
+                    "stableId": f"{subject_id}::{subject_id}.Patch::{subject_id}.Patch.Proofs::Run()",
+                    "alias": "workspace-hotupdate-proof",
+                    "entryIndex": 3,
+                },
+                "source": {
+                    "type": "dotnet-project",
+                    "path": posix_path("subjects", subject_id, "source", f"{subject_id}.sln"),
+                    "primaryProjectPath": posix_path("subjects", subject_id, "source", "NativeProofApp", f"{subject_id}.NativeProofApp.csproj"),
+                    "entry": "",
+                    "fullAssemblyClosure": True,
+                },
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "toolchainProfile": "msvc-reference",
+                    "runtimeProfile": "native-hotupdate-proof-output",
+                },
+            },
+            "upstream": {
+                "source": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "source", "source.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "analysis", "host-input"),
+                "manifestPath": subject_run_path(subject_id, run_id, "analysis", "host-input", "host-input.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("host-input-build-native-hotupdate-chain")
+        try:
+            source_root = repo_root / "subjects" / subject_id / "source"
+            native_project_path = source_root / "NativeProofApp" / f"{subject_id}.NativeProofApp.csproj"
+            host_project_path = source_root / "Host" / f"{subject_id}.Host.csproj"
+            patch_project_path = source_root / "Patch" / f"{subject_id}.Patch.csproj"
+            solution_path = source_root / f"{subject_id}.sln"
+            native_project_path.parent.mkdir(parents=True, exist_ok=True)
+            host_project_path.parent.mkdir(parents=True, exist_ok=True)
+            patch_project_path.parent.mkdir(parents=True, exist_ok=True)
+            native_project_path.write_text("<Project />\n", encoding="utf-8")
+            host_project_path.write_text("<Project />\n", encoding="utf-8")
+            patch_project_path.write_text("<Project />\n", encoding="utf-8")
+            solution_path.write_text(
+                "\n".join(
+                    [
+                        "Project(\"{FAKE}\") = \"NativeProofApp\", \"NativeProofApp\\\\"
+                        f"{subject_id}.NativeProofApp.csproj\", \"{{11111111-1111-1111-1111-111111111111}}\"",
+                        "EndProject",
+                        "Project(\"{FAKE}\") = \"Host\", \"Host\\\\"
+                        f"{subject_id}.Host.csproj\", \"{{22222222-2222-2222-2222-222222222222}}\"",
+                        "EndProject",
+                        "Project(\"{FAKE}\") = \"Patch\", \"Patch\\\\"
+                        f"{subject_id}.Patch.csproj\", \"{{33333333-3333-3333-3333-333333333333}}\"",
+                        "EndProject",
+                        "",
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            workspace_root = repo_root / "solutions" / "subjects" / subject_id
+            hotupdate_tests_root = workspace_root / "hotupdate-tests"
+            generated_root = hotupdate_tests_root / "Generated"
+            generated_root.mkdir(parents=True, exist_ok=True)
+            hotupdate_host_project_path = hotupdate_tests_root / f"{subject_id}.HotUpdateProofHost.csproj"
+            hotupdate_host_project_path.write_text("<Project />\n", encoding="utf-8")
+            binding_manifest_path = generated_root / "declared-tests.binding.json"
+            binding_manifest_path.write_text(
+                json.dumps({"hostKind": "proof-host", "patchAssemblyNames": [f"{subject_id}.Patch"]}),
+                encoding="utf-8",
+            )
+            collection_path = generated_root / "declared-tests.collection.json"
+            collection_path.write_text('{"declaredUnitTests":[{"entryIndex":3}]}', encoding="utf-8")
+            workspace_manifest_path = workspace_root / "workspace.manifest.json"
+            workspace_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "workspaceVersion": 2,
+                        "subjectId": subject_id,
+                        "hotupdatePatchProjects": [
+                            {
+                                "projectId": f"hotupdate-patch/{subject_id}/{subject_id}_Patch",
+                                "managedProjectId": f"managed/{subject_id}/{subject_id}_Patch",
+                                "projectPath": posix_path("subjects", subject_id, "source", "Patch", f"{subject_id}.Patch.csproj"),
+                                "assemblyName": f"{subject_id}.Patch",
+                            }
+                        ],
+                        "hotupdateTestProjects": [
+                            {
+                                "projectId": f"hotupdate-test/{subject_id}/proof-host",
+                                "projectPath": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "hotupdate-tests",
+                                    f"{subject_id}.HotUpdateProofHost.csproj",
+                                ),
+                                "assemblyName": f"{subject_id}.HotUpdateProofHost",
+                                "hostKind": "proof-host",
+                                "collectionPath": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "hotupdate-tests",
+                                    "Generated",
+                                    "declared-tests.collection.json",
+                                ),
+                                "bindingManifestPath": posix_path(
+                                    "solutions",
+                                    "subjects",
+                                    subject_id,
+                                    "hotupdate-tests",
+                                    "Generated",
+                                    "declared-tests.binding.json",
+                                ),
+                                "patchProjectIds": [f"hotupdate-patch/{subject_id}/{subject_id}_Patch"],
+                            }
+                        ],
+                        "matrices": [
+                            {
+                                "matrixId": "windows-corelib-reference-native-hotupdate-proof",
+                                "hotupdatePatchProjectIds": [f"hotupdate-patch/{subject_id}/{subject_id}_Patch"],
+                                "hotupdateTestProjectIds": [f"hotupdate-test/{subject_id}/proof-host"],
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            expected_output_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "host-input"
+            captured_arguments: list[list[str]] = []
+
+            def fake_run_checked(arguments: list[str], *, repo_root: Path, failure_message: str) -> str:
+                del repo_root, failure_message
+                captured_arguments.append(list(arguments))
+                expected_output_root.mkdir(parents=True, exist_ok=True)
+                project_argument = arguments[2]
+                if hotupdate_host_project_path.name in project_argument:
+                    assembly_name = f"{subject_id}.HotUpdateProofHost"
+                elif patch_project_path.name in project_argument:
+                    assembly_name = f"{subject_id}.Patch"
+                elif host_project_path.name in project_argument:
+                    assembly_name = f"{subject_id}.Host"
+                else:
+                    assembly_name = f"{subject_id}.NativeProofApp"
+                (expected_output_root / f"{assembly_name}.dll").write_text("", encoding="utf-8")
+                return ""
+
+            with patch.object(workers_module.tooling_module, "allocate_dotnet_intermediate_dir", return_value=intermediate_root):
+                with patch.object(workers_module, "_run_checked", side_effect=fake_run_checked):
+                    result = workers_module.run_dotnet_host_input_builder(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            self.assertEqual(str(native_project_path), captured_arguments[0][2])
+            self.assertEqual(
+                [
+                    "dotnet",
+                    "build",
+                    str(hotupdate_host_project_path),
                     "-c",
                     "Release",
                     "-m:1",
@@ -3810,31 +4410,24 @@ class SubjectWorkersTests(unittest.TestCase):
                 ],
                 captured_arguments[2],
             )
+            self.assertEqual(3, len(captured_arguments))
 
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
             self.assertEqual(
-                posix_path("solutions", "subjects", subject_id, "hotupdate-tests", f"{subject_id}.HotUpdateProofHost.csproj"),
+                posix_path("subjects", subject_id, "source", "NativeProofApp", f"{subject_id}.NativeProofApp.csproj"),
                 manifest["primaryProjectPath"],
             )
-            self.assertEqual("proof-host", manifest["hostKind"])
             self.assertEqual(
-                posix_path("solutions", "subjects", subject_id, "hotupdate-tests", "Generated", "declared-tests.collection.json"),
-                manifest["collectionPath"],
-            )
-            self.assertEqual(
-                posix_path("solutions", "subjects", subject_id, "hotupdate-tests", "Generated", "declared-tests.binding.json"),
-                manifest["bindingManifestPath"],
-            )
-            self.assertEqual(
-                subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.HotUpdateProofHost.dll"),
+                subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.NativeProofApp.dll"),
                 manifest["primaryAssemblyPath"],
             )
             self.assertEqual(
-                [
-                    subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.Host.dll"),
-                    subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.Patch.dll"),
-                ],
-                manifest["additionalAssemblyPaths"],
+                posix_path("solutions", "subjects", subject_id, "hotupdate-tests", f"{subject_id}.HotUpdateProofHost.csproj"),
+                manifest["managedRuntimeProjectPath"],
+            )
+            self.assertEqual(
+                subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.HotUpdateProofHost.dll"),
+                manifest["managedRuntimeAssemblyPath"],
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
@@ -4148,6 +4741,131 @@ class SubjectWorkersTests(unittest.TestCase):
                 ],
                 manifest["arguments"],
             )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_runtime_managed_output_records_native_upstream_for_native_hotupdate_chain(self) -> None:
+        workers_module = load_module(
+            SUBJECT_WORKERS_MODULE_PATH,
+            "chaos_subject_workers_managed_runtime_output_native_hotupdate_chain",
+        )
+        subject_id = "FixtureHotUpdateRuntimeSubject"
+        run_id = "fixture-run-managed-output-native-hotupdate-proof-host-001"
+        matrix_id = "windows-corelib-reference-native-hotupdate-proof"
+        native_assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.NativeProofApp.dll")
+        managed_runtime_assembly_path = subject_run_path(
+            subject_id,
+            run_id,
+            "analysis",
+            "host-input",
+            f"{subject_id}.HotUpdateProofHost.dll",
+        )
+        collection_path = posix_path(
+            "solutions",
+            "subjects",
+            subject_id,
+            "hotupdate-tests",
+            "Generated",
+            "declared-tests.collection.json",
+        )
+        binding_manifest_path = posix_path(
+            "solutions",
+            "subjects",
+            subject_id,
+            "hotupdate-tests",
+            "Generated",
+            "declared-tests.binding.json",
+        )
+        generated_manifest_path = subject_run_path(subject_id, run_id, "analysis", "generated", "generated.manifest.json")
+        build_manifest_path = subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json")
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+                "matrixId": matrix_id,
+                "entrySelection": {
+                    "family": "declared-unit-test",
+                    "stableId": f"{subject_id}::{subject_id}.Patch::{subject_id}.Patch.Proofs::Run()",
+                    "alias": "hotupdate-proof",
+                    "entryIndex": 4,
+                },
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "runtimeArguments": [
+                        "--heartbeat-interval-seconds=3",
+                    ],
+                    "runtimeProfile": "native-hotupdate-proof-output",
+                },
+            },
+            "upstream": {
+                "host-input": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "host-input", "host-input.manifest.json"),
+                },
+                "generated": {
+                    "manifestPath": generated_manifest_path,
+                },
+                "build": {
+                    "manifestPath": build_manifest_path,
+                },
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime"),
+                "manifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("managed-runtime-output-native-hotupdate-proof-host")
+        try:
+            host_input_manifest_path = repo_root / request["upstream"]["host-input"]["manifestPath"]
+            host_input_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            host_input_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "primaryAssemblyPath": native_assembly_path,
+                        "managedRuntimeAssemblyPath": managed_runtime_assembly_path,
+                        "hostKind": "proof-host",
+                        "collectionPath": collection_path,
+                        "bindingManifestPath": binding_manifest_path,
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            completed = subprocess.CompletedProcess(
+                [
+                    "dotnet",
+                    str(repo_root / managed_runtime_assembly_path),
+                    "--heartbeat-interval-seconds=3",
+                    f"--collection-path={collection_path}",
+                    f"--binding-manifest-path={binding_manifest_path}",
+                    "--entry-index=4",
+                ],
+                0,
+                "managed hotupdate proof host reached.\nargs=4\n",
+                "",
+            )
+
+            with patch.object(workers_module, "run_process", return_value=completed) as run_process_mock:
+                result = workers_module.run_managed_runtime_output(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            run_process_mock.assert_called_once_with(
+                [
+                    "dotnet",
+                    str(repo_root / managed_runtime_assembly_path),
+                    "--heartbeat-interval-seconds=3",
+                    f"--collection-path={collection_path}",
+                    f"--binding-manifest-path={binding_manifest_path}",
+                    "--entry-index=4",
+                ],
+                cwd=repo_root,
+            )
+
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            self.assertEqual(native_assembly_path, manifest["nativePrimaryAssemblyPath"])
+            self.assertEqual(managed_runtime_assembly_path, manifest["managedRuntimeAssemblyPath"])
+            self.assertEqual(generated_manifest_path, manifest["nativeGeneratedManifestPath"])
+            self.assertEqual(build_manifest_path, manifest["nativeBuildManifestPath"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

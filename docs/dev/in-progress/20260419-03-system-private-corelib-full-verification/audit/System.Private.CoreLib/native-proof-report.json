@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 0,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "requiredProofKind": "dll-boundary",
+  "entryDrivenArtifactsAccepted": false,
+  "semanticFamilyRequirements": [
+    {
+      "familyName": "managed-cil",
+      "requiredEvidence": ["generated-native-inventory", "native-build", "conformance", "benchmark"],
+      "status": "blocked"
+    },
+    {
+      "familyName": "internal-call",
+      "requiredEvidence": ["helper-contract-proof", "native-build", "conformance", "benchmark"],
+      "status": "blocked"
+    },
+    {
+      "familyName": "runtime-special",
+      "requiredEvidence": ["helper-contract-proof", "native-build", "conformance"],
+      "status": "blocked"
+    },
+    {
+      "familyName": "pinvoke",
+      "requiredEvidence": ["interop-proof", "native-build", "conformance"],
+      "status": "blocked"
+    },
+    {
+      "familyName": "field-metadata",
+      "requiredEvidence": ["layout-proof", "native-build", "conformance"],
+      "status": "blocked"
+    },
+    {
+      "familyName": "abstract",
+      "requiredEvidence": ["contract-proof", "dispatch-binding-review"],
+      "status": "blocked"
+    }
+  ],
+  "status": "blocked",
+  "blockers": [
+    {
+      "id": "corelib-full-native-proof-missing",
+      "severity": "blocking",
+      "summary": "No normalized full CoreLib DLL-boundary native proof exists under the Phase 0 audit schema; entry-driven SolutionCorePack artifacts are insufficient."
+    }
+  ]
+}

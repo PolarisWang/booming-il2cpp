@@ -14,6 +14,7 @@ public sealed class DriverEntry
         WriteIndented = true,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals,
     };
 
     public string Name => "Chaos.IL2CPP.Driver";
@@ -100,6 +101,7 @@ public sealed class DriverEntry
         string? subjectDir = null;
         string? outputDir = null;
         string? entryPointOverride = null;
+        var fullAssemblyClosure = false;
 
         for (var i = 0; i < args.Length; i++)
         {
@@ -110,6 +112,9 @@ public sealed class DriverEntry
                     break;
                 case "--entry-point" when i + 1 < args.Length:
                     entryPointOverride = args[++i];
+                    break;
+                case "--full-assembly-closure":
+                    fullAssemblyClosure = true;
                     break;
                 case "--help" or "-h":
                     ShowConvertHelp();
@@ -243,7 +248,12 @@ public sealed class DriverEntry
                 ?? (source.TryGetProperty("entry", out var e) ? e.GetString() : null);
 
             var closureOutputDir = Path.Combine(outputDir, "analysis");
-            var request = new ManagedClosureRequest(inputAssemblyPath, closureOutputDir, entry, additionalAssemblyPaths);
+            var request = new ManagedClosureRequest(
+                inputAssemblyPath,
+                closureOutputDir,
+                entry,
+                additionalAssemblyPaths,
+                FullAssemblyClosure: fullAssemblyClosure);
             var driver = new DriverEntry();
             var closureResult = driver.Run(request);
             if (closureResult != 0) return closureResult;
@@ -527,6 +537,7 @@ public sealed class DriverEntry
 
         string? entryPointSubjectIdOverride = null;
         var additionalAssemblyPaths = new List<string>();
+        var fullAssemblyClosure = false;
 
         for (var index = 2; index < args.Length; index++)
         {
@@ -543,6 +554,9 @@ public sealed class DriverEntry
                 case "--additional-assembly" when index + 1 < args.Length && !string.IsNullOrWhiteSpace(args[index + 1]):
                     additionalAssemblyPaths.Add(args[++index]);
                     break;
+                case "--full-assembly-closure":
+                    fullAssemblyClosure = true;
+                    break;
                 default:
                     return false;
             }
@@ -552,7 +566,8 @@ public sealed class DriverEntry
             args[0],
             args[1],
             EntryPointSubjectIdOverride: entryPointSubjectIdOverride,
-            AdditionalAssemblyPaths: additionalAssemblyPaths.Count == 0 ? null : additionalAssemblyPaths);
+            AdditionalAssemblyPaths: additionalAssemblyPaths.Count == 0 ? null : additionalAssemblyPaths,
+            FullAssemblyClosure: fullAssemblyClosure);
         return true;
     }
 
@@ -568,6 +583,7 @@ public sealed class DriverEntry
         Console.WriteLine("Legacy commands:");
         Console.WriteLine("  <input.dll> <output-root>                    Managed closure generation");
         Console.WriteLine("      [--entry-point-subject-id <subject-id>] [--additional-assembly <path> ...]");
+        Console.WriteLine("      [--full-assembly-closure]");
         Console.WriteLine("  emit-native-reference <closure-root> <out>   Native reference emission");
         Console.WriteLine("  emit-native-aot <closure-root> <out>         Generic native AOT emission");
         Console.WriteLine();
@@ -582,7 +598,7 @@ public sealed class DriverEntry
 
     private static void ShowConvertHelp()
     {
-        Console.WriteLine("Usage: chaos-il2cpp convert <subject-dir> [--output <dir>] [--entry-point <id>]");
+        Console.WriteLine("Usage: chaos-il2cpp convert <subject-dir> [--output <dir>] [--entry-point <id>] [--full-assembly-closure]");
         Console.WriteLine();
         Console.WriteLine("Convert a C# project or managed DLLs to native source code.");
         Console.WriteLine("Reads subject.manifest.json from <subject-dir> to determine input type.");

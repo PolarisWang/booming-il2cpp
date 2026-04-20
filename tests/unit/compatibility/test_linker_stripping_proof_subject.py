@@ -20,10 +20,11 @@ FIXTURE_PROJECT_PATH = (
 )
 PROFILE_ID = "proof-linker-stripping"
 MATRIX_ID = "windows-linker-stripping-check"
-ENTRY_POINT = "CoreRuntimeFeatures/LinkerStrippingProofEntry::Run()"
+ENTRY_POINT = "CoreRuntimeFeatures/LinkerStrippingProofEntry::Run:System.Int32()"
 
 CODEGEN_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "CodeGenStage.cs"
 DRIVER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "DriverEntry.cs"
+MANAGED_CLOSURE_CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "linker-stripping-proof"
 
@@ -95,14 +96,61 @@ class Phase2LinkerStrippingProofTests(unittest.TestCase):
         self.assertIn("IncludePreservedClosure(", linker_source)
         self.assertIn('Reason = "preserve-attribute"', linker_source)
 
+    def test_loader_supports_starg_opcodes_for_corelib_full_assembly_closure(self) -> None:
+        loader_source = read_loader_stage_source(REPO_ROOT)
+
+        self.assertIn("ILOpCode.Starg => DecodeStargInstruction(ilReader.ReadUInt16())", loader_source)
+        self.assertIn("ILOpCode.Starg_s => DecodeStargInstruction(ilReader.ReadByte())", loader_source)
+        self.assertIn('Op = "starg"', loader_source)
+        self.assertIn('ILOpCode.Conv_u4 => DecodeSimpleInstruction("conv.u4", "System.UInt32")', loader_source)
+        self.assertIn('ILOpCode.Conv_u8 => DecodeSimpleInstruction("conv.u8", "System.UInt64")', loader_source)
+        self.assertIn('ILOpCode.Conv_r_un => DecodeSimpleInstruction("conv.r.un", "System.Double")', loader_source)
+        self.assertIn('ILOpCode.Conv_ovf_i => DecodeSimpleInstruction("conv.ovf.i", "System.IntPtr")', loader_source)
+        self.assertIn('ILOpCode.Conv_ovf_u => DecodeSimpleInstruction("conv.ovf.u", "System.UIntPtr")', loader_source)
+        self.assertIn('ILOpCode.Conv_ovf_i4 => DecodeSimpleInstruction("conv.ovf.i4", "System.Int32")', loader_source)
+        self.assertIn('ILOpCode.Conv_ovf_u2 => DecodeSimpleInstruction("conv.ovf.u2", "System.UInt16")', loader_source)
+        self.assertIn('ILOpCode.Conv_ovf_u4 => DecodeSimpleInstruction("conv.ovf.u4", "System.UInt32")', loader_source)
+        self.assertIn('ILOpCode.Conv_ovf_u8 => DecodeSimpleInstruction("conv.ovf.u8", "System.UInt64")', loader_source)
+        self.assertIn('ILOpCode.Conv_ovf_i4_un => DecodeSimpleInstruction("conv.ovf.i4.un", "System.Int32")', loader_source)
+        self.assertIn('ILOpCode.Conv_ovf_u4_un => DecodeSimpleInstruction("conv.ovf.u4.un", "System.UInt32")', loader_source)
+        self.assertIn('ILOpCode.Bgt_un => DecodeBranchInstruction("bgt.un", ReadBranchTargetInt32(ref ilReader))', loader_source)
+        self.assertIn('ILOpCode.Bgt_un_s => DecodeBranchInstruction("bgt.un", ReadBranchTargetSByte(ref ilReader))', loader_source)
+        self.assertIn('ILOpCode.Ble_un => DecodeBranchInstruction("ble.un", ReadBranchTargetInt32(ref ilReader))', loader_source)
+        self.assertIn('ILOpCode.Ble_un_s => DecodeBranchInstruction("ble.un", ReadBranchTargetSByte(ref ilReader))', loader_source)
+        self.assertIn('ILOpCode.Div_un => DecodeSimpleInstruction("div.un", "System.Int32")', loader_source)
+        self.assertIn('ILOpCode.Rem_un => DecodeSimpleInstruction("rem.un", "System.Int32")', loader_source)
+        self.assertIn('ILOpCode.Add_ovf_un => DecodeSimpleInstruction("add.ovf.un", "System.Int32")', loader_source)
+        self.assertIn('ILOpCode.Sub_ovf_un => DecodeSimpleInstruction("sub.ovf.un", "System.Int32")', loader_source)
+        self.assertIn('ILOpCode.Mul_ovf_un => DecodeSimpleInstruction("mul.ovf.un", "System.Int32")', loader_source)
+        self.assertIn('ILOpCode.Clt_un => DecodeSimpleInstruction("clt.un", "System.Int32")', loader_source)
+        self.assertIn('ILOpCode.Neg => DecodeSimpleInstruction("neg", "System.Int32")', loader_source)
+        self.assertIn('ILOpCode.Ldelem_i1 => DecodeTypedArrayInstruction("ldelem", "System.SByte", "System.SByte")', loader_source)
+        self.assertIn('ILOpCode.Ldelem_u1 => DecodeTypedArrayInstruction("ldelem", "System.Byte", "System.Byte")', loader_source)
+        self.assertIn('ILOpCode.Ldelem_i2 => DecodeTypedArrayInstruction("ldelem", "System.Int16", "System.Int16")', loader_source)
+        self.assertIn('ILOpCode.Ldelem_u2 => DecodeTypedArrayInstruction("ldelem", "System.UInt16", "System.UInt16")', loader_source)
+        self.assertIn('ILOpCode.Ldelem_u4 => DecodeTypedArrayInstruction("ldelem", "System.UInt32", "System.UInt32")', loader_source)
+        self.assertIn('ILOpCode.Ldelem_i8 => DecodeTypedArrayInstruction("ldelem", "System.Int64", "System.Int64")', loader_source)
+        self.assertIn('ILOpCode.Ldelem_i => DecodeTypedArrayInstruction("ldelem", "System.IntPtr", "System.IntPtr")', loader_source)
+        self.assertIn('ILOpCode.Ldelem_r4 => DecodeTypedArrayInstruction("ldelem", "System.Single", "System.Single")', loader_source)
+        self.assertIn('ILOpCode.Stelem_i1 => DecodeTypedArrayInstruction("stelem", "System.Void", "System.SByte")', loader_source)
+        self.assertIn('ILOpCode.Stelem_i2 => DecodeTypedArrayInstruction("stelem", "System.Void", "System.Int16")', loader_source)
+        self.assertIn('ILOpCode.Stelem_i => DecodeTypedArrayInstruction("stelem", "System.Void", "System.IntPtr")', loader_source)
+        self.assertIn('ILOpCode.Stelem_i8 => DecodeTypedArrayInstruction("stelem", "System.Void", "System.Int64")', loader_source)
+        self.assertIn('ILOpCode.Stelem_r4 => DecodeTypedArrayInstruction("stelem", "System.Void", "System.Single")', loader_source)
+        self.assertIn("ILOpCode.Readonly => null", loader_source)
+
     def test_codegen_and_driver_surface_freeze_preserve_descriptor_artifact(self) -> None:
         codegen_source = CODEGEN_STAGE_PATH.read_text(encoding="utf-8")
         driver_source = DRIVER_PATH.read_text(encoding="utf-8")
+        contracts_source = MANAGED_CLOSURE_CONTRACTS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("ManagedClosureArtifactNames.PreserveDescriptor", codegen_source)
         self.assertIn('new ManagedClosureArtifactRef { Kind = "preserveDescriptor", Path = ManagedClosureArtifactNames.PreserveDescriptor }', codegen_source)
         self.assertIn("PreserveDescriptor = linkedWorld.PreserveDescriptor", codegen_source)
         self.assertIn("WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.PreserveDescriptor), result.PreserveDescriptor);", driver_source)
+        self.assertIn("bool FullAssemblyClosure = false", contracts_source)
+        self.assertIn("--full-assembly-closure", driver_source)
+        self.assertIn("FullAssemblyClosure: fullAssemblyClosure", driver_source)
 
     def test_convert_emits_preserve_descriptor_and_keeps_stripped_type_out_of_analysis(self) -> None:
         output_root = self._make_output_root()
@@ -198,7 +246,104 @@ class Phase2LinkerStrippingProofTests(unittest.TestCase):
         self.assertIn("CoreRuntimeFeatures/ReachableHarness", registered_subject_ids)
         self.assertIn("CoreRuntimeFeatures/PreservedUnusedHarness", registered_subject_ids)
         self.assertNotIn("CoreRuntimeFeatures/StrippedUnusedHarness", registered_subject_ids)
-        self.assertNotIn("CoreRuntimeFeatures/StrippedUnusedHarness::Marker()", registered_subject_ids)
+        self.assertNotIn("CoreRuntimeFeatures/StrippedUnusedHarness::Marker:System.String()", registered_subject_ids)
+
+    def test_convert_with_full_assembly_closure_preserves_entire_input_assembly_surface(self) -> None:
+        output_root = self._make_output_root()
+        subject_root = output_root / "FixtureLinkerFullAssemblyClosureSubject"
+        subject_root.mkdir(parents=True, exist_ok=True)
+        (subject_root / "subject.manifest.json").write_text(
+            json.dumps(
+                {
+                    "subjectId": "FixtureLinkerFullAssemblyClosureSubject",
+                    "displayName": "FixtureLinkerFullAssemblyClosureSubject",
+                    "category": "canonical",
+                    "defaultGoal": "correctness.dev",
+                    "defaultMatrix": "windows-native-check",
+                    "defaultValidationProfile": "proof-dev",
+                    "source": {
+                        "type": "dotnet-project",
+                        "path": "tests/fixtures/contracts/linker-stripping-proof/FixtureLinkerStrippingProof.csproj",
+                        "entry": ENTRY_POINT,
+                    },
+                    "validationProfiles": {
+                        "proof-dev": ["proof"],
+                    },
+                    "validation": {
+                        "proof": {
+                            "kind": "proof",
+                            "defaultVariant": "CHECK",
+                        }
+                    },
+                    "executionPipelines": [
+                        {
+                            "pipelineId": "proof-runtime-output",
+                            "stages": [],
+                        }
+                    ],
+                    "environmentMatrices": [
+                        {
+                            "matrixId": "windows-native-check",
+                            "pipelineId": "proof-runtime-output",
+                            "supportedGoals": ["correctness.dev"],
+                            "executionContext": {
+                                "hostPlatform": "windows-x64",
+                                "targetPlatform": "windows-x64",
+                                "toolchainProfile": "msvc-reference",
+                            },
+                            "artifactPlan": {
+                                "requiredBuckets": ["source", "host-input", "analysis"],
+                                "evidenceTerminalBucket": "analysis",
+                            },
+                        }
+                    ],
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+        run_checked(
+            [
+                "dotnet",
+                "run",
+                "--project",
+                str(DRIVER_PROJECT_PATH),
+                "--",
+                "convert",
+                str(subject_root),
+                "--entry-point",
+                ENTRY_POINT,
+                "--output",
+                str(output_root),
+                "--full-assembly-closure",
+            ],
+            cwd=REPO_ROOT,
+        )
+
+        preserve_descriptor = json.loads(
+            (output_root / "analysis" / "preserve-descriptor.json").read_text(encoding="utf-8")
+        )
+        metadata_registration = json.loads(
+            (output_root / "analysis" / "metadata-registration.json").read_text(encoding="utf-8")
+        )
+
+        preserve_subject_ids = {
+            entry["subjectId"]
+            for entry in preserve_descriptor["entries"]
+        }
+        registered_subject_ids = {
+            registration["subjectId"]
+            for registration in metadata_registration["registrations"]
+        }
+
+        self.assertIn("CoreRuntimeFeatures/ReachableHarness", preserve_subject_ids)
+        self.assertIn("CoreRuntimeFeatures/PreservedUnusedHarness", preserve_subject_ids)
+        self.assertIn("CoreRuntimeFeatures/StrippedUnusedHarness", preserve_subject_ids)
+        self.assertIn("CoreRuntimeFeatures/StrippedUnusedHarness::Marker:System.String()", preserve_subject_ids)
+        self.assertIn("CoreRuntimeFeatures/StrippedUnusedHarness", registered_subject_ids)
+        self.assertIn("CoreRuntimeFeatures/StrippedUnusedHarness::Marker:System.String()", registered_subject_ids)
 
 
 if __name__ == "__main__":

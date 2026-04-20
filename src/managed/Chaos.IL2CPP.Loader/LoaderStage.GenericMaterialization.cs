@@ -133,7 +133,16 @@ public sealed partial class LoaderStage
 
             foreach (var definitionProperty in closedPropertyDefinitions)
             {
-                var subjectId = ManagedNaming.CreatePropertySubjectId(typeIdentity.SubjectId, definitionProperty.Name);
+                var substitutedIndexParameterTypes = definitionProperty.IndexParameterTypes?
+                    .Select(parameterType => SubstituteText(
+                        parameterType,
+                        CreateSubstitutionMap(typeIdentity.TypeArguments, []),
+                        new Dictionary<string, string>(StringComparer.Ordinal)))
+                    .ToList();
+                var subjectId = ManagedNaming.CreatePropertySubjectId(
+                    typeIdentity.SubjectId,
+                    definitionProperty.Name,
+                    substitutedIndexParameterTypes);
                 if (existingPropertySubjects.ContainsKey(subjectId) || materializedProperties.ContainsKey(subjectId))
                 {
                     continue;
@@ -149,6 +158,7 @@ public sealed partial class LoaderStage
                         definitionProperty.PropertyType,
                         substitutions,
                         new Dictionary<string, string>(StringComparer.Ordinal)),
+                    IndexParameterTypes = substitutedIndexParameterTypes,
                     SubjectId = subjectId,
                     DefinitionSubjectId = definitionProperty.SubjectId,
                     IsPreserved = definitionProperty.IsPreserved,
@@ -175,7 +185,16 @@ public sealed partial class LoaderStage
                             substitutions,
                             new Dictionary<string, string>(StringComparer.Ordinal)))
                         .ToList();
-                    return ManagedNaming.CreateMethodSubjectId(typeIdentity.SubjectId, definitionMethod.Name, substitutedParameterTypes);
+                    var substitutedReturnType = SubstituteText(
+                        definitionMethod.ReturnType,
+                        substitutions,
+                        new Dictionary<string, string>(StringComparer.Ordinal));
+                    return ManagedNaming.CreateMethodSubjectId(
+                        typeIdentity.SubjectId,
+                        definitionMethod.Name,
+                        substitutedReturnType,
+                        substitutedParameterTypes,
+                        definitionMethod.GenericParameterCount);
                 },
                 StringComparer.Ordinal);
 
@@ -221,6 +240,7 @@ public sealed partial class LoaderStage
                     DeclaringTypeSubjectId = typeIdentity.SubjectId,
                     DeclaringTypeDisplayName = typeIdentity.DisplayName,
                     Name = definitionMethod.Name,
+                    GenericParameterCount = definitionMethod.GenericParameterCount,
                     ReturnType = returnType,
                     SubjectId = subjectId,
                     DefinitionSubjectId = definitionMethod.SubjectId,
@@ -364,6 +384,7 @@ public sealed partial class LoaderStage
             DeclaringTypeSubjectId = methodReference.DeclaringTypeSubjectId,
             DeclaringTypeDisplayName = methodReference.DeclaringTypeDisplayName,
             Name = methodReference.Name,
+            GenericParameterCount = methodReference.GenericParameterCount,
             ReturnType = methodReference.ReturnType,
             SubjectId = methodReference.SubjectId,
             DefinitionSubjectId = definitionMethod.SubjectId,

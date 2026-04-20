@@ -35,6 +35,10 @@ def make_manifest() -> dict[str, object]:
                 "stages": [{"kind": "runtime-observe"}],
             },
             {
+                "pipelineId": "managed-runtime-output",
+                "stages": [{"kind": "runtime-managed-output"}],
+            },
+            {
                 "pipelineId": "native-benchmark",
                 "stages": [{"kind": "native-runtime-perf"}],
             },
@@ -52,6 +56,15 @@ def make_manifest() -> dict[str, object]:
                 "matrixId": "windows-proof",
                 "pipelineId": "proof-runtime-output",
                 "supportedGoals": ["correctness.dev"],
+            },
+            {
+                "matrixId": "windows-hotupdate-proof",
+                "pipelineId": "managed-runtime-output",
+                "supportedGoals": ["correctness.dev"],
+                "executionContext": {
+                    "runtimeProfile": "hot-update-proof",
+                    "toolchainProfile": "dotnet-managed",
+                },
             },
             {
                 "matrixId": "windows-native-perf",
@@ -88,6 +101,7 @@ def make_subject_item() -> dict[str, object]:
         "goalIds": ["correctness.dev", "perf.release"],
         "matrixIds": [
             "windows-proof",
+            "windows-hotupdate-proof",
             "windows-native-perf",
             "windows-managed-perf",
             "windows-interpreter-perf",
@@ -130,6 +144,22 @@ class DeclaredRegistryMatrixSelectionTests(unittest.TestCase):
 
         self.assertEqual("windows-native-perf", matrix_id)
         self.assertEqual("perf.release", goal_id)
+
+    def test_declared_unit_test_with_hotupdate_capability_prefers_hotupdate_matrix(self) -> None:
+        registry_module = load_registry_module()
+        manifest = make_manifest()
+
+        matrix_id, goal_id = registry_module._select_declared_matrix(
+            manifest,
+            family="declared-unit-test",
+            payload={
+                "hotUpdateCapability": 1,
+            },
+            source_entry="",
+        )
+
+        self.assertEqual("windows-hotupdate-proof", matrix_id)
+        self.assertEqual("correctness.dev", goal_id)
 
     def test_declared_registry_item_exposes_capability_owner_support_and_labels(self) -> None:
         registry_module = load_registry_module()

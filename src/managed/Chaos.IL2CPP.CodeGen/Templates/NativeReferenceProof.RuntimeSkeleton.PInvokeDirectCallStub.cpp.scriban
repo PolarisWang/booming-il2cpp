@@ -1,0 +1,48 @@
+int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)managed_args;
+    if (bridge == nullptr || runtime == nullptr || thread == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_READY;
+    }
+#if !defined(_WIN32)
+    return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+#else
+    using NativeImportFn = int32_t (WINAPI*)(int32_t arg0, int32_t arg1, int32_t arg2);
+    HMODULE module_handle = ::GetModuleHandleA({{ import_module_name_literal }});
+    if (module_handle == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+    FARPROC raw_import = ::GetProcAddress(module_handle, {{ import_entry_point_name_literal }});
+    if (raw_import == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+    const auto import_method = reinterpret_cast<NativeImportFn>(raw_import);
+    const int32_t import_result = import_method({{ import_argument0 }}, {{ import_argument1 }}, {{ import_argument2 }});
+    const std::string output = std::string({{ output_prefix_literal }}) + std::to_string(import_result);
+    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    void* raw_write_line_string = bridge->resolve_icall({{ console_write_line_string_icall_literal }});
+    if (raw_write_line_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+    const auto write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
+    void* message = abi->string_new_utf8(runtime, thread, output.c_str(), static_cast<uint32_t>(output.size()));
+    if (message == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    return write_line_string(runtime, thread, message);
+#endif
+}

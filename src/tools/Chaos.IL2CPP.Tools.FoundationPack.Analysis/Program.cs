@@ -28,7 +28,7 @@ internal static class Program
 
         if (args.Length == 0)
         {
-            Console.Error.WriteLine("usage: Chaos.IL2CPP.Tools.FoundationPack.Analysis <phase1|phase2|phase3|dependency-layer|dependency-layer-certify|dependency-layer-summarize> [options]");
+            Console.Error.WriteLine("usage: Chaos.IL2CPP.Tools.FoundationPack.Analysis <phase1|phase2|phase3|dependency-layer|dependency-layer-certify|dependency-layer-summarize|corelib-dll-inventory> [options]");
             return 1;
         }
 
@@ -44,6 +44,7 @@ internal static class Program
                 "dependency-layer" => ExecuteDependencyLayer(options),
                 "dependency-layer-certify" => ExecuteDependencyLayerCertify(options),
                 "dependency-layer-summarize" => ExecuteDependencyLayerSummarize(options),
+                "corelib-dll-inventory" => ExecuteCoreLibDllInventory(options),
                 _ => throw new ArgumentException($"unsupported command: {command}"),
             };
         }
@@ -250,6 +251,71 @@ internal static class Program
         WriteJson(Path.Combine(outputRoot, "family-proof-matrix-v1-01.json"), proofMatrixPayload);
         WriteJson(Path.Combine(outputRoot, "family-priority-benchmark-v1-01.json"), benchmarkPayload);
         WriteJson(Path.Combine(outputRoot, "semantic-family-execution-entry-v1-01.json"), executionEntryPayload);
+        return 0;
+    }
+
+    private static int ExecuteCoreLibDllInventory(IReadOnlyDictionary<string, string> options)
+    {
+        var phase2Directory = GetRequiredOption(options, "--phase2-dir");
+        var phase3Directory = GetRequiredOption(options, "--phase3-dir");
+        var outputDirectory = GetRequiredOption(options, "--output-dir");
+        var taskId = GetRequiredOption(options, "--task-id");
+
+        var outputRoot = Path.GetFullPath(outputDirectory);
+        Directory.CreateDirectory(outputRoot);
+
+        var phase2Index = Phase2SubstrateIndex.Load(phase2Directory);
+        var familyPlanPath = Path.Combine(Path.GetFullPath(phase3Directory), "semantic-family-plan-v1-01.json");
+        if (!File.Exists(familyPlanPath))
+        {
+            throw new FileNotFoundException("phase3 semantic family plan missing", familyPlanPath);
+        }
+
+        using var familyPlanDocument = JsonDocument.Parse(File.ReadAllText(familyPlanPath));
+        var familyPlanFrameworks = familyPlanDocument.RootElement.GetProperty("targetFrameworks");
+        var payload = new CoreLibDllBoundaryInventoryPayload
+        {
+            TaskId = taskId,
+            Phase2Directory = NormalizePath(phase2Directory),
+            Phase3Directory = NormalizePath(phase3Directory),
+            FinalStatus = "blocked",
+            Blockers = ["corelib-dll-boundary-generated-artifacts-missing"],
+        };
+
+        foreach (var frameworkEntry in phase2Index.TargetFrameworks.OrderBy(static entry => entry.Key, NameComparer))
+        {
+            if (!familyPlanFrameworks.TryGetProperty(frameworkEntry.Key, out var familyPlanFramework))
+            {
+                throw new InvalidOperationException($"phase3 semantic family plan missing target framework: {frameworkEntry.Key}");
+            }
+
+            var familyPayloads = new SortedDictionary<string, CoreLibDllBoundaryInventoryFamilyPayload>(NameComparer);
+            var familyPlanFamilies = familyPlanFramework.GetProperty("families");
+            foreach (var familyEntry in frameworkEntry.Value.MemberIdsByClassification
+                         .Where(static entry => entry.Value.Count > 0)
+                         .OrderBy(static entry => entry.Key, NameComparer))
+            {
+                var requiredEvidence = familyPlanFamilies.TryGetProperty(familyEntry.Key, out var familyPlanFamily)
+                    ? GetRequiredProofsForFamily(familyEntry.Key)
+                    : [];
+                familyPayloads[familyEntry.Key] = new CoreLibDllBoundaryInventoryFamilyPayload
+                {
+                    MemberCount = familyEntry.Value.Count,
+                    RequiredEvidence = requiredEvidence,
+                    InventoryStatus = "blocked",
+                };
+            }
+
+            payload.TargetFrameworks[frameworkEntry.Key] = new CoreLibDllBoundaryInventoryFrameworkPayload
+            {
+                PublicMemberCount = frameworkEntry.Value.TotalPublicMemberCount,
+                FamilyCount = familyPayloads.Count,
+                Families = familyPayloads,
+                GeneratedArtifacts = [],
+            };
+        }
+
+        WriteJson(Path.Combine(outputRoot, "corelib-dll-boundary-inventory-v1-01.json"), payload);
         return 0;
     }
 
@@ -1728,6 +1794,47 @@ internal sealed class Phase1ContractLaneIndex
 
         return new Phase1ContractLaneIndex(candidateAssemblyCounts);
     }
+}
+
+internal sealed class CoreLibDllBoundaryInventoryPayload
+{
+    public int SchemaVersion { get; set; } = 1;
+
+    public string TaskId { get; set; } = string.Empty;
+
+    public DateTimeOffset GeneratedAt { get; set; } = DateTimeOffset.Now;
+
+    public string AssemblyName { get; set; } = "System.Private.CoreLib";
+
+    public string Phase2Directory { get; set; } = string.Empty;
+
+    public string Phase3Directory { get; set; } = string.Empty;
+
+    public SortedDictionary<string, CoreLibDllBoundaryInventoryFrameworkPayload> TargetFrameworks { get; set; } = new(StringComparer.Ordinal);
+
+    public string[] Blockers { get; set; } = [];
+
+    public string FinalStatus { get; set; } = string.Empty;
+}
+
+internal sealed class CoreLibDllBoundaryInventoryFrameworkPayload
+{
+    public int PublicMemberCount { get; set; }
+
+    public int FamilyCount { get; set; }
+
+    public SortedDictionary<string, CoreLibDllBoundaryInventoryFamilyPayload> Families { get; set; } = new(StringComparer.Ordinal);
+
+    public string[] GeneratedArtifacts { get; set; } = [];
+}
+
+internal sealed class CoreLibDllBoundaryInventoryFamilyPayload
+{
+    public int MemberCount { get; set; }
+
+    public string[] RequiredEvidence { get; set; } = [];
+
+    public string InventoryStatus { get; set; } = string.Empty;
 }
 
 internal sealed class Phase2SubstrateIndex

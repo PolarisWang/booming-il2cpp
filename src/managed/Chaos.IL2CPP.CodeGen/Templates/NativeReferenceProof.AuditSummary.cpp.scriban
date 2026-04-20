@@ -1,0 +1,12 @@
+// assembly-full-closure-audit
+// generated for code review and translation inventory audit summary
+#include <cstddef>
+
+namespace chaos::il2cpp::audit
+{
+constexpr const char* kAssemblyName = {{ assembly_name_literal }};
+constexpr const char* kPlanKind = {{ plan_kind_literal }};
+constexpr std::size_t translation_unit_method_count = {{ translation_unit_method_count }};
+constexpr std::size_t translation_unit_page_size = {{ translation_unit_page_size }};
+constexpr std::size_t translation_unit_page_count = {{ translation_unit_page_count }};
+} // namespace chaos::il2cpp::audit

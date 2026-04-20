@@ -10,6 +10,9 @@ BOOTSTRAP_CMAKE_PATH = BOOTSTRAP_DIR / "CMakeLists.txt"
 BOOTSTRAP_HEADER_PATH = BOOTSTRAP_DIR / "bootstrap.h"
 BOOTSTRAP_SOURCE_PATH = BOOTSTRAP_DIR / "bootstrap.cpp"
 CODEGEN_BRIDGE_HEADER_PATH = REPO_ROOT / "contracts" / "native" / "v0" / "codegen_bridge.h"
+NATIVE_BRIDGE_SMOKE_ROOT = REPO_ROOT / "tests" / "contracts" / "native" / "bridge"
+ASSEMBLY_BOUND_SMOKE_SOURCE_PATH = NATIVE_BRIDGE_SMOKE_ROOT / "compile_only_assembly_bound_native_reference_smoke.cpp"
+ASSEMBLY_BOUND_SAMPLE_PATH = REPO_ROOT / "tests" / "contracts" / "native" / "v0" / "samples" / "bridge" / "assembly-bound-dispatch.cpp"
 
 SUPPORT_DIR = REPO_ROOT / "src" / "native" / "support"
 SUPPORT_CMAKE_PATH = SUPPORT_DIR / "CMakeLists.txt"
@@ -66,6 +69,7 @@ class NativeReferenceBootstrapSupportTests(unittest.TestCase):
             "field_token == 0u",
             "System.Console/System.Console::WriteLine(System.String)",
             "System.Private.CoreLib/System.String::Concat(System.String,System.String)",
+            "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String)",
         ]
 
         for marker in required_markers:
@@ -78,6 +82,23 @@ class NativeReferenceBootstrapSupportTests(unittest.TestCase):
         self.assertIn("CHAOS_BRIDGE_STATUS_NOT_SUPPORTED = 4", bridge_header_text)
         self.assertIn("CHAOS_BRIDGE_STATUS_MANAGED_EXCEPTION = 5", bridge_header_text)
         self.assertIn("CHAOS_BRIDGE_STATUS_INTERNAL_ERROR = 6", bridge_header_text)
+        self.assertIn("typedef struct NativeReferenceAssemblyDispatchRequestV0", bridge_header_text)
+        self.assertIn("const char* subject_id_utf8;", bridge_header_text)
+        self.assertIn("void* managed_args;", bridge_header_text)
+
+    def test_assembly_bound_native_reference_contract_sample_is_present(self) -> None:
+        cmake_text = (NATIVE_BRIDGE_SMOKE_ROOT / "CMakeLists.txt").read_text(encoding="utf-8")
+        smoke_text = ASSEMBLY_BOUND_SMOKE_SOURCE_PATH.read_text(encoding="utf-8")
+        sample_text = ASSEMBLY_BOUND_SAMPLE_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("codegen_bridge_assembly_bound_compile_only", cmake_text)
+        self.assertIn("RunNativeReferenceAssembly", smoke_text)
+        self.assertIn("NativeReferenceAssemblyDispatchRequestV0", smoke_text)
+        self.assertIn("subject_id_utf8", smoke_text)
+        self.assertIn("managed_args", smoke_text)
+        self.assertIn("RunNativeReferenceAssembly", sample_text)
+        self.assertIn("NativeReferenceAssemblyDispatchRequestV0", sample_text)
+        self.assertIn("AssemblyBoundDispatchExample", sample_text)
 
     def test_support_source_exposes_narrow_string_and_console_glue(self) -> None:
         support_text = SUPPORT_SOURCE_PATH.read_text(encoding="utf-8")
@@ -85,6 +106,7 @@ class NativeReferenceBootstrapSupportTests(unittest.TestCase):
         required_markers = [
             "TryGetUtf8View",
             "ConcatStringPair",
+            "ConcatStringTriple",
             "WriteLineString",
             "chaos_runtime_get_abi_v0",
             "string_new_utf8",
@@ -124,6 +146,7 @@ class NativeReferenceBootstrapSupportTests(unittest.TestCase):
             "CodegenRegistrationOptionsV0",
             "System.Console/System.Console::WriteLine(System.String)",
             "System.Private.CoreLib/System.String::Concat(System.String,System.String)",
+            "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String)",
         ]
 
         for marker in required_markers:

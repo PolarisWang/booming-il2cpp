@@ -1,0 +1,308 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Native HotUpdate Audit v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "reportVersion",
+    "artifactKind",
+    "runId",
+    "subjectId",
+    "matrixId",
+    "status",
+    "pipelineId",
+    "entrySelection",
+    "hostInput",
+    "nativeGeneration",
+    "nativeBuild",
+    "hotupdateRuntime",
+    "truthBoundary"
+  ],
+  "properties": {
+    "reportVersion": {
+      "type": "string",
+      "const": "v1"
+    },
+    "artifactKind": {
+      "type": "string",
+      "const": "native-hotupdate-audit"
+    },
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subjectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "matrixId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["ok", "fail", "skip", "aborted"]
+    },
+    "pipelineId": {
+      "type": "string",
+      "const": "native-hotupdate-proof-output"
+    },
+    "entrySelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family", "stableId", "alias", "entryIndex"],
+      "properties": {
+        "family": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stableId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "alias": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entryIndex": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "hostInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifestPath",
+        "primaryProjectPath",
+        "primaryAssemblyPath",
+        "additionalAssemblyPaths",
+        "managedRuntimeProjectPath",
+        "managedRuntimeAssemblyPath",
+        "collectionPath",
+        "bindingManifestPath"
+      ],
+      "properties": {
+        "manifestPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "primaryProjectPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "primaryAssemblyPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "additionalAssemblyPaths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifactPath"
+          }
+        },
+        "managedRuntimeProjectPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "managedRuntimeAssemblyPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "collectionPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "bindingManifestPath": {
+          "$ref": "#/$defs/artifactPath"
+        }
+      }
+    },
+    "nativeGeneration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifestPath",
+        "generatedSourcePath",
+        "generatedSourcePaths",
+        "nativeReferenceManifestPath",
+        "nativeReferencePlanPath",
+        "nativeAotManifestPath",
+        "runtimeExecutionKind",
+        "preferredAssemblyDispatchSubjectId",
+        "translationUnitPageCount"
+      ],
+      "properties": {
+        "manifestPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "generatedSourcePath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "generatedSourcePaths": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/artifactPath"
+          }
+        },
+        "nativeReferenceManifestPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "nativeReferencePlanPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "nativeAotManifestPath": {
+          "type": "string"
+        },
+        "runtimeExecutionKind": {
+          "type": "string",
+          "const": "assembly-bound-native-reference-skeleton"
+        },
+        "preferredAssemblyDispatchSubjectId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "translationUnitPageCount": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "nativeBuild": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifestPath",
+        "buildKind",
+        "buildStrategy",
+        "hostSourcePath",
+        "generatedSourcePaths",
+        "outputs"
+      ],
+      "properties": {
+        "manifestPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "buildKind": {
+          "type": "string",
+          "const": "native-reference"
+        },
+        "buildStrategy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hostSourcePath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "generatedSourcePaths": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/artifactPath"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/artifactPath"
+          }
+        }
+      }
+    },
+    "hotupdateRuntime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifestPath",
+        "managedRuntimeAssemblyPath",
+        "nativePrimaryAssemblyPath",
+        "nativeGeneratedManifestPath",
+        "nativeBuildManifestPath",
+        "collectionPath",
+        "bindingManifestPath",
+        "arguments",
+        "outputLines",
+        "stdoutPath",
+        "stderrPath",
+        "exitCodePath"
+      ],
+      "properties": {
+        "manifestPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "managedRuntimeAssemblyPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "nativePrimaryAssemblyPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "nativeGeneratedManifestPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "nativeBuildManifestPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "collectionPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "bindingManifestPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outputLines": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "stdoutPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "stderrPath": {
+          "$ref": "#/$defs/artifactPath"
+        },
+        "exitCodePath": {
+          "$ref": "#/$defs/artifactPath"
+        }
+      }
+    },
+    "truthBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coreLibScope",
+        "nativeReferenceScope",
+        "nativeAotScope",
+        "fullCoreLibTranslated"
+      ],
+      "properties": {
+        "coreLibScope": {
+          "type": "string",
+          "const": "narrow-proof-packet"
+        },
+        "nativeReferenceScope": {
+          "type": "string",
+          "const": "assembly-bound-runtime-skeleton"
+        },
+        "nativeAotScope": {
+          "type": "string",
+          "const": "not-used-by-this-combined-proof"
+        },
+        "fullCoreLibTranslated": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    }
+  },
+  "$defs": {
+    "artifactPath": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

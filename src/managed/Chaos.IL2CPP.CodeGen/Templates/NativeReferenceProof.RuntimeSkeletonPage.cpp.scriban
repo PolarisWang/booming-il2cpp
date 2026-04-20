@@ -1,0 +1,83 @@
+// assembly-full-closure-runtime-skeleton
+// runtime skeleton page {{ page_number }}
+#include "codegen_bridge.h"
+#include "runtime_core.h"
+#include "reflection_query_model.h"
+#include <cstddef>
+#include <cstring>
+#include <cstdint>
+#include <string>
+#if defined(_WIN32)
+#include <windows.h>
+#endif
+
+namespace chaos::il2cpp::generated::runtime_skeleton
+{
+constexpr const char* kRuntimeExecutionKind = {{ runtime_execution_kind_literal }};
+constexpr std::size_t translation_unit_page_number = {{ page_number }};
+constexpr std::size_t translation_unit_page_item_count = {{ page_item_count }};
+constexpr const char* kTranslationUnitMethodSubjectIds[] =
+{
+{{~ for subject_id_literal in method_subject_id_literals ~}}
+    {{ subject_id_literal }},
+{{~ end ~}}
+};
+
+using NativeReferenceAssemblyStubFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args);
+
+{{~ for stub_declaration in method_stub_declarations ~}}
+{{ stub_declaration }}
+{{ end ~}}
+
+{{~ for stub_definition in method_stub_definitions ~}}
+{{ stub_definition }}
+
+{{ end ~}}
+struct PageMethodDispatchEntry
+{
+    const char* subject_id;
+    NativeReferenceAssemblyStubFn stub;
+};
+
+constexpr PageMethodDispatchEntry kPageMethodDispatch[] =
+{
+{{~ for dispatch_entry in dispatch_entries ~}}
+{{ dispatch_entry }}
+{{ end ~}}
+};
+
+int32_t CHAOS_RUNTIME_ABI_CALL {{ page_dispatch_function_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    const char* subject_id,
+    void* managed_args)
+{
+    if (subject_id == nullptr || subject_id[0] == '\0') {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    for (const auto& entry : kPageMethodDispatch) {
+        if (std::strcmp(entry.subject_id, subject_id) == 0) {
+            return entry.stub(
+                bridge,
+                code_registration,
+                metadata_registration,
+                options,
+                runtime,
+                thread,
+                managed_args);
+        }
+    }
+    return CHAOS_BRIDGE_STATUS_NOT_FOUND;
+}
+}  // namespace chaos::il2cpp::generated::runtime_skeleton

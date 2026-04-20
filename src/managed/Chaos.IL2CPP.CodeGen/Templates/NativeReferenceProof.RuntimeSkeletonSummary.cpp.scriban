@@ -1,0 +1,150 @@
+// assembly-full-closure-runtime-skeleton
+// generated executable skeleton for assembly-bound native-reference runtime emission
+#include "codegen_bridge.h"
+#include <cstddef>
+#include <cstring>
+#include <cstdint>
+
+namespace chaos::il2cpp::generated
+{
+namespace runtime_skeleton
+{
+constexpr const char* kAssemblyName = {{ assembly_name_literal }};
+constexpr const char* kPlanKind = {{ plan_kind_literal }};
+constexpr const char* kRuntimeExecutionKind = {{ runtime_execution_kind_literal }};
+constexpr const char* kTranslationUnitMode = {{ translation_unit_mode_literal }};
+constexpr std::size_t translation_unit_method_count = {{ translation_unit_method_count }};
+constexpr std::size_t translation_unit_page_size = {{ translation_unit_page_size }};
+constexpr std::size_t translation_unit_page_count = {{ translation_unit_page_count }};
+using NativeReferenceAssemblyPageDispatchFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    const char* subject_id,
+    void* managed_args);
+
+struct NativeReferenceAssemblyDispatchRequest
+{
+    const char* subject_id;
+    void* managed_args;
+};
+
+struct RuntimeSkeletonPageDispatchCatalogEntry
+{
+    std::size_t page_number;
+    const char* first_subject_id;
+    const char* last_subject_id;
+    NativeReferenceAssemblyPageDispatchFn dispatch;
+};
+
+{{~ for declaration in page_dispatch_declarations ~}}
+{{ declaration }}
+{{ end ~}}
+
+constexpr RuntimeSkeletonPageDispatchCatalogEntry kPageDispatchCatalog[] =
+{
+{{~ for entry in page_dispatch_catalog_entries ~}}
+{{ entry }}
+{{ end ~}}
+};
+
+bool SubjectIdMayBelongToPage(
+    const char* subject_id,
+    const RuntimeSkeletonPageDispatchCatalogEntry& page)
+{
+    if (subject_id == nullptr || subject_id[0] == '\0') {
+        return false;
+    }
+    if (page.first_subject_id == nullptr || page.first_subject_id[0] == '\0' ||
+        page.last_subject_id == nullptr || page.last_subject_id[0] == '\0') {
+        return true;
+    }
+    if (std::strcmp(subject_id, page.first_subject_id) < 0) {
+        return false;
+    }
+    return std::strcmp(subject_id, page.last_subject_id) <= 0;
+}
+
+int32_t DispatchAssemblySubject(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    const char* subject_id,
+    void* managed_args)
+{
+    if (subject_id == nullptr || subject_id[0] == '\0') {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    for (const auto& page : kPageDispatchCatalog) {
+        if (!SubjectIdMayBelongToPage(subject_id, page)) {
+            continue;
+        }
+        const BridgeStatus page_status = page.dispatch(
+            bridge,
+            code_registration,
+            metadata_registration,
+            options,
+            runtime,
+            thread,
+            subject_id,
+            managed_args);
+        if (page_status != CHAOS_BRIDGE_STATUS_NOT_FOUND) {
+            return page_status;
+        }
+    }
+    return CHAOS_BRIDGE_STATUS_NOT_FOUND;
+}
+}  // namespace runtime_skeleton
+
+int32_t CHAOS_RUNTIME_ABI_CALL {{ native_entry_function_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args) {
+    (void)managed_args;
+    if (bridge == nullptr || code_registration == nullptr || metadata_registration == nullptr || options == nullptr || runtime == nullptr || thread == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    const BridgeStatus register_status = bridge->register_codegen(code_registration, metadata_registration, options);
+    if (register_status != CHAOS_BRIDGE_STATUS_OK) {
+        return register_status;
+    }
+    const BridgeStatus bootstrap_status = bridge->bootstrap_runtime();
+    if (bootstrap_status != CHAOS_BRIDGE_STATUS_OK) {
+        return bootstrap_status;
+    }
+    if (managed_args == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+    const auto* request = static_cast<const runtime_skeleton::NativeReferenceAssemblyDispatchRequest*>(managed_args);
+    return runtime_skeleton::DispatchAssemblySubject(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        request->subject_id,
+        request->managed_args);
+}
+
+int32_t CHAOS_RUNTIME_ABI_CALL RunNativeReference(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args) {
+    return {{ native_entry_function_name }}(bridge, code_registration, metadata_registration, options, runtime, thread, managed_args);
+}
+}  // namespace chaos::il2cpp::generated

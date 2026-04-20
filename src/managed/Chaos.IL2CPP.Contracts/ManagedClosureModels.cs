@@ -84,6 +84,8 @@ public sealed record ManagedPropertyModel
 
     public required string PropertyType { get; init; }
 
+    public IReadOnlyList<string>? IndexParameterTypes { get; init; }
+
     public required string SubjectId { get; init; }
 
     public required string DefinitionSubjectId { get; init; }
@@ -102,6 +104,8 @@ public sealed record ManagedMethodModel
     public required string DeclaringTypeDisplayName { get; init; }
 
     public required string Name { get; init; }
+
+    public int GenericParameterCount { get; init; }
 
     public required string ReturnType { get; init; }
 

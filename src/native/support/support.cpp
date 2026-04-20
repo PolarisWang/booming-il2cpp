@@ -71,6 +71,46 @@ void* CHAOS_RUNTIME_ABI_CALL ConcatStringPair(
     return abi->string_new_utf8(runtime_state, thread_state, combined.c_str(), combined.size());
 }
 
+void* CHAOS_RUNTIME_ABI_CALL ConcatStringTriple(
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    const void* first_string,
+    const void* second_string,
+    const void* third_string) {
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr || runtime_state == nullptr || thread_state == nullptr) {
+        return nullptr;
+    }
+
+    uintptr_t first_byte_count = 0u;
+    uintptr_t second_byte_count = 0u;
+    uintptr_t third_byte_count = 0u;
+    const char* first_utf8 = TryGetUtf8View(first_string, &first_byte_count);
+    const char* second_utf8 = TryGetUtf8View(second_string, &second_byte_count);
+    const char* third_utf8 = TryGetUtf8View(third_string, &third_byte_count);
+    if ((first_string != nullptr && first_utf8 == nullptr) ||
+        (second_string != nullptr && second_utf8 == nullptr) ||
+        (third_string != nullptr && third_utf8 == nullptr)) {
+        return nullptr;
+    }
+
+    std::string combined;
+    combined.reserve(static_cast<size_t>(first_byte_count + second_byte_count + third_byte_count));
+    if (first_utf8 != nullptr) {
+        combined.append(first_utf8, static_cast<size_t>(first_byte_count));
+    }
+
+    if (second_utf8 != nullptr) {
+        combined.append(second_utf8, static_cast<size_t>(second_byte_count));
+    }
+
+    if (third_utf8 != nullptr) {
+        combined.append(third_utf8, static_cast<size_t>(third_byte_count));
+    }
+
+    return abi->string_new_utf8(runtime_state, thread_state, combined.c_str(), combined.size());
+}
+
 int32_t CHAOS_RUNTIME_ABI_CALL WriteLineString(
     RuntimeState* runtime_state,
     ThreadState* thread_state,

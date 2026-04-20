@@ -1,0 +1,94 @@
+struct chaos_async_task_int32
+{
+    std::int32_t result = 0;
+    std::intptr_t exception = 0;
+    bool completed = false;
+    bool faulted = false;
+};
+
+chaos_async_task_int32* chaos_require_async_task_int32(std::intptr_t chaos_handle)
+{
+    if (chaos_handle == static_cast<std::intptr_t>(0))
+    {
+        std::abort();
+    }
+
+    return reinterpret_cast<chaos_async_task_int32*>(chaos_handle);
+}
+
+std::intptr_t chaos_async_task_int32_create()
+{
+    return reinterpret_cast<std::intptr_t>(new chaos_async_task_int32{});
+}
+
+std::intptr_t chaos_async_task_int32_builder_get_task(std::intptr_t chaos_builder_ref)
+{
+    auto* chaos_builder_slot = chaos_resolve_native_int_slot(chaos_builder_ref);
+    if (*chaos_builder_slot == static_cast<std::intptr_t>(0))
+    {
+        *chaos_builder_slot = chaos_async_task_int32_create();
+    }
+
+    return *chaos_builder_slot;
+}
+
+void chaos_async_task_int32_builder_set_result(std::intptr_t chaos_builder_ref, std::int32_t chaos_value)
+{
+    auto* chaos_task = chaos_require_async_task_int32(chaos_async_task_int32_builder_get_task(chaos_builder_ref));
+    chaos_task->result = chaos_value;
+    chaos_task->exception = static_cast<std::intptr_t>(0);
+    chaos_task->faulted = false;
+    chaos_task->completed = true;
+}
+
+void chaos_async_task_int32_builder_set_exception(std::intptr_t chaos_builder_ref, std::intptr_t chaos_exception)
+{
+    auto* chaos_task = chaos_require_async_task_int32(chaos_async_task_int32_builder_get_task(chaos_builder_ref));
+    chaos_task->exception = chaos_exception;
+    chaos_task->faulted = true;
+    chaos_task->completed = true;
+}
+
+std::intptr_t chaos_async_yield_create() noexcept
+{
+    return static_cast<std::intptr_t>(1);
+}
+
+std::intptr_t chaos_async_yield_get_awaiter(std::intptr_t chaos_awaiter_ref)
+{
+    return *chaos_resolve_native_int_slot(chaos_awaiter_ref);
+}
+
+std::intptr_t chaos_async_yield_get_is_completed(std::intptr_t chaos_awaiter_ref)
+{
+    (void)chaos_awaiter_ref;
+    return static_cast<std::intptr_t>(1);
+}
+
+void chaos_async_yield_get_result(std::intptr_t chaos_awaiter_ref)
+{
+    (void)chaos_awaiter_ref;
+}
+
+std::intptr_t chaos_async_task_int32_get_awaiter(std::intptr_t chaos_task_handle)
+{
+    (void)chaos_require_async_task_int32(chaos_task_handle);
+    return chaos_task_handle;
+}
+
+std::intptr_t chaos_async_task_int32_awaiter_get_is_completed(std::intptr_t chaos_awaiter_ref)
+{
+    auto* chaos_task = chaos_require_async_task_int32(*chaos_resolve_native_int_slot(chaos_awaiter_ref));
+    return chaos_task->completed ? static_cast<std::intptr_t>(1) : static_cast<std::intptr_t>(0);
+}
+
+std::int32_t chaos_async_task_int32_awaiter_get_result(std::intptr_t chaos_awaiter_ref)
+{
+    auto* chaos_task = chaos_require_async_task_int32(*chaos_resolve_native_int_slot(chaos_awaiter_ref));
+    if (!chaos_task->completed || chaos_task->faulted)
+    {
+        std::abort();
+    }
+
+    return chaos_task->result;
+}

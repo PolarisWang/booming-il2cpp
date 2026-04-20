@@ -143,17 +143,27 @@ def build_plan(
             run_id=selected_run_id,
         )
     )
+    matrix_source = dict(matrix.get("source") or {})
     selected_source = dict(manifest["source"])
-    selected_source.update(dict(matrix.get("source") or {}))
+    selected_source.update(matrix_source)
+    source_entry_overridden = source_entry is not None or "entry" in matrix_source
+    matrix_entry_overridden = "entry" in matrix_source
+    matrix_entry_selection_overridden = "entrySelection" in matrix_source
     if source_entry is not None:
         selected_source["entry"] = source_entry
     explicit_workload_entry = workload_entry is not None
-    normalized_entry_selection = dict(entry_selection or {})
+    normalized_entry_selection = dict(matrix.get("entrySelection") or {})
+    if entry_selection:
+        normalized_entry_selection = dict(entry_selection)
     entry_selection_family = _entry_selection_family(normalized_entry_selection)
     normalized_source_entry_selection = (
         {}
         if entry_selection_family == "declared-benchmark"
-        else _normalize_source_entry_selection(selected_source)
+        else (
+            {}
+            if matrix_entry_overridden and not matrix_entry_selection_overridden and source_entry is None
+            else _normalize_source_entry_selection(selected_source)
+        )
     )
     if normalized_source_entry_selection:
         selected_source["entrySelection"] = normalized_source_entry_selection
@@ -171,7 +181,7 @@ def build_plan(
     if explicit_workload_entry:
         if source_entry is None and selected_workload_entry:
             selected_source["entry"] = selected_workload_entry
-    elif selected_workload_entry and not str(selected_source.get("entry") or ""):
+    elif selected_workload_entry and not str(selected_source.get("entry") or "") and not source_entry_overridden:
         selected_source["entry"] = selected_workload_entry
     if normalized_entry_selection:
         artifacts_root.update(
@@ -279,6 +289,7 @@ def build_plan(
         },
         "selection": {
             "subjectId": subject_id,
+            "runId": selected_run_id,
             "displayName": str(manifest["displayName"]),
             "sourceModel": str(manifest.get("sourceModel") or ""),
             "dependencyModel": str(manifest.get("dependencyModel") or ""),

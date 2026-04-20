@@ -1379,8 +1379,12 @@ public sealed partial class NativeAotLoweringPlanner
         string attributeTypeSubjectId,
         string memberName)
     {
-        var getterSubjectId = ManagedNaming.CreateMethodSubjectId(attributeTypeSubjectId, $"get_{memberName}", []);
-        if (_methodsBySubjectId.TryGetValue(getterSubjectId, out var getterMethod) &&
+        var getterMethod = _methodsBySubjectId.Values.FirstOrDefault(method =>
+            string.Equals(method.Identity.DeclaringTypeSubjectId, attributeTypeSubjectId, StringComparison.Ordinal) &&
+            method.SubjectId.Contains($"::get_{memberName}:", StringComparison.Ordinal) &&
+            !method.IsStatic &&
+            method.ParameterCount == 0);
+        if (getterMethod is not null &&
             TryGetAutoGetterStorageFieldSubjectId(getterMethod, out var fieldSubjectId) &&
             !string.IsNullOrWhiteSpace(fieldSubjectId))
         {

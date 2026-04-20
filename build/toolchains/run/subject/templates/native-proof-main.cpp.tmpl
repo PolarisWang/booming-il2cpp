@@ -15,6 +15,15 @@ int32_t CHAOS_RUNTIME_ABI_CALL RunNativeReference(
     ThreadState* thread,
     void* managed_args);
 
+int32_t CHAOS_RUNTIME_ABI_CALL RunNativeReferenceAssembly(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args);
+
 }  // namespace chaos::il2cpp::generated
 
 namespace chaos::il2cpp::proof_host {
@@ -25,6 +34,10 @@ constexpr const char* kConsoleWriteLineStringIcall =
     "System.Console/System.Console::WriteLine(System.String)";
 constexpr const char* kStringConcatPairIcall =
     "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
+constexpr const char* kStringConcatTripleIcall =
+    "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String)";
+constexpr const bool kUseAssemblyBoundDispatch = @@USE_ASSEMBLY_BOUND_DISPATCH@@;
+constexpr const char* kAssemblyDispatchSubjectId = "@@ASSEMBLY_DISPATCH_SUBJECT_ID@@";
 
 int32_t RunProofHost() {
     const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
@@ -35,8 +48,10 @@ int32_t RunProofHost() {
 
     const auto* write_line_string = &chaos::il2cpp::support::WriteLineString;
     const auto* concat_string_pair = &chaos::il2cpp::support::ConcatStringPair;
+    const auto* concat_string_triple = &chaos::il2cpp::support::ConcatStringTriple;
     (void)write_line_string;
     (void)concat_string_pair;
+    (void)concat_string_triple;
 
     RuntimeInitParams init_params = {};
     init_params.struct_size = sizeof(init_params);
@@ -64,17 +79,33 @@ int32_t RunProofHost() {
     options.struct_size = sizeof(options);
     options.image_name_utf8 = "@@IMAGE_NAME@@";
 
-    const int32_t exit_code = chaos::il2cpp::generated::RunNativeReference(
-        bridge,
-        &code_registration,
-        &metadata_registration,
-        &options,
-        runtime,
-        thread,
-        nullptr);
+    int32_t exit_code = 0;
+    if (kUseAssemblyBoundDispatch) {
+        NativeReferenceAssemblyDispatchRequestV0 request = {};
+        request.subject_id_utf8 = kAssemblyDispatchSubjectId;
+        request.managed_args = nullptr;
+        exit_code = chaos::il2cpp::generated::RunNativeReferenceAssembly(
+            bridge,
+            &code_registration,
+            &metadata_registration,
+            &options,
+            runtime,
+            thread,
+            &request);
+    } else {
+        exit_code = chaos::il2cpp::generated::RunNativeReference(
+            bridge,
+            &code_registration,
+            &metadata_registration,
+            &options,
+            runtime,
+            thread,
+            nullptr);
+    }
 
     (void)bridge->resolve_icall(kConsoleWriteLineStringIcall);
     (void)bridge->resolve_icall(kStringConcatPairIcall);
+    (void)bridge->resolve_icall(kStringConcatTripleIcall);
 
     abi->thread_detach(runtime, thread);
     abi->runtime_shutdown(runtime);

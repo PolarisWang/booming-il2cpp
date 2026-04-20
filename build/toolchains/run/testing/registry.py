@@ -541,6 +541,19 @@ def _matrix_stage_kinds(manifest: dict[str, Any], matrix: dict[str, Any]) -> set
     return set(subjects_module.pipeline_stage_kinds(pipeline))
 
 
+def _matrix_uses_hotupdate_host(manifest: dict[str, Any], matrix: dict[str, Any]) -> bool:
+    engineering_profile = str(manifest.get("engineeringProfile") or "").strip().lower()
+    if engineering_profile == "hot-update-host":
+        return True
+
+    execution_context = dict(matrix.get("executionContext") or {})
+    for field_name in ("runtimeProfile", "toolchainProfile"):
+        normalized = str(execution_context.get(field_name) or "").strip().lower()
+        if "hot-update" in normalized or "hotupdate" in normalized:
+            return True
+    return False
+
+
 def _select_engineering_matrix(manifest: dict[str, Any], kind: str) -> tuple[str, str]:
     candidate_stage_kinds = ENGINEERING_MATRIX_STAGE_KINDS.get(kind, ())
     matrices = _preferred_subject_matrices(manifest)
@@ -587,6 +600,11 @@ def _select_declared_matrix(
     payload: dict[str, Any],
     source_entry: str,
 ) -> tuple[str, str]:
+    if family == "declared-unit-test" and int(payload.get("hotUpdateCapability") or 0) > 0:
+        for matrix in _preferred_subject_matrices(manifest):
+            if _matrix_uses_hotupdate_host(manifest, matrix):
+                return str(matrix.get("matrixId") or ""), _matrix_goal_id(manifest, matrix)
+
     if family == "declared-benchmark":
         supported_modes = declared_metadata_labels_module.supported_modes_from_mask(payload.get("modes"))
         candidate_stage_kinds = {

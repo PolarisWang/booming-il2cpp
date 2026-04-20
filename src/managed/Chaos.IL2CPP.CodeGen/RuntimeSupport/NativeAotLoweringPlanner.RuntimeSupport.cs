@@ -1,4 +1,5 @@
 using System.Text;
+using Scriban.Runtime;
 
 namespace Chaos.IL2CPP.CodeGen;
 
@@ -6,252 +7,27 @@ public sealed partial class NativeAotLoweringPlanner
 {
     private static void EmitCollectionRuntimePrelude(StringBuilder builder)
     {
-        builder.AppendLine("template <typename TValue>");
-        builder.AppendLine("struct chaos_list_runtime_storage");
-        builder.AppendLine("{");
-        builder.AppendLine("    std::vector<TValue> items{};");
-        builder.AppendLine("};");
-        builder.AppendLine();
-        builder.AppendLine("template <typename TValue>");
-        builder.AppendLine("chaos_list_runtime_storage<TValue>* chaos_require_list_runtime_storage(std::intptr_t chaos_handle)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_handle == static_cast<std::intptr_t>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        std::abort();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    static std::unordered_map<std::intptr_t, std::unique_ptr<chaos_list_runtime_storage<TValue>>> chaos_storage_by_handle;");
-        builder.AppendLine("    auto& chaos_storage = chaos_storage_by_handle[chaos_handle];");
-        builder.AppendLine("    if (chaos_storage == nullptr)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        chaos_storage = std::make_unique<chaos_list_runtime_storage<TValue>>();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return chaos_storage.get();");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("template <typename TKey, typename TValue>");
-        builder.AppendLine("struct chaos_dictionary_runtime_storage");
-        builder.AppendLine("{");
-        builder.AppendLine("    std::vector<std::pair<TKey, TValue>> entries{};");
-        builder.AppendLine("};");
-        builder.AppendLine();
-        builder.AppendLine("template <typename TKey, typename TValue>");
-        builder.AppendLine("chaos_dictionary_runtime_storage<TKey, TValue>* chaos_require_dictionary_runtime_storage(std::intptr_t chaos_handle)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_handle == static_cast<std::intptr_t>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        std::abort();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    static std::unordered_map<std::intptr_t, std::unique_ptr<chaos_dictionary_runtime_storage<TKey, TValue>>> chaos_storage_by_handle;");
-        builder.AppendLine("    auto& chaos_storage = chaos_storage_by_handle[chaos_handle];");
-        builder.AppendLine("    if (chaos_storage == nullptr)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        chaos_storage = std::make_unique<chaos_dictionary_runtime_storage<TKey, TValue>>();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return chaos_storage.get();");
-        builder.AppendLine("}");
-        builder.AppendLine();
+        AppendRuntimeSupportTemplate(builder, NativeAotTemplateCatalog.GetCollectionRuntimePreludeTemplate());
     }
 
     private static void EmitMonitorRuntimePrelude(StringBuilder builder)
     {
-        builder.AppendLine("struct chaos_monitor_runtime_entry");
-        builder.AppendLine("{");
-        builder.AppendLine("    std::recursive_timed_mutex mutex{};");
-        builder.AppendLine("};");
-        builder.AppendLine();
-        builder.AppendLine("chaos_monitor_runtime_entry& chaos_require_monitor_runtime_entry(std::intptr_t chaos_object_value)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_object_value == static_cast<std::intptr_t>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        std::abort();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    static std::mutex chaos_monitor_table_mutex;");
-        builder.AppendLine("    static std::unordered_map<std::intptr_t, std::unique_ptr<chaos_monitor_runtime_entry>> chaos_monitor_table;");
-        builder.AppendLine("    std::lock_guard<std::mutex> chaos_guard(chaos_monitor_table_mutex);");
-        builder.AppendLine("    auto& chaos_entry = chaos_monitor_table[chaos_object_value];");
-        builder.AppendLine("    if (!chaos_entry)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        chaos_entry = std::make_unique<chaos_monitor_runtime_entry>();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return *chaos_entry;");
-        builder.AppendLine("}");
-        builder.AppendLine();
+        AppendRuntimeSupportTemplate(builder, NativeAotTemplateCatalog.GetMonitorRuntimePreludeTemplate());
     }
 
     private static void EmitThreadRuntimePrelude(StringBuilder builder)
     {
-        builder.AppendLine("struct chaos_thread_runtime_entry");
-        builder.AppendLine("{");
-        builder.AppendLine("    std::mutex mutex{};");
-        builder.AppendLine("    std::unique_ptr<std::thread> worker{};");
-        builder.AppendLine("    std::intptr_t thread_start_delegate = 0;");
-        builder.AppendLine("    std::intptr_t name = 0;");
-        builder.AppendLine("    std::int32_t managed_thread_id = 0;");
-        builder.AppendLine("};");
-        builder.AppendLine();
-        builder.AppendLine("std::mutex& chaos_thread_runtime_table_mutex()");
-        builder.AppendLine("{");
-        builder.AppendLine("    static std::mutex chaos_mutex;");
-        builder.AppendLine("    return chaos_mutex;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine(
-            "std::unordered_map<std::intptr_t, std::unique_ptr<chaos_thread_runtime_entry>>& chaos_thread_runtime_table()");
-        builder.AppendLine("{");
-        builder.AppendLine(
-            "    static std::unordered_map<std::intptr_t, std::unique_ptr<chaos_thread_runtime_entry>> chaos_table;");
-        builder.AppendLine("    return chaos_table;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::int32_t chaos_allocate_managed_thread_id()");
-        builder.AppendLine("{");
-        builder.AppendLine("    static std::mutex chaos_thread_id_mutex;");
-        builder.AppendLine("    static std::int32_t chaos_next_managed_thread_id = 2;");
-        builder.AppendLine("    std::lock_guard<std::mutex> chaos_guard(chaos_thread_id_mutex);");
-        builder.AppendLine("    return chaos_next_managed_thread_id++;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("thread_local std::intptr_t chaos_current_thread_object = static_cast<std::intptr_t>(0);");
-        builder.AppendLine("thread_local std::int32_t chaos_current_managed_thread_id = 1;");
-        builder.AppendLine();
-        builder.AppendLine("chaos_thread_runtime_entry* chaos_try_get_thread_runtime_entry(std::intptr_t chaos_thread_object_value)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_thread_object_value == static_cast<std::intptr_t>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return nullptr;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    std::lock_guard<std::mutex> chaos_guard(chaos_thread_runtime_table_mutex());");
-        builder.AppendLine("    const auto chaos_entry_it = chaos_thread_runtime_table().find(chaos_thread_object_value);");
-        builder.AppendLine("    if (chaos_entry_it == chaos_thread_runtime_table().end())");
-        builder.AppendLine("    {");
-        builder.AppendLine("        return nullptr;");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return chaos_entry_it->second.get();");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("chaos_thread_runtime_entry& chaos_require_thread_runtime_entry(std::intptr_t chaos_thread_object_value)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_thread_object_value == static_cast<std::intptr_t>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        std::abort();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    std::lock_guard<std::mutex> chaos_guard(chaos_thread_runtime_table_mutex());");
-        builder.AppendLine("    auto& chaos_entry = chaos_thread_runtime_table()[chaos_thread_object_value];");
-        builder.AppendLine("    if (!chaos_entry)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        chaos_entry = std::make_unique<chaos_thread_runtime_entry>();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return *chaos_entry;");
-        builder.AppendLine("}");
-        builder.AppendLine();
+        AppendRuntimeSupportTemplate(builder, NativeAotTemplateCatalog.GetThreadRuntimePreludeTemplate());
     }
 
     private static void EmitAsyncRuntimePrelude(StringBuilder builder)
     {
-        builder.AppendLine("struct chaos_async_task_int32");
-        builder.AppendLine("{");
-        builder.AppendLine("    std::int32_t result = 0;");
-        builder.AppendLine("    std::intptr_t exception = 0;");
-        builder.AppendLine("    bool completed = false;");
-        builder.AppendLine("    bool faulted = false;");
-        builder.AppendLine("};");
-        builder.AppendLine();
-        builder.AppendLine("chaos_async_task_int32* chaos_require_async_task_int32(std::intptr_t chaos_handle)");
-        builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_handle == static_cast<std::intptr_t>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        std::abort();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return reinterpret_cast<chaos_async_task_int32*>(chaos_handle);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_async_task_int32_create()");
-        builder.AppendLine("{");
-        builder.AppendLine("    return reinterpret_cast<std::intptr_t>(new chaos_async_task_int32{});");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_async_task_int32_builder_get_task(std::intptr_t chaos_builder_ref)");
-        builder.AppendLine("{");
-        builder.AppendLine("    auto* chaos_builder_slot = chaos_resolve_native_int_slot(chaos_builder_ref);");
-        builder.AppendLine("    if (*chaos_builder_slot == static_cast<std::intptr_t>(0))");
-        builder.AppendLine("    {");
-        builder.AppendLine("        *chaos_builder_slot = chaos_async_task_int32_create();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return *chaos_builder_slot;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("void chaos_async_task_int32_builder_set_result(std::intptr_t chaos_builder_ref, std::int32_t chaos_value)");
-        builder.AppendLine("{");
-        builder.AppendLine("    auto* chaos_task = chaos_require_async_task_int32(chaos_async_task_int32_builder_get_task(chaos_builder_ref));");
-        builder.AppendLine("    chaos_task->result = chaos_value;");
-        builder.AppendLine("    chaos_task->exception = static_cast<std::intptr_t>(0);");
-        builder.AppendLine("    chaos_task->faulted = false;");
-        builder.AppendLine("    chaos_task->completed = true;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("void chaos_async_task_int32_builder_set_exception(std::intptr_t chaos_builder_ref, std::intptr_t chaos_exception)");
-        builder.AppendLine("{");
-        builder.AppendLine("    auto* chaos_task = chaos_require_async_task_int32(chaos_async_task_int32_builder_get_task(chaos_builder_ref));");
-        builder.AppendLine("    chaos_task->exception = chaos_exception;");
-        builder.AppendLine("    chaos_task->faulted = true;");
-        builder.AppendLine("    chaos_task->completed = true;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_async_yield_create() noexcept");
-        builder.AppendLine("{");
-        builder.AppendLine("    return static_cast<std::intptr_t>(1);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_async_yield_get_awaiter(std::intptr_t chaos_awaiter_ref)");
-        builder.AppendLine("{");
-        builder.AppendLine("    return *chaos_resolve_native_int_slot(chaos_awaiter_ref);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_async_yield_get_is_completed(std::intptr_t chaos_awaiter_ref)");
-        builder.AppendLine("{");
-        builder.AppendLine("    (void)chaos_awaiter_ref;");
-        builder.AppendLine("    return static_cast<std::intptr_t>(1);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("void chaos_async_yield_get_result(std::intptr_t chaos_awaiter_ref)");
-        builder.AppendLine("{");
-        builder.AppendLine("    (void)chaos_awaiter_ref;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_async_task_int32_get_awaiter(std::intptr_t chaos_task_handle)");
-        builder.AppendLine("{");
-        builder.AppendLine("    (void)chaos_require_async_task_int32(chaos_task_handle);");
-        builder.AppendLine("    return chaos_task_handle;");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_async_task_int32_awaiter_get_is_completed(std::intptr_t chaos_awaiter_ref)");
-        builder.AppendLine("{");
-        builder.AppendLine("    auto* chaos_task = chaos_require_async_task_int32(*chaos_resolve_native_int_slot(chaos_awaiter_ref));");
-        builder.AppendLine("    return chaos_task->completed ? static_cast<std::intptr_t>(1) : static_cast<std::intptr_t>(0);");
-        builder.AppendLine("}");
-        builder.AppendLine();
-        builder.AppendLine("std::int32_t chaos_async_task_int32_awaiter_get_result(std::intptr_t chaos_awaiter_ref)");
-        builder.AppendLine("{");
-        builder.AppendLine("    auto* chaos_task = chaos_require_async_task_int32(*chaos_resolve_native_int_slot(chaos_awaiter_ref));");
-        builder.AppendLine("    if (!chaos_task->completed || chaos_task->faulted)");
-        builder.AppendLine("    {");
-        builder.AppendLine("        std::abort();");
-        builder.AppendLine("    }");
-        builder.AppendLine();
-        builder.AppendLine("    return chaos_task->result;");
-        builder.AppendLine("}");
+        AppendRuntimeSupportTemplate(builder, NativeAotTemplateCatalog.GetAsyncRuntimePreludeTemplate());
+    }
+
+    private static void AppendRuntimeSupportTemplate(StringBuilder builder, Scriban.Template template)
+    {
+        builder.AppendLine(ScribanTemplateRenderer.RenderTemplate(template, new ScriptObject()).TrimEnd());
         builder.AppendLine();
     }
 }

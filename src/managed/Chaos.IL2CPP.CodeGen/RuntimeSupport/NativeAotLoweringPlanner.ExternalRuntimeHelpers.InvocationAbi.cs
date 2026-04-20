@@ -13,6 +13,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using Chaos.IL2CPP.Contracts;
+using Scriban.Runtime;
 
 namespace Chaos.IL2CPP.CodeGen;
 
@@ -109,57 +110,97 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static void EmitMethodReturn(StringBuilder builder, AotCoreIrAbiSlotArtifact returnAbi)
 	{
+		string[] returnLines;
 		switch (returnAbi.CarrierKindCode)
 		{
 		case AotCoreIrAbiCarrierKind.Void:
-			builder.AppendLine("    return;");
+			returnLines =
+			[
+				"    return;"
+			];
 			break;
 		case AotCoreIrAbiCarrierKind.Int32:
-			builder.AppendLine("    return static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);");
+			returnLines =
+			[
+				"    return static_cast<std::int32_t>(chaos_eval_stack[--chaos_stack_top]);"
+			];
 			break;
 		case AotCoreIrAbiCarrierKind.Int8:
-			builder.AppendLine("    return static_cast<std::int8_t>(chaos_eval_stack[--chaos_stack_top]);");
+			returnLines =
+			[
+				"    return static_cast<std::int8_t>(chaos_eval_stack[--chaos_stack_top]);"
+			];
 			break;
 		case AotCoreIrAbiCarrierKind.UInt8:
-			builder.AppendLine("    return static_cast<std::uint8_t>(chaos_eval_stack[--chaos_stack_top]);");
+			returnLines =
+			[
+				"    return static_cast<std::uint8_t>(chaos_eval_stack[--chaos_stack_top]);"
+			];
 			break;
 		case AotCoreIrAbiCarrierKind.Int16:
-			builder.AppendLine("    return static_cast<std::int16_t>(chaos_eval_stack[--chaos_stack_top]);");
+			returnLines =
+			[
+				"    return static_cast<std::int16_t>(chaos_eval_stack[--chaos_stack_top]);"
+			];
 			break;
 		case AotCoreIrAbiCarrierKind.UInt16:
-			builder.AppendLine("    return static_cast<std::uint16_t>(chaos_eval_stack[--chaos_stack_top]);");
+			returnLines =
+			[
+				"    return static_cast<std::uint16_t>(chaos_eval_stack[--chaos_stack_top]);"
+			];
 			break;
 		case AotCoreIrAbiCarrierKind.Float32:
-			builder.AppendLine("    return chaos_load_float32(chaos_eval_stack[--chaos_stack_top]);");
+			returnLines =
+			[
+				"    return chaos_load_float32(chaos_eval_stack[--chaos_stack_top]);"
+			];
 			break;
 		case AotCoreIrAbiCarrierKind.Float64:
-			builder.AppendLine("    return chaos_load_float64(chaos_eval_stack[--chaos_stack_top]);");
+			returnLines =
+			[
+				"    return chaos_load_float64(chaos_eval_stack[--chaos_stack_top]);"
+			];
 			break;
 		case AotCoreIrAbiCarrierKind.Int64:
-			builder.AppendLine("    return chaos_load_int64(chaos_eval_stack[--chaos_stack_top]);");
+			returnLines =
+			[
+				"    return chaos_load_int64(chaos_eval_stack[--chaos_stack_top]);"
+			];
 			break;
 		case AotCoreIrAbiCarrierKind.UInt64:
-			builder.AppendLine("    return chaos_load_uint64(chaos_eval_stack[--chaos_stack_top]);");
+			returnLines =
+			[
+				"    return chaos_load_uint64(chaos_eval_stack[--chaos_stack_top]);"
+			];
 			break;
 		case AotCoreIrAbiCarrierKind.NativeInt:
-			builder.AppendLine("    return chaos_eval_stack[--chaos_stack_top];");
+			returnLines =
+			[
+				"    return chaos_eval_stack[--chaos_stack_top];"
+			];
 			break;
 		case AotCoreIrAbiCarrierKind.ValueTypeByValue:
-		{
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(87, 1, builder);
-			handler.AppendLiteral("    return *chaos_resolve_managed_value_pointer<");
-			handler.AppendFormatted(GetRequiredAbiValueTypeSymbol(returnAbi));
-			handler.AppendLiteral(">(chaos_eval_stack[--chaos_stack_top]);");
-			builder.AppendLine(ref handler);
+			returnLines =
+			[
+				$"    return *chaos_resolve_managed_value_pointer<{GetRequiredAbiValueTypeSymbol(returnAbi)}>(chaos_eval_stack[--chaos_stack_top]);"
+			];
 			break;
-		}
 		default:
 			throw new NotSupportedException($"native-aot lowering does not support ABI return carrier '{returnAbi.CarrierKindCode}'.");
 		}
+
+		builder.AppendLine(
+			ScribanTemplateRenderer.RenderTemplate(
+				NativeAotTemplateCatalog.GetMethodReturnTemplate(),
+				new ScriptObject
+				{
+					["lines"] = returnLines,
+				}).TrimEnd());
 	}
 
 	private static void EmitAbiReturnPush(StringBuilder builder, AotCoreIrAbiSlotArtifact returnAbi, string resultExpression, string indentation)
 	{
+		string[] pushLines;
 		switch (returnAbi.CarrierKindCode)
 		{
 		case AotCoreIrAbiCarrierKind.Int32:
@@ -168,94 +209,54 @@ public sealed partial class NativeAotLoweringPlanner
 		case AotCoreIrAbiCarrierKind.UInt8:
 		case AotCoreIrAbiCarrierKind.Int16:
 		case AotCoreIrAbiCarrierKind.UInt16:
-		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder9 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(67, 2, stringBuilder);
-			handler.AppendFormatted(indentation);
-			handler.AppendLiteral("chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>(");
-			handler.AppendFormatted(resultExpression);
-			handler.AppendLiteral(");");
-			stringBuilder9.AppendLine(ref handler);
+			pushLines =
+			[
+				$"{indentation}chaos_eval_stack[chaos_stack_top++] = static_cast<std::intptr_t>({resultExpression});"
+			];
 			break;
-		}
 		case AotCoreIrAbiCarrierKind.Float32:
-		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder8 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(60, 2, stringBuilder);
-			handler.AppendFormatted(indentation);
-			handler.AppendLiteral("chaos_eval_stack[chaos_stack_top++] = chaos_store_float32(");
-			handler.AppendFormatted(resultExpression);
-			handler.AppendLiteral(");");
-			stringBuilder8.AppendLine(ref handler);
+			pushLines =
+			[
+				$"{indentation}chaos_eval_stack[chaos_stack_top++] = chaos_store_float32({resultExpression});"
+			];
 			break;
-		}
 		case AotCoreIrAbiCarrierKind.Float64:
-		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder7 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(60, 2, stringBuilder);
-			handler.AppendFormatted(indentation);
-			handler.AppendLiteral("chaos_eval_stack[chaos_stack_top++] = chaos_store_float64(");
-			handler.AppendFormatted(resultExpression);
-			handler.AppendLiteral(");");
-			stringBuilder7.AppendLine(ref handler);
+			pushLines =
+			[
+				$"{indentation}chaos_eval_stack[chaos_stack_top++] = chaos_store_float64({resultExpression});"
+			];
 			break;
-		}
 		case AotCoreIrAbiCarrierKind.Int64:
-		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder6 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(58, 2, stringBuilder);
-			handler.AppendFormatted(indentation);
-			handler.AppendLiteral("chaos_eval_stack[chaos_stack_top++] = chaos_store_int64(");
-			handler.AppendFormatted(resultExpression);
-			handler.AppendLiteral(");");
-			stringBuilder6.AppendLine(ref handler);
+			pushLines =
+			[
+				$"{indentation}chaos_eval_stack[chaos_stack_top++] = chaos_store_int64({resultExpression});"
+			];
 			break;
-		}
 		case AotCoreIrAbiCarrierKind.UInt64:
-		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder5 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(59, 2, stringBuilder);
-			handler.AppendFormatted(indentation);
-			handler.AppendLiteral("chaos_eval_stack[chaos_stack_top++] = chaos_store_uint64(");
-			handler.AppendFormatted(resultExpression);
-			handler.AppendLiteral(");");
-			stringBuilder5.AppendLine(ref handler);
+			pushLines =
+			[
+				$"{indentation}chaos_eval_stack[chaos_stack_top++] = chaos_store_uint64({resultExpression});"
+			];
 			break;
-		}
 		case AotCoreIrAbiCarrierKind.ValueTypeByValue:
-		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder2 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(36, 2, stringBuilder);
-			handler.AppendFormatted(indentation);
-			handler.AppendLiteral("auto* chaos_result_storage = new ");
-			handler.AppendFormatted(GetRequiredAbiValueTypeSymbol(returnAbi));
-			handler.AppendLiteral("{};");
-			stringBuilder2.AppendLine(ref handler);
-			stringBuilder = builder;
-			StringBuilder stringBuilder3 = stringBuilder;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(25, 2, stringBuilder);
-			handler.AppendFormatted(indentation);
-			handler.AppendLiteral("*chaos_result_storage = ");
-			handler.AppendFormatted(resultExpression);
-			handler.AppendLiteral(";");
-			stringBuilder3.AppendLine(ref handler);
-			stringBuilder = builder;
-			StringBuilder stringBuilder4 = stringBuilder;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(92, 1, stringBuilder);
-			handler.AppendFormatted(indentation);
-			handler.AppendLiteral("chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(chaos_result_storage);");
-			stringBuilder4.AppendLine(ref handler);
+			pushLines =
+			[
+				$"{indentation}auto* chaos_result_storage = new {GetRequiredAbiValueTypeSymbol(returnAbi)}{{}};",
+				$"{indentation}*chaos_result_storage = {resultExpression};",
+				$"{indentation}chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(chaos_result_storage);",
+			];
 			break;
-		}
 		default:
 			throw new NotSupportedException($"native-aot lowering does not support pushing ABI return carrier '{returnAbi.CarrierKindCode}'.");
 		}
+
+		builder.AppendLine(
+			ScribanTemplateRenderer.RenderTemplate(
+				NativeAotTemplateCatalog.GetAbiReturnPushTemplate(),
+				new ScriptObject
+				{
+					["lines"] = pushLines,
+				}).TrimEnd());
 	}
 
 	private static bool CanEmitMethodBody(AotCoreIrMethodArtifact method)
@@ -514,6 +515,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static void EmitAbiArgumentInitialization(StringBuilder builder, IReadOnlyList<AotCoreIrAbiSlotArtifact> abiSlots)
 	{
+		var lines = new List<string>();
 		for (int i = 0; i < abiSlots.Count; i++)
 		{
 			AotCoreIrAbiSlotArtifact aotCoreIrAbiSlotArtifact = abiSlots[i];
@@ -525,96 +527,36 @@ public sealed partial class NativeAotLoweringPlanner
 			case AotCoreIrAbiCarrierKind.UInt8:
 			case AotCoreIrAbiCarrierKind.Int16:
 			case AotCoreIrAbiCarrierKind.UInt16:
-			{
-				StringBuilder stringBuilder = builder;
-				StringBuilder stringBuilder8 = stringBuilder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(58, 2, stringBuilder);
-				handler.AppendLiteral("    chaos_args[");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral("] = static_cast<std::intptr_t>(chaos_arg_");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral(");");
-				stringBuilder8.AppendLine(ref handler);
+				lines.Add($"    chaos_args[{i}] = static_cast<std::intptr_t>(chaos_arg_{i});");
 				break;
-			}
 			case AotCoreIrAbiCarrierKind.Float32:
-			{
-				StringBuilder stringBuilder = builder;
-				StringBuilder stringBuilder7 = stringBuilder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(51, 2, stringBuilder);
-				handler.AppendLiteral("    chaos_args[");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral("] = chaos_store_float32(chaos_arg_");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral(");");
-				stringBuilder7.AppendLine(ref handler);
+				lines.Add($"    chaos_args[{i}] = chaos_store_float32(chaos_arg_{i});");
 				break;
-			}
 			case AotCoreIrAbiCarrierKind.Float64:
-			{
-				StringBuilder stringBuilder = builder;
-				StringBuilder stringBuilder6 = stringBuilder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(51, 2, stringBuilder);
-				handler.AppendLiteral("    chaos_args[");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral("] = chaos_store_float64(chaos_arg_");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral(");");
-				stringBuilder6.AppendLine(ref handler);
+				lines.Add($"    chaos_args[{i}] = chaos_store_float64(chaos_arg_{i});");
 				break;
-			}
 			case AotCoreIrAbiCarrierKind.Int64:
-			{
-				StringBuilder stringBuilder = builder;
-				StringBuilder stringBuilder5 = stringBuilder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(49, 2, stringBuilder);
-				handler.AppendLiteral("    chaos_args[");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral("] = chaos_store_int64(chaos_arg_");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral(");");
-				stringBuilder5.AppendLine(ref handler);
+				lines.Add($"    chaos_args[{i}] = chaos_store_int64(chaos_arg_{i});");
 				break;
-			}
 			case AotCoreIrAbiCarrierKind.UInt64:
-			{
-				StringBuilder stringBuilder = builder;
-				StringBuilder stringBuilder4 = stringBuilder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(50, 2, stringBuilder);
-				handler.AppendLiteral("    chaos_args[");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral("] = chaos_store_uint64(chaos_arg_");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral(");");
-				stringBuilder4.AppendLine(ref handler);
+				lines.Add($"    chaos_args[{i}] = chaos_store_uint64(chaos_arg_{i});");
 				break;
-			}
 			case AotCoreIrAbiCarrierKind.ValueTypeByValue:
-			{
-				StringBuilder stringBuilder = builder;
-				StringBuilder stringBuilder2 = stringBuilder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(39, 2, stringBuilder);
-				handler.AppendLiteral("    auto chaos_abi_param_");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral(" = chaos_arg_");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral(";");
-				stringBuilder2.AppendLine(ref handler);
-				stringBuilder = builder;
-				StringBuilder stringBuilder3 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(70, 2, stringBuilder);
-				handler.AppendLiteral("    chaos_args[");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral("] = reinterpret_cast<std::intptr_t>(&chaos_abi_param_");
-				handler.AppendFormatted(i);
-				handler.AppendLiteral(");");
-				stringBuilder3.AppendLine(ref handler);
+				lines.Add($"    auto chaos_abi_param_{i} = chaos_arg_{i};");
+				lines.Add($"    chaos_args[{i}] = reinterpret_cast<std::intptr_t>(&chaos_abi_param_{i});");
 				break;
-			}
 			default:
 				throw new NotSupportedException($"native-aot lowering does not support ABI parameter carrier '{aotCoreIrAbiSlotArtifact.CarrierKindCode}'.");
 			}
 		}
+
+		builder.AppendLine(
+			ScribanTemplateRenderer.RenderTemplate(
+				NativeAotTemplateCatalog.GetAbiArgumentInitializationTemplate(),
+				new ScriptObject
+				{
+					["lines"] = lines.ToArray(),
+				}).TrimEnd());
 	}
 
 	private static string FormatAbiInvocationArgumentList(IReadOnlyList<AotCoreIrAbiSlotArtifact> abiSlots, string? firstArgumentOverride = null)

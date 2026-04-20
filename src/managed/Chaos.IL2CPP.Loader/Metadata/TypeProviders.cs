@@ -261,3 +261,34 @@ internal static class FunctionPointerTypeFormatter
         return $"{prefix}<{string.Join(",", signatureParts)}>";
     }
 }
+
+internal sealed class GenericArityTypeProvider : ISignatureTypeProvider<int, object?>
+{
+    public int GetArrayType(int elementType, ArrayShape shape) => 0;
+
+    public int GetByReferenceType(int elementType) => 0;
+
+    public int GetFunctionPointerType(MethodSignature<int> signature) => 0;
+
+    public int GetGenericInstantiation(int genericType, ImmutableArray<int> typeArguments) => 0;
+
+    public int GetGenericMethodParameter(object? genericContext, int index) => 0;
+
+    public int GetGenericTypeParameter(object? genericContext, int index) => 0;
+
+    public int GetModifiedType(int modifierType, int unmodifiedType, bool isRequired) => 0;
+
+    public int GetPinnedType(int elementType) => 0;
+
+    public int GetPointerType(int elementType) => 0;
+
+    public int GetPrimitiveType(PrimitiveTypeCode typeCode) => 0;
+
+    public int GetSZArrayType(int elementType) => 0;
+
+    public int GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind) => 0;
+
+    public int GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind) => 0;
+
+    public int GetTypeFromSpecification(MetadataReader reader, object? genericContext, TypeSpecificationHandle handle, byte rawTypeKind) => 0;
+}

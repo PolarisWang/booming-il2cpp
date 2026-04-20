@@ -338,7 +338,22 @@ class ProjectWorkspaceTests(unittest.TestCase):
             (native_reference_root / "main.cpp").write_text("int main() { return 0; }\n", encoding="utf-8")
         (generated_root / "generated").mkdir(parents=True, exist_ok=True)
         (generated_root / "generated.manifest.json").write_text("{}\n", encoding="utf-8")
-        (generated_root / "native-reference.manifest.json").write_text("{}\n", encoding="utf-8")
+        write_json(
+            generated_root / "native-reference.manifest.json",
+            {
+                "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
+                "preferredAssemblyDispatchSubjectId": "FixtureSubject/Program::Main:System.Int32(System.String[])",
+                "translationUnitPages": [
+                    {
+                        "pageNumber": 1,
+                        "methodCount": 1,
+                        "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
+                        "firstMethodSubjectId": "FixtureSubject/Program::Main:System.Int32(System.String[])",
+                        "lastMethodSubjectId": "FixtureSubject/Program::Main:System.Int32(System.String[])",
+                    }
+                ],
+            },
+        )
         (generated_root / "native-reference.plan.json").write_text("{}\n", encoding="utf-8")
         (generated_root / "generated" / "native-reference.generated.cpp").write_text("// generated\n", encoding="utf-8")
 
@@ -896,6 +911,13 @@ class ProjectWorkspaceTests(unittest.TestCase):
             proof_host_text = proof_host_path.read_text(encoding="utf-8")
             self.assertIn('options.image_name_utf8 = "FixtureSubject";', proof_host_text)
             self.assertIn('constexpr const char* kRuntimeTag = "subject-reference-proof";', proof_host_text)
+            self.assertIn("constexpr const bool kUseAssemblyBoundDispatch = true;", proof_host_text)
+            self.assertIn(
+                'constexpr const char* kAssemblyDispatchSubjectId = "FixtureSubject/Program::Main:System.Int32(System.String[])";',
+                proof_host_text,
+            )
+            self.assertIn("NativeReferenceAssemblyDispatchRequestV0 request = {};", proof_host_text)
+            self.assertIn("RunNativeReferenceAssembly(", proof_host_text)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -3616,6 +3638,31 @@ class ProjectWorkspaceTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_subject_matrix_source_entry_selection_does_not_inherit_manifest_slice_when_matrix_overrides_entry(self) -> None:
+        workspace_module = load_module(
+            PROJECT_WORKSPACE_MODULE_PATH,
+            "chaos_project_workspace_subject_matrix_source_entry_selection_override",
+        )
+        manifest = {
+            "source": {
+                "entry": "FixtureSubject/Program::Main()",
+                "entrySelection": {
+                    "entryKind": 1,
+                    "entrySlice": 7,
+                },
+            }
+        }
+        matrix = {
+            "matrixId": "windows-foundation-dll-translation-native-proof",
+            "source": {
+                "entry": "",
+                "primaryProjectPath": "subjects/FixtureSubject/source/Foundation/App/Foundation.App.csproj",
+                "fullAssemblyClosure": True,
+            },
+        }
+
+        self.assertEqual({}, workspace_module._subject_matrix_source_entry_selection(manifest, matrix))
+
     def test_refresh_subject_generated_root_clears_existing_run_root_before_planning(self) -> None:
         workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_refresh_generated_root_clears_run_root")
         repo_root = self._make_repo_root("refresh-generated-root-clears-run-root")
@@ -3707,6 +3754,48 @@ class ProjectWorkspaceTests(unittest.TestCase):
                     )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_effective_generated_stage_kind_keeps_native_proof_for_native_hotupdate_chain(self) -> None:
+        workspace_module = load_module(
+            PROJECT_WORKSPACE_MODULE_PATH,
+            "chaos_project_workspace_effective_generated_stage_kind_native_hotupdate_chain",
+        )
+
+        manifest = {
+            "engineeringProfile": "hot-update-host",
+            "source": {
+                "type": "dotnet-project",
+                "entry": "",
+                "fullAssemblyClosure": True,
+            },
+        }
+        matrix = {
+            "matrixId": "windows-corelib-reference-native-hotupdate-proof",
+            "executionContext": {
+                "hostPlatform": "windows-x64",
+                "targetPlatform": "windows-x64",
+                "toolchainProfile": "msvc-reference",
+                "runtimeProfile": "native-hotupdate-proof-output",
+            },
+        }
+        entry_selection = {
+            "family": "declared-unit-test",
+            "stableId": "FixtureSubject::FixtureSubject.Patch::FixtureSubject.Patch.Proofs::Verify()",
+            "alias": "native-hotupdate-proof",
+            "entryIndex": 0,
+        }
+
+        uses_native_hotupdate_chain = workspace_module._matrix_uses_native_hotupdate_chain(matrix, manifest)
+        self.assertTrue(uses_native_hotupdate_chain)
+        self.assertEqual(
+            "generated-native-proof",
+            workspace_module._effective_generated_stage_kind(
+                "generated-native-proof",
+                entry_selection,
+                None,
+                uses_native_hotupdate_chain=uses_native_hotupdate_chain,
+            ),
+        )
 
 
 if __name__ == "__main__":

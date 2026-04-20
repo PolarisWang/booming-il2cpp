@@ -48,14 +48,17 @@ public sealed partial class LoaderStage
                 requireEntryPoint: false))
             .ToList();
         loadedAssemblies = MaterializeCrossAssemblyMethodInstantiations(assemblyPaths, loadedAssemblies);
-        var entryAssembly = ResolveEntryAssembly(loadedAssemblies, request.EntryPointSubjectIdOverride);
+        var entryAssembly = ResolveEntryAssembly(loadedAssemblies, request.EntryPointSubjectIdOverride, request.FullAssemblyClosure);
         var entryPointSubjectId = !string.IsNullOrWhiteSpace(request.EntryPointSubjectIdOverride)
             ? request.EntryPointSubjectIdOverride!
-            : entryAssembly.EntryPointSubjectId;
+            : request.FullAssemblyClosure
+                ? string.Empty
+                : entryAssembly.EntryPointSubjectId;
 
         return new LoadedWorldModel
         {
             InputAssemblyPath = request.InputAssemblyPath,
+            FullAssemblyClosure = request.FullAssemblyClosure,
             Assembly = entryAssembly.Assembly,
             Assemblies = loadedAssemblies,
             EntryPointSubjectId = entryPointSubjectId,
