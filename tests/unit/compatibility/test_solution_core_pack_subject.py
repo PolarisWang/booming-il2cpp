@@ -14,6 +14,14 @@ ARCHETYPE_ROOT = SUBJECT_ROOT / "source" / "EngineeringScenarios"
 REFERENCE_BUNDLE_ROOT = REPO_ROOT / "assets" / "reference-bundles" / "dotnet-foundation"
 CONTROLLED_DLL_ROOT = REPO_ROOT / "src" / "dll" / "dotnet-foundation"
 LAUNCHER_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Host" / "Program.cs"
+CORELIB_NATIVE_PROOF_PROGRAM_PATH = (
+    SUBJECT_ROOT
+    / "source"
+    / "EngineeringScenarios"
+    / "CoreLibReferenceSolution"
+    / "NativeProofApp"
+    / "Program.cs"
+)
 
 
 class SolutionCorePackSubjectTests(unittest.TestCase):
@@ -593,6 +601,20 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
             self.assertIn(required_fragment, launcher_source)
         self.assertNotIn("ChaosSourceEntryArguments.TryParse", launcher_source)
         self.assertNotIn("InvokeSourceEntry(", launcher_source)
+
+    def test_solution_core_pack_corelib_native_proof_program_uses_main_forwarder_shape(self) -> None:
+        program_source = CORELIB_NATIVE_PROOF_PROGRAM_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("private static int Main()", program_source)
+        self.assertIn("return PrintAndExit();", program_source)
+        self.assertIn("private static int PrintAndExit()", program_source)
+        self.assertIn("return ComposeAndPrint();", program_source)
+        self.assertIn("private static int ComposeAndPrint()", program_source)
+        self.assertIn("private sealed class AuxiliaryHolder", program_source)
+        self.assertIn("private static int ComposeAuxiliary()", program_source)
+        self.assertIn('new AuxiliaryHolder("System.Runtime").Render()', program_source)
+        self.assertIn('new Holder("System.Private.CoreLib").Render()', program_source)
+        self.assertIn("Console.WriteLine(", program_source)
 
 
 if __name__ == "__main__":
