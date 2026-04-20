@@ -31,7 +31,8 @@ updated_at: 2026-04-20 12:36:10 +08:00
 updated_at: 2026-04-20 12:53:20 +08:00
 updated_at: 2026-04-20 13:05:40 +08:00
 updated_at: 2026-04-20 13:24:00 +08:00
-latest_stop_point: after widening the canonical CoreLib packet to `translationUnitMethodCount = 18` with a producer-ctor-getter-write-line chain, this slice added one more higher-order executable family to the actual `GoldenCoreLibReference.NativeProofApp` proof packet: an unused `static string producer -> ctor -> render -> Console.WriteLine` chain (`ComposeProducedRender`) that composes the existing `BuildLiteralMessage():System.String` producer with the existing `Holder::.ctor(System.String)` and `Holder::Render():System.String` helper pair, together with a new generic runtime-skeleton helper template for the producer/object-construction/field-backed-render/write-line sequence. Real native proof run `20260420-132121-windows-97cb` and real combined run `20260420-132301-windows-c9ec` both passed, the observable proof output remained unchanged, the canonical audit widened to `translationUnitMethodCount = 19`, `runtimeSkeletonReservedStubCount` stayed `0`, and `fullCoreLibTranslated` remains `false`
+updated_at: 2026-04-20 13:56:33 +08:00
+latest_stop_point: after widening the canonical CoreLib packet to `translationUnitMethodCount = 19` with a producer-ctor-render-write-line chain, this slice added two more higher-order executable helper families to the actual `GoldenCoreLibReference.NativeProofApp` proof packet: an unused `static string producer -> ctor -> instance-call(string) -> forwarder -> Console.WriteLine` chain (`ComposeProducedForwardedRender` / `ComposeProducedForwardedEcho`) and an unused `static string producer -> forwarder -> ctor -> instance-call(string) -> Console.WriteLine` chain (`ComposeForwardedProducedEcho`). Real combined proof run `20260420-135505-windows-1a5a` passed, the observable proof output remained unchanged, the canonical audit widened to `translationUnitMethodCount = 22`, `runtimeSkeletonReservedStubCount` stayed `0`, and `fullCoreLibTranslated` remains `false`
 current_dir: docs/dev/in-progress/20260419-07-corelib-dll-boundary-native-codegen-implementation
 parent_task_id: 20260419-01-foundation-dll-translation-audit-roadmap
 source_task_id: 20260419-03-system-private-corelib-full-verification
@@ -60,12 +61,12 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
 - Keep `windows-corelib-reference-native-hotupdate-proof` as the canonical combined proof anchor:
   - its matrix-level audit path and narrowness metrics are now stable again after widening the canonical proof packet itself
   - the current audited truth boundary is now:
-    - `translationUnitMethodCount = 19`
+    - `translationUnitMethodCount = 22`
     - `runtimeSkeletonReservedStubCount = 0`
     - `fullCoreLibTranslated = false`
 - Continue widening executable runtime-skeleton coverage inside the actual `GoldenCoreLibReference.NativeProofApp` proof packet before adding more detached lanes:
   - prefer the next distinct method family that keeps the packet auditable and avoids a spike in reserved stubs
-  - the cheap wins from existing assembly-agnostic helper recognizers are mostly consumed:
+  - the cheap wins from existing assembly-agnostic helper recognizers and their first reorder variants are mostly consumed:
     - constructor + field-backed-render family
     - static-int forwarder family
     - static string forwarder + field getter family
@@ -75,9 +76,11 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
     - static string producer -> static string forwarder -> `Console.WriteLine`
     - static string producer -> ctor -> getter -> `Console.WriteLine`
     - static string producer -> ctor -> render -> `Console.WriteLine`
-  - the strongest next candidate is now either:
-    - carefully-shaped `async/await`, if compiler-generated method spill can be contained, or
-    - another higher-order family that still keeps `runtimeSkeletonReservedStubCount = 0`
+    - static string producer -> ctor -> instance-call(string) -> forwarder -> `Console.WriteLine`
+    - static string producer -> forwarder -> ctor -> instance-call(string) -> `Console.WriteLine`
+  - the strongest next candidate is still another reorder variant that reuses the current generic helper set while keeping `runtimeSkeletonReservedStubCount = 0`:
+    - for example `static string producer -> forwarder -> ctor -> render -> Console.WriteLine`
+  - keep delaying `async/await` until the remaining low-risk synchronous families stop yielding cheap packet widening
 
 ## Current Progress
 
@@ -1444,6 +1447,43 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
       - `matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/native-hotupdate-audit.json`
     - audit now reports:
       - `nativeGeneration.translationUnitMethodCount = 19`
+      - `nativeGeneration.runtimeSkeletonReservedStubCount = 0`
+      - `truthBoundary.fullCoreLibTranslated = false`
+    - runtime stdout:
+      - `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`
+- Added one more assembly-agnostic runtime-skeleton helper for a producer/object/instance-call/forwarder/write-line chain:
+  - `src/managed/Chaos.IL2CPP.CodeGen/Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringProducerCtorInstanceCallForwarderConsoleWriteLineStub.cpp.scriban`
+  - `NativeReferenceProofEmitter` now recognizes:
+    - `TryBuildAssemblyBoundStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineStub(...)`
+  - `NativeReferenceProofCatalog` now exposes:
+    - `GetRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineStubTemplate()`
+- Added one more assembly-agnostic runtime-skeleton helper for a producer/forwarder/object/instance-call/write-line chain:
+  - `src/managed/Chaos.IL2CPP.CodeGen/Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringProducerForwarderCtorInstanceCallConsoleWriteLineStub.cpp.scriban`
+  - `NativeReferenceProofEmitter` now recognizes:
+    - `TryBuildAssemblyBoundStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineStub(...)`
+  - `NativeReferenceProofCatalog` now exposes:
+    - `GetRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineStubTemplate()`
+- Widened the canonical packet with three more unused higher-order CoreLib families:
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/NativeProofApp/Program.cs`
+    - added `ComposeProducedForwardedRender():System.Int32`
+    - added `ComposeProducedForwardedEcho():System.Int32`
+    - added `ComposeForwardedProducedEcho():System.Int32`
+  - these families are intentionally not called from `Main`, so the observable proof output is unchanged while full-assembly-closure translation still has to lower:
+    - producer -> ctor -> render -> forwarder -> `Console.WriteLine`
+    - producer -> ctor -> getter -> forwarder -> `Console.WriteLine`
+    - producer -> forwarder -> ctor -> getter -> `Console.WriteLine`
+- Re-ran the canonical packet after adding the new reorder families:
+  - `python -m pytest tests/unit/compatibility/test_solution_core_pack_subject.py tests/unit/compatibility/test_full_assembly_closure_codegen_contracts.py tests/unit/planning/test_solution_core_pack_planner.py tests/unit/reporting/test_subject_reporting.py tests/contracts/shared/test_foundation_dll_translation_audit_schema.py -q`
+    - Result: `69 passed`
+  - `dotnet build src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj -c Release -m:1`
+    - Result: build succeeded, `0 warnings`, `0 errors`
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-corelib-reference-native-hotupdate-proof --json`
+    - run id = `20260420-135505-windows-1a5a`
+    - summary = `ok`
+    - canonical audit path remains:
+      - `matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/native-hotupdate-audit.json`
+    - audit now reports:
+      - `nativeGeneration.translationUnitMethodCount = 22`
       - `nativeGeneration.runtimeSkeletonReservedStubCount = 0`
       - `truthBoundary.fullCoreLibTranslated = false`
     - runtime stdout:

@@ -110,6 +110,10 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringProducerCtorGetterConsoleWriteLineStub.cpp.scriban";
     public const string RuntimeSkeletonStaticStringProducerCtorRenderConsoleWriteLineStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringProducerCtorRenderConsoleWriteLineStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringProducerCtorInstanceCallForwarderConsoleWriteLineStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringProducerForwarderCtorInstanceCallConsoleWriteLineStub.cpp.scriban";
     public const string RuntimeSkeletonStaticLiteralStringReturnStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticLiteralStringReturnStub.cpp.scriban";
     public const string RuntimeSkeletonStaticStringProducerConsoleWriteLineStubTemplateRelativePath =
@@ -257,6 +261,16 @@ internal static class NativeReferenceProofCatalog
     public static Template GetRuntimeSkeletonStaticStringProducerCtorRenderConsoleWriteLineStubTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticStringProducerCtorRenderConsoleWriteLineStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineStubTemplateRelativePath);
     }
 
     public static Template GetRuntimeSkeletonStaticLiteralStringReturnStubTemplate()
