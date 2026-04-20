@@ -453,6 +453,34 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             return staticIntForwarderStub;
         }
 
+        if (TryBuildAssemblyBoundStaticStringForwarderStub(
+                subjectId,
+                methodsBySubjectId,
+                stubName,
+                out var staticStringForwarderStub))
+        {
+            return staticStringForwarderStub;
+        }
+
+        if (TryBuildAssemblyBoundStaticLiteralStringReturnStub(
+                subjectId,
+                methodsBySubjectId,
+                stubName,
+                out var staticLiteralStringReturnStub))
+        {
+            return staticLiteralStringReturnStub;
+        }
+
+        if (TryBuildAssemblyBoundStaticStringProducerConsoleWriteLineStub(
+                subjectId,
+                methodsBySubjectId,
+                methodStubNamesBySubjectId,
+                stubName,
+                out var staticStringProducerConsoleWriteLineStub))
+        {
+            return staticStringProducerConsoleWriteLineStub;
+        }
+
         if (TryBuildAssemblyBoundConstructorFieldSetterStub(
                 loweringPlan.AssemblyName,
                 subjectId,
@@ -473,6 +501,17 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 out var fieldBackedStringReturnStub))
         {
             return fieldBackedStringReturnStub;
+        }
+
+        if (TryBuildAssemblyBoundFieldGetterStringReturnStub(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodsBySubjectId,
+                stubName,
+                out var fieldGetterStringReturnStub))
+        {
+            return fieldGetterStringReturnStub;
         }
 
         if (TryBuildAssemblyBoundConsoleWriteLineStub(subjectId, methodsBySubjectId, stubName, out var consoleWriteLineStub))
@@ -1625,6 +1664,140 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return true;
     }
 
+    private static bool TryBuildAssemblyBoundStaticStringForwarderStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(GetMethodReturnType(method.SubjectId), "System.String", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+            ValidateSingleArgumentForwarderShape(method, instructions);
+        }
+        catch
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringForwarderStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticLiteralStringReturnStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(GetMethodReturnType(method.SubjectId), "System.String", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var instructions = GetSingleBlockInstructions(method);
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            instructions.Count != 2 ||
+            !string.Equals(instructions[0].Op, "ldstr", StringComparison.Ordinal) ||
+            !string.Equals(instructions[1].Op, "ret", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var literal = GetRequiredOperandString(instructions[0]);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["literal"] = ToCppStringLiteral(literal),
+            ["literal_byte_count"] = Encoding.UTF8.GetByteCount(literal),
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticLiteralStringReturnStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticStringProducerConsoleWriteLineStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        IReadOnlyDictionary<string, string> methodStubNamesBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Int32", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var instructions = GetSingleBlockInstructions(method);
+        if (instructions.Count != 4 ||
+            !string.Equals(instructions[0].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[1].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[2].Op, "ldc.i4", StringComparison.Ordinal) ||
+            !string.Equals(instructions[3].Op, "ret", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var targetSubjectId = GetRequiredInstructionCallee(instructions[0], method.SubjectId, 0);
+        if (string.Equals(targetSubjectId, subjectId, StringComparison.Ordinal) ||
+            !methodStubNamesBySubjectId.TryGetValue(targetSubjectId, out var targetStubName))
+        {
+            return false;
+        }
+
+        var writeLineTarget = GetRequiredInstructionCallee(instructions[1], method.SubjectId, 1);
+        if (!IsConsoleWriteLineStringTarget(writeLineTarget) ||
+            GetRequiredOperandInt(instructions[2]) != 0)
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["target_stub_name"] = targetStubName,
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerConsoleWriteLineStubTemplate(),
+            model);
+        return true;
+    }
+
     private static bool TryBuildAssemblyBoundConstructorFieldSetterStub(
         string assemblyName,
         string subjectId,
@@ -1710,6 +1883,51 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
             NativeReferenceProofCatalog.GetRuntimeSkeletonFieldBackedStringReturnStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundFieldGetterStringReturnStub(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(GetMethodReturnType(method.SubjectId), "System.String", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+            ValidateFieldGetterShape(method, instructions);
+        }
+        catch
+        {
+            return false;
+        }
+
+        var declaringTypeSubjectId = GetDeclaringTypeSubjectId(subjectId);
+        var loadedFieldSubjectId = GetRequiredOperandString(instructions[1]);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(assemblyName),
+            ["reference_type_token"] = CreateTypeTokenLiteral(metadataRegistration, declaringTypeSubjectId),
+            ["captured_field_token"] = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "field", loadedFieldSubjectId)),
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonFieldGetterStringReturnStubTemplate(),
             model);
         return true;
     }

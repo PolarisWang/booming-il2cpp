@@ -274,6 +274,122 @@ class FullAssemblyClosureCodegenContractTests(unittest.TestCase):
         ]:
             self.assertIn(required_fragment, render_template_source)
 
+    def test_runtime_skeleton_string_forwarder_and_field_getter_helpers_have_templates(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        string_forwarder_template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.StaticStringForwarderStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+        field_getter_template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.FieldGetterStringReturnStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticStringForwarderStub",
+            "TryBuildAssemblyBoundFieldGetterStringReturnStub",
+            "GetRuntimeSkeletonStaticStringForwarderStubTemplate",
+            "GetRuntimeSkeletonFieldGetterStringReturnStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        for required_fragment in [
+            "RuntimeSkeletonStaticStringForwarderStubTemplateRelativePath",
+            "RuntimeSkeletonFieldGetterStringReturnStubTemplateRelativePath",
+        ]:
+            self.assertIn(required_fragment, catalog_source)
+
+        for required_fragment in [
+            "_ManagedArgs",
+            "request->value",
+            "request->return_value",
+            "*request->return_value = request->value;",
+        ]:
+            self.assertIn(required_fragment, string_forwarder_template_source)
+
+        for required_fragment in [
+            "_ManagedArgs",
+            "request->instance",
+            "request->return_value",
+            "field_get_value(",
+            "*request->return_value = captured_value;",
+        ]:
+            self.assertIn(required_fragment, field_getter_template_source)
+
+    def test_runtime_skeleton_static_string_producer_write_line_helpers_have_templates(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        static_literal_template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.StaticLiteralStringReturnStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+        write_line_template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.StaticStringProducerConsoleWriteLineStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticLiteralStringReturnStub",
+            "TryBuildAssemblyBoundStaticStringProducerConsoleWriteLineStub",
+            "GetRuntimeSkeletonStaticLiteralStringReturnStubTemplate",
+            "GetRuntimeSkeletonStaticStringProducerConsoleWriteLineStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        for required_fragment in [
+            "RuntimeSkeletonStaticLiteralStringReturnStubTemplateRelativePath",
+            "RuntimeSkeletonStaticStringProducerConsoleWriteLineStubTemplateRelativePath",
+        ]:
+            self.assertIn(required_fragment, catalog_source)
+
+        for required_fragment in [
+            "_ManagedArgs",
+            "request->return_value",
+            "string_new_utf8",
+            "*request->return_value = literal_string;",
+        ]:
+            self.assertIn(required_fragment, static_literal_template_source)
+
+        for required_fragment in [
+            "_ProducerArgs",
+            "target_stub_name",
+            "producer_args",
+            "resolve_icall",
+            "write_line_string",
+        ]:
+            self.assertIn(required_fragment, write_line_template_source)
+
 
 if __name__ == "__main__":
     unittest.main()

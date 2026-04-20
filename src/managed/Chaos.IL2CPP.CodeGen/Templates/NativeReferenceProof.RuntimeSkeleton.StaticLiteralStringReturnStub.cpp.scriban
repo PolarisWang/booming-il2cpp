@@ -1,0 +1,36 @@
+struct {{ stub_name }}_ManagedArgs
+{
+    void** return_value;
+};
+
+int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    if (runtime == nullptr || thread == nullptr || managed_args == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    const auto* request = static_cast<const {{ stub_name }}_ManagedArgs*>(managed_args);
+    if (request->return_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_READY;
+    }
+    void* literal_string = abi->string_new_utf8(runtime, thread, {{ literal }}, {{ literal_byte_count }}u);
+    if (literal_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    *request->return_value = literal_string;
+    return CHAOS_BRIDGE_STATUS_OK;
+}

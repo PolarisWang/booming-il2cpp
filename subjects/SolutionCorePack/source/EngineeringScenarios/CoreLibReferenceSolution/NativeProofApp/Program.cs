@@ -38,6 +38,21 @@ internal static class Program
         }
     }
 
+    private sealed class EchoHolder
+    {
+        private readonly string _value;
+
+        public EchoHolder(string value)
+        {
+            _value = value;
+        }
+
+        public string GetValue()
+        {
+            return _value;
+        }
+    }
+
     private static int Main()
     {
         return PrintAndExit();
@@ -57,6 +72,34 @@ internal static class Program
     private static int ComposeAuxiliary()
     {
         Console.WriteLine(new AuxiliaryHolder("System.Runtime").Render());
+        return 0;
+    }
+
+    private static string EchoValue(string value)
+    {
+        return value;
+    }
+
+    private static int ComposeEcho()
+    {
+        Console.WriteLine(new EchoHolder(EchoValue("corelib-reference-echo:System.Private.CoreLib|System.Console")).GetValue());
+        return 0;
+    }
+
+    private static int ComposeLiteral()
+    {
+        Console.WriteLine("corelib-reference-literal:System.Console");
+        return 0;
+    }
+
+    private static string BuildLiteralMessage()
+    {
+        return "corelib-reference-static-message:System.Private.CoreLib|System.Console";
+    }
+
+    private static int ComposeStaticMessage()
+    {
+        Console.WriteLine(BuildLiteralMessage());
         return 0;
     }
 }
