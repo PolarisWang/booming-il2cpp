@@ -472,6 +472,16 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             return staticStringForwarderConsoleWriteLineStub;
         }
 
+        if (TryBuildAssemblyBoundStaticStringProducerForwarderConsoleWriteLineStub(
+                subjectId,
+                methodsBySubjectId,
+                methodStubNamesBySubjectId,
+                stubName,
+                out var staticStringProducerForwarderConsoleWriteLineStub))
+        {
+            return staticStringProducerForwarderConsoleWriteLineStub;
+        }
+
         if (TryBuildAssemblyBoundStaticLiteralStringReturnStub(
                 subjectId,
                 methodsBySubjectId,
@@ -1712,46 +1722,6 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return true;
     }
 
-    private static bool TryBuildAssemblyBoundStaticLiteralStringReturnStub(
-        string subjectId,
-        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
-        string stubName,
-        out string stub)
-    {
-        stub = string.Empty;
-        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
-        {
-            return false;
-        }
-
-        if (!string.Equals(GetMethodReturnType(method.SubjectId), "System.String", StringComparison.Ordinal))
-        {
-            return false;
-        }
-
-        var instructions = GetSingleBlockInstructions(method);
-        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
-            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
-            instructions.Count != 2 ||
-            !string.Equals(instructions[0].Op, "ldstr", StringComparison.Ordinal) ||
-            !string.Equals(instructions[1].Op, "ret", StringComparison.Ordinal))
-        {
-            return false;
-        }
-
-        var literal = GetRequiredOperandString(instructions[0]);
-        var model = new ScriptObject
-        {
-            ["stub_name"] = stubName,
-            ["literal"] = ToCppStringLiteral(literal),
-            ["literal_byte_count"] = Encoding.UTF8.GetByteCount(literal),
-        };
-        stub = ScribanTemplateRenderer.RenderTemplate(
-            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticLiteralStringReturnStubTemplate(),
-            model);
-        return true;
-    }
-
     private static bool TryBuildAssemblyBoundStaticStringForwarderConsoleWriteLineStub(
         string subjectId,
         IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
@@ -1819,6 +1789,134 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
             NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringForwarderConsoleWriteLineStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticStringProducerForwarderConsoleWriteLineStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        IReadOnlyDictionary<string, string> methodStubNamesBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Int32", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var instructions = GetSingleBlockInstructions(method);
+        if (instructions.Count != 5 ||
+            !string.Equals(instructions[0].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[1].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[2].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[3].Op, "ldc.i4", StringComparison.Ordinal) ||
+            !string.Equals(instructions[4].Op, "ret", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var producerSubjectId = GetRequiredInstructionCallee(instructions[0], method.SubjectId, 0);
+        if (string.Equals(producerSubjectId, subjectId, StringComparison.Ordinal) ||
+            !methodStubNamesBySubjectId.TryGetValue(producerSubjectId, out var producerStubName) ||
+            !methodsBySubjectId.TryGetValue(producerSubjectId, out var producerMethod) ||
+            !string.Equals(GetMethodReturnType(producerSubjectId), "System.String", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        try
+        {
+            _ = GetSingleBlockInstructions(producerMethod);
+        }
+        catch
+        {
+            return false;
+        }
+
+        var forwarderSubjectId = GetRequiredInstructionCallee(instructions[1], method.SubjectId, 1);
+        if (string.Equals(forwarderSubjectId, subjectId, StringComparison.Ordinal) ||
+            string.Equals(forwarderSubjectId, producerSubjectId, StringComparison.Ordinal) ||
+            !methodStubNamesBySubjectId.TryGetValue(forwarderSubjectId, out var forwarderStubName) ||
+            !methodsBySubjectId.TryGetValue(forwarderSubjectId, out var forwarderMethod) ||
+            !string.Equals(GetMethodReturnType(forwarderSubjectId), "System.String", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        try
+        {
+            ValidateSingleArgumentForwarderShape(forwarderMethod, GetSingleBlockInstructions(forwarderMethod));
+        }
+        catch
+        {
+            return false;
+        }
+
+        var writeLineTarget = GetRequiredInstructionCallee(instructions[2], method.SubjectId, 2);
+        if (!IsConsoleWriteLineStringTarget(writeLineTarget) ||
+            GetRequiredOperandInt(instructions[3]) != 0)
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["producer_stub_name"] = producerStubName,
+            ["forwarder_stub_name"] = forwarderStubName,
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(ConsoleWriteLineStringIcall),
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProducerForwarderConsoleWriteLineStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticLiteralStringReturnStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(GetMethodReturnType(method.SubjectId), "System.String", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var instructions = GetSingleBlockInstructions(method);
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            instructions.Count != 2 ||
+            !string.Equals(instructions[0].Op, "ldstr", StringComparison.Ordinal) ||
+            !string.Equals(instructions[1].Op, "ret", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var literal = GetRequiredOperandString(instructions[0]);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["literal"] = ToCppStringLiteral(literal),
+            ["literal_byte_count"] = Encoding.UTF8.GetByteCount(literal),
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticLiteralStringReturnStubTemplate(),
             model);
         return true;
     }

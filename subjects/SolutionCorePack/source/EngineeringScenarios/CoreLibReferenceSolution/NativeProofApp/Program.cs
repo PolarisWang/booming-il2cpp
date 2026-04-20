@@ -108,4 +108,10 @@ internal static class Program
         Console.WriteLine(EchoValue("corelib-reference-forwarded:System.Private.CoreLib|System.Console"));
         return 0;
     }
+
+    private static int ComposeForwardedStaticMessage()
+    {
+        Console.WriteLine(EchoValue(BuildLiteralMessage()));
+        return 0;
+    }
 }

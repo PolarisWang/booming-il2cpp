@@ -624,6 +624,8 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         self.assertIn('Console.WriteLine(BuildLiteralMessage());', program_source)
         self.assertIn("private static int ComposeForwardedLiteral()", program_source)
         self.assertIn('Console.WriteLine(EchoValue("corelib-reference-forwarded:System.Private.CoreLib|System.Console"));', program_source)
+        self.assertIn("private static int ComposeForwardedStaticMessage()", program_source)
+        self.assertIn('Console.WriteLine(EchoValue(BuildLiteralMessage()));', program_source)
         self.assertIn('new Holder("System.Private.CoreLib").Render()', program_source)
         self.assertIn("Console.WriteLine(", program_source)
 
