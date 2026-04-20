@@ -120,4 +120,10 @@ internal static class Program
         Console.WriteLine(new EchoHolder(BuildLiteralMessage()).GetValue());
         return 0;
     }
+
+    private static int ComposeProducedRender()
+    {
+        Console.WriteLine(new Holder(BuildLiteralMessage()).Render());
+        return 0;
+    }
 }

@@ -515,6 +515,50 @@ class FullAssemblyClosureCodegenContractTests(unittest.TestCase):
         ]:
             self.assertIn(required_fragment, producer_ctor_getter_write_line_template_source)
 
+    def test_runtime_skeleton_static_string_producer_ctor_render_write_line_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        producer_ctor_render_write_line_template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.StaticStringProducerCtorRenderConsoleWriteLineStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticStringProducerCtorRenderConsoleWriteLineStub",
+            "GetRuntimeSkeletonStaticStringProducerCtorRenderConsoleWriteLineStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn(
+            "RuntimeSkeletonStaticStringProducerCtorRenderConsoleWriteLineStubTemplateRelativePath",
+            catalog_source,
+        )
+
+        for required_fragment in [
+            "_ProducerArgs",
+            "producer_stub_name",
+            "reference_type_token",
+            "captured_field_token",
+            "produced_value",
+            "object_new",
+            "field_set_value",
+            "field_get_value",
+            "concat_icall_literal",
+            "write_line_string",
+        ]:
+            self.assertIn(required_fragment, producer_ctor_render_write_line_template_source)
+
 
 if __name__ == "__main__":
     unittest.main()
