@@ -76,6 +76,11 @@
       "code": 15,
       "id": "solution-interface-dispatch-message",
       "sourcePath": "subjects/SolutionCorePack/source/EngineeringScenarios/InterfaceDispatchMessageSolution"
+    },
+    {
+      "code": 16,
+      "id": "solution-threading-threadstatic-monitor",
+      "sourcePath": "subjects/SolutionCorePack/source/EngineeringScenarios/ThreadingThreadStaticMonitorSolution"
     }
   ],
   "features": [

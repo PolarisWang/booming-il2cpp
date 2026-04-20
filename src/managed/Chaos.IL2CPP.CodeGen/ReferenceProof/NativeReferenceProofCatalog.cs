@@ -114,6 +114,8 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.ExceptionThrowCatchFinallyStub.cpp.scriban";
     public const string RuntimeSkeletonNestedExceptionThrowCatchFinallyStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.NestedExceptionThrowCatchFinallyStub.cpp.scriban";
+    public const string RuntimeSkeletonThreadingThreadStaticMonitorStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.ThreadingThreadStaticMonitorStub.cpp.scriban";
 
     private static readonly IReadOnlyDictionary<string, string> TemplateRelativePathByPlanKind =
         new Dictionary<string, string>(StringComparer.Ordinal)
@@ -249,6 +251,11 @@ internal static class NativeReferenceProofCatalog
     public static Template GetRuntimeSkeletonNestedExceptionThrowCatchFinallyStubTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonNestedExceptionThrowCatchFinallyStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonThreadingThreadStaticMonitorStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonThreadingThreadStaticMonitorStubTemplateRelativePath);
     }
 
     public static string GetRequiredTemplateRelativePath(string planKind)

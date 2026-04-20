@@ -34,9 +34,15 @@
     "nativeReferenceManifestPath": "artifacts/subjects/SolutionCorePack/runs/20260420-snapshot-native-hotupdate-001/analysis/generated/native-reference.manifest.json",
     "nativeReferencePlanPath": "artifacts/subjects/SolutionCorePack/runs/20260420-snapshot-native-hotupdate-001/analysis/generated/native-reference.plan.json",
     "nativeAotManifestPath": "",
+    "nativeReferencePlanKind": "assembly-full-closure-runtime-skeleton",
     "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
     "preferredAssemblyDispatchSubjectId": "GoldenCoreLibReference.NativeProofApp/Program::Main:System.Int32()",
-    "translationUnitPageCount": 1
+    "translationUnitMode": "runtime-skeleton",
+    "translationUnitMethodCount": 3,
+    "translationUnitPageCount": 1,
+    "auditStatus": "runtime-skeleton",
+    "auditMessage": "assembly-bound full-closure native-reference runtime skeleton is emitted; executable per-method translation remains unimplemented",
+    "runtimeSkeletonReservedStubCount": 0
   },
   "nativeBuild": {
     "manifestPath": "artifacts/subjects/SolutionCorePack/runs/20260420-snapshot-native-hotupdate-001/matrices/windows-corelib-reference-native-hotupdate-proof/build/build.manifest.json",

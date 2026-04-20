@@ -446,6 +446,31 @@ class SolutionCorePackPlannerTests(unittest.TestCase):
         self.assertTrue(plan["selection"]["source"]["fullAssemblyClosure"])
         self.assertNotIn("entrySelection", plan["selection"]["source"])
 
+    def test_planner_surfaces_solution_core_pack_threading_threadstatic_monitor_native_proof_matrix(self) -> None:
+        planner_module = load_module(
+            PLANNER_MODULE_PATH,
+            "chaos_solution_core_pack_planner_threading_threadstatic_monitor",
+        )
+
+        plan = planner_module.build_plan(
+            REPO_ROOT,
+            "SolutionCorePack",
+            matrix_id="windows-threading-threadstatic-monitor-native-proof",
+            run_id="20260420-solution-core-pack-threading-threadstatic-monitor-native-proof-001",
+        )
+
+        self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
+        self.assertEqual("windows-threading-threadstatic-monitor-native-proof", plan["selection"]["matrixId"])
+        self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
+        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(
+            "subjects/SolutionCorePack/source/EngineeringScenarios/ThreadingThreadStaticMonitorSolution/App/ThreadingThreadStaticMonitor.App.csproj",
+            plan["selection"]["source"]["primaryProjectPath"],
+        )
+        self.assertEqual("", plan["selection"]["source"]["entry"])
+        self.assertTrue(plan["selection"]["source"]["fullAssemblyClosure"])
+        self.assertNotIn("entrySelection", plan["selection"]["source"])
+
     def test_planner_surfaces_solution_core_pack_corelib_reference_hotupdate_proof_matrix(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_solution_core_pack_planner_corelib_reference_hotupdate")
 

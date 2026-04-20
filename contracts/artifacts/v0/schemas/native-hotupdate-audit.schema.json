@@ -123,9 +123,15 @@
         "nativeReferenceManifestPath",
         "nativeReferencePlanPath",
         "nativeAotManifestPath",
+        "nativeReferencePlanKind",
         "runtimeExecutionKind",
         "preferredAssemblyDispatchSubjectId",
-        "translationUnitPageCount"
+        "translationUnitMode",
+        "translationUnitMethodCount",
+        "translationUnitPageCount",
+        "auditStatus",
+        "auditMessage",
+        "runtimeSkeletonReservedStubCount"
       ],
       "properties": {
         "manifestPath": {
@@ -150,6 +156,10 @@
         "nativeAotManifestPath": {
           "type": "string"
         },
+        "nativeReferencePlanKind": {
+          "type": "string",
+          "minLength": 1
+        },
         "runtimeExecutionKind": {
           "type": "string",
           "const": "assembly-bound-native-reference-skeleton"
@@ -158,9 +168,29 @@
           "type": "string",
           "minLength": 1
         },
+        "translationUnitMode": {
+          "type": "string",
+          "minLength": 1
+        },
+        "translationUnitMethodCount": {
+          "type": "integer",
+          "minimum": 1
+        },
         "translationUnitPageCount": {
           "type": "integer",
           "minimum": 1
+        },
+        "auditStatus": {
+          "type": "string",
+          "minLength": 1
+        },
+        "auditMessage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runtimeSkeletonReservedStubCount": {
+          "type": "integer",
+          "minimum": 0
         }
       }
     },

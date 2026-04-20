@@ -398,6 +398,16 @@ class SubjectReportingTests(unittest.TestCase):
         host_input_manifest_path = run_bucket_path(subject_id, run_id, "analysis", "host-input", "host-input.manifest.json")
         generated_manifest_path = run_bucket_path(subject_id, run_id, "analysis", "generated", "generated.manifest.json")
         native_reference_manifest_path = run_bucket_path(subject_id, run_id, "analysis", "generated", "native-reference.manifest.json")
+        native_reference_plan_path = run_bucket_path(subject_id, run_id, "analysis", "generated", "native-reference.plan.json")
+        runtime_page_path = run_bucket_path(
+            subject_id,
+            run_id,
+            "analysis",
+            "generated",
+            "generated",
+            "runtime",
+            "native-reference.runtime-skeleton.page-0001.cpp",
+        )
         build_manifest_path = run_bucket_path(subject_id, run_id, "matrices", matrix_id, "build", "build.manifest.json")
         runtime_manifest_path = run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "runtime.manifest.json")
 
@@ -511,10 +521,10 @@ class SubjectReportingTests(unittest.TestCase):
                     "generatedSourcePath": run_bucket_path(subject_id, run_id, "analysis", "generated", "generated", "native-reference.generated.cpp"),
                     "generatedSourcePaths": [
                         run_bucket_path(subject_id, run_id, "analysis", "generated", "generated", "native-reference.generated.cpp"),
-                        run_bucket_path(subject_id, run_id, "analysis", "generated", "generated", "runtime", "native-reference.runtime-skeleton.page-0001.cpp"),
+                        runtime_page_path,
                     ],
                     "nativeReferenceManifestPath": native_reference_manifest_path,
-                    "nativeReferencePlanPath": run_bucket_path(subject_id, run_id, "analysis", "generated", "native-reference.plan.json"),
+                    "nativeReferencePlanPath": native_reference_plan_path,
                 },
             )
             write_json(
@@ -524,6 +534,26 @@ class SubjectReportingTests(unittest.TestCase):
                     "preferredAssemblyDispatchSubjectId": "Fixture.NativeProofApp/Program::Main:System.Int32()",
                     "translationUnitPageCount": 1,
                 },
+            )
+            write_json(
+                repo_root / native_reference_plan_path,
+                {
+                    "planKind": "assembly-full-closure-runtime-skeleton",
+                    "translationUnitMode": "runtime-skeleton",
+                    "translationUnitMethodCount": 3,
+                    "auditStatus": "runtime-skeleton",
+                    "auditMessage": "assembly-bound full-closure native-reference runtime skeleton is emitted; executable per-method translation remains unimplemented",
+                },
+            )
+            (repo_root / runtime_page_path).parent.mkdir(parents=True, exist_ok=True)
+            (repo_root / runtime_page_path).write_text(
+                (
+                    "int stub0() {\n"
+                    "    // Stub reserved for Fixture.NativeProofApp/Program::Helper:System.String()\n"
+                    "    return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
             )
             write_json(
                 repo_root / build_manifest_path,
@@ -571,6 +601,10 @@ class SubjectReportingTests(unittest.TestCase):
             self.assertEqual([audit_path], report_artifacts)
             self.assertEqual(audit_path, report["nativeHotupdateAudit"]["artifactPath"])
             self.assertEqual(native_reference_manifest_path, report["nativeHotupdateAudit"]["nativeReferenceManifestPath"])
+            self.assertEqual("assembly-full-closure-runtime-skeleton", report["nativeHotupdateAudit"]["nativeReferencePlanKind"])
+            self.assertEqual(3, report["nativeHotupdateAudit"]["translationUnitMethodCount"])
+            self.assertEqual(1, report["nativeHotupdateAudit"]["runtimeSkeletonReservedStubCount"])
+            self.assertEqual("runtime-skeleton", report["nativeHotupdateAudit"]["auditStatus"])
             self.assertEqual(build_manifest_path, report["nativeHotupdateAudit"]["nativeBuildManifestPath"])
             self.assertEqual(
                 ["corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3"],
@@ -579,7 +613,12 @@ class SubjectReportingTests(unittest.TestCase):
 
             audit_payload = json.loads((repo_root / audit_path).read_text(encoding="utf-8"))
             self.assertEqual("native-hotupdate-audit", audit_payload["artifactKind"])
+            self.assertEqual("assembly-full-closure-runtime-skeleton", audit_payload["nativeGeneration"]["nativeReferencePlanKind"])
             self.assertEqual("assembly-bound-native-reference-skeleton", audit_payload["nativeGeneration"]["runtimeExecutionKind"])
+            self.assertEqual("runtime-skeleton", audit_payload["nativeGeneration"]["translationUnitMode"])
+            self.assertEqual(3, audit_payload["nativeGeneration"]["translationUnitMethodCount"])
+            self.assertEqual("runtime-skeleton", audit_payload["nativeGeneration"]["auditStatus"])
+            self.assertEqual(1, audit_payload["nativeGeneration"]["runtimeSkeletonReservedStubCount"])
             self.assertEqual("native-reference", audit_payload["nativeBuild"]["buildKind"])
             self.assertEqual(False, audit_payload["truthBoundary"]["fullCoreLibTranslated"])
         finally:

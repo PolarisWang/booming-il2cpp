@@ -3,10 +3,12 @@
 #include "codegen_bridge.h"
 #include "runtime_core.h"
 #include "reflection_query_model.h"
+#include <atomic>
 #include <cstddef>
 #include <cstring>
 #include <cstdint>
 #include <string>
+#include <thread>
 #if defined(_WIN32)
 #include <windows.h>
 #endif

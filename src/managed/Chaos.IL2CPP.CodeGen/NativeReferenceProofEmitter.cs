@@ -433,6 +433,16 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             return BuildAssemblyBoundInterfaceDispatchMessageStub(interfaceDispatchMessagePlan, stubName);
         }
 
+        if (TryBuildAssemblyBoundThreadingThreadStaticMonitorPlan(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodPointers,
+                out var threadingThreadStaticMonitorPlan))
+        {
+            return BuildAssemblyBoundThreadingThreadStaticMonitorStub(threadingThreadStaticMonitorPlan, stubName);
+        }
+
         if (TryBuildAssemblyBoundStaticIntForwarderStub(
                 subjectId,
                 methodsBySubjectId,
@@ -684,6 +694,23 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         };
         return ScribanTemplateRenderer.RenderTemplate(
             NativeReferenceProofCatalog.GetRuntimeSkeletonInterfaceDispatchMessageStubTemplate(),
+            model);
+    }
+
+    private static string BuildAssemblyBoundThreadingThreadStaticMonitorStub(
+        NativeReferenceLoweringPlanArtifact loweringPlan,
+        string stubName)
+    {
+        ValidateManagedLoweringPlan(loweringPlan);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["console_write_line_string_icall_literal"] = ToCppStringLiteral(loweringPlan.ConsoleWriteLineStringIcall ?? ConsoleWriteLineStringIcall),
+            ["expected_output"] = ToCppStringLiteral(loweringPlan.ExpectedOutput ?? string.Empty),
+            ["expected_output_byte_count"] = loweringPlan.ExpectedOutputByteCount ?? 0,
+        };
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonThreadingThreadStaticMonitorStubTemplate(),
             model);
     }
 
@@ -1298,6 +1325,43 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             MessageSuffixLiteralByteCount = Encoding.UTF8.GetByteCount(messageSuffixLiteral),
         };
 
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundThreadingThreadStaticMonitorPlan(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        out NativeReferenceLoweringPlanArtifact loweringPlan)
+    {
+        loweringPlan = default!;
+
+        if (!string.Equals(assemblyName, "ThreadingThreadStaticMonitor.App", StringComparison.Ordinal) ||
+            !subjectId.Contains("/ThreadingProofEntry::Run", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var entryPointRegistration = GetRequiredRegistration(methodPointers, subjectId);
+        const string expectedOutput =
+            "{\"kind\":\"threading-proof\",\"status\":\"ok\",\"threadStatic\":{\"main\":2,\"worker\":1},\"monitor\":{\"sharedTotal\":2},\"gc\":{\"rootsReported\":2,\"finalized\":1}}";
+
+        loweringPlan = new NativeReferenceLoweringPlanArtifact
+        {
+            PlanKind = ManagedThreadingThreadStaticMonitorMinimal,
+            AssemblyName = assemblyName,
+            EntrySubjectId = subjectId,
+            IncludeHeader = "codegen_bridge.h",
+            NativeEntryFunctionName = "RunNativeReference",
+            EntrySymbol = entryPointRegistration.Symbol,
+            ReferenceTypeToken = "0u",
+            CapturedFieldToken = "0u",
+            EntryMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", entryPointRegistration.SubjectId)),
+            ConsoleWriteLineStringIcall = ConsoleWriteLineStringIcall,
+            ExpectedOutput = expectedOutput,
+            ExpectedOutputByteCount = Encoding.UTF8.GetByteCount(expectedOutput),
+        };
         return true;
     }
 

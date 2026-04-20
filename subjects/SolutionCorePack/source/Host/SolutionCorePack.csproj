@@ -29,6 +29,7 @@
     <ProjectReference Include="..\EngineeringScenarios\PInvokeDirectCallSolution\App\PInvokeDirectCall.App.csproj" />
     <ProjectReference Include="..\EngineeringScenarios\ArrayBoxingReferenceArraySolution\App\ArrayBoxingReferenceArray.App.csproj" />
     <ProjectReference Include="..\EngineeringScenarios\InterfaceDispatchMessageSolution\App\InterfaceDispatchMessage.App.csproj" />
+    <ProjectReference Include="..\EngineeringScenarios\ThreadingThreadStaticMonitorSolution\App\ThreadingThreadStaticMonitor.App.csproj" />
   </ItemGroup>
 </Project>
 

@@ -21,7 +21,9 @@ updated_at: 2026-04-19 23:05:00 +08:00
 updated_at: 2026-04-19 23:28:00 +08:00
 updated_at: 2026-04-20 00:36:00 +08:00
 updated_at: 2026-04-20 01:10:00 +08:00
-latest_stop_point: the narrow CoreLib-first combined chain is now both runnable and contract-frozen: after adding `contracts/artifacts/v0/schemas/native-hotupdate-audit.schema.json` plus sample/snapshot assets, real matrix run `20260420-020614-windows-0ebd` again passed `windows-corelib-reference-native-hotupdate-proof` end-to-end with `analysis-frontend = ok`, `generated-native-proof = ok`, `build-target = ok`, `runtime-managed-output = ok`, runtime stdout `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`, and a schema-backed `native-hotupdate-audit.json`; this still remains only a narrow `GoldenCoreLibReference.NativeProofApp` proof packet rather than full `System.Private.CoreLib` DLL-body translation
+updated_at: 2026-04-20 10:25:00 +08:00
+updated_at: 2026-04-20 10:50:00 +08:00
+latest_stop_point: after keeping the canonical combined CoreLib-first `native -> hotupdate` audit anchor stable, this slice added a new subject-visible assembly-bound runtime-skeleton threading/threadstatic/monitor/gc proof lane end-to-end: `ThreadingThreadStaticMonitorSolution` now builds through `SolutionCorePack`, `NativeReferenceProofEmitter` can recognize and emit an executable `ThreadingProofEntry::Run` runtime-skeleton stub, and real matrix run `20260420-104850-windows-23e3` passed `windows-threading-threadstatic-monitor-native-proof` with the expected JSON stdout; the canonical CoreLib combined chain was then re-run (`20260420-104821-windows-fdb9`, plus parallel `20260420-104521-windows-b76a`) and remains `ok` with the same narrow truth boundary (`translationUnitMethodCount = 3`, `runtimeSkeletonReservedStubCount = 0`, `fullCoreLibTranslated = false`)
 current_dir: docs/dev/in-progress/20260419-07-corelib-dll-boundary-native-codegen-implementation
 parent_task_id: 20260419-01-foundation-dll-translation-audit-roadmap
 source_task_id: 20260419-03-system-private-corelib-full-verification
@@ -29,7 +31,7 @@ source_relation: unblocker-for-corelib-full-verification
 design_doc: docs/dev/in-progress/20260419-07-corelib-dll-boundary-native-codegen-implementation/design-v1-01.md
 plan_doc: docs/dev/in-progress/20260419-07-corelib-dll-boundary-native-codegen-implementation/plan-v1-01.md
 total_tasks: 6
-current_task: use the newly verified and schema-frozen narrow CoreLib-first `native -> hotupdate` bridge as the audit anchor, with matrix-level audit output now canonicalized, then continue widening assembly-bound native-reference executable method families without overstating CoreLib completion
+current_task: use the schema-frozen and metric-backed narrow CoreLib-first `native -> hotupdate` bridge as the audit anchor, while widening executable assembly-bound runtime-skeleton method families and clearly separating standalone lane progress from actual CoreLib DLL-body completion
 active: true
 ---
 
@@ -47,10 +49,12 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
 
 ## Immediate Next Step
 
-- Keep `windows-corelib-reference-native-hotupdate-proof` as the canonical combined proof anchor, but reduce review ambiguity:
-  - make failure/success reporting distinguish incomplete audit payloads from verified audit payloads
-  - keep the matrix-level pipeline report as the one canonical review surface while leaving declared entry summaries as lightweight navigation views
-  - then continue widening the executable method-family coverage needed before this can represent meaningful `System.Private.CoreLib` DLL-boundary translation
+- Keep `windows-corelib-reference-native-hotupdate-proof` as the canonical combined proof anchor:
+  - its matrix-level audit path and narrowness metrics are now stable again after the threading-lane expansion
+  - do not conflate the new standalone threading proof with CoreLib completion
+- Continue widening executable runtime-skeleton coverage in one of two directions:
+  - widen the actual `GoldenCoreLibReference.NativeProofApp` proof packet beyond the current 3 translated methods, or
+  - land the next standalone method family with comparable auditability (the best prepared remaining candidate is still `async/await`)
 
 ## Current Progress
 
@@ -948,3 +952,85 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
       - matrix-level `pipeline-report/report.json`
       - declared-entry summary only
       - one matrix-level `pipeline-report/report/native-hotupdate-audit.json`
+- Combined audit narrowness-metric reruns:
+  - `python -m pytest tests/contracts/shared/test_foundation_dll_translation_audit_schema.py -q`
+    - Result: `4 passed`
+    - Context: `native-hotupdate-audit.schema.json` now freezes native-reference plan kind/mode/method-count/audit-status and runtime-skeleton reserved-stub count.
+  - `python -m pytest tests/unit/reporting/test_subject_reporting.py -q`
+    - Result: `8 passed`
+    - Context: matrix report materialization now writes the richer combined audit payload and surfaces those fields in `matrix_report["nativeHotupdateAudit"]`.
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-corelib-reference-native-hotupdate-proof --json`
+    - run id = `20260420-101915-windows-0c1c`
+    - summary = `ok`
+    - verification:
+      - canonical artifact path remains `matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/native-hotupdate-audit.json`
+      - `nativeGeneration.nativeReferencePlanKind = "assembly-full-closure-runtime-skeleton"`
+      - `nativeGeneration.translationUnitMode = "runtime-skeleton"`
+      - `nativeGeneration.translationUnitMethodCount = 3`
+      - `nativeGeneration.auditStatus = "runtime-skeleton"`
+      - `nativeGeneration.runtimeSkeletonReservedStubCount = 0`
+      - runtime stdout = `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-delegate-closed-target-relay-native-proof --json`
+    - run id = `20260420-100630-windows-09ef`
+    - summary = `ok`
+    - runtime stdout = `Delegate native proof: delegate proof.!`
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-static-call-ctor-getter-native-proof --json`
+    - run id = `20260420-100758-windows-c221`
+    - summary = `ok`
+    - runtime stdout = `static-call-ctor-getter:System.Private.CoreLib|System.Console`
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-reflection-interop-closure-native-proof --json`
+    - run id = `20260420-102051-windows-4166`
+    - summary = `ok`
+    - runtime stdout = `closure-ok|ReflectionClosureBox<String>|Value|Echo|GetTickCount64`
+- Added a new standalone assembly-bound threading family lane under `SolutionCorePack`:
+  - new engineering scenario:
+    - `subjects/SolutionCorePack/source/EngineeringScenarios/ThreadingThreadStaticMonitorSolution`
+  - new matrix:
+    - `windows-threading-threadstatic-monitor-native-proof`
+  - host solution and subject manifest/feature inventory now include the new scenario and project
+- Added executable runtime-skeleton support for the threading/threadstatic/monitor/gc family:
+  - `NativeReferenceProofEmitter` now recognizes:
+    - `ThreadingThreadStaticMonitor.App/ThreadingProofEntry::Run:System.Int32()`
+  - runtime skeleton page generation now emits a dedicated threading stub instead of a reserved stub comment
+  - added a dedicated runtime-skeleton threading stub template instead of incorrectly reusing the full proof translation unit template
+  - runtime skeleton page template now includes the standard headers needed by threading-family stubs (`<atomic>`, `<thread>`)
+- Verified the new threading lane end-to-end on the real subject:
+  - `python -m pytest tests/unit/compatibility/test_solution_core_pack_subject.py tests/unit/planning/test_solution_core_pack_planner.py tests/unit/compatibility/test_threading_gc_proof_subject.py -q`
+    - Result: `43 passed`
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-threading-threadstatic-monitor-native-proof --json`
+    - first attempt:
+      - run id = `20260420-104456-windows-956e`
+      - summary = `fail`
+      - diagnosis:
+        - reusing the full `NativeReferenceProof.ThreadingThreadStaticMonitor.cpp.scriban` inside a runtime-skeleton page injected nested includes/namespaces into the page body and broke the native build
+    - fixed rerun:
+      - run id = `20260420-104850-windows-23e3`
+      - summary = `ok`
+      - `host-input-build = ok`
+      - `analysis-frontend = ok`
+      - `generated-native-proof = ok`
+      - `build-target = ok`
+      - `runtime-observe = ok`
+      - runtime stdout:
+        - `{"kind":"threading-proof","status":"ok","threadStatic":{"main":2,"worker":1},"monitor":{"sharedTotal":2},"gc":{"rootsReported":2,"finalized":1}}`
+      - generated manifest:
+        - `assemblyName = "ThreadingThreadStaticMonitor.App"`
+        - `preferredAssemblyDispatchSubjectId = "ThreadingThreadStaticMonitor.App/ThreadingProofEntry::Run:System.Int32()"`
+        - `translationUnitMethodCount = 9`
+      - generated runtime page review:
+        - page `0001` contains `7` reserved stubs, so this lane proves one executable family inside a broader 9-method full-closure packet rather than complete per-method translation
+- Re-ran the canonical CoreLib combined anchor after the threading slice:
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-corelib-reference-native-hotupdate-proof --json`
+    - run id = `20260420-104821-windows-fdb9`
+    - summary = `ok`
+    - canonical audit path remains:
+      - `matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/native-hotupdate-audit.json`
+    - audit still reports:
+      - `nativeGeneration.translationUnitMethodCount = 3`
+      - `nativeGeneration.runtimeSkeletonReservedStubCount = 0`
+      - `truthBoundary.fullCoreLibTranslated = false`
+    - runtime stdout:
+      - `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`
+  - parallel re-run:
+    - run id = `20260420-104521-windows-b76a`
+    - summary = `ok`

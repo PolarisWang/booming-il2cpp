@@ -105,6 +105,10 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
             r"EngineeringScenarios\InterfaceDispatchMessageSolution\App\InterfaceDispatchMessage.App.csproj",
             solution_text,
         )
+        self.assertIn(
+            r"EngineeringScenarios\ThreadingThreadStaticMonitorSolution\App\ThreadingThreadStaticMonitor.App.csproj",
+            solution_text,
+        )
         self.assertNotIn(r"Slices\HelloWorld\HelloWorld.csproj", solution_text)
         self.assertNotIn(r"Slices\GenericEcho\GenericEcho.csproj", solution_text)
         self.assertNotIn(r"Slices\HelloWorldObject\HelloWorldObject.csproj", solution_text)
@@ -162,6 +166,10 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         )
         self.assertIn(
             r"..\EngineeringScenarios\InterfaceDispatchMessageSolution\App\InterfaceDispatchMessage.App.csproj",
+            project_text,
+        )
+        self.assertIn(
+            r"..\EngineeringScenarios\ThreadingThreadStaticMonitorSolution\App\ThreadingThreadStaticMonitor.App.csproj",
             project_text,
         )
         self.assertNotIn(r"..\..\..\MainlineFeaturePack\source\MainlineFeaturePack.csproj", project_text)
@@ -222,6 +230,9 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         )
         self.assertTrue(
             (ARCHETYPE_ROOT / "InterfaceDispatchMessageSolution" / "InterfaceDispatchMessageSolution.sln").is_file()
+        )
+        self.assertTrue(
+            (ARCHETYPE_ROOT / "ThreadingThreadStaticMonitorSolution" / "ThreadingThreadStaticMonitorSolution.sln").is_file()
         )
         self.assertTrue((SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj").is_file())
         self.assertTrue((SUBJECT_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "CoreRuntimeBenchmarks.csproj").is_file())
@@ -364,6 +375,12 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         self.assertEqual(
             "subjects/SolutionCorePack/source/EngineeringScenarios/InterfaceDispatchMessageSolution",
             scenarios["solution-interface-dispatch-message"]["sourcePath"],
+        )
+        self.assertIn("solution-threading-threadstatic-monitor", scenarios)
+        self.assertEqual(16, scenarios["solution-threading-threadstatic-monitor"]["code"])
+        self.assertEqual(
+            "subjects/SolutionCorePack/source/EngineeringScenarios/ThreadingThreadStaticMonitorSolution",
+            scenarios["solution-threading-threadstatic-monitor"]["sourcePath"],
         )
 
     def test_solution_core_pack_manifest_declares_foundation_dll_translation_native_proof_matrix(self) -> None:
@@ -508,6 +525,18 @@ class SolutionCorePackSubjectTests(unittest.TestCase):
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
             "subjects/SolutionCorePack/source/EngineeringScenarios/InterfaceDispatchMessageSolution/App/InterfaceDispatchMessage.App.csproj",
+            matrix["source"]["primaryProjectPath"],
+        )
+        self.assertEqual("", matrix["source"]["entry"])
+        self.assertTrue(matrix["source"]["fullAssemblyClosure"])
+        self.assertNotIn("entrySelection", matrix["source"])
+
+        self.assertIn("windows-threading-threadstatic-monitor-native-proof", matrices)
+        matrix = matrices["windows-threading-threadstatic-monitor-native-proof"]
+        self.assertEqual("proof-runtime-output", matrix["pipelineId"])
+        self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
+        self.assertEqual(
+            "subjects/SolutionCorePack/source/EngineeringScenarios/ThreadingThreadStaticMonitorSolution/App/ThreadingThreadStaticMonitor.App.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])

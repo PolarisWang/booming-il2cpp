@@ -129,6 +129,8 @@ class Phase2ThreadingGcProofTests(unittest.TestCase):
         self.assertIn("TryCreateThreadingThreadStaticMonitorLoweringPlan(", planner_source)
         self.assertIn("NativeReferenceProofCatalog.ManagedThreadingThreadStaticMonitorMinimal", emitter_source)
         self.assertIn("case ManagedThreadingThreadStaticMonitorMinimal:", emitter_source)
+        self.assertIn("TryBuildAssemblyBoundThreadingThreadStaticMonitorPlan(", emitter_source)
+        self.assertIn("BuildAssemblyBoundThreadingThreadStaticMonitorStub(", emitter_source)
 
         self.assertIn("ThreadStaticInt32Add(", runtime_header_source)
         self.assertIn("MonitorEnter(", runtime_header_source)

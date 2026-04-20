@@ -372,6 +372,27 @@ def _relative_artifact_path(repo_root: Path, path: Path) -> str:
         return path.as_posix()
 
 
+def _count_runtime_skeleton_reserved_stubs(repo_root: Path, generated_source_paths: list[str]) -> int:
+    count = 0
+    for source_path_text in generated_source_paths:
+        normalized_path = str(source_path_text or "").replace("\\", "/")
+        if not normalized_path:
+            continue
+        if "runtime-skeleton" not in normalized_path and "/runtime/" not in normalized_path:
+            continue
+
+        source_path = repo_root / normalized_path
+        if not source_path.is_file():
+            continue
+
+        try:
+            source_text = source_path.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        count += source_text.count("Stub reserved for ")
+    return count
+
+
 def _native_hotupdate_audit_payload(repo_root: Path, matrix_report: dict[str, Any]) -> dict[str, Any]:
     host_input_manifest_path = _stage_manifest_path(matrix_report, "host-input-build")
     generated_manifest_path = _stage_manifest_path(matrix_report, "generated-native-proof")
@@ -385,6 +406,13 @@ def _native_hotupdate_audit_payload(repo_root: Path, matrix_report: dict[str, An
 
     native_reference_manifest_path = str(generated_manifest.get("nativeReferenceManifestPath") or "").strip()
     native_reference_manifest = _read_json_document(repo_root, native_reference_manifest_path)
+    native_reference_plan_path = str(generated_manifest.get("nativeReferencePlanPath") or "").strip()
+    native_reference_plan = _read_json_document(repo_root, native_reference_plan_path)
+    generated_source_paths = list(generated_manifest.get("generatedSourcePaths") or [])
+    runtime_skeleton_reserved_stub_count = _count_runtime_skeleton_reserved_stubs(
+        repo_root,
+        generated_source_paths,
+    )
 
     return {
         "reportVersion": "v1",
@@ -408,13 +436,19 @@ def _native_hotupdate_audit_payload(repo_root: Path, matrix_report: dict[str, An
         "nativeGeneration": {
             "manifestPath": generated_manifest_path,
             "generatedSourcePath": str(generated_manifest.get("generatedSourcePath") or ""),
-            "generatedSourcePaths": list(generated_manifest.get("generatedSourcePaths") or []),
+            "generatedSourcePaths": generated_source_paths,
             "nativeReferenceManifestPath": native_reference_manifest_path,
-            "nativeReferencePlanPath": str(generated_manifest.get("nativeReferencePlanPath") or ""),
+            "nativeReferencePlanPath": native_reference_plan_path,
             "nativeAotManifestPath": str(generated_manifest.get("nativeAotManifestPath") or ""),
+            "nativeReferencePlanKind": str(native_reference_plan.get("planKind") or ""),
             "runtimeExecutionKind": str(native_reference_manifest.get("runtimeExecutionKind") or ""),
             "preferredAssemblyDispatchSubjectId": str(native_reference_manifest.get("preferredAssemblyDispatchSubjectId") or ""),
+            "translationUnitMode": str(native_reference_plan.get("translationUnitMode") or ""),
+            "translationUnitMethodCount": native_reference_plan.get("translationUnitMethodCount"),
             "translationUnitPageCount": native_reference_manifest.get("translationUnitPageCount"),
+            "auditStatus": str(native_reference_plan.get("auditStatus") or ""),
+            "auditMessage": str(native_reference_plan.get("auditMessage") or ""),
+            "runtimeSkeletonReservedStubCount": runtime_skeleton_reserved_stub_count,
         },
         "nativeBuild": {
             "manifestPath": build_manifest_path,
@@ -469,6 +503,10 @@ def materialize_matrix_report_artifacts(
             "artifactPath": audit_path_text,
             "status": str(audit_payload.get("status") or ""),
             "nativeReferenceManifestPath": audit_payload["nativeGeneration"]["nativeReferenceManifestPath"],
+            "nativeReferencePlanKind": audit_payload["nativeGeneration"]["nativeReferencePlanKind"],
+            "translationUnitMethodCount": audit_payload["nativeGeneration"]["translationUnitMethodCount"],
+            "runtimeSkeletonReservedStubCount": audit_payload["nativeGeneration"]["runtimeSkeletonReservedStubCount"],
+            "auditStatus": audit_payload["nativeGeneration"]["auditStatus"],
             "nativeBuildManifestPath": audit_payload["hotupdateRuntime"]["nativeBuildManifestPath"],
             "managedRuntimeAssemblyPath": audit_payload["hotupdateRuntime"]["managedRuntimeAssemblyPath"],
             "stdoutPath": audit_payload["hotupdateRuntime"]["stdoutPath"],

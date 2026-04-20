@@ -111,6 +111,17 @@ class FoundationDllTranslationAuditSchemaTests(unittest.TestCase):
         )
 
         self.assertEqual("native-hotupdate-audit", schema["properties"]["artifactKind"]["const"])
+        native_generation_required = set(schema["properties"]["nativeGeneration"]["required"])
+        self.assertTrue(
+            {
+                "nativeReferencePlanKind",
+                "translationUnitMode",
+                "translationUnitMethodCount",
+                "auditStatus",
+                "auditMessage",
+                "runtimeSkeletonReservedStubCount",
+            }.issubset(native_generation_required)
+        )
         self.assertEqual(
             "not-used-by-this-combined-proof",
             schema["properties"]["truthBoundary"]["properties"]["nativeAotScope"]["const"],
@@ -130,9 +141,15 @@ class FoundationDllTranslationAuditSchemaTests(unittest.TestCase):
         self.assertEqual("native-hotupdate-audit", sample["artifactKind"])
         self.assertEqual("native-hotupdate-proof-output", sample["pipelineId"])
         self.assertEqual("assembly-bound-native-reference-skeleton", sample["nativeGeneration"]["runtimeExecutionKind"])
+        self.assertEqual("assembly-full-closure-runtime-skeleton", sample["nativeGeneration"]["nativeReferencePlanKind"])
+        self.assertEqual("runtime-skeleton", sample["nativeGeneration"]["translationUnitMode"])
+        self.assertEqual(3, sample["nativeGeneration"]["translationUnitMethodCount"])
+        self.assertEqual("runtime-skeleton", sample["nativeGeneration"]["auditStatus"])
+        self.assertEqual(0, sample["nativeGeneration"]["runtimeSkeletonReservedStubCount"])
         self.assertEqual("native-reference", sample["nativeBuild"]["buildKind"])
         self.assertEqual(False, sample["truthBoundary"]["fullCoreLibTranslated"])
         self.assertGreaterEqual(len(snapshot["nativeGeneration"]["generatedSourcePaths"]), 2)
+        self.assertEqual(3, snapshot["nativeGeneration"]["translationUnitMethodCount"])
         self.assertIn("corelib-reference-hotupdate:", snapshot["hotupdateRuntime"]["outputLines"][0])
 
 
