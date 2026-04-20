@@ -37,7 +37,8 @@ updated_at: 2026-04-20 14:11:37 +08:00
 updated_at: 2026-04-20 14:20:40 +08:00
 updated_at: 2026-04-20 14:34:00 +08:00
 updated_at: 2026-04-20 14:43:30 +08:00
-latest_stop_point: after widening the canonical CoreLib packet to `translationUnitMethodCount = 29` with the combined-side triple-hop family, this slice added the symmetric triple-terminal-forwarder helper family to the actual `GoldenCoreLibReference.NativeProofApp` proof packet: `static string producer -> ctor -> instance-call(string) -> forwarder -> forwarder -> forwarder -> Console.WriteLine`. The new generic lowering was proven with an unused render path (`ComposeProducedForwardedForwardedForwardedRender`) and then with an unused getter path (`ComposeProducedForwardedForwardedForwardedEcho`). Real combined proof run `20260420-144201-windows-a617` passed, the observable proof output remained unchanged, the canonical audit widened to `translationUnitMethodCount = 31`, `runtimeSkeletonReservedStubCount` stayed `0`, and `fullCoreLibTranslated` remains `false`
+updated_at: 2026-04-20 15:00:00 +08:00
+latest_stop_point: after widening the canonical CoreLib packet to `translationUnitMethodCount = 31` with the symmetric triple-terminal-forwarder family, this slice added the matching combined-side four-hop helper family to the actual `GoldenCoreLibReference.NativeProofApp` proof packet: `static string producer -> forwarder -> ctor -> instance-call(string) -> forwarder -> forwarder -> forwarder -> Console.WriteLine`. The new generic lowering was proven with an unused render path (`ComposeForwardedProducedForwardedForwardedForwardedRender`) and then with an unused getter path (`ComposeForwardedProducedForwardedForwardedForwardedEcho`). Real combined proof run `20260420-145423-windows-14e1` passed, the observable proof output remained unchanged, the canonical audit widened to `translationUnitMethodCount = 33`, `runtimeSkeletonReservedStubCount` stayed `0`, and `fullCoreLibTranslated` remains `false`
 current_dir: docs/dev/in-progress/20260419-07-corelib-dll-boundary-native-codegen-implementation
 parent_task_id: 20260419-01-foundation-dll-translation-audit-roadmap
 source_task_id: 20260419-03-system-private-corelib-full-verification
@@ -66,7 +67,7 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
 - Keep `windows-corelib-reference-native-hotupdate-proof` as the canonical combined proof anchor:
   - its matrix-level audit path and narrowness metrics are now stable again after widening the canonical proof packet itself
   - the current audited truth boundary is now:
-    - `translationUnitMethodCount = 31`
+    - `translationUnitMethodCount = 33`
     - `runtimeSkeletonReservedStubCount = 0`
     - `fullCoreLibTranslated = false`
 - Continue widening executable runtime-skeleton coverage inside the actual `GoldenCoreLibReference.NativeProofApp` proof packet before adding more detached lanes:
@@ -88,10 +89,12 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
     - static string producer -> ctor -> instance-call(string) -> forwarder -> forwarder -> `Console.WriteLine`
     - static string producer -> forwarder -> ctor -> instance-call(string) -> forwarder -> forwarder -> `Console.WriteLine`
     - static string producer -> ctor -> instance-call(string) -> forwarder -> forwarder -> forwarder -> `Console.WriteLine`
-  - the strongest next candidate is now either:
-    - the matching combined-side four-hop synchronous family, if we still want one more cheap string-pipeline extension
-    - or a deliberate pivot to `async/await`, because the marginal packet-widening yield per new helper is starting to fall
-  - if the next synchronous family no longer lands cheaply, stop and reassess whether `async/await` is finally the better packet-widening target
+    - `static string producer -> forwarder -> ctor -> instance-call(string) -> forwarder -> forwarder -> forwarder -> Console.WriteLine`
+  - the cheap synchronous string-pipeline harvest is now close to exhausted:
+    - the matching combined-side four-hop family also landed cleanly
+    - each additional synchronous helper is now likely to buy less audit widening per recognizer added
+  - the strongest next candidate is now a deliberate pivot to `async/await`
+  - only fall back to another synchronous family if the first `async/await` slice proves materially more expensive than expected
 
 ## Current Progress
 
@@ -1726,3 +1729,45 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
       - `truthBoundary.fullCoreLibTranslated = false`
     - runtime stdout:
       - `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`
+- Added one more assembly-agnostic runtime-skeleton helper for a producer/forwarder/object/instance-call/forwarder/forwarder/forwarder/write-line chain:
+  - `src/managed/Chaos.IL2CPP.CodeGen/Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub.cpp.scriban`
+  - `NativeReferenceProofEmitter` now recognizes:
+    - `TryBuildAssemblyBoundStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub(...)`
+  - `NativeReferenceProofCatalog` now exposes:
+    - `GetRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStubTemplate()`
+- Widened the canonical packet with the combined-side four-hop render variant:
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/NativeProofApp/Program.cs`
+    - added `ComposeForwardedProducedForwardedForwardedForwardedRender():System.Int32`
+  - this family is intentionally not called from `Main`, so the observable proof output is unchanged while full-assembly-closure translation still has to lower:
+    - producer -> forwarder -> ctor -> render -> forwarder -> forwarder -> forwarder -> `Console.WriteLine`
+- Widened the canonical packet with the combined-side four-hop getter companion:
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/NativeProofApp/Program.cs`
+    - added `ComposeForwardedProducedForwardedForwardedForwardedEcho():System.Int32`
+  - this family is intentionally not called from `Main`, so the observable proof output is unchanged while full-assembly-closure translation still has to lower:
+    - producer -> forwarder -> ctor -> getter -> forwarder -> forwarder -> forwarder -> `Console.WriteLine`
+  - together with the previous render variant, this confirms the new combined-side four-hop helper covers both:
+    - field-backed render instance calls
+    - field getter instance calls
+- Re-ran the canonical packet after adding the combined-side four-hop family:
+  - `python -m pytest tests/unit/compatibility/test_solution_core_pack_subject.py tests/unit/compatibility/test_full_assembly_closure_codegen_contracts.py -q`
+    - Result: `30 passed`
+  - `dotnet build src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj -c Release -m:1`
+    - Result: build succeeded, `0 warnings`, `0 errors`
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-corelib-reference-native-hotupdate-proof --json`
+    - run id = `20260420-145423-windows-14e1`
+    - summary = `ok`
+    - canonical audit path remains:
+      - `matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/native-hotupdate-audit.json`
+    - audit now reports:
+      - `nativeGeneration.translationUnitMethodCount = 33`
+      - `nativeGeneration.runtimeSkeletonReservedStubCount = 0`
+      - `truthBoundary.fullCoreLibTranslated = false`
+    - runtime stdout:
+      - `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`
+    - generated runtime page now contains:
+      - `Program::ComposeForwardedProducedForwardedForwardedForwardedRender:System.Int32()`
+      - `Program::ComposeForwardedProducedForwardedForwardedForwardedEcho:System.Int32()`
+      - `initial_forwarded_value`
+      - `first_forwarded_message`
+      - `second_forwarded_message`
+      - `forwarded_message`
