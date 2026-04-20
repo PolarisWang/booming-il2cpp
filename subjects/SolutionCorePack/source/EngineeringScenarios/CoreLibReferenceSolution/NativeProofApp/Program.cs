@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace GoldenCoreLibReference.NativeProofApp;
 
@@ -209,5 +210,22 @@ internal static class Program
     {
         Console.WriteLine(EchoValue(EchoValue(EchoValue(new EchoHolder(EchoValue(BuildLiteralMessage())).GetValue()))));
         return 0;
+    }
+
+    private static async Task<int> AddAsync(int left, int right)
+    {
+        await Task.Yield();
+        return left + right;
+    }
+
+    private static async Task<int> ComputeAsyncValue(int seed)
+    {
+        await Task.Yield();
+        return await AddAsync(seed, 2);
+    }
+
+    private static int ComposeAsyncValue()
+    {
+        return ComputeAsyncValue(40).GetAwaiter().GetResult();
     }
 }

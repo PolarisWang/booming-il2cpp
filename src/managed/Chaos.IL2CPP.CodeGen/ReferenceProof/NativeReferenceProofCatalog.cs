@@ -124,6 +124,12 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub.cpp.scriban";
     public const string RuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub.cpp.scriban";
+    public const string RuntimeSkeletonAsyncTaskIntFactoryStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.AsyncTaskIntFactoryStub.cpp.scriban";
+    public const string RuntimeSkeletonAsyncGetResultIntStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.AsyncGetResultIntStub.cpp.scriban";
+    public const string RuntimeSkeletonAsyncStateMachineNoOpStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.AsyncStateMachineNoOpStub.cpp.scriban";
     public const string RuntimeSkeletonStaticLiteralStringReturnStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticLiteralStringReturnStub.cpp.scriban";
     public const string RuntimeSkeletonStaticStringProducerConsoleWriteLineStubTemplateRelativePath =
@@ -306,6 +312,21 @@ internal static class NativeReferenceProofCatalog
     public static Template GetRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStubTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonAsyncTaskIntFactoryStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonAsyncTaskIntFactoryStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonAsyncGetResultIntStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonAsyncGetResultIntStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonAsyncStateMachineNoOpStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonAsyncStateMachineNoOpStubTemplateRelativePath);
     }
 
     public static Template GetRuntimeSkeletonStaticLiteralStringReturnStubTemplate()

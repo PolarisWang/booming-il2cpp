@@ -38,7 +38,8 @@ updated_at: 2026-04-20 14:20:40 +08:00
 updated_at: 2026-04-20 14:34:00 +08:00
 updated_at: 2026-04-20 14:43:30 +08:00
 updated_at: 2026-04-20 15:00:00 +08:00
-latest_stop_point: after widening the canonical CoreLib packet to `translationUnitMethodCount = 31` with the symmetric triple-terminal-forwarder family, this slice added the matching combined-side four-hop helper family to the actual `GoldenCoreLibReference.NativeProofApp` proof packet: `static string producer -> forwarder -> ctor -> instance-call(string) -> forwarder -> forwarder -> forwarder -> Console.WriteLine`. The new generic lowering was proven with an unused render path (`ComposeForwardedProducedForwardedForwardedForwardedRender`) and then with an unused getter path (`ComposeForwardedProducedForwardedForwardedForwardedEcho`). Real combined proof run `20260420-145423-windows-14e1` passed, the observable proof output remained unchanged, the canonical audit widened to `translationUnitMethodCount = 33`, `runtimeSkeletonReservedStubCount` stayed `0`, and `fullCoreLibTranslated` remains `false`
+updated_at: 2026-04-20 16:47:29 +08:00
+latest_stop_point: after the synchronous string-pipeline harvest reached `translationUnitMethodCount = 33`, this slice pivoted the actual `GoldenCoreLibReference.NativeProofApp` canonical proof packet to the first `async/await` widening family by adding `AddAsync`, `ComputeAsyncValue`, and `ComposeAsyncValue`. The native-reference runtime skeleton now recognizes three new assembly-bound async helper families: `Task<int>` wrapper factory stubs via `resolve_method_by_token + method_invoke`, `TaskAwaiter<int>.GetResult()` consumer stubs via `resolve_method_by_token + method_invoke`, and compiler-generated async state-machine `MoveNext/SetStateMachine` no-op stubs after strict shape validation. Real combined proof run `20260420-164703-windows-65d3` passed, the observable proof output remained unchanged, the canonical audit widened to `translationUnitMethodCount = 40`, `runtimeSkeletonReservedStubCount` stayed `0`, and `fullCoreLibTranslated` remains `false`
 current_dir: docs/dev/in-progress/20260419-07-corelib-dll-boundary-native-codegen-implementation
 parent_task_id: 20260419-01-foundation-dll-translation-audit-roadmap
 source_task_id: 20260419-03-system-private-corelib-full-verification
@@ -67,7 +68,7 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
 - Keep `windows-corelib-reference-native-hotupdate-proof` as the canonical combined proof anchor:
   - its matrix-level audit path and narrowness metrics are now stable again after widening the canonical proof packet itself
   - the current audited truth boundary is now:
-    - `translationUnitMethodCount = 33`
+    - `translationUnitMethodCount = 40`
     - `runtimeSkeletonReservedStubCount = 0`
     - `fullCoreLibTranslated = false`
 - Continue widening executable runtime-skeleton coverage inside the actual `GoldenCoreLibReference.NativeProofApp` proof packet before adding more detached lanes:
@@ -93,8 +94,11 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
   - the cheap synchronous string-pipeline harvest is now close to exhausted:
     - the matching combined-side four-hop family also landed cleanly
     - each additional synchronous helper is now likely to buy less audit widening per recognizer added
-  - the strongest next candidate is now a deliberate pivot to `async/await`
-  - only fall back to another synchronous family if the first `async/await` slice proves materially more expensive than expected
+  - the first deliberate `async/await` widening slice is now closed:
+    - wrapper factories for `Task<int>`
+    - zero-arg `GetAwaiter().GetResult()` consumer
+    - compiler-generated async state-machine `MoveNext/SetStateMachine`
+  - the next candidate should be the next non-trivial CoreLib family after this first async boundary, rather than going back to small synchronous reorder variants
 
 ## Current Progress
 
@@ -312,6 +316,41 @@ Do not start Complex BCL 13 DLL execution until `System.Private.CoreLib` full ve
     - canonical constructor helper methods with `ldarg 0 -> call System.Object::.ctor -> ldarg 0/1 -> stfld -> ret` now emit executable assembly-bound helper stubs
   - added `RuntimeSkeleton.FieldBackedStringReturnStub`
     - canonical field-backed string-return instance methods with `ldstr + ldarg 0 + ldfld + string.Concat + ret` now emit executable assembly-bound helper stubs
+- Added the first assembly-bound async runtime-skeleton helper family for the canonical CoreLib packet:
+  - `RuntimeSkeleton.AsyncTaskIntFactoryStub`
+    - matches static `Task<int>` wrapper factories using `AsyncTaskMethodBuilder<int>::Create/Start/get_Task`
+    - emits method-token-driven `resolve_method_by_token + method_invoke` stubs
+  - `RuntimeSkeleton.AsyncGetResultIntStub`
+    - matches `ComputeAsyncValue(...).GetAwaiter().GetResult()`-style zero-arg consumers
+    - emits method-token-driven `resolve_method_by_token + method_invoke` stubs returning `int32`
+  - `RuntimeSkeleton.AsyncStateMachineNoOpStub`
+    - matches compiler-generated `+<...>d__*::MoveNext/SetStateMachine`
+    - validates async-specific canonical callees before emitting explicit non-reserved no-op stubs
+- Widened the canonical CoreLib packet with the first async family:
+  - `subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/NativeProofApp/Program.cs`
+    - added `AddAsync(int,int)`
+    - added `ComputeAsyncValue(int)`
+    - added `ComposeAsyncValue()`
+  - this family remains intentionally uncalled from `Main`, so the observable proof output is unchanged while full-assembly-closure translation still has to lower:
+    - `Task<int>` wrapper factory methods
+    - one `GetAwaiter().GetResult()` consumer
+    - four compiler-generated async state-machine methods
+- Re-ran the canonical packet after landing and debugging the first async slice:
+  - `python -m pytest tests/unit/compatibility/test_solution_core_pack_subject.py tests/unit/compatibility/test_full_assembly_closure_codegen_contracts.py -q`
+    - Result: `33 passed`
+  - `dotnet build src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj -c Release -m:1`
+    - Result: build succeeded, `119 warnings`, `0 errors`
+  - `python build/toolchains/run/run.py test subject --id subject/SolutionCorePack --matrix windows-corelib-reference-native-hotupdate-proof --json`
+    - final fixed run id = `20260420-164703-windows-65d3`
+    - summary = `ok`
+    - canonical audit path remains:
+      - `matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/native-hotupdate-audit.json`
+    - audit now reports:
+      - `nativeGeneration.translationUnitMethodCount = 40`
+      - `nativeGeneration.runtimeSkeletonReservedStubCount = 0`
+      - `truthBoundary.fullCoreLibTranslated = false`
+    - runtime stdout:
+      - `corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3`
 - Re-ran CoreLib native proof after the forwarder/helper widening:
   - run id: `20260420-010219-windows-f55b`
   - matrix: `windows-corelib-reference-native-proof`

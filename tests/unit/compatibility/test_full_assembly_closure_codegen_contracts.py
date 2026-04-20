@@ -904,5 +904,123 @@ class FullAssemblyClosureCodegenContractTests(unittest.TestCase):
         ]:
             self.assertIn(required_fragment, template_source)
 
+    def test_runtime_skeleton_async_task_int_factory_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.AsyncTaskIntFactoryStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundAsyncTaskIntFactoryStub",
+            "GetRuntimeSkeletonAsyncTaskIntFactoryStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn(
+            "RuntimeSkeletonAsyncTaskIntFactoryStubTemplateRelativePath",
+            catalog_source,
+        )
+
+        for required_fragment in [
+            "_ManagedArgs",
+            "resolve_method_by_token",
+            "method_invoke",
+            "target_method_token",
+            "return_value",
+            "arg0",
+            "arg1",
+            "argc",
+            "out_exception",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_async_get_result_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.AsyncGetResultIntStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundAsyncGetResultIntStub",
+            "GetRuntimeSkeletonAsyncGetResultIntStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn(
+            "RuntimeSkeletonAsyncGetResultIntStubTemplateRelativePath",
+            catalog_source,
+        )
+
+        for required_fragment in [
+            "resolve_method_by_token",
+            "method_invoke",
+            "target_method_token",
+            "return_value",
+            "out_exception",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_async_state_machine_no_op_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.AsyncStateMachineNoOpStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundAsyncStateMachineNoOpStub",
+            "GetRuntimeSkeletonAsyncStateMachineNoOpStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn(
+            "RuntimeSkeletonAsyncStateMachineNoOpStubTemplateRelativePath",
+            catalog_source,
+        )
+
+        for required_fragment in [
+            "managed_args",
+            "CHAOS_BRIDGE_STATUS_OK",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
 if __name__ == "__main__":
     unittest.main()

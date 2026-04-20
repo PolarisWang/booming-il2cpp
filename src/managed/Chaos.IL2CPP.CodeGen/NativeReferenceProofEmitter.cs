@@ -443,6 +443,37 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             return BuildAssemblyBoundThreadingThreadStaticMonitorStub(threadingThreadStaticMonitorPlan, stubName);
         }
 
+        if (TryBuildAssemblyBoundAsyncTaskIntFactoryStub(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodsBySubjectId,
+                stubName,
+                out var asyncTaskIntFactoryStub))
+        {
+            return asyncTaskIntFactoryStub;
+        }
+
+        if (TryBuildAssemblyBoundAsyncGetResultIntStub(
+                loweringPlan.AssemblyName,
+                subjectId,
+                metadataRegistration,
+                methodsBySubjectId,
+                stubName,
+                out var asyncGetResultIntStub))
+        {
+            return asyncGetResultIntStub;
+        }
+
+        if (TryBuildAssemblyBoundAsyncStateMachineNoOpStub(
+                subjectId,
+                methodsBySubjectId,
+                stubName,
+                out var asyncStateMachineNoOpStub))
+        {
+            return asyncStateMachineNoOpStub;
+        }
+
         if (TryBuildAssemblyBoundStaticIntForwarderStub(
                 subjectId,
                 methodsBySubjectId,
@@ -1742,6 +1773,143 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
             NativeReferenceProofCatalog.GetRuntimeSkeletonConsoleWriteLineStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundAsyncTaskIntFactoryStub(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(GetMethodReturnType(method.SubjectId), "System.Threading.Tasks.Task<System.Int32>", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+            ValidateAsyncTaskIntFactoryShape(method, instructions);
+        }
+        catch
+        {
+            return false;
+        }
+
+        var argc = method.Parameters.Count;
+        if (argc is not 1 and not 2)
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(assemblyName),
+            ["target_method_token"] = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", subjectId)),
+            ["argc"] = argc,
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonAsyncTaskIntFactoryStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundAsyncGetResultIntStub(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(GetMethodReturnType(method.SubjectId), "System.Int32", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+            ValidateAsyncGetResultIntShape(method, instructions);
+        }
+        catch
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(assemblyName),
+            ["target_method_token"] = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", subjectId)),
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonAsyncGetResultIntStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundAsyncStateMachineNoOpStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method) ||
+            !IsCompilerGeneratedAsyncStateMachineMethodSubjectId(subjectId))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+            switch (GetMethodName(subjectId))
+            {
+                case "MoveNext":
+                    ValidateAsyncStateMachineMoveNextShape(method, instructions);
+                    break;
+
+                case "SetStateMachine":
+                    ValidateAsyncStateMachineSetStateMachineShape(method, instructions);
+                    break;
+
+                default:
+                    return false;
+            }
+        }
+        catch
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonAsyncStateMachineNoOpStubTemplate(),
             model);
         return true;
     }
@@ -4523,13 +4691,23 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
     private static string GetMethodName(string subjectId)
     {
         var methodSeparatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
+        var returnTypeSeparatorIndex = subjectId.LastIndexOf(':');
         var parameterSeparatorIndex = subjectId.IndexOf('(', methodSeparatorIndex + 2);
         if (methodSeparatorIndex <= 0 || parameterSeparatorIndex <= methodSeparatorIndex + 2)
         {
             throw new InvalidOperationException($"failed to extract method name from subject id '{subjectId}'");
         }
 
-        return subjectId[(methodSeparatorIndex + 2)..parameterSeparatorIndex];
+        var methodEndIndex = returnTypeSeparatorIndex > methodSeparatorIndex
+            && returnTypeSeparatorIndex < parameterSeparatorIndex
+            ? returnTypeSeparatorIndex
+            : parameterSeparatorIndex;
+        if (methodEndIndex <= methodSeparatorIndex + 2)
+        {
+            throw new InvalidOperationException($"failed to extract method name from subject id '{subjectId}'");
+        }
+
+        return subjectId[(methodSeparatorIndex + 2)..methodEndIndex];
     }
 
     private static string GetMethodReturnType(string subjectId)
@@ -4542,6 +4720,230 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         }
 
         return subjectId[(returnTypeSeparatorIndex + 1)..parameterSeparatorIndex];
+    }
+
+    private static bool IsCompilerGeneratedAsyncStateMachineMethodSubjectId(string subjectId)
+    {
+        var declaringTypeSubjectId = GetDeclaringTypeSubjectId(subjectId);
+        return declaringTypeSubjectId.Contains("+<", StringComparison.Ordinal) &&
+               declaringTypeSubjectId.Contains(">d__", StringComparison.Ordinal);
+    }
+
+    private static void ValidateAsyncTaskIntFactoryShape(
+        TypedIlMethodArtifact method,
+        IReadOnlyList<TypedIlInstructionArtifact> instructions)
+    {
+        RequireMethodContract(method, "static-method", "has-canonical-body");
+
+        var argc = method.Parameters.Count;
+        if (argc is not 1 and not 2)
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects async Task<int> factory '{method.SubjectId}' to take one or two Int32 arguments");
+        }
+
+        var expectedInstructionCount = 14 + (argc * 3);
+        RequireInstructionCount(method, instructions, expectedInstructionCount);
+
+        RequireInstructionOp(instructions[0], "ldloca", method.SubjectId, 0);
+        if (GetRequiredOperandInt(instructions[0]) != 0)
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects '{method.SubjectId}' to initialize local state machine slot 0");
+        }
+
+        RequireInstructionOp(instructions[1], "call", method.SubjectId, 1);
+        RequireInstructionCallee(
+            instructions[1],
+            "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Int32>::Create:System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Int32>()",
+            method.SubjectId,
+            1);
+        RequireInstructionOp(instructions[2], "stfld", method.SubjectId, 2);
+
+        var instructionIndex = 3;
+        for (var argIndex = 0; argIndex < argc; argIndex++)
+        {
+            RequireInstructionOp(instructions[instructionIndex], "ldloca", method.SubjectId, instructionIndex);
+            if (GetRequiredOperandInt(instructions[instructionIndex]) != 0)
+            {
+                throw new InvalidOperationException(
+                    $"native-reference emitter expects '{method.SubjectId}' to reload local state machine slot 0");
+            }
+
+            RequireInstructionOp(instructions[instructionIndex + 1], "ldarg", method.SubjectId, instructionIndex + 1);
+            if (GetRequiredOperandInt(instructions[instructionIndex + 1]) != argIndex)
+            {
+                throw new InvalidOperationException(
+                    $"native-reference emitter expects '{method.SubjectId}' to store async wrapper argument {argIndex}");
+            }
+
+            RequireInstructionOp(instructions[instructionIndex + 2], "stfld", method.SubjectId, instructionIndex + 2);
+            instructionIndex += 3;
+        }
+
+        RequireInstructionOp(instructions[instructionIndex], "ldloca", method.SubjectId, instructionIndex);
+        RequireInstructionOp(instructions[instructionIndex + 1], "ldc.i4", method.SubjectId, instructionIndex + 1);
+        RequireInstructionOp(instructions[instructionIndex + 2], "stfld", method.SubjectId, instructionIndex + 2);
+        if (GetRequiredOperandInt(instructions[instructionIndex]) != 0 ||
+            GetRequiredOperandInt(instructions[instructionIndex + 1]) != -1)
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects '{method.SubjectId}' to set async state to -1 on local slot 0");
+        }
+
+        RequireInstructionOp(instructions[instructionIndex + 3], "ldloca", method.SubjectId, instructionIndex + 3);
+        RequireInstructionOp(instructions[instructionIndex + 4], "ldflda", method.SubjectId, instructionIndex + 4);
+        RequireInstructionOp(instructions[instructionIndex + 5], "ldloca", method.SubjectId, instructionIndex + 5);
+        RequireInstructionOp(instructions[instructionIndex + 6], "call", method.SubjectId, instructionIndex + 6);
+        RequireInstructionOp(instructions[instructionIndex + 7], "ldloca", method.SubjectId, instructionIndex + 7);
+        RequireInstructionOp(instructions[instructionIndex + 8], "ldflda", method.SubjectId, instructionIndex + 8);
+        RequireInstructionOp(instructions[instructionIndex + 9], "call", method.SubjectId, instructionIndex + 9);
+        RequireInstructionOp(instructions[instructionIndex + 10], "ret", method.SubjectId, instructionIndex + 10);
+
+        RequireInstructionCalleePrefix(
+            instructions[instructionIndex + 6],
+            "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Int32>::Start<",
+            method.SubjectId,
+            instructionIndex + 6);
+        RequireInstructionCallee(
+            instructions[instructionIndex + 9],
+            "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Int32>::get_Task:System.Threading.Tasks.Task<System.Int32>()",
+            method.SubjectId,
+            instructionIndex + 9);
+    }
+
+    private static void ValidateAsyncGetResultIntShape(
+        TypedIlMethodArtifact method,
+        IReadOnlyList<TypedIlInstructionArtifact> instructions)
+    {
+        RequireMethodContract(method, "static-method", "has-canonical-body");
+        if (method.Parameters.Count != 0)
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects async get-result wrapper '{method.SubjectId}' to be parameterless");
+        }
+
+        RequireInstructionCount(method, instructions, 7);
+        RequireInstructionOp(instructions[0], "ldc.i4", method.SubjectId, 0);
+        RequireInstructionOp(instructions[1], "call", method.SubjectId, 1);
+        RequireInstructionOp(instructions[2], "call", "callvirt", method.SubjectId, 2);
+        RequireInstructionOp(instructions[3], "stloc", method.SubjectId, 3);
+        RequireInstructionOp(instructions[4], "ldloca", method.SubjectId, 4);
+        RequireInstructionOp(instructions[5], "call", method.SubjectId, 5);
+        RequireInstructionOp(instructions[6], "ret", method.SubjectId, 6);
+
+        var producedTaskMethod = GetRequiredInstructionCallee(instructions[1], method.SubjectId, 1);
+        if (string.Equals(producedTaskMethod, method.SubjectId, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects '{method.SubjectId}' to consume an async producer, not recurse into itself");
+        }
+
+        RequireInstructionCallee(
+            instructions[2],
+            "System.Private.CoreLib/System.Threading.Tasks.Task<System.Int32>::GetAwaiter:System.Runtime.CompilerServices.TaskAwaiter<System.Int32>()",
+            method.SubjectId,
+            2);
+        RequireInstructionCallee(
+            instructions[5],
+            "System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.Int32>::GetResult:System.Int32()",
+            method.SubjectId,
+            5);
+    }
+
+    private static void ValidateAsyncStateMachineMoveNextShape(
+        TypedIlMethodArtifact method,
+        IReadOnlyList<TypedIlInstructionArtifact> instructions)
+    {
+        RequireMethodContract(method, "instance-method", "has-canonical-body");
+        if (instructions.Count < 20)
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects async state machine MoveNext '{method.SubjectId}' to contain the canonical async body");
+        }
+
+        var callees = instructions
+            .Where(instruction =>
+                (string.Equals(instruction.Op, "call", StringComparison.Ordinal) ||
+                 string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal)) &&
+                !string.IsNullOrWhiteSpace(instruction.Callee))
+            .Select(instruction => instruction.Callee!)
+            .ToList();
+
+        if (!callees.Contains("System.Private.CoreLib/System.Threading.Tasks.Task::Yield:System.Runtime.CompilerServices.YieldAwaitable()", StringComparer.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects async state machine MoveNext '{method.SubjectId}' to call Task::Yield()");
+        }
+
+        if (!callees.Any(callee =>
+                callee.StartsWith(
+                    "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Int32>::AwaitUnsafeOnCompleted<",
+                    StringComparison.Ordinal)))
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects async state machine MoveNext '{method.SubjectId}' to call AwaitUnsafeOnCompleted");
+        }
+
+        if (!callees.Contains(
+                "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Int32>::SetResult:System.Void(System.Int32)",
+                StringComparer.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects async state machine MoveNext '{method.SubjectId}' to call SetResult");
+        }
+
+        if (!callees.Contains(
+                "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Int32>::SetException:System.Void(System.Exception)",
+                StringComparer.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects async state machine MoveNext '{method.SubjectId}' to call SetException");
+        }
+
+        if (!callees.Contains(
+                "System.Private.CoreLib/System.Runtime.CompilerServices.YieldAwaitable+YieldAwaiter::GetResult:System.Void()",
+                StringComparer.Ordinal) &&
+            !callees.Contains(
+                "System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<System.Int32>::GetResult:System.Int32()",
+                StringComparer.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects async state machine MoveNext '{method.SubjectId}' to observe an awaiter GetResult call");
+        }
+    }
+
+    private static void ValidateAsyncStateMachineSetStateMachineShape(
+        TypedIlMethodArtifact method,
+        IReadOnlyList<TypedIlInstructionArtifact> instructions)
+    {
+        RequireMethodContract(method, "instance-method", "has-canonical-body");
+        if (method.Parameters.Count != 1 ||
+            !string.Equals(method.Parameters[0].Type, "System.Runtime.CompilerServices.IAsyncStateMachine", StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects async state machine SetStateMachine '{method.SubjectId}' to take IAsyncStateMachine");
+        }
+
+        RequireInstructionCount(method, instructions, 5);
+        RequireInstructionOp(instructions[0], "ldarg", method.SubjectId, 0);
+        RequireInstructionOp(instructions[1], "ldflda", method.SubjectId, 1);
+        RequireInstructionOp(instructions[2], "ldarg", method.SubjectId, 2);
+        RequireInstructionOp(instructions[3], "call", method.SubjectId, 3);
+        RequireInstructionOp(instructions[4], "ret", method.SubjectId, 4);
+
+        if (GetRequiredOperandInt(instructions[0]) != 0 ||
+            GetRequiredOperandInt(instructions[2]) != 1)
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects '{method.SubjectId}' to load ldarg 0 and ldarg 1");
+        }
+
+        RequireInstructionCallee(
+            instructions[3],
+            "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Int32>::SetStateMachine:System.Void(System.Runtime.CompilerServices.IAsyncStateMachine)",
+            method.SubjectId,
+            3);
     }
 
     private static void ValidateSingleArgumentForwarderShape(
@@ -4687,6 +5089,20 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 : $"'{expectedCallee}' or '{alternateExpectedCallee}'";
             throw new InvalidOperationException(
                 $"native-reference emitter expects instruction {instructionIndex} in '{subjectId}' to call {expectedDescription}, but found '{instruction.Callee ?? "<null>"}'");
+        }
+    }
+
+    private static void RequireInstructionCalleePrefix(
+        TypedIlInstructionArtifact instruction,
+        string expectedPrefix,
+        string subjectId,
+        int instructionIndex)
+    {
+        if (string.IsNullOrWhiteSpace(instruction.Callee) ||
+            !instruction.Callee.StartsWith(expectedPrefix, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects instruction {instructionIndex} in '{subjectId}' to call a method starting with '{expectedPrefix}', but found '{instruction.Callee ?? "<null>"}'");
         }
     }
 
