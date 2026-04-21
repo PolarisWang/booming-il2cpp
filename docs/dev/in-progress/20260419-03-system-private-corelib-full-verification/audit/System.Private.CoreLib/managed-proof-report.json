@@ -1,9 +1,0 @@
-{
-  "schemaVersion": 0,
-  "assemblyName": "System.Private.CoreLib",
-  "ownerSubjectId": "SolutionCorePack",
-  "sourceReport": "docs/dev/completed/20260418-05-phase-3-system-private-corelib-semantic-family-nativeization/semantic-family-execution-entry-v1-01.json",
-  "status": "partial",
-  "summary": "Existing SolutionCorePack declared proofs cover the first semantic-family batch, not the full CoreLib verification gate."
-}
-
