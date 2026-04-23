@@ -231,14 +231,14 @@ class CommandManifestTests(unittest.TestCase):
         self.assertEqual("test-registry-check-consistency", registry_check["command"]["id"])
 
         verification_case = manifest_module.parse_cli(
-            ["verify", "verification-v1", "--output", "artifacts/testing-inventory"],
+            ["verify", "verification-v1", "--output", "verification/projections/testing-inventory"],
             False,
             manifest,
             "windows",
         )
         self.assertEqual("verify-verification-v1", verification_case["command"]["id"])
         self.assertEqual("verification-v1", verification_case["target"])
-        self.assertEqual("artifacts/testing-inventory", verification_case["options"]["output"])
+        self.assertEqual("verification/projections/testing-inventory", verification_case["options"]["output"])
 
         list_family = manifest_module.parse_cli(["test", "list", "smoke"], False, manifest, "macos")
         self.assertEqual("test-list", list_family["command"]["id"])

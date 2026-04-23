@@ -79,7 +79,6 @@ class CommandManifestStructureTests(CommandManifestTestSupport):
                 "test-subject",
                 "test-module",
                 "test-system",
-                "test-inventory",
                 "test-registry-list",
                 "test-registry-refresh",
                 "test-registry-check-consistency",
@@ -116,6 +115,8 @@ class CommandManifestStructureTests(CommandManifestTestSupport):
                 "deploy-core",
             }.issubset(visible_command_ids)
         )
+        self.assertNotIn("test-inventory", visible_command_ids)
+        self.assertIn("test-inventory", all_command_ids)
 
     def test_public_specs_route_trace_checks_through_subject_entries(self) -> None:
         public_specs_module = load_public_specs_module("chaos_manifest_legacy_smoke_specs")

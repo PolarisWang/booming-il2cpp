@@ -6,7 +6,8 @@ Commands:
     run benchmark --dashboard [--open]
     run benchmark status [--subject <id>] [--all]
 
-After each --record run, verification/projections/benchmark/ is automatically updated.
+`--record` only appends raw benchmark records. Refresh formal benchmark projections
+with `run verify verification-v1 --json`.
 """
 from __future__ import annotations
 
@@ -962,9 +963,10 @@ def dispatch(args: list[str], repo_root: Path, host_platform: str) -> int:
 
     # 鈹€鈹€ dashboard sub-command 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
     if do_dashboard and not do_record:
-        output_path = Path(output) if output else repo_root / "docs" / "benchmark" / "dashboard.html"
+        default_output_path = verification_layout_module.benchmark_projection_root(repo_root) / "dashboard.html"
+        output_path = Path(output) if output else default_output_path
         print(f"Generating benchmark dashboard 鈫?{output_path}")
-        if output is None or output_path == repo_root / "docs" / "benchmark" / "dashboard.html":
+        if output is None or output_path == default_output_path:
             dash_mod.update_docs(repo_root)
         else:
             dash_mod.generate(repo_root, output_path)
@@ -1073,20 +1075,19 @@ def dispatch(args: list[str], repo_root: Path, host_platform: str) -> int:
                     if case_result.get("regressionFound"):
                         regression_found = True
 
-            # Update verification/projections/benchmark/ after each subject
-            try:
-                dash_mod.update_docs(repo_root, subject_id=sid)
-                print(f"  -> verification/projections/benchmark/ updated")
-            except Exception as e:
-                print(f"  鈿?dashboard update failed: {e}")
-
         if errors_found:
             print("Benchmark execution failed; some runs did not generate records.")
             return 2
         if regression_found:
-            print("Benchmark records generated; regression verdict found. Review verification/projections/benchmark/dashboard.html for details.")
+            print(
+                "Benchmark records generated; regression verdict found. "
+                "Run `run verify verification-v1 --json` to merge records and refresh verification/projections/benchmark/."
+            )
             return 0
-        print("Benchmark records generated without execution errors.")
+        print(
+            "Benchmark records generated without execution errors. "
+            "Run `run verify verification-v1 --json` to refresh formal benchmark projections."
+        )
         return 0
 
     # 鈹€鈹€ Default: show help 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€

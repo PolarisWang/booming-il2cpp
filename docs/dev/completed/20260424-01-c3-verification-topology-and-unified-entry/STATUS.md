@@ -1,12 +1,12 @@
----
+﻿---
 task_id: 20260424-01-c3-verification-topology-and-unified-entry
 title: C3 Verification Topology And Unified Entry
 task_type: roadmap
 lifecycle_status: completed
 phase: completed
 created_at: 2026-04-24 00:00:00 +08:00
-updated_at: 2026-04-24 06:00:00 +08:00
-latest_stop_point: verification-v1 hard cut closed; authority and public entry moved to verification root; real commands re-verified.
+updated_at: 2026-04-24 23:40:00 +08:00
+latest_stop_point: verification-v1 roadmap closeout re-reviewed; completed archive, wiki, and skill rules are aligned with the new verification root and public command surface.
 current_dir: docs/dev/completed/20260424-01-c3-verification-topology-and-unified-entry
 parent_task_id:
 source_task_id: 20260423-01-verification-v1-roadmap
@@ -74,5 +74,16 @@ auto_execution_decision: continue
 - legacy_scan:
   - command: git grep -n -E "solutions/|docs/testing-inventory/verification|docs/benchmark/|subjects/.*/verification/codegen-stubs|catalog/owners/scenarios|verification/src/reference" -- . ":(exclude)docs/dev/**" ":(exclude).artifact/**"
   - result: clean
-- wiki: updated wiki/06-测试验证/Verification-V1测试流程规范.md
+- interface_surface:
+  - publicVerifyCommand: python build/toolchains/run/run.py verify verification-v1 --json
+  - publicWorkspaceCommand: python build/toolchains/run/run.py generate project all --json
+  - hiddenInternalCommand: run test inventory
+  - benchmarkRecordRule: benchmark --record only writes raw records; formal archive/projection refresh still requires run verify verification-v1 --json
+- wiki:
+  - updated: wiki/06-测试验证/Verification-V1测试流程规范.md
+  - updated: wiki/06-测试验证/INDEX.md
+  - updated: wiki/04-工具与集成/统一入口脚本.md
+  - updated: wiki/02-Skill体系/04-质量保障/project-test-governance.md
+  - updated: wiki/02-Skill体系/skill-registry.md
 - next: merge
+

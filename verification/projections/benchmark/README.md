@@ -1,6 +1,6 @@
 # Benchmark Dashboard
 
-`docs/benchmark/` 由统一入口自动维护。不要手动编辑 `overview.json`、`subjects/*.json`、`dashboard.html`。
+`verification/projections/benchmark/` 由统一入口自动维护。不要手动编辑 `overview.json`、`subjects/*.json`、`dashboard.html`。
 
 当前 dashboard 的统一基线是 `managed` 模式的 `meanDurationMs`。所有 subject 和 case 的对比都以这个 managed latency baseline 为中心展开。
 
@@ -12,7 +12,7 @@
   - `allocation-bench`、`dispatch-bench`、`generic-bench` 保留为 `managed-only` 诊断 case，用来暴露当前 native AOT 还未覆盖的能力边界。
 
 - `MixedExecutionFeaturePack`
-  - 目标：验证 mixed execution 的 managed / native / interpreter 切换成本。
+  - 目标：验证 mixed execution 的 `managed / native / interpreter` 切换成本。
   - `mixed-execution-native-bench` 覆盖 `managed + native + interpreter`，是主对比 case。
   - `mixed-execution-bench` 覆盖 `managed + interpreter`，聚焦解释器参与的混合路径。
 
@@ -38,13 +38,16 @@
 ## Update Commands
 
 ```bash
-# 跑单个 retained subject 的 benchmark 并刷新 docs/benchmark
+# 跑单个 retained subject 的 benchmark，写入原始记录
 run benchmark --subject SolutionCorePack --record
 
-# 跑全部 retained benchmark subjects
+# 跑全部 retained benchmark subjects，写入原始记录
 run benchmark --all --record
 
-# 只重建 dashboard 和 JSON 产物
+# 合并最新 benchmark 记录并刷新 formal archive / projection
+run verify verification-v1 --json
+
+# 仅重建当前 benchmark dashboard 视图
 run benchmark --dashboard --open
 ```
 
@@ -57,4 +60,4 @@ run benchmark --dashboard --open
   - retained benchmark subjects 的总览数据。
 
 - `subjects/*.json`
-  - 每个 retained subject 的完整 benchmark 数据，包括 case 级明细。
+  - 每个 retained subject 的完整 benchmark 数据，包含 case 级明细。

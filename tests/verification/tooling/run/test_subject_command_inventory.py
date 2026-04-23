@@ -171,6 +171,23 @@ class TestSubjectCommandInventory(SubjectCommandTestSupport):
                 {f".artifact/verification/benchmark-records/{fixture['subjectId']}/records.jsonl"},
                 evidence_paths,
             )
+            verification_index = (repo_root / "verification" / "INDEX.md").read_text(encoding="utf-8")
+            verification_manifest = json.loads(
+                (repo_root / "verification" / "verification.manifest.json").read_text(encoding="utf-8")
+            )
+            self.assertIn("python build/toolchains/run/run.py verify verification-v1 --json", verification_index)
+            self.assertIn("python build/toolchains/run/run.py generate project all --json", verification_index)
+            self.assertNotIn("python build/toolchains/run/run.py test inventory --json", verification_index)
+            self.assertNotIn("python build/toolchains/run/run.py project all-workspaces --json", verification_index)
+            self.assertEqual(
+                "python build/toolchains/run/run.py verify verification-v1 --json",
+                verification_manifest["commands"]["verify"],
+            )
+            self.assertEqual(
+                "python build/toolchains/run/run.py generate project all --json",
+                verification_manifest["commands"]["workspace"],
+            )
+            self.assertNotIn("inventory", verification_manifest["commands"])
         finally:
             cleanup_repo_root(repo_root)
 
@@ -187,8 +204,8 @@ class TestSubjectCommandInventory(SubjectCommandTestSupport):
                 create=True,
             ) as generator_mock:
                 generator_mock.refresh_inventory_outputs.return_value = {
-                    "outputRoot": "artifacts/testing-inventory",
-                    "artifacts": ["artifacts/testing-inventory/inventory.html"],
+                    "outputRoot": "custom/testing-inventory",
+                    "artifacts": ["custom/testing-inventory/inventory.html"],
                     "tables": {},
                 }
                 result = test_module.handle(
@@ -198,17 +215,17 @@ class TestSubjectCommandInventory(SubjectCommandTestSupport):
                     },
                     repo_root,
                     "windows",
-                    "test inventory --output artifacts/testing-inventory",
+                    "test inventory --output custom/testing-inventory",
                     {},
-                    {"output": "artifacts/testing-inventory"},
+                    {"output": "custom/testing-inventory"},
                 )
 
             self.assertEqual("ok", result.status)
-            self.assertEqual("artifacts/testing-inventory", result.payload["outputRoot"])
+            self.assertEqual("custom/testing-inventory", result.payload["outputRoot"])
             generator_mock.refresh_inventory_outputs.assert_called_once_with(
                 repo_root,
                 host_platform="windows",
-                output_root="artifacts/testing-inventory",
+                output_root="custom/testing-inventory",
             )
         finally:
             cleanup_repo_root(repo_root)
