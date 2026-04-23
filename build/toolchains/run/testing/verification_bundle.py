@@ -158,6 +158,7 @@ def _unit_claim(row: dict[str, Any]) -> tuple[str, dict[str, Any]]:
     }.get(stage_requirement, "supported")
     verification_state = {
         "covered": "passed",
+        "failed": "failed",
         "missing-evidence": "missing",
         "required": "planned",
         "optional": "planned",
@@ -502,6 +503,25 @@ def _relative(repo_root: Path, path: Path) -> str:
         return path.as_posix()
 
 
+def _filter_master_items(
+    payload: dict[str, Any],
+    *,
+    key_fields: tuple[str, ...],
+    allowed_items: list[dict[str, Any]],
+) -> dict[str, Any]:
+    allowed_keys = {
+        tuple(_string(item.get(field)) for field in key_fields)
+        for item in list(allowed_items or [])
+    }
+    filtered = dict(payload or {})
+    filtered["items"] = [
+        dict(item)
+        for item in list(filtered.get("items") or [])
+        if tuple(_string(dict(item).get(field)) for field in key_fields) in allowed_keys
+    ]
+    return filtered
+
+
 def _load_existing(path: Path) -> dict[str, Any] | None:
     if not path.is_file():
         return None
@@ -572,6 +592,26 @@ def write_verification_bundle(
     result_master = verification_merge_module.merge_result_master(
         _load_existing(master_files["result"]),
         current_bundle["master"]["result"],
+    )
+    capability_master = _filter_master_items(
+        capability_master,
+        key_fields=("capabilityId",),
+        allowed_items=list(current_bundle["master"]["capability"].get("items") or []),
+    )
+    evidence_claim_master = _filter_master_items(
+        evidence_claim_master,
+        key_fields=("evidenceClaimId",),
+        allowed_items=list(current_bundle["master"]["evidenceClaim"].get("items") or []),
+    )
+    stage_master = _filter_master_items(
+        stage_master,
+        key_fields=("stageId", "scopeCode"),
+        allowed_items=list(current_bundle["master"]["stage"].get("items") or []),
+    )
+    result_master = _filter_master_items(
+        result_master,
+        key_fields=("obligationClaimId",),
+        allowed_items=list(current_bundle["master"]["result"].get("items") or []),
     )
 
     write_json(master_files["closure"], closure_master)

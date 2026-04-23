@@ -372,9 +372,9 @@ def _hint_values(key: str) -> list[str]:
     if key == "stageRequirement":
         return ["required", "optional", "not-applicable", "unsupported"]
     if key == "stageCoverage":
-        return ["covered", "missing-evidence", "pending-proof", "n/a"]
+        return ["covered", "failed", "missing-evidence", "pending-proof", "n/a"]
     if key == "stageStatus":
-        return ["covered", "missing-evidence", "required", "optional", "not-applicable", "unsupported"]
+        return ["covered", "failed", "missing-evidence", "required", "optional", "not-applicable", "unsupported"]
     if key in {"managedStatus", "nativeStatus", "interpreterStatus"}:
         return ["recorded", "missing", "unsupported"]
     if key == "stage":
@@ -390,7 +390,7 @@ def _hint_rule(key: str) -> str:
     if key == "stageRequirement":
         return "先判断阶段义务，再与证据覆盖组合；authority JSON 必须保留原值。"
     if key == "stageCoverage":
-        return "collector/registry/workspace 直接看机器证据；proof 阶段在未执行正式 proof 前记为 pending-proof。"
+        return "collector/registry/workspace 直接看机器证据；managed-proof 读取最新托管 proof 运行结果，其余 proof 阶段在未执行前记为 pending-proof。"
     if key == "stageStatus":
         return "CSV 和 HTML 使用压缩后的阶段状态，但不能反向替代 StageRequirement 和 StageCoverage。"
     if key.endswith("RelativeToManaged"):
@@ -535,9 +535,22 @@ def _workspace_unit_ids(source_payload: dict[str, Any]) -> set[str]:
     return stable_ids
 
 
+def _managed_proof_evidence_by_stable_id(source_payload: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    evidence_by_stable_id: dict[str, dict[str, Any]] = {}
+    for item in _list_value(source_payload.get("managedProofEvidence")):
+        if not isinstance(item, dict):
+            continue
+        stable_id = str(item.get("stableId") or "").strip()
+        if stable_id:
+            evidence_by_stable_id[stable_id] = dict(item)
+    return evidence_by_stable_id
+
+
 def _derive_stage_status(requirement: str, coverage: str) -> str:
     if requirement in {"unsupported", "not-applicable"}:
         return requirement
+    if coverage == "failed":
+        return "failed"
     if coverage == "missing-evidence":
         return coverage
     if coverage == "covered":
@@ -547,10 +560,29 @@ def _derive_stage_status(requirement: str, coverage: str) -> str:
     return coverage or requirement or "missing-evidence"
 
 
-def _stage_reason(stage: str, requirement: str, coverage: str, status: str) -> str:
+def _stage_reason(
+    stage: str,
+    requirement: str,
+    coverage: str,
+    status: str,
+    *,
+    evidence: dict[str, Any] | None = None,
+) -> str:
     if status == "covered":
+        if evidence and stage == "managed-proof":
+            run_id = str(evidence.get("runId") or "").strip()
+            if run_id:
+                return f"{stage} 阶段已经有对应的机器可见证据；最新通过记录来自 run {run_id}。"
         return f"{stage} 阶段已经有对应的机器可见证据。"
+    if status == "failed":
+        if evidence and stage == "managed-proof":
+            run_id = str(evidence.get("runId") or "").strip()
+            if run_id:
+                return f"{stage} 阶段已有正式执行记录，但最新 proof 在 run {run_id} 中失败。"
+        return f"{stage} 阶段已有正式执行记录，但最新 proof 失败。"
     if status == "missing-evidence":
+        if stage == "managed-proof":
+            return f"{stage} 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。"
         return f"{stage} 阶段是必经阶段，但当前没有找到对应证据。"
     if status == "required":
         return f"{stage} 阶段是必需义务，当前需要正式执行 proof 才能变为 covered。"
@@ -563,8 +595,14 @@ def _stage_reason(stage: str, requirement: str, coverage: str, status: str) -> s
     return f"{stage} 阶段状态由 requirement={requirement} 与 coverage={coverage} 派生。"
 
 
-def _unit_stage_values(item: dict[str, Any], stage: str, workspace_ids: set[str]) -> tuple[str, str, str, str]:
+def _unit_stage_values(
+    item: dict[str, Any],
+    stage: str,
+    workspace_ids: set[str],
+    managed_proof_evidence_by_id: dict[str, dict[str, Any]],
+) -> tuple[str, str, str, str]:
     stable_id = str(item.get("stableId") or "").strip()
+    evidence: dict[str, Any] | None = None
     if stage in {"collector", "registry"}:
         requirement = "required"
         coverage = "covered" if stable_id else "missing-evidence"
@@ -573,7 +611,17 @@ def _unit_stage_values(item: dict[str, Any], stage: str, workspace_ids: set[str]
         coverage = "covered" if stable_id in workspace_ids else "missing-evidence"
     elif stage == "managed-proof":
         requirement = "required" if bool(item.get("proofRequired", True)) else "optional"
-        coverage = "pending-proof"
+        evidence = managed_proof_evidence_by_id.get(stable_id)
+        if evidence:
+            proof_status = str(evidence.get("status") or "").strip()
+            if proof_status == "ok":
+                coverage = "covered"
+            elif proof_status in {"fail", "aborted"}:
+                coverage = "failed"
+            else:
+                coverage = "missing-evidence" if requirement == "required" else "pending-proof"
+        else:
+            coverage = "missing-evidence" if requirement == "required" else "pending-proof"
     elif stage == "native-proof":
         if _has_unsupported_contract(item):
             requirement = "unsupported"
@@ -594,11 +642,12 @@ def _unit_stage_values(item: dict[str, Any], stage: str, workspace_ids: set[str]
         requirement = "unsupported"
         coverage = "n/a"
     status = _derive_stage_status(requirement, coverage)
-    return requirement, coverage, status, _stage_reason(stage, requirement, coverage, status)
+    return requirement, coverage, status, _stage_reason(stage, requirement, coverage, status, evidence=evidence)
 
 
 def _build_unit_table(source_payload: dict[str, Any]) -> dict[str, Any]:
     workspace_ids = _workspace_unit_ids(source_payload)
+    managed_proof_evidence_by_id = _managed_proof_evidence_by_stable_id(source_payload)
     rows: list[dict[str, Any]] = []
     unit_items = [
         dict(item)
@@ -607,7 +656,12 @@ def _build_unit_table(source_payload: dict[str, Any]) -> dict[str, Any]:
     ]
     for item in sorted(unit_items, key=lambda value: str(value.get("stableId") or "")):
         for stage, stage_order in UNIT_STAGES:
-            requirement, coverage, status, reason = _unit_stage_values(item, stage, workspace_ids)
+            requirement, coverage, status, reason = _unit_stage_values(
+                item,
+                stage,
+                workspace_ids,
+                managed_proof_evidence_by_id,
+            )
             rows.append(
                 {
                     "subjectId": str(item.get("subjectId") or ""),

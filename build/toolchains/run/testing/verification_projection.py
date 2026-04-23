@@ -124,6 +124,27 @@ def _increment_status(row: dict[str, Any], status: str) -> None:
     row[_status_column(status)] = _int(row.get(_status_column(status))) + 1
 
 
+def _aggregate_verification(states: list[str]) -> str:
+    filtered = [state for state in (_string(value) for value in states) if state]
+    if not filtered:
+        return "planned"
+    if any(state == "failed" for state in filtered):
+        return "failed"
+    if any(state == "blocked" for state in filtered):
+        return "blocked"
+    if any(state == "missing" for state in filtered):
+        return "missing"
+    if all(state == "not_required" for state in filtered):
+        return "not_required"
+    if all(state in {"passed", "not_required"} for state in filtered) and any(
+        state == "passed" for state in filtered
+    ):
+        return "passed"
+    if any(state == "planned" for state in filtered):
+        return "planned"
+    return filtered[-1]
+
+
 def _attention_count(row: dict[str, Any]) -> int:
     return (
         _int(row.get("failedCount"))
@@ -477,6 +498,7 @@ def _route_topology_view(formal_source: dict[str, Any]) -> dict[str, Any]:
                 "missingCount": 0,
                 "plannedCount": 0,
                 "notRequiredCount": 0,
+                "_verificationStates": [],
                 "_gapStages": [],
                 "_owners": [],
             },
@@ -484,14 +506,17 @@ def _route_topology_view(formal_source: dict[str, Any]) -> dict[str, Any]:
         row["claimCount"] = _int(row.get("claimCount")) + 1
         status = _string(item.get("verificationState"))
         _increment_status(row, status)
+        row["_verificationStates"].append(status)
         row["_owners"].append(_string(meta.get("ownerSubjectId")))
         if status not in {"passed", "not_required"}:
             row["_gapStages"].append(_string(item.get("stageKind")))
     rows: list[dict[str, Any]] = []
     for row in rows_by_key.values():
+        verification_state = _aggregate_verification(list(row.get("_verificationStates") or []))
         rows.append(
             {
                 "routeCode": _string(row.get("routeCode")),
+                "verificationState": verification_state,
                 "claimCount": _int(row.get("claimCount")),
                 "passedCount": _int(row.get("passedCount")),
                 "failedCount": _int(row.get("failedCount")),
@@ -521,6 +546,7 @@ def _route_topology_view(formal_source: dict[str, Any]) -> dict[str, Any]:
         "chips": chips,
         "headers": [
             {"key": "routeCode", "label": "Route"},
+            {"key": "verificationState", "label": "Verification"},
             {"key": "claimCount", "label": "Claims"},
             {"key": "passedCount", "label": "Passed"},
             {"key": "failedCount", "label": "Failed"},

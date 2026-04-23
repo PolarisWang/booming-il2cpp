@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-04-23T21:56:32.255663Z",
+  "generatedAtUtc": "2026-04-23T23:20:21.611797Z",
   "producerId": "verification-v1",
   "sourceSpecVersion": "verification-v1",
   "mergeKey": "closureId",
@@ -89,11 +89,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "requiredEvidenceKinds": [
         "contract",
@@ -136,7 +136,7 @@
       "passedCount": 0,
       "failedCount": 0,
       "blockedCount": 4,
-      "missingCount": 2,
+      "missingCount": 51,
       "notRequiredCount": 0
     }
   ]

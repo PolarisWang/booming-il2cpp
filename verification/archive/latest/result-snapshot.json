@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-04-23T21:56:32.255663Z",
+  "generatedAtUtc": "2026-04-23T23:20:21.611797Z",
   "producerId": "verification-v1",
   "sourceSpecVersion": "verification-v1",
   "closureId": "closure/completed/testing-inventory",
@@ -23,11 +23,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -38,7 +38,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()/collector",
@@ -47,8 +47,8 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -91,11 +91,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -106,7 +106,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.BitwiseOpsProofEntry::Run()/collector",
@@ -121,10 +121,10 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UInt64BitwiseProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UInt64BitwiseProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UInt64BitwiseProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.ShiftOpsBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.ShiftOpsBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.UInt64BitwiseBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.UInt64BitwiseBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.ShiftOpsBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.ShiftOpsBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.UInt64BitwiseBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.UInt64BitwiseBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -179,7 +179,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.BranchOpsProofEntry::Run()/collector",
@@ -230,11 +230,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -245,7 +245,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ConversionOpsProofEntry::Run()/collector",
@@ -260,10 +260,10 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.IntegerCarrierProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.IntegerCarrierProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.IntegerCarrierProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.FloatingPointCarrierBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.FloatingPointCarrierBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.IntegerCarrierBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.IntegerCarrierBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.FloatingPointCarrierBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.FloatingPointCarrierBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.IntegerCarrierBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.IntegerCarrierBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -318,7 +318,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.OverflowOpsProofEntry::Run()/collector",
@@ -381,7 +381,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayOpsProofEntry::Run()/collector",
@@ -444,7 +444,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayBoxingProofEntry::Run()/collector",
@@ -570,7 +570,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericConstraintProofEntry::Run()/collector",
@@ -621,11 +621,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -636,7 +636,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DispatchProofEntry::Run()/collector",
@@ -651,7 +651,7 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DispatchBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DispatchBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -694,11 +694,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -709,7 +709,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.InterfaceDispatchProofEntry::Run()/collector",
@@ -718,8 +718,8 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.InterfaceDispatchProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.InterfaceDispatchProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.InterfaceDispatchProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericInterfaceDispatchBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -762,11 +762,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -786,8 +786,7 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericCollectionProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericCollectionProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericCollectionProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -842,7 +841,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericLayoutProofEntry::Run()/collector",
@@ -905,7 +904,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CastTypeCheckProofEntry::Run()/collector",
@@ -968,7 +967,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayCovarianceProofEntry::Run()/collector",
@@ -1082,11 +1081,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -1097,7 +1096,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run()/collector",
@@ -1106,7 +1105,7 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskAndValueTaskFlowBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -1161,7 +1160,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.IteratorStateMachineProofEntry::Run()/collector",
@@ -1287,7 +1286,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateChainProofEntry::Run()/collector",
@@ -1350,7 +1349,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.LambdaClosureCaptureProofEntry::Run()/collector",
@@ -1413,7 +1412,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.EventCallbackFlowProofEntry::Run()/collector",
@@ -1476,7 +1475,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ExceptionCatchProofEntry::Run()/collector",
@@ -1545,7 +1544,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.NestedExceptionProofEntry::Run()/collector",
@@ -1608,7 +1607,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.FinallyAndFilterProofEntry::Run()/collector",
@@ -1671,7 +1670,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CrossBoundaryExceptionProofEntry::Run()/collector",
@@ -1787,11 +1786,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -1802,7 +1801,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()/collector",
@@ -1811,7 +1810,7 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MemberMetadataLookupBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -1996,7 +1995,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.LinkerPreserveContractProofEntry::Run()/collector",
@@ -2061,7 +2060,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.LinkerStrippingProofEntry::Run()/collector",
@@ -2114,11 +2113,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -2129,7 +2128,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.NativeCallInteropProofEntry::Run()/collector",
@@ -2138,7 +2137,7 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.NativeCallInteropProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.NativeCallInteropProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.NativeCallInteropProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.NativeCallInteropBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.NativeCallInteropBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -2183,11 +2182,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -2198,7 +2197,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MarshalingProofEntry::Run()/collector",
@@ -2207,8 +2206,8 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MarshalingProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MarshalingProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MarshalingProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.StringAndUtf8MarshalingBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.StringAndUtf8MarshalingBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.StringAndUtf8MarshalingBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.StringAndUtf8MarshalingBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -2253,11 +2252,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -2268,7 +2267,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.StructMarshalingProofEntry::Run()/collector",
@@ -2277,8 +2276,8 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.StructMarshalingProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.StructMarshalingProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.StructMarshalingProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.StructMarshalingBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.StructMarshalingBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.StructMarshalingBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.StructMarshalingBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -2323,11 +2322,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -2338,7 +2337,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateCallbackInteropProofEntry::Run()/collector",
@@ -2347,8 +2346,8 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateCallbackInteropProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateCallbackInteropProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateCallbackInteropProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DelegateCallbackInteropBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DelegateCallbackInteropBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DelegateCallbackInteropBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.DelegateCallbackInteropBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -2456,11 +2455,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -2471,7 +2470,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()/collector",
@@ -2480,7 +2479,7 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskSchedulingBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.TaskSchedulingBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -2523,11 +2522,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -2538,7 +2537,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MonitorAndLockingProofEntry::Run()/collector",
@@ -2547,8 +2546,8 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MonitorAndLockingProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MonitorAndLockingProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MonitorAndLockingProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.MonitorAndLockingBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -2666,7 +2665,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()/collector",
@@ -2749,11 +2748,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -2764,7 +2763,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GcSensitiveFlowProofEntry::Run()/collector",
@@ -2773,8 +2772,8 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GcSensitiveFlowProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GcSensitiveFlowProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GcSensitiveFlowProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.AllocationBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.AllocationBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.AllocationBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.AllocationBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -2831,7 +2830,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ResourceLifecycleProofEntry::Run()/collector",
@@ -2896,7 +2895,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.LoaderContractProofEntry::Run()/collector",
@@ -2949,11 +2948,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -2964,7 +2963,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.SpanAndMemoryProofEntry::Run()/collector",
@@ -2973,7 +2972,7 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.SpanAndMemoryProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.SpanAndMemoryProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.SpanAndMemoryProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.SpanAndMemoryBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.SpanAndMemoryBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -3028,7 +3027,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RefStructAndStackallocProofEntry::Run()/collector",
@@ -3079,11 +3078,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -3094,7 +3093,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UnsafePointerProofEntry::Run()/collector",
@@ -3103,7 +3102,7 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UnsafePointerProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UnsafePointerProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UnsafePointerProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.UnsafePointerBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.UnsafePointerBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -3146,11 +3145,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -3161,7 +3160,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.FunctionPointerProofEntry::Run()/collector",
@@ -3170,8 +3169,8 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.FunctionPointerProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.FunctionPointerProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.FunctionPointerProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.FunctionPointerBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -3418,11 +3417,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -3433,7 +3432,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run()/collector",
@@ -3442,8 +3441,8 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.RequiredInstantiationClosureBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -3488,11 +3487,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -3503,7 +3502,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericSharingBoundaryProofEntry::Run()/collector",
@@ -3512,8 +3511,8 @@
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericSharingBoundaryProofEntry::Run()/managed-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericSharingBoundaryProofEntry::Run()/native-proof",
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericSharingBoundaryProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.GenericSharingBoundaryBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -3623,11 +3622,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -3638,7 +3637,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/collector",
@@ -3647,7 +3646,7 @@
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/managed-proof",
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/native-proof",
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -3757,11 +3756,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -3781,7 +3780,7 @@
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementProofEntry::Run()/managed-proof",
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementProofEntry::Run()/native-proof",
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -4021,11 +4020,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -4036,7 +4035,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchCallbackFlowProofEntry::Run()/collector",
@@ -4045,8 +4044,8 @@
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchCallbackFlowProofEntry::Run()/managed-proof",
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchCallbackFlowProofEntry::Run()/native-proof",
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchCallbackFlowProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -4092,11 +4091,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -4107,7 +4106,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/collector",
@@ -4116,8 +4115,8 @@
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/managed-proof",
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/native-proof",
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry::RunWorkload()/interpreter/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry::RunWorkload()/interpreter/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -4176,7 +4175,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()/collector",
@@ -4232,11 +4231,11 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "windows-x64"
+        "unknown-platform"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
-        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "bridge/default-platform/default"
       ],
       "mandatoryLanes": [
         "test_governance",
@@ -4247,7 +4246,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/collector",
@@ -4256,9 +4255,9 @@
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/managed-proof",
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/native-proof",
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/hotupdate-proof",
-        "evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()/managed/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()/native/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd",
-        "evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()/interpreter/bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+        "evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default",
+        "evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default",
+        "evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()/interpreter/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
       "projectionMeta": {
@@ -4317,7 +4316,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/collector",
@@ -4384,7 +4383,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExceptionFlowProofEntry::Run()/collector",
@@ -4451,7 +4450,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()/collector",
