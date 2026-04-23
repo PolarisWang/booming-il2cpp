@@ -152,8 +152,10 @@ class Phase4BArrayOpsNativeAotTests(unittest.TestCase):
             "chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(&chaos_array->elements[static_cast<std::size_t>(chaos_index)]);",
             "chaos_array->elements[static_cast<std::size_t>(chaos_index)] = chaos_value;",
             "chaos_eval_stack[chaos_stack_top++] = chaos_array->elements[static_cast<std::size_t>(chaos_index)];",
-            "const auto chaos_value = static_cast<std::int32_t>(*reinterpret_cast<std::intptr_t*>(chaos_address));",
-            "*reinterpret_cast<std::intptr_t*>(chaos_address) = static_cast<std::intptr_t>(chaos_value);",
+            "const auto* chaos_value_ptr = reinterpret_cast<const std::int32_t*>(",
+            "const auto* chaos_value_ptr = chaos_resolve_native_int_slot(chaos_address);",
+            "auto* chaos_value_ptr = reinterpret_cast<std::int32_t*>(",
+            "auto* chaos_value_ptr = chaos_resolve_native_int_slot(chaos_address);",
             'extern "C" void CoreRuntimeFeatures_ArrayOpsProofEntry_AddTo(std::intptr_t chaos_arg_0, std::int32_t chaos_arg_1);',
             "CoreRuntimeFeatures_ArrayOpsProofEntry_AddTo(chaos_arg_0, static_cast<std::int32_t>(chaos_arg_1));",
         ]:

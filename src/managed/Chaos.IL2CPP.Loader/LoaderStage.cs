@@ -47,10 +47,11 @@ public sealed partial class LoaderStage
                 entryPointSubjectIdOverride: null,
                 requireEntryPoint: false))
             .ToList();
-        loadedAssemblies = MaterializeCrossAssemblyMethodInstantiations(assemblyPaths, loadedAssemblies);
-        var entryAssembly = ResolveEntryAssembly(loadedAssemblies, request.EntryPointSubjectIdOverride, request.FullAssemblyClosure);
-        var entryPointSubjectId = !string.IsNullOrWhiteSpace(request.EntryPointSubjectIdOverride)
-            ? request.EntryPointSubjectIdOverride!
+        loadedAssemblies = ProjectCrossAssemblyMethodInstantiations(assemblyPaths, loadedAssemblies);
+        var resolvedEntryPointSubjectIdOverride = ResolveEntryPointSubjectIdOverride(loadedAssemblies, request.EntryPointSubjectIdOverride);
+        var entryAssembly = ResolveEntryAssembly(loadedAssemblies, resolvedEntryPointSubjectIdOverride, request.FullAssemblyClosure);
+        var entryPointSubjectId = !string.IsNullOrWhiteSpace(resolvedEntryPointSubjectIdOverride)
+            ? resolvedEntryPointSubjectIdOverride!
             : request.FullAssemblyClosure
                 ? string.Empty
                 : entryAssembly.EntryPointSubjectId;
@@ -62,11 +63,34 @@ public sealed partial class LoaderStage
             Assembly = entryAssembly.Assembly,
             Assemblies = loadedAssemblies,
             EntryPointSubjectId = entryPointSubjectId,
+            GenericInstantiationDemandGraph = MergeGenericInstantiationDemandGraphs(loadedAssemblies),
             Types = loadedAssemblies.SelectMany(assembly => assembly.Types).OrderBy(model => model.MetadataToken).ToList(),
             Fields = loadedAssemblies.SelectMany(assembly => assembly.Fields).OrderBy(model => model.MetadataToken).ToList(),
             Properties = loadedAssemblies.SelectMany(assembly => assembly.Properties).OrderBy(model => model.MetadataToken).ToList(),
             Methods = loadedAssemblies.SelectMany(assembly => assembly.Methods).OrderBy(model => model.MetadataToken).ToList(),
         };
+    }
+
+    private static string? ResolveEntryPointSubjectIdOverride(
+        IReadOnlyList<LoadedAssemblyModel> loadedAssemblies,
+        string? entryPointSubjectIdOverride)
+    {
+        if (string.IsNullOrWhiteSpace(entryPointSubjectIdOverride))
+        {
+            return null;
+        }
+
+        var matchedSubjectId = loadedAssemblies
+            .SelectMany(assembly => assembly.Methods)
+            .FirstOrDefault(method => ManagedNaming.MatchesMethodSubjectId(method.SubjectId, entryPointSubjectIdOverride!))
+            ?.SubjectId;
+        if (!string.IsNullOrWhiteSpace(matchedSubjectId))
+        {
+            return matchedSubjectId;
+        }
+
+        throw new InvalidOperationException(
+            $"managed closure entry point override '{entryPointSubjectIdOverride}' does not match any loaded method");
     }
 
 }

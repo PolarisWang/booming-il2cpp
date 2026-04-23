@@ -53,8 +53,8 @@
   - `dotnet run --project subjects/BridgeRoundtripProof/source/BridgeRoundtripProof.csproj --`
   - `dotnet run --project subjects/GenericSupplementProof/source/GenericSupplementProof.csproj --`
 - 项目级完成前验证：
-  - `./run.ps1 test pipeline --id pipeline/completion-managed-closure --json`
-  - `./run.ps1 test pipeline --id pipeline/completion-runtime-core --json`
+  - `./run.ps1 test module --id module/managed-closure/basic --json`
+  - `./run.ps1 test system --id system/runtime-baseline-windows --json`
 
 ## 边界说明
 

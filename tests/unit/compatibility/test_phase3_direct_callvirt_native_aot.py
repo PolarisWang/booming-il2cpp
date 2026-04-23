@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id, get_method_subject_display_string
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -120,12 +122,14 @@ class Phase3DirectCallVirtNativeAotTests(unittest.TestCase):
 
         artifact_path = self.output_root / "aot-core-ir.json"
         artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
-        entry_method = next(method for method in artifact["methods"] if method["subjectId"] == ENTRY_SUBJECT_ID)
+        entry_method = find_method_by_subject_id(artifact["methods"], ENTRY_SUBJECT_ID)
 
         direct_callvirt = next(
             instruction
             for instruction in entry_method["instructions"]
-            if instruction["op"] == "callvirt" and instruction["callee"] == DIRECT_CALLEE_SUBJECT_ID
+            if instruction["op"] == "callvirt"
+            and get_method_subject_display_string(instruction["callee"])
+            == get_method_subject_display_string(DIRECT_CALLEE_SUBJECT_ID)
         )
 
         self.assertEqual(1, direct_callvirt["dispatchKindCode"])

@@ -3,6 +3,8 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
+from tests.support import read_native_aot_planner_source
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
@@ -59,7 +61,7 @@ class Phase4AotCoreIrContractTests(unittest.TestCase):
     def test_aot_core_ir_direct_call_contract_is_exposed(self) -> None:
         contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")
         lowering_source = AOT_CORE_IR_LOWERING_PATH.read_text(encoding="utf-8")
-        planner_source = NATIVE_AOT_PLANNER_PATH.read_text(encoding="utf-8")
+        planner_source = read_native_aot_planner_source(REPO_ROOT)
 
         for required_fragment in [
             "string? TargetSymbol",

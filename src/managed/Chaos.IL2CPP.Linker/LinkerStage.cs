@@ -41,6 +41,7 @@ public sealed partial class LinkerStage
             Assembly = semanticWorld.Assembly,
             Assemblies = semanticWorld.Assemblies,
             EntryPointSubjectId = semanticWorld.EntryPointSubjectId,
+            GenericInstantiationDemandGraph = semanticWorld.GenericInstantiationDemandGraph,
             Types = orderedTypes,
             Fields = orderedFields,
             Properties = orderedProperties,

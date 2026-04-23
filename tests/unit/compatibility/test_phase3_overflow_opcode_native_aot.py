@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -123,7 +125,13 @@ class Phase3OverflowOpcodeNativeAotTests(unittest.TestCase):
 
         aot_core_ir = load_json(self.output_root / "aot-core-ir.json")
         methods = {method["subjectId"]: method for method in aot_core_ir["methods"]}
-        run_ops = [instruction["op"] for instruction in methods["CoreRuntimeFeatures/OverflowOpsProofEntry::Run()"]["instructions"]]
+        run_ops = [
+            instruction["op"]
+            for instruction in find_method_by_subject_id(
+                methods,
+                "CoreRuntimeFeatures/OverflowOpsProofEntry::Run()",
+            )["instructions"]
+        ]
 
         self.assertNotIn("add.ovf", run_ops)
         self.assertNotIn("sub.ovf", run_ops)
@@ -132,19 +140,43 @@ class Phase3OverflowOpcodeNativeAotTests(unittest.TestCase):
 
         self.assertIn(
             "add.ovf",
-            [instruction["op"] for instruction in methods["CoreRuntimeFeatures/OverflowOpsProofEntry::CheckedAddOverflow()"]["instructions"]],
+            [
+                instruction["op"]
+                for instruction in find_method_by_subject_id(
+                    methods,
+                    "CoreRuntimeFeatures/OverflowOpsProofEntry::CheckedAddOverflow()",
+                )["instructions"]
+            ],
         )
         self.assertIn(
             "sub.ovf",
-            [instruction["op"] for instruction in methods["CoreRuntimeFeatures/OverflowOpsProofEntry::CheckedSubtractOverflow()"]["instructions"]],
+            [
+                instruction["op"]
+                for instruction in find_method_by_subject_id(
+                    methods,
+                    "CoreRuntimeFeatures/OverflowOpsProofEntry::CheckedSubtractOverflow()",
+                )["instructions"]
+            ],
         )
         self.assertIn(
             "mul.ovf",
-            [instruction["op"] for instruction in methods["CoreRuntimeFeatures/OverflowOpsProofEntry::CheckedMultiplyOverflow()"]["instructions"]],
+            [
+                instruction["op"]
+                for instruction in find_method_by_subject_id(
+                    methods,
+                    "CoreRuntimeFeatures/OverflowOpsProofEntry::CheckedMultiplyOverflow()",
+                )["instructions"]
+            ],
         )
         self.assertIn(
             "conv.ovf.i1",
-            [instruction["op"] for instruction in methods["CoreRuntimeFeatures/OverflowOpsProofEntry::CheckedSByteConversionOverflow()"]["instructions"]],
+            [
+                instruction["op"]
+                for instruction in find_method_by_subject_id(
+                    methods,
+                    "CoreRuntimeFeatures/OverflowOpsProofEntry::CheckedSByteConversionOverflow()",
+                )["instructions"]
+            ],
         )
 
     def test_emit_native_aot_succeeds_for_overflow_proof(self) -> None:

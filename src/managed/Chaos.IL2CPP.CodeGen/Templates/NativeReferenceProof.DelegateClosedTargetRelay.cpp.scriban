@@ -1,3 +1,4 @@
+// {{ plan_kind }}
 #include "{{ include_header }}"
 
 namespace chaos::il2cpp::generated {
@@ -176,7 +177,11 @@ extern "C" void* CHAOS_RUNTIME_ABI_CALL {{ static_method_symbol }}(
         return nullptr;
     }
 
-    void* suffix = CreateManagedString(runtime, thread, "!", 1u);
+    void* suffix = CreateManagedString(
+        runtime,
+        thread,
+        {{ trailing_literal }},
+        {{ trailing_literal_byte_count }}u);
     if (suffix == nullptr) {
         return nullptr;
     }

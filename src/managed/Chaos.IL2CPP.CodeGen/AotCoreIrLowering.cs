@@ -17,6 +17,7 @@ public sealed class AotCoreIrLowering
         var managedTypes = linkedWorld.Types.ToDictionary(type => type.SubjectId, StringComparer.Ordinal);
         var managedFields = linkedWorld.Fields.ToDictionary(field => field.SubjectId, StringComparer.Ordinal);
         var managedMethods = linkedWorld.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
+        var genericDemandLookup = BuildGenericDemandLookup(linkedWorld.GenericInstantiationDemandGraph);
         var targetSymbols = codeRegistration.Modules
             .SelectMany(module => module.Registrations)
             .Where(registration => string.Equals(registration.RegistrationKind, "methodPointer", StringComparison.Ordinal))
@@ -29,7 +30,8 @@ public sealed class AotCoreIrLowering
                 managedTypes,
                 managedFields,
                 managedMethods,
-                targetSymbols))
+                targetSymbols,
+                genericDemandLookup))
             .Where(method => method is not null)
             .Select(method => method!)
             .ToList();
@@ -46,7 +48,8 @@ public sealed class AotCoreIrLowering
         IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
         IReadOnlyDictionary<string, ManagedFieldModel> managedFields,
         IReadOnlyDictionary<string, ManagedMethodModel> managedMethods,
-        IReadOnlyDictionary<string, string> targetSymbols)
+        IReadOnlyDictionary<string, string> targetSymbols,
+        IReadOnlyDictionary<string, GenericInstantiationDemandModel> genericDemandLookup)
     {
         var typedBlocks = typedMethod.Blocks.ToDictionary(block => block.BlockId, StringComparer.Ordinal);
         var instructions = new List<AotCoreIrInstructionArtifact>();
@@ -97,7 +100,8 @@ public sealed class AotCoreIrLowering
                         typedInstruction,
                         managedTypes,
                         managedFields,
-                        managedMethods),
+                        managedMethods,
+                        genericDemandLookup),
                     RuntimeServiceKind = ResolveRuntimeServiceKind(typedInstruction),
                     TargetSymbol = directCallTarget.TargetSymbol,
                     TargetParameterCount = directCallTarget.TargetParameterCount,
@@ -107,15 +111,26 @@ public sealed class AotCoreIrLowering
             }
         }
 
+        var runtimeGenericContext = ResolveRuntimeGenericContext(
+            method.SubjectId,
+            method.DefinitionSubjectId,
+            genericDemandLookup);
+        var genericDiagnostic = ResolveGenericDiagnostic(
+            method.SubjectId,
+            method.DefinitionSubjectId,
+            genericDemandLookup);
+
         return new AotCoreIrMethodArtifact
         {
             MethodId = typedMethod.MethodId,
             SubjectId = typedMethod.SubjectId,
             Signature = typedMethod.Signature,
             Identity = typedMethod.Identity,
-            GenericContext = ManagedNaming.TryCreateGenericContext(
-                method.SubjectId,
-                method.DefinitionSubjectId),
+            OpenDefinitionSubjectId = runtimeGenericContext?.InstantiationKey.DefinitionSubjectId,
+            SharedGenericBodyId = runtimeGenericContext?.SharedGenericBodyId,
+            InstantiationStubId = runtimeGenericContext?.InstantiationStubId,
+            RuntimeGenericContext = runtimeGenericContext,
+            GenericDiagnostic = genericDiagnostic,
             NativeSymbol = GetRequiredNativeSymbol(targetSymbols, typedMethod.SubjectId),
             IsStatic = method.IsStatic,
             ReturnType = method.ReturnType,
@@ -169,7 +184,8 @@ public sealed class AotCoreIrLowering
         TypedIlInstructionArtifact typedInstruction,
         IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
         IReadOnlyDictionary<string, ManagedFieldModel> managedFields,
-        IReadOnlyDictionary<string, ManagedMethodModel> managedMethods)
+        IReadOnlyDictionary<string, ManagedMethodModel> managedMethods,
+        IReadOnlyDictionary<string, GenericInstantiationDemandModel> genericDemandLookup)
     {
         var reference = managedInstruction.Reference;
         if (reference is null)
@@ -189,14 +205,16 @@ public sealed class AotCoreIrLowering
                             constructorType.AssemblyName,
                             constructorType.SubjectId,
                             constructorType,
-                            managedTypes);
+                            managedTypes,
+                            genericDemandLookup);
                     }
 
                     return CreateTypeReference(
                         constructorMethod.AssemblyName,
                         constructorMethod.DeclaringTypeSubjectId,
                         null,
-                        managedTypes);
+                        managedTypes,
+                        genericDemandLookup);
                 }
 
                 var constructorTypeSubjectId = GetMemberDeclaringTypeSubjectId(
@@ -207,7 +225,8 @@ public sealed class AotCoreIrLowering
                     reference.AssemblyName,
                     constructorTypeSubjectId,
                     null,
-                    managedTypes);
+                    managedTypes,
+                    genericDemandLookup);
 
             case "call":
             case "callvirt":
@@ -218,10 +237,11 @@ public sealed class AotCoreIrLowering
                     return CreateMethodReference(
                         reference.AssemblyName,
                         reference.SubjectId,
-                        referencedMethod.DefinitionSubjectId);
+                        referencedMethod.DefinitionSubjectId,
+                        genericDemandLookup);
                 }
 
-                return CreateMethodReference(reference.AssemblyName, reference.SubjectId);
+                return CreateMethodReference(reference.AssemblyName, reference.SubjectId, genericDemandLookup: genericDemandLookup);
 
             case "ldtoken":
                 switch (reference.SubjectKind)
@@ -233,20 +253,22 @@ public sealed class AotCoreIrLowering
                                 tokenType.AssemblyName,
                                 tokenType.SubjectId,
                                 tokenType,
-                                managedTypes);
+                                managedTypes,
+                                genericDemandLookup);
                         }
 
                         return CreateTypeReference(
                             reference.AssemblyName,
                             reference.SubjectId,
                             null,
-                            managedTypes);
+                            managedTypes,
+                            genericDemandLookup);
 
                     case "field":
                         if (managedFields.TryGetValue(reference.SubjectId, out var tokenField))
                         {
                             managedTypes.TryGetValue(tokenField.DeclaringTypeSubjectId, out var tokenDeclaringType);
-                            return CreateFieldReference(tokenField, tokenDeclaringType);
+                            return CreateFieldReference(tokenField, tokenDeclaringType, genericDemandLookup);
                         }
 
                         return CreateFieldReference(
@@ -254,7 +276,8 @@ public sealed class AotCoreIrLowering
                             reference.SubjectId,
                             reference.SubjectId,
                             GetDeclaringTypeSubjectId(reference.SubjectId),
-                            null);
+                            null,
+                            genericDemandLookup);
 
                     case "method":
                         if (managedMethods.TryGetValue(reference.SubjectId, out var tokenMethod))
@@ -262,10 +285,11 @@ public sealed class AotCoreIrLowering
                             return CreateMethodReference(
                                 reference.AssemblyName,
                                 reference.SubjectId,
-                                tokenMethod.DefinitionSubjectId);
+                                tokenMethod.DefinitionSubjectId,
+                                genericDemandLookup);
                         }
 
-                        return CreateMethodReference(reference.AssemblyName, reference.SubjectId);
+                        return CreateMethodReference(reference.AssemblyName, reference.SubjectId, genericDemandLookup: genericDemandLookup);
 
                     default:
                         throw new NotSupportedException(
@@ -281,7 +305,7 @@ public sealed class AotCoreIrLowering
                 if (managedFields.TryGetValue(reference.SubjectId, out var field))
                 {
                     managedTypes.TryGetValue(field.DeclaringTypeSubjectId, out var declaringType);
-                    return CreateFieldReference(field, declaringType);
+                    return CreateFieldReference(field, declaringType, genericDemandLookup);
                 }
 
                 return CreateFieldReference(
@@ -289,7 +313,8 @@ public sealed class AotCoreIrLowering
                     reference.SubjectId,
                     reference.SubjectId,
                     GetDeclaringTypeSubjectId(reference.SubjectId),
-                    null);
+                    null,
+                    genericDemandLookup);
 
             case "newarr":
             case "castclass":
@@ -314,14 +339,16 @@ public sealed class AotCoreIrLowering
                         managedType.AssemblyName,
                         managedType.SubjectId,
                         managedType,
-                        managedTypes);
+                        managedTypes,
+                        genericDemandLookup);
                 }
 
                 return CreateTypeReference(
                     reference.AssemblyName,
                     reference.SubjectId,
                     null,
-                    managedTypes);
+                    managedTypes,
+                    genericDemandLookup);
 
             default:
                 return null;
@@ -616,16 +643,28 @@ public sealed class AotCoreIrLowering
     private static AotCoreIrReferenceArtifact CreateMethodReference(
         string assemblyName,
         string subjectId,
-        string? definitionSubjectId = null)
+        string? definitionSubjectId = null,
+        IReadOnlyDictionary<string, GenericInstantiationDemandModel>? genericDemandLookup = null)
     {
+        var runtimeGenericContext = ResolveRuntimeGenericContext(
+            subjectId,
+            definitionSubjectId ?? subjectId,
+            genericDemandLookup);
+        var genericDiagnostic = ResolveGenericDiagnostic(
+            subjectId,
+            definitionSubjectId ?? subjectId,
+            genericDemandLookup);
+
         return new AotCoreIrReferenceArtifact
         {
             Kind = AotCoreIrReferenceKind.Method,
             AssemblyName = assemblyName,
             SubjectId = subjectId,
-            GenericContext = ManagedNaming.TryCreateGenericContext(
-                subjectId,
-                definitionSubjectId ?? subjectId),
+            OpenDefinitionSubjectId = runtimeGenericContext?.InstantiationKey.DefinitionSubjectId,
+            SharedGenericBodyId = runtimeGenericContext?.SharedGenericBodyId,
+            InstantiationStubId = runtimeGenericContext?.InstantiationStubId,
+            RuntimeGenericContext = runtimeGenericContext,
+            GenericDiagnostic = genericDiagnostic,
         };
     }
 
@@ -633,18 +672,30 @@ public sealed class AotCoreIrLowering
         string assemblyName,
         string subjectId,
         ManagedTypeModel? managedType,
-        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes)
+        IReadOnlyDictionary<string, ManagedTypeModel> managedTypes,
+        IReadOnlyDictionary<string, GenericInstantiationDemandModel>? genericDemandLookup = null)
     {
         var arrayElementSubjectId = ResolveArrayElementSubjectId(subjectId);
         managedTypes.TryGetValue(arrayElementSubjectId ?? string.Empty, out var arrayElementType);
+        var runtimeGenericContext = ResolveRuntimeGenericContext(
+            subjectId,
+            managedType?.DefinitionSubjectId ?? subjectId,
+            genericDemandLookup);
+        var genericDiagnostic = ResolveGenericDiagnostic(
+            subjectId,
+            managedType?.DefinitionSubjectId ?? subjectId,
+            genericDemandLookup);
+
         return new AotCoreIrReferenceArtifact
         {
             Kind = AotCoreIrReferenceKind.Type,
             AssemblyName = assemblyName,
             SubjectId = subjectId,
-            GenericContext = ManagedNaming.TryCreateGenericContext(
-                subjectId,
-                managedType?.DefinitionSubjectId ?? subjectId),
+            OpenDefinitionSubjectId = runtimeGenericContext?.InstantiationKey.DefinitionSubjectId,
+            SharedGenericBodyId = runtimeGenericContext?.SharedGenericBodyId,
+            InstantiationStubId = runtimeGenericContext?.InstantiationStubId,
+            RuntimeGenericContext = runtimeGenericContext,
+            GenericDiagnostic = genericDiagnostic,
             TypeShape = ResolveTypeShape(managedType, subjectId),
             ArrayElementSubjectId = ResolveArrayElementSubjectId(subjectId),
             ArrayElementTypeShape = ResolveArrayElementTypeShape(managedTypes, ResolveArrayElementSubjectId(subjectId)),
@@ -657,16 +708,31 @@ public sealed class AotCoreIrLowering
 
     private static AotCoreIrReferenceArtifact CreateFieldReference(
         ManagedFieldModel field,
-        ManagedTypeModel? declaringType)
+        ManagedTypeModel? declaringType,
+        IReadOnlyDictionary<string, GenericInstantiationDemandModel>? genericDemandLookup = null)
     {
+        var runtimeGenericContext = ResolveRuntimeGenericContext(
+            field.SubjectId,
+            field.DefinitionSubjectId,
+            genericDemandLookup) ?? ResolveFieldRuntimeGenericContext(
+            field.DefinitionSubjectId,
+            field.DeclaringTypeSubjectId,
+            genericDemandLookup);
+        var genericDiagnostic = ResolveGenericDiagnostic(
+            field.SubjectId,
+            field.DefinitionSubjectId,
+            genericDemandLookup);
+
         return new AotCoreIrReferenceArtifact
         {
             Kind = AotCoreIrReferenceKind.Field,
             AssemblyName = field.AssemblyName,
             SubjectId = field.SubjectId,
-            GenericContext = ManagedNaming.TryCreateGenericContext(
-                field.SubjectId,
-                field.DefinitionSubjectId),
+            OpenDefinitionSubjectId = runtimeGenericContext?.InstantiationKey.DefinitionSubjectId,
+            SharedGenericBodyId = runtimeGenericContext?.SharedGenericBodyId,
+            InstantiationStubId = runtimeGenericContext?.InstantiationStubId,
+            RuntimeGenericContext = runtimeGenericContext,
+            GenericDiagnostic = genericDiagnostic,
             DeclaringTypeSubjectId = field.DeclaringTypeSubjectId,
             DeclaringTypeShape = ResolveTypeShape(declaringType),
         };
@@ -677,19 +743,198 @@ public sealed class AotCoreIrLowering
         string subjectId,
         string definitionSubjectId,
         string declaringTypeSubjectId,
-        ManagedTypeModel? declaringType)
+        ManagedTypeModel? declaringType,
+        IReadOnlyDictionary<string, GenericInstantiationDemandModel>? genericDemandLookup = null)
     {
+        var runtimeGenericContext = ResolveRuntimeGenericContext(
+            subjectId,
+            definitionSubjectId,
+            genericDemandLookup) ?? ResolveFieldRuntimeGenericContext(
+            definitionSubjectId,
+            declaringTypeSubjectId,
+            genericDemandLookup);
+        var genericDiagnostic = ResolveGenericDiagnostic(
+            subjectId,
+            definitionSubjectId,
+            genericDemandLookup);
+
         return new AotCoreIrReferenceArtifact
         {
             Kind = AotCoreIrReferenceKind.Field,
             AssemblyName = assemblyName,
             SubjectId = subjectId,
-            GenericContext = ManagedNaming.TryCreateGenericContext(
-                subjectId,
-                definitionSubjectId),
+            OpenDefinitionSubjectId = runtimeGenericContext?.InstantiationKey.DefinitionSubjectId,
+            SharedGenericBodyId = runtimeGenericContext?.SharedGenericBodyId,
+            InstantiationStubId = runtimeGenericContext?.InstantiationStubId,
+            RuntimeGenericContext = runtimeGenericContext,
+            GenericDiagnostic = genericDiagnostic,
             DeclaringTypeSubjectId = declaringTypeSubjectId,
             DeclaringTypeShape = ResolveTypeShape(declaringType),
         };
+    }
+
+    private static IReadOnlyDictionary<string, GenericInstantiationDemandModel> BuildGenericDemandLookup(
+        GenericInstantiationDemandGraphModel? genericInstantiationDemandGraph)
+    {
+        var genericDemandLookup = new Dictionary<string, GenericInstantiationDemandModel>(StringComparer.Ordinal);
+        if (genericInstantiationDemandGraph?.Demands is not { Count: > 0 } demands)
+        {
+            return genericDemandLookup;
+        }
+
+        foreach (var demand in demands)
+        {
+            if (genericDemandLookup.TryGetValue(demand.SubjectId, out var existingDemand))
+            {
+                EnsureEquivalentDemand(existingDemand, demand);
+                continue;
+            }
+
+            genericDemandLookup[demand.SubjectId] = demand;
+        }
+
+        return genericDemandLookup;
+    }
+
+    private static RuntimeGenericContextArtifact? ResolveRuntimeGenericContext(
+        string subjectId,
+        string definitionSubjectId,
+        IReadOnlyDictionary<string, GenericInstantiationDemandModel>? genericDemandLookup)
+    {
+        if (genericDemandLookup is not null &&
+            genericDemandLookup.TryGetValue(subjectId, out var demand))
+        {
+            return new RuntimeGenericContextArtifact
+            {
+                InstantiationKey = demand.InstantiationKey,
+                SharedGenericBodyId = ManagedNaming.CreateSharedGenericBodyId(demand.InstantiationKey),
+                InstantiationStubId = ManagedNaming.CreateInstantiationStubId(demand.InstantiationKey),
+                SupportKindCode = demand.SupportKindCode,
+                SpecializationKindCode = demand.SpecializationKindCode,
+                StatusReasonCode = $"loader-demand:{demand.DemandSourceKind}",
+            };
+        }
+
+        return null;
+    }
+
+    private static RuntimeGenericContextArtifact? ResolveFieldRuntimeGenericContext(
+        string definitionSubjectId,
+        string declaringTypeSubjectId,
+        IReadOnlyDictionary<string, GenericInstantiationDemandModel>? genericDemandLookup)
+    {
+        if (genericDemandLookup is null ||
+            !genericDemandLookup.TryGetValue(declaringTypeSubjectId, out var declaringTypeDemand))
+        {
+            return null;
+        }
+
+        if (declaringTypeDemand.SubjectKind != "type" ||
+            declaringTypeDemand.InstantiationKey.ContextKind != GenericContextKind.TypeInstantiation)
+        {
+            return null;
+        }
+
+        var instantiationKey = new GenericInstantiationKey
+        {
+            ContextKind = GenericContextKind.TypeInstantiation,
+            DefinitionSubjectId = definitionSubjectId,
+            TypeArguments = declaringTypeDemand.InstantiationKey.TypeArguments,
+            MethodArguments = [],
+        };
+
+        return new RuntimeGenericContextArtifact
+        {
+            InstantiationKey = instantiationKey,
+            SharedGenericBodyId = ManagedNaming.CreateSharedGenericBodyId(instantiationKey),
+            InstantiationStubId = ManagedNaming.CreateInstantiationStubId(instantiationKey),
+            SupportKindCode = declaringTypeDemand.SupportKindCode,
+            SpecializationKindCode = declaringTypeDemand.SpecializationKindCode,
+            StatusReasonCode = $"loader-demand:{declaringTypeDemand.DemandSourceKind}:field-projection",
+        };
+    }
+
+    private static GenericDiagnosticArtifact? ResolveGenericDiagnostic(
+        string subjectId,
+        string definitionSubjectId,
+        IReadOnlyDictionary<string, GenericInstantiationDemandModel>? genericDemandLookup)
+    {
+        if (genericDemandLookup is not null &&
+            genericDemandLookup.TryGetValue(subjectId, out var demand))
+        {
+            var diagnostic = ManagedNaming.TryCreateGenericDiagnosticArtifact(
+                demand.SubjectId,
+                demand.DefinitionSubjectId);
+            if (diagnostic is not null)
+            {
+                return diagnostic with
+                {
+                    InstantiationKey = demand.InstantiationKey,
+                };
+            }
+
+            return new GenericDiagnosticArtifact
+            {
+                SubjectId = demand.SubjectId,
+                DefinitionSubjectId = demand.DefinitionSubjectId,
+                DisplaySubjectId = demand.SubjectId,
+                InstantiationKey = demand.InstantiationKey,
+            };
+        }
+
+        return ManagedNaming.TryCreateGenericDiagnosticArtifact(subjectId, definitionSubjectId);
+    }
+
+    private static void EnsureEquivalentDemand(
+        GenericInstantiationDemandModel existingDemand,
+        GenericInstantiationDemandModel additionalDemand)
+    {
+        if (string.Equals(existingDemand.DefinitionSubjectId, additionalDemand.DefinitionSubjectId, StringComparison.Ordinal) &&
+            existingDemand.SupportKindCode == additionalDemand.SupportKindCode &&
+            existingDemand.SpecializationKindCode == additionalDemand.SpecializationKindCode &&
+            existingDemand.FamilyKindCode == additionalDemand.FamilyKindCode &&
+            AreEquivalentInstantiationKeys(existingDemand.InstantiationKey, additionalDemand.InstantiationKey))
+        {
+            return;
+        }
+
+        throw new InvalidOperationException(
+            $"conflicting generic instantiation demand entries detected for '{existingDemand.SubjectId}' during AotCoreIr lowering.");
+    }
+
+    private static bool AreEquivalentInstantiationKeys(
+        GenericInstantiationKey left,
+        GenericInstantiationKey right)
+    {
+        return left.ContextKind == right.ContextKind &&
+               string.Equals(left.DefinitionSubjectId, right.DefinitionSubjectId, StringComparison.Ordinal) &&
+               SequenceEqual(left.TypeArguments, right.TypeArguments) &&
+               SequenceEqual(left.MethodArguments, right.MethodArguments);
+    }
+
+    private static bool SequenceEqual(
+        IReadOnlyList<string>? left,
+        IReadOnlyList<string>? right)
+    {
+        if (ReferenceEquals(left, right))
+        {
+            return true;
+        }
+
+        if (left is null || right is null || left.Count != right.Count)
+        {
+            return false;
+        }
+
+        for (var index = 0; index < left.Count; index++)
+        {
+            if (!string.Equals(left[index], right[index], StringComparison.Ordinal))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private static AotCoreIrTypeShapeKind ResolveTypeShape(

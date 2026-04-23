@@ -83,7 +83,9 @@ public sealed record SupplementalMetadataTypeTemplateEntry
 
     public required string DefinitionSubjectId { get; init; }
 
-    public GenericContextArtifact? GenericContext { get; init; }
+    public RuntimeGenericContextArtifact? RuntimeGenericContext { get; init; }
+
+    public GenericDiagnosticArtifact? GenericDiagnostic { get; init; }
 
     public required int MetadataToken { get; init; }
 }
@@ -96,7 +98,9 @@ public sealed record SupplementalMetadataMethodTemplateEntry
 
     public required string DefinitionSubjectId { get; init; }
 
-    public GenericContextArtifact? GenericContext { get; init; }
+    public RuntimeGenericContextArtifact? RuntimeGenericContext { get; init; }
+
+    public GenericDiagnosticArtifact? GenericDiagnostic { get; init; }
 
     public required string DeclaringTypeSubjectId { get; init; }
 
@@ -194,6 +198,10 @@ public sealed record ManagedClosureResult
 
     public required CodeRegistrationArtifact CodeRegistration { get; init; }
 
+    public required GenericInstantiationDemandGraphModel GenericInstantiationDemandGraph { get; init; }
+
+    public required GenericCapabilityMatrixArtifact GenericCapabilityMatrix { get; init; }
+
     public required OptimizationFactsArtifact OptimizationFacts { get; init; }
 
     public required PreserveDescriptorArtifact PreserveDescriptor { get; init; }
@@ -213,6 +221,10 @@ public static class NativeReferenceArtifactNames
 {
     public const string GeneratedDirectory = "generated";
     public const string GeneratedTranslationUnit = "generated/native-reference.generated.cpp";
+    public const string RuntimeSkeletonGeneratedTranslationUnit = "generated/runtime/native-reference.runtime-skeleton.generated.cpp";
+    public const string RuntimeSkeletonCoverageReport = "generated/runtime/native-reference.runtime-skeleton.coverage.json";
+    public const string AuditSummaryTranslationUnit = "generated/audit/native-reference.audit.generated.cpp";
+    public const string CodegenMetrics = "native-reference.codegen-metrics.json";
     public const string LoweringPlan = "native-reference.plan.json";
     public const string Manifest = "native-reference.manifest.json";
 }
@@ -221,8 +233,33 @@ public static class NativeAotArtifactNames
 {
     public const string GeneratedDirectory = "generated";
     public const string GeneratedTranslationUnit = "generated/native-aot.generated.cpp";
+    public const string AuditSummaryTranslationUnit = "generated/audit/native-aot.audit.generated.cpp";
+    public const string CodegenMetrics = "native-aot.codegen-metrics.json";
     public const string LoweringPlan = "native-aot.plan.json";
     public const string Manifest = "native-aot.manifest.json";
+}
+
+public sealed record NativeCodegenMetricsArtifact
+{
+    public string FormatVersion { get; init; } = "v0";
+
+    public string ArtifactKind { get; init; } = "nativeCodegenMetrics";
+
+    public required string CodegenKind { get; init; }
+
+    public required string PlanKind { get; init; }
+
+    public required IReadOnlyList<string> GeneratedSourcePaths { get; init; }
+
+    public int GeneratedCppFileCount { get; init; }
+
+    public long GeneratedCppTotalBytes { get; init; }
+
+    public long LargestGeneratedCppBytes { get; init; }
+
+    public int GeneratedSymbolCount { get; init; }
+
+    public long PeakWorkingSetBytes { get; init; }
 }
 
 public sealed record NativeReferenceGeneratedArtifactRef
@@ -243,6 +280,23 @@ public sealed record AuditTranslationUnitPageArtifact
     public string? FirstMethodSubjectId { get; init; }
 
     public string? LastMethodSubjectId { get; init; }
+}
+
+public sealed record AssemblyFullClosureAuditPageManifestArtifact
+{
+    public string FormatVersion { get; init; } = "v0";
+
+    public string ArtifactKind { get; init; } = "assemblyFullClosureAuditPage";
+
+    public required string AssemblyName { get; init; }
+
+    public required string PlanKind { get; init; }
+
+    public required int PageNumber { get; init; }
+
+    public required int MethodCount { get; init; }
+
+    public required IReadOnlyList<string> MethodSubjectIds { get; init; }
 }
 
 public sealed record NativeReferenceProofManifestArtifact
@@ -268,6 +322,10 @@ public sealed record NativeReferenceProofManifestArtifact
     public int? TranslationUnitPageCount { get; init; }
 
     public IReadOnlyList<AuditTranslationUnitPageArtifact>? TranslationUnitPages { get; init; }
+
+    public string? GeneratedSourcePath { get; init; }
+
+    public IReadOnlyList<string>? GeneratedSourcePaths { get; init; }
 
     public required IReadOnlyList<NativeReferenceGeneratedArtifactRef> GeneratedArtifacts { get; init; }
 }
@@ -414,6 +472,10 @@ public sealed record NativeReferenceLoweringPlanArtifact
 
     public int? ConstructorLiteralByteCount { get; init; }
 
+    public string? StoredLiteral { get; init; }
+
+    public int? StoredLiteralByteCount { get; init; }
+
     public string? MessagePrefixLiteral { get; init; }
 
     public int? MessagePrefixLiteralByteCount { get; init; }
@@ -421,6 +483,10 @@ public sealed record NativeReferenceLoweringPlanArtifact
     public string? MessageSuffixLiteral { get; init; }
 
     public int? MessageSuffixLiteralByteCount { get; init; }
+
+    public string? TrailingLiteral { get; init; }
+
+    public int? TrailingLiteralByteCount { get; init; }
 
     public string? EchoLiteral { get; init; }
 
@@ -433,6 +499,34 @@ public sealed record NativeReferenceLoweringPlanArtifact
     public string? BoxedValueTypeToken { get; init; }
 
     public int? BoxedInt32Value { get; init; }
+
+    public int? SourceArrayLength { get; init; }
+
+    public int? TargetArrayLength { get; init; }
+
+    public int? SourceStoreIndex { get; init; }
+
+    public int? SourceArrayIndex { get; init; }
+
+    public int? TargetArrayIndex { get; init; }
+
+    public int? TargetReadIndex { get; init; }
+
+    public int? CopyLength { get; init; }
+
+    public int? ArrayLength { get; init; }
+
+    public int? ArrayStoreIndex { get; init; }
+
+    public int? ClearStartIndex { get; init; }
+
+    public int? ClearLength { get; init; }
+
+    public int? ReverseStartIndex { get; init; }
+
+    public int? ReverseLength { get; init; }
+
+    public int? ArrayReadIndex { get; init; }
 
     public string? ClosedTypeSubjectId { get; init; }
 
@@ -538,6 +632,8 @@ public sealed record NativeReferenceProofResult
 
     public required NativeReferenceProofManifestArtifact Manifest { get; init; }
 
+    public required NativeCodegenMetricsArtifact CodegenMetrics { get; init; }
+
     public required IReadOnlyList<NativeReferenceGeneratedSource> GeneratedSources { get; init; }
 }
 
@@ -548,6 +644,8 @@ public sealed record NativeAotResult
     public required NativeAotLoweringPlanArtifact LoweringPlan { get; init; }
 
     public required NativeAotManifestArtifact Manifest { get; init; }
+
+    public required NativeCodegenMetricsArtifact CodegenMetrics { get; init; }
 
     public required IReadOnlyList<NativeAotGeneratedSource> GeneratedSources { get; init; }
 }

@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -140,7 +142,7 @@ class Phase4BArrayCovarianceNativeAotTests(unittest.TestCase):
 
         artifact_path = self.output_root / "aot-core-ir.json"
         artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
-        method = next(method for method in artifact["methods"] if method["subjectId"] == ENTRY_SUBJECT_ID)
+        method = find_method_by_subject_id(artifact["methods"], ENTRY_SUBJECT_ID)
 
         array_casts = [
             instruction

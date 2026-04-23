@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -130,12 +132,18 @@ class Phase3UInt64LiteralBitwiseNativeAotTests(unittest.TestCase):
             "CoreRuntimeBenchmarks/UInt64BitwiseBenchmarkMath::OrLiteralUInt64(System.UInt64)",
             "CoreRuntimeBenchmarks/UInt64BitwiseBenchmarkMath::XorLiteralUInt64(System.UInt64)",
         ]:
-            method = methods[subject_id]
+            method = find_method_by_subject_id(methods, subject_id)
             self.assertEqual(11, method["returnAbi"]["carrierKindCode"])
 
         self.assertEqual(
             [11],
-            [slot["carrierKindCode"] for slot in methods["CoreRuntimeBenchmarks/UInt64BitwiseBenchmarkMath::AndLiteralUInt64(System.UInt64)"]["parameterAbis"]],
+            [
+                slot["carrierKindCode"]
+                for slot in find_method_by_subject_id(
+                    methods,
+                    "CoreRuntimeBenchmarks/UInt64BitwiseBenchmarkMath::AndLiteralUInt64(System.UInt64)",
+                )["parameterAbis"]
+            ],
         )
 
     def test_emit_native_aot_succeeds_for_uint64_literal_bitwise_benchmark(self) -> None:

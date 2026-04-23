@@ -19,7 +19,37 @@ public sealed partial class NativeAotLoweringPlanner
 {
 	private static string FormatMethodDeclaration(AotCoreIrMethodArtifact method)
 	{
-		return $"extern \"C\" {MapAbiSlotReturnType(method.ReturnAbi)} {method.NativeSymbol}({FormatAbiSlotParameterSignature(GetMethodAbiParameterSlots(method))});";
+		return FormatMethodDeclaration(method.NativeSymbol, method.ReturnAbi, GetMethodAbiParameterSlots(method));
+	}
+
+	private static string FormatMethodDeclaration(string symbol, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis)
+	{
+		return $"extern \"C\" {MapAbiSlotReturnType(returnAbi)} {symbol}({FormatAbiSlotParameterSignature(parameterAbis)});";
+	}
+
+	private static string? TryGetInstantiationStubSymbol(AotCoreIrMethodArtifact method)
+	{
+		if (method.InstantiationStubId is null)
+		{
+			return null;
+		}
+
+		return ManagedNaming.CreateInstantiationStubSymbol(method.InstantiationStubId);
+	}
+
+	private static IReadOnlyList<string> BuildMethodDeclarations(IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
+	{
+		var declarations = new List<string>();
+		foreach (AotCoreIrMethodArtifact reachableMethod in reachableMethods)
+		{
+			declarations.Add(FormatMethodDeclaration(reachableMethod));
+			string text = TryGetInstantiationStubSymbol(reachableMethod);
+			if (!string.IsNullOrWhiteSpace(text))
+			{
+				declarations.Add(FormatMethodDeclaration(text, reachableMethod.ReturnAbi, GetMethodAbiParameterSlots(reachableMethod)));
+			}
+		}
+		return declarations;
 	}
 
 	private static void EmitReachableMethodForwardDeclarations(StringBuilder builder, IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
@@ -27,12 +57,47 @@ public sealed partial class NativeAotLoweringPlanner
 		foreach (AotCoreIrMethodArtifact reachableMethod in reachableMethods)
 		{
 			builder.AppendLine(FormatMethodDeclaration(reachableMethod));
+			string text = TryGetInstantiationStubSymbol(reachableMethod);
+			if (!string.IsNullOrWhiteSpace(text))
+			{
+				builder.AppendLine(FormatMethodDeclaration(text, reachableMethod.ReturnAbi, GetMethodAbiParameterSlots(reachableMethod)));
+			}
 		}
 
 		if (reachableMethods.Count > 0)
 		{
 			builder.AppendLine();
 		}
+	}
+
+	private void EmitGenericInstantiationStub(StringBuilder builder, AotCoreIrMethodArtifact method)
+	{
+		string text = TryGetInstantiationStubSymbol(method);
+		if (string.IsNullOrWhiteSpace(text))
+		{
+			return;
+		}
+
+		IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(method);
+		builder.AppendLine();
+		builder.AppendLine("// Generic instantiation stub: " + ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));
+		builder.AppendLine(FormatGenericExecutionAuthorityComment(
+			method.OpenDefinitionSubjectId,
+			method.SharedGenericBodyId,
+			method.InstantiationStubId,
+			method.RuntimeGenericContext));
+		builder.AppendLine($"extern \"C\" {MapAbiSlotReturnType(method.ReturnAbi)} {text}({FormatAbiSlotParameterSignature(methodAbiParameterSlots)})");
+		builder.AppendLine("{");
+		string text2 = string.Join(", ", Enumerable.Range(0, methodAbiParameterSlots.Count).Select((int index) => $"chaos_arg_{index}"));
+		if (method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
+		{
+			builder.AppendLine(methodAbiParameterSlots.Count == 0 ? $"    {method.NativeSymbol}();" : $"    {method.NativeSymbol}({text2});");
+		}
+		else
+		{
+			builder.AppendLine(methodAbiParameterSlots.Count == 0 ? $"    return {method.NativeSymbol}();" : $"    return {method.NativeSymbol}({text2});");
+		}
+		builder.AppendLine("}");
 	}
 
 	private void EmitManagedMethod(StringBuilder builder, AotCoreIrMethodArtifact method)
@@ -48,7 +113,7 @@ public sealed partial class NativeAotLoweringPlanner
 		StringBuilder stringBuilder2 = stringBuilder;
 		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(19, 1, stringBuilder);
 		handler.AppendLiteral("// Managed method: ");
-		handler.AppendFormatted(method.SubjectId);
+		handler.AppendFormatted(ManagedNaming.GetMethodSubjectIdDisplayString(method.SubjectId));
 		stringBuilder2.AppendLine(ref handler);
 		stringBuilder = builder;
 		StringBuilder stringBuilder3 = stringBuilder;
@@ -188,13 +253,20 @@ public sealed partial class NativeAotLoweringPlanner
 	private void EmitInstruction(StringBuilder builder, AotCoreIrMethodArtifact method, AotCoreIrInstructionArtifact instruction, int? nextOffset, IReadOnlySet<int> offsets)
 	{
 		AotCoreIrReferenceArtifact targetReference = instruction.TargetReference;
-		if ((object)targetReference?.GenericContext != null)
+		if (!string.IsNullOrWhiteSpace(targetReference?.OpenDefinitionSubjectId) ||
+			(object)targetReference?.SharedGenericBodyId != null ||
+			(object)targetReference?.InstantiationStubId != null ||
+			(object)targetReference?.RuntimeGenericContext != null)
 		{
 			StringBuilder stringBuilder = builder;
 			StringBuilder stringBuilder2 = stringBuilder;
 			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(4, 1, stringBuilder);
 			handler.AppendLiteral("    ");
-			handler.AppendFormatted(FormatGenericContextComment(targetReference.GenericContext));
+			handler.AppendFormatted(FormatGenericExecutionAuthorityComment(
+				targetReference?.OpenDefinitionSubjectId,
+				targetReference?.SharedGenericBodyId,
+				targetReference?.InstantiationStubId,
+				targetReference?.RuntimeGenericContext));
 			stringBuilder2.AppendLine(ref handler);
 		}
 		switch (instruction.Op)
@@ -289,6 +361,9 @@ public sealed partial class NativeAotLoweringPlanner
 			break;
 		case "conv.i8":
 			EmitStackTopConversion(builder, "std::int64_t", nextOffset, instruction.Op);
+			break;
+		case "conv.u8":
+			EmitStackTopWideIntegralConversion(builder, "std::uint64_t", "chaos_store_uint64", nextOffset, instruction.Op);
 			break;
 		case "conv.r4":
 			EmitStackTopFloatingPointConversion(builder, "float", "chaos_store_float32", nextOffset, instruction.Op);
@@ -850,7 +925,7 @@ public sealed partial class NativeAotLoweringPlanner
 	private void EmitVirtualDispatchCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, int? nextOffset, string op)
 	{
 		AotCoreIrMethodArtifact aotCoreIrMethodArtifact = ResolveRequiredDispatchSlotMethod(instruction);
-		IReadOnlyList<AotCoreIrMethodArtifact> readOnlyList = ResolveVirtualDispatchTargets(instruction);
+		IReadOnlyList<VirtualDispatchRoute> readOnlyList = ResolveVirtualDispatchRoutes(instruction);
 		if (readOnlyList.Count == 0)
 		{
 			throw new NotSupportedException("native-aot lowering could not resolve virtual dispatch targets for '" + (instruction.Callee ?? aotCoreIrMethodArtifact.SubjectId) + "'.");
@@ -898,10 +973,11 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		builder.AppendLine("        switch (chaos_header->type_id)");
 		builder.AppendLine("        {");
-		foreach (AotCoreIrMethodArtifact item in readOnlyList)
+		foreach (VirtualDispatchRoute item in readOnlyList)
 		{
-			string virtualDispatchTargetTypeIdSymbol = GetVirtualDispatchTargetTypeIdSymbol(item.Identity.DeclaringTypeSubjectId);
-			string virtualDispatchInstanceExpression = GetVirtualDispatchInstanceExpression(item.Identity.DeclaringTypeSubjectId, "chaos_instance");
+			string virtualDispatchTargetTypeIdSymbol = GetVirtualDispatchTargetTypeIdSymbol(item.ReceiverTypeSubjectId);
+			string virtualDispatchInstanceExpression = GetVirtualDispatchInstanceExpression(item.ReceiverTypeSubjectId, "chaos_instance");
+			AotCoreIrMethodArtifact implementationMethod = item.ImplementationMethod;
 			stringBuilder = builder;
 			StringBuilder stringBuilder5 = stringBuilder;
 			handler = new StringBuilder.AppendInterpolatedStringHandler(18, 1, stringBuilder);
@@ -915,7 +991,7 @@ public sealed partial class NativeAotLoweringPlanner
 				StringBuilder stringBuilder6 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(19, 2, stringBuilder);
 				handler.AppendLiteral("                ");
-				handler.AppendFormatted(item.NativeSymbol);
+				handler.AppendFormatted(implementationMethod.NativeSymbol);
 				handler.AppendLiteral("(");
 				handler.AppendFormatted(FormatAbiInvocationArgumentList(methodAbiParameterSlots, virtualDispatchInstanceExpression));
 				handler.AppendLiteral(");");
@@ -927,7 +1003,7 @@ public sealed partial class NativeAotLoweringPlanner
 				StringBuilder stringBuilder7 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(43, 2, stringBuilder);
 				handler.AppendLiteral("                chaos_callvirt_result = ");
-				handler.AppendFormatted(item.NativeSymbol);
+				handler.AppendFormatted(implementationMethod.NativeSymbol);
 				handler.AppendLiteral("(");
 				handler.AppendFormatted(FormatAbiInvocationArgumentList(methodAbiParameterSlots, virtualDispatchInstanceExpression));
 				handler.AppendLiteral(");");
@@ -950,10 +1026,11 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine("        {");
 		builder.AppendLine("            switch (chaos_current_type_id)");
 		builder.AppendLine("            {");
-		foreach (AotCoreIrMethodArtifact item2 in readOnlyList)
+		foreach (VirtualDispatchRoute item2 in readOnlyList)
 		{
-			string virtualDispatchTargetTypeIdSymbol2 = GetVirtualDispatchTargetTypeIdSymbol(item2.Identity.DeclaringTypeSubjectId);
-			string virtualDispatchInstanceExpression2 = GetVirtualDispatchInstanceExpression(item2.Identity.DeclaringTypeSubjectId, "chaos_instance");
+			string virtualDispatchTargetTypeIdSymbol2 = GetVirtualDispatchTargetTypeIdSymbol(item2.ReceiverTypeSubjectId);
+			string virtualDispatchInstanceExpression2 = GetVirtualDispatchInstanceExpression(item2.ReceiverTypeSubjectId, "chaos_instance");
+			AotCoreIrMethodArtifact implementationMethod2 = item2.ImplementationMethod;
 			stringBuilder = builder;
 			StringBuilder stringBuilder9 = stringBuilder;
 			handler = new StringBuilder.AppendInterpolatedStringHandler(22, 1, stringBuilder);
@@ -967,7 +1044,7 @@ public sealed partial class NativeAotLoweringPlanner
 				StringBuilder stringBuilder10 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(23, 2, stringBuilder);
 				handler.AppendLiteral("                    ");
-				handler.AppendFormatted(item2.NativeSymbol);
+				handler.AppendFormatted(implementationMethod2.NativeSymbol);
 				handler.AppendLiteral("(");
 				handler.AppendFormatted(FormatAbiInvocationArgumentList(methodAbiParameterSlots, virtualDispatchInstanceExpression2));
 				handler.AppendLiteral(");");
@@ -979,7 +1056,7 @@ public sealed partial class NativeAotLoweringPlanner
 				StringBuilder stringBuilder11 = stringBuilder;
 				handler = new StringBuilder.AppendInterpolatedStringHandler(47, 2, stringBuilder);
 				handler.AppendLiteral("                    chaos_callvirt_result = ");
-				handler.AppendFormatted(item2.NativeSymbol);
+				handler.AppendFormatted(implementationMethod2.NativeSymbol);
 				handler.AppendLiteral("(");
 				handler.AppendFormatted(FormatAbiInvocationArgumentList(methodAbiParameterSlots, virtualDispatchInstanceExpression2));
 				handler.AppendLiteral(");");
@@ -1175,6 +1252,18 @@ public sealed partial class NativeAotLoweringPlanner
 	}
 
 	private static void EmitStackTopFloatingPointConversion(StringBuilder builder, string castType, string storeHelperName, int? nextOffset, string op)
+	{
+		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(99, 2, builder);
+		handler.AppendLiteral("    chaos_eval_stack[chaos_stack_top - 1] = ");
+		handler.AppendFormatted(storeHelperName);
+		handler.AppendLiteral("(static_cast<");
+		handler.AppendFormatted(castType);
+		handler.AppendLiteral(">(chaos_eval_stack[chaos_stack_top - 1]));");
+		builder.AppendLine(ref handler);
+		AppendGotoNext(builder, nextOffset, op);
+	}
+
+	private static void EmitStackTopWideIntegralConversion(StringBuilder builder, string castType, string storeHelperName, int? nextOffset, string op)
 	{
 		StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(99, 2, builder);
 		handler.AppendLiteral("    chaos_eval_stack[chaos_stack_top - 1] = ");

@@ -114,15 +114,16 @@ class Phase3MarshaledUtf8FinallyNativeAotTests(unittest.TestCase):
         self.assertIn("// Managed method: CoreRuntimeFeatures/MarshalingProofEntry::MarshalUtf8(System.String)", generated_cpp)
         self.assertIn("// Managed method: CoreRuntimeFeatures/MarshalingProofEntry::ValidateExportContract()", generated_cpp)
         self.assertIn(
-            "chaos_external_runtime_System_Runtime_InteropServices_Marshal__StringToCoTaskMemUTF8_System_String_",
+            "chaos_external_runtime_System_Runtime_InteropServices_Marshal__StringToCoTaskMemUTF8_System_IntPtr_System_String_",
             generated_cpp,
         )
         self.assertIn(
-            "chaos_external_runtime_System_Runtime_InteropServices_Marshal__FreeCoTaskMem_System_IntPtr_",
+            "chaos_external_runtime_System_Runtime_InteropServices_Marshal__FreeCoTaskMem_System_Void_System_IntPtr_",
             generated_cpp,
         )
         self.assertIn("chaos_require_default_interpolated_string_handler_state", generated_cpp)
         self.assertIn("chaos_default_interpolated_string_handler_append_string", generated_cpp)
+        self.assertIn("chaos_default_interpolated_string_handler_append_int32", generated_cpp)
 
 
 if __name__ == "__main__":

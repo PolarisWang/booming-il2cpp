@@ -1,75 +1,75 @@
-# Subject Stage D+E Reporting And Public Cutover 设计 v1.01
+﻿# Subject Stage D+E Reporting And Public Cutover 璁捐 v1.01
 
 Date: 2026-04-06
 Status: plan-ready
 
-## 1. 目标
+## 1. 鐩爣
 
-在现有 `HelloWorldObject` subject spine 之上补齐：
+鍦ㄧ幇鏈?`HelloWorldObject` subject spine 涔嬩笂琛ラ綈锛?
 
 - `matrix report / subject summary / session summary`
 - `matrix events / subject events / session events`
-- subject registry / public CLI / TUI 的最小切换
+- subject registry / public CLI / TUI 鐨勬渶灏忓垏鎹?
 
-并保持以下原则不回退：
+骞朵繚鎸佷互涓嬪師鍒欎笉鍥為€€锛?
 
-- matrix 仍是诊断主入口
-- subject / session 仍是导航聚合层
-- legacy `suite/session/watch` 仍可用，但只作为 compatibility surface
+- matrix 浠嶆槸璇婃柇涓诲叆鍙?
+- subject / session 浠嶆槸瀵艰埅鑱氬悎灞?
+- legacy `suite/session/watch` 浠嶅彲鐢紝浣嗗彧浣滀负 compatibility surface
 
-## 2. 非目标
+## 2. 闈炵洰鏍?
 
-本设计不包含：
+鏈璁′笉鍖呭惈锛?
 
 - `perf.dev / perf.release`
-- 多 subject onboarding
-- 清理或删除现有测试工程
-- 把 legacy `suiteResults` 变成新 subject 结果的正式真源
+- 澶?subject onboarding
+- 娓呯悊鎴栧垹闄ょ幇鏈夋祴璇曞伐绋?
+- 鎶?legacy `suiteResults` 鍙樻垚鏂?subject 缁撴灉鐨勬寮忕湡婧?
 
-这些都继续归 `Stage F`。
+杩欎簺閮界户缁綊 `Stage F`銆?
 
-## 3. 已知现状
+## 3. 宸茬煡鐜扮姸
 
-### 3.1 已存在的 subject spine
+### 3.1 宸插瓨鍦ㄧ殑 subject spine
 
 - `build/toolchains/run/testing/subjects.py`
-  - 已能读取 `subject.manifest.json`，并固定 artifact roots / bucket manifest 路径
+  - 宸茶兘璇诲彇 `subject.manifest.json`锛屽苟鍥哄畾 artifact roots / bucket manifest 璺緞
 - `build/toolchains/run/testing/subject_planner.py`
-  - 已能产出 `selection / artifactsRoot / stagePlan`
+  - 宸茶兘浜у嚭 `selection / artifactsRoot / stagePlan`
 - `build/toolchains/run/testing/subject_executor.py`
-  - 已能执行 stage worker，并写出最小 `report.json`
+  - 宸茶兘鎵ц stage worker锛屽苟鍐欏嚭鏈€灏?`report.json`
 
-### 3.2 仍然偏 legacy 的 public/test surface
+### 3.2 浠嶇劧鍋?legacy 鐨?public/test surface
 
 - `build/toolchains/run/testing/reporting.py`
-  - 当前只面向 legacy suite/session
+  - 褰撳墠鍙潰鍚?legacy suite/session
 - `build/toolchains/run/testing/events.py`
-  - 当前 envelope 仍以 `suiteId / stage` 为中心
+  - 褰撳墠 envelope 浠嶄互 `suiteId / stage` 涓轰腑蹇?
 - `build/toolchains/run/testing/registry.py`
-  - 当前 registry 只有 `suite/module/system/pipeline`
+  - 当前 registry 仍停留在旧一代 formal object 集合
 - `build/toolchains/run/commands/test.py`
-  - 当前 public dispatch 仍以 legacy suite spec 和 registry object 为主
+  - 褰撳墠 public dispatch 浠嶄互 legacy suite spec 鍜?registry object 涓轰富
 - `build/toolchains/run/tui.py`
-  - 当前 watch / summary / registry 入口都假设 session 事件流仍是旧语义
+  - 褰撳墠 watch / summary / registry 鍏ュ彛閮藉亣璁?session 浜嬩欢娴佷粛鏄棫璇箟
 
-## 4. 设计决定
+## 4. 璁捐鍐冲畾
 
-## 4.1 Reporting 采用 `B2`
+## 4.1 Reporting 閲囩敤 `B2`
 
-直接采用 `docs/discuss/reporting/20260406-20-reporting-schema-design-v1-01.md` 的结论：
+鐩存帴閲囩敤 `docs/discuss/reporting/20260406-20-reporting-schema-design-v1-01.md` 鐨勭粨璁猴細
 
 - `matrices/<matrix-id>/report.json`
-  - 是单个 matrix 的诊断主入口
-  - 保留 `selection`、`stageResults`、`artifactResults`、`errors`
+  - 鏄崟涓?matrix 鐨勮瘖鏂富鍏ュ彛
+  - 淇濈暀 `selection`銆乣stageResults`銆乣artifactResults`銆乣errors`
 - `subject-report/summary.json`
-  - 只做 subject 聚合与导航
+  - 鍙仛 subject 鑱氬悎涓庡鑸?
 - `artifacts/logs/tests/<run-id>/summary.json`
-  - 保留现有 session summary 语义
-  - 增量加入 `subjectStatusCounts` 与 `subjectResults`
+  - 淇濈暀鐜版湁 session summary 璇箟
+  - 澧為噺鍔犲叆 `subjectStatusCounts` 涓?`subjectResults`
 
-## 4.2 Events 采用方案 `C`
+## 4.2 Events 閲囩敤鏂规 `C`
 
-直接采用 `docs/discuss/reporting/20260406-21-event-schema-alignment-design-v1-01.md` 的结论：
+鐩存帴閲囩敤 `docs/discuss/reporting/20260406-21-event-schema-alignment-design-v1-01.md` 鐨勭粨璁猴細
 
 - matrix events
   - canonical detailed stream
@@ -78,129 +78,129 @@ Status: plan-ready
 - session events
   - compatibility projection
 
-### 单写者原则
+### 鍗曞啓鑰呭師鍒?
 
 - matrix / subject events
-  - 由 subject execution path 写
+  - 鐢?subject execution path 鍐?
 - session events
-  - 由 public command orchestration 写
+  - 鐢?public command orchestration 鍐?
 
-worker 不直接 append `events.jsonl`。
+worker 涓嶇洿鎺?append `events.jsonl`銆?
 
-## 4.3 Public cutover 以 subject 为一等对象，但不抹掉 legacy surface
+## 4.3 Public cutover 浠?subject 涓轰竴绛夊璞★紝浣嗕笉鎶规帀 legacy surface
 
-Stage E 的第一版不是“删除旧入口”，而是：
+Stage E 鐨勭涓€鐗堜笉鏄€滃垹闄ゆ棫鍏ュ彛鈥濓紝鑰屾槸锛?
 
-- 给 registry 增加 `subject` object type
-- 给 public command 增加 `test subject --id <subject-id>`
-- 让 registry list / manifest / TUI 能发现并执行 subject
-- 同时保留 legacy suite / watch / summary / registry 的兼容路径
+- 缁?registry 澧炲姞 `subject` object type
+- 缁?public command 澧炲姞 `test subject --id <subject-id>`
+- 璁?registry list / manifest / TUI 鑳藉彂鐜板苟鎵ц subject
+- 鍚屾椂淇濈暀 legacy suite / watch / summary / registry 鐨勫吋瀹硅矾寰?
 
-这意味着：
+杩欐剰鍛崇潃锛?
 
-- `subject` 是新的一等执行对象
-- legacy suite 仍可作为 alias / compatibility path 存在
-- `suiteResults` 不承载 `subject` 的正式真相
+- `subject` 鏄柊鐨勪竴绛夋墽琛屽璞?
+- legacy suite 浠嶅彲浣滀负 alias / compatibility path 瀛樺湪
+- `suiteResults` 涓嶆壙杞?`subject` 鐨勬寮忕湡鐩?
 
-## 5. 模块边界
+## 5. 妯″潡杈圭晫
 
 ## 5.1 `subject_reporting.py`
 
-新增一个独立模块，负责：
+鏂板涓€涓嫭绔嬫ā鍧楋紝璐熻矗锛?
 
-- 把 executor 的 `matrix execution result` 写成 `report.json`
-- 聚合同一 subject 的 `subject-report/summary.json`
-- 统一返回可写入 event / session summary 的轻量对象
+- 鎶?executor 鐨?`matrix execution result` 鍐欐垚 `report.json`
+- 鑱氬悎鍚屼竴 subject 鐨?`subject-report/summary.json`
+- 缁熶竴杩斿洖鍙啓鍏?event / session summary 鐨勮交閲忓璞?
 
-这样可以避免：
+杩欐牱鍙互閬垮厤锛?
 
-- 把 legacy `reporting.py` 继续膨胀成同时承载 old suite 和 new subject 的双头实现
+- 鎶?legacy `reporting.py` 缁х画鑶ㄨ儉鎴愬悓鏃舵壙杞?old suite 鍜?new subject 鐨勫弻澶村疄鐜?
 
 ## 5.2 `events.py`
 
-保留 `build_event()` 作为统一入口，但做 additive 扩展：
+淇濈暀 `build_event()` 浣滀负缁熶竴鍏ュ彛锛屼絾鍋?additive 鎵╁睍锛?
 
-- 增加 `streamScope`
-- 增加 `subjectId`
-- 增加 `matrixId`
-- 增加 `goalId`
-- 增加 `stageId`
-- 增加 `bucket`
-- 增加 `stageScope`
+- 澧炲姞 `streamScope`
+- 澧炲姞 `subjectId`
+- 澧炲姞 `matrixId`
+- 澧炲姞 `goalId`
+- 澧炲姞 `stageId`
+- 澧炲姞 `bucket`
+- 澧炲姞 `stageScope`
 
-legacy `suiteId / stage` 继续保留，供旧消费方兼容读取。
+legacy `suiteId / stage` 缁х画淇濈暀锛屼緵鏃ф秷璐规柟鍏煎璇诲彇銆?
 
 ## 5.3 `subject_executor.py`
 
-职责扩展为：
+鑱岃矗鎵╁睍涓猴細
 
-- 仍负责 stage 执行
-- 在 stage 生命周期上生成 matrix canonical events
-- 在 `report-assemble` 之后把结果交给 `subject_reporting.py`
+- 浠嶈礋璐?stage 鎵ц
+- 鍦?stage 鐢熷懡鍛ㄦ湡涓婄敓鎴?matrix canonical events
+- 鍦?`report-assemble` 涔嬪悗鎶婄粨鏋滀氦缁?`subject_reporting.py`
 
-它不负责：
+瀹冧笉璐熻矗锛?
 
-- 直接写 session summary
-- 直接承担 TUI / watch 兼容投影
+- 鐩存帴鍐?session summary
+- 鐩存帴鎵挎媴 TUI / watch 鍏煎鎶曞奖
 
 ## 5.4 `reporting.py`
 
-继续只做 run/session 层，但扩展为可接受 `subjectResults`：
+缁х画鍙仛 run/session 灞傦紝浣嗘墿灞曚负鍙帴鍙?`subjectResults`锛?
 
 - `summary.json`
-  - 增量写入 `subjectStatusCounts` 与 `subjectResults`
+  - 澧為噺鍐欏叆 `subjectStatusCounts` 涓?`subjectResults`
 - `final-summary`
-  - 增量带出 `subjectResults`
-- 不把 `subjectResults` 回灌成 `suiteResults`
+  - 澧為噺甯﹀嚭 `subjectResults`
+- 涓嶆妸 `subjectResults` 鍥炵亴鎴?`suiteResults`
 
-## 5.5 `registry.py` 与 public command
+## 5.5 `registry.py` 涓?public command
 
-`registry.py` 需要新增 `subject` collection，并把它们纳入：
+`registry.py` 闇€瑕佹柊澧?`subject` collection锛屽苟鎶婂畠浠撼鍏ワ細
 
 - `flatItems`
 - `find_registry_object()`
 - `expand_execution_plan()`
 
-public command 层需要新增：
+public command 灞傞渶瑕佹柊澧烇細
 
 - `run test subject --id <subject-id>`
 
-并让：
+骞惰锛?
 
 - `run test registry list`
 - `run test registry check-consistency`
 - TUI test menu / registry route
 
-都能识别新的 `subject` object type。
+閮借兘璇嗗埆鏂扮殑 `subject` object type銆?
 
-## 6. 范围收敛
+## 6. 鑼冨洿鏀舵暃
 
-本轮 public cutover 继续绑定到：
+鏈疆 public cutover 缁х画缁戝畾鍒帮細
 
 - `HelloWorldObject`
-- 四个既有 Windows matrix
+- 鍥涗釜鏃㈡湁 Windows matrix
 
-这保证：
+杩欎繚璇侊細
 
-- registry / CLI / TUI 的第一版 subject public entry 有真实实现对象
-- 不会把多 subject 选择、默认排序、跨 subject 汇总等 `Stage F` 议题提前带进来
+- registry / CLI / TUI 鐨勭涓€鐗?subject public entry 鏈夌湡瀹炲疄鐜板璞?
+- 涓嶄細鎶婂 subject 閫夋嫨銆侀粯璁ゆ帓搴忋€佽法 subject 姹囨€荤瓑 `Stage F` 璁鎻愬墠甯﹁繘鏉?
 
-## 7. 预期长期沉淀
+## 7. 棰勬湡闀挎湡娌夋穩
 
-当本计划未来执行闭环后，应把长期边界回写到：
+褰撴湰璁″垝鏈潵鎵ц闂幆鍚庯紝搴旀妸闀挎湡杈圭晫鍥炲啓鍒帮細
 
 - `docs/architecture/subject-test-framework-v1/reporting-and-public-cutover-v1.md`
 
-并按实际 public surface 更新：
+骞舵寜瀹為檯 public surface 鏇存柊锛?
 
-- `wiki/06-测试验证/`
+- `wiki/06-娴嬭瘯楠岃瘉/`
 
-## 8. 结论
+## 8. 缁撹
 
-`Stage D + Stage E` 的实现主线已经可以固定为：
+`Stage D + Stage E` 鐨勫疄鐜颁富绾垮凡缁忓彲浠ュ浐瀹氫负锛?
 
-1. 先补 subject reporting 与 canonical event
-2. 再把 session summary / watch / TUI 接成兼容投影
-3. 最后把 subject 公开为 registry / public command / TUI 的一等对象
+1. 鍏堣ˉ subject reporting 涓?canonical event
+2. 鍐嶆妸 session summary / watch / TUI 鎺ユ垚鍏煎鎶曞奖
+3. 鏈€鍚庢妸 subject 鍏紑涓?registry / public command / TUI 鐨勪竴绛夊璞?
 
-只要保持这个顺序，就不会为了“先看到 public 入口”而把 reporting/session 语义做坏。
+鍙淇濇寔杩欎釜椤哄簭锛屽氨涓嶄細涓轰簡鈥滃厛鐪嬪埌 public 鍏ュ彛鈥濊€屾妸 reporting/session 璇箟鍋氬潖銆?

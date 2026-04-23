@@ -11,7 +11,7 @@ objectType: guide
 
 ## 何时使用
 
-当你要验证 subject 级结果，而不是 suite/module/system/pipeline 级对象时，优先从这里进入。
+当你要验证 subject 级结果，而不是 suite/module/system 级对象时，优先从这里进入。
 
 推荐顺序：
 

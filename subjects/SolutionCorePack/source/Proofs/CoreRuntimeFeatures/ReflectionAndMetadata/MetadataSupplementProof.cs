@@ -73,6 +73,7 @@ internal static class MetadataSupplementProofEntry
         var records = new List<MetadataSupplementRecord>(capacity: 3);
         var closedIntType = typeof(MetadataSupplementBox<int>);
         var closedStringType = typeof(MetadataSupplementBox<string>);
+        MethodBase constructor = closedIntType.GetConstructors(BindingFlags.Instance | BindingFlags.Public)[0];
         var appendMethod = closedIntType.GetMethod(nameof(MetadataSupplementBox<int>.AppendTo), BindingFlags.Instance | BindingFlags.Public)!;
 
         MetadataSupplementRegistry.Add(records, MetadataSupplementSlot.ClosedIntType, closedIntType);
@@ -96,6 +97,9 @@ internal static class MetadataSupplementProofEntry
         Assert.Equal(1, appendMethodRecord.GenericArity);
         Assert.Equal(1, appendMethodRecord.ParameterCount);
         Assert.True(appendMethodRecord.MetadataToken > 0);
+
+        var constructedBox = (MetadataSupplementBox<int>)constructor.Invoke(obj: null, parameters: [84])!;
+        Assert.Equal(84, constructedBox.Value);
 
         var values = new List<int> { 21 };
         appendMethod.Invoke(new MetadataSupplementBox<int>(21), [values]);

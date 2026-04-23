@@ -34,12 +34,12 @@ DLL_PATH = (
     / "net8.0"
     / "CoreRuntimeFeatures.dll"
 )
-ENTRY_SUBJECT_ID = "CoreRuntimeFeatures/GenericInstantiationProofEntry::Run()"
+ENTRY_SUBJECT_ID = "CoreRuntimeFeatures/GenericInstantiationProofEntry::Run:System.Int32()"
 GENERIC_CALLEE_SUBJECT_ID = (
     "CoreRuntimeFeatures/GenericInstantiationProofEntry::CreatePair<System.Int32,System.String>"
-    "(System.Int32,System.String)"
+    ":System.ValueTuple<System.Int32,System.String>(System.Int32,System.String)"
 )
-GENERIC_DEFINITION_SUBJECT_ID = "CoreRuntimeFeatures/GenericInstantiationProofEntry::CreatePair(!!0,!!1)"
+GENERIC_DEFINITION_SUBJECT_ID = "CoreRuntimeFeatures/GenericInstantiationProofEntry::CreatePair`2:System.ValueTuple<!!0,!!1>(!!0,!!1)"
 TEST_OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase7-loader-generic-method-reference"
 
 
@@ -129,12 +129,18 @@ class Phase7LoaderGenericMethodReferenceDecodeTests(unittest.TestCase):
     def test_aot_core_ir_keeps_generic_context_for_closed_generic_call(self) -> None:
         self._ensure_bundle_generated()
 
+        generic_demand_graph = load_json(self.output_root / "generic-instantiation-demand-graph.json")
         aot_core_ir = load_json(self.output_root / "aot-core-ir.json")
         method = next(method for method in aot_core_ir["methods"] if method["subjectId"] == ENTRY_SUBJECT_ID)
         call = next(
             instruction
             for instruction in method["instructions"]
             if instruction["op"] == "call" and instruction.get("callee") == GENERIC_CALLEE_SUBJECT_ID
+        )
+        graph_demand = next(
+            demand
+            for demand in generic_demand_graph["demands"]
+            if demand["subjectKind"] == "method" and demand["subjectId"] == GENERIC_CALLEE_SUBJECT_ID
         )
 
         self.assertEqual(
@@ -145,6 +151,7 @@ class Phase7LoaderGenericMethodReferenceDecodeTests(unittest.TestCase):
             },
             call["reference"],
         )
+        runtime_generic_context = call["targetReference"]["runtimeGenericContext"]
         self.assertEqual(
             {
                 "contextKind": 2,
@@ -152,8 +159,15 @@ class Phase7LoaderGenericMethodReferenceDecodeTests(unittest.TestCase):
                 "typeArguments": [],
                 "methodArguments": ["System.Int32", "System.String"],
             },
-            call["targetReference"]["genericContext"],
+            runtime_generic_context["instantiationKey"],
         )
+        self.assertEqual(3, runtime_generic_context["supportKindCode"])
+        self.assertEqual(2, runtime_generic_context["specializationKindCode"])
+        self.assertTrue(runtime_generic_context["sharedGenericBodyId"]["value"])
+        self.assertTrue(runtime_generic_context["instantiationStubId"]["value"])
+        self.assertEqual(graph_demand["instantiationKey"], runtime_generic_context["instantiationKey"])
+        self.assertEqual(graph_demand["supportKindCode"], runtime_generic_context["supportKindCode"])
+        self.assertEqual(graph_demand["specializationKindCode"], runtime_generic_context["specializationKindCode"])
 
 
 if __name__ == "__main__":

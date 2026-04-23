@@ -13,6 +13,7 @@ public sealed class MetadataWriterStage
     public MetadataWriterOutput Write(LinkedWorldModel linkedWorld)
     {
         var aotEntries = new List<AotManifestEntry>();
+        var genericDemandLookup = BuildGenericDemandLookup(linkedWorld.GenericInstantiationDemandGraph);
 
         foreach (var method in linkedWorld.Methods)
         {
@@ -148,9 +149,14 @@ public sealed class MetadataWriterStage
                     AssemblyName = type.AssemblyName,
                     SubjectId = type.SubjectId,
                     DefinitionSubjectId = type.DefinitionSubjectId,
-                    GenericContext = ManagedNaming.TryCreateGenericContext(
+                    RuntimeGenericContext = ResolveRuntimeGenericContext(
                         type.SubjectId,
-                        type.DefinitionSubjectId),
+                        type.DefinitionSubjectId,
+                        genericDemandLookup),
+                    GenericDiagnostic = ResolveGenericDiagnostic(
+                        type.SubjectId,
+                        type.DefinitionSubjectId,
+                        genericDemandLookup),
                     MetadataToken = type.MetadataToken,
                 })
                 .ToList(),
@@ -160,9 +166,14 @@ public sealed class MetadataWriterStage
                     AssemblyName = method.AssemblyName,
                     SubjectId = method.SubjectId,
                     DefinitionSubjectId = method.DefinitionSubjectId,
-                    GenericContext = ManagedNaming.TryCreateGenericContext(
+                    RuntimeGenericContext = ResolveRuntimeGenericContext(
                         method.SubjectId,
-                        method.DefinitionSubjectId),
+                        method.DefinitionSubjectId,
+                        genericDemandLookup),
+                    GenericDiagnostic = ResolveGenericDiagnostic(
+                        method.SubjectId,
+                        method.DefinitionSubjectId,
+                        genericDemandLookup),
                     DeclaringTypeSubjectId = method.DeclaringTypeSubjectId,
                     MetadataToken = method.MetadataToken,
                     ParameterCount = method.Parameters.Count,
@@ -188,5 +199,133 @@ public sealed class MetadataWriterStage
             },
             SupplementalMetadataTemplate = supplementalMetadataTemplate,
         };
+    }
+
+    private static IReadOnlyDictionary<string, GenericInstantiationDemandModel> BuildGenericDemandLookup(
+        GenericInstantiationDemandGraphModel? genericInstantiationDemandGraph)
+    {
+        var genericDemandLookup = new Dictionary<string, GenericInstantiationDemandModel>(StringComparer.Ordinal);
+        if (genericInstantiationDemandGraph?.Demands is not { Count: > 0 } demands)
+        {
+            return genericDemandLookup;
+        }
+
+        foreach (var demand in demands)
+        {
+            if (genericDemandLookup.TryGetValue(demand.SubjectId, out var existingDemand))
+            {
+                EnsureEquivalentDemand(existingDemand, demand);
+                continue;
+            }
+
+            genericDemandLookup[demand.SubjectId] = demand;
+        }
+
+        return genericDemandLookup;
+    }
+
+    private static RuntimeGenericContextArtifact? ResolveRuntimeGenericContext(
+        string subjectId,
+        string definitionSubjectId,
+        IReadOnlyDictionary<string, GenericInstantiationDemandModel>? genericDemandLookup)
+    {
+        if (genericDemandLookup is not null &&
+            genericDemandLookup.TryGetValue(subjectId, out var demand))
+        {
+            return new RuntimeGenericContextArtifact
+            {
+                InstantiationKey = demand.InstantiationKey,
+                SharedGenericBodyId = ManagedNaming.CreateSharedGenericBodyId(demand.InstantiationKey),
+                InstantiationStubId = ManagedNaming.CreateInstantiationStubId(demand.InstantiationKey),
+                SupportKindCode = demand.SupportKindCode,
+                SpecializationKindCode = demand.SpecializationKindCode,
+                StatusReasonCode = $"loader-demand:{demand.DemandSourceKind}",
+            };
+        }
+
+        return null;
+    }
+
+    private static GenericDiagnosticArtifact? ResolveGenericDiagnostic(
+        string subjectId,
+        string definitionSubjectId,
+        IReadOnlyDictionary<string, GenericInstantiationDemandModel>? genericDemandLookup)
+    {
+        if (genericDemandLookup is not null &&
+            genericDemandLookup.TryGetValue(subjectId, out var demand))
+        {
+            var diagnostic = ManagedNaming.TryCreateGenericDiagnosticArtifact(
+                demand.SubjectId,
+                demand.DefinitionSubjectId);
+            if (diagnostic is not null)
+            {
+                return diagnostic with
+                {
+                    InstantiationKey = demand.InstantiationKey,
+                };
+            }
+
+            return new GenericDiagnosticArtifact
+            {
+                SubjectId = demand.SubjectId,
+                DefinitionSubjectId = demand.DefinitionSubjectId,
+                DisplaySubjectId = demand.SubjectId,
+                InstantiationKey = demand.InstantiationKey,
+            };
+        }
+
+        return ManagedNaming.TryCreateGenericDiagnosticArtifact(subjectId, definitionSubjectId);
+    }
+
+    private static void EnsureEquivalentDemand(
+        GenericInstantiationDemandModel existingDemand,
+        GenericInstantiationDemandModel additionalDemand)
+    {
+        if (string.Equals(existingDemand.DefinitionSubjectId, additionalDemand.DefinitionSubjectId, StringComparison.Ordinal) &&
+            existingDemand.SupportKindCode == additionalDemand.SupportKindCode &&
+            existingDemand.SpecializationKindCode == additionalDemand.SpecializationKindCode &&
+            existingDemand.FamilyKindCode == additionalDemand.FamilyKindCode &&
+            AreEquivalentInstantiationKeys(existingDemand.InstantiationKey, additionalDemand.InstantiationKey))
+        {
+            return;
+        }
+
+        throw new InvalidOperationException(
+            $"conflicting generic instantiation demand entries detected for '{existingDemand.SubjectId}' during MetadataWriter.");
+    }
+
+    private static bool AreEquivalentInstantiationKeys(
+        GenericInstantiationKey left,
+        GenericInstantiationKey right)
+    {
+        return left.ContextKind == right.ContextKind &&
+               string.Equals(left.DefinitionSubjectId, right.DefinitionSubjectId, StringComparison.Ordinal) &&
+               SequenceEqual(left.TypeArguments, right.TypeArguments) &&
+               SequenceEqual(left.MethodArguments, right.MethodArguments);
+    }
+
+    private static bool SequenceEqual(
+        IReadOnlyList<string>? left,
+        IReadOnlyList<string>? right)
+    {
+        if (ReferenceEquals(left, right))
+        {
+            return true;
+        }
+
+        if (left is null || right is null || left.Count != right.Count)
+        {
+            return false;
+        }
+
+        for (var index = 0; index < left.Count; index++)
+        {
+            if (!string.Equals(left[index], right[index], StringComparison.Ordinal))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -158,7 +158,7 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
         self.assertEqual(1, len(native_aot_plan["translationUnitPages"]))
         self.assertEqual(1, native_aot_plan["translationUnitPages"][0]["pageNumber"])
         self.assertEqual(1, native_aot_plan["translationUnitPages"][0]["methodCount"])
-        self.assertEqual("generated/audit/native-aot.methods.page-0001.cpp", native_aot_plan["translationUnitPages"][0]["path"])
+        self.assertEqual("generated/audit/native-aot.audit.page-0001.json", native_aot_plan["translationUnitPages"][0]["path"])
         self.assertIn(
             "GoldenSimpleLib.Library/Greeter::BuildMessage:System.String()",
             native_aot_plan["translationUnitMethodSubjectIds"],
@@ -191,7 +191,8 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
         generated_cpp = (
             self.native_reference_output_root
             / "generated"
-            / "native-reference.generated.cpp"
+            / "runtime"
+            / "native-reference.runtime-skeleton.generated.cpp"
         ).read_text(encoding="utf-8")
         generated_page_cpp = (
             self.native_reference_output_root
@@ -199,23 +200,30 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
             / "runtime"
             / "native-reference.runtime-skeleton.page-0001.cpp"
         ).read_text(encoding="utf-8")
+        coverage_report = load_json(
+            self.native_reference_output_root
+            / "generated"
+            / "runtime"
+            / "native-reference.runtime-skeleton.coverage.json"
+        )
         manifest = load_json(self.native_reference_output_root / "native-reference.manifest.json")
 
         self.assertIn("assembly-full-closure-runtime-skeleton", generated_cpp)
         self.assertIn("RunNativeReferenceAssembly", generated_cpp)
-        self.assertIn("kPageDispatchCatalog", generated_cpp)
+        self.assertIn("kMethodDispatchCatalog", generated_cpp)
         self.assertIn("NativeReferenceAssemblyDispatchRequest", generated_cpp)
+        self.assertIn("FindMethodDispatchCatalogEntry", generated_cpp)
         self.assertIn("DispatchAssemblySubject", generated_cpp)
         self.assertIn("DispatchRuntimeSkeletonPage0001", generated_cpp)
         self.assertIn("CHAOS_BRIDGE_STATUS_NOT_FOUND", generated_cpp)
         self.assertIn("translation_unit_method_count = 1", generated_cpp)
         self.assertIn("translation_unit_page_count = 1", generated_cpp)
-        self.assertIn("GoldenSimpleLib.Library/Greeter::BuildMessage:System.String()", generated_page_cpp)
+        self.assertIn("method_slot", generated_cpp)
+        self.assertIn("GoldenSimpleLib.Library/Greeter::BuildMessage:System.String()", generated_cpp)
         self.assertIn("kPageMethodDispatch", generated_page_cpp)
-        self.assertIn("NativeReferenceStub_", generated_page_cpp)
+        self.assertIn("NativeReferenceStub_Page0001_Item0001", generated_page_cpp)
         self.assertIn("DispatchRuntimeSkeletonPage0001", generated_page_cpp)
-        self.assertIn("std::strcmp(entry.subject_id, subject_id) == 0", generated_page_cpp)
-        self.assertIn("CHAOS_BRIDGE_STATUS_NOT_SUPPORTED", generated_page_cpp)
+        self.assertIn("ResolveRuntimeSkeletonFieldBinding", generated_page_cpp)
         self.assertEqual("GoldenSimpleLib.Library", manifest["assemblyName"])
         self.assertEqual("", manifest["entrySubjectId"])
         self.assertEqual("assembly-bound-native-reference-skeleton", manifest["runtimeExecutionKind"])
@@ -224,6 +232,617 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
         self.assertEqual(1, manifest["translationUnitPageCount"])
         self.assertEqual(1, len(manifest["translationUnitPages"]))
         self.assertEqual("generated/runtime/native-reference.runtime-skeleton.page-0001.cpp", manifest["translationUnitPages"][0]["path"])
+        self.assertIn(
+            {"kind": "runtimeSkeletonCoverageReport", "path": "generated/runtime/native-reference.runtime-skeleton.coverage.json"},
+            manifest["generatedArtifacts"],
+        )
+        self.assertIn(
+            {"kind": "generatedTranslationUnit", "path": "generated/runtime/native-reference.runtime-skeleton.generated.cpp"},
+            manifest["generatedArtifacts"],
+        )
+        self.assertEqual("nativeReferenceRuntimeSkeletonCoverage", coverage_report["artifactKind"])
+        self.assertEqual(1, coverage_report["requestedMethodCount"])
+        self.assertEqual(1, coverage_report["emittedMethodCount"])
+        self.assertEqual(0, coverage_report["uncoveredMethodCount"])
+        self.assertEqual([], coverage_report["uncoveredMethodSubjectIds"])
+
+    def test_emit_native_reference_reports_all_uncovered_runtime_skeleton_methods(self) -> None:
+        self._ensure_bundle_generated()
+
+        fixture_root = TEST_OUTPUT_ROOT / f"FixtureUnsupportedLibrary-{uuid.uuid4().hex}"
+        project_root = fixture_root / "FixtureUnsupportedLibrary"
+        project_path = project_root / "FixtureUnsupportedLibrary.csproj"
+        source_path = project_root / "Arithmetic.cs"
+        dll_path = project_root / "bin" / "Release" / "net8.0" / "FixtureUnsupportedLibrary.dll"
+        closure_root = fixture_root / "closure"
+        emit_root = fixture_root / "emit-native-reference"
+
+        try:
+            project_root.mkdir(parents=True, exist_ok=False)
+            project_path.write_text(
+                (
+                    '<Project Sdk="Microsoft.NET.Sdk">\n'
+                    "  <PropertyGroup>\n"
+                    "    <TargetFramework>net8.0</TargetFramework>\n"
+                    "    <ImplicitUsings>disable</ImplicitUsings>\n"
+                    "    <Nullable>disable</Nullable>\n"
+                    "  </PropertyGroup>\n"
+                    "</Project>\n"
+                ),
+                encoding="utf-8",
+            )
+            source_path.write_text(
+                (
+                    "namespace FixtureUnsupportedLibrary;\n\n"
+                    "public static class Arithmetic\n"
+                    "{\n"
+                    "    public static int Add(int left, int right)\n"
+                    "    {\n"
+                    "        return left + right;\n"
+                    "    }\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(project_path),
+                    "-c",
+                    "Release",
+                ],
+                cwd=REPO_ROOT,
+            )
+            self.assertTrue(dll_path.is_file(), msg=f"missing unsupported library dll: {dll_path}")
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    str(dll_path),
+                    str(closure_root),
+                    "--full-assembly-closure",
+                ],
+                cwd=REPO_ROOT,
+            )
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    "emit-native-reference",
+                    str(closure_root),
+                    str(emit_root),
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            lowering_plan = load_json(emit_root / "native-reference.plan.json")
+            generated_cpp = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.generated.cpp"
+            ).read_text(encoding="utf-8")
+            coverage_report = load_json(
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.coverage.json"
+            )
+            manifest = load_json(emit_root / "native-reference.manifest.json")
+
+            self.assertEqual("assembly-full-closure-runtime-skeleton", lowering_plan["planKind"])
+            self.assertEqual(1, lowering_plan["translationUnitMethodCount"])
+            self.assertEqual(1, lowering_plan["translationUnitPageCount"])
+            self.assertEqual(1, len(lowering_plan["translationUnitPages"]))
+            self.assertIn("translation_unit_method_count = 0", generated_cpp)
+            self.assertIn("translation_unit_page_count = 0", generated_cpp)
+            self.assertIn("kMethodDispatchCatalogCount = 0", generated_cpp)
+            self.assertIn("return nullptr;", generated_cpp)
+            self.assertNotIn("DispatchRuntimeSkeletonPage0001", generated_cpp)
+            self.assertFalse(
+                (
+                    emit_root
+                    / "generated"
+                    / "runtime"
+                    / "native-reference.runtime-skeleton.page-0001.cpp"
+                ).exists()
+            )
+            self.assertEqual("FixtureUnsupportedLibrary", manifest["assemblyName"])
+            self.assertEqual("", manifest["entrySubjectId"])
+            self.assertEqual("assembly-bound-native-reference-skeleton", manifest["runtimeExecutionKind"])
+            self.assertNotIn("preferredAssemblyDispatchSubjectId", manifest)
+            self.assertEqual(1024, manifest["translationUnitPageSize"])
+            self.assertEqual(0, manifest["translationUnitPageCount"])
+            self.assertEqual([], manifest["translationUnitPages"])
+            self.assertEqual(
+                [
+                    {"kind": "generatedTranslationUnit", "path": "generated/runtime/native-reference.runtime-skeleton.generated.cpp"},
+                    {"kind": "runtimeSkeletonCoverageReport", "path": "generated/runtime/native-reference.runtime-skeleton.coverage.json"},
+                    {"kind": "codegenMetrics", "path": "native-reference.codegen-metrics.json"},
+                ],
+                manifest["generatedArtifacts"],
+            )
+            self.assertEqual("nativeReferenceRuntimeSkeletonCoverage", coverage_report["artifactKind"])
+            self.assertEqual(1, coverage_report["requestedMethodCount"])
+            self.assertEqual(0, coverage_report["emittedMethodCount"])
+            self.assertEqual(1, coverage_report["uncoveredMethodCount"])
+            self.assertEqual(
+                [
+                    {
+                        "subjectId": "FixtureUnsupportedLibrary/Arithmetic::Add:System.Int32(System.Int32,System.Int32)",
+                        "reasonCode": "unsupportedShapeOrCapability",
+                    }
+                ],
+                coverage_report["uncoveredMethods"],
+            )
+            self.assertEqual(
+                ["FixtureUnsupportedLibrary/Arithmetic::Add:System.Int32(System.Int32,System.Int32)"],
+                coverage_report["uncoveredMethodSubjectIds"],
+            )
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
+
+    def test_emit_native_reference_async_task_factory_uses_parameter_carriers_independent_of_result_type(self) -> None:
+        self._ensure_bundle_generated()
+
+        fixture_root = TEST_OUTPUT_ROOT / f"FixtureAsyncBridgeLibrary-{uuid.uuid4().hex}"
+        project_root = fixture_root / "FixtureAsyncBridgeLibrary"
+        project_path = project_root / "FixtureAsyncBridgeLibrary.csproj"
+        source_path = project_root / "AsyncBridge.cs"
+        dll_path = project_root / "bin" / "Release" / "net8.0" / "FixtureAsyncBridgeLibrary.dll"
+        closure_root = fixture_root / "closure"
+        emit_root = fixture_root / "emit-native-reference"
+
+        try:
+            project_root.mkdir(parents=True, exist_ok=False)
+            project_path.write_text(
+                (
+                    '<Project Sdk="Microsoft.NET.Sdk">\n'
+                    "  <PropertyGroup>\n"
+                    "    <TargetFramework>net8.0</TargetFramework>\n"
+                    "    <ImplicitUsings>disable</ImplicitUsings>\n"
+                    "    <Nullable>disable</Nullable>\n"
+                    "  </PropertyGroup>\n"
+                    "</Project>\n"
+                ),
+                encoding="utf-8",
+            )
+            source_path.write_text(
+                (
+                    "using System.Threading.Tasks;\n\n"
+                    "namespace FixtureAsyncBridgeLibrary;\n\n"
+                    "public static class AsyncBridge\n"
+                    "{\n"
+                    "    public static async Task<string> DescribeAsync(int seed)\n"
+                    "    {\n"
+                    "        await Task.Yield();\n"
+                    '        return seed == 40 ? "value:40" : "value:unexpected";\n'
+                    "    }\n\n"
+                    "    public static string ComposeDescribe()\n"
+                    "    {\n"
+                    "        return DescribeAsync(40).GetAwaiter().GetResult();\n"
+                    "    }\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(project_path),
+                    "-c",
+                    "Release",
+                ],
+                cwd=REPO_ROOT,
+            )
+            self.assertTrue(dll_path.is_file(), msg=f"missing async bridge dll: {dll_path}")
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    str(dll_path),
+                    str(closure_root),
+                    "--full-assembly-closure",
+                ],
+                cwd=REPO_ROOT,
+            )
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    "emit-native-reference",
+                    str(closure_root),
+                    str(emit_root),
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            generated_page = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.page-0001.cpp"
+            ).read_text(encoding="utf-8")
+            coverage_report = load_json(
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.coverage.json"
+            )
+
+            self.assertEqual(0, coverage_report["uncoveredMethodCount"])
+            self.assertIn(
+                "int32_t arg0;\n    void* arg1;\n    void** return_value;\n};\n\n// managed_result_type: System.String",
+                generated_page,
+            )
+            self.assertNotIn(
+                "void* arg0;\n    void* arg1;\n    void** return_value;\n};\n\n// managed_result_type: System.String",
+                generated_page,
+            )
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
+
+    def test_delegate_closed_target_relay_lowering_supports_arbitrary_names_and_trailing_literal(self) -> None:
+        self._ensure_bundle_generated()
+
+        fixture_root = TEST_OUTPUT_ROOT / f"FixtureDelegateRelayLibrary-{uuid.uuid4().hex}"
+        project_root = fixture_root / "FixtureDelegateRelayLibrary"
+        project_path = project_root / "FixtureDelegateRelayLibrary.csproj"
+        source_path = project_root / "Program.cs"
+        dll_path = project_root / "bin" / "Release" / "net8.0" / "FixtureDelegateRelayLibrary.dll"
+        closure_root = fixture_root / "closure"
+        emit_root = fixture_root / "emit-native-reference"
+
+        try:
+            project_root.mkdir(parents=True, exist_ok=False)
+            project_path.write_text(
+                (
+                    '<Project Sdk="Microsoft.NET.Sdk">\n'
+                    "  <PropertyGroup>\n"
+                    "    <OutputType>Exe</OutputType>\n"
+                    "    <TargetFramework>net8.0</TargetFramework>\n"
+                    "    <ImplicitUsings>disable</ImplicitUsings>\n"
+                    "    <Nullable>disable</Nullable>\n"
+                    "  </PropertyGroup>\n"
+                    "</Project>\n"
+                ),
+                encoding="utf-8",
+            )
+            source_path.write_text(
+                (
+                    "using System;\n\n"
+                    "namespace FixtureDelegateRelayLibrary;\n\n"
+                    "internal delegate string RelayTextFormatter(string prefix);\n\n"
+                    "internal delegate string RelayTailFormatter(string value);\n\n"
+                    "internal sealed class RelayPacket\n"
+                    "{\n"
+                    "    private readonly string _name;\n\n"
+                    "    public RelayPacket(string name)\n"
+                    "    {\n"
+                    "        _name = name;\n"
+                    "    }\n\n"
+                    "    public string Compose(string prefix)\n"
+                    "    {\n"
+                    '        return string.Concat(prefix, _name, ".");\n'
+                    "    }\n"
+                    "}\n\n"
+                    "internal static class TailOps\n"
+                    "{\n"
+                    "    public static string AppendQuestion(string value)\n"
+                    "    {\n"
+                    '        return string.Concat(value, "?");\n'
+                    "    }\n"
+                    "}\n\n"
+                    "internal static class Program\n"
+                    "{\n"
+                    "    private static int Main()\n"
+                    "    {\n"
+                    '        var packet = new RelayPacket("generic delegate");\n'
+                    "        RelayTextFormatter formatter = packet.Compose;\n"
+                    "        RelayTailFormatter tail = TailOps.AppendQuestion;\n"
+                    '        Console.WriteLine(tail(formatter("fixture-delegate:")));\n'
+                    "        return 0;\n"
+                    "    }\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(project_path),
+                    "-c",
+                    "Release",
+                ],
+                cwd=REPO_ROOT,
+            )
+            self.assertTrue(dll_path.is_file(), msg=f"missing delegate relay dll: {dll_path}")
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    str(dll_path),
+                    str(closure_root),
+                    "--entry-point-subject-id",
+                    "FixtureDelegateRelayLibrary/Program::Main()",
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            lowering_plan = load_json(closure_root / "native-reference.lowering-plan.json")
+            self.assertEqual("managed-delegates.closed-target-relay-message.minimal", lowering_plan["planKind"])
+            self.assertEqual('"?"', lowering_plan["trailingLiteral"])
+            self.assertEqual(1, lowering_plan["trailingLiteralByteCount"])
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    "emit-native-reference",
+                    str(closure_root),
+                    str(emit_root),
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            manifest = load_json(emit_root / "native-reference.manifest.json")
+            generated_source_path = Path(manifest.get("generatedSourcePath") or manifest["generatedSourcePaths"][0])
+            generated_cpp = (emit_root / generated_source_path).read_text(encoding="utf-8").replace("\r\n", "\n")
+
+            self.assertIn("FixtureDelegateRelayLibrary/Program::Main:System.Int32()", manifest["entrySubjectId"])
+            self.assertIn("managed-delegates.closed-target-relay-message.minimal", generated_cpp)
+            self.assertIn('thread,\n        "?",\n        1u);', generated_cpp)
+            self.assertNotIn('thread,\n        "!",\n        1u);', generated_cpp)
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
+
+    def test_emit_native_reference_delegate_closed_target_relay_full_closure_supports_arbitrary_names(self) -> None:
+        self._ensure_bundle_generated()
+
+        fixture_root = TEST_OUTPUT_ROOT / f"FixtureDelegateRelayFullClosureLibrary-{uuid.uuid4().hex}"
+        project_root = fixture_root / "FixtureDelegateRelayFullClosureLibrary"
+        project_path = project_root / "FixtureDelegateRelayFullClosureLibrary.csproj"
+        source_path = project_root / "Program.cs"
+        dll_path = project_root / "bin" / "Release" / "net8.0" / "FixtureDelegateRelayFullClosureLibrary.dll"
+        closure_root = fixture_root / "closure"
+        emit_root = fixture_root / "emit-native-reference"
+
+        try:
+            project_root.mkdir(parents=True, exist_ok=False)
+            project_path.write_text(
+                (
+                    '<Project Sdk="Microsoft.NET.Sdk">\n'
+                    "  <PropertyGroup>\n"
+                    "    <OutputType>Exe</OutputType>\n"
+                    "    <TargetFramework>net8.0</TargetFramework>\n"
+                    "    <ImplicitUsings>disable</ImplicitUsings>\n"
+                    "    <Nullable>disable</Nullable>\n"
+                    "  </PropertyGroup>\n"
+                    "</Project>\n"
+                ),
+                encoding="utf-8",
+            )
+            source_path.write_text(
+                (
+                    "using System;\n\n"
+                    "namespace FixtureDelegateRelayFullClosureLibrary;\n\n"
+                    "internal delegate string RelayTextFormatter(string prefix);\n\n"
+                    "internal delegate string RelayTailFormatter(string value);\n\n"
+                    "internal sealed class RelayPacket\n"
+                    "{\n"
+                    "    private readonly string _name;\n\n"
+                    "    public RelayPacket(string name)\n"
+                    "    {\n"
+                    "        _name = name;\n"
+                    "    }\n\n"
+                    "    public string Compose(string prefix)\n"
+                    "    {\n"
+                    '        return string.Concat(prefix, _name, ".");\n'
+                    "    }\n"
+                    "}\n\n"
+                    "internal static class TailOps\n"
+                    "{\n"
+                    "    public static string AppendQuestion(string value)\n"
+                    "    {\n"
+                    '        return string.Concat(value, "?");\n'
+                    "    }\n"
+                    "}\n\n"
+                    "internal static class Program\n"
+                    "{\n"
+                    "    private static int Main()\n"
+                    "    {\n"
+                    '        var packet = new RelayPacket("full closure delegate");\n'
+                    "        RelayTextFormatter formatter = packet.Compose;\n"
+                    "        RelayTailFormatter tail = TailOps.AppendQuestion;\n"
+                    '        Console.WriteLine(tail(formatter("fixture-full-closure:")));\n'
+                    "        return 0;\n"
+                    "    }\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(project_path),
+                    "-c",
+                    "Release",
+                ],
+                cwd=REPO_ROOT,
+            )
+            self.assertTrue(dll_path.is_file(), msg=f"missing delegate relay full closure dll: {dll_path}")
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    str(dll_path),
+                    str(closure_root),
+                    "--full-assembly-closure",
+                ],
+                cwd=REPO_ROOT,
+            )
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    "emit-native-reference",
+                    str(closure_root),
+                    str(emit_root),
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            generated_cpp = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.generated.cpp"
+            ).read_text(encoding="utf-8")
+            generated_page = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.page-0001.cpp"
+            ).read_text(encoding="utf-8").replace("\r\n", "\n")
+            coverage_report = load_json(
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.coverage.json"
+            )
+
+            self.assertEqual(0, coverage_report["uncoveredMethodCount"])
+            self.assertIn(
+                "FixtureDelegateRelayFullClosureLibrary/Program::Main:System.Int32()",
+                generated_cpp,
+            )
+            self.assertIn("kPageDelegateClosedTargetRelayDescriptorCount = 1;", generated_page)
+            self.assertIn('"?", 1u', generated_page)
+            self.assertNotIn('"!", 1u', generated_page)
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
+
+    def test_emit_native_reference_ignores_interface_declarations_without_canonical_body(self) -> None:
+        self._ensure_bundle_generated()
+
+        fixture_root = TEST_OUTPUT_ROOT / f"FixtureInterfaceDeclarationLibrary-{uuid.uuid4().hex}"
+        project_root = fixture_root / "FixtureInterfaceDeclarationLibrary"
+        project_path = project_root / "FixtureInterfaceDeclarationLibrary.csproj"
+        source_path = project_root / "MessageBanner.cs"
+        dll_path = project_root / "bin" / "Release" / "net8.0" / "FixtureInterfaceDeclarationLibrary.dll"
+        closure_root = fixture_root / "closure"
+        emit_root = fixture_root / "emit-native-reference"
+
+        try:
+            project_root.mkdir(parents=True, exist_ok=False)
+            project_path.write_text(
+                (
+                    '<Project Sdk="Microsoft.NET.Sdk">\n'
+                    "  <PropertyGroup>\n"
+                    "    <TargetFramework>net8.0</TargetFramework>\n"
+                    "    <ImplicitUsings>disable</ImplicitUsings>\n"
+                    "    <Nullable>disable</Nullable>\n"
+                    "  </PropertyGroup>\n"
+                    "</Project>\n"
+                ),
+                encoding="utf-8",
+            )
+            source_path.write_text(
+                (
+                    "namespace FixtureInterfaceDeclarationLibrary;\n\n"
+                    "public interface IMessageBanner\n"
+                    "{\n"
+                    "    string Render();\n"
+                    "}\n\n"
+                    "public sealed class MessageBanner : IMessageBanner\n"
+                    "{\n"
+                    "    private readonly string _value;\n\n"
+                    "    public MessageBanner(string value)\n"
+                    "    {\n"
+                    "        _value = value;\n"
+                    "    }\n\n"
+                    "    public string Render()\n"
+                    "    {\n"
+                    '        return string.Concat(string.Concat("interface-declaration:", _value), "|ok");\n'
+                    "    }\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(project_path),
+                    "-c",
+                    "Release",
+                ],
+                cwd=REPO_ROOT,
+            )
+            self.assertTrue(dll_path.is_file(), msg=f"missing interface declaration library dll: {dll_path}")
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    str(dll_path),
+                    str(closure_root),
+                    "--full-assembly-closure",
+                ],
+                cwd=REPO_ROOT,
+            )
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    "emit-native-reference",
+                    str(closure_root),
+                    str(emit_root),
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            generated_cpp = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.generated.cpp"
+            ).read_text(encoding="utf-8")
+            coverage_report = load_json(
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.coverage.json"
+            )
+
+            self.assertIn(
+                "FixtureInterfaceDeclarationLibrary/MessageBanner::.ctor:System.Void(System.String)",
+                generated_cpp,
+            )
+            self.assertIn(
+                "FixtureInterfaceDeclarationLibrary/MessageBanner::Render:System.String()",
+                generated_cpp,
+            )
+            self.assertEqual(3, coverage_report["requestedMethodCount"])
+            self.assertEqual(2, coverage_report["emittedMethodCount"])
+            self.assertEqual(0, coverage_report["uncoveredMethodCount"])
+            self.assertEqual([], coverage_report["uncoveredMethodSubjectIds"])
+            self.assertEqual([], coverage_report["uncoveredMethods"])
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
 
     def test_emit_native_aot_generates_auditable_translation_unit(self) -> None:
         self._ensure_bundle_generated()
@@ -251,26 +870,45 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
         generated_cpp = (
             self.native_aot_output_root
             / "generated"
-            / "native-aot.generated.cpp"
+            / "audit"
+            / "native-aot.audit.generated.cpp"
         ).read_text(encoding="utf-8")
-        generated_page_cpp = (
+        generated_page_json = load_json(
             self.native_aot_output_root
             / "generated"
             / "audit"
-            / "native-aot.methods.page-0001.cpp"
-        ).read_text(encoding="utf-8")
+            / "native-aot.audit.page-0001.json"
+        )
         manifest = load_json(self.native_aot_output_root / "native-aot.manifest.json")
 
         self.assertIn("assembly-full-closure-audit", generated_cpp)
+        self.assertIn('extern "C" int RunNativeAotAudit', generated_cpp)
         self.assertIn("translation_unit_method_count = 1", generated_cpp)
         self.assertIn("translation_unit_page_count = 1", generated_cpp)
-        self.assertIn("GoldenSimpleLib.Library/Greeter::BuildMessage:System.String()", generated_page_cpp)
+        self.assertNotIn("GoldenSimpleLib.Library/Greeter::BuildMessage:System.String()", generated_cpp)
+        self.assertEqual("assemblyFullClosureAuditPage", generated_page_json["artifactKind"])
+        self.assertEqual("GoldenSimpleLib.Library", generated_page_json["assemblyName"])
+        self.assertEqual("assembly-full-closure-audit", generated_page_json["planKind"])
+        self.assertEqual(1, generated_page_json["pageNumber"])
+        self.assertEqual(1, generated_page_json["methodCount"])
+        self.assertEqual(
+            ["GoldenSimpleLib.Library/Greeter::BuildMessage:System.String()"],
+            generated_page_json["methodSubjectIds"],
+        )
         self.assertEqual("GoldenSimpleLib.Library", manifest["assemblyName"])
         self.assertEqual("", manifest["entrySubjectId"])
         self.assertEqual(1024, manifest["translationUnitPageSize"])
         self.assertEqual(1, manifest["translationUnitPageCount"])
         self.assertEqual(1, len(manifest["translationUnitPages"]))
-        self.assertEqual("generated/audit/native-aot.methods.page-0001.cpp", manifest["translationUnitPages"][0]["path"])
+        self.assertEqual("generated/audit/native-aot.audit.page-0001.json", manifest["translationUnitPages"][0]["path"])
+        self.assertEqual(
+            [
+                {"kind": "generatedTranslationUnit", "path": "generated/audit/native-aot.audit.generated.cpp"},
+                {"kind": "auditInventoryPage", "path": "generated/audit/native-aot.audit.page-0001.json"},
+                {"kind": "codegenMetrics", "path": "native-aot.codegen-metrics.json"},
+            ],
+            manifest["generatedArtifacts"],
+        )
 
     def test_native_reference_runtime_skeleton_shape_is_implemented_for_assembly_bound_plan(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")

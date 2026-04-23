@@ -10,6 +10,8 @@ public sealed record LoadedWorldModel
 
     public required string EntryPointSubjectId { get; init; }
 
+    public GenericInstantiationDemandGraphModel? GenericInstantiationDemandGraph { get; init; }
+
     public required IReadOnlyList<LoadedAssemblyModel> Assemblies { get; init; }
 
     public required IReadOnlyList<ManagedTypeModel> Types { get; init; }

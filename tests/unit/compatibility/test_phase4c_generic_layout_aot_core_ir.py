@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -96,35 +98,80 @@ class Phase4CGenericLayoutAotCoreIrTests(unittest.TestCase):
         artifact_path = self.output_root / "aot-core-ir.json"
         artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
 
-        generic_echo = next(
-            method
-            for method in artifact["methods"]
-            if method["subjectId"] == "CoreRuntimeFeatures/GenericEcho::Echo<System.Int32>(System.Int32)"
+        generic_echo = find_method_by_subject_id(
+            artifact["methods"],
+            "CoreRuntimeFeatures/GenericEcho::Echo<System.Int32>(System.Int32)",
         )
-        self.assertEqual(2, generic_echo["genericContext"]["contextKind"])
+        self.assertEqual(2, generic_echo["runtimeGenericContext"]["instantiationKey"]["contextKind"])
         self.assertEqual(
-            "CoreRuntimeFeatures/GenericEcho::Echo(!!0)",
-            generic_echo["genericContext"]["definitionSubjectId"],
+            "CoreRuntimeFeatures/GenericEcho::Echo`1:!!0(!!0)",
+            generic_echo["runtimeGenericContext"]["instantiationKey"]["definitionSubjectId"],
         )
-        self.assertEqual([], generic_echo["genericContext"]["typeArguments"])
-        self.assertEqual(["System.Int32"], generic_echo["genericContext"]["methodArguments"])
+        self.assertEqual([], generic_echo["runtimeGenericContext"]["instantiationKey"]["typeArguments"])
+        self.assertEqual(
+            ["System.Int32"],
+            generic_echo["runtimeGenericContext"]["instantiationKey"]["methodArguments"],
+        )
+        self.assertEqual(3, generic_echo["runtimeGenericContext"]["supportKindCode"])
+        self.assertEqual(2, generic_echo["runtimeGenericContext"]["specializationKindCode"])
+        self.assertTrue(generic_echo["runtimeGenericContext"]["statusReasonCode"].startswith("loader-demand:"))
+        self.assertTrue(generic_echo["runtimeGenericContext"]["sharedGenericBodyId"]["value"])
+        self.assertTrue(generic_echo["runtimeGenericContext"]["instantiationStubId"]["value"])
+        self.assertEqual(
+            generic_echo["runtimeGenericContext"]["instantiationKey"]["definitionSubjectId"],
+            generic_echo["openDefinitionSubjectId"],
+        )
+        self.assertEqual(
+            generic_echo["runtimeGenericContext"]["sharedGenericBodyId"],
+            generic_echo["sharedGenericBodyId"],
+        )
+        self.assertEqual(
+            generic_echo["runtimeGenericContext"]["instantiationStubId"],
+            generic_echo["instantiationStubId"],
+        )
+        self.assertEqual(
+            "CoreRuntimeFeatures/GenericEcho::Echo<System.Int32>:System.Int32(System.Int32)",
+            generic_echo["genericDiagnostic"]["subjectId"],
+        )
+        self.assertEqual(
+            "CoreRuntimeFeatures/GenericEcho::Echo<System.Int32>(System.Int32)",
+            generic_echo["genericDiagnostic"]["displaySubjectId"],
+        )
 
-        entry_method = next(method for method in artifact["methods"] if method["subjectId"] == ENTRY_SUBJECT_ID)
+        entry_method = find_method_by_subject_id(artifact["methods"], ENTRY_SUBJECT_ID)
 
         generic_echo_call = next(
             instruction
             for instruction in entry_method["instructions"]
-            if instruction.get("targetReference", {}).get("subjectId")
+            if instruction.get("targetReference", {}).get("genericDiagnostic", {}).get("displaySubjectId")
             == "CoreRuntimeFeatures/GenericEcho::Echo<System.Int32>(System.Int32)"
         )
-        self.assertEqual(2, generic_echo_call["targetReference"]["genericContext"]["contextKind"])
         self.assertEqual(
-            "CoreRuntimeFeatures/GenericEcho::Echo(!!0)",
-            generic_echo_call["targetReference"]["genericContext"]["definitionSubjectId"],
+            2,
+            generic_echo_call["targetReference"]["runtimeGenericContext"]["instantiationKey"]["contextKind"],
+        )
+        self.assertEqual(
+            "CoreRuntimeFeatures/GenericEcho::Echo`1:!!0(!!0)",
+            generic_echo_call["targetReference"]["runtimeGenericContext"]["instantiationKey"]["definitionSubjectId"],
+        )
+        self.assertEqual(
+            generic_echo_call["targetReference"]["runtimeGenericContext"]["instantiationKey"]["definitionSubjectId"],
+            generic_echo_call["targetReference"]["openDefinitionSubjectId"],
+        )
+        self.assertEqual(
+            generic_echo_call["targetReference"]["runtimeGenericContext"]["sharedGenericBodyId"],
+            generic_echo_call["targetReference"]["sharedGenericBodyId"],
+        )
+        self.assertEqual(
+            generic_echo_call["targetReference"]["runtimeGenericContext"]["instantiationStubId"],
+            generic_echo_call["targetReference"]["instantiationStubId"],
         )
         self.assertEqual(
             ["System.Int32"],
-            generic_echo_call["targetReference"]["genericContext"]["methodArguments"],
+            generic_echo_call["targetReference"]["runtimeGenericContext"]["instantiationKey"]["methodArguments"],
+        )
+        self.assertTrue(
+            generic_echo_call["targetReference"]["runtimeGenericContext"]["statusReasonCode"].startswith("loader-demand:")
         )
 
         generic_box_newobj = next(
@@ -132,32 +179,74 @@ class Phase4CGenericLayoutAotCoreIrTests(unittest.TestCase):
             for instruction in entry_method["instructions"]
             if instruction.get("targetReference", {}).get("subjectId") == "CoreRuntimeFeatures/GenericBox<System.Int32>"
         )
-        self.assertEqual(1, generic_box_newobj["targetReference"]["genericContext"]["contextKind"])
+        self.assertEqual(
+            1,
+            generic_box_newobj["targetReference"]["runtimeGenericContext"]["instantiationKey"]["contextKind"],
+        )
         self.assertEqual(
             "CoreRuntimeFeatures/GenericBox`1",
-            generic_box_newobj["targetReference"]["genericContext"]["definitionSubjectId"],
+            generic_box_newobj["targetReference"]["runtimeGenericContext"]["instantiationKey"]["definitionSubjectId"],
         )
         self.assertEqual(
             ["System.Int32"],
-            generic_box_newobj["targetReference"]["genericContext"]["typeArguments"],
+            generic_box_newobj["targetReference"]["runtimeGenericContext"]["instantiationKey"]["typeArguments"],
         )
-        self.assertEqual([], generic_box_newobj["targetReference"]["genericContext"]["methodArguments"])
+        self.assertEqual(
+            generic_box_newobj["targetReference"]["runtimeGenericContext"]["instantiationKey"]["definitionSubjectId"],
+            generic_box_newobj["targetReference"]["openDefinitionSubjectId"],
+        )
+        self.assertEqual(
+            generic_box_newobj["targetReference"]["runtimeGenericContext"]["sharedGenericBodyId"],
+            generic_box_newobj["targetReference"]["sharedGenericBodyId"],
+        )
+        self.assertEqual(
+            generic_box_newobj["targetReference"]["runtimeGenericContext"]["instantiationStubId"],
+            generic_box_newobj["targetReference"]["instantiationStubId"],
+        )
+        self.assertTrue(
+            generic_box_newobj["targetReference"]["runtimeGenericContext"]["statusReasonCode"].startswith("loader-demand:")
+        )
+        self.assertEqual(
+            [],
+            generic_box_newobj["targetReference"]["runtimeGenericContext"]["instantiationKey"]["methodArguments"],
+        )
 
         generic_box_field = next(
             instruction
             for instruction in entry_method["instructions"]
             if instruction.get("targetReference", {}).get("subjectId") == "CoreRuntimeFeatures/GenericBox<System.Int32>::Value"
         )
-        self.assertEqual(1, generic_box_field["targetReference"]["genericContext"]["contextKind"])
+        self.assertEqual(
+            1,
+            generic_box_field["targetReference"]["runtimeGenericContext"]["instantiationKey"]["contextKind"],
+        )
         self.assertEqual(
             "CoreRuntimeFeatures/GenericBox`1::Value",
-            generic_box_field["targetReference"]["genericContext"]["definitionSubjectId"],
+            generic_box_field["targetReference"]["runtimeGenericContext"]["instantiationKey"]["definitionSubjectId"],
         )
         self.assertEqual(
             ["System.Int32"],
-            generic_box_field["targetReference"]["genericContext"]["typeArguments"],
+            generic_box_field["targetReference"]["runtimeGenericContext"]["instantiationKey"]["typeArguments"],
         )
-        self.assertEqual([], generic_box_field["targetReference"]["genericContext"]["methodArguments"])
+        self.assertEqual(
+            generic_box_field["targetReference"]["runtimeGenericContext"]["instantiationKey"]["definitionSubjectId"],
+            generic_box_field["targetReference"]["openDefinitionSubjectId"],
+        )
+        self.assertEqual(
+            generic_box_field["targetReference"]["runtimeGenericContext"]["sharedGenericBodyId"],
+            generic_box_field["targetReference"]["sharedGenericBodyId"],
+        )
+        self.assertEqual(
+            generic_box_field["targetReference"]["runtimeGenericContext"]["instantiationStubId"],
+            generic_box_field["targetReference"]["instantiationStubId"],
+        )
+        self.assertTrue(
+            generic_box_field["targetReference"]["runtimeGenericContext"]["statusReasonCode"].startswith("loader-demand:")
+        )
+        self.assertEqual(
+            [],
+            generic_box_field["targetReference"]["runtimeGenericContext"]["instantiationKey"]["methodArguments"],
+        )
 
 
 if __name__ == "__main__":

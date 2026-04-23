@@ -13,6 +13,9 @@ except ImportError:
     from testing import release_evidence_contracts as release_evidence_contracts_module
 
 
+DEPRECATED_RUNTIME_SKELETON_RESERVED_STUB_COUNT = 0
+
+
 def _copy_execution_context(selection: dict[str, Any]) -> dict[str, Any]:
     execution_context = dict(selection.get("executionContext") or {})
     return {
@@ -25,6 +28,7 @@ def _copy_execution_context(selection: dict[str, Any]) -> dict[str, Any]:
 
 def _normalize_stage_result(stage_result: dict[str, Any]) -> dict[str, Any]:
     performance = dict(dict(stage_result.get("details") or {}).get("performance") or {})
+    codegen_performance = dict(dict(stage_result.get("details") or {}).get("codegenPerformance") or {})
     engine_contract_summary = dict(dict(stage_result.get("details") or {}).get("engineContractSummary") or {})
     engine_emission_summary = dict(dict(stage_result.get("details") or {}).get("engineEmissionSummary") or {})
     engine_observation_summary = dict(dict(stage_result.get("details") or {}).get("engineObservationSummary") or {})
@@ -41,6 +45,17 @@ def _normalize_stage_result(stage_result: dict[str, Any]) -> dict[str, Any]:
             "runtimeEvidence": dict(performance.get("runtimeEvidence") or {}),
             "collectorDetails": dict(performance.get("collectorDetails") or {}),
             "collectorEvidencePaths": list(performance.get("collectorEvidencePaths") or []),
+        }
+    if codegen_performance:
+        details["codegenPerformance"] = {
+            "metrics": dict(codegen_performance.get("metrics") or {}),
+            "baselinePath": codegen_performance.get("baselinePath"),
+            "baseline": dict(codegen_performance.get("baseline") or {}),
+            "baselineUpdated": bool(codegen_performance.get("baselineUpdated", False)),
+            "regressionStatus": str(codegen_performance.get("regressionStatus") or "no-baseline"),
+            "regressions": list(codegen_performance.get("regressions") or []),
+            "metricsArtifactPath": codegen_performance.get("metricsArtifactPath"),
+            "baselineComparePath": codegen_performance.get("baselineComparePath"),
         }
     if engine_contract_summary:
         details["engineContractSummary"] = engine_contract_summary
@@ -181,6 +196,14 @@ def build_matrix_report(
         ),
         {},
     )
+    codegen_performance = next(
+        (
+            dict(dict(stage_result.get("details") or {}).get("codegenPerformance") or {})
+            for stage_result in normalized_stage_results
+            if dict(stage_result.get("details") or {}).get("codegenPerformance")
+        ),
+        {},
+    )
     engine_contract_summary = _first_stage_detail(normalized_stage_results, "engineContractSummary")
     engine_emission_summary = _first_stage_detail(normalized_stage_results, "engineEmissionSummary")
     engine_observation_summary = _first_stage_detail(normalized_stage_results, "engineObservationSummary")
@@ -217,6 +240,18 @@ def build_matrix_report(
         report["performanceEvidence"] = dict(performance.get("runtimeEvidence") or {})
         report["releaseReportPaths"] = []
         report["reportArtifacts"] = []
+    if codegen_performance:
+        report["codegenPerformance"] = codegen_performance
+        report["codegenMetrics"] = dict(codegen_performance.get("metrics") or {})
+        report["codegenBaseline"] = {
+            "path": codegen_performance.get("baselinePath"),
+            "metrics": dict(codegen_performance.get("baseline") or {}),
+            "updated": bool(codegen_performance.get("baselineUpdated", False)),
+            "regressions": list(codegen_performance.get("regressions") or []),
+        }
+        report["codegenRegressionStatus"] = str(codegen_performance.get("regressionStatus") or "no-baseline")
+        report["codegenReportPaths"] = []
+        report.setdefault("reportArtifacts", [])
     if engine_contract_summary:
         report["engineContractSummary"] = engine_contract_summary
     if engine_emission_summary:
@@ -296,8 +331,12 @@ def build_subject_summary(
                 "reportPath": str(matrix_report_paths[matrix_id]),
                 "metrics": dict(report.get("metrics") or {}),
                 "regressionStatus": report.get("regressionStatus"),
+                "codegenMetrics": dict(report.get("codegenMetrics") or {}),
+                "codegenRegressionStatus": report.get("codegenRegressionStatus"),
+                "codegenReportPaths": list(report.get("codegenReportPaths") or []),
                 "releaseReportPaths": list(report.get("releaseReportPaths") or []),
                 "reportArtifacts": list(report.get("reportArtifacts") or []),
+                "matrixProofLinkage": dict(report.get("matrixProofLinkage") or {}),
             }
         )
 
@@ -358,6 +397,16 @@ def _read_json_document(repo_root: Path, relative_path: str) -> dict[str, Any]:
     return dict(payload) if isinstance(payload, dict) else {}
 
 
+def _read_json_file(path: Path) -> dict[str, Any]:
+    if not path.is_file():
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return dict(payload) if isinstance(payload, dict) else {}
+
+
 def _stage_manifest_path(matrix_report: dict[str, Any], stage_id: str) -> str:
     for stage_result in list(matrix_report.get("stageResults") or []):
         if str(dict(stage_result).get("stageId") or "") == stage_id:
@@ -372,25 +421,232 @@ def _relative_artifact_path(repo_root: Path, path: Path) -> str:
         return path.as_posix()
 
 
-def _count_runtime_skeleton_reserved_stubs(repo_root: Path, generated_source_paths: list[str]) -> int:
-    count = 0
-    for source_path_text in generated_source_paths:
-        normalized_path = str(source_path_text or "").replace("\\", "/")
-        if not normalized_path:
+def _generated_artifact_path(manifest: dict[str, Any], artifact_kind: str) -> str:
+    for artifact in list(manifest.get("generatedArtifacts") or []):
+        if not isinstance(artifact, dict):
             continue
-        if "runtime-skeleton" not in normalized_path and "/runtime/" not in normalized_path:
+        if str(artifact.get("kind") or "").strip() != artifact_kind:
             continue
+        artifact_path = str(artifact.get("path") or "").strip()
+        if artifact_path:
+            return artifact_path
+    return ""
 
-        source_path = repo_root / normalized_path
-        if not source_path.is_file():
-            continue
 
-        try:
-            source_text = source_path.read_text(encoding="utf-8")
-        except OSError:
+def _resolve_manifest_relative_artifact_path(
+    repo_root: Path,
+    *,
+    manifest_path: str,
+    artifact_path: str,
+) -> str:
+    normalized_artifact_path = str(artifact_path or "").strip()
+    if not normalized_artifact_path:
+        return ""
+
+    direct_path = repo_root / normalized_artifact_path
+    if direct_path.is_file():
+        return normalized_artifact_path
+
+    normalized_manifest_path = str(manifest_path or "").strip()
+    if not normalized_manifest_path:
+        return ""
+
+    resolved_path = (repo_root / normalized_manifest_path).parent / normalized_artifact_path
+    if not resolved_path.is_file():
+        return ""
+    return _relative_artifact_path(repo_root, resolved_path)
+
+
+def _load_runtime_skeleton_coverage_report(
+    repo_root: Path,
+    *,
+    native_reference_manifest_path: str,
+    native_reference_manifest: dict[str, Any],
+) -> tuple[str, dict[str, Any]]:
+    coverage_report_artifact_path = _generated_artifact_path(
+        native_reference_manifest,
+        "runtimeSkeletonCoverageReport",
+    )
+    coverage_report_path = _resolve_manifest_relative_artifact_path(
+        repo_root,
+        manifest_path=native_reference_manifest_path,
+        artifact_path=coverage_report_artifact_path,
+    )
+    if not coverage_report_path:
+        return "", {}
+    return coverage_report_path, _read_json_file(repo_root / coverage_report_path)
+
+
+def _ordered_unique_paths(paths: list[str]) -> list[str]:
+    ordered_paths: list[str] = []
+    seen_paths: set[str] = set()
+    for value in paths:
+        normalized_path = str(value or "").strip()
+        if not normalized_path or normalized_path in seen_paths:
             continue
-        count += source_text.count("Stub reserved for ")
-    return count
+        seen_paths.add(normalized_path)
+        ordered_paths.append(normalized_path)
+    return ordered_paths
+
+
+def _first_generated_manifest_path(matrix_report: dict[str, Any]) -> str:
+    for stage_result in list(matrix_report.get("stageResults") or []):
+        stage_result_dict = dict(stage_result)
+        if str(stage_result_dict.get("bucket") or "") != "generated":
+            continue
+        manifest_path = str(stage_result_dict.get("manifestPath") or "").strip()
+        if manifest_path:
+            return manifest_path
+    return ""
+
+
+def _load_generic_capability_matrix_payload(
+    repo_root: Path,
+    matrix_report: dict[str, Any],
+) -> tuple[str, str, str, dict[str, Any]]:
+    generated_manifest_path = _first_generated_manifest_path(matrix_report)
+    if not generated_manifest_path:
+        return "", "", "", {}
+
+    generated_manifest = _read_json_document(repo_root, generated_manifest_path)
+    analysis_manifest_path = str(generated_manifest.get("analysisManifestPath") or "").strip()
+    if not analysis_manifest_path:
+        return generated_manifest_path, "", "", {}
+
+    analysis_manifest = _read_json_document(repo_root, analysis_manifest_path)
+    artifacts = dict(analysis_manifest.get("artifacts") or {})
+    generic_capability_matrix_path = str(artifacts.get("genericCapabilityMatrixPath") or "").strip()
+    if not generic_capability_matrix_path:
+        return generated_manifest_path, analysis_manifest_path, "", {}
+
+    return (
+        generated_manifest_path,
+        analysis_manifest_path,
+        generic_capability_matrix_path,
+        _read_json_document(repo_root, generic_capability_matrix_path),
+    )
+
+
+def _collect_matrix_proof_artifact_paths(matrix_report: dict[str, Any]) -> list[str]:
+    candidate_paths: list[str] = []
+
+    native_hotupdate_audit = dict(matrix_report.get("nativeHotupdateAudit") or {})
+    audit_artifact_path = str(native_hotupdate_audit.get("artifactPath") or "").strip()
+    if audit_artifact_path:
+        candidate_paths.append(audit_artifact_path)
+
+    engine_proof_summary = dict(matrix_report.get("engineProofSummary") or {})
+    for evidence_result in list(engine_proof_summary.get("evidenceResults") or []):
+        candidate_paths.append(str(dict(evidence_result).get("primaryPath") or ""))
+
+    for stage_result in list(matrix_report.get("stageResults") or []):
+        stage_result_dict = dict(stage_result)
+        if str(stage_result_dict.get("bucket") or "") not in {"generated", "build", "runtime"}:
+            continue
+        candidate_paths.extend(
+            str(value)
+            for value in list(stage_result_dict.get("primaryEvidencePaths") or [])
+            if str(value)
+        )
+        candidate_paths.extend(
+            str(value)
+            for value in list(stage_result_dict.get("reportPaths") or [])
+            if str(value)
+        )
+
+    return _ordered_unique_paths(candidate_paths)
+
+
+def _infer_matrix_proof_kind(matrix_report: dict[str, Any]) -> str:
+    engine_proof_summary = dict(matrix_report.get("engineProofSummary") or {})
+    proof_kind = str(engine_proof_summary.get("proofKind") or "").strip()
+    if proof_kind:
+        return proof_kind
+
+    pipeline_id = str(dict(matrix_report.get("selection") or {}).get("pipelineId") or "").strip()
+    if pipeline_id == "native-hotupdate-proof-output":
+        return "hotupdate-proof"
+
+    validation_kind = str(matrix_report.get("validationKind") or "").strip()
+    if validation_kind == "proof":
+        return "native-proof"
+
+    if pipeline_id:
+        return pipeline_id
+
+    return "proof"
+
+
+def _build_generic_matrix_proof_linkage_payload(
+    repo_root: Path,
+    *,
+    matrix_report_path: str,
+    matrix_report: dict[str, Any],
+) -> tuple[str, dict[str, Any]]:
+    (
+        generated_manifest_path,
+        analysis_manifest_path,
+        generic_capability_matrix_path,
+        generic_capability_matrix,
+    ) = _load_generic_capability_matrix_payload(repo_root, matrix_report)
+    if not generic_capability_matrix_path or not generic_capability_matrix:
+        return "", {}
+
+    boundary_cases = [
+        dict(boundary_case)
+        for boundary_case in list(generic_capability_matrix.get("boundaryCases") or [])
+        if isinstance(boundary_case, dict)
+    ]
+    if not boundary_cases:
+        return "", {}
+
+    selection = dict(matrix_report.get("selection") or {})
+    pipeline_id = str(selection.get("pipelineId") or "")
+    proof_kind = _infer_matrix_proof_kind(matrix_report)
+    proof_artifact_paths = _collect_matrix_proof_artifact_paths(matrix_report)
+    boundary_kinds = sorted(
+        {
+            str(boundary_case.get("boundaryKind") or "").strip()
+            for boundary_case in boundary_cases
+            if str(boundary_case.get("boundaryKind") or "").strip()
+        }
+    )
+
+    return (
+        generic_capability_matrix_path,
+        {
+            "reportVersion": "v1",
+            "artifactKind": "generic-matrix-proof-linkage",
+            "subjectId": str(matrix_report.get("subjectId") or ""),
+            "matrixId": str(matrix_report.get("matrixId") or ""),
+            "goalId": str(matrix_report.get("goalId") or ""),
+            "status": str(matrix_report.get("status") or ""),
+            "pipelineId": pipeline_id,
+            "proofKind": proof_kind,
+            "matrixReportPath": matrix_report_path,
+            "generatedManifestPath": generated_manifest_path,
+            "analysisManifestPath": analysis_manifest_path,
+            "genericCapabilityMatrixPath": generic_capability_matrix_path,
+            "entrySelection": dict(selection.get("entrySelection") or {}),
+            "proofArtifactPaths": proof_artifact_paths,
+            "boundaryCaseCount": len(boundary_cases),
+            "boundaryKinds": boundary_kinds,
+            "boundaryCases": [
+                {
+                    "boundaryKind": str(boundary_case.get("boundaryKind") or ""),
+                    "sourceMethodSubjectId": str(boundary_case.get("sourceMethodSubjectId") or ""),
+                    "ilOffset": int(boundary_case.get("ilOffset") or 0),
+                    "targetSubjectId": str(boundary_case.get("targetSubjectId") or ""),
+                    "evidenceKind": str(boundary_case.get("evidenceKind") or ""),
+                    "status": str(boundary_case.get("status") or ""),
+                    "coverageStatus": "covered-by-matrix-run",
+                    "proofKind": proof_kind,
+                    "proofArtifactPaths": proof_artifact_paths,
+                }
+                for boundary_case in boundary_cases
+            ],
+        },
+    )
 
 
 def _native_hotupdate_audit_payload(repo_root: Path, matrix_report: dict[str, Any]) -> dict[str, Any]:
@@ -409,10 +665,14 @@ def _native_hotupdate_audit_payload(repo_root: Path, matrix_report: dict[str, An
     native_reference_plan_path = str(generated_manifest.get("nativeReferencePlanPath") or "").strip()
     native_reference_plan = _read_json_document(repo_root, native_reference_plan_path)
     generated_source_paths = list(generated_manifest.get("generatedSourcePaths") or [])
-    runtime_skeleton_reserved_stub_count = _count_runtime_skeleton_reserved_stubs(
+    runtime_skeleton_coverage_report_path, runtime_skeleton_coverage_report = _load_runtime_skeleton_coverage_report(
         repo_root,
-        generated_source_paths,
+        native_reference_manifest_path=native_reference_manifest_path,
+        native_reference_manifest=native_reference_manifest,
     )
+    runtime_skeleton_uncovered_method_count = runtime_skeleton_coverage_report.get("uncoveredMethodCount")
+    if not isinstance(runtime_skeleton_uncovered_method_count, int) or runtime_skeleton_uncovered_method_count < 0:
+        runtime_skeleton_uncovered_method_count = 0
 
     return {
         "reportVersion": "v1",
@@ -448,7 +708,9 @@ def _native_hotupdate_audit_payload(repo_root: Path, matrix_report: dict[str, An
             "translationUnitPageCount": native_reference_manifest.get("translationUnitPageCount"),
             "auditStatus": str(native_reference_plan.get("auditStatus") or ""),
             "auditMessage": str(native_reference_plan.get("auditMessage") or ""),
-            "runtimeSkeletonReservedStubCount": runtime_skeleton_reserved_stub_count,
+            "runtimeSkeletonReservedStubCount": DEPRECATED_RUNTIME_SKELETON_RESERVED_STUB_COUNT,
+            "runtimeSkeletonCoverageReportPath": runtime_skeleton_coverage_report_path,
+            "runtimeSkeletonUncoveredMethodCount": runtime_skeleton_uncovered_method_count,
         },
         "nativeBuild": {
             "manifestPath": build_manifest_path,
@@ -488,11 +750,14 @@ def materialize_matrix_report_artifacts(
     matrix_report: dict[str, Any],
 ) -> list[str]:
     performance = dict(matrix_report.get("performance") or {})
+    codegen_performance = dict(matrix_report.get("codegenPerformance") or {})
     matrix_report["releaseReportPaths"] = list(matrix_report.get("releaseReportPaths") or [])
     matrix_report["reportArtifacts"] = list(matrix_report.get("reportArtifacts") or [])
+    matrix_report["codegenReportPaths"] = list(matrix_report.get("codegenReportPaths") or [])
     pipeline_id = str(dict(matrix_report.get("selection") or {}).get("pipelineId") or "")
+    matrix_root = Path(matrix_report_path).parent.parent
+    report_root = matrix_root / "pipeline-report" / "report"
     if pipeline_id == "native-hotupdate-proof-output":
-        matrix_root = Path(matrix_report_path).parent.parent
         audit_path = matrix_root / "pipeline-report" / "report" / "native-hotupdate-audit.json"
         audit_payload = _native_hotupdate_audit_payload(repo_root, matrix_report)
         _write_json_document(repo_root / audit_path, audit_payload)
@@ -504,13 +769,83 @@ def materialize_matrix_report_artifacts(
             "status": str(audit_payload.get("status") or ""),
             "nativeReferenceManifestPath": audit_payload["nativeGeneration"]["nativeReferenceManifestPath"],
             "nativeReferencePlanKind": audit_payload["nativeGeneration"]["nativeReferencePlanKind"],
+            "preferredAssemblyDispatchSubjectId": audit_payload["nativeGeneration"]["preferredAssemblyDispatchSubjectId"],
             "translationUnitMethodCount": audit_payload["nativeGeneration"]["translationUnitMethodCount"],
+            "translationUnitPageCount": audit_payload["nativeGeneration"]["translationUnitPageCount"],
             "runtimeSkeletonReservedStubCount": audit_payload["nativeGeneration"]["runtimeSkeletonReservedStubCount"],
+            "runtimeSkeletonCoverageReportPath": audit_payload["nativeGeneration"]["runtimeSkeletonCoverageReportPath"],
+            "runtimeSkeletonUncoveredMethodCount": audit_payload["nativeGeneration"]["runtimeSkeletonUncoveredMethodCount"],
             "auditStatus": audit_payload["nativeGeneration"]["auditStatus"],
             "nativeBuildManifestPath": audit_payload["hotupdateRuntime"]["nativeBuildManifestPath"],
             "managedRuntimeAssemblyPath": audit_payload["hotupdateRuntime"]["managedRuntimeAssemblyPath"],
             "stdoutPath": audit_payload["hotupdateRuntime"]["stdoutPath"],
             "outputLines": list(audit_payload["hotupdateRuntime"]["outputLines"]),
+        }
+    if codegen_performance:
+        codegen_summary_path = report_root / "codegen-summary.json"
+        codegen_baseline_compare_path = report_root / "codegen-baseline-compare.json"
+        codegen_metrics_path = report_root / "codegen-metrics.json"
+        _write_json_document(
+            repo_root / codegen_summary_path,
+            {
+                "reportVersion": "v1",
+                "subjectId": matrix_report.get("subjectId"),
+                "matrixId": matrix_report.get("matrixId"),
+                "goalId": matrix_report.get("goalId"),
+                "status": matrix_report.get("status"),
+                "metrics": dict(matrix_report.get("codegenMetrics") or {}),
+                "regressionStatus": matrix_report.get("codegenRegressionStatus"),
+            },
+        )
+        _write_json_document(
+            repo_root / codegen_baseline_compare_path,
+            {
+                "reportVersion": "v1",
+                "subjectId": matrix_report.get("subjectId"),
+                "matrixId": matrix_report.get("matrixId"),
+                "goalId": matrix_report.get("goalId"),
+                "metrics": dict(matrix_report.get("codegenMetrics") or {}),
+                "baseline": dict(matrix_report.get("codegenBaseline") or {}),
+                "regressionStatus": matrix_report.get("codegenRegressionStatus"),
+            },
+        )
+        _write_json_document(
+            repo_root / codegen_metrics_path,
+            {
+                "reportVersion": "v1",
+                "subjectId": matrix_report.get("subjectId"),
+                "matrixId": matrix_report.get("matrixId"),
+                "goalId": matrix_report.get("goalId"),
+                "metrics": dict(matrix_report.get("codegenMetrics") or {}),
+            },
+        )
+        codegen_report_artifacts = [
+            codegen_summary_path.as_posix(),
+            codegen_baseline_compare_path.as_posix(),
+            codegen_metrics_path.as_posix(),
+        ]
+        matrix_report["codegenReportPaths"] = codegen_report_artifacts
+        for artifact_path in codegen_report_artifacts:
+            if artifact_path not in matrix_report["reportArtifacts"]:
+                matrix_report["reportArtifacts"].append(artifact_path)
+    generic_capability_matrix_path, generic_matrix_proof_linkage_payload = _build_generic_matrix_proof_linkage_payload(
+        repo_root,
+        matrix_report_path=matrix_report_path,
+        matrix_report=matrix_report,
+    )
+    if generic_matrix_proof_linkage_payload:
+        linkage_path = report_root / "generic-matrix-proof-linkage.json"
+        _write_json_document(repo_root / linkage_path, generic_matrix_proof_linkage_payload)
+        linkage_path_text = linkage_path.as_posix()
+        if linkage_path_text not in matrix_report["reportArtifacts"]:
+            matrix_report["reportArtifacts"].append(linkage_path_text)
+        matrix_report["matrixProofLinkage"] = {
+            "artifactPath": linkage_path_text,
+            "proofKind": generic_matrix_proof_linkage_payload["proofKind"],
+            "boundaryCaseCount": generic_matrix_proof_linkage_payload["boundaryCaseCount"],
+            "boundaryKinds": list(generic_matrix_proof_linkage_payload["boundaryKinds"]),
+            "proofArtifactCount": len(generic_matrix_proof_linkage_payload["proofArtifactPaths"]),
+            "genericCapabilityMatrixPath": generic_capability_matrix_path,
         }
     if not performance:
         return list(matrix_report["reportArtifacts"])
@@ -526,7 +861,6 @@ def materialize_matrix_report_artifacts(
         matrix_report["reportArtifacts"] = list(matrix_report.get("reportArtifacts") or [])
         return list(matrix_report["reportArtifacts"])
 
-    matrix_root = Path(matrix_report_path).parent.parent
     if is_native_perf:
         report_root = matrix_root / "pipeline-report" / "report"
         summary_path = report_root / "perf-summary.json"
@@ -578,12 +912,14 @@ def materialize_matrix_report_artifacts(
     _write_json_document(repo_root / baseline_compare_path, baseline_compare_payload)
     _write_json_document(repo_root / metrics_path, metrics_payload)
 
-    report_artifacts = [
+    performance_report_artifacts = [
         summary_path.as_posix(),
         baseline_compare_path.as_posix(),
         metrics_path.as_posix(),
     ]
-    matrix_report["reportArtifacts"] = report_artifacts
+    for artifact_path in performance_report_artifacts:
+        if artifact_path not in matrix_report["reportArtifacts"]:
+            matrix_report["reportArtifacts"].append(artifact_path)
     if is_managed_release:
-        matrix_report["releaseReportPaths"] = report_artifacts
-    return report_artifacts
+        matrix_report["releaseReportPaths"] = performance_report_artifacts
+    return list(matrix_report["reportArtifacts"])

@@ -428,6 +428,36 @@ public sealed partial class NativeReferenceLoweringPlanner
             return ManagedDispatchVirtualInstanceMessageMinimal;
         }
 
+        if (MatchesArrayCopyReferenceArrayCandidate(linkedWorld, entryCapabilities))
+        {
+            RequireDependencyReason(
+                dependencyReasons,
+                "stdout-path",
+                ManagedArraysCopyReferenceArrayMinimal,
+                linkedWorld.EntryPointSubjectId);
+            return ManagedArraysCopyReferenceArrayMinimal;
+        }
+
+        if (MatchesArrayClearReferenceArrayCandidate(linkedWorld, entryCapabilities))
+        {
+            RequireDependencyReason(
+                dependencyReasons,
+                "stdout-path",
+                ManagedArraysClearReferenceArrayMinimal,
+                linkedWorld.EntryPointSubjectId);
+            return ManagedArraysClearReferenceArrayMinimal;
+        }
+
+        if (MatchesArrayReverseReferenceArrayCandidate(linkedWorld, entryCapabilities))
+        {
+            RequireDependencyReason(
+                dependencyReasons,
+                "stdout-path",
+                ManagedArraysReverseReferenceArrayMinimal,
+                linkedWorld.EntryPointSubjectId);
+            return ManagedArraysReverseReferenceArrayMinimal;
+        }
+
         if (MatchesArrayBoxingReferenceArrayCandidate(linkedWorld, entryCapabilities))
         {
             RequireDependencyReason(
@@ -626,6 +656,57 @@ public sealed partial class NativeReferenceLoweringPlanner
         return entryInstructions is not null && IsArrayBoxingReferenceArrayEntryPointShape(entryInstructions);
     }
 
+    private static bool MatchesArrayCopyReferenceArrayCandidate(
+        LinkedWorldModel linkedWorld,
+        IReadOnlyList<string> entryCapabilities)
+    {
+        if (!entryCapabilities.Contains("requires-console-string-output", StringComparer.Ordinal) ||
+            !entryCapabilities.Contains("requires-array-allocation", StringComparer.Ordinal) ||
+            entryCapabilities.Contains("requires-boxing", StringComparer.Ordinal))
+        {
+            return false;
+        }
+
+        var entryMethod = linkedWorld.Methods.FirstOrDefault(method =>
+            string.Equals(method.SubjectId, linkedWorld.EntryPointSubjectId, StringComparison.Ordinal));
+        var entryInstructions = TryGetSingleBlockInstructions(entryMethod);
+        return entryInstructions is not null && IsArrayCopyReferenceArrayEntryPointShape(entryInstructions);
+    }
+
+    private static bool MatchesArrayReverseReferenceArrayCandidate(
+        LinkedWorldModel linkedWorld,
+        IReadOnlyList<string> entryCapabilities)
+    {
+        if (!entryCapabilities.Contains("requires-console-string-output", StringComparer.Ordinal) ||
+            !entryCapabilities.Contains("requires-array-allocation", StringComparer.Ordinal) ||
+            entryCapabilities.Contains("requires-boxing", StringComparer.Ordinal))
+        {
+            return false;
+        }
+
+        var entryMethod = linkedWorld.Methods.FirstOrDefault(method =>
+            string.Equals(method.SubjectId, linkedWorld.EntryPointSubjectId, StringComparison.Ordinal));
+        var entryInstructions = TryGetSingleBlockInstructions(entryMethod);
+        return entryInstructions is not null && IsArrayReverseReferenceArrayEntryPointShape(entryInstructions);
+    }
+
+    private static bool MatchesArrayClearReferenceArrayCandidate(
+        LinkedWorldModel linkedWorld,
+        IReadOnlyList<string> entryCapabilities)
+    {
+        if (!entryCapabilities.Contains("requires-console-string-output", StringComparer.Ordinal) ||
+            !entryCapabilities.Contains("requires-array-allocation", StringComparer.Ordinal) ||
+            entryCapabilities.Contains("requires-boxing", StringComparer.Ordinal))
+        {
+            return false;
+        }
+
+        var entryMethod = linkedWorld.Methods.FirstOrDefault(method =>
+            string.Equals(method.SubjectId, linkedWorld.EntryPointSubjectId, StringComparison.Ordinal));
+        var entryInstructions = TryGetSingleBlockInstructions(entryMethod);
+        return entryInstructions is not null && IsArrayClearReferenceArrayEntryPointShape(entryInstructions);
+    }
+
     private static bool MatchesCapturedStateInstanceMessageCandidate(
         IReadOnlyDictionary<string, MethodShapeModel> methodShapes,
         IReadOnlySet<string> worldCapabilities,
@@ -663,6 +744,9 @@ public sealed partial class NativeReferenceLoweringPlanner
             "dispatchVirtualInstanceMessage" => ManagedDispatchVirtualInstanceMessageMinimal,
             "constructorThenInstanceCall" => ManagedObjectCapturedStateInstanceMessageMinimal,
             "staticCallCtorGetter" => ManagedGenericStaticForwarderCapturedGetterMinimal,
+            "arrayReverseReferenceArray" => ManagedArraysReverseReferenceArrayMinimal,
+            "arrayClearReferenceArray" => ManagedArraysClearReferenceArrayMinimal,
+            "arrayCopyReferenceArray" => ManagedArraysCopyReferenceArrayMinimal,
             "arrayBoxingReferenceArray" => ManagedArraysBoxingReferenceArrayBoxedIntMinimal,
             "delegateClosedTargetRelayMinimal" => DelegateClosedTargetRelayMinimal,
             "nestedExceptionThrowCatchFinallyMinimal" => NestedExceptionThrowCatchFinallyMinimal,
@@ -732,6 +816,10 @@ public sealed partial class NativeReferenceLoweringPlanner
             RelativePath = NativeReferenceArtifactNames.GeneratedTranslationUnit,
             Contents = translationUnit,
         };
+        var codegenMetrics = NativeCodegenMetricsBuilder.Build(
+            "native-reference",
+            loweringPlan.PlanKind,
+            [(generatedSource.RelativePath, generatedSource.Contents)]);
 
         var manifest = new NativeReferenceProofManifestArtifact
         {
@@ -746,6 +834,11 @@ public sealed partial class NativeReferenceLoweringPlanner
                     Kind = "generatedTranslationUnit",
                     Path = generatedSource.RelativePath,
                 },
+                new NativeReferenceGeneratedArtifactRef
+                {
+                    Kind = "codegenMetrics",
+                    Path = NativeReferenceArtifactNames.CodegenMetrics,
+                },
             ],
         };
 
@@ -754,6 +847,7 @@ public sealed partial class NativeReferenceLoweringPlanner
             OutputRootPath = request.OutputRootPath,
             LoweringPlan = loweringPlan,
             Manifest = manifest,
+            CodegenMetrics = codegenMetrics,
             GeneratedSources = [generatedSource],
         };
     }

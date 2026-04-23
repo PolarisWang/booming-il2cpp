@@ -15,6 +15,8 @@ public sealed record LoadedAssemblyModel
 
     public required string EntryPointSubjectId { get; init; }
 
+    public GenericInstantiationDemandGraphModel? GenericInstantiationDemandGraph { get; init; }
+
     public required IReadOnlyList<ManagedTypeModel> Types { get; init; }
 
     public required IReadOnlyList<ManagedFieldModel> Fields { get; init; }
@@ -128,6 +130,8 @@ public sealed record ManagedMethodModel
     public required IReadOnlyList<ManagedParameterModel> Parameters { get; init; }
 
     public ManagedImportModel? Import { get; init; }
+
+    public RuntimeGenericContextArtifact? RuntimeGenericContext { get; init; }
 
     public required ManagedMethodBodyModel Body { get; init; }
 }
@@ -325,7 +329,36 @@ public enum GenericContextKind : byte
     TypeAndMethodInstantiation = 3,
 }
 
-public sealed record GenericContextArtifact
+public enum GenericSupportKind : byte
+{
+    Legal = 1,
+
+    Shared = 2,
+
+    Specialized = 3,
+
+    Forbidden = 4,
+}
+
+public enum GenericSpecializationKind : byte
+{
+    SharedBody = 1,
+
+    SpecializedBody = 2,
+}
+
+public enum GenericDemandFamilyKind : byte
+{
+    ClosedGenericType = 1,
+
+    ClosedMethodOnGenericType = 2,
+
+    ClosedGenericMethod = 3,
+
+    ClosedGenericMethodOnGenericType = 4,
+}
+
+public sealed record GenericInstantiationKey
 {
     public required GenericContextKind ContextKind { get; init; }
 
@@ -334,5 +367,183 @@ public sealed record GenericContextArtifact
     public IReadOnlyList<string>? TypeArguments { get; init; }
 
     public IReadOnlyList<string>? MethodArguments { get; init; }
+}
+
+public sealed record SharedGenericBodyId
+{
+    public required string Value { get; init; }
+}
+
+public sealed record InstantiationStubId
+{
+    public required string Value { get; init; }
+}
+
+public sealed record RuntimeGenericContextArtifact
+{
+    public required GenericInstantiationKey InstantiationKey { get; init; }
+
+    public required SharedGenericBodyId SharedGenericBodyId { get; init; }
+
+    public required InstantiationStubId InstantiationStubId { get; init; }
+
+    public required GenericSupportKind SupportKindCode { get; init; }
+
+    public required GenericSpecializationKind SpecializationKindCode { get; init; }
+
+    public string? StatusReasonCode { get; init; }
+}
+
+public sealed record GenericDiagnosticArtifact
+{
+    public required string SubjectId { get; init; }
+
+    public required string DefinitionSubjectId { get; init; }
+
+    public required string DisplaySubjectId { get; init; }
+
+    public required GenericInstantiationKey InstantiationKey { get; init; }
+}
+
+public sealed record GenericInstantiationDemandModel
+{
+    public required string RequestingAssemblyName { get; init; }
+
+    public required string OwningAssemblyName { get; init; }
+
+    public required string SubjectKind { get; init; }
+
+    public required string SubjectId { get; init; }
+
+    public required string DefinitionSubjectId { get; init; }
+
+    public required string DemandSourceKind { get; init; }
+
+    public required GenericInstantiationKey InstantiationKey { get; init; }
+
+    public required GenericSupportKind SupportKindCode { get; init; }
+
+    public required GenericSpecializationKind SpecializationKindCode { get; init; }
+
+    public required GenericDemandFamilyKind FamilyKindCode { get; init; }
+
+    public bool IsCrossAssembly { get; init; }
+}
+
+public sealed record GenericInstantiationDemandGraphModel
+{
+    public required IReadOnlyList<GenericInstantiationDemandModel> Demands { get; init; }
+}
+
+public sealed record GenericCapabilityMatrixArtifact
+{
+    public string FormatVersion { get; init; } = "v0";
+
+    public string ArtifactKind { get; init; } = "genericCapabilityMatrix";
+
+    public required string OwnerSubjectId { get; init; }
+
+    public required string EntrySubjectId { get; init; }
+
+    public required IReadOnlyList<string> HotUpdateModes { get; init; }
+
+    public required GenericCapabilityMatrixGateStatus Gates { get; init; }
+
+    public required IReadOnlyList<GenericCapabilityFamilyBudgetArtifact> FamilyBudgets { get; init; }
+
+    public required IReadOnlyList<GenericCapabilityBoundaryCaseArtifact> BoundaryCases { get; init; }
+
+    public required IReadOnlyList<GenericCapabilityMatrixEntryArtifact> Entries { get; init; }
+}
+
+public sealed record GenericCapabilityMatrixGateStatus
+{
+    public required string Status { get; init; }
+
+    public required int UnsupportedLeakCount { get; init; }
+
+    public required int MissingAuthorityCount { get; init; }
+
+    public required int NonCanonicalHotUpdateNameCount { get; init; }
+
+    public required IReadOnlyList<GenericCapabilityMatrixLeakArtifact> Leaks { get; init; }
+}
+
+public sealed record GenericCapabilityFamilyBudgetArtifact
+{
+    public required string FamilyId { get; init; }
+
+    public required string DisplayName { get; init; }
+
+    public required int BudgetLimit { get; init; }
+
+    public required int ObservedCount { get; init; }
+}
+
+public sealed record GenericCapabilityBoundaryCaseArtifact
+{
+    public required string BoundaryKind { get; init; }
+
+    public required string SourceMethodSubjectId { get; init; }
+
+    public required int IlOffset { get; init; }
+
+    public required string TargetSubjectId { get; init; }
+
+    public required string EvidenceKind { get; init; }
+
+    public required string Status { get; init; }
+}
+
+public sealed record GenericCapabilityMatrixEntryArtifact
+{
+    public required string SubjectKind { get; init; }
+
+    public required string SubjectId { get; init; }
+
+    public required string DefinitionSubjectId { get; init; }
+
+    public required string DemandSourceKind { get; init; }
+
+    public required string RequestingAssemblyName { get; init; }
+
+    public required string OwningAssemblyName { get; init; }
+
+    public required GenericDemandFamilyKind FamilyKindCode { get; init; }
+
+    public required GenericContextKind ContextKindCode { get; init; }
+
+    public required GenericSupportKind SupportKindCode { get; init; }
+
+    public required GenericSpecializationKind SpecializationKindCode { get; init; }
+
+    public required bool IsCrossAssembly { get; init; }
+
+    public required string StatusReasonCode { get; init; }
+
+    public required string AuthoritySource { get; init; }
+
+    public required string OpenDefinitionSubjectId { get; init; }
+
+    public required string SharedGenericBodyId { get; init; }
+
+    public required string InstantiationStubId { get; init; }
+
+    public required bool HasOpenDefinitionAuthority { get; init; }
+
+    public required bool HasSharedBodyAuthority { get; init; }
+
+    public required bool HasInstantiationStubAuthority { get; init; }
+
+    public required bool HasRuntimeGenericContextAuthority { get; init; }
+}
+
+public sealed record GenericCapabilityMatrixLeakArtifact
+{
+    public required string SubjectId { get; init; }
+
+    public required string LeakKind { get; init; }
+
+    public required string Reason { get; init; }
 }
 

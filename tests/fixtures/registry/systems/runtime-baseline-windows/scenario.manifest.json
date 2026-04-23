@@ -7,7 +7,13 @@
   "supportedHosts": ["windows"],
   "docRefs": ["wiki/06-测试验证/整体验证场景/runtime-baseline.md"],
   "members": [
-    {"type": "pipeline", "id": "pipeline/completion-runtime-trace-windows"},
+    {"type": "module", "id": "module/analysis/basic"},
+    {"type": "module", "id": "module/managed-smoke/basic"},
+    {"type": "module", "id": "module/reflection/basic"},
+    {"type": "module", "id": "module/interop/basic"},
+    {"type": "module", "id": "module/hosted-runtime/basic"},
+    {"type": "module", "id": "module/trace-export/windows"},
+    {"type": "system", "id": "system/windows-reference-gate"},
     {"type": "system", "id": "system/android-startup-gate"},
     {"type": "system", "id": "system/linux-packaging-gate"}
   ]

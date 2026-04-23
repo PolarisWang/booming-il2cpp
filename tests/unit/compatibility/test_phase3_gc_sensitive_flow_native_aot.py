@@ -112,11 +112,11 @@ class Phase3GcSensitiveFlowNativeAotTests(unittest.TestCase):
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
         self.assertIn("// Managed method: CoreRuntimeFeatures/GcSensitiveFlowProofEntry::Run()", generated_cpp)
         self.assertIn(
-            'extern "C" void chaos_external_runtime_System_Private_CoreLib_System_GC__Collect__()',
+            'extern "C" void chaos_external_runtime_System_Private_CoreLib_System_GC__Collect_System_Void__',
             generated_cpp,
         )
         self.assertIn(
-            'extern "C" void chaos_external_runtime_System_Private_CoreLib_System_GC__WaitForPendingFinalizers__()',
+            'extern "C" void chaos_external_runtime_System_Private_CoreLib_System_GC__WaitForPendingFinalizers_System_Void__',
             generated_cpp,
         )
         self.assertIn(

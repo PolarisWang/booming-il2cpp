@@ -34,9 +34,13 @@ public static class PackageReader
             throw new InvalidDataException($"failed to deserialize hot update package manifest: {manifestPath}");
         }
 
-        if (!string.Equals(manifest.FormatVersion, "v0", StringComparison.Ordinal))
+        if (!string.Equals(
+                manifest.PackageFormatVersion,
+                HotUpdateVersionContract.CurrentPackageFormatVersion,
+                StringComparison.Ordinal))
         {
-            throw new InvalidDataException($"unsupported hot update package format version: {manifest.FormatVersion}");
+            throw new InvalidDataException(
+                $"unsupported hot update package format version: {manifest.PackageFormatVersion}");
         }
 
         var loadedAssemblies = new Dictionary<string, LoadedAssemblyImage>(StringComparer.Ordinal);

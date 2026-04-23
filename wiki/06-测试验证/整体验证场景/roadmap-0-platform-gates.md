@@ -11,43 +11,43 @@ objectType: guide
 ## 当前正式对象
 
 - `gate/android-arm64-smoke`
-- `system/roadmap-0-android-startup-gate`
+- `system/android-startup-gate`
 - `gate/ios-arm64-packaging`
-- `system/roadmap-0-ios-packaging-gate`
+- `system/ios-packaging-gate`
 - `gate/linux-x64-packaging`
-- `system/roadmap-0-linux-packaging-gate`
+- `system/linux-packaging-gate`
 - `gate/windows-reference-desktop`
-- `system/roadmap-0-windows-reference-gate`
+- `system/windows-reference-gate`
 - `gate/macos-reference-desktop`
-- `system/roadmap-0-macos-reference-gate`
+- `system/macos-reference-gate`
 
 ## 边界
 
 - `gate/android-arm64-smoke` 验证 Android startup smoke 路由是否仍可在 Windows 宿主上完成 configure/build 检查。
-- `system/roadmap-0-android-startup-gate` 把这条 gate 作为正式整体验证场景暴露给 registry 与 `run test system ...`。
+- `system/android-startup-gate` 把这条 gate 作为正式整体验证场景暴露给 registry 与 `run test system ...`。
 - `gate/ios-arm64-packaging` 验证 iOS compile/link/packaging 路由是否仍可在 macOS 宿主上完成 configure/build 检查。
-- `system/roadmap-0-ios-packaging-gate` 把这条 gate 作为正式整体验证场景暴露给 registry 与 `run test system ...`。
+- `system/ios-packaging-gate` 把这条 gate 作为正式整体验证场景暴露给 registry 与 `run test system ...`。
 - `gate/linux-x64-packaging` 验证 Linux cross-compile / packaging 路由是否仍可在当前宿主上完成 configure/build 检查。
-- `system/roadmap-0-linux-packaging-gate` 把这条 gate 作为正式整体验证场景暴露给 registry 与 `run test system ...`。
+- `system/linux-packaging-gate` 把这条 gate 作为正式整体验证场景暴露给 registry 与 `run test system ...`。
 - `gate/windows-reference-desktop` 验证 Windows reference desktop 是否仍能完成 reference preset 构建，并通过 `HostEmbeddingLite` 的 `windows-managed-trace` subject matrix 产出并校验 Windows warmup trace。
-- `system/roadmap-0-windows-reference-gate` 把这条 gate 作为正式整体验证场景暴露给 registry 与 `run test system ...`。
+- `system/windows-reference-gate` 把这条 gate 作为正式整体验证场景暴露给 registry 与 `run test system ...`。
 - `gate/macos-reference-desktop` 验证 macOS reference desktop 是否仍能完成 reference preset 构建，并通过 `HostEmbeddingLite` 的 `macos-managed-trace` subject matrix 产出并校验 macOS warmup trace。
-- `system/roadmap-0-macos-reference-gate` 把这条 gate 作为正式整体验证场景暴露给 registry 与 `run test system ...`。
+- `system/macos-reference-gate` 把这条 gate 作为正式整体验证场景暴露给 registry 与 `run test system ...`。
 - 这条 gate 验证的是“矩阵可调度、路由可构建、shell 可落盘”，不是 Linux 目标平台的完整运行时闭环。
 - reference desktop gate 验证的是“参考桌面基线仍可构建并且 trace contract 未漂移”，不是把整条 `workflow/roadmap-0-*` 全量重跑一遍。
 
 ## 正式入口
 
 - `run test suite --id gate/android-arm64-smoke`
-- `run test system --id system/roadmap-0-android-startup-gate`
+- `run test system --id system/android-startup-gate`
 - `run test suite --id gate/ios-arm64-packaging`
-- `run test system --id system/roadmap-0-ios-packaging-gate`
+- `run test system --id system/ios-packaging-gate`
 - `run test suite --id gate/linux-x64-packaging`
-- `run test system --id system/roadmap-0-linux-packaging-gate`
+- `run test system --id system/linux-packaging-gate`
 - `run test suite --id gate/windows-reference-desktop`
-- `run test system --id system/roadmap-0-windows-reference-gate`
+- `run test system --id system/windows-reference-gate`
 - `run test suite --id gate/macos-reference-desktop`
-- `run test system --id system/roadmap-0-macos-reference-gate`
+- `run test system --id system/macos-reference-gate`
 
 ## 失败定位
 

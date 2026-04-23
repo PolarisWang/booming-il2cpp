@@ -73,6 +73,9 @@ static_assert(std::is_same<BridgeStatus, int32_t>::value, "bridge status must st
 static_assert(CHAOS_BRIDGE_STATUS_NOT_SUPPORTED == 4, "bridge not-supported status must remain stable");
 static_assert(CHAOS_BRIDGE_STATUS_MANAGED_EXCEPTION == 5, "bridge managed-exception status must remain stable");
 static_assert(CHAOS_BRIDGE_STATUS_INTERNAL_ERROR == 6, "bridge internal-error status must remain stable");
+static_assert(CHAOS_BRIDGE_STATUS_METADATA_RESOLUTION_FAILED == 7, "bridge metadata-resolution-failed status must remain stable");
+static_assert(CHAOS_BRIDGE_STATUS_CLASS_INIT_FAILED == 8, "bridge class-init-failed status must remain stable");
+static_assert(CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED == 9, "bridge runtime-call-failed status must remain stable");
 
 }  // namespace
 

@@ -8,12 +8,26 @@ internal static class HotUpdateSkeletonProofEntry
 {
     private static readonly ManagedMethodIdentityArtifact HotUpdateValueIdentity =
         ManagedMethodIdentityResolver.Create(
-            "HotUpdateSkeletonProof/Helper::GetValue()",
-            "System.Int32 Helper::GetValue()");
+            new ManagedMethodIdentitySpec
+            {
+                AssemblyName = "HotUpdateSkeletonProof",
+                DeclaringTypeSubjectId = "HotUpdateSkeletonProof/Helper",
+                DeclaringTypeDisplayName = "Helper",
+                MethodName = "GetValue",
+                SubjectId = "HotUpdateSkeletonProof/Helper::GetValue()",
+                Signature = "System.Int32 Helper::GetValue()",
+            });
     private static readonly ManagedMethodIdentityArtifact HotUpdateAddIdentity =
         ManagedMethodIdentityResolver.Create(
-            "HotUpdateSkeletonProof/HotPatch::Add()",
-            "System.Int32 HotPatch::Add()");
+            new ManagedMethodIdentitySpec
+            {
+                AssemblyName = "HotUpdateSkeletonProof",
+                DeclaringTypeSubjectId = "HotUpdateSkeletonProof/HotPatch",
+                DeclaringTypeDisplayName = "HotPatch",
+                MethodName = "Add",
+                SubjectId = "HotUpdateSkeletonProof/HotPatch::Add()",
+                Signature = "System.Int32 HotPatch::Add()",
+            });
 
     [ChaosUnitTest(
         ChaosUnitCategory.HotUpdateContract,

@@ -93,31 +93,65 @@ class Phase4CMetadataClosureContractTests(unittest.TestCase):
     def test_supplemental_metadata_template_carries_required_instantiation_context(self) -> None:
         self._ensure_bundle_generated()
 
+        generic_demand_graph = json.loads((self.output_root / "generic-instantiation-demand-graph.json").read_text(encoding="utf-8"))
         template_path = self.output_root / "hot-update" / "supplemental-metadata-template.json"
         template = json.loads(template_path.read_text(encoding="utf-8"))
         registered_methods = {entry["subjectId"]: entry for entry in template["registeredMethods"]}
 
-        int_tail = registered_methods[
-            "CoreRuntimeFeatures/RequiredInstantiationHarness::Tail<System.Int32>(System.Collections.Generic.IReadOnlyList<System.Int32>)"
-        ]
-        self.assertEqual(2, int_tail["genericContext"]["contextKind"])
-        self.assertEqual(
-            "CoreRuntimeFeatures/RequiredInstantiationHarness::Tail(System.Collections.Generic.IReadOnlyList<!!0>)",
-            int_tail["genericContext"]["definitionSubjectId"],
+        int_tail = next(
+            entry
+            for subject_id, entry in registered_methods.items()
+            if subject_id.startswith("CoreRuntimeFeatures/RequiredInstantiationHarness::Tail<System.Int32>")
         )
-        self.assertEqual([], int_tail["genericContext"]["typeArguments"])
-        self.assertEqual(["System.Int32"], int_tail["genericContext"]["methodArguments"])
+        self.assertEqual(2, int_tail["runtimeGenericContext"]["instantiationKey"]["contextKind"])
+        self.assertEqual(
+            "CoreRuntimeFeatures/RequiredInstantiationHarness::Tail`1:!!0(System.Collections.Generic.IReadOnlyList<!!0>)",
+            int_tail["runtimeGenericContext"]["instantiationKey"]["definitionSubjectId"],
+        )
+        self.assertEqual([], int_tail["runtimeGenericContext"]["instantiationKey"]["typeArguments"])
+        self.assertEqual(
+            ["System.Int32"],
+            int_tail["runtimeGenericContext"]["instantiationKey"]["methodArguments"],
+        )
+        self.assertEqual(3, int_tail["runtimeGenericContext"]["supportKindCode"])
+        self.assertEqual(2, int_tail["runtimeGenericContext"]["specializationKindCode"])
+        self.assertTrue(int_tail["runtimeGenericContext"]["statusReasonCode"].startswith("loader-demand:"))
+        self.assertTrue(int_tail["runtimeGenericContext"]["sharedGenericBodyId"]["value"])
+        self.assertTrue(int_tail["runtimeGenericContext"]["instantiationStubId"]["value"])
+        int_tail_demand = next(
+            demand
+            for demand in generic_demand_graph["demands"]
+            if demand["subjectKind"] == "method" and demand["subjectId"] == int_tail["subjectId"]
+        )
+        self.assertEqual(int_tail_demand["instantiationKey"], int_tail["runtimeGenericContext"]["instantiationKey"])
+        self.assertEqual(int_tail_demand["supportKindCode"], int_tail["runtimeGenericContext"]["supportKindCode"])
+        self.assertEqual(
+            int_tail_demand["specializationKindCode"],
+            int_tail["runtimeGenericContext"]["specializationKindCode"],
+        )
 
-        string_tail = registered_methods[
-            "CoreRuntimeFeatures/RequiredInstantiationHarness::Tail<System.String>(System.Collections.Generic.IReadOnlyList<System.String>)"
-        ]
-        self.assertEqual(2, string_tail["genericContext"]["contextKind"])
-        self.assertEqual(
-            "CoreRuntimeFeatures/RequiredInstantiationHarness::Tail(System.Collections.Generic.IReadOnlyList<!!0>)",
-            string_tail["genericContext"]["definitionSubjectId"],
+        string_tail = next(
+            entry
+            for subject_id, entry in registered_methods.items()
+            if subject_id.startswith("CoreRuntimeFeatures/RequiredInstantiationHarness::Tail<System.String>")
         )
-        self.assertEqual([], string_tail["genericContext"]["typeArguments"])
-        self.assertEqual(["System.String"], string_tail["genericContext"]["methodArguments"])
+        self.assertEqual(2, string_tail["runtimeGenericContext"]["instantiationKey"]["contextKind"])
+        self.assertEqual(
+            "CoreRuntimeFeatures/RequiredInstantiationHarness::Tail`1:!!0(System.Collections.Generic.IReadOnlyList<!!0>)",
+            string_tail["runtimeGenericContext"]["instantiationKey"]["definitionSubjectId"],
+        )
+        self.assertEqual([], string_tail["runtimeGenericContext"]["instantiationKey"]["typeArguments"])
+        self.assertEqual(
+            ["System.String"],
+            string_tail["runtimeGenericContext"]["instantiationKey"]["methodArguments"],
+        )
+        self.assertTrue(string_tail["runtimeGenericContext"]["statusReasonCode"].startswith("loader-demand:"))
+        string_tail_demand = next(
+            demand
+            for demand in generic_demand_graph["demands"]
+            if demand["subjectKind"] == "method" and demand["subjectId"] == string_tail["subjectId"]
+        )
+        self.assertEqual(string_tail_demand["instantiationKey"], string_tail["runtimeGenericContext"]["instantiationKey"])
 
 
 if __name__ == "__main__":

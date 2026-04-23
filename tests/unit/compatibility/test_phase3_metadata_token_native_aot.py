@@ -103,6 +103,8 @@ class Phase3MetadataTokenNativeAotTests(unittest.TestCase):
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
         self.assertIn("// Managed method: CoreRuntimeFeatures/MetadataSupplementProofEntry::Run()", generated_cpp)
         self.assertIn("chaos_reflection_get_metadata_token", generated_cpp)
+        self.assertIn("chaos_reflection_get_constructors", generated_cpp)
+        self.assertIn("chaos_reflection_invoke_method", generated_cpp)
 
 
 if __name__ == "__main__":

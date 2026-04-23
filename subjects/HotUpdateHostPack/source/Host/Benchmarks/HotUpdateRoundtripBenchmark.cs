@@ -10,8 +10,23 @@ internal static class HotUpdateRoundtripBenchmarkEntry
     private const int IterationCount = 1000;
     private static readonly ManagedMethodIdentityArtifact RoundtripIdentity =
         ManagedMethodIdentityResolver.Create(
-            "BenchHotUpdateRoundtrip/HotPatch::Roundtrip(System.Int32)",
-            "System.Int32 HotPatch::Roundtrip(System.Int32)");
+            new ManagedMethodIdentitySpec
+            {
+                AssemblyName = "BenchHotUpdateRoundtrip",
+                DeclaringTypeSubjectId = "BenchHotUpdateRoundtrip/HotPatch",
+                DeclaringTypeDisplayName = "HotPatch",
+                MethodName = "Roundtrip",
+                SubjectId = "BenchHotUpdateRoundtrip/HotPatch::Roundtrip(System.Int32)",
+                Signature = "System.Int32 HotPatch::Roundtrip(System.Int32)",
+            });
+    private static readonly BridgeCarrierSchema RoundtripCarrierSchema = new()
+    {
+        ReturnKind = BridgeCarrierKind.Int32,
+        ParameterKinds = [BridgeCarrierKind.Int32],
+        WriteBackRule = "none",
+        PinningRule = "none",
+        LifetimeRule = "call-bounded",
+    };
 
     [ChaosBenchmark(
         ChaosBenchmarkCategory.HotUpdate,
@@ -42,8 +57,10 @@ internal static class HotUpdateRoundtripBenchmarkEntry
                 {
                     BridgeId = BridgeId,
                     TargetIdentity = RoundtripIdentity,
-                    TargetSubjectId = RoundtripIdentity.SubjectId,
+                    TargetAuthorityKey = ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(RoundtripIdentity),
                     SignatureKey = "System.Int32(System.Int32)",
+                    DispatchStyle = BridgeDispatchStyle.ManagedArgs,
+                    CarrierSchema = RoundtripCarrierSchema,
                 },
             ],
         });

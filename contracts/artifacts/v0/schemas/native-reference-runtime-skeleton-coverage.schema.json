@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Native Reference Runtime Skeleton Coverage v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "formatVersion",
+    "artifactKind",
+    "assemblyName",
+    "planKind",
+    "translationUnitMode",
+    "requestedMethodCount",
+    "emittedMethodCount",
+    "uncoveredMethodCount",
+    "uncoveredMethodSubjectIds"
+  ],
+  "properties": {
+    "formatVersion": {
+      "type": "string",
+      "const": "v0"
+    },
+    "artifactKind": {
+      "type": "string",
+      "const": "nativeReferenceRuntimeSkeletonCoverage"
+    },
+    "assemblyName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "planKind": {
+      "type": "string",
+      "const": "assembly-full-closure-runtime-skeleton"
+    },
+    "translationUnitMode": {
+      "type": "string",
+      "const": "runtime-skeleton"
+    },
+    "requestedMethodCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "emittedMethodCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "uncoveredMethodCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "uncoveredMethodSubjectIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

@@ -231,14 +231,16 @@ def _generated_translation_unit_paths(
     primary_generated_source_name: str,
 ) -> list[Path]:
     primary_generated_source_path = output_root / "generated" / primary_generated_source_name
-    generated_source_paths = [primary_generated_source_path]
     manifest_path = output_root / manifest_name
+    generated_source_paths: list[Path] = []
+    if primary_generated_source_path.is_file():
+        generated_source_paths.append(primary_generated_source_path)
     if not manifest_path.is_file():
-        return generated_source_paths
+        return generated_source_paths or [primary_generated_source_path]
 
     manifest = read_json(manifest_path)
     if not isinstance(manifest, dict):
-        return generated_source_paths
+        return generated_source_paths or [primary_generated_source_path]
 
     discovered_paths: list[Path] = []
     for artifact in list(manifest.get("generatedArtifacts") or []):
@@ -261,7 +263,7 @@ def _generated_translation_unit_paths(
     for path in discovered_paths:
         if path not in generated_source_paths:
             generated_source_paths.append(path)
-    return generated_source_paths
+    return generated_source_paths or [primary_generated_source_path]
 
 
 def _generated_source_paths_from_manifest(generated_manifest: dict[str, Any]) -> list[str]:
@@ -277,6 +279,64 @@ def _generated_source_paths_from_manifest(generated_manifest: dict[str, Any]) ->
     return [generated_source_path] if generated_source_path else []
 
 
+def _native_aot_entry_function_name(
+    repo_root: Path,
+    generated_manifest: dict[str, Any],
+) -> str:
+    native_entry_function_name = str(generated_manifest.get("nativeEntryFunctionName") or "").strip()
+    if native_entry_function_name:
+        return native_entry_function_name
+
+    native_aot_plan_path_text = str(generated_manifest.get("nativeAotPlanPath") or "").strip()
+    if native_aot_plan_path_text:
+        native_aot_plan_path = _resolve(repo_root, native_aot_plan_path_text)
+        if native_aot_plan_path.is_file():
+            native_aot_plan = read_json(native_aot_plan_path)
+            if isinstance(native_aot_plan, dict):
+                native_entry_function_name = str(native_aot_plan.get("nativeEntryFunctionName") or "").strip()
+                if native_entry_function_name:
+                    return native_entry_function_name
+
+    return "RunNativeAot"
+
+
+def _generated_artifact_path(output_root: Path, manifest_name: str, artifact_kind: str) -> Path | None:
+    manifest_path = output_root / manifest_name
+    if not manifest_path.is_file():
+        return None
+
+    manifest = read_json(manifest_path)
+    if not isinstance(manifest, dict):
+        return None
+
+    for artifact in list(manifest.get("generatedArtifacts") or []):
+        if not isinstance(artifact, dict):
+            continue
+        if str(artifact.get("kind") or "").strip() != artifact_kind:
+            continue
+        artifact_path = str(artifact.get("path") or "").strip()
+        if artifact_path:
+            return output_root / artifact_path
+
+    return None
+
+
+def _numeric_metric(payload: dict[str, Any], key: str) -> int | float | None:
+    value = payload.get(key)
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+    return value
+
+
+def _native_codegen_gate_metrics(codegen_metrics_payload: dict[str, Any]) -> dict[str, int | float]:
+    metrics: dict[str, int | float] = {}
+    for key in ("generatedCppTotalBytes", "generatedSymbolCount", "peakWorkingSetBytes"):
+        numeric_value = _numeric_metric(codegen_metrics_payload, key)
+        if numeric_value is not None:
+            metrics[key] = numeric_value
+    return metrics
+
+
 def _render_windows_native_aot_host_cmakelists() -> str:
     return """if(NOT EXISTS "${CHAOS_SUBJECT_HOST_MAIN}")
     message(FATAL_ERROR "Missing native-aot host source: ${CHAOS_SUBJECT_HOST_MAIN}")
@@ -285,6 +345,12 @@ endif()
 add_executable(chaos_subject_native_aot EXCLUDE_FROM_ALL
     "${CHAOS_SUBJECT_HOST_MAIN}")
 chaos_configure_subject_target(chaos_subject_native_aot)
+if(DEFINED CHAOS_SUBJECT_NATIVE_AOT_ENTRY_FUNCTION_NAME AND NOT CHAOS_SUBJECT_NATIVE_AOT_ENTRY_FUNCTION_NAME STREQUAL "")
+    target_compile_definitions(
+        chaos_subject_native_aot
+        PRIVATE
+            "CHAOS_NATIVE_AOT_ENTRY=${CHAOS_SUBJECT_NATIVE_AOT_ENTRY_FUNCTION_NAME}")
+endif()
 target_link_libraries(
     chaos_subject_native_aot
     PRIVATE
@@ -1348,6 +1414,7 @@ def _write_native_benchmark_dispatch_manifest(
     selection: dict[str, Any],
     collection_path: str,
     entry_selection: dict[str, Any],
+    native_entry_function_name: str = "RunNativeAot",
 ) -> str:
     dispatch_manifest_path = _native_benchmark_dispatch_manifest_path(build_root)
     write_json(
@@ -1357,7 +1424,7 @@ def _write_native_benchmark_dispatch_manifest(
             "matrixId": str(selection.get("matrixId") or ""),
             "hostKind": "benchmark-host",
             "collectionPath": collection_path,
-            "nativeEntryFunctionName": "RunNativeAot",
+            "nativeEntryFunctionName": native_entry_function_name or "RunNativeAot",
             "entrySelection": dict(entry_selection),
         },
     )
@@ -1777,6 +1844,8 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
             "aotManifestPath": _relative(repo_root, output_root / "aot-manifest.json"),
             "metadataRegistrationPath": _relative(repo_root, output_root / "metadata-registration.json"),
             "codeRegistrationPath": _relative(repo_root, output_root / "code-registration.json"),
+            "genericInstantiationDemandGraphPath": _relative(repo_root, output_root / "generic-instantiation-demand-graph.json"),
+            "genericCapabilityMatrixPath": _relative(repo_root, output_root / "generic-capability-matrix.json"),
             "optimizationFactsPath": _relative(repo_root, output_root / "optimization-facts.json"),
             "preserveDescriptorPath": _relative(repo_root, output_root / "preserve-descriptor.json"),
             "closureManifestPath": _relative(repo_root, output_root / "closure.manifest.json"),
@@ -1795,6 +1864,8 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
         report_paths=list(request["paths"]["reportPaths"]),
         primary_evidence_paths=[
             manifest["artifacts"]["typedIlIrPath"],
+            manifest["artifacts"]["genericInstantiationDemandGraphPath"],
+            manifest["artifacts"]["genericCapabilityMatrixPath"],
             manifest["artifacts"]["optimizationFactsPath"],
             manifest["artifacts"]["closureManifestPath"],
         ],
@@ -1850,6 +1921,55 @@ def _run_native_generated_emitter(
         plan_key: _relative(repo_root, output_root / plan_name),
     }
     details: dict[str, Any] = {}
+    primary_evidence_paths = [
+        *list(generated_manifest["generatedSourcePaths"]),
+        str(generated_manifest[manifest_key]),
+    ]
+    codegen_metrics_path = _generated_artifact_path(output_root, manifest_name, "codegenMetrics")
+    if codegen_metrics_path is not None and codegen_metrics_path.is_file():
+        codegen_metrics_payload = read_json(codegen_metrics_path)
+        if isinstance(codegen_metrics_payload, dict):
+            generated_manifest["codegenMetricsPath"] = _relative(repo_root, codegen_metrics_path)
+            primary_evidence_paths.append(generated_manifest["codegenMetricsPath"])
+
+            gate_metrics = _native_codegen_gate_metrics(codegen_metrics_payload)
+            execution_context = dict(selection.get("executionContext") or {})
+            host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
+            matrix_id = str(selection.get("matrixId") or "")
+            subject_id = str(selection.get("subjectId") or "")
+            if gate_metrics and host_platform and matrix_id and subject_id:
+                codegen_perf = perf_module.evaluate_codegen_subject(
+                    repo_root=repo_root,
+                    subject_id=subject_id,
+                    matrix_id=matrix_id,
+                    host_platform=host_platform,
+                    metrics=gate_metrics,
+                    update_baseline=False,
+                )
+                baseline_compare_path = output_root / "codegen-baseline-compare.json"
+                baseline_compare_payload = {
+                    "reportVersion": "v1",
+                    "subjectId": subject_id,
+                    "matrixId": matrix_id,
+                    "metrics": dict(codegen_perf["metrics"]),
+                    "baseline": dict(codegen_perf["baseline"]),
+                    "regressionStatus": str(codegen_perf["regressionStatus"]),
+                    "metricsArtifactPath": generated_manifest["codegenMetricsPath"],
+                }
+                write_json(baseline_compare_path, baseline_compare_payload)
+                generated_manifest["codegenBaselineComparePath"] = _relative(repo_root, baseline_compare_path)
+                generated_manifest["codegenRegressionStatus"] = str(codegen_perf["regressionStatus"])
+                primary_evidence_paths.append(generated_manifest["codegenBaselineComparePath"])
+                details["codegenPerformance"] = {
+                    "metrics": dict(codegen_perf["metrics"]),
+                    "baselinePath": str(codegen_perf["baselinePath"]),
+                    "baseline": dict(codegen_perf["baseline"]),
+                    "baselineUpdated": bool(codegen_perf["baselineUpdated"]),
+                    "regressionStatus": str(codegen_perf["regressionStatus"]),
+                    "regressions": list(codegen_perf.get("regressions") or []),
+                    "metricsArtifactPath": generated_manifest["codegenMetricsPath"],
+                    "baselineComparePath": generated_manifest["codegenBaselineComparePath"],
+                }
     lowering_plan = read_json(output_root / plan_name)
     if isinstance(lowering_plan, dict):
         engine_emission_summary = _engine_emission_summary(
@@ -1864,10 +1984,7 @@ def _run_native_generated_emitter(
     return _success_result(
         bucket_manifest_path=request["paths"]["manifestPath"],
         report_paths=[],
-        primary_evidence_paths=[
-            *list(generated_manifest["generatedSourcePaths"]),
-            str(generated_manifest[manifest_key]),
-        ],
+        primary_evidence_paths=primary_evidence_paths,
         details=details,
     )
 
@@ -1924,6 +2041,7 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
     if native_aot_build:
         if not generated_source_path_text:
             raise RuntimeError("generated manifest missing generatedSourcePath")
+        native_entry_function_name = _native_aot_entry_function_name(repo_root, generated_manifest)
         expected_host_kind = _selection_native_aot_workspace_host_kind(selection) or "benchmark-host"
         if expected_host_kind not in {"proof-host", "benchmark-host"}:
             raise RuntimeError(f"unsupported native-aot host kind: {expected_host_kind}")
@@ -1972,6 +2090,7 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
                 selection=selection,
                 collection_path=collection_path,
                 entry_selection=_selection_declared_entry_selection(selection),
+                native_entry_function_name=native_entry_function_name,
             )
 
         out_root.mkdir(parents=True, exist_ok=True)
@@ -2004,6 +2123,11 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
                 f"-DCHAOS_SUBJECT_GENERATED_INPUT_SOURCE={generated_source_path.as_posix()}",
                 f"-DCHAOS_SUBJECT_VARIANT={variant}",
                 f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={out_root.as_posix()}",
+                *(
+                    [f"-DCHAOS_SUBJECT_NATIVE_AOT_ENTRY_FUNCTION_NAME={native_entry_function_name}"]
+                    if native_entry_function_name and native_entry_function_name != "RunNativeAot"
+                    else []
+                ),
                 *([f"-DCMAKE_GENERATOR_INSTANCE={instance_spec}"] if instance_spec else []),
             ],
             repo_root=repo_root,
@@ -2051,6 +2175,7 @@ def _windows_subject_build(*, repo_root: Path, request: dict[str, Any]) -> dict[
             "hostKind": expected_host_kind,
             "collectionPath": collection_path,
             "managedTestProjectId": managed_test_project_id,
+            "nativeEntryFunctionName": native_entry_function_name,
         }
         if dispatch_manifest_path:
             manifest["dispatchManifestPath"] = dispatch_manifest_path

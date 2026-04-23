@@ -1,0 +1,519 @@
+from __future__ import annotations
+
+import unittest
+from pathlib import Path
+
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+
+NATIVE_REFERENCE_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceLoweringPlanner.cs"
+NATIVE_REFERENCE_EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceProofEmitter.cs"
+NATIVE_AOT_EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeAotEmitter.cs"
+NATIVE_AOT_PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeAotLoweringPlanner.cs"
+
+NATIVE_REFERENCE_CATALOG_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofCatalog.cs"
+)
+NATIVE_AOT_TEMPLATE_CATALOG_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Emission"
+    / "NativeAot"
+    / "NativeAotTemplateCatalog.cs"
+)
+NATIVE_REFERENCE_ENGINE_AND_FAMILY_SELECTION_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceLoweringPlanner.EngineAndFamilySelection.cs"
+)
+NATIVE_REFERENCE_PLAN_BUILDERS_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceLoweringPlanner.PlanBuilders.cs"
+)
+NATIVE_REFERENCE_SHAPE_VALIDATION_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceLoweringPlanner.ShapeValidation.cs"
+)
+SCRIBAN_RENDERER_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templating"
+    / "ScribanTemplateRenderer.cs"
+)
+NATIVE_REFERENCE_AUDIT_SUMMARY_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "AssemblyFullClosureAuditSummary.cpp.scriban"
+)
+ASSEMBLY_FULL_CLOSURE_AUDIT_EMITTER_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "AssemblyFullClosureAuditEmitter.cs"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_SUMMARY_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeletonSummary.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_PAGE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeletonPage.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_CONSOLE_WRITE_LINE_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.ConsoleWriteLineStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_MARSHALING_UTF8_EXPORT_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.MarshalingUtf8ExportStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_PINVOKE_DIRECT_CALL_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.PInvokeDirectCallStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_STATIC_CALL_CTOR_GETTER_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.StaticCallCtorGetterStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_CONSTRUCTOR_THEN_INSTANCE_CALL_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.ConstructorThenInstanceCallStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_DELEGATE_CLOSED_TARGET_RELAY_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.DelegateClosedTargetRelayStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_INTERFACE_DISPATCH_MESSAGE_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.InterfaceDispatchMessageStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_REFLECTION_INTEROP_CLOSURE_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.ReflectionInteropClosureStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_EXCEPTION_THROW_CATCH_FINALLY_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.ExceptionThrowCatchFinallyStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_NESTED_EXCEPTION_THROW_CATCH_FINALLY_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.NestedExceptionThrowCatchFinallyStub.cpp.scriban"
+)
+NATIVE_REFERENCE_RUNTIME_SKELETON_ARRAY_BOXING_REFERENCE_ARRAY_STUB_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.ArrayBoxingReferenceArrayStub.cpp.scriban"
+)
+NATIVE_AOT_RUNTIME_PRELUDE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "RuntimeSupport"
+    / "NativeAotLoweringPlanner.RuntimeSupport.cs"
+)
+NATIVE_AOT_COLLECTION_RUNTIME_PRELUDE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.CollectionRuntimePrelude.cpp.scriban"
+)
+NATIVE_AOT_MONITOR_RUNTIME_PRELUDE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.MonitorRuntimePrelude.cpp.scriban"
+)
+NATIVE_AOT_THREAD_RUNTIME_PRELUDE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.ThreadRuntimePrelude.cpp.scriban"
+)
+NATIVE_AOT_ASYNC_RUNTIME_PRELUDE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.AsyncRuntimePrelude.cpp.scriban"
+)
+NATIVE_AOT_RUNTIME_PRELUDE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.RuntimePrelude.cpp.scriban"
+)
+NATIVE_AOT_SPAN_RUNTIME_PRELUDE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.SpanRuntimePrelude.cpp.scriban"
+)
+NATIVE_AOT_RUNTIME_PRELUDE_AGGREGATOR_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "RuntimeSupport"
+    / "NativeAotLoweringPlanner.RuntimePrelude.cs"
+)
+NATIVE_AOT_STATIC_INITIALIZATION_EMISSION_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "RuntimeSupport"
+    / "NativeAotLoweringPlanner.StaticInitializationEmission.cs"
+)
+NATIVE_AOT_STATIC_INITIALIZATION_DEFINITION_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.StaticInitializationDefinition.cpp.scriban"
+)
+NATIVE_AOT_STATIC_INITIALIZATION_ACTION_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.StaticInitializationAction.cpp.scriban"
+)
+NATIVE_AOT_STATIC_INITIALIZATION_CALL_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.StaticInitializationCall.cpp.scriban"
+)
+NATIVE_AOT_INVOCATION_ABI_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "RuntimeSupport"
+    / "NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs"
+)
+NATIVE_AOT_METHOD_RETURN_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.MethodReturn.cpp.scriban"
+)
+NATIVE_AOT_ABI_RETURN_PUSH_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.AbiReturnPush.cpp.scriban"
+)
+NATIVE_AOT_ABI_ARGUMENT_INITIALIZATION_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.AbiArgumentInitialization.cpp.scriban"
+)
+NATIVE_AOT_STRING_AND_PLATFORM_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "RuntimeSupport"
+    / "NativeAotLoweringPlanner.ExternalRuntimeHelpers.StringAndPlatform.cs"
+)
+NATIVE_AOT_STRING_JOIN_INT32_ENUMERABLE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.StringJoinInt32Enumerable.cpp.scriban"
+)
+NATIVE_AOT_STRING_JOIN_STRING_ENUMERABLE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.StringJoinStringEnumerable.cpp.scriban"
+)
+NATIVE_AOT_SIMPLE_EXTERNAL_RUNTIME_HELPER_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.SimpleExternalRuntimeHelper.cpp.scriban"
+)
+NATIVE_AOT_TESTFRAMEWORK_EQUAL_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeAot.TestFrameworkEqual.cpp.scriban"
+)
+NATIVE_AOT_METADATA_SUPPORT_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Planning"
+    / "NativeAotLoweringPlanner.MetadataSupport.cs"
+)
+NATIVE_AOT_INVOCATION_PLANNING_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Planning"
+    / "NativeAotLoweringPlanner.InvocationPlanning.cs"
+)
+NATIVE_AOT_METHOD_EMISSION_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Emission"
+    / "NativeAotLoweringPlanner.MethodEmission.cs"
+)
+NATIVE_AOT_EXCEPTION_EMISSION_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Emission"
+    / "NativeAotLoweringPlanner.ExceptionEmission.cs"
+)
+NATIVE_AOT_EXTERNAL_RUNTIME_HELPERS_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "RuntimeSupport"
+    / "NativeAotLoweringPlanner.ExternalRuntimeHelpers.cs"
+)
+NATIVE_AOT_OBJECT_MODEL_EMISSION_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Emission"
+    / "NativeAotLoweringPlanner.ObjectModelEmission.cs"
+)
+NATIVE_AOT_OBJECT_EQUALITY_EMISSION_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Emission"
+    / "NativeAotLoweringPlanner.ObjectEqualityEmission.cs"
+)
+NATIVE_AOT_REFLECTION_OBJECT_EMISSION_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Emission"
+    / "NativeAotLoweringPlanner.ReflectionObjectEmission.cs"
+)
+NATIVE_AOT_OBJECT_MODEL_UTILITIES_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Emission"
+    / "NativeAotLoweringPlanner.ObjectModelUtilities.cs"
+)
+NATIVE_AOT_EXTERNAL_RUNTIME_STRING_AND_PLATFORM_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "RuntimeSupport"
+    / "NativeAotLoweringPlanner.ExternalRuntimeHelpers.StringAndPlatform.cs"
+)
+NATIVE_AOT_EXTERNAL_RUNTIME_COLLECTION_AND_REFLECTION_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "RuntimeSupport"
+    / "NativeAotLoweringPlanner.ExternalRuntimeHelpers.CollectionAndReflection.cs"
+)
+NATIVE_AOT_EXTERNAL_RUNTIME_TYPE_RESOLUTION_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "RuntimeSupport"
+    / "NativeAotLoweringPlanner.ExternalRuntimeHelpers.TypeResolution.cs"
+)
+NATIVE_AOT_EXTERNAL_RUNTIME_INVOCATION_ABI_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "RuntimeSupport"
+    / "NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs"
+)
+NATIVE_AOT_EXTERNAL_RUNTIME_ASSERTIONS_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "RuntimeSupport"
+    / "NativeAotLoweringPlanner.ExternalRuntimeHelpers.Assertions.cs"
+)
+TEST_FRAMEWORK_SUBJECT_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "TestFrameworkSubjectFamily.cs"
+)
+LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
+LOADER_STAGE_CROSS_ASSEMBLY_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.CrossAssemblyInstantiation.cs"
+)
+LOADER_STAGE_ASSEMBLY_LOADING_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.AssemblyLoading.cs"
+)
+LOADER_STAGE_INSTRUCTION_DECODING_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.InstructionDecoding.cs"
+)
+LOADER_STAGE_METADATA_RESOLUTION_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.MetadataResolution.cs"
+)
+LOADER_STAGE_GENERIC_INSTANTIATION_PROJECTION_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.GenericInstantiationProjection.cs"
+)
+LINKER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Linker" / "LinkerStage.cs"
+LINKER_STAGE_REACHABILITY_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Linker" / "LinkerStage.Reachability.cs"
+)
+LINKER_STAGE_OPTIMIZATION_FACTS_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Linker" / "LinkerStage.OptimizationFacts.cs"
+)
+LINKER_STAGE_DISPATCH_RESOLUTION_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Linker" / "LinkerStage.DispatchResolution.cs"
+)
+LINKER_STAGE_OUTPUT_PROJECTION_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Linker" / "LinkerStage.OutputProjection.cs"
+)
+MANAGED_CLOSURE_CONTRACTS_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
+)
+MANAGED_NAMING_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedNaming.cs"
+MANAGED_CLOSURE_MODELS_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureModels.cs"
+)
+MANAGED_METHOD_IDENTITY_CONTRACTS_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedMethodIdentityContracts.cs"
+)
+MANAGED_SEMANTIC_WORLD_CONTRACTS_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedSemanticWorldContracts.cs"
+)
+TYPED_IL_AND_AOT_CORE_IR_CONTRACTS_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "TypedIlAndAotCoreIrContracts.cs"
+)
+MANAGED_CLOSURE_ARTIFACT_MODELS_PATH = (
+    REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureArtifactModels.cs"
+)
+
+class Il2CppCodeGenStructureGovernanceTestSupport(unittest.TestCase):
+    pass

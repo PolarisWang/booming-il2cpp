@@ -152,7 +152,10 @@ class Phase4BBoxedStructFieldReadNativeAotTests(unittest.TestCase):
         ]:
             self.assertIn(required_fragment, source_text)
 
-        self.assertIn("BoxedStructFieldReadProofEntry.Run,", program_text)
+        self.assertIn("var proofMethods = typeof(ProofEntry).Assembly", program_text)
+        self.assertIn(".GetTypes()", program_text)
+        self.assertIn(".Where(m => m.IsDefined(typeof(ChaosUnitTestAttribute), inherit: false))", program_text)
+        self.assertIn("method.Invoke(obj: null, parameters: null)", program_text)
 
     def test_driver_emits_native_aot_cpp_for_boxed_struct_field_read_proof(self) -> None:
         self._ensure_native_aot_generated()

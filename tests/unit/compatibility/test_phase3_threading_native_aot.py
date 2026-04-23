@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import get_method_subject_display_string
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -39,7 +41,7 @@ OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase3-threading-native-
 GENERATED_CPP_RELATIVE_PATH = Path("generated") / "native-aot.generated.cpp"
 THREAD_CTOR_HELPER_SYMBOL = (
     "chaos_external_runtime_"
-    "System_Threading_Thread_System_Threading_Thread___ctor_System_Threading_ThreadStart_"
+    "System_Threading_Thread_System_Threading_Thread___ctor"
 )
 
 
@@ -123,7 +125,7 @@ class Phase3ThreadingNativeAotTests(unittest.TestCase):
 
         artifact = json.loads((self.output_root / "aot-core-ir.json").read_text(encoding="utf-8"))
         runtime_calls = {
-            instruction["callee"]
+            get_method_subject_display_string(instruction["callee"])
             for method in artifact["methods"]
             for instruction in method["instructions"]
             if instruction.get("callee", "").startswith("System.Threading.Thread/System.Threading.Thread::")
@@ -131,12 +133,24 @@ class Phase3ThreadingNativeAotTests(unittest.TestCase):
 
         self.assertTrue(
             {
-                "System.Threading.Thread/System.Threading.Thread::.ctor(System.Threading.ThreadStart)",
-                "System.Threading.Thread/System.Threading.Thread::Start()",
-                "System.Threading.Thread/System.Threading.Thread::Join()",
-                "System.Threading.Thread/System.Threading.Thread::get_CurrentThread()",
-                "System.Threading.Thread/System.Threading.Thread::get_Name()",
-                "System.Threading.Thread/System.Threading.Thread::set_Name(System.String)",
+                get_method_subject_display_string(
+                    "System.Threading.Thread/System.Threading.Thread::.ctor:System.Void(System.Threading.ThreadStart)"
+                ),
+                get_method_subject_display_string(
+                    "System.Threading.Thread/System.Threading.Thread::Start:System.Void()"
+                ),
+                get_method_subject_display_string(
+                    "System.Threading.Thread/System.Threading.Thread::Join:System.Void()"
+                ),
+                get_method_subject_display_string(
+                    "System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()"
+                ),
+                get_method_subject_display_string(
+                    "System.Threading.Thread/System.Threading.Thread::get_Name:System.String()"
+                ),
+                get_method_subject_display_string(
+                    "System.Threading.Thread/System.Threading.Thread::set_Name:System.Void(System.String)"
+                ),
             }.issubset(runtime_calls),
             msg=f"missing expected thread runtime calls: {sorted(runtime_calls)}",
         )
@@ -149,10 +163,7 @@ class Phase3ThreadingNativeAotTests(unittest.TestCase):
 
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
         self.assertIn("// Managed method: CoreRuntimeFeatures/ThreadingProofEntry::Run()", generated_cpp)
-        self.assertIn(
-            f"{THREAD_CTOR_HELPER_SYMBOL}(chaos_arg_0, chaos_arg_1);",
-            generated_cpp,
-        )
+        self.assertIn(THREAD_CTOR_HELPER_SYMBOL, generated_cpp)
 
 
 if __name__ == "__main__":

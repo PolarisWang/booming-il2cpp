@@ -28,6 +28,10 @@ class Phase3HotUpdateRuntimeFoundationTests(unittest.TestCase):
 
         for required_fragment in [
             "record LoadedHotUpdatePackage",
+            "class HotUpdateVersionContract",
+            "PackageFormatVersion",
+            "KernelArtifactVersion",
+            "string? ExecutionAuthorityKey",
             "LoadedSupplementalMetadata SupplementalMetadata",
         ]:
             self.assertIn(required_fragment, package_source)
@@ -52,6 +56,9 @@ class Phase3HotUpdateRuntimeFoundationTests(unittest.TestCase):
             "Activate(LoadedHotUpdatePackage package)",
             "Clear()",
             "TryGetMethod(ManagedMethodIdentityArtifact identity",
+            "TryGetMethodByExecutionAuthority(",
+            "ResolvePackageExecutionAuthorityKey(",
+            "assembly.ExecutionAuthorityKey",
             "TryGetMethodByToken(",
             "TryGetTypeBySubjectId(",
             "HasGenericInstantiation(",
@@ -62,6 +69,11 @@ class Phase3HotUpdateRuntimeFoundationTests(unittest.TestCase):
             "HotUpdateAssemblyLoader _assemblyLoader = new();",
             "public SupplementalMetadataRegistry SupplementalMetadata { get; } = new();",
             "_assemblyLoader.LoadFromDirectory(",
+            "CurrentKernelArtifactVersion",
+            "_currentGeneration",
+            "CreateHandle(",
+            "TryDispatchHandle(",
+            "ValidateCompatibleKernelArtifactVersion(",
             "SupplementalMetadata.Activate(package);",
             "SupplementalMetadata.Clear();",
         ]:
@@ -73,7 +85,20 @@ class Phase3HotUpdateRuntimeFoundationTests(unittest.TestCase):
             "runtimeManager.SupplementalMetadata",
             "TryGetTypeBySubjectId(",
             "TryGetMethod(PackageIdentity",
+            "TryGetMethodByExecutionAuthority(PackageAuthorityIdentity",
+            "PackageExecutionAuthorityKey",
+            "executionAuthorityKey: PackageExecutionAuthorityKey",
             "TryGetMethodByToken(",
+            "using System.Reflection;",
+            "typeof(List<int>)",
+            "GetConstructors(BindingFlags.Instance | BindingFlags.Public)[0]",
+            "GetMethod(nameof(List<int>.Add), BindingFlags.Instance | BindingFlags.Public)!",
+            "constructor.Invoke(parameters: null)",
+            "addMethod.Invoke(constructedList, [21])",
+            "addMethod.Invoke(constructedList, [84])",
+            "typeof(List<string>)",
+            "stringConstructor.Invoke(parameters: null)",
+            "stringAddMethod.Invoke(constructedStringList, [\"bridge\"])",
         ]:
             self.assertIn(required_fragment, proof_source)
 

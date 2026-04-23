@@ -31,6 +31,8 @@ public sealed class DriverEntry
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.MetadataRegistration), result.MetadataRegistration);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.SupplementalMetadataTemplate), result.SupplementalMetadataTemplate);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.CodeRegistration), result.CodeRegistration);
+        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.GenericInstantiationDemandGraph), result.GenericInstantiationDemandGraph);
+        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.GenericCapabilityMatrix), result.GenericCapabilityMatrix);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.OptimizationFacts), result.OptimizationFacts);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.PreserveDescriptor), result.PreserveDescriptor);
         WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.NativeReferenceLoweringPlan), result.NativeReferenceLoweringPlan);
@@ -55,6 +57,7 @@ public sealed class DriverEntry
 
         WriteJson(Path.Combine(result.OutputRootPath, NativeReferenceArtifactNames.LoweringPlan), result.LoweringPlan);
         WriteJson(Path.Combine(result.OutputRootPath, NativeReferenceArtifactNames.Manifest), result.Manifest);
+        WriteJson(Path.Combine(result.OutputRootPath, NativeReferenceArtifactNames.CodegenMetrics), result.CodegenMetrics);
         return 0;
     }
 
@@ -73,6 +76,7 @@ public sealed class DriverEntry
 
         WriteJson(Path.Combine(result.OutputRootPath, NativeAotArtifactNames.LoweringPlan), result.LoweringPlan);
         WriteJson(Path.Combine(result.OutputRootPath, NativeAotArtifactNames.Manifest), result.Manifest);
+        WriteJson(Path.Combine(result.OutputRootPath, NativeAotArtifactNames.CodegenMetrics), result.CodegenMetrics);
         return 0;
     }
 

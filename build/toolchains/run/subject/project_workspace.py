@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import os
 import shutil
 import sys
@@ -763,6 +764,70 @@ def _generated_stage_source_name(generated_stage_kind: str) -> str:
     return "native-reference.generated.cpp"
 
 
+def _generated_stage_manifest_name(generated_stage_kind: str) -> str:
+    if generated_stage_kind == "generated-native-aot":
+        return "native-aot.manifest.json"
+    if generated_stage_kind in {"generated-native-proof", "generated-engine-proof"}:
+        return "native-reference.manifest.json"
+    return ""
+
+
+def _generated_stage_translation_unit_paths(generated_root: Path, *, generated_stage_kind: str) -> list[Path]:
+    manifest_name = _generated_stage_manifest_name(generated_stage_kind)
+    if not manifest_name:
+        return []
+
+    manifest_path = generated_root / manifest_name
+    if not manifest_path.is_file():
+        return []
+
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+
+    if not isinstance(manifest, dict):
+        return []
+
+    discovered_paths: list[Path] = []
+    for artifact in list(manifest.get("generatedArtifacts") or []):
+        if not isinstance(artifact, dict):
+            continue
+        if str(artifact.get("kind") or "").strip() != "generatedTranslationUnit":
+            continue
+        artifact_path = str(artifact.get("path") or "").strip()
+        if artifact_path:
+            discovered_paths.append(generated_root / artifact_path)
+
+    if not discovered_paths:
+        for page in list(manifest.get("translationUnitPages") or []):
+            if not isinstance(page, dict):
+                continue
+            page_path = str(page.get("path") or "").strip()
+            if page_path:
+                discovered_paths.append(generated_root / page_path)
+
+    unique_paths: list[Path] = []
+    for path in discovered_paths:
+        if path not in unique_paths:
+            unique_paths.append(path)
+    return unique_paths
+
+
+def _generated_stage_source_path(generated_root: Path, *, generated_stage_kind: str) -> Path:
+    primary_generated_source_path = generated_root / "generated" / _generated_stage_source_name(generated_stage_kind)
+    if primary_generated_source_path.is_file():
+        return primary_generated_source_path
+
+    discovered_paths = _generated_stage_translation_unit_paths(
+        generated_root,
+        generated_stage_kind=generated_stage_kind,
+    )
+    if discovered_paths:
+        return discovered_paths[0]
+    return primary_generated_source_path
+
+
 def _subject_generated_source_path(
     repo_root: Path,
     subject_id: str,
@@ -770,8 +835,9 @@ def _subject_generated_source_path(
     generated_stage_kind: str,
     run_id: str = "subject-exec",
 ) -> Path:
-    return _subject_generated_root(repo_root, subject_id, run_id=run_id) / "generated" / _generated_stage_source_name(
-        generated_stage_kind
+    return _generated_stage_source_path(
+        _subject_generated_root(repo_root, subject_id, run_id=run_id),
+        generated_stage_kind=generated_stage_kind,
     )
 
 
@@ -803,7 +869,10 @@ def _subject_generated_solution_root(workspace_root: Path, *, matrix_id: str, mu
 
 
 def _subject_generated_solution_source_path(generated_solution_root: Path, *, generated_stage_kind: str) -> Path:
-    return generated_solution_root / "analysis" / "generated" / "generated" / _generated_stage_source_name(generated_stage_kind)
+    return _generated_stage_source_path(
+        generated_solution_root / "analysis" / "generated",
+        generated_stage_kind=generated_stage_kind,
+    )
 
 
 def _ensure_subject_generated_source(
@@ -838,6 +907,12 @@ def _ensure_subject_generated_source(
             matrix_id,
             variant,
             **refresh_kwargs,
+        )
+        generated_source_path = _subject_generated_source_path(
+            repo_root,
+            subject_id,
+            generated_stage_kind=generated_stage_kind,
+            run_id=run_id,
         )
 
     if not generated_source_path.is_file():

@@ -15,7 +15,8 @@
 ## 0. Authority 边界
 
 - 本文档拥有 AOT capability intake、owner subject、proof / benchmark / hotupdate obligation 与 formal verification 顺序的 authority。
-- [`../../docs/architecture/managed-native-hotupdate-test-pipeline.md`](../../docs/architecture/managed-native-hotupdate-test-pipeline.md) 只负责统一测试主线与分层边界。
+- [`../../docs/architecture/subject-test-framework-v1/INDEX.md`](../../docs/architecture/subject-test-framework-v1/INDEX.md) 只负责统一测试主线、collection / manifest / codegen 分层与宿主边界。
+- [`../../docs/architecture/verification-v1/spec.md`](../../docs/architecture/verification-v1/spec.md) 负责 formal verification、归并归档与 projection 口径。
 - [`INDEX.md`](./INDEX.md) 负责正式验证入口、对象导航与 completion 前对象优先级。
 - 命中本规范的计划，必须把 obligation 显式写入 `plan-v1-01.md`；不允许留到实现时临时决定。
 
@@ -116,6 +117,12 @@
   - 额外在 `HotUpdateHostPack` 补一层 hotupdate smoke 或 proof
 - 如果 capability 的 owner 是 `MixedExecutionFeaturePack`，且 mixed execution 会穿过 hotupdate 边界，按同样规则在热更侧补边界验证
 
+### 3.4 canonical generic runtime kernel 的补充 obligation
+
+- 命中 dispatch / reflection / hotupdate generic 边界时，`formalVerificationObjects` 至少覆盖：reflection construction/invoke proof、hotupdate `host -> patch` proof、hotupdate `patch -> host` proof、advanced carrier proof、generated code review、generated cpp size/memory benchmark。
+- 这一路径上的最终执行 authority 固定为 `InstantiationStubId + generation`；`subjectId`、metadata token、legacy slot string 不得重新成为 runtime final authority。
+- 如 hotupdate 包因为 `PackageFormatVersion`、`KernelArtifactVersion` 或 target AOT mismatch 被拒绝，必须证明 transactional activate / rollback 不会污染 rollback history。
+
 ## 4. 标准执行步骤
 
 ### Step 0: 判定 capability 与 owner subject
@@ -147,6 +154,10 @@
   锁 planner、loader、semantic、lowering、emitter 规则
 - `tests/contracts/**`
   锁 collection schema、registry shape、generated file shape、manifest / ABI / runtime contract
+
+补充约束：
+
+- 如果改动涉及 async generic family / runtime-skeleton / generated wrapper carrier，必须至少补一个“结果类型与参数 carrier 脱钩”的 generated artifact 回归，例如 `Task<string>(int)`；不允许只用 `Task<int>(int)`、`Task<bool>(bool)`、`Task<string>(string)` 这类同构 case 证明泛化已完成。
 
 没有这层失败测试，不直接修改 AOT 主线实现。
 
@@ -284,7 +295,7 @@ benchmark 的职责是补充成本证据，不替代 correctness 层。
 
 - owner subject 的受影响 declared proof / benchmark
 - 相关 consumer smoke（如果存在）
-- 受影响 pipeline / module / system 验证
+- 受影响 module / system 验证
 - `formalVerificationObjects` 中声明的全部对象
 
 ## 5. 完成标准
@@ -320,4 +331,5 @@ benchmark 的职责是补充成本证据，不替代 correctness 层。
 
 - [`新增测试接入规范.md`](./新增测试接入规范.md)
 - [`../04-工具与集成/统一测试框架.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md)
-- [`../../docs/architecture/managed-native-hotupdate-test-pipeline.md`](../../docs/architecture/managed-native-hotupdate-test-pipeline.md)
+- [`../../docs/architecture/subject-test-framework-v1/INDEX.md`](../../docs/architecture/subject-test-framework-v1/INDEX.md)
+- [`../../docs/architecture/verification-v1/spec.md`](../../docs/architecture/verification-v1/spec.md)

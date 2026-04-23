@@ -131,7 +131,9 @@
         "translationUnitPageCount",
         "auditStatus",
         "auditMessage",
-        "runtimeSkeletonReservedStubCount"
+        "runtimeSkeletonReservedStubCount",
+        "runtimeSkeletonCoverageReportPath",
+        "runtimeSkeletonUncoveredMethodCount"
       ],
       "properties": {
         "manifestPath": {
@@ -165,8 +167,7 @@
           "const": "assembly-bound-native-reference-skeleton"
         },
         "preferredAssemblyDispatchSubjectId": {
-          "type": "string",
-          "minLength": 1
+          "type": "string"
         },
         "translationUnitMode": {
           "type": "string",
@@ -178,7 +179,7 @@
         },
         "translationUnitPageCount": {
           "type": "integer",
-          "minimum": 1
+          "minimum": 0
         },
         "auditStatus": {
           "type": "string",
@@ -189,6 +190,15 @@
           "minLength": 1
         },
         "runtimeSkeletonReservedStubCount": {
+          "type": "integer",
+          "minimum": 0,
+          "deprecated": true,
+          "description": "Deprecated compatibility field. Runtime skeleton emission no longer generates reserved stubs and this value is always 0."
+        },
+        "runtimeSkeletonCoverageReportPath": {
+          "type": "string"
+        },
+        "runtimeSkeletonUncoveredMethodCount": {
           "type": "integer",
           "minimum": 0
         }

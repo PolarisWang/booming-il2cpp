@@ -5,33 +5,40 @@ objectType: guide
 
 ## 目的
 
-- 把 `workflow/roadmap-0-*` 这条项目级验证链路收敛为正式 `system` 对象，供 harness、skill 和发布前验证统一调用。
+- 把 `workflow/roadmap-0-*` 这条项目级验证链路收敛到正式 `system/runtime-baseline-*` 对象，供 harness、skill 和发布前验证统一调用。
 - 覆盖 roadmap-0 在本机宿主上的完整运行时验证流程，而不是只停留在手工脚本或历史 `verify` 语义。
 
 ## 整体验证对象
 
-- `system/roadmap-0-windows`
-- `system/roadmap-0-macos`
+- `system/runtime-baseline-windows`
+- `system/runtime-baseline-macos`
 
 ## 组合边界
 
-- `pipeline/completion-runtime-trace-windows`
-- `pipeline/completion-runtime-trace-macos`
-- `system/roadmap-0-android-startup-gate`
-- `system/roadmap-0-ios-packaging-gate`
-- `system/roadmap-0-linux-packaging-gate`
+- `module/analysis/basic`
+- `module/managed-smoke/basic`
+- `module/reflection/basic`
+- `module/interop/basic`
+- `module/hosted-runtime/basic`
+- `module/trace-export/windows`
+- `module/trace-export/macos`
+- `system/windows-reference-gate`
+- `system/macos-reference-gate`
+- `system/android-startup-gate`
+- `system/ios-packaging-gate`
+- `system/linux-packaging-gate`
 
 ## 兼容入口
 
 - `workflow/roadmap-0-windows`
 - `workflow/roadmap-0-macos`
 
-这两个 `workflow` suite 仍保留给公开 `run test workflow ...` 语法使用，但内部已经转发到正式 `system/roadmap-0-*` 对象；`build/scripts/verify-roadmap-0.*` 只保留为底层实现与调试路径，不再代表正式命令入口。
+这两个 `workflow` suite 仍保留给公开 `run test workflow ...` 语法使用，但内部已经转发到正式 `system/runtime-baseline-*` 对象；`build/scripts/verify-roadmap-0.*` 只保留为底层实现与调试路径，不再代表正式命令入口。
 
 ## 正式入口
 
-- `run test system --id system/roadmap-0-windows`
-- `run test system --id system/roadmap-0-macos`
+- `run test system --id system/runtime-baseline-windows`
+- `run test system --id system/runtime-baseline-macos`
 
 ## 关联说明
 

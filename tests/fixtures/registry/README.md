@@ -4,6 +4,5 @@
 
 - `modules/`: module verification manifests
 - `systems/`: system scenario manifests
-- `pipelines/`: pipeline manifests
 
 `tests/registry/` has been retired. Do not recreate it and do not add registry manifests outside this fixtures tree.

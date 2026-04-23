@@ -8,85 +8,12 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     void* managed_args)
 {
     (void)managed_args;
-    if (bridge == nullptr || code_registration == nullptr || metadata_registration == nullptr || options == nullptr || runtime == nullptr || thread == nullptr) {
-        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
-    }
-    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
-    if (abi == nullptr) {
-        return CHAOS_BRIDGE_STATUS_NOT_READY;
-    }
-    const char* image_name = options->image_name_utf8 != nullptr
-        ? options->image_name_utf8 : {{ assembly_name_literal }};
-    ImageHandle image = reinterpret_cast<ImageHandle>(const_cast<char*>(image_name));
-    TypeInfoHandle reference_type = bridge->resolve_type_by_token(image, {{ reference_type_token }});
-    FieldInfoHandle captured_field = bridge->resolve_field_by_token(image, {{ captured_field_token }});
-    if (reference_type == nullptr || captured_field == nullptr) {
-        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
-    }
-    if (abi->class_init(runtime, reference_type) != CHAOS_RUNTIME_STATUS_OK) {
-        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
-    }
-    using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
-    using WriteLineStringFn = int32_t (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
-    void* raw_concat_string = bridge->resolve_icall({{ concat_icall_literal }});
-    void* raw_write_line_string = bridge->resolve_icall({{ console_write_line_string_icall_literal }});
-    if (raw_concat_string == nullptr || raw_write_line_string == nullptr) {
-        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
-    }
-    const auto concat_string_pair = reinterpret_cast<ConcatStringPairFn>(raw_concat_string);
-    const auto write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
-    (void)code_registration;
-    (void)metadata_registration;
-    void* constructor_argument = abi->string_new_utf8(runtime, thread, {{ constructor_literal }}, {{ constructor_literal_byte_count }}u);
-    if (constructor_argument == nullptr) {
-        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
-    }
-    void* prefix = abi->string_new_utf8(runtime, thread, {{ message_prefix_literal }}, {{ message_prefix_literal_byte_count }}u);
-    if (prefix == nullptr) {
-        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
-    }
-    void* message_suffix = abi->string_new_utf8(runtime, thread, {{ message_suffix_literal }}, {{ message_suffix_literal_byte_count }}u);
-    if (message_suffix == nullptr) {
-        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
-    }
-    void* banner = abi->object_new(runtime, thread, reference_type);
-    if (banner == nullptr) {
-        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
-    }
-    if (abi->field_set_value(
-            runtime,
-            thread,
-            captured_field,
-            banner,
-            &constructor_argument,
-            sizeof(constructor_argument)) != CHAOS_RUNTIME_STATUS_OK) {
-        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
-    }
-    void* captured_value = nullptr;
-    if (abi->field_get_value(
-            runtime,
-            thread,
-            captured_field,
-            banner,
-            &captured_value,
-            sizeof(captured_value)) != CHAOS_RUNTIME_STATUS_OK || captured_value == nullptr) {
-        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
-    }
-    void* formatted = concat_string_pair(runtime, thread, prefix, captured_value);
-    if (formatted == nullptr) {
-        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
-    }
-    void* suffixed_message = concat_string_pair(runtime, thread, formatted, message_suffix);
-    if (suffixed_message == nullptr) {
-        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
-    }
-    void* bang = abi->string_new_utf8(runtime, thread, "!", 1u);
-    if (bang == nullptr) {
-        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
-    }
-    void* final_message = concat_string_pair(runtime, thread, suffixed_message, bang);
-    if (final_message == nullptr) {
-        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
-    }
-    return write_line_string(runtime, thread, final_message);
+    return ExecuteRuntimeSkeletonDelegateClosedTargetRelay(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        {{ descriptor_index }}u);
 }

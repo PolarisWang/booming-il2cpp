@@ -23,7 +23,9 @@ internal static class HotUpdatePackageSupport
         byte[] assemblyBytes,
         string signature,
         bool corruptAssemblyHash = false,
-        string? metadataContent = null)
+        string? metadataContent = null,
+        string kernelArtifactVersion = HotUpdateVersionContract.CurrentKernelArtifactVersion,
+        string? executionAuthorityKey = null)
     {
         var packageRoot = Path.Combine(workspaceRoot, packageIdSuffix);
         Directory.CreateDirectory(packageRoot);
@@ -37,6 +39,8 @@ internal static class HotUpdatePackageSupport
         {
             PackageId = $"com.example.hotupdate.{packageIdSuffix}",
             TargetAotVersion = targetAotVersion,
+            PackageFormatVersion = HotUpdateVersionContract.CurrentPackageFormatVersion,
+            KernelArtifactVersion = kernelArtifactVersion,
             Assemblies =
             [
                 new HotUpdateAssemblyEntry
@@ -47,6 +51,7 @@ internal static class HotUpdatePackageSupport
                         : PackageReader.ComputeFileHash(assemblyBytes),
                     Size = assemblyBytes.Length,
                     EntryPoint = entryPoint,
+                    ExecutionAuthorityKey = executionAuthorityKey,
                 },
             ],
             SupplementalMetadata = "metadata-supplement.bin",

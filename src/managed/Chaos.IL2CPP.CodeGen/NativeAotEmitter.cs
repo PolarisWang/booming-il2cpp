@@ -7,6 +7,10 @@ namespace Chaos.IL2CPP.CodeGen;
 
 public sealed class NativeAotEmitter
 {
+    private sealed record AssemblyFullClosureAuditEmission(
+        IReadOnlyList<NativeAotGeneratedSource> GeneratedSources,
+        IReadOnlyList<NativeAotGeneratedArtifactRef> GeneratedArtifacts);
+
     private const int AuditTranslationUnitPageSize = 1024;
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
@@ -19,10 +23,13 @@ public sealed class NativeAotEmitter
         var loweringPlanPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.NativeAotLoweringPlan);
         var loweringPlan = LoadRequiredJson<NativeAotLoweringPlanArtifact>(loweringPlanPath);
         IReadOnlyList<NativeAotGeneratedSource> generatedSources;
+        IReadOnlyList<NativeAotGeneratedArtifactRef> generatedArtifacts;
 
         if (string.Equals(loweringPlan.PlanKind, "assembly-full-closure-audit", StringComparison.Ordinal))
         {
-            generatedSources = BuildAssemblyFullClosureAuditGeneratedSources(loweringPlan);
+            var auditEmission = BuildAssemblyFullClosureAuditGeneratedSources(loweringPlan);
+            generatedSources = auditEmission.GeneratedSources;
+            generatedArtifacts = auditEmission.GeneratedArtifacts;
         }
         else
         {
@@ -52,7 +59,29 @@ public sealed class NativeAotEmitter
                     Contents = BuildGeneratedTranslationUnit(templateModel),
                 },
             ];
+            generatedArtifacts = generatedSources
+                .Select(generatedSource => new NativeAotGeneratedArtifactRef
+                {
+                    Kind = "generatedTranslationUnit",
+                    Path = generatedSource.RelativePath,
+                })
+                .ToList();
         }
+
+        var codegenMetrics = NativeCodegenMetricsBuilder.Build(
+            "native-aot",
+            loweringPlan.PlanKind,
+            generatedSources.Select(generatedSource => (generatedSource.RelativePath, generatedSource.Contents)));
+        generatedArtifacts = generatedArtifacts
+            .Concat(
+            [
+                new NativeAotGeneratedArtifactRef
+                {
+                    Kind = "codegenMetrics",
+                    Path = NativeAotArtifactNames.CodegenMetrics,
+                },
+            ])
+            .ToList();
 
         var manifest = new NativeAotManifestArtifact
         {
@@ -63,13 +92,7 @@ public sealed class NativeAotEmitter
             TranslationUnitPageSize = loweringPlan.TranslationUnitPageSize,
             TranslationUnitPageCount = loweringPlan.TranslationUnitPageCount,
             TranslationUnitPages = loweringPlan.TranslationUnitPages,
-            GeneratedArtifacts = generatedSources
-                .Select(generatedSource => new NativeAotGeneratedArtifactRef
-                {
-                    Kind = "generatedTranslationUnit",
-                    Path = generatedSource.RelativePath,
-                })
-                .ToList(),
+            GeneratedArtifacts = generatedArtifacts,
         };
 
         return new NativeAotResult
@@ -77,74 +100,45 @@ public sealed class NativeAotEmitter
             OutputRootPath = request.OutputRootPath,
             LoweringPlan = loweringPlan,
             Manifest = manifest,
+            CodegenMetrics = codegenMetrics,
             GeneratedSources = generatedSources,
         };
     }
 
-    private static IReadOnlyList<NativeAotGeneratedSource> BuildAssemblyFullClosureAuditGeneratedSources(
+    private static AssemblyFullClosureAuditEmission BuildAssemblyFullClosureAuditGeneratedSources(
         NativeAotLoweringPlanArtifact loweringPlan)
     {
         ValidateAssemblyFullClosureAuditPlan(loweringPlan);
-
-        var generatedSources = new List<NativeAotGeneratedSource>
+        var generatedFiles = AssemblyFullClosureAuditEmitter.BuildGeneratedFiles(
+            loweringPlan.AssemblyName,
+            loweringPlan.PlanKind,
+            loweringPlan.TranslationUnitMethodCount ?? 0,
+            loweringPlan.TranslationUnitPageSize ?? AuditTranslationUnitPageSize,
+            loweringPlan.TranslationUnitPages ?? [],
+            loweringPlan.TranslationUnitMethodSubjectIds ?? [],
+            NativeAotArtifactNames.AuditSummaryTranslationUnit);
+        var generatedSources = generatedFiles
+            .Select(generatedFile => new NativeAotGeneratedSource
+            {
+                RelativePath = generatedFile.RelativePath,
+                Contents = generatedFile.Contents,
+            })
+            .ToList();
+        var generatedArtifacts = new List<NativeAotGeneratedArtifactRef>
         {
             new()
             {
-                RelativePath = NativeAotArtifactNames.GeneratedTranslationUnit,
-                Contents = BuildAssemblyFullClosureAuditSummaryTranslationUnit(loweringPlan),
+                Kind = "generatedTranslationUnit",
+                Path = NativeAotArtifactNames.AuditSummaryTranslationUnit,
             },
         };
-
-        var methodSubjectIds = loweringPlan.TranslationUnitMethodSubjectIds ?? [];
-        for (var pageIndex = 0; pageIndex * AuditTranslationUnitPageSize < methodSubjectIds.Count; pageIndex++)
+        generatedArtifacts.AddRange((loweringPlan.TranslationUnitPages ?? []).Select(page => new NativeAotGeneratedArtifactRef
         {
-            var pageItems = methodSubjectIds
-                .Skip(pageIndex * AuditTranslationUnitPageSize)
-                .Take(AuditTranslationUnitPageSize)
-                .ToList();
-            generatedSources.Add(new NativeAotGeneratedSource
-            {
-                RelativePath = $"generated/audit/native-aot.methods.page-{pageIndex + 1:D4}.cpp",
-                Contents = BuildAssemblyFullClosureAuditPageTranslationUnit(loweringPlan, pageIndex + 1, pageItems),
-            });
-        }
+            Kind = "auditInventoryPage",
+            Path = page.Path,
+        }));
 
-        return generatedSources;
-    }
-
-    private static string BuildAssemblyFullClosureAuditSummaryTranslationUnit(
-        NativeAotLoweringPlanArtifact loweringPlan)
-    {
-        ValidateAssemblyFullClosureAuditPlan(loweringPlan);
-        var model = new ScriptObject
-        {
-            ["assembly_name_literal"] = ToCppStringLiteral(loweringPlan.AssemblyName),
-            ["plan_kind_literal"] = ToCppStringLiteral(loweringPlan.PlanKind),
-            ["translation_unit_method_count"] = loweringPlan.TranslationUnitMethodCount ?? 0,
-            ["translation_unit_page_size"] = loweringPlan.TranslationUnitPageSize ?? AuditTranslationUnitPageSize,
-            ["translation_unit_page_count"] = loweringPlan.TranslationUnitPageCount
-                ?? GetAuditPageCount(loweringPlan.TranslationUnitMethodSubjectIds?.Count ?? 0),
-        };
-        return ScribanTemplateRenderer.RenderTemplate(
-            NativeAotTemplateCatalog.GetAssemblyFullClosureAuditSummaryTemplate(),
-            model);
-    }
-
-    private static string BuildAssemblyFullClosureAuditPageTranslationUnit(
-        NativeAotLoweringPlanArtifact loweringPlan,
-        int pageNumber,
-        IReadOnlyList<string> pageItems)
-    {
-        var model = new ScriptObject
-        {
-            ["assembly_name_literal"] = ToCppStringLiteral(loweringPlan.AssemblyName),
-            ["page_number"] = pageNumber,
-            ["page_item_count"] = pageItems.Count,
-            ["method_subject_id_literals"] = pageItems.Select(ToCppStringLiteral).ToArray(),
-        };
-        return ScribanTemplateRenderer.RenderTemplate(
-            NativeAotTemplateCatalog.GetAssemblyFullClosureAuditPageTemplate(),
-            model);
+        return new AssemblyFullClosureAuditEmission(generatedSources, generatedArtifacts);
     }
 
     private static void ValidateLoweringPlan(
@@ -180,46 +174,15 @@ public sealed class NativeAotEmitter
 
     private static void ValidateAssemblyFullClosureAuditPlan(NativeAotLoweringPlanArtifact loweringPlan)
     {
-        RequireStringField(loweringPlan.PlanKind, nameof(loweringPlan.PlanKind));
-        RequireStringField(loweringPlan.AssemblyName, nameof(loweringPlan.AssemblyName));
-
-        if (!string.Equals(loweringPlan.PlanKind, "assembly-full-closure-audit", StringComparison.Ordinal))
-        {
-            throw new InvalidOperationException(
-                $"assembly-full-closure audit emitter expected plan kind 'assembly-full-closure-audit', but found '{loweringPlan.PlanKind}'");
-        }
-
-        if (!string.Equals(loweringPlan.TranslationUnitMode, "audit-only", StringComparison.Ordinal))
-        {
-            throw new InvalidOperationException(
-                $"assembly-full-closure audit emitter expected translation-unit mode 'audit-only', but found '{loweringPlan.TranslationUnitMode ?? "<null>"}'");
-        }
-
-        if (loweringPlan.TranslationUnitMethodSubjectIds is null ||
-            loweringPlan.TranslationUnitMethodSubjectIds.Count == 0)
-        {
-            throw new InvalidOperationException(
-                "assembly-full-closure audit emitter requires at least one translation-unit method subject id");
-        }
-
-        if (loweringPlan.TranslationUnitPageSize != AuditTranslationUnitPageSize)
-        {
-            throw new InvalidOperationException(
-                $"assembly-full-closure audit emitter expected translation-unit page size '{AuditTranslationUnitPageSize}', but found '{loweringPlan.TranslationUnitPageSize?.ToString() ?? "<null>"}'");
-        }
-
-        if (loweringPlan.TranslationUnitPageCount != GetAuditPageCount(loweringPlan.TranslationUnitMethodSubjectIds.Count))
-        {
-            throw new InvalidOperationException(
-                $"assembly-full-closure audit emitter expected translation-unit page count '{GetAuditPageCount(loweringPlan.TranslationUnitMethodSubjectIds.Count)}', but found '{loweringPlan.TranslationUnitPageCount?.ToString() ?? "<null>"}'");
-        }
-
-        if (loweringPlan.TranslationUnitPages is null ||
-            loweringPlan.TranslationUnitPages.Count != loweringPlan.TranslationUnitPageCount)
-        {
-            throw new InvalidOperationException(
-                "assembly-full-closure audit emitter requires translation-unit page metadata matching the declared page count");
-        }
+        AssemblyFullClosureAuditEmitter.ValidatePlan(
+            loweringPlan.PlanKind,
+            loweringPlan.AssemblyName,
+            loweringPlan.TranslationUnitMode,
+            loweringPlan.TranslationUnitMethodSubjectIds,
+            loweringPlan.TranslationUnitPageSize,
+            loweringPlan.TranslationUnitPageCount,
+            loweringPlan.TranslationUnitPages,
+            AuditTranslationUnitPageSize);
     }
 
     private static AotCoreIrMethodArtifact LoadEntryMethod(
@@ -322,15 +285,5 @@ public sealed class NativeAotEmitter
 
         builder.Append('"');
         return builder.ToString();
-    }
-
-    private static int GetAuditPageCount(int totalMethodCount)
-    {
-        if (totalMethodCount <= 0)
-        {
-            return 0;
-        }
-
-        return (totalMethodCount + AuditTranslationUnitPageSize - 1) / AuditTranslationUnitPageSize;
     }
 }

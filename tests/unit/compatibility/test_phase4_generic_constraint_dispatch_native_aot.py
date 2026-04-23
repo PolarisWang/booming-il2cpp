@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -34,14 +36,14 @@ DLL_PATH = (
 )
 TEST_FRAMEWORK_PROJECT_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"
 TEST_FRAMEWORK_DLL_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "bin" / "Release" / "net8.0" / "Chaos.TestFramework.Sdk.dll"
-ENTRY_SUBJECT_ID = "CoreRuntimeFeatures/GenericConstraintProofEntry::Run()"
+ENTRY_SUBJECT_ID = "CoreRuntimeFeatures/GenericConstraintProofEntry::Run:System.Int32()"
 FORMAT_VALUE_SUBJECT_ID = (
     "CoreRuntimeFeatures/GenericConstraintProofEntry::FormatValue"
-    "<GenericConstraintValue,GenericConstraintFormatter>(GenericConstraintValue,GenericConstraintFormatter)"
+    "<GenericConstraintValue,GenericConstraintFormatter>:System.Int32(GenericConstraintValue,GenericConstraintFormatter)"
 )
 CLOSED_INTERFACE_SLOT_SUBJECT_ID = (
     "CoreRuntimeFeatures/IGenericConstraintFormatter"
-    "<GenericConstraintValue>::Format(GenericConstraintValue)"
+    "<GenericConstraintValue>::Format:System.Int32(GenericConstraintValue)"
 )
 TEST_OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase4-generic-constraint-dispatch-native-aot"
 GENERATED_CPP_RELATIVE_PATH = Path("generated") / "native-aot.generated.cpp"
@@ -127,7 +129,7 @@ class Phase4GenericConstraintDispatchNativeAotTests(unittest.TestCase):
 
         artifact_path = self.output_root / "aot-core-ir.json"
         artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
-        format_value_method = next(method for method in artifact["methods"] if method["subjectId"] == FORMAT_VALUE_SUBJECT_ID)
+        format_value_method = find_method_by_subject_id(artifact["methods"], FORMAT_VALUE_SUBJECT_ID)
 
         constrained_callvirt = next(
             instruction for instruction in format_value_method["instructions"] if instruction["op"] == "callvirt"

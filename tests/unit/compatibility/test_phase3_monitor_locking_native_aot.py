@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -122,7 +124,7 @@ class Phase3MonitorLockingNativeAotTests(unittest.TestCase):
 
         artifact_path = self.output_root / "aot-core-ir.json"
         artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
-        increment_method = next(method for method in artifact["methods"] if method["subjectId"] == INCREMENT_SUBJECT_ID)
+        increment_method = find_method_by_subject_id(artifact["methods"], INCREMENT_SUBJECT_ID)
 
         self.assertEqual(1, increment_method["exceptionRegionCount"])
         self.assertEqual(

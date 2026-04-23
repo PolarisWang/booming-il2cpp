@@ -368,6 +368,8 @@ internal static class Program
             {
                 PackageId = $"com.example.compatibility.{patchId}",
                 TargetAotVersion = targetAotVersion,
+                PackageFormatVersion = HotUpdateVersionContract.CurrentPackageFormatVersion,
+                KernelArtifactVersion = HotUpdateVersionContract.CurrentKernelArtifactVersion,
                 Assemblies = [],
                 SupplementalMetadata = "metadata-supplement.bin",
                 Signature = "signed-proof",

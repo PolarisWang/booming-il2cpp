@@ -33,7 +33,7 @@ DLL_PATH = (
     / "net8.0"
     / "CoreRuntimeFeatures.dll"
 )
-ENTRY_SUBJECT_ID = "CoreRuntimeFeatures/GenericSharingBoundaryProofEntry::Run()"
+ENTRY_SUBJECT_ID = "CoreRuntimeFeatures/GenericSharingBoundaryProofEntry::Run:System.Int32()"
 OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase3-generic-sharing-boundary-native-aot"
 GENERATED_CPP_RELATIVE_PATH = Path("generated") / "native-aot.generated.cpp"
 
@@ -110,7 +110,7 @@ class Phase3GenericSharingBoundaryNativeAotTests(unittest.TestCase):
         self.assertTrue(generated_cpp_path.is_file(), msg=f"missing generated source: {generated_cpp_path}")
 
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
-        self.assertIn("// Managed method: CoreRuntimeFeatures/GenericSharingBoundaryProofEntry::Run()", generated_cpp)
+        self.assertIn("// Managed method: CoreRuntimeFeatures/GenericSharingBoundaryProofEntry::Run", generated_cpp)
         self.assertIn("switch (chaos_header->type_id)", generated_cpp)
         self.assertIn("GenericValue_System_Int32_", generated_cpp)
         self.assertIn("GenericSharingBoundaryProofEntry_Run", generated_cpp)

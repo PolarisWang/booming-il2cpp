@@ -73,7 +73,10 @@ public sealed partial class NativeReferenceLoweringPlanner
                 entryPointSubjectId,
                 metadataRegistration,
                 methodPointers,
+                methods,
                 entryPointRegistration,
+                entryPointMethod,
+                entryPointInstructions,
                 out var delegateClosedTargetRelayPlan))
         {
             return delegateClosedTargetRelayPlan;
@@ -161,6 +164,48 @@ public sealed partial class NativeReferenceLoweringPlanner
                 out var arrayBoxingReferenceArrayPlan))
         {
             return arrayBoxingReferenceArrayPlan;
+        }
+
+        if (TryCreateArrayClearReferenceArrayLoweringPlan(
+                assemblyName,
+                entryPointSubjectId,
+                metadataRegistration,
+                methodPointers,
+                methods,
+                entryPointRegistration,
+                entryPointMethod,
+                entryPointInstructions,
+                out var arrayClearReferenceArrayPlan))
+        {
+            return arrayClearReferenceArrayPlan;
+        }
+
+        if (TryCreateArrayCopyReferenceArrayLoweringPlan(
+                assemblyName,
+                entryPointSubjectId,
+                metadataRegistration,
+                methodPointers,
+                methods,
+                entryPointRegistration,
+                entryPointMethod,
+                entryPointInstructions,
+                out var arrayCopyReferenceArrayPlan))
+        {
+            return arrayCopyReferenceArrayPlan;
+        }
+
+        if (TryCreateArrayReverseReferenceArrayLoweringPlan(
+                assemblyName,
+                entryPointSubjectId,
+                metadataRegistration,
+                methodPointers,
+                methods,
+                entryPointRegistration,
+                entryPointMethod,
+                entryPointInstructions,
+                out var arrayReverseReferenceArrayPlan))
+        {
+            return arrayReverseReferenceArrayPlan;
         }
 
         if (IsStaticCallCtorGetterEntryPointShape(entryPointInstructions))
@@ -457,19 +502,12 @@ public sealed partial class NativeReferenceLoweringPlanner
     {
         loweringPlan = null;
 
-        string writeLineStringIcall;
-        if (IsConstructorThenInstanceCallEntryPointShape(entryPointInstructions))
-        {
-            writeLineStringIcall = GetRequiredInstructionCallee(entryPointInstructions[3], entryPointMethod.SubjectId, 3);
-        }
-        else if (IsConstructorThenAssertStringEqualityEntryPointShape(entryPointInstructions))
-        {
-            writeLineStringIcall = ConsoleWriteLineStringIcall;
-        }
-        else
+        if (!IsConstructorThenInstanceCallEntryPointShape(entryPointInstructions))
         {
             return false;
         }
+
+        var writeLineStringIcall = GetRequiredInstructionCallee(entryPointInstructions[3], entryPointMethod.SubjectId, 3);
 
         var constructorSubjectId = GetRequiredInstructionCallee(entryPointInstructions[1], entryPointMethod.SubjectId, 1);
         var declaredMethodSubjectId = GetRequiredInstructionCallee(entryPointInstructions[2], entryPointMethod.SubjectId, 2);
@@ -630,71 +668,536 @@ public sealed partial class NativeReferenceLoweringPlanner
         return true;
     }
 
+    private static bool TryCreateArrayClearReferenceArrayLoweringPlan(
+        string assemblyName,
+        string entryPointSubjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        IReadOnlyList<TypedIlMethodArtifact> methods,
+        CodeRegistrationEntry entryPointRegistration,
+        TypedIlMethodArtifact entryPointMethod,
+        IReadOnlyList<TypedIlInstructionArtifact> entryPointInstructions,
+        out NativeReferenceLoweringPlanArtifact? loweringPlan)
+    {
+        loweringPlan = null;
+
+        if (!IsArrayClearReferenceArrayEntryPointShape(entryPointInstructions))
+        {
+            return false;
+        }
+
+        var wholeArrayClearShape = entryPointInstructions.Count == 17;
+        var arrayLength = GetRequiredOperandInt(entryPointInstructions[0]);
+        var arrayElementTypeSubjectId = GetRequiredOperandString(entryPointInstructions[1]);
+        var arrayLocalIndex = GetRequiredOperandInt(entryPointInstructions[2]);
+        var arrayStoreLocalIndex = GetRequiredOperandInt(entryPointInstructions[3]);
+        var arrayStoreIndex = GetRequiredOperandInt(entryPointInstructions[4]);
+        var storedLiteral = GetRequiredOperandString(entryPointInstructions[5]);
+        var arrayClearLocalIndex = GetRequiredOperandInt(entryPointInstructions[7]);
+        var clearStartIndex = wholeArrayClearShape ? 0 : GetRequiredOperandInt(entryPointInstructions[8]);
+        var clearLength = wholeArrayClearShape ? arrayLength : GetRequiredOperandInt(entryPointInstructions[9]);
+        var arrayClearMethodSubjectId = GetRequiredInstructionCallee(entryPointInstructions[wholeArrayClearShape ? 8 : 10], entryPointMethod.SubjectId, wholeArrayClearShape ? 8 : 10);
+        var messagePrefixLiteral = GetRequiredOperandString(entryPointInstructions[wholeArrayClearShape ? 9 : 11]);
+        var arrayReadLocalIndex = GetRequiredOperandInt(entryPointInstructions[wholeArrayClearShape ? 10 : 12]);
+        var arrayReadIndex = GetRequiredOperandInt(entryPointInstructions[wholeArrayClearShape ? 11 : 13]);
+        var concatPairIcall = GetRequiredInstructionCallee(entryPointInstructions[wholeArrayClearShape ? 13 : 15], entryPointMethod.SubjectId, wholeArrayClearShape ? 13 : 15);
+        var writeLineStringIcall = GetRequiredInstructionCallee(entryPointInstructions[wholeArrayClearShape ? 14 : 16], entryPointMethod.SubjectId, wholeArrayClearShape ? 14 : 16);
+
+        if (arrayLocalIndex != arrayStoreLocalIndex || arrayLocalIndex != arrayClearLocalIndex || arrayLocalIndex != arrayReadLocalIndex)
+        {
+            throw new InvalidOperationException(
+                $"array clear lowering expects '{entryPointMethod.SubjectId}' to reuse one array local across store/clear/read");
+        }
+
+        if (clearLength <= 0)
+        {
+            throw new InvalidOperationException(
+                $"array clear lowering expects '{entryPointMethod.SubjectId}' to clear a positive constant number of elements");
+        }
+
+        if (clearStartIndex < 0 || arrayStoreIndex < 0 || arrayReadIndex < 0 ||
+            clearStartIndex + clearLength > arrayLength ||
+            arrayStoreIndex >= arrayLength ||
+            arrayReadIndex >= arrayLength)
+        {
+            throw new InvalidOperationException(
+                $"array clear lowering expects '{entryPointMethod.SubjectId}' to use in-range constant clear indices");
+        }
+
+        if (arrayStoreIndex < clearStartIndex || arrayStoreIndex >= clearStartIndex + clearLength)
+        {
+            throw new InvalidOperationException(
+                $"array clear lowering expects '{entryPointMethod.SubjectId}' to store the literal inside the cleared range");
+        }
+
+        if (arrayReadIndex != arrayStoreIndex)
+        {
+            throw new InvalidOperationException(
+                $"array clear lowering expects '{entryPointMethod.SubjectId}' to read back from the cleared slot that originally held the stored literal");
+        }
+
+        if (!IsSupportedArrayClearMethodSubjectId(arrayClearMethodSubjectId))
+        {
+            throw new InvalidOperationException(
+                $"array clear lowering expects '{entryPointMethod.SubjectId}' to call supported System.Array.Clear overload, but found '{arrayClearMethodSubjectId}'");
+        }
+
+        loweringPlan = new NativeReferenceLoweringPlanArtifact
+        {
+            PlanKind = "arrayClearReferenceArray",
+            AssemblyName = assemblyName,
+            EntrySubjectId = entryPointSubjectId,
+            IncludeHeader = "codegen_bridge.h",
+            NativeEntryFunctionName = "RunNativeReference",
+            EntrySymbol = entryPointRegistration.Symbol,
+            ReferenceTypeToken = CreateTypeTokenLiteral(metadataRegistration, arrayElementTypeSubjectId),
+            CapturedFieldToken = "0u",
+            EntryMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", entryPointRegistration.SubjectId)),
+            ConsoleWriteLineStringIcall = writeLineStringIcall,
+            StringConcatPairIcall = concatPairIcall,
+            StoredLiteral = ToCppStringLiteral(storedLiteral),
+            StoredLiteralByteCount = Encoding.UTF8.GetByteCount(storedLiteral),
+            MessagePrefixLiteral = ToCppStringLiteral(messagePrefixLiteral),
+            MessagePrefixLiteralByteCount = Encoding.UTF8.GetByteCount(messagePrefixLiteral),
+            ArrayLength = arrayLength,
+            ArrayStoreIndex = arrayStoreIndex,
+            ClearStartIndex = clearStartIndex,
+            ClearLength = clearLength,
+            ArrayReadIndex = arrayReadIndex,
+        };
+
+        return true;
+    }
+
+    private static bool TryCreateArrayCopyReferenceArrayLoweringPlan(
+        string assemblyName,
+        string entryPointSubjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        IReadOnlyList<TypedIlMethodArtifact> methods,
+        CodeRegistrationEntry entryPointRegistration,
+        TypedIlMethodArtifact entryPointMethod,
+        IReadOnlyList<TypedIlInstructionArtifact> entryPointInstructions,
+        out NativeReferenceLoweringPlanArtifact? loweringPlan)
+    {
+        loweringPlan = null;
+
+        if (!IsArrayCopyReferenceArrayEntryPointShape(entryPointInstructions))
+        {
+            return false;
+        }
+
+        var lengthOnlyInt64Shape = IsArrayCopyReferenceArrayLengthOnlyInt64EntryPointShape(entryPointInstructions);
+        var lengthOnlyInt32Shape = !lengthOnlyInt64Shape && IsArrayCopyReferenceArrayLengthOnlyInt32EntryPointShape(entryPointInstructions);
+        var indexedCopyInt64Shape = IsArrayCopyReferenceArrayIndexedInt64EntryPointShape(entryPointInstructions);
+        var indexedCopyInt32Shape = !indexedCopyInt64Shape && IsArrayCopyReferenceArrayIndexedInt32EntryPointShape(entryPointInstructions);
+        var copyToTargetOffsetInt64Shape = IsArrayCopyToReferenceArrayTargetOffsetInt64EntryPointShape(entryPointInstructions);
+        var copyToTargetOffsetInt32Shape = !copyToTargetOffsetInt64Shape && IsArrayCopyToReferenceArrayTargetOffsetInt32EntryPointShape(entryPointInstructions);
+        var indexedCopyShape = indexedCopyInt32Shape || indexedCopyInt64Shape;
+        var copyToTargetOffsetShape = copyToTargetOffsetInt32Shape || copyToTargetOffsetInt64Shape;
+        var sourceArrayLength = GetRequiredOperandInt(entryPointInstructions[0]);
+        var sourceArrayElementTypeSubjectId = GetRequiredOperandString(entryPointInstructions[1]);
+        var sourceStoreIndex = GetRequiredOperandInt(entryPointInstructions[3]);
+        var constructorLiteral = GetRequiredOperandString(entryPointInstructions[4]);
+        var constructorSubjectId = GetRequiredInstructionCallee(entryPointInstructions[5], entryPointMethod.SubjectId, 5);
+        var targetArrayLength = GetRequiredOperandInt(entryPointInstructions[7]);
+        var targetArrayElementTypeSubjectId = GetRequiredOperandString(entryPointInstructions[8]);
+        var targetLocalIndex = GetRequiredOperandInt(entryPointInstructions[9]);
+        var sourceArrayIndex = indexedCopyInt64Shape
+            ? GetRequiredPromotedInt64ConstantAsInt(entryPointInstructions, 10, entryPointMethod.SubjectId)
+            : indexedCopyInt32Shape
+                ? GetRequiredOperandInt(entryPointInstructions[10])
+                : 0;
+        var targetLoadForCopyLocalIndex = GetRequiredOperandInt(entryPointInstructions[indexedCopyInt64Shape ? 12 : indexedCopyInt32Shape ? 11 : 10]);
+        var targetArrayIndex = indexedCopyInt64Shape
+            ? GetRequiredPromotedInt64ConstantAsInt(entryPointInstructions, 13, entryPointMethod.SubjectId)
+            : indexedCopyInt32Shape
+                ? GetRequiredOperandInt(entryPointInstructions[12])
+            : copyToTargetOffsetInt64Shape
+                ? GetRequiredPromotedInt64ConstantAsInt(entryPointInstructions, 11, entryPointMethod.SubjectId)
+            : copyToTargetOffsetInt32Shape
+                ? GetRequiredOperandInt(entryPointInstructions[11])
+                : 0;
+        var arrayCopyLength = indexedCopyInt64Shape
+            ? GetRequiredPromotedInt64ConstantAsInt(entryPointInstructions, 15, entryPointMethod.SubjectId)
+            : indexedCopyInt32Shape
+                ? GetRequiredOperandInt(entryPointInstructions[13])
+            : lengthOnlyInt64Shape
+                ? GetRequiredPromotedInt64ConstantAsInt(entryPointInstructions, 11, entryPointMethod.SubjectId)
+            : copyToTargetOffsetShape
+                ? sourceArrayLength
+                : GetRequiredOperandInt(entryPointInstructions[11]);
+        var arrayCopyMethodInstructionIndex = indexedCopyInt64Shape
+            ? 17
+            : indexedCopyInt32Shape
+                ? 14
+            : copyToTargetOffsetInt64Shape
+                ? 13
+            : lengthOnlyInt64Shape
+                ? 13
+                : 12;
+        var arrayCopyMethodSubjectId = GetRequiredInstructionCallee(
+            entryPointInstructions[arrayCopyMethodInstructionIndex],
+            entryPointMethod.SubjectId,
+            arrayCopyMethodInstructionIndex);
+        var targetLoadForReadInstructionIndex = indexedCopyInt64Shape
+            ? 18
+            : indexedCopyInt32Shape
+                ? 15
+            : copyToTargetOffsetInt64Shape
+                ? 14
+            : lengthOnlyInt64Shape
+                ? 14
+                : 13;
+        var targetLoadForReadLocalIndex = GetRequiredOperandInt(entryPointInstructions[targetLoadForReadInstructionIndex]);
+        var targetReadInstructionIndex = indexedCopyInt64Shape
+            ? 19
+            : indexedCopyInt32Shape
+                ? 16
+            : copyToTargetOffsetInt64Shape
+                ? 15
+            : lengthOnlyInt64Shape
+                ? 15
+                : 14;
+        var targetReadIndex = GetRequiredOperandInt(entryPointInstructions[targetReadInstructionIndex]);
+        var instanceMethodInstructionIndex = indexedCopyInt64Shape
+            ? 21
+            : indexedCopyInt32Shape
+                ? 18
+            : copyToTargetOffsetInt64Shape
+                ? 17
+            : lengthOnlyInt64Shape
+                ? 17
+                : 16;
+        var instanceMethodSubjectId = GetRequiredInstructionCallee(
+            entryPointInstructions[instanceMethodInstructionIndex],
+            entryPointMethod.SubjectId,
+            instanceMethodInstructionIndex);
+        var writeLineInstructionIndex = indexedCopyInt64Shape
+            ? 22
+            : indexedCopyInt32Shape
+                ? 19
+            : copyToTargetOffsetInt64Shape
+                ? 18
+            : lengthOnlyInt64Shape
+                ? 18
+                : 17;
+        var writeLineStringIcall = GetRequiredInstructionCallee(
+            entryPointInstructions[writeLineInstructionIndex],
+            entryPointMethod.SubjectId,
+            writeLineInstructionIndex);
+
+        var expectedTargetReadIndex = targetArrayIndex + (sourceStoreIndex - sourceArrayIndex);
+
+        if (sourceStoreIndex < sourceArrayIndex || sourceStoreIndex >= sourceArrayIndex + arrayCopyLength)
+        {
+            throw new InvalidOperationException(
+                $"array copy lowering expects '{entryPointMethod.SubjectId}' to store the constructed banner inside the copied source range");
+        }
+
+        if (targetLocalIndex != targetLoadForCopyLocalIndex || targetLocalIndex != targetLoadForReadLocalIndex)
+        {
+            throw new InvalidOperationException(
+                $"array copy lowering expects '{entryPointMethod.SubjectId}' to reuse one target local across copy/read");
+        }
+
+        if (targetReadIndex != expectedTargetReadIndex)
+        {
+            throw new InvalidOperationException(
+                $"array copy lowering expects '{entryPointMethod.SubjectId}' to read back from the copied target slot that corresponds to the stored source element");
+        }
+
+        if (arrayCopyLength <= 0)
+        {
+            throw new InvalidOperationException(
+                $"array copy lowering expects '{entryPointMethod.SubjectId}' to copy a positive constant number of elements");
+        }
+
+        if (sourceArrayIndex < 0 || targetArrayIndex < 0 || sourceStoreIndex < 0 || targetReadIndex < 0 || arrayCopyLength < 0 ||
+            sourceArrayIndex + arrayCopyLength > sourceArrayLength ||
+            targetArrayIndex + arrayCopyLength > targetArrayLength ||
+            sourceStoreIndex >= sourceArrayLength ||
+            targetReadIndex >= targetArrayLength)
+        {
+            throw new InvalidOperationException(
+                $"array copy lowering expects '{entryPointMethod.SubjectId}' to use in-range constant array copy indices");
+        }
+
+        if (!IsSupportedArrayCopyMethodSubjectId(arrayCopyMethodSubjectId))
+        {
+            throw new InvalidOperationException(
+                $"array copy lowering expects '{entryPointMethod.SubjectId}' to call supported System.Array.Copy/CopyTo overload, but found '{arrayCopyMethodSubjectId}'");
+        }
+
+        var constructorRegistration = GetRequiredRegistration(methodPointers, constructorSubjectId);
+        var instanceMethodRegistration = GetRequiredRegistration(methodPointers, instanceMethodSubjectId);
+        var constructorMethod = GetRequiredMethod(methods, constructorSubjectId);
+        var instanceMethod = GetRequiredMethod(methods, instanceMethodSubjectId);
+        var constructorInstructions = GetSingleBlockInstructions(constructorMethod);
+        var instanceMethodInstructions = GetSingleBlockInstructions(instanceMethod);
+
+        ValidateConstructorShape(constructorMethod, constructorInstructions);
+        ValidateFieldBackedStringInstanceMethodShape(instanceMethod, instanceMethodInstructions);
+
+        var constructorTypeSubjectId = GetDeclaringTypeSubjectId(constructorSubjectId);
+        if (!string.Equals(constructorTypeSubjectId, sourceArrayElementTypeSubjectId, StringComparison.Ordinal) ||
+            !string.Equals(constructorTypeSubjectId, targetArrayElementTypeSubjectId, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"array copy lowering expects source/target array element types to match constructor type '{constructorTypeSubjectId}'");
+        }
+
+        var storedFieldSubjectId = GetRequiredOperandString(constructorInstructions[4]);
+        var loadedFieldSubjectId = GetRequiredOperandString(instanceMethodInstructions[2]);
+        if (!string.Equals(storedFieldSubjectId, loadedFieldSubjectId, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"array copy lowering expects constructor writes '{storedFieldSubjectId}' and instance method reads '{loadedFieldSubjectId}'");
+        }
+
+        var messagePrefixLiteral = GetRequiredOperandString(instanceMethodInstructions[0]);
+        var messageSuffixLiteral = GetRequiredOperandString(instanceMethodInstructions[4]);
+        var concatPairIcall = GetRequiredInstructionCallee(instanceMethodInstructions[3], instanceMethod.SubjectId, 3);
+
+        loweringPlan = new NativeReferenceLoweringPlanArtifact
+        {
+            PlanKind = "arrayCopyReferenceArray",
+            AssemblyName = assemblyName,
+            EntrySubjectId = entryPointSubjectId,
+            IncludeHeader = "codegen_bridge.h",
+            NativeEntryFunctionName = "RunNativeReference",
+            EntrySymbol = entryPointRegistration.Symbol,
+            ConstructorSymbol = constructorRegistration.Symbol,
+            InstanceMethodSymbol = instanceMethodRegistration.Symbol,
+            ReferenceTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", constructorTypeSubjectId)),
+            CapturedFieldToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "field", storedFieldSubjectId)),
+            EntryMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", entryPointRegistration.SubjectId)),
+            ConstructorMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", constructorRegistration.SubjectId)),
+            InstanceMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", instanceMethodRegistration.SubjectId)),
+            ConsoleWriteLineStringIcall = writeLineStringIcall,
+            StringConcatPairIcall = concatPairIcall,
+            ConstructorLiteral = ToCppStringLiteral(constructorLiteral),
+            ConstructorLiteralByteCount = Encoding.UTF8.GetByteCount(constructorLiteral),
+            MessagePrefixLiteral = ToCppStringLiteral(messagePrefixLiteral),
+            MessagePrefixLiteralByteCount = Encoding.UTF8.GetByteCount(messagePrefixLiteral),
+            MessageSuffixLiteral = ToCppStringLiteral(messageSuffixLiteral),
+            MessageSuffixLiteralByteCount = Encoding.UTF8.GetByteCount(messageSuffixLiteral),
+            SourceArrayLength = sourceArrayLength,
+            TargetArrayLength = targetArrayLength,
+            SourceStoreIndex = sourceStoreIndex,
+            SourceArrayIndex = sourceArrayIndex,
+            TargetArrayIndex = targetArrayIndex,
+            TargetReadIndex = targetReadIndex,
+            CopyLength = arrayCopyLength,
+        };
+
+        return true;
+    }
+
+    private static bool TryCreateArrayReverseReferenceArrayLoweringPlan(
+        string assemblyName,
+        string entryPointSubjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        IReadOnlyList<TypedIlMethodArtifact> methods,
+        CodeRegistrationEntry entryPointRegistration,
+        TypedIlMethodArtifact entryPointMethod,
+        IReadOnlyList<TypedIlInstructionArtifact> entryPointInstructions,
+        out NativeReferenceLoweringPlanArtifact? loweringPlan)
+    {
+        loweringPlan = null;
+
+        if (!IsArrayReverseReferenceArrayEntryPointShape(entryPointInstructions))
+        {
+            return false;
+        }
+
+        var wholeArrayReverseShape = entryPointInstructions.Count == 15;
+        var arrayLength = GetRequiredOperandInt(entryPointInstructions[0]);
+        var arrayElementTypeSubjectId = GetRequiredOperandString(entryPointInstructions[1]);
+        var arrayStoreIndex = GetRequiredOperandInt(entryPointInstructions[3]);
+        var constructorLiteral = GetRequiredOperandString(entryPointInstructions[4]);
+        var constructorSubjectId = GetRequiredInstructionCallee(entryPointInstructions[5], entryPointMethod.SubjectId, 5);
+        var reverseStartIndex = wholeArrayReverseShape ? 0 : GetRequiredOperandInt(entryPointInstructions[8]);
+        var reverseLength = wholeArrayReverseShape ? arrayLength : GetRequiredOperandInt(entryPointInstructions[9]);
+        var arrayReverseMethodSubjectId = GetRequiredInstructionCallee(entryPointInstructions[wholeArrayReverseShape ? 8 : 10], entryPointMethod.SubjectId, wholeArrayReverseShape ? 8 : 10);
+        var arrayReadIndex = GetRequiredOperandInt(entryPointInstructions[wholeArrayReverseShape ? 9 : 11]);
+        var instanceMethodSubjectId = GetRequiredInstructionCallee(entryPointInstructions[wholeArrayReverseShape ? 11 : 13], entryPointMethod.SubjectId, wholeArrayReverseShape ? 11 : 13);
+        var writeLineStringIcall = GetRequiredInstructionCallee(entryPointInstructions[wholeArrayReverseShape ? 12 : 14], entryPointMethod.SubjectId, wholeArrayReverseShape ? 12 : 14);
+
+        if (reverseLength <= 0)
+        {
+            throw new InvalidOperationException(
+                $"array reverse lowering expects '{entryPointMethod.SubjectId}' to reverse a positive constant number of elements");
+        }
+
+        if (reverseStartIndex < 0 || arrayStoreIndex < 0 || arrayReadIndex < 0 ||
+            reverseStartIndex + reverseLength > arrayLength ||
+            arrayStoreIndex >= arrayLength ||
+            arrayReadIndex >= arrayLength)
+        {
+            throw new InvalidOperationException(
+                $"array reverse lowering expects '{entryPointMethod.SubjectId}' to use in-range constant reverse indices");
+        }
+
+        if (arrayStoreIndex < reverseStartIndex || arrayStoreIndex >= reverseStartIndex + reverseLength)
+        {
+            throw new InvalidOperationException(
+                $"array reverse lowering expects '{entryPointMethod.SubjectId}' to store the constructed banner inside the reversed range");
+        }
+
+        var expectedReadIndex = reverseStartIndex + reverseLength - 1 - (arrayStoreIndex - reverseStartIndex);
+        if (arrayReadIndex != expectedReadIndex)
+        {
+            throw new InvalidOperationException(
+                $"array reverse lowering expects '{entryPointMethod.SubjectId}' to read back from the reversed slot that corresponds to the stored source element");
+        }
+
+        if (!IsSupportedArrayReverseMethodSubjectId(arrayReverseMethodSubjectId))
+        {
+            throw new InvalidOperationException(
+                $"array reverse lowering expects '{entryPointMethod.SubjectId}' to call supported System.Array.Reverse overload, but found '{arrayReverseMethodSubjectId}'");
+        }
+
+        var constructorRegistration = GetRequiredRegistration(methodPointers, constructorSubjectId);
+        var instanceMethodRegistration = GetRequiredRegistration(methodPointers, instanceMethodSubjectId);
+        var constructorMethod = GetRequiredMethod(methods, constructorSubjectId);
+        var instanceMethod = GetRequiredMethod(methods, instanceMethodSubjectId);
+        var constructorInstructions = GetSingleBlockInstructions(constructorMethod);
+        var instanceMethodInstructions = GetSingleBlockInstructions(instanceMethod);
+
+        ValidateConstructorShape(constructorMethod, constructorInstructions);
+        ValidateFieldBackedStringInstanceMethodShape(instanceMethod, instanceMethodInstructions);
+
+        var constructorTypeSubjectId = GetDeclaringTypeSubjectId(constructorSubjectId);
+        if (!string.Equals(constructorTypeSubjectId, arrayElementTypeSubjectId, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"array reverse lowering expects array element type '{arrayElementTypeSubjectId}' to match constructor type '{constructorTypeSubjectId}'");
+        }
+
+        var storedFieldSubjectId = GetRequiredOperandString(constructorInstructions[4]);
+        var loadedFieldSubjectId = GetRequiredOperandString(instanceMethodInstructions[2]);
+        if (!string.Equals(storedFieldSubjectId, loadedFieldSubjectId, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"array reverse lowering expects constructor writes '{storedFieldSubjectId}' and instance method reads '{loadedFieldSubjectId}'");
+        }
+
+        var messagePrefixLiteral = GetRequiredOperandString(instanceMethodInstructions[0]);
+        var messageSuffixLiteral = GetRequiredOperandString(instanceMethodInstructions[4]);
+        var concatPairIcall = GetRequiredInstructionCallee(instanceMethodInstructions[3], instanceMethod.SubjectId, 3);
+
+        loweringPlan = new NativeReferenceLoweringPlanArtifact
+        {
+            PlanKind = "arrayReverseReferenceArray",
+            AssemblyName = assemblyName,
+            EntrySubjectId = entryPointSubjectId,
+            IncludeHeader = "codegen_bridge.h",
+            NativeEntryFunctionName = "RunNativeReference",
+            EntrySymbol = entryPointRegistration.Symbol,
+            ConstructorSymbol = constructorRegistration.Symbol,
+            InstanceMethodSymbol = instanceMethodRegistration.Symbol,
+            ReferenceTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", constructorTypeSubjectId)),
+            CapturedFieldToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "field", storedFieldSubjectId)),
+            EntryMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", entryPointRegistration.SubjectId)),
+            ConstructorMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", constructorRegistration.SubjectId)),
+            InstanceMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", instanceMethodRegistration.SubjectId)),
+            ConsoleWriteLineStringIcall = writeLineStringIcall,
+            StringConcatPairIcall = concatPairIcall,
+            ConstructorLiteral = ToCppStringLiteral(constructorLiteral),
+            ConstructorLiteralByteCount = Encoding.UTF8.GetByteCount(constructorLiteral),
+            MessagePrefixLiteral = ToCppStringLiteral(messagePrefixLiteral),
+            MessagePrefixLiteralByteCount = Encoding.UTF8.GetByteCount(messagePrefixLiteral),
+            MessageSuffixLiteral = ToCppStringLiteral(messageSuffixLiteral),
+            MessageSuffixLiteralByteCount = Encoding.UTF8.GetByteCount(messageSuffixLiteral),
+            ArrayLength = arrayLength,
+            ArrayStoreIndex = arrayStoreIndex,
+            ReverseStartIndex = reverseStartIndex,
+            ReverseLength = reverseLength,
+            ArrayReadIndex = arrayReadIndex,
+        };
+
+        return true;
+    }
+
     private static bool TryCreateDelegateClosedTargetRelayLoweringPlan(
         string assemblyName,
         string entryPointSubjectId,
         MetadataRegistrationArtifact metadataRegistration,
         IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        IReadOnlyList<TypedIlMethodArtifact> methods,
         CodeRegistrationEntry entryPointRegistration,
+        TypedIlMethodArtifact entryPointMethod,
+        IReadOnlyList<TypedIlInstructionArtifact> entryPointInstructions,
         out NativeReferenceLoweringPlanArtifact? loweringPlan)
     {
         loweringPlan = null;
+        string constructorSubjectId;
+        string instanceMethodSubjectId;
+        string staticMethodSubjectId;
+        string constructorLiteral;
+        string messagePrefixLiteral;
+        string messageSuffixLiteral;
+        string trailingLiteral;
+        string capturedFieldSubjectId;
+        string concatPairIcall;
 
-        if (!entryPointSubjectId.Contains("DelegateProofEntry::Run", StringComparison.Ordinal))
+        try
+        {
+            ValidateDelegateClosedTargetRelayEntryPointShape(entryPointMethod, entryPointInstructions);
+
+            constructorLiteral = GetRequiredOperandString(entryPointInstructions[0]);
+            constructorSubjectId = GetRequiredInstructionCallee(entryPointInstructions[1], entryPointMethod.SubjectId, 1);
+            instanceMethodSubjectId = GetRequiredInstructionCallee(entryPointInstructions[2], entryPointMethod.SubjectId, 2);
+            staticMethodSubjectId = GetRequiredInstructionCallee(
+                entryPointInstructions[GetDelegateClosedTargetRelayStaticMethodInstructionIndex(entryPointInstructions)],
+                entryPointMethod.SubjectId,
+                GetDelegateClosedTargetRelayStaticMethodInstructionIndex(entryPointInstructions));
+            messagePrefixLiteral = GetRequiredOperandString(
+                entryPointInstructions[GetDelegateClosedTargetRelayMessagePrefixInstructionIndex(entryPointInstructions)]);
+
+            var constructorMethod = GetRequiredMethod(methods, constructorSubjectId);
+            var instanceMethod = GetRequiredMethod(methods, instanceMethodSubjectId);
+            var staticMethod = GetRequiredMethod(methods, staticMethodSubjectId);
+
+            var constructorInstructions = GetSingleBlockInstructions(constructorMethod);
+            var instanceMethodInstructions = GetSingleBlockInstructions(instanceMethod);
+            var staticMethodInstructions = GetSingleBlockInstructions(staticMethod);
+
+            ValidateConstructorShape(constructorMethod, constructorInstructions);
+            ValidateFieldBackedStringInstanceMethodShape(instanceMethod, instanceMethodInstructions);
+            ValidateDelegateClosedTargetRelayStaticTailShape(staticMethod, staticMethodInstructions);
+
+            var diagnosticConstructorTypeSubjectId = GetDeclaringTypeSubjectId(constructorSubjectId);
+            var instanceMethodTypeSubjectId = GetDeclaringTypeSubjectId(instanceMethodSubjectId);
+            if (!string.Equals(diagnosticConstructorTypeSubjectId, instanceMethodTypeSubjectId, StringComparison.Ordinal))
+            {
+                throw new InvalidOperationException(
+                    $"delegate closed target relay expects constructor '{constructorSubjectId}' and instance method '{instanceMethodSubjectId}' to share a declaring type");
+            }
+
+            capturedFieldSubjectId = GetRequiredOperandString(constructorInstructions[4]);
+            var loadedFieldSubjectId = GetRequiredOperandString(instanceMethodInstructions[2]);
+            if (!string.Equals(capturedFieldSubjectId, loadedFieldSubjectId, StringComparison.Ordinal))
+            {
+                throw new InvalidOperationException(
+                    $"delegate closed target relay expects constructor writes '{capturedFieldSubjectId}' and instance method reads '{loadedFieldSubjectId}'");
+            }
+
+            messageSuffixLiteral = GetCapturedStateInstanceMessageSuffixLiteral(instanceMethod, instanceMethodInstructions);
+            concatPairIcall = NormalizeStringConcatIcall(GetCapturedStateInstanceMessageConcatIcall(instanceMethod, instanceMethodInstructions));
+            trailingLiteral = GetDelegateClosedTargetRelayTrailingLiteral(staticMethod, staticMethodInstructions);
+        }
+        catch
         {
             return false;
         }
 
-        var registrations = metadataRegistration.Registrations;
-        var bannerTypeRegistration = GetRequiredMetadataRegistration(
-            registrations,
-            "type",
-            registration => string.Equals(registration.Name, "DelegateBanner", StringComparison.Ordinal),
-            "delegate banner type");
-        var bannerFieldRegistration = GetRequiredMetadataRegistration(
-            registrations,
-            "field",
-            registration =>
-                string.Equals(registration.DeclaringTypeSubjectId, bannerTypeRegistration.SubjectId, StringComparison.Ordinal) &&
-                string.Equals(registration.Name, "_name", StringComparison.Ordinal),
-            "delegate banner captured field");
-        var constructorMetadata = GetRequiredMetadataRegistration(
-            registrations,
-            "method",
-            registration =>
-                string.Equals(registration.DeclaringTypeSubjectId, bannerTypeRegistration.SubjectId, StringComparison.Ordinal) &&
-                string.Equals(registration.Name, ".ctor", StringComparison.Ordinal) &&
-                registration.ParameterCount == 1,
-            "delegate banner constructor");
-        var instanceMethodMetadata = GetRequiredMetadataRegistration(
-            registrations,
-            "method",
-            registration =>
-                string.Equals(registration.DeclaringTypeSubjectId, bannerTypeRegistration.SubjectId, StringComparison.Ordinal) &&
-                string.Equals(registration.Name, "BuildMessage", StringComparison.Ordinal) &&
-                registration.ParameterCount == 1,
-            "delegate closed target");
-        var staticTailTypeRegistration = GetRequiredMetadataRegistration(
-            registrations,
-            "type",
-            registration => string.Equals(registration.Name, "DelegateStaticTail", StringComparison.Ordinal),
-            "delegate static tail type");
-        var staticMethodMetadata = GetRequiredMetadataRegistration(
-            registrations,
-            "method",
-            registration =>
-                string.Equals(registration.DeclaringTypeSubjectId, staticTailTypeRegistration.SubjectId, StringComparison.Ordinal) &&
-                string.Equals(registration.Name, "AppendBang", StringComparison.Ordinal) &&
-                registration.ParameterCount == 1,
-            "delegate static tail");
-
-        var constructorRegistration = GetRequiredRegistration(methodPointers, constructorMetadata.SubjectId);
-        var instanceMethodRegistration = GetRequiredRegistration(methodPointers, instanceMethodMetadata.SubjectId);
-        var staticMethodRegistration = GetRequiredRegistration(methodPointers, staticMethodMetadata.SubjectId);
-
-        const string constructorLiteral = "delegate proof";
-        const string messagePrefixLiteral = "Delegate native proof: ";
-        const string messageSuffixLiteral = ".";
+        var constructorRegistration = GetRequiredRegistration(methodPointers, constructorSubjectId);
+        var instanceMethodRegistration = GetRequiredRegistration(methodPointers, instanceMethodSubjectId);
+        var staticMethodRegistration = GetRequiredRegistration(methodPointers, staticMethodSubjectId);
+        var constructorTypeSubjectId = GetDeclaringTypeSubjectId(constructorSubjectId);
 
         loweringPlan = new NativeReferenceLoweringPlanArtifact
         {
@@ -707,20 +1210,22 @@ public sealed partial class NativeReferenceLoweringPlanner
             ConstructorSymbol = constructorRegistration.Symbol,
             InstanceMethodSymbol = instanceMethodRegistration.Symbol,
             StaticMethodSymbol = staticMethodRegistration.Symbol,
-            ReferenceTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", bannerTypeRegistration.SubjectId)),
-            CapturedFieldToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "field", bannerFieldRegistration.SubjectId)),
+            ReferenceTypeToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "type", constructorTypeSubjectId)),
+            CapturedFieldToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "field", capturedFieldSubjectId)),
             EntryMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", entryPointRegistration.SubjectId)),
-            ConstructorMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", constructorMetadata.SubjectId)),
-            InstanceMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", instanceMethodMetadata.SubjectId)),
-            StaticMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", staticMethodMetadata.SubjectId)),
+            ConstructorMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", constructorSubjectId)),
+            InstanceMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", instanceMethodSubjectId)),
+            StaticMethodToken = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", staticMethodSubjectId)),
             ConsoleWriteLineStringIcall = ConsoleWriteLineStringIcall,
-            StringConcatPairIcall = StringConcatPairIcall,
+            StringConcatPairIcall = concatPairIcall,
             ConstructorLiteral = ToCppStringLiteral(constructorLiteral),
             ConstructorLiteralByteCount = Encoding.UTF8.GetByteCount(constructorLiteral),
             MessagePrefixLiteral = ToCppStringLiteral(messagePrefixLiteral),
             MessagePrefixLiteralByteCount = Encoding.UTF8.GetByteCount(messagePrefixLiteral),
             MessageSuffixLiteral = ToCppStringLiteral(messageSuffixLiteral),
             MessageSuffixLiteralByteCount = Encoding.UTF8.GetByteCount(messageSuffixLiteral),
+            TrailingLiteral = ToCppStringLiteral(trailingLiteral),
+            TrailingLiteralByteCount = Encoding.UTF8.GetByteCount(trailingLiteral),
         };
 
         return true;
@@ -1236,16 +1741,34 @@ public sealed partial class NativeReferenceLoweringPlanner
         AddIfNotNull(model, "string_concat_pair_icall", loweringPlan.StringConcatPairIcall);
         AddIfNotNull(model, "constructor_literal", loweringPlan.ConstructorLiteral);
         AddIfNotNull(model, "constructor_literal_byte_count", loweringPlan.ConstructorLiteralByteCount);
+        AddIfNotNull(model, "stored_literal", loweringPlan.StoredLiteral);
+        AddIfNotNull(model, "stored_literal_byte_count", loweringPlan.StoredLiteralByteCount);
         AddIfNotNull(model, "message_prefix_literal", loweringPlan.MessagePrefixLiteral);
         AddIfNotNull(model, "message_prefix_literal_byte_count", loweringPlan.MessagePrefixLiteralByteCount);
         AddIfNotNull(model, "message_suffix_literal", loweringPlan.MessageSuffixLiteral);
         AddIfNotNull(model, "message_suffix_literal_byte_count", loweringPlan.MessageSuffixLiteralByteCount);
+        AddIfNotNull(model, "trailing_literal", loweringPlan.TrailingLiteral);
+        AddIfNotNull(model, "trailing_literal_byte_count", loweringPlan.TrailingLiteralByteCount);
         AddIfNotNull(model, "echo_literal", loweringPlan.EchoLiteral);
         AddIfNotNull(model, "echo_literal_byte_count", loweringPlan.EchoLiteralByteCount);
         AddIfNotNull(model, "finally_literal", loweringPlan.FinallyLiteral);
         AddIfNotNull(model, "finally_literal_byte_count", loweringPlan.FinallyLiteralByteCount);
         AddIfNotNull(model, "boxed_value_type_token", loweringPlan.BoxedValueTypeToken);
         AddIfNotNull(model, "boxed_int32_value", loweringPlan.BoxedInt32Value);
+        AddIfNotNull(model, "source_array_length", loweringPlan.SourceArrayLength);
+        AddIfNotNull(model, "target_array_length", loweringPlan.TargetArrayLength);
+        AddIfNotNull(model, "source_store_index", loweringPlan.SourceStoreIndex);
+        AddIfNotNull(model, "source_array_index", loweringPlan.SourceArrayIndex);
+        AddIfNotNull(model, "target_array_index", loweringPlan.TargetArrayIndex);
+        AddIfNotNull(model, "target_read_index", loweringPlan.TargetReadIndex);
+        AddIfNotNull(model, "copy_length", loweringPlan.CopyLength);
+        AddIfNotNull(model, "array_length", loweringPlan.ArrayLength);
+        AddIfNotNull(model, "array_store_index", loweringPlan.ArrayStoreIndex);
+        AddIfNotNull(model, "clear_start_index", loweringPlan.ClearStartIndex);
+        AddIfNotNull(model, "clear_length", loweringPlan.ClearLength);
+        AddIfNotNull(model, "reverse_start_index", loweringPlan.ReverseStartIndex);
+        AddIfNotNull(model, "reverse_length", loweringPlan.ReverseLength);
+        AddIfNotNull(model, "array_read_index", loweringPlan.ArrayReadIndex);
         AddIfNotNull(model, "closed_type_subject_id", loweringPlan.ClosedTypeSubjectId);
         AddIfNotNull(model, "generic_type_definition_subject_id", loweringPlan.GenericTypeDefinitionSubjectId);
         AddIfNotNull(model, "field_subject_id", loweringPlan.FieldSubjectId);

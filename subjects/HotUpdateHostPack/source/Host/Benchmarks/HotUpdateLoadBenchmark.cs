@@ -8,8 +8,15 @@ internal static class HotUpdateLoadBenchmarkEntry
 {
     private static readonly ManagedMethodIdentityArtifact BenchmarkIdentity =
         ManagedMethodIdentityResolver.Create(
-            "BenchHotUpdateLoad/HotPatch::GetValue()",
-            "System.Int32 HotPatch::GetValue()");
+            new ManagedMethodIdentitySpec
+            {
+                AssemblyName = "BenchHotUpdateLoad",
+                DeclaringTypeSubjectId = "BenchHotUpdateLoad/HotPatch",
+                DeclaringTypeDisplayName = "HotPatch",
+                MethodName = "GetValue",
+                SubjectId = "BenchHotUpdateLoad/HotPatch::GetValue()",
+                Signature = "System.Int32 HotPatch::GetValue()",
+            });
 
     [ChaosBenchmark(
         ChaosBenchmarkCategory.HotUpdate,

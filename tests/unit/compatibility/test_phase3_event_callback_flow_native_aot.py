@@ -112,7 +112,7 @@ class Phase3EventCallbackFlowNativeAotTests(unittest.TestCase):
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
         self.assertIn("// Managed method: CoreRuntimeFeatures/EventCallbackFlowProofEntry::Run()", generated_cpp)
         self.assertIn(
-            "chaos_external_runtime_System_Threading_Interlocked__CompareExchange_System_Action_System_Int32___System_Action_System_Int32___System_Action_System_Int32__",
+            "chaos_external_runtime_System_Threading_Interlocked__CompareExchange_System_Action_System_Int32__",
             generated_cpp,
         )
         self.assertIn("// Managed method: CoreRuntimeFeatures/EventCallbackFlowHub::add_Occurred(System.Action<System.Int32>)", generated_cpp)

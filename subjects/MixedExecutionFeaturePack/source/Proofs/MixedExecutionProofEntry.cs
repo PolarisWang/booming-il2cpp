@@ -16,12 +16,26 @@ internal static class MixedExecutionProofEntry
     private const string EngineBridgeSubjectId = "MixedExecutionProof/Engine::AddFive(System.Int32)";
     private static readonly ManagedMethodIdentityArtifact AotBridgeMethodIdentity =
         ManagedMethodIdentityResolver.Create(
-            AotBridgeSubjectId,
-            "System.Int32 AotBridgeExports::Add(System.Int32,System.Int32)");
+            new ManagedMethodIdentitySpec
+            {
+                AssemblyName = "InterpreterArithmeticProof.AotBridge",
+                DeclaringTypeSubjectId = "InterpreterArithmeticProof.AotBridge/AotBridgeExports",
+                DeclaringTypeDisplayName = "AotBridgeExports",
+                MethodName = "Add",
+                SubjectId = AotBridgeSubjectId,
+                Signature = "System.Int32 AotBridgeExports::Add(System.Int32,System.Int32)",
+            });
     private static readonly ManagedMethodIdentityArtifact EngineBridgeMethodIdentity =
         ManagedMethodIdentityResolver.Create(
-            EngineBridgeSubjectId,
-            "System.Int32 Engine::AddFive(System.Int32)");
+            new ManagedMethodIdentitySpec
+            {
+                AssemblyName = "MixedExecutionProof",
+                DeclaringTypeSubjectId = "MixedExecutionProof/Engine",
+                DeclaringTypeDisplayName = "Engine",
+                MethodName = "AddFive",
+                SubjectId = EngineBridgeSubjectId,
+                Signature = "System.Int32 Engine::AddFive(System.Int32)",
+            });
 
     [ChaosUnitTest(
         ChaosUnitCategory.RuntimeContract,
@@ -87,7 +101,7 @@ internal static class MixedExecutionProofEntry
                     {
                         BridgeId = AotBridgeSubjectId,
                         AotIdentity = addMethodIdentity,
-                        AotSubjectId = AotBridgeSubjectId,
+                        AotAuthorityKey = ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(addMethodIdentity),
                     },
                 ],
                 HotUpdateToEngine =
@@ -96,7 +110,7 @@ internal static class MixedExecutionProofEntry
                     {
                         BridgeId = EngineBridgeId,
                         EngineIdentity = EngineBridgeMethodIdentity,
-                        EngineSubjectId = EngineBridgeSubjectId,
+                        EngineAuthorityKey = ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(EngineBridgeMethodIdentity),
                     },
                 ],
                 DelegateWrappers = [],
@@ -250,6 +264,8 @@ internal static class MixedExecutionProofEntry
         {
             PackageId = "com.example.mixed-execution-proof",
             TargetAotVersion = CurrentAotVersion,
+            PackageFormatVersion = HotUpdateVersionContract.CurrentPackageFormatVersion,
+            KernelArtifactVersion = HotUpdateVersionContract.CurrentKernelArtifactVersion,
             Assemblies =
             [
                 new HotUpdateAssemblyEntry

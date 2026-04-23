@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -124,7 +126,10 @@ class Phase2Int64CarrierNativeAotTests(unittest.TestCase):
         aot_core_ir = load_json(self.output_root / "aot-core-ir.json")
         methods = {method["subjectId"]: method for method in aot_core_ir["methods"]}
 
-        int64_method = methods["CoreRuntimeBenchmarks/IntegerCarrierBenchmarkMath::RoundTripInt64(System.Int64)"]
+        int64_method = find_method_by_subject_id(
+            methods,
+            "CoreRuntimeBenchmarks/IntegerCarrierBenchmarkMath::RoundTripInt64(System.Int64)",
+        )
         self.assertEqual(10, int64_method["returnAbi"]["carrierKindCode"])
         self.assertEqual([10], [slot["carrierKindCode"] for slot in int64_method["parameterAbis"]])
 

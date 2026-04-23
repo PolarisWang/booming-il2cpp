@@ -5,7 +5,9 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
+MANAGED_CLOSURE_CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
+MANAGED_CLOSURE_MODELS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureModels.cs"
+MANAGED_SEMANTIC_WORLD_CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedSemanticWorldContracts.cs"
 SEMANTIC_WORLD_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.SemanticWorld" / "SemanticWorldStage.cs"
 CODEGEN_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "CodeGenStage.cs"
 EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeReferenceProofEmitter.cs"
@@ -23,7 +25,11 @@ class Phase2CoreContractCutoverTests(unittest.TestCase):
         self.assertNotIn(THREE_PART_CONCAT, codegen_source)
 
     def test_contracts_and_downstream_sources_expose_method_contract_surface(self) -> None:
-        contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")
+        contracts_source = (
+            MANAGED_CLOSURE_CONTRACTS_PATH.read_text(encoding="utf-8") +
+            MANAGED_CLOSURE_MODELS_PATH.read_text(encoding="utf-8") +
+            MANAGED_SEMANTIC_WORLD_CONTRACTS_PATH.read_text(encoding="utf-8")
+        )
         codegen_source = CODEGEN_STAGE_PATH.read_text(encoding="utf-8")
         emitter_source = EMITTER_PATH.read_text(encoding="utf-8")
 

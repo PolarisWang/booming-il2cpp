@@ -10,6 +10,7 @@ SCHEMA_ROOT = REPO_ROOT / "contracts" / "artifacts" / "v0" / "schemas"
 AUDIT_PACKET_SCHEMA = SCHEMA_ROOT / "foundation-dll-audit-packet.schema.json"
 CODEGEN_REVIEW_SCHEMA = SCHEMA_ROOT / "foundation-codegen-review.schema.json"
 NATIVE_HOTUPDATE_AUDIT_SCHEMA = SCHEMA_ROOT / "native-hotupdate-audit.schema.json"
+NATIVE_REFERENCE_RUNTIME_SKELETON_COVERAGE_SCHEMA = SCHEMA_ROOT / "native-reference-runtime-skeleton-coverage.schema.json"
 ANALYSIS_CONTRACT_ROOT = REPO_ROOT / "tests" / "contracts" / "analysis" / "v0"
 
 
@@ -120,7 +121,25 @@ class FoundationDllTranslationAuditSchemaTests(unittest.TestCase):
                 "auditStatus",
                 "auditMessage",
                 "runtimeSkeletonReservedStubCount",
+                "runtimeSkeletonCoverageReportPath",
+                "runtimeSkeletonUncoveredMethodCount",
             }.issubset(native_generation_required)
+        )
+        self.assertEqual("string", schema["properties"]["nativeGeneration"]["properties"]["preferredAssemblyDispatchSubjectId"]["type"])
+        self.assertNotIn(
+            "minLength",
+            schema["properties"]["nativeGeneration"]["properties"]["preferredAssemblyDispatchSubjectId"],
+        )
+        self.assertEqual(
+            0,
+            schema["properties"]["nativeGeneration"]["properties"]["translationUnitPageCount"]["minimum"],
+        )
+        self.assertTrue(
+            schema["properties"]["nativeGeneration"]["properties"]["runtimeSkeletonReservedStubCount"]["deprecated"]
+        )
+        self.assertIn(
+            "always 0",
+            schema["properties"]["nativeGeneration"]["properties"]["runtimeSkeletonReservedStubCount"]["description"],
         )
         self.assertEqual(
             "not-used-by-this-combined-proof",
@@ -146,11 +165,76 @@ class FoundationDllTranslationAuditSchemaTests(unittest.TestCase):
         self.assertEqual(3, sample["nativeGeneration"]["translationUnitMethodCount"])
         self.assertEqual("runtime-skeleton", sample["nativeGeneration"]["auditStatus"])
         self.assertEqual(0, sample["nativeGeneration"]["runtimeSkeletonReservedStubCount"])
+        self.assertTrue(sample["nativeGeneration"]["runtimeSkeletonCoverageReportPath"].endswith(".coverage.json"))
+        self.assertEqual(1, sample["nativeGeneration"]["runtimeSkeletonUncoveredMethodCount"])
         self.assertEqual("native-reference", sample["nativeBuild"]["buildKind"])
         self.assertEqual(False, sample["truthBoundary"]["fullCoreLibTranslated"])
         self.assertGreaterEqual(len(snapshot["nativeGeneration"]["generatedSourcePaths"]), 2)
         self.assertEqual(3, snapshot["nativeGeneration"]["translationUnitMethodCount"])
+        self.assertEqual(1, snapshot["nativeGeneration"]["runtimeSkeletonUncoveredMethodCount"])
         self.assertIn("corelib-reference-hotupdate:", snapshot["hotupdateRuntime"]["outputLines"][0])
+
+    def test_runtime_skeleton_coverage_schema_freezes_artifact_shape(self) -> None:
+        self.assertTrue(
+            NATIVE_REFERENCE_RUNTIME_SKELETON_COVERAGE_SCHEMA.is_file(),
+            msg=f"missing schema: {NATIVE_REFERENCE_RUNTIME_SKELETON_COVERAGE_SCHEMA}",
+        )
+
+        schema = _read_json(NATIVE_REFERENCE_RUNTIME_SKELETON_COVERAGE_SCHEMA)
+        self.assertEqual("Native Reference Runtime Skeleton Coverage v0", schema["title"])
+        self.assertEqual("object", schema["type"])
+        self.assertFalse(schema["additionalProperties"])
+
+        required = set(schema["required"])
+        self.assertEqual(
+            {
+                "formatVersion",
+                "artifactKind",
+                "assemblyName",
+                "planKind",
+                "translationUnitMode",
+                "requestedMethodCount",
+                "emittedMethodCount",
+                "uncoveredMethodCount",
+                "uncoveredMethodSubjectIds",
+            },
+            required,
+        )
+        self.assertEqual(
+            "nativeReferenceRuntimeSkeletonCoverage",
+            schema["properties"]["artifactKind"]["const"],
+        )
+        self.assertEqual(
+            "assembly-full-closure-runtime-skeleton",
+            schema["properties"]["planKind"]["const"],
+        )
+        self.assertEqual(
+            "runtime-skeleton",
+            schema["properties"]["translationUnitMode"]["const"],
+        )
+
+    def test_runtime_skeleton_coverage_sample_and_snapshot_are_paired(self) -> None:
+        sample_path = ANALYSIS_CONTRACT_ROOT / "samples" / "native-reference-runtime-skeleton-coverage.min.json"
+        snapshot_path = ANALYSIS_CONTRACT_ROOT / "snapshots" / "native-reference-runtime-skeleton-coverage.snapshot.json"
+
+        self.assertTrue(sample_path.is_file(), msg=f"missing sample: {sample_path}")
+        self.assertTrue(snapshot_path.is_file(), msg=f"missing snapshot: {snapshot_path}")
+
+        sample = _read_json(sample_path)
+        snapshot = _read_json(snapshot_path)
+
+        self.assertEqual("nativeReferenceRuntimeSkeletonCoverage", sample["artifactKind"])
+        self.assertEqual("assembly-full-closure-runtime-skeleton", sample["planKind"])
+        self.assertEqual("runtime-skeleton", sample["translationUnitMode"])
+        self.assertEqual(1, sample["requestedMethodCount"])
+        self.assertEqual(0, sample["emittedMethodCount"])
+        self.assertEqual(1, sample["uncoveredMethodCount"])
+        self.assertEqual(1, len(sample["uncoveredMethodSubjectIds"]))
+        self.assertEqual("nativeReferenceRuntimeSkeletonCoverage", snapshot["artifactKind"])
+        self.assertEqual(3, snapshot["requestedMethodCount"])
+        self.assertEqual(2, snapshot["emittedMethodCount"])
+        self.assertEqual(1, snapshot["uncoveredMethodCount"])
+        self.assertEqual(1, len(snapshot["uncoveredMethodSubjectIds"]))
 
 
 if __name__ == "__main__":

@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -123,8 +125,7 @@ class Phase3FinallyFilterNativeAotTests(unittest.TestCase):
         self._ensure_bundle_generated()
 
         aot_core_ir = load_json(self.output_root / "aot-core-ir.json")
-        methods = {method["subjectId"]: method for method in aot_core_ir["methods"]}
-        execute_method = methods[EXECUTE_SUBJECT_ID]
+        execute_method = find_method_by_subject_id(aot_core_ir["methods"], EXECUTE_SUBJECT_ID)
 
         self.assertEqual(3, execute_method["exceptionRegionCount"])
         self.assertEqual([4, 2, 2], [region["handlingKindCode"] for region in execute_method["exceptionRegions"]])
@@ -136,8 +137,7 @@ class Phase3FinallyFilterNativeAotTests(unittest.TestCase):
         self._ensure_bundle_generated()
 
         aot_core_ir = load_json(self.output_root / "aot-core-ir.json")
-        methods = {method["subjectId"]: method for method in aot_core_ir["methods"]}
-        execute_method = methods[EXECUTE_SUBJECT_ID]
+        execute_method = find_method_by_subject_id(aot_core_ir["methods"], EXECUTE_SUBJECT_ID)
 
         self.assertNotIn(
             "System.Private.CoreLib/System.ArgumentException::get_ParamName()",

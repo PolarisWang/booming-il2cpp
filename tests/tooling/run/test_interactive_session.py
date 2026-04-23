@@ -3,7 +3,7 @@ from __future__ import annotations
 import unittest
 from unittest.mock import patch
 
-from .test_command_manifest import load_manifest_module
+from .command_manifest_test_support import load_manifest_module
 
 
 class _FakeStream:

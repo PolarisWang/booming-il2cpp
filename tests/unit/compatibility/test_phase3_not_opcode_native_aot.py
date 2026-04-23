@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -123,7 +125,13 @@ class Phase3NotOpcodeNativeAotTests(unittest.TestCase):
 
         aot_core_ir = load_json(self.output_root / "aot-core-ir.json")
         methods = {method["subjectId"]: method for method in aot_core_ir["methods"]}
-        proof_ops = [instruction["op"] for instruction in methods["CoreRuntimeFeatures/BitwiseOpsProofEntry::Run()"]["instructions"]]
+        proof_ops = [
+            instruction["op"]
+            for instruction in find_method_by_subject_id(
+                methods,
+                "CoreRuntimeFeatures/BitwiseOpsProofEntry::Run()",
+            )["instructions"]
+        ]
 
         self.assertIn("not", proof_ops)
 

@@ -239,7 +239,15 @@ public sealed record AotCoreIrReferenceArtifact
 
     public required string SubjectId { get; init; }
 
-    public GenericContextArtifact? GenericContext { get; init; }
+    public string? OpenDefinitionSubjectId { get; init; }
+
+    public SharedGenericBodyId? SharedGenericBodyId { get; init; }
+
+    public InstantiationStubId? InstantiationStubId { get; init; }
+
+    public RuntimeGenericContextArtifact? RuntimeGenericContext { get; init; }
+
+    public GenericDiagnosticArtifact? GenericDiagnostic { get; init; }
 
     public AotCoreIrTypeShapeKind TypeShape { get; init; }
 
@@ -279,7 +287,15 @@ public sealed record AotCoreIrMethodArtifact
 
     public required ManagedMethodIdentityArtifact Identity { get; init; }
 
-    public GenericContextArtifact? GenericContext { get; init; }
+    public string? OpenDefinitionSubjectId { get; init; }
+
+    public SharedGenericBodyId? SharedGenericBodyId { get; init; }
+
+    public InstantiationStubId? InstantiationStubId { get; init; }
+
+    public RuntimeGenericContextArtifact? RuntimeGenericContext { get; init; }
+
+    public GenericDiagnosticArtifact? GenericDiagnostic { get; init; }
 
     public required string NativeSymbol { get; init; }
 

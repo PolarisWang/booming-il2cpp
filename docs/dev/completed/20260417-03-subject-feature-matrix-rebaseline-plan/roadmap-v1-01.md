@@ -1,52 +1,52 @@
-# Subject Feature Matrix Rebaseline Roadmap v1.01
+﻿# Subject Feature Matrix Rebaseline Roadmap v1.01
 
 Date: 2026-04-17
 Status: proposed
 
-## 1. 目标
+## 1. 鐩爣
 
-把当前 `subjects/` 中已经完成的 AOT / Mixed Execution / HotUpdate 能力，按现行统一测试框架重构为一套清晰、可扩展、可自动校验的验证体系：
+鎶婂綋鍓?`subjects/` 涓凡缁忓畬鎴愮殑 AOT / Mixed Execution / HotUpdate 鑳藉姏锛屾寜鐜拌缁熶竴娴嬭瘯妗嗘灦閲嶆瀯涓轰竴濂楁竻鏅般€佸彲鎵╁睍銆佸彲鑷姩鏍￠獙鐨勯獙璇佷綋绯伙細
 
-- feature 有唯一 owner subject
-- feature 有 machine-readable capability matrix
-- proof / benchmark / hotupdate proof 全部由 `Chaos.TestFramework.Sdk` attribute 声明
-- collector 统一生成 collection file
-- managed / native / hotupdate 全部消费同一份 collection
-- 工程级 solution 样例压缩为最小必要集合
-- 手工 proof/benchmark 聚合入口与旧 `validation` 旁路被彻底删除
-- 最终能够一键回答“已完成能力是否被完整验证”
+- feature 鏈夊敮涓€ owner subject
+- feature 鏈?machine-readable capability matrix
+- proof / benchmark / hotupdate proof 鍏ㄩ儴鐢?`Chaos.TestFramework.Sdk` attribute 澹版槑
+- collector 缁熶竴鐢熸垚 collection file
+- managed / native / hotupdate 鍏ㄩ儴娑堣垂鍚屼竴浠?collection
+- 宸ョ▼绾?solution 鏍蜂緥鍘嬬缉涓烘渶灏忓繀瑕侀泦鍚?
+- 鎵嬪伐 proof/benchmark 鑱氬悎鍏ュ彛涓庢棫 `validation` 鏃佽矾琚交搴曞垹闄?
+- 鏈€缁堣兘澶熶竴閿洖绛斺€滃凡瀹屾垚鑳藉姏鏄惁琚畬鏁撮獙璇佲€?
 
-## 2. 范围边界
+## 2. 鑼冨洿杈圭晫
 
-本 roadmap 负责：
+鏈?roadmap 璐熻矗锛?
 
-- 盘点并冻结已完成 feature inventory
-- 压缩 archetype/engineering scenario 到最小必要集合
-- 调整 subject 目录内正式验证资产的组织方式
-- 删除手工聚合入口和旧验证路径
-- 把已完成 feature 逐条重接到 collection 主线
-- 对齐测试、manifest、planner、registry、workspace、dashboard 对 subject 结构的消费方式
-- 输出完整回归与 coverage gap
+- 鐩樼偣骞跺喕缁撳凡瀹屾垚 feature inventory
+- 鍘嬬缉 archetype/engineering scenario 鍒版渶灏忓繀瑕侀泦鍚?
+- 璋冩暣 subject 鐩綍鍐呮寮忛獙璇佽祫浜х殑缁勭粐鏂瑰紡
+- 鍒犻櫎鎵嬪伐鑱氬悎鍏ュ彛鍜屾棫楠岃瘉璺緞
+- 鎶婂凡瀹屾垚 feature 閫愭潯閲嶆帴鍒?collection 涓荤嚎
+- 瀵归綈娴嬭瘯銆乵anifest銆乸lanner銆乺egistry銆亀orkspace銆乨ashboard 瀵?subject 缁撴瀯鐨勬秷璐规柟寮?
+- 杈撳嚭瀹屾暣鍥炲綊涓?coverage gap
 
-本 roadmap 不负责：
+鏈?roadmap 涓嶈礋璐ｏ細
 
-- 新增尚未实现的 AOT Core IR 能力
-- 新增尚未实现的 HotUpdate 能力
-- 重做整个测试框架大架构
-- 非测试主线的业务功能开发
+- 鏂板灏氭湭瀹炵幇鐨?AOT Core IR 鑳藉姏
+- 鏂板灏氭湭瀹炵幇鐨?HotUpdate 鑳藉姏
+- 閲嶅仛鏁翠釜娴嬭瘯妗嗘灦澶ф灦鏋?
+- 闈炴祴璇曚富绾跨殑涓氬姟鍔熻兘寮€鍙?
 
-## 3. 非目标
+## 3. 闈炵洰鏍?
 
-- 不保留“新旧双轨并存”的长期兼容状态
-- 不继续扩大 `subject.manifest.json` 中的手工 proof/benchmark 入口协议
-- 不继续依赖 `Program::Main + Console.WriteLine` 作为正式 correctness 判定方式
-- 不把 capability matrix 仅做成一份人工文档
+- 涓嶄繚鐣欌€滄柊鏃у弻杞ㄥ苟瀛樷€濈殑闀挎湡鍏煎鐘舵€?
+- 涓嶇户缁墿澶?`subject.manifest.json` 涓殑鎵嬪伐 proof/benchmark 鍏ュ彛鍗忚
+- 涓嶇户缁緷璧?`Program::Main + Console.WriteLine` 浣滀负姝ｅ紡 correctness 鍒ゅ畾鏂瑰紡
+- 涓嶆妸 capability matrix 浠呭仛鎴愪竴浠戒汉宸ユ枃妗?
 
-## 4. 目标结构
+## 4. 鐩爣缁撴瀯
 
-### 4.1 Subject 目标结构
+### 4.1 Subject 鐩爣缁撴瀯
 
-推荐目标结构：
+鎺ㄨ崘鐩爣缁撴瀯锛?
 
 ```text
 subjects/
@@ -76,15 +76,15 @@ subjects/
     subject.features.json
 ```
 
-说明：
+璇存槑锛?
 
-- `EngineeringScenarios/` 是对当前 `Archetypes/` 的推荐改名
-- `subject.features.json` 作为每个 owner subject 的 machine-readable capability matrix
-- `subject.manifest.json` 收敛为 subject/source/pipeline/matrix 描述，不再承担具体 proof/benchmark 入口真源
+- `EngineeringScenarios/` 鏄褰撳墠 `Archetypes/` 鐨勬帹鑽愭敼鍚?
+- `subject.features.json` 浣滀负姣忎釜 owner subject 鐨?machine-readable capability matrix
+- `subject.manifest.json` 鏀舵暃涓?subject/source/pipeline/matrix 鎻忚堪锛屼笉鍐嶆壙鎷呭叿浣?proof/benchmark 鍏ュ彛鐪熸簮
 
-### 4.2 Archetype 最小必要集合
+### 4.2 Archetype 鏈€灏忓繀瑕侀泦鍚?
 
-最终建议保留：
+鏈€缁堝缓璁繚鐣欙細
 
 - `SolutionCorePack`
   - `MultiProjectSolution`
@@ -96,116 +96,116 @@ subjects/
 - `HotUpdateHostPack`
   - `FullProjectHotUpdateSolution`
 
-最终建议删除：
+鏈€缁堝缓璁垹闄わ細
 
 - `SolutionCorePack/SimpleLibrarySolution`
 - `SolutionCorePack/PackageReferenceSolution`
 
-### 4.3 正式验证资产的唯一集合
+### 4.3 姝ｅ紡楠岃瘉璧勪骇鐨勫敮涓€闆嗗悎
 
-每个 feature 最终只允许通过以下资产表达：
+姣忎釜 feature 鏈€缁堝彧鍏佽閫氳繃浠ヤ笅璧勪骇琛ㄨ揪锛?
 
 - `tests/unit/**`
 - `tests/contracts/**`
 - owner managed proof
 - owner native proof
-- 按规则要求的 hotupdate smoke / proof
-- 按需 benchmark
+- 鎸夎鍒欒姹傜殑 hotupdate smoke / proof
+- 鎸夐渶 benchmark
 
-以下都必须退出正式主线：
+浠ヤ笅閮藉繀椤婚€€鍑烘寮忎富绾匡細
 
 - `DefaultProofEntries`
-- 手工 `switch` proof 路由
-- `ProofEntry::Run()` 作为长期聚合真源
-- `BenchmarkEntry::RunWorkload()` 的手工配置真源
-- `subjects/*/validation/*` 旁路验证目录
+- 鎵嬪伐 `switch` proof 璺敱
+- `ProofEntry::Run()` 浣滀负闀挎湡鑱氬悎鐪熸簮
+- `BenchmarkEntry::RunWorkload()` 鐨勬墜宸ラ厤缃湡婧?
+- `subjects/*/validation/*` 鏃佽矾楠岃瘉鐩綍
 
-## 5. 阶段列表
+## 5. 闃舵鍒楄〃
 
 ### Phase 0: Authority Freeze And Inventory Baseline
 
-目标：
+鐩爣锛?
 
-- 冻结 feature inventory
-- 冻结 archetype/engineering scenario inventory
-- 冻结 capability matrix / collection / manifest 三者边界
-- 冻结 archetype 最小必要集合
+- 鍐荤粨 feature inventory
+- 鍐荤粨 archetype/engineering scenario inventory
+- 鍐荤粨 capability matrix / collection / manifest 涓夎€呰竟鐣?
+- 鍐荤粨 archetype 鏈€灏忓繀瑕侀泦鍚?
 
-Checklist：
+Checklist锛?
 
-- 列出所有已完成 AOT / Mixed / HotUpdate feature
-- 为每个 feature 指定：
+- 鍒楀嚭鎵€鏈夊凡瀹屾垚 AOT / Mixed / HotUpdate feature
+- 涓烘瘡涓?feature 鎸囧畾锛?
   - `ownerSubjectId`
   - `capabilityFamily`
   - `capabilityItem`
-  - `managed/native/hotupdate` 覆盖要求
+  - `managed/native/hotupdate` 瑕嗙洊瑕佹眰
   - `benchmark requirement`
   - `engineering scenario coverage`
-- 列出所有现有 archetype
-- 对每个 archetype 标记：
+- 鍒楀嚭鎵€鏈夌幇鏈?archetype
+- 瀵规瘡涓?archetype 鏍囪锛?
   - `keep`
   - `merge`
   - `delete`
-- 明确哪些场景仍临时依赖 `Program::Main`
-- 明确 manifest 中哪些字段必须退出“测试真源”角色
+- 鏄庣‘鍝簺鍦烘櫙浠嶄复鏃朵緷璧?`Program::Main`
+- 鏄庣‘ manifest 涓摢浜涘瓧娈靛繀椤婚€€鍑衡€滄祴璇曠湡婧愨€濊鑹?
 
-结构调整：
+缁撴瀯璋冩暣锛?
 
-- 新增 `subject.features.json` 契约设计
-- 评估 `Archetypes -> EngineeringScenarios` 命名切换
+- 鏂板 `subject.features.json` 濂戠害璁捐
+- 璇勪及 `Archetypes -> EngineeringScenarios` 鍛藉悕鍒囨崲
 
-验收标准：
+楠屾敹鏍囧噯锛?
 
-- 每个已完成 feature 都有唯一 matrix 行
-- 每个 engineering scenario 都有唯一保留/删除决策
-- 团队能明确回答：
-  - collection 是什么真源
-  - manifest 是什么真源
-  - capability matrix 是什么真源
+- 姣忎釜宸插畬鎴?feature 閮芥湁鍞竴 matrix 琛?
+- 姣忎釜 engineering scenario 閮芥湁鍞竴淇濈暀/鍒犻櫎鍐崇瓥
+- 鍥㈤槦鑳芥槑纭洖绛旓細
+  - collection 鏄粈涔堢湡婧?
+  - manifest 鏄粈涔堢湡婧?
+  - capability matrix 鏄粈涔堢湡婧?
 
 ### Phase 1: Subject Entry And Scenario Cutover
 
-目标：
+鐩爣锛?
 
-- 删除手工 proof/benchmark 聚合入口
-- 压缩 archetype 到最小必要集合
-- 尽量把保留下来的 engineering scenario 切到 `Sdk + Assert + collection`
-- 收缩 manifest 的手工 proof/benchmark 入口协议
+- 鍒犻櫎鎵嬪伐 proof/benchmark 鑱氬悎鍏ュ彛
+- 鍘嬬缉 archetype 鍒版渶灏忓繀瑕侀泦鍚?
+- 灏介噺鎶婁繚鐣欎笅鏉ョ殑 engineering scenario 鍒囧埌 `Sdk + Assert + collection`
+- 鏀剁缉 manifest 鐨勬墜宸?proof/benchmark 鍏ュ彛鍗忚
 
-Checklist：
+Checklist锛?
 
-- 删除 `DefaultProofEntries`
-- 删除手工 `RunAll(...)`
-- 删除手工 proof `switch`
-- 删除不再保留的 archetype 目录
-- 更新保留 archetype 的项目引用、solution、路径
-- 把保留 engineering scenario 中的正式验证迁移到 `ChaosUnitTest` / `ChaosBenchmark`
-- 调整 `subject.manifest.json`
-  - 去掉不再需要的 `entry` / `workloadEntry` / `entrySelection`
-  - 保留 source solution / matrix / pipeline / default set 级信息
-- 更新 planner / registry / workspace / subject schema 的相关测试
+- 鍒犻櫎 `DefaultProofEntries`
+- 鍒犻櫎鎵嬪伐 `RunAll(...)`
+- 鍒犻櫎鎵嬪伐 proof `switch`
+- 鍒犻櫎涓嶅啀淇濈暀鐨?archetype 鐩綍
+- 鏇存柊淇濈暀 archetype 鐨勯」鐩紩鐢ㄣ€乻olution銆佽矾寰?
+- 鎶婁繚鐣?engineering scenario 涓殑姝ｅ紡楠岃瘉杩佺Щ鍒?`ChaosUnitTest` / `ChaosBenchmark`
+- 璋冩暣 `subject.manifest.json`
+  - 鍘绘帀涓嶅啀闇€瑕佺殑 `entry` / `workloadEntry` / `entrySelection`
+  - 淇濈暀 source solution / matrix / pipeline / default set 绾т俊鎭?
+- 鏇存柊 planner / registry / workspace / subject schema 鐨勭浉鍏虫祴璇?
 
-结构调整：
+缁撴瀯璋冩暣锛?
 
-- `Archetypes/` 重命名为 `EngineeringScenarios/`
-- 清理 `subjects/SolutionCorePack/validation/`
+- `Archetypes/` 閲嶅懡鍚嶄负 `EngineeringScenarios/`
+- 娓呯悊 `subjects/SolutionCorePack/validation/`
 
-验收标准：
+楠屾敹鏍囧噯锛?
 
-- 新增 feature 不再需要改手工入口
-- 工程级样例只保留最小必要集合
-- 绝大多数正式场景已经不依赖 `Program::Main + Console`
-- manifest 不再是 proof/benchmark 具体入口真源
+- 鏂板 feature 涓嶅啀闇€瑕佹敼鎵嬪伐鍏ュ彛
+- 宸ョ▼绾ф牱渚嬪彧淇濈暀鏈€灏忓繀瑕侀泦鍚?
+- 缁濆ぇ澶氭暟姝ｅ紡鍦烘櫙宸茬粡涓嶄緷璧?`Program::Main + Console`
+- manifest 涓嶅啀鏄?proof/benchmark 鍏蜂綋鍏ュ彛鐪熸簮
 
 ### Phase 2: SolutionCorePack AOT Rebaseline
 
-目标：
+鐩爣锛?
 
-- 按 capability matrix 重建 `SolutionCorePack` 已完成 AOT feature 的正式验证面
+- 鎸?capability matrix 閲嶅缓 `SolutionCorePack` 宸插畬鎴?AOT feature 鐨勬寮忛獙璇侀潰
 
-Checklist：
+Checklist锛?
 
-- 逐个能力域补齐或重写：
+- 閫愪釜鑳藉姏鍩熻ˉ榻愭垨閲嶅啓锛?
   - `PrimitivesAndOps`
   - `ObjectModelAndDispatch`
   - `GenericsAndCollections`
@@ -214,32 +214,32 @@ Checklist：
   - `ReflectionAndMetadata`
   - `RuntimeServices`
   - `AsyncAndThreading`
-- 为每条 completed feature 对齐：
+- 涓烘瘡鏉?completed feature 瀵归綈锛?
   - `tests/unit` / `tests/contracts`
   - managed proof
   - native proof
-  - 按需 benchmark
-- 把工程级 scenario 与 feature matrix 关联起来
-- 清理重复、漂移或失效 proof
+  - 鎸夐渶 benchmark
+- 鎶婂伐绋嬬骇 scenario 涓?feature matrix 鍏宠仈璧锋潵
+- 娓呯悊閲嶅銆佹紓绉绘垨澶辨晥 proof
 
-结构调整：
+缁撴瀯璋冩暣锛?
 
-- 按 capability family 清理 `FeatureSlices` 与 `Benchmarks` 内的命名和归属
-- 对齐 collection 中的 stableId 命名
+- 鎸?capability family 娓呯悊 `FeatureSlices` 涓?`Benchmarks` 鍐呯殑鍛藉悕鍜屽綊灞?
+- 瀵归綈 collection 涓殑 stableId 鍛藉悕
 
-验收标准：
+楠屾敹鏍囧噯锛?
 
-- 每条 completed AOT feature 都能从 matrix 追到正式验证资产
-- 不存在“只在文件里有 proof，但不在正式回归中”的漂移项
-- AOT 工程级验证被纳入正式 collection 主线，或在 matrix 中明确标注为临时 smoke
+- 姣忔潯 completed AOT feature 閮借兘浠?matrix 杩藉埌姝ｅ紡楠岃瘉璧勪骇
+- 涓嶅瓨鍦ㄢ€滃彧鍦ㄦ枃浠堕噷鏈?proof锛屼絾涓嶅湪姝ｅ紡鍥炲綊涓€濈殑婕傜Щ椤?
+- AOT 宸ョ▼绾ч獙璇佽绾冲叆姝ｅ紡 collection 涓荤嚎锛屾垨鍦?matrix 涓槑纭爣娉ㄤ负涓存椂 smoke
 
 ### Phase 3: MixedExecution And HotUpdate Rebaseline
 
-目标：
+鐩爣锛?
 
-- 按 capability matrix 重建 `MixedExecutionFeaturePack` 与 `HotUpdateHostPack` 已完成能力的正式验证面
+- 鎸?capability matrix 閲嶅缓 `MixedExecutionFeaturePack` 涓?`HotUpdateHostPack` 宸插畬鎴愯兘鍔涚殑姝ｅ紡楠岃瘉闈?
 
-Checklist：
+Checklist锛?
 
 - `MixedExecutionFeaturePack`
   - interpreter lowering
@@ -254,221 +254,222 @@ Checklist：
   - shared contract
   - patch integrity
   - rollback/versioning
-- 逐条确认：
+- 閫愭潯纭锛?
   - owner managed proof
-  - owner native proof 或 mixed/native equivalent
+  - owner native proof 鎴?mixed/native equivalent
   - required hotupdate smoke / proof
-  - 按需 benchmark
+  - 鎸夐渶 benchmark
 
-结构调整：
+缁撴瀯璋冩暣锛?
 
-- 对齐 patch/host/shared-contract 样例的正式验证角色
-- 清理仍留在 Host/Program 或 ManagedBridge/Program 的手工分发
+- 瀵归綈 patch/host/shared-contract 鏍蜂緥鐨勬寮忛獙璇佽鑹?
+- 娓呯悊浠嶇暀鍦?Host/Program 鎴?ManagedBridge/Program 鐨勬墜宸ュ垎鍙?
 
-验收标准：
+楠屾敹鏍囧噯锛?
 
-- 每条 completed mixed/hotupdate feature 都进入正式 collection 主线
-- 命中 hotupdate 规则的 feature 全部有 hotupdate 验证
-- mixed / hotupdate 的工程级样例与 capability matrix 形成一一对应
+- 姣忔潯 completed mixed/hotupdate feature 閮借繘鍏ユ寮?collection 涓荤嚎
+- 鍛戒腑 hotupdate 瑙勫垯鐨?feature 鍏ㄩ儴鏈?hotupdate 楠岃瘉
+- mixed / hotupdate 鐨勫伐绋嬬骇鏍蜂緥涓?capability matrix 褰㈡垚涓€涓€瀵瑰簲
 
 ### Phase 4: Coverage Automation And Full Regression
 
-目标：
+鐩爣锛?
 
-- 让 capability matrix 可自动校验
-- 跑完整回归
-- 输出 coverage 与 gap 报表
+- 璁?capability matrix 鍙嚜鍔ㄦ牎楠?
+- 璺戝畬鏁村洖褰?
+- 杈撳嚭 coverage 涓?gap 鎶ヨ〃
 
-Checklist：
+Checklist锛?
 
-- 建立 matrix 与 collection 的自动对照检查
-- 建立 matrix 与 benchmark 覆盖的自动对照检查
-- 建立 matrix 与 hotupdate requirement 的自动对照检查
-- 运行完整 managed / native / hotupdate 回归
-- 产出：
+- 寤虹珛 matrix 涓?collection 鐨勮嚜鍔ㄥ鐓ф鏌?
+- 寤虹珛 matrix 涓?benchmark 瑕嗙洊鐨勮嚜鍔ㄥ鐓ф鏌?
+- 寤虹珛 matrix 涓?hotupdate requirement 鐨勮嚜鍔ㄥ鐓ф鏌?
+- 杩愯瀹屾暣 managed / native / hotupdate 鍥炲綊
+- 浜у嚭锛?
   - feature coverage report
   - benchmark coverage report
   - engineering scenario coverage report
   - remaining gap report
 
-结构调整：
+缁撴瀯璋冩暣锛?
 
-- 新增 coverage report 生成逻辑
-- 更新 dashboard / reporting，使其能显示 capability 级视图
+- 鏂板 coverage report 鐢熸垚閫昏緫
+- 鏇存柊 dashboard / reporting锛屼娇鍏惰兘鏄剧ず capability 绾ц鍥?
 
-验收标准：
+楠屾敹鏍囧噯锛?
 
-- 能自动发现：
+- 鑳借嚜鍔ㄥ彂鐜帮細
   - declared but not covered
   - covered but not in matrix
   - benchmark required but missing
   - hotupdate proof required but missing
-- 能明确回答“已完成能力是否完整验证”
+- 鑳芥槑纭洖绛斺€滃凡瀹屾垚鑳藉姏鏄惁瀹屾暣楠岃瘉鈥?
 
 ### Phase 5: Documentation And Governance Closeout
 
-目标：
+鐩爣锛?
 
-- 把最终规则固化到 architecture / wiki / skill
+- 鎶婃渶缁堣鍒欏浐鍖栧埌 architecture / wiki / skill
 
-Checklist：
+Checklist锛?
 
-- 更新 `docs/architecture/managed-native-hotupdate-test-pipeline.md`
-- 更新 `wiki/04-工具与集成/统一测试框架.md`
-- 更新 `wiki/06-测试验证/新增测试接入规范.md`
-- 更新 `wiki/06-测试验证/AOT新Feature接入自测规范.md`
-- 补充：
-  - owner feature matrix 规则
-  - engineering scenario 规则
-  - manifest / collection / matrix 真源边界
+- 更新 `docs/architecture/subject-test-framework-v1/INDEX.md`
+- 更新 `docs/architecture/verification-v1/spec.md`
+- 鏇存柊 `wiki/04-宸ュ叿涓庨泦鎴?缁熶竴娴嬭瘯妗嗘灦.md`
+- 鏇存柊 `wiki/06-娴嬭瘯楠岃瘉/鏂板娴嬭瘯鎺ュ叆瑙勮寖.md`
+- 鏇存柊 `wiki/06-娴嬭瘯楠岃瘉/AOT鏂癋eature鎺ュ叆鑷祴瑙勮寖.md`
+- 琛ュ厖锛?
+  - owner feature matrix 瑙勫垯
+  - engineering scenario 瑙勫垯
+  - manifest / collection / matrix 鐪熸簮杈圭晫
 
-验收标准：
+楠屾敹鏍囧噯锛?
 
-- 新开发者仅看 wiki/architecture 就能正确接入新 feature
-- 不再需要口头解释 `Archetypes`、手工入口、旧验证路径的历史背景
+- 鏂板紑鍙戣€呬粎鐪?wiki/architecture 灏辫兘姝ｇ‘鎺ュ叆鏂?feature
+- 涓嶅啀闇€瑕佸彛澶磋В閲?`Archetypes`銆佹墜宸ュ叆鍙ｃ€佹棫楠岃瘉璺緞鐨勫巻鍙茶儗鏅?
 
-## 6. 每阶段完成定义
+## 6. 姣忛樁娈靛畬鎴愬畾涔?
 
 ### Phase 0
 
-- goal: 冻结 inventory、真源边界、最小 archetype 集合
+- goal: 鍐荤粨 inventory銆佺湡婧愯竟鐣屻€佹渶灏?archetype 闆嗗悎
 - exit_criteria:
-  - `subject.features.json` 结构定稿
-  - archetype 保留/删除决策定稿
-  - collection / manifest / matrix 权责定稿
+  - `subject.features.json` 缁撴瀯瀹氱
+  - archetype 淇濈暀/鍒犻櫎鍐崇瓥瀹氱
+  - collection / manifest / matrix 鏉冭矗瀹氱
 - deliverables:
   - feature inventory
   - archetype inventory
-  - matrix schema 草案
-- dependencies: 无
+  - matrix schema 鑽夋
+- dependencies: 鏃?
 - open_questions:
-  - `subject.features.json` 放每个 subject 还是放仓库根部聚合
-  - `Archetypes` 是否本轮改名为 `EngineeringScenarios`
+  - `subject.features.json` 鏀炬瘡涓?subject 杩樻槸鏀句粨搴撴牴閮ㄨ仛鍚?
+  - `Archetypes` 鏄惁鏈疆鏀瑰悕涓?`EngineeringScenarios`
 
 ### Phase 1
 
-- goal: 切掉手工入口并压缩 engineering scenarios
+- goal: 鍒囨帀鎵嬪伐鍏ュ彛骞跺帇缂?engineering scenarios
 - exit_criteria:
-  - 无 `DefaultProofEntries`
-  - 无手工 proof/benchmark 聚合真源
-  - 最小必要 engineering scenario 集合落地
+  - 鏃?`DefaultProofEntries`
+  - 鏃犳墜宸?proof/benchmark 鑱氬悎鐪熸簮
+  - 鏈€灏忓繀瑕?engineering scenario 闆嗗悎钀藉湴
 - deliverables:
-  - 精简后的 subject 入口
-  - 更新后的 manifest
-  - 更新后的 tests
+  - 绮剧畝鍚庣殑 subject 鍏ュ彛
+  - 鏇存柊鍚庣殑 manifest
+  - 鏇存柊鍚庣殑 tests
 - dependencies: Phase 0
 - open_questions:
-  - 少量确实不能立刻 collection 化的 scenario 如何临时标记
+  - 灏戦噺纭疄涓嶈兘绔嬪埢 collection 鍖栫殑 scenario 濡備綍涓存椂鏍囪
 
 ### Phase 2
 
-- goal: SolutionCorePack 形成完整 AOT owner 验证面
+- goal: SolutionCorePack 褰㈡垚瀹屾暣 AOT owner 楠岃瘉闈?
 - exit_criteria:
-  - completed AOT feature 全部映射到正式验证资产
-  - 工程级 AOT scenario 进入正式主线或明确标临时状态
+  - completed AOT feature 鍏ㄩ儴鏄犲皠鍒版寮忛獙璇佽祫浜?
+  - 宸ョ▼绾?AOT scenario 杩涘叆姝ｅ紡涓荤嚎鎴栨槑纭爣涓存椂鐘舵€?
 - deliverables:
-  - 重基线后的 `SolutionCorePack`
-  - 对应 unit/contracts/integration 证据
+  - 閲嶅熀绾垮悗鐨?`SolutionCorePack`
+  - 瀵瑰簲 unit/contracts/integration 璇佹嵁
 - dependencies: Phase 1
-- open_questions: 无
+- open_questions: 鏃?
 
 ### Phase 3
 
-- goal: Mixed/HotUpdate owner 验证面完整化
+- goal: Mixed/HotUpdate owner 楠岃瘉闈㈠畬鏁村寲
 - exit_criteria:
-  - completed mixed/hotupdate feature 全部进入正式主线
-  - required hotupdate validation 完整存在
+  - completed mixed/hotupdate feature 鍏ㄩ儴杩涘叆姝ｅ紡涓荤嚎
+  - required hotupdate validation 瀹屾暣瀛樺湪
 - deliverables:
-  - 重基线后的 `MixedExecutionFeaturePack`
-  - 重基线后的 `HotUpdateHostPack`
+  - 閲嶅熀绾垮悗鐨?`MixedExecutionFeaturePack`
+  - 閲嶅熀绾垮悗鐨?`HotUpdateHostPack`
 - dependencies: Phase 1
-- open_questions: 无
+- open_questions: 鏃?
 
 ### Phase 4
 
-- goal: 让 coverage 可自动审计，并完成全量回归
+- goal: 璁?coverage 鍙嚜鍔ㄥ璁★紝骞跺畬鎴愬叏閲忓洖褰?
 - exit_criteria:
-  - coverage 差距可以自动报告
-  - managed/native/hotupdate 完整回归可复跑
+  - coverage 宸窛鍙互鑷姩鎶ュ憡
+  - managed/native/hotupdate 瀹屾暣鍥炲綊鍙璺?
 - deliverables:
   - coverage automation
   - reports
 - dependencies: Phase 2, Phase 3
 - open_questions:
-  - dashboard 是否同时展示 capability 级和工程 scenario 级视图
+  - dashboard 鏄惁鍚屾椂灞曠ず capability 绾у拰宸ョ▼ scenario 绾ц鍥?
 
 ### Phase 5
 
-- goal: 文档、wiki、skill 与最终状态一致
+- goal: 鏂囨。銆亀iki銆乻kill 涓庢渶缁堢姸鎬佷竴鑷?
 - exit_criteria:
-  - architecture / wiki / skill 全部同步
+  - architecture / wiki / skill 鍏ㄩ儴鍚屾
 - deliverables:
-  - 更新后的长期文档
+  - 鏇存柊鍚庣殑闀挎湡鏂囨。
 - dependencies: Phase 4
-- open_questions: 无
+- open_questions: 鏃?
 
-## 7. 子任务映射
+## 7. 瀛愪换鍔℃槧灏?
 
 | task_id | phase | status | owner | purpose | depends_on |
 | --- | --- | --- | --- | --- | --- |
-| `20260417-03-phase-0-authority-freeze-and-inventory-baseline` | Phase 0 | planned | codex | 冻结 feature/archetype inventory 与真源边界 | `-` |
-| `20260417-03-phase-1-subject-entry-and-scenario-cutover` | Phase 1 | planned | codex | 删除手工入口并压缩 engineering scenario 集合 | `20260417-03-phase-0-authority-freeze-and-inventory-baseline` |
-| `20260417-03-phase-2-solution-core-pack-aot-rebaseline` | Phase 2 | planned | codex | 重建 SolutionCorePack 的 owner AOT 验证面 | `20260417-03-phase-1-subject-entry-and-scenario-cutover` |
-| `20260417-03-phase-3-mixed-hotupdate-rebaseline` | Phase 3 | planned | codex | 重建 MixedExecution/HotUpdate 的 owner 验证面 | `20260417-03-phase-1-subject-entry-and-scenario-cutover` |
-| `20260417-03-phase-4-coverage-automation-and-full-regression` | Phase 4 | planned | codex | 建立 capability coverage 自动审计并完成全量回归 | `20260417-03-phase-2-solution-core-pack-aot-rebaseline, 20260417-03-phase-3-mixed-hotupdate-rebaseline` |
-| `20260417-03-phase-5-documentation-and-governance-closeout` | Phase 5 | planned | codex | 固化最终规范到 architecture/wiki/skill | `20260417-03-phase-4-coverage-automation-and-full-regression` |
+| `20260417-03-phase-0-authority-freeze-and-inventory-baseline` | Phase 0 | planned | codex | 鍐荤粨 feature/archetype inventory 涓庣湡婧愯竟鐣?| `-` |
+| `20260417-03-phase-1-subject-entry-and-scenario-cutover` | Phase 1 | planned | codex | 鍒犻櫎鎵嬪伐鍏ュ彛骞跺帇缂?engineering scenario 闆嗗悎 | `20260417-03-phase-0-authority-freeze-and-inventory-baseline` |
+| `20260417-03-phase-2-solution-core-pack-aot-rebaseline` | Phase 2 | planned | codex | 閲嶅缓 SolutionCorePack 鐨?owner AOT 楠岃瘉闈?| `20260417-03-phase-1-subject-entry-and-scenario-cutover` |
+| `20260417-03-phase-3-mixed-hotupdate-rebaseline` | Phase 3 | planned | codex | 閲嶅缓 MixedExecution/HotUpdate 鐨?owner 楠岃瘉闈?| `20260417-03-phase-1-subject-entry-and-scenario-cutover` |
+| `20260417-03-phase-4-coverage-automation-and-full-regression` | Phase 4 | planned | codex | 寤虹珛 capability coverage 鑷姩瀹¤骞跺畬鎴愬叏閲忓洖褰?| `20260417-03-phase-2-solution-core-pack-aot-rebaseline, 20260417-03-phase-3-mixed-hotupdate-rebaseline` |
+| `20260417-03-phase-5-documentation-and-governance-closeout` | Phase 5 | planned | codex | 鍥哄寲鏈€缁堣鑼冨埌 architecture/wiki/skill | `20260417-03-phase-4-coverage-automation-and-full-regression` |
 
-## 8. 依赖
+## 8. 渚濊禆
 
-- 现有 `Chaos.TestFramework.Sdk / Runtime / collector / manifest` 主线已经可用
-- subject discovery / registry / workspace 具备继续演进空间
-- 当前 3 个 canonical subject 已经存在，可作为 owner 收口容器
-- 后续 AOT 主线能力补洞可以并行推进，但不应混淆本 roadmap 的验证重梳目标
+- 鐜版湁 `Chaos.TestFramework.Sdk / Runtime / collector / manifest` 涓荤嚎宸茬粡鍙敤
+- subject discovery / registry / workspace 鍏峰缁х画婕旇繘绌洪棿
+- 褰撳墠 3 涓?canonical subject 宸茬粡瀛樺湪锛屽彲浣滀负 owner 鏀跺彛瀹瑰櫒
+- 鍚庣画 AOT 涓荤嚎鑳藉姏琛ユ礊鍙互骞惰鎺ㄨ繘锛屼絾涓嶅簲娣锋穯鏈?roadmap 鐨勯獙璇侀噸姊崇洰鏍?
 
-## 9. 风险
+## 9. 椋庨櫓
 
-- 如果不收缩 manifest 的手工入口协议，collection 主线仍然不是唯一真源
-- 如果 capability matrix 只是文档，不做自动校验，很快会再次漂移
-- 如果 archetype 只做目录压缩、不改验证方式，仍会留下 `Program + Console` 的旧轨
-- 如果不在本轮删除旧 `validation/*` 与手工入口，后续新增 feature 会继续双轨
-- 如果 coverage automation 最后才想起来补，Phase 2/3 的结果很难证明“完整”
+- 濡傛灉涓嶆敹缂?manifest 鐨勬墜宸ュ叆鍙ｅ崗璁紝collection 涓荤嚎浠嶇劧涓嶆槸鍞竴鐪熸簮
+- 濡傛灉 capability matrix 鍙槸鏂囨。锛屼笉鍋氳嚜鍔ㄦ牎楠岋紝寰堝揩浼氬啀娆℃紓绉?
+- 濡傛灉 archetype 鍙仛鐩綍鍘嬬缉銆佷笉鏀归獙璇佹柟寮忥紝浠嶄細鐣欎笅 `Program + Console` 鐨勬棫杞?
+- 濡傛灉涓嶅湪鏈疆鍒犻櫎鏃?`validation/*` 涓庢墜宸ュ叆鍙ｏ紝鍚庣画鏂板 feature 浼氱户缁弻杞?
+- 濡傛灉 coverage automation 鏈€鍚庢墠鎯宠捣鏉ヨˉ锛孭hase 2/3 鐨勭粨鏋滃緢闅捐瘉鏄庘€滃畬鏁粹€?
 
-## 10. 备选路径
+## 10. 澶囬€夎矾寰?
 
-### 方案 A：补用例但不改真源结构
+### 鏂规 A锛氳ˉ鐢ㄤ緥浣嗕笉鏀圭湡婧愮粨鏋?
 
-- 优点：快
-- 缺点：后续继续双轨，等于没完成重构
+- 浼樼偣锛氬揩
+- 缂虹偣锛氬悗缁户缁弻杞紝绛変簬娌″畬鎴愰噸鏋?
 
-### 方案 B：能力矩阵重基线并同步切真源
+### 鏂规 B锛氳兘鍔涚煩闃甸噸鍩虹嚎骞跺悓姝ュ垏鐪熸簮
 
-- 优点：最符合当前测试框架
-- 缺点：初始梳理成本更高
+- 浼樼偣锛氭渶绗﹀悎褰撳墠娴嬭瘯妗嗘灦
+- 缂虹偣锛氬垵濮嬫⒊鐞嗘垚鏈洿楂?
 
-### 方案 C：整个 subject 体系全量重生
+### 鏂规 C锛氭暣涓?subject 浣撶郴鍏ㄩ噺閲嶇敓
 
-- 优点：最干净
-- 缺点：风险过大，容易把已完成资产打散
+- 浼樼偣锛氭渶骞插噣
+- 缂虹偣锛氶闄╄繃澶э紝瀹规槗鎶婂凡瀹屾垚璧勪骇鎵撴暎
 
-当前采用：方案 B。
+褰撳墠閲囩敤锛氭柟妗?B銆?
 
-## 11. 当前建议推进顺序
+## 11. 褰撳墠寤鸿鎺ㄨ繘椤哄簭
 
-1. 先做 `Phase 0`，冻结真源边界和最小 engineering scenario 集合
-2. 再做 `Phase 1`，先切掉最关键的手工入口和旧 scenario 残留
-3. 优先推进 `Phase 2`，把 `SolutionCorePack` 这个 AOT 主 owner 先打稳
-4. 再推进 `Phase 3`，补齐 mixed/hotupdate owner 面
-5. 最后用 `Phase 4` 做自动审计和全量回归
-6. 收口到 `Phase 5`，把规则固化到长期文档
+1. 鍏堝仛 `Phase 0`锛屽喕缁撶湡婧愯竟鐣屽拰鏈€灏?engineering scenario 闆嗗悎
+2. 鍐嶅仛 `Phase 1`锛屽厛鍒囨帀鏈€鍏抽敭鐨勬墜宸ュ叆鍙ｅ拰鏃?scenario 娈嬬暀
+3. 浼樺厛鎺ㄨ繘 `Phase 2`锛屾妸 `SolutionCorePack` 杩欎釜 AOT 涓?owner 鍏堟墦绋?
+4. 鍐嶆帹杩?`Phase 3`锛岃ˉ榻?mixed/hotupdate owner 闈?
+5. 鏈€鍚庣敤 `Phase 4` 鍋氳嚜鍔ㄥ璁″拰鍏ㄩ噺鍥炲綊
+6. 鏀跺彛鍒?`Phase 5`锛屾妸瑙勫垯鍥哄寲鍒伴暱鏈熸枃妗?
 
-## 12. 重审结论
+## 12. 閲嶅缁撹
 
-这份 roadmap 在重审后，比原设计更合理的地方有三点：
+杩欎唤 roadmap 鍦ㄩ噸瀹″悗锛屾瘮鍘熻璁℃洿鍚堢悊鐨勫湴鏂规湁涓夌偣锛?
 
-- 不再默认接受 `Archetypes/*` 维持旧 console smoke 角色，而是要求尽量回到统一 collection 主线。
-- 不再把 capability matrix 当说明文档，而是把它提升为 machine-readable 契约，后续能自动对照 collection。
-- 不再默认让 `subject.manifest.json` 继续承载 proof/benchmark 具体入口真源，而是明确要求收缩这层协议。
+- 涓嶅啀榛樿鎺ュ彈 `Archetypes/*` 缁存寔鏃?console smoke 瑙掕壊锛岃€屾槸瑕佹眰灏介噺鍥炲埌缁熶竴 collection 涓荤嚎銆?
+- 涓嶅啀鎶?capability matrix 褰撹鏄庢枃妗ｏ紝鑰屾槸鎶婂畠鎻愬崌涓?machine-readable 濂戠害锛屽悗缁兘鑷姩瀵圭収 collection銆?
+- 涓嶅啀榛樿璁?`subject.manifest.json` 缁х画鎵胯浇 proof/benchmark 鍏蜂綋鍏ュ彛鐪熸簮锛岃€屾槸鏄庣‘瑕佹眰鏀剁缉杩欏眰鍗忚銆?
 
-当前仍需注意但已纳入 roadmap 的唯一高风险点是：
+褰撳墠浠嶉渶娉ㄦ剰浣嗗凡绾冲叆 roadmap 鐨勫敮涓€楂橀闄╃偣鏄細
 
-- 这一轮不只是内容补齐，而是一次 manifest / tests / planner / registry / workspace 的真实 cutover，所以 Phase 1 的改动面会比表面看起来大。
+- 杩欎竴杞笉鍙槸鍐呭琛ラ綈锛岃€屾槸涓€娆?manifest / tests / planner / registry / workspace 鐨勭湡瀹?cutover锛屾墍浠?Phase 1 鐨勬敼鍔ㄩ潰浼氭瘮琛ㄩ潰鐪嬭捣鏉ュぇ銆?

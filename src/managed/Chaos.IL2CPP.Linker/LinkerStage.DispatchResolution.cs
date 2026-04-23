@@ -134,9 +134,41 @@ public sealed partial class LinkerStage
         ManagedTypeModel interfaceType,
         IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
     {
+        return ImplementsInterface(
+            candidateType,
+            interfaceType.SubjectId,
+            interfaceType.DefinitionSubjectId,
+            typeMap);
+    }
+
+    private static bool ImplementsInterface(
+        ManagedTypeModel candidateType,
+        string interfaceTypeSubjectId,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
+    {
+        var interfaceDefinitionSubjectId = typeMap.TryGetValue(interfaceTypeSubjectId, out var interfaceType)
+            ? interfaceType.DefinitionSubjectId
+            : interfaceTypeSubjectId;
+        return ImplementsInterface(
+            candidateType,
+            interfaceTypeSubjectId,
+            interfaceDefinitionSubjectId,
+            typeMap);
+    }
+
+    private static bool ImplementsInterface(
+        ManagedTypeModel candidateType,
+        string interfaceTypeSubjectId,
+        string? interfaceDefinitionSubjectId,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
+    {
         return candidateType.ImplementedInterfaceSubjectIds is not null &&
                candidateType.ImplementedInterfaceSubjectIds.Any(candidateInterfaceSubjectId =>
-                   MatchesInterfaceSubjectId(candidateInterfaceSubjectId, interfaceType, typeMap));
+                   MatchesInterfaceSubjectId(
+                       candidateInterfaceSubjectId,
+                       interfaceTypeSubjectId,
+                       interfaceDefinitionSubjectId,
+                       typeMap));
     }
 
     private static bool MatchesInterfaceSubjectId(
@@ -144,15 +176,52 @@ public sealed partial class LinkerStage
         ManagedTypeModel interfaceType,
         IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
     {
-        if (string.Equals(candidateInterfaceSubjectId, interfaceType.SubjectId, StringComparison.Ordinal) ||
-            string.Equals(candidateInterfaceSubjectId, interfaceType.DefinitionSubjectId, StringComparison.Ordinal))
+        return MatchesInterfaceSubjectId(
+            candidateInterfaceSubjectId,
+            interfaceType.SubjectId,
+            interfaceType.DefinitionSubjectId,
+            typeMap);
+    }
+
+    private static bool MatchesInterfaceSubjectId(
+        string candidateInterfaceSubjectId,
+        string interfaceTypeSubjectId,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
+    {
+        var interfaceDefinitionSubjectId = typeMap.TryGetValue(interfaceTypeSubjectId, out var interfaceType)
+            ? interfaceType.DefinitionSubjectId
+            : interfaceTypeSubjectId;
+        return MatchesInterfaceSubjectId(
+            candidateInterfaceSubjectId,
+            interfaceTypeSubjectId,
+            interfaceDefinitionSubjectId,
+            typeMap);
+    }
+
+    private static bool MatchesInterfaceSubjectId(
+        string candidateInterfaceSubjectId,
+        string interfaceTypeSubjectId,
+        string? interfaceDefinitionSubjectId,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
+    {
+        if (string.Equals(candidateInterfaceSubjectId, interfaceTypeSubjectId, StringComparison.Ordinal) ||
+            (!string.IsNullOrWhiteSpace(interfaceDefinitionSubjectId) &&
+             string.Equals(candidateInterfaceSubjectId, interfaceDefinitionSubjectId, StringComparison.Ordinal)))
         {
             return true;
         }
 
-        return typeMap.TryGetValue(candidateInterfaceSubjectId, out var candidateInterfaceType) &&
-               (string.Equals(candidateInterfaceType.SubjectId, interfaceType.SubjectId, StringComparison.Ordinal) ||
-                string.Equals(candidateInterfaceType.DefinitionSubjectId, interfaceType.DefinitionSubjectId, StringComparison.Ordinal));
+        if (!typeMap.TryGetValue(candidateInterfaceSubjectId, out var candidateInterfaceType))
+        {
+            return false;
+        }
+
+        return string.Equals(candidateInterfaceType.SubjectId, interfaceTypeSubjectId, StringComparison.Ordinal) ||
+               (!string.IsNullOrWhiteSpace(interfaceDefinitionSubjectId) &&
+                string.Equals(candidateInterfaceType.SubjectId, interfaceDefinitionSubjectId, StringComparison.Ordinal)) ||
+               string.Equals(candidateInterfaceType.DefinitionSubjectId, interfaceTypeSubjectId, StringComparison.Ordinal) ||
+               (!string.IsNullOrWhiteSpace(interfaceDefinitionSubjectId) &&
+                string.Equals(candidateInterfaceType.DefinitionSubjectId, interfaceDefinitionSubjectId, StringComparison.Ordinal));
     }
 
     private static bool IsCompatibleVirtualDispatchTargetType(

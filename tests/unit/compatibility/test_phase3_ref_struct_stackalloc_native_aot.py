@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id, get_method_subject_display_string
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -119,10 +121,8 @@ class Phase3RefStructStackallocNativeAotTests(unittest.TestCase):
         self._ensure_bundle_generated()
 
         artifact = json.loads((self.output_root / "aot-core-ir.json").read_text(encoding="utf-8"))
-        entry_method = next(method for method in artifact["methods"] if method["subjectId"] == ENTRY_SUBJECT_ID)
-        stack_window_sum_method = next(
-            method for method in artifact["methods"] if method["subjectId"] == STACK_WINDOW_SUM_SUBJECT_ID
-        )
+        entry_method = find_method_by_subject_id(artifact["methods"], ENTRY_SUBJECT_ID)
+        stack_window_sum_method = find_method_by_subject_id(artifact["methods"], STACK_WINDOW_SUM_SUBJECT_ID)
 
         entry_ops = [instruction["op"] for instruction in entry_method["instructions"]]
         self.assertIn("localloc", entry_ops)
@@ -130,7 +130,7 @@ class Phase3RefStructStackallocNativeAotTests(unittest.TestCase):
         self.assertIn("newobj", entry_ops)
 
         entry_runtime_calls = {
-            instruction["callee"]
+            get_method_subject_display_string(instruction["callee"])
             for instruction in entry_method["instructions"]
             if instruction["op"] in {"call", "newobj"}
         }
@@ -146,7 +146,7 @@ class Phase3RefStructStackallocNativeAotTests(unittest.TestCase):
         )
 
         sum_runtime_calls = {
-            instruction["callee"]
+            get_method_subject_display_string(instruction["callee"])
             for instruction in stack_window_sum_method["instructions"]
             if instruction["op"] == "call"
         }
@@ -174,7 +174,7 @@ class Phase3RefStructStackallocNativeAotTests(unittest.TestCase):
             "cpblk",
             "CreateSpan",
             "ReadOnlySpan",
-            "__ctor_System_Void__System_Int32_",
+            "__ctor_System_Void_System_Void__System_Int32_",
             "get_Length",
             "get_Item",
         ]:

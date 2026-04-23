@@ -13,11 +13,38 @@ public sealed record ManagedMethodIdentityArtifact
     public required string MethodId { get; init; }
 
     public required string Signature { get; init; }
+
+    public string? ExecutionAuthorityKey { get; init; }
+
+    public InstantiationStubId? InstantiationStubId { get; init; }
+}
+
+public sealed record ManagedMethodIdentitySpec
+{
+    public required string AssemblyName { get; init; }
+
+    public required string DeclaringTypeSubjectId { get; init; }
+
+    public required string DeclaringTypeDisplayName { get; init; }
+
+    public required string MethodName { get; init; }
+
+    public required string SubjectId { get; init; }
+
+    public required string Signature { get; init; }
+
+    public string? DefinitionSubjectId { get; init; }
+
+    public string? ExecutionAuthorityKey { get; init; }
+
+    public InstantiationStubId? InstantiationStubId { get; init; }
 }
 
 public static class ManagedMethodIdentityResolver
 {
-    public static ManagedMethodIdentityArtifact Create(ManagedMethodModel method)
+    public static ManagedMethodIdentityArtifact Create(
+        ManagedMethodModel method,
+        string? executionAuthorityKey = null)
     {
         ArgumentNullException.ThrowIfNull(method);
 
@@ -29,29 +56,36 @@ public static class ManagedMethodIdentityResolver
             SubjectId = method.SubjectId,
             MethodId = ManagedNaming.CreateMethodId(method),
             Signature = method.Signature,
+            ExecutionAuthorityKey = executionAuthorityKey,
+            InstantiationStubId = method.RuntimeGenericContext?.InstantiationStubId,
         };
     }
 
-    public static ManagedMethodIdentityArtifact Create(string subjectId, string signature, string? definitionSubjectId = null)
+    public static ManagedMethodIdentityArtifact Create(
+        ManagedMethodIdentitySpec spec)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
-        ArgumentException.ThrowIfNullOrWhiteSpace(signature);
+        ArgumentNullException.ThrowIfNull(spec);
+        ArgumentException.ThrowIfNullOrWhiteSpace(spec.AssemblyName);
+        ArgumentException.ThrowIfNullOrWhiteSpace(spec.DeclaringTypeSubjectId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(spec.DeclaringTypeDisplayName);
+        ArgumentException.ThrowIfNullOrWhiteSpace(spec.MethodName);
+        ArgumentException.ThrowIfNullOrWhiteSpace(spec.SubjectId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(spec.Signature);
 
-        var assemblyName = ResolveAssemblyName(subjectId);
-        var declaringTypeSubjectId = ResolveDeclaringTypeSubjectId(subjectId);
-        var declaringTypeDisplayName = ResolveDeclaringTypeDisplayName(declaringTypeSubjectId);
-        var methodName = ResolveMethodName(subjectId);
+        var resolvedDefinitionSubjectId = string.IsNullOrWhiteSpace(spec.DefinitionSubjectId)
+            ? spec.SubjectId
+            : spec.DefinitionSubjectId;
 
         return new ManagedMethodIdentityArtifact
         {
-            AssemblyName = assemblyName,
-            DeclaringTypeSubjectId = declaringTypeSubjectId,
-            DefinitionSubjectId = string.IsNullOrWhiteSpace(definitionSubjectId)
-                ? subjectId
-                : definitionSubjectId,
-            SubjectId = subjectId,
-            MethodId = ManagedNaming.CreateMethodId(assemblyName, declaringTypeDisplayName, methodName),
-            Signature = signature,
+            AssemblyName = spec.AssemblyName,
+            DeclaringTypeSubjectId = spec.DeclaringTypeSubjectId,
+            DefinitionSubjectId = resolvedDefinitionSubjectId,
+            SubjectId = spec.SubjectId,
+            MethodId = ManagedNaming.CreateMethodId(spec.AssemblyName, spec.DeclaringTypeDisplayName, spec.MethodName),
+            Signature = spec.Signature,
+            ExecutionAuthorityKey = spec.ExecutionAuthorityKey,
+            InstantiationStubId = spec.InstantiationStubId,
         };
     }
 
@@ -75,6 +109,51 @@ public static class ManagedMethodIdentityResolver
         }
 
         throw new InvalidOperationException("managed method identity is missing subject id.");
+    }
+
+    public static string ResolveExecutionAuthorityKey(ManagedMethodIdentityArtifact identity)
+    {
+        ArgumentNullException.ThrowIfNull(identity);
+
+        if (!string.IsNullOrWhiteSpace(identity.ExecutionAuthorityKey))
+        {
+            return identity.ExecutionAuthorityKey;
+        }
+
+        if (!string.IsNullOrWhiteSpace(identity.InstantiationStubId?.Value))
+        {
+            return identity.InstantiationStubId.Value;
+        }
+
+        if (!string.IsNullOrWhiteSpace(identity.DefinitionSubjectId))
+        {
+            return identity.DefinitionSubjectId;
+        }
+
+        return ResolveSubjectId(identity);
+    }
+
+    public static string ResolveExecutionAuthorityKey(
+        ManagedMethodIdentityArtifact? identity,
+        string? fallbackSubjectId,
+        string? fallbackDefinitionSubjectId = null)
+    {
+        if (identity is not null)
+        {
+            return ResolveExecutionAuthorityKey(identity);
+        }
+
+        if (!string.IsNullOrWhiteSpace(fallbackDefinitionSubjectId))
+        {
+            return fallbackDefinitionSubjectId;
+        }
+
+        if (!string.IsNullOrWhiteSpace(fallbackSubjectId))
+        {
+            return fallbackSubjectId;
+        }
+
+        throw new InvalidOperationException("managed method identity is missing execution authority.");
     }
 
     public static int ResolveParameterCount(ManagedMethodIdentityArtifact? identity, string? fallbackSubjectId = null)
@@ -123,52 +202,6 @@ public static class ManagedMethodIdentityResolver
         }
 
         return parameterCount;
-    }
-
-    private static string ResolveAssemblyName(string subjectId)
-    {
-        var separatorIndex = subjectId.IndexOf('/', StringComparison.Ordinal);
-        if (separatorIndex <= 0)
-        {
-            throw new InvalidOperationException($"method identity '{subjectId}' is missing assembly prefix.");
-        }
-
-        return subjectId[..separatorIndex];
-    }
-
-    private static string ResolveDeclaringTypeSubjectId(string subjectId)
-    {
-        var separatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
-        if (separatorIndex <= 0)
-        {
-            throw new InvalidOperationException($"method identity '{subjectId}' is missing declaring type.");
-        }
-
-        return subjectId[..separatorIndex];
-    }
-
-    private static string ResolveDeclaringTypeDisplayName(string declaringTypeSubjectId)
-    {
-        var separatorIndex = declaringTypeSubjectId.IndexOf('/', StringComparison.Ordinal);
-        if (separatorIndex <= 0 || separatorIndex == declaringTypeSubjectId.Length - 1)
-        {
-            throw new InvalidOperationException(
-                $"declaring type subject '{declaringTypeSubjectId}' is missing display name.");
-        }
-
-        return declaringTypeSubjectId[(separatorIndex + 1)..];
-    }
-
-    private static string ResolveMethodName(string subjectId)
-    {
-        var separatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
-        var parameterListIndex = subjectId.LastIndexOf('(');
-        if (separatorIndex <= 0 || parameterListIndex <= separatorIndex + 2)
-        {
-            throw new InvalidOperationException($"method identity '{subjectId}' is missing method name.");
-        }
-
-        return subjectId[(separatorIndex + 2)..parameterListIndex];
     }
 }
 

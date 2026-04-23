@@ -26,6 +26,15 @@ def _subject_baseline_path(repo_root: Path, subject_id: str, matrix_id: str, hos
     )
 
 
+def _subject_codegen_baseline_path(repo_root: Path, subject_id: str, matrix_id: str, host_platform: str) -> Path:
+    return path_resolver_module.subject_codegen_baseline_path(
+        repo_root,
+        subject_id,
+        matrix_id,
+        host_platform,
+    )
+
+
 def _load_baseline(baseline_path: Path) -> dict[str, Any]:
     if baseline_path.is_file():
         return json.loads(baseline_path.read_text(encoding="utf-8"))
@@ -137,6 +146,26 @@ def evaluate_perf_subject(
 ) -> dict[str, Any]:
     result = _evaluate_baseline(
         baseline_path=_subject_baseline_path(repo_root, subject_id, matrix_id, host_platform),
+        metrics=metrics,
+        update_baseline=update_baseline,
+    )
+    result["subjectId"] = subject_id
+    result["matrixId"] = matrix_id
+    result["hostPlatform"] = host_platform
+    return result
+
+
+def evaluate_codegen_subject(
+    *,
+    repo_root: Path,
+    subject_id: str,
+    matrix_id: str,
+    host_platform: str,
+    metrics: dict[str, Any],
+    update_baseline: bool = False,
+) -> dict[str, Any]:
+    result = _evaluate_baseline(
+        baseline_path=_subject_codegen_baseline_path(repo_root, subject_id, matrix_id, host_platform),
         metrics=metrics,
         update_baseline=update_baseline,
     )

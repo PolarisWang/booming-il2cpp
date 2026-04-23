@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -124,19 +126,31 @@ class Phase2SmallIntegerCarrierNativeAotTests(unittest.TestCase):
         aot_core_ir = load_json(self.output_root / "aot-core-ir.json")
         methods = {method["subjectId"]: method for method in aot_core_ir["methods"]}
 
-        uint16_method = methods["CoreRuntimeBenchmarks/IntegerCarrierBenchmarkMath::RoundTripUInt16(System.UInt16)"]
+        uint16_method = find_method_by_subject_id(
+            methods,
+            "CoreRuntimeBenchmarks/IntegerCarrierBenchmarkMath::RoundTripUInt16(System.UInt16)",
+        )
         self.assertEqual(7, uint16_method["returnAbi"]["carrierKindCode"])
         self.assertEqual([7], [slot["carrierKindCode"] for slot in uint16_method["parameterAbis"]])
 
-        int16_method = methods["CoreRuntimeBenchmarks/IntegerCarrierBenchmarkMath::IncrementInt16(System.Int16)"]
+        int16_method = find_method_by_subject_id(
+            methods,
+            "CoreRuntimeBenchmarks/IntegerCarrierBenchmarkMath::IncrementInt16(System.Int16)",
+        )
         self.assertEqual(6, int16_method["returnAbi"]["carrierKindCode"])
         self.assertEqual([6], [slot["carrierKindCode"] for slot in int16_method["parameterAbis"]])
 
-        byte_method = methods["CoreRuntimeBenchmarks/IntegerCarrierBenchmarkMath::TruncateToByte(System.Int32)"]
+        byte_method = find_method_by_subject_id(
+            methods,
+            "CoreRuntimeBenchmarks/IntegerCarrierBenchmarkMath::TruncateToByte(System.Int32)",
+        )
         self.assertEqual(5, byte_method["returnAbi"]["carrierKindCode"])
         self.assertEqual([1], [slot["carrierKindCode"] for slot in byte_method["parameterAbis"]])
 
-        sbyte_method = methods["CoreRuntimeBenchmarks/IntegerCarrierBenchmarkMath::TruncateToSByte(System.Int32)"]
+        sbyte_method = find_method_by_subject_id(
+            methods,
+            "CoreRuntimeBenchmarks/IntegerCarrierBenchmarkMath::TruncateToSByte(System.Int32)",
+        )
         self.assertEqual(4, sbyte_method["returnAbi"]["carrierKindCode"])
         self.assertEqual([1], [slot["carrierKindCode"] for slot in sbyte_method["parameterAbis"]])
 

@@ -15,8 +15,15 @@ objectType: guide
 
 ## 组合边界
 
-- `pipeline/completion-runtime-trace-windows`
-- `pipeline/completion-runtime-trace-macos`
+- `module/analysis/basic`
+- `module/managed-smoke/basic`
+- `module/reflection/basic`
+- `module/interop/basic`
+- `module/hosted-runtime/basic`
+- `module/trace-export/windows`
+- `module/trace-export/macos`
+- `system/windows-reference-gate`
+- `system/macos-reference-gate`
 - `system/android-startup-gate`
 - `system/ios-packaging-gate`
 - `system/linux-packaging-gate`
@@ -25,8 +32,6 @@ objectType: guide
 
 - `test workflow roadmap-0-windows`
 - `test workflow roadmap-0-macos`
-- `test system --id system/roadmap-0-windows`
-- `test system --id system/roadmap-0-macos`
 
 ## 正式入口
 

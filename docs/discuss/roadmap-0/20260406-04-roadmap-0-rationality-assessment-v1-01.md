@@ -1,65 +1,65 @@
-# roadmap-0 测试合理性评估 v1.01
+﻿# roadmap-0 娴嬭瘯鍚堢悊鎬ц瘎浼?v1.01
 
 Date: 2026-04-06
 Status: design-discuss
 
-## 1. 结论
+## 1. 缁撹
 
-`roadmap-0` 作为历史阶段的“统一验证工作流”是合理的；  
-但在当前已经明确采用 `subject + goal + environment-matrix + artifact-chain` 的新测试架构下，`roadmap-0` 已经不再适合作为正式的一等测试对象继续保留。
+`roadmap-0` 浣滀负鍘嗗彶闃舵鐨勨€滅粺涓€楠岃瘉宸ヤ綔娴佲€濇槸鍚堢悊鐨勶紱  
+浣嗗湪褰撳墠宸茬粡鏄庣‘閲囩敤 `subject + goal + environment-matrix + artifact-chain` 鐨勬柊娴嬭瘯鏋舵瀯涓嬶紝`roadmap-0` 宸茬粡涓嶅啀閫傚悎浣滀负姝ｅ紡鐨勪竴绛夋祴璇曞璞＄户缁繚鐣欍€?
 
-更准确地说：
+鏇村噯纭湴璇达細
 
-- 它曾经是合理的阶段性集成壳层
-- 但它现在不再是合理的长期架构中心
-- 它应被降级为“历史迁移来源 / 能力拆解来源”
-- 不应继续作为公开测试模型、正式 registry 主对象或 CLI 核心语义
+- 瀹冩浘缁忔槸鍚堢悊鐨勯樁娈垫€ч泦鎴愬３灞?
+- 浣嗗畠鐜板湪涓嶅啀鏄悎鐞嗙殑闀挎湡鏋舵瀯涓績
+- 瀹冨簲琚檷绾т负鈥滃巻鍙茶縼绉绘潵婧?/ 鑳藉姏鎷嗚В鏉ユ簮鈥?
+- 涓嶅簲缁х画浣滀负鍏紑娴嬭瘯妯″瀷銆佹寮?registry 涓诲璞℃垨 CLI 鏍稿績璇箟
 
-## 2. 为什么说它曾经合理
+## 2. 涓轰粈涔堣瀹冩浘缁忓悎鐞?
 
-在旧框架里，`roadmap-0` 解决的是“先把一条项目主线打通”的问题，而不是“把测试语义建模正确”的问题。
+鍦ㄦ棫妗嗘灦閲岋紝`roadmap-0` 瑙ｅ喅鐨勬槸鈥滃厛鎶婁竴鏉￠」鐩富绾挎墦閫氣€濈殑闂锛岃€屼笉鏄€滄妸娴嬭瘯璇箟寤烘ā姝ｇ‘鈥濈殑闂銆?
 
-从现有文档和脚本看，它把这些东西一次性串了起来：
+浠庣幇鏈夋枃妗ｅ拰鑴氭湰鐪嬶紝瀹冩妸杩欎簺涓滆タ涓€娆℃€т覆浜嗚捣鏉ワ細
 
-- schema / contract 基础校验
-- managed smoke 项目构建与运行
+- schema / contract 鍩虹鏍￠獙
+- managed smoke 椤圭洰鏋勫缓涓庤繍琛?
 - native ABI / bridge compile-only smoke
 - Windows / macOS reference desktop trace compare
-- Android / iOS / Linux 的 routing 或 packaging gate
+- Android / iOS / Linux 鐨?routing 鎴?packaging gate
 
-对应证据：
+瀵瑰簲璇佹嵁锛?
 
-- `roadmap-0 runtime` 明确把它定义为“项目级验证链路收敛为正式 system 对象”：
+- `roadmap-0 runtime` 鏄庣‘鎶婂畠瀹氫箟涓衡€滈」鐩骇楠岃瘉閾捐矾鏀舵暃涓烘寮?system 瀵硅薄鈥濓細
   [roadmap-0-runtime.md](/E:/agent/booming-il2cpp/wiki/06-%E6%B5%8B%E8%AF%95%E9%AA%8C%E8%AF%81/%E6%95%B4%E4%BD%93%E9%AA%8C%E8%AF%81%E5%9C%BA%E6%99%AF/roadmap-0-runtime.md#L8)
-- Windows / macOS 的 `scenario.manifest.json` 也确实是一个聚合容器：
+- Windows / macOS 鐨?`scenario.manifest.json` 涔熺‘瀹炴槸涓€涓仛鍚堝鍣細
   [scenario.manifest.json](/E:/agent/booming-il2cpp/tests/registry/system/roadmap-0-windows/scenario.manifest.json#L8)
   [scenario.manifest.json](/E:/agent/booming-il2cpp/tests/registry/system/roadmap-0-macos/scenario.manifest.json#L8)
-- `verify-roadmap-0.py` 把从 schema 到 smoke、再到 reference gate 和平台 gate 的动作都编排在一支脚本里：
+- `verify-roadmap-0.py` 鎶婁粠 schema 鍒?smoke銆佸啀鍒?reference gate 鍜屽钩鍙?gate 鐨勫姩浣滈兘缂栨帓鍦ㄤ竴鏀剼鏈噷锛?
   [verify-roadmap-0.py](/E:/agent/booming-il2cpp/build/scripts/verify-roadmap-0.py#L200)
 
-如果项目当时的目标是“快速拥有一个能跑的主线验收入口”，这个设计是成立的。
+濡傛灉椤圭洰褰撴椂鐨勭洰鏍囨槸鈥滃揩閫熸嫢鏈変竴涓兘璺戠殑涓荤嚎楠屾敹鍏ュ彛鈥濓紝杩欎釜璁捐鏄垚绔嬬殑銆?
 
-## 3. 为什么它现在不再合理
+## 3. 涓轰粈涔堝畠鐜板湪涓嶅啀鍚堢悊
 
-### 3.1 主轴错了
+### 3.1 涓昏酱閿欎簡
 
-你现在已经确认测试主轴应该是：
+浣犵幇鍦ㄥ凡缁忕‘璁ゆ祴璇曚富杞村簲璇ユ槸锛?
 
-- 测试目标：`correctness.dev` / `correctness.platform` / `perf.dev` / `perf.release`
-- 产物主线：`source -> host-input -> analysis -> generated -> build -> runtime -> report`
+- 娴嬭瘯鐩爣锛歚correctness.dev` / `correctness.platform` / `perf.dev` / `perf.release`
+- 浜х墿涓荤嚎锛歚source -> host-input -> analysis -> generated -> build -> runtime -> report`
 
-而 `roadmap-0` 的主轴却是：
+鑰?`roadmap-0` 鐨勪富杞村嵈鏄細
 
-- 按宿主平台分成 `roadmap-0-windows` / `roadmap-0-macos`
-- 再把不同类型验证硬塞进一个 workflow / system 聚合对象
+- 鎸夊涓诲钩鍙板垎鎴?`roadmap-0-windows` / `roadmap-0-macos`
+- 鍐嶆妸涓嶅悓绫诲瀷楠岃瘉纭杩涗竴涓?workflow / system 鑱氬悎瀵硅薄
 
-这意味着它回答的是“当前宿主的一条历史路线通没通”，而不是“某个 subject 在某个目标、某个 matrix 下是否达到了预期”。
+杩欐剰鍛崇潃瀹冨洖绛旂殑鏄€滃綋鍓嶅涓荤殑涓€鏉″巻鍙茶矾绾块€氭病閫氣€濓紝鑰屼笉鏄€滄煇涓?subject 鍦ㄦ煇涓洰鏍囥€佹煇涓?matrix 涓嬫槸鍚﹁揪鍒颁簡棰勬湡鈥濄€?
 
-这和新架构要解决的问题已经不是同一个问题。
+杩欏拰鏂版灦鏋勮瑙ｅ喅鐨勯棶棰樺凡缁忎笉鏄悓涓€涓棶棰樸€?
 
-### 3.2 它把多种验证语义混在一起
+### 3.2 瀹冩妸澶氱楠岃瘉璇箟娣峰湪涓€璧?
 
-`verify-roadmap-0.py` 同时做了：
+`verify-roadmap-0.py` 鍚屾椂鍋氫簡锛?
 
 - JSON parse
 - analysis contract validate
@@ -70,7 +70,7 @@ Status: design-discuss
 - trace compare
 - Android / iOS / Linux routing gate
 
-可见：
+鍙锛?
 [verify-roadmap-0.py](/E:/agent/booming-il2cpp/build/scripts/verify-roadmap-0.py#L204)
 [verify-roadmap-0.py](/E:/agent/booming-il2cpp/build/scripts/verify-roadmap-0.py#L216)
 [verify-roadmap-0.py](/E:/agent/booming-il2cpp/build/scripts/verify-roadmap-0.py#L222)
@@ -78,61 +78,61 @@ Status: design-discuss
 [verify-roadmap-0.py](/E:/agent/booming-il2cpp/build/scripts/verify-roadmap-0.py#L246)
 [verify-roadmap-0.py](/E:/agent/booming-il2cpp/build/scripts/verify-roadmap-0.py#L280)
 
-这些动作在新模型里至少会落到不同的：
+杩欎簺鍔ㄤ綔鍦ㄦ柊妯″瀷閲岃嚦灏戜細钀藉埌涓嶅悓鐨勶細
 
 - `goal`
 - `validationMode`
 - `adaptationLevel`
 - `artifact bucket`
 
-旧 `roadmap-0` 把它们捆成一个“通过 / 不通过”的大对象，会直接削弱失败定位能力。
+鏃?`roadmap-0` 鎶婂畠浠崋鎴愪竴涓€滈€氳繃 / 涓嶉€氳繃鈥濈殑澶у璞★紝浼氱洿鎺ュ墛寮卞け璐ュ畾浣嶈兘鍔涖€?
 
-### 3.3 它把“平台适配验证”与“完整平台正确性”混淆了
+### 3.3 瀹冩妸鈥滃钩鍙伴€傞厤楠岃瘉鈥濅笌鈥滃畬鏁村钩鍙版纭€р€濇贩娣嗕簡
 
-现有 gate 文档已经明确承认：
+鐜版湁 gate 鏂囨。宸茬粡鏄庣‘鎵胯锛?
 
-- Linux gate 验证的是“矩阵可调度、路由可构建、shell 可落盘”，不是完整运行时闭环
-- reference desktop gate 验证的是“参考桌面基线仍可构建并且 trace contract 未漂移”，不是全量 workflow
+- Linux gate 楠岃瘉鐨勬槸鈥滅煩闃靛彲璋冨害銆佽矾鐢卞彲鏋勫缓銆乻hell 鍙惤鐩樷€濓紝涓嶆槸瀹屾暣杩愯鏃堕棴鐜?
+- reference desktop gate 楠岃瘉鐨勬槸鈥滃弬鑰冩闈㈠熀绾夸粛鍙瀯寤哄苟涓?trace contract 鏈紓绉烩€濓紝涓嶆槸鍏ㄩ噺 workflow
 
-见：
+瑙侊細
 [roadmap-0-platform-gates.md](/E:/agent/booming-il2cpp/wiki/06-%E6%B5%8B%E8%AF%95%E9%AA%8C%E8%AF%81/%E6%95%B4%E4%BD%93%E9%AA%8C%E8%AF%81%E5%9C%BA%E6%99%AF/roadmap-0-platform-gates.md#L24)
 
-这恰好说明 `roadmap-0` 里很多“平台验证”其实只是适配性 / buildability / routing capability 的 probe，不是平台正确性本身。
+杩欐伆濂借鏄?`roadmap-0` 閲屽緢澶氣€滃钩鍙伴獙璇佲€濆叾瀹炲彧鏄€傞厤鎬?/ buildability / routing capability 鐨?probe锛屼笉鏄钩鍙版纭€ф湰韬€?
 
-而你已经明确要求：
+鑰屼綘宸茬粡鏄庣‘瑕佹眰锛?
 
-- 平台适配性应和平台正确性放在一起建模
-- 需要区分不同成熟度与不同验证深度
+- 骞冲彴閫傞厤鎬у簲鍜屽钩鍙版纭€ф斁鍦ㄤ竴璧峰缓妯?
+- 闇€瑕佸尯鍒嗕笉鍚屾垚鐔熷害涓庝笉鍚岄獙璇佹繁搴?
 
-因此旧 `roadmap-0` 的表达粒度已经不够。
+鍥犳鏃?`roadmap-0` 鐨勮〃杈剧矑搴﹀凡缁忎笉澶熴€?
 
-### 3.4 它没有 subject 身份，只有工作流身份
+### 3.4 瀹冩病鏈?subject 韬唤锛屽彧鏈夊伐浣滄祦韬唤
 
-Windows 聚合对象包含：
+Windows 鑱氬悎瀵硅薄鍖呭惈锛?
 
-- `pipeline/completion-runtime-trace-windows`
-- `system/roadmap-0-android-startup-gate`
-- `system/roadmap-0-linux-packaging-gate`
+- `system/runtime-baseline-windows`
+- `system/android-startup-gate`
+- `system/linux-packaging-gate`
 
-见：
+瑙侊細
 [scenario.manifest.json](/E:/agent/booming-il2cpp/tests/registry/system/roadmap-0-windows/scenario.manifest.json#L8)
 
-macOS 聚合对象包含：
+macOS 鑱氬悎瀵硅薄鍖呭惈锛?
 
-- `pipeline/completion-runtime-trace-macos`
-- `system/roadmap-0-ios-packaging-gate`
-- `system/roadmap-0-linux-packaging-gate`
+- `system/runtime-baseline-macos`
+- `system/ios-packaging-gate`
+- `system/linux-packaging-gate`
 
-见：
+瑙侊細
 [scenario.manifest.json](/E:/agent/booming-il2cpp/tests/registry/system/roadmap-0-macos/scenario.manifest.json#L8)
 
-这说明它关心的是“当前 host 能做哪些事”，而不是“哪个 subject 被验证了什么”。
+杩欒鏄庡畠鍏冲績鐨勬槸鈥滃綋鍓?host 鑳藉仛鍝簺浜嬧€濓紝鑰屼笉鏄€滃摢涓?subject 琚獙璇佷簡浠€涔堚€濄€?
 
-但你现在希望顶层测试对象是可以持续扩展的大量调试项目，这就要求正式模型必须围绕 `subjects/` 收敛，而不是围绕历史工作流收敛。
+浣嗕綘鐜板湪甯屾湜椤跺眰娴嬭瘯瀵硅薄鏄彲浠ユ寔缁墿灞曠殑澶ч噺璋冭瘯椤圭洰锛岃繖灏辫姹傛寮忔ā鍨嬪繀椤诲洿缁?`subjects/` 鏀舵暃锛岃€屼笉鏄洿缁曞巻鍙插伐浣滄祦鏀舵暃銆?
 
-### 3.5 它把具体样例和产物路径写死在底层脚本里
+### 3.5 瀹冩妸鍏蜂綋鏍蜂緥鍜屼骇鐗╄矾寰勫啓姝诲湪搴曞眰鑴氭湰閲?
 
-脚本直接硬编码了：
+鑴氭湰鐩存帴纭紪鐮佷簡锛?
 
 - `HelloWorld`
 - `GenericEcho`
@@ -143,84 +143,84 @@ macOS 聚合对象包含：
 - `artifacts/proof/managed-closure/...`
 - `artifacts/proof/native-reference/...`
 
-见：
+瑙侊細
 [verify-roadmap-0.py](/E:/agent/booming-il2cpp/build/scripts/verify-roadmap-0.py#L85)
 [verify-roadmap-0.py](/E:/agent/booming-il2cpp/build/scripts/verify-roadmap-0.py#L222)
 
-这和你已经确认的方向冲突：
+杩欏拰浣犲凡缁忕‘璁ょ殑鏂瑰悜鍐茬獊锛?
 
-- `subjects/` 应作为未来大量扩展调试项目的统一入口
-- subject 应可配置，而不是散落在脚本常量里
-- `managed-closure` 命名本身也已经被判定为不合理
+- `subjects/` 搴斾綔涓烘湭鏉ュぇ閲忔墿灞曡皟璇曢」鐩殑缁熶竴鍏ュ彛
+- subject 搴斿彲閰嶇疆锛岃€屼笉鏄暎钀藉湪鑴氭湰甯搁噺閲?
+- `managed-closure` 鍛藉悕鏈韩涔熷凡缁忚鍒ゅ畾涓轰笉鍚堢悊
 
-### 3.6 它的报告模型过粗
+### 3.6 瀹冪殑鎶ュ憡妯″瀷杩囩矖
 
-`roadmap-0` 更像一次宿主级“总工作流执行”，天然更适合输出单次脚本日志，而不是：
+`roadmap-0` 鏇村儚涓€娆″涓荤骇鈥滄€诲伐浣滄祦鎵ц鈥濓紝澶╃劧鏇撮€傚悎杈撳嚭鍗曟鑴氭湰鏃ュ織锛岃€屼笉鏄細
 
 - `subject-report`
 - `matrix-results[]`
 - `stage-results[]`
 - `artifact-results[]`
 
-因此它不利于你要求的两类结果：
+鍥犳瀹冧笉鍒╀簬浣犺姹傜殑涓ょ被缁撴灉锛?
 
-- 开发环境正确性验证
-- 多平台 / 发布性能的分层报告与覆盖追踪
+- 寮€鍙戠幆澧冩纭€ч獙璇?
+- 澶氬钩鍙?/ 鍙戝竷鎬ц兘鐨勫垎灞傛姤鍛婁笌瑕嗙洊杩借釜
 
-## 4. 应该如何定性 roadmap-0
+## 4. 搴旇濡備綍瀹氭€?roadmap-0
 
-建议给它一个明确的新定位：
+寤鸿缁欏畠涓€涓槑纭殑鏂板畾浣嶏細
 
-- 不是正式测试对象
-- 不是新 registry 的公开对象模型
-- 不是新 CLI 的目标实体
-- 不是长期文档入口
+- 涓嶆槸姝ｅ紡娴嬭瘯瀵硅薄
+- 涓嶆槸鏂?registry 鐨勫叕寮€瀵硅薄妯″瀷
+- 涓嶆槸鏂?CLI 鐨勭洰鏍囧疄浣?
+- 涓嶆槸闀挎湡鏂囨。鍏ュ彛
 
-它应该被视为：
+瀹冨簲璇ヨ瑙嗕负锛?
 
-- 历史阶段的集成脚本集合
-- 新框架迁移时的能力清单来源
-- 用于拆解出 `subject` / `matrix` / `goal` / `stage-check` 的参考实现
+- 鍘嗗彶闃舵鐨勯泦鎴愯剼鏈泦鍚?
+- 鏂版鏋惰縼绉绘椂鐨勮兘鍔涙竻鍗曟潵婧?
+- 鐢ㄤ簬鎷嗚В鍑?`subject` / `matrix` / `goal` / `stage-check` 鐨勫弬鑰冨疄鐜?
 
-## 5. roadmap-0 里哪些东西值得保留
+## 5. roadmap-0 閲屽摢浜涗笢瑗垮€煎緱淇濈暀
 
-不是整个 `roadmap-0` 保留，而是把其中有效能力拆出来保留。
+涓嶆槸鏁翠釜 `roadmap-0` 淇濈暀锛岃€屾槸鎶婂叾涓湁鏁堣兘鍔涙媶鍑烘潵淇濈暀銆?
 
-### 5.1 值得保留的能力
+### 5.1 鍊煎緱淇濈暀鐨勮兘鍔?
 
-- schema / contract 校验能力
-- trace schema 与 snapshot compare 能力
-- reference desktop trace gate 能力
-- Android / iOS / Linux 的 routing / packaging probe 能力
-- HostEmbeddingLite 相关 trace export 能力
-- HelloWorldObject 的 native proof 输入与 reference 输出链路
+- schema / contract 鏍￠獙鑳藉姏
+- trace schema 涓?snapshot compare 鑳藉姏
+- reference desktop trace gate 鑳藉姏
+- Android / iOS / Linux 鐨?routing / packaging probe 鑳藉姏
+- HostEmbeddingLite 鐩稿叧 trace export 鑳藉姏
+- HelloWorldObject 鐨?native proof 杈撳叆涓?reference 杈撳嚭閾捐矾
 
-### 5.2 不值得保留的壳层
+### 5.2 涓嶅€煎緱淇濈暀鐨勫３灞?
 
-- `workflow/roadmap-0-*` 这层公共语义
-- `system/roadmap-0-*` 作为正式中心对象的地位
-- “一个宿主对应一整条 roadmap 验证流程”的入口设计
-- `verify-roadmap-0.*` 作为测试框架中心脚本的角色
+- `workflow/roadmap-0-*` 杩欏眰鍏叡璇箟
+- `system/roadmap-0-*` 浣滀负姝ｅ紡涓績瀵硅薄鐨勫湴浣?
+- 鈥滀竴涓涓诲搴斾竴鏁存潯 roadmap 楠岃瘉娴佺▼鈥濈殑鍏ュ彛璁捐
+- `verify-roadmap-0.*` 浣滀负娴嬭瘯妗嗘灦涓績鑴氭湰鐨勮鑹?
 
-## 6. 在新架构下怎么拆
+## 6. 鍦ㄦ柊鏋舵瀯涓嬫€庝箞鎷?
 
-建议按“subject + matrix + goal”拆，而不是按 “roadmap host workflow” 拆。
+寤鸿鎸夆€渟ubject + matrix + goal鈥濇媶锛岃€屼笉鏄寜 鈥渞oadmap host workflow鈥?鎷嗐€?
 
-### 6.1 第一优先级 subject
+### 6.1 绗竴浼樺厛绾?subject
 
 - `subjects/HelloWorldObject`
-  - 作为 canonical proof subject
-  - 覆盖 `source -> host-input -> analysis -> generated -> build -> runtime -> report`
+  - 浣滀负 canonical proof subject
+  - 瑕嗙洊 `source -> host-input -> analysis -> generated -> build -> runtime -> report`
 - `subjects/HostEmbeddingLite`
-  - 作为 diagnostic subject
-  - 覆盖 trace / host embedding / runtime 证据
+  - 浣滀负 diagnostic subject
+  - 瑕嗙洊 trace / host embedding / runtime 璇佹嵁
 - `subjects/ReflectionLite`
 - `subjects/PInvokeLite`
 - `subjects/GenericEcho`
 
-### 6.2 把原 roadmap-0 gate 变成 matrix，而不是变成 system
+### 6.2 鎶婂師 roadmap-0 gate 鍙樻垚 matrix锛岃€屼笉鏄彉鎴?system
 
-例如 `HelloWorldObject` 可以声明：
+渚嬪 `HelloWorldObject` 鍙互澹版槑锛?
 
 - `windows-dev-output`
 - `windows-reference-trace`
@@ -230,13 +230,13 @@ macOS 聚合对象包含：
 - `windows-linux-buildable`
 - `macos-linux-buildable`
 
-然后通过：
+鐒跺悗閫氳繃锛?
 
 - `validationMode`
 - `adaptationLevel`
 - `expectedOutcome`
 
-来表达它到底是在验证：
+鏉ヨ〃杈惧畠鍒板簳鏄湪楠岃瘉锛?
 
 - compile-only
 - build
@@ -245,49 +245,49 @@ macOS 聚合对象包含：
 - trace
 - perf
 
-而不是继续用 “android-startup-gate / linux-packaging-gate / reference-gate” 这类历史命名来承载主模型。
+鑰屼笉鏄户缁敤 鈥渁ndroid-startup-gate / linux-packaging-gate / reference-gate鈥?杩欑被鍘嗗彶鍛藉悕鏉ユ壙杞戒富妯″瀷銆?
 
-### 6.3 保留必要的低层实现，但只作为 stage worker
+### 6.3 淇濈暀蹇呰鐨勪綆灞傚疄鐜帮紝浣嗗彧浣滀负 stage worker
 
-`verify-roadmap-0.py` 里不少动作仍然可以复用，但角色要变成：
+`verify-roadmap-0.py` 閲屼笉灏戝姩浣滀粛鐒跺彲浠ュ鐢紝浣嗚鑹茶鍙樻垚锛?
 
 - stage executor
 - contract validator
 - trace comparator
 - preset probe helper
 
-不能继续充当“整个测试体系的总 orchestrator”。
+涓嶈兘缁х画鍏呭綋鈥滄暣涓祴璇曚綋绯荤殑鎬?orchestrator鈥濄€?
 
-## 7. 最终判断
+## 7. 鏈€缁堝垽鏂?
 
-如果问题是：
+濡傛灉闂鏄細
 
-“`roadmap-0` 这个测试在旧阶段是否有价值？”
+鈥渀roadmap-0` 杩欎釜娴嬭瘯鍦ㄦ棫闃舵鏄惁鏈変环鍊硷紵鈥?
 
-答案是：
+绛旀鏄細
 
-- 有，作为历史主线打通验证是合理的
+- 鏈夛紝浣滀负鍘嗗彶涓荤嚎鎵撻€氶獙璇佹槸鍚堢悊鐨?
 
-如果问题是：
+濡傛灉闂鏄細
 
-“`roadmap-0` 在当前新测试框架里是否还应继续作为正式测试对象存在？”
+鈥渀roadmap-0` 鍦ㄥ綋鍓嶆柊娴嬭瘯妗嗘灦閲屾槸鍚﹁繕搴旂户缁綔涓烘寮忔祴璇曞璞″瓨鍦紵鈥?
 
-答案是：
+绛旀鏄細
 
-- 不合理
+- 涓嶅悎鐞?
 
-更合适的处理方式是：
+鏇村悎閫傜殑澶勭悊鏂瑰紡鏄細
 
-- 把 `roadmap-0` 降级为历史迁移来源
-- 把里面可复用的验证能力拆到新 `subject` 架构
-- 用 `subject-report -> matrix-results -> stage-results -> artifact-results` 重建报告面
-- 不再让 `roadmap-0` 占据正式 CLI / registry / 文档入口
+- 鎶?`roadmap-0` 闄嶇骇涓哄巻鍙茶縼绉绘潵婧?
+- 鎶婇噷闈㈠彲澶嶇敤鐨勯獙璇佽兘鍔涙媶鍒版柊 `subject` 鏋舵瀯
+- 鐢?`subject-report -> matrix-results -> stage-results -> artifact-results` 閲嶅缓鎶ュ憡闈?
+- 涓嶅啀璁?`roadmap-0` 鍗犳嵁姝ｅ紡 CLI / registry / 鏂囨。鍏ュ彛
 
-## 8. 对当前设计稿的影响
+## 8. 瀵瑰綋鍓嶈璁＄鐨勫奖鍝?
 
-这条判断会强化以下设计结论：
+杩欐潯鍒ゆ柇浼氬己鍖栦互涓嬭璁＄粨璁猴細
 
-- 第一波迁移只保留 `HelloWorldObject` 是合理的
-- 旧 `roadmap-0` 不做对等迁移是合理的
-- 未来若需要恢复其中某些验证，必须以新的 `subject` 形式重建
-- 旧的 platform gate 应转译成 matrix 能力，而不是原样保留为主模型
+- 绗竴娉㈣縼绉诲彧淇濈暀 `HelloWorldObject` 鏄悎鐞嗙殑
+- 鏃?`roadmap-0` 涓嶅仛瀵圭瓑杩佺Щ鏄悎鐞嗙殑
+- 鏈潵鑻ラ渶瑕佹仮澶嶅叾涓煇浜涢獙璇侊紝蹇呴』浠ユ柊鐨?`subject` 褰㈠紡閲嶅缓
+- 鏃х殑 platform gate 搴旇浆璇戞垚 matrix 鑳藉姏锛岃€屼笉鏄師鏍蜂繚鐣欎负涓绘ā鍨?
