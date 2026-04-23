@@ -352,6 +352,65 @@ def _collect_workspace_collections(repo_root: Path, subject_ids: list[str]) -> l
     return records
 
 
+def _collect_managed_proof_evidence(repo_root: Path) -> list[dict[str, Any]]:
+    runs_root = repo_root / "artifacts" / "subjects"
+    if not runs_root.is_dir():
+        return []
+
+    latest_by_stable_id: dict[str, tuple[float, dict[str, Any]]] = {}
+    for summary_path in runs_root.rglob("run-report/summary.json"):
+        if not summary_path.is_file():
+            continue
+        try:
+            payload = read_json(summary_path)
+        except Exception:
+            continue
+        if not isinstance(payload, dict):
+            continue
+        if str(payload.get("command") or "").strip() != "test declared-unit-test":
+            continue
+
+        run_id = str(payload.get("runId") or "").strip()
+        final_status = str(payload.get("finalStatus") or "").strip()
+        errors = _string_list(payload.get("errors"))
+        subject_results = list(payload.get("subjectResults") or [])
+        modified_at = summary_path.stat().st_mtime
+        for raw_result in subject_results:
+            if not isinstance(raw_result, dict):
+                continue
+            entry_selection = dict(raw_result.get("entrySelection") or {})
+            if str(entry_selection.get("family") or "").strip() != "declared-unit-test":
+                continue
+            stable_id = str(entry_selection.get("stableId") or "").strip()
+            if not stable_id:
+                continue
+            record = {
+                "subjectId": str(raw_result.get("subjectId") or "").strip(),
+                "stableId": stable_id,
+                "alias": str(entry_selection.get("alias") or "").strip(),
+                "entryIndex": _int_value(entry_selection.get("entryIndex")),
+                "status": str(raw_result.get("status") or final_status or "").strip(),
+                "runId": run_id,
+                "summaryPath": _relative(repo_root, summary_path),
+                "subjectSummaryPath": str(raw_result.get("subjectSummaryPath") or "").strip(),
+                "errors": errors,
+            }
+            previous = latest_by_stable_id.get(stable_id)
+            if previous is None or modified_at >= previous[0]:
+                latest_by_stable_id[stable_id] = (modified_at, record)
+
+    return [
+        record
+        for _, record in sorted(
+            latest_by_stable_id.values(),
+            key=lambda item: (
+                str(item[1].get("subjectId") or ""),
+                str(item[1].get("stableId") or ""),
+            ),
+        )
+    ]
+
+
 def _device_platform(subject_payload: dict[str, Any], device_id: str) -> tuple[str, str]:
     platforms = dict(subject_payload.get("platforms") or {})
     for platform_id, raw_platform in platforms.items():
@@ -680,6 +739,7 @@ def collect_inventory_source(repo_root: Path, *, host_platform: str) -> dict[str
     subject_ids = sorted({*subject_ids, *_discover_local_subject_ids(repo_root)})
     capability_contracts = _collect_capability_contracts(repo_root)
     workspace_collections = _collect_workspace_collections(repo_root, subject_ids)
+    managed_proof_evidence = _collect_managed_proof_evidence(repo_root)
     benchmark_overview, benchmark_subjects, benchmark_evidence = _load_benchmark_projection(
         repo_root,
         subject_ids=subject_ids,
@@ -702,6 +762,7 @@ def collect_inventory_source(repo_root: Path, *, host_platform: str) -> dict[str
         "declaredBenchmarks": sorted(declared_benchmarks, key=lambda item: (item["stableId"], item["workloadEntry"])),
         "capabilityContracts": capability_contracts,
         "workspaceCollections": workspace_collections,
+        "managedProofEvidence": managed_proof_evidence,
         "benchmarkSubjects": benchmark_subjects,
         "benchmarkEvidence": sorted(
             benchmark_evidence,

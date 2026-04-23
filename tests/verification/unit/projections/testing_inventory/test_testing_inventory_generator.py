@@ -52,9 +52,9 @@ class TestTestingInventoryGenerator(TestingInventoryTestSupport):
         self.assertEqual("covered", by_stage["registry"]["stageStatus"])
         self.assertEqual("covered", by_stage["workspace"]["stageStatus"])
 
-        self.assertEqual("required", by_stage["managed-proof"]["stageStatus"])
+        self.assertEqual("missing-evidence", by_stage["managed-proof"]["stageStatus"])
         self.assertEqual("required", by_stage["managed-proof"]["stageRequirement"])
-        self.assertEqual("pending-proof", by_stage["managed-proof"]["stageCoverage"])
+        self.assertEqual("missing-evidence", by_stage["managed-proof"]["stageCoverage"])
 
         self.assertEqual("required", by_stage["native-proof"]["stageStatus"])
         self.assertEqual("required", by_stage["native-proof"]["stageRequirement"])
@@ -116,6 +116,48 @@ class TestTestingInventoryGenerator(TestingInventoryTestSupport):
         platform_rows = {row["deviceProfileCode"]: row for row in fixed_views[3]["rows"]}
         self.assertIn("inventory-host", platform_rows)
         self.assertIn("bridge/windows-x64/fixture-device", platform_rows)
+
+    def test_build_inventory_outputs_marks_managed_route_incomplete_when_proof_baseline_is_missing(self) -> None:
+        generator_module = load_inventory_generator_module("chaos_testing_inventory_generator_route_verification_state")
+        payload = generator_module.build_inventory_outputs(
+            sample_inventory_source(),
+            formal_source={
+                "records": {
+                    "evidenceClaims": [
+                        {
+                            "evidenceClaimId": "evidence-claim/unit/fixture/collector",
+                            "scenarioKind": "unit-test",
+                            "scenarioId": "fixture",
+                            "routeCode": "managed",
+                            "verificationState": "passed",
+                            "stageKind": "collector",
+                            "projectionMeta": {
+                                "ownerSubjectId": "FixtureSubject",
+                            },
+                        },
+                        {
+                            "evidenceClaimId": "evidence-claim/unit/fixture/managed-proof",
+                            "scenarioKind": "unit-test",
+                            "scenarioId": "fixture",
+                            "routeCode": "managed",
+                            "verificationState": "missing",
+                            "stageKind": "managed-proof",
+                            "projectionMeta": {
+                                "ownerSubjectId": "FixtureSubject",
+                            },
+                        },
+                    ],
+                },
+            },
+        )
+
+        route_rows = {
+            row["routeCode"]: row
+            for row in payload["html"]["fixedViews"][2]["rows"]
+        }
+
+        self.assertEqual("missing", route_rows["managed"]["verificationState"])
+        self.assertIn("managed-proof x1", route_rows["managed"]["gapStages"])
 
     def test_build_inventory_outputs_uses_plain_language_benchmark_hints(self) -> None:
         generator_module = load_inventory_generator_module("chaos_testing_inventory_generator_benchmark_plain_language")

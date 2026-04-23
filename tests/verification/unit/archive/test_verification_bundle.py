@@ -56,7 +56,7 @@ class TestVerificationBundle(unittest.TestCase):
         self.assertEqual("passed", stage_by_kind["collector"]["verificationState"])
         self.assertEqual("passed", stage_by_kind["registry"]["verificationState"])
         self.assertEqual("passed", stage_by_kind["workspace"]["verificationState"])
-        self.assertEqual("planned", stage_by_kind["managed-proof"]["verificationState"])
+        self.assertEqual("missing", stage_by_kind["managed-proof"]["verificationState"])
         self.assertEqual("planned", stage_by_kind["native-proof"]["verificationState"])
         self.assertEqual("not_required", stage_by_kind["hotupdate-proof"]["verificationState"])
         self.assertEqual("missing", stage_by_kind["perf"]["verificationState"])

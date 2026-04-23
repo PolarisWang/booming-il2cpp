@@ -4,7 +4,7 @@
 - stageKind: managed-proof
 - closureId: closure/completed/testing-inventory
 - scopeCode: testing-inventory
-- verificationState: planned
+- verificationState: missing
 - supportState: supported
 
 ## Covered Obligations
@@ -74,7 +74,39 @@
 - obligation/10/45
 
 ## Success Evidence
-- n/a
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/managed-proof
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MetadataSupplementProofEntry::Run()/managed-proof
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementProofEntry::Run()/managed-proof
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchCallbackFlowProofEntry::Run()/managed-proof
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchIntegrityProofEntry::Run()/managed-proof
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.SharedContractProofEntry::Run()/managed-proof
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.VersionRollbackProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AsyncAwaitProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ConversionOpsProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CustomAttributeLookupProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DirectCallVirtProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DispatchProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ExceptionProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.FunctionPointerProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericCollectionProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericInstantiationProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericSharingBoundaryProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.InterfaceDispatchProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MetadataSupplementProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MonitorAndLockingProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ReflectionInteropClosureEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RuntimeHelpersProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.SpanAndMemoryProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadLocalStateProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()/managed-proof
 
 ## Failed Evidence
 - n/a
@@ -83,7 +115,85 @@
 - n/a
 
 ## Missing Claims
-- n/a
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/managed-proof
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()/managed-proof
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()/managed-proof
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExceptionFlowProofEntry::Run()/managed-proof
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/managed-proof
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayBoxingProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayCovarianceProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayOpsProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.BitwiseOpsProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.BoxedStructFieldReadProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.BranchOpsProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CastTypeCheckProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CrossBoundaryExceptionProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateCallbackInteropProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateChainProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.EventCallbackFlowProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ExceptionCatchProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.FinallyAndFilterProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GcSensitiveFlowProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericConstraintProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericLayoutProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.IntegerCarrierProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.IteratorStateMachineProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.LambdaClosureCaptureProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.LinkerPreserveContractProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.LinkerStrippingProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.LoaderContractProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MarshalingProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.NativeCallInteropProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.NestedExceptionProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ObjectFieldProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ObjectReturnProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.OverflowOpsProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RefStructAndStackallocProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ResourceLifecycleProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.StructMarshalingProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UInt64BitwiseProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UnsafePointerProofEntry::Run()/managed-proof
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()/managed-proof
 
 ## Blockers
-- n/a
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
+- missing-evidence [contracts] managed-proof 阶段是必经阶段，但当前没有找到对应的托管 proof 执行记录。
