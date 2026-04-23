@@ -66,7 +66,7 @@ class WorkspaceDeclaredCollectionTests(unittest.TestCase):
         )
         (source_root / "SolutionCorePack.sln").write_text("Microsoft Visual Studio Solution File\n", encoding="utf-8")
 
-        workspace_root = repo_root / "solutions" / "subjects" / subject_id
+        workspace_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id
         generated_root = workspace_root / "managed-tests" / "Generated"
         generated_root.mkdir(parents=True, exist_ok=True)
         collection_path = generated_root / "declared-tests.collection.json"
@@ -95,7 +95,7 @@ class WorkspaceDeclaredCollectionTests(unittest.TestCase):
                         {
                             "projectId": "managed-test/SolutionCorePack/benchmark-host",
                             "hostKind": "benchmark-host",
-                            "collectionPath": "solutions/subjects/SolutionCorePack/managed-tests/Generated/declared-tests.collection.json",
+                            "collectionPath": "verification/workspaces/subjects/SolutionCorePack/managed-tests/Generated/declared-tests.collection.json",
                         }
                     ],
                 },
@@ -151,3 +151,5 @@ class WorkspaceDeclaredCollectionTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+

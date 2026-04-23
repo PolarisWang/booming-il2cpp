@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import os
 import shutil
@@ -268,7 +268,7 @@ def _project_command_details(command_id: str, host_platform: str) -> dict[str, s
     if command_id == "generate-project-all":
         return {
             "summary": "为当前宿主生成全部 subject/core solution 与对应 native project/workspace。",
-            "outputs": "solutions/manifest.json | solutions/all/generation.report.json | solutions/subjects/<subject-id>/ | solutions/core/<host>/",
+            "outputs": "verification/workspaces/verification-all.manifest.json | verification/workspaces/verification-all.generation.report.json | verification/workspaces/subjects/<subject-id>/ | verification/workspaces/core/<host>/",
             "target_scope": "当前宿主支持的全部 subject 与全部 core target",
             "host_support": f"{host_platform}: {_subject_count_for_host(host_platform)} subjects | {core_targets}",
             "command": f"run generate project all --host {host_platform} [--refresh-generated]",
@@ -277,7 +277,7 @@ def _project_command_details(command_id: str, host_platform: str) -> dict[str, s
     if command_id == "generate-project-subject":
         return {
             "summary": "生成 Subject 的 solution 与 native 调试工程。",
-            "outputs": "solutions/subjects/<subject-id>/<subject-id>.sln | solutions/subjects/<subject-id>/native/<matrix-id>/",
+            "outputs": "verification/workspaces/subjects/<subject-id>/<subject-id>.sln | verification/workspaces/subjects/<subject-id>/native/<matrix-id>/",
             "target_scope": "默认目标 / 指定目标 / 全部支持目标",
             "host_support": "从 subject.manifest.json 动态读取当前宿主可用 matrices",
             "command": "run generate project subject --id subject/<subject-id> [--matrix <matrix-id>] [--all-targets] [--variant CHECK|PROFILE|SHIP] [--refresh-generated] [--open-native-target generated|proof]",
@@ -286,7 +286,7 @@ def _project_command_details(command_id: str, host_platform: str) -> dict[str, s
     if command_id == "build-project-subject":
         return {
             "summary": "构建 Subject 已生成的 managed solution 与 native workspace。",
-            "outputs": "solutions/subjects/<subject-id>/build.report.json | solutions/subjects/<subject-id>/workspace.manifest.json",
+            "outputs": "verification/workspaces/subjects/<subject-id>/build.report.json | verification/workspaces/subjects/<subject-id>/workspace.manifest.json",
             "target_scope": "默认目标 / 指定目标 / 全部支持目标",
             "host_support": "基于已生成的 workspace.manifest.json 读取可构建 matrices",
             "command": "run build project subject --id subject/<subject-id> [--matrix <matrix-id>] [--all-targets] [--native-target generated|proof]",
@@ -295,7 +295,7 @@ def _project_command_details(command_id: str, host_platform: str) -> dict[str, s
     if command_id == "generate-project-core":
         return {
             "summary": "生成 IL2CPP Core 的 managed solution 与 native 调试工作区。",
-            "outputs": "solutions/core/<host>/chaos-il2cpp-core.sln | solutions/core/<host>/native/<target-id>/",
+            "outputs": "verification/workspaces/core/<host>/chaos-il2cpp-core.sln | verification/workspaces/core/<host>/native/<target-id>/",
             "target_scope": "默认目标 / 指定目标 / 全部支持目标",
             "host_support": core_targets,
             "command": f"run generate project core --host {host_platform} [--target <target-id>] [--all-targets]",
@@ -303,7 +303,7 @@ def _project_command_details(command_id: str, host_platform: str) -> dict[str, s
         }
     return {
         "summary": "构建 IL2CPP Core 已生成的 managed solution 与 native workspace。",
-        "outputs": "solutions/core/<host>/build.report.json | solutions/core/<host>/workspace.manifest.json",
+        "outputs": "verification/workspaces/core/<host>/build.report.json | verification/workspaces/core/<host>/workspace.manifest.json",
         "target_scope": "默认目标 / 指定目标 / 全部支持目标",
         "host_support": core_targets,
         "command": f"run build project core --host {host_platform} [--target <target-id>] [--all-targets]",
@@ -330,17 +330,13 @@ def _core_target_ids(host_platform: str) -> list[str]:
 
 
 def _subject_records_for_host(host_platform: str) -> list[dict[str, Any]]:
-    subjects_root = REPO_ROOT / "subjects"
-    if not subjects_root.is_dir():
-        return []
-
     records: list[dict[str, Any]] = []
-    for manifest_path in sorted(subjects_root.glob("*/subject.manifest.json")):
-        subject_id = manifest_path.parent.name
+    for manifest_path in subjects_module.discover_subject_manifests(REPO_ROOT):
         try:
-            manifest = subjects_module.load_subject_manifest(REPO_ROOT, subject_id)
+            manifest = subjects_module.load_subject_manifest_file(manifest_path)
         except Exception:
             continue
+        subject_id = str(manifest.get("subjectId") or manifest_path.parent.name)
         matrices = [
             dict(matrix)
             for matrix in list(manifest.get("environmentMatrices") or [])
@@ -1012,7 +1008,7 @@ def run_generate_project_all_flow(
     if not run_confirmation_screen(
         "确认生成所有 Solution",
         [
-            f"输出根: solutions/",
+            "输出根: verification/workspaces/",
             f"当前宿主: {host_platform}",
             f"刷新 generated: {'yes' if refresh_entry.command.get('refresh_generated') else 'no'}",
             f"执行命令: {' '.join(argv)}",

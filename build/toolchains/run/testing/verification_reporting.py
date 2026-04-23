@@ -3,6 +3,15 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+try:
+    from . import verification_layout as verification_layout_module
+except ImportError:
+    import sys
+
+    root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(root))
+    from testing import verification_layout as verification_layout_module
+
 
 def _relative(repo_root: Path, path: Path) -> str:
     try:
@@ -96,14 +105,10 @@ def write_stage_reports(
     scope_code: str,
     stage_reports: list[dict[str, Any]],
 ) -> dict[str, Any]:
-    report_root = (
-        repo_root
-        / "docs"
-        / "testing-inventory"
-        / "verification"
-        / "reports"
-        / str(closure_kind or "")
-        / str(scope_code or "")
+    report_root = verification_layout_module.archive_report_scope_root(
+        repo_root,
+        closure_kind=str(closure_kind or ""),
+        scope_code=str(scope_code or ""),
     )
     report_root.mkdir(parents=True, exist_ok=True)
 

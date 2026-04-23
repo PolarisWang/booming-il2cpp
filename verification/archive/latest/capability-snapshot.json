@@ -1,0 +1,3416 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-04-23T21:56:32.255663Z",
+  "producerId": "verification-v1",
+  "sourceSpecVersion": "verification-v1",
+  "closureId": "closure/completed/testing-inventory",
+  "items": [
+    {
+      "capabilityId": "capability/1/1",
+      "displayName": "Arithmetic Ops",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/1/1"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 1,
+        "capabilityFamilyLabel": "Primitives And Ops",
+        "capabilityItem": 1,
+        "capabilityItemLabel": "Arithmetic Ops",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/1/1"
+      }
+    },
+    {
+      "capabilityId": "capability/1/2",
+      "displayName": "Bitwise Ops",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/1/2"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 1,
+        "capabilityFamilyLabel": "Primitives And Ops",
+        "capabilityItem": 2,
+        "capabilityItemLabel": "Bitwise Ops",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 2,
+        "declaredBenchmarkCount": 2,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/1/2"
+      }
+    },
+    {
+      "capabilityId": "capability/1/3",
+      "displayName": "Comparison And Branch",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/1/3"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 1,
+        "capabilityFamilyLabel": "Primitives And Ops",
+        "capabilityItem": 3,
+        "capabilityItemLabel": "Comparison And Branch",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/1/3"
+      }
+    },
+    {
+      "capabilityId": "capability/1/4",
+      "displayName": "Numeric Conversion",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/1/4"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 1,
+        "capabilityFamilyLabel": "Primitives And Ops",
+        "capabilityItem": 4,
+        "capabilityItemLabel": "Numeric Conversion",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 2,
+        "declaredBenchmarkCount": 2,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/1/4"
+      }
+    },
+    {
+      "capabilityId": "capability/1/5",
+      "displayName": "Overflow Behavior",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/1/5"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 1,
+        "capabilityFamilyLabel": "Primitives And Ops",
+        "capabilityItem": 5,
+        "capabilityItemLabel": "Overflow Behavior",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/1/5"
+      }
+    },
+    {
+      "capabilityId": "capability/1/6",
+      "displayName": "Array Basics",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/1/6"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 1,
+        "capabilityFamilyLabel": "Primitives And Ops",
+        "capabilityItem": 6,
+        "capabilityItemLabel": "Array Basics",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/1/6"
+      }
+    },
+    {
+      "capabilityId": "capability/1/7",
+      "displayName": "Array Boxing",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/1/7"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 1,
+        "capabilityFamilyLabel": "Primitives And Ops",
+        "capabilityItem": 7,
+        "capabilityItemLabel": "Array Boxing",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/1/7"
+      }
+    },
+    {
+      "capabilityId": "capability/2/8",
+      "displayName": "Generic Instantiation",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/2/8"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 2,
+        "capabilityFamilyLabel": "Type System And Generics",
+        "capabilityItem": 8,
+        "capabilityItemLabel": "Generic Instantiation",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/2/8"
+      }
+    },
+    {
+      "capabilityId": "capability/2/9",
+      "displayName": "Generic Constraint",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/2/9"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 2,
+        "capabilityFamilyLabel": "Type System And Generics",
+        "capabilityItem": 9,
+        "capabilityItemLabel": "Generic Constraint",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/2/9"
+      }
+    },
+    {
+      "capabilityId": "capability/2/10",
+      "displayName": "Generic Virtual Dispatch",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/2/10"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 2,
+        "capabilityFamilyLabel": "Type System And Generics",
+        "capabilityItem": 10,
+        "capabilityItemLabel": "Generic Virtual Dispatch",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 2,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/2/10"
+      }
+    },
+    {
+      "capabilityId": "capability/2/11",
+      "displayName": "Generic Interface Dispatch",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/2/11"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 2,
+        "capabilityFamilyLabel": "Type System And Generics",
+        "capabilityItem": 11,
+        "capabilityItemLabel": "Generic Interface Dispatch",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/2/11"
+      }
+    },
+    {
+      "capabilityId": "capability/2/12",
+      "displayName": "Generic Collections",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "missing",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/2/12"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 2,
+        "capabilityFamilyLabel": "Type System And Generics",
+        "capabilityItem": 12,
+        "capabilityItemLabel": "Generic Collections",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/2/12"
+      }
+    },
+    {
+      "capabilityId": "capability/2/13",
+      "displayName": "Generic Layout",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/2/13"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 2,
+        "capabilityFamilyLabel": "Type System And Generics",
+        "capabilityItem": 13,
+        "capabilityItemLabel": "Generic Layout",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/2/13"
+      }
+    },
+    {
+      "capabilityId": "capability/2/67",
+      "displayName": "Object Cast And Type Check",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/2/67"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 2,
+        "capabilityFamilyLabel": "Type System And Generics",
+        "capabilityItem": 67,
+        "capabilityItemLabel": "Object Cast And Type Check",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/2/67"
+      }
+    },
+    {
+      "capabilityId": "capability/2/68",
+      "displayName": "Array Covariance",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/2/68"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 2,
+        "capabilityFamilyLabel": "Type System And Generics",
+        "capabilityItem": 68,
+        "capabilityItemLabel": "Array Covariance",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/2/68"
+      }
+    },
+    {
+      "capabilityId": "capability/3/14",
+      "displayName": "Async Await",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/3/14"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 3,
+        "capabilityFamilyLabel": "Async And Iterators",
+        "capabilityItem": 14,
+        "capabilityItemLabel": "Async Await",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/3/14"
+      }
+    },
+    {
+      "capabilityId": "capability/3/15",
+      "displayName": "Task And ValueTask Flow",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/3/15"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 3,
+        "capabilityFamilyLabel": "Async And Iterators",
+        "capabilityItem": 15,
+        "capabilityItemLabel": "Task And ValueTask Flow",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/3/15"
+      }
+    },
+    {
+      "capabilityId": "capability/3/16",
+      "displayName": "Iterator State Machine",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/3/16"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 3,
+        "capabilityFamilyLabel": "Async And Iterators",
+        "capabilityItem": 16,
+        "capabilityItemLabel": "Iterator State Machine",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/3/16"
+      }
+    },
+    {
+      "capabilityId": "capability/4/17",
+      "displayName": "Delegate Invocation",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/4/17"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 4,
+        "capabilityFamilyLabel": "Delegates And Closures",
+        "capabilityItem": 17,
+        "capabilityItemLabel": "Delegate Invocation",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/4/17"
+      }
+    },
+    {
+      "capabilityId": "capability/4/18",
+      "displayName": "Delegate Chaining",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/4/18"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 4,
+        "capabilityFamilyLabel": "Delegates And Closures",
+        "capabilityItem": 18,
+        "capabilityItemLabel": "Delegate Chaining",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/4/18"
+      }
+    },
+    {
+      "capabilityId": "capability/4/19",
+      "displayName": "Lambda Closure Capture",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/4/19"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 4,
+        "capabilityFamilyLabel": "Delegates And Closures",
+        "capabilityItem": 19,
+        "capabilityItemLabel": "Lambda Closure Capture",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/4/19"
+      }
+    },
+    {
+      "capabilityId": "capability/4/20",
+      "displayName": "Event Callback Flow",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/4/20"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 4,
+        "capabilityFamilyLabel": "Delegates And Closures",
+        "capabilityItem": 20,
+        "capabilityItemLabel": "Event Callback Flow",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/4/20"
+      }
+    },
+    {
+      "capabilityId": "capability/5/27",
+      "displayName": "Exception Basic",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/5/27"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 5,
+        "capabilityFamilyLabel": "Exceptions And Control Flow",
+        "capabilityItem": 27,
+        "capabilityItemLabel": "Exception Basic",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 2,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/5/27"
+      }
+    },
+    {
+      "capabilityId": "capability/5/28",
+      "displayName": "Nested Exception",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/5/28"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 5,
+        "capabilityFamilyLabel": "Exceptions And Control Flow",
+        "capabilityItem": 28,
+        "capabilityItemLabel": "Nested Exception",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/5/28"
+      }
+    },
+    {
+      "capabilityId": "capability/5/29",
+      "displayName": "Finally And Filter",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/5/29"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 5,
+        "capabilityFamilyLabel": "Exceptions And Control Flow",
+        "capabilityItem": 29,
+        "capabilityItemLabel": "Finally And Filter",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/5/29"
+      }
+    },
+    {
+      "capabilityId": "capability/5/30",
+      "displayName": "Cross Boundary Exception",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/5/30"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 5,
+        "capabilityFamilyLabel": "Exceptions And Control Flow",
+        "capabilityItem": 30,
+        "capabilityItemLabel": "Cross Boundary Exception",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/5/30"
+      }
+    },
+    {
+      "capabilityId": "capability/6/21",
+      "displayName": "Custom Attribute Lookup",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/6/21"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 6,
+        "capabilityFamilyLabel": "Reflection And Metadata",
+        "capabilityItem": 21,
+        "capabilityItemLabel": "Custom Attribute Lookup",
+        "supportStates": [
+          4,
+          1
+        ],
+        "supportStateLabels": [
+          "MetadataOnly",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/6/21"
+      }
+    },
+    {
+      "capabilityId": "capability/6/22",
+      "displayName": "Member Metadata Lookup",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/6/22"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 6,
+        "capabilityFamilyLabel": "Reflection And Metadata",
+        "capabilityItem": 22,
+        "capabilityItemLabel": "Member Metadata Lookup",
+        "supportStates": [
+          4,
+          1
+        ],
+        "supportStateLabels": [
+          "MetadataOnly",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/6/22"
+      }
+    },
+    {
+      "capabilityId": "capability/6/23",
+      "displayName": "Metadata Supplement",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/6/23"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 6,
+        "capabilityFamilyLabel": "Reflection And Metadata",
+        "capabilityItem": 23,
+        "capabilityItemLabel": "Metadata Supplement",
+        "supportStates": [
+          4
+        ],
+        "supportStateLabels": [
+          "MetadataOnly"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/6/23"
+      }
+    },
+    {
+      "capabilityId": "capability/6/24",
+      "displayName": "Metadata Closure",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/6/24"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 6,
+        "capabilityFamilyLabel": "Reflection And Metadata",
+        "capabilityItem": 24,
+        "capabilityItemLabel": "Metadata Closure",
+        "supportStates": [
+          4,
+          1
+        ],
+        "supportStateLabels": [
+          "MetadataOnly",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/6/24"
+      }
+    },
+    {
+      "capabilityId": "capability/6/25",
+      "displayName": "Linker Preserve Contract",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/6/25"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 6,
+        "capabilityFamilyLabel": "Reflection And Metadata",
+        "capabilityItem": 25,
+        "capabilityItemLabel": "Linker Preserve Contract",
+        "supportStates": [
+          4,
+          1
+        ],
+        "supportStateLabels": [
+          "MetadataOnly",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/6/25"
+      }
+    },
+    {
+      "capabilityId": "capability/6/26",
+      "displayName": "Linker Stripping",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/6/26"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 6,
+        "capabilityFamilyLabel": "Reflection And Metadata",
+        "capabilityItem": 26,
+        "capabilityItemLabel": "Linker Stripping",
+        "supportStates": [
+          4,
+          1
+        ],
+        "supportStateLabels": [
+          "MetadataOnly",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/6/26"
+      }
+    },
+    {
+      "capabilityId": "capability/7/31",
+      "displayName": "Native Call Interop",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/7/31"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 7,
+        "capabilityFamilyLabel": "Interop And Marshaling",
+        "capabilityItem": 31,
+        "capabilityItemLabel": "Native Call Interop",
+        "supportStates": [
+          1,
+          5
+        ],
+        "supportStateLabels": [
+          "NativeGenerated",
+          "ExternalRuntime"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/7/31"
+      }
+    },
+    {
+      "capabilityId": "capability/7/32",
+      "displayName": "String And Utf8 Marshaling",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/7/32"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 7,
+        "capabilityFamilyLabel": "Interop And Marshaling",
+        "capabilityItem": 32,
+        "capabilityItemLabel": "String And Utf8 Marshaling",
+        "supportStates": [
+          1,
+          5
+        ],
+        "supportStateLabels": [
+          "NativeGenerated",
+          "ExternalRuntime"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/7/32"
+      }
+    },
+    {
+      "capabilityId": "capability/7/33",
+      "displayName": "Struct Marshaling",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/7/33"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 7,
+        "capabilityFamilyLabel": "Interop And Marshaling",
+        "capabilityItem": 33,
+        "capabilityItemLabel": "Struct Marshaling",
+        "supportStates": [
+          1,
+          5
+        ],
+        "supportStateLabels": [
+          "NativeGenerated",
+          "ExternalRuntime"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/7/33"
+      }
+    },
+    {
+      "capabilityId": "capability/7/34",
+      "displayName": "Delegate Callback Interop",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/7/34"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 7,
+        "capabilityFamilyLabel": "Interop And Marshaling",
+        "capabilityItem": 34,
+        "capabilityItemLabel": "Delegate Callback Interop",
+        "supportStates": [
+          1,
+          5
+        ],
+        "supportStateLabels": [
+          "NativeGenerated",
+          "ExternalRuntime"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/7/34"
+      }
+    },
+    {
+      "capabilityId": "capability/8/35",
+      "displayName": "Threading",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/8/35"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 8,
+        "capabilityFamilyLabel": "Threading And Synchronization",
+        "capabilityItem": 35,
+        "capabilityItemLabel": "Threading",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/8/35"
+      }
+    },
+    {
+      "capabilityId": "capability/8/36",
+      "displayName": "Task Scheduling",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/8/36"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 8,
+        "capabilityFamilyLabel": "Threading And Synchronization",
+        "capabilityItem": 36,
+        "capabilityItemLabel": "Task Scheduling",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/8/36"
+      }
+    },
+    {
+      "capabilityId": "capability/8/37",
+      "displayName": "Monitor And Locking",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/8/37"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 8,
+        "capabilityFamilyLabel": "Threading And Synchronization",
+        "capabilityItem": 37,
+        "capabilityItemLabel": "Monitor And Locking",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/8/37"
+      }
+    },
+    {
+      "capabilityId": "capability/8/38",
+      "displayName": "Thread Local State",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/8/38"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 8,
+        "capabilityFamilyLabel": "Threading And Synchronization",
+        "capabilityItem": 38,
+        "capabilityItemLabel": "Thread Local State",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/8/38"
+      }
+    },
+    {
+      "capabilityId": "capability/9/39",
+      "displayName": "Runtime Helpers",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/9/39"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 9,
+        "capabilityFamilyLabel": "Runtime Services",
+        "capabilityItem": 39,
+        "capabilityItemLabel": "Runtime Helpers",
+        "supportStates": [
+          1,
+          4
+        ],
+        "supportStateLabels": [
+          "NativeGenerated",
+          "MetadataOnly"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 6,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/9/39"
+      }
+    },
+    {
+      "capabilityId": "capability/9/40",
+      "displayName": "Gc Sensitive Flow",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/9/40"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 9,
+        "capabilityFamilyLabel": "Runtime Services",
+        "capabilityItem": 40,
+        "capabilityItemLabel": "Gc Sensitive Flow",
+        "supportStates": [
+          1,
+          4
+        ],
+        "supportStateLabels": [
+          "NativeGenerated",
+          "MetadataOnly"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/9/40"
+      }
+    },
+    {
+      "capabilityId": "capability/9/41",
+      "displayName": "Resource Lifecycle",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/9/41"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 9,
+        "capabilityFamilyLabel": "Runtime Services",
+        "capabilityItem": 41,
+        "capabilityItemLabel": "Resource Lifecycle",
+        "supportStates": [
+          1,
+          4
+        ],
+        "supportStateLabels": [
+          "NativeGenerated",
+          "MetadataOnly"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/9/41"
+      }
+    },
+    {
+      "capabilityId": "capability/9/42",
+      "displayName": "Loader Contract",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/9/42"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 9,
+        "capabilityFamilyLabel": "Runtime Services",
+        "capabilityItem": 42,
+        "capabilityItemLabel": "Loader Contract",
+        "supportStates": [
+          1,
+          4
+        ],
+        "supportStateLabels": [
+          "NativeGenerated",
+          "MetadataOnly"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/9/42"
+      }
+    },
+    {
+      "capabilityId": "capability/10/43",
+      "displayName": "Span And Memory",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/10/43"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 10,
+        "capabilityFamilyLabel": "Unsafe And Low Level",
+        "capabilityItem": 43,
+        "capabilityItemLabel": "Span And Memory",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/10/43"
+      }
+    },
+    {
+      "capabilityId": "capability/10/44",
+      "displayName": "Ref Struct And Stackalloc",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/10/44"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 10,
+        "capabilityFamilyLabel": "Unsafe And Low Level",
+        "capabilityItem": 44,
+        "capabilityItemLabel": "Ref Struct And Stackalloc",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/10/44"
+      }
+    },
+    {
+      "capabilityId": "capability/10/45",
+      "displayName": "Unsafe Pointer",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/10/45"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 10,
+        "capabilityFamilyLabel": "Unsafe And Low Level",
+        "capabilityItem": 45,
+        "capabilityItemLabel": "Unsafe Pointer",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/10/45"
+      }
+    },
+    {
+      "capabilityId": "capability/10/46",
+      "displayName": "Function Pointer",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/10/46"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 10,
+        "capabilityFamilyLabel": "Unsafe And Low Level",
+        "capabilityItem": 46,
+        "capabilityItemLabel": "Function Pointer",
+        "supportStates": [
+          1
+        ],
+        "supportStateLabels": [
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/10/46"
+      }
+    },
+    {
+      "capabilityId": "capability/11/47",
+      "displayName": "Runtime Trace Output",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [],
+      "defaultPlatforms": [],
+      "defaultDeviceProfiles": [],
+      "requiredEvidenceKinds": [
+        "contract"
+      ],
+      "verificationState": "blocked",
+      "supportState": "unsupported",
+      "blockers": [
+        {
+          "code": "unsupported-capability",
+          "lane": "test_governance",
+          "message": "能力 contract 明确标记为 unsupported。"
+        }
+      ],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/11/47"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 11,
+        "capabilityFamilyLabel": "Diagnostics And Tracing",
+        "capabilityItem": 47,
+        "capabilityItemLabel": "Runtime Trace Output",
+        "supportStates": [
+          4,
+          6
+        ],
+        "supportStateLabels": [
+          "MetadataOnly",
+          "Unsupported"
+        ],
+        "proofRequired": false,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 0,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "unsupported",
+        "statusReason": "能力 contract 明确标记为 unsupported。",
+        "scope": "capability",
+        "rowKey": "capability/11/47"
+      }
+    },
+    {
+      "capabilityId": "capability/11/48",
+      "displayName": "Native Symbol Evidence",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [],
+      "defaultPlatforms": [],
+      "defaultDeviceProfiles": [],
+      "requiredEvidenceKinds": [
+        "contract"
+      ],
+      "verificationState": "blocked",
+      "supportState": "unsupported",
+      "blockers": [
+        {
+          "code": "unsupported-capability",
+          "lane": "test_governance",
+          "message": "能力 contract 明确标记为 unsupported。"
+        }
+      ],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/11/48"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 11,
+        "capabilityFamilyLabel": "Diagnostics And Tracing",
+        "capabilityItem": 48,
+        "capabilityItemLabel": "Native Symbol Evidence",
+        "supportStates": [
+          4,
+          6
+        ],
+        "supportStateLabels": [
+          "MetadataOnly",
+          "Unsupported"
+        ],
+        "proofRequired": false,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 0,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "unsupported",
+        "statusReason": "能力 contract 明确标记为 unsupported。",
+        "scope": "capability",
+        "rowKey": "capability/11/48"
+      }
+    },
+    {
+      "capabilityId": "capability/11/49",
+      "displayName": "Crash Evidence",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [],
+      "defaultPlatforms": [],
+      "defaultDeviceProfiles": [],
+      "requiredEvidenceKinds": [
+        "contract"
+      ],
+      "verificationState": "blocked",
+      "supportState": "unsupported",
+      "blockers": [
+        {
+          "code": "unsupported-capability",
+          "lane": "test_governance",
+          "message": "能力 contract 明确标记为 unsupported。"
+        }
+      ],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/11/49"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 11,
+        "capabilityFamilyLabel": "Diagnostics And Tracing",
+        "capabilityItem": 49,
+        "capabilityItemLabel": "Crash Evidence",
+        "supportStates": [
+          4,
+          6
+        ],
+        "supportStateLabels": [
+          "MetadataOnly",
+          "Unsupported"
+        ],
+        "proofRequired": false,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 0,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "unsupported",
+        "statusReason": "能力 contract 明确标记为 unsupported。",
+        "scope": "capability",
+        "rowKey": "capability/11/49"
+      }
+    },
+    {
+      "capabilityId": "capability/11/50",
+      "displayName": "Failure Diagnostics",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [],
+      "defaultPlatforms": [],
+      "defaultDeviceProfiles": [],
+      "requiredEvidenceKinds": [
+        "contract"
+      ],
+      "verificationState": "blocked",
+      "supportState": "unsupported",
+      "blockers": [
+        {
+          "code": "unsupported-capability",
+          "lane": "test_governance",
+          "message": "能力 contract 明确标记为 unsupported。"
+        }
+      ],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/11/50"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 11,
+        "capabilityFamilyLabel": "Diagnostics And Tracing",
+        "capabilityItem": 50,
+        "capabilityItemLabel": "Failure Diagnostics",
+        "supportStates": [
+          4,
+          6
+        ],
+        "supportStateLabels": [
+          "MetadataOnly",
+          "Unsupported"
+        ],
+        "proofRequired": false,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 0,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "unsupported",
+        "statusReason": "能力 contract 明确标记为 unsupported。",
+        "scope": "capability",
+        "rowKey": "capability/11/50"
+      }
+    },
+    {
+      "capabilityId": "capability/12/51",
+      "displayName": "Required Instantiation Closure",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/12/51"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 12,
+        "capabilityFamilyLabel": "Linker And Aot Closure",
+        "capabilityItem": 51,
+        "capabilityItemLabel": "Required Instantiation Closure",
+        "supportStates": [
+          4,
+          1
+        ],
+        "supportStateLabels": [
+          "MetadataOnly",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/12/51"
+      }
+    },
+    {
+      "capabilityId": "capability/12/52",
+      "displayName": "Generic Sharing Boundary",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/12/52"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 12,
+        "capabilityFamilyLabel": "Linker And Aot Closure",
+        "capabilityItem": 52,
+        "capabilityItemLabel": "Generic Sharing Boundary",
+        "supportStates": [
+          4,
+          1
+        ],
+        "supportStateLabels": [
+          "MetadataOnly",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/12/52"
+      }
+    },
+    {
+      "capabilityId": "capability/12/53",
+      "displayName": "Aot Closure Validation",
+      "ownerSubjectId": "SolutionCorePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/12/53"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "SolutionCorePack",
+        "capabilityFamily": 12,
+        "capabilityFamilyLabel": "Linker And Aot Closure",
+        "capabilityItem": 53,
+        "capabilityItemLabel": "Aot Closure Validation",
+        "supportStates": [
+          4,
+          1
+        ],
+        "supportStateLabels": [
+          "MetadataOnly",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/12/53"
+      }
+    },
+    {
+      "capabilityId": "capability/13/54",
+      "displayName": "Package Load",
+      "ownerSubjectId": "HotUpdateHostPack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/13/54"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "HotUpdateHostPack",
+        "capabilityFamily": 13,
+        "capabilityFamilyLabel": "Hot Update Workflow",
+        "capabilityItem": 54,
+        "capabilityItemLabel": "Package Load",
+        "supportStates": [
+          3,
+          2
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/13/54"
+      }
+    },
+    {
+      "capabilityId": "capability/13/55",
+      "displayName": "Shared Contract Binding",
+      "ownerSubjectId": "HotUpdateHostPack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/13/55"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "HotUpdateHostPack",
+        "capabilityFamily": 13,
+        "capabilityFamilyLabel": "Hot Update Workflow",
+        "capabilityItem": 55,
+        "capabilityItemLabel": "Shared Contract Binding",
+        "supportStates": [
+          3,
+          2
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/13/55"
+      }
+    },
+    {
+      "capabilityId": "capability/13/56",
+      "displayName": "Method Replacement",
+      "ownerSubjectId": "HotUpdateHostPack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "missing",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/13/56"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "HotUpdateHostPack",
+        "capabilityFamily": 13,
+        "capabilityFamilyLabel": "Hot Update Workflow",
+        "capabilityItem": 56,
+        "capabilityItemLabel": "Method Replacement",
+        "supportStates": [
+          3,
+          2
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/13/56"
+      }
+    },
+    {
+      "capabilityId": "capability/13/57",
+      "displayName": "Hot Update Metadata Supplement",
+      "ownerSubjectId": "HotUpdateHostPack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/13/57"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "HotUpdateHostPack",
+        "capabilityFamily": 13,
+        "capabilityFamilyLabel": "Hot Update Workflow",
+        "capabilityItem": 57,
+        "capabilityItemLabel": "Hot Update Metadata Supplement",
+        "supportStates": [
+          3,
+          2
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/13/57"
+      }
+    },
+    {
+      "capabilityId": "capability/13/58",
+      "displayName": "Patch Integrity",
+      "ownerSubjectId": "HotUpdateHostPack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/13/58"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "HotUpdateHostPack",
+        "capabilityFamily": 13,
+        "capabilityFamilyLabel": "Hot Update Workflow",
+        "capabilityItem": 58,
+        "capabilityItemLabel": "Patch Integrity",
+        "supportStates": [
+          3,
+          2
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/13/58"
+      }
+    },
+    {
+      "capabilityId": "capability/13/59",
+      "displayName": "Version Rollback",
+      "ownerSubjectId": "HotUpdateHostPack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/13/59"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "HotUpdateHostPack",
+        "capabilityFamily": 13,
+        "capabilityFamilyLabel": "Hot Update Workflow",
+        "capabilityItem": 59,
+        "capabilityItemLabel": "Version Rollback",
+        "supportStates": [
+          3,
+          2
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/13/59"
+      }
+    },
+    {
+      "capabilityId": "capability/13/60",
+      "displayName": "Patch Callback Flow",
+      "ownerSubjectId": "HotUpdateHostPack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/13/60"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "HotUpdateHostPack",
+        "capabilityFamily": 13,
+        "capabilityFamilyLabel": "Hot Update Workflow",
+        "capabilityItem": 60,
+        "capabilityItemLabel": "Patch Callback Flow",
+        "supportStates": [
+          3,
+          2
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 2,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/13/60"
+      }
+    },
+    {
+      "capabilityId": "capability/14/61",
+      "displayName": "Mixed Bridge Dispatch",
+      "ownerSubjectId": "MixedExecutionFeaturePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate",
+        "interpreter"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/14/61"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "MixedExecutionFeaturePack",
+        "capabilityFamily": 14,
+        "capabilityFamilyLabel": "Mixed Execution",
+        "capabilityItem": 61,
+        "capabilityItemLabel": "Mixed Bridge Dispatch",
+        "supportStates": [
+          3,
+          2,
+          1
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/14/61"
+      }
+    },
+    {
+      "capabilityId": "capability/14/62",
+      "displayName": "Interpreter Lowering",
+      "ownerSubjectId": "MixedExecutionFeaturePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/14/62"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "MixedExecutionFeaturePack",
+        "capabilityFamily": 14,
+        "capabilityFamilyLabel": "Mixed Execution",
+        "capabilityItem": 62,
+        "capabilityItemLabel": "Interpreter Lowering",
+        "supportStates": [
+          3,
+          2,
+          1
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/14/62"
+      }
+    },
+    {
+      "capabilityId": "capability/14/63",
+      "displayName": "Interpreter Arithmetic",
+      "ownerSubjectId": "MixedExecutionFeaturePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate",
+        "interpreter"
+      ],
+      "defaultPlatforms": [
+        "inventory-host",
+        "windows-x64"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host",
+        "bridge/windows-x64/windows-x64-amd64-family-26-model-68-stepping-0-authenticamd"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic",
+        "perf"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/14/63"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "MixedExecutionFeaturePack",
+        "capabilityFamily": 14,
+        "capabilityFamilyLabel": "Mixed Execution",
+        "capabilityItem": 63,
+        "capabilityItemLabel": "Interpreter Arithmetic",
+        "supportStates": [
+          3,
+          2,
+          1
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 1,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/14/63"
+      }
+    },
+    {
+      "capabilityId": "capability/14/64",
+      "displayName": "Mixed Generic Flow",
+      "ownerSubjectId": "MixedExecutionFeaturePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/14/64"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "MixedExecutionFeaturePack",
+        "capabilityFamily": 14,
+        "capabilityFamilyLabel": "Mixed Execution",
+        "capabilityItem": 64,
+        "capabilityItemLabel": "Mixed Generic Flow",
+        "supportStates": [
+          3,
+          2,
+          1
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/14/64"
+      }
+    },
+    {
+      "capabilityId": "capability/14/65",
+      "displayName": "Mixed Exception Flow",
+      "ownerSubjectId": "MixedExecutionFeaturePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/14/65"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "MixedExecutionFeaturePack",
+        "capabilityFamily": 14,
+        "capabilityFamilyLabel": "Mixed Execution",
+        "capabilityItem": 65,
+        "capabilityItemLabel": "Mixed Exception Flow",
+        "supportStates": [
+          3,
+          2,
+          1
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/14/65"
+      }
+    },
+    {
+      "capabilityId": "capability/14/66",
+      "displayName": "Mixed Delegate Flow",
+      "ownerSubjectId": "MixedExecutionFeaturePack",
+      "defaultRoutes": [
+        "managed",
+        "native",
+        "hotupdate"
+      ],
+      "defaultPlatforms": [
+        "inventory-host"
+      ],
+      "defaultDeviceProfiles": [
+        "inventory-host"
+      ],
+      "requiredEvidenceKinds": [
+        "contract",
+        "semantic"
+      ],
+      "verificationState": "planned",
+      "supportState": "supported",
+      "blockers": [],
+      "latestClosureId": "closure/completed/testing-inventory",
+      "latestObligationClaimIds": [
+        "obligation/14/66"
+      ],
+      "projectionMeta": {
+        "ownerSubjectId": "MixedExecutionFeaturePack",
+        "capabilityFamily": 14,
+        "capabilityFamilyLabel": "Mixed Execution",
+        "capabilityItem": 66,
+        "capabilityItemLabel": "Mixed Delegate Flow",
+        "supportStates": [
+          3,
+          2,
+          1
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": false,
+        "declaredUnitCount": 1,
+        "declaredBenchmarkCount": 0,
+        "contractStatus": "ok",
+        "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
+        "scope": "capability",
+        "rowKey": "capability/14/66"
+      }
+    }
+  ]
+}

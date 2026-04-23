@@ -15,6 +15,7 @@ try:
     from ..testing import registry as registry_module
     from ..testing import selectors as selectors_module
     from ..testing import session as session_module
+    from ..testing import verification_layout as verification_layout_module
     from ..testing import reporting as reporting_module
     from ..testing import subject_executor as subject_executor_module
     from ..testing import subject_planner as subject_planner_module
@@ -37,6 +38,7 @@ except ImportError:
     from testing import registry as registry_module
     from testing import selectors as selectors_module
     from testing import session as session_module
+    from testing import verification_layout as verification_layout_module
     from testing import reporting as reporting_module
     from testing import subject_executor as subject_executor_module
     from testing import subject_planner as subject_planner_module
@@ -205,7 +207,7 @@ def _relative_repo_path(repo_root: Path, path: Path) -> str:
 
 
 def _subject_workspace_manifest_path(repo_root: Path, subject_id: str) -> Path:
-    return repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+    return verification_layout_module.subject_workspace_manifest_path(repo_root, subject_id)
 
 
 def _load_subject_workspace_manifest(repo_root: Path, subject_id: str) -> tuple[Path, dict[str, Any]] | None:
@@ -300,8 +302,8 @@ def _regenerate_subject_workspace_manifest(
     if loaded_manifest is None:
         raise RuntimeError(
             "workspace manifest is missing after regeneration: "
-            f"solutions/subjects/{subject_id}/workspace.manifest.json"
-    )
+            f"verification/workspaces/subjects/{subject_id}/workspace.manifest.json"
+        )
     return loaded_manifest
 
 

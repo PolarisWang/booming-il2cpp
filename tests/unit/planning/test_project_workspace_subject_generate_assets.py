@@ -50,7 +50,7 @@ class TestProjectWorkspaceSubjectGenerateAssets(ProjectWorkspaceTestSupport):
             self.assertEqual("CHECK", manifest["variant"])
             self.assertEqual("windows-dev-output", manifest["defaultMatrixId"])
             self.assertEqual(
-                "solutions/subjects/FixtureSubject/FixtureSubject.sln",
+                "verification/workspaces/subjects/FixtureSubject/FixtureSubject.sln",
                 manifest["managedSolutionPath"],
             )
             self.assertEqual(
@@ -71,7 +71,7 @@ class TestProjectWorkspaceSubjectGenerateAssets(ProjectWorkspaceTestSupport):
                         "projectPath": "src/reference/Chaos.TestFramework.Runtime/Chaos.TestFramework.Runtime.csproj",
                         "assemblyName": "Chaos.TestFramework.Runtime",
                         "hostKind": "proof-host",
-                        "collectionPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.collection.json",
+                        "collectionPath": "verification/workspaces/subjects/FixtureSubject/managed-tests/Generated/declared-tests.collection.json",
                         "executionModel": "shared-runtime-host",
                     },
                     {
@@ -79,7 +79,7 @@ class TestProjectWorkspaceSubjectGenerateAssets(ProjectWorkspaceTestSupport):
                         "projectPath": "src/reference/Chaos.TestFramework.Runtime/Chaos.TestFramework.Runtime.csproj",
                         "assemblyName": "Chaos.TestFramework.Runtime",
                         "hostKind": "benchmark-host",
-                        "collectionPath": "solutions/subjects/FixtureSubject/managed-tests/Generated/declared-tests.collection.json",
+                        "collectionPath": "verification/workspaces/subjects/FixtureSubject/managed-tests/Generated/declared-tests.collection.json",
                         "executionModel": "shared-runtime-host",
                     },
                 ],
@@ -90,8 +90,8 @@ class TestProjectWorkspaceSubjectGenerateAssets(ProjectWorkspaceTestSupport):
                     {
                         "projectId": "native/FixtureSubject/windows-dev-output/generated-native",
                         "matrixId": "windows-dev-output",
-                        "projectPath": "solutions/subjects/FixtureSubject/native/windows-dev-output/generated/chaos_subject_generated_native.vcxproj",
-                        "configureRoot": "solutions/subjects/FixtureSubject/native/windows-dev-output",
+                        "projectPath": "verification/workspaces/subjects/FixtureSubject/native/windows-dev-output/generated/chaos_subject_generated_native.vcxproj",
+                        "configureRoot": "verification/workspaces/subjects/FixtureSubject/native/windows-dev-output",
                         "targetPlatform": "windows-x64",
                         "toolchainProfile": "msvc-reference",
                         "deliveryKind": "generated-static-library",
@@ -105,8 +105,8 @@ class TestProjectWorkspaceSubjectGenerateAssets(ProjectWorkspaceTestSupport):
                     {
                         "projectId": "native-test/FixtureSubject/windows-dev-output/proof-host",
                         "matrixId": "windows-dev-output",
-                        "projectPath": "solutions/subjects/FixtureSubject/native/windows-dev-output/proof/chaos_subject_reference_proof.vcxproj",
-                        "configureRoot": "solutions/subjects/FixtureSubject/native/windows-dev-output",
+                        "projectPath": "verification/workspaces/subjects/FixtureSubject/native/windows-dev-output/proof/chaos_subject_reference_proof.vcxproj",
+                        "configureRoot": "verification/workspaces/subjects/FixtureSubject/native/windows-dev-output",
                         "targetPlatform": "windows-x64",
                         "toolchainProfile": "msvc-reference",
                         "deliveryKind": "direct-run-host",
@@ -148,7 +148,7 @@ class TestProjectWorkspaceSubjectGenerateAssets(ProjectWorkspaceTestSupport):
             self.assertTrue((repo_root / manifest["managedTestProjects"][0]["projectPath"]).is_file())
             self.assertTrue((repo_root / manifest["managedTestProjects"][1]["projectPath"]).is_file())
             self.assertTrue((repo_root / manifest["managedTestProjects"][0]["collectionPath"]).is_file())
-            mirrored_subject_exec_root = repo_root / "solutions" / "subjects" / "FixtureSubject" / "generated" / "subject-exec"
+            mirrored_subject_exec_root = repo_root / "verification" / "workspaces" / "subjects" / "FixtureSubject" / "generated" / "subject-exec"
             self.assertTrue((mirrored_subject_exec_root / "analysis" / "generated" / "generated.manifest.json").is_file())
             self.assertTrue((mirrored_subject_exec_root / "analysis" / "generated" / "native-reference.plan.json").is_file())
             self.assertTrue(
@@ -164,15 +164,15 @@ class TestProjectWorkspaceSubjectGenerateAssets(ProjectWorkspaceTestSupport):
                 [
                     "cmake",
                     "-S",
-                    str(repo_root / "solutions" / "subjects" / "FixtureSubject" / "native-source" / "windows-dev-output"),
+                    str(repo_root / "verification" / "workspaces" / "subjects" / "FixtureSubject" / "native-source" / "windows-dev-output"),
                     "-B",
-                    str(repo_root / "solutions" / "subjects" / "FixtureSubject" / "native" / "windows-dev-output"),
+                    str(repo_root / "verification" / "workspaces" / "subjects" / "FixtureSubject" / "native" / "windows-dev-output"),
                     "-G",
                     "Visual Studio 17 2022",
                     f"-DCHAOS_SUBJECT_REPO_ROOT={repo_root.as_posix()}",
                     "-DCHAOS_SUBJECT_VARIANT=CHECK",
-                    f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={repo_root / 'solutions' / 'subjects' / 'FixtureSubject' / 'native' / 'windows-dev-output' / 'out'}",
-                    f"-DCHAOS_SUBJECT_RUNTIME_ROOT={repo_root / 'solutions' / 'subjects' / 'FixtureSubject' / 'native' / 'windows-dev-output' / 'runtime'}",
+                    f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={repo_root / 'verification' / 'workspaces' / 'subjects' / 'FixtureSubject' / 'native' / 'windows-dev-output' / 'out'}",
+                    f"-DCHAOS_SUBJECT_RUNTIME_ROOT={repo_root / 'verification' / 'workspaces' / 'subjects' / 'FixtureSubject' / 'native' / 'windows-dev-output' / 'runtime'}",
                 ],
                 run_process_mock.call_args.args[0],
             )
@@ -204,8 +204,7 @@ class TestProjectWorkspaceSubjectGenerateAssets(ProjectWorkspaceTestSupport):
             manifest = json.loads((repo_root / result["manifestPath"]).read_text(encoding="utf-8"))
             proof_host_path = (
                 repo_root
-                / "solutions"
-                / "subjects"
+                / "verification" / "workspaces" / "subjects"
                 / "FixtureSubject"
                 / "native-source"
                 / "windows-dev-output"
@@ -226,3 +225,7 @@ class TestProjectWorkspaceSubjectGenerateAssets(ProjectWorkspaceTestSupport):
             self.assertIn("RunNativeReferenceAssembly(", proof_host_text)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+
+
+
+

@@ -10,15 +10,17 @@ try:
     from ..core.common import read_json
     from . import declarations as declarations_module
     from . import path_resolver as path_resolver_module
+    from . import verification_layout as verification_layout_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from core.common import read_json
     from testing import declarations as declarations_module
     from testing import path_resolver as path_resolver_module
+    from testing import verification_layout as verification_layout_module
 
 
-SUBJECT_MANIFEST_NAME = "subject.manifest.json"
+SUBJECT_MANIFEST_NAME = verification_layout_module.OWNER_MANIFEST_NAME
 BUCKET_MANIFEST_NAMES = {
     "source": "source.manifest.json",
     "host-input": "host-input.manifest.json",
@@ -94,15 +96,17 @@ def _normalize_enum_value(
 
 
 def _project_files(subject_root: Path) -> list[Path]:
-    source_root = subject_root / "source"
-    if not source_root.is_dir():
-        return []
-    return sorted(source_root.rglob("*.csproj"))
+    project_files: list[Path] = []
+    for project_file in sorted(subject_root.rglob("*.csproj")):
+        if any(part in {"bin", "obj"} for part in project_file.parts):
+            continue
+        project_files.append(project_file)
+    return project_files
 
 
 def _derive_source_model(manifest_path: Path) -> str:
-    source_root = manifest_path.parent / "source"
-    if source_root.is_dir() and any(source_root.rglob("*.sln")):
+    owner_root = manifest_path.parent
+    if any("bin" not in path.parts and "obj" not in path.parts for path in owner_root.rglob("*.sln")):
         return SourceModel.DOTNET_SOLUTION.value
     return SourceModel.DOTNET_PROJECT_SET.value
 
@@ -463,16 +467,14 @@ def normalize_subject_manifest(
 
 
 def discover_subject_manifests(repo_root: Path) -> list[Path]:
-    subject_root = repo_root / "subjects"
-    if not subject_root.is_dir():
-        return []
-
     manifest_paths: list[Path] = []
-    for candidate in subject_root.iterdir():
+    owners_root = verification_layout_module.owners_root(repo_root)
+    if not owners_root.is_dir():
+        return []
+    for candidate in owners_root.iterdir():
         if not candidate.is_dir():
             continue
-
-        manifest_path = candidate / SUBJECT_MANIFEST_NAME
+        manifest_path = candidate / verification_layout_module.OWNER_MANIFEST_NAME
         if manifest_path.is_file():
             manifest_paths.append(manifest_path)
 

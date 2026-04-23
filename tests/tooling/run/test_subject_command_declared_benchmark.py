@@ -141,7 +141,7 @@ class TestSubjectCommandDeclaredBenchmark(SubjectCommandTestSupport):
             benchmark_entry_index=12,
             include_native_proof=False,
         )
-        workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+        workspace_manifest_path = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "workspace.manifest.json"
         workspace_manifest = read_json(workspace_manifest_path)
         workspace_manifest["defaultMatrixId"] = "windows-managed-output"
         managed_project_ids = list(workspace_manifest["matrices"][0]["managedProjectIds"])
@@ -264,7 +264,7 @@ class TestSubjectCommandDeclaredBenchmark(SubjectCommandTestSupport):
             benchmark_entry_index=12,
             include_native_proof=False,
         )
-        workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+        workspace_manifest_path = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "workspace.manifest.json"
         regenerated_calls: list[dict[str, object]] = []
         build_plan = make_build_plan_side_effect(
             observed_selection,
@@ -378,3 +378,4 @@ class TestSubjectCommandDeclaredBenchmark(SubjectCommandTestSupport):
             self.assertEqual("perf.release", result.payload["workspaceExecution"]["goalId"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+

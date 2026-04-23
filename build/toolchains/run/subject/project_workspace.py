@@ -20,6 +20,7 @@ try:
     from ..testing import subject_executor as subject_executor_module
     from ..testing import subject_planner as subject_planner_module
     from ..testing import subjects as subjects_module
+    from ..testing import verification_layout as verification_layout_module
     from ..testing.events import build_event
 except ImportError:
     root = Path(__file__).resolve().parents[1]
@@ -34,6 +35,7 @@ except ImportError:
     from testing import subject_executor as subject_executor_module
     from testing import subject_planner as subject_planner_module
     from testing import subjects as subjects_module
+    from testing import verification_layout as verification_layout_module
     from testing.events import build_event
 
 
@@ -731,11 +733,11 @@ def _write_solution_file(
 
 
 def _subject_workspace_root(repo_root: Path, subject_id: str) -> Path:
-    return repo_root / "solutions" / "subjects" / subject_id
+    return verification_layout_module.subject_workspace_root(repo_root, subject_id)
 
 
 def _subject_workspace_manifest_path(repo_root: Path, subject_id: str) -> Path:
-    return _subject_workspace_root(repo_root, subject_id) / "workspace.manifest.json"
+    return verification_layout_module.subject_workspace_manifest_path(repo_root, subject_id)
 
 
 def _workspace_visual_studio_state_root(workspace_root: Path) -> Path:
@@ -976,19 +978,19 @@ def _reset_stale_visual_studio_state(workspace_root: Path, manifest_path: Path) 
 
 
 def _core_workspace_root(repo_root: Path, host_platform: str) -> Path:
-    return repo_root / "solutions" / "core" / host_platform
+    return verification_layout_module.core_workspace_root(repo_root, host_platform)
 
 
 def _core_workspace_manifest_path(repo_root: Path, host_platform: str) -> Path:
-    return _core_workspace_root(repo_root, host_platform) / "workspace.manifest.json"
+    return verification_layout_module.core_workspace_manifest_path(repo_root, host_platform)
 
 
 def _all_solutions_manifest_path(repo_root: Path) -> Path:
-    return repo_root / "solutions" / "manifest.json"
+    return verification_layout_module.verification_all_manifest_path(repo_root)
 
 
 def _all_solutions_report_path(repo_root: Path) -> Path:
-    return repo_root / "solutions" / "all" / "generation.report.json"
+    return verification_layout_module.verification_all_report_path(repo_root)
 
 
 def _write_all_solutions_outputs(
@@ -1003,6 +1005,7 @@ def _write_all_solutions_outputs(
 ) -> tuple[Path, Path]:
     manifest_path = _all_solutions_manifest_path(repo_root)
     report_path = _all_solutions_report_path(repo_root)
+    solution_path = verification_layout_module.verification_all_solution_path(repo_root)
 
     write_json(
         manifest_path,
@@ -1010,6 +1013,7 @@ def _write_all_solutions_outputs(
             "kind": "all-workspaces",
             "hostPlatform": host_platform,
             "status": status,
+            "solutionPath": _path_text(repo_root, solution_path),
             "subjectWorkspaceManifests": subject_manifest_paths,
             "coreWorkspaceManifest": core_manifest_path,
         },
@@ -1025,6 +1029,47 @@ def _write_all_solutions_outputs(
         },
     )
     return manifest_path, report_path
+
+
+def _load_workspace_manifest_payload(repo_root: Path, manifest_path_text: str) -> dict[str, Any]:
+    manifest_path = repo_root / manifest_path_text
+    payload = read_json(manifest_path)
+    if not isinstance(payload, dict):
+        raise RuntimeError(f"workspace manifest must be an object: {manifest_path}")
+    return payload
+
+
+def _verification_all_solution_paths(
+    repo_root: Path,
+    *,
+    subject_manifest_paths: list[str],
+    core_manifest_path: str,
+) -> tuple[list[str], list[str]]:
+    managed_project_paths: list[str] = []
+    native_project_paths: list[str] = []
+
+    for manifest_path_text in subject_manifest_paths:
+        manifest = _load_workspace_manifest_payload(repo_root, manifest_path_text)
+        managed_project_paths.extend(_manifest_project_paths(list(manifest.get("managedProjects") or [])))
+        managed_project_paths.extend(_manifest_project_paths(list(manifest.get("managedTestProjects") or [])))
+        managed_project_paths.extend(_manifest_project_paths(list(manifest.get("hotupdateTestProjects") or [])))
+        managed_project_paths.extend(_manifest_project_paths(list(manifest.get("hotupdatePatchProjects") or [])))
+        native_project_paths.extend(_manifest_project_paths(list(manifest.get("nativeProjects") or [])))
+        native_project_paths.extend(_manifest_project_paths(list(manifest.get("nativeTestProjects") or [])))
+
+    if core_manifest_path:
+        core_manifest = _load_workspace_manifest_payload(repo_root, core_manifest_path)
+        managed_project_paths.extend(_manifest_project_paths(list(core_manifest.get("managedProjects") or [])))
+        native_targets = [dict(item) for item in list(core_manifest.get("nativeTargets") or []) if isinstance(item, dict)]
+        native_project_paths.extend(
+            _manifest_project_paths(
+                [target.get("projectPath") for target in native_targets if str(target.get("projectPath") or "").strip()]
+            )
+        )
+
+    deduped_managed = _manifest_project_paths(managed_project_paths)
+    deduped_native = _manifest_project_paths(native_project_paths)
+    return deduped_managed, deduped_native
 
 
 def _subject_id_from_options(options: dict[str, object]) -> str:
@@ -2067,13 +2112,9 @@ def _subject_hotupdate_test_projects(
 
 
 def _discover_subject_ids(repo_root: Path, host_platform: str) -> list[str]:
-    subjects_root = repo_root / "subjects"
-    if not subjects_root.is_dir():
-        return []
-
     discovered: list[str] = []
-    for manifest_path in sorted(subjects_root.glob("*/subject.manifest.json")):
-        subject_id = manifest_path.parent.name
+    for manifest_path in subjects_module.discover_subject_manifests(repo_root):
+        subject_id = str(subjects_module.load_subject_manifest_file(manifest_path).get("subjectId") or manifest_path.parent.name)
         try:
             if not _subject_supports_workspace_generation(repo_root, subject_id, host_platform):
                 continue
@@ -2653,6 +2694,18 @@ def generate_all_workspaces(repo_root: Path, host_platform: str, options: dict[s
         for item in list(core_manifest.get("nativeTargets") or [])
         if str(item.get("targetId") or "")
     ]
+    verification_all_solution_path = verification_layout_module.verification_all_solution_path(repo_root)
+    verification_all_managed_projects, verification_all_native_projects = _verification_all_solution_paths(
+        repo_root,
+        subject_manifest_paths=subject_manifest_paths,
+        core_manifest_path=core_manifest_path,
+    )
+    _write_solution_file(
+        verification_all_solution_path,
+        repo_root,
+        verification_all_managed_projects,
+        native_project_paths=verification_all_native_projects,
+    )
     _write_all_solutions_outputs(
         repo_root,
         host_platform=requested_host,
@@ -2668,12 +2721,14 @@ def generate_all_workspaces(repo_root: Path, host_platform: str, options: dict[s
         [
             _path_text(repo_root, manifest_path),
             _path_text(repo_root, report_path),
+            _path_text(repo_root, verification_all_solution_path),
         ]
     )
     important_outputs.extend(
         [
             {"label": "Solutions manifest", "path": _path_text(repo_root, manifest_path)},
             {"label": "Generation report", "path": _path_text(repo_root, report_path)},
+            {"label": "Verification solution", "path": _path_text(repo_root, verification_all_solution_path)},
         ]
     )
     console_text = str(core_outcome.get("consoleText") or "")

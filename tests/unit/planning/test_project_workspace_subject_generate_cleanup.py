@@ -12,8 +12,7 @@ class TestProjectWorkspaceSubjectGenerateCleanup(ProjectWorkspaceTestSupport):
         self._write_subject_fixture(repo_root, subject_id=subject_id)
         stale_host_path = (
             repo_root
-            / "solutions"
-            / "subjects"
+            / "verification" / "workspaces" / "subjects"
             / subject_id
             / "managed-tests"
             / "Generated"
@@ -62,8 +61,7 @@ class TestProjectWorkspaceSubjectGenerateCleanup(ProjectWorkspaceTestSupport):
             self.assertFalse(
                 (
                     repo_root
-                    / "solutions"
-                    / "subjects"
+                    / "verification" / "workspaces" / "subjects"
                     / subject_id
                     / "managed-tests"
                     / f"{subject_id}.DeclaredBenchmarkHost.csproj"
@@ -300,3 +298,4 @@ class TestProjectWorkspaceSubjectGenerateCleanup(ProjectWorkspaceTestSupport):
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+

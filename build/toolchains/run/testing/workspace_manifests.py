@@ -4,12 +4,21 @@ import json
 from pathlib import Path
 from typing import Any
 
+try:
+    from . import verification_layout as verification_layout_module
+except ImportError:
+    import sys
+
+    root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(root))
+    from testing import verification_layout as verification_layout_module
+
 
 WORKSPACE_MANIFEST_VERSION = 2
 
 
 def subject_workspace_manifest_path(repo_root: Path, subject_id: str) -> Path:
-    return repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+    return verification_layout_module.subject_workspace_manifest_path(repo_root, subject_id)
 
 
 def load_subject_workspace_manifest(repo_root: Path, subject_id: str) -> tuple[Path, dict[str, Any]] | None:

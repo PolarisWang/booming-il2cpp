@@ -26,17 +26,17 @@ class TestProjectWorkspaceAll(ProjectWorkspaceTestSupport):
                             {"host": "windows"},
                         )
 
-            self.assertEqual("solutions/manifest.json", result["manifestPath"])
-            aggregate_manifest = json.loads((repo_root / "solutions" / "manifest.json").read_text(encoding="utf-8"))
-            generation_report = json.loads((repo_root / "solutions" / "all" / "generation.report.json").read_text(encoding="utf-8"))
+            self.assertEqual("verification/workspaces/verification-all.manifest.json", result["manifestPath"])
+            aggregate_manifest = json.loads((repo_root / "verification" / "workspaces" / "verification-all.manifest.json").read_text(encoding="utf-8"))
+            generation_report = json.loads((repo_root / "verification" / "workspaces" / "verification-all.generation.report.json").read_text(encoding="utf-8"))
             self.assertEqual("all-workspaces", aggregate_manifest["kind"])
             self.assertEqual("windows", aggregate_manifest["hostPlatform"])
             self.assertEqual(
-                ["solutions/subjects/FixtureSubject/workspace.manifest.json"],
+                ["verification/workspaces/subjects/FixtureSubject/workspace.manifest.json"],
                 aggregate_manifest["subjectWorkspaceManifests"],
             )
             self.assertEqual(
-                "solutions/core/windows/workspace.manifest.json",
+                "verification/workspaces/core/windows/workspace.manifest.json",
                 aggregate_manifest["coreWorkspaceManifest"],
             )
             self.assertEqual(["FixtureSubject"], generation_report["generatedSubjectIds"])
@@ -62,8 +62,8 @@ class TestProjectWorkspaceAll(ProjectWorkspaceTestSupport):
                 **kwargs: object,
             ) -> dict[str, object]:
                 del subject_host_platform, options
-                aggregate_manifest_path = subject_repo_root / "solutions" / "manifest.json"
-                generation_report_path = subject_repo_root / "solutions" / "all" / "generation.report.json"
+                aggregate_manifest_path = subject_repo_root / "verification" / "workspaces" / "verification-all.manifest.json"
+                generation_report_path = subject_repo_root / "verification" / "workspaces" / "verification-all.generation.report.json"
 
                 self.assertTrue(aggregate_manifest_path.is_file())
                 self.assertTrue(generation_report_path.is_file())
@@ -77,11 +77,11 @@ class TestProjectWorkspaceAll(ProjectWorkspaceTestSupport):
                 self.assertEqual([], generation_report["generatedSubjectIds"])
                 self.assertEqual([], generation_report["generatedCoreTargets"])
 
-                subject_manifest_path = subject_repo_root / "solutions" / "subjects" / "FixtureSubject" / "workspace.manifest.json"
+                subject_manifest_path = subject_repo_root / "verification" / "workspaces" / "subjects" / "FixtureSubject" / "workspace.manifest.json"
                 write_json(subject_manifest_path, {"kind": "subject-workspace"})
                 return {
-                    "manifestPath": "solutions/subjects/FixtureSubject/workspace.manifest.json",
-                    "artifacts": ["solutions/subjects/FixtureSubject/workspace.manifest.json"],
+                    "manifestPath": "verification/workspaces/subjects/FixtureSubject/workspace.manifest.json",
+                    "artifacts": ["verification/workspaces/subjects/FixtureSubject/workspace.manifest.json"],
                     "importantOutputs": [],
                     "consoleText": "",
                 }
@@ -93,7 +93,7 @@ class TestProjectWorkspaceAll(ProjectWorkspaceTestSupport):
                 **kwargs: object,
             ) -> dict[str, object]:
                 del core_host_platform, options
-                core_manifest_path = core_repo_root / "solutions" / "core" / "windows" / "workspace.manifest.json"
+                core_manifest_path = core_repo_root / "verification" / "workspaces" / "core" / "windows" / "workspace.manifest.json"
                 write_json(
                     core_manifest_path,
                     {
@@ -102,8 +102,8 @@ class TestProjectWorkspaceAll(ProjectWorkspaceTestSupport):
                     },
                 )
                 return {
-                    "manifestPath": "solutions/core/windows/workspace.manifest.json",
-                    "artifacts": ["solutions/core/windows/workspace.manifest.json"],
+                    "manifestPath": "verification/workspaces/core/windows/workspace.manifest.json",
+                    "artifacts": ["verification/workspaces/core/windows/workspace.manifest.json"],
                     "importantOutputs": [],
                     "consoleText": "",
                 }
@@ -116,16 +116,16 @@ class TestProjectWorkspaceAll(ProjectWorkspaceTestSupport):
                         {"host": "windows"},
                     )
 
-            self.assertEqual("solutions/manifest.json", result["manifestPath"])
-            aggregate_manifest = json.loads((repo_root / "solutions" / "manifest.json").read_text(encoding="utf-8"))
-            generation_report = json.loads((repo_root / "solutions" / "all" / "generation.report.json").read_text(encoding="utf-8"))
+            self.assertEqual("verification/workspaces/verification-all.manifest.json", result["manifestPath"])
+            aggregate_manifest = json.loads((repo_root / "verification" / "workspaces" / "verification-all.manifest.json").read_text(encoding="utf-8"))
+            generation_report = json.loads((repo_root / "verification" / "workspaces" / "verification-all.generation.report.json").read_text(encoding="utf-8"))
             self.assertEqual("completed", aggregate_manifest["status"])
             self.assertEqual("completed", generation_report["status"])
             self.assertEqual(
-                ["solutions/subjects/FixtureSubject/workspace.manifest.json"],
+                ["verification/workspaces/subjects/FixtureSubject/workspace.manifest.json"],
                 aggregate_manifest["subjectWorkspaceManifests"],
             )
-            self.assertEqual("solutions/core/windows/workspace.manifest.json", aggregate_manifest["coreWorkspaceManifest"])
+            self.assertEqual("verification/workspaces/core/windows/workspace.manifest.json", aggregate_manifest["coreWorkspaceManifest"])
             self.assertEqual(["FixtureSubject"], generation_report["generatedSubjectIds"])
             self.assertEqual(["windows-x64-reference"], generation_report["generatedCoreTargets"])
         finally:
@@ -193,8 +193,8 @@ class TestProjectWorkspaceAll(ProjectWorkspaceTestSupport):
                             {"host": "windows"},
                         )
 
-            self.assertEqual("solutions/manifest.json", result["manifestPath"])
-            self.assertTrue((repo_root / "solutions" / "manifest.json").is_file())
+            self.assertEqual("verification/workspaces/verification-all.manifest.json", result["manifestPath"])
+            self.assertTrue((repo_root / "verification" / "workspaces" / "verification-all.manifest.json").is_file())
             refresh_mock.assert_called_once()
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
@@ -224,11 +224,11 @@ class TestProjectWorkspaceAll(ProjectWorkspaceTestSupport):
                         )
 
             aggregate_manifest = json.loads((repo_root / result["manifestPath"]).read_text(encoding="utf-8"))
-            generation_report = json.loads((repo_root / "solutions" / "all" / "generation.report.json").read_text(encoding="utf-8"))
+            generation_report = json.loads((repo_root / "verification" / "workspaces" / "verification-all.generation.report.json").read_text(encoding="utf-8"))
             self.assertEqual(
                 [
-                    "solutions/subjects/FixtureSubject/workspace.manifest.json",
-                    "solutions/subjects/ManagedOnlySubject/workspace.manifest.json",
+                    "verification/workspaces/subjects/FixtureSubject/workspace.manifest.json",
+                    "verification/workspaces/subjects/ManagedOnlySubject/workspace.manifest.json",
                 ],
                 aggregate_manifest["subjectWorkspaceManifests"],
             )
@@ -260,11 +260,14 @@ class TestProjectWorkspaceAll(ProjectWorkspaceTestSupport):
                         )
 
             aggregate_manifest = json.loads((repo_root / result["manifestPath"]).read_text(encoding="utf-8"))
-            generation_report = json.loads((repo_root / "solutions" / "all" / "generation.report.json").read_text(encoding="utf-8"))
+            generation_report = json.loads((repo_root / "verification" / "workspaces" / "verification-all.generation.report.json").read_text(encoding="utf-8"))
             self.assertEqual(
-                ["solutions/subjects/FixtureSubject/workspace.manifest.json"],
+                ["verification/workspaces/subjects/FixtureSubject/workspace.manifest.json"],
                 aggregate_manifest["subjectWorkspaceManifests"],
             )
             self.assertEqual(["FixtureSubject"], generation_report["generatedSubjectIds"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+
+
+

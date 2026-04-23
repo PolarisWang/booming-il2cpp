@@ -12,6 +12,7 @@ try:
     from . import compiled_catalog as compiled_catalog_module
     from . import declared_metadata_labels as declared_metadata_labels_module
     from . import subjects as subjects_module
+    from . import verification_layout as verification_layout_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
@@ -20,6 +21,7 @@ except ImportError:
     from testing import compiled_catalog as compiled_catalog_module
     from testing import declared_metadata_labels as declared_metadata_labels_module
     from testing import subjects as subjects_module
+    from testing import verification_layout as verification_layout_module
 
 
 SUBJECT_EXECUTION_OBJECT_TYPES = {
@@ -301,8 +303,17 @@ def _load_system_manifest(path: Path) -> dict[str, Any]:
 
 def _load_subject_manifest(path: Path) -> dict[str, Any]:
     payload = subjects_module.load_subject_manifest_file(path)
-    if path.parent.parent.name != "subjects":
-        raise ValueError("subject manifest path must be subjects/<subject>/subject.manifest.json")
+    if not (
+        path.parent.parent.name == "subjects"
+        or (
+            path.parent.parent.name == "owners"
+            and path.parent.parent.parent.name == "catalog"
+            and path.parent.parent.parent.parent.name == verification_layout_module.VERIFICATION_ROOT_NAME
+        )
+    ):
+        raise ValueError(
+            "subject manifest path must be verification/catalog/owners/<subject>/owner.manifest.json"
+        )
 
     subject_id = _require_string(payload, "subjectId")
     if path.parent.name != subject_id:
@@ -963,7 +974,9 @@ def scan_registry(
         canonical_parts=("tests", "fixtures", "registry", "systems"),
     )
     suites = _suite_items(host_platform, public_suite_specs)
-    subjects, subject_errors = _scan_directory(repo_root / "subjects", subjects_module.SUBJECT_MANIFEST_NAME, _load_subject_manifest)
+    subjects_root = verification_layout_module.owners_root(repo_root)
+    subject_pattern = subjects_module.SUBJECT_MANIFEST_NAME
+    subjects, subject_errors = _scan_directory(subjects_root, subject_pattern, _load_subject_manifest)
     modules, module_errors = _scan_directory(modules_root, "verification.manifest.json", _load_module_manifest)
     systems, system_errors = _scan_directory(systems_root, "scenario.manifest.json", _load_system_manifest)
     subjects = _exclude_deprecated(subjects)

@@ -15,7 +15,7 @@
 正式验证层固定使用以下目录：
 
 ```text
-docs/testing-inventory/verification/
+verification/archive/
   latest/
     closure-snapshot.json
     capability-snapshot.json
@@ -471,7 +471,7 @@ Projection 默认遵守以下规则：
 - `unit-test-inventory` 的 `header + hint` 模型
 - `benchmark-inventory` 的中文 tooltip 模型
 - `inventory.html` 作为组合 projection 容器
-- `docs/benchmark/overview.json` 中“平台、subject、模式、设备”四层可读汇总
+- `verification/projections/benchmark/overview.json` 中“平台、subject、模式、设备”四层可读汇总
 
 ### 8.2 需要收敛的点
 

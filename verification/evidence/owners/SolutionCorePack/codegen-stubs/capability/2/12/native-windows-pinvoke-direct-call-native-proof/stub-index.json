@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-04-23T21:56:32.256663Z",
+  "producerId": "verification-v1",
+  "sourceSpecVersion": "verification-v1",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityId": "capability/2/12",
+  "routeCode": "native",
+  "profileCode": "windows-pinvoke-direct-call-native-proof",
+  "mergeKey": "SolutionCorePack|capability/2/12|native|windows-pinvoke-direct-call-native-proof",
+  "managedSourceRefs": [
+    {
+      "kind": "managed-source",
+      "path": "verification/catalog/owners/SolutionCorePack",
+      "label": "CoreRuntimeFeatures/GenericCollectionProofEntry::Run()",
+      "hash": ""
+    },
+    {
+      "kind": "managed-source",
+      "path": "verification/catalog/owners/SolutionCorePack",
+      "label": "CoreRuntimeBenchmarks/GenericBenchmarkEntry::RunWorkload()",
+      "hash": ""
+    }
+  ],
+  "stubRefs": [
+    {
+      "kind": "stub-dir",
+      "path": "verification/evidence/owners/SolutionCorePack/codegen-stubs/windows-pinvoke-direct-call-native-proof",
+      "label": "windows-pinvoke-direct-call-native-proof",
+      "hash": ""
+    }
+  ],
+  "generatedFromEvidenceIds": [
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericCollectionProofEntry::Run()/native-proof"
+  ]
+}

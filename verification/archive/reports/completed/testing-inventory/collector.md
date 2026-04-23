@@ -1,0 +1,161 @@
+# Verification Stage Report: collector
+
+- stageId: collector
+- stageKind: collector
+- closureId: closure/completed/testing-inventory
+- scopeCode: testing-inventory
+- verificationState: passed
+- supportState: supported
+
+## Covered Obligations
+- obligation/13/54
+- obligation/13/57
+- obligation/13/56
+- obligation/13/60
+- obligation/13/58
+- obligation/13/55
+- obligation/13/59
+- obligation/14/63
+- obligation/14/62
+- obligation/14/66
+- obligation/14/65
+- obligation/14/61
+- obligation/14/64
+- obligation/9/39
+- obligation/12/53
+- obligation/1/1
+- obligation/1/7
+- obligation/2/68
+- obligation/1/6
+- obligation/3/14
+- obligation/1/2
+- obligation/1/3
+- obligation/2/67
+- obligation/1/4
+- obligation/5/30
+- obligation/6/21
+- obligation/7/34
+- obligation/4/18
+- obligation/4/17
+- obligation/2/10
+- obligation/4/20
+- obligation/5/27
+- obligation/5/29
+- obligation/10/46
+- obligation/9/40
+- obligation/2/12
+- obligation/2/9
+- obligation/2/8
+- obligation/2/13
+- obligation/12/52
+- obligation/2/11
+- obligation/3/16
+- obligation/4/19
+- obligation/6/25
+- obligation/6/26
+- obligation/9/42
+- obligation/7/32
+- obligation/6/22
+- obligation/6/23
+- obligation/8/37
+- obligation/7/31
+- obligation/5/28
+- obligation/1/5
+- obligation/10/44
+- obligation/6/24
+- obligation/12/51
+- obligation/9/41
+- obligation/10/43
+- obligation/7/33
+- obligation/3/15
+- obligation/8/36
+- obligation/8/38
+- obligation/8/35
+- obligation/10/45
+
+## Success Evidence
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/collector
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MetadataSupplementProofEntry::Run()/collector
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementProofEntry::Run()/collector
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchCallbackFlowProofEntry::Run()/collector
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchIntegrityProofEntry::Run()/collector
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.SharedContractProofEntry::Run()/collector
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.VersionRollbackProofEntry::Run()/collector
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/collector
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()/collector
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()/collector
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExceptionFlowProofEntry::Run()/collector
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()/collector
+- evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayBoxingProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayCovarianceProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayOpsProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AsyncAwaitProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.BitwiseOpsProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.BoxedStructFieldReadProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.BranchOpsProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CastTypeCheckProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ConversionOpsProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CrossBoundaryExceptionProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CustomAttributeLookupProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateCallbackInteropProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateChainProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DirectCallVirtProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DispatchProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.EventCallbackFlowProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ExceptionCatchProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ExceptionProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.FinallyAndFilterProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.FunctionPointerProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GcSensitiveFlowProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericCollectionProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericConstraintProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericInstantiationProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericLayoutProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericSharingBoundaryProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.IntegerCarrierProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.InterfaceDispatchProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.IteratorStateMachineProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.LambdaClosureCaptureProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.LinkerPreserveContractProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.LinkerStrippingProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.LoaderContractProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MarshalingProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MemberMetadataLookupProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MetadataSupplementProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MonitorAndLockingProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.NativeCallInteropProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.NestedExceptionProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ObjectFieldProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ObjectReturnProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.OverflowOpsProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RefStructAndStackallocProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ReflectionInteropClosureEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RequiredInstantiationClosureProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ResourceLifecycleProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RuntimeHelpersProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.SpanAndMemoryProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.StructMarshalingProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskAndValueTaskFlowProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.TaskSchedulingProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadLocalStateProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UInt64BitwiseProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UnsafePointerProofEntry::Run()/collector
+- evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()/collector
+
+## Failed Evidence
+- n/a
+
+## Blocked Evidence
+- n/a
+
+## Missing Claims
+- n/a
+
+## Blockers
+- n/a

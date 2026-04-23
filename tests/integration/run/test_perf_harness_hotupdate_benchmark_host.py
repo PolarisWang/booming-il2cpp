@@ -18,8 +18,7 @@ HARNESS_PROJECT_PATH = (
 )
 HOTUPDATE_BENCHMARK_HOST_PROJECT_PATH = (
     REPO_ROOT
-    / "solutions"
-    / "subjects"
+    / "verification" / "workspaces" / "subjects"
     / "HotUpdateHostPack"
     / "hotupdate-tests"
     / "HotUpdateHostPack.HotUpdateBenchmarkHost.csproj"
@@ -53,8 +52,7 @@ HOTUPDATE_SHARED_CONTRACTS_PROJECT_PATH = (
 )
 COLLECTION_PATH = (
     REPO_ROOT
-    / "solutions"
-    / "subjects"
+    / "verification" / "workspaces" / "subjects"
     / "HotUpdateHostPack"
     / "hotupdate-tests"
     / "Generated"
@@ -62,8 +60,7 @@ COLLECTION_PATH = (
 )
 BINDING_MANIFEST_PATH = (
     REPO_ROOT
-    / "solutions"
-    / "subjects"
+    / "verification" / "workspaces" / "subjects"
     / "HotUpdateHostPack"
     / "hotupdate-tests"
     / "Generated"
@@ -186,3 +183,4 @@ class PerfHarnessHotUpdateBenchmarkHostIntegrationTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

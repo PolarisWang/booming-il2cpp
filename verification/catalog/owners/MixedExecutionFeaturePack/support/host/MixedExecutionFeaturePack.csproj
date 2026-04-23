@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>MixedExecutionFeaturePack</AssemblyName>
+    <RootNamespace>MixedExecutionFeaturePack</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\\..\\proofs\\**\\*.cs" />
+    <Compile Include="..\\..\\benchmarks\\**\\*.cs" />
+    <Compile Include="..\\interpreter\\**\\*.cs" />
+    <ProjectReference Include="..\\..\\..\\..\\..\\..\\src\\reference\\Chaos.TestFramework.Sdk\\Chaos.TestFramework.Sdk.csproj" />
+    <ProjectReference Include="..\\..\\..\\..\\..\\..\\src\\managed\\Chaos.IL2CPP.Contracts\\Chaos.IL2CPP.Contracts.csproj" />
+    <ProjectReference Include="..\\..\\..\\..\\..\\..\\src\\managed\\Chaos.IL2CPP.HotUpdate\\Chaos.IL2CPP.HotUpdate.csproj" />
+    <ProjectReference Include="..\\..\\..\\..\\..\\..\\src\\managed\\Chaos.IL2CPP.Loader\\Chaos.IL2CPP.Loader.csproj" />
+    <ProjectReference Include="..\\..\\..\\..\\..\\..\\src\\managed\\Chaos.IL2CPP.Interpreter\\Chaos.IL2CPP.Interpreter.csproj" />
+    <ProjectReference Include="..\\..\\..\\scenarios\\MixedExecutionFeaturePack\\MixedBridgeSolution\\InterpreterArithmeticProof\\InterpreterArithmeticProof.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="MixedExecutionFeaturePack.DeclaredBenchmarkNativeHost" />
+  </ItemGroup>
+</Project>
+

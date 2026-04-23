@@ -6,7 +6,7 @@ Commands:
     run benchmark --dashboard [--open]
     run benchmark status [--subject <id>] [--all]
 
-After each --record run, docs/benchmark/ is automatically updated.
+After each --record run, verification/projections/benchmark/ is automatically updated.
 """
 from __future__ import annotations
 
@@ -20,11 +20,13 @@ from typing import Any
 
 try:
     from ..testing import workspace_declared_collection as workspace_declared_collection_module
+    from ..testing import verification_layout as verification_layout_module
 except ImportError:
     run_root = Path(__file__).resolve().parents[1]
     if str(run_root) not in sys.path:
         sys.path.insert(0, str(run_root))
     from testing import workspace_declared_collection as workspace_declared_collection_module
+    from testing import verification_layout as verification_layout_module
 
 _MODE_ORDER = ("managed", "native", "interpreter")
 _BENCHMARK_MODE_FLAGS = {
@@ -1071,10 +1073,10 @@ def dispatch(args: list[str], repo_root: Path, host_platform: str) -> int:
                     if case_result.get("regressionFound"):
                         regression_found = True
 
-            # Update docs/benchmark/ after each subject
+            # Update verification/projections/benchmark/ after each subject
             try:
                 dash_mod.update_docs(repo_root, subject_id=sid)
-                print(f"  鈫?docs/benchmark/ updated")
+                print(f"  -> verification/projections/benchmark/ updated")
             except Exception as e:
                 print(f"  鈿?dashboard update failed: {e}")
 
@@ -1082,7 +1084,7 @@ def dispatch(args: list[str], repo_root: Path, host_platform: str) -> int:
             print("Benchmark execution failed; some runs did not generate records.")
             return 2
         if regression_found:
-            print("Benchmark records generated; regression verdict found. Review docs/benchmark/dashboard.html for details.")
+            print("Benchmark records generated; regression verdict found. Review verification/projections/benchmark/dashboard.html for details.")
             return 0
         print("Benchmark records generated without execution errors.")
         return 0
@@ -1112,7 +1114,7 @@ def _run_pipeline_and_record(
     All modes flow through the subject planner/executor pipeline so the same
     workload contract is consumed by managed, native and interpreter benchmarks.
     """
-    manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+    manifest_path = verification_layout_module.owner_manifest_path(repo_root, subject_id)
     if not manifest_path.exists():
         return {"error": f"subject not found: {subject_id}"}
 

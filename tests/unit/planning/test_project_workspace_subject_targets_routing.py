@@ -106,7 +106,7 @@ class TestProjectWorkspaceSubjectTargetsRouting(ProjectWorkspaceTestSupport):
                 proof_native_test_project["managedTestProjectId"],
             )
             self.assertEqual(
-                "solutions/subjects/FixtureSubject/native/windows-dev-output/proof/chaos_subject_native_aot.vcxproj",
+                "verification/workspaces/subjects/FixtureSubject/native/windows-dev-output/proof/chaos_subject_native_aot.vcxproj",
                 proof_native_test_project["projectPath"],
             )
             self.assertTrue((repo_root / proof_native_test_project["projectPath"]).is_file())
@@ -211,7 +211,7 @@ class TestProjectWorkspaceSubjectTargetsRouting(ProjectWorkspaceTestSupport):
                 benchmark_native_test_project["managedTestProjectId"],
             )
             self.assertEqual(
-                "solutions/subjects/FixtureSubject/native/windows-dev-output/benchmark/chaos_subject_native_aot.vcxproj",
+                "verification/workspaces/subjects/FixtureSubject/native/windows-dev-output/benchmark/chaos_subject_native_aot.vcxproj",
                 benchmark_native_test_project["projectPath"],
             )
             self.assertTrue((repo_root / benchmark_native_test_project["projectPath"]).is_file())
@@ -223,7 +223,7 @@ class TestProjectWorkspaceSubjectTargetsRouting(ProjectWorkspaceTestSupport):
         repo_root = self._make_repo_root("subject-clear-stale-vs-state")
         self._write_subject_fixture(repo_root)
         completed = subprocess.CompletedProcess(["cmake"], 0, "", "")
-        workspace_root = repo_root / "solutions" / "subjects" / "FixtureSubject"
+        workspace_root = repo_root / "verification" / "workspaces" / "subjects" / "FixtureSubject"
         stale_vs_state_file = workspace_root / ".vs" / "FixtureSubject" / "v17" / ".suo"
         stale_vs_state_file.parent.mkdir(parents=True, exist_ok=True)
         stale_vs_state_file.write_text("stale\n", encoding="utf-8")
@@ -259,3 +259,5 @@ class TestProjectWorkspaceSubjectTargetsRouting(ProjectWorkspaceTestSupport):
             self.assertNotIn("visualStudioStateVersion", updated_manifest)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+
+

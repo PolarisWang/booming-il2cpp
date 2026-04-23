@@ -46,7 +46,7 @@
 
 ## 约束
 
-- `Verification V1` 的 formal source 只认 `docs/testing-inventory/verification/` 与 `subjects/<OwnerPack>/verification/codegen-stubs/`。
+- `Verification V1` 的 formal source 只认 `verification/archive/` 与 `verification/evidence/owners/<OwnerPack>/codegen-stubs/`。
 - `artifacts/` 只放临时过程产物。
 - 不使用 `run-id` 作为 formal 归档目录。
 - `supportState` 与 `verificationState` 必须分离。

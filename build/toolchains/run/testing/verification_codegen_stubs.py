@@ -7,10 +7,12 @@ import sys
 
 try:
     from ..core.common import write_json
+    from . import verification_layout as verification_layout_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from core.common import write_json
+    from testing import verification_layout as verification_layout_module
 
 
 def _utc_timestamp() -> str:
@@ -47,9 +49,10 @@ def codegen_stub_relative_dir(
     if _string(profile_code):
         route_segment = f"{route_segment}-{_string(profile_code)}"
     return Path(
-        "subjects",
+        verification_layout_module.VERIFICATION_ROOT_NAME,
+        "evidence",
+        "owners",
         _string(owner_subject_id),
-        "verification",
         "codegen-stubs",
         _string(capability_id),
         route_segment,

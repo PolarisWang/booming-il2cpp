@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-04-23T21:56:32.258667Z",
+  "producerId": "verification-v1",
+  "sourceSpecVersion": "verification-v1",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityId": "capability/9/42",
+  "routeCode": "native",
+  "profileCode": "windows-native-check",
+  "mergeKey": "SolutionCorePack|capability/9/42|native|windows-native-check",
+  "managedSourceRefs": [
+    {
+      "kind": "managed-source",
+      "path": "verification/catalog/owners/SolutionCorePack",
+      "label": "CoreRuntimeFeatures/LoaderContractProofEntry::Run()",
+      "hash": ""
+    }
+  ],
+  "stubRefs": [
+    {
+      "kind": "stub-dir",
+      "path": "verification/evidence/owners/SolutionCorePack/codegen-stubs/windows-native-check",
+      "label": "windows-native-check",
+      "hash": ""
+    }
+  ],
+  "generatedFromEvidenceIds": [
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.LoaderContractProofEntry::Run()/native-proof"
+  ]
+}

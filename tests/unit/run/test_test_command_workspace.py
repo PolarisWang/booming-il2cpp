@@ -79,7 +79,7 @@ class TestCommandWorkspaceTests(unittest.TestCase):
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_test_command_workspace_regeneration")
         repo_root = self._make_repo_root("workspace-regeneration")
         subject_id = "FixtureSubject"
-        workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+        workspace_manifest_path = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "workspace.manifest.json"
         selected_object = {
             "type": "declared-unit-test",
             "subjectId": subject_id,
@@ -130,7 +130,7 @@ class TestCommandWorkspaceTests(unittest.TestCase):
                     encoding="utf-8",
                 )
                 return {
-                    "manifestPath": f"solutions/subjects/{subject_id}/workspace.manifest.json",
+                    "manifestPath": f"verification/workspaces/subjects/{subject_id}/workspace.manifest.json",
                 }
 
             with patch.object(
@@ -156,8 +156,8 @@ class TestCommandWorkspaceTests(unittest.TestCase):
         repo_root = self._make_repo_root("workspace-missing-declared-entry")
         subject_id = "FixtureSubject"
         stable_id = f"{subject_id}::{subject_id}::{subject_id}.Proofs::Run()"
-        workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
-        collection_path = repo_root / "solutions" / "subjects" / subject_id / "managed-tests" / "Generated" / "declared-tests.collection.json"
+        workspace_manifest_path = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "workspace.manifest.json"
+        collection_path = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "managed-tests" / "Generated" / "declared-tests.collection.json"
         selected_object = {
             "type": "declared-unit-test",
             "subjectId": subject_id,
@@ -176,11 +176,11 @@ class TestCommandWorkspaceTests(unittest.TestCase):
             "managedTestProjects": [
                 {
                     "projectId": f"managed-test/{subject_id}/proof-host",
-                    "projectPath": f"solutions/subjects/{subject_id}/managed-tests/{subject_id}.DeclaredProofHost.csproj",
+                    "projectPath": f"verification/workspaces/subjects/{subject_id}/managed-tests/{subject_id}.DeclaredProofHost.csproj",
                     "assemblyName": f"{subject_id}.DeclaredProofHost",
                     "hostKind": "proof-host",
-                    "collectionPath": f"solutions/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json",
-                    "generatedSourcePath": f"solutions/subjects/{subject_id}/managed-tests/Generated/ChaosGeneratedDeclaredTests.g.cs",
+                    "collectionPath": f"verification/workspaces/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json",
+                    "generatedSourcePath": f"verification/workspaces/subjects/{subject_id}/managed-tests/Generated/ChaosGeneratedDeclaredTests.g.cs",
                 }
             ],
             "matrices": [
@@ -241,7 +241,7 @@ class TestCommandWorkspaceTests(unittest.TestCase):
 
             self.assertEqual(5, execution["entryIndex"])
             self.assertEqual(
-                f"solutions/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json",
+                f"verification/workspaces/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json",
                 execution["collectionPath"],
             )
             regenerate_mock.assert_called_once()
@@ -253,8 +253,8 @@ class TestCommandWorkspaceTests(unittest.TestCase):
         repo_root = self._make_repo_root("workspace-hotupdate-host")
         subject_id = "FixtureSubject"
         stable_id = f"{subject_id}::FixturePatch::FixturePatch.Proofs::Run()"
-        workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
-        hotupdate_collection_path = repo_root / "solutions" / "subjects" / subject_id / "hotupdate-tests" / "Generated" / "declared-tests.collection.json"
+        workspace_manifest_path = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "workspace.manifest.json"
+        hotupdate_collection_path = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "hotupdate-tests" / "Generated" / "declared-tests.collection.json"
         selected_object = {
             "type": "declared-unit-test",
             "subjectId": subject_id,
@@ -274,22 +274,22 @@ class TestCommandWorkspaceTests(unittest.TestCase):
             "managedTestProjects": [
                 {
                     "projectId": f"managed-test/{subject_id}/proof-host",
-                    "projectPath": f"solutions/subjects/{subject_id}/managed-tests/{subject_id}.DeclaredProofHost.csproj",
+                    "projectPath": f"verification/workspaces/subjects/{subject_id}/managed-tests/{subject_id}.DeclaredProofHost.csproj",
                     "assemblyName": f"{subject_id}.DeclaredProofHost",
                     "hostKind": "proof-host",
-                    "collectionPath": f"solutions/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json",
-                    "generatedSourcePath": f"solutions/subjects/{subject_id}/managed-tests/Generated/ChaosGeneratedDeclaredTests.g.cs",
+                    "collectionPath": f"verification/workspaces/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json",
+                    "generatedSourcePath": f"verification/workspaces/subjects/{subject_id}/managed-tests/Generated/ChaosGeneratedDeclaredTests.g.cs",
                 }
             ],
             "hotupdateTestProjects": [
                 {
                     "projectId": f"hotupdate-test/{subject_id}/proof-host",
-                    "projectPath": f"solutions/subjects/{subject_id}/hotupdate-tests/{subject_id}.HotUpdateProofHost.csproj",
+                    "projectPath": f"verification/workspaces/subjects/{subject_id}/hotupdate-tests/{subject_id}.HotUpdateProofHost.csproj",
                     "assemblyName": f"{subject_id}.HotUpdateProofHost",
                     "hostKind": "proof-host",
-                    "collectionPath": f"solutions/subjects/{subject_id}/hotupdate-tests/Generated/declared-tests.collection.json",
-                    "bindingManifestPath": f"solutions/subjects/{subject_id}/hotupdate-tests/Generated/declared-tests.binding.json",
-                    "generatedSourcePath": f"solutions/subjects/{subject_id}/hotupdate-tests/Generated/ChaosGeneratedHotUpdateProofHost.g.cs",
+                    "collectionPath": f"verification/workspaces/subjects/{subject_id}/hotupdate-tests/Generated/declared-tests.collection.json",
+                    "bindingManifestPath": f"verification/workspaces/subjects/{subject_id}/hotupdate-tests/Generated/declared-tests.binding.json",
+                    "generatedSourcePath": f"verification/workspaces/subjects/{subject_id}/hotupdate-tests/Generated/ChaosGeneratedHotUpdateProofHost.g.cs",
                 }
             ],
             "matrices": [
@@ -328,11 +328,11 @@ class TestCommandWorkspaceTests(unittest.TestCase):
             )
 
             self.assertEqual(
-                f"solutions/subjects/{subject_id}/hotupdate-tests/Generated/declared-tests.collection.json",
+                f"verification/workspaces/subjects/{subject_id}/hotupdate-tests/Generated/declared-tests.collection.json",
                 execution["collectionPath"],
             )
             self.assertEqual(
-                f"solutions/subjects/{subject_id}/hotupdate-tests/Generated/declared-tests.binding.json",
+                f"verification/workspaces/subjects/{subject_id}/hotupdate-tests/Generated/declared-tests.binding.json",
                 execution["bindingManifestPath"],
             )
             self.assertEqual(f"hotupdate-test/{subject_id}/proof-host", execution["managedTestProject"]["projectId"])
@@ -343,3 +343,5 @@ class TestCommandWorkspaceTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+

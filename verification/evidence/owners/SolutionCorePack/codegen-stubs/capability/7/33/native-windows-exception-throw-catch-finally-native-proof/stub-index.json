@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-04-23T21:56:32.257664Z",
+  "producerId": "verification-v1",
+  "sourceSpecVersion": "verification-v1",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityId": "capability/7/33",
+  "routeCode": "native",
+  "profileCode": "windows-exception-throw-catch-finally-native-proof",
+  "mergeKey": "SolutionCorePack|capability/7/33|native|windows-exception-throw-catch-finally-native-proof",
+  "managedSourceRefs": [
+    {
+      "kind": "managed-source",
+      "path": "verification/catalog/owners/SolutionCorePack",
+      "label": "CoreRuntimeFeatures/StructMarshalingProofEntry::Run()",
+      "hash": ""
+    },
+    {
+      "kind": "managed-source",
+      "path": "verification/catalog/owners/SolutionCorePack",
+      "label": "CoreRuntimeBenchmarks/StructMarshalingBenchmarkEntry::RunWorkload()",
+      "hash": ""
+    }
+  ],
+  "stubRefs": [
+    {
+      "kind": "stub-dir",
+      "path": "verification/evidence/owners/SolutionCorePack/codegen-stubs/windows-exception-throw-catch-finally-native-proof",
+      "label": "windows-exception-throw-catch-finally-native-proof",
+      "hash": ""
+    }
+  ],
+  "generatedFromEvidenceIds": [
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.StructMarshalingProofEntry::Run()/native-proof"
+  ]
+}

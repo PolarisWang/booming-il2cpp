@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-04-23T21:56:32.255663Z",
+  "producerId": "verification-v1",
+  "sourceSpecVersion": "verification-v1",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityId": "capability/1/2",
+  "routeCode": "native",
+  "profileCode": "windows-exception-throw-catch-finally-native-proof",
+  "mergeKey": "SolutionCorePack|capability/1/2|native|windows-exception-throw-catch-finally-native-proof",
+  "managedSourceRefs": [
+    {
+      "kind": "managed-source",
+      "path": "verification/catalog/owners/SolutionCorePack",
+      "label": "CoreRuntimeFeatures/BitwiseOpsProofEntry::Run()",
+      "hash": ""
+    },
+    {
+      "kind": "managed-source",
+      "path": "verification/catalog/owners/SolutionCorePack",
+      "label": "CoreRuntimeFeatures/UInt64BitwiseProofEntry::Run()",
+      "hash": ""
+    },
+    {
+      "kind": "managed-source",
+      "path": "verification/catalog/owners/SolutionCorePack",
+      "label": "CoreRuntimeBenchmarks/ShiftOpsBenchmarkEntry::RunWorkload()",
+      "hash": ""
+    },
+    {
+      "kind": "managed-source",
+      "path": "verification/catalog/owners/SolutionCorePack",
+      "label": "CoreRuntimeBenchmarks/UInt64BitwiseBenchmarkEntry::RunWorkload()",
+      "hash": ""
+    }
+  ],
+  "stubRefs": [
+    {
+      "kind": "stub-dir",
+      "path": "verification/evidence/owners/SolutionCorePack/codegen-stubs/windows-exception-throw-catch-finally-native-proof",
+      "label": "windows-exception-throw-catch-finally-native-proof",
+      "hash": ""
+    }
+  ],
+  "generatedFromEvidenceIds": [
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.BitwiseOpsProofEntry::Run()/native-proof",
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UInt64BitwiseProofEntry::Run()/native-proof"
+  ]
+}

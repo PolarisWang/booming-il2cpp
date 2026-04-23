@@ -8,10 +8,12 @@ import sys
 
 try:
     from . import declared_metadata_labels as declared_metadata_labels_module
+    from . import verification_layout as verification_layout_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from testing import declared_metadata_labels as declared_metadata_labels_module
+    from testing import verification_layout as verification_layout_module
 
 
 class BodyAvailabilityCode(IntEnum):
@@ -61,7 +63,7 @@ def _normalize_repo_root(repo_root: Path | str | None) -> Path:
 
 
 def _subject_features_root(repo_root: Path) -> Path:
-    return repo_root / "subjects"
+    return verification_layout_module.owners_root(repo_root)
 
 
 def _cache_key(repo_root: Path) -> str:
@@ -104,15 +106,21 @@ def _load_feature_contracts(repo_root: Path) -> dict[int, dict[str, Any]]:
         _FEATURE_CONTRACT_CACHE[cache_key] = contracts_by_item
         return contracts_by_item
 
-    for feature_path in sorted(subjects_root.glob("*/subject.features.json")):
+    feature_name_candidates = verification_layout_module.owner_features_name_candidates()
+    feature_paths: list[Path] = []
+    for feature_name in feature_name_candidates:
+        feature_paths.extend(sorted(subjects_root.glob(f"*/{feature_name}")))
+        if feature_paths:
+            break
+    for feature_path in feature_paths:
         payload = json.loads(feature_path.read_text(encoding="utf-8"))
         schema_version = _int_value(payload.get("schemaVersion"))
         if schema_version != _SUPPORTED_SCHEMA_VERSION:
-            raise ValueError(f"unsupported subject.features.json schemaVersion: {feature_path}")
+            raise ValueError(f"unsupported owner.features schemaVersion: {feature_path}")
 
         subject_id = str(payload.get("subjectId") or feature_path.parent.name).strip()
         if not subject_id:
-            raise ValueError(f"subject.features.json missing subjectId: {feature_path}")
+            raise ValueError(f"owner.features missing subjectId: {feature_path}")
 
         for raw_entry in payload.get("features", []):
             normalized_entry = _normalize_feature_entry(subject_id=subject_id, raw_entry=raw_entry)
@@ -123,7 +131,7 @@ def _load_feature_contracts(repo_root: Path) -> dict[int, dict[str, Any]]:
             existing_entry = contracts_by_item.get(capability_item)
             if existing_entry is not None and existing_entry["ownerSubjectId"] != subject_id:
                 raise ValueError(
-                    "duplicate capability ownership in subject.features.json: "
+                    "duplicate capability ownership in owner.features: "
                     f"item={capability_item}, owners={existing_entry['ownerSubjectId']} and {subject_id}"
                 )
             contracts_by_item[capability_item] = normalized_entry

@@ -9,7 +9,7 @@ class TestSubjectWorkersRuntimeOutputHotupdate(SubjectWorkersTestSupport):
         matrix_id = "windows-hotupdate-output"
         assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.HotUpdateProofHost.dll")
         collection_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "hotupdate-tests",
@@ -17,7 +17,7 @@ class TestSubjectWorkersRuntimeOutputHotupdate(SubjectWorkersTestSupport):
             "declared-tests.collection.json",
         )
         binding_manifest_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "hotupdate-tests",
@@ -130,7 +130,7 @@ class TestSubjectWorkersRuntimeOutputHotupdate(SubjectWorkersTestSupport):
             f"{subject_id}.HotUpdateProofHost.dll",
         )
         collection_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "hotupdate-tests",
@@ -138,7 +138,7 @@ class TestSubjectWorkersRuntimeOutputHotupdate(SubjectWorkersTestSupport):
             "declared-tests.collection.json",
         )
         binding_manifest_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "hotupdate-tests",
@@ -237,3 +237,4 @@ class TestSubjectWorkersRuntimeOutputHotupdate(SubjectWorkersTestSupport):
             self.assertEqual(build_manifest_path, manifest["nativeBuildManifestPath"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+

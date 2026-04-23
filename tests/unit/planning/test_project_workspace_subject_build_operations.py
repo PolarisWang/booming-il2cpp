@@ -6,7 +6,7 @@ class TestProjectWorkspaceSubjectBuildOperations(ProjectWorkspaceTestSupport):
         workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_build_generated_target")
         repo_root = self._make_repo_root("subject-build-generated-target")
         self._write_subject_fixture(repo_root)
-        workspace_root = repo_root / "solutions" / "subjects" / "FixtureSubject"
+        workspace_root = repo_root / "verification" / "workspaces" / "subjects" / "FixtureSubject"
         build_root = workspace_root / "native" / "windows-dev-output"
         build_root.mkdir(parents=True, exist_ok=True)
         manifest_path = workspace_root / "workspace.manifest.json"
@@ -16,7 +16,7 @@ class TestProjectWorkspaceSubjectBuildOperations(ProjectWorkspaceTestSupport):
                 "kind": "subject-workspace",
                 "subjectId": "FixtureSubject",
                 "defaultMatrix": "windows-dev-output",
-                "managedSolutionPath": "solutions/subjects/FixtureSubject/FixtureSubject.sln",
+                "managedSolutionPath": "verification/workspaces/subjects/FixtureSubject/FixtureSubject.sln",
                 "managedProjects": [
                     "subjects/FixtureSubject/source/FixtureSubject.csproj",
                     "subjects/FixtureSubject/validation/unit/FixtureSubject.Subject.UnitTests/FixtureSubject.Subject.UnitTests.csproj",
@@ -25,20 +25,20 @@ class TestProjectWorkspaceSubjectBuildOperations(ProjectWorkspaceTestSupport):
                     {
                         "matrixId": "windows-dev-output",
                         "targetPlatform": "windows-x64",
-                        "configureRoot": "solutions/subjects/FixtureSubject/native/windows-dev-output",
+                        "configureRoot": "verification/workspaces/subjects/FixtureSubject/native/windows-dev-output",
                         "buildArgs": ["--config", "Release", "--target", "chaos_subject_reference_proof"],
                         "defaultBuildNativeProject": "chaos_subject_reference_proof",
                         "nativeProjects": [
                             {
                                 "targetId": "chaos_subject_generated_native",
                                 "kind": "generated-native",
-                                "projectPath": "solutions/subjects/FixtureSubject/native/windows-dev-output/generated/chaos_subject_generated_native.vcxproj",
+                                "projectPath": "verification/workspaces/subjects/FixtureSubject/native/windows-dev-output/generated/chaos_subject_generated_native.vcxproj",
                                 "buildArgs": ["--config", "Release", "--target", "chaos_subject_generated_native"],
                             },
                             {
                                 "targetId": "chaos_subject_reference_proof",
                                 "kind": "proof-native",
-                                "projectPath": "solutions/subjects/FixtureSubject/native/windows-dev-output/proof/chaos_subject_reference_proof.vcxproj",
+                                "projectPath": "verification/workspaces/subjects/FixtureSubject/native/windows-dev-output/proof/chaos_subject_reference_proof.vcxproj",
                                 "buildArgs": ["--config", "Release", "--target", "chaos_subject_reference_proof"],
                             },
                         ],
@@ -60,7 +60,7 @@ class TestProjectWorkspaceSubjectBuildOperations(ProjectWorkspaceTestSupport):
                         {"id": "subject/FixtureSubject", "matrix": "windows-dev-output", "native-target": "generated"},
                     )
 
-            self.assertEqual("solutions/subjects/FixtureSubject/build.report.json", result["buildReportPath"])
+            self.assertEqual("verification/workspaces/subjects/FixtureSubject/build.report.json", result["buildReportPath"])
             self.assertEqual(
                 [
                     "cmake",
@@ -80,7 +80,7 @@ class TestProjectWorkspaceSubjectBuildOperations(ProjectWorkspaceTestSupport):
         workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_build")
         repo_root = self._make_repo_root("subject-build")
         self._write_subject_fixture(repo_root)
-        workspace_root = repo_root / "solutions" / "subjects" / "FixtureSubject"
+        workspace_root = repo_root / "verification" / "workspaces" / "subjects" / "FixtureSubject"
         build_root = workspace_root / "native" / "windows-dev-output"
         build_root.mkdir(parents=True, exist_ok=True)
         manifest_path = workspace_root / "workspace.manifest.json"
@@ -89,7 +89,7 @@ class TestProjectWorkspaceSubjectBuildOperations(ProjectWorkspaceTestSupport):
             {
                 "kind": "subject-workspace",
                 "subjectId": "FixtureSubject",
-                "managedSolutionPath": "solutions/subjects/FixtureSubject/FixtureSubject.sln",
+                "managedSolutionPath": "verification/workspaces/subjects/FixtureSubject/FixtureSubject.sln",
                 "managedProjects": [
                     "subjects/FixtureSubject/source/FixtureSubject.csproj",
                     "subjects/FixtureSubject/validation/unit/FixtureSubject.Subject.UnitTests/FixtureSubject.Subject.UnitTests.csproj",
@@ -97,12 +97,12 @@ class TestProjectWorkspaceSubjectBuildOperations(ProjectWorkspaceTestSupport):
                 "matrices": [
                     {
                         "matrixId": "windows-dev-output",
-                        "configureRoot": "solutions/subjects/FixtureSubject/native/windows-dev-output",
+                        "configureRoot": "verification/workspaces/subjects/FixtureSubject/native/windows-dev-output",
                         "buildArgs": ["--config", "Release", "--target", "chaos_subject_reference_proof"],
                     },
                     {
                         "matrixId": "windows-linux-buildable",
-                        "configureRoot": "solutions/subjects/FixtureSubject/native/windows-linux-buildable",
+                        "configureRoot": "verification/workspaces/subjects/FixtureSubject/native/windows-linux-buildable",
                         "buildArgs": [],
                     },
                 ],
@@ -122,7 +122,7 @@ class TestProjectWorkspaceSubjectBuildOperations(ProjectWorkspaceTestSupport):
                         {"id": "subject/FixtureSubject", "matrix": "windows-dev-output"},
                     )
 
-            self.assertEqual("solutions/subjects/FixtureSubject/build.report.json", result["buildReportPath"])
+            self.assertEqual("verification/workspaces/subjects/FixtureSubject/build.report.json", result["buildReportPath"])
             report = json.loads((repo_root / result["buildReportPath"]).read_text(encoding="utf-8"))
             self.assertEqual(["windows-dev-output"], report["builtMatrices"])
             self.assertEqual(
@@ -148,7 +148,7 @@ class TestProjectWorkspaceSubjectBuildOperations(ProjectWorkspaceTestSupport):
         workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_subject_build_managed_only")
         repo_root = self._make_repo_root("subject-build-managed-only")
         self._write_managed_only_subject_fixture(repo_root)
-        workspace_root = repo_root / "solutions" / "subjects" / "ManagedOnlySubject"
+        workspace_root = repo_root / "verification" / "workspaces" / "subjects" / "ManagedOnlySubject"
         manifest_path = workspace_root / "workspace.manifest.json"
         managed_test_project_path = workspace_root / "managed-tests" / "ManagedOnlySubject.DeclaredBenchmarkHost.csproj"
         managed_test_project_path.parent.mkdir(parents=True, exist_ok=True)
@@ -159,7 +159,7 @@ class TestProjectWorkspaceSubjectBuildOperations(ProjectWorkspaceTestSupport):
                 "kind": "subject-workspace",
                 "subjectId": "ManagedOnlySubject",
                 "defaultMatrix": "windows-perf-dev",
-                "managedSolutionPath": "solutions/subjects/ManagedOnlySubject/ManagedOnlySubject.sln",
+                "managedSolutionPath": "verification/workspaces/subjects/ManagedOnlySubject/ManagedOnlySubject.sln",
                 "managedProjects": [
                     {
                         "projectId": "managed/ManagedOnlySubject/ManagedOnlySubject",
@@ -169,7 +169,7 @@ class TestProjectWorkspaceSubjectBuildOperations(ProjectWorkspaceTestSupport):
                 "managedTestProjects": [
                     {
                         "projectId": "managed-test/ManagedOnlySubject/benchmark-host",
-                        "projectPath": "solutions/subjects/ManagedOnlySubject/managed-tests/ManagedOnlySubject.DeclaredBenchmarkHost.csproj",
+                        "projectPath": "verification/workspaces/subjects/ManagedOnlySubject/managed-tests/ManagedOnlySubject.DeclaredBenchmarkHost.csproj",
                     }
                 ],
                 "nativeProjects": [],
@@ -199,7 +199,7 @@ class TestProjectWorkspaceSubjectBuildOperations(ProjectWorkspaceTestSupport):
                         {"id": "subject/ManagedOnlySubject", "matrix": "windows-perf-dev"},
                     )
 
-            self.assertEqual("solutions/subjects/ManagedOnlySubject/build.report.json", result["buildReportPath"])
+            self.assertEqual("verification/workspaces/subjects/ManagedOnlySubject/build.report.json", result["buildReportPath"])
             report = json.loads((repo_root / result["buildReportPath"]).read_text(encoding="utf-8"))
             self.assertEqual(["windows-perf-dev"], report["builtMatrices"])
             self.assertEqual(2, run_process_mock.call_count)
@@ -213,3 +213,5 @@ class TestProjectWorkspaceSubjectBuildOperations(ProjectWorkspaceTestSupport):
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+
+

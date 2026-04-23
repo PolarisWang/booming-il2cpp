@@ -97,7 +97,7 @@ class TestSubjectWorkersRuntimeOutputManagedCore(SubjectWorkersTestSupport):
         matrix_id = "windows-managed-output"
         assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", "Chaos.TestFramework.Runtime.dll")
         collection_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "managed-tests",
@@ -206,3 +206,4 @@ class TestSubjectWorkersRuntimeOutputManagedCore(SubjectWorkersTestSupport):
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+

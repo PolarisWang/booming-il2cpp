@@ -12,8 +12,8 @@ except ImportError:
     from testing import template_assets as template_assets_module
 
 
-_FRAMEWORK_PROJECT_REFERENCE = "../../../../src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj"
-_RUNTIME_PROJECT_REFERENCE = "../../../../src/reference/Chaos.TestFramework.Runtime/Chaos.TestFramework.Runtime.csproj"
+_FRAMEWORK_PROJECT_REFERENCE = "../../../../../src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj"
+_RUNTIME_PROJECT_REFERENCE = "../../../../../src/reference/Chaos.TestFramework.Runtime/Chaos.TestFramework.Runtime.csproj"
 _PROOF_HOST_TEMPLATE = "templates/managed-proof-host.cs.tmpl"
 _BENCHMARK_HOST_TEMPLATE = "templates/managed-benchmark-host.cs.tmpl"
 _HOST_PROJECT_TEMPLATE = "templates/managed-declared-host.csproj.tmpl"

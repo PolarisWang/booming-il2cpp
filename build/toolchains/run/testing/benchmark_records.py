@@ -1,7 +1,7 @@
 """benchmark_records.py — Append-Only JSON Lines store for benchmark run data.
 
 Each benchmark run appends a single JSON record (one line) to:
-    subjects/{subject_id}/benchmark-records/records.jsonl
+    .artifact/verification/benchmark-records/{subject_id}/records.jsonl
 
 Queries scan the file from the end to retrieve the most-recent record(s).
 File locking prevents concurrent-write corruption.
@@ -13,6 +13,15 @@ import os
 import time
 from pathlib import Path
 from typing import Any
+
+try:
+    from . import verification_layout as verification_layout_module
+except ImportError:
+    import sys
+
+    root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(root))
+    from testing import verification_layout as verification_layout_module
 
 # fcntl is Unix-only; on Windows we use a lock-file strategy instead
 try:
@@ -28,7 +37,7 @@ except ImportError:
 # ---------------------------------------------------------------------------
 
 def _records_path(repo_root: Path, subject_id: str) -> Path:
-    return repo_root / "subjects" / subject_id / "benchmark-records" / "records.jsonl"
+    return verification_layout_module.raw_benchmark_records_path(repo_root, subject_id)
 
 
 # ---------------------------------------------------------------------------
@@ -189,9 +198,11 @@ def query_all_devices(
 
 def list_subjects_with_records(repo_root: Path) -> list[str]:
     """Return sorted list of subject IDs that have at least one benchmark record."""
-    subjects_root = repo_root / "subjects"
+    subjects_root = verification_layout_module.raw_benchmark_records_root(repo_root)
+    if not subjects_root.is_dir():
+        return []
     results: list[str] = []
     for p in sorted(subjects_root.iterdir()):
-        if (p / "benchmark-records" / "records.jsonl").exists():
+        if (p / "records.jsonl").exists():
             results.append(p.name)
     return results

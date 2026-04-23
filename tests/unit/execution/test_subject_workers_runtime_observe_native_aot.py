@@ -8,7 +8,7 @@ class TestSubjectWorkersRuntimeObserveNativeAot(SubjectWorkersTestSupport):
         run_id = "fixture-run-runtime-observe-native-aot-proof-001"
         matrix_id = "windows-native-check"
         collection_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "managed-tests",
@@ -119,7 +119,7 @@ class TestSubjectWorkersRuntimeObserveNativeAot(SubjectWorkersTestSupport):
         run_id = "fixture-run-runtime-observe-native-aot-benchmark-001"
         matrix_id = "windows-native-check"
         collection_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "managed-tests",
@@ -211,3 +211,4 @@ class TestSubjectWorkersRuntimeObserveNativeAot(SubjectWorkersTestSupport):
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+

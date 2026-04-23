@@ -269,9 +269,10 @@ class TestProjectWorkspaceSubjectTargetsAll(ProjectWorkspaceTestSupport):
                 benchmark_native_test_project["managedTestProjectId"],
             )
             self.assertEqual(
-                "solutions/subjects/FixtureSubject/native/windows-native-perf/benchmark/chaos_subject_native_aot.vcxproj",
+                "verification/workspaces/subjects/FixtureSubject/native/windows-native-perf/benchmark/chaos_subject_native_aot.vcxproj",
                 benchmark_native_test_project["projectPath"],
             )
             self.assertTrue((repo_root / benchmark_native_test_project["projectPath"]).is_file())
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+

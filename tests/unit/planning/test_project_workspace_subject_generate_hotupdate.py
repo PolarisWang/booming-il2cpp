@@ -85,8 +85,7 @@ class TestProjectWorkspaceSubjectGenerateHotupdate(ProjectWorkspaceTestSupport):
         self._write_hotupdate_subject_fixture(repo_root, subject_id=subject_id)
         stale_collection_path = (
             repo_root
-            / "solutions"
-            / "subjects"
+            / "verification" / "workspaces" / "subjects"
             / subject_id
             / "hotupdate-tests"
             / "Generated"
@@ -141,3 +140,4 @@ class TestProjectWorkspaceSubjectGenerateHotupdate(ProjectWorkspaceTestSupport):
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+

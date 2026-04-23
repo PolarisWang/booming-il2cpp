@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>GoldenHotUpdateHost.App</AssemblyName>
+    <RootNamespace>GoldenHotUpdateHost.App</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\\SharedContracts\\GoldenHotUpdate.SharedContracts.csproj" />
+    <ProjectReference Include="..\\Patch\\GoldenHotUpdate.PatchModule.csproj" />
+    <ProjectReference Include="..\\..\\..\\..\\..\\..\\src\\reference\\Chaos.TestFramework.Sdk\\Chaos.TestFramework.Sdk.csproj" />
+  </ItemGroup>
+</Project>
+

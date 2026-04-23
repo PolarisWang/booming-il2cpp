@@ -43,7 +43,7 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
             source_root.mkdir(parents=True, exist_ok=True)
             (source_root / f"{subject_id}.csproj").write_text("<Project />\n", encoding="utf-8")
 
-            workspace_root = repo_root / "solutions" / "subjects" / subject_id
+            workspace_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id
             stale_managed_tests_root = workspace_root / "managed-tests"
             stale_generated_root = stale_managed_tests_root / "Generated"
             stale_generated_root.mkdir(parents=True, exist_ok=True)
@@ -61,7 +61,7 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
                             {
                                 "projectId": f"managed-test/{subject_id}/benchmark-host",
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -70,7 +70,7 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
                                 "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
                                 "hostKind": "benchmark-host",
                                 "collectionPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -128,7 +128,7 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
                                     "assemblyName": SHARED_RUNTIME_ASSEMBLY_NAME,
                                     "hostKind": "benchmark-host",
                                     "collectionPath": posix_path(
-                                        "solutions",
+                                        "verification", "workspaces",
                                         "subjects",
                                         subject_id,
                                         "managed-tests",
@@ -143,7 +143,7 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
                     encoding="utf-8",
                 )
                 return {
-                    "manifestPath": posix_path("solutions", "subjects", subject_id, "workspace.manifest.json"),
+                    "manifestPath": posix_path("verification", "workspaces", "subjects", subject_id, "workspace.manifest.json"),
                 }
 
             class FakeProjectWorkspaceModule:
@@ -261,7 +261,7 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
             source_root.mkdir(parents=True, exist_ok=True)
             (source_root / f"{subject_id}.csproj").write_text("<Project />\n", encoding="utf-8")
 
-            workspace_root = repo_root / "solutions" / "subjects" / subject_id
+            workspace_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id
             managed_tests_root = workspace_root / "managed-tests"
             generated_root = managed_tests_root / "Generated"
             generated_root.mkdir(parents=True, exist_ok=True)
@@ -281,7 +281,7 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
                             {
                                 "projectId": f"managed-test/{subject_id}/benchmark-host",
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -290,7 +290,7 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
                                 "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
                                 "hostKind": "benchmark-host",
                                 "collectionPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -301,7 +301,7 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
                             {
                                 "projectId": f"managed-test/{subject_id}/benchmark-host-native",
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -310,7 +310,7 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
                                 "assemblyName": f"{subject_id}.DeclaredBenchmarkNativeHost",
                                 "hostKind": "benchmark-host",
                                 "collectionPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -324,7 +324,7 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
                                 "projectId": f"native-test/{subject_id}/{matrix_id}/benchmark-host",
                                 "matrixId": matrix_id,
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "native",
@@ -333,7 +333,7 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
                                     "chaos_subject_native_aot.vcxproj",
                                 ),
                                 "configureRoot": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "native",
@@ -385,12 +385,12 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
             self.assertEqual("ok", result["status"])
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
             self.assertEqual(
-                posix_path("solutions", "subjects", subject_id, "managed-tests", f"{subject_id}.DeclaredBenchmarkNativeHost.csproj"),
+                posix_path("verification", "workspaces", "subjects", subject_id, "managed-tests", f"{subject_id}.DeclaredBenchmarkNativeHost.csproj"),
                 manifest["primaryProjectPath"],
             )
             self.assertEqual("benchmark-host", manifest["hostKind"])
             self.assertEqual(
-                posix_path("solutions", "subjects", subject_id, "managed-tests", "Generated", "declared-tests.collection.json"),
+                posix_path("verification", "workspaces", "subjects", subject_id, "managed-tests", "Generated", "declared-tests.collection.json"),
                 manifest["collectionPath"],
             )
             self.assertEqual(
@@ -399,3 +399,5 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+
+

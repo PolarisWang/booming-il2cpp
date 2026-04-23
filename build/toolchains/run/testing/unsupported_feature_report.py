@@ -12,6 +12,7 @@ try:
     from . import registry as registry_module
     from . import release_evidence_contracts as release_evidence_contracts_module
     from . import subjects as subjects_module
+    from . import verification_layout as verification_layout_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
@@ -20,6 +21,7 @@ except ImportError:
     from testing import registry as registry_module
     from testing import release_evidence_contracts as release_evidence_contracts_module
     from testing import subjects as subjects_module
+    from testing import verification_layout as verification_layout_module
 
 
 RULES: list[dict[str, Any]] = [
@@ -112,7 +114,7 @@ def build_repo_unsupported_feature_report(repo_root: Path) -> dict[str, Any]:
 
     for manifest_path in subjects_module.discover_subject_manifests(repo_root):
         subject_id = manifest_path.parent.name
-        source_root = repo_root / "subjects" / subject_id / "source"
+        source_root = verification_layout_module.owner_root(repo_root, subject_id)
         subject_report = build_unsupported_feature_report_for_source_tree(
             source_root,
             subject_id=subject_id,

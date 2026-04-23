@@ -10,7 +10,7 @@ from tests.support import read_loader_stage_source
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-CORE_SOLUTION_PATH = REPO_ROOT / "solutions" / "core" / "windows" / "chaos-il2cpp-core.sln"
+CORE_SOLUTION_PATH = REPO_ROOT / "verification" / "workspaces" / "core" / "windows" / "chaos-il2cpp-core.sln"
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase7-interpreter-mixed-execution"
 
 INTERPRETER_ROOT = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Interpreter"
@@ -103,3 +103,4 @@ def make_unique_build_root(prefix: str) -> Path:
 
 class Phase7InterpreterMixedExecutionTestSupport(unittest.TestCase):
     pass
+

@@ -69,8 +69,14 @@ class GeneratedHotUpdateHostsTests(unittest.TestCase):
         self.assertIn("<TargetFramework>net8.0</TargetFramework>", project_text)
         self.assertIn("<OutputType>Exe</OutputType>", project_text)
         self.assertIn("<EnableDefaultCompileItems>false</EnableDefaultCompileItems>", project_text)
-        self.assertIn("Chaos.TestFramework.Sdk.csproj", project_text)
-        self.assertIn("Chaos.TestFramework.Runtime.csproj", project_text)
+        self.assertIn(
+            "../../../../../src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj",
+            project_text,
+        )
+        self.assertIn(
+            "../../../../../src/reference/Chaos.TestFramework.Runtime/Chaos.TestFramework.Runtime.csproj",
+            project_text,
+        )
         self.assertIn('<Compile Include="Generated/ChaosGeneratedHotUpdateProofHost.g.cs" />', project_text)
 
 

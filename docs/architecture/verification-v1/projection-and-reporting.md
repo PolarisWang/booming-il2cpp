@@ -24,7 +24,7 @@
 固定路径如下：
 
 ```text
-docs/testing-inventory/verification/
+verification/archive/
   latest/
   master/
   reports/
@@ -33,7 +33,7 @@ docs/testing-inventory/verification/
 辅助正式 source：
 
 ```text
-subjects/<OwnerPack>/verification/codegen-stubs/
+verification/evidence/owners/<OwnerPack>/codegen-stubs/
 ```
 
 `artifacts/` 不是 formal source。
@@ -173,7 +173,7 @@ benchmark 相关投影拆成两层：
 
 - `docs/testing-inventory/benchmark-inventory.*`
   - 面向 verification 视角，看 declared benchmark 与 device profile 的 formal 状态。
-- `docs/benchmark/*`
+- `verification/projections/benchmark/*`
   - 面向 perf 视角，看设备、平台、subject、指标与阈值。
 
 ### 8.1 Benchmark Inventory

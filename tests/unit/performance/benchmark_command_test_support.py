@@ -87,7 +87,7 @@ class BenchmarkCommandTestSupport(unittest.TestCase):
         matrix_id: str = "workspace-benchmark-matrix",
         native_host_assembly_name: str | None = None,
     ) -> None:
-        workspace_root = repo_root / "solutions" / "subjects" / subject_id
+        workspace_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id
         managed_tests_root = workspace_root / "managed-tests"
         generated_root = managed_tests_root / "Generated"
         project_path = managed_tests_root / f"{subject_id}.DeclaredBenchmarkHost.csproj"
@@ -193,3 +193,4 @@ class BenchmarkCommandTestSupport(unittest.TestCase):
         }
         manifest_path.parent.mkdir(parents=True, exist_ok=True)
         manifest_path.write_text(json.dumps(manifest_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+

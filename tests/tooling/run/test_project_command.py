@@ -35,8 +35,8 @@ class ProjectCommandTests(unittest.TestCase):
             project_module.workspace_module,
             "generate_subject_workspace",
             return_value={
-                "manifestPath": "solutions/subjects/FixtureSubject/workspace.manifest.json",
-                "artifacts": ["solutions/subjects/FixtureSubject/workspace.manifest.json"],
+                "manifestPath": "verification/workspaces/subjects/FixtureSubject/workspace.manifest.json",
+                "artifacts": ["verification/workspaces/subjects/FixtureSubject/workspace.manifest.json"],
                 "importantOutputs": [],
                 "consoleText": "",
             },
@@ -65,8 +65,8 @@ class ProjectCommandTests(unittest.TestCase):
             project_module.workspace_module,
             "generate_all_workspaces",
             return_value={
-                "manifestPath": "solutions/manifest.json",
-                "artifacts": ["solutions/manifest.json", "solutions/all/generation.report.json"],
+                "manifestPath": "verification/workspaces/verification-all.manifest.json",
+                "artifacts": ["verification/workspaces/verification-all.manifest.json", "verification/workspaces/verification-all.generation.report.json"],
                 "importantOutputs": [],
                 "consoleText": "",
             },
@@ -80,7 +80,7 @@ class ProjectCommandTests(unittest.TestCase):
             )
 
         self.assertEqual("ok", result.status)
-        self.assertEqual("solutions/manifest.json", result.payload["manifestPath"])
+        self.assertEqual("verification/workspaces/verification-all.manifest.json", result.payload["manifestPath"])
         generate_mock.assert_called_once_with(
             REPO_ROOT,
             "windows",
@@ -95,8 +95,8 @@ class ProjectCommandTests(unittest.TestCase):
             build_module.workspace_module,
             "build_subject_workspace",
             return_value={
-                "buildReportPath": "solutions/subjects/FixtureSubject/build.report.json",
-                "artifacts": ["solutions/subjects/FixtureSubject/build.report.json"],
+                "buildReportPath": "verification/workspaces/subjects/FixtureSubject/build.report.json",
+                "artifacts": ["verification/workspaces/subjects/FixtureSubject/build.report.json"],
                 "importantOutputs": [],
                 "consoleText": "",
             },
@@ -112,8 +112,8 @@ class ProjectCommandTests(unittest.TestCase):
             build_module.workspace_module,
             "build_core_workspace",
             return_value={
-                "buildReportPath": "solutions/core/windows/build.report.json",
-                "artifacts": ["solutions/core/windows/build.report.json"],
+                "buildReportPath": "verification/workspaces/core/windows/build.report.json",
+                "artifacts": ["verification/workspaces/core/windows/build.report.json"],
                 "importantOutputs": [],
                 "consoleText": "",
             },
@@ -157,3 +157,4 @@ class ProjectCommandTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

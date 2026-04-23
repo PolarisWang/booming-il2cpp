@@ -131,10 +131,10 @@ class TestSubjectReportingArtifacts(SubjectReportingTestSupport):
                     "primaryProjectPath": "subjects/Fixture/NativeProofApp.csproj",
                     "primaryAssemblyPath": run_bucket_path(subject_id, run_id, "analysis", "host-input", "NativeProofApp.dll"),
                     "additionalAssemblyPaths": [run_bucket_path(subject_id, run_id, "analysis", "host-input", "Patch.dll")],
-                    "managedRuntimeProjectPath": "solutions/subjects/Fixture/hotupdate-tests/Fixture.HotUpdateProofHost.csproj",
+                    "managedRuntimeProjectPath": "verification/workspaces/subjects/Fixture/hotupdate-tests/Fixture.HotUpdateProofHost.csproj",
                     "managedRuntimeAssemblyPath": run_bucket_path(subject_id, run_id, "analysis", "host-input", "Fixture.HotUpdateProofHost.dll"),
-                    "collectionPath": "solutions/subjects/Fixture/hotupdate-tests/Generated/declared-tests.collection.json",
-                    "bindingManifestPath": "solutions/subjects/Fixture/hotupdate-tests/Generated/declared-tests.binding.json",
+                    "collectionPath": "verification/workspaces/subjects/Fixture/hotupdate-tests/Generated/declared-tests.collection.json",
+                    "bindingManifestPath": "verification/workspaces/subjects/Fixture/hotupdate-tests/Generated/declared-tests.binding.json",
                 },
             )
             write_json(
@@ -207,7 +207,7 @@ class TestSubjectReportingArtifacts(SubjectReportingTestSupport):
                 {
                     "buildKind": "native-reference",
                     "buildStrategy": "windows-reference-cmake",
-                    "hostSourcePath": "solutions/subjects/Fixture/native-source/proof/main.cpp",
+                    "hostSourcePath": "verification/workspaces/subjects/Fixture/native-source/proof/main.cpp",
                     "generatedSourcePaths": [
                         run_bucket_path(subject_id, run_id, "analysis", "generated", "generated", "native-reference.generated.cpp"),
                     ],
@@ -223,7 +223,7 @@ class TestSubjectReportingArtifacts(SubjectReportingTestSupport):
                     "nativePrimaryAssemblyPath": run_bucket_path(subject_id, run_id, "analysis", "host-input", "NativeProofApp.dll"),
                     "nativeGeneratedManifestPath": generated_manifest_path,
                     "nativeBuildManifestPath": build_manifest_path,
-                    "bindingManifestPath": "solutions/subjects/Fixture/hotupdate-tests/Generated/declared-tests.binding.json",
+                    "bindingManifestPath": "verification/workspaces/subjects/Fixture/hotupdate-tests/Generated/declared-tests.binding.json",
                     "arguments": ["--entry-index=60"],
                     "outputLines": ["corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3"],
                     "stdoutPath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stdout.log"),
@@ -558,10 +558,10 @@ class TestSubjectReportingArtifacts(SubjectReportingTestSupport):
                     "primaryProjectPath": "subjects/Fixture/NativeProofApp.csproj",
                     "primaryAssemblyPath": run_bucket_path(subject_id, run_id, "analysis", "host-input", "NativeProofApp.dll"),
                     "additionalAssemblyPaths": [run_bucket_path(subject_id, run_id, "analysis", "host-input", "Patch.dll")],
-                    "managedRuntimeProjectPath": "solutions/subjects/Fixture/hotupdate-tests/Fixture.HotUpdateProofHost.csproj",
+                    "managedRuntimeProjectPath": "verification/workspaces/subjects/Fixture/hotupdate-tests/Fixture.HotUpdateProofHost.csproj",
                     "managedRuntimeAssemblyPath": run_bucket_path(subject_id, run_id, "analysis", "host-input", "Fixture.HotUpdateProofHost.dll"),
-                    "collectionPath": "solutions/subjects/Fixture/hotupdate-tests/Generated/declared-tests.collection.json",
-                    "bindingManifestPath": "solutions/subjects/Fixture/hotupdate-tests/Generated/declared-tests.binding.json",
+                    "collectionPath": "verification/workspaces/subjects/Fixture/hotupdate-tests/Generated/declared-tests.collection.json",
+                    "bindingManifestPath": "verification/workspaces/subjects/Fixture/hotupdate-tests/Generated/declared-tests.binding.json",
                 },
             )
             write_json(
@@ -622,7 +622,7 @@ class TestSubjectReportingArtifacts(SubjectReportingTestSupport):
                 {
                     "buildKind": "native-reference",
                     "buildStrategy": "windows-reference-cmake",
-                    "hostSourcePath": "solutions/subjects/Fixture/native-source/proof/main.cpp",
+                    "hostSourcePath": "verification/workspaces/subjects/Fixture/native-source/proof/main.cpp",
                     "generatedSourcePaths": [
                         run_bucket_path(subject_id, run_id, "analysis", "generated", "generated", "native-reference.generated.cpp"),
                     ],
@@ -638,7 +638,7 @@ class TestSubjectReportingArtifacts(SubjectReportingTestSupport):
                     "nativePrimaryAssemblyPath": run_bucket_path(subject_id, run_id, "analysis", "host-input", "NativeProofApp.dll"),
                     "nativeGeneratedManifestPath": generated_manifest_path,
                     "nativeBuildManifestPath": build_manifest_path,
-                    "bindingManifestPath": "solutions/subjects/Fixture/hotupdate-tests/Generated/declared-tests.binding.json",
+                    "bindingManifestPath": "verification/workspaces/subjects/Fixture/hotupdate-tests/Generated/declared-tests.binding.json",
                     "arguments": ["--entry-index=60"],
                     "outputLines": ["corelib-reference-hotupdate:System.Private.CoreLib|System.Runtime|System.Console:16:3"],
                     "stdoutPath": run_bucket_path(subject_id, run_id, "matrices", matrix_id, "runtime", "stdout.log"),
@@ -671,3 +671,4 @@ class TestSubjectReportingArtifacts(SubjectReportingTestSupport):
             self.assertEqual(3, audit_payload["nativeGeneration"]["runtimeSkeletonUncoveredMethodCount"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+

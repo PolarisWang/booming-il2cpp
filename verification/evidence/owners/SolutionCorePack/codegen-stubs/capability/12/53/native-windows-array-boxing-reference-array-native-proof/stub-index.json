@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-04-23T21:56:32.255663Z",
+  "producerId": "verification-v1",
+  "sourceSpecVersion": "verification-v1",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityId": "capability/12/53",
+  "routeCode": "native",
+  "profileCode": "windows-array-boxing-reference-array-native-proof",
+  "mergeKey": "SolutionCorePack|capability/12/53|native|windows-array-boxing-reference-array-native-proof",
+  "managedSourceRefs": [
+    {
+      "kind": "managed-source",
+      "path": "verification/catalog/owners/SolutionCorePack",
+      "label": "CoreRuntimeFeatures/AotClosureValidationProofEntry::Run()",
+      "hash": ""
+    }
+  ],
+  "stubRefs": [
+    {
+      "kind": "stub-dir",
+      "path": "verification/evidence/owners/SolutionCorePack/codegen-stubs/windows-array-boxing-reference-array-native-proof",
+      "label": "windows-array-boxing-reference-array-native-proof",
+      "hash": ""
+    }
+  ],
+  "generatedFromEvidenceIds": [
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()/native-proof"
+  ]
+}

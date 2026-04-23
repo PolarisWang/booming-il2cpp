@@ -10,11 +10,13 @@ from typing import Any
 try:
     from ..core.common import write_json
     from . import inventory_source as inventory_source_module
+    from . import verification_layout as verification_layout_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from core.common import write_json
     from testing import inventory_source as inventory_source_module
+    from testing import verification_layout as verification_layout_module
 
 
 INVENTORY_SCHEMA_VERSION = 1
@@ -353,14 +355,14 @@ def _hint_source(key: str) -> list[str]:
         return ["inventory_generator.py", "verification-v1/spec.md", "subject-test-framework-v1/INDEX.md", "AOT新Feature接入自测规范.md"]
     if key in {"platformId", "deviceId", "deviceName", "managedStatus", "nativeStatus", "interpreterStatus", "lastRecordedAt", "gitCommit", "isStale"} or key.endswith("MeanDurationMs") or key.endswith("OpsPerSecond") or key.endswith("RelativeToManaged"):
         return [
-            "docs/testing-inventory/verification/master/evidence-claims-master.json",
-            "docs/testing-inventory/verification/master/result-master.json",
+            "verification/archive/master/evidence-claims-master.json",
+            "verification/archive/master/result-master.json",
             "verification_projection.py",
         ]
     if key in {"defaultGoalId", "defaultMatrixId"}:
         return ["registry.py", "workspace.manifest.json"]
     if key in {"proofRequired", "benchmarkRequired", "supportStates", "supportStateLabels", "ownerSubjectId", "capabilityFamily", "capabilityFamilyLabel", "capabilityItem", "capabilityItemLabel"}:
-        return ["subjects/*/subject.features.json", "capability_coverage.py"]
+        return ["verification/catalog/owners/*/owner.features.json", "capability_coverage.py"]
     return ["compiled_catalog.py", "registry.py", "inventory_source.py"]
 
 
@@ -969,7 +971,7 @@ def build_inventory_outputs(
 
 def resolve_inventory_output_root(repo_root: Path, output_root: Path | str | None = None) -> Path:
     if output_root in (None, ""):
-        resolved = repo_root / "docs" / "testing-inventory"
+        resolved = verification_layout_module.testing_inventory_projection_root(repo_root)
     else:
         resolved = Path(output_root)
         if not resolved.is_absolute():
@@ -1019,7 +1021,7 @@ def validate_inventory_outputs(
     codegen_stub_paths = [
         artifact
         for artifact in artifacts
-        if "verification/codegen-stubs/" in _normalized_artifact_path(artifact)
+        if "verification/evidence/owners/" in _normalized_artifact_path(artifact)
     ]
     if required_codegen_stub_count > 0 and not codegen_stub_paths:
         raise RuntimeError(
@@ -1028,11 +1030,11 @@ def validate_inventory_outputs(
 
     verification_data = {
         "verificationOutputRoot": str(verification_payload.get("outputRoot") or ""),
-        "latestResultPath": _find_artifact_by_suffix(artifacts, "verification/latest/result-snapshot.json"),
-        "masterResultPath": _find_artifact_by_suffix(artifacts, "verification/master/result-master.json"),
+        "latestResultPath": _find_artifact_by_suffix(artifacts, "verification/archive/latest/result-snapshot.json"),
+        "masterResultPath": _find_artifact_by_suffix(artifacts, "verification/archive/master/result-master.json"),
         "reportSummaryPath": _find_artifact_by_suffix(
             artifacts,
-            "verification/reports/completed/testing-inventory/summary.md",
+            "verification/archive/reports/completed/testing-inventory/summary.md",
         ),
         "codegenStubPaths": codegen_stub_paths,
     }
@@ -1043,6 +1045,90 @@ def validate_inventory_outputs(
         "validated": True,
         "verificationData": verification_data,
     }
+
+
+def _write_verification_navigation(
+    repo_root: Path,
+    *,
+    projection_root: Path,
+) -> list[str]:
+    verification_root = verification_layout_module.verification_root(repo_root)
+    verification_root.mkdir(parents=True, exist_ok=True)
+
+    manifest_path = verification_layout_module.verification_manifest_path(repo_root)
+    index_path = verification_layout_module.verification_index_path(repo_root)
+    testing_inventory_root = projection_root
+    benchmark_root = verification_layout_module.benchmark_projection_root(repo_root)
+    archive_root = verification_layout_module.archive_root(repo_root)
+    workspaces_root = verification_layout_module.workspaces_root(repo_root)
+    verification_all_solution = verification_layout_module.verification_all_solution_path(repo_root)
+    verification_all_manifest = verification_layout_module.verification_all_manifest_path(repo_root)
+
+    write_json(
+        manifest_path,
+        {
+            "schemaVersion": 1,
+            "rootPath": _relative(repo_root, verification_root),
+            "archive": {
+                "root": _relative(repo_root, archive_root),
+                "latest": _relative(repo_root, verification_layout_module.archive_latest_root(repo_root)),
+                "master": _relative(repo_root, verification_layout_module.archive_master_root(repo_root)),
+                "reports": _relative(repo_root, verification_layout_module.archive_reports_root(repo_root)),
+            },
+            "catalog": {
+                "root": _relative(repo_root, verification_layout_module.catalog_root(repo_root)),
+                "owners": _relative(repo_root, verification_layout_module.owners_root(repo_root)),
+                "scenarios": _relative(repo_root, verification_layout_module.scenarios_root(repo_root)),
+            },
+            "evidence": {
+                "root": _relative(repo_root, verification_layout_module.evidence_root(repo_root)),
+                "owners": _relative(repo_root, verification_layout_module.evidence_owners_root(repo_root)),
+            },
+            "workspaces": {
+                "root": _relative(repo_root, workspaces_root),
+                "verificationAllSolution": _relative(repo_root, verification_all_solution),
+                "verificationAllManifest": _relative(repo_root, verification_all_manifest),
+            },
+            "projections": {
+                "root": _relative(repo_root, verification_layout_module.projections_root(repo_root)),
+                "testingInventory": _relative(repo_root, testing_inventory_root),
+                "benchmark": _relative(repo_root, benchmark_root),
+            },
+            "commands": {
+                "verify": "python build/toolchains/run/run.py verify verification-v1 --json",
+                "inventory": "python build/toolchains/run/run.py test inventory --json",
+                "workspace": "python build/toolchains/run/run.py project all-workspaces --json",
+            },
+        },
+    )
+
+    index_path.write_text(
+        "\n".join(
+            [
+                "# Verification",
+                "",
+                "## Authority",
+                f"- Archive: `{_relative(repo_root, archive_root)}`",
+                f"- Catalog: `{_relative(repo_root, verification_layout_module.catalog_root(repo_root))}`",
+                f"- Evidence: `{_relative(repo_root, verification_layout_module.evidence_root(repo_root))}`",
+                f"- Workspaces: `{_relative(repo_root, workspaces_root)}`",
+                f"- Projections: `{_relative(repo_root, verification_layout_module.projections_root(repo_root))}`",
+                "",
+                "## Main Entries",
+                f"- Testing inventory: `{_relative(repo_root, testing_inventory_root / 'inventory.html')}`",
+                f"- Benchmark dashboard: `{_relative(repo_root, benchmark_root / 'dashboard.html')}`",
+                f"- Total workspace: `{_relative(repo_root, verification_all_solution)}`",
+                "",
+                "## Commands",
+                "- `python build/toolchains/run/run.py verify verification-v1 --json`",
+                "- `python build/toolchains/run/run.py test inventory --json`",
+                "- `python build/toolchains/run/run.py project all-workspaces --json`",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    return [_relative(repo_root, manifest_path), _relative(repo_root, index_path)]
 
 
 def write_inventory_outputs(repo_root: Path, *, host_platform: str, output_root: Path) -> dict[str, Any]:
@@ -1058,7 +1144,7 @@ def write_inventory_outputs(repo_root: Path, *, host_platform: str, output_root:
         source_payload,
         closure_kind="completed",
         scope_code="testing-inventory",
-        output_root=output_root / "verification",
+        output_root=verification_layout_module.archive_root(repo_root),
         bundle=bundle,
     )
     outputs = build_inventory_outputs(
@@ -1085,6 +1171,7 @@ def write_inventory_outputs(repo_root: Path, *, host_platform: str, output_root:
     files["benchmark_csv"].write_text(outputs["csv"]["benchmark"], encoding="utf-8")
     files["html"].write_text(outputs["htmlDocument"], encoding="utf-8")
     artifacts = [_relative(repo_root, path) for path in files.values()]
+    artifacts.extend(_write_verification_navigation(repo_root, projection_root=output_root))
     artifacts.extend(str(item) for item in list(verification_payload.get("artifacts") or []))
     payload = {
         "outputRoot": _relative(repo_root, output_root),
