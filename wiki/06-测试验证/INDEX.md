@@ -1,4 +1,4 @@
-# 06-测试验证 INDEX
+﻿# 06-测试验证 INDEX
 
 > 项目级测试与验证知识的正式入口。当前主线以 collection-driven 的 managed/native/hotupdate 流程为准。
 
@@ -17,6 +17,8 @@
 
 - 正式长期流程入口：[`Verification-V1测试流程规范.md`](./Verification-V1测试流程规范.md)
 - 默认 formal refresh 入口：`run verify verification-v1 --json`
+- `run test inventory` 只保留为内部实现命令，不是 public entry。
+- `benchmark --record` 只写原始 benchmark records，不会直接刷新 formal archive / projection。需要新的正式报告、dashboard 和合并数据时，仍然走 `run verify verification-v1 --json`。
 - 主线定义：`managed solution -> dotnet 8 collection analysis -> collection files -> managed test project -> native project -> native test project -> hotupdate patch project + hotupdate test host project`
 - 测试声明：由 `Chaos.TestFramework.Sdk` 中的 attribute 在 managed solution 中声明。
 - collection 产生：由 `.NET 8` collector 分析 managed project 中的 `Sdk` 声明并输出 collection file。
@@ -74,3 +76,4 @@
 - `2026-04-21`：补充 full-assembly-closure native codegen 产物命名约束；runtime skeleton summary/page 必须显式落在 `generated/runtime/`，audit summary 必须落在 `generated/audit/*.audit.generated.cpp`，audit method inventory page 必须改为 JSON sidecar，不能继续作为 C++ translation unit 编译。
 - `2026-04-22`：补充 async generic family generated review 规则；runtime-skeleton async wrapper 必须按真实方法签名推导 parameter carrier，`Task<string>(int)` 这类 mixed-carrier case 必须进入正式 generated artifact 回归，不能再靠结果类型白名单推导参数 C++ 类型。
 - `2026-04-22`：补充 canonical generic runtime kernel 的 hotupdate/dispatch/reflection 规则；最终 authority 固定为 `InstantiationStubId + generation`，包版本校验固定为 `PackageFormatVersion + KernelArtifactVersion`，advanced carrier 必须带正式 generated review 与 benchmark 证据。
+

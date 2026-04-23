@@ -14,5 +14,4 @@
 
 ## Commands
 - `python build/toolchains/run/run.py verify verification-v1 --json`
-- `python build/toolchains/run/run.py test inventory --json`
-- `python build/toolchains/run/run.py project all-workspaces --json`
+- `python build/toolchains/run/run.py generate project all --json`

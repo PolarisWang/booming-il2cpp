@@ -1,4 +1,4 @@
-# Skill Registry
+﻿# Skill Registry
 
 | Skill | 级别 | 分层 | 项目职责 | 实现路径 | 相关页面 |
 | --- | --- | --- | --- | --- | --- |
@@ -38,3 +38,6 @@
 - `2026-04-18`：补充 AOT obligation intake 字段、formal verification gate 与 authority 分工；`dev-verification-before-completion` 成为 formal object selector，`dev-test-driven-development` 只保留 TDD 纪律。
 - `2026-04-19`：更新 `dev-project-test-governance` 的项目说明，明确 IL2CPP / Python codegen 默认优先 Scriban，能力不足时先扩展 Scriban。
 - `2026-04-23`：更新 `dev-using-booming`、`dev-brainstorm`、`dev-roadmap`、`dev-writing-plans`、`dev-executing-plans`、`dev-subagent-driven-development`、`dev-project-test-governance`、`dev-verification-before-completion` 与 `dev-project-wiki-maintenance`，统一“问题先清零再规划/执行”的主线，并要求命中新测试流程打通任务时在 formal object 通过后刷新 `verification-v1` 正式产物、记录结构化新数据路径。
+
+- `2026-04-24`：补充 verification-v1 public command surface 口径，明确 `run test inventory` 已内部化，以及 `benchmark --record` 只写 raw benchmark records，不等于 formal refresh。
+

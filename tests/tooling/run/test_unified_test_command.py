@@ -386,7 +386,7 @@ class UnifiedTestCommandTests(unittest.TestCase):
                 "windows",
                 {},
                 REPO_ROOT,
-                {"output": "artifacts/testing-inventory"},
+                {"output": "verification/projections/testing-inventory"},
             )
 
         self.assertEqual("ok", result.status)
@@ -399,7 +399,7 @@ class UnifiedTestCommandTests(unittest.TestCase):
             REPO_ROOT,
             "windows",
             "verify verification-v1",
-            {"output": "artifacts/testing-inventory"},
+            {"output": "verification/projections/testing-inventory"},
             progress_callback=None,
         )
 

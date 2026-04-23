@@ -85,24 +85,24 @@ class CommandManifestCliTests(CommandManifestTestSupport):
         self.assertEqual("system/hosted-runtime-smoke", system_case["target"])
 
         inventory_case = manifest_module.parse_cli(
-            ["test", "inventory", "--output", "docs/testing-inventory"],
+            ["test", "inventory", "--output", "verification/projections/testing-inventory"],
             False,
             manifest,
             "windows",
         )
         self.assertEqual("test-inventory", inventory_case["command"]["id"])
         self.assertEqual("testing-inventory", inventory_case["target"])
-        self.assertEqual("docs/testing-inventory", inventory_case["options"]["output"])
+        self.assertEqual("verification/projections/testing-inventory", inventory_case["options"]["output"])
 
         verification_case = manifest_module.parse_cli(
-            ["verify", "verification-v1", "--output", "artifacts/testing-inventory"],
+            ["verify", "verification-v1", "--output", "verification/projections/testing-inventory"],
             False,
             manifest,
             "windows",
         )
         self.assertEqual("verify-verification-v1", verification_case["command"]["id"])
         self.assertEqual("verification-v1", verification_case["target"])
-        self.assertEqual("artifacts/testing-inventory", verification_case["options"]["output"])
+        self.assertEqual("verification/projections/testing-inventory", verification_case["options"]["output"])
 
         registry_refresh = manifest_module.parse_cli(["test", "registry", "refresh"], False, manifest, "macos")
         self.assertEqual("test-registry-refresh", registry_refresh["command"]["id"])

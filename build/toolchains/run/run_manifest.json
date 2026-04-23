@@ -1004,6 +1004,7 @@
       "title": "Generate the unified testing inventory authority reports",
       "group": "Test And Verify",
       "handler": "test.dispatch",
+      "public": false,
       "platforms": [
         "windows",
         "macos",
@@ -1014,10 +1015,10 @@
         "inventory"
       ],
       "syntax": "test inventory [--output <dir>]",
-      "show_in_menu": true,
+      "show_in_menu": false,
       "examples": [
         "run test inventory",
-        "run test inventory --output artifacts/testing-inventory"
+        "run test inventory --output verification/projections/testing-inventory"
       ]
     },
     {
@@ -1039,7 +1040,7 @@
       "show_in_menu": true,
       "examples": [
         "run verify verification-v1",
-        "run verify verification-v1 --output artifacts/testing-inventory"
+        "run verify verification-v1 --output verification/projections/testing-inventory"
       ]
     },
     {

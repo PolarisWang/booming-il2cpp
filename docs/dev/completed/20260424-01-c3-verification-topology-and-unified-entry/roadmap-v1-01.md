@@ -1,7 +1,7 @@
-# C3 Verification Topology And Unified Entry Roadmap v1.01
+﻿# C3 Verification Topology And Unified Entry Roadmap v1.01
 
 Date: 2026-04-24 00:00:00 +08:00
-Status: draft-approved
+Status: completed
 
 ## 1. 目标
 
@@ -275,14 +275,14 @@ Status: draft-approved
 
 | task_id | phase | status | owner | purpose | depends_on |
 | --- | --- | --- | --- | --- | --- |
-| `20260424-02-c3-phase-0-contract-freeze-and-layout-skeleton` | `Phase 0` | `ready` | `codex` | 冻结最终路径、目录职责、切换边界、实施清单 | `-` |
-| `20260424-03-c3-phase-1-catalog-and-subject-authority-migration` | `Phase 1` | `planned` | `codex` | 把 `subjects/*` authority 迁到 `verification/catalog/*` | `20260424-02-c3-phase-0-contract-freeze-and-layout-skeleton` |
-| `20260424-04-c3-phase-2-archive-evidence-and-projection-writer-cutover` | `Phase 2` | `planned` | `codex` | 切换 archive / evidence / projection writer | `20260424-03-c3-phase-1-catalog-and-subject-authority-migration` |
-| `20260424-05-c3-phase-3-workspace-and-public-entry-cutover` | `Phase 3` | `planned` | `codex` | 切换 workspace、manifest、CLI/TUI、统一首页 | `20260424-04-c3-phase-2-archive-evidence-and-projection-writer-cutover` |
-| `20260424-06-c3-phase-4-tests-verification-tree-and-discovery-cutover` | `Phase 4` | `planned` | `codex` | 建立 `tests/verification/*` 并迁移 verification 专属脚本 | `20260424-05-c3-phase-3-workspace-and-public-entry-cutover` |
-| `20260424-07-c3-phase-5-wiki-and-skill-cutover` | `Phase 5` | `planned` | `codex` | 切换 wiki/skill 到新 authority | `20260424-06-c3-phase-4-tests-verification-tree-and-discovery-cutover` |
-| `20260424-08-c3-phase-6-legacy-hard-cut-and-repo-cleanup` | `Phase 6` | `planned` | `codex` | 删除旧 authority、旧路径、旧 subject pack | `20260424-07-c3-phase-5-wiki-and-skill-cutover` |
-| `20260424-09-c3-phase-7-acceptance-and-archive` | `Phase 7` | `planned` | `codex` | 完成最终验证、报告、归档与 closeout | `20260424-08-c3-phase-6-legacy-hard-cut-and-repo-cleanup` |
+| `20260424-02-c3-phase-0-contract-freeze-and-layout-skeleton` | `Phase 0` | `completed` | `codex` | 冻结最终路径、目录职责、切换边界、实施清单 | `-` |
+| `20260424-03-c3-phase-1-catalog-and-subject-authority-migration` | `Phase 1` | `completed` | `codex` | 把 `subjects/*` authority 迁到 `verification/catalog/*` | `20260424-02-c3-phase-0-contract-freeze-and-layout-skeleton` |
+| `20260424-04-c3-phase-2-archive-evidence-and-projection-writer-cutover` | `Phase 2` | `completed` | `codex` | 切换 archive / evidence / projection writer | `20260424-03-c3-phase-1-catalog-and-subject-authority-migration` |
+| `20260424-05-c3-phase-3-workspace-and-public-entry-cutover` | `Phase 3` | `completed` | `codex` | 切换 workspace、manifest、CLI/TUI、统一首页 | `20260424-04-c3-phase-2-archive-evidence-and-projection-writer-cutover` |
+| `20260424-06-c3-phase-4-tests-verification-tree-and-discovery-cutover` | `Phase 4` | `completed` | `codex` | 建立 `tests/verification/*` 并迁移 verification 专属脚本 | `20260424-05-c3-phase-3-workspace-and-public-entry-cutover` |
+| `20260424-07-c3-phase-5-wiki-and-skill-cutover` | `Phase 5` | `completed` | `codex` | 切换 wiki/skill 到新 authority | `20260424-06-c3-phase-4-tests-verification-tree-and-discovery-cutover` |
+| `20260424-08-c3-phase-6-legacy-hard-cut-and-repo-cleanup` | `Phase 6` | `completed` | `codex` | 删除旧 authority、旧路径、旧 subject pack | `20260424-07-c3-phase-5-wiki-and-skill-cutover` |
+| `20260424-09-c3-phase-7-acceptance-and-archive` | `Phase 7` | `completed` | `codex` | 完成最终验证、报告、归档与 closeout | `20260424-08-c3-phase-6-legacy-hard-cut-and-repo-cleanup` |
 
 ## 7. 依赖
 
@@ -358,85 +358,86 @@ Status: draft-approved
 
 ### Phase 0 Checklist
 
-- [ ] 冻结 `verification/catalog/archive/evidence/workspaces/projections` 目录职责
-- [ ] 冻结 `subjects/*` 迁移矩阵
-- [ ] 冻结 `tests/verification/*` 最终树
-- [ ] 冻结 wiki/skill 切换清单
-- [ ] 冻结 legacy 清理清单
+- [x] 冻结 `verification/catalog/archive/evidence/workspaces/projections` 目录职责
+- [x] 冻结 `subjects/*` 迁移矩阵
+- [x] 冻结 `tests/verification/*` 最终树
+- [x] 冻结 wiki/skill 切换清单
+- [x] 冻结 legacy 清理清单
 
 ### Phase 1 Checklist
 
-- [ ] 迁移 `subject.manifest.json`
-- [ ] 迁移 `subject.features.json`
-- [ ] 迁移 proofs
-- [ ] 迁移 benchmarks
-- [ ] 迁移 engineering scenarios
-- [ ] 迁移 support source
-- [ ] 迁移 perf baselines
+- [x] 迁移 `subject.manifest.json`
+- [x] 迁移 `subject.features.json`
+- [x] 迁移 proofs
+- [x] 迁移 benchmarks
+- [x] 迁移 engineering scenarios
+- [x] 迁移 support source
+- [x] 迁移 perf baselines
 
 ### Phase 2 Checklist
 
-- [ ] formal archive writer -> `verification/archive/*`
-- [ ] owner evidence writer -> `verification/evidence/owners/*`
-- [ ] projection writer -> `verification/projections/*`
-- [ ] benchmark records merge -> `.artifact/*` + `verification/archive/*`
-- [ ] `run verify verification-v1 --json` 输出切到新 formal source
+- [x] formal archive writer -> `verification/archive/*`
+- [x] owner evidence writer -> `verification/evidence/owners/*`
+- [x] projection writer -> `verification/projections/*`
+- [x] benchmark records merge -> `.artifact/*` + `verification/archive/*`
+- [x] `run verify verification-v1 --json` 输出切到新 formal source
 
 ### Phase 3 Checklist
 
-- [ ] 生成 `verification/verification.manifest.json`
-- [ ] 生成 `verification/INDEX.md`
-- [ ] 生成 `verification/workspaces/verification-all.sln`
-- [ ] 生成 `verification/workspaces/subjects/*`
-- [ ] 生成 `verification/workspaces/routes/*`
-- [ ] 生成 `verification/workspaces/core/*`
-- [ ] CLI/TUI/help/manifest 切到新入口
+- [x] 生成 `verification/verification.manifest.json`
+- [x] 生成 `verification/INDEX.md`
+- [x] 生成 `verification/workspaces/verification-all.sln`
+- [x] 生成 `verification/workspaces/subjects/*`
+- [x] 生成 `verification/workspaces/routes/*`
+- [x] 生成 `verification/workspaces/core/*`
+- [x] CLI/TUI/help/manifest 切到新入口
 
 ### Phase 4 Checklist
 
-- [ ] 创建 `tests/verification/unit/archive/*`
-- [ ] 创建 `tests/verification/unit/catalog/*`
-- [ ] 创建 `tests/verification/unit/evidence/*`
-- [ ] 创建 `tests/verification/unit/projections/testing-inventory/*`
-- [ ] 创建 `tests/verification/unit/projections/benchmark/*`
-- [ ] 创建 `tests/verification/unit/workspaces/*`
-- [ ] 创建 `tests/verification/integration/pipeline/*`
-- [ ] 创建 `tests/verification/integration/catalog/*`
-- [ ] 创建 `tests/verification/integration/workspaces/*`
-- [ ] 创建 `tests/verification/tooling/run/*`
-- [ ] 创建 `tests/verification/contracts/*`
-- [ ] 删除纯 legacy 入口存在性测试
-- [ ] 增加旧 public path 不存在的负向断言
+- [x] 创建 `tests/verification/unit/archive/*`
+- [x] 创建 `tests/verification/unit/catalog/*`
+- [x] 创建 `tests/verification/unit/evidence/*`
+- [x] 创建 `tests/verification/unit/projections/testing-inventory/*`
+- [x] 创建 `tests/verification/unit/projections/benchmark/*`
+- [x] 创建 `tests/verification/unit/workspaces/*`
+- [x] 创建 `tests/verification/integration/pipeline/*`
+- [x] 创建 `tests/verification/integration/catalog/*`
+- [x] 创建 `tests/verification/integration/workspaces/*`
+- [x] 创建 `tests/verification/tooling/run/*`
+- [x] 创建 `tests/verification/contracts/*`
+- [x] 删除纯 legacy 入口存在性测试
+- [x] 增加旧 public path 不存在的负向断言
 
 ### Phase 5 Checklist
 
-- [ ] 更新 `wiki/06-测试验证/INDEX.md`
-- [ ] 更新 `wiki/06-测试验证/Verification-V1测试流程规范.md`
-- [ ] 更新 `wiki/06-测试验证/AOT新Feature接入自测规范.md`
-- [ ] 更新 `wiki/06-测试验证/新增测试接入规范.md`
-- [ ] 更新 `wiki/06-测试验证/测试分层.md`
-- [ ] 更新 `wiki/06-测试验证/模块映射.md`
-- [ ] 更新 `.codex/skills/dev-project-test-governance/SKILL.md`
-- [ ] 更新 `.codex/skills/dev-executing-plans/SKILL.md`
-- [ ] 更新 `.codex/skills/dev-subagent-driven-development/SKILL.md`
-- [ ] 更新 `.codex/skills/dev-verification-before-completion/SKILL.md`
-- [ ] 更新 `wiki/02-Skill体系/skill-registry.md`
-- [ ] 更新 `wiki/02-Skill体系/04-质量保障/project-test-governance.md`
+- [x] 更新 `wiki/06-测试验证/INDEX.md`
+- [x] 更新 `wiki/06-测试验证/Verification-V1测试流程规范.md`
+- [x] 更新 `wiki/06-测试验证/AOT新Feature接入自测规范.md`
+- [x] 更新 `wiki/06-测试验证/新增测试接入规范.md`
+- [x] 更新 `wiki/06-测试验证/测试分层.md`
+- [x] 更新 `wiki/06-测试验证/模块映射.md`
+- [x] 更新 `.codex/skills/dev-project-test-governance/SKILL.md`
+- [x] 更新 `.codex/skills/dev-executing-plans/SKILL.md`
+- [x] 更新 `.codex/skills/dev-subagent-driven-development/SKILL.md`
+- [x] 更新 `.codex/skills/dev-verification-before-completion/SKILL.md`
+- [x] 更新 `wiki/02-Skill体系/skill-registry.md`
+- [x] 更新 `wiki/02-Skill体系/04-质量保障/project-test-governance.md`
 
 ### Phase 6 Checklist
 
-- [ ] 删除 `docs/testing-inventory/verification/*`
-- [ ] 删除 `subjects/*/verification/*`
-- [ ] 删除当前 3 套 owner pack 目录
-- [ ] 删除旧 `solutions/*` verification public entry
-- [ ] 删除旧 alias / old path constants / old menu / old help text
-- [ ] 删除旧 run-oriented reporting sink
+- [x] 删除 `docs/testing-inventory/verification/*`
+- [x] 删除 `subjects/*/verification/*`
+- [x] 删除当前 3 套 owner pack 目录
+- [x] 删除旧 `solutions/*` verification public entry
+- [x] 删除旧 alias / old path constants / old menu / old help text
+- [x] 删除旧 run-oriented reporting sink
 
 ### Phase 7 Checklist
 
-- [ ] formal archive 在新根下可重建
-- [ ] owner evidence 在新根下可重建
-- [ ] workspace 在新根下可重建
-- [ ] CLI/TUI/wiki/skill 不再引用旧路径
-- [ ] legacy path scan 通过
-- [ ] roadmap closeout 完成
+- [x] formal archive 在新根下可重建
+- [x] owner evidence 在新根下可重建
+- [x] workspace 在新根下可重建
+- [x] CLI/TUI/wiki/skill 不再引用旧路径
+- [x] legacy path scan 通过
+- [x] roadmap closeout 完成
+

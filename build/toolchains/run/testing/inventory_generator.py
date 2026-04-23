@@ -1096,8 +1096,7 @@ def _write_verification_navigation(
             },
             "commands": {
                 "verify": "python build/toolchains/run/run.py verify verification-v1 --json",
-                "inventory": "python build/toolchains/run/run.py test inventory --json",
-                "workspace": "python build/toolchains/run/run.py project all-workspaces --json",
+                "workspace": "python build/toolchains/run/run.py generate project all --json",
             },
         },
     )
@@ -1121,8 +1120,7 @@ def _write_verification_navigation(
                 "",
                 "## Commands",
                 "- `python build/toolchains/run/run.py verify verification-v1 --json`",
-                "- `python build/toolchains/run/run.py test inventory --json`",
-                "- `python build/toolchains/run/run.py project all-workspaces --json`",
+                "- `python build/toolchains/run/run.py generate project all --json`",
                 "",
             ]
         ),

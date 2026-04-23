@@ -9,9 +9,9 @@ class VerifyVerificationV1CommandTests(VerifyRoadmap0TestSupport):
     def test_verify_verification_v1_refreshes_and_returns_formal_output_paths(self) -> None:
         verify_module = load_module(VERIFY_MODULE_PATH, "chaos_run_verify_verification_v1_refresh")
         payload = {
-            "outputRoot": "artifacts/testing-inventory",
+            "outputRoot": "verification/projections/testing-inventory",
             "artifacts": [
-                "artifacts/testing-inventory/inventory.html",
+                "verification/projections/testing-inventory/inventory.html",
                 "verification/archive/latest/result-snapshot.json",
                 "verification/archive/master/result-master.json",
                 "verification/archive/reports/completed/testing-inventory/summary.md",
@@ -29,7 +29,9 @@ class VerifyVerificationV1CommandTests(VerifyRoadmap0TestSupport):
         }
 
         with patch.object(verify_module, "inventory_generator_module", create=True) as generator_mock:
-            generator_mock.resolve_inventory_output_root.return_value = REPO_ROOT / "artifacts" / "testing-inventory"
+            generator_mock.resolve_inventory_output_root.return_value = (
+                REPO_ROOT / "verification" / "projections" / "testing-inventory"
+            )
             generator_mock.refresh_inventory_outputs.return_value = payload
             result = verify_module.handle(
                 {
@@ -40,7 +42,7 @@ class VerifyVerificationV1CommandTests(VerifyRoadmap0TestSupport):
                 REPO_ROOT,
                 "windows",
                 "verify verification-v1",
-                {"output": "artifacts/testing-inventory"},
+                {"output": "verification/projections/testing-inventory"},
             )
 
         self.assertEqual("ok", result.status)
@@ -53,11 +55,14 @@ class VerifyVerificationV1CommandTests(VerifyRoadmap0TestSupport):
             "verification/evidence/owners/FixtureSubject/codegen-stubs/capability/7/31/native/stub-index.json",
             result.payload["importantOutputs"],
         )
-        generator_mock.resolve_inventory_output_root.assert_called_once_with(REPO_ROOT, "artifacts/testing-inventory")
+        generator_mock.resolve_inventory_output_root.assert_called_once_with(
+            REPO_ROOT,
+            "verification/projections/testing-inventory",
+        )
         generator_mock.refresh_inventory_outputs.assert_called_once_with(
             REPO_ROOT,
             host_platform="windows",
-            output_root=REPO_ROOT / "artifacts" / "testing-inventory",
+            output_root=REPO_ROOT / "verification" / "projections" / "testing-inventory",
         )
 
     def test_verify_verification_v1_reports_refresh_failures(self) -> None:
