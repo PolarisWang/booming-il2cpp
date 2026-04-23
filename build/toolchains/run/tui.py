@@ -63,7 +63,6 @@ TEST_MENU_COMMAND_IDS = {
     "test-subject",
     "test-module",
     "test-system",
-    "test-pipeline",
     "test-registry-list",
     "test-registry-refresh",
     "test-registry-check-consistency",
@@ -641,12 +640,12 @@ def build_test_menu_entries(manifest: dict[str, Any], host_platform: str) -> lis
         MenuEntry("Selectors", {"id": "test-subject", "title": "Run a subject object"}, "subject", ["test"]),
         MenuEntry("Selectors", {"id": "test-module", "title": "Run a module verification object"}, "module", ["test"]),
         MenuEntry("Selectors", {"id": "test-system", "title": "Run a system validation object"}, "system", ["test"]),
-        MenuEntry("Selectors", {"id": "test-pipeline", "title": "Run a test pipeline object"}, "pipeline", ["test"]),
         MenuEntry("Registry", {"id": "test-registry-list", "title": "Browse registered test objects"}, "registry-list", ["test", "registry", "list"]),
         MenuEntry("Registry", {"id": "test-registry-refresh", "title": "Refresh registry snapshots"}, "registry-refresh", ["test", "registry", "refresh"]),
         MenuEntry("Registry", {"id": "test-registry-check-consistency", "title": "Check registry/wiki consistency"}, "registry-check", ["test", "registry", "check-consistency"]),
         MenuEntry("Results", {"id": "test-watch", "title": "Show the latest test event timeline"}, "watch", ["test", "watch"]),
         MenuEntry("Results", {"id": "test-summary", "title": "Show the latest aggregated summary"}, "summary", ["test", "summary"]),
+        MenuEntry("Results", {"id": "verify-verification-v1", "title": "Refresh verification-v1 formal outputs"}, "verify", ["verify", "verification-v1"]),
         MenuEntry("Back", {**MENU_BACK_COMMAND, "title": "Back to previous menu"}, "back", []),
     ]
 
@@ -689,7 +688,7 @@ def resolve_entry_argv(
 
     if command_id == "test-menu":
         mode = prompt_value_provider(
-            "Test mode (suite/subject/module/system/pipeline/all/registry-list/registry-refresh/registry-check/watch/summary), leave blank to cancel: "
+            "Test mode (suite/subject/module/system/all/registry-list/registry-refresh/registry-check/watch/summary/verify), leave blank to cancel: "
         ).strip().lower()
         if not mode:
             return None
@@ -715,11 +714,6 @@ def resolve_entry_argv(
             if not value:
                 return None
             return ["test", "system", "--scenario", value]
-        if mode == "pipeline":
-            value = prompt_value_provider("Enter pipeline id, for example: completion-runtime-core: ").strip()
-            if not value:
-                return None
-            return ["test", "pipeline", "--pipeline", value]
         if mode == "all":
             return ["test", "all"]
         if mode == "registry-list":
@@ -732,6 +726,8 @@ def resolve_entry_argv(
             return ["test", "watch"]
         if mode == "summary":
             return ["test", "summary"]
+        if mode == "verify":
+            return ["verify", "verification-v1"]
         return None
 
     if command_id == "test-suite":
@@ -759,12 +755,6 @@ def resolve_entry_argv(
         if not value:
             return None
         return ["test", "system", "--scenario", value]
-
-    if command_id == "test-pipeline":
-        value = prompt_value_provider("Enter pipeline id, for example: completion-runtime-core: ").strip()
-        if not value:
-            return None
-        return ["test", "pipeline", "--pipeline", value]
 
     if command_id == "test-all":
         return ["test", "all"]

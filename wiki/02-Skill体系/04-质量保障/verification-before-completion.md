@@ -15,7 +15,7 @@
 2. 再查 registry 快照或 `run test registry list --json`
 3. 有 `canonicalCommand` 就直接执行
 4. 有 `docRefs` 再回退到 `wiki/06-测试验证/` 对应页面
-5. 如果用户要求新的验证通过记录 / 新的数据，或任务命中 `project-test-governance` 主线，则 formal object 与 regression 通过后继续执行 `run test inventory --json` 刷新正式产物
+5. 如果用户要求新的验证通过记录 / 新的数据，或任务命中 `project-test-governance` 主线，则 formal object 与 regression 通过后继续执行 `run verify verification-v1 --json` 刷新正式产物
 
 ## Obligation-Driven 规则
 

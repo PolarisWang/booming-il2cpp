@@ -26,6 +26,7 @@ _DEFAULT_PLATFORM = "windows-x64"
 _STALE_AFTER_DAYS = 7.0
 _MODE_FLAGS = declared_metadata_labels_module.MODE_FLAGS
 _ALL_MODE_FLAGS = declared_metadata_labels_module.ALL_MODE_FLAGS
+_PLATFORM_KEY_PREFIXES = {"windows", "linux", "macos", "android", "ios"}
 
 
 def _load(name: str, path: Path):
@@ -34,6 +35,24 @@ def _load(name: str, path: Path):
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)  # type: ignore[union-attr]
     return module
+
+
+def _testing_support_path(repo_root: Path, *relative_parts: str) -> Path:
+    repo_path = repo_root / "build" / "toolchains" / "run" / "testing" / Path(*relative_parts)
+    if repo_path.is_file():
+        return repo_path
+    return Path(__file__).resolve().parent.joinpath(*relative_parts)
+
+
+def _import_verification_projection_module():
+    try:
+        from . import verification_projection as verification_projection_module
+    except ImportError:
+        testing_root = Path(__file__).resolve().parent
+        if str(testing_root) not in sys.path:
+            sys.path.insert(0, str(testing_root))
+        import verification_projection as verification_projection_module
+    return verification_projection_module
 
 
 def _sort_modes(values: list[str]) -> list[str]:
@@ -144,9 +163,17 @@ def _normalize_platform_key(value: str) -> str:
     if not text:
         return ""
     parts = text.split("-")
-    if len(parts) >= 2 and parts[0] in {"windows", "linux", "macos"}:
+    if len(parts) >= 2 and parts[0] in _PLATFORM_KEY_PREFIXES:
         return "-".join(parts[:2])
     return text
+
+
+def _looks_like_platform_key(value: str) -> bool:
+    text = str(value or "").strip().lower()
+    if not text:
+        return False
+    parts = text.split("-")
+    return len(parts) >= 2 and parts[0] in _PLATFORM_KEY_PREFIXES
 
 
 def _parse_timestamp(value: str | None) -> datetime | None:
@@ -451,12 +478,67 @@ def _record_sort_key(record: dict[str, Any]) -> tuple[float, str]:
     return ((parsed.timestamp() if parsed else 0.0), recorded_at)
 
 
+def _summary_record(record: dict[str, Any]) -> dict[str, Any]:
+    device = dict(record.get("device") or {})
+    return {
+        "mode": str(record.get("mode") or ""),
+        "platform": str(record.get("platform") or ""),
+        "device": {
+            "id": str(device.get("id") or ""),
+            "name": str(device.get("name") or ""),
+        },
+        "metrics": dict(record.get("metrics") or {}),
+        "recordedAt": record.get("recordedAt"),
+        "gitCommit": record.get("gitCommit"),
+    }
+
+
+def _record_platform_key(record: dict[str, Any]) -> str:
+    payload = dict(record or {})
+    device = dict(payload.get("device") or {})
+    return _normalize_platform_key(
+        str(
+            payload.get("platform")
+            or device.get("platformId")
+            or device.get("platform")
+            or ""
+        )
+    )
+
+
+def _device_platform_key(
+    device_id: str,
+    *,
+    modes: dict[str, Any] | None = None,
+    cases: dict[str, Any] | None = None,
+) -> str:
+    platform_key = _normalize_platform_key(device_id)
+    if platform_key and _looks_like_platform_key(device_id):
+        return platform_key
+
+    candidates: set[str] = set()
+    for record in list(dict(modes or {}).values()):
+        record_platform_key = _record_platform_key(dict(record or {}))
+        if record_platform_key:
+            candidates.add(record_platform_key)
+    for case_payload in list(dict(cases or {}).values()):
+        records = dict(dict(case_payload or {}).get("records") or {})
+        for record in list(records.values()):
+            record_platform_key = _record_platform_key(dict(record or {}))
+            if record_platform_key:
+                candidates.add(record_platform_key)
+    if not candidates:
+        return ""
+    return sorted(candidates)[0]
+
+
 def _choose_device_for_platform(by_device: dict[str, dict[str, Any]], platform_key: str) -> str | None:
     best_device_id: str | None = None
     best_score: tuple[int, float, str] = (-1, -1.0, "")
 
     for device_id, modes in by_device.items():
-        if platform_key and _normalize_platform_key(device_id) != platform_key:
+        device_platform_key = _device_platform_key(device_id, modes=modes)
+        if platform_key and device_platform_key and device_platform_key != platform_key:
             continue
         latest_record = max(list(modes.values()), key=_record_sort_key, default=None)
         latest_timestamp = _record_sort_key(latest_record)[0] if latest_record else -1.0
@@ -955,10 +1037,265 @@ def _summarize_subject_entries(entries: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def _load_json_if_exists(path: Path) -> dict[str, Any] | None:
+    if not path.is_file():
+        return None
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    return dict(payload) if isinstance(payload, dict) else None
+
+
+def _load_formal_source(repo_root: Path) -> dict[str, Any] | None:
+    master_root = repo_root / "docs" / "testing-inventory" / "verification" / "master"
+    if not master_root.is_dir():
+        return None
+    payload = {
+        "closure": _load_json_if_exists(master_root / "closure-master.json"),
+        "capability": _load_json_if_exists(master_root / "capability-master.json"),
+        "evidenceClaim": _load_json_if_exists(master_root / "evidence-claims-master.json"),
+        "stage": _load_json_if_exists(master_root / "stage-master.json"),
+        "result": _load_json_if_exists(master_root / "result-master.json"),
+    }
+    if not any(value for value in payload.values()):
+        return None
+    return payload
+
+
+def _projection_mode_status(row: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    raw = dict(row.get("modeStatus") or {})
+    if raw:
+        return {
+            mode: dict(entry or {})
+            for mode, entry in raw.items()
+        }
+
+    result: dict[str, dict[str, Any]] = {}
+    for mode in _MODE_ORDER:
+        status = str(row.get(f"{mode}Status") or "").strip()
+        entry = {
+            "mode": mode,
+            "status": status or "unsupported",
+            "deviceId": str(row.get("deviceId") or "unknown"),
+            "deviceName": str(row.get("deviceName") or row.get("deviceId") or ""),
+            "recordedAt": row.get("lastRecordedAt"),
+            "gitCommit": row.get("gitCommit"),
+            "metrics": {},
+            "isStale": bool(row.get("isStale", False)),
+            "staleReasonCode": "",
+            "staleReasonLabel": "",
+        }
+        duration_key = f"{mode}MeanDurationMs"
+        ops_key = f"{mode}OpsPerSecond"
+        metrics: dict[str, Any] = {}
+        if isinstance(row.get(duration_key), (int, float)):
+            metrics["meanDurationMs"] = float(row[duration_key])
+        if isinstance(row.get(ops_key), (int, float)):
+            metrics["meanOpsPerSecond"] = float(row[ops_key])
+        if metrics:
+            entry["metrics"] = metrics
+        if status == "recorded":
+            entry.update(_mode_reason_payload(status="recorded", declared_by="formal projection"))
+        elif status == "missing":
+            entry.update(_mode_reason_payload(status="missing", declared_by="formal projection"))
+        else:
+            entry.update(_mode_reason_payload(status="unsupported", declared_by="formal projection"))
+        result[mode] = entry
+    return result
+
+
+def _projection_case_payload(row: dict[str, Any]) -> dict[str, Any]:
+    mode_status = _projection_mode_status(row)
+    supported_modes = _sort_modes(list(row.get("supportedModes") or []))
+    recorded_modes = _sort_modes(
+        [
+            mode
+            for mode, entry in mode_status.items()
+            if str(entry.get("status") or "") == "recorded"
+        ]
+    )
+    missing_modes = _sort_modes(
+        [
+            mode
+            for mode, entry in mode_status.items()
+            if str(entry.get("status") or "") == "missing"
+        ]
+    )
+    stale_modes = _sort_modes(
+        [
+            mode
+            for mode, entry in mode_status.items()
+            if bool(entry.get("isStale", False))
+        ]
+    )
+    unsupported_modes = _sort_modes(
+        [
+            mode
+            for mode, entry in mode_status.items()
+            if str(entry.get("status") or "") == "unsupported"
+        ]
+    )
+    return {
+        "caseId": str(row.get("stableId") or ""),
+        "displayName": str(row.get("displayName") or row.get("alias") or row.get("stableId") or ""),
+        "alias": str(row.get("alias") or row.get("stableId") or ""),
+        "workloadEntry": str(row.get("workloadEntry") or row.get("method") or ""),
+        "entryIndex": int(row.get("entryIndex") or 0),
+        "assemblyName": str(row.get("assemblyName") or ""),
+        "declaringType": str(row.get("declaringType") or ""),
+        "methodName": str(row.get("methodName") or ""),
+        "methodSignature": str(row.get("methodSignature") or ""),
+        "category": int(row.get("category") or 0),
+        "categoryLabel": str(row.get("categoryLabel") or "Uncategorized"),
+        "metrics": int(row.get("metrics") or 0),
+        "metricLabels": list(row.get("metricLabels") or []),
+        "requires": int(row.get("requires") or 0),
+        "requirementLabels": list(row.get("requirementLabels") or []),
+        "archetype": int(row.get("archetype") or 0),
+        "archetypeLabel": str(row.get("archetypeLabel") or declared_metadata_labels_module.archetype_label(0)),
+        "hotUpdateCapability": int(row.get("hotUpdateCapability") or 0),
+        "hotUpdateCapabilityLabels": list(row.get("hotUpdateCapabilityLabels") or []),
+        "capabilityFamily": int(row.get("capabilityFamily") or 0),
+        "capabilityFamilyLabel": str(row.get("capabilityFamilyLabel") or ""),
+        "capabilityItem": int(row.get("capabilityItem") or 0),
+        "capabilityItemLabel": str(row.get("capabilityItemLabel") or ""),
+        "ownerSubjectId": str(row.get("ownerSubjectId") or ""),
+        "supportStates": [int(value) for value in list(row.get("supportStates") or [])],
+        "supportStateLabels": [str(value) for value in list(row.get("supportStateLabels") or [])],
+        "proofRequired": bool(row.get("proofRequired", False)),
+        "benchmarkRequired": bool(row.get("benchmarkRequired", False)),
+        "warmupCount": int(row.get("warmupCount") or 0),
+        "iterationCount": int(row.get("iterationCount") or 0),
+        "invocationCount": int(row.get("invocationCount") or 0),
+        "supportedModes": supported_modes,
+        "recordedModes": recorded_modes,
+        "missingModes": missing_modes,
+        "staleModes": stale_modes,
+        "unsupportedModes": unsupported_modes,
+        "modeStatus": mode_status,
+        "isStale": bool(stale_modes or row.get("isStale", False)),
+        "coverage": {
+            "supportedModeCount": len(supported_modes),
+            "recordedModeCount": len(recorded_modes),
+            "missingModeCount": len(missing_modes),
+            "staleModeCount": len(stale_modes),
+            "unsupportedModeCount": len(unsupported_modes),
+            "isComplete": len(supported_modes) > 0 and len(missing_modes) == 0 and len(stale_modes) == 0,
+            "needsAttention": bool(missing_modes or stale_modes),
+        },
+        "keyMetrics": _key_metrics_from_mode_status(mode_status),
+        "lastRecordedAt": str(row.get("lastRecordedAt") or ""),
+        "gitCommit": str(row.get("gitCommit") or ""),
+        "deviceId": str(row.get("deviceId") or ""),
+        "deviceName": str(row.get("deviceName") or row.get("deviceId") or ""),
+        "platformId": str(row.get("platformId") or ""),
+        "stableId": str(row.get("stableId") or ""),
+    }
+
+
+def _collect_data_from_formal_source(formal_source: dict[str, Any]) -> dict[str, Any]:
+    verification_projection_module = _import_verification_projection_module()
+    projected = verification_projection_module.project_inventory_tables(formal_source)
+    benchmark_rows = list(projected.get("benchmark") or [])
+    data: dict[str, Any] = {}
+
+    for row in benchmark_rows:
+        subject_id = str(row.get("subjectId") or row.get("ownerSubjectId") or "").strip()
+        if not subject_id:
+            continue
+        device_id = str(row.get("deviceId") or "").strip()
+        case_id = str(row.get("stableId") or "").strip()
+        subject_payload = data.setdefault(
+            subject_id,
+            {
+                "subjectId": subject_id,
+                "displayName": str(row.get("subjectDisplayName") or subject_id),
+                "summaryWorkloadEntry": str(row.get("subjectSummaryWorkloadEntry") or ""),
+                "summaryBenchmarkCase": dict(row.get("subjectSummaryBenchmarkCase") or {}),
+                "supportedModesByPlatform": dict(row.get("subjectSupportedModesByPlatform") or {}),
+                "availablePlatforms": [],
+                "platforms": dict(row.get("subjectPlatforms") or {}),
+                "latestByDevice": dict(row.get("subjectLatestByDevice") or {}),
+                "benchmarkCasesByDevice": {},
+                "declaredBenchmarkCases": {},
+                "caseSummaryByDevice": {},
+                "history": {},
+                "comparisons": {},
+            },
+        )
+        if not subject_payload["platforms"] and isinstance(row.get("subjectPlatforms"), dict):
+            subject_payload["platforms"] = dict(row.get("subjectPlatforms") or {})
+        if not subject_payload["latestByDevice"] and isinstance(row.get("subjectLatestByDevice"), dict):
+            subject_payload["latestByDevice"] = dict(row.get("subjectLatestByDevice") or {})
+        if not subject_payload["supportedModesByPlatform"] and isinstance(row.get("subjectSupportedModesByPlatform"), dict):
+            subject_payload["supportedModesByPlatform"] = dict(row.get("subjectSupportedModesByPlatform") or {})
+        if not subject_payload["summaryWorkloadEntry"]:
+            subject_payload["summaryWorkloadEntry"] = str(row.get("subjectSummaryWorkloadEntry") or "")
+        if not subject_payload["summaryBenchmarkCase"] and isinstance(row.get("subjectSummaryBenchmarkCase"), dict):
+            subject_payload["summaryBenchmarkCase"] = dict(row.get("subjectSummaryBenchmarkCase") or {})
+
+        case_payload = _projection_case_payload(row)
+        if device_id:
+            subject_payload["benchmarkCasesByDevice"].setdefault(device_id, {})[case_id] = case_payload
+        subject_payload["declaredBenchmarkCases"][case_id] = _summary_benchmark_case_payload(case_payload)
+
+    for subject_id, subject_payload in data.items():
+        benchmark_cases_by_device = dict(subject_payload.get("benchmarkCasesByDevice") or {})
+        declared_cases = dict(subject_payload.get("declaredBenchmarkCases") or {})
+        subject_payload["caseSummaryByDevice"] = {
+            device_id: _summarize_case_entries(list(cases.values()))
+            for device_id, cases in benchmark_cases_by_device.items()
+        }
+        if not subject_payload["summaryWorkloadEntry"]:
+            subject_payload["summaryWorkloadEntry"] = _resolve_summary_workload_entry(
+                {},
+                benchmark_cases_by_device=benchmark_cases_by_device,
+                declared_cases=declared_cases,
+            )
+        if not subject_payload["summaryBenchmarkCase"]:
+            summary_case = _find_summary_benchmark_case(
+                str(subject_payload.get("summaryWorkloadEntry") or ""),
+                benchmark_cases_by_device=benchmark_cases_by_device,
+                declared_cases=declared_cases,
+            )
+            subject_payload["summaryBenchmarkCase"] = summary_case or {}
+        if not subject_payload["availablePlatforms"]:
+            platforms = dict(subject_payload.get("platforms") or {})
+            if platforms:
+                subject_payload["availablePlatforms"] = sorted(platforms)
+            else:
+                subject_payload["availablePlatforms"] = sorted(
+                    {
+                        str(case.get("platformId") or "")
+                        for cases in benchmark_cases_by_device.values()
+                        for case in cases.values()
+                        if str(case.get("platformId") or "")
+                    }
+                )
+        if not subject_payload["latestByDevice"]:
+            subject_payload["latestByDevice"] = {
+                device_id: {
+                    case_id: {
+                        "modeStatus": dict(case_payload.get("modeStatus") or {}),
+                        "lastRecordedAt": case_payload.get("lastRecordedAt"),
+                        "gitCommit": case_payload.get("gitCommit"),
+                    }
+                    for case_id, case_payload in cases.items()
+                }
+                for device_id, cases in benchmark_cases_by_device.items()
+            }
+        if not subject_payload["summaryBenchmarkCase"]:
+            subject_payload["summaryBenchmarkCase"] = None
+        else:
+            subject_payload["summaryBenchmarkCase"] = dict(subject_payload["summaryBenchmarkCase"])
+
+    return data
+
+
 def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict[str, Any]:
-    testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
-    comparison_mod = _load("benchmark_comparison", testing_root / "benchmark_comparison.py")
-    subjects_mod = _load("subjects", testing_root / "subjects.py")
+    comparison_mod = _load("benchmark_comparison", _testing_support_path(repo_root, "benchmark_comparison.py"))
+    subjects_mod = _load("subjects", _testing_support_path(repo_root, "subjects.py"))
 
     if subject_ids is None:
         subject_ids = subjects_mod.discover_perf_subject_ids(repo_root)
@@ -973,7 +1310,9 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
         declared_case_lookup = _build_declared_case_lookup(declared_cases)
 
         seen_pairs: set[tuple[str, str]] = set()
+        seen_case_pairs: set[tuple[str, str]] = set()
         by_device: dict[str, dict[str, Any]] = {}
+        case_fallback_by_device: dict[str, dict[str, Any]] = {}
         history: dict[str, dict[str, list[Any]]] = {}
         case_records_by_device: dict[str, dict[str, dict[str, Any]]] = {}
 
@@ -981,6 +1320,8 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
             for record in _iter_jsonl_reverse(records_path):
                 mode = str(record.get("mode") or "")
                 device_id = str(dict(record.get("device") or {}).get("id") or "unknown")
+                pair = (mode, device_id)
+
                 benchmark_case = dict(record.get("benchmarkCase") or {})
                 case_id = str(benchmark_case.get("stableId") or benchmark_case.get("alias") or "").strip()
                 if case_id:
@@ -991,6 +1332,13 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
                     )
                     if declared_cases and not resolved_case_id:
                         continue
+                    summary_record = _summary_record(record)
+                    history.setdefault(device_id, {}).setdefault(mode, [])
+                    if len(history[device_id][mode]) < 20:
+                        history[device_id][mode].append(summary_record)
+                    if pair not in seen_case_pairs:
+                        seen_case_pairs.add(pair)
+                        case_fallback_by_device.setdefault(device_id, {})[mode] = summary_record
                     canonical_case_id = resolved_case_id or case_id
                     record_case_meta = {
                         "stableId": canonical_case_id,
@@ -1047,19 +1395,22 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
                         _merge_case_meta(record_case_meta, dict(declared_cases.get(canonical_case_id) or {})),
                     )
                     if mode and mode not in case_payload["records"]:
-                        case_payload["records"][mode] = record
+                        case_payload["records"][mode] = summary_record
                     continue
-                pair = (mode, device_id)
-
+                summary_record = _summary_record(record)
                 history.setdefault(device_id, {}).setdefault(mode, [])
                 if len(history[device_id][mode]) < 20:
-                    history[device_id][mode].append(record)
-
+                    history[device_id][mode].append(summary_record)
                 if pair not in seen_pairs:
                     seen_pairs.add(pair)
-                    by_device.setdefault(device_id, {})[mode] = record
+                    by_device.setdefault(device_id, {})[mode] = summary_record
 
         comparisons: dict[str, Any] = {}
+        for device_id, modes in case_fallback_by_device.items():
+            merged_modes = by_device.setdefault(device_id, {})
+            for mode, record in modes.items():
+                merged_modes.setdefault(mode, record)
+
         for device_id, modes in by_device.items():
             comparison = comparison_mod.compute_comparison(
                 dict(dict(modes.get("managed") or {}).get("metrics") or {}),
@@ -1071,7 +1422,13 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
                 "verdict": comparison_mod.evaluate_targets(comparison),
             }
 
-        platforms = sorted(set(_manifest_platforms(manifest)) | {_normalize_platform_key(device_id) for device_id in by_device})
+        platforms = sorted(
+            set(_manifest_platforms(manifest))
+            | {
+                _device_platform_key(device_id, modes=modes)
+                for device_id, modes in by_device.items()
+            }
+        )
         platform_summaries: dict[str, Any] = {}
         supported_modes_by_platform: dict[str, list[str]] = {}
         for platform_key in platforms:
@@ -1102,7 +1459,7 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
 
         benchmark_cases_by_device: dict[str, dict[str, Any]] = {}
         for device_id, cases in case_records_by_device.items():
-            platform_key = _normalize_platform_key(device_id)
+            platform_key = _device_platform_key(device_id, cases=cases)
             platform_supported_modes = supported_modes_by_platform.get(platform_key) or _sort_modes(
                 [mode for mode in _MODE_ORDER if any(mode in dict(case_payload.get("records") or {}) for case_payload in cases.values())]
             )
@@ -1146,6 +1503,10 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
         }
 
     return data
+
+
+def collect_dashboard_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict[str, Any]:
+    return _collect_data(repo_root, subject_ids)
 
 
 def _iter_jsonl_reverse(path: Path):
@@ -1217,10 +1578,21 @@ def _dashboard_payload(data: dict[str, Any], overview: dict[str, Any]) -> dict[s
     }
 
 
+def build_dashboard_overview(
+    data: dict[str, Any],
+    default_platform_prefix: str = _DEFAULT_PLATFORM,
+) -> dict[str, Any]:
+    return _build_overview(data, default_platform_prefix=default_platform_prefix)
+
+
 def generate(repo_root: Path, output_path: Path, subject_ids: list[str] | None = None) -> None:
-    data = _collect_data(repo_root, subject_ids)
+    formal_source = _load_formal_source(repo_root)
+    if formal_source is not None:
+        data = _collect_data_from_formal_source(formal_source)
+    else:
+        data = _collect_data(repo_root, subject_ids)
     overview = _build_overview(data)
-    template = _read_template(repo_root / "build" / "toolchains" / "run" / "testing" / "templates" / "benchmark-dashboard.html")
+    template = _read_template(_testing_support_path(repo_root, "templates", "benchmark-dashboard.html"))
     payload = _dashboard_payload(data, overview)
     html = template.replace(
         "/* BENCHMARK_DATA_PLACEHOLDER */",
@@ -1232,18 +1604,27 @@ def generate(repo_root: Path, output_path: Path, subject_ids: list[str] | None =
 
 
 def update_docs(repo_root: Path, subject_id: str | None = None) -> None:
-    testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
-    subjects_mod = _load("subjects", testing_root / "subjects.py")
     docs_root = repo_root / "docs" / "benchmark"
     subjects_doc_root = docs_root / "subjects"
     subjects_doc_root.mkdir(parents=True, exist_ok=True)
 
-    del subject_id
-    data = _collect_data(repo_root, subjects_mod.discover_perf_subject_ids(repo_root))
+    formal_source = _load_formal_source(repo_root)
+    if formal_source is not None:
+        del subject_id
+        data = _collect_data_from_formal_source(formal_source)
+    else:
+        subjects_mod = _load("subjects", _testing_support_path(repo_root, "subjects.py"))
+        del subject_id
+        data = _collect_data(repo_root, subjects_mod.discover_perf_subject_ids(repo_root))
     overview = _build_overview(data)
 
-    for stale_path in subjects_doc_root.glob("*.json"):
-        stale_path.unlink()
+    for stale_path in list(subjects_doc_root.glob("*.json")):
+        try:
+            stale_path.unlink()
+        except PermissionError:
+            # Some sandboxed environments deny deletes but still allow the
+            # current subject payloads to be rewritten in place.
+            continue
 
     for current_subject_id, subject_payload in data.items():
         (subjects_doc_root / f"{current_subject_id}.json").write_text(
@@ -1256,7 +1637,7 @@ def update_docs(repo_root: Path, subject_id: str | None = None) -> None:
         encoding="utf-8",
     )
 
-    template = _read_template(testing_root / "templates" / "benchmark-dashboard.html")
+    template = _read_template(_testing_support_path(repo_root, "templates", "benchmark-dashboard.html"))
     payload = _dashboard_payload(data, overview)
     html = template.replace(
         "/* BENCHMARK_DATA_PLACEHOLDER */",

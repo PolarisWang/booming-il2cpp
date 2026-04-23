@@ -78,7 +78,6 @@ class RegistryIndex:
     declared_benchmarks: list[dict[str, Any]] = field(default_factory=list)
     module_verifications: list[dict[str, Any]] = field(default_factory=list)
     system_scenarios: list[dict[str, Any]] = field(default_factory=list)
-    pipelines: list[dict[str, Any]] = field(default_factory=list)
     errors: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
 
@@ -94,10 +93,13 @@ class RegistryIndex:
                 *self.declared_benchmarks,
                 *self.module_verifications,
                 *self.system_scenarios,
-                *self.pipelines,
             ],
             key=lambda item: item["id"],
         )
+
+    @property
+    def public_flat_items(self) -> list[dict[str, Any]]:
+        return self.flat_items
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -110,8 +112,23 @@ class RegistryIndex:
             "declaredBenchmarks": self.declared_benchmarks,
             "moduleVerifications": self.module_verifications,
             "systemScenarios": self.system_scenarios,
-            "pipelines": self.pipelines,
             "flatItems": self.flat_items,
+            "errors": list(self.errors),
+            "warnings": list(self.warnings),
+        }
+
+    def to_public_dict(self) -> dict[str, Any]:
+        return {
+            "hostPlatform": self.host_platform,
+            "suites": self.suites,
+            "subjects": self.subjects,
+            "engineeringValidations": self.engineering_validations,
+            "engineeringWorkloads": self.engineering_workloads,
+            "declaredUnitTests": self.declared_unit_tests,
+            "declaredBenchmarks": self.declared_benchmarks,
+            "moduleVerifications": self.module_verifications,
+            "systemScenarios": self.system_scenarios,
+            "flatItems": self.public_flat_items,
             "errors": list(self.errors),
             "warnings": list(self.warnings),
         }
@@ -119,7 +136,6 @@ class RegistryIndex:
 
 CANONICAL_MODULE_MANIFEST_LAYOUT = "tests/fixtures/registry/modules/<module>/<profile>/verification.manifest.json"
 CANONICAL_SYSTEM_MANIFEST_LAYOUT = "tests/fixtures/registry/systems/<scenario>/scenario.manifest.json"
-CANONICAL_PIPELINE_MANIFEST_LAYOUT = "tests/fixtures/registry/pipelines/<pipeline>/pipeline.manifest.json"
 
 
 def _require_string(payload: dict[str, Any], field_name: str) -> str:
@@ -190,11 +206,6 @@ def _base_registry_object(
 
 
 def _resolved_member_ids(item: dict[str, Any]) -> list[str]:
-    if item["type"] == "pipeline":
-        member_ids: list[str] = []
-        for phase in item.get("phases", []):
-            member_ids.extend(member["id"] for member in phase.get("members", []))
-        return member_ids
     if item["type"] == "subject":
         return [str(item["id"])]
     return [member["id"] for member in item.get("members", [])]
@@ -283,50 +294,6 @@ def _load_system_manifest(path: Path) -> dict[str, Any]:
     )
     item["scenarioId"] = scenario
     item["members"] = _member_list(payload, "members")
-    item["resolvedMembers"] = _resolved_member_ids(item)
-    item["deprecated"] = _deprecated_flag(payload)
-    return item
-
-
-def _load_pipeline_manifest(path: Path) -> dict[str, Any]:
-    payload = read_json(path)
-    collection_root = path.parent.parent
-    if not _matches_registry_collection_root(collection_root, canonical_name="pipelines"):
-        raise ValueError(f"pipeline manifest path must be {CANONICAL_PIPELINE_MANIFEST_LAYOUT}")
-    pipeline = path.parent.name
-    primary_module_id = payload.get("primaryModuleId")
-    if primary_module_id is not None and not isinstance(primary_module_id, str):
-        raise ValueError("primaryModuleId must be a string")
-    item = _base_registry_object(
-        object_id=f"pipeline/{pipeline}",
-        object_type="pipeline",
-        display_name=_require_string(payload, "displayName"),
-        level="pipeline",
-        manifest_path=path,
-        primary_module_id=primary_module_id,
-        module_ids=_string_list(payload, "moduleIds"),
-        subsystem_ids=_string_list(payload, "subsystemIds"),
-        supported_hosts=_string_list(payload, "supportedHosts"),
-        doc_refs=_string_list(payload, "docRefs"),
-    )
-    item["pipelineId"] = pipeline
-    item["pipelinePurpose"] = _require_string(payload, "pipelinePurpose")
-    phases = payload.get("phases", [])
-    if not isinstance(phases, list) or not phases:
-        raise ValueError("phases must be a non-empty list")
-    normalized_phases: list[dict[str, Any]] = []
-    for index, phase in enumerate(phases):
-        if not isinstance(phase, dict):
-            raise ValueError(f"phases[{index}] must be an object")
-        normalized_phases.append(
-            {
-                "id": _require_string(phase, "id"),
-                "title": _require_string(phase, "title"),
-                "parallel": bool(phase.get("parallel", False)),
-                "members": _member_list(phase, "members"),
-            }
-        )
-    item["phases"] = normalized_phases
     item["resolvedMembers"] = _resolved_member_ids(item)
     item["deprecated"] = _deprecated_flag(payload)
     return item
@@ -841,8 +808,6 @@ def _canonical_command(item: dict[str, Any]) -> str:
         return f"run test module --id {item['id']}"
     if object_type == "system":
         return f"run test system --id {item['id']}"
-    if object_type == "pipeline":
-        return f"run test pipeline --id {item['id']}"
     return f"run test --id {item['id']}"
 
 
@@ -878,12 +843,15 @@ def _subsystem_scope_tokens(item: dict[str, Any]) -> set[str]:
 
 
 def _recommendation_entry(item: dict[str, Any]) -> dict[str, str]:
-    return {
+    entry = {
         "objectId": str(item["id"]),
         "objectType": str(item["type"]),
         "displayName": str(item.get("displayName") or item["id"]),
-        "command": str(item.get("canonicalCommand") or _canonical_command(item)),
     }
+    command = str(item.get("canonicalCommand") or _canonical_command(item))
+    if command:
+        entry["command"] = command
+    return entry
 
 
 def _related_items(index: RegistryIndex, item: dict[str, Any]) -> list[dict[str, Any]]:
@@ -935,11 +903,6 @@ def _decorate_registry_items(index: RegistryIndex) -> None:
             for candidate in related
             if candidate["type"] == "module" and candidate.get("primaryModuleId") == primary_module_id
         ]
-        related_pipelines = [
-            candidate
-            for candidate in related
-            if candidate["type"] == "pipeline" and candidate.get("pipelinePurpose") in {"completion", "release"}
-        ]
 
         if item["type"] == "suite":
             required_before_completion = related_modules or [item]
@@ -950,25 +913,12 @@ def _decorate_registry_items(index: RegistryIndex) -> None:
         else:
             required_before_completion = []
 
-        if item["type"] == "pipeline" and item.get("pipelinePurpose") in {"completion", "release"}:
-            required_for_pipeline_release = [item]
-        else:
-            required_for_pipeline_release = related_pipelines
-
-        excluded_ids = {
-            *[candidate["id"] for candidate in required_before_completion],
-            *[candidate["id"] for candidate in required_for_pipeline_release],
-        }
-        recommended = [
-            candidate
-            for candidate in related
-            if candidate["id"] not in excluded_ids and candidate["type"] != "pipeline"
-        ]
+        excluded_ids = {candidate["id"] for candidate in required_before_completion}
+        recommended = [candidate for candidate in related if candidate["id"] not in excluded_ids]
 
         item["skillRecommendations"] = {
             "recommended": _dedupe_entries(recommended),
             "requiredBeforeCompletion": _dedupe_entries(required_before_completion),
-            "requiredForPipelineRelease": _dedupe_entries(required_for_pipeline_release),
         }
 
 
@@ -1012,23 +962,16 @@ def scan_registry(
         repo_root,
         canonical_parts=("tests", "fixtures", "registry", "systems"),
     )
-    pipelines_root = _canonical_registry_collection_root(
-        repo_root,
-        canonical_parts=("tests", "fixtures", "registry", "pipelines"),
-    )
     suites = _suite_items(host_platform, public_suite_specs)
     subjects, subject_errors = _scan_directory(repo_root / "subjects", subjects_module.SUBJECT_MANIFEST_NAME, _load_subject_manifest)
     modules, module_errors = _scan_directory(modules_root, "verification.manifest.json", _load_module_manifest)
     systems, system_errors = _scan_directory(systems_root, "scenario.manifest.json", _load_system_manifest)
-    pipelines, pipeline_errors = _scan_directory(pipelines_root, "pipeline.manifest.json", _load_pipeline_manifest)
     subjects = _exclude_deprecated(subjects)
     modules = _exclude_deprecated(modules)
     systems = _exclude_deprecated(systems)
-    pipelines = _exclude_deprecated(pipelines)
     subjects = _filter_host_supported(subjects, host_platform)
     modules = _filter_host_supported(modules, host_platform)
     systems = _filter_host_supported(systems, host_platform)
-    pipelines = _filter_host_supported(pipelines, host_platform)
     engineering_validations: list[dict[str, Any]] = []
     engineering_workloads: list[dict[str, Any]] = []
     declared_unit_tests: list[dict[str, Any]] = []
@@ -1051,8 +994,7 @@ def scan_registry(
         declared_benchmarks=declared_benchmarks,
         module_verifications=modules,
         system_scenarios=systems,
-        pipelines=pipelines,
-        errors=[*subject_errors, *compiled_errors, *module_errors, *system_errors, *pipeline_errors],
+        errors=[*subject_errors, *compiled_errors, *module_errors, *system_errors],
         warnings=[],
     )
     _decorate_registry_items(provisional)
@@ -1067,7 +1009,6 @@ def scan_registry(
         declared_benchmarks=provisional.declared_benchmarks,
         module_verifications=provisional.module_verifications,
         system_scenarios=provisional.system_scenarios,
-        pipelines=provisional.pipelines,
         errors=errors,
         warnings=warnings,
     )
@@ -1111,13 +1052,8 @@ def expand_execution_plan(index: RegistryIndex, object_id: str) -> list[dict[str
                 plan.append(item)
             return
         active_stack.add(current_id)
-        if item["type"] == "pipeline":
-            for phase in item.get("phases", []):
-                for member in phase.get("members", []):
-                    visit(member["id"])
-        else:
-            for member in item.get("members", []):
-                visit(member["id"])
+        for member in item.get("members", []):
+            visit(member["id"])
         active_stack.remove(current_id)
 
     visit(object_id)

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-04-23T17:12:49.361218Z",
+  "producerId": "verification-v1",
+  "sourceSpecVersion": "verification-v1",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityId": "capability/9/42",
+  "routeCode": "hotupdate",
+  "profileCode": "windows-corelib-reference-native-hotupdate-proof",
+  "mergeKey": "SolutionCorePack|capability/9/42|hotupdate|windows-corelib-reference-native-hotupdate-proof",
+  "managedSourceRefs": [
+    {
+      "kind": "managed-source",
+      "path": "subjects/SolutionCorePack/source",
+      "label": "CoreRuntimeFeatures/LoaderContractProofEntry::Run()",
+      "hash": ""
+    }
+  ],
+  "stubRefs": [
+    {
+      "kind": "stub-dir",
+      "path": "subjects/SolutionCorePack/baselines/codegen/windows-corelib-reference-native-hotupdate-proof",
+      "label": "windows-corelib-reference-native-hotupdate-proof",
+      "hash": ""
+    }
+  ],
+  "generatedFromEvidenceIds": [
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.LoaderContractProofEntry::Run()/hotupdate-proof"
+  ]
+}

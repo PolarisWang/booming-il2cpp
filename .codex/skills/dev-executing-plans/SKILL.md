@@ -232,15 +232,15 @@ description: 当你有一个已写好的实现计划，需要在当前会话中�
 2. 运行 formal verification gate 与项目级测试
    - obligation-driven 任务先按 `dev:verification-before-completion` 选择并执行正式对象
    - 再运行受影响项目级测试套件或项目约定的完整命令
-   - 如果任务命中 `dev:project-test-governance`、需要新的验证通过记录 / 新的数据，或本轮改动触及 `verification-v1` consumer / projection / codegen-stubs：在 formal object 与项目测试通过后，必须执行 `run test inventory --json`（或仓库等价 writer）刷新正式产物
-   - 只有当 `run test inventory --json` 返回的 `artifacts` 中出现最新 `docs/testing-inventory/verification/latest/*`、`master/*`、`reports/*`，且命中 codegen 主线时出现 `subjects/*/verification/codegen-stubs/*`，本轮才算真正打通新测试流程
+   - 如果任务命中 `dev:project-test-governance`、需要新的验证通过记录 / 新的数据，或本轮改动触及 `verification-v1` consumer / projection / codegen-stubs：在 formal object 与项目测试通过后，必须执行 `run verify verification-v1 --json` 刷新正式产物
+   - 只有当 `run verify verification-v1 --json` 返回的 `artifacts` 中出现最新 `docs/testing-inventory/verification/latest/*`、`master/*`、`reports/*`，且命中 codegen 主线时出现 `subjects/*/verification/codegen-stubs/*`，本轮才算真正打通新测试流程
    - 如果测试阶段出现 `dotnet build` / `dotnet test` / `msbuild` 编译崩溃：
      - 本次验证立即视为失败
      - 收集 `stderr`、`binlog`、崩溃堆栈或 dump 信息（如果可用）
      - 使用 `dev:systematic-debugging` 定位并修复根因
      - 根因未修复前，不得继续归档或收尾
 3. 将结构告警、架构审视结论与验证结果写入 `STATUS.md`
-   - 如果本轮执行了 `run test inventory --json`，同时写入新的 formal verification 数据路径，而不只是运行日志路径
+   - 如果本轮执行了 `run verify verification-v1 --json`，同时写入新的 formal verification 数据路径，而不只是运行日志路径
    - 如果 `docs/dev/ACTIVE.md` 仍指向当前任务，再同步其中的摘要指针
    - 只有在重要决策或验证失败时才需要额外写入 `notes/progress-*.md`
    - 默认使用结构化证据卡，不写长篇完成总结

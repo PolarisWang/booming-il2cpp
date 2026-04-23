@@ -29,7 +29,7 @@
 - 测试阶段的 `dotnet` 编译崩溃必须先查根因并修复
 - IL2CPP / Python file-level codegen 默认 Scriban，能力不足时先扩展 Scriban
 - cutover 完成后删除旧 alias、旧命名和旧双轨逻辑
-- 如果任务要求新的验证通过记录或新的 verification 数据，formal object 跑通后还必须刷新 `verification-v1` 正式产物；默认命令为 `run test inventory --json`
+- 如果任务要求新的验证通过记录或新的 verification 数据，formal object 跑通后还必须刷新 `verification-v1` 正式产物；默认命令为 `run verify verification-v1 --json`
 - 新测试流程的数据以 `docs/testing-inventory/verification/{latest,master,reports}` 与 `subjects/*/verification/codegen-stubs/*` 为准；`artifacts/**` 运行日志只算过程证据
 
 ## 命中 AOT / IL2CPP / test-flow 任务时必须先冻结

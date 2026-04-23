@@ -173,8 +173,8 @@
       ]
     },
     {
-      "id": "test-pipeline",
-      "title": "Run a test pipeline by selector or object id",
+      "id": "test-inventory",
+      "title": "Generate the unified testing inventory authority reports",
       "group": "Test And Verify",
       "handler": "test.dispatch",
       "platforms": [
@@ -184,13 +184,35 @@
       ],
       "tokens": [
         "test",
-        "pipeline"
+        "inventory"
       ],
-      "syntax": "test pipeline (--id pipeline/<pipeline> | --pipeline <pipeline>)",
+      "syntax": "test inventory [--output <dir>]",
       "show_in_menu": true,
       "examples": [
-        "run test pipeline --id pipeline/completion-runtime-core",
-        "run test pipeline --pipeline completion-runtime-core"
+        "run test inventory",
+        "run test inventory --output artifacts/testing-inventory"
+      ]
+    },
+    {
+      "id": "verify-verification-v1",
+      "title": "Refresh and validate verification-v1 formal outputs",
+      "group": "Test And Verify",
+      "handler": "verify.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "verify",
+        "verification-v1"
+      ],
+      "target": "verification-v1",
+      "syntax": "verify verification-v1 [--output <dir>]",
+      "show_in_menu": true,
+      "examples": [
+        "run verify verification-v1",
+        "run verify verification-v1 --output artifacts/testing-inventory"
       ]
     },
     {

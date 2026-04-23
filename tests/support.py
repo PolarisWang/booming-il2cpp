@@ -1,33 +1,16 @@
 from __future__ import annotations
 
-import importlib.util
 import json
 import shutil
-import sys
-import uuid
 from pathlib import Path
 from typing import Any
 
+from tests._support.fs import REPO_ROOT, TEST_TMP_ROOT, make_temp_repo_root, write_json
+from tests._support.module_loading import load_module
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_SPECS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "public_specs.py"
 FIXTURE_SUBJECTS_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects"
 REGISTRY_FIXTURES_ROOT = REPO_ROOT / "tests" / "fixtures" / "registry"
-TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests"
-
-
-def load_module(path: Path, module_name: str):
-    if not path.is_file():
-        raise FileNotFoundError(f"module missing: {path}")
-
-    spec = importlib.util.spec_from_file_location(module_name, path)
-    if spec is None or spec.loader is None:
-        raise RuntimeError(f"unable to load module: {path}")
-
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    return module
 
 
 def read_text_bundle(*paths: Path) -> str:
@@ -55,7 +38,7 @@ def read_loader_stage_source(repo_root: Path = REPO_ROOT) -> str:
         loader_root / "LoaderStage.AssemblyLoading.cs",
         loader_root / "LoaderStage.InstructionDecoding.cs",
         loader_root / "LoaderStage.MetadataResolution.cs",
-        loader_root / "LoaderStage.GenericMaterialization.cs",
+        loader_root / "LoaderStage.GenericInstantiationProjection.cs",
     )
 
 
@@ -80,15 +63,58 @@ def read_native_reference_planner_source(repo_root: Path = REPO_ROOT) -> str:
         reference_root / "NativeReferenceLoweringPlanner.ShapeValidation.cs",
     )
 
-def write_json(path: Path, payload: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+def read_native_aot_planner_source(repo_root: Path = REPO_ROOT) -> str:
+    codegen_root = repo_root / "src" / "managed" / "Chaos.IL2CPP.CodeGen"
+    planner_parts = [
+        codegen_root / "NativeAotLoweringPlanner.cs",
+        *sorted((codegen_root / "Planning").glob("NativeAotLoweringPlanner*.cs")),
+        *sorted((codegen_root / "Emission").glob("NativeAotLoweringPlanner*.cs")),
+        *sorted((codegen_root / "RuntimeSupport").glob("NativeAotLoweringPlanner*.cs")),
+    ]
+    return read_text_bundle(*planner_parts)
 
 
-def make_temp_repo_root(area: str, prefix: str) -> Path:
-    repo_root = TEST_TMP_ROOT / area / f"{prefix}-{uuid.uuid4().hex}"
-    repo_root.mkdir(parents=True, exist_ok=False)
-    return repo_root
+def get_method_subject_display_string(subject_id: str) -> str:
+    separator_index = subject_id.find("::")
+    parameter_list_index = subject_id.rfind("(")
+    if separator_index <= 0 or parameter_list_index <= separator_index + 2 or not subject_id.endswith(")"):
+        return subject_id
+
+    return_type_separator_index = subject_id.rfind(":", separator_index + 2, parameter_list_index)
+    method_name_end_index = (
+        return_type_separator_index
+        if return_type_separator_index > separator_index + 1
+        else parameter_list_index
+    )
+    method_name = subject_id[(separator_index + 2) : method_name_end_index]
+    parameter_signature = subject_id[(parameter_list_index + 1) : -1]
+    return f"{subject_id[:separator_index]}::{method_name}({parameter_signature})"
+
+
+def find_method_by_subject_id(
+    methods: list[dict[str, Any]] | dict[str, dict[str, Any]],
+    requested_subject_id: str,
+) -> dict[str, Any]:
+    if isinstance(methods, dict):
+        exact_match = methods.get(requested_subject_id)
+        if exact_match is not None:
+            return exact_match
+        candidates = list(methods.values())
+    else:
+        candidates = list(methods)
+
+    requested_display = get_method_subject_display_string(requested_subject_id)
+    matches = [
+        method
+        for method in candidates
+        if get_method_subject_display_string(str(method.get("subjectId") or "")) == requested_display
+    ]
+    if len(matches) != 1:
+        raise AssertionError(
+            f"expected exactly one method for subject id '{requested_subject_id}', found {len(matches)}"
+        )
+    return matches[0]
 
 
 def _rewrite_path_prefixes(payload: object, *, prefix: str, replacement: str) -> object:

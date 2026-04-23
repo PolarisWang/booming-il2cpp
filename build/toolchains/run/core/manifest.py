@@ -258,12 +258,15 @@ def resolve_dynamic_test_command(
         command = find_command(manifest, command_id, host_platform, include_hidden=True)
         return command, positional[2], merged_options
 
+    if len(positional) == 2 and positional[1] == "inventory":
+        command = find_command(manifest, "test-inventory", host_platform, include_hidden=True)
+        return command, "testing-inventory", merged_options
+
     if len(positional) == 2 and positional[1] in {
         "suite",
         "subject",
         "module",
         "system",
-        "pipeline",
         "engineering-validation",
         "engineering-workload",
         "declared-unit-test",

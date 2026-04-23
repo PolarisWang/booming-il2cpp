@@ -95,7 +95,7 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 ### 5. 新验证记录与新数据必须落地
 
 - 如果任务目标包含“与新测试流程打通”、需要新的验证通过记录、需要新的 verification 数据，或本轮改动触及 `subjects/test/runner/benchmark/codegen` 主线，则不能只停在 formal object 跑通
-- formal object 与受影响 regression 通过后，必须刷新 `verification-v1` 正式产物；默认命令为 `run test inventory --json`，或仓库后续提供的等价 writer
+- formal object 与受影响 regression 通过后，必须刷新 `verification-v1` 正式产物；默认命令为 `run verify verification-v1 --json`
 - 至少确认本轮生成或更新：
   - `docs/testing-inventory/verification/latest/*`
   - `docs/testing-inventory/verification/master/*`

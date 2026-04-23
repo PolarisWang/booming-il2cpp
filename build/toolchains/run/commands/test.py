@@ -10,6 +10,7 @@ try:
     from ..testing import catalog as catalog_module
     from ..testing import contracts as contracts_module
     from ..testing import events as events_module
+    from ..testing import inventory_generator as inventory_generator_module
     from ..testing import public_specs as public_specs_module
     from ..testing import registry as registry_module
     from ..testing import selectors as selectors_module
@@ -31,6 +32,7 @@ except ImportError:
     from testing import catalog as catalog_module
     from testing import contracts as contracts_module
     from testing import events as events_module
+    from testing import inventory_generator as inventory_generator_module
     from testing import public_specs as public_specs_module
     from testing import registry as registry_module
     from testing import selectors as selectors_module
@@ -66,6 +68,28 @@ WORKSPACE_HOST_KIND_BY_OBJECT_TYPE = {
     "declared-benchmark": "benchmark-host",
 }
 WORKSPACE_MANIFEST_VERSION = 2
+REGISTRY_OBJECT_TEST_COMMAND_IDS = {
+    "test-suite",
+    "test-subject",
+    "test-engineering-validation",
+    "test-engineering-workload",
+    "test-declared-unit-test",
+    "test-declared-benchmark",
+    "test-module",
+    "test-system",
+}
+PUBLIC_TEST_COMMAND_IDS = {
+    *REGISTRY_OBJECT_TEST_COMMAND_IDS,
+    "test-family-suite",
+    "test-family-all",
+    "test-all",
+    "test-list",
+    "test-watch",
+    "test-summary",
+    "test-registry-refresh",
+    "test-registry-list",
+    "test-registry-check-consistency",
+}
 
 
 def find_public_test_suite_spec(family: str | None, suite: str | None) -> dict | None:
@@ -127,7 +151,6 @@ def _render_registry_list(index: registry_module.RegistryIndex) -> str:
         ("Declared Benchmarks", index.declared_benchmarks),
         ("Module Verifications", index.module_verifications),
         ("System Scenarios", index.system_scenarios),
-        ("Pipelines", index.pipelines),
     ):
         lines.append(f"{title}:")
         for item in items:
@@ -634,7 +657,7 @@ def _handle_registry_dispatch(
         payload = {
             "currentPath": str(snapshot["currentPath"].relative_to(repo_root).as_posix()),
             "historyPath": str(snapshot["historyPath"].relative_to(repo_root).as_posix()),
-            "flatItems": index.flat_items,
+            "flatItems": index.public_flat_items,
             "errors": index.errors,
             "warnings": index.warnings,
         }
@@ -655,7 +678,7 @@ def _handle_registry_dispatch(
             command=command_text,
             host_platform=host_platform,
             target="registry",
-            payload=index.to_dict(),
+            payload=index.to_public_dict(),
             text=_render_registry_list(index),
         )
 
@@ -1134,110 +1157,6 @@ def _mark_remaining_items_aborted(
             subject_results.append(_build_aborted_subject_result(remaining_item))
 
 
-def _merge_phase_suite_ids(target: list[str], additions: list[str]) -> None:
-    for suite_id in additions:
-        if suite_id not in target:
-            target.append(suite_id)
-
-
-def _aggregate_phase_member_status(statuses: list[str]) -> str:
-    if not statuses:
-        return "aborted"
-    if any(status == "fail" for status in statuses):
-        return "fail"
-    if any(status == "aborted" for status in statuses):
-        return "aborted"
-    if all(status == "skip" for status in statuses):
-        return "skip"
-    if all(status in {"ok", "skip"} for status in statuses):
-        return "ok"
-    return "aborted"
-
-
-def _build_pipeline_phase_plan(selected_object: dict[str, Any]) -> list[dict[str, Any]]:
-    phase_plan: list[dict[str, Any]] = []
-    for phase in list(selected_object.get("phases") or []):
-        phase_plan.append(
-            {
-                "phaseId": str(phase.get("id") or ""),
-                "title": str(phase.get("title") or ""),
-                "members": [
-                    {
-                        "type": str(member.get("type") or ""),
-                        "id": str(member.get("id") or ""),
-                    }
-                    for member in list(phase.get("members") or [])
-                ],
-            }
-        )
-    return phase_plan
-
-
-def _build_pipeline_phase_results(
-    index: registry_module.RegistryIndex,
-    selected_object: dict[str, Any],
-    suite_results: list[dict[str, Any]],
-) -> list[dict[str, Any]]:
-    suite_status_by_id = {
-        str(suite_result.get("suiteId") or ""): str(suite_result.get("status") or "aborted")
-        for suite_result in suite_results
-    }
-    phase_results: list[dict[str, Any]] = []
-
-    for phase in list(selected_object.get("phases") or []):
-        member_counts = _empty_phase_status_counts()
-        member_results: list[dict[str, Any]] = []
-        resolved_phase_suite_ids: list[str] = []
-
-        for member in list(phase.get("members") or []):
-            member_id = str(member.get("id") or "")
-            member_object = registry_module.find_registry_object(index, member_id)
-            if member_object is None:
-                resolved_suite_ids: list[str] = []
-                member_status = "aborted"
-                member_results.append(
-                    {
-                        "objectId": member_id,
-                        "objectType": str(member.get("type") or ""),
-                        "displayName": member_id,
-                        "resolvedSuiteIds": resolved_suite_ids,
-                        "status": member_status,
-                    }
-                )
-            else:
-                resolved_suite_ids = [item["id"] for item in registry_module.expand_execution_plan(index, member_id)]
-                resolved_statuses = [suite_status_by_id.get(suite_id, "aborted") for suite_id in resolved_suite_ids]
-                member_status = _aggregate_phase_member_status(resolved_statuses)
-                member_results.append(
-                    {
-                        "objectId": member_id,
-                        "objectType": str(member_object.get("type") or member.get("type") or ""),
-                        "displayName": str(member_object.get("displayName") or member_id),
-                        "canonicalCommand": str(member_object.get("canonicalCommand") or ""),
-                        "resolvedSuiteIds": resolved_suite_ids,
-                        "status": member_status,
-                    }
-                )
-
-            member_counts["total"] += 1
-            member_counts[member_status if member_status in member_counts else "aborted"] += 1
-            _merge_phase_suite_ids(resolved_phase_suite_ids, resolved_suite_ids)
-
-        phase_status = _aggregate_phase_member_status([member["status"] for member in member_results])
-        phase_results.append(
-            {
-                "phaseId": str(phase.get("id") or ""),
-                "title": str(phase.get("title") or ""),
-                "status": phase_status,
-                "memberCounts": member_counts,
-                "memberResults": member_results,
-                "suiteIds": resolved_phase_suite_ids,
-            }
-        )
-
-    return phase_results
-
-
 def _with_selected_object_context(
     result: CommandResult,
     selected_object: dict[str, Any],
@@ -1250,13 +1169,6 @@ def _with_selected_object_context(
         "moduleIds": list(selected_object.get("moduleIds", [])),
         "subsystemIds": list(selected_object.get("subsystemIds", [])),
     }
-    if selected_object.get("type") == "pipeline":
-        payload["phasePlan"] = _build_pipeline_phase_plan(selected_object)
-        payload["phaseResults"] = _build_pipeline_phase_results(
-            index,
-            selected_object,
-            list(payload.get("suiteResults") or []),
-        )
     if result.status != "ok":
         payload.setdefault("failureCode", "test.execution.object_failed")
         payload.setdefault(
@@ -1873,17 +1785,7 @@ def _handle_public_test_dispatch(
         return _handle_test_summary(command_text, repo_root, host_platform, options)
     if command_id in {"test-registry-refresh", "test-registry-list", "test-registry-check-consistency"}:
         return _handle_registry_dispatch(command, repo_root, host_platform, command_text)
-    if command_id in {
-        "test-suite",
-        "test-subject",
-        "test-engineering-validation",
-        "test-engineering-workload",
-        "test-declared-unit-test",
-        "test-declared-benchmark",
-        "test-module",
-        "test-system",
-        "test-pipeline",
-    }:
+    if command_id in REGISTRY_OBJECT_TEST_COMMAND_IDS:
         return _handle_registry_object_dispatch(
             command_id.removeprefix("test-"),
             repo_root,
@@ -2119,6 +2021,43 @@ def _run_python_unittest(command: dict, repo_root: Path, host_platform: str, com
     return _success(command_text, host_platform, command.get("target"), output, artifacts)
 
 
+def _handle_test_inventory(
+    repo_root: Path,
+    host_platform: str,
+    command_text: str,
+    options: dict[str, Any],
+) -> CommandResult:
+    try:
+        payload = inventory_generator_module.refresh_inventory_outputs(
+            repo_root,
+            host_platform=host_platform,
+            output_root=options.get("output"),
+        )
+    except Exception as error:
+        return CommandResult.failure(
+            command=command_text,
+            host_platform=host_platform,
+            target="testing-inventory",
+            errors=[str(error)],
+            payload={"exitCode": 1},
+            text=f"{error}\n",
+        )
+
+    text = "\n".join(
+        [
+            f"outputRoot: {payload.get('outputRoot')}",
+            f"artifacts: {len(list(payload.get('artifacts') or []))}",
+        ]
+    )
+    return CommandResult.success(
+        command=command_text,
+        host_platform=host_platform,
+        target="testing-inventory",
+        payload=payload,
+        text=text + "\n",
+    )
+
+
 def handle(
     command: dict,
     repo_root: Path,
@@ -2128,26 +2067,12 @@ def handle(
     options: dict | None = None,
     progress_callback: Callable[[dict[str, Any]], None] | None = None,
 ) -> CommandResult:
-    if command["id"] in {
-        "test-suite",
-        "test-subject",
-        "test-engineering-validation",
-        "test-engineering-workload",
-        "test-declared-unit-test",
-        "test-declared-benchmark",
-        "test-module",
-        "test-system",
-        "test-pipeline",
-        "test-family-suite",
-        "test-family-all",
-        "test-all",
-        "test-list",
-        "test-watch",
-        "test-summary",
-        "test-registry-refresh",
-        "test-registry-list",
-        "test-registry-check-consistency",
-    }:
+    command_id = command["id"]
+
+    if command_id == "test-inventory":
+        return _handle_test_inventory(repo_root, host_platform, command_text, options or {})
+
+    if command_id in PUBLIC_TEST_COMMAND_IDS:
         return _handle_public_test_dispatch(
             command,
             repo_root,
@@ -2156,6 +2081,15 @@ def handle(
             manifest or {},
             options or {},
             progress_callback=progress_callback,
+        )
+
+    if str(command.get("handler") or "") == "test.dispatch":
+        return _failure(
+            command_text,
+            host_platform,
+            command_id,
+            "",
+            [f"unsupported public test command: {command_id}"],
         )
 
     kind = command["kind"]

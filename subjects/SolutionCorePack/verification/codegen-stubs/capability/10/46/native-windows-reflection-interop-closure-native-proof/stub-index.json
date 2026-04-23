@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-04-23T17:12:49.361218Z",
+  "producerId": "verification-v1",
+  "sourceSpecVersion": "verification-v1",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityId": "capability/10/46",
+  "routeCode": "native",
+  "profileCode": "windows-reflection-interop-closure-native-proof",
+  "mergeKey": "SolutionCorePack|capability/10/46|native|windows-reflection-interop-closure-native-proof",
+  "managedSourceRefs": [
+    {
+      "kind": "managed-source",
+      "path": "subjects/SolutionCorePack/source",
+      "label": "CoreRuntimeFeatures/FunctionPointerProofEntry::Run()",
+      "hash": ""
+    },
+    {
+      "kind": "managed-source",
+      "path": "subjects/SolutionCorePack/source",
+      "label": "CoreRuntimeBenchmarks/FunctionPointerBenchmarkEntry::RunWorkload()",
+      "hash": ""
+    }
+  ],
+  "stubRefs": [
+    {
+      "kind": "stub-dir",
+      "path": "subjects/SolutionCorePack/baselines/codegen/windows-reflection-interop-closure-native-proof",
+      "label": "windows-reflection-interop-closure-native-proof",
+      "hash": ""
+    }
+  ],
+  "generatedFromEvidenceIds": [
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.FunctionPointerProofEntry::Run()/native-proof"
+  ]
+}

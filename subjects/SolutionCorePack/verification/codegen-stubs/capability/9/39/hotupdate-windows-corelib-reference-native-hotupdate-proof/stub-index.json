@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-04-23T17:12:49.361218Z",
+  "producerId": "verification-v1",
+  "sourceSpecVersion": "verification-v1",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityId": "capability/9/39",
+  "routeCode": "hotupdate",
+  "profileCode": "windows-corelib-reference-native-hotupdate-proof",
+  "mergeKey": "SolutionCorePack|capability/9/39|hotupdate|windows-corelib-reference-native-hotupdate-proof",
+  "managedSourceRefs": [
+    {
+      "kind": "managed-source",
+      "path": "subjects/SolutionCorePack/source",
+      "label": "CoreRuntimeFeatures/AbiWideningProofEntry::Run()",
+      "hash": ""
+    },
+    {
+      "kind": "managed-source",
+      "path": "subjects/SolutionCorePack/source",
+      "label": "CoreRuntimeFeatures/BoxedStructFieldReadProofEntry::Run()",
+      "hash": ""
+    },
+    {
+      "kind": "managed-source",
+      "path": "subjects/SolutionCorePack/source",
+      "label": "CoreRuntimeFeatures/DirectCallVirtProofEntry::Run()",
+      "hash": ""
+    },
+    {
+      "kind": "managed-source",
+      "path": "subjects/SolutionCorePack/source",
+      "label": "CoreRuntimeFeatures/ObjectFieldProofEntry::Run()",
+      "hash": ""
+    },
+    {
+      "kind": "managed-source",
+      "path": "subjects/SolutionCorePack/source",
+      "label": "CoreRuntimeFeatures/ObjectReturnProofEntry::Run()",
+      "hash": ""
+    },
+    {
+      "kind": "managed-source",
+      "path": "subjects/SolutionCorePack/source",
+      "label": "CoreRuntimeFeatures/RuntimeHelpersProofEntry::Run()",
+      "hash": ""
+    }
+  ],
+  "stubRefs": [
+    {
+      "kind": "stub-dir",
+      "path": "subjects/SolutionCorePack/baselines/codegen/windows-corelib-reference-native-hotupdate-proof",
+      "label": "windows-corelib-reference-native-hotupdate-proof",
+      "hash": ""
+    }
+  ],
+  "generatedFromEvidenceIds": [
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()/hotupdate-proof",
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.BoxedStructFieldReadProofEntry::Run()/hotupdate-proof",
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DirectCallVirtProofEntry::Run()/hotupdate-proof",
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ObjectFieldProofEntry::Run()/hotupdate-proof",
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ObjectReturnProofEntry::Run()/hotupdate-proof",
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.RuntimeHelpersProofEntry::Run()/hotupdate-proof"
+  ]
+}

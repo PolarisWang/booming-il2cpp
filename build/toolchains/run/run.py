@@ -15,6 +15,7 @@ if __package__ in (None, ""):
     from commands import prepare as prepare_commands
     from commands import project as project_commands
     from commands import test as test_commands
+    from commands import verify as verify_commands
     from commands import benchmark as benchmark_commands
     from core import manifest as manifest_module
     from core import operation_reporting as operation_reporting_module
@@ -31,6 +32,7 @@ else:
     from .commands import prepare as prepare_commands
     from .commands import project as project_commands
     from .commands import test as test_commands
+    from .commands import verify as verify_commands
     from .commands import benchmark as benchmark_commands
     from .core import manifest as manifest_module
     from .core import operation_reporting as operation_reporting_module
@@ -40,7 +42,7 @@ else:
     from .core.result import CommandResult
 
 
-OPERATION_HANDLERS = {"build.dispatch", "prepare.dispatch", "project.dispatch", "deploy.dispatch"}
+OPERATION_HANDLERS = {"build.dispatch", "prepare.dispatch", "project.dispatch", "deploy.dispatch", "verify.dispatch"}
 
 
 def resolve_repo_root() -> Path:
@@ -256,6 +258,15 @@ def execute_command(
             host_platform,
             command_text,
             manifest,
+            options or {},
+            progress_callback=progress_callback,
+        )
+    if command["handler"] == "verify.dispatch":
+        return verify_commands.handle(
+            command,
+            repo_root,
+            host_platform,
+            command_text,
             options or {},
             progress_callback=progress_callback,
         )

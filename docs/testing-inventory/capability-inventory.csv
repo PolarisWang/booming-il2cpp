@@ -1,0 +1,69 @@
+ownerSubjectId,capabilityFamily,capabilityFamilyLabel,capabilityItem,capabilityItemLabel,supportStates,supportStateLabels,proofRequired,benchmarkRequired,declaredUnitCount,declaredBenchmarkCount,contractStatus,statusReason
+SolutionCorePack,1,Primitives And Ops,1,Arithmetic Ops,1,NativeGenerated,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,1,Primitives And Ops,2,Bitwise Ops,1,NativeGenerated,true,false,2,2,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,1,Primitives And Ops,3,Comparison And Branch,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,1,Primitives And Ops,4,Numeric Conversion,1,NativeGenerated,true,false,2,2,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,1,Primitives And Ops,5,Overflow Behavior,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,1,Primitives And Ops,6,Array Basics,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,1,Primitives And Ops,7,Array Boxing,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,2,Type System And Generics,8,Generic Instantiation,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,2,Type System And Generics,9,Generic Constraint,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,2,Type System And Generics,10,Generic Virtual Dispatch,1,NativeGenerated,true,true,2,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,2,Type System And Generics,11,Generic Interface Dispatch,1,NativeGenerated,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,2,Type System And Generics,12,Generic Collections,1,NativeGenerated,true,false,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,2,Type System And Generics,13,Generic Layout,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,2,Type System And Generics,67,Object Cast And Type Check,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,2,Type System And Generics,68,Array Covariance,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,3,Async And Iterators,14,Async Await,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,3,Async And Iterators,15,Task And ValueTask Flow,1,NativeGenerated,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,3,Async And Iterators,16,Iterator State Machine,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,4,Delegates And Closures,17,Delegate Invocation,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,4,Delegates And Closures,18,Delegate Chaining,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,4,Delegates And Closures,19,Lambda Closure Capture,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,4,Delegates And Closures,20,Event Callback Flow,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,5,Exceptions And Control Flow,27,Exception Basic,1,NativeGenerated,true,false,2,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,5,Exceptions And Control Flow,28,Nested Exception,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,5,Exceptions And Control Flow,29,Finally And Filter,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,5,Exceptions And Control Flow,30,Cross Boundary Exception,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,6,Reflection And Metadata,21,Custom Attribute Lookup,4; 1,MetadataOnly; NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,6,Reflection And Metadata,22,Member Metadata Lookup,4; 1,MetadataOnly; NativeGenerated,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,6,Reflection And Metadata,23,Metadata Supplement,4,MetadataOnly,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,6,Reflection And Metadata,24,Metadata Closure,4; 1,MetadataOnly; NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,6,Reflection And Metadata,25,Linker Preserve Contract,4; 1,MetadataOnly; NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,6,Reflection And Metadata,26,Linker Stripping,4; 1,MetadataOnly; NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,7,Interop And Marshaling,31,Native Call Interop,1; 5,NativeGenerated; ExternalRuntime,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,7,Interop And Marshaling,32,String And Utf8 Marshaling,1; 5,NativeGenerated; ExternalRuntime,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,7,Interop And Marshaling,33,Struct Marshaling,1; 5,NativeGenerated; ExternalRuntime,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,7,Interop And Marshaling,34,Delegate Callback Interop,1; 5,NativeGenerated; ExternalRuntime,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,8,Threading And Synchronization,35,Threading,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,8,Threading And Synchronization,36,Task Scheduling,1,NativeGenerated,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,8,Threading And Synchronization,37,Monitor And Locking,1,NativeGenerated,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,8,Threading And Synchronization,38,Thread Local State,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,9,Runtime Services,39,Runtime Helpers,1; 4,NativeGenerated; MetadataOnly,true,false,6,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,9,Runtime Services,40,Gc Sensitive Flow,1; 4,NativeGenerated; MetadataOnly,true,false,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,9,Runtime Services,41,Resource Lifecycle,1; 4,NativeGenerated; MetadataOnly,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,9,Runtime Services,42,Loader Contract,1; 4,NativeGenerated; MetadataOnly,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,10,Unsafe And Low Level,43,Span And Memory,1,NativeGenerated,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,10,Unsafe And Low Level,44,Ref Struct And Stackalloc,1,NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,10,Unsafe And Low Level,45,Unsafe Pointer,1,NativeGenerated,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,10,Unsafe And Low Level,46,Function Pointer,1,NativeGenerated,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,11,Diagnostics And Tracing,47,Runtime Trace Output,4; 6,MetadataOnly; Unsupported,false,false,0,0,unsupported,能力 contract 明确标记为 unsupported。
+SolutionCorePack,11,Diagnostics And Tracing,48,Native Symbol Evidence,4; 6,MetadataOnly; Unsupported,false,false,0,0,unsupported,能力 contract 明确标记为 unsupported。
+SolutionCorePack,11,Diagnostics And Tracing,49,Crash Evidence,4; 6,MetadataOnly; Unsupported,false,false,0,0,unsupported,能力 contract 明确标记为 unsupported。
+SolutionCorePack,11,Diagnostics And Tracing,50,Failure Diagnostics,4; 6,MetadataOnly; Unsupported,false,false,0,0,unsupported,能力 contract 明确标记为 unsupported。
+SolutionCorePack,12,Linker And Aot Closure,51,Required Instantiation Closure,4; 1,MetadataOnly; NativeGenerated,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,12,Linker And Aot Closure,52,Generic Sharing Boundary,4; 1,MetadataOnly; NativeGenerated,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+SolutionCorePack,12,Linker And Aot Closure,53,Aot Closure Validation,4; 1,MetadataOnly; NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+HotUpdateHostPack,13,Hot Update Workflow,54,Package Load,3; 2,BridgeDispatch; InterpreterReady,true,true,2,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+HotUpdateHostPack,13,Hot Update Workflow,55,Shared Contract Binding,3; 2,BridgeDispatch; InterpreterReady,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+HotUpdateHostPack,13,Hot Update Workflow,56,Method Replacement,3; 2,BridgeDispatch; InterpreterReady,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+HotUpdateHostPack,13,Hot Update Workflow,57,Hot Update Metadata Supplement,3; 2,BridgeDispatch; InterpreterReady,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+HotUpdateHostPack,13,Hot Update Workflow,58,Patch Integrity,3; 2,BridgeDispatch; InterpreterReady,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+HotUpdateHostPack,13,Hot Update Workflow,59,Version Rollback,3; 2,BridgeDispatch; InterpreterReady,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+HotUpdateHostPack,13,Hot Update Workflow,60,Patch Callback Flow,3; 2,BridgeDispatch; InterpreterReady,true,true,1,2,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+MixedExecutionFeaturePack,14,Mixed Execution,61,Mixed Bridge Dispatch,3; 2; 1,BridgeDispatch; InterpreterReady; NativeGenerated,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+MixedExecutionFeaturePack,14,Mixed Execution,62,Interpreter Lowering,3; 2; 1,BridgeDispatch; InterpreterReady; NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+MixedExecutionFeaturePack,14,Mixed Execution,63,Interpreter Arithmetic,3; 2; 1,BridgeDispatch; InterpreterReady; NativeGenerated,true,true,1,1,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+MixedExecutionFeaturePack,14,Mixed Execution,64,Mixed Generic Flow,3; 2; 1,BridgeDispatch; InterpreterReady; NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+MixedExecutionFeaturePack,14,Mixed Execution,65,Mixed Exception Flow,3; 2; 1,BridgeDispatch; InterpreterReady; NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。
+MixedExecutionFeaturePack,14,Mixed Execution,66,Mixed Delegate Flow,3; 2; 1,BridgeDispatch; InterpreterReady; NativeGenerated,true,false,1,0,ok,能力已经满足当前声明的 proof 与 benchmark 覆盖要求。

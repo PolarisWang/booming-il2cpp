@@ -17,7 +17,7 @@
 - 每任务后更新 `STATUS.md`、`ACTIVE.md`、索引与进度文档
 - 对长期知识调用 `project-wiki-maintenance`
 - completion 前与顺序执行主线使用同一套 formal verification gate
-- 需要新的验证通过记录 / 新的数据时，在 formal object 与项目测试通过后继续执行 `run test inventory --json`，刷新 `verification-v1` 正式产物
+- 需要新的验证通过记录 / 新的数据时，在 formal object 与项目测试通过后继续执行 `run verify verification-v1 --json`，刷新 `verification-v1` 正式产物
 
 ## 项目规则
 

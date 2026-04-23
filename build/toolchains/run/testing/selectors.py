@@ -30,10 +30,6 @@ def system_id(scenario: str) -> str:
     return f"system/{scenario}"
 
 
-def pipeline_id(pipeline: str) -> str:
-    return f"pipeline/{pipeline}"
-
-
 def engineering_id(family: str, subject: str, kind: str) -> str:
     return f"{family}/{subject}/{kind}"
 
@@ -67,13 +63,6 @@ def parse_system_id(value: str) -> str:
     parts = value.split("/")
     if len(parts) != 2 or parts[0] != "system" or not parts[1]:
         raise ValueError(f"invalid system id: {value}")
-    return parts[1]
-
-
-def parse_pipeline_id(value: str) -> str:
-    parts = value.split("/")
-    if len(parts) != 2 or parts[0] != "pipeline" or not parts[1]:
-        raise ValueError(f"invalid pipeline id: {value}")
     return parts[1]
 
 
@@ -139,16 +128,6 @@ def normalize_selector_options(kind: str, options: dict[str, Any]) -> dict[str, 
             if not scenario:
                 raise ValueError("system selector requires --id or --scenario")
             normalized["id"] = system_id(scenario)
-        return normalized
-
-    if kind == "pipeline":
-        if object_id:
-            normalized["pipeline"] = parse_pipeline_id(str(object_id))
-        else:
-            pipeline = str(normalized.get("pipeline") or "")
-            if not pipeline:
-                raise ValueError("pipeline selector requires --id or --pipeline")
-            normalized["id"] = pipeline_id(pipeline)
         return normalized
 
     if kind in ENGINEERING_SELECTOR_KINDS:

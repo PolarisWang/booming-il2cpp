@@ -56,7 +56,7 @@ description: 在即将声称工作完成、已修复或通过时使用，在提�
 - selector 信息优先读取 `artifacts/tests/registry/current/index.json` 或执行 `run test registry list --json`
 - registry 给出 `canonicalCommand` 时，优先直接执行该命令
 - registry 给出 `docRefs` 时，再回到 `wiki/06-测试验证/` 读取对象说明
-- 如果用户明确要求“新的验证通过记录 / 新的数据”，或任务命中 `dev:project-test-governance` / `verification-v1` 主线，则 formal objects 与 regression 通过后还必须刷新 formal source；默认执行 `run test inventory --json`
+- 如果用户明确要求“新的验证通过记录 / 新的数据”，或任务命中 `dev:project-test-governance` / `verification-v1` 主线，则 formal objects 与 regression 通过后还必须刷新 formal source；默认执行 `run verify verification-v1 --json`
 - 只有 `summaryPath` / `eventsPath` / `consolePath`，但没有最新 `docs/testing-inventory/verification/{latest,master,reports}` 或 `subjects/*/verification/codegen-stubs/*` 更新时，不足以宣称“新测试流程已打通”
 - `docs/dev/**` 只记录任务过程，不是长期 authority
 

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-04-23T17:12:49.361218Z",
+  "producerId": "verification-v1",
+  "sourceSpecVersion": "verification-v1",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityId": "capability/1/2",
+  "routeCode": "native",
+  "profileCode": "windows-reflection-interop-closure-native-proof",
+  "mergeKey": "SolutionCorePack|capability/1/2|native|windows-reflection-interop-closure-native-proof",
+  "managedSourceRefs": [
+    {
+      "kind": "managed-source",
+      "path": "subjects/SolutionCorePack/source",
+      "label": "CoreRuntimeFeatures/BitwiseOpsProofEntry::Run()",
+      "hash": ""
+    },
+    {
+      "kind": "managed-source",
+      "path": "subjects/SolutionCorePack/source",
+      "label": "CoreRuntimeFeatures/UInt64BitwiseProofEntry::Run()",
+      "hash": ""
+    },
+    {
+      "kind": "managed-source",
+      "path": "subjects/SolutionCorePack/source",
+      "label": "CoreRuntimeBenchmarks/ShiftOpsBenchmarkEntry::RunWorkload()",
+      "hash": ""
+    },
+    {
+      "kind": "managed-source",
+      "path": "subjects/SolutionCorePack/source",
+      "label": "CoreRuntimeBenchmarks/UInt64BitwiseBenchmarkEntry::RunWorkload()",
+      "hash": ""
+    }
+  ],
+  "stubRefs": [
+    {
+      "kind": "stub-dir",
+      "path": "subjects/SolutionCorePack/baselines/codegen/windows-reflection-interop-closure-native-proof",
+      "label": "windows-reflection-interop-closure-native-proof",
+      "hash": ""
+    }
+  ],
+  "generatedFromEvidenceIds": [
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.BitwiseOpsProofEntry::Run()/native-proof",
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UInt64BitwiseProofEntry::Run()/native-proof"
+  ]
+}

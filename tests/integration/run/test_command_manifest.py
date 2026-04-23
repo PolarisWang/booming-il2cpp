@@ -74,7 +74,6 @@ class CommandManifestTests(unittest.TestCase):
                 "test-suite",
                 "test-module",
                 "test-system",
-                "test-pipeline",
                 "test-engineering-validation",
                 "test-engineering-workload",
                 "test-declared-unit-test",
@@ -86,8 +85,10 @@ class CommandManifestTests(unittest.TestCase):
                 "test-family-all",
                 "test-all",
                 "test-list",
+                "verify-verification-v1",
             }.issubset(visible_command_ids)
         )
+        self.assertNotIn("test-pipeline", visible_command_ids)
         self.assertNotIn("build-platform-windows-reference-desktop", all_command_ids)
         self.assertNotIn("build-platform-macos-reference-desktop", all_command_ids)
         self.assertNotIn("test-workflow-runtime-baseline-windows", all_command_ids)
@@ -179,16 +180,6 @@ class CommandManifestTests(unittest.TestCase):
         self.assertEqual("test-system", system_case["command"]["id"])
         self.assertEqual("system/hosted-runtime-smoke", system_case["target"])
 
-        pipeline_case = manifest_module.parse_cli(
-            ["test", "pipeline", "--pipeline", "completion-runtime-core"],
-            False,
-            manifest,
-            "macos",
-        )
-        self.assertEqual("test-pipeline", pipeline_case["command"]["id"])
-        self.assertEqual("pipeline/completion-runtime-core", pipeline_case["target"])
-        self.assertEqual("completion-runtime-core", pipeline_case["options"]["pipeline"])
-
         engineering_validation_case = manifest_module.parse_cli(
             ["test", "engineering-validation", "--id", fixture_engineering_validation_id],
             False,
@@ -239,10 +230,29 @@ class CommandManifestTests(unittest.TestCase):
         )
         self.assertEqual("test-registry-check-consistency", registry_check["command"]["id"])
 
+        verification_case = manifest_module.parse_cli(
+            ["verify", "verification-v1", "--output", "artifacts/testing-inventory"],
+            False,
+            manifest,
+            "windows",
+        )
+        self.assertEqual("verify-verification-v1", verification_case["command"]["id"])
+        self.assertEqual("verification-v1", verification_case["target"])
+        self.assertEqual("artifacts/testing-inventory", verification_case["options"]["output"])
+
         list_family = manifest_module.parse_cli(["test", "list", "smoke"], False, manifest, "macos")
         self.assertEqual("test-list", list_family["command"]["id"])
         self.assertEqual("smoke", list_family["target"])
         self.assertEqual("smoke", list_family["options"]["family"])
+
+        removed_pipeline = manifest_module.parse_cli(
+            ["test", "pipeline", "--pipeline", "completion-runtime-core"],
+            False,
+            manifest,
+            "macos",
+        )
+        self.assertIsNone(removed_pipeline["command"])
+        self.assertEqual("test pipeline", removed_pipeline["command_text"])
 
     def test_parse_cli_rejects_removed_verify_entrypoint(self) -> None:
         manifest_module = load_manifest_module()
