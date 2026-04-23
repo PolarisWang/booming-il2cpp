@@ -13,6 +13,7 @@ try:
     from ..core import tooling as tooling_module
     from . import declarations as declarations_module
     from . import subjects as subjects_module
+    from . import verification_layout as verification_layout_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
@@ -20,6 +21,7 @@ except ImportError:
     from core import tooling as tooling_module
     from testing import declarations as declarations_module
     from testing import subjects as subjects_module
+    from testing import verification_layout as verification_layout_module
 
 
 DISCOVERY_PROJECT_PATH = Path("src/tools/Chaos.IL2CPP.Tools.TestFramework.CollectionGen/Chaos.IL2CPP.Tools.TestFramework.CollectionGen.csproj")
@@ -164,7 +166,7 @@ def _assemblies_are_stale(
 
     subject_id = str(manifest.get("subjectId") or "").strip()
     if subject_id:
-        subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+        subject_manifest_path = verification_layout_module.owner_manifest_path(repo_root, subject_id)
         try:
             if subject_manifest_path.is_file() and subject_manifest_path.stat().st_mtime > assembly_mtime:
                 return True

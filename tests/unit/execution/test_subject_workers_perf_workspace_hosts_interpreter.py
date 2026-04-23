@@ -11,7 +11,7 @@ class TestSubjectWorkersPerfWorkspaceHostsInterpreter(SubjectWorkersTestSupport)
         alias = "arithmetic-bench"
         resolved_workload_entry = "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()"
         collection_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "managed-tests",
@@ -176,7 +176,7 @@ class TestSubjectWorkersPerfWorkspaceHostsInterpreter(SubjectWorkersTestSupport)
         alias = "hotupdate-bench"
         resolved_workload_entry = "HotUpdateHostPack.Patch/Benchmarks::RunWorkload()"
         collection_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "hotupdate-tests",
@@ -184,7 +184,7 @@ class TestSubjectWorkersPerfWorkspaceHostsInterpreter(SubjectWorkersTestSupport)
             "declared-tests.collection.json",
         )
         binding_manifest_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "hotupdate-tests",
@@ -333,3 +333,4 @@ class TestSubjectWorkersPerfWorkspaceHostsInterpreter(SubjectWorkersTestSupport)
             self.assertEqual(binding_manifest_path, manifest["bindingManifestPath"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+

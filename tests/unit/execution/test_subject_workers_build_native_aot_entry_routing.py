@@ -11,7 +11,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
         run_id = "fixture-run-native-aot-managed-entry-build-001"
         matrix_id = "windows-native-check"
         collection_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "managed-tests",
@@ -20,7 +20,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
         )
         expected_cmake_path = self._make_non_repo_path("cmake", "bin", "cmake.exe")
         expected_configure_root = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "native",
@@ -93,7 +93,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
                 encoding="utf-8",
             )
 
-            workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+            workspace_manifest_path = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "workspace.manifest.json"
             workspace_manifest_path.parent.mkdir(parents=True, exist_ok=True)
             workspace_manifest_path.write_text(
                 json.dumps(
@@ -104,7 +104,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
                             {
                                 "projectId": f"managed-test/{subject_id}/benchmark-host",
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -120,7 +120,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
                                 "projectId": f"native-test/{subject_id}/{matrix_id}/benchmark-host",
                                 "matrixId": matrix_id,
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "native",
@@ -139,7 +139,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
             )
 
             expected_cmake_dir = repo_root / expected_configure_root
-            expected_cmake_source_root = repo_root / "solutions" / "subjects" / subject_id / "native-source" / matrix_id
+            expected_cmake_source_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "native-source" / matrix_id
             with patch.object(workers_module.tooling_module, "cmake_environment", return_value=(str(expected_cmake_path), {})):
                 with patch.object(workers_module.tooling_module, "windows_developer_environment", return_value=expected_env):
                     with patch.object(workers_module.tooling_module, "detect_visual_studio_generator", return_value="Visual Studio 18 2026"):
@@ -205,7 +205,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
         run_id = "fixture-run-native-aot-proof-build-001"
         matrix_id = "windows-native-check"
         collection_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "managed-tests",
@@ -214,7 +214,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
         )
         expected_cmake_path = self._make_non_repo_path("cmake", "bin", "cmake.exe")
         expected_configure_root = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "native",
@@ -287,7 +287,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
                 encoding="utf-8",
             )
 
-            workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+            workspace_manifest_path = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "workspace.manifest.json"
             workspace_manifest_path.parent.mkdir(parents=True, exist_ok=True)
             workspace_manifest_path.write_text(
                 json.dumps(
@@ -298,7 +298,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
                             {
                                 "projectId": f"managed-test/{subject_id}/proof-host",
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -314,7 +314,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
                                 "projectId": f"native-test/{subject_id}/{matrix_id}/proof-host",
                                 "matrixId": matrix_id,
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "native",
@@ -333,7 +333,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
             )
 
             expected_cmake_dir = repo_root / expected_configure_root
-            expected_cmake_source_root = repo_root / "solutions" / "subjects" / subject_id / "native-source" / matrix_id
+            expected_cmake_source_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "native-source" / matrix_id
             with patch.object(workers_module.tooling_module, "cmake_environment", return_value=(str(expected_cmake_path), {})):
                 with patch.object(workers_module.tooling_module, "windows_developer_environment", return_value=expected_env):
                     with patch.object(workers_module.tooling_module, "detect_visual_studio_generator", return_value="Visual Studio 18 2026"):
@@ -424,7 +424,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
         run_id = "fixture-run-native-aot-audit-proof-build-001"
         matrix_id = "windows-reflection-interop-closure-native-proof"
         collection_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "managed-tests",
@@ -433,7 +433,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
         )
         expected_cmake_path = self._make_non_repo_path("cmake", "bin", "cmake.exe")
         expected_configure_root = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "native",
@@ -521,7 +521,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
                 encoding="utf-8",
             )
 
-            workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+            workspace_manifest_path = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "workspace.manifest.json"
             workspace_manifest_path.parent.mkdir(parents=True, exist_ok=True)
             workspace_manifest_path.write_text(
                 json.dumps(
@@ -532,7 +532,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
                             {
                                 "projectId": f"managed-test/{subject_id}/proof-host",
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -548,7 +548,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
                                 "projectId": f"native-test/{subject_id}/{matrix_id}/proof-host",
                                 "matrixId": matrix_id,
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "native",
@@ -567,7 +567,7 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
             )
 
             expected_cmake_dir = repo_root / expected_configure_root
-            expected_cmake_source_root = repo_root / "solutions" / "subjects" / subject_id / "native-source" / matrix_id
+            expected_cmake_source_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "native-source" / matrix_id
             with patch.object(workers_module.tooling_module, "cmake_environment", return_value=(str(expected_cmake_path), {})):
                 with patch.object(workers_module.tooling_module, "windows_developer_environment", return_value=expected_env):
                     with patch.object(workers_module.tooling_module, "detect_visual_studio_generator", return_value="Visual Studio 18 2026"):
@@ -611,3 +611,5 @@ class TestSubjectWorkersBuildNativeAotEntryRouting(SubjectWorkersTestSupport):
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+
+

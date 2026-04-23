@@ -11,6 +11,7 @@ from typing import Any
 try:
     from . import capability_coverage as capability_coverage_module
     from . import declared_metadata_labels as declared_metadata_labels_module
+    from . import verification_layout as verification_layout_module
     from . import workspace_declared_collection as workspace_declared_collection_module
 except ImportError:
     testing_root = Path(__file__).resolve().parent
@@ -18,6 +19,7 @@ except ImportError:
         sys.path.insert(0, str(testing_root))
     import capability_coverage as capability_coverage_module
     import declared_metadata_labels as declared_metadata_labels_module
+    import verification_layout as verification_layout_module
     import workspace_declared_collection as workspace_declared_collection_module
 
 
@@ -1048,7 +1050,7 @@ def _load_json_if_exists(path: Path) -> dict[str, Any] | None:
 
 
 def _load_formal_source(repo_root: Path) -> dict[str, Any] | None:
-    master_root = repo_root / "docs" / "testing-inventory" / "verification" / "master"
+    master_root = verification_layout_module.archive_master_root(repo_root)
     if not master_root.is_dir():
         return None
     payload = {
@@ -1305,7 +1307,7 @@ def _collect_data(repo_root: Path, subject_ids: list[str] | None = None) -> dict
     for subject_id in subject_ids:
         manifest = subjects_mod.load_subject_manifest(repo_root, subject_id)
         display_name = str(manifest.get("displayName") or subject_id)
-        records_path = repo_root / "subjects" / subject_id / "benchmark-records" / "records.jsonl"
+        records_path = verification_layout_module.raw_benchmark_records_path(repo_root, subject_id)
         declared_cases = _load_declared_benchmark_cases(repo_root, subject_id)
         declared_case_lookup = _build_declared_case_lookup(declared_cases)
 
@@ -1604,7 +1606,7 @@ def generate(repo_root: Path, output_path: Path, subject_ids: list[str] | None =
 
 
 def update_docs(repo_root: Path, subject_id: str | None = None) -> None:
-    docs_root = repo_root / "docs" / "benchmark"
+    docs_root = verification_layout_module.benchmark_projection_root(repo_root)
     subjects_doc_root = docs_root / "subjects"
     subjects_doc_root.mkdir(parents=True, exist_ok=True)
 

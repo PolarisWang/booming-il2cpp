@@ -75,25 +75,25 @@ class TestSubjectCommandDispatchWorkspace(SubjectCommandTestSupport):
             self.assertEqual(
                 {
                     "subjectId": subject_id,
-                    "workspaceManifestPath": f"solutions/subjects/{subject_id}/workspace.manifest.json",
+                    "workspaceManifestPath": f"verification/workspaces/subjects/{subject_id}/workspace.manifest.json",
                     "workspaceVersion": 2,
                     "goalId": "correctness.dev",
                     "matrixId": workspace_matrix_id,
                     "hostKind": "proof-host",
-                    "collectionPath": f"solutions/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json",
+                    "collectionPath": f"verification/workspaces/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json",
                     "managedTestProject": {
                         "projectId": f"managed-test/{subject_id}/proof-host",
                         "projectPath": SHARED_RUNTIME_PROJECT_PATH,
                         "assemblyName": SHARED_RUNTIME_ASSEMBLY_NAME,
                         "hostKind": "proof-host",
-                        "collectionPath": f"solutions/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json",
+                        "collectionPath": f"verification/workspaces/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json",
                         "executionModel": "shared-runtime-host",
                     },
                     "nativeTestProject": {
                         "projectId": f"native-test/{subject_id}/{workspace_matrix_id}/proof-host",
                         "matrixId": workspace_matrix_id,
-                        "projectPath": f"solutions/subjects/{subject_id}/native/{workspace_matrix_id}/proof/chaos_subject_reference_proof.vcxproj",
-                        "configureRoot": f"solutions/subjects/{subject_id}/native/{workspace_matrix_id}",
+                        "projectPath": f"verification/workspaces/subjects/{subject_id}/native/{workspace_matrix_id}/proof/chaos_subject_reference_proof.vcxproj",
+                        "configureRoot": f"verification/workspaces/subjects/{subject_id}/native/{workspace_matrix_id}",
                         "targetPlatform": "windows-x64",
                         "toolchainProfile": "msvc-reference",
                         "deliveryKind": "direct-run-host",
@@ -185,3 +185,4 @@ class TestSubjectCommandDispatchWorkspace(SubjectCommandTestSupport):
             self.assertIsNone(result.payload["workspaceExecution"]["nativeTestProject"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+

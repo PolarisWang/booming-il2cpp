@@ -55,7 +55,7 @@ def write_subject_workspace(
     benchmark_entry_index: int,
     include_native_proof: bool = True,
 ) -> None:
-    workspace_root = repo_root / "solutions" / "subjects" / subject_id
+    workspace_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id
     managed_tests_root = workspace_root / "managed-tests"
     generated_root = managed_tests_root / "Generated"
     native_root = workspace_root / "native" / matrix_id
@@ -160,7 +160,7 @@ def write_subject_workspace(
         "subjectId": subject_id,
         "variant": "CHECK",
         "defaultMatrixId": matrix_id,
-        "managedSolutionPath": f"solutions/subjects/{subject_id}/{subject_id}.sln",
+        "managedSolutionPath": f"verification/workspaces/subjects/{subject_id}/{subject_id}.sln",
         "managedProjects": [
             {
                 "projectId": f"managed/{subject_id}/{subject_id}",
@@ -221,9 +221,12 @@ def make_subject_registry_index(
                 "canonicalCommand": f"run test subject --id subject/{subject_id}",
             }
         ],
+        engineering_validations=[],
+        engineering_workloads=[],
+        declared_unit_tests=[],
+        declared_benchmarks=[],
         module_verifications=[],
         system_scenarios=[],
-        pipelines=[],
         errors=[],
         warnings=[],
     )
@@ -281,7 +284,6 @@ def make_declared_registry_index(
         declared_benchmarks=[declared_object] if object_type == "declared-benchmark" else [],
         module_verifications=[],
         system_scenarios=[],
-        pipelines=[],
         errors=[],
         warnings=[],
     )
@@ -472,3 +474,5 @@ def empty_validation_outcome(*args: object, **kwargs: object) -> dict[str, Any]:
 
 class SubjectCommandTestSupport(unittest.TestCase):
     pass
+
+

@@ -6,16 +6,18 @@ from typing import Any
 
 try:
     from . import workspace_manifests as workspace_manifests_module
+    from . import verification_layout as verification_layout_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     import sys
 
     sys.path.insert(0, str(root))
     from testing import workspace_manifests as workspace_manifests_module
+    from testing import verification_layout as verification_layout_module
 
 
 def _load_subject_manifest(repo_root: Path, subject_id: str) -> dict[str, Any] | None:
-    manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+    manifest_path = verification_layout_module.owner_manifest_path(repo_root, subject_id)
     if not manifest_path.is_file():
         return None
 
@@ -41,7 +43,7 @@ def _workspace_collection_is_stale(repo_root: Path, subject_id: str, collection_
     except OSError:
         return True
 
-    subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+    subject_manifest_path = verification_layout_module.owner_manifest_path(repo_root, subject_id)
     try:
         if subject_manifest_path.is_file() and subject_manifest_path.stat().st_mtime > collection_mtime:
             return True

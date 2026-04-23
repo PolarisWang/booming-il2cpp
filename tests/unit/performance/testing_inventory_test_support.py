@@ -458,7 +458,6 @@ def make_registry_index(registry_module, fixture: dict[str, Any]):
         ],
         module_verifications=[],
         system_scenarios=[],
-        pipelines=[],
         errors=[],
         warnings=[],
     )
@@ -466,7 +465,11 @@ def make_registry_index(registry_module, fixture: dict[str, Any]):
 
 def write_inventory_fixture_repo(repo_root: Path, fixture: dict[str, Any]) -> None:
     subject_id = str(fixture["subjectId"])
-    features_path = repo_root / "subjects" / subject_id / "subject.features.json"
+    owner_root = repo_root / "verification" / "catalog" / "owners" / subject_id
+    workspace_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id
+    raw_records_root = repo_root / ".artifact" / "verification" / "benchmark-records" / subject_id
+    codegen_root = repo_root / "verification" / "evidence" / "owners" / subject_id / "codegen-stubs"
+    features_path = owner_root / "owner.features.json"
     write_json(
         features_path,
         {
@@ -491,13 +494,13 @@ def write_inventory_fixture_repo(repo_root: Path, fixture: dict[str, Any]) -> No
         },
     )
     write_json(
-        repo_root / "subjects" / subject_id / "subject.manifest.json",
+        owner_root / "owner.manifest.json",
         {
             "subjectId": subject_id,
             "displayName": str(fixture["displayName"]),
             "source": {
                 "type": "dotnet-project",
-                "path": f"subjects/{subject_id}/source",
+                "path": f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.csproj",
             },
             "workloadEntry": str(fixture["workloadEntry"]),
             "executionPipelines": [
@@ -550,15 +553,12 @@ def write_inventory_fixture_repo(repo_root: Path, fixture: dict[str, Any]) -> No
             ],
         },
     )
-    (repo_root / "subjects" / subject_id / "source").mkdir(parents=True, exist_ok=True)
-    (repo_root / "subjects" / subject_id / "baselines" / "codegen" / "windows-native-check").mkdir(
-        parents=True,
-        exist_ok=True,
-    )
+    (owner_root / "proofs").mkdir(parents=True, exist_ok=True)
+    (owner_root / "support" / "host").mkdir(parents=True, exist_ok=True)
+    raw_records_root.mkdir(parents=True, exist_ok=True)
+    (codegen_root / "windows-native-check").mkdir(parents=True, exist_ok=True)
 
-    collection_path = (
-        repo_root / "solutions" / "subjects" / subject_id / "managed-tests" / "Generated" / "declared-tests.collection.json"
-    )
+    collection_path = workspace_root / "managed-tests" / "Generated" / "declared-tests.collection.json"
     write_json(
         collection_path,
         {
@@ -591,7 +591,7 @@ def write_inventory_fixture_repo(repo_root: Path, fixture: dict[str, Any]) -> No
         },
     )
     write_json(
-        repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json",
+        workspace_root / "workspace.manifest.json",
         {
             "workspaceVersion": 2,
             "kind": "subject-workspace",
@@ -650,7 +650,7 @@ def append_benchmark_record(
     benchmark_case_overrides: dict[str, Any] | None = None,
 ) -> None:
     subject_id = str(fixture["subjectId"])
-    records_path = repo_root / "subjects" / subject_id / "benchmark-records" / "records.jsonl"
+    records_path = repo_root / ".artifact" / "verification" / "benchmark-records" / subject_id / "records.jsonl"
     records_path.parent.mkdir(parents=True, exist_ok=True)
 
     benchmark_case = benchmark_case_payload(fixture)
@@ -781,9 +781,9 @@ def sample_inventory_source() -> dict[str, Any]:
         "workspaceCollections": [
             {
                 "subjectId": subject_id,
-                "manifestPath": f"solutions/subjects/{subject_id}/workspace.manifest.json",
+                "manifestPath": f"verification/workspaces/subjects/{subject_id}/workspace.manifest.json",
                 "collectionPath": (
-                    f"solutions/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json"
+                    f"verification/workspaces/subjects/{subject_id}/managed-tests/Generated/declared-tests.collection.json"
                 ),
                 "declaredUnitTests": [
                     {
@@ -838,7 +838,7 @@ def sample_inventory_source() -> dict[str, Any]:
                 "lastRecordedAt": fixture["recordedAt"],
                 "gitCommit": fixture["gitCommit"],
                 "isStale": False,
-                "sourceSubjectPath": f"subjects/{subject_id}/benchmark-records/records.jsonl",
+                "sourceSubjectPath": f".artifact/verification/benchmark-records/{subject_id}/records.jsonl",
             }
         ],
         "codegenStubs": [
@@ -850,14 +850,14 @@ def sample_inventory_source() -> dict[str, Any]:
                 "managedSourceRefs": [
                     {
                         "kind": "managed-source",
-                        "path": f"subjects/{subject_id}/source/Proofs/NativeInteropProofEntry.cs",
+                        "path": f"verification/catalog/owners/{subject_id}/proofs/NativeInteropProofEntry.cs",
                         "label": fixture["sourceEntry"],
                     }
                 ],
                 "stubRefs": [
                     {
                         "kind": "stub-dir",
-                        "path": f"subjects/{subject_id}/baselines/codegen/windows-native-check",
+                        "path": f"verification/evidence/owners/{subject_id}/codegen-stubs/windows-native-check",
                         "label": "windows-native-check",
                     }
                 ],

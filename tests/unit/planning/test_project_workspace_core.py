@@ -23,7 +23,7 @@ class TestProjectWorkspaceCore(ProjectWorkspaceTestSupport):
             manifest = json.loads((repo_root / result["manifestPath"]).read_text(encoding="utf-8"))
             self.assertEqual("core-workspace", manifest["kind"])
             self.assertEqual("windows", manifest["hostPlatform"])
-            self.assertEqual("solutions/core/windows/chaos-il2cpp-core.sln", manifest["managedSolutionPath"])
+            self.assertEqual("verification/workspaces/core/windows/chaos-il2cpp-core.sln", manifest["managedSolutionPath"])
             self.assertEqual(
                 [
                     "windows-x64-reference",
@@ -42,9 +42,9 @@ class TestProjectWorkspaceCore(ProjectWorkspaceTestSupport):
             )
             self.assertEqual(
                 [
-                    "solutions/core/windows/native/windows-x64-reference",
-                    "solutions/core/windows/native/android-arm64",
-                    "solutions/core/windows/native/linux-x64",
+                    "verification/workspaces/core/windows/native/windows-x64-reference",
+                    "verification/workspaces/core/windows/native/android-arm64",
+                    "verification/workspaces/core/windows/native/linux-x64",
                 ],
                 [item["configureRoot"] for item in manifest["nativeTargets"]],
             )
@@ -55,7 +55,7 @@ class TestProjectWorkspaceCore(ProjectWorkspaceTestSupport):
         workspace_module = load_module(PROJECT_WORKSPACE_MODULE_PATH, "chaos_project_workspace_core_build")
         repo_root = self._make_repo_root("core-build")
         self._write_core_fixture(repo_root)
-        workspace_root = repo_root / "solutions" / "core" / "windows"
+        workspace_root = repo_root / "verification" / "workspaces" / "core" / "windows"
         (workspace_root / "native" / "windows-x64-reference").mkdir(parents=True, exist_ok=True)
         manifest_path = workspace_root / "workspace.manifest.json"
         write_json(
@@ -63,7 +63,7 @@ class TestProjectWorkspaceCore(ProjectWorkspaceTestSupport):
             {
                 "kind": "core-workspace",
                 "hostPlatform": "windows",
-                "managedSolutionPath": "solutions/core/windows/chaos-il2cpp-core.sln",
+                "managedSolutionPath": "verification/workspaces/core/windows/chaos-il2cpp-core.sln",
                 "managedProjects": [
                     "src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj",
                     "src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj",
@@ -71,12 +71,12 @@ class TestProjectWorkspaceCore(ProjectWorkspaceTestSupport):
                 "nativeTargets": [
                     {
                         "targetId": "windows-x64-reference",
-                        "configureRoot": "solutions/core/windows/native/windows-x64-reference",
+                        "configureRoot": "verification/workspaces/core/windows/native/windows-x64-reference",
                         "buildArgs": ["--config", "Release"],
                     },
                     {
                         "targetId": "linux-x64",
-                        "configureRoot": "solutions/core/windows/native/linux-x64",
+                        "configureRoot": "verification/workspaces/core/windows/native/linux-x64",
                         "buildArgs": [],
                     },
                 ],
@@ -96,14 +96,14 @@ class TestProjectWorkspaceCore(ProjectWorkspaceTestSupport):
                         {"target": "windows-x64-reference"},
                     )
 
-            self.assertEqual("solutions/core/windows/build.report.json", result["buildReportPath"])
+            self.assertEqual("verification/workspaces/core/windows/build.report.json", result["buildReportPath"])
             report = json.loads((repo_root / result["buildReportPath"]).read_text(encoding="utf-8"))
             self.assertEqual(["windows-x64-reference"], report["builtTargets"])
             self.assertEqual(
                 [
                     "cmake",
                     "--build",
-                    str(repo_root / "solutions" / "core" / "windows" / "native" / "windows-x64-reference"),
+                    str(repo_root / "verification" / "workspaces" / "core" / "windows" / "native" / "windows-x64-reference"),
                     "--config",
                     "Release",
                 ],
@@ -111,3 +111,5 @@ class TestProjectWorkspaceCore(ProjectWorkspaceTestSupport):
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+
+

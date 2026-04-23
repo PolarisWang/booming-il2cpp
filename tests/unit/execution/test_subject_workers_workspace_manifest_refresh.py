@@ -14,7 +14,7 @@ class TestSubjectWorkersWorkspaceManifestRefresh(SubjectWorkersTestSupport):
 
         repo_root = self._make_repo_root("workspace-manifest-reentry-guard")
         try:
-            workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+            workspace_manifest_path = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "workspace.manifest.json"
             nested_results: list[tuple[Path, dict[str, object]] | None] = []
             generate_calls = 0
 
@@ -52,7 +52,7 @@ class TestSubjectWorkersWorkspaceManifestRefresh(SubjectWorkersTestSupport):
                         encoding="utf-8",
                     )
                     return {
-                        "manifestPath": posix_path("solutions", "subjects", subject_id, "workspace.manifest.json"),
+                        "manifestPath": posix_path("verification", "workspaces", "subjects", subject_id, "workspace.manifest.json"),
                     }
 
             with patch.object(workers_module, "_load_project_workspace_module", return_value=FakeProjectWorkspaceModule):
@@ -89,7 +89,7 @@ class TestSubjectWorkersWorkspaceManifestRefresh(SubjectWorkersTestSupport):
 
         repo_root = self._make_repo_root("workspace-manifest-declared-entry-selection")
         try:
-            workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+            workspace_manifest_path = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "workspace.manifest.json"
 
             class FakeProjectWorkspaceModule:
                 @staticmethod
@@ -124,7 +124,7 @@ class TestSubjectWorkersWorkspaceManifestRefresh(SubjectWorkersTestSupport):
                         encoding="utf-8",
                     )
                     return {
-                        "manifestPath": posix_path("solutions", "subjects", subject_id, "workspace.manifest.json"),
+                        "manifestPath": posix_path("verification", "workspaces", "subjects", subject_id, "workspace.manifest.json"),
                     }
 
             with patch.object(workers_module, "_load_project_workspace_module", return_value=FakeProjectWorkspaceModule):
@@ -167,7 +167,7 @@ class TestSubjectWorkersWorkspaceManifestRefresh(SubjectWorkersTestSupport):
                 encoding="utf-8",
             )
 
-            workspace_root = repo_root / "solutions" / "subjects" / subject_id
+            workspace_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id
             generated_root = workspace_root / "managed-tests" / "Generated"
             generated_root.mkdir(parents=True, exist_ok=True)
             project_path = workspace_root / "managed-tests" / f"{subject_id}.DeclaredBenchmarkHost.csproj"
@@ -187,7 +187,7 @@ class TestSubjectWorkersWorkspaceManifestRefresh(SubjectWorkersTestSupport):
                             {
                                 "projectId": f"managed-test/{subject_id}/benchmark-host",
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -195,7 +195,7 @@ class TestSubjectWorkersWorkspaceManifestRefresh(SubjectWorkersTestSupport):
                                 ),
                                 "hostKind": "benchmark-host",
                                 "collectionPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -203,7 +203,7 @@ class TestSubjectWorkersWorkspaceManifestRefresh(SubjectWorkersTestSupport):
                                     "declared-tests.collection.json",
                                 ),
                                 "generatedSourcePath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -270,7 +270,7 @@ class TestSubjectWorkersWorkspaceManifestRefresh(SubjectWorkersTestSupport):
                         encoding="utf-8",
                     )
                     return {
-                        "manifestPath": posix_path("solutions", "subjects", subject_id, "workspace.manifest.json"),
+                        "manifestPath": posix_path("verification", "workspaces", "subjects", subject_id, "workspace.manifest.json"),
                     }
 
             with patch.object(workers_module, "_load_project_workspace_module", return_value=FakeProjectWorkspaceModule):
@@ -280,3 +280,5 @@ class TestSubjectWorkersWorkspaceManifestRefresh(SubjectWorkersTestSupport):
             self.assertEqual(1, generate_calls)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+
+

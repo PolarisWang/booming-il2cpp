@@ -2,6 +2,7 @@
 
 | task_id | task_type | phase | updated_at | summary | active |
 | --- | --- | --- | --- | --- | --- |
+| [20260424-01-c3-verification-topology-and-unified-entry](20260424-01-c3-verification-topology-and-unified-entry/STATUS.md) | roadmap | completed | 2026-04-24 06:00:00 +08:00 | verification-v1 hard cut 已完成收口：`verification/*` 成为唯一 authority/public entry，真实 `verify` / `generate project all` 与旧路径扫描全部通过。 | false |
 | [20260423-05-verification-v1-gap-reopen](20260423-05-verification-v1-gap-reopen/STATUS.md) | task | completed | 2026-04-23 17:59:31 +08:00 | verification-v1 reopen 缺口已关闭：formal `codegen-stubs` 正式落地，旧公开验证入口已退役，并已按 roadmap 重跑回归与 `test inventory`。 | false |
 | [20260423-01-verification-v1-roadmap](20260423-01-verification-v1-roadmap/STATUS.md) | roadmap | completed | 2026-04-23 17:59:31 +08:00 | verification-v1 roadmap 已完成收口：formal source 固定到 `docs/testing-inventory/verification/*` 与 `subjects/*/verification/codegen-stubs/*`，旧公共验证入口已退出主线。 | false |
 | [20260423-04-verification-v1-legacy-retirement](20260423-04-verification-v1-legacy-retirement/STATUS.md) | task | completed | 2026-04-23 14:12:40 +08:00 | 鏃?benchmark docs authority consumer 宸叉竻闆讹紝鏃ф祴璇曟祦绋嬪叆鍙ｅ凡閫€褰逛负 legacy锛宺un-id 浠呬繚鐣欏湪闈?formal 鐨勪复鏃?artifacts 閾捐矾銆?| false |

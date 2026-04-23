@@ -82,13 +82,12 @@ class TestProjectWorkspaceSubjectBuildRefresh(ProjectWorkspaceTestSupport):
                             {"id": "subject/FixtureSubject", "refresh-generated": True},
                         )
 
-            materialized_source_root = repo_root / "solutions" / "subjects" / "FixtureSubject" / "native-source" / "windows-dev-output"
+            materialized_source_root = repo_root / "verification" / "workspaces" / "subjects" / "FixtureSubject" / "native-source" / "windows-dev-output"
             self.assertIn(
                 str(
                     (
                         repo_root
-                        / "solutions"
-                        / "subjects"
+                        / "verification" / "workspaces" / "subjects"
                         / "FixtureSubject"
                         / "generated"
                         / "subject-exec"
@@ -184,7 +183,7 @@ class TestProjectWorkspaceSubjectBuildRefresh(ProjectWorkspaceTestSupport):
                         {"id": "subject/FixtureSubject"},
                     )
 
-            materialized_source_root = repo_root / "solutions" / "subjects" / "FixtureSubject" / "native-source" / "windows-dev-output"
+            materialized_source_root = repo_root / "verification" / "workspaces" / "subjects" / "FixtureSubject" / "native-source" / "windows-dev-output"
             self.assertTrue((materialized_source_root / "CMakeLists.txt").is_file())
             self.assertTrue((materialized_source_root / "generated" / "CMakeLists.txt").is_file())
             self.assertTrue((materialized_source_root / "proof" / "CMakeLists.txt").is_file())
@@ -214,8 +213,7 @@ class TestProjectWorkspaceSubjectBuildRefresh(ProjectWorkspaceTestSupport):
                 str(
                     (
                         repo_root
-                        / "solutions"
-                        / "subjects"
+                        / "verification" / "workspaces" / "subjects"
                         / "FixtureSubject"
                         / "generated"
                         / "subject-exec"
@@ -249,13 +247,13 @@ class TestProjectWorkspaceSubjectBuildRefresh(ProjectWorkspaceTestSupport):
                     "-S",
                     str(materialized_source_root),
                     "-B",
-                    str(repo_root / "solutions" / "subjects" / "FixtureSubject" / "native" / "windows-dev-output"),
+                    str(repo_root / "verification" / "workspaces" / "subjects" / "FixtureSubject" / "native" / "windows-dev-output"),
                     "-G",
                     "Visual Studio 17 2022",
                     f"-DCHAOS_SUBJECT_REPO_ROOT={repo_root.as_posix()}",
                     "-DCHAOS_SUBJECT_VARIANT=CHECK",
-                    f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={repo_root / 'solutions' / 'subjects' / 'FixtureSubject' / 'native' / 'windows-dev-output' / 'out'}",
-                    f"-DCHAOS_SUBJECT_RUNTIME_ROOT={repo_root / 'solutions' / 'subjects' / 'FixtureSubject' / 'native' / 'windows-dev-output' / 'runtime'}",
+                    f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={repo_root / 'verification' / 'workspaces' / 'subjects' / 'FixtureSubject' / 'native' / 'windows-dev-output' / 'out'}",
+                    f"-DCHAOS_SUBJECT_RUNTIME_ROOT={repo_root / 'verification' / 'workspaces' / 'subjects' / 'FixtureSubject' / 'native' / 'windows-dev-output' / 'runtime'}",
                 ],
                 run_process_mock.call_args.args[0],
             )
@@ -330,8 +328,7 @@ class TestProjectWorkspaceSubjectBuildRefresh(ProjectWorkspaceTestSupport):
             refresh_mock.assert_called_once()
             mirrored_generated_source = (
                 repo_root
-                / "solutions"
-                / "subjects"
+                / "verification" / "workspaces" / "subjects"
                 / "FixtureSubject"
                 / "generated"
                 / "subject-exec"
@@ -440,7 +437,7 @@ class TestProjectWorkspaceSubjectBuildRefresh(ProjectWorkspaceTestSupport):
             self.assertNotIn("generatedRoot", matrices_by_id["windows-dev-output"])
             self.assertNotIn("generatedRoot", matrices_by_id["windows-reference-trace"])
 
-            workspace_root = repo_root / "solutions" / "subjects" / "FixtureSubject"
+            workspace_root = repo_root / "verification" / "workspaces" / "subjects" / "FixtureSubject"
             dev_generated_root = workspace_module._subject_generated_solution_root(
                 workspace_root,
                 matrix_id="windows-dev-output",
@@ -472,8 +469,7 @@ class TestProjectWorkspaceSubjectBuildRefresh(ProjectWorkspaceTestSupport):
                 "generated/windows-dev-output/subject-exec/analysis/generated/generated/native-reference.generated.cpp",
                 (
                     repo_root
-                    / "solutions"
-                    / "subjects"
+                    / "verification" / "workspaces" / "subjects"
                     / "FixtureSubject"
                     / "native-source"
                     / "windows-dev-output"
@@ -485,8 +481,7 @@ class TestProjectWorkspaceSubjectBuildRefresh(ProjectWorkspaceTestSupport):
                 "generated/windows-reference-trace/subject-exec/analysis/generated/generated/native-reference.generated.cpp",
                 (
                     repo_root
-                    / "solutions"
-                    / "subjects"
+                    / "verification" / "workspaces" / "subjects"
                     / "FixtureSubject"
                     / "native-source"
                     / "windows-reference-trace"
@@ -496,3 +491,6 @@ class TestProjectWorkspaceSubjectBuildRefresh(ProjectWorkspaceTestSupport):
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+
+
+

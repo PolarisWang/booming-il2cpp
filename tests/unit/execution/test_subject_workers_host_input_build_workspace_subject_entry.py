@@ -46,7 +46,7 @@ class TestSubjectWorkersHostInputBuildWorkspaceSubjectEntry(SubjectWorkersTestSu
             source_project_path = source_root / f"{subject_id}.csproj"
             source_project_path.write_text("<Project />\n", encoding="utf-8")
 
-            workspace_root = repo_root / "solutions" / "subjects" / subject_id
+            workspace_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id
             managed_tests_root = workspace_root / "managed-tests"
             generated_root = managed_tests_root / "Generated"
             generated_root.mkdir(parents=True, exist_ok=True)
@@ -64,7 +64,7 @@ class TestSubjectWorkersHostInputBuildWorkspaceSubjectEntry(SubjectWorkersTestSu
                             {
                                 "projectId": f"managed-test/{subject_id}/benchmark-host",
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -73,7 +73,7 @@ class TestSubjectWorkersHostInputBuildWorkspaceSubjectEntry(SubjectWorkersTestSu
                                 "assemblyName": f"{subject_id}.DeclaredBenchmarkHost",
                                 "hostKind": "benchmark-host",
                                 "collectionPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -131,3 +131,5 @@ class TestSubjectWorkersHostInputBuildWorkspaceSubjectEntry(SubjectWorkersTestSu
             self.assertNotIn("collectionPath", manifest)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+
+

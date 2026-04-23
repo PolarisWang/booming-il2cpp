@@ -7,6 +7,7 @@ import sys
 try:
     from ..core.common import read_json, write_json
     from . import inventory_generator as inventory_generator_module
+    from . import verification_layout as verification_layout_module
     from . import verification_codegen_stubs as verification_codegen_stubs_module
     from . import verification_contracts as verification_contracts_module
     from . import verification_merge as verification_merge_module
@@ -16,6 +17,7 @@ except ImportError:
     sys.path.insert(0, str(root))
     from core.common import read_json, write_json
     from testing import inventory_generator as inventory_generator_module
+    from testing import verification_layout as verification_layout_module
     from testing import verification_codegen_stubs as verification_codegen_stubs_module
     from testing import verification_contracts as verification_contracts_module
     from testing import verification_merge as verification_merge_module
@@ -520,7 +522,7 @@ def write_verification_bundle(
         closure_kind=closure_kind,
         scope_code=scope_code,
     )
-    root = output_root or repo_root / "docs" / "testing-inventory" / "verification"
+    root = output_root or verification_layout_module.archive_root(repo_root)
     latest_root = root / "latest"
     master_root = root / "master"
     latest_root.mkdir(parents=True, exist_ok=True)

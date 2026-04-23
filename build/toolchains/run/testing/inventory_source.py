@@ -12,6 +12,7 @@ try:
     from . import declared_metadata_labels as declared_metadata_labels_module
     from . import public_specs as public_specs_module
     from . import registry as registry_module
+    from . import verification_layout as verification_layout_module
     from . import workspace_declared_collection as workspace_declared_collection_module
     from . import workspace_manifests as workspace_manifests_module
 except ImportError:
@@ -23,6 +24,7 @@ except ImportError:
     from testing import declared_metadata_labels as declared_metadata_labels_module
     from testing import public_specs as public_specs_module
     from testing import registry as registry_module
+    from testing import verification_layout as verification_layout_module
     from testing import workspace_declared_collection as workspace_declared_collection_module
     from testing import workspace_manifests as workspace_manifests_module
 
@@ -196,13 +198,20 @@ def _normalize_declared_benchmark(item: dict[str, Any], *, repo_root: Path) -> d
 
 
 def _collect_capability_contracts(repo_root: Path) -> list[dict[str, Any]]:
-    subjects_root = repo_root / "subjects"
+    subjects_root = verification_layout_module.owners_root(repo_root)
+    feature_name_candidates = verification_layout_module.owner_features_name_candidates()
     contracts: list[dict[str, Any]] = []
     seen: set[tuple[str, int]] = set()
     if not subjects_root.is_dir():
         return contracts
 
-    for feature_path in sorted(subjects_root.glob("*/subject.features.json")):
+    feature_paths: list[Path] = []
+    for feature_name in feature_name_candidates:
+        feature_paths.extend(sorted(subjects_root.glob(f"*/{feature_name}")))
+        if feature_paths:
+            break
+
+    for feature_path in feature_paths:
         payload = read_json(feature_path)
         subject_id = str(payload.get("subjectId") or feature_path.parent.name).strip()
         for raw in list(payload.get("features") or []):
@@ -246,9 +255,11 @@ def _collect_capability_contracts(repo_root: Path) -> list[dict[str, Any]]:
 
 def _discover_local_subject_ids(repo_root: Path) -> list[str]:
     subject_ids: set[str] = set()
-    subjects_root = repo_root / "subjects"
+    subjects_root = verification_layout_module.owners_root(repo_root)
+    manifest_name_candidates = verification_layout_module.owner_manifest_name_candidates()
+    feature_name_candidates = verification_layout_module.owner_features_name_candidates()
     if subjects_root.is_dir():
-        for manifest_name in ("subject.features.json", "subject.manifest.json"):
+        for manifest_name in [*feature_name_candidates, *manifest_name_candidates]:
             for manifest_path in sorted(subjects_root.glob(f"*/{manifest_name}")):
                 if not manifest_path.is_file():
                     continue
@@ -260,7 +271,7 @@ def _discover_local_subject_ids(repo_root: Path) -> list[str]:
                 if subject_id:
                     subject_ids.add(subject_id)
 
-    workspace_root = repo_root / "solutions" / "subjects"
+    workspace_root = verification_layout_module.subject_workspaces_root(repo_root)
     if workspace_root.is_dir():
         for manifest_path in sorted(workspace_root.glob("*/workspace.manifest.json")):
             if not manifest_path.is_file():
@@ -453,7 +464,7 @@ def _normalize_benchmark_evidence_row(
 
 
 def _benchmark_records_path(repo_root: Path, subject_id: str) -> Path:
-    return repo_root / "subjects" / subject_id / "benchmark-records" / "records.jsonl"
+    return verification_layout_module.raw_benchmark_records_path(repo_root, subject_id)
 
 
 def _capability_id(item: dict[str, Any]) -> str:
@@ -489,7 +500,7 @@ def _managed_source_refs_for_capability(
         label = str(item.get("sourceEntry") or item.get("workloadEntry") or item.get("stableId") or "").strip()
         if not label:
             continue
-        key = (f"subjects/{owner_subject_id}/source", label)
+        key = (f"verification/catalog/owners/{owner_subject_id}", label)
         if key in seen:
             continue
         seen.add(key)
@@ -560,7 +571,7 @@ def _collect_codegen_stubs(
         )
         if not managed_source_refs:
             continue
-        baseline_root = repo_root / "subjects" / owner_subject_id / "baselines" / "codegen"
+        baseline_root = verification_layout_module.owner_codegen_stubs_root(repo_root, owner_subject_id)
         if not baseline_root.is_dir():
             continue
         for profile_dir in sorted(path for path in baseline_root.iterdir() if path.is_dir()):

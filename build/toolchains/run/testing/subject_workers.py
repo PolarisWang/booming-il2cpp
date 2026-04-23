@@ -21,6 +21,7 @@ try:
     from . import perf as perf_module
     from . import subjects as subjects_module
     from . import template_assets as template_assets_module
+    from . import verification_layout as verification_layout_module
     from . import workspace_manifests as workspace_manifests_module
     from . import workspace_declared_collection as workspace_declared_collection_module
 except ImportError:
@@ -34,6 +35,7 @@ except ImportError:
     from testing import perf as perf_module
     from testing import subjects as subjects_module
     from testing import template_assets as template_assets_module
+    from testing import verification_layout as verification_layout_module
     from testing import workspace_manifests as workspace_manifests_module
     from testing import workspace_declared_collection as workspace_declared_collection_module
 
@@ -608,7 +610,7 @@ def _is_relevant_workspace_source_file(path: Path) -> bool:
 
 
 def _load_subject_manifest_payload(repo_root: Path, subject_id: str) -> dict[str, Any] | None:
-    manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+    manifest_path = verification_layout_module.owner_manifest_path(repo_root, subject_id)
     if not manifest_path.is_file():
         return None
     try:
@@ -663,7 +665,7 @@ def _workspace_manifest_is_stale(
     except OSError:
         return True
 
-    subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+    subject_manifest_path = verification_layout_module.owner_manifest_path(repo_root, subject_id)
     try:
         if subject_manifest_path.is_file() and subject_manifest_path.stat().st_mtime > manifest_mtime:
             return True
@@ -1205,7 +1207,7 @@ def _materialize_workspace_windows_native_aot_cmake_source(
     matrix_id: str,
     host_kind: str,
 ) -> Path:
-    workspace_source_root = repo_root / "solutions" / "subjects" / subject_id / "native-source" / matrix_id
+    workspace_source_root = verification_layout_module.subject_workspace_root(repo_root, subject_id) / "native-source" / matrix_id
     return _materialize_windows_native_aot_cmake_source_at(
         repo_root,
         source_root=workspace_source_root,
@@ -1357,7 +1359,7 @@ def _materialize_workspace_windows_native_reference_cmake_source(
     matrix_id: str,
     generated_source_paths: list[Path],
 ) -> Path:
-    workspace_source_root = repo_root / "solutions" / "subjects" / subject_id / "native-source" / matrix_id
+    workspace_source_root = verification_layout_module.subject_workspace_root(repo_root, subject_id) / "native-source" / matrix_id
     return _materialize_windows_native_reference_cmake_source_at(
         workspace_source_root,
         subject_id=subject_id,
@@ -1447,10 +1449,10 @@ def _windows_variant_build_flags(variant: str) -> tuple[list[str], list[str]]:
 
 def _subject_mobile_host_root(repo_root: Path, subject_id: str, target_platform: str) -> Path:
     if target_platform == "android-arm64":
-        candidate = repo_root / "subjects" / subject_id / "validation" / "mobile" / "android-host"
+        candidate = verification_layout_module.owner_evidence_root(repo_root, subject_id) / "validation" / "mobile" / "android-host"
         fallback = repo_root / "tests" / "gate" / "android-smoke"
     elif target_platform == "ios-arm64":
-        candidate = repo_root / "subjects" / subject_id / "validation" / "mobile" / "ios-host"
+        candidate = verification_layout_module.owner_evidence_root(repo_root, subject_id) / "validation" / "mobile" / "ios-host"
         fallback = repo_root / "tests" / "gate" / "ios-smoke"
     else:
         raise RuntimeError(f"unsupported mobile target platform: {target_platform}")

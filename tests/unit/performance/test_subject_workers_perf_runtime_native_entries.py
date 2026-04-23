@@ -73,7 +73,7 @@ class TestSubjectWorkersPerfRuntimeNativeEntries(SubjectWorkersPerfTestSupport):
                         "matrixId": matrix_id,
                         "outputs": [executable_path],
                         "hostKind": "benchmark-host",
-                        "collectionPath": posix_path("solutions", "subjects", subject_id, "managed-tests", "Generated", "declared-tests.collection.json"),
+                        "collectionPath": posix_path("verification", "workspaces", "subjects", subject_id, "managed-tests", "Generated", "declared-tests.collection.json"),
                         "dispatchManifestPath": subject_run_path(subject_id, run_id, "matrices", matrix_id, "build", "benchmark.dispatch.manifest.json"),
                     }
                 ),
@@ -255,3 +255,4 @@ class TestSubjectWorkersPerfRuntimeNativeEntries(SubjectWorkersPerfTestSupport):
             self.assertEqual("ok", manifest["regressionStatus"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+

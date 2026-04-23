@@ -8,7 +8,7 @@ class TestSubjectWorkersBuildNativeAotContractsPerf(SubjectWorkersTestSupport):
         run_id = "fixture-run-native-aot-summary-build-001"
         matrix_id = "windows-native-perf"
         collection_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "managed-tests",
@@ -73,7 +73,7 @@ class TestSubjectWorkersBuildNativeAotContractsPerf(SubjectWorkersTestSupport):
                 encoding="utf-8",
             )
 
-            workspace_manifest_path = repo_root / "solutions" / "subjects" / subject_id / "workspace.manifest.json"
+            workspace_manifest_path = repo_root / "verification" / "workspaces" / "subjects" / subject_id / "workspace.manifest.json"
             workspace_manifest_path.parent.mkdir(parents=True, exist_ok=True)
             workspace_manifest_path.write_text(
                 json.dumps(
@@ -84,7 +84,7 @@ class TestSubjectWorkersBuildNativeAotContractsPerf(SubjectWorkersTestSupport):
                             {
                                 "projectId": f"managed-test/{subject_id}/benchmark-host",
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -100,7 +100,7 @@ class TestSubjectWorkersBuildNativeAotContractsPerf(SubjectWorkersTestSupport):
                                 "projectId": f"native-test/{subject_id}/{matrix_id}/benchmark-host",
                                 "matrixId": matrix_id,
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "native",
@@ -109,7 +109,7 @@ class TestSubjectWorkersBuildNativeAotContractsPerf(SubjectWorkersTestSupport):
                                     "chaos_subject_native_aot.vcxproj",
                                 ),
                                 "configureRoot": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "native",
@@ -155,7 +155,7 @@ class TestSubjectWorkersBuildNativeAotContractsPerf(SubjectWorkersTestSupport):
         run_id = "fixture-run-native-perf-workspace-contract-001"
         matrix_id = "windows-native-perf"
         collection_path = posix_path(
-            "solutions",
+            "verification", "workspaces",
             "subjects",
             subject_id,
             "managed-tests",
@@ -276,3 +276,5 @@ class TestSubjectWorkersBuildNativeAotContractsPerf(SubjectWorkersTestSupport):
             self.assertEqual(dispatch_manifest_path, manifest["dispatchManifestPath"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+
+

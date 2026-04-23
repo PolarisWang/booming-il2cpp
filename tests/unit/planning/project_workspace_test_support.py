@@ -36,6 +36,18 @@ def write_json(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
 
+def write_owner_manifest_fixture(repo_root: Path, subject_id: str, payload: dict) -> None:
+    write_json(repo_root / "subjects" / subject_id / "subject.manifest.json", payload)
+    write_json(repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.manifest.json", payload)
+    write_json(
+        repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.features.json",
+        {
+            "subjectId": subject_id,
+            "features": [],
+        },
+    )
+
+
 def write_windows_subject_native_project_stubs(
     configure_root: Path,
     *,
@@ -357,75 +369,73 @@ class ProjectWorkspaceTestSupport(unittest.TestCase):
         (generated_root / "native-reference.plan.json").write_text("{}\n", encoding="utf-8")
         (generated_root / "generated" / "native-reference.generated.cpp").write_text("// generated\n", encoding="utf-8")
 
-        write_json(
-            repo_root / "subjects" / subject_id / "subject.manifest.json",
-            {
-                "subjectId": subject_id,
-                "displayName": subject_id,
-                "defaultGoal": "correctness.dev",
-                "defaultMatrix": "windows-dev-output",
-                "defaultValidationProfile": "proof-dev",
-                "source": {
-                    "type": "dotnet-project",
-                    "path": f"subjects/{subject_id}/source/{subject_id}.csproj",
-                    "entry": f"{subject_id}/Program::Main(System.String[])",
-                },
-                "validationProfiles": {
-                    "proof-dev": ["proof", "unit"],
-                },
-                "validation": {
-                    "proof": {
-                        "kind": "proof",
-                        "defaultVariant": "CHECK",
-                    },
-                    "unit": {
-                        "kind": "unit",
-                        "project": f"subjects/{subject_id}/validation/unit/{subject_id}.Subject.UnitTests/{subject_id}.Subject.UnitTests.csproj",
-                        "framework": "xunit",
-                        "defaultVariant": "CHECK",
-                    },
-                },
-                "executionPipelines": [
-                    {
-                        "pipelineId": "proof-runtime-output",
-                        "stages": [
-                            {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source"},
-                            {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input"},
-                            {"stageId": "analysis-frontend", "kind": "analysis-frontend", "scope": "shared", "bucket": "analysis"},
-                            {"stageId": "generated-native-proof", "kind": "generated-native-proof", "scope": "shared", "bucket": "generated"},
-                        ],
-                    },
-                ],
-                "environmentMatrices": [
-                    {
-                        "matrixId": "windows-dev-output",
-                        "pipelineId": "proof-runtime-output",
-                        "supportedGoals": ["correctness.dev"],
-                        "executionContext": {
-                            "hostPlatform": "windows-x64",
-                            "targetPlatform": "windows-x64",
-                            "toolchainProfile": "msvc-reference",
-                        },
-                        "artifactPlan": {
-                            "evidenceTerminalBucket": "runtime",
-                        },
-                    },
-                    {
-                        "matrixId": "windows-linux-buildable",
-                        "pipelineId": "proof-runtime-output",
-                        "supportedGoals": ["correctness.platform"],
-                        "executionContext": {
-                            "hostPlatform": "windows-x64",
-                            "targetPlatform": "linux-x64",
-                            "toolchainProfile": "linux-cross",
-                        },
-                        "artifactPlan": {
-                            "evidenceTerminalBucket": "build",
-                        },
-                    },
-                ],
+        manifest_payload = {
+            "subjectId": subject_id,
+            "displayName": subject_id,
+            "defaultGoal": "correctness.dev",
+            "defaultMatrix": "windows-dev-output",
+            "defaultValidationProfile": "proof-dev",
+            "source": {
+                "type": "dotnet-project",
+                "path": f"subjects/{subject_id}/source/{subject_id}.csproj",
+                "entry": f"{subject_id}/Program::Main(System.String[])",
             },
-        )
+            "validationProfiles": {
+                "proof-dev": ["proof", "unit"],
+            },
+            "validation": {
+                "proof": {
+                    "kind": "proof",
+                    "defaultVariant": "CHECK",
+                },
+                "unit": {
+                    "kind": "unit",
+                    "project": f"subjects/{subject_id}/validation/unit/{subject_id}.Subject.UnitTests/{subject_id}.Subject.UnitTests.csproj",
+                    "framework": "xunit",
+                    "defaultVariant": "CHECK",
+                },
+            },
+            "executionPipelines": [
+                {
+                    "pipelineId": "proof-runtime-output",
+                    "stages": [
+                        {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source"},
+                        {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input"},
+                        {"stageId": "analysis-frontend", "kind": "analysis-frontend", "scope": "shared", "bucket": "analysis"},
+                        {"stageId": "generated-native-proof", "kind": "generated-native-proof", "scope": "shared", "bucket": "generated"},
+                    ],
+                },
+            ],
+            "environmentMatrices": [
+                {
+                    "matrixId": "windows-dev-output",
+                    "pipelineId": "proof-runtime-output",
+                    "supportedGoals": ["correctness.dev"],
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "msvc-reference",
+                    },
+                    "artifactPlan": {
+                        "evidenceTerminalBucket": "runtime",
+                    },
+                },
+                {
+                    "matrixId": "windows-linux-buildable",
+                    "pipelineId": "proof-runtime-output",
+                    "supportedGoals": ["correctness.platform"],
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "linux-x64",
+                        "toolchainProfile": "linux-cross",
+                    },
+                    "artifactPlan": {
+                        "evidenceTerminalBucket": "build",
+                    },
+                },
+            ],
+        }
+        write_owner_manifest_fixture(repo_root, subject_id, manifest_payload)
 
         (repo_root / "build" / "toolchains").mkdir(parents=True, exist_ok=True)
         (repo_root / "build" / "toolchains" / "linux-x64.cmake").write_text("# linux\n", encoding="utf-8")
@@ -472,62 +482,60 @@ class ProjectWorkspaceTestSupport(unittest.TestCase):
         perf_project.parent.mkdir(parents=True, exist_ok=True)
         perf_project.write_text("<Project />\n", encoding="utf-8")
 
-        write_json(
-            repo_root / "subjects" / subject_id / "subject.manifest.json",
-            {
-                "subjectId": subject_id,
-                "displayName": subject_id,
-                "defaultGoal": "perf.dev",
-                "defaultMatrix": "windows-perf-dev",
-                "defaultValidationProfile": "perf-dev",
-                "source": {
-                    "type": "dotnet-project",
-                    "path": f"subjects/{subject_id}/source/{subject_id}.csproj",
-                    "entry": f"{subject_id}/Program::Main()",
-                },
-                "validationProfiles": {
-                    "perf-dev": ["perf"],
-                },
-                "validation": {
-                    "perf": {
-                        "kind": "perf",
-                        "project": f"subjects/{subject_id}/validation/perf/{subject_id}.Subject.PerfHarness/{subject_id}.Subject.PerfHarness.csproj",
-                        "driver": "csharp-perf-harness",
-                        "defaultVariant": "PROFILE",
-                    },
-                },
-                "executionPipelines": [
-                    {
-                        "pipelineId": "managed-runtime-perf",
-                        "stages": [
-                            {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source"},
-                            {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input"},
-                            {"stageId": "runtime-perf-collect", "kind": "runtime-perf-collect", "scope": "matrix", "bucket": "runtime"},
-                        ],
-                    },
-                ],
-                "environmentMatrices": [
-                    {
-                        "matrixId": "windows-perf-dev",
-                        "pipelineId": "managed-runtime-perf",
-                        "supportedGoals": ["perf.dev"],
-                        "executionContext": {
-                            "hostPlatform": "windows-x64",
-                            "targetPlatform": "windows-x64",
-                            "toolchainProfile": "dotnet-managed",
-                        },
-                        "validationIntent": {
-                            "validationMode": "perf",
-                            "adaptationLevel": "managed-runtime",
-                            "expectedOutcome": "pass",
-                        },
-                        "artifactPlan": {
-                            "evidenceTerminalBucket": "runtime",
-                        },
-                    },
-                ],
+        manifest_payload = {
+            "subjectId": subject_id,
+            "displayName": subject_id,
+            "defaultGoal": "perf.dev",
+            "defaultMatrix": "windows-perf-dev",
+            "defaultValidationProfile": "perf-dev",
+            "source": {
+                "type": "dotnet-project",
+                "path": f"subjects/{subject_id}/source/{subject_id}.csproj",
+                "entry": f"{subject_id}/Program::Main()",
             },
-        )
+            "validationProfiles": {
+                "perf-dev": ["perf"],
+            },
+            "validation": {
+                "perf": {
+                    "kind": "perf",
+                    "project": f"subjects/{subject_id}/validation/perf/{subject_id}.Subject.PerfHarness/{subject_id}.Subject.PerfHarness.csproj",
+                    "driver": "csharp-perf-harness",
+                    "defaultVariant": "PROFILE",
+                },
+            },
+            "executionPipelines": [
+                {
+                    "pipelineId": "managed-runtime-perf",
+                    "stages": [
+                        {"stageId": "source-resolve", "kind": "source-resolve", "scope": "shared", "bucket": "source"},
+                        {"stageId": "host-input-build", "kind": "host-input-build", "scope": "shared", "bucket": "host-input"},
+                        {"stageId": "runtime-perf-collect", "kind": "runtime-perf-collect", "scope": "matrix", "bucket": "runtime"},
+                    ],
+                },
+            ],
+            "environmentMatrices": [
+                {
+                    "matrixId": "windows-perf-dev",
+                    "pipelineId": "managed-runtime-perf",
+                    "supportedGoals": ["perf.dev"],
+                    "executionContext": {
+                        "hostPlatform": "windows-x64",
+                        "targetPlatform": "windows-x64",
+                        "toolchainProfile": "dotnet-managed",
+                    },
+                    "validationIntent": {
+                        "validationMode": "perf",
+                        "adaptationLevel": "managed-runtime",
+                        "expectedOutcome": "pass",
+                    },
+                    "artifactPlan": {
+                        "evidenceTerminalBucket": "runtime",
+                    },
+                },
+            ],
+        }
+        write_owner_manifest_fixture(repo_root, subject_id, manifest_payload)
 
     def _write_hotupdate_subject_fixture(
         self,
@@ -601,43 +609,41 @@ class ProjectWorkspaceTestSupport(unittest.TestCase):
             encoding="utf-8",
         )
 
-        write_json(
-            repo_root / "subjects" / subject_id / "subject.manifest.json",
-            {
-                "subjectId": subject_id,
-                "displayName": subject_id,
-                "defaultGoal": "correctness.dev",
-                "defaultMatrix": "windows-hotupdate-proof",
-                "defaultValidationProfile": "proof-dev",
-                "engineeringProfile": "hot-update-host",
-                "source": {
-                    "type": "dotnet-project",
-                    "path": f"subjects/{subject_id}/source/{subject_id}.sln",
-                    "primaryProjectPath": f"subjects/{subject_id}/source/Host/{subject_id}.Host.csproj",
-                    "entry": f"{subject_id}.Host/Program::Main()",
+        manifest_payload = {
+            "subjectId": subject_id,
+            "displayName": subject_id,
+            "defaultGoal": "correctness.dev",
+            "defaultMatrix": "windows-hotupdate-proof",
+            "defaultValidationProfile": "proof-dev",
+            "engineeringProfile": "hot-update-host",
+            "source": {
+                "type": "dotnet-project",
+                "path": f"subjects/{subject_id}/source/{subject_id}.sln",
+                "primaryProjectPath": f"subjects/{subject_id}/source/Host/{subject_id}.Host.csproj",
+                "entry": f"{subject_id}.Host/Program::Main()",
+            },
+            "hotUpdate": {
+                "patchProjectPaths": [
+                    f"subjects/{subject_id}/source/Patch/{subject_id}.Patch.csproj",
+                ]
+            },
+            "validationProfiles": {
+                "proof-dev": ["proof"],
+                "perf-dev": ["perf"],
+            },
+            "validation": {
+                "proof": {
+                    "kind": "proof",
+                    "defaultVariant": "CHECK",
                 },
-                "hotUpdate": {
-                    "patchProjectPaths": [
-                        f"subjects/{subject_id}/source/Patch/{subject_id}.Patch.csproj",
-                    ]
+                "perf": {
+                    "kind": "perf",
+                    "driver": "interpreter-runtime-perf",
+                    "project": "src/tools/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.csproj",
+                    "defaultVariant": "PROFILE",
                 },
-                "validationProfiles": {
-                    "proof-dev": ["proof"],
-                    "perf-dev": ["perf"],
-                },
-                "validation": {
-                    "proof": {
-                        "kind": "proof",
-                        "defaultVariant": "CHECK",
-                    },
-                    "perf": {
-                        "kind": "perf",
-                        "driver": "interpreter-runtime-perf",
-                        "project": "src/tools/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness/Chaos.IL2CPP.Tools.Benchmark.WorkloadEntry.PerfHarness.csproj",
-                        "defaultVariant": "PROFILE",
-                    },
-                },
-                "executionPipelines": [
+            },
+            "executionPipelines": [
                     {
                         "pipelineId": "hotupdate-proof",
                         "stages": [
@@ -695,5 +701,5 @@ class ProjectWorkspaceTestSupport(unittest.TestCase):
                         },
                     },
                 ],
-            },
-        )
+        }
+        write_owner_manifest_fixture(repo_root, subject_id, manifest_payload)

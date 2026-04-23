@@ -97,8 +97,8 @@
 
 目标：
 
-- `docs/testing-inventory/*` 改为只读 formal source
-- `docs/benchmark/*` 改为只读 formal source
+- `verification/projections/testing-inventory/*` 改为只读 formal source
+- `verification/projections/benchmark/*` 改为只读 formal source
 - 主页视图改为只读 projection generator 的输出
 
 进入条件：
@@ -171,7 +171,7 @@
 
 - formal source 已完整覆盖成功与失败项
 - inventory/benchmark 已完成读取切换
-- codegen 关键存根已迁到 `subjects/*/verification/codegen-stubs`
+- codegen 关键存根已迁到 `verification/evidence/owners/*/codegen-stubs`
 - 临时目录中的中间产物不再被任何正式逻辑引用
 
 以下做法不允许：

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "rootPath": "verification",
+  "archive": {
+    "root": "verification/archive",
+    "latest": "verification/archive/latest",
+    "master": "verification/archive/master",
+    "reports": "verification/archive/reports"
+  },
+  "catalog": {
+    "root": "verification/catalog",
+    "owners": "verification/catalog/owners",
+    "scenarios": "verification/catalog/scenarios"
+  },
+  "evidence": {
+    "root": "verification/evidence",
+    "owners": "verification/evidence/owners"
+  },
+  "workspaces": {
+    "root": "verification/workspaces",
+    "verificationAllSolution": "verification/workspaces/verification-all.sln",
+    "verificationAllManifest": "verification/workspaces/verification-all.manifest.json"
+  },
+  "projections": {
+    "root": "verification/projections",
+    "testingInventory": "verification/projections/testing-inventory",
+    "benchmark": "verification/projections/benchmark"
+  },
+  "commands": {
+    "verify": "python build/toolchains/run/run.py verify verification-v1 --json",
+    "inventory": "python build/toolchains/run/run.py test inventory --json",
+    "workspace": "python build/toolchains/run/run.py project all-workspaces --json"
+  }
+}

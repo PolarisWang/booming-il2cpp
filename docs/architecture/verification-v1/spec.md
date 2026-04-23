@@ -23,9 +23,9 @@
   - 拥有执行主线、collection/manifest/codegen 分层与 managed/native/hotupdate 宿主边界 authority。
 - [`docs/architecture/unsupported-feature-policy.md`](../unsupported-feature-policy.md)
   - 拥有对外 `supportState` 词汇与 reason code 使用边界。
-- `docs/testing-inventory/*`
+- `verification/projections/testing-inventory/*`
   - 是面向人的投影视图与展示层，不是 formal verification authority。
-- `docs/benchmark/*`
+- `verification/projections/benchmark/*`
   - 是 perf 展示层，不是 formal verification authority。
 
 ---
@@ -378,7 +378,7 @@ Closure
 | `docs/testing-inventory/benchmark-inventory.*` | benchmark 明细投影 | `一行一个 declared benchmark x device profile` |
 | `docs/testing-inventory/capability-inventory.*` | capability 总览投影 | `一行一个 capability x closure` |
 | `docs/testing-inventory/inventory.html` | 人工浏览入口 | 组合以上三类投影 |
-| `docs/benchmark/*` | perf 展示入口 | 从 perf evidence 和 benchmark master 派生 |
+| `verification/projections/benchmark/*` | perf 展示入口 | 从 perf evidence 和 benchmark master 派生 |
 
 这些页面上的表头提示、tooltip、中文解释都来自 formal schema 元数据，而不是页面内部手写口径。
 
@@ -736,7 +736,7 @@ job 生成顺序固定为：
 artifacts/
   # 临时目录，只放过程产物
 
-docs/testing-inventory/verification/
+verification/archive/
   latest/
   master/
   reports/
@@ -759,10 +759,10 @@ subjects/<OwnerPack>/verification/
 
 ### 12.3 正式目录
 
-`docs/testing-inventory/verification/` 是 formal verification 结果目录，推荐结构如下：
+`verification/archive/` 是 formal verification 结果目录，推荐结构如下：
 
 ```text
-docs/testing-inventory/verification/
+verification/archive/
   latest/
     closure-snapshot.json
     capability-snapshot.json
@@ -807,14 +807,14 @@ docs/testing-inventory/verification/
 关键 codegen 存根的正式落点固定为：
 
 ```text
-subjects/<OwnerPack>/verification/codegen-stubs/<capability>/<route>[-<profile>]/
+verification/evidence/owners/<OwnerPack>/codegen-stubs/<capability>/<route>[-<profile>]/
 ```
 
 存根目录采用 stable path 覆盖更新，不按 run 追加新目录。
 
 ### 12.7 下游投影
 
-`docs/testing-inventory/*` 根目录和 `docs/benchmark/*` 页面属于下游投影层，应从 `verification/latest` 与 `verification/master` 重新生成，而不是直接消费临时运行目录。
+`verification/projections/testing-inventory/*` 根目录和 `verification/projections/benchmark/*` 页面属于下游投影层，应从 `verification/archive/latest` 与 `verification/archive/master` 重新生成，而不是直接消费临时运行目录。
 
 ---
 
@@ -993,9 +993,9 @@ formal 聚合时，`verificationState` 判定顺序固定为：
 
 清理只允许作用于当前 closure 的临时过程产物。不得清理：
 
-- `docs/testing-inventory/verification/master`
-- `docs/testing-inventory/verification/reports`
-- `subjects/<OwnerPack>/verification/codegen-stubs`
+- `verification/archive/master`
+- `verification/archive/reports`
+- `verification/evidence/owners/<OwnerPack>/codegen-stubs`
 
 ---
 
@@ -1016,7 +1016,7 @@ formal 聚合时，`verificationState` 判定顺序固定为：
 3. `Fact Normalization`
    - 让 managed/aot/hotupdate 执行器统一回写 execution facts，再由规范化层生成 evidence。
 4. `Projection Cutover`
-   - 让 `docs/testing-inventory/*` 与 `docs/benchmark/*` 改为从 `verification/latest` 和 `verification/master` 派生。
+   - 让 `verification/projections/testing-inventory/*` 与 `verification/projections/benchmark/*` 改为从 `verification/archive/latest` 和 `verification/archive/master` 派生。
 5. `Legacy Retirement`
    - 停止旧 formal 路径写入，删除 run-id 式正式归档与重复 report 逻辑。
 
@@ -1029,8 +1029,8 @@ formal 聚合时，`verificationState` 判定顺序固定为：
 | `docs/testing-inventory/unit-test-inventory.*` | 从 verification master 派生的 unit test 投影 |
 | `docs/testing-inventory/benchmark-inventory.*` | 从 verification master 派生的 benchmark 投影 |
 | `docs/testing-inventory/capability-inventory.*` | 从 verification master 派生的 capability 投影 |
-| `docs/benchmark/*` | 从 perf evidence 派生的 perf 展示层 |
-| `subjects/*/baselines/codegen` | 迁移期只读参考；正式存根迁移到 `subjects/*/verification/codegen-stubs` |
+| `verification/projections/benchmark/*` | 从 perf evidence 派生的 perf 展示层 |
+| `subjects/*/baselines/codegen` | 迁移期只读参考；正式存根迁移到 `verification/evidence/owners/*/codegen-stubs` |
 
 ### 16.4 Cutover 完成判据
 
@@ -1038,8 +1038,8 @@ formal 聚合时，`verificationState` 判定顺序固定为：
 
 - closure、obligation、evidence 三层对象全部稳定
 - 主线 lane 的权责图审核已进入正式阶段报告
-- `verification/latest`、`verification/master`、`verification/reports` 已成为唯一 formal source
-- `docs/testing-inventory/*` 和 `docs/benchmark/*` 已完全从 formal source 派生
+- `verification/archive/latest`、`verification/archive/master`、`verification/archive/reports` 已成为唯一 formal source
+- `verification/projections/testing-inventory/*` 和 `verification/projections/benchmark/*` 已完全从 formal source 派生
 - 旧 run-oriented 正式目录不再接收新写入
 
 ### 16.5 长期维护规则

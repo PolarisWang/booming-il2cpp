@@ -62,18 +62,18 @@ class BenchmarkDashboardGeneratorTestSupport(unittest.TestCase):
                     "",
                     "",
                     "def discover_perf_subject_ids(repo_root: Path) -> list[str]:",
-                    '    subjects_root = repo_root / "subjects"',
-                    "    if not subjects_root.is_dir():",
+                    '    owners_root = repo_root / "verification" / "catalog" / "owners"',
+                    "    if not owners_root.is_dir():",
                     "        return []",
                     "    return sorted(",
                     "        path.parent.name",
-                    '        for path in subjects_root.glob("*/subject.manifest.json")',
+                    '        for path in owners_root.glob("*/owner.manifest.json")',
                     "        if path.is_file()",
                     "    )",
                     "",
                     "",
                     "def load_subject_manifest(repo_root: Path, subject_id: str) -> dict:",
-                    '    manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"',
+                    '    manifest_path = repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.manifest.json"',
                     '    return json.loads(manifest_path.read_text(encoding="utf-8"))',
                     "",
                 ]
@@ -119,7 +119,7 @@ class BenchmarkDashboardGeneratorTestSupport(unittest.TestCase):
         method_signature: str,
         matrix_id: str = "workspace-benchmark-matrix",
     ) -> None:
-        workspace_root = repo_root / "solutions" / "subjects" / subject_id
+        workspace_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id
         managed_tests_root = workspace_root / "managed-tests"
         generated_root = managed_tests_root / "Generated"
         project_path = managed_tests_root / f"{subject_id}.DeclaredBenchmarkHost.csproj"
@@ -204,7 +204,7 @@ class BenchmarkDashboardGeneratorTestSupport(unittest.TestCase):
         host_platform: str = "windows-x64",
         workload_entry: str | None = None,
     ) -> None:
-        subject_root = repo_root / "subjects" / subject_id
+        subject_root = repo_root / "verification" / "catalog" / "owners" / subject_id
         subject_root.mkdir(parents=True, exist_ok=True)
 
         pipelines = []
@@ -256,7 +256,7 @@ class BenchmarkDashboardGeneratorTestSupport(unittest.TestCase):
         }
         if workload_entry:
             manifest["workloadEntry"] = workload_entry
-        (subject_root / "subject.manifest.json").write_text(
+        (subject_root / "owner.manifest.json").write_text(
             json.dumps(manifest, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
@@ -273,7 +273,7 @@ class BenchmarkDashboardGeneratorTestSupport(unittest.TestCase):
         recorded_at: str = "2026-04-13T08:00:00+00:00",
         git_commit: str = "abc123",
     ) -> None:
-        records_path = repo_root / "subjects" / subject_id / "benchmark-records" / "records.jsonl"
+        records_path = repo_root / ".artifact" / "verification" / "benchmark-records" / subject_id / "records.jsonl"
         records_path.parent.mkdir(parents=True, exist_ok=True)
         payload = {
             "subject": subject_id,

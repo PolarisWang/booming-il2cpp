@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "generatedAtUtc": "2026-04-23T21:56:32.256663Z",
+  "producerId": "verification-v1",
+  "sourceSpecVersion": "verification-v1",
+  "ownerSubjectId": "SolutionCorePack",
+  "capabilityId": "capability/5/30",
+  "routeCode": "native",
+  "profileCode": "windows-delegate-closed-target-relay-native-proof",
+  "mergeKey": "SolutionCorePack|capability/5/30|native|windows-delegate-closed-target-relay-native-proof",
+  "managedSourceRefs": [
+    {
+      "kind": "managed-source",
+      "path": "verification/catalog/owners/SolutionCorePack",
+      "label": "CoreRuntimeFeatures/CrossBoundaryExceptionProofEntry::Run()",
+      "hash": ""
+    }
+  ],
+  "stubRefs": [
+    {
+      "kind": "stub-dir",
+      "path": "verification/evidence/owners/SolutionCorePack/codegen-stubs/windows-delegate-closed-target-relay-native-proof",
+      "label": "windows-delegate-closed-target-relay-native-proof",
+      "hash": ""
+    }
+  ],
+  "generatedFromEvidenceIds": [
+    "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CrossBoundaryExceptionProofEntry::Run()/native-proof"
+  ]
+}

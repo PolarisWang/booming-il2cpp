@@ -16,9 +16,9 @@
 本 roadmap 覆盖以下内容：
 
 - `build/toolchains/run/testing/` 下的 formal verification DTO、merge、report、projection 生成逻辑
-- `docs/testing-inventory/verification/` 的 formal 结果布局
-- `subjects/<OwnerPack>/verification/codegen-stubs/` 的正式存根布局
-- `docs/testing-inventory/*` 与 `docs/benchmark/*` 的投影切换
+- `verification/archive/` 的 formal 结果布局
+- `verification/evidence/owners/<OwnerPack>/codegen-stubs/` 的正式存根布局
+- `verification/projections/testing-inventory/*` 与 `verification/projections/benchmark/*` 的投影切换
 - `wiki/06-测试验证/` 的新规范与旧入口退役
 
 ## 3. 非目标
@@ -38,8 +38,8 @@
   - 建立 formal verification 的对象层、归并层和阶段报告层，使新系统先有稳定 source，再谈 UI 和下游入口切换。
 - `exit_criteria`
   - formal DTO、merge key、path key、stage report generator 可运行
-  - `docs/testing-inventory/verification/latest|master|reports` 可生成最小有效输出
-  - `subjects/<OwnerPack>/verification/codegen-stubs/` 可写入正式存根索引
+  - `verification/archive/latest|master|reports` 可生成最小有效输出
+  - `verification/evidence/owners/<OwnerPack>/codegen-stubs/` 可写入正式存根索引
 - `deliverables`
   - `verification` contracts / DTO
   - `latest/master` merge engine
@@ -105,7 +105,7 @@
 ### Phase 4 `Projection Cutover`
 
 - `goal`
-  - 让 `docs/testing-inventory/*`、`docs/benchmark/*` 和主页视图只消费新的 formal source。
+  - 让 `verification/projections/testing-inventory/*`、`verification/projections/benchmark/*` 和主页视图只消费新的 formal source。
 - `exit_criteria`
   - inventory / benchmark / dashboard 不再自行推导 authority
   - 表头 tooltip 全部来自 formal schema 元数据
@@ -176,7 +176,7 @@
 - merge 规则有自动化单测
 - stage report 有自动化单测
 - codegen stub 路径与索引有自动化单测
-- `verification/latest|master|reports` 目录 contract 固定
+- `verification/archive/latest|master|reports` 目录 contract 固定
 
 ### Phase 2 完成定义
 
@@ -196,7 +196,7 @@
 - `docs/testing-inventory/unit-test-inventory.*` 只读 formal source
 - `docs/testing-inventory/benchmark-inventory.*` 只读 formal source
 - `docs/testing-inventory/capability-inventory.*` 只读 formal source
-- `docs/benchmark/*` 只读 formal source
+- `verification/projections/benchmark/*` 只读 formal source
 
 ### Phase 5 完成定义
 
@@ -304,10 +304,10 @@
 
 新路径固定替代为：
 
-- `docs/testing-inventory/verification/latest/*`
-- `docs/testing-inventory/verification/master/*`
-- `docs/testing-inventory/verification/reports/<closure-kind>/<scope-code>/*`
-- `subjects/<OwnerPack>/verification/codegen-stubs/*`
+- `verification/archive/latest/*`
+- `verification/archive/master/*`
+- `verification/archive/reports/<closure-kind>/<scope-code>/*`
+- `verification/evidence/owners/<OwnerPack>/codegen-stubs/*`
 
 ### 12.2 pipeline 入口替代
 
@@ -325,11 +325,11 @@
 旧路径：
 
 - `inventory_source -> inventory_generator -> html/csv/json`
-- `benchmark_dashboard_generator -> docs/benchmark/*`
+- `benchmark_dashboard_generator -> verification/projections/benchmark/*`
 
 新路径：
 
-- `execution facts -> evidence -> latest/master/reports -> projection generator -> docs/testing-inventory/* / docs/benchmark/*`
+- `execution facts -> evidence -> archive/latest|master|reports -> projection generator -> verification/projections/testing-inventory/* / verification/projections/benchmark/*`
 
 ## 13. 如何 cover 所有测试
 

@@ -2,8 +2,17 @@ from __future__ import annotations
 
 from pathlib import Path
 
+try:
+    from . import verification_layout as verification_layout_module
+except ImportError:
+    import sys
 
-SUBJECT_MANIFEST_NAME = "subject.manifest.json"
+    root = Path(__file__).resolve().parents[1]
+    sys.path.insert(0, str(root))
+    from testing import verification_layout as verification_layout_module
+
+
+SUBJECT_MANIFEST_NAME = verification_layout_module.OWNER_MANIFEST_NAME
 
 
 def _profile_relative_path(profile_id: str) -> Path:
@@ -14,13 +23,7 @@ def _profile_relative_path(profile_id: str) -> Path:
 
 
 def repo_root_from_subject_manifest(manifest_path: Path) -> Path:
-    for parent in manifest_path.parents:
-        if parent.name == "subjects":
-            fixtures_parent = parent.parent
-            if fixtures_parent.name == "fixtures" and fixtures_parent.parent.name == "tests":
-                return fixtures_parent.parent.parent
-            return fixtures_parent
-    raise ValueError(f"subject manifest path must be rooted under subjects/: {manifest_path}")
+    return verification_layout_module.repo_root_from_owner_manifest(manifest_path)
 
 
 def _normalize_subject_id(subject_id: str) -> str:
@@ -28,11 +31,11 @@ def _normalize_subject_id(subject_id: str) -> str:
 
 
 def subject_root(repo_root: Path, subject_id: str) -> Path:
-    return repo_root / "subjects" / _normalize_subject_id(subject_id)
+    return verification_layout_module.owner_root(repo_root, _normalize_subject_id(subject_id))
 
 
 def subject_manifest_path(repo_root: Path, subject_id: str) -> Path:
-    return subject_root(repo_root, subject_id) / SUBJECT_MANIFEST_NAME
+    return verification_layout_module.owner_manifest_path(repo_root, _normalize_subject_id(subject_id))
 
 
 def orchestration_root(repo_root: Path) -> Path:
@@ -68,11 +71,11 @@ def subject_run_root(repo_root: Path, subject_id: str, run_id: str) -> Path:
 
 
 def subject_content_roots(repo_root: Path, subject_id: str) -> dict[str, Path]:
-    root = subject_root(repo_root, subject_id)
+    owner_id = _normalize_subject_id(subject_id)
     return {
-        "validationRoot": root / "validation",
-        "expectedRoot": root / "expected",
-        "baselinesRoot": root / "baselines",
+        "validationRoot": verification_layout_module.owner_evidence_root(repo_root, owner_id) / "validation",
+        "expectedRoot": verification_layout_module.owner_evidence_root(repo_root, owner_id) / "expected",
+        "baselinesRoot": verification_layout_module.owner_benchmark_baselines_root(repo_root, owner_id),
     }
 
 
@@ -96,12 +99,10 @@ def subject_codegen_baseline_path(
     matrix_id: str,
     host_platform: str,
 ) -> Path:
-    return (
-        subject_content_roots(repo_root, subject_id)["baselinesRoot"]
-        / "codegen"
-        / matrix_id
-        / f"{host_platform}.json"
-    )
+    return verification_layout_module.owner_codegen_stubs_root(
+        repo_root,
+        _normalize_subject_id(subject_id),
+    ) / matrix_id / f"{host_platform}.json"
 
 
 def contract_roots(repo_root: Path, *, version: str = "v0") -> dict[str, Path]:

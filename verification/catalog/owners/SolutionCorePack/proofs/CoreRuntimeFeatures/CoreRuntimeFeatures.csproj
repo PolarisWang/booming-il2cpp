@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>CoreRuntimeFeatures</AssemblyName>
+    <RootNamespace>CoreRuntimeFeatures</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\\..\\..\\..\\..\\..\\src\\reference\\Chaos.TestFramework.Sdk\\Chaos.TestFramework.Sdk.csproj" />
+  </ItemGroup>
+</Project>
+

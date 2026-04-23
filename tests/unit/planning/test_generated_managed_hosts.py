@@ -268,8 +268,14 @@ class GeneratedManagedHostsTests(unittest.TestCase):
             assembly_name="FixtureSubject.DeclaredProofHost",
         )
 
-        self.assertIn("Chaos.TestFramework.Sdk.csproj", project_text)
-        self.assertIn("Chaos.TestFramework.Runtime.csproj", project_text)
+        self.assertIn(
+            "../../../../../src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj",
+            project_text,
+        )
+        self.assertIn(
+            "../../../../../src/reference/Chaos.TestFramework.Runtime/Chaos.TestFramework.Runtime.csproj",
+            project_text,
+        )
         self.assertIn("../../../../subjects/FixtureSubject/source/FixtureSubject.csproj", project_text)
         self.assertIn("../../../../subjects/FixtureSubject/source/FixtureSubject.Support.csproj", project_text)
         self.assertIn("<TargetFramework>net8.0</TargetFramework>", project_text)

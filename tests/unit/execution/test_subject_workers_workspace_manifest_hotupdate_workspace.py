@@ -89,7 +89,7 @@ class TestSubjectWorkersWorkspaceManifestHotupdateWorkspace(SubjectWorkersTestSu
                 encoding="utf-8",
             )
 
-            workspace_root = repo_root / "solutions" / "subjects" / subject_id
+            workspace_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id
             hotupdate_tests_root = workspace_root / "hotupdate-tests"
             generated_root = hotupdate_tests_root / "Generated"
             generated_root.mkdir(parents=True, exist_ok=True)
@@ -125,7 +125,7 @@ class TestSubjectWorkersWorkspaceManifestHotupdateWorkspace(SubjectWorkersTestSu
                             {
                                 "projectId": f"hotupdate-test/{subject_id}/proof-host",
                                 "projectPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "hotupdate-tests",
@@ -134,7 +134,7 @@ class TestSubjectWorkersWorkspaceManifestHotupdateWorkspace(SubjectWorkersTestSu
                                 "assemblyName": f"{subject_id}.HotUpdateProofHost",
                                 "hostKind": "proof-host",
                                 "collectionPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "hotupdate-tests",
@@ -142,7 +142,7 @@ class TestSubjectWorkersWorkspaceManifestHotupdateWorkspace(SubjectWorkersTestSu
                                     "declared-tests.collection.json",
                                 ),
                                 "bindingManifestPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "hotupdate-tests",
@@ -225,16 +225,16 @@ class TestSubjectWorkersWorkspaceManifestHotupdateWorkspace(SubjectWorkersTestSu
 
             manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
             self.assertEqual(
-                posix_path("solutions", "subjects", subject_id, "hotupdate-tests", f"{subject_id}.HotUpdateProofHost.csproj"),
+                posix_path("verification", "workspaces", "subjects", subject_id, "hotupdate-tests", f"{subject_id}.HotUpdateProofHost.csproj"),
                 manifest["primaryProjectPath"],
             )
             self.assertEqual("proof-host", manifest["hostKind"])
             self.assertEqual(
-                posix_path("solutions", "subjects", subject_id, "hotupdate-tests", "Generated", "declared-tests.collection.json"),
+                posix_path("verification", "workspaces", "subjects", subject_id, "hotupdate-tests", "Generated", "declared-tests.collection.json"),
                 manifest["collectionPath"],
             )
             self.assertEqual(
-                posix_path("solutions", "subjects", subject_id, "hotupdate-tests", "Generated", "declared-tests.binding.json"),
+                posix_path("verification", "workspaces", "subjects", subject_id, "hotupdate-tests", "Generated", "declared-tests.binding.json"),
                 manifest["bindingManifestPath"],
             )
             self.assertEqual(
@@ -249,3 +249,5 @@ class TestSubjectWorkersWorkspaceManifestHotupdateWorkspace(SubjectWorkersTestSu
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+
+

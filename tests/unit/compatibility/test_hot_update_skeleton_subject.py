@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-CORE_SOLUTION_PATH = REPO_ROOT / "solutions" / "core" / "windows" / "chaos-il2cpp-core.sln"
+CORE_SOLUTION_PATH = REPO_ROOT / "verification" / "workspaces" / "core" / "windows" / "chaos-il2cpp-core.sln"
 ROOT_CMAKE_PATH = REPO_ROOT / "CMakeLists.txt"
 
 HOT_UPDATE_ROOT = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.HotUpdate"
@@ -278,3 +278,4 @@ class Phase5HotUpdateSkeletonTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+

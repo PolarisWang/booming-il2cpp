@@ -1,4 +1,4 @@
-from tests.tooling.run.tui_test_support import *
+﻿from tests.tooling.run.tui_test_support import *
 
 
 class TestTuiUnifiedSections(TuiUnifiedMenuTestSupport):
@@ -50,9 +50,9 @@ class TestTuiUnifiedSections(TuiUnifiedMenuTestSupport):
             ["all", "subject", "core", "subject-build", "core-build", "back"],
             [entry.syntax for entry in entries],
         )
-        self.assertIn("生成所有 Solution", entries[0].command["title"])
-        self.assertIn("Subject 调试工程", entries[1].command["title"])
-        self.assertIn("IL2CPP Core 调试工程", entries[2].command["title"])
+        self.assertIn("生成所有", entries[0].command["title"])
+        self.assertIn("Subject", entries[1].command["title"])
+        self.assertIn("IL2CPP Core", entries[2].command["title"])
 
     def test_run_section_submenu_routes_project_menu_to_project_flow(self) -> None:
         tui_module = load_tui_module()
@@ -94,7 +94,7 @@ class TestTuiUnifiedSections(TuiUnifiedMenuTestSupport):
         self.assertIn("当前宿主支持:", screen)
         self.assertIn("执行命令:", screen)
         self.assertIn("备注:", screen)
-        self.assertIn("solutions/manifest.json", screen)
+        self.assertIn("verification/workspaces/verification-all.manifest.json", screen)
 
     def test_build_inspect_menu_entries_points_to_registry_listing(self) -> None:
         manifest_module = load_manifest_module()

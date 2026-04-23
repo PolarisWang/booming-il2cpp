@@ -43,7 +43,7 @@ class TestSubjectWorkersHostInputBuildWorkspaceProof(SubjectWorkersTestSupport):
             source_root.mkdir(parents=True, exist_ok=True)
             (source_root / f"{subject_id}.csproj").write_text("<Project />\n", encoding="utf-8")
 
-            workspace_root = repo_root / "solutions" / "subjects" / subject_id
+            workspace_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id
             managed_tests_root = workspace_root / "managed-tests"
             generated_root = managed_tests_root / "Generated"
             generated_root.mkdir(parents=True, exist_ok=True)
@@ -62,7 +62,7 @@ class TestSubjectWorkersHostInputBuildWorkspaceProof(SubjectWorkersTestSupport):
                                 "assemblyName": SHARED_RUNTIME_ASSEMBLY_NAME,
                                 "hostKind": "proof-host",
                                 "collectionPath": posix_path(
-                                    "solutions",
+                                    "verification", "workspaces",
                                     "subjects",
                                     subject_id,
                                     "managed-tests",
@@ -129,7 +129,7 @@ class TestSubjectWorkersHostInputBuildWorkspaceProof(SubjectWorkersTestSupport):
             self.assertEqual(SHARED_RUNTIME_PROJECT_PATH, manifest["primaryProjectPath"])
             self.assertEqual("proof-host", manifest["hostKind"])
             self.assertEqual(
-                posix_path("solutions", "subjects", subject_id, "managed-tests", "Generated", "declared-tests.collection.json"),
+                posix_path("verification", "workspaces", "subjects", subject_id, "managed-tests", "Generated", "declared-tests.collection.json"),
                 manifest["collectionPath"],
             )
             self.assertEqual("shared-runtime-host", manifest["hostExecutionModel"])
@@ -150,3 +150,5 @@ class TestSubjectWorkersHostInputBuildWorkspaceProof(SubjectWorkersTestSupport):
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
+
+

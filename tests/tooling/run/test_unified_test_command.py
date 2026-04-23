@@ -369,7 +369,7 @@ class UnifiedTestCommandTests(unittest.TestCase):
             command="verify verification-v1",
             host_platform="windows",
             target="verification-v1",
-            payload={"artifacts": ["docs/testing-inventory/verification/latest/result-snapshot.json"]},
+            payload={"artifacts": ["verification/archive/latest/result-snapshot.json"]},
             text="verification-v1 ok\n",
         )
 
@@ -406,3 +406,4 @@ class UnifiedTestCommandTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
