@@ -14,16 +14,37 @@ internal static class Program
     private const string DelegateWrapperId = "delegate-process";
     private static readonly ManagedMethodIdentityArtifact HotServiceIdentity =
         ManagedMethodIdentityResolver.Create(
-            "BridgeRoundtripProof/HotService::Process(System.Int32)",
-            "System.Int32 HotService::Process(System.Int32)");
+            new ManagedMethodIdentitySpec
+            {
+                AssemblyName = "BridgeRoundtripProof",
+                DeclaringTypeSubjectId = "BridgeRoundtripProof/HotService",
+                DeclaringTypeDisplayName = "HotService",
+                MethodName = "Process",
+                SubjectId = "BridgeRoundtripProof/HotService::Process(System.Int32)",
+                Signature = "System.Int32 HotService::Process(System.Int32)",
+            });
     private static readonly ManagedMethodIdentityArtifact AotMathMaxIdentity =
         ManagedMethodIdentityResolver.Create(
-            "System.Math/System.Math::Max(System.Int32,System.Int32)",
-            "System.Int32 System.Math::Max(System.Int32,System.Int32)");
+            new ManagedMethodIdentitySpec
+            {
+                AssemblyName = "System.Math",
+                DeclaringTypeSubjectId = "System.Math/System.Math",
+                DeclaringTypeDisplayName = "System.Math",
+                MethodName = "Max",
+                SubjectId = "System.Math/System.Math::Max(System.Int32,System.Int32)",
+                Signature = "System.Int32 System.Math::Max(System.Int32,System.Int32)",
+            });
     private static readonly ManagedMethodIdentityArtifact EngineAddFiveIdentity =
         ManagedMethodIdentityResolver.Create(
-            "BridgeRoundtripProof/Engine::AddFive(System.Int32)",
-            "System.Int32 Engine::AddFive(System.Int32)");
+            new ManagedMethodIdentitySpec
+            {
+                AssemblyName = "BridgeRoundtripProof",
+                DeclaringTypeSubjectId = "BridgeRoundtripProof/Engine",
+                DeclaringTypeDisplayName = "Engine",
+                MethodName = "AddFive",
+                SubjectId = "BridgeRoundtripProof/Engine::AddFive(System.Int32)",
+                Signature = "System.Int32 Engine::AddFive(System.Int32)",
+            });
     private const string ExpectedAotToHotUpdateOutput = "bridge-aot-to-hot-update=42";
     private const string ExpectedHotUpdateToAotOutput = "bridge-hot-update-to-aot=2";
     private const string ExpectedHotUpdateToEngineOutput = "bridge-hot-update-to-engine=7";
@@ -40,7 +61,7 @@ internal static class Program
                 {
                     BridgeId = ServiceBridgeId,
                     HotUpdateIdentity = HotServiceIdentity,
-                    HotUpdateSubjectId = HotServiceIdentity.SubjectId,
+                    HotUpdateAuthorityKey = ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(HotServiceIdentity),
                 },
             ],
             HotUpdateToAot =
@@ -49,7 +70,7 @@ internal static class Program
                 {
                     BridgeId = MathBridgeId,
                     AotIdentity = AotMathMaxIdentity,
-                    AotSubjectId = AotMathMaxIdentity.SubjectId,
+                    AotAuthorityKey = ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(AotMathMaxIdentity),
                 },
             ],
             HotUpdateToEngine =
@@ -58,7 +79,7 @@ internal static class Program
                 {
                     BridgeId = EngineBridgeId,
                     EngineIdentity = EngineAddFiveIdentity,
-                    EngineSubjectId = EngineAddFiveIdentity.SubjectId,
+                    EngineAuthorityKey = ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(EngineAddFiveIdentity),
                 },
             ],
             DelegateWrappers =
@@ -67,7 +88,7 @@ internal static class Program
                 {
                     WrapperId = DelegateWrapperId,
                     HotUpdateIdentity = HotServiceIdentity,
-                    HotUpdateSubjectId = HotServiceIdentity.SubjectId,
+                    HotUpdateAuthorityKey = ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(HotServiceIdentity),
                 },
             ],
         });

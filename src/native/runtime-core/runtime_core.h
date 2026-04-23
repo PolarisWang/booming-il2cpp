@@ -39,6 +39,20 @@ bool ArrayStoreReference(
 void* ArrayLoadReference(
     void* array_instance,
     uintptr_t index);
+bool ArrayCopyReferenceRange(
+    void* source_array_instance,
+    uintptr_t source_index,
+    void* target_array_instance,
+    uintptr_t target_index,
+    uintptr_t length);
+bool ArrayClearReferenceRange(
+    void* array_instance,
+    uintptr_t start_index,
+    uintptr_t length);
+bool ArrayReverseReferenceRange(
+    void* array_instance,
+    uintptr_t start_index,
+    uintptr_t length);
 int32_t EngineLogWrite(
     const char* category_utf8,
     const char* message_utf8);

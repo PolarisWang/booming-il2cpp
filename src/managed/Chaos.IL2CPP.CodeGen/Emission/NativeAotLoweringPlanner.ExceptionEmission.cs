@@ -162,6 +162,11 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 		builder.AppendLine("        try");
 		builder.AppendLine("        {");
+		if (catchAndFinallyShape.PreInnerFinallyInstructions.Count > 0)
+		{
+			EmitLinearInstructionSequence(builder, catchAndFinallyShape.PreInnerFinallyInstructions, "            ");
+			builder.AppendLine();
+		}
 		StringBuilder stringBuilder;
 		StringBuilder.AppendInterpolatedStringHandler handler;
 		if ((object)catchAndFinallyShape.InnerFinallyHandler == null)
@@ -489,6 +494,12 @@ public sealed partial class NativeAotLoweringPlanner
 		case "call":
 			EmitLinearCall(builder, instruction, indentation);
 			break;
+		case "callvirt":
+			EmitLinearCallVirt(builder, instruction, indentation);
+			break;
+		case "newobj":
+			EmitLinearNewObject(builder, instruction, indentation);
+			break;
 		case "stloc":
 		{
 			StringBuilder stringBuilder = builder;
@@ -598,10 +609,110 @@ public sealed partial class NativeAotLoweringPlanner
 	private void EmitLinearCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
 	{
 		InvocationTarget invocationTarget = ResolveDirectInvocationTarget(instruction);
-		EmitLinearResolvedInvocation(builder, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation);
+		EmitLinearResolvedInvocation(builder, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, enforceInstanceNullCheck: false);
 	}
 
-	private static void EmitLinearResolvedInvocation(StringBuilder builder, string targetSymbol, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlySet<int> rawArgumentIndices, string indentation)
+	private void EmitLinearCallVirt(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
+	{
+		if (IsDelegateInvokeInstruction(instruction))
+		{
+			throw new NotSupportedException("native-aot structured EH linear lowering does not support delegate callvirt.");
+		}
+		switch (instruction.DispatchKindCode.GetValueOrDefault())
+		{
+		case HybridDispatchKind.None:
+		case HybridDispatchKind.Direct:
+		case HybridDispatchKind.ExternalRuntime:
+		{
+			InvocationTarget invocationTarget = ResolveDirectInvocationTarget(instruction);
+			EmitLinearResolvedInvocation(builder, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, enforceInstanceNullCheck: true);
+			return;
+		}
+		default:
+			throw new NotSupportedException($"native-aot structured EH linear lowering does not support callvirt dispatch kind '{instruction.DispatchKindCode}'.");
+		}
+	}
+
+	private void EmitLinearNewObject(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
+	{
+		AotCoreIrReferenceArtifact requiredTargetReference = GetRequiredTargetReference(instruction);
+		if (requiredTargetReference.Kind != AotCoreIrReferenceKind.Type)
+		{
+			throw new NotSupportedException($"native-aot structured EH linear newobj requires type target reference, got '{requiredTargetReference.Kind}'.");
+		}
+		if (IsDelegateTypeSubjectId(requiredTargetReference.SubjectId, _referenceTypeBaseSubjectIds))
+		{
+			builder.AppendLine(indentation + "{");
+			builder.AppendLine(indentation + "    const auto chaos_method_ptr = chaos_eval_stack[--chaos_stack_top];");
+			builder.AppendLine(indentation + "    const auto chaos_target = chaos_eval_stack[--chaos_stack_top];");
+			builder.AppendLine($"{indentation}    auto* chaos_object = new {GetNativeTypeSymbol(requiredTargetReference.SubjectId)}{{}};");
+			builder.AppendLine($"{indentation}    chaos_object->header.type_id = {GetNativeTypeIdSymbol(requiredTargetReference.SubjectId)};");
+			builder.AppendLine(indentation + "    chaos_object->chaos_delegate_target = chaos_target;");
+			builder.AppendLine(indentation + "    chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;");
+			builder.AppendLine(indentation + "    chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(chaos_object);");
+			builder.AppendLine(indentation + "}");
+			return;
+		}
+		if (requiredTargetReference.TypeShape == AotCoreIrTypeShapeKind.ValueType)
+		{
+			InvocationTarget invocationTarget = TryResolveDirectInvocationTarget(instruction.Callee) ?? throw new NotSupportedException("native-aot structured EH linear lowering requires constructor target for value-type newobj '" + (instruction.Callee ?? "<null>") + "'.");
+			if (invocationTarget.ParameterAbis.Count == 0)
+			{
+				throw new NotSupportedException("native-aot structured EH linear lowering requires instance constructor ABI for '" + (instruction.Callee ?? "<null>") + "'.");
+			}
+			if (invocationTarget.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
+			{
+				throw new NotSupportedException("native-aot structured EH linear lowering requires void constructor return ABI for '" + (instruction.Callee ?? "<null>") + "'.");
+			}
+			builder.AppendLine(indentation + "{");
+			for (int num = invocationTarget.ParameterAbis.Count - 1; num >= 1; num--)
+			{
+				builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{num} = chaos_eval_stack[--chaos_stack_top];");
+				builder.AppendLine(invocationTarget.RawArgumentIndices.Contains(num)
+					? $"{indentation}    const auto chaos_arg_{num} = chaos_raw_arg_{num};"
+					: $"{indentation}    const auto chaos_arg_{num} = {FormatInboundAbiArgumentExpression(invocationTarget.ParameterAbis[num], $"chaos_raw_arg_{num}")};");
+			}
+			builder.AppendLine(indentation + "    std::intptr_t chaos_value = static_cast<std::intptr_t>(0);");
+			builder.AppendLine(indentation + "    const auto chaos_arg_0 = reinterpret_cast<std::intptr_t>(&chaos_value) | chaos_managed_pointer_local_slot_tag;");
+			builder.AppendLine($"{indentation}    {invocationTarget.TargetSymbol}({FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis)});");
+			builder.AppendLine(indentation + "    chaos_eval_stack[chaos_stack_top++] = chaos_value;");
+			builder.AppendLine(indentation + "}");
+			return;
+		}
+		if (TryResolveDirectInvocationTarget(instruction.Callee) is { } constructorTarget)
+		{
+			if (constructorTarget.ParameterAbis.Count == 0)
+			{
+				throw new NotSupportedException("native-aot structured EH linear lowering requires instance constructor ABI for '" + (instruction.Callee ?? "<null>") + "'.");
+			}
+			if (constructorTarget.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
+			{
+				throw new NotSupportedException("native-aot structured EH linear lowering requires void constructor return ABI for '" + (instruction.Callee ?? "<null>") + "'.");
+			}
+			builder.AppendLine(indentation + "{");
+			for (int num2 = constructorTarget.ParameterAbis.Count - 1; num2 >= 1; num2--)
+			{
+				builder.AppendLine($"{indentation}    const auto chaos_raw_arg_{num2} = chaos_eval_stack[--chaos_stack_top];");
+				builder.AppendLine(constructorTarget.RawArgumentIndices.Contains(num2)
+					? $"{indentation}    const auto chaos_arg_{num2} = chaos_raw_arg_{num2};"
+					: $"{indentation}    const auto chaos_arg_{num2} = {FormatInboundAbiArgumentExpression(constructorTarget.ParameterAbis[num2], $"chaos_raw_arg_{num2}")};");
+			}
+			builder.AppendLine($"{indentation}    auto* chaos_object = new {GetNativeTypeSymbol(requiredTargetReference.SubjectId)}{{}};");
+			builder.AppendLine($"{indentation}    chaos_object->header.type_id = {GetNativeTypeIdSymbol(requiredTargetReference.SubjectId)};");
+			builder.AppendLine(indentation + "    const auto chaos_arg_0 = reinterpret_cast<std::intptr_t>(chaos_object);");
+			builder.AppendLine($"{indentation}    {constructorTarget.TargetSymbol}({FormatAbiInvocationArgumentList(constructorTarget.ParameterAbis)});");
+			builder.AppendLine(indentation + "    chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(chaos_object);");
+			builder.AppendLine(indentation + "}");
+			return;
+		}
+		builder.AppendLine(indentation + "{");
+		builder.AppendLine($"{indentation}    auto* chaos_object = new {GetNativeTypeSymbol(requiredTargetReference.SubjectId)}{{}};");
+		builder.AppendLine($"{indentation}    chaos_object->header.type_id = {GetNativeTypeIdSymbol(requiredTargetReference.SubjectId)};");
+		builder.AppendLine(indentation + "    chaos_eval_stack[chaos_stack_top++] = reinterpret_cast<std::intptr_t>(chaos_object);");
+		builder.AppendLine(indentation + "}");
+	}
+
+	private static void EmitLinearResolvedInvocation(StringBuilder builder, string targetSymbol, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlySet<int> rawArgumentIndices, string indentation, bool enforceInstanceNullCheck)
 	{
 		string a = MapAbiSlotReturnType(returnAbi);
 		StringBuilder stringBuilder = builder;
@@ -621,6 +732,13 @@ public sealed partial class NativeAotLoweringPlanner
 			handler.AppendLiteral(" = chaos_eval_stack[--chaos_stack_top];");
 			stringBuilder3.AppendLine(ref handler);
 			builder.AppendLine(rawArgumentIndices.Contains(num) ? $"{indentation}    const auto chaos_arg_{num} = chaos_raw_arg_{num};" : $"{indentation}    const auto chaos_arg_{num} = {FormatInboundAbiArgumentExpression(parameterAbis[num], $"chaos_raw_arg_{num}")};");
+		}
+		if (enforceInstanceNullCheck && parameterAbis.Count > 0)
+		{
+			builder.AppendLine(indentation + "    if (chaos_arg_0 == static_cast<std::intptr_t>(0))");
+			builder.AppendLine(indentation + "    {");
+			builder.AppendLine(indentation + "        std::abort();");
+			builder.AppendLine(indentation + "    }");
 		}
 		string value = targetSymbol + "(" + FormatAbiInvocationArgumentList(parameterAbis) + ")";
 		if (string.Equals(a, "void", StringComparison.Ordinal))
@@ -1230,19 +1348,20 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return false;
 		}
-		AotCoreIrInstructionArtifact[] array3 = method.Instructions.OrderBy(GetRequiredIlOffset).ToArray();
-		if (array3.Length == 0)
+		AotCoreIrInstructionArtifact[] orderedInstructions = method.Instructions.OrderBy(GetRequiredIlOffset).ToArray();
+		if (orderedInstructions.Length == 0)
 		{
 			return false;
 		}
 		int rootTryOffset = catchRegion.TryOffset;
-		FinallyHandlerShape finallyHandlerShape;
+		FinallyHandlerShape? finallyHandlerShape;
 		List<FinallyHandlerShape> list;
 		AotCoreIrInstructionArtifact[] array9;
 		AotCoreIrInstructionArtifact[] array10;
 		AotCoreIrInstructionArtifact[] array11;
 		AotCoreIrInstructionArtifact[] array12;
 		AotCoreIrInstructionArtifact[] array13;
+		AotCoreIrInstructionArtifact[] array14;
 		checked
 		{
 			int catchHandlerEnd = catchRegion.HandlerOffset + catchRegion.HandlerLength;
@@ -1253,12 +1372,13 @@ public sealed partial class NativeAotLoweringPlanner
 				return false;
 			}
 			finallyHandlerShape = null;
+			int innerFinallyTryOffset = catchRegion.TryOffset;
 			int innerFinallyHandlerEnd = catchRegion.HandlerOffset;
 			int innerTryEnd = catchRegion.HandlerOffset;
 			if (array4.Length == 1)
 			{
 				AotCoreIrExceptionRegionArtifact innerFinallyRegion = array4[0];
-				if (innerFinallyRegion.TryOffset != rootTryOffset || rootTryOffset + innerFinallyRegion.TryLength != innerFinallyRegion.HandlerOffset || innerFinallyRegion.FilterOffset.HasValue || !string.IsNullOrWhiteSpace(innerFinallyRegion.CatchTypeSubjectId))
+				if (innerFinallyRegion.TryOffset < rootTryOffset || innerFinallyRegion.TryOffset + innerFinallyRegion.TryLength != innerFinallyRegion.HandlerOffset || innerFinallyRegion.FilterOffset.HasValue || !string.IsNullOrWhiteSpace(innerFinallyRegion.CatchTypeSubjectId))
 				{
 					return false;
 				}
@@ -1267,7 +1387,7 @@ public sealed partial class NativeAotLoweringPlanner
 				{
 					return false;
 				}
-				AotCoreIrInstructionArtifact[] array6 = array3.Where(delegate(AotCoreIrInstructionArtifact instruction)
+				AotCoreIrInstructionArtifact[] array6 = orderedInstructions.Where(delegate(AotCoreIrInstructionArtifact instruction)
 				{
 					int requiredIlOffset = GetRequiredIlOffset(instruction);
 					return requiredIlOffset >= innerFinallyRegion.HandlerOffset && requiredIlOffset < innerFinallyHandlerEnd;
@@ -1276,6 +1396,7 @@ public sealed partial class NativeAotLoweringPlanner
 				{
 					return false;
 				}
+				innerFinallyTryOffset = innerFinallyRegion.TryOffset;
 				innerTryEnd = innerFinallyRegion.HandlerOffset;
 				finallyHandlerShape = new FinallyHandlerShape(innerFinallyRegion, array6);
 			}
@@ -1289,7 +1410,7 @@ public sealed partial class NativeAotLoweringPlanner
 					return false;
 				}
 				int outerHandlerEnd = outerFinallyRegion.HandlerOffset + outerFinallyRegion.HandlerLength;
-				AotCoreIrInstructionArtifact[] array8 = array3.Where(delegate(AotCoreIrInstructionArtifact instruction)
+				AotCoreIrInstructionArtifact[] array8 = orderedInstructions.Where(delegate(AotCoreIrInstructionArtifact instruction)
 				{
 					int requiredIlOffset = GetRequiredIlOffset(instruction);
 					return requiredIlOffset >= outerFinallyRegion.HandlerOffset && requiredIlOffset < outerHandlerEnd;
@@ -1301,46 +1422,43 @@ public sealed partial class NativeAotLoweringPlanner
 				list.Add(new FinallyHandlerShape(outerFinallyRegion, array8));
 				nextSegmentOffset = outerHandlerEnd;
 			}
-			array9 = array3.Where((AotCoreIrInstructionArtifact instruction) => GetRequiredIlOffset(instruction) < rootTryOffset).ToArray();
-			array10 = array3.Where(delegate(AotCoreIrInstructionArtifact instruction)
+			array9 = orderedInstructions.Where((AotCoreIrInstructionArtifact instruction) => GetRequiredIlOffset(instruction) < rootTryOffset).ToArray();
+			array10 = orderedInstructions.Where(delegate(AotCoreIrInstructionArtifact instruction)
 			{
 				int requiredIlOffset = GetRequiredIlOffset(instruction);
-				return requiredIlOffset >= rootTryOffset && requiredIlOffset < innerTryEnd;
+				return requiredIlOffset >= rootTryOffset && requiredIlOffset < innerFinallyTryOffset;
 			}).ToArray();
-			array11 = array3.Where(delegate(AotCoreIrInstructionArtifact instruction)
+			array11 = orderedInstructions.Where(delegate(AotCoreIrInstructionArtifact instruction)
+			{
+				int requiredIlOffset = GetRequiredIlOffset(instruction);
+				return requiredIlOffset >= innerFinallyTryOffset && requiredIlOffset < innerTryEnd;
+			}).ToArray();
+			array12 = orderedInstructions.Where(delegate(AotCoreIrInstructionArtifact instruction)
 			{
 				int requiredIlOffset = GetRequiredIlOffset(instruction);
 				return requiredIlOffset >= innerFinallyHandlerEnd && requiredIlOffset < catchRegion.HandlerOffset;
 			}).ToArray();
-			array12 = array3.Where(delegate(AotCoreIrInstructionArtifact instruction)
+			array13 = orderedInstructions.Where(delegate(AotCoreIrInstructionArtifact instruction)
 			{
 				int requiredIlOffset = GetRequiredIlOffset(instruction);
 				return requiredIlOffset >= catchRegion.HandlerOffset && requiredIlOffset < catchHandlerEnd;
 			}).ToArray();
-			array13 = array3.Where((AotCoreIrInstructionArtifact instruction) => GetRequiredIlOffset(instruction) >= nextSegmentOffset).ToArray();
+			array14 = orderedInstructions.Where((AotCoreIrInstructionArtifact instruction) => GetRequiredIlOffset(instruction) >= nextSegmentOffset).ToArray();
 		}
-		if (array9.Length + array10.Length + (finallyHandlerShape?.Instructions.Count ?? 0) + array11.Length + array12.Length + list.Sum((FinallyHandlerShape shape) => shape.Instructions.Count) + array13.Length != array3.Length || array10.Length == 0 || array12.Length < 2 || array13.Length == 0)
+		if (array9.Length + array10.Length + array11.Length + (finallyHandlerShape?.Instructions.Count ?? 0) + array12.Length + array13.Length + list.Sum((FinallyHandlerShape shape) => shape.Instructions.Count) + array14.Length != orderedInstructions.Length || array11.Length == 0 || array13.Length < 2 || array14.Length == 0)
 		{
 			return false;
 		}
-		if ((!string.Equals(array12[0].Op, "pop", StringComparison.Ordinal) && !string.Equals(array12[0].Op, "stloc", StringComparison.Ordinal)) || !string.Equals(array12[^1].Op, "leave", StringComparison.Ordinal))
+		if ((!string.Equals(array13[0].Op, "pop", StringComparison.Ordinal) && !string.Equals(array13[0].Op, "stloc", StringComparison.Ordinal)) || !string.Equals(array13[^1].Op, "leave", StringComparison.Ordinal))
 		{
 			return false;
 		}
-		HashSet<int> tailOffsets = array13.Select(GetRequiredIlOffset).ToHashSet();
-		if (!tailOffsets.Contains(GetRequiredIntOperand(array12[^1])))
+		HashSet<int> tailOffsets = array14.Select(GetRequiredIlOffset).ToHashSet();
+		if (!tailOffsets.Contains(GetRequiredIntOperand(array13[^1])))
 		{
 			return false;
 		}
 		if ((object)finallyHandlerShape == null)
-		{
-			int[] array14 = array10.Where((AotCoreIrInstructionArtifact instruction) => string.Equals(instruction.Op, "leave", StringComparison.Ordinal)).Select(GetRequiredIntOperand).ToArray();
-			if (array14.Length == 0 || array14.Any((int target) => !tailOffsets.Contains(target)))
-			{
-				return false;
-			}
-		}
-		else
 		{
 			int[] array15 = array11.Where((AotCoreIrInstructionArtifact instruction) => string.Equals(instruction.Op, "leave", StringComparison.Ordinal)).Select(GetRequiredIntOperand).ToArray();
 			if (array15.Length == 0 || array15.Any((int target) => !tailOffsets.Contains(target)))
@@ -1348,11 +1466,19 @@ public sealed partial class NativeAotLoweringPlanner
 				return false;
 			}
 		}
-		if (array9.Any((AotCoreIrInstructionArtifact instruction) => !IsStructuredEhLinearInstructionSupported(instruction.Op)) || ((object)finallyHandlerShape != null && !TryCreateFinallyHandlerEmissionPlan(finallyHandlerShape, out FinallyHandlerEmissionPlan _)) || list.Any((FinallyHandlerShape shape) => !TryCreateFinallyHandlerEmissionPlan(shape, out FinallyHandlerEmissionPlan _)) || array12[1..^1].Any((AotCoreIrInstructionArtifact instruction) => IsUnsupportedStructuredExceptionControlFlow(instruction.Op)) || array13.Any((AotCoreIrInstructionArtifact instruction) => string.Equals(instruction.Op, "leave", StringComparison.Ordinal)))
+		else
+		{
+			int[] array16 = array12.Where((AotCoreIrInstructionArtifact instruction) => string.Equals(instruction.Op, "leave", StringComparison.Ordinal)).Select(GetRequiredIntOperand).ToArray();
+			if (array16.Length == 0 || array16.Any((int target) => !tailOffsets.Contains(target)))
+			{
+				return false;
+			}
+		}
+		if (array9.Any((AotCoreIrInstructionArtifact instruction) => !IsStructuredEhLinearInstructionSupported(instruction.Op)) || array10.Any((AotCoreIrInstructionArtifact instruction) => !IsStructuredEhLinearInstructionSupported(instruction.Op)) || ((object)finallyHandlerShape != null && !TryCreateFinallyHandlerEmissionPlan(finallyHandlerShape, out FinallyHandlerEmissionPlan _)) || list.Any((FinallyHandlerShape shape) => !TryCreateFinallyHandlerEmissionPlan(shape, out FinallyHandlerEmissionPlan _)) || array13[1..^1].Any((AotCoreIrInstructionArtifact instruction) => IsUnsupportedStructuredExceptionControlFlow(instruction.Op)) || array14.Any((AotCoreIrInstructionArtifact instruction) => string.Equals(instruction.Op, "leave", StringComparison.Ordinal)))
 		{
 			return false;
 		}
-		catchAndFinallyShape = new CatchAndFinallyExceptionMethodShape(catchRegion, array9, array10, finallyHandlerShape, array11, array12, list.AsEnumerable().Reverse().ToArray(), array13);
+		catchAndFinallyShape = new CatchAndFinallyExceptionMethodShape(catchRegion, array9, array10, array11, finallyHandlerShape, array12, array13, list.AsEnumerable().Reverse().ToArray(), array14);
 		return true;
 	}
 
@@ -1661,6 +1787,8 @@ public sealed partial class NativeAotLoweringPlanner
 		case "xor":
 		case "ldtoken":
 		case "call":
+		case "callvirt":
+		case "newobj":
 		case "or":
 			return true;
 		default:

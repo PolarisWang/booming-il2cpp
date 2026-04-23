@@ -780,6 +780,104 @@ void* ArrayLoadReference(
     return elements[index];
 }
 
+bool ArrayCopyReferenceRange(
+    void* source_array_instance,
+    uintptr_t source_index,
+    void* target_array_instance,
+    uintptr_t target_index,
+    uintptr_t length) {
+    if (source_array_instance == nullptr || target_array_instance == nullptr) {
+        return false;
+    }
+
+    auto* source_header = reinterpret_cast<ArrayHeader*>(source_array_instance);
+    auto* target_header = reinterpret_cast<ArrayHeader*>(target_array_instance);
+    if (source_header->element_type == nullptr ||
+        target_header->element_type == nullptr ||
+        source_header->element_type != target_header->element_type) {
+        return false;
+    }
+
+    if (source_index > source_header->length ||
+        target_index > target_header->length ||
+        length > (source_header->length - source_index) ||
+        length > (target_header->length - target_index)) {
+        return false;
+    }
+
+    if (length == 0u) {
+        return true;
+    }
+
+    auto* source_elements = reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(source_array_instance) + sizeof(ArrayHeader));
+    auto* target_elements = reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(target_array_instance) + sizeof(ArrayHeader));
+    std::memmove(
+        target_elements + target_index,
+        source_elements + source_index,
+        static_cast<size_t>(length) * sizeof(void*));
+    return true;
+}
+
+bool ArrayClearReferenceRange(
+    void* array_instance,
+    uintptr_t start_index,
+    uintptr_t length) {
+    if (array_instance == nullptr) {
+        return false;
+    }
+
+    auto* header = reinterpret_cast<ArrayHeader*>(array_instance);
+    if (header->element_type == nullptr) {
+        return false;
+    }
+
+    if (start_index > header->length || length > (header->length - start_index)) {
+        return false;
+    }
+
+    auto* elements = reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(array_instance) + sizeof(ArrayHeader));
+    for (uintptr_t index = 0; index < length; ++index) {
+        elements[start_index + index] = nullptr;
+    }
+
+    return true;
+}
+
+bool ArrayReverseReferenceRange(
+    void* array_instance,
+    uintptr_t start_index,
+    uintptr_t length) {
+    if (array_instance == nullptr) {
+        return false;
+    }
+
+    auto* header = reinterpret_cast<ArrayHeader*>(array_instance);
+    if (header->element_type == nullptr) {
+        return false;
+    }
+
+    if (start_index > header->length || length > (header->length - start_index)) {
+        return false;
+    }
+
+    if (length <= 1u) {
+        return true;
+    }
+
+    auto* elements = reinterpret_cast<void**>(reinterpret_cast<unsigned char*>(array_instance) + sizeof(ArrayHeader));
+    uintptr_t left = start_index;
+    uintptr_t right = start_index + length - 1u;
+    while (left < right) {
+        void* temporary = elements[left];
+        elements[left] = elements[right];
+        elements[right] = temporary;
+        ++left;
+        --right;
+    }
+
+    return true;
+}
+
 int32_t EngineLogWrite(
     const char* category_utf8,
     const char* message_utf8) {

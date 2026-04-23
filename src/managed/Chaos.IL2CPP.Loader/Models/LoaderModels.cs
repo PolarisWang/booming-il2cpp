@@ -86,11 +86,18 @@ internal sealed record MethodSummary : MethodReferenceSummary
     public ManagedImportModel? Import { get; init; }
 }
 
-internal sealed record MaterializedGenericModels(
-    IReadOnlyList<ManagedTypeModel> Types,
-    IReadOnlyList<ManagedFieldModel> Fields,
-    IReadOnlyList<ManagedPropertyModel> Properties,
-    IReadOnlyList<ManagedMethodModel> Methods);
+internal sealed record GenericInstantiationProjection
+{
+    public required IReadOnlyList<ManagedTypeModel> Types { get; init; }
+
+    public required IReadOnlyList<ManagedFieldModel> Fields { get; init; }
+
+    public required IReadOnlyList<ManagedPropertyModel> Properties { get; init; }
+
+    public required IReadOnlyList<ManagedMethodModel> Methods { get; init; }
+
+    public required GenericInstantiationDemandGraphModel DemandGraph { get; init; }
+}
 
 internal sealed record FieldBindingKey(string DefinitionSubjectId, string DeclaringTypeSubjectId);
 

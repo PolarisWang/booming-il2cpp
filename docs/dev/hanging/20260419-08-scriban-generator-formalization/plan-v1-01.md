@@ -1,14 +1,11 @@
-# Scriban Generator Formalization 实现计划
+﻿# Scriban Generator Formalization 瀹炵幇璁″垝
 
-> **面向执行 Agent：** 必须按 TDD 顺序执行：先补/改失败测试，再改实现，再做 wiki 与 authority 收口。
+> **闈㈠悜鎵ц Agent锛?* 蹇呴』鎸?TDD 椤哄簭鎵ц锛氬厛琛?鏀瑰け璐ユ祴璇曪紝鍐嶆敼瀹炵幇锛屽啀鍋?wiki 涓?authority 鏀跺彛銆?
+**鐩爣锛?* 灏嗙幇鏈?`Chaos.IL2CPP.CodeGen` 姝ｅ紡 cutover 涓?`Chaos.IL2CPP.Generator`锛屽悓姝ユ敹鍙?`Scriban` 鐨勬牳蹇冨眰瀹氫綅銆丳ython 鐢熸垚鍏ュ彛銆亀iki 浣跨敤鏂囨。涓?codegen 瑙勮寖銆?
+**鏋舵瀯锛?* 淇濇寔鍗曚竴鏍稿績鐢熸垚宸ョ▼锛屼笉鏂板缓骞惰澹抽」鐩€俙Scriban` 缁х画閫氳繃 vendored `ProjectReference` 杩涘叆鐢熸垚灞傦紝鎵€鏈夌粨鏋勫寲 codegen 瑙勫垯缁熶竴缁?`Chaos.IL2CPP.Generator` 鍜屽叾 `Templating/Templates` 鍩虹璁炬柦钀藉湴锛涘綋鐜版湁濮垮娍涓嶆敮鎸佹椂锛屾墿灞?Generator锛岃€屼笉鏄粫寮€瀹冨啓涓存椂鐢熸垚閫昏緫銆?
+**鎶€鏈爤锛?* C#/.NET 8銆丮SBuild銆乿endored `Scriban`銆丳ython workspace/planning tooling銆乺epo wiki銆乣pytest`
 
-**目标：** 将现有 `Chaos.IL2CPP.CodeGen` 正式 cutover 为 `Chaos.IL2CPP.Generator`，同步收口 `Scriban` 的核心层定位、Python 生成入口、wiki 使用文档与 codegen 规范。
-
-**架构：** 保持单一核心生成工程，不新建并行壳项目。`Scriban` 继续通过 vendored `ProjectReference` 进入生成层，所有结构化 codegen 规则统一经 `Chaos.IL2CPP.Generator` 和其 `Templating/Templates` 基础设施落地；当现有姿势不支持时，扩展 Generator，而不是绕开它写临时生成逻辑。
-
-**技术栈：** C#/.NET 8、MSBuild、vendored `Scriban`、Python workspace/planning tooling、repo wiki、`pytest`
-
-**AOT/IL2CPP/Test Governance Intake：**
+**AOT/IL2CPP/Test Governance Intake锛?*
 - capabilityFamily: n/a
 - capabilityItem: scriban-generator-formalization
 - ownerSubjectId: n/a
@@ -18,95 +15,58 @@
 - formalVerificationObjects: []
 - requiredGates: collector -> registry -> workspace
 
-**设计文档：** `docs/dev/in-progress/20260419-08-scriban-generator-formalization/design-v1-01.md`
+**璁捐鏂囨。锛?* `docs/dev/in-progress/20260419-08-scriban-generator-formalization/design-v1-01.md`
 
-**预期知识沉淀：**
-- `wiki/04-工具与集成/il2cpp-generator-usage-and-codegen-governance.md`
-- `wiki/04-工具与集成/INDEX.md`
-- 视情况同步更新 `wiki/04-工具与集成/il2cpp-core-structure-and-scriban-governance.md`
+**棰勬湡鐭ヨ瘑娌夋穩锛?*
+- `wiki/04-宸ュ叿涓庨泦鎴?il2cpp-generator-usage-and-codegen-governance.md`
+- `wiki/04-宸ュ叿涓庨泦鎴?INDEX.md`
+- 瑙嗘儏鍐靛悓姝ユ洿鏂?`wiki/04-宸ュ叿涓庨泦鎴?il2cpp-core-structure-and-scriban-governance.md`
 
-**收尾约束：** 执行完成后必须进入“审视架构合理性 -> 测试通过 -> 文档/wiki 收口 -> 保持无双轨旧名”的固定链路。
-
+**鏀跺熬绾︽潫锛?* 鎵ц瀹屾垚鍚庡繀椤昏繘鍏モ€滃瑙嗘灦鏋勫悎鐞嗘€?-> 娴嬭瘯閫氳繃 -> 鏂囨。/wiki 鏀跺彛 -> 淇濇寔鏃犲弻杞ㄦ棫鍚嶁€濈殑鍥哄畾閾捐矾銆?
 ---
 
-## 目标文件与职责
-
+## 鐩爣鏂囦欢涓庤亴璐?
 - `src/managed/Chaos.IL2CPP.Generator/**`
-  - 新 canonical 生成工程目录与源码。
-- `src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj`
-  - 改引用到 `Chaos.IL2CPP.Generator`。
-- `src/managed/Chaos.IL2CPP.Driver/DriverEntry.cs`
-  - 改 `using` 与调用入口。
-- `src/managed/Chaos.IL2CPP.Pipeline/Chaos.IL2CPP.Pipeline.csproj`
-  - 改引用到 `Chaos.IL2CPP.Generator`。
-- `src/managed/Chaos.IL2CPP.Pipeline/PipelinePlan.cs`
-  - 改 `using` 与 stage 依赖。
-- `build/toolchains/run/subject/project_workspace.py`
-  - Python 核心工作区生成入口改为识别并引用 `Chaos.IL2CPP.Generator`。
-- `tests/support.py`
-  - shared helper 改到 `Chaos.IL2CPP.Generator` 路径。
-- `tests/unit/run/test_repo_layout.py`
-  - 仓库 canonical 项目布局与依赖关系切到 `Generator`。
-- `tests/unit/planning/test_project_workspace.py`
-  - Python 工作区生成用例改为引用 `Generator`。
-- `tests/unit/compatibility/**`
-  - 所有直接锚定 `Chaos.IL2CPP.CodeGen` 路径/项目名的用例切到 `Generator`。
-- `docs/dev/ACTIVE.md`
-  - 当前 active task 指向本任务。
-- `docs/architecture/managed-native-hotupdate-test-pipeline.md`
-  - authority 文档明确 `Chaos.IL2CPP.Generator` 为 IL2CPP 核心 codegen 工程。
-- `docs/architecture/runtime-baseline/repo-layout.md`
-  - 当前 repo layout 真相源切到 `Generator`。
-- `docs/architecture/runtime-baseline/ownership-map.md`
-  - ownership map 切到 `Generator`。
-- `wiki/04-工具与集成/il2cpp-core-structure-and-scriban-governance.md`
-  - 同步 canonical 名称与“姿势不支持就扩展 Generator”的长期规则。
-- `wiki/04-工具与集成/il2cpp-generator-usage-and-codegen-governance.md`
-  - 新增 Generator 使用与 codegen 规范页。
-- `wiki/04-工具与集成/INDEX.md`
-  - 纳入新页面与入口。
+  - 鏂?canonical 鐢熸垚宸ョ▼鐩綍涓庢簮鐮併€?- `src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj`
+  - 鏀瑰紩鐢ㄥ埌 `Chaos.IL2CPP.Generator`銆?- `src/managed/Chaos.IL2CPP.Driver/DriverEntry.cs`
+  - 鏀?`using` 涓庤皟鐢ㄥ叆鍙ｃ€?- `src/managed/Chaos.IL2CPP.Pipeline/Chaos.IL2CPP.Pipeline.csproj`
+  - 鏀瑰紩鐢ㄥ埌 `Chaos.IL2CPP.Generator`銆?- `src/managed/Chaos.IL2CPP.Pipeline/PipelinePlan.cs`
+  - 鏀?`using` 涓?stage 渚濊禆銆?- `build/toolchains/run/subject/project_workspace.py`
+  - Python 鏍稿績宸ヤ綔鍖虹敓鎴愬叆鍙ｆ敼涓鸿瘑鍒苟寮曠敤 `Chaos.IL2CPP.Generator`銆?- `tests/support.py`
+  - shared helper 鏀瑰埌 `Chaos.IL2CPP.Generator` 璺緞銆?- `tests/unit/run/test_repo_layout.py`
+  - 浠撳簱 canonical 椤圭洰甯冨眬涓庝緷璧栧叧绯诲垏鍒?`Generator`銆?- `tests/unit/planning/test_project_workspace.py`
+  - Python 宸ヤ綔鍖虹敓鎴愮敤渚嬫敼涓哄紩鐢?`Generator`銆?- `tests/unit/compatibility/**`
+  - 鎵€鏈夌洿鎺ラ敋瀹?`Chaos.IL2CPP.CodeGen` 璺緞/椤圭洰鍚嶇殑鐢ㄤ緥鍒囧埌 `Generator`銆?- `docs/dev/ACTIVE.md`
+  - `docs/architecture/subject-test-framework-v1/INDEX.md`
+  - `docs/architecture/verification-v1/spec.md`
+  - authority 鏂囨。鏄庣‘ `Chaos.IL2CPP.Generator` 涓?IL2CPP 鏍稿績 codegen 宸ョ▼銆?- `docs/architecture/runtime-baseline/repo-layout.md`
+  - 褰撳墠 repo layout 鐪熺浉婧愬垏鍒?`Generator`銆?- `docs/architecture/runtime-baseline/ownership-map.md`
+  - ownership map 鍒囧埌 `Generator`銆?- `wiki/04-宸ュ叿涓庨泦鎴?il2cpp-core-structure-and-scriban-governance.md`
+  - 鍚屾 canonical 鍚嶇О涓庘€滃Э鍔夸笉鏀寔灏辨墿灞?Generator鈥濈殑闀挎湡瑙勫垯銆?- `wiki/04-宸ュ叿涓庨泦鎴?il2cpp-generator-usage-and-codegen-governance.md`
+  - 鏂板 Generator 浣跨敤涓?codegen 瑙勮寖椤点€?- `wiki/04-宸ュ叿涓庨泦鎴?INDEX.md`
+  - 绾冲叆鏂伴〉闈笌鍏ュ彛銆?
+## 鎵ц姝ラ
 
-## 执行步骤
-
-- [ ] **步骤 1：先补/改失败测试，锁定新 canonical 名称**
-  - 修改 `tests/unit/run/test_repo_layout.py`，把 managed project canonical 名称从 `Chaos.IL2CPP.CodeGen` 改为 `Chaos.IL2CPP.Generator`。
-  - 修改 `tests/unit/planning/test_project_workspace.py`、`tests/support.py` 及最小必要 compatibility 用例，使它们锚定 `src/managed/Chaos.IL2CPP.Generator/**`。
-  - 运行最小测试子集，确认在源码尚未重命名前确实失败。
-
-- [ ] **步骤 2：实施单次工程 cutover**
-  - 原地重命名目录 `src/managed/Chaos.IL2CPP.CodeGen` -> `src/managed/Chaos.IL2CPP.Generator`。
-  - 重命名 `.csproj` 为 `Chaos.IL2CPP.Generator.csproj`。
-  - 批量修改 namespace / `using` / `ProjectReference` / Python 硬编码路径。
-  - 不保留长期 wrapper project、alias project 或双轨路径。
-
-- [ ] **步骤 3：收口 Python 生成入口**
-  - 更新 `build/toolchains/run/subject/project_workspace.py` 和相关测试夹具，使 Python 生成核心工作区时引用 `Chaos.IL2CPP.Generator`。
-  - 明确 Python 侧 codegen 应消费/调用 Generator，而不是再单独维护旁路生成逻辑。
-
-- [ ] **步骤 4：写入 authority 文档与 wiki**
-  - 更新 architecture authority 文档中的 canonical 工程名与边界。
-  - 新增 wiki 页面，明确：
-    - `Chaos.IL2CPP.Generator` 的职责
-    - `Scriban` 的正式位置
-    - 文件级 codegen 默认走 Generator
-    - 当当前姿势不支持时，应扩展 Generator，而不是写临时字符串拼接/旁路 Python 生成器
-    - Python 如何使用 Generator 生成代码
-  - 更新 `wiki/04-工具与集成/INDEX.md`。
-
-- [ ] **步骤 5：验证与收口**
-  - 跑 repo layout / planning / compatibility / build 验证。
-  - 确认不存在活动代码树中的 `Chaos.IL2CPP.CodeGen` canonical 入口残留。
-  - 如验证通过，更新任务 `STATUS.md` 并准备归档。
-
-## 关键测试与验证命令
-
+- [ ] **姝ラ 1锛氬厛琛?鏀瑰け璐ユ祴璇曪紝閿佸畾鏂?canonical 鍚嶇О**
+  - 淇敼 `tests/unit/run/test_repo_layout.py`锛屾妸 managed project canonical 鍚嶇О浠?`Chaos.IL2CPP.CodeGen` 鏀逛负 `Chaos.IL2CPP.Generator`銆?  - 淇敼 `tests/unit/planning/test_project_workspace.py`銆乣tests/support.py` 鍙婃渶灏忓繀瑕?compatibility 鐢ㄤ緥锛屼娇瀹冧滑閿氬畾 `src/managed/Chaos.IL2CPP.Generator/**`銆?  - 杩愯鏈€灏忔祴璇曞瓙闆嗭紝纭鍦ㄦ簮鐮佸皻鏈噸鍛藉悕鍓嶇‘瀹炲け璐ャ€?
+- [ ] **姝ラ 2锛氬疄鏂藉崟娆″伐绋?cutover**
+  - 鍘熷湴閲嶅懡鍚嶇洰褰?`src/managed/Chaos.IL2CPP.CodeGen` -> `src/managed/Chaos.IL2CPP.Generator`銆?  - 閲嶅懡鍚?`.csproj` 涓?`Chaos.IL2CPP.Generator.csproj`銆?  - 鎵归噺淇敼 namespace / `using` / `ProjectReference` / Python 纭紪鐮佽矾寰勩€?  - 涓嶄繚鐣欓暱鏈?wrapper project銆乤lias project 鎴栧弻杞ㄨ矾寰勩€?
+- [ ] **姝ラ 3锛氭敹鍙?Python 鐢熸垚鍏ュ彛**
+  - 鏇存柊 `build/toolchains/run/subject/project_workspace.py` 鍜岀浉鍏虫祴璇曞す鍏凤紝浣?Python 鐢熸垚鏍稿績宸ヤ綔鍖烘椂寮曠敤 `Chaos.IL2CPP.Generator`銆?  - 鏄庣‘ Python 渚?codegen 搴旀秷璐?璋冪敤 Generator锛岃€屼笉鏄啀鍗曠嫭缁存姢鏃佽矾鐢熸垚閫昏緫銆?
+- [ ] **姝ラ 4锛氬啓鍏?authority 鏂囨。涓?wiki**
+  - 鏇存柊 architecture authority 鏂囨。涓殑 canonical 宸ョ▼鍚嶄笌杈圭晫銆?  - 鏂板 wiki 椤甸潰锛屾槑纭細
+    - `Chaos.IL2CPP.Generator` 鐨勮亴璐?    - `Scriban` 鐨勬寮忎綅缃?    - 鏂囦欢绾?codegen 榛樿璧?Generator
+    - 褰撳綋鍓嶅Э鍔夸笉鏀寔鏃讹紝搴旀墿灞?Generator锛岃€屼笉鏄啓涓存椂瀛楃涓叉嫾鎺?鏃佽矾 Python 鐢熸垚鍣?    - Python 濡備綍浣跨敤 Generator 鐢熸垚浠ｇ爜
+  - 鏇存柊 `wiki/04-宸ュ叿涓庨泦鎴?INDEX.md`銆?
+- [ ] **姝ラ 5锛氶獙璇佷笌鏀跺彛**
+  - 璺?repo layout / planning / compatibility / build 楠岃瘉銆?  - 纭涓嶅瓨鍦ㄦ椿鍔ㄤ唬鐮佹爲涓殑 `Chaos.IL2CPP.CodeGen` canonical 鍏ュ彛娈嬬暀銆?  - 濡傞獙璇侀€氳繃锛屾洿鏂颁换鍔?`STATUS.md` 骞跺噯澶囧綊妗ｃ€?
+## 鍏抽敭娴嬭瘯涓庨獙璇佸懡浠?
 - `python -m pytest tests/unit/run/test_repo_layout.py -q`
 - `python -m pytest tests/unit/planning/test_project_workspace.py -q`
 - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance.py -q`
 - `python -m pytest tests/unit/compatibility/test_scriban_vendor_build.py -q`
 - `dotnet build src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj -c Release -m:1`
 
-建议补充：
-
+寤鸿琛ュ厖锛?
 - `python -m pytest tests/unit/planning/test_canonical_solution_project_paths.py -q`
-- 任选一条真实 `Generator` 生成链命令，验证 Python/workspace -> Driver -> Generator -> Scriban 仍能产出 generated artifacts
+- 浠婚€変竴鏉＄湡瀹?`Generator` 鐢熸垚閾惧懡浠わ紝楠岃瘉 Python/workspace -> Driver -> Generator -> Scriban 浠嶈兘浜у嚭 generated artifacts

@@ -86,32 +86,9 @@ class RegistryManifestPathTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
-    def test_pipeline_manifest_accepts_canonical_fixture_root(self) -> None:
+    def test_pipeline_manifest_loader_is_removed_after_verification_v1_cutover(self) -> None:
         registry_module = load_registry_module()
-        repo_root = self._make_repo_root("pipeline-canonical")
-        try:
-            manifest_path = write_json(
-                repo_root / "tests" / "fixtures" / "registry" / "pipelines" / "completion-runtime-core" / "pipeline.manifest.json",
-                {
-                    "displayName": "Completion Runtime Core",
-                    "pipelinePurpose": "completion",
-                    "supportedHosts": ["windows"],
-                    "phases": [
-                        {
-                            "id": "core",
-                            "title": "Core",
-                            "members": [{"type": "module", "id": "module/analysis/basic"}],
-                        }
-                    ],
-                },
-            )
-
-            item = registry_module._load_pipeline_manifest(manifest_path)
-
-            self.assertEqual("pipeline/completion-runtime-core", item["id"])
-            self.assertEqual(str(manifest_path), item["manifestPath"])
-        finally:
-            shutil.rmtree(repo_root, ignore_errors=True)
+        self.assertFalse(hasattr(registry_module, "_load_pipeline_manifest"))
 
     def test_legacy_registry_paths_are_rejected_after_phase8_cutover(self) -> None:
         registry_module = load_registry_module()
@@ -135,30 +112,11 @@ class RegistryManifestPathTests(unittest.TestCase):
                     "members": [{"type": "module", "id": "module/analysis/basic"}],
                 },
             )
-            pipeline_manifest_path = write_json(
-                repo_root / "tests" / "registry" / "pipelines" / "completion-runtime-core" / "pipeline.manifest.json",
-                {
-                    "displayName": "Completion Runtime Core",
-                    "pipelinePurpose": "completion",
-                    "supportedHosts": ["windows"],
-                    "phases": [
-                        {
-                            "id": "core",
-                            "title": "Core",
-                            "members": [{"type": "module", "id": "module/analysis/basic"}],
-                        }
-                    ],
-                },
-            )
-
             with self.assertRaises(ValueError):
                 registry_module._load_module_manifest(module_manifest_path)
 
             with self.assertRaises(ValueError):
                 registry_module._load_system_manifest(system_manifest_path)
-
-            with self.assertRaises(ValueError):
-                registry_module._load_pipeline_manifest(pipeline_manifest_path)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

@@ -9,7 +9,7 @@ MANAGED_NAMING_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" /
 MANAGED_CLOSURE_MODELS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureModels.cs"
 LOADER_MODELS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "Models" / "LoaderModels.cs"
 LOADER_METADATA_RESOLUTION_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.MetadataResolution.cs"
-LOADER_GENERIC_MATERIALIZATION_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.GenericMaterialization.cs"
+LOADER_GENERIC_INSTANTIATION_PROJECTION_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.GenericInstantiationProjection.cs"
 
 
 class LoaderMethodIdentityGenericArityTests(unittest.TestCase):
@@ -32,9 +32,9 @@ class LoaderMethodIdentityGenericArityTests(unittest.TestCase):
         ]:
             self.assertIn(required_fragment, naming_source)
 
-    def test_loader_propagates_generic_arity_into_definition_and_materialized_subject_ids(self) -> None:
+    def test_loader_propagates_generic_arity_into_definition_and_instantiation_projection_subject_ids(self) -> None:
         metadata_resolution_source = LOADER_METADATA_RESOLUTION_PATH.read_text(encoding="utf-8")
-        generic_materialization_source = LOADER_GENERIC_MATERIALIZATION_PATH.read_text(encoding="utf-8")
+        generic_instantiation_projection_source = LOADER_GENERIC_INSTANTIATION_PROJECTION_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
             "var genericParameterCount = methodDefinition.GetGenericParameters().Count;",
@@ -47,7 +47,7 @@ class LoaderMethodIdentityGenericArityTests(unittest.TestCase):
         ]:
             self.assertIn(required_fragment, metadata_resolution_source)
 
-        self.assertIn("definitionMethod.GenericParameterCount", generic_materialization_source)
+        self.assertIn("definitionMethod.GenericParameterCount", generic_instantiation_projection_source)
 
 
 if __name__ == "__main__":

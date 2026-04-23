@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -124,10 +126,16 @@ class Phase2UInt64InteropCarrierNativeAotTests(unittest.TestCase):
         aot_core_ir = load_json(self.output_root / "aot-core-ir.json")
         methods = {method["subjectId"]: method for method in aot_core_ir["methods"]}
 
-        imported_method = methods["CoreRuntimeBenchmarks/NativeCallInteropBenchmarkMethods::GetTickCount64()"]
+        imported_method = find_method_by_subject_id(
+            methods,
+            "CoreRuntimeBenchmarks/NativeCallInteropBenchmarkMethods::GetTickCount64()",
+        )
         self.assertEqual(11, imported_method["returnAbi"]["carrierKindCode"])
 
-        round_trip_method = methods["CoreRuntimeBenchmarks/NativeCallInteropBenchmarkMethods::RoundTripUInt64(System.UInt64)"]
+        round_trip_method = find_method_by_subject_id(
+            methods,
+            "CoreRuntimeBenchmarks/NativeCallInteropBenchmarkMethods::RoundTripUInt64(System.UInt64)",
+        )
         self.assertEqual(11, round_trip_method["returnAbi"]["carrierKindCode"])
         self.assertEqual([11], [slot["carrierKindCode"] for slot in round_trip_method["parameterAbis"]])
 

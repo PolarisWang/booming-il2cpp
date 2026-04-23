@@ -31,6 +31,8 @@ public sealed record SemanticWorldModel
 
     public required string EntryPointSubjectId { get; init; }
 
+    public GenericInstantiationDemandGraphModel? GenericInstantiationDemandGraph { get; init; }
+
     public required IReadOnlyList<ManagedTypeModel> Types { get; init; }
 
     public required IReadOnlyList<ManagedFieldModel> Fields { get; init; }
@@ -57,6 +59,8 @@ public sealed record LinkedWorldModel
     public required IReadOnlyList<AssemblyIdentityModel> Assemblies { get; init; }
 
     public required string EntryPointSubjectId { get; init; }
+
+    public GenericInstantiationDemandGraphModel? GenericInstantiationDemandGraph { get; init; }
 
     public required IReadOnlyList<ManagedTypeModel> Types { get; init; }
 

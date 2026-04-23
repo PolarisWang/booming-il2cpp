@@ -112,19 +112,19 @@ class Phase3GenericCollectionProofNativeAotTests(unittest.TestCase):
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
         self.assertIn("// Managed method: CoreRuntimeFeatures/GenericCollectionProofEntry::Run()", generated_cpp)
         self.assertIn(
-            'chaos_external_runtime_System_Collections_System_Collections_Generic_List_System_Int32___Add_System_Int32_',
+            'chaos_external_runtime_System_Collections_System_Collections_Generic_List_System_Int32___Add_',
             generated_cpp,
         )
         self.assertIn(
-            'chaos_external_runtime_System_Collections_System_Collections_Generic_List_System_Int32___get_Count__',
+            'chaos_external_runtime_System_Collections_System_Collections_Generic_List_System_Int32___get_Count',
             generated_cpp,
         )
         self.assertIn(
-            'chaos_external_runtime_System_Collections_System_Collections_Generic_List_System_Int32___get_Item_System_Int32_',
+            'chaos_external_runtime_System_Collections_System_Collections_Generic_List_System_Int32___get_Item',
             generated_cpp,
         )
         self.assertIn(
-            'chaos_external_runtime_System_Collections_System_Collections_Generic_Dictionary_System_String_System_Int32___set_Item_System_String_System_Int32_',
+            'chaos_external_runtime_System_Collections_System_Collections_Generic_Dictionary_System_String_System_Int32___set_Item',
             generated_cpp,
         )
 

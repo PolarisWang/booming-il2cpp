@@ -4,7 +4,11 @@
 #include <cstdlib>
 #include <cstring>
 
-extern "C" int RunNativeAot(std::int32_t entryIndex);
+#ifndef CHAOS_NATIVE_AOT_ENTRY
+#define CHAOS_NATIVE_AOT_ENTRY RunNativeAot
+#endif
+
+extern "C" int CHAOS_NATIVE_AOT_ENTRY(std::int32_t entryIndex);
 
 namespace {
 
@@ -50,7 +54,7 @@ int main(int argc, char** argv) {
     const auto started = std::chrono::steady_clock::now();
     long long checksum = 0;
     for (int index = 0; index < iterations; ++index) {
-        checksum += static_cast<long long>(RunNativeAot(entry_index));
+        checksum += static_cast<long long>(CHAOS_NATIVE_AOT_ENTRY(entry_index));
     }
     const auto elapsed = std::chrono::duration<double, std::milli>(
         std::chrono::steady_clock::now() - started);

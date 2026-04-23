@@ -51,28 +51,54 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool TryParseAsyncTaskBuilderStartStateMachineType(string callee, out string? stateMachineTypeName)
 	{
-		return TryParseAsyncBuilderStartStateMachineType(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Int32>", out stateMachineTypeName);
+		return TryParseAsyncTaskBuilderStartStateMachineType(callee, out _, out stateMachineTypeName);
 	}
 
 	private static bool TryParseAsyncTaskBuilderAwaitUnsafeOnCompleted(string callee, out string? awaiterTypeName, out string? stateMachineTypeName)
 	{
-		return TryParseAsyncBuilderAwaitUnsafeOnCompleted(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder<System.Int32>", out awaiterTypeName, out stateMachineTypeName);
+		return TryParseAsyncTaskBuilderAwaitUnsafeOnCompleted(callee, out _, out awaiterTypeName, out stateMachineTypeName);
 	}
 
 	private static bool TryParseAsyncValueTaskBuilderStartStateMachineType(string callee, out string? stateMachineTypeName)
 	{
-		return TryParseAsyncBuilderStartStateMachineType(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder<System.Int32>", out stateMachineTypeName);
+		return TryParseAsyncValueTaskBuilderStartStateMachineType(callee, out _, out stateMachineTypeName);
 	}
 
 	private static bool TryParseAsyncValueTaskBuilderAwaitUnsafeOnCompleted(string callee, out string? awaiterTypeName, out string? stateMachineTypeName)
 	{
-		return TryParseAsyncBuilderAwaitUnsafeOnCompleted(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder<System.Int32>", out awaiterTypeName, out stateMachineTypeName);
+		return TryParseAsyncValueTaskBuilderAwaitUnsafeOnCompleted(callee, out _, out awaiterTypeName, out stateMachineTypeName);
 	}
 
-	private static bool TryParseAsyncBuilderStartStateMachineType(string callee, string builderSubjectPrefix, out string? stateMachineTypeName)
+	private static bool TryParseAsyncTaskBuilderStartStateMachineType(string callee, out string? builderResultTypeName, out string? stateMachineTypeName)
 	{
+		return TryParseAsyncBuilderStartStateMachineType(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder", out builderResultTypeName, out stateMachineTypeName);
+	}
+
+	private static bool TryParseAsyncTaskBuilderAwaitUnsafeOnCompleted(string callee, out string? builderResultTypeName, out string? awaiterTypeName, out string? stateMachineTypeName)
+	{
+		return TryParseAsyncBuilderAwaitUnsafeOnCompleted(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder", out builderResultTypeName, out awaiterTypeName, out stateMachineTypeName);
+	}
+
+	private static bool TryParseAsyncValueTaskBuilderStartStateMachineType(string callee, out string? builderResultTypeName, out string? stateMachineTypeName)
+	{
+		return TryParseAsyncBuilderStartStateMachineType(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder", out builderResultTypeName, out stateMachineTypeName);
+	}
+
+	private static bool TryParseAsyncValueTaskBuilderAwaitUnsafeOnCompleted(string callee, out string? builderResultTypeName, out string? awaiterTypeName, out string? stateMachineTypeName)
+	{
+		return TryParseAsyncBuilderAwaitUnsafeOnCompleted(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder", out builderResultTypeName, out awaiterTypeName, out stateMachineTypeName);
+	}
+
+	private static bool TryParseAsyncBuilderStartStateMachineType(string callee, string openGenericBuilderTypePrefix, out string? builderResultTypeName, out string? stateMachineTypeName)
+	{
+		builderResultTypeName = null;
 		stateMachineTypeName = null;
-		if (!TryReadGenericArgumentList(callee, builderSubjectPrefix + "::Start<", out string genericArgumentList))
+		if (!TryReadSingleGenericTypeArgument(callee, openGenericBuilderTypePrefix + "<", out string builderResultTypeNameValue))
+		{
+			return false;
+		}
+		string marker = $"{openGenericBuilderTypePrefix}<{builderResultTypeNameValue}>::Start<";
+		if (!TryReadGenericArgumentList(callee, marker, out string genericArgumentList))
 		{
 			return false;
 		}
@@ -81,15 +107,22 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return false;
 		}
+		builderResultTypeName = builderResultTypeNameValue;
 		stateMachineTypeName = readOnlyList[0];
 		return true;
 	}
 
-	private static bool TryParseAsyncBuilderAwaitUnsafeOnCompleted(string callee, string builderSubjectPrefix, out string? awaiterTypeName, out string? stateMachineTypeName)
+	private static bool TryParseAsyncBuilderAwaitUnsafeOnCompleted(string callee, string openGenericBuilderTypePrefix, out string? builderResultTypeName, out string? awaiterTypeName, out string? stateMachineTypeName)
 	{
+		builderResultTypeName = null;
 		awaiterTypeName = null;
 		stateMachineTypeName = null;
-		if (!TryReadGenericArgumentList(callee, builderSubjectPrefix + "::AwaitUnsafeOnCompleted<", out string genericArgumentList))
+		if (!TryReadSingleGenericTypeArgument(callee, openGenericBuilderTypePrefix + "<", out string builderResultTypeNameValue))
+		{
+			return false;
+		}
+		string marker = $"{openGenericBuilderTypePrefix}<{builderResultTypeNameValue}>::AwaitUnsafeOnCompleted<";
+		if (!TryReadGenericArgumentList(callee, marker, out string genericArgumentList))
 		{
 			return false;
 		}
@@ -98,6 +131,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return false;
 		}
+		builderResultTypeName = builderResultTypeNameValue;
 		awaiterTypeName = readOnlyList[0];
 		stateMachineTypeName = readOnlyList[1];
 		return true;
@@ -185,6 +219,22 @@ public sealed partial class NativeAotLoweringPlanner
 		return !string.IsNullOrWhiteSpace(typeSubjectId);
 	}
 
+	private static bool TryParseDefaultInterpolatedStringHandlerAppendFormattedType(string subjectId, out string? formattedTypeDisplayName)
+	{
+		formattedTypeDisplayName = null;
+		if (!TryReadSingleGenericTypeArgument(subjectId, DefaultInterpolatedStringHandlerAppendFormattedMethodSubjectPrefix, out string formattedTypeName) || !string.Equals(GetMethodDeclaringTypeSubjectId(subjectId), "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", StringComparison.Ordinal) || !GetMethodName(subjectId).StartsWith("AppendFormatted<", StringComparison.Ordinal) || !GetMethodParameterTypes(subjectId).SequenceEqual(new string[1] { formattedTypeName }))
+		{
+			return false;
+		}
+		formattedTypeDisplayName = GetTypeDisplayName(formattedTypeName);
+		return !string.IsNullOrWhiteSpace(formattedTypeDisplayName);
+	}
+
+	private static bool IsSupportedDefaultInterpolatedStringHandlerAppendFormattedSubjectId(string subjectId)
+	{
+		return TryParseDefaultInterpolatedStringHandlerAppendFormattedType(subjectId, out string formattedTypeDisplayName) && string.Equals(formattedTypeDisplayName, "System.Int32", StringComparison.Ordinal);
+	}
+
 	private static bool TryParseClosedListElementType(string declaringTypeSubjectId, out string elementTypeNameOrSubjectId)
 	{
 		return TryParseClosedSingleGenericArgument(declaringTypeSubjectId, "System.Collections/System.Collections.Generic.List<", out elementTypeNameOrSubjectId);
@@ -254,6 +304,10 @@ public sealed partial class NativeAotLoweringPlanner
 			return true;
 		}
 		string typeDisplayName = GetTypeDisplayName(typeNameOrSubjectId);
+		if (TryCreateNativeIntBackedValueTypeAbiSlot(typeDisplayName, typeNameOrSubjectId, out abiSlot))
+		{
+			return true;
+		}
 		switch (typeDisplayName)
 		{
 		case "System.Int64":
@@ -284,6 +338,28 @@ public sealed partial class NativeAotLoweringPlanner
 			abiSlot = null;
 			return false;
 		}
+		}
+	}
+
+	private bool TryCreateNativeIntBackedValueTypeAbiSlot(string typeDisplayName, string typeNameOrSubjectId, out AotCoreIrAbiSlotArtifact abiSlot)
+	{
+		switch (typeDisplayName)
+		{
+		case "System.IntPtr":
+		case "System.UIntPtr":
+		case "System.RuntimeFieldHandle":
+		case "System.RuntimeMethodHandle":
+		case "System.RuntimeTypeHandle":
+			if (TryResolveKnownTypeSubjectId(typeNameOrSubjectId, out string subjectId))
+			{
+				abiSlot = CreateNativeIntAbiSlot(subjectId, AotCoreIrTypeShapeKind.ValueType);
+				return true;
+			}
+			abiSlot = CreateNativeIntAbiSlot();
+			return true;
+		default:
+			abiSlot = null;
+			return false;
 		}
 	}
 
@@ -442,6 +518,21 @@ public sealed partial class NativeAotLoweringPlanner
 		if (array.Length == 1)
 		{
 			subjectId = array[0];
+			return true;
+		}
+		switch (typeNameOrSubjectId)
+		{
+		case "System.String":
+			subjectId = "System.Private.CoreLib/System.String";
+			return true;
+		case "System.Object":
+			subjectId = "System.Private.CoreLib/System.Object";
+			return true;
+		case "System.Exception":
+			subjectId = "System.Private.CoreLib/System.Exception";
+			return true;
+		case "System.Type":
+			subjectId = "System.Private.CoreLib/System.Type";
 			return true;
 		}
 		subjectId = string.Empty;

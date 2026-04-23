@@ -106,7 +106,7 @@ public sealed partial class LinkerStage
             reachableFieldIds,
             reachablePropertyIds,
             reachableTypeIds);
-        IncludeInterfaceDispatchImplementationClosure(
+        IncludePolymorphicDispatchImplementationClosure(
             semanticWorld,
             methodMap,
             fieldMap,
@@ -253,7 +253,7 @@ public sealed partial class LinkerStage
             reachableTypeIds);
     }
 
-    private static void IncludeInterfaceDispatchImplementationClosure(
+    private static void IncludePolymorphicDispatchImplementationClosure(
         SemanticWorldModel semanticWorld,
         IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
         IReadOnlyDictionary<string, ManagedFieldModel> fieldMap,
@@ -264,6 +264,10 @@ public sealed partial class LinkerStage
         HashSet<string> reachablePropertyIds,
         HashSet<string> reachableTypeIds)
     {
+        var methodsByDeclaringType = semanticWorld.Methods
+            .GroupBy(method => method.DeclaringTypeSubjectId, StringComparer.Ordinal)
+            .ToDictionary(group => group.Key, group => group.ToArray(), StringComparer.Ordinal);
+
         while (true)
         {
             var pendingMethods = new Queue<ManagedMethodModel>();
@@ -276,10 +280,15 @@ public sealed partial class LinkerStage
             {
                 foreach (var instruction in method.Body.Blocks.SelectMany(block => block.Instructions))
                 {
-                    if (!string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal) ||
-                        string.IsNullOrWhiteSpace(instruction.Callee) ||
-                        !methodMap.TryGetValue(instruction.Callee, out var slotMethod) ||
-                        !typeMap.TryGetValue(slotMethod.DeclaringTypeSubjectId, out var slotType))
+                    if (!TryResolvePolymorphicDispatchSlot(
+                            methodMap,
+                            typeMap,
+                            instruction,
+                            out var slotMethod,
+                            out var slotType,
+                            out var slotTypeSubjectId,
+                            out var slotSignatureSuffix,
+                            out var interfaceDispatch))
                     {
                         continue;
                     }
@@ -288,20 +297,30 @@ public sealed partial class LinkerStage
                     {
                         if (!typeMap.TryGetValue(candidateTypeSubjectId, out var candidateType) ||
                             candidateType.IsInterface ||
-                            !IsCompatibleVirtualDispatchTargetType(candidateType, slotType, typeMap))
+                            !IsCompatiblePolymorphicDispatchTargetType(
+                                candidateType,
+                                slotType,
+                                slotTypeSubjectId!,
+                                interfaceDispatch,
+                                typeMap))
                         {
                             continue;
                         }
 
-                        foreach (var candidateMethod in semanticWorld.Methods.Where(candidate =>
-                                     string.Equals(candidate.DeclaringTypeSubjectId, candidateType.SubjectId, StringComparison.Ordinal) &&
-                                     MatchesVirtualDispatchSignature(candidate, slotMethod)))
+                        var implementationMethod = ResolvePolymorphicDispatchImplementationMethod(
+                            methodsByDeclaringType,
+                            typeMap,
+                            candidateType,
+                            slotMethod,
+                            slotSignatureSuffix!,
+                            interfaceDispatch);
+                        if (implementationMethod is null ||
+                            reachableMethodIds.Contains(implementationMethod.SubjectId))
                         {
-                            if (!reachableMethodIds.Contains(candidateMethod.SubjectId))
-                            {
-                                pendingMethods.Enqueue(candidateMethod);
-                            }
+                            continue;
                         }
+
+                        pendingMethods.Enqueue(implementationMethod);
                     }
                 }
             }
@@ -320,9 +339,169 @@ public sealed partial class LinkerStage
                 pendingMethods,
                 reachableMethodIds,
                 reachableFieldIds,
-                reachablePropertyIds,
-                reachableTypeIds);
+            reachablePropertyIds,
+            reachableTypeIds);
         }
+    }
+
+    private static bool TryResolvePolymorphicDispatchSlot(
+        IReadOnlyDictionary<string, ManagedMethodModel> methodMap,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
+        ManagedInstructionModel instruction,
+        out ManagedMethodModel? slotMethod,
+        out ManagedTypeModel? slotType,
+        out string? slotTypeSubjectId,
+        out string? slotSignatureSuffix,
+        out bool interfaceDispatch)
+    {
+        slotMethod = null;
+        slotType = null;
+        slotTypeSubjectId = null;
+        slotSignatureSuffix = null;
+        interfaceDispatch = false;
+
+        if (!string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal) ||
+            string.IsNullOrWhiteSpace(instruction.Callee) ||
+            !instruction.Callee.Contains("::", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        slotTypeSubjectId = GetDeclaringTypeSubjectId(instruction.Callee);
+        slotSignatureSuffix = GetMethodSignatureSuffix(instruction.Callee);
+
+        if (TryResolveMethod(methodMap, instruction.Callee, out var resolvedSlotMethod))
+        {
+            slotMethod = resolvedSlotMethod;
+            if (!typeMap.TryGetValue(resolvedSlotMethod.DeclaringTypeSubjectId, out slotType) ||
+                (!slotType.IsInterface && !resolvedSlotMethod.IsVirtual))
+            {
+                return false;
+            }
+
+            interfaceDispatch = slotType.IsInterface;
+            return true;
+        }
+
+        if (typeMap.TryGetValue(slotTypeSubjectId, out slotType))
+        {
+            interfaceDispatch = slotType.IsInterface;
+            return true;
+        }
+
+        interfaceDispatch = true;
+        return true;
+    }
+
+    private static bool IsCompatiblePolymorphicDispatchTargetType(
+        ManagedTypeModel candidateType,
+        ManagedTypeModel? slotType,
+        string slotTypeSubjectId,
+        bool interfaceDispatch,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap)
+    {
+        if (slotType is not null)
+        {
+            return IsCompatibleVirtualDispatchTargetType(candidateType, slotType, typeMap);
+        }
+
+        return interfaceDispatch && ImplementsInterface(candidateType, slotTypeSubjectId, typeMap);
+    }
+
+    private static ManagedMethodModel? ResolvePolymorphicDispatchImplementationMethod(
+        IReadOnlyDictionary<string, ManagedMethodModel[]> methodsByDeclaringType,
+        IReadOnlyDictionary<string, ManagedTypeModel> typeMap,
+        ManagedTypeModel candidateType,
+        ManagedMethodModel? slotMethod,
+        string slotSignatureSuffix,
+        bool interfaceDispatch)
+    {
+        var currentSubjectId = candidateType.SubjectId;
+        var currentDefinitionSubjectId = candidateType.DefinitionSubjectId;
+
+        while (!string.IsNullOrWhiteSpace(currentSubjectId))
+        {
+            if (TryResolveDispatchImplementationMethodOnType(
+                    methodsByDeclaringType,
+                    currentSubjectId,
+                    slotMethod,
+                    slotSignatureSuffix,
+                    interfaceDispatch,
+                    out var implementationMethod))
+            {
+                return implementationMethod;
+            }
+
+            if (!string.IsNullOrWhiteSpace(currentDefinitionSubjectId) &&
+                !string.Equals(currentDefinitionSubjectId, currentSubjectId, StringComparison.Ordinal) &&
+                TryResolveDispatchImplementationMethodOnType(
+                    methodsByDeclaringType,
+                    currentDefinitionSubjectId,
+                    slotMethod,
+                    slotSignatureSuffix,
+                    interfaceDispatch,
+                    out implementationMethod))
+            {
+                return implementationMethod;
+            }
+
+            var baseTypeSubjectId = TryResolveBaseTypeSubjectId(
+                currentSubjectId,
+                currentDefinitionSubjectId,
+                typeMap);
+            if (string.IsNullOrWhiteSpace(baseTypeSubjectId))
+            {
+                break;
+            }
+
+            if (typeMap.TryGetValue(baseTypeSubjectId, out var baseType))
+            {
+                currentSubjectId = baseType.SubjectId;
+                currentDefinitionSubjectId = baseType.DefinitionSubjectId;
+            }
+            else
+            {
+                currentSubjectId = baseTypeSubjectId;
+                currentDefinitionSubjectId = baseTypeSubjectId;
+            }
+        }
+
+        return null;
+    }
+
+    private static bool TryResolveDispatchImplementationMethodOnType(
+        IReadOnlyDictionary<string, ManagedMethodModel[]> methodsByDeclaringType,
+        string declaringTypeSubjectId,
+        ManagedMethodModel? slotMethod,
+        string slotSignatureSuffix,
+        bool interfaceDispatch,
+        out ManagedMethodModel? implementationMethod)
+    {
+        implementationMethod = null;
+        if (!methodsByDeclaringType.TryGetValue(declaringTypeSubjectId, out var candidateMethods))
+        {
+            return false;
+        }
+
+        implementationMethod = candidateMethods.FirstOrDefault(candidate =>
+            MatchesPolymorphicDispatchSlot(candidate, slotMethod, slotSignatureSuffix, interfaceDispatch));
+        return implementationMethod is not null;
+    }
+
+    private static bool MatchesPolymorphicDispatchSlot(
+        ManagedMethodModel candidateMethod,
+        ManagedMethodModel? slotMethod,
+        string slotSignatureSuffix,
+        bool interfaceDispatch)
+    {
+        return !candidateMethod.IsStatic &&
+               (interfaceDispatch || candidateMethod.IsVirtual) &&
+               (slotMethod is not null
+                   ? MatchesVirtualDispatchSignature(candidateMethod, slotMethod)
+                   : string.Equals(
+                       GetMethodSignatureSuffix(candidateMethod.SubjectId),
+                       slotSignatureSuffix,
+                       StringComparison.Ordinal));
     }
 
     private static void ExpandReachableMethods(

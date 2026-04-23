@@ -22,7 +22,7 @@ public sealed partial class NativeAotLoweringPlanner
 	private bool TryCreateStringRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
 	{
 		helperDefinition = null;
-		if (string.Equals(callee, "System.Private.CoreLib/System.String::Concat(System.String,System.String)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.String", "Concat", "System.String", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -37,7 +37,24 @@ public sealed partial class NativeAotLoweringPlanner
 			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String,System.String)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.String", "Concat", "System.String", "System.String", "System.String"))
+		{
+			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
+				"std::intptr_t",
+				GetExternalRuntimeHelperSymbol(callee),
+				"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1, std::intptr_t chaos_arg_2",
+				[
+					"    const auto chaos_left_pair = chaos_reflection_concat_string_pair_values(chaos_arg_0, chaos_arg_1);",
+					"    return chaos_reflection_concat_string_pair_values(chaos_left_pair, chaos_arg_2);",
+				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+			{
+				CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+				CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+				CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)
+			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1, 2 });
+			return true;
+		}
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.String", "Concat", "System.String", "System.String", "System.String", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -56,7 +73,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1, 2, 3 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Private.CoreLib/System.String::op_Equality(System.String,System.String)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.String", "op_Equality", "System.String", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -73,7 +90,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}), CreateNativeIntAbiSlot(), new HashSet<int> { 0, 1 });
 			return true;
 		}
-		if (string.Equals(callee, StringGetLengthMethodSubjectId, StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.String", "get_Length"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::int32_t",
@@ -90,7 +107,7 @@ public sealed partial class NativeAotLoweringPlanner
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(StringTypeSubjectId, AotCoreIrTypeShapeKind.ReferenceType)), CreateInt32AbiSlot(), new HashSet<int> { 0 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Private.CoreLib/System.String::StartsWith(System.String,System.StringComparison)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.String", "StartsWith", "System.String", "System.StringComparison"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -140,7 +157,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}), CreateNativeIntAbiSlot(), new HashSet<int> { 0, 1 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Private.CoreLib/System.String::Contains(System.String,System.StringComparison)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.String", "Contains", "System.String", "System.StringComparison"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -197,15 +214,18 @@ public sealed partial class NativeAotLoweringPlanner
 			}), CreateNativeIntAbiSlot(), new HashSet<int> { 0, 1 });
 			return true;
 		}
-		if (TryParseStringJoinGenericEnumerableElementType(callee, out string elementTypeDisplayName) && string.Equals(elementTypeDisplayName, "System.Int32", StringComparison.Ordinal))
+		if (TryGetStringJoinEnumerableElementType(callee, out string elementTypeDisplayName))
 		{
-			helperDefinition = CreateStringJoinInt32EnumerableRuntimeHelperDefinition(callee, ResolveEnumerableJoinSupportVariants(elementTypeDisplayName));
-			return true;
-		}
-		if (string.Equals(callee, "System.Private.CoreLib/System.String::Join(System.String,System.Collections.Generic.IEnumerable<System.String>)", StringComparison.Ordinal))
-		{
-			helperDefinition = CreateStringJoinStringEnumerableRuntimeHelperDefinition(callee, ResolveEnumerableJoinSupportVariants("System.String"));
-			return true;
+			if (string.Equals(elementTypeDisplayName, "System.Int32", StringComparison.Ordinal))
+			{
+				helperDefinition = CreateStringJoinInt32EnumerableRuntimeHelperDefinition(callee, ResolveEnumerableJoinSupportVariants(elementTypeDisplayName));
+				return true;
+			}
+			if (string.Equals(elementTypeDisplayName, "System.String", StringComparison.Ordinal))
+			{
+				helperDefinition = CreateStringJoinStringEnumerableRuntimeHelperDefinition(callee, ResolveEnumerableJoinSupportVariants(elementTypeDisplayName));
+				return true;
+			}
 		}
 		return false;
 	}
@@ -286,7 +306,7 @@ public sealed partial class NativeAotLoweringPlanner
 	private bool TryCreateExceptionRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
 	{
 		helperDefinition = null;
-		if (string.Equals(callee, "System.Private.CoreLib/System.Exception::.ctor(System.String)", StringComparison.Ordinal) || string.Equals(callee, "System.Private.CoreLib/System.InvalidOperationException::.ctor(System.String)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Exception", ".ctor", "System.String") || MatchesMethodSubject(callee, "System.Private.CoreLib/System.InvalidOperationException", ".ctor", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
@@ -308,7 +328,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}, new HashSet<int> { 0, 1 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor(System.String,System.String)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.ArgumentOutOfRangeException", ".ctor", "System.String", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
@@ -340,7 +360,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}, new HashSet<int> { 0, 1, 2 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Private.CoreLib/System.Exception::get_Message()", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Exception", "get_Message"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -351,7 +371,7 @@ public sealed partial class NativeAotLoweringPlanner
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Private.CoreLib/System.ArgumentException::get_ParamName()", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.ArgumentException", "get_ParamName"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -368,7 +388,7 @@ public sealed partial class NativeAotLoweringPlanner
 	private bool TryCreateNumericFormattingRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
 	{
 		helperDefinition = null;
-		if (string.Equals(callee, "System.Private.CoreLib/System.Int32::ToString()", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Int32", "ToString"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -382,7 +402,7 @@ public sealed partial class NativeAotLoweringPlanner
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Private.CoreLib/System.Single::ToString(System.String)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Single", "ToString", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -411,7 +431,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Private.CoreLib/System.Double::ToString(System.String)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Double", "ToString", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -446,7 +466,7 @@ public sealed partial class NativeAotLoweringPlanner
 	private bool TryCreateInterpolatedStringRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
 	{
 		helperDefinition = null;
-		if (string.Equals(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::.ctor(System.Int32,System.Int32)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", ".ctor", "System.Int32", "System.Int32"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
@@ -468,7 +488,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}, new HashSet<int> { 0 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted(System.String)", StringComparison.Ordinal) || string.Equals(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendLiteral(System.String)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", "AppendFormatted", "System.String") || MatchesMethodSubject(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", "AppendLiteral", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
@@ -487,7 +507,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}, new HashSet<int> { 0, 1 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted<System.Int32>(System.Int32)", StringComparison.Ordinal))
+		if (IsSupportedDefaultInterpolatedStringHandlerAppendFormattedSubjectId(callee))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
@@ -506,7 +526,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}, new HashSet<int> { 0 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::ToStringAndClear()", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", "ToStringAndClear"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -524,15 +544,15 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 		helperDefinition = null;
 		string text = null;
-		if (string.Equals(callee, "System.Private.CoreLib/System.OperatingSystem::IsWindows()", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.OperatingSystem", "IsWindows"))
 		{
 			text = "#if defined(_WIN32)\n    return static_cast<std::intptr_t>(1);\n#else\n    return static_cast<std::intptr_t>(0);\n#endif";
 		}
-		else if (string.Equals(callee, "System.Private.CoreLib/System.OperatingSystem::IsLinux()", StringComparison.Ordinal))
+		else if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.OperatingSystem", "IsLinux"))
 		{
 			text = "#if defined(__linux__)\n    return static_cast<std::intptr_t>(1);\n#else\n    return static_cast<std::intptr_t>(0);\n#endif";
 		}
-		else if (string.Equals(callee, "System.Private.CoreLib/System.OperatingSystem::IsMacOS()", StringComparison.Ordinal))
+		else if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.OperatingSystem", "IsMacOS"))
 		{
 			text = "#if defined(__APPLE__)\n    return static_cast<std::intptr_t>(1);\n#else\n    return static_cast<std::intptr_t>(0);\n#endif";
 		}
@@ -551,7 +571,7 @@ public sealed partial class NativeAotLoweringPlanner
 	private bool TryCreateDelegateInteropRuntimeHelperDefinition(string callee, out ExternalRuntimeHelperDefinition? helperDefinition)
 	{
 		helperDefinition = null;
-		if (string.Equals(callee, "System.Private.CoreLib/System.Delegate::Combine(System.Delegate,System.Delegate)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Delegate", "Combine", "System.Delegate", "System.Delegate"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -566,7 +586,7 @@ public sealed partial class NativeAotLoweringPlanner
 			}), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Delegate", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0, 1 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Private.CoreLib/System.Delegate::Remove(System.Delegate,System.Delegate)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Delegate", "Remove", "System.Delegate", "System.Delegate"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -690,7 +710,7 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
 				]), Array.Empty<AotCoreIrAbiSlotArtifact>(), CreateInt32AbiSlot(), EmptyRawArgumentIndices);
 			return true;
 		}
-		if (string.Equals(callee, MarshalAllocHGlobalInt32MethodSubjectId, StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Runtime.InteropServices/Marshal", "AllocHGlobal", "System.Int32"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -713,7 +733,7 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateInt32AbiSlot()), CreateNativeIntAbiSlot(), EmptyRawArgumentIndices);
 			return true;
 		}
-		if (string.Equals(callee, MarshalFreeHGlobalMethodSubjectId, StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Runtime.InteropServices/Marshal", "FreeHGlobal", "System.IntPtr"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
@@ -766,7 +786,7 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()), valueTypeAbi, new HashSet<int> { 0 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Runtime.InteropServices/Marshal::StringToCoTaskMemUTF8(System.String)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Runtime.InteropServices/Marshal", "StringToCoTaskMemUTF8", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -802,7 +822,7 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Runtime.InteropServices/Marshal::PtrToStringUTF8(System.IntPtr)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Runtime.InteropServices/Marshal", "PtrToStringUTF8", "System.IntPtr"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"std::intptr_t",
@@ -815,7 +835,7 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
 			return true;
 		}
-		if (string.Equals(callee, "System.Runtime.InteropServices/Marshal::FreeCoTaskMem(System.IntPtr)", StringComparison.Ordinal))
+		if (MatchesMethodSubject(callee, "System.Runtime.InteropServices/Marshal", "FreeCoTaskMem", "System.IntPtr"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",

@@ -9,8 +9,15 @@ internal static class MixedDelegateFlowProofEntry
     private const string DelegateWrapperId = "mixed-delegate-wrapper";
     private static readonly ManagedMethodIdentityArtifact HotUpdateIdentity =
         ManagedMethodIdentityResolver.Create(
-            "MixedDelegateFlowProof/HotService::Process(System.Int32)",
-            "System.Int32 HotService::Process(System.Int32)");
+            new ManagedMethodIdentitySpec
+            {
+                AssemblyName = "MixedDelegateFlowProof",
+                DeclaringTypeSubjectId = "MixedDelegateFlowProof/HotService",
+                DeclaringTypeDisplayName = "HotService",
+                MethodName = "Process",
+                SubjectId = "MixedDelegateFlowProof/HotService::Process(System.Int32)",
+                Signature = "System.Int32 HotService::Process(System.Int32)",
+            });
 
     [ChaosUnitTest(
         ChaosUnitCategory.RuntimeContract,
@@ -30,7 +37,7 @@ internal static class MixedDelegateFlowProofEntry
                 {
                     WrapperId = DelegateWrapperId,
                     HotUpdateIdentity = HotUpdateIdentity,
-                    HotUpdateSubjectId = HotUpdateIdentity.SubjectId,
+                    HotUpdateAuthorityKey = ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(HotUpdateIdentity),
                 },
             ],
         });

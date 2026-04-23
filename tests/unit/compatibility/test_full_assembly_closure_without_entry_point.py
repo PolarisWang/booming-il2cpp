@@ -17,10 +17,12 @@ class FullAssemblyClosureWithoutEntryPointTests(unittest.TestCase):
         cross_assembly_source = LOADER_CROSS_ASSEMBLY_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
-            "var entryAssembly = ResolveEntryAssembly(loadedAssemblies, request.EntryPointSubjectIdOverride, request.FullAssemblyClosure);",
-            'var entryPointSubjectId = !string.IsNullOrWhiteSpace(request.EntryPointSubjectIdOverride)',
+            "var resolvedEntryPointSubjectIdOverride = ResolveEntryPointSubjectIdOverride(loadedAssemblies, request.EntryPointSubjectIdOverride);",
+            "var entryAssembly = ResolveEntryAssembly(loadedAssemblies, resolvedEntryPointSubjectIdOverride, request.FullAssemblyClosure);",
+            'var entryPointSubjectId = !string.IsNullOrWhiteSpace(resolvedEntryPointSubjectIdOverride)',
             ': request.FullAssemblyClosure',
             '? string.Empty',
+            "private static string? ResolveEntryPointSubjectIdOverride(",
         ]:
             self.assertIn(required_fragment, loader_source)
 

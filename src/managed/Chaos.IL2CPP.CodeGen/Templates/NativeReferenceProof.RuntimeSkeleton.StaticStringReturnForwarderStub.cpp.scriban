@@ -1,0 +1,19 @@
+int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)managed_args;
+    return {{ target_stub_name }}(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        nullptr);
+}

@@ -1,206 +1,206 @@
-# event schema 对齐设计 v1.01
+﻿# event schema 瀵归綈璁捐 v1.01
 
 Date: 2026-04-06
 Status: design-discuss
 
-## 1. 目标
+## 1. 鐩爣
 
-在已经固定：
+鍦ㄥ凡缁忓浐瀹氾細
 
-- `matrix report / subject summary / session summary` 三层 reporting schema
-- executor / worker 的责任边界
-- matrix / subject / session 三层产物落点
+- `matrix report / subject summary / session summary` 涓夊眰 reporting schema
+- executor / worker 鐨勮矗浠昏竟鐣?
+- matrix / subject / session 涓夊眰浜х墿钀界偣
 
-之后，下一步必须把 `events.jsonl` 也对齐。
+涔嬪悗锛屼笅涓€姝ュ繀椤绘妸 `events.jsonl` 涔熷榻愩€?
 
-否则后面会出现三类典型问题：
+鍚﹀垯鍚庨潰浼氬嚭鐜颁笁绫诲吀鍨嬮棶棰橈細
 
-- `report.json` 说的是一套语义，`events.jsonl` 说的是另一套语义
-- matrix / subject / session 三层事件流重复但不一致
-- 当前 `test watch` / TUI 继续依赖旧事件，而新 subject 管线又另起炉灶
+- `report.json` 璇寸殑鏄竴濂楄涔夛紝`events.jsonl` 璇寸殑鏄彟涓€濂楄涔?
+- matrix / subject / session 涓夊眰浜嬩欢娴侀噸澶嶄絾涓嶄竴鑷?
+- 褰撳墠 `test watch` / TUI 缁х画渚濊禆鏃т簨浠讹紝鑰屾柊 subject 绠＄嚎鍙堝彟璧风倝鐏?
 
-所以这一步要回答：
+鎵€浠ヨ繖涓€姝ヨ鍥炵瓟锛?
 
-- 三层事件流分别服务谁
-- 哪些事件是 canonical domain events
-- 哪些事件只是给当前 watch/TUI 用的兼容投影
-- 事件 envelope 最小字段应该是什么
+- 涓夊眰浜嬩欢娴佸垎鍒湇鍔¤皝
+- 鍝簺浜嬩欢鏄?canonical domain events
+- 鍝簺浜嬩欢鍙槸缁欏綋鍓?watch/TUI 鐢ㄧ殑鍏煎鎶曞奖
+- 浜嬩欢 envelope 鏈€灏忓瓧娈靛簲璇ユ槸浠€涔?
 
-## 2. 现有约束
+## 2. 鐜版湁绾︽潫
 
-从当前代码和测试看，已经有几个现实约束不能忽略：
+浠庡綋鍓嶄唬鐮佸拰娴嬭瘯鐪嬶紝宸茬粡鏈夊嚑涓幇瀹炵害鏉熶笉鑳藉拷鐣ワ細
 
-- session 级 `events.jsonl`
-  - 已经被 `test watch` / TUI 直接消费
-- 当前 TUI 直接识别的事件类型主要是：
+- session 绾?`events.jsonl`
+  - 宸茬粡琚?`test watch` / TUI 鐩存帴娑堣垂
+- 褰撳墠 TUI 鐩存帴璇嗗埆鐨勪簨浠剁被鍨嬩富瑕佹槸锛?
   - `session-start`
   - `progress`
   - `stage-start`
   - `warning`
   - `artifact`
   - `final-summary`
-- 当前 TUI 通过 `payload.completedUnits / totalUnits`
-  - 推导进度百分比
-- 当前 test reporting 测试已经要求：
-  - `final-summary` payload 不直接塞 `suiteResults`
+- 褰撳墠 TUI 閫氳繃 `payload.completedUnits / totalUnits`
+  - 鎺ㄥ杩涘害鐧惧垎姣?
+- 褰撳墠 test reporting 娴嬭瘯宸茬粡瑕佹眰锛?
+  - `final-summary` payload 涓嶇洿鎺ュ `suiteResults`
 
-这意味着：
+杩欐剰鍛崇潃锛?
 
-- 我们不能简单把 session event stream 全部推倒重来
-- 但也不应该让新 subject 事件永久困在旧 `suite` 命名里
+- 鎴戜滑涓嶈兘绠€鍗曟妸 session event stream 鍏ㄩ儴鎺ㄥ€掗噸鏉?
+- 浣嗕篃涓嶅簲璇ヨ鏂?subject 浜嬩欢姘镐箙鍥板湪鏃?`suite` 鍛藉悕閲?
 
-## 3. 三个可选方向
+## 3. 涓変釜鍙€夋柟鍚?
 
-## 3.1 方案 A：只保留一条 session 事件流
+## 3.1 鏂规 A锛氬彧淇濈暀涓€鏉?session 浜嬩欢娴?
 
-做法：
+鍋氭硶锛?
 
-- 不引入 matrix / subject 专属事件流
-- 所有信息都进 `artifacts/logs/tests/<run-id>/events.jsonl`
+- 涓嶅紩鍏?matrix / subject 涓撳睘浜嬩欢娴?
+- 鎵€鏈変俊鎭兘杩?`artifacts/logs/tests/<run-id>/events.jsonl`
 
-优点：
+浼樼偣锛?
 
-- 最简单
-- 当前 watch/TUI 兼容最容易
+- 鏈€绠€鍗?
+- 褰撳墠 watch/TUI 鍏煎鏈€瀹规槗
 
-问题：
+闂锛?
 
-- matrix 层排障太弱
-- subject 内多个 matrix 会把一条 stream 搅在一起
-- 不符合我们已经收敛出的 `matrix / subject / session` 三层模型
+- matrix 灞傛帓闅滃お寮?
+- subject 鍐呭涓?matrix 浼氭妸涓€鏉?stream 鎼呭湪涓€璧?
+- 涓嶇鍚堟垜浠凡缁忔敹鏁涘嚭鐨?`matrix / subject / session` 涓夊眰妯″瀷
 
-结论：
+缁撹锛?
 
-- 不推荐
+- 涓嶆帹鑽?
 
-## 3.2 方案 B：三层事件流都使用同一套 canonical 事件
+## 3.2 鏂规 B锛氫笁灞備簨浠舵祦閮戒娇鐢ㄥ悓涓€濂?canonical 浜嬩欢
 
-做法：
+鍋氭硶锛?
 
-- matrix / subject / session 全部统一成同一组 eventType
-- 当前 TUI / watch 之后整体改造去适配新事件
+- matrix / subject / session 鍏ㄩ儴缁熶竴鎴愬悓涓€缁?eventType
+- 褰撳墠 TUI / watch 涔嬪悗鏁翠綋鏀归€犲幓閫傞厤鏂颁簨浠?
 
-优点：
+浼樼偣锛?
 
-- 架构最整齐
-- 没有“兼容事件”这层技术债
+- 鏋舵瀯鏈€鏁撮綈
+- 娌℃湁鈥滃吋瀹逛簨浠垛€濊繖灞傛妧鏈€?
 
-问题：
+闂锛?
 
-- 对现有 watch/TUI 冲击太大
-- 第一版实现时会把事件 schema 改造和 UI 改造强绑定
+- 瀵圭幇鏈?watch/TUI 鍐插嚮澶ぇ
+- 绗竴鐗堝疄鐜版椂浼氭妸浜嬩欢 schema 鏀归€犲拰 UI 鏀归€犲己缁戝畾
 
-结论：
+缁撹锛?
 
-- 长远干净，但不适合第一版落地
+- 闀胯繙骞插噣锛屼絾涓嶉€傚悎绗竴鐗堣惤鍦?
 
-## 3.3 方案 C：matrix / subject 采用 canonical 事件，session 保留兼容投影
+## 3.3 鏂规 C锛歮atrix / subject 閲囩敤 canonical 浜嬩欢锛宻ession 淇濈暀鍏煎鎶曞奖
 
-做法：
+鍋氭硶锛?
 
 - `matrix events.jsonl`
-  - 作为 detailed canonical stream
+  - 浣滀负 detailed canonical stream
 - `subject events.jsonl`
-  - 作为 aggregate canonical stream
+  - 浣滀负 aggregate canonical stream
 - `session events.jsonl`
-  - 继续服务统一 watch/TUI
-  - 以兼容事件为主
-  - 可增量附带部分 canonical 事件
+  - 缁х画鏈嶅姟缁熶竴 watch/TUI
+  - 浠ュ吋瀹逛簨浠朵负涓?
+  - 鍙閲忛檮甯﹂儴鍒?canonical 浜嬩欢
 
-优点：
+浼樼偣锛?
 
-- 不打断当前 watch/TUI
-- matrix 层和 subject 层仍然能建立新的正规语义
-- 实施切分合理，迁移风险最低
+- 涓嶆墦鏂綋鍓?watch/TUI
+- matrix 灞傚拰 subject 灞備粛鐒惰兘寤虹珛鏂扮殑姝ｈ璇箟
+- 瀹炴柦鍒囧垎鍚堢悊锛岃縼绉婚闄╂渶浣?
 
-问题：
+闂锛?
 
-- 短期会存在“canonical + compatibility projection”两层语义
+- 鐭湡浼氬瓨鍦ㄢ€渃anonical + compatibility projection鈥濅袱灞傝涔?
 
-结论：
+缁撹锛?
 
-- 推荐采用方案 C
+- 鎺ㄨ崘閲囩敤鏂规 C
 
-## 4. 推荐结论
+## 4. 鎺ㄨ崘缁撹
 
-正式推荐：
+姝ｅ紡鎺ㄨ崘锛?
 
-- 采用方案 C
+- 閲囩敤鏂规 C
 
-并固定三条原则：
+骞跺浐瀹氫笁鏉″師鍒欙細
 
 - matrix event stream
-  - 是 stage 级执行细节的权威来源
+  - 鏄?stage 绾ф墽琛岀粏鑺傜殑鏉冨▉鏉ユ簮
 - subject event stream
-  - 是 subject 聚合过程的权威来源
+  - 鏄?subject 鑱氬悎杩囩▼鐨勬潈濞佹潵婧?
 - session event stream
-  - 是 run/watch/TUI 的兼容与导航来源
+  - 鏄?run/watch/TUI 鐨勫吋瀹逛笌瀵艰埅鏉ユ簮
 
-这句话很重要，因为它决定了后面谁才是“真日志”：
+杩欏彞璇濆緢閲嶈锛屽洜涓哄畠鍐冲畾浜嗗悗闈㈣皝鎵嶆槸鈥滅湡鏃ュ織鈥濓細
 
-- 真正用于定位 stage 行为的，看 matrix events
-- 真正用于看 subject 汇总过程的，看 subject events
-- 真正用于看统一入口实时进度的，看 session events
+- 鐪熸鐢ㄤ簬瀹氫綅 stage 琛屼负鐨勶紝鐪?matrix events
+- 鐪熸鐢ㄤ簬鐪?subject 姹囨€昏繃绋嬬殑锛岀湅 subject events
+- 鐪熸鐢ㄤ簬鐪嬬粺涓€鍏ュ彛瀹炴椂杩涘害鐨勶紝鐪?session events
 
-## 5. 三层事件文件的正式职责
+## 5. 涓夊眰浜嬩欢鏂囦欢鐨勬寮忚亴璐?
 
 ## 5.1 matrix events
 
-路径：
+璺緞锛?
 
 - `artifacts/subjects/<subject-id>/matrices/<matrix-id>/events.jsonl`
 
-职责：
+鑱岃矗锛?
 
-- 记录当前 matrix 的详细执行时间线
-- 记录 stage start / reuse / invalidation / finish / warning / artifact
-- 为后续排障和细粒度 UI 提供最直接数据源
+- 璁板綍褰撳墠 matrix 鐨勮缁嗘墽琛屾椂闂寸嚎
+- 璁板綍 stage start / reuse / invalidation / finish / warning / artifact
+- 涓哄悗缁帓闅滃拰缁嗙矑搴?UI 鎻愪緵鏈€鐩存帴鏁版嵁婧?
 
-不负责：
+涓嶈礋璐ｏ細
 
-- 聚合多个 matrix
-- 承担 session 统一 watch 兼容
+- 鑱氬悎澶氫釜 matrix
+- 鎵挎媴 session 缁熶竴 watch 鍏煎
 
 ## 5.2 subject events
 
-路径：
+璺緞锛?
 
 - `artifacts/subjects/<subject-id>/subject-report/events.jsonl`
 
-职责：
+鑱岃矗锛?
 
-- 记录当前 subject 的 matrix 聚合过程
-- 记录 `subject-start`
-- 记录各 matrix 的完成摘要
-- 记录 `subject-summary`
+- 璁板綍褰撳墠 subject 鐨?matrix 鑱氬悎杩囩▼
+- 璁板綍 `subject-start`
+- 璁板綍鍚?matrix 鐨勫畬鎴愭憳瑕?
+- 璁板綍 `subject-summary`
 
-不负责：
+涓嶈礋璐ｏ細
 
-- 转储每个 stage 的详细执行过程
+- 杞偍姣忎釜 stage 鐨勮缁嗘墽琛岃繃绋?
 
-也就是说：
+涔熷氨鏄锛?
 
-- subject events 不镜像 matrix 的所有 stage 事件
+- subject events 涓嶉暅鍍?matrix 鐨勬墍鏈?stage 浜嬩欢
 
 ## 5.3 session events
 
-路径：
+璺緞锛?
 
 - `artifacts/logs/tests/<run-id>/events.jsonl`
 
-职责：
+鑱岃矗锛?
 
-- 继续服务 `test watch` / TUI / 当前 run 级用户体验
-- 提供统一入口的实时进度与最终摘要
-- 作为 subject 新模型接入旧入口的兼容桥接层
+- 缁х画鏈嶅姟 `test watch` / TUI / 褰撳墠 run 绾х敤鎴蜂綋楠?
+- 鎻愪緵缁熶竴鍏ュ彛鐨勫疄鏃惰繘搴︿笌鏈€缁堟憳瑕?
+- 浣滀负 subject 鏂版ā鍨嬫帴鍏ユ棫鍏ュ彛鐨勫吋瀹规ˉ鎺ュ眰
 
-不负责：
+涓嶈礋璐ｏ細
 
-- 成为 matrix 级详细排障日志的唯一真源
+- 鎴愪负 matrix 绾ц缁嗘帓闅滄棩蹇楃殑鍞竴鐪熸簮
 
 ## 6. canonical event envelope
 
-推荐新 subject 框架里的 canonical event 最小 envelope 为：
+鎺ㄨ崘鏂?subject 妗嗘灦閲岀殑 canonical event 鏈€灏?envelope 涓猴細
 
 ```json
 {
@@ -220,51 +220,51 @@ Status: design-discuss
 }
 ```
 
-## 6.1 顶层字段
+## 6.1 椤跺眰瀛楁
 
 - `schemaVersion`
-  - 事件 schema 版本
+  - 浜嬩欢 schema 鐗堟湰
 - `streamScope`
   - `matrix | subject | session`
 - `eventType`
-  - 事件类型
+  - 浜嬩欢绫诲瀷
 - `timestampUtc`
-  - UTC 时间戳
+  - UTC 鏃堕棿鎴?
 - `runId`
-  - 当前 run
+  - 褰撳墠 run
 - `subjectId`
-  - 当前 subject
+  - 褰撳墠 subject
 - `matrixId`
-  - 当前 matrix
+  - 褰撳墠 matrix
 - `goalId`
-  - 当前 goal
+  - 褰撳墠 goal
 - `stageId`
-  - 当前 stage
+  - 褰撳墠 stage
 - `bucket`
-  - 当前 bucket
+  - 褰撳墠 bucket
 - `stageScope`
   - `shared | matrix`
 - `status`
-  - 当前事件对应的结果状态
+  - 褰撳墠浜嬩欢瀵瑰簲鐨勭粨鏋滅姸鎬?
 - `payload`
-  - 事件具体内容
+  - 浜嬩欢鍏蜂綋鍐呭
 
-## 6.2 与现有 `build_event()` 的兼容策略
+## 6.2 涓庣幇鏈?`build_event()` 鐨勫吋瀹圭瓥鐣?
 
-当前 `build_event()` 只有：
+褰撳墠 `build_event()` 鍙湁锛?
 
 - `runId`
 - `suiteId`
 - `stage`
 - `status`
 
-所以推荐未来改为 additive 扩展，而不是破坏性替换：
+鎵€浠ユ帹鑽愭湭鏉ユ敼涓?additive 鎵╁睍锛岃€屼笉鏄牬鍧忔€ф浛鎹細
 
-- 保留 `suiteId`
-  - 仅用于 legacy suite/test pipeline
-- 保留 `stage`
-  - 仅作为兼容字段
-- 新增：
+- 淇濈暀 `suiteId`
+  - 仅用于 legacy suite/旧公开验证入口
+- 淇濈暀 `stage`
+  - 浠呬綔涓哄吋瀹瑰瓧娈?
+- 鏂板锛?
   - `streamScope`
   - `subjectId`
   - `matrixId`
@@ -273,14 +273,14 @@ Status: design-discuss
   - `bucket`
   - `stageScope`
 
-也就是：
+涔熷氨鏄細
 
-- 旧消费方继续可读
-- 新 subject 事件不再被迫塞进 `suiteId / stage`
+- 鏃ф秷璐规柟缁х画鍙
+- 鏂?subject 浜嬩欢涓嶅啀琚揩濉炶繘 `suiteId / stage`
 
-## 7. canonical eventType 集合
+## 7. canonical eventType 闆嗗悎
 
-第一版推荐固定以下 canonical eventType：
+绗竴鐗堟帹鑽愬浐瀹氫互涓?canonical eventType锛?
 
 - `subject-start`
 - `matrix-start`
@@ -294,22 +294,22 @@ Status: design-discuss
 - `subject-summary`
 - `final-summary`
 
-说明：
+璇存槑锛?
 
 - `progress`
-  - 不作为新 subject 框架的 canonical event
-  - 它保留为 session compatibility projection
+  - 涓嶄綔涓烘柊 subject 妗嗘灦鐨?canonical event
+  - 瀹冧繚鐣欎负 session compatibility projection
 
-## 8. 每类 canonical 事件的最小语义
+## 8. 姣忕被 canonical 浜嬩欢鐨勬渶灏忚涔?
 
 ## 8.1 `subject-start`
 
-出现位置：
+鍑虹幇浣嶇疆锛?
 
 - `subject events`
 - `session events`
 
-最小 payload：
+鏈€灏?payload锛?
 
 ```json
 {
@@ -323,12 +323,12 @@ Status: design-discuss
 
 ## 8.2 `matrix-start`
 
-出现位置：
+鍑虹幇浣嶇疆锛?
 
 - `matrix events`
 - `session events`
 
-最小 payload：
+鏈€灏?payload锛?
 
 ```json
 {
@@ -340,12 +340,12 @@ Status: design-discuss
 
 ## 8.3 `stage-start`
 
-出现位置：
+鍑虹幇浣嶇疆锛?
 
 - `matrix events`
 - `session events`
 
-最小 payload：
+鏈€灏?payload锛?
 
 ```json
 {
@@ -358,12 +358,12 @@ Status: design-discuss
 
 ## 8.4 `stage-reused`
 
-出现位置：
+鍑虹幇浣嶇疆锛?
 
 - `matrix events`
-- `session events` 可选
+- `session events` 鍙€?
 
-最小 payload：
+鏈€灏?payload锛?
 
 ```json
 {
@@ -375,18 +375,18 @@ Status: design-discuss
 }
 ```
 
-说明：
+璇存槑锛?
 
-- 它表达“这一步没有执行 worker，而是命中了复用”
+- 瀹冭〃杈锯€滆繖涓€姝ユ病鏈夋墽琛?worker锛岃€屾槸鍛戒腑浜嗗鐢ㄢ€?
 
 ## 8.5 `stage-invalidated`
 
-出现位置：
+鍑虹幇浣嶇疆锛?
 
 - `matrix events`
-- `session events` 可选
+- `session events` 鍙€?
 
-最小 payload：
+鏈€灏?payload锛?
 
 ```json
 {
@@ -398,19 +398,19 @@ Status: design-discuss
 }
 ```
 
-说明：
+璇存槑锛?
 
-- 它表达“executor 对当前 bucket 应用了失效重建”
-- 它不是 stage 执行完成事件
+- 瀹冭〃杈锯€渆xecutor 瀵瑰綋鍓?bucket 搴旂敤浜嗗け鏁堥噸寤衡€?
+- 瀹冧笉鏄?stage 鎵ц瀹屾垚浜嬩欢
 
 ## 8.6 `stage-finished`
 
-出现位置：
+鍑虹幇浣嶇疆锛?
 
 - `matrix events`
-- `session events` 可选
+- `session events` 鍙€?
 
-最小 payload：
+鏈€灏?payload锛?
 
 ```json
 {
@@ -433,12 +433,12 @@ Status: design-discuss
 
 ## 8.7 `artifact`
 
-出现位置：
+鍑虹幇浣嶇疆锛?
 
 - `matrix events`
 - `session events`
 
-最小 payload：
+鏈€灏?payload锛?
 
 ```json
 {
@@ -447,25 +447,25 @@ Status: design-discuss
 }
 ```
 
-这里要特别固定一条规则：
+杩欓噷瑕佺壒鍒浐瀹氫竴鏉¤鍒欙細
 
-- `artifact` 不是为 bucket 内所有文件逐个打点
-- 它只用于暴露用户或调试者真正会关心的 surfaced artifacts
+- `artifact` 涓嶆槸涓?bucket 鍐呮墍鏈夋枃浠堕€愪釜鎵撶偣
+- 瀹冨彧鐢ㄤ簬鏆撮湶鐢ㄦ埛鎴栬皟璇曡€呯湡姝ｄ細鍏冲績鐨?surfaced artifacts
 
-例如：
+渚嬪锛?
 
-- 当前 bucket manifest
-- 局部 report
-- 关键 trace / generated source
-- 最终 matrix / subject / session summary
+- 褰撳墠 bucket manifest
+- 灞€閮?report
+- 鍏抽敭 trace / generated source
+- 鏈€缁?matrix / subject / session summary
 
 ## 8.8 `warning`
 
-出现位置：
+鍑虹幇浣嶇疆锛?
 
-- 三层都允许
+- 涓夊眰閮藉厑璁?
 
-最小 payload：
+鏈€灏?payload锛?
 
 ```json
 {
@@ -475,13 +475,13 @@ Status: design-discuss
 
 ## 8.9 `matrix-summary`
 
-出现位置：
+鍑虹幇浣嶇疆锛?
 
 - `matrix events`
 - `subject events`
-- `session events` 可选
+- `session events` 鍙€?
 
-最小 payload：
+鏈€灏?payload锛?
 
 ```json
 {
@@ -494,12 +494,12 @@ Status: design-discuss
 
 ## 8.10 `subject-summary`
 
-出现位置：
+鍑虹幇浣嶇疆锛?
 
 - `subject events`
 - `session events`
 
-最小 payload：
+鏈€灏?payload锛?
 
 ```json
 {
@@ -517,13 +517,13 @@ Status: design-discuss
 
 ## 8.11 `final-summary`
 
-出现位置：
+鍑虹幇浣嶇疆锛?
 
 - `session events`
 
-它继续作为 session 的最终结束事件，但 payload 要与新的 session summary 对齐。
+瀹冪户缁綔涓?session 鐨勬渶缁堢粨鏉熶簨浠讹紝浣?payload 瑕佷笌鏂扮殑 session summary 瀵归綈銆?
 
-推荐最小 payload：
+鎺ㄨ崘鏈€灏?payload锛?
 
 ```json
 {
@@ -558,15 +558,15 @@ Status: design-discuss
 
 ## 9. session compatibility projection
 
-这是当前最关键的兼容点，需要单独定死。
+杩欐槸褰撳墠鏈€鍏抽敭鐨勫吋瀹圭偣锛岄渶瑕佸崟鐙畾姝汇€?
 
-推荐规则：
+鎺ㄨ崘瑙勫垯锛?
 
-- session stream 允许同时包含：
-  - canonical 高层事件
-  - 兼容 watch/TUI 的 projection 事件
+- session stream 鍏佽鍚屾椂鍖呭惈锛?
+  - canonical 楂樺眰浜嬩欢
+  - 鍏煎 watch/TUI 鐨?projection 浜嬩欢
 
-其中兼容事件继续沿用：
+鍏朵腑鍏煎浜嬩欢缁х画娌跨敤锛?
 
 - `session-start`
 - `progress`
@@ -575,21 +575,21 @@ Status: design-discuss
 - `artifact`
 - `final-summary`
 
-## 9.1 `progress` 的定位
+## 9.1 `progress` 鐨勫畾浣?
 
-正式规定：
+姝ｅ紡瑙勫畾锛?
 
 - `progress`
-  - 不是 canonical event
-  - 只是 session compatibility projection
+  - 涓嶆槸 canonical event
+  - 鍙槸 session compatibility projection
 
-它存在的唯一主要理由是：
+瀹冨瓨鍦ㄧ殑鍞竴涓昏鐞嗙敱鏄細
 
-- 当前 TUI / watch 依赖它的 `completedUnits / totalUnits / activeUnit`
+- 褰撳墠 TUI / watch 渚濊禆瀹冪殑 `completedUnits / totalUnits / activeUnit`
 
-## 9.2 `progress` 的最小 payload
+## 9.2 `progress` 鐨勬渶灏?payload
 
-第一版推荐继续兼容当前字段：
+绗竴鐗堟帹鑽愮户缁吋瀹瑰綋鍓嶅瓧娈碉細
 
 ```json
 {
@@ -603,86 +603,86 @@ Status: design-discuss
 }
 ```
 
-这里保留 `suiteStatus` 虽然命名不理想，但第一版不建议改名。
+杩欓噷淇濈暀 `suiteStatus` 铏界劧鍛藉悕涓嶇悊鎯筹紝浣嗙涓€鐗堜笉寤鸿鏀瑰悕銆?
 
-原因：
+鍘熷洜锛?
 
-- 当前 TUI 直接读取这个字段
+- 褰撳墠 TUI 鐩存帴璇诲彇杩欎釜瀛楁
 
-未来如果 TUI 完成新 subject 事件适配，再考虑把它升级成更合理的命名。
+鏈潵濡傛灉 TUI 瀹屾垚鏂?subject 浜嬩欢閫傞厤锛屽啀鑰冭檻鎶婂畠鍗囩骇鎴愭洿鍚堢悊鐨勫懡鍚嶃€?
 
-## 10. 单写者原则
+## 10. 鍗曞啓鑰呭師鍒?
 
-为了避免事件顺序错乱，推荐正式固定：
+涓轰簡閬垮厤浜嬩欢椤哄簭閿欎贡锛屾帹鑽愭寮忓浐瀹氾細
 
-- 每个 `events.jsonl` 文件只允许一个逻辑写者
+- 姣忎釜 `events.jsonl` 鏂囦欢鍙厑璁镐竴涓€昏緫鍐欒€?
 
-具体是：
+鍏蜂綋鏄細
 
 - matrix events
-  - 由 executor 负责 append
+  - 鐢?executor 璐熻矗 append
 - subject events
-  - 由 executor 负责 append
+  - 鐢?executor 璐熻矗 append
 - session events
-  - 由 executor / test command orchestration 负责 append
+  - 鐢?executor / test command orchestration 璐熻矗 append
 
-reporting 不直接自己追加事件文件。
+reporting 涓嶇洿鎺ヨ嚜宸辫拷鍔犱簨浠舵枃浠躲€?
 
-更合理的模式是：
+鏇村悎鐞嗙殑妯″紡鏄細
 
-- reporting 生成 summary/report 对象
-- executor 拿到结果后统一写对应 summary event
+- reporting 鐢熸垚 summary/report 瀵硅薄
+- executor 鎷垮埌缁撴灉鍚庣粺涓€鍐欏搴?summary event
 
-这样不会出现：
+杩欐牱涓嶄細鍑虹幇锛?
 
-- executor 和 reporting 同时往同一文件抢写
+- executor 鍜?reporting 鍚屾椂寰€鍚屼竴鏂囦欢鎶㈠啓
 
-## 11. 与 reporting 三层 schema 的关系
+## 11. 涓?reporting 涓夊眰 schema 鐨勫叧绯?
 
-正式固定这条引用关系：
+姝ｅ紡鍥哄畾杩欐潯寮曠敤鍏崇郴锛?
 
 - `matrix-summary` payload
-  - 指向 matrix `report.json`
+  - 鎸囧悜 matrix `report.json`
 - `subject-summary` payload
-  - 指向 subject `summary.json`
+  - 鎸囧悜 subject `summary.json`
 - `final-summary` payload
-  - 指向 session `summary.json`
+  - 鎸囧悜 session `summary.json`
 
-因此：
+鍥犳锛?
 
-- summary/report 是稳定对象
-- event 只是时间线入口
+- summary/report 鏄ǔ瀹氬璞?
+- event 鍙槸鏃堕棿绾垮叆鍙?
 
-event 不负责重复 summary/report 的全部字段。
+event 涓嶈礋璐ｉ噸澶?summary/report 鐨勫叏閮ㄥ瓧娈点€?
 
-## 12. 第一版明确不做的事情
+## 12. 绗竴鐗堟槑纭笉鍋氱殑浜嬫儏
 
-第一版不建议现在就做：
+绗竴鐗堜笉寤鸿鐜板湪灏卞仛锛?
 
-- 为每个 bucket 单独建立事件文件
-- 在 subject events 里转储全部 stage 事件
-- 让 worker 直接 append 事件文件
-- 让 session events 成为 matrix 排障的唯一真源
-- 彻底移除 `progress`
+- 涓烘瘡涓?bucket 鍗曠嫭寤虹珛浜嬩欢鏂囦欢
+- 鍦?subject events 閲岃浆鍌ㄥ叏閮?stage 浜嬩欢
+- 璁?worker 鐩存帴 append 浜嬩欢鏂囦欢
+- 璁?session events 鎴愪负 matrix 鎺掗殰鐨勫敮涓€鐪熸簮
+- 褰诲簳绉婚櫎 `progress`
 
-这些要么太细，要么会打断当前兼容面。
+杩欎簺瑕佷箞澶粏锛岃涔堜細鎵撴柇褰撳墠鍏煎闈€?
 
-## 13. 当前可以正式固定的规则
+## 13. 褰撳墠鍙互姝ｅ紡鍥哄畾鐨勮鍒?
 
-这次可以正式固定为：
+杩欐鍙互姝ｅ紡鍥哄畾涓猴細
 
-- 事件流采用三层：
+- 浜嬩欢娴侀噰鐢ㄤ笁灞傦細
   - matrix detailed stream
   - subject aggregate stream
   - session compatibility stream
-- 采用方案 C：
+- 閲囩敤鏂规 C锛?
   - matrix / subject canonical
   - session compatibility projection
-- `progress` 不是 canonical event
-- matrix events 是 stage 行为的权威来源
-- subject events 是 subject 聚合过程的权威来源
-- session events 主要服务 watch/TUI 与统一入口导航
-- event envelope 需要增量支持：
+- `progress` 涓嶆槸 canonical event
+- matrix events 鏄?stage 琛屼负鐨勬潈濞佹潵婧?
+- subject events 鏄?subject 鑱氬悎杩囩▼鐨勬潈濞佹潵婧?
+- session events 涓昏鏈嶅姟 watch/TUI 涓庣粺涓€鍏ュ彛瀵艰埅
+- event envelope 闇€瑕佸閲忔敮鎸侊細
   - `streamScope`
   - `subjectId`
   - `matrixId`
@@ -690,17 +690,17 @@ event 不负责重复 summary/report 的全部字段。
   - `stageId`
   - `bucket`
   - `stageScope`
-- `artifact` 只暴露 surfaced artifacts，不穷举 bucket 内全部文件
-- 每个事件文件坚持单写者原则
+- `artifact` 鍙毚闇?surfaced artifacts锛屼笉绌蜂妇 bucket 鍐呭叏閮ㄦ枃浠?
+- 姣忎釜浜嬩欢鏂囦欢鍧氭寔鍗曞啓鑰呭師鍒?
 
-## 14. 这一步之后最自然的下一个问题
+## 14. 杩欎竴姝ヤ箣鍚庢渶鑷劧鐨勪笅涓€涓棶棰?
 
-如果继续往下收敛，最自然的下一个问题是：
+濡傛灉缁х画寰€涓嬫敹鏁涳紝鏈€鑷劧鐨勪笅涓€涓棶棰樻槸锛?
 
-- registry / planner / executor / reporting 进入正式实施时，第一批模块切分与 API 形状如何定
+- registry / planner / executor / reporting 杩涘叆姝ｅ紡瀹炴柦鏃讹紝绗竴鎵规ā鍧楀垏鍒嗕笌 API 褰㈢姸濡備綍瀹?
 
-也就是从“设计对象”继续走到：
+涔熷氨鏄粠鈥滆璁″璞♀€濈户缁蛋鍒帮細
 
-- Python 模块边界
-- 命令入口 cutover
-- 首批实现顺序
+- Python 妯″潡杈圭晫
+- 鍛戒护鍏ュ彛 cutover
+- 棣栨壒瀹炵幇椤哄簭

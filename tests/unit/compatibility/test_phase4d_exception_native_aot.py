@@ -6,6 +6,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import read_native_aot_planner_source
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -132,7 +134,7 @@ class Phase4DExceptionNativeAotTests(unittest.TestCase):
             self.assertIn(required_fragment, source_text)
 
     def test_native_aot_planner_exposes_phase4d_exception_entrypoints(self) -> None:
-        planner_source = PLANNER_PATH.read_text(encoding="utf-8")
+        planner_source = read_native_aot_planner_source(REPO_ROOT)
 
         for required_fragment in [
             'case "throw":',

@@ -14,6 +14,9 @@ public sealed partial class NativeReferenceLoweringPlanner
     private const string ManagedDispatchVirtualInstanceMessageMinimal = NativeReferenceProofCatalog.ManagedDispatchVirtualInstanceMessageMinimal;
     private const string ManagedObjectCapturedStateInstanceMessageMinimal = NativeReferenceProofCatalog.ManagedObjectCapturedStateInstanceMessageMinimal;
     private const string ManagedGenericStaticForwarderCapturedGetterMinimal = NativeReferenceProofCatalog.ManagedGenericStaticForwarderCapturedGetterMinimal;
+    private const string ManagedArraysReverseReferenceArrayMinimal = NativeReferenceProofCatalog.ManagedArraysReverseReferenceArrayMinimal;
+    private const string ManagedArraysClearReferenceArrayMinimal = NativeReferenceProofCatalog.ManagedArraysClearReferenceArrayMinimal;
+    private const string ManagedArraysCopyReferenceArrayMinimal = NativeReferenceProofCatalog.ManagedArraysCopyReferenceArrayMinimal;
     private const string ManagedArraysBoxingReferenceArrayBoxedIntMinimal = NativeReferenceProofCatalog.ManagedArraysBoxingReferenceArrayBoxedIntMinimal;
     private const string DelegateClosedTargetRelayMinimal = NativeReferenceProofCatalog.DelegateClosedTargetRelayMinimal;
     private const string NestedExceptionThrowCatchFinallyMinimal = NativeReferenceProofCatalog.NestedExceptionThrowCatchFinallyMinimal;
@@ -41,10 +44,11 @@ public sealed partial class NativeReferenceLoweringPlanner
     private const string ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.ExceptionThrowCatchFinallyGeneratedTranslationUnitTemplateRelativePath;
     private const string ReflectionInteropClosureGeneratedTranslationUnitTemplateRelativePath = NativeReferenceProofCatalog.ReflectionInteropClosureGeneratedTranslationUnitTemplateRelativePath;
     private const string ConsoleWriteLineStringIcall = "System.Console/System.Console::WriteLine(System.String)";
+    private const string ConsoleWriteLineStringMethodSubjectId = "System.Console/System.Console::WriteLine:System.Void(System.String)";
     private const string StringConcatPairIcall = "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
-    private const string AssertEqualStringMethod =
-        "Chaos.TestFramework/Assert::Equal<System.String>(System.String,System.String,System.String)";
-
+    private const string StringConcatTripleIcall = "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String)";
+    private const string StringConcatPairMethodSubjectId = "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)";
+    private const string StringConcatTripleMethodSubjectId = "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String,System.String)";
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNameCaseInsensitive = true,

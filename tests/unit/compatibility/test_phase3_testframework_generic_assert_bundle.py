@@ -15,11 +15,12 @@ TEST_FRAMEWORK_PROJECT_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFrame
 TEST_FRAMEWORK_DLL_PATH = REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "bin" / "Release" / "net8.0" / "Chaos.TestFramework.Sdk.dll"
 TEST_OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase3-testframework-generic-assert-bundle"
 ASSEMBLY_NAME = "CrossAssemblyGenericAssertHarness"
-ENTRY_SUBJECT_ID = f"{ASSEMBLY_NAME}/Program::Main()"
+ENTRY_SUBJECT_ID_OVERRIDE = f"{ASSEMBLY_NAME}/Program::Main()"
+CANONICAL_ENTRY_SUBJECT_ID = f"{ASSEMBLY_NAME}/Program::Main:System.Int32()"
 GENERIC_ASSERT_SUBJECT_IDS = (
-    "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal<System.RuntimeTypeHandle>(System.RuntimeTypeHandle,System.RuntimeTypeHandle,System.String)",
-    "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal<System.RuntimeMethodHandle>(System.RuntimeMethodHandle,System.RuntimeMethodHandle,System.String)",
-    "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal<System.String>(System.String,System.String,System.String)",
+    "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal<System.RuntimeTypeHandle>:System.Void(System.RuntimeTypeHandle,System.RuntimeTypeHandle,System.String)",
+    "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal<System.RuntimeMethodHandle>:System.Void(System.RuntimeMethodHandle,System.RuntimeMethodHandle,System.String)",
+    "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal<System.String>:System.Void(System.String,System.String,System.String)",
 )
 
 
@@ -140,7 +141,7 @@ class Phase3TestFrameworkGenericAssertBundleTests(unittest.TestCase):
                 str(harness_dll_path),
                 str(self.output_root),
                 "--entry-point-subject-id",
-                ENTRY_SUBJECT_ID,
+                ENTRY_SUBJECT_ID_OVERRIDE,
                 "--additional-assembly",
                 str(TEST_FRAMEWORK_DLL_PATH),
             ],
@@ -174,28 +175,24 @@ class Phase3TestFrameworkGenericAssertBundleTests(unittest.TestCase):
         self._ensure_bundle_generated()
 
         typed_il = load_json(self.output_root / "typed-il-ir.json")
-        typed_methods = {method["subjectId"] for method in typed_il["methods"]}
-        for subject_id in GENERIC_ASSERT_SUBJECT_IDS:
-            self.assertIn(subject_id, typed_methods)
-
-        code_registration = load_json(self.output_root / "code-registration.json")
-        registered_subject_ids = {
-            registration["subjectId"]
-            for module in code_registration["modules"]
-            for registration in module["registrations"]
-        }
-        for subject_id in GENERIC_ASSERT_SUBJECT_IDS:
-            self.assertIn(subject_id, registered_subject_ids)
+        typed_entry_method = next(
+            method
+            for method in typed_il["methods"]
+            if method["subjectId"] == CANONICAL_ENTRY_SUBJECT_ID
+        )
+        typed_generic_call_instructions = [
+            instruction
+            for block in typed_entry_method["blocks"]
+            for instruction in block["instructions"]
+            if instruction.get("callee") in GENERIC_ASSERT_SUBJECT_IDS
+        ]
+        self.assertEqual(len(GENERIC_ASSERT_SUBJECT_IDS), len(typed_generic_call_instructions))
 
         aot_core_ir = load_json(self.output_root / "aot-core-ir.json")
-        aot_methods = {method["subjectId"] for method in aot_core_ir["methods"]}
-        for subject_id in GENERIC_ASSERT_SUBJECT_IDS:
-            self.assertIn(subject_id, aot_methods)
-
         entry_method = next(
             method
             for method in aot_core_ir["methods"]
-            if method["subjectId"] == ENTRY_SUBJECT_ID
+            if method["subjectId"] == CANONICAL_ENTRY_SUBJECT_ID
         )
         generic_call_instructions = [
             instruction
@@ -204,9 +201,8 @@ class Phase3TestFrameworkGenericAssertBundleTests(unittest.TestCase):
         ]
         self.assertEqual(len(GENERIC_ASSERT_SUBJECT_IDS), len(generic_call_instructions))
         for instruction in generic_call_instructions:
-            self.assertTrue(instruction.get("targetSymbol"))
-            self.assertEqual(3, instruction.get("targetParameterCount"))
-            self.assertEqual("System.Void", instruction.get("targetReturnType"))
+            self.assertEqual(instruction["callee"], instruction["targetReference"]["subjectId"])
+            self.assertEqual(3, instruction.get("dispatchKindCode"))
 
     def test_cross_assembly_generic_assert_harness_emits_native_aot(self) -> None:
         self._ensure_native_emitted()

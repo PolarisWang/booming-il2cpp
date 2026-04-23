@@ -7,8 +7,6 @@ internal static class NativeAotTemplateCatalog
     public const string TranslationUnitTemplateRelativePath = "Templates/NativeAot.TranslationUnit.cpp.scriban";
     public const string ObjectModelTemplateRelativePath = "Templates/NativeAot.ObjectModel.cpp.scriban";
     public const string MethodTemplateRelativePath = "Templates/NativeAot.Method.cpp.scriban";
-    public const string AssemblyFullClosureAuditSummaryTemplateRelativePath = "Templates/NativeAot.AuditSummary.cpp.scriban";
-    public const string AssemblyFullClosureAuditPageTemplateRelativePath = "Templates/NativeAot.AuditPage.cpp.scriban";
     public const string RuntimePreludeTemplateRelativePath = "Templates/NativeAot.RuntimePrelude.cpp.scriban";
     public const string SpanRuntimePreludeTemplateRelativePath = "Templates/NativeAot.SpanRuntimePrelude.cpp.scriban";
     public const string CollectionRuntimePreludeTemplateRelativePath = "Templates/NativeAot.CollectionRuntimePrelude.cpp.scriban";
@@ -38,16 +36,6 @@ internal static class NativeAotTemplateCatalog
     public static Template GetMethodTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(MethodTemplateRelativePath);
-    }
-
-    public static Template GetAssemblyFullClosureAuditSummaryTemplate()
-    {
-        return ScribanTemplateRenderer.LoadTemplate(AssemblyFullClosureAuditSummaryTemplateRelativePath);
-    }
-
-    public static Template GetAssemblyFullClosureAuditPageTemplate()
-    {
-        return ScribanTemplateRenderer.LoadTemplate(AssemblyFullClosureAuditPageTemplateRelativePath);
     }
 
     public static Template GetRuntimePreludeTemplate()
@@ -124,4 +112,5 @@ internal static class NativeAotTemplateCatalog
     {
         return ScribanTemplateRenderer.LoadTemplate(SimpleExternalRuntimeHelperTemplateRelativePath);
     }
+
 }

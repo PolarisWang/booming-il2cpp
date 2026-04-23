@@ -4,10 +4,14 @@ namespace Chaos.IL2CPP.SemanticWorld;
 
 public sealed class SemanticWorldStage
 {
-    private const string ThreePartStringConcatSubjectId =
+    private const string ThreePartStringConcatDisplaySubjectId =
         "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String)";
-    private const string PairStringConcatSubjectId =
+    private const string PairStringConcatDisplaySubjectId =
         "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
+    private const string ThreePartStringConcatMethodSubjectId =
+        "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String,System.String)";
+    private const string PairStringConcatMethodSubjectId =
+        "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)";
     private const string StringJoinStringEnumerableSubjectId =
         "System.Private.CoreLib/System.String::Join(System.String,System.Collections.Generic.IEnumerable<System.String>)";
     private const string GenericStringJoinEnumerableSubjectIdPrefix =
@@ -49,6 +53,7 @@ public sealed class SemanticWorldStage
             Assembly = loadedWorld.Assembly,
             Assemblies = loadedWorld.Assemblies.Select(assembly => assembly.Assembly).ToList(),
             EntryPointSubjectId = loadedWorld.EntryPointSubjectId,
+            GenericInstantiationDemandGraph = loadedWorld.GenericInstantiationDemandGraph,
             Types = loadedWorld.Types,
             Fields = loadedWorld.Fields,
             Properties = loadedWorld.Properties,
@@ -92,8 +97,8 @@ public sealed class SemanticWorldStage
                 new CanonicalSubjectModel
                 {
                     SubjectKind = "method",
-                    SubjectId = ThreePartStringConcatSubjectId,
-                    CanonicalSubjectId = PairStringConcatSubjectId,
+                    SubjectId = ThreePartStringConcatMethodSubjectId,
+                    CanonicalSubjectId = PairStringConcatMethodSubjectId,
                 },
             ],
         };
@@ -197,7 +202,7 @@ public sealed class SemanticWorldStage
         foreach (var instruction in instructions)
         {
             if (instruction.Op == "call" &&
-                string.Equals(instruction.Callee, ThreePartStringConcatSubjectId, StringComparison.Ordinal))
+                MethodSubjectIdEquals(instruction.Callee, ThreePartStringConcatDisplaySubjectId))
             {
                 if (canonicalized.Count == 0)
                 {
@@ -224,13 +229,13 @@ public sealed class SemanticWorldStage
         return new ManagedInstructionModel
         {
             Op = "call",
-            Callee = PairStringConcatSubjectId,
+            Callee = PairStringConcatMethodSubjectId,
             ResultType = "System.String",
             Reference = new ManagedInstructionReference
             {
                 AssemblyName = "System.Private.CoreLib",
                 SubjectKind = "method",
-                SubjectId = PairStringConcatSubjectId,
+                SubjectId = PairStringConcatMethodSubjectId,
             },
         };
     }
@@ -368,9 +373,10 @@ public sealed class SemanticWorldStage
                 continue;
             }
 
-            switch (instruction.Callee)
+            var normalizedCallee = NormalizeMethodSubjectIdForMatching(instruction.Callee);
+            switch (normalizedCallee)
             {
-                case PairStringConcatSubjectId:
+                case PairStringConcatDisplaySubjectId:
                     capabilities.Add("requires-string-concat");
                     break;
                 case ConsoleWriteLineStringSubjectId:
@@ -471,8 +477,9 @@ public sealed class SemanticWorldStage
 
     private static bool IsDelegateInvokeCallee(string? subjectId)
     {
-        return !string.IsNullOrWhiteSpace(subjectId) &&
-               subjectId.Contains("::Invoke(", StringComparison.Ordinal);
+        var normalizedSubjectId = NormalizeMethodSubjectIdForMatching(subjectId);
+        return !string.IsNullOrWhiteSpace(normalizedSubjectId) &&
+               normalizedSubjectId.Contains("::Invoke(", StringComparison.Ordinal);
     }
 
     private static bool IsCompilerGeneratedAsyncStateMachineMethod(ManagedMethodModel method)
@@ -507,22 +514,62 @@ public sealed class SemanticWorldStage
 
     private static bool ContainsTaskAwaiterMarker(string? subjectId)
     {
-        return !string.IsNullOrWhiteSpace(subjectId) &&
-               (subjectId.Contains("TaskAwaiter", StringComparison.Ordinal) ||
-                subjectId.Contains("::GetAwaiter(", StringComparison.Ordinal) ||
-                subjectId.Contains("::GetResult(", StringComparison.Ordinal));
+        var normalizedSubjectId = NormalizeMethodSubjectIdForMatching(subjectId);
+        return !string.IsNullOrWhiteSpace(normalizedSubjectId) &&
+               (normalizedSubjectId.Contains("TaskAwaiter", StringComparison.Ordinal) ||
+                normalizedSubjectId.Contains("::GetAwaiter(", StringComparison.Ordinal) ||
+                normalizedSubjectId.Contains("::GetResult(", StringComparison.Ordinal));
     }
 
     private static bool IsStringJoinEnumerableSurface(string? subjectId)
     {
-        if (string.IsNullOrWhiteSpace(subjectId))
+        var normalizedSubjectId = NormalizeMethodSubjectIdForMatching(subjectId);
+        if (string.IsNullOrWhiteSpace(normalizedSubjectId))
         {
             return false;
         }
 
-        return string.Equals(subjectId, StringJoinStringEnumerableSubjectId, StringComparison.Ordinal) ||
-               (subjectId.StartsWith(GenericStringJoinEnumerableSubjectIdPrefix, StringComparison.Ordinal) &&
-                subjectId.Contains("(System.String,System.Collections.Generic.IEnumerable<", StringComparison.Ordinal));
+        return string.Equals(normalizedSubjectId, StringJoinStringEnumerableSubjectId, StringComparison.Ordinal) ||
+               (normalizedSubjectId.StartsWith(GenericStringJoinEnumerableSubjectIdPrefix, StringComparison.Ordinal) &&
+                normalizedSubjectId.Contains("(System.String,System.Collections.Generic.IEnumerable<", StringComparison.Ordinal));
+    }
+
+    private static bool MethodSubjectIdEquals(string? subjectId, string expectedSubjectId)
+    {
+        return string.Equals(
+            NormalizeMethodSubjectIdForMatching(subjectId),
+            expectedSubjectId,
+            StringComparison.Ordinal);
+    }
+
+    private static string? NormalizeMethodSubjectIdForMatching(string? subjectId)
+    {
+        if (string.IsNullOrWhiteSpace(subjectId))
+        {
+            return subjectId;
+        }
+
+        var methodSeparatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
+        if (methodSeparatorIndex < 0)
+        {
+            return subjectId;
+        }
+
+        var openParenIndex = subjectId.IndexOf('(', methodSeparatorIndex + 2);
+        if (openParenIndex < 0)
+        {
+            return subjectId;
+        }
+
+        var returnTypeSeparatorIndex = subjectId.LastIndexOf(':', openParenIndex - 1);
+        if (returnTypeSeparatorIndex <= methodSeparatorIndex + 1)
+        {
+            return subjectId;
+        }
+
+        return string.Concat(
+            subjectId.AsSpan(0, returnTypeSeparatorIndex),
+            subjectId.AsSpan(openParenIndex));
     }
 
     private static bool IsInterfaceDispatchCallee(

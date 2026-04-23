@@ -11,43 +11,43 @@ public sealed class HotUpdateMethodRegistry
     public void RegisterConstantInt32(ManagedMethodIdentityArtifact identity, int constantValue)
     {
         ArgumentNullException.ThrowIfNull(identity);
-        RegisterConstantInt32Core(ManagedMethodIdentityResolver.ResolveSubjectId(identity), constantValue);
+        RegisterConstantInt32ByExecutionAuthority(ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity), constantValue);
     }
 
     public void RegisterInt32Unary(ManagedMethodIdentityArtifact identity, Func<int, int> target)
     {
         ArgumentNullException.ThrowIfNull(identity);
-        RegisterInt32UnaryBySubjectId(ManagedMethodIdentityResolver.ResolveSubjectId(identity), target);
+        RegisterInt32UnaryByExecutionAuthority(ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity), target);
     }
 
     public void RegisterMethod(ManagedMethodIdentityArtifact identity, Func<IReadOnlyList<object?>, object?> target)
     {
         ArgumentNullException.ThrowIfNull(identity);
-        RegisterMethodBySubjectId(ManagedMethodIdentityResolver.ResolveSubjectId(identity), target);
+        RegisterMethodByExecutionAuthority(ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity), target);
     }
 
     public bool TryGet(ManagedMethodIdentityArtifact identity, out ConstantInt32InterpreterStub? stub)
     {
         ArgumentNullException.ThrowIfNull(identity);
-        return TryGetCore(ManagedMethodIdentityResolver.ResolveSubjectId(identity), out stub);
+        return TryGetCore(ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity), out stub);
     }
 
     public bool TryGetInt32Unary(ManagedMethodIdentityArtifact identity, out Func<int, int>? target)
     {
         ArgumentNullException.ThrowIfNull(identity);
-        return TryGetInt32UnaryCore(ManagedMethodIdentityResolver.ResolveSubjectId(identity), out target);
+        return TryGetInt32UnaryCore(ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity), out target);
     }
 
     public bool TryDispatchInt32Unary(ManagedMethodIdentityArtifact identity, int value, out int result)
     {
         ArgumentNullException.ThrowIfNull(identity);
-        return TryDispatchInt32UnaryCore(ManagedMethodIdentityResolver.ResolveSubjectId(identity), value, out result);
+        return TryDispatchInt32UnaryCore(ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity), value, out result);
     }
 
     public bool TryDispatch(ManagedMethodIdentityArtifact identity, IReadOnlyList<object?> arguments, out object? result)
     {
         ArgumentNullException.ThrowIfNull(identity);
-        return TryDispatchBySubjectId(ManagedMethodIdentityResolver.ResolveSubjectId(identity), arguments, out result);
+        return TryDispatchByExecutionAuthority(ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity), arguments, out result);
     }
 
     public HotUpdateMethodRegistrySnapshot Snapshot()
@@ -91,56 +91,42 @@ public sealed class HotUpdateMethodRegistry
         _genericEntries.Clear();
     }
 
-    private void RegisterConstantInt32Core(string subjectId, int constantValue)
+    internal void RegisterConstantInt32ByExecutionAuthority(string executionAuthorityKey, int constantValue)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
-        var stub = new ConstantInt32InterpreterStub(constantValue);
-        _entries[subjectId] = stub;
-        _genericEntries[subjectId] = _ => stub.Execute();
+        RegisterConstantInt32Core(executionAuthorityKey, constantValue);
     }
 
-    internal void RegisterInt32UnaryBySubjectId(string subjectId, Func<int, int> target)
+    internal void RegisterInt32UnaryByExecutionAuthority(string executionAuthorityKey, Func<int, int> target)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(executionAuthorityKey);
         ArgumentNullException.ThrowIfNull(target);
-        _int32UnaryEntries[subjectId] = target;
-        _genericEntries[subjectId] = args =>
+        _int32UnaryEntries[executionAuthorityKey] = target;
+        _genericEntries[executionAuthorityKey] = args =>
         {
             if (args.Count != 1)
             {
-                throw new InvalidOperationException($"hot update unary entry '{subjectId}' expects 1 argument.");
+                throw new InvalidOperationException($"hot update unary entry '{executionAuthorityKey}' expects 1 argument.");
             }
 
             return target(Convert.ToInt32(args[0]));
         };
     }
 
-    internal void RegisterMethodBySubjectId(string subjectId, Func<IReadOnlyList<object?>, object?> target)
+    internal void RegisterMethodByExecutionAuthority(string executionAuthorityKey, Func<IReadOnlyList<object?>, object?> target)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(executionAuthorityKey);
         ArgumentNullException.ThrowIfNull(target);
-        _genericEntries[subjectId] = target;
+        _genericEntries[executionAuthorityKey] = target;
     }
 
-    private bool TryGetCore(string subjectId, out ConstantInt32InterpreterStub? stub)
+    internal bool TryDispatchByExecutionAuthority(string executionAuthorityKey, IReadOnlyList<object?> arguments, out object? result)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
-        return _entries.TryGetValue(subjectId, out stub);
-    }
+        ArgumentException.ThrowIfNullOrWhiteSpace(executionAuthorityKey);
+        ArgumentNullException.ThrowIfNull(arguments);
 
-    private bool TryGetInt32UnaryCore(string subjectId, out Func<int, int>? target)
-    {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
-        return _int32UnaryEntries.TryGetValue(subjectId, out target);
-    }
-
-    private bool TryDispatchInt32UnaryCore(string subjectId, int value, out int result)
-    {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
-
-        if (_int32UnaryEntries.TryGetValue(subjectId, out var target))
+        if (_genericEntries.TryGetValue(executionAuthorityKey, out var target))
         {
-            result = target(value);
+            result = target(arguments);
             return true;
         }
 
@@ -148,14 +134,33 @@ public sealed class HotUpdateMethodRegistry
         return false;
     }
 
-    internal bool TryDispatchBySubjectId(string subjectId, IReadOnlyList<object?> arguments, out object? result)
+    private void RegisterConstantInt32Core(string executionAuthorityKey, int constantValue)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
-        ArgumentNullException.ThrowIfNull(arguments);
+        ArgumentException.ThrowIfNullOrWhiteSpace(executionAuthorityKey);
+        var stub = new ConstantInt32InterpreterStub(constantValue);
+        _entries[executionAuthorityKey] = stub;
+        _genericEntries[executionAuthorityKey] = _ => stub.Execute();
+    }
 
-        if (_genericEntries.TryGetValue(subjectId, out var target))
+    private bool TryGetCore(string executionAuthorityKey, out ConstantInt32InterpreterStub? stub)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(executionAuthorityKey);
+        return _entries.TryGetValue(executionAuthorityKey, out stub);
+    }
+
+    private bool TryGetInt32UnaryCore(string executionAuthorityKey, out Func<int, int>? target)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(executionAuthorityKey);
+        return _int32UnaryEntries.TryGetValue(executionAuthorityKey, out target);
+    }
+
+    private bool TryDispatchInt32UnaryCore(string executionAuthorityKey, int value, out int result)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(executionAuthorityKey);
+
+        if (_int32UnaryEntries.TryGetValue(executionAuthorityKey, out var target))
         {
-            result = target(arguments);
+            result = target(value);
             return true;
         }
 

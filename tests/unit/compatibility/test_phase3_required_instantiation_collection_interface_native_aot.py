@@ -112,19 +112,19 @@ class Phase3RequiredInstantiationCollectionInterfaceNativeAotTests(unittest.Test
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
         self.assertIn("// Managed method: CoreRuntimeFeatures/RequiredInstantiationClosureProofEntry::Run()", generated_cpp)
         self.assertIn(
-            "chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_IReadOnlyCollection_System_Int32___get_Count__",
+            "chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_IReadOnlyCollection_System_Int32___get_Count",
             generated_cpp,
         )
         self.assertIn(
-            "chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_IReadOnlyList_System_Int32___get_Item_System_Int32_",
+            "chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_IReadOnlyList_System_Int32___get_Item",
             generated_cpp,
         )
         self.assertIn(
-            "chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_IReadOnlyCollection_System_String___get_Count__",
+            "chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_IReadOnlyCollection_System_String___get_Count",
             generated_cpp,
         )
         self.assertIn(
-            "chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_IReadOnlyList_System_String___get_Item_System_Int32_",
+            "chaos_external_runtime_System_Private_CoreLib_System_Collections_Generic_IReadOnlyList_System_String___get_Item",
             generated_cpp,
         )
 

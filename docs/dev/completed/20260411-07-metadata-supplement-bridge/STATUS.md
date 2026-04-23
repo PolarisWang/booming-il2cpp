@@ -24,7 +24,7 @@ active: false
 
 - current_focus: Batch 1-4.3 已全部闭环；`MetadataWriter` 已输出 `hot-update/supplemental-metadata-template.json`，`Chaos.IL2CPP.HotUpdate` 已具备 supplemental metadata writer/loader、bridge generator/dispatcher baseline，`BridgeRoundtripProof` 与 `GenericSupplementProof` 已形成最小可验证证据。
 - why_now: Phase 6 已把 metadata supplement 与 bridge generation 的最小承载面补齐，父 roadmap 可以继续推进到 Phase 7 `20260411-08-interpreter-mixed-execution`，开始收口真正的 interpreter core 与 mixed execution。
-- done_definition: `plan-v1-01.md` 的 Batch 1-4.3 已完成；专项 pytest、proof 程序、managed build、native loader surface build，以及项目级 `pipeline/completion-managed-closure` / `pipeline/completion-runtime-core` 均已通过。
+- done_definition: `plan-v1-01.md` 的 Batch 1-4.3 已完成；专项 pytest、proof 程序、managed build、native loader surface build，以及项目级 formal 验证对象均已通过。
 
 ## 最近摘要
 
@@ -49,8 +49,8 @@ active: false
 - passed: `dotnet build src/managed/Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.csproj -c Release`
 - passed: `cmake -S . -B artifacts/.tmp-hot-update-reference -G "Visual Studio 17 2022" -DROADMAP0_PRESET_TARGET=windows-x64-reference`
 - passed: `cmake --build artifacts/.tmp-hot-update-reference --config Release --target chaos_hot_update`
-- passed: `./run.ps1 test pipeline --id pipeline/completion-managed-closure --json` -> `runId=20260411-155954-windows-b697`, `finalStatus=ok`, `summaryPath=artifacts/logs/tests/20260411-155954-windows-b697/summary.json`
-- passed: `./run.ps1 test pipeline --id pipeline/completion-runtime-core --json` -> `runId=20260411-160011-windows-3f75`, `finalStatus=ok`, `summaryPath=artifacts/logs/tests/20260411-160011-windows-3f75/summary.json`
+- passed: `module/managed-closure/basic` formal verification -> `runId=20260411-155954-windows-b697`, `finalStatus=ok`, `summaryPath=artifacts/logs/tests/20260411-155954-windows-b697/summary.json`
+- passed: `system/runtime-baseline-windows` formal verification -> `runId=20260411-160011-windows-3f75`, `finalStatus=ok`, `summaryPath=artifacts/logs/tests/20260411-160011-windows-3f75/summary.json`
 
 ## 风险 / 阻塞
 

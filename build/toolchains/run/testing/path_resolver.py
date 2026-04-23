@@ -90,6 +90,20 @@ def subject_perf_baseline_path(
     )
 
 
+def subject_codegen_baseline_path(
+    repo_root: Path,
+    subject_id: str,
+    matrix_id: str,
+    host_platform: str,
+) -> Path:
+    return (
+        subject_content_roots(repo_root, subject_id)["baselinesRoot"]
+        / "codegen"
+        / matrix_id
+        / f"{host_platform}.json"
+    )
+
+
 def contract_roots(repo_root: Path, *, version: str = "v0") -> dict[str, Path]:
     artifact_schema_root = repo_root / "contracts" / "artifacts" / version / "schemas"
     analysis_version_root = repo_root / "tests" / "contracts" / "analysis" / version

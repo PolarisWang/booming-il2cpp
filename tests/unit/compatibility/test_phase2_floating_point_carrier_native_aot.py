@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -124,19 +126,31 @@ class Phase2FloatingPointCarrierNativeAotTests(unittest.TestCase):
         aot_core_ir = load_json(self.output_root / "aot-core-ir.json")
         methods = {method["subjectId"]: method for method in aot_core_ir["methods"]}
 
-        single_method = methods["CoreRuntimeBenchmarks/FloatingPointCarrierBenchmarkMath::RoundTripSingle(System.Single)"]
+        single_method = find_method_by_subject_id(
+            methods,
+            "CoreRuntimeBenchmarks/FloatingPointCarrierBenchmarkMath::RoundTripSingle(System.Single)",
+        )
         self.assertEqual(8, single_method["returnAbi"]["carrierKindCode"])
         self.assertEqual([8], [slot["carrierKindCode"] for slot in single_method["parameterAbis"]])
 
-        double_method = methods["CoreRuntimeBenchmarks/FloatingPointCarrierBenchmarkMath::RoundTripDouble(System.Double)"]
+        double_method = find_method_by_subject_id(
+            methods,
+            "CoreRuntimeBenchmarks/FloatingPointCarrierBenchmarkMath::RoundTripDouble(System.Double)",
+        )
         self.assertEqual(9, double_method["returnAbi"]["carrierKindCode"])
         self.assertEqual([9], [slot["carrierKindCode"] for slot in double_method["parameterAbis"]])
 
-        single_conv_method = methods["CoreRuntimeBenchmarks/FloatingPointCarrierBenchmarkMath::ConvertInt32ToSingle(System.Int32)"]
+        single_conv_method = find_method_by_subject_id(
+            methods,
+            "CoreRuntimeBenchmarks/FloatingPointCarrierBenchmarkMath::ConvertInt32ToSingle(System.Int32)",
+        )
         self.assertEqual(8, single_conv_method["returnAbi"]["carrierKindCode"])
         self.assertEqual([1], [slot["carrierKindCode"] for slot in single_conv_method["parameterAbis"]])
 
-        double_conv_method = methods["CoreRuntimeBenchmarks/FloatingPointCarrierBenchmarkMath::ConvertInt32ToDouble(System.Int32)"]
+        double_conv_method = find_method_by_subject_id(
+            methods,
+            "CoreRuntimeBenchmarks/FloatingPointCarrierBenchmarkMath::ConvertInt32ToDouble(System.Int32)",
+        )
         self.assertEqual(9, double_conv_method["returnAbi"]["carrierKindCode"])
         self.assertEqual([1], [slot["carrierKindCode"] for slot in double_conv_method["parameterAbis"]])
 

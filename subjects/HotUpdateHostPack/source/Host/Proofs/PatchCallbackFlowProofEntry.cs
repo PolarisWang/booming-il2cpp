@@ -8,8 +8,15 @@ internal static class PatchCallbackFlowProofEntry
 {
     private static readonly ManagedMethodIdentityArtifact CallbackIdentity =
         ManagedMethodIdentityResolver.Create(
-            "PatchCallbackFlowProof/HotPatch::AddOne(System.Int32)",
-            "System.Int32 HotPatch::AddOne(System.Int32)");
+            new ManagedMethodIdentitySpec
+            {
+                AssemblyName = "PatchCallbackFlowProof",
+                DeclaringTypeSubjectId = "PatchCallbackFlowProof/HotPatch",
+                DeclaringTypeDisplayName = "HotPatch",
+                MethodName = "AddOne",
+                SubjectId = "PatchCallbackFlowProof/HotPatch::AddOne(System.Int32)",
+                Signature = "System.Int32 HotPatch::AddOne(System.Int32)",
+            });
 
     [ChaosUnitTest(
         ChaosUnitCategory.HotUpdateContract,

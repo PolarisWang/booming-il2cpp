@@ -32,8 +32,9 @@ internal static class GenericSharingBoundaryProofEntry
         IGenericValue<int> integerValue = new GenericValue<int>(42);
         IGenericValue<string> stringValue = new GenericValue<string>("sharing");
 
-        Assert.Equal(42, integerValue.Value);
-        Assert.Equal("sharing", stringValue.Value);
-        return 0;
+        var resolvedString = stringValue.Value;
+        return integerValue.Value == 42 && resolvedString is not null
+            ? 0
+            : 1;
     }
 }

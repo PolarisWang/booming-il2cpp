@@ -302,13 +302,18 @@ public sealed partial class NativeAotLoweringPlanner
 	private static string GetMethodName(string subjectId)
 	{
 		int num = subjectId.IndexOf("::", StringComparison.Ordinal);
-		int num2 = subjectId.IndexOf('(', num + 2);
+		int num2 = subjectId.IndexOf(':', num + 2);
+		int num3 = subjectId.IndexOf('(', num + 2);
+		if (num2 < 0 || (num3 >= 0 && num3 < num2))
+		{
+			num2 = num3;
+		}
 		if (num <= 0 || num2 <= num + 2)
 		{
 			throw new InvalidOperationException("failed to extract method name from subject id '" + subjectId + "'");
 		}
-		int num3 = num + 2;
-		return subjectId.Substring(num3, num2 - num3);
+		int num4 = num + 2;
+		return subjectId.Substring(num4, num2 - num4);
 	}
 
 	private static string GetTypeDisplayName(string typeSubjectId)
@@ -379,15 +384,19 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool IsAsyncRuntimeHelperSubjectId(string subjectId)
 	{
-		if (!subjectId.Contains("AsyncTaskMethodBuilder<System.Int32>", StringComparison.Ordinal) && !subjectId.Contains("AsyncValueTaskMethodBuilder<System.Int32>", StringComparison.Ordinal) && !subjectId.Contains("YieldAwaitable", StringComparison.Ordinal) && !subjectId.Contains("TaskAwaiter<System.Int32>", StringComparison.Ordinal) && !subjectId.Contains("ValueTaskAwaiter<System.Int32>", StringComparison.Ordinal) && !string.Equals(subjectId, "System.Private.CoreLib/System.Threading.Tasks.Task::Yield()", StringComparison.Ordinal))
+		if (subjectId.Contains("YieldAwaitable", StringComparison.Ordinal) || (subjectId.StartsWith("System.Private.CoreLib/System.Threading.Tasks.Task::", StringComparison.Ordinal) && string.Equals(GetMethodName(subjectId), "Yield", StringComparison.Ordinal)))
 		{
-			if (!string.Equals(subjectId, "System.Private.CoreLib/System.Threading.Tasks.Task<System.Int32>::GetAwaiter()", StringComparison.Ordinal))
-			{
-				return string.Equals(subjectId, "System.Private.CoreLib/System.Threading.Tasks.ValueTask<System.Int32>::GetAwaiter()", StringComparison.Ordinal);
-			}
 			return true;
 		}
-		return true;
+		if (subjectId.StartsWith("System.Private.CoreLib/System.Runtime.CompilerServices.AsyncTaskMethodBuilder<", StringComparison.Ordinal) || subjectId.StartsWith("System.Private.CoreLib/System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder<", StringComparison.Ordinal) || subjectId.StartsWith("System.Private.CoreLib/System.Runtime.CompilerServices.TaskAwaiter<", StringComparison.Ordinal) || subjectId.StartsWith("System.Private.CoreLib/System.Runtime.CompilerServices.ValueTaskAwaiter<", StringComparison.Ordinal))
+		{
+			return true;
+		}
+		if (subjectId.StartsWith("System.Private.CoreLib/System.Threading.Tasks.Task<", StringComparison.Ordinal) && string.Equals(GetMethodName(subjectId), "GetAwaiter", StringComparison.Ordinal))
+		{
+			return true;
+		}
+		return subjectId.StartsWith("System.Private.CoreLib/System.Threading.Tasks.ValueTask<", StringComparison.Ordinal) && string.Equals(GetMethodName(subjectId), "GetAwaiter", StringComparison.Ordinal);
 	}
 
 	private static bool IsCollectionRuntimeHelperSubjectId(string subjectId)
@@ -401,7 +410,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool IsSpanRuntimeHelperSubjectId(string subjectId)
 	{
-		if (string.Equals(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)", StringComparison.Ordinal) || subjectId.StartsWith("System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan<", StringComparison.Ordinal) || subjectId.StartsWith("System.Memory/System.MemoryExtensions::AsSpan<", StringComparison.Ordinal) || subjectId.StartsWith("System.Memory/System.MemoryExtensions::AsMemory<", StringComparison.Ordinal))
+		if (MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers", "InitializeArray", "System.Array", "System.RuntimeFieldHandle") || subjectId.StartsWith("System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan<", StringComparison.Ordinal) || subjectId.StartsWith("System.Memory/System.MemoryExtensions::AsSpan<", StringComparison.Ordinal) || subjectId.StartsWith("System.Memory/System.MemoryExtensions::AsMemory<", StringComparison.Ordinal))
 		{
 			return true;
 		}
@@ -415,29 +424,44 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static bool IsMonitorRuntimeHelperSubjectId(string subjectId)
 	{
-		if (!string.Equals(subjectId, "System.Threading/Monitor::Enter(System.Object,System.Boolean&)", StringComparison.Ordinal) && !string.Equals(subjectId, "System.Threading/Monitor::Exit(System.Object)", StringComparison.Ordinal))
+		if (!MatchesMethodSubject(subjectId, "System.Threading/Monitor", "Enter", "System.Object", "System.Boolean&") && !MatchesMethodSubject(subjectId, "System.Threading/Monitor", "Exit", "System.Object"))
 		{
-			return string.Equals(subjectId, "System.Threading/Monitor::TryEnter(System.Object,System.TimeSpan,System.Boolean&)", StringComparison.Ordinal);
+			return MatchesMethodSubject(subjectId, "System.Threading/Monitor", "TryEnter", "System.Object", "System.TimeSpan", "System.Boolean&");
 		}
 		return true;
 	}
 
 	private static bool IsThreadRuntimeHelperSubjectId(string subjectId)
 	{
-		if (!string.Equals(subjectId, "System.Private.CoreLib/System.Environment::get_CurrentManagedThreadId()", StringComparison.Ordinal) && !string.Equals(subjectId, "System.Threading.Thread/System.Threading.Thread::.ctor(System.Threading.ThreadStart)", StringComparison.Ordinal) && !string.Equals(subjectId, "System.Threading.Thread/System.Threading.Thread::Start()", StringComparison.Ordinal) && !string.Equals(subjectId, "System.Threading.Thread/System.Threading.Thread::Join()", StringComparison.Ordinal) && !string.Equals(subjectId, "System.Threading.Thread/System.Threading.Thread::get_CurrentThread()", StringComparison.Ordinal) && !string.Equals(subjectId, "System.Threading.Thread/System.Threading.Thread::get_Name()", StringComparison.Ordinal))
+		if (!MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Environment", "get_CurrentManagedThreadId") && !MatchesMethodSubject(subjectId, "System.Threading.Thread/System.Threading.Thread", ".ctor", "System.Threading.ThreadStart") && !MatchesMethodSubject(subjectId, "System.Threading.Thread/System.Threading.Thread", "Start") && !MatchesMethodSubject(subjectId, "System.Threading.Thread/System.Threading.Thread", "Join") && !MatchesMethodSubject(subjectId, "System.Threading.Thread/System.Threading.Thread", "get_CurrentThread") && !MatchesMethodSubject(subjectId, "System.Threading.Thread/System.Threading.Thread", "get_Name"))
 		{
-			return string.Equals(subjectId, "System.Threading.Thread/System.Threading.Thread::set_Name(System.String)", StringComparison.Ordinal);
+			return MatchesMethodSubject(subjectId, "System.Threading.Thread/System.Threading.Thread", "set_Name", "System.String");
 		}
 		return true;
 	}
 
 	private static bool IsDefaultInterpolatedStringHandlerHelperSubjectId(string subjectId)
 	{
-		if (!string.Equals(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::.ctor(System.Int32,System.Int32)", StringComparison.Ordinal) && !string.Equals(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted(System.String)", StringComparison.Ordinal) && !string.Equals(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendLiteral(System.String)", StringComparison.Ordinal) && !string.Equals(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted<System.Int32>(System.Int32)", StringComparison.Ordinal))
+		if (!MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", ".ctor", "System.Int32", "System.Int32") && !MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", "AppendFormatted", "System.String") && !MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", "AppendLiteral", "System.String") && !IsSupportedDefaultInterpolatedStringHandlerAppendFormattedSubjectId(subjectId))
 		{
-			return string.Equals(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::ToStringAndClear()", StringComparison.Ordinal);
+			return MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", "ToStringAndClear");
 		}
 		return true;
+	}
+
+	private static bool IsTypeReflectionHelperSubjectId(string subjectId)
+	{
+		return MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "GetTypeFromHandle", "System.RuntimeTypeHandle") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "get_TypeHandle") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "GetField", "System.String") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "GetMethod", "System.String") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "GetGenericArguments") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Reflection.MemberInfo", "get_DeclaringType") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "GetMethod", "System.String", "System.Reflection.BindingFlags") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "get_Assembly") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "GetGenericTypeDefinition") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "GetConstructors", "System.Reflection.BindingFlags");
+	}
+
+	private static bool IsAssemblyReflectionHelperSubjectId(string subjectId)
+	{
+		return MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "get_Assembly") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Reflection.Assembly", "GetType", "System.String") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "GetType", "System.String") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Reflection.Assembly", "GetName") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Reflection.AssemblyName", "get_Name");
+	}
+
+	private static bool IsReflectionMemberHelperSubjectId(string subjectId)
+	{
+		return MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "GetMethod", "System.String") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Type", "GetMethod", "System.String", "System.Reflection.BindingFlags") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Reflection.MethodBase", "GetParameters") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Reflection.MemberInfo", "get_Name") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Reflection.ParameterInfo", "get_Name") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Reflection.MethodBase", "get_MethodHandle") || MatchesMethodSubject(subjectId, "System.Private.CoreLib/System.Reflection.MethodBase", "Invoke", "System.Object", "System.Object[]");
 	}
 
 	private static bool UsesReachableInstruction(IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods, Func<AotCoreIrInstructionArtifact, bool> predicate)
@@ -595,10 +619,34 @@ public sealed partial class NativeAotLoweringPlanner
 		};
 	}
 
-	private static string FormatGenericContextComment(GenericContextArtifact genericContext)
+	private static string FormatGenericExecutionAuthorityComment(
+		string? openDefinitionSubjectId,
+		SharedGenericBodyId? sharedGenericBodyId,
+		InstantiationStubId? instantiationStubId,
+		RuntimeGenericContextArtifact? runtimeGenericContext)
 	{
-		ArgumentNullException.ThrowIfNull(genericContext, "genericContext");
-		return $"// Generic context: definition={genericContext.DefinitionSubjectId}; type={FormatGenericArgumentList(genericContext.TypeArguments)}; method={FormatGenericArgumentList(genericContext.MethodArguments)}";
+		if (string.IsNullOrWhiteSpace(openDefinitionSubjectId) &&
+			sharedGenericBodyId is null &&
+			instantiationStubId is null &&
+			runtimeGenericContext is null)
+		{
+			throw new ArgumentNullException(nameof(runtimeGenericContext));
+		}
+
+		string definitionSubjectId = !string.IsNullOrWhiteSpace(openDefinitionSubjectId)
+			? openDefinitionSubjectId
+			: runtimeGenericContext!.InstantiationKey.DefinitionSubjectId;
+		string bodyId = sharedGenericBodyId?.Value
+			?? runtimeGenericContext?.SharedGenericBodyId.Value
+			?? "<unknown>";
+		string stubId = instantiationStubId?.Value
+			?? runtimeGenericContext?.InstantiationStubId.Value
+			?? "<unknown>";
+		string support = runtimeGenericContext?.SupportKindCode.ToString() ?? "<unknown>";
+		string specialization = runtimeGenericContext?.SpecializationKindCode.ToString() ?? "<unknown>";
+		IReadOnlyList<string>? typeArguments = runtimeGenericContext?.InstantiationKey.TypeArguments;
+		IReadOnlyList<string>? methodArguments = runtimeGenericContext?.InstantiationKey.MethodArguments;
+		return $"// Generic execution authority: definition={definitionSubjectId}; type={FormatGenericArgumentList(typeArguments)}; method={FormatGenericArgumentList(methodArguments)}; support={support}; specialization={specialization}; body={bodyId}; stub={stubId}";
 	}
 
 	private static string FormatGenericArgumentList(IReadOnlyList<string>? arguments)

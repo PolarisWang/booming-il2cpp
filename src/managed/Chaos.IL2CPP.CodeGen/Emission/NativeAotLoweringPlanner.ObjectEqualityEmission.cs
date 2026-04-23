@@ -19,7 +19,7 @@ public sealed partial class NativeAotLoweringPlanner
 {
 	private void EmitObjectEqualityHelpers(StringBuilder builder, IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods, IReadOnlySet<string> referenceTypeSubjectIds, IReadOnlySet<string> boxedTypeSubjectIds)
 	{
-		if (!UsesReachableInstruction(reachableMethods, (AotCoreIrInstructionArtifact instruction) => string.Equals(instruction.Callee, "System.Private.CoreLib/System.Object::Equals(System.Object)", StringComparison.Ordinal) || string.Equals(instruction.Callee, "System.Private.CoreLib/System.String::op_Equality(System.String,System.String)", StringComparison.Ordinal) || IsCollectionRuntimeHelperSubjectId(instruction.Callee ?? string.Empty)))
+		if (!UsesReachableInstruction(reachableMethods, (AotCoreIrInstructionArtifact instruction) => MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.Object", "Equals", "System.Object") || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Private.CoreLib/System.String", "op_Equality", "System.String", "System.String") || IsCollectionRuntimeHelperSubjectId(instruction.Callee ?? string.Empty)))
 		{
 			return;
 		}

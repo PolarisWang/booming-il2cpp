@@ -33,8 +33,8 @@
 - `dotnet build src/managed/Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.csproj -c Release` -> succeeded
 - `cmake -S . -B artifacts/.tmp-hot-update-reference -G "Visual Studio 17 2022" -DROADMAP0_PRESET_TARGET=windows-x64-reference` -> succeeded
 - `cmake --build artifacts/.tmp-hot-update-reference --config Release --target chaos_hot_update` -> succeeded
-- `./run.ps1 test pipeline --id pipeline/completion-managed-closure --json` -> `runId=20260411-155954-windows-b697`, `finalStatus=ok`
-- `./run.ps1 test pipeline --id pipeline/completion-runtime-core --json` -> `runId=20260411-160011-windows-3f75`, `finalStatus=ok`
+- `module/managed-closure/basic` formal verification -> `runId=20260411-155954-windows-b697`, `finalStatus=ok`
+- `system/runtime-baseline-windows` formal verification -> `runId=20260411-160011-windows-3f75`, `finalStatus=ok`
 
 ## 备注
 

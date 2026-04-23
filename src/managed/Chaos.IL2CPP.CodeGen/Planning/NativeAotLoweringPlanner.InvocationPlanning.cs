@@ -39,9 +39,12 @@ public sealed partial class NativeAotLoweringPlanner
     {
         if (string.Equals(instruction.Op, "callvirt", StringComparison.Ordinal))
         {
-            return instruction.DispatchKindCode == HybridDispatchKind.Virtual
-                ? ResolveVirtualDispatchTargets(instruction)
-                : ResolveDirectReachableMethods(instruction);
+            return instruction.DispatchKindCode switch
+            {
+                HybridDispatchKind.Virtual => ResolveVirtualDispatchTargets(instruction),
+                HybridDispatchKind.ExternalRuntime => ResolveExternalRuntimeReachableMethods(instruction),
+                _ => ResolveDirectReachableMethods(instruction),
+            };
         }
 
         if (string.Equals(instruction.Op, "ldftn", StringComparison.Ordinal) ||
@@ -61,6 +64,32 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         return ResolveDirectReachableMethods(instruction);
+    }
+
+    private IReadOnlyList<AotCoreIrMethodArtifact> ResolveExternalRuntimeReachableMethods(
+        AotCoreIrInstructionArtifact instruction)
+    {
+        var reachableMethods = new List<AotCoreIrMethodArtifact>();
+        var seenSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+
+        void AddRange(IReadOnlyList<AotCoreIrMethodArtifact> methods)
+        {
+            foreach (var method in methods)
+            {
+                if (seenSubjectIds.Add(method.SubjectId))
+                {
+                    reachableMethods.Add(method);
+                }
+            }
+        }
+
+        AddRange(ResolveDirectReachableMethods(instruction));
+        if (!string.IsNullOrWhiteSpace(instruction.Callee))
+        {
+            AddRange(ResolveInterfaceDispatchTargets(instruction.Callee));
+        }
+
+        return reachableMethods;
     }
 
     private IReadOnlyList<AotCoreIrMethodArtifact> ResolveDirectReachableMethods(
@@ -137,7 +166,8 @@ public sealed partial class NativeAotLoweringPlanner
             .Where(method =>
                 !method.IsStatic &&
                 CanEmitMethodBody(method) &&
-                method.SubjectId.EndsWith($"{stateMachineTypeName}::MoveNext()", StringComparison.Ordinal))
+                string.Equals(GetMethodName(method.SubjectId), "MoveNext", StringComparison.Ordinal) &&
+                GetMethodDeclaringTypeSubjectId(method.SubjectId).EndsWith(stateMachineTypeName, StringComparison.Ordinal))
             .OrderBy(method => method.SubjectId, StringComparer.Ordinal)
             .ToArray();
         if (matches.Length == 0)
@@ -161,15 +191,9 @@ public sealed partial class NativeAotLoweringPlanner
     {
         helperMethods = null;
 
-        if (TryParseStringJoinGenericEnumerableElementType(callee, out var elementTypeDisplayName))
+        if (TryGetStringJoinEnumerableElementType(callee, out var elementTypeDisplayName))
         {
             helperMethods = ResolveEnumerableJoinSupportMethods(elementTypeDisplayName!);
-            return true;
-        }
-
-        if (string.Equals(callee, StringJoinStringEnumerableMethodSubjectId, StringComparison.Ordinal))
-        {
-            helperMethods = ResolveEnumerableJoinSupportMethods("System.String");
             return true;
         }
 
@@ -294,6 +318,30 @@ public sealed partial class NativeAotLoweringPlanner
                string.Equals(GetTypeDisplayName(arguments[0]), elementTypeDisplayName, StringComparison.Ordinal);
     }
 
+    private static bool TryGetStringJoinEnumerableElementType(
+        string callee,
+        out string? elementTypeDisplayName)
+    {
+        if (TryParseStringJoinGenericEnumerableElementType(callee, out elementTypeDisplayName))
+        {
+            return true;
+        }
+
+        if (MatchesMethodSubject(
+                callee,
+                StringTypeSubjectId,
+                "Join",
+                "System.String",
+                "System.Collections.Generic.IEnumerable<System.String>"))
+        {
+            elementTypeDisplayName = "System.String";
+            return true;
+        }
+
+        elementTypeDisplayName = null;
+        return false;
+    }
+
     private static bool TryParseStringJoinGenericEnumerableElementType(
         string callee,
         out string? elementTypeDisplayName)
@@ -309,26 +357,152 @@ public sealed partial class NativeAotLoweringPlanner
         return !string.IsNullOrWhiteSpace(elementTypeDisplayName);
     }
 
+    private sealed record VirtualDispatchRoute(
+        string ReceiverTypeSubjectId,
+        AotCoreIrMethodArtifact ImplementationMethod);
+
     private IReadOnlyList<AotCoreIrMethodArtifact> ResolveVirtualDispatchTargets(
+        AotCoreIrInstructionArtifact instruction)
+    {
+        var routes = ResolveVirtualDispatchRoutes(instruction);
+        var methods = new List<AotCoreIrMethodArtifact>();
+        var seenSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+
+        foreach (var route in routes)
+        {
+            if (seenSubjectIds.Add(route.ImplementationMethod.SubjectId))
+            {
+                methods.Add(route.ImplementationMethod);
+            }
+        }
+
+        return methods;
+    }
+
+    private IReadOnlyList<VirtualDispatchRoute> ResolveVirtualDispatchRoutes(
         AotCoreIrInstructionArtifact instruction)
     {
         var dispatchSlotMethod = ResolveRequiredDispatchSlotMethod(instruction);
         var slotDeclaringTypeSubjectId = dispatchSlotMethod.Identity.DeclaringTypeSubjectId;
         var slotDeclaringTypeDefinitionSubjectId = GetDeclaringTypeSubjectId(dispatchSlotMethod.Identity.DefinitionSubjectId);
         var slotSignatureSuffix = GetMethodSignatureSuffix(dispatchSlotMethod.SubjectId);
+        var routes = new List<VirtualDispatchRoute>();
+        var seenReceiverTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
 
-        return _methodsBySubjectId.Values
+        foreach (var candidateTypeSubjectId in EnumerateVirtualDispatchCandidateTypeSubjectIds())
+        {
+            if (!seenReceiverTypeSubjectIds.Add(candidateTypeSubjectId))
+            {
+                continue;
+            }
+
+            var implementationMethod = TryResolveVirtualDispatchImplementationMethod(
+                candidateTypeSubjectId,
+                slotDeclaringTypeSubjectId,
+                slotDeclaringTypeDefinitionSubjectId,
+                slotSignatureSuffix);
+            if (implementationMethod is null)
+            {
+                continue;
+            }
+
+            routes.Add(new VirtualDispatchRoute(candidateTypeSubjectId, implementationMethod));
+        }
+
+        return routes
+            .OrderBy(route => route.ReceiverTypeSubjectId, StringComparer.Ordinal)
+            .ToArray();
+    }
+
+    private IEnumerable<string> EnumerateVirtualDispatchCandidateTypeSubjectIds()
+    {
+        var seenTypeSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+
+        foreach (var typeSubjectId in _referenceTypeBaseSubjectIds.Keys.OrderBy(subjectId => subjectId, StringComparer.Ordinal))
+        {
+            if (seenTypeSubjectIds.Add(typeSubjectId))
+            {
+                yield return typeSubjectId;
+            }
+        }
+
+        foreach (var typeSubjectId in _referenceTypeImplementedInterfaceSubjectIds.Keys.OrderBy(subjectId => subjectId, StringComparer.Ordinal))
+        {
+            if (seenTypeSubjectIds.Add(typeSubjectId))
+            {
+                yield return typeSubjectId;
+            }
+        }
+
+        foreach (var typeSubjectId in _methodsBySubjectId.Values
+                     .Select(method => method.Identity.DeclaringTypeSubjectId)
+                     .Where(subjectId => !string.IsNullOrWhiteSpace(subjectId))
+                     .OrderBy(subjectId => subjectId, StringComparer.Ordinal))
+        {
+            if (seenTypeSubjectIds.Add(typeSubjectId))
+            {
+                yield return typeSubjectId;
+            }
+        }
+    }
+
+    private AotCoreIrMethodArtifact? TryResolveVirtualDispatchImplementationMethod(
+        string candidateTypeSubjectId,
+        string slotDeclaringTypeSubjectId,
+        string slotDeclaringTypeDefinitionSubjectId,
+        string slotSignatureSuffix)
+    {
+        if (!IsTypeCompatibleWithSlot(
+                candidateTypeSubjectId,
+                candidateTypeSubjectId,
+                slotDeclaringTypeSubjectId,
+                slotDeclaringTypeDefinitionSubjectId))
+        {
+            return null;
+        }
+
+        var currentTypeSubjectId = candidateTypeSubjectId;
+        var currentTypeDefinitionSubjectId = candidateTypeSubjectId;
+        while (!string.IsNullOrWhiteSpace(currentTypeSubjectId))
+        {
+            if (TryResolveVirtualDispatchImplementationMethodOnType(
+                    currentTypeSubjectId,
+                    slotSignatureSuffix,
+                    out var implementationMethod))
+            {
+                return implementationMethod;
+            }
+
+            if (!TryGetBaseTypeSubjectId(
+                    currentTypeSubjectId,
+                    currentTypeDefinitionSubjectId,
+                    out var baseTypeSubjectId) ||
+                string.IsNullOrWhiteSpace(baseTypeSubjectId))
+            {
+                break;
+            }
+
+            currentTypeSubjectId = baseTypeSubjectId;
+            currentTypeDefinitionSubjectId = baseTypeSubjectId;
+        }
+
+        return null;
+    }
+
+    private bool TryResolveVirtualDispatchImplementationMethodOnType(
+        string declaringTypeSubjectId,
+        string slotSignatureSuffix,
+        out AotCoreIrMethodArtifact? implementationMethod)
+    {
+        implementationMethod = _methodsBySubjectId.Values
             .Where(method =>
                 !method.IsStatic &&
                 CanEmitMethodBody(method) &&
-                string.Equals(GetMethodSignatureSuffix(method.SubjectId), slotSignatureSuffix, StringComparison.Ordinal) &&
-                IsTypeCompatibleWithSlot(
-                    method.Identity.DeclaringTypeSubjectId,
-                    GetDeclaringTypeSubjectId(method.Identity.DefinitionSubjectId),
-                    slotDeclaringTypeSubjectId,
-                    slotDeclaringTypeDefinitionSubjectId))
+                string.Equals(method.Identity.DeclaringTypeSubjectId, declaringTypeSubjectId, StringComparison.Ordinal) &&
+                string.Equals(GetMethodSignatureSuffix(method.SubjectId), slotSignatureSuffix, StringComparison.Ordinal))
             .OrderBy(method => method.SubjectId, StringComparer.Ordinal)
-            .ToArray();
+            .FirstOrDefault();
+        return implementationMethod is not null;
     }
 
     private AotCoreIrMethodArtifact ResolveRequiredDispatchSlotMethod(AotCoreIrInstructionArtifact instruction)
@@ -357,7 +531,11 @@ public sealed partial class NativeAotLoweringPlanner
             GetRequiredTargetSymbol(instruction),
             CreateLegacyAbiParameterSlots(GetRequiredTargetParameterCount(instruction)),
             CreateLegacyReturnAbiSlot(instruction.TargetReturnType),
-            EmptyRawArgumentIndices);
+            EmptyRawArgumentIndices,
+            instruction.TargetReference?.OpenDefinitionSubjectId,
+            instruction.TargetReference?.SharedGenericBodyId,
+            instruction.TargetReference?.InstantiationStubId,
+            instruction.TargetReference?.RuntimeGenericContext);
     }
 
     private InvocationTarget? TryResolveDirectInvocationTarget(string? callee)
@@ -379,10 +557,14 @@ public sealed partial class NativeAotLoweringPlanner
         if (TryGetLowerableMethod(callee) is { } lowerableMethod)
         {
             return new InvocationTarget(
-                lowerableMethod.NativeSymbol,
+                TryGetInstantiationStubSymbol(lowerableMethod) ?? lowerableMethod.NativeSymbol,
                 GetMethodAbiParameterSlots(lowerableMethod),
                 lowerableMethod.ReturnAbi,
-                EmptyRawArgumentIndices);
+                EmptyRawArgumentIndices,
+                lowerableMethod.OpenDefinitionSubjectId,
+                lowerableMethod.SharedGenericBodyId,
+                lowerableMethod.InstantiationStubId,
+                lowerableMethod.RuntimeGenericContext);
         }
 
         return null;

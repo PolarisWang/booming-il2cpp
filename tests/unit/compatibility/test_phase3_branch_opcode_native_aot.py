@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -123,16 +125,22 @@ class Phase3BranchOpcodeNativeAotTests(unittest.TestCase):
 
         aot_core_ir = load_json(self.output_root / "aot-core-ir.json")
         methods = {method["subjectId"]: method for method in aot_core_ir["methods"]}
-        run_ops = [instruction["op"] for instruction in methods["CoreRuntimeFeatures/BranchOpsProofEntry::Run()"]["instructions"]]
+        run_ops = [
+            instruction["op"]
+            for instruction in find_method_by_subject_id(
+                methods,
+                "CoreRuntimeFeatures/BranchOpsProofEntry::Run()",
+            )["instructions"]
+        ]
 
         self.assertNotIn("ldstr", run_ops)
-        self.assertIn("bne.un", [instruction["op"] for instruction in methods["CoreRuntimeFeatures/BranchOpsProofEntry::EqualBranch(System.Int32,System.Int32)"]["instructions"]])
-        self.assertIn("beq", [instruction["op"] for instruction in methods["CoreRuntimeFeatures/BranchOpsProofEntry::NotEqualBranch(System.Int32,System.Int32)"]["instructions"]])
-        self.assertIn("bge", [instruction["op"] for instruction in methods["CoreRuntimeFeatures/BranchOpsProofEntry::LessThanBranch(System.Int32,System.Int32)"]["instructions"]])
-        self.assertIn("ble", [instruction["op"] for instruction in methods["CoreRuntimeFeatures/BranchOpsProofEntry::GreaterThanBranch(System.Int32,System.Int32)"]["instructions"]])
-        self.assertIn("bgt", [instruction["op"] for instruction in methods["CoreRuntimeFeatures/BranchOpsProofEntry::LessThanOrEqualBranch(System.Int32,System.Int32)"]["instructions"]])
-        self.assertIn("blt", [instruction["op"] for instruction in methods["CoreRuntimeFeatures/BranchOpsProofEntry::GreaterThanOrEqualBranch(System.Int32,System.Int32)"]["instructions"]])
-        self.assertIn("bge.un", [instruction["op"] for instruction in methods["CoreRuntimeFeatures/BranchOpsProofEntry::UnsignedLessThanBranch(System.UInt32,System.UInt32)"]["instructions"]])
+        self.assertIn("bne.un", [instruction["op"] for instruction in find_method_by_subject_id(methods, "CoreRuntimeFeatures/BranchOpsProofEntry::EqualBranch(System.Int32,System.Int32)")["instructions"]])
+        self.assertIn("beq", [instruction["op"] for instruction in find_method_by_subject_id(methods, "CoreRuntimeFeatures/BranchOpsProofEntry::NotEqualBranch(System.Int32,System.Int32)")["instructions"]])
+        self.assertIn("bge", [instruction["op"] for instruction in find_method_by_subject_id(methods, "CoreRuntimeFeatures/BranchOpsProofEntry::LessThanBranch(System.Int32,System.Int32)")["instructions"]])
+        self.assertIn("ble", [instruction["op"] for instruction in find_method_by_subject_id(methods, "CoreRuntimeFeatures/BranchOpsProofEntry::GreaterThanBranch(System.Int32,System.Int32)")["instructions"]])
+        self.assertIn("bgt", [instruction["op"] for instruction in find_method_by_subject_id(methods, "CoreRuntimeFeatures/BranchOpsProofEntry::LessThanOrEqualBranch(System.Int32,System.Int32)")["instructions"]])
+        self.assertIn("blt", [instruction["op"] for instruction in find_method_by_subject_id(methods, "CoreRuntimeFeatures/BranchOpsProofEntry::GreaterThanOrEqualBranch(System.Int32,System.Int32)")["instructions"]])
+        self.assertIn("bge.un", [instruction["op"] for instruction in find_method_by_subject_id(methods, "CoreRuntimeFeatures/BranchOpsProofEntry::UnsignedLessThanBranch(System.UInt32,System.UInt32)")["instructions"]])
 
     def test_emit_native_aot_succeeds_for_branch_proof(self) -> None:
         self._ensure_native_emitted()

@@ -112,7 +112,7 @@ class Phase3LinkerPreserveContractNativeAotTests(unittest.TestCase):
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
         self.assertIn("// Managed method: CoreRuntimeFeatures/LinkerPreserveContractProofEntry::Run()", generated_cpp)
         self.assertIn(
-            "chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__IsDefined_System_Type_System_Boolean_",
+            "chaos_external_runtime_System_Private_CoreLib_System_Reflection_MemberInfo__IsDefined",
             generated_cpp,
         )
 

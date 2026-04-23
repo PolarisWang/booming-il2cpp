@@ -80,6 +80,41 @@ public static class ManagedNaming
             : methodName;
     }
 
+    public static bool MatchesMethodSubjectId(string candidateSubjectId, string requestedSubjectId)
+    {
+        if (string.Equals(candidateSubjectId, requestedSubjectId, StringComparison.Ordinal))
+        {
+            return true;
+        }
+
+        if (!TryParseMethodSubjectIdComponents(candidateSubjectId, out var candidateDeclaringTypeSubjectId, out var candidateMethodName, out var candidateReturnType, out var candidateParameterSignature) ||
+            !TryParseMethodSubjectIdComponents(requestedSubjectId, out var requestedDeclaringTypeSubjectId, out var requestedMethodName, out var requestedReturnType, out var requestedParameterSignature))
+        {
+            return false;
+        }
+
+        if (!string.Equals(candidateDeclaringTypeSubjectId, requestedDeclaringTypeSubjectId, StringComparison.Ordinal) ||
+            !string.Equals(candidateMethodName, requestedMethodName, StringComparison.Ordinal) ||
+            !string.Equals(candidateParameterSignature, requestedParameterSignature, StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        return string.IsNullOrWhiteSpace(candidateReturnType) ||
+               string.IsNullOrWhiteSpace(requestedReturnType) ||
+               string.Equals(candidateReturnType, requestedReturnType, StringComparison.Ordinal);
+    }
+
+    public static string GetMethodSubjectIdDisplayString(string subjectId)
+    {
+        if (!TryParseMethodSubjectIdComponents(subjectId, out var declaringTypeSubjectId, out var methodName, out _, out var parameterSignature))
+        {
+            return subjectId;
+        }
+
+        return $"{declaringTypeSubjectId}::{methodName}({parameterSignature})";
+    }
+
     public static string CreateMethodId(ManagedMethodModel method)
     {
         ArgumentNullException.ThrowIfNull(method);
@@ -109,6 +144,13 @@ public static class ManagedNaming
                 ToSymbolPart(method.DeclaringTypeDisplayName),
                 ToSymbolPart(method.Name),
             ]);
+    }
+
+    public static string CreateInstantiationStubSymbol(InstantiationStubId instantiationStubId)
+    {
+        ArgumentNullException.ThrowIfNull(instantiationStubId);
+
+        return $"chaos_{ToSymbolPart(instantiationStubId.Value)}";
     }
 
     public static string NormalizePathForManifest(string path, string baseDirectory)
@@ -149,7 +191,119 @@ public static class ManagedNaming
         return builder.ToString();
     }
 
-    public static GenericContextArtifact? TryCreateGenericContext(string subjectId, string definitionSubjectId)
+    public static GenericInstantiationKey? TryCreateGenericInstantiationKey(string subjectId, string definitionSubjectId)
+    {
+        return TryParseGenericInstantiation(subjectId, definitionSubjectId, out var parsed)
+            ? parsed.InstantiationKey
+            : null;
+    }
+
+    public static GenericDiagnosticArtifact? TryCreateGenericDiagnosticArtifact(string subjectId, string definitionSubjectId)
+    {
+        if (!TryParseGenericInstantiation(subjectId, definitionSubjectId, out var parsed))
+        {
+            return null;
+        }
+
+        return new GenericDiagnosticArtifact
+        {
+            SubjectId = subjectId,
+            DefinitionSubjectId = definitionSubjectId,
+            DisplaySubjectId = parsed.DisplaySubjectId,
+            InstantiationKey = parsed.InstantiationKey,
+        };
+    }
+
+    public static SharedGenericBodyId CreateSharedGenericBodyId(GenericInstantiationKey instantiationKey)
+    {
+        ArgumentNullException.ThrowIfNull(instantiationKey);
+
+        return new SharedGenericBodyId
+        {
+            Value = $"body:{CreateGenericKernelIdentityValue(instantiationKey)}",
+        };
+    }
+
+    public static InstantiationStubId CreateInstantiationStubId(GenericInstantiationKey instantiationKey)
+    {
+        ArgumentNullException.ThrowIfNull(instantiationKey);
+
+        return new InstantiationStubId
+        {
+            Value = $"stub:{CreateGenericKernelIdentityValue(instantiationKey)}",
+        };
+    }
+
+    private static string GetTypeIdentityPart(string assemblyName, string? namespaceName, string typeName)
+    {
+        return string.Equals(namespaceName, assemblyName, StringComparison.Ordinal) || string.IsNullOrEmpty(namespaceName)
+            ? typeName
+            : $"{namespaceName}.{typeName}";
+    }
+
+    private static bool LooksLikeMethodSubjectId(string subjectId)
+    {
+        return subjectId.Contains("::", StringComparison.Ordinal) &&
+               subjectId.EndsWith(")", StringComparison.Ordinal);
+    }
+
+    private static bool TryParseMethodSubjectIdComponents(
+        string subjectId,
+        out string declaringTypeSubjectId,
+        out string methodName,
+        out string? returnType,
+        out string parameterSignature)
+    {
+        declaringTypeSubjectId = string.Empty;
+        methodName = string.Empty;
+        returnType = null;
+        parameterSignature = string.Empty;
+
+        var separatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
+        var parameterListIndex = subjectId.LastIndexOf('(');
+        if (separatorIndex <= 0 ||
+            parameterListIndex <= separatorIndex + 2 ||
+            !subjectId.EndsWith(")", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var returnTypeSeparatorIndex = subjectId.LastIndexOf(':', parameterListIndex);
+        var hasReturnType = returnTypeSeparatorIndex > separatorIndex + 1;
+        var methodNameEndIndex = hasReturnType
+            ? returnTypeSeparatorIndex
+            : parameterListIndex;
+        if (methodNameEndIndex <= separatorIndex + 2)
+        {
+            return false;
+        }
+
+        declaringTypeSubjectId = subjectId[..separatorIndex];
+        methodName = subjectId[(separatorIndex + 2)..methodNameEndIndex];
+        if (hasReturnType)
+        {
+            returnType = subjectId[(returnTypeSeparatorIndex + 1)..parameterListIndex];
+        }
+
+        parameterSignature = subjectId[(parameterListIndex + 1)..^1];
+        return true;
+    }
+
+    private static string GetDeclaringTypeSubjectId(string subjectId)
+    {
+        var separatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
+        if (separatorIndex <= 0)
+        {
+            throw new InvalidOperationException($"subject id '{subjectId}' is missing declaring type information.");
+        }
+
+        return subjectId[..separatorIndex];
+    }
+
+    private static bool TryParseGenericInstantiation(
+        string subjectId,
+        string definitionSubjectId,
+        out ParsedGenericInstantiation parsed)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
         ArgumentException.ThrowIfNullOrWhiteSpace(definitionSubjectId);
@@ -177,44 +331,26 @@ public static class ManagedNaming
         var hasMethodArguments = methodArguments.Count > 0;
         if (!hasTypeArguments && !hasMethodArguments)
         {
-            return null;
+            parsed = default;
+            return false;
         }
 
-        return new GenericContextArtifact
-        {
-            ContextKind = hasTypeArguments && hasMethodArguments
-                ? GenericContextKind.TypeAndMethodInstantiation
-                : hasTypeArguments
-                    ? GenericContextKind.TypeInstantiation
-                    : GenericContextKind.MethodInstantiation,
-            DefinitionSubjectId = definitionSubjectId,
-            TypeArguments = typeArguments,
-            MethodArguments = methodArguments,
-        };
-    }
-
-    private static string GetTypeIdentityPart(string assemblyName, string? namespaceName, string typeName)
-    {
-        return string.Equals(namespaceName, assemblyName, StringComparison.Ordinal) || string.IsNullOrEmpty(namespaceName)
-            ? typeName
-            : $"{namespaceName}.{typeName}";
-    }
-
-    private static bool LooksLikeMethodSubjectId(string subjectId)
-    {
-        return subjectId.Contains("::", StringComparison.Ordinal) &&
-               subjectId.EndsWith(")", StringComparison.Ordinal);
-    }
-
-    private static string GetDeclaringTypeSubjectId(string subjectId)
-    {
-        var separatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
-        if (separatorIndex <= 0)
-        {
-            throw new InvalidOperationException($"subject id '{subjectId}' is missing declaring type information.");
-        }
-
-        return subjectId[..separatorIndex];
+        parsed = new ParsedGenericInstantiation(
+            new GenericInstantiationKey
+            {
+                ContextKind = hasTypeArguments && hasMethodArguments
+                    ? GenericContextKind.TypeAndMethodInstantiation
+                    : hasTypeArguments
+                        ? GenericContextKind.TypeInstantiation
+                        : GenericContextKind.MethodInstantiation,
+                DefinitionSubjectId = definitionSubjectId,
+                TypeArguments = typeArguments,
+                MethodArguments = methodArguments,
+            },
+            LooksLikeMethodSubjectId(subjectId)
+                ? GetMethodSubjectIdDisplayString(subjectId)
+                : subjectId);
+        return true;
     }
 
     private static IReadOnlyList<string> TryExtractTypeArguments(string subjectId, string definitionSubjectId)
@@ -310,6 +446,21 @@ public static class ManagedNaming
         return arguments;
     }
 
+    private static string CreateGenericKernelIdentityValue(GenericInstantiationKey instantiationKey)
+    {
+        return $"definition={instantiationKey.DefinitionSubjectId};type={FormatGenericArgumentList(instantiationKey.TypeArguments)};method={FormatGenericArgumentList(instantiationKey.MethodArguments)}";
+    }
+
+    private static string FormatGenericArgumentList(IReadOnlyList<string>? arguments)
+    {
+        if (arguments is not { Count: > 0 })
+        {
+            return "[]";
+        }
+
+        return $"[{string.Join(",", arguments)}]";
+    }
+
     private static string ToKebabCase(string value)
     {
         var builder = new System.Text.StringBuilder();
@@ -354,4 +505,8 @@ public static class ManagedNaming
 
         return builder.ToString().Trim('_');
     }
+
+    private readonly record struct ParsedGenericInstantiation(
+        GenericInstantiationKey InstantiationKey,
+        string DisplaySubjectId);
 }

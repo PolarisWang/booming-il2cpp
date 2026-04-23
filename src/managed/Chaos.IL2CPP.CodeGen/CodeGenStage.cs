@@ -53,6 +53,17 @@ public sealed class CodeGenStage
                 .ToList(),
         };
         var aotCoreIr = new AotCoreIrLowering().Create(linkedWorld, typedIl, codeRegistration);
+        var genericInstantiationDemandGraph = linkedWorld.GenericInstantiationDemandGraph
+            ?? new GenericInstantiationDemandGraphModel
+            {
+                Demands = [],
+            };
+        var genericCapabilityMatrix = new GenericCapabilityMatrixBuilder().Build(
+            ResolveOwnerSubjectId(request.InputAssemblyPath, linkedWorld.Assembly.Name),
+            linkedWorld.EntryPointSubjectId,
+            genericInstantiationDemandGraph,
+            aotCoreIr,
+            metadataWriterOutput.SupplementalMetadataTemplate);
         NativeReferenceLoweringPlanArtifact nativeReferenceLoweringPlan;
         if (linkedWorld.FullAssemblyClosure && string.IsNullOrWhiteSpace(linkedWorld.EntryPointSubjectId))
         {
@@ -100,6 +111,8 @@ public sealed class CodeGenStage
                 new ManagedClosureArtifactRef { Kind = "metadataRegistration", Path = ManagedClosureArtifactNames.MetadataRegistration },
                 new ManagedClosureArtifactRef { Kind = "supplementalMetadataTemplate", Path = ManagedClosureArtifactNames.SupplementalMetadataTemplate },
                 new ManagedClosureArtifactRef { Kind = "codeRegistration", Path = ManagedClosureArtifactNames.CodeRegistration },
+                new ManagedClosureArtifactRef { Kind = "genericInstantiationDemandGraph", Path = ManagedClosureArtifactNames.GenericInstantiationDemandGraph },
+                new ManagedClosureArtifactRef { Kind = "genericCapabilityMatrix", Path = ManagedClosureArtifactNames.GenericCapabilityMatrix },
                 new ManagedClosureArtifactRef { Kind = "optimizationFacts", Path = ManagedClosureArtifactNames.OptimizationFacts },
                 new ManagedClosureArtifactRef { Kind = "preserveDescriptor", Path = ManagedClosureArtifactNames.PreserveDescriptor },
                 new ManagedClosureArtifactRef { Kind = "nativeReferenceLoweringPlan", Path = ManagedClosureArtifactNames.NativeReferenceLoweringPlan },
@@ -116,12 +129,33 @@ public sealed class CodeGenStage
             MetadataRegistration = metadataWriterOutput.MetadataRegistration,
             SupplementalMetadataTemplate = metadataWriterOutput.SupplementalMetadataTemplate,
             CodeRegistration = codeRegistration,
+            GenericInstantiationDemandGraph = genericInstantiationDemandGraph,
+            GenericCapabilityMatrix = genericCapabilityMatrix,
             OptimizationFacts = linkedWorld.OptimizationFacts,
             PreserveDescriptor = linkedWorld.PreserveDescriptor,
             NativeReferenceLoweringPlan = nativeReferenceLoweringPlan,
             NativeAotLoweringPlan = nativeAotLoweringPlan,
             ClosureManifest = closureManifest,
         };
+    }
+
+    private static string ResolveOwnerSubjectId(string inputAssemblyPath, string fallbackOwnerSubjectId)
+    {
+        if (!string.IsNullOrWhiteSpace(inputAssemblyPath))
+        {
+            var normalizedPath = inputAssemblyPath
+                .Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar)
+                .Split(Path.DirectorySeparatorChar, StringSplitOptions.RemoveEmptyEntries);
+            for (var index = 0; index < normalizedPath.Length - 1; index++)
+            {
+                if (string.Equals(normalizedPath[index], "subjects", StringComparison.OrdinalIgnoreCase))
+                {
+                    return normalizedPath[index + 1];
+                }
+            }
+        }
+
+        return fallbackOwnerSubjectId;
     }
 
     private static bool ShouldFallbackToGenericLoweringPlan(LinkedWorldModel linkedWorld)
@@ -202,7 +236,7 @@ public sealed class CodeGenStage
             TranslationUnitPageCount = GetAuditPageCount(methodSubjectIds.Count),
             TranslationUnitPages = BuildAuditTranslationUnitPages(methodSubjectIds, "generated/runtime/native-reference.runtime-skeleton"),
             AuditStatus = "runtime-skeleton",
-            AuditMessage = "assembly-bound full-closure native-reference runtime skeleton is emitted; executable per-method translation remains unimplemented",
+            AuditMessage = "assembly-bound full-closure native-reference runtime skeleton emits covered executable methods only; uncovered methods are reported separately",
             ReferenceTypeToken = "0u",
             CapturedFieldToken = "0u",
             EntryMethodToken = "0u",
@@ -274,7 +308,7 @@ public sealed class CodeGenStage
             TranslationUnitMethodCount = methodSubjectIds.Count,
             TranslationUnitPageSize = AuditTranslationUnitPageSize,
             TranslationUnitPageCount = GetAuditPageCount(methodSubjectIds.Count),
-            TranslationUnitPages = BuildAuditTranslationUnitPages(methodSubjectIds, "generated/audit/native-aot.methods"),
+            TranslationUnitPages = BuildAuditTranslationUnitPages(methodSubjectIds, "generated/audit/native-aot.audit", ".json"),
             AuditStatus = "not-yet-emittable",
             AuditMessage = "assembly-bound full-closure native-aot emission is not implemented",
         };
@@ -282,7 +316,8 @@ public sealed class CodeGenStage
 
     private static IReadOnlyList<AuditTranslationUnitPageArtifact> BuildAuditTranslationUnitPages(
         IReadOnlyList<string> methodSubjectIds,
-        string pathPrefix)
+        string pathPrefix,
+        string extension = ".cpp")
     {
         var pages = new List<AuditTranslationUnitPageArtifact>();
         for (var pageIndex = 0; pageIndex * AuditTranslationUnitPageSize < methodSubjectIds.Count; pageIndex++)
@@ -295,7 +330,7 @@ public sealed class CodeGenStage
             {
                 PageNumber = pageIndex + 1,
                 MethodCount = pageItems.Count,
-                Path = $"{pathPrefix}.page-{pageIndex + 1:D4}.cpp",
+                Path = $"{pathPrefix}.page-{pageIndex + 1:D4}{extension}",
                 FirstMethodSubjectId = pageItems.FirstOrDefault(),
                 LastMethodSubjectId = pageItems.LastOrDefault(),
             });
@@ -347,15 +382,7 @@ public sealed class CodeGenStage
             MethodId = ManagedNaming.CreateMethodId(method),
             SubjectId = method.SubjectId,
             Signature = method.Signature,
-            Identity = new ManagedMethodIdentityArtifact
-            {
-                AssemblyName = method.AssemblyName,
-                DeclaringTypeSubjectId = method.DeclaringTypeSubjectId,
-                DefinitionSubjectId = method.DefinitionSubjectId,
-                SubjectId = method.SubjectId,
-                MethodId = ManagedNaming.CreateMethodId(method),
-                Signature = method.Signature,
-            },
+            Identity = ManagedMethodIdentityResolver.Create(method),
             MethodRole = methodShape.MethodRole,
             BodyAvailability = methodShape.BodyAvailability,
             BodyAvailabilityCode = methodShape.BodyAvailabilityCode,

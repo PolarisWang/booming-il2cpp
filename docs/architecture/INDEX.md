@@ -6,9 +6,8 @@
   - 记录当前 runtime baseline 主线的长期架构、contract、gate 和本地验证规则。
 - `subject-test-framework-v1/`
   - 记录 `subject` 测试框架在 Stage A+B+C 落地后的 canonical source、artifact bucket 和 execution spine。
-- `managed-native-hotupdate-test-pipeline.md`
-  - 定义统一测试主线：
-    `managed solution -> collection files -> managed test solution -> native project -> native test solution -> hotupdate verification solution`
+- `verification-v1/`
+  - 记录 graph-first 验证架构、formal schema、closure/claim/evidence 模型、归并归档规则与投影视图入口。
 - `il2cpp-hotupdate-capability-matrix.md`
   - 定义 IL2CPP、热更与 mixed execution 的能力矩阵、support-state 分层与产品化维度。
 - `solution-archetype-matrix.md`

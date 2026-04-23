@@ -177,7 +177,9 @@ class MultiAssemblyEntryOverrideTests(unittest.TestCase):
         self.assertTrue(app_dll_path.is_file(), msg=f"missing primary assembly: {app_dll_path}")
         self.assertTrue(library_dll_path.is_file(), msg=f"missing secondary assembly: {library_dll_path}")
 
-        entry_subject_id = "Library/Entry::Run()"
+        entry_override_subject_id = "Library/Entry::Run()"
+        canonical_entry_subject_id = "Library/Entry::Run:System.Int32()"
+        canonical_helper_add_subject_id = "Library/Helper::Add:System.Int32(System.Int32,System.Int32)"
         run_checked(
             [
                 "dotnet",
@@ -185,7 +187,7 @@ class MultiAssemblyEntryOverrideTests(unittest.TestCase):
                 str(app_dll_path),
                 str(analysis_root),
                 "--entry-point-subject-id",
-                entry_subject_id,
+                entry_override_subject_id,
                 "--additional-assembly",
                 str(library_dll_path),
             ],
@@ -193,7 +195,7 @@ class MultiAssemblyEntryOverrideTests(unittest.TestCase):
         )
 
         closure_manifest = load_json(analysis_root / "closure.manifest.json")
-        self.assertEqual(entry_subject_id, closure_manifest["entrySubjectId"])
+        self.assertEqual(canonical_entry_subject_id, closure_manifest["entrySubjectId"])
         self.assertEqual(
             str(app_dll_path.relative_to(REPO_ROOT)).replace("\\", "/"),
             closure_manifest["inputAssemblyPath"],
@@ -205,14 +207,14 @@ class MultiAssemblyEntryOverrideTests(unittest.TestCase):
 
         typed_il = load_json(analysis_root / "typed-il-ir.json")
         self.assertIn(
-            entry_subject_id,
+            canonical_entry_subject_id,
             {method["subjectId"] for method in typed_il["methods"]},
         )
         aot_core_ir = load_json(analysis_root / "aot-core-ir.json")
         entry_method = next(
             method
             for method in aot_core_ir["methods"]
-            if method["subjectId"] == entry_subject_id
+            if method["subjectId"] == canonical_entry_subject_id
         )
         call_instruction = next(
             instruction
@@ -222,7 +224,7 @@ class MultiAssemblyEntryOverrideTests(unittest.TestCase):
         self.assertEqual("Library", call_instruction["reference"]["assemblyName"])
         self.assertEqual("method", call_instruction["reference"]["subjectKind"])
         self.assertEqual(
-            "Library/Helper::Add(System.Int32,System.Int32)",
+            canonical_helper_add_subject_id,
             call_instruction["reference"]["subjectId"],
         )
         code_registration = load_json(analysis_root / "code-registration.json")
@@ -230,7 +232,7 @@ class MultiAssemblyEntryOverrideTests(unittest.TestCase):
             registration["symbol"]
             for module in code_registration["modules"]
             for registration in module["registrations"]
-            if registration["subjectId"] == "Library/Helper::Add(System.Int32,System.Int32)"
+            if registration["subjectId"] == canonical_helper_add_subject_id
         )
 
         run_checked(
@@ -245,7 +247,7 @@ class MultiAssemblyEntryOverrideTests(unittest.TestCase):
         )
 
         native_aot_manifest = load_json(generated_root / "native-aot.manifest.json")
-        self.assertEqual(entry_subject_id, native_aot_manifest["entrySubjectId"])
+        self.assertEqual(canonical_entry_subject_id, native_aot_manifest["entrySubjectId"])
         generated_cpp_path = generated_root / "generated" / "native-aot.generated.cpp"
         self.assertTrue(generated_cpp_path.is_file(), msg="missing native-aot generated source")
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")

@@ -112,23 +112,23 @@ class Phase3LoaderContractNativeAotTests(unittest.TestCase):
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
         self.assertIn("// Managed method: CoreRuntimeFeatures/LoaderContractProofEntry::Run()", generated_cpp)
         self.assertIn(
-            "chaos_external_runtime_System_Private_CoreLib_System_Type__get_Assembly__",
+            "chaos_external_runtime_System_Private_CoreLib_System_Type__get_Assembly",
             generated_cpp,
         )
         self.assertIn(
-            "chaos_external_runtime_System_Private_CoreLib_System_Reflection_Assembly__GetType_System_String_",
+            "chaos_external_runtime_System_Private_CoreLib_System_Reflection_Assembly__GetType",
             generated_cpp,
         )
         self.assertIn(
-            "chaos_external_runtime_System_Private_CoreLib_System_Type__GetType_System_String_",
+            "chaos_external_runtime_System_Private_CoreLib_System_Type__GetType",
             generated_cpp,
         )
         self.assertIn(
-            "chaos_external_runtime_System_Private_CoreLib_System_Reflection_Assembly__GetName__",
+            "chaos_external_runtime_System_Private_CoreLib_System_Reflection_Assembly__GetName",
             generated_cpp,
         )
         self.assertIn(
-            "chaos_external_runtime_System_Private_CoreLib_System_Reflection_AssemblyName__get_Name__",
+            "chaos_external_runtime_System_Private_CoreLib_System_Reflection_AssemblyName__get_Name",
             generated_cpp,
         )
 

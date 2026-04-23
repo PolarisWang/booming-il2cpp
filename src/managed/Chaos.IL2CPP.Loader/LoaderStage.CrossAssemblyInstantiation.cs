@@ -9,43 +9,58 @@ namespace Chaos.IL2CPP.Loader;
 
 public sealed partial class LoaderStage
 {
-    private static List<LoadedAssemblyModel> MaterializeCrossAssemblyMethodInstantiations(
+    private static List<LoadedAssemblyModel> ProjectCrossAssemblyMethodInstantiations(
         IReadOnlyList<string> assemblyPaths,
         IReadOnlyList<LoadedAssemblyModel> loadedAssemblies)
     {
+        var genericInstantiationDemandEntriesByAssembly = loadedAssemblies.ToDictionary(
+            assembly => assembly.Assembly.Name,
+            _ => new Dictionary<string, GenericInstantiationDemandModel>(StringComparer.Ordinal),
+            StringComparer.Ordinal);
         var definitionMethodsByAssembly = loadedAssemblies.ToDictionary(
             assembly => assembly.Assembly.Name,
             assembly => (IReadOnlyDictionary<string, ManagedMethodModel>)assembly.Methods
                 .ToDictionary(method => method.SubjectId, StringComparer.Ordinal),
             StringComparer.Ordinal);
-        var materializedMethodsByAssembly = loadedAssemblies.ToDictionary(
+        var projectedMethodsByAssembly = loadedAssemblies.ToDictionary(
             assembly => assembly.Assembly.Name,
             assembly => assembly.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal),
             StringComparer.Ordinal);
 
         foreach (var assemblyPath in assemblyPaths)
         {
-            CollectCrossAssemblyMethodInstantiations(
+            CollectProjectedCrossAssemblyMethodInstantiations(
                 assemblyPath,
                 definitionMethodsByAssembly,
-                materializedMethodsByAssembly);
+                projectedMethodsByAssembly,
+                genericInstantiationDemandEntriesByAssembly);
         }
 
         return loadedAssemblies
-            .Select(assembly => assembly with
+            .Select(assembly =>
             {
-                Methods = materializedMethodsByAssembly[assembly.Assembly.Name].Values
+                var mergedDemandGraph = MergeGenericInstantiationDemandGraphs(
+                    assembly.GenericInstantiationDemandGraph,
+                    BuildGenericInstantiationDemandGraph(genericInstantiationDemandEntriesByAssembly[assembly.Assembly.Name]));
+                var projectedMethods = projectedMethodsByAssembly[assembly.Assembly.Name].Values
                     .OrderBy(model => model.MetadataToken)
                     .ThenBy(model => model.SubjectId, StringComparer.Ordinal)
-                    .ToList(),
+                    .ToList();
+
+                return assembly with
+                {
+                    Methods = ApplyDemandDerivedRuntimeGenericContexts(projectedMethods, mergedDemandGraph),
+                    GenericInstantiationDemandGraph = mergedDemandGraph,
+                };
             })
             .ToList();
     }
 
-    private static void CollectCrossAssemblyMethodInstantiations(
+    private static void CollectProjectedCrossAssemblyMethodInstantiations(
         string assemblyPath,
         IReadOnlyDictionary<string, IReadOnlyDictionary<string, ManagedMethodModel>> definitionMethodsByAssembly,
-        IReadOnlyDictionary<string, Dictionary<string, ManagedMethodModel>> materializedMethodsByAssembly)
+        IReadOnlyDictionary<string, Dictionary<string, ManagedMethodModel>> projectedMethodsByAssembly,
+        IReadOnlyDictionary<string, Dictionary<string, GenericInstantiationDemandModel>> genericInstantiationDemandEntriesByAssembly)
     {
         using var stream = File.OpenRead(assemblyPath);
         using var peReader = new PEReader(stream);
@@ -63,17 +78,19 @@ public sealed partial class LoaderStage
                 continue;
             }
 
-            TryMaterializeCrossAssemblyMethod(
+            TryProjectCrossAssemblyMethodInstantiation(
                 assemblyName,
                 DescribeMemberReferenceMethod(metadataReader, typeResolver, memberReferenceHandle),
                 definitionMethodsByAssembly,
-                materializedMethodsByAssembly);
+                projectedMethodsByAssembly,
+                genericInstantiationDemandEntriesByAssembly,
+                demandSourceKind: "memberReference");
         }
 
         for (var rowNumber = 1; rowNumber <= metadataReader.GetTableRowCount(TableIndex.MethodSpec); rowNumber++)
         {
             var methodSpecificationHandle = MetadataTokens.MethodSpecificationHandle(rowNumber);
-            TryMaterializeCrossAssemblyMethod(
+            TryProjectCrossAssemblyMethodInstantiation(
                 assemblyName,
                 DescribeMethodSpecification(
                     metadataReader,
@@ -82,29 +99,39 @@ public sealed partial class LoaderStage
                     ownerIndex.MethodOwners,
                     methodSpecificationHandle),
                 definitionMethodsByAssembly,
-                materializedMethodsByAssembly);
+                projectedMethodsByAssembly,
+                genericInstantiationDemandEntriesByAssembly,
+                demandSourceKind: "methodSpec");
         }
     }
 
-    private static void TryMaterializeCrossAssemblyMethod(
+    private static void TryProjectCrossAssemblyMethodInstantiation(
         string sourceAssemblyName,
         MethodReferenceSummary methodReference,
         IReadOnlyDictionary<string, IReadOnlyDictionary<string, ManagedMethodModel>> definitionMethodsByAssembly,
-        IReadOnlyDictionary<string, Dictionary<string, ManagedMethodModel>> materializedMethodsByAssembly)
+        IReadOnlyDictionary<string, Dictionary<string, ManagedMethodModel>> projectedMethodsByAssembly,
+        IReadOnlyDictionary<string, Dictionary<string, GenericInstantiationDemandModel>> genericInstantiationDemandEntriesByAssembly,
+        string demandSourceKind)
     {
         if (string.Equals(methodReference.AssemblyName, sourceAssemblyName, StringComparison.Ordinal) ||
             !definitionMethodsByAssembly.TryGetValue(methodReference.AssemblyName, out var targetDefinitionMethods) ||
-            !materializedMethodsByAssembly.TryGetValue(methodReference.AssemblyName, out var targetMaterializedMethods))
+            !projectedMethodsByAssembly.TryGetValue(methodReference.AssemblyName, out var targetProjectedMethods) ||
+            !genericInstantiationDemandEntriesByAssembly.TryGetValue(methodReference.AssemblyName, out var targetDemandEntries))
         {
             return;
         }
 
-        TryMaterializeMethod(
+        TrackMethodInstantiationDemand(
+            genericInstantiationDemandEntries: targetDemandEntries,
+            requestingAssemblyName: sourceAssemblyName,
+            methodReference: methodReference,
+            demandSourceKind: demandSourceKind);
+        ProjectInstantiationMethod(
             methodReference.AssemblyName,
             methodReference,
             targetDefinitionMethods,
             EmptyFieldBindings,
-            targetMaterializedMethods);
+            targetProjectedMethods);
     }
 
     private static LoadedAssemblyModel ResolveEntryAssembly(

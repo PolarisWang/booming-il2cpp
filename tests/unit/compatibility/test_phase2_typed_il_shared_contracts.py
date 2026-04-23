@@ -3,16 +3,17 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
+from tests.support import read_contracts_source
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
 SEMANTIC_WORLD_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.SemanticWorld" / "SemanticWorldStage.cs"
 CODEGEN_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "CodeGenStage.cs"
 
 
 class Phase2TypedIlSharedContractTests(unittest.TestCase):
     def test_contracts_define_shared_method_identity_body_availability_and_dispatch_enums(self) -> None:
-        contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")
+        contracts_source = read_contracts_source(REPO_ROOT)
 
         for required_fragment in [
             "record ManagedMethodIdentityArtifact",
@@ -40,7 +41,7 @@ class Phase2TypedIlSharedContractTests(unittest.TestCase):
             self.assertIn(required_fragment, semantic_world_source)
 
         for required_fragment in [
-            "Identity = new ManagedMethodIdentityArtifact",
+            "Identity = ManagedMethodIdentityResolver.Create(method)",
             "BodyAvailabilityCode =",
             "DispatchKindCode =",
             "HybridDispatchResolver.ResolveInstruction(",

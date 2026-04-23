@@ -15,6 +15,8 @@ public static class ManagedClosureArtifactNames
     public const string MetadataRegistration = "metadata-registration.json";
     public const string SupplementalMetadataTemplate = "hot-update/supplemental-metadata-template.json";
     public const string CodeRegistration = "code-registration.json";
+    public const string GenericInstantiationDemandGraph = "generic-instantiation-demand-graph.json";
+    public const string GenericCapabilityMatrix = "generic-capability-matrix.json";
     public const string OptimizationFacts = "optimization-facts.json";
     public const string PreserveDescriptor = "preserve-descriptor.json";
     public const string NativeReferenceLoweringPlan = "native-reference.lowering-plan.json";

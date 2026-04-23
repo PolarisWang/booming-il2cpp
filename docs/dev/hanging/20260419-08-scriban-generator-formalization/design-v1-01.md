@@ -1,169 +1,127 @@
-# Scriban Generator Formalization Design v1.01
+﻿# Scriban Generator Formalization Design v1.01
 
 Date: 2026-04-19 22:45:00 +08:00
 Status: draft
 
-## 1. 设计结论
+## 1. 璁捐缁撹
 
-把现有 `src/managed/Chaos.IL2CPP.CodeGen/` 原地重命名为 `src/managed/Chaos.IL2CPP.Generator/`，并保持 `third_party/scriban/src/Scriban/Scriban.csproj` 作为唯一第三方模板引擎入口。
+鎶婄幇鏈?`src/managed/Chaos.IL2CPP.CodeGen/` 鍘熷湴閲嶅懡鍚嶄负 `src/managed/Chaos.IL2CPP.Generator/`锛屽苟淇濇寔 `third_party/scriban/src/Scriban/Scriban.csproj` 浣滀负鍞竴绗笁鏂规ā鏉垮紩鎿庡叆鍙ｃ€?
+杩欎笉鏄柊澧炰竴灞?wrapper锛屼篃涓嶆槸鍐嶉€犱竴涓?generator 瀛愮郴缁燂紱鏈川涓婃槸瀵圭幇鏈夋牳蹇冪敓鎴愬伐绋嬪仛 canonical naming cutover銆?
+## 2. 鍛藉悕鍐崇瓥
 
-这不是新增一层 wrapper，也不是再造一个 generator 子系统；本质上是对现有核心生成工程做 canonical naming cutover。
+### 2.1 Canonical 鍚嶇О
 
-## 2. 命名决策
+- 宸ョ▼鐩綍锛歚src/managed/Chaos.IL2CPP.Generator/`
+- 椤圭洰鏂囦欢锛歚Chaos.IL2CPP.Generator.csproj`
+- namespace锛歚Chaos.IL2CPP.Generator`
+- 涓婃父寮曠敤锛氬叏閮ㄦ敼涓?`Chaos.IL2CPP.Generator`
 
-### 2.1 Canonical 名称
+### 2.2 涓嶉噰绾?`CHaos.IL2CPP.Generator`
 
-- 工程目录：`src/managed/Chaos.IL2CPP.Generator/`
-- 项目文件：`Chaos.IL2CPP.Generator.csproj`
-- namespace：`Chaos.IL2CPP.Generator`
-- 上游引用：全部改为 `Chaos.IL2CPP.Generator`
+涓嶅缓璁噰鐢?`CHaos.IL2CPP.Generator`锛屽師鍥犲涓嬶細
 
-### 2.2 不采纳 `CHaos.IL2CPP.Generator`
-
-不建议采用 `CHaos.IL2CPP.Generator`，原因如下：
-
-- 仓库现有命名统一为 `Chaos.*`。
-- 单项目大小写漂移不会提升表达力，只会增加检索、路径、引用和文档不一致。
-- 若要品牌改写，应作为仓库级别任务处理，而不是借这次 Scriban 正式接入做局部例外。
-
-## 3. Scriban 的正式位置
-
-`Scriban` 在 cutover 后的角色保持不变，但治理地位提升为显式 canonical 规则：
-
-- 仍通过 `ProjectReference` 直接引用 vendored 工程：
-  - `third_party/scriban/src/Scriban/Scriban.csproj`
-- 仍由共享渲染入口统一加载与渲染：
+- 浠撳簱鐜版湁鍛藉悕缁熶竴涓?`Chaos.*`銆?- 鍗曢」鐩ぇ灏忓啓婕傜Щ涓嶄細鎻愬崌琛ㄨ揪鍔涳紝鍙細澧炲姞妫€绱€佽矾寰勩€佸紩鐢ㄥ拰鏂囨。涓嶄竴鑷淬€?- 鑻ヨ鍝佺墝鏀瑰啓锛屽簲浣滀负浠撳簱绾у埆浠诲姟澶勭悊锛岃€屼笉鏄€熻繖娆?Scriban 姝ｅ紡鎺ュ叆鍋氬眬閮ㄤ緥澶栥€?
+## 3. Scriban 鐨勬寮忎綅缃?
+`Scriban` 鍦?cutover 鍚庣殑瑙掕壊淇濇寔涓嶅彉锛屼絾娌荤悊鍦颁綅鎻愬崌涓烘樉寮?canonical 瑙勫垯锛?
+- 浠嶉€氳繃 `ProjectReference` 鐩存帴寮曠敤 vendored 宸ョ▼锛?  - `third_party/scriban/src/Scriban/Scriban.csproj`
+- 浠嶇敱鍏变韩娓叉煋鍏ュ彛缁熶竴鍔犺浇涓庢覆鏌擄細
   - `Templating/ScribanTemplateRenderer.cs`
-- 仍作为文件级结构化文本生成的默认路径：
-  - `.cpp`
+- 浠嶄綔涓烘枃浠剁骇缁撴瀯鍖栨枃鏈敓鎴愮殑榛樿璺緞锛?  - `.cpp`
   - `.h`
   - `.g.cs`
   - `.json`
 
-明确不做：
+鏄庣‘涓嶅仛锛?
+- 涓嶅垏鍒?NuGet 鍖呭紩鐢ㄣ€?- 涓嶅鍒?`Scriban` 婧愮爜鍒?`src/managed/Chaos.IL2CPP.Generator/`銆?- 涓嶄负 `Scriban` 鍐嶅涓€涓粨搴撳唴绉佹湁 fork assembly銆?
+## 4. 鏋舵瀯杈圭晫
 
-- 不切到 NuGet 包引用。
-- 不复制 `Scriban` 源码到 `src/managed/Chaos.IL2CPP.Generator/`。
-- 不为 `Scriban` 再套一个仓库内私有 fork assembly。
-
-## 4. 架构边界
-
-本次变更只处理命名和 canonical 接入，不推翻 2026-04-17 已冻结的结构治理路线。
-
-因此保留以下边界：
-
-- 一个核心生成工程，继续承载：
-  - `CoreIr`
+鏈鍙樻洿鍙鐞嗗懡鍚嶅拰 canonical 鎺ュ叆锛屼笉鎺ㄧ炕 2026-04-17 宸插喕缁撶殑缁撴瀯娌荤悊璺嚎銆?
+鍥犳淇濈暀浠ヤ笅杈圭晫锛?
+- 涓€涓牳蹇冪敓鎴愬伐绋嬶紝缁х画鎵胯浇锛?  - `CoreIr`
   - `Planning`
   - `RuntimeSupport`
   - `Emission`
   - `ReferenceProof`
   - `Templating`
   - `Templates`
-- 不新增并行 managed assembly。
-- 不把 `Scriban` 变成“外围工具层”。
-- 不重新放宽手写 `StringBuilder` 作为主生成面。
-
-## 5. 数据流
-
-cutover 前后，核心生成链不变：
-
+- 涓嶆柊澧炲苟琛?managed assembly銆?- 涓嶆妸 `Scriban` 鍙樻垚鈥滃鍥村伐鍏峰眰鈥濄€?- 涓嶉噸鏂版斁瀹芥墜鍐?`StringBuilder` 浣滀负涓荤敓鎴愰潰銆?
+## 5. 鏁版嵁娴?
+cutover 鍓嶅悗锛屾牳蹇冪敓鎴愰摼涓嶅彉锛?
 `Loader/SemanticWorld/Linker/MetadataWriter -> GeneratorStage -> lowering plans -> NativeReference/NativeAot emitters -> Scriban templates -> generated artifacts`
 
-变化只有 canonical 标识：
-
+鍙樺寲鍙湁 canonical 鏍囪瘑锛?
 - `Chaos.IL2CPP.CodeGen` -> `Chaos.IL2CPP.Generator`
 - `using Chaos.IL2CPP.CodeGen;` -> `using Chaos.IL2CPP.Generator;`
-- 项目路径、测试锚点、authority 文档同步迁移
+- 椤圭洰璺緞銆佹祴璇曢敋鐐广€乤uthority 鏂囨。鍚屾杩佺Щ
 
-## 6. 影响面
-
-### 6.1 必改源码
+## 6. 褰卞搷闈?
+### 6.1 蹇呮敼婧愮爜
 
 - `src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj`
 - `src/managed/Chaos.IL2CPP.Driver/DriverEntry.cs`
 - `src/managed/Chaos.IL2CPP.Pipeline/Chaos.IL2CPP.Pipeline.csproj`
 - `src/managed/Chaos.IL2CPP.Pipeline/PipelinePlan.cs`
-- `src/managed/Chaos.IL2CPP.Generator/**` 下所有 namespace 与相对引用
-
-### 6.2 必改测试
+- `src/managed/Chaos.IL2CPP.Generator/**` 涓嬫墍鏈?namespace 涓庣浉瀵瑰紩鐢?
+### 6.2 蹇呮敼娴嬭瘯
 
 - `tests/unit/run/test_repo_layout.py`
 - `tests/unit/planning/test_project_workspace.py`
-- 直接锚定 `src/managed/Chaos.IL2CPP.CodeGen/**` 的 compatibility tests
+- 鐩存帴閿氬畾 `src/managed/Chaos.IL2CPP.CodeGen/**` 鐨?compatibility tests
 - `tests/support.py`
 
-### 6.3 必改 authority / wiki
+### 6.3 蹇呮敼 authority / wiki
 
-- `docs/architecture/managed-native-hotupdate-test-pipeline.md`
+- `docs/architecture/subject-test-framework-v1/INDEX.md`
+- `docs/architecture/verification-v1/spec.md`
 - `docs/architecture/runtime-baseline/repo-layout.md`
 - `docs/architecture/runtime-baseline/ownership-map.md`
-- `wiki/04-工具与集成/il2cpp-core-structure-and-scriban-governance.md`
+- `wiki/04-宸ュ叿涓庨泦鎴?il2cpp-core-structure-and-scriban-governance.md`
 
-### 6.4 不建议回写的历史文档
+### 6.4 涓嶅缓璁洖鍐欑殑鍘嗗彶鏂囨。
 
-不建议大规模修改 `docs/dev/completed/**` 里的历史任务文档。
+涓嶅缓璁ぇ瑙勬ā淇敼 `docs/dev/completed/**` 閲岀殑鍘嗗彶浠诲姟鏂囨。銆?
+鍘熷洜锛?
+- 瀹冧滑璁板綍鐨勬槸褰撴椂鐪熷疄鍙戠敓鐨勪换鍔′笌璺緞銆?- 鍏ㄩ噺鍥炲啓鏀剁泭寰堜綆锛屼笖浼氭ā绯婂巻鍙蹭笂涓嬫枃銆?- 鍙渶瑕佷繚璇佸綋鍓?authority 鏂囨。鍜屾椿鍔ㄤ唬鐮佹爲浣跨敤鏂板悕绉般€?
+## 7. 閿欒澶勭悊涓庨闄?
+### 7.1 椋庨櫓
 
-原因：
+- 鐩綍涓?`.csproj` 鏀瑰悕鍚庯紝娴嬭瘯涓殑纭紪鐮佽矾寰勪細澶ч噺澶辨晥銆?- 鏌愪簺 Python 瑙勫垝閫昏緫鎶?`Chaos.IL2CPP.CodeGen.csproj` 浣滀负 canonical 椤圭洰璺緞锛岃嫢婕忔敼浼氱洿鎺ョ牬鍧?workspace 鏋勯€犮€?- 濡傛灉淇濈暀鏃х洰褰曟垨 wrapper锛屼細璁?cutover 闀挎湡鎮€屾湭鍐炽€?
+### 7.2 搴斿
 
-- 它们记录的是当时真实发生的任务与路径。
-- 全量回写收益很低，且会模糊历史上下文。
-- 只需要保证当前 authority 文档和活动代码树使用新名称。
+- 涓€娆℃€?cutover锛屼笉淇濈暀鍙岃建銆?- 鍏堟敼 source/test/authority doc锛屽啀鍋氶獙璇併€?- 鍘嗗彶鏂囨。涓嶈拷姹傚叏閲忓洖鍐欙紝鍙洿鏂扳€滃綋鍓嶇湡鐩告簮鈥濄€?
+## 8. 楠岃瘉寤鸿
 
-## 7. 错误处理与风险
-
-### 7.1 风险
-
-- 目录与 `.csproj` 改名后，测试中的硬编码路径会大量失效。
-- 某些 Python 规划逻辑把 `Chaos.IL2CPP.CodeGen.csproj` 作为 canonical 项目路径，若漏改会直接破坏 workspace 构造。
-- 如果保留旧目录或 wrapper，会让 cutover 长期悬而未决。
-
-### 7.2 应对
-
-- 一次性 cutover，不保留双轨。
-- 先改 source/test/authority doc，再做验证。
-- 历史文档不追求全量回写，只更新“当前真相源”。
-
-## 8. 验证建议
-
-最少验证链：
-
+鏈€灏戦獙璇侀摼锛?
 1. `python -m pytest tests/unit/run/test_repo_layout.py -q`
 2. `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance.py -q`
 3. `python -m pytest tests/unit/compatibility/test_scriban_vendor_build.py -q`
 4. `dotnet build src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj -c Release -m:1`
 
-推荐补一条真实生成链：
-
-5. 任选一个现有 native generation 入口，验证 `Driver -> Generator -> Scriban` 仍然能产出 generated artifacts。
-
-## 9. 实施顺序
+鎺ㄨ崘琛ヤ竴鏉＄湡瀹炵敓鎴愰摼锛?
+5. 浠婚€変竴涓幇鏈?native generation 鍏ュ彛锛岄獙璇?`Driver -> Generator -> Scriban` 浠嶇劧鑳戒骇鍑?generated artifacts銆?
+## 9. 瀹炴柦椤哄簭
 
 ### Step 1
 
-冻结 canonical 名称为 `Chaos.IL2CPP.Generator`。
-
+鍐荤粨 canonical 鍚嶇О涓?`Chaos.IL2CPP.Generator`銆?
 ### Step 2
 
-原地重命名：
+鍘熷湴閲嶅懡鍚嶏細
 
-- 目录
+- 鐩綍
 - `.csproj`
 - namespace
-- 上游 `ProjectReference`
+- 涓婃父 `ProjectReference`
 
 ### Step 3
 
-修正测试与 Python 规划层中的路径/工程名锚点。
-
+淇娴嬭瘯涓?Python 瑙勫垝灞備腑鐨勮矾寰?宸ョ▼鍚嶉敋鐐广€?
 ### Step 4
 
-更新 authority 文档和 wiki，把 `Generator` 设为当前真相源。
-
+鏇存柊 authority 鏂囨。鍜?wiki锛屾妸 `Generator` 璁句负褰撳墠鐪熺浉婧愩€?
 ### Step 5
 
-跑最小验证链并确认没有残留 `CodeGen` 双轨入口。
+璺戞渶灏忛獙璇侀摼骞剁‘璁ゆ病鏈夋畫鐣?`CodeGen` 鍙岃建鍏ュ彛銆?
+## 10. 缁撹
 
-## 10. 结论
-
-如果你的目标是“正式把 Scriban 纳入 IL2CPP 核心层，并把该层命名为 Generator”，那正确操作不是新建一个 `Generator` 工程，而是把现有 `Chaos.IL2CPP.CodeGen` 原地 cutover 成 `Chaos.IL2CPP.Generator`，同时保留 vendored `Scriban` 的直接引用方式。
+濡傛灉浣犵殑鐩爣鏄€滄寮忔妸 Scriban 绾冲叆 IL2CPP 鏍稿績灞傦紝骞舵妸璇ュ眰鍛藉悕涓?Generator鈥濓紝閭ｆ纭搷浣滀笉鏄柊寤轰竴涓?`Generator` 宸ョ▼锛岃€屾槸鎶婄幇鏈?`Chaos.IL2CPP.CodeGen` 鍘熷湴 cutover 鎴?`Chaos.IL2CPP.Generator`锛屽悓鏃朵繚鐣?vendored `Scriban` 鐨勭洿鎺ュ紩鐢ㄦ柟寮忋€?

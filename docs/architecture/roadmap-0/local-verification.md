@@ -1,6 +1,6 @@
 ﻿# Local Verification (Roadmap 0)
 
-> 项目级测试对象、模块验证、整体验证和测试管线的正式知识入口统一位于 [`wiki/06-测试验证/INDEX.md`](../../../wiki/06-%E6%B5%8B%E8%AF%95%E9%AA%8C%E8%AF%81/INDEX.md)。本页只说明 `Roadmap 0` 本地执行入口。
+> 项目级测试对象、模块验证与整体验证的正式知识入口统一位于 [`wiki/06-测试验证/INDEX.md`](../../../wiki/06-%E6%B5%8B%E8%AF%95%E9%AA%8C%E8%AF%81/INDEX.md)。本页只说明 `Roadmap 0` 本地执行入口。
 
 ## 推荐入口
 
@@ -11,7 +11,7 @@
 ./run.ps1 bootstrap --yes --json
 ./run.ps1 prepare workflow roadmap-0 --host windows --json
 ./run.ps1 test workflow roadmap-0-windows --json
-./run.ps1 test pipeline --id pipeline/completion-runtime-core --json
+./run.ps1 test system --id system/runtime-baseline-windows --json
 ./run.ps1 clean --scope workflow-roadmap0-windows --json
 ```
 
@@ -22,7 +22,7 @@
 ./run.sh bootstrap --yes --json
 ./run.sh prepare workflow roadmap-0 --host macos --json
 ./run.sh test workflow roadmap-0-macos --json
-./run.sh test pipeline --id pipeline/completion-runtime-core --json
+./run.sh test system --id system/runtime-baseline-macos --json
 ./run.sh clean --scope workflow-roadmap0-macos --json
 ```
 

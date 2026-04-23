@@ -22,6 +22,8 @@ EXPECTED_BUNDLE_ARTIFACTS = (
     "aot-manifest.json",
     "metadata-registration.json",
     "code-registration.json",
+    "generic-instantiation-demand-graph.json",
+    "generic-capability-matrix.json",
     "optimization-facts.json",
     "preserve-descriptor.json",
     "native-reference.lowering-plan.json",
@@ -162,7 +164,7 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         self.assertEqual("v0", manifest["formatVersion"])
         self.assertEqual("managedClosureManifest", manifest["artifactKind"])
         self.assertEqual(self.subject_id, manifest["assemblyName"])
-        self.assertEqual("GoldenSimpleLib.App/Program::Main()", manifest["entrySubjectId"])
+        self.assertEqual("GoldenSimpleLib.App/Program::Main:System.Int32()", manifest["entrySubjectId"])
         self.assertEqual(str(self.dll_path.relative_to(REPO_ROOT)).replace("\\", "/"), manifest["inputAssemblyPath"])
         self.assertEqual(
             [
@@ -172,6 +174,8 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
                 "metadata-registration.json",
                 "hot-update/supplemental-metadata-template.json",
                 "code-registration.json",
+                "generic-instantiation-demand-graph.json",
+                "generic-capability-matrix.json",
                 "optimization-facts.json",
                 "preserve-descriptor.json",
                 "native-reference.lowering-plan.json",
@@ -180,6 +184,14 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
             [artifact["path"] for artifact in manifest["artifacts"]],
         )
         self.assertTrue(manifest["inputModuleVersionId"])
+
+        generic_instantiation_demand_graph = load_json(self.output_root / "generic-instantiation-demand-graph.json")
+        self.assertEqual([], generic_instantiation_demand_graph["demands"])
+
+        generic_capability_matrix = load_json(self.output_root / "generic-capability-matrix.json")
+        self.assertEqual("genericCapabilityMatrix", generic_capability_matrix["artifactKind"])
+        self.assertEqual([], generic_capability_matrix["entries"])
+        self.assertEqual("ok", generic_capability_matrix["gates"]["status"])
 
     def test_generated_preserve_descriptor_defaults_to_empty_entries_without_preserve_attributes(self) -> None:
         self._ensure_bundle_generated()
@@ -201,9 +213,9 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         self.assertEqual("aotManifest", aot_manifest["artifactKind"])
         self.assertEqual(
             [
-                "GoldenSimpleLib.App/Program::Main()",
-                "GoldenSimpleLib.Library/Greeter::BuildMessage()",
-                "System.Console/System.Console::WriteLine(System.String)",
+                "GoldenSimpleLib.App/Program::Main:System.Int32()",
+                "GoldenSimpleLib.Library/Greeter::BuildMessage:System.String()",
+                "System.Console/System.Console::WriteLine:System.Void(System.String)",
             ],
             [entry["subjectId"] for entry in aot_manifest["entries"]],
         )
@@ -214,7 +226,7 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
             [
                 "GoldenSimpleLib.App",
                 "GoldenSimpleLib.App/Program",
-                "GoldenSimpleLib.App/Program::Main()",
+                "GoldenSimpleLib.App/Program::Main:System.Int32()",
             ],
             [entry["subjectId"] for entry in metadata_registration["registrations"]],
         )
@@ -223,7 +235,7 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         self.assertEqual("codeRegistration", code_registration["artifactKind"])
         self.assertEqual("GoldenSimpleLib.App.dll", code_registration["modules"][0]["moduleName"])
         self.assertEqual(
-            "GoldenSimpleLib.App/Program::Main()",
+            "GoldenSimpleLib.App/Program::Main:System.Int32()",
             code_registration["modules"][0]["registrations"][0]["subjectId"],
         )
 
@@ -232,7 +244,7 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         self.assertEqual(
             [
                 "GoldenSimpleLib.App/Program",
-                "GoldenSimpleLib.App/Program::Main()",
+                "GoldenSimpleLib.App/Program::Main:System.Int32()",
             ],
             [entry["subjectId"] for entry in optimization_facts["closedWorldSpecializations"]],
         )
@@ -246,17 +258,17 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
             for method in typed_il["methods"]
         }
 
-        self.assertEqual(["GoldenSimpleLib.App/Program::Main()"], sorted(methods.keys()))
+        self.assertEqual(["GoldenSimpleLib.App/Program::Main:System.Int32()"], sorted(methods.keys()))
 
-        main_method = methods["GoldenSimpleLib.App/Program::Main()"]
+        main_method = methods["GoldenSimpleLib.App/Program::Main:System.Int32()"]
         self.assertEqual("GoldenSimpleLib.App", main_method["identity"]["assemblyName"])
         self.assertEqual("GoldenSimpleLib.App/Program", main_method["identity"]["declaringTypeSubjectId"])
-        self.assertEqual("GoldenSimpleLib.App/Program::Main()", main_method["identity"]["subjectId"])
+        self.assertEqual("GoldenSimpleLib.App/Program::Main:System.Int32()", main_method["identity"]["subjectId"])
         self.assertEqual(main_method["methodId"], main_method["identity"]["methodId"])
         self.assertEqual("static-method", main_method["methodRole"])
         self.assertEqual("has-canonical-body", main_method["bodyAvailability"])
         self.assertEqual(2, main_method["bodyAvailabilityCode"])
-        self.assertEqual(["requires-console-string-output"], main_method["capabilities"])
+        self.assertEqual([], main_method["capabilities"])
         self.assertEqual(
             [4, 4],
             [
@@ -267,8 +279,8 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         )
         self.assertEqual(
             [
-                "GoldenSimpleLib.Library/Greeter::BuildMessage()",
-                "System.Console/System.Console::WriteLine(System.String)",
+                "GoldenSimpleLib.Library/Greeter::BuildMessage:System.String()",
+                "System.Console/System.Console::WriteLine:System.Void(System.String)",
             ],
             [
                 instruction["callee"]
@@ -282,7 +294,7 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
 
         lowering_plan = load_json(self.output_root / "native-reference.lowering-plan.json")
         self.assertEqual("generic-analysis-only", lowering_plan["planKind"])
-        self.assertEqual("GoldenSimpleLib.App/Program::Main()", lowering_plan["entrySubjectId"])
+        self.assertEqual("GoldenSimpleLib.App/Program::Main:System.Int32()", lowering_plan["entrySubjectId"])
 
         if self.emit_output_root.exists():
             shutil.rmtree(self.emit_output_root)

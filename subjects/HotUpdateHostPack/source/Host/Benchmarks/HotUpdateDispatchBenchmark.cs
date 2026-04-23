@@ -9,8 +9,15 @@ internal static class HotUpdateDispatchBenchmarkEntry
     private const int IterationCount = 1000;
     private static readonly ManagedMethodIdentityArtifact BenchmarkIdentity =
         ManagedMethodIdentityResolver.Create(
-            "BenchHotUpdateDispatch/HotPatch::AddOne(System.Int32)",
-            "System.Int32 HotPatch::AddOne(System.Int32)");
+            new ManagedMethodIdentitySpec
+            {
+                AssemblyName = "BenchHotUpdateDispatch",
+                DeclaringTypeSubjectId = "BenchHotUpdateDispatch/HotPatch",
+                DeclaringTypeDisplayName = "HotPatch",
+                MethodName = "AddOne",
+                SubjectId = "BenchHotUpdateDispatch/HotPatch::AddOne(System.Int32)",
+                Signature = "System.Int32 HotPatch::AddOne(System.Int32)",
+            });
 
     [ChaosBenchmark(
         ChaosBenchmarkCategory.HotUpdate,

@@ -112,6 +112,7 @@ public sealed partial class NativeAotLoweringPlanner
                         materializationKeys);
                     CollectSyntheticMethodCustomAttributeMaterializations(
                         metadataReader,
+                        assemblyName,
                         methodEntry.SubjectId,
                         methodDefinition,
                         queriedDisplayNames,
@@ -121,6 +122,15 @@ public sealed partial class NativeAotLoweringPlanner
                         materializationKeys);
                 }
             }
+
+            CollectClosureWideSyntheticMethodCustomAttributeMaterializations(
+                metadataReader,
+                assemblyName,
+                queriedDisplayNames,
+                memberInfoIsDefinedAttributeTypeSubjectIds,
+                displayNameToSubjectId,
+                materializations,
+                materializationKeys);
         }
 
         var queryAttributeTypeByCallee = new Dictionary<string, string>(StringComparer.Ordinal);
@@ -340,7 +350,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var typeDefinition = metadataReader.GetTypeDefinition(typeDefinitionHandle);
                     var typeName = metadataReader.GetString(typeDefinition.Name);
                     var genericParameterCount = typeDefinition.GetGenericParameters().Count;
-                    var genericArgumentTypeSubjectIds = typeEntry.GenericContext?.TypeArguments?.ToArray() ?? [];
+                    var genericArgumentTypeSubjectIds = typeEntry.RuntimeGenericContext?.InstantiationKey.TypeArguments?.ToArray() ?? [];
                     var metadataToken = MetadataTokens.GetToken(typeDefinitionHandle);
                     var genericDefinitionTypeSubjectId =
                         string.Equals(typeEntry.SubjectId, typeEntry.DefinitionSubjectId, StringComparison.Ordinal)

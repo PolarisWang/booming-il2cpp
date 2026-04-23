@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Globalization;
 using System.Reflection;
 using System.Reflection.Metadata;
@@ -13,7 +14,7 @@ public sealed partial class NativeAotLoweringPlanner
 {
     private const string OverflowExceptionTypeSubjectId = "System.Private.CoreLib/System.OverflowException";
     private const string ObjectTypeSubjectId = "System.Private.CoreLib/System.Object";
-    private const string ObjectCtorMethodSubjectId = "System.Private.CoreLib/System.Object::.ctor()";
+    private const string ObjectCtorMethodSubjectId = "System.Private.CoreLib/System.Object::.ctor:System.Void()";
     private const string DelegateTypeSubjectId = "System.Private.CoreLib/System.Delegate";
     private const string MulticastDelegateTypeSubjectId = "System.Private.CoreLib/System.MulticastDelegate";
     private const string StringTypeSubjectId = "System.Private.CoreLib/System.String";
@@ -29,8 +30,6 @@ public sealed partial class NativeAotLoweringPlanner
         "System.Private.CoreLib/System.String::StartsWith(System.String,System.StringComparison)";
     private const string StringContainsComparisonMethodSubjectId =
         "System.Private.CoreLib/System.String::Contains(System.String,System.StringComparison)";
-    private const string StringJoinStringEnumerableMethodSubjectId =
-        "System.Private.CoreLib/System.String::Join(System.String,System.Collections.Generic.IEnumerable<System.String>)";
     private const string StringJoinGenericEnumerableMethodPrefix =
         "System.Private.CoreLib/System.String::Join<";
     private const string ExceptionCtorWithMessageMethodSubjectId =
@@ -59,8 +58,6 @@ public sealed partial class NativeAotLoweringPlanner
     private const string MemberInfoGetMetadataTokenMethodSubjectId =
         "System.Private.CoreLib/System.Reflection.MemberInfo::get_MetadataToken()";
     private const string ObjectEqualsMethodSubjectId = "System.Private.CoreLib/System.Object::Equals(System.Object)";
-    private const string EnvironmentGetCurrentManagedThreadIdMethodSubjectId =
-        "System.Private.CoreLib/System.Environment::get_CurrentManagedThreadId()";
     private const string GcCollectMethodSubjectId = "System.Private.CoreLib/System.GC::Collect()";
     private const string GcWaitForPendingFinalizersMethodSubjectId = "System.Private.CoreLib/System.GC::WaitForPendingFinalizers()";
     private const string GcKeepAliveMethodSubjectId = "System.Private.CoreLib/System.GC::KeepAlive(System.Object)";
@@ -96,14 +93,13 @@ public sealed partial class NativeAotLoweringPlanner
     private const string TimeSpanFromMillisecondsMethodSubjectId =
         "System.Private.CoreLib/System.TimeSpan::FromMilliseconds(System.Double)";
     private const string InitializeArrayMethodSubjectId =
-        "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(System.Array,System.RuntimeFieldHandle)";
+        "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)";
     private const string RuntimeHelpersCreateSpanMethodPrefix =
         "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan<";
     private const string MemoryExtensionsAsSpanMethodPrefix =
         "System.Memory/System.MemoryExtensions::AsSpan<";
     private const string MemoryExtensionsAsMemoryMethodPrefix =
         "System.Memory/System.MemoryExtensions::AsMemory<";
-    private const string GetTypeFromHandleMethodSubjectId = "System.Private.CoreLib/System.Type::GetTypeFromHandle(System.RuntimeTypeHandle)";
     private const string GetTypeHandleMethodSubjectId = "System.Private.CoreLib/System.Type::get_TypeHandle()";
     private const string GetFieldMethodSubjectId = "System.Private.CoreLib/System.Type::GetField(System.String)";
     private const string GetMethodByNameMethodSubjectId = "System.Private.CoreLib/System.Type::GetMethod(System.String)";
@@ -129,20 +125,14 @@ public sealed partial class NativeAotLoweringPlanner
         "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted(System.String)";
     private const string DefaultInterpolatedStringHandlerAppendLiteralMethodSubjectId =
         "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendLiteral(System.String)";
-    private const string DefaultInterpolatedStringHandlerAppendFormattedInt32MethodSubjectId =
-        "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted<System.Int32>(System.Int32)";
+    private const string DefaultInterpolatedStringHandlerAppendFormattedMethodSubjectPrefix =
+        "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted<";
     private const string DefaultInterpolatedStringHandlerToStringAndClearMethodSubjectId =
         "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::ToStringAndClear()";
     private const string MarshalGetFunctionPointerForDelegateMethodPrefix =
         "System.Runtime.InteropServices/Marshal::GetFunctionPointerForDelegate<";
     private const string MarshalGetDelegateForFunctionPointerMethodPrefix =
         "System.Runtime.InteropServices/Marshal::GetDelegateForFunctionPointer<";
-    private const string MarshalStringToCoTaskMemUtf8MethodSubjectId =
-        "System.Runtime.InteropServices/Marshal::StringToCoTaskMemUTF8(System.String)";
-    private const string MarshalPtrToStringUtf8MethodSubjectId =
-        "System.Runtime.InteropServices/Marshal::PtrToStringUTF8(System.IntPtr)";
-    private const string MarshalFreeCoTaskMemMethodSubjectId =
-        "System.Runtime.InteropServices/Marshal::FreeCoTaskMem(System.IntPtr)";
     private const string MarshalAllocHGlobalInt32MethodSubjectId =
         "System.Runtime.InteropServices/Marshal::AllocHGlobal(System.Int32)";
     private const string MarshalFreeHGlobalMethodSubjectId =
@@ -156,6 +146,8 @@ public sealed partial class NativeAotLoweringPlanner
     private const int StringComparisonOrdinalValue = 4;
     private const string DllImportAttributeDisplayName = "DllImportAttribute";
     private const string DllImportAttributeTypeSubjectId = "System.Runtime.InteropServices/DllImportAttribute";
+    private const string UnmanagedCallersOnlyAttributeDisplayName = "UnmanagedCallersOnlyAttribute";
+    private const string UnmanagedCallersOnlyAttributeTypeSubjectId = "System.Runtime.InteropServices/UnmanagedCallersOnlyAttribute";
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
@@ -185,7 +177,11 @@ public sealed partial class NativeAotLoweringPlanner
         string TargetSymbol,
         IReadOnlyList<AotCoreIrAbiSlotArtifact> ParameterAbis,
         AotCoreIrAbiSlotArtifact ReturnAbi,
-        IReadOnlySet<int> RawArgumentIndices);
+        IReadOnlySet<int> RawArgumentIndices,
+        string? OpenDefinitionSubjectId = null,
+        SharedGenericBodyId? SharedGenericBodyId = null,
+        InstantiationStubId? InstantiationStubId = null,
+        RuntimeGenericContextArtifact? RuntimeGenericContext = null);
 
     private sealed record ExternalRuntimeHelperDefinition(
         string SubjectId,
@@ -193,7 +189,8 @@ public sealed partial class NativeAotLoweringPlanner
         string Source,
         IReadOnlyList<AotCoreIrAbiSlotArtifact> ParameterAbis,
         AotCoreIrAbiSlotArtifact ReturnAbi,
-        IReadOnlySet<int> RawArgumentIndices);
+        IReadOnlySet<int> RawArgumentIndices,
+        IReadOnlySet<string>? ReferencedStaticFieldSubjectIds = null);
 
     private sealed record EnumerableJoinSupportVariant(
         string EnumerableTypeSubjectId,
@@ -271,6 +268,7 @@ public sealed partial class NativeAotLoweringPlanner
     private sealed record CatchAndFinallyExceptionMethodShape(
         AotCoreIrExceptionRegionArtifact CatchRegion,
         IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> PreInnerFinallyInstructions,
         IReadOnlyList<AotCoreIrInstructionArtifact> InnerTryInstructions,
         FinallyHandlerShape? InnerFinallyHandler,
         IReadOnlyList<AotCoreIrInstructionArtifact> PostInnerTryInstructions,
@@ -368,6 +366,121 @@ public sealed partial class NativeAotLoweringPlanner
         public string DisplayName => ManagedNaming.CreateTypeDisplayName(AssemblyName, NamespaceName, TypeName);
     }
 
+    private sealed class MetadataMethodSignatureTypeNameProvider : ISignatureTypeProvider<string, object?>
+    {
+        private readonly MetadataReader _metadataReader;
+        private readonly string _assemblyName;
+
+        public MetadataMethodSignatureTypeNameProvider(
+            MetadataReader metadataReader,
+            string assemblyName)
+        {
+            _metadataReader = metadataReader;
+            _assemblyName = assemblyName;
+        }
+
+        public string GetArrayType(string elementType, ArrayShape shape)
+        {
+            if (shape.Rank == 1 && shape.LowerBounds.IsDefaultOrEmpty && shape.Sizes.IsDefaultOrEmpty)
+            {
+                return $"{elementType}[]";
+            }
+
+            return $"{elementType}[{new string(',', shape.Rank - 1)}]";
+        }
+
+        public string GetByReferenceType(string elementType) => $"{elementType}&";
+
+        public string GetFunctionPointerType(MethodSignature<string> signature)
+        {
+            return $"fnptr<{signature.ReturnType}({string.Join(",", signature.ParameterTypes)})>";
+        }
+
+        public string GetGenericInstantiation(string genericType, ImmutableArray<string> typeArguments)
+        {
+            return ManagedNaming.CreateInstantiatedTypeDisplayName(genericType, typeArguments);
+        }
+
+        public string GetGenericMethodParameter(object? genericContext, int index) => $"!!{index}";
+
+        public string GetGenericTypeParameter(object? genericContext, int index) => $"!{index}";
+
+        public string GetModifiedType(string modifierType, string unmodifiedType, bool isRequired) => unmodifiedType;
+
+        public string GetPinnedType(string elementType) => elementType;
+
+        public string GetPointerType(string elementType) => $"{elementType}*";
+
+        public string GetPrimitiveType(PrimitiveTypeCode typeCode)
+        {
+            return typeCode switch
+            {
+                PrimitiveTypeCode.Boolean => "System.Boolean",
+                PrimitiveTypeCode.Byte => "System.Byte",
+                PrimitiveTypeCode.Char => "System.Char",
+                PrimitiveTypeCode.Double => "System.Double",
+                PrimitiveTypeCode.Int16 => "System.Int16",
+                PrimitiveTypeCode.Int32 => "System.Int32",
+                PrimitiveTypeCode.Int64 => "System.Int64",
+                PrimitiveTypeCode.IntPtr => "System.IntPtr",
+                PrimitiveTypeCode.Object => "System.Object",
+                PrimitiveTypeCode.SByte => "System.SByte",
+                PrimitiveTypeCode.Single => "System.Single",
+                PrimitiveTypeCode.String => "System.String",
+                PrimitiveTypeCode.TypedReference => "System.TypedReference",
+                PrimitiveTypeCode.UInt16 => "System.UInt16",
+                PrimitiveTypeCode.UInt32 => "System.UInt32",
+                PrimitiveTypeCode.UInt64 => "System.UInt64",
+                PrimitiveTypeCode.UIntPtr => "System.UIntPtr",
+                PrimitiveTypeCode.Void => "System.Void",
+                _ => typeCode.ToString(),
+            };
+        }
+
+        public string GetSZArrayType(string elementType) => $"{elementType}[]";
+
+        public string GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind)
+        {
+            return TryResolveTypeDefinitionIdentity(reader, _assemblyName, handle, out var identity)
+                ? identity.DisplayName
+                : GetTypeNameFallback(
+                    reader,
+                    reader.GetTypeDefinition(handle).Namespace,
+                    reader.GetTypeDefinition(handle).Name);
+        }
+
+        public string GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind)
+        {
+            return TryResolveTypeReferenceIdentity(reader, _assemblyName, handle, out var identity)
+                ? identity.DisplayName
+                : GetTypeNameFallback(
+                    reader,
+                    reader.GetTypeReference(handle).Namespace,
+                    reader.GetTypeReference(handle).Name);
+        }
+
+        public string GetTypeFromSpecification(
+            MetadataReader reader,
+            object? genericContext,
+            TypeSpecificationHandle handle,
+            byte rawTypeKind)
+        {
+            return reader.GetTypeSpecification(handle).DecodeSignature(this, genericContext);
+        }
+
+        private static string GetTypeNameFallback(
+            MetadataReader reader,
+            StringHandle namespaceHandle,
+            StringHandle typeNameHandle)
+        {
+            var namespaceName = reader.GetString(namespaceHandle);
+            var typeName = reader.GetString(typeNameHandle);
+            return string.IsNullOrEmpty(namespaceName)
+                ? typeName
+                : $"{namespaceName}.{typeName}";
+        }
+    }
+
     public NativeAotTemplateModel Create(
         NativeAotLoweringPlanArtifact loweringPlan,
         AotCoreIrArtifact aotCoreIr,
@@ -418,7 +531,7 @@ public sealed partial class NativeAotLoweringPlanner
         var externalRuntimeHelpers = CollectExternalRuntimeHelpers(reachableMethods, _staticInitializationSupport);
         var objectModelBuilder = new StringBuilder();
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
-        EmitObjectModelDeclarations(objectModelBuilder, reachableMethods);
+        EmitObjectModelDeclarations(objectModelBuilder, reachableMethods, externalRuntimeHelpers);
         EmitReachableMethodForwardDeclarations(objectModelBuilder, reachableMethods);
         if (externalRuntimeHelpers.Any(helper => IsSpanRuntimeHelperSubjectId(helper.SubjectId)))
         {
@@ -428,8 +541,7 @@ public sealed partial class NativeAotLoweringPlanner
         EmitExternalRuntimeHelperDefinitions(objectModelBuilder, externalRuntimeHelpers);
         EmitStaticInitializationDefinitions(objectModelBuilder);
 
-        var methodDeclarations = reachableMethods
-            .Select(FormatMethodDeclaration)
+        var methodDeclarations = BuildMethodDeclarations(reachableMethods)
             .ToArray();
         var methods = reachableMethods
             .Select(method => new NativeAotMethodTemplateModel
@@ -499,12 +611,20 @@ public sealed partial class NativeAotLoweringPlanner
     private string BuildMethodSource(AotCoreIrMethodArtifact method)
     {
         var builder = new StringBuilder();
-        if (method.GenericContext is not null)
+        if (!string.IsNullOrWhiteSpace(method.OpenDefinitionSubjectId) ||
+            method.SharedGenericBodyId is not null ||
+            method.InstantiationStubId is not null ||
+            method.RuntimeGenericContext is not null)
         {
-            builder.AppendLine(FormatGenericContextComment(method.GenericContext));
+            builder.AppendLine(FormatGenericExecutionAuthorityComment(
+                method.OpenDefinitionSubjectId,
+                method.SharedGenericBodyId,
+                method.InstantiationStubId,
+                method.RuntimeGenericContext));
         }
 
         EmitManagedMethod(builder, method);
+        EmitGenericInstantiationStub(builder, method);
         return builder.ToString().TrimEnd();
     }
 
@@ -1134,6 +1254,7 @@ public sealed partial class NativeAotLoweringPlanner
 
     private void CollectSyntheticMethodCustomAttributeMaterializations(
         MetadataReader metadataReader,
+        string assemblyName,
         string targetSubjectId,
         MethodDefinition methodDefinition,
         IReadOnlySet<string> queriedDisplayNames,
@@ -1160,6 +1281,133 @@ public sealed partial class NativeAotLoweringPlanner
                 materializations.Add(CreateDllImportAttributeMaterializationPlan(metadataReader, targetSubjectId, methodDefinition));
             }
         }
+
+        if (!memberInfoIsDefinedAttributeTypeSubjectIds.Contains(UnmanagedCallersOnlyAttributeTypeSubjectId) &&
+            !queriedDisplayNames.Contains(UnmanagedCallersOnlyAttributeDisplayName))
+        {
+            return;
+        }
+
+        foreach (var attributeHandle in methodDefinition.GetCustomAttributes())
+        {
+            if (!TryGetAttributeTypeIdentity(
+                    metadataReader,
+                    assemblyName,
+                    attributeHandle,
+                    out var attributeTypeIdentity) ||
+                !string.Equals(
+                    attributeTypeIdentity.SubjectId,
+                    UnmanagedCallersOnlyAttributeTypeSubjectId,
+                    StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            if (queriedDisplayNames.Contains(UnmanagedCallersOnlyAttributeDisplayName))
+            {
+                RegisterCustomAttributeTypeSubjectId(
+                    UnmanagedCallersOnlyAttributeDisplayName,
+                    UnmanagedCallersOnlyAttributeTypeSubjectId,
+                    displayNameToSubjectId);
+            }
+
+            var key = $"{(byte)CustomAttributeTargetKind.Method}:{targetSubjectId}:{UnmanagedCallersOnlyAttributeTypeSubjectId}";
+            if (!materializationKeys.Add(key))
+            {
+                continue;
+            }
+
+            materializations.Add(CreateCustomAttributeMaterializationPlan(
+                metadataReader,
+                targetSubjectId,
+                CustomAttributeTargetKind.Method,
+                attributeHandle,
+                UnmanagedCallersOnlyAttributeTypeSubjectId));
+        }
+    }
+
+    private void CollectClosureWideSyntheticMethodCustomAttributeMaterializations(
+        MetadataReader metadataReader,
+        string assemblyName,
+        IReadOnlySet<string> queriedDisplayNames,
+        IReadOnlySet<string> memberInfoIsDefinedAttributeTypeSubjectIds,
+        IDictionary<string, string> displayNameToSubjectId,
+        ICollection<CustomAttributeMaterializationPlan> materializations,
+        ISet<string> materializationKeys)
+    {
+        if (!memberInfoIsDefinedAttributeTypeSubjectIds.Contains(DllImportAttributeTypeSubjectId) &&
+            !memberInfoIsDefinedAttributeTypeSubjectIds.Contains(UnmanagedCallersOnlyAttributeTypeSubjectId) &&
+            !queriedDisplayNames.Contains(DllImportAttributeDisplayName) &&
+            !queriedDisplayNames.Contains(UnmanagedCallersOnlyAttributeDisplayName))
+        {
+            return;
+        }
+
+        foreach (var typeHandle in metadataReader.TypeDefinitions)
+        {
+            if (!TryResolveTypeDefinitionIdentity(
+                    metadataReader,
+                    assemblyName,
+                    typeHandle,
+                    out var declaringTypeIdentity))
+            {
+                continue;
+            }
+
+            var typeDefinition = metadataReader.GetTypeDefinition(typeHandle);
+            foreach (var methodHandle in typeDefinition.GetMethods())
+            {
+                if (!TryCreateMetadataMethodSubjectId(
+                        metadataReader,
+                        assemblyName,
+                        declaringTypeIdentity.SubjectId,
+                        methodHandle,
+                        out var targetSubjectId) ||
+                    string.IsNullOrWhiteSpace(targetSubjectId))
+                {
+                    continue;
+                }
+
+                CollectSyntheticMethodCustomAttributeMaterializations(
+                    metadataReader,
+                    assemblyName,
+                    targetSubjectId!,
+                    metadataReader.GetMethodDefinition(methodHandle),
+                    queriedDisplayNames,
+                    memberInfoIsDefinedAttributeTypeSubjectIds,
+                    displayNameToSubjectId,
+                    materializations,
+                    materializationKeys);
+            }
+        }
+    }
+
+    private static bool TryCreateMetadataMethodSubjectId(
+        MetadataReader metadataReader,
+        string assemblyName,
+        string declaringTypeSubjectId,
+        MethodDefinitionHandle methodHandle,
+        out string? methodSubjectId)
+    {
+        methodSubjectId = null;
+        var methodDefinition = metadataReader.GetMethodDefinition(methodHandle);
+        var signature = methodDefinition.DecodeSignature(
+            new MetadataMethodSignatureTypeNameProvider(metadataReader, assemblyName),
+            genericContext: null);
+        var methodName = metadataReader.GetString(methodDefinition.Name);
+        if (string.IsNullOrWhiteSpace(methodName) ||
+            string.IsNullOrWhiteSpace(signature.ReturnType))
+        {
+            return false;
+        }
+
+        methodSubjectId = ManagedNaming.CreateMethodSubjectId(
+            declaringTypeSubjectId,
+            methodName,
+            signature.ReturnType,
+            signature.ParameterTypes.ToArray(),
+            methodDefinition.GetGenericParameters().Count);
+        return true;
     }
 
     private CustomAttributeMaterializationPlan CreateDllImportAttributeMaterializationPlan(
@@ -1257,7 +1505,12 @@ public sealed partial class NativeAotLoweringPlanner
             for (var index = 0; index < method.Instructions.Count; index++)
             {
                 var instruction = method.Instructions[index];
-                if (!string.Equals(instruction.Callee, MemberInfoIsDefinedMethodSubjectId, StringComparison.Ordinal))
+                if (!MatchesMethodSubject(
+                        instruction.Callee ?? string.Empty,
+                        "System.Private.CoreLib/System.Reflection.MemberInfo",
+                        "IsDefined",
+                        "System.Type",
+                        "System.Boolean"))
                 {
                     continue;
                 }
@@ -1284,7 +1537,11 @@ public sealed partial class NativeAotLoweringPlanner
         attributeTypeSubjectId = null;
         if (callIndex < 3 ||
             !string.Equals(instructions[callIndex - 1].Op, "ldc.i4", StringComparison.Ordinal) ||
-            !string.Equals(instructions[callIndex - 2].Callee, GetTypeFromHandleMethodSubjectId, StringComparison.Ordinal))
+            !MatchesMethodSubject(
+                instructions[callIndex - 2].Callee ?? string.Empty,
+                "System.Private.CoreLib/System.Type",
+                "GetTypeFromHandle",
+                "System.RuntimeTypeHandle"))
         {
             return false;
         }
@@ -1462,17 +1719,22 @@ public sealed partial class NativeAotLoweringPlanner
         string? callee,
         out string? attributeDisplayName)
     {
-        const string prefix = "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute<";
-        const string suffix = ">(System.Reflection.MemberInfo)";
         attributeDisplayName = null;
+        const string declaringTypeSubjectId =
+            "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions";
+        const string openGenericMethodPrefix =
+            "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute<";
+
         if (string.IsNullOrWhiteSpace(callee) ||
-            !callee.StartsWith(prefix, StringComparison.Ordinal) ||
-            !callee.EndsWith(suffix, StringComparison.Ordinal))
+            !string.Equals(GetMethodDeclaringTypeSubjectId(callee), declaringTypeSubjectId, StringComparison.Ordinal) ||
+            !GetMethodName(callee).StartsWith("GetCustomAttribute<", StringComparison.Ordinal) ||
+            !GetMethodParameterTypes(callee).SequenceEqual(["System.Reflection.MemberInfo"]) ||
+            !TryReadSingleGenericTypeArgument(callee, openGenericMethodPrefix, out var attributeTypeName))
         {
             return false;
         }
 
-        attributeDisplayName = callee[prefix.Length..^suffix.Length];
+        attributeDisplayName = GetTypeDisplayName(attributeTypeName);
         return !string.IsNullOrWhiteSpace(attributeDisplayName);
     }
 

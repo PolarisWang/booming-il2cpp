@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id, get_method_subject_display_string
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -118,7 +120,7 @@ class Phase3SpanMemoryNativeAotTests(unittest.TestCase):
         self._ensure_bundle_generated()
 
         artifact = json.loads((self.output_root / "aot-core-ir.json").read_text(encoding="utf-8"))
-        method = next(method for method in artifact["methods"] if method["subjectId"] == ENTRY_SUBJECT_ID)
+        method = find_method_by_subject_id(artifact["methods"], ENTRY_SUBJECT_ID)
 
         field_tokens = [
             instruction
@@ -130,7 +132,7 @@ class Phase3SpanMemoryNativeAotTests(unittest.TestCase):
         self.assertEqual(2, field_tokens[0]["targetReference"]["kind"])
 
         runtime_calls = {
-            instruction["callee"]
+            get_method_subject_display_string(instruction["callee"])
             for instruction in method["instructions"]
             if instruction["op"] == "call"
         }

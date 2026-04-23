@@ -14,7 +14,10 @@ public sealed class BridgeGenerator
                 .Select(spec => new AotToHotUpdateBridgeEntry
                 {
                     BridgeId = RequireValue(spec.BridgeId, nameof(spec.BridgeId)),
-                    HotUpdateSubjectId = ResolveSubjectId(spec.HotUpdateIdentity, spec.HotUpdateSubjectId, nameof(spec.HotUpdateSubjectId)),
+                    HotUpdateAuthorityKey = ResolveAuthorityKey(
+                        spec.HotUpdateIdentity,
+                        spec.HotUpdateAuthorityKey,
+                        nameof(spec.HotUpdateAuthorityKey)),
                     HotUpdateIdentity = spec.HotUpdateIdentity,
                 })
                 .ToList(),
@@ -22,7 +25,10 @@ public sealed class BridgeGenerator
                 .Select(spec => new HotUpdateToAotBridgeEntry
                 {
                     BridgeId = RequireValue(spec.BridgeId, nameof(spec.BridgeId)),
-                    AotSubjectId = ResolveSubjectId(spec.AotIdentity, spec.AotSubjectId, nameof(spec.AotSubjectId)),
+                    AotAuthorityKey = ResolveAuthorityKey(
+                        spec.AotIdentity,
+                        spec.AotAuthorityKey,
+                        nameof(spec.AotAuthorityKey)),
                     AotIdentity = spec.AotIdentity,
                 })
                 .ToList(),
@@ -30,7 +36,10 @@ public sealed class BridgeGenerator
                 .Select(spec => new HotUpdateToEngineBridgeEntry
                 {
                     BridgeId = RequireValue(spec.BridgeId, nameof(spec.BridgeId)),
-                    EngineSubjectId = ResolveSubjectId(spec.EngineIdentity, spec.EngineSubjectId, nameof(spec.EngineSubjectId)),
+                    EngineAuthorityKey = ResolveAuthorityKey(
+                        spec.EngineIdentity,
+                        spec.EngineAuthorityKey,
+                        nameof(spec.EngineAuthorityKey)),
                     EngineIdentity = spec.EngineIdentity,
                 })
                 .ToList(),
@@ -38,24 +47,32 @@ public sealed class BridgeGenerator
                 .Select(spec => new DelegateWrapperEntry
                 {
                     WrapperId = RequireValue(spec.WrapperId, nameof(spec.WrapperId)),
-                    HotUpdateSubjectId = ResolveSubjectId(spec.HotUpdateIdentity, spec.HotUpdateSubjectId, nameof(spec.HotUpdateSubjectId)),
+                    HotUpdateAuthorityKey = ResolveAuthorityKey(
+                        spec.HotUpdateIdentity,
+                        spec.HotUpdateAuthorityKey,
+                        nameof(spec.HotUpdateAuthorityKey)),
                     HotUpdateIdentity = spec.HotUpdateIdentity,
                 })
                 .ToList(),
         };
     }
 
-    private static string ResolveSubjectId(
+    private static string ResolveAuthorityKey(
         ManagedMethodIdentityArtifact? identity,
-        string? subjectId,
+        string? authorityKey,
         string parameterName)
     {
-        if (identity is not null)
+        if (!string.IsNullOrWhiteSpace(authorityKey))
         {
-            return ManagedMethodIdentityResolver.ResolveSubjectId(identity);
+            return authorityKey;
         }
 
-        return RequireValue(subjectId, parameterName);
+        if (identity is not null)
+        {
+            return ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity);
+        }
+
+        throw new InvalidOperationException($"bridge generation requires '{parameterName}' or an identity-backed execution authority.");
     }
 
     private static string RequireValue(string? value, string parameterName)
@@ -84,7 +101,7 @@ public sealed record AotToHotUpdateBridgeSpec
 {
     public required string BridgeId { get; init; }
 
-    public string? HotUpdateSubjectId { get; init; }
+    public string? HotUpdateAuthorityKey { get; init; }
 
     public ManagedMethodIdentityArtifact? HotUpdateIdentity { get; init; }
 }
@@ -93,7 +110,7 @@ public sealed record HotUpdateToAotBridgeSpec
 {
     public required string BridgeId { get; init; }
 
-    public string? AotSubjectId { get; init; }
+    public string? AotAuthorityKey { get; init; }
 
     public ManagedMethodIdentityArtifact? AotIdentity { get; init; }
 }
@@ -102,7 +119,7 @@ public sealed record HotUpdateToEngineBridgeSpec
 {
     public required string BridgeId { get; init; }
 
-    public string? EngineSubjectId { get; init; }
+    public string? EngineAuthorityKey { get; init; }
 
     public ManagedMethodIdentityArtifact? EngineIdentity { get; init; }
 }
@@ -111,7 +128,7 @@ public sealed record DelegateWrapperSpec
 {
     public required string WrapperId { get; init; }
 
-    public string? HotUpdateSubjectId { get; init; }
+    public string? HotUpdateAuthorityKey { get; init; }
 
     public ManagedMethodIdentityArtifact? HotUpdateIdentity { get; init; }
 }
@@ -133,7 +150,7 @@ public sealed record AotToHotUpdateBridgeEntry
 {
     public required string BridgeId { get; init; }
 
-    public required string HotUpdateSubjectId { get; init; }
+    public required string HotUpdateAuthorityKey { get; init; }
 
     public ManagedMethodIdentityArtifact? HotUpdateIdentity { get; init; }
 }
@@ -142,7 +159,7 @@ public sealed record HotUpdateToAotBridgeEntry
 {
     public required string BridgeId { get; init; }
 
-    public required string AotSubjectId { get; init; }
+    public required string AotAuthorityKey { get; init; }
 
     public ManagedMethodIdentityArtifact? AotIdentity { get; init; }
 }
@@ -151,7 +168,7 @@ public sealed record HotUpdateToEngineBridgeEntry
 {
     public required string BridgeId { get; init; }
 
-    public required string EngineSubjectId { get; init; }
+    public required string EngineAuthorityKey { get; init; }
 
     public ManagedMethodIdentityArtifact? EngineIdentity { get; init; }
 }
@@ -160,7 +177,7 @@ public sealed record DelegateWrapperEntry
 {
     public required string WrapperId { get; init; }
 
-    public required string HotUpdateSubjectId { get; init; }
+    public required string HotUpdateAuthorityKey { get; init; }
 
     public ManagedMethodIdentityArtifact? HotUpdateIdentity { get; init; }
 }
@@ -169,9 +186,13 @@ public sealed record AutoGeneratedBridgeEntry
 {
     public required string BridgeId { get; init; }
 
-    public required string TargetSubjectId { get; init; }
+    public required string TargetAuthorityKey { get; init; }
 
     public ManagedMethodIdentityArtifact? TargetIdentity { get; init; }
 
     public required string SignatureKey { get; init; }
+
+    public required BridgeDispatchStyle DispatchStyle { get; init; }
+
+    public required BridgeCarrierSchema CarrierSchema { get; init; }
 }

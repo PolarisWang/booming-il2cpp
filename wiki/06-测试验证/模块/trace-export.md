@@ -16,10 +16,8 @@ objectType: guide
 
 - `system/trace-export-windows-smoke`
 - `system/trace-export-macos-smoke`
-- `pipeline/completion-runtime-trace-windows`
-- `pipeline/completion-runtime-trace-macos`
-- `pipeline/trace-export-windows-runtime`
-- `pipeline/trace-export-macos-runtime`
+- `system/runtime-baseline-windows`
+- `system/runtime-baseline-macos`
 
 ## 覆盖
 
@@ -33,7 +31,5 @@ objectType: guide
 - `run test module --id module/trace-export/macos`
 - `run test system --id system/trace-export-windows-smoke`
 - `run test system --id system/trace-export-macos-smoke`
-- `run test pipeline --id pipeline/completion-runtime-trace-windows`
-- `run test pipeline --id pipeline/completion-runtime-trace-macos`
-- `run test pipeline --id pipeline/trace-export-windows-runtime`
-- `run test pipeline --id pipeline/trace-export-macos-runtime`
+- `run test system --id system/runtime-baseline-windows`
+- `run test system --id system/runtime-baseline-macos`

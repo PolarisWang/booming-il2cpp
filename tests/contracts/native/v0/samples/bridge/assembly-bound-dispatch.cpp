@@ -34,6 +34,7 @@ void AssemblyBoundDispatchExample(
     NativeReferenceAssemblyDispatchRequestV0 request = {};
     request.subject_id_utf8 = subject_id_utf8;
     request.managed_args = subject_args;
+    request.method_id = 0u;
 
     (void)RunNativeReferenceAssembly(
         bridge,

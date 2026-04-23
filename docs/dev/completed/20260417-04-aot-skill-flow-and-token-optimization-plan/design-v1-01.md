@@ -1,70 +1,71 @@
-# AOT Skill Flow And Token Optimization Design v1.01
+﻿# AOT Skill Flow And Token Optimization Design v1.01
 
 Date: 2026-04-17
 Status: design-frozen
 
-## 1. 目标
+## 1. 鐩爣
 
-把当前 skill 流程优化成一条更适合 IL2CPP/AOT 主线的正式工作流，使它在处理 `managed -> native -> hotupdate`、`proof / benchmark obligation` 和 `completed` 收口时满足以下要求：
+鎶婂綋鍓?skill 娴佺▼浼樺寲鎴愪竴鏉℃洿閫傚悎 IL2CPP/AOT 涓荤嚎鐨勬寮忓伐浣滄祦锛屼娇瀹冨湪澶勭悊 `managed -> native -> hotupdate`銆乣proof / benchmark obligation` 鍜?`completed` 鏀跺彛鏃舵弧瓒充互涓嬭姹傦細
 
-- capability、owner subject、proof / benchmark obligation 在 plan 阶段显式冻结，而不是隐式依赖作者记忆；
-- `completed` 之前必须经过 formal verification gate，而不是只跑一轮泛化“项目测试套件”；
-- 高频 skill 只保留 routing / gate / decision，长篇 reference 回落到 architecture 与 `wiki/06-测试验证/`；
-- 多个 skill 之间对同一条规则只保留一个 authority，不继续复制粘贴式增长。
+- capability銆乷wner subject銆乸roof / benchmark obligation 鍦?plan 闃舵鏄惧紡鍐荤粨锛岃€屼笉鏄殣寮忎緷璧栦綔鑰呰蹇嗭紱
+- `completed` 涔嬪墠蹇呴』缁忚繃 formal verification gate锛岃€屼笉鏄彧璺戜竴杞硾鍖栤€滈」鐩祴璇曞浠垛€濓紱
+- 楂橀 skill 鍙繚鐣?routing / gate / decision锛岄暱绡?reference 鍥炶惤鍒?architecture 涓?`wiki/06-娴嬭瘯楠岃瘉/`锛?
+- 澶氫釜 skill 涔嬮棿瀵瑰悓涓€鏉¤鍒欏彧淇濈暀涓€涓?authority锛屼笉缁х画澶嶅埗绮樿创寮忓闀裤€?
 
-## 2. 当前问题
+## 2. 褰撳墠闂
 
-### 2.1 authority 已有，但 control skill 没有完全消费
+### 2.1 authority 宸叉湁锛屼絾 control skill 娌℃湁瀹屽叏娑堣垂
 
-当前 authority 已存在于：
+褰撳墠 authority 宸插瓨鍦ㄤ簬锛?
 
-- `docs/architecture/managed-native-hotupdate-test-pipeline.md`
-- `wiki/06-测试验证/INDEX.md`
-- `wiki/06-测试验证/AOT新Feature接入自测规范.md`
+- `docs/architecture/subject-test-framework-v1/INDEX.md`
+- `docs/architecture/verification-v1/spec.md`
+- `wiki/06-娴嬭瘯楠岃瘉/INDEX.md`
+- `wiki/06-娴嬭瘯楠岃瘉/AOT鏂癋eature鎺ュ叆鑷祴瑙勮寖.md`
 
-但 control skill 仍存在两个缺口：
+浣?control skill 浠嶅瓨鍦ㄤ袱涓己鍙ｏ細
 
-- `writing-plans` 没有要求显式写出 `capabilityFamily / capabilityItem / ownerSubjectId / proofRequired / benchmarkRequired / hotupdateImpact`；
-- `executing-plans` 与 `subagent-driven-development` 还没有把 AOT formal verification chain 变成 `completed` 之前的硬门。
+- `writing-plans` 娌℃湁瑕佹眰鏄惧紡鍐欏嚭 `capabilityFamily / capabilityItem / ownerSubjectId / proofRequired / benchmarkRequired / hotupdateImpact`锛?
+- `executing-plans` 涓?`subagent-driven-development` 杩樻病鏈夋妸 AOT formal verification chain 鍙樻垚 `completed` 涔嬪墠鐨勭‖闂ㄣ€?
 
-### 2.2 高频 skill 重复携带同一条规则
+### 2.2 楂橀 skill 閲嶅鎼哄甫鍚屼竴鏉¤鍒?
 
-以下规则目前被多个 skill 重复叙述：
+浠ヤ笅瑙勫垯鐩墠琚涓?skill 閲嶅鍙欒堪锛?
 
-- `dotnet build/test/msbuild` 编译崩溃必须追根因并修复
-- `completed` 前必须验证
-- benchmark 不能替代 correctness
-- AOT 主线必须走 managed/native/hotupdate 正式验证
+- `dotnet build/test/msbuild` 缂栬瘧宕╂簝蹇呴』杩芥牴鍥犲苟淇
+- `completed` 鍓嶅繀椤婚獙璇?
+- benchmark 涓嶈兘鏇夸唬 correctness
+- AOT 涓荤嚎蹇呴』璧?managed/native/hotupdate 姝ｅ紡楠岃瘉
 
-重复叙述带来的问题不是“字数不好看”，而是：
+閲嶅鍙欒堪甯︽潵鐨勯棶棰樹笉鏄€滃瓧鏁颁笉濂界湅鈥濓紝鑰屾槸锛?
 
-- token 消耗偏高；
-- authority 容易漂移；
-- 修改规则时容易漏改某一份镜像。
+- token 娑堣€楀亸楂橈紱
+- authority 瀹规槗婕傜Щ锛?
+- 淇敼瑙勫垯鏃跺鏄撴紡鏀规煇涓€浠介暅鍍忋€?
 
-### 2.3 AOT onboarding 缺少快路径
+### 2.3 AOT onboarding 缂哄皯蹇矾寰?
 
-当前仓库已经有非常明确的 AOT feature onboarding 规则，但 skill 主线还没有为这类高频、标准化任务提供足够轻量的入口。结果是：
+褰撳墠浠撳簱宸茬粡鏈夐潪甯告槑纭殑 AOT feature onboarding 瑙勫垯锛屼絾 skill 涓荤嚎杩樻病鏈変负杩欑被楂橀銆佹爣鍑嗗寲浠诲姟鎻愪緵瓒冲杞婚噺鐨勫叆鍙ｃ€傜粨鏋滄槸锛?
 
-- 复杂度已经被 architecture / wiki 冻结，但 skill 仍然每次都要重复携带大量说明；
-- `using-booming` 能正确分流，但后续 skill 仍可能把任务执行成“泛化计划”而不是“AOT obligation-driven plan”。
+- 澶嶆潅搴﹀凡缁忚 architecture / wiki 鍐荤粨锛屼絾 skill 浠嶇劧姣忔閮借閲嶅鎼哄甫澶ч噺璇存槑锛?
+- `using-booming` 鑳芥纭垎娴侊紝浣嗗悗缁?skill 浠嶅彲鑳芥妸浠诲姟鎵ц鎴愨€滄硾鍖栬鍒掆€濊€屼笉鏄€淎OT obligation-driven plan鈥濄€?
 
-## 3. 设计原则
+## 3. 璁捐鍘熷垯
 
-### 3.1 authority 与 control 分层
+### 3.1 authority 涓?control 鍒嗗眰
 
-- authority：`docs/architecture` 与 `wiki/06-测试验证/`
-- control：`.codex/skills/**`
+- authority锛歚docs/architecture` 涓?`wiki/06-娴嬭瘯楠岃瘉/`
+- control锛歚.codex/skills/**`
 
-authority 负责说明长期规则，control 只负责：
+authority 璐熻矗璇存槑闀挎湡瑙勫垯锛宑ontrol 鍙礋璐ｏ細
 
-- 什么时候必须进入哪条规则；
-- 完成前必须过哪些 gate；
-- 如果缺规则对象，下一步去哪里补。
+- 浠€涔堟椂鍊欏繀椤昏繘鍏ュ摢鏉¤鍒欙紱
+- 瀹屾垚鍓嶅繀椤昏繃鍝簺 gate锛?
+- 濡傛灉缂鸿鍒欏璞★紝涓嬩竴姝ュ幓鍝噷琛ャ€?
 
-### 3.2 plan 必须冻结 obligation
+### 3.2 plan 蹇呴』鍐荤粨 obligation
 
-所有 AOT / IL2CPP 主线的正式计划，都必须在 plan 文档里冻结：
+鎵€鏈?AOT / IL2CPP 涓荤嚎鐨勬寮忚鍒掞紝閮藉繀椤诲湪 plan 鏂囨。閲屽喕缁擄細
 
 - `capabilityFamily`
 - `capabilityItem`
@@ -72,51 +73,52 @@ authority 负责说明长期规则，control 只负责：
 - `proofRequired`
 - `benchmarkRequired`
 - `hotupdateImpact`
-- 准备执行的 declared proof / benchmark 或 formal verification object
+- 鍑嗗鎵ц鐨?declared proof / benchmark 鎴?formal verification object
 
-### 3.3 completed 必须绑定 formal verification chain
+### 3.3 completed 蹇呴』缁戝畾 formal verification chain
 
-对 AOT feature onboarding 类任务，`completed` 之前的正式执行链固定为：
+瀵?AOT feature onboarding 绫讳换鍔★紝`completed` 涔嬪墠鐨勬寮忔墽琛岄摼鍥哄畾涓猴細
 
-`collector/registry/workspace gate -> owner managed proof -> owner native proof -> hotupdate proof(按需) -> benchmark(按需) -> affected regressions`
+`collector/registry/workspace gate -> owner managed proof -> owner native proof -> hotupdate proof(鎸夐渶) -> benchmark(鎸夐渶) -> affected regressions`
 
-其中 benchmark 只作为补充证据，不替代 correctness。
+鍏朵腑 benchmark 鍙綔涓鸿ˉ鍏呰瘉鎹紝涓嶆浛浠?correctness銆?
 
-### 3.4 高频 skill 采用薄入口
+### 3.4 楂橀 skill 閲囩敤钖勫叆鍙?
 
-高频 skill 应缩成：
+楂橀 skill 搴旂缉鎴愶細
 
-- 短 description
-- 核心 gate
-- 指向 authority 的明确入口
+- 鐭?description
+- 鏍稿績 gate
+- 鎸囧悜 authority 鐨勬槑纭叆鍙?
 
-不应在每个 skill 正文里都完整重讲一遍 owner subject、proof obligation、collector gate 与 benchmark 边界。
+涓嶅簲鍦ㄦ瘡涓?skill 姝ｆ枃閲岄兘瀹屾暣閲嶈涓€閬?owner subject銆乸roof obligation銆乧ollector gate 涓?benchmark 杈圭晫銆?
 
-## 4. 目标结构
+## 4. 鐩爣缁撴瀯
 
-### 4.1 control skill 分工
+### 4.1 control skill 鍒嗗伐
 
-- `using-booming`: 负责 routing，明确哪些任务必须先过 `project-test-governance`
-- `project-test-governance`: 负责治理边界与 authority 入口，不负责完整重讲所有 AOT onboarding 细节
-- `writing-plans`: 负责把 capability / owner / obligation 写进 plan
-- `executing-plans` / `subagent-driven-development`: 负责在 `completed` 前强制 formal verification gate
-- `verification-before-completion`: 负责选择正式对象、执行 `canonicalCommand`、处理 verification escalation
+- `using-booming`: 璐熻矗 routing锛屾槑纭摢浜涗换鍔″繀椤诲厛杩?`project-test-governance`
+- `project-test-governance`: 璐熻矗娌荤悊杈圭晫涓?authority 鍏ュ彛锛屼笉璐熻矗瀹屾暣閲嶈鎵€鏈?AOT onboarding 缁嗚妭
+- `writing-plans`: 璐熻矗鎶?capability / owner / obligation 鍐欒繘 plan
+- `executing-plans` / `subagent-driven-development`: 璐熻矗鍦?`completed` 鍓嶅己鍒?formal verification gate
+- `verification-before-completion`: 璐熻矗閫夋嫨姝ｅ紡瀵硅薄銆佹墽琛?`canonicalCommand`銆佸鐞?verification escalation
 
-### 4.2 authority 文档分工
+### 4.2 authority 鏂囨。鍒嗗伐
 
-- `docs/architecture/managed-native-hotupdate-test-pipeline.md`: 主线边界、长期契约、分层原则
-- `wiki/06-测试验证/AOT新Feature接入自测规范.md`: onboarding 顺序、gate、proof / benchmark obligation
-- `wiki/06-测试验证/INDEX.md`: 正式入口与对象导航
+- `docs/architecture/subject-test-framework-v1/INDEX.md`: 执行主线边界、长期契约、分层原则
+- `docs/architecture/verification-v1/spec.md`: formal verification、projection 与 archive 边界
+- `wiki/06-娴嬭瘯楠岃瘉/AOT鏂癋eature鎺ュ叆鑷祴瑙勮寖.md`: onboarding 椤哄簭銆乬ate銆乸roof / benchmark obligation
+- `wiki/06-娴嬭瘯楠岃瘉/INDEX.md`: 姝ｅ紡鍏ュ彛涓庡璞″鑸?
 
-## 5. 成功标准
+## 5. 鎴愬姛鏍囧噯
 
-完成后应满足：
+瀹屾垚鍚庡簲婊¤冻锛?
 
-- 一个 AOT 新 feature 进入 plan 时，不需要作者额外口头补充 owner/proof/benchmark obligation；
-- `completed` 前无法只靠 managed green 或 benchmark green 就宣布完成；
-- `project-test-governance` skill 正文与其 wiki 镜像、architecture、AOT 自测规范不再漂移；
-- 高频热路径 token 成本相比当前组合下降约 25%~35%，主要来自去重，而不是删规则；
-- 通过 scenario-based 验证，确认 skill 仍能正确处理：
-  - AOT 新 feature 接入
-  - benchmark 异常排查
-  - `completed` 前 formal verification gate
+- 涓€涓?AOT 鏂?feature 杩涘叆 plan 鏃讹紝涓嶉渶瑕佷綔鑰呴澶栧彛澶磋ˉ鍏?owner/proof/benchmark obligation锛?
+- `completed` 鍓嶆棤娉曞彧闈?managed green 鎴?benchmark green 灏卞甯冨畬鎴愶紱
+- `project-test-governance` skill 姝ｆ枃涓庡叾 wiki 闀滃儚銆乤rchitecture銆丄OT 鑷祴瑙勮寖涓嶅啀婕傜Щ锛?
+- 楂橀鐑矾寰?token 鎴愭湰鐩告瘮褰撳墠缁勫悎涓嬮檷绾?25%~35%锛屼富瑕佹潵鑷幓閲嶏紝鑰屼笉鏄垹瑙勫垯锛?
+- 閫氳繃 scenario-based 楠岃瘉锛岀‘璁?skill 浠嶈兘姝ｇ‘澶勭悊锛?
+  - AOT 鏂?feature 鎺ュ叆
+  - benchmark 寮傚父鎺掓煡
+  - `completed` 鍓?formal verification gate

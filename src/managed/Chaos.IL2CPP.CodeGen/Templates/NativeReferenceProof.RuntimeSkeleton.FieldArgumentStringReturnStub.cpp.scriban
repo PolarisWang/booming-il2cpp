@@ -1,0 +1,35 @@
+struct {{ stub_name }}_ManagedArgs
+{
+    void* instance;
+    void* value;
+    void** return_value;
+};
+
+int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr || managed_args == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    const auto* request = static_cast<const {{ stub_name }}_ManagedArgs*>(managed_args);
+    if (request->instance == nullptr || request->return_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    return ExecuteRuntimeSkeletonFieldArgumentStringReturn(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        {{ descriptor_index }}u,
+        request->instance,
+        request->value,
+        request->return_value);
+}

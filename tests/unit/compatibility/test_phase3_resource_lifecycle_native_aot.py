@@ -112,6 +112,7 @@ class Phase3ResourceLifecycleNativeAotTests(unittest.TestCase):
         generated_cpp = generated_cpp_path.read_text(encoding="utf-8")
         self.assertIn("// Managed method: CoreRuntimeFeatures/ResourceLifecycleProofEntry::Run()", generated_cpp)
         self.assertIn("// Managed method: CoreRuntimeFeatures/ResourceLifecycleProofEntry::RunScenario(System.Boolean)", generated_cpp)
+        self.assertIn("// Managed method: CoreRuntimeFeatures/ResourceLifecycleProbe::Dispose()", generated_cpp)
         self.assertIn("chaos_inner_finally_guard", generated_cpp)
         self.assertIn("dispose", generated_cpp)
 

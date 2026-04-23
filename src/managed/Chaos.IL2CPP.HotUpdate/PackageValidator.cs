@@ -32,6 +32,26 @@ public static class PackageValidator
         }
     }
 
+    public static void ValidateCompatibleKernelArtifactVersion(
+        LoadedHotUpdatePackage package,
+        string currentKernelArtifactVersion)
+    {
+        ArgumentNullException.ThrowIfNull(package);
+        ArgumentException.ThrowIfNullOrWhiteSpace(currentKernelArtifactVersion);
+
+        var kernelArtifactVersion = package.Manifest.KernelArtifactVersion;
+        if (string.IsNullOrWhiteSpace(kernelArtifactVersion))
+        {
+            throw new InvalidOperationException("hot update package kernel artifact version must not be empty.");
+        }
+
+        if (!string.Equals(kernelArtifactVersion, currentKernelArtifactVersion, StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"hot update package kernel artifact version '{kernelArtifactVersion}' is not compatible with runtime kernel artifact version '{currentKernelArtifactVersion}'.");
+        }
+    }
+
     public static void ValidateIosDistributionCompliance(
         LoadedHotUpdatePackage package,
         IosComplianceValidationOptions? options = null)

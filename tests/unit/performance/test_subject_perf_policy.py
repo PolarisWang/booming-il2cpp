@@ -118,6 +118,62 @@ class SubjectPerfPolicyTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_codegen_subject_uses_subject_aware_baseline_path_and_detects_regression(self) -> None:
+        perf_module = load_perf_module()
+        subject_id = "FixturePerfPolicySubject"
+        matrix_id = "windows-native-perf"
+
+        repo_root = TEST_TMP_ROOT / f"repo-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
+            baseline_path = (
+                repo_root
+                / "subjects"
+                / subject_id
+                / "baselines"
+                / "codegen"
+                / matrix_id
+                / "windows.json"
+            )
+            baseline_path.parent.mkdir(parents=True, exist_ok=True)
+            baseline_path.write_text(
+                json.dumps(
+                    {
+                        "generatedCppTotalBytes": 320.0,
+                        "generatedSymbolCount": 4.0,
+                        "peakWorkingSetBytes": 1024.0,
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            result = perf_module.evaluate_codegen_subject(
+                repo_root=repo_root,
+                subject_id=subject_id,
+                matrix_id=matrix_id,
+                host_platform="windows",
+                metrics={
+                    "generatedCppTotalBytes": 512.0,
+                    "generatedSymbolCount": 7.0,
+                    "peakWorkingSetBytes": 4096.0,
+                },
+                update_baseline=False,
+            )
+
+            self.assertTrue(
+                result["baselinePath"].endswith(
+                    f"/subjects/{subject_id}/baselines/codegen/{matrix_id}/windows.json"
+                )
+            )
+            self.assertFalse(result["baselineUpdated"])
+            self.assertEqual("regressed", result["regressionStatus"])
+            self.assertEqual(
+                ["generatedCppTotalBytes", "generatedSymbolCount", "peakWorkingSetBytes"],
+                sorted(item["metric"] for item in result["regressions"]),
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
 
 if __name__ == "__main__":
     unittest.main()

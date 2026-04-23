@@ -17,14 +17,14 @@ TEST_OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "testframework-int-a
 ASSEMBLY_NAME = "TestFrameworkIntAssertExternalCallHarness"
 ENTRY_SUBJECT_ID = f"{ASSEMBLY_NAME}/Program::Main()"
 ASSERT_EQUAL_SUBJECT_ID = (
-    "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal(System.Int32,System.Int32,System.String)"
+    "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal:System.Void(System.Int32,System.Int32,System.String)"
 )
 ASSERT_STATE_FIELD_SUBJECT_ID = (
     "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::ExitCode"
 )
 HELPER_SYMBOL = (
     "chaos_external_runtime_Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert__Equal_"
-    "System_Int32_System_Int32_System_String_"
+    "System_Void_System_Int32_System_Int32_System_String_"
 )
 STATIC_FIELD_SYMBOL = "chaos_static_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosAssertState__ExitCode"
 

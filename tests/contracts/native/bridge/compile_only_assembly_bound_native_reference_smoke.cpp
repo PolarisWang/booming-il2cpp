@@ -31,6 +31,7 @@ void CompileOnlyAssemblyBoundNativeReferenceSmoke(const CodegenBridgeV0* bridge)
     NativeReferenceAssemblyDispatchRequestV0 request = {};
     request.subject_id_utf8 = "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)";
     request.managed_args = &managed_payload;
+    request.method_id = 0u;
 
     if (bridge == nullptr) {
         return;
@@ -52,5 +53,8 @@ static_assert(
 static_assert(
     std::is_same<decltype(NativeReferenceAssemblyDispatchRequestV0::managed_args), void*>::value,
     "assembly-bound dispatch request payload must remain opaque pointer");
+static_assert(
+    std::is_same<decltype(NativeReferenceAssemblyDispatchRequestV0::method_id), uint32_t>::value,
+    "assembly-bound dispatch request numeric method id must remain uint32_t");
 
 }  // namespace chaos::contracts::native::assembly_bound

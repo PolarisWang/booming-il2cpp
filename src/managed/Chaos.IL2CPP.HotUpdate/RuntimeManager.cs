@@ -18,18 +18,34 @@ public enum RuntimeMode
     Mixed = 1,
 }
 
+public readonly record struct HotUpdateMethodHandle(string ExecutionAuthorityKey, int Generation);
+
+public static class HotUpdateDispatchReasonCodes
+{
+    public const string RuntimeNotMixed = "runtime-not-mixed";
+
+    public const string StaleHandle = "stale-handle";
+
+    public const string UnboundAuthority = "unbound-authority";
+}
+
 public sealed class RuntimeManager
 {
+    public const string CurrentKernelArtifactVersion = HotUpdateVersionContract.CurrentKernelArtifactVersion;
+
     private readonly HotUpdateAssemblyLoader _assemblyLoader = new();
     private readonly HotUpdateMethodRegistry _methodRegistry = new();
     private readonly Stack<RuntimeSnapshot> _history = new();
     private string? _currentAotVersion;
+    private int _currentGeneration;
 
     public RuntimeMode Mode { get; private set; } = RuntimeMode.Aot;
 
     public bool IsMixedMode => Mode == RuntimeMode.Mixed;
 
     public bool CanRollback => _history.Count > 0;
+
+    public int CurrentGeneration => _currentGeneration;
 
     public LoadedHotUpdatePackage? LoadedPackage { get; private set; }
 
@@ -67,6 +83,7 @@ public sealed class RuntimeManager
         _history.Clear();
         LoadedPackage = null;
         _currentAotVersion = null;
+        _currentGeneration = 0;
         _methodRegistry.Clear();
         SupplementalMetadata.Clear();
         Mode = RuntimeMode.Aot;
@@ -115,26 +132,67 @@ public sealed class RuntimeManager
         };
     }
 
+    public HotUpdateMethodHandle CreateHandle(ManagedMethodIdentityArtifact identity)
+    {
+        ArgumentNullException.ThrowIfNull(identity);
+
+        return new HotUpdateMethodHandle(
+            ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity),
+            _currentGeneration);
+    }
+
+    public bool TryDispatchHandle(
+        HotUpdateMethodHandle handle,
+        IReadOnlyList<object?> arguments,
+        out object? result,
+        out string reasonCode)
+    {
+        ArgumentNullException.ThrowIfNull(arguments);
+
+        if (!IsMixedMode)
+        {
+            result = null;
+            reasonCode = HotUpdateDispatchReasonCodes.RuntimeNotMixed;
+            return false;
+        }
+
+        if (handle.Generation != _currentGeneration)
+        {
+            result = null;
+            reasonCode = HotUpdateDispatchReasonCodes.StaleHandle;
+            return false;
+        }
+
+        if (_methodRegistry.TryDispatchByExecutionAuthority(handle.ExecutionAuthorityKey, arguments, out result))
+        {
+            reasonCode = string.Empty;
+            return true;
+        }
+
+        reasonCode = HotUpdateDispatchReasonCodes.UnboundAuthority;
+        return false;
+    }
+
     public int DispatchInt32(ManagedMethodIdentityArtifact identity, Func<int> aotFallback)
     {
         ArgumentNullException.ThrowIfNull(identity);
         ArgumentNullException.ThrowIfNull(aotFallback);
 
-        return DispatchInt32Core(ManagedMethodIdentityResolver.ResolveSubjectId(identity), aotFallback);
+        return DispatchInt32Core(ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity), aotFallback);
     }
 
     public void RegisterInt32Unary(ManagedMethodIdentityArtifact identity, Func<int, int> target)
     {
         ArgumentNullException.ThrowIfNull(identity);
         ArgumentNullException.ThrowIfNull(target);
-        RegisterInt32UnaryCore(ManagedMethodIdentityResolver.ResolveSubjectId(identity), target);
+        RegisterInt32UnaryCore(ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity), target);
     }
 
     public void RegisterMethod(ManagedMethodIdentityArtifact identity, Func<IReadOnlyList<object?>, object?> target)
     {
         ArgumentNullException.ThrowIfNull(identity);
         ArgumentNullException.ThrowIfNull(target);
-        RegisterMethodCore(ManagedMethodIdentityResolver.ResolveSubjectId(identity), target);
+        RegisterMethodCore(ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity), target);
     }
 
     public int DispatchInt32Unary(ManagedMethodIdentityArtifact identity, int value, Func<int, int> aotFallback)
@@ -142,7 +200,7 @@ public sealed class RuntimeManager
         ArgumentNullException.ThrowIfNull(identity);
         ArgumentNullException.ThrowIfNull(aotFallback);
 
-        return DispatchInt32UnaryCore(ManagedMethodIdentityResolver.ResolveSubjectId(identity), value, aotFallback);
+        return DispatchInt32UnaryCore(ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity), value, aotFallback);
     }
 
     private bool TryLoadPackage(
@@ -172,47 +230,75 @@ public sealed class RuntimeManager
         string currentAotVersion,
         Action applyBindings)
     {
-        _history.Push(CaptureSnapshot());
+        var snapshot = CaptureSnapshot();
         PackageValidator.ValidateCompatibleTargetAotVersion(package, currentAotVersion);
+        PackageValidator.ValidateCompatibleKernelArtifactVersion(package, CurrentKernelArtifactVersion);
 
-        _methodRegistry.Clear();
-        applyBindings();
-        SupplementalMetadata.Activate(package);
+        try
+        {
+            _methodRegistry.Clear();
+            applyBindings();
+            SupplementalMetadata.Activate(package);
 
-        LoadedPackage = package;
-        _currentAotVersion = currentAotVersion;
-        Mode = RuntimeMode.Mixed;
-        LastError = null;
+            LoadedPackage = package;
+            _currentAotVersion = currentAotVersion;
+            _currentGeneration = checked(snapshot.CurrentGeneration + 1);
+            Mode = RuntimeMode.Mixed;
+            _history.Push(snapshot);
+            LastError = null;
+        }
+        catch
+        {
+            RestoreSnapshot(snapshot);
+            throw;
+        }
     }
 
     private void ApplyBindings(HotUpdateMethodBindingSet bindings)
     {
         foreach (var binding in bindings.ConstantInt32Bindings)
         {
-            _methodRegistry.RegisterConstantInt32(binding.Identity, binding.ConstantValue);
+            _methodRegistry.RegisterConstantInt32ByExecutionAuthority(
+                ResolveBindingExecutionAuthorityKey(binding.ExecutionAuthorityKey, binding.Identity),
+                binding.ConstantValue);
         }
 
         foreach (var binding in bindings.Int32UnaryBindings)
         {
-            _methodRegistry.RegisterInt32UnaryBySubjectId(
-                ManagedMethodIdentityResolver.ResolveSubjectId(binding.Identity),
+            _methodRegistry.RegisterInt32UnaryByExecutionAuthority(
+                ResolveBindingExecutionAuthorityKey(binding.ExecutionAuthorityKey, binding.Identity),
                 binding.Target);
         }
 
         foreach (var binding in bindings.GenericBindings)
         {
-            _methodRegistry.RegisterMethodBySubjectId(
-                ManagedMethodIdentityResolver.ResolveSubjectId(binding.Identity),
+            _methodRegistry.RegisterMethodByExecutionAuthority(
+                ResolveBindingExecutionAuthorityKey(binding.ExecutionAuthorityKey, binding.Identity),
                 binding.Target);
         }
     }
 
-    private int DispatchInt32Core(string subjectId, Func<int> aotFallback)
+    private static string ResolveBindingExecutionAuthorityKey(
+        string? executionAuthorityKey,
+        ManagedMethodIdentityArtifact identity)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+        ArgumentNullException.ThrowIfNull(identity);
+
+        if (!string.IsNullOrWhiteSpace(executionAuthorityKey))
+        {
+            return executionAuthorityKey;
+        }
+
+        return ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity);
+    }
+
+    private int DispatchInt32Core(string executionAuthorityKey, Func<int> aotFallback)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(executionAuthorityKey);
         ArgumentNullException.ThrowIfNull(aotFallback);
 
-        if (IsMixedMode && _methodRegistry.TryDispatchBySubjectId(subjectId, Array.Empty<object?>(), out var mixedValue))
+        if (IsMixedMode &&
+            _methodRegistry.TryDispatchByExecutionAuthority(executionAuthorityKey, Array.Empty<object?>(), out var mixedValue))
         {
             return Convert.ToInt32(mixedValue);
         }
@@ -220,26 +306,27 @@ public sealed class RuntimeManager
         return aotFallback();
     }
 
-    private void RegisterInt32UnaryCore(string subjectId, Func<int, int> target)
+    private void RegisterInt32UnaryCore(string executionAuthorityKey, Func<int, int> target)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(executionAuthorityKey);
         ArgumentNullException.ThrowIfNull(target);
-        _methodRegistry.RegisterInt32UnaryBySubjectId(subjectId, target);
+        _methodRegistry.RegisterInt32UnaryByExecutionAuthority(executionAuthorityKey, target);
     }
 
-    private void RegisterMethodCore(string subjectId, Func<IReadOnlyList<object?>, object?> target)
+    private void RegisterMethodCore(string executionAuthorityKey, Func<IReadOnlyList<object?>, object?> target)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(executionAuthorityKey);
         ArgumentNullException.ThrowIfNull(target);
-        _methodRegistry.RegisterMethodBySubjectId(subjectId, target);
+        _methodRegistry.RegisterMethodByExecutionAuthority(executionAuthorityKey, target);
     }
 
-    private int DispatchInt32UnaryCore(string subjectId, int value, Func<int, int> aotFallback)
+    private int DispatchInt32UnaryCore(string executionAuthorityKey, int value, Func<int, int> aotFallback)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(executionAuthorityKey);
         ArgumentNullException.ThrowIfNull(aotFallback);
 
-        if (IsMixedMode && _methodRegistry.TryDispatchBySubjectId(subjectId, [value], out var mixedValue))
+        if (IsMixedMode &&
+            _methodRegistry.TryDispatchByExecutionAuthority(executionAuthorityKey, [value], out var mixedValue))
         {
             return Convert.ToInt32(mixedValue);
         }
@@ -253,6 +340,7 @@ public sealed class RuntimeManager
         {
             LoadedPackage = LoadedPackage,
             CurrentAotVersion = _currentAotVersion,
+            CurrentGeneration = _currentGeneration,
             Mode = Mode,
             Registry = _methodRegistry.Snapshot(),
         };
@@ -264,6 +352,7 @@ public sealed class RuntimeManager
 
         LoadedPackage = snapshot.LoadedPackage;
         _currentAotVersion = snapshot.CurrentAotVersion;
+        _currentGeneration = snapshot.CurrentGeneration;
         Mode = snapshot.Mode;
         _methodRegistry.Restore(snapshot.Registry);
         if (snapshot.LoadedPackage is null)
@@ -280,6 +369,15 @@ public sealed class RuntimeManager
 
     private void ValidatePackageCompatibility(LoadedHotUpdatePackage package, List<string> issues)
     {
+        try
+        {
+            PackageValidator.ValidateCompatibleKernelArtifactVersion(package, CurrentKernelArtifactVersion);
+        }
+        catch (InvalidOperationException exception)
+        {
+            issues.Add(exception.Message);
+        }
+
         if (string.IsNullOrWhiteSpace(_currentAotVersion))
         {
             issues.Add("current AOT version is missing for integrity validation.");
@@ -369,6 +467,8 @@ public sealed class RuntimeManager
         public LoadedHotUpdatePackage? LoadedPackage { get; init; }
 
         public string? CurrentAotVersion { get; init; }
+
+        public int CurrentGeneration { get; init; }
 
         public RuntimeMode Mode { get; init; }
 

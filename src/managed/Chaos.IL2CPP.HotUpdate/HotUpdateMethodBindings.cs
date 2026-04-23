@@ -6,6 +6,8 @@ public sealed record HotUpdateConstantInt32Binding
 {
     public required ManagedMethodIdentityArtifact Identity { get; init; }
 
+    public string? ExecutionAuthorityKey { get; init; }
+
     public required int ConstantValue { get; init; }
 }
 
@@ -13,12 +15,16 @@ public sealed record HotUpdateInt32UnaryBinding
 {
     public required ManagedMethodIdentityArtifact Identity { get; init; }
 
+    public string? ExecutionAuthorityKey { get; init; }
+
     public required Func<int, int> Target { get; init; }
 }
 
 public sealed record HotUpdateGenericMethodBinding
 {
     public required ManagedMethodIdentityArtifact Identity { get; init; }
+
+    public string? ExecutionAuthorityKey { get; init; }
 
     public required Func<IReadOnlyList<object?>, object?> Target { get; init; }
 }

@@ -41,8 +41,10 @@
     "translationUnitMethodCount": 3,
     "translationUnitPageCount": 1,
     "auditStatus": "runtime-skeleton",
-    "auditMessage": "assembly-bound full-closure native-reference runtime skeleton is emitted; executable per-method translation remains unimplemented",
-    "runtimeSkeletonReservedStubCount": 0
+    "auditMessage": "assembly-bound full-closure native-reference runtime skeleton emits covered executable methods only; uncovered methods are reported separately",
+    "runtimeSkeletonReservedStubCount": 0,
+    "runtimeSkeletonCoverageReportPath": "artifacts/subjects/SolutionCorePack/runs/20260420-snapshot-native-hotupdate-001/analysis/generated/generated/runtime/native-reference.runtime-skeleton.coverage.json",
+    "runtimeSkeletonUncoveredMethodCount": 1
   },
   "nativeBuild": {
     "manifestPath": "artifacts/subjects/SolutionCorePack/runs/20260420-snapshot-native-hotupdate-001/matrices/windows-corelib-reference-native-hotupdate-proof/build/build.manifest.json",

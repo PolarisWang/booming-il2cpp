@@ -38,7 +38,7 @@ public sealed partial class LoaderStage
             ownerIndex.FieldOwners,
             ownerIndex.MethodOwners,
             assemblyName);
-        var materializedGenerics = MaterializeGenericInstantiations(
+        var genericInstantiationProjection = BuildGenericInstantiationProjection(
             metadataReader,
             typeResolver,
             assemblyName,
@@ -49,19 +49,19 @@ public sealed partial class LoaderStage
             propertyModels,
             methodModels);
         var allTypes = typeModels.Values
-            .Concat(materializedGenerics.Types)
+            .Concat(genericInstantiationProjection.Types)
             .OrderBy(model => model.MetadataToken)
             .ToList();
         var allFields = fieldModels
-            .Concat(materializedGenerics.Fields)
+            .Concat(genericInstantiationProjection.Fields)
             .OrderBy(model => model.MetadataToken)
             .ToList();
         var allProperties = propertyModels
-            .Concat(materializedGenerics.Properties)
+            .Concat(genericInstantiationProjection.Properties)
             .OrderBy(model => model.MetadataToken)
             .ToList();
         var allMethods = methodModels
-            .Concat(materializedGenerics.Methods)
+            .Concat(genericInstantiationProjection.Methods)
             .OrderBy(model => model.MetadataToken)
             .ToList();
         var entryPointSubjectId = ResolveEntryPointSubjectId(
@@ -80,10 +80,11 @@ public sealed partial class LoaderStage
             InputAssemblyPath = inputAssemblyPath,
             Assembly = assembly,
             EntryPointSubjectId = entryPointSubjectId,
+            GenericInstantiationDemandGraph = genericInstantiationProjection.DemandGraph,
             Types = allTypes,
             Fields = allFields,
             Properties = allProperties,
-            Methods = allMethods,
+            Methods = ApplyDemandDerivedRuntimeGenericContexts(allMethods, genericInstantiationProjection.DemandGraph),
         };
     }
 
@@ -101,9 +102,12 @@ public sealed partial class LoaderStage
         if (!string.IsNullOrWhiteSpace(entryPointSubjectIdOverride))
         {
             var overrideSubjectId = entryPointSubjectIdOverride!;
-            if (methods.Any(method => string.Equals(method.SubjectId, overrideSubjectId, StringComparison.Ordinal)))
+            var matchedSubjectId = methods
+                .FirstOrDefault(method => ManagedNaming.MatchesMethodSubjectId(method.SubjectId, overrideSubjectId))
+                ?.SubjectId;
+            if (!string.IsNullOrWhiteSpace(matchedSubjectId))
             {
-                return overrideSubjectId;
+                return matchedSubjectId;
             }
 
             throw new InvalidOperationException(

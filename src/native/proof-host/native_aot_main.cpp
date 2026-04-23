@@ -2,7 +2,11 @@
 #include <cstdlib>
 #include <cstring>
 
-extern "C" int RunNativeAot(std::int32_t entryIndex);
+#ifndef CHAOS_NATIVE_AOT_ENTRY
+#define CHAOS_NATIVE_AOT_ENTRY RunNativeAot
+#endif
+
+extern "C" int CHAOS_NATIVE_AOT_ENTRY(std::int32_t entryIndex);
 
 namespace {
 
@@ -31,5 +35,5 @@ std::int32_t ParseEntryIndex(int argc, char** argv) {
 }  // namespace
 
 int main(int argc, char** argv) {
-    return RunNativeAot(ParseEntryIndex(argc, argv));
+    return CHAOS_NATIVE_AOT_ENTRY(ParseEntryIndex(argc, argv));
 }

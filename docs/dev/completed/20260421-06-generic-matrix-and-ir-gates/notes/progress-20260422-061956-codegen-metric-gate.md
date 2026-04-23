@@ -1,0 +1,25 @@
+# 20260422-061956 Codegen Metric Gate
+
+- `20260421-06` 已完成 native codegen metrics sidecar 接线：
+  - `native-reference.codegen-metrics.json`
+  - `native-aot.codegen-metrics.json`
+- 这批 sidecar 现在会在 generated 阶段进入 subject-scoped baseline compare，并产出：
+  - `codegenMetricsPath`
+  - `codegenBaselineComparePath`
+  - `codegenRegressionStatus`
+- reporting 已物化：
+  - `pipeline-report/report/codegen-summary.json`
+  - `pipeline-report/report/codegen-baseline-compare.json`
+  - `pipeline-report/report/codegen-metrics.json`
+- 当前 gate 只比较三项：
+  - `generatedCppTotalBytes`
+  - `generatedSymbolCount`
+  - `peakWorkingSetBytes`
+- `boundaryCases` 真值链也已落地，`DispatchBoundary` / `ReflectionBoundary` / `HotUpdateBoundary` 的计数不再依赖字符串命名猜测
+- 已完成验证：
+  - `python -m pytest tests/unit/execution/test_subject_workers_frontend_codegen_emitter.py tests/unit/performance/test_subject_perf_policy.py tests/unit/reporting/test_subject_reporting_codegen_metrics.py tests/unit/reporting/test_subject_reporting_matrix_perf.py -q`
+  - `python -m pytest tests/unit/compatibility/test_phase4c_generic_matrix_gates.py tests/unit/compatibility/test_phase5_virtual_dispatch_native_aot.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.Driver/Chaos.IL2CPP.Driver.csproj -c Release -m:1`
+- 剩余工作：
+  - 把 matrix case 与 native/hotupdate proof artifact 做正式关联
+  - 如需更高层审阅，再将 `codegenRegressionStatus` / `codegenMetrics` 上卷到 summary/dashboard

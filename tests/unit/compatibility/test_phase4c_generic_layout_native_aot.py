@@ -6,11 +6,14 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import read_native_aot_planner_source
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
 DRIVER_DLL_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Driver.dll"
 PLANNER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeAotLoweringPlanner.cs"
+METHOD_EMISSION_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "Emission" / "NativeAotLoweringPlanner.MethodEmission.cs"
 PROJECT_PATH = (
     REPO_ROOT
     / "subjects"
@@ -62,6 +65,11 @@ def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProce
         combined_output = "\n".join(part for part in [completed.stdout, completed.stderr] if part)
         raise AssertionError(f"command failed ({completed.returncode}): {' '.join(arguments)}\n{combined_output}")
     return completed
+
+
+def create_expected_stub_symbol(stub_value: str) -> str:
+    symbol_part = "".join(character if character.isalnum() else "_" for character in stub_value).strip("_")
+    return f"chaos_{symbol_part}"
 
 
 class Phase4CGenericLayoutNativeAotTests(unittest.TestCase):
@@ -127,15 +135,36 @@ class Phase4CGenericLayoutNativeAotTests(unittest.TestCase):
         ]:
             self.assertIn(required_fragment, source_text)
 
-    def test_native_aot_planner_consumes_generic_context_when_rendering_generic_layout(self) -> None:
-        planner_source = PLANNER_PATH.read_text(encoding="utf-8")
+    def test_native_aot_planner_consumes_runtime_generic_context_when_rendering_generic_layout(self) -> None:
+        planner_source = read_native_aot_planner_source(REPO_ROOT)
+        method_emission_source = METHOD_EMISSION_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
-            "method.GenericContext",
-            "targetReference.GenericContext",
-            "FormatGenericContextComment(",
+            "method.OpenDefinitionSubjectId",
+            "method.SharedGenericBodyId",
+            "method.InstantiationStubId",
+            "lowerableMethod.OpenDefinitionSubjectId",
+            "lowerableMethod.SharedGenericBodyId",
+            "lowerableMethod.InstantiationStubId",
+            "instruction.TargetReference?.OpenDefinitionSubjectId",
+            "instruction.TargetReference?.SharedGenericBodyId",
+            "instruction.TargetReference?.InstantiationStubId",
+            "FormatGenericExecutionAuthorityComment(",
+            "ManagedNaming.CreateInstantiationStubSymbol(",
+            "TryGetInstantiationStubSymbol(",
+            "EmitGenericInstantiationStub(",
         ]:
             self.assertIn(required_fragment, planner_source)
+
+        for required_fragment in [
+            "targetReference?.OpenDefinitionSubjectId",
+            "targetReference?.SharedGenericBodyId",
+            "targetReference?.InstantiationStubId",
+            "FormatGenericExecutionAuthorityComment(",
+            "ManagedNaming.CreateInstantiationStubSymbol(",
+            "EmitGenericInstantiationStub(",
+        ]:
+            self.assertIn(required_fragment, method_emission_source)
 
     def test_driver_emits_native_aot_cpp_for_generic_layout_proof(self) -> None:
         self._ensure_native_aot_generated()
@@ -145,15 +174,21 @@ class Phase4CGenericLayoutNativeAotTests(unittest.TestCase):
             / "generated"
             / "native-aot.generated.cpp"
         ).read_text(encoding="utf-8")
+        generic_echo_stub_symbol = create_expected_stub_symbol(
+            "stub:definition=CoreRuntimeFeatures/GenericEcho::Echo`1:!!0(!!0);type=[];method=[System.Int32]"
+        )
 
         for required_fragment in [
             "CoreRuntimeFeatures_GenericEcho_Echo_System_Int32",
             "chaos_type_CoreRuntimeFeatures_GenericBox_System_Int32",
             "field_CoreRuntimeFeatures_GenericBox_System_Int32",
-            "// Generic context: definition=CoreRuntimeFeatures/GenericEcho::Echo(!!0); type=[]; method=[System.Int32]",
-            "// Generic context: definition=CoreRuntimeFeatures/GenericBox`1; type=[System.Int32]; method=[]",
+            "// Generic execution authority: definition=CoreRuntimeFeatures/GenericEcho::Echo`1:!!0(!!0); type=[]; method=[System.Int32]",
+            "// Generic execution authority: definition=CoreRuntimeFeatures/GenericBox`1; type=[System.Int32]; method=[]",
+            f'extern "C" std::int32_t {generic_echo_stub_symbol}(std::int32_t chaos_arg_0);',
+            f'extern "C" std::int32_t {generic_echo_stub_symbol}(std::int32_t chaos_arg_0)\n{{',
         ]:
             self.assertIn(required_fragment, generated_cpp)
+        self.assertGreaterEqual(generated_cpp.count(generic_echo_stub_symbol), 3)
 
 
 if __name__ == "__main__":

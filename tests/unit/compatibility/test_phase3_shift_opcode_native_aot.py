@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
@@ -124,14 +126,26 @@ class Phase3ShiftOpcodeNativeAotTests(unittest.TestCase):
         aot_core_ir = load_json(self.output_root / "aot-core-ir.json")
         methods = {method["subjectId"]: method for method in aot_core_ir["methods"]}
 
-        left_shift_ops = [instruction["op"] for instruction in methods["CoreRuntimeBenchmarks/ShiftOpsBenchmarkMath::LeftShift(System.Int32)"]["instructions"]]
+        left_shift_ops = [
+            instruction["op"]
+            for instruction in find_method_by_subject_id(
+                methods,
+                "CoreRuntimeBenchmarks/ShiftOpsBenchmarkMath::LeftShift(System.Int32)",
+            )["instructions"]
+        ]
         arithmetic_right_shift_ops = [
             instruction["op"]
-            for instruction in methods["CoreRuntimeBenchmarks/ShiftOpsBenchmarkMath::ArithmeticRightShift(System.Int32)"]["instructions"]
+            for instruction in find_method_by_subject_id(
+                methods,
+                "CoreRuntimeBenchmarks/ShiftOpsBenchmarkMath::ArithmeticRightShift(System.Int32)",
+            )["instructions"]
         ]
         logical_right_shift_ops = [
             instruction["op"]
-            for instruction in methods["CoreRuntimeBenchmarks/ShiftOpsBenchmarkMath::LogicalRightShiftSignBit(System.Int32)"]["instructions"]
+            for instruction in find_method_by_subject_id(
+                methods,
+                "CoreRuntimeBenchmarks/ShiftOpsBenchmarkMath::LogicalRightShiftSignBit(System.Int32)",
+            )["instructions"]
         ]
 
         self.assertIn("shl", left_shift_ops)

@@ -19,7 +19,10 @@ enum {
     CHAOS_BRIDGE_STATUS_NOT_FOUND = 3,
     CHAOS_BRIDGE_STATUS_NOT_SUPPORTED = 4,
     CHAOS_BRIDGE_STATUS_MANAGED_EXCEPTION = 5,
-    CHAOS_BRIDGE_STATUS_INTERNAL_ERROR = 6
+    CHAOS_BRIDGE_STATUS_INTERNAL_ERROR = 6,
+    CHAOS_BRIDGE_STATUS_METADATA_RESOLUTION_FAILED = 7,
+    CHAOS_BRIDGE_STATUS_CLASS_INIT_FAILED = 8,
+    CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED = 9
 };
 
 typedef struct CodeRegistrationV0 {
@@ -59,6 +62,7 @@ typedef struct CodegenRegistrationOptionsV0 {
 typedef struct NativeReferenceAssemblyDispatchRequestV0 {
     const char* subject_id_utf8;
     void* managed_args;
+    uint32_t method_id;
 } NativeReferenceAssemblyDispatchRequestV0;
 
 /*

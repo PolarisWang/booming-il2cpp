@@ -53,19 +53,23 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private string GetRequiredFunctionPointerTargetSymbol(AotCoreIrInstructionArtifact instruction)
 	{
+		if (!string.IsNullOrWhiteSpace(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact value))
+		{
+			return TryGetInstantiationStubSymbol(value) ?? value.NativeSymbol;
+		}
 		if (!string.IsNullOrWhiteSpace(instruction.TargetSymbol))
 		{
 			return instruction.TargetSymbol;
-		}
-		if (!string.IsNullOrWhiteSpace(instruction.Callee) && _methodsBySubjectId.TryGetValue(instruction.Callee, out AotCoreIrMethodArtifact value))
-		{
-			return value.NativeSymbol;
 		}
 		throw new NotSupportedException("native-aot lowering does not support unresolved function pointer target '" + (instruction.Callee ?? "<null>") + "'.");
 	}
 
 	private static string GetRequiredTargetSymbol(AotCoreIrInstructionArtifact instruction)
 	{
+		if (TryGetInstantiationStubSymbol(instruction.TargetReference?.InstantiationStubId) is { } text)
+		{
+			return text;
+		}
 		if (!string.IsNullOrWhiteSpace(instruction.TargetSymbol))
 		{
 			return instruction.TargetSymbol;
@@ -671,6 +675,16 @@ public sealed partial class NativeAotLoweringPlanner
 			throw new FileNotFoundException("required native-aot lowering plan is missing: " + path, path);
 		}
 		return JsonSerializer.Deserialize<T>(File.ReadAllText(path), JsonOptions) ?? throw new InvalidOperationException("failed to deserialize native-aot lowering plan: " + path);
+	}
+
+	private static string? TryGetInstantiationStubSymbol(InstantiationStubId? instantiationStubId)
+	{
+		if (instantiationStubId is null)
+		{
+			return null;
+		}
+
+		return ManagedNaming.CreateInstantiationStubSymbol(instantiationStubId);
 	}
 
 }

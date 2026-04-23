@@ -1,0 +1,13 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "assemblyName": "SolutionCorePack",
+  "planKind": "assembly-full-closure-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 3,
+  "emittedMethodCount": 2,
+  "uncoveredMethodCount": 1,
+  "uncoveredMethodSubjectIds": [
+    "GoldenCoreLibReference.NativeProofApp/Program::Helper:System.String()"
+  ]
+}

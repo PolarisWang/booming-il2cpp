@@ -59,15 +59,7 @@ public sealed class ILToIRLowering
             {
                 MethodId = ManagedNaming.CreateMethodId(method),
                 SubjectId = method.SubjectId,
-                Identity = new ManagedMethodIdentityArtifact
-                {
-                    AssemblyName = method.AssemblyName,
-                    DeclaringTypeSubjectId = method.DeclaringTypeSubjectId,
-                    DefinitionSubjectId = method.DefinitionSubjectId,
-                    SubjectId = method.SubjectId,
-                    MethodId = ManagedNaming.CreateMethodId(method),
-                    Signature = method.Signature,
-                },
+                Identity = ManagedMethodIdentityResolver.Create(method),
                 BodyAvailabilityCode = BodyAvailabilityResolver.Resolve(method),
                 Blocks = blocks,
                 ExceptionRegions = LowerExceptionRegions(method, offsetBlocks, offsetToBlockIndex),
@@ -98,15 +90,7 @@ public sealed class ILToIRLowering
         {
             MethodId = ManagedNaming.CreateMethodId(method),
             SubjectId = method.SubjectId,
-            Identity = new ManagedMethodIdentityArtifact
-            {
-                AssemblyName = method.AssemblyName,
-                DeclaringTypeSubjectId = method.DeclaringTypeSubjectId,
-                DefinitionSubjectId = method.DefinitionSubjectId,
-                SubjectId = method.SubjectId,
-                MethodId = ManagedNaming.CreateMethodId(method),
-                Signature = method.Signature,
-            },
+            Identity = ManagedMethodIdentityResolver.Create(method),
             BodyAvailabilityCode = BodyAvailabilityResolver.Resolve(method),
             Blocks = fallbackBlocks,
         };

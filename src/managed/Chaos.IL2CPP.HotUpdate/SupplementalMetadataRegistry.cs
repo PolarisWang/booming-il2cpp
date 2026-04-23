@@ -4,6 +4,8 @@ namespace Chaos.IL2CPP.HotUpdate;
 
 public sealed class SupplementalMetadataRegistry
 {
+    private readonly Dictionary<string, SupplementalMetadataResolvedMethod> _packageMethodsByExecutionAuthority =
+        new(StringComparer.Ordinal);
     private readonly Dictionary<string, SupplementalMetadataResolvedMethod> _packageMethodsBySubjectId =
         new(StringComparer.Ordinal);
     private readonly Dictionary<int, SupplementalMetadataResolvedMethod> _packageMethodsByToken = [];
@@ -25,6 +27,7 @@ public sealed class SupplementalMetadataRegistry
     {
         ActivePackage = null;
         ActiveMetadata = null;
+        _packageMethodsByExecutionAuthority.Clear();
         _packageMethodsBySubjectId.Clear();
         _packageMethodsByToken.Clear();
     }
@@ -88,6 +91,23 @@ public sealed class SupplementalMetadataRegistry
         return ActiveMetadata is not null && ActiveMetadata.HasGenericInstantiation(subjectId);
     }
 
+    public bool TryGetMethodByExecutionAuthority(
+        ManagedMethodIdentityArtifact identity,
+        out SupplementalMetadataResolvedMethod? entry)
+    {
+        ArgumentNullException.ThrowIfNull(identity);
+
+        if (_packageMethodsByExecutionAuthority.TryGetValue(
+                ManagedMethodIdentityResolver.ResolveExecutionAuthorityKey(identity),
+                out entry))
+        {
+            return true;
+        }
+
+        entry = null;
+        return false;
+    }
+
     internal bool TryGetMethodBySubjectId(string subjectId, out SupplementalMetadataResolvedMethod? entry)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
@@ -102,6 +122,7 @@ public sealed class SupplementalMetadataRegistry
 
     private void RebuildPackageMethods(LoadedHotUpdatePackage package)
     {
+        _packageMethodsByExecutionAuthority.Clear();
         _packageMethodsBySubjectId.Clear();
         _packageMethodsByToken.Clear();
 
@@ -121,7 +142,20 @@ public sealed class SupplementalMetadataRegistry
             };
 
             _packageMethodsBySubjectId[assembly.EntryPoint] = entry;
+            _packageMethodsByExecutionAuthority[ResolvePackageExecutionAuthorityKey(assembly)] = entry;
             _packageMethodsByToken[entry.MetadataToken] = entry;
         }
+    }
+
+    private static string ResolvePackageExecutionAuthorityKey(HotUpdateAssemblyEntry assembly)
+    {
+        ArgumentNullException.ThrowIfNull(assembly);
+
+        if (!string.IsNullOrWhiteSpace(assembly.ExecutionAuthorityKey))
+        {
+            return assembly.ExecutionAuthorityKey;
+        }
+
+        return assembly.EntryPoint;
     }
 }

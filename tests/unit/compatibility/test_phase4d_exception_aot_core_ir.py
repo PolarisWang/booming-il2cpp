@@ -7,6 +7,8 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import find_method_by_subject_id, read_contracts_source
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
@@ -93,7 +95,7 @@ class Phase4DExceptionAotCoreIrTests(unittest.TestCase):
         self.__class__.bundle_generated = True
 
     def test_aot_core_ir_contract_exposes_typed_exception_regions(self) -> None:
-        contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")
+        contracts_source = read_contracts_source(REPO_ROOT)
 
         for required_fragment in [
             "public enum AotCoreIrExceptionRegionKind : byte",
@@ -108,7 +110,7 @@ class Phase4DExceptionAotCoreIrTests(unittest.TestCase):
 
         artifact_path = self.output_root / "aot-core-ir.json"
         artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
-        capture_method = next(method for method in artifact["methods"] if method["subjectId"] == CAPTURE_SUBJECT_ID)
+        capture_method = find_method_by_subject_id(artifact["methods"], CAPTURE_SUBJECT_ID)
 
         self.assertEqual(1, capture_method["exceptionRegionCount"])
         self.assertEqual(1, len(capture_method["exceptionRegions"]))

@@ -32,6 +32,9 @@ class Phase5MetadataClosureProofTests(unittest.TestCase):
         self.assertIn("Capability = ChaosCapabilityItem.MetadataSupplement", metadata_supplement_source)
         self.assertIn("typeof(MetadataSupplementBox<int>)", metadata_supplement_source)
         self.assertIn("MetadataSupplementRegistry.Add", metadata_supplement_source)
+        self.assertIn("MethodBase constructor = closedIntType.GetConstructors(BindingFlags.Instance | BindingFlags.Public)[0];", metadata_supplement_source)
+        self.assertIn("var constructedBox = (MetadataSupplementBox<int>)constructor.Invoke(obj: null, parameters: [84])!;", metadata_supplement_source)
+        self.assertIn("Assert.Equal(84, constructedBox.Value);", metadata_supplement_source)
 
         self.assertIn("internal readonly record struct AotClosureRecord", aot_closure_validation_source)
         self.assertIn("internal static class AotClosureValidationProofEntry", aot_closure_validation_source)
