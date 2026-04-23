@@ -15,6 +15,7 @@
 - 让每个任务的知识沉淀目标尽量明确
 - 让任务总数可被执行阶段稳定确认
 - 让任务在完成后进入“审视架构合理性 -> 测试通过 -> 归档 completed -> 合并&提交”固定收尾链路
+- 如果计划对应 roadmap-child 或其它独立子任务，必须在计划里写明：终态时要物理移动目录并回写父任务，不能只在正文里写 `completed`
 
 ## AOT / IL2CPP / Test Governance Intake
 
@@ -38,3 +39,4 @@
 ## 最近变更
 
 - `2026-04-18`：新增 AOT / IL2CPP / test governance intake 字段，要求 plan 先冻结 obligation，再进入执行。
+- `2026-04-22`：补充 roadmap-child 终态约束，要求计划显式声明物理归档与父任务回写。

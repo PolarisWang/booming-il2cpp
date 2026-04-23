@@ -22,8 +22,9 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
 
 ### 1. 在任何响应或行动前先选技能
 
-- 新功能、行为调整、流程重构：先用 `brainstorming`
-- 已有明确多阶段任务：用 `writing-plans` 或 `roadmap`
+- 默认的边界清晰、单会话、单目标任务，且执行前提已确认完毕：可直接实现；如果已存在正式任务目录，默认只维护 `STATUS.md`
+- 新功能、行为调整、流程重构，或仍存在任何影响执行的问题（边界、authority、结构、依赖、验收口径、阶段切分、启动条件）：先用 `brainstorming`
+- 已有明确跨会话或多步骤任务，且上游问题已清零并得到用户确认：用 `writing-plans` 或 `roadmap`
 - 已有计划并开始推进：用 `executing-plans`
 - bug、回归、异常结果：先用 `systematic-debugging`
 - 完成前的结果确认：用 `verification-before-completion`
@@ -41,7 +42,11 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
 ### 3. 工作流映射
 
 - “设计一个新功能 / 规范 / 架构”：
-  `brainstorming -> writing-plans`，如果是多阶段主线则转 `roadmap`
+  先 `brainstorming` 把执行相关问题清零并拿到用户确认；之后进入 `writing-plans`，如果是多阶段主线则转 `roadmap`
+- “边界清晰的小范围改动 / 单文件修复 / 单会话任务”：
+  直接实现；如已存在正式任务目录，则走 `STATUS.md` 轻量维护，不强制补 `plan` / `design`
+- “任务已经跨会话 / 多步骤，但还有执行前未确认的问题”：
+  先回 `brainstorming`，不要直接写 `plan` 或 `roadmap`
 - “继续执行现有 roadmap / plan”：
   `executing-plans`
 - “修这个 bug / 回归 / benchmark 异常 / 测试阶段 dotnet 崩溃”：
@@ -55,6 +60,22 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
 
 - 小范围阅读、局部核对、低风险验证可以直接处理
 - 一旦进入新的正式主线任务，再由计划/执行类技能负责更新 `docs/dev/ACTIVE.md`、`STATUS.md` 和索引
+- 默认不要为了简单任务创建额外文档；只有跨会话/多步骤才引入 `plan`，只有边界或 authority 真实变化才引入 `design`
+
+### 5. `STATUS-only` 不是永久豁免
+
+- 边界清晰、单会话、单目标任务可以先走 `STATUS.md` 轻量维护
+- 但只要出现以下任一信号，就必须在继续实现前升级：
+  - 任务将跨会话继续
+  - 已拆成多个可验证步骤
+  - 需要稳定交接给后续执行者
+  - 边界、authority、结构方案不再稳定
+  - 仍存在任何影响执行的问题尚未确认
+- 命中上述条件时：
+  - 如果仍有执行前未确认的问题：先升级到 `brainstorming`
+  - 如果问题已清零，只是执行步骤增多：升级到 `writing-plans`
+  - 如果问题已清零，且已经形成多阶段或多个独立子任务：升级到 `roadmap`
+  - 升级必须在原任务目录完成，并在 `STATUS.md` 记录升级原因与下一步入口
 
 ## 红旗
 
@@ -65,6 +86,7 @@ description: 在开始任何对话时使用，负责先判断应该激活哪些�
 - “先把 benchmark 跑通，之后再补自动化测试”
 - “先把 emitter 拼出来，模板后面再说”
 - “formal verification object 后面再补，现在先归档 completed”
+- “先建 roadmap，剩下的 open questions 边做边确认”
 
 ## 关联技能
 

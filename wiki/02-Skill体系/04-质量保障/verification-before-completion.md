@@ -15,6 +15,7 @@
 2. 再查 registry 快照或 `run test registry list --json`
 3. 有 `canonicalCommand` 就直接执行
 4. 有 `docRefs` 再回退到 `wiki/06-测试验证/` 对应页面
+5. 如果用户要求新的验证通过记录 / 新的数据，或任务命中 `project-test-governance` 主线，则 formal object 与 regression 通过后继续执行 `run test inventory --json` 刷新正式产物
 
 ## Obligation-Driven 规则
 
@@ -32,7 +33,9 @@
 - 先执行 plan 声明的 `formalVerificationObjects`
 - 至少确认 `requiredGates`、managed proof、native proof、按需 hotupdate proof / benchmark、以及受影响 regression
 - 如果 authority 要求正式对象或 case，但仓库里不存在，先补对象或 case，再允许完成
+- 如果本轮要求新的 verification 数据，则不能只记录 `summaryPath` / `eventsPath` / `consolePath`；还要记录 `verification-v1` 的 `latest/master/reports` 路径，命中 codegen 时再记录 `codegen-stubs` 路径
 
 ## 最近变更
 
 - `2026-04-18`：把该 skill 明确为 formal object selector，并接入 AOT obligation-driven completion gate。
+- `2026-04-23`：补充 verification 数据刷新要求；命中新测试流程打通任务时，formal object 通过后必须刷新 `verification-v1` 正式产物。

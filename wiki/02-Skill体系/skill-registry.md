@@ -37,3 +37,4 @@
 - `2026-04-17`：新增 `dev-project-test-governance`，并把 `subjects/test/Chaos.TestFramework/collection/runner/codegen` 相关任务正式接入主技能入口。
 - `2026-04-18`：补充 AOT obligation intake 字段、formal verification gate 与 authority 分工；`dev-verification-before-completion` 成为 formal object selector，`dev-test-driven-development` 只保留 TDD 纪律。
 - `2026-04-19`：更新 `dev-project-test-governance` 的项目说明，明确 IL2CPP / Python codegen 默认优先 Scriban，能力不足时先扩展 Scriban。
+- `2026-04-23`：更新 `dev-using-booming`、`dev-brainstorm`、`dev-roadmap`、`dev-writing-plans`、`dev-executing-plans`、`dev-subagent-driven-development`、`dev-project-test-governance`、`dev-verification-before-completion` 与 `dev-project-wiki-maintenance`，统一“问题先清零再规划/执行”的主线，并要求命中新测试流程打通任务时在 formal object 通过后刷新 `verification-v1` 正式产物、记录结构化新数据路径。

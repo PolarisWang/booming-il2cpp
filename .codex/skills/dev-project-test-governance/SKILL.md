@@ -20,8 +20,10 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 
 ## Authority 边界
 
-- [`docs/architecture/managed-native-hotupdate-test-pipeline.md`](../../../docs/architecture/managed-native-hotupdate-test-pipeline.md)
-  - 拥有 pipeline、分层、collection/manifest/codegen 边界
+- [`docs/architecture/subject-test-framework-v1/INDEX.md`](../../../docs/architecture/subject-test-framework-v1/INDEX.md)
+  - 拥有统一测试主线、collection/manifest/codegen 分层与 subject test framework 的长期边界
+- [`docs/architecture/verification-v1/spec.md`](../../../docs/architecture/verification-v1/spec.md)
+  - 拥有 formal verification、归并归档、projection 与权责图审核边界
 - [`wiki/06-测试验证/INDEX.md`](../../../wiki/06-测试验证/INDEX.md)
   - 拥有正式验证入口、对象导航与 completion 前的对象优先级
 - [`wiki/06-测试验证/AOT新Feature接入自测规范.md`](../../../wiki/06-测试验证/AOT新Feature接入自测规范.md)
@@ -90,11 +92,23 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 - file-level codegen 默认 Scriban
 - cutover 完成后删除旧 alias、旧命名和旧双轨逻辑
 
+### 5. 新验证记录与新数据必须落地
+
+- 如果任务目标包含“与新测试流程打通”、需要新的验证通过记录、需要新的 verification 数据，或本轮改动触及 `subjects/test/runner/benchmark/codegen` 主线，则不能只停在 formal object 跑通
+- formal object 与受影响 regression 通过后，必须刷新 `verification-v1` 正式产物；默认命令为 `run test inventory --json`，或仓库后续提供的等价 writer
+- 至少确认本轮生成或更新：
+  - `docs/testing-inventory/verification/latest/*`
+  - `docs/testing-inventory/verification/master/*`
+  - `docs/testing-inventory/verification/reports/<closure-kind>/<scope>/summary.md`
+  - `subjects/*/verification/codegen-stubs/*`（命中 codegen 主线时）
+- `artifacts/**` 下的 `summaryPath` / `eventsPath` / `consolePath` 只是过程证据，不等于新的 formal verification 数据
+
 ## 输出要求
 
 如果本次任务改变了长期规则，至少同步更新：
 
-- `docs/architecture/managed-native-hotupdate-test-pipeline.md`
+- `docs/architecture/subject-test-framework-v1/INDEX.md`
+- `docs/architecture/verification-v1/spec.md`
 - `wiki/06-测试验证/AOT新Feature接入自测规范.md`
 - `wiki/06-测试验证/INDEX.md`
 - `wiki/02-Skill体系/04-质量保障/project-test-governance.md`

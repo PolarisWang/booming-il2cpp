@@ -28,7 +28,10 @@
 - 若分流结果是 roadmap，必须先向用户说明原因并等待确认
 - roadmap 是父任务，不承担具体长期执行
 - 具体实施必须通过独立子任务目录完成
+- roadmap child task 是独立生命周期任务；进入 `completed` / `hanging` / `abandoned` 后必须物理移出 `docs/dev/in-progress/`
+- 父 roadmap 只能同步 child mapping、摘要和下一步，不能用父任务文案替代 child task 的归档动作
 
 ## 最近变更
 
 - `2026-04-04`：新增 roadmap 主线，承接 brainstorm 后的多阶段规划分流。
+- `2026-04-22`：明确 roadmap-child 必须物理归档，父任务不能只在表格里把 child 标成 completed。
