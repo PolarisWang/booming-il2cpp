@@ -161,6 +161,13 @@ public sealed record ManagedClosureArtifactRef
     public required string Path { get; init; }
 }
 
+public sealed record ManagedClosureResolvedAssemblyRef
+{
+    public required string AssemblyName { get; init; }
+
+    public required string Path { get; init; }
+}
+
 public sealed record ManagedClosureManifestArtifact
 {
     public string FormatVersion { get; init; } = "v0";
@@ -174,6 +181,8 @@ public sealed record ManagedClosureManifestArtifact
     public required string InputAssemblyPath { get; init; }
 
     public IReadOnlyList<string>? AdditionalAssemblyPaths { get; init; }
+
+    public IReadOnlyList<ManagedClosureResolvedAssemblyRef>? ResolvedAssemblies { get; init; }
 
     public bool FullAssemblyClosure { get; init; }
 

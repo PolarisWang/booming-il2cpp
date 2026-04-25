@@ -40,4 +40,5 @@
 - `2026-04-23`：更新 `dev-using-booming`、`dev-brainstorm`、`dev-roadmap`、`dev-writing-plans`、`dev-executing-plans`、`dev-subagent-driven-development`、`dev-project-test-governance`、`dev-verification-before-completion` 与 `dev-project-wiki-maintenance`，统一“问题先清零再规划/执行”的主线，并要求命中新测试流程打通任务时在 formal object 通过后刷新 `verification-v1` 正式产物、记录结构化新数据路径。
 
 - `2026-04-24`：补充 verification-v1 public command surface 口径，明确 `run test inventory` 已内部化，以及 `benchmark --record` 只写 raw benchmark records，不等于 formal refresh。
+- `2026-04-25`：更新 `dev-project-test-governance`，补充 DLL-first reporting / projection contract 的数据刷新约束；命中报告对象、formal reports、projection 字段或证据链接规则改动时，必须同步刷新 `verification-v1` 正式数据与对应 projection。
 

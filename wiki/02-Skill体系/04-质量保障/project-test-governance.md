@@ -26,7 +26,10 @@
 - 测试阶段�?`dotnet` 编译崩溃必须先查根因并修�?- IL2CPP / Python file-level codegen 默认 Scriban，能力不足时先扩�?Scriban
 - cutover 完成后删除旧 alias、旧命名和旧双轨逻辑
 - 如果任务要求新的验证通过记录或新的 verification 数据，formal object 跑通后还必须刷新 `verification-v1` 正式产物；默认命令为 `run verify verification-v1 --json`
+- 如果本轮改动触及 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、`testing-inventory` / `benchmark` 页面字段或证据链接规则，也必须在实现后刷新 `verification-v1` 正式产物；不允许只改 schema、模板或页面读取逻辑而不刷新正式数据
+- 对于 DLL-first reporting 一类 evidence-driven projection，`artifacts/**` 下的真实产物才允许进入 primary evidence / artifact index；`docs/**`、`subjects/**`、`verification/**` 等引用只能作为 support refs，不能把项目状态置为通过，也不能混入 primary artifact table
 - 新测试流程的数据以 `verification/archive/{latest,master,reports}` 与 `verification/evidence/owners/*/codegen-stubs/*` 为准；`artifacts/**` 运行日志只算过程证据
+- 命中 projection / report contract 时，还必须确认对应 `verification/projections/**` 派生产物已更新
 - `run test inventory` 只是内部命令，不作为对外 public entry。
 - `benchmark --record` 只写 raw benchmark records，不等于 formal refresh。需要新的 benchmark archive / projection / merged data 时，必须后续执行 `run verify verification-v1 --json`。
 
@@ -45,4 +48,6 @@
 - `2026-04-18`：把 skill 本身收缩为治理入口，不再重复承担全部 authority 叙述，并新增 obligation intake 字段冻结要求。
 - `2026-04-23`：补充“新验证记录 / 新数据”规则，要求命中测试治理主线的任务在 formal object 通过后刷新 `verification-v1` 正式产物。
 - `2026-04-24`：补充 public command surface 口径，明确 `run test inventory` 已内部化，以及 `benchmark --record` 只写 raw records，不等于 formal refresh。
+- `2026-04-25`：补充 DLL-first reporting / projection contract 刷新要求；命中报告对象、页面字段或证据链接规则改动时，不能只改 schema 或页面，必须同步刷新 `verification-v1` 正式数据与对应 projection。
+- `2026-04-25`：补充 DLL-first reporting 证据分层口径；`artifacts/**` 只计 primary evidence，`docs/**` / `subjects/**` / `verification/**` 只作为 support refs。
 

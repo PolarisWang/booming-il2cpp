@@ -24,7 +24,8 @@
   "projections": {
     "root": "verification/projections",
     "testingInventory": "verification/projections/testing-inventory",
-    "benchmark": "verification/projections/benchmark"
+    "benchmark": "verification/projections/benchmark",
+    "foundationDllAudit": "verification/projections/foundation-dll-audit"
   },
   "commands": {
     "verify": "python build/toolchains/run/run.py verify verification-v1 --json",

@@ -92,12 +92,15 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 ### 5. 新验证记录与新数据必须落地
 - 如果任务目标包含“与新测试流程打通”、需要新的验证通过记录、需要新的 verification 数据，或本轮改动触及 `subjects/test/runner/benchmark/codegen` 主线，则不能只停在 formal object 跑通。
 - formal object 与受影响 regression 通过后，必须刷新 `verification-v1` 正式产物；默认命令为 `run verify verification-v1 --json`。
+- 如果本轮改动触及 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、`testing-inventory` / `benchmark` 页面字段，或证据链接规则，也必须在实现后刷新 `verification-v1` 正式产物；不允许只改 schema、模板或页面读取逻辑而不刷新正式数据。
+- 对于 DLL-first reporting 一类 evidence-driven projection，`artifacts/**` 下的真实产物才允许进入 primary evidence / artifact index；`docs/**`、`subjects/**`、`verification/**` 等引用只能作为 support refs，不能把项目状态置为 `passed`，也不能混入 primary artifact table。
 - `run test inventory` 只是内部命令，不是 public command surface。
 - `benchmark --record` 只写 raw benchmark records，不等于 formal refresh。需要新的 benchmark archive、projection 或 merged data 时，仍要后续执行 `run verify verification-v1 --json`。
 - 至少确认本轮生成或更新：
   - `verification/archive/latest/*`
   - `verification/archive/master/*`
   - `verification/archive/reports/<closure-kind>/<scope>/summary.md`
+  - 命中 projection / report contract 时，对应 `verification/projections/**` 派生产物
   - `verification/evidence/owners/*/codegen-stubs/*`（命�?codegen 主线时）
 - `artifacts/**` 下的 `summaryPath` / `eventsPath` / `consolePath` 只是过程证据，不等于新的 formal verification 数据
 
@@ -116,6 +119,4 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 - 上游：`brainstorming`、`systematic-debugging`
 - 协作：`test-driven-development`、`project-wiki-maintenance`
 - 下游：`writing-plans`、`executing-plans`、`verification-before-completion`
-
-
 
