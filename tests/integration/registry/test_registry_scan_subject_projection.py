@@ -5,7 +5,7 @@ class TestRegistryScanSubjectProjection(RegistryScanTestSupport):
     def test_registry_scan_collects_subjects_declared_by_shared_orchestration_profiles(self) -> None:
         registry_module = load_module(REGISTRY_MODULE_PATH, "chaos_run_registry_shared_profiles")
         repo_root = make_temp_repo_root("registry-scan", "shared-profiles")
-        manifest_path = repo_root / "subjects" / "FixtureSharedRegistry" / "subject.manifest.json"
+        manifest_path = repo_root / "verification" / "catalog" / "owners" / "FixtureSharedRegistry" / "owner.manifest.json"
         pipeline_profile_path = repo_root / "testing" / "orchestration" / "pipelines" / "proof-core.json"
         matrix_profile_path = repo_root / "testing" / "orchestration" / "matrices" / "proof-core.json"
         manifest_path.parent.mkdir(parents=True, exist_ok=True)
@@ -62,7 +62,7 @@ class TestRegistryScanSubjectProjection(RegistryScanTestSupport):
             "defaultValidationProfile": "proof-dev",
             "source": {
                 "type": "dotnet-project",
-                "path": "subjects/FixtureSharedRegistry/source/FixtureSharedRegistry.csproj",
+                "path": "verification/catalog/owners/FixtureSharedRegistry/support/host/FixtureSharedRegistry.csproj",
                 "entry": "FixtureSharedRegistry/Program::Main()",
             },
             "orchestration": {
@@ -124,7 +124,7 @@ class TestRegistryScanSubjectProjection(RegistryScanTestSupport):
         solution_core_item = next(item for item in index.subjects if item["id"] == "subject/SolutionCorePack")
 
         self.assertEqual(
-            "subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj",
+            "verification/catalog/owners/HotUpdateHostPack/support/host/HotUpdateHostPack.csproj",
             hot_update_item["defaultPrimaryProjectPath"],
         )
         self.assertEqual(
@@ -138,7 +138,7 @@ class TestRegistryScanSubjectProjection(RegistryScanTestSupport):
         self.assertNotIn("defaultWorkloadEntry", hot_update_item)
 
         self.assertEqual(
-            "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj",
+            "verification/catalog/owners/MixedExecutionFeaturePack/support/host/MixedExecutionFeaturePack.csproj",
             mixed_execution_item["defaultPrimaryProjectPath"],
         )
         self.assertEqual(
@@ -152,7 +152,7 @@ class TestRegistryScanSubjectProjection(RegistryScanTestSupport):
         self.assertNotIn("defaultWorkloadEntry", mixed_execution_item)
 
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
+            "verification/catalog/owners/SolutionCorePack/support/host/SolutionCorePack.csproj",
             solution_core_item["defaultPrimaryProjectPath"],
         )
         self.assertEqual(

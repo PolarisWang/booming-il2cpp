@@ -4,10 +4,11 @@ import json
 import unittest
 from pathlib import Path
 
+from tests.support import SOLUTION_CORE_PACK_OWNER_MANIFEST_PATH, SOLUTION_CORE_PACK_OWNER_ROOT
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-INTERFACE_DISPATCH_SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
-INTERFACE_DISPATCH_MANIFEST_PATH = INTERFACE_DISPATCH_SUBJECT_ROOT / "subject.manifest.json"
+INTERFACE_DISPATCH_SUBJECT_ROOT = SOLUTION_CORE_PACK_OWNER_ROOT
+INTERFACE_DISPATCH_MANIFEST_PATH = SOLUTION_CORE_PACK_OWNER_MANIFEST_PATH
 INTERFACE_DISPATCH_TEMPLATE_PATH = (
     REPO_ROOT
     / "src"
@@ -18,7 +19,7 @@ INTERFACE_DISPATCH_TEMPLATE_PATH = (
 )
 INTERFACE_DISPATCH_BASELINE_PATH = (
     INTERFACE_DISPATCH_SUBJECT_ROOT
-    / "baselines"
+    / "benchmark-baselines"
     / "perf"
     / "windows-native-profile"
     / "windows.json"

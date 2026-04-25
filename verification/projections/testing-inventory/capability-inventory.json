@@ -1376,7 +1376,7 @@
       ],
       "proofRequired": true,
       "benchmarkRequired": true,
-      "declaredUnitCount": 1,
+      "declaredUnitCount": 2,
       "declaredBenchmarkCount": 1,
       "contractStatus": "ok",
       "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。"

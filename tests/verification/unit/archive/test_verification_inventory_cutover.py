@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 
 from tests.unit.performance.testing_inventory_test_support import (
     cleanup_repo_root,
@@ -126,6 +127,195 @@ def test_write_inventory_outputs_projects_capability_table_from_merged_formal_ma
         assert len(capability_payload["rows"]) == 3
         assert capability_items[88]["ownerSubjectId"] == "LegacyPack"
         assert capability_items[88]["statusReason"] == "Merged from previous formal master."
+    finally:
+        cleanup_repo_root(repo_root)
+
+
+def test_write_inventory_outputs_preserves_legacy_formal_master_rows_across_inventory_views() -> None:
+    generator_module = load_inventory_generator_module("chaos_testing_inventory_generator_verification_legacy_rows")
+    fixture = inventory_fixture()
+    repo_root = make_temp_repo_root("verification", "inventory-legacy-rows")
+    write_inventory_fixture_repo(repo_root, fixture)
+
+    master_root = repo_root / "verification" / "archive" / "master"
+    master_root.mkdir(parents=True, exist_ok=True)
+    (master_root / "capability-master.json").write_text(
+        json.dumps(
+            {
+                "schemaVersion": 1,
+                "generatedAtUtc": "2026-04-22T07:00:00Z",
+                "producerId": "verification-v1",
+                "sourceSpecVersion": "verification-v1",
+                "mergeKey": "capabilityId",
+                "items": [
+                    {
+                        "capabilityId": "capability/42/88",
+                        "displayName": "Legacy Capability",
+                        "ownerSubjectId": "LegacyPack",
+                        "defaultRoutes": ["managed"],
+                        "defaultPlatforms": ["windows-x64"],
+                        "defaultDeviceProfiles": ["inventory-host"],
+                        "requiredEvidenceKinds": ["contract", "semantic"],
+                        "verificationState": "passed",
+                        "supportState": "supported",
+                        "blockers": [],
+                        "latestClosureId": "closure/completed/testing-inventory",
+                        "latestObligationClaimIds": ["obligation/42/88"],
+                        "projectionMeta": {
+                            "ownerSubjectId": "LegacyPack",
+                            "capabilityFamily": 42,
+                            "capabilityFamilyLabel": "Legacy Family",
+                            "capabilityItem": 88,
+                            "capabilityItemLabel": "Legacy Capability",
+                            "supportStates": [1],
+                            "supportStateLabels": ["NativeGenerated"],
+                            "proofRequired": True,
+                            "benchmarkRequired": False,
+                            "declaredUnitCount": 1,
+                            "declaredBenchmarkCount": 0,
+                            "contractStatus": "ok",
+                            "statusReason": "Merged from previous formal master.",
+                            "scope": "capability",
+                            "rowKey": "capability/42/88",
+                        },
+                    }
+                ],
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    (master_root / "evidence-claims-master.json").write_text(
+        json.dumps(
+            {
+                "schemaVersion": 1,
+                "generatedAtUtc": "2026-04-22T07:00:00Z",
+                "producerId": "verification-v1",
+                "sourceSpecVersion": "verification-v1",
+                "mergeKey": "evidenceClaimId",
+                "items": [
+                    {
+                        "evidenceClaimId": "evidence-claim/unit/LegacyPack::Legacy.Tests::Legacy.LegacyProof::Run()/managed-proof",
+                        "obligationClaimId": "obligation/42/88",
+                        "scenarioId": "LegacyPack::Legacy.Tests::Legacy.LegacyProof::Run()",
+                        "scenarioKind": "unit-test",
+                        "routeCode": "managed",
+                        "platformCode": "inventory-host",
+                        "deviceProfileCode": "inventory-host",
+                        "evidenceKind": "semantic",
+                        "executionContractId": "inventory-bridge/managed-proof",
+                        "verificationState": "passed",
+                        "supportState": "supported",
+                        "blockers": [],
+                        "stageKind": "managed-proof",
+                        "projectionMeta": {
+                            "subjectId": "LegacyPack",
+                            "stableId": "LegacyPack::Legacy.Tests::Legacy.LegacyProof::Run()",
+                            "alias": "legacy-proof",
+                            "method": "Legacy.Tests/Legacy.LegacyProof::Run()",
+                            "stage": "managed-proof",
+                            "stageOrder": 40,
+                            "capabilityFamily": 42,
+                            "capabilityItem": 88,
+                            "capabilityItemLabel": "Legacy Capability",
+                            "ownerSubjectId": "LegacyPack",
+                            "supportStateLabels": ["NativeGenerated"],
+                            "stageRequirement": "required",
+                            "stageCoverage": "covered",
+                            "stageStatus": "covered",
+                            "statusReason": "Merged from previous formal master.",
+                            "defaultGoalId": "correctness.dev",
+                            "defaultMatrixId": "windows-native-check",
+                            "evidenceLabels": ["Semantic"],
+                            "priority": 1,
+                            "scope": "unitTest",
+                            "rowKey": "unit/LegacyPack::Legacy.Tests::Legacy.LegacyProof::Run()/managed-proof",
+                        },
+                    }
+                ],
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    (master_root / "result-master.json").write_text(
+        json.dumps(
+            {
+                "schemaVersion": 1,
+                "generatedAtUtc": "2026-04-22T07:00:00Z",
+                "producerId": "verification-v1",
+                "sourceSpecVersion": "verification-v1",
+                "mergeKey": "obligationClaimId",
+                "items": [
+                    {
+                        "obligationClaimId": "obligation/42/88",
+                        "closureId": "closure/completed/testing-inventory",
+                        "capabilityId": "capability/42/88",
+                        "ownerSubjectId": "LegacyPack",
+                        "requiredEvidenceKinds": ["contract", "semantic"],
+                        "requiredRoutes": ["managed"],
+                        "requiredPlatforms": ["inventory-host"],
+                        "requiredDeviceProfiles": ["inventory-host"],
+                        "mandatoryLanes": ["test_governance", "contracts"],
+                        "supportState": "supported",
+                        "verificationState": "passed",
+                        "blockers": [],
+                        "evidenceClaimIds": [
+                            "evidence-claim/unit/LegacyPack::Legacy.Tests::Legacy.LegacyProof::Run()/managed-proof"
+                        ],
+                        "latestStageId": "managed-proof",
+                        "capabilityFamily": "42",
+                        "projectionMeta": {
+                            "ownerSubjectId": "LegacyPack",
+                            "capabilityFamily": 42,
+                            "capabilityFamilyLabel": "Legacy Family",
+                            "capabilityItem": 88,
+                            "capabilityItemLabel": "Legacy Capability",
+                            "scope": "capability",
+                            "rowKey": "capability/42/88",
+                        },
+                    }
+                ],
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    try:
+        generator_module.write_inventory_outputs(
+            repo_root,
+            host_platform="windows",
+            output_root=repo_root / "verification" / "projections" / "testing-inventory",
+        )
+
+        output_root = repo_root / "verification" / "projections" / "testing-inventory"
+        capability_payload = json.loads((output_root / "capability-inventory.json").read_text(encoding="utf-8"))
+        unit_payload = json.loads((output_root / "unit-test-inventory.json").read_text(encoding="utf-8"))
+        html_document = (output_root / "inventory.html").read_text(encoding="utf-8")
+        payload_match = re.search(r"window\.TESTING_INVENTORY_DATA = (\{.*?\});", html_document, re.DOTALL)
+        assert payload_match is not None
+        inventory_html_payload = json.loads(payload_match.group(1))
+
+        capability_items = {row["capabilityItem"]: row for row in capability_payload["rows"]}
+        assert capability_items[88]["ownerSubjectId"] == "LegacyPack"
+
+        unit_rows = {
+            (row["stableId"], row["stage"]): row
+            for row in unit_payload["rows"]
+        }
+        legacy_unit_row = unit_rows[("LegacyPack::Legacy.Tests::Legacy.LegacyProof::Run()", "managed-proof")]
+        assert legacy_unit_row["ownerSubjectId"] == "LegacyPack"
+        assert legacy_unit_row["stageStatus"] == "covered"
+
+        responsibility_rows = {
+            (row["ownerSubjectId"], row["lane"]): row
+            for row in inventory_html_payload["fixedViews"][1]["rows"]
+        }
+        assert responsibility_rows[("LegacyPack", "test_governance")]["passedCount"] == 1
     finally:
         cleanup_repo_root(repo_root)
 

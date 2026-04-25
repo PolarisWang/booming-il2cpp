@@ -147,6 +147,7 @@
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UInt64BitwiseProofEntry::Run()/registry
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.UnsafePointerProofEntry::Run()/registry
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()/registry
+- evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/registry
 
 ## Failed Evidence
 - n/a

@@ -108,6 +108,16 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticCallCtorGetterStub.cpp.scriban";
     public const string RuntimeSkeletonStaticIntForwarderStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticIntForwarderStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticBoolIdentityForwarderStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticBoolIdentityForwarderStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticBoolProducerForwarderStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticBoolProducerForwarderStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticPrimitiveConvertStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticPrimitiveConvertStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticCheckedByteConvertStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticCheckedByteConvertStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticByteForwarderStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticByteForwarderStub.cpp.scriban";
     public const string RuntimeSkeletonStaticStringReturnForwarderStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringReturnForwarderStub.cpp.scriban";
     public const string RuntimeSkeletonStaticStringForwarderStubTemplateRelativePath =
@@ -146,6 +156,8 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticVoidObjectSinkNoOpStub.cpp.scriban";
     public const string RuntimeSkeletonStaticExceptionThrowLiteralStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticExceptionThrowLiteralStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticExceptionThrowStringProducerStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticExceptionThrowStringProducerStub.cpp.scriban";
     public const string RuntimeSkeletonStaticExceptionCatchStringReturnStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticExceptionCatchStringReturnStub.cpp.scriban";
     public const string RuntimeSkeletonStaticLiteralStringReturnStubTemplateRelativePath =
@@ -242,6 +254,31 @@ internal static class NativeReferenceProofCatalog
     public static Template GetRuntimeSkeletonFieldBackedStringReturnStubTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonFieldBackedStringReturnStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStaticBoolIdentityForwarderStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticBoolIdentityForwarderStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStaticBoolProducerForwarderStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticBoolProducerForwarderStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStaticPrimitiveConvertStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticPrimitiveConvertStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStaticCheckedByteConvertStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticCheckedByteConvertStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStaticByteForwarderStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticByteForwarderStubTemplateRelativePath);
     }
 
     public static Template GetRuntimeSkeletonFieldArgumentStringReturnStubTemplate()
@@ -367,6 +404,11 @@ internal static class NativeReferenceProofCatalog
     public static Template GetRuntimeSkeletonStaticExceptionThrowLiteralStubTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticExceptionThrowLiteralStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStaticExceptionThrowStringProducerStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticExceptionThrowStringProducerStubTemplateRelativePath);
     }
 
     public static Template GetRuntimeSkeletonStaticExceptionCatchStringReturnStubTemplate()

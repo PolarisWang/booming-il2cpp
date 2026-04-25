@@ -9,14 +9,14 @@ Stage 3 负责把真实编译产出的 managed assembly 收束成 generated-code
 ## 输入
 
 - legacy standalone proof input
-  - `subjects/<subject-id>/source/<subject-id>.csproj`
-  - `subjects/<subject-id>/source/bin/Release/net8.0/<subject-id>.dll`
+  - `verification/catalog/owners/<subject-id>/support/host/<subject-id>.csproj`
+  - `verification/catalog/owners/<subject-id>/support/host/bin/Release/net8.0/<subject-id>.dll`
 - retained solution slice input
-  - `subjects/<subject-pack>/source/Slices/<slice-name>/<slice-name>.csproj`
-  - `subjects/<subject-pack>/source/Slices/<slice-name>/bin/Release/net8.0/<slice-name>.dll`
+  - `verification/catalog/scenarios/<subject-pack>/<solution-name>/<slice-name>/<slice-name>.csproj`
+  - `verification/catalog/scenarios/<subject-pack>/<solution-name>/<slice-name>/bin/Release/net8.0/<slice-name>.dll`
 - concrete retained example
-  - `subjects/SolutionCorePack/source/Slices/HelloWorldObject/HelloWorldObject.csproj`
-  - `subjects/SolutionCorePack/source/Slices/HelloWorldObject/bin/Release/net8.0/HelloWorldObject.dll`
+  - `verification/catalog/scenarios/SolutionCorePack/SimpleLibrarySolution/App/GoldenSimpleLib.App.csproj`
+  - `verification/catalog/scenarios/SolutionCorePack/SimpleLibrarySolution/App/bin/Release/net8.0/GoldenSimpleLib.App.dll`
 
 Stage 3 的实现必须读取真实 assembly metadata 和 method body，
 不允许直接复制 Stage 2 的 canonical artifact JSON 作为伪实现输出。

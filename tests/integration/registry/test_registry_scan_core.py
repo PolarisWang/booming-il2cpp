@@ -160,8 +160,8 @@ class TestRegistryScanCore(RegistryScanTestSupport):
                     },
                 }
             ],
-            source_path="subjects/FixtureManagedOutputSubject/source/FixtureManagedOutputSubject.sln",
-            primary_project_path="subjects/FixtureManagedOutputSubject/source/App/App.csproj",
+            source_path="verification/catalog/scenarios/FixtureManagedOutputSubject/FixtureManagedOutputSubjectSolution/FixtureManagedOutputSubject.sln",
+            primary_project_path="verification/catalog/scenarios/FixtureManagedOutputSubject/FixtureManagedOutputSubjectSolution/App/App.csproj",
             entry="FixtureManagedOutputSubject/Program::Main()",
         )
         native_proof_subject = build_registry_subject_manifest(

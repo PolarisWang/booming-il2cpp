@@ -180,6 +180,51 @@ class TestTestingInventoryGenerator(TestingInventoryTestSupport):
         )
         self.assertNotIn("docs/benchmark/overview.json", headers["managedStatus"]["hint"]["source"])
 
+    def test_build_inventory_outputs_projects_legacy_proof_evidence_into_all_proof_stages(self) -> None:
+        generator_module = load_inventory_generator_module("chaos_testing_inventory_generator_legacy_proof_stages")
+        payload = sample_inventory_source()
+        payload["declaredUnitTests"][0]["hotUpdateCapability"] = 1
+        payload["declaredUnitTests"][0]["hotUpdateCapabilityLabels"] = ["PackageLoad"]
+        payload["proofEvidence"] = [
+            {
+                "subjectId": "FixtureSubject",
+                "stableId": payload["declaredUnitTests"][0]["stableId"],
+                "stageKind": "managed-proof",
+                "status": "ok",
+                "runId": "legacy-managed",
+            },
+            {
+                "subjectId": "FixtureSubject",
+                "stableId": payload["declaredUnitTests"][0]["stableId"],
+                "stageKind": "native-proof",
+                "status": "fail",
+                "runId": "legacy-native",
+            },
+            {
+                "subjectId": "FixtureSubject",
+                "stableId": payload["declaredUnitTests"][0]["stableId"],
+                "stageKind": "hotupdate-proof",
+                "status": "ok",
+                "runId": "legacy-hotupdate",
+            },
+        ]
+
+        outputs = generator_module.build_inventory_outputs(payload)
+        by_stage = {row["stage"]: row for row in outputs["unitTest"]["rows"]}
+
+        self.assertEqual("covered", by_stage["managed-proof"]["stageStatus"])
+        self.assertEqual("failed", by_stage["native-proof"]["stageStatus"])
+        self.assertEqual("covered", by_stage["hotupdate-proof"]["stageStatus"])
+
+    def test_build_inventory_outputs_omits_legacy_benchmark_flag_for_non_legacy_rows(self) -> None:
+        generator_module = load_inventory_generator_module("chaos_testing_inventory_generator_non_legacy_benchmark_flag")
+        payload = sample_inventory_source()
+
+        outputs = generator_module.build_inventory_outputs(payload)
+        row = outputs["benchmark"]["rows"][0]
+
+        self.assertNotIn("legacyCompatibilityClaim", row)
+
     def test_build_inventory_outputs_renders_html_document_with_header_tooltips(self) -> None:
         generator_module = load_inventory_generator_module("chaos_testing_inventory_generator_html_document")
         payload = generator_module.build_inventory_outputs(sample_inventory_source())

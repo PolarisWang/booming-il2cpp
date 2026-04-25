@@ -66,7 +66,9 @@ class TestSubjectWorkersPerfWorkspaceHostsInterpreter(SubjectWorkersTestSupport)
                 ),
                 encoding="utf-8",
             )
-            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+            subject_manifest_path = (
+                repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.manifest.json"
+            )
             subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
             subject_manifest_path.write_text(
                 json.dumps(
@@ -87,7 +89,7 @@ class TestSubjectWorkersPerfWorkspaceHostsInterpreter(SubjectWorkersTestSupport)
 
             perf_result = {
                 "metrics": {"meanDurationMs": 20.0, "opsPerSecond": 5000, "checksum": 42},
-                "baselinePath": "subjects/SolutionCorePack/baselines/perf/windows-interpreter-perf/windows.json",
+                "baselinePath": "verification/catalog/owners/SolutionCorePack/benchmark-baselines/perf/windows-interpreter-perf/windows.json",
                 "baseline": {},
                 "baselineUpdated": False,
                 "regressionStatus": "no-baseline",
@@ -239,7 +241,9 @@ class TestSubjectWorkersPerfWorkspaceHostsInterpreter(SubjectWorkersTestSupport)
                 ),
                 encoding="utf-8",
             )
-            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+            subject_manifest_path = (
+                repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.manifest.json"
+            )
             subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
             subject_manifest_path.write_text(
                 json.dumps(
@@ -260,7 +264,7 @@ class TestSubjectWorkersPerfWorkspaceHostsInterpreter(SubjectWorkersTestSupport)
 
             perf_result = {
                 "metrics": {"meanDurationMs": 20.0, "opsPerSecond": 5000, "checksum": 42},
-                "baselinePath": "subjects/HotUpdateHostPack/baselines/perf/windows-interpreter-perf/windows.json",
+                "baselinePath": "verification/catalog/owners/HotUpdateHostPack/benchmark-baselines/perf/windows-interpreter-perf/windows.json",
                 "baseline": {},
                 "baselineUpdated": False,
                 "regressionStatus": "no-baseline",

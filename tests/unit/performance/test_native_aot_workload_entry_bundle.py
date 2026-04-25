@@ -7,7 +7,7 @@ import unittest
 import uuid
 from pathlib import Path
 
-from tests.support import load_module
+from tests.support import SOLUTION_CORE_PACK_BENCHMARKS_PROJECT_PATH, SOLUTION_CORE_PACK_BENCHMARKS_ROOT, load_module
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -15,9 +15,9 @@ TOOLING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "core" / "too
 DRIVER_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
 DRIVER_DLL_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Driver.dll"
 SUBJECT_ID = "SolutionCorePack"
-WORKLOAD_ENTRY = "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()"
-PROJECT_PATH = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "CoreRuntimeBenchmarks.csproj"
-DLL_PATH = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "bin" / "Release" / "net8.0" / "CoreRuntimeBenchmarks.dll"
+WORKLOAD_ENTRY = "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload:System.Int32()"
+PROJECT_PATH = SOLUTION_CORE_PACK_BENCHMARKS_PROJECT_PATH
+DLL_PATH = SOLUTION_CORE_PACK_BENCHMARKS_ROOT / "bin" / "Release" / "net8.0" / "CoreRuntimeBenchmarks.dll"
 TEST_OUTPUT_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase-b-native-aot-workload-entry"
 
 

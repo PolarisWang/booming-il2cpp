@@ -59,8 +59,7 @@ def _workspace_collection_is_stale(repo_root: Path, subject_id: str, collection_
     if not source_path_text:
         return False
 
-    source_path = repo_root / source_path_text
-    source_root = source_path if source_path.is_dir() else source_path.parent
+    source_root = verification_layout_module.owner_scan_root(repo_root, subject_id, source_path_text)
     if not source_root.is_dir():
         return False
 

@@ -40,6 +40,7 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
         for required_fragment in [
             '#include "runtime_core.h"',
             "#include <atomic>",
+            "external_method_stub_declarations",
             "struct RuntimeSkeletonFieldBindingDescriptor",
             "struct RuntimeSkeletonFieldBindingState",
             "struct RuntimeSkeletonTypeDescriptor",
@@ -69,6 +70,31 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
             "kPageArrayClearReferenceArrayDescriptors[]",
         ]:
             self.assertIn(required_fragment, page_template_source)
+
+    def test_runtime_skeleton_static_byte_forwarder_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_STATIC_BYTE_FORWARDER_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticByteReturnForwarderStub",
+            'GetMethodReturnType(method.SubjectId), "System.Byte"',
+            "input_cpp_type",
+            "GetRuntimeSkeletonStaticByteForwarderStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn("RuntimeSkeletonStaticByteForwarderStubTemplateRelativePath", catalog_source)
+        self.assertIn("{{ input_cpp_type }} value;", template_source)
+        self.assertIn("std::uint8_t* return_value;", template_source)
+        self.assertIn("return {{ target_stub_name }}(", template_source)
 
     def test_runtime_skeleton_field_families_lower_to_descriptor_driven_wrappers(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
@@ -533,6 +559,57 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
         ]:
             self.assertIn(required_fragment, native_reference_emitter_source)
 
+    def test_runtime_skeleton_static_bool_identity_forwarder_has_dedicated_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_STATIC_BOOL_IDENTITY_FORWARDER_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticBoolIdentityForwarderStub",
+            "ValidateSingleArgumentForwarderShape",
+            'string.Equals(method.Parameters[0].Type, "System.Boolean", StringComparison.Ordinal)',
+            "GetRuntimeSkeletonStaticBoolIdentityForwarderStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn("RuntimeSkeletonStaticBoolIdentityForwarderStubTemplateRelativePath", catalog_source)
+        self.assertIn("bool value;", template_source)
+        self.assertIn("bool* return_value;", template_source)
+        self.assertIn("*request->return_value = request->value;", template_source)
+
+    def test_runtime_skeleton_static_bool_producer_forwarder_calls_both_stubs(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_STATIC_BOOL_PRODUCER_FORWARDER_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticBoolProducerForwarderStub",
+            'GetMethodReturnType(method.SubjectId), "System.Boolean"',
+            "methodStubNamesBySubjectId",
+            "GetRuntimeSkeletonStaticBoolProducerForwarderStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn("RuntimeSkeletonStaticBoolProducerForwarderStubTemplateRelativePath", catalog_source)
+        self.assertIn("bool produced_value = false;", template_source)
+        self.assertIn("bool forwarded_value = false;", template_source)
+        self.assertIn("{{ producer_stub_name }}(", template_source)
+        self.assertIn("{{ forwarder_stub_name }}(", template_source)
+
     def test_runtime_skeleton_static_string_return_forwarder_calls_target_stub(self) -> None:
         native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         catalog_source = (
@@ -557,6 +634,31 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
         self.assertIn("{{ target_stub_name }}(", template_source)
         self.assertIn("return {{ target_stub_name }}(", template_source)
         self.assertIn("(void)managed_args;", template_source)
+
+    def test_runtime_skeleton_static_primitive_convert_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_STATIC_PRIMITIVE_CONVERT_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticPrimitiveConvertStub",
+            "TryResolveRuntimeSkeletonPrimitiveConvertShape",
+            "GetRuntimeSkeletonStaticPrimitiveConvertStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn("RuntimeSkeletonStaticPrimitiveConvertStubTemplateRelativePath", catalog_source)
+        self.assertIn("{{ input_cpp_type }} value;", template_source)
+        self.assertIn("{{ output_cpp_type }}* return_value;", template_source)
+        self.assertIn("{{ converted_value_expression }}", template_source)
+        self.assertIn("*request->return_value = static_cast<{{ output_cpp_type }}>(", template_source)
 
     def test_runtime_skeleton_static_exception_throw_literal_helper_has_template(self) -> None:
         native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
@@ -597,6 +699,47 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
             "raise_managed_exception",
             "exception_literal",
             "exception_literal_byte_count",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_static_exception_throw_string_producer_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.StaticExceptionThrowStringProducerStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticExceptionThrowStringProducerStub",
+            "GetRuntimeSkeletonStaticExceptionThrowStringProducerStubTemplate",
+            "::.ctor:System.Void(System.String)",
+            "methodStubNamesBySubjectId",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn(
+            "RuntimeSkeletonStaticExceptionThrowStringProducerStubTemplateRelativePath",
+            catalog_source,
+        )
+
+        for required_fragment in [
+            "_ProducerArgs",
+            "producer_stub_name",
+            "produced_message",
+            "object_new",
+            "raise_managed_exception",
         ]:
             self.assertIn(required_fragment, template_source)
 

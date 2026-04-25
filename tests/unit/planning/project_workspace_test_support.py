@@ -37,7 +37,6 @@ def write_json(path: Path, payload: dict) -> None:
 
 
 def write_owner_manifest_fixture(repo_root: Path, subject_id: str, payload: dict) -> None:
-    write_json(repo_root / "subjects" / subject_id / "subject.manifest.json", payload)
     write_json(repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.manifest.json", payload)
     write_json(
         repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.features.json",
@@ -46,6 +45,10 @@ def write_owner_manifest_fixture(repo_root: Path, subject_id: str, payload: dict
             "features": [],
         },
     )
+
+
+def owner_manifest_path(repo_root: Path, subject_id: str) -> Path:
+    return repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.manifest.json"
 
 
 def write_windows_subject_native_project_stubs(
@@ -325,16 +328,9 @@ class ProjectWorkspaceTestSupport(unittest.TestCase):
         subject_id: str = "FixtureSubject",
         include_legacy_native_reference: bool = True,
     ) -> None:
-        source_project = repo_root / "subjects" / subject_id / "source" / f"{subject_id}.csproj"
-        unit_project = (
-            repo_root
-            / "subjects"
-            / subject_id
-            / "validation"
-            / "unit"
-            / f"{subject_id}.Subject.UnitTests"
-            / f"{subject_id}.Subject.UnitTests.csproj"
-        )
+        owner_root = repo_root / "verification" / "catalog" / "owners" / subject_id
+        source_project = owner_root / "support" / "host" / f"{subject_id}.csproj"
+        unit_project = owner_root / "support" / "unit" / f"{subject_id}.Subject.UnitTests" / f"{subject_id}.Subject.UnitTests.csproj"
         native_reference_root = repo_root / "subjects" / subject_id / "validation" / "proof" / "native-reference"
         subject_exec_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / "subject-exec"
         generated_root = subject_exec_root / "analysis" / "generated"
@@ -377,7 +373,7 @@ class ProjectWorkspaceTestSupport(unittest.TestCase):
             "defaultValidationProfile": "proof-dev",
             "source": {
                 "type": "dotnet-project",
-                "path": f"subjects/{subject_id}/source/{subject_id}.csproj",
+                "path": f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.csproj",
                 "entry": f"{subject_id}/Program::Main(System.String[])",
             },
             "validationProfiles": {
@@ -390,7 +386,7 @@ class ProjectWorkspaceTestSupport(unittest.TestCase):
                 },
                 "unit": {
                     "kind": "unit",
-                    "project": f"subjects/{subject_id}/validation/unit/{subject_id}.Subject.UnitTests/{subject_id}.Subject.UnitTests.csproj",
+                    "project": f"verification/catalog/owners/{subject_id}/support/unit/{subject_id}.Subject.UnitTests/{subject_id}.Subject.UnitTests.csproj",
                     "framework": "xunit",
                     "defaultVariant": "CHECK",
                 },
@@ -465,16 +461,9 @@ class ProjectWorkspaceTestSupport(unittest.TestCase):
             (repo_root / "build" / "toolchains" / toolchain_name).write_text("# toolchain\n", encoding="utf-8")
 
     def _write_managed_only_subject_fixture(self, repo_root: Path, *, subject_id: str = "ManagedOnlySubject") -> None:
-        source_project = repo_root / "subjects" / subject_id / "source" / f"{subject_id}.csproj"
-        perf_project = (
-            repo_root
-            / "subjects"
-            / subject_id
-            / "validation"
-            / "perf"
-            / f"{subject_id}.Subject.PerfHarness"
-            / f"{subject_id}.Subject.PerfHarness.csproj"
-        )
+        owner_root = repo_root / "verification" / "catalog" / "owners" / subject_id
+        source_project = owner_root / "support" / "host" / f"{subject_id}.csproj"
+        perf_project = owner_root / "support" / "perf" / f"{subject_id}.Subject.PerfHarness" / f"{subject_id}.Subject.PerfHarness.csproj"
 
         self._write_shared_runtime_fixture(repo_root)
         source_project.parent.mkdir(parents=True, exist_ok=True)
@@ -490,7 +479,7 @@ class ProjectWorkspaceTestSupport(unittest.TestCase):
             "defaultValidationProfile": "perf-dev",
             "source": {
                 "type": "dotnet-project",
-                "path": f"subjects/{subject_id}/source/{subject_id}.csproj",
+                "path": f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.csproj",
                 "entry": f"{subject_id}/Program::Main()",
             },
             "validationProfiles": {
@@ -499,7 +488,7 @@ class ProjectWorkspaceTestSupport(unittest.TestCase):
             "validation": {
                 "perf": {
                     "kind": "perf",
-                    "project": f"subjects/{subject_id}/validation/perf/{subject_id}.Subject.PerfHarness/{subject_id}.Subject.PerfHarness.csproj",
+                    "project": f"verification/catalog/owners/{subject_id}/support/perf/{subject_id}.Subject.PerfHarness/{subject_id}.Subject.PerfHarness.csproj",
                     "driver": "csharp-perf-harness",
                     "defaultVariant": "PROFILE",
                 },
@@ -543,11 +532,13 @@ class ProjectWorkspaceTestSupport(unittest.TestCase):
         *,
         subject_id: str = "FixtureHotUpdateSubject",
     ) -> None:
-        source_root = repo_root / "subjects" / subject_id / "source"
-        host_project = source_root / "Host" / f"{subject_id}.Host.csproj"
-        patch_project = source_root / "Patch" / f"{subject_id}.Patch.csproj"
-        shared_project = source_root / "Shared" / f"{subject_id}.Shared.csproj"
-        solution_path = source_root / f"{subject_id}.sln"
+        owner_root = repo_root / "verification" / "catalog" / "owners" / subject_id
+        scenario_root = repo_root / "verification" / "catalog" / "scenarios" / subject_id / "FixtureHotUpdateSolution"
+        host_root = owner_root / "support" / "host"
+        host_project = host_root / f"{subject_id}.Host.csproj"
+        patch_project = scenario_root / "Patch" / f"{subject_id}.Patch.csproj"
+        shared_project = scenario_root / "Shared" / f"{subject_id}.Shared.csproj"
+        solution_path = host_root / f"{subject_id}.sln"
 
         host_project.parent.mkdir(parents=True, exist_ok=True)
         patch_project.parent.mkdir(parents=True, exist_ok=True)
@@ -618,13 +609,13 @@ class ProjectWorkspaceTestSupport(unittest.TestCase):
             "engineeringProfile": "hot-update-host",
             "source": {
                 "type": "dotnet-project",
-                "path": f"subjects/{subject_id}/source/{subject_id}.sln",
-                "primaryProjectPath": f"subjects/{subject_id}/source/Host/{subject_id}.Host.csproj",
+                "path": f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.sln",
+                "primaryProjectPath": f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.Host.csproj",
                 "entry": f"{subject_id}.Host/Program::Main()",
             },
             "hotUpdate": {
                 "patchProjectPaths": [
-                    f"subjects/{subject_id}/source/Patch/{subject_id}.Patch.csproj",
+                    f"verification/catalog/scenarios/{subject_id}/FixtureHotUpdateSolution/Patch/{subject_id}.Patch.csproj",
                 ]
             },
             "validationProfiles": {

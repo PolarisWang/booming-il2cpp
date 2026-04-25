@@ -42,7 +42,7 @@ class BenchmarkCommandTestSupport(unittest.TestCase):
         *,
         perf_matrix_ids: list[str] | None = None,
     ) -> None:
-        manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+        manifest_path = repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.manifest.json"
         manifest_path.parent.mkdir(parents=True, exist_ok=True)
         environment_matrices = []
         for matrix_id in perf_matrix_ids or []:

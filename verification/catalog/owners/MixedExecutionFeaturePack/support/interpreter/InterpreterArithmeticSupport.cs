@@ -6,6 +6,7 @@ namespace MixedExecutionFeaturePack;
 internal static class InterpreterArithmeticSupport
 {
     private const string AssemblyFileName = "InterpreterArithmeticProof.dll";
+    private const string StringLengthBridgeSubjectId = "System.Private.CoreLib/System.String::get_Length:System.Int32()";
 
     public static string ResolveAssemblyPath()
     {
@@ -35,7 +36,7 @@ internal static class InterpreterArithmeticSupport
         ArgumentException.ThrowIfNullOrWhiteSpace(methodName);
 
         return methods.Values.Single(method =>
-            string.Equals(method.SubjectId.Split("::", StringSplitOptions.None)[1].Split('(')[0], methodName, StringComparison.Ordinal));
+            string.Equals(GetMethodName(method.SubjectId), methodName, StringComparison.Ordinal));
     }
 
     public static ManagedInterpreterExecutor CreateExecutor(IReadOnlyDictionary<string, IRMethod> methods)
@@ -44,7 +45,7 @@ internal static class InterpreterArithmeticSupport
 
         return new ManagedInterpreterExecutor((bridgeId, bridgeArguments) =>
         {
-            if (string.Equals(bridgeId, "System.Private.CoreLib/System.String::get_Length()", StringComparison.Ordinal))
+            if (string.Equals(bridgeId, StringLengthBridgeSubjectId, StringComparison.Ordinal))
             {
                 if (bridgeArguments.Count != 1 || bridgeArguments[0] is not string instance)
                 {
@@ -57,5 +58,26 @@ internal static class InterpreterArithmeticSupport
             throw new InvalidOperationException($"unsupported bridge '{bridgeId}'.");
         },
         subjectKey => methods[subjectKey]);
+    }
+
+    private static string GetMethodName(string subjectId)
+    {
+        var separatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
+        if (separatorIndex < 0)
+        {
+            return subjectId;
+        }
+
+        var methodPart = subjectId[(separatorIndex + 2)..];
+        var returnTypeSeparatorIndex = methodPart.IndexOf(':', StringComparison.Ordinal);
+        if (returnTypeSeparatorIndex >= 0)
+        {
+            methodPart = methodPart[..returnTypeSeparatorIndex];
+        }
+
+        var parameterListIndex = methodPart.IndexOf('(');
+        return parameterListIndex >= 0
+            ? methodPart[..parameterListIndex]
+            : methodPart;
     }
 }

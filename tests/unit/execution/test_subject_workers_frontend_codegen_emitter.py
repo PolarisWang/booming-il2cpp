@@ -349,10 +349,11 @@ class TestSubjectWorkersFrontendCodegenEmitter(SubjectWorkersTestSupport):
 
             baseline_path = (
                 repo_root
-                / "subjects"
+                / "verification"
+                / "evidence"
+                / "owners"
                 / subject_id
-                / "baselines"
-                / "codegen"
+                / "codegen-stubs"
                 / matrix_id
                 / "windows.json"
             )
@@ -457,6 +458,305 @@ class TestSubjectWorkersFrontendCodegenEmitter(SubjectWorkersTestSupport):
             self.assertEqual(
                 "regressed",
                 result["details"]["codegenPerformance"]["regressionStatus"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_native_proof_emitter_records_supplemental_full_closure_sidecars(self) -> None:
+        workers_module = load_module(
+            SUBJECT_WORKERS_MODULE_PATH,
+            "chaos_subject_workers_native_proof_emitter_supplemental_full_closure",
+        )
+        subject_id = "FixtureGeneratedSupplementalClosureSubject"
+        run_id = "fixture-run-generated-supplemental-001"
+        request = {
+            "selection": {
+                "subjectId": subject_id,
+            },
+            "upstream": {
+                "analysis": {
+                    "manifestPath": subject_run_path(subject_id, run_id, "analysis", "analysis", "analysis.manifest.json"),
+                }
+            },
+            "paths": {
+                "bucketRoot": subject_run_path(subject_id, run_id, "analysis", "generated"),
+                "manifestPath": subject_run_path(subject_id, run_id, "analysis", "generated", "generated.manifest.json"),
+                "reportPaths": [],
+            },
+        }
+
+        repo_root = self._make_repo_root("native-proof-emitter-supplemental-full-closure")
+        try:
+            analysis_manifest_path = repo_root / request["upstream"]["analysis"]["manifestPath"]
+            analysis_manifest_path.parent.mkdir(parents=True, exist_ok=True)
+            analysis_manifest_path.write_text(
+                json.dumps(
+                    {
+                        "supplementalFullAssemblyClosures": [
+                            {
+                                "assemblyName": "System.Private.CoreLib",
+                                "inputAssemblyPath": "src/dll/dotnet-foundation/net8.0/runtime/System.Private.CoreLib.dll",
+                                "analysisRootPath": subject_run_path(
+                                    subject_id,
+                                    run_id,
+                                    "analysis",
+                                    "analysis",
+                                    "supplemental-full-closures",
+                                    "system-private-corelib",
+                                ),
+                                "closureManifestPath": subject_run_path(
+                                    subject_id,
+                                    run_id,
+                                    "analysis",
+                                    "analysis",
+                                    "supplemental-full-closures",
+                                    "system-private-corelib",
+                                    "closure.manifest.json",
+                                ),
+                                "nativeReferencePlanPath": subject_run_path(
+                                    subject_id,
+                                    run_id,
+                                    "analysis",
+                                    "analysis",
+                                    "supplemental-full-closures",
+                                    "system-private-corelib",
+                                    "native-reference.lowering-plan.json",
+                                ),
+                                "nativeAotPlanPath": subject_run_path(
+                                    subject_id,
+                                    run_id,
+                                    "analysis",
+                                    "analysis",
+                                    "supplemental-full-closures",
+                                    "system-private-corelib",
+                                    "native-aot.lowering-plan.json",
+                                ),
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            expected_analysis_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "analysis"
+            expected_output_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "generated"
+            expected_supplemental_analysis_root = expected_analysis_root / "supplemental-full-closures" / "system-private-corelib"
+            expected_supplemental_reference_root = (
+                expected_output_root / "supplemental-full-closures" / "system-private-corelib" / "native-reference"
+            )
+            expected_supplemental_aot_root = (
+                expected_output_root / "supplemental-full-closures" / "system-private-corelib" / "native-aot"
+            )
+            observed_arguments: list[list[str]] = []
+
+            def fake_run_checked(arguments: list[str], *, repo_root: Path, failure_message: str) -> str:
+                del failure_message
+                observed_arguments.append(arguments)
+                if len(observed_arguments) == 1:
+                    self.assertEqual(
+                        [
+                            "dotnet",
+                            str(repo_root / "driver" / "Chaos.IL2CPP.Driver.dll"),
+                            "emit-native-reference",
+                            str(expected_analysis_root),
+                            str(expected_output_root),
+                        ],
+                        arguments,
+                    )
+                    (expected_output_root / "generated").mkdir(parents=True, exist_ok=True)
+                    (expected_output_root / "generated" / "native-reference.generated.cpp").write_text("// generated", encoding="utf-8")
+                    (expected_output_root / "native-reference.manifest.json").write_text(
+                        json.dumps(
+                            {
+                                "generatedArtifacts": [
+                                    {
+                                        "kind": "generatedTranslationUnit",
+                                        "path": "generated/native-reference.generated.cpp",
+                                    }
+                                ]
+                            }
+                        ),
+                        encoding="utf-8",
+                    )
+                    (expected_output_root / "native-reference.plan.json").write_text("{}", encoding="utf-8")
+                    return ""
+                if len(observed_arguments) == 2:
+                    self.assertEqual(
+                        [
+                            "dotnet",
+                            str(repo_root / "driver" / "Chaos.IL2CPP.Driver.dll"),
+                            "emit-native-reference",
+                            str(expected_supplemental_analysis_root),
+                            str(expected_supplemental_reference_root),
+                        ],
+                        arguments,
+                    )
+                    (expected_supplemental_reference_root / "generated" / "runtime").mkdir(parents=True, exist_ok=True)
+                    (expected_supplemental_reference_root / "generated" / "runtime" / "native-reference.runtime-skeleton.page-0001.cpp").write_text(
+                        "// supplemental runtime page",
+                        encoding="utf-8",
+                    )
+                    (expected_supplemental_reference_root / "native-reference.manifest.json").write_text(
+                        json.dumps(
+                            {
+                                "generatedArtifacts": [
+                                    {
+                                        "kind": "generatedTranslationUnit",
+                                        "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
+                                    },
+                                    {
+                                        "kind": "runtimeSkeletonCoverageReport",
+                                        "path": "generated/runtime/native-reference.runtime-skeleton.coverage.json",
+                                    },
+                                ]
+                            }
+                        ),
+                        encoding="utf-8",
+                    )
+                    (expected_supplemental_reference_root / "native-reference.plan.json").write_text(
+                        json.dumps(
+                            {
+                                "planKind": "assembly-full-closure-runtime-skeleton",
+                                "translationUnitMethodCount": 4096,
+                            }
+                        ),
+                        encoding="utf-8",
+                    )
+                    (expected_supplemental_reference_root / "generated" / "runtime" / "native-reference.runtime-skeleton.coverage.json").write_text(
+                        json.dumps(
+                            {
+                                "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+                                "uncoveredMethodCount": 123,
+                            }
+                        ),
+                        encoding="utf-8",
+                    )
+                    return ""
+                if len(observed_arguments) == 3:
+                    self.assertEqual(
+                        [
+                            "dotnet",
+                            str(repo_root / "driver" / "Chaos.IL2CPP.Driver.dll"),
+                            "emit-native-aot",
+                            str(expected_supplemental_analysis_root),
+                            str(expected_supplemental_aot_root),
+                        ],
+                        arguments,
+                    )
+                    (expected_supplemental_aot_root / "generated").mkdir(parents=True, exist_ok=True)
+                    (expected_supplemental_aot_root / "generated" / "native-aot.generated.cpp").write_text("// supplemental audit", encoding="utf-8")
+                    (expected_supplemental_aot_root / "native-aot.manifest.json").write_text(
+                        json.dumps(
+                            {
+                                "generatedArtifacts": [
+                                    {
+                                        "kind": "generatedTranslationUnit",
+                                        "path": "generated/native-aot.generated.cpp",
+                                    }
+                                ]
+                            }
+                        ),
+                        encoding="utf-8",
+                    )
+                    (expected_supplemental_aot_root / "native-aot.plan.json").write_text(
+                        json.dumps(
+                            {
+                                "planKind": "assembly-full-closure-audit",
+                                "translationUnitMethodCount": 4096,
+                            }
+                        ),
+                        encoding="utf-8",
+                    )
+                    return ""
+                self.fail(f"unexpected driver invocation: {arguments}")
+
+            with patch.object(workers_module, "_ensure_driver_built", return_value=repo_root / "driver" / "Chaos.IL2CPP.Driver.dll"):
+                with patch.object(workers_module, "_run_checked", side_effect=fake_run_checked):
+                    result = workers_module.run_native_proof_emitter(repo_root=repo_root, request=request)
+
+            self.assertEqual("ok", result["status"])
+            self.assertEqual(3, len(observed_arguments))
+            manifest = json.loads((repo_root / request["paths"]["manifestPath"]).read_text(encoding="utf-8"))
+            supplemental_closures = manifest["supplementalFullAssemblyClosures"]
+            self.assertEqual(1, len(supplemental_closures))
+            self.assertEqual(
+                {
+                    "assemblyName": "System.Private.CoreLib",
+                    "inputAssemblyPath": "src/dll/dotnet-foundation/net8.0/runtime/System.Private.CoreLib.dll",
+                    "analysisRootPath": subject_run_path(
+                        subject_id,
+                        run_id,
+                        "analysis",
+                        "analysis",
+                        "supplemental-full-closures",
+                        "system-private-corelib",
+                    ),
+                    "nativeReferenceManifestPath": subject_run_path(
+                        subject_id,
+                        run_id,
+                        "analysis",
+                        "generated",
+                        "supplemental-full-closures",
+                        "system-private-corelib",
+                        "native-reference",
+                        "native-reference.manifest.json",
+                    ),
+                    "nativeReferencePlanPath": subject_run_path(
+                        subject_id,
+                        run_id,
+                        "analysis",
+                        "generated",
+                        "supplemental-full-closures",
+                        "system-private-corelib",
+                        "native-reference",
+                        "native-reference.plan.json",
+                    ),
+                    "runtimeSkeletonCoverageReportPath": subject_run_path(
+                        subject_id,
+                        run_id,
+                        "analysis",
+                        "generated",
+                        "supplemental-full-closures",
+                        "system-private-corelib",
+                        "native-reference",
+                        "generated",
+                        "runtime",
+                        "native-reference.runtime-skeleton.coverage.json",
+                    ),
+                    "nativeAotManifestPath": subject_run_path(
+                        subject_id,
+                        run_id,
+                        "analysis",
+                        "generated",
+                        "supplemental-full-closures",
+                        "system-private-corelib",
+                        "native-aot",
+                        "native-aot.manifest.json",
+                    ),
+                    "nativeAotPlanPath": subject_run_path(
+                        subject_id,
+                        run_id,
+                        "analysis",
+                        "generated",
+                        "supplemental-full-closures",
+                        "system-private-corelib",
+                        "native-aot",
+                        "native-aot.plan.json",
+                    ),
+                },
+                {
+                    key: supplemental_closures[0][key]
+                    for key in [
+                        "assemblyName",
+                        "inputAssemblyPath",
+                        "analysisRootPath",
+                        "nativeReferenceManifestPath",
+                        "nativeReferencePlanPath",
+                        "runtimeSkeletonCoverageReportPath",
+                        "nativeAotManifestPath",
+                        "nativeAotPlanPath",
+                    ]
+                },
             )
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)

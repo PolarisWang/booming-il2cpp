@@ -55,6 +55,12 @@ class SolutionCorePackRegistryTests(unittest.TestCase):
             managed_build_item["defaultMatrixId"],
         )
 
+        async_await_item = next(
+            item for item in index.declared_unit_tests if item.get("subjectId") == "SolutionCorePack" and item.get("alias") == "async-await-proof"
+        )
+        self.assertEqual("windows-managed-proof", async_await_item["defaultMatrixId"])
+        self.assertEqual("correctness.dev", async_await_item["defaultGoalId"])
+
 
 if __name__ == "__main__":
     unittest.main()

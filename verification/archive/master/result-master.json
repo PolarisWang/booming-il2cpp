@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAtUtc": "2026-04-23T23:20:21.611797Z",
+  "generatedAtUtc": "2026-04-25T03:08:11.807019Z",
   "producerId": "verification-v1",
   "sourceSpecVersion": "verification-v1",
   "mergeKey": "obligationClaimId",
@@ -507,7 +507,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.GenericInstantiationProofEntry::Run()/collector",
@@ -1030,7 +1030,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AsyncAwaitProofEntry::Run()/collector",
@@ -1223,7 +1223,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.DelegateProofEntry::Run()/collector",
@@ -1733,7 +1733,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.CustomAttributeLookupProofEntry::Run()/collector",
@@ -1867,7 +1867,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MetadataSupplementProofEntry::Run()/collector",
@@ -1930,7 +1930,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ReflectionInteropClosureEntry::Run()/collector",
@@ -2404,7 +2404,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadingProofEntry::Run()/collector",
@@ -2602,7 +2602,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ThreadLocalStateProofEntry::Run()/collector",
@@ -3569,7 +3569,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()/collector",
@@ -3622,7 +3622,7 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "unknown-platform"
+        "windows-x64"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
@@ -3646,6 +3646,12 @@
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/managed-proof",
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/native-proof",
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/hotupdate-proof",
+        "evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/collector",
+        "evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/registry",
+        "evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/workspace",
+        "evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/managed-proof",
+        "evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/native-proof",
+        "evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/hotupdate-proof",
         "evidence-claim/benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default"
       ],
       "latestStageId": "perf",
@@ -3665,7 +3671,7 @@
         ],
         "proofRequired": true,
         "benchmarkRequired": true,
-        "declaredUnitCount": 1,
+        "declaredUnitCount": 2,
         "declaredBenchmarkCount": 1,
         "contractStatus": "ok",
         "statusReason": "能力已经满足当前声明的 proof 与 benchmark 覆盖要求。",
@@ -3703,7 +3709,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.SharedContractProofEntry::Run()/collector",
@@ -3837,7 +3843,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MetadataSupplementProofEntry::Run()/collector",
@@ -3902,7 +3908,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchIntegrityProofEntry::Run()/collector",
@@ -3967,7 +3973,7 @@
         "loader"
       ],
       "supportState": "supported",
-      "verificationState": "planned",
+      "verificationState": "missing",
       "blockers": [],
       "evidenceClaimIds": [
         "evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.VersionRollbackProofEntry::Run()/collector",
@@ -4091,7 +4097,7 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "unknown-platform"
+        "windows-x64"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",
@@ -4231,7 +4237,7 @@
       ],
       "requiredPlatforms": [
         "inventory-host",
-        "unknown-platform"
+        "windows-x64"
       ],
       "requiredDeviceProfiles": [
         "inventory-host",

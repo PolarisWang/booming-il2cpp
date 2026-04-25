@@ -323,6 +323,90 @@ def _generated_artifact_path(output_root: Path, manifest_name: str, artifact_kin
     return None
 
 
+def _slug_text(value: str) -> str:
+    characters: list[str] = []
+    previous_hyphen = False
+    for character in str(value or "").strip().lower():
+        if character.isalnum():
+            characters.append(character)
+            previous_hyphen = False
+            continue
+        if previous_hyphen:
+            continue
+        characters.append("-")
+        previous_hyphen = True
+    return "".join(characters).strip("-") or "supplemental"
+
+
+def _normalized_supplemental_full_closure_requests(selection_source: dict[str, Any]) -> list[dict[str, str]]:
+    normalized_requests: list[dict[str, str]] = []
+    for item in list(selection_source.get("supplementalFullClosureAssemblies") or []):
+        if not isinstance(item, dict):
+            continue
+        input_assembly_path = str(item.get("inputAssemblyPath") or "").strip()
+        if not input_assembly_path:
+            continue
+        assembly_name = str(item.get("assemblyName") or Path(input_assembly_path).stem).strip()
+        normalized_requests.append(
+            {
+                "assemblyName": assembly_name or Path(input_assembly_path).stem,
+                "inputAssemblyPath": input_assembly_path,
+                "slug": _slug_text(assembly_name or Path(input_assembly_path).stem),
+            }
+        )
+    return normalized_requests
+
+
+def _emit_native_generated_bundle(
+    *,
+    repo_root: Path,
+    driver_dll_path: Path,
+    driver_command: str,
+    analysis_root: Path,
+    output_root: Path,
+    failure_label: str,
+    generated_source_name: str,
+    manifest_name: str,
+    plan_name: str,
+    manifest_key: str,
+    plan_key: str,
+) -> tuple[dict[str, Any], list[str]]:
+    output_root.mkdir(parents=True, exist_ok=True)
+    _run_checked(
+        ["dotnet", str(driver_dll_path), driver_command, str(analysis_root), str(output_root)],
+        repo_root=repo_root,
+        failure_message=f"{failure_label} failed: {analysis_root}",
+    )
+
+    generated_source_paths = [
+        _relative(repo_root, path)
+        for path in _generated_translation_unit_paths(
+            output_root,
+            manifest_name=manifest_name,
+            primary_generated_source_name=generated_source_name,
+        )
+    ]
+    emitted_bundle: dict[str, Any] = {
+        "generatedSourcePath": generated_source_paths[0],
+        "generatedSourcePaths": generated_source_paths,
+        manifest_key: _relative(repo_root, output_root / manifest_name),
+        plan_key: _relative(repo_root, output_root / plan_name),
+    }
+    evidence_paths = [
+        *list(emitted_bundle["generatedSourcePaths"]),
+        str(emitted_bundle[manifest_key]),
+    ]
+    codegen_metrics_path = _generated_artifact_path(output_root, manifest_name, "codegenMetrics")
+    if codegen_metrics_path is not None and codegen_metrics_path.is_file():
+        emitted_bundle["codegenMetricsPath"] = _relative(repo_root, codegen_metrics_path)
+        evidence_paths.append(emitted_bundle["codegenMetricsPath"])
+    runtime_skeleton_coverage_path = _generated_artifact_path(output_root, manifest_name, "runtimeSkeletonCoverageReport")
+    if runtime_skeleton_coverage_path is not None and runtime_skeleton_coverage_path.is_file():
+        emitted_bundle["runtimeSkeletonCoverageReportPath"] = _relative(repo_root, runtime_skeleton_coverage_path)
+        evidence_paths.append(emitted_bundle["runtimeSkeletonCoverageReportPath"])
+    return emitted_bundle, evidence_paths
+
+
 def _numeric_metric(payload: dict[str, Any], key: str) -> int | float | None:
     value = payload.get(key)
     if isinstance(value, bool) or not isinstance(value, (int, float)):
@@ -692,7 +776,7 @@ def _workspace_manifest_is_stale(
         return False
 
     source_path = _resolve(repo_root, source_path_text)
-    source_root = source_path if source_path.is_dir() else source_path.parent
+    source_root = verification_layout_module.owner_scan_root(repo_root, subject_id, source_path_text)
     if not source_root.is_dir():
         return False
 
@@ -1800,6 +1884,7 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
     output_root.mkdir(parents=True, exist_ok=True)
     driver_arguments = ["dotnet", str(driver_dll_path), str(assembly_path), str(output_root)]
     selection_source = dict(selection.get("source") or {})
+    supplemental_full_closure_requests = _normalized_supplemental_full_closure_requests(selection_source)
     entry_point_subject_id = str(selection_source.get("entry") or "")
     if entry_point_subject_id:
         driver_arguments.extend(["--entry-point-subject-id", entry_point_subject_id])
@@ -1813,6 +1898,32 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
         repo_root=repo_root,
         failure_message=f"managed closure materialization failed: {assembly_path}",
     )
+
+    supplemental_full_closures: list[dict[str, Any]] = []
+    for supplemental_request in supplemental_full_closure_requests:
+        supplemental_output_root = output_root / "supplemental-full-closures" / str(supplemental_request["slug"])
+        supplemental_input_assembly_path = _resolve(repo_root, str(supplemental_request["inputAssemblyPath"]))
+        _run_checked(
+            [
+                "dotnet",
+                str(driver_dll_path),
+                str(supplemental_input_assembly_path),
+                str(supplemental_output_root),
+                "--full-assembly-closure",
+            ],
+            repo_root=repo_root,
+            failure_message=f"managed supplemental closure materialization failed: {supplemental_input_assembly_path}",
+        )
+        supplemental_full_closures.append(
+            {
+                "assemblyName": str(supplemental_request["assemblyName"]),
+                "inputAssemblyPath": str(supplemental_request["inputAssemblyPath"]),
+                "analysisRootPath": _relative(repo_root, supplemental_output_root),
+                "closureManifestPath": _relative(repo_root, supplemental_output_root / "closure.manifest.json"),
+                "nativeReferencePlanPath": _relative(repo_root, supplemental_output_root / "native-reference.lowering-plan.json"),
+                "nativeAotPlanPath": _relative(repo_root, supplemental_output_root / "native-aot.lowering-plan.json"),
+            }
+        )
 
     contracts_module.validate_analysis_contracts(repo_root)
     report_path = _resolve(repo_root, request["paths"]["reportPaths"][0])
@@ -1853,6 +1964,8 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
             "closureManifestPath": _relative(repo_root, output_root / "closure.manifest.json"),
         },
     }
+    if supplemental_full_closures:
+        manifest["supplementalFullAssemblyClosures"] = supplemental_full_closures
     details: dict[str, Any] = {}
     engine_contract_summary = _engine_contract_summary(
         _engine_profile(repo_root, str(request["selection"]["subjectId"])),
@@ -1870,6 +1983,16 @@ def run_frontend_pipeline_worker(*, repo_root: Path, request: dict[str, Any]) ->
             manifest["artifacts"]["genericCapabilityMatrixPath"],
             manifest["artifacts"]["optimizationFactsPath"],
             manifest["artifacts"]["closureManifestPath"],
+            *[
+                path
+                for supplemental_entry in supplemental_full_closures
+                for path in [
+                    str(supplemental_entry.get("closureManifestPath") or ""),
+                    str(supplemental_entry.get("nativeReferencePlanPath") or ""),
+                    str(supplemental_entry.get("nativeAotPlanPath") or ""),
+                ]
+                if path
+            ],
         ],
         details=details,
     )
@@ -1891,24 +2014,25 @@ def _run_native_generated_emitter(
     selection = dict(request["selection"])
     variant = _selection_variant(selection)
     variant_macros = _variant_macros(variant)
-    analysis_root = _resolve(repo_root, request["upstream"]["analysis"]["manifestPath"]).parent
+    analysis_manifest_path = _resolve(repo_root, request["upstream"]["analysis"]["manifestPath"])
+    analysis_root = analysis_manifest_path.parent
+    analysis_manifest = read_json(analysis_manifest_path) if analysis_manifest_path.is_file() else {}
+    if not isinstance(analysis_manifest, dict):
+        analysis_manifest = {}
     output_root = _resolve(repo_root, request["paths"]["bucketRoot"])
-    output_root.mkdir(parents=True, exist_ok=True)
-
-    _run_checked(
-        ["dotnet", str(driver_dll_path), driver_command, str(analysis_root), str(output_root)],
+    emitted_bundle, primary_evidence_paths = _emit_native_generated_bundle(
         repo_root=repo_root,
-        failure_message=f"{failure_label} failed: {analysis_root}",
+        driver_dll_path=driver_dll_path,
+        driver_command=driver_command,
+        analysis_root=analysis_root,
+        output_root=output_root,
+        failure_label=failure_label,
+        generated_source_name=generated_source_name,
+        manifest_name=manifest_name,
+        plan_name=plan_name,
+        manifest_key=manifest_key,
+        plan_key=plan_key,
     )
-
-    generated_source_paths = [
-        _relative(repo_root, path)
-        for path in _generated_translation_unit_paths(
-            output_root,
-            manifest_name=manifest_name,
-            primary_generated_source_name=generated_source_name,
-        )
-    ]
     generated_manifest = {
         "subjectId": str(request["selection"]["subjectId"]),
         "bucket": "generated",
@@ -1917,16 +2041,9 @@ def _run_native_generated_emitter(
         "validationKind": selection.get("validationKind"),
         "variant": variant,
         "codegenMacros": list(variant_macros["codegen"]),
-        "generatedSourcePath": generated_source_paths[0],
-        "generatedSourcePaths": generated_source_paths,
-        manifest_key: _relative(repo_root, output_root / manifest_name),
-        plan_key: _relative(repo_root, output_root / plan_name),
+        **emitted_bundle,
     }
     details: dict[str, Any] = {}
-    primary_evidence_paths = [
-        *list(generated_manifest["generatedSourcePaths"]),
-        str(generated_manifest[manifest_key]),
-    ]
     codegen_metrics_path = _generated_artifact_path(output_root, manifest_name, "codegenMetrics")
     if codegen_metrics_path is not None and codegen_metrics_path.is_file():
         codegen_metrics_payload = read_json(codegen_metrics_path)
@@ -1982,6 +2099,60 @@ def _run_native_generated_emitter(
         if engine_emission_summary:
             generated_manifest["engineEmissionSummary"] = engine_emission_summary
             details["engineEmissionSummary"] = engine_emission_summary
+    supplemental_full_closures: list[dict[str, Any]] = []
+    for supplemental_entry in list(analysis_manifest.get("supplementalFullAssemblyClosures") or []):
+        if not isinstance(supplemental_entry, dict):
+            continue
+        supplemental_analysis_root_path = str(supplemental_entry.get("analysisRootPath") or "").strip()
+        if not supplemental_analysis_root_path:
+            continue
+        supplemental_slug = _slug_text(
+            str(supplemental_entry.get("assemblyName") or Path(supplemental_analysis_root_path).name)
+        )
+        supplemental_base_output_root = output_root / "supplemental-full-closures" / supplemental_slug
+        supplemental_reference_bundle, supplemental_reference_evidence = _emit_native_generated_bundle(
+            repo_root=repo_root,
+            driver_dll_path=driver_dll_path,
+            driver_command="emit-native-reference",
+            analysis_root=_resolve(repo_root, supplemental_analysis_root_path),
+            output_root=supplemental_base_output_root / "native-reference",
+            failure_label="supplemental native reference emission",
+            generated_source_name="native-reference.generated.cpp",
+            manifest_name="native-reference.manifest.json",
+            plan_name="native-reference.plan.json",
+            manifest_key="nativeReferenceManifestPath",
+            plan_key="nativeReferencePlanPath",
+        )
+        supplemental_aot_bundle, supplemental_aot_evidence = _emit_native_generated_bundle(
+            repo_root=repo_root,
+            driver_dll_path=driver_dll_path,
+            driver_command="emit-native-aot",
+            analysis_root=_resolve(repo_root, supplemental_analysis_root_path),
+            output_root=supplemental_base_output_root / "native-aot",
+            failure_label="supplemental native aot emission",
+            generated_source_name="native-aot.generated.cpp",
+            manifest_name="native-aot.manifest.json",
+            plan_name="native-aot.plan.json",
+            manifest_key="nativeAotManifestPath",
+            plan_key="nativeAotPlanPath",
+        )
+        supplemental_manifest_entry = {
+            "assemblyName": str(supplemental_entry.get("assemblyName") or ""),
+            "inputAssemblyPath": str(supplemental_entry.get("inputAssemblyPath") or ""),
+            "analysisRootPath": supplemental_analysis_root_path,
+            "nativeReferenceManifestPath": str(supplemental_reference_bundle["nativeReferenceManifestPath"]),
+            "nativeReferencePlanPath": str(supplemental_reference_bundle["nativeReferencePlanPath"]),
+            "nativeAotManifestPath": str(supplemental_aot_bundle["nativeAotManifestPath"]),
+            "nativeAotPlanPath": str(supplemental_aot_bundle["nativeAotPlanPath"]),
+        }
+        runtime_skeleton_coverage_report_path = str(supplemental_reference_bundle.get("runtimeSkeletonCoverageReportPath") or "")
+        if runtime_skeleton_coverage_report_path:
+            supplemental_manifest_entry["runtimeSkeletonCoverageReportPath"] = runtime_skeleton_coverage_report_path
+        supplemental_full_closures.append(supplemental_manifest_entry)
+        primary_evidence_paths.extend(supplemental_reference_evidence)
+        primary_evidence_paths.extend(supplemental_aot_evidence)
+    if supplemental_full_closures:
+        generated_manifest["supplementalFullAssemblyClosures"] = supplemental_full_closures
     write_json(_resolve(repo_root, request["paths"]["manifestPath"]), generated_manifest)
     return _success_result(
         bucket_manifest_path=request["paths"]["manifestPath"],

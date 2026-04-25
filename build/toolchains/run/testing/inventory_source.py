@@ -307,6 +307,29 @@ def _collection_entries(collection: dict[str, Any], key: str) -> list[dict[str, 
     return entries
 
 
+def _unit_test_lookup(declared_unit_tests: list[dict[str, Any]]) -> dict[str, dict[str, dict[str, Any]]]:
+    by_subject_and_alias: dict[str, dict[str, dict[str, Any]]] = {}
+    by_subject_and_type: dict[str, dict[str, dict[str, Any]]] = {}
+    by_subject_and_source_entry: dict[str, dict[str, dict[str, Any]]] = {}
+    for item in declared_unit_tests:
+        subject_id = str(item.get("subjectId") or "").strip()
+        alias = str(item.get("alias") or "").strip().lower()
+        declaring_type = str(item.get("declaringType") or "").strip()
+        type_name = declaring_type.rsplit(".", 1)[-1].lower() if declaring_type else ""
+        source_entry = str(item.get("sourceEntry") or "").strip()
+        if subject_id and alias:
+            by_subject_and_alias.setdefault(subject_id, {})[alias] = item
+        if subject_id and type_name:
+            by_subject_and_type.setdefault(subject_id, {})[type_name] = item
+        if subject_id and source_entry:
+            by_subject_and_source_entry.setdefault(subject_id, {})[source_entry] = item
+    return {
+        "bySubjectAndAlias": by_subject_and_alias,
+        "bySubjectAndType": by_subject_and_type,
+        "bySubjectAndSourceEntry": by_subject_and_source_entry,
+    }
+
+
 def _managed_collection_path(manifest: dict[str, Any], *, host_kind: str) -> str:
     project = workspace_manifests_module.find_managed_test_project(manifest, host_kind=host_kind)
     if project is None:
@@ -352,12 +375,290 @@ def _collect_workspace_collections(repo_root: Path, subject_ids: list[str]) -> l
     return records
 
 
-def _collect_managed_proof_evidence(repo_root: Path) -> list[dict[str, Any]]:
+def _stage_kind_from_runtime_profile(runtime_profile: str) -> str:
+    normalized = runtime_profile.strip().lower()
+    if "hotupdate" in normalized:
+        return "hotupdate-proof"
+    if "native" in normalized:
+        return "native-proof"
+    return "managed-proof"
+
+
+def _stage_kind_from_pipeline_report(report: dict[str, Any]) -> str:
+    matrix_proof_linkage = dict(report.get("matrixProofLinkage") or {})
+    proof_kind = str(matrix_proof_linkage.get("proofKind") or "").strip()
+    if proof_kind in {"managed-proof", "native-proof", "hotupdate-proof"}:
+        return proof_kind
+    selection = dict(report.get("selection") or {})
+    execution_context = dict(selection.get("executionContext") or {})
+    return _stage_kind_from_runtime_profile(str(execution_context.get("runtimeProfile") or ""))
+
+
+def _record_status(status: str) -> str:
+    normalized = status.strip().lower()
+    if normalized in {"ok", "pass", "passed"}:
+        return "ok"
+    if normalized in {"fail", "failed"}:
+        return "fail"
+    if normalized in {"aborted", "abort"}:
+        return "aborted"
+    return normalized
+
+
+def _pipeline_report_from_artifact(repo_root: Path, artifact_path: str) -> dict[str, Any] | None:
+    path = repo_root / artifact_path
+    if not path.is_file():
+        return None
+    try:
+        payload = read_json(path)
+    except Exception:
+        return None
+    return dict(payload) if isinstance(payload, dict) else None
+
+
+def _stage_kind_from_run_artifacts(repo_root: Path, artifact_paths: list[str]) -> str:
+    for artifact_path in artifact_paths:
+        normalized = artifact_path.replace("\\", "/")
+        if not normalized.endswith("/report.json"):
+            continue
+        report = _pipeline_report_from_artifact(repo_root, artifact_path)
+        if report is None:
+            continue
+        stage_kind = _stage_kind_from_pipeline_report(report)
+        if stage_kind in {"managed-proof", "native-proof", "hotupdate-proof"}:
+            return stage_kind
+    return "managed-proof"
+
+
+def _proof_record(
+    *,
+    subject_id: str,
+    stable_id: str,
+    alias: str,
+    entry_index: int,
+    status: str,
+    stage_kind: str,
+    run_id: str,
+    summary_path: Path,
+    artifact_path: str,
+    errors: list[str],
+    repo_root: Path,
+    dispatch_subject_id: str = "",
+) -> dict[str, Any]:
+    record = {
+        "subjectId": subject_id,
+        "stableId": stable_id,
+        "alias": alias,
+        "entryIndex": entry_index,
+        "status": _record_status(status),
+        "stageKind": stage_kind,
+        "runId": run_id,
+        "summaryPath": _relative(repo_root, summary_path),
+        "errors": errors,
+    }
+    if artifact_path.endswith("pipeline-report/report.json"):
+        record["pipelineReportPath"] = artifact_path
+    else:
+        record["declaredReportPath"] = artifact_path
+    if dispatch_subject_id:
+        record["dispatchSubjectId"] = dispatch_subject_id
+    return record
+
+
+def _read_json_dict(path: Path) -> dict[str, Any] | None:
+    if not path.is_file():
+        return None
+    try:
+        payload = read_json(path)
+    except Exception:
+        return None
+    return dict(payload) if isinstance(payload, dict) else None
+
+
+def _dispatch_subject_id_from_report(repo_root: Path, report: dict[str, Any]) -> str:
+    for raw_stage in list(report.get("stageResults") or []):
+        stage = dict(raw_stage or {})
+        for evidence_path in _string_list(stage.get("primaryEvidencePaths")):
+            if not evidence_path.endswith("native-reference.manifest.json"):
+                continue
+            payload = _read_json_dict(repo_root / evidence_path)
+            if payload is None:
+                continue
+            subject_id = str(payload.get("preferredAssemblyDispatchSubjectId") or "").strip()
+            if subject_id:
+                return subject_id
+    return ""
+
+
+def _mixed_execution_legacy_stdout_matches(
+    *,
+    alias: str,
+    stdout_text: str,
+) -> bool:
+    required_patterns = {
+        "interpreter-arithmetic-proof": [
+            "mixed-aot-to-interpreter=",
+            "mixed-interpreter-local-call=",
+        ],
+        "mixed-generic-flow-proof": [
+            "mixed-interpreter-string-bridge=",
+        ],
+        "mixed-exception-flow-proof": [
+            "mixed-interpreter-real-catch=",
+            "mixed-interpreter-real-rethrow-caught=",
+            "mixed-interpreter-real-leave-finally=",
+        ],
+        "mixed-delegate-flow-proof": [
+            "mixed-interpreter-to-aot=",
+        ],
+        "mixed-execution-proof": [
+            "mixed-aot-to-interpreter-before-load=",
+            "mixed-interpreter-to-engine=",
+            "mixed-aot-to-interpreter-after-unload=",
+        ],
+    }
+    patterns = required_patterns.get(alias, [])
+    return bool(patterns) and all(pattern in stdout_text for pattern in patterns)
+
+
+def _legacy_proof_stable_id(
+    report: dict[str, Any],
+    *,
+    repo_root: Path,
+    lookup: dict[str, dict[str, dict[str, Any]]],
+) -> tuple[str, str, int, str]:
+    selection = dict(report.get("selection") or {})
+    entry_selection = dict(selection.get("entrySelection") or {})
+    if str(entry_selection.get("family") or "").strip() == "declared-unit-test":
+        stable_id = str(entry_selection.get("stableId") or "").strip()
+        if stable_id:
+            return (
+                stable_id,
+                str(entry_selection.get("alias") or "").strip(),
+                _int_value(entry_selection.get("entryIndex")),
+                "",
+            )
+
+    subject_id = str(report.get("subjectId") or "").strip()
+    alias = str(entry_selection.get("alias") or "").strip().lower()
+    if subject_id and alias:
+        match = dict(lookup.get("bySubjectAndAlias", {}).get(subject_id, {})).get(alias)
+        if match:
+            return (
+                str(match.get("stableId") or "").strip(),
+                str(match.get("alias") or "").strip(),
+                _int_value(match.get("entryIndex")),
+                "",
+            )
+
+    dispatch_subject_id = _dispatch_subject_id_from_report(repo_root, report)
+    type_name = ""
+    if dispatch_subject_id:
+        head = dispatch_subject_id.split("::", 1)[0]
+        type_name = head.rsplit("/", 1)[-1].strip().lower()
+    if subject_id and type_name:
+        match = dict(lookup.get("bySubjectAndType", {}).get(subject_id, {})).get(type_name)
+        if match:
+            return (
+                str(match.get("stableId") or "").strip(),
+                str(match.get("alias") or "").strip(),
+                _int_value(match.get("entryIndex")),
+                dispatch_subject_id,
+            )
+
+    selection = dict(report.get("selection") or {})
+    source = dict(selection.get("source") or {})
+    source_entry = str(source.get("entry") or "").strip()
+    runtime_profile = str(dict(selection.get("executionContext") or {}).get("runtimeProfile") or "").strip().lower()
+    if subject_id and source_entry and "managed-output" in runtime_profile:
+        match = dict(lookup.get("bySubjectAndSourceEntry", {}).get(subject_id, {})).get(source_entry)
+        if match:
+            return (
+                str(match.get("stableId") or "").strip(),
+                str(match.get("alias") or "").strip(),
+                _int_value(match.get("entryIndex")),
+                "",
+            )
+
+    return "", "", 0, dispatch_subject_id
+
+
+def _legacy_managed_stdout_proof_matches(
+    report: dict[str, Any],
+    *,
+    repo_root: Path,
+    lookup: dict[str, dict[str, dict[str, Any]]],
+) -> list[tuple[str, str, int]]:
+    selection = dict(report.get("selection") or {})
+    subject_id = str(report.get("subjectId") or "").strip()
+    source_entry = str(dict(selection.get("source") or {}).get("entry") or "").strip()
+    runtime_profile = str(dict(selection.get("executionContext") or {}).get("runtimeProfile") or "").strip().lower()
+    if subject_id != "MixedExecutionFeaturePack":
+        return []
+    if source_entry != "MixedExecutionFeaturePack/MixedExecutionProofEntry::Run()":
+        return []
+    if "managed-output" not in runtime_profile:
+        return []
+
+    stdout_path = ""
+    for raw_stage in list(report.get("stageResults") or []):
+        stage = dict(raw_stage or {})
+        if str(stage.get("kind") or "").strip() != "runtime-managed-output":
+            continue
+        diagnostics = dict(stage.get("diagnostics") or {})
+        stdout_path = str(diagnostics.get("stdoutPath") or "").strip()
+        if not stdout_path:
+            for evidence_path in _string_list(stage.get("primaryEvidencePaths")):
+                if evidence_path.endswith("stdout.log"):
+                    stdout_path = evidence_path
+                    break
+        if stdout_path:
+            break
+    if not stdout_path:
+        return []
+    stdout_file = repo_root / stdout_path
+    if not stdout_file.is_file():
+        return []
+    try:
+        stdout_text = stdout_file.read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        stdout_text = stdout_file.read_text(encoding="utf-8", errors="replace")
+
+    matches: list[tuple[str, str, int]] = []
+    subject_aliases = dict(lookup.get("bySubjectAndAlias", {}).get(subject_id, {}))
+    for alias in (
+        "interpreter-arithmetic-proof",
+        "mixed-generic-flow-proof",
+        "mixed-exception-flow-proof",
+        "mixed-delegate-flow-proof",
+        "mixed-execution-proof",
+    ):
+        item = dict(subject_aliases.get(alias) or {})
+        if not item:
+            continue
+        if not _mixed_execution_legacy_stdout_matches(alias=alias, stdout_text=stdout_text):
+            continue
+        matches.append(
+            (
+                str(item.get("stableId") or "").strip(),
+                str(item.get("alias") or "").strip(),
+                _int_value(item.get("entryIndex")),
+            )
+        )
+    return [item for item in matches if item[0]]
+
+
+def _collect_proof_evidence(
+    repo_root: Path,
+    *,
+    declared_unit_tests: list[dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
     runs_root = repo_root / "artifacts" / "subjects"
     if not runs_root.is_dir():
         return []
 
-    latest_by_stable_id: dict[str, tuple[float, dict[str, Any]]] = {}
+    lookup = _unit_test_lookup(list(declared_unit_tests or []))
+    latest_by_key: dict[tuple[str, str], tuple[float, dict[str, Any]]] = {}
     for summary_path in runs_root.rglob("run-report/summary.json"):
         if not summary_path.is_file():
             continue
@@ -367,45 +668,148 @@ def _collect_managed_proof_evidence(repo_root: Path) -> list[dict[str, Any]]:
             continue
         if not isinstance(payload, dict):
             continue
-        if str(payload.get("command") or "").strip() != "test declared-unit-test":
-            continue
 
         run_id = str(payload.get("runId") or "").strip()
-        final_status = str(payload.get("finalStatus") or "").strip()
+        command = str(payload.get("command") or "").strip()
+        final_status = _record_status(str(payload.get("finalStatus") or ""))
         errors = _string_list(payload.get("errors"))
-        subject_results = list(payload.get("subjectResults") or [])
         modified_at = summary_path.stat().st_mtime
-        for raw_result in subject_results:
-            if not isinstance(raw_result, dict):
+        artifact_paths = _string_list(payload.get("artifacts"))
+        subject_results = list(payload.get("subjectResults") or [])
+        if command == "test declared-unit-test":
+            stage_kind = _stage_kind_from_run_artifacts(repo_root, artifact_paths)
+            for raw_result in subject_results:
+                if not isinstance(raw_result, dict):
+                    continue
+                entry_selection = dict(raw_result.get("entrySelection") or {})
+                if str(entry_selection.get("family") or "").strip() != "declared-unit-test":
+                    continue
+                stable_id = str(entry_selection.get("stableId") or "").strip()
+                if not stable_id:
+                    continue
+                record = {
+                    "subjectId": str(raw_result.get("subjectId") or "").strip(),
+                    "stableId": stable_id,
+                    "alias": str(entry_selection.get("alias") or "").strip(),
+                    "entryIndex": _int_value(entry_selection.get("entryIndex")),
+                    "status": _record_status(str(raw_result.get("status") or final_status or "")),
+                    "stageKind": stage_kind,
+                    "runId": run_id,
+                    "summaryPath": _relative(repo_root, summary_path),
+                    "subjectSummaryPath": str(raw_result.get("subjectSummaryPath") or "").strip(),
+                    "errors": errors,
+                }
+                key = (stable_id, stage_kind)
+                previous = latest_by_key.get(key)
+                if previous is None or modified_at >= previous[0]:
+                    latest_by_key[key] = (modified_at, record)
+            continue
+
+        if not command.endswith("test subject") and not command.startswith("run test subject"):
+            continue
+
+        for artifact_path in artifact_paths:
+            if artifact_path.endswith("declared/unit") or artifact_path.endswith("declared/unit/"):
                 continue
-            entry_selection = dict(raw_result.get("entrySelection") or {})
-            if str(entry_selection.get("family") or "").strip() != "declared-unit-test":
+            if artifact_path.endswith("/report.json") and "/declared/unit/" in artifact_path.replace("\\", "/"):
+                report = _pipeline_report_from_artifact(repo_root, artifact_path)
+                if report is None:
+                    continue
+                stable_id, alias, entry_index, dispatch_subject_id = _legacy_proof_stable_id(
+                    report,
+                    repo_root=repo_root,
+                    lookup=lookup,
+                )
+                if not stable_id:
+                    continue
+                stage_kind = _stage_kind_from_pipeline_report(report)
+                if stage_kind not in {"managed-proof", "native-proof", "hotupdate-proof"}:
+                    continue
+                record = _proof_record(
+                    subject_id=str(report.get("subjectId") or "").strip(),
+                    stable_id=stable_id,
+                    alias=alias,
+                    entry_index=entry_index,
+                    status=str(report.get("status") or final_status or ""),
+                    stage_kind=stage_kind,
+                    run_id=run_id,
+                    summary_path=summary_path,
+                    artifact_path=artifact_path,
+                    errors=errors,
+                    repo_root=repo_root,
+                    dispatch_subject_id=dispatch_subject_id,
+                )
+                key = (stable_id, stage_kind)
+                previous = latest_by_key.get(key)
+                if previous is None or modified_at >= previous[0]:
+                    latest_by_key[key] = (modified_at, record)
                 continue
-            stable_id = str(entry_selection.get("stableId") or "").strip()
+            if not artifact_path.endswith("pipeline-report/report.json"):
+                continue
+            report = _pipeline_report_from_artifact(repo_root, artifact_path)
+            if report is None:
+                continue
+            stable_id, alias, entry_index, dispatch_subject_id = _legacy_proof_stable_id(
+                report,
+                repo_root=repo_root,
+                lookup=lookup,
+            )
             if not stable_id:
                 continue
-            record = {
-                "subjectId": str(raw_result.get("subjectId") or "").strip(),
-                "stableId": stable_id,
-                "alias": str(entry_selection.get("alias") or "").strip(),
-                "entryIndex": _int_value(entry_selection.get("entryIndex")),
-                "status": str(raw_result.get("status") or final_status or "").strip(),
-                "runId": run_id,
-                "summaryPath": _relative(repo_root, summary_path),
-                "subjectSummaryPath": str(raw_result.get("subjectSummaryPath") or "").strip(),
-                "errors": errors,
-            }
-            previous = latest_by_stable_id.get(stable_id)
+            stage_kind = _stage_kind_from_pipeline_report(report)
+            if stage_kind not in {"managed-proof", "native-proof", "hotupdate-proof"}:
+                continue
+            record = _proof_record(
+                subject_id=str(report.get("subjectId") or "").strip(),
+                stable_id=stable_id,
+                alias=alias,
+                entry_index=entry_index,
+                status=str(report.get("status") or final_status or ""),
+                stage_kind=stage_kind,
+                run_id=run_id,
+                summary_path=summary_path,
+                artifact_path=artifact_path,
+                errors=errors,
+                repo_root=repo_root,
+                dispatch_subject_id=dispatch_subject_id,
+            )
+            key = (stable_id, stage_kind)
+            previous = latest_by_key.get(key)
             if previous is None or modified_at >= previous[0]:
-                latest_by_stable_id[stable_id] = (modified_at, record)
+                latest_by_key[key] = (modified_at, record)
+
+            if stage_kind == "managed-proof":
+                for extra_stable_id, extra_alias, extra_entry_index in _legacy_managed_stdout_proof_matches(
+                    report,
+                    repo_root=repo_root,
+                    lookup=lookup,
+                ):
+                    extra_record = _proof_record(
+                        subject_id=str(report.get("subjectId") or "").strip(),
+                        stable_id=extra_stable_id,
+                        alias=extra_alias,
+                        entry_index=extra_entry_index,
+                        status=str(report.get("status") or final_status or ""),
+                        stage_kind=stage_kind,
+                        run_id=run_id,
+                        summary_path=summary_path,
+                        artifact_path=artifact_path,
+                        errors=errors,
+                        repo_root=repo_root,
+                    )
+                    extra_key = (extra_stable_id, stage_kind)
+                    previous = latest_by_key.get(extra_key)
+                    if previous is None or modified_at >= previous[0]:
+                        latest_by_key[extra_key] = (modified_at, extra_record)
 
     return [
         record
         for _, record in sorted(
-            latest_by_stable_id.values(),
+            latest_by_key.values(),
             key=lambda item: (
                 str(item[1].get("subjectId") or ""),
                 str(item[1].get("stableId") or ""),
+                str(item[1].get("stageKind") or ""),
             ),
         )
     ]
@@ -524,6 +928,203 @@ def _normalize_benchmark_evidence_row(
 
 def _benchmark_records_path(repo_root: Path, subject_id: str) -> Path:
     return verification_layout_module.raw_benchmark_records_path(repo_root, subject_id)
+
+
+def _benchmark_declared_lookup(
+    declared_benchmarks: list[dict[str, Any]],
+) -> dict[str, dict[str, dict[str, Any]]]:
+    by_subject: dict[str, dict[str, dict[str, Any]]] = {}
+    for item in declared_benchmarks:
+        subject_id = str(item.get("subjectId") or "").strip()
+        workload_entry = str(item.get("workloadEntry") or "").strip()
+        if not subject_id or not workload_entry:
+            continue
+        by_subject.setdefault(subject_id, {})[workload_entry] = dict(item)
+    return by_subject
+
+
+def _benchmark_mode_from_runtime_profile(runtime_profile: str) -> str:
+    normalized = runtime_profile.strip().lower()
+    if "interpreter" in normalized:
+        return "interpreter"
+    if "native" in normalized:
+        return "native"
+    return "managed"
+
+
+def _empty_mode_status_payload(mode: str, *, status: str) -> dict[str, Any]:
+    if status == "recorded":
+        return {"mode": mode, "status": status}
+    if status == "unsupported":
+        return {
+            "mode": mode,
+            "status": status,
+            "reasonCode": "unsupported-by-contract",
+            "reasonLabel": "This mode is not declared by the benchmark contract.",
+        }
+    return {
+        "mode": mode,
+        "status": status,
+        "reasonCode": "missing-record",
+        "reasonLabel": "Declared by case contract, but no benchmark record was found.",
+    }
+
+
+def _legacy_benchmark_metrics(report: dict[str, Any], perf_summary: dict[str, Any]) -> dict[str, Any]:
+    for source in (
+        dict(perf_summary.get("metrics") or {}),
+        dict(report.get("metrics") or {}),
+        dict(dict(report.get("performance") or {}).get("metrics") or {}),
+    ):
+        if source:
+            return source
+    return {}
+
+
+def _merge_legacy_benchmark_row(
+    bucket: dict[tuple[str, str, str, str], dict[str, Any]],
+    *,
+    declared: dict[str, Any],
+    mode: str,
+    metrics: dict[str, Any],
+    summary_path: str,
+    platform_id: str,
+    device_id: str,
+    device_name: str,
+    git_commit: str,
+    recorded_at: str,
+) -> None:
+    key = (
+        str(declared.get("stableId") or ""),
+        str(declared.get("subjectId") or ""),
+        platform_id,
+        device_id,
+    )
+    supported_modes = _string_list(declared.get("supportedModes"))
+    if not supported_modes:
+        supported_modes = declared_metadata_labels_module.supported_modes_from_mask(declared.get("modes"))
+    row = bucket.setdefault(
+        key,
+        {
+            **dict(declared),
+            "deviceId": device_id,
+            "deviceName": device_name,
+            "platformId": platform_id,
+            "supportedModes": supported_modes,
+            "recordedModes": [],
+            "missingModes": [],
+            "staleModes": [],
+            "unsupportedModes": [],
+            "modeStatus": {},
+            "sourceSubjectPath": summary_path,
+            "lastRecordedAt": recorded_at,
+            "gitCommit": git_commit,
+            "isStale": False,
+        },
+    )
+    row["sourceSubjectPath"] = summary_path
+    if recorded_at:
+        row["lastRecordedAt"] = recorded_at
+    if git_commit:
+        row["gitCommit"] = git_commit
+    row.setdefault("modeStatus", {})[mode] = {
+        "mode": mode,
+        "status": "recorded",
+        "metrics": dict(metrics),
+        "recordedAt": recorded_at,
+        "gitCommit": git_commit,
+        "reasonCode": "recorded",
+        "reasonLabel": "Benchmark record captured.",
+    }
+    for known_mode in MODE_ORDER:
+        if known_mode in row["modeStatus"]:
+            continue
+        if known_mode in supported_modes:
+            row["modeStatus"][known_mode] = _empty_mode_status_payload(known_mode, status="missing")
+        else:
+            row["modeStatus"][known_mode] = _empty_mode_status_payload(known_mode, status="unsupported")
+    row["recordedModes"] = [current for current in MODE_ORDER if row["modeStatus"].get(current, {}).get("status") == "recorded"]
+    row["missingModes"] = [current for current in MODE_ORDER if row["modeStatus"].get(current, {}).get("status") == "missing"]
+    row["unsupportedModes"] = [
+        current for current in MODE_ORDER if row["modeStatus"].get(current, {}).get("status") == "unsupported"
+    ]
+
+
+def _collect_legacy_benchmark_evidence(
+    repo_root: Path,
+    *,
+    declared_benchmarks: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    runs_root = repo_root / "artifacts" / "subjects"
+    if not runs_root.is_dir():
+        return []
+
+    declared_lookup = _benchmark_declared_lookup(declared_benchmarks)
+    if not declared_lookup:
+        return []
+
+    rows: dict[tuple[str, str, str, str], dict[str, Any]] = {}
+    for summary_path in runs_root.rglob("run-report/summary.json"):
+        if not summary_path.is_file():
+            continue
+        try:
+            payload = read_json(summary_path)
+        except Exception:
+            continue
+        if not isinstance(payload, dict):
+            continue
+        command = str(payload.get("command") or "").strip()
+        if "test subject" not in command:
+            continue
+        subject_id = str(dict(list(payload.get("subjectResults") or [{}])[0]).get("subjectId") or "").strip()
+        declared_by_workload = declared_lookup.get(subject_id)
+        if not declared_by_workload:
+            continue
+        for artifact_path in _string_list(payload.get("artifacts")):
+            if not artifact_path.endswith("pipeline-report/report.json"):
+                continue
+            report = _pipeline_report_from_artifact(repo_root, artifact_path)
+            if report is None:
+                continue
+            if str(report.get("goalId") or "").strip() != "perf.release":
+                continue
+            selection = dict(report.get("selection") or {})
+            workload_entry = str(selection.get("workloadEntry") or "").strip()
+            declared = declared_by_workload.get(workload_entry)
+            if declared is None:
+                continue
+            metrics = _legacy_benchmark_metrics(report, {})
+            if not metrics:
+                continue
+            execution_context = dict(selection.get("executionContext") or {})
+            platform_id = str(
+                execution_context.get("targetPlatform")
+                or execution_context.get("hostPlatform")
+                or "windows-x64"
+            )
+            mode = _benchmark_mode_from_runtime_profile(str(execution_context.get("runtimeProfile") or ""))
+            _merge_legacy_benchmark_row(
+                rows,
+                declared=declared,
+                mode=mode,
+                metrics=metrics,
+                summary_path=_relative(repo_root, summary_path.parent.parent / "matrices" / str(report.get("matrixId") or "") / "validations" / "perf" / "summary.json"),
+                platform_id=platform_id,
+                device_id="legacy-host",
+                device_name="Legacy Host",
+                git_commit=str(report.get("gitCommit") or ""),
+                recorded_at=str(report.get("generatedAt") or ""),
+            )
+            rows[(
+                str(declared.get("stableId") or ""),
+                str(declared.get("subjectId") or ""),
+                platform_id,
+                "legacy-host",
+            )]["legacyCompatibilityClaim"] = True
+    return sorted(
+        rows.values(),
+        key=lambda item: (str(item.get("stableId") or ""), str(item.get("deviceId") or ""), str(item.get("platformId") or "")),
+    )
 
 
 def _capability_id(item: dict[str, Any]) -> str:
@@ -739,11 +1340,24 @@ def collect_inventory_source(repo_root: Path, *, host_platform: str) -> dict[str
     subject_ids = sorted({*subject_ids, *_discover_local_subject_ids(repo_root)})
     capability_contracts = _collect_capability_contracts(repo_root)
     workspace_collections = _collect_workspace_collections(repo_root, subject_ids)
-    managed_proof_evidence = _collect_managed_proof_evidence(repo_root)
+    proof_evidence = _collect_proof_evidence(repo_root, declared_unit_tests=declared_unit_tests)
     benchmark_overview, benchmark_subjects, benchmark_evidence = _load_benchmark_projection(
         repo_root,
         subject_ids=subject_ids,
     )
+    legacy_benchmark_evidence = _collect_legacy_benchmark_evidence(
+        repo_root,
+        declared_benchmarks=declared_benchmarks,
+    )
+    merged_benchmark_evidence: dict[tuple[str, str, str], dict[str, Any]] = {}
+    for item in [*legacy_benchmark_evidence, *benchmark_evidence]:
+        key = (
+            str(item.get("stableId") or ""),
+            str(item.get("deviceId") or ""),
+            str(item.get("platformId") or ""),
+        )
+        if key[0]:
+            merged_benchmark_evidence[key] = dict(item)
     codegen_stubs = _collect_codegen_stubs(
         repo_root,
         capability_contracts=capability_contracts,
@@ -762,10 +1376,10 @@ def collect_inventory_source(repo_root: Path, *, host_platform: str) -> dict[str
         "declaredBenchmarks": sorted(declared_benchmarks, key=lambda item: (item["stableId"], item["workloadEntry"])),
         "capabilityContracts": capability_contracts,
         "workspaceCollections": workspace_collections,
-        "managedProofEvidence": managed_proof_evidence,
+        "proofEvidence": proof_evidence,
         "benchmarkSubjects": benchmark_subjects,
         "benchmarkEvidence": sorted(
-            benchmark_evidence,
+            merged_benchmark_evidence.values(),
             key=lambda item: (item["stableId"], item["deviceId"], item["platformId"]),
         ),
         "codegenStubs": codegen_stubs,

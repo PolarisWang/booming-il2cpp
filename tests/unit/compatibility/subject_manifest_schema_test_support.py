@@ -46,11 +46,14 @@ SOLUTION_CORE_PACK_MATRIX_IDS = {
     "windows-interface-dispatch-message-native-proof",
     "windows-threading-threadstatic-monitor-native-proof",
     "windows-native-check",
+    "windows-managed-proof",
     "windows-managed-trace",
     "macos-managed-trace",
     "windows-managed-perf",
     "windows-native-perf",
 }
+SOLUTION_CORE_PACK_HOST_SOLUTION = "verification/catalog/owners/SolutionCorePack/support/host/SolutionCorePack.sln"
+SOLUTION_CORE_PACK_HOST_PROJECT = "verification/catalog/owners/SolutionCorePack/support/host/SolutionCorePack.csproj"
 
 
 def load_module(path: Path, module_name: str):
@@ -76,6 +79,29 @@ def assert_matrix_source_entry(
 ) -> None:
     matrix = subjects_module.find_matrix(manifest, matrix_id)
     test_case.assertEqual(expected_entry, str(dict(matrix.get("source") or {})["entry"]))
+
+
+def owner_manifest_path(repo_root: Path, subject_id: str) -> Path:
+    return repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.manifest.json"
+
+
+def write_owner_manifest(repo_root: Path, subject_id: str, payload: dict) -> Path:
+    manifest_path = owner_manifest_path(repo_root, subject_id)
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
+    manifest_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (manifest_path.parent / "owner.features.json").write_text(
+        json.dumps(
+            {
+                "subjectId": subject_id,
+                "features": [],
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return manifest_path
 
 class SubjectManifestSchemaTestSupport(unittest.TestCase):
     pass

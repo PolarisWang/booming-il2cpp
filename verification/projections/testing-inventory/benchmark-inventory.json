@@ -879,9 +879,9 @@
       "deviceProfileCode": "bridge/default-platform/default"
     },
     {
-      "platformId": "",
-      "deviceId": "",
-      "deviceName": "",
+      "platformId": "windows-x64",
+      "deviceId": "legacy-host",
+      "deviceName": "Legacy Host",
       "subjectId": "HotUpdateHostPack",
       "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()",
       "alias": "hot-update-load-bench",
@@ -930,9 +930,9 @@
       "warmupCount": 1,
       "iterationCount": 8,
       "invocationCount": 1,
-      "managedStatus": "missing",
-      "managedMeanDurationMs": "",
-      "managedOpsPerSecond": "",
+      "managedStatus": "recorded",
+      "managedMeanDurationMs": 58.263,
+      "managedOpsPerSecond": 68.657,
       "nativeStatus": "unsupported",
       "nativeMeanDurationMs": "",
       "nativeOpsPerSecond": "",
@@ -942,14 +942,55 @@
       "interpreterOpsPerSecond": "",
       "interpreterRelativeToManaged": "",
       "isStale": false,
-      "lastRecordedAt": "",
+      "lastRecordedAt": "2026-04-13T20:45:24Z",
       "gitCommit": "",
-      "modeStatus": {},
-      "recordedModes": [],
+      "modeStatus": {
+        "managed": {
+          "mode": "managed",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 58.263,
+            "minDurationMs": 57.768,
+            "maxDurationMs": 58.778,
+            "meanChecksum": 4.0,
+            "minChecksum": 4.0,
+            "maxChecksum": 4.0,
+            "meanElapsedMilliseconds": 58.263,
+            "minElapsedMilliseconds": 57.768,
+            "maxElapsedMilliseconds": 58.778,
+            "meanOpsPerSecond": 68.657,
+            "minOpsPerSecond": 68.052,
+            "maxOpsPerSecond": 69.242
+          },
+          "recordedAt": "2026-04-13T20:45:24Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        },
+        "native": {
+          "mode": "native",
+          "status": "unsupported",
+          "reasonCode": "unsupported-by-contract",
+          "reasonLabel": "This mode is not declared by the benchmark contract."
+        },
+        "interpreter": {
+          "mode": "interpreter",
+          "status": "unsupported",
+          "reasonCode": "unsupported-by-contract",
+          "reasonLabel": "This mode is not declared by the benchmark contract."
+        }
+      },
+      "recordedModes": [
+        "managed"
+      ],
       "missingModes": [],
       "staleModes": [],
-      "unsupportedModes": [],
-      "sourceSubjectPath": "",
+      "unsupportedModes": [
+        "native",
+        "interpreter"
+      ],
+      "sourceSubjectPath": "artifacts/subjects/HotUpdateHostPack/runs/20260414-044521-windows-f2fe/matrices/windows-managed-perf/validations/perf/summary.json",
       "subjectDisplayName": "HotUpdateHostPack",
       "subjectSummaryWorkloadEntry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
       "subjectSummaryBenchmarkCase": {
@@ -1113,7 +1154,286 @@
         }
       },
       "subjectLatestByDevice": {},
+      "legacyCompatibilityClaim": true,
       "deviceProfileCode": "bridge/default-platform/default"
+    },
+    {
+      "platformId": "windows-x64",
+      "deviceId": "legacy-host",
+      "deviceName": "Legacy Host",
+      "subjectId": "HotUpdateHostPack",
+      "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()",
+      "alias": "hot-update-load-bench",
+      "method": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
+      "capabilityFamily": 13,
+      "capabilityItem": 54,
+      "capabilityItemLabel": "Package Load",
+      "ownerSubjectId": "HotUpdateHostPack",
+      "displayName": "",
+      "workloadEntry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
+      "entryIndex": 1,
+      "assemblyName": "HotUpdateHostPack",
+      "declaringType": "HotUpdateHostPack.HotUpdateLoadBenchmarkEntry",
+      "methodName": "RunWorkload",
+      "methodSignature": "RunWorkload()",
+      "category": 4,
+      "categoryLabel": "Hot Update",
+      "metrics": 1,
+      "supportStateLabels": [
+        "BridgeDispatch",
+        "InterpreterReady"
+      ],
+      "supportStates": [
+        3,
+        2
+      ],
+      "proofRequired": true,
+      "benchmarkRequired": true,
+      "supportedModes": [
+        "managed"
+      ],
+      "metricLabels": [
+        "Wall Clock"
+      ],
+      "requires": 32,
+      "requirementLabels": [
+        "Hot Update"
+      ],
+      "archetype": 7,
+      "archetypeLabel": "Skeleton Patch Solution",
+      "hotUpdateCapability": 17,
+      "hotUpdateCapabilityLabels": [
+        "Package Load",
+        "Patch Integrity"
+      ],
+      "warmupCount": 1,
+      "iterationCount": 8,
+      "invocationCount": 1,
+      "managedStatus": "recorded",
+      "managedMeanDurationMs": 58.263,
+      "managedOpsPerSecond": 68.657,
+      "nativeStatus": "unsupported",
+      "nativeMeanDurationMs": "",
+      "nativeOpsPerSecond": "",
+      "nativeRelativeToManaged": "",
+      "interpreterStatus": "unsupported",
+      "interpreterMeanDurationMs": "",
+      "interpreterOpsPerSecond": "",
+      "interpreterRelativeToManaged": "",
+      "isStale": false,
+      "lastRecordedAt": "2026-04-13T20:45:24Z",
+      "gitCommit": "",
+      "modeStatus": {
+        "managed": {
+          "mode": "managed",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 58.263,
+            "minDurationMs": 57.768,
+            "maxDurationMs": 58.778,
+            "meanChecksum": 4.0,
+            "minChecksum": 4.0,
+            "maxChecksum": 4.0,
+            "meanElapsedMilliseconds": 58.263,
+            "minElapsedMilliseconds": 57.768,
+            "maxElapsedMilliseconds": 58.778,
+            "meanOpsPerSecond": 68.657,
+            "minOpsPerSecond": 68.052,
+            "maxOpsPerSecond": 69.242
+          },
+          "recordedAt": "2026-04-13T20:45:24Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        },
+        "native": {
+          "mode": "native",
+          "status": "unsupported",
+          "reasonCode": "unsupported-by-contract",
+          "reasonLabel": "This mode is not declared by the benchmark contract."
+        },
+        "interpreter": {
+          "mode": "interpreter",
+          "status": "unsupported",
+          "reasonCode": "unsupported-by-contract",
+          "reasonLabel": "This mode is not declared by the benchmark contract."
+        }
+      },
+      "recordedModes": [
+        "managed"
+      ],
+      "missingModes": [],
+      "staleModes": [],
+      "unsupportedModes": [
+        "native",
+        "interpreter"
+      ],
+      "sourceSubjectPath": "artifacts/subjects/HotUpdateHostPack/runs/20260414-044521-windows-f2fe/matrices/windows-managed-perf/validations/perf/summary.json",
+      "subjectDisplayName": "HotUpdateHostPack",
+      "subjectSummaryWorkloadEntry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
+      "subjectSummaryBenchmarkCase": {
+        "caseId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()",
+        "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()",
+        "alias": "hot-update-load-bench",
+        "displayName": "hot-update-load-bench",
+        "workloadEntry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
+        "entryIndex": 1,
+        "assemblyName": "HotUpdateHostPack",
+        "declaringType": "HotUpdateHostPack.HotUpdateLoadBenchmarkEntry",
+        "methodName": "RunWorkload",
+        "methodSignature": "RunWorkload()",
+        "category": 4,
+        "categoryLabel": "Hot Update",
+        "metricLabels": [
+          "Wall Clock"
+        ],
+        "requirementLabels": [
+          "Hot Update"
+        ],
+        "archetype": 7,
+        "archetypeLabel": "Skeleton Patch Solution",
+        "hotUpdateCapability": 17,
+        "hotUpdateCapabilityLabels": [
+          "Package Load",
+          "Patch Integrity"
+        ],
+        "capabilityFamily": 13,
+        "capabilityFamilyLabel": "Hot Update Workflow",
+        "capabilityItem": 54,
+        "capabilityItemLabel": "Package Load",
+        "ownerSubjectId": "HotUpdateHostPack",
+        "supportStates": [
+          3,
+          2
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "supportedModes": [
+          "managed"
+        ]
+      },
+      "subjectSupportedModesByPlatform": {
+        "windows-x64": [
+          "managed"
+        ]
+      },
+      "subjectPlatforms": {
+        "windows-x64": {
+          "subjectId": "HotUpdateHostPack",
+          "displayName": "HotUpdateHostPack",
+          "platformId": "windows-x64",
+          "deviceId": null,
+          "deviceName": "",
+          "supportedModes": [
+            "managed"
+          ],
+          "recordedModes": [],
+          "missingModes": [
+            "managed"
+          ],
+          "staleModes": [],
+          "unsupportedModes": [
+            "native",
+            "interpreter"
+          ],
+          "modeStatus": {
+            "managed": {
+              "mode": "managed",
+              "status": "missing",
+              "reasonCode": "missing-record",
+              "reasonLabel": "Declared by subject manifest, but no benchmark record was found."
+            },
+            "native": {
+              "mode": "native",
+              "status": "unsupported",
+              "reasonCode": "unsupported-by-contract",
+              "reasonLabel": "This mode is not declared by the subject manifest."
+            },
+            "interpreter": {
+              "mode": "interpreter",
+              "status": "unsupported",
+              "reasonCode": "unsupported-by-contract",
+              "reasonLabel": "This mode is not declared by the subject manifest."
+            }
+          },
+          "coverage": {
+            "supportedModeCount": 1,
+            "recordedModeCount": 0,
+            "missingModeCount": 1,
+            "staleModeCount": 0,
+            "unsupportedModeCount": 2,
+            "isComplete": false,
+            "needsAttention": true
+          },
+          "lastRecordedAt": null,
+          "gitCommit": null,
+          "isStale": false,
+          "comparison": null,
+          "verdict": null,
+          "keyMetrics": {
+            "managedBaseline": {
+              "mode": "managed",
+              "status": "missing",
+              "reasonCode": "missing-record",
+              "reasonLabel": "Declared by subject manifest, but no benchmark record was found.",
+              "durationMs": null,
+              "opsPerSecond": null,
+              "recordedAt": null,
+              "gitCommit": null,
+              "isStale": false,
+              "staleReasonCode": "",
+              "staleReasonLabel": ""
+            },
+            "relativeToManaged": {
+              "native": {
+                "mode": "native",
+                "status": "unsupported",
+                "reasonCode": "unsupported-by-contract",
+                "reasonLabel": "This mode is not declared by the subject manifest.",
+                "direction": "faster",
+                "ratio": null,
+                "durationMs": null,
+                "opsPerSecond": null,
+                "recordedAt": null,
+                "gitCommit": null,
+                "baselineStatus": "missing",
+                "baselineReasonCode": "missing-record",
+                "baselineReasonLabel": "Declared by subject manifest, but no benchmark record was found.",
+                "isStale": false,
+                "staleReasonCode": "",
+                "staleReasonLabel": ""
+              },
+              "interpreter": {
+                "mode": "interpreter",
+                "status": "unsupported",
+                "reasonCode": "unsupported-by-contract",
+                "reasonLabel": "This mode is not declared by the subject manifest.",
+                "direction": "slower",
+                "ratio": null,
+                "durationMs": null,
+                "opsPerSecond": null,
+                "recordedAt": null,
+                "gitCommit": null,
+                "baselineStatus": "missing",
+                "baselineReasonCode": "missing-record",
+                "baselineReasonLabel": "Declared by subject manifest, but no benchmark record was found.",
+                "isStale": false,
+                "staleReasonCode": "",
+                "staleReasonLabel": ""
+              }
+            },
+            "nativeSpeedup": null,
+            "interpreterOverhead": null
+          }
+        }
+      },
+      "subjectLatestByDevice": {},
+      "deviceProfileCode": "bridge/windows-x64/legacy-host"
     },
     {
       "platformId": "",
@@ -1589,9 +1909,9 @@
       "deviceProfileCode": "bridge/default-platform/default"
     },
     {
-      "platformId": "",
-      "deviceId": "",
-      "deviceName": "",
+      "platformId": "windows-x64",
+      "deviceId": "legacy-host",
+      "deviceName": "Legacy Host",
       "subjectId": "MixedExecutionFeaturePack",
       "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry::RunWorkload()",
       "alias": "mixed-execution-bench",
@@ -1640,26 +1960,84 @@
       "warmupCount": 1,
       "iterationCount": 6,
       "invocationCount": 1000,
-      "managedStatus": "missing",
-      "managedMeanDurationMs": "",
-      "managedOpsPerSecond": "",
+      "managedStatus": "recorded",
+      "managedMeanDurationMs": 2.349,
+      "managedOpsPerSecond": 2554.733,
       "nativeStatus": "unsupported",
       "nativeMeanDurationMs": "",
       "nativeOpsPerSecond": "",
       "nativeRelativeToManaged": "",
-      "interpreterStatus": "missing",
-      "interpreterMeanDurationMs": "",
-      "interpreterOpsPerSecond": "",
-      "interpreterRelativeToManaged": "",
+      "interpreterStatus": "recorded",
+      "interpreterMeanDurationMs": 2.451,
+      "interpreterOpsPerSecond": 2449.758,
+      "interpreterRelativeToManaged": 1.0434,
       "isStale": false,
-      "lastRecordedAt": "",
+      "lastRecordedAt": "2026-04-13T09:58:41Z",
       "gitCommit": "",
-      "modeStatus": {},
-      "recordedModes": [],
+      "modeStatus": {
+        "managed": {
+          "mode": "managed",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 2.349,
+            "minDurationMs": 2.308,
+            "maxDurationMs": 2.37,
+            "meanChecksum": 9632.0,
+            "minChecksum": 9632.0,
+            "maxChecksum": 9632.0,
+            "meanElapsedMilliseconds": 2.349,
+            "minElapsedMilliseconds": 2.308,
+            "maxElapsedMilliseconds": 2.37,
+            "meanOpsPerSecond": 2554.733,
+            "minOpsPerSecond": 2531.432,
+            "maxOpsPerSecond": 2599.09
+          },
+          "recordedAt": "2026-04-13T09:57:41Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        },
+        "native": {
+          "mode": "native",
+          "status": "unsupported",
+          "reasonCode": "unsupported-by-contract",
+          "reasonLabel": "This mode is not declared by the benchmark contract."
+        },
+        "interpreter": {
+          "mode": "interpreter",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 2.451,
+            "minDurationMs": 2.369,
+            "maxDurationMs": 2.5,
+            "meanChecksum": 9632.0,
+            "minChecksum": 9632.0,
+            "maxChecksum": 9632.0,
+            "meanElapsedMilliseconds": 2.451,
+            "minElapsedMilliseconds": 2.369,
+            "maxElapsedMilliseconds": 2.5,
+            "meanOpsPerSecond": 2449.758,
+            "minOpsPerSecond": 2399.904,
+            "maxOpsPerSecond": 2533.035
+          },
+          "recordedAt": "2026-04-13T09:58:41Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        }
+      },
+      "recordedModes": [
+        "managed",
+        "interpreter"
+      ],
       "missingModes": [],
       "staleModes": [],
-      "unsupportedModes": [],
-      "sourceSubjectPath": "",
+      "unsupportedModes": [
+        "native"
+      ],
+      "sourceSubjectPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260413-175836-windows-7046/matrices/windows-interpreter-perf/validations/perf/summary.json",
       "subjectDisplayName": "MixedExecutionFeaturePack",
       "subjectSummaryWorkloadEntry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
       "subjectSummaryBenchmarkCase": {
@@ -1825,12 +2203,310 @@
         }
       },
       "subjectLatestByDevice": {},
+      "legacyCompatibilityClaim": true,
       "deviceProfileCode": "bridge/default-platform/default"
     },
     {
-      "platformId": "",
-      "deviceId": "",
-      "deviceName": "",
+      "platformId": "windows-x64",
+      "deviceId": "legacy-host",
+      "deviceName": "Legacy Host",
+      "subjectId": "MixedExecutionFeaturePack",
+      "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry::RunWorkload()",
+      "alias": "mixed-execution-bench",
+      "method": "MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()",
+      "capabilityFamily": 14,
+      "capabilityItem": 61,
+      "capabilityItemLabel": "Mixed Bridge Dispatch",
+      "ownerSubjectId": "MixedExecutionFeaturePack",
+      "displayName": "",
+      "workloadEntry": "MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()",
+      "entryIndex": 0,
+      "assemblyName": "MixedExecutionFeaturePack",
+      "declaringType": "MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry",
+      "methodName": "RunWorkload",
+      "methodSignature": "RunWorkload()",
+      "category": 1,
+      "categoryLabel": "Runtime Dispatch",
+      "metrics": 1,
+      "supportStateLabels": [
+        "BridgeDispatch",
+        "InterpreterReady",
+        "NativeGenerated"
+      ],
+      "supportStates": [
+        3,
+        2,
+        1
+      ],
+      "proofRequired": true,
+      "benchmarkRequired": true,
+      "supportedModes": [
+        "managed",
+        "interpreter"
+      ],
+      "metricLabels": [
+        "Wall Clock"
+      ],
+      "requires": 4,
+      "requirementLabels": [
+        "Delegate"
+      ],
+      "archetype": 11,
+      "archetypeLabel": "Mixed Bridge Solution",
+      "hotUpdateCapability": 0,
+      "hotUpdateCapabilityLabels": [],
+      "warmupCount": 1,
+      "iterationCount": 6,
+      "invocationCount": 1000,
+      "managedStatus": "recorded",
+      "managedMeanDurationMs": 2.349,
+      "managedOpsPerSecond": 2554.733,
+      "nativeStatus": "unsupported",
+      "nativeMeanDurationMs": "",
+      "nativeOpsPerSecond": "",
+      "nativeRelativeToManaged": "",
+      "interpreterStatus": "recorded",
+      "interpreterMeanDurationMs": 2.451,
+      "interpreterOpsPerSecond": 2449.758,
+      "interpreterRelativeToManaged": 1.0434,
+      "isStale": false,
+      "lastRecordedAt": "2026-04-13T09:58:41Z",
+      "gitCommit": "",
+      "modeStatus": {
+        "managed": {
+          "mode": "managed",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 2.349,
+            "minDurationMs": 2.308,
+            "maxDurationMs": 2.37,
+            "meanChecksum": 9632.0,
+            "minChecksum": 9632.0,
+            "maxChecksum": 9632.0,
+            "meanElapsedMilliseconds": 2.349,
+            "minElapsedMilliseconds": 2.308,
+            "maxElapsedMilliseconds": 2.37,
+            "meanOpsPerSecond": 2554.733,
+            "minOpsPerSecond": 2531.432,
+            "maxOpsPerSecond": 2599.09
+          },
+          "recordedAt": "2026-04-13T09:57:41Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        },
+        "native": {
+          "mode": "native",
+          "status": "unsupported",
+          "reasonCode": "unsupported-by-contract",
+          "reasonLabel": "This mode is not declared by the benchmark contract."
+        },
+        "interpreter": {
+          "mode": "interpreter",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 2.451,
+            "minDurationMs": 2.369,
+            "maxDurationMs": 2.5,
+            "meanChecksum": 9632.0,
+            "minChecksum": 9632.0,
+            "maxChecksum": 9632.0,
+            "meanElapsedMilliseconds": 2.451,
+            "minElapsedMilliseconds": 2.369,
+            "maxElapsedMilliseconds": 2.5,
+            "meanOpsPerSecond": 2449.758,
+            "minOpsPerSecond": 2399.904,
+            "maxOpsPerSecond": 2533.035
+          },
+          "recordedAt": "2026-04-13T09:58:41Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        }
+      },
+      "recordedModes": [
+        "managed",
+        "interpreter"
+      ],
+      "missingModes": [],
+      "staleModes": [],
+      "unsupportedModes": [
+        "native"
+      ],
+      "sourceSubjectPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260413-175836-windows-7046/matrices/windows-interpreter-perf/validations/perf/summary.json",
+      "subjectDisplayName": "MixedExecutionFeaturePack",
+      "subjectSummaryWorkloadEntry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+      "subjectSummaryBenchmarkCase": {
+        "caseId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+        "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+        "alias": "mixed-execution-native-bench",
+        "displayName": "mixed-execution-native-bench",
+        "workloadEntry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+        "entryIndex": 1,
+        "assemblyName": "MixedExecutionFeaturePack",
+        "declaringType": "MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry",
+        "methodName": "RunWorkload",
+        "methodSignature": "RunWorkload()",
+        "category": 1,
+        "categoryLabel": "Runtime Dispatch",
+        "metricLabels": [
+          "Wall Clock"
+        ],
+        "requirementLabels": [],
+        "archetype": 11,
+        "archetypeLabel": "Mixed Bridge Solution",
+        "hotUpdateCapability": 0,
+        "hotUpdateCapabilityLabels": [],
+        "capabilityFamily": 14,
+        "capabilityFamilyLabel": "Mixed Execution",
+        "capabilityItem": 63,
+        "capabilityItemLabel": "Interpreter Arithmetic",
+        "ownerSubjectId": "MixedExecutionFeaturePack",
+        "supportStates": [
+          3,
+          2,
+          1
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "supportedModes": [
+          "managed",
+          "native",
+          "interpreter"
+        ]
+      },
+      "subjectSupportedModesByPlatform": {
+        "windows-x64": [
+          "managed",
+          "native",
+          "interpreter"
+        ]
+      },
+      "subjectPlatforms": {
+        "windows-x64": {
+          "subjectId": "MixedExecutionFeaturePack",
+          "displayName": "MixedExecutionFeaturePack",
+          "platformId": "windows-x64",
+          "deviceId": null,
+          "deviceName": "",
+          "supportedModes": [
+            "managed",
+            "native",
+            "interpreter"
+          ],
+          "recordedModes": [],
+          "missingModes": [
+            "managed",
+            "native",
+            "interpreter"
+          ],
+          "staleModes": [],
+          "unsupportedModes": [],
+          "modeStatus": {
+            "managed": {
+              "mode": "managed",
+              "status": "missing",
+              "reasonCode": "missing-record",
+              "reasonLabel": "Declared by subject manifest, but no benchmark record was found."
+            },
+            "native": {
+              "mode": "native",
+              "status": "missing",
+              "reasonCode": "missing-record",
+              "reasonLabel": "Declared by subject manifest, but no benchmark record was found."
+            },
+            "interpreter": {
+              "mode": "interpreter",
+              "status": "missing",
+              "reasonCode": "missing-record",
+              "reasonLabel": "Declared by subject manifest, but no benchmark record was found."
+            }
+          },
+          "coverage": {
+            "supportedModeCount": 3,
+            "recordedModeCount": 0,
+            "missingModeCount": 3,
+            "staleModeCount": 0,
+            "unsupportedModeCount": 0,
+            "isComplete": false,
+            "needsAttention": true
+          },
+          "lastRecordedAt": null,
+          "gitCommit": null,
+          "isStale": false,
+          "comparison": null,
+          "verdict": null,
+          "keyMetrics": {
+            "managedBaseline": {
+              "mode": "managed",
+              "status": "missing",
+              "reasonCode": "missing-record",
+              "reasonLabel": "Declared by subject manifest, but no benchmark record was found.",
+              "durationMs": null,
+              "opsPerSecond": null,
+              "recordedAt": null,
+              "gitCommit": null,
+              "isStale": false,
+              "staleReasonCode": "",
+              "staleReasonLabel": ""
+            },
+            "relativeToManaged": {
+              "native": {
+                "mode": "native",
+                "status": "missing",
+                "reasonCode": "missing-record",
+                "reasonLabel": "Declared by subject manifest, but no benchmark record was found.",
+                "direction": "faster",
+                "ratio": null,
+                "durationMs": null,
+                "opsPerSecond": null,
+                "recordedAt": null,
+                "gitCommit": null,
+                "baselineStatus": "missing",
+                "baselineReasonCode": "missing-record",
+                "baselineReasonLabel": "Declared by subject manifest, but no benchmark record was found.",
+                "isStale": false,
+                "staleReasonCode": "",
+                "staleReasonLabel": ""
+              },
+              "interpreter": {
+                "mode": "interpreter",
+                "status": "missing",
+                "reasonCode": "missing-record",
+                "reasonLabel": "Declared by subject manifest, but no benchmark record was found.",
+                "direction": "slower",
+                "ratio": null,
+                "durationMs": null,
+                "opsPerSecond": null,
+                "recordedAt": null,
+                "gitCommit": null,
+                "baselineStatus": "missing",
+                "baselineReasonCode": "missing-record",
+                "baselineReasonLabel": "Declared by subject manifest, but no benchmark record was found.",
+                "isStale": false,
+                "staleReasonCode": "",
+                "staleReasonLabel": ""
+              }
+            },
+            "nativeSpeedup": null,
+            "interpreterOverhead": null
+          }
+        }
+      },
+      "subjectLatestByDevice": {},
+      "deviceProfileCode": "bridge/windows-x64/legacy-host"
+    },
+    {
+      "platformId": "windows-x64",
+      "deviceId": "legacy-host",
+      "deviceName": "Legacy Host",
       "subjectId": "MixedExecutionFeaturePack",
       "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()",
       "alias": "mixed-execution-native-bench",
@@ -1878,26 +2554,100 @@
       "warmupCount": 1,
       "iterationCount": 6,
       "invocationCount": 1000,
-      "managedStatus": "missing",
-      "managedMeanDurationMs": "",
-      "managedOpsPerSecond": "",
-      "nativeStatus": "missing",
-      "nativeMeanDurationMs": "",
-      "nativeOpsPerSecond": "",
-      "nativeRelativeToManaged": "",
-      "interpreterStatus": "missing",
-      "interpreterMeanDurationMs": "",
-      "interpreterOpsPerSecond": "",
-      "interpreterRelativeToManaged": "",
+      "managedStatus": "recorded",
+      "managedMeanDurationMs": 6.832,
+      "managedOpsPerSecond": 878.148,
+      "nativeStatus": "recorded",
+      "nativeMeanDurationMs": 6.404,
+      "nativeOpsPerSecond": 936.9,
+      "nativeRelativeToManaged": 0.9374,
+      "interpreterStatus": "recorded",
+      "interpreterMeanDurationMs": 6.987,
+      "interpreterOpsPerSecond": 858.783,
+      "interpreterRelativeToManaged": 1.0227,
       "isStale": false,
-      "lastRecordedAt": "",
+      "lastRecordedAt": "2026-04-13T20:46:12Z",
       "gitCommit": "",
-      "modeStatus": {},
-      "recordedModes": [],
+      "modeStatus": {
+        "native": {
+          "mode": "native",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 1,
+            "meanDurationMs": 6.404,
+            "minDurationMs": 6.404,
+            "maxDurationMs": 6.404,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.404,
+            "minElapsedMilliseconds": 6.404,
+            "maxElapsedMilliseconds": 6.404,
+            "meanOpsPerSecond": 936.9,
+            "minOpsPerSecond": 936.9,
+            "maxOpsPerSecond": 936.9
+          },
+          "recordedAt": "2026-04-13T20:46:05Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        },
+        "managed": {
+          "mode": "managed",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.832,
+            "minDurationMs": 6.827,
+            "maxDurationMs": 6.842,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.832,
+            "minElapsedMilliseconds": 6.827,
+            "maxElapsedMilliseconds": 6.842,
+            "meanOpsPerSecond": 878.148,
+            "minOpsPerSecond": 876.898,
+            "maxOpsPerSecond": 878.863
+          },
+          "recordedAt": "2026-04-13T20:45:42Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        },
+        "interpreter": {
+          "mode": "interpreter",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.987,
+            "minDurationMs": 6.902,
+            "maxDurationMs": 7.05,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.987,
+            "minElapsedMilliseconds": 6.902,
+            "maxElapsedMilliseconds": 7.05,
+            "meanOpsPerSecond": 858.783,
+            "minOpsPerSecond": 851.04,
+            "maxOpsPerSecond": 869.376
+          },
+          "recordedAt": "2026-04-13T20:46:12Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        }
+      },
+      "recordedModes": [
+        "managed",
+        "native",
+        "interpreter"
+      ],
       "missingModes": [],
       "staleModes": [],
       "unsupportedModes": [],
-      "sourceSubjectPath": "",
+      "sourceSubjectPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260414-044608-windows-4ce3/matrices/windows-interpreter-perf/validations/perf/summary.json",
       "subjectDisplayName": "MixedExecutionFeaturePack",
       "subjectSummaryWorkloadEntry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
       "subjectSummaryBenchmarkCase": {
@@ -2063,7 +2813,320 @@
         }
       },
       "subjectLatestByDevice": {},
+      "legacyCompatibilityClaim": true,
       "deviceProfileCode": "bridge/default-platform/default"
+    },
+    {
+      "platformId": "windows-x64",
+      "deviceId": "legacy-host",
+      "deviceName": "Legacy Host",
+      "subjectId": "MixedExecutionFeaturePack",
+      "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+      "alias": "mixed-execution-native-bench",
+      "method": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+      "capabilityFamily": 14,
+      "capabilityItem": 63,
+      "capabilityItemLabel": "Interpreter Arithmetic",
+      "ownerSubjectId": "MixedExecutionFeaturePack",
+      "displayName": "",
+      "workloadEntry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+      "entryIndex": 1,
+      "assemblyName": "MixedExecutionFeaturePack",
+      "declaringType": "MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry",
+      "methodName": "RunWorkload",
+      "methodSignature": "RunWorkload()",
+      "category": 1,
+      "categoryLabel": "Runtime Dispatch",
+      "metrics": 1,
+      "supportStateLabels": [
+        "BridgeDispatch",
+        "InterpreterReady",
+        "NativeGenerated"
+      ],
+      "supportStates": [
+        3,
+        2,
+        1
+      ],
+      "proofRequired": true,
+      "benchmarkRequired": true,
+      "supportedModes": [
+        "managed",
+        "native",
+        "interpreter"
+      ],
+      "metricLabels": [
+        "Wall Clock"
+      ],
+      "requires": 0,
+      "requirementLabels": [],
+      "archetype": 11,
+      "archetypeLabel": "Mixed Bridge Solution",
+      "hotUpdateCapability": 0,
+      "hotUpdateCapabilityLabels": [],
+      "warmupCount": 1,
+      "iterationCount": 6,
+      "invocationCount": 1000,
+      "managedStatus": "recorded",
+      "managedMeanDurationMs": 6.832,
+      "managedOpsPerSecond": 878.148,
+      "nativeStatus": "recorded",
+      "nativeMeanDurationMs": 6.404,
+      "nativeOpsPerSecond": 936.9,
+      "nativeRelativeToManaged": 0.9374,
+      "interpreterStatus": "recorded",
+      "interpreterMeanDurationMs": 6.987,
+      "interpreterOpsPerSecond": 858.783,
+      "interpreterRelativeToManaged": 1.0227,
+      "isStale": false,
+      "lastRecordedAt": "2026-04-13T20:46:12Z",
+      "gitCommit": "",
+      "modeStatus": {
+        "native": {
+          "mode": "native",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 1,
+            "meanDurationMs": 6.404,
+            "minDurationMs": 6.404,
+            "maxDurationMs": 6.404,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.404,
+            "minElapsedMilliseconds": 6.404,
+            "maxElapsedMilliseconds": 6.404,
+            "meanOpsPerSecond": 936.9,
+            "minOpsPerSecond": 936.9,
+            "maxOpsPerSecond": 936.9
+          },
+          "recordedAt": "2026-04-13T20:46:05Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        },
+        "managed": {
+          "mode": "managed",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.832,
+            "minDurationMs": 6.827,
+            "maxDurationMs": 6.842,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.832,
+            "minElapsedMilliseconds": 6.827,
+            "maxElapsedMilliseconds": 6.842,
+            "meanOpsPerSecond": 878.148,
+            "minOpsPerSecond": 876.898,
+            "maxOpsPerSecond": 878.863
+          },
+          "recordedAt": "2026-04-13T20:45:42Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        },
+        "interpreter": {
+          "mode": "interpreter",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.987,
+            "minDurationMs": 6.902,
+            "maxDurationMs": 7.05,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.987,
+            "minElapsedMilliseconds": 6.902,
+            "maxElapsedMilliseconds": 7.05,
+            "meanOpsPerSecond": 858.783,
+            "minOpsPerSecond": 851.04,
+            "maxOpsPerSecond": 869.376
+          },
+          "recordedAt": "2026-04-13T20:46:12Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        }
+      },
+      "recordedModes": [
+        "managed",
+        "native",
+        "interpreter"
+      ],
+      "missingModes": [],
+      "staleModes": [],
+      "unsupportedModes": [],
+      "sourceSubjectPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260414-044608-windows-4ce3/matrices/windows-interpreter-perf/validations/perf/summary.json",
+      "subjectDisplayName": "MixedExecutionFeaturePack",
+      "subjectSummaryWorkloadEntry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+      "subjectSummaryBenchmarkCase": {
+        "caseId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+        "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+        "alias": "mixed-execution-native-bench",
+        "displayName": "mixed-execution-native-bench",
+        "workloadEntry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+        "entryIndex": 1,
+        "assemblyName": "MixedExecutionFeaturePack",
+        "declaringType": "MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry",
+        "methodName": "RunWorkload",
+        "methodSignature": "RunWorkload()",
+        "category": 1,
+        "categoryLabel": "Runtime Dispatch",
+        "metricLabels": [
+          "Wall Clock"
+        ],
+        "requirementLabels": [],
+        "archetype": 11,
+        "archetypeLabel": "Mixed Bridge Solution",
+        "hotUpdateCapability": 0,
+        "hotUpdateCapabilityLabels": [],
+        "capabilityFamily": 14,
+        "capabilityFamilyLabel": "Mixed Execution",
+        "capabilityItem": 63,
+        "capabilityItemLabel": "Interpreter Arithmetic",
+        "ownerSubjectId": "MixedExecutionFeaturePack",
+        "supportStates": [
+          3,
+          2,
+          1
+        ],
+        "supportStateLabels": [
+          "BridgeDispatch",
+          "InterpreterReady",
+          "NativeGenerated"
+        ],
+        "proofRequired": true,
+        "benchmarkRequired": true,
+        "supportedModes": [
+          "managed",
+          "native",
+          "interpreter"
+        ]
+      },
+      "subjectSupportedModesByPlatform": {
+        "windows-x64": [
+          "managed",
+          "native",
+          "interpreter"
+        ]
+      },
+      "subjectPlatforms": {
+        "windows-x64": {
+          "subjectId": "MixedExecutionFeaturePack",
+          "displayName": "MixedExecutionFeaturePack",
+          "platformId": "windows-x64",
+          "deviceId": null,
+          "deviceName": "",
+          "supportedModes": [
+            "managed",
+            "native",
+            "interpreter"
+          ],
+          "recordedModes": [],
+          "missingModes": [
+            "managed",
+            "native",
+            "interpreter"
+          ],
+          "staleModes": [],
+          "unsupportedModes": [],
+          "modeStatus": {
+            "managed": {
+              "mode": "managed",
+              "status": "missing",
+              "reasonCode": "missing-record",
+              "reasonLabel": "Declared by subject manifest, but no benchmark record was found."
+            },
+            "native": {
+              "mode": "native",
+              "status": "missing",
+              "reasonCode": "missing-record",
+              "reasonLabel": "Declared by subject manifest, but no benchmark record was found."
+            },
+            "interpreter": {
+              "mode": "interpreter",
+              "status": "missing",
+              "reasonCode": "missing-record",
+              "reasonLabel": "Declared by subject manifest, but no benchmark record was found."
+            }
+          },
+          "coverage": {
+            "supportedModeCount": 3,
+            "recordedModeCount": 0,
+            "missingModeCount": 3,
+            "staleModeCount": 0,
+            "unsupportedModeCount": 0,
+            "isComplete": false,
+            "needsAttention": true
+          },
+          "lastRecordedAt": null,
+          "gitCommit": null,
+          "isStale": false,
+          "comparison": null,
+          "verdict": null,
+          "keyMetrics": {
+            "managedBaseline": {
+              "mode": "managed",
+              "status": "missing",
+              "reasonCode": "missing-record",
+              "reasonLabel": "Declared by subject manifest, but no benchmark record was found.",
+              "durationMs": null,
+              "opsPerSecond": null,
+              "recordedAt": null,
+              "gitCommit": null,
+              "isStale": false,
+              "staleReasonCode": "",
+              "staleReasonLabel": ""
+            },
+            "relativeToManaged": {
+              "native": {
+                "mode": "native",
+                "status": "missing",
+                "reasonCode": "missing-record",
+                "reasonLabel": "Declared by subject manifest, but no benchmark record was found.",
+                "direction": "faster",
+                "ratio": null,
+                "durationMs": null,
+                "opsPerSecond": null,
+                "recordedAt": null,
+                "gitCommit": null,
+                "baselineStatus": "missing",
+                "baselineReasonCode": "missing-record",
+                "baselineReasonLabel": "Declared by subject manifest, but no benchmark record was found.",
+                "isStale": false,
+                "staleReasonCode": "",
+                "staleReasonLabel": ""
+              },
+              "interpreter": {
+                "mode": "interpreter",
+                "status": "missing",
+                "reasonCode": "missing-record",
+                "reasonLabel": "Declared by subject manifest, but no benchmark record was found.",
+                "direction": "slower",
+                "ratio": null,
+                "durationMs": null,
+                "opsPerSecond": null,
+                "recordedAt": null,
+                "gitCommit": null,
+                "baselineStatus": "missing",
+                "baselineReasonCode": "missing-record",
+                "baselineReasonLabel": "Declared by subject manifest, but no benchmark record was found.",
+                "isStale": false,
+                "staleReasonCode": "",
+                "staleReasonLabel": ""
+              }
+            },
+            "nativeSpeedup": null,
+            "interpreterOverhead": null
+          }
+        }
+      },
+      "subjectLatestByDevice": {},
+      "deviceProfileCode": "bridge/windows-x64/legacy-host"
     },
     {
       "platformId": "",

@@ -11,7 +11,9 @@ from unittest.mock import patch
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-BENCH_ARITHMETIC_MANIFEST_PATH = REPO_ROOT / "subjects" / "SolutionCorePack" / "subject.manifest.json"
+BENCH_ARITHMETIC_MANIFEST_PATH = (
+    REPO_ROOT / "verification" / "catalog" / "owners" / "SolutionCorePack" / "owner.manifest.json"
+)
 SUBJECT_WORKERS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_workers.py"
 SUBJECT_EXECUTOR_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_executor.py"
 MANAGED_CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"

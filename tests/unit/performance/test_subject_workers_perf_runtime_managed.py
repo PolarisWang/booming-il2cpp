@@ -46,25 +46,22 @@ class TestSubjectWorkersPerfRuntimeManaged(SubjectWorkersPerfTestSupport):
 
         repo_root = self._make_repo_root("runtime-perf-collect")
         try:
-            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
-            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
-            subject_manifest_path.write_text(
-                json.dumps(
-                    {
-                        "subjectId": subject_id,
-                        "validation": {
-                            "perf": {
-                                "kind": "perf",
-                                "project": perf_project_path,
-                                "driver": "csharp-perf-harness",
-                                "defaultVariant": "PROFILE",
-                            }
-                        },
-                        "validationProfiles": {"perf-release": ["perf"]},
-                        "defaultValidationProfile": "perf-release",
-                    }
-                ),
-                encoding="utf-8",
+            write_owner_manifest(
+                repo_root,
+                subject_id,
+                {
+                    "subjectId": subject_id,
+                    "validation": {
+                        "perf": {
+                            "kind": "perf",
+                            "project": perf_project_path,
+                            "driver": "csharp-perf-harness",
+                            "defaultVariant": "PROFILE",
+                        }
+                    },
+                    "validationProfiles": {"perf-release": ["perf"]},
+                    "defaultValidationProfile": "perf-release",
+                },
             )
             host_input_manifest_path = repo_root / request["upstream"]["host-input"]["manifestPath"]
             host_input_manifest_path.parent.mkdir(parents=True, exist_ok=True)

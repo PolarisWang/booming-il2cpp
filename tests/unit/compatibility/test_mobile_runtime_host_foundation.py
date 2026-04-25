@@ -12,7 +12,7 @@ ANDROID_CANONICAL_ROOT = REPO_ROOT / "tests" / "integration" / "platform-hosts" 
 IOS_CANONICAL_ROOT = REPO_ROOT / "tests" / "integration" / "platform-hosts" / "ios-smoke"
 
 
-class Phase4MobileRuntimeHostBatch1Tests(unittest.TestCase):
+class MobileRuntimeHostFoundationTests(unittest.TestCase):
     def test_shared_mobile_host_files_exist_and_gate_cmake_consumes_them(self) -> None:
         required_paths = [
             SHARED_ROOT / "host_main.h",

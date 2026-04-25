@@ -91,7 +91,7 @@ class TestSolutionCorePackPlannerOverridesPerf(SolutionCorePackPlannerTestSuppor
 
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/SimpleLibrarySolution/App/GoldenSimpleLib.App.csproj",
+            solution_core_pack_scenario_project_path("SimpleLibrarySolution", "GoldenSimpleLib.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenSimpleLib.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -116,7 +116,7 @@ class TestSolutionCorePackPlannerOverridesPerf(SolutionCorePackPlannerTestSuppor
 
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/ReferenceAssemblySolution/App/GoldenReferenceAssembly.App.csproj",
+            solution_core_pack_scenario_project_path("ReferenceAssemblySolution", "GoldenReferenceAssembly.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenReferenceAssembly.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -140,7 +140,7 @@ class TestSolutionCorePackPlannerOverridesPerf(SolutionCorePackPlannerTestSuppor
 
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Benchmarks/CoreRuntimeBenchmarks/CoreRuntimeBenchmarks.csproj",
+            SOLUTION_CORE_PACK_BENCHMARKS_PROJECT,
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()", plan["selection"]["source"]["entry"])
@@ -167,7 +167,7 @@ class TestSolutionCorePackPlannerOverridesPerf(SolutionCorePackPlannerTestSuppor
         self.assertEqual("PROFILE", plan["selection"]["variant"])
         self.assertEqual("native-benchmark", plan["selection"]["pipelineId"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Benchmarks/CoreRuntimeBenchmarks/CoreRuntimeBenchmarks.csproj",
+            SOLUTION_CORE_PACK_BENCHMARKS_PROJECT,
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual(

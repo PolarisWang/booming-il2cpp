@@ -19,6 +19,7 @@ class TestSubjectCommandDeclaredUnit(SubjectCommandTestSupport):
             alias=alias,
             source_entry=source_entry,
             workload_entry="should-be-cleared-for-unit-tests",
+            matrix_id="workspace-proof-matrix",
         )
         plan = make_subject_plan(
             subject_id=subject_id,
@@ -118,6 +119,7 @@ class TestSubjectCommandDeclaredUnit(SubjectCommandTestSupport):
             alias=alias,
             source_entry=source_entry,
             workload_entry="should-be-cleared-for-unit-tests",
+            matrix_id="workspace-proof-matrix",
         )
         plan = make_subject_plan(
             subject_id=subject_id,

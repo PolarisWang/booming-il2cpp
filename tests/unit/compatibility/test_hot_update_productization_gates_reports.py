@@ -1,7 +1,7 @@
 from tests.unit.compatibility.hot_update_productization_gates_test_support import *
 
 
-class TestHotUpdateProductizationGatesReports(Phase8ProductizationGatesTestSupport):
+class TestHotUpdateProductizationGatesReports(ProductizationGatesTestSupport):
     def test_compatibility_matrix_assets_define_config_schema_and_proof_subject(self) -> None:
         self.assertTrue(
             COMPATIBILITY_MATRIX_CONFIG_PATH.is_file(),
@@ -44,10 +44,10 @@ class TestHotUpdateProductizationGatesReports(Phase8ProductizationGatesTestSuppo
     def test_compatibility_matrix_runner_executes_proof_subject_and_writes_json_report(self) -> None:
         runner_module = load_module(
             COMPATIBILITY_MATRIX_RUNNER_PATH,
-            "chaos_compatibility_matrix_runner_phase8",
+            "chaos_compatibility_matrix_runner_productization",
         )
 
-        run_id = f"phase8-productization-{uuid.uuid4().hex}"
+        run_id = f"productization-{uuid.uuid4().hex}"
         result = runner_module.run_compatibility_matrix(
             REPO_ROOT,
             COMPATIBILITY_MATRIX_CONFIG_PATH,
@@ -83,7 +83,7 @@ class TestHotUpdateProductizationGatesReports(Phase8ProductizationGatesTestSuppo
     def test_perf_dashboard_builder_discovers_perf_subject_matrix_entries(self) -> None:
         dashboard_module = load_module(
             PERF_DASHBOARD_MODULE_PATH,
-            "chaos_perf_dashboard_phase8",
+            "chaos_perf_dashboard_productization",
         )
 
         config = dashboard_module.build_perf_dashboard_config(REPO_ROOT)
@@ -112,7 +112,11 @@ class TestHotUpdateProductizationGatesReports(Phase8ProductizationGatesTestSuppo
             for entry in config["entries"]
             if entry["subjectId"] == "SolutionCorePack" and entry["matrixId"] == "windows-native-perf"
         )
-        self.assertTrue(solution_core_pack_perf["baselinePath"].startswith("subjects/SolutionCorePack/baselines/perf/"))
+        self.assertTrue(
+            solution_core_pack_perf["baselinePath"].startswith(
+                "verification/catalog/owners/SolutionCorePack/benchmark-baselines/perf/"
+            )
+        )
         self.assertIn("meanDurationMs", solution_core_pack_perf["metricKeys"])
         self.assertEqual(
                     "CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()",
@@ -192,7 +196,7 @@ class TestHotUpdateProductizationGatesReports(Phase8ProductizationGatesTestSuppo
     def test_unsupported_feature_report_scanner_flags_fixture_patterns(self) -> None:
         report_module = load_module(
             UNSUPPORTED_FEATURE_REPORT_MODULE_PATH,
-            "chaos_unsupported_feature_report_phase8",
+            "chaos_unsupported_feature_report_productization",
         )
 
         fixture_root = BATCH4_TMP_ROOT / f"unsupported-feature-{uuid.uuid4().hex}"
@@ -240,7 +244,7 @@ class TestHotUpdateProductizationGatesReports(Phase8ProductizationGatesTestSuppo
     def test_declared_contract_report_distinguishes_reporting_owned_missing_proof_and_missing_benchmark(self) -> None:
         report_module = load_module(
             UNSUPPORTED_FEATURE_REPORT_MODULE_PATH,
-            "chaos_unsupported_feature_report_phase8_contracts",
+            "chaos_unsupported_feature_report_productization_contracts",
         )
 
         report = report_module.build_declared_contract_status_report(
@@ -311,7 +315,7 @@ class TestHotUpdateProductizationGatesReports(Phase8ProductizationGatesTestSuppo
     def test_soak_harness_collects_samples_for_successful_iterations(self) -> None:
         soak_module = load_module(
             SOAK_HARNESS_MODULE_PATH,
-            "chaos_soak_harness_phase8_success",
+            "chaos_soak_harness_productization_success",
         )
 
         report = soak_module.run_soak_harness(
@@ -332,7 +336,7 @@ class TestHotUpdateProductizationGatesReports(Phase8ProductizationGatesTestSuppo
     def test_soak_harness_marks_non_zero_exit_as_crash(self) -> None:
         soak_module = load_module(
             SOAK_HARNESS_MODULE_PATH,
-            "chaos_soak_harness_phase8_failure",
+            "chaos_soak_harness_productization_failure",
         )
 
         report = soak_module.run_soak_harness(

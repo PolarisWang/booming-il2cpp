@@ -164,7 +164,7 @@ def write_subject_workspace(
         "managedProjects": [
             {
                 "projectId": f"managed/{subject_id}/{subject_id}",
-                "projectPath": f"subjects/{subject_id}/source/{subject_id}.csproj",
+                "projectPath": f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.csproj",
                 "assemblyName": subject_id,
                 "isPrimary": True,
             }

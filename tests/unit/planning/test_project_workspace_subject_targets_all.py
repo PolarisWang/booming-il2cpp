@@ -7,7 +7,7 @@ class TestProjectWorkspaceSubjectTargetsAll(ProjectWorkspaceTestSupport):
         repo_root = self._make_repo_root("subject-generate-mixed-windows-matrices")
         self._write_subject_fixture(repo_root)
         completed = subprocess.CompletedProcess(["cmake"], 0, "", "")
-        subject_manifest_path = repo_root / "subjects" / "FixtureSubject" / "subject.manifest.json"
+        subject_manifest_path = owner_manifest_path(repo_root, "FixtureSubject")
         subject_manifest = json.loads(subject_manifest_path.read_text(encoding="utf-8"))
         subject_manifest["executionPipelines"].append(
             {
@@ -79,7 +79,7 @@ class TestProjectWorkspaceSubjectTargetsAll(ProjectWorkspaceTestSupport):
         repo_root = self._make_repo_root("subject-generate-preserve-default-matrix")
         self._write_subject_fixture(repo_root)
         completed = subprocess.CompletedProcess(["cmake"], 0, "", "")
-        subject_manifest_path = repo_root / "subjects" / "FixtureSubject" / "subject.manifest.json"
+        subject_manifest_path = owner_manifest_path(repo_root, "FixtureSubject")
         subject_manifest = json.loads(subject_manifest_path.read_text(encoding="utf-8"))
         subject_manifest["executionPipelines"].append(
             {
@@ -139,7 +139,7 @@ class TestProjectWorkspaceSubjectTargetsAll(ProjectWorkspaceTestSupport):
         repo_root = self._make_repo_root("subject-generate-native-aot-matrix")
         self._write_subject_fixture(repo_root)
         completed = subprocess.CompletedProcess(["cmake"], 0, "", "")
-        subject_manifest_path = repo_root / "subjects" / "FixtureSubject" / "subject.manifest.json"
+        subject_manifest_path = owner_manifest_path(repo_root, "FixtureSubject")
         subject_manifest = json.loads(subject_manifest_path.read_text(encoding="utf-8"))
         subject_manifest["executionPipelines"].append(
             {

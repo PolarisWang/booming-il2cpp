@@ -535,15 +535,17 @@ def _workspace_unit_ids(source_payload: dict[str, Any]) -> set[str]:
     return stable_ids
 
 
-def _managed_proof_evidence_by_stable_id(source_payload: dict[str, Any]) -> dict[str, dict[str, Any]]:
-    evidence_by_stable_id: dict[str, dict[str, Any]] = {}
-    for item in _list_value(source_payload.get("managedProofEvidence")):
+def _proof_evidence_by_stage(source_payload: dict[str, Any]) -> dict[str, dict[str, dict[str, Any]]]:
+    evidence_by_stage: dict[str, dict[str, dict[str, Any]]] = {}
+    proof_items = _list_value(source_payload.get("proofEvidence"))
+    for item in proof_items:
         if not isinstance(item, dict):
             continue
         stable_id = str(item.get("stableId") or "").strip()
-        if stable_id:
-            evidence_by_stable_id[stable_id] = dict(item)
-    return evidence_by_stable_id
+        stage_kind = str(item.get("stageKind") or "managed-proof").strip()
+        if stable_id and stage_kind:
+            evidence_by_stage.setdefault(stage_kind, {})[stable_id] = dict(item)
+    return evidence_by_stage
 
 
 def _derive_stage_status(requirement: str, coverage: str) -> str:
@@ -599,7 +601,7 @@ def _unit_stage_values(
     item: dict[str, Any],
     stage: str,
     workspace_ids: set[str],
-    managed_proof_evidence_by_id: dict[str, dict[str, Any]],
+    proof_evidence_by_stage: dict[str, dict[str, dict[str, Any]]],
 ) -> tuple[str, str, str, str]:
     stable_id = str(item.get("stableId") or "").strip()
     evidence: dict[str, Any] | None = None
@@ -611,7 +613,7 @@ def _unit_stage_values(
         coverage = "covered" if stable_id in workspace_ids else "missing-evidence"
     elif stage == "managed-proof":
         requirement = "required" if bool(item.get("proofRequired", True)) else "optional"
-        evidence = managed_proof_evidence_by_id.get(stable_id)
+        evidence = dict(proof_evidence_by_stage.get("managed-proof", {}).get(stable_id) or {}) or None
         if evidence:
             proof_status = str(evidence.get("status") or "").strip()
             if proof_status == "ok":
@@ -628,7 +630,17 @@ def _unit_stage_values(
             coverage = "n/a"
         elif _has_native_support(item):
             requirement = "required"
-            coverage = "pending-proof"
+            evidence = dict(proof_evidence_by_stage.get("native-proof", {}).get(stable_id) or {}) or None
+            if evidence:
+                proof_status = str(evidence.get("status") or "").strip()
+                if proof_status == "ok":
+                    coverage = "covered"
+                elif proof_status in {"fail", "aborted"}:
+                    coverage = "failed"
+                else:
+                    coverage = "pending-proof"
+            else:
+                coverage = "pending-proof"
         else:
             requirement = "not-applicable"
             coverage = "n/a"
@@ -637,7 +649,20 @@ def _unit_stage_values(
             _list_value(item.get("hotUpdateCapabilityLabels"))
         )
         requirement = "required" if has_hotupdate else "not-applicable"
-        coverage = "pending-proof" if has_hotupdate else "n/a"
+        if has_hotupdate:
+            evidence = dict(proof_evidence_by_stage.get("hotupdate-proof", {}).get(stable_id) or {}) or None
+            if evidence:
+                proof_status = str(evidence.get("status") or "").strip()
+                if proof_status == "ok":
+                    coverage = "covered"
+                elif proof_status in {"fail", "aborted"}:
+                    coverage = "failed"
+                else:
+                    coverage = "pending-proof"
+            else:
+                coverage = "pending-proof"
+        else:
+            coverage = "n/a"
     else:
         requirement = "unsupported"
         coverage = "n/a"
@@ -647,7 +672,7 @@ def _unit_stage_values(
 
 def _build_unit_table(source_payload: dict[str, Any]) -> dict[str, Any]:
     workspace_ids = _workspace_unit_ids(source_payload)
-    managed_proof_evidence_by_id = _managed_proof_evidence_by_stable_id(source_payload)
+    proof_evidence_by_stage = _proof_evidence_by_stage(source_payload)
     rows: list[dict[str, Any]] = []
     unit_items = [
         dict(item)
@@ -660,31 +685,30 @@ def _build_unit_table(source_payload: dict[str, Any]) -> dict[str, Any]:
                 item,
                 stage,
                 workspace_ids,
-                managed_proof_evidence_by_id,
+                proof_evidence_by_stage,
             )
-            rows.append(
-                {
-                    "subjectId": str(item.get("subjectId") or ""),
-                    "stableId": str(item.get("stableId") or ""),
-                    "alias": str(item.get("alias") or ""),
-                    "method": _method_label(item),
-                    "stage": stage,
-                    "stageOrder": stage_order,
-                    "capabilityFamily": _int_value(item.get("capabilityFamily")),
-                    "capabilityItem": _int_value(item.get("capabilityItem")),
-                    "capabilityItemLabel": str(item.get("capabilityItemLabel") or ""),
-                    "ownerSubjectId": str(item.get("ownerSubjectId") or ""),
-                    "supportStateLabels": [str(value) for value in _list_value(item.get("supportStateLabels"))],
-                    "stageRequirement": requirement,
-                    "stageCoverage": coverage,
-                    "stageStatus": status,
-                    "statusReason": reason,
-                    "defaultGoalId": str(item.get("defaultGoalId") or ""),
-                    "defaultMatrixId": str(item.get("defaultMatrixId") or ""),
-                    "evidenceLabels": [str(value) for value in _list_value(item.get("evidenceLabels"))],
-                    "priority": _int_value(item.get("priority")),
-                }
-            )
+            row = {
+                "subjectId": str(item.get("subjectId") or ""),
+                "stableId": str(item.get("stableId") or ""),
+                "alias": str(item.get("alias") or ""),
+                "method": _method_label(item),
+                "stage": stage,
+                "stageOrder": stage_order,
+                "capabilityFamily": _int_value(item.get("capabilityFamily")),
+                "capabilityItem": _int_value(item.get("capabilityItem")),
+                "capabilityItemLabel": str(item.get("capabilityItemLabel") or ""),
+                "ownerSubjectId": str(item.get("ownerSubjectId") or ""),
+                "supportStateLabels": [str(value) for value in _list_value(item.get("supportStateLabels"))],
+                "stageRequirement": requirement,
+                "stageCoverage": coverage,
+                "stageStatus": status,
+                "statusReason": reason,
+                "defaultGoalId": str(item.get("defaultGoalId") or ""),
+                "defaultMatrixId": str(item.get("defaultMatrixId") or ""),
+                "evidenceLabels": [str(value) for value in _list_value(item.get("evidenceLabels"))],
+                "priority": _int_value(item.get("priority")),
+            }
+            rows.append(row)
 
     return {
         "schemaVersion": INVENTORY_SCHEMA_VERSION,
@@ -784,8 +808,7 @@ def _build_benchmark_table(source_payload: dict[str, Any]) -> dict[str, Any]:
             managed_status, managed_ms, managed_ops = _mode_status(evidence, "managed", supported_modes)
             native_status, native_ms, native_ops = _mode_status(evidence, "native", supported_modes)
             interpreter_status, interpreter_ms, interpreter_ops = _mode_status(evidence, "interpreter", supported_modes)
-            rows.append(
-                {
+            row = {
                     "platformId": _first_text(evidence, declared, "platformId"),
                     "deviceId": _first_text(evidence, declared, "deviceId"),
                     "deviceName": _first_text(evidence, declared, "deviceName"),
@@ -850,9 +873,11 @@ def _build_benchmark_table(source_payload: dict[str, Any]) -> dict[str, Any]:
                     "subjectSummaryBenchmarkCase": dict(subject_payload.get("summaryBenchmarkCase") or {}),
                     "subjectSupportedModesByPlatform": dict(subject_payload.get("supportedModesByPlatform") or {}),
                     "subjectPlatforms": dict(subject_payload.get("platforms") or {}),
-                    "subjectLatestByDevice": dict(subject_payload.get("latestByDevice") or {}),
-                }
-            )
+                "subjectLatestByDevice": dict(subject_payload.get("latestByDevice") or {}),
+            }
+            if bool(evidence.get("legacyCompatibilityClaim")):
+                row["legacyCompatibilityClaim"] = True
+            rows.append(row)
 
     return {
         "schemaVersion": INVENTORY_SCHEMA_VERSION,

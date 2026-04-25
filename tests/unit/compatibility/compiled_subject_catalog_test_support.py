@@ -32,5 +32,22 @@ def write_json(path: Path, payload: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+
+def owner_manifest_path(repo_root: Path, subject_id: str) -> Path:
+    return repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.manifest.json"
+
+
+def write_owner_manifest(repo_root: Path, subject_id: str, payload: dict) -> Path:
+    manifest_path = owner_manifest_path(repo_root, subject_id)
+    write_json(manifest_path, payload)
+    write_json(
+        manifest_path.parent / "owner.features.json",
+        {
+            "subjectId": subject_id,
+            "features": [],
+        },
+    )
+    return manifest_path
+
 class CompiledSubjectCatalogTestSupport(unittest.TestCase):
     pass

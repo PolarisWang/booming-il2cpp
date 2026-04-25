@@ -5,8 +5,7 @@ class TestSubjectPlannerFingerprintEntrySelection(SubjectPlannerTestSupport):
     def test_stage_fingerprint_changes_when_declared_entry_selection_changes(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_declared_entry_fingerprint")
         repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"declared-entry-selection-{uuid.uuid4().hex}"
-        manifest_path = repo_root / "subjects" / "FixtureDeclaredEntrySelection" / "subject.manifest.json"
-        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+        subject_id = "FixtureDeclaredEntrySelection"
 
         manifest = {
             "subjectId": "FixtureDeclaredEntrySelection",
@@ -17,7 +16,7 @@ class TestSubjectPlannerFingerprintEntrySelection(SubjectPlannerTestSupport):
             "defaultValidationProfile": "perf-profile",
             "source": {
                 "type": "dotnet-project",
-                "path": "subjects/FixtureDeclaredEntrySelection/source/FixtureDeclaredEntrySelection.csproj",
+                "path": "verification/catalog/owners/FixtureDeclaredEntrySelection/support/host/FixtureDeclaredEntrySelection.csproj",
                 "entry": "FixtureDeclaredEntrySelection/Program::Main()",
             },
             "workloadEntry": "FixtureDeclaredEntrySelection/Program::RunWorkload()",
@@ -67,11 +66,11 @@ class TestSubjectPlannerFingerprintEntrySelection(SubjectPlannerTestSupport):
         }
 
         try:
-            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            write_owner_manifest(repo_root, subject_id, manifest)
 
             first_plan = planner_module.build_plan(
                 repo_root,
-                "FixtureDeclaredEntrySelection",
+                subject_id,
                 goal_id="perf.release",
                 matrix_id="windows-managed-perf",
                 run_id="fixture-declared-entry-selection",
@@ -84,7 +83,7 @@ class TestSubjectPlannerFingerprintEntrySelection(SubjectPlannerTestSupport):
             )
             second_plan = planner_module.build_plan(
                 repo_root,
-                "FixtureDeclaredEntrySelection",
+                subject_id,
                 goal_id="perf.release",
                 matrix_id="windows-managed-perf",
                 run_id="fixture-declared-entry-selection",
@@ -124,8 +123,7 @@ class TestSubjectPlannerFingerprintEntrySelection(SubjectPlannerTestSupport):
     def test_planner_runtime_stage_fingerprint_changes_when_subject_entry_selection_changes(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_subject_entry_fingerprint")
         repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"subject-entry-selection-{uuid.uuid4().hex}"
-        manifest_path = repo_root / "subjects" / "FixtureSubjectEntrySelection" / "subject.manifest.json"
-        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+        subject_id = "FixtureSubjectEntrySelection"
 
         manifest = {
             "subjectId": "FixtureSubjectEntrySelection",
@@ -136,7 +134,7 @@ class TestSubjectPlannerFingerprintEntrySelection(SubjectPlannerTestSupport):
             "defaultValidationProfile": "managed-output",
             "source": {
                 "type": "dotnet-project",
-                "path": "subjects/FixtureSubjectEntrySelection/source/FixtureSubjectEntrySelection.csproj",
+                "path": "verification/catalog/owners/FixtureSubjectEntrySelection/support/host/FixtureSubjectEntrySelection.csproj",
                 "entry": "FixtureSubjectEntrySelection/Program::Main()",
             },
             "validationProfiles": {
@@ -214,11 +212,11 @@ class TestSubjectPlannerFingerprintEntrySelection(SubjectPlannerTestSupport):
         }
 
         try:
-            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            manifest_path = write_owner_manifest(repo_root, subject_id, manifest)
 
             first_plan = planner_module.build_plan(
                 repo_root,
-                "FixtureSubjectEntrySelection",
+                subject_id,
                 matrix_id="windows-managed-output",
                 run_id="fixture-subject-entry-selection-001",
             )
@@ -226,7 +224,7 @@ class TestSubjectPlannerFingerprintEntrySelection(SubjectPlannerTestSupport):
             manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             second_plan = planner_module.build_plan(
                 repo_root,
-                "FixtureSubjectEntrySelection",
+                subject_id,
                 matrix_id="windows-managed-output",
                 run_id="fixture-subject-entry-selection-001",
             )

@@ -3,7 +3,7 @@ from tests.unit.run.repo_layout_test_support import *
 
 class RepoLayoutSubjectContractsTests(RepoLayoutTestSupport):
     def test_subject_manifests_keep_validation_expected_and_baselines_inside_subject_root(self) -> None:
-        manifest_paths = sorted((REPO_ROOT / "subjects").rglob("subject.manifest.json"))
+        manifest_paths = sorted((REPO_ROOT / "verification" / "catalog" / "owners").rglob("owner.manifest.json"))
         self.assertGreater(len(manifest_paths), 0)
 
         for manifest_path in manifest_paths:
@@ -22,20 +22,24 @@ class RepoLayoutSubjectContractsTests(RepoLayoutTestSupport):
                 if not project_path:
                     continue
                 self.assertTrue(
-                    project_path.startswith(f"subjects/{subject_id}/validation/")
+                    project_path.startswith(f"verification/catalog/owners/{subject_id}/")
                     or project_path.startswith("src/tools/Chaos.IL2CPP.Tools.")
                 )
                 self.assertNotIn("/tests/", project_path.replace("\\", "/"))
 
             for expected_path in dict(manifest.get("expected") or {}).values():
-                self.assertTrue(str(expected_path).startswith(f"subjects/{subject_id}/expected/"))
+                self.assertTrue(
+                    str(expected_path).startswith(f"verification/evidence/owners/{subject_id}/expected/")
+                )
 
             for baseline_path in dict(manifest.get("baselines") or {}).values():
-                self.assertTrue(str(baseline_path).startswith(f"subjects/{subject_id}/baselines/"))
+                self.assertTrue(
+                    str(baseline_path).startswith(f"verification/catalog/owners/{subject_id}/benchmark-baselines/")
+                )
 
     def test_phase8_subject_root_tree_does_not_keep_legacy_redirect_shells(self) -> None:
         legacy_shells: list[str] = []
-        for manifest_path in sorted((REPO_ROOT / "subjects").glob("*/subject.manifest.json")):
+        for manifest_path in sorted((REPO_ROOT / "verification" / "catalog" / "owners").glob("*/owner.manifest.json")):
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             compatibility = dict(manifest.get("compatibility") or {})
             if (

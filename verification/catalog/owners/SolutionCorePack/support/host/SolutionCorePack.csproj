@@ -11,25 +11,25 @@
     <ProjectReference Include="..\..\..\..\..\..\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
     <ProjectReference Include="..\..\proofs\CoreRuntimeFeatures\CoreRuntimeFeatures.csproj" />
     <ProjectReference Include="..\..\benchmarks\CoreRuntimeBenchmarks\CoreRuntimeBenchmarks.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\SimpleLibrarySolution\App\GoldenSimpleLib.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\MultiProjectSolution\App\GoldenMultiProject.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\PackageReferenceSolution\App\GoldenWithPackage.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\ReferenceAssemblySolution\App\GoldenReferenceAssembly.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\CoreLibReferenceSolution\App\GoldenCoreLibReference.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\CoreLibReferenceSolution\NativeProofApp\GoldenCoreLibReference.NativeProofApp.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\MixedReferenceClosureSolution\App\GoldenMixedReference.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\FoundationDllTranslationSolution\App\FoundationDllTranslation.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\StaticCallCtorGetterSolution\App\StaticCallCtorGetter.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\ConstructorThenInstanceCallSolution\App\ConstructorThenInstanceCall.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\DelegateClosedTargetRelaySolution\App\DelegateClosedTargetRelay.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\ExceptionThrowCatchFinallySolution\App\ExceptionThrowCatchFinally.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\NestedExceptionThrowCatchFinallySolution\App\NestedExceptionThrowCatchFinally.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\MarshalingUtf8ExportSolution\App\MarshalingUtf8Export.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\ReflectionInteropClosureSolution\App\ReflectionInteropClosure.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\PInvokeDirectCallSolution\App\PInvokeDirectCall.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\ArrayBoxingReferenceArraySolution\App\ArrayBoxingReferenceArray.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\InterfaceDispatchMessageSolution\App\InterfaceDispatchMessage.App.csproj" />
-    <ProjectReference Include="..\..\..\scenarios\SolutionCorePack\ThreadingThreadStaticMonitorSolution\App\ThreadingThreadStaticMonitor.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\SimpleLibrarySolution\App\GoldenSimpleLib.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\MultiProjectSolution\App\GoldenMultiProject.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\PackageReferenceSolution\App\GoldenWithPackage.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\ReferenceAssemblySolution\App\GoldenReferenceAssembly.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\CoreLibReferenceSolution\App\GoldenCoreLibReference.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\CoreLibReferenceSolution\NativeProofApp\GoldenCoreLibReference.NativeProofApp.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\MixedReferenceClosureSolution\App\GoldenMixedReference.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\FoundationDllTranslationSolution\App\FoundationDllTranslation.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\StaticCallCtorGetterSolution\App\StaticCallCtorGetter.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\ConstructorThenInstanceCallSolution\App\ConstructorThenInstanceCall.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\DelegateClosedTargetRelaySolution\App\DelegateClosedTargetRelay.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\ExceptionThrowCatchFinallySolution\App\ExceptionThrowCatchFinally.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\NestedExceptionThrowCatchFinallySolution\App\NestedExceptionThrowCatchFinally.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\MarshalingUtf8ExportSolution\App\MarshalingUtf8Export.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\ReflectionInteropClosureSolution\App\ReflectionInteropClosure.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\PInvokeDirectCallSolution\App\PInvokeDirectCall.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\ArrayBoxingReferenceArraySolution\App\ArrayBoxingReferenceArray.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\InterfaceDispatchMessageSolution\App\InterfaceDispatchMessage.App.csproj" />
+    <ProjectReference Include="..\..\..\..\scenarios\SolutionCorePack\ThreadingThreadStaticMonitorSolution\App\ThreadingThreadStaticMonitor.App.csproj" />
   </ItemGroup>
 </Project>
 

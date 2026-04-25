@@ -1,9 +1,7 @@
 ﻿# 挂起任务
 | task_id | task_type | phase | updated_at | next_step | active |
 | --- | --- | --- | --- | --- | --- |
-| [20260419-07-corelib-dll-boundary-native-codegen-implementation](20260419-07-corelib-dll-boundary-native-codegen-implementation/STATUS.md) | plan | hanging | 2026-04-21 23:45:00 +08:00 | 等待用户恢复本任务；恢复后从 `translationUnitMethodCount = 125`、`runtimeSkeletonReservedStubCount = 0`、`fullCoreLibTranslated = false` 的 canonical CoreLib proof 边界继续 widening。 | false |
 | [20260419-08-scriban-generator-formalization](20260419-08-scriban-generator-formalization/STATUS.md) | plan | hanging | 2026-04-21 23:45:00 +08:00 | 等待用户恢复本任务；恢复后按 `plan-v1-01.md` 先补 RED 测试，再执行 `Chaos.IL2CPP.Generator` 单次原地 cutover。 | false |
-| [20260419-01-foundation-dll-translation-audit-roadmap](20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md) | roadmap | hanging | 2026-04-21 23:45:00 +08:00 | 等待用户恢复本 roadmap；恢复后先重新核对 CoreLib full verification blocker 与子任务衔接，再决定是否继续 Complex BCL lane。 | false |
 | [20260412-05-phase-b-generic-native-aot-benchmark-backend](20260412-05-phase-b-generic-native-aot-benchmark-backend/STATUS.md) | roadmap | hanging | 2026-04-12 17:35:00 +08:00 | 等待用户恢复本任务，或等待 v1.03 测试体系后续阶段明确 benchmark / engineering workload 的最终边界。 | false |
 | [20260411-10-post-phase7-development-roadmap](20260411-10-post-phase7-development-roadmap/STATUS.md) | roadmap | hanging | 2026-04-12 17:35:00 +08:00 | 等待用户恢复本 roadmap，或等待新的测试体系 roadmap 明确哪些历史 phase 仍然有效。 | false |
 | [20260411-05-mobile-runtime-host](20260411-05-mobile-runtime-host/STATUS.md) | plan | hanging | 2026-04-12 00:04:39 +08:00 | 如后续需要无 waiver 的 mobile 发布证据，准备 `macOS + Xcode` 宿主后恢复本任务，继续 Batch 3.4-3.7、4.2-4.4，并按需补齐 crash/perf/package baseline。 | false |

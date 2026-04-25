@@ -9,13 +9,19 @@ import unittest
 from pathlib import Path
 from typing import Any
 
-from tests.support import clone_registry_fixture_tree, make_temp_repo_root, materialize_subject_manifest, write_json
+from tests.support import (
+    HOT_UPDATE_HOST_PACK_HOST_PROJECT_PATH,
+    clone_registry_fixture_tree,
+    make_temp_repo_root,
+    materialize_subject_manifest,
+    write_json,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 REGISTRY_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "registry.py"
 PUBLIC_SPECS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "public_specs.py"
-HOT_UPDATE_HOST_PACK_PROJECT_PATH = REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "HotUpdateHostPack.csproj"
+HOT_UPDATE_HOST_PACK_PROJECT_PATH = HOT_UPDATE_HOST_PACK_HOST_PROJECT_PATH
 
 
 def load_module(path: Path, module_name: str):
@@ -95,7 +101,7 @@ def build_registry_subject_manifest(
     workload_entry: str | None = None,
     test_declaration_mode: str = "none",
 ) -> dict[str, Any]:
-    resolved_source_path = source_path or f"subjects/{subject_id}/source/{subject_id}.csproj"
+    resolved_source_path = source_path or f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.csproj"
     resolved_primary_project_path = primary_project_path or resolved_source_path
     resolved_validation_profiles = validation_profiles or {default_validation_profile: ["proof"]}
     resolved_validation = validation or {

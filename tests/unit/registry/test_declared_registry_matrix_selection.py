@@ -161,6 +161,36 @@ class DeclaredRegistryMatrixSelectionTests(unittest.TestCase):
         self.assertEqual("windows-hotupdate-proof", matrix_id)
         self.assertEqual("correctness.dev", goal_id)
 
+    def test_declared_unit_test_prefers_real_managed_proof_matrix_over_subject_native_default(self) -> None:
+        registry_module = load_registry_module()
+        manifest = make_manifest()
+        manifest["environmentMatrices"].insert(
+            1,
+            {
+                "matrixId": "windows-managed-proof",
+                "pipelineId": "managed-runtime-output",
+                "supportedGoals": ["correctness.dev"],
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "toolchainProfile": "dotnet-managed",
+                    "runtimeProfile": "managed-proof-output",
+                },
+            },
+        )
+
+        matrix_id, goal_id = registry_module._select_declared_matrix(
+            manifest,
+            family="declared-unit-test",
+            payload={
+                "hotUpdateCapability": 0,
+            },
+            source_entry="FixtureBenchSubject/AsyncAwaitProof::Run()",
+        )
+
+        self.assertEqual("windows-managed-proof", matrix_id)
+        self.assertEqual("correctness.dev", goal_id)
+
     def test_declared_registry_item_exposes_capability_owner_support_and_labels(self) -> None:
         registry_module = load_registry_module()
         manifest = make_manifest()

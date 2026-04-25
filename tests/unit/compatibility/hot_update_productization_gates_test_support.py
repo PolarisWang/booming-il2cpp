@@ -9,6 +9,11 @@ import unittest
 import uuid
 from pathlib import Path
 
+from tests.support import (
+    HOT_UPDATE_HOST_PACK_HOST_PROJECT_PATH,
+    HOT_UPDATE_SKELETON_PROOF_PATH,
+)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 HOT_UPDATE_ROOT = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.HotUpdate"
@@ -21,12 +26,7 @@ IOS_POLICY_PATH = REPO_ROOT / "docs" / "architecture" / "ios-distribution-policy
 RELEASE_CHECKLIST_PATH = REPO_ROOT / "docs" / "architecture" / "release-checklist.md"
 VERSION_MATRIX_PATH = REPO_ROOT / "docs" / "architecture" / "version-compatibility-matrix.md"
 
-HOT_UPDATE_SKELETON_PROJECT_PATH = (
-    REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "HotUpdateHostPack.csproj"
-)
-HOT_UPDATE_SKELETON_PROOF_PATH = (
-    REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "Host" / "Proofs" / "HotUpdateSkeletonProofEntry.cs"
-)
+HOT_UPDATE_SKELETON_PROJECT_PATH = HOT_UPDATE_HOST_PACK_HOST_PROJECT_PATH
 COMPATIBILITY_MATRIX_RUNNER_PATH = (
     REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "compatibility_matrix_runner.py"
 )
@@ -42,7 +42,7 @@ UNSUPPORTED_FEATURE_REPORT_MODULE_PATH = (
     REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "unsupported_feature_report.py"
 )
 SOAK_HARNESS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "soak_harness.py"
-BATCH4_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase8-productization-batch4"
+BATCH4_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "hot-update-productization-gates"
 
 
 def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -74,5 +74,5 @@ def load_module(path: Path, module_name: str):
     spec.loader.exec_module(module)
     return module
 
-class Phase8ProductizationGatesTestSupport(unittest.TestCase):
+class ProductizationGatesTestSupport(unittest.TestCase):
     pass

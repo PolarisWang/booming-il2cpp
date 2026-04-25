@@ -55,7 +55,7 @@ class TestProjectWorkspaceRefresh(ProjectWorkspaceTestSupport):
             "matrixId": "windows-foundation-dll-translation-native-proof",
             "source": {
                 "entry": "",
-                "primaryProjectPath": "subjects/FixtureSubject/source/Foundation/App/Foundation.App.csproj",
+                "primaryProjectPath": "verification/catalog/scenarios/FixtureSubject/FoundationDllTranslationSolution/App/Foundation.App.csproj",
                 "fullAssemblyClosure": True,
             },
         }

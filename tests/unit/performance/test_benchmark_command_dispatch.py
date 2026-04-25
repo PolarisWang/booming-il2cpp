@@ -176,7 +176,7 @@ class TestBenchmarkCommandDispatch(BenchmarkCommandTestSupport):
                         )
                         self.assertEqual(0, exit_code)
                         self.assertEqual(expected, scheduled_runs)
-                        self.assertEqual([subject_id for subject_id, _ in expected], dashboard_module.updated_subject_ids)
+                        self.assertEqual([], dashboard_module.updated_subject_ids)
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
@@ -272,7 +272,7 @@ class TestBenchmarkCommandDispatch(BenchmarkCommandTestSupport):
                             )
 
             self.assertEqual(0, exit_code)
-            self.assertEqual(["MixedExecutionFeaturePack"], dashboard_module.updated_subject_ids)
+            self.assertEqual([], dashboard_module.updated_subject_ids)
             printed = " ".join(
                 " ".join(str(argument) for argument in call.args)
                 for call in print_mock.call_args_list

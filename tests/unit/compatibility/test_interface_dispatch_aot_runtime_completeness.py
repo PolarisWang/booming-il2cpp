@@ -5,6 +5,11 @@ import unittest
 from pathlib import Path
 
 from tests.support import (
+    SOLUTION_CORE_PACK_HOST_PROJECT_PATH,
+    SOLUTION_CORE_PACK_HOST_SOLUTION_PATH,
+    SOLUTION_CORE_PACK_OWNER_MANIFEST_PATH,
+    SOLUTION_CORE_PACK_PROOFS_PROJECT_PATH,
+    SOLUTION_CORE_PACK_PROOFS_ROOT,
     read_contracts_source,
     read_linker_stage_source,
     read_loader_stage_source,
@@ -13,10 +18,9 @@ from tests.support import (
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SUBJECT_ROOT = REPO_ROOT / "subjects" / "SolutionCorePack"
-MANIFEST_PATH = SUBJECT_ROOT / "subject.manifest.json"
-SOURCE_PROJECT_PATH = SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
-SOURCE_PROGRAM_PATH = SUBJECT_ROOT / "source" / "Proofs" / "CoreRuntimeFeatures" / "ObjectModelAndDispatch" / "InterfaceDispatchProof.cs"
+MANIFEST_PATH = SOLUTION_CORE_PACK_OWNER_MANIFEST_PATH
+SOURCE_PROJECT_PATH = SOLUTION_CORE_PACK_PROOFS_PROJECT_PATH
+SOURCE_PROGRAM_PATH = SOLUTION_CORE_PACK_PROOFS_ROOT / "ObjectModelAndDispatch" / "InterfaceDispatchProof.cs"
 PROFILE_ID = "proof-interface-dispatch"
 MATRIX_ID = "windows-interface-dispatch-check"
 
@@ -33,8 +37,8 @@ TEMPLATE_PATH = (
 )
 
 
-class Phase2AotRuntimeCompletenessTests(unittest.TestCase):
-    def test_interface_dispatch_subject_tree_realizes_phase2_batch1_proof_slice(self) -> None:
+class InterfaceDispatchAotRuntimeCompletenessTests(unittest.TestCase):
+    def test_interface_dispatch_subject_tree_realizes_proof_slice(self) -> None:
         self.assertTrue(MANIFEST_PATH.is_file(), msg=f"missing subject manifest: {MANIFEST_PATH}")
         self.assertTrue(SOURCE_PROJECT_PATH.is_file(), msg=f"missing source project: {SOURCE_PROJECT_PATH}")
         self.assertTrue(SOURCE_PROGRAM_PATH.is_file(), msg=f"missing source file: {SOURCE_PROGRAM_PATH}")
@@ -43,11 +47,8 @@ class Phase2AotRuntimeCompletenessTests(unittest.TestCase):
         source = SOURCE_PROGRAM_PATH.read_text(encoding="utf-8")
         self.assertEqual("SolutionCorePack", manifest["subjectId"])
         self.assertEqual("dotnet-project", manifest["source"]["type"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
-        self.assertEqual(
-            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
-            manifest["source"]["primaryProjectPath"],
-        )
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION_PATH.relative_to(REPO_ROOT).as_posix(), manifest["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_PROJECT_PATH.relative_to(REPO_ROOT).as_posix(), manifest["source"]["primaryProjectPath"])
         self.assertEqual("CoreRuntimeFeatures/ProofEntry::Run()", manifest["source"]["entry"])
         self.assertEqual("require", manifest["testDeclarationMode"])
         self.assertEqual("proof", manifest["validation"]["proof"]["kind"])

@@ -35,7 +35,12 @@
 - obligation/10/45
 
 ## Success Evidence
-- n/a
+- evidence-claim/benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default
+- evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default
+- evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry::RunWorkload()/interpreter/bridge/default-platform/default
+- evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default
+- evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default
+- evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()/interpreter/bridge/default-platform/default
 
 ## Failed Evidence
 - n/a
@@ -45,14 +50,8 @@
 
 ## Missing Claims
 - evidence-claim/benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default
-- evidence-claim/benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default
 - evidence-claim/benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default
 - evidence-claim/benchmark/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default
-- evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default
-- evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry::RunWorkload()/interpreter/bridge/default-platform/default
-- evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default
-- evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default
-- evidence-claim/benchmark/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()/interpreter/bridge/default-platform/default
 - evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.AllocationBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default
 - evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.AllocationBenchmarkEntry::RunWorkload()/native/bridge/default-platform/default
 - evidence-claim/benchmark/SolutionCorePack::CoreRuntimeBenchmarks::CoreRuntimeBenchmarks.ArithmeticBenchmarkEntry::RunWorkload()/managed/bridge/default-platform/default
@@ -94,12 +93,6 @@
 - missing-benchmark-record [test_governance] managed benchmark is missing.
 - missing-benchmark-record [test_governance] managed benchmark is missing.
 - missing-benchmark-record [test_governance] managed benchmark is missing.
-- missing-benchmark-record [test_governance] managed benchmark is missing.
-- missing-benchmark-record [test_governance] managed benchmark is missing.
-- missing-benchmark-record [test_governance] interpreter benchmark is missing.
-- missing-benchmark-record [test_governance] managed benchmark is missing.
-- missing-benchmark-record [test_governance] native benchmark is missing.
-- missing-benchmark-record [test_governance] interpreter benchmark is missing.
 - missing-benchmark-record [test_governance] managed benchmark is missing.
 - missing-benchmark-record [test_governance] native benchmark is missing.
 - missing-benchmark-record [test_governance] managed benchmark is missing.

@@ -328,6 +328,16 @@ def _workspace_requires_manifest_regeneration(
     requested_matrix_id = _workspace_requested_matrix_id(selected_object, normalized_options)
     if requested_matrix_id and not _workspace_has_matrix_for_host(manifest, requested_matrix_id, host_platform=host_platform):
         return True
+    if (
+        not requested_matrix_id
+        and str(selected_object.get("type") or "").strip() != "subject"
+        and not _workspace_has_matrix_for_host(
+            manifest,
+            str(selected_object.get("defaultMatrixId") or "").strip(),
+            host_platform=host_platform,
+        )
+    ):
+        return True
 
     requested_goal_id = _workspace_requested_goal_id(selected_object, normalized_options)
     if not requested_goal_id:
@@ -1408,6 +1418,11 @@ def _run_subject_object(
         generated_at=generated_at,
         entry_selection=entry_selection,
     )
+    subject_reporting_module.materialize_subject_report_artifacts(
+        repo_root,
+        subject_summary_path=subject_summary_path,
+        subject_summary=subject_summary,
+    )
     _write_json_document(repo_root / subject_summary_path, subject_summary)
     subject_result = subject_reporting_module.build_subject_result(
         subject_summary,
@@ -1419,6 +1434,7 @@ def _run_subject_object(
         for path in [
             matrix_report_path,
             subject_summary_path,
+            *list(subject_summary.get("subjectReportArtifacts") or []),
             *list(matrix_report.get("reportArtifacts") or []),
             *list(matrix_report.get("releaseReportPaths") or []),
             *list(validation_outcome.get("artifacts") or []),

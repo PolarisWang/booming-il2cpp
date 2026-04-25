@@ -43,19 +43,19 @@ class WorkspaceDeclaredCollectionTests(unittest.TestCase):
 
     def _write_subject_and_workspace_fixture(self, repo_root: Path) -> Path:
         subject_id = "SolutionCorePack"
-        source_root = repo_root / "subjects" / subject_id / "source"
-        benchmark_path = source_root / "Benchmarks" / "CoreRuntimeBenchmarks" / "AllocationBenchmark.cs"
+        owner_root = repo_root / "verification" / "catalog" / "owners" / subject_id
+        benchmark_path = owner_root / "benchmarks" / "CoreRuntimeBenchmarks" / "AllocationBenchmark.cs"
         benchmark_path.parent.mkdir(parents=True, exist_ok=True)
         benchmark_path.write_text("// benchmark source\n", encoding="utf-8")
 
-        subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+        subject_manifest_path = owner_root / "owner.manifest.json"
         subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
         subject_manifest_path.write_text(
             json.dumps(
                 {
                     "subjectId": subject_id,
                     "source": {
-                        "path": "subjects/SolutionCorePack/source/SolutionCorePack.sln",
+                        "path": "verification/catalog/owners/SolutionCorePack/support/host/SolutionCorePack.sln",
                     },
                 },
                 ensure_ascii=False,
@@ -64,7 +64,11 @@ class WorkspaceDeclaredCollectionTests(unittest.TestCase):
             + "\n",
             encoding="utf-8",
         )
-        (source_root / "SolutionCorePack.sln").write_text("Microsoft Visual Studio Solution File\n", encoding="utf-8")
+        (owner_root / "support" / "host" / "SolutionCorePack.sln").parent.mkdir(parents=True, exist_ok=True)
+        (owner_root / "support" / "host" / "SolutionCorePack.sln").write_text(
+            "Microsoft Visual Studio Solution File\n",
+            encoding="utf-8",
+        )
 
         workspace_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id
         generated_root = workspace_root / "managed-tests" / "Generated"

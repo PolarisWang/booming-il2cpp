@@ -74,7 +74,7 @@
 - obligation/10/45
 
 ## Success Evidence
-- n/a
+- evidence-claim/unit/SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()/hotupdate-proof
 
 ## Failed Evidence
 - n/a

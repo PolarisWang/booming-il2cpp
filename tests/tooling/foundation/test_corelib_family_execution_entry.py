@@ -120,7 +120,7 @@ class CorelibSemanticFamilyExecutionEntryTests(unittest.TestCase):
 
             self.assertIn("async-await-proof", managed_proofs)
             self.assertIn("interface-dispatch-proof", managed_proofs)
-            self.assertEqual("windows-native-check", managed_proofs["async-await-proof"]["defaultMatrixId"])
+            self.assertEqual("windows-managed-proof", managed_proofs["async-await-proof"]["defaultMatrixId"])
             self.assertIn(
                 "engineering-validation/SolutionCorePack/native-executable-smoke",
                 managed_conformance,

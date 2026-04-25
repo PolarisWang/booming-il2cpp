@@ -3,14 +3,18 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
-from tests.support import read_loader_stage_source
+from tests.support import (
+    MIXED_EXECUTION_FEATURE_PACK_OWNER_ROOT,
+    SOLUTION_CORE_PACK_OWNER_ROOT,
+    read_loader_stage_source,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
-MIXED_EXECUTION_PROOF_PATH = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "Proofs" / "MixedExecutionProofEntry.cs"
-INTERPRETER_LOWERING_PROOF_PATH = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "Proofs" / "InterpreterLoweringProofEntry.cs"
-SOLUTION_CORE_LAUNCHER_PATH = REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Host" / "Program.cs"
+MIXED_EXECUTION_PROOF_PATH = MIXED_EXECUTION_FEATURE_PACK_OWNER_ROOT / "proofs" / "MixedExecutionProofEntry.cs"
+INTERPRETER_LOWERING_PROOF_PATH = MIXED_EXECUTION_FEATURE_PACK_OWNER_ROOT / "proofs" / "InterpreterLoweringProofEntry.cs"
+SOLUTION_CORE_LAUNCHER_PATH = SOLUTION_CORE_PACK_OWNER_ROOT / "support" / "host" / "Program.cs"
 
 
 class LoaderSwitchOpcodeTests(unittest.TestCase):

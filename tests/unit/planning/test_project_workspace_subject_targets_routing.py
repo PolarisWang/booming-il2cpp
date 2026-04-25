@@ -121,7 +121,7 @@ class TestProjectWorkspaceSubjectTargetsRouting(ProjectWorkspaceTestSupport):
         repo_root = self._make_repo_root("subject-generate-subject-entry-native-aot")
         self._write_subject_fixture(repo_root)
         completed = subprocess.CompletedProcess(["cmake"], 0, "", "")
-        subject_manifest_path = repo_root / "subjects" / "FixtureSubject" / "subject.manifest.json"
+        subject_manifest_path = owner_manifest_path(repo_root, "FixtureSubject")
         subject_manifest = json.loads(subject_manifest_path.read_text(encoding="utf-8"))
         subject_manifest["environmentMatrices"][0]["source"] = {
             "entry": "FixtureSubject/Program::RunSelected()",

@@ -1,0 +1,87 @@
+from __future__ import annotations
+
+import subprocess
+import unittest
+import uuid
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+from tests.support import (
+    INTERPRETER_ARITHMETIC_PROJECT_PATH as SCENARIO_INTERPRETER_ARITHMETIC_PROJECT_PATH,
+    MIXED_BRIDGE_SOLUTION_PATH as SCENARIO_MIXED_BRIDGE_SOLUTION_PATH,
+    MIXED_EXECUTION_FEATURE_PACK_HOST_PROGRAM_PATH,
+    MIXED_EXECUTION_FEATURE_PACK_HOST_PROJECT_PATH,
+    MIXED_EXECUTION_FEATURE_PACK_OWNER_MANIFEST_PATH,
+    MIXED_EXECUTION_FEATURE_PACK_PROOFS_ROOT,
+    read_loader_stage_source,
+)
+
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+CORE_SOLUTION_PATH = REPO_ROOT / "verification" / "workspaces" / "core" / "windows" / "chaos-il2cpp-core.sln"
+TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "interpreter-mixed-execution"
+
+INTERPRETER_ROOT = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Interpreter"
+INTERPRETER_PROJECT_PATH = INTERPRETER_ROOT / "Chaos.IL2CPP.Interpreter.csproj"
+INTERPRETER_IR_PATH = INTERPRETER_ROOT / "InterpreterIR.cs"
+IL_TO_IR_LOWERING_PATH = INTERPRETER_ROOT / "ILToIRLowering.cs"
+MANAGED_INTERPRETER_EXECUTOR_PATH = INTERPRETER_ROOT / "ManagedInterpreterExecutor.cs"
+LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
+ROOT_CMAKE_PATH = REPO_ROOT / "CMakeLists.txt"
+HOT_UPDATE_RUNTIME_MANAGER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.HotUpdate" / "RuntimeManager.cs"
+HOT_UPDATE_METHOD_REGISTRY_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.HotUpdate" / "HotUpdateMethodRegistry.cs"
+INTERPRETER_ARITHMETIC_PROJECT_PATH = SCENARIO_INTERPRETER_ARITHMETIC_PROJECT_PATH
+MIXED_BRIDGE_SOLUTION_PATH = SCENARIO_MIXED_BRIDGE_SOLUTION_PATH
+INTERPRETER_LOWERING_MANIFEST_PATH = MIXED_EXECUTION_FEATURE_PACK_OWNER_MANIFEST_PATH
+INTERPRETER_LOWERING_PROJECT_PATH = MIXED_EXECUTION_FEATURE_PACK_HOST_PROJECT_PATH
+INTERPRETER_LOWERING_PROGRAM_PATH = MIXED_EXECUTION_FEATURE_PACK_PROOFS_ROOT / "InterpreterLoweringProofEntry.cs"
+MIXED_EXECUTION_PROOF_MANIFEST_PATH = MIXED_EXECUTION_FEATURE_PACK_OWNER_MANIFEST_PATH
+MIXED_EXECUTION_PROOF_PROJECT_PATH = MIXED_EXECUTION_FEATURE_PACK_HOST_PROJECT_PATH
+MIXED_EXECUTION_PROOF_PROGRAM_PATH = MIXED_EXECUTION_FEATURE_PACK_PROOFS_ROOT / "MixedExecutionProofEntry.cs"
+INTERPRETER_ARITHMETIC_PROOF_PATH = MIXED_EXECUTION_FEATURE_PACK_PROOFS_ROOT / "InterpreterArithmeticProofEntry.cs"
+MIXED_GENERIC_FLOW_PROOF_PATH = MIXED_EXECUTION_FEATURE_PACK_PROOFS_ROOT / "MixedGenericFlowProofEntry.cs"
+MIXED_EXCEPTION_FLOW_PROOF_PATH = MIXED_EXECUTION_FEATURE_PACK_PROOFS_ROOT / "MixedExceptionFlowProofEntry.cs"
+MIXED_DELEGATE_FLOW_PROOF_PATH = MIXED_EXECUTION_FEATURE_PACK_PROOFS_ROOT / "MixedDelegateFlowProofEntry.cs"
+MIXED_EXECUTION_HOST_PROGRAM_PATH = MIXED_EXECUTION_FEATURE_PACK_HOST_PROGRAM_PATH
+NATIVE_INTERPRETER_ROOT = REPO_ROOT / "src" / "native" / "interpreter"
+NATIVE_INTERPRETER_CMAKE_PATH = NATIVE_INTERPRETER_ROOT / "CMakeLists.txt"
+NATIVE_INTERPRETER_HEADER_PATH = NATIVE_INTERPRETER_ROOT / "interpreter_vm.h"
+NATIVE_INTERPRETER_SOURCE_PATH = NATIVE_INTERPRETER_ROOT / "interpreter_vm.cpp"
+NATIVE_INTERPRETER_SMOKE_ROOT = REPO_ROOT / "tests" / "contracts" / "native" / "interpreter"
+NATIVE_INTERPRETER_SMOKE_CMAKE_PATH = NATIVE_INTERPRETER_SMOKE_ROOT / "CMakeLists.txt"
+NATIVE_INTERPRETER_SMOKE_SOURCE_PATH = NATIVE_INTERPRETER_SMOKE_ROOT / "interpreter_smoke.cpp"
+
+
+def parse_project_references(project_path: Path) -> list[str]:
+    root = ET.fromstring(project_path.read_text(encoding="utf-8"))
+    references: list[str] = []
+    for element in root.findall(".//ProjectReference"):
+        include_value = element.attrib.get("Include", "")
+        references.append(Path(include_value).stem)
+    return sorted(references)
+
+
+def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
+    completed = subprocess.run(
+        arguments,
+        cwd=cwd,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        check=False,
+    )
+    if completed.returncode != 0:
+        combined_output = "\n".join(part for part in [completed.stdout, completed.stderr] if part)
+        raise AssertionError(f"command failed ({completed.returncode}): {' '.join(arguments)}\n{combined_output}")
+    return completed
+
+
+def make_unique_build_root(prefix: str) -> Path:
+    build_root = TEST_TMP_ROOT / f"{prefix}-{uuid.uuid4().hex}"
+    build_root.mkdir(parents=True, exist_ok=True)
+    return build_root
+
+class InterpreterMixedExecutionTestSupport(unittest.TestCase):
+    pass
+

@@ -12,11 +12,8 @@ class TestSolutionCorePackPlannerDefaults(SolutionCorePackPlannerTestSupport):
         )
 
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
-        self.assertEqual(
-            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
-            plan["selection"]["source"]["primaryProjectPath"],
-        )
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_PROJECT, plan["selection"]["source"]["primaryProjectPath"])
         self.assertEqual("CoreRuntimeFeatures/InterfaceDispatchProofEntry::Run()", plan["selection"]["source"]["entry"])
         self.assertEqual(
             {

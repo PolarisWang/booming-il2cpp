@@ -48,7 +48,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             "bridge == nullptr",
             "request->instance",
             "request->value",
-            "field_set_value(",
+            "ExecuteRuntimeSkeletonConstructorFieldSetter(",
         ]:
             self.assertIn(required_fragment, constructor_template_source)
 
@@ -56,8 +56,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             "_ManagedArgs",
             "request->instance",
             "request->return_value",
-            "field_get_value(",
-            "*request->return_value = full_message;",
+            "ExecuteRuntimeSkeletonFieldBackedStringReturn(",
         ]:
             self.assertIn(required_fragment, render_template_source)
 
@@ -114,8 +113,7 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             "_ManagedArgs",
             "request->instance",
             "request->return_value",
-            "field_get_value(",
-            "*request->return_value = captured_value;",
+            "ExecuteRuntimeSkeletonFieldGetterStringReturn(",
         ]:
             self.assertIn(required_fragment, field_getter_template_source)
 
@@ -219,6 +217,72 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
         ]:
             self.assertIn(required_fragment, write_line_template_source)
 
+    def test_runtime_skeleton_static_resource_key_string_return_helper_reuses_literal_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        literal_template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.StaticLiteralStringReturnStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticResourceKeyStringReturnStub",
+            '::GetResourceString:System.String(System.String)"',
+            "GetRuntimeSkeletonStaticLiteralStringReturnStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn("RuntimeSkeletonStaticLiteralStringReturnStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "_ManagedArgs",
+            "request->return_value",
+            "string_new_utf8",
+            "*request->return_value = literal_string;",
+        ]:
+            self.assertIn(required_fragment, literal_template_source)
+
+    def test_runtime_skeleton_static_checked_byte_convert_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_STATIC_CHECKED_BYTE_CONVERT_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticCheckedByteConvertStub",
+            "TryResolveRuntimeSkeletonCheckedByteConvertShape",
+            "GetRuntimeSkeletonStaticCheckedByteConvertStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn("RuntimeSkeletonStaticCheckedByteConvertStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "_ManagedArgs",
+            "std::uint8_t* return_value",
+            "overflow_condition_expression",
+            "throw_stub_name",
+            "static_cast<std::uint8_t>(request->value)",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
     def test_runtime_skeleton_static_string_forwarder_write_line_helper_has_template(self) -> None:
         native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         catalog_source = (
@@ -300,3 +364,35 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             "write_line_string",
         ]:
             self.assertIn(required_fragment, producer_forwarder_write_line_template_source)
+
+    def test_runtime_skeleton_static_primitive_convert_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_STATIC_PRIMITIVE_CONVERT_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticPrimitiveConvertStub",
+            "GetRuntimeSkeletonStaticPrimitiveConvertStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn(
+            "RuntimeSkeletonStaticPrimitiveConvertStubTemplateRelativePath",
+            catalog_source,
+        )
+
+        for required_fragment in [
+            "_ManagedArgs",
+            "input_cpp_type",
+            "output_cpp_type",
+            "converted_value_expression",
+            "*request->return_value = static_cast<",
+        ]:
+            self.assertIn(required_fragment, template_source)

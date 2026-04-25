@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-04-23T23:20:21.600797Z",
+  "generatedAt": "2026-04-25T03:08:11.798795Z",
   "hostPlatform": "windows",
   "registryErrors": [],
   "registryWarnings": [],
   "benchmarkOverview": {
-    "generatedAt": "2026-04-23T23:20:20.667480+00:00",
+    "generatedAt": "2026-04-25T03:08:02.968340+00:00",
     "defaultPlatform": "windows-x64",
     "availablePlatforms": [
       "windows-x64"
@@ -1590,7 +1590,7 @@
       "evidenceLabels": [],
       "priority": 7,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -1617,6 +1617,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -1666,7 +1667,7 @@
       "evidenceLabels": [],
       "priority": 6,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -1693,6 +1694,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -1736,7 +1738,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -1763,6 +1765,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -1806,7 +1809,7 @@
       "evidenceLabels": [],
       "priority": 4,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -1833,6 +1836,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -1876,7 +1880,7 @@
       "evidenceLabels": [],
       "priority": 5,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -1903,6 +1907,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -1946,7 +1951,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -1973,6 +1978,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -2018,7 +2024,7 @@
       "evidenceLabels": [],
       "priority": 3,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -2045,6 +2051,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -2088,7 +2095,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -2115,6 +2122,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -2160,7 +2168,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -2187,6 +2195,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -2230,7 +2239,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -2257,6 +2266,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -2300,7 +2310,7 @@
       "evidenceLabels": [],
       "priority": 3,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -2327,6 +2337,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -2370,7 +2381,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -2397,6 +2408,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -2442,7 +2454,7 @@
       "evidenceLabels": [],
       "priority": 6,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -2469,6 +2481,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -2516,7 +2529,7 @@
       "evidenceLabels": [],
       "priority": 6,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -2543,6 +2556,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -2591,7 +2605,7 @@
       "evidenceLabels": [],
       "priority": 7,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -2618,6 +2632,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -2663,7 +2678,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -2690,6 +2705,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -2735,7 +2751,7 @@
       "evidenceLabels": [],
       "priority": 5,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -2762,6 +2778,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -2807,7 +2824,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -2834,6 +2851,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -2877,7 +2895,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -2904,6 +2922,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -2949,7 +2968,7 @@
       "evidenceLabels": [],
       "priority": 4,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -2976,6 +2995,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -3021,7 +3041,7 @@
       "evidenceLabels": [],
       "priority": 6,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -3048,6 +3068,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -3093,7 +3114,7 @@
       "evidenceLabels": [],
       "priority": 6,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -3120,6 +3141,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -3165,7 +3187,7 @@
       "evidenceLabels": [],
       "priority": 6,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -3192,6 +3214,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -3237,7 +3260,7 @@
       "evidenceLabels": [],
       "priority": 6,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -3264,6 +3287,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -3309,7 +3333,7 @@
       "evidenceLabels": [],
       "priority": 5,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -3336,6 +3360,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -3381,7 +3406,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -3408,6 +3433,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -3453,7 +3479,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -3480,6 +3506,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -3525,7 +3552,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -3552,6 +3579,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -3597,7 +3625,7 @@
       "evidenceLabels": [],
       "priority": 3,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -3624,6 +3652,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -3672,7 +3701,7 @@
       "evidenceLabels": [],
       "priority": 5,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -3699,6 +3728,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -3742,7 +3772,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -3769,6 +3799,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -3812,7 +3843,7 @@
       "evidenceLabels": [],
       "priority": 3,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -3839,6 +3870,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -3882,7 +3914,7 @@
       "evidenceLabels": [],
       "priority": 3,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -3909,6 +3941,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -3954,7 +3987,7 @@
       "evidenceLabels": [],
       "priority": 4,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -3981,6 +4014,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -4029,7 +4063,7 @@
       "evidenceLabels": [],
       "priority": 6,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -4056,6 +4090,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -4101,7 +4136,7 @@
       "evidenceLabels": [],
       "priority": 4,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -4128,6 +4163,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -4173,7 +4209,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -4200,6 +4236,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -4248,7 +4285,7 @@
       "evidenceLabels": [],
       "priority": 7,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -4275,6 +4312,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -4322,7 +4360,7 @@
       "evidenceLabels": [],
       "priority": 6,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -4349,6 +4387,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -4396,7 +4435,7 @@
       "evidenceLabels": [],
       "priority": 6,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -4423,6 +4462,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -4468,7 +4508,7 @@
       "evidenceLabels": [],
       "priority": 4,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -4495,6 +4535,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -4542,7 +4583,7 @@
       "evidenceLabels": [],
       "priority": 7,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -4569,6 +4610,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -4614,7 +4656,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -4641,6 +4683,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -4686,7 +4729,7 @@
       "evidenceLabels": [],
       "priority": 1,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -4713,6 +4756,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -4758,7 +4802,7 @@
       "evidenceLabels": [],
       "priority": 3,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -4785,6 +4829,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -4828,7 +4873,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -4855,6 +4900,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -4901,7 +4947,7 @@
       "evidenceLabels": [],
       "priority": 6,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -4928,6 +4974,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -4976,7 +5023,7 @@
       "evidenceLabels": [],
       "priority": 7,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -5003,6 +5050,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -5050,7 +5098,7 @@
       "evidenceLabels": [],
       "priority": 5,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -5077,6 +5125,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -5122,7 +5171,7 @@
       "evidenceLabels": [],
       "priority": 5,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -5149,6 +5198,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -5194,7 +5244,7 @@
       "evidenceLabels": [],
       "priority": 4,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -5221,6 +5271,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -5266,7 +5317,7 @@
       "evidenceLabels": [],
       "priority": 6,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -5293,6 +5344,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -5340,7 +5392,7 @@
       "evidenceLabels": [],
       "priority": 7,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -5367,6 +5419,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -5412,7 +5465,7 @@
       "evidenceLabels": [],
       "priority": 3,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -5439,6 +5492,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -5485,7 +5539,7 @@
       "evidenceLabels": [],
       "priority": 4,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -5512,6 +5566,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -5557,7 +5612,7 @@
       "evidenceLabels": [],
       "priority": 4,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -5584,6 +5639,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -5629,7 +5685,7 @@
       "evidenceLabels": [],
       "priority": 3,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -5656,6 +5712,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -5699,7 +5756,7 @@
       "evidenceLabels": [],
       "priority": 2,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -5726,6 +5783,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -5771,7 +5829,7 @@
       "evidenceLabels": [],
       "priority": 6,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -5798,6 +5856,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -5841,7 +5900,7 @@
       "evidenceLabels": [],
       "priority": 3,
       "defaultGoalId": "correctness.dev",
-      "defaultMatrixId": "windows-native-check",
+      "defaultMatrixId": "windows-managed-proof",
       "goalIds": [
         "correctness.dev",
         "correctness.platform",
@@ -5868,6 +5927,86 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
+        "windows-corelib-reference-native-hotupdate-proof",
+        "windows-native-check",
+        "windows-managed-trace",
+        "macos-managed-trace",
+        "windows-native-perf",
+        "windows-managed-perf"
+      ]
+    },
+    {
+      "subjectId": "SolutionCorePack",
+      "stableId": "SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()",
+      "alias": "corelib-reference-hotupdate-proof",
+      "assemblyName": "GoldenCoreLibReference.HotUpdatePatch",
+      "declaringType": "GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof",
+      "methodName": "Run",
+      "methodSignature": "Run()",
+      "sourceEntry": "GoldenCoreLibReference.HotUpdatePatch/CoreLibHotUpdateProof::Run()",
+      "entryIndex": 60,
+      "category": 5,
+      "categoryLabel": "Hot Update Contract",
+      "capabilityFamily": 13,
+      "capabilityFamilyLabel": "Hot Update Workflow",
+      "capabilityItem": 54,
+      "capabilityItemLabel": "Package Load",
+      "ownerSubjectId": "HotUpdateHostPack",
+      "supportStates": [
+        3,
+        2
+      ],
+      "supportStateLabels": [
+        "BridgeDispatch",
+        "InterpreterReady"
+      ],
+      "proofRequired": true,
+      "benchmarkRequired": true,
+      "archetype": 5,
+      "archetypeLabel": "CoreLib Reference Solution",
+      "hotUpdateCapability": 1,
+      "hotUpdateCapabilityLabels": [
+        "Package Load"
+      ],
+      "requires": 32,
+      "requirementLabels": [
+        "Hot Update"
+      ],
+      "evidence": 1,
+      "evidenceLabels": [
+        "Stdout"
+      ],
+      "priority": 1,
+      "defaultGoalId": "correctness.dev",
+      "defaultMatrixId": "windows-corelib-reference-hotupdate-proof",
+      "goalIds": [
+        "correctness.dev",
+        "correctness.platform",
+        "perf.release"
+      ],
+      "matrixIds": [
+        "windows-archetype-simple-lib-managed-output",
+        "windows-archetype-multi-project-managed-output",
+        "windows-archetype-package-reference-managed-output",
+        "windows-archetype-reference-assembly-managed-output",
+        "windows-archetype-corelib-reference-managed-output",
+        "windows-archetype-mixed-reference-closure-managed-output",
+        "windows-foundation-dll-translation-native-proof",
+        "windows-static-call-ctor-getter-native-proof",
+        "windows-constructor-then-instance-call-native-proof",
+        "windows-delegate-closed-target-relay-native-proof",
+        "windows-exception-throw-catch-finally-native-proof",
+        "windows-nested-exception-throw-catch-finally-native-proof",
+        "windows-corelib-reference-native-proof",
+        "windows-marshaling-utf8-export-native-proof",
+        "windows-reflection-interop-closure-native-proof",
+        "windows-pinvoke-direct-call-native-proof",
+        "windows-array-boxing-reference-array-native-proof",
+        "windows-interface-dispatch-message-native-proof",
+        "windows-threading-threadstatic-monitor-native-proof",
+        "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -6334,6 +6473,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -6414,6 +6554,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -6499,6 +6640,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -6578,6 +6720,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -6658,6 +6801,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -6740,6 +6884,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -6822,6 +6967,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -6902,6 +7048,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -6987,6 +7134,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -7067,6 +7215,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -7150,6 +7299,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -7232,6 +7382,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -7315,6 +7466,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -7399,6 +7551,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -7479,6 +7632,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -7560,6 +7714,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -7645,6 +7800,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -7730,6 +7886,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -7811,6 +7968,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -7893,6 +8051,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -7973,6 +8132,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -8054,6 +8214,7 @@
         "windows-interface-dispatch-message-native-proof",
         "windows-threading-threadstatic-monitor-native-proof",
         "windows-corelib-reference-hotupdate-proof",
+        "windows-managed-proof",
         "windows-corelib-reference-native-hotupdate-proof",
         "windows-native-check",
         "windows-managed-trace",
@@ -9233,119 +9394,6 @@
   ],
   "workspaceCollections": [
     {
-      "subjectId": "HotUpdateHostPack",
-      "manifestPath": "verification/workspaces/subjects/HotUpdateHostPack/workspace.manifest.json",
-      "collectionPath": "verification/workspaces/subjects/HotUpdateHostPack/managed-tests/Generated/declared-tests.collection.json",
-      "declaredUnitTests": [
-        {
-          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()",
-          "alias": "hot-update-skeleton-proof",
-          "entryIndex": 0
-        },
-        {
-          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MetadataSupplementProofEntry::Run()",
-          "alias": "metadata-supplement-proof",
-          "entryIndex": 1
-        },
-        {
-          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementProofEntry::Run()",
-          "alias": "method-replacement-proof",
-          "entryIndex": 2
-        },
-        {
-          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchCallbackFlowProofEntry::Run()",
-          "alias": "patch-callback-flow-proof",
-          "entryIndex": 3
-        },
-        {
-          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchIntegrityProofEntry::Run()",
-          "alias": "patch-integrity-proof",
-          "entryIndex": 4
-        },
-        {
-          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.SharedContractProofEntry::Run()",
-          "alias": "shared-contract-proof",
-          "entryIndex": 5
-        },
-        {
-          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.VersionRollbackProofEntry::Run()",
-          "alias": "version-rollback-proof",
-          "entryIndex": 6
-        }
-      ],
-      "declaredBenchmarks": [
-        {
-          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry::RunWorkload()",
-          "alias": "hot-update-dispatch-bench",
-          "entryIndex": 0
-        },
-        {
-          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()",
-          "alias": "hot-update-load-bench",
-          "entryIndex": 1
-        },
-        {
-          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry::RunWorkload()",
-          "alias": "hot-update-roundtrip-bench",
-          "entryIndex": 2
-        },
-        {
-          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementBenchmarkEntry::RunWorkload()",
-          "alias": "method-replacement-bench",
-          "entryIndex": 3
-        }
-      ]
-    },
-    {
-      "subjectId": "MixedExecutionFeaturePack",
-      "manifestPath": "verification/workspaces/subjects/MixedExecutionFeaturePack/workspace.manifest.json",
-      "collectionPath": "verification/workspaces/subjects/MixedExecutionFeaturePack/managed-tests/Generated/declared-tests.collection.json",
-      "declaredUnitTests": [
-        {
-          "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()",
-          "alias": "interpreter-arithmetic-proof",
-          "entryIndex": 0
-        },
-        {
-          "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()",
-          "alias": "interpreter-lowering-proof",
-          "entryIndex": 1
-        },
-        {
-          "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()",
-          "alias": "mixed-delegate-flow-proof",
-          "entryIndex": 2
-        },
-        {
-          "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExceptionFlowProofEntry::Run()",
-          "alias": "mixed-exception-flow-proof",
-          "entryIndex": 3
-        },
-        {
-          "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()",
-          "alias": "mixed-execution-proof",
-          "entryIndex": 4
-        },
-        {
-          "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()",
-          "alias": "mixed-generic-flow-proof",
-          "entryIndex": 5
-        }
-      ],
-      "declaredBenchmarks": [
-        {
-          "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry::RunWorkload()",
-          "alias": "mixed-execution-bench",
-          "entryIndex": 0
-        },
-        {
-          "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()",
-          "alias": "mixed-execution-native-bench",
-          "entryIndex": 1
-        }
-      ]
-    },
-    {
       "subjectId": "SolutionCorePack",
       "manifestPath": "verification/workspaces/subjects/SolutionCorePack/workspace.manifest.json",
       "collectionPath": "verification/workspaces/subjects/SolutionCorePack/managed-tests/Generated/declared-tests.collection.json",
@@ -9649,6 +9697,11 @@
           "stableId": "SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.VTableDispatchProofEntry::Run()",
           "alias": "vtable-dispatch-proof",
           "entryIndex": 59
+        },
+        {
+          "stableId": "SolutionCorePack::GoldenCoreLibReference.HotUpdatePatch::GoldenCoreLibReference.HotUpdatePatch.CoreLibHotUpdateProof::Run()",
+          "alias": "corelib-reference-hotupdate-proof",
+          "entryIndex": 60
         }
       ],
       "declaredBenchmarks": [
@@ -9765,16 +9818,17 @@
       ]
     }
   ],
-  "managedProofEvidence": [
+  "proofEvidence": [
     {
       "subjectId": "HotUpdateHostPack",
       "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()",
       "alias": "hot-update-skeleton-proof",
       "entryIndex": 0,
       "status": "ok",
-      "runId": "20260421-001101-windows-a0bd",
-      "summaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260421-001101-windows-a0bd/run-report/summary.json",
-      "subjectSummaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260421-001101-windows-a0bd/declared/unit/hot-update-skeleton-proof/summary.json",
+      "stageKind": "managed-proof",
+      "runId": "20260425-105701-windows-95a1",
+      "summaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260425-105701-windows-95a1/run-report/summary.json",
+      "subjectSummaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260425-105701-windows-95a1/declared/unit/hot-update-skeleton-proof/summary.json",
       "errors": []
     },
     {
@@ -9783,6 +9837,7 @@
       "alias": "metadata-supplement-proof",
       "entryIndex": 1,
       "status": "ok",
+      "stageKind": "managed-proof",
       "runId": "20260423-115121-windows-1888",
       "summaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260423-115121-windows-1888/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260423-115121-windows-1888/declared/unit/metadata-supplement-proof/summary.json",
@@ -9794,6 +9849,7 @@
       "alias": "method-replacement-proof",
       "entryIndex": 2,
       "status": "ok",
+      "stageKind": "managed-proof",
       "runId": "20260419-100831-windows-63d6",
       "summaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260419-100831-windows-63d6/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260419-100831-windows-63d6/declared/unit/method-replacement-proof/summary.json",
@@ -9805,6 +9861,7 @@
       "alias": "patch-callback-flow-proof",
       "entryIndex": 3,
       "status": "ok",
+      "stageKind": "managed-proof",
       "runId": "20260419-101154-windows-0cea",
       "summaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260419-101154-windows-0cea/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260419-101154-windows-0cea/declared/unit/patch-callback-flow-proof/summary.json",
@@ -9816,6 +9873,7 @@
       "alias": "patch-integrity-proof",
       "entryIndex": 4,
       "status": "ok",
+      "stageKind": "managed-proof",
       "runId": "20260419-101223-windows-9a84",
       "summaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260419-101223-windows-9a84/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260419-101223-windows-9a84/declared/unit/patch-integrity-proof/summary.json",
@@ -9827,6 +9885,7 @@
       "alias": "shared-contract-proof",
       "entryIndex": 5,
       "status": "ok",
+      "stageKind": "managed-proof",
       "runId": "20260419-101234-windows-915c",
       "summaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260419-101234-windows-915c/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260419-101234-windows-915c/declared/unit/shared-contract-proof/summary.json",
@@ -9838,10 +9897,71 @@
       "alias": "version-rollback-proof",
       "entryIndex": 6,
       "status": "ok",
+      "stageKind": "managed-proof",
       "runId": "20260419-101246-windows-a196",
       "summaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260419-101246-windows-a196/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260419-101246-windows-a196/declared/unit/version-rollback-proof/summary.json",
       "errors": []
+    },
+    {
+      "subjectId": "MixedExecutionFeaturePack",
+      "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()",
+      "alias": "interpreter-arithmetic-proof",
+      "entryIndex": 0,
+      "status": "ok",
+      "stageKind": "managed-proof",
+      "runId": "20260413-175719-windows-2247",
+      "summaryPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260413-175719-windows-2247/run-report/summary.json",
+      "errors": [],
+      "pipelineReportPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260413-175719-windows-2247/matrices/windows-managed-output/pipeline-report/report.json"
+    },
+    {
+      "subjectId": "MixedExecutionFeaturePack",
+      "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()",
+      "alias": "mixed-delegate-flow-proof",
+      "entryIndex": 2,
+      "status": "ok",
+      "stageKind": "managed-proof",
+      "runId": "20260413-175719-windows-2247",
+      "summaryPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260413-175719-windows-2247/run-report/summary.json",
+      "errors": [],
+      "pipelineReportPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260413-175719-windows-2247/matrices/windows-managed-output/pipeline-report/report.json"
+    },
+    {
+      "subjectId": "MixedExecutionFeaturePack",
+      "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExceptionFlowProofEntry::Run()",
+      "alias": "mixed-exception-flow-proof",
+      "entryIndex": 3,
+      "status": "ok",
+      "stageKind": "managed-proof",
+      "runId": "20260413-175719-windows-2247",
+      "summaryPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260413-175719-windows-2247/run-report/summary.json",
+      "errors": [],
+      "pipelineReportPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260413-175719-windows-2247/matrices/windows-managed-output/pipeline-report/report.json"
+    },
+    {
+      "subjectId": "MixedExecutionFeaturePack",
+      "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionProofEntry::Run()",
+      "alias": "mixed-execution-proof",
+      "entryIndex": 4,
+      "status": "ok",
+      "stageKind": "managed-proof",
+      "runId": "20260414-213834-windows-a30c",
+      "summaryPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260414-213834-windows-a30c/run-report/summary.json",
+      "errors": [],
+      "pipelineReportPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260414-213834-windows-a30c/matrices/windows-managed-output/pipeline-report/report.json"
+    },
+    {
+      "subjectId": "MixedExecutionFeaturePack",
+      "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()",
+      "alias": "mixed-generic-flow-proof",
+      "entryIndex": 5,
+      "status": "ok",
+      "stageKind": "managed-proof",
+      "runId": "20260413-175719-windows-2247",
+      "summaryPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260413-175719-windows-2247/run-report/summary.json",
+      "errors": [],
+      "pipelineReportPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260413-175719-windows-2247/matrices/windows-managed-output/pipeline-report/report.json"
     },
     {
       "subjectId": "SolutionCorePack",
@@ -9849,6 +9969,7 @@
       "alias": "abi-widening-proof",
       "entryIndex": 0,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-233231-windows-b8e5",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-233231-windows-b8e5/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-233231-windows-b8e5/declared/unit/abi-widening-proof/summary.json",
@@ -9860,6 +9981,7 @@
       "alias": "aot-closure-validation-proof",
       "entryIndex": 1,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-164853-windows-7d42",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-164853-windows-7d42/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-164853-windows-7d42/declared/unit/aot-closure-validation-proof/summary.json",
@@ -9871,6 +9993,7 @@
       "alias": "arithmetic-ops-proof",
       "entryIndex": 2,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-110734-windows-365a",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-110734-windows-365a/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-110734-windows-365a/declared/unit/arithmetic-ops-proof/summary.json",
@@ -9878,10 +10001,24 @@
     },
     {
       "subjectId": "SolutionCorePack",
+      "stableId": "SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArrayBoxingProofEntry::Run()",
+      "alias": "array-boxing-proof",
+      "entryIndex": 3,
+      "status": "ok",
+      "stageKind": "native-proof",
+      "runId": "20260419-235551-windows-f761",
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260419-235551-windows-f761/run-report/summary.json",
+      "errors": [],
+      "pipelineReportPath": "artifacts/subjects/SolutionCorePack/runs/20260419-235551-windows-f761/matrices/windows-array-boxing-reference-array-native-proof/pipeline-report/report.json",
+      "dispatchSubjectId": "ArrayBoxingReferenceArray.App/ArrayBoxingProofEntry::Run:System.Int32()"
+    },
+    {
+      "subjectId": "SolutionCorePack",
       "stableId": "SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AsyncAwaitProofEntry::Run()",
       "alias": "async-await-proof",
       "entryIndex": 6,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-232346-windows-a7f6",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-232346-windows-a7f6/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-232346-windows-a7f6/declared/unit/async-await-proof/summary.json",
@@ -9893,6 +10030,7 @@
       "alias": "conversion-ops-proof",
       "entryIndex": 11,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-233337-windows-ed32",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-233337-windows-ed32/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-233337-windows-ed32/declared/unit/conversion-ops-proof/summary.json",
@@ -9904,6 +10042,7 @@
       "alias": "custom-attribute-lookup-proof",
       "entryIndex": 13,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-110235-windows-6e51",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-110235-windows-6e51/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-110235-windows-6e51/declared/unit/custom-attribute-lookup-proof/summary.json",
@@ -9915,10 +10054,12 @@
       "alias": "delegate-proof",
       "entryIndex": 16,
       "status": "ok",
-      "runId": "20260418-110900-windows-fe10",
-      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-110900-windows-fe10/run-report/summary.json",
-      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-110900-windows-fe10/declared/unit/delegate-proof/summary.json",
-      "errors": []
+      "stageKind": "native-proof",
+      "runId": "20260420-100630-windows-09ef",
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260420-100630-windows-09ef/run-report/summary.json",
+      "errors": [],
+      "pipelineReportPath": "artifacts/subjects/SolutionCorePack/runs/20260420-100630-windows-09ef/matrices/windows-delegate-closed-target-relay-native-proof/pipeline-report/report.json",
+      "dispatchSubjectId": "DelegateClosedTargetRelay.App/DelegateProofEntry::Run:System.Int32()"
     },
     {
       "subjectId": "SolutionCorePack",
@@ -9926,6 +10067,7 @@
       "alias": "direct-callvirt-proof",
       "entryIndex": 17,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-233424-windows-d9fb",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-233424-windows-d9fb/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-233424-windows-d9fb/declared/unit/direct-callvirt-proof/summary.json",
@@ -9937,6 +10079,7 @@
       "alias": "dispatch-proof",
       "entryIndex": 18,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-232435-windows-3c88",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-232435-windows-3c88/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-232435-windows-3c88/declared/unit/dispatch-proof/summary.json",
@@ -9948,10 +10091,12 @@
       "alias": "exception-proof",
       "entryIndex": 21,
       "status": "ok",
-      "runId": "20260418-110943-windows-bb21",
-      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-110943-windows-bb21/run-report/summary.json",
-      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-110943-windows-bb21/declared/unit/exception-proof/summary.json",
-      "errors": []
+      "stageKind": "native-proof",
+      "runId": "20260420-200001-windows-d24b",
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260420-200001-windows-d24b/run-report/summary.json",
+      "errors": [],
+      "pipelineReportPath": "artifacts/subjects/SolutionCorePack/runs/20260420-200001-windows-d24b/matrices/windows-exception-throw-catch-finally-native-proof/pipeline-report/report.json",
+      "dispatchSubjectId": "ExceptionThrowCatchFinally.App/ExceptionProofEntry::Run:System.Int32()"
     },
     {
       "subjectId": "SolutionCorePack",
@@ -9959,6 +10104,7 @@
       "alias": "function-pointer-proof",
       "entryIndex": 23,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-233531-windows-67f6",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-233531-windows-67f6/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-233531-windows-67f6/declared/unit/function-pointer-proof/summary.json",
@@ -9970,6 +10116,7 @@
       "alias": "generic-collection-proof",
       "entryIndex": 25,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-141411-windows-21a5",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141411-windows-21a5/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141411-windows-21a5/declared/unit/generic-collection-proof/summary.json",
@@ -9981,6 +10128,7 @@
       "alias": "generic-instantiation-proof",
       "entryIndex": 27,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-232534-windows-e775",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-232534-windows-e775/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-232534-windows-e775/declared/unit/generic-instantiation-proof/summary.json",
@@ -9992,6 +10140,7 @@
       "alias": "generic-sharing-boundary-proof",
       "entryIndex": 29,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260423-102338-windows-9302",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260423-102338-windows-9302/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260423-102338-windows-9302/declared/unit/generic-sharing-boundary-proof/summary.json",
@@ -10003,10 +10152,25 @@
       "alias": "interface-dispatch-proof",
       "entryIndex": 31,
       "status": "ok",
-      "runId": "20260418-111023-windows-dc75",
-      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-111023-windows-dc75/run-report/summary.json",
-      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-111023-windows-dc75/declared/unit/interface-dispatch-proof/summary.json",
-      "errors": []
+      "stageKind": "native-proof",
+      "runId": "20260420-005327-windows-66ae",
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260420-005327-windows-66ae/run-report/summary.json",
+      "errors": [],
+      "pipelineReportPath": "artifacts/subjects/SolutionCorePack/runs/20260420-005327-windows-66ae/matrices/windows-interface-dispatch-message-native-proof/pipeline-report/report.json",
+      "dispatchSubjectId": "InterfaceDispatchMessage.App/InterfaceDispatchProofEntry::Run:System.Int32()"
+    },
+    {
+      "subjectId": "SolutionCorePack",
+      "stableId": "SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.MarshalingProofEntry::Run()",
+      "alias": "marshaling-proof",
+      "entryIndex": 37,
+      "status": "ok",
+      "stageKind": "native-proof",
+      "runId": "20260420-100932-windows-9bcf",
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260420-100932-windows-9bcf/run-report/summary.json",
+      "errors": [],
+      "pipelineReportPath": "artifacts/subjects/SolutionCorePack/runs/20260420-100932-windows-9bcf/matrices/windows-marshaling-utf8-export-native-proof/pipeline-report/report.json",
+      "dispatchSubjectId": "MarshalingUtf8Export.App/MarshalingProofEntry::Run:System.Int32()"
     },
     {
       "subjectId": "SolutionCorePack",
@@ -10014,6 +10178,7 @@
       "alias": "member-metadata-lookup-proof",
       "entryIndex": 38,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-233635-windows-1e46",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-233635-windows-1e46/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-233635-windows-1e46/declared/unit/member-metadata-lookup-proof/summary.json",
@@ -10025,6 +10190,7 @@
       "alias": "metadata-supplement-proof",
       "entryIndex": 39,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-233722-windows-a40f",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-233722-windows-a40f/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-233722-windows-a40f/declared/unit/metadata-supplement-proof/summary.json",
@@ -10036,6 +10202,7 @@
       "alias": "monitor-locking-proof",
       "entryIndex": 40,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-141604-windows-41cc",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141604-windows-41cc/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141604-windows-41cc/declared/unit/monitor-locking-proof/summary.json",
@@ -10043,10 +10210,24 @@
     },
     {
       "subjectId": "SolutionCorePack",
+      "stableId": "SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.NestedExceptionProofEntry::Run()",
+      "alias": "nested-exception-proof",
+      "entryIndex": 42,
+      "status": "ok",
+      "stageKind": "native-proof",
+      "runId": "20260419-222224-windows-2938",
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260419-222224-windows-2938/run-report/summary.json",
+      "errors": [],
+      "pipelineReportPath": "artifacts/subjects/SolutionCorePack/runs/20260419-222224-windows-2938/matrices/windows-nested-exception-throw-catch-finally-native-proof/pipeline-report/report.json",
+      "dispatchSubjectId": "NestedExceptionThrowCatchFinally.App/NestedExceptionProofEntry::Run:System.Int32()"
+    },
+    {
+      "subjectId": "SolutionCorePack",
       "stableId": "SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ReflectionInteropClosureEntry::Run()",
       "alias": "reflection-interop-closure-proof",
       "entryIndex": 47,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260422-221836-windows-6e9e",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260422-221836-windows-6e9e/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260422-221836-windows-6e9e/declared/unit/reflection-interop-closure-proof/summary.json",
@@ -10058,6 +10239,7 @@
       "alias": "required-instantiation-closure-proof",
       "entryIndex": 48,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-165340-windows-a77c",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-165340-windows-a77c/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-165340-windows-a77c/declared/unit/required-instantiation-closure-proof/summary.json",
@@ -10069,6 +10251,7 @@
       "alias": "runtime-helpers-proof",
       "entryIndex": 50,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-110447-windows-13c0",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-110447-windows-13c0/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-110447-windows-13c0/declared/unit/runtime-helpers-proof/summary.json",
@@ -10080,6 +10263,7 @@
       "alias": "span-memory-proof",
       "entryIndex": 51,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-165423-windows-0017",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-165423-windows-0017/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-165423-windows-0017/declared/unit/span-memory-proof/summary.json",
@@ -10091,6 +10275,7 @@
       "alias": "task-valuetask-flow-proof",
       "entryIndex": 53,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-233909-windows-92f2",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-233909-windows-92f2/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-233909-windows-92f2/declared/unit/task-valuetask-flow-proof/summary.json",
@@ -10102,6 +10287,7 @@
       "alias": "task-scheduling-proof",
       "entryIndex": 54,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-232628-windows-ce98",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-232628-windows-ce98/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-232628-windows-ce98/declared/unit/task-scheduling-proof/summary.json",
@@ -10113,6 +10299,7 @@
       "alias": "thread-local-state-proof",
       "entryIndex": 55,
       "status": "ok",
+      "stageKind": "native-proof",
       "runId": "20260418-232708-windows-e85e",
       "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-232708-windows-e85e/run-report/summary.json",
       "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-232708-windows-e85e/declared/unit/thread-local-state-proof/summary.json",
@@ -10124,10 +10311,12 @@
       "alias": "threading-proof",
       "entryIndex": 56,
       "status": "ok",
-      "runId": "20260418-141524-windows-5381",
-      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141524-windows-5381/run-report/summary.json",
-      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260418-141524-windows-5381/declared/unit/threading-proof/summary.json",
-      "errors": []
+      "stageKind": "native-proof",
+      "runId": "20260420-104850-windows-23e3",
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260420-104850-windows-23e3/run-report/summary.json",
+      "errors": [],
+      "pipelineReportPath": "artifacts/subjects/SolutionCorePack/runs/20260420-104850-windows-23e3/matrices/windows-threading-threadstatic-monitor-native-proof/pipeline-report/report.json",
+      "dispatchSubjectId": "ThreadingThreadStaticMonitor.App/ThreadingProofEntry::Run:System.Int32()"
     },
     {
       "subjectId": "SolutionCorePack",
@@ -10135,10 +10324,11 @@
       "alias": "corelib-reference-hotupdate-proof",
       "entryIndex": 60,
       "status": "ok",
-      "runId": "20260423-011137-windows-3241",
-      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260423-011137-windows-3241/run-report/summary.json",
-      "subjectSummaryPath": "artifacts/subjects/SolutionCorePack/runs/20260423-011137-windows-3241/declared/unit/corelib-reference-hotupdate-proof/summary.json",
-      "errors": []
+      "stageKind": "hotupdate-proof",
+      "runId": "20260425-110513-windows-ab4b",
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260425-110513-windows-ab4b/run-report/summary.json",
+      "errors": [],
+      "pipelineReportPath": "artifacts/subjects/SolutionCorePack/runs/20260425-110513-windows-ab4b/matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report.json"
     }
   ],
   "benchmarkSubjects": {
@@ -11974,7 +12164,411 @@
       "comparisons": {}
     }
   },
-  "benchmarkEvidence": [],
+  "benchmarkEvidence": [
+    {
+      "subjectId": "HotUpdateHostPack",
+      "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()",
+      "alias": "hot-update-load-bench",
+      "assemblyName": "HotUpdateHostPack",
+      "declaringType": "HotUpdateHostPack.HotUpdateLoadBenchmarkEntry",
+      "methodName": "RunWorkload",
+      "methodSignature": "RunWorkload()",
+      "sourceEntry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
+      "workloadEntry": "HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()",
+      "entryIndex": 1,
+      "category": 4,
+      "categoryLabel": "Hot Update",
+      "capabilityFamily": 13,
+      "capabilityFamilyLabel": "Hot Update Workflow",
+      "capabilityItem": 54,
+      "capabilityItemLabel": "Package Load",
+      "ownerSubjectId": "HotUpdateHostPack",
+      "supportStates": [
+        3,
+        2
+      ],
+      "supportStateLabels": [
+        "BridgeDispatch",
+        "InterpreterReady"
+      ],
+      "proofRequired": true,
+      "benchmarkRequired": true,
+      "archetype": 7,
+      "archetypeLabel": "Skeleton Patch Solution",
+      "hotUpdateCapability": 17,
+      "hotUpdateCapabilityLabels": [
+        "Package Load",
+        "Patch Integrity"
+      ],
+      "requires": 32,
+      "requirementLabels": [
+        "Hot Update"
+      ],
+      "metrics": 1,
+      "metricLabels": [
+        "Wall Clock"
+      ],
+      "modes": 1,
+      "supportedModes": [
+        "managed"
+      ],
+      "warmupCount": 1,
+      "iterationCount": 8,
+      "invocationCount": 1,
+      "defaultGoalId": "perf.release",
+      "defaultMatrixId": "windows-managed-perf",
+      "goalIds": [
+        "correctness.dev",
+        "perf.release"
+      ],
+      "matrixIds": [
+        "windows-managed-output",
+        "macos-managed-output",
+        "linux-managed-output",
+        "windows-archetype-full-project-managed-output",
+        "windows-managed-perf"
+      ],
+      "deviceId": "legacy-host",
+      "deviceName": "Legacy Host",
+      "platformId": "windows-x64",
+      "recordedModes": [
+        "managed"
+      ],
+      "missingModes": [],
+      "staleModes": [],
+      "unsupportedModes": [
+        "native",
+        "interpreter"
+      ],
+      "modeStatus": {
+        "managed": {
+          "mode": "managed",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 58.263,
+            "minDurationMs": 57.768,
+            "maxDurationMs": 58.778,
+            "meanChecksum": 4.0,
+            "minChecksum": 4.0,
+            "maxChecksum": 4.0,
+            "meanElapsedMilliseconds": 58.263,
+            "minElapsedMilliseconds": 57.768,
+            "maxElapsedMilliseconds": 58.778,
+            "meanOpsPerSecond": 68.657,
+            "minOpsPerSecond": 68.052,
+            "maxOpsPerSecond": 69.242
+          },
+          "recordedAt": "2026-04-13T20:45:24Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        },
+        "native": {
+          "mode": "native",
+          "status": "unsupported",
+          "reasonCode": "unsupported-by-contract",
+          "reasonLabel": "This mode is not declared by the benchmark contract."
+        },
+        "interpreter": {
+          "mode": "interpreter",
+          "status": "unsupported",
+          "reasonCode": "unsupported-by-contract",
+          "reasonLabel": "This mode is not declared by the benchmark contract."
+        }
+      },
+      "sourceSubjectPath": "artifacts/subjects/HotUpdateHostPack/runs/20260414-044521-windows-f2fe/matrices/windows-managed-perf/validations/perf/summary.json",
+      "lastRecordedAt": "2026-04-13T20:45:24Z",
+      "gitCommit": "",
+      "isStale": false,
+      "legacyCompatibilityClaim": true
+    },
+    {
+      "subjectId": "MixedExecutionFeaturePack",
+      "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry::RunWorkload()",
+      "alias": "mixed-execution-bench",
+      "assemblyName": "MixedExecutionFeaturePack",
+      "declaringType": "MixedExecutionFeaturePack.MixedExecutionBenchmarkEntry",
+      "methodName": "RunWorkload",
+      "methodSignature": "RunWorkload()",
+      "sourceEntry": "MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()",
+      "workloadEntry": "MixedExecutionFeaturePack/MixedExecutionBenchmarkEntry::RunWorkload()",
+      "entryIndex": 0,
+      "category": 1,
+      "categoryLabel": "Runtime Dispatch",
+      "capabilityFamily": 14,
+      "capabilityFamilyLabel": "Mixed Execution",
+      "capabilityItem": 61,
+      "capabilityItemLabel": "Mixed Bridge Dispatch",
+      "ownerSubjectId": "MixedExecutionFeaturePack",
+      "supportStates": [
+        3,
+        2,
+        1
+      ],
+      "supportStateLabels": [
+        "BridgeDispatch",
+        "InterpreterReady",
+        "NativeGenerated"
+      ],
+      "proofRequired": true,
+      "benchmarkRequired": true,
+      "archetype": 11,
+      "archetypeLabel": "Mixed Bridge Solution",
+      "hotUpdateCapability": 0,
+      "hotUpdateCapabilityLabels": [],
+      "requires": 4,
+      "requirementLabels": [
+        "Delegate"
+      ],
+      "metrics": 1,
+      "metricLabels": [
+        "Wall Clock"
+      ],
+      "modes": 5,
+      "supportedModes": [
+        "managed",
+        "interpreter"
+      ],
+      "warmupCount": 1,
+      "iterationCount": 6,
+      "invocationCount": 1000,
+      "defaultGoalId": "perf.release",
+      "defaultMatrixId": "windows-managed-perf",
+      "goalIds": [
+        "correctness.dev",
+        "perf.release"
+      ],
+      "matrixIds": [
+        "windows-managed-output",
+        "windows-archetype-mixed-bridge-managed-output",
+        "windows-managed-perf",
+        "windows-native-perf",
+        "windows-interpreter-perf"
+      ],
+      "deviceId": "legacy-host",
+      "deviceName": "Legacy Host",
+      "platformId": "windows-x64",
+      "recordedModes": [
+        "managed",
+        "interpreter"
+      ],
+      "missingModes": [],
+      "staleModes": [],
+      "unsupportedModes": [
+        "native"
+      ],
+      "modeStatus": {
+        "managed": {
+          "mode": "managed",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 2.349,
+            "minDurationMs": 2.308,
+            "maxDurationMs": 2.37,
+            "meanChecksum": 9632.0,
+            "minChecksum": 9632.0,
+            "maxChecksum": 9632.0,
+            "meanElapsedMilliseconds": 2.349,
+            "minElapsedMilliseconds": 2.308,
+            "maxElapsedMilliseconds": 2.37,
+            "meanOpsPerSecond": 2554.733,
+            "minOpsPerSecond": 2531.432,
+            "maxOpsPerSecond": 2599.09
+          },
+          "recordedAt": "2026-04-13T09:57:41Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        },
+        "native": {
+          "mode": "native",
+          "status": "unsupported",
+          "reasonCode": "unsupported-by-contract",
+          "reasonLabel": "This mode is not declared by the benchmark contract."
+        },
+        "interpreter": {
+          "mode": "interpreter",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 2.451,
+            "minDurationMs": 2.369,
+            "maxDurationMs": 2.5,
+            "meanChecksum": 9632.0,
+            "minChecksum": 9632.0,
+            "maxChecksum": 9632.0,
+            "meanElapsedMilliseconds": 2.451,
+            "minElapsedMilliseconds": 2.369,
+            "maxElapsedMilliseconds": 2.5,
+            "meanOpsPerSecond": 2449.758,
+            "minOpsPerSecond": 2399.904,
+            "maxOpsPerSecond": 2533.035
+          },
+          "recordedAt": "2026-04-13T09:58:41Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        }
+      },
+      "sourceSubjectPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260413-175836-windows-7046/matrices/windows-interpreter-perf/validations/perf/summary.json",
+      "lastRecordedAt": "2026-04-13T09:58:41Z",
+      "gitCommit": "",
+      "isStale": false,
+      "legacyCompatibilityClaim": true
+    },
+    {
+      "subjectId": "MixedExecutionFeaturePack",
+      "stableId": "MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+      "alias": "mixed-execution-native-bench",
+      "assemblyName": "MixedExecutionFeaturePack",
+      "declaringType": "MixedExecutionFeaturePack.MixedExecutionNativeBenchmarkEntry",
+      "methodName": "RunWorkload",
+      "methodSignature": "RunWorkload()",
+      "sourceEntry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+      "workloadEntry": "MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()",
+      "entryIndex": 1,
+      "category": 1,
+      "categoryLabel": "Runtime Dispatch",
+      "capabilityFamily": 14,
+      "capabilityFamilyLabel": "Mixed Execution",
+      "capabilityItem": 63,
+      "capabilityItemLabel": "Interpreter Arithmetic",
+      "ownerSubjectId": "MixedExecutionFeaturePack",
+      "supportStates": [
+        3,
+        2,
+        1
+      ],
+      "supportStateLabels": [
+        "BridgeDispatch",
+        "InterpreterReady",
+        "NativeGenerated"
+      ],
+      "proofRequired": true,
+      "benchmarkRequired": true,
+      "archetype": 11,
+      "archetypeLabel": "Mixed Bridge Solution",
+      "hotUpdateCapability": 0,
+      "hotUpdateCapabilityLabels": [],
+      "requires": 0,
+      "requirementLabels": [],
+      "metrics": 1,
+      "metricLabels": [
+        "Wall Clock"
+      ],
+      "modes": 7,
+      "supportedModes": [
+        "managed",
+        "native",
+        "interpreter"
+      ],
+      "warmupCount": 1,
+      "iterationCount": 6,
+      "invocationCount": 1000,
+      "defaultGoalId": "perf.release",
+      "defaultMatrixId": "windows-managed-perf",
+      "goalIds": [
+        "correctness.dev",
+        "perf.release"
+      ],
+      "matrixIds": [
+        "windows-managed-output",
+        "windows-archetype-mixed-bridge-managed-output",
+        "windows-managed-perf",
+        "windows-native-perf",
+        "windows-interpreter-perf"
+      ],
+      "deviceId": "legacy-host",
+      "deviceName": "Legacy Host",
+      "platformId": "windows-x64",
+      "recordedModes": [
+        "managed",
+        "native",
+        "interpreter"
+      ],
+      "missingModes": [],
+      "staleModes": [],
+      "unsupportedModes": [],
+      "modeStatus": {
+        "native": {
+          "mode": "native",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 1,
+            "meanDurationMs": 6.404,
+            "minDurationMs": 6.404,
+            "maxDurationMs": 6.404,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.404,
+            "minElapsedMilliseconds": 6.404,
+            "maxElapsedMilliseconds": 6.404,
+            "meanOpsPerSecond": 936.9,
+            "minOpsPerSecond": 936.9,
+            "maxOpsPerSecond": 936.9
+          },
+          "recordedAt": "2026-04-13T20:46:05Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        },
+        "managed": {
+          "mode": "managed",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.832,
+            "minDurationMs": 6.827,
+            "maxDurationMs": 6.842,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.832,
+            "minElapsedMilliseconds": 6.827,
+            "maxElapsedMilliseconds": 6.842,
+            "meanOpsPerSecond": 878.148,
+            "minOpsPerSecond": 876.898,
+            "maxOpsPerSecond": 878.863
+          },
+          "recordedAt": "2026-04-13T20:45:42Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        },
+        "interpreter": {
+          "mode": "interpreter",
+          "status": "recorded",
+          "metrics": {
+            "sampleCount": 3,
+            "meanDurationMs": 6.987,
+            "minDurationMs": 6.902,
+            "maxDurationMs": 7.05,
+            "meanChecksum": 4394.0,
+            "minChecksum": 4394.0,
+            "maxChecksum": 4394.0,
+            "meanElapsedMilliseconds": 6.987,
+            "minElapsedMilliseconds": 6.902,
+            "maxElapsedMilliseconds": 7.05,
+            "meanOpsPerSecond": 858.783,
+            "minOpsPerSecond": 851.04,
+            "maxOpsPerSecond": 869.376
+          },
+          "recordedAt": "2026-04-13T20:46:12Z",
+          "gitCommit": "",
+          "reasonCode": "recorded",
+          "reasonLabel": "Benchmark record captured."
+        }
+      },
+      "sourceSubjectPath": "artifacts/subjects/MixedExecutionFeaturePack/runs/20260414-044608-windows-4ce3/matrices/windows-interpreter-perf/validations/perf/summary.json",
+      "lastRecordedAt": "2026-04-13T20:46:12Z",
+      "gitCommit": "",
+      "isStale": false,
+      "legacyCompatibilityClaim": true
+    }
+  ],
   "codegenStubs": [
     {
       "ownerSubjectId": "SolutionCorePack",

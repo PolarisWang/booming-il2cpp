@@ -9,7 +9,7 @@ class TestSubjectWorkersPerfOverrides(SubjectWorkersTestSupport):
         matrix_id = "windows-managed-perf"
         workload_entry = f"{subject_id}/Program::RunWorkload()"
         perf_project_path = (
-            f"subjects/{subject_id}/validation/perf/"
+            f"verification/catalog/owners/{subject_id}/support/perf/"
             f"{subject_id}.Subject.PerfHarness/{subject_id}.Subject.PerfHarness.csproj"
         )
         assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.dll")
@@ -44,24 +44,21 @@ class TestSubjectWorkersPerfOverrides(SubjectWorkersTestSupport):
                 json.dumps({"primaryAssemblyPath": assembly_path}),
                 encoding="utf-8",
             )
-            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
-            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
-            subject_manifest_path.write_text(
-                json.dumps(
-                    {
-                        "subjectId": subject_id,
-                        "validation": {
-                            "perf": {
-                                "kind": "perf",
-                                "project": perf_project_path,
-                                "driver": "csharp-perf-harness",
-                                "defaultVariant": "PROFILE",
-                                "harnessIterations": 7,
-                            }
-                        },
-                    }
-                ),
-                encoding="utf-8",
+            write_owner_manifest(
+                repo_root,
+                subject_id,
+                {
+                    "subjectId": subject_id,
+                    "validation": {
+                        "perf": {
+                            "kind": "perf",
+                            "project": perf_project_path,
+                            "driver": "csharp-perf-harness",
+                            "defaultVariant": "PROFILE",
+                            "harnessIterations": 7,
+                        }
+                    },
+                },
             )
 
             perf_result = {
@@ -123,7 +120,7 @@ class TestSubjectWorkersPerfOverrides(SubjectWorkersTestSupport):
         matrix_id = "windows-interpreter-perf"
         workload_entry = f"{subject_id}/Program::RunWorkload()"
         perf_project_path = (
-            f"subjects/{subject_id}/validation/perf/"
+            f"verification/catalog/owners/{subject_id}/support/perf/"
             f"{subject_id}.Subject.PerfHarness/{subject_id}.Subject.PerfHarness.csproj"
         )
         assembly_path = subject_run_path(subject_id, run_id, "analysis", "host-input", f"{subject_id}.dll")
@@ -158,24 +155,21 @@ class TestSubjectWorkersPerfOverrides(SubjectWorkersTestSupport):
                 json.dumps({"primaryAssemblyPath": assembly_path}),
                 encoding="utf-8",
             )
-            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
-            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
-            subject_manifest_path.write_text(
-                json.dumps(
-                    {
-                        "subjectId": subject_id,
-                        "validation": {
-                            "perf": {
-                                "kind": "perf",
-                                "project": perf_project_path,
-                                "driver": "interpreter-runtime-perf",
-                                "defaultVariant": "PROFILE",
-                                "harnessIterations": 9,
-                            }
-                        },
-                    }
-                ),
-                encoding="utf-8",
+            write_owner_manifest(
+                repo_root,
+                subject_id,
+                {
+                    "subjectId": subject_id,
+                    "validation": {
+                        "perf": {
+                            "kind": "perf",
+                            "project": perf_project_path,
+                            "driver": "interpreter-runtime-perf",
+                            "defaultVariant": "PROFILE",
+                            "harnessIterations": 9,
+                        }
+                    },
+                },
             )
 
             perf_result = {

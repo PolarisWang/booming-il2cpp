@@ -502,6 +502,21 @@ internal static class Program
         return ComposeAsyncFlagDirectValue();
     }
 
+    private static bool ComposeForwardedForwardedAsyncFlagDirectValue()
+    {
+        return ComposeForwardedAsyncFlagDirectValue();
+    }
+
+    private static bool ComposeForwardedForwardedForwardedAsyncFlagDirectValue()
+    {
+        return ComposeForwardedForwardedAsyncFlagDirectValue();
+    }
+
+    private static bool ComposeForwardedForwardedForwardedForwardedAsyncFlagDirectValue()
+    {
+        return ComposeForwardedForwardedForwardedAsyncFlagDirectValue();
+    }
+
     private static bool ComposeAsyncComputedFlagValue()
     {
         return ComputeAsyncFlag(true).GetAwaiter().GetResult();
@@ -522,6 +537,16 @@ internal static class Program
         return ComposeForwardedRelayedAsyncFlagDirectValue();
     }
 
+    private static bool ComposeForwardedForwardedForwardedRelayedAsyncFlagDirectValue()
+    {
+        return ComposeForwardedForwardedRelayedAsyncFlagDirectValue();
+    }
+
+    private static bool ComposeForwardedForwardedForwardedForwardedRelayedAsyncFlagDirectValue()
+    {
+        return ComposeForwardedForwardedForwardedRelayedAsyncFlagDirectValue();
+    }
+
     private static bool ComposeRelayedAsyncComputedFlagValue()
     {
         return RelayAsyncComputedFlag(true).GetAwaiter().GetResult();
@@ -537,9 +562,44 @@ internal static class Program
         return ComposeForwardedRelayedAsyncComputedFlagValue();
     }
 
+    private static bool ComposeForwardedForwardedForwardedRelayedAsyncComputedFlagValue()
+    {
+        return ComposeForwardedForwardedRelayedAsyncComputedFlagValue();
+    }
+
+    private static bool ComposeForwardedForwardedForwardedForwardedRelayedAsyncComputedFlagValue()
+    {
+        return ComposeForwardedForwardedForwardedRelayedAsyncComputedFlagValue();
+    }
+
     private static bool ComposeForwardedAsyncComputedFlagValue()
     {
         return ComposeAsyncComputedFlagValue();
+    }
+
+    private static bool ComposeForwardedForwardedAsyncComputedFlagValue()
+    {
+        return ComposeForwardedAsyncComputedFlagValue();
+    }
+
+    private static bool ComposeForwardedForwardedForwardedAsyncComputedFlagValue()
+    {
+        return ComposeForwardedForwardedAsyncComputedFlagValue();
+    }
+
+    private static bool ComposeForwardedForwardedForwardedForwardedAsyncComputedFlagValue()
+    {
+        return ComposeForwardedForwardedForwardedAsyncComputedFlagValue();
+    }
+
+    private static bool ForwardBoolValue(bool value)
+    {
+        return value;
+    }
+
+    private static bool ComposeBoolIdentityForwardedAsyncComputedFlagValue()
+    {
+        return ForwardBoolValue(ComposeAsyncComputedFlagValue());
     }
 
     private static async Task<string> BuildAsyncLiteralMessage()

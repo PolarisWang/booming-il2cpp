@@ -6,9 +6,15 @@ import subprocess
 import unittest
 from pathlib import Path
 
+from tests.support import (
+    HOT_UPDATE_HOST_PACK_BENCHMARKS_ROOT,
+    HOT_UPDATE_HOST_PACK_HOST_PROJECT_PATH,
+    HOT_UPDATE_HOST_PACK_PROOFS_ROOT,
+)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase9-hot-update-e2e"
+TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "hot-update-e2e"
 
 HOT_UPDATE_ROOT = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.HotUpdate"
 HOT_UPDATE_PROJECT_PATH = HOT_UPDATE_ROOT / "Chaos.IL2CPP.HotUpdate.csproj"
@@ -35,10 +41,9 @@ ROOT_CMAKE_PATH = REPO_ROOT / "CMakeLists.txt"
 METHOD_REPLACEMENT_SMOKE_CMAKE_PATH = REPO_ROOT / "tests" / "contracts" / "native" / "hot-update" / "CMakeLists.txt"
 METHOD_REPLACEMENT_SMOKE_SOURCE_PATH = REPO_ROOT / "tests" / "contracts" / "native" / "hot-update" / "method_replacement_smoke.cpp"
 
-HOT_UPDATE_SKELETON_ROOT = REPO_ROOT / "subjects" / "HotUpdateHostPack"
-HOT_UPDATE_SKELETON_PROJECT_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "HotUpdateHostPack.csproj"
-HOT_UPDATE_SKELETON_PROGRAM_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "Host" / "Proofs" / "HotUpdateSkeletonProofEntry.cs"
 HOT_UPDATE_FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects"
+HOT_UPDATE_SKELETON_PROJECT_PATH = HOT_UPDATE_HOST_PACK_HOST_PROJECT_PATH
+HOT_UPDATE_SKELETON_PROGRAM_PATH = HOT_UPDATE_HOST_PACK_PROOFS_ROOT / "HotUpdateSkeletonProofEntry.cs"
 
 METHOD_REPLACEMENT_PROOF_ROOT = HOT_UPDATE_FIXTURE_ROOT / "MethodReplacementProof"
 METHOD_REPLACEMENT_PROOF_PROJECT_PATH = METHOD_REPLACEMENT_PROOF_ROOT / "source" / "MethodReplacementProof.csproj"
@@ -55,11 +60,11 @@ BRIDGE_ROUNDTRIP_PROOF_ROOT = HOT_UPDATE_FIXTURE_ROOT / "BridgeRoundtripProof"
 BRIDGE_ROUNDTRIP_PROOF_PROJECT_PATH = BRIDGE_ROUNDTRIP_PROOF_ROOT / "source" / "BridgeRoundtripProof.csproj"
 BRIDGE_ROUNDTRIP_PROOF_PROGRAM_PATH = BRIDGE_ROUNDTRIP_PROOF_ROOT / "source" / "Program.cs"
 
-HOT_UPDATE_HOST_PROJECT_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "HotUpdateHostPack.csproj"
-PATCH_CALLBACK_PROOF_SOURCE_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "Host" / "Proofs" / "PatchCallbackFlowProofEntry.cs"
-BENCH_LOAD_SOURCE_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateLoadBenchmark.cs"
-BENCH_DISPATCH_SOURCE_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateDispatchBenchmark.cs"
-BENCH_ROUNDTRIP_SOURCE_PATH = HOT_UPDATE_SKELETON_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateRoundtripBenchmark.cs"
+HOT_UPDATE_HOST_PROJECT_PATH = HOT_UPDATE_HOST_PACK_HOST_PROJECT_PATH
+PATCH_CALLBACK_PROOF_SOURCE_PATH = HOT_UPDATE_HOST_PACK_PROOFS_ROOT / "PatchCallbackFlowProofEntry.cs"
+BENCH_LOAD_SOURCE_PATH = HOT_UPDATE_HOST_PACK_BENCHMARKS_ROOT / "HotUpdateLoadBenchmark.cs"
+BENCH_DISPATCH_SOURCE_PATH = HOT_UPDATE_HOST_PACK_BENCHMARKS_ROOT / "HotUpdateDispatchBenchmark.cs"
+BENCH_ROUNDTRIP_SOURCE_PATH = HOT_UPDATE_HOST_PACK_BENCHMARKS_ROOT / "HotUpdateRoundtripBenchmark.cs"
 
 
 def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -85,7 +90,7 @@ def parse_last_json_line(output: str) -> dict[str, object]:
     return json.loads(lines[-1])
 
 
-class Phase9HotUpdateE2ETests(unittest.TestCase):
+class HotUpdateE2ETests(unittest.TestCase):
     def test_runtime_manager_and_bridge_surface_support_generic_hot_update_e2e(self) -> None:
         self.assertTrue(HOT_UPDATE_PROJECT_PATH.is_file(), msg=f"missing hot update project: {HOT_UPDATE_PROJECT_PATH}")
         self.assertTrue(RUNTIME_MANAGER_PATH.is_file(), msg=f"missing runtime manager: {RUNTIME_MANAGER_PATH}")

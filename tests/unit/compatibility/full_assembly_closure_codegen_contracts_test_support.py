@@ -33,6 +33,22 @@ RUNTIME_SKELETON_STATIC_INT_FORWARDER_TEMPLATE_PATH = (
     / "Templates"
     / "NativeReferenceProof.RuntimeSkeleton.StaticIntForwarderStub.cpp.scriban"
 )
+RUNTIME_SKELETON_STATIC_BOOL_IDENTITY_FORWARDER_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.StaticBoolIdentityForwarderStub.cpp.scriban"
+)
+RUNTIME_SKELETON_STATIC_BOOL_PRODUCER_FORWARDER_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.StaticBoolProducerForwarderStub.cpp.scriban"
+)
 RUNTIME_SKELETON_STATIC_STRING_RETURN_FORWARDER_TEMPLATE_PATH = (
     REPO_ROOT
     / "src"
@@ -40,6 +56,38 @@ RUNTIME_SKELETON_STATIC_STRING_RETURN_FORWARDER_TEMPLATE_PATH = (
     / "Chaos.IL2CPP.CodeGen"
     / "Templates"
     / "NativeReferenceProof.RuntimeSkeleton.StaticStringReturnForwarderStub.cpp.scriban"
+)
+RUNTIME_SKELETON_STATIC_PRIMITIVE_CONVERT_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.StaticPrimitiveConvertStub.cpp.scriban"
+)
+RUNTIME_SKELETON_STATIC_CHECKED_BYTE_CONVERT_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.StaticCheckedByteConvertStub.cpp.scriban"
+)
+RUNTIME_SKELETON_STATIC_BYTE_FORWARDER_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.StaticByteForwarderStub.cpp.scriban"
+)
+RUNTIME_SKELETON_STATIC_EXCEPTION_THROW_STRING_PRODUCER_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.StaticExceptionThrowStringProducerStub.cpp.scriban"
 )
 
 class FullAssemblyClosureCodegenContractTestSupport(unittest.TestCase):

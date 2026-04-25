@@ -27,7 +27,9 @@ class TestSubjectManifestSchemaQueries(SubjectManifestSchemaTestSupport):
             self.assertEqual(subject_id, manifest["subjectId"])
             self.assertEqual(subject_id, manifest_path.parent.name)
             self.assertEqual("dotnet-project", manifest["source"]["type"])
-            self.assertTrue(str(manifest["source"]["path"]).startswith(f"subjects/{source_owner}/source/"))
+            self.assertTrue(
+                str(manifest["source"]["path"]).startswith(f"verification/catalog/owners/{source_owner}/")
+            )
             self.assertTrue(manifest["displayName"])
             self.assertGreater(len(list(manifest.get("environmentMatrices") or [])), 0)
             self.assertTrue(str(manifest.get("defaultValidationProfile") or ""))
@@ -47,18 +49,19 @@ class TestSubjectManifestSchemaQueries(SubjectManifestSchemaTestSupport):
                 project_path = str(validation_spec.get("project") or "")
                 if project_path:
                     self.assertTrue(
-                        project_path.startswith(f"subjects/{subject_id}/validation/")
+                        project_path.startswith(f"verification/catalog/owners/{subject_id}/")
+                        or project_path.startswith(f"verification/evidence/owners/{subject_id}/")
                         or project_path.startswith("src/tools/Chaos.IL2CPP.Tools.")
                     )
                     self.assertTrue((REPO_ROOT / project_path).is_file())
 
             for label, expected_path in expected.items():
                 self.assertTrue(label)
-                self.assertTrue(str(expected_path).startswith(f"subjects/{subject_id}/expected/"))
+                self.assertTrue(str(expected_path).startswith(f"verification/evidence/owners/{subject_id}/expected/"))
 
             for label, baseline_path in baselines.items():
                 self.assertTrue(label)
-                self.assertTrue(str(baseline_path).startswith(f"subjects/{subject_id}/baselines/"))
+                self.assertTrue(str(baseline_path).startswith(f"verification/catalog/owners/{subject_id}/"))
 
     def test_query_finds_trace_capable_retained_solution_subject_without_subject_name_coupling(self) -> None:
         subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_query_trace")
@@ -171,11 +174,8 @@ class TestSubjectManifestSchemaQueries(SubjectManifestSchemaTestSupport):
         self.assertEqual("generated-native", capabilities["executablePlan"])
         self.assertEqual("native-executable", capabilities["engineeringProfile"])
         self.assertEqual("require", capabilities["testDeclarationMode"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
-        self.assertEqual(
-            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
-            manifest["source"]["primaryProjectPath"],
-        )
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, manifest["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_PROJECT, manifest["source"]["primaryProjectPath"])
         self.assertEqual("CoreRuntimeFeatures/ProofEntry::Run()", manifest["source"]["entry"])
         self.assertEqual("CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
         self.assertEqual(SOLUTION_CORE_PACK_PIPELINE_IDS, pipeline_ids)
@@ -187,6 +187,13 @@ class TestSubjectManifestSchemaQueries(SubjectManifestSchemaTestSupport):
             manifest,
             "windows-archetype-simple-lib-managed-output",
             "GoldenSimpleLib.App/Program::Main()",
+        )
+        assert_matrix_source_entry(
+            self,
+            subjects_module,
+            manifest,
+            "windows-managed-proof",
+            "CoreRuntimeFeatures/ProofEntry::Run()",
         )
         assert_matrix_source_entry(
             self,
@@ -237,5 +244,7 @@ class TestSubjectManifestSchemaQueries(SubjectManifestSchemaTestSupport):
             self.assertEqual("dotnet-solution", capabilities["sourceModel"])
             self.assertEqual("require", capabilities["testDeclarationMode"])
             self.assertIn("perf-profile", dict(manifest.get("validationProfiles") or {}))
-            self.assertTrue(str(manifest["source"]["path"]).startswith(f"subjects/{record['subjectId']}/source/"))
+            self.assertTrue(
+                str(manifest["source"]["path"]).startswith(f"verification/catalog/owners/{record['subjectId']}/")
+            )
             self.assertTrue(str(manifest.get("workloadEntry") or "").endswith("::RunWorkload()"))

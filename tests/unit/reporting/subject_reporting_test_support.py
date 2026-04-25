@@ -6,7 +6,7 @@ import unittest
 import uuid
 from pathlib import Path
 
-from tests.support import load_module, write_json
+from tests.support import SOLUTION_CORE_PACK_HOST_SOLUTION_PATH, load_module, write_json
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SUBJECT_REPORTING_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_reporting.py"

@@ -15,9 +15,9 @@ class TestSolutionCorePackPlannerArchetypes(SolutionCorePackPlannerTestSupport):
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-archetype-simple-lib-managed-output", plan["selection"]["matrixId"])
         self.assertEqual("managed-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/SimpleLibrarySolution/App/GoldenSimpleLib.App.csproj",
+            solution_core_pack_scenario_project_path("SimpleLibrarySolution", "GoldenSimpleLib.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenSimpleLib.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -35,9 +35,9 @@ class TestSolutionCorePackPlannerArchetypes(SolutionCorePackPlannerTestSupport):
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-archetype-multi-project-managed-output", plan["selection"]["matrixId"])
         self.assertEqual("managed-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/MultiProjectSolution/App/GoldenMultiProject.App.csproj",
+            solution_core_pack_scenario_project_path("MultiProjectSolution", "GoldenMultiProject.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenMultiProject.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -55,9 +55,9 @@ class TestSolutionCorePackPlannerArchetypes(SolutionCorePackPlannerTestSupport):
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-archetype-package-reference-managed-output", plan["selection"]["matrixId"])
         self.assertEqual("managed-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/PackageReferenceSolution/App/GoldenWithPackage.App.csproj",
+            solution_core_pack_scenario_project_path("PackageReferenceSolution", "GoldenWithPackage.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenWithPackage.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -75,9 +75,9 @@ class TestSolutionCorePackPlannerArchetypes(SolutionCorePackPlannerTestSupport):
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-archetype-reference-assembly-managed-output", plan["selection"]["matrixId"])
         self.assertEqual("managed-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/ReferenceAssemblySolution/App/GoldenReferenceAssembly.App.csproj",
+            solution_core_pack_scenario_project_path("ReferenceAssemblySolution", "GoldenReferenceAssembly.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenReferenceAssembly.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -95,9 +95,9 @@ class TestSolutionCorePackPlannerArchetypes(SolutionCorePackPlannerTestSupport):
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-archetype-corelib-reference-managed-output", plan["selection"]["matrixId"])
         self.assertEqual("managed-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/App/GoldenCoreLibReference.App.csproj",
+            solution_core_pack_scenario_project_path("CoreLibReferenceSolution", "GoldenCoreLibReference.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenCoreLibReference.App/Program::Main()", plan["selection"]["source"]["entry"])
@@ -115,9 +115,9 @@ class TestSolutionCorePackPlannerArchetypes(SolutionCorePackPlannerTestSupport):
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-archetype-mixed-reference-closure-managed-output", plan["selection"]["matrixId"])
         self.assertEqual("managed-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/MixedReferenceClosureSolution/App/GoldenMixedReference.App.csproj",
+            solution_core_pack_scenario_project_path("MixedReferenceClosureSolution", "GoldenMixedReference.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenMixedReference.App/Program::Main()", plan["selection"]["source"]["entry"])

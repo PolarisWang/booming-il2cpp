@@ -1812,6 +1812,10 @@ int32_t ExecuteRuntimeSkeletonArrayClearReferenceArray(
 {{ stub_declaration }}
 {{ end ~}}
 
+{{~ for external_stub_declaration in external_method_stub_declarations ~}}
+{{ external_stub_declaration }}
+{{ end ~}}
+
 {{~ for stub_definition in method_stub_definitions ~}}
 {{ stub_definition }}
 
