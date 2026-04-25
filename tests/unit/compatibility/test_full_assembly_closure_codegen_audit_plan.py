@@ -609,6 +609,199 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
         finally:
             shutil.rmtree(fixture_root, ignore_errors=True)
 
+    def test_emit_native_reference_supports_checked_char_runtime_skeleton_methods(self) -> None:
+        fixture_root = TEST_OUTPUT_ROOT / f"FixtureCheckedCharConvertLibrary-{uuid.uuid4().hex}"
+        project_root = fixture_root / "FixtureCheckedCharConvertLibrary"
+        project_path = project_root / "FixtureCheckedCharConvertLibrary.csproj"
+        source_path = project_root / "CheckedCharConvertOps.cs"
+        dll_path = project_root / "bin" / "Release" / "net8.0" / "FixtureCheckedCharConvertLibrary.dll"
+        closure_root = fixture_root / "closure"
+        emit_root = fixture_root / "emit-native-reference"
+
+        try:
+            project_root.mkdir(parents=True, exist_ok=False)
+            project_path.write_text(
+                (
+                    '<Project Sdk="Microsoft.NET.Sdk">\n'
+                    "  <PropertyGroup>\n"
+                    "    <TargetFramework>net8.0</TargetFramework>\n"
+                    "    <ImplicitUsings>disable</ImplicitUsings>\n"
+                    "    <Nullable>disable</Nullable>\n"
+                    "  </PropertyGroup>\n"
+                    "</Project>\n"
+                ),
+                encoding="utf-8",
+            )
+            source_path.write_text(
+                (
+                    "using System;\n\n"
+                    "namespace FixtureCheckedCharConvertLibrary;\n\n"
+                    "internal static class ResourceShim\n"
+                    "{\n"
+                    "    public static string GetResourceString(string key)\n"
+                    "    {\n"
+                    "        return key;\n"
+                    "    }\n\n"
+                    "    public static string get_Overflow_Char()\n"
+                    "    {\n"
+                    '        return GetResourceString("Overflow_Char");\n'
+                    "    }\n"
+                    "}\n\n"
+                    "public static class CheckedCharConvertOps\n"
+                    "{\n"
+                    "    public static void ThrowCharOverflowException()\n"
+                    "    {\n"
+                    "        throw new OverflowException(ResourceShim.get_Overflow_Char());\n"
+                    "    }\n\n"
+                    "    public static char ToChar(sbyte value)\n"
+                    "    {\n"
+                    "        if (value < 0)\n"
+                    "        {\n"
+                    "            ThrowCharOverflowException();\n"
+                    "        }\n\n"
+                    "        return (char)value;\n"
+                    "    }\n\n"
+                    "    public static char ToChar(short value)\n"
+                    "    {\n"
+                    "        if (value < 0)\n"
+                    "        {\n"
+                    "            ThrowCharOverflowException();\n"
+                    "        }\n\n"
+                    "        return (char)value;\n"
+                    "    }\n\n"
+                    "    public static char ToChar(ushort value)\n"
+                    "    {\n"
+                    "        return (char)value;\n"
+                    "    }\n\n"
+                    "    public static char ToChar(uint value)\n"
+                    "    {\n"
+                    "        if (value > char.MaxValue)\n"
+                    "        {\n"
+                    "            ThrowCharOverflowException();\n"
+                    "        }\n\n"
+                    "        return (char)value;\n"
+                    "    }\n\n"
+                    "    public static char ToChar(int value)\n"
+                    "    {\n"
+                    "        return ToChar((uint)value);\n"
+                    "    }\n\n"
+                    "    public static char ToChar(ulong value)\n"
+                    "    {\n"
+                    "        if (value > char.MaxValue)\n"
+                    "        {\n"
+                    "            ThrowCharOverflowException();\n"
+                    "        }\n\n"
+                    "        return (char)value;\n"
+                    "    }\n\n"
+                    "    public static char ToChar(long value)\n"
+                    "    {\n"
+                    "        return ToChar((ulong)value);\n"
+                    "    }\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            tooling_module = load_module(TOOLING_MODULE_PATH, f"chaos_checked_char_codegen_audit_{uuid.uuid4().hex}")
+            driver_intermediate_root = tooling_module.allocate_dotnet_intermediate_dir("Chaos.IL2CPP.Driver", host_platform="windows")
+            self.assertIsNotNone(driver_intermediate_root)
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(project_path),
+                    "-c",
+                    "Release",
+                ],
+                cwd=REPO_ROOT,
+            )
+            self.assertTrue(dll_path.is_file(), msg=f"missing checked char convert library dll: {dll_path}")
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(DRIVER_PROJECT_PATH),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    f"-p:ChaosTempIntermediateRoot={Path(driver_intermediate_root).as_posix()}/",
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    str(dll_path),
+                    str(closure_root),
+                    "--full-assembly-closure",
+                ],
+                cwd=REPO_ROOT,
+            )
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    "emit-native-reference",
+                    str(closure_root),
+                    str(emit_root),
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            generated_page = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.page-0001.cpp"
+            ).read_text(encoding="utf-8").replace("\r\n", "\n")
+            coverage_report = load_json(
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.coverage.json"
+            )
+
+            self.assertGreaterEqual(coverage_report["requestedMethodCount"], 10)
+            self.assertEqual(coverage_report["requestedMethodCount"], coverage_report["emittedMethodCount"])
+            self.assertEqual(0, coverage_report["uncoveredMethodCount"])
+            self.assertEqual([], coverage_report["uncoveredMethodSubjectIds"])
+            self.assertIn("std::int8_t value;", generated_page)
+            self.assertIn("std::int16_t value;", generated_page)
+            self.assertIn("std::int32_t value;", generated_page)
+            self.assertIn("std::int64_t value;", generated_page)
+            self.assertIn("std::uint16_t value;", generated_page)
+            self.assertIn("std::uint32_t value;", generated_page)
+            self.assertIn("std::uint64_t value;", generated_page)
+            self.assertIn("std::uint16_t* return_value;", generated_page)
+            self.assertIn(
+                "*request->return_value = static_cast<std::uint16_t>(request->value);",
+                generated_page,
+            )
+            self.assertIn(
+                "request->value < static_cast<std::int8_t>(0)",
+                generated_page,
+            )
+            self.assertIn(
+                "request->value < static_cast<std::int16_t>(0)",
+                generated_page,
+            )
+            self.assertIn(
+                "request->value > static_cast<std::uint32_t>(65535)",
+                generated_page,
+            )
+            self.assertIn(
+                "request->value > static_cast<std::uint64_t>(65535)",
+                generated_page,
+            )
+            self.assertIn('"Overflow_Char"', generated_page)
+            self.assertIn("return NativeReferenceStub_Page0001_Item", generated_page)
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
+
     def test_emit_native_reference_supports_overflow_throw_runtime_skeleton_methods(self) -> None:
         fixture_root = TEST_OUTPUT_ROOT / f"FixtureOverflowThrowLibrary-{uuid.uuid4().hex}"
         project_root = fixture_root / "FixtureOverflowThrowLibrary"

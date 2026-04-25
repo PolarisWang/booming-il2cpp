@@ -1,7 +1,7 @@
 struct {{ stub_name }}_ManagedArgs
 {
     {{ input_cpp_type }} value;
-    std::uint8_t* return_value;
+    {{ output_cpp_type }}* return_value;
 };
 
 int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(

@@ -160,6 +160,7 @@ public sealed class NativeReferenceProofEmitter
         TryBuildRuntimeSkeletonConvertBoolProducerForwarderHandler,
         TryBuildRuntimeSkeletonConvertPrimitiveHandler,
         TryBuildRuntimeSkeletonConvertCheckedByteHandler,
+        TryBuildRuntimeSkeletonConvertCheckedCharHandler,
         TryBuildRuntimeSkeletonConvertByteForwarderHandler,
     ];
 
@@ -1827,6 +1828,22 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertCheckedCharHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticCheckedCharConvertStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertByteForwarderHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -1836,6 +1853,16 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 buildContext.MethodStubNamesBySubjectId,
                 buildContext.StubName,
                 out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        if (TryBuildAssemblyBoundStaticCharReturnForwarderStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out stubDefinition))
         {
             return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
         }
@@ -4881,6 +4908,39 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         string stubName,
         out string stub)
     {
+        return TryBuildAssemblyBoundStaticCheckedPrimitiveConvertStub(
+            subjectId,
+            methodsBySubjectId,
+            methodStubNamesBySubjectId,
+            stubName,
+            "System.Byte",
+            out stub);
+    }
+
+    private static bool TryBuildAssemblyBoundStaticCheckedCharConvertStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        IReadOnlyDictionary<string, string> methodStubNamesBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        return TryBuildAssemblyBoundStaticCheckedPrimitiveConvertStub(
+            subjectId,
+            methodsBySubjectId,
+            methodStubNamesBySubjectId,
+            stubName,
+            "System.Char",
+            out stub);
+    }
+
+    private static bool TryBuildAssemblyBoundStaticCheckedPrimitiveConvertStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        IReadOnlyDictionary<string, string> methodStubNamesBySubjectId,
+        string stubName,
+        string outputManagedType,
+        out string stub)
+    {
         stub = string.Empty;
         if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
         {
@@ -4890,19 +4950,47 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
             !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
             method.Parameters.Count != 1 ||
-            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Byte", StringComparison.Ordinal))
+            !string.Equals(GetMethodReturnType(method.SubjectId), outputManagedType, StringComparison.Ordinal))
         {
             return false;
         }
 
         var instructions = GetSingleBlockInstructions(method);
-        if (!TryResolveRuntimeSkeletonCheckedByteConvertShape(
+        if (!TryResolveRuntimeSkeletonPrimitiveConvertOutputCppType(outputManagedType, out var outputCppType))
+        {
+            return false;
+        }
+
+        string inputCppType;
+        string overflowConditionExpression;
+        string throwSubjectId;
+        var resolvedShape = false;
+        if (string.Equals(outputManagedType, "System.Byte", StringComparison.Ordinal))
+        {
+            resolvedShape = TryResolveRuntimeSkeletonCheckedByteConvertShape(
                 method.SubjectId,
                 method.Parameters[0].Type,
                 instructions,
-                out var inputCppType,
-                out var overflowConditionExpression,
-                out var throwSubjectId))
+                out inputCppType,
+                out overflowConditionExpression,
+                out throwSubjectId);
+        }
+        else if (string.Equals(outputManagedType, "System.Char", StringComparison.Ordinal))
+        {
+            resolvedShape = TryResolveRuntimeSkeletonCheckedCharConvertShape(
+                method.SubjectId,
+                method.Parameters[0].Type,
+                instructions,
+                out inputCppType,
+                out overflowConditionExpression,
+                out throwSubjectId);
+        }
+        else
+        {
+            return false;
+        }
+
+        if (!resolvedShape)
         {
             return false;
         }
@@ -4916,7 +5004,9 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         {
             ["stub_name"] = stubName,
             ["input_cpp_type"] = inputCppType,
+            ["output_cpp_type"] = outputCppType,
             ["overflow_condition_expression"] = overflowConditionExpression,
+            ["converted_value_expression"] = $"static_cast<{outputCppType}>(request->value)",
             ["throw_stub_name"] = throwStubName,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
@@ -4932,6 +5022,39 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         string stubName,
         out string stub)
     {
+        return TryBuildAssemblyBoundStaticPrimitiveReturnForwarderStub(
+            subjectId,
+            methodsBySubjectId,
+            methodStubNamesBySubjectId,
+            stubName,
+            "System.Byte",
+            out stub);
+    }
+
+    private static bool TryBuildAssemblyBoundStaticCharReturnForwarderStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        IReadOnlyDictionary<string, string> methodStubNamesBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        return TryBuildAssemblyBoundStaticPrimitiveReturnForwarderStub(
+            subjectId,
+            methodsBySubjectId,
+            methodStubNamesBySubjectId,
+            stubName,
+            "System.Char",
+            out stub);
+    }
+
+    private static bool TryBuildAssemblyBoundStaticPrimitiveReturnForwarderStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        IReadOnlyDictionary<string, string> methodStubNamesBySubjectId,
+        string stubName,
+        string outputManagedType,
+        out string stub)
+    {
         stub = string.Empty;
         if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
         {
@@ -4940,7 +5063,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
 
         if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
             !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
-            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Byte", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), outputManagedType, StringComparison.Ordinal) ||
             method.Parameters.Count != 1)
         {
             return false;
@@ -4980,10 +5103,16 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             return false;
         }
 
+        if (!TryResolveRuntimeSkeletonPrimitiveConvertOutputCppType(outputManagedType, out var outputCppType))
+        {
+            return false;
+        }
+
         var model = new ScriptObject
         {
             ["stub_name"] = stubName,
             ["input_cpp_type"] = inputCppType,
+            ["output_cpp_type"] = outputCppType,
             ["target_stub_name"] = targetStubName,
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
