@@ -1,7 +1,7 @@
 struct {{ stub_name }}_ManagedArgs
 {
     {{ input_cpp_type }} value;
-    std::uint8_t* return_value;
+    {{ output_cpp_type }}* return_value;
 };
 
 int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
@@ -30,6 +30,6 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
             thread,
             nullptr);
     }
-    *request->return_value = static_cast<std::uint8_t>(request->value);
+    *request->return_value = {{ converted_value_expression }};
     return CHAOS_BRIDGE_STATUS_OK;
 }
