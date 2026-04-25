@@ -21,7 +21,7 @@ class TestSubjectCommandDeclaredBenchmark(SubjectCommandTestSupport):
             source_entry=source_entry,
             workload_entry=workload_entry,
             default_goal_id="perf.release",
-            matrix_id="windows-native-perf",
+            matrix_id="workspace-benchmark-matrix",
         )
         plan = make_subject_plan(
             subject_id=subject_id,

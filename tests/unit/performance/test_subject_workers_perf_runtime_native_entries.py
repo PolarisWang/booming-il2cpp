@@ -47,22 +47,19 @@ class TestSubjectWorkersPerfRuntimeNativeEntries(SubjectWorkersPerfTestSupport):
 
         repo_root = self._make_repo_root("native-runtime-perf-entry-index")
         try:
-            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
-            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
-            subject_manifest_path.write_text(
-                json.dumps(
-                    {
-                        "subjectId": subject_id,
-                        "validation": {
-                            "perf": {
-                                "kind": "perf",
-                                "driver": "native-runtime-perf",
-                                "defaultVariant": "PROFILE",
-                            }
-                        },
-                    }
-                ),
-                encoding="utf-8",
+            write_owner_manifest(
+                repo_root,
+                subject_id,
+                {
+                    "subjectId": subject_id,
+                    "validation": {
+                        "perf": {
+                            "kind": "perf",
+                            "driver": "native-runtime-perf",
+                            "defaultVariant": "PROFILE",
+                        }
+                    },
+                },
             )
             build_manifest_path = repo_root / request["upstream"]["build"]["manifestPath"]
             build_manifest_path.parent.mkdir(parents=True, exist_ok=True)
@@ -161,22 +158,19 @@ class TestSubjectWorkersPerfRuntimeNativeEntries(SubjectWorkersPerfTestSupport):
 
         repo_root = self._make_repo_root("native-runtime-perf-custom-metrics")
         try:
-            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
-            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
-            subject_manifest_path.write_text(
-                json.dumps(
-                    {
-                        "subjectId": subject_id,
-                        "validation": {
-                            "perf": {
-                                "kind": "perf",
-                                "driver": "native-runtime-perf",
-                                "defaultVariant": "PROFILE",
-                            }
-                        },
-                    }
-                ),
-                encoding="utf-8",
+            write_owner_manifest(
+                repo_root,
+                subject_id,
+                {
+                    "subjectId": subject_id,
+                    "validation": {
+                        "perf": {
+                            "kind": "perf",
+                            "driver": "native-runtime-perf",
+                            "defaultVariant": "PROFILE",
+                        }
+                    },
+                },
             )
             build_manifest_path = repo_root / request["upstream"]["build"]["manifestPath"]
             build_manifest_path.parent.mkdir(parents=True, exist_ok=True)

@@ -96,8 +96,7 @@ class TestSubjectPlannerDefaults(SubjectPlannerTestSupport):
     def test_planner_uses_perf_defaults_without_benchmark_name_coupling(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_perf_default")
         repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"perf-default-{uuid.uuid4().hex}"
-        manifest_path = repo_root / "subjects" / "FixtureBenchDefaults" / "subject.manifest.json"
-        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+        subject_id = "FixtureBenchDefaults"
         manifest = {
             "subjectId": "FixtureBenchDefaults",
             "displayName": "FixtureBenchDefaults",
@@ -107,7 +106,7 @@ class TestSubjectPlannerDefaults(SubjectPlannerTestSupport):
             "defaultValidationProfile": "perf-profile",
             "source": {
                 "type": "dotnet-project",
-                "path": "subjects/FixtureBenchDefaults/source/FixtureBenchDefaults.csproj",
+                "path": "verification/catalog/owners/FixtureBenchDefaults/support/host/FixtureBenchDefaults.csproj",
                 "entry": "FixtureBenchDefaults/Program::Main()",
             },
             "workloadEntry": "FixtureBenchDefaults/Program::RunWorkload()",
@@ -157,9 +156,9 @@ class TestSubjectPlannerDefaults(SubjectPlannerTestSupport):
         }
 
         try:
-            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            write_owner_manifest(repo_root, subject_id, manifest)
             run_id = "20260407-fixture-perf-default-001"
-            plan = planner_module.build_plan(repo_root, "FixtureBenchDefaults", run_id=run_id)
+            plan = planner_module.build_plan(repo_root, subject_id, run_id=run_id)
 
             self.assertEqual("FixtureBenchDefaults", plan["selection"]["subjectId"])
             self.assertEqual("perf.release", plan["selection"]["goalId"])
@@ -282,8 +281,7 @@ class TestSubjectPlannerDefaults(SubjectPlannerTestSupport):
     def test_planner_uses_goal_matching_perf_profile_when_goal_changes_perf_matrix(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_goal_matching_perf_profile")
         repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"goal-matching-perf-profile-{uuid.uuid4().hex}"
-        manifest_path = repo_root / "subjects" / "FixturePerfProfile" / "subject.manifest.json"
-        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+        subject_id = "FixturePerfProfile"
 
         manifest = {
             "subjectId": "FixturePerfProfile",
@@ -294,7 +292,7 @@ class TestSubjectPlannerDefaults(SubjectPlannerTestSupport):
             "defaultValidationProfile": "perf-dev",
             "source": {
                 "type": "dotnet-project",
-                "path": "subjects/FixturePerfProfile/source/FixturePerfProfile.csproj",
+                "path": "verification/catalog/owners/FixturePerfProfile/support/host/FixturePerfProfile.csproj",
                 "entry": "FixturePerfProfile/Program::Main()",
             },
             "workloadEntry": "FixturePerfProfile/Program::RunWorkload()",
@@ -365,11 +363,11 @@ class TestSubjectPlannerDefaults(SubjectPlannerTestSupport):
         }
 
         try:
-            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            write_owner_manifest(repo_root, subject_id, manifest)
 
             plan = planner_module.build_plan(
                 repo_root,
-                "FixturePerfProfile",
+                subject_id,
                 goal_id="perf.release",
                 run_id="20260413-fixture-goal-matching-perf-profile-001",
             )

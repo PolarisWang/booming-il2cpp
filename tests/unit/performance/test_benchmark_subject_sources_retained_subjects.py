@@ -3,25 +3,25 @@ from tests.unit.performance.benchmark_subject_sources_test_support import *
 
 class TestBenchmarkSubjectSourcesRetainedSubjects(BenchmarkSubjectSourceTestSupport):
     def test_hot_update_host_pack_declares_hot_update_unit_and_benchmark_slices(self) -> None:
-        manifest_path = HOT_UPDATE_HOST_PACK_ROOT / "subject.manifest.json"
-        project_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "HotUpdateHostPack.csproj"
-        program_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Program.cs"
-        skeleton_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Proofs" / "HotUpdateSkeletonProofEntry.cs"
-        patch_callback_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Proofs" / "PatchCallbackFlowProofEntry.cs"
-        replacement_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Proofs" / "MethodReplacementProofEntry.cs"
-        shared_proof_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Proofs" / "SharedContractProofEntry.cs"
-        shared_contract_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "SharedContracts" / "ContractIdentityWitness.cs"
-        rollback_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Proofs" / "VersionRollbackProofEntry.cs"
-        dispatch_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateDispatchBenchmark.cs"
-        load_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateLoadBenchmark.cs"
-        method_replacement_benchmark_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Benchmarks" / "MethodReplacementBenchmark.cs"
-        roundtrip_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Host" / "Benchmarks" / "HotUpdateRoundtripBenchmark.cs"
-        package_support_path = HOT_UPDATE_HOST_PACK_ROOT / "source" / "Patch" / "HotUpdatePackageSupport.cs"
+        manifest_path = HOT_UPDATE_HOST_PACK_OWNER_MANIFEST_PATH
+        project_path = HOT_UPDATE_HOST_PACK_ROOT / "support" / "host" / "HotUpdateHostPack.csproj"
+        program_path = HOT_UPDATE_HOST_PACK_ROOT / "support" / "host" / "Program.cs"
+        skeleton_path = HOT_UPDATE_HOST_PACK_ROOT / "proofs" / "HotUpdateSkeletonProofEntry.cs"
+        patch_callback_path = HOT_UPDATE_HOST_PACK_ROOT / "proofs" / "PatchCallbackFlowProofEntry.cs"
+        replacement_path = HOT_UPDATE_HOST_PACK_ROOT / "proofs" / "MethodReplacementProofEntry.cs"
+        shared_proof_path = HOT_UPDATE_HOST_PACK_ROOT / "proofs" / "SharedContractProofEntry.cs"
+        shared_contract_path = HOT_UPDATE_HOST_PACK_ROOT / "support" / "shared-contracts" / "ContractIdentityWitness.cs"
+        rollback_path = HOT_UPDATE_HOST_PACK_ROOT / "proofs" / "VersionRollbackProofEntry.cs"
+        dispatch_path = HOT_UPDATE_HOST_PACK_ROOT / "benchmarks" / "HotUpdateDispatchBenchmark.cs"
+        load_path = HOT_UPDATE_HOST_PACK_ROOT / "benchmarks" / "HotUpdateLoadBenchmark.cs"
+        method_replacement_benchmark_path = HOT_UPDATE_HOST_PACK_ROOT / "benchmarks" / "MethodReplacementBenchmark.cs"
+        roundtrip_path = HOT_UPDATE_HOST_PACK_ROOT / "benchmarks" / "HotUpdateRoundtripBenchmark.cs"
+        package_support_path = HOT_UPDATE_HOST_PACK_ROOT / "support" / "patch" / "HotUpdatePackageSupport.cs"
         full_project_solution_path = (
-            HOT_UPDATE_HOST_PACK_ROOT / "source" / "EngineeringScenarios" / "FullProjectHotUpdateSolution" / "FullProjectHotUpdateSolution.sln"
+            REPO_ROOT / "verification" / "catalog" / "scenarios" / "HotUpdateHostPack" / "FullProjectHotUpdateSolution" / "FullProjectHotUpdateSolution.sln"
         )
         full_project_host_path = (
-            HOT_UPDATE_HOST_PACK_ROOT / "source" / "EngineeringScenarios" / "FullProjectHotUpdateSolution" / "HostApp" / "Program.cs"
+            REPO_ROOT / "verification" / "catalog" / "scenarios" / "HotUpdateHostPack" / "FullProjectHotUpdateSolution" / "HostApp" / "Program.cs"
         )
 
         for path in [
@@ -61,8 +61,8 @@ class TestBenchmarkSubjectSourcesRetainedSubjects(BenchmarkSubjectSourceTestSupp
         full_project_host_source = full_project_host_path.read_text(encoding="utf-8")
 
         self.assertEqual("HotUpdateHostPack", manifest["subjectId"])
-        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.sln", manifest["source"]["path"])
-        self.assertEqual("subjects/HotUpdateHostPack/source/HotUpdateHostPack.csproj", manifest["source"]["primaryProjectPath"])
+        self.assertEqual("verification/catalog/owners/HotUpdateHostPack/support/host/HotUpdateHostPack.sln", manifest["source"]["path"])
+        self.assertEqual("verification/catalog/owners/HotUpdateHostPack/support/host/HotUpdateHostPack.csproj", manifest["source"]["primaryProjectPath"])
         self.assertEqual("require", manifest["testDeclarationMode"])
         self.assertEqual("HotUpdateHostPack/Program::Main()", manifest["source"]["entry"])
         self.assertEqual("HotUpdateHostPack/HotUpdateLoadBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
@@ -77,7 +77,7 @@ class TestBenchmarkSubjectSourcesRetainedSubjects(BenchmarkSubjectSourceTestSupp
             matrix for matrix in manifest["environmentMatrices"] if matrix["matrixId"] == "windows-archetype-full-project-managed-output"
         )
         self.assertEqual(
-            "subjects/HotUpdateHostPack/source/EngineeringScenarios/FullProjectHotUpdateSolution/HostApp/GoldenHotUpdateHost.App.csproj",
+            "verification/catalog/scenarios/HotUpdateHostPack/FullProjectHotUpdateSolution/HostApp/GoldenHotUpdateHost.App.csproj",
             archetype_matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("GoldenHotUpdateHost.App/Program::Main()", archetype_matrix["source"]["entry"])
@@ -159,25 +159,27 @@ class TestBenchmarkSubjectSourcesRetainedSubjects(BenchmarkSubjectSourceTestSupp
         self.assertIn("Assert.Throws<InvalidOperationException>", full_project_host_source)
 
     def test_mixed_execution_feature_pack_declares_mixed_interpreter_unit_and_benchmark_slices(self) -> None:
-        manifest_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "subject.manifest.json"
-        project_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "MixedExecutionFeaturePack.csproj"
-        program_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Host" / "Program.cs"
-        proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Proofs" / "MixedExecutionProofEntry.cs"
-        arithmetic_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Proofs" / "InterpreterArithmeticProofEntry.cs"
-        lowering_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Proofs" / "InterpreterLoweringProofEntry.cs"
-        generic_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Proofs" / "MixedGenericFlowProofEntry.cs"
-        exception_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Proofs" / "MixedExceptionFlowProofEntry.cs"
-        delegate_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Proofs" / "MixedDelegateFlowProofEntry.cs"
-        benchmark_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Benchmarks" / "MixedExecutionBenchmark.cs"
-        native_benchmark_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Benchmarks" / "MixedExecutionNativeBenchmark.cs"
-        support_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "Interpreter" / "InterpreterArithmeticSupport.cs"
+        manifest_path = MIXED_EXECUTION_FEATURE_PACK_OWNER_MANIFEST_PATH
+        project_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "support" / "host" / "MixedExecutionFeaturePack.csproj"
+        program_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "support" / "host" / "Program.cs"
+        proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "proofs" / "MixedExecutionProofEntry.cs"
+        arithmetic_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "proofs" / "InterpreterArithmeticProofEntry.cs"
+        lowering_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "proofs" / "InterpreterLoweringProofEntry.cs"
+        generic_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "proofs" / "MixedGenericFlowProofEntry.cs"
+        exception_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "proofs" / "MixedExceptionFlowProofEntry.cs"
+        delegate_proof_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "proofs" / "MixedDelegateFlowProofEntry.cs"
+        benchmark_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "benchmarks" / "MixedExecutionBenchmark.cs"
+        native_benchmark_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "benchmarks" / "MixedExecutionNativeBenchmark.cs"
+        support_path = MIXED_EXECUTION_FEATURE_PACK_ROOT / "support" / "interpreter" / "InterpreterArithmeticSupport.cs"
         support_solution_path = (
-            MIXED_EXECUTION_FEATURE_PACK_ROOT / "source" / "EngineeringScenarios" / "MixedBridgeSolution" / "MixedBridgeSolution.sln"
+            REPO_ROOT / "verification" / "catalog" / "scenarios" / "MixedExecutionFeaturePack" / "MixedBridgeSolution" / "MixedBridgeSolution.sln"
         )
         arithmetic_support_project_path = (
-            MIXED_EXECUTION_FEATURE_PACK_ROOT
-            / "source"
-            / "EngineeringScenarios"
+            REPO_ROOT
+            / "verification"
+            / "catalog"
+            / "scenarios"
+            / "MixedExecutionFeaturePack"
             / "MixedBridgeSolution"
             / "InterpreterArithmeticProof"
             / "InterpreterArithmeticProof.csproj"
@@ -215,8 +217,8 @@ class TestBenchmarkSubjectSourcesRetainedSubjects(BenchmarkSubjectSourceTestSupp
         support_source = support_path.read_text(encoding="utf-8")
 
         self.assertEqual("MixedExecutionFeaturePack", manifest["subjectId"])
-        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln", manifest["source"]["path"])
-        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", manifest["source"]["primaryProjectPath"])
+        self.assertEqual("verification/catalog/owners/MixedExecutionFeaturePack/support/host/MixedExecutionFeaturePack.sln", manifest["source"]["path"])
+        self.assertEqual("verification/catalog/owners/MixedExecutionFeaturePack/support/host/MixedExecutionFeaturePack.csproj", manifest["source"]["primaryProjectPath"])
         self.assertEqual("require", manifest["testDeclarationMode"])
         self.assertEqual("MixedExecutionFeaturePack/MixedExecutionNativeBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
         self.assertEqual("dotnet-solution", manifest["sourceModel"])
@@ -226,7 +228,7 @@ class TestBenchmarkSubjectSourcesRetainedSubjects(BenchmarkSubjectSourceTestSupp
             matrix for matrix in manifest["environmentMatrices"] if matrix["matrixId"] == "windows-archetype-mixed-bridge-managed-output"
         )
         self.assertEqual(
-            "subjects/MixedExecutionFeaturePack/source/EngineeringScenarios/MixedBridgeSolution/InterpreterArithmeticProof/InterpreterArithmeticProof.csproj",
+            "verification/catalog/scenarios/MixedExecutionFeaturePack/MixedBridgeSolution/InterpreterArithmeticProof/InterpreterArithmeticProof.csproj",
             archetype_matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("InterpreterArithmeticProof/Program::Main()", archetype_matrix["source"]["entry"])

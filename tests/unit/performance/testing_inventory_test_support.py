@@ -8,6 +8,7 @@ from typing import Any
 
 from tests._support.fs import make_temp_repo_root, write_json
 from tests._support.module_loading import load_module
+from build.toolchains.run.core.common import read_json
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -48,6 +49,10 @@ def inventory_fixture() -> dict[str, Any]:
         "benchmarkStableId": benchmark_stable_id,
         "unitAlias": "native-interop-proof",
         "benchmarkAlias": "native-interop-bench",
+        "unitAssemblyName": "Fixture.Tests",
+        "unitDeclaringType": "Fixture.Proofs.NativeInteropProof",
+        "benchmarkAssemblyName": "Fixture.Benchmarks",
+        "benchmarkDeclaringType": "Fixture.Benchmarks.NativeInteropBenchmark",
         "sourceEntry": source_entry,
         "workloadEntry": workload_entry,
         "deviceId": device_id,
@@ -328,8 +333,64 @@ def benchmark_subject_payload(fixture: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def make_registry_index(registry_module, fixture: dict[str, Any]):
+def _declared_unit_test_record(fixture: dict[str, Any]) -> dict[str, Any]:
     subject_id = str(fixture["subjectId"])
+    return {
+        "id": f"declared-unit-test/{fixture['unitStableId']}",
+        "type": "declared-unit-test",
+        "displayName": str(fixture["unitAlias"]),
+        "subjectId": subject_id,
+        "defaultGoalId": "correctness.dev",
+        "defaultMatrixId": "windows-native-check",
+        "goalIds": ["correctness.dev"],
+        "matrixIds": ["windows-native-check"],
+        "supportedHosts": ["windows"],
+        "level": "subject",
+        "primaryModuleId": None,
+        "moduleIds": [],
+        "subsystemIds": [],
+        "docRefs": [],
+        "canonicalCommand": f"run test declared-unit-test --id declared-unit-test/{fixture['unitStableId']}",
+        "stableId": str(fixture["unitStableId"]),
+        "alias": str(fixture["unitAlias"]),
+        "entryIndex": int(fixture.get("unitEntryIndex") or 2),
+        "assemblyName": str(fixture.get("unitAssemblyName") or "Fixture.Tests"),
+        "declaringType": str(fixture.get("unitDeclaringType") or "Fixture.Proofs.NativeInteropProof"),
+        "methodName": "Run",
+        "methodSignature": "Run()",
+        "sourceEntry": str(fixture["sourceEntry"]),
+        "workloadEntry": "",
+        "category": 3,
+        "categoryLabel": "Interop Contract",
+        "capabilityFamily": int(fixture["capabilityFamily"]),
+        "capabilityFamilyLabel": "Interop And Marshaling",
+        "capabilityItem": int(fixture["capabilityItem"]),
+        "capabilityItemLabel": "Native Call Interop",
+        "ownerSubjectId": subject_id,
+        "supportStates": [1, 5],
+        "supportStateLabels": ["NativeGenerated", "ExternalRuntime"],
+        "proofRequired": True,
+        "benchmarkRequired": True,
+        "archetype": int(fixture.get("archetype") or 4),
+        "archetypeLabel": str(fixture.get("archetypeLabel") or "Reference Assembly Solution"),
+        "hotUpdateCapability": int(fixture.get("hotUpdateCapability") or 0),
+        "hotUpdateCapabilityLabels": list(fixture.get("hotUpdateCapabilityLabels") or []),
+        "requires": int(fixture.get("requires") or 16),
+        "requirementLabels": list(fixture.get("requirementLabels") or ["Native Interop"]),
+        "evidence": int(fixture.get("evidence") or 4),
+        "evidenceLabels": list(fixture.get("evidenceLabels") or ["Native Symbol"]),
+        "priority": int(fixture.get("priority") or 2),
+    }
+
+
+def make_registry_index(
+    registry_module,
+    fixture: dict[str, Any],
+    *,
+    declared_unit_test_fixtures: list[dict[str, Any]] | None = None,
+):
+    subject_id = str(fixture["subjectId"])
+    declared_unit_test_fixtures = list(declared_unit_test_fixtures or [fixture])
     return registry_module.RegistryIndex(
         host_platform="windows",
         suites=[],
@@ -354,54 +415,7 @@ def make_registry_index(registry_module, fixture: dict[str, Any]):
         ],
         engineering_validations=[],
         engineering_workloads=[],
-        declared_unit_tests=[
-            {
-                "id": f"declared-unit-test/{fixture['unitStableId']}",
-                "type": "declared-unit-test",
-                "displayName": str(fixture["unitAlias"]),
-                "subjectId": subject_id,
-                "defaultGoalId": "correctness.dev",
-                "defaultMatrixId": "windows-native-check",
-                "goalIds": ["correctness.dev"],
-                "matrixIds": ["windows-native-check"],
-                "supportedHosts": ["windows"],
-                "level": "subject",
-                "primaryModuleId": None,
-                "moduleIds": [],
-                "subsystemIds": [],
-                "docRefs": [],
-                "canonicalCommand": f"run test declared-unit-test --id declared-unit-test/{fixture['unitStableId']}",
-                "stableId": str(fixture["unitStableId"]),
-                "alias": str(fixture["unitAlias"]),
-                "entryIndex": 2,
-                "assemblyName": "Fixture.Tests",
-                "declaringType": "Fixture.Proofs.NativeInteropProof",
-                "methodName": "Run",
-                "methodSignature": "Run()",
-                "sourceEntry": str(fixture["sourceEntry"]),
-                "workloadEntry": "",
-                "category": 3,
-                "categoryLabel": "Interop Contract",
-                "capabilityFamily": int(fixture["capabilityFamily"]),
-                "capabilityFamilyLabel": "Interop And Marshaling",
-                "capabilityItem": int(fixture["capabilityItem"]),
-                "capabilityItemLabel": "Native Call Interop",
-                "ownerSubjectId": subject_id,
-                "supportStates": [1, 5],
-                "supportStateLabels": ["NativeGenerated", "ExternalRuntime"],
-                "proofRequired": True,
-                "benchmarkRequired": True,
-                "archetype": 4,
-                "archetypeLabel": "Reference Assembly Solution",
-                "hotUpdateCapability": 0,
-                "hotUpdateCapabilityLabels": [],
-                "requires": 16,
-                "requirementLabels": ["Native Interop"],
-                "evidence": 4,
-                "evidenceLabels": ["Native Symbol"],
-                "priority": 2,
-            }
-        ],
+        declared_unit_tests=[_declared_unit_test_record(item) for item in declared_unit_test_fixtures],
         declared_benchmarks=[
             {
                 "id": f"declared-benchmark/{fixture['benchmarkStableId']}",
@@ -424,8 +438,10 @@ def make_registry_index(registry_module, fixture: dict[str, Any]):
                 "stableId": str(fixture["benchmarkStableId"]),
                 "alias": str(fixture["benchmarkAlias"]),
                 "entryIndex": 7,
-                "assemblyName": "Fixture.Benchmarks",
-                "declaringType": "Fixture.Benchmarks.NativeInteropBenchmark",
+                "assemblyName": str(fixture.get("benchmarkAssemblyName") or "Fixture.Benchmarks"),
+                "declaringType": str(
+                    fixture.get("benchmarkDeclaringType") or "Fixture.Benchmarks.NativeInteropBenchmark"
+                ),
                 "methodName": "RunWorkload",
                 "methodSignature": "RunWorkload()",
                 "sourceEntry": str(fixture["sourceEntry"]),
@@ -571,8 +587,8 @@ def write_inventory_fixture_repo(repo_root: Path, fixture: dict[str, Any]) -> No
                     "stableId": fixture["unitStableId"],
                     "entryIndex": 2,
                     "alias": fixture["unitAlias"],
-                    "assemblyName": "Fixture.Tests",
-                    "declaringType": "Fixture.Proofs.NativeInteropProof",
+                    "assemblyName": str(fixture.get("unitAssemblyName") or "Fixture.Tests"),
+                    "declaringType": str(fixture.get("unitDeclaringType") or "Fixture.Proofs.NativeInteropProof"),
                     "methodName": "Run",
                     "methodSignature": "Run()",
                 }
@@ -582,8 +598,10 @@ def write_inventory_fixture_repo(repo_root: Path, fixture: dict[str, Any]) -> No
                     "stableId": fixture["benchmarkStableId"],
                     "entryIndex": 7,
                     "alias": fixture["benchmarkAlias"],
-                    "assemblyName": "Fixture.Benchmarks",
-                    "declaringType": "Fixture.Benchmarks.NativeInteropBenchmark",
+                    "assemblyName": str(fixture.get("benchmarkAssemblyName") or "Fixture.Benchmarks"),
+                    "declaringType": str(
+                        fixture.get("benchmarkDeclaringType") or "Fixture.Benchmarks.NativeInteropBenchmark"
+                    ),
                     "methodName": "RunWorkload",
                     "methodSignature": "RunWorkload()",
                 }
@@ -635,6 +653,39 @@ def write_inventory_fixture_repo(repo_root: Path, fixture: dict[str, Any]) -> No
     )
 
 
+def write_inventory_fixture_repo_with_declared_units(
+    repo_root: Path,
+    fixture: dict[str, Any],
+    declared_unit_test_fixtures: list[dict[str, Any]],
+) -> None:
+    write_inventory_fixture_repo(repo_root, fixture)
+    subject_id = str(fixture["subjectId"])
+    collection_path = (
+        repo_root
+        / "verification"
+        / "workspaces"
+        / "subjects"
+        / subject_id
+        / "managed-tests"
+        / "Generated"
+        / "declared-tests.collection.json"
+    )
+    collection_payload = read_json(collection_path)
+    collection_payload["declaredUnitTests"] = [
+        {
+            "stableId": str(item["unitStableId"]),
+            "entryIndex": int(item.get("unitEntryIndex") or 2),
+            "alias": str(item["unitAlias"]),
+            "assemblyName": str(item.get("unitAssemblyName") or "Fixture.Tests"),
+            "declaringType": str(item.get("unitDeclaringType") or "Fixture.Proofs.NativeInteropProof"),
+            "methodName": "Run",
+            "methodSignature": "Run()",
+        }
+        for item in declared_unit_test_fixtures
+    ]
+    write_json(collection_path, collection_payload)
+
+
 def append_benchmark_record(
     repo_root: Path,
     fixture: dict[str, Any],
@@ -675,6 +726,357 @@ def append_benchmark_record(
     }
     with records_path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(payload, ensure_ascii=False) + "\n")
+
+
+def write_legacy_subject_proof_run(
+    repo_root: Path,
+    fixture: dict[str, Any],
+    *,
+    run_id: str,
+    stage_kind: str,
+    status: str = "ok",
+    stable_id: str | None = None,
+    alias: str | None = None,
+    entry_index: int = 2,
+    matrix_id: str | None = None,
+    runtime_profile: str | None = None,
+    include_entry_selection: bool = True,
+    preferred_dispatch_subject_id: str | None = None,
+) -> None:
+    subject_id = str(fixture["subjectId"])
+    stable_id = str(stable_id or fixture["unitStableId"])
+    alias = str(alias or fixture["unitAlias"])
+    matrix_id = str(matrix_id or f"windows-{stage_kind}")
+    runtime_profile = str(
+        runtime_profile
+        or {
+            "managed-proof": "managed-proof-output",
+            "native-proof": "native-proof-output",
+            "hotupdate-proof": "native-hotupdate-proof-output",
+        }.get(stage_kind, "managed-proof-output")
+    )
+    run_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id
+    pipeline_report_path = run_root / "matrices" / matrix_id / "pipeline-report" / "report.json"
+    generated_manifest_path = run_root / "analysis" / "generated" / "native-reference.manifest.json"
+    write_json(
+        run_root / "run-report" / "summary.json",
+        {
+            "runId": run_id,
+            "command": "test subject",
+            "hostPlatform": "windows",
+            "finalStatus": status,
+            "exitCode": 0 if status == "ok" else 1,
+            "errors": [] if status == "ok" else [f"{stage_kind} failed"],
+            "artifacts": [pipeline_report_path.relative_to(repo_root).as_posix()],
+            "subjectResults": [
+                {
+                    "subjectId": subject_id,
+                    "requestedGoalId": "correctness.dev",
+                    "status": status,
+                    "subjectSummaryPath": "",
+                }
+            ],
+        },
+    )
+    selection = {
+        "subjectId": subject_id,
+        "goalId": "correctness.dev",
+        "matrixId": matrix_id,
+        "pipelineId": f"{stage_kind}-pipeline",
+        "workloadEntry": str(fixture["workloadEntry"]),
+        "executionContext": {
+            "hostPlatform": str(fixture["platformId"]),
+            "targetPlatform": str(fixture["platformId"]),
+            "runtimeProfile": runtime_profile,
+        },
+    }
+    if include_entry_selection:
+        selection["entrySelection"] = {
+            "family": "declared-unit-test",
+            "stableId": stable_id,
+            "alias": alias,
+            "entryIndex": int(entry_index),
+        }
+    stage_results = []
+    if preferred_dispatch_subject_id:
+        write_json(
+            generated_manifest_path,
+            {
+                "artifactKind": "nativeReferenceManifest",
+                "preferredAssemblyDispatchSubjectId": str(preferred_dispatch_subject_id),
+            },
+        )
+        stage_results.append(
+            {
+                "stageId": "generated-native-proof",
+                "kind": "generated-native-proof",
+                "bucket": "generated",
+                "status": status,
+                "manifestPath": (
+                    run_root / "analysis" / "generated" / "generated.manifest.json"
+                ).relative_to(repo_root).as_posix(),
+                "primaryEvidencePaths": [
+                    generated_manifest_path.relative_to(repo_root).as_posix(),
+                ],
+            }
+        )
+    write_json(
+        pipeline_report_path,
+        {
+            "reportVersion": "v1",
+            "runId": run_id,
+            "subjectId": subject_id,
+            "matrixId": matrix_id,
+            "goalId": "correctness.dev",
+            "status": status,
+            "selection": selection,
+            "stageResults": stage_results,
+            "matrixProofLinkage": {
+                "proofKind": stage_kind,
+            },
+        },
+    )
+
+
+def write_legacy_declared_unit_report(
+    repo_root: Path,
+    fixture: dict[str, Any],
+    *,
+    run_id: str,
+    stage_kind: str,
+    status: str = "ok",
+    matrix_id: str | None = None,
+) -> None:
+    subject_id = str(fixture["subjectId"])
+    matrix_id = str(matrix_id or "windows-native-check")
+    alias = str(fixture["unitAlias"])
+    run_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id
+    declared_report_path = run_root / "matrices" / matrix_id / "declared" / "unit" / alias / "report.json"
+    write_json(
+        run_root / "run-report" / "summary.json",
+        {
+            "runId": run_id,
+            "command": "run test subject --id subject/FixtureSubject --matrix windows-native-check --json",
+            "hostPlatform": "windows",
+            "finalStatus": status,
+            "exitCode": 0 if status == "ok" else 1,
+            "errors": [] if status == "ok" else [f"{stage_kind} failed"],
+            "artifacts": [declared_report_path.relative_to(repo_root).as_posix()],
+            "subjectResults": [
+                {
+                    "subjectId": subject_id,
+                    "requestedGoalId": "correctness.dev",
+                    "status": status,
+                    "subjectSummaryPath": "",
+                }
+            ],
+        },
+    )
+    write_json(
+        declared_report_path,
+        {
+            "reportVersion": "v1",
+            "runId": run_id,
+            "subjectId": subject_id,
+            "matrixId": matrix_id,
+            "goalId": "correctness.dev",
+            "status": status,
+            "selection": {
+                "subjectId": subject_id,
+                "goalId": "correctness.dev",
+                "matrixId": matrix_id,
+                "entrySelection": {
+                    "family": "declared-unit-test",
+                    "stableId": str(fixture["unitStableId"]),
+                    "alias": alias,
+                    "entryIndex": 2,
+                },
+                "executionContext": {
+                    "hostPlatform": str(fixture["platformId"]),
+                    "targetPlatform": str(fixture["platformId"]),
+                    "runtimeProfile": "managed-proof-output" if stage_kind == "managed-proof" else "native-proof-output",
+                },
+            },
+            "matrixProofLinkage": {
+                "proofKind": stage_kind,
+            },
+        },
+    )
+
+
+def write_legacy_managed_output_proof_run(
+    repo_root: Path,
+    fixture: dict[str, Any],
+    *,
+    run_id: str,
+    source_entry: str,
+    status: str = "ok",
+    matrix_id: str = "windows-managed-output",
+    stdout_lines: list[str] | None = None,
+) -> None:
+    subject_id = str(fixture["subjectId"])
+    run_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id
+    pipeline_report_path = run_root / "matrices" / matrix_id / "pipeline-report" / "report.json"
+    stdout_path = run_root / "matrices" / matrix_id / "runtime" / "stdout.log"
+    if stdout_lines is not None:
+        stdout_path.parent.mkdir(parents=True, exist_ok=True)
+        stdout_path.write_text("\n".join(stdout_lines) + "\n", encoding="utf-8")
+    write_json(
+        run_root / "run-report" / "summary.json",
+        {
+            "runId": run_id,
+            "command": f"run test subject --id subject/{subject_id} --matrix {matrix_id} --json",
+            "hostPlatform": "windows",
+            "finalStatus": status,
+            "exitCode": 0 if status == "ok" else 1,
+            "errors": [] if status == "ok" else ["managed proof failed"],
+            "artifacts": [pipeline_report_path.relative_to(repo_root).as_posix()],
+            "subjectResults": [
+                {
+                    "subjectId": subject_id,
+                    "requestedGoalId": "correctness.dev",
+                    "status": status,
+                    "subjectSummaryPath": "",
+                }
+            ],
+        },
+    )
+    write_json(
+        pipeline_report_path,
+        {
+            "reportVersion": "v1",
+            "runId": run_id,
+            "subjectId": subject_id,
+            "matrixId": matrix_id,
+            "goalId": "correctness.dev",
+            "validationKinds": ["proof"],
+            "status": status,
+            "selection": {
+                "subjectId": subject_id,
+                "goalId": "correctness.dev",
+                "matrixId": matrix_id,
+                "pipelineId": "managed-runtime-output",
+                "source": {
+                    "type": "dotnet-project",
+                    "path": f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.sln",
+                    "primaryProjectPath": f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.csproj",
+                    "entry": source_entry,
+                },
+                "executionContext": {
+                    "hostPlatform": str(fixture["platformId"]),
+                    "targetPlatform": str(fixture["platformId"]),
+                    "runtimeProfile": "managed-output",
+                },
+            },
+            "stageResults": [
+                {
+                    "stageId": "runtime-managed-output",
+                    "kind": "runtime-managed-output",
+                    "bucket": "runtime",
+                    "status": status,
+                    "primaryEvidencePaths": [stdout_path.relative_to(repo_root).as_posix()] if stdout_lines is not None else [],
+                    "diagnostics": {
+                        "stdoutPath": stdout_path.relative_to(repo_root).as_posix() if stdout_lines is not None else None,
+                        "stderrPath": None,
+                    },
+                }
+            ],
+        },
+    )
+
+
+def write_legacy_subject_perf_run(
+    repo_root: Path,
+    fixture: dict[str, Any],
+    *,
+    run_id: str,
+    mode: str,
+    mean_duration_ms: float,
+    mean_ops_per_second: float,
+    matrix_id: str | None = None,
+) -> None:
+    subject_id = str(fixture["subjectId"])
+    matrix_id = str(matrix_id or f"windows-{mode}-perf")
+    run_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id
+    pipeline_report_path = run_root / "matrices" / matrix_id / "pipeline-report" / "report.json"
+    perf_summary_path = run_root / "matrices" / matrix_id / "validations" / "perf" / "summary.json"
+    write_json(
+        run_root / "run-report" / "summary.json",
+        {
+            "runId": run_id,
+            "command": "test subject",
+            "hostPlatform": "windows",
+            "finalStatus": "ok",
+            "exitCode": 0,
+            "errors": [],
+            "artifacts": [
+                pipeline_report_path.relative_to(repo_root).as_posix(),
+                perf_summary_path.relative_to(repo_root).as_posix(),
+            ],
+            "subjectResults": [
+                {
+                    "subjectId": subject_id,
+                    "requestedGoalId": "perf.release",
+                    "status": "ok",
+                    "subjectSummaryPath": "",
+                }
+            ],
+        },
+    )
+    write_json(
+        pipeline_report_path,
+        {
+            "reportVersion": "v1",
+            "runId": run_id,
+            "subjectId": subject_id,
+            "matrixId": matrix_id,
+            "goalId": "perf.release",
+            "status": "ok",
+            "selection": {
+                "subjectId": subject_id,
+                "goalId": "perf.release",
+                "matrixId": matrix_id,
+                "pipelineId": f"{mode}-benchmark",
+                "workloadEntry": str(fixture["workloadEntry"]),
+                "executionContext": {
+                    "hostPlatform": str(fixture["platformId"]),
+                    "targetPlatform": str(fixture["platformId"]),
+                    "runtimeProfile": f"{mode}-perf-release",
+                },
+            },
+            "metrics": {
+                "sampleCount": 3,
+                "meanDurationMs": mean_duration_ms,
+                "meanOpsPerSecond": mean_ops_per_second,
+            },
+            "performance": {
+                "metrics": {
+                    "sampleCount": 3,
+                    "meanDurationMs": mean_duration_ms,
+                    "meanOpsPerSecond": mean_ops_per_second,
+                }
+            },
+            "releaseReportPaths": [
+                perf_summary_path.relative_to(repo_root).as_posix(),
+            ],
+        },
+    )
+    write_json(
+        perf_summary_path,
+        {
+            "reportVersion": "v1",
+            "subjectId": subject_id,
+            "matrixId": matrix_id,
+            "goalId": "perf.release",
+            "status": "ok",
+            "metrics": {
+                "sampleCount": 3,
+                "meanDurationMs": mean_duration_ms,
+                "meanOpsPerSecond": mean_ops_per_second,
+            },
+            "regressionStatus": "no-baseline",
+        },
+    )
 
 
 def sample_inventory_source() -> dict[str, Any]:

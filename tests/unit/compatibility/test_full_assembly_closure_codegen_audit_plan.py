@@ -18,20 +18,20 @@ NATIVE_REFERENCE_EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Co
 ARTIFACT_MODELS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureArtifactModels.cs"
 LIBRARY_PROJECT_PATH = (
     REPO_ROOT
-    / "subjects"
+    / "verification"
+    / "catalog"
+    / "scenarios"
     / "SolutionCorePack"
-    / "source"
-    / "EngineeringScenarios"
     / "SimpleLibrarySolution"
     / "Library"
     / "GoldenSimpleLib.Library.csproj"
 )
 LIBRARY_DLL_PATH = (
     REPO_ROOT
-    / "subjects"
+    / "verification"
+    / "catalog"
+    / "scenarios"
     / "SolutionCorePack"
-    / "source"
-    / "EngineeringScenarios"
     / "SimpleLibrarySolution"
     / "Library"
     / "bin"
@@ -382,6 +382,503 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
                 ["FixtureUnsupportedLibrary/Arithmetic::Add:System.Int32(System.Int32,System.Int32)"],
                 coverage_report["uncoveredMethodSubjectIds"],
             )
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
+
+    def test_emit_native_reference_supports_static_primitive_convert_runtime_skeleton_methods(self) -> None:
+        fixture_root = TEST_OUTPUT_ROOT / f"FixturePrimitiveConvertLibrary-{uuid.uuid4().hex}"
+        project_root = fixture_root / "FixturePrimitiveConvertLibrary"
+        project_path = project_root / "FixturePrimitiveConvertLibrary.csproj"
+        source_path = project_root / "PrimitiveConvertOps.cs"
+        dll_path = project_root / "bin" / "Release" / "net8.0" / "FixturePrimitiveConvertLibrary.dll"
+        closure_root = fixture_root / "closure"
+        emit_root = fixture_root / "emit-native-reference"
+
+        try:
+            project_root.mkdir(parents=True, exist_ok=False)
+            project_path.write_text(
+                (
+                    '<Project Sdk="Microsoft.NET.Sdk">\n'
+                    "  <PropertyGroup>\n"
+                    "    <TargetFramework>net8.0</TargetFramework>\n"
+                    "    <ImplicitUsings>disable</ImplicitUsings>\n"
+                    "    <Nullable>disable</Nullable>\n"
+                    "  </PropertyGroup>\n"
+                    "</Project>\n"
+                ),
+                encoding="utf-8",
+            )
+            source_path.write_text(
+                (
+                    "using System;\n\n"
+                    "namespace FixturePrimitiveConvertLibrary;\n\n"
+                    "internal static class ResourceShim\n"
+                    "{\n"
+                    "    public static string GetResourceString(string key)\n"
+                    "    {\n"
+                    "        return key;\n"
+                    "    }\n\n"
+                    "    public static string get_Overflow_Byte()\n"
+                    "    {\n"
+                    '        return GetResourceString("Overflow_Byte");\n'
+                    "    }\n"
+                    "}\n\n"
+                    "public static class PrimitiveConvertOps\n"
+                    "{\n"
+                    "    public static byte ToByte(bool value)\n"
+                    "    {\n"
+                    "        return value ? (byte)1 : (byte)0;\n"
+                    "    }\n\n"
+                    "    public static bool ToBoolean(byte value)\n"
+                    "    {\n"
+                    "        return value > 0;\n"
+                    "    }\n\n"
+                    "    public static bool ToBoolean(float value)\n"
+                    "    {\n"
+                    "        return value != 0f;\n"
+                    "    }\n\n"
+                    "    public static bool ToBoolean(double value)\n"
+                    "    {\n"
+                    "        return value != 0d;\n"
+                    "    }\n"
+                    "\n"
+                    "    public static long ToInt64(int value)\n"
+                    "    {\n"
+                    "        return value;\n"
+                    "    }\n\n"
+                    "    public static ulong ToUInt64(uint value)\n"
+                    "    {\n"
+                    "        return value;\n"
+                    "    }\n\n"
+                    "    public static float ToSingle(int value)\n"
+                    "    {\n"
+                    "        return value;\n"
+                    "    }\n\n"
+                    "    public static double ToDouble(uint value)\n"
+                    "    {\n"
+                    "        return value;\n"
+                    "    }\n\n"
+                    "    public static char ToChar(byte value)\n"
+                    "    {\n"
+                    "        return (char)value;\n"
+                    "    }\n\n"
+                    "    public static void ThrowByteOverflowException()\n"
+                    "    {\n"
+                    "        throw new OverflowException(ResourceShim.get_Overflow_Byte());\n"
+                    "    }\n\n"
+                    "    public static byte ToByte(uint value)\n"
+                    "    {\n"
+                    "        if (value > byte.MaxValue)\n"
+                    "        {\n"
+                    "            ThrowByteOverflowException();\n"
+                    "        }\n\n"
+                    "        return (byte)value;\n"
+                    "    }\n\n"
+                    "    public static byte ToByte(ulong value)\n"
+                    "    {\n"
+                    "        if (value > byte.MaxValue)\n"
+                    "        {\n"
+                    "            ThrowByteOverflowException();\n"
+                    "        }\n\n"
+                    "        return (byte)value;\n"
+                    "    }\n\n"
+                    "    public static byte ToByte(int value)\n"
+                    "    {\n"
+                    "        return ToByte((uint)value);\n"
+                    "    }\n\n"
+                    "    public static byte ToByte(long value)\n"
+                    "    {\n"
+                    "        return ToByte((ulong)value);\n"
+                    "    }\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            tooling_module = load_module(TOOLING_MODULE_PATH, f"chaos_primitive_convert_codegen_audit_{uuid.uuid4().hex}")
+            driver_intermediate_root = tooling_module.allocate_dotnet_intermediate_dir("Chaos.IL2CPP.Driver", host_platform="windows")
+            self.assertIsNotNone(driver_intermediate_root)
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(project_path),
+                    "-c",
+                    "Release",
+                ],
+                cwd=REPO_ROOT,
+            )
+            self.assertTrue(dll_path.is_file(), msg=f"missing primitive convert library dll: {dll_path}")
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(DRIVER_PROJECT_PATH),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    f"-p:ChaosTempIntermediateRoot={Path(driver_intermediate_root).as_posix()}/",
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    str(dll_path),
+                    str(closure_root),
+                    "--full-assembly-closure",
+                ],
+                cwd=REPO_ROOT,
+            )
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    "emit-native-reference",
+                    str(closure_root),
+                    str(emit_root),
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            generated_page = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.page-0001.cpp"
+            ).read_text(encoding="utf-8").replace("\r\n", "\n")
+            coverage_report = load_json(
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.coverage.json"
+            )
+
+            self.assertGreaterEqual(coverage_report["requestedMethodCount"], 12)
+            self.assertEqual(coverage_report["requestedMethodCount"], coverage_report["emittedMethodCount"])
+            self.assertEqual(0, coverage_report["uncoveredMethodCount"])
+            self.assertEqual([], coverage_report["uncoveredMethodSubjectIds"])
+            self.assertIn("NativeReferenceStub_Page0001_Item0001", generated_page)
+            self.assertIn("NativeReferenceStub_Page0001_Item0002", generated_page)
+            self.assertIn("NativeReferenceStub_Page0001_Item0003", generated_page)
+            self.assertIn("NativeReferenceStub_Page0001_Item0004", generated_page)
+            self.assertIn("std::uint8_t value;", generated_page)
+            self.assertIn("bool value;", generated_page)
+            self.assertIn("float value;", generated_page)
+            self.assertIn("double value;", generated_page)
+            self.assertIn("std::int32_t value;", generated_page)
+            self.assertIn("std::uint32_t value;", generated_page)
+            self.assertIn(
+                "*request->return_value = static_cast<std::uint8_t>(request->value ? static_cast<std::uint8_t>(1) : static_cast<std::uint8_t>(0));",
+                generated_page,
+            )
+            self.assertIn(
+                "*request->return_value = static_cast<bool>(request->value != static_cast<std::uint8_t>(0));",
+                generated_page,
+            )
+            self.assertIn(
+                "*request->return_value = static_cast<bool>(request->value);",
+                generated_page,
+            )
+            self.assertIn(
+                "*request->return_value = static_cast<std::int64_t>(request->value);",
+                generated_page,
+            )
+            self.assertIn(
+                "*request->return_value = static_cast<std::uint64_t>(request->value);",
+                generated_page,
+            )
+            self.assertIn(
+                "*request->return_value = static_cast<float>(request->value);",
+                generated_page,
+            )
+            self.assertIn(
+                "*request->return_value = static_cast<double>(request->value);",
+                generated_page,
+            )
+            self.assertIn(
+                "*request->return_value = static_cast<std::uint16_t>(request->value);",
+                generated_page,
+            )
+            self.assertIn('"Overflow_Byte"', generated_page)
+            self.assertIn("return NativeReferenceStub_Page0001_Item", generated_page)
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
+
+    def test_emit_native_reference_supports_overflow_throw_runtime_skeleton_methods(self) -> None:
+        fixture_root = TEST_OUTPUT_ROOT / f"FixtureOverflowThrowLibrary-{uuid.uuid4().hex}"
+        project_root = fixture_root / "FixtureOverflowThrowLibrary"
+        project_path = project_root / "FixtureOverflowThrowLibrary.csproj"
+        source_path = project_root / "OverflowOps.cs"
+        dll_path = project_root / "bin" / "Release" / "net8.0" / "FixtureOverflowThrowLibrary.dll"
+        closure_root = fixture_root / "closure"
+        emit_root = fixture_root / "emit-native-reference"
+
+        try:
+            project_root.mkdir(parents=True, exist_ok=False)
+            project_path.write_text(
+                (
+                    '<Project Sdk="Microsoft.NET.Sdk">\n'
+                    "  <PropertyGroup>\n"
+                    "    <TargetFramework>net8.0</TargetFramework>\n"
+                    "    <ImplicitUsings>disable</ImplicitUsings>\n"
+                    "    <Nullable>disable</Nullable>\n"
+                    "  </PropertyGroup>\n"
+                    "</Project>\n"
+                ),
+                encoding="utf-8",
+            )
+            source_path.write_text(
+                (
+                    "using System;\n\n"
+                    "namespace FixtureOverflowThrowLibrary;\n\n"
+                    "internal static class ResourceShim\n"
+                    "{\n"
+                    "    public static string GetResourceString(string key)\n"
+                    "    {\n"
+                    "        return key;\n"
+                    "    }\n\n"
+                    "    public static string get_Overflow_Byte()\n"
+                    "    {\n"
+                    '        return GetResourceString("Overflow_Byte");\n'
+                    "    }\n"
+                    "}\n\n"
+                    "public static class OverflowOps\n"
+                    "{\n"
+                    "    public static void ThrowByteOverflowException()\n"
+                    "    {\n"
+                    "        throw new OverflowException(ResourceShim.get_Overflow_Byte());\n"
+                    "    }\n\n"
+                    "    public static byte ToByte(ushort value)\n"
+                    "    {\n"
+                    "        if (value > byte.MaxValue)\n"
+                    "        {\n"
+                    "            ThrowByteOverflowException();\n"
+                    "        }\n\n"
+                    "        return (byte)value;\n"
+                    "    }\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            tooling_module = load_module(TOOLING_MODULE_PATH, f"chaos_overflow_throw_codegen_audit_{uuid.uuid4().hex}")
+            driver_intermediate_root = tooling_module.allocate_dotnet_intermediate_dir("Chaos.IL2CPP.Driver", host_platform="windows")
+            self.assertIsNotNone(driver_intermediate_root)
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(project_path),
+                    "-c",
+                    "Release",
+                ],
+                cwd=REPO_ROOT,
+            )
+            self.assertTrue(dll_path.is_file(), msg=f"missing overflow throw library dll: {dll_path}")
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(DRIVER_PROJECT_PATH),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    f"-p:ChaosTempIntermediateRoot={Path(driver_intermediate_root).as_posix()}/",
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    str(dll_path),
+                    str(closure_root),
+                    "--full-assembly-closure",
+                ],
+                cwd=REPO_ROOT,
+            )
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    "emit-native-reference",
+                    str(closure_root),
+                    str(emit_root),
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            generated_page = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.page-0001.cpp"
+            ).read_text(encoding="utf-8").replace("\r\n", "\n")
+            coverage_report = load_json(
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.coverage.json"
+            )
+
+            self.assertEqual(4, coverage_report["requestedMethodCount"])
+            self.assertEqual(4, coverage_report["emittedMethodCount"])
+            self.assertEqual(0, coverage_report["uncoveredMethodCount"])
+            self.assertEqual([], coverage_report["uncoveredMethodSubjectIds"])
+            self.assertIn("NativeReferenceStub_Page0001_Item0001", generated_page)
+            self.assertIn("NativeReferenceStub_Page0001_Item0002", generated_page)
+            self.assertIn("NativeReferenceStub_Page0001_Item0003", generated_page)
+            self.assertIn("NativeReferenceStub_Page0001_Item0004", generated_page)
+            self.assertIn('"Overflow_Byte"', generated_page)
+            self.assertIn("produced_message", generated_page)
+            self.assertIn("raise_managed_exception", generated_page)
+            self.assertIn("std::uint16_t value;", generated_page)
+            self.assertIn(
+                "*request->return_value = static_cast<std::uint8_t>(request->value);",
+                generated_page,
+            )
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
+
+    def test_emit_native_reference_supports_cross_page_overflow_throw_runtime_skeleton_methods(self) -> None:
+        fixture_root = TEST_OUTPUT_ROOT / f"FixtureCrossPageOverflowThrowLibrary-{uuid.uuid4().hex}"
+        project_root = fixture_root / "FixtureCrossPageOverflowThrowLibrary"
+        project_path = project_root / "FixtureCrossPageOverflowThrowLibrary.csproj"
+        source_path = project_root / "OverflowOps.cs"
+        dll_path = project_root / "bin" / "Release" / "net8.0" / "FixtureCrossPageOverflowThrowLibrary.dll"
+        closure_root = fixture_root / "closure"
+        emit_root = fixture_root / "emit-native-reference"
+
+        filler_methods = "".join(
+            f"    public static int Filler{i:04d}() => {i};\n"
+            for i in range(1022)
+        )
+
+        try:
+            project_root.mkdir(parents=True, exist_ok=False)
+            project_path.write_text(
+                (
+                    '<Project Sdk="Microsoft.NET.Sdk">\n'
+                    "  <PropertyGroup>\n"
+                    "    <TargetFramework>net8.0</TargetFramework>\n"
+                    "    <ImplicitUsings>disable</ImplicitUsings>\n"
+                    "    <Nullable>disable</Nullable>\n"
+                    "  </PropertyGroup>\n"
+                    "</Project>\n"
+                ),
+                encoding="utf-8",
+            )
+            source_path.write_text(
+                (
+                    "using System;\n\n"
+                    "namespace FixtureCrossPageOverflowThrowLibrary;\n\n"
+                    "public static class FillerCatalog\n"
+                    "{\n"
+                    f"{filler_methods}"
+                    "}\n\n"
+                    "internal static class ResourceShim\n"
+                    "{\n"
+                    "    public static string GetResourceString(string key)\n"
+                    "    {\n"
+                    "        return key;\n"
+                    "    }\n\n"
+                    "    public static string get_Overflow_Byte()\n"
+                    "    {\n"
+                    '        return GetResourceString("Overflow_Byte");\n'
+                    "    }\n"
+                    "}\n\n"
+                    "public static class OverflowOps\n"
+                    "{\n"
+                    "    public static void ThrowByteOverflowException()\n"
+                    "    {\n"
+                    "        throw new OverflowException(ResourceShim.get_Overflow_Byte());\n"
+                    "    }\n\n"
+                    "    public static byte ToByte(ushort value)\n"
+                    "    {\n"
+                    "        if (value > byte.MaxValue)\n"
+                    "        {\n"
+                    "            ThrowByteOverflowException();\n"
+                    "        }\n\n"
+                    "        return (byte)value;\n"
+                    "    }\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(project_path),
+                    "-c",
+                    "Release",
+                ],
+                cwd=REPO_ROOT,
+            )
+            self.assertTrue(dll_path.is_file(), msg=f"missing cross-page overflow throw library dll: {dll_path}")
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    str(dll_path),
+                    str(closure_root),
+                    "--full-assembly-closure",
+                ],
+                cwd=REPO_ROOT,
+            )
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    "emit-native-reference",
+                    str(closure_root),
+                    str(emit_root),
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            first_page = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.page-0001.cpp"
+            ).read_text(encoding="utf-8").replace("\r\n", "\n")
+            second_page = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.page-0002.cpp"
+            ).read_text(encoding="utf-8").replace("\r\n", "\n")
+            coverage_report = load_json(
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.coverage.json"
+            )
+
+            self.assertEqual(1026, coverage_report["requestedMethodCount"])
+            self.assertGreaterEqual(coverage_report["emittedMethodCount"], 4)
+            self.assertEqual(1022, coverage_report["uncoveredMethodCount"])
+            for required_subject_id in [
+                "FixtureCrossPageOverflowThrowLibrary/ResourceShim::get_Overflow_Byte:System.String()",
+                "FixtureCrossPageOverflowThrowLibrary/OverflowOps::ThrowByteOverflowException:System.Void()",
+                "FixtureCrossPageOverflowThrowLibrary/OverflowOps::ToByte:System.Byte(System.UInt16)",
+                "FixtureCrossPageOverflowThrowLibrary/ResourceShim::GetResourceString:System.String(System.String)",
+            ]:
+                self.assertNotIn(required_subject_id, coverage_report["uncoveredMethodSubjectIds"])
+            self.assertIn("NativeReferenceStub_Page0002_Item0002", first_page)
+            self.assertIn("producer_status = NativeReferenceStub_Page0002_Item0002(", first_page)
+            self.assertIn('"Overflow_Byte"', second_page)
         finally:
             shutil.rmtree(fixture_root, ignore_errors=True)
 

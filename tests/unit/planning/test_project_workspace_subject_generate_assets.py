@@ -57,7 +57,7 @@ class TestProjectWorkspaceSubjectGenerateAssets(ProjectWorkspaceTestSupport):
                 [
                     {
                         "projectId": "managed/FixtureSubject/FixtureSubject",
-                        "projectPath": "subjects/FixtureSubject/source/FixtureSubject.csproj",
+                        "projectPath": "verification/catalog/owners/FixtureSubject/support/host/FixtureSubject.csproj",
                         "assemblyName": "FixtureSubject",
                         "isPrimary": True,
                     },

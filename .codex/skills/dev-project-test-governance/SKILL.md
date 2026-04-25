@@ -1,4 +1,4 @@
-﻿---
+---
 name: project-test-governance
 description: Use when changing subject/test workflow, Chaos.TestFramework, generated managed/native/hotupdate runners, benchmark or unit verification flow, or project codegen structure in this repository
 ---

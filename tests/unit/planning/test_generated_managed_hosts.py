@@ -261,8 +261,8 @@ class GeneratedManagedHostsTests(unittest.TestCase):
             subject_id="FixtureSubject",
             host_kind="proof-host",
             project_references=[
-                "../../../../subjects/FixtureSubject/source/FixtureSubject.csproj",
-                "../../../../subjects/FixtureSubject/source/FixtureSubject.Support.csproj",
+                "../../../../verification/catalog/owners/FixtureSubject/support/host/FixtureSubject.csproj",
+                "../../../../verification/catalog/owners/FixtureSubject/support/host/FixtureSubject.Support.csproj",
             ],
             generated_source_path="Generated/ChaosGeneratedDeclaredTests.g.cs",
             assembly_name="FixtureSubject.DeclaredProofHost",
@@ -276,8 +276,14 @@ class GeneratedManagedHostsTests(unittest.TestCase):
             "../../../../../src/reference/Chaos.TestFramework.Runtime/Chaos.TestFramework.Runtime.csproj",
             project_text,
         )
-        self.assertIn("../../../../subjects/FixtureSubject/source/FixtureSubject.csproj", project_text)
-        self.assertIn("../../../../subjects/FixtureSubject/source/FixtureSubject.Support.csproj", project_text)
+        self.assertIn(
+            "../../../../verification/catalog/owners/FixtureSubject/support/host/FixtureSubject.csproj",
+            project_text,
+        )
+        self.assertIn(
+            "../../../../verification/catalog/owners/FixtureSubject/support/host/FixtureSubject.Support.csproj",
+            project_text,
+        )
         self.assertIn("<TargetFramework>net8.0</TargetFramework>", project_text)
         self.assertIn("<OutputType>Exe</OutputType>", project_text)
         self.assertIn("<EnableDefaultCompileItems>false</EnableDefaultCompileItems>", project_text)

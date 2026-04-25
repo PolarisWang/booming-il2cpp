@@ -5,7 +5,7 @@ class TestCompiledSubjectCatalogProjection(CompiledSubjectCatalogTestSupport):
     def test_compiled_catalog_projects_managed_output_engineering_entries(self) -> None:
         compiled_catalog_module = load_module(COMPILED_CATALOG_MODULE_PATH, "chaos_compiled_subject_catalog_managed")
         repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "compiled-subject-catalog" / "managed-output"
-        manifest_path = repo_root / "subjects" / "FixtureManagedCatalog" / "subject.manifest.json"
+        subject_id = "FixtureManagedCatalog"
 
         manifest = {
             "subjectId": "FixtureManagedCatalog",
@@ -16,7 +16,7 @@ class TestCompiledSubjectCatalogProjection(CompiledSubjectCatalogTestSupport):
             "defaultValidationProfile": "proof-dev",
             "source": {
                 "type": "dotnet-project",
-                "path": "subjects/FixtureManagedCatalog/source/FixtureManagedCatalog.csproj",
+                "path": "verification/catalog/owners/FixtureManagedCatalog/support/host/FixtureManagedCatalog.csproj",
                 "entry": "FixtureManagedCatalog/Program::Main()",
             },
             "engineeringProfile": "managed-output",
@@ -65,7 +65,7 @@ class TestCompiledSubjectCatalogProjection(CompiledSubjectCatalogTestSupport):
         }
 
         try:
-            write_json(manifest_path, manifest)
+            write_owner_manifest(repo_root, subject_id, manifest)
 
             catalog = compiled_catalog_module.build_compiled_subject_catalog(
                 repo_root=repo_root,
@@ -92,7 +92,7 @@ class TestCompiledSubjectCatalogProjection(CompiledSubjectCatalogTestSupport):
     def test_compiled_catalog_projects_native_executable_entries_and_merges_declared_tests(self) -> None:
         compiled_catalog_module = load_module(COMPILED_CATALOG_MODULE_PATH, "chaos_compiled_subject_catalog_native")
         repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "compiled-subject-catalog" / "native-executable"
-        manifest_path = repo_root / "subjects" / "FixtureNativeCatalog" / "subject.manifest.json"
+        subject_id = "FixtureNativeCatalog"
 
         manifest = {
             "subjectId": "FixtureNativeCatalog",
@@ -103,7 +103,7 @@ class TestCompiledSubjectCatalogProjection(CompiledSubjectCatalogTestSupport):
             "defaultValidationProfile": "proof-dev",
             "source": {
                 "type": "dotnet-project",
-                "path": "subjects/FixtureNativeCatalog/source/FixtureNativeCatalog.csproj",
+                "path": "verification/catalog/owners/FixtureNativeCatalog/support/host/FixtureNativeCatalog.csproj",
                 "entry": "FixtureNativeCatalog/Program::Main()",
             },
             "engineeringProfile": "native-executable",
@@ -155,7 +155,7 @@ class TestCompiledSubjectCatalogProjection(CompiledSubjectCatalogTestSupport):
         }
 
         try:
-            write_json(manifest_path, manifest)
+            write_owner_manifest(repo_root, subject_id, manifest)
 
             catalog = compiled_catalog_module.build_compiled_subject_catalog(
                 repo_root=repo_root,
@@ -183,7 +183,7 @@ class TestCompiledSubjectCatalogProjection(CompiledSubjectCatalogTestSupport):
     def test_compiled_catalog_projects_hot_update_host_entries(self) -> None:
         compiled_catalog_module = load_module(COMPILED_CATALOG_MODULE_PATH, "chaos_compiled_subject_catalog_hot_update")
         repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "compiled-subject-catalog" / "hot-update-host"
-        manifest_path = repo_root / "subjects" / "FixtureHotUpdateCatalog" / "subject.manifest.json"
+        subject_id = "FixtureHotUpdateCatalog"
 
         manifest = {
             "subjectId": "FixtureHotUpdateCatalog",
@@ -194,7 +194,7 @@ class TestCompiledSubjectCatalogProjection(CompiledSubjectCatalogTestSupport):
             "defaultValidationProfile": "proof-dev",
             "source": {
                 "type": "dotnet-project",
-                "path": "subjects/FixtureHotUpdateCatalog/source/FixtureHotUpdateCatalog.csproj",
+                "path": "verification/catalog/owners/FixtureHotUpdateCatalog/support/host/FixtureHotUpdateCatalog.csproj",
                 "entry": "FixtureHotUpdateCatalog/Program::Main()",
             },
             "engineeringProfile": "hot-update-host",
@@ -247,7 +247,7 @@ class TestCompiledSubjectCatalogProjection(CompiledSubjectCatalogTestSupport):
         }
 
         try:
-            write_json(manifest_path, manifest)
+            write_owner_manifest(repo_root, subject_id, manifest)
 
             catalog = compiled_catalog_module.build_compiled_subject_catalog(
                 repo_root=repo_root,
@@ -273,7 +273,7 @@ class TestCompiledSubjectCatalogProjection(CompiledSubjectCatalogTestSupport):
     def test_compiled_catalog_projects_native_workloads_from_non_default_perf_matrix(self) -> None:
         compiled_catalog_module = load_module(COMPILED_CATALOG_MODULE_PATH, "chaos_compiled_subject_catalog_mixed_perf")
         repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "compiled-subject-catalog" / "mixed-perf"
-        manifest_path = repo_root / "subjects" / "FixtureMixedPerfCatalog" / "subject.manifest.json"
+        subject_id = "FixtureMixedPerfCatalog"
 
         manifest = {
             "subjectId": "FixtureMixedPerfCatalog",
@@ -284,7 +284,7 @@ class TestCompiledSubjectCatalogProjection(CompiledSubjectCatalogTestSupport):
             "defaultValidationProfile": "proof-dev",
             "source": {
                 "type": "dotnet-project",
-                "path": "subjects/FixtureMixedPerfCatalog/source/FixtureMixedPerfCatalog.csproj",
+                "path": "verification/catalog/owners/FixtureMixedPerfCatalog/support/host/FixtureMixedPerfCatalog.csproj",
                 "entry": "FixtureMixedPerfCatalog/Program::Main()",
             },
             "engineeringProfile": "managed-output",
@@ -371,7 +371,7 @@ class TestCompiledSubjectCatalogProjection(CompiledSubjectCatalogTestSupport):
         }
 
         try:
-            write_json(manifest_path, manifest)
+            write_owner_manifest(repo_root, subject_id, manifest)
 
             catalog = compiled_catalog_module.build_compiled_subject_catalog(
                 repo_root=repo_root,

@@ -78,6 +78,35 @@ class TestVerificationBundle(unittest.TestCase):
             "evidence-claim/unit/FixtureSubject::Fixture.Tests::Fixture.Proofs.NativeInteropProof::Run()/native-proof"
         ]["stageKind"])
 
+    def test_build_verification_bundle_normalizes_legacy_perf_claim_to_default_device_profile(self) -> None:
+        bundle_module = load_module(VERIFICATION_BUNDLE_MODULE_PATH, "chaos_verification_bundle_legacy_perf_claim")
+        source = sample_inventory_source()
+        source["benchmarkEvidence"] = [
+            {
+                **dict(source["benchmarkEvidence"][0]),
+                "deviceId": "legacy-host",
+                "deviceName": "Legacy Host",
+                "platformId": "windows-x64",
+                "legacyCompatibilityClaim": True,
+            }
+        ]
+
+        bundle = bundle_module.build_verification_bundle(
+            source,
+            closure_kind="completed",
+            scope_code="testing-inventory",
+        )
+
+        evidence_by_id = {
+            item["evidenceClaimId"]: item
+            for item in bundle["latest"]["evidenceClaim"]["items"]
+        }
+        claim = evidence_by_id[
+            "evidence-claim/benchmark/FixtureSubject::Fixture.Benchmarks::Fixture.Benchmarks.NativeInteropBenchmark::RunWorkload()/managed/bridge/default-platform/default"
+        ]
+        self.assertEqual("perf", claim["stageKind"])
+        self.assertEqual("bridge/default-platform/default", claim["deviceProfileCode"])
+
     def test_write_verification_bundle_materializes_latest_master_and_reports(self) -> None:
         bundle_module = load_module(VERIFICATION_BUNDLE_MODULE_PATH, "chaos_verification_bundle_write")
         repo_root = make_temp_repo_root("verification", "bundle-write")

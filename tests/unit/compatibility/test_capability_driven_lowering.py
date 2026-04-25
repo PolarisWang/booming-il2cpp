@@ -19,7 +19,7 @@ CATALOG_PATH = (
 )
 
 
-class Phase3CapabilityDrivenLoweringTests(unittest.TestCase):
+class CapabilityDrivenLoweringTests(unittest.TestCase):
     def test_codegen_owns_lowering_family_selection_and_managed_plan_artifact(self) -> None:
         contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")
         codegen_source = CODEGEN_STAGE_PATH.read_text(encoding="utf-8")

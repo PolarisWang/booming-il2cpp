@@ -28,6 +28,7 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
         native_aot_emitter_source = NATIVE_AOT_EMITTER_PATH.read_text(encoding="utf-8")
         catalog_source = NATIVE_REFERENCE_CATALOG_PATH.read_text(encoding="utf-8")
         runtime_prelude_source = NATIVE_AOT_RUNTIME_PRELUDE_PATH.read_text(encoding="utf-8")
+        scriban_renderer_source = SCRIBAN_RENDERER_PATH.read_text(encoding="utf-8")
 
         self.assertTrue(
             SCRIBAN_RENDERER_PATH.is_file(),
@@ -47,6 +48,8 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
         self.assertIn("ScribanTemplateRenderer", runtime_prelude_source)
         self.assertIn("NativeAotTemplateCatalog.", runtime_prelude_source)
         self.assertNotIn("private static string RenderTemplate(", runtime_prelude_source)
+        self.assertIn("private const int TemplateLoopLimit = 100_000;", scriban_renderer_source)
+        self.assertIn("context.LoopLimit = TemplateLoopLimit;", scriban_renderer_source)
 
     def test_full_closure_audit_and_runtime_skeleton_outputs_are_backed_by_scriban_templates(self) -> None:
         emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
@@ -228,6 +231,354 @@ class TestIl2CppCodeGenStructureGovernanceReference(Il2CppCodeGenStructureGovern
             "private static int GetRuntimeSkeletonPageParallelism(int pageCount)",
             "var recommendedParallelism = Math.Max(1, Environment.ProcessorCount - 1);",
             "return Math.Min(pageCount, recommendedParallelism);",
+        ]:
+            self.assertIn(required_fragment, emitter_source)
+
+    def test_runtime_skeleton_emitter_has_4c_foundation_dispatcher_skeleton(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "private sealed record RuntimeSkeletonStubBuildContext(",
+            "private enum RuntimeSkeletonFamilyHandlerMatchKind",
+            "private sealed record RuntimeSkeletonFamilyHandlerResult(",
+            "private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonFamilyHandler(",
+            "private static readonly RuntimeSkeletonFamilyHandler[] RuntimeSkeletonFamilyHandlers =",
+            "TryBuildRuntimeSkeletonConvertFamilyHandler",
+            "TryBuildRuntimeSkeletonConvertLikeFamilyHandler",
+            "TryBuildAssemblyFullClosureRuntimeSkeletonMethodStubVia4CDispatcher(",
+            "var buildContext = new RuntimeSkeletonStubBuildContext(",
+        ]:
+            self.assertIn(required_fragment, emitter_source)
+
+        self.assertLess(
+            emitter_source.index("TryBuildRuntimeSkeletonConvertFamilyHandler"),
+            emitter_source.index("TryBuildRuntimeSkeletonConvertLikeFamilyHandler"),
+        )
+
+    def test_runtime_skeleton_family_handler_result_supports_unsupported_reason_contract(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "private enum RuntimeSkeletonFamilyHandlerMatchKind",
+            "Unsupported,",
+            "private sealed record RuntimeSkeletonFamilyHandlerResult(",
+            "string? StubDefinition,",
+            "string? UnsupportedReason)",
+            "new(RuntimeSkeletonFamilyHandlerMatchKind.NoMatch, null, null);",
+            "new(RuntimeSkeletonFamilyHandlerMatchKind.Match, stubDefinition, null);",
+            "public static RuntimeSkeletonFamilyHandlerResult CreateUnsupported(string unsupportedReason) =>",
+            "new(RuntimeSkeletonFamilyHandlerMatchKind.Unsupported, null, unsupportedReason);",
+            '"convert-family-owned-unsupported-shape"',
+            '"exception-family-owned-unsupported-shape"',
+        ]:
+            self.assertIn(required_fragment, emitter_source)
+
+        dispatcher_start = emitter_source.index(
+            "private static string? TryBuildAssemblyFullClosureRuntimeSkeletonMethodStubVia4CDispatcher(",
+        )
+        convert_family_start = emitter_source.index(
+            "private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertFamilyHandler(",
+        )
+        dispatcher_slice = emitter_source[dispatcher_start:convert_family_start]
+
+        self.assertIn(
+            "if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)",
+            dispatcher_slice,
+        )
+        self.assertNotIn(
+            "if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Unsupported)",
+            dispatcher_slice,
+        )
+
+    def test_runtime_skeleton_convert_family_has_internal_handler_ordering(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonConvertFamilyHandler(",
+            "private static readonly RuntimeSkeletonConvertFamilyHandler[] RuntimeSkeletonConvertFamilyHandlers =",
+            "TryBuildRuntimeSkeletonConvertIntForwarderHandler",
+            "TryBuildRuntimeSkeletonConvertBoolIdentityForwarderHandler",
+            "TryBuildRuntimeSkeletonConvertBoolProducerForwarderHandler",
+            "TryBuildRuntimeSkeletonConvertPrimitiveHandler",
+            "TryBuildRuntimeSkeletonConvertCheckedByteHandler",
+            "TryBuildRuntimeSkeletonConvertByteForwarderHandler",
+            "foreach (var convertFamilyHandler in RuntimeSkeletonConvertFamilyHandlers)",
+        ]:
+            self.assertIn(required_fragment, emitter_source)
+
+        self.assertNotIn("TryBuildRuntimeSkeletonConvertLegacyHandler", emitter_source)
+        self.assertLess(
+            emitter_source.index("TryBuildRuntimeSkeletonConvertPrimitiveHandler"),
+            emitter_source.index("TryBuildRuntimeSkeletonConvertByteForwarderHandler"),
+        )
+
+    def test_runtime_skeleton_exception_family_has_internal_handler_ordering(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonExceptionFamilyHandler",
+            "private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonExceptionFamilyHandler(",
+            "private static readonly RuntimeSkeletonExceptionFamilyHandler[] RuntimeSkeletonExceptionFamilyHandlers =",
+            "TryBuildRuntimeSkeletonStaticExceptionThrowLiteralHandler",
+            "TryBuildRuntimeSkeletonStaticExceptionThrowStringProducerHandler",
+            "TryBuildRuntimeSkeletonStaticExceptionCatchStringReturnHandler",
+            "TryBuildRuntimeSkeletonExceptionThrowCatchFinallyHandler",
+            "TryBuildRuntimeSkeletonNestedExceptionThrowCatchFinallyHandler",
+            "foreach (var exceptionFamilyHandler in RuntimeSkeletonExceptionFamilyHandlers)",
+        ]:
+            self.assertIn(required_fragment, emitter_source)
+
+        self.assertNotIn("TryBuildRuntimeSkeletonExceptionLegacyHandler", emitter_source)
+        self.assertLess(
+            emitter_source.index("TryBuildRuntimeSkeletonStaticExceptionThrowLiteralHandler"),
+            emitter_source.index("TryBuildRuntimeSkeletonNestedExceptionThrowCatchFinallyHandler"),
+        )
+
+    def test_runtime_skeleton_array_family_has_internal_handler_ordering(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonArrayFamilyHandler",
+            "private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonArrayFamilyHandler(",
+            "private static readonly RuntimeSkeletonArrayFamilyHandler[] RuntimeSkeletonArrayFamilyHandlers =",
+            "TryBuildRuntimeSkeletonArrayBoxingReferenceArrayHandler",
+            "TryBuildRuntimeSkeletonArrayClearReferenceArrayHandler",
+            "TryBuildRuntimeSkeletonArrayReverseReferenceArrayHandler",
+            "TryBuildRuntimeSkeletonArrayCopyReferenceArrayHandler",
+            "foreach (var arrayFamilyHandler in RuntimeSkeletonArrayFamilyHandlers)",
+        ]:
+            self.assertIn(required_fragment, emitter_source)
+
+        self.assertNotIn("TryBuildRuntimeSkeletonArrayLegacyHandler", emitter_source)
+        self.assertLess(
+            emitter_source.index("TryBuildRuntimeSkeletonArrayBoxingReferenceArrayHandler"),
+            emitter_source.index("TryBuildRuntimeSkeletonArrayCopyReferenceArrayHandler"),
+        )
+
+    def test_runtime_skeleton_async_family_has_internal_handler_ordering(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonAsyncFamilyHandler",
+            "private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonAsyncFamilyHandler(",
+            "private static readonly RuntimeSkeletonAsyncFamilyHandler[] RuntimeSkeletonAsyncFamilyHandlers =",
+            "TryBuildRuntimeSkeletonAsyncTaskFactoryHandler",
+            "TryBuildRuntimeSkeletonAsyncGetResultHandler",
+            "TryBuildRuntimeSkeletonAsyncStateMachineNoOpHandler",
+            "foreach (var asyncFamilyHandler in RuntimeSkeletonAsyncFamilyHandlers)",
+        ]:
+            self.assertIn(required_fragment, emitter_source)
+
+        self.assertNotIn("TryBuildRuntimeSkeletonAsyncLegacyHandler", emitter_source)
+        self.assertLess(
+            emitter_source.index("TryBuildRuntimeSkeletonAsyncTaskFactoryHandler"),
+            emitter_source.index("TryBuildRuntimeSkeletonAsyncStateMachineNoOpHandler"),
+        )
+
+    def test_runtime_skeleton_interop_family_has_internal_handler_ordering(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonInteropFamilyHandler",
+            "private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonInteropFamilyHandler(",
+            "private static readonly RuntimeSkeletonInteropFamilyHandler[] RuntimeSkeletonInteropFamilyHandlers =",
+            "TryBuildRuntimeSkeletonMarshalingUtf8ExportHandler",
+            "TryBuildRuntimeSkeletonReflectionInteropClosureHandler",
+            "TryBuildRuntimeSkeletonPInvokeDirectCallHandler",
+            "foreach (var interopFamilyHandler in RuntimeSkeletonInteropFamilyHandlers)",
+        ]:
+            self.assertIn(required_fragment, emitter_source)
+
+        self.assertNotIn("TryBuildRuntimeSkeletonInteropLegacyHandler", emitter_source)
+        self.assertLess(
+            emitter_source.index("TryBuildRuntimeSkeletonMarshalingUtf8ExportHandler"),
+            emitter_source.index("TryBuildRuntimeSkeletonPInvokeDirectCallHandler"),
+        )
+
+    def test_runtime_skeleton_binding_family_has_internal_handler_ordering(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonBindingFamilyHandler",
+            "private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonBindingFamilyHandler(",
+            "private static readonly RuntimeSkeletonBindingFamilyHandler[] RuntimeSkeletonBindingFamilyHandlers =",
+            "TryBuildRuntimeSkeletonConstructorFieldSetterHandler",
+            "TryBuildRuntimeSkeletonFieldBackedStringReturnHandler",
+            "TryBuildRuntimeSkeletonFieldArgumentStringReturnHandler",
+            "TryBuildRuntimeSkeletonFieldGetterStringReturnHandler",
+            "TryBuildRuntimeSkeletonDelegateClosedTargetRelayHandler",
+            "foreach (var bindingFamilyHandler in RuntimeSkeletonBindingFamilyHandlers)",
+        ]:
+            self.assertIn(required_fragment, emitter_source)
+
+        self.assertNotIn("TryBuildRuntimeSkeletonBindingLegacyHandler", emitter_source)
+        self.assertLess(
+            emitter_source.index("TryBuildRuntimeSkeletonConstructorFieldSetterHandler"),
+            emitter_source.index("TryBuildRuntimeSkeletonDelegateClosedTargetRelayHandler"),
+        )
+
+    def test_runtime_skeleton_platform_family_has_internal_handler_ordering(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonPlatformFamilyHandler",
+            "private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonPlatformFamilyHandler(",
+            "private static readonly RuntimeSkeletonPlatformFamilyHandler[] RuntimeSkeletonPlatformFamilyHandlers =",
+            "TryBuildRuntimeSkeletonInterfaceDispatchMessageHandler",
+            "TryBuildRuntimeSkeletonThreadingThreadStaticMonitorHandler",
+            "foreach (var platformFamilyHandler in RuntimeSkeletonPlatformFamilyHandlers)",
+        ]:
+            self.assertIn(required_fragment, emitter_source)
+
+        self.assertNotIn("TryBuildRuntimeSkeletonPlatformLegacyHandler", emitter_source)
+        self.assertLess(
+            emitter_source.index("TryBuildRuntimeSkeletonInterfaceDispatchMessageHandler"),
+            emitter_source.index("TryBuildRuntimeSkeletonThreadingThreadStaticMonitorHandler"),
+        )
+
+    def test_runtime_skeleton_utility_family_has_internal_handler_ordering(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonUtilityFamilyHandler",
+            "private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonUtilityFamilyHandler(",
+            "private static readonly RuntimeSkeletonUtilityFamilyHandler[] RuntimeSkeletonUtilityFamilyHandlers =",
+            "TryBuildRuntimeSkeletonStaticVoidObjectSinkNoOpHandler",
+            "TryBuildRuntimeSkeletonStaticBoolForwarderHandler",
+            "TryBuildRuntimeSkeletonConsoleWriteLineHandler",
+            "foreach (var utilityFamilyHandler in RuntimeSkeletonUtilityFamilyHandlers)",
+        ]:
+            self.assertIn(required_fragment, emitter_source)
+
+        self.assertNotIn("TryBuildRuntimeSkeletonUtilityLegacyHandler", emitter_source)
+        self.assertLess(
+            emitter_source.index("TryBuildRuntimeSkeletonStaticVoidObjectSinkNoOpHandler"),
+            emitter_source.index("TryBuildRuntimeSkeletonConsoleWriteLineHandler"),
+        )
+
+    def test_runtime_skeleton_string_family_has_internal_handler_ordering(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonStringFamilyHandler",
+            "private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonStringFamilyHandler(",
+            "private static readonly RuntimeSkeletonStringFamilyHandler[] RuntimeSkeletonStringFamilyHandlers =",
+            "TryBuildRuntimeSkeletonStaticStringReturnForwarderHandler",
+            "TryBuildRuntimeSkeletonStaticStringForwarderHandler",
+            "TryBuildRuntimeSkeletonStaticStringLiteralAppendHandler",
+            "TryBuildRuntimeSkeletonStaticStringForwarderConsoleWriteLineHandler",
+            "TryBuildRuntimeSkeletonStaticStringProducerForwarderConsoleWriteLineHandler",
+            "TryBuildRuntimeSkeletonStaticStringProducerCtorGetterConsoleWriteLineHandler",
+            "TryBuildRuntimeSkeletonStaticStringProducerCtorRenderConsoleWriteLineHandler",
+            "TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineHandler",
+            "TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineHandler",
+            "TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderConsoleWriteLineHandler",
+            "TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineHandler",
+            "TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineHandler",
+            "TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineHandler",
+            "TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineHandler",
+            "TryBuildRuntimeSkeletonStaticLiteralStringReturnHandler",
+            "TryBuildRuntimeSkeletonStaticResourceKeyStringReturnHandler",
+            "TryBuildRuntimeSkeletonStaticStringProducerConsoleWriteLineHandler",
+            "TryBuildRuntimeSkeletonStaticCallCtorGetterExecutableHandler",
+            "TryBuildRuntimeSkeletonConstructorThenInstanceCallExecutableHandler",
+            "foreach (var stringFamilyHandler in RuntimeSkeletonStringFamilyHandlers)",
+        ]:
+            self.assertIn(required_fragment, emitter_source)
+
+        self.assertLess(
+            emitter_source.index("TryBuildRuntimeSkeletonStaticStringReturnForwarderHandler"),
+            emitter_source.index("TryBuildRuntimeSkeletonConstructorThenInstanceCallExecutableHandler"),
+        )
+
+    def test_runtime_skeleton_string_family_owns_string_executable_plan_lanes(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("TryBuildRuntimeSkeletonStaticCallCtorGetterExecutableHandler", emitter_source)
+        self.assertIn("TryBuildRuntimeSkeletonConstructorThenInstanceCallExecutableHandler", emitter_source)
+        self.assertIn(
+            'string.Equals(executableLoweringPlan.PlanKind, "staticCallCtorGetter", StringComparison.Ordinal)',
+            emitter_source,
+        )
+        self.assertIn(
+            'string.Equals(executableLoweringPlan.PlanKind, "constructorThenInstanceCall", StringComparison.Ordinal)',
+            emitter_source,
+        )
+
+        string_family_handlers_start = emitter_source.index(
+            "private static readonly RuntimeSkeletonStringFamilyHandler[] RuntimeSkeletonStringFamilyHandlers =",
+        )
+        string_family_handlers_end = emitter_source.index(
+            "private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertFamilyHandler(",
+        )
+        string_family_handlers_slice = emitter_source[string_family_handlers_start:string_family_handlers_end]
+
+        self.assertIn("TryBuildRuntimeSkeletonStaticCallCtorGetterExecutableHandler", string_family_handlers_slice)
+        self.assertIn("TryBuildRuntimeSkeletonConstructorThenInstanceCallExecutableHandler", string_family_handlers_slice)
+
+        convert_like_family_start = emitter_source.index(
+            "private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeFamilyHandler(",
+        )
+        convert_int_handler_start = emitter_source.index(
+            "private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertIntForwarderHandler(",
+        )
+        convert_like_family_slice = emitter_source[convert_like_family_start:convert_int_handler_start]
+
+        self.assertNotIn(
+            'string.Equals(executableLoweringPlan.PlanKind, "staticCallCtorGetter", StringComparison.Ordinal)',
+            convert_like_family_slice,
+        )
+        self.assertNotIn(
+            'string.Equals(executableLoweringPlan.PlanKind, "constructorThenInstanceCall", StringComparison.Ordinal)',
+            convert_like_family_slice,
+        )
+
+    def test_runtime_skeleton_legacy_family_is_removed_after_convert_like_cutover(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        self.assertNotIn("TryBuildRuntimeSkeletonLegacyFamilyHandler", emitter_source)
+        self.assertNotIn("TryBuildAssemblyFullClosureRuntimeSkeletonMethodStubLegacy(", emitter_source)
+
+    def test_runtime_skeleton_convert_like_family_owns_generic_convert_fallback_lanes(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        family_handlers_start = emitter_source.index(
+            "private static readonly RuntimeSkeletonFamilyHandler[] RuntimeSkeletonFamilyHandlers =",
+        )
+        convert_family_start = emitter_source.index(
+            "private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertFamilyHandler(",
+        )
+        convert_like_family_start = emitter_source.index(
+            "private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeFamilyHandler(",
+        )
+        convert_int_handler_start = emitter_source.index(
+            "private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertIntForwarderHandler(",
+        )
+
+        family_handlers_slice = emitter_source[family_handlers_start:convert_family_start]
+        convert_like_family_slice = emitter_source[convert_like_family_start:convert_int_handler_start]
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonConvertLikeFamilyHandler",
+            "foreach (var convertFamilyHandler in RuntimeSkeletonConvertFamilyHandlers)",
+            "return RuntimeSkeletonFamilyHandlerResult.NoMatch;",
+        ]:
+            self.assertIn(required_fragment, emitter_source)
+
+        self.assertIn("TryBuildRuntimeSkeletonConvertLikeFamilyHandler", family_handlers_slice)
+        self.assertIn("foreach (var convertFamilyHandler in RuntimeSkeletonConvertFamilyHandlers)", convert_like_family_slice)
+
+    def test_runtime_skeleton_convert_families_share_handler_loop_helper(self) -> None:
+        emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertHandlers(",
+            "RuntimeSkeletonFamilyHandlerResult missResult)",
+            "foreach (var convertFamilyHandler in RuntimeSkeletonConvertFamilyHandlers)",
+            "return missResult;",
+            "return TryBuildRuntimeSkeletonConvertHandlers(",
+            'RuntimeSkeletonFamilyHandlerResult.CreateUnsupported("convert-family-owned-unsupported-shape"));',
+            "return TryBuildRuntimeSkeletonConvertHandlers(buildContext, RuntimeSkeletonFamilyHandlerResult.NoMatch);",
         ]:
             self.assertIn(required_fragment, emitter_source)
 

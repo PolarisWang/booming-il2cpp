@@ -5,6 +5,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
+OWNER_ROOT = REPO_ROOT / "verification" / "catalog" / "owners"
 CANONICAL_SUBJECTS = (
     "SolutionCorePack",
     "MixedExecutionFeaturePack",
@@ -31,27 +32,27 @@ BANNED_CORRECTNESS_SYMBOLS = (
 )
 FORMAL_VERIFICATION_ROOTS = {
     "SolutionCorePack": (
-        REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Proofs",
-        REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Benchmarks",
-        REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Host",
+        OWNER_ROOT / "SolutionCorePack" / "proofs",
+        OWNER_ROOT / "SolutionCorePack" / "benchmarks",
+        OWNER_ROOT / "SolutionCorePack" / "support",
     ),
     "MixedExecutionFeaturePack": (
-        REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "Proofs",
-        REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "Benchmarks",
-        REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "Host",
+        OWNER_ROOT / "MixedExecutionFeaturePack" / "proofs",
+        OWNER_ROOT / "MixedExecutionFeaturePack" / "benchmarks",
+        OWNER_ROOT / "MixedExecutionFeaturePack" / "support",
     ),
     "HotUpdateHostPack": (
-        REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "Host" / "Proofs",
-        REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "Host" / "Benchmarks",
-        REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "Host",
+        OWNER_ROOT / "HotUpdateHostPack" / "proofs",
+        OWNER_ROOT / "HotUpdateHostPack" / "benchmarks",
+        OWNER_ROOT / "HotUpdateHostPack" / "support",
     ),
 }
 PRODUCT_SOURCE_ROOTS = (
     REPO_ROOT / "build" / "toolchains" / "run",
     REPO_ROOT / "src" / "reference",
-    REPO_ROOT / "subjects" / "SolutionCorePack",
-    REPO_ROOT / "subjects" / "MixedExecutionFeaturePack",
-    REPO_ROOT / "subjects" / "HotUpdateHostPack",
+    OWNER_ROOT / "SolutionCorePack",
+    OWNER_ROOT / "MixedExecutionFeaturePack",
+    OWNER_ROOT / "HotUpdateHostPack",
 )
 IGNORED_SOURCE_SEGMENTS = {
     ".vs",
@@ -76,7 +77,7 @@ def _iter_source_files(root: Path) -> list[Path]:
 class Phase5LegacyCutoverContractTests(unittest.TestCase):
     def test_canonical_subject_trees_do_not_reintroduce_legacy_directory_segments(self) -> None:
         for subject_id in CANONICAL_SUBJECTS:
-            subject_root = REPO_ROOT / "subjects" / subject_id
+            subject_root = OWNER_ROOT / subject_id
             self.assertTrue(subject_root.is_dir(), msg=f"missing canonical subject root: {subject_root}")
 
             for path in subject_root.rglob("*"):

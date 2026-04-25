@@ -219,23 +219,20 @@ class TestSubjectWorkersBuildNativeAotContractsPerf(SubjectWorkersTestSupport):
             (repo_root / dispatch_manifest_path).parent.mkdir(parents=True, exist_ok=True)
             (repo_root / dispatch_manifest_path).write_text("{}", encoding="utf-8")
 
-            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
-            subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
-            subject_manifest_path.write_text(
-                json.dumps(
-                    {
-                        "subjectId": subject_id,
-                        "validation": {
-                            "perf": {
-                                "kind": "perf",
-                                "driver": "native-runtime-perf",
-                                "defaultVariant": "PROFILE",
-                                "harnessIterations": 4,
-                            }
-                        },
-                    }
-                ),
-                encoding="utf-8",
+            write_owner_manifest(
+                repo_root,
+                subject_id,
+                {
+                    "subjectId": subject_id,
+                    "validation": {
+                        "perf": {
+                            "kind": "perf",
+                            "driver": "native-runtime-perf",
+                            "defaultVariant": "PROFILE",
+                            "harnessIterations": 4,
+                        }
+                    },
+                },
             )
 
             perf_result = {

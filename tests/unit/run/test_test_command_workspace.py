@@ -248,6 +248,39 @@ class TestCommandWorkspaceTests(unittest.TestCase):
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 
+    def test_workspace_requires_manifest_regeneration_when_declared_unit_default_matrix_is_missing_from_cached_workspace(self) -> None:
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_test_command_workspace_stale_declared_matrix")
+        manifest = {
+            "workspaceVersion": 2,
+            "subjectId": "FixtureSubject",
+            "defaultMatrixId": "windows-native-check",
+            "matrices": [
+                {
+                    "matrixId": "windows-native-check",
+                    "goalIds": ["correctness.dev"],
+                    "hostPlatform": "windows-x64",
+                }
+            ],
+        }
+        selected_object = {
+            "type": "declared-unit-test",
+            "subjectId": "FixtureSubject",
+            "defaultMatrixId": "windows-managed-proof",
+            "defaultGoalId": "correctness.dev",
+            "stableId": "FixtureSubject::Fixture.Managed::Fixture.Managed.ProofEntry::Run()",
+            "alias": "managed-proof",
+            "entryIndex": 3,
+        }
+
+        requires_regeneration = test_module._workspace_requires_manifest_regeneration(
+            manifest,
+            selected_object=selected_object,
+            normalized_options={},
+            host_platform="windows",
+        )
+
+        self.assertTrue(requires_regeneration)
+
     def test_resolve_workspace_execution_prefers_hotupdate_test_project_for_hotupdate_declared_unit_test(self) -> None:
         test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_test_command_workspace_hotupdate_host")
         repo_root = self._make_repo_root("workspace-hotupdate-host")
@@ -337,6 +370,147 @@ class TestCommandWorkspaceTests(unittest.TestCase):
             )
             self.assertEqual(f"hotupdate-test/{subject_id}/proof-host", execution["managedTestProject"]["projectId"])
             self.assertEqual(4, execution["entryIndex"])
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
+    def test_run_subject_object_materializes_subject_review_bundle_into_summary_and_result(self) -> None:
+        test_module = load_module(TEST_COMMAND_MODULE_PATH, "chaos_test_command_subject_review_bundle")
+        repo_root = self._make_repo_root("subject-review-bundle")
+        selected_object = {
+            "id": "subject/SolutionCorePack",
+            "type": "subject",
+            "subjectId": "SolutionCorePack",
+            "defaultGoalId": "correctness.platform",
+            "defaultMatrixId": "windows-corelib-reference-native-hotupdate-proof",
+        }
+        run_id = "20260424-fixture-subject-review-001"
+
+        plan = {
+            "selection": {
+                "subjectId": "SolutionCorePack",
+                "goalId": "correctness.platform",
+                "matrixId": "windows-corelib-reference-native-hotupdate-proof",
+                "validationKind": "proof",
+                "pipelineId": "native-hotupdate-proof-output",
+                "executionContext": {
+                    "hostPlatform": "windows-x64",
+                    "targetPlatform": "windows-x64",
+                    "toolchainProfile": "msvc-reference",
+                    "runtimeProfile": "native-hotupdate-proof-output",
+                },
+            },
+            "stagePlan": [],
+            "artifactsRoot": {
+                "runReportRoot": f"artifacts/logs/run/{run_id}",
+                "runsRoot": "artifacts/logs/run",
+                "subjectReportRoot": f"artifacts/subjects/SolutionCorePack/runs/{run_id}/subject-report",
+                "pipelineReportRoot": f"artifacts/subjects/SolutionCorePack/runs/{run_id}/matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report",
+            },
+        }
+        matrix_report_path = (
+            f"artifacts/subjects/SolutionCorePack/runs/{run_id}/"
+            "matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report.json"
+        )
+        audit_path = (
+            f"artifacts/subjects/SolutionCorePack/runs/{run_id}/"
+            "matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/native-hotupdate-audit.json"
+        )
+        codegen_path = (
+            f"artifacts/subjects/SolutionCorePack/runs/{run_id}/"
+            "matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/codegen-summary.json"
+        )
+        linkage_path = (
+            f"artifacts/subjects/SolutionCorePack/runs/{run_id}/"
+            "matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/generic-matrix-proof-linkage.json"
+        )
+        summary_path = f"artifacts/subjects/SolutionCorePack/runs/{run_id}/subject-report/summary.json"
+        review_bundle_path = f"artifacts/subjects/SolutionCorePack/runs/{run_id}/subject-report/review-bundle.json"
+
+        execution_result = {
+            "subjectId": "SolutionCorePack",
+            "matrixId": "windows-corelib-reference-native-hotupdate-proof",
+            "goalId": "correctness.platform",
+            "status": "ok",
+            "terminalStageId": "runtime-managed-output",
+            "terminalBucket": "runtime",
+            "stageResults": [],
+            "errors": [],
+        }
+        matrix_report = {
+            "reportVersion": "v1",
+            "runId": run_id,
+            "generatedAt": "2026-04-24T02:00:00Z",
+            "subjectId": "SolutionCorePack",
+            "matrixId": "windows-corelib-reference-native-hotupdate-proof",
+            "goalId": "correctness.platform",
+            "validationKind": "proof",
+            "selection": dict(plan["selection"]),
+            "status": "ok",
+            "terminalBucket": "runtime",
+            "stageResults": [],
+            "artifactResults": [],
+            "errors": [],
+            "reportArtifacts": [audit_path, codegen_path, linkage_path],
+            "codegenReportPaths": [codegen_path],
+            "matrixProofLinkage": {
+                "artifactPath": linkage_path,
+                "proofKind": "hotupdate-proof",
+                "boundaryCaseCount": 3,
+            },
+        }
+
+        try:
+            with patch.object(test_module, "_resolve_workspace_execution", return_value=None), patch.object(
+                test_module.reporting_module,
+                "build_run_id",
+                return_value=run_id,
+            ), patch.object(
+                test_module.subject_planner_module,
+                "build_plan",
+                return_value=plan,
+            ), patch.object(
+                test_module.subject_executor_module,
+                "execute_plan",
+                return_value=execution_result,
+            ), patch.object(
+                test_module.subject_reporting_module,
+                "build_matrix_report",
+                return_value=dict(matrix_report),
+            ), patch.object(
+                test_module.subject_reporting_module,
+                "materialize_matrix_report_artifacts",
+                side_effect=lambda repo_root_arg, matrix_report_path, matrix_report: list(matrix_report.get("reportArtifacts") or []),
+            ), patch.object(
+                test_module.subject_validations_module,
+                "run_subject_validations",
+                return_value={"validationResults": [], "errors": [], "artifacts": []},
+            ):
+                result = test_module._run_subject_object(
+                    index=unittest.mock.MagicMock(errors=[]),
+                    selected_object=selected_object,
+                    normalized_options={"id": "subject/SolutionCorePack"},
+                    repo_root=repo_root,
+                    host_platform="windows",
+                    command_text="test subject --id subject/SolutionCorePack",
+                )
+
+            payload = result.payload
+            self.assertIn(review_bundle_path, payload["artifacts"])
+            subject_result = payload["subjectResults"][0]
+            self.assertEqual([review_bundle_path], subject_result["subjectReportArtifacts"])
+            self.assertEqual(review_bundle_path, subject_result["subjectReviewBundle"]["artifactPath"])
+
+            summary_payload = json.loads((repo_root / summary_path).read_text(encoding="utf-8"))
+            self.assertEqual([review_bundle_path], summary_payload["subjectReportArtifacts"])
+            self.assertEqual(review_bundle_path, summary_payload["subjectReviewBundle"]["artifactPath"])
+
+            review_bundle_payload = json.loads((repo_root / review_bundle_path).read_text(encoding="utf-8"))
+            self.assertEqual("subject-review-bundle", review_bundle_payload["artifactKind"])
+            self.assertEqual(
+                [audit_path, codegen_path, linkage_path],
+                review_bundle_payload["artifactPaths"],
+            )
+            self.assertEqual("hotupdate-proof", review_bundle_payload["matrixReviews"][0]["proofKind"])
         finally:
             shutil.rmtree(repo_root, ignore_errors=True)
 

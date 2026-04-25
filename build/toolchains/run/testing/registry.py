@@ -532,6 +532,13 @@ def _matrix_uses_hotupdate_host(manifest: dict[str, Any], matrix: dict[str, Any]
     return False
 
 
+def _matrix_is_managed_proof(matrix: dict[str, Any]) -> bool:
+    execution_context = dict(matrix.get("executionContext") or {})
+    toolchain_profile = str(execution_context.get("toolchainProfile") or "").strip().lower()
+    runtime_profile = str(execution_context.get("runtimeProfile") or "").strip().lower()
+    return toolchain_profile == "dotnet-managed" and runtime_profile == "managed-proof-output"
+
+
 def _select_engineering_matrix(manifest: dict[str, Any], kind: str) -> tuple[str, str]:
     candidate_stage_kinds = ENGINEERING_MATRIX_STAGE_KINDS.get(kind, ())
     matrices = _preferred_subject_matrices(manifest)
@@ -581,6 +588,11 @@ def _select_declared_matrix(
     if family == "declared-unit-test" and int(payload.get("hotUpdateCapability") or 0) > 0:
         for matrix in _preferred_subject_matrices(manifest):
             if _matrix_uses_hotupdate_host(manifest, matrix):
+                return str(matrix.get("matrixId") or ""), _matrix_goal_id(manifest, matrix)
+
+    if family == "declared-unit-test":
+        for matrix in _preferred_subject_matrices(manifest):
+            if _matrix_is_managed_proof(matrix):
                 return str(matrix.get("matrixId") or ""), _matrix_goal_id(manifest, matrix)
 
     if family == "declared-benchmark":

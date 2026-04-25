@@ -16,7 +16,7 @@
     <ProjectReference Include="..\\..\\..\\..\\..\\..\\src\\managed\\Chaos.IL2CPP.HotUpdate\\Chaos.IL2CPP.HotUpdate.csproj" />
     <ProjectReference Include="..\\..\\..\\..\\..\\..\\src\\managed\\Chaos.IL2CPP.Loader\\Chaos.IL2CPP.Loader.csproj" />
     <ProjectReference Include="..\\..\\..\\..\\..\\..\\src\\managed\\Chaos.IL2CPP.Interpreter\\Chaos.IL2CPP.Interpreter.csproj" />
-    <ProjectReference Include="..\\..\\..\\scenarios\\MixedExecutionFeaturePack\\MixedBridgeSolution\\InterpreterArithmeticProof\\InterpreterArithmeticProof.csproj" />
+    <ProjectReference Include="..\\..\\..\\..\\scenarios\\MixedExecutionFeaturePack\\MixedBridgeSolution\\InterpreterArithmeticProof\\InterpreterArithmeticProof.csproj" />
   </ItemGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="MixedExecutionFeaturePack.DeclaredBenchmarkNativeHost" />

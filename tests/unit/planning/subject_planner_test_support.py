@@ -59,6 +59,11 @@ def create_subject_repo(prefix: str, manifest: dict) -> tuple[Path, dict]:
     return repo_root, manifest
 
 
+def write_owner_manifest(repo_root: Path, subject_id: str, payload: dict) -> Path:
+    materialize_subject_manifest(repo_root, payload)
+    return repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.manifest.json"
+
+
 def build_native_proof_subject_manifest(subject_id: str = "FixtureNativeProofSubject") -> dict:
     return {
         "subjectId": subject_id,
@@ -69,7 +74,7 @@ def build_native_proof_subject_manifest(subject_id: str = "FixtureNativeProofSub
         "defaultValidationProfile": "proof-dev",
         "source": {
             "type": "dotnet-project",
-            "path": f"subjects/{subject_id}/source/{subject_id}.csproj",
+            "path": f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.csproj",
             "entry": f"{subject_id}/Program::Main()",
         },
         "validationProfiles": {
@@ -162,7 +167,7 @@ def build_managed_perf_subject_manifest(subject_id: str = "FixtureManagedPerfSub
         "defaultValidationProfile": "perf-profile",
         "source": {
             "type": "dotnet-project",
-            "path": f"subjects/{subject_id}/source/{subject_id}.csproj",
+            "path": f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.csproj",
             "entry": f"{subject_id}/Program::RunWorkload()",
         },
         "workloadEntry": f"{subject_id}/Program::RunWorkload()",
@@ -221,7 +226,7 @@ def build_managed_output_subject_manifest(subject_id: str = "FixtureManagedOutpu
         "defaultValidationProfile": "proof-dev",
         "source": {
             "type": "dotnet-project",
-            "path": f"subjects/{subject_id}/source/{subject_id}.csproj",
+            "path": f"verification/catalog/owners/{subject_id}/support/host/{subject_id}.csproj",
             "entry": f"{subject_id}/Program::Main()",
         },
         "validationProfiles": {
@@ -277,8 +282,10 @@ def build_solution_style_managed_perf_subject_manifest(
     matrix_workload_entry: str | None = None,
 ) -> dict:
     manifest = build_managed_perf_subject_manifest(subject_id)
-    manifest["source"]["path"] = f"subjects/{subject_id}/source/{subject_id}.sln"
-    manifest["source"]["primaryProjectPath"] = f"subjects/{subject_id}/source/{subject_id}.csproj"
+    manifest["source"]["path"] = f"verification/catalog/scenarios/{subject_id}/{subject_id}Solution/{subject_id}.sln"
+    manifest["source"]["primaryProjectPath"] = (
+        f"verification/catalog/scenarios/{subject_id}/{subject_id}Solution/App/{subject_id}.App.csproj"
+    )
     if source_entry is not None:
         manifest["source"]["entry"] = source_entry
     if workload_entry is not None:
@@ -298,8 +305,10 @@ def build_solution_style_managed_output_subject_manifest(
     matrix_source_entry: str | None = None,
 ) -> dict:
     manifest = build_managed_output_subject_manifest(subject_id)
-    manifest["source"]["path"] = f"subjects/{subject_id}/source/{subject_id}.sln"
-    manifest["source"]["primaryProjectPath"] = f"subjects/{subject_id}/source/{subject_id}.csproj"
+    manifest["source"]["path"] = f"verification/catalog/scenarios/{subject_id}/{subject_id}Solution/{subject_id}.sln"
+    manifest["source"]["primaryProjectPath"] = (
+        f"verification/catalog/scenarios/{subject_id}/{subject_id}Solution/App/{subject_id}.App.csproj"
+    )
     if source_entry is not None:
         manifest["source"]["entry"] = source_entry
     matrix = manifest["environmentMatrices"][0]

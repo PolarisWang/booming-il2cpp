@@ -62,20 +62,20 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         cls.subject_id = "GoldenSimpleLib.App"
         cls.project_path = (
             REPO_ROOT
-            / "subjects"
+            / "verification"
+            / "catalog"
+            / "scenarios"
             / cls.subject_pack_id
-            / "source"
-            / "EngineeringScenarios"
             / "SimpleLibrarySolution"
             / "App"
             / "GoldenSimpleLib.App.csproj"
         )
         cls.dll_path = (
             REPO_ROOT
-            / "subjects"
+            / "verification"
+            / "catalog"
+            / "scenarios"
             / cls.subject_pack_id
-            / "source"
-            / "EngineeringScenarios"
             / "SimpleLibrarySolution"
             / "App"
             / "bin"
@@ -145,7 +145,10 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         overview_text = CONTRACT_OVERVIEW_PATH.read_text(encoding="utf-8")
 
         self.assertIn("retained solution slice input", spec_text)
-        self.assertIn("subjects/<subject-pack>/source/Slices/<slice-name>/<slice-name>.csproj", spec_text)
+        self.assertIn(
+            "verification/catalog/scenarios/<subject-pack>/<solution-name>/<slice-name>/<slice-name>.csproj",
+            spec_text,
+        )
         self.assertIn("closure.manifest.json", spec_text)
         self.assertIn(
             "artifacts/subjects/<subject-id>/runs/<run-id>/analysis/analysis/hot-update/supplemental-metadata-template.json",
@@ -268,7 +271,10 @@ class ManagedClosureContractBundleTests(unittest.TestCase):
         self.assertEqual("static-method", main_method["methodRole"])
         self.assertEqual("has-canonical-body", main_method["bodyAvailability"])
         self.assertEqual(2, main_method["bodyAvailabilityCode"])
-        self.assertEqual([], main_method["capabilities"])
+        self.assertEqual(
+            ["requires-console-string-output"],
+            main_method["capabilities"],
+        )
         self.assertEqual(
             [4, 4],
             [

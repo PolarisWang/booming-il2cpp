@@ -15,9 +15,9 @@ class TestSolutionCorePackPlannerNativeProofA(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-foundation-dll-translation-native-proof", plan["selection"]["matrixId"])
         self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/App/FoundationDllTranslation.App.csproj",
+            solution_core_pack_scenario_project_path("FoundationDllTranslationSolution", "FoundationDllTranslation.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("", plan["selection"]["source"]["entry"])
@@ -37,9 +37,9 @@ class TestSolutionCorePackPlannerNativeProofA(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-static-call-ctor-getter-native-proof", plan["selection"]["matrixId"])
         self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/StaticCallCtorGetterSolution/App/StaticCallCtorGetter.App.csproj",
+            solution_core_pack_scenario_project_path("StaticCallCtorGetterSolution", "StaticCallCtorGetter.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("", plan["selection"]["source"]["entry"])
@@ -59,9 +59,9 @@ class TestSolutionCorePackPlannerNativeProofA(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-constructor-then-instance-call-native-proof", plan["selection"]["matrixId"])
         self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/ConstructorThenInstanceCallSolution/App/ConstructorThenInstanceCall.App.csproj",
+            solution_core_pack_scenario_project_path("ConstructorThenInstanceCallSolution", "ConstructorThenInstanceCall.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("", plan["selection"]["source"]["entry"])
@@ -81,9 +81,9 @@ class TestSolutionCorePackPlannerNativeProofA(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-delegate-closed-target-relay-native-proof", plan["selection"]["matrixId"])
         self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/DelegateClosedTargetRelaySolution/App/DelegateClosedTargetRelay.App.csproj",
+            solution_core_pack_scenario_project_path("DelegateClosedTargetRelaySolution", "DelegateClosedTargetRelay.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("", plan["selection"]["source"]["entry"])
@@ -103,9 +103,9 @@ class TestSolutionCorePackPlannerNativeProofA(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-exception-throw-catch-finally-native-proof", plan["selection"]["matrixId"])
         self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/ExceptionThrowCatchFinallySolution/App/ExceptionThrowCatchFinally.App.csproj",
+            solution_core_pack_scenario_project_path("ExceptionThrowCatchFinallySolution", "ExceptionThrowCatchFinally.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("", plan["selection"]["source"]["entry"])
@@ -125,9 +125,9 @@ class TestSolutionCorePackPlannerNativeProofA(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-nested-exception-throw-catch-finally-native-proof", plan["selection"]["matrixId"])
         self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/NestedExceptionThrowCatchFinallySolution/App/NestedExceptionThrowCatchFinally.App.csproj",
+            solution_core_pack_scenario_project_path("NestedExceptionThrowCatchFinallySolution", "NestedExceptionThrowCatchFinally.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("", plan["selection"]["source"]["entry"])
@@ -147,9 +147,9 @@ class TestSolutionCorePackPlannerNativeProofA(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-corelib-reference-native-proof", plan["selection"]["matrixId"])
         self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/NativeProofApp/GoldenCoreLibReference.NativeProofApp.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/CoreLibReferenceSolution/NativeProofApp/GoldenCoreLibReference.NativeProofApp.csproj",
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("", plan["selection"]["source"]["entry"])
@@ -169,9 +169,9 @@ class TestSolutionCorePackPlannerNativeProofA(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-marshaling-utf8-export-native-proof", plan["selection"]["matrixId"])
         self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/MarshalingUtf8ExportSolution/App/MarshalingUtf8Export.App.csproj",
+            solution_core_pack_scenario_project_path("MarshalingUtf8ExportSolution", "MarshalingUtf8Export.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("", plan["selection"]["source"]["entry"])

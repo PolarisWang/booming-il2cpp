@@ -54,7 +54,7 @@ class TestProjectWorkspaceSubjectTargetsOperations(ProjectWorkspaceTestSupport):
                 "managedProjects": [
                     {
                         "projectId": "managed/FixtureSubject/FixtureSubject",
-                        "projectPath": "subjects/FixtureSubject/source/FixtureSubject.csproj",
+                        "projectPath": "verification/catalog/owners/FixtureSubject/support/host/FixtureSubject.csproj",
                         "assemblyName": "FixtureSubject",
                         "isPrimary": True,
                     }
@@ -132,7 +132,13 @@ class TestProjectWorkspaceSubjectTargetsOperations(ProjectWorkspaceTestSupport):
             report = json.loads((repo_root / result["buildReportPath"]).read_text(encoding="utf-8"))
             self.assertEqual(["windows-dev-output"], report["builtMatrices"])
             self.assertEqual(
-                ["dotnet", "build", str(repo_root / "subjects" / "FixtureSubject" / "source" / "FixtureSubject.csproj"), "-c", "Release"],
+                [
+                    "dotnet",
+                    "build",
+                    str(repo_root / "verification" / "catalog" / "owners" / "FixtureSubject" / "support" / "host" / "FixtureSubject.csproj"),
+                    "-c",
+                    "Release",
+                ],
                 run_process_mock.call_args_list[0].args[0],
             )
             self.assertEqual(

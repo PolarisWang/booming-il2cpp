@@ -11,6 +11,46 @@ from tests._support.module_loading import load_module
 PUBLIC_SPECS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "public_specs.py"
 FIXTURE_SUBJECTS_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects"
 REGISTRY_FIXTURES_ROOT = REPO_ROOT / "tests" / "fixtures" / "registry"
+VERIFICATION_CATALOG_ROOT = REPO_ROOT / "verification" / "catalog"
+VERIFICATION_OWNERS_ROOT = VERIFICATION_CATALOG_ROOT / "owners"
+VERIFICATION_SCENARIOS_ROOT = VERIFICATION_CATALOG_ROOT / "scenarios"
+
+SOLUTION_CORE_PACK_OWNER_ROOT = VERIFICATION_OWNERS_ROOT / "SolutionCorePack"
+SOLUTION_CORE_PACK_SCENARIO_ROOT = VERIFICATION_SCENARIOS_ROOT / "SolutionCorePack"
+SOLUTION_CORE_PACK_OWNER_MANIFEST_PATH = SOLUTION_CORE_PACK_OWNER_ROOT / "owner.manifest.json"
+SOLUTION_CORE_PACK_HOST_SOLUTION_PATH = SOLUTION_CORE_PACK_OWNER_ROOT / "support" / "host" / "SolutionCorePack.sln"
+SOLUTION_CORE_PACK_HOST_PROJECT_PATH = SOLUTION_CORE_PACK_OWNER_ROOT / "support" / "host" / "SolutionCorePack.csproj"
+SOLUTION_CORE_PACK_PROOFS_ROOT = SOLUTION_CORE_PACK_OWNER_ROOT / "proofs" / "CoreRuntimeFeatures"
+SOLUTION_CORE_PACK_PROOFS_PROJECT_PATH = SOLUTION_CORE_PACK_PROOFS_ROOT / "CoreRuntimeFeatures.csproj"
+SOLUTION_CORE_PACK_BENCHMARKS_ROOT = SOLUTION_CORE_PACK_OWNER_ROOT / "benchmarks" / "CoreRuntimeBenchmarks"
+SOLUTION_CORE_PACK_BENCHMARKS_PROJECT_PATH = SOLUTION_CORE_PACK_BENCHMARKS_ROOT / "CoreRuntimeBenchmarks.csproj"
+
+HOT_UPDATE_HOST_PACK_OWNER_ROOT = VERIFICATION_OWNERS_ROOT / "HotUpdateHostPack"
+HOT_UPDATE_HOST_PACK_OWNER_MANIFEST_PATH = HOT_UPDATE_HOST_PACK_OWNER_ROOT / "owner.manifest.json"
+HOT_UPDATE_HOST_PACK_HOST_PROJECT_PATH = HOT_UPDATE_HOST_PACK_OWNER_ROOT / "support" / "host" / "HotUpdateHostPack.csproj"
+HOT_UPDATE_HOST_PACK_BENCHMARKS_ROOT = HOT_UPDATE_HOST_PACK_OWNER_ROOT / "benchmarks"
+HOT_UPDATE_HOST_PACK_PROOFS_ROOT = HOT_UPDATE_HOST_PACK_OWNER_ROOT / "proofs"
+HOT_UPDATE_HOST_PACK_HOST_PROGRAM_PATH = HOT_UPDATE_HOST_PACK_OWNER_ROOT / "support" / "host" / "Program.cs"
+HOT_UPDATE_SKELETON_PROOF_PATH = HOT_UPDATE_HOST_PACK_PROOFS_ROOT / "HotUpdateSkeletonProofEntry.cs"
+
+MIXED_EXECUTION_FEATURE_PACK_OWNER_ROOT = VERIFICATION_OWNERS_ROOT / "MixedExecutionFeaturePack"
+MIXED_EXECUTION_FEATURE_PACK_OWNER_MANIFEST_PATH = MIXED_EXECUTION_FEATURE_PACK_OWNER_ROOT / "owner.manifest.json"
+MIXED_EXECUTION_FEATURE_PACK_HOST_PROJECT_PATH = (
+    MIXED_EXECUTION_FEATURE_PACK_OWNER_ROOT / "support" / "host" / "MixedExecutionFeaturePack.csproj"
+)
+MIXED_EXECUTION_FEATURE_PACK_HOST_PROGRAM_PATH = (
+    MIXED_EXECUTION_FEATURE_PACK_OWNER_ROOT / "support" / "host" / "Program.cs"
+)
+MIXED_EXECUTION_FEATURE_PACK_PROOFS_ROOT = MIXED_EXECUTION_FEATURE_PACK_OWNER_ROOT / "proofs"
+
+MIXED_EXECUTION_FEATURE_PACK_SCENARIO_ROOT = VERIFICATION_SCENARIOS_ROOT / "MixedExecutionFeaturePack"
+MIXED_BRIDGE_SOLUTION_SCENARIO_ROOT = MIXED_EXECUTION_FEATURE_PACK_SCENARIO_ROOT / "MixedBridgeSolution"
+MIXED_BRIDGE_SOLUTION_PATH = MIXED_BRIDGE_SOLUTION_SCENARIO_ROOT / "MixedBridgeSolution.sln"
+INTERPRETER_ARITHMETIC_PROJECT_PATH = (
+    MIXED_BRIDGE_SOLUTION_SCENARIO_ROOT
+    / "InterpreterArithmeticProof"
+    / "InterpreterArithmeticProof.csproj"
+)
 
 
 def read_text_bundle(*paths: Path) -> str:
@@ -146,10 +186,19 @@ def clone_fixture_subject_repo(
     repo_root = make_temp_repo_root(area, fixture_subject_id.lower())
     subject_root = repo_root / "subjects" / fixture_subject_id
     shutil.copytree(FIXTURE_SUBJECTS_ROOT / fixture_subject_id, subject_root)
-    manifest_path = subject_root / "subject.manifest.json"
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    legacy_manifest_path = subject_root / "subject.manifest.json"
+    manifest = json.loads(legacy_manifest_path.read_text(encoding="utf-8"))
     manifest = rewrite_fixture_manifest_paths(manifest, fixture_subject_id)
-    write_json(manifest_path, manifest)
+    legacy_manifest_path.unlink()
+    owner_manifest_path = repo_root / "verification" / "catalog" / "owners" / fixture_subject_id / "owner.manifest.json"
+    write_json(owner_manifest_path, manifest)
+    write_json(
+        owner_manifest_path.parent / "owner.features.json",
+        {
+            "subjectId": fixture_subject_id,
+            "features": [],
+        },
+    )
     return repo_root, manifest
 
 
@@ -190,7 +239,7 @@ def materialize_subject_manifest(repo_root: Path, manifest: dict[str, Any]) -> P
         else:
             target_path.mkdir(parents=True, exist_ok=True)
 
-    manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+    manifest_path = repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.manifest.json"
     write_json(manifest_path, manifest)
     return manifest_path
 

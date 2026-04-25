@@ -6,16 +6,16 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from tests.support import SOLUTION_CORE_PACK_PROOFS_PROJECT_PATH
+
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SCRIBAN_PROPS_PATH = REPO_ROOT / "third_party" / "scriban" / "src" / "Scriban" / "Scriban.props"
 SCRIBAN_DIRECTORY_BUILD_PROPS_PATH = REPO_ROOT / "third_party" / "scriban" / "src" / "Directory.Build.props"
 MANAGED_DIRECTORY_BUILD_PROPS_PATH = REPO_ROOT / "src" / "managed" / "Directory.Build.props"
-SUBJECTS_DIRECTORY_BUILD_PROPS_PATH = REPO_ROOT / "subjects" / "Directory.Build.props"
+SUBJECTS_DIRECTORY_BUILD_PROPS_PATH = REPO_ROOT / "verification" / "catalog" / "Directory.Build.props"
 CONTRACTS_PROJECT_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "Chaos.IL2CPP.Contracts.csproj"
-MAINLINE_FEATURE_PACK_PROJECT_PATH = (
-    REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Proofs" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
-)
+SOLUTION_CORE_PACK_PROJECT_PATH = SOLUTION_CORE_PACK_PROOFS_PROJECT_PATH
 
 
 def _msbuild_compile_identities(project_path: Path, properties: list[str]) -> list[str]:
@@ -119,7 +119,7 @@ class ScribanVendorBuildTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix="chaos-subject-intermediate-") as temp_root:
             intermediate_text = Path(temp_root).as_posix() + "/$(MSBuildProjectName)/"
             compile_identities = _msbuild_compile_identities(
-                MAINLINE_FEATURE_PACK_PROJECT_PATH,
+                SOLUTION_CORE_PACK_PROJECT_PATH,
                 [
                     f"-p:BaseIntermediateOutputPath={intermediate_text}",
                     f"-p:MSBuildProjectExtensionsPath={intermediate_text}",

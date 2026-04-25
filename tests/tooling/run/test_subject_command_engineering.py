@@ -44,7 +44,6 @@ class TestSubjectCommandEngineering(SubjectCommandTestSupport):
             declared_benchmarks=[],
             module_verifications=[],
             system_scenarios=[],
-            pipelines=[],
             errors=[],
             warnings=[],
         )

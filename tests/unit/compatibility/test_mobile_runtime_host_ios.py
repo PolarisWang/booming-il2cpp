@@ -8,7 +8,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 IOS_ROOT = REPO_ROOT / "src" / "mobile" / "ios"
 
 
-class Phase4MobileRuntimeHostBatch3IosTests(unittest.TestCase):
+class MobileRuntimeHostIosTests(unittest.TestCase):
     def test_ios_host_skeleton_files_exist_and_cmake_reuses_shared_host(self) -> None:
         required_paths = [
             IOS_ROOT / "CMakeLists.txt",

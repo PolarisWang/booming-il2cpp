@@ -85,19 +85,17 @@ class TestSubjectWorkersHostInputBuildRefreshNative(SubjectWorkersTestSupport):
             )
 
             time.sleep(1.1)
-            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
-            subject_manifest_path.write_text(
-                json.dumps(
-                    {
-                        "subjectId": subject_id,
-                        "source": {
-                            "type": "dotnet-project",
-                            "path": subject_source_path(subject_id),
-                            "primaryProjectPath": subject_source_path(subject_id),
-                        },
-                    }
-                ),
-                encoding="utf-8",
+            write_owner_manifest(
+                repo_root,
+                subject_id,
+                {
+                    "subjectId": subject_id,
+                    "source": {
+                        "type": "dotnet-project",
+                        "path": subject_source_path(subject_id),
+                        "primaryProjectPath": subject_source_path(subject_id),
+                    },
+                },
             )
 
             expected_output_root = repo_root / "artifacts" / "subjects" / subject_id / "runs" / run_id / "analysis" / "host-input"

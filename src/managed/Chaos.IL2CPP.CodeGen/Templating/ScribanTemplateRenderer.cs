@@ -6,6 +6,8 @@ namespace Chaos.IL2CPP.CodeGen;
 
 internal static class ScribanTemplateRenderer
 {
+    private const int TemplateLoopLimit = 100_000;
+
     private static readonly ConcurrentDictionary<string, Lazy<Template>> TemplateByRelativePath =
         new(StringComparer.Ordinal);
 
@@ -19,6 +21,7 @@ internal static class ScribanTemplateRenderer
     public static string RenderTemplate(Template template, ScriptObject model)
     {
         var context = new TemplateContext();
+        context.LoopLimit = TemplateLoopLimit;
         context.PushGlobal(model);
 
         try

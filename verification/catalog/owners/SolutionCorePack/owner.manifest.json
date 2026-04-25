@@ -834,7 +834,13 @@
       "source": {
         "entry": "",
         "primaryProjectPath": "verification/catalog/scenarios/SolutionCorePack/CoreLibReferenceSolution/NativeProofApp/GoldenCoreLibReference.NativeProofApp.csproj",
-        "fullAssemblyClosure": true
+        "fullAssemblyClosure": true,
+        "supplementalFullClosureAssemblies": [
+          {
+            "assemblyName": "System.Private.CoreLib",
+            "inputAssemblyPath": "src/dll/dotnet-foundation/net8.0/runtime/System.Private.CoreLib.dll"
+          }
+        ]
       },
       "executionContext": {
         "hostPlatform": "windows-x64",
@@ -1098,6 +1104,37 @@
       }
     },
     {
+      "matrixId": "windows-managed-proof",
+      "pipelineId": "managed-runtime-output",
+      "supportedGoals": [
+        "correctness.dev"
+      ],
+      "source": {
+        "primaryProjectPath": "verification/catalog/owners/SolutionCorePack/proofs/CoreRuntimeFeatures/CoreRuntimeFeatures.csproj",
+        "entry": "CoreRuntimeFeatures/ProofEntry::Run()"
+      },
+      "executionContext": {
+        "hostPlatform": "windows-x64",
+        "targetPlatform": "windows-x64",
+        "toolchainProfile": "dotnet-managed",
+        "runtimeProfile": "managed-proof-output"
+      },
+      "validationIntent": {
+        "validationMode": "output",
+        "adaptationLevel": "observable-output",
+        "expectedOutcome": "pass"
+      },
+      "artifactPlan": {
+        "requiredBuckets": [
+          "source",
+          "host-input",
+          "runtime",
+          "report"
+        ],
+        "evidenceTerminalBucket": "runtime"
+      }
+    },
+    {
       "matrixId": "windows-corelib-reference-native-hotupdate-proof",
       "pipelineId": "native-hotupdate-proof-output",
       "supportedGoals": [
@@ -1106,7 +1143,13 @@
       "source": {
         "entry": "",
         "primaryProjectPath": "verification/catalog/scenarios/SolutionCorePack/CoreLibReferenceSolution/NativeProofApp/GoldenCoreLibReference.NativeProofApp.csproj",
-        "fullAssemblyClosure": true
+        "fullAssemblyClosure": true,
+        "supplementalFullClosureAssemblies": [
+          {
+            "assemblyName": "System.Private.CoreLib",
+            "inputAssemblyPath": "src/dll/dotnet-foundation/net8.0/runtime/System.Private.CoreLib.dll"
+          }
+        ]
       },
       "executionContext": {
         "hostPlatform": "windows-x64",

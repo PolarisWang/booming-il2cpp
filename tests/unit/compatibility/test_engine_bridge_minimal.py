@@ -12,7 +12,7 @@ ENGINE_BRIDGE_HEADER_PATH = ENGINE_BRIDGE_ROOT / "engine_bridge.h"
 ENGINE_BRIDGE_SOURCE_PATH = ENGINE_BRIDGE_ROOT / "engine_bridge.cpp"
 
 
-class Phase3EngineBridgeMinimalTests(unittest.TestCase):
+class EngineBridgeMinimalTests(unittest.TestCase):
     def test_engine_bridge_module_files_exist_and_root_cmake_wires_it(self) -> None:
         root_cmake_source = ROOT_CMAKE_PATH.read_text(encoding="utf-8")
 

@@ -5,10 +5,9 @@ class TestSubjectPlannerFingerprintProfiles(SubjectPlannerTestSupport):
     def test_planner_expands_shared_orchestration_profiles_before_building_plan(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_shared_profiles")
         repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"shared-profiles-{uuid.uuid4().hex}"
-        manifest_path = repo_root / "subjects" / "FixtureSharedPlanner" / "subject.manifest.json"
+        subject_id = "FixtureSharedPlanner"
         pipeline_profile_path = repo_root / "testing" / "orchestration" / "pipelines" / "proof-core.json"
         matrix_profile_path = repo_root / "testing" / "orchestration" / "matrices" / "proof-core.json"
-        manifest_path.parent.mkdir(parents=True, exist_ok=True)
         pipeline_profile_path.parent.mkdir(parents=True, exist_ok=True)
         matrix_profile_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -62,7 +61,7 @@ class TestSubjectPlannerFingerprintProfiles(SubjectPlannerTestSupport):
             "defaultValidationProfile": "proof-dev",
             "source": {
                 "type": "dotnet-project",
-                "path": "subjects/FixtureSharedPlanner/source/FixtureSharedPlanner.csproj",
+                "path": "verification/catalog/owners/FixtureSharedPlanner/support/host/FixtureSharedPlanner.csproj",
                 "entry": "FixtureSharedPlanner/Program::Main()",
             },
             "orchestration": {
@@ -85,11 +84,11 @@ class TestSubjectPlannerFingerprintProfiles(SubjectPlannerTestSupport):
         try:
             pipeline_profile_path.write_text(json.dumps(pipeline_profile, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             matrix_profile_path.write_text(json.dumps(matrix_profile, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            write_owner_manifest(repo_root, subject_id, manifest)
 
             plan = planner_module.build_plan(
                 repo_root,
-                "FixtureSharedPlanner",
+                subject_id,
                 run_id="fixture-shared-planner",
             )
 

@@ -91,8 +91,8 @@ class ProjectGraphTests(unittest.TestCase):
             registration["subjectId"]
             for registration in metadata_registration["registrations"]
         }
-        self.assertIn("GoldenSimpleLib.App/Program::Main()", registered_subject_ids)
-        self.assertIn("GoldenSimpleLib.Library/Greeter::BuildMessage()", registered_subject_ids)
+        self.assertIn("GoldenSimpleLib.App/Program::Main:System.Int32()", registered_subject_ids)
+        self.assertIn("GoldenSimpleLib.Library/Greeter::BuildMessage:System.String()", registered_subject_ids)
 
         code_registration = load_json(output_root / "analysis" / "code-registration.json")
         self.assertEqual(
@@ -122,8 +122,8 @@ class ProjectGraphTests(unittest.TestCase):
             registration["subjectId"]
             for registration in metadata_registration["registrations"]
         }
-        self.assertIn("GoldenMultiProject.Middle/MessageComposer::Compose()", registered_subject_ids)
-        self.assertIn("GoldenMultiProject.Core/SuffixFactory::Create()", registered_subject_ids)
+        self.assertIn("GoldenMultiProject.Middle/MessageComposer::Compose:System.String()", registered_subject_ids)
+        self.assertIn("GoldenMultiProject.Core/SuffixFactory::Create:System.String()", registered_subject_ids)
 
         native_generated_root = output_root / "generated" / "assemblies"
         self.assertTrue((native_generated_root / "GoldenMultiProject.App").is_dir())

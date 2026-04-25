@@ -56,7 +56,7 @@ object-based `HelloWorld` 的 canonical proof 规格入口：
 - `docs/architecture/roadmap-0/hello-world-proof-spec-v0.md`
 - `docs/architecture/roadmap-0/managed-minimal-closure-v0.md`
 
-当 `subjects/<subject-id>/source/`、contract sample 与 native direct-call landing 出现分歧时，以这些 proof spec 和本目录下的 canonical contract 为准。
+当 `verification/catalog/owners/<subject-id>/support/host/`、`verification/catalog/scenarios/<subject-pack>/<solution-name>/`、contract sample 与 native direct-call landing 出现分歧时，以这些 proof spec 和本目录下的 canonical contract 为准。
 
 ## Reading Order
 

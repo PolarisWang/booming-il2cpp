@@ -24,8 +24,8 @@ class TestProjectWorkspaceSubjectGenerateHotupdate(ProjectWorkspaceTestSupport):
                 [
                     {
                         "projectId": "hotupdate-patch/FixtureHotUpdateSubject/FixtureHotUpdateSubject_Patch",
-                        "managedProjectId": "managed/FixtureHotUpdateSubject/FixtureHotUpdateSubject_Patch",
-                        "projectPath": "subjects/FixtureHotUpdateSubject/source/Patch/FixtureHotUpdateSubject.Patch.csproj",
+                        "managedProjectId": "",
+                        "projectPath": "verification/catalog/scenarios/FixtureHotUpdateSubject/FixtureHotUpdateSolution/Patch/FixtureHotUpdateSubject.Patch.csproj",
                         "assemblyName": "FixtureHotUpdateSubject.Patch",
                     }
                 ],

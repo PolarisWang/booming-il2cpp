@@ -49,6 +49,27 @@ def subject_run_path(subject_id: str, run_id: str, *parts: str) -> str:
 def subject_source_path(subject_id: str) -> str:
     return posix_path("subjects", subject_id, "source", f"{subject_id}.csproj")
 
+
+def owner_manifest_path(subject_id: str) -> Path:
+    return Path("verification") / "catalog" / "owners" / subject_id / "owner.manifest.json"
+
+
+def write_owner_manifest(repo_root: Path, subject_id: str, payload: dict) -> Path:
+    manifest_path = repo_root / owner_manifest_path(subject_id)
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
+    manifest_path.write_text(json.dumps(payload), encoding="utf-8")
+    features_path = manifest_path.parent / "owner.features.json"
+    features_path.write_text(
+        json.dumps(
+            {
+                "subjectId": subject_id,
+                "features": [],
+            }
+        ),
+        encoding="utf-8",
+    )
+    return manifest_path
+
 class SubjectWorkersTestSupport(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:

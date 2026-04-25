@@ -5,8 +5,7 @@ class TestSubjectManifestSchemaOverrides(SubjectManifestSchemaTestSupport):
     def test_explicit_thin_manifest_fields_override_legacy_projection(self) -> None:
         subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_thin_explicit_override")
         repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-manifest-schema" / "thin-explicit-override"
-        manifest_path = repo_root / "subjects" / "FixtureThinOverride" / "subject.manifest.json"
-        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+        subject_id = "FixtureThinOverride"
 
         manifest = {
             "subjectId": "FixtureThinOverride",
@@ -17,7 +16,7 @@ class TestSubjectManifestSchemaOverrides(SubjectManifestSchemaTestSupport):
             "defaultValidationProfile": "proof-dev",
             "source": {
                 "type": "dotnet-project",
-                "path": "subjects/FixtureThinOverride/source/FixtureThinOverride.csproj",
+                "path": "verification/catalog/owners/FixtureThinOverride/support/host/FixtureThinOverride.csproj",
                 "entry": "FixtureThinOverride/Program::Main()",
             },
             "sourceModel": "dotnet-solution",
@@ -99,7 +98,7 @@ class TestSubjectManifestSchemaOverrides(SubjectManifestSchemaTestSupport):
         }
 
         try:
-            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            write_owner_manifest(repo_root, subject_id, manifest)
 
             loaded = subjects_module.load_subject_manifest(repo_root, "FixtureThinOverride")
             capabilities = subjects_module.manifest_capabilities(loaded)
@@ -123,10 +122,9 @@ class TestSubjectManifestSchemaOverrides(SubjectManifestSchemaTestSupport):
     def test_shared_orchestration_profiles_expand_and_inline_subject_fields_override(self) -> None:
         subjects_module = load_module(SUBJECTS_MODULE_PATH, "chaos_subject_manifest_shared_profiles")
         repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-manifest-schema" / "shared-profiles"
-        manifest_path = repo_root / "subjects" / "FixtureSharedProfiles" / "subject.manifest.json"
+        subject_id = "FixtureSharedProfiles"
         pipeline_profile_path = repo_root / "testing" / "orchestration" / "pipelines" / "proof-core.json"
         matrix_profile_path = repo_root / "testing" / "orchestration" / "matrices" / "proof-core.json"
-        manifest_path.parent.mkdir(parents=True, exist_ok=True)
         pipeline_profile_path.parent.mkdir(parents=True, exist_ok=True)
         matrix_profile_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -214,7 +212,7 @@ class TestSubjectManifestSchemaOverrides(SubjectManifestSchemaTestSupport):
             "defaultValidationProfile": "proof-dev",
             "source": {
                 "type": "dotnet-project",
-                "path": "subjects/FixtureSharedProfiles/source/FixtureSharedProfiles.csproj",
+                "path": "verification/catalog/owners/FixtureSharedProfiles/support/host/FixtureSharedProfiles.csproj",
                 "entry": "FixtureSharedProfiles/Program::Main()",
             },
             "orchestration": {
@@ -277,7 +275,7 @@ class TestSubjectManifestSchemaOverrides(SubjectManifestSchemaTestSupport):
         try:
             pipeline_profile_path.write_text(json.dumps(pipeline_profile, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             matrix_profile_path.write_text(json.dumps(matrix_profile, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            write_owner_manifest(repo_root, subject_id, manifest)
 
             loaded = subjects_module.load_subject_manifest(repo_root, "FixtureSharedProfiles")
             capabilities = subjects_module.manifest_capabilities(loaded)

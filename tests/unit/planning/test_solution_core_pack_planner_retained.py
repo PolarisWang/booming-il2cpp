@@ -14,10 +14,10 @@ class TestSolutionCorePackPlannerRetained(RetainedSubjectPlannerTestSupport):
 
         support_project_path = (
             REPO_ROOT
-            / "subjects"
+            / "verification"
+            / "catalog"
+            / "scenarios"
             / "MixedExecutionFeaturePack"
-            / "source"
-            / "EngineeringScenarios"
             / "MixedBridgeSolution"
             / "InterpreterArithmeticProof"
             / "InterpreterArithmeticProof.csproj"
@@ -25,11 +25,11 @@ class TestSolutionCorePackPlannerRetained(RetainedSubjectPlannerTestSupport):
 
         self.assertEqual("MixedExecutionFeaturePack", plan["selection"]["subjectId"])
         self.assertEqual(
-            "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln",
+            "verification/catalog/owners/MixedExecutionFeaturePack/support/host/MixedExecutionFeaturePack.sln",
             plan["selection"]["source"]["path"],
         )
         self.assertEqual(
-            "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj",
+            "verification/catalog/owners/MixedExecutionFeaturePack/support/host/MixedExecutionFeaturePack.csproj",
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("MixedExecutionFeaturePack/MixedExecutionProofEntry::Run()", plan["selection"]["source"]["entry"])

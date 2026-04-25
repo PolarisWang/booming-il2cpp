@@ -38,7 +38,9 @@ def write_suite_manifest(root: Path, *, family: str, suite_id: str, display_name
                 "displayName": display_name,
                 "runnerType": runner_type,
                 "supportedStages": ["build", "run", "all"],
-                "runnerConfig": {"projectPath": f"subjects/{display_name}/source/{display_name}.csproj"},
+                "runnerConfig": {
+                    "projectPath": f"verification/catalog/owners/{display_name}/support/host/{display_name}.csproj"
+                },
             }
         ),
         encoding="utf-8",

@@ -48,7 +48,9 @@ class TestSubjectWorkersPerfManagedResolution(SubjectWorkersTestSupport):
                 ),
                 encoding="utf-8",
             )
-            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+            subject_manifest_path = (
+                repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.manifest.json"
+            )
             subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
             subject_manifest_path.write_text(
                 json.dumps(
@@ -69,7 +71,7 @@ class TestSubjectWorkersPerfManagedResolution(SubjectWorkersTestSupport):
 
             perf_result = {
                 "metrics": {"meanDurationMs": 12.5, "opsPerSecond": 8000, "checksum": 42},
-                "baselinePath": "subjects/SolutionCorePack/baselines/perf/windows-managed-perf/windows.json",
+                "baselinePath": "verification/catalog/owners/SolutionCorePack/benchmark-baselines/perf/windows-managed-perf/windows.json",
                 "baseline": {},
                 "baselineUpdated": False,
                 "regressionStatus": "no-baseline",
@@ -180,7 +182,9 @@ class TestSubjectWorkersPerfManagedResolution(SubjectWorkersTestSupport):
                 ),
                 encoding="utf-8",
             )
-            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
+            subject_manifest_path = (
+                repo_root / "verification" / "catalog" / "owners" / subject_id / "owner.manifest.json"
+            )
             subject_manifest_path.parent.mkdir(parents=True, exist_ok=True)
             subject_manifest_path.write_text(
                 json.dumps(
@@ -201,7 +205,7 @@ class TestSubjectWorkersPerfManagedResolution(SubjectWorkersTestSupport):
 
             perf_result = {
                 "metrics": {"meanDurationMs": 12.5, "opsPerSecond": 8000, "checksum": 42},
-                "baselinePath": "subjects/SolutionCorePack/baselines/perf/windows-managed-perf/windows.json",
+                "baselinePath": "verification/catalog/owners/SolutionCorePack/benchmark-baselines/perf/windows-managed-perf/windows.json",
                 "baseline": {},
                 "baselineUpdated": False,
                 "regressionStatus": "no-baseline",

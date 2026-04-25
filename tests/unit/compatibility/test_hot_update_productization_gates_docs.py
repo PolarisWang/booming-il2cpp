@@ -1,7 +1,7 @@
 from tests.unit.compatibility.hot_update_productization_gates_test_support import *
 
 
-class TestHotUpdateProductizationGatesDocs(Phase8ProductizationGatesTestSupport):
+class TestHotUpdateProductizationGatesDocs(ProductizationGatesTestSupport):
     def test_package_validator_uses_version_compatibility_band_instead_of_exact_string_equality(self) -> None:
         validator_source = PACKAGE_VALIDATOR_PATH.read_text(encoding="utf-8")
 
@@ -100,8 +100,6 @@ class TestHotUpdateProductizationGatesDocs(Phase8ProductizationGatesTestSupport)
                 "run",
                 "--project",
                 str(HOT_UPDATE_SKELETON_PROJECT_PATH),
-                "--",
-                "phase8",
             ],
             cwd=REPO_ROOT,
         )

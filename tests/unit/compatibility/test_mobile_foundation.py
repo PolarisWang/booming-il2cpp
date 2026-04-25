@@ -31,7 +31,11 @@ CANONICAL_BENCHMARK_SUBJECTS = [
     "HotUpdateHostPack",
     "MixedExecutionFeaturePack",
 ]
-TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "phase8-mobile-foundation"
+TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "mobile-foundation"
+
+
+def owner_manifest_path(subject_id: str) -> Path:
+    return REPO_ROOT / "verification" / "catalog" / "owners" / subject_id / "owner.manifest.json"
 
 
 def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -50,7 +54,7 @@ def run_checked(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProce
     return completed
 
 
-class Phase8MobileFoundationTests(unittest.TestCase):
+class MobileFoundationTests(unittest.TestCase):
     def test_ios_hot_update_strategy_doc_exists_and_covers_app_store_boundaries(self) -> None:
         self.assertTrue(STRATEGY_DOC_PATH.is_file(), msg=f"missing strategy doc: {STRATEGY_DOC_PATH}")
 
@@ -153,11 +157,11 @@ class Phase8MobileFoundationTests(unittest.TestCase):
 
     def test_benchmark_manifests_declare_mobile_native_perf_surface(self) -> None:
         for subject_id in MOBILE_BENCHMARK_SUBJECTS:
-            manifest_path = REPO_ROOT / "subjects" / subject_id / "subject.manifest.json"
+            manifest_path = owner_manifest_path(subject_id)
             self.assertFalse(manifest_path.is_file(), msg=f"legacy mobile benchmark shell should be retired: {manifest_path}")
 
         for subject_id in CANONICAL_BENCHMARK_SUBJECTS:
-            manifest_path = REPO_ROOT / "subjects" / subject_id / "subject.manifest.json"
+            manifest_path = owner_manifest_path(subject_id)
             self.assertTrue(manifest_path.is_file(), msg=f"missing canonical manifest: {manifest_path}")
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
 

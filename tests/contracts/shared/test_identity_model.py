@@ -8,8 +8,9 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SHARED_ROOT = REPO_ROOT / "contracts" / "shared" / "v0"
+OWNER_ROOT = REPO_ROOT / "verification" / "catalog" / "owners"
 ENTRY_PATTERN = re.compile(
-    r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.+`<>-]+::[A-Za-z0-9_.`<>-]+(?:\([A-Za-z0-9_., <>+\[\]`-]*\))?$"
+    r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.+`<>-]+::[A-Za-z0-9_.`<>-]+(?::[A-Za-z0-9_.+`<>\[\]-]+)?(?:\([A-Za-z0-9_., <>+\[\]`-]*\))?$"
 )
 
 
@@ -32,7 +33,7 @@ class SharedIdentityModelTests(unittest.TestCase):
             self.assertTrue((SHARED_ROOT / relative_path).is_file(), msg=f"missing shared contract file: {relative_path}")
 
     def test_subject_entries_follow_frozen_entry_pattern(self) -> None:
-        manifest_paths = sorted((REPO_ROOT / "subjects").rglob("subject.manifest.json"))
+        manifest_paths = sorted(OWNER_ROOT.rglob("owner.manifest.json"))
         self.assertEqual(3, len(manifest_paths))
 
         for manifest_path in manifest_paths:
@@ -46,7 +47,7 @@ class SharedIdentityModelTests(unittest.TestCase):
 
     def test_managed_naming_source_matches_frozen_patterns(self) -> None:
         contracts_source = (
-            REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
+            REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedNaming.cs"
         ).read_text(encoding="utf-8")
 
         self.assertIn(
@@ -54,9 +55,9 @@ class SharedIdentityModelTests(unittest.TestCase):
             contracts_source,
         )
         self.assertIn('return $"{declaringTypeSubjectId}::{fieldName}";', contracts_source)
-        self.assertIn('return $"{declaringTypeSubjectId}::property:{propertyName}";', contracts_source)
+        self.assertIn('return $"{declaringTypeSubjectId}::property:{propertyName}{parameterSignature}";', contracts_source)
         self.assertIn(
-            'return $"{declaringTypeSubjectId}::{methodName}({string.Join(",", parameterTypes)})";',
+            'return $"{declaringTypeSubjectId}::{CreateMethodIdentityName(methodName, genericParameterCount)}:{returnType}({string.Join(",", parameterTypes)})";',
             contracts_source,
         )
         self.assertIn(

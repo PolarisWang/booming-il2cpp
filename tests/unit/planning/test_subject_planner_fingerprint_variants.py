@@ -37,8 +37,7 @@ class TestSubjectPlannerFingerprintVariants(SubjectPlannerTestSupport):
     def test_stage_fingerprint_changes_when_workload_entry_changes(self) -> None:
         planner_module = load_module(PLANNER_MODULE_PATH, "chaos_subject_planner_workload_fingerprint")
         repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"workload-fingerprint-{uuid.uuid4().hex}"
-        manifest_path = repo_root / "subjects" / "FixtureBench" / "subject.manifest.json"
-        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+        subject_id = "FixtureBench"
 
         manifest = {
             "subjectId": "FixtureBench",
@@ -49,7 +48,7 @@ class TestSubjectPlannerFingerprintVariants(SubjectPlannerTestSupport):
             "defaultValidationProfile": "perf-profile",
             "source": {
                 "type": "dotnet-project",
-                "path": "subjects/FixtureBench/source/FixtureBench.csproj",
+                "path": "verification/catalog/owners/FixtureBench/support/host/FixtureBench.csproj",
                 "entry": "FixtureBench/Program::Main()",
             },
             "workloadEntry": "FixtureBench/Program::RunWorkload()",
@@ -99,10 +98,10 @@ class TestSubjectPlannerFingerprintVariants(SubjectPlannerTestSupport):
         }
 
         try:
-            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            manifest_path = write_owner_manifest(repo_root, subject_id, manifest)
             plan = planner_module.build_plan(
                 repo_root,
-                "FixtureBench",
+                subject_id,
                 goal_id="perf.release",
                 matrix_id="windows-managed-perf",
                 run_id="fixture-workload-fingerprint",
@@ -112,7 +111,7 @@ class TestSubjectPlannerFingerprintVariants(SubjectPlannerTestSupport):
             manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             updated_plan = planner_module.build_plan(
                 repo_root,
-                "FixtureBench",
+                subject_id,
                 goal_id="perf.release",
                 matrix_id="windows-managed-perf",
                 run_id="fixture-workload-fingerprint",

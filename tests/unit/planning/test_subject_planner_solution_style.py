@@ -118,8 +118,7 @@ class TestSubjectPlannerSolutionStyle(SubjectPlannerTestSupport):
             "chaos_subject_planner_declared_entry_ignores_manifest_workload",
         )
         repo_root = REPO_ROOT / "artifacts" / ".tmp-tests" / "subject-planner" / f"declared-entry-workload-{uuid.uuid4().hex}"
-        manifest_path = repo_root / "subjects" / "FixtureDeclaredWorkloadIsolation" / "subject.manifest.json"
-        manifest_path.parent.mkdir(parents=True, exist_ok=True)
+        subject_id = "FixtureDeclaredWorkloadIsolation"
 
         manifest = {
             "subjectId": "FixtureDeclaredWorkloadIsolation",
@@ -130,7 +129,7 @@ class TestSubjectPlannerSolutionStyle(SubjectPlannerTestSupport):
             "defaultValidationProfile": "perf-profile",
             "source": {
                 "type": "dotnet-project",
-                "path": "subjects/FixtureDeclaredWorkloadIsolation/source/FixtureDeclaredWorkloadIsolation.csproj",
+                "path": "verification/catalog/owners/FixtureDeclaredWorkloadIsolation/support/host/FixtureDeclaredWorkloadIsolation.csproj",
                 "entry": "FixtureDeclaredWorkloadIsolation/Program::Main()",
             },
             "workloadEntry": "FixtureDeclaredWorkloadIsolation/Program::RunWorkloadA()",
@@ -180,11 +179,11 @@ class TestSubjectPlannerSolutionStyle(SubjectPlannerTestSupport):
         }
 
         try:
-            manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            manifest_path = write_owner_manifest(repo_root, subject_id, manifest)
 
             plan = planner_module.build_plan(
                 repo_root,
-                "FixtureDeclaredWorkloadIsolation",
+                subject_id,
                 goal_id="perf.release",
                 matrix_id="windows-managed-perf",
                 run_id="fixture-declared-workload-isolation",
@@ -200,7 +199,7 @@ class TestSubjectPlannerSolutionStyle(SubjectPlannerTestSupport):
             manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             updated_plan = planner_module.build_plan(
                 repo_root,
-                "FixtureDeclaredWorkloadIsolation",
+                subject_id,
                 goal_id="perf.release",
                 matrix_id="windows-managed-perf",
                 run_id="fixture-declared-workload-isolation",

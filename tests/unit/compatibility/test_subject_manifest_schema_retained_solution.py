@@ -70,31 +70,31 @@ class TestSubjectManifestSchemaRetainedSolution(SubjectManifestSchemaTestSupport
 
     def test_retained_subject_sources_declare_chaos_attributes_in_csharp_api(self) -> None:
         expected_sources = {
-            "subjects/SolutionCorePack/source/Proofs/CoreRuntimeFeatures/AsyncAndThreading/TaskAndValueTaskFlowProof.cs": [
+            "verification/catalog/owners/SolutionCorePack/proofs/CoreRuntimeFeatures/AsyncAndThreading/TaskAndValueTaskFlowProof.cs": [
                 "[ChaosUnitTest(",
                 'Alias = "task-valuetask-flow-proof"',
             ],
-            "subjects/SolutionCorePack/source/Benchmarks/CoreRuntimeBenchmarks/PrimitivesAndOps/ArithmeticBenchmark.cs": [
+            "verification/catalog/owners/SolutionCorePack/benchmarks/CoreRuntimeBenchmarks/PrimitivesAndOps/ArithmeticBenchmark.cs": [
                 "[ChaosBenchmark(",
                 'Alias = "arithmetic-bench"',
             ],
-            "subjects/HotUpdateHostPack/source/Host/Proofs/HotUpdateSkeletonProofEntry.cs": [
+            "verification/catalog/owners/HotUpdateHostPack/proofs/HotUpdateSkeletonProofEntry.cs": [
                 "[ChaosUnitTest(",
                 'Alias = "hot-update-skeleton-proof"',
             ],
-            "subjects/HotUpdateHostPack/source/Host/Benchmarks/HotUpdateLoadBenchmark.cs": [
+            "verification/catalog/owners/HotUpdateHostPack/benchmarks/HotUpdateLoadBenchmark.cs": [
                 "[ChaosBenchmark(",
                 'Alias = "hot-update-load-bench"',
             ],
-            "subjects/MixedExecutionFeaturePack/source/Proofs/MixedExecutionProofEntry.cs": [
+            "verification/catalog/owners/MixedExecutionFeaturePack/proofs/MixedExecutionProofEntry.cs": [
                 "[ChaosUnitTest(",
                 'Alias = "mixed-execution-proof"',
             ],
-            "subjects/MixedExecutionFeaturePack/source/Benchmarks/MixedExecutionBenchmark.cs": [
+            "verification/catalog/owners/MixedExecutionFeaturePack/benchmarks/MixedExecutionBenchmark.cs": [
                 "[ChaosBenchmark(",
                 'Alias = "mixed-execution-bench"',
             ],
-            "subjects/MixedExecutionFeaturePack/source/Benchmarks/MixedExecutionNativeBenchmark.cs": [
+            "verification/catalog/owners/MixedExecutionFeaturePack/benchmarks/MixedExecutionNativeBenchmark.cs": [
                 "[ChaosBenchmark(",
                 'Alias = "mixed-execution-native-bench"',
             ],
@@ -110,20 +110,20 @@ class TestSubjectManifestSchemaRetainedSolution(SubjectManifestSchemaTestSupport
         manifest = subjects_module.load_subject_manifest(REPO_ROOT, "MixedExecutionFeaturePack")
         project_path = (
             REPO_ROOT
-            / "subjects"
+            / "verification"
+            / "catalog"
+            / "scenarios"
             / "MixedExecutionFeaturePack"
-            / "source"
-            / "EngineeringScenarios"
             / "MixedBridgeSolution"
             / "InterpreterArithmeticProof"
             / "InterpreterArithmeticProof.csproj"
         )
         program_path = (
             REPO_ROOT
-            / "subjects"
+            / "verification"
+            / "catalog"
+            / "scenarios"
             / "MixedExecutionFeaturePack"
-            / "source"
-            / "EngineeringScenarios"
             / "MixedBridgeSolution"
             / "InterpreterArithmeticProof"
             / "Program.cs"
@@ -133,10 +133,13 @@ class TestSubjectManifestSchemaRetainedSolution(SubjectManifestSchemaTestSupport
         self.assertTrue(project_path.is_file(), msg=f"missing nested interpreter arithmetic project: {project_path}")
         self.assertTrue(program_path.is_file(), msg=f"missing nested interpreter arithmetic program: {program_path}")
         self.assertEqual(
-            "subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.sln",
+            "verification/catalog/owners/MixedExecutionFeaturePack/support/host/MixedExecutionFeaturePack.sln",
             manifest["source"]["path"],
         )
-        self.assertEqual("subjects/MixedExecutionFeaturePack/source/MixedExecutionFeaturePack.csproj", manifest["source"]["primaryProjectPath"])
+        self.assertEqual(
+            "verification/catalog/owners/MixedExecutionFeaturePack/support/host/MixedExecutionFeaturePack.csproj",
+            manifest["source"]["primaryProjectPath"],
+        )
         self.assertEqual("dotnet-solution", manifest["sourceModel"])
         self.assertEqual("require", subjects_module.manifest_capabilities(manifest)["testDeclarationMode"])
         self.assertIn("namespace InterpreterArithmeticProof;", program_source)

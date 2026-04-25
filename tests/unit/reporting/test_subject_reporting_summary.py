@@ -266,6 +266,152 @@ class TestSubjectReportingSummary(SubjectReportingTestSupport):
         self.assertEqual("native-proof", matrix_result["matrixProofLinkage"]["proofKind"])
         self.assertEqual(2, matrix_result["matrixProofLinkage"]["boundaryCaseCount"])
 
+    def test_materialize_subject_report_artifacts_writes_consolidated_review_bundle(self) -> None:
+        reporting_module = load_module(SUBJECT_REPORTING_MODULE_PATH, "chaos_subject_reporting_subject_review_bundle")
+        subject_id = "SolutionCorePack"
+        run_id = "20260424-subject-review-bundle-001"
+        summary_path = run_bucket_path(subject_id, run_id, "subject-report", "summary.json")
+        review_bundle_path = run_bucket_path(subject_id, run_id, "subject-report", "review-bundle.json")
+        matrix_report_path = run_bucket_path(
+            subject_id,
+            run_id,
+            "matrices",
+            "windows-corelib-reference-native-hotupdate-proof",
+            "pipeline-report",
+            "report.json",
+        )
+        native_hotupdate_audit_path = run_bucket_path(
+            subject_id,
+            run_id,
+            "matrices",
+            "windows-corelib-reference-native-hotupdate-proof",
+            "pipeline-report",
+            "report",
+            "native-hotupdate-audit.json",
+        )
+        codegen_summary_path = run_bucket_path(
+            subject_id,
+            run_id,
+            "matrices",
+            "windows-corelib-reference-native-hotupdate-proof",
+            "pipeline-report",
+            "report",
+            "codegen-summary.json",
+        )
+        matrix_proof_linkage_path = run_bucket_path(
+            subject_id,
+            run_id,
+            "matrices",
+            "windows-corelib-reference-native-hotupdate-proof",
+            "pipeline-report",
+            "report",
+            "generic-matrix-proof-linkage.json",
+        )
+
+        summary = reporting_module.build_subject_summary(
+            subject_id=subject_id,
+            requested_goal_id="correctness.platform",
+            matrix_reports=[
+                {
+                    "subjectId": subject_id,
+                    "goalId": "correctness.platform",
+                    "matrixId": "windows-corelib-reference-native-hotupdate-proof",
+                    "validationProfileId": "proof-platform",
+                    "validationKind": "proof",
+                    "variant": "CHECK",
+                    "status": "ok",
+                    "terminalBucket": "runtime",
+                    "selection": {
+                        "pipelineId": "native-hotupdate-proof-output",
+                        "executionContext": {
+                            "hostPlatform": "windows-x64",
+                            "targetPlatform": "windows-x64",
+                            "toolchainProfile": "msvc-reference",
+                            "runtimeProfile": "native-hotupdate-proof-output",
+                        },
+                    },
+                    "codegenMetrics": {
+                        "generatedCppTotalBytes": 2048,
+                    },
+                    "codegenRegressionStatus": "ok",
+                    "codegenReportPaths": [codegen_summary_path],
+                    "reportArtifacts": [
+                        native_hotupdate_audit_path,
+                        codegen_summary_path,
+                        matrix_proof_linkage_path,
+                    ],
+                    "matrixProofLinkage": {
+                        "artifactPath": matrix_proof_linkage_path,
+                        "proofKind": "hotupdate-proof",
+                        "boundaryCaseCount": 3,
+                        "boundaryKinds": ["method-call", "runtime-skeleton"],
+                    },
+                }
+            ],
+            matrix_report_paths={
+                "windows-corelib-reference-native-hotupdate-proof": matrix_report_path,
+            },
+            run_id=run_id,
+            generated_at="2026-04-24T01:25:00Z",
+        )
+
+        repo_root = TEST_TMP_ROOT / f"subject-review-bundle-{uuid.uuid4().hex}"
+        repo_root.mkdir(parents=True, exist_ok=False)
+        try:
+            artifact_paths = reporting_module.materialize_subject_report_artifacts(
+                repo_root,
+                subject_summary_path=summary_path,
+                subject_summary=summary,
+            )
+            subject_result = reporting_module.build_subject_result(
+                summary,
+                subject_summary_path=summary_path,
+            )
+
+            self.assertEqual([review_bundle_path], artifact_paths)
+            self.assertEqual([review_bundle_path], summary["subjectReportArtifacts"])
+            self.assertEqual(review_bundle_path, summary["subjectReviewBundle"]["artifactPath"])
+            self.assertEqual(1, summary["subjectReviewBundle"]["matrixCount"])
+            self.assertEqual(3, summary["subjectReviewBundle"]["artifactCount"])
+            self.assertEqual(
+                ["hotupdate-proof"],
+                summary["subjectReviewBundle"]["proofKinds"],
+            )
+            self.assertEqual([review_bundle_path], subject_result["subjectReportArtifacts"])
+            self.assertEqual(review_bundle_path, subject_result["subjectReviewBundle"]["artifactPath"])
+
+            review_bundle_payload = json.loads((repo_root / review_bundle_path).read_text(encoding="utf-8"))
+            self.assertEqual("subject-review-bundle", review_bundle_payload["artifactKind"])
+            self.assertEqual(subject_id, review_bundle_payload["subjectId"])
+            self.assertEqual("correctness.platform", review_bundle_payload["requestedGoalId"])
+            self.assertEqual("ok", review_bundle_payload["status"])
+            self.assertEqual(1, review_bundle_payload["matrixCount"])
+            self.assertEqual(
+                [native_hotupdate_audit_path, codegen_summary_path, matrix_proof_linkage_path],
+                review_bundle_payload["artifactPaths"],
+            )
+            self.assertEqual(
+                [
+                    {
+                        "matrixId": "windows-corelib-reference-native-hotupdate-proof",
+                        "reportPath": matrix_report_path,
+                        "status": "ok",
+                        "validationKind": "proof",
+                        "terminalBucket": "runtime",
+                        "artifactPaths": [
+                            native_hotupdate_audit_path,
+                            codegen_summary_path,
+                            matrix_proof_linkage_path,
+                        ],
+                        "proofKind": "hotupdate-proof",
+                        "boundaryCaseCount": 3,
+                    }
+                ],
+                review_bundle_payload["matrixReviews"],
+            )
+        finally:
+            shutil.rmtree(repo_root, ignore_errors=True)
+
     def test_build_subject_summary_surfaces_release_evidence_contract_summary(self) -> None:
         reporting_module = load_module(SUBJECT_REPORTING_MODULE_PATH, "chaos_subject_reporting_release_evidence")
 

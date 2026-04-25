@@ -7,8 +7,8 @@
   "defaultValidationProfile": "managed-output",
   "source": {
     "type": "dotnet-project",
-    "path": "subjects/SolutionCorePack/source/EngineeringScenarios/PackageReferenceSolution/PackageReferenceSolution.sln",
-    "primaryProjectPath": "subjects/SolutionCorePack/source/EngineeringScenarios/PackageReferenceSolution/App/GoldenWithPackage.App.csproj",
+    "path": "verification/catalog/scenarios/SolutionCorePack/PackageReferenceSolution/PackageReferenceSolution.sln",
+    "primaryProjectPath": "verification/catalog/scenarios/SolutionCorePack/PackageReferenceSolution/App/GoldenWithPackage.App.csproj",
     "entry": "GoldenWithPackage.App/Program::Main()"
   },
   "sourceModel": "dotnet-solution",

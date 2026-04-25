@@ -65,11 +65,179 @@ public sealed class NativeReferenceProofEmitter
         string SubjectId,
         string ReasonCode);
 
+    private sealed record RuntimeSkeletonExternalMethodStubDeclaration(
+        string SubjectId,
+        string StubName,
+        string Declaration);
+
     private sealed record RuntimeSkeletonPageEmission(
         AuditTranslationUnitPageArtifact Page,
         string Contents,
         IReadOnlyList<RuntimeSkeletonSupportedMethodDispatch> SupportedMethods,
         IReadOnlyList<RuntimeSkeletonUnsupportedMethodEmission> UnsupportedMethods);
+
+    private sealed record RuntimeSkeletonStubBuildContext(
+        NativeReferenceLoweringPlanArtifact LoweringPlan,
+        MetadataRegistrationArtifact MetadataRegistration,
+        IReadOnlyList<CodeRegistrationEntry> MethodPointers,
+        IReadOnlyList<TypedIlMethodArtifact> Methods,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> MethodsBySubjectId,
+        IReadOnlyDictionary<string, string> MethodStubNamesBySubjectId,
+        RuntimeSkeletonPageSupportBuilder PageSupportBuilder,
+        string StubName,
+        string SubjectId);
+
+    private enum RuntimeSkeletonFamilyHandlerMatchKind
+    {
+        NoMatch,
+        Unsupported,
+        Match,
+    }
+
+    private sealed record RuntimeSkeletonFamilyHandlerResult(
+        RuntimeSkeletonFamilyHandlerMatchKind MatchKind,
+        string? StubDefinition,
+        string? UnsupportedReason)
+    {
+        public static RuntimeSkeletonFamilyHandlerResult NoMatch { get; } =
+            new(RuntimeSkeletonFamilyHandlerMatchKind.NoMatch, null, null);
+
+        public static RuntimeSkeletonFamilyHandlerResult CreateMatch(string stubDefinition) =>
+            new(RuntimeSkeletonFamilyHandlerMatchKind.Match, stubDefinition, null);
+
+        public static RuntimeSkeletonFamilyHandlerResult CreateUnsupported(string unsupportedReason) =>
+            new(RuntimeSkeletonFamilyHandlerMatchKind.Unsupported, null, unsupportedReason);
+    }
+
+    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext);
+
+    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonConvertFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext);
+
+    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonBindingFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext);
+
+    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonUtilityFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext);
+
+    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonPlatformFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext);
+
+    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonInteropFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext);
+
+    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonAsyncFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext);
+
+    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonArrayFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext);
+
+    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonExceptionFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext);
+
+    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonStringFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext);
+
+    private static readonly RuntimeSkeletonFamilyHandler[] RuntimeSkeletonFamilyHandlers =
+    [
+        TryBuildRuntimeSkeletonConvertFamilyHandler,
+        TryBuildRuntimeSkeletonBindingFamilyHandler,
+        TryBuildRuntimeSkeletonUtilityFamilyHandler,
+        TryBuildRuntimeSkeletonPlatformFamilyHandler,
+        TryBuildRuntimeSkeletonInteropFamilyHandler,
+        TryBuildRuntimeSkeletonAsyncFamilyHandler,
+        TryBuildRuntimeSkeletonArrayFamilyHandler,
+        TryBuildRuntimeSkeletonExceptionFamilyHandler,
+        TryBuildRuntimeSkeletonStringFamilyHandler,
+        TryBuildRuntimeSkeletonConvertLikeFamilyHandler,
+    ];
+
+    private static readonly RuntimeSkeletonConvertFamilyHandler[] RuntimeSkeletonConvertFamilyHandlers =
+    [
+        TryBuildRuntimeSkeletonConvertIntForwarderHandler,
+        TryBuildRuntimeSkeletonConvertBoolIdentityForwarderHandler,
+        TryBuildRuntimeSkeletonConvertBoolProducerForwarderHandler,
+        TryBuildRuntimeSkeletonConvertPrimitiveHandler,
+        TryBuildRuntimeSkeletonConvertCheckedByteHandler,
+        TryBuildRuntimeSkeletonConvertByteForwarderHandler,
+    ];
+
+    private static readonly RuntimeSkeletonBindingFamilyHandler[] RuntimeSkeletonBindingFamilyHandlers =
+    [
+        TryBuildRuntimeSkeletonConstructorFieldSetterHandler,
+        TryBuildRuntimeSkeletonFieldBackedStringReturnHandler,
+        TryBuildRuntimeSkeletonFieldArgumentStringReturnHandler,
+        TryBuildRuntimeSkeletonFieldGetterStringReturnHandler,
+        TryBuildRuntimeSkeletonDelegateClosedTargetRelayHandler,
+    ];
+
+    private static readonly RuntimeSkeletonUtilityFamilyHandler[] RuntimeSkeletonUtilityFamilyHandlers =
+    [
+        TryBuildRuntimeSkeletonStaticVoidObjectSinkNoOpHandler,
+        TryBuildRuntimeSkeletonStaticBoolForwarderHandler,
+        TryBuildRuntimeSkeletonConsoleWriteLineHandler,
+    ];
+
+    private static readonly RuntimeSkeletonPlatformFamilyHandler[] RuntimeSkeletonPlatformFamilyHandlers =
+    [
+        TryBuildRuntimeSkeletonInterfaceDispatchMessageHandler,
+        TryBuildRuntimeSkeletonThreadingThreadStaticMonitorHandler,
+    ];
+
+    private static readonly RuntimeSkeletonInteropFamilyHandler[] RuntimeSkeletonInteropFamilyHandlers =
+    [
+        TryBuildRuntimeSkeletonMarshalingUtf8ExportHandler,
+        TryBuildRuntimeSkeletonReflectionInteropClosureHandler,
+        TryBuildRuntimeSkeletonPInvokeDirectCallHandler,
+    ];
+
+    private static readonly RuntimeSkeletonAsyncFamilyHandler[] RuntimeSkeletonAsyncFamilyHandlers =
+    [
+        TryBuildRuntimeSkeletonAsyncTaskFactoryHandler,
+        TryBuildRuntimeSkeletonAsyncGetResultHandler,
+        TryBuildRuntimeSkeletonAsyncStateMachineNoOpHandler,
+    ];
+
+    private static readonly RuntimeSkeletonArrayFamilyHandler[] RuntimeSkeletonArrayFamilyHandlers =
+    [
+        TryBuildRuntimeSkeletonArrayBoxingReferenceArrayHandler,
+        TryBuildRuntimeSkeletonArrayClearReferenceArrayHandler,
+        TryBuildRuntimeSkeletonArrayReverseReferenceArrayHandler,
+        TryBuildRuntimeSkeletonArrayCopyReferenceArrayHandler,
+    ];
+
+    private static readonly RuntimeSkeletonExceptionFamilyHandler[] RuntimeSkeletonExceptionFamilyHandlers =
+    [
+        TryBuildRuntimeSkeletonStaticExceptionThrowLiteralHandler,
+        TryBuildRuntimeSkeletonStaticExceptionThrowStringProducerHandler,
+        TryBuildRuntimeSkeletonStaticExceptionCatchStringReturnHandler,
+        TryBuildRuntimeSkeletonExceptionThrowCatchFinallyHandler,
+        TryBuildRuntimeSkeletonNestedExceptionThrowCatchFinallyHandler,
+    ];
+
+    private static readonly RuntimeSkeletonStringFamilyHandler[] RuntimeSkeletonStringFamilyHandlers =
+    [
+        TryBuildRuntimeSkeletonStaticStringReturnForwarderHandler,
+        TryBuildRuntimeSkeletonStaticStringForwarderHandler,
+        TryBuildRuntimeSkeletonStaticStringLiteralAppendHandler,
+        TryBuildRuntimeSkeletonStaticStringForwarderConsoleWriteLineHandler,
+        TryBuildRuntimeSkeletonStaticStringProducerForwarderConsoleWriteLineHandler,
+        TryBuildRuntimeSkeletonStaticStringProducerCtorGetterConsoleWriteLineHandler,
+        TryBuildRuntimeSkeletonStaticStringProducerCtorRenderConsoleWriteLineHandler,
+        TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineHandler,
+        TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineHandler,
+        TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderConsoleWriteLineHandler,
+        TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineHandler,
+        TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineHandler,
+        TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineHandler,
+        TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineHandler,
+        TryBuildRuntimeSkeletonStaticLiteralStringReturnHandler,
+        TryBuildRuntimeSkeletonStaticResourceKeyStringReturnHandler,
+        TryBuildRuntimeSkeletonStaticStringProducerConsoleWriteLineHandler,
+        TryBuildRuntimeSkeletonStaticCallCtorGetterExecutableHandler,
+        TryBuildRuntimeSkeletonConstructorThenInstanceCallExecutableHandler,
+    ];
 
     private sealed class RuntimeSkeletonPageSupportBuilder
     {
@@ -971,6 +1139,17 @@ public sealed class NativeReferenceProofEmitter
         var requestedPages = (loweringPlan.TranslationUnitPages ?? []).ToArray();
         var requestedMethodSubjectIds = loweringPlan.TranslationUnitMethodSubjectIds ?? [];
         var translationUnitPageSize = loweringPlan.TranslationUnitPageSize ?? AuditTranslationUnitPageSize;
+        var allMethodStubNamesBySubjectId = new Dictionary<string, string>(requestedMethodSubjectIds.Count, StringComparer.Ordinal);
+        for (var requestedMethodIndex = 0; requestedMethodIndex < requestedMethodSubjectIds.Count; requestedMethodIndex++)
+        {
+            var requestedSubjectId = requestedMethodSubjectIds[requestedMethodIndex];
+            var pageNumber = (requestedMethodIndex / translationUnitPageSize) + 1;
+            var itemNumber = (requestedMethodIndex % translationUnitPageSize) + 1;
+            allMethodStubNamesBySubjectId.Add(
+                requestedSubjectId,
+                BuildAssemblyFullClosureRuntimeSkeletonMethodStubName(pageNumber, itemNumber));
+        }
+
         var pageEmissionsByIndex = new RuntimeSkeletonPageEmission?[requestedPages.Length];
         var unsupportedMethodsByIndex = new IReadOnlyList<RuntimeSkeletonUnsupportedMethodEmission>[requestedPages.Length];
         Parallel.For(
@@ -990,6 +1169,7 @@ public sealed class NativeReferenceProofEmitter
                     methods,
                     methodsBySubjectId,
                     methodPointers,
+                    allMethodStubNamesBySubjectId,
                     page.PageNumber,
                     page.Path,
                     requestedMethodSubjectIds,
@@ -1171,6 +1351,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         IReadOnlyList<TypedIlMethodArtifact> methods,
         IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
         IReadOnlyList<CodeRegistrationEntry> methodPointers,
+        IReadOnlyDictionary<string, string> allMethodStubNamesBySubjectId,
         int pageNumber,
         string pagePath,
         IReadOnlyList<string> requestedMethodSubjectIds,
@@ -1200,7 +1381,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 methodPointers,
                 methods,
                 methodsBySubjectId,
-                methodStubNamesBySubjectId,
+                allMethodStubNamesBySubjectId,
                 pageSupportBuilder,
                 stubName,
                 subjectId);
@@ -1226,6 +1407,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         }
 
         var methodStubDeclarations = new List<string>(emittedMethods.Count);
+        var externalMethodStubDeclarations = new Dictionary<string, RuntimeSkeletonExternalMethodStubDeclaration>(StringComparer.Ordinal);
         var methodStubDefinitions = new List<string>(emittedMethods.Count);
         var dispatchEntries = new List<string>(emittedMethods.Count);
         var supportedMethods = new List<RuntimeSkeletonSupportedMethodDispatch>(emittedMethods.Count);
@@ -1235,6 +1417,22 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             methodStubDeclarations.Add(emission.StubDeclaration);
             methodStubDefinitions.Add(emission.StubDefinition);
             dispatchEntries.Add($"    &{emission.StubName},");
+
+            foreach (var referencedSubjectId in GetReferencedRuntimeSkeletonMethodSubjectIds(methodsBySubjectId, emission.SubjectId))
+            {
+                if (methodStubNamesBySubjectId.ContainsKey(referencedSubjectId) ||
+                    !allMethodStubNamesBySubjectId.TryGetValue(referencedSubjectId, out var referencedStubName))
+                {
+                    continue;
+                }
+
+                externalMethodStubDeclarations.TryAdd(
+                    referencedSubjectId,
+                    new RuntimeSkeletonExternalMethodStubDeclaration(
+                        referencedSubjectId,
+                        referencedStubName,
+                        BuildAssemblyFullClosureRuntimeSkeletonMethodStubDeclaration(referencedStubName)));
+            }
         }
 
         var firstEmittedSubjectId = supportedMethods.Count > 0 ? supportedMethods[0].SubjectId : null;
@@ -1276,6 +1474,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["array_clear_reference_array_descriptor_count"] = pageSupportBuilder.ArrayClearReferenceArrayDescriptorCount,
             ["array_copy_reference_array_descriptors"] = pageSupportBuilder.GetArrayCopyReferenceArrayDescriptors(),
             ["array_copy_reference_array_descriptor_count"] = pageSupportBuilder.ArrayCopyReferenceArrayDescriptorCount,
+            ["external_method_stub_declarations"] = externalMethodStubDeclarations.Values.Select(item => item.Declaration).ToArray(),
             ["dispatch_entries"] = dispatchEntries.ToArray(),
             ["page_dispatch_function_name"] = BuildAssemblyFullClosureRuntimeSkeletonPageDispatchFunctionName(pageNumber),
         };
@@ -1362,510 +1561,1061 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         string stubName,
         string subjectId)
     {
-        if (TryBuildAssemblyBoundMarshalingUtf8ExportPlan(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodPointers,
-                out var marshalingUtf8ExportPlan))
-        {
-            return BuildAssemblyBoundMarshalingUtf8ExportStub(marshalingUtf8ExportPlan, stubName);
-        }
-
-        if (TryBuildAssemblyBoundReflectionInteropClosurePlan(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodPointers,
-                out var reflectionInteropClosurePlan))
-        {
-            return BuildAssemblyBoundReflectionInteropClosureStub(reflectionInteropClosurePlan, stubName);
-        }
-
-        if (TryBuildAssemblyBoundPInvokeDirectCallPlan(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodPointers,
-                methods,
-                out var pinvokeDirectCallPlan))
-        {
-            return BuildAssemblyBoundPInvokeDllImportMinimalStub(pinvokeDirectCallPlan, stubName);
-        }
-
-        if (TryBuildAssemblyBoundArrayBoxingReferenceArrayPlan(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodPointers,
-                methods,
-                out var arrayBoxingReferenceArrayPlan))
-        {
-            return BuildAssemblyBoundArrayBoxingReferenceArrayStub(arrayBoxingReferenceArrayPlan, pageSupportBuilder, stubName);
-        }
-
-        if (TryBuildAssemblyBoundArrayClearReferenceArrayPlan(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodPointers,
-                methods,
-                out var arrayClearReferenceArrayPlan))
-        {
-            return BuildAssemblyBoundArrayClearReferenceArrayStub(arrayClearReferenceArrayPlan, pageSupportBuilder, stubName);
-        }
-
-        if (TryBuildAssemblyBoundArrayReverseReferenceArrayPlan(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodPointers,
-                methods,
-                out var arrayReverseReferenceArrayPlan))
-        {
-            return BuildAssemblyBoundArrayReverseReferenceArrayStub(arrayReverseReferenceArrayPlan, pageSupportBuilder, stubName);
-        }
-
-        if (TryBuildAssemblyBoundArrayCopyReferenceArrayPlan(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodPointers,
-                methods,
-                out var arrayCopyReferenceArrayPlan))
-        {
-            return BuildAssemblyBoundArrayCopyReferenceArrayStub(arrayCopyReferenceArrayPlan, pageSupportBuilder, stubName);
-        }
-
-        if (TryBuildAssemblyBoundInterfaceDispatchMessagePlan(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodPointers,
-                methods,
-                out var interfaceDispatchMessagePlan))
-        {
-            return BuildAssemblyBoundInterfaceDispatchMessageStub(interfaceDispatchMessagePlan, stubName);
-        }
-
-        if (TryBuildAssemblyBoundThreadingThreadStaticMonitorPlan(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodPointers,
-                out var threadingThreadStaticMonitorPlan))
-        {
-            return BuildAssemblyBoundThreadingThreadStaticMonitorStub(threadingThreadStaticMonitorPlan, stubName);
-        }
-
-        if (TryBuildAssemblyBoundAsyncTaskFactoryStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                stubName,
-                out var asyncTaskFactoryStub))
-        {
-            return asyncTaskFactoryStub;
-        }
-
-        if (TryBuildAssemblyBoundAsyncGetResultStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                stubName,
-                out var asyncGetResultStub))
-        {
-            return asyncGetResultStub;
-        }
-
-        if (TryBuildAssemblyBoundAsyncStateMachineNoOpStub(
-                subjectId,
-                methodsBySubjectId,
-                stubName,
-                out var asyncStateMachineNoOpStub))
-        {
-            return asyncStateMachineNoOpStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticVoidObjectSinkNoOpStub(
-                subjectId,
-                methodsBySubjectId,
-                stubName,
-                out var staticVoidObjectSinkNoOpStub))
-        {
-            return staticVoidObjectSinkNoOpStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticExceptionThrowLiteralStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                stubName,
-                out var staticExceptionThrowLiteralStub))
-        {
-            return staticExceptionThrowLiteralStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticExceptionCatchStringReturnStub(
-                subjectId,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticExceptionCatchStringReturnStub))
-        {
-            return staticExceptionCatchStringReturnStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticIntForwarderStub(
-                subjectId,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticIntForwarderStub))
-        {
-            return staticIntForwarderStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticBoolForwarderStub(
-                subjectId,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticBoolForwarderStub))
-        {
-            return staticBoolForwarderStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringReturnForwarderStub(
-                subjectId,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticStringReturnForwarderStub))
-        {
-            return staticStringReturnForwarderStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringForwarderStub(
-                subjectId,
-                methodsBySubjectId,
-                stubName,
-                out var staticStringForwarderStub))
-        {
-            return staticStringForwarderStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringLiteralAppendStub(
-                subjectId,
-                methodsBySubjectId,
-                pageSupportBuilder,
-                stubName,
-                out var staticStringLiteralAppendStub))
-        {
-            return staticStringLiteralAppendStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringForwarderConsoleWriteLineStub(
-                subjectId,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticStringForwarderConsoleWriteLineStub))
-        {
-            return staticStringForwarderConsoleWriteLineStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringProducerForwarderConsoleWriteLineStub(
-                subjectId,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticStringProducerForwarderConsoleWriteLineStub))
-        {
-            return staticStringProducerForwarderConsoleWriteLineStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringProducerCtorGetterConsoleWriteLineStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticStringProducerCtorGetterConsoleWriteLineStub))
-        {
-            return staticStringProducerCtorGetterConsoleWriteLineStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringProducerCtorRenderConsoleWriteLineStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticStringProducerCtorRenderConsoleWriteLineStub))
-        {
-            return staticStringProducerCtorRenderConsoleWriteLineStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticStringProducerCtorInstanceCallForwarderConsoleWriteLineStub))
-        {
-            return staticStringProducerCtorInstanceCallForwarderConsoleWriteLineStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticStringProducerForwarderCtorInstanceCallConsoleWriteLineStub))
-        {
-            return staticStringProducerForwarderCtorInstanceCallConsoleWriteLineStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringProducerForwarderCtorInstanceCallForwarderConsoleWriteLineStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticStringProducerForwarderCtorInstanceCallForwarderConsoleWriteLineStub))
-        {
-            return staticStringProducerForwarderCtorInstanceCallForwarderConsoleWriteLineStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineStub))
-        {
-            return staticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineStub))
-        {
-            return staticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub))
-        {
-            return staticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub))
-        {
-            return staticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticLiteralStringReturnStub(
-                subjectId,
-                methodsBySubjectId,
-                stubName,
-                out var staticLiteralStringReturnStub))
-        {
-            return staticLiteralStringReturnStub;
-        }
-
-        if (TryBuildAssemblyBoundStaticStringProducerConsoleWriteLineStub(
-                subjectId,
-                methodsBySubjectId,
-                methodStubNamesBySubjectId,
-                stubName,
-                out var staticStringProducerConsoleWriteLineStub))
-        {
-            return staticStringProducerConsoleWriteLineStub;
-        }
-
-        if (TryBuildAssemblyBoundConstructorFieldSetterStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                pageSupportBuilder,
-                stubName,
-                out var constructorFieldSetterStub))
-        {
-            return constructorFieldSetterStub;
-        }
-
-        if (TryBuildAssemblyBoundFieldBackedStringReturnStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                pageSupportBuilder,
-                stubName,
-                out var fieldBackedStringReturnStub))
-        {
-            return fieldBackedStringReturnStub;
-        }
-
-        if (TryBuildAssemblyBoundFieldArgumentStringReturnStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                pageSupportBuilder,
-                stubName,
-                out var fieldArgumentStringReturnStub))
-        {
-            return fieldArgumentStringReturnStub;
-        }
-
-        if (TryBuildAssemblyBoundFieldGetterStringReturnStub(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodsBySubjectId,
-                pageSupportBuilder,
-                stubName,
-                out var fieldGetterStringReturnStub))
-        {
-            return fieldGetterStringReturnStub;
-        }
-
-        if (TryBuildAssemblyBoundConsoleWriteLineStub(subjectId, methodsBySubjectId, stubName, out var consoleWriteLineStub))
-        {
-            return consoleWriteLineStub;
-        }
-
-        if (TryBuildAssemblyBoundDelegateClosedTargetRelayPlan(
-                loweringPlan.AssemblyName,
-                subjectId,
-                methods,
-                metadataRegistration,
-                methodPointers,
-                out var delegateClosedTargetRelayPlan))
-        {
-            return BuildAssemblyBoundDelegateClosedTargetRelayStub(delegateClosedTargetRelayPlan, pageSupportBuilder, stubName);
-        }
-
-        if (TryBuildAssemblyBoundExceptionThrowCatchFinallyPlan(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodPointers,
-                out var exceptionThrowCatchFinallyPlan))
-        {
-            return BuildAssemblyBoundExceptionThrowCatchFinallyStub(exceptionThrowCatchFinallyPlan, stubName);
-        }
-
-        if (TryBuildAssemblyBoundNestedExceptionThrowCatchFinallyPlan(
-                loweringPlan.AssemblyName,
-                subjectId,
-                metadataRegistration,
-                methodPointers,
-                out var nestedExceptionThrowCatchFinallyPlan))
-        {
-            return BuildAssemblyBoundNestedExceptionThrowCatchFinallyStub(nestedExceptionThrowCatchFinallyPlan, stubName);
-        }
-
-        var executableLoweringPlan = TryBuildAssemblyFullClosureExecutableLoweringPlan(
-            loweringPlan.AssemblyName,
-            subjectId,
-            methods,
+        var buildContext = new RuntimeSkeletonStubBuildContext(
+            loweringPlan,
             metadataRegistration,
-            methodPointers);
-        if (executableLoweringPlan is not null &&
-            string.Equals(executableLoweringPlan.PlanKind, "staticCallCtorGetter", StringComparison.Ordinal))
-        {
-            return BuildAssemblyBoundStaticCallCtorGetterStub(executableLoweringPlan, pageSupportBuilder, stubName);
-        }
+            methodPointers,
+            methods,
+            methodsBySubjectId,
+            methodStubNamesBySubjectId,
+            pageSupportBuilder,
+            stubName,
+            subjectId);
+        return TryBuildAssemblyFullClosureRuntimeSkeletonMethodStubVia4CDispatcher(buildContext);
+    }
 
-        if (executableLoweringPlan is not null &&
-            string.Equals(executableLoweringPlan.PlanKind, "constructorThenInstanceCall", StringComparison.Ordinal))
+    private static string? TryBuildAssemblyFullClosureRuntimeSkeletonMethodStubVia4CDispatcher(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        foreach (var familyHandler in RuntimeSkeletonFamilyHandlers)
         {
-            return BuildAssemblyBoundConstructorThenInstanceCallStub(executableLoweringPlan, pageSupportBuilder, stubName);
-        }
-
-        if (executableLoweringPlan is not null &&
-            string.Equals(executableLoweringPlan.PlanKind, "delegateClosedTargetRelayMinimal", StringComparison.Ordinal))
-        {
-            return BuildAssemblyBoundDelegateClosedTargetRelayStub(executableLoweringPlan, pageSupportBuilder, stubName);
-        }
-
-        if (executableLoweringPlan is not null &&
-            string.Equals(executableLoweringPlan.PlanKind, ExceptionThrowCatchFinallyMinimal, StringComparison.Ordinal))
-        {
-            return BuildAssemblyBoundExceptionThrowCatchFinallyStub(executableLoweringPlan, stubName);
-        }
-
-        if (executableLoweringPlan is not null &&
-            string.Equals(executableLoweringPlan.PlanKind, InteropPInvokeDirectCallMinimal, StringComparison.Ordinal))
-        {
-            return BuildAssemblyBoundPInvokeDllImportMinimalStub(executableLoweringPlan, stubName);
-        }
-
-        if (executableLoweringPlan is not null &&
-            string.Equals(executableLoweringPlan.PlanKind, "arrayBoxingReferenceArray", StringComparison.Ordinal))
-        {
-            return BuildAssemblyBoundArrayBoxingReferenceArrayStub(executableLoweringPlan, pageSupportBuilder, stubName);
-        }
-
-        if (executableLoweringPlan is not null &&
-            string.Equals(executableLoweringPlan.PlanKind, "arrayClearReferenceArray", StringComparison.Ordinal))
-        {
-            return BuildAssemblyBoundArrayClearReferenceArrayStub(executableLoweringPlan, pageSupportBuilder, stubName);
-        }
-
-        if (executableLoweringPlan is not null &&
-            string.Equals(executableLoweringPlan.PlanKind, "arrayCopyReferenceArray", StringComparison.Ordinal))
-        {
-            return BuildAssemblyBoundArrayCopyReferenceArrayStub(executableLoweringPlan, pageSupportBuilder, stubName);
-        }
-
-        if (executableLoweringPlan is not null &&
-            string.Equals(executableLoweringPlan.PlanKind, "arrayReverseReferenceArray", StringComparison.Ordinal))
-        {
-            return BuildAssemblyBoundArrayReverseReferenceArrayStub(executableLoweringPlan, pageSupportBuilder, stubName);
-        }
-
-        if (executableLoweringPlan is not null &&
-            string.Equals(executableLoweringPlan.PlanKind, "interfaceDispatchMessage", StringComparison.Ordinal))
-        {
-            return BuildAssemblyBoundInterfaceDispatchMessageStub(executableLoweringPlan, stubName);
+            var result = familyHandler(buildContext);
+            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
+            {
+                return result.StubDefinition;
+            }
         }
 
         return null;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (!buildContext.SubjectId.Contains("/System.Convert::", StringComparison.Ordinal))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+        }
+
+        return TryBuildRuntimeSkeletonConvertHandlers(
+            buildContext,
+            RuntimeSkeletonFamilyHandlerResult.CreateUnsupported("convert-family-owned-unsupported-shape"));
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonBindingFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        foreach (var bindingFamilyHandler in RuntimeSkeletonBindingFamilyHandlers)
+        {
+            var result = bindingFamilyHandler(buildContext);
+            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
+            {
+                return result;
+            }
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonUtilityFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        foreach (var utilityFamilyHandler in RuntimeSkeletonUtilityFamilyHandlers)
+        {
+            var result = utilityFamilyHandler(buildContext);
+            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
+            {
+                return result;
+            }
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonPlatformFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        foreach (var platformFamilyHandler in RuntimeSkeletonPlatformFamilyHandlers)
+        {
+            var result = platformFamilyHandler(buildContext);
+            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
+            {
+                return result;
+            }
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonInteropFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        foreach (var interopFamilyHandler in RuntimeSkeletonInteropFamilyHandlers)
+        {
+            var result = interopFamilyHandler(buildContext);
+            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
+            {
+                return result;
+            }
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonAsyncFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        foreach (var asyncFamilyHandler in RuntimeSkeletonAsyncFamilyHandlers)
+        {
+            var result = asyncFamilyHandler(buildContext);
+            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
+            {
+                return result;
+            }
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonArrayFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        foreach (var arrayFamilyHandler in RuntimeSkeletonArrayFamilyHandlers)
+        {
+            var result = arrayFamilyHandler(buildContext);
+            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
+            {
+                return result;
+            }
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonExceptionFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (!buildContext.SubjectId.Contains("Exception", StringComparison.Ordinal))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+        }
+
+        foreach (var exceptionFamilyHandler in RuntimeSkeletonExceptionFamilyHandlers)
+        {
+            var result = exceptionFamilyHandler(buildContext);
+            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
+            {
+                return result;
+            }
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.CreateUnsupported("exception-family-owned-unsupported-shape");
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        return TryBuildRuntimeSkeletonConvertHandlers(buildContext, RuntimeSkeletonFamilyHandlerResult.NoMatch);
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertHandlers(
+        RuntimeSkeletonStubBuildContext buildContext,
+        RuntimeSkeletonFamilyHandlerResult missResult)
+    {
+        foreach (var convertFamilyHandler in RuntimeSkeletonConvertFamilyHandlers)
+        {
+            var result = convertFamilyHandler(buildContext);
+            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
+            {
+                return result;
+            }
+        }
+
+        return missResult;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStringFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        foreach (var stringFamilyHandler in RuntimeSkeletonStringFamilyHandlers)
+        {
+            var result = stringFamilyHandler(buildContext);
+            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
+            {
+                return result;
+            }
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertIntForwarderHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticIntForwarderStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertBoolIdentityForwarderHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticBoolIdentityForwarderStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertBoolProducerForwarderHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticBoolProducerForwarderStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertPrimitiveHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticPrimitiveConvertStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertCheckedByteHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticCheckedByteConvertStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertByteForwarderHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticByteReturnForwarderStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConstructorFieldSetterHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundConstructorFieldSetterStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.PageSupportBuilder,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonFieldBackedStringReturnHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundFieldBackedStringReturnStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.PageSupportBuilder,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonFieldArgumentStringReturnHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundFieldArgumentStringReturnStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.PageSupportBuilder,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonFieldGetterStringReturnHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundFieldGetterStringReturnStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.PageSupportBuilder,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonDelegateClosedTargetRelayHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundDelegateClosedTargetRelayPlan(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.Methods,
+                buildContext.MetadataRegistration,
+                buildContext.MethodPointers,
+                out var loweringPlan))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(
+                BuildAssemblyBoundDelegateClosedTargetRelayStub(
+                    loweringPlan,
+                    buildContext.PageSupportBuilder,
+                    buildContext.StubName));
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticVoidObjectSinkNoOpHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticVoidObjectSinkNoOpStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticBoolForwarderHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticBoolForwarderStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConsoleWriteLineHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundConsoleWriteLineStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonInterfaceDispatchMessageHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundInterfaceDispatchMessagePlan(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodPointers,
+                buildContext.Methods,
+                out var loweringPlan))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(
+                BuildAssemblyBoundInterfaceDispatchMessageStub(loweringPlan, buildContext.StubName));
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonThreadingThreadStaticMonitorHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundThreadingThreadStaticMonitorPlan(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodPointers,
+                out var loweringPlan))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(
+                BuildAssemblyBoundThreadingThreadStaticMonitorStub(loweringPlan, buildContext.StubName));
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonMarshalingUtf8ExportHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundMarshalingUtf8ExportPlan(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodPointers,
+                out var loweringPlan))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(
+                BuildAssemblyBoundMarshalingUtf8ExportStub(loweringPlan, buildContext.StubName));
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonReflectionInteropClosureHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundReflectionInteropClosurePlan(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodPointers,
+                out var loweringPlan))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(
+                BuildAssemblyBoundReflectionInteropClosureStub(loweringPlan, buildContext.StubName));
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonPInvokeDirectCallHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundPInvokeDirectCallPlan(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodPointers,
+                buildContext.Methods,
+                out var loweringPlan))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(
+                BuildAssemblyBoundPInvokeDllImportMinimalStub(loweringPlan, buildContext.StubName));
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonAsyncTaskFactoryHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundAsyncTaskFactoryStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonAsyncGetResultHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundAsyncGetResultStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonAsyncStateMachineNoOpHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundAsyncStateMachineNoOpStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonArrayBoxingReferenceArrayHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundArrayBoxingReferenceArrayPlan(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodPointers,
+                buildContext.Methods,
+                out var loweringPlan))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(
+                BuildAssemblyBoundArrayBoxingReferenceArrayStub(
+                    loweringPlan,
+                    buildContext.PageSupportBuilder,
+                    buildContext.StubName));
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonArrayClearReferenceArrayHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundArrayClearReferenceArrayPlan(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodPointers,
+                buildContext.Methods,
+                out var loweringPlan))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(
+                BuildAssemblyBoundArrayClearReferenceArrayStub(
+                    loweringPlan,
+                    buildContext.PageSupportBuilder,
+                    buildContext.StubName));
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonArrayReverseReferenceArrayHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundArrayReverseReferenceArrayPlan(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodPointers,
+                buildContext.Methods,
+                out var loweringPlan))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(
+                BuildAssemblyBoundArrayReverseReferenceArrayStub(
+                    loweringPlan,
+                    buildContext.PageSupportBuilder,
+                    buildContext.StubName));
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonArrayCopyReferenceArrayHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundArrayCopyReferenceArrayPlan(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodPointers,
+                buildContext.Methods,
+                out var loweringPlan))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(
+                BuildAssemblyBoundArrayCopyReferenceArrayStub(
+                    loweringPlan,
+                    buildContext.PageSupportBuilder,
+                    buildContext.StubName));
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticExceptionThrowLiteralHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticExceptionThrowLiteralStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticExceptionThrowStringProducerHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticExceptionThrowStringProducerStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticExceptionCatchStringReturnHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticExceptionCatchStringReturnStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonExceptionThrowCatchFinallyHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundExceptionThrowCatchFinallyPlan(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodPointers,
+                out var loweringPlan))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(
+                BuildAssemblyBoundExceptionThrowCatchFinallyStub(loweringPlan, buildContext.StubName));
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonNestedExceptionThrowCatchFinallyHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundNestedExceptionThrowCatchFinallyPlan(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodPointers,
+                out var loweringPlan))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(
+                BuildAssemblyBoundNestedExceptionThrowCatchFinallyStub(loweringPlan, buildContext.StubName));
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringReturnForwarderHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringReturnForwarderStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringForwarderHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringForwarderStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringLiteralAppendHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringLiteralAppendStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.PageSupportBuilder,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringForwarderConsoleWriteLineHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringForwarderConsoleWriteLineStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerForwarderConsoleWriteLineHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringProducerForwarderConsoleWriteLineStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerCtorGetterConsoleWriteLineHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringProducerCtorGetterConsoleWriteLineStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerCtorRenderConsoleWriteLineHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringProducerCtorRenderConsoleWriteLineStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderConsoleWriteLineHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringProducerForwarderCtorInstanceCallForwarderConsoleWriteLineStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticLiteralStringReturnHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticLiteralStringReturnStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticResourceKeyStringReturnHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticResourceKeyStringReturnStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerConsoleWriteLineHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringProducerConsoleWriteLineStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.MethodStubNamesBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticCallCtorGetterExecutableHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        var executableLoweringPlan = TryBuildAssemblyFullClosureExecutableLoweringPlan(
+            buildContext.LoweringPlan.AssemblyName,
+            buildContext.SubjectId,
+            buildContext.Methods,
+            buildContext.MetadataRegistration,
+            buildContext.MethodPointers);
+        if (executableLoweringPlan is not null &&
+            string.Equals(executableLoweringPlan.PlanKind, "staticCallCtorGetter", StringComparison.Ordinal))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(
+                BuildAssemblyBoundStaticCallCtorGetterStub(
+                    executableLoweringPlan,
+                    buildContext.PageSupportBuilder,
+                    buildContext.StubName));
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConstructorThenInstanceCallExecutableHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        var executableLoweringPlan = TryBuildAssemblyFullClosureExecutableLoweringPlan(
+            buildContext.LoweringPlan.AssemblyName,
+            buildContext.SubjectId,
+            buildContext.Methods,
+            buildContext.MetadataRegistration,
+            buildContext.MethodPointers);
+        if (executableLoweringPlan is not null &&
+            string.Equals(executableLoweringPlan.PlanKind, "constructorThenInstanceCall", StringComparison.Ordinal))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(
+                BuildAssemblyBoundConstructorThenInstanceCallStub(
+                    executableLoweringPlan,
+                    buildContext.PageSupportBuilder,
+                    buildContext.StubName));
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
     private static string BuildAssemblyBoundStaticCallCtorGetterStub(
@@ -2418,6 +3168,31 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         };
 
         return true;
+    }
+
+    private static IReadOnlyList<string> GetReferencedRuntimeSkeletonMethodSubjectIds(
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string subjectId)
+    {
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return [];
+        }
+
+        try
+        {
+            return GetSingleBlockInstructions(method)
+                .Where(instruction => string.Equals(instruction.Op, "call", StringComparison.Ordinal))
+                .Select(instruction => instruction.Callee)
+                .Where(callee => !string.IsNullOrWhiteSpace(callee))
+                .Cast<string>()
+                .Distinct(StringComparer.Ordinal)
+                .ToArray();
+        }
+        catch
+        {
+            return [];
+        }
     }
 
     private static bool TryBuildAssemblyBoundMarshalingUtf8ExportPlan(
@@ -3727,6 +4502,54 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return true;
     }
 
+    private static bool TryBuildAssemblyBoundStaticExceptionThrowStringProducerStub(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        IReadOnlyDictionary<string, string> methodStubNamesBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+            ValidateStaticExceptionThrowStringProducerShape(method, instructions);
+        }
+        catch
+        {
+            return false;
+        }
+
+        var producerSubjectId = GetRequiredInstructionCallee(instructions[0], method.SubjectId, 0);
+        if (string.Equals(producerSubjectId, subjectId, StringComparison.Ordinal) ||
+            !methodStubNamesBySubjectId.TryGetValue(producerSubjectId, out var producerStubName))
+        {
+            return false;
+        }
+
+        var exceptionConstructorSubjectId = GetRequiredInstructionCallee(instructions[1], method.SubjectId, 1);
+        var exceptionTypeSubjectId = GetDeclaringTypeSubjectId(exceptionConstructorSubjectId);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(assemblyName),
+            ["producer_stub_name"] = producerStubName,
+            ["exception_type_token"] = CreateTypeTokenLiteral(metadataRegistration, exceptionTypeSubjectId),
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticExceptionThrowStringProducerStubTemplate(),
+            model);
+        return true;
+    }
+
     private static bool TryBuildAssemblyBoundStaticExceptionCatchStringReturnStub(
         string subjectId,
         IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
@@ -3842,14 +4665,28 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         }
 
         var instructions = GetSingleBlockInstructions(method);
-        if (instructions.Count != 2 ||
-            !string.Equals(instructions[0].Op, "call", StringComparison.Ordinal) ||
-            !string.Equals(instructions[1].Op, "ret", StringComparison.Ordinal))
+        var callInstructionIndex = -1;
+        if (instructions.Count == 2 &&
+            string.Equals(instructions[0].Op, "call", StringComparison.Ordinal) &&
+            string.Equals(instructions[1].Op, "ret", StringComparison.Ordinal))
+        {
+            callInstructionIndex = 0;
+        }
+        else if (instructions.Count == 3 &&
+                 string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) &&
+                 GetRequiredOperandInt(instructions[0]) == 0 &&
+                 string.Equals(instructions[1].Op, "call", StringComparison.Ordinal) &&
+                 string.Equals(instructions[2].Op, "ret", StringComparison.Ordinal))
+        {
+            callInstructionIndex = 1;
+        }
+
+        if (callInstructionIndex < 0)
         {
             return false;
         }
 
-        var targetSubjectId = GetRequiredInstructionCallee(instructions[0], method.SubjectId, 0);
+        var targetSubjectId = GetRequiredInstructionCallee(instructions[callInstructionIndex], method.SubjectId, callInstructionIndex);
         if (string.Equals(targetSubjectId, subjectId, StringComparison.Ordinal) ||
             !methodStubNamesBySubjectId.TryGetValue(targetSubjectId, out var targetStubName))
         {
@@ -3863,6 +4700,294 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
             NativeReferenceProofCatalog.GetRuntimeSkeletonStaticIntForwarderStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticBoolIdentityForwarderStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(method.MethodRole, "static-forwarder", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Boolean", StringComparison.Ordinal) ||
+            method.Parameters.Count != 1 ||
+            !string.Equals(method.Parameters[0].Type, "System.Boolean", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+            ValidateSingleArgumentForwarderShape(method, instructions);
+        }
+        catch
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticBoolIdentityForwarderStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticBoolProducerForwarderStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        IReadOnlyDictionary<string, string> methodStubNamesBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Boolean", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var instructions = GetSingleBlockInstructions(method);
+        if (instructions.Count != 3 ||
+            !string.Equals(instructions[0].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[1].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[2].Op, "ret", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var producerSubjectId = GetRequiredInstructionCallee(instructions[0], method.SubjectId, 0);
+        var forwarderSubjectId = GetRequiredInstructionCallee(instructions[1], method.SubjectId, 1);
+        if (string.Equals(producerSubjectId, subjectId, StringComparison.Ordinal) ||
+            string.Equals(forwarderSubjectId, subjectId, StringComparison.Ordinal) ||
+            !methodStubNamesBySubjectId.TryGetValue(producerSubjectId, out var producerStubName) ||
+            !methodStubNamesBySubjectId.TryGetValue(forwarderSubjectId, out var forwarderStubName))
+        {
+            return false;
+        }
+
+        if (!methodsBySubjectId.TryGetValue(forwarderSubjectId, out var forwarderMethod))
+        {
+            return false;
+        }
+
+        if (!string.Equals(forwarderMethod.MethodRole, "static-forwarder", StringComparison.Ordinal) ||
+            !string.Equals(forwarderMethod.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(forwarderMethod.SubjectId), "System.Boolean", StringComparison.Ordinal) ||
+            forwarderMethod.Parameters.Count != 1 ||
+            !string.Equals(forwarderMethod.Parameters[0].Type, "System.Boolean", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> forwarderInstructions;
+        try
+        {
+            forwarderInstructions = GetSingleBlockInstructions(forwarderMethod);
+            ValidateSingleArgumentForwarderShape(forwarderMethod, forwarderInstructions);
+        }
+        catch
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["producer_stub_name"] = producerStubName,
+            ["forwarder_stub_name"] = forwarderStubName,
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticBoolProducerForwarderStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticPrimitiveConvertStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if ((!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) &&
+             !string.Equals(method.MethodRole, "static-forwarder", StringComparison.Ordinal)) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            method.Parameters.Count != 1)
+        {
+            return false;
+        }
+
+        if (!TryResolveRuntimeSkeletonPrimitiveConvertShape(
+                method.Parameters[0].Type,
+                GetMethodReturnType(method.SubjectId),
+                out var inputCppType,
+                out var outputCppType,
+                out var convertedValueExpression))
+        {
+            return false;
+        }
+
+        var instructions = GetSingleBlockInstructions(method);
+        if (!MatchesRuntimeSkeletonPrimitiveConvertInstructionShape(
+                instructions,
+                method.Parameters[0].Type,
+                GetMethodReturnType(method.SubjectId)))
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["input_cpp_type"] = inputCppType,
+            ["output_cpp_type"] = outputCppType,
+            ["converted_value_expression"] = convertedValueExpression,
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticPrimitiveConvertStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticCheckedByteConvertStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        IReadOnlyDictionary<string, string> methodStubNamesBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            method.Parameters.Count != 1 ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Byte", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var instructions = GetSingleBlockInstructions(method);
+        if (!TryResolveRuntimeSkeletonCheckedByteConvertShape(
+                method.SubjectId,
+                method.Parameters[0].Type,
+                instructions,
+                out var inputCppType,
+                out var overflowConditionExpression,
+                out var throwSubjectId))
+        {
+            return false;
+        }
+
+        if (!methodStubNamesBySubjectId.TryGetValue(throwSubjectId, out var throwStubName))
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["input_cpp_type"] = inputCppType,
+            ["overflow_condition_expression"] = overflowConditionExpression,
+            ["throw_stub_name"] = throwStubName,
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticCheckedByteConvertStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticByteReturnForwarderStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        IReadOnlyDictionary<string, string> methodStubNamesBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Byte", StringComparison.Ordinal) ||
+            method.Parameters.Count != 1)
+        {
+            return false;
+        }
+
+        var instructions = GetSingleBlockInstructions(method);
+        var callInstructionIndex = -1;
+        if (instructions.Count == 2 &&
+            string.Equals(instructions[0].Op, "call", StringComparison.Ordinal) &&
+            string.Equals(instructions[1].Op, "ret", StringComparison.Ordinal))
+        {
+            callInstructionIndex = 0;
+        }
+        else if (instructions.Count == 3 &&
+                 string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) &&
+                 GetRequiredOperandInt(instructions[0]) == 0 &&
+                 string.Equals(instructions[1].Op, "call", StringComparison.Ordinal) &&
+                 string.Equals(instructions[2].Op, "ret", StringComparison.Ordinal))
+        {
+            callInstructionIndex = 1;
+        }
+
+        if (callInstructionIndex < 0)
+        {
+            return false;
+        }
+
+        var targetSubjectId = GetRequiredInstructionCallee(instructions[callInstructionIndex], method.SubjectId, callInstructionIndex);
+        if (string.Equals(targetSubjectId, subjectId, StringComparison.Ordinal) ||
+            !methodStubNamesBySubjectId.TryGetValue(targetSubjectId, out var targetStubName))
+        {
+            return false;
+        }
+
+        if (!TryResolveRuntimeSkeletonPrimitiveConvertInputCppType(method.Parameters[0].Type, out var inputCppType))
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["input_cpp_type"] = inputCppType,
+            ["target_stub_name"] = targetStubName,
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticByteForwarderStubTemplate(),
             model);
         return true;
     }
@@ -5329,6 +6454,53 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             instructions.Count != 2 ||
             !string.Equals(instructions[0].Op, "ldstr", StringComparison.Ordinal) ||
             !string.Equals(instructions[1].Op, "ret", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var literal = GetRequiredOperandString(instructions[0]);
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["literal"] = ToCppStringLiteral(literal),
+            ["literal_byte_count"] = Encoding.UTF8.GetByteCount(literal),
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticLiteralStringReturnStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticResourceKeyStringReturnStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!string.Equals(GetMethodReturnType(method.SubjectId), "System.String", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var instructions = GetSingleBlockInstructions(method);
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            instructions.Count != 3 ||
+            !string.Equals(instructions[0].Op, "ldstr", StringComparison.Ordinal) ||
+            !string.Equals(instructions[1].Op, "call", StringComparison.Ordinal) ||
+            !string.Equals(instructions[2].Op, "ret", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var targetSubjectId = GetRequiredInstructionCallee(instructions[1], method.SubjectId, 1);
+        if (!targetSubjectId.EndsWith("::GetResourceString:System.String(System.String)", StringComparison.Ordinal))
         {
             return false;
         }
@@ -7282,6 +8454,468 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         }
     }
 
+    private static bool TryResolveRuntimeSkeletonPrimitiveConvertShape(
+        string inputManagedType,
+        string outputManagedType,
+        out string inputCppType,
+        out string outputCppType,
+        out string convertedValueExpression)
+    {
+        inputCppType = string.Empty;
+        outputCppType = string.Empty;
+        convertedValueExpression = string.Empty;
+
+        if (string.Equals(inputManagedType, "System.Boolean", StringComparison.Ordinal) &&
+            string.Equals(outputManagedType, "System.Byte", StringComparison.Ordinal))
+        {
+            inputCppType = "bool";
+            outputCppType = "std::uint8_t";
+            convertedValueExpression = "request->value ? static_cast<std::uint8_t>(1) : static_cast<std::uint8_t>(0)";
+            return true;
+        }
+
+        if (string.Equals(inputManagedType, "System.Byte", StringComparison.Ordinal) &&
+            string.Equals(outputManagedType, "System.Boolean", StringComparison.Ordinal))
+        {
+            inputCppType = "std::uint8_t";
+            outputCppType = "bool";
+            convertedValueExpression = "request->value != static_cast<std::uint8_t>(0)";
+            return true;
+        }
+
+        if (string.Equals(inputManagedType, outputManagedType, StringComparison.Ordinal) &&
+            TryResolveRuntimeSkeletonPrimitiveConvertInputCppType(inputManagedType, out inputCppType))
+        {
+            outputCppType = inputCppType;
+            convertedValueExpression = "request->value";
+            return true;
+        }
+
+        if (TryResolveRuntimeSkeletonPrimitiveConvertInputCppType(inputManagedType, out inputCppType) &&
+            TryResolveRuntimeSkeletonPrimitiveConvertOutputCppType(outputManagedType, out outputCppType))
+        {
+            convertedValueExpression = "request->value";
+            return true;
+        }
+
+        if (string.Equals(outputManagedType, "System.Boolean", StringComparison.Ordinal) &&
+            TryResolveRuntimeSkeletonPrimitiveConvertInputCppType(inputManagedType, out inputCppType))
+        {
+            outputCppType = "bool";
+            convertedValueExpression = "request->value != 0";
+            return true;
+        }
+
+        return false;
+    }
+
+    private static bool MatchesRuntimeSkeletonPrimitiveConvertInstructionShape(
+        IReadOnlyList<TypedIlInstructionArtifact> instructions,
+        string inputManagedType,
+        string outputManagedType)
+    {
+        if (instructions.Count == 2)
+        {
+            return string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) &&
+                   GetRequiredOperandInt(instructions[0]) == 0 &&
+                   string.Equals(instructions[1].Op, "ret", StringComparison.Ordinal) &&
+                   TryResolveRuntimeSkeletonPrimitiveConvertInputCppType(inputManagedType, out _) &&
+                   TryResolveRuntimeSkeletonPrimitiveConvertOutputCppType(outputManagedType, out _) &&
+                   IsRuntimeSkeletonDirectPrimitiveValuePreservingReturn(inputManagedType, outputManagedType);
+        }
+
+        if (TryMatchRuntimeSkeletonPrimitiveConvRetInstructionShape(instructions, inputManagedType, outputManagedType))
+        {
+            return true;
+        }
+
+        if (instructions.Count == 6)
+        {
+            return string.Equals(outputManagedType, "System.Boolean", StringComparison.Ordinal) &&
+                   (string.Equals(inputManagedType, "System.Single", StringComparison.Ordinal) ||
+                    string.Equals(inputManagedType, "System.Double", StringComparison.Ordinal)) &&
+                   string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) &&
+                   GetRequiredOperandInt(instructions[0]) == 0 &&
+                   string.Equals(instructions[1].Op, string.Equals(inputManagedType, "System.Single", StringComparison.Ordinal) ? "ldc.r4" : "ldc.r8", StringComparison.Ordinal) &&
+                   IsZeroLiteralOperand(instructions[1]) &&
+                   string.Equals(instructions[2].Op, "ceq", StringComparison.Ordinal) &&
+                   string.Equals(instructions[3].Op, "ldc.i4", StringComparison.Ordinal) &&
+                   GetRequiredOperandInt(instructions[3]) == 0 &&
+                   string.Equals(instructions[4].Op, "ceq", StringComparison.Ordinal) &&
+                   string.Equals(instructions[5].Op, "ret", StringComparison.Ordinal);
+        }
+
+        if (instructions.Count < 4 || instructions.Count > 5)
+        {
+            return false;
+        }
+
+        if (!string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) ||
+            GetRequiredOperandInt(instructions[0]) != 0 ||
+            !string.Equals(instructions[1].Op, "ldc.i4", StringComparison.Ordinal) ||
+            GetRequiredOperandInt(instructions[1]) != 0)
+        {
+            return false;
+        }
+
+        var compareInstructionIndex = 2;
+        if (instructions.Count == 5 &&
+            string.Equals(instructions[2].Op, "conv.i8", StringComparison.Ordinal))
+        {
+            compareInstructionIndex = 3;
+        }
+
+        var compareOp = instructions[compareInstructionIndex].Op;
+        if (!string.Equals(compareOp, "cgt", StringComparison.Ordinal) &&
+            !string.Equals(compareOp, "cgt.un", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        if (compareInstructionIndex == 3)
+        {
+            return string.Equals(instructions[4].Op, "ret", StringComparison.Ordinal) &&
+                   string.Equals(outputManagedType, "System.Boolean", StringComparison.Ordinal) &&
+                   (string.Equals(inputManagedType, "System.Int64", StringComparison.Ordinal) ||
+                    string.Equals(inputManagedType, "System.UInt64", StringComparison.Ordinal)) &&
+                   string.Equals(compareOp, "cgt.un", StringComparison.Ordinal);
+        }
+
+        if (instructions.Count == 4)
+        {
+            return string.Equals(instructions[3].Op, "ret", StringComparison.Ordinal) &&
+                   string.Equals(outputManagedType, "System.Boolean", StringComparison.Ordinal) &&
+                   (string.Equals(compareOp, "cgt", StringComparison.Ordinal) ||
+                    string.Equals(compareOp, "cgt.un", StringComparison.Ordinal));
+        }
+
+        return string.Equals(instructions[3].Op, "conv.u1", StringComparison.Ordinal) &&
+               string.Equals(instructions[4].Op, "ret", StringComparison.Ordinal) &&
+               string.Equals(inputManagedType, "System.Boolean", StringComparison.Ordinal) &&
+               string.Equals(outputManagedType, "System.Byte", StringComparison.Ordinal) &&
+               string.Equals(compareOp, "cgt.un", StringComparison.Ordinal);
+    }
+
+    private static bool TryResolveRuntimeSkeletonCheckedByteConvertShape(
+        string subjectId,
+        string inputManagedType,
+        IReadOnlyList<TypedIlInstructionArtifact> instructions,
+        out string inputCppType,
+        out string overflowConditionExpression,
+        out string throwSubjectId)
+    {
+        inputCppType = string.Empty;
+        overflowConditionExpression = string.Empty;
+        throwSubjectId = string.Empty;
+
+        if (!TryResolveRuntimeSkeletonPrimitiveConvertInputCppType(inputManagedType, out inputCppType))
+        {
+            return false;
+        }
+
+        if (string.Equals(inputManagedType, "System.UInt64", StringComparison.Ordinal))
+        {
+            if (instructions.Count != 8 ||
+                !string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) ||
+                GetRequiredOperandInt(instructions[0]) != 0 ||
+                !string.Equals(instructions[1].Op, "ldc.i4", StringComparison.Ordinal) ||
+                GetRequiredOperandInt(instructions[1]) != 255 ||
+                !string.Equals(instructions[2].Op, "conv.i8", StringComparison.Ordinal) ||
+                !string.Equals(instructions[3].Op, "ble.un", StringComparison.Ordinal) ||
+                !string.Equals(instructions[4].Op, "call", StringComparison.Ordinal) ||
+                !string.Equals(instructions[5].Op, "ldarg", StringComparison.Ordinal) ||
+                GetRequiredOperandInt(instructions[5]) != 0 ||
+                !string.Equals(instructions[6].Op, "conv.u1", StringComparison.Ordinal) ||
+                !string.Equals(instructions[7].Op, "ret", StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            throwSubjectId = GetRequiredInstructionCallee(instructions[4], subjectId, 4);
+            overflowConditionExpression = "request->value > static_cast<std::uint64_t>(255)";
+            return true;
+        }
+
+        switch (inputManagedType)
+        {
+            case "System.SByte":
+                if (instructions.Count != 7 ||
+                    !string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[0]) != 0 ||
+                    !string.Equals(instructions[1].Op, "ldc.i4", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[1]) != 0 ||
+                    !string.Equals(instructions[2].Op, "bge", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[3].Op, "call", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[4].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[4]) != 0 ||
+                    !string.Equals(instructions[5].Op, "conv.u1", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[6].Op, "ret", StringComparison.Ordinal))
+                {
+                    return false;
+                }
+                throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
+                overflowConditionExpression = "request->value < static_cast<std::int8_t>(0)";
+                return true;
+            case "System.Int16":
+                if (instructions.Count != 7 ||
+                    !string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[0]) != 0 ||
+                    !string.Equals(instructions[1].Op, "ldc.i4", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[1]) != 255 ||
+                    !string.Equals(instructions[2].Op, "ble.un", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[3].Op, "call", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[4].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[4]) != 0 ||
+                    !string.Equals(instructions[5].Op, "conv.u1", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[6].Op, "ret", StringComparison.Ordinal))
+                {
+                    return false;
+                }
+                throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
+                overflowConditionExpression = "request->value < static_cast<std::int16_t>(0) || request->value > static_cast<std::int16_t>(255)";
+                return true;
+            case "System.UInt16":
+                if (instructions.Count != 7 ||
+                    !string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[0]) != 0 ||
+                    !string.Equals(instructions[1].Op, "ldc.i4", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[1]) != 255 ||
+                    !string.Equals(instructions[2].Op, "ble", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[3].Op, "call", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[4].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[4]) != 0 ||
+                    !string.Equals(instructions[5].Op, "conv.u1", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[6].Op, "ret", StringComparison.Ordinal))
+                {
+                    return false;
+                }
+                throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
+                overflowConditionExpression = "request->value > static_cast<std::uint16_t>(255)";
+                return true;
+            case "System.UInt32":
+                if (instructions.Count != 7 ||
+                    !string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[0]) != 0 ||
+                    !string.Equals(instructions[1].Op, "ldc.i4", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[1]) != 255 ||
+                    !string.Equals(instructions[2].Op, "ble.un", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[3].Op, "call", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[4].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[4]) != 0 ||
+                    !string.Equals(instructions[5].Op, "conv.u1", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[6].Op, "ret", StringComparison.Ordinal))
+                {
+                    return false;
+                }
+                throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
+                overflowConditionExpression = "request->value > static_cast<std::uint32_t>(255)";
+                return true;
+            case "System.Char":
+                if (instructions.Count != 7 ||
+                    !string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[0]) != 0 ||
+                    !string.Equals(instructions[1].Op, "ldc.i4", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[1]) != 255 ||
+                    !string.Equals(instructions[2].Op, "ble", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[3].Op, "call", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[4].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[4]) != 0 ||
+                    !string.Equals(instructions[5].Op, "conv.u1", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[6].Op, "ret", StringComparison.Ordinal))
+                {
+                    return false;
+                }
+                throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
+                overflowConditionExpression = "request->value > static_cast<std::uint16_t>(255)";
+                return true;
+            default:
+                return false;
+        }
+    }
+
+
+    private static bool TryResolveRuntimeSkeletonPrimitiveConvertInputCppType(
+        string inputManagedType,
+        out string inputCppType)
+    {
+        inputCppType = string.Empty;
+        switch (inputManagedType)
+        {
+            case "System.Boolean":
+                inputCppType = "bool";
+                return true;
+            case "System.Byte":
+                inputCppType = "std::uint8_t";
+                return true;
+            case "System.SByte":
+                inputCppType = "std::int8_t";
+                return true;
+            case "System.Int16":
+                inputCppType = "std::int16_t";
+                return true;
+            case "System.UInt16":
+                inputCppType = "std::uint16_t";
+                return true;
+            case "System.Int32":
+                inputCppType = "std::int32_t";
+                return true;
+            case "System.UInt32":
+                inputCppType = "std::uint32_t";
+                return true;
+            case "System.Int64":
+                inputCppType = "std::int64_t";
+                return true;
+            case "System.UInt64":
+                inputCppType = "std::uint64_t";
+                return true;
+            case "System.Char":
+                inputCppType = "std::uint16_t";
+                return true;
+            case "System.Single":
+                inputCppType = "float";
+                return true;
+            case "System.Double":
+                inputCppType = "double";
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private static bool TryResolveRuntimeSkeletonPrimitiveConvertOutputCppType(
+        string outputManagedType,
+        out string outputCppType)
+    {
+        return TryResolveRuntimeSkeletonPrimitiveConvertInputCppType(outputManagedType, out outputCppType);
+    }
+
+    private static bool IsRuntimeSkeletonDirectPrimitiveValuePreservingReturn(
+        string inputManagedType,
+        string outputManagedType)
+    {
+        if (string.Equals(inputManagedType, outputManagedType, StringComparison.Ordinal))
+        {
+            return true;
+        }
+
+        return string.Equals(inputManagedType, "System.Byte", StringComparison.Ordinal) &&
+               (string.Equals(outputManagedType, "System.Char", StringComparison.Ordinal) ||
+                string.Equals(outputManagedType, "System.UInt16", StringComparison.Ordinal) ||
+                string.Equals(outputManagedType, "System.Int16", StringComparison.Ordinal) ||
+                string.Equals(outputManagedType, "System.Int32", StringComparison.Ordinal) ||
+                string.Equals(outputManagedType, "System.UInt32", StringComparison.Ordinal) ||
+                string.Equals(outputManagedType, "System.Int64", StringComparison.Ordinal) ||
+                string.Equals(outputManagedType, "System.UInt64", StringComparison.Ordinal) ||
+                string.Equals(outputManagedType, "System.Single", StringComparison.Ordinal) ||
+                string.Equals(outputManagedType, "System.Double", StringComparison.Ordinal));
+    }
+
+    private static bool TryMatchRuntimeSkeletonPrimitiveConvRetInstructionShape(
+        IReadOnlyList<TypedIlInstructionArtifact> instructions,
+        string inputManagedType,
+        string outputManagedType)
+    {
+        if (!TryResolveRuntimeSkeletonPrimitiveConvertInputCppType(inputManagedType, out _) ||
+            !TryResolveRuntimeSkeletonPrimitiveConvertOutputCppType(outputManagedType, out _))
+        {
+            return false;
+        }
+
+        if (instructions.Count == 3 &&
+            string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) &&
+            GetRequiredOperandInt(instructions[0]) == 0 &&
+            string.Equals(instructions[2].Op, "ret", StringComparison.Ordinal))
+        {
+            return IsExpectedPrimitiveConvOp(instructions[1].Op, inputManagedType, outputManagedType);
+        }
+
+        return instructions.Count == 4 &&
+               string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) &&
+               GetRequiredOperandInt(instructions[0]) == 0 &&
+               string.Equals(instructions[1].Op, "conv.r.un", StringComparison.Ordinal) &&
+               string.Equals(instructions[3].Op, "ret", StringComparison.Ordinal) &&
+               IsExpectedPrimitiveConvOp(instructions[2].Op, inputManagedType, outputManagedType) &&
+               (string.Equals(inputManagedType, "System.UInt32", StringComparison.Ordinal) ||
+                string.Equals(inputManagedType, "System.UInt64", StringComparison.Ordinal)) &&
+               (string.Equals(outputManagedType, "System.Single", StringComparison.Ordinal) ||
+                string.Equals(outputManagedType, "System.Double", StringComparison.Ordinal));
+    }
+
+    private static bool IsExpectedPrimitiveConvOp(
+        string op,
+        string inputManagedType,
+        string outputManagedType)
+    {
+        if (string.Equals(inputManagedType, outputManagedType, StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        if (string.Equals(outputManagedType, "System.Byte", StringComparison.Ordinal))
+        {
+            return string.Equals(op, "conv.u1", StringComparison.Ordinal);
+        }
+
+        if (string.Equals(outputManagedType, "System.SByte", StringComparison.Ordinal))
+        {
+            return string.Equals(op, "conv.i1", StringComparison.Ordinal);
+        }
+
+        if (string.Equals(outputManagedType, "System.Int16", StringComparison.Ordinal))
+        {
+            return string.Equals(op, "conv.i2", StringComparison.Ordinal);
+        }
+
+        if (string.Equals(outputManagedType, "System.UInt16", StringComparison.Ordinal) ||
+            string.Equals(outputManagedType, "System.Char", StringComparison.Ordinal))
+        {
+            return string.Equals(op, "conv.u2", StringComparison.Ordinal);
+        }
+
+        if (string.Equals(outputManagedType, "System.Int32", StringComparison.Ordinal) ||
+            string.Equals(outputManagedType, "System.UInt32", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        if (string.Equals(outputManagedType, "System.Int64", StringComparison.Ordinal))
+        {
+            return string.Equals(op, "conv.i8", StringComparison.Ordinal) ||
+                   string.Equals(op, "conv.u8", StringComparison.Ordinal);
+        }
+
+        if (string.Equals(outputManagedType, "System.UInt64", StringComparison.Ordinal))
+        {
+            return string.Equals(op, "conv.i8", StringComparison.Ordinal) ||
+                   string.Equals(op, "conv.u8", StringComparison.Ordinal);
+        }
+
+        if (string.Equals(outputManagedType, "System.Single", StringComparison.Ordinal))
+        {
+            return string.Equals(op, "conv.r4", StringComparison.Ordinal);
+        }
+
+        if (string.Equals(outputManagedType, "System.Double", StringComparison.Ordinal))
+        {
+            return string.Equals(op, "conv.r8", StringComparison.Ordinal);
+        }
+
+        return false;
+    }
+
+    private static bool IsZeroLiteralOperand(TypedIlInstructionArtifact instruction)
+    {
+        return instruction.Operand switch
+        {
+            int value => value == 0,
+            long value => value == 0L,
+            float value => value == 0f,
+            double value => value == 0d,
+            JsonElement element when element.ValueKind == JsonValueKind.Number => element.GetDouble() == 0d,
+            _ => false,
+        };
+    }
+
     private static bool TryCreateAsyncTaskFamilyShape(string taskReturnType, out AsyncTaskFamilyShape familyShape)
     {
         familyShape = null!;
@@ -7792,6 +9426,31 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             "System.Private.CoreLib/System.InvalidOperationException::.ctor:System.Void(System.String)",
             method.SubjectId,
             1);
+    }
+
+    private static void ValidateStaticExceptionThrowStringProducerShape(
+        TypedIlMethodArtifact method,
+        IReadOnlyList<TypedIlInstructionArtifact> instructions)
+    {
+        RequireMethodContract(method, "static-method", "has-canonical-body");
+        if (!string.Equals(GetMethodReturnType(method.SubjectId), "System.Void", StringComparison.Ordinal) ||
+            method.Parameters.Count != 0)
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects static exception throw string producer '{method.SubjectId}' to be parameterless and return void");
+        }
+
+        RequireInstructionCount(method, instructions, 3);
+        RequireInstructionOp(instructions[0], "call", method.SubjectId, 0);
+        RequireInstructionOp(instructions[1], "newobj", method.SubjectId, 1);
+        RequireInstructionOp(instructions[2], "throw", method.SubjectId, 2);
+
+        var exceptionConstructorSubjectId = GetRequiredInstructionCallee(instructions[1], method.SubjectId, 1);
+        if (!exceptionConstructorSubjectId.EndsWith("::.ctor:System.Void(System.String)", StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects static exception throw string producer '{method.SubjectId}' to construct a string-taking exception, but found '{exceptionConstructorSubjectId}'");
+        }
     }
 
     private static void ValidateStaticExceptionCatchStringReturnShape(

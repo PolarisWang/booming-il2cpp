@@ -15,9 +15,9 @@ class TestSolutionCorePackPlannerNativeProofB(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-reflection-interop-closure-native-proof", plan["selection"]["matrixId"])
         self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/ReflectionInteropClosureSolution/App/ReflectionInteropClosure.App.csproj",
+            solution_core_pack_scenario_project_path("ReflectionInteropClosureSolution", "ReflectionInteropClosure.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("", plan["selection"]["source"]["entry"])
@@ -37,9 +37,9 @@ class TestSolutionCorePackPlannerNativeProofB(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-pinvoke-direct-call-native-proof", plan["selection"]["matrixId"])
         self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/PInvokeDirectCallSolution/App/PInvokeDirectCall.App.csproj",
+            solution_core_pack_scenario_project_path("PInvokeDirectCallSolution", "PInvokeDirectCall.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("", plan["selection"]["source"]["entry"])
@@ -59,9 +59,9 @@ class TestSolutionCorePackPlannerNativeProofB(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-array-boxing-reference-array-native-proof", plan["selection"]["matrixId"])
         self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/ArrayBoxingReferenceArraySolution/App/ArrayBoxingReferenceArray.App.csproj",
+            solution_core_pack_scenario_project_path("ArrayBoxingReferenceArraySolution", "ArrayBoxingReferenceArray.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("", plan["selection"]["source"]["entry"])
@@ -81,9 +81,9 @@ class TestSolutionCorePackPlannerNativeProofB(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-interface-dispatch-message-native-proof", plan["selection"]["matrixId"])
         self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/InterfaceDispatchMessageSolution/App/InterfaceDispatchMessage.App.csproj",
+            solution_core_pack_scenario_project_path("InterfaceDispatchMessageSolution", "InterfaceDispatchMessage.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("", plan["selection"]["source"]["entry"])
@@ -106,9 +106,9 @@ class TestSolutionCorePackPlannerNativeProofB(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-threading-threadstatic-monitor-native-proof", plan["selection"]["matrixId"])
         self.assertEqual("proof-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/ThreadingThreadStaticMonitorSolution/App/ThreadingThreadStaticMonitor.App.csproj",
+            solution_core_pack_scenario_project_path("ThreadingThreadStaticMonitorSolution", "ThreadingThreadStaticMonitor.App"),
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("", plan["selection"]["source"]["entry"])
@@ -128,11 +128,8 @@ class TestSolutionCorePackPlannerNativeProofB(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-corelib-reference-hotupdate-proof", plan["selection"]["matrixId"])
         self.assertEqual("managed-runtime-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
-        self.assertEqual(
-            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
-            plan["selection"]["source"]["primaryProjectPath"],
-        )
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_PROJECT, plan["selection"]["source"]["primaryProjectPath"])
         self.assertEqual("dotnet-managed", plan["selection"]["executionContext"]["toolchainProfile"])
         self.assertEqual("hotupdate-proof-output", plan["selection"]["executionContext"]["runtimeProfile"])
 
@@ -152,9 +149,9 @@ class TestSolutionCorePackPlannerNativeProofB(SolutionCorePackPlannerTestSupport
         self.assertEqual("SolutionCorePack", plan["selection"]["subjectId"])
         self.assertEqual("windows-corelib-reference-native-hotupdate-proof", plan["selection"]["matrixId"])
         self.assertEqual("native-hotupdate-proof-output", plan["selection"]["pipelineId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", plan["selection"]["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION, plan["selection"]["source"]["path"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/NativeProofApp/GoldenCoreLibReference.NativeProofApp.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/CoreLibReferenceSolution/NativeProofApp/GoldenCoreLibReference.NativeProofApp.csproj",
             plan["selection"]["source"]["primaryProjectPath"],
         )
         self.assertEqual("", plan["selection"]["source"]["entry"])

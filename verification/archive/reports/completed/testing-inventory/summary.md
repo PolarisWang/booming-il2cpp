@@ -11,4 +11,4 @@
 - native-proof :: verification=planned support=supported
 - perf :: verification=missing support=supported
 - registry :: verification=passed support=supported
-- workspace :: verification=passed support=supported
+- workspace :: verification=missing support=supported

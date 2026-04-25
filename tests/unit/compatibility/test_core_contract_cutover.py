@@ -15,7 +15,7 @@ EMITTER_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.CodeGen" / "NativeR
 THREE_PART_CONCAT = "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String)"
 
 
-class Phase2CoreContractCutoverTests(unittest.TestCase):
+class CoreContractCutoverTests(unittest.TestCase):
     def test_semantic_world_stage_owns_current_concat_canonicalization(self) -> None:
         semantic_world_source = SEMANTIC_WORLD_STAGE_PATH.read_text(encoding="utf-8")
         codegen_source = CODEGEN_STAGE_PATH.read_text(encoding="utf-8")

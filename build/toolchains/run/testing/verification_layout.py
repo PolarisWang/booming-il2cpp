@@ -199,3 +199,18 @@ def owner_manifest_name_candidates() -> tuple[str, ...]:
 
 def owner_features_name_candidates() -> tuple[str, ...]:
     return (OWNER_FEATURES_NAME,)
+
+
+def owner_scan_root(repo_root: Path, owner_id: str, source_path_text: str) -> Path:
+    resolved_source_path = Path(source_path_text)
+    if not resolved_source_path.is_absolute():
+        resolved_source_path = repo_root / resolved_source_path
+
+    resolved_owner_root = owner_root(repo_root, owner_id)
+    try:
+        if resolved_source_path == resolved_owner_root or resolved_owner_root in resolved_source_path.parents:
+            return resolved_owner_root
+    except ValueError:
+        pass
+
+    return resolved_source_path if resolved_source_path.is_dir() else resolved_source_path.parent

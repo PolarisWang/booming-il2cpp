@@ -10,7 +10,7 @@
     <ProjectReference Include="..\..\..\..\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\subjects\SolutionCorePack\source\Proofs\CoreRuntimeFeatures\ReflectionAndMetadata\LinkerStrippingProof.cs" Link="LinkerStrippingProof.cs" />
+    <Compile Include="..\..\..\..\verification\catalog\owners\SolutionCorePack\proofs\CoreRuntimeFeatures\ReflectionAndMetadata\LinkerStrippingProof.cs" Link="LinkerStrippingProof.cs" />
   </ItemGroup>
 </Project>
 

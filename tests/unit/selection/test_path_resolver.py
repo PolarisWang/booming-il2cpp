@@ -16,6 +16,14 @@ PERF_MATRIX_ID = "windows-perf-release"
 LEGACY_ARCHETYPE_SUBJECT_ID = "GoldenMultiProject"
 
 
+def owner_root(subject_id: str) -> Path:
+    return REPO_ROOT / "verification" / "catalog" / "owners" / subject_id
+
+
+def owner_manifest_path(subject_id: str) -> Path:
+    return owner_root(subject_id) / "owner.manifest.json"
+
+
 def load_module(path: Path, module_name: str):
     if not path.is_file():
         raise FileNotFoundError(f"module missing: {path}")
@@ -62,11 +70,11 @@ class PathResolverTests(unittest.TestCase):
         run_id = "20260407-fixture-trace-001"
 
         self.assertEqual(
-            REPO_ROOT / "subjects" / TRACE_SUBJECT_ID,
+            owner_root(TRACE_SUBJECT_ID),
             resolver_module.subject_root(REPO_ROOT, TRACE_SUBJECT_ID),
         )
         self.assertEqual(
-            REPO_ROOT / "subjects" / TRACE_SUBJECT_ID / "subject.manifest.json",
+            owner_manifest_path(TRACE_SUBJECT_ID),
             resolver_module.subject_manifest_path(REPO_ROOT, TRACE_SUBJECT_ID),
         )
         self.assertEqual(
@@ -111,19 +119,19 @@ class PathResolverTests(unittest.TestCase):
         roots = resolver_module.subject_content_roots(REPO_ROOT, TRACE_SUBJECT_ID)
 
         self.assertEqual(
-            REPO_ROOT / "subjects" / TRACE_SUBJECT_ID / "validation",
+            REPO_ROOT / "verification" / "evidence" / "owners" / TRACE_SUBJECT_ID / "validation",
             roots["validationRoot"],
         )
         self.assertEqual(
-            REPO_ROOT / "subjects" / TRACE_SUBJECT_ID / "expected",
+            REPO_ROOT / "verification" / "evidence" / "owners" / TRACE_SUBJECT_ID / "expected",
             roots["expectedRoot"],
         )
         self.assertEqual(
-            REPO_ROOT / "subjects" / TRACE_SUBJECT_ID / "baselines",
+            REPO_ROOT / "verification" / "catalog" / "owners" / TRACE_SUBJECT_ID / "benchmark-baselines",
             roots["baselinesRoot"],
         )
         self.assertEqual(
-            REPO_ROOT / "subjects" / PERF_SUBJECT_ID / "baselines" / "perf" / PERF_MATRIX_ID / "windows.json",
+            REPO_ROOT / "verification" / "catalog" / "owners" / PERF_SUBJECT_ID / "benchmark-baselines" / "perf" / PERF_MATRIX_ID / "windows.json",
             resolver_module.subject_perf_baseline_path(
                 REPO_ROOT,
                 PERF_SUBJECT_ID,
@@ -136,11 +144,11 @@ class PathResolverTests(unittest.TestCase):
         resolver_module = load_module(PATH_RESOLVER_MODULE_PATH, "chaos_path_resolver_without_legacy_archetype_alias")
 
         self.assertEqual(
-            REPO_ROOT / "subjects" / LEGACY_ARCHETYPE_SUBJECT_ID,
+            owner_root(LEGACY_ARCHETYPE_SUBJECT_ID),
             resolver_module.subject_root(REPO_ROOT, LEGACY_ARCHETYPE_SUBJECT_ID),
         )
         self.assertEqual(
-            REPO_ROOT / "subjects" / LEGACY_ARCHETYPE_SUBJECT_ID / "subject.manifest.json",
+            owner_manifest_path(LEGACY_ARCHETYPE_SUBJECT_ID),
             resolver_module.subject_manifest_path(REPO_ROOT, LEGACY_ARCHETYPE_SUBJECT_ID),
         )
 

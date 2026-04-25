@@ -11,7 +11,7 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
         self.assertEqual("proof-runtime-output", matrix["pipelineId"])
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/App/FoundationDllTranslation.App.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/FoundationDllTranslationSolution/App/FoundationDllTranslation.App.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])
@@ -23,7 +23,7 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
         self.assertEqual("proof-runtime-output", matrix["pipelineId"])
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/NestedExceptionThrowCatchFinallySolution/App/NestedExceptionThrowCatchFinally.App.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/NestedExceptionThrowCatchFinallySolution/App/NestedExceptionThrowCatchFinally.App.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])
@@ -35,7 +35,7 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
         self.assertEqual("proof-runtime-output", matrix["pipelineId"])
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/ConstructorThenInstanceCallSolution/App/ConstructorThenInstanceCall.App.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/ConstructorThenInstanceCallSolution/App/ConstructorThenInstanceCall.App.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])
@@ -47,7 +47,7 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
         self.assertEqual("proof-runtime-output", matrix["pipelineId"])
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/StaticCallCtorGetterSolution/App/StaticCallCtorGetter.App.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/StaticCallCtorGetterSolution/App/StaticCallCtorGetter.App.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])
@@ -59,7 +59,7 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
         self.assertEqual("proof-runtime-output", matrix["pipelineId"])
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/DelegateClosedTargetRelaySolution/App/DelegateClosedTargetRelay.App.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/DelegateClosedTargetRelaySolution/App/DelegateClosedTargetRelay.App.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])
@@ -71,7 +71,7 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
         self.assertEqual("proof-runtime-output", matrix["pipelineId"])
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/ExceptionThrowCatchFinallySolution/App/ExceptionThrowCatchFinally.App.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/ExceptionThrowCatchFinallySolution/App/ExceptionThrowCatchFinally.App.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])
@@ -83,7 +83,7 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
         self.assertEqual("proof-runtime-output", matrix["pipelineId"])
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/NativeProofApp/GoldenCoreLibReference.NativeProofApp.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/CoreLibReferenceSolution/NativeProofApp/GoldenCoreLibReference.NativeProofApp.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])
@@ -95,7 +95,7 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
         self.assertEqual("proof-runtime-output", matrix["pipelineId"])
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/MarshalingUtf8ExportSolution/App/MarshalingUtf8Export.App.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/MarshalingUtf8ExportSolution/App/MarshalingUtf8Export.App.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])
@@ -107,7 +107,7 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
         self.assertEqual("proof-runtime-output", matrix["pipelineId"])
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/ReflectionInteropClosureSolution/App/ReflectionInteropClosure.App.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/ReflectionInteropClosureSolution/App/ReflectionInteropClosure.App.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])
@@ -119,7 +119,7 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
         self.assertEqual("proof-runtime-output", matrix["pipelineId"])
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/PInvokeDirectCallSolution/App/PInvokeDirectCall.App.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/PInvokeDirectCallSolution/App/PInvokeDirectCall.App.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])
@@ -131,7 +131,7 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
         self.assertEqual("proof-runtime-output", matrix["pipelineId"])
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/ArrayBoxingReferenceArraySolution/App/ArrayBoxingReferenceArray.App.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/ArrayBoxingReferenceArraySolution/App/ArrayBoxingReferenceArray.App.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])
@@ -143,7 +143,7 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
         self.assertEqual("proof-runtime-output", matrix["pipelineId"])
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/InterfaceDispatchMessageSolution/App/InterfaceDispatchMessage.App.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/InterfaceDispatchMessageSolution/App/InterfaceDispatchMessage.App.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])
@@ -155,7 +155,7 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
         self.assertEqual("proof-runtime-output", matrix["pipelineId"])
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/ThreadingThreadStaticMonitorSolution/App/ThreadingThreadStaticMonitor.App.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/ThreadingThreadStaticMonitorSolution/App/ThreadingThreadStaticMonitor.App.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])
@@ -164,7 +164,7 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
 
         self.assertEqual(
             [
-                "subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/HotUpdatePatch/GoldenCoreLibReference.HotUpdatePatch.csproj"
+                "verification/catalog/scenarios/SolutionCorePack/CoreLibReferenceSolution/HotUpdatePatch/GoldenCoreLibReference.HotUpdatePatch.csproj"
             ],
             manifest["hotUpdate"]["patchProjectPaths"],
         )
@@ -175,18 +175,39 @@ class TestSolutionCorePackSubjectMatrices(SolutionCorePackSubjectTestSupport):
         self.assertEqual("dotnet-managed", matrix["executionContext"]["toolchainProfile"])
         self.assertEqual("hotupdate-proof-output", matrix["executionContext"]["runtimeProfile"])
 
+        self.assertIn("windows-managed-proof", matrices)
+        matrix = matrices["windows-managed-proof"]
+        self.assertEqual("managed-runtime-output", matrix["pipelineId"])
+        self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
+        self.assertEqual(
+            "verification/catalog/owners/SolutionCorePack/proofs/CoreRuntimeFeatures/CoreRuntimeFeatures.csproj",
+            matrix["source"]["primaryProjectPath"],
+        )
+        self.assertEqual("CoreRuntimeFeatures/ProofEntry::Run()", matrix["source"]["entry"])
+        self.assertEqual("dotnet-managed", matrix["executionContext"]["toolchainProfile"])
+        self.assertEqual("managed-proof-output", matrix["executionContext"]["runtimeProfile"])
+
         self.assertIn("windows-corelib-reference-native-hotupdate-proof", matrices)
         matrix = matrices["windows-corelib-reference-native-hotupdate-proof"]
         self.assertEqual("native-hotupdate-proof-output", matrix["pipelineId"])
         self.assertEqual(["correctness.dev"], matrix["supportedGoals"])
         self.assertEqual(
-            "subjects/SolutionCorePack/source/EngineeringScenarios/CoreLibReferenceSolution/NativeProofApp/GoldenCoreLibReference.NativeProofApp.csproj",
+            "verification/catalog/scenarios/SolutionCorePack/CoreLibReferenceSolution/NativeProofApp/GoldenCoreLibReference.NativeProofApp.csproj",
             matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("", matrix["source"]["entry"])
         self.assertTrue(matrix["source"]["fullAssemblyClosure"])
         self.assertEqual("msvc-reference", matrix["executionContext"]["toolchainProfile"])
         self.assertEqual("native-hotupdate-proof-output", matrix["executionContext"]["runtimeProfile"])
+        self.assertEqual(
+            [
+                {
+                    "assemblyName": "System.Private.CoreLib",
+                    "inputAssemblyPath": "src/dll/dotnet-foundation/net8.0/runtime/System.Private.CoreLib.dll",
+                }
+            ],
+            matrix["source"]["supplementalFullClosureAssemblies"],
+        )
         self.assertEqual(
             {
                 "family": "declared-unit-test",

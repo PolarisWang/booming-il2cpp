@@ -152,19 +152,17 @@ class TestSubjectWorkersWorkspaceManifestRefresh(SubjectWorkersTestSupport):
             source_project_path.parent.mkdir(parents=True, exist_ok=True)
             source_project_path.write_text("<Project />\n", encoding="utf-8")
 
-            subject_manifest_path = repo_root / "subjects" / subject_id / "subject.manifest.json"
-            subject_manifest_path.write_text(
-                json.dumps(
-                    {
-                        "subjectId": subject_id,
-                        "source": {
-                            "type": "dotnet-project",
-                            "path": posix_path("subjects", subject_id, "source", f"{subject_id}.csproj"),
-                            "entry": f"{subject_id}/Program::Main()",
-                        },
-                    }
-                ),
-                encoding="utf-8",
+            subject_manifest_path = write_owner_manifest(
+                repo_root,
+                subject_id,
+                {
+                    "subjectId": subject_id,
+                    "source": {
+                        "type": "dotnet-project",
+                        "path": posix_path("subjects", subject_id, "source", f"{subject_id}.csproj"),
+                        "entry": f"{subject_id}/Program::Main()",
+                    },
+                },
             )
 
             workspace_root = repo_root / "verification" / "workspaces" / "subjects" / subject_id

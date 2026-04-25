@@ -6,21 +6,23 @@ import unittest
 import uuid
 from pathlib import Path
 
-from tests.support import load_module
+from tests.support import (
+    HOT_UPDATE_HOST_PACK_HOST_PROJECT_PATH,
+    MIXED_EXECUTION_FEATURE_PACK_HOST_PROJECT_PATH,
+    SOLUTION_CORE_PACK_BENCHMARKS_PROJECT_PATH,
+    SOLUTION_CORE_PACK_PROOFS_PROJECT_PATH,
+    load_module,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 COMPILED_CATALOG_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "compiled_catalog.py"
 FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures" / "contracts" / "declared-metadata"
 TEST_TMP_ROOT = REPO_ROOT / "artifacts" / ".tmp-tests" / "declared-metadata-discovery"
-SOLUTION_CORE_PACK_MAINLINE_SLICE_PROJECT_PATH = (
-    REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Proofs" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj"
-)
-SOLUTION_CORE_PACK_PERFORMANCE_SLICE_PROJECT_PATH = (
-    REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "CoreRuntimeBenchmarks.csproj"
-)
-HOT_UPDATE_HOST_PACK_PROJECT_PATH = REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "HotUpdateHostPack.csproj"
-MIXED_EXECUTION_FEATURE_PACK_PROJECT_PATH = REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "MixedExecutionFeaturePack.csproj"
+SOLUTION_CORE_PACK_MAINLINE_SLICE_PROJECT_PATH = SOLUTION_CORE_PACK_PROOFS_PROJECT_PATH
+SOLUTION_CORE_PACK_PERFORMANCE_SLICE_PROJECT_PATH = SOLUTION_CORE_PACK_BENCHMARKS_PROJECT_PATH
+HOT_UPDATE_HOST_PACK_PROJECT_PATH = HOT_UPDATE_HOST_PACK_HOST_PROJECT_PATH
+MIXED_EXECUTION_FEATURE_PACK_PROJECT_PATH = MIXED_EXECUTION_FEATURE_PACK_HOST_PROJECT_PATH
 
 
 def dotnet_intermediate_args(intermediate_root: Path) -> list[str]:

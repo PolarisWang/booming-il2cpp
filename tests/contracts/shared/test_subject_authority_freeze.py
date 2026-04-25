@@ -6,6 +6,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
+OWNER_ROOT = REPO_ROOT / "verification" / "catalog" / "owners"
 CANONICAL_SUBJECTS = (
     "SolutionCorePack",
     "MixedExecutionFeaturePack",
@@ -20,12 +21,12 @@ def _read_json(path: Path) -> dict:
 class SubjectAuthorityFreezeTests(unittest.TestCase):
     def test_canonical_subjects_ship_subject_feature_files(self) -> None:
         for subject_id in CANONICAL_SUBJECTS:
-            features_path = REPO_ROOT / "subjects" / subject_id / "subject.features.json"
-            self.assertTrue(features_path.is_file(), msg=f"missing subject.features.json: {subject_id}")
+            features_path = OWNER_ROOT / subject_id / "owner.features.json"
+            self.assertTrue(features_path.is_file(), msg=f"missing owner.features.json: {subject_id}")
 
     def test_subject_feature_files_use_frozen_minimum_shape(self) -> None:
         for subject_id in CANONICAL_SUBJECTS:
-            payload = _read_json(REPO_ROOT / "subjects" / subject_id / "subject.features.json")
+            payload = _read_json(OWNER_ROOT / subject_id / "owner.features.json")
             self.assertEqual(1, payload.get("schemaVersion"))
             self.assertEqual(subject_id, payload.get("subjectId"))
             self.assertIsInstance(payload.get("engineeringScenarios"), list)
@@ -37,10 +38,10 @@ class SubjectAuthorityFreezeTests(unittest.TestCase):
                 self.assertIsInstance(scenario.get("id"), str)
                 self.assertTrue(str(scenario["id"]).strip())
                 self.assertIsInstance(scenario.get("sourcePath"), str)
-                self.assertTrue(str(scenario["sourcePath"]).startswith(f"subjects/{subject_id}/"))
+                self.assertTrue(str(scenario["sourcePath"]).startswith(f"verification/catalog/scenarios/{subject_id}/"))
 
     def test_solution_core_pack_scenario_set_is_frozen(self) -> None:
-        payload = _read_json(REPO_ROOT / "subjects" / "SolutionCorePack" / "subject.features.json")
+        payload = _read_json(OWNER_ROOT / "SolutionCorePack" / "owner.features.json")
         scenarios = {item["id"] for item in payload["engineeringScenarios"]}
         self.assertEqual(
             {
@@ -51,6 +52,15 @@ class SubjectAuthorityFreezeTests(unittest.TestCase):
                 "solution-foundation-dll-translation",
                 "solution-static-call-ctor-getter",
                 "solution-constructor-then-instance-call",
+                "solution-delegate-closed-target-relay",
+                "solution-exception-throw-catch-finally",
+                "solution-nested-exception-throw-catch-finally",
+                "solution-marshaling-utf8-export",
+                "solution-reflection-interop-closure",
+                "solution-pinvoke-direct-call",
+                "solution-array-boxing-reference-array",
+                "solution-interface-dispatch-message",
+                "solution-threading-threadstatic-monitor",
             },
             scenarios,
         )
@@ -58,8 +68,8 @@ class SubjectAuthorityFreezeTests(unittest.TestCase):
         self.assertNotIn("solution-package-reference", scenarios)
 
     def test_mixed_and_hotupdate_minimum_scenarios_are_frozen(self) -> None:
-        mixed_payload = _read_json(REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "subject.features.json")
-        hotupdate_payload = _read_json(REPO_ROOT / "subjects" / "HotUpdateHostPack" / "subject.features.json")
+        mixed_payload = _read_json(OWNER_ROOT / "MixedExecutionFeaturePack" / "owner.features.json")
+        hotupdate_payload = _read_json(OWNER_ROOT / "HotUpdateHostPack" / "owner.features.json")
 
         self.assertEqual(
             {"mixed-bridge-solution"},
@@ -71,9 +81,9 @@ class SubjectAuthorityFreezeTests(unittest.TestCase):
         )
 
     def test_subject_feature_files_carry_owner_capability_entries(self) -> None:
-        solution_payload = _read_json(REPO_ROOT / "subjects" / "SolutionCorePack" / "subject.features.json")
-        mixed_payload = _read_json(REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "subject.features.json")
-        hotupdate_payload = _read_json(REPO_ROOT / "subjects" / "HotUpdateHostPack" / "subject.features.json")
+        solution_payload = _read_json(OWNER_ROOT / "SolutionCorePack" / "owner.features.json")
+        mixed_payload = _read_json(OWNER_ROOT / "MixedExecutionFeaturePack" / "owner.features.json")
+        hotupdate_payload = _read_json(OWNER_ROOT / "HotUpdateHostPack" / "owner.features.json")
 
         solution_items = {item["capabilityItem"] for item in solution_payload["features"]}
         mixed_items = {item["capabilityItem"] for item in mixed_payload["features"]}

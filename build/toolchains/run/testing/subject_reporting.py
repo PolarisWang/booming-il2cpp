@@ -360,6 +360,80 @@ def build_subject_summary(
     return summary
 
 
+def _build_subject_review_bundle(subject_summary: dict[str, Any]) -> dict[str, Any]:
+    matrix_results = [
+        dict(matrix_result)
+        for matrix_result in list(subject_summary.get("matrixResults") or [])
+        if isinstance(matrix_result, dict)
+    ]
+    artifact_paths = _ordered_unique_paths(
+        [
+            str(artifact_path)
+            for matrix_result in matrix_results
+            for artifact_path in list(matrix_result.get("reportArtifacts") or [])
+        ]
+    )
+    proof_kinds = _ordered_unique_paths(
+        [
+            str(dict(matrix_result.get("matrixProofLinkage") or {}).get("proofKind") or "")
+            for matrix_result in matrix_results
+        ]
+    )
+
+    return {
+        "reportVersion": "v1",
+        "artifactKind": "subject-review-bundle",
+        "runId": str(subject_summary.get("runId") or ""),
+        "generatedAt": str(subject_summary.get("generatedAt") or ""),
+        "subjectId": str(subject_summary.get("subjectId") or ""),
+        "requestedGoalId": str(subject_summary.get("requestedGoalId") or ""),
+        "status": str(subject_summary.get("status") or "aborted"),
+        "matrixCount": len(matrix_results),
+        "artifactCount": len(artifact_paths),
+        "artifactPaths": artifact_paths,
+        "proofKinds": proof_kinds,
+        "matrixReviews": [
+            {
+                "matrixId": str(matrix_result.get("matrixId") or ""),
+                "reportPath": str(matrix_result.get("reportPath") or ""),
+                "status": str(matrix_result.get("status") or "aborted"),
+                "validationKind": matrix_result.get("validationKind"),
+                "terminalBucket": str(matrix_result.get("terminalBucket") or ""),
+                "artifactPaths": _ordered_unique_paths(
+                    [str(path) for path in list(matrix_result.get("reportArtifacts") or [])]
+                ),
+                "proofKind": str(dict(matrix_result.get("matrixProofLinkage") or {}).get("proofKind") or ""),
+                "boundaryCaseCount": int(
+                    dict(matrix_result.get("matrixProofLinkage") or {}).get("boundaryCaseCount") or 0
+                ),
+            }
+            for matrix_result in matrix_results
+        ],
+    }
+
+
+def materialize_subject_report_artifacts(
+    repo_root: Path,
+    *,
+    subject_summary_path: str,
+    subject_summary: dict[str, Any],
+) -> list[str]:
+    summary_root = Path(subject_summary_path).parent
+    review_bundle_path = summary_root / "review-bundle.json"
+    review_bundle_payload = _build_subject_review_bundle(subject_summary)
+    _write_json_document(repo_root / review_bundle_path, review_bundle_payload)
+
+    review_bundle_path_text = review_bundle_path.as_posix()
+    subject_summary["subjectReportArtifacts"] = [review_bundle_path_text]
+    subject_summary["subjectReviewBundle"] = {
+        "artifactPath": review_bundle_path_text,
+        "matrixCount": int(review_bundle_payload.get("matrixCount") or 0),
+        "artifactCount": int(review_bundle_payload.get("artifactCount") or 0),
+        "proofKinds": list(review_bundle_payload.get("proofKinds") or []),
+    }
+    return list(subject_summary["subjectReportArtifacts"])
+
+
 def build_subject_result(
     subject_summary: dict[str, Any],
     *,
@@ -378,6 +452,12 @@ def build_subject_result(
     release_evidence_summary = dict(subject_summary.get("releaseEvidenceSummary") or {})
     if release_evidence_summary:
         result["releaseEvidenceSummary"] = release_evidence_summary
+    subject_report_artifacts = list(subject_summary.get("subjectReportArtifacts") or [])
+    if subject_report_artifacts:
+        result["subjectReportArtifacts"] = subject_report_artifacts
+    subject_review_bundle = dict(subject_summary.get("subjectReviewBundle") or {})
+    if subject_review_bundle:
+        result["subjectReviewBundle"] = subject_review_bundle
     return result
 
 
@@ -475,6 +555,46 @@ def _load_runtime_skeleton_coverage_report(
     if not coverage_report_path:
         return "", {}
     return coverage_report_path, _read_json_file(repo_root / coverage_report_path)
+
+
+def _supplemental_full_closure_summary(repo_root: Path, entry: dict[str, Any]) -> dict[str, Any]:
+    native_reference_manifest_path = str(entry.get("nativeReferenceManifestPath") or "").strip()
+    native_reference_plan_path = str(entry.get("nativeReferencePlanPath") or "").strip()
+    native_aot_manifest_path = str(entry.get("nativeAotManifestPath") or "").strip()
+    native_aot_plan_path = str(entry.get("nativeAotPlanPath") or "").strip()
+    native_reference_manifest = _read_json_document(repo_root, native_reference_manifest_path)
+    native_reference_plan = _read_json_document(repo_root, native_reference_plan_path)
+    native_aot_plan = _read_json_document(repo_root, native_aot_plan_path)
+
+    runtime_skeleton_coverage_report_path = str(entry.get("runtimeSkeletonCoverageReportPath") or "").strip()
+    runtime_skeleton_coverage_report = _read_json_document(repo_root, runtime_skeleton_coverage_report_path)
+    if not runtime_skeleton_coverage_report_path:
+        runtime_skeleton_coverage_report_path, runtime_skeleton_coverage_report = _load_runtime_skeleton_coverage_report(
+            repo_root,
+            native_reference_manifest_path=native_reference_manifest_path,
+            native_reference_manifest=native_reference_manifest,
+        )
+    runtime_skeleton_uncovered_method_count = runtime_skeleton_coverage_report.get("uncoveredMethodCount")
+    if not isinstance(runtime_skeleton_uncovered_method_count, int) or runtime_skeleton_uncovered_method_count < 0:
+        runtime_skeleton_uncovered_method_count = 0
+
+    return {
+        "assemblyName": str(entry.get("assemblyName") or ""),
+        "inputAssemblyPath": str(entry.get("inputAssemblyPath") or ""),
+        "nativeReferenceManifestPath": native_reference_manifest_path,
+        "nativeReferencePlanPath": native_reference_plan_path,
+        "nativeReferencePlanKind": str(native_reference_plan.get("planKind") or ""),
+        "nativeReferenceTranslationUnitMode": str(native_reference_plan.get("translationUnitMode") or ""),
+        "nativeReferenceTranslationUnitMethodCount": native_reference_plan.get("translationUnitMethodCount"),
+        "nativeReferenceTranslationUnitPageCount": native_reference_manifest.get("translationUnitPageCount"),
+        "runtimeSkeletonCoverageReportPath": runtime_skeleton_coverage_report_path,
+        "runtimeSkeletonUncoveredMethodCount": runtime_skeleton_uncovered_method_count,
+        "nativeAotManifestPath": native_aot_manifest_path,
+        "nativeAotPlanPath": native_aot_plan_path,
+        "nativeAotPlanKind": str(native_aot_plan.get("planKind") or ""),
+        "nativeAotTranslationUnitMode": str(native_aot_plan.get("translationUnitMode") or ""),
+        "nativeAotTranslationUnitMethodCount": native_aot_plan.get("translationUnitMethodCount"),
+    }
 
 
 def _ordered_unique_paths(paths: list[str]) -> list[str]:
@@ -664,6 +784,11 @@ def _native_hotupdate_audit_payload(repo_root: Path, matrix_report: dict[str, An
     native_reference_manifest = _read_json_document(repo_root, native_reference_manifest_path)
     native_reference_plan_path = str(generated_manifest.get("nativeReferencePlanPath") or "").strip()
     native_reference_plan = _read_json_document(repo_root, native_reference_plan_path)
+    supplemental_full_closure_summaries = [
+        _supplemental_full_closure_summary(repo_root, dict(entry))
+        for entry in list(generated_manifest.get("supplementalFullAssemblyClosures") or [])
+        if isinstance(entry, dict)
+    ]
     generated_source_paths = list(generated_manifest.get("generatedSourcePaths") or [])
     runtime_skeleton_coverage_report_path, runtime_skeleton_coverage_report = _load_runtime_skeleton_coverage_report(
         repo_root,
@@ -711,6 +836,7 @@ def _native_hotupdate_audit_payload(repo_root: Path, matrix_report: dict[str, An
             "runtimeSkeletonReservedStubCount": DEPRECATED_RUNTIME_SKELETON_RESERVED_STUB_COUNT,
             "runtimeSkeletonCoverageReportPath": runtime_skeleton_coverage_report_path,
             "runtimeSkeletonUncoveredMethodCount": runtime_skeleton_uncovered_method_count,
+            "supplementalFullAssemblyClosures": supplemental_full_closure_summaries,
         },
         "nativeBuild": {
             "manifestPath": build_manifest_path,
@@ -735,7 +861,11 @@ def _native_hotupdate_audit_payload(repo_root: Path, matrix_report: dict[str, An
             "exitCodePath": str(runtime_manifest.get("exitCodePath") or ""),
         },
         "truthBoundary": {
-            "coreLibScope": "narrow-proof-packet",
+            "coreLibScope": (
+                "narrow-proof-packet-plus-supplemental-full-closure-evidence"
+                if supplemental_full_closure_summaries
+                else "narrow-proof-packet"
+            ),
             "nativeReferenceScope": "assembly-bound-runtime-skeleton",
             "nativeAotScope": "not-used-by-this-combined-proof",
             "fullCoreLibTranslated": False,
@@ -776,6 +906,7 @@ def materialize_matrix_report_artifacts(
             "runtimeSkeletonCoverageReportPath": audit_payload["nativeGeneration"]["runtimeSkeletonCoverageReportPath"],
             "runtimeSkeletonUncoveredMethodCount": audit_payload["nativeGeneration"]["runtimeSkeletonUncoveredMethodCount"],
             "auditStatus": audit_payload["nativeGeneration"]["auditStatus"],
+            "supplementalFullAssemblyClosures": list(audit_payload["nativeGeneration"]["supplementalFullAssemblyClosures"]),
             "nativeBuildManifestPath": audit_payload["hotupdateRuntime"]["nativeBuildManifestPath"],
             "managedRuntimeAssemblyPath": audit_payload["hotupdateRuntime"]["managedRuntimeAssemblyPath"],
             "stdoutPath": audit_payload["hotupdateRuntime"]["stdoutPath"],

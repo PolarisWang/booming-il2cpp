@@ -4,6 +4,7 @@ from enum import Enum
 import json
 import os
 from pathlib import Path
+import re
 import tempfile
 from typing import Any, Iterable
 import sys
@@ -109,6 +110,7 @@ _NATIVE_EXECUTION_STAGE_KINDS = {
 
 _RELEVANT_SOURCE_SUFFIXES = {".cs", ".csproj", ".sln", ".props", ".targets"}
 _COLLECTION_SCHEMA_VERSION = 1
+_ASSEMBLY_NAME_PATTERN = re.compile(r"<AssemblyName>\s*([^<]+)\s*</AssemblyName>", re.IGNORECASE)
 
 
 def _host_platform_name() -> str:
@@ -181,7 +183,7 @@ def _assemblies_are_stale(
     source_path = Path(source_path_text)
     if not source_path.is_absolute():
         source_path = repo_root / source_path
-    source_root = source_path if source_path.is_dir() else source_path.parent
+    source_root = verification_layout_module.owner_scan_root(repo_root, subject_id, source_path_text)
     if not source_root.is_dir():
         return False
 
@@ -561,8 +563,9 @@ def _solution_assembly_paths(
     *,
     primary_project_path: Path,
 ) -> list[Path]:
+    solution_project_paths = subjects_module.resolve_source_solution_project_paths(repo_root, source)
     assembly_names = subjects_module.resolve_source_solution_assembly_names(repo_root, source)
-    if not assembly_names:
+    if not solution_project_paths or not assembly_names:
         return []
 
     primary_assembly = _find_primary_project_assembly(primary_project_path)
@@ -581,6 +584,22 @@ def _solution_assembly_paths(
         if solution_path.is_file():
             candidate_roots.append(solution_path.parent)
 
+    project_path_by_assembly_name: dict[str, Path] = {}
+    for project_path_text in solution_project_paths:
+        project_path = Path(project_path_text)
+        if not project_path.is_absolute():
+            project_path = repo_root / project_path
+        if not project_path.is_file():
+            continue
+        assembly_name = _ASSEMBLY_NAME_PATTERN.search(project_path.read_text(encoding="utf-8"))
+        normalized_assembly_name = (
+            assembly_name.group(1).strip()
+            if assembly_name is not None
+            else project_path.stem
+        )
+        if normalized_assembly_name and normalized_assembly_name not in project_path_by_assembly_name:
+            project_path_by_assembly_name[normalized_assembly_name] = project_path
+
     for assembly_name in assembly_names:
         candidates: list[Path] = []
         for candidate_root in candidate_roots:
@@ -596,6 +615,14 @@ def _solution_assembly_paths(
             candidates.extend(
                 sorted(
                     candidate_root.glob(f"**/bin/Debug/**/{assembly_name}.dll"),
+                    key=lambda candidate: (len(candidate.parts), str(candidate)),
+                )
+            )
+        project_path = project_path_by_assembly_name.get(assembly_name)
+        if project_path is not None:
+            candidates.extend(
+                sorted(
+                    project_path.parent.glob(f"bin/Debug/**/{assembly_name}.dll"),
                     key=lambda candidate: (len(candidate.parts), str(candidate)),
                 )
             )

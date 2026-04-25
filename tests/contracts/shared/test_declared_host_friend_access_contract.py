@@ -5,15 +5,16 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
+OWNER_ROOT = REPO_ROOT / "verification" / "catalog" / "owners"
 
 
 class DeclaredHostFriendAccessContractTests(unittest.TestCase):
     def test_declared_entry_projects_do_not_reference_removed_generated_managed_hosts(self) -> None:
         project_paths = (
-            REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Proofs" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj",
-            REPO_ROOT / "subjects" / "SolutionCorePack" / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "CoreRuntimeBenchmarks.csproj",
-            REPO_ROOT / "subjects" / "MixedExecutionFeaturePack" / "source" / "MixedExecutionFeaturePack.csproj",
-            REPO_ROOT / "subjects" / "HotUpdateHostPack" / "source" / "HotUpdateHostPack.csproj",
+            OWNER_ROOT / "SolutionCorePack" / "proofs" / "CoreRuntimeFeatures" / "CoreRuntimeFeatures.csproj",
+            OWNER_ROOT / "SolutionCorePack" / "benchmarks" / "CoreRuntimeBenchmarks" / "CoreRuntimeBenchmarks.csproj",
+            OWNER_ROOT / "MixedExecutionFeaturePack" / "support" / "host" / "MixedExecutionFeaturePack.csproj",
+            OWNER_ROOT / "HotUpdateHostPack" / "support" / "host" / "HotUpdateHostPack.csproj",
         )
 
         for project_path in project_paths:

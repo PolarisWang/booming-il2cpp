@@ -34,15 +34,15 @@ def parse_project_references(project_path: Path) -> list[str]:
     return sorted(references)
 
 
-class Phase3EngineBindingCodegenBaselineTests(unittest.TestCase):
+class EngineBindingCodegenBaselineTests(unittest.TestCase):
     def test_engine_binding_project_isolation_and_legacy_solution_cutover(self) -> None:
+        core_solution_source = CORE_SOLUTION_PATH.read_text(encoding="utf-8")
+
         self.assertTrue(ENGINE_BINDING_ROOT.is_dir(), msg=f"missing engine binding root: {ENGINE_BINDING_ROOT}")
         self.assertTrue(ENGINE_BINDING_PROJECT_PATH.is_file(), msg=f"missing engine binding project: {ENGINE_BINDING_PROJECT_PATH}")
         self.assertEqual(["Chaos.IL2CPP.Contracts"], parse_project_references(ENGINE_BINDING_PROJECT_PATH))
-        self.assertFalse(
-            CORE_SOLUTION_PATH.exists(),
-            msg=f"legacy static core solution should not exist anymore: {CORE_SOLUTION_PATH}",
-        )
+        self.assertTrue(CORE_SOLUTION_PATH.is_file(), msg=f"missing core solution: {CORE_SOLUTION_PATH}")
+        self.assertNotIn("Chaos.IL2CPP.EngineBinding", core_solution_source)
 
     def test_engine_binding_sources_define_attributes_and_stub_emitter(self) -> None:
         export_source = ENGINE_EXPORT_ATTRIBUTE_PATH.read_text(encoding="utf-8")

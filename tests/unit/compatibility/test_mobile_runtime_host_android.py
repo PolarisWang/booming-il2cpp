@@ -8,7 +8,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 ANDROID_ROOT = REPO_ROOT / "src" / "mobile" / "android"
 
 
-class Phase4MobileRuntimeHostBatch2AndroidTests(unittest.TestCase):
+class MobileRuntimeHostAndroidTests(unittest.TestCase):
     def test_android_host_skeleton_files_exist_and_cmake_reuses_shared_host(self) -> None:
         required_paths = [
             ANDROID_ROOT / "CMakeLists.txt",

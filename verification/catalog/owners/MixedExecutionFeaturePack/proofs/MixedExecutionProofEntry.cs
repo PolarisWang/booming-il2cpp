@@ -11,9 +11,10 @@ namespace MixedExecutionFeaturePack;
 internal static class MixedExecutionProofEntry
 {
     private const string CurrentAotVersion = "1.0.0";
-    private const string AotBridgeSubjectId = "InterpreterArithmeticProof.AotBridge/AotBridgeExports::Add(System.Int32,System.Int32)";
+    private const string AotBridgeSubjectId = "InterpreterArithmeticProof.AotBridge/AotBridgeExports::Add:System.Int32(System.Int32,System.Int32)";
     private const string EngineBridgeId = "mixed-engine-add-five";
-    private const string EngineBridgeSubjectId = "MixedExecutionProof/Engine::AddFive(System.Int32)";
+    private const string EngineBridgeSubjectId = "MixedExecutionProof/Engine::AddFive:System.Int32(System.Int32)";
+    private const string StringLengthBridgeSubjectId = "System.Private.CoreLib/System.String::get_Length:System.Int32()";
     private static readonly ManagedMethodIdentityArtifact AotBridgeMethodIdentity =
         ManagedMethodIdentityResolver.Create(
             new ManagedMethodIdentitySpec
@@ -141,13 +142,13 @@ internal static class MixedExecutionProofEntry
 
                     return dispatcher.InvokeHotUpdateToEngineInt32(EngineBridgeId, Convert.ToInt32(bridgeArguments[0]));
                 },
-                ["System.Private.CoreLib/System.String::get_Length()"] = bridgeArguments =>
+                [StringLengthBridgeSubjectId] = bridgeArguments =>
                 {
                     if (bridgeArguments.Count != 1 || bridgeArguments[0] is not string instance)
                     {
                         var receiver = bridgeArguments.Count == 0 ? null : bridgeArguments[0];
                         throw new InvalidOperationException(
-                            $"bridge 'System.Private.CoreLib/System.String::get_Length()' expects 1 string receiver but received count={bridgeArguments.Count}, type={receiver?.GetType().FullName ?? "<null>"}, value={receiver ?? "<null>"}.");
+                            $"bridge '{StringLengthBridgeSubjectId}' expects 1 string receiver but received count={bridgeArguments.Count}, type={receiver?.GetType().FullName ?? "<null>"}, value={receiver ?? "<null>"}.");
                     }
 
                     return instance.Length;
@@ -181,7 +182,7 @@ internal static class MixedExecutionProofEntry
             var instanceCallTarget = GetCallTarget(instanceCallMethod, IROpCode.CallVirt);
             Assert.Equal(42, instanceCall);
             Assert.Equal("ldarg,ldarg,callvirt,ret", instanceCallOps);
-            Assert.Equal("InterpreterArithmeticProof/InstanceArithmetic::AddOne(System.Int32)", instanceCallTarget);
+            Assert.Equal("InterpreterArithmeticProof/InstanceArithmetic::AddOne:System.Int32(System.Int32)", instanceCallTarget);
             var stringBridgeMethod = CreateStringLengthBridgeMethod();
             var stringBridge = bridgeExecutor.ExecuteInt32(stringBridgeMethod, Array.Empty<int>());
             var stringBridgeOps = GetOpSequence(stringBridgeMethod);
@@ -621,7 +622,7 @@ internal static class MixedExecutionProofEntry
                                 {
                                     Kind = IROperandKind.Method,
                                     TypeTag = IRTypeTag.Int32,
-                                    Symbol = "System.Private.CoreLib/System.String::get_Length()",
+                                    Symbol = StringLengthBridgeSubjectId,
                                 },
                                 new IROperand
                                 {
@@ -747,7 +748,28 @@ internal static class MixedExecutionProofEntry
     private static IRMethod GetRequiredMethod(IReadOnlyDictionary<string, IRMethod> methods, string methodName)
     {
         return methods.Values.Single(method =>
-            string.Equals(method.SubjectId.Split("::", StringSplitOptions.None)[1].Split('(')[0], methodName, StringComparison.Ordinal));
+            string.Equals(GetMethodName(method.SubjectId), methodName, StringComparison.Ordinal));
+    }
+
+    private static string GetMethodName(string subjectId)
+    {
+        var separatorIndex = subjectId.IndexOf("::", StringComparison.Ordinal);
+        if (separatorIndex < 0)
+        {
+            return subjectId;
+        }
+
+        var methodPart = subjectId[(separatorIndex + 2)..];
+        var returnTypeSeparatorIndex = methodPart.IndexOf(':', StringComparison.Ordinal);
+        if (returnTypeSeparatorIndex >= 0)
+        {
+            methodPart = methodPart[..returnTypeSeparatorIndex];
+        }
+
+        var parameterListIndex = methodPart.IndexOf('(');
+        return parameterListIndex >= 0
+            ? methodPart[..parameterListIndex]
+            : methodPart;
     }
 
     private static IRMethod CreateCallEngineBridgeMethod()

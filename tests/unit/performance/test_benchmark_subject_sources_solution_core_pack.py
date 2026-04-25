@@ -3,100 +3,67 @@ from tests.unit.performance.benchmark_subject_sources_test_support import *
 
 class TestBenchmarkSubjectSourcesSolutionCorePack(BenchmarkSubjectSourceTestSupport):
     def test_solution_core_pack_declares_internal_performance_slice_benchmarks(self) -> None:
-        manifest_path = SOLUTION_CORE_PACK_ROOT / "subject.manifest.json"
-        project_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "CoreRuntimeBenchmarks.csproj"
-        arithmetic_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "PrimitivesAndOps" / "ArithmeticBenchmark.cs"
-        allocation_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "MemoryAndAllocation" / "AllocationBenchmark.cs"
-        dispatch_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "ObjectModelAndDispatch" / "DispatchBenchmark.cs"
+        manifest_path = SOLUTION_CORE_PACK_OWNER_MANIFEST_PATH
+        project_path = SOLUTION_CORE_PACK_BENCHMARKS_PROJECT_PATH
+        arithmetic_path = SOLUTION_CORE_PACK_BENCHMARKS_ROOT / "PrimitivesAndOps" / "ArithmeticBenchmark.cs"
+        allocation_path = SOLUTION_CORE_PACK_BENCHMARKS_ROOT / "MemoryAndAllocation" / "AllocationBenchmark.cs"
+        dispatch_path = SOLUTION_CORE_PACK_BENCHMARKS_ROOT / "ObjectModelAndDispatch" / "DispatchBenchmark.cs"
         delegate_callback_path = (
-            SOLUTION_CORE_PACK_ROOT
-            / "source"
-            / "Benchmarks"
-            / "CoreRuntimeBenchmarks"
+            SOLUTION_CORE_PACK_BENCHMARKS_ROOT
             / "ObjectModelAndDispatch"
             / "DelegateCallbackInteropBenchmark.cs"
         )
-        generic_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "GenericsAndCollections" / "GenericBenchmark.cs"
+        generic_path = SOLUTION_CORE_PACK_BENCHMARKS_ROOT / "GenericsAndCollections" / "GenericBenchmark.cs"
         generic_interface_dispatch_path = (
-            SOLUTION_CORE_PACK_ROOT
-            / "source"
-            / "Benchmarks"
-            / "CoreRuntimeBenchmarks"
+            SOLUTION_CORE_PACK_BENCHMARKS_ROOT
             / "ObjectModelAndDispatch"
             / "GenericInterfaceDispatchBenchmark.cs"
         )
         generic_sharing_boundary_path = (
-            SOLUTION_CORE_PACK_ROOT
-            / "source"
-            / "Benchmarks"
-            / "CoreRuntimeBenchmarks"
+            SOLUTION_CORE_PACK_BENCHMARKS_ROOT
             / "GenericsAndCollections"
             / "GenericSharingBoundaryBenchmark.cs"
         )
         required_instantiation_path = (
-            SOLUTION_CORE_PACK_ROOT
-            / "source"
-            / "Benchmarks"
-            / "CoreRuntimeBenchmarks"
+            SOLUTION_CORE_PACK_BENCHMARKS_ROOT
             / "GenericsAndCollections"
             / "RequiredInstantiationClosureBenchmark.cs"
         )
         native_call_interop_path = (
-            SOLUTION_CORE_PACK_ROOT
-            / "source"
-            / "Benchmarks"
-            / "CoreRuntimeBenchmarks"
+            SOLUTION_CORE_PACK_BENCHMARKS_ROOT
             / "InteropAndMarshaling"
             / "NativeCallInteropBenchmark.cs"
         )
         string_utf8_marshaling_path = (
-            SOLUTION_CORE_PACK_ROOT
-            / "source"
-            / "Benchmarks"
-            / "CoreRuntimeBenchmarks"
+            SOLUTION_CORE_PACK_BENCHMARKS_ROOT
             / "InteropAndMarshaling"
             / "StringAndUtf8MarshalingBenchmark.cs"
         )
         struct_marshaling_path = (
-            SOLUTION_CORE_PACK_ROOT
-            / "source"
-            / "Benchmarks"
-            / "CoreRuntimeBenchmarks"
+            SOLUTION_CORE_PACK_BENCHMARKS_ROOT
             / "InteropAndMarshaling"
             / "StructMarshalingBenchmark.cs"
         )
-        task_flow_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "AsyncAndIterators" / "TaskAndValueTaskFlowBenchmark.cs"
-        task_scheduling_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "ThreadingAndSynchronization" / "TaskSchedulingBenchmark.cs"
-        monitor_locking_path = SOLUTION_CORE_PACK_ROOT / "source" / "Benchmarks" / "CoreRuntimeBenchmarks" / "ThreadingAndSynchronization" / "MonitorAndLockingBenchmark.cs"
+        task_flow_path = SOLUTION_CORE_PACK_BENCHMARKS_ROOT / "AsyncAndIterators" / "TaskAndValueTaskFlowBenchmark.cs"
+        task_scheduling_path = SOLUTION_CORE_PACK_BENCHMARKS_ROOT / "ThreadingAndSynchronization" / "TaskSchedulingBenchmark.cs"
+        monitor_locking_path = SOLUTION_CORE_PACK_BENCHMARKS_ROOT / "ThreadingAndSynchronization" / "MonitorAndLockingBenchmark.cs"
         member_metadata_lookup_path = (
-            SOLUTION_CORE_PACK_ROOT
-            / "source"
-            / "Benchmarks"
-            / "CoreRuntimeBenchmarks"
+            SOLUTION_CORE_PACK_BENCHMARKS_ROOT
             / "ReflectionAndMetadata"
             / "MemberMetadataLookupBenchmark.cs"
         )
         function_pointer_path = (
-            SOLUTION_CORE_PACK_ROOT
-            / "source"
-            / "Benchmarks"
-            / "CoreRuntimeBenchmarks"
+            SOLUTION_CORE_PACK_BENCHMARKS_ROOT
             / "UnsafeAndLowLevel"
             / "FunctionPointerBenchmark.cs"
         )
         span_memory_path = (
-            SOLUTION_CORE_PACK_ROOT
-            / "source"
-            / "Benchmarks"
-            / "CoreRuntimeBenchmarks"
+            SOLUTION_CORE_PACK_BENCHMARKS_ROOT
             / "UnsafeAndLowLevel"
             / "SpanAndMemoryBenchmark.cs"
         )
         unsafe_pointer_path = (
-            SOLUTION_CORE_PACK_ROOT
-            / "source"
-            / "Benchmarks"
-            / "CoreRuntimeBenchmarks"
+            SOLUTION_CORE_PACK_BENCHMARKS_ROOT
             / "UnsafeAndLowLevel"
             / "UnsafePointerBenchmark.cs"
         )
@@ -147,16 +114,11 @@ class TestBenchmarkSubjectSourcesSolutionCorePack(BenchmarkSubjectSourceTestSupp
         unsafe_pointer_source = unsafe_pointer_path.read_text(encoding="utf-8")
 
         self.assertEqual("SolutionCorePack", manifest["subjectId"])
-        self.assertEqual("subjects/SolutionCorePack/source/SolutionCorePack.sln", manifest["source"]["path"])
-        self.assertEqual(
-            "subjects/SolutionCorePack/source/Host/SolutionCorePack.csproj",
-            manifest["source"]["primaryProjectPath"],
-        )
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_SOLUTION_PATH.relative_to(REPO_ROOT).as_posix(), manifest["source"]["path"])
+        self.assertEqual(SOLUTION_CORE_PACK_HOST_PROJECT_PATH.relative_to(REPO_ROOT).as_posix(), manifest["source"]["primaryProjectPath"])
         self.assertEqual("require", manifest["testDeclarationMode"])
         self.assertEqual("CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()", manifest["workloadEntry"])
-        benchmark_project_path = (
-            "subjects/SolutionCorePack/source/Benchmarks/CoreRuntimeBenchmarks/CoreRuntimeBenchmarks.csproj"
-        )
+        benchmark_project_path = SOLUTION_CORE_PACK_BENCHMARKS_PROJECT_PATH.relative_to(REPO_ROOT).as_posix()
         managed_perf_matrix = next(matrix for matrix in manifest["environmentMatrices"] if matrix["matrixId"] == "windows-managed-perf")
         native_perf_matrix = next(matrix for matrix in manifest["environmentMatrices"] if matrix["matrixId"] == "windows-native-perf")
         self.assertNotIn('<InternalsVisibleTo Include="SolutionCorePack.DeclaredBenchmarkHost" />', project_source)
@@ -289,7 +251,7 @@ class TestBenchmarkSubjectSourcesSolutionCorePack(BenchmarkSubjectSourceTestSupp
                     native_workload_entry = str(spec.get("native_workload_entry") or workload_entry)
                     self.assertEqual(native_workload_entry, matrix["source"]["entry"], msg=subject_id)
 
-        solution_core_manifest = json.loads((SOLUTION_CORE_PACK_ROOT / "subject.manifest.json").read_text(encoding="utf-8"))
+        solution_core_manifest = json.loads(SOLUTION_CORE_PACK_OWNER_MANIFEST_PATH.read_text(encoding="utf-8"))
         self.assertEqual(SHARED_PERF_PROJECT_PATH, solution_core_manifest["validation"]["perf"]["project"])
         self.assertEqual(4, solution_core_manifest["validation"]["perf"]["harnessIterations"])
         managed_pipeline = next(
@@ -307,7 +269,7 @@ class TestBenchmarkSubjectSourcesSolutionCorePack(BenchmarkSubjectSourceTestSupp
             matrix for matrix in solution_core_manifest["environmentMatrices"] if matrix["matrixId"] == "windows-managed-perf"
         )
         self.assertEqual(
-            "subjects/SolutionCorePack/source/Benchmarks/CoreRuntimeBenchmarks/CoreRuntimeBenchmarks.csproj",
+            SOLUTION_CORE_PACK_BENCHMARKS_PROJECT_PATH.relative_to(REPO_ROOT).as_posix(),
             managed_perf_matrix["source"]["primaryProjectPath"],
         )
         self.assertEqual("CoreRuntimeBenchmarks/ArithmeticBenchmarkEntry::RunWorkload()", managed_perf_matrix["source"]["entry"])

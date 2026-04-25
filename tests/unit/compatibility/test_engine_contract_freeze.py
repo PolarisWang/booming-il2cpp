@@ -14,7 +14,7 @@ RUNTIME_CORE_HEADER_PATH = REPO_ROOT / "src" / "native" / "runtime-core" / "runt
 RUNTIME_CORE_SOURCE_PATH = REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_core.cpp"
 
 
-class Phase3EngineContractFreezeTests(unittest.TestCase):
+class EngineContractFreezeTests(unittest.TestCase):
     def test_engine_contract_directory_and_files_exist(self) -> None:
         self.assertTrue(ENGINE_CONTRACT_ROOT.is_dir(), msg=f"missing engine contract root: {ENGINE_CONTRACT_ROOT}")
         for path in [
@@ -25,7 +25,7 @@ class Phase3EngineContractFreezeTests(unittest.TestCase):
         ]:
             self.assertTrue(path.is_file(), msg=f"missing engine contract artifact: {path}")
 
-    def test_engine_contract_headers_freeze_phase3_abi_names(self) -> None:
+    def test_engine_contract_headers_freeze_abi_names(self) -> None:
         lifecycle_source = LIFECYCLE_HEADER_PATH.read_text(encoding="utf-8")
         ownership_source = OWNERSHIP_HEADER_PATH.read_text(encoding="utf-8")
         callback_source = CALLBACK_HEADER_PATH.read_text(encoding="utf-8")
