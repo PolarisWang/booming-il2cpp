@@ -12,9 +12,11 @@ class VerifyVerificationV1CommandTests(VerifyRoadmap0TestSupport):
             "outputRoot": "verification/projections/testing-inventory",
             "artifacts": [
                 "verification/projections/testing-inventory/inventory.html",
+                "verification/projections/foundation-dll-audit/dashboard.html",
                 "verification/archive/latest/result-snapshot.json",
                 "verification/archive/master/result-master.json",
                 "verification/archive/reports/completed/testing-inventory/summary.md",
+                "verification/archive/reports/completed/foundation-dll-audit/summary.md",
                 "verification/evidence/owners/FixtureSubject/codegen-stubs/capability/7/31/native/stub-index.json",
             ],
             "verificationData": {
@@ -24,6 +26,11 @@ class VerifyVerificationV1CommandTests(VerifyRoadmap0TestSupport):
                 "codegenStubPaths": [
                     "verification/evidence/owners/FixtureSubject/codegen-stubs/capability/7/31/native/stub-index.json",
                 ],
+            },
+            "foundationDllAudit": {
+                "outputRoot": "verification/projections/foundation-dll-audit",
+                "dashboardPath": "verification/projections/foundation-dll-audit/dashboard.html",
+                "reportSummaryPath": "verification/archive/reports/completed/foundation-dll-audit/summary.md",
             },
             "validated": True,
         }
@@ -53,6 +60,10 @@ class VerifyVerificationV1CommandTests(VerifyRoadmap0TestSupport):
         )
         self.assertIn(
             "verification/evidence/owners/FixtureSubject/codegen-stubs/capability/7/31/native/stub-index.json",
+            result.payload["importantOutputs"],
+        )
+        self.assertIn(
+            "verification/projections/foundation-dll-audit/dashboard.html",
             result.payload["importantOutputs"],
         )
         generator_mock.resolve_inventory_output_root.assert_called_once_with(

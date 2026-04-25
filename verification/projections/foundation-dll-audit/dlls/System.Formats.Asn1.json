@@ -1,0 +1,131 @@
+{
+  "assemblyName": "System.Formats.Asn1",
+  "orderIndex": 3,
+  "phase": "phase-2",
+  "roadmapTaskId": "20260419-22-complex-bcl-ordered-dll-02-system-formats-asn1",
+  "dllState": "not-started",
+  "currentProject": "audit-input-and-ledger",
+  "blockingReason": "验证 `System.Formats.Asn1`",
+  "riskTags": [],
+  "projects": [
+    {
+      "projectCode": "audit-input-and-ledger",
+      "displayName": "Audit Input And Ledger",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "刷新 audit input manifest，并校验 surface / semantic / nativeization plan。",
+      "verificationTarget": "System.Formats.Asn1",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "managed-proof",
+      "displayName": "Managed Proof",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "运行 managed proof，验证语义基线。",
+      "verificationTarget": "System.Formats.Asn1",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "native-proof",
+      "displayName": "Native Proof",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "运行 native / AOT proof，验证 generated native code 可执行。",
+      "verificationTarget": "System.Formats.Asn1",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "hotupdate-proof",
+      "displayName": "HotUpdate Proof",
+      "policyState": "conditional",
+      "executionState": "pending",
+      "verificationMethod": "运行 patch / host proof，验证 hotupdate consumer 路径。",
+      "verificationTarget": "System.Formats.Asn1",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "benchmark",
+      "displayName": "Benchmark",
+      "policyState": "conditional",
+      "executionState": "pending",
+      "verificationMethod": "运行 benchmark，归档性能结果。",
+      "verificationTarget": "System.Formats.Asn1",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "codegen-review",
+      "displayName": "Codegen Review",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "审核 generated code、dispatch/helper/binding/coverage。",
+      "verificationTarget": "System.Formats.Asn1",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "completion-certification",
+      "displayName": "Completion Certification",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "汇总前置 project 结果，给出 DLL completion 结论。",
+      "verificationTarget": "System.Formats.Asn1",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
+        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    }
+  ]
+}

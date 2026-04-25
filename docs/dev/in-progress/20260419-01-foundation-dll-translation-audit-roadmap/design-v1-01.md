@@ -181,3 +181,206 @@ hotupdate path 保留为 consumer verification：
 - 新增 `FoundationDllTranslationSolution` 会触碰 subject/workspace/codegen 主线，必须先补 unit/contracts，再改实现。
 - codegen review 如果只做文件存在检查，会退化成伪审核，必须至少覆盖 manifest、dispatch、helper、coverage 和 findings。
 
+## 9. DLL-First 审核与报告对象模型
+
+本路线图的最终审核对象不再以 `subject`、`ScenarioBase` 或 capability projection 作为主入口，而改为以 DLL 为中心的正式对象：
+
+`Program -> DLL -> Verification Project -> Verification Item -> Artifact`
+
+约束如下：
+
+- `subject` 仅保留为执行入口、`.sln` 承载体和产物沉淀位置，不再作为最终审核首页的主对象。
+- `Program` 固定表示本轮 foundation DLL translation audit 的 14 个目标对象。
+- `DLL` 固定表示一个可独立验收的 assembly 审核单元。
+- `Verification Project` 固定表示一个 DLL 下的正式验证项目，而不是临时 run、日志或人工口头结论。
+- `Artifact` 必须是可点击证据；没有证据的绿色状态一律视为 `missing-evidence`。
+
+### 9.1 Program Scope
+
+当前 program scope 固定为以下 14 个对象：
+
+1. `System.Private.CoreLib`
+2. `System.Collections.Immutable`
+3. `System.Formats.Asn1`
+4. `System.IO.Compression.Brotli`
+5. `System.IO.Compression.ZipFile`
+6. `System.IO.Pipelines`
+7. `System.Linq`
+8. `System.Net.ServerSentEvents`
+9. `System.ObjectModel`
+10. `System.Runtime.InteropServices`
+11. `System.Runtime.Serialization.Formatters`
+12. `System.Security.Principal.Windows`
+13. `System.Text.Json`
+14. `System.Threading.Tasks.Parallel`
+
+`Program` 总进度必须直接回答：
+
+- 14 个 DLL 当前完成了几个。
+- 当前 active DLL 是哪个。
+- 哪个 DLL 正在阻塞顺序推进。
+- proof / benchmark / hotupdate 的 project 覆盖情况是什么。
+
+### 9.2 Verification Project 模板
+
+每个 DLL 固定使用以下 project 模板：
+
+- `audit-input-and-ledger`
+- `managed-proof`
+- `native-proof`
+- `hotupdate-proof`
+- `benchmark`
+- `codegen-review`
+- `completion-certification`
+
+默认必选 project：
+
+- `audit-input-and-ledger`
+- `managed-proof`
+- `native-proof`
+- `codegen-review`
+- `completion-certification`
+
+策略驱动 project：
+
+- `hotupdate-proof`
+- `benchmark`
+
+### 9.3 Project Policy
+
+`hotupdate-proof` 与 `benchmark` 不得再被隐含理解为“14 个 DLL 一刀切硬门槛”，而必须显式声明 policy：
+
+- `System.Private.CoreLib` 的 `hotupdate-proof` 为 `required`
+- 其余 13 个 DLL 的 `hotupdate-proof` 默认为 `conditional`
+- 全部 14 个 DLL 的 `benchmark` 默认为 `conditional`
+- 只有某个 DLL 被显式声明存在 perf obligation 时，`benchmark` 才能升级为 `required`
+
+高风险 DLL 必须在 DLL 详情页暴露 `riskTag`：
+
+- `System.Runtime.InteropServices`
+- `System.Runtime.Serialization.Formatters`
+- `System.Text.Json`
+
+## 10. 状态模型与证据规则
+
+### 10.1 状态模型
+
+每个 `Verification Project` 固定拆成两层状态：
+
+- `policyState`: `required | conditional | not-required`
+- `executionState`: `pending | in-progress | passed | failed | blocked | missing-evidence | not-required`
+
+每个 `DLL` 固定汇总为：
+
+- `not-started`
+- `in-progress`
+- `blocked`
+- `completed`
+
+`Program` 状态按 14 个 DLL 汇总，但必须同时显示计数：
+
+- `completedDllCount`
+- `activeDllCount`
+- `blockedDllCount`
+- `notStartedDllCount`
+
+### 10.2 Artifact 证据规则
+
+`Artifact` 不是文件名字符串，而是可点击证据对象。固定规则如下：
+
+- 如果证据是代码文件，则链接到具体文件路径。
+- 如果证据是一组生成代码、运行输出或审计产物，则链接到目录路径。
+- 如果证据是报告，则链接到具体 `json`、`md` 或后续 `html`。
+- 如果证据来自命令执行，则链接到日志文件或归档目录，而不是只写 `passed`。
+
+建议固定 `ArtifactRecord` 字段：
+
+- `artifactKind`: `code-file | directory | report-json | report-md | log | binary | manifest`
+- `displayName`
+- `path`
+- `linkTargetType`: `file | directory`
+- `role`: `input | proof | benchmark | codegen | review | completion | log`
+- `required`
+- `exists`
+
+`exists = false` 且 project 被标绿时，必须回退为 `missing-evidence`。
+
+### 10.3 Project 级证据要求
+
+每个 project 至少要能回答三件事：
+
+- 怎么验证。
+- 当前状态。
+- 证据在哪。
+
+各 project 的主证据规则固定为：
+
+- `audit-input-and-ledger`
+  - 目录：`audit/<assembly>/`
+  - 文件：`input-manifest.json`、`surface-ledger.json`、`semantic-ledger.json`、`nativeization-plan.json`
+- `managed-proof`
+  - 文件：`managed-proof-report.json`
+  - 目录：managed proof 工程或运行输出目录
+- `native-proof`
+  - 文件：`native-proof-report.json`
+  - 目录：generated code 目录、native build/runtime 目录
+- `hotupdate-proof`
+  - 文件：`hotupdate-proof-report.json`
+  - 目录：patch/host 对应输出目录
+- `benchmark`
+  - 文件：`benchmark-report.json`
+  - 目录：benchmark 原始结果目录
+- `codegen-review`
+  - 文件：`codegen-review.json`、`codegen-review.md`
+  - 目录：generated code 目录
+- `completion-certification`
+  - 文件：`completion-report.json`
+
+## 11. 页面与报告合同
+
+最终审核报告固定提供四层入口：
+
+- `Program Overview`
+- `DLL Matrix`
+- `DLL Detail`
+- `Artifact Index`
+
+### 11.1 Program Overview
+
+必须直接展示：
+
+- 14 个 DLL 的总进度。
+- 当前 active DLL。
+- 顺序推进阻塞链。
+- proof / benchmark / hotupdate 的 project 覆盖概览。
+
+### 11.2 DLL Matrix
+
+固定为一行一个 DLL，列为 `Verification Project` 模板。每个单元格必须同时提供：
+
+- project 状态
+- 主证据链接
+- 如果阻塞，则显示 blocker 摘要
+
+### 11.3 DLL Detail
+
+每个 DLL 详情页必须按 project 展示：
+
+- `policyState`
+- `executionState`
+- `verificationMethod`
+- `verificationTarget`
+- `completionRule`
+- `artifacts`
+- `blockers`
+
+### 11.4 Artifact Index
+
+Artifact Index 不是附录，而是正式审核入口。它必须允许审核者从 DLL 维度直接点进：
+
+- 代码文件
+- 生成代码目录
+- proof / benchmark / hotupdate 输出目录
+- JSON / Markdown 审计报告
+
+如果某个 DLL 的结论无法跳转到证据，则该结论不成立。

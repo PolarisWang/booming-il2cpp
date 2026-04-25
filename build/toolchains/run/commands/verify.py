@@ -94,6 +94,11 @@ def _handle_verification_v1(
         str(verification_data.get("reportSummaryPath") or ""),
     ]
     important_outputs = [item for item in important_outputs if item]
+    foundation_dll_audit = dict(payload.get("foundationDllAudit") or {})
+    if str(foundation_dll_audit.get("dashboardPath") or ""):
+        important_outputs.append(str(foundation_dll_audit.get("dashboardPath")))
+    if str(foundation_dll_audit.get("reportSummaryPath") or ""):
+        important_outputs.append(str(foundation_dll_audit.get("reportSummaryPath")))
     codegen_stub_paths = [str(item) for item in list(verification_data.get("codegenStubPaths") or []) if str(item)]
     important_outputs.extend(codegen_stub_paths)
     text = "\n".join(

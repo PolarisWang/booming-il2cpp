@@ -334,6 +334,11 @@ Closure
 
 投影视图只读，不拥有 policy。所有页面、表格、dashboard 都必须从 formal graph 和 master 表派生，而不是反向定义规则。
 
+对于 evidence-driven projection，例如 `Program / DLL / Verification Project / Artifact` 这类 DLL-first reporting 视图，必须显式区分：
+
+- `primary evidence`：只允许引用 `artifacts/**` 中的真实执行产物，用于驱动 `passed / missing / blocked` 等状态判定，并进入 artifact index。
+- `support refs`：允许引用 `docs/**`、`subjects/**`、`verification/**` 等辅助定位材料，但它们只用于说明上下文、authority 或实现入口，不能把项目状态置为 `passed`，也不能混入 primary artifact table。
+
 ### 6.2 固定主页视图
 
 | 视图 | 主问题 | 主键 | 默认不展示 |
@@ -969,6 +974,15 @@ formal 聚合时，`verificationState` 判定顺序固定为：
 7. 上传/提交正式产物
 8. 清理临时过程产物
 
+如果本轮改动触及 formal report / projection contract，例如：
+
+- `latest/master/reports` 字段或聚合口径
+- `Program / DLL / Verification Project / Artifact` 报告对象
+- `testing-inventory`、`benchmark` 或其他 projection 页面字段
+- 证据链接规则
+
+则不能只改 schema、模板或页面读取逻辑；仍必须按上述顺序刷新正式数据与下游 projection。
+
 ### 15.2 无人工复核闸门
 
 正常路径不要求人工复核。只要：
@@ -1051,4 +1065,8 @@ formal 聚合时，`verificationState` 判定顺序固定为：
 3. obligation claim 如何展开
 4. formal 结果与 codegen 存根落在哪里
 
-如果这四个问题回答不清，任务不能直接进入执行阶段。
+如果本轮还改动了 formal report / projection contract，还必须补答第五个问题：
+
+5. 哪些 `verification/archive/{latest,master,reports}` 与 `verification/projections/**` 产物需要重生成
+
+如果这些问题回答不清，任务不能直接进入执行阶段。

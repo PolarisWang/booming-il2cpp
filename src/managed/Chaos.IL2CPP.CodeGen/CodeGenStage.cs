@@ -1,4 +1,5 @@
 using Chaos.IL2CPP.Contracts;
+using System.Reflection;
 
 namespace Chaos.IL2CPP.CodeGen;
 
@@ -101,6 +102,7 @@ public sealed class CodeGenStage
                 .Select(path => ManagedNaming.NormalizePathForManifest(path, Environment.CurrentDirectory))
                 .Distinct(StringComparer.OrdinalIgnoreCase)
                 .ToList(),
+            ResolvedAssemblies = BuildResolvedAssemblies(request, linkedWorld),
             FullAssemblyClosure = request.FullAssemblyClosure,
             InputModuleVersionId = linkedWorld.Assembly.ModuleVersionId.ToString(),
             Artifacts =
@@ -137,6 +139,282 @@ public sealed class CodeGenStage
             NativeAotLoweringPlan = nativeAotLoweringPlan,
             ClosureManifest = closureManifest,
         };
+    }
+
+    private static IReadOnlyList<ManagedClosureResolvedAssemblyRef> BuildResolvedAssemblies(
+        ManagedClosureRequest request,
+        LinkedWorldModel linkedWorld)
+    {
+        var resolvedPathsByAssemblyName = new Dictionary<string, string>(StringComparer.Ordinal);
+        AddResolvedAssemblyPath(
+            resolvedPathsByAssemblyName,
+            linkedWorld.Assembly.Name,
+            request.InputAssemblyPath);
+
+        foreach (var additionalAssemblyPath in request.AdditionalAssemblyPaths ?? [])
+        {
+            if (string.IsNullOrWhiteSpace(additionalAssemblyPath))
+            {
+                continue;
+            }
+
+            if (TryReadAssemblyName(additionalAssemblyPath, out var additionalAssemblyName))
+            {
+                AddResolvedAssemblyPath(resolvedPathsByAssemblyName, additionalAssemblyName, additionalAssemblyPath);
+            }
+        }
+
+        var probeDirectories = EnumerateAssemblyProbeDirectories(request)
+            .ToList();
+        var trustedPlatformAssemblies = BuildTrustedPlatformAssemblyPathsByName();
+
+        foreach (var assemblyName in CollectClosureReferencedAssemblyNames(linkedWorld))
+        {
+            if (resolvedPathsByAssemblyName.ContainsKey(assemblyName))
+            {
+                continue;
+            }
+
+            if (TryResolveAssemblyPath(assemblyName, probeDirectories, trustedPlatformAssemblies, out var resolvedAssemblyPath))
+            {
+                AddResolvedAssemblyPath(resolvedPathsByAssemblyName, assemblyName, resolvedAssemblyPath);
+            }
+        }
+
+        return resolvedPathsByAssemblyName
+            .OrderBy(entry => entry.Key, StringComparer.Ordinal)
+            .Select(entry => new ManagedClosureResolvedAssemblyRef
+            {
+                AssemblyName = entry.Key,
+                Path = ManagedNaming.NormalizePathForManifest(entry.Value, Environment.CurrentDirectory),
+            })
+            .ToList();
+    }
+
+    private static IEnumerable<string> CollectClosureReferencedAssemblyNames(LinkedWorldModel linkedWorld)
+    {
+        var assemblyNames = new HashSet<string>(StringComparer.Ordinal)
+        {
+            linkedWorld.Assembly.Name,
+        };
+
+        foreach (var assembly in linkedWorld.Assemblies)
+        {
+            if (!string.IsNullOrWhiteSpace(assembly.Name))
+            {
+                assemblyNames.Add(assembly.Name);
+            }
+        }
+
+        foreach (var type in linkedWorld.Types)
+        {
+            if (!string.IsNullOrWhiteSpace(type.AssemblyName))
+            {
+                assemblyNames.Add(type.AssemblyName);
+            }
+
+            TryAddAssemblyNameFromSubjectId(assemblyNames, type.SubjectId);
+            TryAddAssemblyNameFromSubjectId(assemblyNames, type.DefinitionSubjectId);
+            TryAddAssemblyNameFromSubjectId(assemblyNames, type.BaseTypeSubjectId);
+            foreach (var implementedInterfaceSubjectId in type.ImplementedInterfaceSubjectIds ?? [])
+            {
+                TryAddAssemblyNameFromSubjectId(assemblyNames, implementedInterfaceSubjectId);
+            }
+        }
+
+        foreach (var field in linkedWorld.Fields)
+        {
+            if (!string.IsNullOrWhiteSpace(field.AssemblyName))
+            {
+                assemblyNames.Add(field.AssemblyName);
+            }
+
+            TryAddAssemblyNameFromSubjectId(assemblyNames, field.SubjectId);
+            TryAddAssemblyNameFromSubjectId(assemblyNames, field.DefinitionSubjectId);
+            TryAddAssemblyNameFromSubjectId(assemblyNames, field.DeclaringTypeSubjectId);
+        }
+
+        foreach (var property in linkedWorld.Properties)
+        {
+            if (!string.IsNullOrWhiteSpace(property.AssemblyName))
+            {
+                assemblyNames.Add(property.AssemblyName);
+            }
+
+            TryAddAssemblyNameFromSubjectId(assemblyNames, property.SubjectId);
+            TryAddAssemblyNameFromSubjectId(assemblyNames, property.DefinitionSubjectId);
+            TryAddAssemblyNameFromSubjectId(assemblyNames, property.DeclaringTypeSubjectId);
+        }
+
+        foreach (var method in linkedWorld.Methods)
+        {
+            if (!string.IsNullOrWhiteSpace(method.AssemblyName))
+            {
+                assemblyNames.Add(method.AssemblyName);
+            }
+
+            TryAddAssemblyNameFromSubjectId(assemblyNames, method.SubjectId);
+            TryAddAssemblyNameFromSubjectId(assemblyNames, method.DefinitionSubjectId);
+            TryAddAssemblyNameFromSubjectId(assemblyNames, method.DeclaringTypeSubjectId);
+            TryAddAssemblyNameFromSubjectId(assemblyNames, method.Import?.ModuleName);
+
+            foreach (var exceptionRegion in method.Body.ExceptionRegions)
+            {
+                TryAddAssemblyNameFromSubjectId(assemblyNames, exceptionRegion.CatchTypeSubjectId);
+            }
+
+            foreach (var block in method.Body.Blocks)
+            {
+                foreach (var instruction in block.Instructions)
+                {
+                    if (!string.IsNullOrWhiteSpace(instruction.Reference?.AssemblyName))
+                    {
+                        assemblyNames.Add(instruction.Reference.AssemblyName);
+                    }
+
+                    TryAddAssemblyNameFromSubjectId(assemblyNames, instruction.Reference?.SubjectId);
+                    TryAddAssemblyNameFromSubjectId(assemblyNames, instruction.Callee);
+                }
+            }
+        }
+
+        foreach (var dependency in linkedWorld.Dependencies)
+        {
+            if (!string.IsNullOrWhiteSpace(dependency.AssemblyName))
+            {
+                assemblyNames.Add(dependency.AssemblyName);
+            }
+
+            TryAddAssemblyNameFromSubjectId(assemblyNames, dependency.SubjectId);
+        }
+
+        return assemblyNames
+            .Where(assemblyName => !string.IsNullOrWhiteSpace(assemblyName))
+            .OrderBy(assemblyName => assemblyName, StringComparer.Ordinal);
+    }
+
+    private static IEnumerable<string> EnumerateAssemblyProbeDirectories(ManagedClosureRequest request)
+    {
+        var directories = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+        static void AddDirectory(HashSet<string> target, string? path)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                return;
+            }
+
+            var directory = Path.GetDirectoryName(Path.GetFullPath(path));
+            if (!string.IsNullOrWhiteSpace(directory))
+            {
+                target.Add(directory);
+            }
+        }
+
+        AddDirectory(directories, request.InputAssemblyPath);
+        foreach (var additionalAssemblyPath in request.AdditionalAssemblyPaths ?? [])
+        {
+            AddDirectory(directories, additionalAssemblyPath);
+        }
+
+        return directories;
+    }
+
+    private static IReadOnlyDictionary<string, string> BuildTrustedPlatformAssemblyPathsByName()
+    {
+        var trustedPlatformAssemblies = new Dictionary<string, string>(StringComparer.Ordinal);
+        if (AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") is not string trustedPlatformAssembliesValue ||
+            string.IsNullOrWhiteSpace(trustedPlatformAssembliesValue))
+        {
+            return trustedPlatformAssemblies;
+        }
+
+        foreach (var trustedPlatformAssemblyPath in trustedPlatformAssembliesValue.Split(Path.PathSeparator, StringSplitOptions.RemoveEmptyEntries))
+        {
+            var assemblyName = Path.GetFileNameWithoutExtension(trustedPlatformAssemblyPath);
+            if (!string.IsNullOrWhiteSpace(assemblyName) &&
+                !trustedPlatformAssemblies.ContainsKey(assemblyName))
+            {
+                trustedPlatformAssemblies[assemblyName] = Path.GetFullPath(trustedPlatformAssemblyPath);
+            }
+        }
+
+        return trustedPlatformAssemblies;
+    }
+
+    private static bool TryResolveAssemblyPath(
+        string assemblyName,
+        IReadOnlyList<string> probeDirectories,
+        IReadOnlyDictionary<string, string> trustedPlatformAssemblies,
+        out string resolvedAssemblyPath)
+    {
+        foreach (var probeDirectory in probeDirectories)
+        {
+            foreach (var extension in new[] { ".dll", ".exe" })
+            {
+                var candidatePath = Path.Combine(probeDirectory, assemblyName + extension);
+                if (File.Exists(candidatePath))
+                {
+                    resolvedAssemblyPath = Path.GetFullPath(candidatePath);
+                    return true;
+                }
+            }
+        }
+
+        if (trustedPlatformAssemblies.TryGetValue(assemblyName, out var trustedPlatformAssemblyPath))
+        {
+            resolvedAssemblyPath = trustedPlatformAssemblyPath;
+            return true;
+        }
+
+        resolvedAssemblyPath = string.Empty;
+        return false;
+    }
+
+    private static bool TryReadAssemblyName(string assemblyPath, out string assemblyName)
+    {
+        assemblyName = string.Empty;
+        try
+        {
+            assemblyName = AssemblyName.GetAssemblyName(assemblyPath).Name ?? string.Empty;
+            return !string.IsNullOrWhiteSpace(assemblyName);
+        }
+        catch (Exception) when (
+            File.Exists(assemblyPath) &&
+            (assemblyPath.EndsWith(".dll", StringComparison.OrdinalIgnoreCase) ||
+             assemblyPath.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)))
+        {
+            return false;
+        }
+    }
+
+    private static void AddResolvedAssemblyPath(
+        IDictionary<string, string> resolvedPathsByAssemblyName,
+        string assemblyName,
+        string assemblyPath)
+    {
+        if (string.IsNullOrWhiteSpace(assemblyName) || string.IsNullOrWhiteSpace(assemblyPath))
+        {
+            return;
+        }
+
+        resolvedPathsByAssemblyName[assemblyName] = Path.GetFullPath(assemblyPath);
+    }
+
+    private static void TryAddAssemblyNameFromSubjectId(
+        ISet<string> assemblyNames,
+        string? subjectId)
+    {
+        if (string.IsNullOrWhiteSpace(subjectId))
+        {
+            return;
+        }
+
+        var separatorIndex = subjectId.IndexOf('/');
+        if (separatorIndex > 0)
+        {
+            assemblyNames.Add(subjectId[..separatorIndex]);
+        }
     }
 
     private static string ResolveOwnerSubjectId(string inputAssemblyPath, string fallbackOwnerSubjectId)

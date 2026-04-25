@@ -8,6 +8,7 @@
 
 - 刷新并校�?`verification-v1` 正式产物：`run verify verification-v1 --json`
 - `test inventory` 只保留为内部实现细节，不作为公开主入�?
+- 如果本轮改动触及 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、projection 页面字段或证据链接规则，则不能只改 schema、模板或页面读取逻辑；formal object 通过后仍必须执行 `run verify verification-v1 --json` 刷新正式数据
 ## 正式主线
 
 新的正式测试流程固定为：
@@ -45,6 +46,7 @@ managed solution
 benchmark 补充规则：
 - `benchmark --record` 只写 raw benchmark records，不直接刷新 `verification/archive/*` 或 formal projections。
 - 需要新的 benchmark merged data、dashboard 或 archive summary 时，必须后续执行 `run verify verification-v1 --json`。
+- 命中 report / projection contract 时，还必须确认对应 `verification/projections/**` 派生产物已从新的 formal source 重生成。
 
 ## 覆盖模型
 
@@ -167,4 +169,5 @@ capability x route x platform x deviceProfile x evidenceKind
 - `supportState` �?`verificationState` 必须分离
 - `failed / blocked / missing / unsupported` 不得混写
 - `AOT / IL2CPP / codegen / contracts / loader / test governance` 六条主线必须进入权责图审�?
+- 只要 formal report / projection contract 发生变化，就必须刷新 `verification/archive/{latest,master,reports}` 与对应 `verification/projections/**`；不允许只改页面或 schema 而不刷新正式数据
 

@@ -70,7 +70,7 @@ public sealed partial class NativeAotLoweringPlanner
             closureManifest.InputAssemblyPath,
             Path.GetDirectoryName(closureManifest.InputAssemblyPath) ?? closureManifest.InputAssemblyPath,
             closureManifest.EntrySubjectId,
-            closureManifest.AdditionalAssemblyPaths,
+            GetResolvedAdditionalAssemblyPaths(closureManifest),
             FullAssemblyClosure: closureManifest.FullAssemblyClosure));
         var loadedMethodsBySubjectId = loadedWorld.Methods
             .GroupBy(method => method.SubjectId, StringComparer.Ordinal)
@@ -140,6 +140,25 @@ public sealed partial class NativeAotLoweringPlanner
             plansByTypeSubjectId,
             declaringTypeByStaticFieldSubjectId,
             requiredExternalRuntimeHelperSubjectIds);
+    }
+
+    private static IReadOnlyList<string>? GetResolvedAdditionalAssemblyPaths(ManagedClosureManifestArtifact closureManifest)
+    {
+        if (closureManifest.ResolvedAssemblies is not { Count: > 0 })
+        {
+            return closureManifest.AdditionalAssemblyPaths;
+        }
+
+        var normalizedInputAssemblyPath = Path.GetFullPath(closureManifest.InputAssemblyPath);
+        var resolvedAdditionalAssemblyPaths = closureManifest.ResolvedAssemblies
+            .Select(assembly => assembly.Path)
+            .Where(path => !string.IsNullOrWhiteSpace(path))
+            .Select(path => Path.GetFullPath(path))
+            .Where(path => !string.Equals(path, normalizedInputAssemblyPath, StringComparison.OrdinalIgnoreCase))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
+        return resolvedAdditionalAssemblyPaths;
     }
 
     private static StaticInitializationPlan? CreateStaticInitializationPlan(

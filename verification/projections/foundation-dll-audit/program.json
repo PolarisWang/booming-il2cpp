@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "programId": "foundation-dll-translation-audit",
+  "title": "Foundation DLL Translation Audit",
+  "summary": {
+    "dllCount": 14,
+    "completedCount": 0,
+    "inProgressCount": 0,
+    "blockedCount": 2,
+    "notStartedCount": 12,
+    "progressPercent": 0.0,
+    "activeAssembly": "System.Private.CoreLib"
+  },
+  "scopeAssemblies": [
+    "System.Private.CoreLib",
+    "System.Collections.Immutable",
+    "System.Formats.Asn1",
+    "System.IO.Compression.Brotli",
+    "System.IO.Compression.ZipFile",
+    "System.IO.Pipelines",
+    "System.Linq",
+    "System.Net.ServerSentEvents",
+    "System.ObjectModel",
+    "System.Runtime.InteropServices",
+    "System.Runtime.Serialization.Formatters",
+    "System.Security.Principal.Windows",
+    "System.Text.Json",
+    "System.Threading.Tasks.Parallel"
+  ]
+}

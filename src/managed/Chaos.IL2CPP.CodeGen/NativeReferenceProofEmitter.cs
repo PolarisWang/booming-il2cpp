@@ -1,6 +1,9 @@
 ﻿using System.Text;
 using System.Text.Json;
 using System.Runtime.CompilerServices;
+using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
+using System.Reflection.PortableExecutable;
 using Chaos.IL2CPP.Contracts;
 using Scriban;
 using Scriban.Runtime;
@@ -76,8 +79,134 @@ public sealed class NativeReferenceProofEmitter
         IReadOnlyList<RuntimeSkeletonSupportedMethodDispatch> SupportedMethods,
         IReadOnlyList<RuntimeSkeletonUnsupportedMethodEmission> UnsupportedMethods);
 
+    private sealed record MetadataTypeIdentity(
+        string AssemblyName,
+        string NamespaceName,
+        string TypeName,
+        string DisplayName,
+        string SubjectId);
+
+    private sealed record ExternalMetadataTokenResolution(
+        string AssemblyName,
+        uint TypeToken,
+        uint MethodToken);
+
+    private sealed class AssemblyMetadataTokenResolver
+    {
+        private readonly IReadOnlyDictionary<string, string> assemblyPathsByName;
+        private readonly Dictionary<string, AssemblyMetadataCache> cacheByAssemblyName = new(StringComparer.Ordinal);
+        private readonly object cacheGate = new();
+
+        public AssemblyMetadataTokenResolver(IReadOnlyDictionary<string, string> assemblyPathsByName)
+        {
+            this.assemblyPathsByName = assemblyPathsByName;
+        }
+
+        public bool TryResolveMethodAndDeclaringTypeToken(
+            string assemblyName,
+            string methodSubjectId,
+            out ExternalMetadataTokenResolution resolution)
+        {
+            resolution = null!;
+            if (!assemblyPathsByName.TryGetValue(assemblyName, out var assemblyPath))
+            {
+                return false;
+            }
+
+            AssemblyMetadataCache cache;
+            lock (cacheGate)
+            {
+                if (!cacheByAssemblyName.TryGetValue(assemblyName, out cache!))
+                {
+                    if (!TryCreateAssemblyMetadataCache(assemblyName, assemblyPath, out cache))
+                    {
+                        return false;
+                    }
+
+                    cacheByAssemblyName.Add(assemblyName, cache);
+                }
+            }
+
+            return cache.TryResolveMethodAndDeclaringTypeToken(methodSubjectId, out resolution);
+        }
+    }
+
+    private sealed class AssemblyMetadataCache
+    {
+        private readonly string assemblyName;
+        private readonly FileStream metadataStream;
+        private readonly PEReader peReader;
+        private readonly MetadataReader metadataReader;
+        private readonly Dictionary<string, TypeDefinitionHandle> typeDefinitionHandlesBySubjectId;
+        private readonly Dictionary<string, ExternalMetadataTokenResolution> resolutionsByMethodSubjectId =
+            new(StringComparer.Ordinal);
+        private readonly object resolutionGate = new();
+
+        public AssemblyMetadataCache(
+            string assemblyName,
+            FileStream metadataStream,
+            PEReader peReader,
+            MetadataReader metadataReader,
+            Dictionary<string, TypeDefinitionHandle> typeDefinitionHandlesBySubjectId)
+        {
+            this.assemblyName = assemblyName;
+            this.metadataStream = metadataStream;
+            this.peReader = peReader;
+            this.metadataReader = metadataReader;
+            this.typeDefinitionHandlesBySubjectId = typeDefinitionHandlesBySubjectId;
+        }
+
+        public bool TryResolveMethodAndDeclaringTypeToken(
+            string methodSubjectId,
+            out ExternalMetadataTokenResolution resolution)
+        {
+            lock (resolutionGate)
+            {
+                if (resolutionsByMethodSubjectId.TryGetValue(methodSubjectId, out resolution!))
+                {
+                    return true;
+                }
+
+                var declaringTypeSubjectId = GetDeclaringTypeSubjectId(methodSubjectId);
+                if (!typeDefinitionHandlesBySubjectId.TryGetValue(declaringTypeSubjectId, out var typeDefinitionHandle))
+                {
+                    resolution = null!;
+                    return false;
+                }
+
+                var metadataMethodName = GetMetadataMethodName(methodSubjectId);
+                var parameterCount = GetMethodParameterTypesFromSubjectId(methodSubjectId).Count;
+                var typeDefinition = metadataReader.GetTypeDefinition(typeDefinitionHandle);
+                foreach (var candidateHandle in typeDefinition.GetMethods())
+                {
+                    var candidateDefinition = metadataReader.GetMethodDefinition(candidateHandle);
+                    if (!string.Equals(
+                            metadataReader.GetString(candidateDefinition.Name),
+                            metadataMethodName,
+                            StringComparison.Ordinal) ||
+                        GetMethodParameterCount(metadataReader, candidateDefinition) != parameterCount)
+                    {
+                        continue;
+                    }
+
+                    resolution = new ExternalMetadataTokenResolution(
+                        assemblyName,
+                        unchecked((uint)MetadataTokens.GetToken(typeDefinitionHandle)),
+                        unchecked((uint)MetadataTokens.GetToken(candidateHandle)));
+                    resolutionsByMethodSubjectId[methodSubjectId] = resolution;
+                    return true;
+                }
+
+                resolution = null!;
+                return false;
+            }
+        }
+    }
+
     private sealed record RuntimeSkeletonStubBuildContext(
         NativeReferenceLoweringPlanArtifact LoweringPlan,
+        ManagedClosureManifestArtifact ClosureManifest,
+        AssemblyMetadataTokenResolver ExternalMetadataTokenResolver,
         MetadataRegistrationArtifact MetadataRegistration,
         IReadOnlyList<CodeRegistrationEntry> MethodPointers,
         IReadOnlyList<TypedIlMethodArtifact> Methods,
@@ -158,7 +287,13 @@ public sealed class NativeReferenceProofEmitter
         TryBuildRuntimeSkeletonConvertIntForwarderHandler,
         TryBuildRuntimeSkeletonConvertBoolIdentityForwarderHandler,
         TryBuildRuntimeSkeletonConvertBoolProducerForwarderHandler,
+        TryBuildRuntimeSkeletonConvertStringProviderPassthroughHandler,
+        TryBuildRuntimeSkeletonConvertStringCharProviderHandler,
+        TryBuildRuntimeSkeletonConvertObjectCharProviderHandler,
+        TryBuildRuntimeSkeletonConvertBoxedValueTypeStringInstanceCallHandler,
         TryBuildRuntimeSkeletonConvertPrimitiveHandler,
+        TryBuildRuntimeSkeletonConvertBoxedValueTypeCharInvalidCastHandler,
+        TryBuildRuntimeSkeletonConvertBoxedIConvertibleCharInvalidCastHandler,
         TryBuildRuntimeSkeletonConvertCheckedByteHandler,
         TryBuildRuntimeSkeletonConvertCheckedCharHandler,
         TryBuildRuntimeSkeletonConvertByteForwarderHandler,
@@ -239,6 +374,12 @@ public sealed class NativeReferenceProofEmitter
         TryBuildRuntimeSkeletonStaticCallCtorGetterExecutableHandler,
         TryBuildRuntimeSkeletonConstructorThenInstanceCallExecutableHandler,
     ];
+
+    private const string RuntimeSkeletonConvertStringCharProviderCoreLibSubjectId =
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)";
+
+    private const string RuntimeSkeletonConvertStringProviderPassthroughCoreLibSubjectId =
+        "System.Private.CoreLib/System.Convert::ToString:System.String(System.String,System.IFormatProvider)";
 
     private sealed class RuntimeSkeletonPageSupportBuilder
     {
@@ -979,7 +1120,10 @@ public sealed class NativeReferenceProofEmitter
     {
         var managedClosureRoot = Path.GetFullPath(request.ManagedClosureRootPath);
         var loweringPlanPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.NativeReferenceLoweringPlan);
+        var closureManifestPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.ClosureManifest);
         var loweringPlan = LoadRequiredJson<NativeReferenceLoweringPlanArtifact>(loweringPlanPath);
+        var closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath);
+        var externalMetadataTokenResolver = new AssemblyMetadataTokenResolver(BuildAssemblyPathsByName(closureManifest));
         IReadOnlyList<NativeReferenceGeneratedSource> generatedSources;
         IReadOnlyList<NativeReferenceGeneratedArtifactRef> generatedArtifacts;
         string? preferredAssemblyDispatchSubjectId = BuildPreferredAssemblyDispatchSubjectId(loweringPlan);
@@ -996,6 +1140,8 @@ public sealed class NativeReferenceProofEmitter
             var codeRegistration = LoadRequiredJson<CodeRegistrationArtifact>(codeRegistrationPath);
             var runtimeSkeletonEmission = BuildAssemblyFullClosureRuntimeSkeletonGeneratedSources(
                 loweringPlan,
+                closureManifest,
+                externalMetadataTokenResolver,
                 request.OutputRootPath,
                 typedIl,
                 metadataRegistration,
@@ -1121,6 +1267,8 @@ public sealed class NativeReferenceProofEmitter
 
     private static AssemblyFullClosureRuntimeSkeletonEmission BuildAssemblyFullClosureRuntimeSkeletonGeneratedSources(
         NativeReferenceLoweringPlanArtifact loweringPlan,
+        ManagedClosureManifestArtifact closureManifest,
+        AssemblyMetadataTokenResolver externalMetadataTokenResolver,
         string outputRootPath,
         TypedIlIrArtifact typedIl,
         MetadataRegistrationArtifact metadataRegistration,
@@ -1166,6 +1314,8 @@ public sealed class NativeReferenceProofEmitter
                 var pageStartIndex = (page.PageNumber - 1) * translationUnitPageSize;
                 var pageEmission = BuildAssemblyFullClosureRuntimeSkeletonPageTranslationUnit(
                     loweringPlan,
+                    closureManifest,
+                    externalMetadataTokenResolver,
                     metadataRegistration,
                     methods,
                     methodsBySubjectId,
@@ -1348,6 +1498,8 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
 
     private static RuntimeSkeletonPageEmission BuildAssemblyFullClosureRuntimeSkeletonPageTranslationUnit(
         NativeReferenceLoweringPlanArtifact loweringPlan,
+        ManagedClosureManifestArtifact closureManifest,
+        AssemblyMetadataTokenResolver externalMetadataTokenResolver,
         MetadataRegistrationArtifact metadataRegistration,
         IReadOnlyList<TypedIlMethodArtifact> methods,
         IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
@@ -1378,6 +1530,8 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             var stubName = methodStubNamesByIndex[index];
             var stubDefinition = TryBuildAssemblyFullClosureRuntimeSkeletonMethodStub(
                 loweringPlan,
+                closureManifest,
+                externalMetadataTokenResolver,
                 metadataRegistration,
                 methodPointers,
                 methods,
@@ -1553,6 +1707,8 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
 
     private static string? TryBuildAssemblyFullClosureRuntimeSkeletonMethodStub(
         NativeReferenceLoweringPlanArtifact loweringPlan,
+        ManagedClosureManifestArtifact closureManifest,
+        AssemblyMetadataTokenResolver externalMetadataTokenResolver,
         MetadataRegistrationArtifact metadataRegistration,
         IReadOnlyList<CodeRegistrationEntry> methodPointers,
         IReadOnlyList<TypedIlMethodArtifact> methods,
@@ -1564,6 +1720,8 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
     {
         var buildContext = new RuntimeSkeletonStubBuildContext(
             loweringPlan,
+            closureManifest,
+            externalMetadataTokenResolver,
             metadataRegistration,
             methodPointers,
             methods,
@@ -1802,6 +1960,108 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
     {
         if (TryBuildAssemblyBoundStaticPrimitiveConvertStub(
                 buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertStringCharProviderHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringCharProviderStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertStringProviderPassthroughHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticStringProviderPassthroughStub(
+                buildContext.SubjectId,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertObjectCharProviderHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticObjectCharProviderStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertBoxedValueTypeStringInstanceCallHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticBoxedValueTypeStringInstanceCallStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.ClosureManifest,
+                buildContext.ExternalMetadataTokenResolver,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertBoxedIConvertibleCharInvalidCastHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticBoxedIConvertibleCharInvalidCastStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
+                buildContext.MethodsBySubjectId,
+                buildContext.StubName,
+                out var stubDefinition))
+        {
+            return RuntimeSkeletonFamilyHandlerResult.CreateMatch(stubDefinition);
+        }
+
+        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
+    }
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertBoxedValueTypeCharInvalidCastHandler(
+        RuntimeSkeletonStubBuildContext buildContext)
+    {
+        if (TryBuildAssemblyBoundStaticBoxedValueTypeCharInvalidCastStub(
+                buildContext.LoweringPlan.AssemblyName,
+                buildContext.SubjectId,
+                buildContext.MetadataRegistration,
                 buildContext.MethodsBySubjectId,
                 buildContext.StubName,
                 out var stubDefinition))
@@ -5011,6 +5271,262 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         };
         stub = ScribanTemplateRenderer.RenderTemplate(
             NativeReferenceProofCatalog.GetRuntimeSkeletonStaticCheckedByteConvertStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticBoxedIConvertibleCharInvalidCastStub(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!TryResolveRuntimeSkeletonBoxedIConvertibleCharInvalidCastShape(
+                method,
+                methodsBySubjectId,
+                out var inputCppType,
+                out var outputCppType,
+                out var exceptionTypeSubjectId,
+                out var sourceTypeName,
+                out var targetTypeName))
+        {
+            return false;
+        }
+
+        var exceptionMessage = $"InvalidCast_FromTo: {sourceTypeName} -> {targetTypeName}";
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(assemblyName),
+            ["input_cpp_type"] = inputCppType,
+            ["output_cpp_type"] = outputCppType,
+            ["exception_type_token"] = CreateTypeTokenLiteral(metadataRegistration, exceptionTypeSubjectId),
+            ["source_type_name_literal"] = ToCppStringLiteral(sourceTypeName),
+            ["target_type_name_literal"] = ToCppStringLiteral(targetTypeName),
+            ["exception_message_literal"] = ToCppStringLiteral(exceptionMessage),
+            ["exception_message_byte_count"] = Encoding.UTF8.GetByteCount(exceptionMessage),
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticBoxedIConvertibleCharInvalidCastStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticBoxedValueTypeCharInvalidCastStub(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!TryResolveRuntimeSkeletonBoxedValueTypeCharInvalidCastShape(
+                method,
+                methodsBySubjectId,
+                out var inputCppType,
+                out var outputCppType,
+                out var boxedValueTypeSubjectId,
+                out var exceptionTypeSubjectId,
+                out var sourceTypeName,
+                out var targetTypeName,
+                out var inputSize))
+        {
+            return false;
+        }
+
+        var exceptionMessage = $"InvalidCast_FromTo: {sourceTypeName} -> {targetTypeName}";
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(assemblyName),
+            ["input_cpp_type"] = inputCppType,
+            ["output_cpp_type"] = outputCppType,
+            ["boxed_value_type_token"] = CreateTypeTokenLiteral(metadataRegistration, boxedValueTypeSubjectId),
+            ["exception_type_token"] = CreateTypeTokenLiteral(metadataRegistration, exceptionTypeSubjectId),
+            ["source_type_name_literal"] = ToCppStringLiteral(sourceTypeName),
+            ["target_type_name_literal"] = ToCppStringLiteral(targetTypeName),
+            ["exception_message_literal"] = ToCppStringLiteral(exceptionMessage),
+            ["exception_message_byte_count"] = Encoding.UTF8.GetByteCount(exceptionMessage),
+            ["input_size"] = inputSize,
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticBoxedValueTypeCharInvalidCastStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticStringCharProviderStub(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!TryResolveRuntimeSkeletonStringCharProviderShape(
+                method,
+                out var targetMethodSubjectId))
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(assemblyName),
+            ["target_method_token"] = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", targetMethodSubjectId)),
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringCharProviderStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticStringProviderPassthroughStub(
+        string subjectId,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!TryResolveRuntimeSkeletonStringProviderPassthroughShape(method))
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticStringProviderPassthroughStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticObjectCharProviderStub(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!TryResolveRuntimeSkeletonObjectCharProviderShape(
+                method,
+                out var targetMethodSubjectId))
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(assemblyName),
+            ["target_method_token"] = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", targetMethodSubjectId)),
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticObjectCharProviderStubTemplate(),
+            model);
+        return true;
+    }
+
+    private static bool TryBuildAssemblyBoundStaticBoxedValueTypeStringInstanceCallStub(
+        string assemblyName,
+        string subjectId,
+        ManagedClosureManifestArtifact closureManifest,
+        AssemblyMetadataTokenResolver externalMetadataTokenResolver,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub)
+    {
+        stub = string.Empty;
+        if (!methodsBySubjectId.TryGetValue(subjectId, out var method))
+        {
+            return false;
+        }
+
+        if (!TryResolveRuntimeSkeletonBoxedValueTypeStringInstanceCallShape(
+                method,
+                methodsBySubjectId,
+                out var inputCppType,
+                out var boxedValueTypeSubjectId,
+                out var targetMethodSubjectId,
+                out var targetAssemblyName,
+                out var inputSize,
+                out var argCount))
+        {
+            return false;
+        }
+
+        string boxedValueTypeTokenLiteral;
+        string targetMethodTokenLiteral;
+        string targetAssemblyNameLiteral;
+        if (string.Equals(targetAssemblyName, assemblyName, StringComparison.Ordinal))
+        {
+            boxedValueTypeTokenLiteral = CreateTypeTokenLiteral(metadataRegistration, boxedValueTypeSubjectId);
+            targetMethodTokenLiteral = FormatCppTokenLiteral(GetRequiredMetadataToken(metadataRegistration, "method", targetMethodSubjectId));
+            targetAssemblyNameLiteral = ToCppStringLiteral(targetAssemblyName);
+        }
+        else if (externalMetadataTokenResolver.TryResolveMethodAndDeclaringTypeToken(
+                     targetAssemblyName,
+                     targetMethodSubjectId,
+                     out var externalResolution))
+        {
+            boxedValueTypeTokenLiteral = FormatCppTokenLiteral(externalResolution.TypeToken);
+            targetMethodTokenLiteral = FormatCppTokenLiteral(externalResolution.MethodToken);
+            targetAssemblyNameLiteral = ToCppStringLiteral(externalResolution.AssemblyName);
+        }
+        else
+        {
+            return false;
+        }
+
+        var model = new ScriptObject
+        {
+            ["stub_name"] = stubName,
+            ["assembly_name_literal"] = ToCppStringLiteral(assemblyName),
+            ["target_assembly_name_literal"] = targetAssemblyNameLiteral,
+            ["input_cpp_type"] = inputCppType,
+            ["boxed_value_type_token"] = boxedValueTypeTokenLiteral,
+            ["target_method_token"] = targetMethodTokenLiteral,
+            ["input_size"] = inputSize,
+            ["argc"] = argCount,
+        };
+        stub = ScribanTemplateRenderer.RenderTemplate(
+            NativeReferenceProofCatalog.GetRuntimeSkeletonStaticBoxedValueTypeStringInstanceCallStubTemplate(),
             model);
         return true;
     }
@@ -8421,13 +8937,49 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         }
 
         var constructorTypeSubjectId = GetDeclaringTypeSubjectId(precedingInstruction.Callee);
-        var declaredMethod = GetRequiredMethod(methods, declaredTargetSubjectId);
+        return TryResolveConcreteTypeCallTarget(methods, constructorTypeSubjectId, declaredTargetSubjectId);
+    }
+
+    private static string? TryResolveBoxedInterfaceCallTarget(
+        IReadOnlyList<TypedIlMethodArtifact> methods,
+        IReadOnlyList<TypedIlInstructionArtifact> instructions,
+        int instructionIndex,
+        string declaredTargetSubjectId)
+    {
+        if (instructionIndex < 0 || instructionIndex >= instructions.Count)
+        {
+            return null;
+        }
+
+        var boxedInstruction = instructions[instructionIndex];
+        if (!string.Equals(boxedInstruction.Op, "box", StringComparison.Ordinal))
+        {
+            return null;
+        }
+
+        var boxedTypeSubjectId = GetRequiredOperandString(boxedInstruction);
+        return TryResolveConcreteTypeCallTarget(methods, boxedTypeSubjectId, declaredTargetSubjectId);
+    }
+
+    private static string? TryResolveConcreteTypeCallTarget(
+        IReadOnlyList<TypedIlMethodArtifact> methods,
+        string concreteTypeSubjectId,
+        string declaredTargetSubjectId)
+    {
+        var declaredMethod = methods.FirstOrDefault(candidate =>
+            string.Equals(candidate.SubjectId, declaredTargetSubjectId, StringComparison.Ordinal));
+        var declaredMethodName = declaredMethod is null
+            ? GetMethodName(declaredTargetSubjectId)
+            : GetMethodName(declaredMethod.SubjectId);
+        var declaredParameterTypes = declaredMethod is null
+            ? GetMethodParameterTypesFromSubjectId(declaredTargetSubjectId)
+            : declaredMethod.Parameters.Select(parameter => parameter.Type).ToArray();
         var exactMatch = methods.FirstOrDefault(candidate =>
-            string.Equals(GetDeclaringTypeSubjectId(candidate.SubjectId), constructorTypeSubjectId, StringComparison.Ordinal) &&
-            string.Equals(GetMethodName(candidate.SubjectId), GetMethodName(declaredMethod.SubjectId), StringComparison.Ordinal) &&
+            string.Equals(GetDeclaringTypeSubjectId(candidate.SubjectId), concreteTypeSubjectId, StringComparison.Ordinal) &&
+            MethodNameMatchesConcreteTarget(GetMethodName(candidate.SubjectId), declaredMethodName) &&
             string.Equals(candidate.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) &&
             candidate.Parameters.Select(parameter => parameter.Type).SequenceEqual(
-                declaredMethod.Parameters.Select(parameter => parameter.Type),
+                declaredParameterTypes,
                 StringComparer.Ordinal))
             ?.SubjectId;
         if (!string.IsNullOrWhiteSpace(exactMatch))
@@ -8436,10 +8988,84 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         }
 
         return methods.FirstOrDefault(candidate =>
-            string.Equals(GetDeclaringTypeSubjectId(candidate.SubjectId), constructorTypeSubjectId, StringComparison.Ordinal) &&
-            string.Equals(GetMethodName(candidate.SubjectId), GetMethodName(declaredMethod.SubjectId), StringComparison.Ordinal) &&
+            string.Equals(GetDeclaringTypeSubjectId(candidate.SubjectId), concreteTypeSubjectId, StringComparison.Ordinal) &&
+            MethodNameMatchesConcreteTarget(GetMethodName(candidate.SubjectId), declaredMethodName) &&
             string.Equals(candidate.BodyAvailability, "has-canonical-body", StringComparison.Ordinal))
             ?.SubjectId;
+    }
+
+    private static bool MethodNameMatchesConcreteTarget(
+        string candidateMethodName,
+        string declaredMethodName)
+    {
+        return string.Equals(candidateMethodName, declaredMethodName, StringComparison.Ordinal) ||
+               candidateMethodName.EndsWith($".{declaredMethodName}", StringComparison.Ordinal);
+    }
+
+    private static void ValidateRuntimeSkeletonBoxedIConvertibleCharEntryShape(
+        TypedIlMethodArtifact method,
+        IReadOnlyList<TypedIlInstructionArtifact> instructions)
+    {
+        RequireMethodContract(method, "static-method", "has-canonical-body");
+        RequireInstructionCount(method, instructions, 5);
+        RequireInstructionOp(instructions[0], "ldarg", method.SubjectId, 0);
+        RequireInstructionOp(instructions[1], "box", method.SubjectId, 1);
+        RequireInstructionOp(instructions[2], "ldnull", method.SubjectId, 2);
+        RequireInstructionOp(instructions[3], "callvirt", method.SubjectId, 3);
+        RequireInstructionOp(instructions[4], "ret", method.SubjectId, 4);
+        if (GetRequiredOperandInt(instructions[0]) != 0)
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects boxed iconvertible char entry '{method.SubjectId}' to load ldarg 0");
+        }
+
+        RequireInstructionCallee(
+            instructions[3],
+            "System.Private.CoreLib/System.IConvertible::ToChar:System.Char(System.IFormatProvider)",
+            method.SubjectId,
+            3);
+    }
+
+    private static void ValidateRuntimeSkeletonBoxedIConvertibleCharInvalidCastTargetShape(
+        TypedIlMethodArtifact method,
+        IReadOnlyList<TypedIlInstructionArtifact> instructions)
+    {
+        RequireMethodContract(method, "instance-method", "has-canonical-body");
+        if (!string.Equals(GetMethodReturnType(method.SubjectId), "System.Char", StringComparison.Ordinal) ||
+            method.Parameters.Count != 1 ||
+            !string.Equals(method.Parameters[0].Type, "System.IFormatProvider", StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects boxed iconvertible char invalid-cast target '{method.SubjectId}' to be an instance method returning char with a single IFormatProvider parameter");
+        }
+
+        RequireInstructionCount(method, instructions, 6);
+        RequireInstructionOp(instructions[0], "call", method.SubjectId, 0);
+        RequireInstructionOp(instructions[1], "ldstr", method.SubjectId, 1);
+        RequireInstructionOp(instructions[2], "ldstr", method.SubjectId, 2);
+        RequireInstructionOp(instructions[3], "call", method.SubjectId, 3);
+        RequireInstructionOp(instructions[4], "newobj", method.SubjectId, 4);
+        RequireInstructionOp(instructions[5], "throw", method.SubjectId, 5);
+        RequireInstructionCallee(
+            instructions[0],
+            "System.Private.CoreLib/System.SR::get_InvalidCast_FromTo:System.String()",
+            method.SubjectId,
+            0);
+        RequireInstructionCallee(
+            instructions[3],
+            "System.Private.CoreLib/System.SR::Format:System.String(System.String,System.Object,System.Object)",
+            method.SubjectId,
+            3);
+
+        var exceptionConstructorSubjectId = GetRequiredInstructionCallee(instructions[4], method.SubjectId, 4);
+        if (!string.Equals(
+                exceptionConstructorSubjectId,
+                "System.Private.CoreLib/System.InvalidCastException::.ctor:System.Void(System.String)",
+                StringComparison.Ordinal))
+        {
+            throw new InvalidOperationException(
+                $"native-reference emitter expects boxed iconvertible char invalid-cast target '{method.SubjectId}' to construct InvalidCastException(string), but found '{exceptionConstructorSubjectId}'");
+        }
     }
 
     private static bool LooksLikeInterfaceMethodSubjectId(string subjectId)
@@ -8471,6 +9097,45 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         }
 
         return subjectId[(methodSeparatorIndex + 2)..methodEndIndex];
+    }
+
+    private static IReadOnlyList<string> GetMethodParameterTypesFromSubjectId(string subjectId)
+    {
+        var startIndex = subjectId.IndexOf('(', StringComparison.Ordinal);
+        var endIndex = subjectId.LastIndexOf(')');
+        if (startIndex < 0 || endIndex < startIndex)
+        {
+            throw new InvalidOperationException($"failed to extract parameter types from subject id '{subjectId}'");
+        }
+
+        var parameterList = subjectId[(startIndex + 1)..endIndex];
+        if (string.IsNullOrWhiteSpace(parameterList))
+        {
+            return Array.Empty<string>();
+        }
+
+        var parameters = new List<string>();
+        var segmentStart = 0;
+        var genericDepth = 0;
+        for (var index = 0; index < parameterList.Length; index++)
+        {
+            switch (parameterList[index])
+            {
+                case '<':
+                    genericDepth++;
+                    break;
+                case '>':
+                    genericDepth--;
+                    break;
+                case ',' when genericDepth == 0:
+                    parameters.Add(parameterList[segmentStart..index].Trim());
+                    segmentStart = index + 1;
+                    break;
+            }
+        }
+
+        parameters.Add(parameterList[segmentStart..].Trim());
+        return parameters;
     }
 
     private static string GetMethodReturnType(string subjectId)
@@ -9017,6 +9682,774 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         out string outputCppType)
     {
         return TryResolveRuntimeSkeletonPrimitiveConvertInputCppType(outputManagedType, out outputCppType);
+    }
+
+    private static bool TryResolveRuntimeSkeletonBoxedIConvertibleCharInvalidCastShape(
+        TypedIlMethodArtifact method,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        out string inputCppType,
+        out string outputCppType,
+        out string exceptionTypeSubjectId,
+        out string sourceTypeName,
+        out string targetTypeName)
+    {
+        inputCppType = string.Empty;
+        outputCppType = string.Empty;
+        exceptionTypeSubjectId = string.Empty;
+        sourceTypeName = string.Empty;
+        targetTypeName = string.Empty;
+
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            method.Parameters.Count != 1 ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Char", StringComparison.Ordinal) ||
+            !TryResolveRuntimeSkeletonPrimitiveConvertInputCppType(method.Parameters[0].Type, out inputCppType) ||
+            !TryResolveRuntimeSkeletonPrimitiveConvertOutputCppType("System.Char", out outputCppType))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+            ValidateRuntimeSkeletonBoxedIConvertibleCharEntryShape(method, instructions);
+        }
+        catch
+        {
+            return false;
+        }
+
+        var boxedTypeSubjectId = GetRequiredOperandString(instructions[1]);
+        var declaredTargetSubjectId = GetRequiredInstructionCallee(instructions[3], method.SubjectId, 3);
+        var resolvedTargetSubjectId = TryResolveBoxedInterfaceCallTarget(
+            methodsBySubjectId.Values.ToArray(),
+            instructions,
+            1,
+            declaredTargetSubjectId);
+        if (string.IsNullOrWhiteSpace(resolvedTargetSubjectId) ||
+            !methodsBySubjectId.TryGetValue(resolvedTargetSubjectId, out var targetMethod))
+        {
+            return TryResolveRuntimeSkeletonBoxedIConvertibleCharInvalidCastFallback(
+                method,
+                boxedTypeSubjectId,
+                out exceptionTypeSubjectId,
+                out sourceTypeName,
+                out targetTypeName);
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> targetInstructions;
+        try
+        {
+            targetInstructions = GetSingleBlockInstructions(targetMethod);
+            ValidateRuntimeSkeletonBoxedIConvertibleCharInvalidCastTargetShape(targetMethod, targetInstructions);
+        }
+        catch
+        {
+            return false;
+        }
+
+        if (!string.Equals(GetDeclaringTypeSubjectId(targetMethod.SubjectId), boxedTypeSubjectId, StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        sourceTypeName = GetRequiredOperandString(targetInstructions[1]);
+        targetTypeName = GetRequiredOperandString(targetInstructions[2]);
+        if (!string.Equals(targetTypeName, "Char", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var exceptionConstructorSubjectId = GetRequiredInstructionCallee(targetInstructions[4], targetMethod.SubjectId, 4);
+        exceptionTypeSubjectId = GetDeclaringTypeSubjectId(exceptionConstructorSubjectId);
+        return string.Equals(exceptionTypeSubjectId, "System.Private.CoreLib/System.InvalidCastException", StringComparison.Ordinal);
+    }
+
+    private static bool TryResolveRuntimeSkeletonStringCharProviderShape(
+        TypedIlMethodArtifact method,
+        out string targetMethodSubjectId)
+    {
+        targetMethodSubjectId = string.Empty;
+
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Char", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+        }
+        catch
+        {
+            return false;
+        }
+
+        if (method.Parameters.Count == 1 &&
+            string.Equals(method.Parameters[0].Type, "System.String", StringComparison.Ordinal) &&
+            instructions.Count == 4 &&
+            string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) &&
+            GetRequiredOperandInt(instructions[0]) == 0 &&
+            string.Equals(instructions[1].Op, "ldnull", StringComparison.Ordinal) &&
+            string.Equals(instructions[2].Op, "call", StringComparison.Ordinal) &&
+            string.Equals(instructions[3].Op, "ret", StringComparison.Ordinal))
+        {
+            targetMethodSubjectId = GetRequiredInstructionCallee(instructions[2], method.SubjectId, 2);
+            if (!string.Equals(GetMethodReturnType(targetMethodSubjectId), "System.Char", StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            var targetParameterTypes = GetMethodParameterTypesFromSubjectId(targetMethodSubjectId);
+            return targetParameterTypes.Count == 2 &&
+                   string.Equals(targetParameterTypes[0], "System.String", StringComparison.Ordinal) &&
+                   string.Equals(targetParameterTypes[1], "System.IFormatProvider", StringComparison.Ordinal) &&
+                   (string.Equals(targetMethodSubjectId, RuntimeSkeletonConvertStringCharProviderCoreLibSubjectId, StringComparison.Ordinal) ||
+                    !string.IsNullOrWhiteSpace(targetMethodSubjectId));
+        }
+
+        if (method.Parameters.Count == 2 &&
+            string.Equals(method.Parameters[0].Type, "System.String", StringComparison.Ordinal) &&
+            string.Equals(method.Parameters[1].Type, "System.IFormatProvider", StringComparison.Ordinal) &&
+            instructions.Count == 14 &&
+            string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) &&
+            GetRequiredOperandInt(instructions[0]) == 0 &&
+            string.Equals(instructions[1].Op, "ldstr", StringComparison.Ordinal) &&
+            string.Equals(instructions[2].Op, "call", StringComparison.Ordinal) &&
+            string.Equals(instructions[3].Op, "ldarg", StringComparison.Ordinal) &&
+            GetRequiredOperandInt(instructions[3]) == 0 &&
+            string.Equals(instructions[4].Op, "callvirt", StringComparison.Ordinal) &&
+            string.Equals(instructions[5].Op, "ldc.i4", StringComparison.Ordinal) &&
+            GetRequiredOperandInt(instructions[5]) == 1 &&
+            string.Equals(instructions[6].Op, "beq", StringComparison.Ordinal) &&
+            (string.Equals(instructions[7].Op, "call", StringComparison.Ordinal) ||
+             string.Equals(instructions[7].Op, "ldstr", StringComparison.Ordinal)) &&
+            string.Equals(instructions[8].Op, "newobj", StringComparison.Ordinal) &&
+            string.Equals(instructions[9].Op, "throw", StringComparison.Ordinal) &&
+            string.Equals(instructions[10].Op, "ldarg", StringComparison.Ordinal) &&
+            GetRequiredOperandInt(instructions[10]) == 0 &&
+            string.Equals(instructions[11].Op, "ldc.i4", StringComparison.Ordinal) &&
+            GetRequiredOperandInt(instructions[11]) == 0 &&
+            string.Equals(instructions[12].Op, "callvirt", StringComparison.Ordinal) &&
+            string.Equals(instructions[13].Op, "ret", StringComparison.Ordinal))
+        {
+            RequireInstructionCallee(
+                instructions[2],
+                "System.Private.CoreLib/System.ArgumentNullException::ThrowIfNull:System.Void(System.Object,System.String)",
+                method.SubjectId,
+                2);
+            RequireInstructionCallee(
+                instructions[4],
+                "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+                method.SubjectId,
+                4);
+            if (string.Equals(instructions[7].Op, "call", StringComparison.Ordinal))
+            {
+                RequireInstructionCallee(
+                    instructions[7],
+                    "System.Private.CoreLib/System.SR::get_Format_NeedSingleChar:System.String()",
+                    method.SubjectId,
+                    7);
+            }
+            RequireInstructionCallee(
+                instructions[8],
+                "System.Private.CoreLib/System.FormatException::.ctor:System.Void(System.String)",
+                method.SubjectId,
+                8);
+            RequireInstructionCallee(
+                instructions[12],
+                "System.Private.CoreLib/System.String::get_Chars:System.Char(System.Int32)",
+                method.SubjectId,
+                12);
+            targetMethodSubjectId = method.SubjectId;
+            return true;
+        }
+
+        return false;
+    }
+
+    private static bool TryResolveRuntimeSkeletonStringProviderPassthroughShape(
+        TypedIlMethodArtifact method)
+    {
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.String", StringComparison.Ordinal) ||
+            method.Parameters.Count != 2 ||
+            !string.Equals(method.Parameters[0].Type, "System.String", StringComparison.Ordinal) ||
+            !string.Equals(method.Parameters[1].Type, "System.IFormatProvider", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+        }
+        catch
+        {
+            return false;
+        }
+
+        return instructions.Count == 2 &&
+               string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) &&
+               GetRequiredOperandInt(instructions[0]) == 0 &&
+               string.Equals(instructions[1].Op, "ret", StringComparison.Ordinal) &&
+               (string.Equals(method.SubjectId, RuntimeSkeletonConvertStringProviderPassthroughCoreLibSubjectId, StringComparison.Ordinal) ||
+                !string.IsNullOrWhiteSpace(method.SubjectId));
+    }
+
+    private static bool TryResolveRuntimeSkeletonObjectCharProviderShape(
+        TypedIlMethodArtifact method,
+        out string targetMethodSubjectId)
+    {
+        targetMethodSubjectId = string.Empty;
+
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Char", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+        }
+        catch
+        {
+            return false;
+        }
+
+        if (method.Parameters.Count == 1 &&
+            string.Equals(method.Parameters[0].Type, "System.Object", StringComparison.Ordinal))
+        {
+            if (instructions.Count == 4 &&
+                string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) &&
+                GetRequiredOperandInt(instructions[0]) == 0 &&
+                string.Equals(instructions[1].Op, "ldnull", StringComparison.Ordinal) &&
+                string.Equals(instructions[2].Op, "call", StringComparison.Ordinal) &&
+                string.Equals(instructions[3].Op, "ret", StringComparison.Ordinal))
+            {
+                targetMethodSubjectId = GetRequiredInstructionCallee(instructions[2], method.SubjectId, 2);
+                var targetParameterTypes = GetMethodParameterTypesFromSubjectId(targetMethodSubjectId);
+                return string.Equals(GetMethodReturnType(targetMethodSubjectId), "System.Char", StringComparison.Ordinal) &&
+                       targetParameterTypes.Count == 2 &&
+                       string.Equals(targetParameterTypes[0], "System.Object", StringComparison.Ordinal) &&
+                       string.Equals(targetParameterTypes[1], "System.IFormatProvider", StringComparison.Ordinal);
+            }
+
+            if (instructions.Count == 9 &&
+                string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) &&
+                GetRequiredOperandInt(instructions[0]) == 0 &&
+                string.Equals(instructions[1].Op, "brfalse", StringComparison.Ordinal) &&
+                string.Equals(instructions[2].Op, "ldarg", StringComparison.Ordinal) &&
+                GetRequiredOperandInt(instructions[2]) == 0 &&
+                string.Equals(instructions[3].Op, "castclass", StringComparison.Ordinal) &&
+                string.Equals(instructions[4].Op, "ldnull", StringComparison.Ordinal) &&
+                string.Equals(instructions[5].Op, "callvirt", StringComparison.Ordinal) &&
+                string.Equals(instructions[6].Op, "ret", StringComparison.Ordinal) &&
+                string.Equals(instructions[7].Op, "ldc.i4", StringComparison.Ordinal) &&
+                GetRequiredOperandInt(instructions[7]) == 0 &&
+                string.Equals(instructions[8].Op, "ret", StringComparison.Ordinal))
+            {
+                targetMethodSubjectId = GetRequiredInstructionCallee(instructions[5], method.SubjectId, 5);
+                var targetParameterTypes = GetMethodParameterTypesFromSubjectId(targetMethodSubjectId);
+                return string.Equals(GetMethodReturnType(targetMethodSubjectId), "System.Char", StringComparison.Ordinal) &&
+                       targetParameterTypes.Count == 1 &&
+                       string.Equals(targetParameterTypes[0], "System.IFormatProvider", StringComparison.Ordinal);
+            }
+
+            if (instructions.Count == 9 &&
+                string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) &&
+                GetRequiredOperandInt(instructions[0]) == 0 &&
+                string.Equals(instructions[1].Op, "brtrue", StringComparison.Ordinal) &&
+                string.Equals(instructions[2].Op, "ldc.i4", StringComparison.Ordinal) &&
+                GetRequiredOperandInt(instructions[2]) == 0 &&
+                string.Equals(instructions[3].Op, "ret", StringComparison.Ordinal) &&
+                string.Equals(instructions[4].Op, "ldarg", StringComparison.Ordinal) &&
+                GetRequiredOperandInt(instructions[4]) == 0 &&
+                string.Equals(instructions[5].Op, "castclass", StringComparison.Ordinal) &&
+                string.Equals(instructions[6].Op, "ldnull", StringComparison.Ordinal) &&
+                string.Equals(instructions[7].Op, "callvirt", StringComparison.Ordinal) &&
+                string.Equals(instructions[8].Op, "ret", StringComparison.Ordinal))
+            {
+                targetMethodSubjectId = GetRequiredInstructionCallee(instructions[7], method.SubjectId, 7);
+                var targetParameterTypes = GetMethodParameterTypesFromSubjectId(targetMethodSubjectId);
+                return string.Equals(GetMethodReturnType(targetMethodSubjectId), "System.Char", StringComparison.Ordinal) &&
+                       targetParameterTypes.Count == 1 &&
+                       string.Equals(targetParameterTypes[0], "System.IFormatProvider", StringComparison.Ordinal);
+            }
+        }
+
+        if (method.Parameters.Count == 2 &&
+            string.Equals(method.Parameters[0].Type, "System.Object", StringComparison.Ordinal) &&
+            string.Equals(method.Parameters[1].Type, "System.IFormatProvider", StringComparison.Ordinal) &&
+            instructions.Count == 9 &&
+            string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) &&
+            GetRequiredOperandInt(instructions[0]) == 0)
+        {
+            if (string.Equals(instructions[1].Op, "brfalse", StringComparison.Ordinal) &&
+                string.Equals(instructions[2].Op, "ldarg", StringComparison.Ordinal) &&
+                GetRequiredOperandInt(instructions[2]) == 0 &&
+                string.Equals(instructions[3].Op, "castclass", StringComparison.Ordinal) &&
+                string.Equals(instructions[4].Op, "ldarg", StringComparison.Ordinal) &&
+                GetRequiredOperandInt(instructions[4]) == 1 &&
+                string.Equals(instructions[5].Op, "callvirt", StringComparison.Ordinal) &&
+                string.Equals(instructions[6].Op, "ret", StringComparison.Ordinal) &&
+                string.Equals(instructions[7].Op, "ldc.i4", StringComparison.Ordinal) &&
+                GetRequiredOperandInt(instructions[7]) == 0 &&
+                string.Equals(instructions[8].Op, "ret", StringComparison.Ordinal))
+            {
+                targetMethodSubjectId = GetRequiredInstructionCallee(instructions[5], method.SubjectId, 5);
+                var targetParameterTypes = GetMethodParameterTypesFromSubjectId(targetMethodSubjectId);
+                return string.Equals(GetMethodReturnType(targetMethodSubjectId), "System.Char", StringComparison.Ordinal) &&
+                       targetParameterTypes.Count == 1 &&
+                       string.Equals(targetParameterTypes[0], "System.IFormatProvider", StringComparison.Ordinal);
+            }
+
+            if (string.Equals(instructions[1].Op, "brtrue", StringComparison.Ordinal) &&
+                string.Equals(instructions[2].Op, "ldc.i4", StringComparison.Ordinal) &&
+                GetRequiredOperandInt(instructions[2]) == 0 &&
+                string.Equals(instructions[3].Op, "ret", StringComparison.Ordinal) &&
+                string.Equals(instructions[4].Op, "ldarg", StringComparison.Ordinal) &&
+                GetRequiredOperandInt(instructions[4]) == 0 &&
+                string.Equals(instructions[5].Op, "castclass", StringComparison.Ordinal) &&
+                string.Equals(instructions[6].Op, "ldarg", StringComparison.Ordinal) &&
+                GetRequiredOperandInt(instructions[6]) == 1 &&
+                string.Equals(instructions[7].Op, "callvirt", StringComparison.Ordinal) &&
+                string.Equals(instructions[8].Op, "ret", StringComparison.Ordinal))
+            {
+                targetMethodSubjectId = GetRequiredInstructionCallee(instructions[7], method.SubjectId, 7);
+                var targetParameterTypes = GetMethodParameterTypesFromSubjectId(targetMethodSubjectId);
+                return string.Equals(GetMethodReturnType(targetMethodSubjectId), "System.Char", StringComparison.Ordinal) &&
+                       targetParameterTypes.Count == 1 &&
+                       string.Equals(targetParameterTypes[0], "System.IFormatProvider", StringComparison.Ordinal);
+            }
+        }
+
+        return false;
+    }
+
+    private static bool TryResolveRuntimeSkeletonBoxedValueTypeStringInstanceCallShape(
+        TypedIlMethodArtifact method,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        out string inputCppType,
+        out string boxedValueTypeSubjectId,
+        out string targetMethodSubjectId,
+        out string targetAssemblyName,
+        out int inputSize,
+        out int argCount)
+    {
+        inputCppType = string.Empty;
+        boxedValueTypeSubjectId = string.Empty;
+        targetMethodSubjectId = string.Empty;
+        targetAssemblyName = string.Empty;
+        inputSize = 0;
+        argCount = 0;
+
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.String", StringComparison.Ordinal) ||
+            method.Parameters.Count < 1 ||
+            method.Parameters.Count > 2 ||
+            !TryResolveRuntimeSkeletonValueTypeByValueInputCppType(method.Parameters[0].Type, out inputCppType, out inputSize))
+        {
+            return false;
+        }
+
+        if (method.Parameters.Count == 2 &&
+            !string.Equals(method.Parameters[1].Type, "System.IFormatProvider", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+        }
+        catch
+        {
+            return false;
+        }
+
+        if (method.Parameters.Count == 1)
+        {
+            if (instructions.Count != 3 ||
+                !string.Equals(instructions[0].Op, "ldarga", StringComparison.Ordinal) ||
+                GetRequiredOperandInt(instructions[0]) != 0 ||
+                !string.Equals(instructions[1].Op, "call", StringComparison.Ordinal) ||
+                !string.Equals(instructions[2].Op, "ret", StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            argCount = 0;
+        }
+        else
+        {
+            if (instructions.Count != 4 ||
+                !string.Equals(instructions[0].Op, "ldarga", StringComparison.Ordinal) ||
+                GetRequiredOperandInt(instructions[0]) != 0 ||
+                !string.Equals(instructions[1].Op, "ldarg", StringComparison.Ordinal) ||
+                GetRequiredOperandInt(instructions[1]) != 1 ||
+                !string.Equals(instructions[2].Op, "call", StringComparison.Ordinal) ||
+                !string.Equals(instructions[3].Op, "ret", StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            argCount = 1;
+        }
+
+        boxedValueTypeSubjectId = $"System.Private.CoreLib/{method.Parameters[0].Type}";
+        targetMethodSubjectId = GetRequiredInstructionCallee(
+            instructions[argCount == 0 ? 1 : 2],
+            method.SubjectId,
+            argCount == 0 ? 1 : 2);
+        targetAssemblyName = GetAssemblyNameFromSubjectId(targetMethodSubjectId);
+
+        if (!string.Equals(GetMethodReturnType(targetMethodSubjectId), "System.String", StringComparison.Ordinal) ||
+            !string.Equals(GetDeclaringTypeSubjectId(targetMethodSubjectId), boxedValueTypeSubjectId, StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var targetParameterTypes = GetMethodParameterTypesFromSubjectId(targetMethodSubjectId);
+        if (argCount == 0)
+        {
+            if (targetParameterTypes.Count != 0)
+            {
+                return false;
+            }
+        }
+        else if (targetParameterTypes.Count != 1 ||
+                 !string.Equals(targetParameterTypes[0], "System.IFormatProvider", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        if (methodsBySubjectId.TryGetValue(targetMethodSubjectId, out var targetMethod))
+        {
+            return string.Equals(targetMethod.MethodRole, "instance-method", StringComparison.Ordinal) &&
+                   string.Equals(targetMethod.BodyAvailability, "has-canonical-body", StringComparison.Ordinal);
+        }
+
+        return true;
+    }
+
+    private static bool TryResolveRuntimeSkeletonBoxedIConvertibleCharInvalidCastFallback(
+        TypedIlMethodArtifact method,
+        string boxedTypeSubjectId,
+        out string exceptionTypeSubjectId,
+        out string sourceTypeName,
+        out string targetTypeName)
+    {
+        exceptionTypeSubjectId = string.Empty;
+        sourceTypeName = string.Empty;
+        targetTypeName = string.Empty;
+
+        if (!TryResolveRuntimeSkeletonBoxedIConvertibleCharFallbackSourceTypeName(
+                method.Parameters[0].Type,
+                boxedTypeSubjectId,
+                out sourceTypeName))
+        {
+            return false;
+        }
+
+        exceptionTypeSubjectId = "System.Private.CoreLib/System.InvalidCastException";
+        targetTypeName = "Char";
+        return true;
+    }
+
+    private static bool TryResolveRuntimeSkeletonBoxedIConvertibleCharFallbackSourceTypeName(
+        string methodParameterType,
+        string boxedTypeSubjectId,
+        out string sourceTypeName)
+    {
+        sourceTypeName = string.Empty;
+        if (!string.Equals(methodParameterType, "System.Boolean", StringComparison.Ordinal) &&
+            !string.Equals(methodParameterType, "System.Single", StringComparison.Ordinal) &&
+            !string.Equals(methodParameterType, "System.Double", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var expectedBoxedTypeSubjectId = $"System.Private.CoreLib/{methodParameterType}";
+        if (!string.Equals(boxedTypeSubjectId, expectedBoxedTypeSubjectId, StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        sourceTypeName = GetTypeDisplayName(methodParameterType);
+        return true;
+    }
+
+    private static bool TryResolveRuntimeSkeletonBoxedValueTypeCharInvalidCastShape(
+        TypedIlMethodArtifact method,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        out string inputCppType,
+        out string outputCppType,
+        out string boxedValueTypeSubjectId,
+        out string exceptionTypeSubjectId,
+        out string sourceTypeName,
+        out string targetTypeName,
+        out int inputSize)
+    {
+        inputCppType = string.Empty;
+        outputCppType = string.Empty;
+        boxedValueTypeSubjectId = string.Empty;
+        exceptionTypeSubjectId = string.Empty;
+        sourceTypeName = string.Empty;
+        targetTypeName = string.Empty;
+        inputSize = 0;
+
+        if (!string.Equals(method.MethodRole, "static-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            method.Parameters.Count != 1 ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Char", StringComparison.Ordinal) ||
+            !TryResolveRuntimeSkeletonValueTypeByValueInputCppType(method.Parameters[0].Type, out inputCppType, out inputSize) ||
+            !TryResolveRuntimeSkeletonPrimitiveConvertOutputCppType("System.Char", out outputCppType))
+        {
+            return false;
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> instructions;
+        try
+        {
+            instructions = GetSingleBlockInstructions(method);
+        }
+        catch
+        {
+            return false;
+        }
+
+        if (instructions.Count != 5 ||
+            !string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) ||
+            GetRequiredOperandInt(instructions[0]) != 0 ||
+            !string.Equals(instructions[1].Op, "box", StringComparison.Ordinal) ||
+            !string.Equals(instructions[2].Op, "ldnull", StringComparison.Ordinal) ||
+            !string.Equals(instructions[3].Op, "callvirt", StringComparison.Ordinal) ||
+            !string.Equals(instructions[4].Op, "ret", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        boxedValueTypeSubjectId = GetRequiredOperandString(instructions[1]);
+        var declaredTargetSubjectId = GetRequiredInstructionCallee(instructions[3], method.SubjectId, 3);
+        var resolvedTargetSubjectId = TryResolveBoxedInterfaceCallTarget(
+            methodsBySubjectId.Values.ToArray(),
+            instructions,
+            1,
+            declaredTargetSubjectId);
+        if (string.IsNullOrWhiteSpace(resolvedTargetSubjectId) ||
+            !methodsBySubjectId.TryGetValue(resolvedTargetSubjectId, out var targetMethod))
+        {
+            return TryResolveRuntimeSkeletonBoxedValueTypeCharInvalidCastFallback(
+                method,
+                boxedValueTypeSubjectId,
+                out exceptionTypeSubjectId,
+                out sourceTypeName,
+                out targetTypeName);
+        }
+
+        IReadOnlyList<TypedIlInstructionArtifact> targetInstructions;
+        try
+        {
+            targetInstructions = GetSingleBlockInstructions(targetMethod);
+        }
+        catch
+        {
+            return false;
+        }
+
+        return TryResolveRuntimeSkeletonBoxedValueTypeCharInvalidCastTargetShape(
+            targetMethod,
+            targetInstructions,
+            out exceptionTypeSubjectId,
+            out sourceTypeName,
+            out targetTypeName);
+    }
+
+    private static bool TryResolveRuntimeSkeletonBoxedValueTypeCharInvalidCastFallback(
+        TypedIlMethodArtifact method,
+        string boxedValueTypeSubjectId,
+        out string exceptionTypeSubjectId,
+        out string sourceTypeName,
+        out string targetTypeName)
+    {
+        exceptionTypeSubjectId = string.Empty;
+        sourceTypeName = string.Empty;
+        targetTypeName = string.Empty;
+
+        if (!TryResolveRuntimeSkeletonBoxedValueTypeCharFallbackSourceTypeName(
+                method.Parameters[0].Type,
+                boxedValueTypeSubjectId,
+                out sourceTypeName))
+        {
+            return false;
+        }
+
+        exceptionTypeSubjectId = "System.Private.CoreLib/System.InvalidCastException";
+        targetTypeName = "Char";
+        return true;
+    }
+
+    private static bool TryResolveRuntimeSkeletonBoxedValueTypeCharFallbackSourceTypeName(
+        string methodParameterType,
+        string boxedValueTypeSubjectId,
+        out string sourceTypeName)
+    {
+        sourceTypeName = string.Empty;
+        if (!string.Equals(methodParameterType, "System.Decimal", StringComparison.Ordinal) &&
+            !string.Equals(methodParameterType, "System.DateTime", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var expectedBoxedTypeSubjectId = $"System.Private.CoreLib/{methodParameterType}";
+        if (!string.Equals(boxedValueTypeSubjectId, expectedBoxedTypeSubjectId, StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        sourceTypeName = GetTypeDisplayName(methodParameterType);
+        return true;
+    }
+
+    private static bool TryResolveRuntimeSkeletonBoxedValueTypeCharInvalidCastTargetShape(
+        TypedIlMethodArtifact method,
+        IReadOnlyList<TypedIlInstructionArtifact> instructions,
+        out string exceptionTypeSubjectId,
+        out string sourceTypeName,
+        out string targetTypeName)
+    {
+        exceptionTypeSubjectId = string.Empty;
+        sourceTypeName = string.Empty;
+        targetTypeName = string.Empty;
+
+        if (!string.Equals(method.MethodRole, "instance-method", StringComparison.Ordinal) ||
+            !string.Equals(method.BodyAvailability, "has-canonical-body", StringComparison.Ordinal) ||
+            !string.Equals(GetMethodReturnType(method.SubjectId), "System.Char", StringComparison.Ordinal) ||
+            method.Parameters.Count != 1 ||
+            !string.Equals(method.Parameters[0].Type, "System.IFormatProvider", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        if (instructions.Count == 6 &&
+            string.Equals(instructions[0].Op, "call", StringComparison.Ordinal) &&
+            string.Equals(instructions[1].Op, "ldstr", StringComparison.Ordinal) &&
+            string.Equals(instructions[2].Op, "ldstr", StringComparison.Ordinal) &&
+            string.Equals(instructions[3].Op, "call", StringComparison.Ordinal) &&
+            string.Equals(instructions[4].Op, "newobj", StringComparison.Ordinal) &&
+            string.Equals(instructions[5].Op, "throw", StringComparison.Ordinal))
+        {
+            sourceTypeName = GetRequiredOperandString(instructions[1]);
+            targetTypeName = GetRequiredOperandString(instructions[2]);
+            var exceptionConstructorSubjectId = GetRequiredInstructionCallee(instructions[4], method.SubjectId, 4);
+            exceptionTypeSubjectId = GetDeclaringTypeSubjectId(exceptionConstructorSubjectId);
+            return string.Equals(exceptionTypeSubjectId, "System.Private.CoreLib/System.InvalidCastException", StringComparison.Ordinal) &&
+                   string.Equals(targetTypeName, "Char", StringComparison.Ordinal);
+        }
+
+        if (instructions.Count == 3 &&
+            string.Equals(instructions[0].Op, "ldstr", StringComparison.Ordinal) &&
+            string.Equals(instructions[1].Op, "call", StringComparison.Ordinal) &&
+            string.Equals(instructions[2].Op, "throw", StringComparison.Ordinal))
+        {
+            targetTypeName = GetRequiredOperandString(instructions[0]);
+            sourceTypeName = GetTypeDisplayName(GetDeclaringTypeSubjectId(method.SubjectId));
+            exceptionTypeSubjectId = "System.Private.CoreLib/System.InvalidCastException";
+            return string.Equals(
+                       GetRequiredInstructionCallee(instructions[1], method.SubjectId, 1),
+                       "System.Private.CoreLib/System.DateTime::InvalidCast:System.InvalidCastException(System.String)",
+                       StringComparison.Ordinal) &&
+                   string.Equals(targetTypeName, "Char", StringComparison.Ordinal);
+        }
+
+        return false;
+    }
+
+    private static bool TryResolveRuntimeSkeletonValueTypeByValueInputCppType(
+        string inputManagedType,
+        out string inputCppType,
+        out int inputSize)
+    {
+        inputCppType = string.Empty;
+        inputSize = 0;
+        switch (inputManagedType)
+        {
+            case "System.Boolean":
+                inputCppType = "bool";
+                inputSize = 1;
+                return true;
+            case "System.Byte":
+                inputCppType = "std::uint8_t";
+                inputSize = 1;
+                return true;
+            case "System.SByte":
+                inputCppType = "std::int8_t";
+                inputSize = 1;
+                return true;
+            case "System.Int16":
+                inputCppType = "std::int16_t";
+                inputSize = 2;
+                return true;
+            case "System.UInt16":
+            case "System.Char":
+                inputCppType = "std::uint16_t";
+                inputSize = 2;
+                return true;
+            case "System.Int32":
+                inputCppType = "std::int32_t";
+                inputSize = 4;
+                return true;
+            case "System.UInt32":
+                inputCppType = "std::uint32_t";
+                inputSize = 4;
+                return true;
+            case "System.Int64":
+                inputCppType = "std::int64_t";
+                inputSize = 8;
+                return true;
+            case "System.UInt64":
+                inputCppType = "std::uint64_t";
+                inputSize = 8;
+                return true;
+            case "System.Single":
+                inputCppType = "float";
+                inputSize = 4;
+                return true;
+            case "System.Double":
+                inputCppType = "double";
+                inputSize = 8;
+                return true;
+            case "System.Decimal":
+                inputCppType = "struct { std::uint32_t flags; std::uint64_t lo64; std::uint32_t hi32; }";
+                inputSize = 16;
+                return true;
+            case "System.DateTime":
+                inputCppType = "std::uint64_t";
+                inputSize = 8;
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private static string GetTypeDisplayName(string managedTypeOrSubjectId)
+    {
+        var separatorIndex = managedTypeOrSubjectId.LastIndexOfAny(['/', '.']);
+        return separatorIndex >= 0 && separatorIndex < managedTypeOrSubjectId.Length - 1
+            ? managedTypeOrSubjectId[(separatorIndex + 1)..]
+            : managedTypeOrSubjectId;
     }
 
     private static bool IsRuntimeSkeletonDirectPrimitiveValuePreservingReturn(
@@ -10057,6 +11490,140 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         }
 
         return typeTokenPrefix | rowIndex;
+    }
+
+    private static IReadOnlyDictionary<string, string> BuildAssemblyPathsByName(ManagedClosureManifestArtifact closureManifest)
+    {
+        var pathsByAssemblyName = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var resolvedAssembly in closureManifest.ResolvedAssemblies ?? [])
+        {
+            if (!string.IsNullOrWhiteSpace(resolvedAssembly.AssemblyName) &&
+                !string.IsNullOrWhiteSpace(resolvedAssembly.Path))
+            {
+                pathsByAssemblyName[resolvedAssembly.AssemblyName] = Path.GetFullPath(resolvedAssembly.Path);
+            }
+        }
+
+        if (pathsByAssemblyName.Count > 0)
+        {
+            return pathsByAssemblyName;
+        }
+
+        pathsByAssemblyName[closureManifest.AssemblyName] = Path.GetFullPath(closureManifest.InputAssemblyPath);
+
+        foreach (var additionalAssemblyPath in closureManifest.AdditionalAssemblyPaths ?? [])
+        {
+            var normalizedPath = Path.GetFullPath(additionalAssemblyPath);
+            var assemblyName = Path.GetFileNameWithoutExtension(normalizedPath);
+            if (!string.IsNullOrWhiteSpace(assemblyName))
+            {
+                pathsByAssemblyName[assemblyName] = normalizedPath;
+            }
+        }
+
+        return pathsByAssemblyName;
+    }
+
+    private static bool TryCreateAssemblyMetadataCache(
+        string assemblyName,
+        string assemblyPath,
+        out AssemblyMetadataCache cache)
+    {
+        cache = null!;
+        var stream = File.OpenRead(assemblyPath);
+        var peReader = new PEReader(stream);
+        if (!peReader.HasMetadata)
+        {
+            peReader.Dispose();
+            stream.Dispose();
+            return false;
+        }
+
+        var metadataReader = peReader.GetMetadataReader();
+        var typeDefinitionHandlesBySubjectId = new Dictionary<string, TypeDefinitionHandle>(StringComparer.Ordinal);
+        foreach (var typeHandle in metadataReader.TypeDefinitions)
+        {
+            if (!TryResolveTypeDefinitionIdentity(metadataReader, assemblyName, typeHandle, out var typeIdentity))
+            {
+                continue;
+            }
+
+            typeDefinitionHandlesBySubjectId[typeIdentity.SubjectId] = typeHandle;
+        }
+
+        cache = new AssemblyMetadataCache(
+            assemblyName,
+            stream,
+            peReader,
+            metadataReader,
+            typeDefinitionHandlesBySubjectId);
+        return true;
+    }
+
+    private static bool TryResolveTypeDefinitionIdentity(
+        MetadataReader metadataReader,
+        string currentAssemblyName,
+        TypeDefinitionHandle handle,
+        out MetadataTypeIdentity typeIdentity)
+    {
+        typeIdentity = default!;
+        var typeDefinition = metadataReader.GetTypeDefinition(handle);
+        var namespaceName = metadataReader.GetString(typeDefinition.Namespace);
+        var typeName = metadataReader.GetString(typeDefinition.Name);
+        var declaringTypeHandle = typeDefinition.GetDeclaringType();
+        if (!declaringTypeHandle.IsNil &&
+            TryResolveTypeDefinitionIdentity(metadataReader, currentAssemblyName, declaringTypeHandle, out var declaringTypeIdentity))
+        {
+            var nestedTypeName = $"{declaringTypeIdentity.TypeName}+{typeName}";
+            var nestedDisplayName = string.IsNullOrEmpty(namespaceName)
+                ? nestedTypeName
+                : $"{namespaceName}.{nestedTypeName}";
+            typeIdentity = new MetadataTypeIdentity(
+                currentAssemblyName,
+                namespaceName,
+                nestedTypeName,
+                nestedDisplayName,
+                $"{currentAssemblyName}/{nestedDisplayName}");
+            return true;
+        }
+
+        var displayName = string.IsNullOrEmpty(namespaceName)
+            ? typeName
+            : $"{namespaceName}.{typeName}";
+        typeIdentity = new MetadataTypeIdentity(
+            currentAssemblyName,
+            namespaceName,
+            typeName,
+            displayName,
+            $"{currentAssemblyName}/{displayName}");
+        return true;
+    }
+
+    private static int GetMethodParameterCount(MetadataReader metadataReader, MethodDefinition methodDefinition)
+    {
+        return methodDefinition.GetParameters()
+            .Select(parameterHandle => metadataReader.GetParameter(parameterHandle))
+            .Count(parameter => parameter.SequenceNumber > 0);
+    }
+
+    private static string GetMetadataMethodName(string methodSubjectId)
+    {
+        var methodName = GetMethodName(methodSubjectId);
+        var genericArgumentIndex = methodName.IndexOf('<');
+        return genericArgumentIndex >= 0
+            ? methodName[..genericArgumentIndex]
+            : methodName;
+    }
+
+    private static string GetAssemblyNameFromSubjectId(string subjectId)
+    {
+        var separatorIndex = subjectId.IndexOf('/');
+        if (separatorIndex <= 0)
+        {
+            throw new InvalidOperationException($"failed to extract assembly name from subject id '{subjectId}'");
+        }
+
+        return subjectId[..separatorIndex];
     }
 
     private static bool TryGetMetadataTokenPrefix(string registrationKind, out uint tokenPrefix)

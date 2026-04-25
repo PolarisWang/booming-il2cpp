@@ -745,6 +745,228 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
         ]:
             self.assertIn(required_fragment, template_source)
 
+    def test_runtime_skeleton_static_boxed_iconvertible_char_invalid_cast_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.StaticBoxedIConvertibleCharInvalidCastStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticBoxedIConvertibleCharInvalidCastStub",
+            "TryResolveRuntimeSkeletonBoxedIConvertibleCharInvalidCastShape",
+            "GetRuntimeSkeletonStaticBoxedIConvertibleCharInvalidCastStubTemplate",
+            "System.IConvertible::ToChar:System.Char(System.IFormatProvider)",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn(
+            "RuntimeSkeletonStaticBoxedIConvertibleCharInvalidCastStubTemplateRelativePath",
+            catalog_source,
+        )
+
+        for required_fragment in [
+            "input_cpp_type",
+            "output_cpp_type",
+            "exception_type_token",
+            "source_type_name_literal",
+            "target_type_name_literal",
+            "string_new_utf8",
+            "raise_managed_exception",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_static_string_char_provider_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.StaticStringCharProviderStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticStringCharProviderStub",
+            "TryResolveRuntimeSkeletonStringCharProviderShape",
+            "GetRuntimeSkeletonStaticStringCharProviderStubTemplate",
+            "System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn(
+            "RuntimeSkeletonStaticStringCharProviderStubTemplateRelativePath",
+            catalog_source,
+        )
+
+        for required_fragment in [
+            "void* arg0",
+            "void* arg1",
+            "target_method_token",
+            "method_invoke",
+            "std::uint16_t return_value",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_static_object_char_provider_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.StaticObjectCharProviderStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticObjectCharProviderStub",
+            "TryResolveRuntimeSkeletonObjectCharProviderShape",
+            "GetRuntimeSkeletonStaticObjectCharProviderStubTemplate",
+            "System.IConvertible::ToChar:System.Char(System.IFormatProvider)",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        self.assertIn(
+            "RuntimeSkeletonStaticObjectCharProviderStubTemplateRelativePath",
+            catalog_source,
+        )
+
+        for required_fragment in [
+            "void* arg0",
+            "void* arg1",
+            "target_method_token",
+            "method_invoke",
+            "request->arg0 == nullptr",
+            "std::uint16_t return_value",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_convert_to_string_helpers_have_templates(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        passthrough_template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.StaticStringProviderPassthroughStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+        value_type_template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.StaticBoxedValueTypeStringInstanceCallStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonConvertStringProviderPassthroughHandler",
+            "TryBuildAssemblyBoundStaticStringProviderPassthroughStub",
+            "TryResolveRuntimeSkeletonStringProviderPassthroughShape",
+            "TryBuildRuntimeSkeletonConvertBoxedValueTypeStringInstanceCallHandler",
+            "TryBuildAssemblyBoundStaticBoxedValueTypeStringInstanceCallStub",
+            "TryResolveRuntimeSkeletonBoxedValueTypeStringInstanceCallShape",
+            "GetRuntimeSkeletonStaticStringProviderPassthroughStubTemplate",
+            "GetRuntimeSkeletonStaticBoxedValueTypeStringInstanceCallStubTemplate",
+            "System.Convert::ToString:System.String(System.String,System.IFormatProvider)",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source)
+
+        for required_fragment in [
+            "RuntimeSkeletonStaticStringProviderPassthroughStubTemplateRelativePath",
+            "RuntimeSkeletonStaticBoxedValueTypeStringInstanceCallStubTemplateRelativePath",
+        ]:
+            self.assertIn(required_fragment, catalog_source)
+
+        for required_fragment in [
+            "void* arg0",
+            "void* arg1",
+            "void** return_value",
+            "*request->return_value = request->arg0",
+        ]:
+            self.assertIn(required_fragment, passthrough_template_source)
+
+        for required_fragment in [
+            "{{ input_cpp_type }} value;",
+            "void* arg1",
+            "void** return_value",
+            "bridge->box_value",
+            "target_method_token",
+            "method_invoke",
+        ]:
+            self.assertIn(required_fragment, value_type_template_source)
+
+    def test_runtime_skeleton_static_boxed_value_type_char_invalid_cast_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.StaticBoxedValueTypeCharInvalidCastStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildAssemblyBoundStaticBoxedValueTypeCharInvalidCastStub",
+            "TryResolveRuntimeSkeletonBoxedValueTypeCharInvalidCastShape",
+            "GetRuntimeSkeletonStaticBoxedValueTypeCharInvalidCastStubTemplate",
+            "bridge->box_value",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source if required_fragment != "bridge->box_value" else template_source)
+
+        self.assertIn("RuntimeSkeletonStaticBoxedValueTypeCharInvalidCastStubTemplateRelativePath", catalog_source)
+        self.assertIn("{{ boxed_value_type_token }}", template_source)
+        self.assertIn("{{ input_size }}u", template_source)
+        self.assertIn("raise_managed_exception", template_source)
+
     def test_runtime_skeleton_static_exception_catch_string_return_helper_has_template(self) -> None:
         native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         catalog_source = (

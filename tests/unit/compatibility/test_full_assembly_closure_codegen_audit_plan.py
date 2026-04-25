@@ -741,6 +741,7 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
                 ],
                 cwd=REPO_ROOT,
             )
+
             run_checked(
                 [
                     "dotnet",
@@ -799,6 +800,714 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
             )
             self.assertIn('"Overflow_Char"', generated_page)
             self.assertIn("return NativeReferenceStub_Page0001_Item", generated_page)
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
+
+    def test_emit_native_reference_supports_boxed_iconvertible_char_invalid_cast_runtime_skeleton_methods(self) -> None:
+        fixture_root = TEST_OUTPUT_ROOT / f"FixtureBoxedIConvertibleCharLibrary-{uuid.uuid4().hex}"
+        project_root = fixture_root / "FixtureBoxedIConvertibleCharLibrary"
+        project_path = project_root / "FixtureBoxedIConvertibleCharLibrary.csproj"
+        source_path = project_root / "FloatingCharOps.cs"
+        dll_path = project_root / "bin" / "Release" / "net8.0" / "FixtureBoxedIConvertibleCharLibrary.dll"
+        closure_root = fixture_root / "closure"
+        emit_root = fixture_root / "emit-native-reference"
+
+        try:
+            project_root.mkdir(parents=True, exist_ok=False)
+            project_path.write_text(
+                (
+                    '<Project Sdk="Microsoft.NET.Sdk">\n'
+                    "  <PropertyGroup>\n"
+                    "    <TargetFramework>net8.0</TargetFramework>\n"
+                    "    <ImplicitUsings>disable</ImplicitUsings>\n"
+                    "    <Nullable>disable</Nullable>\n"
+                    "  </PropertyGroup>\n"
+                    "</Project>\n"
+                ),
+                encoding="utf-8",
+            )
+            source_path.write_text(
+                (
+                    "using System;\n\n"
+                    "namespace FixtureBoxedIConvertibleCharLibrary;\n\n"
+                    "public static class FloatingCharOps\n"
+                    "{\n"
+                    "    public static char ToChar(bool value)\n"
+                    "    {\n"
+                    "        return ((IConvertible)value).ToChar(null);\n"
+                    "    }\n\n"
+                    "    public static char ToChar(float value)\n"
+                    "    {\n"
+                    "        return ((IConvertible)value).ToChar(null);\n"
+                    "    }\n\n"
+                    "    public static char ToChar(double value)\n"
+                    "    {\n"
+                    "        return ((IConvertible)value).ToChar(null);\n"
+                    "    }\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            tooling_module = load_module(
+                TOOLING_MODULE_PATH,
+                f"chaos_boxed_iconvertible_char_codegen_audit_{uuid.uuid4().hex}",
+            )
+            driver_intermediate_root = tooling_module.allocate_dotnet_intermediate_dir(
+                "Chaos.IL2CPP.Driver",
+                host_platform="windows",
+            )
+            self.assertIsNotNone(driver_intermediate_root)
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(project_path),
+                    "-c",
+                    "Release",
+                ],
+                cwd=REPO_ROOT,
+            )
+            self.assertTrue(dll_path.is_file(), msg=f"missing boxed iconvertible char library dll: {dll_path}")
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(DRIVER_PROJECT_PATH),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    f"-p:ChaosTempIntermediateRoot={Path(driver_intermediate_root).as_posix()}/",
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    str(dll_path),
+                    str(closure_root),
+                    "--full-assembly-closure",
+                ],
+                cwd=REPO_ROOT,
+            )
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    "emit-native-reference",
+                    str(closure_root),
+                    str(emit_root),
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            generated_page = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.page-0001.cpp"
+            ).read_text(encoding="utf-8").replace("\r\n", "\n")
+            coverage_report = load_json(
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.coverage.json"
+            )
+
+            for required_subject_id in [
+                "FixtureBoxedIConvertibleCharLibrary/FloatingCharOps::ToChar:System.Char(System.Boolean)",
+                "FixtureBoxedIConvertibleCharLibrary/FloatingCharOps::ToChar:System.Char(System.Single)",
+                "FixtureBoxedIConvertibleCharLibrary/FloatingCharOps::ToChar:System.Char(System.Double)",
+            ]:
+                self.assertNotIn(required_subject_id, coverage_report["uncoveredMethodSubjectIds"])
+
+            self.assertIn("bool value;", generated_page)
+            self.assertIn("float value;", generated_page)
+            self.assertIn("double value;", generated_page)
+            self.assertIn("std::uint16_t* return_value;", generated_page)
+            self.assertIn('"Boolean"', generated_page)
+            self.assertIn('"Single"', generated_page)
+            self.assertIn('"Double"', generated_page)
+            self.assertIn('"Char"', generated_page)
+            self.assertIn("raise_managed_exception", generated_page)
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
+
+    def test_emit_native_reference_supports_string_to_char_runtime_skeleton_methods(self) -> None:
+        fixture_root = TEST_OUTPUT_ROOT / f"FixtureStringCharLibrary-{uuid.uuid4().hex}"
+        project_root = fixture_root / "FixtureStringCharLibrary"
+        project_path = project_root / "FixtureStringCharLibrary.csproj"
+        source_path = project_root / "StringCharOps.cs"
+        dll_path = project_root / "bin" / "Release" / "net8.0" / "FixtureStringCharLibrary.dll"
+        closure_root = fixture_root / "closure"
+        emit_root = fixture_root / "emit-native-reference"
+
+        try:
+            project_root.mkdir(parents=True, exist_ok=False)
+            project_path.write_text(
+                (
+                    '<Project Sdk="Microsoft.NET.Sdk">\n'
+                    "  <PropertyGroup>\n"
+                    "    <TargetFramework>net8.0</TargetFramework>\n"
+                    "    <ImplicitUsings>disable</ImplicitUsings>\n"
+                    "    <Nullable>disable</Nullable>\n"
+                    "  </PropertyGroup>\n"
+                    "</Project>\n"
+                ),
+                encoding="utf-8",
+            )
+            source_path.write_text(
+                (
+                    "using System;\n\n"
+                    "namespace FixtureStringCharLibrary;\n\n"
+                    "public static class StringCharOps\n"
+                    "{\n"
+                    "    public static char ToChar(string value)\n"
+                    "    {\n"
+                    "        return ToCharWithProvider(value, null);\n"
+                    "    }\n\n"
+                    "    public static char ToCharWithProvider(string value, IFormatProvider provider)\n"
+                    "    {\n"
+                    "        ArgumentNullException.ThrowIfNull(value);\n"
+                    "        if (value.Length != 1)\n"
+                    "        {\n"
+                    '            throw new FormatException("Need single char");\n'
+                    "        }\n\n"
+                    "        return value[0];\n"
+                    "    }\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            tooling_module = load_module(
+                TOOLING_MODULE_PATH,
+                f"chaos_string_char_codegen_audit_{uuid.uuid4().hex}",
+            )
+            driver_intermediate_root = tooling_module.allocate_dotnet_intermediate_dir(
+                "Chaos.IL2CPP.Driver",
+                host_platform="windows",
+            )
+            self.assertIsNotNone(driver_intermediate_root)
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(project_path),
+                    "-c",
+                    "Release",
+                ],
+                cwd=REPO_ROOT,
+            )
+            self.assertTrue(dll_path.is_file(), msg=f"missing string char library dll: {dll_path}")
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(DRIVER_PROJECT_PATH),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    f"-p:ChaosTempIntermediateRoot={Path(driver_intermediate_root).as_posix()}/",
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    str(dll_path),
+                    str(closure_root),
+                    "--full-assembly-closure",
+                ],
+                cwd=REPO_ROOT,
+            )
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    "emit-native-reference",
+                    str(closure_root),
+                    str(emit_root),
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            generated_page = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.page-0001.cpp"
+            ).read_text(encoding="utf-8").replace("\r\n", "\n")
+            coverage_report = load_json(
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.coverage.json"
+            )
+
+            for required_subject_id in [
+                "FixtureStringCharLibrary/StringCharOps::ToChar:System.Char(System.String)",
+                "FixtureStringCharLibrary/StringCharOps::ToCharWithProvider:System.Char(System.String,System.IFormatProvider)",
+            ]:
+                self.assertNotIn(required_subject_id, coverage_report["uncoveredMethodSubjectIds"])
+
+            self.assertIn("void* arg0;", generated_page)
+            self.assertIn("void* arg1;", generated_page)
+            self.assertIn("std::uint16_t* return_value;", generated_page)
+            self.assertIn("method_invoke", generated_page)
+            self.assertIn("resolve_method_by_token(image, 0x", generated_page)
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
+
+    def test_emit_native_reference_supports_object_to_char_runtime_skeleton_methods(self) -> None:
+        fixture_root = TEST_OUTPUT_ROOT / f"FixtureObjectCharLibrary-{uuid.uuid4().hex}"
+        project_root = fixture_root / "FixtureObjectCharLibrary"
+        project_path = project_root / "FixtureObjectCharLibrary.csproj"
+        source_path = project_root / "ObjectCharOps.cs"
+        dll_path = project_root / "bin" / "Release" / "net8.0" / "FixtureObjectCharLibrary.dll"
+        closure_root = fixture_root / "closure"
+        emit_root = fixture_root / "emit-native-reference"
+
+        try:
+            project_root.mkdir(parents=True, exist_ok=False)
+            project_path.write_text(
+                (
+                    '<Project Sdk="Microsoft.NET.Sdk">\n'
+                    "  <PropertyGroup>\n"
+                    "    <TargetFramework>net8.0</TargetFramework>\n"
+                    "    <ImplicitUsings>disable</ImplicitUsings>\n"
+                    "    <Nullable>disable</Nullable>\n"
+                    "  </PropertyGroup>\n"
+                    "</Project>\n"
+                ),
+                encoding="utf-8",
+            )
+            source_path.write_text(
+                (
+                    "using System;\n\n"
+                    "namespace FixtureObjectCharLibrary;\n\n"
+                    "public interface IObjectCharProvider\n"
+                    "{\n"
+                    "    char ToChar(IFormatProvider provider);\n"
+                    "}\n\n"
+                    "public sealed class SingleCharBox : IObjectCharProvider\n"
+                    "{\n"
+                    "    private readonly char _value;\n\n"
+                    "    public SingleCharBox(char value)\n"
+                    "    {\n"
+                    "        _value = value;\n"
+                    "    }\n\n"
+                    "    public char ToChar(IFormatProvider provider)\n"
+                    "    {\n"
+                    "        return _value;\n"
+                    "    }\n"
+                    "}\n\n"
+                    "public static class ObjectCharOps\n"
+                    "{\n"
+                    "    public static char ToChar(object value)\n"
+                    "    {\n"
+                    "        if (value == null)\n"
+                    "        {\n"
+                    "            return (char)0;\n"
+                    "        }\n\n"
+                    "        return ((IObjectCharProvider)value).ToChar(null);\n"
+                    "    }\n\n"
+                    "    public static char ToCharWithProvider(object value, IFormatProvider provider)\n"
+                    "    {\n"
+                    "        if (value == null)\n"
+                    "        {\n"
+                    "            return (char)0;\n"
+                    "        }\n\n"
+                    "        return ((IObjectCharProvider)value).ToChar(provider);\n"
+                    "    }\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            tooling_module = load_module(
+                TOOLING_MODULE_PATH,
+                f"chaos_object_char_codegen_audit_{uuid.uuid4().hex}",
+            )
+            driver_intermediate_root = tooling_module.allocate_dotnet_intermediate_dir(
+                "Chaos.IL2CPP.Driver",
+                host_platform="windows",
+            )
+            self.assertIsNotNone(driver_intermediate_root)
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(project_path),
+                    "-c",
+                    "Release",
+                ],
+                cwd=REPO_ROOT,
+            )
+            self.assertTrue(dll_path.is_file(), msg=f"missing object char library dll: {dll_path}")
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(DRIVER_PROJECT_PATH),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    f"-p:ChaosTempIntermediateRoot={Path(driver_intermediate_root).as_posix()}/",
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    str(dll_path),
+                    str(closure_root),
+                    "--full-assembly-closure",
+                ],
+                cwd=REPO_ROOT,
+            )
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    "emit-native-reference",
+                    str(closure_root),
+                    str(emit_root),
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            generated_page = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.page-0001.cpp"
+            ).read_text(encoding="utf-8").replace("\r\n", "\n")
+            coverage_report = load_json(
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.coverage.json"
+            )
+
+            for required_subject_id in [
+                "FixtureObjectCharLibrary/ObjectCharOps::ToChar:System.Char(System.Object)",
+                "FixtureObjectCharLibrary/ObjectCharOps::ToCharWithProvider:System.Char(System.Object,System.IFormatProvider)",
+            ]:
+                self.assertNotIn(required_subject_id, coverage_report["uncoveredMethodSubjectIds"])
+
+            self.assertIn("void* arg0;", generated_page)
+            self.assertIn("void* arg1;", generated_page)
+            self.assertIn("request->arg0 == nullptr", generated_page)
+            self.assertIn("method_invoke", generated_page)
+            self.assertIn("resolve_method_by_token(image, 0x", generated_page)
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
+
+    def test_emit_native_reference_supports_decimal_and_datetime_to_char_runtime_skeleton_methods(self) -> None:
+        fixture_root = TEST_OUTPUT_ROOT / f"FixtureValueTypeCharLibrary-{uuid.uuid4().hex}"
+        project_root = fixture_root / "FixtureValueTypeCharLibrary"
+        project_path = project_root / "FixtureValueTypeCharLibrary.csproj"
+        source_path = project_root / "ValueTypeCharOps.cs"
+        dll_path = project_root / "bin" / "Release" / "net8.0" / "FixtureValueTypeCharLibrary.dll"
+        closure_root = fixture_root / "closure"
+        emit_root = fixture_root / "emit-native-reference"
+
+        try:
+            project_root.mkdir(parents=True, exist_ok=False)
+            project_path.write_text(
+                (
+                    '<Project Sdk="Microsoft.NET.Sdk">\n'
+                    "  <PropertyGroup>\n"
+                    "    <TargetFramework>net8.0</TargetFramework>\n"
+                    "    <ImplicitUsings>disable</ImplicitUsings>\n"
+                    "    <Nullable>disable</Nullable>\n"
+                    "  </PropertyGroup>\n"
+                    "</Project>\n"
+                ),
+                encoding="utf-8",
+            )
+            source_path.write_text(
+                (
+                    "using System;\n\n"
+                    "namespace FixtureValueTypeCharLibrary;\n\n"
+                    "public static class ValueTypeCharOps\n"
+                    "{\n"
+                    "    public static char ToChar(decimal value)\n"
+                    "    {\n"
+                    "        return ((IConvertible)value).ToChar(null);\n"
+                    "    }\n\n"
+                    "    public static char ToChar(DateTime value)\n"
+                    "    {\n"
+                    "        return ((IConvertible)value).ToChar(null);\n"
+                    "    }\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            tooling_module = load_module(
+                TOOLING_MODULE_PATH,
+                f"chaos_value_type_char_codegen_audit_{uuid.uuid4().hex}",
+            )
+            driver_intermediate_root = tooling_module.allocate_dotnet_intermediate_dir(
+                "Chaos.IL2CPP.Driver",
+                host_platform="windows",
+            )
+            self.assertIsNotNone(driver_intermediate_root)
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(project_path),
+                    "-c",
+                    "Release",
+                ],
+                cwd=REPO_ROOT,
+            )
+            self.assertTrue(dll_path.is_file(), msg=f"missing value type char library dll: {dll_path}")
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(DRIVER_PROJECT_PATH),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    f"-p:ChaosTempIntermediateRoot={Path(driver_intermediate_root).as_posix()}/",
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    str(dll_path),
+                    str(closure_root),
+                    "--full-assembly-closure",
+                ],
+                cwd=REPO_ROOT,
+            )
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    "emit-native-reference",
+                    str(closure_root),
+                    str(emit_root),
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            generated_page = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.page-0001.cpp"
+            ).read_text(encoding="utf-8")
+            coverage_report = load_json(
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.coverage.json"
+            )
+
+            for required_subject_id in [
+                "FixtureValueTypeCharLibrary/ValueTypeCharOps::ToChar:System.Char(System.Decimal)",
+                "FixtureValueTypeCharLibrary/ValueTypeCharOps::ToChar:System.Char(System.DateTime)",
+            ]:
+                self.assertNotIn(required_subject_id, coverage_report["uncoveredMethodSubjectIds"])
+
+            self.assertIn("box_value", generated_page)
+            self.assertIn("raise_managed_exception", generated_page)
+            self.assertIn('"Decimal"', generated_page)
+            self.assertIn('"DateTime"', generated_page)
+            self.assertIn('"Char"', generated_page)
+        finally:
+            shutil.rmtree(fixture_root, ignore_errors=True)
+
+    def test_emit_native_reference_supports_convert_to_string_runtime_skeleton_methods(self) -> None:
+        fixture_root = TEST_OUTPUT_ROOT / f"FixtureConvertToStringLibrary-{uuid.uuid4().hex}"
+        project_root = fixture_root / "FixtureConvertToStringLibrary"
+        project_path = project_root / "FixtureConvertToStringLibrary.csproj"
+        source_path = project_root / "ConvertToStringOps.cs"
+        dll_path = project_root / "bin" / "Release" / "net8.0" / "FixtureConvertToStringLibrary.dll"
+        closure_root = fixture_root / "closure"
+        emit_root = fixture_root / "emit-native-reference"
+
+        try:
+            project_root.mkdir(parents=True, exist_ok=False)
+            project_path.write_text(
+                (
+                    '<Project Sdk="Microsoft.NET.Sdk">\n'
+                    "  <PropertyGroup>\n"
+                    "    <TargetFramework>net8.0</TargetFramework>\n"
+                    "    <ImplicitUsings>disable</ImplicitUsings>\n"
+                    "    <Nullable>disable</Nullable>\n"
+                    "  </PropertyGroup>\n"
+                    "</Project>\n"
+                ),
+                encoding="utf-8",
+            )
+            source_path.write_text(
+                (
+                    "using System;\n\n"
+                    "namespace FixtureConvertToStringLibrary;\n\n"
+                    "public static class ConvertToStringOps\n"
+                    "{\n"
+                    "    public static string ToStringWithProvider(string value, IFormatProvider provider)\n"
+                    "    {\n"
+                    "        return value;\n"
+                    "    }\n\n"
+                    "    public static string ToStringBoolean(bool value)\n"
+                    "    {\n"
+                    "        return value.ToString();\n"
+                    "    }\n\n"
+                    "    public static string ToStringBooleanWithProvider(bool value, IFormatProvider provider)\n"
+                    "    {\n"
+                    "        return value.ToString(provider);\n"
+                    "    }\n\n"
+                    "    public static string ToStringInt32(int value)\n"
+                    "    {\n"
+                    "        return value.ToString();\n"
+                    "    }\n\n"
+                    "    public static string ToStringInt32WithProvider(int value, IFormatProvider provider)\n"
+                    "    {\n"
+                    "        return value.ToString(provider);\n"
+                    "    }\n\n"
+                    "    public static string ToStringDecimal(decimal value)\n"
+                    "    {\n"
+                    "        return value.ToString();\n"
+                    "    }\n\n"
+                    "    public static string ToStringDecimalWithProvider(decimal value, IFormatProvider provider)\n"
+                    "    {\n"
+                    "        return value.ToString(provider);\n"
+                    "    }\n"
+                    "}\n"
+                ),
+                encoding="utf-8",
+            )
+
+            tooling_module = load_module(
+                TOOLING_MODULE_PATH,
+                f"chaos_convert_to_string_codegen_audit_{uuid.uuid4().hex}",
+            )
+            driver_intermediate_root = tooling_module.allocate_dotnet_intermediate_dir(
+                "Chaos.IL2CPP.Driver",
+                host_platform="windows",
+            )
+            self.assertIsNotNone(driver_intermediate_root)
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(project_path),
+                    "-c",
+                    "Release",
+                ],
+                cwd=REPO_ROOT,
+            )
+            self.assertTrue(dll_path.is_file(), msg=f"missing convert-to-string library dll: {dll_path}")
+
+            run_checked(
+                [
+                    "dotnet",
+                    "build",
+                    str(DRIVER_PROJECT_PATH),
+                    "-c",
+                    "Release",
+                    "-m:1",
+                    f"-p:ChaosTempIntermediateRoot={Path(driver_intermediate_root).as_posix()}/",
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    str(dll_path),
+                    str(closure_root),
+                    "--full-assembly-closure",
+                ],
+                cwd=REPO_ROOT,
+            )
+            closure_manifest = load_json(closure_root / "closure.manifest.json")
+            resolved_assemblies = {
+                assembly["assemblyName"]: assembly["path"]
+                for assembly in closure_manifest["resolvedAssemblies"]
+            }
+            self.assertEqual(
+                str(dll_path.relative_to(REPO_ROOT)).replace("\\", "/"),
+                resolved_assemblies["FixtureConvertToStringLibrary"],
+            )
+            self.assertIn("System.Private.CoreLib", resolved_assemblies)
+            self.assertTrue(
+                Path(resolved_assemblies["System.Private.CoreLib"]).is_file(),
+                msg=f"missing resolved System.Private.CoreLib path: {resolved_assemblies['System.Private.CoreLib']}",
+            )
+            self.assertTrue(
+                resolved_assemblies["System.Private.CoreLib"].endswith("System.Private.CoreLib.dll"),
+                msg=f"unexpected System.Private.CoreLib path: {resolved_assemblies['System.Private.CoreLib']}",
+            )
+            run_checked(
+                [
+                    "dotnet",
+                    str(DRIVER_DLL_PATH),
+                    "emit-native-reference",
+                    str(closure_root),
+                    str(emit_root),
+                ],
+                cwd=REPO_ROOT,
+            )
+
+            generated_page = (
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.page-0001.cpp"
+            ).read_text(encoding="utf-8").replace("\r\n", "\n")
+            coverage_report = load_json(
+                emit_root
+                / "generated"
+                / "runtime"
+                / "native-reference.runtime-skeleton.coverage.json"
+            )
+
+            for required_subject_id in [
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringWithProvider:System.String(System.String,System.IFormatProvider)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringBoolean:System.String(System.Boolean)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringBooleanWithProvider:System.String(System.Boolean,System.IFormatProvider)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringInt32:System.String(System.Int32)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringInt32WithProvider:System.String(System.Int32,System.IFormatProvider)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringDecimal:System.String(System.Decimal)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringDecimalWithProvider:System.String(System.Decimal,System.IFormatProvider)",
+            ]:
+                self.assertNotIn(required_subject_id, coverage_report["uncoveredMethodSubjectIds"])
+
+            self.assertIn("void* arg0;", generated_page)
+            self.assertIn("void* arg1;", generated_page)
+            self.assertIn("void** return_value;", generated_page)
+            self.assertIn("*request->return_value = request->arg0;", generated_page)
+            self.assertIn("bridge->box_value", generated_page)
+            self.assertIn("method_invoke", generated_page)
+            self.assertIn("resolve_method_by_token(image, 0x", generated_page)
         finally:
             shutil.rmtree(fixture_root, ignore_errors=True)
 

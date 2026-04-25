@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 1,
+  "rows": [
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "orderIndex": 1,
+      "dllState": "blocked",
+      "currentProject": "completion-certification",
+      "riskTags": [
+        "core-foundation"
+      ],
+      "audit-input-and-ledger": "blocked",
+      "managed-proof": "pending",
+      "native-proof": "passed",
+      "hotupdate-proof": "passed",
+      "benchmark": "pending",
+      "codegen-review": "passed",
+      "completion-certification": "blocked"
+    },
+    {
+      "assemblyName": "System.Collections.Immutable",
+      "orderIndex": 2,
+      "dllState": "blocked",
+      "currentProject": "completion-certification",
+      "riskTags": [],
+      "audit-input-and-ledger": "blocked",
+      "managed-proof": "pending",
+      "native-proof": "pending",
+      "hotupdate-proof": "pending",
+      "benchmark": "pending",
+      "codegen-review": "pending",
+      "completion-certification": "blocked"
+    },
+    {
+      "assemblyName": "System.Formats.Asn1",
+      "orderIndex": 3,
+      "dllState": "not-started",
+      "currentProject": "audit-input-and-ledger",
+      "riskTags": [],
+      "audit-input-and-ledger": "pending",
+      "managed-proof": "pending",
+      "native-proof": "pending",
+      "hotupdate-proof": "pending",
+      "benchmark": "pending",
+      "codegen-review": "pending",
+      "completion-certification": "pending"
+    },
+    {
+      "assemblyName": "System.IO.Compression.Brotli",
+      "orderIndex": 4,
+      "dllState": "not-started",
+      "currentProject": "audit-input-and-ledger",
+      "riskTags": [],
+      "audit-input-and-ledger": "pending",
+      "managed-proof": "pending",
+      "native-proof": "pending",
+      "hotupdate-proof": "pending",
+      "benchmark": "pending",
+      "codegen-review": "pending",
+      "completion-certification": "pending"
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "orderIndex": 5,
+      "dllState": "not-started",
+      "currentProject": "audit-input-and-ledger",
+      "riskTags": [],
+      "audit-input-and-ledger": "pending",
+      "managed-proof": "pending",
+      "native-proof": "pending",
+      "hotupdate-proof": "pending",
+      "benchmark": "pending",
+      "codegen-review": "pending",
+      "completion-certification": "pending"
+    },
+    {
+      "assemblyName": "System.IO.Pipelines",
+      "orderIndex": 6,
+      "dllState": "not-started",
+      "currentProject": "audit-input-and-ledger",
+      "riskTags": [],
+      "audit-input-and-ledger": "pending",
+      "managed-proof": "pending",
+      "native-proof": "pending",
+      "hotupdate-proof": "pending",
+      "benchmark": "pending",
+      "codegen-review": "pending",
+      "completion-certification": "pending"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "orderIndex": 7,
+      "dllState": "not-started",
+      "currentProject": "audit-input-and-ledger",
+      "riskTags": [],
+      "audit-input-and-ledger": "pending",
+      "managed-proof": "pending",
+      "native-proof": "pending",
+      "hotupdate-proof": "pending",
+      "benchmark": "pending",
+      "codegen-review": "pending",
+      "completion-certification": "pending"
+    },
+    {
+      "assemblyName": "System.Net.ServerSentEvents",
+      "orderIndex": 8,
+      "dllState": "not-started",
+      "currentProject": "audit-input-and-ledger",
+      "riskTags": [],
+      "audit-input-and-ledger": "pending",
+      "managed-proof": "pending",
+      "native-proof": "pending",
+      "hotupdate-proof": "pending",
+      "benchmark": "pending",
+      "codegen-review": "pending",
+      "completion-certification": "pending"
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "orderIndex": 9,
+      "dllState": "not-started",
+      "currentProject": "audit-input-and-ledger",
+      "riskTags": [],
+      "audit-input-and-ledger": "pending",
+      "managed-proof": "pending",
+      "native-proof": "pending",
+      "hotupdate-proof": "pending",
+      "benchmark": "pending",
+      "codegen-review": "pending",
+      "completion-certification": "pending"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "orderIndex": 10,
+      "dllState": "not-started",
+      "currentProject": "audit-input-and-ledger",
+      "riskTags": [
+        "high-risk"
+      ],
+      "audit-input-and-ledger": "pending",
+      "managed-proof": "pending",
+      "native-proof": "pending",
+      "hotupdate-proof": "pending",
+      "benchmark": "pending",
+      "codegen-review": "pending",
+      "completion-certification": "pending"
+    },
+    {
+      "assemblyName": "System.Runtime.Serialization.Formatters",
+      "orderIndex": 11,
+      "dllState": "not-started",
+      "currentProject": "audit-input-and-ledger",
+      "riskTags": [
+        "high-risk"
+      ],
+      "audit-input-and-ledger": "pending",
+      "managed-proof": "pending",
+      "native-proof": "pending",
+      "hotupdate-proof": "pending",
+      "benchmark": "pending",
+      "codegen-review": "pending",
+      "completion-certification": "pending"
+    },
+    {
+      "assemblyName": "System.Security.Principal.Windows",
+      "orderIndex": 12,
+      "dllState": "not-started",
+      "currentProject": "audit-input-and-ledger",
+      "riskTags": [],
+      "audit-input-and-ledger": "pending",
+      "managed-proof": "pending",
+      "native-proof": "pending",
+      "hotupdate-proof": "pending",
+      "benchmark": "pending",
+      "codegen-review": "pending",
+      "completion-certification": "pending"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "orderIndex": 13,
+      "dllState": "not-started",
+      "currentProject": "audit-input-and-ledger",
+      "riskTags": [
+        "high-risk"
+      ],
+      "audit-input-and-ledger": "pending",
+      "managed-proof": "pending",
+      "native-proof": "pending",
+      "hotupdate-proof": "pending",
+      "benchmark": "pending",
+      "codegen-review": "pending",
+      "completion-certification": "pending"
+    },
+    {
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "orderIndex": 14,
+      "dllState": "not-started",
+      "currentProject": "audit-input-and-ledger",
+      "riskTags": [],
+      "audit-input-and-ledger": "pending",
+      "managed-proof": "pending",
+      "native-proof": "pending",
+      "hotupdate-proof": "pending",
+      "benchmark": "pending",
+      "codegen-review": "pending",
+      "completion-certification": "pending"
+    }
+  ]
+}

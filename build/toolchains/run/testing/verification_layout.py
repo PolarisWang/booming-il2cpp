@@ -130,6 +130,18 @@ def benchmark_projection_root(repo_root: Path) -> Path:
     return projections_root(repo_root) / "benchmark"
 
 
+def foundation_dll_audit_projection_root(repo_root: Path) -> Path:
+    return projections_root(repo_root) / "foundation-dll-audit"
+
+
+def docs_verification_root(repo_root: Path) -> Path:
+    return repo_root / "docs" / "verification"
+
+
+def docs_foundation_dll_audit_root(repo_root: Path) -> Path:
+    return docs_verification_root(repo_root) / "foundation-dll-audit"
+
+
 def workspaces_root(repo_root: Path) -> Path:
     return verification_root(repo_root) / "workspaces"
 

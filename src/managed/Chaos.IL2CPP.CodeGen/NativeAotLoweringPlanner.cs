@@ -1702,6 +1702,19 @@ public sealed partial class NativeAotLoweringPlanner
     private static IEnumerable<string> EnumerateClosureAssemblyPaths(
         ManagedClosureManifestArtifact closureManifest)
     {
+        if (closureManifest.ResolvedAssemblies is { Count: > 0 })
+        {
+            foreach (var resolvedAssembly in closureManifest.ResolvedAssemblies)
+            {
+                if (!string.IsNullOrWhiteSpace(resolvedAssembly.Path))
+                {
+                    yield return Path.GetFullPath(resolvedAssembly.Path);
+                }
+            }
+
+            yield break;
+        }
+
         yield return Path.GetFullPath(closureManifest.InputAssemblyPath);
 
         if (closureManifest.AdditionalAssemblyPaths is null)

@@ -10,6 +10,7 @@
 ## Main Entries
 - Testing inventory: `verification/projections/testing-inventory/inventory.html`
 - Benchmark dashboard: `verification/projections/benchmark/dashboard.html`
+- Foundation DLL audit: `verification/projections/foundation-dll-audit/dashboard.html`
 - Total workspace: `verification/workspaces/verification-all.sln`
 
 ## Commands

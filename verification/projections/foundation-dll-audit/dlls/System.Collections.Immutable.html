@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System.Collections.Immutable - Foundation DLL Audit</title>
+  <link rel="stylesheet" href="../dashboard.css">
+</head>
+<body>
+  <main>
+    <div class="page-header">
+      <a class="back-link" href="../dashboard.html">Back To Dashboard</a>
+      <div class="eyebrow">DLL Detail</div>
+      <h1>System.Collections.Immutable</h1>
+      <p>按 DLL 审核当前验证状态、验证项目、证据与支持引用。</p>
+      <div class="summary-grid">
+        <div class="summary-card"><strong>State</strong><span class="status status-blocked">blocked</span></div>
+        <div class="summary-card"><strong>Current Project</strong>completion-certification</div>
+        <div class="summary-card"><strong>Phase</strong>phase-2</div>
+        <div class="summary-card"><strong>Roadmap Task</strong>20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable</div>
+        <div class="summary-card"><strong>Evidence Count</strong>0</div>
+        <div class="summary-card"><strong>Support Refs</strong>28</div>
+      </div>
+      <div class="link-grid">
+        <div class="link-card"><strong>JSON Payload</strong><a href="./System.Collections.Immutable.json">./System.Collections.Immutable.json</a></div>
+        <div class="link-card"><strong>Dashboard</strong><a href="../dashboard.html">foundation-dll-audit/dashboard.html</a></div>
+      </div>
+    </div>
+    <section>
+      <h2>Blocking Context</h2>
+      <p>验证 `System.Collections.Immutable`，等待 CoreLib full verification 真正完成</p>
+    </section>
+    <section>
+      <h2>Verification Projects</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Project</th><th>Policy</th><th>State</th><th>Verification Method</th><th>Evidence</th><th>Support Refs</th></tr>
+          </thead>
+          <tbody><tr><td>Audit Input And Ledger</td><td><span class="status status-required">required</span></td><td><span class="status status-blocked">blocked</span></td><td>刷新 audit input manifest，并校验 surface / semantic / nativeization plan。</td><td>0</td><td>4</td></tr><tr><td>Managed Proof</td><td><span class="status status-required">required</span></td><td><span class="status status-pending">pending</span></td><td>运行 managed proof，验证语义基线。</td><td>0</td><td>4</td></tr><tr><td>Native Proof</td><td><span class="status status-required">required</span></td><td><span class="status status-pending">pending</span></td><td>运行 native / AOT proof，验证 generated native code 可执行。</td><td>0</td><td>4</td></tr><tr><td>HotUpdate Proof</td><td><span class="status status-conditional">conditional</span></td><td><span class="status status-pending">pending</span></td><td>运行 patch / host proof，验证 hotupdate consumer 路径。</td><td>0</td><td>4</td></tr><tr><td>Benchmark</td><td><span class="status status-conditional">conditional</span></td><td><span class="status status-pending">pending</span></td><td>运行 benchmark，归档性能结果。</td><td>0</td><td>4</td></tr><tr><td>Codegen Review</td><td><span class="status status-required">required</span></td><td><span class="status status-pending">pending</span></td><td>审核 generated code、dispatch/helper/binding/coverage。</td><td>0</td><td>4</td></tr><tr><td>Completion Certification</td><td><span class="status status-required">required</span></td><td><span class="status status-blocked">blocked</span></td><td>汇总前置 project 结果，给出 DLL completion 结论。</td><td>0</td><td>4</td></tr></tbody>
+        </table>
+      </div>
+      <div class="project-grid"><div class="project-card">
+  <div class="project-card-header">
+    <h4>Audit Input And Ledger</h4>
+    <div class="project-summary-line">
+      <span class="status status-blocked">blocked</span>
+      <span class="status status-required">required</span>
+    </div>
+  </div>
+  <p>刷新 audit input manifest，并校验 surface / semantic / nativeization plan。</p>
+  
+  <div class="project-overview-grid">
+    <div class="project-overview"><strong>Project Code</strong>audit-input-and-ledger</div>
+    <div class="project-overview"><strong>Evidence Count</strong>0</div>
+    <div class="project-overview"><strong>Support Refs</strong>4</div>
+  </div>
+  <div class="list-label">Evidence</div>
+  <ul><li>n/a</li></ul>
+  <div class="list-label">Support Refs</div>
+  <ul><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md</a></li></ul>
+</div><div class="project-card">
+  <div class="project-card-header">
+    <h4>Managed Proof</h4>
+    <div class="project-summary-line">
+      <span class="status status-pending">pending</span>
+      <span class="status status-required">required</span>
+    </div>
+  </div>
+  <p>运行 managed proof，验证语义基线。</p>
+  
+  <div class="project-overview-grid">
+    <div class="project-overview"><strong>Project Code</strong>managed-proof</div>
+    <div class="project-overview"><strong>Evidence Count</strong>0</div>
+    <div class="project-overview"><strong>Support Refs</strong>4</div>
+  </div>
+  <div class="list-label">Evidence</div>
+  <ul><li>n/a</li></ul>
+  <div class="list-label">Support Refs</div>
+  <ul><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md</a></li></ul>
+</div><div class="project-card">
+  <div class="project-card-header">
+    <h4>Native Proof</h4>
+    <div class="project-summary-line">
+      <span class="status status-pending">pending</span>
+      <span class="status status-required">required</span>
+    </div>
+  </div>
+  <p>运行 native / AOT proof，验证 generated native code 可执行。</p>
+  
+  <div class="project-overview-grid">
+    <div class="project-overview"><strong>Project Code</strong>native-proof</div>
+    <div class="project-overview"><strong>Evidence Count</strong>0</div>
+    <div class="project-overview"><strong>Support Refs</strong>4</div>
+  </div>
+  <div class="list-label">Evidence</div>
+  <ul><li>n/a</li></ul>
+  <div class="list-label">Support Refs</div>
+  <ul><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md</a></li></ul>
+</div><div class="project-card">
+  <div class="project-card-header">
+    <h4>HotUpdate Proof</h4>
+    <div class="project-summary-line">
+      <span class="status status-pending">pending</span>
+      <span class="status status-conditional">conditional</span>
+    </div>
+  </div>
+  <p>运行 patch / host proof，验证 hotupdate consumer 路径。</p>
+  
+  <div class="project-overview-grid">
+    <div class="project-overview"><strong>Project Code</strong>hotupdate-proof</div>
+    <div class="project-overview"><strong>Evidence Count</strong>0</div>
+    <div class="project-overview"><strong>Support Refs</strong>4</div>
+  </div>
+  <div class="list-label">Evidence</div>
+  <ul><li>n/a</li></ul>
+  <div class="list-label">Support Refs</div>
+  <ul><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md</a></li></ul>
+</div><div class="project-card">
+  <div class="project-card-header">
+    <h4>Benchmark</h4>
+    <div class="project-summary-line">
+      <span class="status status-pending">pending</span>
+      <span class="status status-conditional">conditional</span>
+    </div>
+  </div>
+  <p>运行 benchmark，归档性能结果。</p>
+  
+  <div class="project-overview-grid">
+    <div class="project-overview"><strong>Project Code</strong>benchmark</div>
+    <div class="project-overview"><strong>Evidence Count</strong>0</div>
+    <div class="project-overview"><strong>Support Refs</strong>4</div>
+  </div>
+  <div class="list-label">Evidence</div>
+  <ul><li>n/a</li></ul>
+  <div class="list-label">Support Refs</div>
+  <ul><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md</a></li></ul>
+</div><div class="project-card">
+  <div class="project-card-header">
+    <h4>Codegen Review</h4>
+    <div class="project-summary-line">
+      <span class="status status-pending">pending</span>
+      <span class="status status-required">required</span>
+    </div>
+  </div>
+  <p>审核 generated code、dispatch/helper/binding/coverage。</p>
+  
+  <div class="project-overview-grid">
+    <div class="project-overview"><strong>Project Code</strong>codegen-review</div>
+    <div class="project-overview"><strong>Evidence Count</strong>0</div>
+    <div class="project-overview"><strong>Support Refs</strong>4</div>
+  </div>
+  <div class="list-label">Evidence</div>
+  <ul><li>n/a</li></ul>
+  <div class="list-label">Support Refs</div>
+  <ul><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md</a></li></ul>
+</div><div class="project-card">
+  <div class="project-card-header">
+    <h4>Completion Certification</h4>
+    <div class="project-summary-line">
+      <span class="status status-blocked">blocked</span>
+      <span class="status status-required">required</span>
+    </div>
+  </div>
+  <p>汇总前置 project 结果，给出 DLL completion 结论。</p>
+  
+  <div class="project-overview-grid">
+    <div class="project-overview"><strong>Project Code</strong>completion-certification</div>
+    <div class="project-overview"><strong>Evidence Count</strong>0</div>
+    <div class="project-overview"><strong>Support Refs</strong>4</div>
+  </div>
+  <div class="list-label">Evidence</div>
+  <ul><li>n/a</li></ul>
+  <div class="list-label">Support Refs</div>
+  <ul><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md</a></li><li><a href="../../../../docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md" target="_blank" rel="noreferrer">docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md</a></li></ul>
+</div></div>
+    </section>
+  </main>
+</body>
+</html>

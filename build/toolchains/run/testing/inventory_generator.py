@@ -969,14 +969,16 @@ def build_source_inventory_tables(source_payload: dict[str, Any]) -> dict[str, d
 def _import_verification_modules():
     try:
         from . import verification_bundle as verification_bundle_module
+        from . import foundation_dll_audit_generator as foundation_dll_audit_generator_module
         from . import verification_projection as verification_projection_module
     except ImportError:
         testing_root = Path(__file__).resolve().parent
         if str(testing_root) not in sys.path:
             sys.path.insert(0, str(testing_root))
         import verification_bundle as verification_bundle_module
+        import foundation_dll_audit_generator as foundation_dll_audit_generator_module
         import verification_projection as verification_projection_module
-    return verification_bundle_module, verification_projection_module
+    return verification_bundle_module, foundation_dll_audit_generator_module, verification_projection_module
 
 
 def _inventory_outputs_from_rows(
@@ -1028,7 +1030,7 @@ def build_inventory_outputs(
     *,
     formal_source: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    verification_bundle_module, verification_projection_module = _import_verification_modules()
+    verification_bundle_module, _, verification_projection_module = _import_verification_modules()
     current_formal_source = formal_source
     if current_formal_source is None:
         bundle = verification_bundle_module.build_verification_bundle(
@@ -1130,6 +1132,7 @@ def _write_verification_navigation(
     repo_root: Path,
     *,
     projection_root: Path,
+    include_foundation_dll_audit: bool,
 ) -> list[str]:
     verification_root = verification_layout_module.verification_root(repo_root)
     verification_root.mkdir(parents=True, exist_ok=True)
@@ -1179,38 +1182,51 @@ def _write_verification_navigation(
             },
         },
     )
+    if include_foundation_dll_audit:
+        foundation_dll_audit_root = verification_layout_module.foundation_dll_audit_projection_root(repo_root)
+        manifest_payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest_payload.setdefault("projections", {})["foundationDllAudit"] = _relative(
+            repo_root,
+            foundation_dll_audit_root,
+        )
+        write_json(manifest_path, manifest_payload)
 
-    index_path.write_text(
-        "\n".join(
-            [
-                "# Verification",
-                "",
-                "## Authority",
-                f"- Archive: `{_relative(repo_root, archive_root)}`",
-                f"- Catalog: `{_relative(repo_root, verification_layout_module.catalog_root(repo_root))}`",
-                f"- Evidence: `{_relative(repo_root, verification_layout_module.evidence_root(repo_root))}`",
-                f"- Workspaces: `{_relative(repo_root, workspaces_root)}`",
-                f"- Projections: `{_relative(repo_root, verification_layout_module.projections_root(repo_root))}`",
-                "",
-                "## Main Entries",
-                f"- Testing inventory: `{_relative(repo_root, testing_inventory_root / 'inventory.html')}`",
-                f"- Benchmark dashboard: `{_relative(repo_root, benchmark_root / 'dashboard.html')}`",
-                f"- Total workspace: `{_relative(repo_root, verification_all_solution)}`",
-                "",
-                "## Commands",
-                "- `python build/toolchains/run/run.py verify verification-v1 --json`",
-                "- `python build/toolchains/run/run.py generate project all --json`",
-                "",
-            ]
-        ),
-        encoding="utf-8",
+    index_lines = [
+        "# Verification",
+        "",
+        "## Authority",
+        f"- Archive: `{_relative(repo_root, archive_root)}`",
+        f"- Catalog: `{_relative(repo_root, verification_layout_module.catalog_root(repo_root))}`",
+        f"- Evidence: `{_relative(repo_root, verification_layout_module.evidence_root(repo_root))}`",
+        f"- Workspaces: `{_relative(repo_root, workspaces_root)}`",
+        f"- Projections: `{_relative(repo_root, verification_layout_module.projections_root(repo_root))}`",
+        "",
+        "## Main Entries",
+        f"- Testing inventory: `{_relative(repo_root, testing_inventory_root / 'inventory.html')}`",
+        f"- Benchmark dashboard: `{_relative(repo_root, benchmark_root / 'dashboard.html')}`",
+    ]
+    if include_foundation_dll_audit:
+        foundation_dll_audit_root = verification_layout_module.foundation_dll_audit_projection_root(repo_root)
+        index_lines.append(
+            f"- Foundation DLL audit: `{_relative(repo_root, foundation_dll_audit_root / 'dashboard.html')}`"
+        )
+    index_lines.extend(
+        [
+            f"- Total workspace: `{_relative(repo_root, verification_all_solution)}`",
+            "",
+            "## Commands",
+            "- `python build/toolchains/run/run.py verify verification-v1 --json`",
+            "- `python build/toolchains/run/run.py generate project all --json`",
+            "",
+        ]
     )
+    index_path.write_text("\n".join(index_lines), encoding="utf-8")
     return [_relative(repo_root, manifest_path), _relative(repo_root, index_path)]
 
 
 def write_inventory_outputs(repo_root: Path, *, host_platform: str, output_root: Path) -> dict[str, Any]:
     source_payload = inventory_source_module.collect_inventory_source(repo_root, host_platform=host_platform)
-    verification_bundle_module, _ = _import_verification_modules()
+    verification_bundle_module, foundation_dll_audit_generator_module, _ = _import_verification_modules()
     bundle = verification_bundle_module.build_verification_bundle(
         source_payload,
         closure_kind="completed",
@@ -1228,6 +1244,9 @@ def write_inventory_outputs(repo_root: Path, *, host_platform: str, output_root:
         source_payload,
         formal_source=dict(verification_payload.get("masterPayloads") or bundle["master"]),
     )
+    foundation_dll_audit_payload: dict[str, Any] | None = None
+    if foundation_dll_audit_generator_module.has_foundation_dll_audit_manifest(repo_root):
+        foundation_dll_audit_payload = foundation_dll_audit_generator_module.write_foundation_dll_audit_outputs(repo_root)
     output_root.mkdir(parents=True, exist_ok=True)
     files = {
         "source": output_root / "inventory-source.json",
@@ -1248,8 +1267,17 @@ def write_inventory_outputs(repo_root: Path, *, host_platform: str, output_root:
     files["benchmark_csv"].write_text(outputs["csv"]["benchmark"], encoding="utf-8")
     files["html"].write_text(outputs["htmlDocument"], encoding="utf-8")
     artifacts = [_relative(repo_root, path) for path in files.values()]
-    artifacts.extend(_write_verification_navigation(repo_root, projection_root=output_root))
+    artifacts.extend(
+        _write_verification_navigation(
+            repo_root,
+            projection_root=output_root,
+            include_foundation_dll_audit=foundation_dll_audit_payload is not None,
+        )
+    )
     artifacts.extend(str(item) for item in list(verification_payload.get("artifacts") or []))
+    if foundation_dll_audit_payload is not None:
+        artifacts.extend(str(item) for item in list(foundation_dll_audit_payload.get("artifacts") or []))
+    artifacts = list(dict.fromkeys(artifacts))
     payload = {
         "outputRoot": _relative(repo_root, output_root),
         "artifacts": artifacts,
@@ -1263,6 +1291,8 @@ def write_inventory_outputs(repo_root: Path, *, host_platform: str, output_root:
             "codegenStubCount": len(_list_value(source_payload.get("codegenStubs"))),
         },
     }
+    if foundation_dll_audit_payload is not None:
+        payload["foundationDllAudit"] = foundation_dll_audit_payload
     return validate_inventory_outputs(
         repo_root,
         payload,

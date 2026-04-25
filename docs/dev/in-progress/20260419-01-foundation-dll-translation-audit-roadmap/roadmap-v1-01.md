@@ -184,6 +184,7 @@ Status: in-progress
 | `20260419-07-corelib-dll-boundary-native-codegen-implementation` | `phase-1` | `completed` | `codex` | 完成窄边界 runtime-skeleton widening 与 subject review bundle 主链接线 | `20260419-06` |
 | `20260419-20-corelib-supplemental-full-closure-audit-integration` | `phase-1` | `completed` | `codex` | 已把真实 `System.Private.CoreLib.dll` supplemental full-assembly-closure artifacts 接入当前 canonical proof/audit 链路，并把 truth boundary 推进到 `narrow-proof-packet-plus-supplemental-full-closure-evidence` | `20260419-07` |
 | `20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening` | `phase-1` | `in-progress` | `codex` | 基于真实 CoreLib supplemental full-closure evidence 继续扩大 runtime-skeleton translated coverage，优先消化可批量落地的 uncovered families | `20260419-20` |
+| `20260425-03-foundation-dll-capability-closure-reporting-roadmap` | `cross-cutting` | `planned` | `codex` | 冻结 foundation DLL 报告的 capability-closure denominator、workflow-progress 口径、DLL completed 规则与 source-links / projection contract | `20260419-20` |
 | `20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable` | `phase-2` | `blocked` | `codex` | 验证 `System.Collections.Immutable`，等待 CoreLib full verification 真正完成 | `20260419-03` |
 | `20260419-22-complex-bcl-ordered-dll-02-system-formats-asn1` | `phase-2` | `planned` | `codex` | 验证 `System.Formats.Asn1` | `20260419-21` |
 | `20260419-23-complex-bcl-ordered-dll-03-system-io-compression-brotli` | `phase-2` | `planned` | `codex` | 验证 `System.IO.Compression.Brotli` | `20260419-22` |
@@ -228,4 +229,4 @@ Status: in-progress
 - 鎺ㄨ崘銆?- 鍘熷洜锛氭弧瓒崇敤鎴疯姹傜殑鍙拷韪€佸彲瑙嗐€佸彲楠屾敹銆佸彲楠岃瘉璺緞锛屼篃鑳介伩鍏嶅悗缁枃妗ｅ拰浜х墿褰㈡€佹紓绉汇€?
 ## 10. 褰撳墠寤鸿鎺ㄨ繘椤哄簭
 
-1. 鍒涘缓 `20260419-02-audit-schema-and-foundation-solution-freeze`锛屽喕缁?audit schema 涓?`FoundationDllTranslationSolution`銆?2. 鍒涘缓 `20260419-03-system-private-corelib-full-verification`锛屾墽琛?CoreLib 鏂规 C銆?3. 鎸夐『搴忓垱寤?`20260419-04` 鍒?`20260419-16`锛岄€愪釜鎵ц Complex BCL 13 DLL銆?4. CoreLib 涓?13 DLL 瀹屾垚鍚庯紝鍐嶆墿灞?Phase 3/4/5 鐨?DLL scope銆?
+1. 鍒涘缓 `20260419-02-audit-schema-and-foundation-solution-freeze`锛屽喕缁?audit schema 涓?`FoundationDllTranslationSolution`銆?2. 鍒涘缓 `20260419-03-system-private-corelib-full-verification`锛屾墽琛?CoreLib 鏂规 C銆?3. 骞惰鍒涘缓 `20260425-03-foundation-dll-capability-closure-reporting-roadmap`锛屽喕缁?foundation DLL 姹囨姤鐨?capability closure / workflow progress authority锛屼絾涓嶆姠鍗犲綋鍓?CoreLib widening canonical child銆?4. 鎸夐『搴忓垱寤?`20260419-04` 鍒?`20260419-16`锛岄€愪釜鎵ц Complex BCL 13 DLL銆?5. CoreLib 涓?13 DLL 瀹屾垚鍚庯紝鍐嶆墿灞?Phase 3/4/5 鐨?DLL scope銆?
