@@ -268,6 +268,8 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
         for required_fragment in [
             "TryBuildAssemblyBoundStaticCheckedByteConvertStub",
             "TryResolveRuntimeSkeletonCheckedByteConvertShape",
+            "TryBuildAssemblyBoundStaticCheckedCharConvertStub",
+            "TryResolveRuntimeSkeletonCheckedCharConvertShape",
             "GetRuntimeSkeletonStaticCheckedByteConvertStubTemplate",
         ]:
             self.assertIn(required_fragment, native_reference_emitter_source)
@@ -276,10 +278,11 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
 
         for required_fragment in [
             "_ManagedArgs",
-            "std::uint8_t* return_value",
+            "output_cpp_type",
             "overflow_condition_expression",
+            "converted_value_expression",
             "throw_stub_name",
-            "static_cast<std::uint8_t>(request->value)",
+            "*request->return_value = {{ converted_value_expression }};",
         ]:
             self.assertIn(required_fragment, template_source)
 

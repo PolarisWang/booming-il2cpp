@@ -8862,6 +8862,107 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         }
     }
 
+    private static bool TryResolveRuntimeSkeletonCheckedCharConvertShape(
+        string subjectId,
+        string inputManagedType,
+        IReadOnlyList<TypedIlInstructionArtifact> instructions,
+        out string inputCppType,
+        out string overflowConditionExpression,
+        out string throwSubjectId)
+    {
+        inputCppType = string.Empty;
+        overflowConditionExpression = string.Empty;
+        throwSubjectId = string.Empty;
+
+        if (!TryResolveRuntimeSkeletonPrimitiveConvertInputCppType(inputManagedType, out inputCppType))
+        {
+            return false;
+        }
+
+        if (string.Equals(inputManagedType, "System.UInt64", StringComparison.Ordinal))
+        {
+            if (instructions.Count != 8 ||
+                !string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) ||
+                GetRequiredOperandInt(instructions[0]) != 0 ||
+                !string.Equals(instructions[1].Op, "ldc.i4", StringComparison.Ordinal) ||
+                GetRequiredOperandInt(instructions[1]) != 65535 ||
+                !string.Equals(instructions[2].Op, "conv.i8", StringComparison.Ordinal) ||
+                !string.Equals(instructions[3].Op, "ble.un", StringComparison.Ordinal) ||
+                !string.Equals(instructions[4].Op, "call", StringComparison.Ordinal) ||
+                !string.Equals(instructions[5].Op, "ldarg", StringComparison.Ordinal) ||
+                GetRequiredOperandInt(instructions[5]) != 0 ||
+                !string.Equals(instructions[6].Op, "conv.u2", StringComparison.Ordinal) ||
+                !string.Equals(instructions[7].Op, "ret", StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            throwSubjectId = GetRequiredInstructionCallee(instructions[4], subjectId, 4);
+            overflowConditionExpression = "request->value > static_cast<std::uint64_t>(65535)";
+            return true;
+        }
+
+        switch (inputManagedType)
+        {
+            case "System.SByte":
+                if (instructions.Count != 7 ||
+                    !string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[0]) != 0 ||
+                    !string.Equals(instructions[1].Op, "ldc.i4", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[1]) != 0 ||
+                    !string.Equals(instructions[2].Op, "bge", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[3].Op, "call", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[4].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[4]) != 0 ||
+                    !string.Equals(instructions[5].Op, "conv.u2", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[6].Op, "ret", StringComparison.Ordinal))
+                {
+                    return false;
+                }
+                throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
+                overflowConditionExpression = "request->value < static_cast<std::int8_t>(0)";
+                return true;
+            case "System.Int16":
+                if (instructions.Count != 7 ||
+                    !string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[0]) != 0 ||
+                    !string.Equals(instructions[1].Op, "ldc.i4", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[1]) != 0 ||
+                    !string.Equals(instructions[2].Op, "bge", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[3].Op, "call", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[4].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[4]) != 0 ||
+                    !string.Equals(instructions[5].Op, "conv.u2", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[6].Op, "ret", StringComparison.Ordinal))
+                {
+                    return false;
+                }
+                throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
+                overflowConditionExpression = "request->value < static_cast<std::int16_t>(0)";
+                return true;
+            case "System.UInt32":
+                if (instructions.Count != 7 ||
+                    !string.Equals(instructions[0].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[0]) != 0 ||
+                    !string.Equals(instructions[1].Op, "ldc.i4", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[1]) != 65535 ||
+                    !string.Equals(instructions[2].Op, "ble.un", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[3].Op, "call", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[4].Op, "ldarg", StringComparison.Ordinal) ||
+                    GetRequiredOperandInt(instructions[4]) != 0 ||
+                    !string.Equals(instructions[5].Op, "conv.u2", StringComparison.Ordinal) ||
+                    !string.Equals(instructions[6].Op, "ret", StringComparison.Ordinal))
+                {
+                    return false;
+                }
+                throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
+                overflowConditionExpression = "request->value > static_cast<std::uint32_t>(65535)";
+                return true;
+            default:
+                return false;
+        }
+    }
+
 
     private static bool TryResolveRuntimeSkeletonPrimitiveConvertInputCppType(
         string inputManagedType,
@@ -8923,6 +9024,14 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         string outputManagedType)
     {
         if (string.Equals(inputManagedType, outputManagedType, StringComparison.Ordinal))
+        {
+            return true;
+        }
+
+        if ((string.Equals(inputManagedType, "System.UInt16", StringComparison.Ordinal) &&
+             string.Equals(outputManagedType, "System.Char", StringComparison.Ordinal)) ||
+            (string.Equals(inputManagedType, "System.Char", StringComparison.Ordinal) &&
+             string.Equals(outputManagedType, "System.UInt16", StringComparison.Ordinal)))
         {
             return true;
         }
