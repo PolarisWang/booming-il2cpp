@@ -84,16 +84,18 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
         template_source = RUNTIME_SKELETON_STATIC_BYTE_FORWARDER_TEMPLATE_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
-            "TryBuildAssemblyBoundStaticByteReturnForwarderStub",
-            'GetMethodReturnType(method.SubjectId), "System.Byte"',
+            "TryBuildAssemblyBoundStaticPrimitiveReturnForwarderStub",
+            "TryBuildAssemblyBoundStaticCharReturnForwarderStub",
+            "TryResolveRuntimeSkeletonPrimitiveConvertOutputCppType",
             "input_cpp_type",
+            "output_cpp_type",
             "GetRuntimeSkeletonStaticByteForwarderStubTemplate",
         ]:
             self.assertIn(required_fragment, native_reference_emitter_source)
 
         self.assertIn("RuntimeSkeletonStaticByteForwarderStubTemplateRelativePath", catalog_source)
         self.assertIn("{{ input_cpp_type }} value;", template_source)
-        self.assertIn("std::uint8_t* return_value;", template_source)
+        self.assertIn("{{ output_cpp_type }}* return_value;", template_source)
         self.assertIn("return {{ target_stub_name }}(", template_source)
 
     def test_runtime_skeleton_field_families_lower_to_descriptor_driven_wrappers(self) -> None:
