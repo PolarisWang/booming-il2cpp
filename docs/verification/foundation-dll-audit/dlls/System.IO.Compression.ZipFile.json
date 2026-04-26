@@ -127,5 +127,110 @@
       "blockers": [],
       "updatedAt": ""
     }
-  ]
+  ],
+  "capabilityClosure": {
+    "totalFamilies": 2,
+    "closedFamilies": 0,
+    "waivedFamilies": 0,
+    "excludedFamilies": 0,
+    "platformBlockedFamilies": 0,
+    "inProgressFamilies": 2,
+    "closurePercent": 0.0
+  },
+  "workflowProgress": {
+    "totalRequiredGates": 8,
+    "passedGates": 0,
+    "progressPercent": 0.0
+  },
+  "capabilityFamilies": [
+    {
+      "familyId": "family/System.IO.Compression.ZipFile/zip-file-apis",
+      "displayName": "ZipFile APIs",
+      "description": "ZipFile create, open, extract, and directory archive behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-24-complex-bcl-ordered-dll-04-system-io-compression-zipfile/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.IO.Compression.ZipFile/zip-file-extensions",
+      "displayName": "ZipFile Extensions",
+      "description": "ZipArchiveEntry file extraction and creation extension behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-24-complex-bcl-ordered-dll-04-system-io-compression-zipfile/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    }
+  ],
+  "sourceLinks": {
+    "subjectSource": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln",
+    "generatedCode": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/analysis/generated/",
+    "evidence": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/",
+    "verificationSource": "verification/catalog/programs/foundation-dll-translation-audit.program.json"
+  },
+  "waiverSummary": {
+    "totalWaivers": 0,
+    "activeWaivers": 0,
+    "expiredWaivers": 0,
+    "totalExclusions": 0,
+    "totalPlatformBlocked": 0
+  },
+  "denominatorStatus": "audit-confirmed",
+  "schemaVersion": 2
 }

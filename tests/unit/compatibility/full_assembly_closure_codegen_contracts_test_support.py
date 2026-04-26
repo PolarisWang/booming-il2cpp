@@ -65,7 +65,7 @@ RUNTIME_SKELETON_STATIC_PRIMITIVE_CONVERT_TEMPLATE_PATH = (
     / "Templates"
     / "NativeReferenceProof.RuntimeSkeleton.StaticPrimitiveConvertStub.cpp.scriban"
 )
-RUNTIME_SKELETON_STATIC_CHECKED_BYTE_CONVERT_TEMPLATE_PATH = (
+RUNTIME_SKELETON_STATIC_CHECKED_PRIMITIVE_CONVERT_TEMPLATE_PATH = (
     REPO_ROOT
     / "src"
     / "managed"
@@ -88,6 +88,126 @@ RUNTIME_SKELETON_STATIC_EXCEPTION_THROW_STRING_PRODUCER_TEMPLATE_PATH = (
     / "Chaos.IL2CPP.CodeGen"
     / "Templates"
     / "NativeReferenceProof.RuntimeSkeleton.StaticExceptionThrowStringProducerStub.cpp.scriban"
+)
+RUNTIME_SKELETON_STRING_MANAGED_INVOKE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.StringManagedInvokeStub.cpp.scriban"
+)
+RUNTIME_SKELETON_UNSAFE_MANAGED_INVOKE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.UnsafeManagedInvokeStub.cpp.scriban"
+)
+RUNTIME_SKELETON_MEMORY_EXTENSIONS_MANAGED_INVOKE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.MemoryExtensionsManagedInvokeStub.cpp.scriban"
+)
+RUNTIME_SKELETON_SPANHELPERS_KERNEL_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.SpanHelpersKernelStub.cpp.scriban"
+)
+RUNTIME_SKELETON_ARRAY_AND_MEMORYMARSHAL_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.ArrayAndMemoryMarshalStub.cpp.scriban"
+)
+RUNTIME_SKELETON_HALF_MANAGED_INVOKE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.HalfManagedInvokeStub.cpp.scriban"
+)
+RUNTIME_SKELETON_FLOATING_SCALAR_MANAGED_INVOKE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.FloatingScalarManagedInvokeStub.cpp.scriban"
+)
+RUNTIME_SKELETON_NUMBER_MANAGED_INVOKE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.NumberManagedInvokeStub.cpp.scriban"
+)
+RUNTIME_SKELETON_DECIMAL_MANAGED_INVOKE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.DecimalManagedInvokeStub.cpp.scriban"
+)
+RUNTIME_SKELETON_CHAR_MANAGED_INVOKE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.CharManagedInvokeStub.cpp.scriban"
+)
+RUNTIME_SKELETON_COMPANION_MANAGED_INVOKE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.CompanionManagedInvokeStub.cpp.scriban"
+)
+RUNTIME_SKELETON_DATETIME_SEMANTIC_ENGINE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.DateTimeSemanticEngineStub.cpp.scriban"
+)
+RUNTIME_SKELETON_GLOBALIZATION_DATETIME_SUPPORT_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.GlobalizationDateTimeSupportStub.cpp.scriban"
+)
+RUNTIME_SKELETON_VALUETYPE_KERNEL_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.ValueTypeKernelStub.cpp.scriban"
+)
+RUNTIME_SKELETON_ENUM_MANAGED_INVOKE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.EnumManagedInvokeStub.cpp.scriban"
 )
 
 class FullAssemblyClosureCodegenContractTestSupport(unittest.TestCase):

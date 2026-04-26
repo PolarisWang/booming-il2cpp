@@ -129,5 +129,747 @@
       "blockers": [],
       "updatedAt": ""
     }
-  ]
+  ],
+  "capabilityClosure": {
+    "totalFamilies": 14,
+    "closedFamilies": 0,
+    "waivedFamilies": 0,
+    "excludedFamilies": 0,
+    "platformBlockedFamilies": 0,
+    "inProgressFamilies": 14,
+    "closurePercent": 0.0
+  },
+  "workflowProgress": {
+    "totalRequiredGates": 56,
+    "passedGates": 0,
+    "progressPercent": 0.0
+  },
+  "capabilityFamilies": [
+    {
+      "familyId": "family/System.Runtime.InteropServices/marshalling-attributes",
+      "displayName": "Marshalling Attributes",
+      "description": "StructLayout, MarshalAs, In, Out, Optional, PreserveSig, and related metadata attributes.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-29-complex-bcl-ordered-dll-09-system-runtime-interopservices/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "matchedTypes": [
+        "System.Runtime.InteropServices.MarshalAsAttribute",
+        "System.Runtime.InteropServices.OptionalAttribute",
+        "System.Runtime.InteropServices.PreserveSigAttribute"
+      ],
+      "synthesisStatus": "matched-existing",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Runtime.InteropServices/pinvoke-dllimport",
+      "displayName": "PInvoke DllImport",
+      "description": "DllImport, LibraryImport-adjacent metadata, entry points, calling convention, and char set behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-29-complex-bcl-ordered-dll-09-system-runtime-interopservices/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "matchedTypes": [
+        "System.Runtime.InteropServices.DllImportAttribute",
+        "System.Runtime.InteropServices.LibraryImportAttribute"
+      ],
+      "synthesisStatus": "matched-existing",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Runtime.InteropServices/native-memory-pointers",
+      "displayName": "Native Memory And Pointers",
+      "description": "Marshal allocation, pointer read/write, offset operations, unmanaged memory accessors, and IntPtr helpers.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-29-complex-bcl-ordered-dll-09-system-runtime-interopservices/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "matchedTypes": [
+        "System.IO.UnmanagedMemoryAccessor",
+        "System.Runtime.InteropServices.Marshal",
+        "System.Runtime.InteropServices.MarshalAsAttribute",
+        "System.Runtime.InteropServices.MarshalDirectiveException",
+        "System.Runtime.InteropServices.Marshalling.AnsiStringMarshaller",
+        "System.Runtime.InteropServices.Marshalling.AnsiStringMarshaller+ManagedToUnmanagedIn",
+        "System.Runtime.InteropServices.Marshalling.ArrayMarshaller`2",
+        "System.Runtime.InteropServices.Marshalling.ArrayMarshaller`2+ManagedToUnmanagedIn",
+        "System.Runtime.InteropServices.Marshalling.BStrStringMarshaller",
+        "System.Runtime.InteropServices.Marshalling.BStrStringMarshaller+ManagedToUnmanagedIn",
+        "System.Runtime.InteropServices.Marshalling.ComExposedClassAttribute`1",
+        "System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller`1",
+        "System.Runtime.InteropServices.Marshalling.ComInterfaceOptions",
+        "System.Runtime.InteropServices.Marshalling.ComObject",
+        "System.Runtime.InteropServices.Marshalling.ComVariant",
+        "System.Runtime.InteropServices.Marshalling.ComVariantMarshaller",
+        "System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate",
+        "System.Runtime.InteropServices.Marshalling.ExceptionAsDefaultMarshaller`1",
+        "System.Runtime.InteropServices.Marshalling.ExceptionAsHResultMarshaller`1",
+        "System.Runtime.InteropServices.Marshalling.ExceptionAsNaNMarshaller`1",
+        "System.Runtime.InteropServices.Marshalling.ExceptionAsVoidMarshaller",
+        "System.Runtime.InteropServices.Marshalling.GeneratedComClassAttribute",
+        "System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute",
+        "System.Runtime.InteropServices.Marshalling.IComExposedClass",
+        "System.Runtime.InteropServices.Marshalling.IComExposedDetails",
+        "System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy",
+        "System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy+TableInfo",
+        "System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails",
+        "System.Runtime.InteropServices.Marshalling.IIUnknownInterfaceDetailsStrategy",
+        "System.Runtime.InteropServices.Marshalling.IIUnknownInterfaceType",
+        "System.Runtime.InteropServices.Marshalling.IIUnknownStrategy",
+        "System.Runtime.InteropServices.Marshalling.IUnknownDerivedAttribute`2",
+        "System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider",
+        "System.Runtime.InteropServices.Marshalling.MarshalUsingAttribute",
+        "System.Runtime.InteropServices.Marshalling.PointerArrayMarshaller`2",
+        "System.Runtime.InteropServices.Marshalling.PointerArrayMarshaller`2+ManagedToUnmanagedIn",
+        "System.Runtime.InteropServices.Marshalling.StrategyBasedComWrappers",
+        "System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller`1",
+        "System.Runtime.InteropServices.Marshalling.Utf16StringMarshaller",
+        "System.Runtime.InteropServices.Marshalling.Utf8StringMarshaller",
+        "System.Runtime.InteropServices.Marshalling.Utf8StringMarshaller+ManagedToUnmanagedIn",
+        "System.Runtime.InteropServices.Marshalling.VirtualMethodTableInfo"
+      ],
+      "synthesisStatus": "matched-existing",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Runtime.InteropServices/com-types",
+      "displayName": "COM Types",
+      "description": "ComTypes interfaces, IStream, IEnumVARIANT, FILETIME, BIND_OPTS, and related COM structs.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-29-complex-bcl-ordered-dll-09-system-runtime-interopservices/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "matchedTypes": [
+        "System.Runtime.InteropServices.ComTypes.ADVF",
+        "System.Runtime.InteropServices.ComTypes.BINDPTR",
+        "System.Runtime.InteropServices.ComTypes.BIND_OPTS",
+        "System.Runtime.InteropServices.ComTypes.CALLCONV",
+        "System.Runtime.InteropServices.ComTypes.CONNECTDATA",
+        "System.Runtime.InteropServices.ComTypes.DATADIR",
+        "System.Runtime.InteropServices.ComTypes.DESCKIND",
+        "System.Runtime.InteropServices.ComTypes.DISPPARAMS",
+        "System.Runtime.InteropServices.ComTypes.DVASPECT",
+        "System.Runtime.InteropServices.ComTypes.ELEMDESC",
+        "System.Runtime.InteropServices.ComTypes.ELEMDESC+DESCUNION",
+        "System.Runtime.InteropServices.ComTypes.EXCEPINFO",
+        "System.Runtime.InteropServices.ComTypes.FILETIME",
+        "System.Runtime.InteropServices.ComTypes.FORMATETC",
+        "System.Runtime.InteropServices.ComTypes.FUNCDESC",
+        "System.Runtime.InteropServices.ComTypes.FUNCFLAGS",
+        "System.Runtime.InteropServices.ComTypes.FUNCKIND",
+        "System.Runtime.InteropServices.ComTypes.IAdviseSink",
+        "System.Runtime.InteropServices.ComTypes.IBindCtx",
+        "System.Runtime.InteropServices.ComTypes.IConnectionPoint",
+        "System.Runtime.InteropServices.ComTypes.IConnectionPointContainer",
+        "System.Runtime.InteropServices.ComTypes.IDLDESC",
+        "System.Runtime.InteropServices.ComTypes.IDLFLAG",
+        "System.Runtime.InteropServices.ComTypes.IDataObject",
+        "System.Runtime.InteropServices.ComTypes.IEnumConnectionPoints",
+        "System.Runtime.InteropServices.ComTypes.IEnumConnections",
+        "System.Runtime.InteropServices.ComTypes.IEnumFORMATETC",
+        "System.Runtime.InteropServices.ComTypes.IEnumMoniker",
+        "System.Runtime.InteropServices.ComTypes.IEnumSTATDATA",
+        "System.Runtime.InteropServices.ComTypes.IEnumString",
+        "System.Runtime.InteropServices.ComTypes.IEnumVARIANT",
+        "System.Runtime.InteropServices.ComTypes.IMPLTYPEFLAGS",
+        "System.Runtime.InteropServices.ComTypes.IMoniker",
+        "System.Runtime.InteropServices.ComTypes.INVOKEKIND",
+        "System.Runtime.InteropServices.ComTypes.IPersistFile",
+        "System.Runtime.InteropServices.ComTypes.IRunningObjectTable",
+        "System.Runtime.InteropServices.ComTypes.IStream",
+        "System.Runtime.InteropServices.ComTypes.ITypeComp",
+        "System.Runtime.InteropServices.ComTypes.ITypeInfo",
+        "System.Runtime.InteropServices.ComTypes.ITypeInfo2",
+        "System.Runtime.InteropServices.ComTypes.ITypeLib",
+        "System.Runtime.InteropServices.ComTypes.ITypeLib2",
+        "System.Runtime.InteropServices.ComTypes.LIBFLAGS",
+        "System.Runtime.InteropServices.ComTypes.PARAMDESC",
+        "System.Runtime.InteropServices.ComTypes.PARAMFLAG",
+        "System.Runtime.InteropServices.ComTypes.STATDATA",
+        "System.Runtime.InteropServices.ComTypes.STATSTG",
+        "System.Runtime.InteropServices.ComTypes.STGMEDIUM",
+        "System.Runtime.InteropServices.ComTypes.SYSKIND",
+        "System.Runtime.InteropServices.ComTypes.TYMED",
+        "System.Runtime.InteropServices.ComTypes.TYPEATTR",
+        "System.Runtime.InteropServices.ComTypes.TYPEDESC",
+        "System.Runtime.InteropServices.ComTypes.TYPEFLAGS",
+        "System.Runtime.InteropServices.ComTypes.TYPEKIND",
+        "System.Runtime.InteropServices.ComTypes.TYPELIBATTR",
+        "System.Runtime.InteropServices.ComTypes.VARDESC",
+        "System.Runtime.InteropServices.ComTypes.VARDESC+DESCUNION",
+        "System.Runtime.InteropServices.ComTypes.VARFLAGS",
+        "System.Runtime.InteropServices.ComTypes.VARKIND"
+      ],
+      "synthesisStatus": "matched-existing",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Runtime.InteropServices/com-wrappers",
+      "displayName": "COM Wrappers",
+      "description": "ComWrappers, wrappers strategy, vtable pointer helpers, and COM object identity behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-29-complex-bcl-ordered-dll-09-system-runtime-interopservices/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "matchedTypes": [
+        "System.Runtime.InteropServices.ComWrappers",
+        "System.Runtime.InteropServices.ComWrappers+ComInterfaceDispatch",
+        "System.Runtime.InteropServices.ComWrappers+ComInterfaceEntry"
+      ],
+      "synthesisStatus": "matched-existing",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Runtime.InteropServices/generated-marshalling",
+      "displayName": "Generated Marshalling",
+      "description": "Generated marshalling attributes, marshaller shape, native marshalling, and source-generated contracts.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-29-complex-bcl-ordered-dll-09-system-runtime-interopservices/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "matchedTypes": [
+        "System.Runtime.InteropServices.Marshalling.AnsiStringMarshaller",
+        "System.Runtime.InteropServices.Marshalling.AnsiStringMarshaller+ManagedToUnmanagedIn",
+        "System.Runtime.InteropServices.Marshalling.ArrayMarshaller`2",
+        "System.Runtime.InteropServices.Marshalling.ArrayMarshaller`2+ManagedToUnmanagedIn",
+        "System.Runtime.InteropServices.Marshalling.BStrStringMarshaller",
+        "System.Runtime.InteropServices.Marshalling.BStrStringMarshaller+ManagedToUnmanagedIn",
+        "System.Runtime.InteropServices.Marshalling.ComExposedClassAttribute`1",
+        "System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller`1",
+        "System.Runtime.InteropServices.Marshalling.ComInterfaceOptions",
+        "System.Runtime.InteropServices.Marshalling.ComObject",
+        "System.Runtime.InteropServices.Marshalling.ComVariant",
+        "System.Runtime.InteropServices.Marshalling.ComVariantMarshaller",
+        "System.Runtime.InteropServices.Marshalling.ComVariantMarshaller+RefPropagate",
+        "System.Runtime.InteropServices.Marshalling.ExceptionAsDefaultMarshaller`1",
+        "System.Runtime.InteropServices.Marshalling.ExceptionAsHResultMarshaller`1",
+        "System.Runtime.InteropServices.Marshalling.ExceptionAsNaNMarshaller`1",
+        "System.Runtime.InteropServices.Marshalling.ExceptionAsVoidMarshaller",
+        "System.Runtime.InteropServices.Marshalling.GeneratedComClassAttribute",
+        "System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute",
+        "System.Runtime.InteropServices.Marshalling.IComExposedClass",
+        "System.Runtime.InteropServices.Marshalling.IComExposedDetails",
+        "System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy",
+        "System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy+TableInfo",
+        "System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails",
+        "System.Runtime.InteropServices.Marshalling.IIUnknownInterfaceDetailsStrategy",
+        "System.Runtime.InteropServices.Marshalling.IIUnknownInterfaceType",
+        "System.Runtime.InteropServices.Marshalling.IIUnknownStrategy",
+        "System.Runtime.InteropServices.Marshalling.IUnknownDerivedAttribute`2",
+        "System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider",
+        "System.Runtime.InteropServices.Marshalling.MarshalUsingAttribute",
+        "System.Runtime.InteropServices.Marshalling.PointerArrayMarshaller`2",
+        "System.Runtime.InteropServices.Marshalling.PointerArrayMarshaller`2+ManagedToUnmanagedIn",
+        "System.Runtime.InteropServices.Marshalling.StrategyBasedComWrappers",
+        "System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller`1",
+        "System.Runtime.InteropServices.Marshalling.Utf16StringMarshaller",
+        "System.Runtime.InteropServices.Marshalling.Utf8StringMarshaller",
+        "System.Runtime.InteropServices.Marshalling.Utf8StringMarshaller+ManagedToUnmanagedIn",
+        "System.Runtime.InteropServices.Marshalling.VirtualMethodTableInfo"
+      ],
+      "synthesisStatus": "matched-existing",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Runtime.InteropServices/function-pointers",
+      "displayName": "Function Pointers",
+      "description": "UnmanagedCallersOnly, delegates to function pointers, callbacks, and native invocation contracts.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-29-complex-bcl-ordered-dll-09-system-runtime-interopservices/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "matchedTypes": [
+        "System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute"
+      ],
+      "synthesisStatus": "matched-existing",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Runtime.InteropServices/unmanaged-calling-conventions",
+      "displayName": "Unmanaged Calling Conventions",
+      "description": "CallingConvention, CallingConventionAttribute, SuppressGCTransition, and convention metadata.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-29-complex-bcl-ordered-dll-09-system-runtime-interopservices/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "matchedTypes": [
+        "System.Runtime.InteropServices.CallingConvention"
+      ],
+      "synthesisStatus": "matched-existing",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Runtime.InteropServices/objective-c-interop",
+      "displayName": "Objective-C Interop",
+      "description": "ObjectiveCMarshal, Objective-C tracked type contracts, and platform-specific interop behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-29-complex-bcl-ordered-dll-09-system-runtime-interopservices/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "matchedTypes": [
+        "System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal",
+        "System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+MessageSendFunction",
+        "System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+UnhandledExceptionPropagationHandler",
+        "System.Runtime.InteropServices.ObjectiveC.ObjectiveCTrackedTypeAttribute"
+      ],
+      "synthesisStatus": "matched-existing",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Runtime.InteropServices/exception-errors",
+      "displayName": "Interop Exceptions And Errors",
+      "description": "COMException, ExternalException, SEHException, DllNotFoundException, HRESULT, and last-error behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-29-complex-bcl-ordered-dll-09-system-runtime-interopservices/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "matchedTypes": [
+        "System.DllNotFoundException",
+        "System.Runtime.InteropServices.COMException",
+        "System.Runtime.InteropServices.SEHException"
+      ],
+      "synthesisStatus": "matched-existing",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Runtime.InteropServices/secure-string-marshal",
+      "displayName": "SecureString Marshal",
+      "description": "SecureStringMarshal and secure string to native memory conversion behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-29-complex-bcl-ordered-dll-09-system-runtime-interopservices/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "matchedTypes": [
+        "System.Security.SecureStringMarshal"
+      ],
+      "synthesisStatus": "matched-existing",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Runtime.InteropServices/handles-safehandle-gchandle",
+      "displayName": "Handles SafeHandle GCHandle",
+      "description": "SafeHandle, CriticalHandle, GCHandle, handle types, allocation, release, and lifetime behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-29-complex-bcl-ordered-dll-09-system-runtime-interopservices/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "synthesisStatus": "orphan-confirmed",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Runtime.InteropServices/custom-marshaller-contracts",
+      "displayName": "Custom Marshaller Contracts",
+      "description": "CustomMarshallerAttribute, marshal modes, element marshalling, and collection marshalling contracts.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-29-complex-bcl-ordered-dll-09-system-runtime-interopservices/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "synthesisStatus": "orphan-confirmed",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Runtime.InteropServices/runtime-interop-services",
+      "displayName": "Runtime Interop Services",
+      "description": "RuntimeInformation, OSPlatform, Architecture, MemoryMarshal-adjacent interop surface, and utility contracts.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-29-complex-bcl-ordered-dll-09-system-runtime-interopservices/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "synthesisStatus": "orphan-confirmed",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    }
+  ],
+  "sourceLinks": {
+    "subjectSource": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln",
+    "generatedCode": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/analysis/generated/",
+    "evidence": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/",
+    "verificationSource": "verification/catalog/programs/foundation-dll-translation-audit.program.json"
+  },
+  "waiverSummary": {
+    "totalWaivers": 0,
+    "activeWaivers": 0,
+    "expiredWaivers": 0,
+    "totalExclusions": 0,
+    "totalPlatformBlocked": 0
+  },
+  "denominatorStatus": "audit-confirmed",
+  "schemaVersion": 2
 }

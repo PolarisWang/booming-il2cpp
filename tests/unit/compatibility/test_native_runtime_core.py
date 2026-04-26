@@ -53,6 +53,73 @@ class NativeRuntimeCoreTests(unittest.TestCase):
         for marker in required_markers:
             self.assertIn(marker, runtime_core_text)
 
+    def test_method_invoke_supports_indirect_non_pointer_return_buffers(self) -> None:
+        runtime_core_text = RUNTIME_CORE_SOURCE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "if (out_return_value_size == sizeof(void*))",
+            "auto* indirect_return_value = reinterpret_cast<void* const*>(out_return_value);",
+            "if (indirect_return_value == nullptr || *indirect_return_value == nullptr)",
+            "std::memcpy(*indirect_return_value, return_value, out_return_value_size);",
+        ]:
+            self.assertIn(required_fragment, runtime_core_text)
+
+    def test_runtime_core_exposes_generic_valuetype_kernel_helpers(self) -> None:
+        runtime_core_text = RUNTIME_CORE_SOURCE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "bool CharIsAscii(std::uint16_t value)",
+            "bool CharIsAsciiDigit(std::uint16_t value)",
+            "bool CharIsAsciiHexDigit(std::uint16_t value)",
+            "bool CharIsAsciiLetter(std::uint16_t value)",
+            "bool CharIsSurrogatePair(std::uint16_t high_surrogate, std::uint16_t low_surrogate)",
+            "bool CharIsWhiteSpaceLatin1(std::uint16_t value)",
+            "bool CharIsLatin1(std::uint16_t value)",
+            "bool HalfIsFinite(std::uint16_t value)",
+            "bool HalfIsNegative(std::uint16_t value)",
+            "bool HalfIsNormal(std::uint16_t value)",
+            "bool HalfOperatorEquals(std::uint16_t left_value, std::uint16_t right_value)",
+            "bool HalfOperatorLessThan(std::uint16_t left_value, std::uint16_t right_value)",
+            "bool HalfIsNaN(std::uint16_t value)",
+            "bool HalfIsInfinity(std::uint16_t value)",
+            "int32_t SingleCompare(float left_value, float right_value)",
+            "bool SingleEquals(float left_value, float right_value)",
+            "bool SingleIsNegative(float value)",
+            "bool SingleIsNormal(float value)",
+            "bool SingleIsFinite(float value)",
+            "bool SingleIsNaN(float value)",
+            "bool SingleIsInfinity(float value)",
+            "int32_t DoubleCompare(double left_value, double right_value)",
+            "bool DoubleEquals(double left_value, double right_value)",
+            "bool DoubleIsNegative(double value)",
+            "bool DoubleIsNormal(double value)",
+            "bool DoubleIsFinite(double value)",
+            "bool DoubleIsNaN(double value)",
+            "bool DoubleIsInfinity(double value)",
+            "bool NFloatIsNegative(double value)",
+            "bool NFloatIsNormal(double value)",
+            "bool NFloatIsFinite(double value)",
+            "bool NFloatIsNaN(double value)",
+            "bool NFloatIsInfinity(double value)",
+            "int32_t Int128Compare(const void* left_value, const void* right_value)",
+            "bool Int128Equals(const void* left_value, const void* right_value)",
+            "int32_t UInt128Compare(const void* left_value, const void* right_value)",
+            "bool UInt128Equals(const void* left_value, const void* right_value)",
+            "int32_t DateTimeCompareTicks(const void* left_value, const void* right_value)",
+            "int32_t TimeSpanCompareTicks(const void* left_value, const void* right_value)",
+            "int32_t DateOnlyCompareDayNumber(std::int32_t left_value, std::int32_t right_value)",
+            "bool DateOnlyEqualsDayNumber(std::int32_t left_value, std::int32_t right_value)",
+            "int32_t TimeOnlyCompareTicksValue(std::int64_t left_value, std::int64_t right_value)",
+            "bool TimeOnlyEqualsTicksValue(std::int64_t left_value, std::int64_t right_value)",
+            "std::isfinite(",
+            "std::isnan(",
+            "std::isinf(",
+            "kDateTimeTicksMask",
+            "ValueTypeKernelBackendKind::Intrinsic",
+            "ValueTypeKernelBackendKind::Generic",
+        ]:
+            self.assertIn(required_fragment, runtime_core_text)
+
 
 if __name__ == "__main__":
     unittest.main()

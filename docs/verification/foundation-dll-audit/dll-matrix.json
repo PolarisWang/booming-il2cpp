@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "rows": [
     {
       "assemblyName": "System.Private.CoreLib",
@@ -15,7 +15,22 @@
       "hotupdate-proof": "passed",
       "benchmark": "pending",
       "codegen-review": "passed",
-      "completion-certification": "blocked"
+      "completion-certification": "blocked",
+      "denominatorStatus": "audit-confirmed",
+      "capabilityClosure": {
+        "totalFamilies": 24,
+        "closedFamilies": 0,
+        "waivedFamilies": 0,
+        "excludedFamilies": 0,
+        "platformBlockedFamilies": 0,
+        "inProgressFamilies": 24,
+        "closurePercent": 0.0
+      },
+      "workflowProgress": {
+        "totalRequiredGates": 96,
+        "passedGates": 6,
+        "progressPercent": 6.25
+      }
     },
     {
       "assemblyName": "System.Collections.Immutable",
@@ -29,7 +44,22 @@
       "hotupdate-proof": "pending",
       "benchmark": "pending",
       "codegen-review": "pending",
-      "completion-certification": "blocked"
+      "completion-certification": "blocked",
+      "denominatorStatus": "audit-confirmed",
+      "capabilityClosure": {
+        "totalFamilies": 10,
+        "closedFamilies": 0,
+        "waivedFamilies": 0,
+        "excludedFamilies": 0,
+        "platformBlockedFamilies": 0,
+        "inProgressFamilies": 10,
+        "closurePercent": 0.0
+      },
+      "workflowProgress": {
+        "totalRequiredGates": 40,
+        "passedGates": 0,
+        "progressPercent": 0.0
+      }
     },
     {
       "assemblyName": "System.Formats.Asn1",
@@ -43,7 +73,22 @@
       "hotupdate-proof": "pending",
       "benchmark": "pending",
       "codegen-review": "pending",
-      "completion-certification": "pending"
+      "completion-certification": "pending",
+      "denominatorStatus": "audit-confirmed",
+      "capabilityClosure": {
+        "totalFamilies": 6,
+        "closedFamilies": 0,
+        "waivedFamilies": 0,
+        "excludedFamilies": 0,
+        "platformBlockedFamilies": 0,
+        "inProgressFamilies": 6,
+        "closurePercent": 0.0
+      },
+      "workflowProgress": {
+        "totalRequiredGates": 24,
+        "passedGates": 0,
+        "progressPercent": 0.0
+      }
     },
     {
       "assemblyName": "System.IO.Compression.Brotli",
@@ -57,7 +102,22 @@
       "hotupdate-proof": "pending",
       "benchmark": "pending",
       "codegen-review": "pending",
-      "completion-certification": "pending"
+      "completion-certification": "pending",
+      "denominatorStatus": "audit-confirmed",
+      "capabilityClosure": {
+        "totalFamilies": 4,
+        "closedFamilies": 0,
+        "waivedFamilies": 0,
+        "excludedFamilies": 0,
+        "platformBlockedFamilies": 0,
+        "inProgressFamilies": 4,
+        "closurePercent": 0.0
+      },
+      "workflowProgress": {
+        "totalRequiredGates": 16,
+        "passedGates": 0,
+        "progressPercent": 0.0
+      }
     },
     {
       "assemblyName": "System.IO.Compression.ZipFile",
@@ -71,7 +131,22 @@
       "hotupdate-proof": "pending",
       "benchmark": "pending",
       "codegen-review": "pending",
-      "completion-certification": "pending"
+      "completion-certification": "pending",
+      "denominatorStatus": "audit-confirmed",
+      "capabilityClosure": {
+        "totalFamilies": 2,
+        "closedFamilies": 0,
+        "waivedFamilies": 0,
+        "excludedFamilies": 0,
+        "platformBlockedFamilies": 0,
+        "inProgressFamilies": 2,
+        "closurePercent": 0.0
+      },
+      "workflowProgress": {
+        "totalRequiredGates": 8,
+        "passedGates": 0,
+        "progressPercent": 0.0
+      }
     },
     {
       "assemblyName": "System.IO.Pipelines",
@@ -85,7 +160,22 @@
       "hotupdate-proof": "pending",
       "benchmark": "pending",
       "codegen-review": "pending",
-      "completion-certification": "pending"
+      "completion-certification": "pending",
+      "denominatorStatus": "audit-confirmed",
+      "capabilityClosure": {
+        "totalFamilies": 5,
+        "closedFamilies": 0,
+        "waivedFamilies": 0,
+        "excludedFamilies": 0,
+        "platformBlockedFamilies": 0,
+        "inProgressFamilies": 5,
+        "closurePercent": 0.0
+      },
+      "workflowProgress": {
+        "totalRequiredGates": 20,
+        "passedGates": 0,
+        "progressPercent": 0.0
+      }
     },
     {
       "assemblyName": "System.Linq",
@@ -99,7 +189,22 @@
       "hotupdate-proof": "pending",
       "benchmark": "pending",
       "codegen-review": "pending",
-      "completion-certification": "pending"
+      "completion-certification": "pending",
+      "denominatorStatus": "audit-confirmed",
+      "capabilityClosure": {
+        "totalFamilies": 12,
+        "closedFamilies": 0,
+        "waivedFamilies": 0,
+        "excludedFamilies": 0,
+        "platformBlockedFamilies": 0,
+        "inProgressFamilies": 12,
+        "closurePercent": 0.0
+      },
+      "workflowProgress": {
+        "totalRequiredGates": 48,
+        "passedGates": 0,
+        "progressPercent": 0.0
+      }
     },
     {
       "assemblyName": "System.Net.ServerSentEvents",
@@ -113,7 +218,22 @@
       "hotupdate-proof": "pending",
       "benchmark": "pending",
       "codegen-review": "pending",
-      "completion-certification": "pending"
+      "completion-certification": "pending",
+      "denominatorStatus": "audit-confirmed",
+      "capabilityClosure": {
+        "totalFamilies": 4,
+        "closedFamilies": 0,
+        "waivedFamilies": 0,
+        "excludedFamilies": 0,
+        "platformBlockedFamilies": 0,
+        "inProgressFamilies": 4,
+        "closurePercent": 0.0
+      },
+      "workflowProgress": {
+        "totalRequiredGates": 16,
+        "passedGates": 0,
+        "progressPercent": 0.0
+      }
     },
     {
       "assemblyName": "System.ObjectModel",
@@ -127,7 +247,22 @@
       "hotupdate-proof": "pending",
       "benchmark": "pending",
       "codegen-review": "pending",
-      "completion-certification": "pending"
+      "completion-certification": "pending",
+      "denominatorStatus": "audit-confirmed",
+      "capabilityClosure": {
+        "totalFamilies": 6,
+        "closedFamilies": 0,
+        "waivedFamilies": 0,
+        "excludedFamilies": 0,
+        "platformBlockedFamilies": 0,
+        "inProgressFamilies": 6,
+        "closurePercent": 0.0
+      },
+      "workflowProgress": {
+        "totalRequiredGates": 24,
+        "passedGates": 0,
+        "progressPercent": 0.0
+      }
     },
     {
       "assemblyName": "System.Runtime.InteropServices",
@@ -143,7 +278,22 @@
       "hotupdate-proof": "pending",
       "benchmark": "pending",
       "codegen-review": "pending",
-      "completion-certification": "pending"
+      "completion-certification": "pending",
+      "denominatorStatus": "audit-confirmed",
+      "capabilityClosure": {
+        "totalFamilies": 14,
+        "closedFamilies": 0,
+        "waivedFamilies": 0,
+        "excludedFamilies": 0,
+        "platformBlockedFamilies": 0,
+        "inProgressFamilies": 14,
+        "closurePercent": 0.0
+      },
+      "workflowProgress": {
+        "totalRequiredGates": 56,
+        "passedGates": 0,
+        "progressPercent": 0.0
+      }
     },
     {
       "assemblyName": "System.Runtime.Serialization.Formatters",
@@ -159,7 +309,22 @@
       "hotupdate-proof": "pending",
       "benchmark": "pending",
       "codegen-review": "pending",
-      "completion-certification": "pending"
+      "completion-certification": "pending",
+      "denominatorStatus": "audit-confirmed",
+      "capabilityClosure": {
+        "totalFamilies": 6,
+        "closedFamilies": 0,
+        "waivedFamilies": 0,
+        "excludedFamilies": 0,
+        "platformBlockedFamilies": 0,
+        "inProgressFamilies": 6,
+        "closurePercent": 0.0
+      },
+      "workflowProgress": {
+        "totalRequiredGates": 24,
+        "passedGates": 0,
+        "progressPercent": 0.0
+      }
     },
     {
       "assemblyName": "System.Security.Principal.Windows",
@@ -173,7 +338,22 @@
       "hotupdate-proof": "pending",
       "benchmark": "pending",
       "codegen-review": "pending",
-      "completion-certification": "pending"
+      "completion-certification": "pending",
+      "denominatorStatus": "audit-confirmed",
+      "capabilityClosure": {
+        "totalFamilies": 6,
+        "closedFamilies": 0,
+        "waivedFamilies": 0,
+        "excludedFamilies": 0,
+        "platformBlockedFamilies": 0,
+        "inProgressFamilies": 6,
+        "closurePercent": 0.0
+      },
+      "workflowProgress": {
+        "totalRequiredGates": 24,
+        "passedGates": 0,
+        "progressPercent": 0.0
+      }
     },
     {
       "assemblyName": "System.Text.Json",
@@ -189,7 +369,22 @@
       "hotupdate-proof": "pending",
       "benchmark": "pending",
       "codegen-review": "pending",
-      "completion-certification": "pending"
+      "completion-certification": "pending",
+      "denominatorStatus": "audit-confirmed",
+      "capabilityClosure": {
+        "totalFamilies": 13,
+        "closedFamilies": 0,
+        "waivedFamilies": 0,
+        "excludedFamilies": 0,
+        "platformBlockedFamilies": 0,
+        "inProgressFamilies": 13,
+        "closurePercent": 0.0
+      },
+      "workflowProgress": {
+        "totalRequiredGates": 52,
+        "passedGates": 0,
+        "progressPercent": 0.0
+      }
     },
     {
       "assemblyName": "System.Threading.Tasks.Parallel",
@@ -203,7 +398,22 @@
       "hotupdate-proof": "pending",
       "benchmark": "pending",
       "codegen-review": "pending",
-      "completion-certification": "pending"
+      "completion-certification": "pending",
+      "denominatorStatus": "audit-confirmed",
+      "capabilityClosure": {
+        "totalFamilies": 4,
+        "closedFamilies": 0,
+        "waivedFamilies": 0,
+        "excludedFamilies": 0,
+        "platformBlockedFamilies": 0,
+        "inProgressFamilies": 4,
+        "closurePercent": 0.0
+      },
+      "workflowProgress": {
+        "totalRequiredGates": 16,
+        "passedGates": 0,
+        "progressPercent": 0.0
+      }
     }
   ]
 }

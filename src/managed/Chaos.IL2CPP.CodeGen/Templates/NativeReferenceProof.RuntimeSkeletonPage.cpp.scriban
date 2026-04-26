@@ -50,6 +50,32 @@ struct RuntimeSkeletonTypeState
     std::atomic<void*> type_handle;
 };
 
+struct RuntimeSkeletonConvertDecimalCarrier
+{
+    std::uint32_t flags;
+    std::uint64_t lo64;
+    std::uint32_t hi32;
+};
+
+struct RuntimeSkeletonConvertSpanCarrier
+{
+    void* data;
+    std::uintptr_t length;
+};
+
+struct RuntimeSkeletonStringDecimalCarrier
+{
+    std::uint32_t flags;
+    std::uint64_t lo64;
+    std::uint32_t hi32;
+};
+
+struct RuntimeSkeletonStringSpanCarrier
+{
+    void* data;
+    std::uintptr_t length;
+};
+
 struct RuntimeSkeletonFieldBindingDescriptor
 {
     const char* fallback_assembly_name;

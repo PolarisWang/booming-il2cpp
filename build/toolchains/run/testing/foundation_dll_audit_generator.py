@@ -40,6 +40,12 @@ PROJECT_PROGRESS_ORDER = (
     "completion-certification",
 )
 ARTIFACT_PATH_PATTERN = re.compile(r"(?P<path>(?:artifacts|docs|verification|subjects)/[^\s`]+)")
+LEDGER_RELATIVE_PATH = (
+    "verification",
+    "projections",
+    "foundation-dll-audit",
+    "capability-family-ledger.json",
+)
 
 
 def _string(value: Any) -> str:
@@ -86,6 +92,20 @@ def _load_program_manifest(repo_root: Path) -> dict[str, Any]:
     if not path.is_file():
         raise RuntimeError(f"foundation dll audit manifest is missing: {_relative(repo_root, path)}")
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _load_capability_ledger(repo_root: Path) -> dict[str, Any] | None:
+    path = repo_root.joinpath(*LEDGER_RELATIVE_PATH)
+    if not path.is_file():
+        return None
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _build_ledger_lookup(ledger: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
+    if ledger is None:
+        return {}
+    dlls = list(ledger.get("dlls") or [])
+    return {entry["assemblyName"]: entry for entry in dlls}
 
 
 def _parse_markdown_table_rows(roadmap_text: str) -> dict[str, dict[str, str]]:
@@ -235,6 +255,179 @@ def _dll_state(
         if task_id in active_task_ids:
             return dll_state, task_id, _string((roadmap_rows.get(task_id) or {}).get("purpose"))
     return dll_state, roadmap_task_id, _string(roadmap_row.get("purpose"))
+
+
+def _compute_capability_closure(families: list[dict[str, Any]]) -> dict[str, Any]:
+    total = len(families)
+    closed = sum(1 for f in families if f.get("closureStatus") == "closed")
+    waived = sum(1 for f in families if f.get("closureStatus") == "waived")
+    excluded = sum(1 for f in families if f.get("closureStatus") == "excluded")
+    platform_blocked = sum(1 for f in families if f.get("closureStatus") == "platform-blocked")
+    in_progress = sum(1 for f in families if f.get("closureStatus") == "in-progress")
+    closure_pct = round((closed / total) * 100, 2) if total > 0 else 0.0
+    return {
+        "totalFamilies": total,
+        "closedFamilies": closed,
+        "waivedFamilies": waived,
+        "excludedFamilies": excluded,
+        "platformBlockedFamilies": platform_blocked,
+        "inProgressFamilies": in_progress,
+        "closurePercent": closure_pct,
+    }
+
+
+def _compute_gate_progress(
+    families: list[dict[str, Any]],
+    *,
+    project_templates: list[dict[str, Any]],
+) -> dict[str, Any]:
+    gate_codes = [tmpl.get("code") for tmpl in project_templates if tmpl.get("code") != "completion-certification"]
+    all_required = 0
+    all_passed = 0
+    for family in families:
+        gates = dict(family.get("verificationGates") or {})
+        for code in gate_codes:
+            state = _string(gates.get(code))
+            if state and state != "not-required":
+                all_required += 1
+                if state == "passed":
+                    all_passed += 1
+    progress_pct = round((all_passed / all_required) * 100, 2) if all_required > 0 else 0.0
+    return {
+        "totalRequiredGates": all_required,
+        "passedGates": all_passed,
+        "progressPercent": progress_pct,
+    }
+
+
+def _compute_waiver_summary(families: list[dict[str, Any]]) -> dict[str, Any]:
+    total = 0
+    active = 0
+    expired = 0
+    exclusions = 0
+    platform_blocked = 0
+    for family in families:
+        for record in list(family.get("waiverRecords") or []):
+            total += 1
+            rtype = _string(record.get("type"))
+            if rtype == "exclusion":
+                exclusions += 1
+            elif rtype == "platform-blocked":
+                platform_blocked += 1
+            else:
+                if record.get("status") == "expired":
+                    expired += 1
+                else:
+                    active += 1
+    return {
+        "totalWaivers": total,
+        "activeWaivers": active,
+        "expiredWaivers": expired,
+        "totalExclusions": exclusions,
+        "totalPlatformBlocked": platform_blocked,
+    }
+
+
+_EXECUTION_TO_GATE_STATE: dict[str, str] = {
+    "passed": "passed",
+    "blocked": "in-progress",
+    "in-progress": "in-progress",
+    "pending": "pending",
+    "missing-evidence": "in-progress",
+    "not-required": "not-required",
+}
+
+
+def _auto_derive_family(
+    assembly_name: str,
+    projects: list[dict[str, Any]],
+    project_templates: list[dict[str, Any]],
+) -> dict[str, Any]:
+    verification_gates: dict[str, str] = {}
+    for project in projects:
+        code = _string(project.get("projectCode"))
+        if code == "completion-certification":
+            continue
+        policy = _string(project.get("policyState"))
+        if policy == "not-required":
+            continue
+        ex_state = _string(project.get("executionState"))
+        gate_state = _EXECUTION_TO_GATE_STATE.get(ex_state, "pending")
+        if gate_state != "not-required":
+            verification_gates[code] = gate_state
+    return {
+        "familyId": f"family/{assembly_name}/all",
+        "displayName": f"{assembly_name} Full Surface",
+        "description": f"Auto-derived capability family for {assembly_name}",
+        "denominatorStatus": "auto-derived",
+        "closureStatus": "in-progress",
+        "verificationGates": verification_gates,
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+    }
+
+
+def _validate_ledger_dll(entry: dict[str, Any]) -> list[str]:
+    warnings: list[str] = []
+    families = list(entry.get("families") or [])
+    seen_ids: set[str] = set()
+    valid_states = {"closed", "waived", "excluded", "platform-blocked", "in-progress"}
+    valid_denominator_states = {"candidate-derived", "audit-confirmed", "auto-derived"}
+    valid_gate_states = {"pending", "in-progress", "passed", "failed", "blocked", "missing-evidence", "not-required"}
+    dll_denominator_status = _string(entry.get("denominatorStatus"))
+    if dll_denominator_status and dll_denominator_status not in valid_denominator_states:
+        warnings.append(f"Invalid denominatorStatus '{dll_denominator_status}' for DLL {entry.get('assemblyName')}")
+    for family in families:
+        fid = _string(family.get("familyId"))
+        if fid in seen_ids:
+            warnings.append(f"Duplicate familyId: {fid}")
+        seen_ids.add(fid)
+        status = _string(family.get("closureStatus"))
+        if status and status not in valid_states:
+            warnings.append(f"Invalid closureStatus '{status}' for {fid}")
+        family_denominator_status = _string(family.get("denominatorStatus"))
+        if family_denominator_status and family_denominator_status not in valid_denominator_states:
+            warnings.append(f"Invalid denominatorStatus '{family_denominator_status}' for {fid}")
+        for gate_code, gate_state in dict(family.get("verificationGates") or {}).items():
+            if gate_state not in valid_gate_states:
+                warnings.append(f"Invalid gate state '{gate_state}' for {fid}/{gate_code}")
+    return warnings
+
+
+def _derive_dll_denominator_status(ledger_entry: dict[str, Any] | None, families: list[dict[str, Any]], family_source: str) -> str:
+    if family_source == "auto-derived":
+        return "auto-derived"
+    explicit = _string((ledger_entry or {}).get("denominatorStatus"))
+    if explicit:
+        return explicit
+    family_states = {_string(family.get("denominatorStatus")) for family in families if _string(family.get("denominatorStatus"))}
+    if family_states == {"audit-confirmed"}:
+        return "audit-confirmed"
+    return "candidate-derived"
+
+
+def _render_progress_bar(label: str, numerator: int, denominator: int, pct: float, *, css_class: str) -> str:
+    fill_width = min(pct, 100.0)
+    return (
+        f'<div class="progress-bar-container">'
+        f'<div class="progress-label"><span>{escape(label)}</span><span>{numerator}/{denominator} ({pct:.1f}%)</span></div>'
+        f'<div class="progress-bar"><div class="progress-bar-fill {escape(css_class)}" style="width: {fill_width:.1f}%"></div></div>'
+        f'</div>'
+    )
+
+
+def _render_mini_bar(pct: float, numerator: int, denominator: int) -> str:
+    if denominator == 0:
+        return '<span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span>'
+    fill_width = min(pct, 100.0)
+    css = "high" if pct >= 100 else ("medium" if pct >= 50 else "low")
+    return (
+        f'<span class="mini-bar" title="{numerator}/{denominator}">'
+        f'<span class="mini-fill {escape(css)}" style="width: {fill_width:.1f}%"></span>'
+        f'</span>'
+        f' <span class="mini-label">{numerator}/{denominator}</span>'
+    )
 
 
 def _collect_support_refs(
@@ -403,6 +596,10 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
     program_manifest = _load_program_manifest(repo_root)
     roadmap_rows = _roadmap_rows(repo_root, _string(program_manifest.get("roadmapPath")))
     active_task_ids = _active_task_ids(repo_root)
+    ledger = _load_capability_ledger(repo_root)
+    ledger_lookup = _build_ledger_lookup(ledger)
+    has_ledger = ledger is not None
+    project_templates = list(program_manifest.get("projectTemplates") or [])
     dll_rows: list[dict[str, Any]] = []
     artifact_rows: list[dict[str, Any]] = []
     for assembly_entry in sorted(
@@ -433,6 +630,21 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
             "riskTags": list(assembly_entry.get("riskTags") or []),
             "projects": projects,
         }
+        if has_ledger:
+            ledger_entry = ledger_lookup.get(assembly_name)
+            families = list((ledger_entry or {}).get("families") or [])
+            family_source = ""
+            if not families:
+                families = [_auto_derive_family(assembly_name, projects, project_templates)]
+                dll_record["familySource"] = "auto-derived"
+                family_source = "auto-derived"
+            dll_record["capabilityClosure"] = _compute_capability_closure(families)
+            dll_record["workflowProgress"] = _compute_gate_progress(families, project_templates=project_templates)
+            dll_record["capabilityFamilies"] = families
+            dll_record["sourceLinks"] = dict((ledger_entry or {}).get("sourceLinks") or {})
+            dll_record["waiverSummary"] = _compute_waiver_summary(families)
+            dll_record["denominatorStatus"] = _derive_dll_denominator_status(ledger_entry, families, family_source)
+            dll_record["schemaVersion"] = 2
         dll_rows.append(dll_record)
         for project in projects:
             for artifact in list(project.get("artifacts") or []):
@@ -461,6 +673,34 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
         },
         "scopeAssemblies": [item["assemblyName"] for item in dll_rows],
     }
+    if has_ledger:
+        all_families: list[dict[str, Any]] = []
+        for dll_row in dll_rows:
+            all_families.extend(list(dll_row.get("capabilityFamilies") or []))
+        program_payload["schemaVersion"] = 2
+        program_payload["summary"]["capabilityClosure"] = _compute_capability_closure(all_families)
+        total_required = sum(dll_row.get("workflowProgress", {}).get("totalRequiredGates", 0) for dll_row in dll_rows)
+        total_passed = sum(dll_row.get("workflowProgress", {}).get("passedGates", 0) for dll_row in dll_rows)
+        program_payload["summary"]["workflowProgress"] = {
+            "totalRequiredGates": total_required,
+            "passedGates": total_passed,
+            "progressPercent": round((total_passed / total_required) * 100, 2) if total_required > 0 else 0.0,
+        }
+        program_payload["summary"]["dllCompletion"] = {
+            "completedDllCount": completed_count,
+            "blockedDllCount": len(blocked_rows),
+            "inProgressDllCount": len(in_progress_rows),
+            "notStartedDllCount": sum(1 for item in dll_rows if item["dllState"] == "not-started"),
+        }
+        authority_snapshot = dict(ledger.get("authoritySnapshotOf") or {}) if isinstance(ledger.get("authoritySnapshotOf"), dict) else {}
+        program_payload["authoritySnapshot"] = {
+            "snapshotId": _string(ledger.get("snapshotId") or f"snap-{ledger.get('snapshotAt', 'unknown')}"),
+            "snapshotAt": _string(ledger.get("snapshotAt", "")),
+            "ledgerVersion": _string(ledger.get("schemaVersion", "")),
+            "denominatorStrategy": _string(ledger.get("denominatorStrategy", "")),
+            "denominatorStatus": _string(ledger.get("denominatorStatus", "")),
+            "originalAuthorityDigest": dict(ledger.get("originalAuthorityDigest") or {}),
+        }
     matrix_rows = []
     for dll_row in dll_rows:
         matrix_row = {
@@ -472,12 +712,21 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
         }
         for project in dll_row["projects"]:
             matrix_row[project["projectCode"]] = project["executionState"]
+        if has_ledger:
+            matrix_row["denominatorStatus"] = dll_row.get("denominatorStatus", "")
+            matrix_row["capabilityClosure"] = dll_row.get("capabilityClosure", {
+                "totalFamilies": 0, "closedFamilies": 0, "waivedFamilies": 0, "excludedFamilies": 0,
+                "platformBlockedFamilies": 0, "inProgressFamilies": 0, "closurePercent": 0.0,
+            })
+            matrix_row["workflowProgress"] = dll_row.get("workflowProgress", {
+                "totalRequiredGates": 0, "passedGates": 0, "progressPercent": 0.0,
+            })
         matrix_rows.append(matrix_row)
     return {
         "program": program_payload,
         "dlls": dll_rows,
         "dllMatrix": {
-            "schemaVersion": 1,
+            "schemaVersion": 2 if has_ledger else 1,
             "rows": matrix_rows,
         },
         "artifactIndex": {
@@ -715,6 +964,122 @@ li + li { margin-top: 6px; }
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.78);
 }
+/* progress axis */
+.progress-axis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 18px;
+}
+.progress-bar-container {
+  flex: 1;
+  min-width: 200px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.72);
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.progress-bar {
+  height: 18px;
+  border-radius: 999px;
+  background: var(--pending-bg);
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+.progress-bar-fill.dll-completion { background: #4a7da5; }
+.progress-bar-fill.capability-closure { background: #4a9a5e; }
+.progress-bar-fill.workflow-progress { background: #c4843b; }
+/* mini bars for tables */
+.mini-bar {
+  display: inline-block;
+  width: 60px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--pending-bg);
+  overflow: hidden;
+  vertical-align: middle;
+}
+.mini-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+.mini-fill.high { background: var(--ok-ink); }
+.mini-fill.medium { background: #c4843b; }
+.mini-fill.low { background: var(--blocked-ink); }
+.mini-label {
+  margin-left: 6px;
+  font-size: 11px;
+  color: var(--muted);
+  vertical-align: middle;
+}
+/* source links */
+.source-links { margin-top: 14px; }
+.source-links h3 { font-size: 14px; margin-bottom: 8px; }
+.source-links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.source-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.82);
+  font-size: 12px;
+}
+.source-link-icon { font-size: 14px; }
+.source-link-path {
+  color: var(--muted);
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 11px;
+}
+/* waiver */
+.waiver-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.waiver-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.waiver-badge.active { background: var(--warn-bg); color: var(--warn-ink); }
+.waiver-badge.exclusion { background: var(--pending-bg); color: var(--pending-ink); }
+/* auto-derive notice */
+.auto-derive-notice {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--warn-bg);
+  background: #fffbf0;
+  color: var(--warn-ink);
+  font-size: 13px;
+  border-radius: 6px;
+}
+/* family / waiver tables */
+.family-table th, .family-table td,
+.waiver-table th, .waiver-table td { white-space: nowrap; }
+.family-table tr.family-active td:first-child + td { font-weight: 700; }
+/* dll detail dual axis */
+.dll-axis { margin-top: 0; }
 @media (max-width: 900px) {
   main { width: min(100vw - 18px, 100%); margin: 10px auto 28px; }
   .page-header,
@@ -784,6 +1149,110 @@ def _render_project_card(project: dict[str, Any], *, root_prefix: str) -> str:
 """.strip()
 
 
+def _render_source_links_block(sl: dict[str, Any], *, root_prefix: str) -> str:
+    priority = [
+        ("subjectSource", "Subject Source", "\U0001F4C1"),
+        ("generatedCode", "Generated Code", "\u2699\uFE0F"),
+        ("evidence", "Evidence", "\U0001F4CA"),
+        ("verificationSource", "Verification Source", "\U0001F4CB"),
+        ("authorityDocs", "Authority Docs", "\U0001F4C4"),
+    ]
+    items: list[str] = []
+    for key, label, icon in priority:
+        path = _string(sl.get(key))
+        if not path:
+            continue
+        resolved = root_prefix + _normalized(path)
+        parts = path.rstrip("/").split("/")
+        short_path = "/".join(parts[-3:]) if len(parts) >= 3 else path
+        if len(path) > 60:
+            short_path = ".../" + short_path
+        items.append(
+            f'<a href="{escape(resolved, quote=True)}" target="_blank" rel="noreferrer" class="source-link" '
+            f'title="{escape(path, quote=True)}">'
+            f'<span class="source-link-icon">{icon}</span>'
+            f'<span class="source-link-label">{escape(label)}</span>'
+            f'<span class="source-link-path">{escape(short_path)}</span>'
+            f'</a>'
+        )
+    if not items:
+        return ""
+    return f'<div class="source-links"><h3>Source Links</h3><div class="source-links-grid">{"".join(items)}</div></div>'
+
+
+GATE_LABELS: dict[str, str] = {
+    "audit-input-and-ledger": "Audit Input",
+    "managed-proof": "Managed Proof",
+    "native-proof": "Native Proof",
+    "hotupdate-proof": "HotUpdate",
+    "benchmark": "Benchmark",
+    "codegen-review": "CodeGen Review",
+}
+GATE_COLUMNS = tuple(GATE_LABELS.keys())
+
+
+def _family_has_active_gates(gates: dict[str, str]) -> bool:
+    """Check if a family has any non-pending, non-not-required gate activity."""
+    for k, v in gates.items():
+        if k == "completion-certification":
+            continue
+        v = _string(v)
+        if v and v not in ("pending", "not-required", ""):
+            return True
+    return False
+
+
+def _render_family_table(families: list[dict[str, Any]], *, root_prefix: str) -> str:
+    if not families:
+        return ""
+    rows = ""
+    for idx, family in enumerate(families, start=1):
+        dname = _string(family.get("displayName"))
+        status = _string(family.get("closureStatus"))
+        gates = dict(family.get("verificationGates") or {})
+        mc = family.get("methodCount", 0)
+        test_code = dict(family.get("testCode") or {})
+        test_code_status = _string(test_code.get("testCodeStatus"))
+        test_code_cell = _status_badge(test_code_status) if test_code_status else '<span class="status-badge status-muted">n/a</span>'
+        gate_badges = "".join(f"<td>{_status_badge(gates.get(col, ''))}</td>" for col in GATE_COLUMNS)
+        bold_class = ' class="family-active"' if _family_has_active_gates(gates) else ""
+        rows += f"<tr{bold_class}><td>{idx}</td><td>{escape(dname)}</td><td>{_status_badge(status)}</td><td>{test_code_cell}</td>{gate_badges}<td>{mc}</td></tr>"
+    gate_headers = "".join(f"<th>{GATE_LABELS[col]}</th>" for col in GATE_COLUMNS)
+    return f"""
+<section>
+  <h2>Capability Families</h2>
+  <p>Each capability family represents a logical group of methods. A family is considered closed when all its non-exempt verification gates pass.</p>
+  <div class="table-wrap">
+    <table class="family-table">
+      <thead><tr><th>#</th><th>Family</th><th>closureStatus</th><th>Test Code</th>{gate_headers}<th>methodCount</th></tr></thead>
+      <tbody>{rows}</tbody>
+    </table>
+  </div>
+</section>""".strip()
+
+
+def _render_waiver_table(families: list[dict[str, Any]]) -> str:
+    records: list[dict[str, Any]] = []
+    for family in families:
+        for r in list(family.get("waiverRecords") or []):
+            records.append(r)
+    if not records:
+        return ""
+    rows = ""
+    for r in records:
+        rows += f"<tr><td>{escape(_string(r.get('type')))}</td><td>{_status_badge(r.get('status'))}</td><td>{escape(_string(r.get('expiresAt')))}</td><td>{escape(_string(r.get('reason')))}</td></tr>"
+    return f"""
+<section>
+  <h2>Waiver Records</h2>
+  <div class="table-wrap">
+    <table class="waiver-table">
+      <thead><tr><th>Type</th><th>Status</th><th>Expires At</th><th>Reason</th></tr></thead>
+      <tbody>{rows}</tbody>
+    </table>
+  </div>
+</section>""".strip()
+
+
 def _render_dll_detail_page(dll: dict[str, Any], *, root_prefix: str) -> str:
     projects = list(dll.get("projects") or [])
     project_rows = "".join(
@@ -799,6 +1268,30 @@ def _render_dll_detail_page(dll: dict[str, Any], *, root_prefix: str) -> str:
     )
     project_cards = "".join(_render_project_card(project, root_prefix=root_prefix) for project in projects)
     assembly_name = _string(dll.get("assemblyName"))
+    families = list(dll.get("capabilityFamilies") or [])
+    sl = dict(dll.get("sourceLinks") or {})
+    cc = dict(dll.get("capabilityClosure") or {})
+    wp = dict(dll.get("workflowProgress") or {})
+    family_source = _string(dll.get("familySource"))
+    denominator_status = _string(dll.get("denominatorStatus"))
+
+    dual_axis_html = ""
+    if cc.get("totalFamilies", 0) > 0:
+        dual_axis_html = (
+            '<div class="progress-axis dll-axis">'
+            + _render_progress_bar("Capability Closure", cc.get("closedFamilies", 0), cc.get("totalFamilies", 0), cc.get("closurePercent", 0.0), css_class="capability-closure")
+            + _render_progress_bar("Workflow Progress", wp.get("passedGates", 0), wp.get("totalRequiredGates", 0), wp.get("progressPercent", 0.0), css_class="workflow-progress")
+            + '</div>'
+        )
+
+    auto_derive_notice = ""
+    if family_source == "auto-derived":
+        auto_derive_notice = '<div class="auto-derive-notice">&#9432; Capability families for this DLL have been auto-derived from project execution states. Replace with manually curated entries in capability-family-ledger.json.</div>'
+
+    family_section = _render_family_table(families, root_prefix=root_prefix)
+    waiver_section = _render_waiver_table(families)
+    source_links_html = _render_source_links_block(sl, root_prefix=root_prefix)
+
     return f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -813,7 +1306,7 @@ def _render_dll_detail_page(dll: dict[str, Any], *, root_prefix: str) -> str:
       <a class="back-link" href="../dashboard.html">Back To Dashboard</a>
       <div class="eyebrow">DLL Detail</div>
       <h1>{escape(assembly_name)}</h1>
-      <p>按 DLL 审核当前验证状态、验证项目、证据与支持引用。</p>
+      <p>按 DLL 审核当前验证状态、capability closure、验证项目与证据。</p>
       <div class="summary-grid">
         <div class="summary-card"><strong>State</strong>{_status_badge(dll.get("dllState"))}</div>
         <div class="summary-card"><strong>Current Project</strong>{escape(str(dll.get("currentProject") or ""))}</div>
@@ -821,11 +1314,13 @@ def _render_dll_detail_page(dll: dict[str, Any], *, root_prefix: str) -> str:
         <div class="summary-card"><strong>Roadmap Task</strong>{escape(str(dll.get("roadmapTaskId") or ""))}</div>
         <div class="summary-card"><strong>Evidence Count</strong>{_dll_evidence_count(dll)}</div>
         <div class="summary-card"><strong>Support Refs</strong>{_dll_support_count(dll)}</div>
+        <div class="summary-card"><strong>Denominator</strong>{escape(denominator_status or "n/a")}</div>
       </div>
-      <div class="link-grid">
-        <div class="link-card"><strong>JSON Payload</strong>{_local_link(f"./{_string(dll.get('assemblyName'))}.json")}</div>
-        <div class="link-card"><strong>Dashboard</strong>{_local_link("../dashboard.html", "foundation-dll-audit/dashboard.html")}</div>
-      </div>
+      {dual_axis_html}
+      {auto_derive_notice}
+      {source_links_html}
+      {family_section}
+      {waiver_section}
     </div>
     <section>
       <h2>Blocking Context</h2>
@@ -849,18 +1344,23 @@ def _render_dll_detail_page(dll: dict[str, Any], *, root_prefix: str) -> str:
 """
 
 
-def _render_dashboard(payload: dict[str, Any], *, root_prefix: str) -> str:
+def _render_dashboard(payload: dict[str, Any], *, root_prefix: str, has_ledger: bool = False) -> str:
     program = dict(payload.get("program") or {})
     summary = dict(program.get("summary") or {})
     matrix_rows = list(dict(payload.get("dllMatrix") or {}).get("rows") or [])
+
+    extra_keys: list[str] = []
+    if has_ledger and any(row.get("capabilityClosure") is not None for row in matrix_rows):
+        extra_keys = ["denominatorStatus", "capabilityClosure", "workflowProgress"]
     matrix_headers = [
         "assemblyName",
         "dllState",
         "currentProject",
+        *extra_keys,
         *[
             key
             for key in list(matrix_rows[0].keys() if matrix_rows else [])
-            if key not in {"assemblyName", "orderIndex", "dllState", "currentProject", "riskTags"}
+            if key not in {"assemblyName", "orderIndex", "dllState", "currentProject", "riskTags", "denominatorStatus", "capabilityClosure", "workflowProgress"}
         ],
     ]
 
@@ -870,7 +1370,15 @@ def _render_dashboard(payload: dict[str, Any], *, root_prefix: str) -> str:
             (
                 f"<td>{_local_link('./' + _dll_detail_relative_path(str(row.get(header) or '')), str(row.get(header) or ''))}</td>"
                 if header == "assemblyName"
-                else f"<td>{escape(str(row.get(header, '')))}</td>"
+                else (
+                    f"<td>{_render_mini_bar(row.get('capabilityClosure', {}).get('closurePercent', 0.0), row.get('capabilityClosure', {}).get('closedFamilies', 0), row.get('capabilityClosure', {}).get('totalFamilies', 0))}</td>"
+                    if header == "capabilityClosure"
+                    else (
+                        f"<td>{_render_mini_bar(row.get('workflowProgress', {}).get('progressPercent', 0.0), row.get('workflowProgress', {}).get('passedGates', 0), row.get('workflowProgress', {}).get('totalRequiredGates', 0))}</td>"
+                        if header == "workflowProgress"
+                        else f"<td>{escape(str(row.get(header, '')))}</td>"
+                    )
+                )
             )
             for header in matrix_headers
         )
@@ -880,13 +1388,21 @@ def _render_dashboard(payload: dict[str, Any], *, root_prefix: str) -> str:
 
     detail_cards = []
     for dll in list(payload.get("dlls") or []):
-        project_cards = "".join(
-            _render_project_card(project, root_prefix=root_prefix)
-            for project in list(dll.get("projects") or [])
-        )
-        detail_cards.append(
-            f"""
-<div class="dll-card" id="{escape(_status_class(dll.get('assemblyName')), quote=True)}">
+        if has_ledger and dll.get("capabilityClosure") is not None:
+            cc = dict(dll.get("capabilityClosure") or {})
+            ws = dict(dll.get("waiverSummary") or {})
+            sl = dict(dll.get("sourceLinks") or {})
+            sl_links = ""
+            for key, label in [("subjectSource", "Source"), ("generatedCode", "Generated Code"), ("evidence", "Evidence")]:
+                path = _string(sl.get(key))
+                if path:
+                    sl_links += f'<a class="pill-link" href="{escape(root_prefix + _normalized(path), quote=True)}" target="_blank" rel="noreferrer">{escape(label)}</a>'
+            waiver_line = ""
+            if ws.get("totalWaivers", 0) > 0 or ws.get("totalExclusions", 0) > 0:
+                waiver_line = f'<div class="waiver-summary"><span class="waiver-badge active">&#9888; {ws.get("activeWaivers", 0)} active</span><span class="waiver-badge exclusion">&#8855; {ws.get("totalExclusions", 0)} excluded</span></div>'
+            detail_cards.append(
+                f'''
+<div class="dll-card" id="{escape(_status_class(dll.get("assemblyName")), quote=True)}">
   <div class="dll-card-header">
     <div>
       <h3>{escape(str(dll.get("assemblyName") or ""))}</h3>
@@ -894,8 +1410,34 @@ def _render_dashboard(payload: dict[str, Any], *, root_prefix: str) -> str:
     </div>
     <div class="dll-card-links">
       {_status_badge(dll.get("dllState"))}
-      <a class="pill-link" href="./{escape(_dll_detail_relative_path(str(dll.get('assemblyName') or '')), quote=True)}">Detail Page</a>
-      <a class="pill-link" href="./{escape(_dll_json_relative_path(str(dll.get('assemblyName') or '')), quote=True)}">JSON</a>
+      <a class="pill-link" href="./{escape(_dll_detail_relative_path(str(dll.get("assemblyName") or "")), quote=True)}">Detail Page</a>
+      <a class="pill-link" href="./{escape(_dll_json_relative_path(str(dll.get("assemblyName") or "")), quote=True)}">JSON</a>
+    </div>
+  </div>
+  {f'<div class="dll-card-links">{sl_links}</div>' if sl_links else ''}
+  {waiver_line}
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>{escape(str(dll.get("currentProject") or ""))}</div>
+    <div class="meta-card"><strong>Closure</strong>{cc.get("closedFamilies", 0)}/{cc.get("totalFamilies", 0)} families</div>
+    <div class="meta-card"><strong>Phase</strong>{escape(str(dll.get("phase") or ""))}</div>
+    <div class="meta-card"><strong>Evidence Count</strong>{_dll_evidence_count(dll)}</div>
+  </div>
+</div>'''.strip()
+            )
+        else:
+            project_cards = "".join(_render_project_card(project, root_prefix=root_prefix) for project in list(dll.get("projects") or []))
+            detail_cards.append(
+                f'''
+<div class="dll-card" id="{escape(_status_class(dll.get("assemblyName")), quote=True)}">
+  <div class="dll-card-header">
+    <div>
+      <h3>{escape(str(dll.get("assemblyName") or ""))}</h3>
+      <p>{escape(str(dll.get("blockingReason") or "n/a"))}</p>
+    </div>
+    <div class="dll-card-links">
+      {_status_badge(dll.get("dllState"))}
+      <a class="pill-link" href="./{escape(_dll_detail_relative_path(str(dll.get("assemblyName") or "")), quote=True)}">Detail Page</a>
+      <a class="pill-link" href="./{escape(_dll_json_relative_path(str(dll.get("assemblyName") or "")), quote=True)}">JSON</a>
     </div>
   </div>
   <div class="meta-grid">
@@ -907,24 +1449,22 @@ def _render_dashboard(payload: dict[str, Any], *, root_prefix: str) -> str:
     <div class="meta-card"><strong>Verification Projects</strong>{len(list(dll.get("projects") or []))}</div>
   </div>
   <div class="project-grid">{project_cards}</div>
-</div>
-            """.strip()
-        )
-
-    artifact_headers = ["assemblyName", "projectCode", "displayName", "path", "artifactKind", "linkTargetType", "role", "exists"]
-    artifact_body = "".join(
-        "<tr>"
-        + "".join(
-            (
-                f"<td>{_dashboard_link(str(row.get(header) or ''), root_prefix=root_prefix)}</td>"
-                if header == "path"
-                else f"<td>{escape(str(row.get(header, '')))}</td>"
+</div>'''.strip()
             )
-            for header in artifact_headers
+
+    triple_axis_html = ""
+    if has_ledger:
+        dll_comp = dict(summary.get("dllCompletion") or {})
+        cap_closure = dict(summary.get("capabilityClosure") or {})
+        wf_progress = dict(summary.get("workflowProgress") or {})
+        dll_count = summary.get("dllCount", 0) or 1
+        triple_axis_html = (
+            '<div class="progress-axis">'
+            + _render_progress_bar("DLL Completion", dll_comp.get("completedDllCount", 0), dll_count, round((dll_comp.get("completedDllCount", 0) / dll_count) * 100, 1), css_class="dll-completion")
+            + _render_progress_bar("Capability Closure", cap_closure.get("closedFamilies", 0), cap_closure.get("totalFamilies", 0), cap_closure.get("closurePercent", 0.0), css_class="capability-closure")
+            + _render_progress_bar("Workflow Progress", wf_progress.get("passedGates", 0), wf_progress.get("totalRequiredGates", 0), wf_progress.get("progressPercent", 0.0), css_class="workflow-progress")
+            + '</div>'
         )
-        + "</tr>"
-        for row in list(dict(payload.get("artifactIndex") or {}).get("rows") or [])
-    )
 
     template = f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -944,7 +1484,7 @@ def _render_dashboard(payload: dict[str, Any], *, root_prefix: str) -> str:
         <a href="#program">Program Overview</a>
         <a href="#matrix">DLL Matrix</a>
         <a href="#details">DLL Detail</a>
-        <a href="#artifacts">Artifact Index</a>
+        <a href="./artifact-index.html">Artifact Index</a>
       </div>
       <div class="summary-grid">
         <div class="summary-card"><strong>DLL Count</strong>{escape(str(summary.get("dllCount") or 0))}</div>
@@ -954,6 +1494,7 @@ def _render_dashboard(payload: dict[str, Any], *, root_prefix: str) -> str:
         <div class="summary-card"><strong>Not Started</strong>{escape(str(summary.get("notStartedCount") or 0))}</div>
         <div class="summary-card"><strong>Active Assembly</strong>{escape(str(summary.get("activeAssembly") or ""))}</div>
       </div>
+      {triple_axis_html}
     </div>
     <section id="program">
       <h2>Program Overview</h2>
@@ -977,15 +1518,6 @@ def _render_dashboard(payload: dict[str, Any], *, root_prefix: str) -> str:
     <section id="details">
       <h2>DLL Detail</h2>
       {"".join(detail_cards)}
-    </section>
-    <section id="artifacts">
-      <h2>Artifact Index</h2>
-      <div class="table-wrap">
-        <table>
-          <thead><tr>{"".join(f"<th>{escape(header)}</th>" for header in artifact_headers)}</tr></thead>
-          <tbody>{artifact_body}</tbody>
-        </table>
-      </div>
     </section>
   </main>
 </body>
@@ -1019,10 +1551,53 @@ def _summary_markdown(payload: dict[str, Any]) -> str:
     return "\n".join(lines).strip() + "\n"
 
 
-def _write_projection_bundle(repo_root: Path, payload: dict[str, Any], *, output_root: Path) -> list[str]:
+def _render_artifact_index_page(payload: dict[str, Any], *, root_prefix: str) -> str:
+    artifact_headers = ["assemblyName", "projectCode", "displayName", "path", "artifactKind", "linkTargetType", "role", "exists"]
+    artifact_body = "".join(
+        "<tr>"
+        + "".join(
+            (
+                f"<td>{_dashboard_link(str(row.get(header) or ''), root_prefix=root_prefix)}</td>"
+                if header == "path"
+                else f"<td>{escape(str(row.get(header, '')))}</td>"
+            )
+            for header in artifact_headers
+        )
+        + "</tr>"
+        for row in list(dict(payload.get("artifactIndex") or {}).get("rows") or [])
+    )
+    return f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artifact Index - Foundation DLL Audit</title>
+  <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body>
+  <main>
+    <div class="page-header">
+      <a class="back-link" href="./dashboard.html">Back To Dashboard</a>
+      <div class="eyebrow">Appendix</div>
+      <h1>Artifact Index</h1>
+      <p>All artifacts referenced across foundation DLL audit projections.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>{"".join(f"<th>{escape(h)}</th>" for h in artifact_headers)}</tr></thead>
+          <tbody>{artifact_body}</tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</body>
+</html>"""
+
+
+def _write_projection_bundle(repo_root: Path, payload: dict[str, Any], *, output_root: Path, has_ledger: bool = False) -> list[str]:
     output_root.mkdir(parents=True, exist_ok=True)
     dll_root = output_root / "dlls"
     dll_root.mkdir(parents=True, exist_ok=True)
+    has_ledger = has_ledger or bool(payload.get("program", {}).get("summary", {}).get("capabilityClosure"))
     files = {
         "program": output_root / "program.json",
         "dllMatrix": output_root / "dll-matrix.json",
@@ -1031,14 +1606,20 @@ def _write_projection_bundle(repo_root: Path, payload: dict[str, Any], *, output
         "dashboardCss": output_root / "dashboard.css",
         "summary": output_root / "summary.md",
     }
+    files["artifactIndexHtml"] = output_root / "artifact-index.html"
     write_json(files["program"], payload["program"])
     write_json(files["dllMatrix"], payload["dllMatrix"])
     write_json(files["artifactIndex"], payload["artifactIndex"])
     files["dashboardCss"].write_text(_dashboard_styles(), encoding="utf-8")
     files["dashboard"].write_text(
-        _render_dashboard(payload, root_prefix=_root_relative_prefix(repo_root, files["dashboard"])),
+        _render_dashboard(payload, root_prefix=_root_relative_prefix(repo_root, files["dashboard"]), has_ledger=has_ledger),
         encoding="utf-8",
     )
+    if has_ledger:
+        files["artifactIndexHtml"].write_text(
+            _render_artifact_index_page(payload, root_prefix=_root_relative_prefix(repo_root, files["artifactIndexHtml"])),
+            encoding="utf-8",
+        )
     files["summary"].write_text(_summary_markdown(payload), encoding="utf-8")
 
     artifacts = [_relative(repo_root, path) for path in files.values()]
@@ -1057,6 +1638,7 @@ def _write_projection_bundle(repo_root: Path, payload: dict[str, Any], *, output
 
 def write_foundation_dll_audit_outputs(repo_root: Path) -> dict[str, Any]:
     payload = build_foundation_dll_audit_payload(repo_root)
+    has_ledger = bool(payload.get("program", {}).get("summary", {}).get("capabilityClosure"))
     projection_root = verification_layout_module.foundation_dll_audit_projection_root(repo_root)
     docs_root = verification_layout_module.docs_foundation_dll_audit_root(repo_root)
     report_root = verification_layout_module.archive_report_scope_root(
@@ -1068,8 +1650,8 @@ def write_foundation_dll_audit_outputs(repo_root: Path) -> dict[str, Any]:
     report_summary_path = report_root / "summary.md"
     report_summary_path.write_text(_summary_markdown(payload), encoding="utf-8")
 
-    artifacts = _write_projection_bundle(repo_root, payload, output_root=projection_root)
-    artifacts.extend(_write_projection_bundle(repo_root, payload, output_root=docs_root))
+    artifacts = _write_projection_bundle(repo_root, payload, output_root=projection_root, has_ledger=has_ledger)
+    artifacts.extend(_write_projection_bundle(repo_root, payload, output_root=docs_root, has_ledger=has_ledger))
     artifacts.append(_relative(repo_root, report_summary_path))
     artifacts = list(dict.fromkeys(artifacts))
     return {

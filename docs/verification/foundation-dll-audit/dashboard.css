@@ -196,6 +196,122 @@ li + li { margin-top: 6px; }
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.78);
 }
+/* progress axis */
+.progress-axis {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 18px;
+}
+.progress-bar-container {
+  flex: 1;
+  min-width: 200px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.72);
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.progress-bar {
+  height: 18px;
+  border-radius: 999px;
+  background: var(--pending-bg);
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+.progress-bar-fill.dll-completion { background: #4a7da5; }
+.progress-bar-fill.capability-closure { background: #4a9a5e; }
+.progress-bar-fill.workflow-progress { background: #c4843b; }
+/* mini bars for tables */
+.mini-bar {
+  display: inline-block;
+  width: 60px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--pending-bg);
+  overflow: hidden;
+  vertical-align: middle;
+}
+.mini-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+}
+.mini-fill.high { background: var(--ok-ink); }
+.mini-fill.medium { background: #c4843b; }
+.mini-fill.low { background: var(--blocked-ink); }
+.mini-label {
+  margin-left: 6px;
+  font-size: 11px;
+  color: var(--muted);
+  vertical-align: middle;
+}
+/* source links */
+.source-links { margin-top: 14px; }
+.source-links h3 { font-size: 14px; margin-bottom: 8px; }
+.source-links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.source-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.82);
+  font-size: 12px;
+}
+.source-link-icon { font-size: 14px; }
+.source-link-path {
+  color: var(--muted);
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 11px;
+}
+/* waiver */
+.waiver-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.waiver-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.waiver-badge.active { background: var(--warn-bg); color: var(--warn-ink); }
+.waiver-badge.exclusion { background: var(--pending-bg); color: var(--pending-ink); }
+/* auto-derive notice */
+.auto-derive-notice {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--warn-bg);
+  background: #fffbf0;
+  color: var(--warn-ink);
+  font-size: 13px;
+  border-radius: 6px;
+}
+/* family / waiver tables */
+.family-table th, .family-table td,
+.waiver-table th, .waiver-table td { white-space: nowrap; }
+.family-table tr.family-active td:first-child + td { font-weight: 700; }
+/* dll detail dual axis */
+.dll-axis { margin-top: 0; }
 @media (max-width: 900px) {
   main { width: min(100vw - 18px, 100%); margin: 10px auto 28px; }
   .page-header,

@@ -74,6 +74,13 @@
 - obligation/10/45
 
 ## Success Evidence
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/workspace
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MetadataSupplementProofEntry::Run()/workspace
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementProofEntry::Run()/workspace
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchCallbackFlowProofEntry::Run()/workspace
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchIntegrityProofEntry::Run()/workspace
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.SharedContractProofEntry::Run()/workspace
+- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.VersionRollbackProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AbiWideningProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.AotClosureValidationProofEntry::Run()/workspace
 - evidence-claim/unit/SolutionCorePack::CoreRuntimeFeatures::CoreRuntimeFeatures.ArithmeticOpsProofEntry::Run()/workspace
@@ -143,13 +150,6 @@
 - n/a
 
 ## Missing Claims
-- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()/workspace
-- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MetadataSupplementProofEntry::Run()/workspace
-- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementProofEntry::Run()/workspace
-- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchCallbackFlowProofEntry::Run()/workspace
-- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchIntegrityProofEntry::Run()/workspace
-- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.SharedContractProofEntry::Run()/workspace
-- evidence-claim/unit/HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.VersionRollbackProofEntry::Run()/workspace
 - evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterArithmeticProofEntry::Run()/workspace
 - evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.InterpreterLoweringProofEntry::Run()/workspace
 - evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedDelegateFlowProofEntry::Run()/workspace
@@ -158,13 +158,6 @@
 - evidence-claim/unit/MixedExecutionFeaturePack::MixedExecutionFeaturePack::MixedExecutionFeaturePack.MixedGenericFlowProofEntry::Run()/workspace
 
 ## Blockers
-- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
-- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
-- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
-- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
-- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
-- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
-- missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
 - missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
 - missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。
 - missing-evidence [contracts] workspace 阶段是必经阶段，但当前没有找到对应证据。

@@ -384,6 +384,23 @@ Closure
 | `docs/testing-inventory/capability-inventory.*` | capability 总览投影 | `一行一个 capability x closure` |
 | `docs/testing-inventory/inventory.html` | 人工浏览入口 | 组合以上三类投影 |
 | `verification/projections/benchmark/*` | perf 展示入口 | 从 perf evidence 和 benchmark master 派生 |
+| `verification/projections/foundation-dll-audit/program.json` | foundation DLL 报告投影入口 | 三轴进度（DLL Completion / Capability Closure / Workflow Progress）+ DLL Matrix |
+| `verification/projections/foundation-dll-audit/dll-matrix.json` | DLL 矩阵投影 | 每 DLL 一行，含 gate 列 + Closure/Progress 双轴列 |
+| `verification/projections/foundation-dll-audit/dlls/<assembly>.json` | DLL 详情投影 | 每 DLL 一个，含 capability families、waiver records、source links |
+| `docs/verification/foundation-dll-audit/dashboard.html` | 人工浏览入口（HTML） | 从 projection JSON 派生 |
+| `docs/verification/foundation-dll-audit/dlls/<assembly>.html` | DLL 详情浏览入口（HTML） | 从 projection JSON 派生 |
+| `docs/verification/foundation-dll-audit/artifact-index.html` | artifact 索引（HTML，独立次级入口） | 每 artifact 一行 |
+
+### 6.5.1 Capability-Family Ledger 投影
+
+foundation-dll-audit 投影系列是 evidence-driven closure 投影的一个实例，遵循以下权威链：
+
+1. **分母 authority**：`capability-family ledger`（由 audit input manifest + surface ledger + semantic ledger + nativeization plan 合成）
+2. **进度 authority**：`workflow gate contract`（family 级 gate 的 policyState 和 executionState 决定 passedGates / requiredGates）
+3. **闭包 authority**：`DLL completed contract`（6 条硬规则：family 全 closed、无 in-progress、所有 required gates passed、completion-certification passed、waiver authority 有效、evidence 全部 exists）
+4. **豁免 authority**：`waiver contract`（waiver / exclusion / platform-blocked 三类，必须带正式 authorityRef，不允许引用 task STATUS.md）
+
+该投影的 schemaVersion 当前为 2，采用 CapabilityClosure + WorkflowProgress 双轴字段结构。
 
 这些页面上的表头提示、tooltip、中文解释都来自 formal schema 元数据，而不是页面内部手写口径。
 
@@ -980,8 +997,21 @@ formal 聚合时，`verificationState` 判定顺序固定为：
 - `Program / DLL / Verification Project / Artifact` 报告对象
 - `testing-inventory`、`benchmark` 或其他 projection 页面字段
 - 证据链接规则
+- `capability-family ledger` 的分母条目或 family 状态
 
 则不能只改 schema、模板或页面读取逻辑；仍必须按上述顺序刷新正式数据与下游 projection。
+
+foundation-dll-audit 投影的 refresh 顺序：
+
+1. 确认 capability-family-ledger.json 是最新冻结快照
+2. 读取所有 audit input / surface ledger / semantic ledger 的最新版本
+3. 生成 program.json（含三轴进度）
+4. 生成 dll-matrix.json（含 gate 列 + Closure/Progress 列）
+5. 生成 dlls/\<assembly\>.json（含 capability families、waiver records、source links）
+6. 从 projection JSON 派生 HTML 页面（dashboard.html + DLL detail pages + artifact-index.html）
+7. 提交正式产物并更新 archive
+
+其中 step 6 由 generator 在 projection JSON 就绪后自动执行。
 
 ### 15.2 无人工复核闸门
 

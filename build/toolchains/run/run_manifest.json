@@ -1044,6 +1044,123 @@
       ]
     },
     {
+      "id": "foundation-dll-derive",
+      "title": "Derive a candidate foundation DLL denominator ledger",
+      "group": "Test And Verify",
+      "handler": "foundation_dll.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["foundation-dll", "derive"],
+      "target": "foundation-dll",
+      "syntax": "foundation-dll derive [--scope <all|assembly>]",
+      "show_in_menu": false,
+      "examples": [
+        "run foundation-dll derive",
+        "run foundation-dll derive --scope System.Text.Json"
+      ]
+    },
+    {
+      "id": "foundation-dll-analyze-gaps",
+      "title": "Analyze capability-family test-code gaps",
+      "group": "Test And Verify",
+      "handler": "foundation_dll.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["foundation-dll", "analyze-gaps"],
+      "target": "foundation-dll",
+      "syntax": "foundation-dll analyze-gaps [--scope <all|assembly|family-id>] [--update-ledger true]",
+      "show_in_menu": false,
+      "examples": [
+        "run foundation-dll analyze-gaps",
+        "run foundation-dll analyze-gaps --scope System.Private.CoreLib --update-ledger true"
+      ]
+    },
+    {
+      "id": "foundation-dll-check-family",
+      "title": "Check test-code gap state for a single capability family",
+      "group": "Test And Verify",
+      "handler": "foundation_dll.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["foundation-dll", "check-family"],
+      "target": "foundation-dll",
+      "syntax": "foundation-dll check-family --family <family-id>",
+      "show_in_menu": false,
+      "examples": [
+        "run foundation-dll check-family --family family/System.Private.CoreLib/convert/char"
+      ]
+    },
+    {
+      "id": "foundation-dll-promote",
+      "title": "Promote candidate denominator ledger to formal authority",
+      "group": "Test And Verify",
+      "handler": "foundation_dll.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["foundation-dll", "promote"],
+      "target": "foundation-dll",
+      "syntax": "foundation-dll promote [--scope <all|assembly>] --promote-approved true",
+      "show_in_menu": false,
+      "examples": [
+        "run foundation-dll promote --scope System.Text.Json --promote-approved true",
+        "run foundation-dll promote --scope all --promote-approved true"
+      ]
+    },
+    {
+      "id": "foundation-dll-onboard",
+      "title": "Onboard a DLL into the foundation-dll denominator and refresh reports",
+      "group": "Test And Verify",
+      "handler": "foundation_dll.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["foundation-dll", "onboard"],
+      "target": "foundation-dll",
+      "syntax": "foundation-dll onboard --scope <assembly> --promote-approved true [--mode <quick|full>]",
+      "show_in_menu": false,
+      "examples": [
+        "run foundation-dll onboard --scope System.Text.Json --promote-approved true",
+        "run foundation-dll onboard --scope System.Collections.Immutable --promote-approved true --mode full"
+      ]
+    },
+    {
+      "id": "foundation-dll-refresh",
+      "title": "Refresh foundation DLL projections and docs from the formal ledger",
+      "group": "Test And Verify",
+      "handler": "foundation_dll.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["foundation-dll", "refresh"],
+      "target": "foundation-dll",
+      "syntax": "foundation-dll refresh",
+      "show_in_menu": false,
+      "examples": [
+        "run foundation-dll refresh"
+      ]
+    },
+    {
+      "id": "foundation-dll-verify-consistency",
+      "title": "Verify foundation DLL projection/docs consistency",
+      "group": "Test And Verify",
+      "handler": "foundation_dll.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["foundation-dll", "verify-consistency"],
+      "target": "foundation-dll",
+      "syntax": "foundation-dll verify-consistency [--mode <quick|full>]",
+      "show_in_menu": false,
+      "examples": [
+        "run foundation-dll verify-consistency",
+        "run foundation-dll verify-consistency --mode full"
+      ]
+    },
+    {
+      "id": "foundation-dll-full",
+      "title": "Run derive, promote, refresh and consistency for foundation DLL reporting",
+      "group": "Test And Verify",
+      "handler": "foundation_dll.dispatch",
+      "platforms": ["windows", "macos", "linux"],
+      "tokens": ["foundation-dll", "full"],
+      "target": "foundation-dll",
+      "syntax": "foundation-dll full [--scope <all|assembly>] --promote-approved true [--mode <quick|full>]",
+      "show_in_menu": false,
+      "examples": [
+        "run foundation-dll full --scope all --promote-approved true --mode full"
+      ]
+    },
+    {
       "id": "test-family-suite",
       "title": "Run a test suite from a public family",
       "group": "Test And Verify",

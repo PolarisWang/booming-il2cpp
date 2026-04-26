@@ -228,6 +228,214 @@ def _write_fixture_repo(repo_root: Path) -> None:
     )
 
 
+def _capability_ledger() -> dict:
+    return {
+        "schemaVersion": "1.0",
+        "snapshotId": "snap-20260426-manual",
+        "snapshotAt": "2026-04-26T00:00:00+08:00",
+        "authoritySnapshotOf": "foundation-dll-translation-audit",
+        "denominatorStrategy": "capability-family",
+        "denominatorStatus": "candidate-derived",
+        "originalAuthorityDigest": {
+            "inputManifestVersion": "v1",
+            "surfaceLedgerVersion": "v1",
+            "semanticLedgerVersion": "v1",
+            "nativeizationPlanVersion": "v1",
+        },
+        "dlls": [
+            {
+                "assemblyName": "System.Private.CoreLib",
+                "denominatorStatus": "candidate-derived",
+                "sourceLinks": {
+                    "subjectSource": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln",
+                    "generatedCode": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/analysis/generated/",
+                    "evidence": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/",
+                    "verificationSource": "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+                },
+                "families": [
+                    {
+                        "familyId": "family/System.Private.CoreLib/convert/char",
+                        "displayName": "Convert.Char Conversions",
+                        "description": "char-related type conversions in System.Convert",
+                        "denominatorStatus": "candidate-derived",
+                        "closureStatus": "in-progress",
+                        "verificationGates": {
+                            "audit-input-and-ledger": "passed",
+                            "managed-proof": "passed",
+                            "native-proof": "in-progress",
+                            "hotupdate-proof": "not-required",
+                            "benchmark": "not-required",
+                            "codegen-review": "pending",
+                        },
+                        "methodCount": 18,
+                        "testCode": {
+                            "testCodeStatus": "present",
+                            "requestedMethodCount": 18,
+                            "emittedMethodCount": 18,
+                            "allMethodsCovered": True,
+                            "action": "none",
+                        },
+                        "implementationFamilies": [
+                            {"familyId": "impl/convert/char", "displayName": "Char conversions", "handlerName": "ConvertChar"}
+                        ],
+                        "sourceGroups": [{"groupId": "src/System/Convert", "typeNames": ["Convert"], "methodCount": 18}],
+                    },
+                    {
+                        "familyId": "family/System.Private.CoreLib/buffer/memory",
+                        "displayName": "Buffer.Memory Operations",
+                        "description": "Buffer and Memory-related operations",
+                        "denominatorStatus": "candidate-derived",
+                        "closureStatus": "in-progress",
+                        "verificationGates": {
+                            "audit-input-and-ledger": "passed",
+                            "managed-proof": "passed",
+                            "native-proof": "in-progress",
+                            "hotupdate-proof": "not-required",
+                            "benchmark": "not-required",
+                            "codegen-review": "pending",
+                        },
+                        "methodCount": 10,
+                        "testCode": {
+                            "testCodeStatus": "coverage-widened",
+                            "requestedMethodCount": 10,
+                            "emittedMethodCount": 10,
+                            "allMethodsCovered": False,
+                            "action": "update-tests",
+                        },
+                        "implementationFamilies": [
+                            {"familyId": "impl/buffer/memory", "displayName": "Buffer memory ops", "handlerName": "BufferMemory"}
+                        ],
+                    },
+                    {
+                        "familyId": "family/System.Private.CoreLib/enum/parsing",
+                        "displayName": "Enum Parsing And Formatting",
+                        "description": "Enum.ToString, Enum.Parse, Enum.IsDefined and related",
+                        "denominatorStatus": "candidate-derived",
+                        "closureStatus": "in-progress",
+                        "verificationGates": {
+                            "audit-input-and-ledger": "passed",
+                            "managed-proof": "passed",
+                            "native-proof": "in-progress",
+                            "hotupdate-proof": "not-required",
+                            "benchmark": "not-required",
+                            "codegen-review": "pending",
+                        },
+                        "methodCount": 12,
+                        "testCode": {
+                            "testCodeStatus": "needs-tests",
+                            "requestedMethodCount": 12,
+                            "emittedMethodCount": 12,
+                            "allMethodsCovered": False,
+                            "action": "write-tests",
+                        },
+                        "implementationFamilies": [
+                            {"familyId": "impl/enum/parsing", "displayName": "Enum parsing", "handlerName": "EnumParsing"}
+                        ],
+                    },
+                ],
+            },
+            {
+                "assemblyName": "System.Collections.Immutable",
+                "denominatorStatus": "audit-confirmed",
+                "families": [
+                    {
+                        "familyId": "family/System.Collections.Immutable/immutable-array",
+                        "displayName": "Immutable Array",
+                        "description": "ImmutableArray construction, builders, enumeration, and interop",
+                        "denominatorStatus": "audit-confirmed",
+                        "authorityRefs": [
+                            "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+                            "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md",
+                        ],
+                        "derivationBasis": [
+                            "audit-input-manifest",
+                            "surface-ledger",
+                            "semantic-ledger",
+                            "nativeization-plan",
+                        ],
+                        "closureStatus": "in-progress",
+                        "verificationGates": {
+                            "audit-input-and-ledger": "pending",
+                            "managed-proof": "pending",
+                            "native-proof": "pending",
+                            "hotupdate-proof": "not-required",
+                            "benchmark": "not-required",
+                            "codegen-review": "pending",
+                        },
+                        "methodCount": 0,
+                        "implementationFamilies": [],
+                    },
+                    {
+                        "familyId": "family/System.Collections.Immutable/immutable-dictionary",
+                        "displayName": "Immutable Dictionary",
+                        "description": "ImmutableDictionary construction, mutation, lookup, and enumeration",
+                        "denominatorStatus": "audit-confirmed",
+                        "authorityRefs": [
+                            "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+                            "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md",
+                        ],
+                        "derivationBasis": [
+                            "audit-input-manifest",
+                            "surface-ledger",
+                            "semantic-ledger",
+                            "nativeization-plan",
+                        ],
+                        "closureStatus": "in-progress",
+                        "verificationGates": {
+                            "audit-input-and-ledger": "pending",
+                            "managed-proof": "pending",
+                            "native-proof": "pending",
+                            "hotupdate-proof": "not-required",
+                            "benchmark": "not-required",
+                            "codegen-review": "pending",
+                        },
+                        "methodCount": 0,
+                        "implementationFamilies": [],
+                    },
+                ],
+            },
+        ],
+    }
+
+
+def _write_ledger(repo_root: Path) -> None:
+    write_json(
+        repo_root / "verification" / "projections" / "foundation-dll-audit" / "capability-family-ledger.json",
+        _capability_ledger(),
+    )
+
+
+def test_repository_capability_family_ledger_uses_candidate_denominator_not_full_surface_placeholders() -> None:
+    ledger_path = REPO_ROOT / "verification" / "projections" / "foundation-dll-audit" / "capability-family-ledger.json"
+    ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+
+    expected_counts = {
+        "System.Private.CoreLib": 24,
+        "System.Collections.Immutable": 10,
+        "System.Formats.Asn1": 6,
+        "System.IO.Compression.Brotli": 4,
+        "System.IO.Compression.ZipFile": 2,
+        "System.IO.Pipelines": 5,
+        "System.Linq": 12,
+        "System.Net.ServerSentEvents": 4,
+        "System.ObjectModel": 6,
+        "System.Runtime.InteropServices": 14,
+        "System.Runtime.Serialization.Formatters": 6,
+        "System.Security.Principal.Windows": 6,
+        "System.Text.Json": 13,
+        "System.Threading.Tasks.Parallel": 4,
+    }
+    actual_counts = {entry["assemblyName"]: len(entry.get("families") or []) for entry in ledger["dlls"]}
+
+    assert ledger["denominatorStrategy"] == "capability-family"
+    assert ledger["denominatorStatus"] == "audit-confirmed"
+    assert actual_counts == expected_counts
+    assert sum(actual_counts.values()) == 116
+    assert all(not family["familyId"].endswith("/all") for entry in ledger["dlls"] for family in entry["families"])
+    assert all(entry["denominatorStatus"] == "audit-confirmed" for entry in ledger["dlls"])
+    assert all(family["denominatorStatus"] == "audit-confirmed" for entry in ledger["dlls"] for family in entry["families"])
+
+
 def test_write_foundation_dll_audit_outputs_materializes_program_matrix_and_report_files() -> None:
     generator_module = load_module(GENERATOR_MODULE_PATH, "chaos_foundation_dll_audit_generator_outputs")
     repo_root = make_temp_repo_root("verification", "foundation-dll-audit")
@@ -339,5 +547,143 @@ def test_write_foundation_dll_audit_outputs_materializes_program_matrix_and_repo
         assert "docs/verification/foundation-dll-audit/dlls/System.Private.CoreLib.html" in payload["artifacts"]
         assert payload["reportSummaryPath"] == "verification/archive/reports/completed/foundation-dll-audit/summary.md"
         assert payload["docsDashboardPath"] == "docs/verification/foundation-dll-audit/dashboard.html"
+    finally:
+        shutil.rmtree(repo_root, ignore_errors=True)
+
+
+def test_write_foundation_dll_audit_outputs_with_ledger_produces_dual_axis_reporting() -> None:
+    generator_module = load_module(GENERATOR_MODULE_PATH, "chaos_foundation_dll_audit_generator_ledger")
+    repo_root = make_temp_repo_root("verification", "foundation-dll-audit-ledger")
+    _write_fixture_repo(repo_root)
+    _write_ledger(repo_root)
+
+    try:
+        payload = generator_module.write_foundation_dll_audit_outputs(repo_root)
+
+        projection_root = repo_root / "verification" / "projections" / "foundation-dll-audit"
+        docs_root = repo_root / "docs" / "verification" / "foundation-dll-audit"
+
+        # -- schemaVersion=2 at program level --
+        program_payload = json.loads((projection_root / "program.json").read_text(encoding="utf-8"))
+        assert program_payload["schemaVersion"] == 2
+        assert program_payload["programId"] == "foundation-dll-translation-audit"
+
+        # -- summary has dual-axis fields --
+        summary = program_payload["summary"]
+        assert "capabilityClosure" in summary
+        assert summary["capabilityClosure"]["totalFamilies"] == 5
+        assert summary["capabilityClosure"]["closedFamilies"] == 0
+        assert summary["capabilityClosure"]["inProgressFamilies"] == 5
+        assert summary["capabilityClosure"]["closurePercent"] == 0.0
+        assert "workflowProgress" in summary
+        assert summary["workflowProgress"]["totalRequiredGates"] == 20
+        assert summary["workflowProgress"]["passedGates"] == 6
+        assert summary["workflowProgress"]["progressPercent"] == 30.0
+        assert "dllCompletion" in summary
+        assert summary["dllCompletion"]["completedDllCount"] == 0
+
+        # -- authoritySnapshot --
+        assert "authoritySnapshot" in program_payload
+        assert program_payload["authoritySnapshot"]["snapshotId"] == "snap-20260426-manual"
+        assert program_payload["authoritySnapshot"]["denominatorStatus"] == "candidate-derived"
+
+        # -- dll-matrix has capabilityClosure and workflowProgress columns --
+        matrix_payload = json.loads((projection_root / "dll-matrix.json").read_text(encoding="utf-8"))
+        assert matrix_payload["schemaVersion"] == 2
+        rows = {row["assemblyName"]: row for row in matrix_payload["rows"]}
+        assert "capabilityClosure" in rows["System.Private.CoreLib"]
+        assert "workflowProgress" in rows["System.Private.CoreLib"]
+        assert rows["System.Private.CoreLib"]["capabilityClosure"]["totalFamilies"] == 3
+        assert rows["System.Private.CoreLib"]["workflowProgress"]["totalRequiredGates"] == 12
+        assert rows["System.Private.CoreLib"]["denominatorStatus"] == "candidate-derived"
+        assert rows["System.Collections.Immutable"]["capabilityClosure"]["totalFamilies"] == 2
+        assert rows["System.Collections.Immutable"]["workflowProgress"]["totalRequiredGates"] == 8
+        assert rows["System.Collections.Immutable"]["denominatorStatus"] == "audit-confirmed"
+
+        # -- DLL detail has capabilityFamilies, sourceLinks, waiverSummary --
+        detail_payload = json.loads(
+            (projection_root / "dlls" / "System.Private.CoreLib.json").read_text(encoding="utf-8")
+        )
+        assert detail_payload["schemaVersion"] == 2
+        assert len(detail_payload["capabilityFamilies"]) == 3
+        assert detail_payload["capabilityClosure"]["totalFamilies"] == 3
+        assert detail_payload["workflowProgress"]["totalRequiredGates"] == 12
+        assert detail_payload["waiverSummary"]["totalWaivers"] == 0
+        assert "subjectSource" in detail_payload.get("sourceLinks", {})
+        assert "familySource" not in detail_payload  # CoreLib uses real families, not auto-derived
+        assert detail_payload["denominatorStatus"] == "candidate-derived"
+        assert detail_payload["capabilityFamilies"][0]["testCode"]["testCodeStatus"] == "present"
+        assert detail_payload["capabilityFamilies"][1]["testCode"]["testCodeStatus"] == "coverage-widened"
+        assert detail_payload["capabilityFamilies"][2]["testCode"]["testCodeStatus"] == "needs-tests"
+        immutable_payload = json.loads(
+            (projection_root / "dlls" / "System.Collections.Immutable.json").read_text(encoding="utf-8")
+        )
+        assert len(immutable_payload.get("capabilityFamilies")) == 2
+        assert immutable_payload["capabilityFamilies"][0]["familyId"] == "family/System.Collections.Immutable/immutable-array"
+        assert immutable_payload["capabilityFamilies"][0]["closureStatus"] == "in-progress"
+        assert immutable_payload["capabilityClosure"]["totalFamilies"] == 2
+        assert immutable_payload["capabilityClosure"]["inProgressFamilies"] == 2
+        assert immutable_payload["workflowProgress"]["totalRequiredGates"] == 8
+        assert immutable_payload["workflowProgress"]["passedGates"] == 0
+        assert "familySource" not in immutable_payload
+        assert immutable_payload["denominatorStatus"] == "audit-confirmed"
+        assert immutable_payload["capabilityFamilies"][0]["denominatorStatus"] == "audit-confirmed"
+        assert immutable_payload["capabilityFamilies"][0]["authorityRefs"]
+
+        # -- artifact-index.html exists --
+        assert (projection_root / "artifact-index.html").is_file()
+        artifact_html = (projection_root / "artifact-index.html").read_text(encoding="utf-8")
+        assert "Back To Dashboard" in artifact_html
+        assert 'href="./dashboard.html"' in artifact_html
+        assert "Artifact Index" in artifact_html
+
+        # -- dashboard HTML --
+        dashboard_html = (projection_root / "dashboard.html").read_text(encoding="utf-8")
+        assert "{{" not in dashboard_html
+        assert 'href="./dashboard.css"' in dashboard_html
+        # Artifact link points to independent page, not hash anchor
+        assert 'href="./artifact-index.html"' in dashboard_html
+        # Triple-axis progress bars present
+        assert "DLL Completion" in dashboard_html
+        assert "Capability Closure" in dashboard_html
+        assert "Workflow Progress" in dashboard_html
+        # Condensed card: no full project grid in detail cards
+        assert "Verification Projects" not in dashboard_html
+        # Mini bars in matrix
+        assert 'class="mini-bar"' in dashboard_html
+
+        # -- DLL detail HTML has dual-axis bars and family table --
+        dll_html = (projection_root / "dlls" / "System.Private.CoreLib.html").read_text(encoding="utf-8")
+        assert "Back To Dashboard" in dll_html
+        assert "Capability Closure" in dll_html
+        assert "Workflow Progress" in dll_html
+        assert "Capability Families" in dll_html
+        assert "Convert.Char Conversions" in dll_html
+        assert "Test Code" in dll_html
+        assert "coverage-widened" in dll_html
+        assert "needs-tests" in dll_html
+        assert "Source Links" in dll_html
+        # CoreLib has real families, NOT auto-derived
+        assert "auto-derived" not in dll_html.lower()
+
+        # -- Immutable detail HTML uses curated capability families --
+        immutable_html = (projection_root / "dlls" / "System.Collections.Immutable.html").read_text(encoding="utf-8")
+        assert "Back To Dashboard" in immutable_html
+        assert "auto-derived" not in immutable_html.lower()
+        assert "Immutable Array" in immutable_html
+        assert "Immutable Dictionary" in immutable_html
+        assert "audit-confirmed" in immutable_html
+        # Still has everything a detail page needs
+        assert "Verification Projects" in immutable_html
+        assert "Blocking Context" in immutable_html
+
+        # -- docs bundle is also generated --
+        assert (docs_root / "dashboard.html").is_file()
+        assert (docs_root / "artifact-index.html").is_file()
+        assert (docs_root / "dlls" / "System.Private.CoreLib.html").is_file()
+
+        # -- payload artifacts includes artifact-index.html --
+        assert "verification/projections/foundation-dll-audit/artifact-index.html" in payload["artifacts"]
+        assert "docs/verification/foundation-dll-audit/artifact-index.html" in payload["artifacts"]
     finally:
         shutil.rmtree(repo_root, ignore_errors=True)

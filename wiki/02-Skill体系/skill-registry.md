@@ -41,4 +41,5 @@
 
 - `2026-04-24`：补充 verification-v1 public command surface 口径，明确 `run test inventory` 已内部化，以及 `benchmark --record` 只写 raw benchmark records，不等于 formal refresh。
 - `2026-04-25`：更新 `dev-project-test-governance`，补充 DLL-first reporting / projection contract 的数据刷新约束；命中报告对象、formal reports、projection 字段或证据链接规则改动时，必须同步刷新 `verification-v1` 正式数据与对应 projection。
+- `2026-04-26`：更新 `dev-project-test-governance`，补充 foundation-dll-audit 双轴进度口径、capability-family ledger 分母 authority、completion-certification 的 DLL 级定位，以及 workspace 只作为 proof container 的规则。
 

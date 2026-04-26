@@ -7,7 +7,9 @@
 #include <gc.h>
 
 #include <cstdio>
+#include <cmath>
 #include <atomic>
+#include <limits>
 #include <cstdlib>
 #include <cstring>
 #include <memory>
@@ -54,6 +56,7 @@ namespace chaos::il2cpp::runtime_core {
 namespace {
 
 constexpr size_t kInlineFieldStorageSize = sizeof(void*) * 4u;
+constexpr std::uint64_t kDateTimeTicksMask = 0x3FFFFFFFFFFFFFFFull;
 // struct ManagedExceptionCarrier is declared in runtime_core.h and used as the cold EH payload.
 
 struct ObjectHeader {
@@ -75,6 +78,37 @@ struct BoxedValueHeader {
     TypeInfoHandle type;
     uintptr_t byte_count;
 };
+
+struct UInt128Layout {
+    std::uint64_t lower;
+    std::uint64_t upper;
+};
+
+struct Int128Layout {
+    std::uint64_t lower;
+    std::int64_t upper;
+};
+
+constexpr ValueTypeKernelBackendKind DetectCharClassificationKernelBackend() {
+    return ValueTypeKernelBackendKind::Intrinsic;
+}
+
+constexpr ValueTypeKernelBackendKind DetectFloatingClassificationKernelBackend() {
+    return ValueTypeKernelBackendKind::Intrinsic;
+}
+
+constexpr ValueTypeKernelBackendKind DetectBitArithmeticKernelBackend() {
+    return ValueTypeKernelBackendKind::Intrinsic;
+}
+
+constexpr ValueTypeKernelBackendKind DetectTickArithmeticKernelBackend() {
+    return ValueTypeKernelBackendKind::Generic;
+}
+
+constexpr ValueTypeKernelBackendKind kCharClassificationKernelBackend = DetectCharClassificationKernelBackend();
+constexpr ValueTypeKernelBackendKind kFloatingClassificationKernelBackend = DetectFloatingClassificationKernelBackend();
+constexpr ValueTypeKernelBackendKind kBitArithmeticKernelBackend = DetectBitArithmeticKernelBackend();
+constexpr ValueTypeKernelBackendKind kTickArithmeticKernelBackend = DetectTickArithmeticKernelBackend();
 
 struct EngineLifecycleRegistration {
     std::string phase;
@@ -529,11 +563,20 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL MethodInvoke(
 
         void* return_value = invoker(runtime_state, thread_state, object_instance, argv, argc);
         if (out_return_value != nullptr) {
-            if (out_return_value_size != sizeof(void*)) {
-                return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
-            }
+            if (out_return_value_size == sizeof(void*)) {
+                std::memcpy(out_return_value, &return_value, sizeof(return_value));
+            } else {
+                auto* indirect_return_value = reinterpret_cast<void* const*>(out_return_value);
+                if (indirect_return_value == nullptr || *indirect_return_value == nullptr) {
+                    return CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT;
+                }
 
-            std::memcpy(out_return_value, &return_value, sizeof(return_value));
+                if (return_value == nullptr) {
+                    return CHAOS_RUNTIME_STATUS_INTERNAL_ERROR;
+                }
+
+                std::memcpy(*indirect_return_value, return_value, out_return_value_size);
+            }
         }
 
         return CHAOS_RUNTIME_STATUS_OK;
@@ -1121,6 +1164,875 @@ size_t DrainFinalizerQueue(RuntimeState* runtime_state) {
     }
 
     return pending_finalizers.size();
+}
+
+ValueTypeKernelBackendKind GetCharClassificationKernelBackend() {
+    return kCharClassificationKernelBackend;
+}
+
+ValueTypeKernelBackendKind GetFloatingClassificationKernelBackend() {
+    return kFloatingClassificationKernelBackend;
+}
+
+ValueTypeKernelBackendKind GetBitArithmeticKernelBackend() {
+    return kBitArithmeticKernelBackend;
+}
+
+ValueTypeKernelBackendKind GetTickArithmeticKernelBackend() {
+    return kTickArithmeticKernelBackend;
+}
+
+static bool CharIsAsciiGeneric(std::uint16_t value) {
+    return value <= 0x7Fu;
+}
+
+static bool CharIsAsciiIntrinsicImpl(std::uint16_t value) {
+    return (value & 0xFF80u) == 0u;
+}
+
+bool CharIsAscii(std::uint16_t value) {
+    return kCharClassificationKernelBackend == ValueTypeKernelBackendKind::Intrinsic
+        ? CharIsAsciiIntrinsicImpl(value)
+        : CharIsAsciiGeneric(value);
+}
+
+bool CharIsAsciiDigit(std::uint16_t value) {
+    return static_cast<std::uint16_t>(value - static_cast<std::uint16_t>('0')) <= 9u;
+}
+
+bool CharIsAsciiHexDigitLower(std::uint16_t value) {
+    return static_cast<std::uint16_t>(value - static_cast<std::uint16_t>('a')) <= 5u;
+}
+
+bool CharIsAsciiHexDigitUpper(std::uint16_t value) {
+    return static_cast<std::uint16_t>(value - static_cast<std::uint16_t>('A')) <= 5u;
+}
+
+bool CharIsAsciiHexDigit(std::uint16_t value) {
+    return CharIsAsciiDigit(value) || CharIsAsciiHexDigitLower(value) || CharIsAsciiHexDigitUpper(value);
+}
+
+bool CharIsAsciiLetterLower(std::uint16_t value) {
+    return static_cast<std::uint16_t>(value - static_cast<std::uint16_t>('a')) <= 25u;
+}
+
+bool CharIsAsciiLetterUpper(std::uint16_t value) {
+    return static_cast<std::uint16_t>(value - static_cast<std::uint16_t>('A')) <= 25u;
+}
+
+bool CharIsAsciiLetter(std::uint16_t value) {
+    return CharIsAsciiLetterLower(value) || CharIsAsciiLetterUpper(value);
+}
+
+bool CharIsAsciiLetterOrDigit(std::uint16_t value) {
+    return CharIsAsciiLetter(value) || CharIsAsciiDigit(value);
+}
+
+bool CharIsBetween(std::uint16_t value, std::uint16_t lower_bound, std::uint16_t upper_bound) {
+    return value >= lower_bound && value <= upper_bound;
+}
+
+static bool CharIsLatin1Generic(std::uint16_t value) {
+    return value <= 0xFFu;
+}
+
+static bool CharIsLatin1IntrinsicImpl(std::uint16_t value) {
+    return (value & 0xFF00u) == 0u;
+}
+
+bool CharIsLatin1(std::uint16_t value) {
+    return kCharClassificationKernelBackend == ValueTypeKernelBackendKind::Intrinsic
+        ? CharIsLatin1IntrinsicImpl(value)
+        : CharIsLatin1Generic(value);
+}
+
+bool CharIsHighSurrogate(std::uint16_t value) {
+    return CharIsBetween(value, 0xD800u, 0xDBFFu);
+}
+
+bool CharIsLowSurrogate(std::uint16_t value) {
+    return CharIsBetween(value, 0xDC00u, 0xDFFFu);
+}
+
+bool CharIsSeparatorLatin1(std::uint16_t value) {
+    return value == 0x20u || value == 0xA0u;
+}
+
+bool CharIsSurrogate(std::uint16_t value) {
+    return CharIsBetween(value, 0xD800u, 0xDFFFu);
+}
+
+bool CharIsSurrogatePair(std::uint16_t high_surrogate, std::uint16_t low_surrogate) {
+    return CharIsHighSurrogate(high_surrogate) && CharIsLowSurrogate(low_surrogate);
+}
+
+bool CharIsWhiteSpaceLatin1(std::uint16_t value) {
+    return value == 0x20u ||
+           static_cast<std::uint16_t>(value - 0x09u) <= static_cast<std::uint16_t>(0x0Du - 0x09u) ||
+           value == 0x85u ||
+           value == 0xA0u;
+}
+
+int32_t CharCompare(std::uint16_t left_value, std::uint16_t right_value) {
+    if (left_value < right_value) {
+        return -1;
+    }
+
+    if (left_value > right_value) {
+        return 1;
+    }
+
+    return 0;
+}
+
+bool CharEquals(std::uint16_t left_value, std::uint16_t right_value) {
+    return left_value == right_value;
+}
+
+static std::uint32_t BitCastSingleToUInt32(float value) {
+    std::uint32_t bits = 0u;
+    std::memcpy(&bits, &value, sizeof(bits));
+    return bits;
+}
+
+static std::uint64_t BitCastDoubleToUInt64(double value) {
+    std::uint64_t bits = 0u;
+    std::memcpy(&bits, &value, sizeof(bits));
+    return bits;
+}
+
+static bool HalfIsFiniteGeneric(std::uint16_t value) {
+    return (value & 0x7C00u) != 0x7C00u;
+}
+
+static bool HalfIsNaNGeneric(std::uint16_t value) {
+    return (value & 0x7C00u) == 0x7C00u && (value & 0x03FFu) != 0u;
+}
+
+static bool HalfIsInfinityGeneric(std::uint16_t value) {
+    return (value & 0x7FFFu) == 0x7C00u;
+}
+
+static float HalfToFloatValue(std::uint16_t value);
+bool HalfIsInteger(std::uint16_t value);
+
+bool HalfIsFinite(std::uint16_t value) {
+    return HalfIsFiniteGeneric(value);
+}
+
+bool HalfIsEvenInteger(std::uint16_t value) {
+    return HalfIsInteger(value) &&
+           std::fabs(std::fmod(HalfToFloatValue(value), 2.0f)) == 0.0f;
+}
+
+bool HalfIsNaN(std::uint16_t value) {
+    return HalfIsNaNGeneric(value);
+}
+
+bool HalfIsNaNOrZero(std::uint16_t value) {
+    return (value & 0x7FFFu) == 0u || HalfIsNaN(value);
+}
+
+bool HalfIsNegative(std::uint16_t value) {
+    return (value & 0x8000u) == 0x8000u;
+}
+
+bool HalfIsNegativeInfinity(std::uint16_t value) {
+    return value == 0xFC00u;
+}
+
+bool HalfIsNormal(std::uint16_t value) {
+    const std::uint16_t abs_value = static_cast<std::uint16_t>(value & 0x7FFFu);
+    return abs_value < 0x7C00u && abs_value != 0u && (abs_value & 0x7C00u) != 0u;
+}
+
+bool HalfIsOddInteger(std::uint16_t value) {
+    return HalfIsInteger(value) &&
+           std::fabs(std::fmod(HalfToFloatValue(value), 2.0f)) == 1.0f;
+}
+
+bool HalfIsPositive(std::uint16_t value) {
+    return !HalfIsNegative(value);
+}
+
+bool HalfIsPositiveInfinity(std::uint16_t value) {
+    return value == 0x7C00u;
+}
+
+bool HalfIsPow2(std::uint16_t value) {
+    if (!HalfIsFinite(value)) {
+        return false;
+    }
+
+    const float float_value = HalfToFloatValue(value);
+    if (!(float_value > 0.0f)) {
+        return false;
+    }
+
+    int exponent = 0;
+    return std::frexp(float_value, &exponent) == 0.5f;
+}
+
+bool HalfIsRealNumber(std::uint16_t value) {
+    return !HalfIsNaN(value);
+}
+
+bool HalfIsSubnormal(std::uint16_t value) {
+    const std::uint16_t abs_value = static_cast<std::uint16_t>(value & 0x7FFFu);
+    return abs_value != 0u && (abs_value & 0x7C00u) == 0u;
+}
+
+bool HalfIsZero(std::uint16_t value) {
+    return (value & 0x7FFFu) == 0u;
+}
+
+bool HalfIsInteger(std::uint16_t value) {
+    if (!HalfIsFinite(value)) {
+        return false;
+    }
+
+    const float float_value = HalfToFloatValue(value);
+    return std::trunc(float_value) == float_value;
+}
+
+bool HalfIsInfinity(std::uint16_t value) {
+    return HalfIsInfinityGeneric(value);
+}
+
+static float HalfToFloatValue(std::uint16_t value) {
+    const std::uint16_t exponent = static_cast<std::uint16_t>((value >> 10) & 0x1Fu);
+    const std::uint16_t mantissa = static_cast<std::uint16_t>(value & 0x03FFu);
+    const bool negative = (value & 0x8000u) != 0u;
+
+    float result = 0.0f;
+    if (exponent == 0u) {
+        if (mantissa == 0u) {
+            result = 0.0f;
+        } else {
+            result = std::ldexp(static_cast<float>(mantissa), -24);
+        }
+    } else if (exponent == 0x1Fu) {
+        result = mantissa == 0u
+            ? std::numeric_limits<float>::infinity()
+            : std::numeric_limits<float>::quiet_NaN();
+    } else {
+        result = std::ldexp(1.0f + (static_cast<float>(mantissa) / 1024.0f), static_cast<int>(exponent) - 15);
+    }
+
+    return negative ? -result : result;
+}
+
+int32_t HalfCompare(std::uint16_t left_value, std::uint16_t right_value) {
+    const bool left_is_nan = HalfIsNaN(left_value);
+    const bool right_is_nan = HalfIsNaN(right_value);
+    if (left_is_nan && right_is_nan) {
+        return 0;
+    }
+
+    if (left_is_nan) {
+        return -1;
+    }
+
+    if (right_is_nan) {
+        return 1;
+    }
+
+    const float left = HalfToFloatValue(left_value);
+    const float right = HalfToFloatValue(right_value);
+    if (left < right) {
+        return -1;
+    }
+
+    if (left > right) {
+        return 1;
+    }
+
+    return 0;
+}
+
+bool HalfEquals(std::uint16_t left_value, std::uint16_t right_value) {
+    return left_value == right_value ||
+           (HalfIsZero(left_value) && HalfIsZero(right_value)) ||
+           (HalfIsNaN(left_value) && HalfIsNaN(right_value));
+}
+
+static bool HalfAreZero(std::uint16_t left_value, std::uint16_t right_value) {
+    return ((left_value | right_value) & 0x7FFFu) == 0u;
+}
+
+bool HalfOperatorEquals(std::uint16_t left_value, std::uint16_t right_value) {
+    return !HalfIsNaN(left_value) &&
+           !HalfIsNaN(right_value) &&
+           (left_value == right_value || HalfAreZero(left_value, right_value));
+}
+
+bool HalfOperatorLessThan(std::uint16_t left_value, std::uint16_t right_value) {
+    if (HalfIsNaN(left_value) || HalfIsNaN(right_value)) {
+        return false;
+    }
+
+    const bool left_is_negative = HalfIsNegative(left_value);
+    if (left_is_negative != HalfIsNegative(right_value)) {
+        return left_is_negative && !HalfAreZero(left_value, right_value);
+    }
+
+    return left_value != right_value && ((left_value < right_value) ^ left_is_negative);
+}
+
+bool HalfOperatorLessThanOrEqual(std::uint16_t left_value, std::uint16_t right_value) {
+    if (HalfIsNaN(left_value) || HalfIsNaN(right_value)) {
+        return false;
+    }
+
+    const bool left_is_negative = HalfIsNegative(left_value);
+    if (left_is_negative != HalfIsNegative(right_value)) {
+        return left_is_negative || HalfAreZero(left_value, right_value);
+    }
+
+    return left_value == right_value || ((left_value < right_value) ^ left_is_negative);
+}
+
+bool HalfOperatorGreaterThan(std::uint16_t left_value, std::uint16_t right_value) {
+    return HalfOperatorLessThan(right_value, left_value);
+}
+
+bool HalfOperatorGreaterThanOrEqual(std::uint16_t left_value, std::uint16_t right_value) {
+    return HalfOperatorLessThanOrEqual(right_value, left_value);
+}
+
+template <typename T>
+static int32_t FloatingCompareGeneric(T left_value, T right_value) {
+    const bool left_is_nan = std::isnan(left_value);
+    const bool right_is_nan = std::isnan(right_value);
+    if (left_is_nan && right_is_nan) {
+        return 0;
+    }
+
+    if (left_is_nan) {
+        return -1;
+    }
+
+    if (right_is_nan) {
+        return 1;
+    }
+
+    if (left_value < right_value) {
+        return -1;
+    }
+
+    if (left_value > right_value) {
+        return 1;
+    }
+
+    return 0;
+}
+
+template <typename T>
+static bool FloatingEqualsGeneric(T left_value, T right_value) {
+    return left_value == right_value || (std::isnan(left_value) && std::isnan(right_value));
+}
+
+template <typename T>
+static bool FloatingIsIntegerGeneric(T value) {
+    return std::isfinite(value) && std::trunc(value) == value;
+}
+
+template <typename T>
+static bool FloatingIsEvenIntegerGeneric(T value) {
+    return FloatingIsIntegerGeneric(value) &&
+           std::fabs(std::fmod(value, static_cast<T>(2))) == static_cast<T>(0);
+}
+
+template <typename T>
+static bool FloatingIsOddIntegerGeneric(T value) {
+    return FloatingIsIntegerGeneric(value) &&
+           std::fabs(std::fmod(value, static_cast<T>(2))) == static_cast<T>(1);
+}
+
+template <typename T>
+static bool FloatingIsPow2Generic(T value) {
+    if (!std::isfinite(value) || !(value > static_cast<T>(0))) {
+        return false;
+    }
+
+    int exponent = 0;
+    return std::frexp(value, &exponent) == static_cast<T>(0.5);
+}
+
+static bool SingleIsFiniteGeneric(float value) {
+    return std::isfinite(value);
+}
+
+static bool SingleIsFiniteIntrinsicImpl(float value) {
+    return (BitCastSingleToUInt32(value) & 0x7F800000u) != 0x7F800000u;
+}
+
+bool SingleIsFinite(float value) {
+    return kFloatingClassificationKernelBackend == ValueTypeKernelBackendKind::Intrinsic
+        ? SingleIsFiniteIntrinsicImpl(value)
+        : SingleIsFiniteGeneric(value);
+}
+
+static bool SingleIsNaNGeneric(float value) {
+    return std::isnan(value);
+}
+
+static bool SingleIsNaNIntrinsicImpl(float value) {
+    const std::uint32_t bits = BitCastSingleToUInt32(value);
+    return (bits & 0x7F800000u) == 0x7F800000u && (bits & 0x007FFFFFu) != 0u;
+}
+
+bool SingleIsNaN(float value) {
+    return kFloatingClassificationKernelBackend == ValueTypeKernelBackendKind::Intrinsic
+        ? SingleIsNaNIntrinsicImpl(value)
+        : SingleIsNaNGeneric(value);
+}
+
+static bool SingleIsInfinityGeneric(float value) {
+    return std::isinf(value);
+}
+
+static bool SingleIsInfinityIntrinsicImpl(float value) {
+    return (BitCastSingleToUInt32(value) & 0x7FFFFFFFu) == 0x7F800000u;
+}
+
+bool SingleIsInfinity(float value) {
+    return kFloatingClassificationKernelBackend == ValueTypeKernelBackendKind::Intrinsic
+        ? SingleIsInfinityIntrinsicImpl(value)
+        : SingleIsInfinityGeneric(value);
+}
+
+int32_t SingleCompare(float left_value, float right_value) {
+    return FloatingCompareGeneric(left_value, right_value);
+}
+
+bool SingleEquals(float left_value, float right_value) {
+    return FloatingEqualsGeneric(left_value, right_value);
+}
+
+bool SingleIsEvenInteger(float value) {
+    return FloatingIsEvenIntegerGeneric(value);
+}
+
+bool SingleIsNaNOrZero(float value) {
+    return (BitCastSingleToUInt32(value) & 0x7FFFFFFFu) == 0u || SingleIsNaN(value);
+}
+
+bool SingleIsNegative(float value) {
+    return (BitCastSingleToUInt32(value) & 0x80000000u) != 0u;
+}
+
+bool SingleIsNegativeInfinity(float value) {
+    return BitCastSingleToUInt32(value) == 0xFF800000u;
+}
+
+bool SingleIsNormal(float value) {
+    const std::uint32_t bits = BitCastSingleToUInt32(value);
+    return (bits & 0x7FFFFFFFu) < 0x7F800000u &&
+           (bits & 0x7FFFFFFFu) != 0u &&
+           (bits & 0x7F800000u) != 0u;
+}
+
+bool SingleIsOddInteger(float value) {
+    return FloatingIsOddIntegerGeneric(value);
+}
+
+bool SingleIsPositive(float value) {
+    return (BitCastSingleToUInt32(value) & 0x80000000u) == 0u;
+}
+
+bool SingleIsPositiveInfinity(float value) {
+    return BitCastSingleToUInt32(value) == 0x7F800000u;
+}
+
+bool SingleIsPow2(float value) {
+    return FloatingIsPow2Generic(value);
+}
+
+bool SingleIsRealNumber(float value) {
+    return !SingleIsNaN(value);
+}
+
+bool SingleIsSubnormal(float value) {
+    const std::uint32_t bits = BitCastSingleToUInt32(value);
+    return (bits & 0x7FFFFFFFu) != 0u && (bits & 0x7F800000u) == 0u;
+}
+
+bool SingleIsZero(float value) {
+    return value == 0.0f;
+}
+
+bool SingleIsInteger(float value) {
+    return FloatingIsIntegerGeneric(value);
+}
+
+static bool DoubleIsFiniteGeneric(double value) {
+    return std::isfinite(value);
+}
+
+static bool DoubleIsFiniteIntrinsicImpl(double value) {
+    return (BitCastDoubleToUInt64(value) & 0x7FF0000000000000ull) != 0x7FF0000000000000ull;
+}
+
+bool DoubleIsFinite(double value) {
+    return kFloatingClassificationKernelBackend == ValueTypeKernelBackendKind::Intrinsic
+        ? DoubleIsFiniteIntrinsicImpl(value)
+        : DoubleIsFiniteGeneric(value);
+}
+
+static bool DoubleIsNaNGeneric(double value) {
+    return std::isnan(value);
+}
+
+static bool DoubleIsNaNIntrinsicImpl(double value) {
+    const std::uint64_t bits = BitCastDoubleToUInt64(value);
+    return (bits & 0x7FF0000000000000ull) == 0x7FF0000000000000ull && (bits & 0x000FFFFFFFFFFFFFull) != 0u;
+}
+
+static bool DoubleIsInfinityGeneric(double value) {
+    return std::isinf(value);
+}
+
+static bool DoubleIsInfinityIntrinsicImpl(double value) {
+    return (BitCastDoubleToUInt64(value) & 0x7FFFFFFFFFFFFFFFull) == 0x7FF0000000000000ull;
+}
+
+bool DoubleIsNaN(double value) {
+    return kFloatingClassificationKernelBackend == ValueTypeKernelBackendKind::Intrinsic
+        ? DoubleIsNaNIntrinsicImpl(value)
+        : DoubleIsNaNGeneric(value);
+}
+
+bool DoubleIsInfinity(double value) {
+    return kFloatingClassificationKernelBackend == ValueTypeKernelBackendKind::Intrinsic
+        ? DoubleIsInfinityIntrinsicImpl(value)
+        : DoubleIsInfinityGeneric(value);
+}
+
+int32_t DoubleCompare(double left_value, double right_value) {
+    return FloatingCompareGeneric(left_value, right_value);
+}
+
+bool DoubleEquals(double left_value, double right_value) {
+    return FloatingEqualsGeneric(left_value, right_value);
+}
+
+bool DoubleIsEvenInteger(double value) {
+    return FloatingIsEvenIntegerGeneric(value);
+}
+
+bool DoubleIsNaNOrZero(double value) {
+    return (BitCastDoubleToUInt64(value) & 0x7FFFFFFFFFFFFFFFull) == 0u || DoubleIsNaN(value);
+}
+
+bool DoubleIsNegative(double value) {
+    return (BitCastDoubleToUInt64(value) & 0x8000000000000000ull) != 0u;
+}
+
+bool DoubleIsNegativeInfinity(double value) {
+    return BitCastDoubleToUInt64(value) == 0xFFF0000000000000ull;
+}
+
+bool DoubleIsNormal(double value) {
+    const std::uint64_t bits = BitCastDoubleToUInt64(value);
+    return (bits & 0x7FFFFFFFFFFFFFFFull) < 0x7FF0000000000000ull &&
+           (bits & 0x7FFFFFFFFFFFFFFFull) != 0u &&
+           (bits & 0x7FF0000000000000ull) != 0u;
+}
+
+bool DoubleIsOddInteger(double value) {
+    return FloatingIsOddIntegerGeneric(value);
+}
+
+bool DoubleIsPositive(double value) {
+    return (BitCastDoubleToUInt64(value) & 0x8000000000000000ull) == 0u;
+}
+
+bool DoubleIsPositiveInfinity(double value) {
+    return BitCastDoubleToUInt64(value) == 0x7FF0000000000000ull;
+}
+
+bool DoubleIsPow2(double value) {
+    return FloatingIsPow2Generic(value);
+}
+
+bool DoubleIsRealNumber(double value) {
+    return !DoubleIsNaN(value);
+}
+
+bool DoubleIsSubnormal(double value) {
+    const std::uint64_t bits = BitCastDoubleToUInt64(value);
+    return (bits & 0x7FFFFFFFFFFFFFFFull) != 0u && (bits & 0x7FF0000000000000ull) == 0u;
+}
+
+bool DoubleIsZero(double value) {
+    return value == 0.0;
+}
+
+bool DoubleIsInteger(double value) {
+    return FloatingIsIntegerGeneric(value);
+}
+
+bool NFloatIsFinite(double value) {
+    return DoubleIsFinite(value);
+}
+
+bool NFloatIsNaN(double value) {
+    return DoubleIsNaN(value);
+}
+
+bool NFloatIsInfinity(double value) {
+    return DoubleIsInfinity(value);
+}
+
+int32_t NFloatCompare(double left_value, double right_value) {
+    return DoubleCompare(left_value, right_value);
+}
+
+bool NFloatEquals(double left_value, double right_value) {
+    return DoubleEquals(left_value, right_value);
+}
+
+bool NFloatIsEvenInteger(double value) {
+    return DoubleIsEvenInteger(value);
+}
+
+bool NFloatIsNegative(double value) {
+    return DoubleIsNegative(value);
+}
+
+bool NFloatIsNegativeInfinity(double value) {
+    return DoubleIsNegativeInfinity(value);
+}
+
+bool NFloatIsNormal(double value) {
+    return DoubleIsNormal(value);
+}
+
+bool NFloatIsOddInteger(double value) {
+    return DoubleIsOddInteger(value);
+}
+
+bool NFloatIsPositive(double value) {
+    return DoubleIsPositive(value);
+}
+
+bool NFloatIsPositiveInfinity(double value) {
+    return DoubleIsPositiveInfinity(value);
+}
+
+bool NFloatIsPow2(double value) {
+    return DoubleIsPow2(value);
+}
+
+bool NFloatIsRealNumber(double value) {
+    return DoubleIsRealNumber(value);
+}
+
+bool NFloatIsSubnormal(double value) {
+    return DoubleIsSubnormal(value);
+}
+
+bool NFloatIsInteger(double value) {
+    return DoubleIsInteger(value);
+}
+
+static int32_t Int128CompareGeneric(const void* left_value, const void* right_value) {
+    if (left_value == nullptr || right_value == nullptr) {
+        return 0;
+    }
+
+    Int128Layout left = {};
+    Int128Layout right = {};
+    std::memcpy(&left, left_value, sizeof(left));
+    std::memcpy(&right, right_value, sizeof(right));
+    if (left.upper < right.upper) {
+        return -1;
+    }
+
+    if (left.upper > right.upper) {
+        return 1;
+    }
+
+    if (left.lower < right.lower) {
+        return -1;
+    }
+
+    if (left.lower > right.lower) {
+        return 1;
+    }
+
+    return 0;
+}
+
+static int32_t Int128CompareIntrinsicImpl(const void* left_value, const void* right_value) {
+    return Int128CompareGeneric(left_value, right_value);
+}
+
+int32_t Int128Compare(const void* left_value, const void* right_value) {
+    return kBitArithmeticKernelBackend == ValueTypeKernelBackendKind::Intrinsic
+        ? Int128CompareIntrinsicImpl(left_value, right_value)
+        : Int128CompareGeneric(left_value, right_value);
+}
+
+bool Int128Equals(const void* left_value, const void* right_value) {
+    return Int128Compare(left_value, right_value) == 0;
+}
+
+static int32_t UInt128CompareGeneric(const void* left_value, const void* right_value) {
+    if (left_value == nullptr || right_value == nullptr) {
+        return 0;
+    }
+
+    UInt128Layout left = {};
+    UInt128Layout right = {};
+    std::memcpy(&left, left_value, sizeof(left));
+    std::memcpy(&right, right_value, sizeof(right));
+    if (left.upper < right.upper) {
+        return -1;
+    }
+
+    if (left.upper > right.upper) {
+        return 1;
+    }
+
+    if (left.lower < right.lower) {
+        return -1;
+    }
+
+    if (left.lower > right.lower) {
+        return 1;
+    }
+
+    return 0;
+}
+
+static int32_t UInt128CompareIntrinsicImpl(const void* left_value, const void* right_value) {
+    return UInt128CompareGeneric(left_value, right_value);
+}
+
+int32_t UInt128Compare(const void* left_value, const void* right_value) {
+    return kBitArithmeticKernelBackend == ValueTypeKernelBackendKind::Intrinsic
+        ? UInt128CompareIntrinsicImpl(left_value, right_value)
+        : UInt128CompareGeneric(left_value, right_value);
+}
+
+bool UInt128Equals(const void* left_value, const void* right_value) {
+    return UInt128Compare(left_value, right_value) == 0;
+}
+
+int32_t IntPtrCompare(std::intptr_t left_value, std::intptr_t right_value) {
+    if (left_value < right_value) {
+        return -1;
+    }
+
+    if (left_value > right_value) {
+        return 1;
+    }
+
+    return 0;
+}
+
+bool IntPtrEquals(std::intptr_t left_value, std::intptr_t right_value) {
+    return left_value == right_value;
+}
+
+int32_t UIntPtrCompare(std::uintptr_t left_value, std::uintptr_t right_value) {
+    if (left_value < right_value) {
+        return -1;
+    }
+
+    if (left_value > right_value) {
+        return 1;
+    }
+
+    return 0;
+}
+
+bool UIntPtrEquals(std::uintptr_t left_value, std::uintptr_t right_value) {
+    return left_value == right_value;
+}
+
+int32_t DateTimeCompareTicks(const void* left_value, const void* right_value) {
+    if (left_value == nullptr || right_value == nullptr) {
+        return 0;
+    }
+
+    std::uint64_t left = 0u;
+    std::uint64_t right = 0u;
+    std::memcpy(&left, left_value, sizeof(left));
+    std::memcpy(&right, right_value, sizeof(right));
+    left &= kDateTimeTicksMask;
+    right &= kDateTimeTicksMask;
+    if (left < right) {
+        return -1;
+    }
+
+    if (left > right) {
+        return 1;
+    }
+
+    return 0;
+}
+
+bool DateTimeEqualsTicks(const void* left_value, const void* right_value) {
+    return DateTimeCompareTicks(left_value, right_value) == 0;
+}
+
+int32_t TimeSpanCompareTicks(const void* left_value, const void* right_value) {
+    if (left_value == nullptr || right_value == nullptr) {
+        return 0;
+    }
+
+    std::int64_t left = 0;
+    std::int64_t right = 0;
+    std::memcpy(&left, left_value, sizeof(left));
+    std::memcpy(&right, right_value, sizeof(right));
+    if (left < right) {
+        return -1;
+    }
+
+    if (left > right) {
+        return 1;
+    }
+
+    return 0;
+}
+
+bool TimeSpanEqualsTicks(const void* left_value, const void* right_value) {
+    return TimeSpanCompareTicks(left_value, right_value) == 0;
+}
+
+int32_t DateOnlyCompareDayNumber(std::int32_t left_value, std::int32_t right_value) {
+    if (left_value < right_value) {
+        return -1;
+    }
+
+    if (left_value > right_value) {
+        return 1;
+    }
+
+    return 0;
+}
+
+bool DateOnlyEqualsDayNumber(std::int32_t left_value, std::int32_t right_value) {
+    return left_value == right_value;
+}
+
+int32_t TimeOnlyCompareTicksValue(std::int64_t left_value, std::int64_t right_value) {
+    if (left_value < right_value) {
+        return -1;
+    }
+
+    if (left_value > right_value) {
+        return 1;
+    }
+
+    return 0;
+}
+
+bool TimeOnlyEqualsTicksValue(std::int64_t left_value, std::int64_t right_value) {
+    return left_value == right_value;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

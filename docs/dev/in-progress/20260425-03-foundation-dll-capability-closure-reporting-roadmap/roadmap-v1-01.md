@@ -156,11 +156,11 @@ Status: in-progress
 
 | task_id | phase | status | owner | purpose | depends_on |
 | --- | --- | --- | --- | --- | --- |
-| `20260425-04-capability-family-denominator-and-authority-freeze` | `phase-0` | `planned` | `codex` | 冻结 capability closure 的 denominator authority、family 粒度与 authority layering | `20260425-03` |
-| `20260425-05-workflow-progress-and-completion-rules-freeze` | `phase-1` | `planned` | `codex` | 冻结 workflow required gates、DLL completed 规则和 waiver authority | `20260425-04` |
-| `20260425-06-capability-family-ledger-and-report-contract-cutover` | `phase-2` | `planned` | `codex` | 把 capability-family ledger 接入 foundation DLL projection / report contract | `20260425-05` |
-| `20260425-07-dll-report-pages-source-links-and-artifact-split` | `phase-3` | `planned` | `codex` | 重构 dashboard / DLL detail / artifact entry，并补 Source Links | `20260425-06` |
-| `20260425-08-reporting-authority-sync-and-formal-refresh` | `phase-4` | `planned` | `codex` | 同步 architecture/wiki/skill authority，并执行 formal refresh | `20260425-07` |
+| `20260425-04-capability-family-denominator-and-authority-freeze` | `phase-0` | `completed` | `codex` | 冻结 capability closure 的 denominator authority、family 粒度与 authority layering | `20260425-03` |
+| `20260425-05-workflow-progress-and-completion-rules-freeze` | `phase-1` | `completed` | `codex` | 冻结 workflow required gates、DLL completed 规则和 waiver authority | `20260425-04` |
+| `20260425-06-capability-family-ledger-and-report-contract-cutover` | `phase-2` | `completed` | `codex` | 把 capability-family ledger 接入 foundation DLL projection / report contract | `20260425-05` |
+| `20260425-07-dll-report-pages-source-links-and-artifact-split` | `phase-3` | `completed` | `codex` | 重构 dashboard / DLL detail / artifact entry，并补 Source Links | `20260425-06` |
+| `20260425-08-reporting-authority-sync-and-formal-refresh` | `phase-4` | `in-progress` | `codex` | 同步 architecture/wiki/skill authority，并执行 formal refresh | `20260425-07` |
 
 ## 7. 依赖
 

@@ -1,7 +1,6 @@
 # docs/dev 任务索引
 
 当前 active 任务：
-- `20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening`
 
 - [进行中任务索引](in-progress/INDEX.md)
 - [挂起任务索引](hanging/INDEX.md)
@@ -21,5 +20,5 @@
 | [20260419-08-scriban-generator-formalization](hanging/20260419-08-scriban-generator-formalization/STATUS.md) | hanging | hanging | 2026-04-21 23:45:00 +08:00 | 用户要求暂挂 `20260419` 主线，恢复后按 `plan-v1-01.md` 先补 RED 测试再执行单次原地 cutover。 | false |
 | [20260419-01-foundation-dll-translation-audit-roadmap](in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md) | in-progress | roadmap | 2026-04-25 21:58:00 +08:00 | DLL-first reporting sync 已补齐，`System.Collections.Immutable` 已有正式 blocked STATUS 入口，CoreLib canonical audit authority 同步收敛到 `20260419-37`。 | false |
 | [20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable](in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md) | in-progress | blocked-before-start | 2026-04-25 21:58:00 +08:00 | `System.Collections.Immutable` 已有正式 DLL-first 审计入口，但在 `20260419-03` 真正关闸前仅保持 blocked authority。 | false |
-| [20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening](in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md) | in-progress | implementation | 2026-04-25 21:58:00 +08:00 | 当前 active child 持续扩大 `System.Private.CoreLib` supplemental runtime-skeleton translated coverage，并作为 canonical CoreLib audit authority。 | true |
+| [20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening](in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md) | in-progress | implementation | 2026-04-25 21:58:00 +08:00 | 当前 widening child 持续扩大 `System.Private.CoreLib` supplemental runtime-skeleton translated coverage，并作为 canonical CoreLib audit authority。 | false |
 | [20260419-03-system-private-corelib-full-verification](completed/20260419-03-system-private-corelib-full-verification/STATUS.md) | completed | completed-blocked | 2026-04-24 21:20:00 +08:00 | 已不再只有窄 proof packet，但真实 CoreLib supplemental runtime-skeleton 仍存在大量 uncovered methods，`fullCoreLibTranslated = false`。 | false |

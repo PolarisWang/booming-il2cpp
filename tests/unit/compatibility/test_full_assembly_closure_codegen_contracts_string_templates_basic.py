@@ -263,18 +263,18 @@ class TestFullAssemblyClosureCodegenContractsStringTemplatesBasic(FullAssemblyCl
             / "ReferenceProof"
             / "NativeReferenceProofCatalog.cs"
         ).read_text(encoding="utf-8")
-        template_source = RUNTIME_SKELETON_STATIC_CHECKED_BYTE_CONVERT_TEMPLATE_PATH.read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_STATIC_CHECKED_PRIMITIVE_CONVERT_TEMPLATE_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
-            "TryBuildAssemblyBoundStaticCheckedByteConvertStub",
+            "TryBuildAssemblyBoundStaticCheckedPrimitiveConvertStub",
+            "TryResolveRuntimeSkeletonCheckedPrimitiveConvertShape",
             "TryResolveRuntimeSkeletonCheckedByteConvertShape",
-            "TryBuildAssemblyBoundStaticCheckedCharConvertStub",
             "TryResolveRuntimeSkeletonCheckedCharConvertShape",
-            "GetRuntimeSkeletonStaticCheckedByteConvertStubTemplate",
+            "GetRuntimeSkeletonStaticCheckedPrimitiveConvertStubTemplate",
         ]:
             self.assertIn(required_fragment, native_reference_emitter_source)
 
-        self.assertIn("RuntimeSkeletonStaticCheckedByteConvertStubTemplateRelativePath", catalog_source)
+        self.assertIn("RuntimeSkeletonStaticCheckedPrimitiveConvertStubTemplateRelativePath", catalog_source)
 
         for required_fragment in [
             "_ManagedArgs",
