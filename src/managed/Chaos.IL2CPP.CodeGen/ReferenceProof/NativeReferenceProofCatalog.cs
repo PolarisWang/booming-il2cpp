@@ -114,7 +114,7 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticBoolProducerForwarderStub.cpp.scriban";
     public const string RuntimeSkeletonStaticPrimitiveConvertStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticPrimitiveConvertStub.cpp.scriban";
-    public const string RuntimeSkeletonStaticCheckedByteConvertStubTemplateRelativePath =
+    public const string RuntimeSkeletonStaticCheckedPrimitiveConvertStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticCheckedByteConvertStub.cpp.scriban";
     public const string RuntimeSkeletonStaticBoxedIConvertibleCharInvalidCastStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticBoxedIConvertibleCharInvalidCastStub.cpp.scriban";
@@ -124,6 +124,8 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticByteForwarderStub.cpp.scriban";
     public const string RuntimeSkeletonStaticStringReturnForwarderStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringReturnForwarderStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticStringCallForwarderStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringCallForwarderStub.cpp.scriban";
     public const string RuntimeSkeletonStaticStringForwarderStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringForwarderStub.cpp.scriban";
     public const string RuntimeSkeletonStaticStringProviderPassthroughStubTemplateRelativePath =
@@ -132,8 +134,58 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringCharProviderStub.cpp.scriban";
     public const string RuntimeSkeletonStaticObjectCharProviderStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticObjectCharProviderStub.cpp.scriban";
+    public const string RuntimeSkeletonUnsafeManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.UnsafeManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonMemoryExtensionsManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.MemoryExtensionsManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonSpanHelpersKernelStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.SpanHelpersKernelStub.cpp.scriban";
+    public const string RuntimeSkeletonArrayAndMemoryMarshalStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.ArrayAndMemoryMarshalStub.cpp.scriban";
+    public const string RuntimeSkeletonHalfManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.HalfManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonFloatingScalarManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.FloatingScalarManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonPrimitiveScalarManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.PrimitiveScalarManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonWideNumericManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.WideNumericManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonCalendarStructManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.CalendarStructManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonIdentityStructManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.IdentityStructManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonCompanionManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.CompanionManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonDateTimeSemanticEngineStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.DateTimeSemanticEngineStub.cpp.scriban";
+    public const string RuntimeSkeletonGlobalizationDateTimeSupportStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.GlobalizationDateTimeSupportStub.cpp.scriban";
+    public const string RuntimeSkeletonValueTypeKernelStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.ValueTypeKernelStub.cpp.scriban";
+    public const string RuntimeSkeletonNumberManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.NumberManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonDecimalManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.DecimalManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonCharManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.CharManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonEnumManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.EnumManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonEnumImportedBridgeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.EnumImportedBridgeStub.cpp.scriban";
+    public const string RuntimeSkeletonStringManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StringManagedInvokeStub.cpp.scriban";
     public const string RuntimeSkeletonStaticBoxedValueTypeStringInstanceCallStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticBoxedValueTypeStringInstanceCallStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticBoxedValueTypeInstanceCallStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticBoxedValueTypeInstanceCallStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticValueTypeIdentityForwarderStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticValueTypeIdentityForwarderStub.cpp.scriban";
+    public const string RuntimeSkeletonStaticValueTypeCallForwarderStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.StaticValueTypeCallForwarderStub.cpp.scriban";
+    public const string RuntimeSkeletonInstanceValueTypeCallForwarderStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.InstanceValueTypeCallForwarderStub.cpp.scriban";
+    public const string RuntimeSkeletonConvertRuntimeHelperStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.ConvertRuntimeHelperStub.cpp.scriban";
     public const string RuntimeSkeletonStaticStringLiteralAppendStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticStringLiteralAppendStub.cpp.scriban";
     public const string RuntimeSkeletonStaticStringForwarderConsoleWriteLineStubTemplateRelativePath =
@@ -283,9 +335,9 @@ internal static class NativeReferenceProofCatalog
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticPrimitiveConvertStubTemplateRelativePath);
     }
 
-    public static Template GetRuntimeSkeletonStaticCheckedByteConvertStubTemplate()
+    public static Template GetRuntimeSkeletonStaticCheckedPrimitiveConvertStubTemplate()
     {
-        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticCheckedByteConvertStubTemplateRelativePath);
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticCheckedPrimitiveConvertStubTemplateRelativePath);
     }
 
     public static Template GetRuntimeSkeletonStaticBoxedIConvertibleCharInvalidCastStubTemplate()
@@ -338,6 +390,11 @@ internal static class NativeReferenceProofCatalog
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticStringReturnForwarderStubTemplateRelativePath);
     }
 
+    public static Template GetRuntimeSkeletonStaticStringCallForwarderStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticStringCallForwarderStubTemplateRelativePath);
+    }
+
     public static Template GetRuntimeSkeletonStaticStringForwarderStubTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticStringForwarderStubTemplateRelativePath);
@@ -358,9 +415,134 @@ internal static class NativeReferenceProofCatalog
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticObjectCharProviderStubTemplateRelativePath);
     }
 
+    public static Template GetRuntimeSkeletonUnsafeManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonUnsafeManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonMemoryExtensionsManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonMemoryExtensionsManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonSpanHelpersKernelStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonSpanHelpersKernelStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonArrayAndMemoryMarshalStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonArrayAndMemoryMarshalStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonHalfManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonHalfManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonFloatingScalarManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonFloatingScalarManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonPrimitiveScalarManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonPrimitiveScalarManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonWideNumericManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonWideNumericManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonCalendarStructManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonCalendarStructManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonIdentityStructManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonIdentityStructManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonCompanionManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonCompanionManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonDateTimeSemanticEngineStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonDateTimeSemanticEngineStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonGlobalizationDateTimeSupportStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonGlobalizationDateTimeSupportStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonValueTypeKernelStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonValueTypeKernelStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonNumberManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonNumberManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonDecimalManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonDecimalManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonCharManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonCharManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonEnumManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonEnumManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonEnumImportedBridgeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonEnumImportedBridgeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStringManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStringManagedInvokeStubTemplateRelativePath);
+    }
+
     public static Template GetRuntimeSkeletonStaticBoxedValueTypeStringInstanceCallStubTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticBoxedValueTypeStringInstanceCallStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStaticBoxedValueTypeInstanceCallStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticBoxedValueTypeInstanceCallStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStaticValueTypeIdentityForwarderStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticValueTypeIdentityForwarderStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonStaticValueTypeCallForwarderStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonStaticValueTypeCallForwarderStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonInstanceValueTypeCallForwarderStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonInstanceValueTypeCallForwarderStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonConvertRuntimeHelperStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonConvertRuntimeHelperStubTemplateRelativePath);
     }
 
     public static Template GetRuntimeSkeletonStaticStringLiteralAppendStubTemplate()

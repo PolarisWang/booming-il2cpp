@@ -19,6 +19,8 @@
 - 默认 formal refresh 入口：`run verify verification-v1 --json`
 - 审核者稳定报告入口：[`../../docs/verification/INDEX.md`](../../docs/verification/INDEX.md)
 - foundation DLL 当前总览页：[`../../docs/verification/foundation-dll-audit/dashboard.html`](../../docs/verification/foundation-dll-audit/dashboard.html)
+- foundation DLL 详情页入口：`../../docs/verification/foundation-dll-audit/dlls/<assembly>.html`
+- artifact 索引入口：[`../../docs/verification/foundation-dll-audit/artifact-index.html`](../../docs/verification/foundation-dll-audit/artifact-index.html)
 - `run test inventory` 只保留为内部实现命令，不是 public entry。
 - `benchmark --record` 只写原始 benchmark records，不会直接刷新 formal archive / projection。需要新的正式报告、dashboard 和合并数据时，仍然走 `run verify verification-v1 --json`。
 - 如果本轮改动触及 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、页面矩阵列或证据链接规则，也必须通过 `run verify verification-v1 --json` 刷新正式数据；不允许只改 schema、模板或页面读取逻辑而不刷新 archive / reports / projections。
@@ -37,6 +39,7 @@
 | --- | --- | --- |
 | [`Verification-V1测试流程规范.md`](./Verification-V1测试流程规范.md) | Verification V1 测试流程 | 说明新的 canonical 测试流程、formal source、覆盖模型、投影视图与旧流程清理规则 |
 | [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md) | AOT 新 feature 自测 | 说明 owner subject、hotupdate 触发条件、collector/registry/workspace 接线闸门与标准验收顺序 |
+| [`Foundation-DLL新增验证接入流程.md`](./Foundation-DLL新增验证接入流程.md) | foundation DLL 新增验证接入 | 说明 `derive -> promote -> onboard` 的标准流程 |
 | [`新增测试接入规范.md`](./新增测试接入规范.md) | 新增测试接入 | 说明如何在 subject source 中声明测试，并接入 collection-driven 主线 |
 | [`../04-工具与集成/统一测试框架.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md) | 统一测试框架 | 说明 `Sdk / Runtime / collector / manifest` 分层 |
 | [`../04-工具与集成/scriban-usage-and-codegen-rules.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/scriban-usage-and-codegen-rules.md) | Scriban 使用与 codegen 规范 | 说明 IL2CPP / Python codegen 默认优先 Scriban，以及能力不足时的扩展顺序 |
@@ -67,9 +70,18 @@
 - `completed` 前必须先通过计划声明或 authority 要求的正式验证对象，不能只用“项目测试套件大致通过”替代。
 - product mainline 不允许回退到旧入口协议或旧 subject 命名。
 - 不保留长期 `Annotation` alias 或旧双轨入口。
+- capability-family ledger 是 foundation DLL 报告的正式分母 authority，由 audit input manifest + surface ledger + semantic ledger + nativeization plan 合成。
+- DLL-first reporting 的 workflow progress 是辅助流程条，不代表 capability 覆盖本身；Capability Closure 才是真实进度主轴。
+- waiver / exclusion / platform-blocked 三类豁免必须带正式 authorityRef 且记录在 capability-family-ledger.json 中，不允许只写在 task STATUS.md。
+- completion-certification 是 DLL 级 gate，不进入 capability family 的 workflow denominator。
+- DLL 详情页中的 source links 遵循 `subject-source / verification-source / generated-code / evidence / authority-docs` 五种类型、优先级顺序和路径截断规则。
+- foundation-dll-audit 投影系列的 schemaVersion 当前为 2，采用 CapabilityClosure + WorkflowProgress 双轴字段结构。
 
 ## 最近更新
 
+- `2026-04-26`：新增 Capability Closure 双轴报告治理框架；capability-family ledger 成为 foundation DLL 进度报告的正式分母 authority；completion-certification 改为 DLL 级 gate，不再混入 family workflow denominator；waiver / exclusion / platform-blocked 三类豁免必须带正式 authorityRef，不再允许引用 task STATUS.md。
+- `2026-04-26`：新增 foundation-dll-audit 投影系列的 authority 分层；`verification/projections/foundation-dll-audit/*` 成为正式 projection contract，HTML 报告从 projection JSON 派生；source links 五类（Subject / Verification / Generated / Evidence / Authority）的渲染规则固定。
+- `2026-04-26`：新增 DLL 详情页的信息架构规范；DLL 页头显示双轴进度条 + source links，正文显示 capability families 表格 + waiver records 表格 + verification projects 精简摘要。Dashboard 页头显示三轴进度条（DLL Completion / Capability Closure / Workflow Progress），DLL Matrix 新增 Closure/Progress 列和筛选器。Artifact Index 拆分到独立 artifact-index.html 次级入口。
 - `2026-04-23`：新增 [`Verification-V1测试流程规范.md`](./Verification-V1测试流程规范.md)，将 `Verification V1` 固定为新的长期 canonical 测试流程入口，并明确 formal source、覆盖模型、投影视图与旧流程退役规则。
 - `2026-04-17`：新增 [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md)，固定 AOT 主线 feature 的 owner subject、自测顺序与 collector/registry/workspace 三层闸门。
 - `2026-04-17`：把主线升级为 `Sdk + Runtime + collector + manifest` 分层，并明确 `Assert` 下沉到 `Sdk`、native/hotupdate 分别采用各宿主和 patch/host 分离。

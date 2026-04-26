@@ -52,6 +52,190 @@ NATIVE_REFERENCE_SHAPE_VALIDATION_PATH = (
     / "ReferenceProof"
     / "NativeReferenceLoweringPlanner.ShapeValidation.cs"
 )
+NATIVE_REFERENCE_EMITTER_CONVERTLIKE_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.ConvertLikeFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_CONVERT_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.ConvertFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_STRING_MANAGED_INVOKE_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.StringManagedInvokeFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_UNSAFE_MANAGED_INVOKE_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.UnsafeManagedInvokeFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_MEMORY_EXTENSIONS_MANAGED_INVOKE_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.MemoryExtensionsManagedInvokeFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_SPANHELPERS_KERNEL_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.SpanHelpersKernelFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_ARRAY_AND_MEMORYMARSHAL_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.ArrayAndMemoryMarshalFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_HALF_MANAGED_INVOKE_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.HalfManagedInvokeFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_FLOATING_SCALAR_MANAGED_INVOKE_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.FloatingScalarManagedInvokeFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_NUMBER_MANAGED_INVOKE_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.NumberManagedInvokeFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_DECIMAL_MANAGED_INVOKE_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.DecimalManagedInvokeFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_CHAR_MANAGED_INVOKE_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.CharManagedInvokeFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_COMPANION_MANAGED_INVOKE_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.CompanionManagedInvokeFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_DATETIME_SEMANTIC_ENGINE_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.DateTimeSemanticEngineFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_GLOBALIZATION_DATETIME_SUPPORT_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.GlobalizationDateTimeSupportFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_VALUETYPE_KERNEL_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.ValueTypeKernelFamily.cs"
+)
+NATIVE_REFERENCE_EMITTER_ENUM_MANAGED_INVOKE_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.EnumManagedInvokeFamily.cs"
+)
+RUNTIME_SKELETON_MANAGED_INVOKE_CORE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonManagedInvokeCore.cs"
+)
+RUNTIME_SKELETON_VALUE_TYPE_MANAGED_INVOKE_CORE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonValueTypeManagedInvokeCore.cs"
+)
+RUNTIME_SKELETON_SEMANTIC_REGISTRY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonSemanticRegistry.cs"
+)
+RUNTIME_SKELETON_BACKEND_SELECTOR_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonBackendSelector.cs"
+)
+RUNTIME_SKELETON_KERNEL_CORE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "RuntimeSkeletonKernelCore.cs"
+)
+NATIVE_REFERENCE_EMITTER_STRING_MICRO_FAMILY_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "ReferenceProof"
+    / "NativeReferenceProofEmitter.StringMicroFamily.cs"
+)
 SCRIBAN_RENDERER_PATH = (
     REPO_ROOT
     / "src"

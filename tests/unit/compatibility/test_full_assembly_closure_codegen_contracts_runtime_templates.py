@@ -899,10 +899,10 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
         ).read_text(encoding="utf-8")
 
         for required_fragment in [
-            "TryBuildRuntimeSkeletonConvertStringProviderPassthroughHandler",
+            "TryBuildRuntimeSkeletonConvertLikeStringProviderPassthroughHandler",
             "TryBuildAssemblyBoundStaticStringProviderPassthroughStub",
             "TryResolveRuntimeSkeletonStringProviderPassthroughShape",
-            "TryBuildRuntimeSkeletonConvertBoxedValueTypeStringInstanceCallHandler",
+            "TryBuildRuntimeSkeletonConvertLikeBoxedValueTypeStringInstanceCallHandler",
             "TryBuildAssemblyBoundStaticBoxedValueTypeStringInstanceCallStub",
             "TryResolveRuntimeSkeletonBoxedValueTypeStringInstanceCallShape",
             "GetRuntimeSkeletonStaticStringProviderPassthroughStubTemplate",
@@ -934,6 +934,644 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
             "method_invoke",
         ]:
             self.assertIn(required_fragment, value_type_template_source)
+
+    def test_runtime_skeleton_string_managed_invoke_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.StringManagedInvokeFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_STRING_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler",
+            "TryBuildRuntimeSkeletonStringManagedInvokeHandler",
+            "TryBuildAssemblyBoundStringManagedInvokeStub",
+            "TryBuildAssemblyBoundStringManagedInvokeCore",
+            "RuntimeSkeletonStringManagedInvokeAbi.TryCreate(",
+            "GetRuntimeSkeletonStringManagedInvokeStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonStringManagedInvokeStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_unsafe_managed_invoke_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.UnsafeManagedInvokeFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_UNSAFE_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonUnsafeManagedInvokeFamilyHandler",
+            "TryBuildRuntimeSkeletonUnsafeManagedInvokeHandler",
+            "TryBuildAssemblyBoundUnsafeManagedInvokeStub",
+            "TryBuildAssemblyBoundUnsafeManagedInvokeCore",
+            "RuntimeSkeletonUnsafeManagedInvokeAbi.TryCreate(",
+            "GetRuntimeSkeletonUnsafeManagedInvokeStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonUnsafeManagedInvokeStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+            "return_value_is_indirect",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_memory_extensions_managed_invoke_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.MemoryExtensionsManagedInvokeFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_MEMORY_EXTENSIONS_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonMemoryExtensionsManagedInvokeFamilyHandler",
+            "TryBuildRuntimeSkeletonMemoryExtensionsManagedInvokeHandler",
+            "TryBuildAssemblyBoundMemoryExtensionsManagedInvokeStub",
+            "TryBuildAssemblyBoundMemoryExtensionsManagedInvokeCore",
+            "RuntimeSkeletonMemoryExtensionsManagedInvokeAbi.TryCreate(",
+            "GetRuntimeSkeletonMemoryExtensionsManagedInvokeStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonMemoryExtensionsManagedInvokeStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+            "return_value_argument",
+            "return_value_declaration",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_spanhelpers_kernel_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.SpanHelpersKernelFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_SPANHELPERS_KERNEL_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonSpanHelpersKernelFamilyHandler",
+            "TryBuildRuntimeSkeletonSpanHelpersKernelHandler",
+            "TryBuildAssemblyBoundSpanHelpersKernelStub",
+            "TryBuildAssemblyBoundSpanHelpersKernelCore",
+            "RuntimeSkeletonSpanHelpersKernelAbi.TryCreate(",
+            "GetRuntimeSkeletonSpanHelpersKernelStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonSpanHelpersKernelStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+            "return_value_argument",
+            "return_value_declaration",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_array_and_memorymarshal_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.ArrayAndMemoryMarshalFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_ARRAY_AND_MEMORYMARSHAL_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonArrayAndMemoryMarshalFamilyHandler",
+            "TryBuildRuntimeSkeletonArrayAndMemoryMarshalHandler",
+            "TryBuildAssemblyBoundArrayAndMemoryMarshalStub",
+            "TryBuildAssemblyBoundArrayAndMemoryMarshalCore",
+            "RuntimeSkeletonArrayAndMemoryMarshalAbi.TryCreate(",
+            "GetRuntimeSkeletonArrayAndMemoryMarshalStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonArrayAndMemoryMarshalStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "this_argument_expression",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+            "return_value_is_indirect",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_half_managed_invoke_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.HalfManagedInvokeFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_HALF_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonHalfManagedInvokeFamilyHandler",
+            "TryBuildRuntimeSkeletonHalfManagedInvokeHandler",
+            "TryBuildAssemblyBoundHalfManagedInvokeStub",
+            "TryBuildAssemblyBoundHalfManagedInvokeCore",
+            "RuntimeSkeletonHalfManagedInvokeAbi.TryCreate(",
+            "GetRuntimeSkeletonHalfManagedInvokeStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonHalfManagedInvokeStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "this_argument_expression",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+            "return_value_is_indirect",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_number_managed_invoke_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.NumberManagedInvokeFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_NUMBER_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonNumberManagedInvokeFamilyHandler",
+            "TryBuildRuntimeSkeletonNumberManagedInvokeHandler",
+            "TryBuildAssemblyBoundNumberManagedInvokeStub",
+            "TryBuildAssemblyBoundNumberManagedInvokeCore",
+            "RuntimeSkeletonNumberManagedInvokeAbi.TryCreate(",
+            "GetRuntimeSkeletonNumberManagedInvokeStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonNumberManagedInvokeStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+            "return_value_argument",
+            "return_value_declaration",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_decimal_managed_invoke_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.DecimalManagedInvokeFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_DECIMAL_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonDecimalManagedInvokeFamilyHandler",
+            "TryBuildRuntimeSkeletonDecimalManagedInvokeHandler",
+            "TryBuildAssemblyBoundDecimalManagedInvokeStub",
+            "TryBuildAssemblyBoundDecimalManagedInvokeCore",
+            "RuntimeSkeletonDecimalManagedInvokeAbi.TryCreate(",
+            "GetRuntimeSkeletonDecimalManagedInvokeStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonDecimalManagedInvokeStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "this_argument_expression",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+            "return_value_is_indirect",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_char_managed_invoke_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.CharManagedInvokeFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_CHAR_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonCharManagedInvokeFamilyHandler",
+            "TryBuildRuntimeSkeletonCharManagedInvokeHandler",
+            "TryBuildAssemblyBoundCharManagedInvokeStub",
+            "TryBuildAssemblyBoundCharManagedInvokeCore",
+            "RuntimeSkeletonCharManagedInvokeAbi.TryCreate(",
+            "GetRuntimeSkeletonCharManagedInvokeStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonCharManagedInvokeStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "this_argument_expression",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+            "return_value_is_indirect",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_companion_managed_invoke_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.CompanionManagedInvokeFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_COMPANION_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonCompanionManagedInvokeFamilyHandler",
+            "TryBuildRuntimeSkeletonCompanionManagedInvokeHandler",
+            "TryBuildAssemblyBoundCompanionManagedInvokeStub",
+            "TryBuildAssemblyBoundCompanionManagedInvokeCore",
+            "RuntimeSkeletonCompanionManagedInvokeAbi.TryCreate(",
+            "GetRuntimeSkeletonCompanionManagedInvokeStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonCompanionManagedInvokeStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "this_argument_expression",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+            "return_value_is_indirect",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_datetime_semantic_engine_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.DateTimeSemanticEngineFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_DATETIME_SEMANTIC_ENGINE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonDateTimeSemanticEngineFamilyHandler",
+            "TryBuildRuntimeSkeletonDateTimeSemanticEngineHandler",
+            "TryBuildAssemblyBoundDateTimeSemanticEngineStub",
+            "TryBuildAssemblyBoundDateTimeSemanticEngineCore",
+            "RuntimeSkeletonDateTimeSemanticEngineAbi.TryCreate(",
+            "GetRuntimeSkeletonDateTimeSemanticEngineStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonDateTimeSemanticEngineStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "this_argument_expression",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+            "return_value_is_indirect",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_globalization_datetime_support_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.GlobalizationDateTimeSupportFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_GLOBALIZATION_DATETIME_SUPPORT_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonGlobalizationDateTimeSupportFamilyHandler",
+            "TryBuildRuntimeSkeletonGlobalizationDateTimeSupportHandler",
+            "TryBuildAssemblyBoundGlobalizationDateTimeSupportStub",
+            "TryBuildAssemblyBoundGlobalizationDateTimeSupportCore",
+            "RuntimeSkeletonGlobalizationDateTimeSupportAbi.TryCreate(",
+            "GetRuntimeSkeletonGlobalizationDateTimeSupportStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonGlobalizationDateTimeSupportStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "this_argument_expression",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+            "return_value_is_indirect",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_valuetype_kernel_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.ValueTypeKernelFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_VALUETYPE_KERNEL_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonValueTypeKernelFamilyHandler",
+            "TryBuildRuntimeSkeletonValueTypeKernelHandler",
+            "TryBuildAssemblyBoundValueTypeKernelStub",
+            "TryBuildAssemblyBoundValueTypeKernelCore",
+            "RuntimeSkeletonKernelCore.",
+            "GetRuntimeSkeletonValueTypeKernelStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonValueTypeKernelStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "chaos::il2cpp::runtime_core::",
+            "return CHAOS_BRIDGE_STATUS_OK;",
+            "result = ",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_floating_scalar_managed_invoke_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.FloatingScalarManagedInvokeFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_FLOATING_SCALAR_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonFloatingScalarManagedInvokeFamilyHandler",
+            "TryBuildRuntimeSkeletonFloatingScalarManagedInvokeHandler",
+            "TryBuildAssemblyBoundFloatingScalarManagedInvokeStub",
+            "TryBuildAssemblyBoundFloatingScalarManagedInvokeCore",
+            "RuntimeSkeletonFloatingScalarManagedInvokeAbi.TryCreate(",
+            "GetRuntimeSkeletonFloatingScalarManagedInvokeStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonFloatingScalarManagedInvokeStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "this_argument_expression",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+            "return_value_is_indirect",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_enum_managed_invoke_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.EnumManagedInvokeFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_ENUM_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonEnumManagedInvokeFamilyHandler",
+            "TryBuildRuntimeSkeletonEnumManagedInvokeHandler",
+            "TryBuildAssemblyBoundEnumManagedInvokeStub",
+            "TryBuildAssemblyBoundEnumManagedInvokeCore",
+            "RuntimeSkeletonEnumManagedInvokeAbi.TryCreate(",
+            "GetRuntimeSkeletonEnumManagedInvokeStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonEnumManagedInvokeStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "target_assembly_name_literal",
+            "this_argument_expression",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_size",
+            "return_value_is_indirect",
+        ]:
+            self.assertIn(required_fragment, template_source)
 
     def test_runtime_skeleton_static_boxed_value_type_char_invalid_cast_helper_has_template(self) -> None:
         native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")

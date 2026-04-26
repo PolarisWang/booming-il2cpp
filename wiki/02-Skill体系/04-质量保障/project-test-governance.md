@@ -28,6 +28,11 @@
 - 如果任务要求新的验证通过记录或新的 verification 数据，formal object 跑通后还必须刷新 `verification-v1` 正式产物；默认命令为 `run verify verification-v1 --json`
 - 如果本轮改动触及 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、`testing-inventory` / `benchmark` 页面字段或证据链接规则，也必须在实现后刷新 `verification-v1` 正式产物；不允许只改 schema、模板或页面读取逻辑而不刷新正式数据
 - 对于 DLL-first reporting 一类 evidence-driven projection，`artifacts/**` 下的真实产物才允许进入 primary evidence / artifact index；`docs/**`、`subjects/**`、`verification/**` 等引用只能作为 support refs，不能把项目状态置为通过，也不能混入 primary artifact table
+- foundation-dll-audit 的真实进度主轴是 `Capability Closure`，其分母 authority 是 `verification/projections/foundation-dll-audit/capability-family-ledger.json`；不允许再用 verification project 数量、workspace 数量或样例数量代替
+- `Workflow Progress` 只是辅助流程条，用来表示 family 级 required gates 推进到哪一步，不代表 capability 覆盖本身
+- `completion-certification` 是 DLL 级 gate，不进入 capability family 的 workflow denominator
+- `workspace` 只允许作为 proof container / reproducibility container，不能成为 DLL capability progress 的正式分母
+- waiver / exclusion / platform-blocked 三类豁免必须落在 capability-family ledger 中并带正式 authorityRef，不允许只写在 task `STATUS.md`
 - 新测试流程的数据以 `verification/archive/{latest,master,reports}` 与 `verification/evidence/owners/*/codegen-stubs/*` 为准；`artifacts/**` 运行日志只算过程证据
 - 命中 projection / report contract 时，还必须确认对应 `verification/projections/**` 派生产物已更新
 - `run test inventory` 只是内部命令，不作为对外 public entry。
@@ -50,4 +55,5 @@
 - `2026-04-24`：补充 public command surface 口径，明确 `run test inventory` 已内部化，以及 `benchmark --record` 只写 raw records，不等于 formal refresh。
 - `2026-04-25`：补充 DLL-first reporting / projection contract 刷新要求；命中报告对象、页面字段或证据链接规则改动时，不能只改 schema 或页面，必须同步刷新 `verification-v1` 正式数据与对应 projection。
 - `2026-04-25`：补充 DLL-first reporting 证据分层口径；`artifacts/**` 只计 primary evidence，`docs/**` / `subjects/**` / `verification/**` 只作为 support refs。
+- `2026-04-26`：补充 foundation-dll-audit 双轴口径；`Capability Closure` 成为 DLL 真实进度主轴，`Workflow Progress` 退为辅助流程条，`workspace` 明确降级为 proof container，不再允许作为正式分母。
 

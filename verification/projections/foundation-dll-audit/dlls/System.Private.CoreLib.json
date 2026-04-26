@@ -5,7 +5,7 @@
   "roadmapTaskId": "20260419-03-system-private-corelib-full-verification",
   "dllState": "blocked",
   "currentProject": "completion-certification",
-  "blockingReason": "基于真实 CoreLib supplemental full-closure evidence 继续扩大 runtime-skeleton translated coverage，优先消化可批量落地的 uncovered families",
+  "blockingReason": "已建立 CoreLib audit packet skeleton 并完成 blocker normalization，但仍需真实 DLL-boundary native/codegen/hotupdate 证据闭环",
   "riskTags": [
     "core-foundation"
   ],
@@ -29,8 +29,8 @@
       ],
       "blockers": [
         {
-          "code": "20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening",
-          "message": "基于真实 CoreLib supplemental full-closure evidence 继续扩大 runtime-skeleton translated coverage，优先消化可批量落地的 uncovered families"
+          "code": "20260419-03-system-private-corelib-full-verification",
+          "message": "已建立 CoreLib audit packet skeleton 并完成 blocker normalization，但仍需真实 DLL-boundary native/codegen/hotupdate 证据闭环"
         }
       ],
       "updatedAt": ""
@@ -93,6 +93,83 @@
           "path": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/analysis/generated/supplemental-full-closures/system-private-corelib/native-aot/native-aot.plan.json",
           "artifactKind": "report-json",
           "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "native-proof",
+          "displayName": "native-reference.runtime-skeleton.coverage.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260426-143601-windows-4240/analysis/generated/supplemental-full-closures/system-private-corelib/native-reference/generated/runtime/native-reference.runtime-skeleton.coverage.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "native-proof",
+          "displayName": "native-reference.runtime-skeleton.coverage.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260426-001144-windows-c733/analysis/generated/supplemental-full-closures/system-private-corelib/native-reference/generated/runtime/native-reference.runtime-skeleton.coverage.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "native-proof",
+          "displayName": "native-aot.plan.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260426-001144-windows-c733/analysis/generated/supplemental-full-closures/system-private-corelib/native-aot/native-aot.plan.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "native-proof",
+          "displayName": "runtime",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260426-001144-windows-c733/analysis/generated/supplemental-full-closures/system-private-corelib/native-reference/generated/runtime/",
+          "artifactKind": "directory",
+          "linkTargetType": "directory",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "native-proof",
+          "displayName": "native-reference.runtime-skeleton.coverage.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260425-235502-windows-0bbf/analysis/generated/supplemental-full-closures/system-private-corelib/native-reference/generated/runtime/native-reference.runtime-skeleton.coverage.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "native-proof",
+          "displayName": "native-aot.plan.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260425-200102-windows-9f4c/analysis/generated/supplemental-full-closures/system-private-corelib/native-aot/native-aot.plan.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "native-proof",
+          "displayName": "runtime",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260425-200102-windows-9f4c/analysis/generated/supplemental-full-closures/system-private-corelib/native-reference/generated/runtime/",
+          "artifactKind": "directory",
+          "linkTargetType": "directory",
           "role": "proof",
           "required": false,
           "exists": true
@@ -178,6 +255,138 @@
           "projectCode": "hotupdate-proof",
           "displayName": "review-bundle.json",
           "path": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/declared/unit/corelib-reference-hotupdate-proof/review-bundle.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "hotupdate-proof",
+          "displayName": "native-hotupdate-audit.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260426-001144-windows-c733/matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/native-hotupdate-audit.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "hotupdate-proof",
+          "displayName": "codegen-summary.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260426-001144-windows-c733/matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/codegen-summary.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "hotupdate-proof",
+          "displayName": "summary.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260426-001144-windows-c733/declared/unit/corelib-reference-hotupdate-proof/summary.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "hotupdate-proof",
+          "displayName": "review-bundle.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260426-001144-windows-c733/declared/unit/corelib-reference-hotupdate-proof/review-bundle.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "hotupdate-proof",
+          "displayName": "native-hotupdate-audit.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260425-235502-windows-0bbf/matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/native-hotupdate-audit.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "hotupdate-proof",
+          "displayName": "codegen-summary.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260425-235502-windows-0bbf/matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/codegen-summary.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "hotupdate-proof",
+          "displayName": "summary.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260425-235502-windows-0bbf/declared/unit/corelib-reference-hotupdate-proof/summary.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "hotupdate-proof",
+          "displayName": "review-bundle.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260425-235502-windows-0bbf/declared/unit/corelib-reference-hotupdate-proof/review-bundle.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "hotupdate-proof",
+          "displayName": "native-hotupdate-audit.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260425-200102-windows-9f4c/matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/native-hotupdate-audit.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "hotupdate-proof",
+          "displayName": "codegen-summary.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260425-200102-windows-9f4c/matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report/codegen-summary.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "hotupdate-proof",
+          "displayName": "summary.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260425-200102-windows-9f4c/declared/unit/corelib-reference-hotupdate-proof/summary.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "proof",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "hotupdate-proof",
+          "displayName": "review-bundle.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260425-200102-windows-9f4c/declared/unit/corelib-reference-hotupdate-proof/review-bundle.json",
           "artifactKind": "report-json",
           "linkTargetType": "file",
           "role": "proof",
@@ -295,6 +504,61 @@
           "assemblyName": "System.Private.CoreLib",
           "projectCode": "codegen-review",
           "displayName": "native-reference.runtime-skeleton.coverage.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260426-143601-windows-4240/analysis/generated/supplemental-full-closures/system-private-corelib/native-reference/generated/runtime/native-reference.runtime-skeleton.coverage.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "codegen",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "codegen-review",
+          "displayName": "native-reference.runtime-skeleton.coverage.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260426-001144-windows-c733/analysis/generated/supplemental-full-closures/system-private-corelib/native-reference/generated/runtime/native-reference.runtime-skeleton.coverage.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "codegen",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "codegen-review",
+          "displayName": "runtime",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260426-001144-windows-c733/analysis/generated/supplemental-full-closures/system-private-corelib/native-reference/generated/runtime/",
+          "artifactKind": "directory",
+          "linkTargetType": "directory",
+          "role": "codegen",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "codegen-review",
+          "displayName": "native-reference.runtime-skeleton.coverage.json",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260425-235502-windows-0bbf/analysis/generated/supplemental-full-closures/system-private-corelib/native-reference/generated/runtime/native-reference.runtime-skeleton.coverage.json",
+          "artifactKind": "report-json",
+          "linkTargetType": "file",
+          "role": "codegen",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "codegen-review",
+          "displayName": "runtime",
+          "path": "artifacts/subjects/SolutionCorePack/runs/20260425-200102-windows-9f4c/analysis/generated/supplemental-full-closures/system-private-corelib/native-reference/generated/runtime/",
+          "artifactKind": "directory",
+          "linkTargetType": "directory",
+          "role": "codegen",
+          "required": false,
+          "exists": true
+        },
+        {
+          "assemblyName": "System.Private.CoreLib",
+          "projectCode": "codegen-review",
+          "displayName": "native-reference.runtime-skeleton.coverage.json",
           "path": "artifacts/subjects/SolutionCorePack/runs/20260425-153952-windows-ff29/analysis/generated/supplemental-full-closures/system-private-corelib/native-reference/generated/runtime/native-reference.runtime-skeleton.coverage.json",
           "artifactKind": "report-json",
           "linkTargetType": "file",
@@ -344,11 +608,1004 @@
       ],
       "blockers": [
         {
-          "code": "20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening",
-          "message": "基于真实 CoreLib supplemental full-closure evidence 继续扩大 runtime-skeleton translated coverage，优先消化可批量落地的 uncovered families"
+          "code": "20260419-03-system-private-corelib-full-verification",
+          "message": "已建立 CoreLib audit packet skeleton 并完成 blocker normalization，但仍需真实 DLL-boundary native/codegen/hotupdate 证据闭环"
         }
       ],
       "updatedAt": ""
     }
-  ]
+  ],
+  "capabilityClosure": {
+    "totalFamilies": 24,
+    "closedFamilies": 0,
+    "waivedFamilies": 0,
+    "excludedFamilies": 0,
+    "platformBlockedFamilies": 0,
+    "inProgressFamilies": 24,
+    "closurePercent": 0.0
+  },
+  "workflowProgress": {
+    "totalRequiredGates": 96,
+    "passedGates": 6,
+    "progressPercent": 6.25
+  },
+  "capabilityFamilies": [
+    {
+      "familyId": "family/System.Private.CoreLib/convert/char",
+      "displayName": "Convert.Char Conversions",
+      "description": "Char-related type conversions in System.Convert.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "passed",
+        "managed-proof": "passed",
+        "native-proof": "in-progress",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 18,
+      "implementationFamilies": [
+        {
+          "familyId": "impl/convert/char",
+          "displayName": "Char conversions",
+          "handlerName": "ConvertChar"
+        }
+      ],
+      "sourceGroups": [
+        {
+          "groupId": "src/System/Convert",
+          "typeNames": [
+            "Convert"
+          ],
+          "methodCount": 18
+        }
+      ],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "present",
+        "requestedMethodCount": 18,
+        "emittedMethodCount": 18,
+        "allMethodsCovered": true,
+        "action": "none",
+        "testProjectPath": "tests/families/System.Private.CoreLib/convert-char"
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/buffer/memory",
+      "displayName": "Buffer.Memory Operations",
+      "description": "Buffer and Memory-related operations.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "passed",
+        "managed-proof": "passed",
+        "native-proof": "in-progress",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 10,
+      "implementationFamilies": [
+        {
+          "familyId": "impl/buffer/memory",
+          "displayName": "Buffer memory ops",
+          "handlerName": "BufferMemory"
+        }
+      ],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "present",
+        "requestedMethodCount": 10,
+        "emittedMethodCount": 10,
+        "allMethodsCovered": true,
+        "action": "none",
+        "testProjectPath": "tests/families/System.Private.CoreLib/buffer-memory"
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/enum/parsing",
+      "displayName": "Enum Parsing And Formatting",
+      "description": "Enum.ToString, Enum.Parse, Enum.IsDefined, and related enum operations.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "passed",
+        "managed-proof": "passed",
+        "native-proof": "in-progress",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 12,
+      "implementationFamilies": [
+        {
+          "familyId": "impl/enum/parsing",
+          "displayName": "Enum parsing",
+          "handlerName": "EnumParsing"
+        }
+      ],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "present",
+        "requestedMethodCount": 12,
+        "emittedMethodCount": 12,
+        "allMethodsCovered": true,
+        "action": "none",
+        "testProjectPath": "tests/families/System.Private.CoreLib/enum-parsing"
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/primitive/numeric-conversions",
+      "displayName": "Primitive Numeric Conversions",
+      "description": "Boolean, integer, floating-point, decimal, checked, unchecked, and parse conversion substrate.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/string/char-text-core",
+      "displayName": "String And Char Text Core",
+      "description": "String, Char, ordinal comparison, substring, search, formatting, and text helpers.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/array/indexing-copy",
+      "displayName": "Array Indexing And Copy",
+      "description": "Array creation, indexing, bounds, copy, clear, resize, sort, and binary-search behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/span/memory-buffers",
+      "displayName": "Span Memory Buffers",
+      "description": "Span, ReadOnlySpan, Memory, ReadOnlyMemory, MemoryMarshal, and buffer projections.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/object/equality-identity",
+      "displayName": "Object Equality And Identity",
+      "description": "Object construction, Equals, ReferenceEquals, GetHashCode, ToString, and runtime identity behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/type/runtime-handles",
+      "displayName": "Type Runtime Handles",
+      "description": "Type, RuntimeTypeHandle, RuntimeMethodHandle, RuntimeFieldHandle, and metadata handles.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/exception/throw-diagnostics",
+      "displayName": "Exception Throw Diagnostics",
+      "description": "Exception types, throw helpers, stack trace, inner exception, and diagnostic message paths.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/generic/nullable-value",
+      "displayName": "Generic Nullable Value Semantics",
+      "description": "Nullable<T>, ValueType, generic constraints, default values, and equality helpers.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/boxing/unboxing-casts",
+      "displayName": "Boxing Unboxing Casts",
+      "description": "Boxed value types, interface casts, invalid casts, unboxing, and constrained calls.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/delegate/core-invocation",
+      "displayName": "Delegate Core Invocation",
+      "description": "Delegate construction, multicast combination, DynamicInvoke-adjacent behavior, and invocation paths.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/reflection/member-basics",
+      "displayName": "Reflection Member Basics",
+      "description": "MemberInfo, MethodInfo, ConstructorInfo, FieldInfo, PropertyInfo, and basic reflection queries.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/attributes/custom-metadata",
+      "displayName": "Attributes And Custom Metadata",
+      "description": "Attribute discovery, custom attribute data, and metadata-driven annotation behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/threading/monitor-interlocked",
+      "displayName": "Monitor And Interlocked",
+      "description": "Monitor, lock, Volatile, Interlocked, memory barriers, and synchronization primitives.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/threading/tasks-primitives",
+      "displayName": "Tasks And Threading Primitives",
+      "description": "Task, ValueTask substrate, Thread, ThreadStatic, AsyncLocal, and execution context basics.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/time/date-time-timespan",
+      "displayName": "Date Time TimeSpan",
+      "description": "DateTime, DateOnly, TimeOnly, TimeSpan, ticks, parsing, formatting, and arithmetic.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/guid/random/hashcode",
+      "displayName": "Guid Random HashCode",
+      "description": "Guid, Random, HashCode, object hashing helpers, and deterministic value generation.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/math/numerics",
+      "displayName": "Math Numerics",
+      "description": "Math, MathF, decimal helpers, numeric intrinsics surface, and primitive arithmetic helpers.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/globalization/culture",
+      "displayName": "Globalization Culture",
+      "description": "CultureInfo, CompareInfo, Calendar, NumberFormatInfo, DateTimeFormatInfo, and resource lookup basics.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/io/streams-basics",
+      "displayName": "IO Streams Basics",
+      "description": "Stream, TextReader, TextWriter, BinaryReader, BinaryWriter, and simple file/path helpers.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/collections/generic-core",
+      "displayName": "Generic Collections Core",
+      "description": "IEnumerable, IEnumerator, ICollection, IList, IDictionary, List, Dictionary, and HashSet substrate.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/runtime/compiler-services",
+      "displayName": "Runtime Compiler Services",
+      "description": "RuntimeHelpers, Unsafe-adjacent helpers, compiler services attributes, and low-level runtime contracts.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/completed/20260419-03-system-private-corelib-full-verification/STATUS.md",
+        "docs/dev/completed/20260419-20-corelib-supplemental-full-closure-audit-integration/STATUS.md",
+        "docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    }
+  ],
+  "sourceLinks": {
+    "subjectSource": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln",
+    "generatedCode": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/analysis/generated/",
+    "evidence": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/",
+    "verificationSource": "verification/catalog/programs/foundation-dll-translation-audit.program.json"
+  },
+  "waiverSummary": {
+    "totalWaivers": 0,
+    "activeWaivers": 0,
+    "expiredWaivers": 0,
+    "totalExclusions": 0,
+    "totalPlatformBlocked": 0
+  },
+  "denominatorStatus": "audit-confirmed",
+  "schemaVersion": 2
 }

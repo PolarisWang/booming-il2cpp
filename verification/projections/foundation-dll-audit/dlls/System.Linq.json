@@ -127,5 +127,480 @@
       "blockers": [],
       "updatedAt": ""
     }
-  ]
+  ],
+  "capabilityClosure": {
+    "totalFamilies": 12,
+    "closedFamilies": 0,
+    "waivedFamilies": 0,
+    "excludedFamilies": 0,
+    "platformBlockedFamilies": 0,
+    "inProgressFamilies": 12,
+    "closurePercent": 0.0
+  },
+  "workflowProgress": {
+    "totalRequiredGates": 48,
+    "passedGates": 0,
+    "progressPercent": 0.0
+  },
+  "capabilityFamilies": [
+    {
+      "familyId": "family/System.Linq/filtering",
+      "displayName": "LINQ Filtering",
+      "description": "Where, OfType, Cast, DistinctBy-adjacent filters, and predicate enumeration behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Linq/projection",
+      "displayName": "LINQ Projection",
+      "description": "Select, SelectMany, index-aware selectors, and iterator shape behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Linq/partitioning",
+      "displayName": "LINQ Partitioning",
+      "description": "Skip, Take, Range, Chunk, ElementAt, First, Last, Single, and default variants.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Linq/ordering",
+      "displayName": "LINQ Ordering",
+      "description": "OrderBy, ThenBy, Reverse, comparer handling, and stable ordering behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Linq/grouping-lookup",
+      "displayName": "LINQ Grouping Lookup",
+      "description": "GroupBy, ToLookup, IGrouping, ILookup, and grouped projection behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Linq/joins",
+      "displayName": "LINQ Joins",
+      "description": "Join, GroupJoin, key comparison, and joined projection behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Linq/set-operations",
+      "displayName": "LINQ Set Operations",
+      "description": "Distinct, Union, Intersect, Except, sequence equality, and comparer behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Linq/aggregation",
+      "displayName": "LINQ Aggregation",
+      "description": "Aggregate, Count, LongCount, Any, All, Contains, and non-enumerated count behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Linq/numeric-aggregation",
+      "displayName": "LINQ Numeric Aggregation",
+      "description": "Sum, Average, Min, Max, MinBy, MaxBy, nullable numeric, and selector overload behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Linq/materialization",
+      "displayName": "LINQ Materialization",
+      "description": "ToArray, ToList, ToDictionary, ToHashSet, and collection conversion behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Linq/generation-concat",
+      "displayName": "LINQ Generation And Concatenation",
+      "description": "Range, Repeat, Empty, Append, Prepend, Concat, and default-if-empty behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.Linq/shuffle-index",
+      "displayName": "LINQ Shuffle Index",
+      "description": "Index, Shuffle, randomization helpers, and index-producing enumeration behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-26-complex-bcl-ordered-dll-06-system-linq/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    }
+  ],
+  "sourceLinks": {
+    "subjectSource": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln",
+    "generatedCode": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/analysis/generated/",
+    "evidence": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/",
+    "verificationSource": "verification/catalog/programs/foundation-dll-translation-audit.program.json"
+  },
+  "waiverSummary": {
+    "totalWaivers": 0,
+    "activeWaivers": 0,
+    "expiredWaivers": 0,
+    "totalExclusions": 0,
+    "totalPlatformBlocked": 0
+  },
+  "denominatorStatus": "audit-confirmed",
+  "schemaVersion": 2
 }

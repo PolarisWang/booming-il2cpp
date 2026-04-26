@@ -103,6 +103,24 @@ class CommandManifestTests(unittest.TestCase):
         self.assertNotIn("test-smoke-helloworld", visible_command_ids)
         self.assertNotIn("verify-roadmap-0-windows", visible_command_ids)
 
+    def test_run_manifest_registers_foundation_dll_command_family(self) -> None:
+        manifest_module = load_manifest_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+        all_command_ids = {command["id"] for command in manifest_module.list_commands(manifest, include_hidden=True)}
+
+        self.assertTrue(
+            {
+                "foundation-dll-derive",
+                "foundation-dll-analyze-gaps",
+                "foundation-dll-check-family",
+                "foundation-dll-promote",
+                "foundation-dll-onboard",
+                "foundation-dll-refresh",
+                "foundation-dll-verify-consistency",
+                "foundation-dll-full",
+            }.issubset(all_command_ids)
+        )
+
     def test_parse_cli_supports_dynamic_unified_test_commands(self) -> None:
         manifest_module = load_manifest_module()
         manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
@@ -253,6 +271,20 @@ class CommandManifestTests(unittest.TestCase):
         )
         self.assertIsNone(removed_pipeline["command"])
         self.assertEqual("test pipeline", removed_pipeline["command_text"])
+
+    def test_parse_cli_rejects_extra_positional_arguments_for_fixed_commands(self) -> None:
+        manifest_module = load_manifest_module()
+        manifest = manifest_module.load_run_manifest(REPO_ROOT, RUN_MANIFEST_PATH)
+
+        cases = [
+            ["foundation-dll", "derive", "junk"],
+            ["foundation-dll", "refresh", "junk"],
+            ["verify", "verification-v1", "junk"],
+        ]
+
+        for argv in cases:
+            parsed = manifest_module.parse_cli(argv, False, manifest, "windows")
+            self.assertIsNone(parsed["command"], argv)
 
     def test_parse_cli_rejects_removed_verify_entrypoint(self) -> None:
         manifest_module = load_manifest_module()

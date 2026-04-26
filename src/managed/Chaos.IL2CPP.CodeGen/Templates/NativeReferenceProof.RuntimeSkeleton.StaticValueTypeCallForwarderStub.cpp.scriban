@@ -1,0 +1,67 @@
+struct {{ stub_name }}_ManagedArgs
+{
+    {{ arg_field_declarations }}
+    {{ output_cpp_type }}* return_value;
+};
+
+// managed_result_type: {{ output_cpp_type }}
+int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)code_registration;
+    (void)metadata_registration;
+    if (bridge == nullptr || options == nullptr || runtime == nullptr || thread == nullptr || managed_args == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    const auto* request = static_cast<const {{ stub_name }}_ManagedArgs*>(managed_args);
+    if (request->return_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_READY;
+    }
+
+    const char* image_name = {{ target_assembly_name_literal }};
+    ImageHandle image = reinterpret_cast<ImageHandle>(const_cast<char*>(image_name));
+    MethodInfoHandle target_method = bridge->resolve_method_by_token(image, {{ target_method_token }});
+    if (target_method == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    void* argv_storage[{{ argc }}] =
+    {
+        {{ arg_refs }}
+    };
+    void* const* argv = {{ argc }}u == 0u ? nullptr : argv_storage;
+    {{ output_cpp_type }} return_buffer = {};
+    void* return_value_ptr = &return_buffer;
+    ExceptionHandle out_exception = nullptr;
+    const RuntimeStatus invoke_status = abi->method_invoke(
+        runtime,
+        thread,
+        target_method,
+        nullptr,
+        argv,
+        {{ argc }}u,
+        &return_value_ptr,
+        sizeof(return_buffer),
+        &out_exception);
+    if (invoke_status == CHAOS_RUNTIME_STATUS_MANAGED_EXCEPTION || out_exception != nullptr) {
+        return CHAOS_BRIDGE_STATUS_MANAGED_EXCEPTION;
+    }
+    if (invoke_status != CHAOS_RUNTIME_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+
+    *request->return_value = return_buffer;
+    return CHAOS_BRIDGE_STATUS_OK;
+}

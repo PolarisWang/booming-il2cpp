@@ -127,5 +127,221 @@
       "blockers": [],
       "updatedAt": ""
     }
-  ]
+  ],
+  "capabilityClosure": {
+    "totalFamilies": 5,
+    "closedFamilies": 0,
+    "waivedFamilies": 0,
+    "excludedFamilies": 0,
+    "platformBlockedFamilies": 0,
+    "inProgressFamilies": 5,
+    "closurePercent": 0.0
+  },
+  "workflowProgress": {
+    "totalRequiredGates": 20,
+    "passedGates": 0,
+    "progressPercent": 0.0
+  },
+  "capabilityFamilies": [
+    {
+      "familyId": "family/System.IO.Pipelines/pipe-core",
+      "displayName": "Pipe Core",
+      "description": "Pipe construction, reset, completion, pause/resume, and coordination behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-25-complex-bcl-ordered-dll-05-system-io-pipelines/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.IO.Pipelines/reader-writer",
+      "displayName": "Pipe Reader Writer",
+      "description": "PipeReader and PipeWriter read, write, advance, cancel, and completion behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-25-complex-bcl-ordered-dll-05-system-io-pipelines/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.IO.Pipelines/read-flush-results",
+      "displayName": "Read And Flush Results",
+      "description": "ReadResult and FlushResult state, cancellation, and completion behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-25-complex-bcl-ordered-dll-05-system-io-pipelines/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.IO.Pipelines/options-scheduler",
+      "displayName": "Options And Scheduler",
+      "description": "PipeOptions, reader/writer stream options, PipeScheduler, and threshold behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-25-complex-bcl-ordered-dll-05-system-io-pipelines/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    },
+    {
+      "familyId": "family/System.IO.Pipelines/stream-adapters",
+      "displayName": "Stream Adapters",
+      "description": "StreamPipeExtensions and stream-backed pipe reader/writer behavior.",
+      "denominatorStatus": "audit-confirmed",
+      "closureStatus": "in-progress",
+      "verificationGates": {
+        "audit-input-and-ledger": "pending",
+        "managed-proof": "pending",
+        "native-proof": "pending",
+        "hotupdate-proof": "not-required",
+        "benchmark": "not-required",
+        "codegen-review": "pending"
+      },
+      "methodCount": 0,
+      "implementationFamilies": [],
+      "sourceGroups": [],
+      "authorityRefs": [
+        "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+        "docs/dev/in-progress/20260419-25-complex-bcl-ordered-dll-05-system-io-pipelines/STATUS.md"
+      ],
+      "derivationBasis": [
+        "audit-input-manifest",
+        "surface-ledger",
+        "semantic-ledger",
+        "nativeization-plan"
+      ],
+      "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+      "testCode": {
+        "testCodeStatus": "no-coverage",
+        "requestedMethodCount": 0,
+        "emittedMethodCount": 0,
+        "allMethodsCovered": false,
+        "action": "none",
+        "testProjectPath": ""
+      }
+    }
+  ],
+  "sourceLinks": {
+    "subjectSource": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln",
+    "generatedCode": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/analysis/generated/",
+    "evidence": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/",
+    "verificationSource": "verification/catalog/programs/foundation-dll-translation-audit.program.json"
+  },
+  "waiverSummary": {
+    "totalWaivers": 0,
+    "activeWaivers": 0,
+    "expiredWaivers": 0,
+    "totalExclusions": 0,
+    "totalPlatformBlocked": 0
+  },
+  "denominatorStatus": "audit-confirmed",
+  "schemaVersion": 2
 }

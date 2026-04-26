@@ -2,10 +2,10 @@
 task_id: 20260425-03-foundation-dll-capability-closure-reporting-roadmap
 title: Foundation DLL Capability Closure Reporting Roadmap
 task_type: roadmap
-lifecycle_status: in-progress
+lifecycle_status: completed
 phase: roadmap
 created_at: 2026-04-25 22:30:00 +08:00
-updated_at: 2026-04-25 22:30:00 +08:00
+updated_at: 2026-04-26 01:00:00 +08:00
 current_dir: docs/dev/in-progress/20260425-03-foundation-dll-capability-closure-reporting-roadmap
 parent_task_id: 20260419-01-foundation-dll-translation-audit-roadmap
 source_task_id: 20260419-01-foundation-dll-translation-audit-roadmap
@@ -14,7 +14,7 @@ roadmap_or_plan: docs/dev/in-progress/20260425-03-foundation-dll-capability-clos
 child_execution_mode: manual
 auto_continue: false
 auto_stop_policy: manual-review
-recommended_next_child: 20260425-04-capability-family-denominator-and-authority-freeze
+recommended_next_child: 20260425-08-reporting-authority-sync-and-formal-refresh
 active: false
 blocking_questions: []
 question_clearance: cleared
@@ -26,8 +26,9 @@ clearance_confirmed_by_user: true
 ## 当前状态
 
 - 状态: `in-progress`
-- 当前阶段: `roadmap`
-- 当前目标: 把 foundation DLL 报告从“按 verification project 计数的流程页”升级为“Capability Closure + Workflow Progress”双轴审核报告
+- 当前阶段: `phase-4`
+- 当前目标: 完成 Phase 4 — 同步 authority 文档和 formal refresh 计划
+- Phase 0-3 已完成，设计文档均已通过用户 review 确认
 
 ## 当前结论
 
@@ -81,9 +82,12 @@ clearance_confirmed_by_user: true
 
 ## 下一步
 
-- next_action: 先冻结 `Capability Closure` 的 denominator authority 与 family 粒度，再冻结 workflow / completion / waiver 规则，然后再做 projection 和 HTML 报告 cutover
+- next_action: 起草 Phase 4 设计文档 `reporting-authority-sync-v1-01.md`，包含 spec.md 更新方案、INDEX.md 同步方案、formal refresh 计划和三层产物一致性校验规则
 - owner: codex
-- trigger: user-approved-roadmap
+- trigger: user-approved-phase-4
+- phase-4-deliverables:
+  - `reporting-authority-sync-v1-01.md` 已起草（draft 状态）
+  - 待用户 review 确认后，实际落地编辑 spec.md 和 INDEX.md
 
 ## 风险 / 阻塞
 

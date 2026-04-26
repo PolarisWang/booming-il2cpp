@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-04-25T10:56:17.883423Z",
+  "generatedAt": "2026-04-26T11:00:43.278537Z",
   "hostPlatform": "windows",
   "registryErrors": [],
   "registryWarnings": [],
   "benchmarkOverview": {
-    "generatedAt": "2026-04-25T10:56:11.313303+00:00",
+    "generatedAt": "2026-04-26T11:00:36.694766+00:00",
     "defaultPlatform": "windows-x64",
     "availablePlatforms": [
       "windows-x64"
@@ -9394,6 +9394,70 @@
   ],
   "workspaceCollections": [
     {
+      "subjectId": "HotUpdateHostPack",
+      "manifestPath": "verification/workspaces/subjects/HotUpdateHostPack/workspace.manifest.json",
+      "collectionPath": "verification/workspaces/subjects/HotUpdateHostPack/managed-tests/Generated/declared-tests.collection.json",
+      "declaredUnitTests": [
+        {
+          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateSkeletonProofEntry::Run()",
+          "alias": "hot-update-skeleton-proof",
+          "entryIndex": 0
+        },
+        {
+          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MetadataSupplementProofEntry::Run()",
+          "alias": "metadata-supplement-proof",
+          "entryIndex": 1
+        },
+        {
+          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementProofEntry::Run()",
+          "alias": "method-replacement-proof",
+          "entryIndex": 2
+        },
+        {
+          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchCallbackFlowProofEntry::Run()",
+          "alias": "patch-callback-flow-proof",
+          "entryIndex": 3
+        },
+        {
+          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.PatchIntegrityProofEntry::Run()",
+          "alias": "patch-integrity-proof",
+          "entryIndex": 4
+        },
+        {
+          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.SharedContractProofEntry::Run()",
+          "alias": "shared-contract-proof",
+          "entryIndex": 5
+        },
+        {
+          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.VersionRollbackProofEntry::Run()",
+          "alias": "version-rollback-proof",
+          "entryIndex": 6
+        }
+      ],
+      "declaredBenchmarks": [
+        {
+          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateDispatchBenchmarkEntry::RunWorkload()",
+          "alias": "hot-update-dispatch-bench",
+          "entryIndex": 0
+        },
+        {
+          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateLoadBenchmarkEntry::RunWorkload()",
+          "alias": "hot-update-load-bench",
+          "entryIndex": 1
+        },
+        {
+          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.HotUpdateRoundtripBenchmarkEntry::RunWorkload()",
+          "alias": "hot-update-roundtrip-bench",
+          "entryIndex": 2
+        },
+        {
+          "stableId": "HotUpdateHostPack::HotUpdateHostPack::HotUpdateHostPack.MethodReplacementBenchmarkEntry::RunWorkload()",
+          "alias": "method-replacement-bench",
+          "entryIndex": 3
+        }
+      ]
+    },
+    {
       "subjectId": "SolutionCorePack",
       "manifestPath": "verification/workspaces/subjects/SolutionCorePack/workspace.manifest.json",
       "collectionPath": "verification/workspaces/subjects/SolutionCorePack/managed-tests/Generated/declared-tests.collection.json",
@@ -9826,9 +9890,9 @@
       "entryIndex": 0,
       "status": "ok",
       "stageKind": "managed-proof",
-      "runId": "20260425-105701-windows-95a1",
-      "summaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260425-105701-windows-95a1/run-report/summary.json",
-      "subjectSummaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260425-105701-windows-95a1/declared/unit/hot-update-skeleton-proof/summary.json",
+      "runId": "20260425-230744-windows-f31b",
+      "summaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260425-230744-windows-f31b/run-report/summary.json",
+      "subjectSummaryPath": "artifacts/subjects/HotUpdateHostPack/runs/20260425-230744-windows-f31b/declared/unit/hot-update-skeleton-proof/summary.json",
       "errors": []
     },
     {
@@ -10325,10 +10389,10 @@
       "entryIndex": 60,
       "status": "ok",
       "stageKind": "hotupdate-proof",
-      "runId": "20260425-153952-windows-ff29",
-      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260425-153952-windows-ff29/run-report/summary.json",
+      "runId": "20260426-181841-windows-9c9b",
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260426-181841-windows-9c9b/run-report/summary.json",
       "errors": [],
-      "pipelineReportPath": "artifacts/subjects/SolutionCorePack/runs/20260425-153952-windows-ff29/matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report.json"
+      "pipelineReportPath": "artifacts/subjects/SolutionCorePack/runs/20260426-181841-windows-9c9b/matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report.json"
     }
   ],
   "benchmarkSubjects": {

@@ -1,0 +1,66 @@
+extern "C" void {{ import_method_symbol }}(void* arg0, void* arg1, void* arg2, int32_t arg3);
+
+struct {{ stub_name }}_ManagedArgs
+{
+    void* arg0;
+    void* arg1;
+    void* arg2;
+    std::int32_t arg3;
+};
+
+int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)runtime;
+    (void)thread;
+    if (bridge == nullptr || options == nullptr || managed_args == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    const auto* request = static_cast<const {{ stub_name }}_ManagedArgs*>(managed_args);
+    if (request->arg0 == nullptr || request->arg1 == nullptr || request->arg2 == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    TypeInfoHandle runtime_type_handle = nullptr;
+    if (ResolveRuntimeSkeletonType(
+            bridge,
+            options,
+            {{ runtime_type_descriptor_index }}u,
+            &runtime_type_handle) != CHAOS_BRIDGE_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    TypeInfoHandle object_array_type_handle = nullptr;
+    if (ResolveRuntimeSkeletonType(
+            bridge,
+            options,
+            {{ object_array_type_descriptor_index }}u,
+            &object_array_type_handle) != CHAOS_BRIDGE_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    TypeInfoHandle string_array_type_handle = nullptr;
+    if (ResolveRuntimeSkeletonType(
+            bridge,
+            options,
+            {{ string_array_type_descriptor_index }}u,
+            &string_array_type_handle) != CHAOS_BRIDGE_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    (void)runtime_type_handle;
+    (void)object_array_type_handle;
+    (void)string_array_type_handle;
+
+    {{ import_method_symbol }}(request->arg0, request->arg1, request->arg2, request->arg3);
+    return CHAOS_BRIDGE_STATUS_OK;
+}

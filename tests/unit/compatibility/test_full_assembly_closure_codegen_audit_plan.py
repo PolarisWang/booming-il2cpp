@@ -1397,6 +1397,42 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
                     "    public static string ToStringDecimalWithProvider(decimal value, IFormatProvider provider)\n"
                     "    {\n"
                     "        return value.ToString(provider);\n"
+                    "    }\n\n"
+                    "    public static string ToStringChar(char value)\n"
+                    "    {\n"
+                    "        return System.Convert.ToString(value);\n"
+                    "    }\n\n"
+                    "    public static string ToStringCharWithProvider(char value, IFormatProvider provider)\n"
+                    "    {\n"
+                    "        return System.Convert.ToString(value, provider);\n"
+                    "    }\n\n"
+                    "    public static string ToStringBooleanWithProviderViaConvert(bool value, IFormatProvider provider)\n"
+                    "    {\n"
+                    "        return System.Convert.ToString(value, provider);\n"
+                    "    }\n\n"
+                    "    public static string ToStringObject(object value)\n"
+                    "    {\n"
+                    "        return System.Convert.ToString(value);\n"
+                    "    }\n\n"
+                    "    public static string ToStringObjectWithProvider(object value, IFormatProvider provider)\n"
+                    "    {\n"
+                    "        return System.Convert.ToString(value, provider);\n"
+                    "    }\n\n"
+                    "    public static string ToStringByteToBase(byte value, int toBase)\n"
+                    "    {\n"
+                    "        return System.Convert.ToString(value, toBase);\n"
+                    "    }\n\n"
+                    "    public static string ToStringInt16ToBase(short value, int toBase)\n"
+                    "    {\n"
+                    "        return System.Convert.ToString(value, toBase);\n"
+                    "    }\n\n"
+                    "    public static string ToStringInt32ToBase(int value, int toBase)\n"
+                    "    {\n"
+                    "        return System.Convert.ToString(value, toBase);\n"
+                    "    }\n\n"
+                    "    public static string ToStringInt64ToBase(long value, int toBase)\n"
+                    "    {\n"
+                    "        return System.Convert.ToString(value, toBase);\n"
                     "    }\n"
                     "}\n"
                 ),
@@ -1498,8 +1534,30 @@ class FullAssemblyClosureCodegenAuditPlanTests(unittest.TestCase):
                 "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringInt32WithProvider:System.String(System.Int32,System.IFormatProvider)",
                 "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringDecimal:System.String(System.Decimal)",
                 "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringDecimalWithProvider:System.String(System.Decimal,System.IFormatProvider)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringChar:System.String(System.Char)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringCharWithProvider:System.String(System.Char,System.IFormatProvider)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringBooleanWithProviderViaConvert:System.String(System.Boolean,System.IFormatProvider)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringObject:System.String(System.Object)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringObjectWithProvider:System.String(System.Object,System.IFormatProvider)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringByteToBase:System.String(System.Byte,System.Int32)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringInt16ToBase:System.String(System.Int16,System.Int32)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringInt32ToBase:System.String(System.Int32,System.Int32)",
+                "FixtureConvertToStringLibrary/ConvertToStringOps::ToStringInt64ToBase:System.String(System.Int64,System.Int32)",
             ]:
                 self.assertNotIn(required_subject_id, coverage_report["uncoveredMethodSubjectIds"])
+
+            for required_corelib_subject_id in [
+                "System.Private.CoreLib/System.Convert::ToString:System.String(System.Char)",
+                "System.Private.CoreLib/System.Convert::ToString:System.String(System.Char,System.IFormatProvider)",
+                "System.Private.CoreLib/System.Convert::ToString:System.String(System.Boolean,System.IFormatProvider)",
+                "System.Private.CoreLib/System.Convert::ToString:System.String(System.Object)",
+                "System.Private.CoreLib/System.Convert::ToString:System.String(System.Object,System.IFormatProvider)",
+                "System.Private.CoreLib/System.Convert::ToString:System.String(System.Byte,System.Int32)",
+                "System.Private.CoreLib/System.Convert::ToString:System.String(System.Int16,System.Int32)",
+                "System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32,System.Int32)",
+                "System.Private.CoreLib/System.Convert::ToString:System.String(System.Int64,System.Int32)",
+            ]:
+                self.assertNotIn(required_corelib_subject_id, coverage_report["uncoveredMethodSubjectIds"])
 
             self.assertIn("void* arg0;", generated_page)
             self.assertIn("void* arg1;", generated_page)
