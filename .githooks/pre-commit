@@ -1,0 +1,35 @@
+#!/bin/sh
+# Chaos IL2CPP — Pre-commit hook: architecture compliance check
+#
+# Runs build/check_arch.py on staged native C++ files.
+# To install: git config core.hooksPath .githooks
+#
+# You can skip this check with: git commit --no-verify
+
+echo "=== [check_arch] Checking native architecture compliance ==="
+
+STAGED_CPP=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '^src/native/.*\.(cpp|h)$' || true)
+
+if [ -z "$STAGED_CPP" ]; then
+    echo "=== [check_arch] No native C++ files staged, skipping ==="
+    exit 0
+fi
+
+HAS_ERROR=0
+for FILE in $STAGED_CPP; do
+    OUTPUT=$(python3 build/check_arch.py --file "$FILE" 2>&1)
+    if echo "$OUTPUT" | grep -q "architecture issue"; then
+        echo "$OUTPUT"
+        HAS_ERROR=1
+    fi
+done
+
+if [ "$HAS_ERROR" -ne 0 ]; then
+    echo ""
+    echo "ERROR: Architecture check failed for staged native files."
+    echo "Fix the issues above or use 'git commit --no-verify' to bypass."
+    exit 1
+fi
+
+echo "=== [check_arch] All staged native files pass architecture checks ==="
+exit 0

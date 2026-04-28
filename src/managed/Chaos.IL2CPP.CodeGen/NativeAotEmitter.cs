@@ -72,6 +72,25 @@ public sealed class NativeAotEmitter
             "native-aot",
             loweringPlan.PlanKind,
             generatedSources.Select(generatedSource => (generatedSource.RelativePath, generatedSource.Contents)));
+
+        // Validate generated C++ code against project coding conventions.
+        var validator = new Validation.NativeCodegenValidator();
+        foreach (var generatedSource in generatedSources)
+        {
+            var result = validator.ValidateContent(generatedSource.Contents, generatedSource.RelativePath);
+            if (!result.IsValid)
+            {
+                foreach (var error in result.Errors)
+                {
+                    System.Console.Error.WriteLine($"[NativeCodegenValidator] {generatedSource.RelativePath}: ERROR: {error}");
+                }
+            }
+            foreach (var warning in result.Warnings)
+            {
+                System.Console.WriteLine($"[NativeCodegenValidator] {generatedSource.RelativePath}: WARNING: {warning}");
+            }
+        }
+
         generatedArtifacts = generatedArtifacts
             .Concat(
             [

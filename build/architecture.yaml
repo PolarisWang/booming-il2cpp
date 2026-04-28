@@ -1,0 +1,206 @@
+# Chaos IL2CPP — Native Architecture Specification
+#
+# This is the SINGLE SOURCE OF TRUTH for native C++ code architecture.
+#
+# When architecture changes (new module, renamed namespace, changed dependency),
+# update THIS file, then run:  python build/check_arch.py --fix
+# to regenerate derived files (CMake checks, docs, etc.).
+#
+# Schema version: 1
+
+# ── Modules ──────────────────────────────────────────────────────────
+# Each module maps to a CMake library target and a source directory.
+
+modules:
+
+  chaos_common:
+    path: src/native/common
+    namespace: ChaosIl2cpp::Common
+    visibility: public          # anyone may depend on it
+    dependencies: []            # zero-dependency foundation
+    allowed_includes:
+      public: []                # no external headers required
+      private: []               # no private headers either (header-only)
+    forbidden_includes:
+      - runtime_core
+      - bootstrap
+      - bdwgc
+      - hot_update
+      - support
+      - interpreter
+      - engine_bridge
+    conventions:
+      naming_types: PascalCase
+      naming_functions: snake_case
+      naming_constants: k_ + snake_case
+      noexcept: true            # all functions should be noexcept
+    include_guard_prefix: CHAOS_IL2CPP_COMMON
+
+  chaos_runtime_core:
+    path: src/native/runtime-core
+    namespace: chaos::il2cpp::runtime_core
+    sub_namespaces:
+      - chaos::il2cpp::memory_domain
+      - chaos::il2cpp::vtable_registry
+      - chaos::il2cpp::generic_context
+    visibility: public
+    dependencies:
+      - chaos_bdwgc
+    allowed_includes:
+      public:
+        - contracts/native/v0/
+      private:
+        - src/native/runtime-core/
+        - third_party/bdwgc/
+        - src/native/bootstrap/       # PeekBootstrapState
+    forbidden_includes:
+      - src/native/hot-update/
+      - src/native/support/
+      - src/native/interpreter/
+      - src/native/engine-bridge/
+      - src/native/common/
+    conventions:
+      naming_types: PascalCase
+      naming_functions: PascalCase
+      naming_constants: k + PascalCase
+      include_guard_prefix: CHAOS_IL2CPP  # headers use CHAOS_IL2CPP_{SUBJECT}_H_
+
+  chaos_hot_update:
+    path: src/native/hot-update
+    namespace: chaos::il2cpp::hot_update
+    sub_namespaces:
+      - chaos::il2cpp::method_replacement
+    visibility: internal
+    dependencies:
+      - chaos_runtime_core
+    allowed_includes:
+      public:
+        - contracts/native/v0/
+      private:
+        - src/native/hot-update/
+        - src/native/runtime-core/
+    forbidden_includes:
+      - src/native/support/
+      - src/native/bootstrap/
+      - src/native/common/
+    conventions:
+      naming_types: PascalCase
+      naming_functions: PascalCase
+      naming_constants: k + PascalCase
+
+  chaos_interpreter:
+    path: src/native/interpreter
+    namespace: chaos::il2cpp::interpreter
+    visibility: internal
+    dependencies:
+      - chaos_runtime_core
+    allowed_includes:
+      public:
+        - contracts/native/v0/
+      private:
+        - src/native/interpreter/
+        - src/native/runtime-core/
+    forbidden_includes:
+      - src/native/common/
+    conventions:
+      naming_types: PascalCase
+      naming_functions: PascalCase
+      naming_constants: k + PascalCase
+
+  chaos_support:
+    path: src/native/support
+    namespace: chaos::il2cpp::support
+    visibility: internal
+    dependencies:
+      - chaos_runtime_core
+    allowed_includes:
+      public:
+        - contracts/native/v0/
+      private:
+        - src/native/support/
+        - src/native/runtime-core/
+    forbidden_includes:
+      - src/native/common/
+
+  chaos_bootstrap:
+    path: src/native/bootstrap
+    namespace: chaos::il2cpp::bootstrap
+    visibility: internal
+    dependencies:
+      - chaos_runtime_core
+      - chaos_hot_update
+      - chaos_support
+    allowed_includes:
+      public:
+        - contracts/native/v0/
+      private:
+        - src/native/bootstrap/
+        - src/native/runtime-core/
+        - src/native/hot-update/
+        - src/native/support/
+        - third_party/bdwgc/
+    forbidden_includes:
+      - src/native/common/
+
+  chaos_engine_bridge:
+    path: src/native/engine-bridge
+    namespace: ""                    # anonymous namespace only
+    visibility: internal
+    dependencies:
+      - chaos_runtime_core
+      - chaos_bootstrap
+    allowed_includes:
+      public:
+        - contracts/native/v0/
+        - contracts/engine/v0/
+      private:
+        - src/native/engine-bridge/
+        - src/native/runtime-core/
+        - src/native/bootstrap/
+    forbidden_includes:
+      - src/native/common/
+
+  chaos_bdwgc:
+    path: third_party/bdwgc
+    namespace: ""                    # C library, no C++ namespace
+    visibility: public
+    dependencies: []
+    conventions:
+      note: "vendored C library; C++ naming conventions do not apply"
+
+# ── Global conventions ───────────────────────────────────────────────
+# Apply to ALL native C++ code unless overridden per-module.
+
+global_conventions:
+  # forbidden patterns (regex)
+  forbidden_patterns:
+    - pattern: using namespace std;
+      message: "use explicit std:: prefix instead of 'using namespace std;'"
+    - pattern: using namespace chaos;
+      message: "use explicit chaos:: prefix instead of 'using namespace chaos;'"
+    - pattern: "\bNULL\b"
+      message: "use nullptr instead of NULL"
+    - pattern: "\bbare_int\b"
+      message: "use <cstdint> types (std::int32_t) instead of bare 'int'"
+      exclude_modules: [chaos_bdwgc]
+    - pattern: "\bbare_long\b"
+      message: "use <cstdint> types instead of bare 'long'"
+      exclude_modules: [chaos_bdwgc]
+
+  # required header formatting
+  include_guard_format: CHAOS_IL2CPP_{MODULE}_H_
+  namespace_closing_comment: true   # }  // namespace chaos::il2cpp::xxx
+
+# ── Dependency graph (immutable) ────────────────────────────────────
+# Declares which modules may depend on which.
+# Direction: rows may depend on columns.
+
+dependency_matrix:
+  chaos_bdwgc: []
+  chaos_common: []
+  chaos_runtime_core: [chaos_bdwgc]
+  chaos_hot_update: [chaos_runtime_core]
+  chaos_interpreter: [chaos_runtime_core]
+  chaos_support: [chaos_runtime_core]
+  chaos_bootstrap: [chaos_runtime_core, chaos_hot_update, chaos_support]
+  chaos_engine_bridge: [chaos_runtime_core, chaos_bootstrap]
