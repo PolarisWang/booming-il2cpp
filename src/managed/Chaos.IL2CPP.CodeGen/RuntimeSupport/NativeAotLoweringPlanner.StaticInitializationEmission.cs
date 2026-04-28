@@ -12,7 +12,7 @@ public sealed partial class NativeAotLoweringPlanner
                      value => value.TypeSubjectId,
                      StringComparer.Ordinal))
         {
-            var actionBuilder = new StringBuilder();
+            var actionBuilder = new StringBuilder(512);
             foreach (var action in plan.Actions)
             {
                 EmitStaticInitializationAction(actionBuilder, action, "        ");
@@ -38,7 +38,7 @@ public sealed partial class NativeAotLoweringPlanner
     private void EmitStaticInitializationPrologue(StringBuilder builder, AotCoreIrMethodArtifact method)
     {
         if (!method.IsStatic ||
-            string.IsNullOrWhiteSpace(method.Identity.DeclaringTypeSubjectId) ||
+            string.IsNullOrEmpty(method.Identity.DeclaringTypeSubjectId) ||
             !TryGetStaticInitializationPlanForType(method.Identity.DeclaringTypeSubjectId, out var plan) ||
             plan is null)
         {
@@ -104,7 +104,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             var resolvedInvocationTarget = invocationTarget!.Value;
             model["constructor_block"] =
-                $"{indentation}    const auto chaos_arg_0 = reinterpret_cast<std::intptr_t>(chaos_object);{Environment.NewLine}" +
+                $"{indentation}    const auto chaos_arg_0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);{Environment.NewLine}" +
                 $"{indentation}    {resolvedInvocationTarget.TargetSymbol}({FormatAbiInvocationArgumentList(resolvedInvocationTarget.ParameterAbis)});{Environment.NewLine}";
         }
 

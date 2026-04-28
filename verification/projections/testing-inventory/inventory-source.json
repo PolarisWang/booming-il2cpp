@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-04-26T11:00:43.278537Z",
+  "generatedAt": "2026-04-28T14:39:17.072753Z",
   "hostPlatform": "windows",
   "registryErrors": [],
   "registryWarnings": [],
   "benchmarkOverview": {
-    "generatedAt": "2026-04-26T11:00:36.694766+00:00",
+    "generatedAt": "2026-04-28T14:39:08.289347+00:00",
     "defaultPlatform": "windows-x64",
     "availablePlatforms": [
       "windows-x64"
@@ -10389,10 +10389,10 @@
       "entryIndex": 60,
       "status": "ok",
       "stageKind": "hotupdate-proof",
-      "runId": "20260426-181841-windows-9c9b",
-      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260426-181841-windows-9c9b/run-report/summary.json",
+      "runId": "20260428-202520-windows-b9e4",
+      "summaryPath": "artifacts/subjects/SolutionCorePack/runs/20260428-202520-windows-b9e4/run-report/summary.json",
       "errors": [],
-      "pipelineReportPath": "artifacts/subjects/SolutionCorePack/runs/20260426-181841-windows-9c9b/matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report.json"
+      "pipelineReportPath": "artifacts/subjects/SolutionCorePack/runs/20260428-202520-windows-b9e4/matrices/windows-corelib-reference-native-hotupdate-proof/pipeline-report/report.json"
     }
   ],
   "benchmarkSubjects": {

@@ -43,6 +43,7 @@ modules:
       - chaos::il2cpp::memory_domain
       - chaos::il2cpp::vtable_registry
       - chaos::il2cpp::generic_context
+      - chaos::il2cpp::string_table
     visibility: public
     dependencies:
       - chaos_bdwgc
@@ -168,6 +169,14 @@ modules:
     conventions:
       note: "vendored C library; C++ naming conventions do not apply"
 
+  chaos_fmt:
+    path: third_party/fmt
+    namespace: ""                    # C++ library, no project namespace
+    visibility: public
+    dependencies: []
+    conventions:
+      note: "vendored C++ library; project conventions do not apply"
+
 # ── Global conventions ───────────────────────────────────────────────
 # Apply to ALL native C++ code unless overridden per-module.
 
@@ -197,6 +206,7 @@ global_conventions:
 
 dependency_matrix:
   chaos_bdwgc: []
+  chaos_fmt: []
   chaos_common: []
   chaos_runtime_core: [chaos_bdwgc]
   chaos_hot_update: [chaos_runtime_core]

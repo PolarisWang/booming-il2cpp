@@ -23,9 +23,9 @@ void RecordLifecyclePhase(const char* phase_utf8, void* user_data) {
         return;
     }
 
-    if (std::strcmp(phase_utf8, "init") == 0) {
+    if (CHAOS_IL2CPP_STRCMP(phase_utf8, "init") == 0) {
         trace->init_count++;
-    } else if (std::strcmp(phase_utf8, "shutdown") == 0) {
+    } else if (CHAOS_IL2CPP_STRCMP(phase_utf8, "shutdown") == 0) {
         trace->shutdown_count++;
     }
 
@@ -45,12 +45,12 @@ engine_status_t RecordDispatchPayload(
         return ENGINE_STATUS_INVALID_ARGUMENT;
     }
 
-    const size_t expected_payload_size = std::strlen(kExpectedPayload);
+    const size_t expected_payload_size = CHAOS_IL2CPP_STRLEN(kExpectedPayload);
     trace->callback_count++;
     trace->callback_matched =
-        std::strcmp(callback_name_utf8, kExpectedCallbackName) == 0 &&
+        CHAOS_IL2CPP_STRCMP(callback_name_utf8, kExpectedCallbackName) == 0 &&
         payload_size == expected_payload_size &&
-        std::memcmp(payload, kExpectedPayload, expected_payload_size) == 0 &&
+        CHAOS_IL2CPP_MEMCMP(payload, kExpectedPayload, expected_payload_size) == 0 &&
         trace->callback_matched;
     return trace->callback_matched ? ENGINE_STATUS_OK : ENGINE_STATUS_INTERNAL_ERROR;
 }
@@ -130,7 +130,7 @@ int32_t {{ native_reference_function_name }}(
                 engine_runtime,
                 callback_id,
                 kDispatchPayload,
-                std::strlen(kDispatchPayload)) != ENGINE_STATUS_OK) {
+                CHAOS_IL2CPP_STRLEN(kDispatchPayload)) != ENGINE_STATUS_OK) {
             engine_shutdown(engine_runtime);
             return 1;
         }

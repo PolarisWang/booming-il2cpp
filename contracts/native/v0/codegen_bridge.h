@@ -4,6 +4,7 @@
 #include "runtime_abi.h"
 
 #ifdef __cplusplus
+#include <cstdint>
 extern "C" {
 #endif
 
@@ -35,6 +36,8 @@ typedef struct CodeRegistrationV0 {
     uint32_t invoker_pointer_count;
     const void* unresolved_virtual_calls;
     uint32_t unresolved_virtual_call_count;
+    const RuntimeTypeCapabilityEntryV0* type_capabilities;
+    uint32_t type_capability_count;
 } CodeRegistrationV0;
 
 typedef struct MetadataRegistrationV0 {
@@ -85,6 +88,9 @@ typedef struct CodegenBridgeV0 {
     TypeInfoHandle (CHAOS_RUNTIME_ABI_CALL* resolve_type_by_token)(
         ImageHandle image,
         uint32_t type_token);
+    BridgeStatus (CHAOS_RUNTIME_ABI_CALL* query_type_capability)(
+        TypeInfoHandle type,
+        RuntimeTypeCapabilityInfoV0* out_capability_info);
     MethodInfoHandle (CHAOS_RUNTIME_ABI_CALL* resolve_method_by_token)(
         ImageHandle image,
         uint32_t method_token);
@@ -120,6 +126,11 @@ typedef struct CodegenBridgeV0 {
         size_t out_return_value_size,
         ExceptionHandle* out_exception);
 
+    /* Virtual dispatch helpers (token-based, for AOT codegen). */
+    MethodInfoHandle (CHAOS_RUNTIME_ABI_CALL* resolve_virtual_method_by_token)(
+        uint32_t instance_type_token,
+        uint32_t declared_method_token);
+
     /* Delegate helpers. */
     void* (CHAOS_RUNTIME_ABI_CALL* create_delegate)(
         RuntimeState* runtime_state,
@@ -142,6 +153,38 @@ typedef struct CodegenBridgeV0 {
 
 /* Returns the process-wide v0 bridge table or null when unavailable. */
 CHAOS_RUNTIME_ABI_EXPORT const CodegenBridgeV0* CHAOS_RUNTIME_ABI_CALL chaos_codegen_get_bridge_v0(void);
+
+/* ── StringId tag bit helpers ─────────────────────────────────────────
+ *
+ * StringId values on the native eval stack use bit 63 as a tag to
+ * distinguish them from heap object pointers.  AMD64 and ARM64 user-space
+ * addresses occupy at most 48 bits, so bit 63 is never set by legitimate
+ * pointers.  The static_assert below confirms the pointer size invariant.
+ *
+ * StringId encoding:
+ *   - uint64_t content hash (63 bits) | 1 (ensures non-zero)
+ *   - Tagged value: CHAOS_STRING_ID_TAG | id
+ */
+#define CHAOS_STRING_ID_TAG (static_cast<intptr_t>(1) << (sizeof(intptr_t) * 8 - 1))
+
+static_assert(sizeof(intptr_t) == sizeof(uint64_t),
+    "CHAOS_STRING_ID_TAG requires 64-bit intptr_t so that bit 63 "
+    "is never set by valid user-space addresses on AMD64 or ARM64.");
+
+inline bool chaos_is_string_id(intptr_t v) noexcept
+{
+    return (v & CHAOS_STRING_ID_TAG) != 0;
+}
+
+inline uint64_t chaos_extract_string_id(intptr_t v) noexcept
+{
+    return static_cast<uint64_t>(v & ~CHAOS_STRING_ID_TAG);
+}
+
+inline intptr_t chaos_make_string_id_value(uint64_t id) noexcept
+{
+    return CHAOS_STRING_ID_TAG | static_cast<intptr_t>(id);
+}
 
 #ifdef __cplusplus
 }

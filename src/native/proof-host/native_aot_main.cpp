@@ -1,30 +1,30 @@
 #include <cstdint>
-#include <cstdlib>
 #include <cstring>
+#include <chaos/native_types.h>
 
 #ifndef CHAOS_NATIVE_AOT_ENTRY
 #define CHAOS_NATIVE_AOT_ENTRY RunNativeAot
 #endif
 
-extern "C" int CHAOS_NATIVE_AOT_ENTRY(std::int32_t entryIndex);
+extern "C" int CHAOS_NATIVE_AOT_ENTRY(CHAOS_IL2CPP_INT32 entryIndex);
 
 namespace {
 
 constexpr char kEntryIndexPrefix[] = "--entry-index=";
 constexpr char kCollectionPathPrefix[] = "--collection-path=";
 
-std::int32_t ParseEntryIndex(int argc, char** argv) {
+CHAOS_IL2CPP_INT32 ParseEntryIndex(int argc, char** argv) {
     for (int index = 1; index < argc; ++index) {
         const char* argument = argv[index];
         if (argument == nullptr) {
             continue;
         }
 
-        if (std::strncmp(argument, kEntryIndexPrefix, sizeof(kEntryIndexPrefix) - 1) == 0) {
-            return static_cast<std::int32_t>(std::atoi(argument + sizeof(kEntryIndexPrefix) - 1));
+        if (CHAOS_IL2CPP_STRNCMP(argument, kEntryIndexPrefix, sizeof(kEntryIndexPrefix) - 1) == 0) {
+            return static_cast<CHAOS_IL2CPP_INT32>(CHAOS_IL2CPP_ATOI(argument + sizeof(kEntryIndexPrefix) - 1));
         }
 
-        if (std::strncmp(argument, kCollectionPathPrefix, sizeof(kCollectionPathPrefix) - 1) == 0) {
+        if (CHAOS_IL2CPP_STRNCMP(argument, kCollectionPathPrefix, sizeof(kCollectionPathPrefix) - 1) == 0) {
             continue;
         }
     }

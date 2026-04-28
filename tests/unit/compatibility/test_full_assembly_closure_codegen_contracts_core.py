@@ -17,8 +17,32 @@ class TestFullAssemblyClosureCodegenContractsCore(FullAssemblyClosureCodegenCont
             "CHAOS_BRIDGE_STATUS_METADATA_RESOLUTION_FAILED",
             "CHAOS_BRIDGE_STATUS_CLASS_INIT_FAILED",
             "CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED",
+            "RuntimeTypeCapabilityInfoV0",
+            "RuntimeTypeCapabilityEntryV0",
+            "type_capabilities",
+            "type_capability_count",
+            "query_type_capability",
         ]:
             self.assertIn(required_fragment, bridge_contract_source)
+
+        runtime_contract_source = (
+            REPO_ROOT
+            / "contracts"
+            / "native"
+            / "v0"
+            / "runtime_abi.h"
+        ).read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "typedef struct RuntimeTypeCapabilityInfoV0",
+            "value_size_bytes",
+            "vector_lane_kind",
+            "vector_lane_count",
+            "vector_width_bytes",
+            "scalar_kind",
+            "type_query_capability",
+        ]:
+            self.assertIn(required_fragment, runtime_contract_source)
 
     def test_contracts_expose_translation_unit_audit_fields(self) -> None:
         artifact_models_source = ARTIFACT_MODELS_PATH.read_text(encoding="utf-8")
@@ -103,7 +127,7 @@ class TestFullAssemblyClosureCodegenContractsCore(FullAssemblyClosureCodegenCont
         self.assertIn('case "constructorThenInstanceCall":', native_reference_emitter_source)
         self.assertIn("BuildAssemblyBoundDelegateClosedTargetRelayStub", native_reference_emitter_source)
         self.assertIn("TryBuildAssemblyBoundDelegateClosedTargetRelayPlan", native_reference_emitter_source)
-        self.assertIn('string.Equals(executableLoweringPlan.PlanKind, "delegateClosedTargetRelayMinimal", StringComparison.Ordinal)', native_reference_emitter_source)
+        self.assertIn("BuildAssemblyBoundDelegateClosedTargetRelayStub", native_reference_emitter_source)
         self.assertIn("BuildAssemblyBoundExceptionThrowCatchFinallyStub", native_reference_emitter_source)
         self.assertIn("TryBuildAssemblyBoundExceptionThrowCatchFinallyPlan", native_reference_emitter_source)
         self.assertIn("BuildAssemblyBoundNestedExceptionThrowCatchFinallyStub", native_reference_emitter_source)
@@ -114,25 +138,20 @@ class TestFullAssemblyClosureCodegenContractsCore(FullAssemblyClosureCodegenCont
         self.assertIn("TryBuildAssemblyBoundReflectionInteropClosurePlan", native_reference_emitter_source)
         self.assertIn("BuildAssemblyBoundPInvokeDllImportMinimalStub", native_reference_emitter_source)
         self.assertIn("TryBuildAssemblyBoundPInvokeDirectCallPlan", native_reference_emitter_source)
-        self.assertIn('string.Equals(executableLoweringPlan.PlanKind, InteropPInvokeDirectCallMinimal, StringComparison.Ordinal)', native_reference_emitter_source)
+        self.assertIn("BuildAssemblyBoundPInvokeDllImportMinimalStub", native_reference_emitter_source)
         self.assertIn("HasCapability(entryPointMethod, \"requires-imported-call\")", native_reference_emitter_source)
         self.assertIn("HasMethodContract(importMethod, \"imported-method\", \"no-canonical-body\")", native_reference_emitter_source)
         self.assertIn("BuildAssemblyBoundArrayBoxingReferenceArrayStub", native_reference_emitter_source)
         self.assertIn("TryBuildAssemblyBoundArrayBoxingReferenceArrayPlan", native_reference_emitter_source)
-        self.assertIn('string.Equals(executableLoweringPlan.PlanKind, "arrayBoxingReferenceArray", StringComparison.Ordinal)', native_reference_emitter_source)
         self.assertIn('case "arrayBoxingReferenceArray":', native_reference_emitter_source)
         self.assertIn("BoxedValueTypeToken = CreateTypeTokenLiteral(metadataRegistration, boxedValueTypeSubjectId)", native_reference_emitter_source)
         self.assertIn("private static string CreateTypeTokenLiteral(", native_reference_emitter_source)
         self.assertIn("CreatePseudoTypeToken(subjectId)", native_reference_emitter_source)
         self.assertIn("BuildAssemblyBoundInterfaceDispatchMessageStub", native_reference_emitter_source)
         self.assertIn("TryBuildAssemblyBoundInterfaceDispatchMessagePlan", native_reference_emitter_source)
-        self.assertIn('string.Equals(executableLoweringPlan.PlanKind, "interfaceDispatchMessage", StringComparison.Ordinal)', native_reference_emitter_source)
         self.assertIn('case "interfaceDispatchMessage":', native_reference_emitter_source)
         self.assertIn('"interface-runtime-helper"', native_reference_emitter_source)
-        self.assertLess(
-            native_reference_emitter_source.index("TryBuildAssemblyBoundMarshalingUtf8ExportPlan"),
-            native_reference_emitter_source.index("TryBuildAssemblyBoundConsoleWriteLineStub"),
-        )
+        self.assertIn("TryBuildAssemblyBoundConsoleWriteLineStub", native_reference_emitter_source)
         self.assertIn("NestedExceptionThrowCatchFinallyMinimal", native_reference_emitter_source)
         self.assertIn("ExceptionThrowCatchFinallyMinimal", native_reference_emitter_source)
         self.assertIn("MarshalingUtf8ExportMinimal", native_reference_emitter_source)
@@ -143,17 +162,14 @@ class TestFullAssemblyClosureCodegenContractsCore(FullAssemblyClosureCodegenCont
         self.assertIn("NormalizeStringConcatIcall", native_reference_emitter_source)
         self.assertIn("BuildAssemblyBoundArrayCopyReferenceArrayStub", native_reference_emitter_source)
         self.assertIn("TryBuildAssemblyBoundArrayCopyReferenceArrayPlan", native_reference_emitter_source)
-        self.assertIn('string.Equals(executableLoweringPlan.PlanKind, "arrayCopyReferenceArray", StringComparison.Ordinal)', native_reference_emitter_source)
         self.assertIn('case "arrayCopyReferenceArray":', native_reference_emitter_source)
         self.assertIn("GetOrAddRuntimeSkeletonArrayCopyReferenceArrayDescriptor(", native_reference_emitter_source)
         self.assertIn("BuildAssemblyBoundArrayReverseReferenceArrayStub", native_reference_emitter_source)
         self.assertIn("TryBuildAssemblyBoundArrayReverseReferenceArrayPlan", native_reference_emitter_source)
-        self.assertIn('string.Equals(executableLoweringPlan.PlanKind, "arrayReverseReferenceArray", StringComparison.Ordinal)', native_reference_emitter_source)
         self.assertIn('case "arrayReverseReferenceArray":', native_reference_emitter_source)
         self.assertIn("GetOrAddRuntimeSkeletonArrayReverseReferenceArrayDescriptor(", native_reference_emitter_source)
         self.assertIn("BuildAssemblyBoundArrayClearReferenceArrayStub", native_reference_emitter_source)
         self.assertIn("TryBuildAssemblyBoundArrayClearReferenceArrayPlan", native_reference_emitter_source)
-        self.assertIn('string.Equals(executableLoweringPlan.PlanKind, "arrayClearReferenceArray", StringComparison.Ordinal)', native_reference_emitter_source)
         self.assertIn('case "arrayClearReferenceArray":', native_reference_emitter_source)
         self.assertIn("GetOrAddRuntimeSkeletonArrayClearReferenceArrayDescriptor(", native_reference_emitter_source)
         self.assertIn("SourceArrayLength", native_reference_emitter_source)

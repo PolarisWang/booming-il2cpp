@@ -62,9 +62,12 @@ public sealed partial class LoaderStage
 
         foreach (var demand in demands)
         {
-            if (genericDemandLookup.TryGetValue(demand.SubjectId, out var existingDemand))
+            // Multiple assemblies may demand the same generic instantiation
+            // (e.g. Array::Empty<String> referenced from both the subject
+            // and proof assemblies). All entries for the same SubjectId
+            // produce the same RuntimeGenericContextArtifact — keep the first.
+            if (genericDemandLookup.ContainsKey(demand.SubjectId))
             {
-                EnsureEquivalentDemand(existingDemand, demand);
                 continue;
             }
 

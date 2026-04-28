@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/string/char-text-core",
+  "summary": {
+    "totalMethods": 20,
+    "matchedCount": 20,
+    "unmatchedCount": 0,
+    "nativeFasterCount": 20,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 48.78
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)",
+      "status": "matched",
+      "managedElapsedMs": 0.0185,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 49.19
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)",
+      "status": "matched",
+      "managedElapsedMs": 0.0186,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 49.46
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)",
+      "status": "matched",
+      "managedElapsedMs": 0.0186,
+      "nativeElapsedMs": 0.0148,
+      "speedupPercent": 20.43
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.Int32,System.String,System.Int32,System.Int32)",
+      "status": "matched",
+      "managedElapsedMs": 0.0185,
+      "nativeElapsedMs": 0.0095,
+      "speedupPercent": 48.65
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.0185,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 49.19
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.0186,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 49.46
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String,System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.0186,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 49.46
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.0186,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 49.46
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])",
+      "status": "matched",
+      "managedElapsedMs": 0.0185,
+      "nativeElapsedMs": 0.0092,
+      "speedupPercent": 50.27
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)",
+      "status": "matched",
+      "managedElapsedMs": 0.0148,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 36.49
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)",
+      "status": "matched",
+      "managedElapsedMs": 5.0144,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 99.81
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])",
+      "status": "matched",
+      "managedElapsedMs": 0.0185,
+      "nativeElapsedMs": 0.0095,
+      "speedupPercent": 48.65
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.0185,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 49.19
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Split:System.String[](System.Char)",
+      "status": "matched",
+      "managedElapsedMs": 0.0185,
+      "nativeElapsedMs": 0.0095,
+      "speedupPercent": 48.65
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)",
+      "status": "matched",
+      "managedElapsedMs": 0.0185,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 49.19
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32)",
+      "status": "matched",
+      "managedElapsedMs": 0.0185,
+      "nativeElapsedMs": 0.0095,
+      "speedupPercent": 48.65
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)",
+      "status": "matched",
+      "managedElapsedMs": 0.0186,
+      "nativeElapsedMs": 0.0094,
+      "speedupPercent": 49.46
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::ToLower:System.String()",
+      "status": "matched",
+      "managedElapsedMs": 0.0187,
+      "nativeElapsedMs": 0.0097,
+      "speedupPercent": 48.13
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::ToUpper:System.String()",
+      "status": "matched",
+      "managedElapsedMs": 0.0186,
+      "nativeElapsedMs": 0.0093,
+      "speedupPercent": 50.0
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.String::Trim:System.String()",
+      "status": "matched",
+      "managedElapsedMs": 0.0185,
+      "nativeElapsedMs": 0.0126,
+      "speedupPercent": 31.89
+    }
+  ]
+}

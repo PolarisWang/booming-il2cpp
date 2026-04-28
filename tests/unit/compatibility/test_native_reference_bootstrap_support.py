@@ -59,6 +59,7 @@ class NativeReferenceBootstrapSupportTests(unittest.TestCase):
             "RegisterCodegen",
             "BootstrapRuntime",
             "ResolveTypeByToken",
+            "QueryTypeCapability",
             "ResolveMethodByToken",
             "ResolveFieldByToken",
             "ResolveIcall",
@@ -75,6 +76,15 @@ class NativeReferenceBootstrapSupportTests(unittest.TestCase):
         for marker in required_markers:
             self.assertIn(marker, bootstrap_text)
 
+    def test_bootstrap_initializes_empty_aot_string_table_for_reference_proof_hosts(self) -> None:
+        bootstrap_text = BOOTSTRAP_SOURCE_PATH.read_text(encoding="utf-8")
+
+        self.assertIn("InitializeFromAot(", bootstrap_text)
+        self.assertIn("nullptr,", bootstrap_text)
+        self.assertIn("0u);", bootstrap_text)
+        self.assertNotIn("extern constexpr chaos::il2cpp::string_table::StringEntry chaos_aot_string_entries[];", bootstrap_text)
+        self.assertNotIn("extern constexpr uint32_t chaos_aot_string_entry_count;", bootstrap_text)
+
     def test_codegen_bridge_header_declares_not_supported_status(self) -> None:
         bridge_header_text = CODEGEN_BRIDGE_HEADER_PATH.read_text(encoding="utf-8")
 
@@ -85,6 +95,25 @@ class NativeReferenceBootstrapSupportTests(unittest.TestCase):
         self.assertIn("typedef struct NativeReferenceAssemblyDispatchRequestV0", bridge_header_text)
         self.assertIn("const char* subject_id_utf8;", bridge_header_text)
         self.assertIn("void* managed_args;", bridge_header_text)
+        self.assertIn("RuntimeTypeCapabilityInfoV0", bridge_header_text)
+        self.assertIn("RuntimeTypeCapabilityEntryV0", bridge_header_text)
+        self.assertIn("type_capabilities", bridge_header_text)
+        self.assertIn("type_capability_count", bridge_header_text)
+        self.assertIn("query_type_capability", bridge_header_text)
+
+    def test_codegen_bridge_header_uses_c_abi_intptr_types_for_string_id_tagging(self) -> None:
+        bridge_header_text = CODEGEN_BRIDGE_HEADER_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "static_cast<intptr_t>(1)",
+            "sizeof(intptr_t)",
+            "inline bool chaos_is_string_id(intptr_t v) noexcept",
+            "inline uint64_t chaos_extract_string_id(intptr_t v) noexcept",
+            "inline intptr_t chaos_make_string_id_value(uint64_t id) noexcept",
+        ]:
+            self.assertIn(required_fragment, bridge_header_text)
+
+        self.assertNotIn("std::intptr_t", bridge_header_text)
 
     def test_assembly_bound_native_reference_contract_sample_is_present(self) -> None:
         cmake_text = (NATIVE_BRIDGE_SMOKE_ROOT / "CMakeLists.txt").read_text(encoding="utf-8")

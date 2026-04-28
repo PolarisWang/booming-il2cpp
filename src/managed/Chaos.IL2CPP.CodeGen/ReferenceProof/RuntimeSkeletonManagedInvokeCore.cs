@@ -95,8 +95,8 @@ internal static class RuntimeSkeletonManagedInvokeAbiCore
         contract = new RuntimeSkeletonManagedInvokeReturnContract(
             managedType,
             includeIndirectFlag
-                ? "void* return_value;\n    std::size_t return_value_size;\n    bool return_value_is_indirect;"
-                : "void* return_value;\n    std::size_t return_value_size;",
+                ? "void* return_value;\n    CHAOS_IL2CPP_SIZE return_value_size;\n    bool return_value_is_indirect;"
+                : "void* return_value;\n    CHAOS_IL2CPP_SIZE return_value_size;",
             "if (request->return_value == nullptr || request->return_value_size == 0u) {\n        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;\n    }",
             "void* return_value_ptr = request->return_value;",
             includeIndirectFlag

@@ -90,7 +90,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     if (message_suffix == nullptr) {
         return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
     }
-    if (std::strcmp({{ concat_icall_literal }}, {{ string_concat_triple_icall_literal }}) == 0) {
+    if (CHAOS_IL2CPP_STRCMP({{ concat_icall_literal }}, {{ string_concat_triple_icall_literal }}) == 0) {
         const auto concat_string_triple = reinterpret_cast<ConcatStringTripleFn>(raw_concat_string);
         void* full_message = concat_string_triple(runtime, thread, message_prefix, captured_value, message_suffix);
         if (full_message == nullptr) {

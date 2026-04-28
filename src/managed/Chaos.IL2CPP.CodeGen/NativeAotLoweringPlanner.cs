@@ -6,156 +6,18 @@ using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Chaos.IL2CPP.Contracts;
 
 namespace Chaos.IL2CPP.CodeGen;
 
 public sealed partial class NativeAotLoweringPlanner
 {
-    private const string OverflowExceptionTypeSubjectId = "System.Private.CoreLib/System.OverflowException";
-    private const string ObjectTypeSubjectId = "System.Private.CoreLib/System.Object";
-    private const string ObjectCtorMethodSubjectId = "System.Private.CoreLib/System.Object::.ctor:System.Void()";
-    private const string DelegateTypeSubjectId = "System.Private.CoreLib/System.Delegate";
-    private const string MulticastDelegateTypeSubjectId = "System.Private.CoreLib/System.MulticastDelegate";
-    private const string StringTypeSubjectId = "System.Private.CoreLib/System.String";
-    private const string PairStringConcatMethodSubjectId =
-        "System.Private.CoreLib/System.String::Concat(System.String,System.String)";
-    private const string QuadStringConcatMethodSubjectId =
-        "System.Private.CoreLib/System.String::Concat(System.String,System.String,System.String,System.String)";
-    private const string StringEqualityMethodSubjectId =
-        "System.Private.CoreLib/System.String::op_Equality(System.String,System.String)";
-    private const string StringGetLengthMethodSubjectId =
-        "System.Private.CoreLib/System.String::get_Length()";
-    private const string StringStartsWithComparisonMethodSubjectId =
-        "System.Private.CoreLib/System.String::StartsWith(System.String,System.StringComparison)";
-    private const string StringContainsComparisonMethodSubjectId =
-        "System.Private.CoreLib/System.String::Contains(System.String,System.StringComparison)";
-    private const string StringJoinGenericEnumerableMethodPrefix =
-        "System.Private.CoreLib/System.String::Join<";
-    private const string ExceptionCtorWithMessageMethodSubjectId =
-        "System.Private.CoreLib/System.Exception::.ctor(System.String)";
-    private const string InvalidOperationExceptionCtorWithMessageMethodSubjectId =
-        "System.Private.CoreLib/System.InvalidOperationException::.ctor(System.String)";
-    private const string ArgumentOutOfRangeExceptionCtorWithParamNameAndMessageMethodSubjectId =
-        "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor(System.String,System.String)";
-    private const string ExceptionGetMessageMethodSubjectId =
-        "System.Private.CoreLib/System.Exception::get_Message()";
-    private const string ArgumentExceptionGetParamNameMethodSubjectId =
-        "System.Private.CoreLib/System.ArgumentException::get_ParamName()";
-    private const string TypeTypeSubjectId = "System.Private.CoreLib/System.Type";
-    private const string MethodInfoTypeSubjectId = "System.Private.CoreLib/System.Reflection.MethodInfo";
-    private const string ConstructorInfoTypeSubjectId = "System.Private.CoreLib/System.Reflection.ConstructorInfo";
-    private const string FieldInfoTypeSubjectId = "System.Private.CoreLib/System.Reflection.FieldInfo";
-    private const string ParameterInfoTypeSubjectId = "System.Private.CoreLib/System.Reflection.ParameterInfo";
-    private const string AssemblyTypeSubjectId = "System.Private.CoreLib/System.Reflection.Assembly";
-    private const string AssemblyNameTypeSubjectId = "System.Private.CoreLib/System.Reflection.AssemblyName";
-    private const string MemberInfoIsDefinedMethodSubjectId =
-        "System.Private.CoreLib/System.Reflection.MemberInfo::IsDefined(System.Type,System.Boolean)";
-    private const string MemberInfoGetNameMethodSubjectId =
-        "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name()";
-    private const string MemberInfoGetDeclaringTypeMethodSubjectId =
-        "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType()";
-    private const string MemberInfoGetMetadataTokenMethodSubjectId =
-        "System.Private.CoreLib/System.Reflection.MemberInfo::get_MetadataToken()";
-    private const string ObjectEqualsMethodSubjectId = "System.Private.CoreLib/System.Object::Equals(System.Object)";
-    private const string GcCollectMethodSubjectId = "System.Private.CoreLib/System.GC::Collect()";
-    private const string GcWaitForPendingFinalizersMethodSubjectId = "System.Private.CoreLib/System.GC::WaitForPendingFinalizers()";
-    private const string GcKeepAliveMethodSubjectId = "System.Private.CoreLib/System.GC::KeepAlive(System.Object)";
-    private const string MonitorEnterMethodSubjectId = "System.Threading/Monitor::Enter(System.Object,System.Boolean&)";
-    private const string MonitorExitMethodSubjectId = "System.Threading/Monitor::Exit(System.Object)";
-    private const string MonitorTryEnterTimeSpanMethodSubjectId = "System.Threading/Monitor::TryEnter(System.Object,System.TimeSpan,System.Boolean&)";
-    private const string ThreadTypeSubjectId = "System.Threading.Thread/System.Threading.Thread";
-    private const string ThreadStartDelegateTypeSubjectId = "System.Threading.Thread/System.Threading.ThreadStart";
-    private const string ThreadConstructorMethodSubjectId =
-        "System.Threading.Thread/System.Threading.Thread::.ctor(System.Threading.ThreadStart)";
-    private const string ThreadStartMethodSubjectId = "System.Threading.Thread/System.Threading.Thread::Start()";
-    private const string ThreadJoinMethodSubjectId = "System.Threading.Thread/System.Threading.Thread::Join()";
-    private const string ThreadCurrentThreadGetterMethodSubjectId =
-        "System.Threading.Thread/System.Threading.Thread::get_CurrentThread()";
-    private const string ThreadGetNameMethodSubjectId = "System.Threading.Thread/System.Threading.Thread::get_Name()";
-    private const string ThreadSetNameMethodSubjectId =
-        "System.Threading.Thread/System.Threading.Thread::set_Name(System.String)";
-    private const string DelegateCombineMethodSubjectId = "System.Private.CoreLib/System.Delegate::Combine(System.Delegate,System.Delegate)";
-    private const string DelegateRemoveMethodSubjectId = "System.Private.CoreLib/System.Delegate::Remove(System.Delegate,System.Delegate)";
-    private const string MethodBaseInvokeMethodSubjectId = "System.Private.CoreLib/System.Reflection.MethodBase::Invoke(System.Object,System.Object[])";
-    private const string OperatingSystemIsWindowsMethodSubjectId = "System.Private.CoreLib/System.OperatingSystem::IsWindows()";
-    private const string OperatingSystemIsLinuxMethodSubjectId = "System.Private.CoreLib/System.OperatingSystem::IsLinux()";
-    private const string OperatingSystemIsMacOsMethodSubjectId = "System.Private.CoreLib/System.OperatingSystem::IsMacOS()";
-    private const string InterlockedCompareExchangeMethodPrefix = "System.Threading/Interlocked::CompareExchange<";
-    private const string ListTypeSubjectIdPrefix = "System.Collections/System.Collections.Generic.List<";
-    private const string DictionaryTypeSubjectIdPrefix = "System.Collections/System.Collections.Generic.Dictionary<";
-    private const string ReadOnlyCollectionTypeSubjectIdPrefix = "System.Private.CoreLib/System.Collections.Generic.IReadOnlyCollection<";
-    private const string ReadOnlyListTypeSubjectIdPrefix = "System.Private.CoreLib/System.Collections.Generic.IReadOnlyList<";
-    private const string SpanTypeSubjectIdPrefix = "System.Private.CoreLib/System.Span<";
-    private const string ReadOnlySpanTypeSubjectIdPrefix = "System.Private.CoreLib/System.ReadOnlySpan<";
-    private const string MemoryTypeSubjectIdPrefix = "System.Private.CoreLib/System.Memory<";
-    private const string TimeSpanTypeSubjectId = "System.Private.CoreLib/System.TimeSpan";
-    private const string TimeSpanFromMillisecondsMethodSubjectId =
-        "System.Private.CoreLib/System.TimeSpan::FromMilliseconds(System.Double)";
-    private const string InitializeArrayMethodSubjectId =
-        "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)";
-    private const string RuntimeHelpersCreateSpanMethodPrefix =
-        "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan<";
-    private const string MemoryExtensionsAsSpanMethodPrefix =
-        "System.Memory/System.MemoryExtensions::AsSpan<";
-    private const string MemoryExtensionsAsMemoryMethodPrefix =
-        "System.Memory/System.MemoryExtensions::AsMemory<";
-    private const string GetTypeHandleMethodSubjectId = "System.Private.CoreLib/System.Type::get_TypeHandle()";
-    private const string GetFieldMethodSubjectId = "System.Private.CoreLib/System.Type::GetField(System.String)";
-    private const string GetMethodByNameMethodSubjectId = "System.Private.CoreLib/System.Type::GetMethod(System.String)";
-    private const string GetAssemblyMethodSubjectId = "System.Private.CoreLib/System.Type::get_Assembly()";
-    private const string GetGenericArgumentsMethodSubjectId = "System.Private.CoreLib/System.Type::GetGenericArguments()";
-    private const string GetGenericTypeDefinitionMethodSubjectId = "System.Private.CoreLib/System.Type::GetGenericTypeDefinition()";
-    private const string GetConstructorsMethodSubjectId = "System.Private.CoreLib/System.Type::GetConstructors(System.Reflection.BindingFlags)";
-    private const string AssemblyGetTypeMethodSubjectId = "System.Private.CoreLib/System.Reflection.Assembly::GetType(System.String)";
-    private const string TypeGetTypeByNameMethodSubjectId = "System.Private.CoreLib/System.Type::GetType(System.String)";
-    private const string AssemblyGetNameMethodSubjectId = "System.Private.CoreLib/System.Reflection.Assembly::GetName()";
-    private const string AssemblyNameGetNameMethodSubjectId = "System.Private.CoreLib/System.Reflection.AssemblyName::get_Name()";
-    private const string GetMethodMethodSubjectId = "System.Private.CoreLib/System.Type::GetMethod(System.String,System.Reflection.BindingFlags)";
-    private const string GetMethodHandleMethodSubjectId = "System.Private.CoreLib/System.Reflection.MethodBase::get_MethodHandle()";
-    private const string GetParametersMethodSubjectId = "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters()";
-    private const string MakeGenericMethodMethodSubjectId = "System.Private.CoreLib/System.Reflection.MethodInfo::MakeGenericMethod(System.Type[])";
-    private const string ParameterInfoGetNameMethodSubjectId = "System.Private.CoreLib/System.Reflection.ParameterInfo::get_Name()";
-    private const string Int32ToStringMethodSubjectId = "System.Private.CoreLib/System.Int32::ToString()";
-    private const string SingleToStringWithFormatMethodSubjectId = "System.Private.CoreLib/System.Single::ToString(System.String)";
-    private const string DoubleToStringWithFormatMethodSubjectId = "System.Private.CoreLib/System.Double::ToString(System.String)";
-    private const string DefaultInterpolatedStringHandlerCtorMethodSubjectId =
-        "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::.ctor(System.Int32,System.Int32)";
-    private const string DefaultInterpolatedStringHandlerAppendFormattedStringMethodSubjectId =
-        "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted(System.String)";
-    private const string DefaultInterpolatedStringHandlerAppendLiteralMethodSubjectId =
-        "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendLiteral(System.String)";
-    private const string DefaultInterpolatedStringHandlerAppendFormattedMethodSubjectPrefix =
-        "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted<";
-    private const string DefaultInterpolatedStringHandlerToStringAndClearMethodSubjectId =
-        "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::ToStringAndClear()";
-    private const string MarshalGetFunctionPointerForDelegateMethodPrefix =
-        "System.Runtime.InteropServices/Marshal::GetFunctionPointerForDelegate<";
-    private const string MarshalGetDelegateForFunctionPointerMethodPrefix =
-        "System.Runtime.InteropServices/Marshal::GetDelegateForFunctionPointer<";
-    private const string MarshalAllocHGlobalInt32MethodSubjectId =
-        "System.Runtime.InteropServices/Marshal::AllocHGlobal(System.Int32)";
-    private const string MarshalFreeHGlobalMethodSubjectId =
-        "System.Runtime.InteropServices/Marshal::FreeHGlobal(System.IntPtr)";
-    private const string MarshalSizeOfMethodPrefix =
-        "System.Runtime.InteropServices/Marshal::SizeOf<";
-    private const string MarshalStructureToPtrMethodPrefix =
-        "System.Runtime.InteropServices/Marshal::StructureToPtr<";
-    private const string MarshalPtrToStructureMethodPrefix =
-        "System.Runtime.InteropServices/Marshal::PtrToStructure<";
-    private const int StringComparisonOrdinalValue = 4;
-    private const string DllImportAttributeDisplayName = "DllImportAttribute";
-    private const string DllImportAttributeTypeSubjectId = "System.Runtime.InteropServices/DllImportAttribute";
-    private const string UnmanagedCallersOnlyAttributeDisplayName = "UnmanagedCallersOnlyAttribute";
-    private const string UnmanagedCallersOnlyAttributeTypeSubjectId = "System.Runtime.InteropServices/UnmanagedCallersOnlyAttribute";
-
-    private static readonly JsonSerializerOptions JsonOptions = new()
-    {
-        PropertyNameCaseInsensitive = true,
-    };
-
     private IReadOnlyDictionary<string, AotCoreIrMethodArtifact> _methodsBySubjectId =
         new Dictionary<string, AotCoreIrMethodArtifact>(StringComparer.Ordinal);
+
+    private Dictionary<string, string> _attributeStorageFieldIndex =
+        new Dictionary<string, string>(StringComparer.Ordinal);
 
     private IReadOnlyDictionary<string, string?> _referenceTypeBaseSubjectIds =
         new Dictionary<string, string?>(StringComparer.Ordinal);
@@ -171,315 +33,29 @@ public sealed partial class NativeAotLoweringPlanner
     private ReflectionMemberSupportModel _reflectionMemberSupport = ReflectionMemberSupportModel.Empty;
     private StaticFieldDataSupportModel _staticFieldDataSupport = StaticFieldDataSupportModel.Empty;
 
-    private static readonly IReadOnlySet<int> EmptyRawArgumentIndices = new HashSet<int>();
+    private IReadOnlyList<string> _cachedClosureAssemblyPaths = Array.Empty<string>();
+    private IReadOnlyDictionary<string, string> _closureAssemblyPathByName =
+        new Dictionary<string, string>(StringComparer.Ordinal);
 
-    private readonly record struct InvocationTarget(
-        string TargetSymbol,
-        IReadOnlyList<AotCoreIrAbiSlotArtifact> ParameterAbis,
-        AotCoreIrAbiSlotArtifact ReturnAbi,
-        IReadOnlySet<int> RawArgumentIndices,
-        string? OpenDefinitionSubjectId = null,
-        SharedGenericBodyId? SharedGenericBodyId = null,
-        InstantiationStubId? InstantiationStubId = null,
-        RuntimeGenericContextArtifact? RuntimeGenericContext = null);
+	private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _cppStringLiteralCache =
+		new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
 
-    private sealed record ExternalRuntimeHelperDefinition(
-        string SubjectId,
-        string TargetSymbol,
-        string Source,
-        IReadOnlyList<AotCoreIrAbiSlotArtifact> ParameterAbis,
-        AotCoreIrAbiSlotArtifact ReturnAbi,
-        IReadOnlySet<int> RawArgumentIndices,
-        IReadOnlySet<string>? ReferencedStaticFieldSubjectIds = null);
+	private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _sanitizedSubjectIdCache =
+		new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
 
-    private sealed record EnumerableJoinSupportVariant(
-        string EnumerableTypeSubjectId,
-        AotCoreIrMethodArtifact GetEnumeratorMethod,
-        AotCoreIrMethodArtifact MoveNextMethod,
-        AotCoreIrMethodArtifact GetCurrentMethod);
+	private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _pseudoMetadataHandleCache =
+		new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
 
-    private sealed record AssemblyReflectionTypeEntry(
-        string AssemblyName,
-        string TypeSubjectId,
-        string TypeDisplayName);
+	private static readonly System.Collections.Concurrent.ConcurrentDictionary<ulong, string> _nativeStringIdSymbolCache =
+		new System.Collections.Concurrent.ConcurrentDictionary<ulong, string>();
 
-    private sealed record AssemblyReflectionSupportModel(
-        IReadOnlyList<AssemblyReflectionTypeEntry> TypeEntries)
-    {
-        public static readonly AssemblyReflectionSupportModel Empty = new([]);
-    }
+    private StringBuilder _sharedMethodSourceBuilder = new(4096);
 
-    private sealed record ReflectionMemberTypeEntry(
-        string TypeSubjectId,
-        string TypeName,
-        string? GenericDefinitionTypeSubjectId,
-        IReadOnlyList<string> GenericArgumentTypeSubjectIds,
-        int GenericParameterCount,
-        int MetadataToken);
+    private IReadOnlyList<IGrouping<string, AotCoreIrMethodArtifact>> _methodsGroupedByDeclaringType =
+        Array.Empty<IGrouping<string, AotCoreIrMethodArtifact>>();
 
-    private sealed record ReflectionMemberFieldEntry(
-        string DeclaringTypeSubjectId,
-        string FieldName,
-        int MetadataToken);
-
-    private sealed record ReflectionMemberMethodEntry(
-        string MethodSubjectId,
-        string DeclaringTypeSubjectId,
-        string MethodName,
-        IReadOnlyList<string> ParameterNames,
-        bool IsConstructor,
-        int MetadataToken);
-
-    private sealed record ReflectionMemberSupportModel(
-        IReadOnlyList<ReflectionMemberTypeEntry> TypeEntries,
-        IReadOnlyList<ReflectionMemberFieldEntry> FieldEntries,
-        IReadOnlyList<ReflectionMemberMethodEntry> MethodEntries)
-    {
-        public static readonly ReflectionMemberSupportModel Empty = new([], [], []);
-    }
-
-    private sealed record StaticFieldDataEntry(
-        string FieldSubjectId,
-        string MemberType,
-        IReadOnlyList<byte> Bytes);
-
-    private sealed record StaticFieldDataSupportModel(
-        IReadOnlyDictionary<string, StaticFieldDataEntry> EntriesBySubjectId)
-    {
-        public static readonly StaticFieldDataSupportModel Empty =
-            new(new Dictionary<string, StaticFieldDataEntry>(StringComparer.Ordinal));
-    }
-
-    private sealed record CatchOnlyExceptionMethodShape(
-        AotCoreIrExceptionRegionArtifact ExceptionRegion,
-        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> TryInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> HandlerInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
-
-    private sealed record FilterOnlyExceptionMethodShape(
-        AotCoreIrExceptionRegionArtifact FilterRegion,
-        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> TryInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> FilterInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> HandlerInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
-
-    private sealed record CatchAndFinallyExceptionMethodShape(
-        AotCoreIrExceptionRegionArtifact CatchRegion,
-        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> PreInnerFinallyInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> InnerTryInstructions,
-        FinallyHandlerShape? InnerFinallyHandler,
-        IReadOnlyList<AotCoreIrInstructionArtifact> PostInnerTryInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> HandlerInstructions,
-        IReadOnlyList<FinallyHandlerShape> OuterFinallyHandlers,
-        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
-
-    private sealed record FinallyOnlyExceptionMethodShape(
-        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> TryInstructions,
-        IReadOnlyList<FinallyHandlerShape> FinallyHandlers,
-        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
-
-    private sealed record FinallyHandlerShape(
-        AotCoreIrExceptionRegionArtifact ExceptionRegion,
-        IReadOnlyList<AotCoreIrInstructionArtifact> Instructions);
-
-    private sealed record FinallyHandlerGuardShape(
-        IReadOnlyList<AotCoreIrInstructionArtifact> ConditionInstructions,
-        bool BranchWhenNonZeroToEnd);
-
-    private sealed record FinallyHandlerEmissionPlan(
-        FinallyHandlerGuardShape? Guard,
-        IReadOnlyList<AotCoreIrInstructionArtifact> BodyInstructions);
-
-    private sealed record FilterAndFinallyExceptionMethodShape(
-        AotCoreIrExceptionRegionArtifact FilterRegion,
-        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> TryInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> FilterInstructions,
-        IReadOnlyList<AotCoreIrInstructionArtifact> HandlerInstructions,
-        IReadOnlyList<FinallyHandlerShape> FinallyHandlers,
-        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
-
-    private sealed record CustomAttributeSupportModel(
-        IReadOnlyDictionary<string, string> QueryAttributeTypeByCallee,
-        IReadOnlyDictionary<string, string> SyntheticGetterFieldByMethodSubjectId,
-        IReadOnlyList<CustomAttributeMaterializationPlan> Materializations,
-        IReadOnlySet<string> AdditionalReferenceTypeSubjectIds,
-        IReadOnlySet<string> AdditionalInstanceFieldSubjectIds,
-        bool RequiresStringSupport,
-        bool UsesMemberInfoIsDefined)
-    {
-        public static readonly CustomAttributeSupportModel Empty = new(
-            new Dictionary<string, string>(StringComparer.Ordinal),
-            new Dictionary<string, string>(StringComparer.Ordinal),
-            [],
-            new HashSet<string>(StringComparer.Ordinal),
-            new HashSet<string>(StringComparer.Ordinal),
-            false,
-            false);
-    }
-
-    private enum CustomAttributeTargetKind : byte
-    {
-        Type = 1,
-        Method = 2,
-    }
-
-    private enum CustomAttributeLiteralKind : byte
-    {
-        Null = 0,
-        Boolean = 1,
-        Byte = 2,
-        Int16 = 3,
-        Int32 = 4,
-        Int64 = 5,
-        UInt16 = 6,
-        UInt32 = 7,
-        UInt64 = 8,
-        String = 9,
-    }
-
-    private sealed record CustomAttributeLiteralValue(
-        CustomAttributeLiteralKind Kind,
-        object? Value);
-
-    private sealed record CustomAttributeFieldAssignment(
-        string FieldSubjectId,
-        CustomAttributeLiteralValue Value);
-
-    private sealed record CustomAttributeMaterializationPlan(
-        CustomAttributeTargetKind TargetKind,
-        string TargetSubjectId,
-        string AttributeTypeSubjectId,
-        IReadOnlyList<CustomAttributeFieldAssignment> Assignments);
-
-    private readonly record struct MetadataTypeIdentity(
-        string AssemblyName,
-        string NamespaceName,
-        string TypeName)
-    {
-        public string SubjectId => ManagedNaming.CreateTypeSubjectId(AssemblyName, NamespaceName, TypeName);
-
-        public string DisplayName => ManagedNaming.CreateTypeDisplayName(AssemblyName, NamespaceName, TypeName);
-    }
-
-    private sealed class MetadataMethodSignatureTypeNameProvider : ISignatureTypeProvider<string, object?>
-    {
-        private readonly MetadataReader _metadataReader;
-        private readonly string _assemblyName;
-
-        public MetadataMethodSignatureTypeNameProvider(
-            MetadataReader metadataReader,
-            string assemblyName)
-        {
-            _metadataReader = metadataReader;
-            _assemblyName = assemblyName;
-        }
-
-        public string GetArrayType(string elementType, ArrayShape shape)
-        {
-            if (shape.Rank == 1 && shape.LowerBounds.IsDefaultOrEmpty && shape.Sizes.IsDefaultOrEmpty)
-            {
-                return $"{elementType}[]";
-            }
-
-            return $"{elementType}[{new string(',', shape.Rank - 1)}]";
-        }
-
-        public string GetByReferenceType(string elementType) => $"{elementType}&";
-
-        public string GetFunctionPointerType(MethodSignature<string> signature)
-        {
-            return $"fnptr<{signature.ReturnType}({string.Join(",", signature.ParameterTypes)})>";
-        }
-
-        public string GetGenericInstantiation(string genericType, ImmutableArray<string> typeArguments)
-        {
-            return ManagedNaming.CreateInstantiatedTypeDisplayName(genericType, typeArguments);
-        }
-
-        public string GetGenericMethodParameter(object? genericContext, int index) => $"!!{index}";
-
-        public string GetGenericTypeParameter(object? genericContext, int index) => $"!{index}";
-
-        public string GetModifiedType(string modifierType, string unmodifiedType, bool isRequired) => unmodifiedType;
-
-        public string GetPinnedType(string elementType) => elementType;
-
-        public string GetPointerType(string elementType) => $"{elementType}*";
-
-        public string GetPrimitiveType(PrimitiveTypeCode typeCode)
-        {
-            return typeCode switch
-            {
-                PrimitiveTypeCode.Boolean => "System.Boolean",
-                PrimitiveTypeCode.Byte => "System.Byte",
-                PrimitiveTypeCode.Char => "System.Char",
-                PrimitiveTypeCode.Double => "System.Double",
-                PrimitiveTypeCode.Int16 => "System.Int16",
-                PrimitiveTypeCode.Int32 => "System.Int32",
-                PrimitiveTypeCode.Int64 => "System.Int64",
-                PrimitiveTypeCode.IntPtr => "System.IntPtr",
-                PrimitiveTypeCode.Object => "System.Object",
-                PrimitiveTypeCode.SByte => "System.SByte",
-                PrimitiveTypeCode.Single => "System.Single",
-                PrimitiveTypeCode.String => "System.String",
-                PrimitiveTypeCode.TypedReference => "System.TypedReference",
-                PrimitiveTypeCode.UInt16 => "System.UInt16",
-                PrimitiveTypeCode.UInt32 => "System.UInt32",
-                PrimitiveTypeCode.UInt64 => "System.UInt64",
-                PrimitiveTypeCode.UIntPtr => "System.UIntPtr",
-                PrimitiveTypeCode.Void => "System.Void",
-                _ => typeCode.ToString(),
-            };
-        }
-
-        public string GetSZArrayType(string elementType) => $"{elementType}[]";
-
-        public string GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind)
-        {
-            return TryResolveTypeDefinitionIdentity(reader, _assemblyName, handle, out var identity)
-                ? identity.DisplayName
-                : GetTypeNameFallback(
-                    reader,
-                    reader.GetTypeDefinition(handle).Namespace,
-                    reader.GetTypeDefinition(handle).Name);
-        }
-
-        public string GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind)
-        {
-            return TryResolveTypeReferenceIdentity(reader, _assemblyName, handle, out var identity)
-                ? identity.DisplayName
-                : GetTypeNameFallback(
-                    reader,
-                    reader.GetTypeReference(handle).Namespace,
-                    reader.GetTypeReference(handle).Name);
-        }
-
-        public string GetTypeFromSpecification(
-            MetadataReader reader,
-            object? genericContext,
-            TypeSpecificationHandle handle,
-            byte rawTypeKind)
-        {
-            return reader.GetTypeSpecification(handle).DecodeSignature(this, genericContext);
-        }
-
-        private static string GetTypeNameFallback(
-            MetadataReader reader,
-            StringHandle namespaceHandle,
-            StringHandle typeNameHandle)
-        {
-            var namespaceName = reader.GetString(namespaceHandle);
-            var typeName = reader.GetString(typeNameHandle);
-            return string.IsNullOrEmpty(namespaceName)
-                ? typeName
-                : $"{namespaceName}.{typeName}";
-        }
-    }
+    private IReadOnlyList<AotCoreIrMethodArtifact> _genericStaticMethodCandidates =
+        Array.Empty<AotCoreIrMethodArtifact>();
 
     public NativeAotTemplateModel Create(
         NativeAotLoweringPlanArtifact loweringPlan,
@@ -504,35 +80,58 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         _methodsBySubjectId = aotCoreIr.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
+        _attributeStorageFieldIndex = BuildAttributeStorageFieldIndex(_methodsBySubjectId);
         _referenceTypeBaseSubjectIds = CollectReferenceTypeBaseSubjectIds(aotCoreIr);
         _referenceTypeImplementedInterfaceSubjectIds = CollectReferenceTypeImplementedInterfaceSubjectIds(aotCoreIr);
         _valueTypeSubjectIds = CollectValueTypeSubjectIds(aotCoreIr);
 
         var reachableMethods = CollectReachableMethods(aotCoreIr, entryMethod);
-        _customAttributeSupport = BuildCustomAttributeSupportModel(
-            reachableMethods,
-            closureManifest,
-            supplementalMetadataTemplate);
-        _assemblyReflectionSupport = BuildAssemblyReflectionSupportModel(
-            reachableMethods,
-            closureManifest,
-            supplementalMetadataTemplate);
-        _reflectionMemberSupport = BuildReflectionMemberSupportModel(
-            reachableMethods,
-            closureManifest,
-            supplementalMetadataTemplate);
-        _staticFieldDataSupport = BuildStaticFieldDataSupportModel(
-            reachableMethods,
-            closureManifest,
-            metadataRegistration);
+        var stringLiterals = CollectStringLiterals(reachableMethods);
+        _stringIdMapping = BuildStringIdMapping(stringLiterals);
+        _cachedClosureAssemblyPaths = EnumerateClosureAssemblyPaths(closureManifest).ToArray();
+        _closureAssemblyPathByName = BuildClosureAssemblyPathByNameCore(_cachedClosureAssemblyPaths);
+        _methodsGroupedByDeclaringType = _methodsBySubjectId.Values
+            .Where(m => !string.IsNullOrWhiteSpace(m.Identity.DeclaringTypeSubjectId))
+            .OrderBy(m => m.Identity.DeclaringTypeSubjectId, StringComparer.Ordinal)
+            .ThenBy(m => m.SubjectId, StringComparer.Ordinal)
+            .GroupBy(m => m.Identity.DeclaringTypeSubjectId, StringComparer.Ordinal)
+            .ToArray();
+        _genericStaticMethodCandidates = _methodsBySubjectId.Values
+            .Where(c => c.IsStatic && c.ParameterCount == 1 && c.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.NativeInt && c.ParameterAbis.Count == 1 && c.ParameterAbis[0].CarrierKindCode == AotCoreIrAbiCarrierKind.NativeInt && c.SubjectId.Contains("!!0", StringComparison.Ordinal))
+            .OrderBy(c => c.SubjectId, StringComparer.Ordinal)
+            .ToArray();
+        CustomAttributeSupportModel? customAttributeSupport = null;
+        AssemblyReflectionSupportModel? assemblyReflectionSupport = null;
+        ReflectionMemberSupportModel? reflectionMemberSupport = null;
+        StaticFieldDataSupportModel? staticFieldDataSupport = null;
+
+        Parallel.Invoke(
+            () => customAttributeSupport = BuildCustomAttributeSupportModel(
+                reachableMethods,
+                supplementalMetadataTemplate),
+            () => assemblyReflectionSupport = BuildAssemblyReflectionSupportModel(
+                reachableMethods,
+                supplementalMetadataTemplate),
+            () => reflectionMemberSupport = BuildReflectionMemberSupportModel(
+                reachableMethods,
+                supplementalMetadataTemplate),
+            () => staticFieldDataSupport = BuildStaticFieldDataSupportModel(
+                reachableMethods,
+                metadataRegistration));
+
+        _customAttributeSupport = customAttributeSupport!;
+        _assemblyReflectionSupport = assemblyReflectionSupport!;
+        _reflectionMemberSupport = reflectionMemberSupport!;
+        _staticFieldDataSupport = staticFieldDataSupport!;
         _staticInitializationSupport = BuildStaticInitializationSupportModel(
             reachableMethods,
             closureManifest);
         var externalRuntimeHelpers = CollectExternalRuntimeHelpers(reachableMethods, _staticInitializationSupport);
-        var objectModelBuilder = new StringBuilder();
+        var objectModelBuilder = new StringBuilder(65536);
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
         EmitObjectModelDeclarations(objectModelBuilder, reachableMethods, externalRuntimeHelpers);
         EmitReachableMethodForwardDeclarations(objectModelBuilder, reachableMethods);
+        EmitStringIdTable(objectModelBuilder, stringLiterals);
         if (externalRuntimeHelpers.Any(helper => IsSpanRuntimeHelperSubjectId(helper.SubjectId)))
         {
             EmitSpanRuntimePrelude(objectModelBuilder, _staticFieldDataSupport);
@@ -541,15 +140,14 @@ public sealed partial class NativeAotLoweringPlanner
         EmitExternalRuntimeHelperDefinitions(objectModelBuilder, externalRuntimeHelpers);
         EmitStaticInitializationDefinitions(objectModelBuilder);
 
-        var methodDeclarations = BuildMethodDeclarations(reachableMethods)
-            .ToArray();
+        var methodDeclarations = BuildMethodDeclarations(reachableMethods);
         var methods = reachableMethods
             .Select(method => new NativeAotMethodTemplateModel
             {
                 SubjectId = method.SubjectId,
                 MethodSource = BuildMethodSource(method),
             })
-            .ToArray();
+            .ToList();
         var entryBridgeArguments = BuildEntryBridgeArguments(entryMethod);
 
         return new NativeAotTemplateModel
@@ -557,21 +155,7 @@ public sealed partial class NativeAotLoweringPlanner
             Includes =
             [
                 "<chaos/common.h>",
-                "<array>",
-                "<cstddef>",
-                "<cstdint>",
-                "<cstdio>",
-                "<cstdlib>",
-                "<cstring>",
-                "<limits>",
-                "<chrono>",
-                "<memory>",
-                "<mutex>",
-                "<string>",
-                "<thread>",
-                "<unordered_map>",
-                "<utility>",
-                "<vector>",
+                "\"runtime_core.h\"",
             ],
             ObjectModelCode = objectModelBuilder.ToString().TrimEnd(),
             MethodDeclarations = methodDeclarations,
@@ -611,7 +195,8 @@ public sealed partial class NativeAotLoweringPlanner
 
     private string BuildMethodSource(AotCoreIrMethodArtifact method)
     {
-        var builder = new StringBuilder();
+        _sharedMethodSourceBuilder.Clear();
+        var builder = _sharedMethodSourceBuilder;
         if (!string.IsNullOrWhiteSpace(method.OpenDefinitionSubjectId) ||
             method.SharedGenericBodyId is not null ||
             method.InstantiationStubId is not null ||
@@ -655,16 +240,15 @@ public sealed partial class NativeAotLoweringPlanner
         var delegateTypeSubjectIds = CollectReachableDelegateTypeSubjectIds(reachableMethods)
             .Where(subjectId =>
                 !string.Equals(subjectId, DelegateTypeSubjectId, StringComparison.Ordinal) &&
-                !string.Equals(subjectId, MulticastDelegateTypeSubjectId, StringComparison.Ordinal))
-            .ToArray();
+                !string.Equals(subjectId, MulticastDelegateTypeSubjectId, StringComparison.Ordinal));
 
-        builder.AppendLine("using chaos_delegate_invocation_list = std::vector<std::intptr_t>;");
+        builder.AppendLine("using chaos_delegate_invocation_list = CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR);");
         builder.AppendLine();
-        builder.AppendLine("chaos_type_System_Private_CoreLib_System_Delegate* chaos_require_delegate(std::intptr_t chaos_delegate_value)");
+        builder.AppendLine("chaos_type_System_Private_CoreLib_System_Delegate* chaos_require_delegate(CHAOS_IL2CPP_INTPTR chaos_delegate_value)");
         builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_delegate_value == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("    if (chaos_delegate_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
         builder.AppendLine("    {");
-        builder.AppendLine("        std::abort();");
+        builder.AppendLine("        CHAOS_IL2CPP_ABORT();");
         builder.AppendLine("    }");
         builder.AppendLine();
         builder.AppendLine("    return reinterpret_cast<chaos_type_System_Private_CoreLib_System_Delegate*>(chaos_delegate_value);");
@@ -674,8 +258,8 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine("    const chaos_type_System_Private_CoreLib_System_Delegate* chaos_delegate) noexcept");
         builder.AppendLine("{");
         builder.AppendLine("    if (chaos_delegate == nullptr ||");
-        builder.AppendLine("        chaos_delegate->chaos_delegate_invocation_list == static_cast<std::intptr_t>(0) ||");
-        builder.AppendLine("        chaos_delegate->chaos_delegate_invocation_count <= static_cast<std::intptr_t>(0))");
+        builder.AppendLine("        chaos_delegate->chaos_delegate_invocation_list == static_cast<CHAOS_IL2CPP_INTPTR>(0) ||");
+        builder.AppendLine("        chaos_delegate->chaos_delegate_invocation_count <= static_cast<CHAOS_IL2CPP_INTPTR>(0))");
         builder.AppendLine("    {");
         builder.AppendLine("        return nullptr;");
         builder.AppendLine("    }");
@@ -684,15 +268,15 @@ public sealed partial class NativeAotLoweringPlanner
             "    return reinterpret_cast<const chaos_delegate_invocation_list*>(chaos_delegate->chaos_delegate_invocation_list);");
         builder.AppendLine("}");
         builder.AppendLine();
-        builder.AppendLine("bool chaos_delegate_single_entry_equals(std::intptr_t chaos_left_value, std::intptr_t chaos_right_value) noexcept");
+        builder.AppendLine("bool chaos_delegate_single_entry_equals(CHAOS_IL2CPP_INTPTR chaos_left_value, CHAOS_IL2CPP_INTPTR chaos_right_value) noexcept");
         builder.AppendLine("{");
         builder.AppendLine("    if (chaos_left_value == chaos_right_value)");
         builder.AppendLine("    {");
         builder.AppendLine("        return true;");
         builder.AppendLine("    }");
         builder.AppendLine();
-        builder.AppendLine("    if (chaos_left_value == static_cast<std::intptr_t>(0) ||");
-        builder.AppendLine("        chaos_right_value == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("    if (chaos_left_value == static_cast<CHAOS_IL2CPP_INTPTR>(0) ||");
+        builder.AppendLine("        chaos_right_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
         builder.AppendLine("    {");
         builder.AppendLine("        return false;");
         builder.AppendLine("    }");
@@ -706,9 +290,9 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine();
         builder.AppendLine("void chaos_delegate_append_flattened_entries(");
         builder.AppendLine("    chaos_delegate_invocation_list& chaos_entries,");
-        builder.AppendLine("    std::intptr_t chaos_delegate_value)");
+        builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_value)");
         builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_delegate_value == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("    if (chaos_delegate_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
         builder.AppendLine("    {");
         builder.AppendLine("        return;");
         builder.AppendLine("    }");
@@ -717,9 +301,9 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine("    const auto* chaos_invocation_list = chaos_try_get_delegate_invocation_list(chaos_delegate);");
         builder.AppendLine("    if (chaos_invocation_list == nullptr)");
         builder.AppendLine("    {");
-        builder.AppendLine("        if (chaos_delegate->chaos_delegate_method_ptr == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("        if (chaos_delegate->chaos_delegate_method_ptr == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
         builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
+        builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
         builder.AppendLine("        }");
         builder.AppendLine();
         builder.AppendLine("        chaos_entries.push_back(chaos_delegate_value);");
@@ -727,9 +311,9 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine("    }");
         builder.AppendLine();
         builder.AppendLine(
-            "    if (static_cast<std::intptr_t>(chaos_invocation_list->size()) != chaos_delegate->chaos_delegate_invocation_count)");
+            "    if (static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size()) != chaos_delegate->chaos_delegate_invocation_count)");
         builder.AppendLine("    {");
-        builder.AppendLine("        std::abort();");
+        builder.AppendLine("        CHAOS_IL2CPP_ABORT();");
         builder.AppendLine("    }");
         builder.AppendLine();
         builder.AppendLine("    for (const auto chaos_entry_value : *chaos_invocation_list)");
@@ -751,12 +335,12 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine("        const auto* chaos_entry = chaos_require_delegate(chaos_entry_value);");
         builder.AppendLine("        if (chaos_entry->header.type_id != chaos_first->header.type_id)");
         builder.AppendLine("        {");
-        builder.AppendLine("            std::abort();");
+        builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
         builder.AppendLine("        }");
         builder.AppendLine("    }");
         builder.AppendLine("}");
         builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_delegate_allocate_with_type_id(std::intptr_t chaos_delegate_type_id)");
+        builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_delegate_allocate_with_type_id(CHAOS_IL2CPP_INTPTR chaos_delegate_type_id)");
         builder.AppendLine("{");
         builder.AppendLine("    switch (chaos_delegate_type_id)");
         builder.AppendLine("    {");
@@ -766,22 +350,22 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine("        {");
             builder.AppendLine($"            auto* chaos_delegate = new {GetNativeTypeSymbol(delegateTypeSubjectId)}{{}};");
             builder.AppendLine($"            chaos_delegate->header.type_id = {GetNativeTypeIdSymbol(delegateTypeSubjectId)};");
-            builder.AppendLine("            return reinterpret_cast<std::intptr_t>(chaos_delegate);");
+            builder.AppendLine("            return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_delegate);");
             builder.AppendLine("        }");
         }
 
         builder.AppendLine("        default:");
-        builder.AppendLine("            std::abort();");
+        builder.AppendLine("            CHAOS_IL2CPP_ABORT();");
         builder.AppendLine("    }");
         builder.AppendLine("}");
         builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_delegate_create_multicast_like(");
-        builder.AppendLine("    std::intptr_t chaos_template_delegate_value,");
+        builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_delegate_create_multicast_like(");
+        builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_template_delegate_value,");
         builder.AppendLine("    const chaos_delegate_invocation_list& chaos_entries)");
         builder.AppendLine("{");
         builder.AppendLine("    if (chaos_entries.empty())");
         builder.AppendLine("    {");
-        builder.AppendLine("        return static_cast<std::intptr_t>(0);");
+        builder.AppendLine("        return static_cast<CHAOS_IL2CPP_INTPTR>(0);");
         builder.AppendLine("    }");
         builder.AppendLine();
         builder.AppendLine("    if (chaos_entries.size() == 1)");
@@ -794,23 +378,23 @@ public sealed partial class NativeAotLoweringPlanner
             "    const auto chaos_delegate_value = chaos_delegate_allocate_with_type_id(chaos_template_delegate->header.type_id);");
         builder.AppendLine("    auto* chaos_delegate = chaos_require_delegate(chaos_delegate_value);");
         builder.AppendLine("    auto* chaos_invocation_list = new chaos_delegate_invocation_list(chaos_entries);");
-        builder.AppendLine("    chaos_delegate->chaos_delegate_target = static_cast<std::intptr_t>(0);");
-        builder.AppendLine("    chaos_delegate->chaos_delegate_method_ptr = static_cast<std::intptr_t>(0);");
+        builder.AppendLine("    chaos_delegate->chaos_delegate_target = static_cast<CHAOS_IL2CPP_INTPTR>(0);");
+        builder.AppendLine("    chaos_delegate->chaos_delegate_method_ptr = static_cast<CHAOS_IL2CPP_INTPTR>(0);");
         builder.AppendLine(
-            "    chaos_delegate->chaos_delegate_invocation_list = reinterpret_cast<std::intptr_t>(chaos_invocation_list);");
+            "    chaos_delegate->chaos_delegate_invocation_list = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list);");
         builder.AppendLine(
-            "    chaos_delegate->chaos_delegate_invocation_count = static_cast<std::intptr_t>(chaos_invocation_list->size());");
+            "    chaos_delegate->chaos_delegate_invocation_count = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size());");
         builder.AppendLine("    return chaos_delegate_value;");
         builder.AppendLine("}");
         builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_delegate_combine(std::intptr_t chaos_left_value, std::intptr_t chaos_right_value)");
+        builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_delegate_combine(CHAOS_IL2CPP_INTPTR chaos_left_value, CHAOS_IL2CPP_INTPTR chaos_right_value)");
         builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_left_value == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("    if (chaos_left_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
         builder.AppendLine("    {");
         builder.AppendLine("        return chaos_right_value;");
         builder.AppendLine("    }");
         builder.AppendLine();
-        builder.AppendLine("    if (chaos_right_value == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("    if (chaos_right_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
         builder.AppendLine("    {");
         builder.AppendLine("        return chaos_left_value;");
         builder.AppendLine("    }");
@@ -822,14 +406,14 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine("    return chaos_delegate_create_multicast_like(chaos_left_value, chaos_entries);");
         builder.AppendLine("}");
         builder.AppendLine();
-        builder.AppendLine("std::intptr_t chaos_delegate_remove(std::intptr_t chaos_source_value, std::intptr_t chaos_value_to_remove)");
+        builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_delegate_remove(CHAOS_IL2CPP_INTPTR chaos_source_value, CHAOS_IL2CPP_INTPTR chaos_value_to_remove)");
         builder.AppendLine("{");
-        builder.AppendLine("    if (chaos_source_value == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("    if (chaos_source_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
         builder.AppendLine("    {");
-        builder.AppendLine("        return static_cast<std::intptr_t>(0);");
+        builder.AppendLine("        return static_cast<CHAOS_IL2CPP_INTPTR>(0);");
         builder.AppendLine("    }");
         builder.AppendLine();
-        builder.AppendLine("    if (chaos_value_to_remove == static_cast<std::intptr_t>(0))");
+        builder.AppendLine("    if (chaos_value_to_remove == static_cast<CHAOS_IL2CPP_INTPTR>(0))");
         builder.AppendLine("    {");
         builder.AppendLine("        return chaos_source_value;");
         builder.AppendLine("    }");
@@ -844,15 +428,15 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine("    }");
         builder.AppendLine();
         builder.AppendLine(
-            "    for (std::intptr_t chaos_start = static_cast<std::intptr_t>(chaos_source_entries.size() - chaos_remove_entries.size());");
-        builder.AppendLine("         chaos_start >= static_cast<std::intptr_t>(0);");
+            "    for (CHAOS_IL2CPP_INTPTR chaos_start = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_source_entries.size() - chaos_remove_entries.size());");
+        builder.AppendLine("         chaos_start >= static_cast<CHAOS_IL2CPP_INTPTR>(0);");
         builder.AppendLine("         --chaos_start)");
         builder.AppendLine("    {");
         builder.AppendLine("        bool chaos_matches = true;");
-        builder.AppendLine("        for (std::size_t chaos_index = 0; chaos_index < chaos_remove_entries.size(); ++chaos_index)");
+        builder.AppendLine("        for (CHAOS_IL2CPP_SIZE chaos_index = 0; chaos_index < chaos_remove_entries.size(); ++chaos_index)");
         builder.AppendLine("        {");
         builder.AppendLine(
-            "            if (!chaos_delegate_single_entry_equals(chaos_source_entries[static_cast<std::size_t>(chaos_start) + chaos_index], chaos_remove_entries[chaos_index]))");
+            "            if (!chaos_delegate_single_entry_equals(chaos_source_entries[static_cast<CHAOS_IL2CPP_SIZE>(chaos_start) + chaos_index], chaos_remove_entries[chaos_index]))");
         builder.AppendLine("            {");
         builder.AppendLine("                chaos_matches = false;");
         builder.AppendLine("                break;");
@@ -865,10 +449,10 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine("        }");
         builder.AppendLine();
         builder.AppendLine(
-            "        chaos_source_entries.erase(chaos_source_entries.begin() + static_cast<std::size_t>(chaos_start), chaos_source_entries.begin() + static_cast<std::size_t>(chaos_start) + chaos_remove_entries.size());");
+            "        chaos_source_entries.erase(chaos_source_entries.begin() + static_cast<CHAOS_IL2CPP_SIZE>(chaos_start), chaos_source_entries.begin() + static_cast<CHAOS_IL2CPP_SIZE>(chaos_start) + chaos_remove_entries.size());");
         builder.AppendLine("        if (chaos_source_entries.empty())");
         builder.AppendLine("        {");
-        builder.AppendLine("            return static_cast<std::intptr_t>(0);");
+        builder.AppendLine("            return static_cast<CHAOS_IL2CPP_INTPTR>(0);");
         builder.AppendLine("        }");
         builder.AppendLine();
         builder.AppendLine("        if (chaos_source_entries.size() == 1)");
@@ -899,7 +483,7 @@ public sealed partial class NativeAotLoweringPlanner
                     subjectIds.Add(targetReference.SubjectId);
                 }
 
-                if (!string.IsNullOrWhiteSpace(instruction.Callee) &&
+                if (!string.IsNullOrEmpty(instruction.Callee) &&
                     instruction.Callee.Contains("::Invoke(", StringComparison.Ordinal))
                 {
                     var declaringTypeSubjectId = GetMethodDeclaringTypeSubjectId(instruction.Callee);
@@ -909,7 +493,7 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                 }
 
-                if (!string.IsNullOrWhiteSpace(instruction.Callee) &&
+                if (!string.IsNullOrEmpty(instruction.Callee) &&
                     TryReadSingleGenericTypeArgument(
                         instruction.Callee,
                         MarshalGetFunctionPointerForDelegateMethodPrefix,
@@ -920,7 +504,7 @@ public sealed partial class NativeAotLoweringPlanner
                     subjectIds.Add(marshalDelegateTypeSubjectId);
                 }
 
-                if (!string.IsNullOrWhiteSpace(instruction.Callee) &&
+                if (!string.IsNullOrEmpty(instruction.Callee) &&
                     TryReadSingleGenericTypeArgument(
                         instruction.Callee,
                         MarshalGetDelegateForFunctionPointerMethodPrefix,
@@ -944,11 +528,11 @@ public sealed partial class NativeAotLoweringPlanner
             .ToArray();
     }
 
-    private static IReadOnlyDictionary<string, string> BuildClosureAssemblyPathByName(
-        ManagedClosureManifestArtifact closureManifest)
+    private static IReadOnlyDictionary<string, string> BuildClosureAssemblyPathByNameCore(
+        IReadOnlyList<string> closureAssemblyPaths)
     {
-        var pathsByAssemblyName = new Dictionary<string, string>(StringComparer.Ordinal);
-        foreach (var assemblyPath in EnumerateClosureAssemblyPaths(closureManifest))
+        var pathsByAssemblyName = new Dictionary<string, string>(closureAssemblyPaths.Count, StringComparer.Ordinal);
+        foreach (var assemblyPath in closureAssemblyPaths)
         {
             using var stream = File.OpenRead(assemblyPath);
             using var peReader = new PEReader(stream);
@@ -1081,7 +665,7 @@ public sealed partial class NativeAotLoweringPlanner
             return true;
         }
 
-        if (string.IsNullOrWhiteSpace(typeEntry.DefinitionSubjectId) ||
+        if (string.IsNullOrEmpty(typeEntry.DefinitionSubjectId) ||
             string.Equals(typeEntry.SubjectId, typeEntry.DefinitionSubjectId, StringComparison.Ordinal))
         {
             typeDefinitionHandle = default;
@@ -1120,7 +704,7 @@ public sealed partial class NativeAotLoweringPlanner
             return true;
         }
 
-        if (string.IsNullOrWhiteSpace(methodEntry.DefinitionSubjectId))
+        if (string.IsNullOrEmpty(methodEntry.DefinitionSubjectId))
         {
             methodDefinitionHandle = default;
             return false;
@@ -1364,7 +948,7 @@ public sealed partial class NativeAotLoweringPlanner
                         declaringTypeIdentity.SubjectId,
                         methodHandle,
                         out var targetSubjectId) ||
-                    string.IsNullOrWhiteSpace(targetSubjectId))
+                    string.IsNullOrEmpty(targetSubjectId))
                 {
                     continue;
                 }
@@ -1396,8 +980,8 @@ public sealed partial class NativeAotLoweringPlanner
             new MetadataMethodSignatureTypeNameProvider(metadataReader, assemblyName),
             genericContext: null);
         var methodName = metadataReader.GetString(methodDefinition.Name);
-        if (string.IsNullOrWhiteSpace(methodName) ||
-            string.IsNullOrWhiteSpace(signature.ReturnType))
+        if (string.IsNullOrEmpty(methodName) ||
+            string.IsNullOrEmpty(signature.ReturnType))
         {
             return false;
         }
@@ -1479,7 +1063,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         foreach (var namedArgument in decodedValue.NamedArguments)
         {
-            if (string.IsNullOrWhiteSpace(namedArgument.Name))
+            if (string.IsNullOrEmpty(namedArgument.Name))
             {
                 throw new NotSupportedException(
                     $"native-aot custom-attribute materialization found an unnamed argument on '{attributeTypeSubjectId}'.");
@@ -1517,7 +1101,7 @@ public sealed partial class NativeAotLoweringPlanner
                 }
 
                 if (!TryResolveMemberInfoIsDefinedAttributeTypeSubjectId(method.Instructions, index, out var attributeTypeSubjectId) ||
-                    string.IsNullOrWhiteSpace(attributeTypeSubjectId))
+                    string.IsNullOrEmpty(attributeTypeSubjectId))
                 {
                     throw new NotSupportedException(
                         $"native-aot custom-attribute IsDefined requires a direct typeof(T) attribute argument in '{method.SubjectId}' at IL offset {instruction.IlOffset}.");
@@ -1554,14 +1138,14 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         if (loadTokenInstruction.TargetReference?.Kind == AotCoreIrReferenceKind.Type &&
-            !string.IsNullOrWhiteSpace(loadTokenInstruction.TargetReference.SubjectId))
+            !string.IsNullOrEmpty(loadTokenInstruction.TargetReference.SubjectId))
         {
             attributeTypeSubjectId = loadTokenInstruction.TargetReference.SubjectId;
             return true;
         }
 
         if (loadTokenInstruction.Operand is string directSubjectId &&
-            !string.IsNullOrWhiteSpace(directSubjectId))
+            !string.IsNullOrEmpty(directSubjectId))
         {
             attributeTypeSubjectId = directSubjectId;
             return true;
@@ -1570,7 +1154,7 @@ public sealed partial class NativeAotLoweringPlanner
         if (loadTokenInstruction.Operand is JsonElement { ValueKind: JsonValueKind.String } element)
         {
             var jsonSubjectId = element.GetString();
-            if (!string.IsNullOrWhiteSpace(jsonSubjectId))
+            if (!string.IsNullOrEmpty(jsonSubjectId))
             {
                 attributeTypeSubjectId = jsonSubjectId;
                 return true;
@@ -1592,7 +1176,7 @@ public sealed partial class NativeAotLoweringPlanner
         var methodDefinition = metadataReader.GetMethodDefinition((MethodDefinitionHandle)constructorHandle);
         return methodDefinition.GetParameters()
             .Select(handle => metadataReader.GetString(metadataReader.GetParameter(handle).Name))
-            .Where(name => !string.IsNullOrWhiteSpace(name))
+            .Where(name => !string.IsNullOrEmpty(name))
             .ToArray();
     }
 
@@ -1618,7 +1202,7 @@ public sealed partial class NativeAotLoweringPlanner
         int totalArgumentCount)
     {
         if (argumentIndex < constructorParameterNames.Count &&
-            !string.IsNullOrWhiteSpace(constructorParameterNames[argumentIndex]))
+            !string.IsNullOrEmpty(constructorParameterNames[argumentIndex]))
         {
             var parameterName = constructorParameterNames[argumentIndex];
             return char.ToUpperInvariant(parameterName[0]) + parameterName[1..];
@@ -1637,19 +1221,66 @@ public sealed partial class NativeAotLoweringPlanner
         string attributeTypeSubjectId,
         string memberName)
     {
-        var getterMethod = _methodsBySubjectId.Values.FirstOrDefault(method =>
-            string.Equals(method.Identity.DeclaringTypeSubjectId, attributeTypeSubjectId, StringComparison.Ordinal) &&
-            method.SubjectId.Contains($"::get_{memberName}:", StringComparison.Ordinal) &&
-            !method.IsStatic &&
-            method.ParameterCount == 0);
-        if (getterMethod is not null &&
-            TryGetAutoGetterStorageFieldSubjectId(getterMethod, out var fieldSubjectId) &&
-            !string.IsNullOrWhiteSpace(fieldSubjectId))
+        var key = $"{attributeTypeSubjectId}:{memberName}";
+        if (_attributeStorageFieldIndex.TryGetValue(key, out var cached))
         {
-            return fieldSubjectId!;
+            return cached;
         }
 
         return ManagedNaming.CreateFieldSubjectId(attributeTypeSubjectId, memberName);
+    }
+
+    private static Dictionary<string, string> BuildAttributeStorageFieldIndex(
+        IReadOnlyDictionary<string, AotCoreIrMethodArtifact> methodsBySubjectId)
+    {
+        var index = new Dictionary<string, string>(methodsBySubjectId.Count, StringComparer.Ordinal);
+        foreach (var method in methodsBySubjectId.Values)
+        {
+            if (method.IsStatic || method.ParameterCount != 0)
+            {
+                continue;
+            }
+
+            // Check if this method is a property getter (auto-property pattern)
+            var getterMemberName = ExtractGetterMemberName(method);
+            if (getterMemberName is null)
+            {
+                continue;
+            }
+
+            if (!TryGetAutoGetterStorageFieldSubjectId(method, out var fieldSubjectId) ||
+                string.IsNullOrEmpty(fieldSubjectId))
+            {
+                continue;
+            }
+
+            var declaringType = method.Identity.DeclaringTypeSubjectId;
+            var key = $"{declaringType}:{getterMemberName}";
+            index.TryAdd(key, fieldSubjectId!);
+        }
+
+        return index;
+    }
+
+    private static string? ExtractGetterMemberName(AotCoreIrMethodArtifact method)
+    {
+        var subjectId = method.SubjectId;
+        var getterPrefix = "::get_";
+        var getterSuffix = ":";
+        var startIndex = subjectId.IndexOf(getterPrefix, StringComparison.Ordinal);
+        if (startIndex < 0)
+        {
+            return null;
+        }
+
+        startIndex += getterPrefix.Length;
+        var endIndex = subjectId.IndexOf(getterSuffix, startIndex, StringComparison.Ordinal);
+        if (endIndex < 0)
+        {
+            return null;
+        }
+
+        return subjectId[startIndex..endIndex];
     }
 
     private static bool TryGetAutoGetterStorageFieldSubjectId(
@@ -1707,7 +1338,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             foreach (var resolvedAssembly in closureManifest.ResolvedAssemblies)
             {
-                if (!string.IsNullOrWhiteSpace(resolvedAssembly.Path))
+                if (!string.IsNullOrEmpty(resolvedAssembly.Path))
                 {
                     yield return Path.GetFullPath(resolvedAssembly.Path);
                 }
@@ -1739,7 +1370,7 @@ public sealed partial class NativeAotLoweringPlanner
         const string openGenericMethodPrefix =
             "System.Private.CoreLib/System.Reflection.CustomAttributeExtensions::GetCustomAttribute<";
 
-        if (string.IsNullOrWhiteSpace(callee) ||
+        if (string.IsNullOrEmpty(callee) ||
             !string.Equals(GetMethodDeclaringTypeSubjectId(callee), declaringTypeSubjectId, StringComparison.Ordinal) ||
             !GetMethodName(callee).StartsWith("GetCustomAttribute<", StringComparison.Ordinal) ||
             !GetMethodParameterTypes(callee).SequenceEqual(["System.Reflection.MemberInfo"]) ||
@@ -1749,7 +1380,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         attributeDisplayName = GetTypeDisplayName(attributeTypeName);
-        return !string.IsNullOrWhiteSpace(attributeDisplayName);
+        return !string.IsNullOrEmpty(attributeDisplayName);
     }
 
     private static bool TryParseAttributeGetterMethodSubjectId(
@@ -1759,7 +1390,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         attributeTypeSubjectId = null;
         memberName = null;
-        if (string.IsNullOrWhiteSpace(subjectId) ||
+        if (string.IsNullOrEmpty(subjectId) ||
             !subjectId.EndsWith("()", StringComparison.Ordinal))
         {
             return false;
@@ -1773,8 +1404,8 @@ public sealed partial class NativeAotLoweringPlanner
 
         attributeTypeSubjectId = subjectId[..separatorIndex];
         memberName = subjectId.Substring(separatorIndex + "::get_".Length, subjectId.Length - separatorIndex - "::get_".Length - 2);
-        return !string.IsNullOrWhiteSpace(attributeTypeSubjectId) &&
-               !string.IsNullOrWhiteSpace(memberName);
+        return !string.IsNullOrEmpty(attributeTypeSubjectId) &&
+               !string.IsNullOrEmpty(memberName);
     }
 
     private static bool TryGetAttributeTypeIdentity(

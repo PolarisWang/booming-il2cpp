@@ -282,6 +282,27 @@
       ]
     },
     {
+      "id": "foundation-dll-execute",
+      "title": "Execute a generated foundation-dll family entry",
+      "group": "Test And Verify",
+      "handler": "foundation_dll.dispatch",
+      "platforms": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "tokens": [
+        "foundation-dll",
+        "execute"
+      ],
+      "target": "foundation-dll",
+      "syntax": "foundation-dll execute --assembly <assembly> --family <family-id> --kind <test|native|benchmark|host|patch>",
+      "show_in_menu": false,
+      "examples": [
+        "run foundation-dll execute --assembly System.Private.CoreLib --family family/System.Private.CoreLib/convert/char --kind test"
+      ]
+    },
+    {
       "id": "foundation-dll-promote",
       "title": "Promote candidate denominator ledger to formal authority",
       "group": "Test And Verify",

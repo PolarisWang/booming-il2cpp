@@ -56,8 +56,8 @@ public sealed partial class NativeAotLoweringPlanner
 
                 return new ScriptObject
                 {
-                    ["sanitized_field_subject_id"] = SanitizeSubjectId(entry.FieldSubjectId),
-                    ["field_handle_literal"] = GetFieldHandleLiteral(entry.FieldSubjectId),
+                    ["sanitized_field_subject_id"] = NativeAotLoweringPlanner.SanitizeSubjectId(entry.FieldSubjectId),
+                    ["field_handle_literal"] = NativeAotLoweringPlanner.GetFieldHandleLiteral(entry.FieldSubjectId),
                     ["byte_rows"] = byteRows,
                 };
             })

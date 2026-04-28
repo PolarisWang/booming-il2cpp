@@ -29,6 +29,7 @@ internal static class RuntimeSkeletonSemanticRegistry
     public const string WideNumericFamilyId = "wide-numeric";
     public const string CalendarStructFamilyId = "calendar-struct";
     public const string IdentityStructFamilyId = "identity-struct";
+    public const string VectorManagedInvokeFamilyId = "vector-managed-invoke";
     public const string CompanionManagedInvokeFamilyId = "owner-attached-companion";
     public const string DateTimeSemanticEngineFamilyId = "datetime-semantic-engine";
     public const string GlobalizationDateTimeSupportFamilyId = "globalization-datetime-support";
@@ -229,6 +230,21 @@ internal static class RuntimeSkeletonSemanticRegistry
             SupportsInstanceMethods: true,
             SupportsConstructors: true,
             SupportsInstanceFieldGetters: true),
+        new(
+            VectorManagedInvokeFamilyId,
+            "/System.Numerics.Vector2::",
+            RuntimeSkeletonExecutionBackendKind.ManagedInvoke,
+            SupportsInstanceMethods: true),
+        new(
+            VectorManagedInvokeFamilyId,
+            "/System.Numerics.Vector3::",
+            RuntimeSkeletonExecutionBackendKind.ManagedInvoke,
+            SupportsInstanceMethods: true),
+        new(
+            VectorManagedInvokeFamilyId,
+            "/System.Numerics.Vector4::",
+            RuntimeSkeletonExecutionBackendKind.ManagedInvoke,
+            SupportsInstanceMethods: true),
         new(
             CompanionManagedInvokeFamilyId,
             "/System.DateTime+LeapSecondCache::",

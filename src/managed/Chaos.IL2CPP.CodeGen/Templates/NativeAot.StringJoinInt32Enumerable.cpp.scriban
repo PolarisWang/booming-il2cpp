@@ -1,14 +1,14 @@
-extern "C" std::intptr_t {{ helper_symbol }}(std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1)
+extern "C" CHAOS_IL2CPP_INTPTR {{ helper_symbol }}(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
 {
-    if (chaos_arg_1 == static_cast<std::intptr_t>(0))
+    if (chaos_arg_1 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
     {
-        std::abort();
+        CHAOS_IL2CPP_ABORT();
     }
 
-    const char* chaos_separator_utf8 = chaos_arg_0 == static_cast<std::intptr_t>(0)
+    const char* chaos_separator_utf8 = chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0)
         ? ""
         : chaos_reflection_get_string_utf8(chaos_arg_0);
-    std::string chaos_joined;
+    CHAOS_IL2CPP_STRING chaos_joined;
     bool chaos_first = true;
     auto chaos_append_separator = [&]()
     {
@@ -32,21 +32,19 @@ extern "C" std::intptr_t {{ helper_symbol }}(std::intptr_t chaos_arg_0, std::int
         while (true)
         {
             const auto chaos_has_next = {{ entry.move_next_symbol }}(chaos_enumerator);
-            if (chaos_has_next == static_cast<std::intptr_t>(0))
+            if (chaos_has_next == static_cast<CHAOS_IL2CPP_INTPTR>(0))
             {
                 break;
             }
 
             chaos_append_separator();
             const auto chaos_current = {{ entry.get_current_symbol }}(chaos_enumerator);
-            char chaos_buffer[64]{};
-            std::snprintf(chaos_buffer, sizeof(chaos_buffer), "%d", static_cast<std::int32_t>(chaos_current));
-            chaos_joined += chaos_buffer;
+            ChaosIl2cpp::Common::format_append_to(chaos_joined, "{}", static_cast<CHAOS_IL2CPP_INT32>(chaos_current));
         }
 
         return chaos_reflection_create_string_utf8_copy(chaos_joined.c_str(), chaos_joined.size());
     }
 
 {{~ end }}
-    std::abort();
+    CHAOS_IL2CPP_ABORT();
 }

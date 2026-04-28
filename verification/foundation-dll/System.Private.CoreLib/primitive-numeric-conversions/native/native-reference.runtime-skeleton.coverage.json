@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/primitive/numeric-conversions",
+  "planKind": "family-runtime-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "requestedMethodCount": 15,
+  "emittedMethodCount": 15,
+  "uncoveredMethodCount": 0,
+  "uncoveredReasonCounts": {},
+  "uncoveredMethodSubjectIds": [],
+  "coveredMethodSubjectIds": [
+    "System.Private.CoreLib/System.Convert::ToBoolean:System.Boolean(System.String)",
+    "System.Private.CoreLib/System.Convert::ToByte:System.Byte(System.String)",
+    "System.Private.CoreLib/System.Convert::ToInt16:System.Int16(System.String)",
+    "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)",
+    "System.Private.CoreLib/System.Convert::ToInt64:System.Int64(System.String)",
+    "System.Private.CoreLib/System.Convert::ToSingle:System.Single(System.String)",
+    "System.Private.CoreLib/System.Convert::ToDouble:System.Double(System.String)",
+    "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)",
+    "System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)",
+    "System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)",
+    "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.Double)",
+    "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.Double)",
+    "System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)",
+    "System.Private.CoreLib/System.Int64::Parse:System.Int64(System.String)",
+    "System.Private.CoreLib/System.Double::Parse:System.Double(System.String)"
+  ]
+}

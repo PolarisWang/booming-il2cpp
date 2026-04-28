@@ -5,7 +5,7 @@ struct {{ stub_name }}_ManagedArgs
     void* arg0;
     void* arg1;
     void* arg2;
-    std::int32_t arg3;
+    CHAOS_IL2CPP_INT32 arg3;
 };
 
 int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(

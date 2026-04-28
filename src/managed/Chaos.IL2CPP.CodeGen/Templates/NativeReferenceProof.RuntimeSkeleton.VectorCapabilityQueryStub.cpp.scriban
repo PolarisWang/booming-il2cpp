@@ -1,0 +1,478 @@
+struct {{ stub_name }}_VectorCapabilityArgs
+{
+{{~ if capability_arg_count > 0 ~}}
+    {{ capability_arg0_cpp_type }} arg0;
+{{~ end ~}}
+{{~ if capability_arg_count > 1 ~}}
+    {{ capability_arg1_cpp_type }} arg1;
+{{~ end ~}}
+    {{ return_cpp_type }}* return_value;
+};
+
+// contract_id: {{ contract_id }}
+// kernel_semantic: {{ kernel_semantic_id }}
+// kernel_backend: {{ kernel_backend_kind }}
+int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    if (bridge == nullptr || managed_args == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    auto* request = static_cast<{{ stub_name }}_VectorCapabilityArgs*>(managed_args);
+    if (request->return_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    RuntimeTypeCapabilityInfoV0 capability_info = {};
+    capability_info.struct_size = sizeof(capability_info);
+    ImageHandle image = reinterpret_cast<ImageHandle>(const_cast<char*>({{ target_assembly_name_literal }}));
+    TypeInfoHandle scalar_type = nullptr;
+{{~ if scalar_resolution_kind == "ConcreteTypeToken" ~}}
+    scalar_type = bridge->resolve_type_by_token(image, {{ scalar_type_token }});
+{{~ else ~}}
+    const RuntimeAbiV0* runtime_abi = chaos_runtime_get_abi_v0();
+    if (runtime_abi != nullptr &&
+        bridge->resolve_method_by_token != nullptr &&
+        runtime_abi->method_get_generic_context != nullptr) {
+        MethodInfoHandle current_method = bridge->resolve_method_by_token(image, {{ target_method_token }});
+        GenericContextHandle generic_context = current_method != nullptr
+            ? runtime_abi->method_get_generic_context(current_method)
+            : nullptr;
+        if (generic_context != nullptr) {
+{{~ if scalar_resolution_kind == "ClassGenericArgument" ~}}
+            if (runtime_abi->generic_context_get_class_arg_count != nullptr &&
+                runtime_abi->generic_context_get_class_arg != nullptr &&
+                runtime_abi->generic_context_get_class_arg_count(generic_context) > static_cast<uint32_t>({{ scalar_generic_arg_index }})) {
+                scalar_type = runtime_abi->generic_context_get_class_arg(generic_context, static_cast<uint32_t>({{ scalar_generic_arg_index }}));
+            }
+{{~ else ~}}
+            if (runtime_abi->generic_context_get_method_arg_count != nullptr &&
+                runtime_abi->generic_context_get_method_arg != nullptr &&
+                runtime_abi->generic_context_get_method_arg_count(generic_context) > static_cast<uint32_t>({{ scalar_generic_arg_index }})) {
+                scalar_type = runtime_abi->generic_context_get_method_arg(generic_context, static_cast<uint32_t>({{ scalar_generic_arg_index }}));
+            }
+{{~ end ~}}
+        }
+    }
+{{~ end ~}}
+
+{{~ if capability_operation_id == "shift-left" || capability_operation_id == "shift-right-logical" || capability_operation_id == "shift-right-arithmetic" || capability_operation_id == "shift-right-dynamic" ~}}
+    if (scalar_type == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    if (bridge->query_type_capability(scalar_type, &capability_info) != CHAOS_BRIDGE_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+{{~ if capability_operation_id == "shift-left" ~}}
+    switch (capability_info.scalar_kind) {
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedShiftLeft<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}>(request->arg0, {{ shift_count_value_expression }});
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_UNSIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedShiftLeft<CHAOS_IL2CPP_UINT64, {{ return_cpp_type }}>(request->arg0, {{ shift_count_value_expression }});
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedShiftLeft<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}>(request->arg0, {{ shift_count_value_expression }});
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_UNSIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedShiftLeft<CHAOS_IL2CPP_UINTPTR, {{ return_cpp_type }}>(request->arg0, {{ shift_count_value_expression }});
+            return CHAOS_BRIDGE_STATUS_OK;
+        default:
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+{{~ else if capability_operation_id == "shift-right-logical" ~}}
+    switch (capability_info.scalar_kind) {
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedShiftRightLogical<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}>(request->arg0, {{ shift_count_value_expression }});
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_UNSIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedShiftRightLogical<CHAOS_IL2CPP_UINT64, {{ return_cpp_type }}>(request->arg0, {{ shift_count_value_expression }});
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedShiftRightLogical<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}>(request->arg0, {{ shift_count_value_expression }});
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_UNSIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedShiftRightLogical<CHAOS_IL2CPP_UINTPTR, {{ return_cpp_type }}>(request->arg0, {{ shift_count_value_expression }});
+            return CHAOS_BRIDGE_STATUS_OK;
+        default:
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+{{~ else if capability_operation_id == "shift-right-arithmetic" ~}}
+    switch (capability_info.scalar_kind) {
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedShiftRightArithmetic<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}>(request->arg0, {{ shift_count_value_expression }});
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedShiftRightArithmetic<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}>(request->arg0, {{ shift_count_value_expression }});
+            return CHAOS_BRIDGE_STATUS_OK;
+        default:
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+{{~ else if capability_operation_id == "shift-right-dynamic" ~}}
+    switch (capability_info.scalar_kind) {
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedShiftRightArithmetic<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}>(request->arg0, {{ shift_count_value_expression }});
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedShiftRightArithmetic<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}>(request->arg0, {{ shift_count_value_expression }});
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_UNSIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedShiftRightLogical<CHAOS_IL2CPP_UINT64, {{ return_cpp_type }}>(request->arg0, {{ shift_count_value_expression }});
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_UNSIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedShiftRightLogical<CHAOS_IL2CPP_UINTPTR, {{ return_cpp_type }}>(request->arg0, {{ shift_count_value_expression }});
+            return CHAOS_BRIDGE_STATUS_OK;
+        default:
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+{{~ end ~}}
+{{~ end ~}}
+
+{{~ if capability_operation_id == "fixed-multiply" || capability_operation_id == "fixed-divide" || capability_operation_id == "fixed-multiply-scalar-right" || capability_operation_id == "fixed-multiply-scalar-left" || capability_operation_id == "fixed-divide-scalar-right" ~}}
+    if (scalar_type == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    if (bridge->query_type_capability(scalar_type, &capability_info) != CHAOS_BRIDGE_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+{{~ if capability_operation_id == "fixed-multiply-scalar-right" || capability_operation_id == "fixed-divide-scalar-right" ~}}
+    if (request->arg1 == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+{{~ end ~}}
+{{~ if capability_operation_id == "fixed-multiply-scalar-left" ~}}
+    if (request->arg0 == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+{{~ end ~}}
+
+    switch (capability_info.scalar_kind) {
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_SIGNED_INTEGER:
+{{~ if capability_operation_id == "fixed-multiply" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiply<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-divide" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedDivide<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-multiply-scalar-right" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiplyScalar<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}>(request->arg0, *reinterpret_cast<const CHAOS_IL2CPP_INT64*>(request->arg1));
+{{~ else if capability_operation_id == "fixed-multiply-scalar-left" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiplyScalar<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}>(request->arg1, *reinterpret_cast<const CHAOS_IL2CPP_INT64*>(request->arg0));
+{{~ else if capability_operation_id == "fixed-divide-scalar-right" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedDivideScalar<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}>(request->arg0, *reinterpret_cast<const CHAOS_IL2CPP_INT64*>(request->arg1));
+{{~ end ~}}
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_UNSIGNED_INTEGER:
+{{~ if capability_operation_id == "fixed-multiply" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiply<CHAOS_IL2CPP_UINT64, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-divide" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedDivide<CHAOS_IL2CPP_UINT64, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-multiply-scalar-right" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiplyScalar<CHAOS_IL2CPP_UINT64, {{ return_cpp_type }}>(request->arg0, *reinterpret_cast<const CHAOS_IL2CPP_UINT64*>(request->arg1));
+{{~ else if capability_operation_id == "fixed-multiply-scalar-left" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiplyScalar<CHAOS_IL2CPP_UINT64, {{ return_cpp_type }}>(request->arg1, *reinterpret_cast<const CHAOS_IL2CPP_UINT64*>(request->arg0));
+{{~ else if capability_operation_id == "fixed-divide-scalar-right" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedDivideScalar<CHAOS_IL2CPP_UINT64, {{ return_cpp_type }}>(request->arg0, *reinterpret_cast<const CHAOS_IL2CPP_UINT64*>(request->arg1));
+{{~ end ~}}
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_SIGNED_INTEGER:
+{{~ if capability_operation_id == "fixed-multiply" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiply<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-divide" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedDivide<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-multiply-scalar-right" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiplyScalar<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}>(request->arg0, *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(request->arg1));
+{{~ else if capability_operation_id == "fixed-multiply-scalar-left" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiplyScalar<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}>(request->arg1, *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(request->arg0));
+{{~ else if capability_operation_id == "fixed-divide-scalar-right" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedDivideScalar<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}>(request->arg0, *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(request->arg1));
+{{~ end ~}}
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_UNSIGNED_INTEGER:
+{{~ if capability_operation_id == "fixed-multiply" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiply<CHAOS_IL2CPP_UINTPTR, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-divide" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedDivide<CHAOS_IL2CPP_UINTPTR, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-multiply-scalar-right" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiplyScalar<CHAOS_IL2CPP_UINTPTR, {{ return_cpp_type }}>(request->arg0, *reinterpret_cast<const CHAOS_IL2CPP_UINTPTR*>(request->arg1));
+{{~ else if capability_operation_id == "fixed-multiply-scalar-left" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiplyScalar<CHAOS_IL2CPP_UINTPTR, {{ return_cpp_type }}>(request->arg1, *reinterpret_cast<const CHAOS_IL2CPP_UINTPTR*>(request->arg0));
+{{~ else if capability_operation_id == "fixed-divide-scalar-right" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedDivideScalar<CHAOS_IL2CPP_UINTPTR, {{ return_cpp_type }}>(request->arg0, *reinterpret_cast<const CHAOS_IL2CPP_UINTPTR*>(request->arg1));
+{{~ end ~}}
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_FLOATING:
+            if (capability_info.value_size_bytes == 4u) {
+{{~ if capability_operation_id == "fixed-multiply" ~}}
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiply<float, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-divide" ~}}
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedDivide<float, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-multiply-scalar-right" ~}}
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiplyScalar<float, {{ return_cpp_type }}>(request->arg0, *reinterpret_cast<const float*>(request->arg1));
+{{~ else if capability_operation_id == "fixed-multiply-scalar-left" ~}}
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiplyScalar<float, {{ return_cpp_type }}>(request->arg1, *reinterpret_cast<const float*>(request->arg0));
+{{~ else if capability_operation_id == "fixed-divide-scalar-right" ~}}
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedDivideScalar<float, {{ return_cpp_type }}>(request->arg0, *reinterpret_cast<const float*>(request->arg1));
+{{~ end ~}}
+                return CHAOS_BRIDGE_STATUS_OK;
+            }
+            if (capability_info.value_size_bytes == 8u) {
+{{~ if capability_operation_id == "fixed-multiply" ~}}
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiply<double, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-divide" ~}}
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedDivide<double, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-multiply-scalar-right" ~}}
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiplyScalar<double, {{ return_cpp_type }}>(request->arg0, *reinterpret_cast<const double*>(request->arg1));
+{{~ else if capability_operation_id == "fixed-multiply-scalar-left" ~}}
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedMultiplyScalar<double, {{ return_cpp_type }}>(request->arg1, *reinterpret_cast<const double*>(request->arg0));
+{{~ else if capability_operation_id == "fixed-divide-scalar-right" ~}}
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedDivideScalar<double, {{ return_cpp_type }}>(request->arg0, *reinterpret_cast<const double*>(request->arg1));
+{{~ end ~}}
+                return CHAOS_BRIDGE_STATUS_OK;
+            }
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+        default:
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+{{~ end ~}}
+
+{{~ if capability_operation_id == "fixed-equality" || capability_operation_id == "fixed-inequality" ~}}
+    if (scalar_type == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    if (bridge->query_type_capability(scalar_type, &capability_info) != CHAOS_BRIDGE_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    switch (capability_info.scalar_kind) {
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_SIGNED_INTEGER:
+{{~ if capability_operation_id == "fixed-equality" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedEquals<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-inequality" ~}}
+            *request->return_value = !chaos::il2cpp::runtime_core::VectorFixedEquals<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ end ~}}
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_UNSIGNED_INTEGER:
+{{~ if capability_operation_id == "fixed-equality" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedEquals<CHAOS_IL2CPP_UINT64, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-inequality" ~}}
+            *request->return_value = !chaos::il2cpp::runtime_core::VectorFixedEquals<CHAOS_IL2CPP_UINT64, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ end ~}}
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_SIGNED_INTEGER:
+{{~ if capability_operation_id == "fixed-equality" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedEquals<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-inequality" ~}}
+            *request->return_value = !chaos::il2cpp::runtime_core::VectorFixedEquals<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ end ~}}
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_UNSIGNED_INTEGER:
+{{~ if capability_operation_id == "fixed-equality" ~}}
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedEquals<CHAOS_IL2CPP_UINTPTR, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-inequality" ~}}
+            *request->return_value = !chaos::il2cpp::runtime_core::VectorFixedEquals<CHAOS_IL2CPP_UINTPTR, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ end ~}}
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_FLOATING:
+            if (capability_info.value_size_bytes == 4u) {
+{{~ if capability_operation_id == "fixed-equality" ~}}
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedEquals<float, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-inequality" ~}}
+                *request->return_value = !chaos::il2cpp::runtime_core::VectorFixedEquals<float, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ end ~}}
+                return CHAOS_BRIDGE_STATUS_OK;
+            }
+            if (capability_info.value_size_bytes == 8u) {
+{{~ if capability_operation_id == "fixed-equality" ~}}
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedEquals<double, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ else if capability_operation_id == "fixed-inequality" ~}}
+                *request->return_value = !chaos::il2cpp::runtime_core::VectorFixedEquals<double, {{ return_cpp_type }}>(request->arg0, request->arg1);
+{{~ end ~}}
+                return CHAOS_BRIDGE_STATUS_OK;
+            }
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+        default:
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+{{~ end ~}}
+
+{{~ if kernel_semantic_id == "vector-generic-create" ~}}
+    if (scalar_type == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+    if (bridge->query_type_capability(scalar_type, &capability_info) != CHAOS_BRIDGE_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+
+{{~ if generic_create_argument_count == 1 ~}}
+    if (request->arg0 == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    switch (capability_info.scalar_kind) {
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedBroadcast<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}>(*reinterpret_cast<const CHAOS_IL2CPP_INT64*>(request->arg0));
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_UNSIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedBroadcast<CHAOS_IL2CPP_UINT64, {{ return_cpp_type }}>(*reinterpret_cast<const CHAOS_IL2CPP_UINT64*>(request->arg0));
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedBroadcast<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}>(*reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(request->arg0));
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_UNSIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedBroadcast<CHAOS_IL2CPP_UINTPTR, {{ return_cpp_type }}>(*reinterpret_cast<const CHAOS_IL2CPP_UINTPTR*>(request->arg0));
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_FLOATING:
+            if (capability_info.value_size_bytes == 4u) {
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedBroadcast<float, {{ return_cpp_type }}>(*reinterpret_cast<const float*>(request->arg0));
+                return CHAOS_BRIDGE_STATUS_OK;
+            }
+            if (capability_info.value_size_bytes == 8u) {
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedBroadcast<double, {{ return_cpp_type }}>(*reinterpret_cast<const double*>(request->arg0));
+                return CHAOS_BRIDGE_STATUS_OK;
+            }
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+        default:
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+{{~ else if generic_create_argument_count == 2 ~}}
+{{~ if generic_create_arg0_cpp_type == "void*" && generic_create_arg1_cpp_type == "CHAOS_IL2CPP_INT32" ~}}
+    if (request->arg0 == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    switch (capability_info.scalar_kind) {
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromArray<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}>(reinterpret_cast<const CHAOS_IL2CPP_INT64*>(request->arg0), static_cast<CHAOS_IL2CPP_SIZE>(request->arg1));
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_UNSIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromArray<CHAOS_IL2CPP_UINT64, {{ return_cpp_type }}>(reinterpret_cast<const CHAOS_IL2CPP_UINT64*>(request->arg0), static_cast<CHAOS_IL2CPP_SIZE>(request->arg1));
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromArray<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}>(reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(request->arg0), static_cast<CHAOS_IL2CPP_SIZE>(request->arg1));
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_UNSIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromArray<CHAOS_IL2CPP_UINTPTR, {{ return_cpp_type }}>(reinterpret_cast<const CHAOS_IL2CPP_UINTPTR*>(request->arg0), static_cast<CHAOS_IL2CPP_SIZE>(request->arg1));
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_FLOATING:
+            if (capability_info.value_size_bytes == 4u) {
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromArray<float, {{ return_cpp_type }}>(reinterpret_cast<const float*>(request->arg0), static_cast<CHAOS_IL2CPP_SIZE>(request->arg1));
+                return CHAOS_BRIDGE_STATUS_OK;
+            }
+            if (capability_info.value_size_bytes == 8u) {
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromArray<double, {{ return_cpp_type }}>(reinterpret_cast<const double*>(request->arg0), static_cast<CHAOS_IL2CPP_SIZE>(request->arg1));
+                return CHAOS_BRIDGE_STATUS_OK;
+            }
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+        default:
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+{{~ else ~}}
+    switch (capability_info.scalar_kind) {
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromHalves<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}, {{ generic_create_arg0_cpp_type }}>(request->arg0, request->arg1);
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_UNSIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromHalves<CHAOS_IL2CPP_UINT64, {{ return_cpp_type }}, {{ generic_create_arg0_cpp_type }}>(request->arg0, request->arg1);
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromHalves<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}, {{ generic_create_arg0_cpp_type }}>(request->arg0, request->arg1);
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_UNSIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromHalves<CHAOS_IL2CPP_UINTPTR, {{ return_cpp_type }}, {{ generic_create_arg0_cpp_type }}>(request->arg0, request->arg1);
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_FLOATING:
+            if (capability_info.value_size_bytes == 4u) {
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromHalves<float, {{ return_cpp_type }}, {{ generic_create_arg0_cpp_type }}>(request->arg0, request->arg1);
+                return CHAOS_BRIDGE_STATUS_OK;
+            }
+            if (capability_info.value_size_bytes == 8u) {
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromHalves<double, {{ return_cpp_type }}, {{ generic_create_arg0_cpp_type }}>(request->arg0, request->arg1);
+                return CHAOS_BRIDGE_STATUS_OK;
+            }
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+        default:
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+{{~ end ~}}
+{{~ else if generic_create_argument_count == 1 && generic_create_arg0_cpp_type == "RuntimeSkeletonConvertSpanCarrier" ~}}
+    if (request->arg0.data == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    switch (capability_info.scalar_kind) {
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromArray<CHAOS_IL2CPP_INT64, {{ return_cpp_type }}>(reinterpret_cast<const CHAOS_IL2CPP_INT64*>(request->arg0.data), 0u);
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_UNSIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromArray<CHAOS_IL2CPP_UINT64, {{ return_cpp_type }}>(reinterpret_cast<const CHAOS_IL2CPP_UINT64*>(request->arg0.data), 0u);
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_SIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromArray<CHAOS_IL2CPP_INTPTR, {{ return_cpp_type }}>(reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(request->arg0.data), 0u);
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_UNSIGNED_INTEGER:
+            *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromArray<CHAOS_IL2CPP_UINTPTR, {{ return_cpp_type }}>(reinterpret_cast<const CHAOS_IL2CPP_UINTPTR*>(request->arg0.data), 0u);
+            return CHAOS_BRIDGE_STATUS_OK;
+        case CHAOS_TYPE_CAPABILITY_SCALAR_KIND_FLOATING:
+            if (capability_info.value_size_bytes == 4u) {
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromArray<float, {{ return_cpp_type }}>(reinterpret_cast<const float*>(request->arg0.data), 0u);
+                return CHAOS_BRIDGE_STATUS_OK;
+            }
+            if (capability_info.value_size_bytes == 8u) {
+                *request->return_value = chaos::il2cpp::runtime_core::VectorFixedCreateFromArray<double, {{ return_cpp_type }}>(reinterpret_cast<const double*>(request->arg0.data), 0u);
+                return CHAOS_BRIDGE_STATUS_OK;
+            }
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+        default:
+            return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+{{~ end ~}}
+{{~ end ~}}
+
+    if (scalar_type == nullptr) {
+{{~ if return_cpp_type == "CHAOS_IL2CPP_INT32" ~}}
+        *request->return_value = 0;
+{{~ else if return_cpp_type == "bool" ~}}
+        *request->return_value = false;
+{{~ else ~}}
+        *request->return_value = {{ return_cpp_type }}{};
+{{~ end ~}}
+        return CHAOS_BRIDGE_STATUS_OK;
+    }
+
+    if (bridge->query_type_capability(scalar_type, &capability_info) != CHAOS_BRIDGE_STATUS_OK) {
+{{~ if return_cpp_type == "CHAOS_IL2CPP_INT32" ~}}
+        *request->return_value = 0;
+{{~ else if return_cpp_type == "bool" ~}}
+        *request->return_value = false;
+{{~ else ~}}
+        *request->return_value = {{ return_cpp_type }}{};
+{{~ end ~}}
+        return CHAOS_BRIDGE_STATUS_OK;
+    }
+
+{{~ if return_cpp_type == "CHAOS_IL2CPP_INT32" ~}}
+    *request->return_value = capability_info.value_size_bytes == 0u
+        ? 0
+        : static_cast<CHAOS_IL2CPP_INT32>({{ fixed_vector_width_bytes }}u / capability_info.value_size_bytes);
+{{~ else if return_cpp_type == "bool" ~}}
+    *request->return_value = capability_info.vector_lane_kind != CHAOS_TYPE_CAPABILITY_VECTOR_LANE_NONE &&
+        capability_info.value_size_bytes != 0u;
+{{~ else ~}}
+    *request->return_value = chaos::il2cpp::runtime_core::VectorFixedOneFromCapability<{{ return_cpp_type }}>(capability_info);
+{{~ end ~}}
+    return CHAOS_BRIDGE_STATUS_OK;
+}

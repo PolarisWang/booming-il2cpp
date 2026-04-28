@@ -4,6 +4,9 @@ namespace Chaos.IL2CPP.CodeGen;
 
 internal static class NativeReferenceProofCatalog
 {
+    public static IReadOnlyList<ICodegenTemplateBundlePlugin> GetRegisteredTemplateBundles() =>
+        NativeReferenceTemplateBundleRegistry.Plugins;
+
     public const string ManagedAsyncAwaitIntMinimal =
         "managed-async.awaitable-int.minimal";
     public const string ManagedThreadingThreadStaticMonitorMinimal =
@@ -142,6 +145,8 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.SpanHelpersKernelStub.cpp.scriban";
     public const string RuntimeSkeletonArrayAndMemoryMarshalStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.ArrayAndMemoryMarshalStub.cpp.scriban";
+    public const string RuntimeSkeletonMarshalPlatformFastPathStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.MarshalPlatformFastPathStub.cpp.scriban";
     public const string RuntimeSkeletonHalfManagedInvokeStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.HalfManagedInvokeStub.cpp.scriban";
     public const string RuntimeSkeletonFloatingScalarManagedInvokeStubTemplateRelativePath =
@@ -162,6 +167,10 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.GlobalizationDateTimeSupportStub.cpp.scriban";
     public const string RuntimeSkeletonValueTypeKernelStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.ValueTypeKernelStub.cpp.scriban";
+    public const string RuntimeSkeletonVectorCopyKernelStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.VectorCopyKernelStub.cpp.scriban";
+    public const string RuntimeSkeletonVectorCapabilityQueryStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.VectorCapabilityQueryStub.cpp.scriban";
     public const string RuntimeSkeletonNumberManagedInvokeStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.NumberManagedInvokeStub.cpp.scriban";
     public const string RuntimeSkeletonDecimalManagedInvokeStubTemplateRelativePath =
@@ -216,6 +225,12 @@ internal static class NativeReferenceProofCatalog
         "Templates/NativeReferenceProof.RuntimeSkeleton.AsyncGetResultStub.cpp.scriban";
     public const string RuntimeSkeletonAsyncStateMachineNoOpStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.AsyncStateMachineNoOpStub.cpp.scriban";
+    public const string RuntimeSkeletonTaskKernelFastPathStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.TaskKernelFastPathStub.cpp.scriban";
+    public const string RuntimeSkeletonTaskManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.TaskManagedInvokeStub.cpp.scriban";
+    public const string RuntimeSkeletonNativeRuntimeEventSourceManagedInvokeStubTemplateRelativePath =
+        "Templates/NativeReferenceProof.RuntimeSkeleton.NativeRuntimeEventSourceManagedInvokeStub.cpp.scriban";
     public const string RuntimeSkeletonStaticVoidObjectSinkNoOpStubTemplateRelativePath =
         "Templates/NativeReferenceProof.RuntimeSkeleton.StaticVoidObjectSinkNoOpStub.cpp.scriban";
     public const string RuntimeSkeletonStaticExceptionThrowLiteralStubTemplateRelativePath =
@@ -435,6 +450,11 @@ internal static class NativeReferenceProofCatalog
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonArrayAndMemoryMarshalStubTemplateRelativePath);
     }
 
+    public static Template GetRuntimeSkeletonMarshalPlatformFastPathStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonMarshalPlatformFastPathStubTemplateRelativePath);
+    }
+
     public static Template GetRuntimeSkeletonHalfManagedInvokeStubTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonHalfManagedInvokeStubTemplateRelativePath);
@@ -483,6 +503,16 @@ internal static class NativeReferenceProofCatalog
     public static Template GetRuntimeSkeletonValueTypeKernelStubTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonValueTypeKernelStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonVectorCopyKernelStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonVectorCopyKernelStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonVectorCapabilityQueryStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonVectorCapabilityQueryStubTemplateRelativePath);
     }
 
     public static Template GetRuntimeSkeletonNumberManagedInvokeStubTemplate()
@@ -618,6 +648,21 @@ internal static class NativeReferenceProofCatalog
     public static Template GetRuntimeSkeletonAsyncStateMachineNoOpStubTemplate()
     {
         return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonAsyncStateMachineNoOpStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonTaskKernelFastPathStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonTaskKernelFastPathStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonTaskManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonTaskManagedInvokeStubTemplateRelativePath);
+    }
+
+    public static Template GetRuntimeSkeletonNativeRuntimeEventSourceManagedInvokeStubTemplate()
+    {
+        return ScribanTemplateRenderer.LoadTemplate(RuntimeSkeletonNativeRuntimeEventSourceManagedInvokeStubTemplateRelativePath);
     }
 
     public static Template GetRuntimeSkeletonStaticVoidObjectSinkNoOpStubTemplate()

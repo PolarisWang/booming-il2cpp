@@ -2,6 +2,7 @@
 #define CHAOS_IL2CPP_HOT_UPDATE_H_
 
 #include <cstddef>
+#include <cstdint>
 
 namespace chaos::il2cpp::hot_update {
 
@@ -22,6 +23,8 @@ struct HotUpdatePackageHandle {
     SupplementalMetadataImage metadata_image = {};
     char* package_id = nullptr;
     char* target_aot_version = nullptr;
+    char* assembly_name = nullptr;       ///< Duplicated manifest Name, used as MemoryDomain module_name.
+    uint32_t domain_id = 0u;             ///< Registered MemoryDomain id (0 = not registered).
     bool loaded = false;
 };
 

@@ -252,8 +252,8 @@ def check_module(mod_name: str, mod_cfg: dict, modules: dict, global_cfg: dict, 
     if not mod_path.exists():
         return [f"[MODULE] module '{mod_name}' path '{mod_cfg['path']}' not found"]
 
-    # Skip conventions checks for vendored third-party C library
-    if mod_cfg.get("conventions", {}).get("note", "").startswith("vendored C library"):
+    # Skip conventions checks for vendored third-party libraries
+    if mod_cfg.get("conventions", {}).get("note", "").startswith("vendored"):
         return []
 
     patterns = ["*.h", "*.cpp"]

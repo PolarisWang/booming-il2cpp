@@ -15,7 +15,8 @@ target_include_directories(
     PRIVATE
         "${REPO_ROOT}/src/native/hot-update"
         "${REPO_ROOT}/src/native/runtime-core"
-        "${REPO_ROOT}/src/native/support")
+        "${REPO_ROOT}/src/native/support"
+        "${REPO_ROOT}/third_party/bdwgc/include")
 target_link_libraries(
     chaos_bootstrap
     PUBLIC

@@ -25,9 +25,9 @@ public sealed partial class NativeAotLoweringPlanner
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.String", "Concat", "System.String", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
 				[
 					"    return chaos_reflection_concat_string_pair_values(chaos_arg_0, chaos_arg_1);",
 				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -40,9 +40,9 @@ public sealed partial class NativeAotLoweringPlanner
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.String", "Concat", "System.String", "System.String", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1, std::intptr_t chaos_arg_2",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
 				[
 					"    const auto chaos_left_pair = chaos_reflection_concat_string_pair_values(chaos_arg_0, chaos_arg_1);",
 					"    return chaos_reflection_concat_string_pair_values(chaos_left_pair, chaos_arg_2);",
@@ -57,9 +57,9 @@ public sealed partial class NativeAotLoweringPlanner
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.String", "Concat", "System.String", "System.String", "System.String", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1, std::intptr_t chaos_arg_2, std::intptr_t chaos_arg_3",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2, CHAOS_IL2CPP_INTPTR chaos_arg_3",
 				[
 					"    const auto chaos_left_pair = chaos_reflection_concat_string_pair_values(chaos_arg_0, chaos_arg_1);",
 					"    const auto chaos_right_pair = chaos_reflection_concat_string_pair_values(chaos_arg_2, chaos_arg_3);",
@@ -76,13 +76,13 @@ public sealed partial class NativeAotLoweringPlanner
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.String", "op_Equality", "System.String", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
 				[
 					"    return chaos_object_equals(chaos_arg_0, chaos_arg_1)",
-					"        ? static_cast<std::intptr_t>(1)",
-					"        : static_cast<std::intptr_t>(0);",
+					"        ? static_cast<CHAOS_IL2CPP_INTPTR>(1)",
+					"        : static_cast<CHAOS_IL2CPP_INTPTR>(0);",
 				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
 			{
 				CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -93,62 +93,75 @@ public sealed partial class NativeAotLoweringPlanner
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.String", "get_Length"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::int32_t",
+				"CHAOS_IL2CPP_INT32",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
 				[
-					"    if (chaos_arg_0 == static_cast<std::intptr_t>(0))",
+					"    if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))",
 					"    {",
-					"        std::abort();",
+					"        CHAOS_IL2CPP_ABORT();",
+					"    }",
+					string.Empty,
+					"    if (chaos_is_string_id(chaos_arg_0))",
+					"    {",
+					"        return static_cast<CHAOS_IL2CPP_INT32>(",
+					"            chaos::il2cpp::string_table::Resolve(",
+					"                chaos_extract_string_id(chaos_arg_0)).byte_count);",
 					"    }",
 					string.Empty,
 					$"    auto* chaos_string = reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_0);",
-					"    return static_cast<std::int32_t>(chaos_string->length);",
+					"    return static_cast<CHAOS_IL2CPP_INT32>(chaos_string->length);",
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(StringTypeSubjectId, AotCoreIrTypeShapeKind.ReferenceType)), CreateInt32AbiSlot(), new HashSet<int> { 0 });
 			return true;
 		}
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.String", "StartsWith", "System.String", "System.StringComparison"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1, std::int32_t chaos_arg_2",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2",
 				[
 					"    if (chaos_arg_2 != 4)",
 					"    {",
-					"        std::abort();",
+					"        CHAOS_IL2CPP_ABORT();",
 					"    }",
 					string.Empty,
-					"    if (chaos_arg_1 == static_cast<std::intptr_t>(0))",
+					"    if (chaos_arg_1 == static_cast<CHAOS_IL2CPP_INTPTR>(0))",
 					"    {",
-					"        std::abort();",
-					"    }",
-					string.Empty,
-					$"    auto* chaos_instance = reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_0);",
-					$"    auto* chaos_prefix = reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_1);",
-					"    const auto chaos_instance_length = static_cast<std::size_t>(chaos_instance->length);",
-					"    const auto chaos_prefix_length = static_cast<std::size_t>(chaos_prefix->length);",
-					"    if (chaos_prefix_length > chaos_instance_length)",
-					"    {",
-					"        return static_cast<std::intptr_t>(0);",
-					"    }",
-					string.Empty,
-					"    if (chaos_prefix_length == 0)",
-					"    {",
-					"        return static_cast<std::intptr_t>(1);",
+					"        CHAOS_IL2CPP_ABORT();",
 					"    }",
 					string.Empty,
 					"    const char* chaos_instance_utf8 = chaos_reflection_get_string_utf8(chaos_arg_0);",
 					"    const char* chaos_prefix_utf8 = chaos_reflection_get_string_utf8(chaos_arg_1);",
+					"    const auto chaos_instance_length = static_cast<CHAOS_IL2CPP_SIZE>(",
+					"        chaos_is_string_id(chaos_arg_0)",
+					"            ? static_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::string_table::Resolve(",
+					"                chaos_extract_string_id(chaos_arg_0)).byte_count)",
+					$"            : static_cast<CHAOS_IL2CPP_INTPTR>(reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_0)->length));",
+					"    const auto chaos_prefix_length = static_cast<CHAOS_IL2CPP_SIZE>(",
+					"        chaos_is_string_id(chaos_arg_1)",
+					"            ? static_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::string_table::Resolve(",
+					"                chaos_extract_string_id(chaos_arg_1)).byte_count)",
+					$"            : static_cast<CHAOS_IL2CPP_INTPTR>(reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_1)->length));",
+					"    if (chaos_prefix_length > chaos_instance_length)",
+					"    {",
+					"        return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+					"    }",
+					string.Empty,
+					"    if (chaos_prefix_length == 0)",
+					"    {",
+					"        return static_cast<CHAOS_IL2CPP_INTPTR>(1);",
+					"    }",
+					string.Empty,
 					"    if ((chaos_instance_utf8 == nullptr && chaos_instance_length != 0) ||",
 					"        (chaos_prefix_utf8 == nullptr && chaos_prefix_length != 0))",
 					"    {",
-					"        std::abort();",
+					"        CHAOS_IL2CPP_ABORT();",
 					"    }",
 					string.Empty,
-					"    return std::memcmp(chaos_instance_utf8, chaos_prefix_utf8, chaos_prefix_length) == 0",
-					"        ? static_cast<std::intptr_t>(1)",
-					"        : static_cast<std::intptr_t>(0);",
+					"    return CHAOS_IL2CPP_MEMCMP(chaos_instance_utf8, chaos_prefix_utf8, chaos_prefix_length) == 0",
+					"        ? static_cast<CHAOS_IL2CPP_INTPTR>(1)",
+					"        : static_cast<CHAOS_IL2CPP_INTPTR>(0);",
 				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
 			{
 				CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -160,52 +173,58 @@ public sealed partial class NativeAotLoweringPlanner
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.String", "Contains", "System.String", "System.StringComparison"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1, std::int32_t chaos_arg_2",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2",
 				[
 					"    if (chaos_arg_2 != 4)",
 					"    {",
-					"        std::abort();",
+					"        CHAOS_IL2CPP_ABORT();",
 					"    }",
 					string.Empty,
-					"    if (chaos_arg_1 == static_cast<std::intptr_t>(0))",
+					"    if (chaos_arg_1 == static_cast<CHAOS_IL2CPP_INTPTR>(0))",
 					"    {",
-					"        std::abort();",
-					"    }",
-					string.Empty,
-					$"    auto* chaos_instance = reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_0);",
-					$"    auto* chaos_value = reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_1);",
-					"    const auto chaos_instance_length = static_cast<std::size_t>(chaos_instance->length);",
-					"    const auto chaos_value_length = static_cast<std::size_t>(chaos_value->length);",
-					"    if (chaos_value_length == 0)",
-					"    {",
-					"        return static_cast<std::intptr_t>(1);",
-					"    }",
-					string.Empty,
-					"    if (chaos_value_length > chaos_instance_length)",
-					"    {",
-					"        return static_cast<std::intptr_t>(0);",
+					"        CHAOS_IL2CPP_ABORT();",
 					"    }",
 					string.Empty,
 					"    const char* chaos_instance_utf8 = chaos_reflection_get_string_utf8(chaos_arg_0);",
 					"    const char* chaos_value_utf8 = chaos_reflection_get_string_utf8(chaos_arg_1);",
+					"    const auto chaos_instance_length = static_cast<CHAOS_IL2CPP_SIZE>(",
+					"        chaos_is_string_id(chaos_arg_0)",
+					"            ? static_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::string_table::Resolve(",
+					"                chaos_extract_string_id(chaos_arg_0)).byte_count)",
+					$"            : static_cast<CHAOS_IL2CPP_INTPTR>(reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_0)->length));",
+					"    const auto chaos_value_length = static_cast<CHAOS_IL2CPP_SIZE>(",
+					"        chaos_is_string_id(chaos_arg_1)",
+					"            ? static_cast<CHAOS_IL2CPP_INTPTR>(chaos::il2cpp::string_table::Resolve(",
+					"                chaos_extract_string_id(chaos_arg_1)).byte_count)",
+					$"            : static_cast<CHAOS_IL2CPP_INTPTR>(reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_1)->length));",
+					"    if (chaos_value_length == 0)",
+					"    {",
+					"        return static_cast<CHAOS_IL2CPP_INTPTR>(1);",
+					"    }",
+					string.Empty,
+					"    if (chaos_value_length > chaos_instance_length)",
+					"    {",
+					"        return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
+					"    }",
+					string.Empty,
 					"    if ((chaos_instance_utf8 == nullptr && chaos_instance_length != 0) ||",
 					"        (chaos_value_utf8 == nullptr && chaos_value_length != 0))",
 					"    {",
-					"        std::abort();",
+					"        CHAOS_IL2CPP_ABORT();",
 					"    }",
 					string.Empty,
 					"    const auto chaos_last_start = chaos_instance_length - chaos_value_length;",
-					"    for (std::size_t chaos_index = 0; chaos_index <= chaos_last_start; chaos_index++)",
+					"    for (CHAOS_IL2CPP_SIZE chaos_index = 0; chaos_index <= chaos_last_start; chaos_index++)",
 					"    {",
-					"        if (std::memcmp(chaos_instance_utf8 + chaos_index, chaos_value_utf8, chaos_value_length) == 0)",
+					"        if (CHAOS_IL2CPP_MEMCMP(chaos_instance_utf8 + chaos_index, chaos_value_utf8, chaos_value_length) == 0)",
 					"        {",
-					"            return static_cast<std::intptr_t>(1);",
+					"            return static_cast<CHAOS_IL2CPP_INTPTR>(1);",
 					"        }",
 					"    }",
 					string.Empty,
-					"    return static_cast<std::intptr_t>(0);",
+					"    return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
 				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
 			{
 				CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
@@ -311,12 +330,12 @@ public sealed partial class NativeAotLoweringPlanner
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
 				[
 					"    chaos_reflection_set_exception_metadata(",
 					"        chaos_arg_0,",
 					"        chaos_arg_1,",
-					"        static_cast<std::intptr_t>(0));",
+					"        static_cast<CHAOS_IL2CPP_INTPTR>(0));",
 				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
 			{
 				CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -333,13 +352,13 @@ public sealed partial class NativeAotLoweringPlanner
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1, std::intptr_t chaos_arg_2",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
 				[
 					"    auto chaos_message_value = chaos_arg_2;",
-					"    if (chaos_arg_1 != static_cast<std::intptr_t>(0))",
+					"    if (chaos_arg_1 != static_cast<CHAOS_IL2CPP_INTPTR>(0))",
 					"    {",
 					"        chaos_message_value =",
-					"            chaos_message_value == static_cast<std::intptr_t>(0)",
+					"            chaos_message_value == static_cast<CHAOS_IL2CPP_INTPTR>(0)",
 					"                ? chaos_arg_1",
 					"                : chaos_reflection_concat_string_pair_values(chaos_message_value, chaos_arg_1);",
 					"    }",
@@ -363,9 +382,9 @@ public sealed partial class NativeAotLoweringPlanner
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Exception", "get_Message"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
 				[
 					"    return chaos_reflection_get_exception_message(chaos_arg_0);",
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
@@ -374,9 +393,9 @@ public sealed partial class NativeAotLoweringPlanner
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.ArgumentException", "get_ParamName"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
 				[
 					"    return chaos_reflection_get_exception_param_name(chaos_arg_0);",
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
@@ -391,39 +410,40 @@ public sealed partial class NativeAotLoweringPlanner
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Int32", "ToString"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
 				[
 					"    auto* chaos_value_slot = chaos_resolve_native_int_slot(chaos_arg_0);",
-					"    char chaos_buffer[64]{};",
-					"    std::snprintf(chaos_buffer, sizeof(chaos_buffer), \"%d\", static_cast<std::int32_t>(*chaos_value_slot));",
-					"    return chaos_reflection_create_string_literal(chaos_buffer);",
+					"    const CHAOS_IL2CPP_STRING chaos_formatted = ChaosIl2cpp::Common::format_int32(static_cast<CHAOS_IL2CPP_INT32>(*chaos_value_slot));",
+					"    const auto chaos_id = chaos::il2cpp::string_table::Intern(",
+					"        chaos_formatted.c_str(), static_cast<CHAOS_IL2CPP_UINT32>(chaos_formatted.size()));",
+					"    return chaos_make_string_id_value(chaos_id);",
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
 			return true;
 		}
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Single", "ToString", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
 				[
 					"    const char* chaos_format_utf8 = nullptr;",
-					"    if (chaos_arg_1 != static_cast<std::intptr_t>(0))",
+					"    if (chaos_arg_1 != static_cast<CHAOS_IL2CPP_INTPTR>(0))",
 					"    {",
-					$"        auto* chaos_format = reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_1);",
-					"        chaos_format_utf8 = chaos_format->utf8_data;",
+					"        chaos_format_utf8 = chaos_reflection_get_string_utf8(chaos_arg_1);",
 					"    }",
 					string.Empty,
-					"    if (chaos_format_utf8 != nullptr && std::strcmp(chaos_format_utf8, \"F1\") != 0)",
+					"    if (chaos_format_utf8 != nullptr && CHAOS_IL2CPP_STRCMP(chaos_format_utf8, \"F1\") != 0)",
 					"    {",
-					"        std::abort();",
+					"        CHAOS_IL2CPP_ABORT();",
 					"    }",
 					string.Empty,
-					"    char chaos_buffer[64]{};",
-					"    std::snprintf(chaos_buffer, sizeof(chaos_buffer), \"%.1f\", static_cast<double>(chaos_load_float32(chaos_arg_0)));",
-					"    return chaos_reflection_create_string_literal(chaos_buffer);",
+					"    const CHAOS_IL2CPP_STRING chaos_formatted = ChaosIl2cpp::Common::format_float(chaos_load_float32(chaos_arg_0));",
+					"    const auto chaos_id = chaos::il2cpp::string_table::Intern(",
+					"        chaos_formatted.c_str(), static_cast<CHAOS_IL2CPP_UINT32>(chaos_formatted.size()));",
+					"    return chaos_make_string_id_value(chaos_id);",
 				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
 			{
 				CreateNativeIntAbiSlot(),
@@ -434,25 +454,25 @@ public sealed partial class NativeAotLoweringPlanner
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Double", "ToString", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
 				[
 					"    const char* chaos_format_utf8 = nullptr;",
-					"    if (chaos_arg_1 != static_cast<std::intptr_t>(0))",
+					"    if (chaos_arg_1 != static_cast<CHAOS_IL2CPP_INTPTR>(0))",
 					"    {",
-					$"        auto* chaos_format = reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_1);",
-					"        chaos_format_utf8 = chaos_format->utf8_data;",
+					"        chaos_format_utf8 = chaos_reflection_get_string_utf8(chaos_arg_1);",
 					"    }",
 					string.Empty,
-					"    if (chaos_format_utf8 != nullptr && std::strcmp(chaos_format_utf8, \"F1\") != 0)",
+					"    if (chaos_format_utf8 != nullptr && CHAOS_IL2CPP_STRCMP(chaos_format_utf8, \"F1\") != 0)",
 					"    {",
-					"        std::abort();",
+					"        CHAOS_IL2CPP_ABORT();",
 					"    }",
 					string.Empty,
-					"    char chaos_buffer[64]{};",
-					"    std::snprintf(chaos_buffer, sizeof(chaos_buffer), \"%.1f\", chaos_load_float64(chaos_arg_0));",
-					"    return chaos_reflection_create_string_literal(chaos_buffer);",
+					"    const CHAOS_IL2CPP_STRING chaos_formatted = ChaosIl2cpp::Common::format_double(chaos_load_float64(chaos_arg_0));",
+					"    const auto chaos_id = chaos::il2cpp::string_table::Intern(",
+					"        chaos_formatted.c_str(), static_cast<CHAOS_IL2CPP_UINT32>(chaos_formatted.size()));",
+					"    return chaos_make_string_id_value(chaos_id);",
 				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
 			{
 				CreateNativeIntAbiSlot(),
@@ -471,7 +491,7 @@ public sealed partial class NativeAotLoweringPlanner
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::int32_t chaos_arg_1, std::int32_t chaos_arg_2",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2",
 				[
 					"    (void)chaos_arg_1;",
 					"    (void)chaos_arg_2;",
@@ -493,7 +513,7 @@ public sealed partial class NativeAotLoweringPlanner
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
 				[
 					"    chaos_default_interpolated_string_handler_append_string(chaos_arg_0, chaos_arg_1);",
 				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -512,7 +532,7 @@ public sealed partial class NativeAotLoweringPlanner
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::int32_t chaos_arg_1",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1",
 				[
 					"    chaos_default_interpolated_string_handler_append_int32(chaos_arg_0, chaos_arg_1);",
 				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -529,9 +549,9 @@ public sealed partial class NativeAotLoweringPlanner
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler", "ToStringAndClear"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
 				[
 					"    return chaos_default_interpolated_string_handler_to_string_and_clear(chaos_arg_0);",
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
@@ -546,22 +566,22 @@ public sealed partial class NativeAotLoweringPlanner
 		string text = null;
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.OperatingSystem", "IsWindows"))
 		{
-			text = "#if defined(_WIN32)\n    return static_cast<std::intptr_t>(1);\n#else\n    return static_cast<std::intptr_t>(0);\n#endif";
+			text = "#if defined(_WIN32)\n    return static_cast<CHAOS_IL2CPP_INTPTR>(1);\n#else\n    return static_cast<CHAOS_IL2CPP_INTPTR>(0);\n#endif";
 		}
 		else if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.OperatingSystem", "IsLinux"))
 		{
-			text = "#if defined(__linux__)\n    return static_cast<std::intptr_t>(1);\n#else\n    return static_cast<std::intptr_t>(0);\n#endif";
+			text = "#if defined(__linux__)\n    return static_cast<CHAOS_IL2CPP_INTPTR>(1);\n#else\n    return static_cast<CHAOS_IL2CPP_INTPTR>(0);\n#endif";
 		}
 		else if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.OperatingSystem", "IsMacOS"))
 		{
-			text = "#if defined(__APPLE__)\n    return static_cast<std::intptr_t>(1);\n#else\n    return static_cast<std::intptr_t>(0);\n#endif";
+			text = "#if defined(__APPLE__)\n    return static_cast<CHAOS_IL2CPP_INTPTR>(1);\n#else\n    return static_cast<CHAOS_IL2CPP_INTPTR>(0);\n#endif";
 		}
 		if (text == null)
 		{
 			return false;
 		}
 		helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-			"std::intptr_t",
+			"CHAOS_IL2CPP_INTPTR",
 			GetExternalRuntimeHelperSymbol(callee),
 			string.Empty,
 			text.Split('\n')), Array.Empty<AotCoreIrAbiSlotArtifact>(), CreateNativeIntAbiSlot(), EmptyRawArgumentIndices);
@@ -574,9 +594,9 @@ public sealed partial class NativeAotLoweringPlanner
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Delegate", "Combine", "System.Delegate", "System.Delegate"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
 				[
 					"    return chaos_delegate_combine(chaos_arg_0, chaos_arg_1);",
 				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -589,9 +609,9 @@ public sealed partial class NativeAotLoweringPlanner
 		if (MatchesMethodSubject(callee, "System.Private.CoreLib/System.Delegate", "Remove", "System.Delegate", "System.Delegate"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
 				[
 					"    return chaos_delegate_remove(chaos_arg_0, chaos_arg_1);",
 				]), new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -609,27 +629,27 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 			var helperSymbol = GetExternalRuntimeHelperSymbol(callee);
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, helperSymbol, $$"""
-extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
+extern "C" CHAOS_IL2CPP_INTPTR {{helperSymbol}}(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
     struct chaos_delegate_function_pointer_bridge
     {
-        std::uint64_t magic = 0;
-        std::intptr_t delegate_target = 0;
-        std::intptr_t delegate_method_ptr = 0;
-        std::intptr_t delegate_invocation_list = 0;
-        std::intptr_t delegate_invocation_count = 0;
+        CHAOS_IL2CPP_UINT64 magic = 0;
+        CHAOS_IL2CPP_INTPTR delegate_target = 0;
+        CHAOS_IL2CPP_INTPTR delegate_method_ptr = 0;
+        CHAOS_IL2CPP_INTPTR delegate_invocation_list = 0;
+        CHAOS_IL2CPP_INTPTR delegate_invocation_count = 0;
     };
 
-    constexpr std::uint64_t chaos_delegate_function_pointer_bridge_magic = 0x4348414F535F4446ULL;
+    constexpr CHAOS_IL2CPP_UINT64 chaos_delegate_function_pointer_bridge_magic = 0x4348414F535F4446ULL;
 
-    if (chaos_arg_0 == static_cast<std::intptr_t>(0))
+    if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))
     {
-        return static_cast<std::intptr_t>(0);
+        return static_cast<CHAOS_IL2CPP_INTPTR>(0);
     }
 
     auto* chaos_delegate = reinterpret_cast<{{GetNativeTypeSymbol(typeSubjectId)}}*>(chaos_arg_0);
-    if (chaos_delegate->chaos_delegate_target == static_cast<std::intptr_t>(0) &&
-        chaos_delegate->chaos_delegate_invocation_count == static_cast<std::intptr_t>(0))
+    if (chaos_delegate->chaos_delegate_target == static_cast<CHAOS_IL2CPP_INTPTR>(0) &&
+        chaos_delegate->chaos_delegate_invocation_count == static_cast<CHAOS_IL2CPP_INTPTR>(0))
     {
         return chaos_delegate->chaos_delegate_method_ptr;
     }
@@ -640,7 +660,7 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
     chaos_bridge->delegate_method_ptr = chaos_delegate->chaos_delegate_method_ptr;
     chaos_bridge->delegate_invocation_list = chaos_delegate->chaos_delegate_invocation_list;
     chaos_bridge->delegate_invocation_count = chaos_delegate->chaos_delegate_invocation_count;
-    return reinterpret_cast<std::intptr_t>(chaos_bridge);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_bridge);
 }
 """, new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot(typeSubjectId, AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
 			return true;
@@ -653,22 +673,22 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
 			}
 			var helperSymbol = GetExternalRuntimeHelperSymbol(callee);
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, helperSymbol, $$"""
-extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
+extern "C" CHAOS_IL2CPP_INTPTR {{helperSymbol}}(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
     struct chaos_delegate_function_pointer_bridge
     {
-        std::uint64_t magic = 0;
-        std::intptr_t delegate_target = 0;
-        std::intptr_t delegate_method_ptr = 0;
-        std::intptr_t delegate_invocation_list = 0;
-        std::intptr_t delegate_invocation_count = 0;
+        CHAOS_IL2CPP_UINT64 magic = 0;
+        CHAOS_IL2CPP_INTPTR delegate_target = 0;
+        CHAOS_IL2CPP_INTPTR delegate_method_ptr = 0;
+        CHAOS_IL2CPP_INTPTR delegate_invocation_list = 0;
+        CHAOS_IL2CPP_INTPTR delegate_invocation_count = 0;
     };
 
-    constexpr std::uint64_t chaos_delegate_function_pointer_bridge_magic = 0x4348414F535F4446ULL;
+    constexpr CHAOS_IL2CPP_UINT64 chaos_delegate_function_pointer_bridge_magic = 0x4348414F535F4446ULL;
 
     auto* chaos_delegate = new {{GetNativeTypeSymbol(typeSubjectId)}}{};
     chaos_delegate->header.type_id = {{GetNativeTypeIdSymbol(typeSubjectId)}};
-    if (chaos_arg_0 != static_cast<std::intptr_t>(0))
+    if (chaos_arg_0 != static_cast<CHAOS_IL2CPP_INTPTR>(0))
     {
         const auto* chaos_bridge = reinterpret_cast<const chaos_delegate_function_pointer_bridge*>(chaos_arg_0);
         if (chaos_bridge->magic == chaos_delegate_function_pointer_bridge_magic)
@@ -677,13 +697,13 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
             chaos_delegate->chaos_delegate_method_ptr = chaos_bridge->delegate_method_ptr;
             chaos_delegate->chaos_delegate_invocation_list = chaos_bridge->delegate_invocation_list;
             chaos_delegate->chaos_delegate_invocation_count = chaos_bridge->delegate_invocation_count;
-            return reinterpret_cast<std::intptr_t>(chaos_delegate);
+            return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_delegate);
         }
     }
 
-    chaos_delegate->chaos_delegate_target = static_cast<std::intptr_t>(0);
+    chaos_delegate->chaos_delegate_target = static_cast<CHAOS_IL2CPP_INTPTR>(0);
     chaos_delegate->chaos_delegate_method_ptr = chaos_arg_0;
-    return reinterpret_cast<std::intptr_t>(chaos_delegate);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_delegate);
 }
 """, new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()), CreateNativeIntAbiSlot(typeSubjectId, AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
 			return true;
@@ -702,34 +722,30 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
 		if (TryReadSingleGenericTypeArgument(callee, MarshalSizeOfMethodPrefix, out string valueTypeNameOrSubjectId) && TryCreateResolvedTypeAbiSlot(valueTypeNameOrSubjectId, out AotCoreIrAbiSlotArtifact valueTypeAbi) && valueTypeAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue)
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::int32_t",
+				"CHAOS_IL2CPP_INT32",
 				GetExternalRuntimeHelperSymbol(callee),
 				string.Empty,
 				[
-					$"    return static_cast<std::int32_t>(sizeof({GetRequiredAbiValueTypeSymbol(valueTypeAbi)}));",
+					$"    return static_cast<CHAOS_IL2CPP_INT32>(sizeof({GetRequiredAbiValueTypeSymbol(valueTypeAbi)}));",
 				]), Array.Empty<AotCoreIrAbiSlotArtifact>(), CreateInt32AbiSlot(), EmptyRawArgumentIndices);
 			return true;
 		}
 		if (MatchesMethodSubject(callee, "System.Runtime.InteropServices/Marshal", "AllocHGlobal", "System.Int32"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::int32_t chaos_arg_0",
+				"CHAOS_IL2CPP_INT32 chaos_arg_0",
 				[
 					"    if (chaos_arg_0 < 0)",
 					"    {",
-					"        std::abort();",
+					"        CHAOS_IL2CPP_ABORT();",
 					"    }",
 					string.Empty,
-					"    const auto chaos_size = static_cast<std::size_t>(chaos_arg_0 == 0 ? 1 : chaos_arg_0);",
-					"    auto* chaos_buffer = std::malloc(chaos_size);",
-					"    if (chaos_buffer == nullptr)",
-					"    {",
-					"        std::abort();",
-					"    }",
-					string.Empty,
-					"    return reinterpret_cast<std::intptr_t>(chaos_buffer);",
+					"    auto* chaos_runtime = chaos::il2cpp::runtime_core::GetCurrentRuntimeState();",
+					"    if (chaos_runtime == nullptr) { CHAOS_IL2CPP_ABORT(); }",
+					"    return chaos::il2cpp::runtime_core::MarshalAllocHGlobal(", 
+					"        chaos_runtime, static_cast<CHAOS_IL2CPP_INTPTR>(chaos_size));",
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateInt32AbiSlot()), CreateNativeIntAbiSlot(), EmptyRawArgumentIndices);
 			return true;
 		}
@@ -738,12 +754,11 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
 				[
-					"    if (chaos_arg_0 != static_cast<std::intptr_t>(0))",
-					"    {",
-					"        std::free(reinterpret_cast<void*>(chaos_arg_0));",
-					"    }",
+					"    auto* chaos_runtime = chaos::il2cpp::runtime_core::GetCurrentRuntimeState();",
+					"    if (chaos_runtime == nullptr) { CHAOS_IL2CPP_ABORT(); }",
+					"    (void)chaos::il2cpp::runtime_core::MarshalFreeHGlobal(chaos_runtime, chaos_arg_0);",
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()), voidReturnAbi, new HashSet<int> { 0 });
 			return true;
 		}
@@ -753,11 +768,11 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
 				GetExternalRuntimeHelperSymbol(callee),
-				$"{valueTypeSymbol} chaos_arg_0, std::intptr_t chaos_arg_1, std::intptr_t chaos_arg_2",
+				$"{valueTypeSymbol} chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
 				[
-					"    if (chaos_arg_1 == static_cast<std::intptr_t>(0) || chaos_arg_2 != static_cast<std::intptr_t>(0))",
+					"    if (chaos_arg_1 == static_cast<CHAOS_IL2CPP_INTPTR>(0) || chaos_arg_2 != static_cast<CHAOS_IL2CPP_INTPTR>(0))",
 					"    {",
-					"        std::abort();",
+					"        CHAOS_IL2CPP_ABORT();",
 					"    }",
 					string.Empty,
 					$"    *reinterpret_cast<{valueTypeSymbol}*>(chaos_arg_1) = chaos_arg_0;",
@@ -775,11 +790,11 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				valueTypeSymbol2,
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
 				[
-					"    if (chaos_arg_0 == static_cast<std::intptr_t>(0))",
+					"    if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))",
 					"    {",
-					"        std::abort();",
+					"        CHAOS_IL2CPP_ABORT();",
 					"    }",
 					string.Empty,
 					$"    return *reinterpret_cast<{valueTypeSymbol2}*>(chaos_arg_0);",
@@ -789,48 +804,33 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
 		if (MatchesMethodSubject(callee, "System.Runtime.InteropServices/Marshal", "StringToCoTaskMemUTF8", "System.String"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
 				[
-					"    if (chaos_arg_0 == static_cast<std::intptr_t>(0))",
+					"    if (chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0))",
 					"    {",
-					"        return static_cast<std::intptr_t>(0);",
+					"        return static_cast<CHAOS_IL2CPP_INTPTR>(0);",
 					"    }",
 					string.Empty,
 					$"    auto* chaos_string = reinterpret_cast<{GetNativeTypeSymbol(StringTypeSubjectId)}*>(chaos_arg_0);",
-					"    const auto chaos_length = static_cast<std::size_t>(chaos_string->length);",
-					"    const auto* chaos_utf8_data = chaos_string->utf8_data;",
-					"    if (chaos_length != 0 && chaos_utf8_data == nullptr)",
-					"    {",
-					"        std::abort();",
-					"    }",
-					string.Empty,
-					"    auto* chaos_buffer = static_cast<char*>(std::malloc(chaos_length + 1));",
-					"    if (chaos_buffer == nullptr)",
-					"    {",
-					"        std::abort();",
-					"    }",
-					string.Empty,
-					"    if (chaos_length != 0)",
-					"    {",
-					"        std::memcpy(chaos_buffer, chaos_utf8_data, chaos_length);",
-					"    }",
-					string.Empty,
-					"    chaos_buffer[chaos_length] = '\\0';",
-					"    return reinterpret_cast<std::intptr_t>(chaos_buffer);",
+					"    (void)chaos_length; (void)chaos_utf8_data;",
+					"    auto* chaos_runtime = chaos::il2cpp::runtime_core::GetCurrentRuntimeState();",
+					"    if (chaos_runtime == nullptr) { CHAOS_IL2CPP_ABORT(); }",
+					"    return chaos::il2cpp::runtime_core::MarshalStringToCoTaskMemUtf8(", 
+					"        chaos_runtime, nullptr, reinterpret_cast<void*>(chaos_arg_0));",
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)), CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
 			return true;
 		}
 		if (MatchesMethodSubject(callee, "System.Runtime.InteropServices/Marshal", "PtrToStringUTF8", "System.IntPtr"))
 		{
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-				"std::intptr_t",
+				"CHAOS_IL2CPP_INTPTR",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
 				[
-					"    return chaos_arg_0 == static_cast<std::intptr_t>(0)",
-					"        ? static_cast<std::intptr_t>(0)",
+					"    return chaos_arg_0 == static_cast<CHAOS_IL2CPP_INTPTR>(0)",
+					"        ? static_cast<CHAOS_IL2CPP_INTPTR>(0)",
 					"        : chaos_reflection_create_string_literal(reinterpret_cast<const char*>(chaos_arg_0));",
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType), new HashSet<int> { 0 });
 			return true;
@@ -840,12 +840,11 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
 			helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
 				"void",
 				GetExternalRuntimeHelperSymbol(callee),
-				"std::intptr_t chaos_arg_0",
+				"CHAOS_IL2CPP_INTPTR chaos_arg_0",
 				[
-					"    if (chaos_arg_0 != static_cast<std::intptr_t>(0))",
-					"    {",
-					"        std::free(reinterpret_cast<void*>(chaos_arg_0));",
-					"    }",
+					"    auto* chaos_runtime = chaos::il2cpp::runtime_core::GetCurrentRuntimeState();",
+					"    if (chaos_runtime == nullptr) { CHAOS_IL2CPP_ABORT(); }",
+					"    (void)chaos::il2cpp::runtime_core::MarshalFreeCoTaskMem(chaos_runtime, chaos_arg_0);",
 				]), new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()), new AotCoreIrAbiSlotArtifact
 			{
 				CarrierKindCode = AotCoreIrAbiCarrierKind.Void,
@@ -868,9 +867,9 @@ extern "C" std::intptr_t {{helperSymbol}}(std::intptr_t chaos_arg_0)
 			return false;
 		}
 		helperDefinition = new ExternalRuntimeHelperDefinition(callee, GetExternalRuntimeHelperSymbol(callee), RenderSimpleExternalRuntimeHelper(
-			"std::intptr_t",
+			"CHAOS_IL2CPP_INTPTR",
 			GetExternalRuntimeHelperSymbol(callee),
-			"std::intptr_t chaos_arg_0, std::intptr_t chaos_arg_1, std::intptr_t chaos_arg_2",
+			"CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
 			[
 				"    auto* chaos_slot = chaos_resolve_native_int_slot(chaos_arg_0);",
 				"    const auto chaos_original = *chaos_slot;",

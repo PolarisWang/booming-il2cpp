@@ -1,11 +1,10 @@
-# è¿›è¡Œä¸­ä»»åŠ¡ç´¢å¼•
+# ½øĞĞÖĞÈÎÎñË÷Òı
 
-å½“å‰ active ä»»åŠ¡ï¼š
-- `20260426-01-capability-family-test-code-first-pipeline`
+µ±Ç° active ÈÎÎñ£º
+- none
 
 | task_id | task_type | phase | updated_at | next_step | active |
 | --- | --- | --- | --- | --- | --- |
-| [20260419-01-foundation-dll-translation-audit-roadmap](20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md) | roadmap | roadmap | 2026-04-25 21:58:00 +08:00 | ç»§ç»­ç»´æŠ¤ DLL-first reporting authorityï¼Œå¹¶æŠŠ phase-2 DLL é€ä¸ªæ”¶æ•›æˆå¯å®¡è®¡çŠ¶æ€é¡µã€‚ | false |
-| [20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable](20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md) | plan | blocked-before-start | 2026-04-25 21:58:00 +08:00 | åœ¨ `20260419-03` çœŸæ­£å…³é—¸å‰ï¼Œä»…ä¿æŒ `System.Collections.Immutable` çš„ blocked authorityï¼Œä¸å¯åŠ¨çœŸå® proofã€‚ | false |
-| [20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening](20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md) | plan | implementation | 2026-04-25 21:58:00 +08:00 | åŸºäº 4C family/router framework ç»§ç»­æ‰©å¤§ `System.Private.CoreLib` supplemental runtime-skeleton translated coverageã€‚ | false |
-| [20260426-01-capability-family-test-code-first-pipeline](20260426-01-capability-family-test-code-first-pipeline/STATUS.md) | roadmap | roadmap | 2026-04-26 19:05:00 +08:00 | å·²ä¿®å¤ foundation-dll CLI/manifest å›å½’ï¼Œå¹¶å°†ä»»åŠ¡å‡çº§ä¸º roadmapï¼›ä¸‹ä¸€æ­¥è¡¥ `gap_analyzer.py`ã€å‘½ä»¤æ¥çº¿å’Œ ledger `testCode` authorityã€‚ | true |
+| [20260419-01-foundation-dll-translation-audit-roadmap](20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md) | roadmap | roadmap | 2026-04-25 21:58:00 +08:00 | ¼ÌĞøÎ¬»¤ DLL-first reporting authority£¬²¢°´ phase-2 DLL ½Ú×àÍÆ½øÉó¼Æ×´Ì¬Ò³¡£ | false |
+| [20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable](20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md) | plan | blocked-before-start | 2026-04-25 21:58:00 +08:00 | ÔÚ `20260419-03` ÕæÕı¹ØÕ¢Ç°£¬½ö±£³Ö `System.Collections.Immutable` µÄ blocked authority£¬²»Æô¶¯ÕæÊµ proof¡£ | false |
+| [20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening](20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/STATUS.md) | plan | implementation | 2026-04-25 21:58:00 +08:00 | »ùÓÚ 4C family/router framework ¼ÌĞøÀ©´ó `System.Private.CoreLib` supplemental runtime-skeleton translated coverage¡£ | false |

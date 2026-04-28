@@ -1,5 +1,7 @@
 #include "method_replacement.h"
 
+#include <chaos/native_types.h>
+
 #include <mutex>
 #include <unordered_map>
 
@@ -7,8 +9,8 @@ namespace chaos::il2cpp::method_replacement {
 
 namespace {
 
-std::mutex g_method_replacement_mutex;
-std::unordered_map<uint32_t, MethodReplacementEntry> g_method_replacements;
+CHAOS_IL2CPP_MUTEX g_method_replacement_mutex;
+CHAOS_IL2CPP_UNORDERED_MAP(uint32_t, MethodReplacementEntry) g_method_replacements;
 
 }  // namespace
 
@@ -17,7 +19,7 @@ bool Register(uint32_t method_token, void* thunk) {
         return false;
     }
 
-    std::lock_guard<std::mutex> lock(g_method_replacement_mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_method_replacement_mutex);
     auto& entry = g_method_replacements[method_token];
     entry.method_token = method_token;
     entry.replacement_thunk = thunk;
@@ -26,17 +28,17 @@ bool Register(uint32_t method_token, void* thunk) {
 }
 
 bool Revert(uint32_t method_token) {
-    std::lock_guard<std::mutex> lock(g_method_replacement_mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_method_replacement_mutex);
     return g_method_replacements.erase(method_token) > 0u;
 }
 
 void RevertAll() {
-    std::lock_guard<std::mutex> lock(g_method_replacement_mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_method_replacement_mutex);
     g_method_replacements.clear();
 }
 
 void* Resolve(uint32_t method_token) {
-    std::lock_guard<std::mutex> lock(g_method_replacement_mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_method_replacement_mutex);
     const auto it = g_method_replacements.find(method_token);
     if (it == g_method_replacements.end() || !it->second.active) {
         return nullptr;
@@ -46,7 +48,7 @@ void* Resolve(uint32_t method_token) {
 }
 
 uint32_t ActiveCount() {
-    std::lock_guard<std::mutex> lock(g_method_replacement_mutex);
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_method_replacement_mutex);
     return static_cast<uint32_t>(g_method_replacements.size());
 }
 

@@ -11,6 +11,7 @@ struct DelegateInstance {
     uint32_t method_token;
     void* method_pointer;
     void* target_instance;
+    DelegateInstance* next;          // multicast chain (nullptr = last in chain)
 };
 ```
 
@@ -19,6 +20,7 @@ struct DelegateInstance {
 - `method_token`: 创建 delegate 时记录的 method token。
 - `method_pointer`: bootstrap 通过 code registration 解析出的真实入口。
 - `target_instance`: 闭包/实例 delegate 的 target；静态 delegate 为 `NULL`。
+- `next`: multicast 链表指针；节点不可变（immutable），通过 GC 分配。
 
 ## 创建语义
 

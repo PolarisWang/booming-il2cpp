@@ -86,12 +86,52 @@ public sealed partial class LoaderStage
             value = exactReplacement;
         }
 
-        foreach (var (placeholder, replacement) in substitutions.OrderByDescending(pair => pair.Key.Length))
+        return ReplaceInstantiationPlaceholders(value, substitutions);
+    }
+
+    private static string ReplaceInstantiationPlaceholders(
+        string value,
+        IReadOnlyDictionary<string, string> substitutions)
+    {
+        if (substitutions.Count == 0 || !value.Contains('!'))
         {
-            value = value.Replace(placeholder, replacement, StringComparison.Ordinal);
+            return value;
         }
 
-        return value;
+        var builder = new System.Text.StringBuilder(value.Length);
+        for (var index = 0; index < value.Length;)
+        {
+            if (value[index] != '!')
+            {
+                builder.Append(value[index]);
+                index++;
+                continue;
+            }
+
+            var placeholderStart = index;
+            while (index < value.Length && value[index] == '!')
+            {
+                index++;
+            }
+
+            var digitStart = index;
+            while (index < value.Length && char.IsDigit(value[index]))
+            {
+                index++;
+            }
+
+            if (digitStart > placeholderStart &&
+                index > digitStart &&
+                substitutions.TryGetValue(value[placeholderStart..index], out var replacement))
+            {
+                builder.Append(replacement);
+                continue;
+            }
+
+            builder.Append(value.AsSpan(placeholderStart, index - placeholderStart));
+        }
+
+        return builder.ToString();
     }
 
     private static ImmutableDictionary<string, string> CreateSubstitutionMap(

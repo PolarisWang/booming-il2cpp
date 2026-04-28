@@ -27,6 +27,7 @@ void CompileOnlyRuntimeAbiSmoke(const RuntimeAbiV0* abi) {
     AssemblyHandle assembly = nullptr;
     ImageHandle image = nullptr;
     ExceptionHandle exception = nullptr;
+    RuntimeTypeCapabilityInfoV0 capability_info = {};
 
     int input_value = 7;
     int output_value = 0;
@@ -70,6 +71,12 @@ void CompileOnlyRuntimeAbiSmoke(const RuntimeAbiV0* abi) {
     generic_type_definition = abi->type_get_generic_type_definition(type);
     parameter = abi->method_get_parameter(method, 0);
     generic_context = abi->method_get_generic_context(method);
+    (void)abi->generic_context_get_class_arg_count(generic_context);
+    (void)abi->generic_context_get_class_arg(generic_context, 0u);
+    (void)abi->generic_context_get_method_arg_count(generic_context);
+    (void)abi->generic_context_get_method_arg(generic_context, 0u);
+    capability_info.struct_size = sizeof(capability_info);
+    (void)abi->type_query_capability(type, &capability_info);
 
     (void)property;
     (void)event_handle;

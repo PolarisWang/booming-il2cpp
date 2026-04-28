@@ -4,6 +4,9 @@ namespace Chaos.IL2CPP.CodeGen;
 
 internal static class NativeAotTemplateCatalog
 {
+    public static IReadOnlyList<ICodegenTemplateBundlePlugin> GetRegisteredTemplateBundles() =>
+        NativeAotTemplateBundleRegistry.Plugins;
+
     public const string TranslationUnitTemplateRelativePath = "Templates/NativeAot.TranslationUnit.cpp.scriban";
     public const string ObjectModelTemplateRelativePath = "Templates/NativeAot.ObjectModel.cpp.scriban";
     public const string MethodTemplateRelativePath = "Templates/NativeAot.Method.cpp.scriban";

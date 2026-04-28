@@ -2,7 +2,7 @@ struct {{ stub_name }}_ManagedArgs
 {
     void* arg0;
     void* arg1;
-    std::uint16_t* return_value;
+    CHAOS_IL2CPP_UINT16* return_value;
 };
 
 // managed_result_type: System.Char
@@ -44,7 +44,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
         const_cast<void**>(&request->arg0),
         const_cast<void**>(&request->arg1)
     };
-    std::uint16_t return_value = 0;
+    CHAOS_IL2CPP_UINT16 return_value = 0;
     ExceptionHandle out_exception = nullptr;
     const RuntimeStatus invoke_status = abi->method_invoke(
         runtime,

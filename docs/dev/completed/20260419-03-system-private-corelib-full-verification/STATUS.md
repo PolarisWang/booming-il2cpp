@@ -58,6 +58,8 @@ active: false
   - `artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/declared/unit/corelib-reference-hotupdate-proof/summary.json`
 - subject-facing review bundle:
   - `artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/declared/unit/corelib-reference-hotupdate-proof/review-bundle.json`
+- completion certification report:
+  - `artifacts/foundation-dll/System.Private.CoreLib/completion-report.json`
 
 ## Next
 

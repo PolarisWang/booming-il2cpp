@@ -70,37 +70,25 @@ public sealed class SemanticWorldStage
         {
             Subjects =
             [
-                .. loadedWorld.Types.Select(type => new CanonicalSubjectModel
-                {
-                    SubjectKind = "type",
-                    SubjectId = type.SubjectId,
-                    CanonicalSubjectId = type.SubjectId,
-                }),
-                .. loadedWorld.Fields.Select(field => new CanonicalSubjectModel
-                {
-                    SubjectKind = "field",
-                    SubjectId = field.SubjectId,
-                    CanonicalSubjectId = field.SubjectId,
-                }),
-                .. loadedWorld.Properties.Select(property => new CanonicalSubjectModel
-                {
-                    SubjectKind = "property",
-                    SubjectId = property.SubjectId,
-                    CanonicalSubjectId = property.SubjectId,
-                }),
-                .. loadedWorld.Methods.Select(method => new CanonicalSubjectModel
-                {
-                    SubjectKind = "method",
-                    SubjectId = method.SubjectId,
-                    CanonicalSubjectId = method.SubjectId,
-                }),
-                new CanonicalSubjectModel
-                {
-                    SubjectKind = "method",
-                    SubjectId = ThreePartStringConcatMethodSubjectId,
-                    CanonicalSubjectId = PairStringConcatMethodSubjectId,
-                },
+                .. loadedWorld.Types.Select(type => CreateCanonicalSubject("type", type.SubjectId)),
+                .. loadedWorld.Fields.Select(field => CreateCanonicalSubject("field", field.SubjectId)),
+                .. loadedWorld.Properties.Select(property => CreateCanonicalSubject("property", property.SubjectId)),
+                .. loadedWorld.Methods.Select(method => CreateCanonicalSubject("method", method.SubjectId)),
+                CreateCanonicalSubject("method", ThreePartStringConcatMethodSubjectId, PairStringConcatMethodSubjectId),
             ],
+        };
+    }
+
+    private static CanonicalSubjectModel CreateCanonicalSubject(
+        string subjectKind,
+        string subjectId,
+        string? canonicalSubjectId = null)
+    {
+        return new CanonicalSubjectModel
+        {
+            SubjectKind = subjectKind,
+            SubjectId = subjectId,
+            CanonicalSubjectId = canonicalSubjectId ?? ManagedNaming.CanonicalizeSubjectId(subjectId),
         };
     }
 

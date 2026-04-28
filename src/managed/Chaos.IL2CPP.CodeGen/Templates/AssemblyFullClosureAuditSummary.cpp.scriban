@@ -7,12 +7,12 @@ namespace chaos::il2cpp::audit
 {
 constexpr const char* kAssemblyName = {{ assembly_name_literal }};
 constexpr const char* kPlanKind = {{ plan_kind_literal }};
-constexpr std::size_t translation_unit_method_count = {{ translation_unit_method_count }};
-constexpr std::size_t translation_unit_page_size = {{ translation_unit_page_size }};
-constexpr std::size_t translation_unit_page_count = {{ translation_unit_page_count }};
+constexpr CHAOS_IL2CPP_SIZE translation_unit_method_count = {{ translation_unit_method_count }};
+constexpr CHAOS_IL2CPP_SIZE translation_unit_page_size = {{ translation_unit_page_size }};
+constexpr CHAOS_IL2CPP_SIZE translation_unit_page_count = {{ translation_unit_page_count }};
 } // namespace chaos::il2cpp::audit
 
-extern "C" int RunNativeAotAudit(std::int32_t entry_index)
+extern "C" int RunNativeAotAudit(CHAOS_IL2CPP_INT32 entry_index)
 {
     (void)entry_index;
     return 0;

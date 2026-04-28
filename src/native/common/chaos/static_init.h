@@ -6,9 +6,9 @@
 namespace ChaosIl2cpp::Common {
 
 template <typename TInitFunc>
-inline void ensure_initialized(std::once_flag& flag, TInitFunc init)
+inline void ensure_initialized(CHAOS_IL2CPP_ONCE_FLAG& flag, TInitFunc init)
 {
-    std::call_once(flag, static_cast<TInitFunc&&>(init));
+    CHAOS_IL2CPP_CALL_ONCE(flag, static_cast<TInitFunc&&>(init));
 }
 
 } // namespace ChaosIl2cpp::Common

@@ -67,6 +67,7 @@ public sealed partial class NativeReferenceProofEmitter
             ["target_method_token"] = "0u",
             ["this_field_declaration"] = plan.CarrierSchema.ThisFieldDeclaration,
             ["arg_field_declarations"] = plan.CarrierSchema.ArgFieldDeclarations,
+            ["arg_validation_statements"] = string.Empty,
             ["return_field_declaration"] = plan.CarrierSchema.ReturnFieldDeclaration,
             ["helper_call_expression"] = plan.HelperCallExpression,
         };

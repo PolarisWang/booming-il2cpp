@@ -4,15 +4,15 @@
 - title: Foundation DLL Translation Audit
 - dllCount: 14
 - completedCount: 0
-- inProgressCount: 0
-- blockedCount: 2
-- notStartedCount: 12
+- inProgressCount: 1
+- blockedCount: 0
+- notStartedCount: 13
 - activeAssembly: System.Private.CoreLib
 - dashboard: docs/verification/foundation-dll-audit/dashboard.html
 
 ## DLLs
-- System.Private.CoreLib: state=blocked currentProject=completion-certification detail=docs/verification/foundation-dll-audit/dlls/System.Private.CoreLib.html
-- System.Collections.Immutable: state=blocked currentProject=completion-certification detail=docs/verification/foundation-dll-audit/dlls/System.Collections.Immutable.html
+- System.Private.CoreLib: state=in-progress currentProject=completion-certification detail=docs/verification/foundation-dll-audit/dlls/System.Private.CoreLib.html
+- System.Collections.Immutable: state=not-started currentProject=audit-input-and-ledger detail=docs/verification/foundation-dll-audit/dlls/System.Collections.Immutable.html
 - System.Formats.Asn1: state=not-started currentProject=audit-input-and-ledger detail=docs/verification/foundation-dll-audit/dlls/System.Formats.Asn1.html
 - System.IO.Compression.Brotli: state=not-started currentProject=audit-input-and-ledger detail=docs/verification/foundation-dll-audit/dlls/System.IO.Compression.Brotli.html
 - System.IO.Compression.ZipFile: state=not-started currentProject=audit-input-and-ledger detail=docs/verification/foundation-dll-audit/dlls/System.IO.Compression.ZipFile.html

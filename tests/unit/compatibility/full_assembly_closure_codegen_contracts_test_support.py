@@ -129,6 +129,46 @@ RUNTIME_SKELETON_ARRAY_AND_MEMORYMARSHAL_TEMPLATE_PATH = (
     / "Templates"
     / "NativeReferenceProof.RuntimeSkeleton.ArrayAndMemoryMarshalStub.cpp.scriban"
 )
+RUNTIME_SKELETON_MARSHAL_PLATFORM_FASTPATH_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.MarshalPlatformFastPathStub.cpp.scriban"
+)
+RUNTIME_SKELETON_TASK_KERNEL_FASTPATH_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.TaskKernelFastPathStub.cpp.scriban"
+)
+RUNTIME_SKELETON_TASK_MANAGED_INVOKE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.TaskManagedInvokeStub.cpp.scriban"
+)
+RUNTIME_SKELETON_NATIVE_RUNTIME_EVENTSOURCE_MANAGED_INVOKE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.NativeRuntimeEventSourceManagedInvokeStub.cpp.scriban"
+)
+RUNTIME_SKELETON_IDENTITY_STRUCT_MANAGED_INVOKE_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.IdentityStructManagedInvokeStub.cpp.scriban"
+)
 RUNTIME_SKELETON_HALF_MANAGED_INVOKE_TEMPLATE_PATH = (
     REPO_ROOT
     / "src"
@@ -200,6 +240,14 @@ RUNTIME_SKELETON_VALUETYPE_KERNEL_TEMPLATE_PATH = (
     / "Chaos.IL2CPP.CodeGen"
     / "Templates"
     / "NativeReferenceProof.RuntimeSkeleton.ValueTypeKernelStub.cpp.scriban"
+)
+RUNTIME_SKELETON_VECTOR_CAPABILITY_QUERY_TEMPLATE_PATH = (
+    REPO_ROOT
+    / "src"
+    / "managed"
+    / "Chaos.IL2CPP.CodeGen"
+    / "Templates"
+    / "NativeReferenceProof.RuntimeSkeleton.VectorCapabilityQueryStub.cpp.scriban"
 )
 RUNTIME_SKELETON_ENUM_MANAGED_INVOKE_TEMPLATE_PATH = (
     REPO_ROOT

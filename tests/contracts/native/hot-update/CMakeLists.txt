@@ -6,3 +6,14 @@ target_link_libraries(
     chaos_method_replacement_smoke
     PRIVATE
         chaos_hot_update)
+
+add_executable(chaos_hotupdate_verification_test
+    hotupdate_verification_test.cpp)
+
+target_compile_features(chaos_hotupdate_verification_test PRIVATE cxx_std_17)
+target_compile_definitions(chaos_hotupdate_verification_test PRIVATE CHAOS_RUNTIME_ABI_STATIC)
+target_link_libraries(
+    chaos_hotupdate_verification_test
+    PRIVATE
+        chaos_hot_update
+        chaos_bootstrap)

@@ -119,7 +119,7 @@ inline const ReflectionQueryMethodDescriptor* TryDecodeReflectionQueryMethodHand
 inline bool NamesMatch(const char* left, const char* right) {
     const char* normalized_left = left != nullptr ? left : "";
     const char* normalized_right = right != nullptr ? right : "";
-    return std::strcmp(normalized_left, normalized_right) == 0;
+    return CHAOS_IL2CPP_STRCMP(normalized_left, normalized_right) == 0;
 }
 
 inline const ReflectionQueryTypeDescriptor* FindReflectionQueryTypeByToken(

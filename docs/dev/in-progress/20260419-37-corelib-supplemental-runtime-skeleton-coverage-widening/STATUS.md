@@ -5,7 +5,7 @@ task_type: plan
 lifecycle_status: in-progress
 phase: implementation
 created_at: 2026-04-24 21:20:00 +08:00
-updated_at: 2026-04-26 18:55:00 +08:00
+updated_at: 2026-04-28 18:08:17 +08:00
 current_dir: docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening
 parent_task_id: 20260419-01-foundation-dll-translation-audit-roadmap
 source_task_id: 20260419-03-system-private-corelib-full-verification
@@ -17,9 +17,9 @@ clearance_confirmed_by_user: true
 preflight_review: warn
 preflight_summary: 当前 widening child 仍在父 roadmap 已批准边界内，可继续沿新的 4C `Convert family` 扩大 `System.Private.CoreLib` supplemental runtime-skeleton translated coverage；风险是 `ToString/object/provider/value-type` 族继续堆进单一 emitter 会放大结构债务，因此本轮继续坚持 family router 边界，不回流 legacy 入口。
 auto_execution_decision: continue
-design_doc: docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/design-v2-02-marshal-platform-capability.md
+design_doc: docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/design-v2-04-codegen-d3c-pluginization-roadmap.md
 plan_doc: docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/plan-v2-01.md
-active: false
+active: true
 ---
 
 # 20260419-37 CoreLib Supplemental Runtime Skeleton Coverage Widening
@@ -63,7 +63,44 @@ active: false
 - `System.DateTimeFormat` / `System.DateTimeParse` / `System.DateTimeRawInfo` / `System.DateTimeResult` supplemental uncovered are now `0`.
 - `System.Globalization.CultureData` supplemental uncovered is now `0`.
 - `System.Globalization.DateTimeFormatInfo` supplemental uncovered is now `0`.
+- `System.Runtime.InteropServices.Marshal` supplemental uncovered is now `0`.
+- `System.Threading.Tasks.Task` supplemental uncovered is now `0`.
+- `Interop+Kernel32` supplemental uncovered is now `0`.
+- `System.Diagnostics.Tracing.NativeRuntimeEventSource` supplemental uncovered is now `0`.
+- first vector kernel slice is now active for `System.Numerics.Vector2/3/4`.
 - first valuetype kernel generic/intrinsic cutover is now active.
+- vector `op_Equality` / `op_Inequality` slice is now complete for:
+  - `System.Numerics.Vector2/3/4`
+  - `System.Numerics.Vector<T>`
+  - `System.Runtime.Intrinsics.Vector64/128/256/512<T>`
+- vector numerics `get_Item` slice is now complete for:
+  - `System.Numerics.Vector2`
+  - `System.Numerics.Vector3`
+  - `System.Numerics.Vector4`
+- vector numerics `Length` / typed `Equals(VectorN)` slices are now complete for:
+  - `System.Numerics.Vector2`
+  - `System.Numerics.Vector3`
+  - `System.Numerics.Vector4`
+- vector numerics `GetHashCode` slice is now complete for:
+  - `System.Numerics.Vector2`
+  - `System.Numerics.Vector3`
+  - `System.Numerics.Vector4`
+- vector numerics `Distance` slice is now complete for:
+  - `System.Numerics.Vector2`
+  - `System.Numerics.Vector3`
+  - `System.Numerics.Vector4`
+- vector numerics public matrix `Transform / TransformNormal` slice is now complete for:
+  - `System.Numerics.Vector2`
+  - `System.Numerics.Vector3`
+  - `System.Numerics.Vector4`
+- vector numerics public quaternion `Transform` slice is now complete for:
+  - `System.Numerics.Vector2`
+  - `System.Numerics.Vector3`
+  - `System.Numerics.Vector4`
+- vector numerics internal matrix `Impl& Transform / TransformNormal` slice is now complete for:
+  - `System.Numerics.Vector2`
+  - `System.Numerics.Vector3`
+  - `System.Numerics.Vector4`
 - **All `System.Convert` methods are now EMITTED** — 343 Convert methods in plan, 0 uncovered. Includes IConvertible-interfaced methods like `ToDateTime(valueType)` via `ConvertRuntimeHelperAbi`.
 - `DecimalClusterManagedInvokeFamily` now owns:
   - `System.Decimal`
@@ -83,6 +120,712 @@ active: false
 
 ## Latest Summary
 
+- 2026-04-28 18:08:17 +08:00: vector numerics internal matrix `Impl& Transform / TransformNormal` slice is now landed and formally verified under canonical formal `20260428-180721-windows-590d`.
+  Architecture landed this round:
+  - kept the work inside the existing shared `vector-transform` lane, without falling back to managed invoke
+  - widened `RuntimeSkeletonVectorKernelCore` to absorb the remaining internal matrix byref overloads:
+    - `Transform(Vector2, Matrix3x2+Impl&)`
+    - `TransformNormal(Vector2, Matrix3x2+Impl&)`
+    - `TransformNormal(Vector2, Matrix4x4+Impl&)`
+    - `TransformNormal(Vector3, Matrix4x4+Impl&)`
+    - `Vector4.Transform(Vector2, Matrix4x4+Impl&)`
+    - `Vector4.Transform(Vector3, Matrix4x4+Impl&)`
+    - `Vector4.Transform(Vector4, Matrix4x4+Impl&)`
+  - landed the byref widening as pointer carriers inside the shared value-type kernel template:
+    - `RuntimeNumericsMatrix3x2Carrier*`
+    - `RuntimeNumericsMatrix4x4Carrier*`
+    - helper-side `*request->arg1` dereference back into the existing native matrix helpers
+  - kept the landing IL2CPP / hotupdate friendly:
+    - no managed-invoke fallback
+    - no new native helper ABI
+    - pointer-arg null guards were added in the shared runtime-skeleton kernel template
+  Coverage effect from canonical evidence:
+  - residuals are no longer present in `uncoveredMethodSubjectIds` for:
+    - `System.Numerics.Vector2::Transform(System.Numerics.Vector2,System.Numerics.Matrix3x2+Impl&)`
+    - `System.Numerics.Vector2::TransformNormal(System.Numerics.Vector2,System.Numerics.Matrix3x2+Impl&)`
+    - `System.Numerics.Vector2::TransformNormal(System.Numerics.Vector2,System.Numerics.Matrix4x4+Impl&)`
+    - `System.Numerics.Vector3::TransformNormal(System.Numerics.Vector3,System.Numerics.Matrix4x4+Impl&)`
+    - `System.Numerics.Vector4::Transform(System.Numerics.Vector2,System.Numerics.Matrix4x4+Impl&)`
+    - `System.Numerics.Vector4::Transform(System.Numerics.Vector3,System.Numerics.Matrix4x4+Impl&)`
+    - `System.Numerics.Vector4::Transform(System.Numerics.Vector4,System.Numerics.Matrix4x4+Impl&)`
+  - `emittedMethodCount`: `54828 -> 54835` (`+7`)
+  - current dirty-tree formal context still does **not** show a global uncovered drop:
+    - `uncoveredMethodCount`: `42473 -> 42473`
+    - treat this round as confirmed slice-local progress only
+  Resulting state after this round:
+  - vector numerics `Transform / TransformNormal` tail is now cleared for the currently targeted `Vector2/3/4` surface
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance_reference.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260428-180721-windows-590d`
+- 2026-04-28 17:37:30 +08:00: vector numerics public quaternion `Transform` slice is now landed and formally verified under canonical formal `20260428-173551-windows-3ec3`.
+  Architecture landed this round:
+  - kept the work inside the existing `vector-transform` lane, without falling back to managed invoke
+  - widened `RuntimeSkeletonVectorKernelCore` to absorb:
+    - `Transform(VectorN, Quaternion)`
+    - `Vector4.Transform(Vector2, Quaternion)`
+    - `Vector4.Transform(Vector3, Quaternion)`
+    - `Vector4.Transform(Vector4, Quaternion)`
+  - widened native runtime-core numerics helpers with:
+    - `RuntimeNumericsQuaternionCarrier`
+    - `Vector2Transform(value, rotation)`
+    - `Vector3Transform(value, rotation)`
+    - `Vector4Transform(value, rotation)` for `Vector2/3/4` inputs
+  - kept the landing IL2CPP / hotupdate friendly:
+    - public static overloads only
+    - no `Impl&` ABI widening
+    - no instance-void `.ctor` widening
+  Coverage effect from canonical evidence:
+  - residuals now cleared to `0` for:
+    - `System.Numerics.Vector2::Transform(System.Numerics.Vector2,System.Numerics.Quaternion)`
+    - `System.Numerics.Vector3::Transform(System.Numerics.Vector3,System.Numerics.Quaternion)`
+    - `System.Numerics.Vector4::Transform(System.Numerics.Vector2,System.Numerics.Quaternion)`
+    - `System.Numerics.Vector4::Transform(System.Numerics.Vector3,System.Numerics.Quaternion)`
+    - `System.Numerics.Vector4::Transform(System.Numerics.Vector4,System.Numerics.Quaternion)`
+  - `emittedMethodCount`: `54818 -> 54828` (`+10`)
+  - current dirty-tree formal context still does **not** show a global uncovered drop:
+    - `uncoveredMethodCount`: `42468 -> 42473`
+    - treat this round as confirmed slice-local progress only
+  Remaining transform tail after this round:
+  - `System.Numerics.Vector2::Transform(System.Numerics.Vector2,System.Numerics.Matrix3x2+Impl&)`
+  - `System.Numerics.Vector2::TransformNormal(System.Numerics.Vector2,System.Numerics.Matrix3x2+Impl&)`
+  - `System.Numerics.Vector2::TransformNormal(System.Numerics.Vector2,System.Numerics.Matrix4x4+Impl&)`
+  - `System.Numerics.Vector3::TransformNormal(System.Numerics.Vector3,System.Numerics.Matrix4x4+Impl&)`
+  - `System.Numerics.Vector4::Transform(System.Numerics.Vector2,System.Numerics.Matrix4x4+Impl&)`
+  - `System.Numerics.Vector4::Transform(System.Numerics.Vector3,System.Numerics.Matrix4x4+Impl&)`
+  - `System.Numerics.Vector4::Transform(System.Numerics.Vector4,System.Numerics.Matrix4x4+Impl&)`
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance_reference.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260428-173551-windows-3ec3`
+- 2026-04-28 17:26:51 +08:00: vector numerics public matrix `Transform / TransformNormal` slice is now landed and formally verified under canonical formal `20260428-172651-windows-dc0a`.
+  Architecture landed this round:
+  - kept the work inside the existing `vector-transform` lane, without falling back to managed invoke
+  - widened `RuntimeSkeletonVectorKernelCore` to absorb public matrix overloads only:
+    - `Transform(Vector2, Matrix3x2)`
+    - `Transform(VectorN, Matrix4x4)` for `Vector2/3/4`
+    - `TransformNormal(Vector2, Matrix3x2)`
+    - `TransformNormal(VectorN, Matrix4x4)` for `Vector2/3`
+    - `Vector4.Transform(Vector2, Matrix4x4)`
+    - `Vector4.Transform(Vector3, Matrix4x4)`
+    - `Vector4.Transform(Vector4, Matrix4x4)`
+  - widened native runtime-core numerics helpers with:
+    - `RuntimeNumericsMatrix3x2Carrier`
+    - `RuntimeNumericsMatrix4x4Carrier`
+    - public matrix transform helpers for `Vector2/3/4`
+  - this round deliberately did **not** widen:
+    - quaternion overloads
+    - `Impl&` matrix overloads
+    - instance-void `.ctor`
+  Coverage effect from canonical evidence:
+  - residuals now cleared to `0` for:
+    - `System.Numerics.Vector2::Transform(System.Numerics.Vector2,System.Numerics.Matrix3x2)`
+    - `System.Numerics.Vector2::Transform(System.Numerics.Vector2,System.Numerics.Matrix4x4)`
+    - `System.Numerics.Vector2::TransformNormal(System.Numerics.Vector2,System.Numerics.Matrix3x2)`
+    - `System.Numerics.Vector2::TransformNormal(System.Numerics.Vector2,System.Numerics.Matrix4x4)`
+    - `System.Numerics.Vector3::Transform(System.Numerics.Vector3,System.Numerics.Matrix4x4)`
+    - `System.Numerics.Vector3::TransformNormal(System.Numerics.Vector3,System.Numerics.Matrix4x4)`
+    - `System.Numerics.Vector4::Transform(System.Numerics.Vector2,System.Numerics.Matrix4x4)`
+    - `System.Numerics.Vector4::Transform(System.Numerics.Vector3,System.Numerics.Matrix4x4)`
+    - `System.Numerics.Vector4::Transform(System.Numerics.Vector4,System.Numerics.Matrix4x4)`
+  - `emittedMethodCount`: `54767 -> 54818` (`+51`)
+  - current dirty-tree formal context still does **not** show a global uncovered drop:
+    - `uncoveredMethodCount`: `42426 -> 42468`
+    - treat this round as confirmed slice-local progress only
+  Remaining transform tail after this round:
+  - public quaternion overloads
+  - `Impl&` matrix overloads
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance_reference.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260428-172651-windows-dc0a`
+- 2026-04-28 16:56:52 +08:00: vector numerics `Distance` slice is now landed and formally verified under canonical formal `20260428-165533-windows-1c52`.
+  Architecture landed this round:
+  - kept the work inside the existing `vector-distance` lane, without adding new native ABI
+  - widened `RuntimeSkeletonVectorKernelCore` to absorb:
+    - `Distance:System.Single(VectorN, VectorN)`
+  - reused the existing numerics helper surface:
+    - `VectorNDistanceSquared`
+    - `std::sqrt(...)`
+  Coverage effect from canonical evidence:
+  - residuals now cleared to `0` for:
+    - `System.Numerics.Vector2::Distance`
+    - `System.Numerics.Vector3::Distance`
+    - `System.Numerics.Vector4::Distance`
+  - `emittedMethodCount`: `54815 -> 54828` (`+13`)
+  - current dirty-tree formal context still does **not** show a global uncovered drop:
+    - `uncoveredMethodCount`: `42501 -> 42511`
+    - treat this round as confirmed slice-local progress only
+  Current next numerics-tail hotspots:
+  - `.ctor`
+  - `CopyTo / TryCopyTo`
+  - `ToString`
+  - `Transform / TransformNormal`
+  - `set_Item`
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance_reference.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260428-165533-windows-1c52`
+- 2026-04-28 16:52:04 +08:00: vector numerics `GetHashCode` slice is now landed and formally verified under canonical formal `20260428-165023-windows-2162`.
+  Architecture landed this round:
+  - kept the work inside the existing vector kernel lane, without falling back to managed invoke
+  - widened `RuntimeSkeletonVectorKernelCore` with:
+    - `vector-hash`
+  - widened native runtime-core numerics helpers with:
+    - `Vector2GetHashCode`
+    - `Vector3GetHashCode`
+    - `Vector4GetHashCode`
+  - matched current CoreLib method shape for numerics vectors:
+    - `GetHashCode() => HashCode.Combine(...)`
+    - scalar element hashing normalized through `Single.GetHashCode`-style zero / NaN handling before combining
+  Coverage effect from canonical evidence:
+  - residuals now cleared to `0` for:
+    - `System.Numerics.Vector2::GetHashCode`
+    - `System.Numerics.Vector3::GetHashCode`
+    - `System.Numerics.Vector4::GetHashCode`
+  - `emittedMethodCount`: `54807 -> 54815` (`+8`)
+  - current dirty-tree formal context still does **not** show a global uncovered drop:
+    - `uncoveredMethodCount`: `42496 -> 42501`
+    - treat this round as confirmed slice-local progress only
+  Current next numerics-tail hotspots:
+  - `.ctor`
+  - `CopyTo / TryCopyTo`
+  - `ToString`
+  - `Transform / TransformNormal`
+  - `set_Item`
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance_reference.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260428-165023-windows-2162`
+- 2026-04-28 16:32:54 +08:00: vector numerics `Length` and typed `Equals(VectorN)` slices are now landed and formally verified under canonical formal `20260428-163118-windows-e84b`.
+  Architecture landed this round:
+  - kept the work inside the existing vector kernel lane, without falling back to managed invoke
+  - widened `RuntimeSkeletonVectorKernelCore` to absorb:
+    - `Equals:System.Boolean(VectorN)` via shared instance-unary planning
+    - `Length:System.Single()` via shared instance-nullary planning
+  - widened native runtime-core numerics helpers with:
+    - `Vector2Length`
+    - `Vector3Length`
+    - `Vector4Length`
+  Coverage effect from canonical evidence:
+  - residuals now cleared to `0` for:
+    - `System.Numerics.Vector2::Length`
+    - `System.Numerics.Vector3::Length`
+    - `System.Numerics.Vector4::Length`
+    - `System.Numerics.Vector2::Equals(System.Numerics.Vector2)`
+    - `System.Numerics.Vector3::Equals(System.Numerics.Vector3)`
+    - `System.Numerics.Vector4::Equals(System.Numerics.Vector4)`
+  - `emittedMethodCount`: `54789 -> 54807` (`+18`)
+  - current dirty-tree formal context still does **not** show a global uncovered drop:
+    - `uncoveredMethodCount`: `42484 -> 42496`
+    - treat this round as confirmed slice-local progress only
+  Current next numerics-tail hotspots:
+  - `GetHashCode`
+  - `.ctor`
+  - `CopyTo / TryCopyTo`
+  - `ToString`
+  - `Transform / TransformNormal`
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance_reference.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260428-163118-windows-e84b`
+- 2026-04-28 16:12:39 +08:00: vector numerics `get_Item` slice is now landed and formally verified under canonical formal `20260428-161017-windows-54e9`.
+  Architecture landed this round:
+  - widened `RuntimeSkeletonVectorKernelCore` with:
+    - `vector-indexer`
+  - added shared instance-unary vector kernel planning surface for:
+    - `this_arg + arg0 -> return_value`
+  - widened native runtime-core numerics helpers with:
+    - `Vector2GetElement`
+    - `Vector3GetElement`
+    - `Vector4GetElement`
+  Coverage effect from canonical evidence:
+  - `System.Numerics.Vector2/3/4::get_Item(System.Int32)` residuals are now `0`
+  - `emittedMethodCount`: `54780 -> 54789` (`+9`)
+  - current dirty-tree formal context does **not** show a global uncovered drop:
+    - `uncoveredMethodCount`: `42478 -> 42484`
+    - so this round should be treated as confirmed slice-local progress, not whole-tree convergence
+  Current next numerics-tail hotspots:
+  - `.ctor`
+  - `CopyTo / TryCopyTo`
+  - `ToString`
+  - `Equals`
+  - `Transform / TransformNormal`
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance_reference.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260428-161017-windows-54e9`
+- 2026-04-28 14:02:15 +08:00: vector equality slice is now truly landed and formally verified under canonical formal `20260428-135957-windows-93f8`.
+  Architecture / debugging outcome this round:
+  - first widened fixed-container equality for open/closed generic vector families:
+    - formal `20260428-133748-windows-0a39`
+    - only open generic lane moved
+  - then fixed emitter routing so concrete `vector-fixed-equality` plans no longer get forced through the capability template:
+    - formal `20260428-134209-windows-85d3`
+    - `System.Numerics.Vector<T>` and `System.Runtime.Intrinsics.Vector64/128/256/512<T>` equality residuals dropped to numerics-only tail
+  - then added `Vector2Equals / Vector3Equals / Vector4Equals` planner/runtime surface:
+    - formal `20260428-134705-windows-3455`
+    - this did **not** clear the residuals yet
+  - root cause of the remaining numerics tail:
+    - `TryCreateArithmeticPlan(...)` matched
+      - `op_Equality:{vectorType}({vectorType},{vectorType})`
+      - `op_Inequality:{vectorType}({vectorType},{vectorType})`
+    - but real subject ids return `System.Boolean`, so all six numerics equality operators still MISSed planner creation
+  - corrected numerics equality suffix matching to:
+    - `op_Equality:System.Boolean({vectorType},{vectorType})`
+    - `op_Inequality:System.Boolean({vectorType},{vectorType})`
+  Coverage effect from canonical evidence:
+  - stale / diagnostic formals:
+    - `20260428-134705-windows-3455`
+    - `20260428-135414-windows-904b`
+    - both still left:
+      - `Vector2::op_Equality / op_Inequality`
+      - `Vector3::op_Equality / op_Inequality`
+      - `Vector4::op_Equality / op_Inequality`
+  - final canonical formal:
+    - `20260428-135957-windows-93f8`
+  - `emittedMethodCount`: `54754 -> 54780` (`+26`) vs the last diagnostic run
+  - residual families now cleared to `0`:
+    - `op_Equality`
+    - `op_Inequality`
+  Current next hotspot families:
+  - `Equals`
+  - `ToString`
+  - `GetHashCode`
+  - `get_Item`
+  - numerics tail:
+    - `.ctor`
+    - `CopyTo / TryCopyTo`
+    - `Abs / Min / Max / Clamp / Normalize / Reflect / SquareRoot / Transform*`
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance_reference.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260428-135957-windows-93f8`
+- 2026-04-27 10:51:00 +08:00: first vector fixed-create batch is now landed and formally verified under canonical formal `20260427-104944-windows-6881`.
+  Architecture landed this round:
+  - widened `RuntimeSkeletonVectorKernelCore` with:
+    - `vector-fixed-create`
+  - widened fixed-container runtime helper layer with:
+    - `VectorFixedCreateScalar`
+  - current emitted fixed-container create lane now covers:
+    - scalar broadcast `Create(value)`
+    - scalar low-lane-only `CreateScalar(value)`
+    - scalar low-lane-only `CreateScalarUnsafe(value)`
+    - explicit generic-argument concrete forms like `Create<System.Byte>(value)`
+  Coverage effect from canonical evidence:
+  - `emittedMethodCount`: `10616 -> 10904` (`+288`)
+  - residual family deltas:
+    - `Create`: `431 -> 143`
+    - `CreateScalar`: `200 -> 8`
+    - `CreateScalarUnsafe`: `100 -> 4`
+  Current next hotspot families:
+  - remaining `Create` variants:
+    - multi-lane explicit constructors
+    - half-width pair constructors
+    - array/span-backed generic constructors
+    - open-generic `Create` / `CreateScalar` / `CreateScalarUnsafe`
+  - `op_LeftShift / op_RightShift / op_UnsignedRightShift`
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260427-104944-windows-6881`
+- 2026-04-27 09:52:00 +08:00: vector `subjectId-first` widening batch is now landed and formally verified under canonical formal `20260427-095052-windows-b735`.
+  Architecture landed this round:
+  - removed the unnecessary `methodsBySubjectId` hard dependency from vector-kernel planning for metadata-only intrinsic subjects
+  - promoted vector-kernel planning to `subjectId-first`, so bodyless or non-typed-IL fixed-container intrinsic methods can still lower through the same family router
+  - `vector-capability-query` now also clears:
+    - `get_One`
+  Coverage effect from canonical evidence:
+  - `emittedMethodCount`: `10552 -> 10616` (`+64`)
+  - residual family now cleared to `0`:
+    - `get_One`
+  Current next hotspot families:
+  - `Create`
+  - `CreateScalar`
+  - `CreateScalarUnsafe`
+  - `op_LeftShift / op_RightShift / op_UnsignedRightShift`
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260427-095052-windows-b735`
+- 2026-04-27 09:25:00 +08:00: second vector authority-consumer widening batch is now landed and formally verified under canonical formal `20260427-092352-windows-85b4`.
+  Architecture landed this round:
+  - widened `RuntimeSkeletonVectorKernelCore` with scalar-kind-independent fixed-container lanes:
+    - `vector-fixed-constant`
+    - `vector-fixed-bitwise`
+    - `vector-unary-passthrough`
+  - widened vector capability runtime helper surface with:
+    - `VectorFixedBroadcast`
+    - `VectorFixedOneFromCapability`
+  - current emitted fixed-container generic-safe constant/bitwise/unary lane now covers:
+    - `get_Zero`
+    - `get_AllBitsSet`
+    - `op_UnaryPlus`
+    - `op_BitwiseAnd`
+    - `op_BitwiseOr`
+    - `op_ExclusiveOr`
+    - `op_OnesComplement`
+  Coverage effect from canonical evidence:
+  - `emittedMethodCount`: `10296 -> 10552` (`+256`)
+  - residual families now cleared to `0`:
+    - `get_Zero`
+    - `get_AllBitsSet`
+    - `op_UnaryPlus`
+    - `op_BitwiseAnd`
+    - `op_BitwiseOr`
+    - `op_ExclusiveOr`
+    - `op_OnesComplement`
+  Current next hotspot families:
+  - `get_One`
+  - `Create / CreateScalar / CreateScalarUnsafe`
+  - `op_LeftShift / op_RightShift / op_UnsignedRightShift`
+  - `Equals / GetHashCode / ToString / get_DisplayString / get_Item`
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_core.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260427-092352-windows-85b4`
+- 2026-04-27 09:19:00 +08:00: first vector authority-consumer widening batch is now landed and formally verified under canonical formal `20260427-091835-windows-be75`.
+  Architecture landed this round:
+  - promoted the type capability authority seam from temporary native-only proof wiring to emitted vector consumer wiring
+  - added runtime ABI generic-context accessor surface:
+    - `generic_context_get_class_arg_count`
+    - `generic_context_get_class_arg`
+    - `generic_context_get_method_arg_count`
+    - `generic_context_get_method_arg`
+  - widened `vector-capability-query` to support:
+    - concrete scalar token resolution
+    - class generic argument resolution
+    - method generic argument resolution
+    - open generic definition fallback
+  Coverage effect from canonical evidence:
+  - `emittedMethodCount`: `10264 -> 10296` (`+32`)
+  - fixed-container residual families now cleared to `0`:
+    - `get_Count`
+    - `get_IsSupported`
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_native_reference_bootstrap_support.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260427-091835-windows-be75`
+- 2026-04-27 01:47:00 +08:00: first fixed-container intrinsics arithmetic slice is now landed and formally verified under canonical formal `20260427-014559-windows-be84`.
+  Architecture landed this round:
+  - widened `RuntimeSkeletonVectorKernelCore` with:
+    - `vector-fixed-arithmetic`
+  - widened fixed-container runtime helper layer with generic byte/lane helpers:
+    - `VectorFixedApplyBinary`
+    - `VectorFixedAdd`
+    - `VectorFixedSubtract`
+    - `VectorFixedBitwiseAnd`
+    - `VectorFixedBitwiseOr`
+    - `VectorFixedBitwiseXor`
+    - `VectorFixedOnesComplement`
+  - current emitted fixed-container operator lane covers:
+    - `op_Addition`
+    - `op_Subtraction`
+    - `op_BitwiseAnd`
+    - `op_BitwiseOr`
+    - `op_ExclusiveOr`
+    - `op_OnesComplement`
+  Coverage effect from canonical evidence:
+  - `emittedMethodCount`: `9880 -> 10168` (`+288`)
+  - fixed-container closed-generic arithmetic/bitwise residuals:
+    - `Vector64<...>`: `90 -> 18`
+    - `Vector128<...>`: `90 -> 18`
+    - `Vector256<...>`: `90 -> 18`
+    - `Vector512<...>`: `90 -> 18`
+  - emitted examples include:
+    - `Vector64<System.Int32>::op_Addition`
+    - `Vector64<System.Int32>::op_BitwiseAnd`
+    - `Vector128<System.Int32>::op_Subtraction`
+    - `Vector128<System.Int32>::op_BitwiseOr`
+    - `Vector256<System.Int32>::op_ExclusiveOr`
+    - `Vector512<System.Int32>::op_OnesComplement`
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance_reference.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260427-014559-windows-be84`
+- 2026-04-27 01:34:00 +08:00: first fixed-container intrinsics reinterpret slice is now landed and formally verified under canonical formal `20260427-013233-windows-3a6e`.
+  Architecture landed this round:
+  - widened `RuntimeSkeletonVectorKernelCore` to absorb fixed-width intrinsics containers:
+    - `System.Runtime.Intrinsics.Vector64`
+    - `System.Runtime.Intrinsics.Vector128`
+    - `System.Runtime.Intrinsics.Vector256`
+    - `System.Runtime.Intrinsics.Vector512`
+  - new vector semantic lane:
+    - `vector-reinterpret`
+  - native runtime-core fixed-width carriers/helpers:
+    - `RuntimeIntrinsicVector64Carrier`
+    - `RuntimeIntrinsicVector128Carrier`
+    - `RuntimeIntrinsicVector256Carrier`
+    - `RuntimeIntrinsicVector512Carrier`
+    - `Vector64Reinterpret`
+    - `Vector128Reinterpret`
+    - `Vector256Reinterpret`
+    - `Vector512Reinterpret`
+  Coverage effect from canonical evidence:
+  - `emittedMethodCount`: `9681 -> 9880` (`+199`)
+  - `Vector64::As*`: `25 -> 0`
+  - `Vector128::As*`: `82 -> 0`
+  - `Vector256::As*`: `60 -> 0`
+  - `Vector512::As*`: `32 -> 0`
+  - emitted examples include:
+    - `Vector64::As<!!0,System.Int32>`
+    - `Vector128::As<!!0,System.Int32>`
+    - `Vector256::As<!!0,System.Single>`
+    - `Vector512::As<!!0,System.Double>`
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance_reference.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260427-013233-windows-3a6e`
+- 2026-04-27 01:24:00 +08:00: second `vector kernel` widening slice is now landed and formally verified under canonical formal `20260427-012240-windows-a54c`.
+  Architecture landed this round:
+  - widened `RuntimeSkeletonVectorKernelCore` with:
+    - `vector-initializer`
+    - `vector-arithmetic`
+    - `vector-distance`
+  - widened runtime-core vector helpers for `Vector2/3/4`:
+    - `Zero / One / UnitX/Y/Z/W`
+    - vector-vector `Multiply / Divide`
+    - vector-scalar `MultiplyScalar / DivideScalar`
+    - `Negate`
+    - `LengthSquared`
+    - `DistanceSquared`
+  Coverage effect from canonical evidence:
+  - `emittedMethodCount`: `9624 -> 9681` (`+57`)
+  - `System.Numerics.Vector2`: `54 -> 36`
+  - `System.Numerics.Vector3`: `53 -> 34`
+  - `System.Numerics.Vector4`: `58 -> 38`
+  - newly emitted examples include:
+    - `Vector2::get_Zero`
+    - `Vector2::get_UnitX`
+    - `Vector2::op_Multiply(vector,vector)`
+    - `Vector2::op_Division(vector,scalar)`
+    - `Vector3::LengthSquared`
+    - `Vector4::DistanceSquared`
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance_reference.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260427-012240-windows-a54c`
+- 2026-04-27 01:13:00 +08:00: first `vector kernel` foundation slice is now landed and formally verified under canonical formal `20260427-011134-windows-980c`.
+  Architecture landed this round:
+  - new vector kernel core:
+    - `src/managed/Chaos.IL2CPP.CodeGen/ReferenceProof/RuntimeSkeletonVectorKernelCore.cs`
+  - new split family:
+    - `src/managed/Chaos.IL2CPP.CodeGen/ReferenceProof/NativeReferenceProofEmitter.VectorKernelFamily.cs`
+  - runtime plugin registration:
+    - `Plugin_VectorKernelFamily`
+  - native runtime-core vector carrier/helpers:
+    - `RuntimeNumericsVector2Carrier`
+    - `RuntimeNumericsVector3Carrier`
+    - `RuntimeNumericsVector4Carrier`
+    - `Vector2Add / Vector2Subtract / Vector2Dot`
+    - `Vector3Add / Vector3Subtract / Vector3Dot`
+    - `Vector4Add / Vector4Subtract / Vector4Dot`
+  - template strategy is frozen as:
+    - vector kernel reuses `RuntimeSkeletonValueTypeKernelStub`
+    - no separate vector-only scriban layer was introduced in this first slice
+  Coverage effect from canonical evidence:
+  - `emittedMethodCount`: `9609 -> 9624` (`+15`)
+  - `System.Numerics.Vector2`: `59 -> 54`
+  - `System.Numerics.Vector3`: `58 -> 53`
+  - `System.Numerics.Vector4`: `63 -> 58`
+  - first emitted targets include:
+    - `Vector2::Add`
+    - `Vector2::op_Addition`
+    - `Vector2::Subtract`
+    - `Vector2::op_Subtraction`
+    - `Vector2::Dot`
+    - `Vector3::Add/op_Addition`
+    - `Vector4::Add/op_Addition`
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance_reference.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260427-011134-windows-980c`
+- 2026-04-27 00:58:00 +08:00: `System.Diagnostics.Tracing.NativeRuntimeEventSource` is now complete. Canonical formal `20260427-005643-windows-d194` proves `NativeRuntimeEventSource` supplemental uncovered is now `0`.
+  Architecture landed this round:
+  - completed the root emitter handoff by adding `TryBuildRuntimeSkeletonNativeRuntimeEventSourcePlatformCapabilityFamilyHandler(...)` into `NativeReferenceProofEmitter.cs`
+  - widened `NativeReferenceProofEmitter.NativeRuntimeEventSourcePlatformCapabilityFamily.cs` from managed-invoke-only coverage to a hybrid lane:
+    - canonical-body methods still use `RuntimeSkeletonNativeRuntimeEventSourceManagedInvokeAbi`
+    - imported `QCall` residual methods now go through a capability-gated residual stub lane
+  - residual policy is frozen as:
+    - scope: `imported-method + no-canonical-body + QCall + System.Void`
+    - behavior: validate pointer-backed argument slots, then intentionally no-op on proof runtime
+    - rationale: these ETW logging entrypoints are platform capability residuals, not generic `DllImport` targets
+  Verification:
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance_reference.py -q`
+  - canonical formal `20260427-005643-windows-d194`
+- 2026-04-27 00:32:00 +08:00: approved `D3-C` codegen pluginization refactor is now implemented and self-verified under canonical formal `20260427-002755-windows-aecd`.
+  Completed phases:
+  - `Phase 1: Family Registry Generator`
+  - `Phase 2: Lowering Plan Registry Generator`
+  - `Phase 3: Template Bundle Registry Generator`
+  - `Phase 4: Runtime Provider Registry Generator`
+  Landed files and surfaces:
+  - source generator project:
+    - `src/managed/Chaos.IL2CPP.CodeGen.Generators/Chaos.IL2CPP.CodeGen.Generators.csproj`
+    - `src/managed/Chaos.IL2CPP.CodeGen.Generators/CodeGenPluginRegistryGenerator.cs`
+  - plugin metadata/contracts:
+    - `src/managed/Chaos.IL2CPP.CodeGen/Pluginization/CodeGenPluginAttributes.cs`
+    - `src/managed/Chaos.IL2CPP.CodeGen/Pluginization/CodeGenPluginRegistries.cs`
+  - generated-plugin export sources:
+    - `src/managed/Chaos.IL2CPP.CodeGen/ReferenceProof/NativeReferenceProofEmitter.GeneratedPluginExports.cs`
+    - `src/managed/Chaos.IL2CPP.CodeGen/ReferenceProof/NativeReferenceLoweringPlanner.GeneratedPluginExports.cs`
+  - template/provider plugin declarations:
+    - `src/managed/Chaos.IL2CPP.CodeGen/Pluginization/CodeGenTemplateBundlePlugins.cs`
+    - `src/managed/Chaos.IL2CPP.CodeGen/Pluginization/CodeGenRuntimeProviderPlugins.cs`
+    - `src/managed/Chaos.IL2CPP.CodeGen/Pluginization/CodeGenRuntimeProviderCatalog.cs`
+  - product-line template access now explicitly exposes generated bundle registries through:
+    - `NativeReferenceProofCatalog.GetRegisteredTemplateBundles()`
+    - `NativeAotTemplateCatalog.GetRegisteredTemplateBundles()`
+  Effective architecture changes:
+  - root runtime-skeleton family list is no longer hand-maintained in `NativeReferenceProofEmitter.cs`
+  - `NativeReferenceLoweringPlanner.CreateLoweringPlan(...)` now dispatches through generated lowering plan plugin registry instead of a hand-written `TryCreate*` bus
+  - runtime provider declarations are generated per product line and explicitly surfaced through `CodeGenRuntimeProviderCatalog`
+  - source generator remains compile-time-only and performs collection/registry generation only; no runtime reflection discovery or backend/template/provider capability inference was introduced
+  Verification:
+  - `python -m pytest tests/unit/compatibility/test_il2cpp_codegen_structure_governance_reference.py -q`
+  - `python -m pytest tests/unit/compatibility/test_full_assembly_closure_codegen_contracts_runtime_templates.py -q`
+  - `python -m pytest tests/unit/compatibility/test_native_runtime_core.py -q`
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal`
+  - canonical formal `20260427-002755-windows-aecd`
+- 2026-04-26 23:50:00 +08:00: codegen architecture has a new approved roadmap supplement for source-generator-driven `D3-C` pluginization:
+  - `docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/design-v2-04-codegen-d3c-pluginization-roadmap.md`
+  Approved structure:
+  - compile-time generated static registries only
+  - no runtime reflection discovery
+  - four generated plugin classes:
+    - family registry
+    - lowering plan registry
+    - template bundle registry
+    - runtime provider registry
+  - registries must be split by product line:
+    - `NativeReference`
+    - `NativeAot`
+  - source generator authority is limited to collection and registry generation; it must not infer backend, template, provider capability, or semantic ownership
+  - migration phases are frozen as:
+    1. family registry generator
+    2. lowering plan registry generator
+    3. template bundle registry generator
+    4. runtime provider registry generator
+  Immediate architecture next step is now:
+  - `Phase 1: Family Registry Generator`
+- 2026-04-26 23:38:00 +08:00: `Interop+Kernel32` is complete. Canonical formal `20260426-233441-windows-c7f1` proves `Interop+Kernel32` supplemental uncovered is now `0`.
+  Architecture landed this round:
+  - new family split:
+    - `NativeReferenceProofEmitter.InteropKernel32PlatformCapabilityFamily.cs`
+  - new shared cores:
+    - `RuntimeSkeletonInteropKernel32PlatformCore`
+    - `RuntimeSkeletonInteropKernel32ManagedInvokeAbi`
+  - new runtime-core helpers:
+    - `InteropKernel32GetLastError`
+    - `InteropKernel32GetCurrentProcessId`
+    - `InteropKernel32GetCurrentThreadId`
+    - `InteropKernel32GetCurrentProcess`
+    - `InteropKernel32GetCurrentThread`
+    - `InteropKernel32CloseHandle`
+    - `InteropKernel32FreeLibrary`
+  Family shape:
+  - selected leaf fast paths for stable process/loader/handle helpers
+  - managed fallback for canonical-body wrappers
+  - residual default platform stubs for imported/private wrapper tail
+  This is sufficient to eliminate the full `Interop+Kernel32` residual cluster without reintroducing repository-wide special cases.
+  Local gates:
+  - `test_native_runtime_core.py` passed
+  - `test_il2cpp_codegen_structure_governance_reference.py` passed
+  - `test_full_assembly_closure_codegen_contracts_runtime_templates.py` passed
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal` passed
+- 2026-04-26 23:08:00 +08:00: `System.Threading.Tasks.Task` is complete. Canonical formal `20260426-230452-windows-f028` proves `Task` supplemental uncovered is now `0`.
+  Architecture landed this round:
+  - new family split:
+    - `NativeReferenceProofEmitter.TaskContinuationFamily.cs`
+  - new shared cores:
+    - `RuntimeSkeletonTaskPlatformCore`
+    - `RuntimeSkeletonTaskManagedInvokeAbi`
+  - new runtime templates:
+    - `NativeReferenceProof.RuntimeSkeleton.TaskKernelFastPathStub.cpp.scriban`
+    - `NativeReferenceProof.RuntimeSkeleton.TaskManagedInvokeStub.cpp.scriban`
+  - new runtime-core kernel root:
+    - `TaskRuntimeKernelV1`
+  Kernel direction is now frozen as `Hybrid Task Runtime`.
+  Current first safe kernelized entry:
+  - `Task::NewId`
+  The rest of `Task` is now owned by the same family through task-specific fallback instead of repository-wide special cases.
+  A narrow residual tail for two debugger/field-getter shapes was also closed inside the family:
+  - `get_ExecutingTaskScheduler`
+  - `get_StateFlagsForDebugger`
+  Local gates:
+  - `test_native_runtime_core.py` passed
+  - `test_il2cpp_codegen_structure_governance_reference.py` passed
+  - `test_full_assembly_closure_codegen_contracts_runtime_templates.py` passed
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal` passed
+- 2026-04-26 19:36:00 +08:00: `System.Runtime.InteropServices.Marshal` is complete. Canonical formal `20260426-193309-windows-f3dc` proves `Marshal` supplemental uncovered is now `0`.
+  Architecture landed this round:
+  - new family split:
+    - `NativeReferenceProofEmitter.MarshalPlatformCapabilityFamily.cs`
+  - new shared cores:
+    - `RuntimeSkeletonMarshalPlatformCore`
+    - `RuntimeSkeletonMarshalManagedInvokeAbi`
+  - new runtime template:
+    - `NativeReferenceProof.RuntimeSkeleton.MarshalPlatformFastPathStub.cpp.scriban`
+  - new runtime-core provider surface:
+    - `MarshalPlatformAbiRootV1`
+    - `MarshalMemoryBlockAbiV1`
+    - `MarshalStringMarshalingAbiV1`
+    - `MarshalStructureLayoutAbiV1`
+    - allocation-kind headers
+  Fast-path cutover landed for:
+  - `AllocHGlobal / AllocCoTaskMem / ReAllocHGlobal / ReAllocCoTaskMem`
+  - `FreeHGlobal / FreeCoTaskMem / ZeroFreeCoTaskMemUTF8`
+  - `StringToCoTaskMemUTF8`
+  - `PtrToStringUTF8`
+  - raw-pointer `Read* / Write*`
+  Remaining platform-internal residual tail was closed with narrow platform stubs for:
+  - private COM activation `g____PInvoke` wrappers
+  - `GetHINSTANCE(QCallModule)`
+  - `InternalPrelink(RuntimeMethodHandleInternal)`
+  Evidence from generated runtime pages now includes:
+  - `MarshalAllocHGlobal`
+  - `MarshalAllocCoTaskMem`
+  - `MarshalStringToCoTaskMemUtf8`
+  - `MarshalPtrToStringUtf8`
+  - `MarshalReadInt32`
+  - `MarshalWriteIntPtr`
+  Local gates:
+  - `test_native_runtime_core.py` passed
+  - `test_il2cpp_codegen_structure_governance_reference.py` passed
+  - `test_full_assembly_closure_codegen_contracts_runtime_templates.py` passed
+  - `dotnet build src/managed/Chaos.IL2CPP.CodeGen/Chaos.IL2CPP.CodeGen.csproj -v:minimal` passed
 - 2026-04-26 18:55:00 +08:00: `System.Runtime.InteropServices.Marshal` is now formally frozen as the first `Phase 4A: Platform Capability` target. Approved design supplement:
   - `docs/dev/in-progress/20260419-37-corelib-supplemental-runtime-skeleton-coverage-widening/design-v2-02-marshal-platform-capability.md`
   Key authority decisions:
@@ -290,7 +1033,7 @@ active: false
 
 ## Next Step
 
-- next_action: start `System.Runtime.InteropServices.Marshal` implementation with `MarshalPlatformAbiRootV1 + MarshalMemoryBlockAbiV1 + allocation-kind headers + canonical descriptor A/B/C classification`
+- next_action: continue fixed-width intrinsics containers with `Create / CreateScalar / Count / IsSupported`, then revisit `Vector<T>` only after deciding whether a clean type-size authority seam is required
 - owner: codex
 - trigger: immediate
 
@@ -322,6 +1065,12 @@ active: false
   - `runId = 20260426-170213-windows-5990`
 - kernel registry + widened char/floating kernel formal:
   - `runId = 20260426-181841-windows-9c9b`
+- marshal platform capability closure formal:
+  - `runId = 20260426-193309-windows-f3dc`
+- task continuation family closure formal:
+  - `runId = 20260426-230452-windows-f028`
+- interop-kernel32 platform capability closure formal:
+  - `runId = 20260426-233441-windows-c7f1`
 - enum D2 closure formal:
   - `runId = 20260426-143918-windows-54fe`
 - number managed-invoke closure formal:

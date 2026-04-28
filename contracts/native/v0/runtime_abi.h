@@ -45,6 +45,21 @@ typedef struct ThreadState ThreadState;
 typedef uint64_t GCHandle;
 typedef int32_t RuntimeStatus;
 
+typedef enum TypeCapabilityVectorLaneKind {
+    CHAOS_TYPE_CAPABILITY_VECTOR_LANE_NONE = 0,
+    CHAOS_TYPE_CAPABILITY_VECTOR_LANE_INTEGER = 1,
+    CHAOS_TYPE_CAPABILITY_VECTOR_LANE_FLOATING = 2
+} TypeCapabilityVectorLaneKind;
+
+typedef enum TypeCapabilityScalarKind {
+    CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NONE = 0,
+    CHAOS_TYPE_CAPABILITY_SCALAR_KIND_SIGNED_INTEGER = 1,
+    CHAOS_TYPE_CAPABILITY_SCALAR_KIND_UNSIGNED_INTEGER = 2,
+    CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_SIGNED_INTEGER = 3,
+    CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_UNSIGNED_INTEGER = 4,
+    CHAOS_TYPE_CAPABILITY_SCALAR_KIND_FLOATING = 5
+} TypeCapabilityScalarKind;
+
 enum {
     CHAOS_RUNTIME_STATUS_OK = 0,
     CHAOS_RUNTIME_STATUS_INVALID_ARGUMENT = 1,
@@ -80,6 +95,21 @@ typedef struct RuntimeConfig {
     void* allocator_user_data;
     uint32_t reserved_u32[4];
 } RuntimeConfig;
+
+typedef struct RuntimeTypeCapabilityInfoV0 {
+    uint32_t struct_size;
+    uint32_t capability_bits;
+    uint32_t value_size_bytes;
+    uint32_t vector_width_bytes;
+    uint32_t vector_lane_count;
+    uint32_t vector_lane_kind;
+    uint32_t scalar_kind;
+} RuntimeTypeCapabilityInfoV0;
+
+typedef struct RuntimeTypeCapabilityEntryV0 {
+    uint32_t type_token;
+    RuntimeTypeCapabilityInfoV0 capability_info;
+} RuntimeTypeCapabilityEntryV0;
 
 /*
  * Process-wide function table for the low-level runtime ABI.
@@ -188,11 +218,24 @@ typedef struct RuntimeAbiV0 {
         const char* event_name_utf8);
     TypeInfoHandle (CHAOS_RUNTIME_ABI_CALL* type_get_generic_type_definition)(
         TypeInfoHandle type);
+    RuntimeStatus (CHAOS_RUNTIME_ABI_CALL* type_query_capability)(
+        TypeInfoHandle type,
+        RuntimeTypeCapabilityInfoV0* out_capability_info);
     ParameterInfoHandle (CHAOS_RUNTIME_ABI_CALL* method_get_parameter)(
         MethodInfoHandle method,
         uint32_t parameter_index);
     GenericContextHandle (CHAOS_RUNTIME_ABI_CALL* method_get_generic_context)(
         MethodInfoHandle method);
+    uint32_t (CHAOS_RUNTIME_ABI_CALL* generic_context_get_class_arg_count)(
+        GenericContextHandle generic_context);
+    TypeInfoHandle (CHAOS_RUNTIME_ABI_CALL* generic_context_get_class_arg)(
+        GenericContextHandle generic_context,
+        uint32_t index);
+    uint32_t (CHAOS_RUNTIME_ABI_CALL* generic_context_get_method_arg_count)(
+        GenericContextHandle generic_context);
+    TypeInfoHandle (CHAOS_RUNTIME_ABI_CALL* generic_context_get_method_arg)(
+        GenericContextHandle generic_context,
+        uint32_t index);
 } RuntimeAbiV0;
 
 /* Returns the process-wide v0 table or null when the ABI is unavailable. */

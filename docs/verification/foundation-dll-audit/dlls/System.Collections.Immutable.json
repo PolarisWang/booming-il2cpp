@@ -1,34 +1,28 @@
 {
   "assemblyName": "System.Collections.Immutable",
   "orderIndex": 2,
-  "phase": "phase-2",
-  "roadmapTaskId": "20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable",
-  "dllState": "blocked",
-  "currentProject": "completion-certification",
-  "blockingReason": "验证 `System.Collections.Immutable`，等待 CoreLib full verification 真正完成",
+  "phase": "roadmap-closed",
+  "roadmapTaskId": "20260427-04-dll-capability-verification-closure-roadmap",
+  "dllState": "not-started",
+  "currentProject": "audit-input-and-ledger",
+  "blockingReason": "",
   "riskTags": [],
   "projects": [
     {
       "projectCode": "audit-input-and-ledger",
       "displayName": "Audit Input And Ledger",
       "policyState": "required",
-      "executionState": "blocked",
-      "verificationMethod": "刷新 audit input manifest，并校验 surface / semantic / nativeization plan。",
+      "executionState": "pending",
+      "verificationMethod": "Refresh audit input manifest and validate surface / semantic / nativeization plan.",
       "verificationTarget": "System.Collections.Immutable",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md",
         "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
       ],
-      "blockers": [
-        {
-          "code": "20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable",
-          "message": "验证 `System.Collections.Immutable`，等待 CoreLib full verification 真正完成"
-        }
-      ],
+      "blockers": [],
       "updatedAt": ""
     },
     {
@@ -36,14 +30,13 @@
       "displayName": "Managed Proof",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "运行 managed proof，验证语义基线。",
+      "verificationMethod": "Run managed proof and validate managed semantics baseline.",
       "verificationTarget": "System.Collections.Immutable",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md",
         "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
       ],
       "blockers": [],
@@ -54,14 +47,13 @@
       "displayName": "Native Proof",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "运行 native / AOT proof，验证 generated native code 可执行。",
+      "verificationMethod": "Run native / AOT proof and validate generated native code execution.",
       "verificationTarget": "System.Collections.Immutable",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md",
         "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
       ],
       "blockers": [],
@@ -72,14 +64,13 @@
       "displayName": "HotUpdate Proof",
       "policyState": "conditional",
       "executionState": "pending",
-      "verificationMethod": "运行 patch / host proof，验证 hotupdate consumer 路径。",
+      "verificationMethod": "Run patch / host proof and validate hotupdate consumer path.",
       "verificationTarget": "System.Collections.Immutable",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md",
         "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
       ],
       "blockers": [],
@@ -90,14 +81,13 @@
       "displayName": "Benchmark",
       "policyState": "conditional",
       "executionState": "pending",
-      "verificationMethod": "运行 benchmark，归档性能结果。",
+      "verificationMethod": "Run benchmarks and archive performance results.",
       "verificationTarget": "System.Collections.Immutable",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md",
         "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
       ],
       "blockers": [],
@@ -108,14 +98,13 @@
       "displayName": "Codegen Review",
       "policyState": "required",
       "executionState": "pending",
-      "verificationMethod": "审核 generated code、dispatch/helper/binding/coverage。",
+      "verificationMethod": "Review generated code, dispatch, helpers, bindings, and coverage artifacts.",
       "verificationTarget": "System.Collections.Immutable",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md",
         "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
       ],
       "blockers": [],
@@ -125,23 +114,17 @@
       "projectCode": "completion-certification",
       "displayName": "Completion Certification",
       "policyState": "required",
-      "executionState": "blocked",
-      "verificationMethod": "汇总前置 project 结果，给出 DLL completion 结论。",
+      "executionState": "pending",
+      "verificationMethod": "Aggregate project results and produce DLL completion conclusion.",
       "verificationTarget": "System.Collections.Immutable",
       "completionRule": "",
       "artifacts": [],
       "supportRefs": [
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-        "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md",
         "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
       ],
-      "blockers": [
-        {
-          "code": "20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable",
-          "message": "验证 `System.Collections.Immutable`，等待 CoreLib full verification 真正完成"
-        }
-      ],
+      "blockers": [],
       "updatedAt": ""
     }
   ],
@@ -155,7 +138,7 @@
     "closurePercent": 0.0
   },
   "workflowProgress": {
-    "totalRequiredGates": 40,
+    "totalRequiredGates": 60,
     "passedGates": 0,
     "progressPercent": 0.0
   },
@@ -170,8 +153,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -195,7 +178,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Collections.Immutable/immutable-list",
@@ -207,8 +269,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -232,7 +294,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Collections.Immutable/immutable-dictionary",
@@ -244,8 +385,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -269,7 +410,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Collections.Immutable/immutable-sorted-dictionary",
@@ -281,8 +501,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -306,7 +526,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Collections.Immutable/immutable-hash-set",
@@ -318,8 +617,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -343,7 +642,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Collections.Immutable/immutable-sorted-set",
@@ -355,8 +733,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -380,7 +758,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Collections.Immutable/immutable-queue-stack",
@@ -392,8 +849,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -417,7 +874,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Collections.Immutable/immutable-interlocked",
@@ -429,8 +965,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -454,7 +990,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Collections.Immutable/frozen-collections",
@@ -466,8 +1081,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -491,7 +1106,86 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     },
     {
       "familyId": "family/System.Collections.Immutable/extensions-marshal",
@@ -503,8 +1197,8 @@
         "audit-input-and-ledger": "pending",
         "managed-proof": "pending",
         "native-proof": "pending",
-        "hotupdate-proof": "not-required",
-        "benchmark": "not-required",
+        "hotupdate-proof": "pending",
+        "benchmark": "pending",
         "codegen-review": "pending"
       },
       "methodCount": 0,
@@ -528,9 +1222,2097 @@
         "allMethodsCovered": false,
         "action": "none",
         "testProjectPath": ""
-      }
+      },
+      "synthesisStatus": "orphan-confirmed",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate"
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 1,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "no-coverage",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "pending",
+        "denominator": 0,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "reviewBundle": {}
     }
   ],
+  "familyVerificationClaims": {
+    "schemaVersion": 1,
+    "assemblyName": "System.Collections.Immutable",
+    "ownerSubjectId": "SolutionCorePack",
+    "methodUniverseArtifactPaths": [],
+    "claims": [
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-array::native-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-array",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Array",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-array::managed-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-array",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Array",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-array::hotupdate-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-array",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Array",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-array::benchmark",
+        "familyId": "family/System.Collections.Immutable/immutable-array",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Array",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-array::test-code",
+        "familyId": "family/System.Collections.Immutable/immutable-array",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Array",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-list::native-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-list",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable List",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-list::managed-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-list",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable List",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-list::hotupdate-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-list",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable List",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-list::benchmark",
+        "familyId": "family/System.Collections.Immutable/immutable-list",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable List",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-list::test-code",
+        "familyId": "family/System.Collections.Immutable/immutable-list",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable List",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-dictionary::native-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-dictionary",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Dictionary",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-dictionary::managed-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-dictionary",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Dictionary",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-dictionary::hotupdate-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-dictionary",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Dictionary",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-dictionary::benchmark",
+        "familyId": "family/System.Collections.Immutable/immutable-dictionary",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Dictionary",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-dictionary::test-code",
+        "familyId": "family/System.Collections.Immutable/immutable-dictionary",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Dictionary",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-sorted-dictionary::native-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-sorted-dictionary",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Sorted Dictionary",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-sorted-dictionary::managed-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-sorted-dictionary",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Sorted Dictionary",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-sorted-dictionary::hotupdate-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-sorted-dictionary",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Sorted Dictionary",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-sorted-dictionary::benchmark",
+        "familyId": "family/System.Collections.Immutable/immutable-sorted-dictionary",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Sorted Dictionary",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-sorted-dictionary::test-code",
+        "familyId": "family/System.Collections.Immutable/immutable-sorted-dictionary",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Sorted Dictionary",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-hash-set::native-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-hash-set",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Hash Set",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-hash-set::managed-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-hash-set",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Hash Set",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-hash-set::hotupdate-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-hash-set",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Hash Set",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-hash-set::benchmark",
+        "familyId": "family/System.Collections.Immutable/immutable-hash-set",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Hash Set",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-hash-set::test-code",
+        "familyId": "family/System.Collections.Immutable/immutable-hash-set",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Hash Set",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-sorted-set::native-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-sorted-set",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Sorted Set",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-sorted-set::managed-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-sorted-set",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Sorted Set",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-sorted-set::hotupdate-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-sorted-set",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Sorted Set",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-sorted-set::benchmark",
+        "familyId": "family/System.Collections.Immutable/immutable-sorted-set",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Sorted Set",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-sorted-set::test-code",
+        "familyId": "family/System.Collections.Immutable/immutable-sorted-set",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Sorted Set",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-queue-stack::native-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-queue-stack",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Queue And Stack",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-queue-stack::managed-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-queue-stack",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Queue And Stack",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-queue-stack::hotupdate-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-queue-stack",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Queue And Stack",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-queue-stack::benchmark",
+        "familyId": "family/System.Collections.Immutable/immutable-queue-stack",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Queue And Stack",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-queue-stack::test-code",
+        "familyId": "family/System.Collections.Immutable/immutable-queue-stack",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Queue And Stack",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-interlocked::native-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-interlocked",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Interlocked",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-interlocked::managed-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-interlocked",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Interlocked",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-interlocked::hotupdate-proof",
+        "familyId": "family/System.Collections.Immutable/immutable-interlocked",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Interlocked",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-interlocked::benchmark",
+        "familyId": "family/System.Collections.Immutable/immutable-interlocked",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Interlocked",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/immutable-interlocked::test-code",
+        "familyId": "family/System.Collections.Immutable/immutable-interlocked",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Interlocked",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/frozen-collections::native-proof",
+        "familyId": "family/System.Collections.Immutable/frozen-collections",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Frozen Collections",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/frozen-collections::managed-proof",
+        "familyId": "family/System.Collections.Immutable/frozen-collections",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Frozen Collections",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/frozen-collections::hotupdate-proof",
+        "familyId": "family/System.Collections.Immutable/frozen-collections",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Frozen Collections",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/frozen-collections::benchmark",
+        "familyId": "family/System.Collections.Immutable/frozen-collections",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Frozen Collections",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/frozen-collections::test-code",
+        "familyId": "family/System.Collections.Immutable/frozen-collections",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Frozen Collections",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/extensions-marshal::native-proof",
+        "familyId": "family/System.Collections.Immutable/extensions-marshal",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Extensions And Marshal",
+        "derivationRule": "",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/extensions-marshal::managed-proof",
+        "familyId": "family/System.Collections.Immutable/extensions-marshal",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Extensions And Marshal",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/extensions-marshal::hotupdate-proof",
+        "familyId": "family/System.Collections.Immutable/extensions-marshal",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Extensions And Marshal",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/extensions-marshal::benchmark",
+        "familyId": "family/System.Collections.Immutable/extensions-marshal",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Extensions And Marshal",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Collections.Immutable/extensions-marshal::test-code",
+        "familyId": "family/System.Collections.Immutable/extensions-marshal",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 0,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "Immutable Extensions And Marshal",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      }
+    ]
+  },
+  "familyVerificationSnapshot": {
+    "schemaVersion": 1,
+    "assemblyName": "System.Collections.Immutable",
+    "ownerSubjectId": "SolutionCorePack",
+    "families": [
+      {
+        "familyId": "family/System.Collections.Immutable/immutable-array",
+        "displayName": "Immutable Array",
+        "description": "ImmutableArray construction, builders, enumeration, mutation-like transforms, and interop.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Collections.Immutable/immutable-list",
+        "displayName": "Immutable List",
+        "description": "ImmutableList nodes, builders, indexing, range, mutation-like transforms, and enumeration.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Collections.Immutable/immutable-dictionary",
+        "displayName": "Immutable Dictionary",
+        "description": "ImmutableDictionary lookup, add, set, remove, builders, and enumeration.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Collections.Immutable/immutable-sorted-dictionary",
+        "displayName": "Immutable Sorted Dictionary",
+        "description": "ImmutableSortedDictionary comparers, ordering, builders, lookup, and mutation-like transforms.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Collections.Immutable/immutable-hash-set",
+        "displayName": "Immutable Hash Set",
+        "description": "ImmutableHashSet equality comparers, set operations, builders, and enumeration.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Collections.Immutable/immutable-sorted-set",
+        "displayName": "Immutable Sorted Set",
+        "description": "ImmutableSortedSet ordering, range views, set operations, builders, and enumeration.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Collections.Immutable/immutable-queue-stack",
+        "displayName": "Immutable Queue And Stack",
+        "description": "ImmutableQueue and ImmutableStack push, pop, peek, clear, and enumeration behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Collections.Immutable/immutable-interlocked",
+        "displayName": "Immutable Interlocked",
+        "description": "ImmutableInterlocked atomic update, add, remove, and compare-exchange helper behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Collections.Immutable/frozen-collections",
+        "displayName": "Frozen Collections",
+        "description": "FrozenDictionary and FrozenSet lookup, alternate lookup, enumeration, and construction.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Collections.Immutable/extensions-marshal",
+        "displayName": "Immutable Extensions And Marshal",
+        "description": "ImmutableArrayExtensions and ImmutableCollectionsMarshal interop and projection behavior.",
+        "denominatorStatus": "audit-confirmed",
+        "closureStatus": "in-progress",
+        "verificationGates": {
+          "audit-input-and-ledger": "pending",
+          "managed-proof": "pending",
+          "native-proof": "pending",
+          "hotupdate-proof": "pending",
+          "benchmark": "pending",
+          "codegen-review": "pending"
+        },
+        "methodCount": 0,
+        "implementationFamilies": [],
+        "sourceGroups": [],
+        "authorityRefs": [
+          "verification/catalog/programs/foundation-dll-translation-audit.program.json",
+          "docs/dev/in-progress/20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable/STATUS.md"
+        ],
+        "derivationBasis": [
+          "audit-input-manifest",
+          "surface-ledger",
+          "semantic-ledger",
+          "nativeization-plan"
+        ],
+        "confirmationNote": "Confirmed in the all-DLL denominator freeze for unified foundation reporting.",
+        "testCode": {
+          "testCodeStatus": "no-coverage",
+          "requestedMethodCount": 0,
+          "emittedMethodCount": 0,
+          "allMethodsCovered": false,
+          "action": "none",
+          "testProjectPath": ""
+        },
+        "synthesisStatus": "orphan-confirmed",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate"
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 1,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "no-coverage",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "pending",
+          "denominator": 0,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "reviewBundle": {}
+      }
+    ]
+  },
+  "truthContracts": {
+    "schemaVersion": 1,
+    "dllCapabilityManifest": {
+      "assemblyName": "System.Collections.Immutable",
+      "ownerSubjectId": "SolutionCorePack",
+      "capabilityFamilies": [
+        "family/System.Collections.Immutable/immutable-array",
+        "family/System.Collections.Immutable/immutable-list",
+        "family/System.Collections.Immutable/immutable-dictionary",
+        "family/System.Collections.Immutable/immutable-sorted-dictionary",
+        "family/System.Collections.Immutable/immutable-hash-set",
+        "family/System.Collections.Immutable/immutable-sorted-set",
+        "family/System.Collections.Immutable/immutable-queue-stack",
+        "family/System.Collections.Immutable/immutable-interlocked",
+        "family/System.Collections.Immutable/frozen-collections",
+        "family/System.Collections.Immutable/extensions-marshal"
+      ],
+      "capabilityFamilyCount": 10,
+      "methodUniverseCount": 0
+    },
+    "capabilityFamilyVerificationContracts": [
+      {
+        "assemblyName": "System.Collections.Immutable",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Collections.Immutable/immutable-array",
+        "displayName": "Immutable Array",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Collections.Immutable",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Collections.Immutable/immutable-list",
+        "displayName": "Immutable List",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Collections.Immutable",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Collections.Immutable/immutable-dictionary",
+        "displayName": "Immutable Dictionary",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Collections.Immutable",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Collections.Immutable/immutable-sorted-dictionary",
+        "displayName": "Immutable Sorted Dictionary",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Collections.Immutable",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Collections.Immutable/immutable-hash-set",
+        "displayName": "Immutable Hash Set",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Collections.Immutable",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Collections.Immutable/immutable-sorted-set",
+        "displayName": "Immutable Sorted Set",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Collections.Immutable",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Collections.Immutable/immutable-queue-stack",
+        "displayName": "Immutable Queue And Stack",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Collections.Immutable",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Collections.Immutable/immutable-interlocked",
+        "displayName": "Immutable Interlocked",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Collections.Immutable",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Collections.Immutable/frozen-collections",
+        "displayName": "Frozen Collections",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      },
+      {
+        "assemblyName": "System.Collections.Immutable",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Collections.Immutable/extensions-marshal",
+        "displayName": "Immutable Extensions And Marshal",
+        "methodSubjectIds": [],
+        "methodSubjectCount": 0,
+        "functionalObligation": {
+          "required": false
+        },
+        "performanceObligation": {
+          "required": false
+        },
+        "hotupdateFunctionalObligation": {
+          "required": false
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": false
+      }
+    ],
+    "methodCapabilityContracts": []
+  },
   "sourceLinks": {
     "subjectSource": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln",
     "generatedCode": "artifacts/subjects/SolutionCorePack/runs/20260424-200729-windows-23a1/analysis/generated/",

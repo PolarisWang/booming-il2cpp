@@ -14,10 +14,14 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
         ).read_text(encoding="utf-8")
 
         for required_fragment in [
-            "std::uint32_t method_id;",
+            "CHAOS_IL2CPP_UINT32 method_id;",
             "FindMethodDispatchCatalogEntryByMethodId",
             "request->method_id",
             "DispatchAssemblySubject(",
+            "constexpr RuntimeTypeCapabilityEntryV0 kTypeCapabilityEntries[]",
+            "local_code_registration.type_capabilities = kTypeCapabilityEntries",
+            "local_code_registration.type_capability_count",
+            "bridge->register_codegen(&local_code_registration, metadata_registration, options)",
         ]:
             self.assertIn(required_fragment, summary_template_source)
 
@@ -51,7 +55,7 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
             "gPageTypeStates[",
             "ResolveRuntimeSkeletonFieldBinding(",
             "ResolveRuntimeSkeletonType(",
-            "std::atomic<void*>",
+            "CHAOS_IL2CPP_ATOMIC(void*) type_handle;",
             "ExecuteRuntimeSkeletonConstructorFieldSetter(",
             "ExecuteRuntimeSkeletonFieldGetterStringReturn(",
             "ExecuteRuntimeSkeletonFieldBackedStringReturn(",
@@ -825,7 +829,7 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
             "void* arg1",
             "target_method_token",
             "method_invoke",
-            "std::uint16_t return_value",
+            "CHAOS_IL2CPP_UINT16 return_value",
         ]:
             self.assertIn(required_fragment, template_source)
 
@@ -867,7 +871,7 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
             "target_method_token",
             "method_invoke",
             "request->arg0 == nullptr",
-            "std::uint16_t return_value",
+            "CHAOS_IL2CPP_UINT16 return_value",
         ]:
             self.assertIn(required_fragment, template_source)
 
@@ -1143,6 +1147,168 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
             "method_invoke",
             "arg_storage_size",
             "return_value_size",
+            "return_value_is_indirect",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_marshal_platform_fastpath_helper_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.MarshalPlatformCapabilityFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_MARSHAL_PLATFORM_FASTPATH_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonMarshalPlatformCapabilityFamilyHandler",
+            "TryBuildRuntimeSkeletonMarshalPlatformCapabilityCore",
+            "TryBuildAssemblyBoundMarshalPlatformCapabilityCore",
+            "RuntimeSkeletonMarshalPlatformCore.TryCreateFastPath(",
+            "RuntimeSkeletonMarshalManagedInvokeAbi.TryCreate(",
+            "GetRuntimeSkeletonMarshalPlatformFastPathStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonMarshalPlatformFastPathStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "marshal_capability_area",
+            "helper_statements",
+            "return_value_declaration",
+            "return_value_validation_statement",
+            "arg_validation_statements",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_task_continuation_family_has_templates(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.TaskContinuationFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        kernel_template_source = RUNTIME_SKELETON_TASK_KERNEL_FASTPATH_TEMPLATE_PATH.read_text(encoding="utf-8")
+        managed_template_source = RUNTIME_SKELETON_TASK_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonTaskContinuationFamilyHandler",
+            "TryBuildRuntimeSkeletonTaskContinuationCore",
+            "TryBuildAssemblyBoundTaskContinuationCore",
+            "RuntimeSkeletonTaskPlatformCore.TryCreateFastPath(",
+            "RuntimeSkeletonTaskManagedInvokeAbi.TryCreate(",
+            "GetRuntimeSkeletonTaskKernelFastPathStubTemplate",
+            "GetRuntimeSkeletonTaskManagedInvokeStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonTaskKernelFastPathStubTemplateRelativePath", catalog_source)
+        self.assertIn("RuntimeSkeletonTaskManagedInvokeStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "task_capability_area",
+            "helper_statements",
+            "return_value_declaration",
+            "arg_validation_statements",
+        ]:
+            self.assertIn(required_fragment, kernel_template_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "this_argument_expression",
+            "method_invoke",
+            "arg_storage_size",
+            "return_value_is_indirect",
+        ]:
+            self.assertIn(required_fragment, managed_template_source)
+
+    def test_runtime_skeleton_interop_kernel32_platform_family_uses_existing_templates(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.InteropKernel32PlatformCapabilityFamily.cs"
+        ).read_text(encoding="utf-8")
+        fastpath_template_source = RUNTIME_SKELETON_MARSHAL_PLATFORM_FASTPATH_TEMPLATE_PATH.read_text(encoding="utf-8")
+        managed_template_source = RUNTIME_SKELETON_TASK_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonInteropKernel32PlatformCapabilityFamilyHandler",
+            "TryBuildRuntimeSkeletonInteropKernel32PlatformCapabilityCore",
+            "TryBuildAssemblyBoundInteropKernel32PlatformCapabilityCore",
+            "GetRuntimeSkeletonMarshalPlatformFastPathStubTemplate",
+            "GetRuntimeSkeletonTaskManagedInvokeStubTemplate",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("marshal_capability_area", fastpath_template_source)
+        self.assertIn("this_argument_expression", managed_template_source)
+
+    def test_runtime_skeleton_native_runtime_eventsource_family_has_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.NativeRuntimeEventSourcePlatformCapabilityFamily.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_NATIVE_RUNTIME_EVENTSOURCE_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonNativeRuntimeEventSourcePlatformCapabilityFamilyHandler",
+            "TryBuildRuntimeSkeletonNativeRuntimeEventSourcePlatformCapabilityCore",
+            "TryBuildAssemblyBoundNativeRuntimeEventSourcePlatformCapabilityCore",
+            "TryBuildAssemblyBoundNativeRuntimeEventSourceResidualStub",
+            "RuntimeSkeletonNativeRuntimeEventSourceManagedInvokeAbi.TryCreate(",
+            "GetRuntimeSkeletonNativeRuntimeEventSourceManagedInvokeStubTemplate",
+            "GetRuntimeSkeletonMarshalPlatformFastPathStubTemplate",
+            "ImportModuleName",
+            "\"QCall\"",
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        self.assertIn("RuntimeSkeletonNativeRuntimeEventSourceManagedInvokeStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "target_method_token",
+            "this_argument_expression",
+            "method_invoke",
+            "arg_storage_size",
             "return_value_is_indirect",
         ]:
             self.assertIn(required_fragment, template_source)
@@ -1487,6 +1653,351 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
         ]:
             self.assertIn(required_fragment, template_source)
 
+    def test_runtime_skeleton_vector_kernel_family_reuses_shared_kernel_template(self) -> None:
+        native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.VectorKernelFamily.cs"
+        ).read_text(encoding="utf-8")
+        vector_kernel_core_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "RuntimeSkeletonVectorKernelCore.cs"
+        ).read_text(encoding="utf-8")
+        catalog_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofCatalog.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_VALUETYPE_KERNEL_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "TryBuildRuntimeSkeletonVectorKernelFamilyHandler",
+            "TryBuildRuntimeSkeletonVectorKernelFamilyCore",
+            "TryBuildRuntimeSkeletonVectorKernelCore",
+            "TryBuildAssemblyBoundVectorKernelCore",
+            "RuntimeSkeletonVectorKernelCore.",
+            "GetRuntimeSkeletonValueTypeKernelStubTemplate",
+            "GetRuntimeSkeletonVectorCopyKernelStubTemplate",
+            "GetRuntimeSkeletonVectorCapabilityQueryStubTemplate",
+            '(string.Equals(plan.SemanticId, "vector-fixed-equality", StringComparison.Ordinal) &&',
+            '!string.IsNullOrWhiteSpace(plan.CapabilityOperationId))',
+            'string.Equals(plan.SemanticId, "vector-copy", StringComparison.Ordinal)',
+        ]:
+            self.assertIn(required_fragment, native_reference_emitter_source + "\n" + split_source)
+
+        for required_fragment in [
+            "record RuntimeSkeletonVectorKernelEmissionPlan(",
+            "ArgValidationStatements",
+            "vector-arithmetic",
+            "vector-dot-product",
+            "vector-indexer",
+            "vector-hash",
+            "vector-copy",
+            "vector-capability-query",
+            "vector-fixed-equality",
+            "vector-fixed-create",
+            "vector-fixed-shift",
+            "RuntimeSkeletonVectorShiftTraitKind",
+            "Deferred",
+            '"shift-right-dynamic"',
+            '"/System.Numerics.Vector::"',
+            '"/System.Numerics.Vector<"',
+            '"/System.Numerics.Vector`1::"',
+            '"/System.Runtime.Intrinsics.Wasm.PackedSimd::"',
+            '"/System.Runtime.Intrinsics.Arm.AdvSimd::"',
+            '"/System.Runtime.Intrinsics.X86.Sse2::"',
+            '"/System.Runtime.Intrinsics.X86.Avx2::"',
+            'CreateDescriptor("vector-indexer", "/System.Numerics.Vector2::"',
+            'CreateDescriptor("vector-indexer", "/System.Numerics.Vector3::"',
+            'CreateDescriptor("vector-indexer", "/System.Numerics.Vector4::"',
+            'CreateDescriptor("vector-hash", "/System.Numerics.Vector2::"',
+            'CreateDescriptor("vector-hash", "/System.Numerics.Vector3::"',
+            'CreateDescriptor("vector-hash", "/System.Numerics.Vector4::"',
+            'CreateDescriptor("vector-copy", "/System.Numerics.Vector2::"',
+            'CreateDescriptor("vector-copy", "/System.Numerics.Vector3::"',
+            'CreateDescriptor("vector-copy", "/System.Numerics.Vector4::"',
+            'CreateDescriptor("vector-fixed-equality", "/System.Numerics.Vector<"',
+            'CreateDescriptor("vector-fixed-equality", "/System.Numerics.Vector`1::"',
+            'CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector64<"',
+            'CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector64`1::"',
+            'CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector128<"',
+            'CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector128`1::"',
+            'CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector256<"',
+            'CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector256`1::"',
+            'CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector512<"',
+            'CreateDescriptor("vector-fixed-equality", "/System.Runtime.Intrinsics.Vector512`1::"',
+            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Arm.AdvSimd::"',
+            'CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.Arm.AdvSimd::"',
+            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Sse2::"',
+            'CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Sse2::"',
+            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx2::"',
+            'CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx2::"',
+            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx512F::"',
+            'CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx512F::"',
+            'CreateDescriptor("vector-fixed-shift", "/System.Runtime.Intrinsics.X86.Avx512BW+VL::"',
+            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx512BW+VL::"',
+            'CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx512BW+VL::"',
+            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.X86.Avx512F+VL::"',
+            'CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.X86.Avx512F+VL::"',
+            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Wasm.PackedSimd::"',
+            'CreateDescriptor("vector-fixed-bitwise", "/System.Runtime.Intrinsics.Wasm.PackedSimd::"',
+            '"System.Numerics.Vector<", 32',
+            '"/System.Runtime.Intrinsics.Vector128::" => 16',
+            '"/System.Runtime.Intrinsics.Vector256::" => 32',
+            '"/System.Runtime.Intrinsics.Vector512::" => 64',
+            '"/System.Runtime.Intrinsics.Arm.AdvSimd::" => 16',
+            '"/System.Runtime.Intrinsics.X86.Sse2::" => 16',
+            '"/System.Runtime.Intrinsics.X86.Ssse3::" => 16',
+            '"/System.Runtime.Intrinsics.X86.Avx2::" => 32',
+            '"/System.Runtime.Intrinsics.X86.Avx512F::" => 64',
+            '"/System.Runtime.Intrinsics.Wasm.PackedSimd::" => 16',
+            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Vector64`1::"',
+            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Vector128`1::"',
+            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Vector256`1::"',
+            'CreateDescriptor("vector-fixed-arithmetic", "/System.Runtime.Intrinsics.Vector512`1::"',
+            'current.StartsWith("Add:", StringComparison.Ordinal)',
+            'current.StartsWith("Subtract:", StringComparison.Ordinal)',
+            'current.StartsWith("Multiply:", StringComparison.Ordinal)',
+            'current.StartsWith("Divide:", StringComparison.Ordinal)',
+            'current.StartsWith("And:", StringComparison.Ordinal)',
+            'current.StartsWith("Or:", StringComparison.Ordinal)',
+            'current.StartsWith("Xor:", StringComparison.Ordinal)',
+            'current.StartsWith("Not:", StringComparison.Ordinal)',
+            "TryExtractIntrinsicUnaryVectorOperationShape(",
+            "TryExtractIntrinsicBinaryVectorOperationShape(",
+            "TryExtractIntrinsicTernaryVectorOperationShape(",
+            "TryExtractIntrinsicFactoryReturnVectorType(",
+            "TryIsReturnManagedVectorTypeCompatible(",
+            "returnManagedVectorType",
+            'return "System.Numerics.Vector";',
+            '"CompareEqual" => TryCreateStaticBinaryCustomArgsPlan(',
+            '"CompareNotEqual" => TryCreateStaticBinaryCustomArgsPlan(',
+            '"CompareGreaterThan" => TryCreateStaticBinaryCustomArgsPlan(',
+            '"CompareGreaterThanOrEqual" => TryCreateStaticBinaryCustomArgsPlan(',
+            '"CompareLessThan" => TryCreateStaticBinaryCustomArgsPlan(',
+            '"CompareLessThanOrEqual" => TryCreateStaticBinaryCustomArgsPlan(',
+            '"Min" when string.Equals(leftScalarManagedType, returnScalarManagedType, StringComparison.Ordinal) =>',
+            '"Max" when string.Equals(leftScalarManagedType, returnScalarManagedType, StringComparison.Ordinal) =>',
+            '"Abs" => TryCreateStaticUnaryCustomArgPlan(',
+            '"Negate" => TryCreateStaticUnaryCustomArgPlan(',
+            '"AndNot" => TryCreateStaticBinaryCustomArgsPlan(',
+            '"BitwiseSelect" => TryCreateStaticTernaryCustomArgsPlan(',
+            '"TernaryLogic" => TryCreatePlanCore(',
+            "TryExtractIntrinsicTernaryVectorByteImmediateOperationShape(",
+            "VectorFixedTernaryLogic<",
+            '"RotateLeft" => TryCreatePlanCore(',
+            '"RotateRight" => TryCreatePlanCore(',
+            'binaryMethodName is "RotateLeftVariable" or "RotateRightVariable"',
+            '"RotateLeftVariable" => TryCreateStaticBinaryCustomArgsPlan(',
+            '"RotateRightVariable" => TryCreateStaticBinaryCustomArgsPlan(',
+            '"AlignRight32" => TryCreatePlanCore(',
+            '"AlignRight64" => TryCreatePlanCore(',
+            '"Shuffle2x128"',
+            'when string.Equals(binaryImmediateCarrierCppType, "RuntimeIntrinsicVector256Carrier", StringComparison.Ordinal)',
+            "TryExtractIntrinsicUnaryVectorConversionShape(",
+            "TryExtractIntrinsicTernaryVectorMaskByteImmediateOperationShape(",
+            "VectorFixedConvertToVector128<",
+            "VectorFixedConvertToVector128Saturating<",
+            "VectorFixedGetExponent<",
+            "VectorFixedGetMantissa<",
+            "VectorFixedReciprocal14<",
+            "VectorFixedReciprocalSqrt14<",
+            "VectorFixedRoundScale<",
+            "VectorFixedScale<",
+            "VectorFixedFixup<",
+            "VectorFixedAlignRight32<",
+            "VectorFixedAlignRight64<",
+            "VectorFixedShuffle2x128<",
+            "VectorFixedRotateLeft<",
+            "VectorFixedRotateRight<",
+            "VectorFixedRotateLeftVariable<",
+            "VectorFixedRotateRightVariable<",
+            "VectorFixedCompareEqual<",
+            "VectorFixedCompareNotEqual<",
+            "VectorFixedCompareGreaterThan<",
+            "VectorFixedCompareGreaterThanOrEqual<",
+            "VectorFixedCompareLessThan<",
+            "VectorFixedCompareLessThanOrEqual<",
+            "VectorFixedMin<",
+            "VectorFixedMax<",
+            "VectorFixedAbs<",
+            "VectorFixedNegate<",
+            "VectorFixedBitwiseAndNot<",
+            "VectorFixedBitwiseSelect<",
+            "TryResolveNumericsVectorScalarSelector(",
+            "TryResolveShiftCountShape(",
+            "shiftCountValueExpression",
+            "SplitTopLevelParameters(",
+            "RuntimeSkeletonVectorKernelOperationKind.VectorIndexer",
+            "RuntimeSkeletonVectorKernelOperationKind.VectorIndexer => TryCreateIndexerPlan",
+            "RuntimeSkeletonVectorKernelOperationKind.VectorHash",
+            "RuntimeSkeletonVectorKernelOperationKind.VectorHash => TryCreateHashPlan",
+            "RuntimeSkeletonVectorKernelOperationKind.VectorCopy",
+            "RuntimeSkeletonVectorKernelOperationKind.VectorCopy => TryCreateCopyPlan",
+            "RuntimeSkeletonVectorKernelOperationKind.VectorTransform",
+            "RuntimeSkeletonVectorKernelOperationKind.VectorTransform => TryCreateTransformPlan",
+            "RuntimeNumericsVector2Carrier",
+            "RuntimeNumericsVector3Carrier",
+            "RuntimeNumericsVector4Carrier",
+            "RuntimeNumericsMatrix3x2Carrier",
+            "RuntimeNumericsMatrix4x4Carrier",
+            "RuntimeNumericsMatrix3x2Carrier*",
+            "RuntimeNumericsMatrix4x4Carrier*",
+            "RuntimeNumericsQuaternionCarrier",
+            "request->arg{index} == nullptr",
+            '::{descriptor.HelperPrefix}Equals(',
+            '::{descriptor.HelperPrefix}Equals(request->this_arg, request->arg0)',
+            '::{descriptor.HelperPrefix}GetHashCode(request->this_arg)',
+            '::{descriptor.HelperPrefix}GetElement(request->this_arg, request->arg0)',
+            'CHAOS_IL2CPP_SQRT({GetHelperNamespace()}::{descriptor.HelperPrefix}DistanceSquared(request->arg0, request->arg1))',
+            '::{descriptor.HelperPrefix}Transform(request->arg0, request->arg1)',
+            '::{descriptor.HelperPrefix}Transform(request->arg0, *request->arg1)',
+            '::{descriptor.HelperPrefix}TransformNormal(request->arg0, request->arg1)',
+            '::{descriptor.HelperPrefix}TransformNormal(request->arg0, *request->arg1)',
+            '::{descriptor.HelperPrefix}Abs(request->arg0)',
+            '::{descriptor.HelperPrefix}Min(request->arg0, request->arg1)',
+            '::{descriptor.HelperPrefix}Max(request->arg0, request->arg1)',
+            '::{descriptor.HelperPrefix}Clamp(request->arg0, request->arg1, request->arg2)',
+            '::{descriptor.HelperPrefix}SquareRoot(request->arg0)',
+            '::{descriptor.HelperPrefix}Normalize(request->arg0)',
+            '::{descriptor.HelperPrefix}Lerp(request->arg0, request->arg1, request->arg2)',
+            '::{descriptor.HelperPrefix}Reflect(request->arg0, request->arg1)',
+            '::{descriptor.HelperPrefix}Cross(request->arg0, request->arg1)',
+            'var current when current == "GetHashCode:System.Int32()"',
+            'var current when current == $"Abs:{vectorType}({vectorType})"',
+            'var current when current == $"Min:{vectorType}({vectorType},{vectorType})"',
+            'var current when current == $"Max:{vectorType}({vectorType},{vectorType})"',
+            'var current when current == $"Clamp:{vectorType}({vectorType},{vectorType},{vectorType})"',
+            'var current when current == $"SquareRoot:{vectorType}({vectorType})"',
+            'var current when current == $"Normalize:{vectorType}({vectorType})"',
+            'var current when current == $"Lerp:{vectorType}({vectorType},{vectorType},System.Single)"',
+            'var current when current == $"Reflect:{vectorType}({vectorType},{vectorType})"',
+            'var current when current == $"Cross:{vectorType}({vectorType},{vectorType})"',
+            'var current when current == $"Equals:System.Boolean({vectorType})"',
+            'var current when current == $"Distance:System.Single({vectorType},{vectorType})"',
+            'var current when current == $"Transform:{vectorType}({vectorType},System.Numerics.Matrix3x2)"',
+            'var current when current == $"Transform:{vectorType}({vectorType},System.Numerics.Matrix3x2+Impl&)"',
+            'var current when current == $"Transform:{vectorType}({vectorType},System.Numerics.Matrix4x4)"',
+            'var current when current == $"Transform:{vectorType}({vectorType},System.Numerics.Matrix4x4+Impl&)"',
+            'var current when current == $"Transform:{vectorType}({vectorType},System.Numerics.Quaternion)"',
+            'var current when current == $"TransformNormal:{vectorType}({vectorType},System.Numerics.Matrix3x2)"',
+            'var current when current == $"TransformNormal:{vectorType}({vectorType},System.Numerics.Matrix3x2+Impl&)"',
+            'var current when current == $"TransformNormal:{vectorType}({vectorType},System.Numerics.Matrix4x4)"',
+            'var current when current == $"TransformNormal:{vectorType}({vectorType},System.Numerics.Matrix4x4+Impl&)"',
+            'var current when current == $"Transform:{vectorType}(System.Numerics.Vector2,System.Numerics.Matrix4x4)"',
+            'var current when current == $"Transform:{vectorType}(System.Numerics.Vector2,System.Numerics.Matrix4x4+Impl&)"',
+            'var current when current == $"Transform:{vectorType}(System.Numerics.Vector2,System.Numerics.Quaternion)"',
+            'var current when current == $"Transform:{vectorType}(System.Numerics.Vector3,System.Numerics.Matrix4x4)"',
+            'var current when current == $"Transform:{vectorType}(System.Numerics.Vector3,System.Numerics.Matrix4x4+Impl&)"',
+            'var current when current == $"Transform:{vectorType}(System.Numerics.Vector3,System.Numerics.Quaternion)"',
+            'var current when current == $"Transform:{vectorType}(System.Numerics.Vector4,System.Numerics.Matrix4x4+Impl&)"',
+            'var current when current == $"Transform:{vectorType}(System.Numerics.Vector4,System.Numerics.Quaternion)"',
+            'var current when current == "get_Item:System.Single(System.Int32)"',
+            'var current when current == "Length:System.Single()"',
+            'var current when current == "CopyTo:System.Void(System.Single[])"',
+            'var current when current == "CopyTo:System.Void(System.Single[],System.Int32)"',
+            'var current when current == "CopyTo:System.Void(System.Span<System.Single>)"',
+            'var current when current == "TryCopyTo:System.Boolean(System.Span<System.Single>)"',
+            'RuntimeSkeletonConvertSpanCarrier',
+            '::{descriptor.HelperPrefix}TryCopyTo(',
+            '::{descriptor.HelperPrefix}Length(request->this_arg)',
+            'current == $"op_Equality:System.Boolean({vectorType},{vectorType})"',
+            'current == $"op_Inequality:System.Boolean({vectorType},{vectorType})"',
+            'current.StartsWith("op_Multiply:", StringComparison.Ordinal)',
+            'current.StartsWith("op_Division:", StringComparison.Ordinal)',
+            "VectorFixedMultiply<",
+            "VectorFixedMultiplyScalar<",
+            "VectorFixedDivide<",
+            "VectorFixedDivideScalar<",
+            "VectorFixedEquals<",
+            '"fixed-equality"',
+            '"fixed-inequality"',
+            "private static bool TryCreateHashPlan(",
+            "private static bool TryCreateIndexerPlan(",
+            "private static bool TryCreateTransformPlan(",
+            "private static bool TryCreateStaticTernaryPlan(",
+            "private static bool TryCreateStaticTernaryMixedPlan(",
+            "TryCreateInstanceNullaryPlan(",
+            "TryCreateInstanceUnaryPlan(",
+            "TryExtractOpenIntrinsicMethodSuffix(descriptor.SubjectIdPrefix, subjectId, out methodSuffix)",
+            'scalarManagedType = "!0";',
+        ]:
+            self.assertIn(required_fragment, vector_kernel_core_source)
+
+        for retired_fragment in [
+            'current == $"op_Equality:{vectorType}({vectorType},{vectorType})"',
+            'current == $"op_Inequality:{vectorType}({vectorType},{vectorType})"',
+        ]:
+            self.assertNotIn(retired_fragment, vector_kernel_core_source)
+
+        self.assertIn("RuntimeSkeletonValueTypeKernelStubTemplateRelativePath", catalog_source)
+        self.assertIn("RuntimeSkeletonVectorCopyKernelStubTemplateRelativePath", catalog_source)
+        self.assertIn("RuntimeSkeletonVectorCapabilityQueryStubTemplateRelativePath", catalog_source)
+
+        for required_fragment in [
+            "chaos::il2cpp::runtime_core::",
+            "arg_validation_statements",
+            "return CHAOS_BRIDGE_STATUS_OK;",
+            "result = ",
+        ]:
+            self.assertIn(required_fragment, template_source)
+
+        capability_template_source = RUNTIME_SKELETON_VECTOR_CAPABILITY_QUERY_TEMPLATE_PATH.read_text(encoding="utf-8")
+        for required_fragment in [
+            "RuntimeTypeCapabilityInfoV0",
+            "query_type_capability",
+            "scalar_type_token",
+            "fixed_vector_width_bytes",
+            "scalar_resolution_kind",
+            "target_method_token",
+            "method_get_generic_context",
+            "generic_context_get_class_arg_count",
+            "generic_context_get_method_arg_count",
+            "VectorFixedOneFromCapability",
+            "shift-right-dynamic",
+            "fixed-multiply",
+            "fixed-divide",
+            "fixed-equality",
+            "fixed-inequality",
+            "VectorFixedEquals",
+            "VectorFixedMultiplyScalar",
+            "VectorFixedDivideScalar",
+            "VectorFixedShiftRightArithmetic",
+            "VectorFixedShiftRightLogical",
+            "CHAOS_TYPE_CAPABILITY_SCALAR_KIND_NATIVE_UNSIGNED_INTEGER",
+            "shift_count_value_expression",
+        ]:
+            self.assertIn(required_fragment, capability_template_source)
+
+        vector_copy_template_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "Templates"
+            / "NativeReferenceProof.RuntimeSkeleton.VectorCopyKernelStub.cpp.scriban"
+        ).read_text(encoding="utf-8")
+        for required_fragment in [
+            "destination_arg_cpp_type",
+            "destination_data_expression",
+            "destination_length_expression",
+            "start_index_expression",
+            "returns_bool",
+            "TryCopyTo(",
+        ]:
+            self.assertIn(required_fragment, vector_copy_template_source)
+
     def test_runtime_skeleton_floating_scalar_managed_invoke_helper_has_template(self) -> None:
         native_reference_emitter_source = NATIVE_REFERENCE_EMITTER_PATH.read_text(encoding="utf-8")
         split_source = (
@@ -1643,3 +2154,69 @@ class TestFullAssemblyClosureCodegenContractsRuntimeTemplates(FullAssemblyClosur
             "return_value",
         ]:
             self.assertIn(required_fragment, template_source)
+
+    def test_runtime_skeleton_vector_managed_invoke_family_reuses_generic_template_for_vector_string_and_equals_object(self) -> None:
+        split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.VectorManagedInvokeFamily.cs"
+        ).read_text(encoding="utf-8")
+        identity_split_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "NativeReferenceProofEmitter.IdentityStructManagedInvokeFamily.cs"
+        ).read_text(encoding="utf-8")
+        semantic_registry_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "RuntimeSkeletonSemanticRegistry.cs"
+        ).read_text(encoding="utf-8")
+        abi_source = (
+            REPO_ROOT
+            / "src"
+            / "managed"
+            / "Chaos.IL2CPP.CodeGen"
+            / "ReferenceProof"
+            / "RuntimeSkeletonVectorManagedInvokeAbi.cs"
+        ).read_text(encoding="utf-8")
+        template_source = RUNTIME_SKELETON_IDENTITY_STRUCT_MANAGED_INVOKE_TEMPLATE_PATH.read_text(encoding="utf-8")
+
+        for required_fragment in [
+            "VectorManagedInvokeFamilyId",
+            '"/System.Numerics.Vector2::"',
+            '"/System.Numerics.Vector3::"',
+            '"/System.Numerics.Vector4::"',
+            'Equals:System.Boolean(System.Object)',
+            'ToString:System.String()',
+            'ToString:System.String(System.String)',
+            'ToString:System.String(System.String,System.IFormatProvider)',
+            "TryBuildAssemblyBoundVectorManagedInvokeStub",
+        ]:
+            self.assertIn(required_fragment, split_source + "\n" + semantic_registry_source)
+
+        self.assertIn(
+            "RuntimeSkeletonValueTypeManagedInvokeCore.TryCreate(",
+            abi_source,
+        )
+        self.assertIn(
+            "identity-struct-managed-invoke-v1",
+            abi_source,
+        )
+        self.assertIn(
+            "GetRuntimeSkeletonIdentityStructManagedInvokeStubTemplate()",
+            split_source,
+        )
+        self.assertIn("target_method_token", template_source)
+        self.assertIn("this_argument_expression", template_source)
+        self.assertNotIn('"/System.Numerics.Vector2::"', identity_split_source)
+        self.assertNotIn('"/System.Numerics.Vector3::"', identity_split_source)
+        self.assertNotIn('"/System.Numerics.Vector4::"', identity_split_source)

@@ -37,20 +37,34 @@ public sealed class NativeAotEmitter
             var closureManifestPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.ClosureManifest);
             var metadataRegistrationPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.MetadataRegistration);
             var supplementalMetadataTemplatePath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.SupplementalMetadataTemplate);
-            var aotCoreIr = LoadRequiredJson<AotCoreIrArtifact>(aotCoreIrPath);
-            var closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath);
-            var metadataRegistration = LoadRequiredJson<MetadataRegistrationArtifact>(metadataRegistrationPath);
-            var supplementalMetadataTemplate = LoadRequiredJson<SupplementalMetadataTemplateArtifact>(supplementalMetadataTemplatePath);
-            ValidateLoweringPlan(loweringPlan, closureManifest);
 
-            var entryMethod = LoadEntryMethod(aotCoreIr, loweringPlan.EntrySubjectId);
+            AotCoreIrArtifact? aotCoreIr = null;
+            ManagedClosureManifestArtifact? closureManifest = null;
+            MetadataRegistrationArtifact? metadataRegistration = null;
+            SupplementalMetadataTemplateArtifact? supplementalMetadataTemplate = null;
+            Exception? loadException = null;
+            var loadLock = new object();
+
+            System.Threading.Tasks.Parallel.Invoke(
+                () => { try { aotCoreIr = LoadRequiredJson<AotCoreIrArtifact>(aotCoreIrPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
+                () => { try { closureManifest = LoadRequiredJson<ManagedClosureManifestArtifact>(closureManifestPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
+                () => { try { metadataRegistration = LoadRequiredJson<MetadataRegistrationArtifact>(metadataRegistrationPath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } },
+                () => { try { supplementalMetadataTemplate = LoadRequiredJson<SupplementalMetadataTemplateArtifact>(supplementalMetadataTemplatePath); } catch (Exception ex) { lock (loadLock) { loadException ??= ex; } } });
+
+            if (loadException is not null)
+            {
+                throw new InvalidOperationException("failed to load one or more required closure artifacts", loadException);
+            }
+
+            ValidateLoweringPlan(loweringPlan, closureManifest!);
+            var entryMethod = LoadEntryMethod(aotCoreIr!, loweringPlan.EntrySubjectId);
             var templateModel = new NativeAotLoweringPlanner().Create(
                 loweringPlan,
-                aotCoreIr,
+                aotCoreIr!,
                 entryMethod,
-                closureManifest,
-                metadataRegistration,
-                supplementalMetadataTemplate);
+                closureManifest!,
+                metadataRegistration!,
+                supplementalMetadataTemplate!);
             generatedSources =
             [
                 new NativeAotGeneratedSource
@@ -286,7 +300,7 @@ public sealed class NativeAotEmitter
 
     private static string ToCppStringLiteral(string value)
     {
-        var builder = new StringBuilder();
+        var builder = new StringBuilder(value.Length + 2);
         builder.Append('"');
 
         foreach (var current in value)

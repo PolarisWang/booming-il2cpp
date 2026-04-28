@@ -1,6 +1,6 @@
-{{ indentation }}if ({{ static_field_symbol }} == static_cast<std::intptr_t>(0))
+{{ indentation }}if ({{ static_field_symbol }} == static_cast<CHAOS_IL2CPP_INTPTR>(0))
 {{ indentation }}{
 {{ indentation }}    auto* chaos_object = new {{ native_type_symbol }}{};
 {{ indentation }}    chaos_object->header.type_id = {{ native_type_id_symbol }};
-{{ constructor_block }}{{ indentation }}    {{ static_field_symbol }} = reinterpret_cast<std::intptr_t>(chaos_object);
+{{ constructor_block }}{{ indentation }}    {{ static_field_symbol }} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 {{ indentation }}}

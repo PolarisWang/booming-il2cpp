@@ -1,5 +1,7 @@
 #include "support.h"
 
+#include <chaos/native_types.h>
+
 #include <cstdio>
 #include <string>
 
@@ -58,7 +60,7 @@ void* CHAOS_RUNTIME_ABI_CALL ConcatStringPair(
         return nullptr;
     }
 
-    std::string combined;
+    CHAOS_IL2CPP_STRING combined;
     combined.reserve(static_cast<size_t>(left_byte_count + right_byte_count));
     if (left_utf8 != nullptr) {
         combined.append(left_utf8, static_cast<size_t>(left_byte_count));
@@ -94,7 +96,7 @@ void* CHAOS_RUNTIME_ABI_CALL ConcatStringTriple(
         return nullptr;
     }
 
-    std::string combined;
+    CHAOS_IL2CPP_STRING combined;
     combined.reserve(static_cast<size_t>(first_byte_count + second_byte_count + third_byte_count));
     if (first_utf8 != nullptr) {
         combined.append(first_utf8, static_cast<size_t>(first_byte_count));
@@ -124,15 +126,15 @@ int32_t CHAOS_RUNTIME_ABI_CALL WriteLineString(
         return 1;
     }
 
-    if (utf8_text != nullptr && std::fwrite(utf8_text, 1u, static_cast<size_t>(byte_count), stdout) != byte_count) {
+    if (utf8_text != nullptr && CHAOS_IL2CPP_FWRITE(utf8_text, 1u, static_cast<size_t>(byte_count), stdout) != byte_count) {
         return 1;
     }
 
-    if (std::fputc('\n', stdout) == EOF) {
+    if (CHAOS_IL2CPP_FPUTC('\n', stdout) == EOF) {
         return 1;
     }
 
-    return std::fflush(stdout) == 0 ? 0 : 1;
+    return CHAOS_IL2CPP_FFLUSH(stdout) == 0 ? 0 : 1;
 }
 
 }  // namespace chaos::il2cpp::support

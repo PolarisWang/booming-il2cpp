@@ -2,16 +2,19 @@
   "schemaVersion": 1,
   "programId": "foundation-dll-translation-audit",
   "title": "Foundation DLL Translation Audit",
-  "roadmapPath": "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
-  "designPath": "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
-  "statusPath": "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md",
+  "roadmapPath": "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+  "designPath": "",
+  "statusPath": "docs/dev/completed/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md",
+  "authorityTaskId": "20260427-04-dll-capability-verification-closure-roadmap",
+  "authorityPhase": "roadmap-closed",
+  "scopeSource": "capability-family-ledger",
   "subjectEntry": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln",
   "projectTemplates": [
     {
       "code": "audit-input-and-ledger",
       "displayName": "Audit Input And Ledger",
       "defaultPolicyState": "required",
-      "verificationMethod": "刷新 audit input manifest，并校验 surface / semantic / nativeization plan。",
+      "verificationMethod": "Refresh audit input manifest and validate surface / semantic / nativeization plan.",
       "artifactKeywords": [
         "input-manifest",
         "surface-ledger",
@@ -24,7 +27,7 @@
       "code": "managed-proof",
       "displayName": "Managed Proof",
       "defaultPolicyState": "required",
-      "verificationMethod": "运行 managed proof，验证语义基线。",
+      "verificationMethod": "Run managed proof and validate managed semantics baseline.",
       "artifactKeywords": [
         "managed-proof"
       ]
@@ -33,7 +36,7 @@
       "code": "native-proof",
       "displayName": "Native Proof",
       "defaultPolicyState": "required",
-      "verificationMethod": "运行 native / AOT proof，验证 generated native code 可执行。",
+      "verificationMethod": "Run native / AOT proof and validate generated native code execution.",
       "artifactKeywords": [
         "native-proof",
         "native-aot",
@@ -46,7 +49,7 @@
       "code": "hotupdate-proof",
       "displayName": "HotUpdate Proof",
       "defaultPolicyState": "conditional",
-      "verificationMethod": "运行 patch / host proof，验证 hotupdate consumer 路径。",
+      "verificationMethod": "Run patch / host proof and validate hotupdate consumer path.",
       "artifactKeywords": [
         "hotupdate-proof",
         "hot-update",
@@ -57,7 +60,7 @@
       "code": "benchmark",
       "displayName": "Benchmark",
       "defaultPolicyState": "conditional",
-      "verificationMethod": "运行 benchmark，归档性能结果。",
+      "verificationMethod": "Run benchmarks and archive performance results.",
       "artifactKeywords": [
         "benchmark"
       ]
@@ -66,7 +69,7 @@
       "code": "codegen-review",
       "displayName": "Codegen Review",
       "defaultPolicyState": "required",
-      "verificationMethod": "审核 generated code、dispatch/helper/binding/coverage。",
+      "verificationMethod": "Review generated code, dispatch, helpers, bindings, and coverage artifacts.",
       "artifactKeywords": [
         "codegen-review",
         "generated/audit",
@@ -77,7 +80,7 @@
       "code": "completion-certification",
       "displayName": "Completion Certification",
       "defaultPolicyState": "required",
-      "verificationMethod": "汇总前置 project 结果，给出 DLL completion 结论。",
+      "verificationMethod": "Aggregate project results and produce DLL completion conclusion.",
       "artifactKeywords": [
         "completion-report",
         "completion"

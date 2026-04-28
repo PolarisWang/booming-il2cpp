@@ -7,6 +7,7 @@ from typing import Any, Callable
 try:
     from ..core.result import CommandResult
     from ..testing import foundation_dll_audit_generator as audit_generator_module
+    from ..testing.foundation_dll import execution_entry as execution_entry_module
     from ..testing.foundation_dll import derive as denominator_derive_module
     from ..testing.foundation_dll import gap_analyzer as gap_analyzer_module
     from ..testing.foundation_dll import promote as denominator_promote_module
@@ -18,6 +19,7 @@ except ImportError:
     sys.path.insert(0, str(root))
     from core.result import CommandResult
     from testing import foundation_dll_audit_generator as audit_generator_module
+    from testing.foundation_dll import execution_entry as execution_entry_module
     from testing.foundation_dll import derive as denominator_derive_module
     from testing.foundation_dll import gap_analyzer as gap_analyzer_module
     from testing.foundation_dll import promote as denominator_promote_module
@@ -265,6 +267,26 @@ def _handle_onboard(
     )
 
 
+def _handle_execute(
+    repo_root: Path,
+    host_platform: str,
+    command_text: str,
+    options: dict[str, Any],
+) -> CommandResult:
+    assembly_name = str(_get_option(options, "assembly") or "").strip()
+    family_id = str(_get_option(options, "family") or "").strip()
+    kind = str(_get_option(options, "kind") or "test").strip()
+    if not assembly_name or not family_id:
+        return _failure(command_text, host_platform, "assembly and family are required for foundation-dll execute")
+    payload = execution_entry_module.execute_entry(
+        repo_root,
+        assembly_name=assembly_name,
+        family_id=family_id,
+        kind=kind,
+    )
+    return _success(command_text, host_platform, payload)
+
+
 def handle(
     command: dict,
     repo_root: Path,
@@ -292,6 +314,8 @@ def handle(
             return _handle_full(repo_root, host_platform, command_text, opts, progress_callback=progress_callback)
         if command_id == "foundation-dll-onboard":
             return _handle_onboard(repo_root, host_platform, command_text, opts, progress_callback=progress_callback)
+        if command_id == "foundation-dll-execute":
+            return _handle_execute(repo_root, host_platform, command_text, opts)
         return _failure(command_text, host_platform, f"unsupported foundation-dll command: {command_id}")
     except Exception as error:
         return _failure(command_text, host_platform, str(error))

@@ -11,22 +11,22 @@ namespace ChaosIl2cpp::Common {
 
 struct MonitorRuntimeEntry
 {
-    std::recursive_timed_mutex mutex;
+    CHAOS_IL2CPP_RECURSIVE_MUTEX mutex;
 };
 
-inline MonitorRuntimeEntry& require_monitor_runtime_entry(std::intptr_t object_value)
+inline MonitorRuntimeEntry& require_monitor_runtime_entry(CHAOS_IL2CPP_INTPTR object_value)
 {
-    if (object_value == static_cast<std::intptr_t>(0))
+    if (object_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
     {
-        std::abort();
+        CHAOS_IL2CPP_ABORT();
     }
-    static std::mutex table_mutex;
-    static std::unordered_map<std::intptr_t, std::unique_ptr<MonitorRuntimeEntry>> table;
-    std::lock_guard<std::mutex> guard(table_mutex);
+    static CHAOS_IL2CPP_MUTEX table_mutex;
+    static CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_UNIQUE_PTR(MonitorRuntimeEntry)) table;
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(table_mutex);
     auto& entry = table[object_value];
     if (!entry)
     {
-        entry = std::make_unique<MonitorRuntimeEntry>();
+        entry = CHAOS_IL2CPP_MAKE_UNIQUE(MonitorRuntimeEntry);
     }
     return *entry;
 }

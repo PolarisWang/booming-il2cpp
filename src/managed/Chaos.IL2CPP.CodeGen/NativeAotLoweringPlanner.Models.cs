@@ -1,0 +1,199 @@
+using Chaos.IL2CPP.Contracts;
+
+namespace Chaos.IL2CPP.CodeGen;
+
+public sealed partial class NativeAotLoweringPlanner
+{
+    private readonly record struct InvocationTarget(
+        string TargetSymbol,
+        IReadOnlyList<AotCoreIrAbiSlotArtifact> ParameterAbis,
+        AotCoreIrAbiSlotArtifact ReturnAbi,
+        IReadOnlySet<int> RawArgumentIndices,
+        string? OpenDefinitionSubjectId = null,
+        SharedGenericBodyId? SharedGenericBodyId = null,
+        InstantiationStubId? InstantiationStubId = null,
+        RuntimeGenericContextArtifact? RuntimeGenericContext = null);
+
+    private sealed record ExternalRuntimeHelperDefinition(
+        string SubjectId,
+        string TargetSymbol,
+        string Source,
+        IReadOnlyList<AotCoreIrAbiSlotArtifact> ParameterAbis,
+        AotCoreIrAbiSlotArtifact ReturnAbi,
+        IReadOnlySet<int> RawArgumentIndices,
+        IReadOnlySet<string>? ReferencedStaticFieldSubjectIds = null);
+
+    private sealed record EnumerableJoinSupportVariant(
+        string EnumerableTypeSubjectId,
+        AotCoreIrMethodArtifact GetEnumeratorMethod,
+        AotCoreIrMethodArtifact MoveNextMethod,
+        AotCoreIrMethodArtifact GetCurrentMethod);
+
+    private sealed record AssemblyReflectionTypeEntry(
+        string AssemblyName,
+        string TypeSubjectId,
+        string TypeDisplayName);
+
+    private sealed record AssemblyReflectionSupportModel(
+        IReadOnlyList<AssemblyReflectionTypeEntry> TypeEntries)
+    {
+        public static readonly AssemblyReflectionSupportModel Empty = new([]);
+    }
+
+    private sealed record ReflectionMemberTypeEntry(
+        string TypeSubjectId,
+        string TypeName,
+        string? GenericDefinitionTypeSubjectId,
+        IReadOnlyList<string> GenericArgumentTypeSubjectIds,
+        int GenericParameterCount,
+        int MetadataToken);
+
+    private sealed record ReflectionMemberFieldEntry(
+        string DeclaringTypeSubjectId,
+        string FieldName,
+        int MetadataToken);
+
+    private sealed record ReflectionMemberMethodEntry(
+        string MethodSubjectId,
+        string DeclaringTypeSubjectId,
+        string MethodName,
+        IReadOnlyList<string> ParameterNames,
+        bool IsConstructor,
+        int MetadataToken);
+
+    private sealed record ReflectionMemberSupportModel(
+        IReadOnlyList<ReflectionMemberTypeEntry> TypeEntries,
+        IReadOnlyList<ReflectionMemberFieldEntry> FieldEntries,
+        IReadOnlyList<ReflectionMemberMethodEntry> MethodEntries)
+    {
+        public static readonly ReflectionMemberSupportModel Empty = new([], [], []);
+    }
+
+    private sealed record StaticFieldDataEntry(
+        string FieldSubjectId,
+        string MemberType,
+        IReadOnlyList<byte> Bytes);
+
+    private sealed record StaticFieldDataSupportModel(
+        IReadOnlyDictionary<string, StaticFieldDataEntry> EntriesBySubjectId)
+    {
+        public static readonly StaticFieldDataSupportModel Empty =
+            new(new Dictionary<string, StaticFieldDataEntry>(StringComparer.Ordinal));
+    }
+
+    private sealed record CatchOnlyExceptionMethodShape(
+        AotCoreIrExceptionRegionArtifact ExceptionRegion,
+        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TryInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> HandlerInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
+
+    private sealed record FilterOnlyExceptionMethodShape(
+        AotCoreIrExceptionRegionArtifact FilterRegion,
+        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TryInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> FilterInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> HandlerInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
+
+    private sealed record CatchAndFinallyExceptionMethodShape(
+        AotCoreIrExceptionRegionArtifact CatchRegion,
+        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> PreInnerFinallyInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> InnerTryInstructions,
+        FinallyHandlerShape? InnerFinallyHandler,
+        IReadOnlyList<AotCoreIrInstructionArtifact> PostInnerTryInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> HandlerInstructions,
+        IReadOnlyList<FinallyHandlerShape> OuterFinallyHandlers,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
+
+    private sealed record FinallyOnlyExceptionMethodShape(
+        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TryInstructions,
+        IReadOnlyList<FinallyHandlerShape> FinallyHandlers,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
+
+    private sealed record FinallyHandlerShape(
+        AotCoreIrExceptionRegionArtifact ExceptionRegion,
+        IReadOnlyList<AotCoreIrInstructionArtifact> Instructions);
+
+    private sealed record FinallyHandlerGuardShape(
+        IReadOnlyList<AotCoreIrInstructionArtifact> ConditionInstructions,
+        bool BranchWhenNonZeroToEnd);
+
+    private sealed record FinallyHandlerEmissionPlan(
+        FinallyHandlerGuardShape? Guard,
+        IReadOnlyList<AotCoreIrInstructionArtifact> BodyInstructions);
+
+    private sealed record FilterAndFinallyExceptionMethodShape(
+        AotCoreIrExceptionRegionArtifact FilterRegion,
+        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TryInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> FilterInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> HandlerInstructions,
+        IReadOnlyList<FinallyHandlerShape> FinallyHandlers,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
+
+    private sealed record CustomAttributeSupportModel(
+        IReadOnlyDictionary<string, string> QueryAttributeTypeByCallee,
+        IReadOnlyDictionary<string, string> SyntheticGetterFieldByMethodSubjectId,
+        IReadOnlyList<CustomAttributeMaterializationPlan> Materializations,
+        IReadOnlySet<string> AdditionalReferenceTypeSubjectIds,
+        IReadOnlySet<string> AdditionalInstanceFieldSubjectIds,
+        bool RequiresStringSupport,
+        bool UsesMemberInfoIsDefined)
+    {
+        public static readonly CustomAttributeSupportModel Empty = new(
+            new Dictionary<string, string>(StringComparer.Ordinal),
+            new Dictionary<string, string>(StringComparer.Ordinal),
+            [],
+            new HashSet<string>(StringComparer.Ordinal),
+            new HashSet<string>(StringComparer.Ordinal),
+            false,
+            false);
+    }
+
+    private enum CustomAttributeTargetKind : byte
+    {
+        Type = 1,
+        Method = 2,
+    }
+
+    private enum CustomAttributeLiteralKind : byte
+    {
+        Null = 0,
+        Boolean = 1,
+        Byte = 2,
+        Int16 = 3,
+        Int32 = 4,
+        Int64 = 5,
+        UInt16 = 6,
+        UInt32 = 7,
+        UInt64 = 8,
+        String = 9,
+    }
+
+    private sealed record CustomAttributeLiteralValue(
+        CustomAttributeLiteralKind Kind,
+        object? Value);
+
+    private sealed record CustomAttributeFieldAssignment(
+        string FieldSubjectId,
+        CustomAttributeLiteralValue Value);
+
+    private sealed record CustomAttributeMaterializationPlan(
+        CustomAttributeTargetKind TargetKind,
+        string TargetSubjectId,
+        string AttributeTypeSubjectId,
+        IReadOnlyList<CustomAttributeFieldAssignment> Assignments);
+
+    private readonly record struct MetadataTypeIdentity(
+        string AssemblyName,
+        string NamespaceName,
+        string TypeName)
+    {
+        public string SubjectId => ManagedNaming.CreateTypeSubjectId(AssemblyName, NamespaceName, TypeName);
+
+        public string DisplayName => ManagedNaming.CreateTypeDisplayName(AssemblyName, NamespaceName, TypeName);
+    }
+}

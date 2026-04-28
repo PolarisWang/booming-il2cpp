@@ -1480,7 +1480,7 @@ public sealed partial class NativeReferenceLoweringPlanner
 
     private static string ToCppStringLiteral(string value)
     {
-        var builder = new StringBuilder();
+        var builder = new StringBuilder(value.Length + 2);
         builder.Append('"');
 
         foreach (var current in value)

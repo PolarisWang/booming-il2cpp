@@ -1,6 +1,6 @@
 namespace {
 
-std::atomic<int32_t> {{ stub_name }}_g_finalized_count = 0;
+CHAOS_IL2CPP_ATOMIC(int32_t) {{ stub_name }}_g_finalized_count = 0;
 
 void {{ stub_name }}_RecordFinalizer(void* object_instance)
 {
@@ -78,9 +78,9 @@ int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
     {{ stub_name }}_g_finalized_count.store(0);
 
     int32_t worker_slot = 0;
-    std::size_t worker_root_count = 0u;
+    CHAOS_IL2CPP_SIZE worker_root_count = 0u;
     bool worker_ok = false;
-    std::thread worker([&]() {
+    CHAOS_IL2CPP_THREAD worker([&]() {
         ThreadState* worker_thread = nullptr;
         if (abi->thread_attach(runtime, &worker_thread) != CHAOS_RUNTIME_STATUS_OK || worker_thread == nullptr) {
             return;

@@ -166,6 +166,12 @@ public static class ManagedNaming
         return absolutePath.Replace('\\', '/');
     }
 
+    public static string CanonicalizeSubjectId(string subjectId)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(subjectId);
+        return CanonicalizeGenericPlaceholderOrdinals(subjectId);
+    }
+
     public static string StripGenericArity(string value)
     {
         var builder = new System.Text.StringBuilder();
@@ -459,6 +465,150 @@ public static class ManagedNaming
         }
 
         return $"[{string.Join(",", arguments)}]";
+    }
+
+    private static string CanonicalizeGenericPlaceholderOrdinals(string subjectId)
+    {
+        var placeholderMaps = new Dictionary<int, IReadOnlyDictionary<string, string>>();
+        foreach (var placeholderPrefixLength in GetGenericPlaceholderPrefixLengths(subjectId))
+        {
+            var placeholderMap = BuildGenericPlaceholderMap(subjectId, placeholderPrefixLength);
+            if (placeholderMap.Count > 0)
+            {
+                placeholderMaps[placeholderPrefixLength] = placeholderMap;
+            }
+        }
+
+        if (placeholderMaps.Count == 0)
+        {
+            return subjectId;
+        }
+
+        var builder = new System.Text.StringBuilder(subjectId.Length);
+        for (var index = 0; index < subjectId.Length;)
+        {
+            if (subjectId[index] != '!')
+            {
+                builder.Append(subjectId[index]);
+                index++;
+                continue;
+            }
+
+            var bangStart = index;
+            while (index < subjectId.Length && subjectId[index] == '!')
+            {
+                index++;
+            }
+
+            var digitStart = index;
+            while (index < subjectId.Length && char.IsDigit(subjectId[index]))
+            {
+                index++;
+            }
+
+            var placeholderPrefixLength = digitStart - bangStart;
+            if (digitStart > bangStart &&
+                index > digitStart &&
+                placeholderMaps.TryGetValue(placeholderPrefixLength, out var placeholderMap))
+            {
+                var placeholderToken = subjectId[bangStart..index];
+                if (placeholderMap.TryGetValue(placeholderToken, out var canonicalPlaceholderToken))
+                {
+                    builder.Append(canonicalPlaceholderToken);
+                    continue;
+                }
+            }
+
+            builder.Append(subjectId.AsSpan(bangStart, index - bangStart));
+        }
+
+        return builder.ToString();
+    }
+
+    private static IReadOnlyList<int> GetGenericPlaceholderPrefixLengths(string subjectId)
+    {
+        var placeholderPrefixLengths = new SortedSet<int>();
+        for (var index = 0; index < subjectId.Length;)
+        {
+            if (subjectId[index] != '!')
+            {
+                index++;
+                continue;
+            }
+
+            var bangStart = index;
+            while (index < subjectId.Length && subjectId[index] == '!')
+            {
+                index++;
+            }
+
+            var digitStart = index;
+            while (index < subjectId.Length && char.IsDigit(subjectId[index]))
+            {
+                index++;
+            }
+
+            if (digitStart > bangStart && index > digitStart)
+            {
+                placeholderPrefixLengths.Add(digitStart - bangStart);
+            }
+        }
+
+        return placeholderPrefixLengths.ToList();
+    }
+
+    private static IReadOnlyDictionary<string, string> BuildGenericPlaceholderMap(
+        string subjectId,
+        int placeholderPrefixLength)
+    {
+        var placeholderOrdinals = new SortedSet<int>();
+        for (var index = 0; index < subjectId.Length;)
+        {
+            if (subjectId[index] != '!')
+            {
+                index++;
+                continue;
+            }
+
+            var bangStart = index;
+            while (index < subjectId.Length && subjectId[index] == '!')
+            {
+                index++;
+            }
+
+            var digitStart = index;
+            while (index < subjectId.Length && char.IsDigit(subjectId[index]))
+            {
+                index++;
+            }
+
+            if (digitStart == bangStart ||
+                index == digitStart ||
+                digitStart - bangStart != placeholderPrefixLength ||
+                !int.TryParse(subjectId.AsSpan(digitStart, index - digitStart), out var placeholderOrdinal))
+            {
+                continue;
+            }
+
+            placeholderOrdinals.Add(placeholderOrdinal);
+        }
+
+        if (placeholderOrdinals.Count == 0)
+        {
+            return new Dictionary<string, string>(StringComparer.Ordinal);
+        }
+
+        var placeholderPrefix = new string('!', placeholderPrefixLength);
+        var placeholderMap = new Dictionary<string, string>(placeholderOrdinals.Count, StringComparer.Ordinal);
+        var canonicalOrdinal = 0;
+        foreach (var placeholderOrdinal in placeholderOrdinals)
+        {
+            placeholderMap[$"{placeholderPrefix}{placeholderOrdinal}"] =
+                $"{placeholderPrefix}{canonicalOrdinal}";
+            canonicalOrdinal++;
+        }
+
+        return placeholderMap;
     }
 
     private static string ToKebabCase(string value)

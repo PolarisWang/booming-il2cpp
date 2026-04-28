@@ -22,6 +22,7 @@ internal static class ScribanTemplateRenderer
     {
         var context = new TemplateContext();
         context.LoopLimit = TemplateLoopLimit;
+        context.LimitToString = -1;
         context.PushGlobal(model);
 
         try

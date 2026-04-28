@@ -1,5 +1,8 @@
 #include "hot_update.h"
 
+#include "memory_domain.h"
+#include "string_table.h"
+
 #include <fstream>
 #include <string>
 #include <vector>
@@ -14,14 +17,14 @@ bool LoadBinaryImageFromPath(const char* path_utf8, TImage* out_image) {
         return false;
     }
 
-    std::ifstream stream(path_utf8, std::ios::binary);
+    CHAOS_IL2CPP_IFSTREAM stream(path_utf8, CHAOS_IL2CPP_IOS_BINARY);
     if (!stream.good()) {
         return false;
     }
 
-    const auto begin = std::istreambuf_iterator<char>(stream);
-    const auto end = std::istreambuf_iterator<char>();
-    auto* buffer = new std::vector<unsigned char>(begin, end);
+    const auto begin = CHAOS_IL2CPP_ISTREAMBUF_ITERATOR(char)(stream);
+    const auto end = CHAOS_IL2CPP_ISTREAMBUF_ITERATOR(char)();
+    auto* buffer = new CHAOS_IL2CPP_VECTOR(unsigned char)(begin, end);
 
     out_image->data = buffer->data();
     out_image->size = buffer->size();
@@ -35,19 +38,19 @@ void ReleaseBinaryImage(TImage* image) {
         return;
     }
 
-    auto* buffer = static_cast<std::vector<unsigned char>*>(image->owner);
+    auto* buffer = static_cast<CHAOS_IL2CPP_VECTOR(unsigned char)*>(image->owner);
     delete buffer;
     image->data = nullptr;
     image->size = 0u;
     image->owner = nullptr;
 }
 
-std::string JoinPath(const char* root_utf8, const char* leaf_utf8) {
+CHAOS_IL2CPP_STRING JoinPath(const char* root_utf8, const char* leaf_utf8) {
     if (root_utf8 == nullptr || leaf_utf8 == nullptr) {
         return {};
     }
 
-    std::string path(root_utf8);
+    CHAOS_IL2CPP_STRING path(root_utf8);
     if (!path.empty() && path.back() != '/' && path.back() != '\\') {
         path.push_back('/');
     }
@@ -56,52 +59,52 @@ std::string JoinPath(const char* root_utf8, const char* leaf_utf8) {
     return path;
 }
 
-bool ReadTextFile(const std::string& path, std::string* out_contents) {
+bool ReadTextFile(const CHAOS_IL2CPP_STRING& path, CHAOS_IL2CPP_STRING* out_contents) {
     if (out_contents == nullptr) {
         return false;
     }
 
-    std::ifstream stream(path, std::ios::binary);
+    CHAOS_IL2CPP_IFSTREAM stream(path, CHAOS_IL2CPP_IOS_BINARY);
     if (!stream.good()) {
         return false;
     }
 
     out_contents->assign(
-        std::istreambuf_iterator<char>(stream),
-        std::istreambuf_iterator<char>());
+        CHAOS_IL2CPP_ISTREAMBUF_ITERATOR(char)(stream),
+        CHAOS_IL2CPP_ISTREAMBUF_ITERATOR(char)());
     return true;
 }
 
-std::string ExtractJsonString(const std::string& source, const char* key) {
+CHAOS_IL2CPP_STRING ExtractJsonString(const CHAOS_IL2CPP_STRING& source, const char* key) {
     if (key == nullptr) {
         return {};
     }
 
-    const std::string needle = std::string("\"") + key + "\"";
+    const CHAOS_IL2CPP_STRING needle = CHAOS_IL2CPP_STRING("\"") + key + "\"";
     const size_t key_offset = source.find(needle);
-    if (key_offset == std::string::npos) {
+    if (key_offset == CHAOS_IL2CPP_STRING::npos) {
         return {};
     }
 
     const size_t colon_offset = source.find(':', key_offset + needle.size());
-    if (colon_offset == std::string::npos) {
+    if (colon_offset == CHAOS_IL2CPP_STRING::npos) {
         return {};
     }
 
     const size_t quote_begin = source.find('"', colon_offset + 1u);
-    if (quote_begin == std::string::npos) {
+    if (quote_begin == CHAOS_IL2CPP_STRING::npos) {
         return {};
     }
 
     const size_t quote_end = source.find('"', quote_begin + 1u);
-    if (quote_end == std::string::npos || quote_end <= quote_begin) {
+    if (quote_end == CHAOS_IL2CPP_STRING::npos || quote_end <= quote_begin) {
         return {};
     }
 
     return source.substr(quote_begin + 1u, quote_end - quote_begin - 1u);
 }
 
-char* DuplicateCString(const std::string& value) {
+char* DuplicateCString(const CHAOS_IL2CPP_STRING& value) {
     auto* buffer = new char[value.size() + 1u];
     for (size_t index = 0; index < value.size(); index++) {
         buffer[index] = value[index];
@@ -137,24 +140,24 @@ bool LoadHotUpdatePackage(const char* package_root_utf8, HotUpdatePackageHandle*
 
     UnloadHotUpdatePackage(out_handle);
 
-    const std::string manifest_path = JoinPath(package_root_utf8, "package.manifest.json");
-    const std::string fallback_manifest_path = JoinPath(package_root_utf8, "manifest.json");
-    std::string manifest_contents;
+    const CHAOS_IL2CPP_STRING manifest_path = JoinPath(package_root_utf8, "package.manifest.json");
+    const CHAOS_IL2CPP_STRING fallback_manifest_path = JoinPath(package_root_utf8, "manifest.json");
+    CHAOS_IL2CPP_STRING manifest_contents;
     if (!ReadTextFile(manifest_path, &manifest_contents)
         && !ReadTextFile(fallback_manifest_path, &manifest_contents)) {
         return false;
     }
 
-    const std::string package_id = ExtractJsonString(manifest_contents, "PackageId");
-    const std::string target_aot_version = ExtractJsonString(manifest_contents, "TargetAotVersion");
-    const std::string assembly_name = ExtractJsonString(manifest_contents, "Name");
-    const std::string metadata_name = ExtractJsonString(manifest_contents, "SupplementalMetadata");
+    const CHAOS_IL2CPP_STRING package_id = ExtractJsonString(manifest_contents, "PackageId");
+    const CHAOS_IL2CPP_STRING target_aot_version = ExtractJsonString(manifest_contents, "TargetAotVersion");
+    const CHAOS_IL2CPP_STRING assembly_name = ExtractJsonString(manifest_contents, "Name");
+    const CHAOS_IL2CPP_STRING metadata_name = ExtractJsonString(manifest_contents, "SupplementalMetadata");
     if (package_id.empty() || target_aot_version.empty() || assembly_name.empty() || metadata_name.empty()) {
         return false;
     }
 
-    const std::string assembly_path = JoinPath(package_root_utf8, assembly_name.c_str());
-    const std::string metadata_path = JoinPath(package_root_utf8, metadata_name.c_str());
+    const CHAOS_IL2CPP_STRING assembly_path = JoinPath(package_root_utf8, assembly_name.c_str());
+    const CHAOS_IL2CPP_STRING metadata_path = JoinPath(package_root_utf8, metadata_name.c_str());
     if (!LoadAssemblyImageFromPath(assembly_path.c_str(), &out_handle->assembly_image)) {
         return false;
     }
@@ -166,7 +169,20 @@ bool LoadHotUpdatePackage(const char* package_root_utf8, HotUpdatePackageHandle*
 
     out_handle->package_id = DuplicateCString(package_id);
     out_handle->target_aot_version = DuplicateCString(target_aot_version);
+    out_handle->assembly_name = DuplicateCString(assembly_name);
     out_handle->loaded = true;
+
+    // Register a per-package memory domain so marshal allocations during
+    // hot-update method execution are attributed to the correct domain.
+    // On package unload, UnregisterMemoryDomain destroys the domain heap,
+    // releasing all marshal allocations for this package at once.
+    namespace md = chaos::il2cpp::memory_domain;
+    md::DomainInit domain_init = {};
+    domain_init.module_name = out_handle->assembly_name;
+    domain_init.module_kind = 1u;  // HotUpdate
+    domain_init.usage_limit = 0;
+    domain_init.runtime_config = nullptr;
+    out_handle->domain_id = md::RegisterMemoryDomain(domain_init);
     return true;
 }
 
@@ -175,12 +191,22 @@ void UnloadHotUpdatePackage(HotUpdatePackageHandle* handle) {
         return;
     }
 
+    // Unregister the memory domain first, which destroys the domain heap
+    // and releases all marshal allocations attributed to this package.
+    if (handle->domain_id != 0u) {
+        chaos::il2cpp::string_table::UnregisterDomain(handle->domain_id);
+        chaos::il2cpp::memory_domain::UnregisterMemoryDomain(handle->domain_id);
+        handle->domain_id = 0u;
+    }
+
     ReleaseAssemblyImage(&handle->assembly_image);
     ReleaseSupplementalMetadataImage(&handle->metadata_image);
     delete[] handle->package_id;
     delete[] handle->target_aot_version;
+    delete[] handle->assembly_name;
     handle->package_id = nullptr;
     handle->target_aot_version = nullptr;
+    handle->assembly_name = nullptr;
     handle->loaded = false;
 }
 

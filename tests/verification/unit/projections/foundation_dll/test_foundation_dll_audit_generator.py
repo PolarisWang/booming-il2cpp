@@ -17,6 +17,136 @@ def _write_text(path: Path, text: str) -> None:
     path.write_text(text, encoding="utf-8")
 
 
+def _corelib_fixture_coverage() -> dict:
+    convert_char = [
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
+    ]
+    buffer_memory = [
+        "System.Private.CoreLib/System.Buffer::BlockCopy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
+        "System.Private.CoreLib/System.Buffer::BulkMoveWithWriteBarrier:System.Void(System.Byte&,System.Byte&,System.UIntPtr)",
+        "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
+        "System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)",
+        "System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Byte*,System.Int32)",
+        "System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Int32,System.Byte[],System.Int32,System.Int32)",
+        "System.Private.CoreLib/System.Buffer::Memmove:System.Void(System.Byte&,System.Byte&,System.UIntPtr)",
+        "System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.Int64,System.Int64)",
+        "System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.UInt64,System.UInt64)",
+        "System.Private.CoreLib/System.Buffer::SetByte:System.Void(System.Array,System.Int32,System.Byte)",
+    ]
+    enum_parsing = [
+        "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)",
+        "System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)",
+        "System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)",
+        "System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)",
+        "System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)",
+        "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)",
+        "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)",
+        "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)",
+        "System.Private.CoreLib/System.Enum::ToString:System.String()",
+        "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)",
+        "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)",
+        "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)",
+    ]
+    uncovered = [*buffer_memory, *enum_parsing]
+    return {
+        "formatVersion": "v0",
+        "artifactKind": "nativeReferenceRuntimeSkeletonCoverage",
+        "assemblyName": "System.Private.CoreLib",
+        "planKind": "assembly-full-closure-runtime-skeleton",
+        "translationUnitMode": "runtime-skeleton",
+        "requestedMethodCount": 40,
+        "emittedMethodCount": len(convert_char),
+        "uncoveredMethodCount": len(uncovered),
+        "uncoveredReasonCounts": {"unsupportedShapeOrCapability": len(uncovered)},
+        "uncoveredMethodSubjectIds": uncovered,
+        "uncoveredMethods": [
+            {"subjectId": subject_id, "reasonCode": "unsupportedShapeOrCapability"}
+            for subject_id in uncovered
+        ],
+    }
+
+
+def _corelib_fixture_native_reference_plan() -> dict:
+    convert_char = [
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
+        "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
+    ]
+    buffer_memory = [
+        "System.Private.CoreLib/System.Buffer::BlockCopy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
+        "System.Private.CoreLib/System.Buffer::BulkMoveWithWriteBarrier:System.Void(System.Byte&,System.Byte&,System.UIntPtr)",
+        "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
+        "System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)",
+        "System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Byte*,System.Int32)",
+        "System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Int32,System.Byte[],System.Int32,System.Int32)",
+        "System.Private.CoreLib/System.Buffer::Memmove:System.Void(System.Byte&,System.Byte&,System.UIntPtr)",
+        "System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.Int64,System.Int64)",
+        "System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.UInt64,System.UInt64)",
+        "System.Private.CoreLib/System.Buffer::SetByte:System.Void(System.Array,System.Int32,System.Byte)",
+    ]
+    enum_parsing = [
+        "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)",
+        "System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)",
+        "System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)",
+        "System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)",
+        "System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)",
+        "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)",
+        "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)",
+        "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)",
+        "System.Private.CoreLib/System.Enum::ToString:System.String()",
+        "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)",
+        "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)",
+        "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)",
+    ]
+    all_ids = [*convert_char, *buffer_memory, *enum_parsing]
+    return {
+        "formatVersion": "v0",
+        "artifactKind": "nativeReferencePlan",
+        "planKind": "assembly-full-closure-runtime-skeleton",
+        "assemblyName": "System.Private.CoreLib",
+        "translationUnitMode": "runtime-skeleton",
+        "translationUnitMethodSubjectIds": all_ids,
+        "translationUnitMethodCount": len(all_ids),
+        "translationUnitPageSize": len(all_ids),
+        "translationUnitPageCount": 1,
+        "translationUnitPages": [],
+        "auditStatus": "runtime-skeleton",
+        "auditMessage": "",
+    }
+
+
 def _program_manifest() -> dict:
     return {
         "schemaVersion": 1,
@@ -25,6 +155,9 @@ def _program_manifest() -> dict:
         "roadmapPath": "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/roadmap-v1-01.md",
         "designPath": "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/design-v1-01.md",
         "statusPath": "docs/dev/in-progress/20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md",
+        "authorityTaskId": "20260427-04-dll-capability-verification-closure-roadmap",
+        "authorityPhase": "roadmap-closed",
+        "scopeSource": "capability-family-ledger",
         "subjectEntry": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln",
         "projectTemplates": [
             {
@@ -216,7 +349,11 @@ def _write_fixture_repo(repo_root: Path) -> None:
     )
     _write_text(
         repo_root / "artifacts" / "subjects" / "SolutionCorePack" / "runs" / "20260424-200729-windows-23a1" / "analysis" / "generated" / "supplemental-full-closures" / "system-private-corelib" / "native-reference" / "generated" / "runtime" / "native-reference.runtime-skeleton.coverage.json",
-        "{}\n",
+        json.dumps(_corelib_fixture_coverage(), ensure_ascii=False, indent=2) + "\n",
+    )
+    _write_text(
+        repo_root / "artifacts" / "subjects" / "SolutionCorePack" / "runs" / "20260424-200729-windows-23a1" / "analysis" / "generated" / "supplemental-full-closures" / "system-private-corelib" / "native-reference" / "native-reference.plan.json",
+        json.dumps(_corelib_fixture_native_reference_plan(), ensure_ascii=False, indent=2) + "\n",
     )
     _write_text(
         repo_root / "artifacts" / "subjects" / "SolutionCorePack" / "runs" / "20260424-200729-windows-23a1" / "analysis" / "generated" / "supplemental-full-closures" / "system-private-corelib" / "native-aot" / "native-aot.plan.json",
@@ -225,6 +362,80 @@ def _write_fixture_repo(repo_root: Path) -> None:
     _write_text(
         repo_root / "artifacts" / "subjects" / "SolutionCorePack" / "runs" / "20260424-200729-windows-23a1" / "audit" / "System.Private.CoreLib" / "hotupdate-proof-report.json",
         "{}\n",
+    )
+    write_json(
+        repo_root / "verification" / "foundation-dll" / "System.Private.CoreLib" / "convert-char" / "method-test-case-index.json",
+        {
+            "schemaVersion": 1,
+            "cases": [
+                {
+                    "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
+                    "familyId": "family/System.Private.CoreLib/convert/char",
+                    "caseKind": "functional-test",
+                    "projectPath": "verification/foundation-dll/System.Private.CoreLib/convert-char/test",
+                    "sourceFile": "verification/foundation-dll/System.Private.CoreLib/convert-char/test/ConvertCharTests.AutoGenerated.cs",
+                    "className": "ConvertCharTests",
+                    "memberName": "Method_System_Convert_ToChar_System_Boolean",
+                    "routeCode": "Native",
+                    "profileCode": "",
+                }
+            ],
+        },
+    )
+    write_json(
+        repo_root / "verification" / "foundation-dll" / "System.Private.CoreLib" / "convert-char" / "method-benchmark-case-index.json",
+        {
+            "schemaVersion": 1,
+            "cases": [
+                {
+                    "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
+                    "familyId": "family/System.Private.CoreLib/convert/char",
+                    "caseKind": "benchmark",
+                    "projectPath": "verification/foundation-dll/System.Private.CoreLib/convert-char/benchmark",
+                    "sourceFile": "verification/foundation-dll/System.Private.CoreLib/convert-char/benchmark/ConvertCharBenchmarks.AutoGenerated.cs",
+                    "className": "ConvertCharBenchmarks",
+                    "memberName": "Method_System_Convert_ToChar_System_Boolean",
+                    "routeCode": "Native",
+                    "profileCode": "Default",
+                }
+            ],
+        },
+    )
+    write_json(
+        repo_root / "verification" / "foundation-dll" / "System.Private.CoreLib" / "convert-char" / "method-hotupdate-case-index.json",
+        {
+            "schemaVersion": 1,
+            "cases": [
+                {
+                    "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
+                    "familyId": "family/System.Private.CoreLib/convert/char",
+                    "caseKind": "hotupdate",
+                    "projectPath": "verification/foundation-dll/System.Private.CoreLib/convert-char/host",
+                    "sourceFile": "verification/foundation-dll/System.Private.CoreLib/convert-char/host/ConvertCharHotUpdate.AutoGenerated.cs",
+                    "className": "ConvertCharHotUpdate",
+                    "memberName": "Method_System_Convert_ToChar_System_Boolean",
+                    "direction": "HostToPatch",
+                }
+            ],
+        },
+    )
+    write_json(
+        repo_root / "verification" / "foundation-dll" / "System.Private.CoreLib" / "convert-char" / "review" / "bundle.json",
+        {
+            "schemaVersion": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "familyId": "family/System.Private.CoreLib/convert/char",
+            "displayName": "Convert.Char Conversions",
+            "generatedArtifacts": [
+                "verification/foundation-dll/System.Private.CoreLib/convert-char/method-test-case-index.json"
+            ],
+            "solutionPath": "subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln",
+            "notesPath": "verification/foundation-dll/System.Private.CoreLib/convert-char/review/notes.md",
+        },
+    )
+    _write_text(
+        repo_root / "verification" / "foundation-dll" / "System.Private.CoreLib" / "convert-char" / "review" / "notes.md",
+        "# Review Notes\n",
     )
 
 
@@ -268,6 +479,27 @@ def _capability_ledger() -> dict:
                             "codegen-review": "pending",
                         },
                         "methodCount": 18,
+                        "capabilityFamilyEnum": "SystemPrivateCoreLib_ConvertChar",
+                        "methodSubjectIds": [
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
+                            "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
+                        ],
                         "testCode": {
                             "testCodeStatus": "present",
                             "requestedMethodCount": 18,
@@ -295,6 +527,19 @@ def _capability_ledger() -> dict:
                             "codegen-review": "pending",
                         },
                         "methodCount": 10,
+                        "capabilityFamilyEnum": "SystemPrivateCoreLib_BufferMemory",
+                        "methodSubjectIds": [
+                            "System.Private.CoreLib/System.Buffer::BlockCopy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
+                            "System.Private.CoreLib/System.Buffer::BulkMoveWithWriteBarrier:System.Void(System.Byte&,System.Byte&,System.UIntPtr)",
+                            "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
+                            "System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)",
+                            "System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Byte*,System.Int32)",
+                            "System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Int32,System.Byte[],System.Int32,System.Int32)",
+                            "System.Private.CoreLib/System.Buffer::Memmove:System.Void(System.Byte&,System.Byte&,System.UIntPtr)",
+                            "System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.Int64,System.Int64)",
+                            "System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.UInt64,System.UInt64)",
+                            "System.Private.CoreLib/System.Buffer::SetByte:System.Void(System.Array,System.Int32,System.Byte)",
+                        ],
                         "testCode": {
                             "testCodeStatus": "coverage-widened",
                             "requestedMethodCount": 10,
@@ -321,6 +566,21 @@ def _capability_ledger() -> dict:
                             "codegen-review": "pending",
                         },
                         "methodCount": 12,
+                        "capabilityFamilyEnum": "SystemPrivateCoreLib_EnumParsing",
+                        "methodSubjectIds": [
+                            "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)",
+                            "System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)",
+                            "System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)",
+                            "System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)",
+                            "System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)",
+                            "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)",
+                            "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)",
+                            "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)",
+                            "System.Private.CoreLib/System.Enum::ToString:System.String()",
+                            "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)",
+                            "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)",
+                            "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)",
+                        ],
                         "testCode": {
                             "testCodeStatus": "needs-tests",
                             "requestedMethodCount": 12,
@@ -448,6 +708,8 @@ def test_write_foundation_dll_audit_outputs_materializes_program_matrix_and_repo
         report_root = repo_root / "verification" / "archive" / "reports" / "completed" / "foundation-dll-audit"
         docs_root = repo_root / "docs" / "verification" / "foundation-dll-audit"
         assert (projection_root / "program.json").is_file()
+        assert (projection_root / "family-verification.json").is_file()
+        assert (projection_root / "family-verification-claims.json").is_file()
         assert (projection_root / "dll-matrix.json").is_file()
         assert (projection_root / "artifact-index.json").is_file()
         assert (projection_root / "dashboard.html").is_file()
@@ -456,6 +718,8 @@ def test_write_foundation_dll_audit_outputs_materializes_program_matrix_and_repo
         assert (projection_root / "dlls" / "System.Private.CoreLib.html").is_file()
         assert (report_root / "summary.md").is_file()
         assert (docs_root / "program.json").is_file()
+        assert (docs_root / "family-verification.json").is_file()
+        assert (docs_root / "family-verification-claims.json").is_file()
         assert (docs_root / "dll-matrix.json").is_file()
         assert (docs_root / "artifact-index.json").is_file()
         assert (docs_root / "dashboard.html").is_file()
@@ -468,23 +732,26 @@ def test_write_foundation_dll_audit_outputs_materializes_program_matrix_and_repo
         assert program_payload["programId"] == "foundation-dll-translation-audit"
         assert program_payload["summary"]["dllCount"] == 2
         assert program_payload["summary"]["completedCount"] == 0
-        assert program_payload["summary"]["blockedCount"] == 2
+        assert program_payload["summary"]["inProgressCount"] == 1
+        assert program_payload["summary"]["blockedCount"] == 1
         assert program_payload["summary"]["activeAssembly"] == "System.Private.CoreLib"
 
         matrix_payload = json.loads((projection_root / "dll-matrix.json").read_text(encoding="utf-8"))
         rows = {row["assemblyName"]: row for row in matrix_payload["rows"]}
-        assert rows["System.Private.CoreLib"]["dllState"] == "blocked"
-        assert rows["System.Private.CoreLib"]["currentProject"] == "completion-certification"
+        assert rows["System.Private.CoreLib"]["dllState"] == "in-progress"
+        assert rows["System.Private.CoreLib"]["currentProject"] == "native-proof"
         assert rows["System.Collections.Immutable"]["dllState"] == "blocked"
 
         detail_payload = json.loads(
             (projection_root / "dlls" / "System.Private.CoreLib.json").read_text(encoding="utf-8")
         )
+        assert detail_payload["phase"] == "roadmap-closed"
+        assert detail_payload["roadmapTaskId"] == "20260427-04-dll-capability-verification-closure-roadmap"
         projects = {item["projectCode"]: item for item in detail_payload["projects"]}
         assert projects["managed-proof"]["executionState"] == "passed"
         assert projects["native-proof"]["executionState"] == "passed"
         assert projects["codegen-review"]["executionState"] == "passed"
-        assert projects["completion-certification"]["executionState"] == "blocked"
+        assert projects["completion-certification"]["executionState"] == "in-progress"
         assert projects["managed-proof"]["supportRefs"]
         assert all(path.startswith("docs/") or path.startswith("subjects/") for path in projects["managed-proof"]["supportRefs"])
         assert any(
@@ -496,6 +763,8 @@ def test_write_foundation_dll_audit_outputs_materializes_program_matrix_and_repo
         immutable_payload = json.loads(
             (projection_root / "dlls" / "System.Collections.Immutable.json").read_text(encoding="utf-8")
         )
+        assert immutable_payload["phase"] == "roadmap-closed"
+        assert immutable_payload["roadmapTaskId"] == "20260427-04-dll-capability-verification-closure-roadmap"
         immutable_projects = {item["projectCode"]: item for item in immutable_payload["projects"]}
         assert immutable_projects["audit-input-and-ledger"]["executionState"] == "blocked"
         assert immutable_projects["managed-proof"]["executionState"] == "pending"
@@ -514,6 +783,7 @@ def test_write_foundation_dll_audit_outputs_materializes_program_matrix_and_repo
         assert all(not item["path"].startswith("docs/") for item in artifact_payload["rows"])
         assert all(not item["path"].startswith("subjects/") for item in artifact_payload["rows"])
         dashboard_html = (projection_root / "dashboard.html").read_text(encoding="utf-8")
+        dashboard_css = (projection_root / "dashboard.css").read_text(encoding="utf-8")
         assert "{{" not in dashboard_html
         assert 'href="./dashboard.css"' in dashboard_html
         assert 'href="./dlls/System.Private.CoreLib.html"' in dashboard_html
@@ -539,6 +809,9 @@ def test_write_foundation_dll_audit_outputs_materializes_program_matrix_and_repo
         assert "Verification Projects" in docs_dll_html
         assert "Managed Proof" in docs_dll_html
         assert "../../../artifacts/subjects/SolutionCorePack/runs/" in docs_dll_html
+        assert "20260427-04-dll-capability-verification-closure-roadmap" in docs_dll_html
+        assert "20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable" not in docs_dashboard_html
+        assert "phase-2" not in docs_dashboard_html
         assert "verification/projections/foundation-dll-audit/dashboard.html" in payload["artifacts"]
         assert "verification/projections/foundation-dll-audit/dashboard.css" in payload["artifacts"]
         assert "verification/projections/foundation-dll-audit/dlls/System.Private.CoreLib.html" in payload["artifacts"]
@@ -567,6 +840,24 @@ def test_write_foundation_dll_audit_outputs_with_ledger_produces_dual_axis_repor
         program_payload = json.loads((projection_root / "program.json").read_text(encoding="utf-8"))
         assert program_payload["schemaVersion"] == 2
         assert program_payload["programId"] == "foundation-dll-translation-audit"
+        assert program_payload["scopeAssemblies"] == [
+            "System.Private.CoreLib",
+            "System.Collections.Immutable",
+        ]
+        family_verification_payload = json.loads((projection_root / "family-verification.json").read_text(encoding="utf-8"))
+        assert family_verification_payload["schemaVersion"] == 1
+        corelib_family_snapshot = next(item for item in family_verification_payload["assemblies"] if item["assemblyName"] == "System.Private.CoreLib")
+        assert len(corelib_family_snapshot["families"]) == 3
+        family_verification_claims_payload = json.loads((projection_root / "family-verification-claims.json").read_text(encoding="utf-8"))
+        assert family_verification_claims_payload["schemaVersion"] == 1
+        corelib_claims = next(item for item in family_verification_claims_payload["assemblies"] if item["assemblyName"] == "System.Private.CoreLib")
+        assert len(corelib_claims["claims"]) == 15
+        native_claim = next(item for item in corelib_claims["claims"] if item["familyId"] == "family/System.Private.CoreLib/convert/char" and item["gateCode"] == "native-proof")
+        assert native_claim["methodSubjectIds"]
+        truth_contracts_payload = json.loads((projection_root / "truth-contracts.json").read_text(encoding="utf-8"))
+        assert truth_contracts_payload["schemaVersion"] == 1
+        corelib_truth = next(item for item in truth_contracts_payload["assemblies"] if item["dllCapabilityManifest"]["assemblyName"] == "System.Private.CoreLib")
+        assert corelib_truth["dllCapabilityManifest"]["methodUniverseCount"] >= 40
 
         # -- summary has dual-axis fields --
         summary = program_payload["summary"]
@@ -605,6 +896,10 @@ def test_write_foundation_dll_audit_outputs_with_ledger_produces_dual_axis_repor
             (projection_root / "dlls" / "System.Private.CoreLib.json").read_text(encoding="utf-8")
         )
         assert detail_payload["schemaVersion"] == 2
+        assert detail_payload["phase"] == "roadmap-closed"
+        assert detail_payload["roadmapTaskId"] == "20260427-04-dll-capability-verification-closure-roadmap"
+        assert "truthContracts" in detail_payload
+        assert detail_payload["truthContracts"]["dllCapabilityManifest"]["assemblyName"] == "System.Private.CoreLib"
         assert len(detail_payload["capabilityFamilies"]) == 3
         assert detail_payload["capabilityClosure"]["totalFamilies"] == 3
         assert detail_payload["workflowProgress"]["totalRequiredGates"] == 12
@@ -615,9 +910,23 @@ def test_write_foundation_dll_audit_outputs_with_ledger_produces_dual_axis_repor
         assert detail_payload["capabilityFamilies"][0]["testCode"]["testCodeStatus"] == "present"
         assert detail_payload["capabilityFamilies"][1]["testCode"]["testCodeStatus"] == "coverage-widened"
         assert detail_payload["capabilityFamilies"][2]["testCode"]["testCodeStatus"] == "needs-tests"
+        assert detail_payload["capabilityFamilies"][0]["nativeProof"]["status"] == "in-progress"
+        assert detail_payload["capabilityFamilies"][0]["nativeProof"]["numerator"] == 18
+        assert detail_payload["capabilityFamilies"][0]["nativeProof"]["denominator"] == 18
+        assert detail_payload["capabilityFamilies"][0]["nativeProof"]["progressPercent"] == 100.0
+        assert detail_payload["capabilityFamilies"][0]["nativeProof"]["evidence"]
+        assert detail_payload["capabilityFamilies"][0]["nativeProof"]["runs"]
+        assert detail_payload["capabilityFamilies"][1]["nativeProof"]["numerator"] == 0
+        assert detail_payload["capabilityFamilies"][1]["nativeProof"]["denominator"] == 10
+        assert detail_payload["capabilityFamilies"][1]["nativeProof"]["progressPercent"] == 0.0
+        assert detail_payload["capabilityFamilies"][2]["nativeProof"]["numerator"] == 0
+        assert detail_payload["capabilityFamilies"][2]["nativeProof"]["denominator"] == 12
+        assert detail_payload["capabilityFamilies"][2]["nativeProof"]["progressPercent"] == 0.0
         immutable_payload = json.loads(
             (projection_root / "dlls" / "System.Collections.Immutable.json").read_text(encoding="utf-8")
         )
+        assert immutable_payload["phase"] == "roadmap-closed"
+        assert immutable_payload["roadmapTaskId"] == "20260427-04-dll-capability-verification-closure-roadmap"
         assert len(immutable_payload.get("capabilityFamilies")) == 2
         assert immutable_payload["capabilityFamilies"][0]["familyId"] == "family/System.Collections.Immutable/immutable-array"
         assert immutable_payload["capabilityFamilies"][0]["closureStatus"] == "in-progress"
@@ -639,6 +948,7 @@ def test_write_foundation_dll_audit_outputs_with_ledger_produces_dual_axis_repor
 
         # -- dashboard HTML --
         dashboard_html = (projection_root / "dashboard.html").read_text(encoding="utf-8")
+        dashboard_css = (projection_root / "dashboard.css").read_text(encoding="utf-8")
         assert "{{" not in dashboard_html
         assert 'href="./dashboard.css"' in dashboard_html
         # Artifact link points to independent page, not hash anchor
@@ -651,6 +961,8 @@ def test_write_foundation_dll_audit_outputs_with_ledger_produces_dual_axis_repor
         assert "Verification Projects" not in dashboard_html
         # Mini bars in matrix
         assert 'class="mini-bar"' in dashboard_html
+        assert "20260419-21-complex-bcl-ordered-dll-01-system-collections-immutable" not in dashboard_html
+        assert "phase-2" not in dashboard_html
 
         # -- DLL detail HTML has dual-axis bars and family table --
         dll_html = (projection_root / "dlls" / "System.Private.CoreLib.html").read_text(encoding="utf-8")
@@ -660,8 +972,32 @@ def test_write_foundation_dll_audit_outputs_with_ledger_produces_dual_axis_repor
         assert "Capability Families" in dll_html
         assert "Convert.Char Conversions" in dll_html
         assert "Test Code" in dll_html
+        assert "Native Proof Detail" not in dll_html
+        assert "native-reference.runtime-skeleton.coverage.json" in dll_html
         assert "coverage-widened" in dll_html
         assert "needs-tests" in dll_html
+        assert "18/18" in dll_html
+        assert "0/10" in dll_html
+        assert "0/12" in dll_html
+        assert 'class="native-proof-tooltip"' in dll_html
+        assert 'class="native-proof-trigger"' in dll_html
+        assert 'data-tooltip-delay-ms="500"' in dll_html
+        assert 'class="native-proof-links"' in dll_html
+        assert 'class="native-proof-methods"' in dll_html
+        assert "System.Convert::ToChar(System.Boolean)" in dll_html
+        assert "System.Convert::ToChar(System.UInt64)" in dll_html
+        assert "System.Convert::ToChar:System.Char(System.Boolean)" not in dll_html
+        assert 'class="native-proof-runs"' not in dll_html
+        assert "Tests" in dll_html
+        assert "Benchmarks" in dll_html
+        assert "HotUpdate" in dll_html
+        assert "Method_System_Convert_ToChar_System_Boolean" in dll_html
+        assert "HostToPatch" in dll_html
+        assert "native-proof-trigger.is-visible .native-proof-tooltip" in dashboard_css
+        assert "window.setTimeout" in dll_html
+        assert "user-select: text;" in dashboard_css
+        assert "white-space: nowrap;" in dashboard_css
+        assert "width: max-content;" in dashboard_css
         assert "Source Links" in dll_html
         # CoreLib has real families, NOT auto-derived
         assert "auto-derived" not in dll_html.lower()

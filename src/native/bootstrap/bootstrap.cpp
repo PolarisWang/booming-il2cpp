@@ -1,14 +1,19 @@
 #include "bootstrap.h"
 
 #include "generic_context.h"
+#include "memory_domain.h"
 #include "method_replacement.h"
 #include "reflection_query_model.h"
 #include "runtime_core.h"
+#include "string_table.h"
 #include "support.h"
 #include "vtable_registry.h"
 
+#include <gc.h>
+
 #include <cstdint>
 #include <cstring>
+#include <unordered_map>
 
 namespace chaos::il2cpp::bootstrap {
 
@@ -36,15 +41,27 @@ struct MethodPointerEntry {
     void* method_pointer;
 };
 
+struct InvokerEntry {
+    uint32_t method_token;
+    void* invoker_pointer;
+};
+
 struct DelegateInstance {
     uint32_t method_token;
     void* method_pointer;
     void* target_instance;
     DelegateInstance* next;          // multicast chain (nullptr = last in chain)
-    uint32_t invocation_count;       // total length of the chain starting at this node
+    // NOTE: nodes are GC-allocated and immutable after creation.
+    // Combine clones left prefix, shares right suffix.
+    // Remove clones prefix past removed node, shares suffix.
 };
 
-BootstrapState g_bootstrap_state = {};
+BootstrapState g_bootstrap_state = {};/// Invoker pointer table built at RegisterCodegen time from the
+/// code_registration->invoker_pointers array.
+/// Keyed by method_token, used by MethodInvoke to dispatch calls correctly
+/// regardless of whether the caller passes an opaque token, a reflection-query
+/// handle, or a raw function pointer.
+static CHAOS_IL2CPP_UNORDERED_MAP(uint32_t, void*) g_invoker_table;
 
 template <typename THandle>
 THandle MakeOpaqueHandle(uint32_t token) {
@@ -81,23 +98,9 @@ const MethodPointerEntry* GetMethodPointerEntries() {
     return static_cast<const MethodPointerEntry*>(g_bootstrap_state.code_registration->method_pointers);
 }
 
-void* FindMethodPointerByToken(uint32_t method_token) {
-    if (void* replacement = chaos::il2cpp::method_replacement::Resolve(method_token)) {
-        return replacement;
-    }
-
-    const auto* entries = GetMethodPointerEntries();
-    if (entries == nullptr) {
-        return nullptr;
-    }
-
-    for (uint32_t index = 0u; index < g_bootstrap_state.code_registration->method_pointer_count; index++) {
-        if (entries[index].method_token == method_token) {
-            return entries[index].method_pointer;
-        }
-    }
-
-    return nullptr;
+void* FindInvokerPointerByToken(uint32_t method_token) {
+    auto iter = g_invoker_table.find(method_token);
+    return iter != g_invoker_table.end() ? iter->second : nullptr;
 }
 
 const UnresolvedVirtualCallEntry* GetUnresolvedVirtualCallEntries() {
@@ -111,15 +114,12 @@ const UnresolvedVirtualCallEntry* GetUnresolvedVirtualCallEntries() {
 }
 
 const UnresolvedVirtualCallEntry* FindUnresolvedVirtualCallEntry(
-    TypeInfoHandle instance_type,
-    MethodInfoHandle declared_method) {
+    uint32_t instance_type_token,
+    uint32_t declared_method_token) {
     const auto* entries = GetUnresolvedVirtualCallEntries();
     if (entries == nullptr) {
         return nullptr;
     }
-
-    const uint32_t instance_type_token = DecodeOpaqueToken(instance_type);
-    const uint32_t declared_method_token = DecodeOpaqueToken(declared_method);
 
     for (uint32_t index = 0u; index < g_bootstrap_state.code_registration->unresolved_virtual_call_count; index++) {
         const auto& entry = entries[index];
@@ -174,6 +174,16 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL RegisterCodegen(
     g_bootstrap_state.options = options;
     g_bootstrap_state.is_registered = true;
     g_bootstrap_state.is_bootstrapped = false;
+
+    // Build invoker pointer table for MethodInvoke dispatch.
+    g_invoker_table.clear();
+    if (code_registration->invoker_pointers != nullptr && code_registration->invoker_pointer_count > 0u) {
+        const auto* entries = static_cast<const InvokerEntry*>(code_registration->invoker_pointers);
+        for (uint32_t index = 0u; index < code_registration->invoker_pointer_count; index++) {
+            g_invoker_table[entries[index].method_token] = entries[index].invoker_pointer;
+        }
+    }
+
     return CHAOS_BRIDGE_STATUS_OK;
 }
 
@@ -192,7 +202,39 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
     // chaos::il2cpp::generic_context::RegisterGenericInstantiation().
     // For now the pointers may be null; this is a no-op.
 
+    // Register an AOT root memory domain for this module so that marshal
+    // allocations originating from the main AOT module are domain-tracked.
+    const char* module_name = g_bootstrap_state.options != nullptr
+        && g_bootstrap_state.options->image_name_utf8 != nullptr
+        ? g_bootstrap_state.options->image_name_utf8
+        : "AotRoot";
+    memory_domain::DomainInit domain_init{};
+    domain_init.module_name = module_name;
+    domain_init.module_kind = 0u;       // 0 = AOT
+    domain_init.usage_limit = 0;        // unlimited
+    domain_init.runtime_config = nullptr;
+    g_bootstrap_state.aot_domain_id = memory_domain::RegisterMemoryDomain(domain_init);
+
+    // Push the AOT domain as the ambient domain on this thread so that
+    // CurrentDomain() returns it for any marshal allocation originating
+    // from the main module.  Hot-update DLLs push their own domain when
+    // their code runs (via DomainScope in their entry points).
+    if (g_bootstrap_state.aot_domain_id != memory_domain::kDomainIdInvalid) {
+        auto* aot_domain = memory_domain::FindDomainById(g_bootstrap_state.aot_domain_id);
+        if (aot_domain != nullptr) {
+            memory_domain::PushDomain(aot_domain);
+        }
+    }
+
     g_bootstrap_state.is_bootstrapped = true;
+
+    // Native-reference proof hosts do not guarantee an AOT-baked string table.
+    // Initialize the runtime table with an empty AOT view; generated entrypoints
+    // can still intern strings dynamically when they need them.
+    chaos::il2cpp::string_table::InitializeFromAot(
+        nullptr,
+        0u);
+
     return CHAOS_BRIDGE_STATUS_OK;
 }
 
@@ -209,6 +251,39 @@ TypeInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveTypeByToken(
     }
 
     return MakeOpaqueHandle<TypeInfoHandle>(type_token);
+}
+
+const RuntimeTypeCapabilityEntryV0* GetTypeCapabilityEntries() {
+    if (g_bootstrap_state.code_registration == nullptr ||
+        g_bootstrap_state.code_registration->type_capabilities == nullptr ||
+        g_bootstrap_state.code_registration->type_capability_count == 0u) {
+        return nullptr;
+    }
+
+    return g_bootstrap_state.code_registration->type_capabilities;
+}
+
+const RuntimeTypeCapabilityEntryV0* FindTypeCapabilityEntryByToken(uint32_t type_token) {
+    const auto* entries = GetTypeCapabilityEntries();
+    if (entries == nullptr || type_token == 0u) {
+        return nullptr;
+    }
+
+    for (uint32_t index = 0u; index < g_bootstrap_state.code_registration->type_capability_count; ++index) {
+        if (entries[index].type_token == type_token) {
+            return &entries[index];
+        }
+    }
+
+    return nullptr;
+}
+
+BridgeStatus CHAOS_RUNTIME_ABI_CALL QueryTypeCapability(
+    TypeInfoHandle type,
+    RuntimeTypeCapabilityInfoV0* out_capability_info) {
+    return chaos::il2cpp::runtime_core::TypeQueryCapability(type, out_capability_info) == CHAOS_RUNTIME_STATUS_OK
+        ? CHAOS_BRIDGE_STATUS_OK
+        : CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
 }
 
 MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveMethodByToken(
@@ -269,6 +344,20 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL UnboxValue(
         : CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
 }
 
+static uint32_t DecodeVirtualMethodToken(MethodInfoHandle method) {
+    if (const auto* desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryMethodHandle(method)) {
+        return desc->metadata_token;
+    }
+    return DecodeOpaqueToken(method);
+}
+
+static uint32_t DecodeVirtualTypeToken(TypeInfoHandle type) {
+    if (const auto* desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryTypeHandle(type)) {
+        return desc->metadata_token;
+    }
+    return DecodeOpaqueToken(type);
+}
+
 MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveVirtualMethod(
     TypeInfoHandle instance_type,
     MethodInfoHandle declared_method) {
@@ -276,8 +365,8 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveVirtualMethod(
         return nullptr;
     }
 
-    const uint32_t instance_type_token  = DecodeOpaqueToken(instance_type);
-    const uint32_t declared_method_token = DecodeOpaqueToken(declared_method);
+    const uint32_t instance_type_token  = DecodeVirtualTypeToken(instance_type);
+    const uint32_t declared_method_token = DecodeVirtualMethodToken(declared_method);
 
     // 1. Try vtable registry (runtime-registered per-type vtables).
     if (void* vtable_ptr = chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(
@@ -286,12 +375,38 @@ MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveVirtualMethod(
     }
 
     // 2. Fall back to the pre-resolved unresolved-virtual-call table (codegen inline).
-    if (const auto* entry = FindUnresolvedVirtualCallEntry(instance_type, declared_method)) {
+    if (const auto* entry = FindUnresolvedVirtualCallEntry(instance_type_token, declared_method_token)) {
         return reinterpret_cast<MethodInfoHandle>(entry->resolved_method);
     }
 
     // 3. Return the declared method as last resort (direct call fallback).
     return declared_method;
+}
+
+static MethodInfoHandle ResolveVirtualMethodTokenImpl(
+    uint32_t instance_type_token,
+    uint32_t declared_method_token) {
+    // 1. Try vtable registry (runtime-registered per-type vtables).
+    if (void* vtable_ptr = chaos::il2cpp::vtable_registry::ResolveVirtualMethodPointer(
+            instance_type_token, declared_method_token)) {
+        return reinterpret_cast<MethodInfoHandle>(vtable_ptr);
+    }
+
+    // 2. Fall back to the pre-resolved unresolved-virtual-call table.
+    if (const auto* entry = FindUnresolvedVirtualCallEntry(instance_type_token, declared_method_token)) {
+        return reinterpret_cast<MethodInfoHandle>(entry->resolved_method);
+    }
+
+    return nullptr;
+}
+
+MethodInfoHandle CHAOS_RUNTIME_ABI_CALL ResolveVirtualMethodByToken(
+    uint32_t instance_type_token,
+    uint32_t declared_method_token) {
+    if (instance_type_token == 0u || declared_method_token == 0u) {
+        return nullptr;
+    }
+    return ResolveVirtualMethodTokenImpl(instance_type_token, declared_method_token);
 }
 
 BridgeStatus CHAOS_RUNTIME_ABI_CALL InvokeVirtual(
@@ -304,14 +419,13 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL InvokeVirtual(
     void* out_return_value,
     size_t out_return_value_size,
     ExceptionHandle* out_exception) {
-    (void)argv;
-
     if (runtime_state == nullptr
         || thread_state == nullptr
         || object_instance == nullptr
         || method == nullptr
+        || (argv == nullptr && argc > 0u)
+        || argc > 4u
         || out_return_value == nullptr
-        || argc != 0u
         || out_return_value_size != sizeof(void*)
         || !IsKnownResolvedVirtualHandle(method)) {
         return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
@@ -321,14 +435,33 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL InvokeVirtual(
         *out_exception = nullptr;
     }
 
-    using VirtualInstanceMethodFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
-        RuntimeState* runtime,
-        ThreadState* thread,
-        void* __this);
+    using Vfn0 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*, void*);
+    using Vfn1 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*, void*, void*);
+    using Vfn2 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*, void*, void*, void*);
+    using Vfn3 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*, void*, void*, void*, void*);
+    using Vfn4 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*, void*, void*, void*, void*, void*);
 
     try {
         auto* const return_slot = static_cast<void**>(out_return_value);
-        *return_slot = reinterpret_cast<VirtualInstanceMethodFn>(method)(runtime_state, thread_state, object_instance);
+        switch (argc) {
+            case 0u:
+                *return_slot = reinterpret_cast<Vfn0>(method)(runtime_state, thread_state, object_instance);
+                break;
+            case 1u:
+                *return_slot = reinterpret_cast<Vfn1>(method)(runtime_state, thread_state, object_instance, argv[0]);
+                break;
+            case 2u:
+                *return_slot = reinterpret_cast<Vfn2>(method)(runtime_state, thread_state, object_instance, argv[0], argv[1]);
+                break;
+            case 3u:
+                *return_slot = reinterpret_cast<Vfn3>(method)(runtime_state, thread_state, object_instance, argv[0], argv[1], argv[2]);
+                break;
+            case 4u:
+                *return_slot = reinterpret_cast<Vfn4>(method)(runtime_state, thread_state, object_instance, argv[0], argv[1], argv[2], argv[3]);
+                break;
+            default:
+                return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+        }
         return CHAOS_BRIDGE_STATUS_OK;
     } catch (const chaos::il2cpp::runtime_core::ManagedExceptionCarrier& carrier) {
         if (out_exception != nullptr) {
@@ -337,6 +470,40 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL InvokeVirtual(
 
         return CHAOS_BRIDGE_STATUS_MANAGED_EXCEPTION;
     }
+}
+
+static DelegateInstance* AllocateDelegateNode(
+    uint32_t method_token,
+    void* method_pointer,
+    void* target_instance,
+    DelegateInstance* next) {
+    // GC_MALLOC is required here (not domain heap) because DelegateInstance
+    // nodes contain managed object pointers (target_instance, next) that
+    // BDWGC must scan for reachability.  Domain heaps are raw allocators
+    // with no GC tracing.
+    auto* node = static_cast<DelegateInstance*>(GC_MALLOC(sizeof(DelegateInstance)));
+    node->method_token = method_token;
+    node->method_pointer = method_pointer;
+    node->target_instance = target_instance;
+    node->next = next;
+    return node;
+}
+
+static DelegateInstance* ClonePrefixTo(const DelegateInstance* head, const DelegateInstance* exclusive_end) {
+    if (head == nullptr || head == exclusive_end) {
+        return nullptr;
+    }
+
+    auto* clone_head = AllocateDelegateNode(head->method_token, head->method_pointer, head->target_instance, nullptr);
+    DelegateInstance* tail = clone_head;
+    const DelegateInstance* cur = head->next;
+    while (cur != nullptr && cur != exclusive_end) {
+        auto* clone = AllocateDelegateNode(cur->method_token, cur->method_pointer, cur->target_instance, nullptr);
+        tail->next = clone;
+        tail = clone;
+        cur = cur->next;
+    }
+    return clone_head;
 }
 
 void* CHAOS_RUNTIME_ABI_CALL CreateDelegate(
@@ -357,30 +524,7 @@ void* CHAOS_RUNTIME_ABI_CALL CreateDelegate(
         return nullptr;
     }
 
-    auto* delegate_instance = new DelegateInstance
-    {
-        method_token,
-        method_pointer,
-        target_instance,
-        nullptr,   // next
-        1u,        // invocation_count
-    };
-    return delegate_instance;
-}
-
-/// Clone a delegate chain (deep copy of all nodes).
-static DelegateInstance* CloneChain(const DelegateInstance* src) {
-    if (src == nullptr) return nullptr;
-    auto* copy = new DelegateInstance { src->method_token, src->method_pointer, src->target_instance, nullptr, 1u };
-    DelegateInstance* tail = copy;
-    const DelegateInstance* cur = src->next;
-    while (cur != nullptr) {
-        auto* node = new DelegateInstance { cur->method_token, cur->method_pointer, cur->target_instance, nullptr, 1u };
-        tail->next = node;
-        tail = node;
-        cur = cur->next;
-    }
-    return copy;
+    return AllocateDelegateNode(method_token, method_pointer, target_instance, nullptr);
 }
 
 /// Returns true if two delegate nodes refer to the same (method, target) pair.
@@ -390,16 +534,21 @@ static bool DelegateNodesEqual(const DelegateInstance* a, const DelegateInstance
         && a->target_instance == b->target_instance;
 }
 
-/// Rebuild invocation_count for each node in the chain.
-static void RebuildCounts(DelegateInstance* head) {
-    // Count chain length
-    uint32_t len = 0u;
-    for (const DelegateInstance* n = head; n != nullptr; n = n->next) { ++len; }
-    // Assign descending counts
-    DelegateInstance* n = head;
-    while (n != nullptr) {
-        n->invocation_count = len--;
-        n = n->next;
+/// Finds the last node matching `tgt` in the chain starting at `head`.
+/// Returns { prev, match } pointers (prev = nullptr if match is head).
+static void FindLastMatch(
+    const DelegateInstance* head,
+    const DelegateInstance* tgt,
+    const DelegateInstance** out_prev,
+    const DelegateInstance** out_match) {
+    *out_match = nullptr;
+    *out_prev = nullptr;
+    const DelegateInstance* prev = nullptr;
+    for (auto* cur = head; cur != nullptr; prev = cur, cur = cur->next) {
+        if (DelegateNodesEqual(cur, tgt)) {
+            *out_match = cur;
+            *out_prev = prev;
+        }
     }
 }
 
@@ -409,18 +558,24 @@ void* CHAOS_RUNTIME_ABI_CALL CombineDelegate(
     if (left_delegate == nullptr)  return right_delegate;
     if (right_delegate == nullptr) return left_delegate;
 
-    // Clone left chain and append a clone of the right node (single-node append).
-    auto* new_head = CloneChain(static_cast<DelegateInstance*>(left_delegate));
-    // Find tail of new_head
-    DelegateInstance* tail = new_head;
-    while (tail->next != nullptr) { tail = tail->next; }
-    // Append clone of right (single node only — multicast combine is left + right)
+    // Build: clone(left) -> share(right as suffix)
+    // The right chain is shared by reference (immutable nodes), so this is
+    // O(|left|) — we only copy the left prefix, not the right chain.
+    auto* left = static_cast<DelegateInstance*>(left_delegate);
     auto* right = static_cast<DelegateInstance*>(right_delegate);
-    auto* right_clone = new DelegateInstance
-        { right->method_token, right->method_pointer, right->target_instance, nullptr, 1u };
-    tail->next = right_clone;
-    RebuildCounts(new_head);
-    return new_head;
+
+    auto* clone_head = ClonePrefixTo(left, nullptr);
+    if (clone_head == nullptr) {
+        return right;  // left was empty
+    }
+
+    // Attach shared right suffix to the tail of the cloned left.
+    DelegateInstance* tail = clone_head;
+    while (tail->next != nullptr) {
+        tail = tail->next;
+    }
+    tail->next = right;
+    return clone_head;
 }
 
 void* CHAOS_RUNTIME_ABI_CALL RemoveDelegate(
@@ -428,46 +583,71 @@ void* CHAOS_RUNTIME_ABI_CALL RemoveDelegate(
     void* target_delegate) {
     if (source_delegate == nullptr || target_delegate == nullptr) return source_delegate;
 
-    auto* src  = static_cast<const DelegateInstance*>(source_delegate);
-    auto* tgt  = static_cast<const DelegateInstance*>(target_delegate);
+    auto* src = static_cast<DelegateInstance*>(source_delegate);
+    auto* tgt = static_cast<DelegateInstance*>(target_delegate);
 
-    // Find the LAST node in the chain matching target.
-    // Build a cloned chain without that node.
-    auto* clone_head = CloneChain(src);
+    // 1. Find the last matching node in the original chain (without cloning).
+    const DelegateInstance* match = nullptr;
+    const DelegateInstance* match_prev = nullptr;
+    FindLastMatch(src, tgt, &match_prev, &match);
 
-    // Find the last matching node in the clone
-    DelegateInstance* prev        = nullptr;
-    DelegateInstance* last_match  = nullptr;
-    DelegateInstance* last_prev   = nullptr;
-    DelegateInstance* cur         = clone_head;
-    while (cur != nullptr) {
-        if (DelegateNodesEqual(cur, tgt)) {
-            last_match = cur;
-            last_prev  = prev;
+    if (match == nullptr) {
+        return source_delegate;
+    }
+
+    // 2. Clone the prefix up to (but not including) the match node.
+    if (match_prev == nullptr) {
+        // match is the head — no prefix to clone, skip directly to match->next
+        return match->next;
+    }
+
+    auto* clone_head = ClonePrefixTo(src, match);
+    // Attach shared suffix (match->next) to the tail of the cloned prefix.
+    DelegateInstance* tail = clone_head;
+    while (tail->next != nullptr) {
+        tail = tail->next;
+    }
+    tail->next = match->next;
+    return clone_head;
+}
+
+/// Template helper: dispatch delegate call with `has_target` (closed/static)
+/// and `argc` (0-4) to the correct function pointer signature.
+template <bool has_target>
+static void DfnDispatch(
+    void** return_slot,
+    void* method_pointer,
+    uint32_t argc,
+    RuntimeState* runtime_state,
+    ThreadState* thread_state,
+    void* target_instance,
+    void* const* argv) {
+    if constexpr (has_target) {
+        using Dfn0 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*, void*);
+        using Dfn1 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*, void*, void*);
+        using Dfn2 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*, void*, void*, void*);
+        using Dfn3 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*, void*, void*, void*, void*);
+        using Dfn4 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*, void*, void*, void*, void*, void*);
+        switch (argc) {
+            case 0u: *return_slot = reinterpret_cast<Dfn0>(method_pointer)(runtime_state, thread_state, target_instance); break;
+            case 1u: *return_slot = reinterpret_cast<Dfn1>(method_pointer)(runtime_state, thread_state, target_instance, argv[0]); break;
+            case 2u: *return_slot = reinterpret_cast<Dfn2>(method_pointer)(runtime_state, thread_state, target_instance, argv[0], argv[1]); break;
+            case 3u: *return_slot = reinterpret_cast<Dfn3>(method_pointer)(runtime_state, thread_state, target_instance, argv[0], argv[1], argv[2]); break;
+            case 4u: *return_slot = reinterpret_cast<Dfn4>(method_pointer)(runtime_state, thread_state, target_instance, argv[0], argv[1], argv[2], argv[3]); break;
         }
-        prev = cur;
-        cur  = cur->next;
-    }
-
-    if (last_match == nullptr) {
-        // No match — return original (clone is wasted, but safe)
-        return clone_head;
-    }
-
-    // Remove last_match from clone chain
-    if (last_prev == nullptr) {
-        // Removing head
-        DelegateInstance* new_head = last_match->next;
-        last_match->next = nullptr;
-        delete last_match;
-        if (new_head != nullptr) RebuildCounts(new_head);
-        return new_head;
     } else {
-        last_prev->next = last_match->next;
-        last_match->next = nullptr;
-        delete last_match;
-        RebuildCounts(clone_head);
-        return clone_head;
+        using Dfn0 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*);
+        using Dfn1 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*, void*);
+        using Dfn2 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*, void*, void*);
+        using Dfn3 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*, void*, void*, void*);
+        using Dfn4 = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState*, ThreadState*, void*, void*, void*, void*);
+        switch (argc) {
+            case 0u: *return_slot = reinterpret_cast<Dfn0>(method_pointer)(runtime_state, thread_state); break;
+            case 1u: *return_slot = reinterpret_cast<Dfn1>(method_pointer)(runtime_state, thread_state, argv[0]); break;
+            case 2u: *return_slot = reinterpret_cast<Dfn2>(method_pointer)(runtime_state, thread_state, argv[0], argv[1]); break;
+            case 3u: *return_slot = reinterpret_cast<Dfn3>(method_pointer)(runtime_state, thread_state, argv[0], argv[1], argv[2]); break;
+            case 4u: *return_slot = reinterpret_cast<Dfn4>(method_pointer)(runtime_state, thread_state, argv[0], argv[1], argv[2], argv[3]); break;
+        }
     }
 }
 
@@ -484,7 +664,7 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL DelegateInvoke(
         || thread_state == nullptr
         || delegate_instance == nullptr
         || argv == nullptr
-        || argc != 1u
+        || argc > 4u
         || out_return_value == nullptr
         || out_return_value_size != sizeof(void*)) {
         return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
@@ -495,8 +675,6 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL DelegateInvoke(
     }
 
     auto* delegate_handle = static_cast<DelegateInstance*>(delegate_instance);
-
-    void* const argument0 = argv[0];
     auto* const return_slot = static_cast<void**>(out_return_value);
     *return_slot = nullptr;
 
@@ -508,15 +686,11 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL DelegateInvoke(
             }
 
             if (delegate_handle->target_instance != nullptr) {
-                using ClosedInstanceDelegateFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
-                    RuntimeState* runtime, ThreadState* thread, void* __this, void* arg0);
-                *return_slot = reinterpret_cast<ClosedInstanceDelegateFn>(delegate_handle->method_pointer)(
-                    runtime_state, thread_state, delegate_handle->target_instance, argument0);
+                DfnDispatch<true>(return_slot, delegate_handle->method_pointer, argc,
+                    runtime_state, thread_state, delegate_handle->target_instance, argv);
             } else {
-                using StaticDelegateFn = void* (CHAOS_RUNTIME_ABI_CALL*)(
-                    RuntimeState* runtime, ThreadState* thread, void* arg0);
-                *return_slot = reinterpret_cast<StaticDelegateFn>(delegate_handle->method_pointer)(
-                    runtime_state, thread_state, argument0);
+                DfnDispatch<false>(return_slot, delegate_handle->method_pointer, argc,
+                    runtime_state, thread_state, nullptr, argv);
             }
 
             delegate_handle = delegate_handle->next;
@@ -535,23 +709,23 @@ void* CHAOS_RUNTIME_ABI_CALL ResolveIcall(const char* icall_name_utf8) {
         return nullptr;
     }
 
-    if (std::strcmp(icall_name_utf8, kConsoleWriteLineStringIcall) == 0) {
+    if (CHAOS_IL2CPP_STRCMP(icall_name_utf8, kConsoleWriteLineStringIcall) == 0) {
         return reinterpret_cast<void*>(&chaos::il2cpp::support::WriteLineString);
     }
 
-    if (std::strcmp(icall_name_utf8, kStringConcatPairIcall) == 0) {
+    if (CHAOS_IL2CPP_STRCMP(icall_name_utf8, kStringConcatPairIcall) == 0) {
         return reinterpret_cast<void*>(&chaos::il2cpp::support::ConcatStringPair);
     }
 
-    if (std::strcmp(icall_name_utf8, kStringConcatTripleIcall) == 0) {
+    if (CHAOS_IL2CPP_STRCMP(icall_name_utf8, kStringConcatTripleIcall) == 0) {
         return reinterpret_cast<void*>(&chaos::il2cpp::support::ConcatStringTriple);
     }
 
-    if (std::strcmp(icall_name_utf8, kDelegateCombineIcall) == 0) {
+    if (CHAOS_IL2CPP_STRCMP(icall_name_utf8, kDelegateCombineIcall) == 0) {
         return reinterpret_cast<void*>(&CombineDelegate);
     }
 
-    if (std::strcmp(icall_name_utf8, kDelegateRemoveIcall) == 0) {
+    if (CHAOS_IL2CPP_STRCMP(icall_name_utf8, kDelegateRemoveIcall) == 0) {
         return reinterpret_cast<void*>(&RemoveDelegate);
     }
 
@@ -564,12 +738,14 @@ const CodegenBridgeV0 kCodegenBridgeV0 = {
     &RegisterCodegen,
     &BootstrapRuntime,
     &ResolveTypeByToken,
+    &QueryTypeCapability,
     &ResolveMethodByToken,
     &ResolveFieldByToken,
     &BoxValue,
     &UnboxValue,
     &ResolveVirtualMethod,
     &InvokeVirtual,
+    &ResolveVirtualMethodByToken,
     &CreateDelegate,
     &DelegateInvoke,
     &ResolveIcall,
@@ -583,6 +759,37 @@ const BootstrapState* PeekBootstrapState() {
 
 const CodegenBridgeV0* GetCodegenBridgeV0() {
     return &kCodegenBridgeV0;
+}
+
+const RuntimeTypeCapabilityEntryV0* FindRegisteredTypeCapabilityEntry(uint32_t type_token) {
+    return FindTypeCapabilityEntryByToken(type_token);
+}
+
+void* FindMethodPointerByToken(uint32_t method_token) {
+    if (void* replacement = chaos::il2cpp::method_replacement::Resolve(method_token)) {
+        return replacement;
+    }
+
+    const auto* entries = GetMethodPointerEntries();
+    if (entries == nullptr) {
+        return nullptr;
+    }
+
+    for (uint32_t index = 0u; index < g_bootstrap_state.code_registration->method_pointer_count; index++) {
+        if (entries[index].method_token == method_token) {
+            return entries[index].method_pointer;
+        }
+    }
+
+    return nullptr;
+}
+
+void* FindInvokerPointer(uint32_t method_token) {
+    return FindInvokerPointerByToken(method_token);
+}
+
+memory_domain::DomainId GetAotDomainId() {
+    return g_bootstrap_state.aot_domain_id;
 }
 
 }  // namespace chaos::il2cpp::bootstrap

@@ -170,7 +170,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static IReadOnlyList<string> SplitTopLevelGenericArguments(string value)
 	{
-		if (string.IsNullOrWhiteSpace(value))
+		if (string.IsNullOrEmpty(value))
 		{
 			return Array.Empty<string>();
 		}
@@ -216,7 +216,7 @@ public sealed partial class NativeAotLoweringPlanner
 			return false;
 		}
 		typeSubjectId = readOnlyList[0];
-		return !string.IsNullOrWhiteSpace(typeSubjectId);
+		return !string.IsNullOrEmpty(typeSubjectId);
 	}
 
 	private static bool TryParseDefaultInterpolatedStringHandlerAppendFormattedType(string subjectId, out string? formattedTypeDisplayName)
@@ -227,7 +227,7 @@ public sealed partial class NativeAotLoweringPlanner
 			return false;
 		}
 		formattedTypeDisplayName = GetTypeDisplayName(formattedTypeName);
-		return !string.IsNullOrWhiteSpace(formattedTypeDisplayName);
+		return !string.IsNullOrEmpty(formattedTypeDisplayName);
 	}
 
 	private static bool IsSupportedDefaultInterpolatedStringHandlerAppendFormattedSubjectId(string subjectId)
@@ -274,7 +274,7 @@ public sealed partial class NativeAotLoweringPlanner
 			elementExpression = slotExpression;
 			return true;
 		case AotCoreIrAbiCarrierKind.Int32:
-			elementExpression = "static_cast<std::int32_t>(" + slotExpression + ")";
+			elementExpression = "static_cast<CHAOS_IL2CPP_INT32>(" + slotExpression + ")";
 			return true;
 		default:
 			elementExpression = string.Empty;
@@ -365,7 +365,7 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private bool TryResolveKnownTypeSubjectId(string typeNameOrSubjectId, out string subjectId)
 	{
-		if (string.IsNullOrWhiteSpace(typeNameOrSubjectId))
+		if (string.IsNullOrEmpty(typeNameOrSubjectId))
 		{
 			subjectId = string.Empty;
 			return false;
@@ -398,7 +398,7 @@ public sealed partial class NativeAotLoweringPlanner
 				string text = methodSignatureSuffix;
 				int num2 = num + 1;
 				string value = text.Substring(num2, text.Length - 1 - num2);
-				if (string.IsNullOrWhiteSpace(value))
+				if (string.IsNullOrEmpty(value))
 				{
 					return Array.Empty<string>();
 				}
@@ -411,7 +411,7 @@ public sealed partial class NativeAotLoweringPlanner
 	private static bool IsDelegateTypeSubjectId(string subjectId, IReadOnlyDictionary<string, string?> referenceTypeBaseSubjectIds)
 	{
 		string value = subjectId;
-		while (!string.IsNullOrWhiteSpace(value))
+		while (!string.IsNullOrEmpty(value))
 		{
 			if (string.Equals(value, "System.Private.CoreLib/System.Delegate", StringComparison.Ordinal) || string.Equals(value, "System.Private.CoreLib/System.MulticastDelegate", StringComparison.Ordinal))
 			{
@@ -431,11 +431,11 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private string? ResolveReferenceTypeBaseSubjectId(string subjectId, string? baseTypeSubjectId)
 	{
-		if (!string.IsNullOrWhiteSpace(baseTypeSubjectId))
+		if (!string.IsNullOrEmpty(baseTypeSubjectId))
 		{
 			return baseTypeSubjectId;
 		}
-		if (_referenceTypeBaseSubjectIds.TryGetValue(subjectId, out string value) && !string.IsNullOrWhiteSpace(value))
+		if (_referenceTypeBaseSubjectIds.TryGetValue(subjectId, out string value) && !string.IsNullOrEmpty(value))
 		{
 			return value;
 		}

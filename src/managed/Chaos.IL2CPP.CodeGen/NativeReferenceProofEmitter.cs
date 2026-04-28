@@ -268,39 +268,6 @@ public sealed partial class NativeReferenceProofEmitter
     private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonStringFamilyHandler(
         RuntimeSkeletonStubBuildContext buildContext);
 
-    private static readonly RuntimeSkeletonFamilyHandler[] RuntimeSkeletonFamilyHandlers =
-    [
-        TryBuildRuntimeSkeletonConvertFamilyHandler,
-        TryBuildRuntimeSkeletonBindingFamilyHandler,
-        TryBuildRuntimeSkeletonUtilityFamilyHandler,
-        TryBuildRuntimeSkeletonPlatformFamilyHandler,
-        TryBuildRuntimeSkeletonInteropFamilyHandler,
-        TryBuildRuntimeSkeletonAsyncFamilyHandler,
-        TryBuildRuntimeSkeletonArrayFamilyHandler,
-        TryBuildRuntimeSkeletonExceptionFamilyHandler,
-        TryBuildRuntimeSkeletonUnsafeManagedInvokeFamilyHandler,
-        TryBuildRuntimeSkeletonMemoryExtensionsManagedInvokeFamilyHandler,
-        TryBuildRuntimeSkeletonSpanHelpersKernelFamilyHandler,
-        TryBuildRuntimeSkeletonValueTypeKernelFamilyHandler,
-        TryBuildRuntimeSkeletonArrayAndMemoryMarshalFamilyHandler,
-        TryBuildRuntimeSkeletonHalfManagedInvokeFamilyHandler,
-        TryBuildRuntimeSkeletonFloatingScalarManagedInvokeFamilyHandler,
-        TryBuildRuntimeSkeletonPrimitiveScalarManagedInvokeFamilyHandler,
-        TryBuildRuntimeSkeletonWideNumericManagedInvokeFamilyHandler,
-        TryBuildRuntimeSkeletonCalendarStructManagedInvokeFamilyHandler,
-        TryBuildRuntimeSkeletonIdentityStructManagedInvokeFamilyHandler,
-        TryBuildRuntimeSkeletonCompanionManagedInvokeFamilyHandler,
-        TryBuildRuntimeSkeletonDateTimeSemanticEngineFamilyHandler,
-        TryBuildRuntimeSkeletonGlobalizationDateTimeSupportFamilyHandler,
-        TryBuildRuntimeSkeletonNumberManagedInvokeFamilyHandler,
-        TryBuildRuntimeSkeletonDecimalManagedInvokeFamilyHandler,
-        TryBuildRuntimeSkeletonCharManagedInvokeFamilyHandler,
-        TryBuildRuntimeSkeletonEnumManagedInvokeFamilyHandler,
-        TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler,
-        TryBuildRuntimeSkeletonStringFamilyHandler,
-        TryBuildRuntimeSkeletonConvertLikeFamilyHandler,
-    ];
-
     private static readonly RuntimeSkeletonConvertLikeFamilyHandler[] RuntimeSkeletonConvertLikeFamilyHandlers =
     [
         TryBuildRuntimeSkeletonConvertLikeIntForwarderHandler,
@@ -1175,25 +1142,6 @@ public sealed partial class NativeReferenceProofEmitter
             translationUnitPageCount = runtimeSkeletonEmission.TranslationUnitPages.Count;
             translationUnitPages = runtimeSkeletonEmission.TranslationUnitPages;
         }
-        else if (string.Equals(loweringPlan.PlanKind, "assembly-full-closure-audit", StringComparison.Ordinal))
-        {
-            generatedSources = BuildAssemblyFullClosureAuditGeneratedSources(loweringPlan);
-            generatedArtifacts = new List<NativeReferenceGeneratedArtifactRef>
-            {
-                new()
-                {
-                    Kind = "generatedTranslationUnit",
-                    Path = NativeReferenceArtifactNames.AuditSummaryTranslationUnit,
-                },
-            };
-            generatedArtifacts = generatedArtifacts
-                .Concat((loweringPlan.TranslationUnitPages ?? []).Select(page => new NativeReferenceGeneratedArtifactRef
-                {
-                    Kind = "auditInventoryPage",
-                    Path = page.Path,
-                }))
-                .ToList();
-        }
         else
         {
             generatedSources =
@@ -1217,6 +1165,25 @@ public sealed partial class NativeReferenceProofEmitter
             "native-reference",
             loweringPlan.PlanKind,
             generatedSources.Select(generatedSource => (generatedSource.RelativePath, generatedSource.Contents)));
+
+        // Validate generated C++ code against project coding conventions.
+        var validator = new Validation.NativeCodegenValidator();
+        foreach (var generatedSource in generatedSources)
+        {
+            var result = validator.ValidateContent(generatedSource.Contents, generatedSource.RelativePath);
+            if (!result.IsValid)
+            {
+                foreach (var error in result.Errors)
+                {
+                    System.Console.Error.WriteLine($"[NativeCodegenValidator] {generatedSource.RelativePath}: ERROR: {error}");
+                }
+            }
+            foreach (var warning in result.Warnings)
+            {
+                System.Console.WriteLine($"[NativeCodegenValidator] {generatedSource.RelativePath}: WARNING: {warning}");
+            }
+        }
+
         generatedArtifacts = generatedArtifacts
             .Concat(
             [
@@ -1411,7 +1378,8 @@ public sealed partial class NativeReferenceProofEmitter
                 Contents = BuildAssemblyFullClosureRuntimeSkeletonSummaryTranslationUnit(
                     loweringPlan,
                     pageEmissions,
-                    emittedMethodCount),
+                    emittedMethodCount,
+                    codeRegistration),
             },
         };
 
@@ -1469,7 +1437,8 @@ public sealed partial class NativeReferenceProofEmitter
     private static string BuildAssemblyFullClosureRuntimeSkeletonSummaryTranslationUnit(
         NativeReferenceLoweringPlanArtifact loweringPlan,
         IReadOnlyList<RuntimeSkeletonPageEmission> pageEmissions,
-        int emittedMethodCount)
+        int emittedMethodCount,
+        CodeRegistrationArtifact codeRegistration)
     {
         ValidateAssemblyFullClosureRuntimeSkeletonPlan(loweringPlan);
         var emittedPages = pageEmissions
@@ -1487,7 +1456,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
     const CodegenRegistrationOptionsV0* options,
     RuntimeState* runtime,
     ThreadState* thread,
-    std::uint32_t method_slot,
+    CHAOS_IL2CPP_UINT32 method_slot,
     void* managed_args);
 """;
             })
@@ -1499,6 +1468,10 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 return pageEmission.SupportedMethods.Select(method =>
                     $"    {{ {method.MethodId}u, {ToCppStringLiteral(method.SubjectId)}, &{pageDispatchName}, {method.DispatchSlot}u }},");
             })
+            .ToArray();
+        var typeCapabilityEntries = codeRegistration.TypeCapabilities
+            .Select(capability =>
+                $"    {{ {FormatCppTokenLiteral(capability.TypeToken)}, {{ sizeof(RuntimeTypeCapabilityInfoV0), {capability.CapabilityBits}u, {capability.ValueSizeBytes}u, {capability.VectorWidthBytes}u, {capability.VectorLaneCount}u, {capability.VectorLaneKind}u, {capability.ScalarKind}u }} }},")
             .ToArray();
         var model = new ScriptObject
         {
@@ -1512,6 +1485,9 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["has_method_dispatch_entries"] = methodDispatchCatalogEntries.Length > 0,
             ["page_dispatch_declarations"] = pageDispatchDeclarations,
             ["method_dispatch_catalog_entries"] = methodDispatchCatalogEntries,
+            ["has_type_capability_entries"] = typeCapabilityEntries.Length > 0,
+            ["type_capability_entries"] = typeCapabilityEntries,
+            ["type_capability_entry_count"] = typeCapabilityEntries.Length,
             ["native_entry_function_name"] = loweringPlan.NativeEntryFunctionName,
         };
         return ScribanTemplateRenderer.RenderTemplate(
@@ -1572,7 +1548,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 }
 
                 unsupportedMethods.Add(new RuntimeSkeletonUnsupportedMethodEmission(subjectId, "unsupportedShapeOrCapability"));
-                continue;
+                stubDefinition = BuildAssemblyFullClosureRuntimeSkeletonFallbackStubDefinition(stubName);
             }
 
             emittedMethods.Add(new RuntimeSkeletonMethodEmission(
@@ -1689,6 +1665,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         int emittedMethodCount,
         IReadOnlyList<RuntimeSkeletonUnsupportedMethodEmission> unsupportedMethods)
     {
+        var canonicalSubjectIds = BuildCanonicalSubjectIdLookup(loweringPlan.TranslationUnitMethodSubjectIds ?? []);
         var uncoveredReasonCounts = unsupportedMethods
             .GroupBy(method => method.ReasonCode, StringComparer.Ordinal)
             .ToDictionary(group => group.Key, group => group.Count(), StringComparer.Ordinal);
@@ -1703,10 +1680,13 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             ["emittedMethodCount"] = emittedMethodCount,
             ["uncoveredMethodCount"] = unsupportedMethods.Count,
             ["uncoveredReasonCounts"] = uncoveredReasonCounts,
-            ["uncoveredMethodSubjectIds"] = unsupportedMethods.Select(method => method.SubjectId).ToArray(),
+            ["uncoveredMethodSubjectIds"] = unsupportedMethods
+                .Select(method => ResolveCanonicalSubjectId(canonicalSubjectIds, method.SubjectId))
+                .ToArray(),
             ["uncoveredMethods"] = unsupportedMethods.Select(method => new Dictionary<string, object?>
             {
                 ["subjectId"] = method.SubjectId,
+                ["canonicalSubjectId"] = ResolveCanonicalSubjectId(canonicalSubjectIds, method.SubjectId),
                 ["reasonCode"] = method.ReasonCode,
             }).ToArray(),
         };
@@ -1726,6 +1706,28 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
     RuntimeState* runtime,
     ThreadState* thread,
     void* managed_args);";
+    }
+
+    private static string BuildAssemblyFullClosureRuntimeSkeletonFallbackStubDefinition(string stubName)
+    {
+        return $@"int32_t CHAOS_RUNTIME_ABI_CALL {stubName}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    (void)managed_args;
+    return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+}}";
     }
 
     private static string? TryBuildAssemblyFullClosureRuntimeSkeletonMethodStub(
@@ -1846,6 +1848,10 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonInteropKernel32PlatformCapabilityFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonInteropKernel32PlatformCapabilityFamilyCore(buildContext);
+
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonInteropFamilyHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -1953,6 +1959,10 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonTaskContinuationFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonTaskContinuationFamilyCore(buildContext);
+
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStringManagedInvokeFamilyHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStringManagedInvokeFamilyCore(buildContext);
@@ -1973,9 +1983,25 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonValueTypeKernelFamilyCore(buildContext);
 
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonVectorKernelFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonVectorKernelFamilyCore(buildContext);
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonVectorManagedInvokeFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonVectorManagedInvokeFamilyCore(buildContext);
+
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonArrayAndMemoryMarshalFamilyHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonArrayAndMemoryMarshalFamilyCore(buildContext);
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonMarshalPlatformCapabilityFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonMarshalPlatformCapabilityFamilyCore(buildContext);
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonNativeRuntimeEventSourcePlatformCapabilityFamilyHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonNativeRuntimeEventSourcePlatformCapabilityFamilyCore(buildContext);
 
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonHalfManagedInvokeFamilyHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
@@ -2048,6 +2074,10 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonValueTypeKernelHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonValueTypeKernelCore(buildContext);
+
+    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonVectorKernelHandler(
+        RuntimeSkeletonStubBuildContext buildContext) =>
+        TryBuildRuntimeSkeletonVectorKernelCore(buildContext);
 
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonArrayAndMemoryMarshalHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
@@ -5040,6 +5070,20 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             subjectId,
             metadataRegistration,
             methodsBySubjectId,
+            stubName,
+            out stub);
+
+    private static bool TryBuildAssemblyBoundVectorKernelStub(
+        string assemblyName,
+        string subjectId,
+        MetadataRegistrationArtifact metadataRegistration,
+        IReadOnlyDictionary<string, TypedIlMethodArtifact> methodsBySubjectId,
+        string stubName,
+        out string stub) =>
+        TryBuildAssemblyBoundVectorKernelCore(
+            assemblyName,
+            subjectId,
+            metadataRegistration,
             stubName,
             out stub);
 
@@ -9735,17 +9779,17 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             string.Equals(outputManagedType, "System.Byte", StringComparison.Ordinal))
         {
             inputCppType = "bool";
-            outputCppType = "std::uint8_t";
-            convertedValueExpression = "request->value ? static_cast<std::uint8_t>(1) : static_cast<std::uint8_t>(0)";
+            outputCppType = "CHAOS_IL2CPP_UINT8";
+            convertedValueExpression = "request->value ? static_cast<CHAOS_IL2CPP_UINT8>(1) : static_cast<CHAOS_IL2CPP_UINT8>(0)";
             return true;
         }
 
         if (string.Equals(inputManagedType, "System.Byte", StringComparison.Ordinal) &&
             string.Equals(outputManagedType, "System.Boolean", StringComparison.Ordinal))
         {
-            inputCppType = "std::uint8_t";
+            inputCppType = "CHAOS_IL2CPP_UINT8";
             outputCppType = "bool";
-            convertedValueExpression = "request->value != static_cast<std::uint8_t>(0)";
+            convertedValueExpression = "request->value != static_cast<CHAOS_IL2CPP_UINT8>(0)";
             return true;
         }
 
@@ -9898,7 +9942,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             }
 
             throwSubjectId = GetRequiredInstructionCallee(instructions[4], subjectId, 4);
-            overflowConditionExpression = "request->value > static_cast<std::uint64_t>(255)";
+            overflowConditionExpression = "request->value > static_cast<CHAOS_IL2CPP_UINT64>(255)";
             return true;
         }
 
@@ -9920,7 +9964,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                     return false;
                 }
                 throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
-                overflowConditionExpression = "request->value < static_cast<std::int8_t>(0)";
+                overflowConditionExpression = "request->value < static_cast<CHAOS_IL2CPP_INT8>(0)";
                 return true;
             case "System.Int16":
                 if (instructions.Count != 7 ||
@@ -9938,7 +9982,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                     return false;
                 }
                 throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
-                overflowConditionExpression = "request->value < static_cast<std::int16_t>(0) || request->value > static_cast<std::int16_t>(255)";
+                overflowConditionExpression = "request->value < static_cast<CHAOS_IL2CPP_INT16>(0) || request->value > static_cast<CHAOS_IL2CPP_INT16>(255)";
                 return true;
             case "System.UInt16":
                 if (instructions.Count != 7 ||
@@ -9956,7 +10000,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                     return false;
                 }
                 throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
-                overflowConditionExpression = "request->value > static_cast<std::uint16_t>(255)";
+                overflowConditionExpression = "request->value > static_cast<CHAOS_IL2CPP_UINT16>(255)";
                 return true;
             case "System.UInt32":
                 if (instructions.Count != 7 ||
@@ -9974,7 +10018,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                     return false;
                 }
                 throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
-                overflowConditionExpression = "request->value > static_cast<std::uint32_t>(255)";
+                overflowConditionExpression = "request->value > static_cast<CHAOS_IL2CPP_UINT32>(255)";
                 return true;
             case "System.Char":
                 if (instructions.Count != 7 ||
@@ -9992,7 +10036,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                     return false;
                 }
                 throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
-                overflowConditionExpression = "request->value > static_cast<std::uint16_t>(255)";
+                overflowConditionExpression = "request->value > static_cast<CHAOS_IL2CPP_UINT16>(255)";
                 return true;
             default:
                 return false;
@@ -10035,7 +10079,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             }
 
             throwSubjectId = GetRequiredInstructionCallee(instructions[4], subjectId, 4);
-            overflowConditionExpression = "request->value > static_cast<std::uint64_t>(65535)";
+            overflowConditionExpression = "request->value > static_cast<CHAOS_IL2CPP_UINT64>(65535)";
             return true;
         }
 
@@ -10057,7 +10101,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                     return false;
                 }
                 throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
-                overflowConditionExpression = "request->value < static_cast<std::int8_t>(0)";
+                overflowConditionExpression = "request->value < static_cast<CHAOS_IL2CPP_INT8>(0)";
                 return true;
             case "System.Int16":
                 if (instructions.Count != 7 ||
@@ -10075,7 +10119,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                     return false;
                 }
                 throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
-                overflowConditionExpression = "request->value < static_cast<std::int16_t>(0)";
+                overflowConditionExpression = "request->value < static_cast<CHAOS_IL2CPP_INT16>(0)";
                 return true;
             case "System.UInt32":
                 if (instructions.Count != 7 ||
@@ -10093,7 +10137,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                     return false;
                 }
                 throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
-                overflowConditionExpression = "request->value > static_cast<std::uint32_t>(65535)";
+                overflowConditionExpression = "request->value > static_cast<CHAOS_IL2CPP_UINT32>(65535)";
                 return true;
             default:
                 return false;
@@ -10170,12 +10214,12 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         string maxBranchOp;
         if (string.Equals(outputManagedType, "System.UInt32", StringComparison.Ordinal))
         {
-            maxCppExpr = "static_cast<std::uint64_t>(4294967295)";
+            maxCppExpr = "static_cast<CHAOS_IL2CPP_UINT64>(4294967295)";
             maxBranchOp = "ble.un";
         }
         else
         {
-            maxCppExpr = $"static_cast<std::int32_t>({maxValue})";
+            maxCppExpr = $"static_cast<CHAOS_IL2CPP_INT32>({maxValue})";
             maxBranchOp = isSigned ? "ble" : "ble.un";
         }
 
@@ -10203,7 +10247,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
             }
 
             throwSubjectId = GetRequiredInstructionCallee(instructions[4], subjectId, 4);
-            overflowConditionExpression = $"request->value > static_cast<std::uint64_t>({maxValue})";
+            overflowConditionExpression = $"request->value > static_cast<CHAOS_IL2CPP_UINT64>({maxValue})";
             return true;
         }
 
@@ -10259,7 +10303,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                     signedMin = -32768;
                 else if (string.Equals(outputManagedType, "System.Int32", StringComparison.Ordinal))
                     signedMin = -2147483648;
-                overflowConditionExpression = $"request->value < static_cast<std::int32_t>({signedMin}) || {overflowConditionExpression}";
+                overflowConditionExpression = $"request->value < static_cast<CHAOS_IL2CPP_INT32>({signedMin}) || {overflowConditionExpression}";
                 return true;
             }
 
@@ -10273,7 +10317,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 string.Equals(instructions[2].Op, "bge", StringComparison.Ordinal))
             {
                 throwSubjectId = GetRequiredInstructionCallee(instructions[3], subjectId, 3);
-                overflowConditionExpression = "request->value < static_cast<std::int8_t>(0)";
+                overflowConditionExpression = "request->value < static_cast<CHAOS_IL2CPP_INT8>(0)";
                 return true;
             }
             return false;
@@ -10356,31 +10400,31 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 inputCppType = "bool";
                 return true;
             case "System.Byte":
-                inputCppType = "std::uint8_t";
+                inputCppType = "CHAOS_IL2CPP_UINT8";
                 return true;
             case "System.SByte":
-                inputCppType = "std::int8_t";
+                inputCppType = "CHAOS_IL2CPP_INT8";
                 return true;
             case "System.Int16":
-                inputCppType = "std::int16_t";
+                inputCppType = "CHAOS_IL2CPP_INT16";
                 return true;
             case "System.UInt16":
-                inputCppType = "std::uint16_t";
+                inputCppType = "CHAOS_IL2CPP_UINT16";
                 return true;
             case "System.Int32":
-                inputCppType = "std::int32_t";
+                inputCppType = "CHAOS_IL2CPP_INT32";
                 return true;
             case "System.UInt32":
-                inputCppType = "std::uint32_t";
+                inputCppType = "CHAOS_IL2CPP_UINT32";
                 return true;
             case "System.Int64":
-                inputCppType = "std::int64_t";
+                inputCppType = "CHAOS_IL2CPP_INT64";
                 return true;
             case "System.UInt64":
-                inputCppType = "std::uint64_t";
+                inputCppType = "CHAOS_IL2CPP_UINT64";
                 return true;
             case "System.Char":
-                inputCppType = "std::uint16_t";
+                inputCppType = "CHAOS_IL2CPP_UINT16";
                 return true;
             case "System.Single":
                 inputCppType = "float";
@@ -11430,36 +11474,36 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 inputSize = 1;
                 return true;
             case "System.Byte":
-                inputCppType = "std::uint8_t";
+                inputCppType = "CHAOS_IL2CPP_UINT8";
                 inputSize = 1;
                 return true;
             case "System.SByte":
-                inputCppType = "std::int8_t";
+                inputCppType = "CHAOS_IL2CPP_INT8";
                 inputSize = 1;
                 return true;
             case "System.Int16":
-                inputCppType = "std::int16_t";
+                inputCppType = "CHAOS_IL2CPP_INT16";
                 inputSize = 2;
                 return true;
             case "System.UInt16":
             case "System.Char":
-                inputCppType = "std::uint16_t";
+                inputCppType = "CHAOS_IL2CPP_UINT16";
                 inputSize = 2;
                 return true;
             case "System.Int32":
-                inputCppType = "std::int32_t";
+                inputCppType = "CHAOS_IL2CPP_INT32";
                 inputSize = 4;
                 return true;
             case "System.UInt32":
-                inputCppType = "std::uint32_t";
+                inputCppType = "CHAOS_IL2CPP_UINT32";
                 inputSize = 4;
                 return true;
             case "System.Int64":
-                inputCppType = "std::int64_t";
+                inputCppType = "CHAOS_IL2CPP_INT64";
                 inputSize = 8;
                 return true;
             case "System.UInt64":
-                inputCppType = "std::uint64_t";
+                inputCppType = "CHAOS_IL2CPP_UINT64";
                 inputSize = 8;
                 return true;
             case "System.Single":
@@ -11471,11 +11515,11 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
                 inputSize = 8;
                 return true;
             case "System.Decimal":
-                inputCppType = "struct { std::uint32_t flags; std::uint64_t lo64; std::uint32_t hi32; }";
+                inputCppType = "struct { CHAOS_IL2CPP_UINT32 flags; CHAOS_IL2CPP_UINT64 lo64; CHAOS_IL2CPP_UINT32 hi32; }";
                 inputSize = 16;
                 return true;
             case "System.DateTime":
-                inputCppType = "std::uint64_t";
+                inputCppType = "CHAOS_IL2CPP_UINT64";
                 inputSize = 8;
                 return true;
             default:
@@ -12703,7 +12747,7 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
 
     private static string ToCppStringLiteral(string value)
     {
-        var builder = new StringBuilder();
+        var builder = new StringBuilder(value.Length + 2);
         builder.Append('"');
 
         foreach (var current in value)
@@ -12796,6 +12840,26 @@ int32_t CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return MethodLookupCache.GetValue(
             methods,
             static items => items.ToDictionary(method => method.SubjectId, StringComparer.Ordinal));
+    }
+
+    private static IReadOnlyDictionary<string, string> BuildCanonicalSubjectIdLookup(IReadOnlyList<string> subjectIds)
+    {
+        return subjectIds
+            .Where(subjectId => !string.IsNullOrWhiteSpace(subjectId))
+            .Distinct(StringComparer.Ordinal)
+            .ToDictionary(
+                subjectId => subjectId,
+                ManagedNaming.CanonicalizeSubjectId,
+                StringComparer.Ordinal);
+    }
+
+    private static string ResolveCanonicalSubjectId(
+        IReadOnlyDictionary<string, string> canonicalSubjectIds,
+        string subjectId)
+    {
+        return canonicalSubjectIds.TryGetValue(subjectId, out var canonicalSubjectId)
+            ? canonicalSubjectId
+            : ManagedNaming.CanonicalizeSubjectId(subjectId);
     }
 
     private static IReadOnlyDictionary<string, CodeRegistrationEntry> GetCodeRegistrationLookup(

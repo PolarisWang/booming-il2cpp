@@ -12,43 +12,43 @@ namespace ChaosIl2cpp::Common {
 
 struct ThreadRuntimeEntry
 {
-    std::mutex mutex;
-    std::unique_ptr<std::thread> worker;
-    std::intptr_t thread_start_delegate = 0;
-    std::intptr_t name = 0;
-    std::int32_t managed_thread_id = 0;
+    CHAOS_IL2CPP_MUTEX mutex;
+    CHAOS_IL2CPP_UNIQUE_PTR(CHAOS_IL2CPP_THREAD) worker;
+    CHAOS_IL2CPP_INTPTR thread_start_delegate = 0;
+    CHAOS_IL2CPP_INTPTR name = 0;
+    CHAOS_IL2CPP_INT32 managed_thread_id = 0;
 };
 
-inline std::mutex& thread_runtime_table_mutex()
+inline CHAOS_IL2CPP_MUTEX& thread_runtime_table_mutex()
 {
-    static std::mutex m;
+    static CHAOS_IL2CPP_MUTEX m;
     return m;
 }
 
-inline std::unordered_map<std::intptr_t, std::unique_ptr<ThreadRuntimeEntry>>& thread_runtime_table()
+inline CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_UNIQUE_PTR(ThreadRuntimeEntry))& thread_runtime_table()
 {
-    static std::unordered_map<std::intptr_t, std::unique_ptr<ThreadRuntimeEntry>> table;
+    static CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_UNIQUE_PTR(ThreadRuntimeEntry)) table;
     return table;
 }
 
-inline std::int32_t allocate_managed_thread_id()
+inline CHAOS_IL2CPP_INT32 allocate_managed_thread_id()
 {
-    static std::mutex id_mutex;
-    static std::int32_t next_id = 2;
-    std::lock_guard<std::mutex> guard(id_mutex);
+    static CHAOS_IL2CPP_MUTEX id_mutex;
+    static CHAOS_IL2CPP_INT32 next_id = 2;
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(id_mutex);
     return next_id++;
 }
 
-inline thread_local std::intptr_t current_thread_object = 0;
-inline thread_local std::int32_t current_managed_thread_id = 1;
+inline thread_local CHAOS_IL2CPP_INTPTR current_thread_object = 0;
+inline thread_local CHAOS_IL2CPP_INT32 current_managed_thread_id = 1;
 
-inline ThreadRuntimeEntry* try_get_thread_runtime_entry(std::intptr_t thread_object_value)
+inline ThreadRuntimeEntry* try_get_thread_runtime_entry(CHAOS_IL2CPP_INTPTR thread_object_value)
 {
-    if (thread_object_value == static_cast<std::intptr_t>(0))
+    if (thread_object_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
     {
         return nullptr;
     }
-    std::lock_guard<std::mutex> guard(thread_runtime_table_mutex());
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(thread_runtime_table_mutex());
     const auto it = thread_runtime_table().find(thread_object_value);
     if (it == thread_runtime_table().end())
     {
@@ -57,17 +57,17 @@ inline ThreadRuntimeEntry* try_get_thread_runtime_entry(std::intptr_t thread_obj
     return it->second.get();
 }
 
-inline ThreadRuntimeEntry& require_thread_runtime_entry(std::intptr_t thread_object_value)
+inline ThreadRuntimeEntry& require_thread_runtime_entry(CHAOS_IL2CPP_INTPTR thread_object_value)
 {
-    if (thread_object_value == static_cast<std::intptr_t>(0))
+    if (thread_object_value == static_cast<CHAOS_IL2CPP_INTPTR>(0))
     {
-        std::abort();
+        CHAOS_IL2CPP_ABORT();
     }
-    std::lock_guard<std::mutex> guard(thread_runtime_table_mutex());
+    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(thread_runtime_table_mutex());
     auto& entry = thread_runtime_table()[thread_object_value];
     if (!entry)
     {
-        entry = std::make_unique<ThreadRuntimeEntry>();
+        entry = CHAOS_IL2CPP_MAKE_UNIQUE(ThreadRuntimeEntry)();
     }
     return *entry;
 }

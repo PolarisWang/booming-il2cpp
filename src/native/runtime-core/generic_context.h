@@ -28,6 +28,11 @@ void RegisterMethodGenericContext(
     const TypeInfoHandle* class_type_args, uint32_t class_arg_count,
     const TypeInfoHandle* method_type_args, uint32_t method_arg_count);
 
+uint32_t GetClassTypeArgCount(GenericContextHandle generic_context);
+TypeInfoHandle GetClassTypeArg(GenericContextHandle generic_context, uint32_t index);
+uint32_t GetMethodTypeArgCount(GenericContextHandle generic_context);
+TypeInfoHandle GetMethodTypeArg(GenericContextHandle generic_context, uint32_t index);
+
 /// Returns the number of registered generic instantiations.
 uint32_t GetRegisteredInstantiationCount();
 

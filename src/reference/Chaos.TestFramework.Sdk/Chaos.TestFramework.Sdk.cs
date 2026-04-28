@@ -216,6 +216,80 @@ public enum ChaosHotUpdateCapability : ushort
     PatchCallbackFlow = 1 << 6,
 }
 
+/// <summary>
+/// Defines stable family identifiers for foundation-dll verification closure.
+/// This enum is intentionally partial and can grow as more families are onboarded.
+/// </summary>
+public enum CapabilityFamilyId : ushort
+{
+    None = 0,
+    SystemPrivateCoreLib_ConvertChar = 1,
+    SystemPrivateCoreLib_BufferMemory = 2,
+    SystemPrivateCoreLib_EnumParsing = 3,
+    SystemPrivateCoreLib_PrimitiveNumericConversions = 4,
+    SystemPrivateCoreLib_StringCharTextCore = 5,
+    SystemPrivateCoreLib_ArrayIndexingCopy = 6,
+    SystemPrivateCoreLib_SpanMemoryBuffers = 7,
+    SystemPrivateCoreLib_ObjectEqualityIdentity = 8,
+    SystemPrivateCoreLib_TypeRuntimeHandles = 9,
+    SystemPrivateCoreLib_ExceptionThrowDiagnostics = 10,
+    SystemPrivateCoreLib_GenericNullableValue = 11,
+    SystemPrivateCoreLib_BoxingUnboxingCasts = 12,
+    SystemPrivateCoreLib_DelegateCoreInvocation = 13,
+    SystemPrivateCoreLib_ReflectionMemberBasics = 14,
+    SystemPrivateCoreLib_AttributesCustomMetadata = 15,
+    SystemPrivateCoreLib_ThreadingMonitorInterlocked = 16,
+    SystemPrivateCoreLib_ThreadingTasksPrimitives = 17,
+    SystemPrivateCoreLib_TimeDateTimeTimespan = 18,
+    SystemPrivateCoreLib_GuidRandomHashcode = 19,
+    SystemPrivateCoreLib_MathNumerics = 20,
+    SystemPrivateCoreLib_GlobalizationCulture = 21,
+    SystemPrivateCoreLib_IOStreamsBasics = 22,
+    SystemPrivateCoreLib_CollectionsGenericCore = 23,
+    SystemPrivateCoreLib_RuntimeCompilerServices = 24,
+}
+
+/// <summary>
+/// Defines stable verification route codes for foundation-dll case mapping.
+/// </summary>
+public enum VerificationRoute : byte
+{
+    None = 0,
+    Managed = 1,
+    Native = 2,
+    HotUpdate = 3,
+}
+
+/// <summary>
+/// Defines stable benchmark route codes for foundation-dll benchmark mapping.
+/// </summary>
+public enum BenchmarkRoute : byte
+{
+    None = 0,
+    Managed = 1,
+    Native = 2,
+    HotUpdate = 3,
+}
+
+/// <summary>
+/// Defines stable benchmark profiles for foundation-dll benchmark mapping.
+/// </summary>
+public enum BenchmarkProfile : byte
+{
+    None = 0,
+    Default = 1,
+}
+
+/// <summary>
+/// Defines stable hot-update directions for foundation-dll case mapping.
+/// </summary>
+public enum HotUpdateDirection : byte
+{
+    None = 0,
+    HostToPatch = 1,
+    PatchToHost = 2,
+}
+
 [Flags]
 /// <summary>
 /// Defines the runtime features required by a declared entry.
@@ -381,6 +455,118 @@ public sealed class CapabilityTestAttribute : Attribute
     /// Supported execution modes for the test methods in this class.
     /// </summary>
     public ChaosExecutionMode ExecutionModes { get; init; } = ChaosExecutionMode.All;
+}
+
+/// <summary>
+/// Marks the canonical methodSubjectId consumed by foundation-dll functional validation.
+/// </summary>
+[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
+public sealed class MethodSubjectIdAttribute : Attribute
+{
+    public MethodSubjectIdAttribute(string methodSubjectId)
+    {
+        MethodSubjectId = methodSubjectId;
+    }
+
+    public string MethodSubjectId { get; }
+}
+
+/// <summary>
+/// Marks the canonical methodSubjectId consumed by foundation-dll benchmark validation.
+/// </summary>
+[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
+public sealed class BenchmarkSubjectIdAttribute : Attribute
+{
+    public BenchmarkSubjectIdAttribute(string methodSubjectId)
+    {
+        MethodSubjectId = methodSubjectId;
+    }
+
+    public string MethodSubjectId { get; }
+}
+
+/// <summary>
+/// Marks the canonical methodSubjectId consumed by foundation-dll hot-update validation.
+/// </summary>
+[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
+public sealed class HotUpdateSubjectIdAttribute : Attribute
+{
+    public HotUpdateSubjectIdAttribute(string methodSubjectId)
+    {
+        MethodSubjectId = methodSubjectId;
+    }
+
+    public string MethodSubjectId { get; }
+}
+
+/// <summary>
+/// Marks the stable foundation-dll family identifier for generated cases.
+/// </summary>
+[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false)]
+public sealed class CapabilityFamilyIdAttribute : Attribute
+{
+    public CapabilityFamilyIdAttribute(CapabilityFamilyId familyId)
+    {
+        FamilyId = familyId;
+    }
+
+    public CapabilityFamilyId FamilyId { get; }
+}
+
+/// <summary>
+/// Marks the execution route for generated functional cases.
+/// </summary>
+[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
+public sealed class VerificationRouteAttribute : Attribute
+{
+    public VerificationRouteAttribute(VerificationRoute route)
+    {
+        Route = route;
+    }
+
+    public VerificationRoute Route { get; }
+}
+
+/// <summary>
+/// Marks the execution route for generated benchmark cases.
+/// </summary>
+[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
+public sealed class BenchmarkRouteAttribute : Attribute
+{
+    public BenchmarkRouteAttribute(BenchmarkRoute route)
+    {
+        Route = route;
+    }
+
+    public BenchmarkRoute Route { get; }
+}
+
+/// <summary>
+/// Marks the benchmark profile for generated benchmark cases.
+/// </summary>
+[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
+public sealed class BenchmarkProfileAttribute : Attribute
+{
+    public BenchmarkProfileAttribute(BenchmarkProfile profile)
+    {
+        Profile = profile;
+    }
+
+    public BenchmarkProfile Profile { get; }
+}
+
+/// <summary>
+/// Marks the hot-update direction for generated hot-update cases.
+/// </summary>
+[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
+public sealed class HotUpdateDirectionAttribute : Attribute
+{
+    public HotUpdateDirectionAttribute(HotUpdateDirection direction)
+    {
+        Direction = direction;
+    }
+
+    public HotUpdateDirection Direction { get; }
 }
 
 // =========================================================================

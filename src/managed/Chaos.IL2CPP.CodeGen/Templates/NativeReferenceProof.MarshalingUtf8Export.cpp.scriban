@@ -11,15 +11,15 @@ constexpr const char* kMarshalMarker = "marshal-ok";
 constexpr const char* kExportMarker = "export-ok";
 
 bool WriteExpectedOutputLine() {
-    if (std::fwrite(kExpectedOutput, 1u, {{ expected_output_byte_count }}u, stdout) != {{ expected_output_byte_count }}u) {
+    if (CHAOS_IL2CPP_FWRITE(kExpectedOutput, 1u, {{ expected_output_byte_count }}u, stdout) != {{ expected_output_byte_count }}u) {
         return false;
     }
 
-    if (std::fputc('\n', stdout) == EOF) {
+    if (CHAOS_IL2CPP_FPUTC('\n', stdout) == EOF) {
         return false;
     }
 
-    return std::fflush(stdout) == 0;
+    return CHAOS_IL2CPP_FFLUSH(stdout) == 0;
 }
 
 }  // namespace

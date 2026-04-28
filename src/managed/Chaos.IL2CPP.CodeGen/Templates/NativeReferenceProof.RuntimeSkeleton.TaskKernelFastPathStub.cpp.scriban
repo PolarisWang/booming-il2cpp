@@ -1,0 +1,49 @@
+struct {{ stub_name }}_ManagedArgs
+{
+{{~ if this_field_declaration.size > 0 ~}}
+    {{ this_field_declaration }}
+{{~ end ~}}
+{{~ if arg_field_declarations.size > 0 ~}}
+    {{ arg_field_declarations }}
+{{~ end ~}}
+{{~ if return_field_declarations.size > 0 ~}}
+    {{ return_field_declarations }}
+{{~ end ~}}
+};
+
+// contract_id: {{ contract_id }}
+// task_capability_area: {{ capability_area }}
+// managed_result_type: {{ return_managed_type }}
+int32_t CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    if (runtime == nullptr || thread == nullptr || managed_args == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    const auto* request = static_cast<const {{ stub_name }}_ManagedArgs*>(managed_args);
+{{~ if this_validation_statement.size > 0 ~}}
+    {{ this_validation_statement }}
+{{~ end ~}}
+{{~ if arg_validation_statements.size > 0 ~}}
+    {{ arg_validation_statements }}
+{{~ end ~}}
+{{~ if return_value_validation_statement.size > 0 ~}}
+    {{ return_value_validation_statement }}
+{{~ end ~}}
+{{~ if return_value_declaration.size > 0 ~}}
+    {{ return_value_declaration }}
+{{~ end ~}}
+    {{ helper_statements }}
+    return CHAOS_BRIDGE_STATUS_OK;
+}
