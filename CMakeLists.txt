@@ -27,7 +27,10 @@ set(
     "Subject-owned host directory for ios-arm64-packaging")
 
 if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
+    find_package(Python3 QUIET)
+
     add_subdirectory(third_party/bdwgc bdwgc_build)
+    add_subdirectory(src/native/common)
     add_subdirectory(src/native/runtime-core)
     add_subdirectory(src/native/hot-update)
     add_subdirectory(src/native/interpreter)
@@ -39,6 +42,33 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     add_subdirectory(tests/contracts/native/hot-update)
     add_subdirectory(tests/contracts/native/interpreter)
     add_subdirectory(tests/contracts/native/gc)
+
+    # ── Architecture check targets ─────────────────────────────────────
+    # Each native module gets a per-module check target.
+    # Run: cmake --build <build-dir> --target check_arch_<module>
+    # Or:  cmake --build <build-dir> --target check_arch  (all modules)
+    if(Python3_FOUND)
+        set(CHAOS_NATIVE_MODULES
+            chaos_common
+            chaos_runtime_core
+            chaos_hot_update
+            chaos_interpreter
+            chaos_support
+            chaos_bootstrap
+            chaos_engine_bridge)
+        foreach(MODULE ${CHAOS_NATIVE_MODULES})
+            add_custom_target(check_arch_${MODULE}
+                COMMAND ${Python3_EXECUTABLE} build/check_arch.py --module ${MODULE}
+                WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+                COMMENT "Checking ${MODULE} architecture compliance..."
+            )
+        endforeach()
+        add_custom_target(check_arch
+            COMMAND ${Python3_EXECUTABLE} build/check_arch.py --ci
+            WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+            COMMENT "Checking all native modules for architecture compliance..."
+        )
+    endif()
 elseif(ROADMAP0_PRESET_TARGET STREQUAL "macos-reference")
     add_subdirectory(tests/contracts/native/bridge)
 elseif(ROADMAP0_PRESET_TARGET STREQUAL "android-arm64-smoke")

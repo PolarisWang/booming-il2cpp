@@ -556,6 +556,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             Includes =
             [
+                "<chaos/common.h>",
                 "<array>",
                 "<cstddef>",
                 "<cstdint>",
